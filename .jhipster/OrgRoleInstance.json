@@ -1,0 +1,56 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "statusMaster",
+            "otherEntityName": "statusMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "orgRoleHierarchy",
+            "otherEntityName": "orgRoleHierarchy",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "departmentsMaster",
+            "otherEntityName": "departmentsMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "orgRoleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "parentOrgRoleId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "creationDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "isHead",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20160229092048",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

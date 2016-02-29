@@ -1,0 +1,39 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "applicationType",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "updatedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160229064640",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

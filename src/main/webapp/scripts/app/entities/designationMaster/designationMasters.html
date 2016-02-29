@@ -1,0 +1,74 @@
+<div>
+    <h2>DesignationMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="designationMaster.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new DesignationMaster
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span>CreationDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderNo"><span>OrderNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serviceType"><span>ServiceType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="code"><span>Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="desigalias"><span>Desigalias</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>statusMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="designationMaster in designationMasters track by designationMaster.id">
+                    <td><a ui-sref="designationMaster.detail({id:designationMaster.id})">{{designationMaster.id}}</a></td>
+                    <td>{{designationMaster.name}}</td>
+                    <td>{{designationMaster.creationDate | date:'medium'}}</td>
+                    <td>{{designationMaster.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{designationMaster.description}}</td>
+                    <td>{{designationMaster.orderNo}}</td>
+                    <td>{{designationMaster.serviceType}}</td>
+                    <td>{{designationMaster.code}}</td>
+                    <td>{{designationMaster.desigalias}}</td>
+                    <td>
+                        <a ui-sref="statusMaster.detail({id:designationMaster.statusMaster.id})">{{designationMaster.statusMaster.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="designationMaster.detail({id:designationMaster.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="designationMaster.edit({id:designationMaster.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="designationMaster.delete({id:designationMaster.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

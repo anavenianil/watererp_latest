@@ -1,0 +1,238 @@
+
+<div>
+    <h2><span>ApplicationTxn</span> {{applicationTxn.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>SHouseNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.sHouseNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>GovtOfficialNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.govtOfficialNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Ward</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.ward}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Street</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.street}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Pincode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.pincode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Block</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.block}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Area</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.area}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Section</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.section}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Constituency</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.constituency}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Email</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.email}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TelephoneNumber</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.telephoneNumber}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Mobile</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.mobile}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ScanPlan</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.scanPlan}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ScanPlan1</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.scanPlan1}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SaleDeed</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.saleDeed}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SaleDeed1</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.saleDeed1}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TotalPlinthArea</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.totalPlinthArea}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreatedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.createdDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>UpdatedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.updatedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{applicationTxn.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>applicationTypeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="applicationTypeMaster.detail({id:applicationTxn.applicationTypeMaster.id})">{{applicationTxn.applicationTypeMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>connectionTypeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="connectionTypeMaster.detail({id:applicationTxn.connectionTypeMaster.id})">{{applicationTxn.connectionTypeMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ctegoryMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="ctegoryMaster.detail({id:applicationTxn.ctegoryMaster.id})">{{applicationTxn.ctegoryMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>pipeSizeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="pipeSizeMaster.detail({id:applicationTxn.pipeSizeMaster.id})">{{applicationTxn.pipeSizeMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>sewerSize</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="sewerSize.detail({id:applicationTxn.sewerSize.id})">{{applicationTxn.sewerSize.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>fileNumber</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="fileNumber.detail({id:applicationTxn.fileNumber.id})">{{applicationTxn.fileNumber.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>customer</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="customer.detail({id:applicationTxn.customer.id})">{{applicationTxn.customer.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

@@ -1,0 +1,78 @@
+
+<div>
+    <h2><span>DepartmentsMaster</span> {{departmentsMaster.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>DepartmentName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{departmentsMaster.departmentName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ParentDeparment</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{departmentsMaster.parentDeparment}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreationDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{departmentsMaster.creationDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{departmentsMaster.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>departmentsHierarchy</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="departmentsHierarchy.detail({id:departmentsMaster.departmentsHierarchy.id})">{{departmentsMaster.departmentsHierarchy.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>departmentTypeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="departmentTypeMaster.detail({id:departmentsMaster.departmentTypeMaster.id})">{{departmentsMaster.departmentTypeMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>statusMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="statusMaster.detail({id:departmentsMaster.statusMaster.id})">{{departmentsMaster.statusMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

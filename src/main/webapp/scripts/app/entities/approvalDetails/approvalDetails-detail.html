@@ -1,0 +1,86 @@
+
+<div>
+    <h2><span>ApprovalDetails</span> {{approvalDetails.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Remarks</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{approvalDetails.remarks}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ApprovedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{approvalDetails.approvedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ApprovedEmpNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{approvalDetails.approvedEmpNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ApprovedEmpName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{approvalDetails.approvedEmpName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ApprovedEmpDesig</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{approvalDetails.approvedEmpDesig}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>customer</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="customer.detail({id:approvalDetails.customer.id})">{{approvalDetails.customer.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>feasibilityStatus</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="feasibilityStatus.detail({id:approvalDetails.feasibilityStatus.id})">{{approvalDetails.feasibilityStatus.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>designationMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="designationMaster.detail({id:approvalDetails.designationMaster.id})">{{approvalDetails.designationMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

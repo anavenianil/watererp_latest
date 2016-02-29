@@ -1,0 +1,166 @@
+
+<div>
+    <h2><span>Customer</span> {{customer.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>RequestDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.requestDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>FirstName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.firstName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MiddleName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.middleName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.lastName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>HouseNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.houseNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>GovtOfficialNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.govtOfficialNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Ward</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.ward}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Street</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.street}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Pincode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.pincode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Block</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.block}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Area</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.area}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Section</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.section}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Constituency</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.constituency}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Email</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.email}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TelOffice</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.telOffice}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TelHome</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.telHome}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Mobile</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.mobile}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>fileNumber</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="fileNumber.detail({id:customer.fileNumber.id})">{{customer.fileNumber.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

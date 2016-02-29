@@ -1,0 +1,80 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "transactionTypeMaster",
+            "otherEntityName": "transactionTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "cashBookMaster",
+            "otherEntityName": "cashBookMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "paymentTypes",
+            "otherEntityName": "paymentTypes",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "fileNumber",
+            "otherEntityName": "fileNumber",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "todayDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "payeeName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "txnAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "openBal",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "availBal",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "totalReceipts",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "locationCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160229072353",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

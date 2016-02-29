@@ -1,0 +1,88 @@
+<div>
+    <h2>ManageCashPoints</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="manageCashPoint.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new ManageCashPoint
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="todayDate"><span>TodayDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="payeeName"><span>PayeeName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="txnAmount"><span>TxnAmount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="openBal"><span>OpenBal</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="availBal"><span>AvailBal</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalReceipts"><span>TotalReceipts</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="locationCode"><span>LocationCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="transactionTypeMaster.id"><span>transactionTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cashBookMaster.id"><span>cashBookMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="paymentTypes.id"><span>paymentTypes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fileNumber.id"><span>fileNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.id"><span>customer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="manageCashPoint in manageCashPoints track by manageCashPoint.id">
+                    <td><a ui-sref="manageCashPoint.detail({id:manageCashPoint.id})">{{manageCashPoint.id}}</a></td>
+                    <td>{{manageCashPoint.todayDate | date:'medium'}}</td>
+                    <td>{{manageCashPoint.payeeName}}</td>
+                    <td>{{manageCashPoint.txnAmount}}</td>
+                    <td>{{manageCashPoint.openBal}}</td>
+                    <td>{{manageCashPoint.availBal}}</td>
+                    <td>{{manageCashPoint.totalReceipts}}</td>
+                    <td>{{manageCashPoint.locationCode}}</td>
+                    <td>
+                        <a ui-sref="transactionTypeMaster.detail({id:manageCashPoint.transactionTypeMaster.id})">{{manageCashPoint.transactionTypeMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="cashBookMaster.detail({id:manageCashPoint.cashBookMaster.id})">{{manageCashPoint.cashBookMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="paymentTypes.detail({id:manageCashPoint.paymentTypes.id})">{{manageCashPoint.paymentTypes.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="fileNumber.detail({id:manageCashPoint.fileNumber.id})">{{manageCashPoint.fileNumber.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="customer.detail({id:manageCashPoint.customer.id})">{{manageCashPoint.customer.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="manageCashPoint.detail({id:manageCashPoint.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="manageCashPoint.edit({id:manageCashPoint.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="manageCashPoint.delete({id:manageCashPoint.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

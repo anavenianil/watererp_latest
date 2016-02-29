@@ -1,0 +1,76 @@
+<div>
+    <h2>OrgRoleInstances</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="orgRoleInstance.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new OrgRoleInstance
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orgRoleName"><span>OrgRoleName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="parentOrgRoleId"><span>ParentOrgRoleId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span>CreationDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isHead"><span>IsHead</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>statusMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orgRoleHierarchy.id"><span>orgRoleHierarchy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="departmentsMaster.id"><span>departmentsMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="orgRoleInstance in orgRoleInstances track by orgRoleInstance.id">
+                    <td><a ui-sref="orgRoleInstance.detail({id:orgRoleInstance.id})">{{orgRoleInstance.id}}</a></td>
+                    <td>{{orgRoleInstance.orgRoleName}}</td>
+                    <td>{{orgRoleInstance.parentOrgRoleId}}</td>
+                    <td>{{orgRoleInstance.creationDate | date:'medium'}}</td>
+                    <td>{{orgRoleInstance.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{orgRoleInstance.isHead | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="statusMaster.detail({id:orgRoleInstance.statusMaster.id})">{{orgRoleInstance.statusMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="orgRoleHierarchy.detail({id:orgRoleInstance.orgRoleHierarchy.id})">{{orgRoleInstance.orgRoleHierarchy.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="departmentsMaster.detail({id:orgRoleInstance.departmentsMaster.id})">{{orgRoleInstance.departmentsMaster.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="orgRoleInstance.detail({id:orgRoleInstance.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="orgRoleInstance.edit({id:orgRoleInstance.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="orgRoleInstance.delete({id:orgRoleInstance.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

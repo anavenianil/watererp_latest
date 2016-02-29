@@ -1,0 +1,159 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "applicationTypeMaster",
+            "otherEntityName": "applicationTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "connectionTypeMaster",
+            "otherEntityName": "connectionTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "ctegoryMaster",
+            "otherEntityName": "ctegoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "pipeSizeMaster",
+            "otherEntityName": "pipeSizeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "sewerSize",
+            "otherEntityName": "sewerSize",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "fileNumber",
+            "otherEntityName": "fileNumber",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 7,
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "sHouseNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "govtOfficialNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "ward",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "street",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "pincode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "block",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "area",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "section",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "constituency",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "telephoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "mobile",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "scanPlan",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "scanPlan1",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "saleDeed",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 16,
+            "fieldName": "saleDeed1",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 17,
+            "fieldName": "totalPlinthArea",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 18,
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 19,
+            "fieldName": "updatedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 20,
+            "fieldName": "status",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160229075018",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

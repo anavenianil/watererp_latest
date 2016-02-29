@@ -1,0 +1,92 @@
+<div>
+    <h2>Customers</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="customer.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new Customer
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="requestDate"><span>RequestDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="firstName"><span>FirstName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="middleName"><span>MiddleName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastName"><span>LastName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="houseNo"><span>HouseNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="govtOfficialNo"><span>GovtOfficialNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ward"><span>Ward</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="street"><span>Street</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pincode"><span>Pincode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="block"><span>Block</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="area"><span>Area</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="section"><span>Section</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="constituency"><span>Constituency</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="telOffice"><span>TelOffice</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="telHome"><span>TelHome</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobile"><span>Mobile</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fileNumber.id"><span>fileNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="customer in customers track by customer.id">
+                    <td><a ui-sref="customer.detail({id:customer.id})">{{customer.id}}</a></td>
+                    <td>{{customer.requestDate | date:'medium'}}</td>
+                    <td>{{customer.firstName}}</td>
+                    <td>{{customer.middleName}}</td>
+                    <td>{{customer.lastName}}</td>
+                    <td>{{customer.houseNo}}</td>
+                    <td>{{customer.govtOfficialNo}}</td>
+                    <td>{{customer.ward}}</td>
+                    <td>{{customer.street}}</td>
+                    <td>{{customer.pincode}}</td>
+                    <td>{{customer.block}}</td>
+                    <td>{{customer.area}}</td>
+                    <td>{{customer.section}}</td>
+                    <td>{{customer.constituency}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>{{customer.telOffice}}</td>
+                    <td>{{customer.telHome}}</td>
+                    <td>{{customer.mobile}}</td>
+                    <td>
+                        <a ui-sref="fileNumber.detail({id:customer.fileNumber.id})">{{customer.fileNumber.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="customer.detail({id:customer.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer.edit({id:customer.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer.delete({id:customer.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

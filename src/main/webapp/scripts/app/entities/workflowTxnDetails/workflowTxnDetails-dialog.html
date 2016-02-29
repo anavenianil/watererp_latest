@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myWorkflowTxnDetailsLabel">Create or edit a WorkflowTxnDetails</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="workflowTxnDetails.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_requestId">RequestId</label>
+            <input type="number" class="form-control" name="requestId" id="field_requestId"
+                    ng-model="workflowTxnDetails.requestId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_referenceNumber">ReferenceNumber</label>
+            <input type="text" class="form-control" name="referenceNumber" id="field_referenceNumber"
+                    ng-model="workflowTxnDetails.referenceNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_rowNumber">RowNumber</label>
+            <input type="number" class="form-control" name="rowNumber" id="field_rowNumber"
+                    ng-model="workflowTxnDetails.rowNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_columnName">ColumnName</label>
+            <input type="text" class="form-control" name="columnName" id="field_columnName"
+                    ng-model="workflowTxnDetails.columnName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_previousValue">PreviousValue</label>
+            <input type="text" class="form-control" name="previousValue" id="field_previousValue"
+                    ng-model="workflowTxnDetails.previousValue"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_newValue">NewValue</label>
+            <input type="text" class="form-control" name="newValue" id="field_newValue"
+                    ng-model="workflowTxnDetails.newValue"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_ipAddress">IpAddress</label>
+            <input type="text" class="form-control" name="ipAddress" id="field_ipAddress"
+                    ng-model="workflowTxnDetails.ipAddress"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="workflowTxnDetails.description"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_requestMaster">requestMaster</label>
+            <select class="form-control" id="field_requestMaster" name="requestMaster" ng-model="workflowTxnDetails.requestMaster" ng-options="requestMaster as requestMaster.id for requestMaster in requestmasters track by requestMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,74 @@
+<div>
+    <h2>ReqDesigWorkflowMappings</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="reqDesigWorkflowMapping.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new ReqDesigWorkflowMapping
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span>CreationDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="workflowMaster.id"><span>workflowMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="requestMaster.id"><span>requestMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="designationMaster.id"><span>designationMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>statusMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="reqDesigWorkflowMapping in reqDesigWorkflowMappings track by reqDesigWorkflowMapping.id">
+                    <td><a ui-sref="reqDesigWorkflowMapping.detail({id:reqDesigWorkflowMapping.id})">{{reqDesigWorkflowMapping.id}}</a></td>
+                    <td>{{reqDesigWorkflowMapping.creationDate | date:'medium'}}</td>
+                    <td>{{reqDesigWorkflowMapping.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="workflowMaster.detail({id:reqDesigWorkflowMapping.workflowMaster.id})">{{reqDesigWorkflowMapping.workflowMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="requestMaster.detail({id:reqDesigWorkflowMapping.requestMaster.id})">{{reqDesigWorkflowMapping.requestMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="designationMaster.detail({id:reqDesigWorkflowMapping.designationMaster.id})">{{reqDesigWorkflowMapping.designationMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="statusMaster.detail({id:reqDesigWorkflowMapping.statusMaster.id})">{{reqDesigWorkflowMapping.statusMaster.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="reqDesigWorkflowMapping.detail({id:reqDesigWorkflowMapping.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="reqDesigWorkflowMapping.edit({id:reqDesigWorkflowMapping.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="reqDesigWorkflowMapping.delete({id:reqDesigWorkflowMapping.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

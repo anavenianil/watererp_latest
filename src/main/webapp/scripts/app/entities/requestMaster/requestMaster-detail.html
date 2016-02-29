@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>RequestMaster</span> {{requestMaster.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>RequestType</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestMaster.requestType}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreationDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestMaster.creationDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestMaster.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestMaster.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InternalFlag</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestMaster.internalFlag}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>statusMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="statusMaster.detail({id:requestMaster.statusMaster.id})">{{requestMaster.statusMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

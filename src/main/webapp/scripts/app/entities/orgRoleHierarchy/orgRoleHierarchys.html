@@ -1,0 +1,66 @@
+<div>
+    <h2>OrgRoleHierarchys</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="orgRoleHierarchy.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new OrgRoleHierarchy
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="roleHierarchyName"><span>RoleHierarchyName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="parentRoleHierarchyId"><span>ParentRoleHierarchyId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span>CreationDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>statusMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="orgRoleHierarchy in orgRoleHierarchys track by orgRoleHierarchy.id">
+                    <td><a ui-sref="orgRoleHierarchy.detail({id:orgRoleHierarchy.id})">{{orgRoleHierarchy.id}}</a></td>
+                    <td>{{orgRoleHierarchy.roleHierarchyName}}</td>
+                    <td>{{orgRoleHierarchy.parentRoleHierarchyId}}</td>
+                    <td>{{orgRoleHierarchy.creationDate | date:'medium'}}</td>
+                    <td>{{orgRoleHierarchy.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="statusMaster.detail({id:orgRoleHierarchy.statusMaster.id})">{{orgRoleHierarchy.statusMaster.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="orgRoleHierarchy.detail({id:orgRoleHierarchy.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="orgRoleHierarchy.edit({id:orgRoleHierarchy.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="orgRoleHierarchy.delete({id:orgRoleHierarchy.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

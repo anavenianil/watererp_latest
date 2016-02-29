@@ -1,0 +1,74 @@
+<div>
+    <h2>DepartmentsMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="departmentsMaster.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new DepartmentsMaster
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="departmentName"><span>DepartmentName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="parentDeparment"><span>ParentDeparment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span>CreationDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="departmentsHierarchy.id"><span>departmentsHierarchy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="departmentTypeMaster.id"><span>departmentTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>statusMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="departmentsMaster in departmentsMasters track by departmentsMaster.id">
+                    <td><a ui-sref="departmentsMaster.detail({id:departmentsMaster.id})">{{departmentsMaster.id}}</a></td>
+                    <td>{{departmentsMaster.departmentName}}</td>
+                    <td>{{departmentsMaster.parentDeparment}}</td>
+                    <td>{{departmentsMaster.creationDate | date:'medium'}}</td>
+                    <td>{{departmentsMaster.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="departmentsHierarchy.detail({id:departmentsMaster.departmentsHierarchy.id})">{{departmentsMaster.departmentsHierarchy.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="departmentTypeMaster.detail({id:departmentsMaster.departmentTypeMaster.id})">{{departmentsMaster.departmentTypeMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="statusMaster.detail({id:departmentsMaster.statusMaster.id})">{{departmentsMaster.statusMaster.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="departmentsMaster.detail({id:departmentsMaster.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="departmentsMaster.edit({id:departmentsMaster.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="departmentsMaster.delete({id:departmentsMaster.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity OrgHierarchy.
+    -->
+    <changeSet id="20160229090028" author="jhipster">
+        <createTable tableName="org_hierarchy">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="hierarchy_name" type="varchar(255)"/>
+            
+            <column name="parent_hierarchy_id" type="integer"/>
+            
+            <column name="creation_date" type="timestamp"/>
+            
+            <column name="last_modified_date" type="timestamp"/>
+            
+            <column name="status_master_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="org_hierarchy" columnName="creation_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="org_hierarchy" columnName="last_modified_date" columnDataType="datetime"/>
+
+        
+        <addForeignKeyConstraint baseColumnNames="status_master_id"
+                                 baseTableName="org_hierarchy"
+                                 constraintName="fk_orghierarchy_statusmaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status_master"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>RoleWorkflowMapping</span> {{roleWorkflowMapping.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>CreationDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{roleWorkflowMapping.creationDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{roleWorkflowMapping.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>statusMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="statusMaster.detail({id:roleWorkflowMapping.statusMaster.id})">{{roleWorkflowMapping.statusMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>orgRoleInstance</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="orgRoleInstance.detail({id:roleWorkflowMapping.orgRoleInstance.id})">{{roleWorkflowMapping.orgRoleInstance.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>workflowMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowMaster.detail({id:roleWorkflowMapping.workflowMaster.id})">{{roleWorkflowMapping.workflowMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>requestMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="requestMaster.detail({id:roleWorkflowMapping.requestMaster.id})">{{roleWorkflowMapping.requestMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

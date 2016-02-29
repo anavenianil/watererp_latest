@@ -1,0 +1,60 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myOrgRoleHierarchyLabel">Create or edit a OrgRoleHierarchy</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="orgRoleHierarchy.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_roleHierarchyName">RoleHierarchyName</label>
+            <input type="text" class="form-control" name="roleHierarchyName" id="field_roleHierarchyName"
+                    ng-model="orgRoleHierarchy.roleHierarchyName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_parentRoleHierarchyId">ParentRoleHierarchyId</label>
+            <input type="number" class="form-control" name="parentRoleHierarchyId" id="field_parentRoleHierarchyId"
+                    ng-model="orgRoleHierarchy.parentRoleHierarchyId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="orgRoleHierarchy.creationDate" is-open="datePickerForCreationDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForCreationDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="orgRoleHierarchy.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForLastModifiedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="field_statusMaster">statusMaster</label>
+            <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="orgRoleHierarchy.statusMaster" ng-options="statusMaster as statusMaster.id for statusMaster in statusmasters track by statusMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

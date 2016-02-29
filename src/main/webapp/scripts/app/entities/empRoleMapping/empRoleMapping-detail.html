@@ -1,0 +1,94 @@
+
+<div>
+    <h2><span>EmpRoleMapping</span> {{empRoleMapping.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>InternalDivision</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{empRoleMapping.internalDivision}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InternalRole</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{empRoleMapping.internalRole}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreationDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{empRoleMapping.creationDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{empRoleMapping.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ParentRoleId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{empRoleMapping.parentRoleId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>user</span>
+                </td>
+                <td>
+                    {{empRoleMapping.user.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>parentUser</span>
+                </td>
+                <td>
+                    {{empRoleMapping.parentUser.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>orgRoleInstance</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="orgRoleInstance.detail({id:empRoleMapping.orgRoleInstance.id})">{{empRoleMapping.orgRoleInstance.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>statusMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="statusMaster.detail({id:empRoleMapping.statusMaster.id})">{{empRoleMapping.statusMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

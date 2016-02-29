@@ -1,0 +1,118 @@
+
+<div>
+    <h2><span>ManageCashPoint</span> {{manageCashPoint.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>TodayDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{manageCashPoint.todayDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PayeeName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{manageCashPoint.payeeName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TxnAmount</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{manageCashPoint.txnAmount}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>OpenBal</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{manageCashPoint.openBal}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>AvailBal</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{manageCashPoint.availBal}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TotalReceipts</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{manageCashPoint.totalReceipts}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LocationCode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{manageCashPoint.locationCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>transactionTypeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="transactionTypeMaster.detail({id:manageCashPoint.transactionTypeMaster.id})">{{manageCashPoint.transactionTypeMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>cashBookMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="cashBookMaster.detail({id:manageCashPoint.cashBookMaster.id})">{{manageCashPoint.cashBookMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>paymentTypes</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="paymentTypes.detail({id:manageCashPoint.paymentTypes.id})">{{manageCashPoint.paymentTypes.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>fileNumber</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="fileNumber.detail({id:manageCashPoint.fileNumber.id})">{{manageCashPoint.fileNumber.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>customer</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="customer.detail({id:manageCashPoint.customer.id})">{{manageCashPoint.customer.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

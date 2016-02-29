@@ -1,0 +1,94 @@
+
+<div>
+    <h2><span>WorkflowTxnDetails</span> {{workflowTxnDetails.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>RequestId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.requestId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ReferenceNumber</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.referenceNumber}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>RowNumber</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.rowNumber}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ColumnName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.columnName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PreviousValue</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.previousValue}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>NewValue</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.newValue}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>IpAddress</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.ipAddress}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflowTxnDetails.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>requestMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="requestMaster.detail({id:workflowTxnDetails.requestMaster.id})">{{workflowTxnDetails.requestMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
