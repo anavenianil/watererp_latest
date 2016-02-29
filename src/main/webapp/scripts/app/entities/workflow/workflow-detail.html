@@ -1,0 +1,110 @@
+
+<div>
+    <h2><span>Workflow</span> {{workflow.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>StageId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{workflow.stageId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>workflowMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowMaster.detail({id:workflow.workflowMaster.id})">{{workflow.workflowMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>relativeFromRole</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowRelations.detail({id:workflow.relativeFromRole.id})">{{workflow.relativeFromRole.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>absoluteFromRole</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="orgRoleInstance.detail({id:workflow.absoluteFromRole.id})">{{workflow.absoluteFromRole.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>relationshipType</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowRelationships.detail({id:workflow.relationshipType.id})">{{workflow.relationshipType.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>relativeToRole</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowRelations.detail({id:workflow.relativeToRole.id})">{{workflow.relativeToRole.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>absoluteToRole</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="orgRoleInstance.detail({id:workflow.absoluteToRole.id})">{{workflow.absoluteToRole.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>escalationRelationshipType</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowRelationships.detail({id:workflow.escalationRelationshipType.id})">{{workflow.escalationRelationshipType.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>relativeEscalationTo</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowRelations.detail({id:workflow.relativeEscalationTo.id})">{{workflow.relativeEscalationTo.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>absoluteEscalationTo</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="orgRoleInstance.detail({id:workflow.absoluteEscalationTo.id})">{{workflow.absoluteEscalationTo.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>workflowStageMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowStageMaster.detail({id:workflow.workflowStageMaster.id})">{{workflow.workflowStageMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

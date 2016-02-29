@@ -48,5 +48,7 @@
     <include file="classpath:config/liquibase/changelog/20160229100821_added_entity_RoleWorkflowMapping.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229100952_added_entity_RequestWorkflowMapping.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229101231_added_entity_WorkflowTxnDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160229111312_added_entity_Workflow.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

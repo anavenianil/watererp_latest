@@ -1,0 +1,96 @@
+<div>
+    <h2>RequestWorkflowHistorys</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="requestWorkflowHistory.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new RequestWorkflowHistory
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="requestStage"><span>RequestStage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assignedDate"><span>AssignedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actionedDate"><span>ActionedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ipAddress"><span>IpAddress</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assignedRole"><span>AssignedRole</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="domainObject"><span>DomainObject</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assignedFrom.id"><span>assignedFrom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assignedTo.id"><span>assignedTo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>statusMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="requestMaster.id"><span>requestMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="workflowMaster.id"><span>workflowMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="workflowStageMaster.id"><span>workflowStageMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="appliedBy.id"><span>appliedBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="requestWorkflowHistory in requestWorkflowHistorys track by requestWorkflowHistory.id">
+                    <td><a ui-sref="requestWorkflowHistory.detail({id:requestWorkflowHistory.id})">{{requestWorkflowHistory.id}}</a></td>
+                    <td>{{requestWorkflowHistory.requestStage}}</td>
+                    <td>{{requestWorkflowHistory.assignedDate | date:'medium'}}</td>
+                    <td>{{requestWorkflowHistory.actionedDate | date:'medium'}}</td>
+                    <td>{{requestWorkflowHistory.remarks}}</td>
+                    <td>{{requestWorkflowHistory.ipAddress}}</td>
+                    <td>{{requestWorkflowHistory.assignedRole}}</td>
+                    <td>{{requestWorkflowHistory.domainObject}}</td>
+                    <td>
+                        {{requestWorkflowHistory.assignedFrom.id}}
+                    </td>
+                    <td>
+                        {{requestWorkflowHistory.assignedTo.id}}
+                    </td>
+                    <td>
+                        <a ui-sref="statusMaster.detail({id:requestWorkflowHistory.statusMaster.id})">{{requestWorkflowHistory.statusMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="requestMaster.detail({id:requestWorkflowHistory.requestMaster.id})">{{requestWorkflowHistory.requestMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="workflowMaster.detail({id:requestWorkflowHistory.workflowMaster.id})">{{requestWorkflowHistory.workflowMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="workflowStageMaster.detail({id:requestWorkflowHistory.workflowStageMaster.id})">{{requestWorkflowHistory.workflowStageMaster.id}}</a>
+                    </td>
+                    <td>
+                        {{requestWorkflowHistory.appliedBy.id}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="requestWorkflowHistory.detail({id:requestWorkflowHistory.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="requestWorkflowHistory.edit({id:requestWorkflowHistory.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="requestWorkflowHistory.delete({id:requestWorkflowHistory.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

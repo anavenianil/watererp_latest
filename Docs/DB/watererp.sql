@@ -364,7 +364,9 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160229100431','jhipster','classpath:config/liquibase/changelog/20160229100431_added_entity_ReqOrgWorkflowMapping.xml','2016-02-29 15:49:32',41,'EXECUTED','7:f3cade643b99f3ca2eaf4c44cf764f9c','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160229100821','jhipster','classpath:config/liquibase/changelog/20160229100821_added_entity_RoleWorkflowMapping.xml','2016-02-29 15:49:35',42,'EXECUTED','7:25c22c3ba0d09c89818f178cb23b9aea','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160229100952','jhipster','classpath:config/liquibase/changelog/20160229100952_added_entity_RequestWorkflowMapping.xml','2016-02-29 15:49:37',43,'EXECUTED','7:e2e3affdf6fd6213512081f5a7c52acd','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160229101231','jhipster','classpath:config/liquibase/changelog/20160229101231_added_entity_WorkflowTxnDetails.xml','2016-02-29 15:49:38',44,'EXECUTED','7:ffd53ef669a1b6a5fdacfdfc2c63c8d4','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+ ('20160229101231','jhipster','classpath:config/liquibase/changelog/20160229101231_added_entity_WorkflowTxnDetails.xml','2016-02-29 15:49:38',44,'EXECUTED','7:ffd53ef669a1b6a5fdacfdfc2c63c8d4','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160229111312','jhipster','classpath:config/liquibase/changelog/20160229111312_added_entity_Workflow.xml','2016-02-29 16:56:15',45,'EXECUTED','7:aa3bbe903f8a96b777e321dc647773ab','createTable, addForeignKeyConstraint (x10)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-02-29 16:56:21',46,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -818,7 +820,7 @@ CREATE TABLE  `watererp`.`jhi_persistent_token` (
 LOCK TABLES `jhi_persistent_token` WRITE;
 INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('DEqQipDM3iLfE1PFx+mwRA==',3,'rlSkhLwJf+8q3MOatcrcDA==','2016-02-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('x4nyB9VRFeiND5t0i1DU8Q==',3,'3j36pZ8GJyjtt62VSvbj+w==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0');
+ ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
 
@@ -1219,6 +1221,54 @@ UNLOCK TABLES;
 
 
 --
+-- Definition of table `watererp`.`request_workflow_history`
+--
+
+DROP TABLE IF EXISTS `watererp`.`request_workflow_history`;
+CREATE TABLE  `watererp`.`request_workflow_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `request_stage` int(11) DEFAULT NULL,
+  `assigned_date` timestamp NULL,
+  `actioned_date` timestamp NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(255) DEFAULT NULL,
+  `assigned_role` int(11) DEFAULT NULL,
+  `domain_object` bigint(20) DEFAULT NULL,
+  `assigned_from_id` bigint(20) DEFAULT NULL,
+  `assigned_to_id` bigint(20) DEFAULT NULL,
+  `status_master_id` bigint(20) DEFAULT NULL,
+  `request_master_id` bigint(20) DEFAULT NULL,
+  `workflow_master_id` bigint(20) DEFAULT NULL,
+  `workflow_stage_master_id` bigint(20) DEFAULT NULL,
+  `applied_by_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_requestworkflowhistory_assignedfrom_id` (`assigned_from_id`),
+  KEY `fk_requestworkflowhistory_assignedto_id` (`assigned_to_id`),
+  KEY `fk_requestworkflowhistory_statusmaster_id` (`status_master_id`),
+  KEY `fk_requestworkflowhistory_requestmaster_id` (`request_master_id`),
+  KEY `fk_requestworkflowhistory_workflowmaster_id` (`workflow_master_id`),
+  KEY `fk_requestworkflowhistory_workflowstagemaster_id` (`workflow_stage_master_id`),
+  KEY `fk_requestworkflowhistory_appliedby_id` (`applied_by_id`),
+  CONSTRAINT `fk_requestworkflowhistory_appliedby_id` FOREIGN KEY (`applied_by_id`) REFERENCES `jhi_user` (`id`),
+  CONSTRAINT `fk_requestworkflowhistory_assignedfrom_id` FOREIGN KEY (`assigned_from_id`) REFERENCES `jhi_user` (`id`),
+  CONSTRAINT `fk_requestworkflowhistory_assignedto_id` FOREIGN KEY (`assigned_to_id`) REFERENCES `jhi_user` (`id`),
+  CONSTRAINT `fk_requestworkflowhistory_requestmaster_id` FOREIGN KEY (`request_master_id`) REFERENCES `request_master` (`id`),
+  CONSTRAINT `fk_requestworkflowhistory_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
+  CONSTRAINT `fk_requestworkflowhistory_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`),
+  CONSTRAINT `fk_requestworkflowhistory_workflowstagemaster_id` FOREIGN KEY (`workflow_stage_master_id`) REFERENCES `workflow_stage_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`request_workflow_history`
+--
+
+/*!40000 ALTER TABLE `request_workflow_history` DISABLE KEYS */;
+LOCK TABLES `request_workflow_history` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `request_workflow_history` ENABLE KEYS */;
+
+
+--
 -- Definition of table `watererp`.`request_workflow_mapping`
 --
 
@@ -1375,6 +1425,57 @@ CREATE TABLE  `watererp`.`transaction_type_master` (
 LOCK TABLES `transaction_type_master` WRITE;
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `transaction_type_master` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`workflow`
+--
+
+DROP TABLE IF EXISTS `watererp`.`workflow`;
+CREATE TABLE  `watererp`.`workflow` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `stage_id` int(11) DEFAULT NULL,
+  `workflow_master_id` bigint(20) DEFAULT NULL,
+  `relative_from_role_id` bigint(20) DEFAULT NULL,
+  `absolute_from_role_id` bigint(20) DEFAULT NULL,
+  `relationship_type_id` bigint(20) DEFAULT NULL,
+  `relative_to_role_id` bigint(20) DEFAULT NULL,
+  `absolute_to_role_id` bigint(20) DEFAULT NULL,
+  `escalation_relationship_type_id` bigint(20) DEFAULT NULL,
+  `relative_escalation_to_id` bigint(20) DEFAULT NULL,
+  `absolute_escalation_to_id` bigint(20) DEFAULT NULL,
+  `workflow_stage_master_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_workflow_workflowmaster_id` (`workflow_master_id`),
+  KEY `fk_workflow_relativefromrole_id` (`relative_from_role_id`),
+  KEY `fk_workflow_absolutefromrole_id` (`absolute_from_role_id`),
+  KEY `fk_workflow_relationshiptype_id` (`relationship_type_id`),
+  KEY `fk_workflow_relativetorole_id` (`relative_to_role_id`),
+  KEY `fk_workflow_absolutetorole_id` (`absolute_to_role_id`),
+  KEY `fk_workflow_escalationrelationshiptype_id` (`escalation_relationship_type_id`),
+  KEY `fk_workflow_relativeescalationto_id` (`relative_escalation_to_id`),
+  KEY `fk_workflow_absoluteescalationto_id` (`absolute_escalation_to_id`),
+  KEY `fk_workflow_workflowstagemaster_id` (`workflow_stage_master_id`),
+  CONSTRAINT `fk_workflow_workflowstagemaster_id` FOREIGN KEY (`workflow_stage_master_id`) REFERENCES `workflow_stage_master` (`id`),
+  CONSTRAINT `fk_workflow_absoluteescalationto_id` FOREIGN KEY (`absolute_escalation_to_id`) REFERENCES `org_role_instance` (`id`),
+  CONSTRAINT `fk_workflow_absolutefromrole_id` FOREIGN KEY (`absolute_from_role_id`) REFERENCES `org_role_instance` (`id`),
+  CONSTRAINT `fk_workflow_absolutetorole_id` FOREIGN KEY (`absolute_to_role_id`) REFERENCES `org_role_instance` (`id`),
+  CONSTRAINT `fk_workflow_escalationrelationshiptype_id` FOREIGN KEY (`escalation_relationship_type_id`) REFERENCES `workflow_relationships` (`id`),
+  CONSTRAINT `fk_workflow_relationshiptype_id` FOREIGN KEY (`relationship_type_id`) REFERENCES `workflow_relationships` (`id`),
+  CONSTRAINT `fk_workflow_relativeescalationto_id` FOREIGN KEY (`relative_escalation_to_id`) REFERENCES `workflow_relations` (`id`),
+  CONSTRAINT `fk_workflow_relativefromrole_id` FOREIGN KEY (`relative_from_role_id`) REFERENCES `workflow_relations` (`id`),
+  CONSTRAINT `fk_workflow_relativetorole_id` FOREIGN KEY (`relative_to_role_id`) REFERENCES `workflow_relations` (`id`),
+  CONSTRAINT `fk_workflow_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`workflow`
+--
+
+/*!40000 ALTER TABLE `workflow` DISABLE KEYS */;
+LOCK TABLES `workflow` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `workflow` ENABLE KEYS */;
 
 
 --

@@ -1,0 +1,85 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "workflowMaster",
+            "otherEntityName": "workflowMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "relativeFromRole",
+            "otherEntityName": "workflowRelations",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "absoluteFromRole",
+            "otherEntityName": "orgRoleInstance",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "relationshipType",
+            "otherEntityName": "workflowRelationships",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "relativeToRole",
+            "otherEntityName": "workflowRelations",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "absoluteToRole",
+            "otherEntityName": "orgRoleInstance",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 7,
+            "relationshipName": "escalationRelationshipType",
+            "otherEntityName": "workflowRelationships",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 8,
+            "relationshipName": "relativeEscalationTo",
+            "otherEntityName": "workflowRelations",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 9,
+            "relationshipName": "absoluteEscalationTo",
+            "otherEntityName": "orgRoleInstance",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 10,
+            "relationshipName": "workflowStageMaster",
+            "otherEntityName": "workflowStageMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "stageId",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160229111312",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

@@ -1,0 +1,134 @@
+
+<div>
+    <h2><span>RequestWorkflowHistory</span> {{requestWorkflowHistory.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>RequestStage</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestWorkflowHistory.requestStage}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>AssignedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestWorkflowHistory.assignedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ActionedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestWorkflowHistory.actionedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Remarks</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestWorkflowHistory.remarks}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>IpAddress</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestWorkflowHistory.ipAddress}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>AssignedRole</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestWorkflowHistory.assignedRole}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DomainObject</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{requestWorkflowHistory.domainObject}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>assignedFrom</span>
+                </td>
+                <td>
+                    {{requestWorkflowHistory.assignedFrom.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>assignedTo</span>
+                </td>
+                <td>
+                    {{requestWorkflowHistory.assignedTo.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>statusMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="statusMaster.detail({id:requestWorkflowHistory.statusMaster.id})">{{requestWorkflowHistory.statusMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>requestMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="requestMaster.detail({id:requestWorkflowHistory.requestMaster.id})">{{requestWorkflowHistory.requestMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>workflowMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowMaster.detail({id:requestWorkflowHistory.workflowMaster.id})">{{requestWorkflowHistory.workflowMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>workflowStageMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="workflowStageMaster.detail({id:requestWorkflowHistory.workflowStageMaster.id})">{{requestWorkflowHistory.workflowStageMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>appliedBy</span>
+                </td>
+                <td>
+                    {{requestWorkflowHistory.appliedBy.id}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
