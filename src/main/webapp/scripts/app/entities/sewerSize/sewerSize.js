@@ -19,6 +19,24 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
+            .state('sewerSize.edit', {
+            	parent: 'sewerSize',
+                url: '/{id}/edit',
+                data: {
+                    authorities: ['ROLE_USER'],
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/sewerSize/sewerSizes.html',
+                        controller: 'SewerSizeController'
+                    }
+                },
+                resolve: {
+                    entity: ['SewerSize', function(SewerSize) {
+                        return SewerSize.get({id : $stateParams.id});
+                    }]
+                }
+            })
             .state('sewerSize.detail', {
                 parent: 'entity',
                 url: '/sewerSize/{id}',
@@ -38,33 +56,24 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('sewerSize.new', {
+            .state('sewerSize.all', {
                 parent: 'sewerSize',
-                url: '/new',
+                url: '/all',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$uibModal', function($uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/sewerSize/sewerSize-dialog.html',
                         controller: 'SewerSizeDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: function () {
-                                return {
-                                    sewerSize: null,
-                                    id: null
-                                };
-                            }
+                 
                         }
-                    }).result.then(function(result) {
-                        $state.go('sewerSize', null, { reload: true });
-                    }, function() {
-                        $state.go('sewerSize');
                     })
-                }]
+                 }]
             })
-            .state('sewerSize.edit', {
+            .state('sewerSize.edit1', {
                 parent: 'sewerSize',
                 url: '/{id}/edit',
                 data: {
@@ -72,8 +81,8 @@ angular.module('watererpApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/sewerSize/sewerSize-dialog.html',
-                        controller: 'SewerSizeDialogController',
+                        templateUrl: 'scripts/app/entities/sewerSize/sewerSizes.html',
+                        controller: 'SewerSizeController',
                         size: 'lg',
                         resolve: {
                             entity: ['SewerSize', function(SewerSize) {

@@ -1,35 +1,34 @@
 'use strict';
 
-angular.module('watererpApp')
-    .controller('SewerSizeController', function ($scope, $state, SewerSize, ParseLinks) {
+angular.module('watererpApp').controller('SewerSizeController',
+    ['$scope', '$stateParams', /*'$uibModalInstance', 'entity',*/ 'SewerSize',
+        function($scope, $stateParams,  /*entity,*/ SewerSize) {
 
-        $scope.sewerSizes = [];
-        $scope.predicate = 'id';
-        $scope.reverse = true;
-        $scope.page = 0;
-        $scope.loadAll = function() {
-            SewerSize.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.sewerSizes.push(result[i]);
-                }
+        $scope.sewerSize = {};//entity;
+        $scope.load = function(id) {
+            SewerSize.get({id : id}, function(result) {
+                $scope.sewerSize = result;
             });
         };
-        $scope.reset = function() {
-            $scope.page = 0;
-            $scope.sewerSizes = [];
-            $scope.loadAll();
-        };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
-        };
-        $scope.loadAll();
 
-
-        $scope.refresh = function () {
-            $scope.reset();
+        var onSaveSuccess = function (result) {
+            $scope.$emit('watererpApp:sewerSizeUpdate', result);
+            //$uibModalInstance.close(result);
             $scope.clear();
+            $scope.isSaving = false;
+        };
+
+        var onSaveError = function (result) {
+            $scope.isSaving = false;
+        };
+
+        $scope.save = function () {
+            $scope.isSaving = true;
+            if ($scope.sewerSize.id != null) {
+                SewerSize.update($scope.sewerSize, onSaveSuccess, onSaveError);
+            } else {
+                SewerSize.save($scope.sewerSize, onSaveSuccess, onSaveError);
+            }
         };
 
         $scope.clear = function () {
@@ -38,4 +37,8 @@ angular.module('watererpApp')
                 id: null
             };
         };
-    });
+        
+        $scope.clear = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
+}]);
