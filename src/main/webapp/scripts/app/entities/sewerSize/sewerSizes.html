@@ -2,7 +2,7 @@
 	<h2>SewerSizes</h2>
 	<jh-alert></jh-alert>
 	<div class="container-fluid">
-		<button class="btn btn-primary pull-right" ui-sref="sewerSize.all">
+		<button class="btn btn-primary pull-right" ng-click="loadAll()">
 			<span class="glyphicon glyphicon-plus"></span> <span>View
 				SewerSize </span>
 		</button>
@@ -58,4 +58,61 @@
 			</button>
 		</div>
 	</form>
+
+	<div class="modal fade" id="viewSewerSizeModal" tabindex="-1"
+		role="dialog" aria-labelledby="mySewerSizeLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" ng-click="clear()">Close</button>
+					<h4 class="modal-title" id="mySewerSizeLabel">View SewerSize</h4>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="jh-table table table-striped">
+							<thead>
+								<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+									<th jh-sort-by="id"><span>ID</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="sewerSize"><span>SewerSize</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody infinite-scroll="loadPage(page + 1)"
+								infinite-scroll-disabled="links['last'] == page">
+								<tr ng-repeat="sewerSize in sewerSizes track by sewerSize.id">
+									<td><a ui-sref="sewerSize.detail({id:sewerSize.id})">{{sewerSize.id}}</a></td>
+									<td>{{sewerSize.sewerSize}}</td>
+									<td class="text-right">
+										<div class="btn-group flex-btn-group-container">
+											<button type="submit"
+												ui-sref="sewerSize.detail({id:sewerSize.id})"
+												class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-eye-open"></span> <span
+													class="hidden-xs hidden-sm"></span>
+											</button>
+											<button type="button" ng-click="showUpdate(sewerSize.id)"
+												class="btn btn-primary btn-sm">
+												<span class="glyphicon glyphicon-pencil"></span> <span
+													class="hidden-xs hidden-sm"></span>
+											</button>
+											<button type="submit"
+												ui-sref="sewerSize.delete({id:sewerSize.id})"
+												class="btn btn-danger btn-sm">
+												<span class="glyphicon glyphicon-remove-circle"></span> <span
+													class="hidden-xs hidden-sm"></span>
+											</button>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>

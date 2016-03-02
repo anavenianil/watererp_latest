@@ -19,7 +19,7 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
-            .state('sewerSize.edit', {
+            /*.state('sewerSize.edit', {
             	parent: 'sewerSize',
                 url: '/{id}/edit',
                 data: {
@@ -36,7 +36,7 @@ angular.module('watererpApp')
                         return SewerSize.get({id : $stateParams.id});
                     }]
                 }
-            })
+            })*/
             .state('sewerSize.detail', {
                 parent: 'entity',
                 url: '/sewerSize/{id}',
@@ -56,9 +56,9 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('sewerSize.all', {
+            /*.state('sewerSize.new', {
                 parent: 'sewerSize',
-                url: '/all',
+                url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
@@ -72,8 +72,8 @@ angular.module('watererpApp')
                         }
                     })
                  }]
-            })
-            .state('sewerSize.edit1', {
+            })*/
+            /*.state('sewerSize.edit1', {
                 parent: 'sewerSize',
                 url: '/{id}/edit',
                 data: {
@@ -95,7 +95,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('sewerSize.delete', {
                 parent: 'sewerSize',
                 url: '/{id}/delete',

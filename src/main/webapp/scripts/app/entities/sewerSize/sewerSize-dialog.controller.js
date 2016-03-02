@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('SewerSizeDialogController', function ($scope, $state, SewerSize, ParseLinks) {
+    .controller('SewerSizeDialogController', function ($scope, $state, SewerSize, ParseLinks, $uibModalInstance) {
 
         $scope.sewerSizes = [];
         $scope.predicate = 'id';
@@ -37,5 +37,15 @@ angular.module('watererpApp')
                 sewerSize: null,
                 id: null
             };
+        };
+        
+        $scope.showUpdate = function (id) {
+        	 $state.go('sewerSize');
+            SewerSize.get({id: id}, function(result) {
+                $scope.sewerSize = result;
+                //$('#viewSewerSizeModal').modal('hide');
+                $uibModalInstance.dismiss('cancel');
+               
+            });
         };
     });
