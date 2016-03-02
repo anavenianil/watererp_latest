@@ -10,7 +10,6 @@ angular.module('watererpApp')
         $scope.confirmDelete = function (id) {
             SewerSize.delete({id: id},
                 function () {
-            		$('#viewSewerSizeModal').modal('hide');
                     $uibModalInstance.close(true);
                 });
         };

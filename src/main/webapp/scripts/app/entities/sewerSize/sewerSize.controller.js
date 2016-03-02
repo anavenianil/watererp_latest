@@ -17,6 +17,7 @@ angular.module('watererpApp').controller('SewerSizeController',
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:sewerSizeUpdate', result);
+            console.log(result);
             //$uibModalInstance.close(result);
             $scope.clear();
             $scope.isSaving = false;

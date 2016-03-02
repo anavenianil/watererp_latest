@@ -71,7 +71,7 @@ CREATE TABLE  `watererp`.`application_txn` (
   CONSTRAINT `fk_applicationtxn_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_applicationtxn_sewersize_id` FOREIGN KEY (`sewer_size_id`) REFERENCES `sewer_size` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+DROP
 --
 -- Dumping data for table `watererp`.`application_txn`
 --

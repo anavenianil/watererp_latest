@@ -109,13 +109,16 @@ angular.module('watererpApp')
                         size: 'md',
                         resolve: {
                             entity: ['SewerSize', function(SewerSize) {
+                            	$('#viewSewerSizeModal').modal('hide');
                                 return SewerSize.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
                         $state.go('sewerSize', null, { reload: true });
+                        
                     }, function() {
                         $state.go('^');
+                        $('#viewSewerSizeModal').modal('hide');
                     })
                 }]
             });
