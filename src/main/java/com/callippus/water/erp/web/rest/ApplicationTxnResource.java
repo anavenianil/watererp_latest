@@ -1,10 +1,12 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.ApplicationTxn;
-import com.callippus.water.erp.repository.ApplicationTxnRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,13 +15,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing ApplicationTxn.
@@ -32,6 +39,8 @@ public class ApplicationTxnResource {
         
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
+    
+    @Inject ApplicationTxnWorkflowService applicationTxnWorkflowService;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -46,6 +55,15 @@ public class ApplicationTxnResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationTxn", "idexists", "A new applicationTxn cannot already have an ID")).body(null);
         }
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+        
+        //this is for workflow
+        try{
+        	applicationTxnWorkflowService.createTxn(applicationTxn);
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
+        
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))
             .body(result);
