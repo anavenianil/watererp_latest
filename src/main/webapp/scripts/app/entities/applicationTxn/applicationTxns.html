@@ -1,122 +1,559 @@
 <div>
-    <h2>ApplicationTxns</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="applicationTxn.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new ApplicationTxn
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sHouseNo"><span>SHouseNo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="govtOfficialNo"><span>GovtOfficialNo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ward"><span>Ward</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="street"><span>Street</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="pincode"><span>Pincode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="block"><span>Block</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="area"><span>Area</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="section"><span>Section</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="constituency"><span>Constituency</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="telephoneNumber"><span>TelephoneNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="mobile"><span>Mobile</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="scanPlan"><span>ScanPlan</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="scanPlan1"><span>ScanPlan1</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="saleDeed"><span>SaleDeed</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="saleDeed1"><span>SaleDeed1</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalPlinthArea"><span>TotalPlinthArea</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createdDate"><span>CreatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="updatedDate"><span>UpdatedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="applicationTypeMaster.id"><span>applicationTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="connectionTypeMaster.id"><span>connectionTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ctegoryMaster.id"><span>ctegoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="pipeSizeMaster.id"><span>pipeSizeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sewerSize.id"><span>sewerSize</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fileNumber.id"><span>fileNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="customer.id"><span>customer</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
-                    <td><a ui-sref="applicationTxn.detail({id:applicationTxn.id})">{{applicationTxn.id}}</a></td>
-                    <td>{{applicationTxn.sHouseNo}}</td>
-                    <td>{{applicationTxn.govtOfficialNo}}</td>
-                    <td>{{applicationTxn.ward}}</td>
-                    <td>{{applicationTxn.street}}</td>
-                    <td>{{applicationTxn.pincode}}</td>
-                    <td>{{applicationTxn.block}}</td>
-                    <td>{{applicationTxn.area}}</td>
-                    <td>{{applicationTxn.section}}</td>
-                    <td>{{applicationTxn.constituency}}</td>
-                    <td>{{applicationTxn.email}}</td>
-                    <td>{{applicationTxn.telephoneNumber}}</td>
-                    <td>{{applicationTxn.mobile}}</td>
-                    <td>{{applicationTxn.scanPlan}}</td>
-                    <td>{{applicationTxn.scanPlan1}}</td>
-                    <td>{{applicationTxn.saleDeed}}</td>
-                    <td>{{applicationTxn.saleDeed1}}</td>
-                    <td>{{applicationTxn.totalPlinthArea}}</td>
-                    <td>{{applicationTxn.createdDate | date:'medium'}}</td>
-                    <td>{{applicationTxn.updatedDate | date:'medium'}}</td>
-                    <td>{{applicationTxn.status}}</td>
-                    <td>
-                        <a ui-sref="applicationTypeMaster.detail({id:applicationTxn.applicationTypeMaster.id})">{{applicationTxn.applicationTypeMaster.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="connectionTypeMaster.detail({id:applicationTxn.connectionTypeMaster.id})">{{applicationTxn.connectionTypeMaster.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="ctegoryMaster.detail({id:applicationTxn.ctegoryMaster.id})">{{applicationTxn.ctegoryMaster.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="pipeSizeMaster.detail({id:applicationTxn.pipeSizeMaster.id})">{{applicationTxn.pipeSizeMaster.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="sewerSize.detail({id:applicationTxn.sewerSize.id})">{{applicationTxn.sewerSize.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="fileNumber.detail({id:applicationTxn.fileNumber.id})">{{applicationTxn.fileNumber.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="customer.detail({id:applicationTxn.customer.id})">{{applicationTxn.customer.id}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="applicationTxn.detail({id:applicationTxn.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="applicationTxn.edit({id:applicationTxn.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="applicationTxn.delete({id:applicationTxn.id})"
-                                    class="btn btn-danger btn-sm">                                    
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+	<h2>ApplicationTxns</h2>
+	<jh-alert></jh-alert>
+	<div class="container-fluid">
+		<button class="btn btn-primary pull-right" ng-click="loadAll()">
+			<span class="glyphicon glyphicon-plus"></span> <span>View
+				ApplicationTxn </span>
+		</button>
+	</div>
+	<br/>
+
+	<form name="editForm" role="form" novalidate ng-submit="save()">
+
+		<!-- <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true" ng-click="clear()">&times;</button>
+			<h4 class="modal-title" id="myApplicationTxnLabel">Create or
+				edit a ApplicationTxn</h4>
+		</div> -->
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">Application For New
+					Connection</h3>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="modal-body">
+						<jh-alert-error></jh-alert-error>
+						<!-- fields from Customer Entity -->
+						<fieldset>
+							<legend></legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_fileNumber">fileNumber</label> <select
+										class="form-control" id="field_fileNumber" name="fileNumber"
+										ng-model="customer.fileNumber"
+										ng-options="fileNumber as fileNumber.fileNo for fileNumber in filenumbers track by fileNumber.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<label for="id">ID</label> <input type="text"
+										class="form-control" id="id" name="id" ng-model="customer.id"
+										readonly />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_requestDate">RequestDate</label>
+									<input id="field_requestDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="customer.requestDate"
+										is-open="datePickerForRequestDate.status.opened" />
+								</div>
+								<div class="col-sm-1">
+									<label></label> <span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForRequestDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>APPLICANT NAME</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_firstName">FirstName</label>
+									<input type="text" class="form-control" name="firstName"
+										id="field_firstName" ng-model="customer.firstName" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_middleName">MiddleName</label>
+									<input type="text" class="form-control" name="middleName"
+										id="field_middleName" ng-model="customer.middleName" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_lastName">LastName</label>
+									<input type="text" class="form-control" name="lastName"
+										id="field_lastName" ng-model="customer.lastName" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>CORRESPONDANCE ADDRESS</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_houseNo">HouseNo</label>
+									<input type="text" class="form-control" name="houseNo"
+										id="field_houseNo" ng-model="customer.houseNo" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_street">Street</label>
+									<input type="text" class="form-control" name="street"
+										id="field_street" ng-model="customer.street" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_area">Area</label> <input
+										type="text" class="form-control" name="area" id="field_area"
+										ng-model="customer.area" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_govtOfficialNo">GovtOfficialNo</label>
+									<input type="text" class="form-control" name="govtOfficialNo"
+										id="field_govtOfficialNo" ng-model="customer.govtOfficialNo" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_pincode">Pincode</label>
+									<input type="text" class="form-control" name="pincode"
+										id="field_pincode" ng-model="customer.pincode" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_section">Section</label>
+									<input type="text" class="form-control" name="section"
+										id="field_section" ng-model="customer.section" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_ward">Ward</label> <input
+										type="text" class="form-control" name="ward" id="field_ward"
+										ng-model="customer.ward" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_block">Block</label> <input
+										type="text" class="form-control" name="block" id="field_block"
+										ng-model="customer.block" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_constituency">Constituency</label>
+									<input type="text" class="form-control" name="constituency"
+										id="field_constituency" ng-model="customer.constituency" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>Contact Details</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_telOffice">TelOffice</label>
+									<input type="text" class="form-control" name="telOffice"
+										id="field_telOffice" ng-model="customer.telOffice" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_telHome">TelHome</label>
+									<input type="text" class="form-control" name="telHome"
+										id="field_telHome" ng-model="customer.telHome" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_mobile">Mobile</label>
+									<input type="text" class="form-control" name="mobile"
+										id="field_mobile" ng-model="customer.mobile" />
+								</div>
+								<div class="col-sm-8">
+									<label class="control-label" for="field_email">Email</label> <input
+										type="text" class="form-control" name="email" id="field_email"
+										ng-model="customer.email" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<!-- fields from ApplicationTxn Entity -->
+						<fieldset>
+							<legend>SERVICE PREMISES ADDRESS</legend>
+							<div class="row">
+								<div class="col-sm-4" ng-hide="true">
+									<label for="id">ID</label> <input type="text"
+										class="form-control" id="id" name="id"
+										ng-model="applicationTxn.id" readonly />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_sHouseNo">SHouseNo</label>
+									<input type="text" class="form-control" name="sHouseNo"
+										id="field_sHouseNo" ng-model="applicationTxn.sHouseNo" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_street">Street</label>
+									<input type="text" class="form-control" name="street"
+										id="field_street" ng-model="applicationTxn.street" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_area">Area</label> <input
+										type="text" class="form-control" name="area" id="field_area"
+										ng-model="applicationTxn.area" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_govtOfficialNo">GovtOfficialNo</label>
+									<input type="text" class="form-control" name="govtOfficialNo"
+										id="field_govtOfficialNo"
+										ng-model="applicationTxn.govtOfficialNo" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_pincode">Pincode</label>
+									<input type="text" class="form-control" name="pincode"
+										id="field_pincode" ng-model="applicationTxn.pincode" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_section">Section</label>
+									<input type="text" class="form-control" name="section"
+										id="field_section" ng-model="applicationTxn.section" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_ward">Ward</label> <input
+										type="text" class="form-control" name="ward" id="field_ward"
+										ng-model="applicationTxn.ward" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_block">Block</label> <input
+										type="text" class="form-control" name="block" id="field_block"
+										ng-model="applicationTxn.block" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_constituency">Constituency</label>
+									<input type="text" class="form-control" name="constituency"
+										id="field_constituency" ng-model="applicationTxn.constituency" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>Contact Details</legend>
+
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_email">Email</label> <input
+										type="text" class="form-control" name="email" id="field_email"
+										ng-model="applicationTxn.email" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_telephoneNumber">TelephoneNumber</label>
+									<input type="text" class="form-control" name="telephoneNumber"
+										id="field_telephoneNumber"
+										ng-model="applicationTxn.telephoneNumber" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_mobile">Mobile</label>
+									<input type="text" class="form-control" name="mobile"
+										id="field_mobile" ng-model="applicationTxn.mobile" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend> PlotArea(As per)</legend>
+							<div class="row">
+								<div class="col-sm-2">
+									<label>(a)MCH Sanc. Plan</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_scanPlan">ScanPlan</label>
+									<input type="number" class="form-control" name="scanPlan"
+										id="field_scanPlan" ng-model="applicationTxn.scanPlan" />
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_scanPlan1">ScanPlan1</label>
+									<input type="number" class="form-control" name="scanPlan1"
+										id="field_scanPlan1" ng-model="applicationTxn.scanPlan1" />
+								</div>
+								<div class="col-sm-3">
+									<label for="field_applicationTypeMaster">applicationTypeMaster</label>
+									<select class="form-control" id="field_applicationTypeMaster"
+										name="applicationTypeMaster"
+										ng-model="applicationTxn.applicationTypeMaster"
+										ng-options="applicationTypeMaster as applicationTypeMaster.applicationType for applicationTypeMaster in applicationtypemasters track by applicationTypeMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label for="field_connectionTypeMaster">connectionTypeMaster</label>
+									<select class="form-control" id="field_connectionTypeMaster"
+										name="connectionTypeMaster"
+										ng-model="applicationTxn.connectionTypeMaster"
+										ng-options="connectionTypeMaster as connectionTypeMaster.connectionType for connectionTypeMaster in connectiontypemasters track by connectionTypeMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-2">
+									<label>(b).Reg.SaleDeed</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_saleDeed">SaleDeed</label>
+									<input type="number" class="form-control" name="saleDeed"
+										id="field_saleDeed" ng-model="applicationTxn.saleDeed" />
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_saleDeed1">SaleDeed1</label>
+									<input type="number" class="form-control" name="saleDeed1"
+										id="field_saleDeed1" ng-model="applicationTxn.saleDeed1" />
+								</div>
+								<div class="col-sm-3">
+									<label for="field_ctegoryMaster">ctegoryMaster</label> <select
+										class="form-control" id="field_ctegoryMaster"
+										name="ctegoryMaster" ng-model="applicationTxn.ctegoryMaster"
+										ng-options="ctegoryMaster as ctegoryMaster.categoryName for ctegoryMaster in ctegorymasters track by ctegoryMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label for="field_pipeSizeMaster">pipeSizeMaster</label> <select
+										class="form-control" id="field_pipeSizeMaster"
+										name="pipeSizeMaster" ng-model="applicationTxn.pipeSizeMaster"
+										ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-9">
+									<label class="control-label" for="field_totalPlinthArea">TotalPlinthArea</label>
+									<input type="number" class="form-control"
+										name="totalPlinthArea" id="field_totalPlinthArea"
+										ng-model="applicationTxn.totalPlinthArea" />
+								</div>
+								<!-- <div class="col-sm-3"></div> -->
+								<div class="col-sm-3">
+									<label for="field_sewerSize">sewerSize</label> <select
+										class="form-control" id="field_sewerSize" name="sewerSize"
+										ng-model="applicationTxn.sewerSize"
+										ng-options="sewerSize as sewerSize.sewerSize for sewerSize in sewersizes track by sewerSize.id">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>Extra</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_status">Status</label>
+									<input type="text" class="form-control" name="status"
+										id="field_status" ng-model="applicationTxn.status" />
+								</div>
+								<div class="col-sm-4">
+									<label for="field_fileNumber">fileNumber</label> <select
+										class="form-control" id="field_fileNumber" name="fileNumber"
+										ng-model="applicationTxn.fileNumber"
+										ng-options="fileNumber as fileNumber.fileNo for fileNumber in filenumbers track by fileNumber.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<label for="field_customer">customer</label> <select
+										class="form-control" id="field_customer" name="customer"
+										ng-model="applicationTxn.customer"
+										ng-options="customer as customer.id for customer in customers track by customer.id">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_createdDate">CreatedDate</label>
+									<input id="field_createdDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="applicationTxn.createdDate"
+										is-open="datePickerForCreatedDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForCreatedDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_updatedDate">UpdatedDate</label>
+									<input id="field_updatedDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="applicationTxn.updatedDate"
+										is-open="datePickerForUpdatedDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForUpdatedDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+						</button>
+						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+							class="btn btn-primary">
+							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+	<div class="modal fade" id="viewApplicationTxnModal" tabindex="-1"
+		role="dialog" aria-labelledby="myApplicationTxnLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" ng-click="clear()">Close</button>
+					<h4 class="modal-title" id="myApplicationTxnLabel">View
+						Application Txn</h4>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="jh-table table table-striped">
+							<thead>
+								<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+									<th jh-sort-by="id"><span>ID</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="sHouseNo"><span>SHouseNo</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="govtOfficialNo"><span>GovtOfficialNo</span>
+										<span class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="ward"><span>Ward</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="street"><span>Street</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="pincode"><span>Pincode</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="block"><span>Block</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="area"><span>Area</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="section"><span>Section</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="constituency"><span>Constituency</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="email"><span>Email</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="telephoneNumber"><span>TelephoneNumber</span>
+										<span class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="mobile"><span>Mobile</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="scanPlan"><span>ScanPlan</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="scanPlan1"><span>ScanPlan1</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="saleDeed"><span>SaleDeed</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="saleDeed1"><span>SaleDeed1</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="totalPlinthArea"><span>TotalPlinthArea</span>
+										<span class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="createdDate"><span>CreatedDate</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="updatedDate"><span>UpdatedDate</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="status"><span>Status</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="applicationTypeMaster.id"><span>applicationTypeMaster</span>
+										<span class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="connectionTypeMaster.id"><span>connectionTypeMaster</span>
+										<span class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="ctegoryMaster.id"><span>ctegoryMaster</span>
+										<span class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="pipeSizeMaster.id"><span>pipeSizeMaster</span>
+										<span class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="sewerSize.id"><span>sewerSize</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="fileNumber.id"><span>fileNumber</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th jh-sort-by="customer.id"><span>customer</span> <span
+										class="glyphicon glyphicon-sort"></span></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody infinite-scroll="loadPage(page + 1)"
+								infinite-scroll-disabled="links['last'] == page">
+								<tr
+									ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
+									<td><a
+										ui-sref="applicationTxn.detail({id:applicationTxn.id})">{{applicationTxn.id}}</a></td>
+									<td>{{applicationTxn.sHouseNo}}</td>
+									<td>{{applicationTxn.govtOfficialNo}}</td>
+									<td>{{applicationTxn.ward}}</td>
+									<td>{{applicationTxn.street}}</td>
+									<td>{{applicationTxn.pincode}}</td>
+									<td>{{applicationTxn.block}}</td>
+									<td>{{applicationTxn.area}}</td>
+									<td>{{applicationTxn.section}}</td>
+									<td>{{applicationTxn.constituency}}</td>
+									<td>{{applicationTxn.email}}</td>
+									<td>{{applicationTxn.telephoneNumber}}</td>
+									<td>{{applicationTxn.mobile}}</td>
+									<td>{{applicationTxn.scanPlan}}</td>
+									<td>{{applicationTxn.scanPlan1}}</td>
+									<td>{{applicationTxn.saleDeed}}</td>
+									<td>{{applicationTxn.saleDeed1}}</td>
+									<td>{{applicationTxn.totalPlinthArea}}</td>
+									<td>{{applicationTxn.createdDate | date:'medium'}}</td>
+									<td>{{applicationTxn.updatedDate | date:'medium'}}</td>
+									<td>{{applicationTxn.status}}</td>
+									<td><a
+										ui-sref="applicationTypeMaster.detail({id:applicationTxn.applicationTypeMaster.id})">{{applicationTxn.applicationTypeMaster.id}}</a>
+									</td>
+									<td><a
+										ui-sref="connectionTypeMaster.detail({id:applicationTxn.connectionTypeMaster.id})">{{applicationTxn.connectionTypeMaster.id}}</a>
+									</td>
+									<td><a
+										ui-sref="ctegoryMaster.detail({id:applicationTxn.ctegoryMaster.id})">{{applicationTxn.ctegoryMaster.id}}</a>
+									</td>
+									<td><a
+										ui-sref="pipeSizeMaster.detail({id:applicationTxn.pipeSizeMaster.id})">{{applicationTxn.pipeSizeMaster.id}}</a>
+									</td>
+									<td><a
+										ui-sref="sewerSize.detail({id:applicationTxn.sewerSize.id})">{{applicationTxn.sewerSize.id}}</a>
+									</td>
+									<td><a
+										ui-sref="fileNumber.detail({id:applicationTxn.fileNumber.id})">{{applicationTxn.fileNumber.id}}</a>
+									</td>
+									<td><a
+										ui-sref="customer.detail({id:applicationTxn.customer.id})">{{applicationTxn.customer.id}}</a>
+									</td>
+									<td class="text-right">
+										<div class="btn-group flex-btn-group-container">
+											<button type="submit"
+												ui-sref="applicationTxn.detail({id:applicationTxn.id})"
+												class="btn btn-info btn-sm">
+												<span class="glyphicon glyphicon-eye-open"></span> <span
+													class="hidden-xs hidden-sm"></span>
+											</button>
+											<button type="submit"
+												ui-sref="applicationTxn.edit({id:applicationTxn.id})"
+												class="btn btn-primary btn-sm">
+												<span class="glyphicon glyphicon-pencil"></span> <span
+													class="hidden-xs hidden-sm"></span>
+											</button>
+											<button type="submit"
+												ui-sref="applicationTxn.delete({id:applicationTxn.id})"
+												class="btn btn-danger btn-sm">
+												<span class="glyphicon glyphicon-remove-circle"></span> <span
+													class="hidden-xs hidden-sm"></span>
+											</button>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
