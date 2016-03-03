@@ -22,11 +22,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findOneByEmail(String email);
 
-    Optional<User> findOneByLogin(String login);
+    Optional<User> findOneByLogin(String login);//this method was by default commented
 
     Optional<User> findOneById(Long userId);
 
     @Override
     void delete(User t);
+    
+    User findById(long parseLong);
+    //User findOneByLogin(String login);
 
 }
