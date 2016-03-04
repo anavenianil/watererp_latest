@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
@@ -40,7 +42,11 @@ public class ApplicationTxnResource {
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
     
-    @Inject ApplicationTxnWorkflowService applicationTxnWorkflowService;
+    @Inject 
+    private ApplicationTxnWorkflowService applicationTxnWorkflowService;
+    
+    @Inject
+    private CustomerRepository customerRepository;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -54,15 +60,21 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationTxn", "idexists", "A new applicationTxn cannot already have an ID")).body(null);
         }
+        
+    	Customer customer = customerRepository.save(applicationTxn.getCustomer());
+    	applicationTxn.setFileNumber(customer.getFileNumber());
+    	applicationTxn.setStatus("0");
+    	applicationTxn.setCreatedDate(customer.getRequestDate());
+    	applicationTxn.setUpdatedDate(customer.getRequestDate());
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         //this is for workflow
-        try{
+       /* try{
         	applicationTxnWorkflowService.createTxn(applicationTxn);
         }
         catch(Exception e){
         	System.out.println(e);
-        }
+        }*/
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))

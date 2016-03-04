@@ -32,7 +32,7 @@ public class InternalWorkflowService {// extends WorkflowService {
      * @return
      */
     public String getInternalDivisionWorkFlow() throws Exception{
-    	log.debug("com.callippus.doi.workflow.service.InternalWorkflowService : getInternalDivisionWorkFlow(): ");
+    	log.debug("com.callippus.water.erp.workflow.service.InternalWorkflowService : getInternalDivisionWorkFlow(): ");
     	
     	String parentID = null;
            /**
