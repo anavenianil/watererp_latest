@@ -128,5 +128,22 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('applicationTxn.all', {
+                parent: 'applicationTxn',
+                url: '/all',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'ApplicationTxns'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
+                        controller: 'ApplicationTxnDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
+        
     });

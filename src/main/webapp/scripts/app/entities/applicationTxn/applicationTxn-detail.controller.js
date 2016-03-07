@@ -13,5 +13,12 @@ angular.module('watererpApp')
             $scope.applicationTxn = result;
         });
         $scope.$on('$destroy', unsubscribe);
+        
+        $scope.approve = function(){
+        	 if ($scope.applicationTxn.id != null) {
+                 ApplicationTxn.update($scope.applicationTxn);
+             }
+        }
+       
 
     });

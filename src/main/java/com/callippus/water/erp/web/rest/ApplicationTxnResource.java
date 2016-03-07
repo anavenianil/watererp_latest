@@ -93,6 +93,7 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(applicationTxn);
         }
+        applicationTxn.setStatus(String.valueOf(Integer.parseInt(applicationTxn.getStatus())+1));
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
