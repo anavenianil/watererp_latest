@@ -6,7 +6,7 @@
 	</div>
 	<div class="modal-body">
 		<div class="table-responsive">
-			<table class="jh-table table table-striped">
+			<table class="jh-table table  table-striped">
 				<thead>
 					<tr jh-sort="predicate" ascending="reverse" callback="reset()">
 						<th jh-sort-by="id"><span>Application ID</span> <span
@@ -15,44 +15,6 @@
 							class="glyphicon glyphicon-sort"></span></th>
 						<th jh-sort-by="customer.id"><span>Customer</span> <span
 							class="glyphicon glyphicon-sort"></span></th>
-						<!-- <th jh-sort-by="sHouseNo"><span>SHouseNo</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="govtOfficialNo"><span>GovtOfficialNo</span>
-										<span class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="ward"><span>Ward</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="street"><span>Street</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="pincode"><span>Pincode</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="block"><span>Block</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="area"><span>Area</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="section"><span>Section</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="constituency"><span>Constituency</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="email"><span>Email</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="telephoneNumber"><span>TelephoneNumber</span>
-										<span class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="mobile"><span>Mobile</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="scanPlan"><span>ScanPlan</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="scanPlan1"><span>ScanPlan1</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="saleDeed"><span>SaleDeed</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="saleDeed1"><span>SaleDeed1</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="totalPlinthArea"><span>TotalPlinthArea</span>
-										<span class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="createdDate"><span>CreatedDate</span> <span
-										class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="updatedDate"><span>UpdatedDate</span> <span
-										class="glyphicon glyphicon-sort"></span></th> -->
 						<th jh-sort-by="status"><span>Status</span> <span
 							class="glyphicon glyphicon-sort"></span></th>
 						<th jh-sort-by="applicationTypeMaster.id"><span>Application
@@ -74,47 +36,18 @@
 						ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
 						<td><a
 							ui-sref="applicationTxn.detail({id:applicationTxn.id})">{{applicationTxn.id}}</a></td>
-						<td><a
-							ui-sref="fileNumber.detail({id:applicationTxn.fileNumber.id})">{{applicationTxn.fileNumber.fileNo}}</a>
-						</td>
+						<td>{{applicationTxn.fileNumber.fileNo}}</td>
 						<td><a
 							ui-sref="customer.detail({id:applicationTxn.customer.id})">{{applicationTxn.customer.id}}</a>
 						</td>
-						<!-- <td>{{applicationTxn.sHouseNo}}</td>
-									<td>{{applicationTxn.govtOfficialNo}}</td>
-									<td>{{applicationTxn.ward}}</td>
-									<td>{{applicationTxn.street}}</td>
-									<td>{{applicationTxn.pincode}}</td>
-									<td>{{applicationTxn.block}}</td>
-									<td>{{applicationTxn.area}}</td>
-									<td>{{applicationTxn.section}}</td>
-									<td>{{applicationTxn.constituency}}</td>
-									<td>{{applicationTxn.email}}</td>
-									<td>{{applicationTxn.telephoneNumber}}</td>
-									<td>{{applicationTxn.mobile}}</td>
-									<td>{{applicationTxn.scanPlan}}</td>
-									<td>{{applicationTxn.scanPlan1}}</td>
-									<td>{{applicationTxn.saleDeed}}</td>
-									<td>{{applicationTxn.saleDeed1}}</td>
-									<td>{{applicationTxn.totalPlinthArea}}</td>
-									<td>{{applicationTxn.createdDate | date:'medium'}}</td>
-									<td>{{applicationTxn.updatedDate | date:'medium'}}</td> -->
+
 						<td>{{applicationTxn.status}}</td>
-						<td><a
-							ui-sref="applicationTypeMaster.detail({id:applicationTxn.applicationTypeMaster.id})">{{applicationTxn.applicationTypeMaster.applicationType}}</a>
+						<td>{{applicationTxn.applicationTypeMaster.applicationType}}
 						</td>
-						<td><a
-							ui-sref="connectionTypeMaster.detail({id:applicationTxn.connectionTypeMaster.id})">{{applicationTxn.connectionTypeMaster.connectionType}}</a>
-						</td>
-						<td><a
-							ui-sref="ctegoryMaster.detail({id:applicationTxn.ctegoryMaster.id})">{{applicationTxn.ctegoryMaster.categoryName}}</a>
-						</td>
-						<td><a
-							ui-sref="pipeSizeMaster.detail({id:applicationTxn.pipeSizeMaster.id})">{{applicationTxn.pipeSizeMaster.pipeSize}}</a>
-						</td>
-						<td><a
-							ui-sref="sewerSize.detail({id:applicationTxn.sewerSize.id})">{{applicationTxn.sewerSize.sewerSize}}</a>
-						</td>
+						<td>{{applicationTxn.connectionTypeMaster.connectionType}}</td>
+						<td>{{applicationTxn.ctegoryMaster.categoryName}}</td>
+						<td>{{applicationTxn.pipeSizeMaster.pipeSize}}</td>
+						<td>{{applicationTxn.sewerSize.sewerSize}}</td>
 
 						<td class="text-right">
 							<div class="btn-group flex-btn-group-container">

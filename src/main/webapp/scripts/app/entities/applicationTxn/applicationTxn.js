@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/applicationTxns',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CUSTOMER', 'ROLE_ADMIN'],
                     pageTitle: 'ApplicationTxns'
                 },
                 views: {
@@ -123,7 +123,7 @@ angular.module('watererpApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('applicationTxn', null, { reload: true });
+                        $state.go('applicationTxn.all', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

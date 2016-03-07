@@ -97,6 +97,9 @@ angular.module('watererpApp')
         //save method
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
+            $scope.applicationTxn.id = result.id;
+            $scope.applicationTxn.fileNumber = {};
+            $scope.applicationTxn.fileNumber.fileNo = result.fileNumber.fileNo;
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
         };

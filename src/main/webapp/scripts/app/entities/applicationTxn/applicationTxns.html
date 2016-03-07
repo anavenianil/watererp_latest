@@ -2,15 +2,15 @@
 	<!-- <h2>ApplicationTxns</h2> -->
 	<jh-alert></jh-alert>
 	<div class="container-fluid">
-		<button class="btn btn-primary pull-right"  ui-sref="applicationTxn.all">
+		<button class="btn btn-primary pull-right"
+			ui-sref="applicationTxn.all">
 			<span class="glyphicon glyphicon-plus"></span> <span>View
 				ApplicationTxn </span>
 		</button>
 	</div>
 	<br />
 
-	<form name="editForm" role="form" novalidate ng-submit="save()"
-		has-role="ROLE_CUSTOMER">
+	<form name="editForm" role="form" novalidate ng-submit="save()">
 
 		<!-- <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
@@ -433,7 +433,14 @@
 					</div>
 					<div class="modal-body">
 						<p>Request Submitted Successfully!</p>
+						<div>
+							<label>Application No.: </label>{{applicationTxn.id}}
+						</div>
+						<div>
+							<label>File No.: </label>{{applicationTxn.fileNumber.fileNo}}
+						</div>
 					</div>
+
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal"
 							ng-click="clear()">
@@ -567,7 +574,7 @@
 									<td><a
 										ui-sref="sewerSize.detail({id:applicationTxn.sewerSize.id})">{{applicationTxn.sewerSize.sewerSize}}</a>
 									</td>
-									
+
 									<td class="text-right">
 										<div class="btn-group flex-btn-group-container">
 											<button type="submit"

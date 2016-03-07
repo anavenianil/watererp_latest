@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
@@ -107,10 +108,17 @@ public class ApplicationTxnResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<ApplicationTxn>> getAllApplicationTxns(Pageable pageable)
+    public ResponseEntity<List<ApplicationTxn>> getAllApplicationTxns(Pageable pageable,@RequestParam(value = "status", required = false) String status)
         throws URISyntaxException {
         log.debug("REST request to get a page of ApplicationTxns");
-        Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
+        //Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
+        Page<ApplicationTxn> page;
+        if(status== null){
+        	page = applicationTxnRepository.findAll(pageable);
+        }
+        else{
+        	page = applicationTxnRepository.findByStatus(pageable, status);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/applicationTxns");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
