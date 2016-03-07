@@ -35,7 +35,7 @@ angular.module('watererpApp')
             //$scope.loadAll();
         };
         $scope.loadPage = function(page) {
-            $scope.page = page;
+            //$scope.page = page;
             //$scope.loadAll();
         };
         //$scope.loadAll();

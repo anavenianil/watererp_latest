@@ -1,238 +1,497 @@
 
 <div>
-    <h2><span>ApplicationTxn</span> {{applicationTxn.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <span>SHouseNo</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.sHouseNo}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>GovtOfficialNo</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.govtOfficialNo}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Ward</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.ward}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Street</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.street}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Pincode</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.pincode}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Block</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.block}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Area</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.area}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Section</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.section}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Constituency</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.constituency}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Email</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.email}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>TelephoneNumber</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.telephoneNumber}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Mobile</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.mobile}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>ScanPlan</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.scanPlan}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>ScanPlan1</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.scanPlan1}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SaleDeed</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.saleDeed}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SaleDeed1</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.saleDeed1}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>TotalPlinthArea</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.totalPlinthArea}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>CreatedDate</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.createdDate | date:'medium'}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>UpdatedDate</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.updatedDate | date:'medium'}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Status</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{applicationTxn.status}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>applicationTypeMaster</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="applicationTypeMaster.detail({id:applicationTxn.applicationTypeMaster.id})">{{applicationTxn.applicationTypeMaster.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>connectionTypeMaster</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="connectionTypeMaster.detail({id:applicationTxn.connectionTypeMaster.id})">{{applicationTxn.connectionTypeMaster.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>ctegoryMaster</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="ctegoryMaster.detail({id:applicationTxn.ctegoryMaster.id})">{{applicationTxn.ctegoryMaster.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>pipeSizeMaster</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="pipeSizeMaster.detail({id:applicationTxn.pipeSizeMaster.id})">{{applicationTxn.pipeSizeMaster.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>sewerSize</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="sewerSize.detail({id:applicationTxn.sewerSize.id})">{{applicationTxn.sewerSize.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>fileNumber</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="fileNumber.detail({id:applicationTxn.fileNumber.id})">{{applicationTxn.fileNumber.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>customer</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="customer.detail({id:applicationTxn.customer.id})">{{applicationTxn.customer.id}}</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+	<h2>
+		<span>ApplicationTxn</span> {{applicationTxn.id}}
+	</h2>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Application For New Connection</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<fieldset>
+					<legend></legend>
+					<div class="row">
+					<div class="col-sm-4">
+							<label>File Number</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.fileNumber.fileNo}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Application No</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.id}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>RequestDate</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.requestDate
+								| date:'medium'}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<fieldset>
+					<legend>APPLICANT NAME</legend>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>First Name</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.firstName}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Middle Name</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.middleName}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Last Name</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.lastName}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<fieldset>
+					<legend>CORRESPONDANCE ADDRESS</legend>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>House No</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.houseNo}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Street</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.street}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Area</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.area}}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Govt. Official No.</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.govtOfficialNo}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Pincode</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.pincode}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Section</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.section}}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Ward</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.ward}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Block</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.block}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Constituency</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.constituency}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<fieldset>
+					<legend>Contact Details</legend>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Tel. Office</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.telOffice}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Tel. Home</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.telHome}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Mobile</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.mobile}}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Email</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.customer.email}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<fieldset>
+					<legend>SERVICE PREMISES ADDRESS</legend>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>House No</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.sHouseNo}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Street</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.street}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Area</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.area}}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Govt. Official No.</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.govtOfficialNo}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Pincode</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.pincode}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Section</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.section}}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Ward</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.ward}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Block</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.block}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Constituency</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.constituency}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<fieldset>
+					<legend>Service Premises Contact Details</legend>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Tel. Office</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.telephoneNumber}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Mobile</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.mobile}}</h5>
+						</div>
+						<div class="col-sm-4">
+							<label>Email</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.email}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<fieldset>
+					<legend>PlotArea(As per)</legend>
+					<div class="row">
+						<div class="col-sm-2">
+							<label>(a)MCH Sanc. Plan</label>
+							<h5 class="list-group-item-heading"></h5>
+						</div>
+						<div class="col-sm-2">
+							<label>Sq. Mts. </label>
+							<h5 class="list-group-item-heading">{{applicationTxn.scanPlan}}</h5>
+						</div>
+						<div class="col-sm-2">
+							<label> Sq. Yards </label>
+							<h5 class="list-group-item-heading">{{applicationTxn.scanPlan1}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Application Type</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.applicationTypeMaster.applicationType}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Connection Type</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.connectionTypeMaster.connectionType}}</h5>
+						</div>
 
-    <button type="submit"
-            onclick="window.history.back()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<label>(b)Reg. Sale Deed</label>
+							<h5 class="list-group-item-heading"></h5>
+						</div>
+						<div class="col-sm-2">
+							<label>Sq. Mts. </label>
+							<h5 class="list-group-item-heading">{{applicationTxn.saleDeed}}</h5>
+						</div>
+						<div class="col-sm-2">
+							<label>Sq. Yards</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.saleDeed1}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Category</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.ctegoryMaster.categoryName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Pipe Size</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.pipeSizeMaster.pipeSize}}</h5>
+						</div>
+					</div>
+					<div class="row">
+					<div class="col-sm-9">
+							<label>Total Plinth Area</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.totalPlinthArea}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Sewer Size</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.sewerSize.sewerSize}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<!-- <div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Field</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><span>RequestDate</span></td>
+								<td><span class="form-control-static">{{applicationTxn.customer.requestDate
+										| date:'medium'}}</span></td>
+							</tr>
+							<tr>
+								<td><span>FirstName</span></td>
+								<td><span class="form-control-static">{{applicationTxn.customer.firstName}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>MiddleName</span></td>
+								<td><span class="form-control-static">{{customer.middleName}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>LastName</span></td>
+								<td><span class="form-control-static">{{customer.lastName}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>HouseNo</span></td>
+								<td><span class="form-control-static">{{customer.houseNo}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>GovtOfficialNo</span></td>
+								<td><span class="form-control-static">{{customer.govtOfficialNo}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Ward</span></td>
+								<td><span class="form-control-static">{{customer.ward}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Street</span></td>
+								<td><span class="form-control-static">{{customer.street}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Pincode</span></td>
+								<td><span class="form-control-static">{{customer.pincode}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Block</span></td>
+								<td><span class="form-control-static">{{customer.block}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Area</span></td>
+								<td><span class="form-control-static">{{customer.area}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Section</span></td>
+								<td><span class="form-control-static">{{customer.section}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Constituency</span></td>
+								<td><span class="form-control-static">{{customer.constituency}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Email</span></td>
+								<td><span class="form-control-static">{{customer.email}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>TelOffice</span></td>
+								<td><span class="form-control-static">{{customer.telOffice}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>TelHome</span></td>
+								<td><span class="form-control-static">{{customer.telHome}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Mobile</span></td>
+								<td><span class="form-control-static">{{customer.mobile}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>fileNumber</span></td>
+								<td><a class="form-control-static"
+									ui-sref="fileNumber.detail({id:customer.fileNumber.id})">{{customer.fileNumber.id}}</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span>SHouseNo</span></td>
+								<td><span class="form-control-static">{{applicationTxn.sHouseNo}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>GovtOfficialNo</span></td>
+								<td><span class="form-control-static">{{applicationTxn.govtOfficialNo}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Ward</span></td>
+								<td><span class="form-control-static">{{applicationTxn.ward}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Street</span></td>
+								<td><span class="form-control-static">{{applicationTxn.street}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Pincode</span></td>
+								<td><span class="form-control-static">{{applicationTxn.pincode}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Block</span></td>
+								<td><span class="form-control-static">{{applicationTxn.block}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Area</span></td>
+								<td><span class="form-control-static">{{applicationTxn.area}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Section</span></td>
+								<td><span class="form-control-static">{{applicationTxn.section}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Constituency</span></td>
+								<td><span class="form-control-static">{{applicationTxn.constituency}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Email</span></td>
+								<td><span class="form-control-static">{{applicationTxn.email}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>TelephoneNumber</span></td>
+								<td><span class="form-control-static">{{applicationTxn.telephoneNumber}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>Mobile</span></td>
+								<td><span class="form-control-static">{{applicationTxn.mobile}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>ScanPlan</span></td>
+								<td><span class="form-control-static">{{applicationTxn.scanPlan}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>ScanPlan1</span></td>
+								<td><span class="form-control-static">{{applicationTxn.scanPlan1}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>SaleDeed</span></td>
+								<td><span class="form-control-static">{{applicationTxn.saleDeed}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>SaleDeed1</span></td>
+								<td><span class="form-control-static">{{applicationTxn.saleDeed1}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>TotalPlinthArea</span></td>
+								<td><span class="form-control-static">{{applicationTxn.totalPlinthArea}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>CreatedDate</span></td>
+								<td><span class="form-control-static">{{applicationTxn.createdDate
+										| date:'medium'}}</span></td>
+							</tr>
+							<tr>
+								<td><span>UpdatedDate</span></td>
+								<td><span class="form-control-static">{{applicationTxn.updatedDate
+										| date:'medium'}}</span></td>
+							</tr>
+							<tr>
+								<td><span>Status</span></td>
+								<td><span class="form-control-static">{{applicationTxn.status}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><span>applicationTypeMaster</span></td>
+								<td><a class="form-control-static"
+									ui-sref="applicationTypeMaster.detail({id:applicationTxn.applicationTypeMaster.id})">{{applicationTxn.applicationTypeMaster.id}}</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span>connectionTypeMaster</span></td>
+								<td><a class="form-control-static"
+									ui-sref="connectionTypeMaster.detail({id:applicationTxn.connectionTypeMaster.id})">{{applicationTxn.connectionTypeMaster.id}}</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span>ctegoryMaster</span></td>
+								<td><a class="form-control-static"
+									ui-sref="ctegoryMaster.detail({id:applicationTxn.ctegoryMaster.id})">{{applicationTxn.ctegoryMaster.id}}</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span>pipeSizeMaster</span></td>
+								<td><a class="form-control-static"
+									ui-sref="pipeSizeMaster.detail({id:applicationTxn.pipeSizeMaster.id})">{{applicationTxn.pipeSizeMaster.id}}</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span>sewerSize</span></td>
+								<td><a class="form-control-static"
+									ui-sref="sewerSize.detail({id:applicationTxn.sewerSize.id})">{{applicationTxn.sewerSize.id}}</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span>fileNumber</span></td>
+								<td><a class="form-control-static"
+									ui-sref="fileNumber.detail({id:applicationTxn.fileNumber.id})">{{applicationTxn.fileNumber.id}}</a>
+								</td>
+							</tr>
+							<tr>
+								<td><span>customer</span></td>
+								<td><a class="form-control-static"
+									ui-sref="customer.detail({id:applicationTxn.customer.id})">{{applicationTxn.customer.id}}</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div> -->
+
+			</div>
+		</div>
+	</div>
+
+	<button type="submit" onclick="window.history.back()"
+		class="btn btn-info">
+		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+			Back</span>
+	</button>
 </div>
