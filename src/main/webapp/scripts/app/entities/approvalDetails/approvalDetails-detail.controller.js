@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApprovalDetailsDetailController', function ($scope, $rootScope, $stateParams, entity, ApprovalDetails, Customer, FeasibilityStatus, DesignationMaster) {
+    .controller('ApprovalDetailsDetailController', function ($scope, $rootScope, $stateParams, entity, ApprovalDetails, Customer, FeasibilityStatus, DesignationMaster, ApplicationTxn) {
         $scope.approvalDetails = entity;
         $scope.load = function (id) {
             ApprovalDetails.get({id: id}, function(result) {

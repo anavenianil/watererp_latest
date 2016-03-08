@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('watererpApp').controller('ApprovalDetailsDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ApprovalDetails', 'Customer', 'FeasibilityStatus', 'DesignationMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, ApprovalDetails, Customer, FeasibilityStatus, DesignationMaster) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ApprovalDetails', 'Customer', 'FeasibilityStatus', 'DesignationMaster', 'ApplicationTxn',
+        function($scope, $stateParams, $uibModalInstance, entity, ApprovalDetails, Customer, FeasibilityStatus, DesignationMaster, ApplicationTxn) {
 
         $scope.approvalDetails = entity;
         $scope.customers = Customer.query();
         $scope.feasibilitystatuss = FeasibilityStatus.query();
         $scope.designationmasters = DesignationMaster.query();
+        $scope.applicationtxns = ApplicationTxn.query();
         $scope.load = function(id) {
             ApprovalDetails.get({id : id}, function(result) {
                 $scope.approvalDetails = result;

@@ -1,10 +1,12 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.ApprovalDetails;
-import com.callippus.water.erp.repository.ApprovalDetailsRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,13 +15,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.ApprovalDetails;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.ApprovalDetailsRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing ApprovalDetails.
@@ -33,6 +41,9 @@ public class ApprovalDetailsResource {
     @Inject
     private ApprovalDetailsRepository approvalDetailsRepository;
     
+    @Inject
+    private ApplicationTxnRepository applicationTxnRepository;
+    
     /**
      * POST  /approvalDetailss -> Create a new approvalDetails.
      */
@@ -45,6 +56,10 @@ public class ApprovalDetailsResource {
         if (approvalDetails.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("approvalDetails", "idexists", "A new approvalDetails cannot already have an ID")).body(null);
         }
+        ApplicationTxn applicationTxn = applicationTxnRepository.findOne(approvalDetails.getApplicationTxn().getId());
+        applicationTxn.setStatus("1");
+        applicationTxnRepository.save(applicationTxn);
+        
         ApprovalDetails result = approvalDetailsRepository.save(approvalDetails);
         return ResponseEntity.created(new URI("/api/approvalDetailss/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("approvalDetails", result.getId().toString()))

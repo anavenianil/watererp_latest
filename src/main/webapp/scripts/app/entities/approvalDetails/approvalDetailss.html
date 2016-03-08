@@ -27,6 +27,7 @@
                     <th jh-sort-by="customer.id"><span>customer</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="feasibilityStatus.id"><span>feasibilityStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="designationMaster.id"><span>designationMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applicationTxn.id"><span>applicationTxn</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -46,6 +47,9 @@
                     </td>
                     <td>
                         <a ui-sref="designationMaster.detail({id:approvalDetails.designationMaster.id})">{{approvalDetails.designationMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="applicationTxn.detail({id:approvalDetails.applicationTxn.id})">{{approvalDetails.applicationTxn.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

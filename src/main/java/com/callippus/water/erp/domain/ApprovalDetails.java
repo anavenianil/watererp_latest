@@ -49,6 +49,10 @@ public class ApprovalDetails implements Serializable {
     @JoinColumn(name = "designation_master_id")
     private DesignationMaster designationMaster;
 
+    @ManyToOne
+    @JoinColumn(name = "application_txn_id")
+    private ApplicationTxn applicationTxn;
+
     public Long getId() {
         return id;
     }
@@ -119,6 +123,14 @@ public class ApprovalDetails implements Serializable {
 
     public void setDesignationMaster(DesignationMaster designationMaster) {
         this.designationMaster = designationMaster;
+    }
+
+    public ApplicationTxn getApplicationTxn() {
+        return applicationTxn;
+    }
+
+    public void setApplicationTxn(ApplicationTxn applicationTxn) {
+        this.applicationTxn = applicationTxn;
     }
 
     @Override

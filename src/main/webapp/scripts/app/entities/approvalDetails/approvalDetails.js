@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('approvalDetails.new', {
+            .state('approvalDetails1.new', {
                 parent: 'approvalDetails',
                 url: '/new',
                 data: {

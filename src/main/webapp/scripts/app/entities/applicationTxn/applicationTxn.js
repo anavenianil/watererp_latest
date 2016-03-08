@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('applicationTxn.new', {
+            .state('applicationTxn1.new', {
                 parent: 'applicationTxn',
                 url: '/new',
                 data: {
@@ -144,6 +144,36 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('approvalDetails.new', {
+                parent: 'applicationTxn.all',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'scripts/app/entities/approvalDetails/approvalDetails-dialog.html',
+                        controller: 'ApprovalDetailsDialogController',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    remarks: null,
+                                    approvedDate: null,
+                                    approvedEmpNo: null,
+                                    approvedEmpName: null,
+                                    approvedEmpDesig: null,
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function(result) {
+                        $state.go('applicationTxn.all', null, { reload: true });
+                    }, function() {
+                        $state.go('applicationTxn.all');
+                    })
+                }]
             });
         
     });

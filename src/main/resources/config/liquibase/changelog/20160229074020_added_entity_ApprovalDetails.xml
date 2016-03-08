@@ -34,6 +34,7 @@
             <column name="customer_id" type="bigint"/>
             <column name="feasibility_status_id" type="bigint"/>
             <column name="designation_master_id" type="bigint"/>
+            <column name="application_txn_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="approval_details" columnName="approved_date" columnDataType="datetime"/>
@@ -56,6 +57,12 @@
                                  constraintName="fk_approvaldetails_designationmaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="designation_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="application_txn_id"
+                                 baseTableName="approval_details"
+                                 constraintName="fk_approvaldetails_applicationtxn_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_txn"/>
 
     </changeSet>
 </databaseChangeLog>
