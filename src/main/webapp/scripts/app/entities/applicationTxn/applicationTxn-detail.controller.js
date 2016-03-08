@@ -29,8 +29,16 @@ angular.module('watererpApp')
             ApprovalDetails.save(($scope.approvalDetails), function(){
             	$state.go('applicationTxn.all');
             });
-            
         }
        
+        $scope.datePickerForApprovedDate = {};
+
+        $scope.datePickerForApprovedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForApprovedDateOpen = function($event) {
+            $scope.datePickerForApprovedDate.status.opened = true;
+        };
 
     });

@@ -303,19 +303,19 @@
 										<jh-alert-error></jh-alert-error>
 										<div class="row">
 											<div class="col-sm-3">
-												<label for="field_applicationTxn">applicationTxn</label> <input
+												<label for="field_applicationTxn">Application Txn Id</label> <input
 													type="text" class="form-control" name="applicationTxn"
 													id="field_applicationTxn"
-													ng-model="approvalDetails.applicationTxn.id" />
+													ng-model="approvalDetails.applicationTxn.id" disabled/>
 											</div>
 											<div class="col-sm-3">
-												<label for="field_customer">customer</label> <input
+												<label for="field_customer">Customer Id</label> <input
 													type="text" class="form-control" id="field_customer" name="customer"
-													ng-model="approvalDetails.customer.id" />
+													ng-model="approvalDetails.customer.id" disabled/>
 
 											</div>
 											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedDate">ApprovedDate</label>
+												<label class="control-label" for="field_approvedDate">Approved Date</label>
 												<input id="field_approvedDate" type="text"
 													class="form-control" uib-datepicker-popup="{{dateformat}}"
 													ng-model="approvalDetails.approvedDate"
@@ -328,7 +328,7 @@
 												</span>
 											</div>
 											<div class="col-sm-3">
-												<label for="field_feasibilityStatus">feasibilityStatus</label>
+												<label for="field_feasibilityStatus">Feasibility Status</label>
 												<select class="form-control" id="field_feasibilityStatus"
 													name="feasibilityStatus"
 													ng-model="approvalDetails.feasibilityStatus"
@@ -347,25 +347,25 @@
 										<br>
 										<div class="row">
 											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedEmpNo">ApprovedEmpNo</label>
+												<label class="control-label" for="field_approvedEmpNo">Approved Emp. No.</label>
 												<input type="text" class="form-control" name="approvedEmpNo"
 													id="field_approvedEmpNo"
 													ng-model="approvalDetails.approvedEmpNo" />
 											</div>
 											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedEmpName">ApprovedEmpName</label>
+												<label class="control-label" for="field_approvedEmpName">Approved Emp. Name</label>
 												<input type="text" class="form-control"
 													name="approvedEmpName" id="field_approvedEmpName"
 													ng-model="approvalDetails.approvedEmpName" />
 											</div>
 											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedEmpDesig">ApprovedEmpDesig</label>
+												<label class="control-label" for="field_approvedEmpDesig">Approved Emp. Desig.</label>
 												<input type="text" class="form-control"
 													name="approvedEmpDesig" id="field_approvedEmpDesig"
 													ng-model="approvalDetails.approvedEmpDesig" />
 											</div>
 											<div class="col-sm-3">
-												<label for="field_designationMaster">designationMaster</label>
+												<label for="field_designationMaster">Designation Master</label>
 												<select class="form-control" id="field_designationMaster"
 													name="designationMaster"
 													ng-model="approvalDetails.designationMaster"
