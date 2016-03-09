@@ -193,6 +193,7 @@ angular.module('watererpApp')
         $scope.datePickerForCreatedDateOpen = function($event) {
             $scope.datePickerForCreatedDate.status.opened = true;
         };
+        
         $scope.datePickerForUpdatedDate = {};
 
         $scope.datePickerForUpdatedDate.status = {
