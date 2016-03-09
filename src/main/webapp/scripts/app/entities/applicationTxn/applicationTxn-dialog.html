@@ -4,6 +4,17 @@
 		<h4 class="modal-title" id="myApplicationTxnLabel">View
 			Application Txn</h4>
 	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<select class="input-sm form-control" name="applicationTxnSearch"
+				id="statusSearch" ng-model="statusSearch" ng-change="onSearch(statusSearch)">
+				<option value="All" label="All">Select Status</option>
+				<option value="Pending" label="Pending">Pending</option>
+				<option value="In Feasibility" label="In Feasibility">In Feasibility</option>
+				<option value="Approved" label="Approved">Approved</option>
+			</select>
+		</div>
+	</div>
 	<div class="modal-body">
 		<div class="table-responsive">
 			<table class="jh-table table  table-striped">

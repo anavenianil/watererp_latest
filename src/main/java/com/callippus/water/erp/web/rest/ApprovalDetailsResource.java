@@ -57,7 +57,7 @@ public class ApprovalDetailsResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("approvalDetails", "idexists", "A new approvalDetails cannot already have an ID")).body(null);
         }
         ApplicationTxn applicationTxn = applicationTxnRepository.findOne(approvalDetails.getApplicationTxn().getId());
-        applicationTxn.setStatus("1");
+        applicationTxn.setStatus("In Feasibility");
         applicationTxnRepository.save(applicationTxn);
         
         ApprovalDetails result = approvalDetailsRepository.save(approvalDetails);

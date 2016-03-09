@@ -64,7 +64,7 @@ public class ApplicationTxnResource {
         
     	Customer customer = customerRepository.save(applicationTxn.getCustomer());
     	applicationTxn.setFileNumber(customer.getFileNumber());
-    	applicationTxn.setStatus("0");
+    	applicationTxn.setStatus("Pending");
     	applicationTxn.setCreatedDate(customer.getRequestDate());
     	applicationTxn.setUpdatedDate(customer.getRequestDate());
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
@@ -94,7 +94,8 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(applicationTxn);
         }
-        applicationTxn.setStatus(String.valueOf(Integer.parseInt(applicationTxn.getStatus())+1));
+        //applicationTxn.setStatus(String.valueOf(Integer.parseInt(applicationTxn.getStatus())+1));
+        applicationTxn.setStatus("In Feasibility");
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
@@ -112,6 +113,9 @@ public class ApplicationTxnResource {
         throws URISyntaxException {
         log.debug("REST request to get a page of ApplicationTxns");
         //Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
+        if("All".equals(status)){
+        	status=null;
+        }
         Page<ApplicationTxn> page;
         if(status== null){
         	page = applicationTxnRepository.findAll(pageable);
