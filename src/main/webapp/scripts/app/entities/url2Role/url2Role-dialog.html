@@ -1,38 +1,43 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myUrl2RoleLabel">Create or edit a Url2Role</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="url2Role.id" readonly />
-        </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myUrl2RoleLabel">Create or edit a
+			Url2Role</h4>
+	</div>
+	<div class="modal-body">
+		<jh-alert-error></jh-alert-error>
+		<div class="form-group">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="url2Role.id" readonly />
+		</div>
 
-        <div class="form-group">
-            <label for="field_url">url</label>
-            <select class="form-control" id="field_url" name="url" ng-model="url2Role.url" ng-options="url as url.id for url in urls track by url.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_authority">authority</label>
-            <select class="form-control" id="field_authority" name="authority" ng-model="url2Role.authority" ng-options="authority as authority.name for authority in authoritys track by authority.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+		<div class="form-group">
+			<label for="field_url">url</label> <select class="form-control"
+				id="field_url" name="url" ng-model="url2Role.url"
+				ng-options="url as url.urlPattern for url in urls track by url.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_authority">authority</label> <select
+				class="form-control" id="field_authority" name="authority"
+				ng-model="url2Role.authority"
+				ng-options="authority as authority.name for authority in authoritys track by authority.id">
+				<option value=""></option>
+			</select>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
 </form>

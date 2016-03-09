@@ -26,7 +26,7 @@ public class Url2Role implements Serializable {
     private Url url;
 
     @ManyToOne
-    @JoinColumn(name = "authority_id")
+    @JoinColumn(name = "authority_name")
     private Authority authority;
 
     public Long getId() {

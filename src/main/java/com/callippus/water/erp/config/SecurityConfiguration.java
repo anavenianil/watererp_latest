@@ -1,7 +1,9 @@
 package com.callippus.water.erp.config;
 
-import com.callippus.water.erp.security.*;
-import com.callippus.water.erp.web.filter.CsrfCookieGeneratorFilter;
+import java.util.Map;
+
+import javax.inject.Inject;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -11,15 +13,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.csrf.CsrfFilter;
 
-import javax.inject.Inject;
+import com.callippus.water.erp.security.AjaxAuthenticationFailureHandler;
+import com.callippus.water.erp.security.AjaxAuthenticationSuccessHandler;
+import com.callippus.water.erp.security.AjaxLogoutSuccessHandler;
+import com.callippus.water.erp.security.AuthoritiesConstants;
+import com.callippus.water.erp.security.CustomAccessDeniedHandler;
+import com.callippus.water.erp.security.Http401UnauthorizedEntryPoint;
+import com.callippus.water.erp.security.PermissionMap;
+import com.callippus.water.erp.web.filter.CsrfCookieGeneratorFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -46,6 +55,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Inject
     private RememberMeServices rememberMeServices;
+    
+    @Inject
+	private PermissionMap permissionMap;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -101,9 +113,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .headers()
             .frameOptions()
-            .disable()
-        .and()
-            .authorizeRequests()
+            .disable();
+        
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry interceptUrlRegistry = 
+        http.authorizeRequests()
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/authenticate").permitAll()
@@ -128,8 +141,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/v2/api-docs/**").permitAll()
             .antMatchers("/configuration/security").permitAll()
             .antMatchers("/configuration/ui").permitAll()
-            .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/protected/**").authenticated() ;
+            .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN);
+            
+            Map<String, String> viewPermissions = permissionMap.getPermissions();
+	
+			for (Map.Entry<String, String> entry : viewPermissions.entrySet()) {
+				interceptUrlRegistry.antMatchers(entry.getKey()).hasAuthority(
+						entry.getValue());
+		}
+			interceptUrlRegistry.antMatchers("/protected/**").authenticated() ;
 
     }
 

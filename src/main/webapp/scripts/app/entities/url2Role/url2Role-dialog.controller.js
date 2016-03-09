@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('watererpApp').controller('Url2RoleDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Url2Role', 'Url', /*'Authority',*/
-        function($scope, $stateParams, $uibModalInstance, entity, Url2Role, Url/*, Authority*/) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Url2Role', 'Url', 'Authority',
+        function($scope, $stateParams, $uibModalInstance, entity, Url2Role, Url, Authority) {
 
         $scope.url2Role = entity;
         $scope.urls = Url.query();
-        //$scope.authoritys = Authority.query();
+        $scope.authoritys = Authority.query();
         $scope.load = function(id) {
             Url2Role.get({id : id}, function(result) {
                 $scope.url2Role = result;

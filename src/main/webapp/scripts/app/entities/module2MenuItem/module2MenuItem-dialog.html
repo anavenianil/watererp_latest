@@ -1,44 +1,48 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myModule2MenuItemLabel">Create or edit a Module2MenuItem</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="module2MenuItem.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_priority">Priority</label>
-            <input type="number" class="form-control" name="priority" id="field_priority"
-                    ng-model="module2MenuItem.priority"
-                     />
-        </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myModule2MenuItemLabel">Create or
+			edit a Module2MenuItem</h4>
+	</div>
+	<div class="modal-body">
+		<jh-alert-error></jh-alert-error>
+		<div class="form-group">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="module2MenuItem.id" readonly />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_priority">Priority</label> <input
+				type="number" class="form-control" name="priority"
+				id="field_priority" ng-model="module2MenuItem.priority" />
+		</div>
 
-        <div class="form-group">
-            <label for="field_module">module</label>
-            <select class="form-control" id="field_module" name="module" ng-model="module2MenuItem.module" ng-options="module as module.id for module in modules track by module.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_menuItem">menuItem</label>
-            <select class="form-control" id="field_menuItem" name="menuItem" ng-model="module2MenuItem.menuItem" ng-options="menuItem as menuItem.id for menuItem in menuitems track by menuItem.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+		<div class="form-group">
+			<label for="field_module">module</label> <select class="form-control"
+				id="field_module" name="module" ng-model="module2MenuItem.module"
+				ng-options="module as module.name for module in modules track by module.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_menuItem">menuItem</label> <select
+				class="form-control" id="field_menuItem" name="menuItem"
+				ng-model="module2MenuItem.menuItem"
+				ng-options="menuItem as menuItem.name for menuItem in menuitems track by menuItem.id">
+				<option value=""></option>
+			</select>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
 </form>

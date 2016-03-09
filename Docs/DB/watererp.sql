@@ -1075,7 +1075,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('2uRUyClVWXV8AlYMNeuJOw==
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('z08EeG7y6nE2AM+4UtUJ6Q==',3,'ahF0i1IPyUjZB9s6PZSi1Q==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('z08EeG7y6nE2AM+4UtUJ6Q==',3,'qZxEeoOQY9uEowKSndAXGA==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
 
@@ -1206,7 +1206,7 @@ CREATE TABLE  `watererp`.`menu_item` (
   `path` varchar(255) NOT NULL,
   `modified_date` timestamp NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`menu_item`
@@ -1214,6 +1214,7 @@ CREATE TABLE  `watererp`.`menu_item` (
 
 /*!40000 ALTER TABLE `menu_item` DISABLE KEYS */;
 LOCK TABLES `menu_item` WRITE;
+INSERT INTO `watererp`.`menu_item` VALUES  (1,'Module','#/modules','2016-03-09 00:00:00');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
@@ -1232,7 +1233,7 @@ CREATE TABLE  `watererp`.`menu_item2_url` (
   KEY `fk_menuitem2url_url_id` (`url_id`),
   CONSTRAINT `fk_menuitem2url_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`),
   CONSTRAINT `fk_menuitem2url_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`menu_item2_url`
@@ -1240,6 +1241,7 @@ CREATE TABLE  `watererp`.`menu_item2_url` (
 
 /*!40000 ALTER TABLE `menu_item2_url` DISABLE KEYS */;
 LOCK TABLES `menu_item2_url` WRITE;
+INSERT INTO `watererp`.`menu_item2_url` VALUES  (1,1,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
 
@@ -1255,7 +1257,7 @@ CREATE TABLE  `watererp`.`module` (
   `priority` int(11) DEFAULT NULL,
   `modified_date` timestamp NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`module`
@@ -1263,6 +1265,7 @@ CREATE TABLE  `watererp`.`module` (
 
 /*!40000 ALTER TABLE `module` DISABLE KEYS */;
 LOCK TABLES `module` WRITE;
+INSERT INTO `watererp`.`module` VALUES  (1,'User Management',1,'2016-03-09 00:00:00');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 
@@ -1282,7 +1285,7 @@ CREATE TABLE  `watererp`.`module2_menu_item` (
   KEY `fk_module2menuitem_menuitem_id` (`menu_item_id`),
   CONSTRAINT `fk_module2menuitem_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`),
   CONSTRAINT `fk_module2menuitem_module_id` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`module2_menu_item`
@@ -1290,6 +1293,7 @@ CREATE TABLE  `watererp`.`module2_menu_item` (
 
 /*!40000 ALTER TABLE `module2_menu_item` DISABLE KEYS */;
 LOCK TABLES `module2_menu_item` WRITE;
+INSERT INTO `watererp`.`module2_menu_item` VALUES  (1,NULL,1,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
@@ -1819,7 +1823,7 @@ CREATE TABLE  `watererp`.`url` (
   `url_pattern` varchar(255) NOT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`url`
@@ -1827,6 +1831,7 @@ CREATE TABLE  `watererp`.`url` (
 
 /*!40000 ALTER TABLE `url` DISABLE KEYS */;
 LOCK TABLES `url` WRITE;
+INSERT INTO `watererp`.`url` VALUES  (1,'/modules',1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
@@ -1845,7 +1850,7 @@ CREATE TABLE  `watererp`.`url2_role` (
   KEY `fk_url2role_authority_name` (`authority_name`),
   CONSTRAINT `fk_url2role_authority_name` FOREIGN KEY (`authority_name`) REFERENCES `jhi_authority` (`name`),
   CONSTRAINT `fk_url2role_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`url2_role`
@@ -1853,6 +1858,7 @@ CREATE TABLE  `watererp`.`url2_role` (
 
 /*!40000 ALTER TABLE `url2_role` DISABLE KEYS */;
 LOCK TABLES `url2_role` WRITE;
+INSERT INTO `watererp`.`url2_role` VALUES  (1,1,'ROLE_ADMIN');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
