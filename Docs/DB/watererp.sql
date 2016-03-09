@@ -434,7 +434,12 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160229101231','jhipster','classpath:config/liquibase/changelog/20160229101231_added_entity_WorkflowTxnDetails.xml','2016-02-29 15:49:38',44,'EXECUTED','7:ffd53ef669a1b6a5fdacfdfc2c63c8d4','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229111312','jhipster','classpath:config/liquibase/changelog/20160229111312_added_entity_Workflow.xml','2016-02-29 16:56:15',45,'EXECUTED','7:aa3bbe903f8a96b777e321dc647773ab','createTable, addForeignKeyConstraint (x10)','',NULL,'3.4.2',NULL,NULL),
  ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-02-29 16:56:21',46,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
- ('20160229074020','jhipster','classpath:config/liquibase/changelog/20160229074020_added_entity_ApprovalDetails.xml','2016-03-08 14:21:51',47,'EXECUTED','7:37e6360d74c522cda74763685e8f3e6e','createTable, dropDefaultValue, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
+ ('20160229074020','jhipster','classpath:config/liquibase/changelog/20160229074020_added_entity_ApprovalDetails.xml','2016-03-08 14:21:51',47,'EXECUTED','7:37e6360d74c522cda74763685e8f3e6e','createTable, dropDefaultValue, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
+ ('20160309103544','jhipster','classpath:config/liquibase/changelog/20160309103544_added_entity_Module.xml','2016-03-09 16:14:40',48,'EXECUTED','7:ae553e293db4d292b225cd36fb0ba43c','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
+ ('20160309103701','jhipster','classpath:config/liquibase/changelog/20160309103701_added_entity_MenuItem.xml','2016-03-09 16:14:41',49,'EXECUTED','7:bd9888add9c5af34bcdca93e50add4d1','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
+ ('20160309103829','jhipster','classpath:config/liquibase/changelog/20160309103829_added_entity_Url.xml','2016-03-09 16:14:41',50,'EXECUTED','7:1889bdedffb7df6fe11f9bc33d0efa35','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160309104001','jhipster','classpath:config/liquibase/changelog/20160309104001_added_entity_MenuItem2Url.xml','2016-03-09 16:14:43',51,'EXECUTED','7:902843a076e3bb258db90badb9e1dc9a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-03-09 16:14:45',52,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -1069,7 +1074,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('2uRUyClVWXV8AlYMNeuJOw==
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('z08EeG7y6nE2AM+4UtUJ6Q==',3,'rHj3sHCiyzKPMvLiOC8ciA==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('z08EeG7y6nE2AM+4UtUJ6Q==',3,'+W6Eo/Y2Il9H0xpojTSSxA==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
 
@@ -1187,6 +1192,105 @@ CREATE TABLE  `watererp`.`manage_cash_point` (
 LOCK TABLES `manage_cash_point` WRITE;
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `manage_cash_point` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`menu_item`
+--
+
+DROP TABLE IF EXISTS `watererp`.`menu_item`;
+CREATE TABLE  `watererp`.`menu_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `modified_date` timestamp NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`menu_item`
+--
+
+/*!40000 ALTER TABLE `menu_item` DISABLE KEYS */;
+LOCK TABLES `menu_item` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`menu_item2_url`
+--
+
+DROP TABLE IF EXISTS `watererp`.`menu_item2_url`;
+CREATE TABLE  `watererp`.`menu_item2_url` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `menu_item_id` bigint(20) DEFAULT NULL,
+  `url_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_menuitem2url_menuitem_id` (`menu_item_id`),
+  KEY `fk_menuitem2url_url_id` (`url_id`),
+  CONSTRAINT `fk_menuitem2url_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`),
+  CONSTRAINT `fk_menuitem2url_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`menu_item2_url`
+--
+
+/*!40000 ALTER TABLE `menu_item2_url` DISABLE KEYS */;
+LOCK TABLES `menu_item2_url` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`module`
+--
+
+DROP TABLE IF EXISTS `watererp`.`module`;
+CREATE TABLE  `watererp`.`module` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `modified_date` timestamp NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`module`
+--
+
+/*!40000 ALTER TABLE `module` DISABLE KEYS */;
+LOCK TABLES `module` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `module` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`module2_menu_item`
+--
+
+DROP TABLE IF EXISTS `watererp`.`module2_menu_item`;
+CREATE TABLE  `watererp`.`module2_menu_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `priority` int(11) DEFAULT NULL,
+  `module_id` bigint(20) DEFAULT NULL,
+  `menu_item_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_module2menuitem_module_id` (`module_id`),
+  KEY `fk_module2menuitem_menuitem_id` (`menu_item_id`),
+  CONSTRAINT `fk_module2menuitem_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`),
+  CONSTRAINT `fk_module2menuitem_module_id` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`module2_menu_item`
+--
+
+/*!40000 ALTER TABLE `module2_menu_item` DISABLE KEYS */;
+LOCK TABLES `module2_menu_item` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
 
 --
@@ -1702,6 +1806,28 @@ CREATE TABLE  `watererp`.`transaction_type_master` (
 LOCK TABLES `transaction_type_master` WRITE;
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `transaction_type_master` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`url`
+--
+
+DROP TABLE IF EXISTS `watererp`.`url`;
+CREATE TABLE  `watererp`.`url` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `url_pattern` varchar(255) NOT NULL,
+  `version` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`url`
+--
+
+/*!40000 ALTER TABLE `url` DISABLE KEYS */;
+LOCK TABLES `url` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 
 --

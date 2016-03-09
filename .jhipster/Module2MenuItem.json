@@ -1,0 +1,29 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "module",
+            "otherEntityName": "module",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "menuItem",
+            "otherEntityName": "menuItem",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "priority",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160309104200",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

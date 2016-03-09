@@ -1,0 +1,23 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "menuItem",
+            "otherEntityName": "menuItem",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "url",
+            "otherEntityName": "url",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20160309104001",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

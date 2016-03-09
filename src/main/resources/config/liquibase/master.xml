@@ -50,5 +50,10 @@
     <include file="classpath:config/liquibase/changelog/20160229101231_added_entity_WorkflowTxnDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229111312_added_entity_Workflow.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160309103544_added_entity_Module.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160309103701_added_entity_MenuItem.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160309103829_added_entity_Url.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160309104001_added_entity_MenuItem2Url.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>
