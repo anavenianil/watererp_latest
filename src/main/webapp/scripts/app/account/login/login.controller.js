@@ -15,6 +15,10 @@ angular.module('watererpApp')
                 rememberMe: $scope.rememberMe
             }).then(function () {
                 $scope.authenticationError = false;
+                if($scope.username=='customer'){
+                	$state.go('applicationTxn');
+                }
+                else
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
                 } else {
