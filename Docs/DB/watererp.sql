@@ -439,7 +439,8 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160309103701','jhipster','classpath:config/liquibase/changelog/20160309103701_added_entity_MenuItem.xml','2016-03-09 16:14:41',49,'EXECUTED','7:bd9888add9c5af34bcdca93e50add4d1','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
  ('20160309103829','jhipster','classpath:config/liquibase/changelog/20160309103829_added_entity_Url.xml','2016-03-09 16:14:41',50,'EXECUTED','7:1889bdedffb7df6fe11f9bc33d0efa35','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160309104001','jhipster','classpath:config/liquibase/changelog/20160309104001_added_entity_MenuItem2Url.xml','2016-03-09 16:14:43',51,'EXECUTED','7:902843a076e3bb258db90badb9e1dc9a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-03-09 16:14:45',52,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-03-09 16:14:45',52,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160309105304','jhipster','classpath:config/liquibase/changelog/20160309105304_added_entity_Url2Role.xml','2016-03-09 16:34:47',53,'EXECUTED','7:10331a2dfcdaf6902d65c17510f31bc4','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -1074,7 +1075,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('2uRUyClVWXV8AlYMNeuJOw==
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('z08EeG7y6nE2AM+4UtUJ6Q==',3,'+W6Eo/Y2Il9H0xpojTSSxA==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('z08EeG7y6nE2AM+4UtUJ6Q==',3,'ahF0i1IPyUjZB9s6PZSi1Q==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
 
@@ -1828,6 +1829,32 @@ CREATE TABLE  `watererp`.`url` (
 LOCK TABLES `url` WRITE;
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`url2_role`
+--
+
+DROP TABLE IF EXISTS `watererp`.`url2_role`;
+CREATE TABLE  `watererp`.`url2_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `url_id` bigint(20) DEFAULT NULL,
+  `authority_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_url2role_url_id` (`url_id`),
+  KEY `fk_url2role_authority_name` (`authority_name`),
+  CONSTRAINT `fk_url2role_authority_name` FOREIGN KEY (`authority_name`) REFERENCES `jhi_authority` (`name`),
+  CONSTRAINT `fk_url2role_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`url2_role`
+--
+
+/*!40000 ALTER TABLE `url2_role` DISABLE KEYS */;
+LOCK TABLES `url2_role` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 
 --

@@ -55,5 +55,6 @@
     <include file="classpath:config/liquibase/changelog/20160309103829_added_entity_Url.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160309104001_added_entity_MenuItem2Url.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160309105304_added_entity_Url2Role.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

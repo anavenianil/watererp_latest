@@ -1,0 +1,23 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "url",
+            "otherEntityName": "url",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "authority",
+            "otherEntityName": "authority",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20160309105304",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}
