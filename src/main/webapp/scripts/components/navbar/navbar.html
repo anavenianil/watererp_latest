@@ -7,8 +7,12 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#/"><span>jhipster</span> <span
-				class="navbar-version">v{{VERSION}}</span></a>
+			<!-- <a class="navbar-brand" href="#/"><span>jhipster</span> <span
+				class="navbar-version">v{{VERSION}}</span></a> -->
+			<div ng-switch="getLogin()">
+				<div class="navbar-brand" ng-model="navbarUserId">
+					{{navbarUserId}}</div>
+			</div>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse"
 			ng-switch="isAuthenticated()">
@@ -20,24 +24,21 @@
 
 				<!-- for module menu role -->
 				<li class="dropdown pointer"
-					ng-repeat="module_node in module2MenuItems ">
-					<a class="dropdown-toggle" data-toggle="dropdown"
-					href="javascript:;"> <span> <span
-							class="glyphicon glyphicon-th-list"></span> <span
+					ng-repeat="module_node in module2MenuItems "><a
+					class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						<span> <span class="glyphicon glyphicon-th-list"></span> <span
 							class="hidden-tablet"> {{module_node.module_name}} </span> <b
 							class="caret"></b>
 					</span>
 				</a>
 					<ul class="dropdown-menu">
 						<li class="ng-scope" ui-sref-active="active"
-							ng-repeat="menu_node in module2MenuItems">
-							<a ng-if="module_node.module_id == menu_node.module_id"
+							ng-repeat="menu_node in module2MenuItems"><a
+							ng-if="module_node.module_id == menu_node.module_id"
 							href="{{menu_node.path}}"> <span
 								class="glyphicon glyphicon-user"></span> <span>&nbsp;{{menu_node.menu_name}}</span>
-						</a>
-						</li>
-					</ul>
-				</li>
+						</a></li>
+					</ul></li>
 
 
 				<!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
@@ -58,9 +59,8 @@
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Application
 									type master</span></a></li>
-						<li ui-sref-active="active"><a
-							ui-sref="connectionTypeMaster" data-toggle="collapse"
-							data-target=".navbar-collapse.in"><span
+						<li ui-sref-active="active"><a ui-sref="connectionTypeMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Connection
 									type master</span></a></li>
 						<li ui-sref-active="active"><a ui-sref="ctegoryMaster"
@@ -124,9 +124,8 @@
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Application
 									txn</span></a></li>
-						<li ui-sref-active="active"><a
-							ui-sref="configurationDetails" data-toggle="collapse"
-							data-target=".navbar-collapse.in"><span
+						<li ui-sref-active="active"><a ui-sref="configurationDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Configuration
 									details</span></a></li>
 						<li ui-sref-active="active"><a ui-sref="desigCategoryMaster"
@@ -150,14 +149,12 @@
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Designation
 									mappings</span></a></li>
-						<li ui-sref-active="active"><a
-							ui-sref="departmentsHierarchy" data-toggle="collapse"
-							data-target=".navbar-collapse.in"><span
+						<li ui-sref-active="active"><a ui-sref="departmentsHierarchy"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Departments
 									hierarchy</span></a></li>
-						<li ui-sref-active="active"><a
-							ui-sref="departmentTypeMaster" data-toggle="collapse"
-							data-target=".navbar-collapse.in"><span
+						<li ui-sref-active="active"><a ui-sref="departmentTypeMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Department
 									type master</span></a></li>
 						<li ui-sref-active="active"><a ui-sref="departmentsMaster"

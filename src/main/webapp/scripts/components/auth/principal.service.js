@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('watererpApp')
-    .factory('Principal', function Principal($q, Account) {
+    .factory('Principal', function Principal($q, Account, $http) {
         var _identity,
             _authenticated = false;
+        var module2MenuItems = {};
 
         return {
             isIdentityResolved: function () {
@@ -67,7 +68,21 @@ angular.module('watererpApp')
                         _authenticated = false;
                         deferred.resolve(_identity);
                     });
+                
+                $http.get("/api/rest/module2MenuItems/role").success(
+    					function(response) {
+    						module2MenuItems = response;
+    					});
+                
                 return deferred.promise;
+            },
+            getLogonUser: function () {
+            	//console.log("principal.service.js: Returning User:" + JSON.stringify(_identity));
+            	return _identity;
+            },
+            geModuleMenus: function(){
+            	//console.log("principal.service.js: Returning Module2menu_items:" + JSON.stringify(module2menu_items));
+            	return module2MenuItems;
             }
         };
     });

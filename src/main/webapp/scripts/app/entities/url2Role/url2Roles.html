@@ -28,7 +28,7 @@
                 <tr ng-repeat="url2Role in url2Roles track by url2Role.id">
                     <td><a ui-sref="url2Role.detail({id:url2Role.id})">{{url2Role.id}}</a></td>
                     <td>
-                        <a ui-sref="url.detail({id:url2Role.url.id})">{{url2Role.url.id}}</a>
+                        <a ui-sref="url.detail({id:url2Role.url.id})">{{url2Role.url.urlPattern}}</a>
                     </td>
                     <td>
                         <a ui-sref="authority.detail({id:url2Role.authority.id})">{{url2Role.authority.name}}</a>

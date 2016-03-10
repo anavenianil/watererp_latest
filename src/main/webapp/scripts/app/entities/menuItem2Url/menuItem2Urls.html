@@ -28,10 +28,10 @@
                 <tr ng-repeat="menuItem2Url in menuItem2Urls track by menuItem2Url.id">
                     <td><a ui-sref="menuItem2Url.detail({id:menuItem2Url.id})">{{menuItem2Url.id}}</a></td>
                     <td>
-                        <a ui-sref="menuItem.detail({id:menuItem2Url.menuItem.id})">{{menuItem2Url.menuItem.id}}</a>
+                        <a ui-sref="menuItem.detail({id:menuItem2Url.menuItem.id})">{{menuItem2Url.menuItem.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="url.detail({id:menuItem2Url.url.id})">{{menuItem2Url.url.id}}</a>
+                        <a ui-sref="url.detail({id:menuItem2Url.url.id})">{{menuItem2Url.url.urlPattern}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
