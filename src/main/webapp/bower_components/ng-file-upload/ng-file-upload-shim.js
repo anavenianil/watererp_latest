@@ -1,9 +1,8 @@
 /**!
- * AngularJS file upload directives and services. Supoorts: file upload/drop/paste, resume, cancel/abort,
- * progress, resize, thumbnail, preview, validation and CORS
+ * AngularJS file upload/drop directive and service with progress and abort
  * FileAPI Flash shim for old browsers not supporting FormData
  * @author  Danial  <danial.farid@gmail.com>
- * @version 10.0.2
+ * @version 5.0.9
  */
 
 (function () {
@@ -24,11 +23,7 @@
     window.FileAPI = {};
   }
 
-  if (!window.XMLHttpRequest) {
-    throw 'AJAX is not supported. XMLHttpRequest is not defined.';
-  }
-
-  FileAPI.shouldLoad = !window.FormData || FileAPI.forceLoad;
+  FileAPI.shouldLoad = (window.XMLHttpRequest && !window.FormData) || FileAPI.forceLoad;
   if (FileAPI.shouldLoad) {
     var initializeUploadListener = function (xhr) {
       if (!xhr.__listeners) {
@@ -102,10 +97,6 @@
             jsonp: false, //removes the callback form param
             cache: true, //removes the ?fileapiXXX in the url
             complete: function (err, fileApiXHR) {
-              if (err && angular.isString(err) && err.indexOf('#2174') !== -1) {
-                // this error seems to be fine the file is being uploaded properly.
-                err = null;
-              }
               xhr.__completed = true;
               if (!err && xhr.__listeners.load)
                 xhr.__listeners.load({
@@ -269,7 +260,6 @@
   }
 
   if (FileAPI.shouldLoad) {
-    FileAPI.hasFlash = hasFlash();
 
     //load FileAPI
     if (FileAPI.forceLoad) {
@@ -294,28 +284,42 @@
       }
 
       if (FileAPI.staticPath == null) FileAPI.staticPath = basePath;
-      script.setAttribute('src', jsUrl || basePath + 'FileAPI.js');
+      script.setAttribute('src', jsUrl || basePath + 'FileAPI.min.js');
       document.getElementsByTagName('head')[0].appendChild(script);
+
+      FileAPI.hasFlash = hasFlash();
     }
 
-    FileAPI.ngfFixIE = function (elem, fileElem, changeFn) {
+    FileAPI.ngfFixIE = function (elem, createFileElemFn, bindAttr, changeFn) {
       if (!hasFlash()) {
         throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
       }
-      var fixInputStyle = function () {
+      var makeFlashInput = function () {
         if (elem.attr('disabled')) {
-          if (fileElem) fileElem.removeClass('js-fileapi-wrapper');
+          elem.$$ngfRefElem.removeClass('js-fileapi-wrapper');
         } else {
-          if (!fileElem.attr('__ngf_flash_')) {
-            fileElem.unbind('change');
-            fileElem.unbind('click');
+          var fileElem = elem.$$ngfRefElem;
+          if (!fileElem) {
+            fileElem = elem.$$ngfRefElem = createFileElemFn();
+            fileElem.addClass('js-fileapi-wrapper');
+            if (!isInputTypeFile(elem)) {
+//						if (fileElem.parent().css('position') === '' || fileElem.parent().css('position') === 'static') {
+//							fileElem.parent().css('position', 'relative');
+//						}
+//						elem.parent()[0].insertBefore(fileElem[0], elem[0]);
+//						elem.css('overflow', 'hidden');
+            }
+            setTimeout(function () {
+              fileElem.bind('mouseenter', makeFlashInput);
+            }, 10);
             fileElem.bind('change', function (evt) {
               fileApiChangeFn.apply(this, [evt]);
               changeFn.apply(this, [evt]);
+//						alert('change' +  evt);
             });
-            fileElem.attr('__ngf_flash_', 'true');
+          } else {
+            bindAttr(elem.$$ngfRefElem);
           }
-          fileElem.addClass('js-fileapi-wrapper');
           if (!isInputTypeFile(elem)) {
             fileElem.css('position', 'absolute')
               .css('top', getOffset(elem[0]).top + 'px').css('left', getOffset(elem[0]).left + 'px')
@@ -327,7 +331,7 @@
         }
       };
 
-      elem.bind('mouseenter', fixInputStyle);
+      elem.bind('mouseenter', makeFlashInput);
 
       var fileApiChangeFn = function (evt) {
         var files = FileAPI.getFiles(evt);
@@ -407,6 +411,12 @@ if (!window.FileReader) {
         if (_this.onerror) _this.onerror(e);
         _this.dispatchEvent(e);
       }
+    };
+    this.readAsArrayBuffer = function (file) {
+      FileAPI.readAsBinaryString(file, listener);
+    };
+    this.readAsBinaryString = function (file) {
+      FileAPI.readAsBinaryString(file, listener);
     };
     this.readAsDataURL = function (file) {
       FileAPI.readAsDataURL(file, listener);

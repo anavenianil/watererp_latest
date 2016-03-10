@@ -24,7 +24,7 @@
 
 				<!-- for module menu role -->
 				<li class="dropdown pointer"
-					ng-repeat="module_node in module2MenuItems "><a
+					ng-repeat="module_node in module2MenuItems | unique: 'module_id'"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
 						<span> <span class="glyphicon glyphicon-th-list"></span> <span
 							class="hidden-tablet"> {{module_node.module_name}} </span> <b
@@ -33,10 +33,10 @@
 				</a>
 					<ul class="dropdown-menu">
 						<li class="ng-scope" ui-sref-active="active"
-							ng-repeat="menu_node in module2MenuItems"><a
+							ng-repeat="menu_node in module2MenuItems | unique: 'menu_item_id'"><a
 							ng-if="module_node.module_id == menu_node.module_id"
-							href="{{menu_node.path}}"> <span
-								class="glyphicon glyphicon-user"></span> <span>&nbsp;{{menu_node.menu_name}}</span>
+							href="{{menu_node.path}}">  <span><span
+								class="glyphicon glyphicon-user"></span>&nbsp;{{menu_node.menu_name}}</span>
 						</a></li>
 					</ul></li>
 

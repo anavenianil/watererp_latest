@@ -275,7 +275,6 @@
 			return attr in input;
 		},
 
-		_support
 
 		/**
 		 * FileAPI (core object)
@@ -341,9 +340,8 @@
 			},
 
 			log: function (){
-				// ngf fix for IE8 #1071
-				if( api.debug && api._supportConsoleLog ){
-					if( api._supportConsoleLogApply ){
+				if( api.debug && window.console && console.log ){
+					if( console.log.apply ){
 						console.log.apply(console, arguments);
 					}
 					else {
@@ -1532,7 +1530,7 @@
 			}
 		}
 		else {
-			_emit(file, fn, 'error', undef, { error: 'FileReader_not_support_'+as });
+			_emit(file, fn, 'error', undef, { error: 'filreader_not_support_'+as });
 		}
 	}
 
@@ -1793,12 +1791,7 @@
 	});
 
 
-	// configuration
-	try {
-		api._supportConsoleLog = !!console.log;
-		api._supportConsoleLogApply = !!console.log.apply;
-	} catch (err) {}
-
+	// @configuration
 	if( !api.flashUrl ){ api.flashUrl = api.staticPath + 'FileAPI.flash.swf'; }
 	if( !api.flashImageUrl ){ api.flashImageUrl = api.staticPath + 'FileAPI.flash.image.swf'; }
 	if( !api.flashWebcamUrl ){ api.flashWebcamUrl = api.staticPath + 'FileAPI.flash.camera.swf'; }
@@ -3382,31 +3375,6 @@
 
 
 				/**
-				 * Publish flash-object
-				 *
-				 * @param {HTMLElement} el
-				 * @param {String} id
-				 * @param {Object} [opts]
-				 */
-				publish: function (el, id, opts){
-					opts = opts || {};
-					el.innerHTML = _makeFlashHTML({
-						id: id
-						, src: _getUrl(api.flashUrl, 'r=' + api.version)
-//						, src: _getUrl('http://v.demidov.boom.corp.mail.ru/uploaderfileapi/FlashFileAPI.swf?1')
-						, wmode: opts.camera ? '' : 'transparent'
-						, flashvars: 'callback=' + (opts.onEvent || 'FileAPI.Flash.onEvent')
-						+ '&flashId='+ id
-						+ '&storeKey='+ navigator.userAgent.match(/\d/ig).join('') +'_'+ api.version
-						+ (flash.isReady || (api.pingUrl ? '&ping='+api.pingUrl : ''))
-						+ '&timeout='+api.flashAbortTimeout
-						+ (opts.camera ? '&useCamera=' + _getUrl(api.flashWebcamUrl) : '')
-						+ '&debug='+(api.debug?"1":"")
-					}, opts);
-				},
-
-
-				/**
 				 * Initialization & preload flash object
 				 */
 				init: function (){
@@ -3442,6 +3410,31 @@
 					if( _retry < 10 ){
 						setTimeout(flash.init, ++_retry*50);
 					}
+				},
+
+
+				/**
+				 * Publish flash-object
+				 *
+				 * @param {HTMLElement} el
+				 * @param {String} id
+				 * @param {Object} [opts]
+				 */
+				publish: function (el, id, opts){
+					opts = opts || {};
+					el.innerHTML = _makeFlashHTML({
+						  id: id
+						, src: _getUrl(api.flashUrl, 'r=' + api.version)
+//						, src: _getUrl('http://v.demidov.boom.corp.mail.ru/uploaderfileapi/FlashFileAPI.swf?1')
+						, wmode: opts.camera ? '' : 'transparent'
+						, flashvars: 'callback=' + (opts.onEvent || 'FileAPI.Flash.onEvent')
+							+ '&flashId='+ id
+							+ '&storeKey='+ navigator.userAgent.match(/\d/ig).join('') +'_'+ api.version
+							+ (flash.isReady || (api.pingUrl ? '&ping='+api.pingUrl : ''))
+							+ '&timeout='+api.flashAbortTimeout
+							+ (opts.camera ? '&useCamera=' + _getUrl(api.flashWebcamUrl) : '')
+							+ '&debug='+(api.debug?"1":"")
+					}, opts);
 				},
 
 

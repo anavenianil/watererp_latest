@@ -2,8 +2,9 @@
 
 angular.module('watererpApp', ['LocalStorageModule', 
     'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
+    'angular.filter','ui.bootstrap', 'ui.bootstrap.datetimepicker',
     // jhipster-needle-angularjs-add-module JHipster will add new module here
-    'ui.bootstrap', 'ui.router',  'infinite-scroll', 'angular-loading-bar'])
+    'ui.router', 'infinite-scroll', 'angular-loading-bar'])
 
     .run(function ($rootScope, $location, $window, $http, $state,  Auth, Principal, ENV, VERSION) {
         

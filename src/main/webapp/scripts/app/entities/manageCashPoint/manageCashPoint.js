@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/manageCashPoints',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'ManageCashPoints'
                 },
                 views: {
