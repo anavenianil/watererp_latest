@@ -11,11 +11,13 @@ angular.module('watererpApp').controller('FeasibilityStudyDialogController',
         $scope.mainwatersizes = MainWaterSize.query();
         $scope.mainseweragesizes = MainSewerageSize.query();
         $scope.docketcodes = DocketCode.query();
-        $scope.applicationtxns = ApplicationTxn.query();
+        //$scope.applicationtxns = ApplicationTxn.query();
         $scope.categorymasters = CategoryMaster.query();
         $scope.sewersizes = SewerSize.query();
         $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.feasibilitystatuss = FeasibilityStatus.query();
+        $scope.applicationtxn = {};
+        
         $scope.load = function(id) {
             FeasibilityStudy.get({id : id}, function(result) {
                 $scope.feasibilityStudy = result;
@@ -44,4 +46,12 @@ angular.module('watererpApp').controller('FeasibilityStudyDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+        
+        $scope.getCustomer = function(fileNo){
+        	ApplicationTxn.get({id : fileNo}, function(result) {
+                $scope.applicationTxn = result;
+                //$scope.feasibilityStudy.customerName = $scope.applicationTxn.firstName;
+            });
+        	
+        }
 }]);
