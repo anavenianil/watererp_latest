@@ -19,7 +19,7 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ctegoryMaster.id"><span>ctegoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryMaster.id"><span>categoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="pipeSizeMaster.id"><span>pipeSizeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -28,7 +28,7 @@
                 <tr ng-repeat="categoryPipeSizeMapping in categoryPipeSizeMappings track by categoryPipeSizeMapping.id">
                     <td><a ui-sref="categoryPipeSizeMapping.detail({id:categoryPipeSizeMapping.id})">{{categoryPipeSizeMapping.id}}</a></td>
                     <td>
-                        <a ui-sref="ctegoryMaster.detail({id:categoryPipeSizeMapping.ctegoryMaster.id})">{{categoryPipeSizeMapping.ctegoryMaster.id}}</a>
+                        <a ui-sref="categoryMaster.detail({id:categoryPipeSizeMapping.categoryMaster.id})">{{categoryPipeSizeMapping.categoryMaster.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="pipeSizeMaster.detail({id:categoryPipeSizeMapping.pipeSizeMaster.id})">{{categoryPipeSizeMapping.pipeSizeMaster.id}}</a>

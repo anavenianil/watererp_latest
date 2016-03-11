@@ -8,7 +8,7 @@
     <include file="classpath:config/liquibase/changelog/20160224131058_added_entity_SewerSize.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229064640_added_entity_ApplicationTypeMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229065150_added_entity_ConnectionTypeMaster.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160229065305_added_entity_CtegoryMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160229065305_added_entity_CategoryMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229065514_added_entity_PipeSizeMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229065700_added_entity_CategoryPipeSizeMapping.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229070517_added_entity_FileNumber.xml" relativeToChangelogFile="false"/>

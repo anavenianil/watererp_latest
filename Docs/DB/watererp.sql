@@ -45,12 +45,12 @@ CREATE TABLE  `watererp`.`application_txn` (
   `sale_deed` float DEFAULT NULL,
   `sale_deed1` float DEFAULT NULL,
   `total_plinth_area` float DEFAULT NULL,
-  `created_date` timestamp NULL,
-  `updated_date` timestamp NULL,
+  `created_date` timestamp NULL DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `application_type_master_id` bigint(20) DEFAULT NULL,
   `connection_type_master_id` bigint(20) DEFAULT NULL,
-  `ctegory_master_id` bigint(20) DEFAULT NULL,
+  `category_master_id` bigint(20) DEFAULT NULL,
   `pipe_size_master_id` bigint(20) DEFAULT NULL,
   `sewer_size_id` bigint(20) DEFAULT NULL,
   `file_number_id` bigint(20) DEFAULT NULL,
@@ -58,19 +58,19 @@ CREATE TABLE  `watererp`.`application_txn` (
   PRIMARY KEY (`id`),
   KEY `fk_applicationtxn_applicationtypemaster_id` (`application_type_master_id`),
   KEY `fk_applicationtxn_connectiontypemaster_id` (`connection_type_master_id`),
-  KEY `fk_applicationtxn_ctegorymaster_id` (`ctegory_master_id`),
+  KEY `fk_applicationtxn_categorymaster_id` (`category_master_id`),
   KEY `fk_applicationtxn_pipesizemaster_id` (`pipe_size_master_id`),
   KEY `fk_applicationtxn_sewersize_id` (`sewer_size_id`),
   KEY `fk_applicationtxn_filenumber_id` (`file_number_id`),
   KEY `fk_applicationtxn_customer_id` (`customer_id`),
   CONSTRAINT `fk_applicationtxn_applicationtypemaster_id` FOREIGN KEY (`application_type_master_id`) REFERENCES `application_type_master` (`id`),
   CONSTRAINT `fk_applicationtxn_connectiontypemaster_id` FOREIGN KEY (`connection_type_master_id`) REFERENCES `connection_type_master` (`id`),
-  CONSTRAINT `fk_applicationtxn_ctegorymaster_id` FOREIGN KEY (`ctegory_master_id`) REFERENCES `ctegory_master` (`id`),
+  CONSTRAINT `fk_applicationtxn_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
   CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `fk_applicationtxn_filenumber_id` FOREIGN KEY (`file_number_id`) REFERENCES `file_number` (`id`),
   CONSTRAINT `fk_applicationtxn_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_applicationtxn_sewersize_id` FOREIGN KEY (`sewer_size_id`) REFERENCES `sewer_size` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`application_txn`
@@ -95,7 +95,8 @@ INSERT INTO `watererp`.`application_txn` VALUES  (5,'123','339','233','258','741
  (29,'sdhsh','shsd','shs','shs','sdhs','sfhshf','shshdh','shsd','shsdf','sg','dfhs','sh',3,3.6,5,6,667,'2016-03-08 00:00:00','2016-03-08 00:00:00','Pending',2,2,3,2,5,2,29),
  (30,'bhb','.b',',mn,mn','kkjkj',',,m,mn','mnjh','hk',',mn,mn','gh','vhjh','ghgc','h',4,4.8,6,7.2,4626,'2016-03-08 00:00:00','2016-03-08 00:00:00','Pending',2,2,3,2,5,3,30),
  (31,'hgh','ghg','v ccnbv','hgjg','jhg','vbnfhgd','hjh','hvbn','vhvhjh','jkgjjhj','vhjvg','6876876',2,2.4,4,4.8,5,'2016-03-08 00:00:00','2016-03-08 00:00:00','Pending',2,2,3,2,5,3,31),
- (32,'jhkjh','kjhjk','hkj','jhjkh','hkj','hkjh','jkh','hkj','kjh','jhkj','jkhkjh','jkh',3,3.6,5,6,6,'2016-03-10 00:00:00','2016-03-10 00:00:00','Pending',1,1,2,2,4,3,32);
+ (32,'jhkjh','kjhjk','hkj','jhjkh','hkj','hkjh','jkh','hkj','kjh','jhkj','jkhkjh','jkh',3,3.6,5,6,6,'2016-03-10 00:00:00','2016-03-10 00:00:00','Pending',1,1,2,2,4,3,32),
+ (33,'236','236','236','236','236','236','236','236','236','236','236','326',6,7.2,7,8.4,43,'2016-03-11 00:00:00','2016-03-11 00:00:00','Pending',3,2,2,2,4,2,33);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `application_txn` ENABLE KEYS */;
 
@@ -108,8 +109,8 @@ DROP TABLE IF EXISTS `watererp`.`application_type_master`;
 CREATE TABLE  `watererp`.`application_type_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `application_type` varchar(255) DEFAULT NULL,
-  `created_date` timestamp NULL,
-  `updated_date` timestamp NULL,
+  `created_date` timestamp NULL DEFAULT NULL,
+  `updated_date` timestamp NULL DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
@@ -138,7 +139,7 @@ DROP TABLE IF EXISTS `watererp`.`approval_details`;
 CREATE TABLE  `watererp`.`approval_details` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `remarks` varchar(255) DEFAULT NULL,
-  `approved_date` timestamp NULL,
+  `approved_date` timestamp NULL DEFAULT NULL,
   `approved_emp_no` varchar(255) DEFAULT NULL,
   `approved_emp_name` varchar(255) DEFAULT NULL,
   `approved_emp_desig` varchar(255) DEFAULT NULL,
@@ -196,18 +197,43 @@ UNLOCK TABLES;
 
 
 --
+-- Definition of table `watererp`.`category_master`
+--
+
+DROP TABLE IF EXISTS `watererp`.`category_master`;
+CREATE TABLE  `watererp`.`category_master` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`category_master`
+--
+
+/*!40000 ALTER TABLE `category_master` DISABLE KEYS */;
+LOCK TABLES `category_master` WRITE;
+INSERT INTO `watererp`.`category_master` VALUES  (1,'BULK'),
+ (2,'INDIVIDUAL/DOMESTIC'),
+ (3,'MULTISTORIED/BUILDING'),
+ (4,'NON REVENUE CONNECTION');
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `category_master` ENABLE KEYS */;
+
+
+--
 -- Definition of table `watererp`.`category_pipe_size_mapping`
 --
 
 DROP TABLE IF EXISTS `watererp`.`category_pipe_size_mapping`;
 CREATE TABLE  `watererp`.`category_pipe_size_mapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ctegory_master_id` bigint(20) DEFAULT NULL,
+  `category_master_id` bigint(20) DEFAULT NULL,
   `pipe_size_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_categorypipesizemapping_ctegorymaster_id` (`ctegory_master_id`),
+  KEY `fk_categorypipesizemapping_categorymaster_id` (`category_master_id`),
   KEY `fk_categorypipesizemapping_pipesizemaster_id` (`pipe_size_master_id`),
-  CONSTRAINT `fk_categorypipesizemapping_ctegorymaster_id` FOREIGN KEY (`ctegory_master_id`) REFERENCES `ctegory_master` (`id`),
+  CONSTRAINT `fk_categorypipesizemapping_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
   CONSTRAINT `fk_categorypipesizemapping_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -269,38 +295,13 @@ UNLOCK TABLES;
 
 
 --
--- Definition of table `watererp`.`ctegory_master`
---
-
-DROP TABLE IF EXISTS `watererp`.`ctegory_master`;
-CREATE TABLE  `watererp`.`ctegory_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`ctegory_master`
---
-
-/*!40000 ALTER TABLE `ctegory_master` DISABLE KEYS */;
-LOCK TABLES `ctegory_master` WRITE;
-INSERT INTO `watererp`.`ctegory_master` VALUES  (1,'BULK'),
- (2,'INDIVIDUAL/DOMESTIC'),
- (3,'MULTISTORIED/BUILDING'),
- (4,'NON REVENUE CONNECTION');
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `ctegory_master` ENABLE KEYS */;
-
-
---
 -- Definition of table `watererp`.`customer`
 --
 
 DROP TABLE IF EXISTS `watererp`.`customer`;
 CREATE TABLE  `watererp`.`customer` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `request_date` timestamp NULL,
+  `request_date` timestamp NULL DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `middle_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
@@ -321,7 +322,7 @@ CREATE TABLE  `watererp`.`customer` (
   PRIMARY KEY (`id`),
   KEY `fk_customer_filenumber_id` (`file_number_id`),
   CONSTRAINT `fk_customer_filenumber_id` FOREIGN KEY (`file_number_id`) REFERENCES `file_number` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`customer`
@@ -360,7 +361,8 @@ INSERT INTO `watererp`.`customer` VALUES  (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,
  (29,'2016-03-08 00:00:00','awrf','sg','sg','sdhsh','shsd','shs','shs','sdhs','sfhshf','shshdh','shsd','shsdf','sg','dfhs','sh','sh',2),
  (30,'2016-03-08 00:00:00','kj','jhg','ujjkk','bhb','.b',',mn,mn','kkjkj',',,m,mn','mnjh','hk',',mn,mn','gh','vhjh','ghgc','chc','h',3),
  (31,'2016-03-08 00:00:00','asd','lkj','iuy','hgh','ghg','v ccnbv','hgjg','jhg','vbnfhgd','hjh','hvbn','vhvhjh','jkgjjhj','vhjvg','tutty','6876876',3),
- (32,'2016-03-10 00:00:00','jj','jhkjh','jhkjh','jhkjh','kjhjk','hkj','jhjkh','hkj','hkjh','jkh','hkj','kjh','jhkj','jkhkjh','jh','jkh',3);
+ (32,'2016-03-10 00:00:00','jj','jhkjh','jhkjh','jhkjh','kjhjk','hkj','jhjkh','hkj','hkjh','jkh','hkj','kjh','jhkj','jkhkjh','jh','jkh',3),
+ (33,'2016-03-11 00:00:00','235','23','236','236','236','236','236','236','236','236','236','236','236','236','26','326',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 
@@ -396,9 +398,9 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160224131058','jhipster','classpath:config/liquibase/changelog/20160224131058_added_entity_SewerSize.xml','2016-02-26 10:35:06',2,'EXECUTED','7:be40d7c60d89c57e1672aaaed4915727','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229064640','jhipster','classpath:config/liquibase/changelog/20160229064640_added_entity_ApplicationTypeMaster.xml','2016-02-29 12:31:59',3,'EXECUTED','7:c1c9f7b3be47bd9dca371ebec3968605','createTable, dropDefaultValue (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160229065150','jhipster','classpath:config/liquibase/changelog/20160229065150_added_entity_ConnectionTypeMaster.xml','2016-02-29 12:31:59',4,'EXECUTED','7:1d2213aedb239d233daaff9d017fe21f','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160229065305','jhipster','classpath:config/liquibase/changelog/20160229065305_added_entity_CtegoryMaster.xml','2016-02-29 12:32:00',5,'EXECUTED','7:7187e4e6cf68b8c34f8e969de708bc43','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160229065305','jhipster','classpath:config/liquibase/changelog/20160229065305_added_entity_CategoryMaster.xml','2016-02-29 12:32:00',5,'EXECUTED','7:bdbad9897632fcb3b27b84614eb65631','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229065514','jhipster','classpath:config/liquibase/changelog/20160229065514_added_entity_PipeSizeMaster.xml','2016-02-29 12:32:00',6,'EXECUTED','7:5530b835ccc14b682cdd22ef99c3cd80','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160229065700','jhipster','classpath:config/liquibase/changelog/20160229065700_added_entity_CategoryPipeSizeMapping.xml','2016-02-29 12:32:01',7,'EXECUTED','7:60940e516fdfdf11fdad8e77df2c4a42','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229065700','jhipster','classpath:config/liquibase/changelog/20160229065700_added_entity_CategoryPipeSizeMapping.xml','2016-02-29 12:32:01',7,'EXECUTED','7:10b74427e2abf13a1e46b02177b879c5','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160229070517','jhipster','classpath:config/liquibase/changelog/20160229070517_added_entity_FileNumber.xml','2016-02-29 14:06:34',8,'EXECUTED','7:d3e42819856cbf28b67058bba741014f','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229070707','jhipster','classpath:config/liquibase/changelog/20160229070707_added_entity_TransactionTypeMaster.xml','2016-02-29 14:06:34',9,'EXECUTED','7:afd37db16070bbc1db18016656893a32','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229070800','jhipster','classpath:config/liquibase/changelog/20160229070800_added_entity_CashBookMaster.xml','2016-02-29 14:06:34',10,'EXECUTED','7:d0decf027ebc34ee609eba6744ef51c2','createTable','',NULL,'3.4.2',NULL,NULL),
@@ -409,7 +411,7 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160229073547','jhipster','classpath:config/liquibase/changelog/20160229073547_added_entity_DesignationMaster.xml','2016-02-29 14:06:41',15,'EXECUTED','7:127eba27413f9aa0a5e653084544e03a','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229073648','jhipster','classpath:config/liquibase/changelog/20160229073648_added_entity_FeasibilityStatus.xml','2016-02-29 14:06:41',16,'EXECUTED','7:190180bbcfa1c279424b098aae93a57c','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229074219','jhipster','classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml','2016-02-29 14:06:46',18,'EXECUTED','7:eb523405877dcf8d7dd83dc9199b8ea3','createTable, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-02-29 14:06:51',19,'EXECUTED','7:32f89c1a2b7b3db967b52f9324776461','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-02-29 14:06:51',19,'EXECUTED','7:ff65e8435ea7b29464676823a9a5eb0c','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
  ('20160229084044','jhipster','classpath:config/liquibase/changelog/20160229084044_added_entity_ConfigurationDetails.xml','2016-02-29 15:03:13',20,'EXECUTED','7:839bd04dd36ec11b9c3f6f6db979cc63','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229085139','jhipster','classpath:config/liquibase/changelog/20160229085139_added_entity_DesigCategoryMaster.xml','2016-02-29 15:03:14',21,'EXECUTED','7:fdd173d8f6e7a9bc336c5a494f57f052','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229085352','jhipster','classpath:config/liquibase/changelog/20160229085352_added_entity_SubDesigCategoryMaster.xml','2016-02-29 15:03:15',22,'EXECUTED','7:c1f7021bd38767b73129e94983eb54cf','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
@@ -480,8 +482,8 @@ DROP TABLE IF EXISTS `watererp`.`department_type_master`;
 CREATE TABLE  `watererp`.`department_type_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -508,8 +510,8 @@ CREATE TABLE  `watererp`.`departments_hierarchy` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `dept_hierarchy_name` varchar(255) DEFAULT NULL,
   `parent_dept_hierarchy_id` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_departmentshierarchy_statusmaster_id` (`status_master_id`),
@@ -535,8 +537,8 @@ CREATE TABLE  `watererp`.`departments_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `department_name` varchar(255) DEFAULT NULL,
   `parent_deparment` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `departments_hierarchy_id` bigint(20) DEFAULT NULL,
   `department_type_master_id` bigint(20) DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
@@ -567,8 +569,8 @@ DROP TABLE IF EXISTS `watererp`.`desig_category_master`;
 CREATE TABLE  `watererp`.`desig_category_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `order_by` int(11) DEFAULT NULL,
@@ -630,8 +632,8 @@ DROP TABLE IF EXISTS `watererp`.`designation_master`;
 CREATE TABLE  `watererp`.`designation_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `order_no` int(11) DEFAULT NULL,
   `service_type` varchar(255) DEFAULT NULL,
@@ -697,8 +699,8 @@ CREATE TABLE  `watererp`.`emp_role_mapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `internal_division` varchar(255) DEFAULT NULL,
   `internal_role` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `parent_role_id` int(11) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `parent_user_id` bigint(20) DEFAULT NULL,
@@ -781,8 +783,8 @@ DROP TABLE IF EXISTS `watererp`.`group_master`;
 CREATE TABLE  `watererp`.`group_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -1160,7 +1162,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('XDGXmczwil8KeD6KL6Yt1w==',3,'fbROZLGioPS/YUzyTyG2kg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('zy6YAeHzjqbMHb8NPwiMQg==',3,'GSOrMMO/Gkn4wLLe3xwvSg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('zy6YAeHzjqbMHb8NPwiMQg==',3,'CrdT8w8ZqC7SQgp8DDcAIQ==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
 
@@ -1182,7 +1184,7 @@ CREATE TABLE  `watererp`.`jhi_user` (
   `activation_key` varchar(20) DEFAULT NULL,
   `reset_key` varchar(20) DEFAULT NULL,
   `created_by` varchar(50) NOT NULL,
-  `created_date` timestamp NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `reset_date` timestamp NULL DEFAULT NULL,
   `last_modified_by` varchar(50) DEFAULT NULL,
   `last_modified_date` timestamp NULL DEFAULT NULL,
@@ -1245,7 +1247,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `watererp`.`manage_cash_point`;
 CREATE TABLE  `watererp`.`manage_cash_point` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `today_date` timestamp NULL,
+  `today_date` timestamp NULL DEFAULT NULL,
   `payee_name` varchar(255) DEFAULT NULL,
   `txn_amount` float DEFAULT NULL,
   `open_bal` float DEFAULT NULL,
@@ -1289,7 +1291,7 @@ CREATE TABLE  `watererp`.`menu_item` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `path` varchar(255) NOT NULL,
-  `modified_date` timestamp NULL,
+  `modified_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
@@ -1356,7 +1358,7 @@ CREATE TABLE  `watererp`.`module` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `priority` int(11) DEFAULT NULL,
-  `modified_date` timestamp NULL,
+  `modified_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -1417,8 +1419,8 @@ CREATE TABLE  `watererp`.`org_hierarchy` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `hierarchy_name` varchar(255) DEFAULT NULL,
   `parent_hierarchy_id` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orghierarchy_statusmaster_id` (`status_master_id`),
@@ -1444,8 +1446,8 @@ CREATE TABLE  `watererp`.`org_role_hierarchy` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_hierarchy_name` varchar(255) DEFAULT NULL,
   `parent_role_hierarchy_id` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orgrolehierarchy_statusmaster_id` (`status_master_id`),
@@ -1471,9 +1473,9 @@ CREATE TABLE  `watererp`.`org_role_instance` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `org_role_name` varchar(255) DEFAULT NULL,
   `parent_org_role_id` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `is_head` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
+  `is_head` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   `org_role_hierarchy_id` bigint(20) DEFAULT NULL,
   `departments_master_id` bigint(20) DEFAULT NULL,
@@ -1505,8 +1507,8 @@ CREATE TABLE  `watererp`.`org_roles_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `org_role_name` varchar(255) DEFAULT NULL,
   `hierarchy_id` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orgrolesmaster_statusmaster_id` (`status_master_id`),
@@ -1606,8 +1608,8 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `watererp`.`req_desig_workflow_mapping`;
 CREATE TABLE  `watererp`.`req_desig_workflow_mapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `workflow_master_id` bigint(20) DEFAULT NULL,
   `request_master_id` bigint(20) DEFAULT NULL,
   `designation_master_id` bigint(20) DEFAULT NULL,
@@ -1640,8 +1642,8 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `watererp`.`req_org_workflow_mapping`;
 CREATE TABLE  `watererp`.`req_org_workflow_mapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `workflow_master_id` bigint(20) DEFAULT NULL,
   `request_master_id` bigint(20) DEFAULT NULL,
   `org_role_instance_id` bigint(20) DEFAULT NULL,
@@ -1675,8 +1677,8 @@ DROP TABLE IF EXISTS `watererp`.`request_master`;
 CREATE TABLE  `watererp`.`request_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `request_type` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `internal_flag` int(11) DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
@@ -1703,8 +1705,8 @@ DROP TABLE IF EXISTS `watererp`.`request_workflow_history`;
 CREATE TABLE  `watererp`.`request_workflow_history` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `request_stage` int(11) DEFAULT NULL,
-  `assigned_date` timestamp NULL,
-  `actioned_date` timestamp NULL,
+  `assigned_date` timestamp NULL DEFAULT NULL,
+  `actioned_date` timestamp NULL DEFAULT NULL,
   `remarks` varchar(255) DEFAULT NULL,
   `ip_address` varchar(255) DEFAULT NULL,
   `assigned_role` int(11) DEFAULT NULL,
@@ -1750,8 +1752,8 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `watererp`.`request_workflow_mapping`;
 CREATE TABLE  `watererp`.`request_workflow_mapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   `workflow_master_id` bigint(20) DEFAULT NULL,
   `request_master_id` bigint(20) DEFAULT NULL,
@@ -1781,8 +1783,8 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `watererp`.`role_workflow_mapping`;
 CREATE TABLE  `watererp`.`role_workflow_mapping` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   `org_role_instance_id` bigint(20) DEFAULT NULL,
   `workflow_master_id` bigint(20) DEFAULT NULL,
@@ -1881,8 +1883,8 @@ DROP TABLE IF EXISTS `watererp`.`sub_desig_category_master`;
 CREATE TABLE  `watererp`.`sub_desig_category_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `order_by` int(11) DEFAULT NULL,
@@ -2051,8 +2053,8 @@ CREATE TABLE  `watererp`.`workflow_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `workflow_name` varchar(255) NOT NULL,
   `to_workflow` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_workflowmaster_statusmaster_id` (`status_master_id`),
@@ -2125,8 +2127,8 @@ DROP TABLE IF EXISTS `watererp`.`workflow_stage_master`;
 CREATE TABLE  `watererp`.`workflow_stage_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -2183,8 +2185,8 @@ DROP TABLE IF EXISTS `watererp`.`workflow_type_master`;
 CREATE TABLE  `watererp`.`workflow_type_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
+  `creation_date` timestamp NULL DEFAULT NULL,
+  `last_modified_date` timestamp NULL DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),

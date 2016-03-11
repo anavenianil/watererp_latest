@@ -22,8 +22,8 @@ public class CategoryPipeSizeMapping implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ctegory_master_id")
-    private CtegoryMaster ctegoryMaster;
+    @JoinColumn(name = "category_master_id")
+    private CategoryMaster categoryMaster;
 
     @ManyToOne
     @JoinColumn(name = "pipe_size_master_id")
@@ -37,12 +37,12 @@ public class CategoryPipeSizeMapping implements Serializable {
         this.id = id;
     }
 
-    public CtegoryMaster getCtegoryMaster() {
-        return ctegoryMaster;
+    public CategoryMaster getcategoryMaster() {
+        return categoryMaster;
     }
 
-    public void setCtegoryMaster(CtegoryMaster ctegoryMaster) {
-        this.ctegoryMaster = ctegoryMaster;
+    public void setcategoryMaster(CategoryMaster categoryMaster) {
+        this.categoryMaster = categoryMaster;
     }
 
     public PipeSizeMaster getPipeSizeMaster() {

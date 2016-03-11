@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('watererpApp').controller('ApplicationTxnDialogController',
-    ['$scope', '$stateParams', /*'$uibModalInstance', 'entity',*/ 'ApplicationTxn', 'ApplicationTypeMaster', 'ConnectionTypeMaster', 'CtegoryMaster', 'PipeSizeMaster', 'SewerSize', 'FileNumber', 'Customer','ParseLinks',
-        function($scope, $stateParams, /*$uibModalInstance, entity,*/ ApplicationTxn, ApplicationTypeMaster, ConnectionTypeMaster, CtegoryMaster, PipeSizeMaster, SewerSize, FileNumber, Customer, ParseLinks) {
+    ['$scope', '$stateParams', /*'$uibModalInstance', 'entity',*/ 'ApplicationTxn', 'ApplicationTypeMaster', 'ConnectionTypeMaster', 'CategoryMaster', 'PipeSizeMaster', 'SewerSize', 'FileNumber', 'Customer','ParseLinks',
+        function($scope, $stateParams, /*$uibModalInstance, entity,*/ ApplicationTxn, ApplicationTypeMaster, ConnectionTypeMaster, CategoryMaster, PipeSizeMaster, SewerSize, FileNumber, Customer, ParseLinks) {
 
         $scope.applicationTxn = {};//entity;
         $scope.applicationtypemasters = ApplicationTypeMaster.query();
         $scope.connectiontypemasters = ConnectionTypeMaster.query();
-        $scope.ctegorymasters = CtegoryMaster.query();
+        $scope.categorymasters = CategoryMaster.query();
         $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.sewersizes = SewerSize.query();
         $scope.filenumbers = FileNumber.query();

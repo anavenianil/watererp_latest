@@ -3,51 +3,51 @@
 angular.module('watererpApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('ctegoryMaster', {
+            .state('categoryMaster', {
                 parent: 'entity',
-                url: '/ctegoryMasters',
+                url: '/categoryMasters',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'CtegoryMasters'
+                    pageTitle: 'CategoryMasters'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/ctegoryMaster/ctegoryMasters.html',
-                        controller: 'CtegoryMasterController'
+                        templateUrl: 'scripts/app/entities/categoryMaster/categoryMasters.html',
+                        controller: 'CategoryMasterController'
                     }
                 },
                 resolve: {
                 }
             })
-            .state('ctegoryMaster.detail', {
+            .state('categoryMaster.detail', {
                 parent: 'entity',
-                url: '/ctegoryMaster/{id}',
+                url: '/categoryMaster/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'CtegoryMaster'
+                    pageTitle: 'CategoryMaster'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/ctegoryMaster/ctegoryMaster-detail.html',
-                        controller: 'CtegoryMasterDetailController'
+                        templateUrl: 'scripts/app/entities/categoryMaster/categoryMaster-detail.html',
+                        controller: 'CategoryMasterDetailController'
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'CtegoryMaster', function($stateParams, CtegoryMaster) {
-                        return CtegoryMaster.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'CategoryMaster', function($stateParams, CategoryMaster) {
+                        return CategoryMaster.get({id : $stateParams.id});
                     }]
                 }
             })
-            .state('ctegoryMaster.new', {
-                parent: 'ctegoryMaster',
+            .state('categoryMaster.new', {
+                parent: 'categoryMaster',
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/ctegoryMaster/ctegoryMaster-dialog.html',
-                        controller: 'CtegoryMasterDialogController',
+                        templateUrl: 'scripts/app/entities/categoryMaster/categoryMaster-dialog.html',
+                        controller: 'CategoryMasterDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -58,53 +58,53 @@ angular.module('watererpApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('ctegoryMaster', null, { reload: true });
+                        $state.go('categoryMaster', null, { reload: true });
                     }, function() {
-                        $state.go('ctegoryMaster');
+                        $state.go('categoryMaster');
                     })
                 }]
             })
-            .state('ctegoryMaster.edit', {
-                parent: 'ctegoryMaster',
+            .state('categoryMaster.edit', {
+                parent: 'categoryMaster',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/ctegoryMaster/ctegoryMaster-dialog.html',
-                        controller: 'CtegoryMasterDialogController',
+                        templateUrl: 'scripts/app/entities/categoryMaster/categoryMaster-dialog.html',
+                        controller: 'CategoryMasterDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['CtegoryMaster', function(CtegoryMaster) {
-                                return CtegoryMaster.get({id : $stateParams.id});
+                            entity: ['CategoryMaster', function(CategoryMaster) {
+                                return CategoryMaster.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('ctegoryMaster', null, { reload: true });
+                        $state.go('categoryMaster', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('ctegoryMaster.delete', {
-                parent: 'ctegoryMaster',
+            .state('categoryMaster.delete', {
+                parent: 'categoryMaster',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/ctegoryMaster/ctegoryMaster-delete-dialog.html',
-                        controller: 'CtegoryMasterDeleteController',
+                        templateUrl: 'scripts/app/entities/categoryMaster/categoryMaster-delete-dialog.html',
+                        controller: 'CategoryMasterDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['CtegoryMaster', function(CtegoryMaster) {
-                                return CtegoryMaster.get({id : $stateParams.id});
+                            entity: ['CategoryMaster', function(CategoryMaster) {
+                                return CategoryMaster.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('ctegoryMaster', null, { reload: true });
+                        $state.go('categoryMaster', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

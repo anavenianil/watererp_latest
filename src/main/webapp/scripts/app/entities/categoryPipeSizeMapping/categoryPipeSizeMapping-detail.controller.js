@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CategoryPipeSizeMappingDetailController', function ($scope, $rootScope, $stateParams, entity, CategoryPipeSizeMapping, CtegoryMaster, PipeSizeMaster) {
+    .controller('CategoryPipeSizeMappingDetailController', function ($scope, $rootScope, $stateParams, entity, CategoryPipeSizeMapping, CategoryMaster, PipeSizeMaster) {
         $scope.categoryPipeSizeMapping = entity;
         $scope.load = function (id) {
             CategoryPipeSizeMapping.get({id: id}, function(result) {

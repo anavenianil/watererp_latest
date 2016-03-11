@@ -32,7 +32,7 @@
 								Type</span> <span class="glyphicon glyphicon-sort"></span></th>
 						<th jh-sort-by="connectionTypeMaster.id"><span>Connection
 								Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-						<th jh-sort-by="ctegoryMaster.id"><span>Category</span> <span
+						<th jh-sort-by="categoryMaster.id"><span>Category</span> <span
 							class="glyphicon glyphicon-sort"></span></th>
 						<th jh-sort-by="pipeSizeMaster.id"><span>Pipe Size</span> <span
 							class="glyphicon glyphicon-sort"></span></th>
@@ -56,7 +56,7 @@
 						<td>{{applicationTxn.applicationTypeMaster.applicationType}}
 						</td>
 						<td>{{applicationTxn.connectionTypeMaster.connectionType}}</td>
-						<td>{{applicationTxn.ctegoryMaster.categoryName}}</td>
+						<td>{{applicationTxn.categoryMaster.categoryName}}</td>
 						<td>{{applicationTxn.pipeSizeMaster.pipeSize}}</td>
 						<td>{{applicationTxn.sewerSize.sewerSize}}</td>
 
@@ -246,8 +246,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="field_ctegoryMaster">ctegoryMaster</label>
-            <select class="form-control" id="field_ctegoryMaster" name="ctegoryMaster" ng-model="applicationTxn.ctegoryMaster" ng-options="ctegoryMaster as ctegoryMaster.id for ctegoryMaster in ctegorymasters track by ctegoryMaster.id">
+            <label for="field_categoryMaster">categoryMaster</label>
+            <select class="form-control" id="field_categoryMaster" name="categoryMaster" ng-model="applicationTxn.categoryMaster" ng-options="categoryMaster as categoryMaster.id for categoryMaster in categorymasters track by categoryMaster.id">
                 <option value=""></option>
             </select>
         </div>

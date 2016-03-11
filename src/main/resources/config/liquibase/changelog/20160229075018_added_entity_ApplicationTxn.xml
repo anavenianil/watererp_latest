@@ -63,7 +63,7 @@
             
             <column name="application_type_master_id" type="bigint"/>
             <column name="connection_type_master_id" type="bigint"/>
-            <column name="ctegory_master_id" type="bigint"/>
+            <column name="category_master_id" type="bigint"/>
             <column name="pipe_size_master_id" type="bigint"/>
             <column name="sewer_size_id" type="bigint"/>
             <column name="file_number_id" type="bigint"/>
@@ -87,11 +87,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="connection_type_master"/>
 
-        <addForeignKeyConstraint baseColumnNames="ctegory_master_id"
+        <addForeignKeyConstraint baseColumnNames="category_master_id"
                                  baseTableName="application_txn"
-                                 constraintName="fk_applicationtxn_ctegorymaster_id"
+                                 constraintName="fk_applicationtxn_categorymaster_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="ctegory_master"/>
+                                 referencedTableName="category_master"/>
 
         <addForeignKeyConstraint baseColumnNames="pipe_size_master_id"
                                  baseTableName="application_txn"

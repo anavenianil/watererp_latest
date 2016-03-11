@@ -14,10 +14,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity CtegoryMaster.
+        Added the entity CategoryMaster.
     -->
     <changeSet id="20160229065305" author="jhipster">
-        <createTable tableName="ctegory_master">
+        <createTable tableName="category_master">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

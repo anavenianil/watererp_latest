@@ -1,13 +1,13 @@
 <div>
-    <h2>CtegoryMasters</h2>
+    <h2>CategoryMasters</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="ctegoryMaster.new" >
+                <button class="btn btn-primary" ui-sref="categoryMaster.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span 
-                       >Create new CtegoryMaster
+                       >Create new CategoryMaster
                     </span>
                 </button>
             </div>
@@ -24,25 +24,25 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="ctegoryMaster in ctegoryMasters track by ctegoryMaster.id">
-                    <td><a ui-sref="ctegoryMaster.detail({id:ctegoryMaster.id})">{{ctegoryMaster.id}}</a></td>
-                    <td>{{ctegoryMaster.categoryName}}</td>
+                <tr ng-repeat="categoryMaster in categoryMasters track by categoryMaster.id">
+                    <td><a ui-sref="categoryMaster.detail({id:categoryMaster.id})">{{categoryMaster.id}}</a></td>
+                    <td>{{categoryMaster.categoryName}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="ctegoryMaster.detail({id:ctegoryMaster.id})"
+                                    ui-sref="categoryMaster.detail({id:categoryMaster.id})"
                                     class="btn btn-info btn-sm"> 
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="ctegoryMaster.edit({id:ctegoryMaster.id})"
+                                    ui-sref="categoryMaster.edit({id:categoryMaster.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="ctegoryMaster.delete({id:ctegoryMaster.id})"
+                                    ui-sref="categoryMaster.delete({id:categoryMaster.id})"
                                     class="btn btn-danger btn-sm">                                    
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>

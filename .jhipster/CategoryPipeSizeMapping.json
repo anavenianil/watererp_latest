@@ -2,8 +2,8 @@
     "relationships": [
         {
             "relationshipId": 1,
-            "relationshipName": "ctegoryMaster",
-            "otherEntityName": "ctegoryMaster",
+            "relationshipName": "categoryMaster",
+            "otherEntityName": "categoryMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },

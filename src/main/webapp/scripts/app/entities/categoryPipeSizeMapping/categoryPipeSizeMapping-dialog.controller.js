@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('watererpApp').controller('CategoryPipeSizeMappingDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CategoryPipeSizeMapping', 'CtegoryMaster', 'PipeSizeMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, CategoryPipeSizeMapping, CtegoryMaster, PipeSizeMaster) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CategoryPipeSizeMapping', 'CategoryMaster', 'PipeSizeMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, CategoryPipeSizeMapping, CategoryMaster, PipeSizeMaster) {
 
         $scope.categoryPipeSizeMapping = entity;
-        $scope.ctegorymasters = CtegoryMaster.query();
+        $scope.categorymasters = CategoryMaster.query();
         $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.load = function(id) {
             CategoryPipeSizeMapping.get({id : id}, function(result) {

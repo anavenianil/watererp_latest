@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('ApplicationTxnController', function ($scope, $state, ApplicationTxn, ParseLinks, Customer, ApplicationTypeMaster, ConnectionTypeMaster, 
-    		CtegoryMaster, SewerSize,FileNumber, PipeSizeMaster) {
+    		CategoryMaster, SewerSize,FileNumber, PipeSizeMaster) {
 
         //$scope.applicationTxns = [];
         $scope.predicate = 'id';
@@ -11,7 +11,7 @@ angular.module('watererpApp')
         
         $scope.applicationtypemasters = ApplicationTypeMaster.query();
         $scope.connectiontypemasters = ConnectionTypeMaster.query();
-        $scope.ctegorymasters = CtegoryMaster.query();
+        $scope.categorymasters = CategoryMaster.query();
         $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.sewersizes = SewerSize.query();
         $scope.filenumbers = FileNumber.query();

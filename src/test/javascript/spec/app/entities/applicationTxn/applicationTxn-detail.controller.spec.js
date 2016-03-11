@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('ApplicationTxn Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockApplicationTxn, MockApplicationTypeMaster, MockConnectionTypeMaster, MockCtegoryMaster, MockPipeSizeMaster, MockSewerSize, MockFileNumber, MockCustomer;
+        var MockEntity, MockApplicationTxn, MockApplicationTypeMaster, MockConnectionTypeMaster, MockCategoryMaster, MockPipeSizeMaster, MockSewerSize, MockFileNumber, MockCustomer;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -14,7 +14,7 @@ describe('Controller Tests', function() {
             MockApplicationTxn = jasmine.createSpy('MockApplicationTxn');
             MockApplicationTypeMaster = jasmine.createSpy('MockApplicationTypeMaster');
             MockConnectionTypeMaster = jasmine.createSpy('MockConnectionTypeMaster');
-            MockCtegoryMaster = jasmine.createSpy('MockCtegoryMaster');
+            MockCategoryMaster = jasmine.createSpy('MockCategoryMaster');
             MockPipeSizeMaster = jasmine.createSpy('MockPipeSizeMaster');
             MockSewerSize = jasmine.createSpy('MockSewerSize');
             MockFileNumber = jasmine.createSpy('MockFileNumber');
@@ -28,7 +28,7 @@ describe('Controller Tests', function() {
                 'ApplicationTxn': MockApplicationTxn,
                 'ApplicationTypeMaster': MockApplicationTypeMaster,
                 'ConnectionTypeMaster': MockConnectionTypeMaster,
-                'CtegoryMaster': MockCtegoryMaster,
+                'CategoryMaster': MockCategoryMaster,
                 'PipeSizeMaster': MockPipeSizeMaster,
                 'SewerSize': MockSewerSize,
                 'FileNumber': MockFileNumber,

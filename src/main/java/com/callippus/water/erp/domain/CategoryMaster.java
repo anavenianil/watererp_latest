@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A CtegoryMaster.
+ * A categoryMaster.
  */
 @Entity
-@Table(name = "ctegory_master")
+@Table(name = "category_master")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class CtegoryMaster implements Serializable {
+public class CategoryMaster implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,11 +46,11 @@ public class CtegoryMaster implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CtegoryMaster ctegoryMaster = (CtegoryMaster) o;
-        if(ctegoryMaster.id == null || id == null) {
+        CategoryMaster categoryMaster = (CategoryMaster) o;
+        if(categoryMaster.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, ctegoryMaster.id);
+        return Objects.equals(id, categoryMaster.id);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class CtegoryMaster implements Serializable {
 
     @Override
     public String toString() {
-        return "CtegoryMaster{" +
+        return "CategoryMaster{" +
             "id=" + id +
             ", categoryName='" + categoryName + "'" +
             '}';

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the CtegoryMaster entity.
+ * Performance test for the CategoryMaster entity.
  */
-class CtegoryMasterGatlingTest extends Simulation {
+class CategoryMasterGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class CtegoryMasterGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the CtegoryMaster entity")
+    val scn = scenario("Test the CategoryMaster entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class CtegoryMasterGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all ctegoryMasters")
-            .get("/api/ctegoryMasters")
+            exec(http("Get all categoryMasters")
+            .get("/api/categoryMasters")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new ctegoryMaster")
-            .post("/api/ctegoryMasters")
+            .exec(http("Create new categoryMaster")
+            .post("/api/categoryMasters")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "categoryName":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_ctegoryMaster_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_categoryMaster_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created ctegoryMaster")
-                .get("${new_ctegoryMaster_url}")
+                exec(http("Get created categoryMaster")
+                .get("${new_categoryMaster_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created ctegoryMaster")
-            .delete("${new_ctegoryMaster_url}")
+            .exec(http("Delete created categoryMaster")
+            .delete("${new_categoryMaster_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

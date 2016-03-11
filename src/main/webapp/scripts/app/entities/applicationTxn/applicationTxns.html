@@ -319,10 +319,10 @@
 										ng-model="applicationTxn.saleDeed1" />
 								</div>
 								<div class="col-sm-3">
-									<label for="field_ctegoryMaster">Category</label> <select
-										class="form-control" id="field_ctegoryMaster"
-										name="ctegoryMaster" ng-model="applicationTxn.ctegoryMaster"
-										ng-options="ctegoryMaster as ctegoryMaster.categoryName for ctegoryMaster in ctegorymasters track by ctegoryMaster.id">
+									<label for="field_categoryMaster">Category</label> <select
+										class="form-control" id="field_categoryMaster"
+										name="categoryMaster" ng-model="applicationTxn.categoryMaster"
+										ng-options="categoryMaster as categoryMaster.categoryName for categoryMaster in categorymasters track by categoryMaster.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -518,7 +518,7 @@
 											Type</span> <span class="glyphicon glyphicon-sort"></span></th>
 									<th jh-sort-by="connectionTypeMaster.id"><span>Connection
 											Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-									<th jh-sort-by="ctegoryMaster.id"><span>Category</span> <span
+									<th jh-sort-by="categoryMaster.id"><span>Category</span> <span
 										class="glyphicon glyphicon-sort"></span></th>
 									<th jh-sort-by="pipeSizeMaster.id"><span>Pipe Size</span>
 										<span class="glyphicon glyphicon-sort"></span></th>
@@ -566,7 +566,7 @@
 										ui-sref="connectionTypeMaster.detail({id:applicationTxn.connectionTypeMaster.id})">{{applicationTxn.connectionTypeMaster.connectionType}}</a>
 									</td>
 									<td><a
-										ui-sref="ctegoryMaster.detail({id:applicationTxn.ctegoryMaster.id})">{{applicationTxn.ctegoryMaster.categoryName}}</a>
+										ui-sref="categoryMaster.detail({id:applicationTxn.categoryMaster.id})">{{applicationTxn.categoryMaster.categoryName}}</a>
 									</td>
 									<td><a
 										ui-sref="pipeSizeMaster.detail({id:applicationTxn.pipeSizeMaster.id})">{{applicationTxn.pipeSizeMaster.pipeSize}}</a>
