@@ -1,0 +1,114 @@
+<div>
+    <h2>FeasibilityStudys</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="feasibilityStudy.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new FeasibilityStudy
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="plotAreaInSqMtrs"><span>PlotAreaInSqMtrs</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="plotAreaInYards"><span>PlotAreaInYards</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noOfFlatsOrNoOfUnits"><span>NoOfFlatsOrNoOfUnits</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noOfFloors"><span>NoOfFloors</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalPlinthArea"><span>TotalPlinthArea</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="waterRequirement"><span>WaterRequirement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="schemeMaster.id"><span>schemeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffCategoryMaster.id"><span>tariffCategoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="makeOfWaterPipe.id"><span>makeOfWaterPipe</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="makeOfSeweragePipe.id"><span>makeOfSeweragePipe</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mainWaterSize.id"><span>mainWaterSize</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mainSewerageSize.id"><span>mainSewerageSize</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="docketCode.id"><span>docketCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applicationTxn.id"><span>applicationTxn</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryMaster.id"><span>categoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sewerSize.id"><span>sewerSize</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pipeSizeMaster.id"><span>pipeSizeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="feasibilityStatus.id"><span>feasibilityStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="feasibilityStudy in feasibilityStudys track by feasibilityStudy.id">
+                    <td><a ui-sref="feasibilityStudy.detail({id:feasibilityStudy.id})">{{feasibilityStudy.id}}</a></td>
+                    <td>{{feasibilityStudy.plotAreaInSqMtrs}}</td>
+                    <td>{{feasibilityStudy.plotAreaInYards}}</td>
+                    <td>{{feasibilityStudy.noOfFlatsOrNoOfUnits}}</td>
+                    <td>{{feasibilityStudy.noOfFloors}}</td>
+                    <td>{{feasibilityStudy.totalPlinthArea}}</td>
+                    <td>{{feasibilityStudy.waterRequirement}}</td>
+                    <td>
+                        <a ui-sref="schemeMaster.detail({id:feasibilityStudy.schemeMaster.id})">{{feasibilityStudy.schemeMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="tariffCategoryMaster.detail({id:feasibilityStudy.tariffCategoryMaster.id})">{{feasibilityStudy.tariffCategoryMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="makeOfPipe.detail({id:feasibilityStudy.makeOfWaterPipe.id})">{{feasibilityStudy.makeOfWaterPipe.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="makeOfPipe.detail({id:feasibilityStudy.makeOfSeweragePipe.id})">{{feasibilityStudy.makeOfSeweragePipe.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="mainWaterSize.detail({id:feasibilityStudy.mainWaterSize.id})">{{feasibilityStudy.mainWaterSize.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="mainSewerageSize.detail({id:feasibilityStudy.mainSewerageSize.id})">{{feasibilityStudy.mainSewerageSize.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="docketCode.detail({id:feasibilityStudy.docketCode.id})">{{feasibilityStudy.docketCode.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="applicationTxn.detail({id:feasibilityStudy.applicationTxn.id})">{{feasibilityStudy.applicationTxn.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="categoryMaster.detail({id:feasibilityStudy.categoryMaster.id})">{{feasibilityStudy.categoryMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="sewerSize.detail({id:feasibilityStudy.sewerSize.id})">{{feasibilityStudy.sewerSize.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="pipeSizeMaster.detail({id:feasibilityStudy.pipeSizeMaster.id})">{{feasibilityStudy.pipeSizeMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="feasibilityStatus.detail({id:feasibilityStudy.feasibilityStatus.id})">{{feasibilityStudy.feasibilityStatus.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="feasibilityStudy.detail({id:feasibilityStudy.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="feasibilityStudy.edit({id:feasibilityStudy.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="feasibilityStudy.delete({id:feasibilityStudy.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "schemeMaster",
+            "otherEntityName": "schemeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "makeOfWaterPipe",
+            "otherEntityName": "makeOfPipe",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "makeOfSeweragePipe",
+            "otherEntityName": "makeOfPipe",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "mainWaterSize",
+            "otherEntityName": "mainWaterSize",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "mainSewerageSize",
+            "otherEntityName": "mainSewerageSize",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 7,
+            "relationshipName": "docketCode",
+            "otherEntityName": "docketCode",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 8,
+            "relationshipName": "applicationTxn",
+            "otherEntityName": "applicationTxn",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 9,
+            "relationshipName": "categoryMaster",
+            "otherEntityName": "categoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 10,
+            "relationshipName": "sewerSize",
+            "otherEntityName": "sewerSize",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 11,
+            "relationshipName": "pipeSizeMaster",
+            "otherEntityName": "pipeSizeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 12,
+            "relationshipName": "feasibilityStatus",
+            "otherEntityName": "feasibilityStatus",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "plotAreaInSqMtrs",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "plotAreaInYards",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "noOfFlatsOrNoOfUnits",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "noOfFloors",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "totalPlinthArea",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "waterRequirement",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20160311100455",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

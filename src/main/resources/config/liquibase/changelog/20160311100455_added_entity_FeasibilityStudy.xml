@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity FeasibilityStudy.
+    -->
+    <changeSet id="20160311100455" author="jhipster">
+        <createTable tableName="feasibility_study">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="plot_area_in_sq_mtrs" type="${floatType}"/>
+            
+            <column name="plot_area_in_yards" type="${floatType}"/>
+            
+            <column name="no_of_flats_or_no_of_units" type="integer"/>
+            
+            <column name="no_of_floors" type="integer"/>
+            
+            <column name="total_plinth_area" type="${floatType}"/>
+            
+            <column name="water_requirement" type="${floatType}"/>
+            
+            <column name="scheme_master_id" type="bigint"/>
+            <column name="tariff_category_master_id" type="bigint"/>
+            <column name="make_of_water_pipe_id" type="bigint"/>
+            <column name="make_of_sewerage_pipe_id" type="bigint"/>
+            <column name="main_water_size_id" type="bigint"/>
+            <column name="main_sewerage_size_id" type="bigint"/>
+            <column name="docket_code_id" type="bigint"/>
+            <column name="application_txn_id" type="bigint"/>
+            <column name="category_master_id" type="bigint"/>
+            <column name="sewer_size_id" type="bigint"/>
+            <column name="pipe_size_master_id" type="bigint"/>
+            <column name="feasibility_status_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="scheme_master_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_schememaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="scheme_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="tariff_category_master_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_tariffcategorymaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tariff_category_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="make_of_water_pipe_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_makeofwaterpipe_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="make_of_pipe"/>
+
+        <addForeignKeyConstraint baseColumnNames="make_of_sewerage_pipe_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_makeofseweragepipe_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="make_of_pipe"/>
+
+        <addForeignKeyConstraint baseColumnNames="main_water_size_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_mainwatersize_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="main_water_size"/>
+
+        <addForeignKeyConstraint baseColumnNames="main_sewerage_size_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_mainseweragesize_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="main_sewerage_size"/>
+
+        <addForeignKeyConstraint baseColumnNames="docket_code_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_docketcode_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="docket_code"/>
+
+        <addForeignKeyConstraint baseColumnNames="application_txn_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_applicationtxn_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application_txn"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_master_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_categorymaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="sewer_size_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_sewersize_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sewer_size"/>
+
+        <addForeignKeyConstraint baseColumnNames="pipe_size_master_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_pipesizemaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pipe_size_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="feasibility_status_id"
+                                 baseTableName="feasibility_study"
+                                 constraintName="fk_feasibilitystudy_feasibilitystatus_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="feasibility_status"/>
+
+    </changeSet>
+</databaseChangeLog>

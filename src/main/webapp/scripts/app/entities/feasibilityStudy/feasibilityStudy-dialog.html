@@ -1,0 +1,134 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myFeasibilityStudyLabel">Create or edit a FeasibilityStudy</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="feasibilityStudy.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_plotAreaInSqMtrs">PlotAreaInSqMtrs</label>
+            <input type="number" class="form-control" name="plotAreaInSqMtrs" id="field_plotAreaInSqMtrs"
+                    ng-model="feasibilityStudy.plotAreaInSqMtrs"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_plotAreaInYards">PlotAreaInYards</label>
+            <input type="number" class="form-control" name="plotAreaInYards" id="field_plotAreaInYards"
+                    ng-model="feasibilityStudy.plotAreaInYards"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_noOfFlatsOrNoOfUnits">NoOfFlatsOrNoOfUnits</label>
+            <input type="number" class="form-control" name="noOfFlatsOrNoOfUnits" id="field_noOfFlatsOrNoOfUnits"
+                    ng-model="feasibilityStudy.noOfFlatsOrNoOfUnits"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_noOfFloors">NoOfFloors</label>
+            <input type="number" class="form-control" name="noOfFloors" id="field_noOfFloors"
+                    ng-model="feasibilityStudy.noOfFloors"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_totalPlinthArea">TotalPlinthArea</label>
+            <input type="number" class="form-control" name="totalPlinthArea" id="field_totalPlinthArea"
+                    ng-model="feasibilityStudy.totalPlinthArea"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_waterRequirement">WaterRequirement</label>
+            <input type="number" class="form-control" name="waterRequirement" id="field_waterRequirement"
+                    ng-model="feasibilityStudy.waterRequirement"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_schemeMaster">schemeMaster</label>
+            <select class="form-control" id="field_schemeMaster" name="schemeMaster" ng-model="feasibilityStudy.schemeMaster" ng-options="schemeMaster as schemeMaster.id for schemeMaster in schememasters track by schemeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_tariffCategoryMaster">tariffCategoryMaster</label>
+            <select class="form-control" id="field_tariffCategoryMaster" name="tariffCategoryMaster" ng-model="feasibilityStudy.tariffCategoryMaster" ng-options="tariffCategoryMaster as tariffCategoryMaster.id for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_makeOfWaterPipe">makeOfWaterPipe</label>
+            <select class="form-control" id="field_makeOfWaterPipe" name="makeOfWaterPipe" ng-model="feasibilityStudy.makeOfWaterPipe" ng-options="makeOfPipe as makeOfPipe.id for makeOfPipe in makeofpipes track by makeOfPipe.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_makeOfSeweragePipe">makeOfSeweragePipe</label>
+            <select class="form-control" id="field_makeOfSeweragePipe" name="makeOfSeweragePipe" ng-model="feasibilityStudy.makeOfSeweragePipe" ng-options="makeOfPipe as makeOfPipe.id for makeOfPipe in makeofpipes track by makeOfPipe.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_mainWaterSize">mainWaterSize</label>
+            <select class="form-control" id="field_mainWaterSize" name="mainWaterSize" ng-model="feasibilityStudy.mainWaterSize" ng-options="mainWaterSize as mainWaterSize.id for mainWaterSize in mainwatersizes track by mainWaterSize.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_mainSewerageSize">mainSewerageSize</label>
+            <select class="form-control" id="field_mainSewerageSize" name="mainSewerageSize" ng-model="feasibilityStudy.mainSewerageSize" ng-options="mainSewerageSize as mainSewerageSize.id for mainSewerageSize in mainseweragesizes track by mainSewerageSize.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_docketCode">docketCode</label>
+            <select class="form-control" id="field_docketCode" name="docketCode" ng-model="feasibilityStudy.docketCode" ng-options="docketCode as docketCode.id for docketCode in docketcodes track by docketCode.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_applicationTxn">applicationTxn</label>
+            <select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="feasibilityStudy.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_categoryMaster">categoryMaster</label>
+            <select class="form-control" id="field_categoryMaster" name="categoryMaster" ng-model="feasibilityStudy.categoryMaster" ng-options="categoryMaster as categoryMaster.id for categoryMaster in categorymasters track by categoryMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_sewerSize">sewerSize</label>
+            <select class="form-control" id="field_sewerSize" name="sewerSize" ng-model="feasibilityStudy.sewerSize" ng-options="sewerSize as sewerSize.id for sewerSize in sewersizes track by sewerSize.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_pipeSizeMaster">pipeSizeMaster</label>
+            <select class="form-control" id="field_pipeSizeMaster" name="pipeSizeMaster" ng-model="feasibilityStudy.pipeSizeMaster" ng-options="pipeSizeMaster as pipeSizeMaster.id for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_feasibilityStatus">feasibilityStatus</label>
+            <select class="form-control" id="field_feasibilityStatus" name="feasibilityStatus" ng-model="feasibilityStudy.feasibilityStatus" ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

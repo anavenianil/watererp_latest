@@ -56,5 +56,12 @@
     <include file="classpath:config/liquibase/changelog/20160309104001_added_entity_MenuItem2Url.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160309105304_added_entity_Url2Role.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160311094234_added_entity_SchemeMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160311094550_added_entity_MakeOfPipe.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160311094820_added_entity_MainWaterSize.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160311095014_added_entity_DocketCode.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

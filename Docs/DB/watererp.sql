@@ -445,7 +445,14 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160309103829','jhipster','classpath:config/liquibase/changelog/20160309103829_added_entity_Url.xml','2016-03-09 16:14:41',50,'EXECUTED','7:1889bdedffb7df6fe11f9bc33d0efa35','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160309104001','jhipster','classpath:config/liquibase/changelog/20160309104001_added_entity_MenuItem2Url.xml','2016-03-09 16:14:43',51,'EXECUTED','7:902843a076e3bb258db90badb9e1dc9a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-03-09 16:14:45',52,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160309105304','jhipster','classpath:config/liquibase/changelog/20160309105304_added_entity_Url2Role.xml','2016-03-09 16:34:47',53,'EXECUTED','7:10331a2dfcdaf6902d65c17510f31bc4','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160309105304','jhipster','classpath:config/liquibase/changelog/20160309105304_added_entity_Url2Role.xml','2016-03-09 16:34:47',53,'EXECUTED','7:10331a2dfcdaf6902d65c17510f31bc4','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094234','jhipster','classpath:config/liquibase/changelog/20160311094234_added_entity_SchemeMaster.xml','2016-03-11 15:21:26',54,'EXECUTED','7:af80987658cadbe9d18ef393fd5559c7','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml','2016-03-11 15:21:26',55,'EXECUTED','7:76b2ec672aee81aa1c61119392f20b5d','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094550','jhipster','classpath:config/liquibase/changelog/20160311094550_added_entity_MakeOfPipe.xml','2016-03-11 15:21:26',56,'EXECUTED','7:0aae809bc0a38e5aa294a887f735acb8','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094820','jhipster','classpath:config/liquibase/changelog/20160311094820_added_entity_MainWaterSize.xml','2016-03-11 15:21:26',57,'EXECUTED','7:0e853a5e0c7721503d0203d88333bd91','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094904','jhipster','classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml','2016-03-11 15:21:27',58,'EXECUTED','7:03b9b58c058199566e8d55fd5635b97d','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311095014','jhipster','classpath:config/liquibase/changelog/20160311095014_added_entity_DocketCode.xml','2016-03-11 15:21:27',59,'EXECUTED','7:9b3b9b3180ffc95d73eadf3d1294c5e0','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311100455','jhipster','classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml','2016-03-11 15:35:47',60,'EXECUTED','7:02ff1a8ab9783cbd5eaec740ffa6d9cc','createTable, addForeignKeyConstraint (x12)','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -656,6 +663,27 @@ UNLOCK TABLES;
 
 
 --
+-- Definition of table `watererp`.`docket_code`
+--
+
+DROP TABLE IF EXISTS `watererp`.`docket_code`;
+CREATE TABLE  `watererp`.`docket_code` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`docket_code`
+--
+
+/*!40000 ALTER TABLE `docket_code` DISABLE KEYS */;
+LOCK TABLES `docket_code` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `docket_code` ENABLE KEYS */;
+
+
+--
 -- Definition of table `watererp`.`emp_master`
 --
 
@@ -747,6 +775,68 @@ LOCK TABLES `feasibility_status` WRITE;
 INSERT INTO `watererp`.`feasibility_status` VALUES  (1,'Application Accepted');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `feasibility_status` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`feasibility_study`
+--
+
+DROP TABLE IF EXISTS `watererp`.`feasibility_study`;
+CREATE TABLE  `watererp`.`feasibility_study` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `plot_area_in_sq_mtrs` float DEFAULT NULL,
+  `plot_area_in_yards` float DEFAULT NULL,
+  `no_of_flats_or_no_of_units` int(11) DEFAULT NULL,
+  `no_of_floors` int(11) DEFAULT NULL,
+  `total_plinth_area` float DEFAULT NULL,
+  `water_requirement` float DEFAULT NULL,
+  `scheme_master_id` bigint(20) DEFAULT NULL,
+  `tariff_category_master_id` bigint(20) DEFAULT NULL,
+  `make_of_water_pipe_id` bigint(20) DEFAULT NULL,
+  `make_of_sewerage_pipe_id` bigint(20) DEFAULT NULL,
+  `main_water_size_id` bigint(20) DEFAULT NULL,
+  `main_sewerage_size_id` bigint(20) DEFAULT NULL,
+  `docket_code_id` bigint(20) DEFAULT NULL,
+  `application_txn_id` bigint(20) DEFAULT NULL,
+  `category_master_id` bigint(20) DEFAULT NULL,
+  `sewer_size_id` bigint(20) DEFAULT NULL,
+  `pipe_size_master_id` bigint(20) DEFAULT NULL,
+  `feasibility_status_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_feasibilitystudy_schememaster_id` (`scheme_master_id`),
+  KEY `fk_feasibilitystudy_tariffcategorymaster_id` (`tariff_category_master_id`),
+  KEY `fk_feasibilitystudy_makeofwaterpipe_id` (`make_of_water_pipe_id`),
+  KEY `fk_feasibilitystudy_makeofseweragepipe_id` (`make_of_sewerage_pipe_id`),
+  KEY `fk_feasibilitystudy_mainwatersize_id` (`main_water_size_id`),
+  KEY `fk_feasibilitystudy_mainseweragesize_id` (`main_sewerage_size_id`),
+  KEY `fk_feasibilitystudy_docketcode_id` (`docket_code_id`),
+  KEY `fk_feasibilitystudy_applicationtxn_id` (`application_txn_id`),
+  KEY `fk_feasibilitystudy_categorymaster_id` (`category_master_id`),
+  KEY `fk_feasibilitystudy_sewersize_id` (`sewer_size_id`),
+  KEY `fk_feasibilitystudy_pipesizemaster_id` (`pipe_size_master_id`),
+  KEY `fk_feasibilitystudy_feasibilitystatus_id` (`feasibility_status_id`),
+  CONSTRAINT `fk_feasibilitystudy_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_docketcode_id` FOREIGN KEY (`docket_code_id`) REFERENCES `docket_code` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_mainseweragesize_id` FOREIGN KEY (`main_sewerage_size_id`) REFERENCES `main_sewerage_size` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_mainwatersize_id` FOREIGN KEY (`main_water_size_id`) REFERENCES `main_water_size` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_makeofseweragepipe_id` FOREIGN KEY (`make_of_sewerage_pipe_id`) REFERENCES `make_of_pipe` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_makeofwaterpipe_id` FOREIGN KEY (`make_of_water_pipe_id`) REFERENCES `make_of_pipe` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_schememaster_id` FOREIGN KEY (`scheme_master_id`) REFERENCES `scheme_master` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_sewersize_id` FOREIGN KEY (`sewer_size_id`) REFERENCES `sewer_size` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`feasibility_study`
+--
+
+/*!40000 ALTER TABLE `feasibility_study` DISABLE KEYS */;
+LOCK TABLES `feasibility_study` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `feasibility_study` ENABLE KEYS */;
 
 
 --
@@ -1162,7 +1252,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('XDGXmczwil8KeD6KL6Yt1w==',3,'fbROZLGioPS/YUzyTyG2kg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('zy6YAeHzjqbMHb8NPwiMQg==',3,'CrdT8w8ZqC7SQgp8DDcAIQ==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('zy6YAeHzjqbMHb8NPwiMQg==',3,'RfJrmS7MnC9GxnetOTdgpg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
 
@@ -1238,6 +1328,69 @@ INSERT INTO `watererp`.`jhi_user_authority` VALUES  (1,'ROLE_ADMIN'),
  (4,'ROLE_USER');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_user_authority` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`main_sewerage_size`
+--
+
+DROP TABLE IF EXISTS `watererp`.`main_sewerage_size`;
+CREATE TABLE  `watererp`.`main_sewerage_size` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `size` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`main_sewerage_size`
+--
+
+/*!40000 ALTER TABLE `main_sewerage_size` DISABLE KEYS */;
+LOCK TABLES `main_sewerage_size` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `main_sewerage_size` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`main_water_size`
+--
+
+DROP TABLE IF EXISTS `watererp`.`main_water_size`;
+CREATE TABLE  `watererp`.`main_water_size` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `size` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`main_water_size`
+--
+
+/*!40000 ALTER TABLE `main_water_size` DISABLE KEYS */;
+LOCK TABLES `main_water_size` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `main_water_size` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`make_of_pipe`
+--
+
+DROP TABLE IF EXISTS `watererp`.`make_of_pipe`;
+CREATE TABLE  `watererp`.`make_of_pipe` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `make_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`make_of_pipe`
+--
+
+/*!40000 ALTER TABLE `make_of_pipe` DISABLE KEYS */;
+LOCK TABLES `make_of_pipe` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `make_of_pipe` ENABLE KEYS */;
 
 
 --
@@ -1811,6 +1964,27 @@ UNLOCK TABLES;
 
 
 --
+-- Definition of table `watererp`.`scheme_master`
+--
+
+DROP TABLE IF EXISTS `watererp`.`scheme_master`;
+CREATE TABLE  `watererp`.`scheme_master` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `scheme_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`scheme_master`
+--
+
+/*!40000 ALTER TABLE `scheme_master` DISABLE KEYS */;
+LOCK TABLES `scheme_master` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `scheme_master` ENABLE KEYS */;
+
+
+--
 -- Definition of table `watererp`.`sewer_size`
 --
 
@@ -1902,6 +2076,29 @@ CREATE TABLE  `watererp`.`sub_desig_category_master` (
 LOCK TABLES `sub_desig_category_master` WRITE;
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `sub_desig_category_master` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`tariff_category_master`
+--
+
+DROP TABLE IF EXISTS `watererp`.`tariff_category_master`;
+CREATE TABLE  `watererp`.`tariff_category_master` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tariff_name` varchar(255) NOT NULL,
+  `tariff_unit` int(11) NOT NULL,
+  `tariff_value` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`tariff_category_master`
+--
+
+/*!40000 ALTER TABLE `tariff_category_master` DISABLE KEYS */;
+LOCK TABLES `tariff_category_master` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `tariff_category_master` ENABLE KEYS */;
 
 
 --
