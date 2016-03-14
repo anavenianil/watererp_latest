@@ -69,7 +69,7 @@ angular.module('watererpApp')
                     })
                 }]
             })
-            .state('feasibilityStudy.edit', {
+            .state('feasibilityStudy1.edit', {
                 parent: 'feasibilityStudy',
                 url: '/{id}/edit',
                 data: {
@@ -114,5 +114,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            });
+            })
+            .state('feasibilityStudy.form', {
+                parent: 'feasibilityStudy',
+                url: '/form',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'FeasibilityStudysForm'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudysForm.html',
+                        controller: 'FeasibilityStudyFormController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('feasibilityStudy.edit',	{
+            	parent : 'feasibilityStudy',
+            	url : '/edit/:feasibilityStudyId',
+            	//url: '/form',
+				data : {
+					authorities : [ 'ROLE_USER' ],
+					pageTitle : 'FeasibilityStudyForm'
+				},
+				views : {
+					'content@' : {
+						templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudysForm.html',
+                        controller: 'FeasibilityStudyFormController'
+					}
+				},
+				resolve : {}
+				});
     });
