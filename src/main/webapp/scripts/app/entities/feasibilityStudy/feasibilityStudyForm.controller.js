@@ -27,23 +27,14 @@ angular.module('watererpApp')
         	$scope.feasibilityStudyId = $stateParams.feasibilityStudyId;
         	FeasibilityStudy.get({id : $scope.feasibilityStudyId}, function(result) {
                 $scope.feasibilityStudy = result;
-                /*$scope.feasibilityStudy.firstName = $scope.feasibilityStudy.applicationTxn.customer.firstName;
-                $scope.feasibilityStudy.middleName = $scope.feasibilityStudy.applicationTxn.customer.middleName;
-                $scope.feasibilityStudy.lastName = $scope.feasibilityStudy.applicationTxn.customer.lastName;*/
             });
         }
         
         $scope.getCustomer = function(fileNo){
         	ApplicationTxn.get({id : fileNo}, function(result) {
                 $scope.applicationTxn = result;
-                /*$scope.feasibilityStudy.firstName = $scope.applicationTxn.customer.firstName;
-                $scope.feasibilityStudy.middleName = $scope.applicationTxn.customer.middleName;
-                $scope.feasibilityStudy.lastName = $scope.applicationTxn.customer.lastName;*/
                 $scope.feasibilityStudy.applicationTxn = $scope.applicationTxn;
                 $scope.feasibilityStudy.applicationTxn.id = $scope.applicationTxn.id;
-                
-                
-                
             });	
         }
         

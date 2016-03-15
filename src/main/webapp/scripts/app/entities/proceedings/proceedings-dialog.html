@@ -1,0 +1,251 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Create or edit a Proceedings</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<fieldset>
+						<legend>Customer Details</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>File Number</label> <input type="text"
+									class="form-control" id="field_fileNo" name="fileNo"
+									ng-model="feasibilityStudy.fileNo">
+							</div>
+							<div class="col-sm-1">
+								<br>
+								<button type="button"
+									class="btn btn-primary glyphicon glyphicon-search"
+									ng-click="getCustomer(feasibilityStudy.fileNo)"></button>
+							</div>
+							<div class="col-sm-3">
+								<label for="field_applicationTxn">applicationTxn</label> <select
+									class="form-control" id="field_applicationTxn"
+									name="applicationTxn" ng-model="proceedings.applicationTxn"
+									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+									<option value=""></option>
+								</select>
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Customer Name</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>First Name</label> <input type="text"
+									class="form-control" name="firstName" id="field_firstName"
+									ng-model="feasibilityStudy.applicationTxn.customer.firstName"
+									disabled />
+							</div>
+							<div class="col-sm-4">
+								<label>Middle Name</label> <input type="text"
+									class="form-control" name="middleName" id="field_middleName"
+									ng-model="feasibilityStudy.applicationTxn.customer.middleName"
+									disabled />
+							</div>
+							<div class="col-sm-4">
+								<label>Last Name</label> <input type="text" class="form-control"
+									name="lastName" id="field_lastName"
+									ng-model="feasibilityStudy.applicationTxn.customer.lastName"
+									disabled />
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Water Supply Connection Charges</legend>
+						<div class="row">
+							<!-- <div class="col-sm-3">
+								<label for="id">ID</label> <input type="text"
+									class="form-control" id="id" name="id"
+									ng-model="proceedings.id" readonly />
+							</div> -->
+							<div class="col-sm-3">
+								<label class="control-label"
+									for="field_waterSupplyConnectionCharges">Water Supply
+									Connection Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="waterSupplyConnectionCharges"
+									id="field_waterSupplyConnectionCharges"
+									ng-model="proceedings.waterSupplyConnectionCharges" required />
+								<div ng-show="editForm.waterSupplyConnectionCharges.$invalid">
+									<p class="help-block"
+										ng-show="editForm.waterSupplyConnectionCharges.$error.required">
+										This field is required.</p>
+									<p class="help-block"
+										ng-show="editForm.waterSupplyConnectionCharges.$error.number">
+										This field should be a number.</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_waterOtherCharges">Water
+									Other Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="waterOtherCharges" id="field_waterOtherCharges"
+									ng-model="proceedings.waterOtherCharges" />
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label"
+									for="field_sixtyDaysConsumptionCharges">Sixty
+									DaysConsumption Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="sixtyDaysConsumptionCharges"
+									id="field_sixtyDaysConsumptionCharges"
+									ng-model="proceedings.sixtyDaysConsumptionCharges" required />
+								<div ng-show="editForm.sixtyDaysConsumptionCharges.$invalid">
+									<p class="help-block"
+										ng-show="editForm.sixtyDaysConsumptionCharges.$error.required">
+										This field is required.</p>
+									<p class="help-block"
+										ng-show="editForm.sixtyDaysConsumptionCharges.$error.number">
+										This field should be a number.</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label"
+									for="field_waterSupplyImprovementCharges">Water Supply
+									Improvement Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="waterSupplyImprovementCharges"
+									id="field_waterSupplyImprovementCharges"
+									ng-model="proceedings.waterSupplyImprovementCharges" />
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_meterCost">Meter
+									Cost</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control" name="meterCost"
+									id="field_meterCost" ng-model="proceedings.meterCost" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_greenBrigadeCharges">Green
+									Brigade Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="greenBrigadeCharges" id="field_greenBrigadeCharges"
+									ng-model="proceedings.greenBrigadeCharges" />
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_rwhsCharges">RWHS
+									Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control" name="rwhsCharges"
+									id="field_rwhsCharges" ng-model="proceedings.rwhsCharges" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_totalWaterCharges">Total
+									Water Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="totalWaterCharges" id="field_totalWaterCharges"
+									ng-model="proceedings.totalWaterCharges" />
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Sewerage Connection Charges</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label"
+									for="field_sewerageConnectionCharges">Sewerage Connection Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="sewerageConnectionCharges"
+									id="field_sewerageConnectionCharges"
+									ng-model="proceedings.sewerageConnectionCharges" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_sewerageOtherCharges">Sewerage Other Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="sewerageOtherCharges" id="field_sewerageOtherCharges"
+									ng-model="proceedings.sewerageOtherCharges" />
+							</div>
+						</div><br>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label"
+									for="field_sewergeImprovementCharges">Sewerge Improvement Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="sewergeImprovementCharges"
+									id="field_sewergeImprovementCharges"
+									ng-model="proceedings.sewergeImprovementCharges" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_totalSewerageCharges">Total Sewerage Charges</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control"
+									name="totalSewerageCharges" id="field_totalSewerageCharges"
+									ng-model="proceedings.totalSewerageCharges" />
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Net Payment</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label class="control-label" for="field_totalAmount">Total Amount</label>
+								<input type="number" class="form-control" name="totalAmount"
+									id="field_totalAmount" ng-model="proceedings.totalAmount" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_totalDeduction">Total Deduction</label>
+								<input type="number" class="form-control" name="totalDeduction"
+									id="field_totalDeduction" ng-model="proceedings.totalDeduction" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_balance">Balance</label>
+								<input type="number" class="form-control" name="balance"
+									id="field_balance" ng-model="proceedings.balance" />
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

@@ -7,10 +7,12 @@
 	<div class="row">
 		<div class="col-md-3">
 			<select class="input-sm form-control" name="applicationTxnSearch"
-				id="statusSearch" ng-model="statusSearch" ng-change="onSearch(statusSearch)">
+				id="statusSearch" ng-model="statusSearch"
+				ng-change="onSearch(statusSearch)">
 				<option value="All" label="All">Select Status</option>
 				<option value="Pending" label="Pending">Pending</option>
-				<option value="In Feasibility" label="In Feasibility">In Feasibility</option>
+				<option value="In Feasibility" label="In Feasibility">In
+					Feasibility</option>
 				<option value="Approved" label="Approved">Approved</option>
 			</select>
 		</div>
@@ -52,7 +54,11 @@
 							ui-sref="customer.detail({id:applicationTxn.customer.id})">{{applicationTxn.customer.id}}</a>
 						</td>
 
-						<td>{{applicationTxn.status}}</td>
+						<td><span class="label" class="label"
+							ng-class="{'label-success'   : applicationTxn.status === 'Approved', 
+										'label-warning'   : applicationTxn.status === 'In Feasibility', 
+										'label-danger'   : applicationTxn.status === 'Pending'}">
+								{{applicationTxn.status==='Pending'?'Pending':(applicationTxn.status==='In Feasibility'?'In Feasibility':'Completed')}}</span></td>
 						<td>{{applicationTxn.applicationTypeMaster.applicationType}}
 						</td>
 						<td>{{applicationTxn.connectionTypeMaster.connectionType}}</td>

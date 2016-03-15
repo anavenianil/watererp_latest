@@ -1,0 +1,98 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "applicationTxn",
+            "otherEntityName": "applicationTxn",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "waterSupplyConnectionCharges",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "waterOtherCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "sixtyDaysConsumptionCharges",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "waterSupplyImprovementCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "meterCost",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "greenBrigadeCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "rwhsCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "totalWaterCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "sewerageConnectionCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "sewerageOtherCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "sewergeImprovementCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "totalSewerageCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "totalAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "totalDeduction",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "balance",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20160315083447",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

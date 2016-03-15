@@ -64,8 +64,8 @@ CREATE TABLE  `watererp`.`application_txn` (
   KEY `fk_applicationtxn_filenumber_id` (`file_number_id`),
   KEY `fk_applicationtxn_customer_id` (`customer_id`),
   CONSTRAINT `fk_applicationtxn_applicationtypemaster_id` FOREIGN KEY (`application_type_master_id`) REFERENCES `application_type_master` (`id`),
-  CONSTRAINT `fk_applicationtxn_connectiontypemaster_id` FOREIGN KEY (`connection_type_master_id`) REFERENCES `connection_type_master` (`id`),
   CONSTRAINT `fk_applicationtxn_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
+  CONSTRAINT `fk_applicationtxn_connectiontypemaster_id` FOREIGN KEY (`connection_type_master_id`) REFERENCES `connection_type_master` (`id`),
   CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `fk_applicationtxn_filenumber_id` FOREIGN KEY (`file_number_id`) REFERENCES `file_number` (`id`),
   CONSTRAINT `fk_applicationtxn_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
@@ -83,7 +83,7 @@ INSERT INTO `watererp`.`application_txn` VALUES  (5,'123','339','233','258','741
  (16,'123','369','hug','258','1148','gjy','369','2548','jh','ashkjhs@gmail','8876786','76876',2,2.4,3,3.6,47,'2016-03-04 00:00:00','2016-03-04 00:00:00','In Feasibility',1,1,2,2,4,2,16),
  (18,'WEY','WEY','WEY','WEY','WEY','WEY','WEY','WEY','WEY','ATA','WERYWE','ERU',4,4.8,4.2,5,8,'2016-03-04 00:00:00','2016-03-04 00:00:00','In Feasibility',2,1,3,2,5,2,18),
  (19,'hkjh','hkj','kjh','kjhkj','hkjh','kjh','hkj','kjh','kjh','89878','0907','7987',5.04,6,6,7.2,5,'2016-03-04 00:00:00','2016-03-04 00:00:00','In Feasibility',1,1,1,1,3,1,19),
- (20,'147','889','888','855','9999','9999','998','8996','999','999','9999','999',2,2.4,3,3.6,1,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',2,1,2,1,4,1,20),
+ (20,'147','889','888','855','9999','9999','998','8996','999','999','9999','999',2,2.4,3,3.6,1,'2016-03-07 00:00:00','2016-03-07 00:00:00','In Feasibility',2,1,2,1,4,1,20),
  (21,'9','88','788','78','887','788','88','778','997','5567','888','876',7,8.4,9,10.8,8,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,1,1,3,2,21),
  (22,'kjhkj','hkj','hkj','hjk','hkj','h','hkj','hkj','kjh','hkj','kjhkj','hkj',6,7.2,9,10.8,55,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,1,1,6,3,22),
  (23,'hgjh','ghjh','hjhkj','hgjj','hgjh','hkjhkjh','hjhjhg','jhgj','hkkjhj','hkhkjff','khkjkhj','kjkhkj',5.88,7,8,9.6,13,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,4,2,3,4,23),
@@ -156,7 +156,7 @@ CREATE TABLE  `watererp`.`approval_details` (
   CONSTRAINT `fk_approvaldetails_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `fk_approvaldetails_designationmaster_id` FOREIGN KEY (`designation_master_id`) REFERENCES `designation_master` (`id`),
   CONSTRAINT `fk_approvaldetails_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`approval_details`
@@ -170,7 +170,8 @@ INSERT INTO `watererp`.`approval_details` VALUES  (19,'wwqwt',NULL,'qwtqwt','wtw
  (22,'wewe',NULL,'wewey','wewey','weywey',15,NULL,NULL,15),
  (23,'wgwg','2016-03-09 00:00:00','sdgsdg','sdgsdg','sdgsdg',19,NULL,NULL,19),
  (24,'dsgds',NULL,'sdh','sdh','sdh',16,NULL,NULL,16),
- (25,'qr',NULL,'qrqwrqw','tqw','qwtqwt',18,NULL,NULL,18);
+ (25,'qr',NULL,'qrqwrqw','tqw','qwtqwt',18,NULL,NULL,18),
+ (26,'D','2016-03-15 00:00:00','Q','RWETWE','WEYWEY',20,NULL,NULL,20);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `approval_details` ENABLE KEYS */;
 
@@ -452,7 +453,8 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160311094820','jhipster','classpath:config/liquibase/changelog/20160311094820_added_entity_MainWaterSize.xml','2016-03-11 15:21:26',57,'EXECUTED','7:0e853a5e0c7721503d0203d88333bd91','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311094904','jhipster','classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml','2016-03-11 15:21:27',58,'EXECUTED','7:03b9b58c058199566e8d55fd5635b97d','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311095014','jhipster','classpath:config/liquibase/changelog/20160311095014_added_entity_DocketCode.xml','2016-03-11 15:21:27',59,'EXECUTED','7:9b3b9b3180ffc95d73eadf3d1294c5e0','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160311100455','jhipster','classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml','2016-03-11 15:35:47',60,'EXECUTED','7:02ff1a8ab9783cbd5eaec740ffa6d9cc','createTable, addForeignKeyConstraint (x12)','',NULL,'3.4.2',NULL,NULL);
+ ('20160311100455','jhipster','classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml','2016-03-11 15:35:47',60,'EXECUTED','7:02ff1a8ab9783cbd5eaec740ffa6d9cc','createTable, addForeignKeyConstraint (x12)','',NULL,'3.4.2',NULL,NULL),
+ ('20160315083447','jhipster','classpath:config/liquibase/changelog/20160315083447_added_entity_Proceedings.xml','2016-03-15 14:07:12',61,'EXECUTED','7:dd7e9c257108ab49866b8ad0020e73bb','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -671,7 +673,7 @@ CREATE TABLE  `watererp`.`docket_code` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `code` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`docket_code`
@@ -679,6 +681,8 @@ CREATE TABLE  `watererp`.`docket_code` (
 
 /*!40000 ALTER TABLE `docket_code` DISABLE KEYS */;
 LOCK TABLES `docket_code` WRITE;
+INSERT INTO `watererp`.`docket_code` VALUES  (1,'Docket code 1'),
+ (2,'Docket code 2');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `docket_code` ENABLE KEYS */;
 
@@ -815,10 +819,10 @@ CREATE TABLE  `watererp`.`feasibility_study` (
   KEY `fk_feasibilitystudy_sewersize_id` (`sewer_size_id`),
   KEY `fk_feasibilitystudy_pipesizemaster_id` (`pipe_size_master_id`),
   KEY `fk_feasibilitystudy_feasibilitystatus_id` (`feasibility_status_id`),
-  CONSTRAINT `fk_feasibilitystudy_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`),
   CONSTRAINT `fk_feasibilitystudy_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
   CONSTRAINT `fk_feasibilitystudy_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_docketcode_id` FOREIGN KEY (`docket_code_id`) REFERENCES `docket_code` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`),
   CONSTRAINT `fk_feasibilitystudy_mainseweragesize_id` FOREIGN KEY (`main_sewerage_size_id`) REFERENCES `main_sewerage_size` (`id`),
   CONSTRAINT `fk_feasibilitystudy_mainwatersize_id` FOREIGN KEY (`main_water_size_id`) REFERENCES `main_water_size` (`id`),
   CONSTRAINT `fk_feasibilitystudy_makeofseweragepipe_id` FOREIGN KEY (`make_of_sewerage_pipe_id`) REFERENCES `make_of_pipe` (`id`),
@@ -827,7 +831,7 @@ CREATE TABLE  `watererp`.`feasibility_study` (
   CONSTRAINT `fk_feasibilitystudy_schememaster_id` FOREIGN KEY (`scheme_master_id`) REFERENCES `scheme_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_sewersize_id` FOREIGN KEY (`sewer_size_id`) REFERENCES `sewer_size` (`id`),
   CONSTRAINT `fk_feasibilitystudy_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`feasibility_study`
@@ -835,6 +839,11 @@ CREATE TABLE  `watererp`.`feasibility_study` (
 
 /*!40000 ALTER TABLE `feasibility_study` DISABLE KEYS */;
 LOCK TABLES `feasibility_study` WRITE;
+INSERT INTO `watererp`.`feasibility_study` VALUES  (3,1,2,4,5,6,7,1,1,1,1,2,2,1,19,1,4,1,1),
+ (4,1,1,2,2,1,4,1,2,2,1,2,1,1,20,2,3,2,1),
+ (5,1,2,2,3,2,2,1,1,1,1,1,1,1,21,1,3,1,1),
+ (6,2,2,2,2,2,3,1,2,2,1,1,2,1,22,3,31,1,1),
+ (9,2,3,15,23,23,27,1,1,1,2,1,3,2,20,1,5,1,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `feasibility_study` ENABLE KEYS */;
 
@@ -927,7 +936,7 @@ CREATE TABLE  `watererp`.`jhi_persistent_audit_event` (
   `event_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `idx_persistent_audit_event` (`principal`,`event_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`jhi_persistent_audit_event`
@@ -1017,7 +1026,12 @@ INSERT INTO `watererp`.`jhi_persistent_audit_event` VALUES  (1,'admin','2016-02-
  (80,'customer','2016-03-10 15:18:53','AUTHENTICATION_SUCCESS'),
  (81,'admin','2016-03-10 15:53:24','AUTHENTICATION_SUCCESS'),
  (82,'customer','2016-03-10 17:21:19','AUTHENTICATION_SUCCESS'),
- (83,'admin','2016-03-11 10:14:38','AUTHENTICATION_SUCCESS');
+ (83,'admin','2016-03-11 10:14:38','AUTHENTICATION_SUCCESS'),
+ (84,'admin','2016-03-11 17:16:38','AUTHENTICATION_SUCCESS'),
+ (85,'admin','2016-03-14 09:53:55','AUTHENTICATION_SUCCESS'),
+ (86,'admin','2016-03-14 10:03:43','AUTHENTICATION_SUCCESS'),
+ (87,'admin','2016-03-14 10:09:25','AUTHENTICATION_SUCCESS'),
+ (88,'admin','2016-03-15 10:28:56','AUTHENTICATION_SUCCESS');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
@@ -1207,7 +1221,17 @@ INSERT INTO `watererp`.`jhi_persistent_audit_evt_data` VALUES  (1,'remoteAddress
  (82,'remoteAddress','0:0:0:0:0:0:0:1'),
  (82,'sessionId','AE3CB5BA4F06E1DE4D928BA6D9D5F0A1'),
  (83,'remoteAddress','0:0:0:0:0:0:0:1'),
- (83,'sessionId','83E1E00936C3C20ECBB5F8AE48543108');
+ (83,'sessionId','83E1E00936C3C20ECBB5F8AE48543108'),
+ (84,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (84,'sessionId','7CECE0DB5AD1E96A7E4F60C9A0D686CF'),
+ (85,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (85,'sessionId','CD2F4970E49B8F6C4451BDF6431B4145'),
+ (86,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (86,'sessionId','9B16A22E5C0EDD4E1A7483946F39691F'),
+ (87,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (87,'sessionId','0CE2E094F9B45795E8B04F95C006AEC8'),
+ (88,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (88,'sessionId','61AA31C4C66F9DEBAFC44B0382C82597');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
@@ -1237,15 +1261,19 @@ CREATE TABLE  `watererp`.`jhi_persistent_token` (
 LOCK TABLES `jhi_persistent_token` WRITE;
 INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==',5,'/FPZJ9OhXHNXmMOFgz7obg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('2uRUyClVWXV8AlYMNeuJOw==',3,'PErAzkiwxOnl+ZDZP6T7JQ==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('3+5ue5QHIAl3gaEJu2oyFQ==',3,'VKZnSsNabZGNesRM+Hpsvg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('4Kz54liz72Tw0RjO2Zrkpw==',3,'x3C2IoyZxxmQ8IZ4lG8oMg==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('6B2RG6/uWQnWC28vOw8aXg==',3,'8QX7Ux+CmA4n198EaajbnA==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('7Ytkb8b+j1F3nPGWDNtKcw==',3,'l96/eI6viuEUtDy5AibxbA==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('9iL/4QMAvR0xB64rW5HESw==',3,'/k/ylVdhu5TQbQGtpI5N0w==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
+ ('BFMeF7yubUPWeHMlxnpHhg==',3,'86Dlw7pit1sjL3P4rA601A==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('DEqQipDM3iLfE1PFx+mwRA==',3,'rlSkhLwJf+8q3MOatcrcDA==','2016-02-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('N0VbVqugqcpOaPe2ycnLMQ==',3,'oz13ao52OiBVQ7dcvXTwSw==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('uBmBvYHKZMXr5UHwlzKAPA==',3,'oIXVYnHZ2CAqS/lxhNHtBQ==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -1339,7 +1367,7 @@ CREATE TABLE  `watererp`.`main_sewerage_size` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `size` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`main_sewerage_size`
@@ -1347,6 +1375,9 @@ CREATE TABLE  `watererp`.`main_sewerage_size` (
 
 /*!40000 ALTER TABLE `main_sewerage_size` DISABLE KEYS */;
 LOCK TABLES `main_sewerage_size` WRITE;
+INSERT INTO `watererp`.`main_sewerage_size` VALUES  (1,10),
+ (2,11),
+ (3,12);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `main_sewerage_size` ENABLE KEYS */;
 
@@ -1360,7 +1391,7 @@ CREATE TABLE  `watererp`.`main_water_size` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `size` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`main_water_size`
@@ -1368,6 +1399,9 @@ CREATE TABLE  `watererp`.`main_water_size` (
 
 /*!40000 ALTER TABLE `main_water_size` DISABLE KEYS */;
 LOCK TABLES `main_water_size` WRITE;
+INSERT INTO `watererp`.`main_water_size` VALUES  (1,5),
+ (2,6),
+ (3,7);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `main_water_size` ENABLE KEYS */;
 
@@ -1381,7 +1415,7 @@ CREATE TABLE  `watererp`.`make_of_pipe` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `make_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`make_of_pipe`
@@ -1389,6 +1423,8 @@ CREATE TABLE  `watererp`.`make_of_pipe` (
 
 /*!40000 ALTER TABLE `make_of_pipe` DISABLE KEYS */;
 LOCK TABLES `make_of_pipe` WRITE;
+INSERT INTO `watererp`.`make_of_pipe` VALUES  (1,'Pipe make 1'),
+ (2,'Pipe Make 2');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `make_of_pipe` ENABLE KEYS */;
 
@@ -1446,7 +1482,7 @@ CREATE TABLE  `watererp`.`menu_item` (
   `path` varchar(255) NOT NULL,
   `modified_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`menu_item`
@@ -1462,7 +1498,9 @@ INSERT INTO `watererp`.`menu_item` VALUES  (1,'Module','#/modules','2016-03-09 0
  (6,'Module 2 Menu Items','#/module2MenuItems','2016-03-10 00:00:00'),
  (7,'Url 2 Roles','#/url2Roles','2016-03-10 00:00:00'),
  (8,'Application Details','#/applicationTxns/all','2016-03-10 00:00:00'),
- (9,'Manage Cash Point','#/manageCashPoints','2016-03-10 00:00:00');
+ (9,'Manage Cash Point','#/manageCashPoints','2016-03-10 00:00:00'),
+ (10,'Feasibility Study','#/feasibilityStudys','2016-03-11 00:00:00'),
+ (11,'Prepare Proceedings','#/proceedingss','2016-03-15 00:00:00');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
@@ -1481,7 +1519,7 @@ CREATE TABLE  `watererp`.`menu_item2_url` (
   KEY `fk_menuitem2url_url_id` (`url_id`),
   CONSTRAINT `fk_menuitem2url_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`),
   CONSTRAINT `fk_menuitem2url_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`menu_item2_url`
@@ -1497,7 +1535,9 @@ INSERT INTO `watererp`.`menu_item2_url` VALUES  (1,1,1),
  (6,6,6),
  (7,7,7),
  (8,8,8),
- (9,9,9);
+ (9,9,9),
+ (10,10,10),
+ (11,11,11);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
 
@@ -1542,7 +1582,7 @@ CREATE TABLE  `watererp`.`module2_menu_item` (
   KEY `fk_module2menuitem_menuitem_id` (`menu_item_id`),
   CONSTRAINT `fk_module2menuitem_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`),
   CONSTRAINT `fk_module2menuitem_module_id` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`module2_menu_item`
@@ -1558,7 +1598,9 @@ INSERT INTO `watererp`.`module2_menu_item` VALUES  (1,1,2,2),
  (6,6,1,6),
  (7,7,1,7),
  (8,8,2,8),
- (9,9,2,9);
+ (9,9,2,9),
+ (10,10,2,10),
+ (11,3,2,11);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
@@ -1723,6 +1765,45 @@ INSERT INTO `watererp`.`pipe_size_master` VALUES  (1,15),
  (5,50);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `pipe_size_master` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`proceedings`
+--
+
+DROP TABLE IF EXISTS `watererp`.`proceedings`;
+CREATE TABLE  `watererp`.`proceedings` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `water_supply_connection_charges` float NOT NULL,
+  `water_other_charges` float DEFAULT NULL,
+  `sixty_days_consumption_charges` float NOT NULL,
+  `water_supply_improvement_charges` float DEFAULT NULL,
+  `meter_cost` float DEFAULT NULL,
+  `green_brigade_charges` float DEFAULT NULL,
+  `rwhs_charges` float DEFAULT NULL,
+  `total_water_charges` float DEFAULT NULL,
+  `sewerage_connection_charges` float DEFAULT NULL,
+  `sewerage_other_charges` float DEFAULT NULL,
+  `sewerge_improvement_charges` float DEFAULT NULL,
+  `total_sewerage_charges` float DEFAULT NULL,
+  `total_amount` float DEFAULT NULL,
+  `total_deduction` float DEFAULT NULL,
+  `balance` float DEFAULT NULL,
+  `application_txn_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_proceedings_applicationtxn_id` (`application_txn_id`),
+  CONSTRAINT `fk_proceedings_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`proceedings`
+--
+
+/*!40000 ALTER TABLE `proceedings` DISABLE KEYS */;
+LOCK TABLES `proceedings` WRITE;
+INSERT INTO `watererp`.`proceedings` VALUES  (1,1,3,2,4,5,6,7,8,9,10,11,12,13,14,15,NULL);
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `proceedings` ENABLE KEYS */;
 
 
 --
@@ -1972,7 +2053,7 @@ CREATE TABLE  `watererp`.`scheme_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `scheme_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`scheme_master`
@@ -1980,6 +2061,8 @@ CREATE TABLE  `watererp`.`scheme_master` (
 
 /*!40000 ALTER TABLE `scheme_master` DISABLE KEYS */;
 LOCK TABLES `scheme_master` WRITE;
+INSERT INTO `watererp`.`scheme_master` VALUES  (1,'Scheme 1'),
+ (2,'Scheme 2');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `scheme_master` ENABLE KEYS */;
 
@@ -2089,7 +2172,7 @@ CREATE TABLE  `watererp`.`tariff_category_master` (
   `tariff_unit` int(11) NOT NULL,
   `tariff_value` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`tariff_category_master`
@@ -2097,6 +2180,8 @@ CREATE TABLE  `watererp`.`tariff_category_master` (
 
 /*!40000 ALTER TABLE `tariff_category_master` DISABLE KEYS */;
 LOCK TABLES `tariff_category_master` WRITE;
+INSERT INTO `watererp`.`tariff_category_master` VALUES  (1,'Tariff category 1',1,100),
+ (2,'Tariff Category 2',2,200);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `tariff_category_master` ENABLE KEYS */;
 
@@ -2132,7 +2217,7 @@ CREATE TABLE  `watererp`.`url` (
   `url_pattern` varchar(255) NOT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`url`
@@ -2148,7 +2233,9 @@ INSERT INTO `watererp`.`url` VALUES  (1,'/modules',1),
  (6,'/module2MenuItems',1),
  (7,'/url2Roles',1),
  (8,'/applicationTxns/all',1),
- (9,'/manageCashPoints',1);
+ (9,'/manageCashPoints',1),
+ (10,'/feasibilityStudys',1),
+ (11,'/proceedingss',1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
@@ -2167,7 +2254,7 @@ CREATE TABLE  `watererp`.`url2_role` (
   KEY `fk_url2role_authority_name` (`authority_name`),
   CONSTRAINT `fk_url2role_authority_name` FOREIGN KEY (`authority_name`) REFERENCES `jhi_authority` (`name`),
   CONSTRAINT `fk_url2role_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`url2_role`
@@ -2185,7 +2272,9 @@ INSERT INTO `watererp`.`url2_role` VALUES  (1,1,'ROLE_ADMIN'),
  (8,7,'ROLE_ADMIN'),
  (9,8,'ROLE_ADMIN'),
  (11,9,'ROLE_CUSTOMER'),
- (12,9,'ROLE_ADMIN');
+ (12,9,'ROLE_ADMIN'),
+ (13,10,'ROLE_ADMIN'),
+ (14,11,'ROLE_ADMIN');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 

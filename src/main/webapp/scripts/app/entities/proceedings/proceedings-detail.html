@@ -1,0 +1,150 @@
+
+<div>
+    <h2><span>Proceedings</span> {{proceedings.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>WaterSupplyConnectionCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.waterSupplyConnectionCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>WaterOtherCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.waterOtherCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SixtyDaysConsumptionCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.sixtyDaysConsumptionCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>WaterSupplyImprovementCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.waterSupplyImprovementCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterCost</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.meterCost}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>GreenBrigadeCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.greenBrigadeCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>RwhsCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.rwhsCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TotalWaterCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.totalWaterCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SewerageConnectionCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.sewerageConnectionCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SewerageOtherCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.sewerageOtherCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SewergeImprovementCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.sewergeImprovementCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TotalSewerageCharges</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.totalSewerageCharges}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TotalAmount</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.totalAmount}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TotalDeduction</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.totalDeduction}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Balance</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{proceedings.balance}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>applicationTxn</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:proceedings.applicationTxn.id})">{{proceedings.applicationTxn.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
