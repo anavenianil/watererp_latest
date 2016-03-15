@@ -78,7 +78,7 @@ angular.module('watererpApp')
                     })
                 }]
             })*/
-            .state('proceedings.edit', {
+            /*.state('proceedings.edit', {
                 parent: 'proceedings',
                 url: '/{id}/edit',
                 data: {
@@ -100,7 +100,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('proceedings.delete', {
                 parent: 'proceedings',
                 url: '/{id}/delete',
@@ -126,7 +126,7 @@ angular.module('watererpApp')
             })
             
             /**
-             * Created state not to show in pop up
+             * Created state to create form not to show in pop up
              */
             .state('proceedings.new', {
                 parent: 'proceedings',
@@ -143,6 +143,25 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
-            });
+            })
         
+        /**
+         * Created state for edit
+         */
+            .state('proceedings.edit', {
+                parent: 'proceedings',
+                url: '/edit/:proceedingsId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Proceedingss'
+                },
+                views: {
+                    'content@': {
+                    	 templateUrl: 'scripts/app/entities/proceedings/proceedings-dialog.html',
+                         controller: 'ProceedingsDialogController'
+                    }
+                },
+                resolve: {
+                }
+            });
     });

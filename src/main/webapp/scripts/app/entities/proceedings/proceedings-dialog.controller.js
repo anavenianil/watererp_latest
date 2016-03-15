@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ProceedingsDialogController', function ($scope, $state, Proceedings, ParseLinks, ApplicationTxn) {
+    .controller('ProceedingsDialogController', function ($scope, $state, Proceedings, ParseLinks, ApplicationTxn, $stateParams) {
 
         $scope.proceedingss = [];
         $scope.predicate = 'id';
@@ -17,9 +17,19 @@ angular.module('watererpApp')
         $scope.getCustomer = function(fileNo){
         	ApplicationTxn.get({id : fileNo}, function(result) {
                 $scope.applicationTxn = result;
-                $scope.feasibilityStudy.applicationTxn = $scope.applicationTxn;
-                $scope.feasibilityStudy.applicationTxn.id = $scope.applicationTxn.id;
+                $scope.proceedings.applicationTxn = $scope.applicationTxn;
+                $scope.proceedings.applicationTxn.id = $scope.applicationTxn.id;
             });	
+        }
+        
+        /**
+         * when clicked on edit
+         */
+        if($stateParams.proceedingsId != null){
+        	$scope.proceedingsId = $stateParams.proceedingsId;
+        	 Proceedings.get({id : $scope.proceedingsId}, function(result) {
+                 $scope.proceedings = result;
+             });
         }
         
         
@@ -43,6 +53,7 @@ angular.module('watererpApp')
             } else {
                 Proceedings.save($scope.proceedings, onSaveSuccess, onSaveError);
             }
+            $state.go('proceedings');
         };
         
         
