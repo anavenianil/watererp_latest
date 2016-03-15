@@ -1597,10 +1597,10 @@ INSERT INTO `watererp`.`module2_menu_item` VALUES  (1,1,2,2),
  (5,5,1,5),
  (6,6,1,6),
  (7,7,1,7),
- (8,8,2,8),
- (9,9,2,9),
- (10,10,2,10),
- (11,3,2,11);
+ (8,2,2,8),
+ (9,5,2,9),
+ (10,3,2,10),
+ (11,4,2,11);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
