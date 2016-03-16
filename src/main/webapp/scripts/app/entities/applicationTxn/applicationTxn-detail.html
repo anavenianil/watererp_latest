@@ -6,8 +6,10 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">Application For New
-					Connection<span class="label" class="label"
-					ng-class="{ 'label-success'   : applicationTxn.status === 'Approved', 'label-warning'   : applicationTxn.status === 'In Feasibility', 'label-danger'   : applicationTxn.status === 'Pending'}">
+					Connection<span class="label"
+					ng-class="{ 'label-success'   : applicationTxn.status === 'Approved', 
+								'label-warning'   : applicationTxn.status === 'In Feasibility', 
+								'label-danger'   : applicationTxn.status === 'Pending'}">
 					{{applicationTxn.status==='Pending'?'Pending':(applicationTxn.status==='In Feasibility'?'In Feasibility':'Completed')}}</span></h3>
 			</div>
 			<div class="list-group">
@@ -206,7 +208,6 @@
 								<label>Connection Type</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.connectionTypeMaster.connectionType}}</h5>
 							</div>
-
 						</div>
 						<div class="row">
 							<div class="col-sm-2">
@@ -269,27 +270,6 @@
 	<div id="approveModal" class="modal" name="aproveForm">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<!-- <form name="confirmForm">
-					<div class="modal-header">
-						<h4 class="modal-title">Confirmation message</h4>
-					</div>
-					<div class="modal-body">
-						<p>Request Approved Successfully!</p>
-						<div>
-							<label>Application No.: </label>{{applicationTxn.id}}
-						</div>
-						<div>
-							<label>File No.: </label>{{applicationTxn.fileNumber.fileNo}}
-						</div>
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal"
-							ng-click="clear()" ui-sref="applicationTxn.all">
-							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
-						</button>
-					</div>
-				</form> -->
 				<form name="editForm" role="form" novalidate ng-submit="approvalDetailsSave()">
 					<div class="panel panel-primary">
 						<div class="panel-heading clearfix">

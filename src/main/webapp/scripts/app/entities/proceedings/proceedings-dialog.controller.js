@@ -40,6 +40,7 @@ angular.module('watererpApp')
             $scope.$emit('watererpApp:proceedingsUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('proceedings');
         };
 
         var onSaveError = function (result) {
@@ -53,12 +54,9 @@ angular.module('watererpApp')
             } else {
                 Proceedings.save($scope.proceedings, onSaveSuccess, onSaveError);
             }
-            $state.go('proceedings');
         };
         
-        
-        
-        
+
         $scope.loadAll = function() {
             Proceedings.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -104,6 +102,27 @@ angular.module('watererpApp')
                 id: null
             };
         };
+        
+        
+        /**
+         * when approved
+         */
+        $scope.load = function (id) {
+        	$('#approveModal').modal('show');
+            ApplicationTxn.get({id: id}, function(result) {
+                $scope.applicationTxn = result;
+                $scope.approvalDetails.applicationTxn.id = $scope.applicationTxn.id;
+                $scope.approvalDetails.customer.id = $scope.applicationTxn.id
+            });
+        };
+        
+        $scope.approvalDetailsSave = function(){
+        	$('#approveModal').modal('hide');
+        	console.log(JSON.stringify($scope.approvalDetails));
+            ApprovalDetails.save(($scope.approvalDetails), function(){
+            	$state.go('applicationTxn.all');
+            });
+        }
     });
 
 

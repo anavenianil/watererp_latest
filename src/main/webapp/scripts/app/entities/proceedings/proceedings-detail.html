@@ -1,150 +1,325 @@
-
 <div>
-    <h2><span>Proceedings</span> {{proceedings.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <span>WaterSupplyConnectionCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.waterSupplyConnectionCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>WaterOtherCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.waterOtherCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SixtyDaysConsumptionCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.sixtyDaysConsumptionCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>WaterSupplyImprovementCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.waterSupplyImprovementCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>MeterCost</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.meterCost}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>GreenBrigadeCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.greenBrigadeCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>RwhsCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.rwhsCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>TotalWaterCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.totalWaterCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SewerageConnectionCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.sewerageConnectionCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SewerageOtherCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.sewerageOtherCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SewergeImprovementCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.sewergeImprovementCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>TotalSewerageCharges</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.totalSewerageCharges}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>TotalAmount</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.totalAmount}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>TotalDeduction</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.totalDeduction}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Balance</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.balance}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>applicationTxn</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:proceedings.applicationTxn.id})">{{proceedings.applicationTxn.id}}</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+	<div>
+		<h2>
+			<span>Proceedings</span> {{proceedings.id}}
+		</h2>
+		<div>
+			<div class="panel panel-primary">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title pull-left">
+						Proceedings For New Connection<span class="label"
+							ng-class="{ 'label-success'   : proceedings.applicationTxn.status === 'Approved', 
+								'label-warning'   : proceedings.applicationTxn.status === 'In Feasibility', 
+								'label-danger'   : proceedings.applicationTxn.status === 'Pending'}">
+							{{proceedings.applicationTxn.status==='Pending'?'Pending':(proceedings.applicationTxn.status==='In
+							Feasibility'?'In Feasibility':'Completed')}}</span>
+					</h3>
+				</div>
+				<div class="list-group">
+					<div class="list-group-item">
+						<fieldset>
+							<legend></legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>File Number</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.fileNumber.fileNo}}</h5>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>APPLICANT DETAILS</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>First Name</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.customer.firstName}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Middle Name</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.customer.middleName}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Last Name</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.customer.lastName}}</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>House No</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.sHouseNo}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Street</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.street}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Area Code</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.areaCode}}</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Govt. Official No.</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.govtOfficialNo}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Pincode</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.pincode}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Area.</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.area}}</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Telephone</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.telephoneNumber}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Mobile</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.mobile}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>section.</label>
+									<h5 class="list-group-item-heading">{{proceedings.applicationTxn.section}}</h5>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>Connection Detail</legend>
+							<div class="row">
+								<div class="col-sm-3">
+									<label>Plot Area In Yards</label>
+									<h5 class="list-group-item-heading">{{}}</h5>
+								</div>
+								<div class="col-sm-3">
+									<label>Plot Area In Sq. Mtrs.</label>
+									<h5 class="list-group-item-heading">{{}}</h5>
+								</div>
+								<div class="col-sm-3">
+									<label>Water Connection Size</label>
+									<h5 class="list-group-item-heading">{{}}</h5>
+								</div>
+								<div class="col-sm-3">
+									<label>Sewerage</label>
+									<h5 class="list-group-item-heading">{{}}</h5>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<div class="row">
+							<div class="col-sm-6">
+								<fieldset>
+									<legend>Water Supply Connection Charges</legend>
+									<div class="row">
+										<label class="col-sm-8">Water Supply Connection
+											Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.waterSupplyConnectionCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Water Other Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.waterOtherCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Sixty Days Consumption Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.sixtyDaysConsumptionCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Water Supply Improvement
+											Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.waterSupplyImprovementCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Meter Cost</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.meterCost}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Green Brigade Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.greenBrigadeCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">RWHS Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.rwhsCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Total Water Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.totalWaterCharges}}</h5>
+									</div>
+								</fieldset>
+							</div>
+							<div class="col-sm-6">
+								<fieldset>
+									<legend>Sewerage Connection Charges</legend>
+									<div class="row">
+										<label class="col-sm-8">Sewerage Connection Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.sewerageConnectionCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Sewerage Other Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.sewerageOtherCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Sewerge Improvement Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.sewergeImprovementCharges}}</h5>
+									</div>
+									<div class="row">
+										<label class="col-sm-8">Total Sewerage Charges</label>
+										<h5 class="list-group-item-heading col-sm-4">{{proceedings.totalSewerageCharges}}</h5>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+						<br> <br>
+						<fieldset>
+							<legend>NET PAYMENT</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Total Amount</label>
+									<h5 class="list-group-item-heading">{{proceedings.totalAmount}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Total Deduction</label>
+									<h5 class="list-group-item-headng">{{proceedings.totalDeduction}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Balance</label>
+									<h5 class="list-group-item-heading">{{proceedings.balance}}</h5>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button type="submit" onclick="window.history.back()"
+			class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+				Back</span>
+		</button>
+		<button type="button" class="btn btn-success pull-right" 
+				ng-click="getApplicationTxn(proceedings.applicationTxn.id)">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+		</button>
 
-    <button type="submit"
-            onclick="window.history.back()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
+		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+
+		<button type="button" class="btn btn-danger pull-right"
+			ng-click="decline()">
+			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
+		</button>
+	</div>
+	
+	
+	
+	<div id="approveModal" class="modal" name="aproveForm">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form name="editForm" role="form" novalidate
+					ng-submit="approvalDetailsSave()">
+					<div class="panel panel-primary">
+						<div class="panel-heading clearfix">
+							<h3 class="panel-title pull-left">Application Approval
+								Details</h3>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true" ng-click="clear()">&times;</button>
+						</div>
+						<div class="list-group">
+							<div class="list-group-item">
+								<div class="modal-body">
+									<jh-alert-error></jh-alert-error>
+									<div class="row">
+										<div class="col-sm-3">
+											<label for="field_applicationTxn">Application Txn Id</label>
+											<input type="text" class="form-control" name="applicationTxn"
+												id="field_applicationTxn"
+												ng-model="approvalDetails.applicationTxn.id" disabled />
+										</div>
+										<div class="col-sm-3">
+											<label for="field_customer">Customer Id</label> <input
+												type="text" class="form-control" id="field_customer"
+												name="customer" ng-model="approvalDetails.customer.id"
+												disabled />
+
+										</div>
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedDate">Approved
+												Date</label> <input id="field_approvedDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="approvalDetails.approvedDate"
+												is-open="datePickerForApprovedDate.status.opened" /> <span
+												class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForApprovedDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
+										<div class="col-sm-3">
+											<label for="field_feasibilityStatus">Feasibility
+												Status</label> <select class="form-control"
+												id="field_feasibilityStatus" name="feasibilityStatus"
+												ng-model="approvalDetails.feasibilityStatus"
+												ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
+												<option value=""></option>
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" for="field_remarks">Remarks</label>
+											<input type="text" class="form-control" name="remarks"
+												id="field_remarks" ng-model="approvalDetails.remarks" />
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedEmpNo">Approved
+												Emp. No.</label> <input type="text" class="form-control"
+												name="approvedEmpNo" id="field_approvedEmpNo"
+												ng-model="approvalDetails.approvedEmpNo" />
+										</div>
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedEmpName">Approved
+												Emp. Name</label> <input type="text" class="form-control"
+												name="approvedEmpName" id="field_approvedEmpName"
+												ng-model="approvalDetails.approvedEmpName" />
+										</div>
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedEmpDesig">Approved
+												Emp. Desig.</label> <input type="text" class="form-control"
+												name="approvedEmpDesig" id="field_approvedEmpDesig"
+												ng-model="approvalDetails.approvedEmpDesig" />
+										</div>
+										<div class="col-sm-3">
+											<label for="field_designationMaster">Designation
+												Master</label> <select class="form-control"
+												id="field_designationMaster" name="designationMaster"
+												ng-model="approvalDetails.designationMaster"
+												ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
+												<option value=""></option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal" ng-click="clear()">
+										<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+									</button>
+									<button type="submit"
+										ng-disabled="editForm.$invalid || isSaving"
+										class="btn btn-primary">
+										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

@@ -23,14 +23,14 @@
 									class="btn btn-primary glyphicon glyphicon-search"
 									ng-click="getCustomer(feasibilityStudy.fileNo)"></button>
 							</div>
-							<div class="col-sm-3">
+							<!-- <div class="col-sm-3">
 								<label for="field_applicationTxn">applicationTxn</label> <select
 									class="form-control" id="field_applicationTxn"
 									name="applicationTxn" ng-model="proceedings.applicationTxn"
 									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
 									<option value=""></option>
 								</select>
-							</div>
+							</div> -->
 						</div>
 					</fieldset>
 					<br>
@@ -56,7 +56,8 @@
 									disabled />
 							</div>
 						</div>
-					</fieldset><br>
+					</fieldset>
+					<br>
 					<fieldset>
 						<legend>Service Premises Area</legend>
 						<div class="row">
@@ -87,8 +88,7 @@
 								<label>govtOfficialNo</label> <input type="text"
 									class="form-control" id="field_govtOfficialNo"
 									name="govtOfficialNo"
-									ng-model="proceedings.applicationTxn.govtOfficialNo"
-									disabled>
+									ng-model="proceedings.applicationTxn.govtOfficialNo" disabled>
 							</div>
 							<div class="col-sm-4">
 								<label>Pincode</label> <input type="text" class="form-control"
@@ -105,8 +105,7 @@
 							<div class="col-sm-4">
 								<label>Telephone</label> <input type="text" class="form-control"
 									id="field_telephoneNumber" name="telephoneNumber"
-									ng-model="proceedings.applicationTxn.telephoneNumber"
-									disabled>
+									ng-model="proceedings.applicationTxn.telephoneNumber" disabled>
 							</div>
 							<div class="col-sm-4">
 								<label>Mobile</label> <input type="text" class="form-control"
@@ -122,7 +121,7 @@
 					</fieldset>
 					<br>
 					<fieldset>
-					<legend>Plot Details</legend>
+						<legend>Plot Details</legend>
 					</fieldset>
 					<fieldset>
 						<legend>Water Supply Connection Charges</legend>
@@ -241,7 +240,8 @@
 						<div class="row">
 							<div class="col-sm-3">
 								<label class="control-label"
-									for="field_sewerageConnectionCharges">Sewerage Connection Charges</label>
+									for="field_sewerageConnectionCharges">Sewerage
+									Connection Charges</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="number" class="form-control"
@@ -250,18 +250,21 @@
 									ng-model="proceedings.sewerageConnectionCharges" />
 							</div>
 							<div class="col-sm-3">
-								<label class="control-label" for="field_sewerageOtherCharges">Sewerage Other Charges</label>
+								<label class="control-label" for="field_sewerageOtherCharges">Sewerage
+									Other Charges</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="number" class="form-control"
 									name="sewerageOtherCharges" id="field_sewerageOtherCharges"
 									ng-model="proceedings.sewerageOtherCharges" />
 							</div>
-						</div><br>
+						</div>
+						<br>
 						<div class="row">
 							<div class="col-sm-3">
 								<label class="control-label"
-									for="field_sewergeImprovementCharges">Sewerge Improvement Charges</label>
+									for="field_sewergeImprovementCharges">Sewerge
+									Improvement Charges</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="number" class="form-control"
@@ -270,7 +273,8 @@
 									ng-model="proceedings.sewergeImprovementCharges" />
 							</div>
 							<div class="col-sm-3">
-								<label class="control-label" for="field_totalSewerageCharges">Total Sewerage Charges</label>
+								<label class="control-label" for="field_totalSewerageCharges">Total
+									Sewerage Charges</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="number" class="form-control"
@@ -284,14 +288,16 @@
 						<legend>Net Payment</legend>
 						<div class="row">
 							<div class="col-sm-4">
-								<label class="control-label" for="field_totalAmount">Total Amount</label>
-								<input type="number" class="form-control" name="totalAmount"
-									id="field_totalAmount" ng-model="proceedings.totalAmount" />
+								<label class="control-label" for="field_totalAmount">Total
+									Amount</label> <input type="number" class="form-control"
+									name="totalAmount" id="field_totalAmount"
+									ng-model="proceedings.totalAmount" />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_totalDeduction">Total Deduction</label>
-								<input type="number" class="form-control" name="totalDeduction"
-									id="field_totalDeduction" ng-model="proceedings.totalDeduction" />
+								<label class="control-label" for="field_totalDeduction">Total
+									Deduction</label> <input type="number" class="form-control"
+									name="totalDeduction" id="field_totalDeduction"
+									ng-model="proceedings.totalDeduction" />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_balance">Balance</label>
@@ -302,6 +308,11 @@
 					</fieldset>
 				</div>
 				<div class="modal-footer">
+					<button class="btn btn-info pull-left" onclick="window.history.back()"
+						type="button">
+						<span class="glyphicon glyphicon-arrow-left"></span> <span>
+							Back</span>
+					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>

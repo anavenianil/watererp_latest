@@ -14,7 +14,6 @@ angular.module('watererpApp')
                 $scope.applicationTxn = result;
                 $scope.approvalDetails.applicationTxn.id = $scope.applicationTxn.id;
                 $scope.approvalDetails.customer.id = $scope.applicationTxn.id
-                //$scope.approvalDetails.approvedDate = Date();
             });
         };
         var unsubscribe = $rootScope.$on('watererpApp:applicationTxnUpdate', function(event, result) {

@@ -57,7 +57,17 @@ public class ApprovalDetailsResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("approvalDetails", "idexists", "A new approvalDetails cannot already have an ID")).body(null);
         }
         ApplicationTxn applicationTxn = applicationTxnRepository.findOne(approvalDetails.getApplicationTxn().getId());
-        applicationTxn.setStatus("In Feasibility");
+        String status = applicationTxn.getStatus();
+        if("Pending".equals(status)){
+        	applicationTxn.setStatus("In Feasibility");
+        }
+        else if("In Feasibility".equals(status)){
+        	applicationTxn.setStatus("In Proceedings");
+        }
+        else if("In Proceedings".equals(status)){
+        	applicationTxn.setStatus("Connection Approved");
+        }
+        
         applicationTxnRepository.save(applicationTxn);
         
         ApprovalDetails result = approvalDetailsRepository.save(approvalDetails);
