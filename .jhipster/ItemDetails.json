@@ -1,0 +1,39 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "itemCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "itemName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "itemDescription",
+            "fieldType": "String"
+        },
+	{
+            "fieldId": 4,
+            "fieldName": "size",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "itemQuantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "unitPrice",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20160317071301",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

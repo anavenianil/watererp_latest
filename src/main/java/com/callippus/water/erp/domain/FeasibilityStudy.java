@@ -1,13 +1,23 @@
 package com.callippus.water.erp.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
 
 /**
  * A FeasibilityStudy.
@@ -87,7 +97,19 @@ public class FeasibilityStudy implements Serializable {
     @JoinColumn(name = "feasibility_status_id")
     private FeasibilityStatus feasibilityStatus;
 
-    public Long getId() {
+    @OneToMany(mappedBy = "feasibilityStudy", cascade=CascadeType.ALL)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private List<ItemRequired> itemRequired = new ArrayList<>();
+    
+    public List<ItemRequired> getItemRequired() {
+		return itemRequired;
+	}
+
+	public void setItemRequired(List<ItemRequired> itemRequired) {
+		this.itemRequired = itemRequired;
+	}
+
+	public Long getId() {
         return id;
     }
 

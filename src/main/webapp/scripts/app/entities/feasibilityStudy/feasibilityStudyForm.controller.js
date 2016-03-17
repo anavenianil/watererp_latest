@@ -3,12 +3,13 @@
 angular.module('watererpApp')
     .controller('FeasibilityStudyFormController', function ($scope, $state, FeasibilityStudy, SchemeMaster, TariffCategoryMaster, 
     		MakeOfPipe, MainWaterSize, MainSewerageSize, DocketCode, ApplicationTxn, CategoryMaster, SewerSize, PipeSizeMaster, 
-    		FeasibilityStatus, ParseLinks, $stateParams) {
+    		FeasibilityStatus, ParseLinks, $stateParams, ItemDetails) {
 
         $scope.feasibilityStudys = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.feasibilityStudy = {};
 
         $scope.schememasters = SchemeMaster.query();
         $scope.tariffcategorymasters = TariffCategoryMaster.query();
@@ -21,7 +22,9 @@ angular.module('watererpApp')
         $scope.sewersizes = SewerSize.query();
         $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.feasibilitystatuss = FeasibilityStatus.query();
+        $scope.itemDetailss = ItemDetails.query();
         $scope.applicationtxn = {};
+        $scope.feasibilityStudy.applicationTxn = {};
         
         if($stateParams.feasibilityStudyId != null){
         	$scope.feasibilityStudyId = $stateParams.feasibilityStudyId;
@@ -42,6 +45,7 @@ angular.module('watererpApp')
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('feasibilityStudy');
         };
 
         var onSaveError = function (result) {
@@ -55,7 +59,6 @@ angular.module('watererpApp')
             } else {
                 FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError);
             }
-            $state.go('feasibilityStudy');
         };
         
         $scope.reset = function() {
@@ -99,4 +102,24 @@ angular.module('watererpApp')
 	           	section: null
             }
         };
+        
+        
+        $scope.feasibilityStudy.itemRequired = [];
+        $scope.count = 0;
+        $scope.itemArr = [];
+        $scope.createItemArr = function(){
+        	$scope.count = $scope.count +1;
+       		$scope.itemArr.push($scope.count);
+       		$scope.feasibilityStudy.itemRequired[$scope.count]= {};
+       		//$scope.feasibilityStudy.itemRequired[$scope.count].feasibilityStudy = {};
+       		$scope.feasibilityStudy.itemRequired[$scope.count].applicationTxn = {};
+       		$scope.feasibilityStudy.itemRequired[$scope.count].applicationTxn.id = $scope.feasibilityStudy.applicationTxn.id;
+        }
+        
+       /* $scope.items = function(){
+        	for (var item in $scope.feasibilityStudy.itemRequired) {
+        		$scope.feasibilityStudy.itemRequired.push($scope.feasibilityStudy.itemRequired[item]);
+        	}
+        }*/
+        
     });

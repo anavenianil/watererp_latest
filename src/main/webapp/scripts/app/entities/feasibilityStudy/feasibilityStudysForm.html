@@ -112,8 +112,7 @@
 							<div class="col-sm-4">
 								<label>Area</label> <input type="text" class="form-control"
 									id="field_area" name="area"
-									ng-model="feasibilityStudy.applicationTxn.area"
-									disabled>
+									ng-model="feasibilityStudy.applicationTxn.area" disabled>
 							</div>
 						</div>
 						<div class="row">
@@ -298,6 +297,42 @@
 							</div>
 						</div>
 					</fieldset>
+					<fieldset>
+						<legend>Items Required</legend>
+						<div ng-repeat="x in itemArr track by $index">
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_itemName">Item Name</label> <select
+										class="form-control" id="field_itemName" name="itemName"
+										ng-model="feasibilityStudy.itemRequired[x].itemDetails"
+										ng-options="itemDetails as itemDetails.itemName for itemDetails in itemDetailss track by itemDetails.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_quantity">Quantity</label>
+									<input type="number" class="form-control" name="quantity"
+										id="field_quantity"
+										ng-model="feasibilityStudy.itemRequired[x].quantity" />
+								</div>
+								<!-- <div class="col-sm-4">
+									<label for="field_applicationTxn">applicationTxn</label> <select
+										class="form-control" id="field_applicationTxn"
+										name="applicationTxn" ng-model="feasibilityStudy.itemRequired[x].applicationTxn"
+										ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+										<option value=""></option>
+									</select>
+								</div> -->
+							</div>
+						</div>
+						<br>
+						<button type="button" class="btn btn-primary"
+							ng-disabled="editForm.$invalid || isSaving"
+							ng-click="createItemArr()">
+							<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+								Items</span>
+						</button>
+					</fieldset>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
@@ -306,7 +341,7 @@
 					</button>
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						<span class="glyphicon glyphicon-save"></span> &nbsp;<span>Save</span>
 					</button>
 				</div>
 			</div>
