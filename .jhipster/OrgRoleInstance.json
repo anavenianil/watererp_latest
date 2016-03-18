@@ -46,7 +46,7 @@
         {
             "fieldId": 5,
             "fieldName": "isHead",
-            "fieldType": "ZonedDateTime"
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20160229092048",

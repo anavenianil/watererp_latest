@@ -31,19 +31,19 @@
                 <tr ng-repeat="empMaster in empMasters track by empMaster.id">
                     <td><a ui-sref="empMaster.detail({id:empMaster.id})">{{empMaster.id}}</a></td>
                     <td>
-                        {{empMaster.user.id}}
+                        {{empMaster.user.login}}
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:empMaster.officeId.id})">{{empMaster.officeId.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:empMaster.officeId.id})">{{empMaster.officeId.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="designationMaster.detail({id:empMaster.designationMaster.id})">{{empMaster.designationMaster.id}}</a>
+                        <a ui-sref="designationMaster.detail({id:empMaster.designationMaster.id})">{{empMaster.designationMaster.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:empMaster.directorateId.id})">{{empMaster.directorateId.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:empMaster.directorateId.id})">{{empMaster.directorateId.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:empMaster.statusMaster.id})">{{empMaster.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:empMaster.statusMaster.id})">{{empMaster.statusMaster.status}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

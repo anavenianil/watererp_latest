@@ -35,7 +35,7 @@
                     <td>{{orgHierarchy.creationDate | date:'medium'}}</td>
                     <td>{{orgHierarchy.lastModifiedDate | date:'medium'}}</td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:orgHierarchy.statusMaster.id})">{{orgHierarchy.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:orgHierarchy.statusMaster.id})">{{orgHierarchy.statusMaster.status}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

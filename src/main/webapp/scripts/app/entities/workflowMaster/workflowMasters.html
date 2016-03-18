@@ -35,7 +35,7 @@
                     <td>{{workflowMaster.creationDate | date:'medium'}}</td>
                     <td>{{workflowMaster.lastModifiedDate | date:'medium'}}</td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:workflowMaster.statusMaster.id})">{{workflowMaster.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:workflowMaster.statusMaster.id})">{{workflowMaster.statusMaster.status}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
