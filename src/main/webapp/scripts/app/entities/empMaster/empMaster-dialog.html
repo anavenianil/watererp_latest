@@ -25,7 +25,7 @@
 			<label for="field_officeId">officeId</label> <select
 				class="form-control" id="field_officeId" name="officeId"
 				ng-model="empMaster.officeId"
-				ng-options="orgRoleInstance as orgRoleInstance.id for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
+				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 				<option value=""></option>
 			</select>
 		</div>
@@ -41,7 +41,7 @@
 			<label for="field_directorateId">directorateId</label> <select
 				class="form-control" id="field_directorateId" name="directorateId"
 				ng-model="empMaster.directorateId"
-				ng-options="orgRoleInstance as orgRoleInstance.id for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
+				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 				<option value=""></option>
 			</select>
 		</div>

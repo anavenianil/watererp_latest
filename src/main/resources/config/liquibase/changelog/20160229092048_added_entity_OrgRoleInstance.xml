@@ -29,7 +29,7 @@
             
             <column name="last_modified_date" type="timestamp"/>
             
-            <column name="is_head" type="timestamp"/>
+            <column name="is_head" type="integer"/>
             
             <column name="status_master_id" type="bigint"/>
             <column name="org_role_hierarchy_id" type="bigint"/>
@@ -39,8 +39,6 @@
         <dropDefaultValue tableName="org_role_instance" columnName="creation_date" columnDataType="datetime"/>
 
         <dropDefaultValue tableName="org_role_instance" columnName="last_modified_date" columnDataType="datetime"/>
-
-        <dropDefaultValue tableName="org_role_instance" columnName="is_head" columnDataType="datetime"/>
 
         
         <addForeignKeyConstraint baseColumnNames="status_master_id"

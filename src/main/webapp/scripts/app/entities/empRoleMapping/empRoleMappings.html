@@ -40,16 +40,16 @@
                     <td>{{empRoleMapping.lastModifiedDate | date:'medium'}}</td>
                     <td>{{empRoleMapping.parentRoleId}}</td>
                     <td>
-                        {{empRoleMapping.user.id}}
+                        {{empRoleMapping.user.login}}
                     </td>
                     <td>
-                        {{empRoleMapping.parentUser.id}}
+                        {{empRoleMapping.parentUser.login}}
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:empRoleMapping.orgRoleInstance.id})">{{empRoleMapping.orgRoleInstance.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:empRoleMapping.orgRoleInstance.id})">{{empRoleMapping.orgRoleInstance.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:empRoleMapping.statusMaster.id})">{{empRoleMapping.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:empRoleMapping.statusMaster.id})">{{empRoleMapping.statusMaster.status}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

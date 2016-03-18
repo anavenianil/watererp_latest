@@ -35,7 +35,7 @@ public class OrgRoleInstance implements Serializable {
     private ZonedDateTime lastModifiedDate;
     
     @Column(name = "is_head")
-    private ZonedDateTime isHead;
+    private Integer isHead;
     
     @ManyToOne
     @JoinColumn(name = "status_master_id")
@@ -89,11 +89,11 @@ public class OrgRoleInstance implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
-    public ZonedDateTime getIsHead() {
+    public Integer getIsHead() {
         return isHead;
     }
     
-    public void setIsHead(ZonedDateTime isHead) {
+    public void setIsHead(Integer isHead) {
         this.isHead = isHead;
     }
 

@@ -61,9 +61,8 @@ public class OrgRoleInstanceResourceIntTest {
     private static final ZonedDateTime UPDATED_LAST_MODIFIED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_LAST_MODIFIED_DATE_STR = dateTimeFormatter.format(DEFAULT_LAST_MODIFIED_DATE);
 
-    private static final ZonedDateTime DEFAULT_IS_HEAD = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_IS_HEAD = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_IS_HEAD_STR = dateTimeFormatter.format(DEFAULT_IS_HEAD);
+    private static final Integer DEFAULT_IS_HEAD = 1;
+    private static final Integer UPDATED_IS_HEAD = 2;
 
     @Inject
     private OrgRoleInstanceRepository orgRoleInstanceRepository;
@@ -136,7 +135,7 @@ public class OrgRoleInstanceResourceIntTest {
                 .andExpect(jsonPath("$.[*].parentOrgRoleId").value(hasItem(DEFAULT_PARENT_ORG_ROLE_ID)))
                 .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE_STR)))
                 .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE_STR)))
-                .andExpect(jsonPath("$.[*].isHead").value(hasItem(DEFAULT_IS_HEAD_STR)));
+                .andExpect(jsonPath("$.[*].isHead").value(hasItem(DEFAULT_IS_HEAD)));
     }
 
     @Test
@@ -154,7 +153,7 @@ public class OrgRoleInstanceResourceIntTest {
             .andExpect(jsonPath("$.parentOrgRoleId").value(DEFAULT_PARENT_ORG_ROLE_ID))
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE_STR))
             .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE_STR))
-            .andExpect(jsonPath("$.isHead").value(DEFAULT_IS_HEAD_STR));
+            .andExpect(jsonPath("$.isHead").value(DEFAULT_IS_HEAD));
     }
 
     @Test

@@ -54,13 +54,4 @@ angular.module('watererpApp').controller('OrgRoleInstanceDialogController',
         $scope.datePickerForLastModifiedDateOpen = function($event) {
             $scope.datePickerForLastModifiedDate.status.opened = true;
         };
-        $scope.datePickerForIsHead = {};
-
-        $scope.datePickerForIsHead.status = {
-            opened: false
-        };
-
-        $scope.datePickerForIsHeadOpen = function($event) {
-            $scope.datePickerForIsHead.status.opened = true;
-        };
 }]);

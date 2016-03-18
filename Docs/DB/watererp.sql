@@ -723,7 +723,7 @@ CREATE TABLE  `watererp`.`emp_master` (
   CONSTRAINT `fk_empmaster_officeid_id` FOREIGN KEY (`office_id_id`) REFERENCES `org_role_instance` (`id`),
   CONSTRAINT `fk_empmaster_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_empmaster_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`emp_master`
@@ -731,6 +731,17 @@ CREATE TABLE  `watererp`.`emp_master` (
 
 /*!40000 ALTER TABLE `emp_master` DISABLE KEYS */;
 LOCK TABLES `emp_master` WRITE;
+INSERT INTO `watererp`.`emp_master` VALUES  (1,6,1,NULL,1,2),
+ (2,7,2,NULL,2,2),
+ (3,8,3,NULL,3,2),
+ (4,9,4,NULL,4,2),
+ (5,10,5,NULL,5,2),
+ (6,11,6,NULL,6,2),
+ (7,12,7,NULL,7,2),
+ (8,13,8,NULL,8,2),
+ (9,14,9,NULL,9,2),
+ (10,15,10,NULL,10,2),
+ (11,16,11,NULL,11,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `emp_master` ENABLE KEYS */;
 
@@ -760,7 +771,7 @@ CREATE TABLE  `watererp`.`emp_role_mapping` (
   CONSTRAINT `fk_emprolemapping_parentuser_id` FOREIGN KEY (`parent_user_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_emprolemapping_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_emprolemapping_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`emp_role_mapping`
@@ -768,6 +779,29 @@ CREATE TABLE  `watererp`.`emp_role_mapping` (
 
 /*!40000 ALTER TABLE `emp_role_mapping` DISABLE KEYS */;
 LOCK TABLES `emp_role_mapping` WRITE;
+INSERT INTO `watererp`.`emp_role_mapping` VALUES  (1,'','','2016-03-18 00:00:00','2016-03-18 00:00:00',0,6,NULL,NULL,NULL),
+ (2,'','','2016-03-18 00:00:00','2016-03-18 00:00:00',0,7,NULL,1,NULL),
+ (3,NULL,NULL,NULL,NULL,NULL,8,NULL,2,NULL),
+ (4,NULL,NULL,NULL,NULL,NULL,9,NULL,2,NULL),
+ (5,NULL,NULL,NULL,NULL,NULL,10,NULL,4,NULL),
+ (6,NULL,NULL,NULL,NULL,NULL,11,NULL,4,NULL),
+ (7,NULL,NULL,NULL,NULL,NULL,12,NULL,4,NULL),
+ (8,NULL,NULL,NULL,NULL,NULL,13,NULL,4,NULL),
+ (9,NULL,NULL,NULL,NULL,NULL,14,NULL,8,NULL),
+ (10,NULL,NULL,NULL,NULL,NULL,15,NULL,4,NULL),
+ (11,NULL,NULL,NULL,NULL,NULL,16,NULL,4,NULL),
+ (12,NULL,NULL,NULL,NULL,NULL,17,NULL,4,NULL),
+ (13,NULL,NULL,NULL,NULL,NULL,18,NULL,4,NULL),
+ (14,NULL,NULL,NULL,NULL,NULL,19,NULL,10,NULL),
+ (15,NULL,NULL,NULL,NULL,NULL,20,NULL,10,NULL),
+ (16,NULL,NULL,NULL,NULL,NULL,21,NULL,11,NULL),
+ (17,NULL,NULL,NULL,NULL,NULL,22,NULL,11,NULL),
+ (18,NULL,NULL,NULL,NULL,NULL,23,NULL,11,NULL),
+ (19,NULL,NULL,NULL,NULL,NULL,24,NULL,12,NULL),
+ (20,NULL,NULL,NULL,NULL,NULL,25,NULL,13,NULL),
+ (21,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,8,NULL,16,NULL),
+ (22,NULL,NULL,NULL,NULL,NULL,27,NULL,19,NULL),
+ (23,NULL,NULL,NULL,NULL,NULL,28,NULL,19,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `emp_role_mapping` ENABLE KEYS */;
 
@@ -1419,7 +1453,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==
  ('+Pk/ksqHFtjiZEpwz8IVFw==',3,'mxORTPY9bPxFOvMgRBlUAg==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('2uRUyClVWXV8AlYMNeuJOw==',3,'PErAzkiwxOnl+ZDZP6T7JQ==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('3+5ue5QHIAl3gaEJu2oyFQ==',3,'VKZnSsNabZGNesRM+Hpsvg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('4Aup8X2ZRQtO8SBDix3vAg==',3,'6Kg9AhH9kp3AfP8xGENaKg==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('4Aup8X2ZRQtO8SBDix3vAg==',3,'JmcI8+KGnhTfgXHMzc2WbQ==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('4Kz54liz72Tw0RjO2Zrkpw==',3,'x3C2IoyZxxmQ8IZ4lG8oMg==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('6B2RG6/uWQnWC28vOw8aXg==',3,'8QX7Ux+CmA4n198EaajbnA==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('7Ytkb8b+j1F3nPGWDNtKcw==',3,'l96/eI6viuEUtDy5AibxbA==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -1903,7 +1937,7 @@ CREATE TABLE  `watererp`.`org_role_instance` (
   `parent_org_role_id` int(11) DEFAULT NULL,
   `creation_date` timestamp NULL DEFAULT NULL,
   `last_modified_date` timestamp NULL DEFAULT NULL,
-  `is_head` timestamp NULL DEFAULT NULL,
+  `is_head` int(11) DEFAULT NULL,
   `status_master_id` bigint(20) DEFAULT NULL,
   `org_role_hierarchy_id` bigint(20) DEFAULT NULL,
   `departments_master_id` bigint(20) DEFAULT NULL,
@@ -1922,29 +1956,29 @@ CREATE TABLE  `watererp`.`org_role_instance` (
 
 /*!40000 ALTER TABLE `org_role_instance` DISABLE KEYS */;
 LOCK TABLES `org_role_instance` WRITE;
-INSERT INTO `watererp`.`org_role_instance` VALUES  (1,'Ministry Of Waters',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',NULL,2,NULL,NULL),
- (2,'Board Of Directors',1,NULL,NULL,NULL,NULL,NULL,NULL),
- (3,'Energy & Water Utilities Regulatory Authority',2,NULL,NULL,NULL,NULL,NULL,NULL),
- (4,'Managing Director',2,NULL,NULL,NULL,NULL,NULL,NULL),
- (5,'Internal Auditor',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (6,'Legal Officier',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (7,'Public Relations Officer',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (8,'HPMU',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (9,'Stores & Supplies Officer',8,NULL,NULL,NULL,NULL,NULL,NULL),
- (10,'Technical Manager',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (11,'Commercial Manager',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (12,'Finance Manager',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (13,'Human Resource & Administration Manager',4,NULL,NULL,NULL,NULL,NULL,NULL),
- (14,'Officer, GIS, Planning, Design & Construction',10,NULL,NULL,NULL,NULL,NULL,NULL),
- (15,'Officer, Operation & Maintance - NRW, Water Supply and Sanitation',10,NULL,NULL,NULL,NULL,NULL,NULL),
- (16,'Billing Officer',11,NULL,NULL,NULL,NULL,NULL,NULL),
- (17,'Credit Control Officer',11,NULL,NULL,NULL,NULL,NULL,NULL),
- (18,'ICT & Customer Care Officer',11,NULL,NULL,NULL,NULL,NULL,NULL),
- (19,'Accountant',12,NULL,NULL,NULL,NULL,NULL,NULL),
- (20,'Human Resource & Administration Section',13,NULL,NULL,NULL,NULL,NULL,NULL),
- (21,'Zonal Supervisers',16,NULL,NULL,NULL,NULL,NULL,NULL),
- (22,'Assistant Accountant(Revenue)',19,NULL,NULL,NULL,NULL,NULL,NULL),
- (23,'Assistant Accountant(Expenditure)',19,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `watererp`.`org_role_instance` VALUES  (1,'Ministry Of Waters',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (2,'Board Of Directors',1,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (3,'Energy & Water Utilities Regulatory Authority',2,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (4,'Managing Director',2,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (5,'Internal Auditor',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (6,'Legal Officier',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (7,'Public Relations Officer',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (8,'HPMU',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (9,'Stores & Supplies Officer',8,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (10,'Technical Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (11,'Commercial Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (12,'Finance Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (13,'Human Resource & Administration Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (14,'Officer, GIS, Planning, Design & Construction',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (15,'Officer, Operation & Maintance - NRW, Water Supply and Sanitation',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (16,'Billing Officer',11,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (17,'Credit Control Officer',11,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (18,'ICT & Customer Care Officer',11,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (19,'Accountant',12,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (20,'Human Resource & Administration Section',13,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (21,'Zonal Supervisers',16,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (22,'Assistant Accountant(Revenue)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (23,'Assistant Accountant(Expenditure)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `org_role_instance` ENABLE KEYS */;
 

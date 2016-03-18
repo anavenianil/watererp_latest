@@ -67,7 +67,7 @@ class OrgRoleInstanceGatlingTest extends Simulation {
             .exec(http("Create new orgRoleInstance")
             .post("/api/orgRoleInstances")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "orgRoleName":"SAMPLE_TEXT", "parentOrgRoleId":"0", "creationDate":"2020-01-01T00:00:00.000Z", "lastModifiedDate":"2020-01-01T00:00:00.000Z", "isHead":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "orgRoleName":"SAMPLE_TEXT", "parentOrgRoleId":"0", "creationDate":"2020-01-01T00:00:00.000Z", "lastModifiedDate":"2020-01-01T00:00:00.000Z", "isHead":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_orgRoleInstance_url")))
             .pause(10)

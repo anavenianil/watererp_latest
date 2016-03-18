@@ -37,7 +37,7 @@
                     <td>{{orgRoleInstance.parentOrgRoleId}}</td>
                     <td>{{orgRoleInstance.creationDate | date:'medium'}}</td>
                     <td>{{orgRoleInstance.lastModifiedDate | date:'medium'}}</td>
-                    <td>{{orgRoleInstance.isHead | date:'medium'}}</td>
+                    <td>{{orgRoleInstance.isHead}}</td>
                     <td>
                         <a ui-sref="statusMaster.detail({id:orgRoleInstance.statusMaster.id})">{{orgRoleInstance.statusMaster.id}}</a>
                     </td>

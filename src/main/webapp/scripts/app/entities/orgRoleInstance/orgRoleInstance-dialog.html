@@ -43,11 +43,9 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_isHead">IsHead</label>
-            <input id="field_isHead" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="orgRoleInstance.isHead" is-open="datePickerForIsHead.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForIsHeadOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
+            <input type="number" class="form-control" name="isHead" id="field_isHead"
+                    ng-model="orgRoleInstance.isHead"
+                     />
         </div>
 
         <div class="form-group">
