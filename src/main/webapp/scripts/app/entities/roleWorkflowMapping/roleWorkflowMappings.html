@@ -34,16 +34,16 @@
                     <td>{{roleWorkflowMapping.creationDate | date:'medium'}}</td>
                     <td>{{roleWorkflowMapping.lastModifiedDate | date:'medium'}}</td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:roleWorkflowMapping.statusMaster.id})">{{roleWorkflowMapping.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:roleWorkflowMapping.statusMaster.id})">{{roleWorkflowMapping.statusMaster.status}}</a>
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:roleWorkflowMapping.orgRoleInstance.id})">{{roleWorkflowMapping.orgRoleInstance.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:roleWorkflowMapping.orgRoleInstance.id})">{{roleWorkflowMapping.orgRoleInstance.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowMaster.detail({id:roleWorkflowMapping.workflowMaster.id})">{{roleWorkflowMapping.workflowMaster.id}}</a>
+                        <a ui-sref="workflowMaster.detail({id:roleWorkflowMapping.workflowMaster.id})">{{roleWorkflowMapping.workflowMaster.workflowName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="requestMaster.detail({id:roleWorkflowMapping.requestMaster.id})">{{roleWorkflowMapping.requestMaster.id}}</a>
+                        <a ui-sref="requestMaster.detail({id:roleWorkflowMapping.requestMaster.id})">{{roleWorkflowMapping.requestMaster.requestType}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

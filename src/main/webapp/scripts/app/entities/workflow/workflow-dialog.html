@@ -1,92 +1,114 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myWorkflowLabel">Create or edit a Workflow</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="workflow.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_stageId">StageId</label>
-            <input type="number" class="form-control" name="stageId" id="field_stageId"
-                    ng-model="workflow.stageId"
-                     />
-        </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myWorkflowLabel">Create or edit a
+			Workflow</h4>
+	</div>
+	<div class="modal-body">
+		<jh-alert-error></jh-alert-error>
+		<div class="form-group">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="workflow.id" readonly />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_stageId">StageId</label> <input
+				type="number" class="form-control" name="stageId" id="field_stageId"
+				ng-model="workflow.stageId" />
+		</div>
 
-        <div class="form-group">
-            <label for="field_workflowMaster">workflowMaster</label>
-            <select class="form-control" id="field_workflowMaster" name="workflowMaster" ng-model="workflow.workflowMaster" ng-options="workflowMaster as workflowMaster.id for workflowMaster in workflowmasters track by workflowMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_relativeFromRole">relativeFromRole</label>
-            <select class="form-control" id="field_relativeFromRole" name="relativeFromRole" ng-model="workflow.relativeFromRole" ng-options="workflowRelations as workflowRelations.id for workflowRelations in workflowrelationss track by workflowRelations.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_absoluteFromRole">absoluteFromRole</label>
-            <select class="form-control" id="field_absoluteFromRole" name="absoluteFromRole" ng-model="workflow.absoluteFromRole" ng-options="orgRoleInstance as orgRoleInstance.id for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_relationshipType">relationshipType</label>
-            <select class="form-control" id="field_relationshipType" name="relationshipType" ng-model="workflow.relationshipType" ng-options="workflowRelationships as workflowRelationships.id for workflowRelationships in workflowrelationshipss track by workflowRelationships.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_relativeToRole">relativeToRole</label>
-            <select class="form-control" id="field_relativeToRole" name="relativeToRole" ng-model="workflow.relativeToRole" ng-options="workflowRelations as workflowRelations.id for workflowRelations in workflowrelationss track by workflowRelations.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_absoluteToRole">absoluteToRole</label>
-            <select class="form-control" id="field_absoluteToRole" name="absoluteToRole" ng-model="workflow.absoluteToRole" ng-options="orgRoleInstance as orgRoleInstance.id for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_escalationRelationshipType">escalationRelationshipType</label>
-            <select class="form-control" id="field_escalationRelationshipType" name="escalationRelationshipType" ng-model="workflow.escalationRelationshipType" ng-options="workflowRelationships as workflowRelationships.id for workflowRelationships in workflowrelationshipss track by workflowRelationships.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_relativeEscalationTo">relativeEscalationTo</label>
-            <select class="form-control" id="field_relativeEscalationTo" name="relativeEscalationTo" ng-model="workflow.relativeEscalationTo" ng-options="workflowRelations as workflowRelations.id for workflowRelations in workflowrelationss track by workflowRelations.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_absoluteEscalationTo">absoluteEscalationTo</label>
-            <select class="form-control" id="field_absoluteEscalationTo" name="absoluteEscalationTo" ng-model="workflow.absoluteEscalationTo" ng-options="orgRoleInstance as orgRoleInstance.id for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_workflowStageMaster">workflowStageMaster</label>
-            <select class="form-control" id="field_workflowStageMaster" name="workflowStageMaster" ng-model="workflow.workflowStageMaster" ng-options="workflowStageMaster as workflowStageMaster.id for workflowStageMaster in workflowstagemasters track by workflowStageMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+		<div class="form-group">
+			<label for="field_workflowMaster">workflowMaster</label> <select
+				class="form-control" id="field_workflowMaster" name="workflowMaster"
+				ng-model="workflow.workflowMaster"
+				ng-options="workflowMaster as workflowMaster.workflowName for workflowMaster in workflowmasters track by workflowMaster.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_relativeFromRole">relativeFromRole</label> <select
+				class="form-control" id="field_relativeFromRole"
+				name="relativeFromRole" ng-model="workflow.relativeFromRole"
+				ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_absoluteFromRole">absoluteFromRole</label> <select
+				class="form-control" id="field_absoluteFromRole"
+				name="absoluteFromRole" ng-model="workflow.absoluteFromRole"
+				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_relationshipType">relationshipType</label> <select
+				class="form-control" id="field_relationshipType"
+				name="relationshipType" ng-model="workflow.relationshipType"
+				ng-options="workflowRelationships as workflowRelationships.name for workflowRelationships in workflowrelationshipss track by workflowRelationships.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_relativeToRole">relativeToRole</label> <select
+				class="form-control" id="field_relativeToRole" name="relativeToRole"
+				ng-model="workflow.relativeToRole"
+				ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_absoluteToRole">absoluteToRole</label> <select
+				class="form-control" id="field_absoluteToRole" name="absoluteToRole"
+				ng-model="workflow.absoluteToRole"
+				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_escalationRelationshipType">escalationRelationshipType</label>
+			<select class="form-control" id="field_escalationRelationshipType"
+				name="escalationRelationshipType"
+				ng-model="workflow.escalationRelationshipType"
+				ng-options="workflowRelationships as workflowRelationships.name for workflowRelationships in workflowrelationshipss track by workflowRelationships.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_relativeEscalationTo">relativeEscalationTo</label>
+			<select class="form-control" id="field_relativeEscalationTo"
+				name="relativeEscalationTo" ng-model="workflow.relativeEscalationTo"
+				ng-options="workflowRelations as workflowRelations.id for workflowRelations in workflowrelationss track by workflowRelations.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_absoluteEscalationTo">absoluteEscalationTo</label>
+			<select class="form-control" id="field_absoluteEscalationTo"
+				name="absoluteEscalationTo" ng-model="workflow.absoluteEscalationTo"
+				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_workflowStageMaster">workflowStageMaster</label> <select
+				class="form-control" id="field_workflowStageMaster"
+				name="workflowStageMaster" ng-model="workflow.workflowStageMaster"
+				ng-options="workflowStageMaster as workflowStageMaster.name for workflowStageMaster in workflowstagemasters track by workflowStageMaster.id">
+				<option value=""></option>
+			</select>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
 </form>

@@ -38,34 +38,34 @@
                     <td><a ui-sref="workflow.detail({id:workflow.id})">{{workflow.id}}</a></td>
                     <td>{{workflow.stageId}}</td>
                     <td>
-                        <a ui-sref="workflowMaster.detail({id:workflow.workflowMaster.id})">{{workflow.workflowMaster.id}}</a>
+                        <a ui-sref="workflowMaster.detail({id:workflow.workflowMaster.id})">{{workflow.workflowMaster.workflowName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowRelations.detail({id:workflow.relativeFromRole.id})">{{workflow.relativeFromRole.id}}</a>
+                        <a ui-sref="workflowRelations.detail({id:workflow.relativeFromRole.id})">{{workflow.relativeFromRole.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteFromRole.id})">{{workflow.absoluteFromRole.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteFromRole.id})">{{workflow.absoluteFromRole.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowRelationships.detail({id:workflow.relationshipType.id})">{{workflow.relationshipType.id}}</a>
+                        <a ui-sref="workflowRelationships.detail({id:workflow.relationshipType.id})">{{workflow.relationshipType.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowRelations.detail({id:workflow.relativeToRole.id})">{{workflow.relativeToRole.id}}</a>
+                        <a ui-sref="workflowRelations.detail({id:workflow.relativeToRole.id})">{{workflow.relativeToRole.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteToRole.id})">{{workflow.absoluteToRole.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteToRole.id})">{{workflow.absoluteToRole.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowRelationships.detail({id:workflow.escalationRelationshipType.id})">{{workflow.escalationRelationshipType.id}}</a>
+                        <a ui-sref="workflowRelationships.detail({id:workflow.escalationRelationshipType.id})">{{workflow.escalationRelationshipType.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowRelations.detail({id:workflow.relativeEscalationTo.id})">{{workflow.relativeEscalationTo.id}}</a>
+                        <a ui-sref="workflowRelations.detail({id:workflow.relativeEscalationTo.id})">{{workflow.relativeEscalationTo.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteEscalationTo.id})">{{workflow.absoluteEscalationTo.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteEscalationTo.id})">{{workflow.absoluteEscalationTo.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowStageMaster.detail({id:workflow.workflowStageMaster.id})">{{workflow.workflowStageMaster.id}}</a>
+                        <a ui-sref="workflowStageMaster.detail({id:workflow.workflowStageMaster.id})">{{workflow.workflowStageMaster.name}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

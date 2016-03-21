@@ -8,7 +8,6 @@ import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,11 @@ import org.springframework.stereotype.Service;
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ConfigurationDetails;
+import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.RequestMaster;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.RequestMasterRepository;
 import com.callippus.water.erp.repository.RequestWorkflowHistoryRepository;
@@ -148,6 +149,9 @@ public class RequestProcessService {
 
 	@Inject
 	private WorkflowStageMasterRepository workflowStageMasterRepository;
+	
+	@Inject
+	private ApplicationTxnRepository applicationTxnRepository;
 
 	@Autowired(required = true)
 	private JdbcTemplate jdbcTemplate;
@@ -485,8 +489,9 @@ public class RequestProcessService {
 		workflowService.getRequesterType();
 		workflowService.getRequestTypeID();
 
-		rwh.setAppliedBy(userRepository.findById(new Long(workflowService
-				.getAppliedBy())));
+		Long domainId = Long.parseLong(workflowService.getDomain_object_id());
+		Customer customer=applicationTxnRepository.findOne(domainId).getCustomer();
+		//rwh.setAppliedBy(appliedBy);
 
 		workflowService.getUserDetails();
 		rwh.setRequestStage(Integer.parseInt(workflowService.getStageID()));
@@ -663,7 +668,7 @@ public class RequestProcessService {
 	 */
 	public void getRequestDetails() throws Exception {
 		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>getRequestDetails(RequestBean rb)>>>>>>>>>");
-		String getRequestDetails = "select domain_object_id,workflow_master_id,request_master_id, request_stage, assigned_to_id from request_workflow_history where id="
+		String getRequestDetails = "select domain_object,workflow_master_id,request_master_id, request_stage, assigned_to_id from request_workflow_history where id="
 				+ workflowService.getHistoryID() + "";
 		log.debug("SQL : getRequestDetails > > " + getRequestDetails);
 
@@ -672,7 +677,7 @@ public class RequestProcessService {
 		log.debug("SQL : getRequestDetails > > " + rows);
 		while (rows.size() > 0) {
 			HashMap<String, Object> hm = (HashMap<String, Object>) rows.get(0);
-			workflowService.setRequestID(hm.get("domain_object_id").toString());
+			workflowService.setRequestID(hm.get("domain_object").toString());
 			workflowService.setWorkflowID(hm.get("workflow_master_id")
 					.toString());
 			workflowService.setRequestTypeID(hm.get("request_master_id")
@@ -706,11 +711,11 @@ public class RequestProcessService {
 		/**
 		 * First get the delegated requests
 		 */
-		String getEscalatedRequests = "select rwh.id,rwh.domain_object_id,rwh.workflow_master_id,rwh.request_master_id,rwh.request_stage,assigned_to_to,assigned_date from request_workflow_history rwh "
+		String getEscalatedRequests = "select rwh.id,rwh.domain_object,rwh.workflow_master_id,rwh.request_master_id,rwh.request_stage,assigned_to_to,assigned_date from request_workflow_history rwh "
 				+ "where id in (select min(id) from request_workflow_history where status_master_id=6 and to_date(sysdate,'dd-mon-yyyy HH24:MI:SS')>=(to_date(assigned_date,'dd-mon-yyyy HH24:MI:SS')+"
 				+ getConfiguredValue(CPSConstants.ESCALATED_TIME)
 				+ ""
-				+ "group by domain_object_id)";
+				+ "group by domain_object)";
 
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
 				.queryForList(getEscalatedRequests);
@@ -719,20 +724,20 @@ public class RequestProcessService {
 		while (rows.size() > 0) {
 			hm = (HashMap<String, Object>) rows.get(0);
 			escalatedList += hm.get("id").toString() + ","
-					+ hm.get("domain_object_id").toString() + ","
+					+ hm.get("domain_object").toString() + ","
 					+ hm.get("workflow_master_id").toString() + ","
 					+ hm.get("request_master_id").toString() + ","
 					+ hm.get("request_stage") + "," + hm.get("assigned_to_id")
 					+ "#";
-			requestsList += hm.get("domain_object_id").toString() + ",";
+			requestsList += hm.get("domain_object").toString() + ",";
 		}
 
 		/**
 		 * get the pending requests
 		 */
 
-		getEscalatedRequests = "select rwh.id,rwh.domain_object_id, rwh.workflow_master_id,rwh.request_master_id,rwh.request_stage,assigned_to_id,assigned_date from request_workflow_history rwh "
-				+ "where id in (select min(id) from request_workflow_history where status_master_id=3 and domain_object_id not in ("
+		getEscalatedRequests = "select rwh.id,rwh.domain_object, rwh.workflow_master_id,rwh.request_master_id,rwh.request_stage,assigned_to_id,assigned_date from request_workflow_history rwh "
+				+ "where id in (select min(id) from request_workflow_history where status_master_id=3 and domain_object not in ("
 				+ requestsList.subSequence(0, requestsList.length() - 1)
 				+ ") "
 				+ "and to_date(sysdate,'dd-mon-yyyy HH24:MI:SS')>=(to_date(assigned_date,'dd-mon-yyyy HH24:MI:SS')+"
@@ -745,7 +750,7 @@ public class RequestProcessService {
 		HashMap<String, Object> hm1;
 		while (rows1.size() > 0) {
 			hm1 = (HashMap<String, Object>) rows.get(0);
-			escalatedList += hm1.get("id") + "," + hm1.get("domain_object_id")
+			escalatedList += hm1.get("id") + "," + hm1.get("domain_object")
 					+ "," + hm1.get("workflow_master_id") + ","
 					+ hm1.get("request_master_id") + ","
 					+ hm1.get("request_stage") + ","
@@ -839,7 +844,7 @@ public class RequestProcessService {
 		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>checkDelegatedRequestOrNot(String historyID)>>>>>>>>>");
 
 		String getDelegatedUserSfid = "select rwh.assigned_to_id, rwh.id from request_workflow_history rwh, status_master sm "
-				+ "where rwh.domain_object_id=(select domain_object_id from request_workflow_history where id="
+				+ "where rwh.domain_object=(select domain_object from request_workflow_history where id="
 				+ historyID
 				+ ") "
 				+ "and rwh.assigned_to_id=(select assigned_from_id from request_workflow_history where id="
@@ -880,7 +885,7 @@ public class RequestProcessService {
 				+ " and sm.id=rwh.status_master_id and "
 				+ "upper(sm.status)=upper("
 				+ CPSConstants.DELEGATED
-				+ ")) and domain_object_id=(select domain_object_id from request_workflow_history where id="
+				+ ")) and domain_object=(select domain_object from request_workflow_history where id="
 				+ historyID + ")";
 
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
@@ -933,7 +938,7 @@ public class RequestProcessService {
 		String message = null;
 
 		String updateDelegatedStatus = "update request_workflow_history rwh2 set rwh2.status_master_id=6 where rwh2.id in ( select rwh.id from request_workflow_history rwh,"
-				+ "status_master sm where rwh.domain_object_id=(select rwh1.domain_object_id from request_workflow_history rwh1 where rwh1.id="
+				+ "status_master sm where rwh.domain_object=(select rwh1.domain_object from request_workflow_history rwh1 where rwh1.id="
 				+ historyID
 				+ ") and rwh.status_master_id=sm.id and upper(sm.status)=upper("
 				+ CPSConstants.PENDING + ") and rwh.id!=" + historyID + ")";
@@ -1107,10 +1112,10 @@ public class RequestProcessService {
 	public void checkPreviousWorkflows() throws Exception {
 		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>checkPreviousWorkflows(RequestBean rb)>>>>>>>>>");
 
-		String getPreviousWorkflows = "select tab1.id, tab1.workflow_master_id, rwh.request_stage, rwh.domain_object_id from (select domain_object_id, workflow_master_id, "
-				+ "max(id) id from request_workflow_history where domain_object_id=(select domain_object_id from request_workflow_history where id= "
+		String getPreviousWorkflows = "select tab1.id, tab1.workflow_master_id, rwh.request_stage, rwh.domain_object from (select domain_object, workflow_master_id, "
+				+ "max(id) id from request_workflow_history where domain_object=(select domain_object from request_workflow_history where id= "
 				+ workflowService.getHistoryID()
-				+ ") group by domain_object_id, workflow_master_id) tab1, request_workflow_history rwh where rwh.id=tab1.id and rwh.id!="
+				+ ") group by domain_object, workflow_master_id) tab1, request_workflow_history rwh where rwh.id=tab1.id and rwh.id!="
 				+ workflowService.getHistoryID() + " order by tab1.id desc";
 
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
@@ -1123,7 +1128,7 @@ public class RequestProcessService {
 				workflowService.setWorkflowID(hm.get("workflow_master_id")
 						.toString());
 				workflowService.setStageID(hm.get("request_stage").toString());
-				workflowService.setRequestID(hm.get("domain_object_id")
+				workflowService.setRequestID(hm.get("domain_object")
 						.toString());
 				workflowService.setStageID(String.valueOf((Integer
 						.parseInt(workflowService.getStageID()) + 1)));
@@ -1208,7 +1213,7 @@ public class RequestProcessService {
 		// request_workflow_historyRepository.findOne(new
 		// Long(workflowService.getWorkflowID()));
 
-		String checkWorkflow = "select workflow_master_id, request_stage, domain_object_id, applied_by_id from request_workflow_history where id="
+		String checkWorkflow = "select workflow_master_id, request_stage, domain_object, applied_by_id from request_workflow_history where id="
 				+ workflowService.getHistoryID();
 
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
@@ -1221,7 +1226,7 @@ public class RequestProcessService {
 			workflowService.setWorkflowID(hm.get("workflow_master_id")
 					.toString());
 			workflowService.setStageID(hm.get("request_stage").toString());
-			workflowService.setRequestID(hm.get("domain_object_id").toString());
+			workflowService.setRequestID(hm.get("domain_object").toString());
 			workflowService.setAppliedBy(hm.get("applied_by_id").toString());
 		}
 		return workflowService;
@@ -1252,7 +1257,7 @@ public class RequestProcessService {
 				workflowService.setRequestID(requests[i]);
 
 				String getRequestDetails = "select id, workflow_master_id, request_master_id, request_stage from request_workflow_history where id="
-						+ "(select max(id) from request_workflow_history where domain_object_id="
+						+ "(select max(id) from request_workflow_history where domain_object="
 						+ workflowService.getRequestID() + ")";
 				
 				List<java.util.Map<String, Object>> rows1 = jdbcTemplate

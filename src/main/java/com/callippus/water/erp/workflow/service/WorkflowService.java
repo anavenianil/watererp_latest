@@ -210,11 +210,11 @@ public class WorkflowService {
 	public String getOfficeID(String userID) throws Exception{
 		log.debug(" getOfficeID: {}", userID);
 
-		String sql = "select office_id from  emp_master where status_master_id=2 and user_id="
+		String sql = "select office_id_id from  emp_master where status_master_id=2 and user_id="
 				+ userID;
-
+		
 		Integer o = jdbcTemplate.queryForObject(sql, Integer.class);
-
+		
 		return o.toString();
 	}
 	
@@ -259,7 +259,7 @@ public class WorkflowService {
 		log.debug(" getRequesterID: {}", domain_object_id);
 
 		String sql = "select assigned_from_id from request_workflow_history where id=(select min(id) from request_workflow_history "
-				+ "where domain_object_id=" + domain_object_id + ")";
+				+ "where domain_object=" + domain_object_id + ")";
 
 		Integer id = jdbcTemplate.queryForObject(sql, Integer.class);
 		return getLoginID(id.toString());
@@ -274,14 +274,14 @@ public class WorkflowService {
 		String requesterID = null;
 
 		String requesterOfficeID = "select case when (select count(*) from request_workflow_history where id= "
-				+ "(select min(id) from request_workflow_history where domain_object_id="
+				+ "(select min(id) from request_workflow_history where domain_object="
 				+ requestID
 				+ ")) !=0 then "
-				+ "(select office_id from emp_master where user_id= (select assigned_from_id from request_workflow_history where id= "
-				+ "(select min(id) from request_workflow_history where domain_object_id="
+				+ "(select office_id_id from emp_master where user_id= (select assigned_from_id from request_workflow_history where id= "
+				+ "(select min(id) from request_workflow_history where domain_object="
 				+ requestID
 				+ ")) and status_master_id=2) else "
-				+ "(select office_id from emp_master where status_master_id=2 and user_id="
+				+ "(select office_id_id from emp_master where status_master_id=2 and user_id="
 				+ userID + ") end officeId";
 		try{
 			Integer id = jdbcTemplate.queryForObject(requesterOfficeID, Integer.class);
@@ -436,7 +436,7 @@ public class WorkflowService {
 	public String getInstanceLogin(String instanceID) throws Exception{
 		log.debug(" getInstanceLogin: {}", instanceID);
 		String instanceLogin = null;
-		String sql = "select concat(user_id,'#') from emp_role_mapping where status_master_id=2 and org_role_instance_id="
+		String sql = "select concat(user_id,'#',org_role_instance_id) from emp_role_mapping where status_master_id=2 and org_role_instance_id="
 				+ instanceID;
 		instanceLogin = jdbcTemplate.queryForObject(sql, String.class);
 						
@@ -562,7 +562,7 @@ public class WorkflowService {
 						List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 						if (rows.size() > 0) {
 							HashMap<String, Object> hm = (HashMap<String, Object>) rows.get(0);
-							workflowID=(hm.get("id").toString());
+							workflowID=(hm.get("workflow_master_id").toString());
 						}
 					}
 					catch(Exception e){
@@ -604,9 +604,9 @@ public class WorkflowService {
 					+ requestType;
 		} else {
 			// role based workflow
-			sql = "select workflow_master_id from role_workflow_mapping where org_role_instance_id=(select emp.office_id from "
+			sql = "select workflow_master_id from role_workflow_mapping where org_role_instance_id=(select emp.office_id_id from "
 					+ "emp_master emp, emp_role_mapping erm where emp.status_master_id=2 and erm.status_master_id=2 and "
-					+ "erm.user_id=emp.user_id and erm.parent_user_id is null and erm.org_role_instance_id=emp.office_id and "
+					+ "erm.user_id=emp.user_id and erm.parent_user_id is null and erm.org_role_instance_id=emp.office_id_id and "
 					+ "emp.user_id="
 					+ userID
 					+ ") and request_master_id="
@@ -641,7 +641,7 @@ public class WorkflowService {
 		
 		String result = null;
 		String res = null;
-		String checkRequestAssigned = "select id from request_workflow_history where domain_object_id="
+		String checkRequestAssigned = "select id from request_workflow_history where domain_object="
 				+ domain_object_id
 				+ " and assigned_to_id="
 				+ parentID
@@ -666,7 +666,7 @@ public class WorkflowService {
 					+ "'))"
 					+ ">0 then 'false' when "
 					+ "(select assigned_from_id from request_workflow_history where id=(select min(id) from request_workflow_history"
-					+ " where domain_object_id="
+					+ " where domain_object="
 					+ domain_object_id
 					+ "))="
 					+ parentID
@@ -909,7 +909,7 @@ public class WorkflowService {
 		
 		try {
 			String qry =	"update request_workflow_history rwh2 set rwh2.status_master_id=?,rwh2.workflow_stage_master=?,rwh2.actioned_date=sysdate where rwh2.id in ( "
-					+ "select rwh.id from request_workflow_history rwh, status_master sm where rwh.domain_object_id=(select rwh1.domain_object_id from "
+					+ "select rwh.id from request_workflow_history rwh, status_master sm where rwh.domain_object=(select rwh1.domain_object from "
 					+ "request_workflow_history rwh1 where rwh1.id=?) and upper(sm.status) in (upper(?),upper(?)) and rwh.id!=?)"	;
 
 			

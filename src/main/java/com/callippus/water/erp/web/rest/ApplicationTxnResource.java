@@ -29,6 +29,7 @@ import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -48,6 +49,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private CustomerRepository customerRepository;
+    
+    @Inject
+    private WorkflowService workflowService;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -70,12 +74,13 @@ public class ApplicationTxnResource {
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         //this is for workflow
-       /* try{
+        try{
+        	workflowService.getUserDetails();
         	applicationTxnWorkflowService.createTxn(applicationTxn);
         }
         catch(Exception e){
         	System.out.println(e);
-        }*/
+        }
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))
