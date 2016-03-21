@@ -100,8 +100,19 @@ public class ApplicationTxnResource {
             return createApplicationTxn(applicationTxn);
         }
         //applicationTxn.setStatus(String.valueOf(Integer.parseInt(applicationTxn.getStatus())+1));
+        
         applicationTxn.setStatus("In Feasibility");
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+        
+      //this is for workflow
+        try{
+        	workflowService.getUserDetails();
+        	applicationTxnWorkflowService.createTxn(applicationTxn);
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
+        
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);
