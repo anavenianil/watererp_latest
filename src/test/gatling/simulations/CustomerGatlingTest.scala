@@ -67,7 +67,7 @@ class CustomerGatlingTest extends Simulation {
             .exec(http("Create new customer")
             .post("/api/customers")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "requestDate":"2020-01-01T00:00:00.000Z", "firstName":"SAMPLE_TEXT", "middleName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "houseNo":"SAMPLE_TEXT", "govtOfficialNo":"SAMPLE_TEXT", "ward":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "pincode":"SAMPLE_TEXT", "block":"SAMPLE_TEXT", "area":"SAMPLE_TEXT", "section":"SAMPLE_TEXT", "constituency":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "telOffice":"SAMPLE_TEXT", "telHome":"SAMPLE_TEXT", "mobile":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "requestDate":"2020-01-01T00:00:00.000Z", "firstName":"SAMPLE_TEXT", "middleName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "houseNo":"SAMPLE_TEXT", "govtOfficialNo":"SAMPLE_TEXT", "ward":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "pincode":"SAMPLE_TEXT", "block":"SAMPLE_TEXT", "area":"SAMPLE_TEXT", "section":"SAMPLE_TEXT", "constituency":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "telOffice":"SAMPLE_TEXT", "telHome":"SAMPLE_TEXT", "mobile":"SAMPLE_TEXT", "fileNumber":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_customer_url")))
             .pause(10)

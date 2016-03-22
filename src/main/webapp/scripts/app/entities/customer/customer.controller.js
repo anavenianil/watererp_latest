@@ -51,6 +51,7 @@ angular.module('watererpApp')
                 telOffice: null,
                 telHome: null,
                 mobile: null,
+                fileNumber: null,
                 id: null
             };
         };

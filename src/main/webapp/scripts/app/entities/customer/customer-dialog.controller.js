@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('watererpApp').controller('CustomerDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Customer', 'FileNumber',
-        function($scope, $stateParams, $uibModalInstance, entity, Customer, FileNumber) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Customer',
+        function($scope, $stateParams, $uibModalInstance, entity, Customer) {
 
         $scope.customer = entity;
-        $scope.filenumbers = FileNumber.query();
         $scope.load = function(id) {
             Customer.get({id : id}, function(result) {
                 $scope.customer = result;

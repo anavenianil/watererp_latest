@@ -94,8 +94,11 @@ public class ApplicationTxnResourceIntTest {
     private static final ZonedDateTime DEFAULT_UPDATED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_UPDATED_DATE_STR = dateTimeFormatter.format(DEFAULT_UPDATED_DATE);
-    private static final String DEFAULT_STATUS = "AAAAA";
-    private static final String UPDATED_STATUS = "BBBBB";
+
+    private static final Integer DEFAULT_STATUS = 1;
+    private static final Integer UPDATED_STATUS = 2;
+    private static final String DEFAULT_FILE_NUMBER = "AAAAA";
+    private static final String UPDATED_FILE_NUMBER = "BBBBB";
 
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
@@ -143,6 +146,7 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setCreatedDate(DEFAULT_CREATED_DATE);
         applicationTxn.setUpdatedDate(DEFAULT_UPDATED_DATE);
         applicationTxn.setStatus(DEFAULT_STATUS);
+        applicationTxn.setFileNumber(DEFAULT_FILE_NUMBER);
     }
 
     @Test
@@ -181,6 +185,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testApplicationTxn.getFileNumber()).isEqualTo(DEFAULT_FILE_NUMBER);
     }
 
     @Test
@@ -213,7 +218,8 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].totalPlinthArea").value(hasItem(DEFAULT_TOTAL_PLINTH_AREA.doubleValue())))
                 .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].updatedDate").value(hasItem(DEFAULT_UPDATED_DATE_STR)))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+                .andExpect(jsonPath("$.[*].fileNumber").value(hasItem(DEFAULT_FILE_NUMBER.toString())));
     }
 
     @Test
@@ -246,7 +252,8 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.totalPlinthArea").value(DEFAULT_TOTAL_PLINTH_AREA.doubleValue()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE_STR))
             .andExpect(jsonPath("$.updatedDate").value(DEFAULT_UPDATED_DATE_STR))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.fileNumber").value(DEFAULT_FILE_NUMBER.toString()));
     }
 
     @Test
@@ -286,6 +293,7 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setCreatedDate(UPDATED_CREATED_DATE);
         applicationTxn.setUpdatedDate(UPDATED_UPDATED_DATE);
         applicationTxn.setStatus(UPDATED_STATUS);
+        applicationTxn.setFileNumber(UPDATED_FILE_NUMBER);
 
         restApplicationTxnMockMvc.perform(put("/api/applicationTxns")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -316,6 +324,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testApplicationTxn.getFileNumber()).isEqualTo(UPDATED_FILE_NUMBER);
     }
 
     @Test

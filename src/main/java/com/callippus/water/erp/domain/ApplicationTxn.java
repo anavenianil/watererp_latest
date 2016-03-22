@@ -80,7 +80,10 @@ public class ApplicationTxn implements Serializable {
     private ZonedDateTime updatedDate;
     
     @Column(name = "status")
-    private String status;
+    private Integer status;
+    
+    @Column(name = "file_number")
+    private String fileNumber;
     
     @ManyToOne
     @JoinColumn(name = "application_type_master_id")
@@ -101,10 +104,6 @@ public class ApplicationTxn implements Serializable {
     @ManyToOne
     @JoinColumn(name = "sewer_size_id")
     private SewerSize sewerSize;
-
-    @ManyToOne
-    @JoinColumn(name = "file_number_id")
-    private FileNumber fileNumber;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -270,12 +269,20 @@ public class ApplicationTxn implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
     
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getFileNumber() {
+        return fileNumber;
+    }
+    
+    public void setFileNumber(String fileNumber) {
+        this.fileNumber = fileNumber;
     }
 
     public ApplicationTypeMaster getApplicationTypeMaster() {
@@ -294,11 +301,11 @@ public class ApplicationTxn implements Serializable {
         this.connectionTypeMaster = connectionTypeMaster;
     }
 
-    public CategoryMaster getcategoryMaster() {
+    public CategoryMaster getCategoryMaster() {
         return categoryMaster;
     }
 
-    public void setcategoryMaster(CategoryMaster categoryMaster) {
+    public void setCategoryMaster(CategoryMaster categoryMaster) {
         this.categoryMaster = categoryMaster;
     }
 
@@ -316,14 +323,6 @@ public class ApplicationTxn implements Serializable {
 
     public void setSewerSize(SewerSize sewerSize) {
         this.sewerSize = sewerSize;
-    }
-
-    public FileNumber getFileNumber() {
-        return fileNumber;
-    }
-
-    public void setFileNumber(FileNumber fileNumber) {
-        this.fileNumber = fileNumber;
     }
 
     public Customer getCustomer() {
@@ -378,6 +377,7 @@ public class ApplicationTxn implements Serializable {
             ", createdDate='" + createdDate + "'" +
             ", updatedDate='" + updatedDate + "'" +
             ", status='" + status + "'" +
+            ", fileNumber='" + fileNumber + "'" +
             '}';
     }
 }

@@ -36,7 +36,7 @@
                     <th jh-sort-by="telOffice"><span>TelOffice</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="telHome"><span>TelHome</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="mobile"><span>Mobile</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fileNumber.id"><span>fileNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fileNumber"><span>FileNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -60,9 +60,7 @@
                     <td>{{customer.telOffice}}</td>
                     <td>{{customer.telHome}}</td>
                     <td>{{customer.mobile}}</td>
-                    <td>
-                        <a ui-sref="fileNumber.detail({id:customer.fileNumber.id})">{{customer.fileNumber.id}}</a>
-                    </td>
+                    <td>{{customer.fileNumber}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

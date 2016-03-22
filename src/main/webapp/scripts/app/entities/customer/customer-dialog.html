@@ -117,13 +117,13 @@
                     ng-model="customer.mobile"
                      />
         </div>
-
         <div class="form-group">
-            <label for="field_fileNumber">fileNumber</label>
-            <select class="form-control" id="field_fileNumber" name="fileNumber" ng-model="customer.fileNumber" ng-options="fileNumber as fileNumber.id for fileNumber in filenumbers track by fileNumber.id">
-                <option value=""></option>
-            </select>
+            <label class="control-label" for="field_fileNumber">FileNumber</label>
+            <input type="text" class="form-control" name="fileNumber" id="field_fileNumber"
+                    ng-model="customer.fileNumber"
+                     />
         </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

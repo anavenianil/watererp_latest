@@ -5,12 +5,14 @@
 	<div>
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
-				<h3 class="panel-title pull-left">Application For New
-					Connection<span class="label"
-					ng-class="{ 'label-success'   : applicationTxn.status === 'Approved', 
-								'label-warning'   : applicationTxn.status === 'In Feasibility', 
-								'label-danger'   : applicationTxn.status === 'Pending'}">
-					{{applicationTxn.status==='Pending'?'Pending':(applicationTxn.status==='In Feasibility'?'In Feasibility':'Completed')}}</span></h3>
+				<h3 class="panel-title pull-left">
+					Application For New Connection<span class="label" class="label"
+						ng-class="{	'label-success'	: applicationTxn.status === 2, 
+										'label-warning'	: applicationTxn.status === 1, 
+										'label-danger'	: applicationTxn.status === 0}">
+						{{applicationTxn.status===0?'Pending':(requisition.status===1?'In
+						Feasibility':'Approved')}}</span>
+				</h3>
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
@@ -19,7 +21,7 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<label>File Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.fileNumber.fileNo}}</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.fileNumber}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Application No</label>
@@ -253,25 +255,26 @@
 				Back</span>
 		</button>
 
-		<button type="button" ng-disabled="editForm.$invalid"
-			class="btn btn-success pull-right" ng-click="load(applicationTxn.id)">
+		<button type="button" class="btn btn-success pull-right"
+			ng-click="load(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
-		<button type="button" ng-disabled="editForm.$invalid"
-			class="btn btn-danger pull-right" ng-click="decline()" ng-show="{{applicationTxn.status=='Pending'}}">
+		<button type="button" class="btn btn-danger pull-right"
+			ng-click="decline()">
 			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
 		</button>
 	</div>
 
-	
+
 
 	<div id="approveModal" class="modal" name="aproveForm">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<form name="editForm" role="form" novalidate ng-submit="approvalDetailsSave()">
+				<form name="editForm" role="form" novalidate
+					ng-submit="approvalDetailsSave()">
 					<div class="panel panel-primary">
 						<div class="panel-heading clearfix">
 							<h3 class="panel-title pull-left">Application Approval
@@ -281,93 +284,94 @@
 						</div>
 						<div class="list-group">
 							<div class="list-group-item">
-									<div class="modal-body">
-										<jh-alert-error></jh-alert-error>
-										<div class="row">
-											<div class="col-sm-3">
-												<label for="field_applicationTxn">Application Txn Id</label> <input
-													type="text" class="form-control" name="applicationTxn"
-													id="field_applicationTxn"
-													ng-model="approvalDetails.applicationTxn.id" disabled/>
-											</div>
-											<div class="col-sm-3">
-												<label for="field_customer">Customer Id</label> <input
-													type="text" class="form-control" id="field_customer" name="customer"
-													ng-model="approvalDetails.customer.id" disabled/>
+								<div class="modal-body">
+									<jh-alert-error></jh-alert-error>
+									<div class="row">
+										<div class="col-sm-3">
+											<label for="field_applicationTxn">Application Txn Id</label>
+											<input type="text" class="form-control" name="applicationTxn"
+												id="field_applicationTxn"
+												ng-model="approvalDetails.applicationTxn.id" disabled />
+										</div>
+										<div class="col-sm-3">
+											<label for="field_customer">Customer Id</label> <input
+												type="text" class="form-control" id="field_customer"
+												name="customer" ng-model="approvalDetails.customer.id"
+												disabled />
 
-											</div>
-											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedDate">Approved Date</label>
-												<input id="field_approvedDate" type="text"
-													class="form-control" uib-datepicker-popup="{{dateformat}}"
-													ng-model="approvalDetails.approvedDate"
-													is-open="datePickerForApprovedDate.status.opened" /> <span
-													class="input-group-btn">
-													<button type="button" class="btn btn-default"
-														ng-click="datePickerForApprovedDateOpen($event)">
-														<i class="glyphicon glyphicon-calendar"></i>
-													</button>
-												</span>
-											</div>
-											<div class="col-sm-3">
-												<label for="field_feasibilityStatus">Feasibility Status</label>
-												<select class="form-control" id="field_feasibilityStatus"
-													name="feasibilityStatus"
-													ng-model="approvalDetails.feasibilityStatus"
-													ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
-													<option value=""></option>
-												</select>
-											</div>
 										</div>
-										<div class="row">
-											<div class="col-sm-12">
-												<label class="control-label" for="field_remarks">Remarks</label>
-												<input type="text" class="form-control" name="remarks"
-													id="field_remarks" ng-model="approvalDetails.remarks" />
-											</div>
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedDate">Approved
+												Date</label> <input id="field_approvedDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="approvalDetails.approvedDate"
+												is-open="datePickerForApprovedDate.status.opened" /> <span
+												class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForApprovedDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
 										</div>
-										<br>
-										<div class="row">
-											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedEmpNo">Approved Emp. No.</label>
-												<input type="text" class="form-control" name="approvedEmpNo"
-													id="field_approvedEmpNo"
-													ng-model="approvalDetails.approvedEmpNo" />
-											</div>
-											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedEmpName">Approved Emp. Name</label>
-												<input type="text" class="form-control"
-													name="approvedEmpName" id="field_approvedEmpName"
-													ng-model="approvalDetails.approvedEmpName" />
-											</div>
-											<div class="col-sm-3">
-												<label class="control-label" for="field_approvedEmpDesig">Approved Emp. Desig.</label>
-												<input type="text" class="form-control"
-													name="approvedEmpDesig" id="field_approvedEmpDesig"
-													ng-model="approvalDetails.approvedEmpDesig" />
-											</div>
-											<div class="col-sm-3">
-												<label for="field_designationMaster">Designation Master</label>
-												<select class="form-control" id="field_designationMaster"
-													name="designationMaster"
-													ng-model="approvalDetails.designationMaster"
-													ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
-													<option value=""></option>
-												</select>
-											</div>
+										<div class="col-sm-3">
+											<label for="field_feasibilityStatus">Feasibility
+												Status</label> <select class="form-control"
+												id="field_feasibilityStatus" name="feasibilityStatus"
+												ng-model="approvalDetails.feasibilityStatus"
+												ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
+												<option value=""></option>
+											</select>
 										</div>
 									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal" ng-click="clear()">
-											<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-										</button>
-										<button type="submit"
-											ng-disabled="editForm.$invalid || isSaving"
-											class="btn btn-primary">
-											<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-										</button>
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" for="field_remarks">Remarks</label>
+											<input type="text" class="form-control" name="remarks"
+												id="field_remarks" ng-model="approvalDetails.remarks" />
+										</div>
 									</div>
+									<br>
+									<div class="row">
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedEmpNo">Approved
+												Emp. No.</label> <input type="text" class="form-control"
+												name="approvedEmpNo" id="field_approvedEmpNo"
+												ng-model="approvalDetails.approvedEmpNo" />
+										</div>
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedEmpName">Approved
+												Emp. Name</label> <input type="text" class="form-control"
+												name="approvedEmpName" id="field_approvedEmpName"
+												ng-model="approvalDetails.approvedEmpName" />
+										</div>
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedEmpDesig">Approved
+												Emp. Desig.</label> <input type="text" class="form-control"
+												name="approvedEmpDesig" id="field_approvedEmpDesig"
+												ng-model="approvalDetails.approvedEmpDesig" />
+										</div>
+										<div class="col-sm-3">
+											<label for="field_designationMaster">Designation
+												Master</label> <select class="form-control"
+												id="field_designationMaster" name="designationMaster"
+												ng-model="approvalDetails.designationMaster"
+												ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
+												<option value=""></option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal" ng-click="clear()">
+										<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+									</button>
+									<button type="submit"
+										ng-disabled="editForm.$invalid || isSaving"
+										class="btn btn-primary">
+										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>

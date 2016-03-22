@@ -11,6 +11,6 @@ import com.callippus.water.erp.domain.ApplicationTxn;
  */
 public interface ApplicationTxnRepository extends JpaRepository<ApplicationTxn,Long> {
 	
-	Page<ApplicationTxn>findByStatus(Pageable pageable, String status);
+	Page<ApplicationTxn>findByStatus(Pageable pageable, Integer status);
 
 }

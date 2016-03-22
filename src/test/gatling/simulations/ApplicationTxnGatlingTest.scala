@@ -67,7 +67,7 @@ class ApplicationTxnGatlingTest extends Simulation {
             .exec(http("Create new applicationTxn")
             .post("/api/applicationTxns")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "sHouseNo":"SAMPLE_TEXT", "govtOfficialNo":"SAMPLE_TEXT", "ward":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "pincode":"SAMPLE_TEXT", "block":"SAMPLE_TEXT", "area":"SAMPLE_TEXT", "section":"SAMPLE_TEXT", "constituency":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "telephoneNumber":"SAMPLE_TEXT", "mobile":"SAMPLE_TEXT", "scanPlan":null, "scanPlan1":null, "saleDeed":null, "saleDeed1":null, "totalPlinthArea":null, "createdDate":"2020-01-01T00:00:00.000Z", "updatedDate":"2020-01-01T00:00:00.000Z", "status":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "sHouseNo":"SAMPLE_TEXT", "govtOfficialNo":"SAMPLE_TEXT", "ward":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "pincode":"SAMPLE_TEXT", "block":"SAMPLE_TEXT", "area":"SAMPLE_TEXT", "section":"SAMPLE_TEXT", "constituency":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "telephoneNumber":"SAMPLE_TEXT", "mobile":"SAMPLE_TEXT", "scanPlan":null, "scanPlan1":null, "saleDeed":null, "saleDeed1":null, "totalPlinthArea":null, "createdDate":"2020-01-01T00:00:00.000Z", "updatedDate":"2020-01-01T00:00:00.000Z", "status":"0", "fileNumber":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_applicationTxn_url")))
             .pause(10)

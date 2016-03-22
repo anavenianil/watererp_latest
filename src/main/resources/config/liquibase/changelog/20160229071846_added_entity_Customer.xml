@@ -55,17 +55,12 @@
             
             <column name="mobile" type="varchar(255)"/>
             
-            <column name="file_number_id" type="bigint"/>
+            <column name="file_number" type="varchar(255)"/>
+            
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="customer" columnName="request_date" columnDataType="datetime"/>
 
         
-        <addForeignKeyConstraint baseColumnNames="file_number_id"
-                                 baseTableName="customer"
-                                 constraintName="fk_customer_filenumber_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="file_number"/>
-
     </changeSet>
 </databaseChangeLog>

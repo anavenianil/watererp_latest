@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/applicationTxns',
                 data: {
-                    authorities: ['ROLE_CUSTOMER', 'ROLE_ADMIN'],
+                    authorities: ['ROLE_USER'],
                     pageTitle: 'ApplicationTxns'
                 },
                 views: {
@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('applicationTxn1.new', {
+            /*.state('applicationTxn.new', {
                 parent: 'applicationTxn',
                 url: '/new',
                 data: {
@@ -82,8 +82,8 @@ angular.module('watererpApp')
                         $state.go('applicationTxn');
                     })
                 }]
-            })
-            .state('applicationTxn.edit', {
+            })*/
+            /*.state('applicationTxn.edit', {
                 parent: 'applicationTxn',
                 url: '/{id}/edit',
                 data: {
@@ -105,7 +105,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('applicationTxn.delete', {
                 parent: 'applicationTxn',
                 url: '/{id}/delete',
@@ -123,27 +123,45 @@ angular.module('watererpApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('applicationTxn.all', null, { reload: true });
+                        $state.go('applicationTxn', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('applicationTxn.all', {
+            .state('applicationTxn.new', {
                 parent: 'applicationTxn',
-                url: '/all',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    pageTitle: 'ApplicationTxns'
+                },
+                views: {
+                    'content@': {
+                    	 templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
+                         controller: 'ApplicationTxnDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('applicationTxn.edit', {
+                parent: 'applicationTxn',
+                url: '/edit/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'ApplicationTxns'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
-                        controller: 'ApplicationTxnDialogController'
+                    	 templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
+                         controller: 'ApplicationTxnDialogController'
                     }
                 },
                 resolve: {
+                	entity: ['$stateParams', 'ApplicationTxn', function($stateParams, ApplicationTxn) {
+                        return ApplicationTxn.get({id : $stateParams.id});
+                    }]
                 }
             });
-        
     });

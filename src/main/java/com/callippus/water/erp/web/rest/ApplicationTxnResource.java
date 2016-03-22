@@ -68,7 +68,7 @@ public class ApplicationTxnResource {
         
     	Customer customer = customerRepository.save(applicationTxn.getCustomer());
     	applicationTxn.setFileNumber(customer.getFileNumber());
-    	applicationTxn.setStatus("Pending");
+    	applicationTxn.setStatus(0);
     	applicationTxn.setCreatedDate(customer.getRequestDate());
     	applicationTxn.setUpdatedDate(customer.getRequestDate());
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
@@ -125,7 +125,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<ApplicationTxn>> getAllApplicationTxns(Pageable pageable,@RequestParam(value = "status", required = false) String status)
+    public ResponseEntity<List<ApplicationTxn>> getAllApplicationTxns(Pageable pageable,@RequestParam(value = "status", required = false) Integer status)
         throws URISyntaxException {
         log.debug("REST request to get a page of ApplicationTxns");
         //Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 

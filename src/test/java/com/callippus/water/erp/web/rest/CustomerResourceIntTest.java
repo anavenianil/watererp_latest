@@ -83,6 +83,8 @@ public class CustomerResourceIntTest {
     private static final String UPDATED_TEL_HOME = "BBBBB";
     private static final String DEFAULT_MOBILE = "AAAAA";
     private static final String UPDATED_MOBILE = "BBBBB";
+    private static final String DEFAULT_FILE_NUMBER = "AAAAA";
+    private static final String UPDATED_FILE_NUMBER = "BBBBB";
 
     @Inject
     private CustomerRepository customerRepository;
@@ -127,6 +129,7 @@ public class CustomerResourceIntTest {
         customer.setTelOffice(DEFAULT_TEL_OFFICE);
         customer.setTelHome(DEFAULT_TEL_HOME);
         customer.setMobile(DEFAULT_MOBILE);
+        customer.setFileNumber(DEFAULT_FILE_NUMBER);
     }
 
     @Test
@@ -162,6 +165,7 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getTelOffice()).isEqualTo(DEFAULT_TEL_OFFICE);
         assertThat(testCustomer.getTelHome()).isEqualTo(DEFAULT_TEL_HOME);
         assertThat(testCustomer.getMobile()).isEqualTo(DEFAULT_MOBILE);
+        assertThat(testCustomer.getFileNumber()).isEqualTo(DEFAULT_FILE_NUMBER);
     }
 
     @Test
@@ -191,7 +195,8 @@ public class CustomerResourceIntTest {
                 .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
                 .andExpect(jsonPath("$.[*].telOffice").value(hasItem(DEFAULT_TEL_OFFICE.toString())))
                 .andExpect(jsonPath("$.[*].telHome").value(hasItem(DEFAULT_TEL_HOME.toString())))
-                .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE.toString())));
+                .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE.toString())))
+                .andExpect(jsonPath("$.[*].fileNumber").value(hasItem(DEFAULT_FILE_NUMBER.toString())));
     }
 
     @Test
@@ -221,7 +226,8 @@ public class CustomerResourceIntTest {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.telOffice").value(DEFAULT_TEL_OFFICE.toString()))
             .andExpect(jsonPath("$.telHome").value(DEFAULT_TEL_HOME.toString()))
-            .andExpect(jsonPath("$.mobile").value(DEFAULT_MOBILE.toString()));
+            .andExpect(jsonPath("$.mobile").value(DEFAULT_MOBILE.toString()))
+            .andExpect(jsonPath("$.fileNumber").value(DEFAULT_FILE_NUMBER.toString()));
     }
 
     @Test
@@ -258,6 +264,7 @@ public class CustomerResourceIntTest {
         customer.setTelOffice(UPDATED_TEL_OFFICE);
         customer.setTelHome(UPDATED_TEL_HOME);
         customer.setMobile(UPDATED_MOBILE);
+        customer.setFileNumber(UPDATED_FILE_NUMBER);
 
         restCustomerMockMvc.perform(put("/api/customers")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -285,6 +292,7 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getTelOffice()).isEqualTo(UPDATED_TEL_OFFICE);
         assertThat(testCustomer.getTelHome()).isEqualTo(UPDATED_TEL_HOME);
         assertThat(testCustomer.getMobile()).isEqualTo(UPDATED_MOBILE);
+        assertThat(testCustomer.getFileNumber()).isEqualTo(UPDATED_FILE_NUMBER);
     }
 
     @Test

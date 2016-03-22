@@ -6,8 +6,6 @@ import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -73,10 +71,9 @@ public class Customer implements Serializable {
     @Column(name = "mobile")
     private String mobile;
     
-    @ManyToOne
-    @JoinColumn(name = "file_number_id")
-    private FileNumber fileNumber;
-
+    @Column(name = "file_number")
+    private String fileNumber;
+    
     public Long getId() {
         return id;
     }
@@ -221,11 +218,11 @@ public class Customer implements Serializable {
         this.mobile = mobile;
     }
 
-    public FileNumber getFileNumber() {
+    public String getFileNumber() {
         return fileNumber;
     }
-
-    public void setFileNumber(FileNumber fileNumber) {
+    
+    public void setFileNumber(String fileNumber) {
         this.fileNumber = fileNumber;
     }
 
@@ -270,6 +267,7 @@ public class Customer implements Serializable {
             ", telOffice='" + telOffice + "'" +
             ", telHome='" + telHome + "'" +
             ", mobile='" + mobile + "'" +
+            ", fileNumber='" + fileNumber + "'" +
             '}';
     }
 }

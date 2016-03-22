@@ -76,9 +76,9 @@ public class ApprovalDetailsResource {
         	System.out.println(e);
         }
         
-        if(workflowService.getRequestStatus() == 2){//exception
+        /*if(workflowService.getRequestStatus() == 2){//exception
         	applicationTxnWorkflowService.updateApplicationTxn(applicationTxn.getId());        	
-        }
+        }*/
         
         /*String status = applicationTxn.getStatus();
         

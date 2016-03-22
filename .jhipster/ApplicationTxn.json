@@ -37,13 +37,6 @@
         },
         {
             "relationshipId": 6,
-            "relationshipName": "fileNumber",
-            "otherEntityName": "fileNumber",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 7,
             "relationshipName": "customer",
             "otherEntityName": "customer",
             "relationshipType": "many-to-one",
@@ -149,6 +142,11 @@
         {
             "fieldId": 20,
             "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 21,
+            "fieldName": "fileNumber",
             "fieldType": "String"
         }
     ],

@@ -16,7 +16,7 @@ angular.module('watererpApp')
             }).then(function () {
                 $scope.authenticationError = false;
                 if($scope.username=='customer'){
-                	$state.go('applicationTxn');
+                	$state.go('applicationTxn.new');
                 }
                 else
                 if ($rootScope.previousStateName === 'register') {

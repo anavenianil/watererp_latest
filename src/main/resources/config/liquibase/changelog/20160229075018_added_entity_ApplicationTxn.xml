@@ -59,14 +59,15 @@
             
             <column name="updated_date" type="timestamp"/>
             
-            <column name="status" type="varchar(255)"/>
+            <column name="status" type="integer"/>
+            
+            <column name="file_number" type="varchar(255)"/>
             
             <column name="application_type_master_id" type="bigint"/>
             <column name="connection_type_master_id" type="bigint"/>
             <column name="category_master_id" type="bigint"/>
             <column name="pipe_size_master_id" type="bigint"/>
             <column name="sewer_size_id" type="bigint"/>
-            <column name="file_number_id" type="bigint"/>
             <column name="customer_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
@@ -104,12 +105,6 @@
                                  constraintName="fk_applicationtxn_sewersize_id"
                                  referencedColumnNames="id"
                                  referencedTableName="sewer_size"/>
-
-        <addForeignKeyConstraint baseColumnNames="file_number_id"
-                                 baseTableName="application_txn"
-                                 constraintName="fk_applicationtxn_filenumber_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="file_number"/>
 
         <addForeignKeyConstraint baseColumnNames="customer_id"
                                  baseTableName="application_txn"

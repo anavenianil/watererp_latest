@@ -29,7 +29,7 @@ angular.module('watererpApp')
         	$('#approveModal').modal('hide');
         	//console.log(JSON.stringify($scope.approvalDetails));
             ApprovalDetails.save(($scope.approvalDetails), function(){
-            	$state.go('applicationTxn.all');
+            	$state.go('applicationTxn');
             });
             console.log($scope.applicationTxn);
             ApplicationTxn.update($scope.applicationTxn);
