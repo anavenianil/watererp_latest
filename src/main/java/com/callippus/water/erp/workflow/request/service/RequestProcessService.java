@@ -1227,7 +1227,7 @@ public class RequestProcessService {
 					.toString());
 			workflowService.setStageID(hm.get("request_stage").toString());
 			workflowService.setRequestID(hm.get("domain_object").toString());
-			workflowService.setAppliedBy(hm.get("applied_by_id").toString());
+			//workflowService.setAppliedBy(hm.get("applied_by_id").toString());
 		}
 		return workflowService;
 	}

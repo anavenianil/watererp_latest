@@ -148,13 +148,13 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 	 **/
 
 	@SuppressWarnings("unchecked")
-	public String approvedReqisitionRequest(ApplicationTxn applicationTxn)
+	public String approvedApplicationTxnRequest(ApplicationTxn applicationTxn)
 			throws Exception {
 		String message = null;
 		List<RequestWorkflowHistory> l = null;
 		try {
 			Query query = entityManager.createQuery(
-					"from Request_workflow_history r where domain_object_id="
+					"from RequestWorkflowHistory r where domainObject="
 							+ applicationTxn.getId(),
 					RequestWorkflowHistory.class);
 
@@ -200,7 +200,7 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 		List<RequestWorkflowHistory> l = null;
 		try {
 			Query query = entityManager.createQuery(
-					"from Request_workflow_history r where domain_object_id="
+					"from RequestWorkflowHistory r where domainObject="
 							+ id, RequestWorkflowHistory.class);
 
 			l = query.getResultList();

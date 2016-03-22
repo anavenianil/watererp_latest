@@ -27,6 +27,8 @@ import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ApprovalDetailsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -44,6 +46,12 @@ public class ApprovalDetailsResource {
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
     
+    @Inject
+	private WorkflowService workflowService;
+    
+    @Inject
+	private ApplicationTxnWorkflowService applicationTxnWorkflowService;
+    
     /**
      * POST  /approvalDetailss -> Create a new approvalDetails.
      */
@@ -56,8 +64,24 @@ public class ApprovalDetailsResource {
         if (approvalDetails.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("approvalDetails", "idexists", "A new approvalDetails cannot already have an ID")).body(null);
         }
+        
         ApplicationTxn applicationTxn = applicationTxnRepository.findOne(approvalDetails.getApplicationTxn().getId());
-        String status = applicationTxn.getStatus();
+        
+        //Integer status = Integer.parseInt(applicationTxn.getStatus());
+        //workflowService.setRequestStatus(status);
+        try{
+        applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
+        
+        if(workflowService.getRequestStatus() == 2){//exception
+        	applicationTxnWorkflowService.updateApplicationTxn(applicationTxn.getId());        	
+        }
+        
+        /*String status = applicationTxn.getStatus();
+        
         if("Pending".equals(status)){
         	applicationTxn.setStatus("In Feasibility");
         }
@@ -66,7 +90,7 @@ public class ApprovalDetailsResource {
         }
         else if("In Proceedings".equals(status)){
         	applicationTxn.setStatus("Connection Approved");
-        }
+        }*/
         
         applicationTxnRepository.save(applicationTxn);
         
