@@ -2,19 +2,18 @@
 
 angular.module('watererpApp')
     .controller('ApplicationTxnDetailController', function ($scope, $state, $rootScope, $stateParams, entity, ApplicationTxn, 
-    		ApplicationTypeMaster, ConnectionTypeMaster, CategoryMaster, PipeSizeMaster, SewerSize, FileNumber, Customer, ApprovalDetails) {
+    		ApplicationTypeMaster, ConnectionTypeMaster, CategoryMaster, PipeSizeMaster, SewerSize, FileNumber, Customer, ApprovalDetails,
+    		ApplicationTxnService) {
         $scope.applicationTxn = entity;
         $scope.approvalDetails = {};
         $scope.approvalDetails.applicationTxn={};
         $scope.approvalDetails.customer={};
         
-        $scope.load = function (id) {
-        	$('#viewApplicationTxnModal').modal('hide');
+        $scope.status = null;
+        $scope.load = function (id, status) {
         	$('#approveModal').modal('show');
             ApplicationTxn.get({id: id}, function(result) {
                 $scope.applicationTxn = result;
-                $scope.approvalDetails.applicationTxn.id = $scope.applicationTxn.id;
-                $scope.approvalDetails.customer.id = $scope.applicationTxn.id;
             });
         };
         var unsubscribe = $rootScope.$on('watererpApp:applicationTxnUpdate', function(event, result) {
@@ -22,19 +21,22 @@ angular.module('watererpApp')
         });
         $scope.$on('$destroy', unsubscribe);
         
-        
-        
      
-        $scope.approvalDetailsSave = function(){
+        $scope.approvalDetailsSave = function(id, remarks){
         	$('#approveModal').modal('hide');
         	//console.log(JSON.stringify($scope.approvalDetails));
-            ApprovalDetails.save(($scope.approvalDetails), function(){
-            	$state.go('applicationTxn');
-            });
-            console.log($scope.applicationTxn);
-            ApplicationTxn.update($scope.applicationTxn);
-            
+        	ApplicationTxnService.approveRequest(id, remarks);
+        	$state.go('applicationTxn');
         }
+        
+     // to Approve a request
+		/*$scope.approveRequest = function(id) {
+			RequisitionService.approveRequest(id).then(
+					function(data) {
+						$scope.requisitions = data;
+						$state.go('home');
+					});
+		};*/
        
         $scope.datePickerForApprovedDate = {};
 

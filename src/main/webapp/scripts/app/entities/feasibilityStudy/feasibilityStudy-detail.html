@@ -6,11 +6,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">
-					Feasibility For New Connection<span class="label"
-						ng-class="{ 'label-success'   : feasibilityStudy.applicationTxn.status === 'Approved', 
-									'label-warning'   : feasibilityStudy.applicationTxn.status === 'In Feasibility', 
-									'label-danger'   : feasibilityStudy.applicationTxn.status === 'Pending'}">
-						{{feasibilityStudy.applicationTxn.status==='Pending'?'Pending':(feasibilityStudy.applicationTxn.status==='In Feasibility'?'In Feasibility':'Completed')}}</span>
+					Feasibility For New Connection
 				</h3>
 			</div>
 			<div class="list-group">
@@ -209,8 +205,7 @@
 	<div id="approveModal" class="modal" name="aproveForm">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<form name="editForm" role="form" novalidate
-					ng-submit="approvalDetailsSave()">
+				<form name="editForm" role="form" novalidate>
 					<div class="panel panel-primary">
 						<div class="panel-heading clearfix">
 							<h3 class="panel-title pull-left">Application Approval
@@ -226,13 +221,13 @@
 										<div class="col-sm-3">
 											<label for="field_applicationTxn">Application Txn Id</label>
 											<input type="text" class="form-control" name="applicationTxn"
-												id="field_applicationTxn"
-												ng-model="approvalDetails.applicationTxn.id" disabled />
+												id="field_applicationTxn" ng-model="applicationTxn.id"
+												disabled />
 										</div>
 										<div class="col-sm-3">
 											<label for="field_customer">Customer Id</label> <input
 												type="text" class="form-control" id="field_customer"
-												name="customer" ng-model="approvalDetails.customer.id"
+												name="customer" ng-model="applicationTxn.customer.id"
 												disabled />
 
 										</div>
@@ -249,7 +244,7 @@
 												</button>
 											</span>
 										</div>
-										<div class="col-sm-3">
+										<!-- <div class="col-sm-3">
 											<label for="field_feasibilityStatus">Feasibility
 												Status</label> <select class="form-control"
 												id="field_feasibilityStatus" name="feasibilityStatus"
@@ -257,17 +252,17 @@
 												ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
 												<option value=""></option>
 											</select>
-										</div>
+										</div> -->
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<label class="control-label" for="field_remarks">Remarks</label>
-											<input type="text" class="form-control" name="remarks"
-												id="field_remarks" ng-model="approvalDetails.remarks" />
+											<textarea rows="4" cols="50" class="form-control" name="remarks"
+												id="field_remarks" ng-model="applicationTxn.remarks" ></textarea>
 										</div>
 									</div>
 									<br>
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-sm-3">
 											<label class="control-label" for="field_approvedEmpNo">Approved
 												Emp. No.</label> <input type="text" class="form-control"
@@ -295,16 +290,17 @@
 												<option value=""></option>
 											</select>
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal" ng-click="clear()">
 										<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 									</button>
-									<button type="submit"
+									<button type="button"
 										ng-disabled="editForm.$invalid || isSaving"
-										class="btn btn-primary">
+										class="btn btn-primary" 
+										ng-click="approvalDetailsSave(applicationTxn.id, applicationTxn.remarks)">
 										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 									</button>
 								</div>
@@ -316,130 +312,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- old -->
-<!-- <div>
-	<h2>
-		<span>FeasibilityStudy</span> {{feasibilityStudy.id}}
-	</h2>
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Field</th>
-					<th>Value</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><span>PlotAreaInSqMtrs</span></td>
-					<td><span class="form-control-static">{{feasibilityStudy.plotAreaInSqMtrs}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>PlotAreaInYards</span></td>
-					<td><span class="form-control-static">{{feasibilityStudy.plotAreaInYards}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>NoOfFlatsOrNoOfUnits</span></td>
-					<td><span class="form-control-static">{{feasibilityStudy.noOfFlatsOrNoOfUnits}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>NoOfFloors</span></td>
-					<td><span class="form-control-static">{{feasibilityStudy.noOfFloors}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>TotalPlinthArea</span></td>
-					<td><span class="form-control-static">{{feasibilityStudy.totalPlinthArea}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>WaterRequirement</span></td>
-					<td><span class="form-control-static">{{feasibilityStudy.waterRequirement}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>schemeMaster</span></td>
-					<td><a class="form-control-static"
-						ui-sref="schemeMaster.detail({id:feasibilityStudy.schemeMaster.id})">{{feasibilityStudy.schemeMaster.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>tariffCategoryMaster</span></td>
-					<td><a class="form-control-static"
-						ui-sref="tariffCategoryMaster.detail({id:feasibilityStudy.tariffCategoryMaster.id})">{{feasibilityStudy.tariffCategoryMaster.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>makeOfWaterPipe</span></td>
-					<td><a class="form-control-static"
-						ui-sref="makeOfPipe.detail({id:feasibilityStudy.makeOfWaterPipe.id})">{{feasibilityStudy.makeOfWaterPipe.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>makeOfSeweragePipe</span></td>
-					<td><a class="form-control-static"
-						ui-sref="makeOfPipe.detail({id:feasibilityStudy.makeOfSeweragePipe.id})">{{feasibilityStudy.makeOfSeweragePipe.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>mainWaterSize</span></td>
-					<td><a class="form-control-static"
-						ui-sref="mainWaterSize.detail({id:feasibilityStudy.mainWaterSize.id})">{{feasibilityStudy.mainWaterSize.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>mainSewerageSize</span></td>
-					<td><a class="form-control-static"
-						ui-sref="mainSewerageSize.detail({id:feasibilityStudy.mainSewerageSize.id})">{{feasibilityStudy.mainSewerageSize.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>docketCode</span></td>
-					<td><a class="form-control-static"
-						ui-sref="docketCode.detail({id:feasibilityStudy.docketCode.id})">{{feasibilityStudy.docketCode.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>applicationTxn</span></td>
-					<td><a class="form-control-static"
-						ui-sref="applicationTxn.detail({id:feasibilityStudy.applicationTxn.id})">{{feasibilityStudy.applicationTxn.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>categoryMaster</span></td>
-					<td><a class="form-control-static"
-						ui-sref="categoryMaster.detail({id:feasibilityStudy.categoryMaster.id})">{{feasibilityStudy.categoryMaster.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>sewerSize</span></td>
-					<td><a class="form-control-static"
-						ui-sref="sewerSize.detail({id:feasibilityStudy.sewerSize.id})">{{feasibilityStudy.sewerSize.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>pipeSizeMaster</span></td>
-					<td><a class="form-control-static"
-						ui-sref="pipeSizeMaster.detail({id:feasibilityStudy.pipeSizeMaster.id})">{{feasibilityStudy.pipeSizeMaster.id}}</a>
-					</td>
-				</tr>
-				<tr>
-					<td><span>feasibilityStatus</span></td>
-					<td><a class="form-control-static"
-						ui-sref="feasibilityStatus.detail({id:feasibilityStudy.feasibilityStatus.id})">{{feasibilityStudy.feasibilityStatus.id}}</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
-	<button type="submit" onclick="window.history.back()"
-		class="btn btn-info">
-		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
-			Back</span>
-	</button>
-</div> -->

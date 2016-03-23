@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('feasibilityStudy.new', {
+            /*.state('feasibilityStudy.new', {
                 parent: 'feasibilityStudy',
                 url: '/new',
                 data: {
@@ -68,8 +68,8 @@ angular.module('watererpApp')
                         $state.go('feasibilityStudy');
                     })
                 }]
-            })
-            .state('feasibilityStudy1.edit', {
+            })*/
+            /*.state('feasibilityStudy.edit', {
                 parent: 'feasibilityStudy',
                 url: '/{id}/edit',
                 data: {
@@ -91,7 +91,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('feasibilityStudy.delete', {
                 parent: 'feasibilityStudy',
                 url: '/{id}/delete',
@@ -115,36 +115,36 @@ angular.module('watererpApp')
                     })
                 }]
             })
-            .state('feasibilityStudy.form', {
+            .state('feasibilityStudy.new', {
                 parent: 'feasibilityStudy',
-                url: '/form',
+                url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'FeasibilityStudysForm'
+                    pageTitle: 'FeasibilityStudys'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudysForm.html',
-                        controller: 'FeasibilityStudyFormController'
+                    	templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudy-dialog.html',
+                        controller: 'FeasibilityStudyDialogController'
                     }
                 },
                 resolve: {
                 }
             })
-            .state('feasibilityStudy.edit',	{
-            	parent : 'feasibilityStudy',
-            	url : '/edit/:feasibilityStudyId',
-            	//url: '/form',
-				data : {
-					authorities : [ 'ROLE_USER' ],
-					pageTitle : 'FeasibilityStudyForm'
-				},
-				views : {
-					'content@' : {
-						templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudysForm.html',
-                        controller: 'FeasibilityStudyFormController'
-					}
-				},
-				resolve : {}
-				});
+            .state('feasibilityStudy.edit', {
+                parent: 'feasibilityStudy',
+                url: '/edit/:id',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'FeasibilityStudys'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudy-dialog.html',
+                        controller: 'FeasibilityStudyDialogController'
+                    }
+                },
+                resolve: {
+                }
+            });
     });

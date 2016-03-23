@@ -1,21 +1,24 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams, entity, ApplicationTxn, ParseLinks, ApplicationTypeMaster, 
+    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams, ApplicationTxn, ParseLinks, ApplicationTypeMaster, 
     		ConnectionTypeMaster, CategoryMaster, PipeSizeMaster, SewerSize, Customer) {
     	
-    	$scope.applicationTxn = entity;
+    	$scope.applicationTxn = {};
         $scope.applicationtypemasters = ApplicationTypeMaster.query();
         $scope.connectiontypemasters = ConnectionTypeMaster.query();
         $scope.categorymasters = CategoryMaster.query();
         $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.sewersizes = SewerSize.query();
         $scope.customers = Customer.query();
-        /*$scope.load = function(id) {
-            ApplicationTxn.get({id : id}, function(result) {
+        
+        if($stateParams.id != null){
+        //$scope.load = function(id) {
+            ApplicationTxn.get({id : $stateParams.id}, function(result) {
                 $scope.applicationTxn = result;
             });
-        };*/
+        //};
+            }
 
         var onSaveSuccess = function (result) {
         	$scope.clear();

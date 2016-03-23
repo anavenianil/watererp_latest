@@ -60,7 +60,7 @@ public class ApprovalDetailsResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<ApprovalDetails> createApprovalDetails(@RequestBody ApprovalDetails approvalDetails) throws URISyntaxException {
-        log.debug("REST request to save ApprovalDetails : {}", approvalDetails);
+    	log.debug("REST request to save ApprovalDetails : {}", approvalDetails);
         if (approvalDetails.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("approvalDetails", "idexists", "A new approvalDetails cannot already have an ID")).body(null);
         }
@@ -69,8 +69,9 @@ public class ApprovalDetailsResource {
         
         //Integer status = Integer.parseInt(applicationTxn.getStatus());
         //workflowService.setRequestStatus(status);
+        
         try{
-        applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
+        	applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
         }
         catch(Exception e){
         	System.out.println(e);
@@ -80,21 +81,16 @@ public class ApprovalDetailsResource {
         	applicationTxnWorkflowService.updateApplicationTxn(applicationTxn.getId());        	
         }*/
         
-        /*String status = applicationTxn.getStatus();
-        
-        if("Pending".equals(status)){
-        	applicationTxn.setStatus("In Feasibility");
-        }
-        else if("In Feasibility".equals(status)){
-        	applicationTxn.setStatus("In Proceedings");
-        }
-        else if("In Proceedings".equals(status)){
-        	applicationTxn.setStatus("Connection Approved");
-        }*/
+        Integer status = applicationTxn.getStatus();
+        	
+        applicationTxn.setStatus(status += 1);
+        		
         
         applicationTxnRepository.save(applicationTxn);
+        //approvalDetails.setFeasibilityStatus(feasibilityStatus);;
         
         ApprovalDetails result = approvalDetailsRepository.save(approvalDetails);
+        
         return ResponseEntity.created(new URI("/api/approvalDetailss/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("approvalDetails", result.getId().toString()))
             .body(result);

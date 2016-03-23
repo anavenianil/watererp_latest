@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -66,8 +70,13 @@ public class ApplicationTxnResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationTxn", "idexists", "A new applicationTxn cannot already have an ID")).body(null);
         }
         
-    	Customer customer = customerRepository.save(applicationTxn.getCustomer());
-    	applicationTxn.setFileNumber(customer.getFileNumber());
+        //file number format(Division - Property Number - House No - Connection No) : DO4 - 064 - 1 - 1
+        String fileNumber = "D"+applicationTxn.getWard() +"-"+applicationTxn.getGovtOfficialNo()+"-"+applicationTxn.getsHouseNo();
+        
+        applicationTxn.setFileNumber(fileNumber);
+
+        Customer customer = customerRepository.save(applicationTxn.getCustomer());
+    	//applicationTxn.setFileNumber(customer.getFileNumber());
     	applicationTxn.setStatus(0);
     	applicationTxn.setCreatedDate(customer.getRequestDate());
     	applicationTxn.setUpdatedDate(customer.getRequestDate());
@@ -129,9 +138,7 @@ public class ApplicationTxnResource {
         throws URISyntaxException {
         log.debug("REST request to get a page of ApplicationTxns");
         //Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
-        if("All".equals(status)){
-        	status=null;
-        }
+        
         Page<ApplicationTxn> page;
         if(status== null){
         	page = applicationTxnRepository.findAll(pageable);
@@ -172,4 +179,47 @@ public class ApplicationTxnResource {
         applicationTxnRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("applicationTxn", id.toString())).build();
     }
+    
+    /**
+     * this will approve the Connection Request
+     */
+	@RequestMapping(value = "/applicationTxns/approveRequest", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<Void> approveApplication(@RequestParam(value = "id", required = false) Long id,
+						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
+
+		workflowService.getUserDetails();
+	    
+		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
+	    workflowService.setRemarks(remarks);  
+	    Integer status = applicationTxn.getStatus();
+	    status +=1;
+	    applicationTxn.setStatus(status);
+        workflowService.setRequestStatus(status);
+        applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
+        /*if(workflowService.getRequestStatus() == 2){
+        	applicationTxnWorkflowService.updateApplicationTxn(id);        	
+        }*/
+        applicationTxnRepository.save(applicationTxn);
+        return ResponseEntity.ok().build();
+	}
+	    
+    
+    /**
+     * Decline the request
+     */
+    @RequestMapping(value = "/applicationTxns/declineRequest",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<Void> declineRequests(
+			@RequestParam(value = "id", required = false) Long id, HttpServletResponse response)
+			throws Exception {
+		log.debug("REST request to get Requisition : {}", id);
+		
+		applicationTxnWorkflowService.declineRequest(id);
+		return ResponseEntity.ok().build();
+	}
 }

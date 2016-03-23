@@ -4,8 +4,6 @@
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Create or edit a
 				FeasibilityStudy</h3>
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true" ng-click="clear()">&times;</button>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -19,49 +17,106 @@
 					<fieldset>
 						<legend>Customer Details</legend>
 						<div class="row">
-							<!-- <div class="col-sm-4">
-								<label for="id">ID</label> <input type="text"
-									class="form-control" id="id" name="id"
-									ng-model="feasibilityStudy.id" readonly />
-							</div> -->
-							<!-- <div class="col-sm-6">
-								<label for="field_applicationTxn">applicationTxn</label> <select
-									class="form-control" id="field_applicationTxn"
-									name="applicationTxn"
-									ng-model="feasibilityStudy.applicationTxn"
-									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-									<option value=""></option>
-								</select>
-							</div> -->
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label>File Number</label> <input type="text"
 									class="form-control" id="field_fileNo" name="fileNo"
 									ng-model="feasibilityStudy.fileNo">
 							</div>
 							<div class="col-sm-1">
-								<label>&nbsp;</label>
-								<button type="button" class="btn glyphicon glyphicon-search"
+								<br>
+								<button type="button"
+									class="btn btn-primary glyphicon glyphicon-search"
+									ng-disabled="editForm.$invalid || isSaving"
+									ng-click="getApplication(feasibilityStudy.fileNo)"></button>
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Customer Name</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>First Name</label> <input type="text"
+									class="form-control" name="firstName" id="field_firstName"
+									ng-model="feasibilityStudy.applicationTxn.customer.firstName"
+									disabled />
+							</div>
+							<div class="col-sm-4">
+								<label>Middle Name</label> <input type="text"
+									class="form-control" name="middleName" id="field_middleName"
+									ng-model="feasibilityStudy.applicationTxn.customer.middleName"
+									disabled />
+							</div>
+							<div class="col-sm-4">
+								<label>Last Name</label> <input type="text" class="form-control"
+									name="lastName" id="field_lastName"
+									ng-model="feasibilityStudy.applicationTxn.customer.lastName"
+									disabled />
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Service Premises Area</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>House No.</label> <input type="text" class="form-control"
+									name="sHouseNo" id="field_sHouseNo"
+									ng-model="feasibilityStudy.applicationTxn.sHouseNo" disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>Street</label> <input type="text" class="form-control"
+									id="field_street" name="street"
+									ng-model="feasibilityStudy.applicationTxn.street" disabled>
+							</div>
+							<div class="col-sm-3">
+								<label>Area Code</label> <input type="text" class="form-control"
+									id="field_areaCode" name="areaCode"
+									ng-model="feasibilityStudy.applicationTxn.areaCode">
+							</div>
+							<div class="col-sm-1">
+								<br>
+								<button type="button"
+									class="btn btn-primary glyphicon glyphicon-search"
 									ng-disabled="editForm.$invalid || isSaving"
 									ng-click="getCustomer(feasibilityStudy.fileNo)"></button>
 							</div>
-
+						</div>
+						<div class="row">
 							<div class="col-sm-4">
-								<label>Customer Name</label>
-								<input type="text"
-									class="form-control" id="field_customerName"
-									name="customerName" ng-modal="feasibilityStudy.firstName"
-									ng-value="applicationTxn.customer.firstName" disabled>
+								<label>govtOfficialNo</label> <input type="text"
+									class="form-control" id="field_govtOfficialNo"
+									name="govtOfficialNo"
+									ng-model="feasibilityStudy.applicationTxn.govtOfficialNo"
+									disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>Pincode</label> <input type="text" class="form-control"
+									id="field_pincode" name="pincode"
+									ng-model="feasibilityStudy.applicationTxn.pincode" disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>Area</label> <input type="text" class="form-control"
+									id="field_area" name="area"
+									ng-model="feasibilityStudy.applicationTxn.area" disabled>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
-								<label>Service Premises Address</label>
-
+								<label>Telephone</label> <input type="text" class="form-control"
+									id="field_telephoneNumber" name="telephoneNumber"
+									ng-model="feasibilityStudy.applicationTxn.telephoneNumber"
+									disabled>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-sm-4">
-								<label>Section</label>
+								<label>Mobile</label> <input type="text" class="form-control"
+									id="field_mobile" name="mobile"
+									ng-model="feasibilityStudy.applicationTxn.mobile" disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>section</label> <input type="text" class="form-control"
+									id="field_section" name="section"
+									ng-model="feasibilityStudy.applicationTxn.section" disabled>
 							</div>
 						</div>
 					</fieldset>
@@ -73,70 +128,70 @@
 								<label for="field_schemeMaster">schemeMaster</label> <select
 									class="form-control" id="field_schemeMaster"
 									name="schemeMaster" ng-model="feasibilityStudy.schemeMaster"
-									ng-options="schemeMaster as schemeMaster.id for schemeMaster in schememasters track by schemeMaster.id">
+									ng-options="schemeMaster as schemeMaster.schemeName for schemeMaster in schememasters track by schemeMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label class="control-label" for="field_plotAreaInSqMtrs">PlotAreaInSqMtrs</label>
 								<input type="number" class="form-control"
 									name="plotAreaInSqMtrs" id="field_plotAreaInSqMtrs"
 									ng-model="feasibilityStudy.plotAreaInSqMtrs" />
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label class="control-label" for="field_plotAreaInYards">PlotAreaInYards</label>
 								<input type="number" class="form-control" name="plotAreaInYards"
 									id="field_plotAreaInYards"
 									ng-model="feasibilityStudy.plotAreaInYards" />
 							</div>
-						</div>
+							<!-- </div>
 						<br>
-						<div class="row">
-							<div class="col-sm-6">
+						<div class="row"> -->
+							<div class="col-sm-3">
 								<label for="field_tariffCategoryMaster">tariffCategoryMaster</label>
 								<select class="form-control" id="field_tariffCategoryMaster"
 									name="tariffCategoryMaster"
 									ng-model="feasibilityStudy.tariffCategoryMaster"
-									ng-options="tariffCategoryMaster as tariffCategoryMaster.id for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+									ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffName for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label for="field_categoryMaster">categoryMaster</label> <select
 									class="form-control" id="field_categoryMaster"
 									name="categoryMaster"
 									ng-model="feasibilityStudy.categoryMaster"
-									ng-options="categoryMaster as categoryMaster.id for categoryMaster in categorymasters track by categoryMaster.id">
+									ng-options="categoryMaster as categoryMaster.categoryName for categoryMaster in categorymasters track by categoryMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label class="control-label" for="field_noOfFlatsOrNoOfUnits">NoOfFlatsOrNoOfUnits</label>
 								<input type="number" class="form-control"
 									name="noOfFlatsOrNoOfUnits" id="field_noOfFlatsOrNoOfUnits"
 									ng-model="feasibilityStudy.noOfFlatsOrNoOfUnits" />
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label class="control-label" for="field_noOfFloors">NoOfFloors</label>
 								<input type="number" class="form-control" name="noOfFloors"
 									id="field_noOfFloors" ng-model="feasibilityStudy.noOfFloors" />
 							</div>
-						</div>
+							<!-- </div>
 						<br>
-						<div class="row">
-							<div class="col-sm-6">
+						<div class="row"> -->
+							<div class="col-sm-3">
 								<label class="control-label" for="field_totalPlinthArea">TotalPlinthArea</label>
 								<input type="number" class="form-control" name="totalPlinthArea"
 									id="field_totalPlinthArea"
 									ng-model="feasibilityStudy.totalPlinthArea" />
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label class="control-label" for="field_waterRequirement">WaterRequirement</label>
 								<input type="number" class="form-control"
 									name="waterRequirement" id="field_waterRequirement"
@@ -152,7 +207,7 @@
 										class="form-control" id="field_pipeSizeMaster"
 										name="pipeSizeMaster"
 										ng-model="feasibilityStudy.pipeSizeMaster"
-										ng-options="pipeSizeMaster as pipeSizeMaster.id for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id">
+										ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -160,7 +215,7 @@
 									<label for="field_mainWaterSize">mainWaterSize</label> <select
 										class="form-control" id="field_mainWaterSize"
 										name="mainWaterSize" ng-model="feasibilityStudy.mainWaterSize"
-										ng-options="mainWaterSize as mainWaterSize.id for mainWaterSize in mainwatersizes track by mainWaterSize.id">
+										ng-options="mainWaterSize as mainWaterSize.size for mainWaterSize in mainwatersizes track by mainWaterSize.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -169,7 +224,7 @@
 										class="form-control" id="field_makeOfWaterPipe"
 										name="makeOfWaterPipe"
 										ng-model="feasibilityStudy.makeOfWaterPipe"
-										ng-options="makeOfPipe as makeOfPipe.id for makeOfPipe in makeofpipes track by makeOfPipe.id">
+										ng-options="makeOfPipe as makeOfPipe.makeName for makeOfPipe in makeofpipes track by makeOfPipe.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -183,7 +238,7 @@
 									<label for="field_sewerSize">sewerSize</label> <select
 										class="form-control" id="field_sewerSize" name="sewerSize"
 										ng-model="feasibilityStudy.sewerSize"
-										ng-options="sewerSize as sewerSize.id for sewerSize in sewersizes track by sewerSize.id">
+										ng-options="sewerSize as sewerSize.sewerSize for sewerSize in sewersizes track by sewerSize.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -192,7 +247,7 @@
 										class="form-control" id="field_mainSewerageSize"
 										name="mainSewerageSize"
 										ng-model="feasibilityStudy.mainSewerageSize"
-										ng-options="mainSewerageSize as mainSewerageSize.id for mainSewerageSize in mainseweragesizes track by mainSewerageSize.id">
+										ng-options="mainSewerageSize as mainSewerageSize.size for mainSewerageSize in mainseweragesizes track by mainSewerageSize.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -201,7 +256,7 @@
 									<select class="form-control" id="field_makeOfSeweragePipe"
 										name="makeOfSeweragePipe"
 										ng-model="feasibilityStudy.makeOfSeweragePipe"
-										ng-options="makeOfPipe as makeOfPipe.id for makeOfPipe in makeofpipes track by makeOfPipe.id">
+										ng-options="makeOfPipe as makeOfPipe.makeName for makeOfPipe in makeofpipes track by makeOfPipe.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -213,7 +268,7 @@
 								<label for="field_docketCode">docketCode</label> <select
 									class="form-control" id="field_docketCode" name="docketCode"
 									ng-model="feasibilityStudy.docketCode"
-									ng-options="docketCode as docketCode.id for docketCode in docketcodes track by docketCode.id">
+									ng-options="docketCode as docketCode.code for docketCode in docketcodes track by docketCode.id">
 									<option value=""></option>
 								</select>
 							</div>
@@ -222,11 +277,47 @@
 									class="form-control" id="field_feasibilityStatus"
 									name="feasibilityStatus"
 									ng-model="feasibilityStudy.feasibilityStatus"
-									ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
+									ng-options="feasibilityStatus as feasibilityStatus.status for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
 									<option value=""></option>
 								</select>
 							</div>
 						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Items Required</legend>
+						<div ng-repeat="x in itemArr track by $index">
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_itemName">Item Name</label> <select
+										class="form-control" id="field_itemName" name="itemName"
+										ng-model="feasibilityStudy.itemRequired[x].itemDetails"
+										ng-options="itemDetails as itemDetails.itemName for itemDetails in itemDetailss track by itemDetails.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_quantity">Quantity</label>
+									<input type="number" class="form-control" name="quantity"
+										id="field_quantity"
+										ng-model="feasibilityStudy.itemRequired[x].quantity" />
+								</div>
+								<!-- <div class="col-sm-4">
+									<label for="field_applicationTxn">applicationTxn</label> <select
+										class="form-control" id="field_applicationTxn"
+										name="applicationTxn" ng-model="feasibilityStudy.itemRequired[x].applicationTxn"
+										ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+										<option value=""></option>
+									</select>
+								</div> -->
+							</div>
+						</div>
+						<br>
+						<button type="button" class="btn btn-primary"
+							ng-disabled="editForm.$invalid || isSaving"
+							ng-click="createItemArr()">
+							<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+								Items</span>
+						</button>
 					</fieldset>
 				</div>
 				<div class="modal-footer">
@@ -236,7 +327,7 @@
 					</button>
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						<span class="glyphicon glyphicon-save"></span> &nbsp;<span>Save</span>
 					</button>
 				</div>
 			</div>

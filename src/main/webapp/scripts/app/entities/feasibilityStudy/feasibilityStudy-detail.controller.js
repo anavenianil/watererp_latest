@@ -3,8 +3,7 @@
 angular.module('watererpApp')
     .controller('FeasibilityStudyDetailController', function ($scope, $state, $rootScope, $stateParams, entity, FeasibilityStudy, SchemeMaster, 
     			TariffCategoryMaster, MakeOfPipe, MainWaterSize, MainSewerageSize, DocketCode, ApplicationTxn, CategoryMaster, SewerSize, 
-    			PipeSizeMaster, FeasibilityStatus,
-    		ApprovalDetails) {
+    			PipeSizeMaster, FeasibilityStatus, ApplicationTxnService) {
         $scope.feasibilityStudy = entity;
         $scope.approvalDetails = {};
         $scope.approvalDetails.applicationTxn = {};
@@ -30,12 +29,11 @@ angular.module('watererpApp')
             });
         };
         
-        $scope.approvalDetailsSave = function(){
+        $scope.approvalDetailsSave = function(id, remarks){
         	$('#approveModal').modal('hide');
-        	console.log(JSON.stringify($scope.approvalDetails));
-            ApprovalDetails.save(($scope.approvalDetails), function(){
-            	$state.go('feasibilityStudy');
-            });
+        	//console.log(JSON.stringify($scope.approvalDetails));
+        	ApplicationTxnService.approveRequest(id, remarks);
+        	$state.go('feasibilityStudy');
         }
        
         $scope.datePickerForApprovedDate = {};
