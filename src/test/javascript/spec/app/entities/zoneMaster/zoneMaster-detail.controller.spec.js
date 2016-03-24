@@ -2,37 +2,35 @@
 
 describe('Controller Tests', function() {
 
-    describe('ApplicationTxn Detail Controller', function() {
+    describe('ZoneMaster Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockApplicationTxn, MockCategoryMaster, MockCustomer;
+        var MockEntity, MockZoneMaster, MockDivisionMaster;
         var createController;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
-            MockApplicationTxn = jasmine.createSpy('MockApplicationTxn');
-            MockCategoryMaster = jasmine.createSpy('MockCategoryMaster');
-            MockCustomer = jasmine.createSpy('MockCustomer');
+            MockZoneMaster = jasmine.createSpy('MockZoneMaster');
+            MockDivisionMaster = jasmine.createSpy('MockDivisionMaster');
             
 
             var locals = {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
-                'ApplicationTxn': MockApplicationTxn,
-                'CategoryMaster': MockCategoryMaster,
-                'Customer': MockCustomer
+                'ZoneMaster': MockZoneMaster,
+                'DivisionMaster': MockDivisionMaster
             };
             createController = function() {
-                $injector.get('$controller')("ApplicationTxnDetailController", locals);
+                $injector.get('$controller')("ZoneMasterDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'watererpApp:applicationTxnUpdate';
+                var eventType = 'watererpApp:zoneMasterUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

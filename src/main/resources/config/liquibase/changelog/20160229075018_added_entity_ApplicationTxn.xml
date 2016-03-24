@@ -23,7 +23,7 @@
             </column>
             <column name="full_name" type="varchar(255)"/>
             
-            <column name="home_or_ofice_number" type="integer"/>
+            <column name="home_or_office_number" type="integer"/>
             
             <column name="regional_number" type="integer"/>
             
@@ -39,14 +39,6 @@
             
             <column name="village_executive_office_number" type="varchar(255)"/>
             
-            <column name="house" type="varchar(255)"/>
-            
-            <column name="institution" type="varchar(255)"/>
-            
-            <column name="business" type="varchar(255)"/>
-            
-            <column name="industry" type="varchar(255)"/>
-            
             <column name="po_box" type="varchar(255)"/>
             
             <column name="requested_date" type="timestamp"/>
@@ -61,6 +53,8 @@
             
             <column name="status" type="integer"/>
             
+            <column name="category_master_id" type="bigint"/>
+            <column name="customer_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="application_txn" columnName="requested_date" columnDataType="datetime"/>
@@ -70,5 +64,17 @@
         <dropDefaultValue tableName="application_txn" columnName="updated_date" columnDataType="datetime"/>
 
         
+        <addForeignKeyConstraint baseColumnNames="category_master_id"
+                                 baseTableName="application_txn"
+                                 constraintName="fk_applicationtxn_categorymaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="category_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="application_txn"
+                                 constraintName="fk_applicationtxn_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
     </changeSet>
 </databaseChangeLog>

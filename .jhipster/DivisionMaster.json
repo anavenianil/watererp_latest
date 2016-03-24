@@ -1,0 +1,19 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "divisionName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "divisionCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160324101153",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

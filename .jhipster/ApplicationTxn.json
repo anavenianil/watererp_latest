@@ -1,5 +1,19 @@
 {
     "relationships": [
+    	{
+            "relationshipId": 1,
+            "relationshipName": "categoryMaster",
+            "otherEntityName": "categoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
     ],
     "fields": [
         {
@@ -9,7 +23,7 @@
         },
         {
             "fieldId": 2,
-            "fieldName": "homeOrOficeNumber",
+            "fieldName": "homeOrOfficeNumber",
             "fieldType": "Integer"
         },
         {
@@ -49,56 +63,36 @@
         },
         {
             "fieldId": 10,
-            "fieldName": "house",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 11,
-            "fieldName": "institution",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 12,
-            "fieldName": "business",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 13,
-            "fieldName": "industry",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 14,
             "fieldName": "poBox",
             "fieldType": "String"
         },
         {
-            "fieldId": 15,
+            "fieldId": 11,
             "fieldName": "requestedDate",
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldId": 16,
+            "fieldId": 12,
             "fieldName": "photo",
             "fieldType": "String"
         },
         {
-            "fieldId": 17,
+            "fieldId": 13,
             "fieldName": "fileNumber",
             "fieldType": "String"
         },
         {
-            "fieldId": 18,
+            "fieldId": 14,
             "fieldName": "createdDate",
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldId": 19,
+            "fieldId": 15,
             "fieldName": "updatedDate",
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldId": 20,
+            "fieldId": 16,
             "fieldName": "status",
             "fieldType": "Integer"
         }

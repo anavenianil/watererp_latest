@@ -6,6 +6,8 @@ import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -23,8 +25,8 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "full_name")
     private String fullName;
     
-    @Column(name = "home_or_ofice_number")
-    private Integer homeOrOficeNumber;
+    @Column(name = "home_or_office_number")
+    private Integer homeOrOfficeNumber;
     
     @Column(name = "regional_number")
     private Integer regionalNumber;
@@ -47,18 +49,6 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "village_executive_office_number")
     private String villageExecutiveOfficeNumber;
     
-    @Column(name = "house")
-    private String house;
-    
-    @Column(name = "institution")
-    private String institution;
-    
-    @Column(name = "business")
-    private String business;
-    
-    @Column(name = "industry")
-    private String industry;
-    
     @Column(name = "po_box")
     private String poBox;
     
@@ -80,6 +70,14 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "status")
     private Integer status;
     
+    @ManyToOne
+    @JoinColumn(name = "category_master_id")
+    private CategoryMaster categoryMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public Long getId() {
         return id;
     }
@@ -96,12 +94,12 @@ public class ApplicationTxn implements Serializable {
         this.fullName = fullName;
     }
 
-    public Integer getHomeOrOficeNumber() {
-        return homeOrOficeNumber;
+    public Integer getHomeOrOfficeNumber() {
+        return homeOrOfficeNumber;
     }
     
-    public void setHomeOrOficeNumber(Integer homeOrOficeNumber) {
-        this.homeOrOficeNumber = homeOrOficeNumber;
+    public void setHomeOrOfficeNumber(Integer homeOrOfficeNumber) {
+        this.homeOrOfficeNumber = homeOrOfficeNumber;
     }
 
     public Integer getRegionalNumber() {
@@ -160,38 +158,6 @@ public class ApplicationTxn implements Serializable {
         this.villageExecutiveOfficeNumber = villageExecutiveOfficeNumber;
     }
 
-    public String getHouse() {
-        return house;
-    }
-    
-    public void setHouse(String house) {
-        this.house = house;
-    }
-
-    public String getInstitution() {
-        return institution;
-    }
-    
-    public void setInstitution(String institution) {
-        this.institution = institution;
-    }
-
-    public String getBusiness() {
-        return business;
-    }
-    
-    public void setBusiness(String business) {
-        this.business = business;
-    }
-
-    public String getIndustry() {
-        return industry;
-    }
-    
-    public void setIndustry(String industry) {
-        this.industry = industry;
-    }
-
     public String getPoBox() {
         return poBox;
     }
@@ -248,6 +214,22 @@ public class ApplicationTxn implements Serializable {
         this.status = status;
     }
 
+    public CategoryMaster getCategoryMaster() {
+        return categoryMaster;
+    }
+
+    public void setCategoryMaster(CategoryMaster categoryMaster) {
+        this.categoryMaster = categoryMaster;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -273,7 +255,7 @@ public class ApplicationTxn implements Serializable {
         return "ApplicationTxn{" +
             "id=" + id +
             ", fullName='" + fullName + "'" +
-            ", homeOrOficeNumber='" + homeOrOficeNumber + "'" +
+            ", homeOrOfficeNumber='" + homeOrOfficeNumber + "'" +
             ", regionalNumber='" + regionalNumber + "'" +
             ", faxNumber='" + faxNumber + "'" +
             ", plotNumber='" + plotNumber + "'" +
@@ -281,10 +263,6 @@ public class ApplicationTxn implements Serializable {
             ", street='" + street + "'" +
             ", villageExecutiveOffice='" + villageExecutiveOffice + "'" +
             ", villageExecutiveOfficeNumber='" + villageExecutiveOfficeNumber + "'" +
-            ", house='" + house + "'" +
-            ", institution='" + institution + "'" +
-            ", business='" + business + "'" +
-            ", industry='" + industry + "'" +
             ", poBox='" + poBox + "'" +
             ", requestedDate='" + requestedDate + "'" +
             ", photo='" + photo + "'" +

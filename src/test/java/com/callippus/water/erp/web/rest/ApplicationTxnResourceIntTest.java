@@ -50,8 +50,8 @@ public class ApplicationTxnResourceIntTest {
     private static final String DEFAULT_FULL_NAME = "AAAAA";
     private static final String UPDATED_FULL_NAME = "BBBBB";
 
-    private static final Integer DEFAULT_HOME_OR_OFICE_NUMBER = 1;
-    private static final Integer UPDATED_HOME_OR_OFICE_NUMBER = 2;
+    private static final Integer DEFAULT_HOME_OR_OFFICE_NUMBER = 1;
+    private static final Integer UPDATED_HOME_OR_OFFICE_NUMBER = 2;
 
     private static final Integer DEFAULT_REGIONAL_NUMBER = 1;
     private static final Integer UPDATED_REGIONAL_NUMBER = 2;
@@ -68,14 +68,6 @@ public class ApplicationTxnResourceIntTest {
     private static final String UPDATED_VILLAGE_EXECUTIVE_OFFICE = "BBBBB";
     private static final String DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER = "AAAAA";
     private static final String UPDATED_VILLAGE_EXECUTIVE_OFFICE_NUMBER = "BBBBB";
-    private static final String DEFAULT_HOUSE = "AAAAA";
-    private static final String UPDATED_HOUSE = "BBBBB";
-    private static final String DEFAULT_INSTITUTION = "AAAAA";
-    private static final String UPDATED_INSTITUTION = "BBBBB";
-    private static final String DEFAULT_BUSINESS = "AAAAA";
-    private static final String UPDATED_BUSINESS = "BBBBB";
-    private static final String DEFAULT_INDUSTRY = "AAAAA";
-    private static final String UPDATED_INDUSTRY = "BBBBB";
     private static final String DEFAULT_PO_BOX = "AAAAA";
     private static final String UPDATED_PO_BOX = "BBBBB";
 
@@ -125,7 +117,7 @@ public class ApplicationTxnResourceIntTest {
     public void initTest() {
         applicationTxn = new ApplicationTxn();
         applicationTxn.setFullName(DEFAULT_FULL_NAME);
-        applicationTxn.setHomeOrOficeNumber(DEFAULT_HOME_OR_OFICE_NUMBER);
+        applicationTxn.setHomeOrOfficeNumber(DEFAULT_HOME_OR_OFFICE_NUMBER);
         applicationTxn.setRegionalNumber(DEFAULT_REGIONAL_NUMBER);
         applicationTxn.setFaxNumber(DEFAULT_FAX_NUMBER);
         applicationTxn.setPlotNumber(DEFAULT_PLOT_NUMBER);
@@ -133,10 +125,6 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setStreet(DEFAULT_STREET);
         applicationTxn.setVillageExecutiveOffice(DEFAULT_VILLAGE_EXECUTIVE_OFFICE);
         applicationTxn.setVillageExecutiveOfficeNumber(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
-        applicationTxn.setHouse(DEFAULT_HOUSE);
-        applicationTxn.setInstitution(DEFAULT_INSTITUTION);
-        applicationTxn.setBusiness(DEFAULT_BUSINESS);
-        applicationTxn.setIndustry(DEFAULT_INDUSTRY);
         applicationTxn.setPoBox(DEFAULT_PO_BOX);
         applicationTxn.setRequestedDate(DEFAULT_REQUESTED_DATE);
         applicationTxn.setPhoto(DEFAULT_PHOTO);
@@ -163,7 +151,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(applicationTxns).hasSize(databaseSizeBeforeCreate + 1);
         ApplicationTxn testApplicationTxn = applicationTxns.get(applicationTxns.size() - 1);
         assertThat(testApplicationTxn.getFullName()).isEqualTo(DEFAULT_FULL_NAME);
-        assertThat(testApplicationTxn.getHomeOrOficeNumber()).isEqualTo(DEFAULT_HOME_OR_OFICE_NUMBER);
+        assertThat(testApplicationTxn.getHomeOrOfficeNumber()).isEqualTo(DEFAULT_HOME_OR_OFFICE_NUMBER);
         assertThat(testApplicationTxn.getRegionalNumber()).isEqualTo(DEFAULT_REGIONAL_NUMBER);
         assertThat(testApplicationTxn.getFaxNumber()).isEqualTo(DEFAULT_FAX_NUMBER);
         assertThat(testApplicationTxn.getPlotNumber()).isEqualTo(DEFAULT_PLOT_NUMBER);
@@ -171,10 +159,6 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getStreet()).isEqualTo(DEFAULT_STREET);
         assertThat(testApplicationTxn.getVillageExecutiveOffice()).isEqualTo(DEFAULT_VILLAGE_EXECUTIVE_OFFICE);
         assertThat(testApplicationTxn.getVillageExecutiveOfficeNumber()).isEqualTo(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
-        assertThat(testApplicationTxn.getHouse()).isEqualTo(DEFAULT_HOUSE);
-        assertThat(testApplicationTxn.getInstitution()).isEqualTo(DEFAULT_INSTITUTION);
-        assertThat(testApplicationTxn.getBusiness()).isEqualTo(DEFAULT_BUSINESS);
-        assertThat(testApplicationTxn.getIndustry()).isEqualTo(DEFAULT_INDUSTRY);
         assertThat(testApplicationTxn.getPoBox()).isEqualTo(DEFAULT_PO_BOX);
         assertThat(testApplicationTxn.getRequestedDate()).isEqualTo(DEFAULT_REQUESTED_DATE);
         assertThat(testApplicationTxn.getPhoto()).isEqualTo(DEFAULT_PHOTO);
@@ -196,7 +180,7 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(applicationTxn.getId().intValue())))
                 .andExpect(jsonPath("$.[*].fullName").value(hasItem(DEFAULT_FULL_NAME.toString())))
-                .andExpect(jsonPath("$.[*].homeOrOficeNumber").value(hasItem(DEFAULT_HOME_OR_OFICE_NUMBER)))
+                .andExpect(jsonPath("$.[*].homeOrOfficeNumber").value(hasItem(DEFAULT_HOME_OR_OFFICE_NUMBER)))
                 .andExpect(jsonPath("$.[*].regionalNumber").value(hasItem(DEFAULT_REGIONAL_NUMBER)))
                 .andExpect(jsonPath("$.[*].faxNumber").value(hasItem(DEFAULT_FAX_NUMBER)))
                 .andExpect(jsonPath("$.[*].plotNumber").value(hasItem(DEFAULT_PLOT_NUMBER.toString())))
@@ -204,10 +188,6 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
                 .andExpect(jsonPath("$.[*].villageExecutiveOffice").value(hasItem(DEFAULT_VILLAGE_EXECUTIVE_OFFICE.toString())))
                 .andExpect(jsonPath("$.[*].villageExecutiveOfficeNumber").value(hasItem(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER.toString())))
-                .andExpect(jsonPath("$.[*].house").value(hasItem(DEFAULT_HOUSE.toString())))
-                .andExpect(jsonPath("$.[*].institution").value(hasItem(DEFAULT_INSTITUTION.toString())))
-                .andExpect(jsonPath("$.[*].business").value(hasItem(DEFAULT_BUSINESS.toString())))
-                .andExpect(jsonPath("$.[*].industry").value(hasItem(DEFAULT_INDUSTRY.toString())))
                 .andExpect(jsonPath("$.[*].poBox").value(hasItem(DEFAULT_PO_BOX.toString())))
                 .andExpect(jsonPath("$.[*].requestedDate").value(hasItem(DEFAULT_REQUESTED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
@@ -229,7 +209,7 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(applicationTxn.getId().intValue()))
             .andExpect(jsonPath("$.fullName").value(DEFAULT_FULL_NAME.toString()))
-            .andExpect(jsonPath("$.homeOrOficeNumber").value(DEFAULT_HOME_OR_OFICE_NUMBER))
+            .andExpect(jsonPath("$.homeOrOfficeNumber").value(DEFAULT_HOME_OR_OFFICE_NUMBER))
             .andExpect(jsonPath("$.regionalNumber").value(DEFAULT_REGIONAL_NUMBER))
             .andExpect(jsonPath("$.faxNumber").value(DEFAULT_FAX_NUMBER))
             .andExpect(jsonPath("$.plotNumber").value(DEFAULT_PLOT_NUMBER.toString()))
@@ -237,10 +217,6 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
             .andExpect(jsonPath("$.villageExecutiveOffice").value(DEFAULT_VILLAGE_EXECUTIVE_OFFICE.toString()))
             .andExpect(jsonPath("$.villageExecutiveOfficeNumber").value(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER.toString()))
-            .andExpect(jsonPath("$.house").value(DEFAULT_HOUSE.toString()))
-            .andExpect(jsonPath("$.institution").value(DEFAULT_INSTITUTION.toString()))
-            .andExpect(jsonPath("$.business").value(DEFAULT_BUSINESS.toString()))
-            .andExpect(jsonPath("$.industry").value(DEFAULT_INDUSTRY.toString()))
             .andExpect(jsonPath("$.poBox").value(DEFAULT_PO_BOX.toString()))
             .andExpect(jsonPath("$.requestedDate").value(DEFAULT_REQUESTED_DATE_STR))
             .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
@@ -268,7 +244,7 @@ public class ApplicationTxnResourceIntTest {
 
         // Update the applicationTxn
         applicationTxn.setFullName(UPDATED_FULL_NAME);
-        applicationTxn.setHomeOrOficeNumber(UPDATED_HOME_OR_OFICE_NUMBER);
+        applicationTxn.setHomeOrOfficeNumber(UPDATED_HOME_OR_OFFICE_NUMBER);
         applicationTxn.setRegionalNumber(UPDATED_REGIONAL_NUMBER);
         applicationTxn.setFaxNumber(UPDATED_FAX_NUMBER);
         applicationTxn.setPlotNumber(UPDATED_PLOT_NUMBER);
@@ -276,10 +252,6 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setStreet(UPDATED_STREET);
         applicationTxn.setVillageExecutiveOffice(UPDATED_VILLAGE_EXECUTIVE_OFFICE);
         applicationTxn.setVillageExecutiveOfficeNumber(UPDATED_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
-        applicationTxn.setHouse(UPDATED_HOUSE);
-        applicationTxn.setInstitution(UPDATED_INSTITUTION);
-        applicationTxn.setBusiness(UPDATED_BUSINESS);
-        applicationTxn.setIndustry(UPDATED_INDUSTRY);
         applicationTxn.setPoBox(UPDATED_PO_BOX);
         applicationTxn.setRequestedDate(UPDATED_REQUESTED_DATE);
         applicationTxn.setPhoto(UPDATED_PHOTO);
@@ -298,7 +270,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(applicationTxns).hasSize(databaseSizeBeforeUpdate);
         ApplicationTxn testApplicationTxn = applicationTxns.get(applicationTxns.size() - 1);
         assertThat(testApplicationTxn.getFullName()).isEqualTo(UPDATED_FULL_NAME);
-        assertThat(testApplicationTxn.getHomeOrOficeNumber()).isEqualTo(UPDATED_HOME_OR_OFICE_NUMBER);
+        assertThat(testApplicationTxn.getHomeOrOfficeNumber()).isEqualTo(UPDATED_HOME_OR_OFFICE_NUMBER);
         assertThat(testApplicationTxn.getRegionalNumber()).isEqualTo(UPDATED_REGIONAL_NUMBER);
         assertThat(testApplicationTxn.getFaxNumber()).isEqualTo(UPDATED_FAX_NUMBER);
         assertThat(testApplicationTxn.getPlotNumber()).isEqualTo(UPDATED_PLOT_NUMBER);
@@ -306,10 +278,6 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testApplicationTxn.getVillageExecutiveOffice()).isEqualTo(UPDATED_VILLAGE_EXECUTIVE_OFFICE);
         assertThat(testApplicationTxn.getVillageExecutiveOfficeNumber()).isEqualTo(UPDATED_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
-        assertThat(testApplicationTxn.getHouse()).isEqualTo(UPDATED_HOUSE);
-        assertThat(testApplicationTxn.getInstitution()).isEqualTo(UPDATED_INSTITUTION);
-        assertThat(testApplicationTxn.getBusiness()).isEqualTo(UPDATED_BUSINESS);
-        assertThat(testApplicationTxn.getIndustry()).isEqualTo(UPDATED_INDUSTRY);
         assertThat(testApplicationTxn.getPoBox()).isEqualTo(UPDATED_PO_BOX);
         assertThat(testApplicationTxn.getRequestedDate()).isEqualTo(UPDATED_REQUESTED_DATE);
         assertThat(testApplicationTxn.getPhoto()).isEqualTo(UPDATED_PHOTO);

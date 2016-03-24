@@ -129,59 +129,16 @@
 						<fieldset>
 							<legend>Connection Type</legend>
 							<div class="row">
-								<div class="col-sm-3">
-									<label class="control-label" for="field_house">House</label> <input
-										type="text" class="form-control" name="house" id="field_house"
-										ng-model="applicationTxn.house" />
-								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_institution">Institution</label>
-									<input type="text" class="form-control" name="institution"
-										id="field_institution" ng-model="applicationTxn.institution" />
-								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_business">Business</label>
-									<input type="text" class="form-control" name="business"
-										id="field_business" ng-model="applicationTxn.business" />
-								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_industry">Industry</label>
-									<input type="text" class="form-control" name="industry"
-										id="field_industry" ng-model="applicationTxn.industry" />
+								<div class="col-sm-6">
+									<label for="field_categoryMaster">Category</label> <select
+										class="form-control" id="field_categoryMaster"
+										name="categoryMaster" ng-model="applicationTxn.categoryMaster"
+										ng-options="categoryMaster as categoryMaster.categoryName for categoryMaster in categoryMasters track by categoryMaster.id">
+										<option value=""></option>
+									</select>
 								</div>
 							</div>
 						</fieldset>
-						<!-- <div class="col-sm-3">
-						<label class="control-label" for="field_createdDate">CreatedDate</label>
-						<input id="field_createdDate" type="text" class="form-control"
-							uib-datepicker-popup="{{dateformat}}"
-							ng-model="applicationTxn.createdDate"
-							is-open="datePickerForCreatedDate.status.opened" /> <span
-							class="input-group-btn">
-							<button type="button" class="btn btn-default"
-								ng-click="datePickerForCreatedDateOpen($event)">
-								<i class="glyphicon glyphicon-calendar"></i>
-							</button>
-						</span>
-					</div>
-					<div class="col-sm-3">
-						<label class="control-label" for="field_updatedDate">UpdatedDate</label>
-						<input id="field_updatedDate" type="text" class="form-control"
-							uib-datepicker-popup="{{dateformat}}"
-							ng-model="applicationTxn.updatedDate"
-							is-open="datePickerForUpdatedDate.status.opened" /> <span
-							class="input-group-btn">
-							<button type="button" class="btn btn-default"
-								ng-click="datePickerForUpdatedDateOpen($event)">
-								<i class="glyphicon glyphicon-calendar"></i>
-							</button>
-						</span>
-					</div>
-					<div class="col-sm-3">
-						<label class="control-label" for="field_status">Status</label> <input
-							type="number" class="form-control" name="status"
-							id="field_status" ng-model="applicationTxn.status" />
-					</div> -->
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"

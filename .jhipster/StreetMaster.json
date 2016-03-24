@@ -1,0 +1,27 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "zoneMaster",
+            "otherEntityName": "zoneMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "zoneName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "streetName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "streetCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160324101502",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

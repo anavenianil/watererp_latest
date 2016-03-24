@@ -89,20 +89,12 @@
 					<fieldset>
 						<legend>Connection Details</legend>
 						<div class="col-sm-3">
-							<label>House</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.house}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Institution</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.institution}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Business</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.business}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Industry</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.industry}}</h5>
+							<label for="field_categoryMaster">Category</label> <select
+								class="form-control" id="field_categoryMaster"
+								name="categoryMaster" ng-model="applicationTxn.categoryMaster"
+								ng-options="categoryMaster as categoryMaster.categoryName for categoryMaster in categorymasters track by categoryMaster.id">
+								<option value=""></option>
+							</select>
 						</div>
 					</fieldset>
 					<br>

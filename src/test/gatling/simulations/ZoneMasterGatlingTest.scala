@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the ApplicationTxn entity.
+ * Performance test for the ZoneMaster entity.
  */
-class ApplicationTxnGatlingTest extends Simulation {
+class ZoneMasterGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class ApplicationTxnGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the ApplicationTxn entity")
+    val scn = scenario("Test the ZoneMaster entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class ApplicationTxnGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all applicationTxns")
-            .get("/api/applicationTxns")
+            exec(http("Get all zoneMasters")
+            .get("/api/zoneMasters")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new applicationTxn")
-            .post("/api/applicationTxns")
+            .exec(http("Create new zoneMaster")
+            .post("/api/zoneMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "fullName":"SAMPLE_TEXT", "homeOrOfficeNumber":"0", "regionalNumber":"0", "faxNumber":"0", "plotNumber":"SAMPLE_TEXT", "area":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "villageExecutiveOffice":"SAMPLE_TEXT", "villageExecutiveOfficeNumber":"SAMPLE_TEXT", "poBox":"SAMPLE_TEXT", "requestedDate":"2020-01-01T00:00:00.000Z", "photo":"SAMPLE_TEXT", "fileNumber":"SAMPLE_TEXT", "createdDate":"2020-01-01T00:00:00.000Z", "updatedDate":"2020-01-01T00:00:00.000Z", "status":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "zoneName":"SAMPLE_TEXT", "zoneCode":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_applicationTxn_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_zoneMaster_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created applicationTxn")
-                .get("${new_applicationTxn_url}")
+                exec(http("Get created zoneMaster")
+                .get("${new_zoneMaster_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created applicationTxn")
-            .delete("${new_applicationTxn_url}")
+            .exec(http("Delete created zoneMaster")
+            .delete("${new_zoneMaster_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

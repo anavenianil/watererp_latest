@@ -1,0 +1,27 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "divisionMaster",
+            "otherEntityName": "divisionMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "divisionName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "zoneName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "zoneCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160324101330",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

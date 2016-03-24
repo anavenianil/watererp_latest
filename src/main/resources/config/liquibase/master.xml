@@ -66,5 +66,8 @@
     <include file="classpath:config/liquibase/changelog/20160315083447_added_entity_Proceedings.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160317071301_added_entity_ItemDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160317100956_added_entity_ItemRequired.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160324101153_added_entity_DivisionMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160324101330_added_entity_ZoneMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160324101502_added_entity_StreetMaster.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

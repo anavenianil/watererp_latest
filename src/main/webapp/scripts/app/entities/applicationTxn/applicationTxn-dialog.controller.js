@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks) {
+    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster) {
 
     	$scope.applicationTxn = {};
+    	$scope.categoryMasters = CategoryMaster.query();
     	
     	if($stateParams.id != null){
                 ApplicationTxn.get({id : $stateParams.id}, function(result) {
