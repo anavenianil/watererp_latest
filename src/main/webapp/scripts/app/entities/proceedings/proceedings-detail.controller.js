@@ -29,12 +29,11 @@ angular.module('watererpApp')
             });
         };
         
-        $scope.approvalDetailsSave = function(){
+        $scope.approvalDetailsSave = function(id, remarks){
         	$('#approveModal').modal('hide');
-        	console.log(JSON.stringify($scope.approvalDetails));
-            ApprovalDetails.save(($scope.approvalDetails), function(){
-            	$state.go('proceedings');
-            });
+        	//console.log(JSON.stringify($scope.approvalDetails));
+        	ApplicationTxnService.approveRequest(id, remarks);
+        	$state.go('proceedings');
         }
        
         $scope.datePickerForApprovedDate = {};
