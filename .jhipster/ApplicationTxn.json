@@ -1,133 +1,91 @@
 {
     "relationships": [
-        {
-            "relationshipId": 1,
-            "relationshipName": "applicationTypeMaster",
-            "otherEntityName": "applicationTypeMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 2,
-            "relationshipName": "connectionTypeMaster",
-            "otherEntityName": "connectionTypeMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 3,
-            "relationshipName": "categoryMaster",
-            "otherEntityName": "categoryMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 4,
-            "relationshipName": "pipeSizeMaster",
-            "otherEntityName": "pipeSizeMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 5,
-            "relationshipName": "sewerSize",
-            "otherEntityName": "sewerSize",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 6,
-            "relationshipName": "customer",
-            "otherEntityName": "customer",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
     ],
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "sHouseNo",
+            "fieldName": "fullName",
             "fieldType": "String"
         },
         {
             "fieldId": 2,
-            "fieldName": "govtOfficialNo",
-            "fieldType": "String"
+            "fieldName": "homeOrOficeNumber",
+            "fieldType": "Integer"
         },
         {
             "fieldId": 3,
-            "fieldName": "ward",
-            "fieldType": "String"
+            "fieldName": "regionalNumber",
+            "fieldType": "Integer"
         },
         {
             "fieldId": 4,
-            "fieldName": "street",
-            "fieldType": "String"
+            "fieldName": "faxNumber",
+            "fieldType": "Integer"
         },
         {
             "fieldId": 5,
-            "fieldName": "pincode",
+            "fieldName": "plotNumber",
             "fieldType": "String"
         },
         {
             "fieldId": 6,
-            "fieldName": "block",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 7,
             "fieldName": "area",
             "fieldType": "String"
         },
         {
+            "fieldId": 7,
+            "fieldName": "street",
+            "fieldType": "String"
+        },
+        {
             "fieldId": 8,
-            "fieldName": "section",
+            "fieldName": "villageExecutiveOffice",
             "fieldType": "String"
         },
         {
             "fieldId": 9,
-            "fieldName": "constituency",
+            "fieldName": "villageExecutiveOfficeNumber",
             "fieldType": "String"
         },
         {
             "fieldId": 10,
-            "fieldName": "email",
+            "fieldName": "house",
             "fieldType": "String"
         },
         {
             "fieldId": 11,
-            "fieldName": "telephoneNumber",
+            "fieldName": "institution",
             "fieldType": "String"
         },
         {
             "fieldId": 12,
-            "fieldName": "mobile",
+            "fieldName": "business",
             "fieldType": "String"
         },
         {
             "fieldId": 13,
-            "fieldName": "scanPlan",
-            "fieldType": "Float"
+            "fieldName": "industry",
+            "fieldType": "String"
         },
         {
             "fieldId": 14,
-            "fieldName": "scanPlan1",
-            "fieldType": "Float"
+            "fieldName": "poBox",
+            "fieldType": "String"
         },
         {
             "fieldId": 15,
-            "fieldName": "saleDeed",
-            "fieldType": "Float"
+            "fieldName": "requestedDate",
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldId": 16,
-            "fieldName": "saleDeed1",
-            "fieldType": "Float"
+            "fieldName": "photo",
+            "fieldType": "String"
         },
         {
             "fieldId": 17,
-            "fieldName": "totalPlinthArea",
-            "fieldType": "Float"
+            "fieldName": "fileNumber",
+            "fieldType": "String"
         },
         {
             "fieldId": 18,
@@ -143,11 +101,6 @@
             "fieldId": 20,
             "fieldName": "status",
             "fieldType": "Integer"
-        },
-        {
-            "fieldId": 21,
-            "fieldName": "fileNumber",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20160229075018",

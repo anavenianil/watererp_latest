@@ -52,23 +52,23 @@ angular.module('watererpApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    sHouseNo: null,
-                                    govtOfficialNo: null,
-                                    ward: null,
-                                    street: null,
-                                    pincode: null,
-                                    block: null,
+                                    fullName: null,
+                                    homeOrOficeNumber: null,
+                                    regionalNumber: null,
+                                    faxNumber: null,
+                                    plotNumber: null,
                                     area: null,
-                                    section: null,
-                                    constituency: null,
-                                    email: null,
-                                    telephoneNumber: null,
-                                    mobile: null,
-                                    scanPlan: null,
-                                    scanPlan1: null,
-                                    saleDeed: null,
-                                    saleDeed1: null,
-                                    totalPlinthArea: null,
+                                    street: null,
+                                    villageExecutiveOffice: null,
+                                    villageExecutiveOfficeNumber: null,
+                                    house: null,
+                                    institution: null,
+                                    business: null,
+                                    industry: null,
+                                    poBox: null,
+                                    requestedDate: null,
+                                    photo: null,
+                                    fileNumber: null,
                                     createdDate: null,
                                     updatedDate: null,
                                     status: null,
@@ -138,8 +138,8 @@ angular.module('watererpApp')
                 },
                 views: {
                     'content@': {
-                    	 templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
-                         controller: 'ApplicationTxnDialogController'
+                    	templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
+                        controller: 'ApplicationTxnDialogController'
                     }
                 },
                 resolve: {
@@ -154,14 +154,12 @@ angular.module('watererpApp')
                 },
                 views: {
                     'content@': {
-                    	 templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
-                         controller: 'ApplicationTxnDialogController'
+                    	templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-dialog.html',
+                        controller: 'ApplicationTxnDialogController'
                     }
                 },
                 resolve: {
-                	entity: ['$stateParams', 'ApplicationTxn', function($stateParams, ApplicationTxn) {
-                        return ApplicationTxn.get({id : $stateParams.id});
-                    }]
+                	
                 }
             });
     });

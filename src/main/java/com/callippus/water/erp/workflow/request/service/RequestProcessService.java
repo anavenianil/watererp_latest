@@ -1,5 +1,6 @@
 package com.callippus.water.erp.workflow.request.service;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Service;
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ConfigurationDetails;
-import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.RequestMaster;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
@@ -490,7 +490,7 @@ public class RequestProcessService {
 		workflowService.getRequestTypeID();
 
 		Long domainId = Long.parseLong(workflowService.getDomain_object_id());
-		Customer customer=applicationTxnRepository.findOne(domainId).getCustomer();
+		//Customer customer=applicationTxnRepository.findOne(domainId).getCustomer();
 		//rwh.setAppliedBy(appliedBy);
 
 		workflowService.getUserDetails();
@@ -512,6 +512,9 @@ public class RequestProcessService {
 				workflowService.getRequestTypeID())));
 		rwh.setWorkflowMaster(workflowMasterRepository.findOne(new Long(
 				workflowService.getWorkflowID())));
+		ZonedDateTime now = ZonedDateTime.now();
+		rwh.setActionedDate(now);
+		rwh.setAssignedDate(now);
 
 		request_workflow_historyRepository.save(rwh);
 

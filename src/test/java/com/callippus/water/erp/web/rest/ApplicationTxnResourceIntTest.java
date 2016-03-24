@@ -47,45 +47,45 @@ public class ApplicationTxnResourceIntTest {
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
 
-    private static final String DEFAULT_S_HOUSE_NO = "AAAAA";
-    private static final String UPDATED_S_HOUSE_NO = "BBBBB";
-    private static final String DEFAULT_GOVT_OFFICIAL_NO = "AAAAA";
-    private static final String UPDATED_GOVT_OFFICIAL_NO = "BBBBB";
-    private static final String DEFAULT_WARD = "AAAAA";
-    private static final String UPDATED_WARD = "BBBBB";
-    private static final String DEFAULT_STREET = "AAAAA";
-    private static final String UPDATED_STREET = "BBBBB";
-    private static final String DEFAULT_PINCODE = "AAAAA";
-    private static final String UPDATED_PINCODE = "BBBBB";
-    private static final String DEFAULT_BLOCK = "AAAAA";
-    private static final String UPDATED_BLOCK = "BBBBB";
+    private static final String DEFAULT_FULL_NAME = "AAAAA";
+    private static final String UPDATED_FULL_NAME = "BBBBB";
+
+    private static final Integer DEFAULT_HOME_OR_OFICE_NUMBER = 1;
+    private static final Integer UPDATED_HOME_OR_OFICE_NUMBER = 2;
+
+    private static final Integer DEFAULT_REGIONAL_NUMBER = 1;
+    private static final Integer UPDATED_REGIONAL_NUMBER = 2;
+
+    private static final Integer DEFAULT_FAX_NUMBER = 1;
+    private static final Integer UPDATED_FAX_NUMBER = 2;
+    private static final String DEFAULT_PLOT_NUMBER = "AAAAA";
+    private static final String UPDATED_PLOT_NUMBER = "BBBBB";
     private static final String DEFAULT_AREA = "AAAAA";
     private static final String UPDATED_AREA = "BBBBB";
-    private static final String DEFAULT_SECTION = "AAAAA";
-    private static final String UPDATED_SECTION = "BBBBB";
-    private static final String DEFAULT_CONSTITUENCY = "AAAAA";
-    private static final String UPDATED_CONSTITUENCY = "BBBBB";
-    private static final String DEFAULT_EMAIL = "AAAAA";
-    private static final String UPDATED_EMAIL = "BBBBB";
-    private static final String DEFAULT_TELEPHONE_NUMBER = "AAAAA";
-    private static final String UPDATED_TELEPHONE_NUMBER = "BBBBB";
-    private static final String DEFAULT_MOBILE = "AAAAA";
-    private static final String UPDATED_MOBILE = "BBBBB";
+    private static final String DEFAULT_STREET = "AAAAA";
+    private static final String UPDATED_STREET = "BBBBB";
+    private static final String DEFAULT_VILLAGE_EXECUTIVE_OFFICE = "AAAAA";
+    private static final String UPDATED_VILLAGE_EXECUTIVE_OFFICE = "BBBBB";
+    private static final String DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER = "AAAAA";
+    private static final String UPDATED_VILLAGE_EXECUTIVE_OFFICE_NUMBER = "BBBBB";
+    private static final String DEFAULT_HOUSE = "AAAAA";
+    private static final String UPDATED_HOUSE = "BBBBB";
+    private static final String DEFAULT_INSTITUTION = "AAAAA";
+    private static final String UPDATED_INSTITUTION = "BBBBB";
+    private static final String DEFAULT_BUSINESS = "AAAAA";
+    private static final String UPDATED_BUSINESS = "BBBBB";
+    private static final String DEFAULT_INDUSTRY = "AAAAA";
+    private static final String UPDATED_INDUSTRY = "BBBBB";
+    private static final String DEFAULT_PO_BOX = "AAAAA";
+    private static final String UPDATED_PO_BOX = "BBBBB";
 
-    private static final Float DEFAULT_SCAN_PLAN = 1F;
-    private static final Float UPDATED_SCAN_PLAN = 2F;
-
-    private static final Float DEFAULT_SCAN_PLAN1 = 1F;
-    private static final Float UPDATED_SCAN_PLAN1 = 2F;
-
-    private static final Float DEFAULT_SALE_DEED = 1F;
-    private static final Float UPDATED_SALE_DEED = 2F;
-
-    private static final Float DEFAULT_SALE_DEED1 = 1F;
-    private static final Float UPDATED_SALE_DEED1 = 2F;
-
-    private static final Float DEFAULT_TOTAL_PLINTH_AREA = 1F;
-    private static final Float UPDATED_TOTAL_PLINTH_AREA = 2F;
+    private static final ZonedDateTime DEFAULT_REQUESTED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_REQUESTED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_REQUESTED_DATE_STR = dateTimeFormatter.format(DEFAULT_REQUESTED_DATE);
+    private static final String DEFAULT_PHOTO = "AAAAA";
+    private static final String UPDATED_PHOTO = "BBBBB";
+    private static final String DEFAULT_FILE_NUMBER = "AAAAA";
+    private static final String UPDATED_FILE_NUMBER = "BBBBB";
 
     private static final ZonedDateTime DEFAULT_CREATED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_CREATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -97,8 +97,6 @@ public class ApplicationTxnResourceIntTest {
 
     private static final Integer DEFAULT_STATUS = 1;
     private static final Integer UPDATED_STATUS = 2;
-    private static final String DEFAULT_FILE_NUMBER = "AAAAA";
-    private static final String UPDATED_FILE_NUMBER = "BBBBB";
 
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
@@ -126,27 +124,26 @@ public class ApplicationTxnResourceIntTest {
     @Before
     public void initTest() {
         applicationTxn = new ApplicationTxn();
-        applicationTxn.setsHouseNo(DEFAULT_S_HOUSE_NO);
-        applicationTxn.setGovtOfficialNo(DEFAULT_GOVT_OFFICIAL_NO);
-        applicationTxn.setWard(DEFAULT_WARD);
-        applicationTxn.setStreet(DEFAULT_STREET);
-        applicationTxn.setPincode(DEFAULT_PINCODE);
-        applicationTxn.setBlock(DEFAULT_BLOCK);
+        applicationTxn.setFullName(DEFAULT_FULL_NAME);
+        applicationTxn.setHomeOrOficeNumber(DEFAULT_HOME_OR_OFICE_NUMBER);
+        applicationTxn.setRegionalNumber(DEFAULT_REGIONAL_NUMBER);
+        applicationTxn.setFaxNumber(DEFAULT_FAX_NUMBER);
+        applicationTxn.setPlotNumber(DEFAULT_PLOT_NUMBER);
         applicationTxn.setArea(DEFAULT_AREA);
-        applicationTxn.setSection(DEFAULT_SECTION);
-        applicationTxn.setConstituency(DEFAULT_CONSTITUENCY);
-        applicationTxn.setEmail(DEFAULT_EMAIL);
-        applicationTxn.setTelephoneNumber(DEFAULT_TELEPHONE_NUMBER);
-        applicationTxn.setMobile(DEFAULT_MOBILE);
-        applicationTxn.setScanPlan(DEFAULT_SCAN_PLAN);
-        applicationTxn.setScanPlan1(DEFAULT_SCAN_PLAN1);
-        applicationTxn.setSaleDeed(DEFAULT_SALE_DEED);
-        applicationTxn.setSaleDeed1(DEFAULT_SALE_DEED1);
-        applicationTxn.setTotalPlinthArea(DEFAULT_TOTAL_PLINTH_AREA);
+        applicationTxn.setStreet(DEFAULT_STREET);
+        applicationTxn.setVillageExecutiveOffice(DEFAULT_VILLAGE_EXECUTIVE_OFFICE);
+        applicationTxn.setVillageExecutiveOfficeNumber(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
+        applicationTxn.setHouse(DEFAULT_HOUSE);
+        applicationTxn.setInstitution(DEFAULT_INSTITUTION);
+        applicationTxn.setBusiness(DEFAULT_BUSINESS);
+        applicationTxn.setIndustry(DEFAULT_INDUSTRY);
+        applicationTxn.setPoBox(DEFAULT_PO_BOX);
+        applicationTxn.setRequestedDate(DEFAULT_REQUESTED_DATE);
+        applicationTxn.setPhoto(DEFAULT_PHOTO);
+        applicationTxn.setFileNumber(DEFAULT_FILE_NUMBER);
         applicationTxn.setCreatedDate(DEFAULT_CREATED_DATE);
         applicationTxn.setUpdatedDate(DEFAULT_UPDATED_DATE);
         applicationTxn.setStatus(DEFAULT_STATUS);
-        applicationTxn.setFileNumber(DEFAULT_FILE_NUMBER);
     }
 
     @Test
@@ -165,27 +162,26 @@ public class ApplicationTxnResourceIntTest {
         List<ApplicationTxn> applicationTxns = applicationTxnRepository.findAll();
         assertThat(applicationTxns).hasSize(databaseSizeBeforeCreate + 1);
         ApplicationTxn testApplicationTxn = applicationTxns.get(applicationTxns.size() - 1);
-        assertThat(testApplicationTxn.getsHouseNo()).isEqualTo(DEFAULT_S_HOUSE_NO);
-        assertThat(testApplicationTxn.getGovtOfficialNo()).isEqualTo(DEFAULT_GOVT_OFFICIAL_NO);
-        assertThat(testApplicationTxn.getWard()).isEqualTo(DEFAULT_WARD);
-        assertThat(testApplicationTxn.getStreet()).isEqualTo(DEFAULT_STREET);
-        assertThat(testApplicationTxn.getPincode()).isEqualTo(DEFAULT_PINCODE);
-        assertThat(testApplicationTxn.getBlock()).isEqualTo(DEFAULT_BLOCK);
+        assertThat(testApplicationTxn.getFullName()).isEqualTo(DEFAULT_FULL_NAME);
+        assertThat(testApplicationTxn.getHomeOrOficeNumber()).isEqualTo(DEFAULT_HOME_OR_OFICE_NUMBER);
+        assertThat(testApplicationTxn.getRegionalNumber()).isEqualTo(DEFAULT_REGIONAL_NUMBER);
+        assertThat(testApplicationTxn.getFaxNumber()).isEqualTo(DEFAULT_FAX_NUMBER);
+        assertThat(testApplicationTxn.getPlotNumber()).isEqualTo(DEFAULT_PLOT_NUMBER);
         assertThat(testApplicationTxn.getArea()).isEqualTo(DEFAULT_AREA);
-        assertThat(testApplicationTxn.getSection()).isEqualTo(DEFAULT_SECTION);
-        assertThat(testApplicationTxn.getConstituency()).isEqualTo(DEFAULT_CONSTITUENCY);
-        assertThat(testApplicationTxn.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testApplicationTxn.getTelephoneNumber()).isEqualTo(DEFAULT_TELEPHONE_NUMBER);
-        assertThat(testApplicationTxn.getMobile()).isEqualTo(DEFAULT_MOBILE);
-        assertThat(testApplicationTxn.getScanPlan()).isEqualTo(DEFAULT_SCAN_PLAN);
-        assertThat(testApplicationTxn.getScanPlan1()).isEqualTo(DEFAULT_SCAN_PLAN1);
-        assertThat(testApplicationTxn.getSaleDeed()).isEqualTo(DEFAULT_SALE_DEED);
-        assertThat(testApplicationTxn.getSaleDeed1()).isEqualTo(DEFAULT_SALE_DEED1);
-        assertThat(testApplicationTxn.getTotalPlinthArea()).isEqualTo(DEFAULT_TOTAL_PLINTH_AREA);
+        assertThat(testApplicationTxn.getStreet()).isEqualTo(DEFAULT_STREET);
+        assertThat(testApplicationTxn.getVillageExecutiveOffice()).isEqualTo(DEFAULT_VILLAGE_EXECUTIVE_OFFICE);
+        assertThat(testApplicationTxn.getVillageExecutiveOfficeNumber()).isEqualTo(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
+        assertThat(testApplicationTxn.getHouse()).isEqualTo(DEFAULT_HOUSE);
+        assertThat(testApplicationTxn.getInstitution()).isEqualTo(DEFAULT_INSTITUTION);
+        assertThat(testApplicationTxn.getBusiness()).isEqualTo(DEFAULT_BUSINESS);
+        assertThat(testApplicationTxn.getIndustry()).isEqualTo(DEFAULT_INDUSTRY);
+        assertThat(testApplicationTxn.getPoBox()).isEqualTo(DEFAULT_PO_BOX);
+        assertThat(testApplicationTxn.getRequestedDate()).isEqualTo(DEFAULT_REQUESTED_DATE);
+        assertThat(testApplicationTxn.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testApplicationTxn.getFileNumber()).isEqualTo(DEFAULT_FILE_NUMBER);
         assertThat(testApplicationTxn.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testApplicationTxn.getFileNumber()).isEqualTo(DEFAULT_FILE_NUMBER);
     }
 
     @Test
@@ -199,27 +195,26 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(applicationTxn.getId().intValue())))
-                .andExpect(jsonPath("$.[*].sHouseNo").value(hasItem(DEFAULT_S_HOUSE_NO.toString())))
-                .andExpect(jsonPath("$.[*].govtOfficialNo").value(hasItem(DEFAULT_GOVT_OFFICIAL_NO.toString())))
-                .andExpect(jsonPath("$.[*].ward").value(hasItem(DEFAULT_WARD.toString())))
-                .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
-                .andExpect(jsonPath("$.[*].pincode").value(hasItem(DEFAULT_PINCODE.toString())))
-                .andExpect(jsonPath("$.[*].block").value(hasItem(DEFAULT_BLOCK.toString())))
+                .andExpect(jsonPath("$.[*].fullName").value(hasItem(DEFAULT_FULL_NAME.toString())))
+                .andExpect(jsonPath("$.[*].homeOrOficeNumber").value(hasItem(DEFAULT_HOME_OR_OFICE_NUMBER)))
+                .andExpect(jsonPath("$.[*].regionalNumber").value(hasItem(DEFAULT_REGIONAL_NUMBER)))
+                .andExpect(jsonPath("$.[*].faxNumber").value(hasItem(DEFAULT_FAX_NUMBER)))
+                .andExpect(jsonPath("$.[*].plotNumber").value(hasItem(DEFAULT_PLOT_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.toString())))
-                .andExpect(jsonPath("$.[*].section").value(hasItem(DEFAULT_SECTION.toString())))
-                .andExpect(jsonPath("$.[*].constituency").value(hasItem(DEFAULT_CONSTITUENCY.toString())))
-                .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-                .andExpect(jsonPath("$.[*].telephoneNumber").value(hasItem(DEFAULT_TELEPHONE_NUMBER.toString())))
-                .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE.toString())))
-                .andExpect(jsonPath("$.[*].scanPlan").value(hasItem(DEFAULT_SCAN_PLAN.doubleValue())))
-                .andExpect(jsonPath("$.[*].scanPlan1").value(hasItem(DEFAULT_SCAN_PLAN1.doubleValue())))
-                .andExpect(jsonPath("$.[*].saleDeed").value(hasItem(DEFAULT_SALE_DEED.doubleValue())))
-                .andExpect(jsonPath("$.[*].saleDeed1").value(hasItem(DEFAULT_SALE_DEED1.doubleValue())))
-                .andExpect(jsonPath("$.[*].totalPlinthArea").value(hasItem(DEFAULT_TOTAL_PLINTH_AREA.doubleValue())))
+                .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
+                .andExpect(jsonPath("$.[*].villageExecutiveOffice").value(hasItem(DEFAULT_VILLAGE_EXECUTIVE_OFFICE.toString())))
+                .andExpect(jsonPath("$.[*].villageExecutiveOfficeNumber").value(hasItem(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER.toString())))
+                .andExpect(jsonPath("$.[*].house").value(hasItem(DEFAULT_HOUSE.toString())))
+                .andExpect(jsonPath("$.[*].institution").value(hasItem(DEFAULT_INSTITUTION.toString())))
+                .andExpect(jsonPath("$.[*].business").value(hasItem(DEFAULT_BUSINESS.toString())))
+                .andExpect(jsonPath("$.[*].industry").value(hasItem(DEFAULT_INDUSTRY.toString())))
+                .andExpect(jsonPath("$.[*].poBox").value(hasItem(DEFAULT_PO_BOX.toString())))
+                .andExpect(jsonPath("$.[*].requestedDate").value(hasItem(DEFAULT_REQUESTED_DATE_STR)))
+                .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
+                .andExpect(jsonPath("$.[*].fileNumber").value(hasItem(DEFAULT_FILE_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].updatedDate").value(hasItem(DEFAULT_UPDATED_DATE_STR)))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-                .andExpect(jsonPath("$.[*].fileNumber").value(hasItem(DEFAULT_FILE_NUMBER.toString())));
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
 
     @Test
@@ -233,27 +228,26 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(applicationTxn.getId().intValue()))
-            .andExpect(jsonPath("$.sHouseNo").value(DEFAULT_S_HOUSE_NO.toString()))
-            .andExpect(jsonPath("$.govtOfficialNo").value(DEFAULT_GOVT_OFFICIAL_NO.toString()))
-            .andExpect(jsonPath("$.ward").value(DEFAULT_WARD.toString()))
-            .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
-            .andExpect(jsonPath("$.pincode").value(DEFAULT_PINCODE.toString()))
-            .andExpect(jsonPath("$.block").value(DEFAULT_BLOCK.toString()))
+            .andExpect(jsonPath("$.fullName").value(DEFAULT_FULL_NAME.toString()))
+            .andExpect(jsonPath("$.homeOrOficeNumber").value(DEFAULT_HOME_OR_OFICE_NUMBER))
+            .andExpect(jsonPath("$.regionalNumber").value(DEFAULT_REGIONAL_NUMBER))
+            .andExpect(jsonPath("$.faxNumber").value(DEFAULT_FAX_NUMBER))
+            .andExpect(jsonPath("$.plotNumber").value(DEFAULT_PLOT_NUMBER.toString()))
             .andExpect(jsonPath("$.area").value(DEFAULT_AREA.toString()))
-            .andExpect(jsonPath("$.section").value(DEFAULT_SECTION.toString()))
-            .andExpect(jsonPath("$.constituency").value(DEFAULT_CONSTITUENCY.toString()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
-            .andExpect(jsonPath("$.telephoneNumber").value(DEFAULT_TELEPHONE_NUMBER.toString()))
-            .andExpect(jsonPath("$.mobile").value(DEFAULT_MOBILE.toString()))
-            .andExpect(jsonPath("$.scanPlan").value(DEFAULT_SCAN_PLAN.doubleValue()))
-            .andExpect(jsonPath("$.scanPlan1").value(DEFAULT_SCAN_PLAN1.doubleValue()))
-            .andExpect(jsonPath("$.saleDeed").value(DEFAULT_SALE_DEED.doubleValue()))
-            .andExpect(jsonPath("$.saleDeed1").value(DEFAULT_SALE_DEED1.doubleValue()))
-            .andExpect(jsonPath("$.totalPlinthArea").value(DEFAULT_TOTAL_PLINTH_AREA.doubleValue()))
+            .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
+            .andExpect(jsonPath("$.villageExecutiveOffice").value(DEFAULT_VILLAGE_EXECUTIVE_OFFICE.toString()))
+            .andExpect(jsonPath("$.villageExecutiveOfficeNumber").value(DEFAULT_VILLAGE_EXECUTIVE_OFFICE_NUMBER.toString()))
+            .andExpect(jsonPath("$.house").value(DEFAULT_HOUSE.toString()))
+            .andExpect(jsonPath("$.institution").value(DEFAULT_INSTITUTION.toString()))
+            .andExpect(jsonPath("$.business").value(DEFAULT_BUSINESS.toString()))
+            .andExpect(jsonPath("$.industry").value(DEFAULT_INDUSTRY.toString()))
+            .andExpect(jsonPath("$.poBox").value(DEFAULT_PO_BOX.toString()))
+            .andExpect(jsonPath("$.requestedDate").value(DEFAULT_REQUESTED_DATE_STR))
+            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
+            .andExpect(jsonPath("$.fileNumber").value(DEFAULT_FILE_NUMBER.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE_STR))
             .andExpect(jsonPath("$.updatedDate").value(DEFAULT_UPDATED_DATE_STR))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.fileNumber").value(DEFAULT_FILE_NUMBER.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
 
     @Test
@@ -273,27 +267,26 @@ public class ApplicationTxnResourceIntTest {
 		int databaseSizeBeforeUpdate = applicationTxnRepository.findAll().size();
 
         // Update the applicationTxn
-        applicationTxn.setsHouseNo(UPDATED_S_HOUSE_NO);
-        applicationTxn.setGovtOfficialNo(UPDATED_GOVT_OFFICIAL_NO);
-        applicationTxn.setWard(UPDATED_WARD);
-        applicationTxn.setStreet(UPDATED_STREET);
-        applicationTxn.setPincode(UPDATED_PINCODE);
-        applicationTxn.setBlock(UPDATED_BLOCK);
+        applicationTxn.setFullName(UPDATED_FULL_NAME);
+        applicationTxn.setHomeOrOficeNumber(UPDATED_HOME_OR_OFICE_NUMBER);
+        applicationTxn.setRegionalNumber(UPDATED_REGIONAL_NUMBER);
+        applicationTxn.setFaxNumber(UPDATED_FAX_NUMBER);
+        applicationTxn.setPlotNumber(UPDATED_PLOT_NUMBER);
         applicationTxn.setArea(UPDATED_AREA);
-        applicationTxn.setSection(UPDATED_SECTION);
-        applicationTxn.setConstituency(UPDATED_CONSTITUENCY);
-        applicationTxn.setEmail(UPDATED_EMAIL);
-        applicationTxn.setTelephoneNumber(UPDATED_TELEPHONE_NUMBER);
-        applicationTxn.setMobile(UPDATED_MOBILE);
-        applicationTxn.setScanPlan(UPDATED_SCAN_PLAN);
-        applicationTxn.setScanPlan1(UPDATED_SCAN_PLAN1);
-        applicationTxn.setSaleDeed(UPDATED_SALE_DEED);
-        applicationTxn.setSaleDeed1(UPDATED_SALE_DEED1);
-        applicationTxn.setTotalPlinthArea(UPDATED_TOTAL_PLINTH_AREA);
+        applicationTxn.setStreet(UPDATED_STREET);
+        applicationTxn.setVillageExecutiveOffice(UPDATED_VILLAGE_EXECUTIVE_OFFICE);
+        applicationTxn.setVillageExecutiveOfficeNumber(UPDATED_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
+        applicationTxn.setHouse(UPDATED_HOUSE);
+        applicationTxn.setInstitution(UPDATED_INSTITUTION);
+        applicationTxn.setBusiness(UPDATED_BUSINESS);
+        applicationTxn.setIndustry(UPDATED_INDUSTRY);
+        applicationTxn.setPoBox(UPDATED_PO_BOX);
+        applicationTxn.setRequestedDate(UPDATED_REQUESTED_DATE);
+        applicationTxn.setPhoto(UPDATED_PHOTO);
+        applicationTxn.setFileNumber(UPDATED_FILE_NUMBER);
         applicationTxn.setCreatedDate(UPDATED_CREATED_DATE);
         applicationTxn.setUpdatedDate(UPDATED_UPDATED_DATE);
         applicationTxn.setStatus(UPDATED_STATUS);
-        applicationTxn.setFileNumber(UPDATED_FILE_NUMBER);
 
         restApplicationTxnMockMvc.perform(put("/api/applicationTxns")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -304,27 +297,26 @@ public class ApplicationTxnResourceIntTest {
         List<ApplicationTxn> applicationTxns = applicationTxnRepository.findAll();
         assertThat(applicationTxns).hasSize(databaseSizeBeforeUpdate);
         ApplicationTxn testApplicationTxn = applicationTxns.get(applicationTxns.size() - 1);
-        assertThat(testApplicationTxn.getsHouseNo()).isEqualTo(UPDATED_S_HOUSE_NO);
-        assertThat(testApplicationTxn.getGovtOfficialNo()).isEqualTo(UPDATED_GOVT_OFFICIAL_NO);
-        assertThat(testApplicationTxn.getWard()).isEqualTo(UPDATED_WARD);
-        assertThat(testApplicationTxn.getStreet()).isEqualTo(UPDATED_STREET);
-        assertThat(testApplicationTxn.getPincode()).isEqualTo(UPDATED_PINCODE);
-        assertThat(testApplicationTxn.getBlock()).isEqualTo(UPDATED_BLOCK);
+        assertThat(testApplicationTxn.getFullName()).isEqualTo(UPDATED_FULL_NAME);
+        assertThat(testApplicationTxn.getHomeOrOficeNumber()).isEqualTo(UPDATED_HOME_OR_OFICE_NUMBER);
+        assertThat(testApplicationTxn.getRegionalNumber()).isEqualTo(UPDATED_REGIONAL_NUMBER);
+        assertThat(testApplicationTxn.getFaxNumber()).isEqualTo(UPDATED_FAX_NUMBER);
+        assertThat(testApplicationTxn.getPlotNumber()).isEqualTo(UPDATED_PLOT_NUMBER);
         assertThat(testApplicationTxn.getArea()).isEqualTo(UPDATED_AREA);
-        assertThat(testApplicationTxn.getSection()).isEqualTo(UPDATED_SECTION);
-        assertThat(testApplicationTxn.getConstituency()).isEqualTo(UPDATED_CONSTITUENCY);
-        assertThat(testApplicationTxn.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testApplicationTxn.getTelephoneNumber()).isEqualTo(UPDATED_TELEPHONE_NUMBER);
-        assertThat(testApplicationTxn.getMobile()).isEqualTo(UPDATED_MOBILE);
-        assertThat(testApplicationTxn.getScanPlan()).isEqualTo(UPDATED_SCAN_PLAN);
-        assertThat(testApplicationTxn.getScanPlan1()).isEqualTo(UPDATED_SCAN_PLAN1);
-        assertThat(testApplicationTxn.getSaleDeed()).isEqualTo(UPDATED_SALE_DEED);
-        assertThat(testApplicationTxn.getSaleDeed1()).isEqualTo(UPDATED_SALE_DEED1);
-        assertThat(testApplicationTxn.getTotalPlinthArea()).isEqualTo(UPDATED_TOTAL_PLINTH_AREA);
+        assertThat(testApplicationTxn.getStreet()).isEqualTo(UPDATED_STREET);
+        assertThat(testApplicationTxn.getVillageExecutiveOffice()).isEqualTo(UPDATED_VILLAGE_EXECUTIVE_OFFICE);
+        assertThat(testApplicationTxn.getVillageExecutiveOfficeNumber()).isEqualTo(UPDATED_VILLAGE_EXECUTIVE_OFFICE_NUMBER);
+        assertThat(testApplicationTxn.getHouse()).isEqualTo(UPDATED_HOUSE);
+        assertThat(testApplicationTxn.getInstitution()).isEqualTo(UPDATED_INSTITUTION);
+        assertThat(testApplicationTxn.getBusiness()).isEqualTo(UPDATED_BUSINESS);
+        assertThat(testApplicationTxn.getIndustry()).isEqualTo(UPDATED_INDUSTRY);
+        assertThat(testApplicationTxn.getPoBox()).isEqualTo(UPDATED_PO_BOX);
+        assertThat(testApplicationTxn.getRequestedDate()).isEqualTo(UPDATED_REQUESTED_DATE);
+        assertThat(testApplicationTxn.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testApplicationTxn.getFileNumber()).isEqualTo(UPDATED_FILE_NUMBER);
         assertThat(testApplicationTxn.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testApplicationTxn.getFileNumber()).isEqualTo(UPDATED_FILE_NUMBER);
     }
 
     @Test

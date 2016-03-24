@@ -6,8 +6,6 @@ import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -22,56 +20,56 @@ public class ApplicationTxn implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "s_house_no")
-    private String sHouseNo;
+    @Column(name = "full_name")
+    private String fullName;
     
-    @Column(name = "govt_official_no")
-    private String govtOfficialNo;
+    @Column(name = "home_or_ofice_number")
+    private Integer homeOrOficeNumber;
     
-    @Column(name = "ward")
-    private String ward;
+    @Column(name = "regional_number")
+    private Integer regionalNumber;
     
-    @Column(name = "street")
-    private String street;
+    @Column(name = "fax_number")
+    private Integer faxNumber;
     
-    @Column(name = "pincode")
-    private String pincode;
-    
-    @Column(name = "block")
-    private String block;
+    @Column(name = "plot_number")
+    private String plotNumber;
     
     @Column(name = "area")
     private String area;
     
-    @Column(name = "section")
-    private String section;
+    @Column(name = "street")
+    private String street;
     
-    @Column(name = "constituency")
-    private String constituency;
+    @Column(name = "village_executive_office")
+    private String villageExecutiveOffice;
     
-    @Column(name = "email")
-    private String email;
+    @Column(name = "village_executive_office_number")
+    private String villageExecutiveOfficeNumber;
     
-    @Column(name = "telephone_number")
-    private String telephoneNumber;
+    @Column(name = "house")
+    private String house;
     
-    @Column(name = "mobile")
-    private String mobile;
+    @Column(name = "institution")
+    private String institution;
     
-    @Column(name = "scan_plan")
-    private Float scanPlan;
+    @Column(name = "business")
+    private String business;
     
-    @Column(name = "scan_plan1")
-    private Float scanPlan1;
+    @Column(name = "industry")
+    private String industry;
     
-    @Column(name = "sale_deed")
-    private Float saleDeed;
+    @Column(name = "po_box")
+    private String poBox;
     
-    @Column(name = "sale_deed1")
-    private Float saleDeed1;
+    @Column(name = "requested_date")
+    private ZonedDateTime requestedDate;
     
-    @Column(name = "total_plinth_area")
-    private Float totalPlinthArea;
+    @Column(name = "photo")
+    private String photo;
+    
+    @Column(name = "file_number")
+    private String fileNumber;
     
     @Column(name = "created_date")
     private ZonedDateTime createdDate;
@@ -82,33 +80,6 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "status")
     private Integer status;
     
-    @Column(name = "file_number")
-    private String fileNumber;
-    
-    @ManyToOne
-    @JoinColumn(name = "application_type_master_id")
-    private ApplicationTypeMaster applicationTypeMaster;
-
-    @ManyToOne
-    @JoinColumn(name = "connection_type_master_id")
-    private ConnectionTypeMaster connectionTypeMaster;
-
-    @ManyToOne
-    @JoinColumn(name = "category_master_id")
-    private CategoryMaster categoryMaster;
-
-    @ManyToOne
-    @JoinColumn(name = "pipe_size_master_id")
-    private PipeSizeMaster pipeSizeMaster;
-
-    @ManyToOne
-    @JoinColumn(name = "sewer_size_id")
-    private SewerSize sewerSize;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
     public Long getId() {
         return id;
     }
@@ -117,52 +88,44 @@ public class ApplicationTxn implements Serializable {
         this.id = id;
     }
 
-    public String getsHouseNo() {
-        return sHouseNo;
+    public String getFullName() {
+        return fullName;
     }
     
-    public void setsHouseNo(String sHouseNo) {
-        this.sHouseNo = sHouseNo;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getGovtOfficialNo() {
-        return govtOfficialNo;
+    public Integer getHomeOrOficeNumber() {
+        return homeOrOficeNumber;
     }
     
-    public void setGovtOfficialNo(String govtOfficialNo) {
-        this.govtOfficialNo = govtOfficialNo;
+    public void setHomeOrOficeNumber(Integer homeOrOficeNumber) {
+        this.homeOrOficeNumber = homeOrOficeNumber;
     }
 
-    public String getWard() {
-        return ward;
+    public Integer getRegionalNumber() {
+        return regionalNumber;
     }
     
-    public void setWard(String ward) {
-        this.ward = ward;
+    public void setRegionalNumber(Integer regionalNumber) {
+        this.regionalNumber = regionalNumber;
     }
 
-    public String getStreet() {
-        return street;
+    public Integer getFaxNumber() {
+        return faxNumber;
     }
     
-    public void setStreet(String street) {
-        this.street = street;
+    public void setFaxNumber(Integer faxNumber) {
+        this.faxNumber = faxNumber;
     }
 
-    public String getPincode() {
-        return pincode;
+    public String getPlotNumber() {
+        return plotNumber;
     }
     
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
-
-    public String getBlock() {
-        return block;
-    }
-    
-    public void setBlock(String block) {
-        this.block = block;
+    public void setPlotNumber(String plotNumber) {
+        this.plotNumber = plotNumber;
     }
 
     public String getArea() {
@@ -173,84 +136,92 @@ public class ApplicationTxn implements Serializable {
         this.area = area;
     }
 
-    public String getSection() {
-        return section;
+    public String getStreet() {
+        return street;
     }
     
-    public void setSection(String section) {
-        this.section = section;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
-    public String getConstituency() {
-        return constituency;
+    public String getVillageExecutiveOffice() {
+        return villageExecutiveOffice;
     }
     
-    public void setConstituency(String constituency) {
-        this.constituency = constituency;
+    public void setVillageExecutiveOffice(String villageExecutiveOffice) {
+        this.villageExecutiveOffice = villageExecutiveOffice;
     }
 
-    public String getEmail() {
-        return email;
+    public String getVillageExecutiveOfficeNumber() {
+        return villageExecutiveOfficeNumber;
     }
     
-    public void setEmail(String email) {
-        this.email = email;
+    public void setVillageExecutiveOfficeNumber(String villageExecutiveOfficeNumber) {
+        this.villageExecutiveOfficeNumber = villageExecutiveOfficeNumber;
     }
 
-    public String getTelephoneNumber() {
-        return telephoneNumber;
+    public String getHouse() {
+        return house;
     }
     
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setHouse(String house) {
+        this.house = house;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getInstitution() {
+        return institution;
     }
     
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setInstitution(String institution) {
+        this.institution = institution;
     }
 
-    public Float getScanPlan() {
-        return scanPlan;
+    public String getBusiness() {
+        return business;
     }
     
-    public void setScanPlan(Float scanPlan) {
-        this.scanPlan = scanPlan;
+    public void setBusiness(String business) {
+        this.business = business;
     }
 
-    public Float getScanPlan1() {
-        return scanPlan1;
+    public String getIndustry() {
+        return industry;
     }
     
-    public void setScanPlan1(Float scanPlan1) {
-        this.scanPlan1 = scanPlan1;
+    public void setIndustry(String industry) {
+        this.industry = industry;
     }
 
-    public Float getSaleDeed() {
-        return saleDeed;
+    public String getPoBox() {
+        return poBox;
     }
     
-    public void setSaleDeed(Float saleDeed) {
-        this.saleDeed = saleDeed;
+    public void setPoBox(String poBox) {
+        this.poBox = poBox;
     }
 
-    public Float getSaleDeed1() {
-        return saleDeed1;
+    public ZonedDateTime getRequestedDate() {
+        return requestedDate;
     }
     
-    public void setSaleDeed1(Float saleDeed1) {
-        this.saleDeed1 = saleDeed1;
+    public void setRequestedDate(ZonedDateTime requestedDate) {
+        this.requestedDate = requestedDate;
     }
 
-    public Float getTotalPlinthArea() {
-        return totalPlinthArea;
+    public String getPhoto() {
+        return photo;
     }
     
-    public void setTotalPlinthArea(Float totalPlinthArea) {
-        this.totalPlinthArea = totalPlinthArea;
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getFileNumber() {
+        return fileNumber;
+    }
+    
+    public void setFileNumber(String fileNumber) {
+        this.fileNumber = fileNumber;
     }
 
     public ZonedDateTime getCreatedDate() {
@@ -277,62 +248,6 @@ public class ApplicationTxn implements Serializable {
         this.status = status;
     }
 
-    public String getFileNumber() {
-        return fileNumber;
-    }
-    
-    public void setFileNumber(String fileNumber) {
-        this.fileNumber = fileNumber;
-    }
-
-    public ApplicationTypeMaster getApplicationTypeMaster() {
-        return applicationTypeMaster;
-    }
-
-    public void setApplicationTypeMaster(ApplicationTypeMaster applicationTypeMaster) {
-        this.applicationTypeMaster = applicationTypeMaster;
-    }
-
-    public ConnectionTypeMaster getConnectionTypeMaster() {
-        return connectionTypeMaster;
-    }
-
-    public void setConnectionTypeMaster(ConnectionTypeMaster connectionTypeMaster) {
-        this.connectionTypeMaster = connectionTypeMaster;
-    }
-
-    public CategoryMaster getCategoryMaster() {
-        return categoryMaster;
-    }
-
-    public void setCategoryMaster(CategoryMaster categoryMaster) {
-        this.categoryMaster = categoryMaster;
-    }
-
-    public PipeSizeMaster getPipeSizeMaster() {
-        return pipeSizeMaster;
-    }
-
-    public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
-        this.pipeSizeMaster = pipeSizeMaster;
-    }
-
-    public SewerSize getSewerSize() {
-        return sewerSize;
-    }
-
-    public void setSewerSize(SewerSize sewerSize) {
-        this.sewerSize = sewerSize;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -357,27 +272,26 @@ public class ApplicationTxn implements Serializable {
     public String toString() {
         return "ApplicationTxn{" +
             "id=" + id +
-            ", sHouseNo='" + sHouseNo + "'" +
-            ", govtOfficialNo='" + govtOfficialNo + "'" +
-            ", ward='" + ward + "'" +
-            ", street='" + street + "'" +
-            ", pincode='" + pincode + "'" +
-            ", block='" + block + "'" +
+            ", fullName='" + fullName + "'" +
+            ", homeOrOficeNumber='" + homeOrOficeNumber + "'" +
+            ", regionalNumber='" + regionalNumber + "'" +
+            ", faxNumber='" + faxNumber + "'" +
+            ", plotNumber='" + plotNumber + "'" +
             ", area='" + area + "'" +
-            ", section='" + section + "'" +
-            ", constituency='" + constituency + "'" +
-            ", email='" + email + "'" +
-            ", telephoneNumber='" + telephoneNumber + "'" +
-            ", mobile='" + mobile + "'" +
-            ", scanPlan='" + scanPlan + "'" +
-            ", scanPlan1='" + scanPlan1 + "'" +
-            ", saleDeed='" + saleDeed + "'" +
-            ", saleDeed1='" + saleDeed1 + "'" +
-            ", totalPlinthArea='" + totalPlinthArea + "'" +
+            ", street='" + street + "'" +
+            ", villageExecutiveOffice='" + villageExecutiveOffice + "'" +
+            ", villageExecutiveOfficeNumber='" + villageExecutiveOfficeNumber + "'" +
+            ", house='" + house + "'" +
+            ", institution='" + institution + "'" +
+            ", business='" + business + "'" +
+            ", industry='" + industry + "'" +
+            ", poBox='" + poBox + "'" +
+            ", requestedDate='" + requestedDate + "'" +
+            ", photo='" + photo + "'" +
+            ", fileNumber='" + fileNumber + "'" +
             ", createdDate='" + createdDate + "'" +
             ", updatedDate='" + updatedDate + "'" +
             ", status='" + status + "'" +
-            ", fileNumber='" + fileNumber + "'" +
             '}';
     }
 }

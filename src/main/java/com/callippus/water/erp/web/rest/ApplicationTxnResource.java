@@ -2,15 +2,13 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,9 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
-import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
-import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
@@ -48,14 +44,11 @@ public class ApplicationTxnResource {
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
     
-    @Inject 
-    private ApplicationTxnWorkflowService applicationTxnWorkflowService;
-    
-    @Inject
-    private CustomerRepository customerRepository;
-    
     @Inject
     private WorkflowService workflowService;
+    
+    @Inject 
+    private ApplicationTxnWorkflowService applicationTxnWorkflowService;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -69,20 +62,19 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationTxn", "idexists", "A new applicationTxn cannot already have an ID")).body(null);
         }
+      //file number format(Division - Property Number - House No - Connection No) : DO4 - 064 - 1 - 1
+        //String fileNumber = "D"+applicationTxn.getWard() +"-"+applicationTxn.getGovtOfficialNo()+"-"+applicationTxn.getsHouseNo();
+        //applicationTxn.setFileNumber(fileNumber);
+        if(applicationTxn.getStatus()==null){
+        	applicationTxn.setStatus(0);
+        }
         
-        //file number format(Division - Property Number - House No - Connection No) : DO4 - 064 - 1 - 1
-        String fileNumber = "D"+applicationTxn.getWard() +"-"+applicationTxn.getGovtOfficialNo()+"-"+applicationTxn.getsHouseNo();
-        
-        applicationTxn.setFileNumber(fileNumber);
-
-        Customer customer = customerRepository.save(applicationTxn.getCustomer());
-    	//applicationTxn.setFileNumber(customer.getFileNumber());
-    	applicationTxn.setStatus(0);
-    	applicationTxn.setCreatedDate(customer.getRequestDate());
-    	applicationTxn.setUpdatedDate(customer.getRequestDate());
+        ZonedDateTime now = ZonedDateTime.now();
+        applicationTxn.setUpdatedDate(now);
+        applicationTxn.setCreatedDate(now);
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
-        //this is for workflow
+      //this is for workflow
         try{
         	workflowService.getUserDetails();
         	applicationTxnWorkflowService.createTxn(applicationTxn);
@@ -91,11 +83,14 @@ public class ApplicationTxnResource {
         	System.out.println(e);
         }
         
+        
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))
             .body(result);
     }
 
+    
+    
     /**
      * PUT  /applicationTxns -> Updates an existing applicationTxn.
      */
@@ -108,20 +103,7 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(applicationTxn);
         }
-        //applicationTxn.setStatus(String.valueOf(Integer.parseInt(applicationTxn.getStatus())+1));
-        
-        //applicationTxn.setStatus("In Feasibility");
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-        
-      //this is for workflow
-        /*try{
-        	workflowService.getUserDetails();
-        	applicationTxnWorkflowService.createTxn(applicationTxn);
-        }
-        catch(Exception e){
-        	System.out.println(e);
-        }*/
-        
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);
@@ -134,18 +116,10 @@ public class ApplicationTxnResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<ApplicationTxn>> getAllApplicationTxns(Pageable pageable,@RequestParam(value = "status", required = false) Integer status)
+    public ResponseEntity<List<ApplicationTxn>> getAllApplicationTxns(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of ApplicationTxns");
-        //Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
-        
-        Page<ApplicationTxn> page;
-        if(status== null){
-        	page = applicationTxnRepository.findAll(pageable);
-        }
-        else{
-        	page = applicationTxnRepository.findByStatus(pageable, status);
-        }
+        Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/applicationTxns");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -1,17 +1,9 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDetailController', function ($scope, $state, $rootScope, $stateParams, entity, ApplicationTxn, 
-    		ApplicationTypeMaster, ConnectionTypeMaster, CategoryMaster, PipeSizeMaster, SewerSize, FileNumber, Customer, ApprovalDetails,
-    		ApplicationTxnService) {
+    .controller('ApplicationTxnDetailController', function ($state, $scope, $rootScope, $stateParams, entity, ApplicationTxn, ApplicationTxnService) {
         $scope.applicationTxn = entity;
-        $scope.approvalDetails = {};
-        $scope.approvalDetails.applicationTxn={};
-        $scope.approvalDetails.customer={};
-        
-        $scope.status = null;
-        $scope.load = function (id, status) {
-        	$('#approveModal').modal('show');
+        $scope.load = function (id) {
             ApplicationTxn.get({id: id}, function(result) {
                 $scope.applicationTxn = result;
             });
@@ -21,7 +13,14 @@ angular.module('watererpApp')
         });
         $scope.$on('$destroy', unsubscribe);
         
-     
+        $scope.status = null;
+        $scope.load = function (id, status) {
+        	$('#approveModal').modal('show');
+            ApplicationTxn.get({id: id}, function(result) {
+                $scope.applicationTxn = result;
+            });
+        };
+        
         $scope.approvalDetailsSave = function(id, remarks){
         	$('#approveModal').modal('hide');
         	//console.log(JSON.stringify($scope.approvalDetails));
@@ -29,15 +28,7 @@ angular.module('watererpApp')
         	$state.go('applicationTxn');
         }
         
-     // to Approve a request
-		/*$scope.approveRequest = function(id) {
-			RequisitionService.approveRequest(id).then(
-					function(data) {
-						$scope.requisitions = data;
-						$state.go('home');
-					});
-		};*/
-       
+
         $scope.datePickerForApprovedDate = {};
 
         $scope.datePickerForApprovedDate.status = {
