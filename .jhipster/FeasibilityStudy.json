@@ -2,57 +2,57 @@
     "relationships": [
         {
             "relationshipId": 1,
-            "relationshipName": "schemeMaster",
-            "otherEntityName": "schemeMaster",
+            "relationshipName": "divisionMaster",
+            "otherEntityName": "divisionMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 2,
-            "relationshipName": "tariffCategoryMaster",
-            "otherEntityName": "tariffCategoryMaster",
+            "relationshipName": "zoneMaster",
+            "otherEntityName": "zoneMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 3,
-            "relationshipName": "makeOfWaterPipe",
-            "otherEntityName": "makeOfPipe",
+            "relationshipName": "streetMaster",
+            "otherEntityName": "streetMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 4,
-            "relationshipName": "makeOfSeweragePipe",
-            "otherEntityName": "makeOfPipe",
+            "relationshipName": "applicationTxn",
+            "otherEntityName": "applicationTxn",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 5,
-            "relationshipName": "mainWaterSize",
-            "otherEntityName": "mainWaterSize",
+            "relationshipName": "preparedBy",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 6,
-            "relationshipName": "mainSewerageSize",
-            "otherEntityName": "mainSewerageSize",
+            "relationshipName": "approvedByZonalHead",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 7,
-            "relationshipName": "docketCode",
-            "otherEntityName": "docketCode",
+            "relationshipName": "inspectionByDepartmentHead",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 8,
-            "relationshipName": "applicationTxn",
-            "otherEntityName": "applicationTxn",
+            "relationshipName": "approvedByOperationManager",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
@@ -62,63 +62,27 @@
             "otherEntityName": "categoryMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 10,
-            "relationshipName": "sewerSize",
-            "otherEntityName": "sewerSize",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 11,
-            "relationshipName": "pipeSizeMaster",
-            "otherEntityName": "pipeSizeMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 12,
-            "relationshipName": "feasibilityStatus",
-            "otherEntityName": "feasibilityStatus",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
         }
     ],
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "plotAreaInSqMtrs",
-            "fieldType": "Float"
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldId": 2,
-            "fieldName": "plotAreaInYards",
-            "fieldType": "Float"
+            "fieldName": "modifiedDate",
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldId": 3,
-            "fieldName": "noOfFlatsOrNoOfUnits",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "noOfFloors",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldId": 5,
-            "fieldName": "totalPlinthArea",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 6,
-            "fieldName": "waterRequirement",
-            "fieldType": "Float"
+            "fieldName": "status",
+            "fieldType": "String"
         }
     ],
-    "changelogDate": "20160311100455",
+    "changelogDate": "20160324105452",
     "dto": "no",
     "service": "no",
-    "pagination": "infinite-scroll"
+    "pagination": "no"
 }

@@ -23,6 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,24 +45,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class FeasibilityStudyResourceIntTest {
 
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
 
-    private static final Float DEFAULT_PLOT_AREA_IN_SQ_MTRS = 1F;
-    private static final Float UPDATED_PLOT_AREA_IN_SQ_MTRS = 2F;
 
-    private static final Float DEFAULT_PLOT_AREA_IN_YARDS = 1F;
-    private static final Float UPDATED_PLOT_AREA_IN_YARDS = 2F;
+    private static final ZonedDateTime DEFAULT_CREATED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_CREATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_CREATED_DATE_STR = dateTimeFormatter.format(DEFAULT_CREATED_DATE);
 
-    private static final Integer DEFAULT_NO_OF_FLATS_OR_NO_OF_UNITS = 1;
-    private static final Integer UPDATED_NO_OF_FLATS_OR_NO_OF_UNITS = 2;
-
-    private static final Integer DEFAULT_NO_OF_FLOORS = 1;
-    private static final Integer UPDATED_NO_OF_FLOORS = 2;
-
-    private static final Float DEFAULT_TOTAL_PLINTH_AREA = 1F;
-    private static final Float UPDATED_TOTAL_PLINTH_AREA = 2F;
-
-    private static final Float DEFAULT_WATER_REQUIREMENT = 1F;
-    private static final Float UPDATED_WATER_REQUIREMENT = 2F;
+    private static final ZonedDateTime DEFAULT_MODIFIED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_MODIFIED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_MODIFIED_DATE_STR = dateTimeFormatter.format(DEFAULT_MODIFIED_DATE);
+    private static final String DEFAULT_STATUS = "AAAAA";
+    private static final String UPDATED_STATUS = "BBBBB";
 
     @Inject
     private FeasibilityStudyRepository feasibilityStudyRepository;
@@ -86,12 +84,9 @@ public class FeasibilityStudyResourceIntTest {
     @Before
     public void initTest() {
         feasibilityStudy = new FeasibilityStudy();
-        feasibilityStudy.setPlotAreaInSqMtrs(DEFAULT_PLOT_AREA_IN_SQ_MTRS);
-        feasibilityStudy.setPlotAreaInYards(DEFAULT_PLOT_AREA_IN_YARDS);
-        feasibilityStudy.setNoOfFlatsOrNoOfUnits(DEFAULT_NO_OF_FLATS_OR_NO_OF_UNITS);
-        feasibilityStudy.setNoOfFloors(DEFAULT_NO_OF_FLOORS);
-        feasibilityStudy.setTotalPlinthArea(DEFAULT_TOTAL_PLINTH_AREA);
-        feasibilityStudy.setWaterRequirement(DEFAULT_WATER_REQUIREMENT);
+        feasibilityStudy.setCreatedDate(DEFAULT_CREATED_DATE);
+        feasibilityStudy.setModifiedDate(DEFAULT_MODIFIED_DATE);
+        feasibilityStudy.setStatus(DEFAULT_STATUS);
     }
 
     @Test
@@ -110,12 +105,9 @@ public class FeasibilityStudyResourceIntTest {
         List<FeasibilityStudy> feasibilityStudys = feasibilityStudyRepository.findAll();
         assertThat(feasibilityStudys).hasSize(databaseSizeBeforeCreate + 1);
         FeasibilityStudy testFeasibilityStudy = feasibilityStudys.get(feasibilityStudys.size() - 1);
-        assertThat(testFeasibilityStudy.getPlotAreaInSqMtrs()).isEqualTo(DEFAULT_PLOT_AREA_IN_SQ_MTRS);
-        assertThat(testFeasibilityStudy.getPlotAreaInYards()).isEqualTo(DEFAULT_PLOT_AREA_IN_YARDS);
-        assertThat(testFeasibilityStudy.getNoOfFlatsOrNoOfUnits()).isEqualTo(DEFAULT_NO_OF_FLATS_OR_NO_OF_UNITS);
-        assertThat(testFeasibilityStudy.getNoOfFloors()).isEqualTo(DEFAULT_NO_OF_FLOORS);
-        assertThat(testFeasibilityStudy.getTotalPlinthArea()).isEqualTo(DEFAULT_TOTAL_PLINTH_AREA);
-        assertThat(testFeasibilityStudy.getWaterRequirement()).isEqualTo(DEFAULT_WATER_REQUIREMENT);
+        assertThat(testFeasibilityStudy.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testFeasibilityStudy.getModifiedDate()).isEqualTo(DEFAULT_MODIFIED_DATE);
+        assertThat(testFeasibilityStudy.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -129,12 +121,9 @@ public class FeasibilityStudyResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(feasibilityStudy.getId().intValue())))
-                .andExpect(jsonPath("$.[*].plotAreaInSqMtrs").value(hasItem(DEFAULT_PLOT_AREA_IN_SQ_MTRS.doubleValue())))
-                .andExpect(jsonPath("$.[*].plotAreaInYards").value(hasItem(DEFAULT_PLOT_AREA_IN_YARDS.doubleValue())))
-                .andExpect(jsonPath("$.[*].noOfFlatsOrNoOfUnits").value(hasItem(DEFAULT_NO_OF_FLATS_OR_NO_OF_UNITS)))
-                .andExpect(jsonPath("$.[*].noOfFloors").value(hasItem(DEFAULT_NO_OF_FLOORS)))
-                .andExpect(jsonPath("$.[*].totalPlinthArea").value(hasItem(DEFAULT_TOTAL_PLINTH_AREA.doubleValue())))
-                .andExpect(jsonPath("$.[*].waterRequirement").value(hasItem(DEFAULT_WATER_REQUIREMENT.doubleValue())));
+                .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE_STR)))
+                .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE_STR)))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -148,12 +137,9 @@ public class FeasibilityStudyResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(feasibilityStudy.getId().intValue()))
-            .andExpect(jsonPath("$.plotAreaInSqMtrs").value(DEFAULT_PLOT_AREA_IN_SQ_MTRS.doubleValue()))
-            .andExpect(jsonPath("$.plotAreaInYards").value(DEFAULT_PLOT_AREA_IN_YARDS.doubleValue()))
-            .andExpect(jsonPath("$.noOfFlatsOrNoOfUnits").value(DEFAULT_NO_OF_FLATS_OR_NO_OF_UNITS))
-            .andExpect(jsonPath("$.noOfFloors").value(DEFAULT_NO_OF_FLOORS))
-            .andExpect(jsonPath("$.totalPlinthArea").value(DEFAULT_TOTAL_PLINTH_AREA.doubleValue()))
-            .andExpect(jsonPath("$.waterRequirement").value(DEFAULT_WATER_REQUIREMENT.doubleValue()));
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE_STR))
+            .andExpect(jsonPath("$.modifiedDate").value(DEFAULT_MODIFIED_DATE_STR))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -173,12 +159,9 @@ public class FeasibilityStudyResourceIntTest {
 		int databaseSizeBeforeUpdate = feasibilityStudyRepository.findAll().size();
 
         // Update the feasibilityStudy
-        feasibilityStudy.setPlotAreaInSqMtrs(UPDATED_PLOT_AREA_IN_SQ_MTRS);
-        feasibilityStudy.setPlotAreaInYards(UPDATED_PLOT_AREA_IN_YARDS);
-        feasibilityStudy.setNoOfFlatsOrNoOfUnits(UPDATED_NO_OF_FLATS_OR_NO_OF_UNITS);
-        feasibilityStudy.setNoOfFloors(UPDATED_NO_OF_FLOORS);
-        feasibilityStudy.setTotalPlinthArea(UPDATED_TOTAL_PLINTH_AREA);
-        feasibilityStudy.setWaterRequirement(UPDATED_WATER_REQUIREMENT);
+        feasibilityStudy.setCreatedDate(UPDATED_CREATED_DATE);
+        feasibilityStudy.setModifiedDate(UPDATED_MODIFIED_DATE);
+        feasibilityStudy.setStatus(UPDATED_STATUS);
 
         restFeasibilityStudyMockMvc.perform(put("/api/feasibilityStudys")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -189,12 +172,9 @@ public class FeasibilityStudyResourceIntTest {
         List<FeasibilityStudy> feasibilityStudys = feasibilityStudyRepository.findAll();
         assertThat(feasibilityStudys).hasSize(databaseSizeBeforeUpdate);
         FeasibilityStudy testFeasibilityStudy = feasibilityStudys.get(feasibilityStudys.size() - 1);
-        assertThat(testFeasibilityStudy.getPlotAreaInSqMtrs()).isEqualTo(UPDATED_PLOT_AREA_IN_SQ_MTRS);
-        assertThat(testFeasibilityStudy.getPlotAreaInYards()).isEqualTo(UPDATED_PLOT_AREA_IN_YARDS);
-        assertThat(testFeasibilityStudy.getNoOfFlatsOrNoOfUnits()).isEqualTo(UPDATED_NO_OF_FLATS_OR_NO_OF_UNITS);
-        assertThat(testFeasibilityStudy.getNoOfFloors()).isEqualTo(UPDATED_NO_OF_FLOORS);
-        assertThat(testFeasibilityStudy.getTotalPlinthArea()).isEqualTo(UPDATED_TOTAL_PLINTH_AREA);
-        assertThat(testFeasibilityStudy.getWaterRequirement()).isEqualTo(UPDATED_WATER_REQUIREMENT);
+        assertThat(testFeasibilityStudy.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testFeasibilityStudy.getModifiedDate()).isEqualTo(UPDATED_MODIFIED_DATE);
+        assertThat(testFeasibilityStudy.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

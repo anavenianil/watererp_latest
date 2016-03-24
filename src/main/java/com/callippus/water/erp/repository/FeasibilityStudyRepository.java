@@ -11,4 +11,16 @@ import java.util.List;
  */
 public interface FeasibilityStudyRepository extends JpaRepository<FeasibilityStudy,Long> {
 
+    @Query("select feasibilityStudy from FeasibilityStudy feasibilityStudy where feasibilityStudy.preparedBy.login = ?#{principal.username}")
+    List<FeasibilityStudy> findByPreparedByIsCurrentUser();
+
+    @Query("select feasibilityStudy from FeasibilityStudy feasibilityStudy where feasibilityStudy.approvedByZonalHead.login = ?#{principal.username}")
+    List<FeasibilityStudy> findByApprovedByZonalHeadIsCurrentUser();
+
+    @Query("select feasibilityStudy from FeasibilityStudy feasibilityStudy where feasibilityStudy.inspectionByDepartmentHead.login = ?#{principal.username}")
+    List<FeasibilityStudy> findByInspectionByDepartmentHeadIsCurrentUser();
+
+    @Query("select feasibilityStudy from FeasibilityStudy feasibilityStudy where feasibilityStudy.approvedByOperationManager.login = ?#{principal.username}")
+    List<FeasibilityStudy> findByApprovedByOperationManagerIsCurrentUser();
+
 }

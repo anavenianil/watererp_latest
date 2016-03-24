@@ -1,23 +1,14 @@
 package com.callippus.water.erp.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.ZonedDateTime;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
 
 /**
  * A FeasibilityStudy.
@@ -31,85 +22,52 @@ public class FeasibilityStudy implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "plot_area_in_sq_mtrs")
-    private Float plotAreaInSqMtrs;
+    @Column(name = "created_date")
+    private ZonedDateTime createdDate;
     
-    @Column(name = "plot_area_in_yards")
-    private Float plotAreaInYards;
+    @Column(name = "modified_date")
+    private ZonedDateTime modifiedDate;
     
-    @Column(name = "no_of_flats_or_no_of_units")
-    private Integer noOfFlatsOrNoOfUnits;
-    
-    @Column(name = "no_of_floors")
-    private Integer noOfFloors;
-    
-    @Column(name = "total_plinth_area")
-    private Float totalPlinthArea;
-    
-    @Column(name = "water_requirement")
-    private Float waterRequirement;
+    @Column(name = "status")
+    private String status;
     
     @ManyToOne
-    @JoinColumn(name = "scheme_master_id")
-    private SchemeMaster schemeMaster;
+    @JoinColumn(name = "division_master_id")
+    private DivisionMaster divisionMaster;
 
     @ManyToOne
-    @JoinColumn(name = "tariff_category_master_id")
-    private TariffCategoryMaster tariffCategoryMaster;
+    @JoinColumn(name = "zone_master_id")
+    private ZoneMaster zoneMaster;
 
     @ManyToOne
-    @JoinColumn(name = "make_of_water_pipe_id")
-    private MakeOfPipe makeOfWaterPipe;
-
-    @ManyToOne
-    @JoinColumn(name = "make_of_sewerage_pipe_id")
-    private MakeOfPipe makeOfSeweragePipe;
-
-    @ManyToOne
-    @JoinColumn(name = "main_water_size_id")
-    private MainWaterSize mainWaterSize;
-
-    @ManyToOne
-    @JoinColumn(name = "main_sewerage_size_id")
-    private MainSewerageSize mainSewerageSize;
-
-    @ManyToOne
-    @JoinColumn(name = "docket_code_id")
-    private DocketCode docketCode;
+    @JoinColumn(name = "street_master_id")
+    private StreetMaster streetMaster;
 
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
     private ApplicationTxn applicationTxn;
 
     @ManyToOne
+    @JoinColumn(name = "prepared_by_id")
+    private User preparedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "approved_by_zonal_head_id")
+    private User approvedByZonalHead;
+
+    @ManyToOne
+    @JoinColumn(name = "inspection_by_department_head_id")
+    private User inspectionByDepartmentHead;
+
+    @ManyToOne
+    @JoinColumn(name = "approved_by_operation_manager_id")
+    private User approvedByOperationManager;
+
+    @ManyToOne
     @JoinColumn(name = "category_master_id")
     private CategoryMaster categoryMaster;
 
-    @ManyToOne
-    @JoinColumn(name = "sewer_size_id")
-    private SewerSize sewerSize;
-
-    @ManyToOne
-    @JoinColumn(name = "pipe_size_master_id")
-    private PipeSizeMaster pipeSizeMaster;
-
-    @ManyToOne
-    @JoinColumn(name = "feasibility_status_id")
-    private FeasibilityStatus feasibilityStatus;
-
-    @OneToMany(mappedBy = "feasibilityStudy", cascade=CascadeType.ALL)
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private List<ItemRequired> itemRequired = new ArrayList<>();
-    
-    public List<ItemRequired> getItemRequired() {
-		return itemRequired;
-	}
-
-	public void setItemRequired(List<ItemRequired> itemRequired) {
-		this.itemRequired = itemRequired;
-	}
-
-	public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -117,108 +75,52 @@ public class FeasibilityStudy implements Serializable {
         this.id = id;
     }
 
-    public Float getPlotAreaInSqMtrs() {
-        return plotAreaInSqMtrs;
+    public ZonedDateTime getCreatedDate() {
+        return createdDate;
     }
     
-    public void setPlotAreaInSqMtrs(Float plotAreaInSqMtrs) {
-        this.plotAreaInSqMtrs = plotAreaInSqMtrs;
+    public void setCreatedDate(ZonedDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public Float getPlotAreaInYards() {
-        return plotAreaInYards;
+    public ZonedDateTime getModifiedDate() {
+        return modifiedDate;
     }
     
-    public void setPlotAreaInYards(Float plotAreaInYards) {
-        this.plotAreaInYards = plotAreaInYards;
+    public void setModifiedDate(ZonedDateTime modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 
-    public Integer getNoOfFlatsOrNoOfUnits() {
-        return noOfFlatsOrNoOfUnits;
+    public String getStatus() {
+        return status;
     }
     
-    public void setNoOfFlatsOrNoOfUnits(Integer noOfFlatsOrNoOfUnits) {
-        this.noOfFlatsOrNoOfUnits = noOfFlatsOrNoOfUnits;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Integer getNoOfFloors() {
-        return noOfFloors;
-    }
-    
-    public void setNoOfFloors(Integer noOfFloors) {
-        this.noOfFloors = noOfFloors;
+    public DivisionMaster getDivisionMaster() {
+        return divisionMaster;
     }
 
-    public Float getTotalPlinthArea() {
-        return totalPlinthArea;
-    }
-    
-    public void setTotalPlinthArea(Float totalPlinthArea) {
-        this.totalPlinthArea = totalPlinthArea;
+    public void setDivisionMaster(DivisionMaster divisionMaster) {
+        this.divisionMaster = divisionMaster;
     }
 
-    public Float getWaterRequirement() {
-        return waterRequirement;
-    }
-    
-    public void setWaterRequirement(Float waterRequirement) {
-        this.waterRequirement = waterRequirement;
+    public ZoneMaster getZoneMaster() {
+        return zoneMaster;
     }
 
-    public SchemeMaster getSchemeMaster() {
-        return schemeMaster;
+    public void setZoneMaster(ZoneMaster zoneMaster) {
+        this.zoneMaster = zoneMaster;
     }
 
-    public void setSchemeMaster(SchemeMaster schemeMaster) {
-        this.schemeMaster = schemeMaster;
+    public StreetMaster getStreetMaster() {
+        return streetMaster;
     }
 
-    public TariffCategoryMaster getTariffCategoryMaster() {
-        return tariffCategoryMaster;
-    }
-
-    public void setTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster) {
-        this.tariffCategoryMaster = tariffCategoryMaster;
-    }
-
-    public MakeOfPipe getMakeOfWaterPipe() {
-        return makeOfWaterPipe;
-    }
-
-    public void setMakeOfWaterPipe(MakeOfPipe makeOfPipe) {
-        this.makeOfWaterPipe = makeOfPipe;
-    }
-
-    public MakeOfPipe getMakeOfSeweragePipe() {
-        return makeOfSeweragePipe;
-    }
-
-    public void setMakeOfSeweragePipe(MakeOfPipe makeOfPipe) {
-        this.makeOfSeweragePipe = makeOfPipe;
-    }
-
-    public MainWaterSize getMainWaterSize() {
-        return mainWaterSize;
-    }
-
-    public void setMainWaterSize(MainWaterSize mainWaterSize) {
-        this.mainWaterSize = mainWaterSize;
-    }
-
-    public MainSewerageSize getMainSewerageSize() {
-        return mainSewerageSize;
-    }
-
-    public void setMainSewerageSize(MainSewerageSize mainSewerageSize) {
-        this.mainSewerageSize = mainSewerageSize;
-    }
-
-    public DocketCode getDocketCode() {
-        return docketCode;
-    }
-
-    public void setDocketCode(DocketCode docketCode) {
-        this.docketCode = docketCode;
+    public void setStreetMaster(StreetMaster streetMaster) {
+        this.streetMaster = streetMaster;
     }
 
     public ApplicationTxn getApplicationTxn() {
@@ -229,36 +131,44 @@ public class FeasibilityStudy implements Serializable {
         this.applicationTxn = applicationTxn;
     }
 
+    public User getPreparedBy() {
+        return preparedBy;
+    }
+
+    public void setPreparedBy(User user) {
+        this.preparedBy = user;
+    }
+
+    public User getApprovedByZonalHead() {
+        return approvedByZonalHead;
+    }
+
+    public void setApprovedByZonalHead(User user) {
+        this.approvedByZonalHead = user;
+    }
+
+    public User getInspectionByDepartmentHead() {
+        return inspectionByDepartmentHead;
+    }
+
+    public void setInspectionByDepartmentHead(User user) {
+        this.inspectionByDepartmentHead = user;
+    }
+
+    public User getApprovedByOperationManager() {
+        return approvedByOperationManager;
+    }
+
+    public void setApprovedByOperationManager(User user) {
+        this.approvedByOperationManager = user;
+    }
+
     public CategoryMaster getCategoryMaster() {
         return categoryMaster;
     }
 
     public void setCategoryMaster(CategoryMaster categoryMaster) {
         this.categoryMaster = categoryMaster;
-    }
-
-    public SewerSize getSewerSize() {
-        return sewerSize;
-    }
-
-    public void setSewerSize(SewerSize sewerSize) {
-        this.sewerSize = sewerSize;
-    }
-
-    public PipeSizeMaster getPipeSizeMaster() {
-        return pipeSizeMaster;
-    }
-
-    public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
-        this.pipeSizeMaster = pipeSizeMaster;
-    }
-
-    public FeasibilityStatus getFeasibilityStatus() {
-        return feasibilityStatus;
-    }
-
-    public void setFeasibilityStatus(FeasibilityStatus feasibilityStatus) {
-        this.feasibilityStatus = feasibilityStatus;
     }
 
     @Override
@@ -285,12 +195,9 @@ public class FeasibilityStudy implements Serializable {
     public String toString() {
         return "FeasibilityStudy{" +
             "id=" + id +
-            ", plotAreaInSqMtrs='" + plotAreaInSqMtrs + "'" +
-            ", plotAreaInYards='" + plotAreaInYards + "'" +
-            ", noOfFlatsOrNoOfUnits='" + noOfFlatsOrNoOfUnits + "'" +
-            ", noOfFloors='" + noOfFloors + "'" +
-            ", totalPlinthArea='" + totalPlinthArea + "'" +
-            ", waterRequirement='" + waterRequirement + "'" +
+            ", createdDate='" + createdDate + "'" +
+            ", modifiedDate='" + modifiedDate + "'" +
+            ", status='" + status + "'" +
             '}';
     }
 }

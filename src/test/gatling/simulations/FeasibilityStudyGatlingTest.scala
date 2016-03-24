@@ -67,7 +67,7 @@ class FeasibilityStudyGatlingTest extends Simulation {
             .exec(http("Create new feasibilityStudy")
             .post("/api/feasibilityStudys")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "plotAreaInSqMtrs":null, "plotAreaInYards":null, "noOfFlatsOrNoOfUnits":"0", "noOfFloors":"0", "totalPlinthArea":null, "waterRequirement":null}""")).asJSON
+            .body(StringBody("""{"id":null, "createdDate":"2020-01-01T00:00:00.000Z", "modifiedDate":"2020-01-01T00:00:00.000Z", "status":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_feasibilityStudy_url")))
             .pause(10)

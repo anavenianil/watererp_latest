@@ -8,6 +8,8 @@ angular.module('watererpApp')
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
+                    data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
+                    data.modifiedDate = DateUtils.convertDateTimeFromServer(data.modifiedDate);
                     return data;
                 }
             },

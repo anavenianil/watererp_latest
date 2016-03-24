@@ -1,142 +1,132 @@
+<div>
+	<form name="editForm" role="form" novalidate ng-submit="save()">
 
-<form name="editForm" role="form" novalidate ng-submit="save()">
-	<div class="panel panel-primary">
-		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create or edit a
-				FeasibilityStudy</h3>
-		</div>
-		<div class="list-group">
-			<div class="list-group-item">
-				<!-- <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myFeasibilityStudyLabel">Create or edit a FeasibilityStudy</h4>
-    	</div> -->
-				<div class="modal-body">
-					<jh-alert-error></jh-alert-error>
-					<fieldset>
-						<legend>Application</legend>
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">Create or edit a
+					FeasibilityStudy</h3>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="modal-body">
+						<jh-alert-error></jh-alert-error>
 						<div class="row">
-							<div class="col-sm-3">
-								<label>File Number</label> <input type="text"
-									class="form-control" id="field_fileNo" name="fileNo"
-									ng-model="feasibilityStudy.fileNo">
+							<div class="col-sm-4">
+								<label for="id">ID</label> <input type="text"
+									class="form-control" id="id" name="id"
+									ng-model="feasibilityStudy.id" readonly />
 							</div>
-							<div class="col-sm-1">
-								<br>
-								<button type="button"
-									class="btn btn-primary glyphicon glyphicon-search"
-									ng-disabled="editForm.$invalid || isSaving"
-									ng-click="getApplication(feasibilityStudy.fileNo)"></button>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_createdDate">CreatedDate</label>
+								<input id="field_createdDate" type="text" class="form-control"
+									uib-datepicker-popup="{{dateformat}}"
+									ng-model="feasibilityStudy.createdDate"
+									is-open="datePickerForCreatedDate.status.opened" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="datePickerForCreatedDateOpen($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_modifiedDate">ModifiedDate</label>
+								<input id="field_modifiedDate" type="text" class="form-control"
+									uib-datepicker-popup="{{dateformat}}"
+									ng-model="feasibilityStudy.modifiedDate"
+									is-open="datePickerForModifiedDate.status.opened" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="datePickerForModifiedDateOpen($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
 							</div>
 						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Applicant Detail</legend>
 						<div class="row">
-							<div class="col-sm-6">
-								<label>Full Name</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.fullName}}</h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>Home/Office Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.homeOrOficeNumber}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label> Regional Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.regionalNumber}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label> Fax Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.faxNumber}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Address</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label> Plot Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.plotNumber}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label> Area</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.area}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label> Street</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.street}}</h5>
-							</div>
+							
 
-						</div>
-						<div class="row">
 							<div class="col-sm-4">
-								<label> Village Executive Office</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOffice}}</h5>
+								<label for="field_divisionMaster">divisionMaster</label> <select
+									class="form-control" id="field_divisionMaster"
+									name="divisionMaster"
+									ng-model="feasibilityStudy.divisionMaster"
+									ng-change="getZone(feasibilityStudy.divisionMaster.id)"
+									ng-options="divisionMaster as divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
+									<option value=""></option>
+								</select>
 							</div>
 							<div class="col-sm-4">
-								<label> Village Executive Office</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOffice}}</h5>
+								<label for="field_zoneMaster">zoneMaster</label> <select
+									class="form-control" id="field_zoneMaster" name="zoneMaster"
+									ng-model="feasibilityStudy.zoneMaster"
+									ng-change="getStreet(feasibilityStudy.zoneMaster.id)"
+									ng-options="zoneMaster as zoneMaster.zoneName for zoneMaster in zoneMasters track by zoneMaster.id">
+									<option value=""></option>
+								</select>
 							</div>
-						</div>
-
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Connection Details</legend>
-						<div class="col-sm-3">
-							<label for="field_categoryMaster">Category</label> <select
-								class="form-control" id="field_categoryMaster"
-								name="categoryMaster" ng-model="applicationTxn.categoryMaster"
-								ng-options="categoryMaster as categoryMaster.categoryName for categoryMaster in categorymasters track by categoryMaster.id">
-								<option value=""></option>
-							</select>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Accepted For</legend>
-						<div class="row">
-							<div class="col-sm-6">
-								<label for="field_schemeMaster">schemeMaster</label> <select
-									class="form-control" id="field_schemeMaster"
-									name="schemeMaster" ng-model="feasibilityStudy.schemeMaster"
-									ng-options="schemeMaster as schemeMaster.schemeName for schemeMaster in schememasters track by schemeMaster.id">
+							<div class="col-sm-4">
+								<label for="field_streetMaster">streetMaster</label> <select
+									class="form-control" id="field_streetMaster"
+									name="streetMaster" ng-model="feasibilityStudy.streetMaster"
+									ng-options="streetMaster as streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
 						</div>
-						<br>
 						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label" for="field_plotAreaInSqMtrs">PlotAreaInSqMtrs</label>
-								<input type="number" class="form-control"
-									name="plotAreaInSqMtrs" id="field_plotAreaInSqMtrs"
-									ng-model="feasibilityStudy.plotAreaInSqMtrs" />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_plotAreaInYards">PlotAreaInYards</label>
-								<input type="number" class="form-control" name="plotAreaInYards"
-									id="field_plotAreaInYards"
-									ng-model="feasibilityStudy.plotAreaInYards" />
-							</div>
-							<!-- </div>
-						<br>
-						<div class="row"> -->
-							<div class="col-sm-3">
-								<label for="field_tariffCategoryMaster">tariffCategoryMaster</label>
-								<select class="form-control" id="field_tariffCategoryMaster"
-									name="tariffCategoryMaster"
-									ng-model="feasibilityStudy.tariffCategoryMaster"
-									ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffName for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+							
+							<div class="col-sm-4">
+								<label for="field_applicationTxn">applicationTxn</label> <select
+									class="form-control" id="field_applicationTxn"
+									name="applicationTxn"
+									ng-model="feasibilityStudy.applicationTxn"
+									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
 									<option value=""></option>
 								</select>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
+								<label for="field_preparedBy">preparedBy</label> <select
+									class="form-control" id="field_preparedBy" name="preparedBy"
+									ng-model="feasibilityStudy.preparedBy"
+									ng-options="user as user.login for user in users track by user.id">
+									<option value=""></option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<label for="field_approvedByZonalHead">approvedByZonalHead</label>
+								<select class="form-control" id="field_approvedByZonalHead"
+									name="approvedByZonalHead"
+									ng-model="feasibilityStudy.approvedByZonalHead"
+									ng-options="user as user.login for user in users track by user.id">
+									<option value=""></option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<label for="field_inspectionByDepartmentHead">inspectionByDepartmentHead</label>
+								<select class="form-control"
+									id="field_inspectionByDepartmentHead"
+									name="inspectionByDepartmentHead"
+									ng-model="feasibilityStudy.inspectionByDepartmentHead"
+									ng-options="user as user.login for user in users track by user.id">
+									<option value=""></option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<label for="field_approvedByOperationManager">approvedByOperationManager</label>
+								<select class="form-control"
+									id="field_approvedByOperationManager"
+									name="approvedByOperationManager"
+									ng-model="feasibilityStudy.approvedByOperationManager"
+									ng-options="user as user.login for user in users track by user.id">
+									<option value=""></option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
 								<label for="field_categoryMaster">categoryMaster</label> <select
 									class="form-control" id="field_categoryMaster"
 									name="categoryMaster"
@@ -145,169 +135,25 @@
 									<option value=""></option>
 								</select>
 							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label" for="field_noOfFlatsOrNoOfUnits">NoOfFlatsOrNoOfUnits</label>
-								<input type="number" class="form-control"
-									name="noOfFlatsOrNoOfUnits" id="field_noOfFlatsOrNoOfUnits"
-									ng-model="feasibilityStudy.noOfFlatsOrNoOfUnits" />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_noOfFloors">NoOfFloors</label>
-								<input type="number" class="form-control" name="noOfFloors"
-									id="field_noOfFloors" ng-model="feasibilityStudy.noOfFloors" />
-							</div>
-							<!-- </div>
-						<br>
-						<div class="row"> -->
-							<div class="col-sm-3">
-								<label class="control-label" for="field_totalPlinthArea">TotalPlinthArea</label>
-								<input type="number" class="form-control" name="totalPlinthArea"
-									id="field_totalPlinthArea"
-									ng-model="feasibilityStudy.totalPlinthArea" />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_waterRequirement">WaterRequirement</label>
-								<input type="number" class="form-control"
-									name="waterRequirement" id="field_waterRequirement"
-									ng-model="feasibilityStudy.waterRequirement" />
+							<div class="col-sm-4">
+								<label class="control-label" for="field_status">Status</label> <input
+									type="text" class="form-control" name="status"
+									id="field_status" ng-model="feasibilityStudy.status" />
 							</div>
 						</div>
-						<br>
-						<fieldset>
-							<legend>Water Connection</legend>
-							<div class="row">
-								<div class="col-sm-4">
-									<label for="field_pipeSizeMaster">pipeSizeMaster</label> <select
-										class="form-control" id="field_pipeSizeMaster"
-										name="pipeSizeMaster"
-										ng-model="feasibilityStudy.pipeSizeMaster"
-										ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id">
-										<option value=""></option>
-									</select>
-								</div>
-								<div class="col-sm-4">
-									<label for="field_mainWaterSize">mainWaterSize</label> <select
-										class="form-control" id="field_mainWaterSize"
-										name="mainWaterSize" ng-model="feasibilityStudy.mainWaterSize"
-										ng-options="mainWaterSize as mainWaterSize.size for mainWaterSize in mainwatersizes track by mainWaterSize.id">
-										<option value=""></option>
-									</select>
-								</div>
-								<div class="col-sm-4">
-									<label for="field_makeOfWaterPipe">makeOfWaterPipe</label> <select
-										class="form-control" id="field_makeOfWaterPipe"
-										name="makeOfWaterPipe"
-										ng-model="feasibilityStudy.makeOfWaterPipe"
-										ng-options="makeOfPipe as makeOfPipe.makeName for makeOfPipe in makeofpipes track by makeOfPipe.id">
-										<option value=""></option>
-									</select>
-								</div>
-							</div>
-						</fieldset>
-						<br>
-						<fieldset>
-							<legend>Sewerage Connection</legend>
-							<div class="row">
-								<div class="col-sm-4">
-									<label for="field_sewerSize">sewerSize</label> <select
-										class="form-control" id="field_sewerSize" name="sewerSize"
-										ng-model="feasibilityStudy.sewerSize"
-										ng-options="sewerSize as sewerSize.sewerSize for sewerSize in sewersizes track by sewerSize.id">
-										<option value=""></option>
-									</select>
-								</div>
-								<div class="col-sm-4">
-									<label for="field_mainSewerageSize">mainSewerageSize</label> <select
-										class="form-control" id="field_mainSewerageSize"
-										name="mainSewerageSize"
-										ng-model="feasibilityStudy.mainSewerageSize"
-										ng-options="mainSewerageSize as mainSewerageSize.size for mainSewerageSize in mainseweragesizes track by mainSewerageSize.id">
-										<option value=""></option>
-									</select>
-								</div>
-								<div class="col-sm-4">
-									<label for="field_makeOfSeweragePipe">makeOfSeweragePipe</label>
-									<select class="form-control" id="field_makeOfSeweragePipe"
-										name="makeOfSeweragePipe"
-										ng-model="feasibilityStudy.makeOfSeweragePipe"
-										ng-options="makeOfPipe as makeOfPipe.makeName for makeOfPipe in makeofpipes track by makeOfPipe.id">
-										<option value=""></option>
-									</select>
-								</div>
-							</div>
-						</fieldset>
-						<br>
-						<div class="row">
-							<div class="col-sm-6">
-								<label for="field_docketCode">docketCode</label> <select
-									class="form-control" id="field_docketCode" name="docketCode"
-									ng-model="feasibilityStudy.docketCode"
-									ng-options="docketCode as docketCode.code for docketCode in docketcodes track by docketCode.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-6">
-								<label for="field_feasibilityStatus">feasibilityStatus</label> <select
-									class="form-control" id="field_feasibilityStatus"
-									name="feasibilityStatus"
-									ng-model="feasibilityStudy.feasibilityStatus"
-									ng-options="feasibilityStatus as feasibilityStatus.status for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
-									<option value=""></option>
-								</select>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Items Required</legend>
-						<div ng-repeat="x in itemArr track by $index">
-							<div class="row">
-								<div class="col-sm-4">
-									<label for="field_itemName">Item Name</label> <select
-										class="form-control" id="field_itemName" name="itemName"
-										ng-model="feasibilityStudy.itemRequired[x].itemDetails"
-										ng-options="itemDetails as itemDetails.itemName for itemDetails in itemDetailss track by itemDetails.id">
-										<option value=""></option>
-									</select>
-								</div>
-								<div class="col-sm-4">
-									<label class="control-label" for="field_quantity">Quantity</label>
-									<input type="number" class="form-control" name="quantity"
-										id="field_quantity"
-										ng-model="feasibilityStudy.itemRequired[x].quantity" />
-								</div>
-								<!-- <div class="col-sm-4">
-									<label for="field_applicationTxn">applicationTxn</label> <select
-										class="form-control" id="field_applicationTxn"
-										name="applicationTxn" ng-model="feasibilityStudy.itemRequired[x].applicationTxn"
-										ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-										<option value=""></option>
-									</select>
-								</div> -->
-							</div>
-						</div>
-						<br>
-						<button type="button" class="btn btn-primary"
-							ng-disabled="editForm.$invalid || isSaving"
-							ng-click="createItemArr()">
-							<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
-								Items</span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 						</button>
-					</fieldset>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-					</button>
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span> &nbsp;<span>Save</span>
-					</button>
+						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+							class="btn btn-primary">
+							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</div>

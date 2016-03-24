@@ -1,32 +1,19 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('FeasibilityStudyDialogController', function ($scope, $state, FeasibilityStudy, SchemeMaster, TariffCategoryMaster, 
-    		MakeOfPipe, MainWaterSize, MainSewerageSize, DocketCode, ApplicationTxn, CategoryMaster, SewerSize, PipeSizeMaster, 
-    		FeasibilityStatus, ParseLinks, $stateParams, ItemDetails) {
-        $scope.feasibilityStudys = [];
-        $scope.predicate = 'id';
-        $scope.reverse = true;
-        $scope.page = 0;
-        $scope.feasibilityStudy = {};
-
-        $scope.schememasters = SchemeMaster.query();
-        $scope.tariffcategorymasters = TariffCategoryMaster.query();
-        $scope.makeofpipes = MakeOfPipe.query();
-        $scope.mainwatersizes = MainWaterSize.query();
-        $scope.mainseweragesizes = MainSewerageSize.query();
-        $scope.docketcodes = DocketCode.query();
-        //$scope.applicationtxns = ApplicationTxn.query();
+    .controller('FeasibilityStudyDialogController', function ($scope, $stateParams, ParseLinks, $state, FeasibilityStudy, DivisionMaster, ZoneMaster,
+    		StreetMaster, ApplicationTxn, User, CategoryMaster) {
+    	
+    	$scope.feasibilityStudy = {};
+        $scope.divisionmasters = DivisionMaster.query();
+        //$scope.zonemasters = ZoneMaster.query();
+        //$scope.streetmasters = StreetMaster.query();
+        $scope.applicationtxns = ApplicationTxn.query();
+        $scope.users = User.query();
         $scope.categorymasters = CategoryMaster.query();
-        $scope.sewersizes = SewerSize.query();
-        $scope.pipesizemasters = PipeSizeMaster.query();
-        $scope.feasibilitystatuss = FeasibilityStatus.query();
-        $scope.itemDetailss = ItemDetails.query();
-        $scope.applicationtxn = {};
-        $scope.feasibilityStudy.applicationTxn = {};
         
-        if($stateParams.feasibilityStudyId != null){
-        	$scope.feasibilityStudyId = $stateParams.feasibilityStudyId;
+        if($stateParams.id != null){
+        	$scope.feasibilityStudyId = $stateParams.id;
         	FeasibilityStudy.get({id : $scope.feasibilityStudyId}, function(result) {
                 $scope.feasibilityStudy = result;
             });
@@ -39,12 +26,15 @@ angular.module('watererpApp')
                 $scope.feasibilityStudy.applicationTxn.id = $scope.applicationTxn.id;
             });	
         }
-        
+        /*$scope.load = function(id) {
+            FeasibilityStudy.get({id : id}, function(result) {
+                $scope.feasibilityStudy = result;
+            });
+        };*/
+
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
-            //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('feasibilityStudy');
         };
 
         var onSaveError = function (result) {
@@ -59,22 +49,27 @@ angular.module('watererpApp')
                 FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError);
             }
         };
-        
-        $scope.reset = function() {
-            $scope.page = 0;
-            $scope.feasibilityStudys = [];
-            //$scope.loadAll();
-        };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
-        };
-        //$scope.loadAll();
 
+        $scope.clear = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
+        $scope.datePickerForCreatedDate = {};
 
-        $scope.refresh = function () {
-            $scope.reset();
-            //$scope.clear();
+        $scope.datePickerForCreatedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForCreatedDateOpen = function($event) {
+            $scope.datePickerForCreatedDate.status.opened = true;
+        };
+        $scope.datePickerForModifiedDate = {};
+
+        $scope.datePickerForModifiedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForModifiedDateOpen = function($event) {
+            $scope.datePickerForModifiedDate.status.opened = true;
         };
 
         $scope.clear = function () {
@@ -102,26 +97,40 @@ angular.module('watererpApp')
             }
         };
         
-        
-        $scope.feasibilityStudy.itemRequired = [];
-        $scope.count = 0;
-        $scope.itemArr = [];
-        $scope.createItemArr = function(){
-        	$scope.count = $scope.count +1;
-       		$scope.itemArr.push($scope.count);
-       		$scope.feasibilityStudy.itemRequired[$scope.count]= {};
-       		//$scope.feasibilityStudy.itemRequired[$scope.count].feasibilityStudy = {};
-       		$scope.feasibilityStudy.itemRequired[$scope.count].applicationTxn = {};
-       		$scope.feasibilityStudy.itemRequired[$scope.count].applicationTxn.id = $scope.feasibilityStudy.applicationTxn.id;
+        $scope.getZone = function(divisionId){
+        	$scope.zoneMasters = [];
+            ZoneMaster.query({page: $scope.page, size: 20, divisionId : divisionId}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.zoneMasters.push(result[i]);
+                }
+            });
         }
         
-       /* $scope.items = function(){
-        	for (var item in $scope.feasibilityStudy.itemRequired) {
-        		$scope.feasibilityStudy.itemRequired.push($scope.feasibilityStudy.itemRequired[item]);
-        	}
-        }*/
+        $scope.getStreet = function(zoneId){
+        	$scope.streetMasters = [];
+            StreetMaster.query({page: $scope.page, size: 20, zoneId: zoneId}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.streetMasters.push(result[i]);
+                }
+            });
+        }
         
-    });
+    
+    
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -129,23 +138,16 @@ angular.module('watererpApp')
 /*'use strict';
 
 angular.module('watererpApp').controller('FeasibilityStudyDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'FeasibilityStudy', 'SchemeMaster', 'TariffCategoryMaster', 'MakeOfPipe', 'MainWaterSize', 'MainSewerageSize', 'DocketCode', 'ApplicationTxn', 'CategoryMaster', 'SewerSize', 'PipeSizeMaster', 'FeasibilityStatus',
-        function($scope, $stateParams, $uibModalInstance, entity, FeasibilityStudy, SchemeMaster, TariffCategoryMaster, MakeOfPipe, MainWaterSize, MainSewerageSize, DocketCode, ApplicationTxn, CategoryMaster, SewerSize, PipeSizeMaster, FeasibilityStatus) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'FeasibilityStudy', 'DivisionMaster', 'ZoneMaster', 'StreetMaster', 'ApplicationTxn', 'User', 'CategoryMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, FeasibilityStudy, DivisionMaster, ZoneMaster, StreetMaster, ApplicationTxn, User, CategoryMaster) {
 
         $scope.feasibilityStudy = entity;
-        $scope.schememasters = SchemeMaster.query();
-        $scope.tariffcategorymasters = TariffCategoryMaster.query();
-        $scope.makeofpipes = MakeOfPipe.query();
-        $scope.mainwatersizes = MainWaterSize.query();
-        $scope.mainseweragesizes = MainSewerageSize.query();
-        $scope.docketcodes = DocketCode.query();
-        //$scope.applicationtxns = ApplicationTxn.query();
+        $scope.divisionmasters = DivisionMaster.query();
+        $scope.zonemasters = ZoneMaster.query();
+        $scope.streetmasters = StreetMaster.query();
+        $scope.applicationtxns = ApplicationTxn.query();
+        $scope.users = User.query();
         $scope.categorymasters = CategoryMaster.query();
-        $scope.sewersizes = SewerSize.query();
-        $scope.pipesizemasters = PipeSizeMaster.query();
-        $scope.feasibilitystatuss = FeasibilityStatus.query();
-        $scope.applicationtxn = {};
-        
         $scope.load = function(id) {
             FeasibilityStudy.get({id : id}, function(result) {
                 $scope.feasibilityStudy = result;
@@ -174,13 +176,23 @@ angular.module('watererpApp').controller('FeasibilityStudyDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
-        
-        $scope.getCustomer = function(fileNo){
-        	ApplicationTxn.get({id : fileNo}, function(result) {
-                $scope.applicationTxn = result;
-                //$scope.feasibilityStudy.customerName = $scope.applicationTxn.firstName;
-            });
-        	
-        }
+        $scope.datePickerForCreatedDate = {};
+
+        $scope.datePickerForCreatedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForCreatedDateOpen = function($event) {
+            $scope.datePickerForCreatedDate.status.opened = true;
+        };
+        $scope.datePickerForModifiedDate = {};
+
+        $scope.datePickerForModifiedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForModifiedDateOpen = function($event) {
+            $scope.datePickerForModifiedDate.status.opened = true;
+        };
 }]);
 */

@@ -52,12 +52,9 @@ angular.module('watererpApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    plotAreaInSqMtrs: null,
-                                    plotAreaInYards: null,
-                                    noOfFlatsOrNoOfUnits: null,
-                                    noOfFloors: null,
-                                    totalPlinthArea: null,
-                                    waterRequirement: null,
+                                    createdDate: null,
+                                    modifiedDate: null,
+                                    status: null,
                                     id: null
                                 };
                             }

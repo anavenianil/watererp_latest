@@ -1,314 +1,118 @@
+
 <div>
-	<h2>
-		<span>FeasibilityStudy</span> {{feasibilityStudy.id}}
-	</h2>
-	<div>
-		<div class="panel panel-primary">
-			<div class="panel-heading clearfix">
-				<h3 class="panel-title pull-left">
-					Feasibility For New Connection
-				</h3>
-			</div>
-			<div class="list-group">
-				<div class="list-group-item">
-					<fieldset>
-						<legend></legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>File Number</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.fileNumber.fileNo}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>APPLICANT NAME</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>First Name</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.customer.firstName}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Middle Name</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.customer.middleName}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Last Name</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.customer.lastName}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Service Premises Area</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>House No</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.sHouseNo}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Street</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.street}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Area Code</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.areaCode}}</h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>Govt. Official No.</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.govtOfficialNo}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Pincode</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.pincode}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Area.</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.area}}</h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>Telephone</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.telephone}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Mobile</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.mobile}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>section.</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.section}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Accepted For</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>schemeMaster</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.schemeMaster.schemeName}}</h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3">
-								<label>PlotAreaInSqMtrs</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.plotAreaInSqMtrs}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>plotAreaInYards</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.plotAreaInYards}}</h5>
-							</div>
-							<!-- </div>
-						<div class="row"> -->
-							<div class="col-sm-3">
-								<label>tariffCategoryMaster</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.tariffCategoryMaster.tariffName}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>categoryMaster</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.categoryMaster.categoryName}}</h5>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3">
-								<label>NoOfFlatsOrNoOfUnits</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.noOfFlatsOrNoOfUnits}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>NoOfFloors</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.noOfFloors}}</h5>
-							</div>
-							<!-- </div>
-						<div class="row"> -->
-							<div class="col-sm-3">
-								<label>TotalPlinthArea</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.totalPlinthArea}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>WaterRequirement</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.waterRequirement}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Water Connection</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>pipeSizeMaster</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.pipeSizeMaster.pipeSize}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>mainWaterSize</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.mainWaterSize.size}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>makeOfWaterPipe</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.makeOfWaterPipe.makeName}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Sewerage Connection</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>sewerSize</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.sewerSize.sewerSize}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>mainSewerageSize</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.mainSewerageSize.size}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>makeOfSeweragePipe</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.makeOfSeweragePipe.makeName}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend></legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>docketCode</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.docketCode.code}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>feasibilityStatus</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.status}}</h5>
-							</div>
+    <h2><span>FeasibilityStudy</span> {{feasibilityStudy.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>CreatedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{feasibilityStudy.createdDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{feasibilityStudy.modifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{feasibilityStudy.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>divisionMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="divisionMaster.detail({id:feasibilityStudy.divisionMaster.id})">{{feasibilityStudy.divisionMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>zoneMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="zoneMaster.detail({id:feasibilityStudy.zoneMaster.id})">{{feasibilityStudy.zoneMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>streetMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="streetMaster.detail({id:feasibilityStudy.streetMaster.id})">{{feasibilityStudy.streetMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>applicationTxn</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:feasibilityStudy.applicationTxn.id})">{{feasibilityStudy.applicationTxn.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>preparedBy</span>
+                </td>
+                <td>
+                    {{feasibilityStudy.preparedBy.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>approvedByZonalHead</span>
+                </td>
+                <td>
+                    {{feasibilityStudy.approvedByZonalHead.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>inspectionByDepartmentHead</span>
+                </td>
+                <td>
+                    {{feasibilityStudy.inspectionByDepartmentHead.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>approvedByOperationManager</span>
+                </td>
+                <td>
+                    {{feasibilityStudy.approvedByOperationManager.id}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>categoryMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="categoryMaster.detail({id:feasibilityStudy.categoryMaster.id})">{{feasibilityStudy.categoryMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-						</div>
-					</fieldset>
-				</div>
-			</div>
-
-		</div>
-		<button type="submit" onclick="window.history.back()"
-			class="btn btn-info">
-			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
-				Back</span>
-		</button>
-		<button type="button" class="btn btn-success pull-right" 
-				ng-click="getApplicationTxn(feasibilityStudy.applicationTxn.id)">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-		</button>
-
-		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-
-		<button type="button" class="btn btn-danger pull-right" 
-				ng-click="decline(feasibilityStudy.id)">
-			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
-		</button>
-	</div>
-
-
-	<div id="approveModal" class="modal" name="aproveForm">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<form name="editForm" role="form" novalidate>
-					<div class="panel panel-primary">
-						<div class="panel-heading clearfix">
-							<h3 class="panel-title pull-left">Application Approval
-								Details</h3>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true" ng-click="clear()">&times;</button>
-						</div>
-						<div class="list-group">
-							<div class="list-group-item">
-								<div class="modal-body">
-									<jh-alert-error></jh-alert-error>
-									<div class="row">
-										<div class="col-sm-3">
-											<label for="field_applicationTxn">Application Txn Id</label>
-											<input type="text" class="form-control" name="applicationTxn"
-												id="field_applicationTxn" ng-model="applicationTxn.id"
-												disabled />
-										</div>
-										<div class="col-sm-3">
-											<label for="field_customer">Customer Id</label> <input
-												type="text" class="form-control" id="field_customer"
-												name="customer" ng-model="applicationTxn.customer.id"
-												disabled />
-
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_approvedDate">Approved
-												Date</label> <input id="field_approvedDate" type="text"
-												class="form-control" uib-datepicker-popup="{{dateformat}}"
-												ng-model="approvalDetails.approvedDate"
-												is-open="datePickerForApprovedDate.status.opened" /> <span
-												class="input-group-btn">
-												<button type="button" class="btn btn-default"
-													ng-click="datePickerForApprovedDateOpen($event)">
-													<i class="glyphicon glyphicon-calendar"></i>
-												</button>
-											</span>
-										</div>
-										<!-- <div class="col-sm-3">
-											<label for="field_feasibilityStatus">Feasibility
-												Status</label> <select class="form-control"
-												id="field_feasibilityStatus" name="feasibilityStatus"
-												ng-model="approvalDetails.feasibilityStatus"
-												ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
-												<option value=""></option>
-											</select>
-										</div> -->
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<label class="control-label" for="field_remarks">Remarks</label>
-											<textarea rows="4" cols="50" class="form-control" name="remarks"
-												id="field_remarks" ng-model="applicationTxn.remarks" ></textarea>
-										</div>
-									</div>
-									<br>
-									<!-- <div class="row">
-										<div class="col-sm-3">
-											<label class="control-label" for="field_approvedEmpNo">Approved
-												Emp. No.</label> <input type="text" class="form-control"
-												name="approvedEmpNo" id="field_approvedEmpNo"
-												ng-model="approvalDetails.approvedEmpNo" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_approvedEmpName">Approved
-												Emp. Name</label> <input type="text" class="form-control"
-												name="approvedEmpName" id="field_approvedEmpName"
-												ng-model="approvalDetails.approvedEmpName" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_approvedEmpDesig">Approved
-												Emp. Desig.</label> <input type="text" class="form-control"
-												name="approvedEmpDesig" id="field_approvedEmpDesig"
-												ng-model="approvalDetails.approvedEmpDesig" />
-										</div>
-										<div class="col-sm-3">
-											<label for="field_designationMaster">Designation
-												Master</label> <select class="form-control"
-												id="field_designationMaster" name="designationMaster"
-												ng-model="approvalDetails.designationMaster"
-												ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
-												<option value=""></option>
-											</select>
-										</div>
-									</div> -->
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal" ng-click="clear()">
-										<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-									</button>
-									<button type="button"
-										ng-disabled="editForm.$invalid || isSaving"
-										class="btn btn-primary" 
-										ng-click="approvalDetailsSave(applicationTxn.id, applicationTxn.remarks)">
-										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
 </div>

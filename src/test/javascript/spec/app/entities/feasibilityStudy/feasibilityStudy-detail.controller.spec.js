@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('FeasibilityStudy Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockFeasibilityStudy, MockSchemeMaster, MockTariffCategoryMaster, MockMakeOfPipe, MockMainWaterSize, MockMainSewerageSize, MockDocketCode, MockApplicationTxn, MockCategoryMaster, MockSewerSize, MockPipeSizeMaster, MockFeasibilityStatus;
+        var MockEntity, MockFeasibilityStudy, MockDivisionMaster, MockZoneMaster, MockStreetMaster, MockApplicationTxn, MockUser, MockCategoryMaster;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,17 +12,12 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockFeasibilityStudy = jasmine.createSpy('MockFeasibilityStudy');
-            MockSchemeMaster = jasmine.createSpy('MockSchemeMaster');
-            MockTariffCategoryMaster = jasmine.createSpy('MockTariffCategoryMaster');
-            MockMakeOfPipe = jasmine.createSpy('MockMakeOfPipe');
-            MockMainWaterSize = jasmine.createSpy('MockMainWaterSize');
-            MockMainSewerageSize = jasmine.createSpy('MockMainSewerageSize');
-            MockDocketCode = jasmine.createSpy('MockDocketCode');
+            MockDivisionMaster = jasmine.createSpy('MockDivisionMaster');
+            MockZoneMaster = jasmine.createSpy('MockZoneMaster');
+            MockStreetMaster = jasmine.createSpy('MockStreetMaster');
             MockApplicationTxn = jasmine.createSpy('MockApplicationTxn');
+            MockUser = jasmine.createSpy('MockUser');
             MockCategoryMaster = jasmine.createSpy('MockCategoryMaster');
-            MockSewerSize = jasmine.createSpy('MockSewerSize');
-            MockPipeSizeMaster = jasmine.createSpy('MockPipeSizeMaster');
-            MockFeasibilityStatus = jasmine.createSpy('MockFeasibilityStatus');
             
 
             var locals = {
@@ -30,17 +25,12 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
                 'FeasibilityStudy': MockFeasibilityStudy,
-                'SchemeMaster': MockSchemeMaster,
-                'TariffCategoryMaster': MockTariffCategoryMaster,
-                'MakeOfPipe': MockMakeOfPipe,
-                'MainWaterSize': MockMainWaterSize,
-                'MainSewerageSize': MockMainSewerageSize,
-                'DocketCode': MockDocketCode,
+                'DivisionMaster': MockDivisionMaster,
+                'ZoneMaster': MockZoneMaster,
+                'StreetMaster': MockStreetMaster,
                 'ApplicationTxn': MockApplicationTxn,
-                'CategoryMaster': MockCategoryMaster,
-                'SewerSize': MockSewerSize,
-                'PipeSizeMaster': MockPipeSizeMaster,
-                'FeasibilityStatus': MockFeasibilityStatus
+                'User': MockUser,
+                'CategoryMaster': MockCategoryMaster
             };
             createController = function() {
                 $injector.get('$controller')("FeasibilityStudyDetailController", locals);

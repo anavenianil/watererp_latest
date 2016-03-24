@@ -4,11 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -76,13 +73,10 @@ public class FeasibilityStudyResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<FeasibilityStudy>> getAllFeasibilityStudys(Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of FeasibilityStudys");
-        Page<FeasibilityStudy> page = feasibilityStudyRepository.findAll(pageable); 
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/feasibilityStudys");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+    public List<FeasibilityStudy> getAllFeasibilityStudys() {
+        log.debug("REST request to get all FeasibilityStudys");
+        return feasibilityStudyRepository.findAll();
+            }
 
     /**
      * GET  /feasibilityStudys/:id -> get the "id" feasibilityStudy.
