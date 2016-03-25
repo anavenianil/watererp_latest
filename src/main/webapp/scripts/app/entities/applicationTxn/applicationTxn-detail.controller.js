@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDetailController', function ($state, $scope, $rootScope, $stateParams, entity, ApplicationTxn, ApplicationTxnService) {
+    .controller('ApplicationTxnDetailController', function ($state, $scope, $rootScope, $stateParams, entity, ApplicationTxn, 
+    		ApplicationTxnService) {
         $scope.applicationTxn = entity;
+        
         $scope.load = function (id) {
             ApplicationTxn.get({id: id}, function(result) {
                 $scope.applicationTxn = result;
@@ -14,7 +16,7 @@ angular.module('watererpApp')
         $scope.$on('$destroy', unsubscribe);
         
         $scope.status = null;
-        $scope.load = function (id, status) {
+        $scope.getApplicationTxn = function (id, status) {
         	$('#approveModal').modal('show');
             ApplicationTxn.get({id: id}, function(result) {
                 $scope.applicationTxn = result;

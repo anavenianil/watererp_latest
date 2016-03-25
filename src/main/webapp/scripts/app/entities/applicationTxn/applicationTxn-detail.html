@@ -96,20 +96,8 @@
 					<fieldset>
 						<legend>Connection Details</legend>
 						<div class="col-sm-3">
-							<label>House</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.house}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Institution</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.institution}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Business</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.business}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Industry</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.industry}}</h5>
+							<label>Category</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.categoryMaster.categoryName}}</h5>
 						</div>
 					</fieldset>
 				</div>
@@ -118,7 +106,7 @@
 
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-click="load(applicationTxn.id)">
+			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 

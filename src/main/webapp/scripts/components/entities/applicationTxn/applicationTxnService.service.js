@@ -7,7 +7,30 @@ angular.module('watererpApp')
                 return $http.get('api/applicationTxns/approveRequest', {params: {id: id, remarks: remarks}}).then(function (response) {
                     return response.data;
                 });
-            }/*,
+            },
+            getPendingRequests: function () {
+                return $http.get('api/applicationTxns/getPendingRequests').then(function (response) {
+                    return response.data;
+                });
+            },
+            getApprovedRequests: function () {
+                return $http.get('api/applicationTxns/getApprovedRequests').then(function (response) {
+                    return response.data;
+                });
+            },
+            getRequests: function (type,action_type) {
+                return $http.get('api/applicationTxns/getRequests/' + type + '/' + action_type).then(function (response) {
+                    return response.data;
+                });
+            }
+            /*,
+            getMyRequests: function () {
+                return $http.get('api/applicationTxns/getMyRequests').then(function (response) {
+                    return response.data;
+                });
+            }*/
+        
+        /*,
             declineRequest: function (id) {
                 return $http.get('api/applicationTxns/declineRequest', {params: {id: id}}).then(function (response) {
                     return response.data;

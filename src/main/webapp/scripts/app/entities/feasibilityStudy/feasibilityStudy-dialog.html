@@ -18,33 +18,42 @@
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_createdDate">CreatedDate</label>
-								<input id="field_createdDate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="feasibilityStudy.createdDate"
-									is-open="datePickerForCreatedDate.status.opened" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="datePickerForCreatedDateOpen($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
+								<div class="form-group">
+									<div class="input-group date" id="field_createdDate">
+										<input id="field_createdDate" type="text" class="form-control"
+											uib-datepicker-popup="{{dateformat}}"
+											ng-model="feasibilityStudy.createdDate"
+											is-open="datePickerForCreatedDate.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForCreatedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
 							</div>
+
 							<div class="col-sm-4">
 								<label class="control-label" for="field_modifiedDate">ModifiedDate</label>
-								<input id="field_modifiedDate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="feasibilityStudy.modifiedDate"
-									is-open="datePickerForModifiedDate.status.opened" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="datePickerForModifiedDateOpen($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
+								<div class="form-group">
+									<div class="input-group date" id="field_modifiedDate">
+										<input id="field_modifiedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="feasibilityStudy.modifiedDate"
+											is-open="datePickerForModifiedDate.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForModifiedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="row">
-							
+
 
 							<div class="col-sm-4">
 								<label for="field_divisionMaster">divisionMaster</label> <select
@@ -75,7 +84,7 @@
 							</div>
 						</div>
 						<div class="row">
-							
+
 							<div class="col-sm-4">
 								<label for="field_applicationTxn">applicationTxn</label> <select
 									class="form-control" id="field_applicationTxn"

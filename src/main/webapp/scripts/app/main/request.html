@@ -1,0 +1,73 @@
+
+<div>
+
+
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Requests</h3>
+		</div>
+		<div class="list-group">
+			<div class="table-responsive" ng-if="action_type !== '0'">
+				<table class="clickableTable table table-striped">
+					<thead>
+						<tr>
+							<th>Req. Id</th>
+							<th>Req. No.</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Actioned Date</th>
+							<th>Remarks</th>
+							<th>Status</th>
+							<th>IP Address</th>
+						</tr>
+					</thead>
+					<tbody infinite-scroll="loadPage(page + 1)"
+						infinite-scroll-disabled="links['last'] == page">
+						<tr ng-repeat="item in requests"
+							ui-sref="applicationTxn.detail({id:item.domainObject})">
+							<td>{{item.domainObject}}</td>
+							<td>{{item.fileNumber}}</td>
+							<td>{{item.assignedFrom.firstName}}
+								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
+							<td>{{item.assignedTo.firstName}}
+								{{item.assignedTo.lastName}} ({{item.assignedTSo.login}})</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.ipAddress}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="table-responsive" ng-if="action_type === '0'">
+		<table class="clickableTable table table-striped">
+			<thead>
+				<tr>
+					<th>Req. No.</th>
+					<th>Requisition Date</th>
+					<th>Project Name</th>
+					<th>No of Tests Planned</th>
+					<th>No of Test Batches</th>
+				</tr>
+			</thead>
+			<tbody infinite-scroll="loadPage(page + 1)"
+				infinite-scroll-disabled="links['last'] == page">
+
+				<tr ng-repeat="item in requests"
+					ui-sref="requisitionDetail({id:item.id})">
+
+					<!-- <td>{{item.requisition_no}}</td> -->
+					<td>{{$index + 1}}</td>
+					<td>{{item.requisition_date| date:'mediumDate'}}</td>
+					<td>{{item.project_master.project_name}}</td>
+					<td>{{item.no_of_tests_planned}}</td>
+					<td>{{item.no_of_test_batches}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

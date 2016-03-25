@@ -25,7 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.RequestWorkflowHistoryRepository;
+import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
@@ -49,6 +53,12 @@ public class ApplicationTxnResource {
     
     @Inject 
     private ApplicationTxnWorkflowService applicationTxnWorkflowService;
+    
+    @Inject
+    private ApplicationTxnCustomRepository applicationTxnCustomRepository;
+    
+    @Inject
+    private RequestWorkflowHistoryRepository requestWorkflowHistoryRepository;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -184,7 +194,7 @@ public class ApplicationTxnResource {
     /**
      * Decline the request
      */
-    @RequestMapping(value = "/applicationTxns/declineRequest",
+    /*@RequestMapping(value = "/applicationTxns/declineRequest",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -195,5 +205,73 @@ public class ApplicationTxnResource {
 		
 		applicationTxnWorkflowService.declineRequest(id);
 		return ResponseEntity.ok().build();
+	}*/
+    
+    
+    /**
+     * Display count of pending request to the dashboard
+     */
+    
+    @RequestMapping(value = "/applicationTxns/getPendingRequests",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<RequestCountDTO>> getPendingRequests(HttpServletResponse response)throws Exception {
+        log.debug("REST request to get Requisition : {}");
+        List<RequestCountDTO> pendingRequests = applicationTxnCustomRepository.countPendingRequests();
+
+        return new ResponseEntity<>(pendingRequests, HttpStatus.OK);
+    }
+    
+    
+    /**
+     * Display count of approved request to the dashboard
+     */
+    
+    @RequestMapping(value = "/applicationTxns/getApprovedRequests",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<RequestCountDTO>> getApprovedRequests(HttpServletResponse response)throws Exception {
+        log.debug("REST request to get Requisition : {}");
+        List<RequestCountDTO> approvedRequests = applicationTxnCustomRepository.countApprovedRequests();
+
+        return new ResponseEntity<>(approvedRequests, HttpStatus.OK);
+    }
+    
+    
+    /**
+     * Display PENDING request to the dashboard when clicked on Pending Requests button
+     */
+    @RequestMapping(value = "/applicationTxns/getRequests/pending/{type}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<RequestWorkflowHistory>> getAllPendingRequests(HttpServletResponse response, @PathVariable String type)
+			throws Exception {
+		log.debug("REST request to get Requisition : {}");
+		List<RequestWorkflowHistory> requestWorkflowHistorysStatus = applicationTxnCustomRepository.listAllPendingRequests(type);
+
+		return new ResponseEntity<>(requestWorkflowHistorysStatus,
+				HttpStatus.OK);
 	}
+    
+    
+    /**
+     * Display APPROVED request to the dashboard when clicked on Approved Requests button
+     */
+    @RequestMapping(value = "/applicationTxns/getRequests/approved/{type}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<RequestWorkflowHistory>> getAllApprovedRequests(HttpServletResponse response, @PathVariable String type)
+			throws Exception {
+		log.debug("REST request to get Requisition : {}");
+		List<RequestWorkflowHistory> requestWorkflowHistorysStatus = applicationTxnCustomRepository
+				.listAllApprovedRequests(type);
+
+		return new ResponseEntity<>(requestWorkflowHistorysStatus,
+				HttpStatus.OK);
+	}
+
 }
