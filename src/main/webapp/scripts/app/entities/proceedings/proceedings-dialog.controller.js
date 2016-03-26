@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ProceedingsDialogController', function ($scope, $state, Proceedings, ParseLinks, ApplicationTxn, $stateParams) {
+    .controller('ProceedingsDialogController', function ($scope, $state, Proceedings, ParseLinks, ApplicationTxn, $stateParams, ItemDetails) {
 
         $scope.proceedingss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
-        
+        $scope.itemDetailss = ItemDetails.query();
         //$scope.proceedings = entity;
         $scope.proceedings = {};
         
@@ -123,6 +123,19 @@ angular.module('watererpApp')
             	$state.go('applicationTxn.all');
             });
         }
+        
+        $scope.proceedings.itemRequired = [];
+        $scope.count = 0;
+        $scope.itemArr = [];
+        $scope.createItemArr = function(){
+        	$scope.count = $scope.count +1;
+       		$scope.itemArr.push($scope.count);
+       		$scope.proceedings.itemRequired[$scope.count]= {};
+       		//$scope.feasibilityStudy.itemRequired[$scope.count].feasibilityStudy = {};
+       		//$scope.proceedings.itemRequired[$scope.count].applicationTxn = {};
+       		//$scope.proceedings.itemRequired[$scope.count].applicationTxn.id = $scope.applicationTxn.id;
+        }
+        
     });
 
 

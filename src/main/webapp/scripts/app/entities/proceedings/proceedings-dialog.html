@@ -306,10 +306,37 @@
 							</div>
 						</div>
 					</fieldset>
+					<fieldset>
+						<legend>Items Required</legend>
+						<div ng-repeat="x in itemArr track by $index">
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_itemName">Item Name</label> <select
+										class="form-control" id="field_itemName" name="itemName"
+										ng-model="proceedings.itemRequired[x].itemDetails"
+										ng-options="itemDetails as itemDetails.itemName for itemDetails in itemDetailss track by itemDetails.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_quantity">Quantity</label>
+									<input type="number" class="form-control" name="quantity"
+										id="field_quantity"
+										ng-model="proceedings.itemRequired[x].quantity" />
+								</div>
+							</div>
+						</div>
+						<br>
+						<button type="button" class="btn btn-primary"
+							ng-click="createItemArr()">
+							<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+								Items</span>
+						</button>
+					</fieldset>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-info pull-left" onclick="window.history.back()"
-						type="button">
+					<button class="btn btn-info pull-left"
+						onclick="window.history.back()" type="button">
 						<span class="glyphicon glyphicon-arrow-left"></span> <span>
 							Back</span>
 					</button>

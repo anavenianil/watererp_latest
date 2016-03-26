@@ -550,7 +550,6 @@ public class WorkflowService {
 						catch(Exception e){
 							workflowID = null;
 						}
-					
 					}
 				}
 			else{
