@@ -392,7 +392,7 @@ public class WorkflowService {
 			 * role)
 			 */
 			getBossesBossID = "select case when (select count(*) from emp_master em, emp_role_mapping erm where "
-					+ "em.status_master_id=2 and erm.status_master_id=2 and erm.user_id=em.user_id and em.office_id=erm.org_role_instance_id and "
+					+ "em.status_master_id=2 and erm.status_master_id=2 and erm.user_id=em.user_id and em.office_id_id=erm.org_role_instance_id and "
 					+ "erm.parent_user_id is null and em.user_id="
 					+ userID
 					+ ") "
@@ -405,7 +405,7 @@ public class WorkflowService {
 					+ "(select concat(erm1.user_id, '#' ,ifnull(erm1.org_role_instance_id,'')) from emp_master em, "
 					+ "emp_role_mapping erm, org_role_instance ori, emp_role_mapping erm1 where em.status_master_id=2 and "
 					+ "erm.status_master_id=2 and ori.status_master_id=2 and erm1.status_master_id=2 and "
-					+ "erm.org_role_instance_id=em.office_id and ori.id=erm.org_role_instance_id and "
+					+ "erm.org_role_instance_id=em.office_id_id and ori.id=erm.org_role_instance_id and "
 					+ "erm1.org_role_instance_id=ori.parent_org_role_id and em.user_id="
 					+ userID + ") " + "end parentID";
 			
