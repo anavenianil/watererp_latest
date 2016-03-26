@@ -155,7 +155,7 @@ public class ApplicationTxnCustomRepositoryImpl extends
 			rwh.setIpAddress((String) row.get("ip_address"));
 
 			// rwh.setAssigned_role_id(Integer.parseInt((String)row.get("assigned_role_id")));
-			rwh.setDomainObject((Long) row.get("domain_object_id"));
+			rwh.setDomainObject((Long) row.get("domain_object"));
 
 			rwh.setAssignedFrom(userRepository.findById((Long) row
 					.get("assigned_from_id")));

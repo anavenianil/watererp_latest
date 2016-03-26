@@ -1,5 +1,7 @@
 package com.callippus.water.erp.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
@@ -9,7 +11,7 @@ import com.callippus.water.erp.domain.ApplicationTxn;
  */
 public interface ApplicationTxnRepository extends JpaRepository<ApplicationTxn,Long> {
 	
-	//Long countByStatus(Integer status);
+	Page<ApplicationTxn> findByStatus(Pageable pageable, Integer status);
 	
 
 }

@@ -8,9 +8,10 @@ angular.module('watererpApp')
         $scope.divisionmasters = DivisionMaster.query();
         //$scope.zonemasters = ZoneMaster.query();
         //$scope.streetmasters = StreetMaster.query();
-        $scope.applicationtxns = ApplicationTxn.query();
+        //$scope.applicationtxns = ApplicationTxn.query();
         $scope.users = User.query();
         $scope.categorymasters = CategoryMaster.query();
+        $scope.applicationTxn = {};
         
         if($stateParams.id != null){
         	$scope.feasibilityStudyId = $stateParams.id;
@@ -19,7 +20,17 @@ angular.module('watererpApp')
             });
         }
         
-        $scope.getApplication = function(fileNo){
+        //get ApplicationTxn by status when page loaded
+        $scope.applicationTxns = [];
+        ApplicationTxn.query({page: $scope.page, status: 0}, function(result, headers) {
+             $scope.links = ParseLinks.parse(headers('link'));
+             for (var i = 0; i < result.length; i++) {
+                 $scope.applicationTxns.push(result[i]);
+             }
+        });
+        
+        //get applicationTxn by id
+        $scope.getApplicationTxn = function(fileNo){
         	ApplicationTxn.get({id : fileNo}, function(result) {
                 $scope.applicationTxn = result;
                 $scope.feasibilityStudy.applicationTxn = $scope.applicationTxn;
