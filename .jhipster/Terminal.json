@@ -1,0 +1,59 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "amount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "status",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "mrCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "secCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "divCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "secName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "mobileNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "ver",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160315055126",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

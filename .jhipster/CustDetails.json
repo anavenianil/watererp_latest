@@ -1,0 +1,340 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "can",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "divCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "secCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "secName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "metReaderCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "connDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "consName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "houseNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "pinCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "category",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "pipeSize",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "boardMeter",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "sewerage",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 16,
+            "fieldName": "meterNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 17,
+            "fieldName": "prevBillType",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 18,
+            "fieldName": "prevBillMonth",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 19,
+            "fieldName": "prevAvgKl",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 20,
+            "fieldName": "metReadingDt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 21,
+            "fieldName": "prevReading",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 22,
+            "fieldName": "metReadingMo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 23,
+            "fieldName": "metAvgKl",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 24,
+            "fieldName": "arrears",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 25,
+            "fieldName": "reversalAmt",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 26,
+            "fieldName": "installment",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 27,
+            "fieldName": "otherCharges",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 28,
+            "fieldName": "surCharge",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 29,
+            "fieldName": "hrsSurCharge",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 30,
+            "fieldName": "resUnits",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 31,
+            "fieldName": "metCostInstallment",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 32,
+            "fieldName": "intOnArrears",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 33,
+            "fieldName": "lastPymtDt",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 34,
+            "fieldName": "lastPymtAmt",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 35,
+            "fieldName": "mobileNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 36,
+            "fieldName": "billNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 37,
+            "fieldName": "billDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 38,
+            "fieldName": "billTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 39,
+            "fieldName": "meterMake",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 40,
+            "fieldName": "currentBillType",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 41,
+            "fieldName": "fromMonth",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 42,
+            "fieldName": "toMonth",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 43,
+            "fieldName": "meterFixDate",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 44,
+            "fieldName": "initialReading",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 45,
+            "fieldName": "presentReading",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 46,
+            "fieldName": "units",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 47,
+            "fieldName": "waterCess",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 48,
+            "fieldName": "sewerageCess",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 49,
+            "fieldName": "serviceCharge",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 50,
+            "fieldName": "meterServiceCharge",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 51,
+            "fieldName": "totalAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 52,
+            "fieldName": "netPayableAmount",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 53,
+            "fieldName": "telephoneNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 54,
+            "fieldName": "meterStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 55,
+            "fieldName": "mcMetReaderCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 56,
+            "fieldName": "billFlag",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 57,
+            "fieldName": "docket",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 58,
+            "fieldName": "ocFlag",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 59,
+            "fieldName": "ocDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 60,
+            "fieldName": "lat",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 61,
+            "fieldName": "longI",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 62,
+            "fieldName": "noMeterFlag",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 63,
+            "fieldName": "noMeterAckDt",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 64,
+            "fieldName": "noMeterAmt",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 65,
+            "fieldName": "meterTampAmt",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20160314132343",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

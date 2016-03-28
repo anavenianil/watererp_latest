@@ -114,5 +114,21 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('feasibilityStudy.form', {
+                parent: 'feasibilityStudy',
+                url: '/form',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'FeasibilityStudysForm'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudysForm.html',
+                        controller: 'FeasibilityStudyFormController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

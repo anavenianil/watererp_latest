@@ -1,0 +1,99 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myTerminalLabel">Create or edit a Terminal</h4>
+    </div> -->
+    <div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Terminal Details</h3>
+		</div>
+		<div class="list-group">
+	<div class="list-group-item">
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="row">
+        <div class="col-sm-3">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="terminal.id" readonly />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                    ng-model="terminal.amount"
+                     />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_status">Status</label>
+            <input type="text" class="form-control" name="status" id="field_status"
+                    ng-model="terminal.status"
+                     />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_userId">UserId</label>
+            <input type="text" class="form-control" name="userId" id="field_userId"
+                    ng-model="terminal.userId"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="field_mrCode">MrCode</label>
+            <input type="text" class="form-control" name="mrCode" id="field_mrCode"
+                    ng-model="terminal.mrCode"
+                     />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_secCode">SecCode</label>
+            <input type="text" class="form-control" name="secCode" id="field_secCode"
+                    ng-model="terminal.secCode"
+                     />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_divCode">DivCode</label>
+            <input type="text" class="form-control" name="divCode" id="field_divCode"
+                    ng-model="terminal.divCode"
+                     />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_secName">SecName</label>
+            <input type="text" class="form-control" name="secName" id="field_secName"
+                    ng-model="terminal.secName"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-3">
+            <label class="control-label" for="field_userName">UserName</label>
+            <input type="text" class="form-control" name="userName" id="field_userName"
+                    ng-model="terminal.userName"
+                     />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_mobileNo">MobileNo</label>
+            <input type="text" class="form-control" name="mobileNo" id="field_mobileNo"
+                    ng-model="terminal.mobileNo"
+                     />
+        </div>
+        <div class="col-sm-3">
+            <label class="control-label" for="field_ver">Ver</label>
+            <input type="text" class="form-control" name="ver" id="field_ver"
+                    ng-model="terminal.ver"
+                     />
+        </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+    </div></div></div>
+</form>

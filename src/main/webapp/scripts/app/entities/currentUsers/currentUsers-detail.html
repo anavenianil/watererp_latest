@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>CurrentUsers</span> {{currentUsers.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>TerminalId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{currentUsers.terminalId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterReaderId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{currentUsers.meterReaderId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>UserId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{currentUsers.userId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>RequestType</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{currentUsers.requestType}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LoginTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{currentUsers.loginTime | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Ip</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{currentUsers.ip}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

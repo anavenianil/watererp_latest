@@ -1,0 +1,184 @@
+<div>
+    <h2>CustDetailss</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="custDetails.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new CustDetails
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="divCode"><span>DivCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secCode"><span>SecCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secName"><span>SecName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReaderCode"><span>MetReaderCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="connDate"><span>ConnDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="consName"><span>ConsName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="houseNo"><span>HouseNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="address"><span>Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="city"><span>City</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pinCode"><span>PinCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category"><span>Category</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pipeSize"><span>PipeSize</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="boardMeter"><span>BoardMeter</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sewerage"><span>Sewerage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterNo"><span>MeterNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevBillType"><span>PrevBillType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevBillMonth"><span>PrevBillMonth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevAvgKl"><span>PrevAvgKl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReadingDt"><span>MetReadingDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevReading"><span>PrevReading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReadingMo"><span>MetReadingMo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metAvgKl"><span>MetAvgKl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="arrears"><span>Arrears</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reversalAmt"><span>ReversalAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="installment"><span>Installment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="otherCharges"><span>OtherCharges</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="surCharge"><span>SurCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hrsSurCharge"><span>HrsSurCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="resUnits"><span>ResUnits</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metCostInstallment"><span>MetCostInstallment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="intOnArrears"><span>IntOnArrears</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastPymtDt"><span>LastPymtDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastPymtAmt"><span>LastPymtAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobileNo"><span>MobileNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="billNumber"><span>BillNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="billDate"><span>BillDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="billTime"><span>BillTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterMake"><span>MeterMake</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="currentBillType"><span>CurrentBillType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fromMonth"><span>FromMonth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="toMonth"><span>ToMonth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterFixDate"><span>MeterFixDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="initialReading"><span>InitialReading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="presentReading"><span>PresentReading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="units"><span>Units</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="waterCess"><span>WaterCess</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sewerageCess"><span>SewerageCess</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serviceCharge"><span>ServiceCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterServiceCharge"><span>MeterServiceCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalAmount"><span>TotalAmount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="netPayableAmount"><span>NetPayableAmount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="telephoneNo"><span>TelephoneNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterStatus"><span>MeterStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mcMetReaderCode"><span>McMetReaderCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="billFlag"><span>BillFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="docket"><span>Docket</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ocFlag"><span>OcFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ocDate"><span>OcDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lat"><span>Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longI"><span>LongI</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noMeterFlag"><span>NoMeterFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noMeterAckDt"><span>NoMeterAckDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noMeterAmt"><span>NoMeterAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterTampAmt"><span>MeterTampAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="custDetails in custDetailss track by custDetails.id">
+                    <td><a ui-sref="custDetails.detail({id:custDetails.id})">{{custDetails.id}}</a></td>
+                    <td>{{custDetails.can}}</td>
+                    <td>{{custDetails.divCode}}</td>
+                    <td>{{custDetails.secCode}}</td>
+                    <td>{{custDetails.secName}}</td>
+                    <td>{{custDetails.metReaderCode}}</td>
+                        <td>{{custDetails.connDate | date:'mediumDate'}}</td>
+                    <td>{{custDetails.consName}}</td>
+                    <td>{{custDetails.houseNo}}</td>
+                    <td>{{custDetails.address}}</td>
+                    <td>{{custDetails.city}}</td>
+                    <td>{{custDetails.pinCode}}</td>
+                    <td>{{custDetails.category}}</td>
+                    <td>{{custDetails.pipeSize}}</td>
+                    <td>{{custDetails.boardMeter}}</td>
+                    <td>{{custDetails.sewerage}}</td>
+                    <td>{{custDetails.meterNo}}</td>
+                    <td>{{custDetails.prevBillType}}</td>
+                    <td>{{custDetails.prevBillMonth}}</td>
+                    <td>{{custDetails.prevAvgKl}}</td>
+                        <td>{{custDetails.metReadingDt | date:'mediumDate'}}</td>
+                    <td>{{custDetails.prevReading}}</td>
+                    <td>{{custDetails.metReadingMo}}</td>
+                    <td>{{custDetails.metAvgKl}}</td>
+                    <td>{{custDetails.arrears}}</td>
+                    <td>{{custDetails.reversalAmt}}</td>
+                    <td>{{custDetails.installment}}</td>
+                    <td>{{custDetails.otherCharges}}</td>
+                    <td>{{custDetails.surCharge}}</td>
+                    <td>{{custDetails.hrsSurCharge}}</td>
+                    <td>{{custDetails.resUnits}}</td>
+                    <td>{{custDetails.metCostInstallment}}</td>
+                    <td>{{custDetails.intOnArrears}}</td>
+                    <td>{{custDetails.lastPymtDt}}</td>
+                    <td>{{custDetails.lastPymtAmt}}</td>
+                    <td>{{custDetails.mobileNo}}</td>
+                    <td>{{custDetails.billNumber}}</td>
+                        <td>{{custDetails.billDate | date:'mediumDate'}}</td>
+                    <td>{{custDetails.billTime}}</td>
+                    <td>{{custDetails.meterMake}}</td>
+                    <td>{{custDetails.currentBillType}}</td>
+                    <td>{{custDetails.fromMonth}}</td>
+                    <td>{{custDetails.toMonth}}</td>
+                    <td>{{custDetails.meterFixDate}}</td>
+                    <td>{{custDetails.initialReading}}</td>
+                    <td>{{custDetails.presentReading}}</td>
+                    <td>{{custDetails.units}}</td>
+                    <td>{{custDetails.waterCess}}</td>
+                    <td>{{custDetails.sewerageCess}}</td>
+                    <td>{{custDetails.serviceCharge}}</td>
+                    <td>{{custDetails.meterServiceCharge}}</td>
+                    <td>{{custDetails.totalAmount}}</td>
+                    <td>{{custDetails.netPayableAmount}}</td>
+                    <td>{{custDetails.telephoneNo}}</td>
+                    <td>{{custDetails.meterStatus}}</td>
+                    <td>{{custDetails.mcMetReaderCode}}</td>
+                    <td>{{custDetails.billFlag}}</td>
+                    <td>{{custDetails.docket}}</td>
+                    <td>{{custDetails.ocFlag}}</td>
+                        <td>{{custDetails.ocDate | date:'mediumDate'}}</td>
+                    <td>{{custDetails.lat}}</td>
+                    <td>{{custDetails.longI}}</td>
+                    <td>{{custDetails.noMeterFlag}}</td>
+                    <td>{{custDetails.noMeterAckDt}}</td>
+                    <td>{{custDetails.noMeterAmt}}</td>
+                    <td>{{custDetails.meterTampAmt}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="custDetails.detail({id:custDetails.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="custDetails.edit({id:custDetails.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="custDetails.delete({id:custDetails.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

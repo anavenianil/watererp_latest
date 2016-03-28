@@ -1,0 +1,59 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "amount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "lastModified",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "modifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "bankDepositDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "beforeUpdate",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "afterUpdate",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "mrCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "remark",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "txnType",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160315055926",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

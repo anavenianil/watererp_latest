@@ -1,0 +1,74 @@
+<div>
+    <h2>Terminals</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="terminal.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new Terminal
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userId"><span>UserId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mrCode"><span>MrCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secCode"><span>SecCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="divCode"><span>DivCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secName"><span>SecName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userName"><span>UserName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobileNo"><span>MobileNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ver"><span>Ver</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="terminal in terminals track by terminal.id">
+                    <td><a ui-sref="terminal.detail({id:terminal.id})">{{terminal.id}}</a></td>
+                    <td>{{terminal.amount}}</td>
+                    <td>{{terminal.status}}</td>
+                    <td>{{terminal.userId}}</td>
+                    <td>{{terminal.mrCode}}</td>
+                    <td>{{terminal.secCode}}</td>
+                    <td>{{terminal.divCode}}</td>
+                    <td>{{terminal.secName}}</td>
+                    <td>{{terminal.userName}}</td>
+                    <td>{{terminal.mobileNo}}</td>
+                    <td>{{terminal.ver}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="terminal.detail({id:terminal.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="terminal.edit({id:terminal.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="terminal.delete({id:terminal.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

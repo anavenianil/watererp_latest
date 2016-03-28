@@ -1,0 +1,39 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "terminalId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "meterReaderId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "requestType",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "loginTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "ip",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160315053612",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

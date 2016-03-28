@@ -1,0 +1,50 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myVersionLabel">Create or edit a Version</h4>
+    </div> -->
+    <div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Version Details</h3>
+		</div>
+		<div class="list-group">
+	<div class="list-group-item">
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="row">
+        <div class="col-sm-6">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="version.id" readonly/>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-6">
+            <label class="control-label" for="field_versionLow">VersionLow</label>
+            <input type="text" class="form-control" name="versionLow" id="field_versionLow"
+                    ng-model="version.versionLow"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-6">
+            <label class="control-label" for="field_versionHigh">VersionHigh</label>
+            <input type="text" class="form-control" name="versionHigh" id="field_versionHigh"
+                    ng-model="version.versionHigh"
+                     />
+        </div>
+		</div>
+    </div>    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+    </div></div></div>
+</form>

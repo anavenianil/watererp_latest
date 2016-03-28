@@ -1,0 +1,119 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "reversalRef",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "receiptNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "receiptAmt",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "receiptDt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "receiptTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "receiptMode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "instrNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "instrDt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "instrIssuer",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "svrStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "can",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "consName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "terminalId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "collTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "txnStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 16,
+            "fieldName": "meterReaderId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 17,
+            "fieldName": "userId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 18,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 19,
+            "fieldName": "settlementId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 20,
+            "fieldName": "extSettlementId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 21,
+            "fieldName": "lat",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 22,
+            "fieldName": "longI",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160315053144",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

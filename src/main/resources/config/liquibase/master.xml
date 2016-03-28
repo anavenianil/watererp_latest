@@ -63,5 +63,13 @@
     <include file="classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160311095014_added_entity_DocketCode.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160314085424_added_entity_AccessList.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160315053612_added_entity_CurrentUsers.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160315055126_added_entity_Terminal.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160315055926_added_entity_TerminalLog.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160315060107_added_entity_Version.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

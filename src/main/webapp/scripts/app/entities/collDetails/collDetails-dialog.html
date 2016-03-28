@@ -1,0 +1,189 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myCollDetailsLabel">Create or edit a CollDetails</h4>
+    </div> -->
+    
+    <div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Collection Details</h3>
+		</div>
+		<div class="list-group">
+	<div class="list-group-item">
+			
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="row">
+        <div class="col-sm-4">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="collDetails.id" readonly />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_reversalRef">ReversalRef</label>
+            <input type="text" class="form-control" name="reversalRef" id="field_reversalRef"
+                    ng-model="collDetails.reversalRef"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_receiptNo">ReceiptNo</label>
+            <input type="text" class="form-control" name="receiptNo" id="field_receiptNo"
+                    ng-model="collDetails.receiptNo"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="field_receiptAmt">ReceiptAmt</label>
+            <input type="text" class="form-control" name="receiptAmt" id="field_receiptAmt"
+                    ng-model="collDetails.receiptAmt"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_receiptDt">ReceiptDt</label>
+            <input id="field_receiptDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="collDetails.receiptDt" is-open="datePickerForReceiptDt.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForReceiptDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_receiptTime">ReceiptTime</label>
+            <input type="text" class="form-control" name="receiptTime" id="field_receiptTime"
+                    ng-model="collDetails.receiptTime"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="field_receiptMode">ReceiptMode</label>
+            <input type="text" class="form-control" name="receiptMode" id="field_receiptMode"
+                    ng-model="collDetails.receiptMode"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_instrNo">InstrNo</label>
+            <input type="text" class="form-control" name="instrNo" id="field_instrNo"
+                    ng-model="collDetails.instrNo"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_instrDt">InstrDt</label>
+            <input id="field_instrDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="collDetails.instrDt" is-open="datePickerForInstrDt.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForInstrDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="field_instrIssuer">InstrIssuer</label>
+            <input type="text" class="form-control" name="instrIssuer" id="field_instrIssuer"
+                    ng-model="collDetails.instrIssuer"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_svrStatus">SvrStatus</label>
+            <input type="text" class="form-control" name="svrStatus" id="field_svrStatus"
+                    ng-model="collDetails.svrStatus"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_can">Can</label>
+            <input type="text" class="form-control" name="can" id="field_can"
+                    ng-model="collDetails.can"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="field_consName">ConsName</label>
+            <input type="text" class="form-control" name="consName" id="field_consName"
+                    ng-model="collDetails.consName"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_terminalId">TerminalId</label>
+            <input type="text" class="form-control" name="terminalId" id="field_terminalId"
+                    ng-model="collDetails.terminalId"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_collTime">CollTime</label>
+            <input id="field_collTime" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="collDetails.collTime" is-open="datePickerForCollTime.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForCollTimeOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="field_txnStatus">TxnStatus</label>
+            <input type="text" class="form-control" name="txnStatus" id="field_txnStatus"
+                    ng-model="collDetails.txnStatus"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_meterReaderId">MeterReaderId</label>
+            <input type="text" class="form-control" name="meterReaderId" id="field_meterReaderId"
+                    ng-model="collDetails.meterReaderId"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_userId">UserId</label>
+            <input type="text" class="form-control" name="userId" id="field_userId"
+                    ng-model="collDetails.userId"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="field_remarks">Remarks</label>
+            <input type="text" class="form-control" name="remarks" id="field_remarks"
+                    ng-model="collDetails.remarks"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_settlementId">SettlementId</label>
+            <input type="text" class="form-control" name="settlementId" id="field_settlementId"
+                    ng-model="collDetails.settlementId"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_extSettlementId">ExtSettlementId</label>
+            <input type="text" class="form-control" name="extSettlementId" id="field_extSettlementId"
+                    ng-model="collDetails.extSettlementId"
+                     />
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+            <label class="control-label" for="field_lat">Lat</label>
+            <input type="text" class="form-control" name="lat" id="field_lat"
+                    ng-model="collDetails.lat"
+                     />
+        </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_longI">LongI</label>
+            <input type="text" class="form-control" name="longI" id="field_longI"
+                    ng-model="collDetails.longI"
+                     />
+        </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+    </div></div></div>
+</form>
