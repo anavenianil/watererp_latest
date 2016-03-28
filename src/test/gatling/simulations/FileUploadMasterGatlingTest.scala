@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the FeasibilityStudy entity.
+ * Performance test for the FileUploadMaster entity.
  */
-class FeasibilityStudyGatlingTest extends Simulation {
+class FileUploadMasterGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class FeasibilityStudyGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the FeasibilityStudy entity")
+    val scn = scenario("Test the FileUploadMaster entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class FeasibilityStudyGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all feasibilityStudys")
-            .get("/api/feasibilityStudys")
+            exec(http("Get all fileUploadMasters")
+            .get("/api/fileUploadMasters")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new feasibilityStudy")
-            .post("/api/feasibilityStudys")
+            .exec(http("Create new fileUploadMaster")
+            .post("/api/fileUploadMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "createdDate":"2020-01-01T00:00:00.000Z", "modifiedDate":"2020-01-01T00:00:00.000Z", "preparedDate":"2020-01-01T00:00:00.000Z", "zonalHeadApprovalDate":"2020-01-01T00:00:00.000Z", "deptHeadInspectedDate":"2020-01-01T00:00:00.000Z", "operationMangrapproveDate":"2020-01-01T00:00:00.000Z", "status":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "photo":null, "textFile":null, "binaryFile":null}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_feasibilityStudy_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_fileUploadMaster_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created feasibilityStudy")
-                .get("${new_feasibilityStudy_url}")
+                exec(http("Get created fileUploadMaster")
+                .get("${new_fileUploadMaster_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created feasibilityStudy")
-            .delete("${new_feasibilityStudy_url}")
+            .exec(http("Delete created fileUploadMaster")
+            .delete("${new_fileUploadMaster_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

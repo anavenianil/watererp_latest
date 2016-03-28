@@ -55,8 +55,25 @@ public class FeasibilityStudyResourceIntTest {
     private static final ZonedDateTime DEFAULT_MODIFIED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_MODIFIED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_MODIFIED_DATE_STR = dateTimeFormatter.format(DEFAULT_MODIFIED_DATE);
-    private static final String DEFAULT_STATUS = "AAAAA";
-    private static final String UPDATED_STATUS = "BBBBB";
+
+    private static final ZonedDateTime DEFAULT_PREPARED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_PREPARED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_PREPARED_DATE_STR = dateTimeFormatter.format(DEFAULT_PREPARED_DATE);
+
+    private static final ZonedDateTime DEFAULT_ZONAL_HEAD_APPROVAL_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_ZONAL_HEAD_APPROVAL_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_ZONAL_HEAD_APPROVAL_DATE_STR = dateTimeFormatter.format(DEFAULT_ZONAL_HEAD_APPROVAL_DATE);
+
+    private static final ZonedDateTime DEFAULT_DEPT_HEAD_INSPECTED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_DEPT_HEAD_INSPECTED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_DEPT_HEAD_INSPECTED_DATE_STR = dateTimeFormatter.format(DEFAULT_DEPT_HEAD_INSPECTED_DATE);
+
+    private static final ZonedDateTime DEFAULT_OPERATION_MANGRAPPROVE_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_OPERATION_MANGRAPPROVE_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_OPERATION_MANGRAPPROVE_DATE_STR = dateTimeFormatter.format(DEFAULT_OPERATION_MANGRAPPROVE_DATE);
+
+    private static final Integer DEFAULT_STATUS = 1;
+    private static final Integer UPDATED_STATUS = 2;
 
     @Inject
     private FeasibilityStudyRepository feasibilityStudyRepository;
@@ -86,6 +103,10 @@ public class FeasibilityStudyResourceIntTest {
         feasibilityStudy = new FeasibilityStudy();
         feasibilityStudy.setCreatedDate(DEFAULT_CREATED_DATE);
         feasibilityStudy.setModifiedDate(DEFAULT_MODIFIED_DATE);
+        feasibilityStudy.setPreparedDate(DEFAULT_PREPARED_DATE);
+        feasibilityStudy.setZonalHeadApprovalDate(DEFAULT_ZONAL_HEAD_APPROVAL_DATE);
+        feasibilityStudy.setDeptHeadInspectedDate(DEFAULT_DEPT_HEAD_INSPECTED_DATE);
+        feasibilityStudy.setOperationMangrapproveDate(DEFAULT_OPERATION_MANGRAPPROVE_DATE);
         feasibilityStudy.setStatus(DEFAULT_STATUS);
     }
 
@@ -107,6 +128,10 @@ public class FeasibilityStudyResourceIntTest {
         FeasibilityStudy testFeasibilityStudy = feasibilityStudys.get(feasibilityStudys.size() - 1);
         assertThat(testFeasibilityStudy.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testFeasibilityStudy.getModifiedDate()).isEqualTo(DEFAULT_MODIFIED_DATE);
+        assertThat(testFeasibilityStudy.getPreparedDate()).isEqualTo(DEFAULT_PREPARED_DATE);
+        assertThat(testFeasibilityStudy.getZonalHeadApprovalDate()).isEqualTo(DEFAULT_ZONAL_HEAD_APPROVAL_DATE);
+        assertThat(testFeasibilityStudy.getDeptHeadInspectedDate()).isEqualTo(DEFAULT_DEPT_HEAD_INSPECTED_DATE);
+        assertThat(testFeasibilityStudy.getOperationMangrapproveDate()).isEqualTo(DEFAULT_OPERATION_MANGRAPPROVE_DATE);
         assertThat(testFeasibilityStudy.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
@@ -123,7 +148,11 @@ public class FeasibilityStudyResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(feasibilityStudy.getId().intValue())))
                 .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE_STR)))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+                .andExpect(jsonPath("$.[*].preparedDate").value(hasItem(DEFAULT_PREPARED_DATE_STR)))
+                .andExpect(jsonPath("$.[*].zonalHeadApprovalDate").value(hasItem(DEFAULT_ZONAL_HEAD_APPROVAL_DATE_STR)))
+                .andExpect(jsonPath("$.[*].deptHeadInspectedDate").value(hasItem(DEFAULT_DEPT_HEAD_INSPECTED_DATE_STR)))
+                .andExpect(jsonPath("$.[*].operationMangrapproveDate").value(hasItem(DEFAULT_OPERATION_MANGRAPPROVE_DATE_STR)))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
 
     @Test
@@ -139,7 +168,11 @@ public class FeasibilityStudyResourceIntTest {
             .andExpect(jsonPath("$.id").value(feasibilityStudy.getId().intValue()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE_STR))
             .andExpect(jsonPath("$.modifiedDate").value(DEFAULT_MODIFIED_DATE_STR))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.preparedDate").value(DEFAULT_PREPARED_DATE_STR))
+            .andExpect(jsonPath("$.zonalHeadApprovalDate").value(DEFAULT_ZONAL_HEAD_APPROVAL_DATE_STR))
+            .andExpect(jsonPath("$.deptHeadInspectedDate").value(DEFAULT_DEPT_HEAD_INSPECTED_DATE_STR))
+            .andExpect(jsonPath("$.operationMangrapproveDate").value(DEFAULT_OPERATION_MANGRAPPROVE_DATE_STR))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
 
     @Test
@@ -161,6 +194,10 @@ public class FeasibilityStudyResourceIntTest {
         // Update the feasibilityStudy
         feasibilityStudy.setCreatedDate(UPDATED_CREATED_DATE);
         feasibilityStudy.setModifiedDate(UPDATED_MODIFIED_DATE);
+        feasibilityStudy.setPreparedDate(UPDATED_PREPARED_DATE);
+        feasibilityStudy.setZonalHeadApprovalDate(UPDATED_ZONAL_HEAD_APPROVAL_DATE);
+        feasibilityStudy.setDeptHeadInspectedDate(UPDATED_DEPT_HEAD_INSPECTED_DATE);
+        feasibilityStudy.setOperationMangrapproveDate(UPDATED_OPERATION_MANGRAPPROVE_DATE);
         feasibilityStudy.setStatus(UPDATED_STATUS);
 
         restFeasibilityStudyMockMvc.perform(put("/api/feasibilityStudys")
@@ -174,6 +211,10 @@ public class FeasibilityStudyResourceIntTest {
         FeasibilityStudy testFeasibilityStudy = feasibilityStudys.get(feasibilityStudys.size() - 1);
         assertThat(testFeasibilityStudy.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testFeasibilityStudy.getModifiedDate()).isEqualTo(UPDATED_MODIFIED_DATE);
+        assertThat(testFeasibilityStudy.getPreparedDate()).isEqualTo(UPDATED_PREPARED_DATE);
+        assertThat(testFeasibilityStudy.getZonalHeadApprovalDate()).isEqualTo(UPDATED_ZONAL_HEAD_APPROVAL_DATE);
+        assertThat(testFeasibilityStudy.getDeptHeadInspectedDate()).isEqualTo(UPDATED_DEPT_HEAD_INSPECTED_DATE);
+        assertThat(testFeasibilityStudy.getOperationMangrapproveDate()).isEqualTo(UPDATED_OPERATION_MANGRAPPROVE_DATE);
         assertThat(testFeasibilityStudy.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 

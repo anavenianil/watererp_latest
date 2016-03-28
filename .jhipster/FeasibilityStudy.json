@@ -77,8 +77,28 @@
         },
         {
             "fieldId": 3,
+            "fieldName": "preparedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "zonalHeadApprovalDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "deptHeadInspectedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "operationMangrapproveDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 7,
             "fieldName": "status",
-            "fieldType": "String"
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20160324105452",

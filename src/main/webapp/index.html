@@ -21,7 +21,7 @@
         <!--[if lt IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
+        <!-- <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div> -->
         <div ui-view="navbar" ng-cloak=""></div>
         <div class="container">
             <div class="well" ui-view="content"></div>
@@ -540,6 +540,12 @@
     <script src="scripts/app/entities/streetMaster/streetMaster-delete-dialog.controller.js"></script>
     <script src="scripts/app/entities/streetMaster/streetMaster-detail.controller.js"></script>
     <script src="scripts/components/entities/streetMaster/streetMaster.service.js"></script>
+    <script src="scripts/app/entities/fileUploadMaster/fileUploadMaster.js"></script>
+    <script src="scripts/app/entities/fileUploadMaster/fileUploadMaster.controller.js"></script>
+    <script src="scripts/app/entities/fileUploadMaster/fileUploadMaster-dialog.controller.js"></script>
+    <script src="scripts/app/entities/fileUploadMaster/fileUploadMaster-delete-dialog.controller.js"></script>
+    <script src="scripts/app/entities/fileUploadMaster/fileUploadMaster-detail.controller.js"></script>
+    <script src="scripts/components/entities/fileUploadMaster/fileUploadMaster.service.js"></script>
     <!-- endbuild -->
 </body>
 </html>

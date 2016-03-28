@@ -21,6 +21,10 @@ angular.module('watererpApp')
             $scope.feasibilityStudy = {
                 createdDate: null,
                 modifiedDate: null,
+                preparedDate: null,
+                zonalHeadApprovalDate: null,
+                deptHeadInspectedDate: null,
+                operationMangrapproveDate: null,
                 status: null,
                 id: null
             };

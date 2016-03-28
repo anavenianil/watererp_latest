@@ -20,23 +20,31 @@ angular.module('watererpApp')
             });
         }
         
-        //get ApplicationTxn by status when page loaded
-        $scope.applicationTxns = [];
-        ApplicationTxn.query({page: $scope.page, status: 0}, function(result, headers) {
-             $scope.links = ParseLinks.parse(headers('link'));
-             for (var i = 0; i < result.length; i++) {
-                 $scope.applicationTxns.push(result[i]);
-             }
-        });
-        
         //get applicationTxn by id
         $scope.getApplicationTxn = function(fileNo){
         	ApplicationTxn.get({id : fileNo}, function(result) {
                 $scope.applicationTxn = result;
                 $scope.feasibilityStudy.applicationTxn = $scope.applicationTxn;
                 $scope.feasibilityStudy.applicationTxn.id = $scope.applicationTxn.id;
+                $scope.feasibilityStudy.categoryMaster = {};
+                $scope.feasibilityStudy.categoryMaster.id = $scope.applicationTxn.categoryMaster.id;
             });	
         }
+        
+        if($stateParams.applicationId != null){
+        	$scope.getApplicationTxn($stateParams.applicationId);
+        }
+        
+        //get ApplicationTxn by status when page loaded
+        /*$scope.applicationTxns = [];
+        ApplicationTxn.query({page: $scope.page, status: 0}, function(result, headers) {
+             $scope.links = ParseLinks.parse(headers('link'));
+             for (var i = 0; i < result.length; i++) {
+                 $scope.applicationTxns.push(result[i]);
+             }
+        });*/
+        
+       
         /*$scope.load = function(id) {
             FeasibilityStudy.get({id : id}, function(result) {
                 $scope.feasibilityStudy = result;
@@ -46,6 +54,7 @@ angular.module('watererpApp')
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
             $scope.isSaving = false;
+            $state.go("request");
         };
 
         var onSaveError = function (result) {
@@ -81,6 +90,48 @@ angular.module('watererpApp')
 
         $scope.datePickerForModifiedDateOpen = function($event) {
             $scope.datePickerForModifiedDate.status.opened = true;
+        };
+        
+        
+        $scope.datePickerForPreparedDate = {};
+
+        $scope.datePickerForPreparedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForPreparedDateOpen = function($event) {
+            $scope.datePickerForPreparedDate.status.opened = true;
+        };
+        
+        $scope.datePickerForZonalHeadApprovalDate = {};
+
+        $scope.datePickerForZonalHeadApprovalDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForZonalHeadApprovalDateOpen = function($event) {
+            $scope.datePickerForZonalHeadApprovalDate.status.opened = true;
+        };
+        
+        
+        $scope.datePickerForDeptHeadInspectedDate = {};
+
+        $scope.datePickerForDeptHeadInspectedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForDeptHeadInspectedDateOpen = function($event) {
+            $scope.datePickerForDeptHeadInspectedDate.status.opened = true;
+        };
+        
+        $scope.datePickerForOperationMangrapproveDate = {};
+
+        $scope.datePickerForOperationMangrapproveDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForOperationMangrapproveDateOpen = function($event) {
+            $scope.datePickerForOperationMangrapproveDate.status.opened = true;
         };
 
         $scope.clear = function () {
@@ -127,6 +178,22 @@ angular.module('watererpApp')
                 }
             });
         }
+        
+        $scope.getpreparedByName = function(obj){
+        	$scope.feasibilityStudy.preparedBy.name = obj.firstName +" "+obj.lastName;
+           }
+        
+        $scope.getZonalHeadName = function(obj){
+        	$scope.feasibilityStudy.approvedByZonalHead.name = obj.firstName +" "+obj.lastName;
+           }
+        
+        $scope.getDeparmentHeadName = function(obj){
+        	$scope.feasibilityStudy.inspectionByDepartmentHead.name = obj.firstName +" "+obj.lastName;
+           }
+        
+        $scope.getOperationManagerName = function(obj){
+        	$scope.feasibilityStudy.approvedByOperationManager.name = obj.firstName +" "+obj.lastName;
+           }
         
     
     

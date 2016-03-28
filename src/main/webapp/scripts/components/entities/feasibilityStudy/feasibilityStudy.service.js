@@ -10,6 +10,10 @@ angular.module('watererpApp')
                     data = angular.fromJson(data);
                     data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
                     data.modifiedDate = DateUtils.convertDateTimeFromServer(data.modifiedDate);
+                    data.preparedDate = DateUtils.convertDateTimeFromServer(data.preparedDate);
+                    data.zonalHeadApprovalDate = DateUtils.convertDateTimeFromServer(data.zonalHeadApprovalDate);
+                    data.deptHeadInspectedDate = DateUtils.convertDateTimeFromServer(data.deptHeadInspectedDate);
+                    data.operationMangrapproveDate = DateUtils.convertDateTimeFromServer(data.operationMangrapproveDate);
                     return data;
                 }
             },

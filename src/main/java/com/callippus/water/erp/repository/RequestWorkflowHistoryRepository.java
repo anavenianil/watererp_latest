@@ -1,10 +1,13 @@
 package com.callippus.water.erp.repository;
 
-import com.callippus.water.erp.domain.RequestWorkflowHistory;
-
-import org.springframework.data.jpa.repository.*;
-
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.callippus.water.erp.domain.RequestWorkflowHistory;
 
 /**
  * Spring Data JPA repository for the RequestWorkflowHistory entity.
@@ -19,5 +22,7 @@ public interface RequestWorkflowHistoryRepository extends JpaRepository<RequestW
 
     @Query("select requestWorkflowHistory from RequestWorkflowHistory requestWorkflowHistory where requestWorkflowHistory.appliedBy.login = ?#{principal.username}")
     List<RequestWorkflowHistory> findByAppliedByIsCurrentUser();
+    
+    Page<RequestWorkflowHistory> findByDomainObject(Pageable pageable, Long domainObject);
 
 }

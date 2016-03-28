@@ -25,7 +25,15 @@
             
             <column name="modified_date" type="timestamp"/>
             
-            <column name="status" type="varchar(255)"/>
+            <column name="prepared_date" type="timestamp"/>
+            
+            <column name="zonal_head_approval_date" type="timestamp"/>
+            
+            <column name="dept_head_inspected_date" type="timestamp"/>
+            
+            <column name="operation_mangrapprove_date" type="timestamp"/>
+            
+            <column name="status" type="integer"/>
             
             <column name="division_master_id" type="bigint"/>
             <column name="zone_master_id" type="bigint"/>
@@ -41,6 +49,14 @@
         <dropDefaultValue tableName="feasibility_study" columnName="created_date" columnDataType="datetime"/>
 
         <dropDefaultValue tableName="feasibility_study" columnName="modified_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="feasibility_study" columnName="prepared_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="feasibility_study" columnName="zonal_head_approval_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="feasibility_study" columnName="dept_head_inspected_date" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="feasibility_study" columnName="operation_mangrapprove_date" columnDataType="datetime"/>
 
         
         <addForeignKeyConstraint baseColumnNames="division_master_id"

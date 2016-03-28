@@ -21,6 +21,10 @@
                     <th><span>ID</span></th>
                     <th><span>CreatedDate</span></th>
                     <th><span>ModifiedDate</span></th>
+                    <th><span>PreparedDate</span></th>
+                    <th><span>ZonalHeadApprovalDate</span></th>
+                    <th><span>DeptHeadInspectedDate</span></th>
+                    <th><span>OperationMangrapproveDate</span></th>
                     <th><span>Status</span></th>
                     <th><span>divisionMaster</span></th>
                     <th><span>zoneMaster</span></th>
@@ -39,6 +43,10 @@
                     <td><a ui-sref="feasibilityStudy.detail({id:feasibilityStudy.id})">{{feasibilityStudy.id}}</a></td>
                     <td>{{feasibilityStudy.createdDate | date:'medium'}}</td>
                     <td>{{feasibilityStudy.modifiedDate | date:'medium'}}</td>
+                    <td>{{feasibilityStudy.preparedDate | date:'medium'}}</td>
+                    <td>{{feasibilityStudy.zonalHeadApprovalDate | date:'medium'}}</td>
+                    <td>{{feasibilityStudy.deptHeadInspectedDate | date:'medium'}}</td>
+                    <td>{{feasibilityStudy.operationMangrapproveDate | date:'medium'}}</td>
                     <td>{{feasibilityStudy.status}}</td>
                     <td>
                         <a ui-sref="divisionMaster.detail({id:feasibilityStudy.divisionMaster.id})">{{feasibilityStudy.divisionMaster.id}}</a>

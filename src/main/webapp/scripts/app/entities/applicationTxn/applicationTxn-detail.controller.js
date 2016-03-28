@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('ApplicationTxnDetailController', function ($state, $scope, $rootScope, $stateParams, entity, ApplicationTxn, 
-    		ApplicationTxnService) {
+    		ApplicationTxnService, RequestWorkflowHistory, ParseLinks) {
         $scope.applicationTxn = entity;
         
         $scope.load = function (id) {
@@ -23,11 +23,26 @@ angular.module('watererpApp')
             });
         };
         
+        /*RequestWorkflowHistoryfindByDomainObject(id)
+		.then(function(data) {
+			$scope.workflowHistorys = data;
+		});*/
+        $scope.getWorkflowHistoryByDomainId = function() {
+        	$scope.requestWorkflowHistorys = [];
+            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.requestWorkflowHistorys.push(result[i]);
+                }
+            });
+        };
+        $scope.getWorkflowHistoryByDomainId();
+        
         $scope.approvalDetailsSave = function(id, remarks){
         	$('#approveModal').modal('hide');
         	//console.log(JSON.stringify($scope.approvalDetails));
         	ApplicationTxnService.approveRequest(id, remarks);
-        	$state.go('applicationTxn');
+        	$state.go('request');
         }
         
 

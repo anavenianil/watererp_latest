@@ -26,10 +26,10 @@
 									class="form-control" id="field_fileNo" name="fileNo"
 									ng-model="feasibilityStudy.fileNo">
 							</div>
-							<span>
+							<span> <br>
 								<button type="button"
 									class="btn btn-primary glyphicon glyphicon-search"
-									ng-click="getApplicationTxn(feasibilityStudy.applicationTxn.id)"></button>
+									ng-click="getApplicationTxn(feasibilityStudy.fileNo)"></button>
 							</span>
 						</div>
 						<fieldset>
@@ -57,38 +57,38 @@
 
 						</fieldset>
 						<fieldset>
-						<legend>Address</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label> Plot Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.plotNumber}}</h5>
+							<legend>Address</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label> Plot Number</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.plotNumber}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label> Area</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.area}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label> Street</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.street}}</h5>
+								</div>
 							</div>
-							<div class="col-sm-4">
-								<label> Area</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.area}}</h5>
+							<br>
+							<div class="row">
+								<div class="col-sm-4">
+									<label> Village Executive Office</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOffice}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label> Village Executive Office</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOffice}}</h5>
+								</div>
 							</div>
-							<div class="col-sm-4">
-								<label> Street</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.street}}</h5>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-4">
-								<label> Village Executive Office</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOffice}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label> Village Executive Office</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOffice}}</h5>
-							</div>
-						</div>
-					</fieldset>
+						</fieldset>
 						<br>
 						<fieldset>
 							<legend>Connection Details</legend>
 							<div class="row">
-								<div class="col-sm-4">
+								<!-- <div class="col-sm-4">
 									<label for="id">ID</label> <input type="text"
 										class="form-control" id="id" name="id"
 										ng-model="feasibilityStudy.id" readonly />
@@ -127,10 +127,14 @@
 											</span>
 										</div>
 									</div>
-								</div>
+								</div> 
+								<div class="col-sm-4">
+									<label class="control-label" for="field_status">Status</label>
+									<input type="text" class="form-control" name="status"
+										id="field_status" ng-model="feasibilityStudy.status" />
+								</div> -->
 							</div>
 							<div class="row">
-
 								<div class="col-sm-4">
 									<label for="field_categoryMaster">categoryMaster</label> <select
 										class="form-control" id="field_categoryMaster"
@@ -140,11 +144,6 @@
 										<option value=""></option>
 									</select>
 								</div>
-								<div class="col-sm-4">
-									<label class="control-label" for="field_status">Status</label>
-									<input type="text" class="form-control" name="status"
-										id="field_status" ng-model="feasibilityStudy.status" />
-								</div>
 							</div>
 						</fieldset>
 						<br>
@@ -152,7 +151,7 @@
 							<legend>Select Connection Location</legend>
 							<div class="row">
 								<div class="col-sm-4">
-									<label for="field_divisionMaster">divisionMaster</label> <select
+									<label for="field_divisionMaster">Division</label> <select
 										class="form-control" id="field_divisionMaster"
 										name="divisionMaster"
 										ng-model="feasibilityStudy.divisionMaster"
@@ -161,8 +160,9 @@
 										<option value=""></option>
 									</select>
 								</div>
+
 								<div class="col-sm-4">
-									<label for="field_zoneMaster">zoneMaster</label> <select
+									<label for="field_zoneMaster">Zone</label> <select
 										class="form-control" id="field_zoneMaster" name="zoneMaster"
 										ng-model="feasibilityStudy.zoneMaster"
 										ng-change="getStreet(feasibilityStudy.zoneMaster.id)"
@@ -171,7 +171,7 @@
 									</select>
 								</div>
 								<div class="col-sm-4">
-									<label for="field_streetMaster">streetMaster</label> <select
+									<label for="field_streetMaster">Street</label> <select
 										class="form-control" id="field_streetMaster"
 										name="streetMaster" ng-model="feasibilityStudy.streetMaster"
 										ng-options="streetMaster as streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id">
@@ -184,43 +184,153 @@
 						<fieldset>
 							<legend>Select Approval Authority</legend>
 							<div class="row">
-
-								<div class="col-sm-3">
-									<label for="field_preparedBy">preparedBy</label> <select
+								<div class="col-sm-4">
+									<label for="field_preparedBy">Prepared By</label> <select
 										class="form-control" id="field_preparedBy" name="preparedBy"
 										ng-model="feasibilityStudy.preparedBy"
+										ng-change="getpreparedByName(feasibilityStudy.preparedBy)"
 										ng-options="user as user.login for user in users track by user.id">
 										<option value=""></option>
 									</select>
 								</div>
-								<div class="col-sm-3">
-									<label for="field_approvedByZonalHead">approvedByZonalHead</label>
-									<select class="form-control" id="field_approvedByZonalHead"
-										name="approvedByZonalHead"
+								<div class="col-sm-4">
+									<label class="control-label" for="field_status">Name</label> <input
+										type="text" class="form-control" name="preparedBy"
+										id="field_status" ng-model="feasibilityStudy.preparedBy.name"
+										readonly />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_preparedDate">Date</label>
+									<div class="form-group">
+										<div class="input-group date" id="field_preparedDate">
+											<input id="field_preparedDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="feasibilityStudy.preparedDate"
+												is-open="datePickerForPreparedDate.status.opened" /> <span
+												class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForPreparedDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_approvedByZonalHead">Approved By Head
+										of Zonal</label> <select class="form-control"
+										id="field_approvedByZonalHead" name="approvedByZonalHead"
 										ng-model="feasibilityStudy.approvedByZonalHead"
+										ng-change="getZonalHeadName(feasibilityStudy.approvedByZonalHead)"
 										ng-options="user as user.login for user in users track by user.id">
 										<option value=""></option>
 									</select>
 								</div>
-								<div class="col-sm-3">
-									<label for="field_inspectionByDepartmentHead">inspectionByDepartmentHead</label>
-									<select class="form-control"
+								<div class="col-sm-4">
+									<label class="control-label" for="field_status">Name</label> <input
+										type="text" class="form-control" name="approvedByZonalHead"
+										id="field_approvedByZonalHead"
+										ng-model="feasibilityStudy.approvedByZonalHead.name" readonly />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_zonalHeadApprovalDate">Date</label>
+									<div class="form-group">
+										<div class="input-group date" id="field_zonalHeadApprovalDate">
+											<input id="field_zonalHeadApprovalDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="feasibilityStudy.zonalHeadApprovalDate"
+												is-open="datePickerForZonalHeadApprovalDate.status.opened" />
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForZonalHeadApprovalDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_inspectionByDepartmentHead">Inspection
+										By Head of Department</label> <select class="form-control"
 										id="field_inspectionByDepartmentHead"
 										name="inspectionByDepartmentHead"
 										ng-model="feasibilityStudy.inspectionByDepartmentHead"
+										ng-change="getDeparmentHeadName(feasibilityStudy.inspectionByDepartmentHead)"
 										ng-options="user as user.login for user in users track by user.id">
 										<option value=""></option>
 									</select>
 								</div>
-								<div class="col-sm-3">
-									<label for="field_approvedByOperationManager">approvedByOperationManager</label>
-									<select class="form-control"
+								<div class="col-sm-4">
+									<label class="control-label"
+										for="field_inspectionByDepartmentHead">Name</label> <input
+										type="text" class="form-control"
+										name="inspectionByDepartmentHead"
+										id="field_inspectionByDepartmentHead"
+										ng-model="feasibilityStudy.inspectionByDepartmentHead.name"
+										readonly />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_deptHeadInspectedDate">Date</label>
+									<div class="form-group">
+										<div class="input-group date" id="field_deptHeadInspectedDate">
+											<input id="field_deptHeadInspectedDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="feasibilityStudy.deptHeadInspectedDate"
+												is-open="datePickerForDeptHeadInspectedDate.status.opened" />
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForDeptHeadInspectedDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_approvedByOperationManager">Approved
+										By Manager Operation</label> <select class="form-control"
 										id="field_approvedByOperationManager"
 										name="approvedByOperationManager"
 										ng-model="feasibilityStudy.approvedByOperationManager"
+										ng-change="getOperationManagerName(feasibilityStudy.approvedByOperationManager)"
 										ng-options="user as user.login for user in users track by user.id">
 										<option value=""></option>
 									</select>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label"
+										for="field_approvedByOperationManager">Name</label> <input
+										type="text" class="form-control"
+										name="approvedByOperationManager"
+										id="field_approvedByOperationManager"
+										ng-model="feasibilityStudy.approvedByOperationManager.name"
+										readonly />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label"
+										for="field_operationMangrapproveDate">Date</label>
+									<div class="form-group">
+										<div class="input-group date"
+											id="field_operationMangrapproveDate">
+											<input id="field_operationMangrapproveDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="feasibilityStudy.operationMangrapproveDate"
+												is-open="datePickerForOperationMangrapproveDate.status.opened" />
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForOperationMangrapproveDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</fieldset>

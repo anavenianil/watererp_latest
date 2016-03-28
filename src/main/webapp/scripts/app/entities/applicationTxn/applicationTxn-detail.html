@@ -3,16 +3,55 @@
 	<h2>
 		<span>ApplicationTxn</span> {{applicationTxn.id}}
 	</h2>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Requests</h3>
+		</div>
+		<div class="list-group">
+			<div class="table-responsive" 
+			ng-hide="applicationTxn.ststus===0">
+				<table class="clickableTable table table-striped">
+					<thead>
+						<tr>
+							<th>Req. Id</th>
+							<th>Req. No.</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Actioned Date</th>
+							<th>Remarks</th>
+							<th>Status</th>
+							<th>IP Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in requestWorkflowHistorys">
+							<td>{{item.domainObject}}</td>
+							<td>{{item.fileNumber}}</td>
+							<td>{{item.assignedFrom.firstName}}
+								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
+							<td>{{item.assignedTo.firstName}}
+								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.ipAddress}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 	<div>
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">
-					Application For New Connection<span class="label" class="label"
+					Application For New Connection
+					<!-- <span class="label" class="label"
 						ng-class="{	'label-success'	: applicationTxn.status === 2, 
 										'label-warning'	: applicationTxn.status === 1, 
 										'label-danger'	: applicationTxn.status === 0}">
 						{{applicationTxn.status===0?'Pending':(requisition.status===1?'In
-						Feasibility':'Approved')}}</span>
+						Feasibility':'Approved')}}</span> -->
 				</h3>
 			</div>
 			<div class="list-group">
@@ -30,7 +69,7 @@
 							</div>
 							<div class="col-sm-3">
 								<label>RequestDate</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.requestdDate
+								<h5 class="list-group-item-heading">{{applicationTxn.requestedDate
 									| date:'medium'}}</h5>
 							</div>
 							<div class="col-sm-3">
@@ -43,21 +82,21 @@
 					<fieldset>
 						<legend>Applicant Details</legend>
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label>Full Name</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.fullName}}</h5>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
+						<!-- </div>
+						<div class="row"> -->
+							<div class="col-sm-3">
 								<label>Home/Office Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.homeOrOficeNumber}}</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.homeOrOfficeNumber}}</h5>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label> Regional Number</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.regionalNumber}}</h5>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label> Fax Number</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.faxNumber}}</h5>
 							</div>
@@ -95,9 +134,11 @@
 					<br>
 					<fieldset>
 						<legend>Connection Details</legend>
-						<div class="col-sm-3">
-							<label>Category</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.categoryMaster.categoryName}}</h5>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Category</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.categoryMaster.categoryName}}</h5>
+							</div>
 						</div>
 					</fieldset>
 				</div>
@@ -105,10 +146,19 @@
 		</div>
 
 
+		<!-- ng-show="{{applicationTxn.status==0}}" -->
 		<button type="button" class="btn btn-success pull-right"
+			
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
+
+		<!-- <button type="button" class="btn btn-success pull-right"
+			ng-show="{{applicationTxn.status==1}}"
+			ui-sref="feasibilityStudyForAppTxn({applicationId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Create
+			Feasibility
+		</button> -->
 
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 

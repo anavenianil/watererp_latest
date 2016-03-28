@@ -1,14 +1,20 @@
 package com.callippus.water.erp.domain;
 
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
 
 /**
  * A FeasibilityStudy.
@@ -28,8 +34,20 @@ public class FeasibilityStudy implements Serializable {
     @Column(name = "modified_date")
     private ZonedDateTime modifiedDate;
     
+    @Column(name = "prepared_date")
+    private ZonedDateTime preparedDate;
+    
+    @Column(name = "zonal_head_approval_date")
+    private ZonedDateTime zonalHeadApprovalDate;
+    
+    @Column(name = "dept_head_inspected_date")
+    private ZonedDateTime deptHeadInspectedDate;
+    
+    @Column(name = "operation_mangrapprove_date")
+    private ZonedDateTime operationMangrapproveDate;
+    
     @Column(name = "status")
-    private String status;
+    private Integer status;
     
     @ManyToOne
     @JoinColumn(name = "division_master_id")
@@ -91,11 +109,43 @@ public class FeasibilityStudy implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    public String getStatus() {
+    public ZonedDateTime getPreparedDate() {
+        return preparedDate;
+    }
+    
+    public void setPreparedDate(ZonedDateTime preparedDate) {
+        this.preparedDate = preparedDate;
+    }
+
+    public ZonedDateTime getZonalHeadApprovalDate() {
+        return zonalHeadApprovalDate;
+    }
+    
+    public void setZonalHeadApprovalDate(ZonedDateTime zonalHeadApprovalDate) {
+        this.zonalHeadApprovalDate = zonalHeadApprovalDate;
+    }
+
+    public ZonedDateTime getDeptHeadInspectedDate() {
+        return deptHeadInspectedDate;
+    }
+    
+    public void setDeptHeadInspectedDate(ZonedDateTime deptHeadInspectedDate) {
+        this.deptHeadInspectedDate = deptHeadInspectedDate;
+    }
+
+    public ZonedDateTime getOperationMangrapproveDate() {
+        return operationMangrapproveDate;
+    }
+    
+    public void setOperationMangrapproveDate(ZonedDateTime operationMangrapproveDate) {
+        this.operationMangrapproveDate = operationMangrapproveDate;
+    }
+
+    public Integer getStatus() {
         return status;
     }
     
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -197,6 +247,10 @@ public class FeasibilityStudy implements Serializable {
             "id=" + id +
             ", createdDate='" + createdDate + "'" +
             ", modifiedDate='" + modifiedDate + "'" +
+            ", preparedDate='" + preparedDate + "'" +
+            ", zonalHeadApprovalDate='" + zonalHeadApprovalDate + "'" +
+            ", deptHeadInspectedDate='" + deptHeadInspectedDate + "'" +
+            ", operationMangrapproveDate='" + operationMangrapproveDate + "'" +
             ", status='" + status + "'" +
             '}';
     }

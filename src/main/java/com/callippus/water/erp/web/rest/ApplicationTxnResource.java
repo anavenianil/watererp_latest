@@ -57,8 +57,6 @@ public class ApplicationTxnResource {
     @Inject
     private ApplicationTxnCustomRepository applicationTxnCustomRepository;
     
-    @Inject
-    private RequestWorkflowHistoryRepository requestWorkflowHistoryRepository;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -80,8 +78,8 @@ public class ApplicationTxnResource {
         }
         
         ZonedDateTime now = ZonedDateTime.now();
-        applicationTxn.setUpdatedDate(now);
         applicationTxn.setCreatedDate(now);
+        applicationTxn.setUpdatedDate(now);
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
       //this is for workflow
@@ -113,6 +111,8 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(applicationTxn);
         }
+        ZonedDateTime now = ZonedDateTime.now();
+        applicationTxn.setUpdatedDate(now);
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))

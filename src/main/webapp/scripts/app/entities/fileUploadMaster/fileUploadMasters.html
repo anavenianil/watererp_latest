@@ -1,0 +1,62 @@
+<div>
+    <h2>FileUploadMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="fileUploadMaster.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new FileUploadMaster
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Photo</span></th>
+                    <th><span>TextFile</span></th>
+                    <th><span>BinaryFile</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="fileUploadMaster in fileUploadMasters track by fileUploadMaster.id">
+                    <td><a ui-sref="fileUploadMaster.detail({id:fileUploadMaster.id})">{{fileUploadMaster.id}}</a></td>
+                    <td>
+                        <img data-ng-src="{{'data:' + fileUploadMaster.photoContentType + ';base64,' + fileUploadMaster.photo}}" style="max-height: 30px;" ng-if="fileUploadMaster.photo"/> {{fileUploadMaster.photoContentType}} {{byteSize(fileUploadMaster.photo)}}
+                    </td>
+                    <td>{{fileUploadMaster.textFile}}</td>
+                    <td>{{abbreviate(fileUploadMaster.binaryFile)}} {{fileUploadMaster.binaryFileContentType}} {{byteSize(fileUploadMaster.binaryFile)}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="fileUploadMaster.detail({id:fileUploadMaster.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="fileUploadMaster.edit({id:fileUploadMaster.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="fileUploadMaster.delete({id:fileUploadMaster.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
