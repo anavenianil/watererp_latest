@@ -19,6 +19,8 @@ import java.time.ZonedDateTime;
 import java.time.LocalDate;
 
 import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.Months;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -62,13 +64,47 @@ public class BillingService {
     
     public void processBills(List<BillDetails> bd)
     {
-    	List<CustDetails> cd = custDetailsRepository.findAll();
-    	cd.forEach(customer -> process_bill(customer));
+    	bd.forEach(bill_details -> process_bill(bill_details));
     }
     
-    public void process_bill(CustDetails customer)
+    public void process_bill(BillDetails bill_details)
     {
+    	int months;
+    	float avgKL;
+    	
+    	CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());    	
     	CustValidation retVal =  getCustInfo(customer);
+    	
+    	if(retVal != CustValidation.SUCCESS){
+    		//Unable to process customer
+        	log.debug("Unable to process customer:" + customer.getId());
+        	return;
+    	}
+    	
+    	try
+    	{	
+	    	Date from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).parse(customer.getFromMonth()+"01");
+	    	Date to = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).parse(customer.getToMonth()+"01");
+	    	
+	    	DateTime jFrom = new DateTime(from);
+	    	DateTime jTo = new DateTime(to);
+	    	
+	    	Months d = Months.monthsBetween( jTo, jFrom);
+	    	int monthsDiff = d.getMonths() + 1;
+	    	
+	    	log.debug("Customer Info:" + customer.toString());
+	    	log.debug("Months:" + monthsDiff);
+	    	
+	    	if(customer.getPrevBillType().equals("L") && customer.getCurrentBillType().equals("M"))
+	    		avgKL = (Integer.parseInt(bill_details.getPresent_reading()) - Integer.parseInt(bill_details.getInitial_reading()))/1000;
+	    		
+    	}
+    	catch(Exception e)
+    	{
+    		log.debug("Invalid From or To Date:" + customer.getFromMonth() +"::::" + customer.getToMonth());
+    		return;
+    	}
+    	
     }
     
     public CustValidation getCustInfo(CustDetails customer){
