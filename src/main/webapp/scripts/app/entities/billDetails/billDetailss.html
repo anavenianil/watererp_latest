@@ -1,0 +1,108 @@
+<div>
+    <h2>BillDetailss</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="billDetails.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new BillDetails</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bill_number"><span>Bill_number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bill_date"><span>Bill_date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bill_time"><span>Bill_time</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meter_make"><span>Meter_make</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="current_bill_type"><span>Current_bill_type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="from_month"><span>From_month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="to_month"><span>To_month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meter_fix_date"><span>Meter_fix_date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="initial_reading"><span>Initial_reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="present_reading"><span>Present_reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="units"><span>Units</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="water_cess"><span>Water_cess</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sewerage_cess"><span>Sewerage_cess</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="service_charge"><span>Service_charge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meter_service_charge"><span>Meter_service_charge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="total_amount"><span>Total_amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="net_payable_amount"><span>Net_payable_amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="telephone_no"><span>Telephone_no</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meter_status"><span>Meter_status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mc_met_reader_code"><span>Mc_met_reader_code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bill_flag"><span>Bill_flag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="svr_status"><span>Svr_status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="terminal_id"><span>Terminal_id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meter_reader_id"><span>Meter_reader_id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user_id"><span>User_id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobile_no"><span>Mobile_no</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="notice_no"><span>Notice_no</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lat"><span>Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longI"><span>LongI</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="nometer_amt"><span>Nometer_amt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="billDetails in billDetailss track by billDetails.id">
+                    <td><a ui-sref="billDetails.detail({id:billDetails.id})">{{billDetails.id}}</a></td>
+                    <td>{{billDetails.can}}</td>
+                    <td>{{billDetails.bill_number}}</td>
+                        <td>{{billDetails.bill_date | date:'mediumDate'}}</td>
+                    <td>{{billDetails.bill_time}}</td>
+                    <td>{{billDetails.meter_make}}</td>
+                    <td>{{billDetails.current_bill_type}}</td>
+                    <td>{{billDetails.from_month}}</td>
+                    <td>{{billDetails.to_month}}</td>
+                    <td>{{billDetails.meter_fix_date}}</td>
+                    <td>{{billDetails.initial_reading}}</td>
+                    <td>{{billDetails.present_reading}}</td>
+                    <td>{{billDetails.units}}</td>
+                    <td>{{billDetails.water_cess}}</td>
+                    <td>{{billDetails.sewerage_cess}}</td>
+                    <td>{{billDetails.service_charge}}</td>
+                    <td>{{billDetails.meter_service_charge}}</td>
+                    <td>{{billDetails.total_amount}}</td>
+                    <td>{{billDetails.net_payable_amount}}</td>
+                    <td>{{billDetails.telephone_no}}</td>
+                    <td>{{billDetails.meter_status}}</td>
+                    <td>{{billDetails.mc_met_reader_code}}</td>
+                    <td>{{billDetails.bill_flag}}</td>
+                    <td>{{billDetails.svr_status}}</td>
+                    <td>{{billDetails.terminal_id}}</td>
+                    <td>{{billDetails.meter_reader_id}}</td>
+                    <td>{{billDetails.user_id}}</td>
+                    <td>{{billDetails.mobile_no}}</td>
+                    <td>{{billDetails.notice_no}}</td>
+                    <td>{{billDetails.lat}}</td>
+                    <td>{{billDetails.longI}}</td>
+                    <td>{{billDetails.nometer_amt}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="billDetails.detail({id:billDetails.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="billDetails.edit({id:billDetails.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="billDetails.delete({id:billDetails.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

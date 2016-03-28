@@ -1,0 +1,166 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "can",
+            "fieldType": "String"
+        },        {
+            "fieldId": 2,
+            "fieldName": "bill_number",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "bill_date",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "bill_time",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "meter_make",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "current_bill_type",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "from_month",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "to_month",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "meter_fix_date",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "initial_reading",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "present_reading",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "units",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "water_cess",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "sewerage_cess",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 15,
+            "fieldName": "service_charge",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 16,
+            "fieldName": "meter_service_charge",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 17,
+            "fieldName": "total_amount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 18,
+            "fieldName": "net_payable_amount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 19,
+            "fieldName": "telephone_no",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 20,
+            "fieldName":"meter_status",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 21,
+            "fieldName": "mc_met_reader_code",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 22,
+            "fieldName": "bill_flag",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 23,
+            "fieldName": "svr_status",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 24,
+            "fieldName": "terminal_id",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 25,
+            "fieldName": "meter_reader_id",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 26,
+            "fieldName": "user_id",
+            "fieldType": "String"
+        },        
+        {
+            "fieldId": 27,
+            "fieldName": "mobile_no",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 28,
+            "fieldName": "notice_no",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 29,
+            "fieldName": "lat",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 30,
+            "fieldName": "longI",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 31,
+            "fieldName": "nometer_amt",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160314104149",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}
