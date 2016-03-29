@@ -20,7 +20,7 @@
 									<label class="control-label" for="field_fileNumber">File
 										Number</label> <input type="text" class="form-control"
 										name="fileNumber" id="field_fileNumber"
-										ng-model="applicationTxn.fileNumber" />
+										ng-model="applicationTxn.fileNumber" readonly/>
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_requestedDate">Requested
@@ -52,15 +52,84 @@
 						<fieldset>
 							<legend>Applicant Details</legend>
 							<div class="row">
-								<div class="col-sm-8">
+								<div class="col-sm-6">
 									<label class="control-label" for="field_fullName">Full
 										Name</label> <input type="text" class="form-control" name="fullName"
 										id="field_fullName" ng-model="applicationTxn.fullName" />
 								</div>
-								<div class="col-sm-4">
+								<!-- <div class="col-sm-4">
 									<label class="control-label" for="field_photo">Photo</label> <input
 										type="text" class="form-control" name="photo" id="field_photo"
 										ng-model="applicationTxn.photo" />
+								</div> -->
+								<div class="col-sm-2">
+									<label>Photo</label>
+									<!-- <fieldset>
+										<div ngf-drop="" ngf-select=""
+											ng-model="applicationTxn.photo1" ng-model-rejected="rejFiles"
+											ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+											class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+											ngf-accept="'image/*,application/pdf'"
+											ngf-drop-available="dropAvailable">
+											<div ng-hide="dropAvailable">File Drop not available</div>
+											<div ng-show="dropAvailable">Drop Files Here</div>
+											<div>Click to select a file</div>
+										</div>
+									</fieldset> -->
+									<button type="submit" class="btn btn-primary" ngf-drop=""
+										ngf-select="" ng-model="applicationTxn.photo1"
+										ng-model-rejected="rejFiles"
+										ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+										class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+										ngf-accept="'image/*,application/pdf'"
+										ngf-drop-available="dropAvailable">
+										<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
+											Photo</span>
+									</button>
+								</div>
+								<div class="col-sm-3">
+									<ul style="clear: both" ng-show="rejFiles.length > 0"
+										class="response">
+										<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+											file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+									</ul>
+									<ul style="clear: both"
+										ng-show="applicationTxn.photo1.length > 0" class="response">
+										<li class="sel-file" ng-repeat="f in applicationTxn.photo1">
+											<!-- <img
+											ng-show="f.type.indexOf('image') > -1" ngf-src="f"
+											class="thumb" ngf-accept="'*'" style="width:100px;height:125px;">  -->
+											<!-- <span class="progress" ng-show="f.progress >= 0">
+												<div style="width: {{f.progress">{{f.progress}}%</div>
+										</span> -->
+											<!-- <button class="button"
+												ng-click="f.upload.abort();f.upload.aborted=true"
+												ng-show="f.upload != null && f.progress < 100 && !f.upload.aborted">Abort
+											</button> -->
+											- {{f.name}} <a
+											ng-show="f.result" href="javascript:void(0)"
+											ng-click="f.showDetail = !f.showDetail">details</a>
+
+											<!-- <div ng-show="f.showDetail">
+												<br />
+
+												<div data-ng-show="f.result.result == null">{{f.result}}</div>
+												<ul>
+													<li ng-repeat="item in f.result.result">
+														<div data-ng-show="item.name">file name:
+															{{item.name}}</div>
+														<div data-ng-show="item.fieldName">name:
+															{{item.fieldName}}</div>
+														<div data-ng-show="item.size">size on the serve:
+															{{item.size}}</div>
+														<div data-ng-show="item.value">value: {{item.value}}</div>
+													</li>
+												</ul>
+												<div data-ng-show="f.result.requestHeaders" class="reqh">request
+													headers: {{f.result.requestHeaders}}</div>
+											</div> -->
+										</li>
+									</ul>
 								</div>
 							</div>
 							<br>

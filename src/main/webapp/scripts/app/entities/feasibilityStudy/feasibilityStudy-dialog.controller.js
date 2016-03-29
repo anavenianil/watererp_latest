@@ -36,13 +36,17 @@ angular.module('watererpApp')
         }
         
         //get ApplicationTxn by status when page loaded
-        /*$scope.applicationTxns = [];
-        ApplicationTxn.query({page: $scope.page, status: 0}, function(result, headers) {
-             $scope.links = ParseLinks.parse(headers('link'));
-             for (var i = 0; i < result.length; i++) {
-                 $scope.applicationTxns.push(result[i]);
-             }
-        });*/
+        
+        $scope.getApplicationTxns = function(){
+        	$scope.applicationTxns = [];
+        	ApplicationTxn.query({page: $scope.page, status: 0}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.applicationTxns.push(result[i]);
+                }
+           });
+        }
+        $scope.getApplicationTxns();
         
        
         /*$scope.load = function(id) {
@@ -54,7 +58,7 @@ angular.module('watererpApp')
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
             $scope.isSaving = false;
-            $state.go("request");
+            //$state.go("request");
         };
 
         var onSaveError = function (result) {

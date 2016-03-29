@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster) {
+    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster, UploadUtil) {
 
     	$scope.applicationTxn = {};
     	$scope.categoryMasters = CategoryMaster.query();
@@ -78,6 +78,27 @@ angular.module('watererpApp')
         			createdDate: null, updatedDate: null, status: null, id: null
             };
         }
+        
+        
+        $scope.$watch('applicationTxn.photo1', function (files) {
+            $scope.formUpload = false;
+            if (files != null) {
+                for (var i = 0; i < files.length; i++) {
+                    $scope.errorMsg = null;
+                    (function (file) {
+                    	UploadUtil.uploadUsingUpload(file, $scope, 'waterErp');
+                    })(files[i]);
+                }
+            }
+        });
+        
+        $scope.getReqParams = function() {
+			return $scope.generateErrorOnServer ? '?errorCode='
+					+ $scope.serverErrorCode + '&errorMessage='
+					+ $scope.serverErrorMsg : '';
+		};
+		
+		
     });
 
 

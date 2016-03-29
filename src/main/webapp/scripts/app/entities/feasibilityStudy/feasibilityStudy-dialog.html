@@ -11,7 +11,7 @@
 					<div class="modal-body">
 						<jh-alert-error></jh-alert-error>
 						<div class="row">
-							<div class="col-sm-4">
+							<!-- <div class="col-sm-4">
 								<label for="field_applicationTxn">applicationTxn</label> <select
 									class="form-control" id="field_applicationTxn"
 									name="applicationTxn"
@@ -20,8 +20,8 @@
 									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationTxns track by applicationTxn.id">
 									<option value=""></option>
 								</select>
-							</div>
-							<div class="col-sm-3">
+							</div> -->
+							<!-- <div class="col-sm-3">
 								<label>File Number</label> <input type="text"
 									class="form-control" id="field_fileNo" name="fileNo"
 									ng-model="feasibilityStudy.fileNo">
@@ -30,6 +30,20 @@
 								<button type="button"
 									class="btn btn-primary glyphicon glyphicon-search"
 									ng-click="getApplicationTxn(feasibilityStudy.fileNo)"></button>
+							</span> -->
+							<div class="col-sm-3">
+								<label>File Number</label> <input list="applicationTxn" type=""
+									class="form-control" ng-model="feasibilityStudy.applicationTxn.id"
+									 />
+								<datalist id="applicationTxn">
+									<option ng-repeat="applicationTxn in applicationTxns"
+										value="{{applicationTxn.id}}">
+								</datalist>
+							</div>
+							<span> <br>
+								<button type="button"
+									class="btn btn-primary glyphicon glyphicon-search"
+									ng-click="getApplicationTxn(feasibilityStudy.applicationTxn.id)"></button>
 							</span>
 						</div>
 						<fieldset>
@@ -192,6 +206,13 @@
 										ng-options="user as user.login for user in users track by user.id">
 										<option value=""></option>
 									</select>
+									<!-- <input list="preparedBy" type="" class="form-control"
+										id="field_preparedBy" name="preparedBy"
+										ng-model="feasibilityStudy.preparedBy" 
+										ng-change="getpreparedByName(feasibilityStudy.preparedBy)"/>
+									<datalist id="preparedBy">
+										<option ng-repeat="user in users" value="{{user.login}}">
+									</datalist> -->
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_status">Name</label> <input

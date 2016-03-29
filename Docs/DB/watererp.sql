@@ -51,7 +51,7 @@ CREATE TABLE  `watererp`.`application_txn` (
   KEY `fk_applicationtxn_customer_id` (`customer_id`),
   CONSTRAINT `fk_applicationtxn_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
   CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`application_txn`
@@ -59,16 +59,28 @@ CREATE TABLE  `watererp`.`application_txn` (
 
 /*!40000 ALTER TABLE `application_txn` DISABLE KEYS */;
 LOCK TABLES `application_txn` WRITE;
-INSERT INTO `watererp`.`application_txn` VALUES  (1,'sdgsdg',NULL,347,37,'347','347','347','37','3447','sfs','2016-03-24 00:00:00','sdg','kjsh','2016-03-24 17:11:36','2016-03-24 17:11:36',1,1,NULL),
- (2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'354','2016-03-25 15:36:49','2016-03-25 15:36:49',0,NULL,NULL),
- (3,'54654',NULL,4654,654,'6554','654','5465','4654','654','654','2016-03-25 00:00:00','6546','llhkh','2016-03-25 15:37:08','2016-03-25 15:37:08',0,3,NULL),
- (4,'sdhsdhf',NULL,347,37,'346','374','347','37','37','sdg','2016-03-26 00:00:00',NULL,'afasg','2016-03-26 14:27:58','2016-03-26 14:27:58',0,1,NULL),
- (5,'weywy',NULL,457,457,'458','48','457','48','48','wey','2016-03-26 00:00:00','wywe','wewey','2016-03-26 14:32:05','2016-03-26 14:32:05',0,1,NULL),
- (6,'ery',NULL,45745,7457,'457','457','457','457','457','ery','2016-03-26 00:00:00','ery','wetwe','2016-03-26 14:33:42','2016-03-26 14:33:42',0,1,NULL),
- (7,'weewy',NULL,347,347,'347','347','347','347','37','ewey','2016-03-26 00:00:00','wey','we','2016-03-26 14:56:34','2016-03-26 14:56:34',0,1,NULL),
- (8,'weewy',NULL,347,347,'347','347','347','347','37','ewey','2016-03-26 00:00:00','wey','we','2016-03-26 15:00:30','2016-03-26 15:00:30',0,1,NULL),
- (9,'sdhsd',NULL,347,347,'437','37','347','347','347','sdsdh','2016-03-26 00:00:00','sdh','dshh','2016-03-26 15:06:29','2016-03-26 15:06:29',1,1,NULL),
- (10,'sdsh',NULL,3447,73,'37','37','37','37','3737','dfh','2016-03-26 00:00:00','sh','kjkjh','2016-03-26 15:54:55','2016-03-26 15:54:55',1,2,NULL);
+INSERT INTO `watererp`.`application_txn` VALUES  (14,'mohib khan',147,852,6698,'465','65445','54655','5465498','5511684','654','2016-03-28 00:00:00',NULL,'file1','2016-03-28 17:51:35','2016-03-28 17:51:35',1,3,NULL),
+ (15,'mohib khan',4654,6544,5464,'66554','665544','654','654','6554','dfhdfh','2016-03-28 00:00:00',NULL,'file1','2016-03-28 18:26:19','2016-03-28 18:26:19',1,3,NULL),
+ (16,'34634',346,346,436,'436','346','346','346','346','34634','2016-03-29 00:00:00','','534','2016-03-29 10:31:39','2016-03-29 10:31:39',0,3,NULL),
+ (17,'34634',346,346,436,'436','346','346','346','346','34634','2016-03-29 00:00:00','','534','2016-03-29 10:34:06','2016-03-29 10:34:06',0,3,NULL),
+ (18,'346',345,346,346,'346','346','346','346','346','345','2016-03-29 00:00:00','','353','2016-03-29 10:56:27','2016-03-29 10:56:27',0,4,NULL),
+ (19,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 11:23:28','2016-03-29 11:23:28',0,NULL,NULL),
+ (20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 11:27:57','2016-03-29 11:27:57',0,NULL,NULL),
+ (21,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 11:35:00','2016-03-29 11:35:00',0,NULL,NULL),
+ (22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 11:40:25','2016-03-29 11:40:25',0,NULL,NULL),
+ (23,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 11:43:43','2016-03-29 11:43:43',0,NULL,NULL),
+ (24,'wetwe',4364,43734,473,'473','347','347','347','437','etwt','2016-03-29 00:00:00','','skfha','2016-03-29 11:55:03','2016-03-29 11:55:03',0,3,NULL),
+ (25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 12:23:57','2016-03-29 12:23:57',0,NULL,NULL),
+ (26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 12:26:07','2016-03-29 12:26:07',0,NULL,NULL),
+ (27,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 12:36:26','2016-03-29 12:36:26',0,NULL,NULL),
+ (28,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 12:38:43','2016-03-29 12:38:43',0,NULL,NULL),
+ (29,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'2016-03-29 12:43:24','2016-03-29 12:43:24',0,NULL,NULL),
+ (30,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/api/download/30_1e83e71a0573dc7b5e0ea2b193fe5998_eclipse error.png',NULL,'2016-03-29 12:46:13','2016-03-29 12:46:13',0,NULL,NULL),
+ (31,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/api/download/31_318777e0424dce2c551f16e4f6ecda5e_eclipse error.png',NULL,'2016-03-29 12:56:58','2016-03-29 12:56:58',0,NULL,NULL),
+ (32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/api/download/32_3eb4e628f276b918753ec6d0031b4060_eclipse error.png',NULL,'2016-03-29 13:10:34','2016-03-29 13:10:34',0,NULL,NULL),
+ (33,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'/api/download/33_a702c05423d95832e21d3823f6f9127f_eclipse error.png',NULL,'2016-03-29 14:27:14','2016-03-29 14:27:14',0,NULL,NULL),
+ (34,'mohib khan',13,124,215,'125','15','125','125','125','346','2016-03-29 00:00:00','',NULL,'2016-03-29 14:48:54','2016-03-29 14:48:54',0,3,NULL),
+ (35,'mohib',214,124,124,'124','124','214','124','214','342','2016-03-29 00:00:00','/api/download/35_af73bd9088c892842ff2d1fc18d71b5b_eclipse error.png',NULL,'2016-03-29 14:54:31','2016-03-29 14:54:31',0,3,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `application_txn` ENABLE KEYS */;
 
@@ -391,7 +403,9 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160324101330','jhipster','classpath:config/liquibase/changelog/20160324101330_added_entity_ZoneMaster.xml','2016-03-24 15:50:10',66,'EXECUTED','7:7855073214c1c3e194f1b4125d049f25','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160324101502','jhipster','classpath:config/liquibase/changelog/20160324101502_added_entity_StreetMaster.xml','2016-03-24 15:50:11',67,'EXECUTED','7:7834259d37eff0b5a2feb5555c398f82','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-03-24 17:07:52',68,'EXECUTED','7:d1c9aa67d48a51ebe93625f1a2a43eb5','createTable, dropDefaultValue (x3), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-03-24 17:08:35',69,'EXECUTED','7:0d12caa3b29c916e1d4e783450afb2e7','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL);
+ ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-03-28 13:17:41',71,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
+ ('20160328051857','jhipster','classpath:config/liquibase/changelog/20160328051857_added_entity_FileUploadMaster.xml','2016-03-28 18:56:06',72,'EXECUTED','7:9fd8cdb67e4d8cc76478621ecad2012b','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160328131639','jhipster','classpath:config/liquibase/changelog/20160328131639_added_entity_FileUploadMaster.xml','2016-03-28 18:57:23',73,'EXECUTED','7:03be8b2eae9799aec199f76ed49d55a1','createTable','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -415,7 +429,7 @@ CREATE TABLE  `watererp`.`databasechangeloglock` (
 
 /*!40000 ALTER TABLE `databasechangeloglock` DISABLE KEYS */;
 LOCK TABLES `databasechangeloglock` WRITE;
-INSERT INTO `watererp`.`databasechangeloglock` VALUES  (1,0x01,'2016-03-25 13:03:20','192.168.1.5 (192.168.1.5)');
+INSERT INTO `watererp`.`databasechangeloglock` VALUES  (1,0x00,NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangeloglock` ENABLE KEYS */;
 
@@ -808,9 +822,13 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `watererp`.`feasibility_study`;
 CREATE TABLE  `watererp`.`feasibility_study` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` timestamp NULL DEFAULT NULL,
-  `modified_date` timestamp NULL DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `created_date` timestamp NULL,
+  `modified_date` timestamp NULL,
+  `prepared_date` timestamp NULL,
+  `zonal_head_approval_date` timestamp NULL,
+  `dept_head_inspected_date` timestamp NULL,
+  `operation_mangrapprove_date` timestamp NULL,
+  `status` int(11) DEFAULT NULL,
   `division_master_id` bigint(20) DEFAULT NULL,
   `zone_master_id` bigint(20) DEFAULT NULL,
   `street_master_id` bigint(20) DEFAULT NULL,
@@ -847,7 +865,7 @@ CREATE TABLE  `watererp`.`feasibility_study` (
 
 /*!40000 ALTER TABLE `feasibility_study` DISABLE KEYS */;
 LOCK TABLES `feasibility_study` WRITE;
-INSERT INTO `watererp`.`feasibility_study` VALUES  (1,'2016-03-24 00:00:00','2016-03-24 00:00:00',NULL,2,3,5,1,16,12,10,11,1);
+INSERT INTO `watererp`.`feasibility_study` VALUES  (1,'2016-03-29 18:26:45','2016-03-29 18:26:45','2016-03-29 00:00:00','2016-03-30 00:00:00','2016-03-31 00:00:00','2016-04-01 00:00:00',0,2,4,7,35,9,13,15,16,3);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `feasibility_study` ENABLE KEYS */;
 
@@ -876,6 +894,31 @@ INSERT INTO `watererp`.`file_number` VALUES  (1,'F_101'),
  (5,'F_105');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `file_number` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`file_upload_master`
+--
+
+DROP TABLE IF EXISTS `watererp`.`file_upload_master`;
+CREATE TABLE  `watererp`.`file_upload_master` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `photo` blob,
+  `photo_content_type` varchar(50) NOT NULL,
+  `text_file` longtext,
+  `binary_file` blob,
+  `binary_file_content_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`file_upload_master`
+--
+
+/*!40000 ALTER TABLE `file_upload_master` DISABLE KEYS */;
+LOCK TABLES `file_upload_master` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `file_upload_master` ENABLE KEYS */;
 
 
 --
@@ -1001,7 +1044,7 @@ CREATE TABLE  `watererp`.`jhi_persistent_audit_event` (
   `event_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `idx_persistent_audit_event` (`principal`,`event_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`jhi_persistent_audit_event`
@@ -1205,7 +1248,55 @@ INSERT INTO `watererp`.`jhi_persistent_audit_event` VALUES  (1,'admin','2016-02-
  (194,'sf0015','2016-03-26 15:13:19','AUTHENTICATION_SUCCESS'),
  (195,'customer','2016-03-26 15:54:24','AUTHENTICATION_FAILURE'),
  (196,'customer','2016-03-26 15:54:31','AUTHENTICATION_SUCCESS'),
- (197,'sf0015','2016-03-26 15:55:50','AUTHENTICATION_SUCCESS');
+ (197,'sf0015','2016-03-26 15:55:50','AUTHENTICATION_SUCCESS'),
+ (198,'sf0015','2016-03-28 09:57:59','AUTHENTICATION_SUCCESS'),
+ (199,'sf0015','2016-03-28 10:01:48','AUTHENTICATION_SUCCESS'),
+ (200,'admin','2016-03-28 12:43:06','AUTHENTICATION_SUCCESS'),
+ (201,'sf0006','2016-03-28 12:44:05','AUTHENTICATION_FAILURE'),
+ (202,'sf0006','2016-03-28 12:44:20','AUTHENTICATION_SUCCESS'),
+ (203,'sf0009','2016-03-28 12:44:48','AUTHENTICATION_SUCCESS'),
+ (204,'sf0010','2016-03-28 12:45:25','AUTHENTICATION_SUCCESS'),
+ (205,'sf0011','2016-03-28 12:46:19','AUTHENTICATION_SUCCESS'),
+ (206,'sf0013','2016-03-28 12:46:59','AUTHENTICATION_SUCCESS'),
+ (207,'sf0014','2016-03-28 12:47:44','AUTHENTICATION_SUCCESS'),
+ (208,'sf0015','2016-03-28 12:48:18','AUTHENTICATION_SUCCESS'),
+ (209,'sf0016','2016-03-28 12:48:43','AUTHENTICATION_SUCCESS'),
+ (210,'sf0017','2016-03-28 12:49:28','AUTHENTICATION_SUCCESS'),
+ (211,'sf0018','2016-03-28 12:50:15','AUTHENTICATION_SUCCESS'),
+ (212,'sf0019','2016-03-28 12:50:59','AUTHENTICATION_SUCCESS'),
+ (213,'sf0021','2016-03-28 12:51:34','AUTHENTICATION_SUCCESS'),
+ (214,'sf0022','2016-03-28 12:52:15','AUTHENTICATION_SUCCESS'),
+ (215,'sf0023','2016-03-28 12:53:30','AUTHENTICATION_SUCCESS'),
+ (216,'sf0027','2016-03-28 12:57:19','AUTHENTICATION_SUCCESS'),
+ (217,'sf0028','2016-03-28 12:57:55','AUTHENTICATION_SUCCESS'),
+ (218,'sf0015','2016-03-28 12:58:26','AUTHENTICATION_SUCCESS'),
+ (219,'sf0015','2016-03-28 14:05:33','AUTHENTICATION_SUCCESS'),
+ (220,'sf0029','2016-03-28 14:19:02','AUTHENTICATION_SUCCESS'),
+ (221,'customer','2016-03-28 16:44:03','AUTHENTICATION_SUCCESS'),
+ (222,'sf0006','2016-03-28 16:53:02','AUTHENTICATION_SUCCESS'),
+ (223,'sf0029','2016-03-28 16:53:29','AUTHENTICATION_SUCCESS'),
+ (224,'sf0015','2016-03-28 16:53:45','AUTHENTICATION_SUCCESS'),
+ (225,'customer','2016-03-28 17:11:07','AUTHENTICATION_SUCCESS'),
+ (226,'sf0015','2016-03-28 17:19:20','AUTHENTICATION_SUCCESS'),
+ (227,'sf0015','2016-03-28 17:34:50','AUTHENTICATION_SUCCESS'),
+ (228,'customer','2016-03-28 17:39:35','AUTHENTICATION_SUCCESS'),
+ (229,'sf0015','2016-03-28 17:41:04','AUTHENTICATION_SUCCESS'),
+ (230,'sf0015','2016-03-28 17:49:39','AUTHENTICATION_SUCCESS'),
+ (231,'customer','2016-03-28 17:50:54','AUTHENTICATION_SUCCESS'),
+ (232,'sf0015','2016-03-28 17:51:50','AUTHENTICATION_SUCCESS'),
+ (233,'sf0029','2016-03-28 18:15:50','AUTHENTICATION_SUCCESS'),
+ (234,'customer','2016-03-28 18:25:52','AUTHENTICATION_SUCCESS'),
+ (235,'sf0015','2016-03-28 18:26:37','AUTHENTICATION_SUCCESS'),
+ (236,'admin','2016-03-28 18:39:20','AUTHENTICATION_SUCCESS'),
+ (237,'sf0029','2016-03-28 18:40:58','AUTHENTICATION_SUCCESS'),
+ (238,'admin','2016-03-28 18:42:41','AUTHENTICATION_SUCCESS'),
+ (239,'customer','2016-03-29 10:30:34','AUTHENTICATION_SUCCESS'),
+ (240,'sf0015','2016-03-29 11:47:54','AUTHENTICATION_SUCCESS'),
+ (241,'customer','2016-03-29 12:23:39','AUTHENTICATION_SUCCESS'),
+ (242,'customer','2016-03-29 12:36:12','AUTHENTICATION_SUCCESS'),
+ (243,'sf0015','2016-03-29 12:49:09','AUTHENTICATION_SUCCESS'),
+ (244,'customer','2016-03-29 14:48:31','AUTHENTICATION_SUCCESS'),
+ (245,'sf0015','2016-03-29 14:56:45','AUTHENTICATION_SUCCESS');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
@@ -1623,7 +1714,103 @@ INSERT INTO `watererp`.`jhi_persistent_audit_evt_data` VALUES  (1,'remoteAddress
  (196,'remoteAddress','0:0:0:0:0:0:0:1'),
  (196,'sessionId','E56842EED1D1B09E85B6346440113A44'),
  (197,'remoteAddress','0:0:0:0:0:0:0:1'),
- (197,'sessionId','A9D38E33EC7B6218267D7475055179C2');
+ (197,'sessionId','A9D38E33EC7B6218267D7475055179C2'),
+ (198,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (198,'sessionId','F1C44BF7335A42BF1189B63F76D1E68C'),
+ (199,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (199,'sessionId','22973A0B404E8394A53B2016F2670051'),
+ (200,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (200,'sessionId','F1345B335814B6888A7C6544FB65A4E2'),
+ (201,'message','Bad credentials'),
+ (201,'type','org.springframework.security.authentication.BadCredentialsException'),
+ (202,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (202,'sessionId','C9BBAEE0A8D5E9C6F96F3367674F3AFB'),
+ (203,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (203,'sessionId','ECD955C318DAEC17DC6F7AB264245017'),
+ (204,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (204,'sessionId','F9F420CDEAA94B6C5C2B8FA4D90248FC'),
+ (205,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (205,'sessionId','CC3CA8C8CDF14EE9EA7BF395B61FB215'),
+ (206,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (206,'sessionId','3F188158B2D2D519A53C0C1FB1D6E6E7'),
+ (207,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (207,'sessionId','DF67BE6D7192E23440237CAC0833A3C6'),
+ (208,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (208,'sessionId','A28914D77C10E19742C3267F6ACDDE77'),
+ (209,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (209,'sessionId','871279FAB4DF890A0D8D7001AEC15CDD'),
+ (210,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (210,'sessionId','B09347A72F680BAE3E71F905F3266374'),
+ (211,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (211,'sessionId','43AB6757F5EA6B41F75C87FDB8A518C2'),
+ (212,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (212,'sessionId','D6757DAAF7C44994A4575D5392AFF664'),
+ (213,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (213,'sessionId','7B190BC41C4E4F16557E9C9C9E00FDFB'),
+ (214,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (214,'sessionId','157C73F5E7D7D29B28DF6C9A063E2284'),
+ (215,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (215,'sessionId','BBC4B011D6F024F461D0A623B546B507'),
+ (216,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (216,'sessionId','B4DCB2454E421DEE8287AA643DA4C9F0'),
+ (217,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (217,'sessionId','597AFFBD21124261597DAC19C5A4733A'),
+ (218,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (218,'sessionId','9B3077005306A43A732D78FDEF5995AB'),
+ (219,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (219,'sessionId','F3EEBAF16DEF8779F3A01013C20A2FB5'),
+ (220,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (220,'sessionId','5A08684C1E57FA0172D4804F1370EEB8'),
+ (221,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (221,'sessionId','3C1DED5C5A8866C7215B182E5838C523'),
+ (222,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (222,'sessionId','2A9F6D12A7CA246FB8DCD208EEE9FA5B'),
+ (223,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (223,'sessionId','23812034AA63D07ADBEE5A38F0886379'),
+ (224,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (224,'sessionId','A18EAB17BF47032D7BDCC451B19D5B90'),
+ (225,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (225,'sessionId','E3054C034DA2F29014B821BC9E092456'),
+ (226,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (226,'sessionId','A04320C56084B23365DD776993646093'),
+ (227,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (227,'sessionId','2976C5581FA5AED4CCFF0505A53D982D'),
+ (228,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (228,'sessionId','92C7E519CE7DE6179EB19CCDC176A62B'),
+ (229,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (229,'sessionId','5FF53FA38F50C72AFF081EE20ABD3885'),
+ (230,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (230,'sessionId','2044CCE7692A44A652D6E7B77880380F'),
+ (231,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (231,'sessionId','88F947040DC98F3D2A2035643F760E13'),
+ (232,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (232,'sessionId','703DD8BC8DE0E5AB8E9FB4A8815C76B8'),
+ (233,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (233,'sessionId','0D5674517BB2D0F0F987CB8CD50350F2'),
+ (234,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (234,'sessionId','62E5B5A7DFB9B2C591F6FEEDCD818C1A'),
+ (235,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (235,'sessionId','8F94399F468196A72110D94FDB32B317'),
+ (236,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (236,'sessionId','086469BD3ED8A14917756427210E98A6'),
+ (237,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (237,'sessionId','CCEC7DA994A9849DA0A546794495B0F0'),
+ (238,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (238,'sessionId','1F55E871619F8D68227E14A8AE47069A'),
+ (239,'remoteAddress','127.0.0.1'),
+ (239,'sessionId','3E35ACABA321EF5041A70542BACA06E3'),
+ (240,'remoteAddress','127.0.0.1'),
+ (240,'sessionId','F1AB5AB09311B45B006593B30D2CDFB5'),
+ (241,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (241,'sessionId','EE9979299BBA4419DAE5477C1A3C093B'),
+ (242,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (242,'sessionId','9920E29DEFD5849E760CAABB84A6E2D2'),
+ (243,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (243,'sessionId','E687D60E75605CC9384190DB22CAD8AC'),
+ (244,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (244,'sessionId','B71EFCF84593E484FE2342CE491B59E8'),
+ (245,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (245,'sessionId','0BA656795E346284C4AD7D7A52096B84');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
@@ -1668,18 +1855,25 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==
  ('BaKFrbA5ergaotzhQATfrw==',29,'m+gH8u2sRCjqxAeORaQ3zQ==','2016-03-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('BFMeF7yubUPWeHMlxnpHhg==',3,'86Dlw7pit1sjL3P4rA601A==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('bh/be/AQUN2jP5F1P7kdSQ==',3,'kn71wIORmJGn7dP9vuFMTQ==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('C0yHTgCTgnXcC62bNAch3g==',15,'QM8xVxLqO6GowIcWRmrfyw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('cDuDRxT54VRDENf238evFw==',3,'qL156YzlR0uNU4rfJVaZGw==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('DEqQipDM3iLfE1PFx+mwRA==',3,'rlSkhLwJf+8q3MOatcrcDA==','2016-02-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('fNpzeb666xEusKesIpiVaA==',15,'EB7kPB3Prax0zRKgFghQUg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('gjgSoEiEm2u4z82bxneQbA==',15,'Q5ukTsruzqRjPjl2jNIIBA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('hFKfqjPrW8Z/amqU43M89g==',5,'OCMXKNowMoVsmqZ2jGSrxQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Hw5vcTOmIcEuAJ+K5/ttTg==',3,'o/B/WvzQojyU6CRPqa0kug==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('IgMAY7/2pqUwaRD9fRqtZA==',5,'R/v6AK3DT+5hKspBsE0QdQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KU6VZmBHcK3RKoGgwhLDcA==',3,'CtWXmv/L/eFLnOkikbadrw==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('Mb0R0iY0ojE1UtfSOD4ZGA==',15,'6WVg/B+SXzRUR0knUy1I6g==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('nicdzpFVE7fA8XUEciBnBg==',15,'jjnMZHjRSEuYg7FgpryrNw==','2016-03-29','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nK0IBkLMvCyRtRagV7xkIA==',15,'O271OweAwksyy+Yei161xA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('PpZTKOgtRshlEF2Y5H8Nzw==',3,'2oilX1ZtHFQ62F6g/CMZMg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -1694,6 +1888,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==
  ('wtWMmV27ptr0Uutob4MNiQ==',3,'kzJYJannR0ZBgbGhEbYHqQ==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('XDGXmczwil8KeD6KL6Yt1w==',3,'fbROZLGioPS/YUzyTyG2kg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('xf8lo1lE43DIRysCXswyzQ==',3,'BRRKxIW3118BhhPFt6AyXA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Y14PvuTMLFbPHaMU7KlW9A==',3,'yHJLgjbsyzRXqkVlnn1+bA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('yC0cZ89A6opEpVDUp7MPLA==',3,'JNF2a3Nb1kSNcOuOEsAR4Q==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('zy6YAeHzjqbMHb8NPwiMQg==',3,'RfJrmS7MnC9GxnetOTdgpg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
@@ -1743,26 +1938,26 @@ INSERT INTO `watererp`.`jhi_user` VALUES  (1,'system','$2a$10$mE.qmcV0mFU5NcKh73
  (6,'sf0006','$2a$10$.bcy9Ujl3NqgDj6zjXsRHe.UlXABdJyDbcByQ8nX9MvrHAwSYH9xi',NULL,NULL,'sf0006@localhost',0x01,'en','74075798038214678044',NULL,'anonymousUser','2016-03-18 12:43:28',NULL,'admin','2016-03-18 12:53:49'),
  (7,'sf0007','$2a$10$FDsPyaVUL9uFAR5vgWpX2ulAqEn5TJpoZjiCcGYqXO5iDkr11Ae3e',NULL,NULL,'sf0007@localhost',0x01,'en','96267878389108527398',NULL,'anonymousUser','2016-03-18 12:44:05',NULL,'admin','2016-03-18 12:53:50'),
  (8,'sf0008','$2a$10$/M8CkSWBuUlPxZavXb3h/.YQ.Q6lDArLBo5K/dIYcW6mdTfIf45bm',NULL,NULL,'sf0008@localhost',0x01,'en','54288279092286381964',NULL,'anonymousUser','2016-03-18 12:44:40',NULL,'admin','2016-03-18 12:53:51'),
- (9,'sf0009','$2a$10$nSqZo6ISDISQmxLFwbsq3u92OT3hOVS6mkjFlsDamxGInc8JBPtqq',NULL,NULL,'sf0009@localhost',0x01,'en','97951374793812547574',NULL,'anonymousUser','2016-03-18 12:45:19',NULL,'admin','2016-03-18 12:53:52'),
- (10,'sf0010','$2a$10$rCzfnzFSb0dL3ocuA9RViuOaF1Gq5Vc0XzS7GSUKwBCv5tXI./39S',NULL,NULL,'sf0010@localhost',0x01,'en','00161949524540976078',NULL,'anonymousUser','2016-03-18 12:45:54',NULL,'admin','2016-03-18 12:53:54'),
- (11,'sf0011','$2a$10$H7MmlGeb073RorJ69a1fdudLKTRLUFgkmFFeJ5xjCmtyjm.srVgDO',NULL,NULL,'sf0011@localhost',0x01,'en','33673054004780142550',NULL,'anonymousUser','2016-03-18 12:46:15',NULL,'admin','2016-03-18 12:53:55'),
+ (9,'sf0009','$2a$10$nSqZo6ISDISQmxLFwbsq3u92OT3hOVS6mkjFlsDamxGInc8JBPtqq','Simon','Lupuga','sf0009@localhost',0x01,'en','97951374793812547574',NULL,'anonymousUser','2016-03-18 12:45:19',NULL,'sf0009','2016-03-28 12:45:10'),
+ (10,'sf0010','$2a$10$rCzfnzFSb0dL3ocuA9RViuOaF1Gq5Vc0XzS7GSUKwBCv5tXI./39S','Claudius','Kaje','sf0010@localhost',0x01,'en','00161949524540976078',NULL,'anonymousUser','2016-03-18 12:45:54',NULL,'sf0010','2016-03-28 12:45:53'),
+ (11,'sf0011','$2a$10$H7MmlGeb073RorJ69a1fdudLKTRLUFgkmFFeJ5xjCmtyjm.srVgDO','Vacant','vacant','sf0011@localhost',0x01,'en','33673054004780142550',NULL,'anonymousUser','2016-03-18 12:46:15',NULL,'sf0011','2016-03-28 12:46:42'),
  (12,'sf0012','$2a$10$sB2ETKC9vs0uljjuRtez6e0mhtaFDeJSyZGEwGIaGddJ34kRGIEpe',NULL,NULL,'sf0012@localhost',0x01,'en','71560095329758703944',NULL,'anonymousUser','2016-03-18 12:46:38',NULL,'admin','2016-03-18 12:53:56'),
- (13,'sf0013','$2a$10$okQIlNvGPOcBOadT8iyiJuC3vBGmXFtLe3UrvZpB33CWekNcdI/bu',NULL,NULL,'sf0013@localhost',0x01,'en','91544376107529154273',NULL,'anonymousUser','2016-03-18 12:46:56',NULL,'admin','2016-03-18 12:53:57'),
- (14,'sf0014','$2a$10$qEvPMWpVpl54ndQdDE1FbuptYEfG9eqJbcYR7/DDXjSmaekdpwPyG',NULL,NULL,'sf0014@localhost',0x01,'en','98218340790438067335',NULL,'anonymousUser','2016-03-18 12:47:34',NULL,'admin','2016-03-18 12:53:58'),
- (15,'sf0015','$2a$10$/396VihfwsI9iWd/UIEXKe7c3xbjwuWiePbUdUQL1Ug/tq9X2fy.i',NULL,NULL,'sf0015@localhost',0x01,'en','78744568076959050873',NULL,'anonymousUser','2016-03-18 12:47:51',NULL,'admin','2016-03-18 12:54:07'),
- (16,'sf0016','$2a$10$.YzGvqWeUSCQR5q2mtAl5u4ZVjBDmGCRh7xSbb5njETwx1ZwIN2bm',NULL,NULL,'sf0016@localhost',0x01,'en','43535432288382530210',NULL,'anonymousUser','2016-03-18 12:48:46',NULL,'admin','2016-03-18 12:54:05'),
- (17,'sf0017','$2a$10$YDx44W8ShgQ0Jt7tVJXnWOMlyFJ3ernUc4Wh.yo.vVF6lYpGThccu',NULL,NULL,'sf0017@localhost',0x01,'en','06698912264567056315',NULL,'anonymousUser','2016-03-18 12:49:06',NULL,'admin','2016-03-18 12:54:09'),
- (18,'sf0018','$2a$10$if7uNqLVpZ.V5X/OkOes7uZ4gbDpwlrFmesdATE4PQrREuGff1c8G',NULL,NULL,'sf0018@localhost',0x01,'en','38952305015731452387',NULL,'anonymousUser','2016-03-18 12:49:28',NULL,'admin','2016-03-18 12:54:04'),
- (19,'sf0019','$2a$10$43TTSOPygHilSwG5jA3joussQk3.vL.0B88bmbWGAiEyThp/0MLhm',NULL,NULL,'sf0019@localhost',0x01,'en','80544871706487966991',NULL,'anonymousUser','2016-03-18 12:49:48',NULL,'admin','2016-03-18 12:54:02'),
+ (13,'sf0013','$2a$10$okQIlNvGPOcBOadT8iyiJuC3vBGmXFtLe3UrvZpB33CWekNcdI/bu','Adoph','Shavu','sf0013@localhost',0x01,'en','91544376107529154273',NULL,'anonymousUser','2016-03-18 12:46:56',NULL,'sf0013','2016-03-28 12:47:31'),
+ (14,'sf0014','$2a$10$qEvPMWpVpl54ndQdDE1FbuptYEfG9eqJbcYR7/DDXjSmaekdpwPyG','Herry','Makala','sf0014@localhost',0x01,'en','98218340790438067335',NULL,'anonymousUser','2016-03-18 12:47:34',NULL,'sf0014','2016-03-28 12:48:08'),
+ (15,'sf0015','$2a$10$/396VihfwsI9iWd/UIEXKe7c3xbjwuWiePbUdUQL1Ug/tq9X2fy.i','Mbike','Jones','sf0015@localhost',0x01,'en','78744568076959050873',NULL,'anonymousUser','2016-03-18 12:47:51',NULL,'sf0015','2016-03-28 12:48:33'),
+ (16,'sf0016','$2a$10$.YzGvqWeUSCQR5q2mtAl5u4ZVjBDmGCRh7xSbb5njETwx1ZwIN2bm','Fred','Selebwa','sf0016@localhost',0x01,'en','43535432288382530210',NULL,'anonymousUser','2016-03-18 12:48:46',NULL,'sf0016','2016-03-28 12:49:12'),
+ (17,'sf0017','$2a$10$YDx44W8ShgQ0Jt7tVJXnWOMlyFJ3ernUc4Wh.yo.vVF6lYpGThccu','Eliezer','Josiah','sf0017@localhost',0x01,'en','06698912264567056315',NULL,'anonymousUser','2016-03-18 12:49:06',NULL,'sf0017','2016-03-28 12:49:56'),
+ (18,'sf0018','$2a$10$if7uNqLVpZ.V5X/OkOes7uZ4gbDpwlrFmesdATE4PQrREuGff1c8G','Hellena','Mtembeje','sf0018@localhost',0x01,'en','38952305015731452387',NULL,'anonymousUser','2016-03-18 12:49:28',NULL,'sf0018','2016-03-28 12:50:47'),
+ (19,'sf0019','$2a$10$43TTSOPygHilSwG5jA3joussQk3.vL.0B88bmbWGAiEyThp/0MLhm','Charles','Kiwely','sf0019@localhost',0x01,'en','80544871706487966991',NULL,'anonymousUser','2016-03-18 12:49:48',NULL,'sf0019','2016-03-28 12:51:19'),
  (20,'sf0020','$2a$10$UWsog7PJ9mJ5ALW3oT1qjuLsx4r6TtpC2.OtCi6D/qgMvD1pXuFiC',NULL,NULL,'sf0020@localhost',0x01,'en','83805380491517726753',NULL,'anonymousUser','2016-03-18 12:50:10',NULL,'admin','2016-03-18 12:54:00'),
- (21,'sf0021','$2a$10$fyfyZSZ/r94V30rK2V72r.Rs0yzTW81oB6mAvlq3Xz5OTBpBK0DJC',NULL,NULL,'sf0021@localhost',0x01,'en','82028831560154180774',NULL,'anonymousUser','2016-03-18 12:51:39',NULL,'admin','2016-03-18 12:54:19'),
- (22,'sf0022','$2a$10$LV2mBS8VNveWYejGFcCh8OT2JoX.4oeEkPV/w5q5EDyY3dCQjUuGW',NULL,NULL,'sf0022@localhost',0x01,'en','29507620030240498935',NULL,'anonymousUser','2016-03-18 12:51:54',NULL,'admin','2016-03-18 12:54:21'),
- (23,'sf0023','$2a$10$ozkcRMy/Vjj6m.8O3XRg.OwDr3QybLS3qcX8/mZD.q4lzwVOxfPKW',NULL,NULL,'sf0023@localhost',0x01,'en','73060005748380646738',NULL,'anonymousUser','2016-03-18 12:52:18',NULL,'admin','2016-03-18 12:54:22'),
+ (21,'sf0021','$2a$10$fyfyZSZ/r94V30rK2V72r.Rs0yzTW81oB6mAvlq3Xz5OTBpBK0DJC','Salome','Mtwale','sf0021@localhost',0x01,'en','82028831560154180774',NULL,'anonymousUser','2016-03-18 12:51:39',NULL,'sf0021','2016-03-28 12:52:03'),
+ (22,'sf0022','$2a$10$LV2mBS8VNveWYejGFcCh8OT2JoX.4oeEkPV/w5q5EDyY3dCQjUuGW','Mbaraka','Shemueta','sf0022@localhost',0x01,'en','29507620030240498935',NULL,'anonymousUser','2016-03-18 12:51:54',NULL,'sf0022','2016-03-28 12:53:17'),
+ (23,'sf0023','$2a$10$ozkcRMy/Vjj6m.8O3XRg.OwDr3QybLS3qcX8/mZD.q4lzwVOxfPKW','Olivia','Masangya','sf0023@localhost',0x01,'en','73060005748380646738',NULL,'anonymousUser','2016-03-18 12:52:18',NULL,'sf0023','2016-03-28 12:53:58'),
  (24,'sf0024','$2a$10$0YPZsnW/yPzP5mx34t9Gse.x/.bAfB6nTTSBdvhifbYNzjsPQxeeW',NULL,NULL,'sf0024@localhost',0x01,'en','76650231398888348776',NULL,'anonymousUser','2016-03-18 12:52:33',NULL,'admin','2016-03-18 12:54:24'),
  (25,'sf0025','$2a$10$mUYlNHHcw0mpJiioW/p/0Ofx9qAPI6..bRfgSFHvo4ImvcB2CVQ96',NULL,NULL,'sf0025@localhost',0x01,'en','42984014546333704148',NULL,'anonymousUser','2016-03-18 12:52:46',NULL,'admin','2016-03-18 12:54:25'),
  (26,'sf0026','$2a$10$lnV2mPyzb/hLNWtYr7NeBeSe7SErEn4RwK3/Lzr6Oxjqkdj/yOUvS',NULL,NULL,'sf0026@localhost',0x01,'en','30926903415314102347',NULL,'anonymousUser','2016-03-18 12:53:00',NULL,'admin','2016-03-18 12:54:27'),
- (27,'sf0027','$2a$10$F58do6ARzxNnWwXFF3WVa.oH4Cnwfu9GGESf5c64Av7PnAVDDHQfu',NULL,NULL,'sf0027@localhost',0x01,'en','88464590975638599993',NULL,'anonymousUser','2016-03-18 12:53:16',NULL,'admin','2016-03-18 12:54:39'),
- (28,'sf0028','$2a$10$K.A7jrXE..8CIm7SoeVMBepZyR2WdpZeQpPyUOfY429jeBaL.OMju',NULL,NULL,'sf0028@localhost',0x01,'en','71805558970907066489',NULL,'anonymousUser','2016-03-18 12:53:33',NULL,'admin','2016-03-18 12:54:33'),
+ (27,'sf0027','$2a$10$F58do6ARzxNnWwXFF3WVa.oH4Cnwfu9GGESf5c64Av7PnAVDDHQfu','Nobert','Kamba','sf0027@localhost',0x01,'en','88464590975638599993',NULL,'anonymousUser','2016-03-18 12:53:16',NULL,'sf0027','2016-03-28 12:57:46'),
+ (28,'sf0028','$2a$10$K.A7jrXE..8CIm7SoeVMBepZyR2WdpZeQpPyUOfY429jeBaL.OMju','Francis','Hume','sf0028@localhost',0x01,'en','71805558970907066489',NULL,'anonymousUser','2016-03-18 12:53:33',NULL,'sf0028','2016-03-28 12:58:11'),
  (29,'sf0029','$2a$10$L1IXkaggwuSLeeF0fRR9CeMb/Qq6IM7EXLJI/jsdfFSOUQWf4oPHS',NULL,NULL,'sf0029@localhost',0x01,'en','68914493240806760364',NULL,'anonymousUser','2016-03-21 16:19:52',NULL,'admin','2016-03-21 16:20:23');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_user` ENABLE KEYS */;
@@ -2310,7 +2505,7 @@ CREATE TABLE  `watererp`.`proceedings` (
   PRIMARY KEY (`id`),
   KEY `fk_proceedings_applicationtxn_id` (`application_txn_id`),
   CONSTRAINT `fk_proceedings_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`proceedings`
@@ -2318,7 +2513,6 @@ CREATE TABLE  `watererp`.`proceedings` (
 
 /*!40000 ALTER TABLE `proceedings` DISABLE KEYS */;
 LOCK TABLES `proceedings` WRITE;
-INSERT INTO `watererp`.`proceedings` VALUES  (1,1,564,564,54,6554,6554,6554,654,6554,6554,654,6554,6545,654,6545,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `proceedings` ENABLE KEYS */;
 
@@ -2489,7 +2683,7 @@ CREATE TABLE  `watererp`.`request_workflow_history` (
   CONSTRAINT `fk_requestworkflowhistory_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowstagemaster_id` FOREIGN KEY (`workflow_stage_master_id`) REFERENCES `workflow_stage_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`request_workflow_history`
@@ -2497,17 +2691,27 @@ CREATE TABLE  `watererp`.`request_workflow_history` (
 
 /*!40000 ALTER TABLE `request_workflow_history` DISABLE KEYS */;
 LOCK TABLES `request_workflow_history` WRITE;
-INSERT INTO `watererp`.`request_workflow_history` VALUES  (48,1,'2016-03-24 14:34:36','2016-03-24 14:34:36',NULL,'127.0.0.1',NULL,5,5,15,5,1,1,NULL,NULL),
- (49,2,'2016-03-24 14:37:20','2016-03-24 14:37:20','prepare feasibility','127.0.0.1',NULL,5,15,29,3,1,1,NULL,NULL),
- (50,1,'2016-03-24 15:26:10','2016-03-24 15:26:10',NULL,'127.0.0.1',NULL,1,29,15,5,1,1,NULL,NULL),
- (51,1,'2016-03-25 15:36:50','2016-03-25 15:36:50',NULL,'127.0.0.1',NULL,2,5,15,5,1,1,NULL,NULL),
- (52,1,'2016-03-25 15:37:09','2016-03-25 15:37:09',NULL,'127.0.0.1',NULL,3,5,15,3,1,1,NULL,NULL),
- (53,2,'2016-03-25 15:41:09','2016-03-25 15:41:09','asagawg','127.0.0.1',NULL,1,15,29,3,1,1,NULL,NULL),
- (54,2,'2016-03-25 17:51:42','2016-03-25 17:51:42','aAFAFR','127.0.0.1',NULL,2,15,29,3,1,1,NULL,NULL),
- (55,1,'2016-03-26 15:10:32','2016-03-26 15:10:32',NULL,'127.0.0.1',NULL,9,5,15,5,1,1,NULL,NULL),
- (56,2,'2016-03-26 15:16:19','2016-03-26 15:16:19','bossid','127.0.0.1',NULL,9,15,9,3,1,1,NULL,NULL),
- (57,1,'2016-03-26 15:55:09','2016-03-26 15:55:09',NULL,'127.0.0.1',NULL,10,5,15,5,1,1,NULL,NULL),
- (58,2,'2016-03-26 16:04:08','2016-03-26 16:04:08','bosses boss','127.0.0.1',NULL,10,15,7,3,1,1,NULL,NULL);
+INSERT INTO `watererp`.`request_workflow_history` VALUES  (65,1,'2016-03-28 17:51:35','2016-03-28 17:51:35',NULL,'127.0.0.1',NULL,14,5,15,5,1,1,NULL,NULL),
+ (66,2,'2016-03-28 17:53:09','2016-03-28 17:53:09','2nd stage','127.0.0.1',NULL,14,15,29,3,1,1,NULL,NULL),
+ (67,1,'2016-03-28 18:26:19','2016-03-28 18:26:19',NULL,'127.0.0.1',NULL,15,5,15,5,1,1,NULL,NULL),
+ (68,2,'2016-03-28 18:38:02','2016-03-28 18:38:02','2nd stage','127.0.0.1',NULL,15,15,29,3,1,1,NULL,NULL),
+ (69,1,'2016-03-29 10:56:28','2016-03-29 10:56:28',NULL,'127.0.0.1',NULL,18,5,15,3,1,1,NULL,NULL),
+ (70,1,'2016-03-29 11:23:29','2016-03-29 11:23:29',NULL,'127.0.0.1',NULL,19,5,15,3,1,1,NULL,NULL),
+ (71,1,'2016-03-29 11:32:10','2016-03-29 11:32:10',NULL,'127.0.0.1',NULL,20,5,15,3,1,1,NULL,NULL),
+ (72,1,'2016-03-29 11:38:54','2016-03-29 11:38:54',NULL,'127.0.0.1',NULL,21,5,15,3,1,1,NULL,NULL),
+ (73,1,'2016-03-29 11:42:41','2016-03-29 11:42:41',NULL,'127.0.0.1',NULL,22,5,15,3,1,1,NULL,NULL),
+ (74,1,'2016-03-29 11:47:24','2016-03-29 11:47:24',NULL,'127.0.0.1',NULL,23,5,15,3,1,1,NULL,NULL),
+ (75,1,'2016-03-29 11:59:12','2016-03-29 11:59:12',NULL,'127.0.0.1',NULL,24,15,15,3,1,1,NULL,NULL),
+ (76,1,'2016-03-29 12:25:35','2016-03-29 12:25:35',NULL,'127.0.0.1',NULL,25,5,15,3,1,1,NULL,NULL),
+ (77,1,'2016-03-29 12:27:16','2016-03-29 12:27:16',NULL,'127.0.0.1',NULL,26,5,15,3,1,1,NULL,NULL),
+ (78,1,'2016-03-29 12:38:18','2016-03-29 12:38:18',NULL,'127.0.0.1',NULL,27,5,15,3,1,1,NULL,NULL),
+ (79,1,'2016-03-29 12:44:12','2016-03-29 12:44:12',NULL,'127.0.0.1',NULL,29,5,15,3,1,1,NULL,NULL),
+ (80,1,'2016-03-29 12:47:15','2016-03-29 12:47:15',NULL,'127.0.0.1',NULL,30,5,15,3,1,1,NULL,NULL),
+ (81,1,'2016-03-29 12:57:28','2016-03-29 12:57:28',NULL,'127.0.0.1',NULL,31,15,15,3,1,1,NULL,NULL),
+ (82,1,'2016-03-29 13:10:45','2016-03-29 13:10:45',NULL,'127.0.0.1',NULL,32,15,15,3,1,1,NULL,NULL),
+ (83,1,'2016-03-29 14:27:19','2016-03-29 14:27:19',NULL,'127.0.0.1',NULL,33,15,15,3,1,1,NULL,NULL),
+ (84,1,'2016-03-29 14:48:58','2016-03-29 14:48:58',NULL,'127.0.0.1',NULL,34,5,15,3,1,1,NULL,NULL),
+ (85,1,'2016-03-29 14:54:31','2016-03-29 14:54:31',NULL,'127.0.0.1',NULL,35,5,15,3,1,1,NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `request_workflow_history` ENABLE KEYS */;
 
@@ -2938,7 +3142,7 @@ CREATE TABLE  `watererp`.`workflow_master` (
 /*!40000 ALTER TABLE `workflow_master` DISABLE KEYS */;
 LOCK TABLES `workflow_master` WRITE;
 INSERT INTO `watererp`.`workflow_master` VALUES  (1,'REQUISITION',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
- (2,'LEAVE',NULL,'2016-03-26 00:00:00','2016-03-26 00:00:00',2);
+ (2,'LEAVE',0,'2016-03-26 00:00:00','2016-03-26 00:00:00',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `workflow_master` ENABLE KEYS */;
 

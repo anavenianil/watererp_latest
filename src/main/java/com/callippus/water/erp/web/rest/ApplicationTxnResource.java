@@ -3,10 +3,12 @@ package com.callippus.water.erp.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -28,7 +30,6 @@ import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
-import com.callippus.water.erp.repository.RequestWorkflowHistoryRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -65,7 +66,8 @@ public class ApplicationTxnResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ApplicationTxn> createApplicationTxn(@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException {
+    public ResponseEntity<ApplicationTxn> createApplicationTxn(HttpServletRequest request,
+    		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to save ApplicationTxn : {}", applicationTxn);
         if (applicationTxn.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationTxn", "idexists", "A new applicationTxn cannot already have an ID")).body(null);
@@ -80,8 +82,15 @@ public class ApplicationTxnResource {
         ZonedDateTime now = ZonedDateTime.now();
         applicationTxn.setCreatedDate(now);
         applicationTxn.setUpdatedDate(now);
-        ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+
+        applicationTxn.setPhoto("");
+        applicationTxnRepository.save(applicationTxn);
         
+        HashMap<String,String> hm = new HashMap<String,String>();
+        hm.put("photo", "setPhoto");
+        UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
+        
+        ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
       //this is for workflow
         try{
         	workflowService.getUserDetails();
@@ -106,13 +115,15 @@ public class ApplicationTxnResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ApplicationTxn> updateApplicationTxn(@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException {
+    public ResponseEntity<ApplicationTxn> updateApplicationTxn(HttpServletRequest request,
+    		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to update ApplicationTxn : {}", applicationTxn);
         if (applicationTxn.getId() == null) {
-            return createApplicationTxn(applicationTxn);
+            return createApplicationTxn(request, applicationTxn);
         }
         ZonedDateTime now = ZonedDateTime.now();
         applicationTxn.setUpdatedDate(now);
+        
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
