@@ -1,28 +1,19 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
-    <!-- <div class="modal-header">
+    <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
         <h4 class="modal-title" id="myCustDetailsLabel">Create or edit a CustDetails</h4>
-    </div> -->
-    
-    <div class="panel panel-primary">
-		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Customer Details</h3>
-		</div>
-		<div class="list-group">
-	<div class="list-group-item">
-    
+    </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
-        <div class="row">
-        <div class="col-sm-4">
+        <div class="form-group">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="custDetails.id" readonly />
         </div>
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_can">Can</label>
             <input type="text" class="form-control" name="can" id="field_can"
                     ng-model="custDetails.can"
@@ -34,44 +25,40 @@
                 </p>
             </div>
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_divCode">Division Code</label>
+        <div class="form-group">
+            <label class="control-label" for="field_divCode">DivCode</label>
             <input type="text" class="form-control" name="divCode" id="field_divCode"
                     ng-model="custDetails.divCode"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_secCode">Section Code</label>
+        <div class="form-group">
+            <label class="control-label" for="field_secCode">SecCode</label>
             <input type="text" class="form-control" name="secCode" id="field_secCode"
                     ng-model="custDetails.secCode"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_secName">Section Name</label>
+        <div class="form-group">
+            <label class="control-label" for="field_secName">SecName</label>
             <input type="text" class="form-control" name="secName" id="field_secName"
                     ng-model="custDetails.secName"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_metReaderCode">Meter Reader Code</label>
+        <div class="form-group">
+            <label class="control-label" for="field_metReaderCode">MetReaderCode</label>
             <input type="text" class="form-control" name="metReaderCode" id="field_metReaderCode"
                     ng-model="custDetails.metReaderCode"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_connDate">Connection Date</label>
+        <div class="form-group">
+            <label class="control-label" for="field_connDate">ConnDate</label>
             <input id="field_connDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.connDate" is-open="datePickerForConnDate.status.opened"
             />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="datePickerForConnDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_consName">Consumer Name</label>
+        <div class="form-group">
+            <label class="control-label" for="field_consName">ConsName</label>
             <input type="text" class="form-control" name="consName" id="field_consName"
                     ng-model="custDetails.consName"
                     required />
@@ -82,400 +69,212 @@
                 </p>
             </div>
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_houseNo">House No</label>
+        <div class="form-group">
+            <label class="control-label" for="field_houseNo">HouseNo</label>
             <input type="text" class="form-control" name="houseNo" id="field_houseNo"
                     ng-model="custDetails.houseNo"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_address">Address</label>
             <input type="text" class="form-control" name="address" id="field_address"
                     ng-model="custDetails.address"
                      />
         </div>
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_city">City</label>
             <input type="text" class="form-control" name="city" id="field_city"
                     ng-model="custDetails.city"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_pinCode">Pin Code</label>
+        <div class="form-group">
+            <label class="control-label" for="field_pinCode">PinCode</label>
             <input type="text" class="form-control" name="pinCode" id="field_pinCode"
                     ng-model="custDetails.pinCode"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_category">Category</label>
             <input type="text" class="form-control" name="category" id="field_category"
                     ng-model="custDetails.category"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_pipeSize">Pipe Size</label>
+        <div class="form-group">
+            <label class="control-label" for="field_pipeSize">PipeSize</label>
             <input type="text" class="form-control" name="pipeSize" id="field_pipeSize"
                     ng-model="custDetails.pipeSize"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_boardMeter">Board Meter</label>
+        <div class="form-group">
+            <label class="control-label" for="field_boardMeter">BoardMeter</label>
             <input type="text" class="form-control" name="boardMeter" id="field_boardMeter"
                     ng-model="custDetails.boardMeter"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_sewerage">Sewerage</label>
             <input type="text" class="form-control" name="sewerage" id="field_sewerage"
                     ng-model="custDetails.sewerage"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_meterNo">Meter No</label>
+        <div class="form-group">
+            <label class="control-label" for="field_meterNo">MeterNo</label>
             <input type="text" class="form-control" name="meterNo" id="field_meterNo"
                     ng-model="custDetails.meterNo"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_prevBillType">Previous Bill Type</label>
+        <div class="form-group">
+            <label class="control-label" for="field_prevBillType">PrevBillType</label>
             <input type="text" class="form-control" name="prevBillType" id="field_prevBillType"
                     ng-model="custDetails.prevBillType"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_prevBillMonth">Previous Bill Month</label>
+        <div class="form-group">
+            <label class="control-label" for="field_prevBillMonth">PrevBillMonth</label>
             <input type="text" class="form-control" name="prevBillMonth" id="field_prevBillMonth"
                     ng-model="custDetails.prevBillMonth"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_prevAvgKl">Previous Avg Kl</label>
+        <div class="form-group">
+            <label class="control-label" for="field_prevAvgKl">PrevAvgKl</label>
             <input type="text" class="form-control" name="prevAvgKl" id="field_prevAvgKl"
                     ng-model="custDetails.prevAvgKl"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_metReadingDt">Meter Reading Date</label>
+        <div class="form-group">
+            <label class="control-label" for="field_metReadingDt">MetReadingDt</label>
             <input id="field_metReadingDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.metReadingDt" is-open="datePickerForMetReadingDt.status.opened"
             />
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="datePickerForMetReadingDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_prevReading">Previous Reading</label>
+        <div class="form-group">
+            <label class="control-label" for="field_prevReading">PrevReading</label>
             <input type="text" class="form-control" name="prevReading" id="field_prevReading"
                     ng-model="custDetails.prevReading"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_metReadingMo">Meter Reading</label>
+        <div class="form-group">
+            <label class="control-label" for="field_metReadingMo">MetReadingMo</label>
             <input type="text" class="form-control" name="metReadingMo" id="field_metReadingMo"
                     ng-model="custDetails.metReadingMo"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_metAvgKl">Meter Average Kl</label>
+        <div class="form-group">
+            <label class="control-label" for="field_metAvgKl">MetAvgKl</label>
             <input type="text" class="form-control" name="metAvgKl" id="field_metAvgKl"
                     ng-model="custDetails.metAvgKl"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_arrears">Arrears</label>
             <input type="text" class="form-control" name="arrears" id="field_arrears"
                     ng-model="custDetails.arrears"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_reversalAmt">Reversal Amt</label>
+        <div class="form-group">
+            <label class="control-label" for="field_reversalAmt">ReversalAmt</label>
             <input type="text" class="form-control" name="reversalAmt" id="field_reversalAmt"
                     ng-model="custDetails.reversalAmt"
                      />
         </div>
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_installment">Installment</label>
             <input type="text" class="form-control" name="installment" id="field_installment"
                     ng-model="custDetails.installment"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_otherCharges">Other Charges</label>
+        <div class="form-group">
+            <label class="control-label" for="field_otherCharges">OtherCharges</label>
             <input type="text" class="form-control" name="otherCharges" id="field_otherCharges"
                     ng-model="custDetails.otherCharges"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_surCharge">Sur Charge</label>
-            <input type="text" class="form-control" name="surCharge" id="field_surCharge"
-                    ng-model="custDetails.surCharge"
+        <div class="form-group">
+            <label class="control-label" for="field_surcharge">Surcharge</label>
+            <input type="text" class="form-control" name="surcharge" id="field_surcharge"
+                    ng-model="custDetails.surcharge"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_hrsSurCharge">Hrs Sur Charge</label>
-            <input type="text" class="form-control" name="hrsSurCharge" id="field_hrsSurCharge"
-                    ng-model="custDetails.hrsSurCharge"
+        <div class="form-group">
+            <label class="control-label" for="field_hrsSurcharge">HrsSurcharge</label>
+            <input type="text" class="form-control" name="hrsSurcharge" id="field_hrsSurcharge"
+                    ng-model="custDetails.hrsSurcharge"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_resUnits">Res Units</label>
+        <div class="form-group">
+            <label class="control-label" for="field_resUnits">ResUnits</label>
             <input type="text" class="form-control" name="resUnits" id="field_resUnits"
                     ng-model="custDetails.resUnits"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_metCostInstallment">Cost Of Meter Installment</label>
+        <div class="form-group">
+            <label class="control-label" for="field_metCostInstallment">MetCostInstallment</label>
             <input type="text" class="form-control" name="metCostInstallment" id="field_metCostInstallment"
                     ng-model="custDetails.metCostInstallment"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_intOnArrears">Int On Arrears</label>
+        <div class="form-group">
+            <label class="control-label" for="field_intOnArrears">IntOnArrears</label>
             <input type="text" class="form-control" name="intOnArrears" id="field_intOnArrears"
                     ng-model="custDetails.intOnArrears"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_lastPymtDt">Last Paid Date</label>
+        <div class="form-group">
+            <label class="control-label" for="field_lastPymtDt">LastPymtDt</label>
             <input type="text" class="form-control" name="lastPymtDt" id="field_lastPymtDt"
                     ng-model="custDetails.lastPymtDt"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_lastPymtAmt">Last Payment Amt</label>
+        <div class="form-group">
+            <label class="control-label" for="field_lastPymtAmt">LastPymtAmt</label>
             <input type="number" class="form-control" name="lastPymtAmt" id="field_lastPymtAmt"
                     ng-model="custDetails.lastPymtAmt"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_mobileNo">Mobile No</label>
+        <div class="form-group">
+            <label class="control-label" for="field_mobileNo">MobileNo</label>
             <input type="text" class="form-control" name="mobileNo" id="field_mobileNo"
                     ng-model="custDetails.mobileNo"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_billNumber">Bill Number</label>
-            <input type="text" class="form-control" name="billNumber" id="field_billNumber"
-                    ng-model="custDetails.billNumber"
+        <div class="form-group">
+            <label class="control-label" for="field_ccFlag">CcFlag</label>
+            <input type="text" class="form-control" name="ccFlag" id="field_ccFlag"
+                    ng-model="custDetails.ccFlag"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_billDate">Bill Date</label>
-            <input id="field_billDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.billDate" is-open="datePickerForBillDate.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForBillDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_billTime">Bill Time</label>
-            <input type="text" class="form-control" name="billTime" id="field_billTime"
-                    ng-model="custDetails.billTime"
+        <div class="form-group">
+            <label class="control-label" for="field_cpFlag">CpFlag</label>
+            <input type="text" class="form-control" name="cpFlag" id="field_cpFlag"
+                    ng-model="custDetails.cpFlag"
                      />
         </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_meterMake">Meter Make</label>
-            <input type="text" class="form-control" name="meterMake" id="field_meterMake"
-                    ng-model="custDetails.meterMake"
+        <div class="form-group">
+            <label class="control-label" for="field_noticeFlag">NoticeFlag</label>
+            <input type="text" class="form-control" name="noticeFlag" id="field_noticeFlag"
+                    ng-model="custDetails.noticeFlag"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_currentBillType">Current Bill Type</label>
-            <input type="text" class="form-control" name="currentBillType" id="field_currentBillType"
-                    ng-model="custDetails.currentBillType"
+        <div class="form-group">
+            <label class="control-label" for="field_drFlag">DrFlag</label>
+            <input type="text" class="form-control" name="drFlag" id="field_drFlag"
+                    ng-model="custDetails.drFlag"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_fromMonth">From Month</label>
-            <input type="text" class="form-control" name="fromMonth" id="field_fromMonth"
-                    ng-model="custDetails.fromMonth"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_toMonth">To Month</label>
-            <input type="text" class="form-control" name="toMonth" id="field_toMonth"
-                    ng-model="custDetails.toMonth"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_meterFixDate">Meter Fix Date</label>
-            <input type="text" class="form-control" name="meterFixDate" id="field_meterFixDate"
-                    ng-model="custDetails.meterFixDate"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_initialReading">Initial Reading</label>
-            <input type="text" class="form-control" name="initialReading" id="field_initialReading"
-                    ng-model="custDetails.initialReading"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_presentReading">Present Reading</label>
-            <input type="text" class="form-control" name="presentReading" id="field_presentReading"
-                    ng-model="custDetails.presentReading"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_units">Units</label>
-            <input type="text" class="form-control" name="units" id="field_units"
-                    ng-model="custDetails.units"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_waterCess">Water Cess</label>
-            <input type="text" class="form-control" name="waterCess" id="field_waterCess"
-                    ng-model="custDetails.waterCess"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_sewerageCess">Sewerage Cess</label>
-            <input type="text" class="form-control" name="sewerageCess" id="field_sewerageCess"
-                    ng-model="custDetails.sewerageCess"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_serviceCharge">Service Charge</label>
-            <input type="text" class="form-control" name="serviceCharge" id="field_serviceCharge"
-                    ng-model="custDetails.serviceCharge"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_meterServiceCharge">Meter Service Charge</label>
-            <input type="text" class="form-control" name="meterServiceCharge" id="field_meterServiceCharge"
-                    ng-model="custDetails.meterServiceCharge"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_totalAmount">Total Amount</label>
-            <input type="number" class="form-control" name="totalAmount" id="field_totalAmount"
-                    ng-model="custDetails.totalAmount"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_netPayableAmount">Net Payable Amount</label>
-            <input type="text" class="form-control" name="netPayableAmount" id="field_netPayableAmount"
-                    ng-model="custDetails.netPayableAmount"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_telephoneNo">Telephone No</label>
-            <input type="text" class="form-control" name="telephoneNo" id="field_telephoneNo"
-                    ng-model="custDetails.telephoneNo"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_meterStatus">Meter Status</label>
-            <input type="text" class="form-control" name="meterStatus" id="field_meterStatus"
-                    ng-model="custDetails.meterStatus"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_mcMetReaderCode">Mc Meter Reader Code</label>
-            <input type="text" class="form-control" name="mcMetReaderCode" id="field_mcMetReaderCode"
-                    ng-model="custDetails.mcMetReaderCode"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_billFlag">Bill Flag</label>
-            <input type="text" class="form-control" name="billFlag" id="field_billFlag"
-                    ng-model="custDetails.billFlag"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_docket">Docket</label>
-            <input type="text" class="form-control" name="docket" id="field_docket"
-                    ng-model="custDetails.docket"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_ocFlag">OcFlag</label>
-            <input type="text" class="form-control" name="ocFlag" id="field_ocFlag"
-                    ng-model="custDetails.ocFlag"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_ocDate">OcDate</label>
-            <input id="field_ocDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.ocDate" is-open="datePickerForOcDate.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForOcDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
+        <div class="form-group">
             <label class="control-label" for="field_lat">Lat</label>
             <input type="text" class="form-control" name="lat" id="field_lat"
                     ng-model="custDetails.lat"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_longI">LongI</label>
-            <input type="text" class="form-control" name="longI" id="field_longI"
-                    ng-model="custDetails.longI"
+        <div class="form-group">
+            <label class="control-label" for="field_longi">Longi</label>
+            <input type="text" class="form-control" name="longi" id="field_longi"
+                    ng-model="custDetails.longi"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_noMeterFlag">NoMeterFlag</label>
-            <input type="text" class="form-control" name="noMeterFlag" id="field_noMeterFlag"
-                    ng-model="custDetails.noMeterFlag"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_noMeterAckDt">NoMeterAckDt</label>
-            <input type="text" class="form-control" name="noMeterAckDt" id="field_noMeterAckDt"
-                    ng-model="custDetails.noMeterAckDt"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_noMeterAmt">NoMeterAmt</label>
-            <input type="number" class="form-control" name="noMeterAmt" id="field_noMeterAmt"
-                    ng-model="custDetails.noMeterAmt"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_meterTampAmt">MeterTampAmt</label>
-            <input type="number" class="form-control" name="meterTampAmt" id="field_meterTampAmt"
-                    ng-model="custDetails.meterTampAmt"
-                     />
-        </div>
-        </div>
-        
 
     </div>
     <div class="modal-footer">
@@ -486,5 +285,4 @@
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>
     </div>
-    </div></div></div>
 </form>

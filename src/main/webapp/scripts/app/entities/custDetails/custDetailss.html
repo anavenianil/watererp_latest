@@ -1,21 +1,18 @@
 <div>
     <h2>CustDetailss</h2>
     <jh-alert></jh-alert>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="custDetails.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new CustDetails
-                    </span>
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="custDetails.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new CustDetails</span>
                 </button>
             </div>
         </div>
     </div>
-    <br/>
+
     <div class="table-responsive">
-        <table class="jh-table table table-striped">
+        <table class="table table-striped">
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -46,44 +43,20 @@
                     <th jh-sort-by="reversalAmt"><span>ReversalAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="installment"><span>Installment</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="otherCharges"><span>OtherCharges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="surCharge"><span>SurCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="hrsSurCharge"><span>HrsSurCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="surcharge"><span>Surcharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hrsSurcharge"><span>HrsSurcharge</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="resUnits"><span>ResUnits</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="metCostInstallment"><span>MetCostInstallment</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="intOnArrears"><span>IntOnArrears</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastPymtDt"><span>LastPymtDt</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastPymtAmt"><span>LastPymtAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="mobileNo"><span>MobileNo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="billNumber"><span>BillNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="billDate"><span>BillDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="billTime"><span>BillTime</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterMake"><span>MeterMake</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="currentBillType"><span>CurrentBillType</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fromMonth"><span>FromMonth</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="toMonth"><span>ToMonth</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterFixDate"><span>MeterFixDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="initialReading"><span>InitialReading</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="presentReading"><span>PresentReading</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="units"><span>Units</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="waterCess"><span>WaterCess</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sewerageCess"><span>SewerageCess</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="serviceCharge"><span>ServiceCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterServiceCharge"><span>MeterServiceCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalAmount"><span>TotalAmount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="netPayableAmount"><span>NetPayableAmount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="telephoneNo"><span>TelephoneNo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterStatus"><span>MeterStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="mcMetReaderCode"><span>McMetReaderCode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="billFlag"><span>BillFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="docket"><span>Docket</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ocFlag"><span>OcFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ocDate"><span>OcDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ccFlag"><span>CcFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cpFlag"><span>CpFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noticeFlag"><span>NoticeFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="drFlag"><span>DrFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lat"><span>Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="longI"><span>LongI</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="noMeterFlag"><span>NoMeterFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="noMeterAckDt"><span>NoMeterAckDt</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="noMeterAmt"><span>NoMeterAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterTampAmt"><span>MeterTampAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longi"><span>Longi</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -117,65 +90,36 @@
                     <td>{{custDetails.reversalAmt}}</td>
                     <td>{{custDetails.installment}}</td>
                     <td>{{custDetails.otherCharges}}</td>
-                    <td>{{custDetails.surCharge}}</td>
-                    <td>{{custDetails.hrsSurCharge}}</td>
+                    <td>{{custDetails.surcharge}}</td>
+                    <td>{{custDetails.hrsSurcharge}}</td>
                     <td>{{custDetails.resUnits}}</td>
                     <td>{{custDetails.metCostInstallment}}</td>
                     <td>{{custDetails.intOnArrears}}</td>
                     <td>{{custDetails.lastPymtDt}}</td>
                     <td>{{custDetails.lastPymtAmt}}</td>
                     <td>{{custDetails.mobileNo}}</td>
-                    <td>{{custDetails.billNumber}}</td>
-                        <td>{{custDetails.billDate | date:'mediumDate'}}</td>
-                    <td>{{custDetails.billTime}}</td>
-                    <td>{{custDetails.meterMake}}</td>
-                    <td>{{custDetails.currentBillType}}</td>
-                    <td>{{custDetails.fromMonth}}</td>
-                    <td>{{custDetails.toMonth}}</td>
-                    <td>{{custDetails.meterFixDate}}</td>
-                    <td>{{custDetails.initialReading}}</td>
-                    <td>{{custDetails.presentReading}}</td>
-                    <td>{{custDetails.units}}</td>
-                    <td>{{custDetails.waterCess}}</td>
-                    <td>{{custDetails.sewerageCess}}</td>
-                    <td>{{custDetails.serviceCharge}}</td>
-                    <td>{{custDetails.meterServiceCharge}}</td>
-                    <td>{{custDetails.totalAmount}}</td>
-                    <td>{{custDetails.netPayableAmount}}</td>
-                    <td>{{custDetails.telephoneNo}}</td>
-                    <td>{{custDetails.meterStatus}}</td>
-                    <td>{{custDetails.mcMetReaderCode}}</td>
-                    <td>{{custDetails.billFlag}}</td>
-                    <td>{{custDetails.docket}}</td>
-                    <td>{{custDetails.ocFlag}}</td>
-                        <td>{{custDetails.ocDate | date:'mediumDate'}}</td>
+                    <td>{{custDetails.ccFlag}}</td>
+                    <td>{{custDetails.cpFlag}}</td>
+                    <td>{{custDetails.noticeFlag}}</td>
+                    <td>{{custDetails.drFlag}}</td>
                     <td>{{custDetails.lat}}</td>
-                    <td>{{custDetails.longI}}</td>
-                    <td>{{custDetails.noMeterFlag}}</td>
-                    <td>{{custDetails.noMeterAckDt}}</td>
-                    <td>{{custDetails.noMeterAmt}}</td>
-                    <td>{{custDetails.meterTampAmt}}</td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="custDetails.detail({id:custDetails.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="custDetails.edit({id:custDetails.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="custDetails.delete({id:custDetails.id})"
-                                    class="btn btn-danger btn-sm">                                    
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </div>
+                    <td>{{custDetails.longi}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="custDetails.detail({id:custDetails.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="custDetails.edit({id:custDetails.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="custDetails.delete({id:custDetails.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
                     </td>
                 </tr>
             </tbody>

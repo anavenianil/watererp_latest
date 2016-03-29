@@ -52,7 +52,7 @@ public class BillingService {
 
     enum Status {SUCCESS, FAILURE};
     
-    enum CustValidation {ALREADY_BILLED, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS};
+    enum CustValidation {ALREADY_BILLED, INVALID_METER_READING, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS};
     
     List<String> categories = Arrays.asList("D", "DS", "N");
     
@@ -69,22 +69,21 @@ public class BillingService {
     
     public void process_bill(BillDetails bill_details)
     {
-    	int months;
     	float avgKL;
     	
     	CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());    	
-    	CustValidation retVal =  getCustInfo(customer);
+    	CustValidation retVal =  getCustInfo(customer, bill_details);
     	
     	if(retVal != CustValidation.SUCCESS){
     		//Unable to process customer
-        	log.debug("Unable to process customer:" + customer.getId());
+        	log.debug("Unable to process customer:" + customer.getId() +", getCustInfo returned::" + retVal.name());
         	return;
     	}
     	
     	try
     	{	
-	    	Date from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).parse(customer.getFromMonth()+"01");
-	    	Date to = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).parse(customer.getToMonth()+"01");
+	    	Date from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).parse(bill_details.getFrom_month()+"01");
+	    	Date to = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).parse(bill_details.getTo_month()+"01");
 	    	
 	    	DateTime jFrom = new DateTime(from);
 	    	DateTime jTo = new DateTime(to);
@@ -95,19 +94,21 @@ public class BillingService {
 	    	log.debug("Customer Info:" + customer.toString());
 	    	log.debug("Months:" + monthsDiff);
 	    	
-	    	if(customer.getPrevBillType().equals("L") && customer.getCurrentBillType().equals("M"))
+	    	if(customer.getPrevBillType().equals("L") && bill_details.getCurrent_bill_type().equals("M")){
 	    		avgKL = (Integer.parseInt(bill_details.getPresent_reading()) - Integer.parseInt(bill_details.getInitial_reading()))/1000;
+	    		log.debug("avgKL:" + avgKL);
+	    	}
 	    		
     	}
     	catch(Exception e)
     	{
-    		log.debug("Invalid From or To Date:" + customer.getFromMonth() +"::::" + customer.getToMonth());
+    		log.debug("Invalid From or To Date:" + bill_details.getFrom_month() +"::::" + bill_details.getTo_month());
     		return;
     	}
     	
     }
     
-    public CustValidation getCustInfo(CustDetails customer){
+    public CustValidation getCustInfo(CustDetails customer, BillDetails bill_details){
     	
     	if(Float.parseFloat(customer.getPipeSize()) < 0.5f)
     		return CustValidation.INVALID_PIPESIZE;
@@ -120,6 +121,9 @@ public class BillingService {
     	
     	if(!categories.contains(customer.getCategory().trim()))
     		return CustValidation.INVALID_CATEGORY;
+    	
+    	if(Integer.parseInt(bill_details.getPresent_reading()) < Integer.parseInt(bill_details.getInitial_reading()))
+    			return CustValidation.INVALID_METER_READING;
     	
     	SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm");
     	Calendar cal = Calendar.getInstance();

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('custDetails', {
@@ -43,38 +43,6 @@ angular.module('watererpApp')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'CustDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/custDetails/custDetails-dialog.html',
-                        controller: 'CustDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            .state('custDetails.edit', {
-                parent: 'custDetails',
-                url: '/edit/:id',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'CustDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/custDetails/custDetails-dialog.html',
-                        controller: 'CustDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            /*.state('custDetails.new', {
-                parent: 'custDetails',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -111,44 +79,20 @@ angular.module('watererpApp')
                                     reversalAmt: null,
                                     installment: null,
                                     otherCharges: null,
-                                    surCharge: null,
-                                    hrsSurCharge: null,
+                                    surcharge: null,
+                                    hrsSurcharge: null,
                                     resUnits: null,
                                     metCostInstallment: null,
                                     intOnArrears: null,
                                     lastPymtDt: null,
                                     lastPymtAmt: null,
                                     mobileNo: null,
-                                    billNumber: null,
-                                    billDate: null,
-                                    billTime: null,
-                                    meterMake: null,
-                                    currentBillType: null,
-                                    fromMonth: null,
-                                    toMonth: null,
-                                    meterFixDate: null,
-                                    initialReading: null,
-                                    presentReading: null,
-                                    units: null,
-                                    waterCess: null,
-                                    sewerageCess: null,
-                                    serviceCharge: null,
-                                    meterServiceCharge: null,
-                                    totalAmount: null,
-                                    netPayableAmount: null,
-                                    telephoneNo: null,
-                                    meterStatus: null,
-                                    mcMetReaderCode: null,
-                                    billFlag: null,
-                                    docket: null,
-                                    ocFlag: null,
-                                    ocDate: null,
+                                    ccFlag: null,
+                                    cpFlag: null,
+                                    noticeFlag: null,
+                                    drFlag: null,
                                     lat: null,
-                                    longI: null,
-                                    noMeterFlag: null,
-                                    noMeterAckDt: null,
-                                    noMeterAmt: null,
-                                    meterTampAmt: null,
+                                    longi: null,
                                     id: null
                                 };
                             }
@@ -182,7 +126,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })*/
+            })
             .state('custDetails.delete', {
                 parent: 'custDetails',
                 url: '/{id}/delete',

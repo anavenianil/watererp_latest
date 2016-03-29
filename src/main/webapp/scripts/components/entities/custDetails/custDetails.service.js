@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .factory('CustDetails', function ($resource, DateUtils) {
         return $resource('api/custDetailss/:id', {}, {
             'query': { method: 'GET', isArray: true},
@@ -10,8 +10,6 @@ angular.module('watererpApp')
                     data = angular.fromJson(data);
                     data.connDate = DateUtils.convertLocaleDateFromServer(data.connDate);
                     data.metReadingDt = DateUtils.convertLocaleDateFromServer(data.metReadingDt);
-                    data.billDate = DateUtils.convertLocaleDateFromServer(data.billDate);
-                    data.ocDate = DateUtils.convertLocaleDateFromServer(data.ocDate);
                     return data;
                 }
             },
@@ -20,8 +18,6 @@ angular.module('watererpApp')
                 transformRequest: function (data) {
                     data.connDate = DateUtils.convertLocaleDateToServer(data.connDate);
                     data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
-                    data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
-                    data.ocDate = DateUtils.convertLocaleDateToServer(data.ocDate);
                     return angular.toJson(data);
                 }
             },
@@ -30,8 +26,6 @@ angular.module('watererpApp')
                 transformRequest: function (data) {
                     data.connDate = DateUtils.convertLocaleDateToServer(data.connDate);
                     data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
-                    data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
-                    data.ocDate = DateUtils.convertLocaleDateToServer(data.ocDate);
                     return angular.toJson(data);
                 }
             }

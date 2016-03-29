@@ -24,138 +24,48 @@
             <column name="can" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
             <column name="div_code" type="varchar(255)"/>
-            
             <column name="sec_code" type="varchar(255)"/>
-            
             <column name="sec_name" type="varchar(255)"/>
-            
             <column name="met_reader_code" type="varchar(255)"/>
-            
             <column name="conn_date" type="date"/>
-            
             <column name="cons_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
             <column name="house_no" type="varchar(255)"/>
-            
             <column name="address" type="varchar(255)"/>
-            
             <column name="city" type="varchar(255)"/>
-            
             <column name="pin_code" type="varchar(255)"/>
-            
             <column name="category" type="varchar(255)"/>
-            
             <column name="pipe_size" type="varchar(255)"/>
-            
             <column name="board_meter" type="varchar(255)"/>
-            
             <column name="sewerage" type="varchar(255)"/>
-            
             <column name="meter_no" type="varchar(255)"/>
-            
             <column name="prev_bill_type" type="varchar(255)"/>
-            
             <column name="prev_bill_month" type="varchar(255)"/>
-            
             <column name="prev_avg_kl" type="varchar(255)"/>
-            
             <column name="met_reading_dt" type="date"/>
-            
             <column name="prev_reading" type="varchar(255)"/>
-            
             <column name="met_reading_mo" type="varchar(255)"/>
-            
             <column name="met_avg_kl" type="varchar(255)"/>
-            
             <column name="arrears" type="varchar(255)"/>
-            
             <column name="reversal_amt" type="varchar(255)"/>
-            
             <column name="installment" type="varchar(255)"/>
-            
             <column name="other_charges" type="varchar(255)"/>
-            
-            <column name="sur_charge" type="varchar(255)"/>
-            
-            <column name="hrs_sur_charge" type="varchar(255)"/>
-            
+            <column name="surcharge" type="varchar(255)"/>
+            <column name="hrs_surcharge" type="varchar(255)"/>
             <column name="res_units" type="varchar(255)"/>
-            
             <column name="met_cost_installment" type="varchar(255)"/>
-            
             <column name="int_on_arrears" type="varchar(255)"/>
-            
             <column name="last_pymt_dt" type="varchar(255)"/>
-            
             <column name="last_pymt_amt" type="${floatType}"/>
-            
             <column name="mobile_no" type="varchar(255)"/>
-            
-            <column name="bill_number" type="varchar(255)"/>
-            
-            <column name="bill_date" type="date"/>
-            
-            <column name="bill_time" type="varchar(255)"/>
-            
-            <column name="meter_make" type="varchar(255)"/>
-            
-            <column name="current_bill_type" type="varchar(255)"/>
-            
-            <column name="from_month" type="varchar(255)"/>
-            
-            <column name="to_month" type="varchar(255)"/>
-            
-            <column name="meter_fix_date" type="varchar(255)"/>
-            
-            <column name="initial_reading" type="varchar(255)"/>
-            
-            <column name="present_reading" type="varchar(255)"/>
-            
-            <column name="units" type="varchar(255)"/>
-            
-            <column name="water_cess" type="varchar(255)"/>
-            
-            <column name="sewerage_cess" type="varchar(255)"/>
-            
-            <column name="service_charge" type="varchar(255)"/>
-            
-            <column name="meter_service_charge" type="varchar(255)"/>
-            
-            <column name="total_amount" type="${floatType}"/>
-            
-            <column name="net_payable_amount" type="varchar(255)"/>
-            
-            <column name="telephone_no" type="varchar(255)"/>
-            
-            <column name="meter_status" type="varchar(255)"/>
-            
-            <column name="mc_met_reader_code" type="varchar(255)"/>
-            
-            <column name="bill_flag" type="varchar(255)"/>
-            
-            <column name="docket" type="varchar(255)"/>
-            
-            <column name="oc_flag" type="varchar(255)"/>
-            
-            <column name="oc_date" type="date"/>
-            
+            <column name="cc_flag" type="varchar(255)"/>
+            <column name="cp_flag" type="varchar(255)"/>
+            <column name="notice_flag" type="varchar(255)"/>
+            <column name="dr_flag" type="varchar(255)"/>
             <column name="lat" type="varchar(255)"/>
-            
-            <column name="long_i" type="varchar(255)"/>
-            
-            <column name="no_meter_flag" type="varchar(255)"/>
-            
-            <column name="no_meter_ack_dt" type="varchar(255)"/>
-            
-            <column name="no_meter_amt" type="${floatType}"/>
-            
-            <column name="meter_tamp_amt" type="${floatType}"/>
-            
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+            <column name="longi" type="varchar(255)"/>
         </createTable>
         
     </changeSet>

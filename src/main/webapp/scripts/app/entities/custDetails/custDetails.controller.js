@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks) {
 
         $scope.custDetailss = [];
@@ -61,44 +61,20 @@ angular.module('watererpApp')
                 reversalAmt: null,
                 installment: null,
                 otherCharges: null,
-                surCharge: null,
-                hrsSurCharge: null,
+                surcharge: null,
+                hrsSurcharge: null,
                 resUnits: null,
                 metCostInstallment: null,
                 intOnArrears: null,
                 lastPymtDt: null,
                 lastPymtAmt: null,
                 mobileNo: null,
-                billNumber: null,
-                billDate: null,
-                billTime: null,
-                meterMake: null,
-                currentBillType: null,
-                fromMonth: null,
-                toMonth: null,
-                meterFixDate: null,
-                initialReading: null,
-                presentReading: null,
-                units: null,
-                waterCess: null,
-                sewerageCess: null,
-                serviceCharge: null,
-                meterServiceCharge: null,
-                totalAmount: null,
-                netPayableAmount: null,
-                telephoneNo: null,
-                meterStatus: null,
-                mcMetReaderCode: null,
-                billFlag: null,
-                docket: null,
-                ocFlag: null,
-                ocDate: null,
+                ccFlag: null,
+                cpFlag: null,
+                noticeFlag: null,
+                drFlag: null,
                 lat: null,
-                longI: null,
-                noMeterFlag: null,
-                noMeterAckDt: null,
-                noMeterAmt: null,
-                meterTampAmt: null,
+                longi: null,
                 id: null
             };
         };
