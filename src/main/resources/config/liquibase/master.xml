@@ -71,5 +71,7 @@
     <include file="classpath:config/liquibase/changelog/20160315055126_added_entity_Terminal.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160315055926_added_entity_TerminalLog.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160315060107_added_entity_Version.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160329064157_added_entity_ComplaintTypeMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

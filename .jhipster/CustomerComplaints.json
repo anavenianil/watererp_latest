@@ -1,0 +1,44 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "applicationTxn",
+            "otherEntityName": "applicationTxn",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "complaintTypeMaster",
+            "otherEntityName": "complaintTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "complaintType"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "relevantDoc",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "complaintBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "complaintDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20160329064343",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}
