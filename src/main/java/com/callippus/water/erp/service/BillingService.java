@@ -89,7 +89,7 @@ public class BillingService {
 	    	DateTime jFrom = new DateTime(from);
 	    	DateTime jTo = new DateTime(to);
 	    	
-	    	Months d = Months.monthsBetween( jTo, jFrom);
+	    	Months d = Months.monthsBetween( jFrom, jTo);
 	    	int monthsDiff = d.getMonths() + 1;
 	    	
 	    	log.debug("Customer Info:" + customer.toString());
@@ -130,8 +130,8 @@ public class BillingService {
     	Calendar cal = Calendar.getInstance();
     	cal.add(Calendar.MONTH, -1);
     	
-    	if(cal.get(Calendar.MONTH) != Integer.parseInt(customer.getPrevBillMonth().substring(4, 5))
-    			|| cal.get(Calendar.YEAR) != Integer.parseInt(customer.getPrevBillMonth().substring(1, 4)))    		
+    	if(cal.get(Calendar.MONTH) == Integer.parseInt(customer.getPrevBillMonth().substring(4, 5))
+    			&& cal.get(Calendar.YEAR) == Integer.parseInt(customer.getPrevBillMonth().substring(0, 4)))   		
     		return CustValidation.ALREADY_BILLED;
     	
     	
