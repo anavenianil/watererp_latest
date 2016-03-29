@@ -71,6 +71,7 @@ public class BillingService {
     {
     	float avgKL;
     	
+    	log.debug("Process customer with CAN:" + bill_details.getCan());
     	CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());    	
     	CustValidation retVal =  getCustInfo(customer, bill_details);
     	
