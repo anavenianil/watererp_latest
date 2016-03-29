@@ -2,6 +2,7 @@ package com.callippus.water.erp.service;
 
 import com.callippus.water.erp.domain.Authority;
 import com.callippus.water.erp.domain.BillDetails;
+import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.PersistentToken;
 import com.callippus.water.erp.domain.User;
@@ -49,10 +50,13 @@ public class BillingService {
     
     @Inject
     private CustDetailsRepository custDetailsRepository;
+        
+    @Inject
+    private BillFullDetails bfd;
 
     enum Status {SUCCESS, FAILURE};
     
-    enum CustValidation {ALREADY_BILLED, INVALID_METER_READING, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS};
+    enum CustValidation {ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS};
     
     List<String> categories = Arrays.asList("D", "DS", "N");
     
@@ -69,7 +73,11 @@ public class BillingService {
     
     public void process_bill(BillDetails bill_details)
     {
-    	float avgKL;
+    	float avgKL = 0.0f;
+    	float factor = 0.0f;
+    	float prevAvgKL = 0.0f;
+    	long units = 0;
+    	String monthUpto;
     	
     	log.debug("Process customer with CAN:" + bill_details.getCan());
     	CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());    	
@@ -95,10 +103,47 @@ public class BillingService {
 	    	log.debug("Customer Info:" + customer.toString());
 	    	log.debug("Months:" + monthsDiff);
 	    	
-	    	if(customer.getPrevBillType().equals("L") && bill_details.getCurrent_bill_type().equals("M")){
-	    		avgKL = (Integer.parseInt(bill_details.getPresent_reading()) - Integer.parseInt(bill_details.getInitial_reading()))/1000;
-	    		log.debug("avgKL:" + avgKL);
+	    	if(!customer.getPrevReading().equals("0") && monthsDiff != 0)
+	    		avgKL = (Integer.parseInt(bill_details.getPresent_reading()) - Integer.parseInt(bill_details.getInitial_reading()))/monthsDiff;
+	    	
+	    	prevAvgKL = (Float.parseFloat(customer.getPrevAvgKl()) < 1.0f ? 1.0f:Float.parseFloat(customer.getPrevAvgKl()));
+	    	
+	    	factor = avgKL/prevAvgKL;
+	    	
+	    	if (factor > 4.0f || factor < 0.25f) {
+	    		//Unable to process customer
+	        	log.debug("Meter reading for:" + customer.getId() +": is ::" + bill_details.getPresent_reading()+". This is too high or too low.");
+	        	return;
 	    	}
+	    	
+	    	if(!bill_details.getCurrent_bill_type().equals("M"))
+	    		bfd.setPresentReading(customer.getPrevReading());
+	    		    	
+	    	//Previously Metered or Locked and currently Metered
+	    	if((customer.getPrevBillType().equals("L") || customer.getPrevBillType().equals("M") ) && bill_details.getCurrent_bill_type().equals("M")){
+	    		units = Long.parseLong(bill_details.getPresent_reading()) - Long.parseLong(bill_details.getInitial_reading());
+	    		log.debug("units:" + units);
+	    	}
+	    	
+	    	monthUpto = getPrevMonthStart();
+	    	
+//	        d->hassewer = (strcmp(c->sewerage, "T") == 0 ? TRUE : FALSE);
+//	        d->pipesize = atof(c->pipesize);
+//	        d->resunits = atoi(c->resUnits);
+//	        syslog(LOG_INFO, "Resunits=%d\n", d->resunits);
+//	        d->agreedqty = 0;
+//	        d->kl = 31;			// Will be calculated in getCurrReading.
+//	        d->water = 0;
+//	        d->sewerage = 0;
+//	        d->surcharge = 0;
+//	        d->totalcess = 0;
+//	        strcpy(d->category, c->category);
+//	        d->from = 0;
+//	        d->upto = 0;
+//	        d->mths = 0;
+//	        d->avgkl = atof(c->prevAvgKL);
+//	        d->errCode = '0';
+//	        d->svrStatus = '0';
 	    		
     	}
     	catch(Exception e)
@@ -107,6 +152,20 @@ public class BillingService {
     		return;
     	}
     	
+    }
+    
+    public String getPrevMonthStart()
+    {
+    	Calendar aCalendar = Calendar.getInstance();
+    	// add -1 month to current month
+    	aCalendar.add(Calendar.MONTH, -1);
+    	// set DATE to 1, so first date of previous month
+    	aCalendar.set(Calendar.DATE, 1);
+
+    	java.util.Date date = aCalendar.getTime();
+    	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+    	
+    	return formatter.format(date);
     }
     
     public CustValidation getCustInfo(CustDetails customer, BillDetails bill_details){
@@ -134,7 +193,18 @@ public class BillingService {
     			&& cal.get(Calendar.YEAR) == Integer.parseInt(customer.getPrevBillMonth().substring(0, 4)))   		
     		return CustValidation.ALREADY_BILLED;
     	
+    	if((customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L")) && bill_details.getCurrent_bill_type().equals("U"))
+    		return CustValidation.INVALID_BILL_TYPE;
     	
+    	if(customer.getPrevBillType().equals("R") && !bill_details.getCurrent_bill_type().equals("R"))
+    		return CustValidation.INVALID_BILL_TYPE;    	
+    	
+    	if(customer.getPrevBillType().equals("U") && !bill_details.getCurrent_bill_type().equals("U"))
+    		return CustValidation.INVALID_BILL_TYPE; 
+    	
+    	if(customer.getMetReadingMo().equals("") && bill_details.getCurrent_bill_type().equals("M"))
+    		return CustValidation.INVALID_PREV_BILL_MONTH;
+    				
     	return CustValidation.SUCCESS;
     }
     
