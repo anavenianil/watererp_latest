@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('watererpApp').controller('ItemRequiredDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ItemRequired', 'ItemDetails', 'FeasibilityStudy', 'ApplicationTxn',
-        function($scope, $stateParams, $uibModalInstance, entity, ItemRequired, ItemDetails, FeasibilityStudy, ApplicationTxn) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ItemRequired', 'MaterialMaster', 'ApplicationTxn', 'FeasibilityStudy', 'Proceedings',
+        function($scope, $stateParams, $uibModalInstance, entity, ItemRequired, MaterialMaster, ApplicationTxn, FeasibilityStudy, Proceedings) {
 
         $scope.itemRequired = entity;
-        $scope.itemdetailss = ItemDetails.query();
-        $scope.feasibilitystudys = FeasibilityStudy.query();
+        $scope.materialmasters = MaterialMaster.query();
         $scope.applicationtxns = ApplicationTxn.query();
+        $scope.feasibilitystudys = FeasibilityStudy.query();
+        $scope.proceedingss = Proceedings.query();
         $scope.load = function(id) {
             ItemRequired.get({id : id}, function(result) {
                 $scope.itemRequired = result;

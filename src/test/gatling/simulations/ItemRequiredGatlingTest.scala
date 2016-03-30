@@ -67,7 +67,7 @@ class ItemRequiredGatlingTest extends Simulation {
             .exec(http("Create new itemRequired")
             .post("/api/itemRequireds")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "quantity":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "description":"SAMPLE_TEXT", "unit":"SAMPLE_TEXT", "quantity":"0", "ratePerShs":null, "amount":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_itemRequired_url")))
             .pause(10)

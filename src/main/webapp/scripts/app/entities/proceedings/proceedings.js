@@ -52,21 +52,15 @@ angular.module('watererpApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    waterSupplyConnectionCharges: null,
-                                    waterOtherCharges: null,
-                                    sixtyDaysConsumptionCharges: null,
-                                    waterSupplyImprovementCharges: null,
-                                    meterCost: null,
-                                    greenBrigadeCharges: null,
-                                    rwhsCharges: null,
-                                    totalWaterCharges: null,
-                                    sewerageConnectionCharges: null,
-                                    sewerageOtherCharges: null,
-                                    sewergeImprovementCharges: null,
-                                    totalSewerageCharges: null,
-                                    totalAmount: null,
-                                    totalDeduction: null,
-                                    balance: null,
+                                    subTotalA: null,
+                                    supervisionCharge: null,
+                                    labourCharge: null,
+                                    siteSurvey: null,
+                                    subTotalB: null,
+                                    connectionFee: null,
+                                    waterMeterShs: null,
+                                    applicationFormFee: null,
+                                    grandTotal: null,
                                     id: null
                                 };
                             }
@@ -124,10 +118,6 @@ angular.module('watererpApp')
                     })
                 }]
             })
-            
-            /**
-             * Created state to create form not to show in pop up
-             */
             .state('proceedings.new', {
                 parent: 'proceedings',
                 url: '/new',
@@ -137,28 +127,24 @@ angular.module('watererpApp')
                 },
                 views: {
                     'content@': {
-                    	 templateUrl: 'scripts/app/entities/proceedings/proceedings-dialog.html',
-                         controller: 'ProceedingsDialogController'
+                    	templateUrl: 'scripts/app/entities/proceedings/proceedings-dialog.html',
+                        controller: 'ProceedingsDialogController'
                     }
                 },
                 resolve: {
                 }
             })
-        
-        /**
-         * Created state for edit
-         */
             .state('proceedings.edit', {
                 parent: 'proceedings',
-                url: '/edit/:proceedingsId',
+                url: '/edit/:id',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'Proceedingss'
                 },
                 views: {
                     'content@': {
-                    	 templateUrl: 'scripts/app/entities/proceedings/proceedings-dialog.html',
-                         controller: 'ProceedingsDialogController'
+                    	templateUrl: 'scripts/app/entities/proceedings/proceedings-dialog.html',
+                        controller: 'ProceedingsDialogController'
                     }
                 },
                 resolve: {

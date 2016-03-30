@@ -42,50 +42,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProceedingsResourceIntTest {
 
 
-    private static final Float DEFAULT_WATER_SUPPLY_CONNECTION_CHARGES = 1F;
-    private static final Float UPDATED_WATER_SUPPLY_CONNECTION_CHARGES = 2F;
+    private static final Double DEFAULT_SUB_TOTAL_A = 1D;
+    private static final Double UPDATED_SUB_TOTAL_A = 2D;
 
-    private static final Float DEFAULT_WATER_OTHER_CHARGES = 1F;
-    private static final Float UPDATED_WATER_OTHER_CHARGES = 2F;
+    private static final Double DEFAULT_SUPERVISION_CHARGE = 1D;
+    private static final Double UPDATED_SUPERVISION_CHARGE = 2D;
 
-    private static final Float DEFAULT_SIXTY_DAYS_CONSUMPTION_CHARGES = 1F;
-    private static final Float UPDATED_SIXTY_DAYS_CONSUMPTION_CHARGES = 2F;
+    private static final Double DEFAULT_LABOUR_CHARGE = 1D;
+    private static final Double UPDATED_LABOUR_CHARGE = 2D;
 
-    private static final Float DEFAULT_WATER_SUPPLY_IMPROVEMENT_CHARGES = 1F;
-    private static final Float UPDATED_WATER_SUPPLY_IMPROVEMENT_CHARGES = 2F;
+    private static final Double DEFAULT_SITE_SURVEY = 1D;
+    private static final Double UPDATED_SITE_SURVEY = 2D;
 
-    private static final Float DEFAULT_METER_COST = 1F;
-    private static final Float UPDATED_METER_COST = 2F;
+    private static final Double DEFAULT_SUB_TOTAL_B = 1D;
+    private static final Double UPDATED_SUB_TOTAL_B = 2D;
 
-    private static final Float DEFAULT_GREEN_BRIGADE_CHARGES = 1F;
-    private static final Float UPDATED_GREEN_BRIGADE_CHARGES = 2F;
+    private static final Double DEFAULT_CONNECTION_FEE = 1D;
+    private static final Double UPDATED_CONNECTION_FEE = 2D;
 
-    private static final Float DEFAULT_RWHS_CHARGES = 1F;
-    private static final Float UPDATED_RWHS_CHARGES = 2F;
+    private static final Double DEFAULT_WATER_METER_SHS = 1D;
+    private static final Double UPDATED_WATER_METER_SHS = 2D;
 
-    private static final Float DEFAULT_TOTAL_WATER_CHARGES = 1F;
-    private static final Float UPDATED_TOTAL_WATER_CHARGES = 2F;
+    private static final Double DEFAULT_APPLICATION_FORM_FEE = 1D;
+    private static final Double UPDATED_APPLICATION_FORM_FEE = 2D;
 
-    private static final Float DEFAULT_SEWERAGE_CONNECTION_CHARGES = 1F;
-    private static final Float UPDATED_SEWERAGE_CONNECTION_CHARGES = 2F;
-
-    private static final Float DEFAULT_SEWERAGE_OTHER_CHARGES = 1F;
-    private static final Float UPDATED_SEWERAGE_OTHER_CHARGES = 2F;
-
-    private static final Float DEFAULT_SEWERGE_IMPROVEMENT_CHARGES = 1F;
-    private static final Float UPDATED_SEWERGE_IMPROVEMENT_CHARGES = 2F;
-
-    private static final Float DEFAULT_TOTAL_SEWERAGE_CHARGES = 1F;
-    private static final Float UPDATED_TOTAL_SEWERAGE_CHARGES = 2F;
-
-    private static final Float DEFAULT_TOTAL_AMOUNT = 1F;
-    private static final Float UPDATED_TOTAL_AMOUNT = 2F;
-
-    private static final Float DEFAULT_TOTAL_DEDUCTION = 1F;
-    private static final Float UPDATED_TOTAL_DEDUCTION = 2F;
-
-    private static final Float DEFAULT_BALANCE = 1F;
-    private static final Float UPDATED_BALANCE = 2F;
+    private static final Double DEFAULT_GRAND_TOTAL = 1D;
+    private static final Double UPDATED_GRAND_TOTAL = 2D;
 
     @Inject
     private ProceedingsRepository proceedingsRepository;
@@ -113,21 +95,15 @@ public class ProceedingsResourceIntTest {
     @Before
     public void initTest() {
         proceedings = new Proceedings();
-        proceedings.setWaterSupplyConnectionCharges(DEFAULT_WATER_SUPPLY_CONNECTION_CHARGES);
-        proceedings.setWaterOtherCharges(DEFAULT_WATER_OTHER_CHARGES);
-        proceedings.setSixtyDaysConsumptionCharges(DEFAULT_SIXTY_DAYS_CONSUMPTION_CHARGES);
-        proceedings.setWaterSupplyImprovementCharges(DEFAULT_WATER_SUPPLY_IMPROVEMENT_CHARGES);
-        proceedings.setMeterCost(DEFAULT_METER_COST);
-        proceedings.setGreenBrigadeCharges(DEFAULT_GREEN_BRIGADE_CHARGES);
-        proceedings.setRwhsCharges(DEFAULT_RWHS_CHARGES);
-        proceedings.setTotalWaterCharges(DEFAULT_TOTAL_WATER_CHARGES);
-        proceedings.setSewerageConnectionCharges(DEFAULT_SEWERAGE_CONNECTION_CHARGES);
-        proceedings.setSewerageOtherCharges(DEFAULT_SEWERAGE_OTHER_CHARGES);
-        proceedings.setSewergeImprovementCharges(DEFAULT_SEWERGE_IMPROVEMENT_CHARGES);
-        proceedings.setTotalSewerageCharges(DEFAULT_TOTAL_SEWERAGE_CHARGES);
-        proceedings.setTotalAmount(DEFAULT_TOTAL_AMOUNT);
-        proceedings.setTotalDeduction(DEFAULT_TOTAL_DEDUCTION);
-        proceedings.setBalance(DEFAULT_BALANCE);
+        proceedings.setSubTotalA(DEFAULT_SUB_TOTAL_A);
+        proceedings.setSupervisionCharge(DEFAULT_SUPERVISION_CHARGE);
+        proceedings.setLabourCharge(DEFAULT_LABOUR_CHARGE);
+        proceedings.setSiteSurvey(DEFAULT_SITE_SURVEY);
+        proceedings.setSubTotalB(DEFAULT_SUB_TOTAL_B);
+        proceedings.setConnectionFee(DEFAULT_CONNECTION_FEE);
+        proceedings.setWaterMeterShs(DEFAULT_WATER_METER_SHS);
+        proceedings.setApplicationFormFee(DEFAULT_APPLICATION_FORM_FEE);
+        proceedings.setGrandTotal(DEFAULT_GRAND_TOTAL);
     }
 
     @Test
@@ -146,57 +122,15 @@ public class ProceedingsResourceIntTest {
         List<Proceedings> proceedingss = proceedingsRepository.findAll();
         assertThat(proceedingss).hasSize(databaseSizeBeforeCreate + 1);
         Proceedings testProceedings = proceedingss.get(proceedingss.size() - 1);
-        assertThat(testProceedings.getWaterSupplyConnectionCharges()).isEqualTo(DEFAULT_WATER_SUPPLY_CONNECTION_CHARGES);
-        assertThat(testProceedings.getWaterOtherCharges()).isEqualTo(DEFAULT_WATER_OTHER_CHARGES);
-        assertThat(testProceedings.getSixtyDaysConsumptionCharges()).isEqualTo(DEFAULT_SIXTY_DAYS_CONSUMPTION_CHARGES);
-        assertThat(testProceedings.getWaterSupplyImprovementCharges()).isEqualTo(DEFAULT_WATER_SUPPLY_IMPROVEMENT_CHARGES);
-        assertThat(testProceedings.getMeterCost()).isEqualTo(DEFAULT_METER_COST);
-        assertThat(testProceedings.getGreenBrigadeCharges()).isEqualTo(DEFAULT_GREEN_BRIGADE_CHARGES);
-        assertThat(testProceedings.getRwhsCharges()).isEqualTo(DEFAULT_RWHS_CHARGES);
-        assertThat(testProceedings.getTotalWaterCharges()).isEqualTo(DEFAULT_TOTAL_WATER_CHARGES);
-        assertThat(testProceedings.getSewerageConnectionCharges()).isEqualTo(DEFAULT_SEWERAGE_CONNECTION_CHARGES);
-        assertThat(testProceedings.getSewerageOtherCharges()).isEqualTo(DEFAULT_SEWERAGE_OTHER_CHARGES);
-        assertThat(testProceedings.getSewergeImprovementCharges()).isEqualTo(DEFAULT_SEWERGE_IMPROVEMENT_CHARGES);
-        assertThat(testProceedings.getTotalSewerageCharges()).isEqualTo(DEFAULT_TOTAL_SEWERAGE_CHARGES);
-        assertThat(testProceedings.getTotalAmount()).isEqualTo(DEFAULT_TOTAL_AMOUNT);
-        assertThat(testProceedings.getTotalDeduction()).isEqualTo(DEFAULT_TOTAL_DEDUCTION);
-        assertThat(testProceedings.getBalance()).isEqualTo(DEFAULT_BALANCE);
-    }
-
-    @Test
-    @Transactional
-    public void checkWaterSupplyConnectionChargesIsRequired() throws Exception {
-        int databaseSizeBeforeTest = proceedingsRepository.findAll().size();
-        // set the field null
-        proceedings.setWaterSupplyConnectionCharges(null);
-
-        // Create the Proceedings, which fails.
-
-        restProceedingsMockMvc.perform(post("/api/proceedingss")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(proceedings)))
-                .andExpect(status().isBadRequest());
-
-        List<Proceedings> proceedingss = proceedingsRepository.findAll();
-        assertThat(proceedingss).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkSixtyDaysConsumptionChargesIsRequired() throws Exception {
-        int databaseSizeBeforeTest = proceedingsRepository.findAll().size();
-        // set the field null
-        proceedings.setSixtyDaysConsumptionCharges(null);
-
-        // Create the Proceedings, which fails.
-
-        restProceedingsMockMvc.perform(post("/api/proceedingss")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(proceedings)))
-                .andExpect(status().isBadRequest());
-
-        List<Proceedings> proceedingss = proceedingsRepository.findAll();
-        assertThat(proceedingss).hasSize(databaseSizeBeforeTest);
+        assertThat(testProceedings.getSubTotalA()).isEqualTo(DEFAULT_SUB_TOTAL_A);
+        assertThat(testProceedings.getSupervisionCharge()).isEqualTo(DEFAULT_SUPERVISION_CHARGE);
+        assertThat(testProceedings.getLabourCharge()).isEqualTo(DEFAULT_LABOUR_CHARGE);
+        assertThat(testProceedings.getSiteSurvey()).isEqualTo(DEFAULT_SITE_SURVEY);
+        assertThat(testProceedings.getSubTotalB()).isEqualTo(DEFAULT_SUB_TOTAL_B);
+        assertThat(testProceedings.getConnectionFee()).isEqualTo(DEFAULT_CONNECTION_FEE);
+        assertThat(testProceedings.getWaterMeterShs()).isEqualTo(DEFAULT_WATER_METER_SHS);
+        assertThat(testProceedings.getApplicationFormFee()).isEqualTo(DEFAULT_APPLICATION_FORM_FEE);
+        assertThat(testProceedings.getGrandTotal()).isEqualTo(DEFAULT_GRAND_TOTAL);
     }
 
     @Test
@@ -210,21 +144,15 @@ public class ProceedingsResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(proceedings.getId().intValue())))
-                .andExpect(jsonPath("$.[*].waterSupplyConnectionCharges").value(hasItem(DEFAULT_WATER_SUPPLY_CONNECTION_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].waterOtherCharges").value(hasItem(DEFAULT_WATER_OTHER_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].sixtyDaysConsumptionCharges").value(hasItem(DEFAULT_SIXTY_DAYS_CONSUMPTION_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].waterSupplyImprovementCharges").value(hasItem(DEFAULT_WATER_SUPPLY_IMPROVEMENT_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].meterCost").value(hasItem(DEFAULT_METER_COST.doubleValue())))
-                .andExpect(jsonPath("$.[*].greenBrigadeCharges").value(hasItem(DEFAULT_GREEN_BRIGADE_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].rwhsCharges").value(hasItem(DEFAULT_RWHS_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].totalWaterCharges").value(hasItem(DEFAULT_TOTAL_WATER_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].sewerageConnectionCharges").value(hasItem(DEFAULT_SEWERAGE_CONNECTION_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].sewerageOtherCharges").value(hasItem(DEFAULT_SEWERAGE_OTHER_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].sewergeImprovementCharges").value(hasItem(DEFAULT_SEWERGE_IMPROVEMENT_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].totalSewerageCharges").value(hasItem(DEFAULT_TOTAL_SEWERAGE_CHARGES.doubleValue())))
-                .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
-                .andExpect(jsonPath("$.[*].totalDeduction").value(hasItem(DEFAULT_TOTAL_DEDUCTION.doubleValue())))
-                .andExpect(jsonPath("$.[*].balance").value(hasItem(DEFAULT_BALANCE.doubleValue())));
+                .andExpect(jsonPath("$.[*].subTotalA").value(hasItem(DEFAULT_SUB_TOTAL_A.doubleValue())))
+                .andExpect(jsonPath("$.[*].supervisionCharge").value(hasItem(DEFAULT_SUPERVISION_CHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].labourCharge").value(hasItem(DEFAULT_LABOUR_CHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].siteSurvey").value(hasItem(DEFAULT_SITE_SURVEY.doubleValue())))
+                .andExpect(jsonPath("$.[*].subTotalB").value(hasItem(DEFAULT_SUB_TOTAL_B.doubleValue())))
+                .andExpect(jsonPath("$.[*].connectionFee").value(hasItem(DEFAULT_CONNECTION_FEE.doubleValue())))
+                .andExpect(jsonPath("$.[*].waterMeterShs").value(hasItem(DEFAULT_WATER_METER_SHS.doubleValue())))
+                .andExpect(jsonPath("$.[*].applicationFormFee").value(hasItem(DEFAULT_APPLICATION_FORM_FEE.doubleValue())))
+                .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())));
     }
 
     @Test
@@ -238,21 +166,15 @@ public class ProceedingsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(proceedings.getId().intValue()))
-            .andExpect(jsonPath("$.waterSupplyConnectionCharges").value(DEFAULT_WATER_SUPPLY_CONNECTION_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.waterOtherCharges").value(DEFAULT_WATER_OTHER_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.sixtyDaysConsumptionCharges").value(DEFAULT_SIXTY_DAYS_CONSUMPTION_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.waterSupplyImprovementCharges").value(DEFAULT_WATER_SUPPLY_IMPROVEMENT_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.meterCost").value(DEFAULT_METER_COST.doubleValue()))
-            .andExpect(jsonPath("$.greenBrigadeCharges").value(DEFAULT_GREEN_BRIGADE_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.rwhsCharges").value(DEFAULT_RWHS_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.totalWaterCharges").value(DEFAULT_TOTAL_WATER_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.sewerageConnectionCharges").value(DEFAULT_SEWERAGE_CONNECTION_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.sewerageOtherCharges").value(DEFAULT_SEWERAGE_OTHER_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.sewergeImprovementCharges").value(DEFAULT_SEWERGE_IMPROVEMENT_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.totalSewerageCharges").value(DEFAULT_TOTAL_SEWERAGE_CHARGES.doubleValue()))
-            .andExpect(jsonPath("$.totalAmount").value(DEFAULT_TOTAL_AMOUNT.doubleValue()))
-            .andExpect(jsonPath("$.totalDeduction").value(DEFAULT_TOTAL_DEDUCTION.doubleValue()))
-            .andExpect(jsonPath("$.balance").value(DEFAULT_BALANCE.doubleValue()));
+            .andExpect(jsonPath("$.subTotalA").value(DEFAULT_SUB_TOTAL_A.doubleValue()))
+            .andExpect(jsonPath("$.supervisionCharge").value(DEFAULT_SUPERVISION_CHARGE.doubleValue()))
+            .andExpect(jsonPath("$.labourCharge").value(DEFAULT_LABOUR_CHARGE.doubleValue()))
+            .andExpect(jsonPath("$.siteSurvey").value(DEFAULT_SITE_SURVEY.doubleValue()))
+            .andExpect(jsonPath("$.subTotalB").value(DEFAULT_SUB_TOTAL_B.doubleValue()))
+            .andExpect(jsonPath("$.connectionFee").value(DEFAULT_CONNECTION_FEE.doubleValue()))
+            .andExpect(jsonPath("$.waterMeterShs").value(DEFAULT_WATER_METER_SHS.doubleValue()))
+            .andExpect(jsonPath("$.applicationFormFee").value(DEFAULT_APPLICATION_FORM_FEE.doubleValue()))
+            .andExpect(jsonPath("$.grandTotal").value(DEFAULT_GRAND_TOTAL.doubleValue()));
     }
 
     @Test
@@ -272,21 +194,15 @@ public class ProceedingsResourceIntTest {
 		int databaseSizeBeforeUpdate = proceedingsRepository.findAll().size();
 
         // Update the proceedings
-        proceedings.setWaterSupplyConnectionCharges(UPDATED_WATER_SUPPLY_CONNECTION_CHARGES);
-        proceedings.setWaterOtherCharges(UPDATED_WATER_OTHER_CHARGES);
-        proceedings.setSixtyDaysConsumptionCharges(UPDATED_SIXTY_DAYS_CONSUMPTION_CHARGES);
-        proceedings.setWaterSupplyImprovementCharges(UPDATED_WATER_SUPPLY_IMPROVEMENT_CHARGES);
-        proceedings.setMeterCost(UPDATED_METER_COST);
-        proceedings.setGreenBrigadeCharges(UPDATED_GREEN_BRIGADE_CHARGES);
-        proceedings.setRwhsCharges(UPDATED_RWHS_CHARGES);
-        proceedings.setTotalWaterCharges(UPDATED_TOTAL_WATER_CHARGES);
-        proceedings.setSewerageConnectionCharges(UPDATED_SEWERAGE_CONNECTION_CHARGES);
-        proceedings.setSewerageOtherCharges(UPDATED_SEWERAGE_OTHER_CHARGES);
-        proceedings.setSewergeImprovementCharges(UPDATED_SEWERGE_IMPROVEMENT_CHARGES);
-        proceedings.setTotalSewerageCharges(UPDATED_TOTAL_SEWERAGE_CHARGES);
-        proceedings.setTotalAmount(UPDATED_TOTAL_AMOUNT);
-        proceedings.setTotalDeduction(UPDATED_TOTAL_DEDUCTION);
-        proceedings.setBalance(UPDATED_BALANCE);
+        proceedings.setSubTotalA(UPDATED_SUB_TOTAL_A);
+        proceedings.setSupervisionCharge(UPDATED_SUPERVISION_CHARGE);
+        proceedings.setLabourCharge(UPDATED_LABOUR_CHARGE);
+        proceedings.setSiteSurvey(UPDATED_SITE_SURVEY);
+        proceedings.setSubTotalB(UPDATED_SUB_TOTAL_B);
+        proceedings.setConnectionFee(UPDATED_CONNECTION_FEE);
+        proceedings.setWaterMeterShs(UPDATED_WATER_METER_SHS);
+        proceedings.setApplicationFormFee(UPDATED_APPLICATION_FORM_FEE);
+        proceedings.setGrandTotal(UPDATED_GRAND_TOTAL);
 
         restProceedingsMockMvc.perform(put("/api/proceedingss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -297,21 +213,15 @@ public class ProceedingsResourceIntTest {
         List<Proceedings> proceedingss = proceedingsRepository.findAll();
         assertThat(proceedingss).hasSize(databaseSizeBeforeUpdate);
         Proceedings testProceedings = proceedingss.get(proceedingss.size() - 1);
-        assertThat(testProceedings.getWaterSupplyConnectionCharges()).isEqualTo(UPDATED_WATER_SUPPLY_CONNECTION_CHARGES);
-        assertThat(testProceedings.getWaterOtherCharges()).isEqualTo(UPDATED_WATER_OTHER_CHARGES);
-        assertThat(testProceedings.getSixtyDaysConsumptionCharges()).isEqualTo(UPDATED_SIXTY_DAYS_CONSUMPTION_CHARGES);
-        assertThat(testProceedings.getWaterSupplyImprovementCharges()).isEqualTo(UPDATED_WATER_SUPPLY_IMPROVEMENT_CHARGES);
-        assertThat(testProceedings.getMeterCost()).isEqualTo(UPDATED_METER_COST);
-        assertThat(testProceedings.getGreenBrigadeCharges()).isEqualTo(UPDATED_GREEN_BRIGADE_CHARGES);
-        assertThat(testProceedings.getRwhsCharges()).isEqualTo(UPDATED_RWHS_CHARGES);
-        assertThat(testProceedings.getTotalWaterCharges()).isEqualTo(UPDATED_TOTAL_WATER_CHARGES);
-        assertThat(testProceedings.getSewerageConnectionCharges()).isEqualTo(UPDATED_SEWERAGE_CONNECTION_CHARGES);
-        assertThat(testProceedings.getSewerageOtherCharges()).isEqualTo(UPDATED_SEWERAGE_OTHER_CHARGES);
-        assertThat(testProceedings.getSewergeImprovementCharges()).isEqualTo(UPDATED_SEWERGE_IMPROVEMENT_CHARGES);
-        assertThat(testProceedings.getTotalSewerageCharges()).isEqualTo(UPDATED_TOTAL_SEWERAGE_CHARGES);
-        assertThat(testProceedings.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
-        assertThat(testProceedings.getTotalDeduction()).isEqualTo(UPDATED_TOTAL_DEDUCTION);
-        assertThat(testProceedings.getBalance()).isEqualTo(UPDATED_BALANCE);
+        assertThat(testProceedings.getSubTotalA()).isEqualTo(UPDATED_SUB_TOTAL_A);
+        assertThat(testProceedings.getSupervisionCharge()).isEqualTo(UPDATED_SUPERVISION_CHARGE);
+        assertThat(testProceedings.getLabourCharge()).isEqualTo(UPDATED_LABOUR_CHARGE);
+        assertThat(testProceedings.getSiteSurvey()).isEqualTo(UPDATED_SITE_SURVEY);
+        assertThat(testProceedings.getSubTotalB()).isEqualTo(UPDATED_SUB_TOTAL_B);
+        assertThat(testProceedings.getConnectionFee()).isEqualTo(UPDATED_CONNECTION_FEE);
+        assertThat(testProceedings.getWaterMeterShs()).isEqualTo(UPDATED_WATER_METER_SHS);
+        assertThat(testProceedings.getApplicationFormFee()).isEqualTo(UPDATED_APPLICATION_FORM_FEE);
+        assertThat(testProceedings.getGrandTotal()).isEqualTo(UPDATED_GRAND_TOTAL);
     }
 
     @Test

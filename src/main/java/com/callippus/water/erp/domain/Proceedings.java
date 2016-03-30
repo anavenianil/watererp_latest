@@ -1,14 +1,25 @@
 package com.callippus.water.erp.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Proceedings.
@@ -22,56 +33,59 @@ public class Proceedings implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @Column(name = "water_supply_connection_charges", nullable = false)
-    private Float waterSupplyConnectionCharges;
+    @Column(name = "sub_total_a")
+    private Double subTotalA;
     
-    @Column(name = "water_other_charges")
-    private Float waterOtherCharges;
+    @Column(name = "supervision_charge")
+    private Double supervisionCharge;
     
-    @NotNull
-    @Column(name = "sixty_days_consumption_charges", nullable = false)
-    private Float sixtyDaysConsumptionCharges;
+    @Column(name = "labour_charge")
+    private Double labourCharge;
     
-    @Column(name = "water_supply_improvement_charges")
-    private Float waterSupplyImprovementCharges;
+    @Column(name = "site_survey")
+    private Double siteSurvey;
     
-    @Column(name = "meter_cost")
-    private Float meterCost;
+    @Column(name = "sub_total_b")
+    private Double subTotalB;
     
-    @Column(name = "green_brigade_charges")
-    private Float greenBrigadeCharges;
+    @Column(name = "connection_fee")
+    private Double connectionFee;
     
-    @Column(name = "rwhs_charges")
-    private Float rwhsCharges;
+    @Column(name = "water_meter_shs")
+    private Double waterMeterShs;
     
-    @Column(name = "total_water_charges")
-    private Float totalWaterCharges;
+    @Column(name = "application_form_fee")
+    private Double applicationFormFee;
     
-    @Column(name = "sewerage_connection_charges")
-    private Float sewerageConnectionCharges;
+    @Column(name = "grand_total")
+    private Double grandTotal;
     
-    @Column(name = "sewerage_other_charges")
-    private Float sewerageOtherCharges;
-    
-    @Column(name = "sewerge_improvement_charges")
-    private Float sewergeImprovementCharges;
-    
-    @Column(name = "total_sewerage_charges")
-    private Float totalSewerageCharges;
-    
-    @Column(name = "total_amount")
-    private Float totalAmount;
-    
-    @Column(name = "total_deduction")
-    private Float totalDeduction;
-    
-    @Column(name = "balance")
-    private Float balance;
-    
+    @ManyToOne
+    @JoinColumn(name = "supervision_percent_id")
+    private PercentageMaster supervisionPercent;
+
+    @ManyToOne
+    @JoinColumn(name = "labour_charge_percent_id")
+    private PercentageMaster labourChargePercent;
+
+    @ManyToOne
+    @JoinColumn(name = "site_survey_percent_id")
+    private PercentageMaster siteSurveyPercent;
+
+    @ManyToOne
+    @JoinColumn(name = "connection_fee_percent_id")
+    private PercentageMaster connectionFeePercent;
+
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
     private ApplicationTxn applicationTxn;
+
+    //@OneToMany(mappedBy = "proceedings", cascade = CascadeType.ALL)
+    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="proceedings_id", referencedColumnName="id")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private List<ItemRequired> itemRequireds = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -81,124 +95,108 @@ public class Proceedings implements Serializable {
         this.id = id;
     }
 
-    public Float getWaterSupplyConnectionCharges() {
-        return waterSupplyConnectionCharges;
+    public Double getSubTotalA() {
+        return subTotalA;
     }
     
-    public void setWaterSupplyConnectionCharges(Float waterSupplyConnectionCharges) {
-        this.waterSupplyConnectionCharges = waterSupplyConnectionCharges;
+    public void setSubTotalA(Double subTotalA) {
+        this.subTotalA = subTotalA;
     }
 
-    public Float getWaterOtherCharges() {
-        return waterOtherCharges;
+    public Double getSupervisionCharge() {
+        return supervisionCharge;
     }
     
-    public void setWaterOtherCharges(Float waterOtherCharges) {
-        this.waterOtherCharges = waterOtherCharges;
+    public void setSupervisionCharge(Double supervisionCharge) {
+        this.supervisionCharge = supervisionCharge;
     }
 
-    public Float getSixtyDaysConsumptionCharges() {
-        return sixtyDaysConsumptionCharges;
+    public Double getLabourCharge() {
+        return labourCharge;
     }
     
-    public void setSixtyDaysConsumptionCharges(Float sixtyDaysConsumptionCharges) {
-        this.sixtyDaysConsumptionCharges = sixtyDaysConsumptionCharges;
+    public void setLabourCharge(Double labourCharge) {
+        this.labourCharge = labourCharge;
     }
 
-    public Float getWaterSupplyImprovementCharges() {
-        return waterSupplyImprovementCharges;
+    public Double getSiteSurvey() {
+        return siteSurvey;
     }
     
-    public void setWaterSupplyImprovementCharges(Float waterSupplyImprovementCharges) {
-        this.waterSupplyImprovementCharges = waterSupplyImprovementCharges;
+    public void setSiteSurvey(Double siteSurvey) {
+        this.siteSurvey = siteSurvey;
     }
 
-    public Float getMeterCost() {
-        return meterCost;
+    public Double getSubTotalB() {
+        return subTotalB;
     }
     
-    public void setMeterCost(Float meterCost) {
-        this.meterCost = meterCost;
+    public void setSubTotalB(Double subTotalB) {
+        this.subTotalB = subTotalB;
     }
 
-    public Float getGreenBrigadeCharges() {
-        return greenBrigadeCharges;
+    public Double getConnectionFee() {
+        return connectionFee;
     }
     
-    public void setGreenBrigadeCharges(Float greenBrigadeCharges) {
-        this.greenBrigadeCharges = greenBrigadeCharges;
+    public void setConnectionFee(Double connectionFee) {
+        this.connectionFee = connectionFee;
     }
 
-    public Float getRwhsCharges() {
-        return rwhsCharges;
+    public Double getWaterMeterShs() {
+        return waterMeterShs;
     }
     
-    public void setRwhsCharges(Float rwhsCharges) {
-        this.rwhsCharges = rwhsCharges;
+    public void setWaterMeterShs(Double waterMeterShs) {
+        this.waterMeterShs = waterMeterShs;
     }
 
-    public Float getTotalWaterCharges() {
-        return totalWaterCharges;
+    public Double getApplicationFormFee() {
+        return applicationFormFee;
     }
     
-    public void setTotalWaterCharges(Float totalWaterCharges) {
-        this.totalWaterCharges = totalWaterCharges;
+    public void setApplicationFormFee(Double applicationFormFee) {
+        this.applicationFormFee = applicationFormFee;
     }
 
-    public Float getSewerageConnectionCharges() {
-        return sewerageConnectionCharges;
+    public Double getGrandTotal() {
+        return grandTotal;
     }
     
-    public void setSewerageConnectionCharges(Float sewerageConnectionCharges) {
-        this.sewerageConnectionCharges = sewerageConnectionCharges;
+    public void setGrandTotal(Double grandTotal) {
+        this.grandTotal = grandTotal;
     }
 
-    public Float getSewerageOtherCharges() {
-        return sewerageOtherCharges;
-    }
-    
-    public void setSewerageOtherCharges(Float sewerageOtherCharges) {
-        this.sewerageOtherCharges = sewerageOtherCharges;
+    public PercentageMaster getSupervisionPercent() {
+        return supervisionPercent;
     }
 
-    public Float getSewergeImprovementCharges() {
-        return sewergeImprovementCharges;
-    }
-    
-    public void setSewergeImprovementCharges(Float sewergeImprovementCharges) {
-        this.sewergeImprovementCharges = sewergeImprovementCharges;
+    public void setSupervisionPercent(PercentageMaster percentageMaster) {
+        this.supervisionPercent = percentageMaster;
     }
 
-    public Float getTotalSewerageCharges() {
-        return totalSewerageCharges;
-    }
-    
-    public void setTotalSewerageCharges(Float totalSewerageCharges) {
-        this.totalSewerageCharges = totalSewerageCharges;
+    public PercentageMaster getLabourChargePercent() {
+        return labourChargePercent;
     }
 
-    public Float getTotalAmount() {
-        return totalAmount;
-    }
-    
-    public void setTotalAmount(Float totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setLabourChargePercent(PercentageMaster percentageMaster) {
+        this.labourChargePercent = percentageMaster;
     }
 
-    public Float getTotalDeduction() {
-        return totalDeduction;
-    }
-    
-    public void setTotalDeduction(Float totalDeduction) {
-        this.totalDeduction = totalDeduction;
+    public PercentageMaster getSiteSurveyPercent() {
+        return siteSurveyPercent;
     }
 
-    public Float getBalance() {
-        return balance;
+    public void setSiteSurveyPercent(PercentageMaster percentageMaster) {
+        this.siteSurveyPercent = percentageMaster;
     }
-    
-    public void setBalance(Float balance) {
-        this.balance = balance;
+
+    public PercentageMaster getConnectionFeePercent() {
+        return connectionFeePercent;
+    }
+
+    public void setConnectionFeePercent(PercentageMaster percentageMaster) {
+        this.connectionFeePercent = percentageMaster;
     }
 
     public ApplicationTxn getApplicationTxn() {
@@ -207,6 +205,14 @@ public class Proceedings implements Serializable {
 
     public void setApplicationTxn(ApplicationTxn applicationTxn) {
         this.applicationTxn = applicationTxn;
+    }
+
+    public List<ItemRequired> getItemRequireds() {
+        return itemRequireds;
+    }
+
+    public void setItemRequireds(List<ItemRequired> itemRequireds) {
+        this.itemRequireds = itemRequireds;
     }
 
     @Override
@@ -233,21 +239,15 @@ public class Proceedings implements Serializable {
     public String toString() {
         return "Proceedings{" +
             "id=" + id +
-            ", waterSupplyConnectionCharges='" + waterSupplyConnectionCharges + "'" +
-            ", waterOtherCharges='" + waterOtherCharges + "'" +
-            ", sixtyDaysConsumptionCharges='" + sixtyDaysConsumptionCharges + "'" +
-            ", waterSupplyImprovementCharges='" + waterSupplyImprovementCharges + "'" +
-            ", meterCost='" + meterCost + "'" +
-            ", greenBrigadeCharges='" + greenBrigadeCharges + "'" +
-            ", rwhsCharges='" + rwhsCharges + "'" +
-            ", totalWaterCharges='" + totalWaterCharges + "'" +
-            ", sewerageConnectionCharges='" + sewerageConnectionCharges + "'" +
-            ", sewerageOtherCharges='" + sewerageOtherCharges + "'" +
-            ", sewergeImprovementCharges='" + sewergeImprovementCharges + "'" +
-            ", totalSewerageCharges='" + totalSewerageCharges + "'" +
-            ", totalAmount='" + totalAmount + "'" +
-            ", totalDeduction='" + totalDeduction + "'" +
-            ", balance='" + balance + "'" +
+            ", subTotalA='" + subTotalA + "'" +
+            ", supervisionCharge='" + supervisionCharge + "'" +
+            ", labourCharge='" + labourCharge + "'" +
+            ", siteSurvey='" + siteSurvey + "'" +
+            ", subTotalB='" + subTotalB + "'" +
+            ", connectionFee='" + connectionFee + "'" +
+            ", waterMeterShs='" + waterMeterShs + "'" +
+            ", applicationFormFee='" + applicationFormFee + "'" +
+            ", grandTotal='" + grandTotal + "'" +
             '}';
     }
 }

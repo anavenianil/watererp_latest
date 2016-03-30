@@ -2,22 +2,29 @@
     "relationships": [
         {
             "relationshipId": 1,
-            "relationshipName": "itemDetails",
-            "otherEntityName": "itemDetails",
+            "relationshipName": "materialMaster",
+            "otherEntityName": "materialMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "materialName"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "applicationTxn",
+            "otherEntityName": "applicationTxn",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
-            "relationshipId": 2,
+            "relationshipId": 3,
             "relationshipName": "feasibilityStudy",
             "otherEntityName": "feasibilityStudy",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
-            "relationshipId": 3,
-            "relationshipName": "applicationTxn",
-            "otherEntityName": "applicationTxn",
+            "relationshipId": 4,
+            "relationshipName": "proceedings",
+            "otherEntityName": "proceedings",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
@@ -25,11 +32,31 @@
     "fields": [
         {
             "fieldId": 1,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "unit",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
             "fieldName": "quantity",
             "fieldType": "Integer"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "ratePerShs",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
         }
     ],
-    "changelogDate": "20160317100956",
+    "changelogDate": "20160330092113",
     "dto": "no",
     "service": "no",
     "pagination": "infinite-scroll"

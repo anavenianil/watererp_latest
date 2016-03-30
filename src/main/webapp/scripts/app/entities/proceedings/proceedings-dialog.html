@@ -1,330 +1,94 @@
 
-<form name="editForm" role="form" novalidate ng-submit="save()"
-	show-validation>
+<form name="editForm" role="form" novalidate ng-submit="save()">
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create or edit a Proceedings</h3>
+			<h3 class="panel-title pull-left">Create A Connection</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
+
+
 				<div class="modal-body">
 					<jh-alert-error></jh-alert-error>
-					<fieldset>
-						<legend>Customer Details</legend>
-						<div class="row">
-							<div class="col-sm-3">
-								<label>File Number</label> <input type="text"
-									class="form-control" id="field_fileNo" name="fileNo"
-									ng-model="feasibilityStudy.fileNo">
-							</div>
-							<div class="col-sm-1">
-								<br>
-								<button type="button"
-									class="btn btn-primary glyphicon glyphicon-search"
-									ng-click="getCustomer(feasibilityStudy.fileNo)"></button>
-							</div>
-							<!-- <div class="col-sm-3">
-								<label for="field_applicationTxn">applicationTxn</label> <select
-									class="form-control" id="field_applicationTxn"
-									name="applicationTxn" ng-model="proceedings.applicationTxn"
-									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-									<option value=""></option>
-								</select>
-							</div> -->
+					<div class="row">
+						<div class="col-sm-3">
+							<label for="id">ID</label> <input type="text"
+								class="form-control" id="id" name="id" ng-model="proceedings.id"
+								readonly />
 						</div>
-					</fieldset>
+						<div class="col-sm-3">
+							<label for="field_applicationTxn">applicationTxn</label> <select
+								class="form-control" id="field_applicationTxn"
+								name="applicationTxn" ng-model="proceedings.applicationTxn"
+								ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
 					<br>
-					<fieldset>
-						<legend>Customer Name</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>First Name</label> <input type="text"
-									class="form-control" name="firstName" id="field_firstName"
-									ng-model="proceedings.applicationTxn.customer.firstName"
-									disabled />
-							</div>
-							<div class="col-sm-4">
-								<label>Middle Name</label> <input type="text"
-									class="form-control" name="middleName" id="field_middleName"
-									ng-model="proceedings.applicationTxn.customer.middleName"
-									disabled />
-							</div>
-							<div class="col-sm-4">
-								<label>Last Name</label> <input type="text" class="form-control"
-									name="lastName" id="field_lastName"
-									ng-model="proceedings.applicationTxn.customer.lastName"
-									disabled />
-							</div>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Service Premises Area</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>House No.</label> <input type="text" class="form-control"
-									name="sHouseNo" id="field_sHouseNo"
-									ng-model="proceedings.applicationTxn.sHouseNo" disabled>
-							</div>
-							<div class="col-sm-4">
-								<label>Street</label> <input type="text" class="form-control"
-									id="field_street" name="street"
-									ng-model="proceedings.applicationTxn.street" disabled>
-							</div>
-							<div class="col-sm-3">
-								<label>Area Code</label> <input type="text" class="form-control"
-									id="field_areaCode" name="areaCode"
-									ng-model="proceedings.applicationTxn.areaCode">
-							</div>
-							<div class="col-sm-1">
-								<br>
-								<button type="button"
-									class="btn btn-primary glyphicon glyphicon-search"
-									ng-click="getCustomer(feasibilityStudy.fileNo)"></button>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>govtOfficialNo</label> <input type="text"
-									class="form-control" id="field_govtOfficialNo"
-									name="govtOfficialNo"
-									ng-model="proceedings.applicationTxn.govtOfficialNo" disabled>
-							</div>
-							<div class="col-sm-4">
-								<label>Pincode</label> <input type="text" class="form-control"
-									id="field_pincode" name="pincode"
-									ng-model="proceedings.applicationTxn.pincode" disabled>
-							</div>
-							<div class="col-sm-4">
-								<label>Area</label> <input type="text" class="form-control"
-									id="field_area" name="area"
-									ng-model="proceedings.applicationTxn.area" disabled>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>Telephone</label> <input type="text" class="form-control"
-									id="field_telephoneNumber" name="telephoneNumber"
-									ng-model="proceedings.applicationTxn.telephoneNumber" disabled>
-							</div>
-							<div class="col-sm-4">
-								<label>Mobile</label> <input type="text" class="form-control"
-									id="field_mobile" name="mobile"
-									ng-model="proceedings.applicationTxn.mobile" disabled>
-							</div>
-							<div class="col-sm-4">
-								<label>section</label> <input type="text" class="form-control"
-									id="field_section" name="section"
-									ng-model="proceedings.applicationTxn.section" disabled>
-							</div>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Plot Details</legend>
-					</fieldset>
-					<fieldset>
-						<legend>Water Supply Connection Charges</legend>
-						<div class="row">
-							<!-- <div class="col-sm-3">
-								<label for="id">ID</label> <input type="text"
-									class="form-control" id="id" name="id"
-									ng-model="proceedings.id" readonly />
-							</div> -->
-							<div class="col-sm-3">
-								<label class="control-label"
-									for="field_waterSupplyConnectionCharges">Water Supply
-									Connection Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="waterSupplyConnectionCharges"
-									id="field_waterSupplyConnectionCharges"
-									ng-model="proceedings.waterSupplyConnectionCharges" required />
-								<div ng-show="editForm.waterSupplyConnectionCharges.$invalid">
-									<p class="help-block"
-										ng-show="editForm.waterSupplyConnectionCharges.$error.required">
-										This field is required.</p>
-									<p class="help-block"
-										ng-show="editForm.waterSupplyConnectionCharges.$error.number">
-										This field should be a number.</p>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_waterOtherCharges">Water
-									Other Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="waterOtherCharges" id="field_waterOtherCharges"
-									ng-model="proceedings.waterOtherCharges" />
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label"
-									for="field_sixtyDaysConsumptionCharges">Sixty
-									DaysConsumption Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="sixtyDaysConsumptionCharges"
-									id="field_sixtyDaysConsumptionCharges"
-									ng-model="proceedings.sixtyDaysConsumptionCharges" required />
-								<div ng-show="editForm.sixtyDaysConsumptionCharges.$invalid">
-									<p class="help-block"
-										ng-show="editForm.sixtyDaysConsumptionCharges.$error.required">
-										This field is required.</p>
-									<p class="help-block"
-										ng-show="editForm.sixtyDaysConsumptionCharges.$error.number">
-										This field should be a number.</p>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label"
-									for="field_waterSupplyImprovementCharges">Water Supply
-									Improvement Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="waterSupplyImprovementCharges"
-									id="field_waterSupplyImprovementCharges"
-									ng-model="proceedings.waterSupplyImprovementCharges" />
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label" for="field_meterCost">Meter
-									Cost</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" name="meterCost"
-									id="field_meterCost" ng-model="proceedings.meterCost" />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_greenBrigadeCharges">Green
-									Brigade Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="greenBrigadeCharges" id="field_greenBrigadeCharges"
-									ng-model="proceedings.greenBrigadeCharges" />
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label" for="field_rwhsCharges">RWHS
-									Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" name="rwhsCharges"
-									id="field_rwhsCharges" ng-model="proceedings.rwhsCharges" />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_totalWaterCharges">Total
-									Water Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="totalWaterCharges" id="field_totalWaterCharges"
-									ng-model="proceedings.totalWaterCharges" />
-							</div>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Sewerage Connection Charges</legend>
-						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label"
-									for="field_sewerageConnectionCharges">Sewerage
-									Connection Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="sewerageConnectionCharges"
-									id="field_sewerageConnectionCharges"
-									ng-model="proceedings.sewerageConnectionCharges" />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_sewerageOtherCharges">Sewerage
-									Other Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="sewerageOtherCharges" id="field_sewerageOtherCharges"
-									ng-model="proceedings.sewerageOtherCharges" />
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label"
-									for="field_sewergeImprovementCharges">Sewerge
-									Improvement Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="sewergeImprovementCharges"
-									id="field_sewergeImprovementCharges"
-									ng-model="proceedings.sewergeImprovementCharges" />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_totalSewerageCharges">Total
-									Sewerage Charges</label>
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control"
-									name="totalSewerageCharges" id="field_totalSewerageCharges"
-									ng-model="proceedings.totalSewerageCharges" />
-							</div>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend>Net Payment</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label class="control-label" for="field_totalAmount">Total
-									Amount</label> <input type="number" class="form-control"
-									name="totalAmount" id="field_totalAmount"
-									ng-model="proceedings.totalAmount" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_totalDeduction">Total
-									Deduction</label> <input type="number" class="form-control"
-									name="totalDeduction" id="field_totalDeduction"
-									ng-model="proceedings.totalDeduction" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_balance">Balance</label>
-								<input type="number" class="form-control" name="balance"
-									id="field_balance" ng-model="proceedings.balance" />
-							</div>
-						</div>
-					</fieldset>
 					<fieldset>
 						<legend>Items Required</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label for="field_materialMaster">Material Name</label>
+							</div>
+							<!-- <div class="col-sm-2">
+								<label class="control-label" for="field_description">Description</label>
+							</div> -->
+							<div class="col-sm-2">
+								<label class="control-label" for="field_unit">Unit</label>
+							</div>
+							<div class="col-sm-2">
+								<label class="control-label" for="field_quantity">Quantity</label>
+							</div>
+							<div class="col-sm-2">
+								<label class="control-label" for="field_ratePerShs">Rate
+									@ Shs</label>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_amount">Amount</label>
+							</div>
+						</div>
+
 						<div ng-repeat="x in itemArr track by $index">
 							<div class="row">
-								<div class="col-sm-4">
-									<label for="field_itemName">Item Name</label> <select
-										class="form-control" id="field_itemName" name="itemName"
-										ng-model="proceedings.itemRequired[x].itemDetails"
-										ng-options="itemDetails as itemDetails.itemName for itemDetails in itemDetailss track by itemDetails.id">
+								<div class="col-sm-3">
+									<select class="form-control" id="field_materialMaster"
+										name="materialMaster"
+										ng-model="proceedings.itemRequired[x].materialMaster"
+										ng-change="getMaterialDetail(proceedings.itemRequireds[x].materialMaster.id, x)"
+										ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
 										<option value=""></option>
 									</select>
 								</div>
-								<div class="col-sm-4">
-									<label class="control-label" for="field_quantity">Quantity</label>
+								<!-- <div class="col-sm-2">
+									<input type="text" class="form-control" name="description"
+										id="field_description"
+										ng-model="proceedings.itemRequired[x].description" />
+								</div> -->
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="unit"
+										id="field_unit" ng-model="proceedings.itemRequireds[x].unit" />
+								</div>
+								<div class="col-sm-2">
+
 									<input type="number" class="form-control" name="quantity"
 										id="field_quantity"
+										ng-change="calculateRate(proceedings.itemRequireds[x].quantity, proceedings.itemRequired[x].ratePerShs, x)"
 										ng-model="proceedings.itemRequired[x].quantity" />
 								</div>
+								<div class="col-sm-2">
+									<input type="number" class="form-control" name="ratePerShs"
+										id="field_ratePerShs"
+										ng-model="proceedings.itemRequireds[x].ratePerShs" readonly />
+								</div>
+								<div class="col-sm-3">
+									<input type="number" class="form-control" name="amount"
+										id="field_amount"
+										ng-model="proceedings.itemRequireds[x].amount" readonly />
+								</div>
 							</div>
+							<br>
 						</div>
 						<br>
 						<button type="button" class="btn btn-primary"
@@ -333,13 +97,143 @@
 								Items</span>
 						</button>
 					</fieldset>
+					<br>
+					<div class="row">
+						<div class="col-sm-10">
+							<label class="control-label" for="field_subTotalA">SubTotalA</label>
+						</div>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" name="subTotalA"
+								id="field_subTotalA" ng-model="proceedings.subTotalA" />
+						</div>
+					</div>
+					<br>
+					<hr>
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="field_supervisionPercent">supervisionPercent</label>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="field_supervisionPercent"
+								name="supervisionPercent"
+								ng-model="proceedings.supervisionPercent"
+								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<!-- <label class="control-label" for="field_supervisionCharge">SupervisionCharge</label> -->
+							<input type="number" class="form-control"
+								name="supervisionCharge" id="field_supervisionCharge"
+								ng-model="proceedings.supervisionCharge" />
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_labourCharge">LabourCharge</label>
+						</div>
+
+						<div class="col-sm-4">
+							<!-- <label for="field_labourChargePercent">labourChargePercent</label> -->
+							<select class="form-control" id="field_labourChargePercent"
+								name="labourChargePercent"
+								ng-model="proceedings.labourChargePercent"
+								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="labourCharge"
+								id="field_labourCharge" ng-model="proceedings.labourCharge" />
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_siteSurvey">SiteSurvey</label>
+						</div>
+						<div class="col-sm-4">
+							<!-- <label for="field_siteSurveyPercent">siteSurveyPercent</label> -->
+							<select class="form-control" id="field_siteSurveyPercent"
+								name="siteSurveyPercent"
+								ng-model="proceedings.siteSurveyPercent"
+								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<input type="number" class="form-control" name="siteSurvey"
+								id="field_siteSurvey" ng-model="proceedings.siteSurvey" />
+						</div>
+					</div>
+					<br>
+					<hr>
+					<div class="row">
+						<div class="col-sm-10">
+							<label class="control-label" for="field_subTotalB">SubTotalB</label>
+						</div>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" name="subTotalB"
+								id="field_subTotalB" ng-model="proceedings.subTotalB" />
+						</div>
+					</div>
+					<br>
+					<hr>
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="field_ConnectionFeePercent">ConnectionFeePercent</label>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="field_ConnectionFeePercent"
+								name="ConnectionFeePercent"
+								ng-model="proceedings.connectionFeePercent"
+								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<!-- <label class="control-label" for="field_connectionFee">ConnectionFee</label> -->
+							<input type="number" class="form-control" name="connectionFee"
+								id="field_connectionFee" ng-model="proceedings.connectionFee" />
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-10">
+							<label class="control-label" for="field_waterMeterShs">WaterMeterShs</label>
+						</div>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" name="waterMeterShs"
+								id="field_waterMeterShs" ng-model="proceedings.waterMeterShs" />
+						</div>
+					</div>
+					<br>
+					<hr>
+					<div class="row">
+						<div class="col-sm-10">
+							<label class="control-label" for="field_applicationFormFee">ApplicationFormFee</label>
+						</div>
+						<div class="col-sm-2">
+							<input type="number" class="form-control"
+								name="applicationFormFee" id="field_applicationFormFee"
+								ng-model="proceedings.applicationFormFee" />
+						</div>
+					</div>
+					<br>
+					<hr>
+					<div class="row">
+						<div class="col-sm-10">
+							<label class="control-label" for="field_grandTotal">GrandTotal</label>
+						</div>
+						<div class="col-sm-2">
+							<input type="number" class="form-control" name="grandTotal"
+								id="field_grandTotal" ng-model="proceedings.grandTotal" />
+						</div>
+					</div>
+					<hr>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-info pull-left"
-						onclick="window.history.back()" type="button">
-						<span class="glyphicon glyphicon-arrow-left"></span> <span>
-							Back</span>
-					</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>

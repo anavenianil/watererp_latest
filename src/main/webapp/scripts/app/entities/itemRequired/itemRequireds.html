@@ -19,25 +19,37 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="unit"><span>Unit</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="quantity"><span>Quantity</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="itemDetails.id"><span>itemDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="feasibilityStudy.id"><span>feasibilityStudy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ratePerShs"><span>RatePerShs</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="materialMaster.materialName"><span>materialMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="applicationTxn.id"><span>applicationTxn</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="feasibilityStudy.id"><span>feasibilityStudy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="proceedings.id"><span>proceedings</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="itemRequired in itemRequireds track by itemRequired.id">
                     <td><a ui-sref="itemRequired.detail({id:itemRequired.id})">{{itemRequired.id}}</a></td>
+                    <td>{{itemRequired.description}}</td>
+                    <td>{{itemRequired.unit}}</td>
                     <td>{{itemRequired.quantity}}</td>
+                    <td>{{itemRequired.ratePerShs}}</td>
+                    <td>{{itemRequired.amount}}</td>
                     <td>
-                        <a ui-sref="itemDetails.detail({id:itemRequired.itemDetails.id})">{{itemRequired.itemDetails.id}}</a>
+                        <a ui-sref="materialMaster.detail({id:itemRequired.materialMaster.id})">{{itemRequired.materialMaster.materialName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="applicationTxn.detail({id:itemRequired.applicationTxn.id})">{{itemRequired.applicationTxn.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="feasibilityStudy.detail({id:itemRequired.feasibilityStudy.id})">{{itemRequired.feasibilityStudy.id}}</a>
                     </td>
                     <td>
-                        <a ui-sref="applicationTxn.detail({id:itemRequired.applicationTxn.id})">{{itemRequired.applicationTxn.id}}</a>
+                        <a ui-sref="proceedings.detail({id:itemRequired.proceedings.id})">{{itemRequired.proceedings.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

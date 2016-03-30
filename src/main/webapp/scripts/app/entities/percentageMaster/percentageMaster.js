@@ -3,112 +3,109 @@
 angular.module('watererpApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('itemRequired', {
+            .state('percentageMaster', {
                 parent: 'entity',
-                url: '/itemRequireds',
+                url: '/percentageMasters',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'ItemRequireds'
+                    pageTitle: 'PercentageMasters'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/itemRequired/itemRequireds.html',
-                        controller: 'ItemRequiredController'
+                        templateUrl: 'scripts/app/entities/percentageMaster/percentageMasters.html',
+                        controller: 'PercentageMasterController'
                     }
                 },
                 resolve: {
                 }
             })
-            .state('itemRequired.detail', {
+            .state('percentageMaster.detail', {
                 parent: 'entity',
-                url: '/itemRequired/{id}',
+                url: '/percentageMaster/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'ItemRequired'
+                    pageTitle: 'PercentageMaster'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/itemRequired/itemRequired-detail.html',
-                        controller: 'ItemRequiredDetailController'
+                        templateUrl: 'scripts/app/entities/percentageMaster/percentageMaster-detail.html',
+                        controller: 'PercentageMasterDetailController'
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'ItemRequired', function($stateParams, ItemRequired) {
-                        return ItemRequired.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'PercentageMaster', function($stateParams, PercentageMaster) {
+                        return PercentageMaster.get({id : $stateParams.id});
                     }]
                 }
             })
-            .state('itemRequired.new', {
-                parent: 'itemRequired',
+            .state('percentageMaster.new', {
+                parent: 'percentageMaster',
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/itemRequired/itemRequired-dialog.html',
-                        controller: 'ItemRequiredDialogController',
+                        templateUrl: 'scripts/app/entities/percentageMaster/percentageMaster-dialog.html',
+                        controller: 'PercentageMasterDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
                                 return {
-                                    description: null,
-                                    unit: null,
-                                    quantity: null,
-                                    ratePerShs: null,
-                                    amount: null,
+                                    percentType: null,
+                                    percentValue: null,
                                     id: null
                                 };
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('itemRequired', null, { reload: true });
+                        $state.go('percentageMaster', null, { reload: true });
                     }, function() {
-                        $state.go('itemRequired');
+                        $state.go('percentageMaster');
                     })
                 }]
             })
-            .state('itemRequired.edit', {
-                parent: 'itemRequired',
+            .state('percentageMaster.edit', {
+                parent: 'percentageMaster',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/itemRequired/itemRequired-dialog.html',
-                        controller: 'ItemRequiredDialogController',
+                        templateUrl: 'scripts/app/entities/percentageMaster/percentageMaster-dialog.html',
+                        controller: 'PercentageMasterDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['ItemRequired', function(ItemRequired) {
-                                return ItemRequired.get({id : $stateParams.id});
+                            entity: ['PercentageMaster', function(PercentageMaster) {
+                                return PercentageMaster.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('itemRequired', null, { reload: true });
+                        $state.go('percentageMaster', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('itemRequired.delete', {
-                parent: 'itemRequired',
+            .state('percentageMaster.delete', {
+                parent: 'percentageMaster',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/itemRequired/itemRequired-delete-dialog.html',
-                        controller: 'ItemRequiredDeleteController',
+                        templateUrl: 'scripts/app/entities/percentageMaster/percentageMaster-delete-dialog.html',
+                        controller: 'PercentageMasterDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['ItemRequired', function(ItemRequired) {
-                                return ItemRequired.get({id : $stateParams.id});
+                            entity: ['PercentageMaster', function(PercentageMaster) {
+                                return PercentageMaster.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('itemRequired', null, { reload: true });
+                        $state.go('percentageMaster', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

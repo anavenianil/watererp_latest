@@ -12,6 +12,22 @@
             <tbody>
             <tr>
                 <td>
+                    <span>Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemRequired.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Unit</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemRequired.unit}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <span>Quantity</span>
                 </td>
                 <td>
@@ -20,10 +36,34 @@
             </tr>
             <tr>
                 <td>
-                    <span>itemDetails</span>
+                    <span>RatePerShs</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="itemDetails.detail({id:itemRequired.itemDetails.id})">{{itemRequired.itemDetails.id}}</a>
+                    <span class="form-control-static">{{itemRequired.ratePerShs}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Amount</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemRequired.amount}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>materialMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="materialMaster.detail({id:itemRequired.materialMaster.id})">{{itemRequired.materialMaster.materialName}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>applicationTxn</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:itemRequired.applicationTxn.id})">{{itemRequired.applicationTxn.id}}</a>
                 </td>
             </tr>
             <tr>
@@ -36,10 +76,10 @@
             </tr>
             <tr>
                 <td>
-                    <span>applicationTxn</span>
+                    <span>proceedings</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:itemRequired.applicationTxn.id})">{{itemRequired.applicationTxn.id}}</a>
+                    <a class="form-control-static" ui-sref="proceedings.detail({id:itemRequired.proceedings.id})">{{itemRequired.proceedings.id}}</a>
                 </td>
             </tr>
             </tbody>

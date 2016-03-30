@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -21,20 +22,36 @@ public class ItemRequired implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "description")
+    private String description;
+    
+    @Column(name = "unit")
+    private String unit;
+    
     @Column(name = "quantity")
     private Integer quantity;
     
+    @Column(name = "rate_per_shs", precision=10, scale=2)
+    private BigDecimal ratePerShs;
+    
+    @Column(name = "amount", precision=10, scale=2)
+    private BigDecimal amount;
+    
     @ManyToOne
-    @JoinColumn(name = "item_details_id")
-    private ItemDetails itemDetails;
+    @JoinColumn(name = "material_master_id")
+    private MaterialMaster materialMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "application_txn_id")
+    private ApplicationTxn applicationTxn;
 
     @ManyToOne
     @JoinColumn(name = "feasibility_study_id")
     private FeasibilityStudy feasibilityStudy;
 
     @ManyToOne
-    @JoinColumn(name = "application_txn_id")
-    private ApplicationTxn applicationTxn;
+    @JoinColumn(name = "proceedings_id")
+    private Proceedings proceedings;
 
     public Long getId() {
         return id;
@@ -42,6 +59,22 @@ public class ItemRequired implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+    
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public Integer getQuantity() {
@@ -52,12 +85,36 @@ public class ItemRequired implements Serializable {
         this.quantity = quantity;
     }
 
-    public ItemDetails getItemDetails() {
-        return itemDetails;
+    public BigDecimal getRatePerShs() {
+        return ratePerShs;
+    }
+    
+    public void setRatePerShs(BigDecimal ratePerShs) {
+        this.ratePerShs = ratePerShs;
     }
 
-    public void setItemDetails(ItemDetails itemDetails) {
-        this.itemDetails = itemDetails;
+    public BigDecimal getAmount() {
+        return amount;
+    }
+    
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public MaterialMaster getMaterialMaster() {
+        return materialMaster;
+    }
+
+    public void setMaterialMaster(MaterialMaster materialMaster) {
+        this.materialMaster = materialMaster;
+    }
+
+    public ApplicationTxn getApplicationTxn() {
+        return applicationTxn;
+    }
+
+    public void setApplicationTxn(ApplicationTxn applicationTxn) {
+        this.applicationTxn = applicationTxn;
     }
 
     public FeasibilityStudy getFeasibilityStudy() {
@@ -68,12 +125,12 @@ public class ItemRequired implements Serializable {
         this.feasibilityStudy = feasibilityStudy;
     }
 
-    public ApplicationTxn getApplicationTxn() {
-        return applicationTxn;
+    public Proceedings getProceedings() {
+        return proceedings;
     }
 
-    public void setApplicationTxn(ApplicationTxn applicationTxn) {
-        this.applicationTxn = applicationTxn;
+    public void setProceedings(Proceedings proceedings) {
+        this.proceedings = proceedings;
     }
 
     @Override
@@ -100,7 +157,11 @@ public class ItemRequired implements Serializable {
     public String toString() {
         return "ItemRequired{" +
             "id=" + id +
+            ", description='" + description + "'" +
+            ", unit='" + unit + "'" +
             ", quantity='" + quantity + "'" +
+            ", ratePerShs='" + ratePerShs + "'" +
+            ", amount='" + amount + "'" +
             '}';
     }
 }

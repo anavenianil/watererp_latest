@@ -19,48 +19,50 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="subTotalA"><span>SubTotalA</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="supervisionCharge"><span>SupervisionCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="labourCharge"><span>LabourCharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="siteSurvey"><span>SiteSurvey</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="subTotalB"><span>SubTotalB</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="connectionFee"><span>ConnectionFee</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="waterMeterShs"><span>WaterMeterShs</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applicationFormFee"><span>ApplicationFormFee</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="grandTotal"><span>GrandTotal</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="supervisionPercent.id"><span>supervisionPercent</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="labourChargePercent.id"><span>labourChargePercent</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="siteSurveyPercent.id"><span>siteSurveyPercent</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ConnectionFeePercent.id"><span>ConnectionFeePercent</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="applicationTxn.id"><span>applicationTxn</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="waterSupplyConnectionCharges"><span>Water Supply Connection Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="waterOtherCharges"><span>Water Other Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sixtyDaysConsumptionCharges"><span>Sixty Days Consumption Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="waterSupplyImprovementCharges"><span>Water Supply Improvement Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterCost"><span>Meter Cost</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="greenBrigadeCharges"><span>Green Brigade Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="rwhsCharges"><span>Rwhs Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalWaterCharges"><span>Total Water Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sewerageConnectionCharges"><span>Sewerage Connection Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sewerageOtherCharges"><span>Sewerage Other Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="sewergeImprovementCharges"><span>Sewerge Improvement Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalSewerageCharges"><span>Total Sewerage Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalAmount"><span>Total Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalDeduction"><span>Total Deduction</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="balance"><span>Balance</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="proceedings in proceedingss track by proceedings.id">
                     <td><a ui-sref="proceedings.detail({id:proceedings.id})">{{proceedings.id}}</a></td>
+                    <td>{{proceedings.subTotalA}}</td>
+                    <td>{{proceedings.supervisionCharge}}</td>
+                    <td>{{proceedings.labourCharge}}</td>
+                    <td>{{proceedings.siteSurvey}}</td>
+                    <td>{{proceedings.subTotalB}}</td>
+                    <td>{{proceedings.connectionFee}}</td>
+                    <td>{{proceedings.waterMeterShs}}</td>
+                    <td>{{proceedings.applicationFormFee}}</td>
+                    <td>{{proceedings.grandTotal}}</td>
+                    <td>
+                        <a ui-sref="percentageMaster.detail({id:proceedings.supervisionPercent.id})">{{proceedings.supervisionPercent.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="percentageMaster.detail({id:proceedings.labourChargePercent.id})">{{proceedings.labourChargePercent.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="percentageMaster.detail({id:proceedings.siteSurveyPercent.id})">{{proceedings.siteSurveyPercent.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="percentageMaster.detail({id:proceedings.connectionFeePercent.id})">{{proceedings.connectionFeePercent.id}}</a>
+                    </td>
                     <td>
                         <a ui-sref="applicationTxn.detail({id:proceedings.applicationTxn.id})">{{proceedings.applicationTxn.id}}</a>
                     </td>
-                    <td>{{proceedings.waterSupplyConnectionCharges}}</td>
-                    <td>{{proceedings.waterOtherCharges}}</td>
-                    <td>{{proceedings.sixtyDaysConsumptionCharges}}</td>
-                    <td>{{proceedings.waterSupplyImprovementCharges}}</td>
-                    <td>{{proceedings.meterCost}}</td>
-                    <td>{{proceedings.greenBrigadeCharges}}</td>
-                    <td>{{proceedings.rwhsCharges}}</td>
-                    <td>{{proceedings.totalWaterCharges}}</td>
-                    <td>{{proceedings.sewerageConnectionCharges}}</td>
-                    <td>{{proceedings.sewerageOtherCharges}}</td>
-                    <td>{{proceedings.sewergeImprovementCharges}}</td>
-                    <td>{{proceedings.totalSewerageCharges}}</td>
-                    <td>{{proceedings.totalAmount}}</td>
-                    <td>{{proceedings.totalDeduction}}</td>
-                    <td>{{proceedings.balance}}</td>
-                    
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -70,7 +72,7 @@
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="proceedings.edit({proceedingsId : proceedings.id})"
+                                    ui-sref="proceedings.edit({id:proceedings.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>

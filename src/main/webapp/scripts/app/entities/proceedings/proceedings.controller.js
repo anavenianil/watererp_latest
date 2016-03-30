@@ -34,21 +34,15 @@ angular.module('watererpApp')
 
         $scope.clear = function () {
             $scope.proceedings = {
-                waterSupplyConnectionCharges: null,
-                waterOtherCharges: null,
-                sixtyDaysConsumptionCharges: null,
-                waterSupplyImprovementCharges: null,
-                meterCost: null,
-                greenBrigadeCharges: null,
-                rwhsCharges: null,
-                totalWaterCharges: null,
-                sewerageConnectionCharges: null,
-                sewerageOtherCharges: null,
-                sewergeImprovementCharges: null,
-                totalSewerageCharges: null,
-                totalAmount: null,
-                totalDeduction: null,
-                balance: null,
+                subTotalA: null,
+                supervisionCharge: null,
+                labourCharge: null,
+                siteSurvey: null,
+                subTotalB: null,
+                connectionFee: null,
+                waterMeterShs: null,
+                applicationFormFee: null,
+                grandTotal: null,
                 id: null
             };
         };

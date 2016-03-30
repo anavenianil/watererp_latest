@@ -2,96 +2,95 @@
     "relationships": [
         {
             "relationshipId": 1,
+            "relationshipName": "supervisionPercent",
+            "otherEntityName": "percentageMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "labourChargePercent",
+            "otherEntityName": "percentageMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "siteSurveyPercent",
+            "otherEntityName": "percentageMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "ConnectionFeePercent",
+            "otherEntityName": "percentageMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
             "relationshipName": "applicationTxn",
             "otherEntityName": "applicationTxn",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "itemRequired",
+            "otherEntityName": "itemRequired",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "proceedings"
         }
     ],
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "waterSupplyConnectionCharges",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldName": "subTotalA",
+            "fieldType": "Double"
         },
         {
             "fieldId": 2,
-            "fieldName": "waterOtherCharges",
-            "fieldType": "Float"
+            "fieldName": "supervisionCharge",
+            "fieldType": "Double"
         },
         {
             "fieldId": 3,
-            "fieldName": "sixtyDaysConsumptionCharges",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldName": "labourCharge",
+            "fieldType": "Double"
         },
         {
             "fieldId": 4,
-            "fieldName": "waterSupplyImprovementCharges",
-            "fieldType": "Float"
+            "fieldName": "siteSurvey",
+            "fieldType": "Double"
         },
         {
             "fieldId": 5,
-            "fieldName": "meterCost",
-            "fieldType": "Float"
+            "fieldName": "subTotalB",
+            "fieldType": "Double"
         },
         {
             "fieldId": 6,
-            "fieldName": "greenBrigadeCharges",
-            "fieldType": "Float"
+            "fieldName": "connectionFee",
+            "fieldType": "Double"
         },
         {
             "fieldId": 7,
-            "fieldName": "rwhsCharges",
-            "fieldType": "Float"
+            "fieldName": "waterMeterShs",
+            "fieldType": "Double"
         },
         {
             "fieldId": 8,
-            "fieldName": "totalWaterCharges",
-            "fieldType": "Float"
+            "fieldName": "applicationFormFee",
+            "fieldType": "Double"
         },
         {
             "fieldId": 9,
-            "fieldName": "sewerageConnectionCharges",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 10,
-            "fieldName": "sewerageOtherCharges",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 11,
-            "fieldName": "sewergeImprovementCharges",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 12,
-            "fieldName": "totalSewerageCharges",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 13,
-            "fieldName": "totalAmount",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 14,
-            "fieldName": "totalDeduction",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 15,
-            "fieldName": "balance",
-            "fieldType": "Float"
+            "fieldName": "grandTotal",
+            "fieldType": "Double"
         }
     ],
-    "changelogDate": "20160315083447",
+    "changelogDate": "20160330095504",
     "dto": "no",
     "service": "no",
     "pagination": "infinite-scroll"

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Proceedings entity.
+ * Performance test for the PercentageMaster entity.
  */
-class ProceedingsGatlingTest extends Simulation {
+class PercentageMasterGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class ProceedingsGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the Proceedings entity")
+    val scn = scenario("Test the PercentageMaster entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class ProceedingsGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all proceedingss")
-            .get("/api/proceedingss")
+            exec(http("Get all percentageMasters")
+            .get("/api/percentageMasters")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new proceedings")
-            .post("/api/proceedingss")
+            .exec(http("Create new percentageMaster")
+            .post("/api/percentageMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "subTotalA":null, "supervisionCharge":null, "labourCharge":null, "siteSurvey":null, "subTotalB":null, "connectionFee":null, "waterMeterShs":null, "applicationFormFee":null, "grandTotal":null}""")).asJSON
+            .body(StringBody("""{"id":null, "percentType":"SAMPLE_TEXT", "percentValue":null}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_proceedings_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_percentageMaster_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created proceedings")
-                .get("${new_proceedings_url}")
+                exec(http("Get created percentageMaster")
+                .get("${new_percentageMaster_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created proceedings")
-            .delete("${new_proceedings_url}")
+            .exec(http("Delete created percentageMaster")
+            .delete("${new_percentageMaster_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

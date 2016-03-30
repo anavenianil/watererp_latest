@@ -14,15 +14,45 @@
                     ng-model="itemRequired.id" readonly />
         </div>
         <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="itemRequired.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_unit">Unit</label>
+            <input type="text" class="form-control" name="unit" id="field_unit"
+                    ng-model="itemRequired.unit"
+                     />
+        </div>
+        <div class="form-group">
             <label class="control-label" for="field_quantity">Quantity</label>
             <input type="number" class="form-control" name="quantity" id="field_quantity"
                     ng-model="itemRequired.quantity"
                      />
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_ratePerShs">RatePerShs</label>
+            <input type="number" class="form-control" name="ratePerShs" id="field_ratePerShs"
+                    ng-model="itemRequired.ratePerShs"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                    ng-model="itemRequired.amount"
+                     />
+        </div>
 
         <div class="form-group">
-            <label for="field_itemDetails">itemDetails</label>
-            <select class="form-control" id="field_itemDetails" name="itemDetails" ng-model="itemRequired.itemDetails" ng-options="itemDetails as itemDetails.id for itemDetails in itemdetailss track by itemDetails.id">
+            <label for="field_materialMaster">materialMaster</label>
+            <select class="form-control" id="field_materialMaster" name="materialMaster" ng-model="itemRequired.materialMaster" ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_applicationTxn">applicationTxn</label>
+            <select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="itemRequired.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
                 <option value=""></option>
             </select>
         </div>
@@ -33,8 +63,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="field_applicationTxn">applicationTxn</label>
-            <select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="itemRequired.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+            <label for="field_proceedings">proceedings</label>
+            <select class="form-control" id="field_proceedings" name="proceedings" ng-model="itemRequired.proceedings" ng-options="proceedings as proceedings.id for proceedings in proceedingss track by proceedings.id">
                 <option value=""></option>
             </select>
         </div>

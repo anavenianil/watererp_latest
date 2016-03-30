@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ItemRequiredController', function ($scope, $state, ItemRequired, ParseLinks) {
+    .controller('PercentageMasterController', function ($scope, $state, PercentageMaster, ParseLinks) {
 
-        $scope.itemRequireds = [];
+        $scope.percentageMasters = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            ItemRequired.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            PercentageMaster.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.itemRequireds.push(result[i]);
+                    $scope.percentageMasters.push(result[i]);
                 }
             });
         };
         $scope.reset = function() {
             $scope.page = 0;
-            $scope.itemRequireds = [];
+            $scope.percentageMasters = [];
             $scope.loadAll();
         };
         $scope.loadPage = function(page) {
@@ -33,12 +33,9 @@ angular.module('watererpApp')
         };
 
         $scope.clear = function () {
-            $scope.itemRequired = {
-                description: null,
-                unit: null,
-                quantity: null,
-                ratePerShs: null,
-                amount: null,
+            $scope.percentageMaster = {
+                percentType: null,
+                percentValue: null,
                 id: null
             };
         };

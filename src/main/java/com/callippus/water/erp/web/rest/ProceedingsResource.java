@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -41,7 +40,7 @@ public class ProceedingsResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Proceedings> createProceedings(@Valid @RequestBody Proceedings proceedings) throws URISyntaxException {
+    public ResponseEntity<Proceedings> createProceedings(@RequestBody Proceedings proceedings) throws URISyntaxException {
         log.debug("REST request to save Proceedings : {}", proceedings);
         if (proceedings.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("proceedings", "idexists", "A new proceedings cannot already have an ID")).body(null);
@@ -59,7 +58,7 @@ public class ProceedingsResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Proceedings> updateProceedings(@Valid @RequestBody Proceedings proceedings) throws URISyntaxException {
+    public ResponseEntity<Proceedings> updateProceedings(@RequestBody Proceedings proceedings) throws URISyntaxException {
         log.debug("REST request to update Proceedings : {}", proceedings);
         if (proceedings.getId() == null) {
             return createProceedings(proceedings);
