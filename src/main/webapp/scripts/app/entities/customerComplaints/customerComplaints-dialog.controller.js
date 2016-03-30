@@ -52,7 +52,9 @@ angular.module('watererpApp')
     $scope.getApplicationTxn = function(fileNo){
     	//alert("getApplicationTxn		getApplicationTxn		getApplicationTxn		getApplicationTxn");
     	ApplicationTxn.get({id : fileNo}, function(result) {
-            $scope.applicationTxn = result;            
+            $scope.applicationTxn = result; 
+            $scope.customerComplaints.applicationTxn = {};
+            $scope.customerComplaints.applicationTxn.street = $scope.applicationTxn.street;
         });	
     }
     
