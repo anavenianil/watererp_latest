@@ -3,24 +3,8 @@
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "tariffName",
+            "fieldName": "tariffCategory",
             "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "tariffUnit",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "tariffValue",
-            "fieldType": "Float",
             "fieldValidateRules": [
                 "required"
             ]

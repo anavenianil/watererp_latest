@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('tariffCategoryMaster', {
@@ -52,9 +52,7 @@ angular.module('watererpApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    tariffName: null,
-                                    tariffUnit: null,
-                                    tariffValue: null,
+                                    tariffCategory: null,
                                     id: null
                                 };
                             }

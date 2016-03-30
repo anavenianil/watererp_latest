@@ -784,24 +784,28 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-03-09 16:14:45',52,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160309105304','jhipster','classpath:config/liquibase/changelog/20160309105304_added_entity_Url2Role.xml','2016-03-09 16:34:47',53,'EXECUTED','7:10331a2dfcdaf6902d65c17510f31bc4','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160311094234','jhipster','classpath:config/liquibase/changelog/20160311094234_added_entity_SchemeMaster.xml','2016-03-11 15:21:26',54,'EXECUTED','7:af80987658cadbe9d18ef393fd5559c7','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml','2016-03-11 15:21:26',55,'EXECUTED','7:76b2ec672aee81aa1c61119392f20b5d','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160311094550','jhipster','classpath:config/liquibase/changelog/20160311094550_added_entity_MakeOfPipe.xml','2016-03-11 15:21:26',56,'EXECUTED','7:0aae809bc0a38e5aa294a887f735acb8','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160311094550','jhipster','classpath:config/liquibase/changelog/20160311094550_added_entity_MakeOfPipe.xml','2016-03-11 15:21:26',56,'EXECUTED','7:0aae809bc0a38e5aa294a887f735acb8','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311094820','jhipster','classpath:config/liquibase/changelog/20160311094820_added_entity_MainWaterSize.xml','2016-03-11 15:21:26',57,'EXECUTED','7:0e853a5e0c7721503d0203d88333bd91','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311094904','jhipster','classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml','2016-03-11 15:21:27',58,'EXECUTED','7:03b9b58c058199566e8d55fd5635b97d','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311095014','jhipster','classpath:config/liquibase/changelog/20160311095014_added_entity_DocketCode.xml','2016-03-11 15:21:27',59,'EXECUTED','7:9b3b9b3180ffc95d73eadf3d1294c5e0','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160311100455','jhipster','classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml','2016-03-11 15:35:47',60,'EXECUTED','7:02ff1a8ab9783cbd5eaec740ffa6d9cc','createTable, addForeignKeyConstraint (x12)','',NULL,'3.4.2',NULL,NULL);
+ ('20160311100455','jhipster','classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml','2016-03-11 15:35:47',60,'EXECUTED','7:02ff1a8ab9783cbd5eaec740ffa6d9cc','createTable, addForeignKeyConstraint (x12)','',NULL,'3.4.2',NULL,NULL),
+ ('20160314085424','jhipster','classpath:config/liquibase/changelog/20160314085424_added_entity_AccessList.xml','2016-03-14 16:13:27',61,'EXECUTED','7:0bbcbab98b16045642e3ecbe7f8d5e68','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160314085424','jhipster','classpath:config/liquibase/changelog/20160314085424_added_entity_AccessList.xml','2016-03-14 16:13:27',61,'EXECUTED','7:0bbcbab98b16045642e3ecbe7f8d5e68','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-03-15 11:54:55',64,'EXECUTED','7:15f4f13ea9c62925eda8f2dfe76b5250','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
  ('20160315053612','jhipster','classpath:config/liquibase/changelog/20160315053612_added_entity_CurrentUsers.xml','2016-03-15 11:54:55',65,'EXECUTED','7:8a4a035e32b0b643cecd398c7f310072','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
  ('20160315055126','jhipster','classpath:config/liquibase/changelog/20160315055126_added_entity_Terminal.xml','2016-03-15 11:54:55',66,'EXECUTED','7:e1d4bfddad1bbb1d0f00ddd8f44aa0b0','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160315055926','jhipster','classpath:config/liquibase/changelog/20160315055926_added_entity_TerminalLog.xml','2016-03-15 11:54:55',67,'EXECUTED','7:68ef0c670ad1ca54884347c8f8ce48a0','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL);
+ ('20160315055926','jhipster','classpath:config/liquibase/changelog/20160315055926_added_entity_TerminalLog.xml','2016-03-15 11:54:55',67,'EXECUTED','7:68ef0c670ad1ca54884347c8f8ce48a0','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
+ ('20160315060107','jhipster','classpath:config/liquibase/changelog/20160315060107_added_entity_Version.xml','2016-03-15 11:54:56',68,'EXECUTED','7:b17c4a085e285d295f72ab3d5f873ecf','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160315060107','jhipster','classpath:config/liquibase/changelog/20160315060107_added_entity_Version.xml','2016-03-15 11:54:56',68,'EXECUTED','7:b17c4a085e285d295f72ab3d5f873ecf','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-03-15 18:27:22',69,'EXECUTED','7:2e904c908c3eea4a5836561fad0dda47','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml','2016-03-28 17:40:06',70,'EXECUTED','7:d4acae70934c11a3b823cff795b26406','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-03-29 12:48:32',71,'EXECUTED','7:bbd26d35aa2c97875a53556da90c045d','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-03-29 12:48:32',71,'EXECUTED','7:bbd26d35aa2c97875a53556da90c045d','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml','2016-03-30 12:06:06',72,'EXECUTED','7:c01f3faca05eff0386e65260cc81849e','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffMaster.xml','2016-03-30 12:06:07',73,'EXECUTED','7:de67571b345cd24609fcbc1d6d8e12ab','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffTypeMaster.xml','2016-03-30 12:06:07',74,'EXECUTED','7:2fdf8de5ece58a24c9842690d2599317','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCharges.xml','2016-03-30 12:06:07',75,'EXECUTED','7:0d08d8c58279ef6ad2d32f408f3c7009','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -1462,7 +1466,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (108,'admin','2016-03-24 13:04:48','AUTHENTICATION_SUCCESS'),
  (109,'admin','2016-03-28 16:15:34','AUTHENTICATION_SUCCESS'),
  (110,'admin','2016-03-29 11:38:31','AUTHENTICATION_SUCCESS'),
- (111,'admin','2016-03-29 13:56:03','AUTHENTICATION_SUCCESS');
+ (111,'admin','2016-03-29 13:56:03','AUTHENTICATION_SUCCESS'),
+ (112,'admin','2016-03-29 14:19:03','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -1717,7 +1722,9 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (110,'remoteAddress','127.0.0.1'),
  (110,'sessionId','112456BC4B4F8FA4C7C5AC209463523F'),
  (111,'remoteAddress','0:0:0:0:0:0:0:1'),
- (111,'sessionId','31B4C3F636A85DBA24099CDE6B24C3C0');
+ (111,'sessionId','31B4C3F636A85DBA24099CDE6B24C3C0'),
+ (112,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (112,'sessionId','9A41E8AE4AE7EE6B35955EDE8E726A12');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -1746,24 +1753,24 @@ CREATE TABLE `jhi_persistent_token` (
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('+7kfspW2WJpi2bKM/dP9lw==',3,'hBwLquQ1naRCYyedhwXeJA==','2016-03-17','169.254.178.179','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('+kuZ8fh+MT05jeTHFp5gmw==',5,'/FPZJ9OhXHNXmMOFgz7obg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('0XaG2SbZbCV7dycw8dSsaQ==',3,'JcdZydy+wHWV9buPL3BciQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('2r6Z/StVCqb6VQE17jT96A==',3,'PCvfc7Hey8JJ8tf5lIycdg==','2016-03-23','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36'),
  ('2uRUyClVWXV8AlYMNeuJOw==',3,'PErAzkiwxOnl+ZDZP6T7JQ==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('4Kz54liz72Tw0RjO2Zrkpw==',3,'x3C2IoyZxxmQ8IZ4lG8oMg==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
- ('6B2RG6/uWQnWC28vOw8aXg==',3,'8QX7Ux+CmA4n198EaajbnA==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('7Ytkb8b+j1F3nPGWDNtKcw==',3,'l96/eI6viuEUtDy5AibxbA==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('6B2RG6/uWQnWC28vOw8aXg==',3,'8QX7Ux+CmA4n198EaajbnA==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('7Ytkb8b+j1F3nPGWDNtKcw==',3,'l96/eI6viuEUtDy5AibxbA==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('8FWdd/b8HL6zl541Kpr54A==',3,'OQxQHa8eBK/6lZG3uZPUhQ==','2016-03-26','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('9iL/4QMAvR0xB64rW5HESw==',3,'/k/ylVdhu5TQbQGtpI5N0w==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('bcCO32K28oP7r/PbgTTlXA==',3,'x/GmKXJ4i+FtuZWSHRBe0w==','2016-03-16','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('DEqQipDM3iLfE1PFx+mwRA==',3,'rlSkhLwJf+8q3MOatcrcDA==','2016-02-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('dOUzFnBhKu3El7plQu9D8g==',3,'t/g+E732euarMu6XC1r0sw==','2016-03-24','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
- ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('i0EUD52I5oNzHGicd6Ro6g==',3,'TQXcc348st0ko+lml1ZYPA==','2016-03-28','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('jEwMwchTTuqCLrwkSt2ARA==',3,'+3EGK4k26JImuyZpwYIppA==','2016-03-18','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('JGTk29YRjmNFnFbtZ2lwiA==',3,'tIkSNq0mHT3+4HE8TlPqjA==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nsyg6h+LdTgXwbH56+FakA==',3,'TVLj32ZdV7zQcM/9mWq5fA==','2016-03-15','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0');
@@ -2707,47 +2714,13 @@ CREATE TABLE `sub_desig_category_master` (
 
 
 --
--- Table structure for table `watererp`.`t`
---
-
-DROP TABLE IF EXISTS `t`;
-CREATE TABLE `t` (
-  `count(*)` bigint(21) NOT NULL default '0',
-  `can` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`t`
---
-
-/*!40000 ALTER TABLE `t` DISABLE KEYS */;
-INSERT INTO `t` (`count(*)`,`can`) VALUES 
- (2,'613427474'),
- (2,'613472557'),
- (2,'613472562'),
- (2,'613577519'),
- (2,'617738493'),
- (2,'617738918'),
- (2,'617757078'),
- (2,'617757083'),
- (2,'617757111'),
- (2,'617757186'),
- (2,'617771922'),
- (2,'617781451'),
- (2,'617781710');
-/*!40000 ALTER TABLE `t` ENABLE KEYS */;
-
-
---
 -- Table structure for table `watererp`.`tariff_category_master`
 --
 
 DROP TABLE IF EXISTS `tariff_category_master`;
 CREATE TABLE `tariff_category_master` (
   `id` bigint(20) NOT NULL auto_increment,
-  `tariff_name` varchar(255) NOT NULL,
-  `tariff_unit` int(11) NOT NULL,
-  `tariff_value` float NOT NULL,
+  `tariff_category` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2756,7 +2729,104 @@ CREATE TABLE `tariff_category_master` (
 --
 
 /*!40000 ALTER TABLE `tariff_category_master` DISABLE KEYS */;
+INSERT INTO `tariff_category_master` (`id`,`tariff_category`) VALUES 
+ (1,'Domestic'),
+ (2,'Institutional'),
+ (3,'Commercial'),
+ (4,'Industrial'),
+ (5,'Kiosks');
 /*!40000 ALTER TABLE `tariff_category_master` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`tariff_charges`
+--
+
+DROP TABLE IF EXISTS `tariff_charges`;
+CREATE TABLE `tariff_charges` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `tariff_desc` varchar(255) NOT NULL,
+  `slab_min` int(11) NOT NULL,
+  `slab_max` int(11) NOT NULL,
+  `rate` float NOT NULL,
+  `tariff_master_id` bigint(20) default NULL,
+  `tariff_type_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_tariffcharges_tariffmaster_id` (`tariff_master_id`),
+  KEY `fk_tariffcharges_tarifftypemaster_id` (`tariff_type_master_id`),
+  CONSTRAINT `fk_tariffcharges_tarifftypemaster_id` FOREIGN KEY (`tariff_type_master_id`) REFERENCES `tariff_type_master` (`id`),
+  CONSTRAINT `fk_tariffcharges_tariffmaster_id` FOREIGN KEY (`tariff_master_id`) REFERENCES `tariff_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`tariff_charges`
+--
+
+/*!40000 ALTER TABLE `tariff_charges` DISABLE KEYS */;
+INSERT INTO `tariff_charges` (`id`,`tariff_desc`,`slab_min`,`slab_max`,`rate`,`tariff_master_id`,`tariff_type_master_id`) VALUES 
+ (1,'Domestic - Usage',0,999999,780,1,1),
+ (2,'Domestic - Fixed',0,999999,18000,1,2),
+ (3,'Domestic - Service',0,999999,1800,1,3),
+ (4,'Domestic - Usage',0,999999,780,2,1),
+ (5,'Domestic - Fixed',0,999999,19000,2,2),
+ (6,'Domestic - Service',0,999999,1800,2,3),
+ (7,'Domestic - Usage',0,999999,800,3,1),
+ (8,'Domestic - Fixed',0,999999,19500,3,2),
+ (9,'Domestic - Service',0,999999,1820,3,3);
+/*!40000 ALTER TABLE `tariff_charges` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`tariff_master`
+--
+
+DROP TABLE IF EXISTS `tariff_master`;
+CREATE TABLE `tariff_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `tariff_name` varchar(255) NOT NULL,
+  `valid_from` timestamp NOT NULL on update CURRENT_TIMESTAMP,
+  `valid_to` timestamp NOT NULL,
+  `active` varchar(255) NOT NULL,
+  `tariff_category_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_tariffmaster_tariffcategorymaster_id` (`tariff_category_master_id`),
+  CONSTRAINT `fk_tariffmaster_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`tariff_master`
+--
+
+/*!40000 ALTER TABLE `tariff_master` DISABLE KEYS */;
+INSERT INTO `tariff_master` (`id`,`tariff_name`,`valid_from`,`valid_to`,`active`,`tariff_category_master_id`) VALUES 
+ (1,'Domestic - 2010 to 2015','2016-03-30 12:12:37','2015-12-31 00:00:00','1',1),
+ (2,'Domestic - 2016 Jan to Mar','2016-03-30 12:12:37','2016-03-31 00:00:00','1',1),
+ (3,'Domestic - 2016 Apr to  June','2016-03-30 12:12:27','2016-06-30 00:00:00','1',1),
+ (4,'Domestic - 2016 Jul to Dec','2016-07-01 00:00:00','2016-12-31 00:00:00','1',1);
+/*!40000 ALTER TABLE `tariff_master` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`tariff_type_master`
+--
+
+DROP TABLE IF EXISTS `tariff_type_master`;
+CREATE TABLE `tariff_type_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `tariff_type` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`tariff_type_master`
+--
+
+/*!40000 ALTER TABLE `tariff_type_master` DISABLE KEYS */;
+INSERT INTO `tariff_type_master` (`id`,`tariff_type`) VALUES 
+ (1,'Usage Charges'),
+ (2,'Fixed Charges'),
+ (3,'Service Charges');
+/*!40000 ALTER TABLE `tariff_type_master` ENABLE KEYS */;
 
 
 --
@@ -3141,37 +3211,6 @@ CREATE TABLE `workflow_type_master` (
 
 /*!40000 ALTER TABLE `workflow_type_master` DISABLE KEYS */;
 /*!40000 ALTER TABLE `workflow_type_master` ENABLE KEYS */;
-
-
---
--- Table structure for table `watererp`.`x`
---
-
-DROP TABLE IF EXISTS `x`;
-CREATE TABLE `x` (
-  `id` bigint(20) NOT NULL default '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`x`
---
-
-/*!40000 ALTER TABLE `x` DISABLE KEYS */;
-INSERT INTO `x` (`id`) VALUES 
- (14),
- (15),
- (16),
- (17),
- (18),
- (19),
- (20),
- (21),
- (22),
- (23),
- (24),
- (25),
- (26);
-/*!40000 ALTER TABLE `x` ENABLE KEYS */;
 
 
 --

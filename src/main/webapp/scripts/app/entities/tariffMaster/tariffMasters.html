@@ -1,0 +1,58 @@
+<div>
+    <h2>TariffMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="tariffMaster.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new TariffMaster</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffName"><span>TariffName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="validFrom"><span>ValidFrom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="validTo"><span>ValidTo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="active"><span>Active</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffCategoryMaster.id"><span>tariffCategoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="tariffMaster in tariffMasters track by tariffMaster.id">
+                    <td><a ui-sref="tariffMaster.detail({id:tariffMaster.id})">{{tariffMaster.id}}</a></td>
+                    <td>{{tariffMaster.tariffName}}</td>
+                    <td>{{tariffMaster.validFrom | date:'medium'}}</td>
+                    <td>{{tariffMaster.validTo | date:'medium'}}</td>
+                    <td>{{tariffMaster.active}}</td>
+                    <td>
+                        <a ui-sref="tariffCategoryMaster.detail({id:tariffMaster.tariffCategoryMaster.id})">{{tariffMaster.tariffCategoryMaster.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="tariffMaster.detail({id:tariffMaster.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="tariffMaster.edit({id:tariffMaster.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="tariffMaster.delete({id:tariffMaster.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

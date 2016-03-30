@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .controller('TariffCategoryMasterController', function ($scope, $state, TariffCategoryMaster, ParseLinks) {
 
         $scope.tariffCategoryMasters = [];
@@ -34,9 +34,7 @@ angular.module('watererpApp')
 
         $scope.clear = function () {
             $scope.tariffCategoryMaster = {
-                tariffName: null,
-                tariffUnit: null,
-                tariffValue: null,
+                tariffCategory: null,
                 id: null
             };
         };

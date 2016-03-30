@@ -1,0 +1,48 @@
+<div>
+    <h2>TariffTypeMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="tariffTypeMaster.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new TariffTypeMaster</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffType"><span>TariffType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="tariffTypeMaster in tariffTypeMasters track by tariffTypeMaster.id">
+                    <td><a ui-sref="tariffTypeMaster.detail({id:tariffTypeMaster.id})">{{tariffTypeMaster.id}}</a></td>
+                    <td>{{tariffTypeMaster.tariffType}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="tariffTypeMaster.detail({id:tariffTypeMaster.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="tariffTypeMaster.edit({id:tariffTypeMaster.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="tariffTypeMaster.delete({id:tariffTypeMaster.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

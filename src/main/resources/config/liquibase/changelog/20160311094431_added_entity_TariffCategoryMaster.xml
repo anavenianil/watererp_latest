@@ -21,19 +21,9 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="tariff_name" type="varchar(255)">
+            <column name="tariff_category" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
-            <column name="tariff_unit" type="integer">
-                <constraints nullable="false" />
-            </column>
-            
-            <column name="tariff_value" type="${floatType}">
-                <constraints nullable="false" />
-            </column>
-            
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
     </changeSet>

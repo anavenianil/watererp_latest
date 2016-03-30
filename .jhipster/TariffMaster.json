@@ -1,0 +1,49 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "tariffName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },        
+	{
+            "fieldId": 2,
+            "fieldName": "validFrom",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },        
+	{
+            "fieldId": 3,
+            "fieldName": "validTo",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },        
+	{
+            "fieldId": 4,
+            "fieldName": "active",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160311094431",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

@@ -41,14 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class TariffCategoryMasterResourceIntTest {
 
-    private static final String DEFAULT_TARIFF_NAME = "AAAAA";
-    private static final String UPDATED_TARIFF_NAME = "BBBBB";
-
-    private static final Integer DEFAULT_TARIFF_UNIT = 1;
-    private static final Integer UPDATED_TARIFF_UNIT = 2;
-
-    private static final Float DEFAULT_TARIFF_VALUE = 1F;
-    private static final Float UPDATED_TARIFF_VALUE = 2F;
+    private static final String DEFAULT_TARIFF_CATEGORY = "AAAAA";
+    private static final String UPDATED_TARIFF_CATEGORY = "BBBBB";
 
     @Inject
     private TariffCategoryMasterRepository tariffCategoryMasterRepository;
@@ -76,9 +70,7 @@ public class TariffCategoryMasterResourceIntTest {
     @Before
     public void initTest() {
         tariffCategoryMaster = new TariffCategoryMaster();
-        tariffCategoryMaster.setTariffName(DEFAULT_TARIFF_NAME);
-        tariffCategoryMaster.setTariffUnit(DEFAULT_TARIFF_UNIT);
-        tariffCategoryMaster.setTariffValue(DEFAULT_TARIFF_VALUE);
+        tariffCategoryMaster.setTariffCategory(DEFAULT_TARIFF_CATEGORY);
     }
 
     @Test
@@ -97,53 +89,15 @@ public class TariffCategoryMasterResourceIntTest {
         List<TariffCategoryMaster> tariffCategoryMasters = tariffCategoryMasterRepository.findAll();
         assertThat(tariffCategoryMasters).hasSize(databaseSizeBeforeCreate + 1);
         TariffCategoryMaster testTariffCategoryMaster = tariffCategoryMasters.get(tariffCategoryMasters.size() - 1);
-        assertThat(testTariffCategoryMaster.getTariffName()).isEqualTo(DEFAULT_TARIFF_NAME);
-        assertThat(testTariffCategoryMaster.getTariffUnit()).isEqualTo(DEFAULT_TARIFF_UNIT);
-        assertThat(testTariffCategoryMaster.getTariffValue()).isEqualTo(DEFAULT_TARIFF_VALUE);
+        assertThat(testTariffCategoryMaster.getTariffCategory()).isEqualTo(DEFAULT_TARIFF_CATEGORY);
     }
 
     @Test
     @Transactional
-    public void checkTariffNameIsRequired() throws Exception {
+    public void checkTariffCategoryIsRequired() throws Exception {
         int databaseSizeBeforeTest = tariffCategoryMasterRepository.findAll().size();
         // set the field null
-        tariffCategoryMaster.setTariffName(null);
-
-        // Create the TariffCategoryMaster, which fails.
-
-        restTariffCategoryMasterMockMvc.perform(post("/api/tariffCategoryMasters")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(tariffCategoryMaster)))
-                .andExpect(status().isBadRequest());
-
-        List<TariffCategoryMaster> tariffCategoryMasters = tariffCategoryMasterRepository.findAll();
-        assertThat(tariffCategoryMasters).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkTariffUnitIsRequired() throws Exception {
-        int databaseSizeBeforeTest = tariffCategoryMasterRepository.findAll().size();
-        // set the field null
-        tariffCategoryMaster.setTariffUnit(null);
-
-        // Create the TariffCategoryMaster, which fails.
-
-        restTariffCategoryMasterMockMvc.perform(post("/api/tariffCategoryMasters")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(tariffCategoryMaster)))
-                .andExpect(status().isBadRequest());
-
-        List<TariffCategoryMaster> tariffCategoryMasters = tariffCategoryMasterRepository.findAll();
-        assertThat(tariffCategoryMasters).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkTariffValueIsRequired() throws Exception {
-        int databaseSizeBeforeTest = tariffCategoryMasterRepository.findAll().size();
-        // set the field null
-        tariffCategoryMaster.setTariffValue(null);
+        tariffCategoryMaster.setTariffCategory(null);
 
         // Create the TariffCategoryMaster, which fails.
 
@@ -167,9 +121,7 @@ public class TariffCategoryMasterResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(tariffCategoryMaster.getId().intValue())))
-                .andExpect(jsonPath("$.[*].tariffName").value(hasItem(DEFAULT_TARIFF_NAME.toString())))
-                .andExpect(jsonPath("$.[*].tariffUnit").value(hasItem(DEFAULT_TARIFF_UNIT)))
-                .andExpect(jsonPath("$.[*].tariffValue").value(hasItem(DEFAULT_TARIFF_VALUE.doubleValue())));
+                .andExpect(jsonPath("$.[*].tariffCategory").value(hasItem(DEFAULT_TARIFF_CATEGORY.toString())));
     }
 
     @Test
@@ -183,9 +135,7 @@ public class TariffCategoryMasterResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(tariffCategoryMaster.getId().intValue()))
-            .andExpect(jsonPath("$.tariffName").value(DEFAULT_TARIFF_NAME.toString()))
-            .andExpect(jsonPath("$.tariffUnit").value(DEFAULT_TARIFF_UNIT))
-            .andExpect(jsonPath("$.tariffValue").value(DEFAULT_TARIFF_VALUE.doubleValue()));
+            .andExpect(jsonPath("$.tariffCategory").value(DEFAULT_TARIFF_CATEGORY.toString()));
     }
 
     @Test
@@ -205,9 +155,7 @@ public class TariffCategoryMasterResourceIntTest {
 		int databaseSizeBeforeUpdate = tariffCategoryMasterRepository.findAll().size();
 
         // Update the tariffCategoryMaster
-        tariffCategoryMaster.setTariffName(UPDATED_TARIFF_NAME);
-        tariffCategoryMaster.setTariffUnit(UPDATED_TARIFF_UNIT);
-        tariffCategoryMaster.setTariffValue(UPDATED_TARIFF_VALUE);
+        tariffCategoryMaster.setTariffCategory(UPDATED_TARIFF_CATEGORY);
 
         restTariffCategoryMasterMockMvc.perform(put("/api/tariffCategoryMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -218,9 +166,7 @@ public class TariffCategoryMasterResourceIntTest {
         List<TariffCategoryMaster> tariffCategoryMasters = tariffCategoryMasterRepository.findAll();
         assertThat(tariffCategoryMasters).hasSize(databaseSizeBeforeUpdate);
         TariffCategoryMaster testTariffCategoryMaster = tariffCategoryMasters.get(tariffCategoryMasters.size() - 1);
-        assertThat(testTariffCategoryMaster.getTariffName()).isEqualTo(UPDATED_TARIFF_NAME);
-        assertThat(testTariffCategoryMaster.getTariffUnit()).isEqualTo(UPDATED_TARIFF_UNIT);
-        assertThat(testTariffCategoryMaster.getTariffValue()).isEqualTo(UPDATED_TARIFF_VALUE);
+        assertThat(testTariffCategoryMaster.getTariffCategory()).isEqualTo(UPDATED_TARIFF_CATEGORY);
     }
 
     @Test

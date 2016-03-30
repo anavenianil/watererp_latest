@@ -14,46 +14,14 @@
                     ng-model="tariffCategoryMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_tariffName">TariffName</label>
-            <input type="text" class="form-control" name="tariffName" id="field_tariffName"
-                    ng-model="tariffCategoryMaster.tariffName"
+            <label class="control-label" for="field_tariffCategory">TariffCategory</label>
+            <input type="text" class="form-control" name="tariffCategory" id="field_tariffCategory"
+                    ng-model="tariffCategoryMaster.tariffCategory"
                     required />
-            <div ng-show="editForm.tariffName.$invalid">
+            <div ng-show="editForm.tariffCategory.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.tariffName.$error.required">
+                    ng-show="editForm.tariffCategory.$error.required">
                     This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_tariffUnit">TariffUnit</label>
-            <input type="number" class="form-control" name="tariffUnit" id="field_tariffUnit"
-                    ng-model="tariffCategoryMaster.tariffUnit"
-                    required />
-            <div ng-show="editForm.tariffUnit.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.tariffUnit.$error.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.tariffUnit.$error.number">
-                    This field should be a number.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_tariffValue">TariffValue</label>
-            <input type="number" class="form-control" name="tariffValue" id="field_tariffValue"
-                    ng-model="tariffCategoryMaster.tariffValue"
-                    required />
-            <div ng-show="editForm.tariffValue.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.tariffValue.$error.required">
-                    This field is required.
-                </p>
-                <p class="help-block"
-                    ng-show="editForm.tariffValue.$error.number">
-                    This field should be a number.
                 </p>
             </div>
         </div>
