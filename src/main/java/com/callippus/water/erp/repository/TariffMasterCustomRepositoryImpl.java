@@ -56,7 +56,13 @@ TariffMasterCustomRepository {
 	
 	public List<TariffMaster> findTariffs(ZonedDateTime validFrom, ZonedDateTime validTo){
 		String sql = "select * from (select * from tariff_master where unix_timestamp(valid_to) >= ?) a where unix_timestamp(valid_from) <= ? order by unix_timestamp(valid_from)";
-
+/*
+		select id,tariff_name,(case when valid_from < date('2013-10-01') then str_to_date('2013-10-01 00:00:00', '%Y-%m-%d %H:%i:%s') else valid_from end)
+		 valid_from,(case when valid_to > date('2016-03-01') then str_to_date('2016-03-01 00:00:00', '%Y-%m-%d %H:%i:%s') else valid_from end) valid_to,active,tariff_category_master_id
+		 from (select * from tariff_master where unix_timestamp(valid_to) >= unix_timestamp(date('2013-10-01'))) a
+		 where unix_timestamp(valid_from) <= unix_timestamp(date('2016-03-01')) order by unix_timestamp(valid_from)
+*/		 
+		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
 				.queryForList(sql, new Object[]{validFrom.toEpochSecond(),validTo.toEpochSecond()});
 
