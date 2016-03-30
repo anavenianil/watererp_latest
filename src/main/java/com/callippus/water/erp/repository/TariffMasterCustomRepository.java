@@ -10,6 +10,6 @@ import java.util.List;
 /**
  * Spring Data JPA repository for the TariffMaster entity.
  */
-public interface TariffMasterRepository extends JpaRepository<TariffMaster,Long> {
-
+public interface TariffMasterCustomRepository extends JpaRepository<TariffMaster,Long> {	
+	List<TariffMaster> findTariffs(ZonedDateTime validFrom, ZonedDateTime validTo);
 }

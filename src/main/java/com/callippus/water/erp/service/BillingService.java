@@ -5,17 +5,20 @@ import com.callippus.water.erp.domain.BillDetails;
 import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.PersistentToken;
+import com.callippus.water.erp.domain.TariffMaster;
 import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.repository.AuthorityRepository;
 import com.callippus.water.erp.repository.BillDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.PersistentTokenRepository;
+import com.callippus.water.erp.repository.TariffMasterCustomRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.security.SecurityUtils;
 import com.callippus.water.erp.service.util.RandomUtil;
 import com.callippus.water.erp.web.rest.dto.ManagedUserDTO;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.LocalDate;
 
@@ -29,8 +32,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.ZonedDateTime;
 
 import javax.inject.Inject;
 
@@ -51,6 +52,9 @@ public class BillingService {
 	@Inject
 	private CustDetailsRepository custDetailsRepository;
 
+	@Inject
+	private TariffMasterCustomRepository tariffMasterCustomRepository;
+	
 //	@Inject
 //	private BillFullDetails bfd;
 
@@ -108,6 +112,11 @@ public class BillingService {
 
 			DateTime jFrom = new DateTime(d_from);
 			DateTime jTo = new DateTime(d_to);
+			
+			ZonedDateTime zFrom = d_from.toInstant().atZone(ZoneId.systemDefault());
+			ZonedDateTime zTo = d_to.toInstant().atZone(ZoneId.systemDefault());
+			
+			List<TariffMaster> t = tariffMasterCustomRepository.findTariffs(zFrom, zTo);
 
 			Months d = Months.monthsBetween(jFrom, jTo);
 			int monthsDiff = d.getMonths() + 1;
