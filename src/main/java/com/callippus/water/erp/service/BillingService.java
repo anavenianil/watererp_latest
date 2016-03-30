@@ -54,9 +54,9 @@ public class BillingService {
 
 	@Inject
 	private TariffMasterCustomRepository tariffMasterCustomRepository;
-	
-//	@Inject
-//	private BillFullDetails bfd;
+
+	// @Inject
+	// private BillFullDetails bfd;
 
 	enum Status {
 		SUCCESS, FAILURE
@@ -75,10 +75,11 @@ public class BillingService {
 	String monthUpto;
 	boolean hasSewer;
 
-	float water, sewerage, service_charge, total_amount, net_payable_amount, surcharge, total_cess, from, upto, mths, avgkl, kl;
+	float water, sewerage, service_charge, total_amount, net_payable_amount,
+			surcharge, total_cess, from, upto, mths, avgkl, kl;
 
 	String mc_met_reader_code, bill_flag;
-	
+
 	public void generateBill() {
 
 		List<BillDetails> bd = billDetailsRepository.findAll();
@@ -90,7 +91,6 @@ public class BillingService {
 	}
 
 	public void process_bill(BillDetails bill_details) {
-
 
 		log.debug("Process customer with CAN:" + bill_details.getCan());
 		CustDetails customer = custDetailsRepository.findByCan(bill_details
@@ -105,68 +105,76 @@ public class BillingService {
 		}
 
 		try {
-			Date d_from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
-					.parse(bill_details.getFrom_month() + "01");
-			Date d_to = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
-					.parse(bill_details.getTo_month() + "01");
 
-			DateTime jFrom = new DateTime(d_from);
-			DateTime jTo = new DateTime(d_to);
-			
-			ZonedDateTime zFrom = d_from.toInstant().atZone(ZoneId.systemDefault());
-			ZonedDateTime zTo = d_to.toInstant().atZone(ZoneId.systemDefault());
-			
-			List<TariffMaster> t = tariffMasterCustomRepository.findTariffs(zFrom, zTo);
-
-			Months d = Months.monthsBetween(jFrom, jTo);
-			int monthsDiff = d.getMonths() + 1;
-
-			log.debug("Customer Info:" + customer.toString());
-			log.debug("Months:" + monthsDiff);
-
-			if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
-				avgKL = (Integer.parseInt(bill_details.getPresent_reading()) - Integer
-						.parseInt(bill_details.getInitial_reading()))
-						/ monthsDiff;
-
-				prevAvgKL = (Float.parseFloat(customer.getPrevAvgKl()) < 1.0f ? 1.0f
-						: Float.parseFloat(customer.getPrevAvgKl()));
-
-				factor = avgKL / prevAvgKL;
-
-				if (factor > 4.0f || factor < 0.25f) {
-					// Unable to process customer
-					log.debug("Meter reading for:" + customer.getId()
-							+ ": is ::" + bill_details.getPresent_reading()
-							+ ". This is too high or too low.");
-					return;
-				}
-			}
-			
-//			if (!bill_details.getCurrent_bill_type().equals("M"))
-//				bfd.setPresentReading(customer.getPrevReading());
+			// if (!bill_details.getCurrent_bill_type().equals("M"))
+			// bfd.setPresentReading(customer.getPrevReading());
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
 					.getPrevBillType().equals("M"))
 					&& bill_details.getCurrent_bill_type().equals("M")) {
+
+				Date d_from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
+						.parse(customer.getMetReadingMo());
+
+				Calendar date = Calendar.getInstance();
+				date.set(Calendar.DAY_OF_MONTH, 1);
+
+				Date d_to = date.getTime();
+
+				DateTime jFrom = new DateTime(d_from);
+				DateTime jTo = new DateTime(d_to);
+
+				ZonedDateTime zFrom = d_from.toInstant().atZone(
+						ZoneId.systemDefault());
+				ZonedDateTime zTo = d_to.toInstant().atZone(
+						ZoneId.systemDefault());
+
+				log.debug("Customer Info:" + customer.toString());
+				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
+
+				List<TariffMaster> t = tariffMasterCustomRepository
+						.findTariffs(zFrom, zTo);
+
+				Months d = Months.monthsBetween(jFrom, jTo);
+				int monthsDiff = d.getMonths() + 1;
+
+				log.debug("Months:" + monthsDiff);
+
+				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
+					avgKL = (Integer
+							.parseInt(bill_details.getPresent_reading()) - Integer
+							.parseInt(bill_details.getInitial_reading()))
+							/ monthsDiff;
+
+					prevAvgKL = (Float.parseFloat(customer.getPrevAvgKl()) < 1.0f ? 1.0f
+							: Float.parseFloat(customer.getPrevAvgKl()));
+
+					factor = avgKL / prevAvgKL;
+
+					if (factor > 4.0f || factor < 0.25f) {
+						// Unable to process customer
+						log.debug("Meter reading for:" + customer.getId()
+								+ ": is ::" + bill_details.getPresent_reading()
+								+ ". This is too high or too low.");
+						return;
+					}
+				}
+
 				units = Long.parseLong(bill_details.getPresent_reading())
 						- Long.parseLong(bill_details.getInitial_reading());
 				log.debug("units:" + units);
-			
 
-			kl = (float) (units / 1000.0);
-			}
-			else
-			{
-				avgKL = Float.parseFloat(customer.getPrevAvgKl());
-				units = (long) (avgKL * monthsDiff * 1000.0f);
-				log.debug("Units:" + units+" based on avgKL:"+avgKL+" for " + monthsDiff + " months.");
+				kl = (float) (units / 1000.0);
+			} else {
+//				avgKL = Float.parseFloat(customer.getPrevAvgKl());
+//				units = (long) (avgKL * monthsDiff * 1000.0f);
+//				log.debug("Units:" + units + " based on avgKL:" + avgKL
+//						+ " for " + monthsDiff + " months.");
 			}
 			monthUpto = getPrevMonthStart();
 
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
-
 
 		} catch (Exception e) {
 			log.debug("Invalid From or To Date:" + bill_details.getFrom_month()
@@ -176,261 +184,259 @@ public class BillingService {
 
 	}
 
-	void
-	calc()
-	{
-//		ldm->upto = datetomthnum(ldm->mthupto);
-//
-//	    mths = Upto - Feb2014 + 1;
-//	    syslog(LOG_INFO, "Inside clcFeb2014: mths=%d, Upto=%d, Feb2014=%d\n",
-//		   mths, Upto, Feb2014);
-//
-//	    if (mths > Mths)
-//		mths = Mths;
-//
-//	    kl = ldm->avgkl;
-//	    billedKL = kl;
-//
-//	    bMSB = ismsb(ldm->ctgnum);
-//
-//	    if (bMSB) {
-//		if (ldm->resunits == 0)
-//		    ldm->resunits = 1;
-//
-//		kl = (kl / (float) ldm->resunits);
-//
-//		billedKL = kl;
-//
-//		syslog(LOG_INFO,
-//		       "Inside clcFeb2014: resunits=%d, kl=%f, bMSB=%d\n",
-//		       ldm->resunits, kl, bMSB);
-//
-//		water = wfromarray(kl, tbldec2011dn);
-//
-//		water *= (float) ldm->resunits;
-//
-//		syslog(LOG_INFO, "Inside clcFeb2014: water tariff=%f\n", water);
-//
-//		if (ldm->resunits > 4) {
-//
-//		    // TODO: Calculate KL here
-//		    billedKL1 = 0.6F * (float) ldm->resunits;
-//		    minimum = 150.0F * billedKL1;
-//
-//		    if (water < minimum) {
-//			billedKL = billedKL1;
-//			water = minimum;
-//		    }
-//
-//		    syslog(LOG_INFO,
-//			   "Inside clcFeb2014: after resunits=%d, min=%f, water=%f\n",
-//			   ldm->resunits, minimum, water);
-//		}
-//
-//		minkl = sizetokl(ldm->pipesize);
-//		billedKL1 = minkl;
-//
-//		minimum = wfromarray(minkl, tbldec2011dn);
-//
-//		if (water < minimum) {
-//		    billedKL = billedKL1;
-//		    water = minimum;
-//		}
-//
-//		syslog(LOG_INFO,
-//		       "Inside clcFeb2014: after pipesize=%f, min=%f, minkl=%f, water=%f\n",
-//		       ldm->pipesize, minimum, minkl, water);
-//
-//	    } else {
-//		if (ldm->resunits == 0)
-//		    ldm->resunits = 1;
-//
-//		syslog(LOG_INFO,
-//		       "Inside clcFeb2014: resunits=%d, kl=%f, bMSB=%d\n",
-//		       ldm->resunits, kl, bMSB);
-//
-//		switch (ldm->ctgnum) {
-//		case 21316:
-//		    water = wfromarray(kl, tbldec2011ds);
-//		    break;
-//		case 8260:
-//		case 19780:
-//		case 20551:
-//		case 21328:
-//		case 8277:
-//		case 17234:
-//		case 13389:
-//		    water = wfromarray(kl, tbldec2011d);
-//		    break;
-//
-//		case 8259:
-//		case 13133:
-//		case 8270:
-//		    water = wfromarray(kl, tblfeb2014c);
-//		    break;
-//		case 8265:
-//		case 12617:
-//		    water = wfromarray(kl, tblfeb2014i);
-//		    break;
-//		}
-//		syslog(LOG_INFO, "Inside clcFeb2014: water tariff=%f\n", water);
-//
-//		// Apply this min. flats logic only for non-commercial and
-//		// non-industrial customers
-//		if (!
-//		    (ldm->ctgnum == 8259 || ldm->ctgnum == 13133
-//		     || ldm->ctgnum == 8270 || ldm->ctgnum == 8265
-//		     || ldm->ctgnum == 12617)) {
-//		    if (ldm->resunits > 4) {
-//			minimum = 150.0F * (float) ldm->resunits;
-//
-//			if (water < minimum)
-//			    water = minimum;
-//
-//			syslog(LOG_INFO,
-//			       "Inside clcFeb2014: after resunits=%d, min=%f, water=%f\n",
-//			       ldm->resunits, minimum, water);
-//		    }
-//		}
-//		minkl = sizetokl(ldm->pipesize);
-//
-//		switch (ldm->ctgnum) {
-//		case 21316:
-//		    minimum = wfromarray(minkl, tbldec2011ds);
-//		    break;
-//		case 8260:
-//		case 19780:
-//		case 20551:
-//		case 21328:
-//		case 8277:
-//		case 17234:
-//		case 13389:
-//		    minimum = wfromarray(minkl, tbldec2011d);
-//		    break;
-//		case 8259:
-//		case 13133:
-//		case 8270:
-//		    minimum = wfromarray(minkl, tbldec2011c);
-//		    break;
-//		case 8265:
-//		case 12617:
-//		    minimum = wfromarray(minkl, tbldec2011i);
-//		    break;
-//		}
-//
-//		if (water < minimum) {
-//		    billedKL = minkl;
-//		    water = minimum;
-//		}
-//
-//		syslog(LOG_INFO,
-//		       "Inside clcFeb2014: before min pipesize=%f, min=%f, minkl=%f, water=%f\n",
-//		       ldm->pipesize, minimum, minkl, water);
-//
-//		minimum = sizetominfeb2014(ldm->pipesize, Upto, ldm->ctgnum);
-//
-//		if (water < minimum)
-//		    water = minimum;
-//
-//		syslog(LOG_INFO,
-//		       "Inside clcFeb2014: after pipesize=%f, min=%f, minkl=%f, water=%f\n",
-//		       ldm->pipesize, minimum, minkl, water);
-//
-//		syslog(LOG_INFO,
-//		       "Inside clcFeb2014: water after months=%f, mths=%d\n",
-//		       water, mths);
-//	    }
-//
-//	    if (ldm->hassewer) {
-//		sewer = water * 0.35F;
-//	    }
-//
-//	    normal_mths = mths;
-//
-//	    if (strcmp(c->oc_flag, "T") == 0) {
-//		if (strcmp(c->oc_date, "") == 0 || strcmp(c->oc_date, "0") == 0
-//		    || strcmp(c->oc_date, "00010101") == 0) {
-//
-//		    oc_mths = mths;
-//		} else {
-//		    oc_dt = datetomthnum(c->oc_date);
-//
-//		    from = ldm->from;
-//
-//		    if (ldm->from < Feb2014)
-//			from = Feb2014;
-//
-//		    oc_mths = oc_dt - from;
-//		    syslog(LOG_INFO, "oc_dt: %d, from dt: %d, oc_mths: %d\n",
-//			   oc_dt, from, oc_mths);
-//		}
-//
-//		if (oc_mths > 0) {
-//		    syslog(LOG_INFO, "***************************\n");
-//		    syslog(LOG_INFO,
-//			   "Water: %.2f\nOC Months:%d\nOC Penalty Water Cess %.2f times applied!\n",
-//			   water, oc_mths, 3.0 * water * oc_mths);
-//		    syslog(LOG_INFO,
-//			   "Sewerage: %.2f\nOC Months:%d\nOC Penalty Sewerage Cess %.2f times applied!\n",
-//			   sewer, oc_mths, 3.0 * sewer * oc_mths);
-//		    syslog(LOG_INFO, "***************************\n");
-//
-//		    oc_water = 3.0 * water;
-//		    oc_sewer = 3.0 * sewer;
-//
-//		    normal_mths = mths - oc_mths;
-//
-//		}
-//	    }
-//
-//	    ldm->water += water * (float) normal_mths;
-//
-//	    if (ldm->hassewer) {
-//		ldm->sewerage += sewer * (float) normal_mths;
-//	    }
-//
-//	    syslog(LOG_INFO,
-//		   "Inside clcFeb2014: Surcharge before=%f, amt=%.2f, sc=%.2f\n",
-//		   ldm->surcharge, water + sewer,
-//		   clcsurcharge_new(water + sewer, tbljul2010sc));
-//
-//	    if (penal_flag == TRUE && ldm->pipesize > 0.50F)
-//		sprintf(ldm->nometer_amt, "%.2f", (water + sewer) * penal_mths);
-//	    else
-//		strcpy(ldm->nometer_amt, "0.00");
-//
-//	    syslog(LOG_INFO,
-//		   "clcFeb2014: This is the nometer amt:%s, pipesize:%.2f\n",
-//		   ldm->nometer_amt, ldm->pipesize);
-//
-//	    surcharge = clcsurcharge_new(water + sewer, tbljul2010sc);
-//	    syslog(LOG_INFO, "Inside clcFeb2014: Surcharge after=%f\n",
-//		   ldm->surcharge);
-//
-//	    ldm->surcharge += surcharge * (float) normal_mths;
-//
-//	    if (oc_mths > 0) {
-//		ldm->water += oc_water * (float) oc_mths;
-//		ldm->sewerage += oc_sewer * (float) oc_mths;
-//
-//		syslog(LOG_INFO,
-//		       "Inside clcFeb2014: OC Surcharge before=%f, amt=%.2f, sc=%.2f\n",
-//		       ldm->surcharge, oc_water + oc_sewer,
-//		       clcsurcharge_new(oc_water + oc_sewer, tbljul2010sc));
-//
-//		surcharge = clcsurcharge_new(oc_water + oc_sewer, tbljul2010sc);
-//		syslog(LOG_INFO, "Inside clcFeb2014: Surcharge after=%f\n",
-//		       ldm->surcharge);
-//
-//		ldm->surcharge += surcharge * (float) oc_mths;
-//	    }
-//
-//	    if (ldm->from < Feb2014)
-//		clcDec2011(ldm, Feb2014 - 1, Mths - mths);
-//
-//	    return;
+	void calc() {
+		// ldm->upto = datetomthnum(ldm->mthupto);
+		//
+		// mths = Upto - Feb2014 + 1;
+		// syslog(LOG_INFO, "Inside clcFeb2014: mths=%d, Upto=%d, Feb2014=%d\n",
+		// mths, Upto, Feb2014);
+		//
+		// if (mths > Mths)
+		// mths = Mths;
+		//
+		// kl = ldm->avgkl;
+		// billedKL = kl;
+		//
+		// bMSB = ismsb(ldm->ctgnum);
+		//
+		// if (bMSB) {
+		// if (ldm->resunits == 0)
+		// ldm->resunits = 1;
+		//
+		// kl = (kl / (float) ldm->resunits);
+		//
+		// billedKL = kl;
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: resunits=%d, kl=%f, bMSB=%d\n",
+		// ldm->resunits, kl, bMSB);
+		//
+		// water = wfromarray(kl, tbldec2011dn);
+		//
+		// water *= (float) ldm->resunits;
+		//
+		// syslog(LOG_INFO, "Inside clcFeb2014: water tariff=%f\n", water);
+		//
+		// if (ldm->resunits > 4) {
+		//
+		// // TODO: Calculate KL here
+		// billedKL1 = 0.6F * (float) ldm->resunits;
+		// minimum = 150.0F * billedKL1;
+		//
+		// if (water < minimum) {
+		// billedKL = billedKL1;
+		// water = minimum;
+		// }
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: after resunits=%d, min=%f, water=%f\n",
+		// ldm->resunits, minimum, water);
+		// }
+		//
+		// minkl = sizetokl(ldm->pipesize);
+		// billedKL1 = minkl;
+		//
+		// minimum = wfromarray(minkl, tbldec2011dn);
+		//
+		// if (water < minimum) {
+		// billedKL = billedKL1;
+		// water = minimum;
+		// }
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: after pipesize=%f, min=%f, minkl=%f, water=%f\n",
+		// ldm->pipesize, minimum, minkl, water);
+		//
+		// } else {
+		// if (ldm->resunits == 0)
+		// ldm->resunits = 1;
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: resunits=%d, kl=%f, bMSB=%d\n",
+		// ldm->resunits, kl, bMSB);
+		//
+		// switch (ldm->ctgnum) {
+		// case 21316:
+		// water = wfromarray(kl, tbldec2011ds);
+		// break;
+		// case 8260:
+		// case 19780:
+		// case 20551:
+		// case 21328:
+		// case 8277:
+		// case 17234:
+		// case 13389:
+		// water = wfromarray(kl, tbldec2011d);
+		// break;
+		//
+		// case 8259:
+		// case 13133:
+		// case 8270:
+		// water = wfromarray(kl, tblfeb2014c);
+		// break;
+		// case 8265:
+		// case 12617:
+		// water = wfromarray(kl, tblfeb2014i);
+		// break;
+		// }
+		// syslog(LOG_INFO, "Inside clcFeb2014: water tariff=%f\n", water);
+		//
+		// // Apply this min. flats logic only for non-commercial and
+		// // non-industrial customers
+		// if (!
+		// (ldm->ctgnum == 8259 || ldm->ctgnum == 13133
+		// || ldm->ctgnum == 8270 || ldm->ctgnum == 8265
+		// || ldm->ctgnum == 12617)) {
+		// if (ldm->resunits > 4) {
+		// minimum = 150.0F * (float) ldm->resunits;
+		//
+		// if (water < minimum)
+		// water = minimum;
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: after resunits=%d, min=%f, water=%f\n",
+		// ldm->resunits, minimum, water);
+		// }
+		// }
+		// minkl = sizetokl(ldm->pipesize);
+		//
+		// switch (ldm->ctgnum) {
+		// case 21316:
+		// minimum = wfromarray(minkl, tbldec2011ds);
+		// break;
+		// case 8260:
+		// case 19780:
+		// case 20551:
+		// case 21328:
+		// case 8277:
+		// case 17234:
+		// case 13389:
+		// minimum = wfromarray(minkl, tbldec2011d);
+		// break;
+		// case 8259:
+		// case 13133:
+		// case 8270:
+		// minimum = wfromarray(minkl, tbldec2011c);
+		// break;
+		// case 8265:
+		// case 12617:
+		// minimum = wfromarray(minkl, tbldec2011i);
+		// break;
+		// }
+		//
+		// if (water < minimum) {
+		// billedKL = minkl;
+		// water = minimum;
+		// }
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: before min pipesize=%f, min=%f, minkl=%f, water=%f\n",
+		// ldm->pipesize, minimum, minkl, water);
+		//
+		// minimum = sizetominfeb2014(ldm->pipesize, Upto, ldm->ctgnum);
+		//
+		// if (water < minimum)
+		// water = minimum;
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: after pipesize=%f, min=%f, minkl=%f, water=%f\n",
+		// ldm->pipesize, minimum, minkl, water);
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: water after months=%f, mths=%d\n",
+		// water, mths);
+		// }
+		//
+		// if (ldm->hassewer) {
+		// sewer = water * 0.35F;
+		// }
+		//
+		// normal_mths = mths;
+		//
+		// if (strcmp(c->oc_flag, "T") == 0) {
+		// if (strcmp(c->oc_date, "") == 0 || strcmp(c->oc_date, "0") == 0
+		// || strcmp(c->oc_date, "00010101") == 0) {
+		//
+		// oc_mths = mths;
+		// } else {
+		// oc_dt = datetomthnum(c->oc_date);
+		//
+		// from = ldm->from;
+		//
+		// if (ldm->from < Feb2014)
+		// from = Feb2014;
+		//
+		// oc_mths = oc_dt - from;
+		// syslog(LOG_INFO, "oc_dt: %d, from dt: %d, oc_mths: %d\n",
+		// oc_dt, from, oc_mths);
+		// }
+		//
+		// if (oc_mths > 0) {
+		// syslog(LOG_INFO, "***************************\n");
+		// syslog(LOG_INFO,
+		// "Water: %.2f\nOC Months:%d\nOC Penalty Water Cess %.2f times applied!\n",
+		// water, oc_mths, 3.0 * water * oc_mths);
+		// syslog(LOG_INFO,
+		// "Sewerage: %.2f\nOC Months:%d\nOC Penalty Sewerage Cess %.2f times applied!\n",
+		// sewer, oc_mths, 3.0 * sewer * oc_mths);
+		// syslog(LOG_INFO, "***************************\n");
+		//
+		// oc_water = 3.0 * water;
+		// oc_sewer = 3.0 * sewer;
+		//
+		// normal_mths = mths - oc_mths;
+		//
+		// }
+		// }
+		//
+		// ldm->water += water * (float) normal_mths;
+		//
+		// if (ldm->hassewer) {
+		// ldm->sewerage += sewer * (float) normal_mths;
+		// }
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: Surcharge before=%f, amt=%.2f, sc=%.2f\n",
+		// ldm->surcharge, water + sewer,
+		// clcsurcharge_new(water + sewer, tbljul2010sc));
+		//
+		// if (penal_flag == TRUE && ldm->pipesize > 0.50F)
+		// sprintf(ldm->nometer_amt, "%.2f", (water + sewer) * penal_mths);
+		// else
+		// strcpy(ldm->nometer_amt, "0.00");
+		//
+		// syslog(LOG_INFO,
+		// "clcFeb2014: This is the nometer amt:%s, pipesize:%.2f\n",
+		// ldm->nometer_amt, ldm->pipesize);
+		//
+		// surcharge = clcsurcharge_new(water + sewer, tbljul2010sc);
+		// syslog(LOG_INFO, "Inside clcFeb2014: Surcharge after=%f\n",
+		// ldm->surcharge);
+		//
+		// ldm->surcharge += surcharge * (float) normal_mths;
+		//
+		// if (oc_mths > 0) {
+		// ldm->water += oc_water * (float) oc_mths;
+		// ldm->sewerage += oc_sewer * (float) oc_mths;
+		//
+		// syslog(LOG_INFO,
+		// "Inside clcFeb2014: OC Surcharge before=%f, amt=%.2f, sc=%.2f\n",
+		// ldm->surcharge, oc_water + oc_sewer,
+		// clcsurcharge_new(oc_water + oc_sewer, tbljul2010sc));
+		//
+		// surcharge = clcsurcharge_new(oc_water + oc_sewer, tbljul2010sc);
+		// syslog(LOG_INFO, "Inside clcFeb2014: Surcharge after=%f\n",
+		// ldm->surcharge);
+		//
+		// ldm->surcharge += surcharge * (float) oc_mths;
+		// }
+		//
+		// if (ldm->from < Feb2014)
+		// clcDec2011(ldm, Feb2014 - 1, Mths - mths);
+		//
+		// return;
 	}
-	
+
 	public String getPrevMonthStart() {
 		Calendar aCalendar = Calendar.getInstance();
 		// add -1 month to current month
