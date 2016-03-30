@@ -3,6 +3,7 @@
 angular.module('watererpApp')
     .controller('CustomerComplaintsDialogController', function ($scope, $state, CustomerComplaints, ParseLinks, $stateParams, ApplicationTxn, ComplaintTypeMaster) {
     $scope.customerComplaints = {};
+    $scope.customerComplaints.complaintDate = new Date();////////  This code is to per populate system date in Complaint Date Field
     $scope.applicationtxns = ApplicationTxn.query();
     $scope.complainttypemasters = ComplaintTypeMaster.query();
     $scope.load = function(id) {
@@ -38,7 +39,6 @@ angular.module('watererpApp')
     $scope.clear = function() {
         $uibModalInstance.dismiss('cancel');
     };
-    
     $scope.datePickerForComplaintDate = {};
 
     $scope.datePickerForComplaintDate.status = {
@@ -48,6 +48,14 @@ angular.module('watererpApp')
     $scope.datePickerForComplaintDateOpen = function($event) {
         $scope.datePickerForComplaintDate.status.opened = true;
     };
+    
+    $scope.getApplicationTxn = function(fileNo){
+    	//alert("getApplicationTxn		getApplicationTxn		getApplicationTxn		getApplicationTxn");
+    	ApplicationTxn.get({id : fileNo}, function(result) {
+            $scope.applicationTxn = result;            
+        });	
+    }
+    
  });
 
 
