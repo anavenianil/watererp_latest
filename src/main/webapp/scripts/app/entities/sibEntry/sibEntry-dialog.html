@@ -1,0 +1,164 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="mySibEntryLabel">Create or edit a SibEntry</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="sibEntry.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sibId">SibId</label>
+            <input type="number" class="form-control" name="sibId" id="field_sibId"
+                    ng-model="sibEntry.sibId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_soNo">SoNo</label>
+            <input type="text" class="form-control" name="soNo" id="field_soNo"
+                    ng-model="sibEntry.soNo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_soDate">SoDate</label>
+            <input id="field_soDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.soDate" is-open="datePickerForSoDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForSoDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_demandDate">DemandDate</label>
+            <input id="field_demandDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.demandDate" is-open="datePickerForDemandDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForDemandDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_dir">Dir</label>
+            <input type="text" class="form-control" name="dir" id="field_dir"
+                    ng-model="sibEntry.dir"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_divName">DivName</label>
+            <input type="text" class="form-control" name="divName" id="field_divName"
+                    ng-model="sibEntry.divName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_invNo">InvNo</label>
+            <input type="number" class="form-control" name="invNo" id="field_invNo"
+                    ng-model="sibEntry.invNo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sibDate">SibDate</label>
+            <input id="field_sibDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.sibDate" is-open="datePickerForSibDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForSibDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sibNo">SibNo</label>
+            <input type="text" class="form-control" name="sibNo" id="field_sibNo"
+                    ng-model="sibEntry.sibNo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_irDate">IrDate</label>
+            <input id="field_irDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.irDate" is-open="datePickerForIrDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForIrDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_irNo">IrNo</label>
+            <input type="text" class="form-control" name="irNo" id="field_irNo"
+                    ng-model="sibEntry.irNo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_vendorCode">VendorCode</label>
+            <input type="text" class="form-control" name="vendorCode" id="field_vendorCode"
+                    ng-model="sibEntry.vendorCode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_remarks">Remarks</label>
+            <input type="text" class="form-control" name="remarks" id="field_remarks"
+                    ng-model="sibEntry.remarks"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_toUser">ToUser</label>
+            <input id="field_toUser" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.toUser" is-open="datePickerForToUser.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForToUserOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_fromUser">FromUser</label>
+            <input id="field_fromUser" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.fromUser" is-open="datePickerForFromUser.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForFromUserOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_status">Status</label>
+            <input type="number" class="form-control" name="status" id="field_status"
+                    ng-model="sibEntry.status"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.creationDate" is-open="datePickerForCreationDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForCreationDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForLastModifiedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_dcNo">DcNo</label>
+            <input type="text" class="form-control" name="dcNo" id="field_dcNo"
+                    ng-model="sibEntry.dcNo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_dcDate">DcDate</label>
+            <input id="field_dcDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="sibEntry.dcDate" is-open="datePickerForDcDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForDcDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

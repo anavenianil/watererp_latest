@@ -72,5 +72,12 @@
     <include file="classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160328051857_added_entity_FileUploadMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160328131639_added_entity_FileUploadMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330052554_added_entity_ItemCategoryMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330052808_added_entity_ItemSubCategoryMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330053134_added_entity_ItemCodeMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330053533_added_entity_ItemCompanyMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330054006_added_entity_ItemSubCodeMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330054928_added_entity_MaterialMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330055745_added_entity_SibEntry.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

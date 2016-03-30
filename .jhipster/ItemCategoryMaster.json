@@ -1,0 +1,39 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "creationDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "categoryCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160330052554",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

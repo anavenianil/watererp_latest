@@ -1,0 +1,62 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "itemCodeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "itemSubCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "itemName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "creationDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "itemCcodeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "itemCategoryId",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "itemSubCategoryID",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20160330054006",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

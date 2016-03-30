@@ -1,0 +1,114 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myMaterialMasterLabel">Create or edit a MaterialMaster</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="materialMaster.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_materialName">MaterialName</label>
+            <input type="text" class="form-control" name="materialName" id="field_materialName"
+                    ng-model="materialMaster.materialName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_consumableFlag">ConsumableFlag</label>
+            <input type="text" class="form-control" name="consumableFlag" id="field_consumableFlag"
+                    ng-model="materialMaster.consumableFlag"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_uomId">UomId</label>
+            <input type="text" class="form-control" name="uomId" id="field_uomId"
+                    ng-model="materialMaster.uomId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_categoryId">CategoryId</label>
+            <input type="number" class="form-control" name="categoryId" id="field_categoryId"
+                    ng-model="materialMaster.categoryId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_subCategoryId">SubCategoryId</label>
+            <input type="number" class="form-control" name="subCategoryId" id="field_subCategoryId"
+                    ng-model="materialMaster.subCategoryId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemCodeId">ItemCodeId</label>
+            <input type="number" class="form-control" name="itemCodeId" id="field_itemCodeId"
+                    ng-model="materialMaster.itemCodeId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemSubCodeId">ItemSubCodeId</label>
+            <input type="number" class="form-control" name="itemSubCodeId" id="field_itemSubCodeId"
+                    ng-model="materialMaster.itemSubCodeId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_rateContractFlag">RateContractFlag</label>
+            <input type="text" class="form-control" name="rateContractFlag" id="field_rateContractFlag"
+                    ng-model="materialMaster.rateContractFlag"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_unitRate">UnitRate</label>
+            <input type="number" class="form-control" name="unitRate" id="field_unitRate"
+                    ng-model="materialMaster.unitRate"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="materialMaster.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_status">Status</label>
+            <input type="number" class="form-control" name="status" id="field_status"
+                    ng-model="materialMaster.status"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="materialMaster.creationDate" is-open="datePickerForCreationDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForCreationDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="materialMaster.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForLastModifiedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_companyCodeId">CompanyCodeId</label>
+            <input type="number" class="form-control" name="companyCodeId" id="field_companyCodeId"
+                    ng-model="materialMaster.companyCodeId"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

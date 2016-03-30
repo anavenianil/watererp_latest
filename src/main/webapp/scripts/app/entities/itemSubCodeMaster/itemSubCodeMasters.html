@@ -1,0 +1,74 @@
+<div>
+    <h2>ItemSubCodeMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="itemSubCodeMaster.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new ItemSubCodeMaster
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="itemCodeId"><span>ItemCodeId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="itemSubCode"><span>ItemSubCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="itemName"><span>ItemName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span>CreationDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="itemCcodeId"><span>ItemCcodeId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="itemCategoryId"><span>ItemCategoryId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="itemSubCategoryID"><span>ItemSubCategoryID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="itemSubCodeMaster in itemSubCodeMasters track by itemSubCodeMaster.id">
+                    <td><a ui-sref="itemSubCodeMaster.detail({id:itemSubCodeMaster.id})">{{itemSubCodeMaster.id}}</a></td>
+                    <td>{{itemSubCodeMaster.itemCodeId}}</td>
+                    <td>{{itemSubCodeMaster.itemSubCode}}</td>
+                    <td>{{itemSubCodeMaster.itemName}}</td>
+                    <td>{{itemSubCodeMaster.description}}</td>
+                    <td>{{itemSubCodeMaster.status}}</td>
+                    <td>{{itemSubCodeMaster.creationDate | date:'medium'}}</td>
+                    <td>{{itemSubCodeMaster.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{itemSubCodeMaster.itemCcodeId}}</td>
+                    <td>{{itemSubCodeMaster.itemCategoryId}}</td>
+                    <td>{{itemSubCodeMaster.itemSubCategoryID}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="itemSubCodeMaster.detail({id:itemSubCodeMaster.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="itemSubCodeMaster.edit({id:itemSubCodeMaster.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="itemSubCodeMaster.delete({id:itemSubCodeMaster.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+
+<div>
+    <h2><span>MaterialMaster</span> {{materialMaster.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>MaterialName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.materialName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ConsumableFlag</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.consumableFlag}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>UomId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.uomId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CategoryId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.categoryId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SubCategoryId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.subCategoryId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemCodeId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.itemCodeId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemSubCodeId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.itemSubCodeId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>RateContractFlag</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.rateContractFlag}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>UnitRate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.unitRate}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreationDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.creationDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CompanyCodeId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{materialMaster.companyCodeId}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

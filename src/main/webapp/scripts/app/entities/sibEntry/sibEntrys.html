@@ -1,0 +1,94 @@
+<div>
+    <h2>SibEntrys</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="sibEntry.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new SibEntry
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sibId"><span>SibId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="soNo"><span>SoNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="soDate"><span>SoDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="demandDate"><span>DemandDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dir"><span>Dir</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="divName"><span>DivName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="invNo"><span>InvNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sibDate"><span>SibDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sibNo"><span>SibNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="irDate"><span>IrDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="irNo"><span>IrNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="vendorCode"><span>VendorCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="toUser"><span>ToUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fromUser"><span>FromUser</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="creationDate"><span>CreationDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span>LastModifiedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dcNo"><span>DcNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dcDate"><span>DcDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="sibEntry in sibEntrys track by sibEntry.id">
+                    <td><a ui-sref="sibEntry.detail({id:sibEntry.id})">{{sibEntry.id}}</a></td>
+                    <td>{{sibEntry.sibId}}</td>
+                    <td>{{sibEntry.soNo}}</td>
+                    <td>{{sibEntry.soDate | date:'medium'}}</td>
+                    <td>{{sibEntry.demandDate | date:'medium'}}</td>
+                    <td>{{sibEntry.dir}}</td>
+                    <td>{{sibEntry.divName}}</td>
+                    <td>{{sibEntry.invNo}}</td>
+                    <td>{{sibEntry.sibDate | date:'medium'}}</td>
+                    <td>{{sibEntry.sibNo}}</td>
+                    <td>{{sibEntry.irDate | date:'medium'}}</td>
+                    <td>{{sibEntry.irNo}}</td>
+                    <td>{{sibEntry.vendorCode}}</td>
+                    <td>{{sibEntry.remarks}}</td>
+                    <td>{{sibEntry.toUser | date:'medium'}}</td>
+                    <td>{{sibEntry.fromUser | date:'medium'}}</td>
+                    <td>{{sibEntry.status}}</td>
+                    <td>{{sibEntry.creationDate | date:'medium'}}</td>
+                    <td>{{sibEntry.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{sibEntry.dcNo}}</td>
+                    <td>{{sibEntry.dcDate | date:'medium'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="sibEntry.detail({id:sibEntry.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sibEntry.edit({id:sibEntry.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sibEntry.delete({id:sibEntry.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

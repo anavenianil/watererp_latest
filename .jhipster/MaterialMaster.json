@@ -1,0 +1,79 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "materialName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "consumableFlag",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "uomId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "categoryId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "subCategoryId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "itemCodeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "itemSubCodeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "rateContractFlag",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "unitRate",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "creationDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "companyCodeId",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20160330054928",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

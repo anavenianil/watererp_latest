@@ -1,0 +1,100 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myItemSubCodeMasterLabel">Create or edit a ItemSubCodeMaster</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="itemSubCodeMaster.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemCodeId">ItemCodeId</label>
+            <input type="number" class="form-control" name="itemCodeId" id="field_itemCodeId"
+                    ng-model="itemSubCodeMaster.itemCodeId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemSubCode">ItemSubCode</label>
+            <input type="text" class="form-control" name="itemSubCode" id="field_itemSubCode"
+                    ng-model="itemSubCodeMaster.itemSubCode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemName">ItemName</label>
+            <input type="text" class="form-control" name="itemName" id="field_itemName"
+                    ng-model="itemSubCodeMaster.itemName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="itemSubCodeMaster.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_status">Status</label>
+            <input type="number" class="form-control" name="status" id="field_status"
+                    ng-model="itemSubCodeMaster.status"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="itemSubCodeMaster.creationDate" is-open="datePickerForCreationDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForCreationDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="itemSubCodeMaster.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForLastModifiedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemCcodeId">ItemCcodeId</label>
+            <input type="number" class="form-control" name="itemCcodeId" id="field_itemCcodeId"
+                    ng-model="itemSubCodeMaster.itemCcodeId"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemCategoryId">ItemCategoryId</label>
+            <input type="number" class="form-control" name="itemCategoryId" id="field_itemCategoryId"
+                    ng-model="itemSubCodeMaster.itemCategoryId"
+                    required />
+            <div ng-show="editForm.itemCategoryId.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.itemCategoryId.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.itemCategoryId.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_itemSubCategoryID">ItemSubCategoryID</label>
+            <input type="number" class="form-control" name="itemSubCategoryID" id="field_itemSubCategoryID"
+                    ng-model="itemSubCodeMaster.itemSubCategoryID"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

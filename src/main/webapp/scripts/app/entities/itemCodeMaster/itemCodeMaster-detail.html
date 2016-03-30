@@ -1,0 +1,86 @@
+
+<div>
+    <h2><span>ItemCodeMaster</span> {{itemCodeMaster.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>ItemCode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemCodeMaster.itemCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemCodeMaster.itemName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemCodeMaster.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemCodeMaster.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreationDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemCodeMaster.creationDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemCodeMaster.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>itemCategoryMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="itemCategoryMaster.detail({id:itemCodeMaster.itemCategoryMaster.id})">{{itemCodeMaster.itemCategoryMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>itemSubCategoryMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="itemSubCategoryMaster.detail({id:itemCodeMaster.itemSubCategoryMaster.id})">{{itemCodeMaster.itemSubCategoryMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

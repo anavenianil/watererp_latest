@@ -1,0 +1,102 @@
+
+<div>
+    <h2><span>ItemSubCodeMaster</span> {{itemSubCodeMaster.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>ItemCodeId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.itemCodeId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemSubCode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.itemSubCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.itemName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CreationDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.creationDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastModifiedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.lastModifiedDate | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemCcodeId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.itemCcodeId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemCategoryId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.itemCategoryId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ItemSubCategoryID</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{itemSubCodeMaster.itemSubCategoryID}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
