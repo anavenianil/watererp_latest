@@ -50,14 +50,14 @@ public class ApplicationTxnResourceIntTest {
     private static final String DEFAULT_FULL_NAME = "AAAAA";
     private static final String UPDATED_FULL_NAME = "BBBBB";
 
-    private static final Integer DEFAULT_HOME_OR_OFFICE_NUMBER = 1;
-    private static final Integer UPDATED_HOME_OR_OFFICE_NUMBER = 2;
+    private static final Long DEFAULT_HOME_OR_OFFICE_NUMBER = 1L;
+    private static final Long UPDATED_HOME_OR_OFFICE_NUMBER = 2L;
 
-    private static final Integer DEFAULT_REGIONAL_NUMBER = 1;
-    private static final Integer UPDATED_REGIONAL_NUMBER = 2;
+    private static final Long DEFAULT_REGIONAL_NUMBER = 1L;
+    private static final Long UPDATED_REGIONAL_NUMBER = 2L;
 
-    private static final Integer DEFAULT_FAX_NUMBER = 1;
-    private static final Integer UPDATED_FAX_NUMBER = 2;
+    private static final Long DEFAULT_FAX_NUMBER = 1L;
+    private static final Long UPDATED_FAX_NUMBER = 2L;
     private static final String DEFAULT_PLOT_NUMBER = "AAAAA";
     private static final String UPDATED_PLOT_NUMBER = "BBBBB";
     private static final String DEFAULT_AREA = "AAAAA";
@@ -180,9 +180,9 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(applicationTxn.getId().intValue())))
                 .andExpect(jsonPath("$.[*].fullName").value(hasItem(DEFAULT_FULL_NAME.toString())))
-                .andExpect(jsonPath("$.[*].homeOrOfficeNumber").value(hasItem(DEFAULT_HOME_OR_OFFICE_NUMBER)))
-                .andExpect(jsonPath("$.[*].regionalNumber").value(hasItem(DEFAULT_REGIONAL_NUMBER)))
-                .andExpect(jsonPath("$.[*].faxNumber").value(hasItem(DEFAULT_FAX_NUMBER)))
+                .andExpect(jsonPath("$.[*].homeOrOfficeNumber").value(hasItem(DEFAULT_HOME_OR_OFFICE_NUMBER.intValue())))
+                .andExpect(jsonPath("$.[*].regionalNumber").value(hasItem(DEFAULT_REGIONAL_NUMBER.intValue())))
+                .andExpect(jsonPath("$.[*].faxNumber").value(hasItem(DEFAULT_FAX_NUMBER.intValue())))
                 .andExpect(jsonPath("$.[*].plotNumber").value(hasItem(DEFAULT_PLOT_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.toString())))
                 .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
@@ -209,9 +209,9 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(applicationTxn.getId().intValue()))
             .andExpect(jsonPath("$.fullName").value(DEFAULT_FULL_NAME.toString()))
-            .andExpect(jsonPath("$.homeOrOfficeNumber").value(DEFAULT_HOME_OR_OFFICE_NUMBER))
-            .andExpect(jsonPath("$.regionalNumber").value(DEFAULT_REGIONAL_NUMBER))
-            .andExpect(jsonPath("$.faxNumber").value(DEFAULT_FAX_NUMBER))
+            .andExpect(jsonPath("$.homeOrOfficeNumber").value(DEFAULT_HOME_OR_OFFICE_NUMBER.intValue()))
+            .andExpect(jsonPath("$.regionalNumber").value(DEFAULT_REGIONAL_NUMBER.intValue()))
+            .andExpect(jsonPath("$.faxNumber").value(DEFAULT_FAX_NUMBER.intValue()))
             .andExpect(jsonPath("$.plotNumber").value(DEFAULT_PLOT_NUMBER.toString()))
             .andExpect(jsonPath("$.area").value(DEFAULT_AREA.toString()))
             .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))

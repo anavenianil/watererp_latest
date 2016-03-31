@@ -24,17 +24,17 @@
         {
             "fieldId": 2,
             "fieldName": "homeOrOfficeNumber",
-            "fieldType": "Integer"
+            "fieldType": "Long"
         },
         {
             "fieldId": 3,
             "fieldName": "regionalNumber",
-            "fieldType": "Integer"
+            "fieldType": "Long"
         },
         {
             "fieldId": 4,
             "fieldName": "faxNumber",
-            "fieldType": "Integer"
+            "fieldType": "Long"
         },
         {
             "fieldId": 5,

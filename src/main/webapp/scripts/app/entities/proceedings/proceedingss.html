@@ -25,7 +25,7 @@
                     <th jh-sort-by="siteSurvey"><span>SiteSurvey</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="subTotalB"><span>SubTotalB</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="connectionFee"><span>ConnectionFee</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="waterMeterShs"><span>WaterMeterShs</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!-- <th jh-sort-by="waterMeterShs"><span>WaterMeterShs</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="applicationFormFee"><span>ApplicationFormFee</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="grandTotal"><span>GrandTotal</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="supervisionPercent.id"><span>supervisionPercent</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -45,21 +45,13 @@
                     <td>{{proceedings.siteSurvey}}</td>
                     <td>{{proceedings.subTotalB}}</td>
                     <td>{{proceedings.connectionFee}}</td>
-                    <td>{{proceedings.waterMeterShs}}</td>
+                   <!--  <td>{{proceedings.waterMeterShs}}</td> -->
                     <td>{{proceedings.applicationFormFee}}</td>
                     <td>{{proceedings.grandTotal}}</td>
-                    <td>
-                        <a ui-sref="percentageMaster.detail({id:proceedings.supervisionPercent.id})">{{proceedings.supervisionPercent.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="percentageMaster.detail({id:proceedings.labourChargePercent.id})">{{proceedings.labourChargePercent.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="percentageMaster.detail({id:proceedings.siteSurveyPercent.id})">{{proceedings.siteSurveyPercent.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="percentageMaster.detail({id:proceedings.connectionFeePercent.id})">{{proceedings.connectionFeePercent.id}}</a>
-                    </td>
+                    <td>{{proceedings.supervisionPercent}}</td>
+                    <td>{{proceedings.labourChargePercent}}</td>
+                    <td>{{proceedings.siteSurveyPercent}}</td>
+                    <td>{{proceedings.connectionFeePercent}}</td>
                     <td>
                         <a ui-sref="applicationTxn.detail({id:proceedings.applicationTxn.id})">{{proceedings.applicationTxn.id}}</a>
                     </td>

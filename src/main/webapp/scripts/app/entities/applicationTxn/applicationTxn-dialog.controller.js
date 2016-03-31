@@ -12,6 +12,8 @@ angular.module('watererpApp')
                 });
          }
     	
+    	$scope.applicationTxn.requestedDate = new Date();
+    	
         /*$scope.load = function(id) {
             ApplicationTxn.get({id : id}, function(result) {
                 $scope.applicationTxn = result;

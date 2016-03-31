@@ -26,13 +26,13 @@ public class ApplicationTxn implements Serializable {
     private String fullName;
     
     @Column(name = "home_or_office_number")
-    private Integer homeOrOfficeNumber;
+    private Long homeOrOfficeNumber;
     
     @Column(name = "regional_number")
-    private Integer regionalNumber;
+    private Long regionalNumber;
     
     @Column(name = "fax_number")
-    private Integer faxNumber;
+    private Long faxNumber;
     
     @Column(name = "plot_number")
     private String plotNumber;
@@ -94,27 +94,27 @@ public class ApplicationTxn implements Serializable {
         this.fullName = fullName;
     }
 
-    public Integer getHomeOrOfficeNumber() {
+    public Long getHomeOrOfficeNumber() {
         return homeOrOfficeNumber;
     }
     
-    public void setHomeOrOfficeNumber(Integer homeOrOfficeNumber) {
+    public void setHomeOrOfficeNumber(Long homeOrOfficeNumber) {
         this.homeOrOfficeNumber = homeOrOfficeNumber;
     }
 
-    public Integer getRegionalNumber() {
+    public Long getRegionalNumber() {
         return regionalNumber;
     }
     
-    public void setRegionalNumber(Integer regionalNumber) {
+    public void setRegionalNumber(Long regionalNumber) {
         this.regionalNumber = regionalNumber;
     }
 
-    public Integer getFaxNumber() {
+    public Long getFaxNumber() {
         return faxNumber;
     }
     
-    public void setFaxNumber(Integer faxNumber) {
+    public void setFaxNumber(Long faxNumber) {
         this.faxNumber = faxNumber;
     }
 

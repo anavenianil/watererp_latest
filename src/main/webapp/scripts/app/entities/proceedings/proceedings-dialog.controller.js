@@ -1,15 +1,32 @@
 'use strict';
 
 angular.module('watererpApp').controller('ProceedingsDialogController',
-        function($scope, $state, $stateParams, Proceedings, PercentageMaster, ApplicationTxn, ItemRequired, MaterialMaster) {
+        function($scope, $state, $stateParams, Proceedings, PercentageMaster, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks) {
 
         $scope.proceedings = {};
         //$scope.percentagemasters = PercentageMaster.query();
-        $scope.applicationtxns = ApplicationTxn.query();
+        //$scope.applicationtxns = ApplicationTxn.query();
         $scope.itemrequireds = ItemRequired.query();
         $scope.materialmasters = MaterialMaster.query();
         $scope.proceedings.itemRequired = {};
         
+        $scope.getApplicationTxns = function(){
+        	$scope.applicationTxns = [];
+        	ApplicationTxn.query({page: $scope.page, status: 0}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.applicationTxns.push(result[i]);
+                }
+           });
+        }
+        $scope.getApplicationTxns();
+        
+        //get applicationTxn by id
+        $scope.getApplicationTxn = function(fileNo){
+        	ApplicationTxn.get({id : fileNo}, function(result) {
+                $scope.applicationTxn = result;
+            });	
+        }
         
         $scope.loadAllPercentageMaster = function() {
         	$scope.percentagemasters = [];
@@ -18,7 +35,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
                     $scope.percentagemasters.push(result[i]);
                 }
                 $.each($scope.percentagemasters, function(){
-                	console.log(this.percentType);
+                	//console.log(this.percentType);
                 	if(this.percentType == "Supervision"){
                 		$scope.proceedings.supervisionPercentText = this.percentType;
                 		$scope.proceedings.supervisionPercent = this.percentValue;
@@ -83,6 +100,10 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
        		$scope.count = $scope.count +1;
         }
         
+        /*$scope.removeItemArr = function(){
+        	$scope.itemArr.length -=1;
+        }*/
+        
         $scope.getMaterialDetail = function(id, indexId){
         	MaterialMaster.get({id : id}, function(result) {
                 $scope.materialMaster = result;
@@ -90,13 +111,20 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
             });
         }
         
-        $scope.proceedings.subTotalA = 0;
+        
+        //calculations
+        
         $scope.calculateRate = function(quantity, rate, indexId){
-        	$scope.proceedings.itemRequireds[indexId].amount = quantity * rate;	
-        	$scope.proceedings.subTotalA = $scope.proceedings.subTotalA + $scope.proceedings.itemRequireds[indexId].amount;
-        	console.log($scope.proceedings.subTotalA);
+        	$scope.proceedings.itemRequireds[indexId].amount = quantity * rate;
+        	$scope.proceedings.subTotalA = 0;
         	
+        	for(var i=0; i<$scope.itemArr.length; i++){
+        		$scope.proceedings.subTotalA = $scope.proceedings.subTotalA + $scope.proceedings.itemRequireds[i].amount;
+        	}
         	
+        	//console.log($scope.proceedings.subTotalA);
+        	
+        	console.log($scope.itemArr.length);
         	
         	$scope.proceedings.supervisionCharge = ($scope.proceedings.subTotalA * $scope.proceedings.supervisionPercent)/100;
         	$scope.proceedings.labourCharge = ($scope.proceedings.subTotalA * $scope.proceedings.labourChargePercent)/100;
@@ -107,7 +135,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         	$scope.proceedings.applicationFormFee = 1000;
         	$scope.proceedings.grandTotal = $scope.proceedings.subTotalB + $scope.proceedings.connectionFee 
         									+ $scope.proceedings.applicationFormFee;
-        	
         }
         
 });

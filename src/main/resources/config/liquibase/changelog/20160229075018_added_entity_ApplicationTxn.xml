@@ -23,11 +23,11 @@
             </column>
             <column name="full_name" type="varchar(255)"/>
             
-            <column name="home_or_office_number" type="integer"/>
+            <column name="home_or_office_number" type="bigint"/>
             
-            <column name="regional_number" type="integer"/>
+            <column name="regional_number" type="bigint"/>
             
-            <column name="fax_number" type="integer"/>
+            <column name="fax_number" type="bigint"/>
             
             <column name="plot_number" type="varchar(255)"/>
             

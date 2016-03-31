@@ -2,41 +2,13 @@
     "relationships": [
         {
             "relationshipId": 1,
-            "relationshipName": "supervisionPercent",
-            "otherEntityName": "percentageMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 2,
-            "relationshipName": "labourChargePercent",
-            "otherEntityName": "percentageMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 3,
-            "relationshipName": "siteSurveyPercent",
-            "otherEntityName": "percentageMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 4,
-            "relationshipName": "ConnectionFeePercent",
-            "otherEntityName": "percentageMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 5,
             "relationshipName": "applicationTxn",
             "otherEntityName": "applicationTxn",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
-            "relationshipId": 6,
+            "relationshipId": 2,
             "relationshipName": "itemRequired",
             "otherEntityName": "itemRequired",
             "relationshipType": "one-to-many",
@@ -87,6 +59,26 @@
         {
             "fieldId": 9,
             "fieldName": "grandTotal",
+            "fieldType": "Double"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "supervisionPercent",
+            "fieldType": "Double"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "labourChargePercent",
+            "fieldType": "Double"
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "siteSurveyPercent",
+            "fieldType": "Double"
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "ConnectionFeePercent",
             "fieldType": "Double"
         }
     ],

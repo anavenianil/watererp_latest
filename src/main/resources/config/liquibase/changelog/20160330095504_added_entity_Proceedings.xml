@@ -39,38 +39,18 @@
             
             <column name="grand_total" type="double"/>
             
-            <column name="supervision_percent_id" type="bigint"/>
-            <column name="labour_charge_percent_id" type="bigint"/>
-            <column name="site_survey_percent_id" type="bigint"/>
-            <column name="connection_fee_percent_id" type="bigint"/>
+            <column name="supervision_percent" type="double"/>
+            
+            <column name="labour_charge_percent" type="double"/>
+            
+            <column name="site_survey_percent" type="double"/>
+            
+            <column name="connection_fee_percent" type="double"/>
+            
             <column name="application_txn_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
-        <addForeignKeyConstraint baseColumnNames="supervision_percent_id"
-                                 baseTableName="proceedings"
-                                 constraintName="fk_proceedings_supervisionpercent_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="percentage_master"/>
-
-        <addForeignKeyConstraint baseColumnNames="labour_charge_percent_id"
-                                 baseTableName="proceedings"
-                                 constraintName="fk_proceedings_labourchargepercent_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="percentage_master"/>
-
-        <addForeignKeyConstraint baseColumnNames="site_survey_percent_id"
-                                 baseTableName="proceedings"
-                                 constraintName="fk_proceedings_sitesurveypercent_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="percentage_master"/>
-
-        <addForeignKeyConstraint baseColumnNames="connection_fee_percent_id"
-                                 baseTableName="proceedings"
-                                 constraintName="fk_proceedings_connectionfeepercent_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="percentage_master"/>
-
         <addForeignKeyConstraint baseColumnNames="application_txn_id"
                                  baseTableName="proceedings"
                                  constraintName="fk_proceedings_applicationtxn_id"

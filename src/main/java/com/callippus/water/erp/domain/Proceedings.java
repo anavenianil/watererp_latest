@@ -60,21 +60,17 @@ public class Proceedings implements Serializable {
     @Column(name = "grand_total")
     private Double grandTotal;
     
-    @ManyToOne
-    @JoinColumn(name = "supervision_percent_id")
-    private PercentageMaster supervisionPercent;
+    @Column(name = "supervision_percent")
+    private Double supervisionPercent;
 
-    @ManyToOne
-    @JoinColumn(name = "labour_charge_percent_id")
-    private PercentageMaster labourChargePercent;
+    @Column(name = "labour_charge_percent")
+    private Double labourChargePercent;
 
-    @ManyToOne
-    @JoinColumn(name = "site_survey_percent_id")
-    private PercentageMaster siteSurveyPercent;
+    @Column(name = "site_survey_percent")
+    private Double siteSurveyPercent;
 
-    @ManyToOne
-    @JoinColumn(name = "connection_fee_percent_id")
-    private PercentageMaster connectionFeePercent;
+    @Column(name = "connection_fee_percent")
+    private Double connectionFeePercent;
 
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
@@ -167,35 +163,35 @@ public class Proceedings implements Serializable {
         this.grandTotal = grandTotal;
     }
 
-    public PercentageMaster getSupervisionPercent() {
+    public Double getSupervisionPercent() {
         return supervisionPercent;
     }
 
-    public void setSupervisionPercent(PercentageMaster percentageMaster) {
+    public void setSupervisionPercent(Double percentageMaster) {
         this.supervisionPercent = percentageMaster;
     }
 
-    public PercentageMaster getLabourChargePercent() {
+    public Double getLabourChargePercent() {
         return labourChargePercent;
     }
 
-    public void setLabourChargePercent(PercentageMaster percentageMaster) {
+    public void setLabourChargePercent(Double percentageMaster) {
         this.labourChargePercent = percentageMaster;
     }
 
-    public PercentageMaster getSiteSurveyPercent() {
+    public Double getSiteSurveyPercent() {
         return siteSurveyPercent;
     }
 
-    public void setSiteSurveyPercent(PercentageMaster percentageMaster) {
+    public void setSiteSurveyPercent(Double percentageMaster) {
         this.siteSurveyPercent = percentageMaster;
     }
 
-    public PercentageMaster getConnectionFeePercent() {
+    public Double getConnectionFeePercent() {
         return connectionFeePercent;
     }
 
-    public void setConnectionFeePercent(PercentageMaster percentageMaster) {
+    public void setConnectionFeePercent(Double percentageMaster) {
         this.connectionFeePercent = percentageMaster;
     }
 
@@ -248,6 +244,11 @@ public class Proceedings implements Serializable {
             ", waterMeterShs='" + waterMeterShs + "'" +
             ", applicationFormFee='" + applicationFormFee + "'" +
             ", grandTotal='" + grandTotal + "'" +
+            ", supervisionPercent='" + supervisionPercent + "'" +
+            ", labourChargePercent='" + labourChargePercent + "'" +
+            ", siteSurveyPercent='" + siteSurveyPercent + "'" +
+            ", connectionFeePercent='" + connectionFeePercent + "'" +
+            
             '}';
     }
 }
