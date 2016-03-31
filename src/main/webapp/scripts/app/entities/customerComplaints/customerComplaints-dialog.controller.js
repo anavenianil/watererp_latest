@@ -7,6 +7,7 @@ angular.module('watererpApp')
     $scope.applicationtxns = ApplicationTxn.query();
     $scope.complainttypemasters = ComplaintTypeMaster.query();
     $scope.load = function(id) {
+    	//alert("EDIT	EDIT	getApplicationTxn		getApplicationTxn		getApplicationTxn		getApplicationTxn");
         CustomerComplaints.get({id : id}, function(result) {
             $scope.customerComplaints = result;
         });
@@ -49,12 +50,21 @@ angular.module('watererpApp')
         $scope.datePickerForComplaintDate.status.opened = true;
     };
     
+    
+    $scope.customerComplaints.applicationTxn = {};
+    $scope.customerComplaints.applicationTxn.customer = {};
+    //$scope.customerComplaints.connectionTypeMaster = {};
+    $scope.customerComplaints.applicationTxn.categoryMaster = {};
     $scope.getApplicationTxn = function(fileNo){
-    	//alert("getApplicationTxn		getApplicationTxn		getApplicationTxn		getApplicationTxn");
+    	//alert("getApplicationTxn		getApplicationTxn		getApplicationTxn		getApplicationTxn22");
     	ApplicationTxn.get({id : fileNo}, function(result) {
-            $scope.applicationTxn = result; 
-            $scope.customerComplaints.applicationTxn = {};
+            $scope.applicationTxn = result;
+            $scope.customerComplaints.applicationTxn.categoryMaster.categoryName = $scope.applicationTxn.categoryMaster.categoryName;
+            $scope.customerComplaints.applicationTxn.customer.firstName = $scope.applicationTxn.customer.firstName;
             $scope.customerComplaints.applicationTxn.street = $scope.applicationTxn.street;
+            //$scope.customerComplaints.connectionTypeMaster.id = $scope.applicationTxn.connectionTypeMaster.id;
+            $scope.customerComplaints.applicationTxn.constituency = $scope.applicationTxn.constituency;
+            $scope.customerComplaints.applicationTxn.area = $scope.applicationTxn.area;
         });	
     }
     

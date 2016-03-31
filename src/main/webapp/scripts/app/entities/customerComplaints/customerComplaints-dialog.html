@@ -1,16 +1,3 @@
-<style>
-html, body, .container-table {
-    height: 100%;
-}
-.container-table {
-    display: table;
-}
-.vertical-center-row {
-    display: table-cell;
-    vertical-align: middle;
-}
-</style>
-
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
     <!-- <div class="modal-header">
@@ -26,11 +13,11 @@ html, body, .container-table {
 			<div class="list-group-item">
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
-        <div class="row vertical-center-row">        
-        <div class="col-sm-4">
+        <div class="row">        
+        <div class="col-md-4 col-md-offset-2">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                    ng-model="customerComplaints.id" readonly />
+                    ng-model="customerComplaints.id" readonly style="margin: 0 auto;"  />
         </div>
         
         <div class="col-sm-4">
@@ -53,35 +40,35 @@ html, body, .container-table {
         </div> 
         </div>
         <div class="row">       
-		<div class="col-sm-4">
+		<div class="col-md-4 col-md-offset-2">
 			<label>Customer Name</label> <input type="text"
 				class="form-control" id="field_firstName" name="firstName"
-				ng-model="applicationTxn.customer.firstName"
+				ng-model="customerComplaints.applicationTxn.customer.firstName"
 				disabled>
 		</div>
 		<div class="col-sm-4">
 			<label>Category</label> <input type="text"
 				class="form-control" id="field_categoryName" name="categoryName"
-				ng-model="applicationTxn.categoryMaster.categoryName"
+				ng-model="customerComplaints.applicationTxn.categoryMaster.categoryName"
 				disabled>
 		</div>
 		</div>
 		<div class="row">
-		<div class="col-sm-4">
+		<div class="col-md-4 col-md-offset-2">
 			<label>Division</label> <input type="text"
 				class="form-control" id="field_constituency" name="constituency"
-				ng-model="applicationTxn.customer.constituency"
+				ng-model="customerComplaints.applicationTxn.constituency"
 				disabled>
 		</div>
 		<div class="col-sm-4">
 			<label>Zone</label> <input type="text"
 				class="form-control" id="field_area" name="area" 
-				ng-model="applicationTxn.area"
+				ng-model="customerComplaints.applicationTxn.area"
 				disabled>
 		</div>
 		</div>
 		<div class="row">
-		<div class="col-sm-4">
+		<div class="col-md-4 col-md-offset-2">
 			<label>Street</label> <input type="text"
 				class="form-control" id="field_street" name="street"
 				ng-model="customerComplaints.applicationTxn.street"
@@ -95,7 +82,7 @@ html, body, .container-table {
         </div> 
         </div> 
         <div class="row">      
-        <div class="col-sm-4">
+        <div class="col-md-4 col-md-offset-2">
             <label class="control-label" for="field_remarks">Remarks</label>
             <input type="text" class="form-control" name="remarks" id="field_remarks"
                     ng-model="customerComplaints.remarks"
@@ -109,7 +96,7 @@ html, body, .container-table {
         </div>
         </div>
         <div class="row">
-        <div class="col-sm-4">
+        <div class="col-md-4 col-md-offset-2">
             <label class="control-label" for="field_complaintBy">Complaint By</label>
             <input type="text" class="form-control" name="complaintBy" id="field_complaintBy"
                     ng-model="customerComplaints.complaintBy"
@@ -136,5 +123,5 @@ html, body, .container-table {
         <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>
-    </div>
-</form>
+    </div>   
+    </form>
