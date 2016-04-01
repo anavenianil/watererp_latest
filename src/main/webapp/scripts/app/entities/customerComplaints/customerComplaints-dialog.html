@@ -1,127 +1,147 @@
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <!-- <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myCustomerComplaintsLabel">Create or edit a CustomerComplaints</h4>
-    </div> -->
-    <div class="panel panel-primary">
+	<!-- <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="clear()">&times;</button>
+    <h4 class="modal-title" id="myCustomerComplaintsLabel">Create or edit a CustomerComplaints</h4>
+</div> -->
+	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Complaint Request</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="row">        
-        <div class="col-md-4 col-md-offset-2">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="customerComplaints.id" readonly style="margin: 0 auto;"  />
-        </div>
-        
-        <div class="col-sm-4">
-            <label for="field_applicationTxn">Customer ID</label>
-            <!-- Commented Select Box Functionality -->
-            <!-- <select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="customerComplaints.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-                <option value=""></option>
-            </select> -->
-            <!-- <div class="col-sm-4"> -->
-			<div class='input-group date' id='field_applicationTxn'>
-            <input list="applicationTxn" type="" id="field_applicationTxn"	class="form-control" ng-model="customerComplaints.applicationTxn.id"/>
-            
-			<datalist id="applicationTxn">
-				<option ng-repeat="applicationTxn in applicationtxns" value="{{applicationTxn.id}}">
-			</datalist>
-			<span class="input-group-btn">
-			<button type="button" class="btn btn-primary glyphicon glyphicon-search" ng-click="getApplicationTxn(customerComplaints.applicationTxn.id)"></button>
-			</span>
-			</div><!-- </div> -->
-        </div> 
-        </div>
-        <div class="row">       
-		<div class="col-md-4 col-md-offset-2">
-			<label>Customer Name</label> <input type="text"
-				class="form-control" id="field_firstName" name="firstName"
-				ng-model="customerComplaints.applicationTxn.customer.firstName"
-				disabled>
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label for="id">ID</label> <input type="text"
+								class="form-control" id="id" name="id"
+								ng-model="customerComplaints.id" readonly
+								style="margin: 0 auto;" />
+						</div>
+
+						<div class="col-sm-4">
+							<label for="field_applicationTxn">Customer ID</label>
+							<!-- Commented Select Box Functionality -->
+							<!-- <select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="customerComplaints.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+      						<option value=""></option></select> -->
+							<!-- <div class="col-sm-4"> -->
+							<div class="form-group">
+								<div class='input-group date' id='field_applicationTxn'>
+									<input list="applicationTxn" type="" id="field_applicationTxn"
+										class="form-control"
+										ng-model="customerComplaints.applicationTxn.id" />
+
+									<datalist id="applicationTxn">
+										<option ng-repeat="applicationTxn in applicationtxns"
+											value="{{applicationTxn.id}}">
+									</datalist>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="getApplicationTxn(customerComplaints.applicationTxn.id)">
+											<i class="glyphicon glyphicon-search"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label>Customer Name</label> <input type="text"
+								class="form-control" id="field_firstName" name="firstName"
+								ng-model="customerComplaints.applicationTxn.customer.firstName"
+								disabled>
+						</div>
+						<div class="col-sm-4">
+							<label>Category</label> <input type="text" class="form-control"
+								id="field_categoryName" name="categoryName"
+								ng-model="customerComplaints.applicationTxn.categoryMaster.categoryName"
+								disabled>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label>Division</label> <input type="text" class="form-control"
+								id="field_constituency" name="constituency"
+								ng-model="customerComplaints.applicationTxn.constituency"
+								disabled>
+						</div>
+						<div class="col-sm-4">
+							<label>Zone</label> <input type="text" class="form-control"
+								id="field_area" name="area"
+								ng-model="customerComplaints.applicationTxn.area" disabled>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label>Street</label> <input type="text" class="form-control"
+								id="field_street" name="street"
+								ng-model="customerComplaints.applicationTxn.street" disabled>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_complaintTypeMaster">Complaint Type<!-- {{applicationTxn.id}} --></label>
+							<select class="form-control" id="field_complaintTypeMaster"
+								name="complaintTypeMaster"
+								ng-model="customerComplaints.complaintTypeMaster"
+								ng-options="complaintTypeMaster as complaintTypeMaster.complaintType for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.id">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<input type="text" class="form-control" name="remarks"
+								id="field_remarks" ng-model="customerComplaints.remarks" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_relevantDoc">Relevant
+								Document</label> <input type="text" class="form-control"
+								name="relevantDoc" id="field_relevantDoc"
+								ng-model="customerComplaints.relevantDoc" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 col-md-offset-2">
+							<label class="control-label" for="field_complaintBy">Complaint
+								By</label> <input type="text" class="form-control" name="complaintBy"
+								id="field_complaintBy" ng-model="customerComplaints.complaintBy" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_complaintDate">Complaint
+								Date</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_complaintDate'>
+									<input id="field_complaintDate" type="text"
+										class="form-control"
+										ng-click="datePickerForComplaintDateOpen($event)"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="customerComplaints.complaintDate"
+										is-open="datePickerForComplaintDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForComplaintDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-sm-4">
-			<label>Category</label> <input type="text"
-				class="form-control" id="field_categoryName" name="categoryName"
-				ng-model="customerComplaints.applicationTxn.categoryMaster.categoryName"
-				disabled>
-		</div>
-		</div>
-		<div class="row">
-		<div class="col-md-4 col-md-offset-2">
-			<label>Division</label> <input type="text"
-				class="form-control" id="field_constituency" name="constituency"
-				ng-model="customerComplaints.applicationTxn.constituency"
-				disabled>
-		</div>
-		<div class="col-sm-4">
-			<label>Zone</label> <input type="text"
-				class="form-control" id="field_area" name="area" 
-				ng-model="customerComplaints.applicationTxn.area"
-				disabled>
-		</div>
-		</div>
-		<div class="row">
-		<div class="col-md-4 col-md-offset-2">
-			<label>Street</label> <input type="text"
-				class="form-control" id="field_street" name="street"
-				ng-model="customerComplaints.applicationTxn.street"
-				disabled>
-		</div>				
-		<div class="col-sm-4">
-            <label for="field_complaintTypeMaster">Complaint Type<!-- {{applicationTxn.id}} --></label>
-            <select class="form-control" id="field_complaintTypeMaster" name="complaintTypeMaster" ng-model="customerComplaints.complaintTypeMaster" ng-options="complaintTypeMaster as complaintTypeMaster.complaintType for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.id">
-                <option value=""></option>
-            </select>
-        </div> 
-        </div> 
-        <div class="row">      
-        <div class="col-md-4 col-md-offset-2">
-            <label class="control-label" for="field_remarks">Remarks</label>
-            <input type="text" class="form-control" name="remarks" id="field_remarks"
-                    ng-model="customerComplaints.remarks"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_relevantDoc">Relevant Document</label>
-            <input type="text" class="form-control" name="relevantDoc" id="field_relevantDoc"
-                    ng-model="customerComplaints.relevantDoc"
-                     />
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-md-4 col-md-offset-2">
-            <label class="control-label" for="field_complaintBy">Complaint By</label>
-            <input type="text" class="form-control" name="complaintBy" id="field_complaintBy"
-                    ng-model="customerComplaints.complaintBy"
-                     />
-        </div>  
-		<div class="col-sm-4">
-			<label class="control-label" for="field_complaintDate">Complaint Date</label>
-			<div class="form-group">
-			<div class='input-group date' id='field_complaintDate'>
-			<input id="field_complaintDate" type="text" class="form-control" ng-click="datePickerForComplaintDateOpen($event)" uib-datepicker-popup="{{dateformat}}" ng-model="customerComplaints.complaintDate"	is-open="datePickerForComplaintDate.status.opened" /> 
-			<span class="input-group-btn">
-				<button type="button" class="btn btn-default" ng-click="datePickerForComplaintDateOpen($event)">
-					<i class="glyphicon glyphicon-calendar"></i>
-				</button>
-			</span>
-			</div></div>
-		</div>	
-		</div>		
-				</div></div></div></div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>   
-    </form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
+</form>
