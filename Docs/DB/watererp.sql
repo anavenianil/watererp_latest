@@ -1,11 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
-<<<<<<< HEAD
--- Server version	5.6.28-0ubuntu0.14.04.1
-=======
 -- Server version	5.0.24-community-nt
->>>>>>> refs/heads/bhaskar2
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,7 +15,7 @@
 
 
 --
--- Create schema `watererp`
+-- Create schema `watererp1`
 --
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `watererp`;
@@ -29,30 +25,6 @@ USE `watererp`;
 -- Table structure for table `watererp`.`access_list`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `watererp`.`application_txn`;
-CREATE TABLE  `watererp`.`application_txn` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(255) DEFAULT NULL,
-  `home_or_office_number` bigint(20) DEFAULT NULL,
-  `regional_number` bigint(20) DEFAULT NULL,
-  `fax_number` bigint(20) DEFAULT NULL,
-  `plot_number` varchar(255) DEFAULT NULL,
-  `area` varchar(255) DEFAULT NULL,
-  `street` varchar(255) DEFAULT NULL,
-  `village_executive_office` varchar(255) DEFAULT NULL,
-  `village_executive_office_number` varchar(255) DEFAULT NULL,
-  `po_box` varchar(255) DEFAULT NULL,
-  `requested_date` timestamp NULL DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `file_number` varchar(255) DEFAULT NULL,
-  `created_date` timestamp NULL DEFAULT NULL,
-  `updated_date` timestamp NULL DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `category_master_id` bigint(20) DEFAULT NULL,
-  `customer_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-=======
 DROP TABLE IF EXISTS `access_list`;
 CREATE TABLE `access_list` (
   `id` bigint(20) NOT NULL auto_increment,
@@ -90,90 +62,38 @@ INSERT INTO `access_list` (`id`,`user_id`) VALUES
 DROP TABLE IF EXISTS `application_txn`;
 CREATE TABLE `application_txn` (
   `id` bigint(20) NOT NULL auto_increment,
-  `s_house_no` varchar(255) default NULL,
-  `govt_official_no` varchar(255) default NULL,
-  `ward` varchar(255) default NULL,
-  `street` varchar(255) default NULL,
-  `pincode` varchar(255) default NULL,
-  `block` varchar(255) default NULL,
+  `full_name` varchar(255) default NULL,
+  `home_or_office_number` bigint(20) default NULL,
+  `regional_number` bigint(20) default NULL,
+  `fax_number` bigint(20) default NULL,
+  `plot_number` varchar(255) default NULL,
   `area` varchar(255) default NULL,
-  `section` varchar(255) default NULL,
-  `constituency` varchar(255) default NULL,
-  `email` varchar(255) default NULL,
-  `telephone_number` varchar(255) default NULL,
-  `mobile` varchar(255) default NULL,
-  `scan_plan` float default NULL,
-  `scan_plan1` float default NULL,
-  `sale_deed` float default NULL,
-  `sale_deed1` float default NULL,
-  `total_plinth_area` float default NULL,
+  `street` varchar(255) default NULL,
+  `village_executive_office` varchar(255) default NULL,
+  `village_executive_office_number` varchar(255) default NULL,
+  `po_box` varchar(255) default NULL,
+  `requested_date` timestamp NULL default NULL,
+  `photo` varchar(255) default NULL,
+  `file_number` varchar(255) default NULL,
   `created_date` timestamp NULL default NULL,
   `updated_date` timestamp NULL default NULL,
-  `status` varchar(255) default NULL,
-  `application_type_master_id` bigint(20) default NULL,
-  `connection_type_master_id` bigint(20) default NULL,
+  `status` int(11) default NULL,
   `category_master_id` bigint(20) default NULL,
-  `pipe_size_master_id` bigint(20) default NULL,
-  `sewer_size_id` bigint(20) default NULL,
-  `file_number_id` bigint(20) default NULL,
   `customer_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
-  KEY `fk_applicationtxn_applicationtypemaster_id` (`application_type_master_id`),
-  KEY `fk_applicationtxn_connectiontypemaster_id` (`connection_type_master_id`),
->>>>>>> refs/heads/bhaskar2
   KEY `fk_applicationtxn_categorymaster_id` (`category_master_id`),
   KEY `fk_applicationtxn_customer_id` (`customer_id`),
-<<<<<<< HEAD
-=======
-  CONSTRAINT `fk_applicationtxn_applicationtypemaster_id` FOREIGN KEY (`application_type_master_id`) REFERENCES `application_type_master` (`id`),
->>>>>>> refs/heads/bhaskar2
   CONSTRAINT `fk_applicationtxn_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
-<<<<<<< HEAD
   CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
-=======
-  CONSTRAINT `fk_applicationtxn_connectiontypemaster_id` FOREIGN KEY (`connection_type_master_id`) REFERENCES `connection_type_master` (`id`),
-  CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
-  CONSTRAINT `fk_applicationtxn_filenumber_id` FOREIGN KEY (`file_number_id`) REFERENCES `file_number` (`id`),
-  CONSTRAINT `fk_applicationtxn_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
-  CONSTRAINT `fk_applicationtxn_sewersize_id` FOREIGN KEY (`sewer_size_id`) REFERENCES `sewer_size` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`application_txn`
 --
 
 /*!40000 ALTER TABLE `application_txn` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `application_txn` WRITE;
-INSERT INTO `watererp`.`application_txn` VALUES  (38,'mohib khan',9390148141,9390148141,9390148141,'148','977425','jksfgj','jhdkjhfjsh','jhkhfkjh','1234','2016-04-01 10:34:01','/api/download/38_f7deadb6e848534341158fd2dd84b9a7_eclipse error.png',NULL,'2016-04-01 10:34:48','2016-04-01 10:34:48',2,1,NULL);
-UNLOCK TABLES;
-=======
-INSERT INTO `application_txn` (`id`,`s_house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`telephone_number`,`mobile`,`scan_plan`,`scan_plan1`,`sale_deed`,`sale_deed1`,`total_plinth_area`,`created_date`,`updated_date`,`status`,`application_type_master_id`,`connection_type_master_id`,`category_master_id`,`pipe_size_master_id`,`sewer_size_id`,`file_number_id`,`customer_id`) VALUES 
- (5,'123','339','233','258','741','789','852','2558','255','hhjjh','789','58741',14,25,114,58,48.25,'2016-03-03 00:00:00','2016-03-03 00:00:00','Approved',1,1,1,2,3,1,NULL),
- (15,'123','369','hug','258','1148','gjy','369','2548','jh','ashkjhs@gmail','8876786','76876',2,2.4,3,3.6,47,NULL,NULL,'In Feasibility',1,1,2,2,4,2,15),
- (16,'123','369','hug','258','1148','gjy','369','2548','jh','ashkjhs@gmail','8876786','76876',2,2.4,3,3.6,47,'2016-03-04 00:00:00','2016-03-04 00:00:00','In Feasibility',1,1,2,2,4,2,16),
- (18,'WEY','WEY','WEY','WEY','WEY','WEY','WEY','WEY','WEY','ATA','WERYWE','ERU',4,4.8,4.2,5,8,'2016-03-04 00:00:00','2016-03-04 00:00:00','In Feasibility',2,1,3,2,5,2,18),
- (19,'hkjh','hkj','kjh','kjhkj','hkjh','kjh','hkj','kjh','kjh','89878','0907','7987',5.04,6,6,7.2,5,'2016-03-04 00:00:00','2016-03-04 00:00:00','In Feasibility',1,1,1,1,3,1,19);
-INSERT INTO `application_txn` (`id`,`s_house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`telephone_number`,`mobile`,`scan_plan`,`scan_plan1`,`sale_deed`,`sale_deed1`,`total_plinth_area`,`created_date`,`updated_date`,`status`,`application_type_master_id`,`connection_type_master_id`,`category_master_id`,`pipe_size_master_id`,`sewer_size_id`,`file_number_id`,`customer_id`) VALUES 
- (20,'147','889','888','855','9999','9999','998','8996','999','999','9999','999',2,2.4,3,3.6,1,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',2,1,2,1,4,1,20),
- (21,'9','88','788','78','887','788','88','778','997','5567','888','876',7,8.4,9,10.8,8,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,1,1,3,2,21),
- (22,'kjhkj','hkj','hkj','hjk','hkj','h','hkj','hkj','kjh','hkj','kjhkj','hkj',6,7.2,9,10.8,55,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,1,1,6,3,22),
- (23,'hgjh','ghjh','hjhkj','hgjj','hgjh','hkjhkjh','hjhjhg','jhgj','hkkjhj','hkhkjff','khkjkhj','kjkhkj',5.88,7,8,9.6,13,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,4,2,3,4,23),
- (24,'jkhkjhjkh','khhjkh','hjhhjkj','kjhkhk','jhj','hkjhkjh','jhkjh','jhkj','kjhkjh','khkjh','kjhkjhkj','hkjh',5,6,9,10.8,6,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',2,2,1,1,3,4,24);
-INSERT INTO `application_txn` (`id`,`s_house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`telephone_number`,`mobile`,`scan_plan`,`scan_plan1`,`sale_deed`,`sale_deed1`,`total_plinth_area`,`created_date`,`updated_date`,`status`,`application_type_master_id`,`connection_type_master_id`,`category_master_id`,`pipe_size_master_id`,`sewer_size_id`,`file_number_id`,`customer_id`) VALUES 
- (25,'hjkhkh','hkj','jhk','jhk','hjh','hkjh','hkjjk','jhkjh','kjhk','hkhjh','jhkh','khk',7,8.4,7,8.4,11,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',2,2,2,3,4,2,25),
- (26,'jhkjh','jhkjhkjh','kjhkjh','jhkjhk','kjhkjh','kjhk','jkhkjhk','jkhkjh','hk','hkj','hkjhkj','khkj',9,10.8,7,8.4,11,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,1,1,4,4,26),
- (27,'jhkjh','hjkh','kjh','jhjk','kjh','jkhkj','hkjhkj','jkhkjh','hkjh','hkj','kjh','kjhkj',4,4.8,2,2.4,7,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',1,1,1,1,3,2,27),
- (28,'asg','ag','sag','ag','asg','asg','asg','asga','aasg','asg','sdgsd','ssg',6,7.2,6,7.2,4734,'2016-03-07 00:00:00','2016-03-07 00:00:00','Pending',3,2,2,3,5,3,28),
- (29,'sdhsh','shsd','shs','shs','sdhs','sfhshf','shshdh','shsd','shsdf','sg','dfhs','sh',3,3.6,5,6,667,'2016-03-08 00:00:00','2016-03-08 00:00:00','Pending',2,2,3,2,5,2,29);
-INSERT INTO `application_txn` (`id`,`s_house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`telephone_number`,`mobile`,`scan_plan`,`scan_plan1`,`sale_deed`,`sale_deed1`,`total_plinth_area`,`created_date`,`updated_date`,`status`,`application_type_master_id`,`connection_type_master_id`,`category_master_id`,`pipe_size_master_id`,`sewer_size_id`,`file_number_id`,`customer_id`) VALUES 
- (30,'bhb','.b',',mn,mn','kkjkj',',,m,mn','mnjh','hk',',mn,mn','gh','vhjh','ghgc','h',4,4.8,6,7.2,4626,'2016-03-08 00:00:00','2016-03-08 00:00:00','Pending',2,2,3,2,5,3,30),
- (31,'hgh','ghg','v ccnbv','hgjg','jhg','vbnfhgd','hjh','hvbn','vhvhjh','jkgjjhj','vhjvg','6876876',2,2.4,4,4.8,5,'2016-03-08 00:00:00','2016-03-08 00:00:00','Pending',2,2,3,2,5,3,31),
- (32,'jhkjh','kjhjk','hkj','jhjkh','hkj','hkjh','jkh','hkj','kjh','jhkj','jkhkjh','jkh',3,3.6,5,6,6,'2016-03-10 00:00:00','2016-03-10 00:00:00','Pending',1,1,2,2,4,3,32),
- (33,'236','236','236','236','236','236','236','236','236','236','236','326',6,7.2,7,8.4,43,'2016-03-11 00:00:00','2016-03-11 00:00:00','Pending',3,2,2,2,4,2,33);
->>>>>>> refs/heads/bhaskar2
+INSERT INTO `application_txn` (`id`,`full_name`,`home_or_office_number`,`regional_number`,`fax_number`,`plot_number`,`area`,`street`,`village_executive_office`,`village_executive_office_number`,`po_box`,`requested_date`,`photo`,`file_number`,`created_date`,`updated_date`,`status`,`category_master_id`,`customer_id`) VALUES 
+ (38,'mohib khan',9390148141,9390148141,9390148141,'148','977425','jksfgj','jhdkjhfjsh','jhkhfkjh','1234','2016-04-01 10:34:01','/api/download/38_f7deadb6e848534341158fd2dd84b9a7_eclipse error.png',NULL,'2016-04-01 10:34:48','2016-04-01 10:34:48',2,1,NULL);
 /*!40000 ALTER TABLE `application_txn` ENABLE KEYS */;
 
 
@@ -238,54 +158,73 @@ CREATE TABLE `approval_details` (
 --
 
 /*!40000 ALTER TABLE `approval_details` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `approval_details` WRITE;
-UNLOCK TABLES;
-=======
-INSERT INTO `approval_details` (`id`,`remarks`,`approved_date`,`approved_emp_no`,`approved_emp_name`,`approved_emp_desig`,`customer_id`,`feasibility_status_id`,`designation_master_id`,`application_txn_id`) VALUES 
- (19,'wwqwt',NULL,'qwtqwt','wtwt','weywey',19,NULL,NULL,19),
- (20,'wqwrw','2016-03-09 00:00:00','qwr','qwrqw','qwq',20,NULL,NULL,20),
- (21,'ewtwet',NULL,'wetwet','wey','wywe',5,NULL,NULL,5),
- (22,'wewe',NULL,'wewey','wewey','weywey',15,NULL,NULL,15),
- (23,'wgwg','2016-03-09 00:00:00','sdgsdg','sdgsdg','sdgsdg',19,NULL,NULL,19),
- (24,'dsgds',NULL,'sdh','sdh','sdh',16,NULL,NULL,16),
- (25,'qr',NULL,'qrqwrqw','tqw','qwtqwt',18,NULL,NULL,18);
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `approval_details` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`bill_of_material`
+-- Table structure for table `watererp`.`bill_details`
 --
 
-DROP TABLE IF EXISTS `watererp`.`bill_of_material`;
-CREATE TABLE  `watererp`.`bill_of_material` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `amount` double DEFAULT NULL,
-  `bank_name` varchar(255) DEFAULT NULL,
-  `branch_name` varchar(255) DEFAULT NULL,
-  `check_or_dd_date` date DEFAULT NULL,
-  `check_or_dd_no` varchar(255) DEFAULT NULL,
-  `bill_date` date DEFAULT NULL,
-  `application_txn_id` bigint(20) DEFAULT NULL,
-  `payment_types_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_billofmaterial_applicationtxn_id` (`application_txn_id`),
-  KEY `fk_billofmaterial_paymenttypes_id` (`payment_types_id`),
-  CONSTRAINT `fk_billofmaterial_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
-  CONSTRAINT `fk_billofmaterial_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `bill_details`;
+CREATE TABLE `bill_details` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `can` varchar(255) default NULL,
+  `bill_number` varchar(255) default NULL,
+  `bill_date` date NOT NULL,
+  `bill_time` varchar(255) default NULL,
+  `meter_make` varchar(255) default NULL,
+  `current_bill_type` varchar(255) default NULL,
+  `from_month` varchar(255) default NULL,
+  `to_month` varchar(255) default NULL,
+  `meter_fix_date` varchar(255) default NULL,
+  `initial_reading` varchar(255) default NULL,
+  `present_reading` varchar(255) default NULL,
+  `units` varchar(255) default NULL,
+  `water_cess` varchar(255) default NULL,
+  `sewerage_cess` varchar(255) default NULL,
+  `service_charge` varchar(255) default NULL,
+  `meter_service_charge` varchar(255) default NULL,
+  `total_amount` float default NULL,
+  `net_payable_amount` float default NULL,
+  `telephone_no` varchar(255) default NULL,
+  `meter_status` varchar(255) default NULL,
+  `mc_met_reader_code` varchar(255) default NULL,
+  `bill_flag` varchar(255) default NULL,
+  `svr_status` varchar(255) default NULL,
+  `terminal_id` varchar(255) default NULL,
+  `meter_reader_id` varchar(255) default NULL,
+  `user_id` varchar(255) default NULL,
+  `mobile_no` varchar(255) default NULL,
+  `notice_no` varchar(255) default NULL,
+  `lat` varchar(255) default NULL,
+  `long_i` varchar(255) default NULL,
+  `nometer_amt` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `watererp`.`bill_of_material`
+-- Dumping data for table `watererp`.`bill_details`
 --
 
-/*!40000 ALTER TABLE `bill_of_material` DISABLE KEYS */;
-LOCK TABLES `bill_of_material` WRITE;
-INSERT INTO `watererp`.`bill_of_material` VALUES  (1,346347,'sbi','kphb','2016-04-01','544656','2016-04-01',38,1),
- (2,654654,'icici','kphb','2016-04-01','65456','2016-04-01',38,2);
-UNLOCK TABLES;
-/*!40000 ALTER TABLE `bill_of_material` ENABLE KEYS */;
+/*!40000 ALTER TABLE `bill_details` DISABLE KEYS */;
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`long_i`,`nometer_amt`) VALUES 
+ (1,'613427474','31197684','2013-11-26','155200','','U','201212','201310','','0','0','110000','1650.00','577.50','110.00','0.00',2337.5,2680.06,'1111111111','R','','Y','1','A0000','0000','123','0000000000','','0','0','0'),
+ (2,'613472557','31197746','2013-11-26','155200','','R','201212','201310','','0','0','110000','1650.00','577.50','110.00','0.00',2337.5,2985.07,'2222222222','U','','Y','1','A0000','0000','123','0000000000','','0','0','0'),
+ (3,'613472562','31197513','2013-11-26','155200','','R','201212','201310','','0','0','165000','1650.00','577.50','110.00','0.00',2337.5,7174.29,'0000000000','R','','Y','1','A0000','0000','123','0000000000','0000131130172628','0','0','0'),
+ (4,'613577519','31197514','2013-11-26','155200','','R','201212','201310','','0','0','165000','1650.00','577.50','110.00','0.00',2337.5,31664.3,'0000000563','R','','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0','0');
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`long_i`,`nometer_amt`) VALUES 
+ (5,'617738493','31197668','2013-11-26','155200','','R','201212','201310','','0','0','165000','1650.00','577.50','110.00','0.00',2337.5,2768.88,'0000000002','R','','Y','1','A0000','0000','123','0000000000','','0','0','0'),
+ (6,'617738918','D000000001','2013-11-30','173005','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,3412.75,'0000000063','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
+ (7,'617757078','D000000002','2013-11-30','173050','','M','201209','201310','','0','100000','10000','2100.00','735.00','140.00','0.00',2975,2981.38,'0000000006','U','','','1','A0000','0000','123','0000000000','','0','0','0'),
+ (8,'617757083','D000000003','2013-11-30','173124','','M','201209','201310','','0','500000','100000','2100.00','735.00','140.00','0.00',2975,2981.38,'0000000005','M','','','1','A0000','0000','123','0000000000','','0','0','0');
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`long_i`,`nometer_amt`) VALUES 
+ (9,'617757111','D000000004','2013-11-30','173208','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,3095.56,'0000000009','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
+ (10,'617757186','D000000005','2013-11-30','173246','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,2981.38,'0000000008','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
+ (11,'617771922','D000000006','2013-11-30','173352','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,2550,'0000000000','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
+ (12,'617781451','D000000007','2013-11-30','173423','','M','201211','201310','','0','400000','40000','1800.00','630.00','120.00','0.00',2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0','0');
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`long_i`,`nometer_amt`) VALUES 
+ (13,'617781710','D000000008','2013-11-30','173449','','M','201211','201310','','0','50000','50000','1800.00','630.00','120.00','0.00',2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0','0');
+/*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 
 
 --
@@ -373,6 +312,41 @@ INSERT INTO `bill_full_details` (`id`,`can`,`divcode`,`seccode`,`secname`,`metre
 
 
 --
+-- Table structure for table `watererp`.`bill_of_material`
+--
+
+DROP TABLE IF EXISTS `bill_of_material`;
+CREATE TABLE `bill_of_material` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `amount` double default NULL,
+  `bank_name` varchar(255) default NULL,
+  `branch_name` varchar(255) default NULL,
+  `check_or_dd_date` date default NULL,
+  `check_or_dd_no` varchar(255) default NULL,
+  `bill_date` date default NULL,
+  `application_txn_id` bigint(20) default NULL,
+  `payment_types_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_billofmaterial_applicationtxn_id` (`application_txn_id`),
+  KEY `fk_billofmaterial_paymenttypes_id` (`payment_types_id`),
+  CONSTRAINT `fk_billofmaterial_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
+  CONSTRAINT `fk_billofmaterial_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`bill_of_material`
+--
+
+/*!40000 ALTER TABLE `bill_of_material` DISABLE KEYS */;
+INSERT INTO `bill_of_material` (`id`,`amount`,`bank_name`,`branch_name`,`check_or_dd_date`,`check_or_dd_no`,`bill_date`,`application_txn_id`,`payment_types_id`) VALUES 
+ (1,346347,'sbi','kphb','2016-04-01','544656','2016-04-01',38,1),
+ (2,654654,'icici','kphb','2016-04-01','65456','2016-04-01',38,2),
+ (3,116565,'ksdjs','hksdjhksljhd','2016-04-01','64554','2016-04-01',38,3),
+ (4,34634,'34sdg','gsga','2016-04-01','46346','2016-04-01',38,1);
+/*!40000 ALTER TABLE `bill_of_material` ENABLE KEYS */;
+
+
+--
 -- Table structure for table `watererp`.`cash_book_master`
 --
 
@@ -395,42 +369,24 @@ CREATE TABLE `cash_book_master` (
 -- Table structure for table `watererp`.`category_master`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `watererp`.`category_master`;
-CREATE TABLE  `watererp`.`category_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-=======
 DROP TABLE IF EXISTS `category_master`;
 CREATE TABLE `category_master` (
   `id` bigint(20) NOT NULL auto_increment,
   `category_name` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`category_master`
 --
 
 /*!40000 ALTER TABLE `category_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `category_master` WRITE;
-INSERT INTO `watererp`.`category_master` VALUES  (1,'Domestic'),
+INSERT INTO `category_master` (`id`,`category_name`) VALUES 
+ (1,'Domestic'),
  (2,'Institutional'),
  (3,'Commercial'),
  (4,'Industrial'),
  (5,'Kiosks');
-UNLOCK TABLES;
-=======
-INSERT INTO `category_master` (`id`,`category_name`) VALUES 
- (1,'BULK'),
- (2,'INDIVIDUAL/DOMESTIC'),
- (3,'MULTISTORIED/BUILDING'),
- (4,'NON REVENUE CONNECTION');
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `category_master` ENABLE KEYS */;
 
 
@@ -478,7 +434,7 @@ CREATE TABLE `coll_details` (
   `can` varchar(255) default NULL,
   `cons_name` varchar(255) default NULL,
   `terminal_id` varchar(255) default NULL,
-  `coll_time` timestamp NULL,
+  `coll_time` timestamp NULL default NULL,
   `txn_status` varchar(255) default NULL,
   `meter_reader_id` varchar(255) default NULL,
   `user_id` varchar(255) default NULL,
@@ -543,7 +499,8 @@ CREATE TABLE `configuration_details` (
 
 /*!40000 ALTER TABLE `configuration_details` DISABLE KEYS */;
 INSERT INTO `configuration_details` (`id`,`name`,`value`,`description`) VALUES 
- (1,'ADMIN','97',NULL);
+ (1,'ADMIN','97',NULL),
+ (2,'EWURA','1',NULL);
 /*!40000 ALTER TABLE `configuration_details` ENABLE KEYS */;
 
 
@@ -573,31 +530,6 @@ INSERT INTO `connection_type_master` (`id`,`connection_type`) VALUES
 -- Table structure for table `watererp`.`current_users`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `watererp`.`customer`;
-CREATE TABLE  `watererp`.`customer` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `request_date` timestamp NULL DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `middle_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `house_no` varchar(255) DEFAULT NULL,
-  `govt_official_no` varchar(255) DEFAULT NULL,
-  `ward` varchar(255) DEFAULT NULL,
-  `street` varchar(255) DEFAULT NULL,
-  `pincode` varchar(255) DEFAULT NULL,
-  `block` varchar(255) DEFAULT NULL,
-  `area` varchar(255) DEFAULT NULL,
-  `section` varchar(255) DEFAULT NULL,
-  `constituency` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `tel_office` varchar(255) DEFAULT NULL,
-  `tel_home` varchar(255) DEFAULT NULL,
-  `mobile` varchar(255) DEFAULT NULL,
-  `file_number` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_customer_filenumber_id` (`file_number`)
-=======
 DROP TABLE IF EXISTS `current_users`;
 CREATE TABLE `current_users` (
   `id` bigint(20) NOT NULL auto_increment,
@@ -605,7 +537,7 @@ CREATE TABLE `current_users` (
   `meter_reader_id` varchar(255) default NULL,
   `user_id` varchar(255) default NULL,
   `request_type` varchar(255) default NULL,
-  `login_time` timestamp NULL,
+  `login_time` timestamp NULL default NULL,
   `ip` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -655,44 +587,20 @@ CREATE TABLE `cust_details` (
   `reversal_amt` varchar(255) default NULL,
   `installment` varchar(255) default NULL,
   `other_charges` varchar(255) default NULL,
-  `sur_charge` varchar(255) default NULL,
-  `hrs_sur_charge` varchar(255) default NULL,
+  `surcharge` varchar(255) default NULL,
+  `hrs_surcharge` varchar(255) default NULL,
   `res_units` varchar(255) default NULL,
   `met_cost_installment` varchar(255) default NULL,
   `int_on_arrears` varchar(255) default NULL,
   `last_pymt_dt` varchar(255) default NULL,
   `last_pymt_amt` float default NULL,
   `mobile_no` varchar(255) default NULL,
-  `bill_number` varchar(255) default NULL,
-  `bill_date` date default NULL,
-  `bill_time` varchar(255) default NULL,
-  `meter_make` varchar(255) default NULL,
-  `current_bill_type` varchar(255) default NULL,
-  `from_month` varchar(255) default NULL,
-  `to_month` varchar(255) default NULL,
-  `meter_fix_date` varchar(255) default NULL,
-  `initial_reading` varchar(255) default NULL,
-  `present_reading` varchar(255) default NULL,
-  `units` varchar(255) default NULL,
-  `water_cess` varchar(255) default NULL,
-  `sewerage_cess` varchar(255) default NULL,
-  `service_charge` varchar(255) default NULL,
-  `meter_service_charge` varchar(255) default NULL,
-  `total_amount` float default NULL,
-  `net_payable_amount` varchar(255) default NULL,
-  `telephone_no` varchar(255) default NULL,
-  `meter_status` varchar(255) default NULL,
-  `mc_met_reader_code` varchar(255) default NULL,
-  `bill_flag` varchar(255) default NULL,
-  `docket` varchar(255) default NULL,
-  `oc_flag` varchar(255) default NULL,
-  `oc_date` date default NULL,
+  `cc_flag` varchar(255) default NULL,
+  `cp_flag` varchar(255) default NULL,
+  `notice_flag` varchar(255) default NULL,
+  `dr_flag` varchar(255) default NULL,
   `lat` varchar(255) default NULL,
-  `long_i` varchar(255) default NULL,
-  `no_meter_flag` varchar(255) default NULL,
-  `no_meter_ack_dt` varchar(255) default NULL,
-  `no_meter_amt` float default NULL,
-  `meter_tamp_amt` float default NULL,
+  `longi` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -701,8 +609,24 @@ CREATE TABLE `cust_details` (
 --
 
 /*!40000 ALTER TABLE `cust_details` DISABLE KEYS */;
-INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`sur_charge`,`hrs_sur_charge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`docket`,`oc_flag`,`oc_date`,`lat`,`long_i`,`no_meter_flag`,`no_meter_ack_dt`,`no_meter_amt`,`meter_tamp_amt`) VALUES 
- (1,'Can1','DivCode1','SecCode1','SecName1','MetReaderCode1','2016-03-18','ConsName1','HouseNo1','Address1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-03-18',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1111,'1111','1111','2016-03-18',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1111,'1111',NULL,NULL,NULL,NULL,NULL,NULL,'2016-03-18','Lat1','LongI1',NULL,NULL,1111,1111);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (1,'613427474','15','0614','MADHAPUR','0000','2005-04-19','R.PRATIBHA ANNAPURNA','5-109/10/22','RADHE NAGAR COLONY,GACHIBOWLI','','500032','D','0.50','F','T','05505137','U','20131001','10','2016-03-13','0','','10','680.06','0.00','0.00','0.00','0','F','0','0.00','5.06','20131130',2000,'0000000000','1','1','0','1','0','0'),
+ (2,'613472557','15','0614','MADHAPUR','0000','2005-05-25','N.MANJULATHA','PLOT NO.21','RADHE NAGAR COLONY,H.S.DARGA','','500032','D','0.50','F','T','05-1-005551','R','20131001','10','2016-03-13','0','','10','2785.07','0.00','0.00','0.00','0','F','0','0.00','9.57','20131130',200,'0000000000','0','0','0','1','0','0'),
+ (3,'613472562','15','0614','MADHAPUR','0000','2005-05-25','G.MURALI MOHAN','H.NO.33','RADHE NAGAR COLONY,H.S.DARGA.','','500032','D','0.50','F','T','05-1-004920','R','20131001','15','2016-03-13','0','','0','6924.29','0.00','0.00','0.00','0','F','0','0.00','61.94','20131130',250,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (4,'613577519','15','0614','MADHAPUR','0000','2005-09-21','K.V.V.BALA SUBRAMANA','PLOT NO.19 SY.47','RADHA NAGAR RAIDURGA,MADHAPUR','','500032','D','0.50','F','T','05-1-0017909','R','20131001','15','2016-03-13','0','','6','31417.30','0.00','0.00','0.00','0','F','0','0.00','329.73','20131130',247,'0000000000','0','0','0','1','0','0'),
+ (5,'617738493','15','0614','MADHAPUR','0000','2012-08-11','VANIN','3-615/3','PLOT NO. 195','','','D','0.50','F','T','12B40628','R','20131001','15','2016-03-13','0','','15','2508.88','0.00','0.00','0.00','0','F','1','0.00','6.38','20131130',260,'0000000000','0','0','0','1','0','0'),
+ (6,'617738918','15','0614','MADHAPUR','0000','2012-07-14','K RAVI','1-60/30/138/135','ANJAIAH NAGAR,GACHIBOWLI','','','D','0.50','F','T','12A19467','L','20131001','15','2016-03-13','0','20120601','0','3032.75','3400.00','0.00','0.00','0','F','1','0.00','12.75','20131130',380,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (7,'617757078','15','0614','MADHAPUR','0000','2012-09-10','MALOTH.LACHIRAM NAYAK','1-57/31','RAJEEV NAGAR,GACHIBOWLI','','','D','0.50','F','T','12B92564','M','20131001','15','2016-03-13','10000','20131001','0','2481.38','0.00','0.00','0.00','0','F','1','0.00','6.38','20131130',500,'0000000000','0','0','0','1','0','0'),
+ (8,'617757083','15','0614','MADHAPUR','0000','2012-09-15','P HIMA BINDU','1-58/103','RAJEEV NAGAR,GACHIBOWLI','','','D','0.50','F','T','11B35430','M','20131001','15','2016-03-13','100000','20131001','0','2581.38','0.00','0.00','0.00','0','F','1','0.00','6.38','20131130',400,'0000000000','0','0','0','1','0','0'),
+ (9,'617757111','15','0614','MADHAPUR','0000','2012-08-20','JAFFAR BEE','H.NO.2-63/2/A3','CHINNA ANJAIAH NAGAR,GACHIBOWL','','','D','0.50','F','T','12B40792','L','20131001','15','2016-03-13','0','20120701','0','2995.56','3187.50','0.00','0.00','0','F','1','0.00','8.06','20131130',100,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (10,'617757186','15','0614','MADHAPUR','0000','2012-09-26','SMT.SHIVALINGAMMA','2-62/2/A/10','GACHIBOWLI VILLAGE','','','D','0.50','F','T','12B36048','L','20131001','15','2016-03-13','0','20120801','0','2746.38','2975.00','0.00','0.00','0','F','1','0.00','6.38','20131130',235,'0000000000','0','0','0','1','0','0'),
+ (11,'617771922','15','0614','MADHAPUR','0000','2012-11-01','SYED AZEEM','1-14','OLD GACHIBOWLI','','','D','0.50','F','T','','L','20131001','15','2016-03-13','0','','0','2100.00','2550.00','0.00','0.00','0','F','1','0.00','0.00','20131130',450,'0000000000','0','0','0','1','0','0'),
+ (12,'617781451','15','0614','MADHAPUR','0000','2012-11-15','SRINIVAS','1-110/A/32','KONDAPUR W/S COLONY,KONDAPUR','','','D','0.50','F','T','12B53322','M','20131001','15','2016-03-13','400000','20131001','0','1750.00','0.00','0.00','0.00','0','F','1','0.00','0.00','20131130',800,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (13,'617781710','15','0614','MADHAPUR','0000','2012-11-10','K.DEVIDAS','3-618/2,P.NO.540/B','SCB NAGAR,NEW HAFEEZPET','','','D','0.50','F','T','12B53305','M','20131001','15','2016-03-13','500000','20131001','0','2338.00','0.00','0.00','0.00','0','F','2','0.00','0.00','20131130',212,'0000000000','0','0','0','1','0','0');
 /*!40000 ALTER TABLE `cust_details` ENABLE KEYS */;
 
 
@@ -730,11 +654,9 @@ CREATE TABLE `customer` (
   `tel_office` varchar(255) default NULL,
   `tel_home` varchar(255) default NULL,
   `mobile` varchar(255) default NULL,
-  `file_number_id` bigint(20) default NULL,
+  `file_number` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
-  KEY `fk_customer_filenumber_id` (`file_number_id`),
-  CONSTRAINT `fk_customer_filenumber_id` FOREIGN KEY (`file_number_id`) REFERENCES `file_number` (`id`)
->>>>>>> refs/heads/bhaskar2
+  KEY `fk_customer_filenumber_id` (`file_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -742,49 +664,6 @@ CREATE TABLE `customer` (
 --
 
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `customer` WRITE;
-UNLOCK TABLES;
-=======
-INSERT INTO `customer` (`id`,`request_date`,`first_name`,`middle_name`,`last_name`,`house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`tel_office`,`tel_home`,`mobile`,`file_number_id`) VALUES 
- (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (2,'2016-03-03 00:00:00','mohib',NULL,'khan','123','589','kpbh','5','50003','kukatpally','kphb','258','hyd','thisismohib','147','852','1447',1),
- (3,'2016-03-03 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),
- (4,'2016-03-03 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),
- (5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (7,'2016-03-04 00:00:00','Mohib',NULL,'Khan','123',NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),
- (8,'2016-03-04 00:00:00','Mohib','ullah','khan','dA','AF','Q','AF','AAF','Af','AF','QFR','FQ','QWTQWT','QW','WEYW','AWTQW',1);
-INSERT INTO `customer` (`id`,`request_date`,`first_name`,`middle_name`,`last_name`,`house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`tel_office`,`tel_home`,`mobile`,`file_number_id`) VALUES 
- (9,'2016-03-04 00:00:00','asd','sdfas',NULL,'sdh',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),
- (10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (11,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (12,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (13,'2016-03-04 00:00:00','mohib','ullah','khan','123','bvnbch','jhjgjhg','jjh','775765','hgjhgjfh','jhjgf','as','hhjgh','bgh@gmail.com','87987','8798798','87987',1),
- (14,'2016-03-04 00:00:00','mohib','ullah','khan','123','369','hug','258','1148','gjy','369','2548','jh','ashkjhs@gmail','8876786','876876','76876',2),
- (15,'2016-03-04 00:00:00','mohib','ullah','khan','123','369','hug','258','1148','gjy','369','2548','jh','ashkjhs@gmail','8876786','876876','76876',2),
- (16,'2016-03-04 00:00:00','mohib','ullah','khan','123','369','hug','258','1148','gjy','369','2548','jh','ashkjhs@gmail','8876786','876876','76876',2);
-INSERT INTO `customer` (`id`,`request_date`,`first_name`,`middle_name`,`last_name`,`house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`tel_office`,`tel_home`,`mobile`,`file_number_id`) VALUES 
- (17,'2016-03-04 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (18,'2016-03-04 00:00:00','AR','AT','WET','WEY','WEY','WEY','WEY','WEY','WEY','WEY','WEY','WEY','ATA','WERYWE','ERU','ERU',2),
- (19,'2016-03-04 00:00:00','hjk','kjhj','hkj','hkjh','hkj','kjh','kjhkj','hkjh','kjh','hkj','kjh','kjh','89878','0907','8798','7987',1),
- (20,'2016-03-07 00:00:00','mohib',NULL,'khan','147','889','888','855','9999','9999','998','8996','999','999','9999','999','999',1),
- (21,'2016-03-07 00:00:00','mohib',NULL,'khan','9','88','788','78','887','788','88','778','997','5567','888','8888','876',2),
- (22,'2016-03-07 00:00:00','hkjhjk','kjhkj','hkjh','kjhkj','hkj','hkj','hjk','hkj','h','hkj','hkj','kjh','hkj','kjhkj','hkj','hkj',3),
- (23,'2016-03-07 00:00:00','hghg','hgjh','jhgjhg','hgjh','ghjh','hjhkj','hgjj','hgjh','hkjhkjh','hjhjhg','jhgj','hkkjhj','hkhkjff','khkjkhj','hhjjk','kjkhkj',4);
-INSERT INTO `customer` (`id`,`request_date`,`first_name`,`middle_name`,`last_name`,`house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`tel_office`,`tel_home`,`mobile`,`file_number_id`) VALUES 
- (24,'2016-03-07 00:00:00','jgjgkj','jkjhkjh','kjhkjh','jkhkjhjkh','khhjkh','hjhhjkj','kjhkhk','jhj','hkjhkjh','jhkjh','jhkj','kjhkjh','khkjh','kjhkjhkj','hkjhkj','hkjh',4),
- (25,'2016-03-07 00:00:00','kjkjh','jkhkjh','kjhkjh','hjkhkh','hkj','jhk','jhk','hjh','hkjh','hkjjk','jhkjh','kjhk','hkhjh','jhkh','kjh','khk',2),
- (26,'2016-03-07 00:00:00','jkjhkj','hkjhkjh','hjjkh','jhkjh','jhkjhkjh','kjhkjh','jhkjhk','kjhkjh','kjhk','jkhkjhk','jkhkjh','hk','hkj','hkjhkj','hkjh','khkj',4),
- (27,'2016-03-07 00:00:00','kjhkj','jhkhj','kjhlk','jhkjh','hjkh','kjh','jhjk','kjh','jkhkj','hkjhkj','jkhkjh','hkjh','hkj','kjh','jh','kjhkj',2),
- (28,'2016-03-07 00:00:00','asf','saf','assgf','asg','ag','sag','ag','asg','asg','asg','asga','aasg','asg','sdgsd','g','ssg',3),
- (29,'2016-03-08 00:00:00','awrf','sg','sg','sdhsh','shsd','shs','shs','sdhs','sfhshf','shshdh','shsd','shsdf','sg','dfhs','sh','sh',2);
-INSERT INTO `customer` (`id`,`request_date`,`first_name`,`middle_name`,`last_name`,`house_no`,`govt_official_no`,`ward`,`street`,`pincode`,`block`,`area`,`section`,`constituency`,`email`,`tel_office`,`tel_home`,`mobile`,`file_number_id`) VALUES 
- (30,'2016-03-08 00:00:00','kj','jhg','ujjkk','bhb','.b',',mn,mn','kkjkj',',,m,mn','mnjh','hk',',mn,mn','gh','vhjh','ghgc','chc','h',3),
- (31,'2016-03-08 00:00:00','asd','lkj','iuy','hgh','ghg','v ccnbv','hgjg','jhg','vbnfhgd','hjh','hvbn','vhvhjh','jkgjjhj','vhjvg','tutty','6876876',3),
- (32,'2016-03-10 00:00:00','jj','jhkjh','jhkjh','jhkjh','kjhjk','hkj','jhjkh','hkj','hkjh','jkh','hkj','kjh','jhkj','jkhkjh','jh','jkh',3),
- (33,'2016-03-11 00:00:00','235','23','236','236','236','236','236','236','236','236','236','236','236','236','26','326',2);
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 
 
@@ -813,12 +692,6 @@ CREATE TABLE `customer_complaints` (
 --
 
 /*!40000 ALTER TABLE `customer_complaints` DISABLE KEYS */;
-INSERT INTO `customer_complaints` (`id`,`remarks`,`relevant_doc`,`complaint_by`,`complaint_date`,`application_txn_id`,`complaint_type_master_id`) VALUES 
- (1,'Remarks1','Relevant Document1','Mohib','2016-03-30',24,1),
- (4,'Current bill not printed','Relevant Document4','Krishna Reddy','2016-03-30',23,1),
- (7,'Remarks','Document','Complaint By','2016-03-31',22,1),
- (11,'Remarks','Relevant Document','Complaint By','2016-03-31',23,2),
- (13,NULL,NULL,NULL,'2016-03-31',24,NULL);
 /*!40000 ALTER TABLE `customer_complaints` ENABLE KEYS */;
 
 
@@ -869,99 +742,87 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160229073547','jhipster','classpath:config/liquibase/changelog/20160229073547_added_entity_DesignationMaster.xml','2016-02-29 14:06:41',15,'EXECUTED','7:127eba27413f9aa0a5e653084544e03a','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229073648','jhipster','classpath:config/liquibase/changelog/20160229073648_added_entity_FeasibilityStatus.xml','2016-02-29 14:06:41',16,'EXECUTED','7:190180bbcfa1c279424b098aae93a57c','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229074219','jhipster','classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml','2016-02-29 14:06:46',18,'EXECUTED','7:eb523405877dcf8d7dd83dc9199b8ea3','createTable, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
-<<<<<<< HEAD
  ('20160229084044','jhipster','classpath:config/liquibase/changelog/20160229084044_added_entity_ConfigurationDetails.xml','2016-02-29 15:03:13',20,'EXECUTED','7:839bd04dd36ec11b9c3f6f6db979cc63','createTable','',NULL,'3.4.2',NULL,NULL),
-=======
- ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-02-29 14:06:51',19,'EXECUTED','7:ff65e8435ea7b29464676823a9a5eb0c','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
- ('20160229084044','jhipster','classpath:config/liquibase/changelog/20160229084044_added_entity_ConfigurationDetails.xml','2016-02-29 15:03:13',20,'EXECUTED','7:839bd04dd36ec11b9c3f6f6db979cc63','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160229085139','jhipster','classpath:config/liquibase/changelog/20160229085139_added_entity_DesigCategoryMaster.xml','2016-02-29 15:03:14',21,'EXECUTED','7:fdd173d8f6e7a9bc336c5a494f57f052','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
->>>>>>> refs/heads/bhaskar2
- ('20160229085139','jhipster','classpath:config/liquibase/changelog/20160229085139_added_entity_DesigCategoryMaster.xml','2016-02-29 15:03:14',21,'EXECUTED','7:fdd173d8f6e7a9bc336c5a494f57f052','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229085352','jhipster','classpath:config/liquibase/changelog/20160229085352_added_entity_SubDesigCategoryMaster.xml','2016-02-29 15:03:15',22,'EXECUTED','7:c1f7021bd38767b73129e94983eb54cf','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229085805','jhipster','classpath:config/liquibase/changelog/20160229085805_added_entity_GroupMaster.xml','2016-02-29 15:03:16',23,'EXECUTED','7:4c67fc449b40cce038c464ecc57d55d0','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160229090028','jhipster','classpath:config/liquibase/changelog/20160229090028_added_entity_OrgHierarchy.xml','2016-02-29 15:03:17',24,'EXECUTED','7:fd82c8c6649f4fc468f75eda51211b68','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+ ('20160229090028','jhipster','classpath:config/liquibase/changelog/20160229090028_added_entity_OrgHierarchy.xml','2016-02-29 15:03:17',24,'EXECUTED','7:fd82c8c6649f4fc468f75eda51211b68','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160229090217','jhipster','classpath:config/liquibase/changelog/20160229090217_added_entity_DesignationMappings.xml','2016-02-29 15:03:20',25,'EXECUTED','7:a32248161fb67e22dcb376886d1f8d32','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229090217','jhipster','classpath:config/liquibase/changelog/20160229090217_added_entity_DesignationMappings.xml','2016-02-29 15:03:20',25,'EXECUTED','7:a32248161fb67e22dcb376886d1f8d32','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160229090442','jhipster','classpath:config/liquibase/changelog/20160229090442_added_entity_DepartmentsHierarchy.xml','2016-02-29 15:03:21',26,'EXECUTED','7:f61491f7db54a4caa099623241809053','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229090611','jhipster','classpath:config/liquibase/changelog/20160229090611_added_entity_DepartmentTypeMaster.xml','2016-02-29 15:03:23',27,'EXECUTED','7:877befbbede5aa2ae023cef1c740eda5','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160229091226','jhipster','classpath:config/liquibase/changelog/20160229091226_added_entity_DepartmentsMaster.xml','2016-02-29 15:03:25',28,'EXECUTED','7:269c35f7c51323070df2bb00cb146173','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+ ('20160229091226','jhipster','classpath:config/liquibase/changelog/20160229091226_added_entity_DepartmentsMaster.xml','2016-02-29 15:03:25',28,'EXECUTED','7:269c35f7c51323070df2bb00cb146173','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229091411','jhipster','classpath:config/liquibase/changelog/20160229091411_added_entity_OrgRoleHierarchy.xml','2016-02-29 15:03:26',29,'EXECUTED','7:2917d963a991b8d25ed698800fb6d36c','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229091411','jhipster','classpath:config/liquibase/changelog/20160229091411_added_entity_OrgRoleHierarchy.xml','2016-02-29 15:03:26',29,'EXECUTED','7:2917d963a991b8d25ed698800fb6d36c','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229092048','jhipster','classpath:config/liquibase/changelog/20160229092048_added_entity_OrgRoleInstance.xml','2016-02-29 15:03:29',30,'EXECUTED','7:775abb35fbdc8d21cefae3e86deeb7e2','createTable, dropDefaultValue (x3), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
  ('20160229092244','jhipster','classpath:config/liquibase/changelog/20160229092244_added_entity_OrgRolesMaster.xml','2016-02-29 15:03:30',31,'EXECUTED','7:88f6b41a493861a105157b995199f4a1','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160229092636','jhipster','classpath:config/liquibase/changelog/20160229092636_added_entity_WorkflowTypeMaster.xml','2016-02-29 15:03:31',32,'EXECUTED','7:c51656b7eeb13d3c2e615135ac3b1361','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+ ('20160229092636','jhipster','classpath:config/liquibase/changelog/20160229092636_added_entity_WorkflowTypeMaster.xml','2016-02-29 15:03:31',32,'EXECUTED','7:c51656b7eeb13d3c2e615135ac3b1361','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160229093926','jhipster','classpath:config/liquibase/changelog/20160229093926_added_entity_EmpMaster.xml','2016-02-29 15:12:23',33,'EXECUTED','7:3252e1c25b98fa713f2887568665564d','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229093926','jhipster','classpath:config/liquibase/changelog/20160229093926_added_entity_EmpMaster.xml','2016-02-29 15:12:23',33,'EXECUTED','7:3252e1c25b98fa713f2887568665564d','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160229095205','jhipster','classpath:config/liquibase/changelog/20160229095205_added_entity_EmpRoleMapping.xml','2016-02-29 15:49:21',34,'EXECUTED','7:fc3da7a2667930eac07790ad970de8c1','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160229095400','jhipster','classpath:config/liquibase/changelog/20160229095400_added_entity_WorkflowMaster.xml','2016-02-29 15:49:22',35,'EXECUTED','7:9e74b57e21636b130a51342ef513fa9b','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160229095700','jhipster','classpath:config/liquibase/changelog/20160229095700_added_entity_RequestMaster.xml','2016-02-29 15:49:23',36,'EXECUTED','7:4ea16d61dc9c1631995ebcaa24172261','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+ ('20160229095700','jhipster','classpath:config/liquibase/changelog/20160229095700_added_entity_RequestMaster.xml','2016-02-29 15:49:23',36,'EXECUTED','7:4ea16d61dc9c1631995ebcaa24172261','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160229095841','jhipster','classpath:config/liquibase/changelog/20160229095841_added_entity_WorkflowStageMaster.xml','2016-02-29 15:49:24',37,'EXECUTED','7:b232f3ff1a94a47509fc8dcf9d99f1d4','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229095841','jhipster','classpath:config/liquibase/changelog/20160229095841_added_entity_WorkflowStageMaster.xml','2016-02-29 15:49:24',37,'EXECUTED','7:b232f3ff1a94a47509fc8dcf9d99f1d4','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229095927','jhipster','classpath:config/liquibase/changelog/20160229095927_added_entity_WorkflowRelations.xml','2016-02-29 15:49:25',38,'EXECUTED','7:8f71bbc6064b9fe8aa41799e214bbc10','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229100042','jhipster','classpath:config/liquibase/changelog/20160229100042_added_entity_WorkflowRelationships.xml','2016-02-29 15:49:26',39,'EXECUTED','7:af9db222b3e3f53e4df472506e8d6995','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229100254','jhipster','classpath:config/liquibase/changelog/20160229100254_added_entity_ReqDesigWorkflowMapping.xml','2016-02-29 15:49:29',40,'EXECUTED','7:1e7a0c353f3ba594bbb665b568452d48','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
- ('20160229100431','jhipster','classpath:config/liquibase/changelog/20160229100431_added_entity_ReqOrgWorkflowMapping.xml','2016-02-29 15:49:32',41,'EXECUTED','7:f3cade643b99f3ca2eaf4c44cf764f9c','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
+ ('20160229100431','jhipster','classpath:config/liquibase/changelog/20160229100431_added_entity_ReqOrgWorkflowMapping.xml','2016-02-29 15:49:32',41,'EXECUTED','7:f3cade643b99f3ca2eaf4c44cf764f9c','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229100821','jhipster','classpath:config/liquibase/changelog/20160229100821_added_entity_RoleWorkflowMapping.xml','2016-02-29 15:49:35',42,'EXECUTED','7:25c22c3ba0d09c89818f178cb23b9aea','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229100821','jhipster','classpath:config/liquibase/changelog/20160229100821_added_entity_RoleWorkflowMapping.xml','2016-02-29 15:49:35',42,'EXECUTED','7:25c22c3ba0d09c89818f178cb23b9aea','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160229100952','jhipster','classpath:config/liquibase/changelog/20160229100952_added_entity_RequestWorkflowMapping.xml','2016-02-29 15:49:37',43,'EXECUTED','7:e2e3affdf6fd6213512081f5a7c52acd','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
  ('20160229101231','jhipster','classpath:config/liquibase/changelog/20160229101231_added_entity_WorkflowTxnDetails.xml','2016-02-29 15:49:38',44,'EXECUTED','7:ffd53ef669a1b6a5fdacfdfc2c63c8d4','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160229111312','jhipster','classpath:config/liquibase/changelog/20160229111312_added_entity_Workflow.xml','2016-02-29 16:56:15',45,'EXECUTED','7:aa3bbe903f8a96b777e321dc647773ab','createTable, addForeignKeyConstraint (x10)','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160229111312','jhipster','classpath:config/liquibase/changelog/20160229111312_added_entity_Workflow.xml','2016-02-29 16:56:15',45,'EXECUTED','7:aa3bbe903f8a96b777e321dc647773ab','createTable, addForeignKeyConstraint (x10)','',NULL,'3.4.2',NULL,NULL),
  ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-02-29 16:56:21',46,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
- ('20160229074020','jhipster','classpath:config/liquibase/changelog/20160229074020_added_entity_ApprovalDetails.xml','2016-03-08 14:21:51',47,'EXECUTED','7:37e6360d74c522cda74763685e8f3e6e','createTable, dropDefaultValue, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229074020','jhipster','classpath:config/liquibase/changelog/20160229074020_added_entity_ApprovalDetails.xml','2016-03-08 14:21:51',47,'EXECUTED','7:37e6360d74c522cda74763685e8f3e6e','createTable, dropDefaultValue, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160309103544','jhipster','classpath:config/liquibase/changelog/20160309103544_added_entity_Module.xml','2016-03-09 16:14:40',48,'EXECUTED','7:ae553e293db4d292b225cd36fb0ba43c','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
  ('20160309103701','jhipster','classpath:config/liquibase/changelog/20160309103701_added_entity_MenuItem.xml','2016-03-09 16:14:41',49,'EXECUTED','7:bd9888add9c5af34bcdca93e50add4d1','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160309103829','jhipster','classpath:config/liquibase/changelog/20160309103829_added_entity_Url.xml','2016-03-09 16:14:41',50,'EXECUTED','7:1889bdedffb7df6fe11f9bc33d0efa35','createTable','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160309103829','jhipster','classpath:config/liquibase/changelog/20160309103829_added_entity_Url.xml','2016-03-09 16:14:41',50,'EXECUTED','7:1889bdedffb7df6fe11f9bc33d0efa35','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160309104001','jhipster','classpath:config/liquibase/changelog/20160309104001_added_entity_MenuItem2Url.xml','2016-03-09 16:14:43',51,'EXECUTED','7:902843a076e3bb258db90badb9e1dc9a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-03-09 16:14:45',52,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-03-09 16:14:45',52,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160309105304','jhipster','classpath:config/liquibase/changelog/20160309105304_added_entity_Url2Role.xml','2016-03-09 16:34:47',53,'EXECUTED','7:10331a2dfcdaf6902d65c17510f31bc4','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160311094234','jhipster','classpath:config/liquibase/changelog/20160311094234_added_entity_SchemeMaster.xml','2016-03-11 15:21:26',54,'EXECUTED','7:af80987658cadbe9d18ef393fd5559c7','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml','2016-03-11 15:21:26',55,'EXECUTED','7:76b2ec672aee81aa1c61119392f20b5d','createTable','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160311094550','jhipster','classpath:config/liquibase/changelog/20160311094550_added_entity_MakeOfPipe.xml','2016-03-11 15:21:26',56,'EXECUTED','7:0aae809bc0a38e5aa294a887f735acb8','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311094820','jhipster','classpath:config/liquibase/changelog/20160311094820_added_entity_MainWaterSize.xml','2016-03-11 15:21:26',57,'EXECUTED','7:0e853a5e0c7721503d0203d88333bd91','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160311094904','jhipster','classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml','2016-03-11 15:21:27',58,'EXECUTED','7:03b9b58c058199566e8d55fd5635b97d','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094904','jhipster','classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml','2016-03-11 15:21:27',58,'EXECUTED','7:03b9b58c058199566e8d55fd5635b97d','createTable','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160311095014','jhipster','classpath:config/liquibase/changelog/20160311095014_added_entity_DocketCode.xml','2016-03-11 15:21:27',59,'EXECUTED','7:9b3b9b3180ffc95d73eadf3d1294c5e0','createTable','',NULL,'3.4.2',NULL,NULL),
-<<<<<<< HEAD
  ('20160311100455','jhipster','classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml','2016-03-11 15:35:47',60,'EXECUTED','7:02ff1a8ab9783cbd5eaec740ffa6d9cc','createTable, addForeignKeyConstraint (x12)','',NULL,'3.4.2',NULL,NULL),
  ('20160317071301','jhipster','classpath:config/liquibase/changelog/20160317071301_added_entity_ItemDetails.xml','2016-03-17 13:06:23',62,'EXECUTED','7:8d0c73c28056a5186d39bbed2ac7f38f','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160317100956','jhipster','classpath:config/liquibase/changelog/20160317100956_added_entity_ItemRequired.xml','2016-03-17 15:41:55',63,'EXECUTED','7:94df0c0621fc50b07f19c839c8c3e99d','createTable, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160324101153','jhipster','classpath:config/liquibase/changelog/20160324101153_added_entity_DivisionMaster.xml','2016-03-24 15:50:09',65,'EXECUTED','7:49f67b19188786accf52558a610c39c8','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160324101153','jhipster','classpath:config/liquibase/changelog/20160324101153_added_entity_DivisionMaster.xml','2016-03-24 15:50:09',65,'EXECUTED','7:49f67b19188786accf52558a610c39c8','createTable','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160324101330','jhipster','classpath:config/liquibase/changelog/20160324101330_added_entity_ZoneMaster.xml','2016-03-24 15:50:10',66,'EXECUTED','7:7855073214c1c3e194f1b4125d049f25','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160324101502','jhipster','classpath:config/liquibase/changelog/20160324101502_added_entity_StreetMaster.xml','2016-03-24 15:50:11',67,'EXECUTED','7:7834259d37eff0b5a2feb5555c398f82','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-03-24 17:07:52',68,'EXECUTED','7:92c7f965d32eb43ea3431e8ab91bb501','createTable, dropDefaultValue (x3), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-03-28 13:17:41',71,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
- ('20160328051857','jhipster','classpath:config/liquibase/changelog/20160328051857_added_entity_FileUploadMaster.xml','2016-03-28 18:56:06',72,'EXECUTED','7:9fd8cdb67e4d8cc76478621ecad2012b','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160328051857','jhipster','classpath:config/liquibase/changelog/20160328051857_added_entity_FileUploadMaster.xml','2016-03-28 18:56:06',72,'EXECUTED','7:9fd8cdb67e4d8cc76478621ecad2012b','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160328131639','jhipster','classpath:config/liquibase/changelog/20160328131639_added_entity_FileUploadMaster.xml','2016-03-28 18:57:23',73,'EXECUTED','7:03be8b2eae9799aec199f76ed49d55a1','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160330052554','jhipster','classpath:config/liquibase/changelog/20160330052554_added_entity_ItemCategoryMaster.xml','2016-03-30 11:28:44',74,'EXECUTED','7:360b2d16421c3564bb94f0775648580d','createTable, dropDefaultValue (x3)','',NULL,'3.4.2',NULL,NULL),
  ('20160330052808','jhipster','classpath:config/liquibase/changelog/20160330052808_added_entity_ItemSubCategoryMaster.xml','2016-03-30 11:28:45',75,'EXECUTED','7:77c40a173637ee134f58cd079c67aead','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160330053134','jhipster','classpath:config/liquibase/changelog/20160330053134_added_entity_ItemCodeMaster.xml','2016-03-30 11:28:47',76,'EXECUTED','7:a4e7f1b1ca5ebdb94b5d29dd9402b337','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160330053533','jhipster','classpath:config/liquibase/changelog/20160330053533_added_entity_ItemCompanyMaster.xml','2016-03-30 11:28:47',77,'EXECUTED','7:a250630d5ce589a445e309d152c4d935','createTable, dropDefaultValue (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160330053533','jhipster','classpath:config/liquibase/changelog/20160330053533_added_entity_ItemCompanyMaster.xml','2016-03-30 11:28:47',77,'EXECUTED','7:a250630d5ce589a445e309d152c4d935','createTable, dropDefaultValue (x2)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160330054006','jhipster','classpath:config/liquibase/changelog/20160330054006_added_entity_ItemSubCodeMaster.xml','2016-03-30 11:28:48',78,'EXECUTED','7:b3fbded42d2b493c86ffbd3649e87ceb','createTable, dropDefaultValue (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160330054928','jhipster','classpath:config/liquibase/changelog/20160330054928_added_entity_MaterialMaster.xml','2016-03-30 11:28:48',79,'EXECUTED','7:983fd1500db22988ac26254293296036','createTable, dropDefaultValue (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160330055745','jhipster','classpath:config/liquibase/changelog/20160330055745_added_entity_SibEntry.xml','2016-03-30 11:28:49',80,'EXECUTED','7:da7d47c69cd368ff14809fae56104b33','createTable, dropDefaultValue (x9)','',NULL,'3.4.2',NULL,NULL),
  ('20160315083447','jhipster','classpath:config/liquibase/changelog/20160315083447_added_entity_Proceedings.xml','2016-03-30 15:44:38',81,'EXECUTED','7:dd7e9c257108ab49866b8ad0020e73bb','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-03-30 15:44:41',82,'EXECUTED','7:f7c7a5118cd1b8dad31bfb61a4aecfff','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
+ ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-03-30 15:44:41',82,'EXECUTED','7:f7c7a5118cd1b8dad31bfb61a4aecfff','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-03-30 15:58:29',84,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160330093457','jhipster','classpath:config/liquibase/changelog/20160330093457_added_entity_PercentageMaster.xml','2016-03-30 19:02:55',85,'EXECUTED','7:939ffd4e62fb70f2288fd5eb2055b778','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_BillOfMaterial.xml','2016-04-01 13:00:10',86,'EXECUTED','7:4bc9d2b3db96ca1d16d623ad6adb5f8a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
-UNLOCK TABLES;
-=======
- ('20160311100455','jhipster','classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml','2016-03-11 15:35:47',60,'EXECUTED','7:02ff1a8ab9783cbd5eaec740ffa6d9cc','createTable, addForeignKeyConstraint (x12)','',NULL,'3.4.2',NULL,NULL);
+ ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_BillOfMaterial.xml','2016-04-01 13:00:10',86,'EXECUTED','7:4bc9d2b3db96ca1d16d623ad6adb5f8a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml','2016-04-01 15:34:53',87,'EXECUTED','7:c01f3faca05eff0386e65260cc81849e','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffTypeMaster.xml','2016-04-01 15:34:53',88,'EXECUTED','7:2fdf8de5ece58a24c9842690d2599317','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160314085424','jhipster','classpath:config/liquibase/changelog/20160314085424_added_entity_AccessList.xml','2016-03-14 16:13:27',61,'EXECUTED','7:0bbcbab98b16045642e3ecbe7f8d5e68','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-03-15 11:54:54',63,'EXECUTED','7:ec99bdec568d74e2091725962cd5d360','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-03-15 11:54:55',64,'EXECUTED','7:15f4f13ea9c62925eda8f2dfe76b5250','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160315053612','jhipster','classpath:config/liquibase/changelog/20160315053612_added_entity_CurrentUsers.xml','2016-03-15 11:54:55',65,'EXECUTED','7:8a4a035e32b0b643cecd398c7f310072','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160315055126','jhipster','classpath:config/liquibase/changelog/20160315055126_added_entity_Terminal.xml','2016-03-15 11:54:55',66,'EXECUTED','7:e1d4bfddad1bbb1d0f00ddd8f44aa0b0','createTable','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160315055926','jhipster','classpath:config/liquibase/changelog/20160315055926_added_entity_TerminalLog.xml','2016-03-15 11:54:55',67,'EXECUTED','7:68ef0c670ad1ca54884347c8f8ce48a0','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160315060107','jhipster','classpath:config/liquibase/changelog/20160315060107_added_entity_Version.xml','2016-03-15 11:54:56',68,'EXECUTED','7:b17c4a085e285d295f72ab3d5f873ecf','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-03-15 18:27:22',69,'EXECUTED','7:2e904c908c3eea4a5836561fad0dda47','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160329064157','jhipster','classpath:config/liquibase/changelog/20160329064157_added_entity_ComplaintTypeMaster.xml','2016-03-29 12:16:00',70,'EXECUTED','7:925d2a76e3b71e5bc7daf39c4f8ee2b5','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-03-29 17:03:07',71,'EXECUTED','7:4447d052e2e7f65df6e84f8092a18afb','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
->>>>>>> refs/heads/bhaskar2
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffMaster.xml','2016-04-01 15:34:54',89,'EXECUTED','7:de67571b345cd24609fcbc1d6d8e12ab','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160401094431','jhipster','classpath:config/liquibase/changelog/20160401094431_added_entity_TariffCharges.xml','2016-04-01 15:34:56',90,'EXECUTED','7:84a4098f6e6489da14e4b14c2d948a2c','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml','2016-04-01 15:34:56',91,'EXECUTED','7:d4acae70934c11a3b823cff795b26406','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-04-01 15:34:56',92,'EXECUTED','7:bbd26d35aa2c97875a53556da90c045d','createTable','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -1159,25 +1020,24 @@ CREATE TABLE `designation_master` (
 
 
 --
-<<<<<<< HEAD
--- Definition of table `watererp`.`division_master`
+-- Table structure for table `watererp`.`division_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`division_master`;
-CREATE TABLE  `watererp`.`division_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `division_name` varchar(255) DEFAULT NULL,
-  `division_code` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `division_master`;
+CREATE TABLE `division_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `division_name` varchar(255) default NULL,
+  `division_code` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`division_master`
 --
 
 /*!40000 ALTER TABLE `division_master` DISABLE KEYS */;
-LOCK TABLES `division_master` WRITE;
-INSERT INTO `watererp`.`division_master` VALUES  (1,'D1','DCode1'),
+INSERT INTO `division_master` (`id`,`division_name`,`division_code`) VALUES 
+ (1,'D1','DCode1'),
  (2,'D2','DCode2'),
  (3,'D3','DCode3'),
  (4,'D4','DCode4'),
@@ -1187,41 +1047,28 @@ INSERT INTO `watererp`.`division_master` VALUES  (1,'D1','DCode1'),
  (8,'D8','DCode8'),
  (9,'D9','DCode9'),
  (10,'D10','DCode10');
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `division_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`docket_code`
-=======
 -- Table structure for table `watererp`.`docket_code`
->>>>>>> refs/heads/bhaskar2
 --
 
 DROP TABLE IF EXISTS `docket_code`;
 CREATE TABLE `docket_code` (
   `id` bigint(20) NOT NULL auto_increment,
   `code` varchar(255) NOT NULL,
-<<<<<<< HEAD
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-=======
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`docket_code`
 --
 
 /*!40000 ALTER TABLE `docket_code` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `docket_code` WRITE;
-INSERT INTO `watererp`.`docket_code` VALUES  (1,'Docket code 1'),
+INSERT INTO `docket_code` (`id`,`code`) VALUES 
+ (1,'Docket code 1'),
  (2,'Docket code 2');
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `docket_code` ENABLE KEYS */;
 
 
@@ -1248,16 +1095,15 @@ CREATE TABLE `emp_master` (
   CONSTRAINT `fk_empmaster_officeid_id` FOREIGN KEY (`office_id_id`) REFERENCES `org_role_instance` (`id`),
   CONSTRAINT `fk_empmaster_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_empmaster_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`emp_master`
 --
 
 /*!40000 ALTER TABLE `emp_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `emp_master` WRITE;
-INSERT INTO `watererp`.`emp_master` VALUES  (1,6,1,NULL,1,2),
+INSERT INTO `emp_master` (`id`,`user_id`,`office_id_id`,`designation_master_id`,`directorate_id_id`,`status_master_id`) VALUES 
+ (1,6,1,NULL,1,2),
  (2,7,2,NULL,2,2),
  (3,8,3,NULL,3,2),
  (4,9,4,NULL,4,2),
@@ -1283,9 +1129,6 @@ INSERT INTO `watererp`.`emp_master` VALUES  (1,6,1,NULL,1,2),
  (26,27,22,NULL,22,2),
  (27,28,23,NULL,23,2),
  (28,29,24,NULL,24,2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `emp_master` ENABLE KEYS */;
 
 
@@ -1314,16 +1157,15 @@ CREATE TABLE `emp_role_mapping` (
   CONSTRAINT `fk_emprolemapping_parentuser_id` FOREIGN KEY (`parent_user_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_emprolemapping_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_emprolemapping_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`emp_role_mapping`
 --
 
 /*!40000 ALTER TABLE `emp_role_mapping` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `emp_role_mapping` WRITE;
-INSERT INTO `watererp`.`emp_role_mapping` VALUES  (1,'','','2016-03-18 00:00:00','2016-03-18 00:00:00',0,6,NULL,1,2),
+INSERT INTO `emp_role_mapping` (`id`,`internal_division`,`internal_role`,`creation_date`,`last_modified_date`,`parent_role_id`,`user_id`,`parent_user_id`,`org_role_instance_id`,`status_master_id`) VALUES 
+ (1,'','','2016-03-18 00:00:00','2016-03-18 00:00:00',0,6,NULL,1,2),
  (2,'','','2016-03-18 00:00:00','2016-03-18 00:00:00',0,7,NULL,2,2),
  (3,NULL,NULL,NULL,NULL,NULL,8,NULL,3,2),
  (4,NULL,NULL,NULL,NULL,NULL,9,NULL,4,2),
@@ -1340,7 +1182,8 @@ INSERT INTO `watererp`.`emp_role_mapping` VALUES  (1,'','','2016-03-18 00:00:00'
  (15,NULL,NULL,NULL,NULL,NULL,20,NULL,15,2),
  (16,NULL,NULL,NULL,NULL,NULL,21,NULL,16,2),
  (17,NULL,NULL,NULL,NULL,NULL,22,NULL,17,2),
- (18,NULL,NULL,NULL,NULL,NULL,23,NULL,18,2),
+ (18,NULL,NULL,NULL,NULL,NULL,23,NULL,18,2);
+INSERT INTO `emp_role_mapping` (`id`,`internal_division`,`internal_role`,`creation_date`,`last_modified_date`,`parent_role_id`,`user_id`,`parent_user_id`,`org_role_instance_id`,`status_master_id`) VALUES 
  (19,NULL,NULL,NULL,NULL,NULL,24,NULL,19,2),
  (20,NULL,NULL,NULL,NULL,NULL,25,NULL,20,2),
  (22,NULL,NULL,NULL,NULL,NULL,26,NULL,21,2),
@@ -1348,9 +1191,6 @@ INSERT INTO `watererp`.`emp_role_mapping` VALUES  (1,'','','2016-03-18 00:00:00'
  (25,NULL,NULL,NULL,NULL,NULL,28,NULL,23,2),
  (26,'',NULL,'2016-03-18 00:00:00',NULL,NULL,29,NULL,24,2),
  (27,NULL,NULL,NULL,NULL,NULL,5,NULL,25,2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `emp_role_mapping` ENABLE KEYS */;
 
 
@@ -1379,111 +1219,53 @@ INSERT INTO `feasibility_status` (`id`,`status`) VALUES
 -- Table structure for table `watererp`.`feasibility_study`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `watererp`.`feasibility_study`;
-CREATE TABLE  `watererp`.`feasibility_study` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `created_date` timestamp NULL,
-  `modified_date` timestamp NULL,
-  `prepared_date` timestamp NULL,
-  `zonal_head_approval_date` timestamp NULL,
-  `dept_head_inspected_date` timestamp NULL,
-  `operation_mangrapprove_date` timestamp NULL,
-  `status` int(11) DEFAULT NULL,
-  `division_master_id` bigint(20) DEFAULT NULL,
-  `zone_master_id` bigint(20) DEFAULT NULL,
-  `street_master_id` bigint(20) DEFAULT NULL,
-  `application_txn_id` bigint(20) DEFAULT NULL,
-  `prepared_by_id` bigint(20) DEFAULT NULL,
-  `approved_by_zonal_head_id` bigint(20) DEFAULT NULL,
-  `inspection_by_department_head_id` bigint(20) DEFAULT NULL,
-  `approved_by_operation_manager_id` bigint(20) DEFAULT NULL,
-  `category_master_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_feasibilitystudy_divisionmaster_id` (`division_master_id`),
-  KEY `fk_feasibilitystudy_zonemaster_id` (`zone_master_id`),
-  KEY `fk_feasibilitystudy_streetmaster_id` (`street_master_id`),
-=======
 DROP TABLE IF EXISTS `feasibility_study`;
 CREATE TABLE `feasibility_study` (
   `id` bigint(20) NOT NULL auto_increment,
-  `plot_area_in_sq_mtrs` float default NULL,
-  `plot_area_in_yards` float default NULL,
-  `no_of_flats_or_no_of_units` int(11) default NULL,
-  `no_of_floors` int(11) default NULL,
-  `total_plinth_area` float default NULL,
-  `water_requirement` float default NULL,
-  `scheme_master_id` bigint(20) default NULL,
-  `tariff_category_master_id` bigint(20) default NULL,
-  `make_of_water_pipe_id` bigint(20) default NULL,
-  `make_of_sewerage_pipe_id` bigint(20) default NULL,
-  `main_water_size_id` bigint(20) default NULL,
-  `main_sewerage_size_id` bigint(20) default NULL,
-  `docket_code_id` bigint(20) default NULL,
+  `created_date` timestamp NULL default NULL,
+  `modified_date` timestamp NULL default NULL,
+  `prepared_date` timestamp NULL default NULL,
+  `zonal_head_approval_date` timestamp NULL default NULL,
+  `dept_head_inspected_date` timestamp NULL default NULL,
+  `operation_mangrapprove_date` timestamp NULL default NULL,
+  `status` int(11) default NULL,
+  `division_master_id` bigint(20) default NULL,
+  `zone_master_id` bigint(20) default NULL,
+  `street_master_id` bigint(20) default NULL,
   `application_txn_id` bigint(20) default NULL,
+  `prepared_by_id` bigint(20) default NULL,
+  `approved_by_zonal_head_id` bigint(20) default NULL,
+  `inspection_by_department_head_id` bigint(20) default NULL,
+  `approved_by_operation_manager_id` bigint(20) default NULL,
   `category_master_id` bigint(20) default NULL,
-  `sewer_size_id` bigint(20) default NULL,
-  `pipe_size_master_id` bigint(20) default NULL,
-  `feasibility_status_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
-  KEY `fk_feasibilitystudy_schememaster_id` (`scheme_master_id`),
-  KEY `fk_feasibilitystudy_tariffcategorymaster_id` (`tariff_category_master_id`),
-  KEY `fk_feasibilitystudy_makeofwaterpipe_id` (`make_of_water_pipe_id`),
-  KEY `fk_feasibilitystudy_makeofseweragepipe_id` (`make_of_sewerage_pipe_id`),
-  KEY `fk_feasibilitystudy_mainwatersize_id` (`main_water_size_id`),
-  KEY `fk_feasibilitystudy_mainseweragesize_id` (`main_sewerage_size_id`),
-  KEY `fk_feasibilitystudy_docketcode_id` (`docket_code_id`),
->>>>>>> refs/heads/bhaskar2
+  KEY `fk_feasibilitystudy_divisionmaster_id` (`division_master_id`),
+  KEY `fk_feasibilitystudy_zonemaster_id` (`zone_master_id`),
+  KEY `fk_feasibilitystudy_streetmaster_id` (`street_master_id`),
   KEY `fk_feasibilitystudy_applicationtxn_id` (`application_txn_id`),
   KEY `fk_feasibilitystudy_preparedby_id` (`prepared_by_id`),
   KEY `fk_feasibilitystudy_approvedbyzonalhead_id` (`approved_by_zonal_head_id`),
   KEY `fk_feasibilitystudy_inspectionbydepartmenthead_id` (`inspection_by_department_head_id`),
   KEY `fk_feasibilitystudy_approvedbyoperationmanager_id` (`approved_by_operation_manager_id`),
   KEY `fk_feasibilitystudy_categorymaster_id` (`category_master_id`),
-<<<<<<< HEAD
-=======
-  KEY `fk_feasibilitystudy_sewersize_id` (`sewer_size_id`),
-  KEY `fk_feasibilitystudy_pipesizemaster_id` (`pipe_size_master_id`),
-  KEY `fk_feasibilitystudy_feasibilitystatus_id` (`feasibility_status_id`),
->>>>>>> refs/heads/bhaskar2
   CONSTRAINT `fk_feasibilitystudy_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
   CONSTRAINT `fk_feasibilitystudy_approvedbyoperationmanager_id` FOREIGN KEY (`approved_by_operation_manager_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_feasibilitystudy_approvedbyzonalhead_id` FOREIGN KEY (`approved_by_zonal_head_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_feasibilitystudy_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
-<<<<<<< HEAD
   CONSTRAINT `fk_feasibilitystudy_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_inspectionbydepartmenthead_id` FOREIGN KEY (`inspection_by_department_head_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_feasibilitystudy_preparedby_id` FOREIGN KEY (`prepared_by_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_feasibilitystudy_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_zonemaster_id` FOREIGN KEY (`zone_master_id`) REFERENCES `zone_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-=======
-  CONSTRAINT `fk_feasibilitystudy_docketcode_id` FOREIGN KEY (`docket_code_id`) REFERENCES `docket_code` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_mainseweragesize_id` FOREIGN KEY (`main_sewerage_size_id`) REFERENCES `main_sewerage_size` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_mainwatersize_id` FOREIGN KEY (`main_water_size_id`) REFERENCES `main_water_size` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_makeofseweragepipe_id` FOREIGN KEY (`make_of_sewerage_pipe_id`) REFERENCES `make_of_pipe` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_makeofwaterpipe_id` FOREIGN KEY (`make_of_water_pipe_id`) REFERENCES `make_of_pipe` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_schememaster_id` FOREIGN KEY (`scheme_master_id`) REFERENCES `scheme_master` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_sewersize_id` FOREIGN KEY (`sewer_size_id`) REFERENCES `sewer_size` (`id`),
-  CONSTRAINT `fk_feasibilitystudy_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`feasibility_study`
 --
 
 /*!40000 ALTER TABLE `feasibility_study` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `feasibility_study` WRITE;
-INSERT INTO `watererp`.`feasibility_study` VALUES  (2,'2016-04-01 11:37:29','2016-04-01 11:37:29','2016-04-01 00:00:00','2016-04-02 00:00:00','2016-04-03 00:00:00','2016-04-04 00:00:00',0,1,2,4,38,13,14,15,16,1);
-UNLOCK TABLES;
-=======
-INSERT INTO `feasibility_study` (`id`,`plot_area_in_sq_mtrs`,`plot_area_in_yards`,`no_of_flats_or_no_of_units`,`no_of_floors`,`total_plinth_area`,`water_requirement`,`scheme_master_id`,`tariff_category_master_id`,`make_of_water_pipe_id`,`make_of_sewerage_pipe_id`,`main_water_size_id`,`main_sewerage_size_id`,`docket_code_id`,`application_txn_id`,`category_master_id`,`sewer_size_id`,`pipe_size_master_id`,`feasibility_status_id`) VALUES 
- (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
->>>>>>> refs/heads/bhaskar2
+INSERT INTO `feasibility_study` (`id`,`created_date`,`modified_date`,`prepared_date`,`zonal_head_approval_date`,`dept_head_inspected_date`,`operation_mangrapprove_date`,`status`,`division_master_id`,`zone_master_id`,`street_master_id`,`application_txn_id`,`prepared_by_id`,`approved_by_zonal_head_id`,`inspection_by_department_head_id`,`approved_by_operation_manager_id`,`category_master_id`) VALUES 
+ (2,'2016-04-01 11:37:29','2016-04-01 11:37:29','2016-04-01 00:00:00','2016-04-02 00:00:00','2016-04-03 00:00:00','2016-04-04 00:00:00',0,1,2,4,38,13,14,15,16,1);
 /*!40000 ALTER TABLE `feasibility_study` ENABLE KEYS */;
 
 
@@ -1513,19 +1295,18 @@ INSERT INTO `file_number` (`id`,`file_no`) VALUES
 
 
 --
-<<<<<<< HEAD
--- Definition of table `watererp`.`file_upload_master`
+-- Table structure for table `watererp`.`file_upload_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`file_upload_master`;
-CREATE TABLE  `watererp`.`file_upload_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `file_upload_master`;
+CREATE TABLE `file_upload_master` (
+  `id` bigint(20) NOT NULL auto_increment,
   `photo` blob,
   `photo_content_type` varchar(50) NOT NULL,
   `text_file` longtext,
   `binary_file` blob,
   `binary_file_content_type` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1533,16 +1314,11 @@ CREATE TABLE  `watererp`.`file_upload_master` (
 --
 
 /*!40000 ALTER TABLE `file_upload_master` DISABLE KEYS */;
-LOCK TABLES `file_upload_master` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `file_upload_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`group_master`
-=======
 -- Table structure for table `watererp`.`group_master`
->>>>>>> refs/heads/bhaskar2
 --
 
 DROP TABLE IF EXISTS `group_master`;
@@ -1567,20 +1343,19 @@ CREATE TABLE `group_master` (
 
 
 --
-<<<<<<< HEAD
--- Definition of table `watererp`.`item_category_master`
+-- Table structure for table `watererp`.`item_category_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`item_category_master`;
-CREATE TABLE  `watererp`.`item_category_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `category_code` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS `item_category_master`;
+CREATE TABLE `item_category_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `status` int(11) default NULL,
+  `creation_date` timestamp NULL default NULL,
+  `last_modified_date` timestamp NULL default NULL,
+  `category_code` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1588,27 +1363,25 @@ CREATE TABLE  `watererp`.`item_category_master` (
 --
 
 /*!40000 ALTER TABLE `item_category_master` DISABLE KEYS */;
-LOCK TABLES `item_category_master` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_category_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`item_code_master`
+-- Table structure for table `watererp`.`item_code_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`item_code_master`;
-CREATE TABLE  `watererp`.`item_code_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `item_code` varchar(255) DEFAULT NULL,
-  `item_name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `item_category_master_id` bigint(20) DEFAULT NULL,
-  `item_sub_category_master_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+DROP TABLE IF EXISTS `item_code_master`;
+CREATE TABLE `item_code_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `item_code` varchar(255) default NULL,
+  `item_name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `status` int(11) default NULL,
+  `creation_date` timestamp NULL default NULL,
+  `last_modified_date` timestamp NULL default NULL,
+  `item_category_master_id` bigint(20) default NULL,
+  `item_sub_category_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
   KEY `fk_itemcodemaster_itemcategorymaster_id` (`item_category_master_id`),
   KEY `fk_itemcodemaster_itemsubcategorymaster_id` (`item_sub_category_master_id`),
   CONSTRAINT `fk_itemcodemaster_itemcategorymaster_id` FOREIGN KEY (`item_category_master_id`) REFERENCES `item_category_master` (`id`),
@@ -1620,25 +1393,23 @@ CREATE TABLE  `watererp`.`item_code_master` (
 --
 
 /*!40000 ALTER TABLE `item_code_master` DISABLE KEYS */;
-LOCK TABLES `item_code_master` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_code_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`item_company_master`
+-- Table structure for table `watererp`.`item_company_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`item_company_master`;
-CREATE TABLE  `watererp`.`item_company_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `company_code` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS `item_company_master`;
+CREATE TABLE `item_company_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `status` int(11) default NULL,
+  `creation_date` timestamp NULL default NULL,
+  `last_modified_date` timestamp NULL default NULL,
+  `company_code` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1646,58 +1417,55 @@ CREATE TABLE  `watererp`.`item_company_master` (
 --
 
 /*!40000 ALTER TABLE `item_company_master` DISABLE KEYS */;
-LOCK TABLES `item_company_master` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_company_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`item_details`
+-- Table structure for table `watererp`.`item_details`
 --
 
-DROP TABLE IF EXISTS `watererp`.`item_details`;
-CREATE TABLE  `watererp`.`item_details` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `item_code` varchar(255) DEFAULT NULL,
-  `item_name` varchar(255) DEFAULT NULL,
-  `item_description` varchar(255) DEFAULT NULL,
-  `size` varchar(255) DEFAULT NULL,
-  `item_quantity` int(11) DEFAULT NULL,
-  `unit_price` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `item_details`;
+CREATE TABLE `item_details` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `item_code` varchar(255) default NULL,
+  `item_name` varchar(255) default NULL,
+  `item_description` varchar(255) default NULL,
+  `size` varchar(255) default NULL,
+  `item_quantity` int(11) default NULL,
+  `unit_price` float default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`item_details`
 --
 
 /*!40000 ALTER TABLE `item_details` DISABLE KEYS */;
-LOCK TABLES `item_details` WRITE;
-INSERT INTO `watererp`.`item_details` VALUES  (1,NULL,'Pipe','1m','1',1,10),
+INSERT INTO `item_details` (`id`,`item_code`,`item_name`,`item_description`,`size`,`item_quantity`,`unit_price`) VALUES 
+ (1,NULL,'Pipe','1m','1',1,10),
  (2,NULL,'Pipe 2.5','2.5m','2',1,20),
  (3,NULL,'Threading tape',NULL,'10',1,15),
  (4,NULL,'G. S. Pipe',NULL,'3',1,25);
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_details` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`item_required`
+-- Table structure for table `watererp`.`item_required`
 --
 
-DROP TABLE IF EXISTS `watererp`.`item_required`;
-CREATE TABLE  `watererp`.`item_required` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) DEFAULT NULL,
-  `unit` varchar(255) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `rate_per_shs` decimal(10,2) DEFAULT NULL,
-  `amount` decimal(10,2) DEFAULT NULL,
-  `material_master_id` bigint(20) DEFAULT NULL,
-  `application_txn_id` bigint(20) DEFAULT NULL,
-  `feasibility_study_id` bigint(20) DEFAULT NULL,
-  `proceedings_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+DROP TABLE IF EXISTS `item_required`;
+CREATE TABLE `item_required` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `description` varchar(255) default NULL,
+  `unit` varchar(255) default NULL,
+  `quantity` int(11) default NULL,
+  `rate_per_shs` decimal(10,2) default NULL,
+  `amount` decimal(10,2) default NULL,
+  `material_master_id` bigint(20) default NULL,
+  `application_txn_id` bigint(20) default NULL,
+  `feasibility_study_id` bigint(20) default NULL,
+  `proceedings_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
   KEY `fk_itemrequired_materialmaster_id` (`material_master_id`),
   KEY `fk_itemrequired_applicationtxn_id` (`application_txn_id`),
   KEY `fk_itemrequired_feasibilitystudy_id` (`feasibility_study_id`),
@@ -1713,27 +1481,25 @@ CREATE TABLE  `watererp`.`item_required` (
 --
 
 /*!40000 ALTER TABLE `item_required` DISABLE KEYS */;
-LOCK TABLES `item_required` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_required` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`item_sub_category_master`
+-- Table structure for table `watererp`.`item_sub_category_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`item_sub_category_master`;
-CREATE TABLE  `watererp`.`item_sub_category_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `item_sub_category_code` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `category_code` varchar(255) DEFAULT NULL,
-  `item_category_master_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+DROP TABLE IF EXISTS `item_sub_category_master`;
+CREATE TABLE `item_sub_category_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `item_sub_category_code` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `status` int(11) default NULL,
+  `creation_date` timestamp NULL default NULL,
+  `last_modified_date` timestamp NULL default NULL,
+  `name` varchar(255) default NULL,
+  `category_code` varchar(255) default NULL,
+  `item_category_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
   KEY `fk_itemsubcategorymaster_itemcategorymaster_id` (`item_category_master_id`),
   CONSTRAINT `fk_itemsubcategorymaster_itemcategorymaster_id` FOREIGN KEY (`item_category_master_id`) REFERENCES `item_category_master` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1743,29 +1509,27 @@ CREATE TABLE  `watererp`.`item_sub_category_master` (
 --
 
 /*!40000 ALTER TABLE `item_sub_category_master` DISABLE KEYS */;
-LOCK TABLES `item_sub_category_master` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_sub_category_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`item_sub_code_master`
+-- Table structure for table `watererp`.`item_sub_code_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`item_sub_code_master`;
-CREATE TABLE  `watererp`.`item_sub_code_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `item_code_id` bigint(20) DEFAULT NULL,
-  `item_sub_code` varchar(255) DEFAULT NULL,
-  `item_name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `item_ccode_id` bigint(20) DEFAULT NULL,
+DROP TABLE IF EXISTS `item_sub_code_master`;
+CREATE TABLE `item_sub_code_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `item_code_id` bigint(20) default NULL,
+  `item_sub_code` varchar(255) default NULL,
+  `item_name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `status` int(11) default NULL,
+  `creation_date` timestamp NULL default NULL,
+  `last_modified_date` timestamp NULL default NULL,
+  `item_ccode_id` bigint(20) default NULL,
   `item_category_id` bigint(20) NOT NULL,
-  `item_sub_category_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `item_sub_category_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -1773,16 +1537,11 @@ CREATE TABLE  `watererp`.`item_sub_code_master` (
 --
 
 /*!40000 ALTER TABLE `item_sub_code_master` DISABLE KEYS */;
-LOCK TABLES `item_sub_code_master` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_sub_code_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`jhi_authority`
-=======
 -- Table structure for table `watererp`.`jhi_authority`
->>>>>>> refs/heads/bhaskar2
 --
 
 DROP TABLE IF EXISTS `jhi_authority`;
@@ -1816,11 +1575,7 @@ CREATE TABLE `jhi_persistent_audit_event` (
   `event_type` varchar(255) default NULL,
   PRIMARY KEY  (`event_id`),
   KEY `idx_persistent_audit_event` (`principal`,`event_date`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=266 DEFAULT CHARSET=latin1;
-=======
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`jhi_persistent_audit_event`
@@ -1916,7 +1671,6 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (81,'admin','2016-03-10 15:53:24','AUTHENTICATION_SUCCESS'),
  (82,'customer','2016-03-10 17:21:19','AUTHENTICATION_SUCCESS'),
  (83,'admin','2016-03-11 10:14:38','AUTHENTICATION_SUCCESS'),
-<<<<<<< HEAD
  (84,'admin','2016-03-11 17:16:38','AUTHENTICATION_SUCCESS'),
  (85,'admin','2016-03-14 09:53:55','AUTHENTICATION_SUCCESS'),
  (86,'admin','2016-03-14 10:03:43','AUTHENTICATION_SUCCESS'),
@@ -1929,7 +1683,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (93,'admin','2016-03-17 10:05:50','AUTHENTICATION_SUCCESS'),
  (94,'admin','2016-03-17 12:32:18','AUTHENTICATION_SUCCESS'),
  (95,'admin','2016-03-17 12:58:43','AUTHENTICATION_SUCCESS'),
- (96,'admin','2016-03-18 10:14:10','AUTHENTICATION_SUCCESS'),
+ (96,'admin','2016-03-18 10:14:10','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (97,'admin','2016-03-18 10:28:22','AUTHENTICATION_SUCCESS'),
  (98,'admin','2016-03-18 11:13:39','AUTHENTICATION_SUCCESS'),
  (99,'admin','2016-03-18 11:14:08','AUTHENTICATION_SUCCESS'),
@@ -1945,7 +1700,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (109,'admin','2016-03-21 14:42:34','AUTHENTICATION_SUCCESS'),
  (110,'customer','2016-03-21 14:42:55','AUTHENTICATION_SUCCESS'),
  (111,'admin','2016-03-21 16:20:14','AUTHENTICATION_SUCCESS'),
- (112,'customer','2016-03-21 16:21:14','AUTHENTICATION_SUCCESS'),
+ (112,'customer','2016-03-21 16:21:14','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (113,'admin','2016-03-21 16:48:01','AUTHENTICATION_SUCCESS'),
  (114,'customer','2016-03-21 17:12:21','AUTHENTICATION_SUCCESS'),
  (115,'customer','2016-03-21 17:31:11','AUTHENTICATION_SUCCESS'),
@@ -1961,7 +1717,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (125,'sf0015','2016-03-22 13:10:05','AUTHENTICATION_SUCCESS'),
  (126,'sf0029','2016-03-22 13:20:44','AUTHENTICATION_SUCCESS'),
  (127,'admin','2016-03-22 14:20:10','AUTHENTICATION_SUCCESS'),
- (128,'sf0020','2016-03-22 14:22:49','AUTHENTICATION_SUCCESS'),
+ (128,'sf0020','2016-03-22 14:22:49','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (129,'sf0015','2016-03-22 14:38:47','AUTHENTICATION_SUCCESS'),
  (130,'sf0027','2016-03-22 14:46:46','AUTHENTICATION_SUCCESS'),
  (131,'sf0014','2016-03-22 14:48:51','AUTHENTICATION_SUCCESS'),
@@ -1977,7 +1734,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (141,'admin','2016-03-23 10:38:47','AUTHENTICATION_SUCCESS'),
  (142,'sf0015','2016-03-23 13:17:51','AUTHENTICATION_SUCCESS'),
  (143,'customer','2016-03-23 14:41:07','AUTHENTICATION_SUCCESS'),
- (144,'sf0015','2016-03-23 15:03:56','AUTHENTICATION_SUCCESS'),
+ (144,'sf0015','2016-03-23 15:03:56','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (145,'sf0029','2016-03-23 15:36:37','AUTHENTICATION_SUCCESS'),
  (146,'sf0020','2016-03-23 16:09:50','AUTHENTICATION_SUCCESS'),
  (147,'sf0015','2016-03-23 16:12:29','AUTHENTICATION_SUCCESS'),
@@ -1993,7 +1751,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (157,'sf0029','2016-03-23 18:19:54','AUTHENTICATION_SUCCESS'),
  (158,'sf0020','2016-03-24 09:46:53','AUTHENTICATION_SUCCESS'),
  (159,'customer','2016-03-24 11:26:49','AUTHENTICATION_SUCCESS'),
- (160,'admin','2016-03-24 11:35:15','AUTHENTICATION_SUCCESS'),
+ (160,'admin','2016-03-24 11:35:15','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (161,'sf0015','2016-03-24 12:15:10','AUTHENTICATION_SUCCESS'),
  (162,'customer','2016-03-24 12:24:03','AUTHENTICATION_SUCCESS'),
  (163,'sf0015','2016-03-24 12:27:24','AUTHENTICATION_SUCCESS'),
@@ -2009,7 +1768,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (173,'admin','2016-03-24 16:53:51','AUTHENTICATION_SUCCESS'),
  (174,'admin','2016-03-24 17:03:17','AUTHENTICATION_SUCCESS'),
  (175,'admin','2016-03-25 09:52:32','AUTHENTICATION_SUCCESS'),
- (176,'sf0015','2016-03-25 10:27:55','AUTHENTICATION_SUCCESS'),
+ (176,'sf0015','2016-03-25 10:27:55','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (177,'customer','2016-03-25 15:36:43','AUTHENTICATION_SUCCESS'),
  (178,'sf0015','2016-03-25 15:37:43','AUTHENTICATION_SUCCESS'),
  (179,'customer','2016-03-25 17:16:12','AUTHENTICATION_SUCCESS'),
@@ -2025,7 +1785,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (189,'customer','2016-03-26 13:04:18','AUTHENTICATION_SUCCESS'),
  (190,'admin','2016-03-26 13:15:53','AUTHENTICATION_SUCCESS'),
  (191,'customer','2016-03-26 14:26:20','AUTHENTICATION_SUCCESS'),
- (192,'admin','2016-03-26 15:04:07','AUTHENTICATION_SUCCESS'),
+ (192,'admin','2016-03-26 15:04:07','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (193,'customer','2016-03-26 15:06:03','AUTHENTICATION_SUCCESS'),
  (194,'sf0015','2016-03-26 15:13:19','AUTHENTICATION_SUCCESS'),
  (195,'customer','2016-03-26 15:54:24','AUTHENTICATION_FAILURE'),
@@ -2040,7 +1801,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (204,'sf0010','2016-03-28 12:45:25','AUTHENTICATION_SUCCESS'),
  (205,'sf0011','2016-03-28 12:46:19','AUTHENTICATION_SUCCESS'),
  (206,'sf0013','2016-03-28 12:46:59','AUTHENTICATION_SUCCESS'),
- (207,'sf0014','2016-03-28 12:47:44','AUTHENTICATION_SUCCESS'),
+ (207,'sf0014','2016-03-28 12:47:44','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (208,'sf0015','2016-03-28 12:48:18','AUTHENTICATION_SUCCESS'),
  (209,'sf0016','2016-03-28 12:48:43','AUTHENTICATION_SUCCESS'),
  (210,'sf0017','2016-03-28 12:49:28','AUTHENTICATION_SUCCESS'),
@@ -2056,7 +1818,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (220,'sf0029','2016-03-28 14:19:02','AUTHENTICATION_SUCCESS'),
  (221,'customer','2016-03-28 16:44:03','AUTHENTICATION_SUCCESS'),
  (222,'sf0006','2016-03-28 16:53:02','AUTHENTICATION_SUCCESS'),
- (223,'sf0029','2016-03-28 16:53:29','AUTHENTICATION_SUCCESS'),
+ (223,'sf0029','2016-03-28 16:53:29','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (224,'sf0015','2016-03-28 16:53:45','AUTHENTICATION_SUCCESS'),
  (225,'customer','2016-03-28 17:11:07','AUTHENTICATION_SUCCESS'),
  (226,'sf0015','2016-03-28 17:19:20','AUTHENTICATION_SUCCESS'),
@@ -2071,7 +1834,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (235,'sf0015','2016-03-28 18:26:37','AUTHENTICATION_SUCCESS'),
  (236,'admin','2016-03-28 18:39:20','AUTHENTICATION_SUCCESS'),
  (237,'sf0029','2016-03-28 18:40:58','AUTHENTICATION_SUCCESS'),
- (238,'admin','2016-03-28 18:42:41','AUTHENTICATION_SUCCESS'),
+ (238,'admin','2016-03-28 18:42:41','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (239,'customer','2016-03-29 10:30:34','AUTHENTICATION_SUCCESS'),
  (240,'sf0015','2016-03-29 11:47:54','AUTHENTICATION_SUCCESS'),
  (241,'customer','2016-03-29 12:23:39','AUTHENTICATION_SUCCESS'),
@@ -2086,7 +1850,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (250,'admin','2016-03-30 19:04:51','AUTHENTICATION_SUCCESS'),
  (251,'admin','2016-03-31 09:55:45','AUTHENTICATION_SUCCESS'),
  (252,'customer','2016-03-31 18:37:21','AUTHENTICATION_SUCCESS'),
- (253,'customer','2016-03-31 19:14:12','AUTHENTICATION_SUCCESS'),
+ (253,'customer','2016-03-31 19:14:12','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (254,'sf0015','2016-04-01 10:07:33','AUTHENTICATION_SUCCESS'),
  (255,'customer','2016-04-01 10:11:22','AUTHENTICATION_SUCCESS'),
  (256,'sf0016','2016-04-01 10:17:46','AUTHENTICATION_SUCCESS'),
@@ -2098,39 +1863,10 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (262,'sf0015','2016-04-01 10:36:34','AUTHENTICATION_FAILURE'),
  (263,'sf0015','2016-04-01 10:36:39','AUTHENTICATION_SUCCESS'),
  (264,'sf0029','2016-04-01 11:32:50','AUTHENTICATION_SUCCESS'),
- (265,'admin','2016-04-01 12:13:50','AUTHENTICATION_SUCCESS');
-UNLOCK TABLES;
-=======
- (84,'admin','2016-03-14 13:16:23','AUTHENTICATION_SUCCESS'),
- (85,'admin','2016-03-15 16:36:05','AUTHENTICATION_SUCCESS'),
- (86,'admin','2016-03-15 17:38:19','AUTHENTICATION_SUCCESS'),
- (87,'customer','2016-03-15 17:41:30','AUTHENTICATION_SUCCESS'),
- (88,'admin','2016-03-15 17:46:54','AUTHENTICATION_SUCCESS'),
- (89,'admin','2016-03-16 11:51:05','AUTHENTICATION_SUCCESS'),
- (90,'admin','2016-03-16 14:31:31','AUTHENTICATION_SUCCESS'),
- (91,'admin','2016-03-17 10:19:30','AUTHENTICATION_SUCCESS'),
- (92,'admin','2016-03-18 13:27:33','AUTHENTICATION_SUCCESS'),
- (93,'admin','2016-03-18 14:38:11','AUTHENTICATION_SUCCESS'),
- (94,'admin','2016-03-18 14:38:25','AUTHENTICATION_SUCCESS'),
- (95,'admin','2016-03-21 15:41:46','AUTHENTICATION_SUCCESS'),
- (96,'admin','2016-03-21 19:04:21','AUTHENTICATION_SUCCESS');
-INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
- (97,'admin','2016-03-21 19:04:32','AUTHENTICATION_SUCCESS'),
- (98,'admin','2016-03-22 09:47:30','AUTHENTICATION_SUCCESS'),
- (99,'admin','2016-03-22 12:38:02','AUTHENTICATION_SUCCESS'),
- (100,'admin','2016-03-22 17:49:19','AUTHENTICATION_SUCCESS'),
- (101,'admin','2016-03-22 18:04:19','AUTHENTICATION_SUCCESS'),
- (102,'admin','2016-03-23 11:23:36','AUTHENTICATION_SUCCESS'),
- (103,'admin','2016-03-23 15:47:08','AUTHENTICATION_FAILURE'),
- (104,'ADMIN','2016-03-23 15:47:35','AUTHENTICATION_FAILURE'),
- (105,'admin','2016-03-23 15:55:37','AUTHENTICATION_SUCCESS'),
- (106,'admin','2016-03-23 17:43:14','AUTHENTICATION_SUCCESS'),
- (107,'admin','2016-03-24 10:18:09','AUTHENTICATION_SUCCESS'),
- (108,'admin','2016-03-24 13:04:48','AUTHENTICATION_SUCCESS'),
- (109,'admin','2016-03-31 10:02:52','AUTHENTICATION_SUCCESS'),
- (110,'admin','2016-03-31 14:44:56','AUTHENTICATION_SUCCESS'),
- (111,'admin','2016-03-31 16:05:03','AUTHENTICATION_SUCCESS');
->>>>>>> refs/heads/bhaskar2
+ (265,'admin','2016-04-01 12:13:50','AUTHENTICATION_SUCCESS'),
+ (266,'admin','2016-04-01 16:43:46','AUTHENTICATION_FAILURE'),
+ (267,'admin','2016-04-01 16:43:51','AUTHENTICATION_SUCCESS'),
+ (268,'admin','2016-04-01 16:51:17','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -2327,8 +2063,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (82,'sessionId','AE3CB5BA4F06E1DE4D928BA6D9D5F0A1'),
  (83,'remoteAddress','0:0:0:0:0:0:0:1'),
  (83,'sessionId','83E1E00936C3C20ECBB5F8AE48543108'),
-<<<<<<< HEAD
- (84,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (84,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (84,'sessionId','7CECE0DB5AD1E96A7E4F60C9A0D686CF'),
  (85,'remoteAddress','0:0:0:0:0:0:0:1'),
  (85,'sessionId','CD2F4970E49B8F6C4451BDF6431B4145'),
@@ -2349,7 +2085,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (93,'remoteAddress','0:0:0:0:0:0:0:1'),
  (93,'sessionId','7616A1BDEDB326323AC86B94BADC7D2A'),
  (94,'remoteAddress','0:0:0:0:0:0:0:1'),
- (94,'sessionId','3BC6F911B4E0B4AEA0379F2E6FBD3E2B'),
+ (94,'sessionId','3BC6F911B4E0B4AEA0379F2E6FBD3E2B');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (95,'remoteAddress','127.0.0.1'),
  (95,'sessionId','A0373D62E98C8E60A9103470DCB635B5'),
  (96,'remoteAddress','0:0:0:0:0:0:0:1'),
@@ -2370,7 +2107,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (103,'sessionId','8E1C9F6EFCDF37B92C4DB6E4C602E577'),
  (104,'remoteAddress','0:0:0:0:0:0:0:1'),
  (104,'sessionId','89DA41220D832DC9B7828B6E482EEBDD'),
- (105,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (105,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (105,'sessionId','22BE16F6FAD83591D83EDDE8744B0FF2'),
  (106,'remoteAddress','0:0:0:0:0:0:0:1'),
  (106,'sessionId','99AEAC3CF8F89EBC0FF2E65DCF8F7526'),
@@ -2390,7 +2128,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (113,'sessionId','FD58C2D3B1EA51FF58DF3B72CD135333'),
  (114,'remoteAddress','0:0:0:0:0:0:0:1'),
  (114,'sessionId','FD3D6E03C2DCE05A467B10B80CF43941'),
- (115,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (115,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (115,'sessionId','D667FA7E6618EA8474BFCA1C1AA1D6E6'),
  (116,'remoteAddress','0:0:0:0:0:0:0:1'),
  (116,'sessionId','02636F23D3E302282775B7B23E19CAB7'),
@@ -2410,7 +2149,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (123,'sessionId','47A6668786DC311E15BAF3EF8E304E9E'),
  (124,'remoteAddress','0:0:0:0:0:0:0:1'),
  (124,'sessionId','66C95DC4AEA9C48BB59F0BF0789B0363'),
- (125,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (125,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (125,'sessionId','5F26804A553C3D416C902CA5C032A469'),
  (126,'remoteAddress','0:0:0:0:0:0:0:1'),
  (126,'sessionId','652B95FEFF966EC624410723695C7631'),
@@ -2430,7 +2170,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (133,'sessionId','4F11439D128FDB9547989E09E73348AA'),
  (134,'remoteAddress','0:0:0:0:0:0:0:1'),
  (134,'sessionId','A11392ABBCB217BE77ABBCA2F37DE0BA'),
- (135,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (135,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (135,'sessionId','A947BA3A694816F8CFB21F44BDFDF4AA'),
  (136,'remoteAddress','0:0:0:0:0:0:0:1'),
  (136,'sessionId','0BD72C69B50CF2115A0A69D5809E7170'),
@@ -2450,7 +2191,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (143,'sessionId','FF8233928A7E17A2A28C0A6CFECA3606'),
  (144,'remoteAddress','0:0:0:0:0:0:0:1'),
  (144,'sessionId','59C7AFC80FA7EC018A7A07C04C9E4857'),
- (145,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (145,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (145,'sessionId','170204BF43F8E5AE826302859886A556'),
  (146,'remoteAddress','0:0:0:0:0:0:0:1'),
  (146,'sessionId','93ED8B1C1DF797F72D4ADD08402886A9'),
@@ -2470,7 +2212,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (153,'sessionId','65E8FEDFFD43892E9FB80C0A51FB8E5A'),
  (154,'remoteAddress','0:0:0:0:0:0:0:1'),
  (154,'sessionId','DECEB535AF424A04F16D1C4216FF24EF'),
- (155,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (155,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (155,'sessionId','6655EFEC43F2FD481E1C227BD65D0840'),
  (156,'remoteAddress','0:0:0:0:0:0:0:1'),
  (156,'sessionId','E660110AB4E5226A928A3F85D6B19BEE'),
@@ -2490,7 +2233,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (163,'sessionId','9CF964F09711B90E13F6A3C9D3CA0FA1'),
  (164,'remoteAddress','0:0:0:0:0:0:0:1'),
  (164,'sessionId','99AD8593991A9DE7E9D53B41C15B9B74'),
- (165,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (165,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (165,'sessionId','0B655767F686FA7F9D58094E30755E59'),
  (166,'message','Bad credentials'),
  (166,'type','org.springframework.security.authentication.BadCredentialsException'),
@@ -2509,7 +2253,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (173,'remoteAddress','0:0:0:0:0:0:0:1'),
  (173,'sessionId','E4C3DD9CBFACF8CA03CB4E482C8F92EF'),
  (174,'remoteAddress','0:0:0:0:0:0:0:1'),
- (174,'sessionId','222A3CA3FEBC3CA25793D91C1701500B'),
+ (174,'sessionId','222A3CA3FEBC3CA25793D91C1701500B');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (175,'remoteAddress','0:0:0:0:0:0:0:1'),
  (175,'sessionId','1AC9817728FC95583EAA95E6964A90F9'),
  (176,'remoteAddress','0:0:0:0:0:0:0:1'),
@@ -2529,7 +2274,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (183,'remoteAddress','0:0:0:0:0:0:0:1'),
  (183,'sessionId','14334D43383BE6327705C352248F3F07'),
  (184,'remoteAddress','0:0:0:0:0:0:0:1'),
- (184,'sessionId','A905EF6678AAA896227B33FB222A37A5'),
+ (184,'sessionId','A905EF6678AAA896227B33FB222A37A5');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (185,'remoteAddress','0:0:0:0:0:0:0:1'),
  (185,'sessionId','EC7D50123A4269F28F295E886E5C2C24'),
  (186,'remoteAddress','0:0:0:0:0:0:0:1'),
@@ -2550,7 +2296,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (193,'sessionId','FA320D7E42FBAEE073DD7247F72FE5E8'),
  (194,'remoteAddress','0:0:0:0:0:0:0:1'),
  (194,'sessionId','869596EC0EAFA5AA4A17D45D00934103'),
- (195,'message','Bad credentials'),
+ (195,'message','Bad credentials');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (195,'type','org.springframework.security.authentication.BadCredentialsException'),
  (196,'remoteAddress','0:0:0:0:0:0:0:1'),
  (196,'sessionId','E56842EED1D1B09E85B6346440113A44'),
@@ -2569,7 +2316,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (203,'remoteAddress','0:0:0:0:0:0:0:1'),
  (203,'sessionId','ECD955C318DAEC17DC6F7AB264245017'),
  (204,'remoteAddress','0:0:0:0:0:0:0:1'),
- (204,'sessionId','F9F420CDEAA94B6C5C2B8FA4D90248FC'),
+ (204,'sessionId','F9F420CDEAA94B6C5C2B8FA4D90248FC');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (205,'remoteAddress','0:0:0:0:0:0:0:1'),
  (205,'sessionId','CC3CA8C8CDF14EE9EA7BF395B61FB215'),
  (206,'remoteAddress','0:0:0:0:0:0:0:1'),
@@ -2590,7 +2338,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (213,'sessionId','7B190BC41C4E4F16557E9C9C9E00FDFB'),
  (214,'remoteAddress','0:0:0:0:0:0:0:1'),
  (214,'sessionId','157C73F5E7D7D29B28DF6C9A063E2284'),
- (215,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (215,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (215,'sessionId','BBC4B011D6F024F461D0A623B546B507'),
  (216,'remoteAddress','0:0:0:0:0:0:0:1'),
  (216,'sessionId','B4DCB2454E421DEE8287AA643DA4C9F0'),
@@ -2610,7 +2359,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (223,'sessionId','23812034AA63D07ADBEE5A38F0886379'),
  (224,'remoteAddress','0:0:0:0:0:0:0:1'),
  (224,'sessionId','A18EAB17BF47032D7BDCC451B19D5B90'),
- (225,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (225,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (225,'sessionId','E3054C034DA2F29014B821BC9E092456'),
  (226,'remoteAddress','0:0:0:0:0:0:0:1'),
  (226,'sessionId','A04320C56084B23365DD776993646093'),
@@ -2630,7 +2380,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (233,'sessionId','0D5674517BB2D0F0F987CB8CD50350F2'),
  (234,'remoteAddress','0:0:0:0:0:0:0:1'),
  (234,'sessionId','62E5B5A7DFB9B2C591F6FEEDCD818C1A'),
- (235,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (235,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (235,'sessionId','8F94399F468196A72110D94FDB32B317'),
  (236,'remoteAddress','0:0:0:0:0:0:0:1'),
  (236,'sessionId','086469BD3ED8A14917756427210E98A6'),
@@ -2651,7 +2402,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (244,'remoteAddress','0:0:0:0:0:0:0:1'),
  (244,'sessionId','B71EFCF84593E484FE2342CE491B59E8'),
  (245,'remoteAddress','0:0:0:0:0:0:0:1'),
- (245,'sessionId','0BA656795E346284C4AD7D7A52096B84'),
+ (245,'sessionId','0BA656795E346284C4AD7D7A52096B84');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (246,'remoteAddress','0:0:0:0:0:0:0:1'),
  (246,'sessionId','2A7CEAF49EEF6ADC52708C9B4DD0CA4E'),
  (247,'remoteAddress','0:0:0:0:0:0:0:1'),
@@ -2672,7 +2424,8 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (254,'sessionId','34F464957ECD9A0C7113E52EC692137A'),
  (255,'remoteAddress','0:0:0:0:0:0:0:1'),
  (255,'sessionId','0F8E1F4B6BB12D9EA3ECA09FA5C8F3EF'),
- (256,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (256,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
  (256,'sessionId','1A62FEF114962C44B3D8A93CD3A5FC7C'),
  (257,'remoteAddress','0:0:0:0:0:0:0:1'),
  (257,'sessionId','9521A3DDE9FE55B4AECB46DDD5FDFAF5'),
@@ -2691,69 +2444,14 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (264,'remoteAddress','0:0:0:0:0:0:0:1'),
  (264,'sessionId','2A86C935F8CBC129B22A2275D26FBF64'),
  (265,'remoteAddress','0:0:0:0:0:0:0:1'),
- (265,'sessionId','163B5E59F3327A0CAAD5E9CF086E32EB');
-UNLOCK TABLES;
-=======
- (84,'remoteAddress','127.0.0.1');
+ (265,'sessionId','163B5E59F3327A0CAAD5E9CF086E32EB'),
+ (266,'message','Bad credentials');
 INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
- (84,'sessionId','6374EC838E6B2E5A86DD11297E95C24A'),
- (85,'remoteAddress','127.0.0.1'),
- (85,'sessionId','3AB1BC0B270D79595CE16BD5D0979A4A'),
- (86,'remoteAddress','127.0.0.1'),
- (86,'sessionId','89D76B5A024F285874E7B0EB354313AE'),
- (87,'remoteAddress','127.0.0.1'),
- (87,'sessionId','155AEA249ED408D6B2137F7FFB357BCA'),
- (88,'remoteAddress','127.0.0.1'),
- (88,'sessionId','63617245318514B248998A8B9958DA18'),
- (89,'remoteAddress','127.0.0.1'),
- (89,'sessionId','E80EFB1489602030024DABDC1896319F'),
- (90,'remoteAddress','127.0.0.1'),
- (90,'sessionId','087F7AD16C520A469B781F841B04FA90'),
- (91,'remoteAddress','169.254.178.179'),
- (91,'sessionId','5E4A28B2435D291A910B780E9B2CD767'),
- (92,'remoteAddress','127.0.0.1'),
- (92,'sessionId','99568A9FEF33C51170A1B25620923F33'),
- (93,'remoteAddress','127.0.0.1'),
- (93,'sessionId','9637F51215829C152296697576E397D3'),
- (94,'remoteAddress','127.0.0.1'),
- (94,'sessionId','2FC81B79B70D6E468515EDB1391E2987'),
- (95,'remoteAddress','127.0.0.1');
-INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
- (95,'sessionId','947CB8279D957CB004DC6F85C4B2DB93'),
- (96,'remoteAddress','127.0.0.1'),
- (96,'sessionId','28D87A0893F79C8D881861A13FDFF3F1'),
- (97,'remoteAddress','127.0.0.1'),
- (97,'sessionId','EE71883C58F744615ADE8C94B759A01B'),
- (98,'remoteAddress','127.0.0.1'),
- (98,'sessionId','C2534A040F06D6498015393D2A01DD40'),
- (99,'remoteAddress','127.0.0.1'),
- (99,'sessionId','B25564FE5D847A3F2B9DE7683245AD9B'),
- (100,'remoteAddress','127.0.0.1'),
- (100,'sessionId','DB22C3352E1D453D6ED2AC387E313FA6'),
- (101,'remoteAddress','127.0.0.1'),
- (101,'sessionId','2A981A3C5F07C2C2FDDFF5D08A815431'),
- (102,'remoteAddress','127.0.0.1'),
- (102,'sessionId','85CC9D63ABF69763147AC0CBAB484B27'),
- (103,'message','Bad credentials'),
- (103,'type','org.springframework.security.authentication.BadCredentialsException'),
- (104,'message','Bad credentials'),
- (104,'type','org.springframework.security.authentication.BadCredentialsException'),
- (105,'remoteAddress','127.0.0.1');
-INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
- (105,'sessionId','2AB2A0B631D79F46974EB68542CFF55A'),
- (106,'remoteAddress','127.0.0.1'),
- (106,'sessionId','DB22283023A75F82F91B1514AC4F672E'),
- (107,'remoteAddress','127.0.0.1'),
- (107,'sessionId','597C16D7771AE96010B931B132156216'),
- (108,'remoteAddress','127.0.0.1'),
- (108,'sessionId','D6B78D35672069E9949A73579D4D2F94'),
- (109,'remoteAddress','127.0.0.1'),
- (109,'sessionId','9369D46768222C1F041C466D78D09588'),
- (110,'remoteAddress','127.0.0.1'),
- (110,'sessionId','B70373AF1F398E569B59FF4018FC40F8'),
- (111,'remoteAddress','192.168.1.22'),
- (111,'sessionId','503084FA0445234E7DD7014F76062162');
->>>>>>> refs/heads/bhaskar2
+ (266,'type','org.springframework.security.authentication.BadCredentialsException'),
+ (267,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (267,'sessionId','83741110A7949E0D25E4CFF072E38981'),
+ (268,'remoteAddress','127.0.0.1'),
+ (268,'sessionId','4F715896F2A61480F1DB30B2D7E8DDEF');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -2779,106 +2477,75 @@ CREATE TABLE `jhi_persistent_token` (
 --
 
 /*!40000 ALTER TABLE `jhi_persistent_token` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `jhi_persistent_token` WRITE;
-INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==',5,'/FPZJ9OhXHNXmMOFgz7obg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('+kuZ8fh+MT05jeTHFp5gmw==',5,'/FPZJ9OhXHNXmMOFgz7obg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('+Pk/ksqHFtjiZEpwz8IVFw==',3,'mxORTPY9bPxFOvMgRBlUAg==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('+x9pYUuhC9mbEe9rwtR11Q==',3,'moGQ9xPllsRoWmPrNGPN5A==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('/29bYPrVgu1d1Sc7jw0g/A==',3,'8LwcwLZFkj1AZCc96MulbA==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('1+QXFJmIy6UbwHIQ6pxyqw==',15,'HCEI/JsrSbkhfqKDPYVlNQ==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('1V84cfVn/t71qSFvl+nJZw==',29,'nsyfHwdYGyWza9xnxrDHig==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
+ ('1/89/HnVJ0I06ozibiv32Q==',3,'CLNg9gJlNZ5pis+a+Q7wXg==','2016-04-01','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('1V84cfVn/t71qSFvl+nJZw==',29,'nsyfHwdYGyWza9xnxrDHig==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('+7kfspW2WJpi2bKM/dP9lw==',3,'hBwLquQ1naRCYyedhwXeJA==','2016-03-17','169.254.178.179','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('+kuZ8fh+MT05jeTHFp5gmw==',5,'/FPZJ9OhXHNXmMOFgz7obg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('2r6Z/StVCqb6VQE17jT96A==',3,'VjfYifY2n7a6QQgfksW8tg==','2016-03-29','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36'),
->>>>>>> refs/heads/bhaskar2
  ('2uRUyClVWXV8AlYMNeuJOw==',3,'PErAzkiwxOnl+ZDZP6T7JQ==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('3+5ue5QHIAl3gaEJu2oyFQ==',3,'VKZnSsNabZGNesRM+Hpsvg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('3Jc58QBWoVau1yojOb/H3g==',15,'gy3ieEY/pll52Q8TEujbag==','2016-03-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('4Aup8X2ZRQtO8SBDix3vAg==',3,'JmcI8+KGnhTfgXHMzc2WbQ==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('4Kz54liz72Tw0RjO2Zrkpw==',3,'x3C2IoyZxxmQ8IZ4lG8oMg==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('6B2RG6/uWQnWC28vOw8aXg==',3,'8QX7Ux+CmA4n198EaajbnA==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-<<<<<<< HEAD
- ('7wzGSQte7LQJZBy4FB00zA==',29,'3iFZ6Aa9rNbM3Mx+jwfRsw==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('7wzGSQte7LQJZBy4FB00zA==',29,'3iFZ6Aa9rNbM3Mx+jwfRsw==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('7Ytkb8b+j1F3nPGWDNtKcw==',3,'l96/eI6viuEUtDy5AibxbA==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('94hvipCH71zaqo62IRdfRw==',3,'XVI6TLhxx+zep89XenteTw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
- ('7Ytkb8b+j1F3nPGWDNtKcw==',3,'l96/eI6viuEUtDy5AibxbA==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
-INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('8FWdd/b8HL6zl541Kpr54A==',3,'Ozy/Rxel7LWmPioPk0/EpA==','2016-03-30','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
->>>>>>> refs/heads/bhaskar2
  ('9iL/4QMAvR0xB64rW5HESw==',3,'/k/ylVdhu5TQbQGtpI5N0w==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
-<<<<<<< HEAD
  ('b2tUjwgyONjcsbKlUklC+Q==',3,'NiOf/v/Os1vh0byDEVURJA==','2016-03-16','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('BaKFrbA5ergaotzhQATfrw==',29,'m+gH8u2sRCjqxAeORaQ3zQ==','2016-03-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('BFMeF7yubUPWeHMlxnpHhg==',3,'86Dlw7pit1sjL3P4rA601A==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('bh/be/AQUN2jP5F1P7kdSQ==',3,'kn71wIORmJGn7dP9vuFMTQ==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('bh/be/AQUN2jP5F1P7kdSQ==',3,'kn71wIORmJGn7dP9vuFMTQ==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('C0yHTgCTgnXcC62bNAch3g==',15,'QM8xVxLqO6GowIcWRmrfyw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('cDuDRxT54VRDENf238evFw==',3,'qL156YzlR0uNU4rfJVaZGw==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
- ('bcCO32K28oP7r/PbgTTlXA==',3,'x/GmKXJ4i+FtuZWSHRBe0w==','2016-03-16','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
->>>>>>> refs/heads/bhaskar2
  ('DEqQipDM3iLfE1PFx+mwRA==',3,'rlSkhLwJf+8q3MOatcrcDA==','2016-02-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('dOUzFnBhKu3El7plQu9D8g==',3,'t/g+E732euarMu6XC1r0sw==','2016-03-24','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
-<<<<<<< HEAD
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('fNpzeb666xEusKesIpiVaA==',15,'EB7kPB3Prax0zRKgFghQUg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('gjgSoEiEm2u4z82bxneQbA==',15,'Q5ukTsruzqRjPjl2jNIIBA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
- ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
->>>>>>> refs/heads/bhaskar2
+ ('gjgSoEiEm2u4z82bxneQbA==',15,'Q5ukTsruzqRjPjl2jNIIBA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-<<<<<<< HEAD
  ('hFKfqjPrW8Z/amqU43M89g==',5,'OCMXKNowMoVsmqZ2jGSrxQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Hw5vcTOmIcEuAJ+K5/ttTg==',3,'o/B/WvzQojyU6CRPqa0kug==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('IgMAY7/2pqUwaRD9fRqtZA==',5,'R/v6AK3DT+5hKspBsE0QdQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('Kb8YebfE7JAJymtqjh/HBQ==',3,'O/9YDo+EqyrDpaCN4C6VLw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('Kb8YebfE7JAJymtqjh/HBQ==',3,'NLNenPNKYp99JL0VakVcDw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KU6VZmBHcK3RKoGgwhLDcA==',3,'CtWXmv/L/eFLnOkikbadrw==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ltSsrr4LGe85jyi2xaM+GQ==',5,'O2cmSBS0fFhBkpiM4zdCkA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mJ9QRewb5tZnJtq1JS6BeQ==',3,'Y4wzvxHQSVqsUa7uMIa7ug==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
- ('jEwMwchTTuqCLrwkSt2ARA==',3,'+3EGK4k26JImuyZpwYIppA==','2016-03-18','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
->>>>>>> refs/heads/bhaskar2
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-<<<<<<< HEAD
  ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('nicdzpFVE7fA8XUEciBnBg==',15,'jjnMZHjRSEuYg7FgpryrNw==','2016-03-29','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nK0IBkLMvCyRtRagV7xkIA==',15,'O271OweAwksyy+Yei161xA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
- ('nsyg6h+LdTgXwbH56+FakA==',3,'TVLj32ZdV7zQcM/9mWq5fA==','2016-03-15','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('OsLTmPAQOsRHt7orCZeOjw==',3,'mgjpns6oN42wCQrCk+w+Ew==','2016-03-31','192.168.1.22','Mozilla/5.0 (Windows NT 5.1; rv:43.0) Gecko/20100101 Firefox/43.0'),
->>>>>>> refs/heads/bhaskar2
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
-<<<<<<< HEAD
  ('PpZTKOgtRshlEF2Y5H8Nzw==',3,'2oilX1ZtHFQ62F6g/CMZMg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('qFVuu+uRSBJTp3pUTFHbiw==',3,'0mje7iCbeSAXZrqoHwhF0A==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('R6uDzkAd46IU0D3H4E0FVA==',3,'XcfBIoCDayNepzQsEjnkJg==','2016-03-17','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
- ('q3EjfXcMrSJFW7SlKnUuSw==',3,'f/ln79tU4x1LjeMjm0/mbg==','2016-03-22','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
->>>>>>> refs/heads/bhaskar2
- ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
-<<<<<<< HEAD
  ('TN6nvrS4DAcjld/PAsVu3w==',3,'pWLUEigr2nT7tCBerVO3rw==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
-=======
- ('rXxoQKNaiKgwPBXkYCm5RQ==',3,'nZ3Z39G+GWqRWUQGXDRT1w==','2016-03-22','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
->>>>>>> refs/heads/bhaskar2
  ('uBmBvYHKZMXr5UHwlzKAPA==',3,'oIXVYnHZ2CAqS/lxhNHtBQ==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('UDMPyK37cLIktTJg9P5RrQ==',3,'ShKdK3zme2OSRapV6fqKMw==','2016-03-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('Waj7OoRQvtqW2FGm3rwFHw==',3,'DScvaJTEMdPTgvNKd4KoRg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('wtWMmV27ptr0Uutob4MNiQ==',3,'kzJYJannR0ZBgbGhEbYHqQ==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
+ ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0');
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('x4RtQD81f5es8yJniJlwMg==',3,'3Uiil1Q8ezwtbjsEjH7MaQ==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('XDGXmczwil8KeD6KL6Yt1w==',3,'fbROZLGioPS/YUzyTyG2kg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('xf8lo1lE43DIRysCXswyzQ==',3,'BRRKxIW3118BhhPFt6AyXA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('xGIKoFe4g2VAv1/PRp0JLA==',3,'vsc1u7uz/s2rs9AmUbdl+g==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('Y14PvuTMLFbPHaMU7KlW9A==',3,'yHJLgjbsyzRXqkVlnn1+bA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('yC0cZ89A6opEpVDUp7MPLA==',3,'JNF2a3Nb1kSNcOuOEsAR4Q==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('zy6YAeHzjqbMHb8NPwiMQg==',3,'RfJrmS7MnC9GxnetOTdgpg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
@@ -2911,57 +2578,48 @@ CREATE TABLE `jhi_user` (
   UNIQUE KEY `idx_user_login` (`login`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `idx_user_email` (`email`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
-=======
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`jhi_user`
 --
 
 /*!40000 ALTER TABLE `jhi_user` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `jhi_user` WRITE;
-INSERT INTO `watererp`.`jhi_user` VALUES  (1,'system','$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG','System','System','system@localhost',0x01,'en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,'admin','2016-03-07 14:55:39'),
- (2,'anonymousUser','$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO','Anonymous','User','anonymous@localhost',0x01,'en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,NULL,NULL),
- (3,'admin','$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC','Administrator','Administrator','admin@localhost',0x01,'en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,NULL,NULL),
- (4,'user','$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K','User','User','user@localhost',0x01,'en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,NULL,NULL),
- (5,'customer','$2a$10$TYs/wcvo6fAPu0Xdt.jP3.pol1TJpvr13XvYIlBDzlut/Ytlsn/AO','customer','customer','customer@localhost',0x01,'en','NULL',NULL,'anonymousUser','2016-03-04 18:31:04',NULL,'admin','2016-03-08 10:00:31'),
- (6,'sf0006','$2a$10$.bcy9Ujl3NqgDj6zjXsRHe.UlXABdJyDbcByQ8nX9MvrHAwSYH9xi',NULL,NULL,'sf0006@localhost',0x01,'en','74075798038214678044',NULL,'anonymousUser','2016-03-18 12:43:28',NULL,'admin','2016-03-18 12:53:49'),
- (7,'sf0007','$2a$10$FDsPyaVUL9uFAR5vgWpX2ulAqEn5TJpoZjiCcGYqXO5iDkr11Ae3e',NULL,NULL,'sf0007@localhost',0x01,'en','96267878389108527398',NULL,'anonymousUser','2016-03-18 12:44:05',NULL,'admin','2016-03-18 12:53:50'),
- (8,'sf0008','$2a$10$/M8CkSWBuUlPxZavXb3h/.YQ.Q6lDArLBo5K/dIYcW6mdTfIf45bm',NULL,NULL,'sf0008@localhost',0x01,'en','54288279092286381964',NULL,'anonymousUser','2016-03-18 12:44:40',NULL,'admin','2016-03-18 12:53:51'),
- (9,'sf0009','$2a$10$nSqZo6ISDISQmxLFwbsq3u92OT3hOVS6mkjFlsDamxGInc8JBPtqq','Simon','Lupuga','sf0009@localhost',0x01,'en','97951374793812547574',NULL,'anonymousUser','2016-03-18 12:45:19',NULL,'sf0009','2016-03-28 12:45:10'),
- (10,'sf0010','$2a$10$rCzfnzFSb0dL3ocuA9RViuOaF1Gq5Vc0XzS7GSUKwBCv5tXI./39S','Claudius','Kaje','sf0010@localhost',0x01,'en','00161949524540976078',NULL,'anonymousUser','2016-03-18 12:45:54',NULL,'sf0010','2016-03-28 12:45:53'),
- (11,'sf0011','$2a$10$H7MmlGeb073RorJ69a1fdudLKTRLUFgkmFFeJ5xjCmtyjm.srVgDO','Vacant','vacant','sf0011@localhost',0x01,'en','33673054004780142550',NULL,'anonymousUser','2016-03-18 12:46:15',NULL,'sf0011','2016-03-28 12:46:42'),
- (12,'sf0012','$2a$10$sB2ETKC9vs0uljjuRtez6e0mhtaFDeJSyZGEwGIaGddJ34kRGIEpe',NULL,NULL,'sf0012@localhost',0x01,'en','71560095329758703944',NULL,'anonymousUser','2016-03-18 12:46:38',NULL,'admin','2016-03-18 12:53:56'),
- (13,'sf0013','$2a$10$okQIlNvGPOcBOadT8iyiJuC3vBGmXFtLe3UrvZpB33CWekNcdI/bu','Adoph','Shavu','sf0013@localhost',0x01,'en','91544376107529154273',NULL,'anonymousUser','2016-03-18 12:46:56',NULL,'sf0013','2016-03-28 12:47:31'),
- (14,'sf0014','$2a$10$qEvPMWpVpl54ndQdDE1FbuptYEfG9eqJbcYR7/DDXjSmaekdpwPyG','Herry','Makala','sf0014@localhost',0x01,'en','98218340790438067335',NULL,'anonymousUser','2016-03-18 12:47:34',NULL,'sf0014','2016-03-28 12:48:08'),
- (15,'sf0015','$2a$10$/396VihfwsI9iWd/UIEXKe7c3xbjwuWiePbUdUQL1Ug/tq9X2fy.i','Mbike','Jones','sf0015@localhost',0x01,'en','78744568076959050873',NULL,'anonymousUser','2016-03-18 12:47:51',NULL,'sf0015','2016-03-28 12:48:33'),
- (16,'sf0016','$2a$10$.YzGvqWeUSCQR5q2mtAl5u4ZVjBDmGCRh7xSbb5njETwx1ZwIN2bm','Fred','Selebwa','sf0016@localhost',0x01,'en','43535432288382530210',NULL,'anonymousUser','2016-03-18 12:48:46',NULL,'sf0016','2016-03-28 12:49:12'),
- (17,'sf0017','$2a$10$YDx44W8ShgQ0Jt7tVJXnWOMlyFJ3ernUc4Wh.yo.vVF6lYpGThccu','Eliezer','Josiah','sf0017@localhost',0x01,'en','06698912264567056315',NULL,'anonymousUser','2016-03-18 12:49:06',NULL,'sf0017','2016-03-28 12:49:56'),
- (18,'sf0018','$2a$10$if7uNqLVpZ.V5X/OkOes7uZ4gbDpwlrFmesdATE4PQrREuGff1c8G','Hellena','Mtembeje','sf0018@localhost',0x01,'en','38952305015731452387',NULL,'anonymousUser','2016-03-18 12:49:28',NULL,'sf0018','2016-03-28 12:50:47'),
- (19,'sf0019','$2a$10$43TTSOPygHilSwG5jA3joussQk3.vL.0B88bmbWGAiEyThp/0MLhm','Charles','Kiwely','sf0019@localhost',0x01,'en','80544871706487966991',NULL,'anonymousUser','2016-03-18 12:49:48',NULL,'sf0019','2016-03-28 12:51:19'),
- (20,'sf0020','$2a$10$UWsog7PJ9mJ5ALW3oT1qjuLsx4r6TtpC2.OtCi6D/qgMvD1pXuFiC',NULL,NULL,'sf0020@localhost',0x01,'en','83805380491517726753',NULL,'anonymousUser','2016-03-18 12:50:10',NULL,'admin','2016-03-18 12:54:00'),
- (21,'sf0021','$2a$10$fyfyZSZ/r94V30rK2V72r.Rs0yzTW81oB6mAvlq3Xz5OTBpBK0DJC','Salome','Mtwale','sf0021@localhost',0x01,'en','82028831560154180774',NULL,'anonymousUser','2016-03-18 12:51:39',NULL,'sf0021','2016-03-28 12:52:03'),
- (22,'sf0022','$2a$10$LV2mBS8VNveWYejGFcCh8OT2JoX.4oeEkPV/w5q5EDyY3dCQjUuGW','Mbaraka','Shemueta','sf0022@localhost',0x01,'en','29507620030240498935',NULL,'anonymousUser','2016-03-18 12:51:54',NULL,'sf0022','2016-03-28 12:53:17'),
- (23,'sf0023','$2a$10$ozkcRMy/Vjj6m.8O3XRg.OwDr3QybLS3qcX8/mZD.q4lzwVOxfPKW','Olivia','Masangya','sf0023@localhost',0x01,'en','73060005748380646738',NULL,'anonymousUser','2016-03-18 12:52:18',NULL,'sf0023','2016-03-28 12:53:58'),
- (24,'sf0024','$2a$10$0YPZsnW/yPzP5mx34t9Gse.x/.bAfB6nTTSBdvhifbYNzjsPQxeeW',NULL,NULL,'sf0024@localhost',0x01,'en','76650231398888348776',NULL,'anonymousUser','2016-03-18 12:52:33',NULL,'admin','2016-03-18 12:54:24'),
- (25,'sf0025','$2a$10$mUYlNHHcw0mpJiioW/p/0Ofx9qAPI6..bRfgSFHvo4ImvcB2CVQ96',NULL,NULL,'sf0025@localhost',0x01,'en','42984014546333704148',NULL,'anonymousUser','2016-03-18 12:52:46',NULL,'admin','2016-03-18 12:54:25'),
- (26,'sf0026','$2a$10$lnV2mPyzb/hLNWtYr7NeBeSe7SErEn4RwK3/Lzr6Oxjqkdj/yOUvS',NULL,NULL,'sf0026@localhost',0x01,'en','30926903415314102347',NULL,'anonymousUser','2016-03-18 12:53:00',NULL,'admin','2016-03-18 12:54:27'),
- (27,'sf0027','$2a$10$F58do6ARzxNnWwXFF3WVa.oH4Cnwfu9GGESf5c64Av7PnAVDDHQfu','Nobert','Kamba','sf0027@localhost',0x01,'en','88464590975638599993',NULL,'anonymousUser','2016-03-18 12:53:16',NULL,'sf0027','2016-03-28 12:57:46'),
- (28,'sf0028','$2a$10$K.A7jrXE..8CIm7SoeVMBepZyR2WdpZeQpPyUOfY429jeBaL.OMju','Francis','Hume','sf0028@localhost',0x01,'en','71805558970907066489',NULL,'anonymousUser','2016-03-18 12:53:33',NULL,'sf0028','2016-03-28 12:58:11'),
- (29,'sf0029','$2a$10$L1IXkaggwuSLeeF0fRR9CeMb/Qq6IM7EXLJI/jsdfFSOUQWf4oPHS',NULL,NULL,'sf0029@localhost',0x01,'en','68914493240806760364',NULL,'anonymousUser','2016-03-21 16:19:52',NULL,'admin','2016-03-21 16:20:23');
-UNLOCK TABLES;
-=======
 INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
  (1,'system','$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG','System','System','system@localhost','','en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,'admin','2016-03-07 14:55:39'),
  (2,'anonymousUser','$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO','Anonymous','User','anonymous@localhost','','en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,NULL,NULL),
  (3,'admin','$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC','Administrator','Administrator','admin@localhost','','en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,NULL,NULL),
  (4,'user','$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K','User','User','user@localhost','','en',NULL,NULL,'system','2016-02-24 18:37:37',NULL,NULL,NULL),
- (5,'customer','$2a$10$TYs/wcvo6fAPu0Xdt.jP3.pol1TJpvr13XvYIlBDzlut/Ytlsn/AO','customer','customer','customer@localhost','','en','NULL',NULL,'anonymousUser','2016-03-04 18:31:04',NULL,'admin','2016-03-08 10:00:31');
->>>>>>> refs/heads/bhaskar2
+ (5,'customer','$2a$10$TYs/wcvo6fAPu0Xdt.jP3.pol1TJpvr13XvYIlBDzlut/Ytlsn/AO','customer','customer','customer@localhost','','en','NULL',NULL,'anonymousUser','2016-03-04 18:31:04',NULL,'admin','2016-03-08 10:00:31'),
+ (6,'sf0006','$2a$10$.bcy9Ujl3NqgDj6zjXsRHe.UlXABdJyDbcByQ8nX9MvrHAwSYH9xi',NULL,NULL,'sf0006@localhost','','en','74075798038214678044',NULL,'anonymousUser','2016-03-18 12:43:28',NULL,'admin','2016-03-18 12:53:49');
+INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
+ (7,'sf0007','$2a$10$FDsPyaVUL9uFAR5vgWpX2ulAqEn5TJpoZjiCcGYqXO5iDkr11Ae3e',NULL,NULL,'sf0007@localhost','','en','96267878389108527398',NULL,'anonymousUser','2016-03-18 12:44:05',NULL,'admin','2016-03-18 12:53:50'),
+ (8,'sf0008','$2a$10$/M8CkSWBuUlPxZavXb3h/.YQ.Q6lDArLBo5K/dIYcW6mdTfIf45bm',NULL,NULL,'sf0008@localhost','','en','54288279092286381964',NULL,'anonymousUser','2016-03-18 12:44:40',NULL,'admin','2016-03-18 12:53:51'),
+ (9,'sf0009','$2a$10$nSqZo6ISDISQmxLFwbsq3u92OT3hOVS6mkjFlsDamxGInc8JBPtqq','Simon','Lupuga','sf0009@localhost','','en','97951374793812547574',NULL,'anonymousUser','2016-03-18 12:45:19',NULL,'sf0009','2016-03-28 12:45:10'),
+ (10,'sf0010','$2a$10$rCzfnzFSb0dL3ocuA9RViuOaF1Gq5Vc0XzS7GSUKwBCv5tXI./39S','Claudius','Kaje','sf0010@localhost','','en','00161949524540976078',NULL,'anonymousUser','2016-03-18 12:45:54',NULL,'sf0010','2016-03-28 12:45:53'),
+ (11,'sf0011','$2a$10$H7MmlGeb073RorJ69a1fdudLKTRLUFgkmFFeJ5xjCmtyjm.srVgDO','Vacant','vacant','sf0011@localhost','','en','33673054004780142550',NULL,'anonymousUser','2016-03-18 12:46:15',NULL,'sf0011','2016-03-28 12:46:42');
+INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
+ (12,'sf0012','$2a$10$sB2ETKC9vs0uljjuRtez6e0mhtaFDeJSyZGEwGIaGddJ34kRGIEpe',NULL,NULL,'sf0012@localhost','','en','71560095329758703944',NULL,'anonymousUser','2016-03-18 12:46:38',NULL,'admin','2016-03-18 12:53:56'),
+ (13,'sf0013','$2a$10$okQIlNvGPOcBOadT8iyiJuC3vBGmXFtLe3UrvZpB33CWekNcdI/bu','Adoph','Shavu','sf0013@localhost','','en','91544376107529154273',NULL,'anonymousUser','2016-03-18 12:46:56',NULL,'sf0013','2016-03-28 12:47:31'),
+ (14,'sf0014','$2a$10$qEvPMWpVpl54ndQdDE1FbuptYEfG9eqJbcYR7/DDXjSmaekdpwPyG','Herry','Makala','sf0014@localhost','','en','98218340790438067335',NULL,'anonymousUser','2016-03-18 12:47:34',NULL,'sf0014','2016-03-28 12:48:08'),
+ (15,'sf0015','$2a$10$/396VihfwsI9iWd/UIEXKe7c3xbjwuWiePbUdUQL1Ug/tq9X2fy.i','Mbike','Jones','sf0015@localhost','','en','78744568076959050873',NULL,'anonymousUser','2016-03-18 12:47:51',NULL,'sf0015','2016-03-28 12:48:33'),
+ (16,'sf0016','$2a$10$.YzGvqWeUSCQR5q2mtAl5u4ZVjBDmGCRh7xSbb5njETwx1ZwIN2bm','Fred','Selebwa','sf0016@localhost','','en','43535432288382530210',NULL,'anonymousUser','2016-03-18 12:48:46',NULL,'sf0016','2016-03-28 12:49:12');
+INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
+ (17,'sf0017','$2a$10$YDx44W8ShgQ0Jt7tVJXnWOMlyFJ3ernUc4Wh.yo.vVF6lYpGThccu','Eliezer','Josiah','sf0017@localhost','','en','06698912264567056315',NULL,'anonymousUser','2016-03-18 12:49:06',NULL,'sf0017','2016-03-28 12:49:56'),
+ (18,'sf0018','$2a$10$if7uNqLVpZ.V5X/OkOes7uZ4gbDpwlrFmesdATE4PQrREuGff1c8G','Hellena','Mtembeje','sf0018@localhost','','en','38952305015731452387',NULL,'anonymousUser','2016-03-18 12:49:28',NULL,'sf0018','2016-03-28 12:50:47'),
+ (19,'sf0019','$2a$10$43TTSOPygHilSwG5jA3joussQk3.vL.0B88bmbWGAiEyThp/0MLhm','Charles','Kiwely','sf0019@localhost','','en','80544871706487966991',NULL,'anonymousUser','2016-03-18 12:49:48',NULL,'sf0019','2016-03-28 12:51:19'),
+ (20,'sf0020','$2a$10$UWsog7PJ9mJ5ALW3oT1qjuLsx4r6TtpC2.OtCi6D/qgMvD1pXuFiC',NULL,NULL,'sf0020@localhost','','en','83805380491517726753',NULL,'anonymousUser','2016-03-18 12:50:10',NULL,'admin','2016-03-18 12:54:00'),
+ (21,'sf0021','$2a$10$fyfyZSZ/r94V30rK2V72r.Rs0yzTW81oB6mAvlq3Xz5OTBpBK0DJC','Salome','Mtwale','sf0021@localhost','','en','82028831560154180774',NULL,'anonymousUser','2016-03-18 12:51:39',NULL,'sf0021','2016-03-28 12:52:03');
+INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
+ (22,'sf0022','$2a$10$LV2mBS8VNveWYejGFcCh8OT2JoX.4oeEkPV/w5q5EDyY3dCQjUuGW','Mbaraka','Shemueta','sf0022@localhost','','en','29507620030240498935',NULL,'anonymousUser','2016-03-18 12:51:54',NULL,'sf0022','2016-03-28 12:53:17'),
+ (23,'sf0023','$2a$10$ozkcRMy/Vjj6m.8O3XRg.OwDr3QybLS3qcX8/mZD.q4lzwVOxfPKW','Olivia','Masangya','sf0023@localhost','','en','73060005748380646738',NULL,'anonymousUser','2016-03-18 12:52:18',NULL,'sf0023','2016-03-28 12:53:58'),
+ (24,'sf0024','$2a$10$0YPZsnW/yPzP5mx34t9Gse.x/.bAfB6nTTSBdvhifbYNzjsPQxeeW',NULL,NULL,'sf0024@localhost','','en','76650231398888348776',NULL,'anonymousUser','2016-03-18 12:52:33',NULL,'admin','2016-03-18 12:54:24'),
+ (25,'sf0025','$2a$10$mUYlNHHcw0mpJiioW/p/0Ofx9qAPI6..bRfgSFHvo4ImvcB2CVQ96',NULL,NULL,'sf0025@localhost','','en','42984014546333704148',NULL,'anonymousUser','2016-03-18 12:52:46',NULL,'admin','2016-03-18 12:54:25'),
+ (26,'sf0026','$2a$10$lnV2mPyzb/hLNWtYr7NeBeSe7SErEn4RwK3/Lzr6Oxjqkdj/yOUvS',NULL,NULL,'sf0026@localhost','','en','30926903415314102347',NULL,'anonymousUser','2016-03-18 12:53:00',NULL,'admin','2016-03-18 12:54:27');
+INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
+ (27,'sf0027','$2a$10$F58do6ARzxNnWwXFF3WVa.oH4Cnwfu9GGESf5c64Av7PnAVDDHQfu','Nobert','Kamba','sf0027@localhost','','en','88464590975638599993',NULL,'anonymousUser','2016-03-18 12:53:16',NULL,'sf0027','2016-03-28 12:57:46'),
+ (28,'sf0028','$2a$10$K.A7jrXE..8CIm7SoeVMBepZyR2WdpZeQpPyUOfY429jeBaL.OMju','Francis','Hume','sf0028@localhost','','en','71805558970907066489',NULL,'anonymousUser','2016-03-18 12:53:33',NULL,'sf0028','2016-03-28 12:58:11'),
+ (29,'sf0029','$2a$10$L1IXkaggwuSLeeF0fRR9CeMb/Qq6IM7EXLJI/jsdfFSOUQWf4oPHS',NULL,NULL,'sf0029@localhost','','en','68914493240806760364',NULL,'anonymousUser','2016-03-21 16:19:52',NULL,'admin','2016-03-21 16:20:23');
 /*!40000 ALTER TABLE `jhi_user` ENABLE KEYS */;
 
 
@@ -2990,7 +2648,6 @@ INSERT INTO `jhi_user_authority` (`user_id`,`authority_name`) VALUES
  (5,'ROLE_CUSTOMER'),
  (1,'ROLE_USER'),
  (3,'ROLE_USER'),
-<<<<<<< HEAD
  (4,'ROLE_USER'),
  (6,'ROLE_USER'),
  (7,'ROLE_USER'),
@@ -3016,10 +2673,6 @@ INSERT INTO `jhi_user_authority` (`user_id`,`authority_name`) VALUES
  (27,'ROLE_USER'),
  (28,'ROLE_USER'),
  (29,'ROLE_USER');
-UNLOCK TABLES;
-=======
- (4,'ROLE_USER');
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `jhi_user_authority` ENABLE KEYS */;
 
 
@@ -3031,27 +2684,18 @@ DROP TABLE IF EXISTS `main_sewerage_size`;
 CREATE TABLE `main_sewerage_size` (
   `id` bigint(20) NOT NULL auto_increment,
   `size` float NOT NULL,
-<<<<<<< HEAD
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-=======
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`main_sewerage_size`
 --
 
 /*!40000 ALTER TABLE `main_sewerage_size` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `main_sewerage_size` WRITE;
-INSERT INTO `watererp`.`main_sewerage_size` VALUES  (1,10),
+INSERT INTO `main_sewerage_size` (`id`,`size`) VALUES 
+ (1,10),
  (2,11),
  (3,12);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `main_sewerage_size` ENABLE KEYS */;
 
 
@@ -3063,27 +2707,18 @@ DROP TABLE IF EXISTS `main_water_size`;
 CREATE TABLE `main_water_size` (
   `id` bigint(20) NOT NULL auto_increment,
   `size` float NOT NULL,
-<<<<<<< HEAD
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-=======
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`main_water_size`
 --
 
 /*!40000 ALTER TABLE `main_water_size` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `main_water_size` WRITE;
-INSERT INTO `watererp`.`main_water_size` VALUES  (1,5),
+INSERT INTO `main_water_size` (`id`,`size`) VALUES 
+ (1,5),
  (2,6),
  (3,7);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `main_water_size` ENABLE KEYS */;
 
 
@@ -3095,26 +2730,17 @@ DROP TABLE IF EXISTS `make_of_pipe`;
 CREATE TABLE `make_of_pipe` (
   `id` bigint(20) NOT NULL auto_increment,
   `make_name` varchar(255) NOT NULL,
-<<<<<<< HEAD
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-=======
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`make_of_pipe`
 --
 
 /*!40000 ALTER TABLE `make_of_pipe` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `make_of_pipe` WRITE;
-INSERT INTO `watererp`.`make_of_pipe` VALUES  (1,'Pipe make 1'),
+INSERT INTO `make_of_pipe` (`id`,`make_name`) VALUES 
+ (1,'Pipe make 1'),
  (2,'Pipe Make 2');
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `make_of_pipe` ENABLE KEYS */;
 
 
@@ -3159,59 +2785,55 @@ CREATE TABLE `manage_cash_point` (
 
 
 --
-<<<<<<< HEAD
--- Definition of table `watererp`.`material_master`
+-- Table structure for table `watererp`.`material_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`material_master`;
-CREATE TABLE  `watererp`.`material_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `material_name` varchar(255) DEFAULT NULL,
-  `consumable_flag` varchar(255) DEFAULT NULL,
-  `uom_id` varchar(255) DEFAULT NULL,
-  `category_id` bigint(20) DEFAULT NULL,
-  `sub_category_id` bigint(20) DEFAULT NULL,
-  `item_code_id` bigint(20) DEFAULT NULL,
-  `item_sub_code_id` bigint(20) DEFAULT NULL,
-  `rate_contract_flag` varchar(255) DEFAULT NULL,
-  `unit_rate` decimal(10,2) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `company_code_id` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `material_master`;
+CREATE TABLE `material_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `material_name` varchar(255) default NULL,
+  `consumable_flag` varchar(255) default NULL,
+  `uom_id` varchar(255) default NULL,
+  `category_id` bigint(20) default NULL,
+  `sub_category_id` bigint(20) default NULL,
+  `item_code_id` bigint(20) default NULL,
+  `item_sub_code_id` bigint(20) default NULL,
+  `rate_contract_flag` varchar(255) default NULL,
+  `unit_rate` decimal(10,2) default NULL,
+  `description` varchar(255) default NULL,
+  `status` int(11) default NULL,
+  `creation_date` timestamp NULL default NULL,
+  `last_modified_date` timestamp NULL default NULL,
+  `company_code_id` decimal(10,2) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`material_master`
 --
 
 /*!40000 ALTER TABLE `material_master` DISABLE KEYS */;
-LOCK TABLES `material_master` WRITE;
-INSERT INTO `watererp`.`material_master` VALUES  (2,'Threading Tape',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
+INSERT INTO `material_master` (`id`,`material_name`,`consumable_flag`,`uom_id`,`category_id`,`sub_category_id`,`item_code_id`,`item_sub_code_id`,`rate_contract_flag`,`unit_rate`,`description`,`status`,`creation_date`,`last_modified_date`,`company_code_id`) VALUES 
+ (2,'Threading Tape',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (3,'G.S. Pipe',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'30000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (4,'Pipe Polly',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (5,'Coupling',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (6,'Bib Tape',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'12000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (7,'Tee',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'3500.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (8,'Union',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
- (9,'Elbow',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1000.00',NULL,NULL,'2016-03-23 00:00:00','2016-03-30 00:00:00',NULL),
+ (9,'Elbow',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1000.00',NULL,NULL,'2016-03-23 00:00:00','2016-03-30 00:00:00',NULL);
+INSERT INTO `material_master` (`id`,`material_name`,`consumable_flag`,`uom_id`,`category_id`,`sub_category_id`,`item_code_id`,`item_sub_code_id`,`rate_contract_flag`,`unit_rate`,`description`,`status`,`creation_date`,`last_modified_date`,`company_code_id`) VALUES 
  (10,'Nipple',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (11,'Polly Connector',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2500.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (12,'Plain Socket',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (13,'Reducing Socket/Bush',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (14,'Stop Cock',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'12000.00',NULL,NULL,'2016-03-30 00:00:00','2016-03-30 00:00:00',NULL),
  (15,'Clamp Saddle',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `material_master` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`menu_item`
-=======
 -- Table structure for table `watererp`.`menu_item`
->>>>>>> refs/heads/bhaskar2
 --
 
 DROP TABLE IF EXISTS `menu_item`;
@@ -3219,36 +2841,23 @@ CREATE TABLE `menu_item` (
   `id` bigint(20) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
   `path` varchar(255) NOT NULL,
-<<<<<<< HEAD
-  `modified_date` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
-=======
   `modified_date` timestamp NULL default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`menu_item`
 --
 
 /*!40000 ALTER TABLE `menu_item` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `menu_item` WRITE;
-INSERT INTO `watererp`.`menu_item` VALUES  (1,'Module','#/modules','2016-03-09 00:00:00'),
- (2,'Application Form','#/applicationTxns/new','2016-03-10 00:00:00'),
-=======
 INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
  (1,'Module','#/modules','2016-03-09 00:00:00'),
- (2,'Application Form','#/applicationTxns','2016-03-10 00:00:00'),
->>>>>>> refs/heads/bhaskar2
+ (2,'Application Form','#/applicationTxns/new','2016-03-10 00:00:00'),
  (3,'Menu Items','#/menuItems','2016-03-10 00:00:00'),
  (4,'Url','#/urls','2016-03-10 00:00:00'),
  (5,'Menu Item 2 Urls','#/menuItem2Urls','2016-03-10 00:00:00'),
  (6,'Module 2 Menu Items','#/module2MenuItems','2016-03-10 00:00:00'),
  (7,'Url 2 Roles','#/url2Roles','2016-03-10 00:00:00'),
-<<<<<<< HEAD
  (8,'Application Details','#/applicationTxns','2016-03-10 00:00:00'),
  (9,'Manage Cash Point','#/manageCashPoints','2016-03-10 00:00:00'),
  (10,'Feasibility Study','#/feasibilityStudys','2016-03-11 00:00:00'),
@@ -3257,27 +2866,12 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (13,'Item Category Master','#/itemCategoryMasters','2016-03-30 00:00:00'),
  (14,'Item Sub Category Masters','#/itemSubCategoryMasters','2016-03-30 00:00:00'),
  (15,'Item Code Masters','#/itemCodeMasters','2016-03-30 00:00:00'),
- (16,'Item Company Masters','#/itemCompanyMasters','2016-03-30 00:00:00'),
+ (16,'Item Company Masters','#/itemCompanyMasters','2016-03-30 00:00:00');
+INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
  (17,'Item Sub Code Master','#/itemSubCodeMasters','2016-03-30 00:00:00'),
  (18,'Material Master','#/materialMasters','2016-03-30 00:00:00'),
  (19,'Sib Entry','#/sibEntrys','2016-03-30 00:00:00'),
  (20,'Bill Of Material','#/billOfMaterials','2016-04-01 00:00:00');
-UNLOCK TABLES;
-=======
- (8,'Application Details','#/applicationTxns/all','2016-03-10 00:00:00'),
- (9,'Manage Cash Point','#/manageCashPoints','2016-03-10 00:00:00'),
- (10,'Access List','#/accessLists','2016-03-15 00:00:00'),
- (11,'Bill Full Details','#/billFullDetailss','2016-03-15 00:00:00'),
- (12,'Collection Details','#/collDetailss','2016-03-15 00:00:00'),
- (13,'Current Users','#/currentUserss','2016-03-15 00:00:00'),
- (14,'Customer Details','#/custDetailss','2016-03-15 00:00:00'),
- (15,'Terminal','#/terminals','2016-03-15 00:00:00'),
- (16,'Terminal Log','#/terminalLogs','2016-03-15 00:00:00'),
- (17,'Version','#/versions','2016-03-15 00:00:00');
-INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
- (18,'Complaint Type Master','#/complaintTypeMasters','2016-03-29 00:00:00'),
- (19,'Customer Complaints','#/customerComplaintss','2016-03-29 00:00:00');
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -3295,32 +2889,21 @@ CREATE TABLE `menu_item2_url` (
   KEY `fk_menuitem2url_url_id` (`url_id`),
   CONSTRAINT `fk_menuitem2url_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`),
   CONSTRAINT `fk_menuitem2url_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
-=======
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`menu_item2_url`
 --
 
 /*!40000 ALTER TABLE `menu_item2_url` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `menu_item2_url` WRITE;
-INSERT INTO `watererp`.`menu_item2_url` VALUES  (1,1,1),
- (2,2,8),
-=======
 INSERT INTO `menu_item2_url` (`id`,`menu_item_id`,`url_id`) VALUES 
  (1,1,1),
- (2,2,2),
->>>>>>> refs/heads/bhaskar2
+ (2,2,8),
  (3,3,3),
  (4,4,4),
  (5,5,5),
  (6,6,6),
  (7,7,7),
-<<<<<<< HEAD
  (8,8,2),
  (9,9,9),
  (10,10,10),
@@ -3334,77 +2917,7 @@ INSERT INTO `menu_item2_url` (`id`,`menu_item_id`,`url_id`) VALUES
  (18,18,18),
  (19,19,19),
  (20,20,20);
-UNLOCK TABLES;
-=======
- (8,8,8),
- (9,9,9),
- (10,10,10),
- (11,11,11),
- (12,12,12),
- (13,13,13),
- (14,14,14),
- (15,15,15),
- (16,16,16),
- (17,17,17),
- (18,18,18),
- (19,19,19);
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
-
-
---
--- Table structure for table `watererp`.`mmg_material_master`
---
-
-DROP TABLE IF EXISTS `mmg_material_master`;
-CREATE TABLE `mmg_material_master` (
-  `id` bigint(10) NOT NULL,
-  `material_name` varchar(200) default NULL,
-  `consumable_flag` varchar(5) default NULL,
-  `uom_id` bigint(10) default NULL,
-  `category_id` bigint(10) default NULL,
-  `sub_category_id` bigint(10) default NULL,
-  `item_code_id` bigint(10) default NULL,
-  `item_sub_code_id` bigint(10) default NULL,
-  `rate_contract_flag` varchar(5) default NULL,
-  `unit_rate` bigint(126) default NULL,
-  `description` varchar(500) default NULL,
-  `status` bigint(10) default NULL,
-  `creation_date` datetime default NULL,
-  `last_modified_date` datetime default NULL,
-  `company_code_id` bigint(10) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`mmg_material_master`
---
-
-/*!40000 ALTER TABLE `mmg_material_master` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mmg_material_master` ENABLE KEYS */;
-
-
---
--- Table structure for table `watererp`.`mmg_terms_master`
---
-
-DROP TABLE IF EXISTS `mmg_terms_master`;
-CREATE TABLE `mmg_terms_master` (
-  `id` bigint(10) NOT NULL auto_increment,
-  `name` varchar(25) default NULL,
-  `description` varchar(500) default NULL,
-  `status` bigint(10) default NULL,
-  `creation_date` datetime default NULL,
-  `last_modified_date` datetime default NULL,
-  `tax_type_id` bigint(10) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`mmg_terms_master`
---
-
-/*!40000 ALTER TABLE `mmg_terms_master` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mmg_terms_master` ENABLE KEYS */;
 
 
 --
@@ -3415,36 +2928,20 @@ DROP TABLE IF EXISTS `module`;
 CREATE TABLE `module` (
   `id` bigint(20) NOT NULL auto_increment,
   `name` varchar(255) NOT NULL,
-<<<<<<< HEAD
-  `priority` int(11) DEFAULT NULL,
-  `modified_date` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-=======
   `priority` int(11) default NULL,
   `modified_date` timestamp NULL default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`module`
 --
 
 /*!40000 ALTER TABLE `module` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `module` WRITE;
-INSERT INTO `watererp`.`module` VALUES  (1,'Role Management',1,'2016-03-09 00:00:00'),
- (2,'Connection',2,'2016-03-10 00:00:00'),
- (3,'Items Details',3,'2016-03-30 00:00:00');
-UNLOCK TABLES;
-=======
 INSERT INTO `module` (`id`,`name`,`priority`,`modified_date`) VALUES 
  (1,'Role Management',1,'2016-03-09 00:00:00'),
  (2,'Connection',2,'2016-03-10 00:00:00'),
- (3,'Billing and Collection',3,'2016-03-15 00:00:00'),
- (4,'Customer Care',4,'2016-03-29 00:00:00');
->>>>>>> refs/heads/bhaskar2
+ (3,'Items Details',3,'2016-03-30 00:00:00');
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 
 
@@ -3463,20 +2960,15 @@ CREATE TABLE `module2_menu_item` (
   KEY `fk_module2menuitem_menuitem_id` (`menu_item_id`),
   CONSTRAINT `fk_module2menuitem_menuitem_id` FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item` (`id`),
   CONSTRAINT `fk_module2menuitem_module_id` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
-=======
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`module2_menu_item`
 --
 
 /*!40000 ALTER TABLE `module2_menu_item` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `module2_menu_item` WRITE;
-INSERT INTO `watererp`.`module2_menu_item` VALUES  (1,1,2,2),
+INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VALUES 
+ (1,1,2,2),
  (2,1,1,1),
  (3,2,1,3),
  (4,3,1,4),
@@ -3496,29 +2988,6 @@ INSERT INTO `watererp`.`module2_menu_item` VALUES  (1,1,2,2),
  (18,6,3,18),
  (19,7,3,19),
  (20,7,2,20);
-UNLOCK TABLES;
-=======
-INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VALUES 
- (1,1,2,2),
- (2,2,1,1),
- (3,3,1,3),
- (4,4,1,4),
- (5,5,1,5),
- (6,6,1,6),
- (7,7,1,7),
- (8,8,2,8),
- (9,9,2,9),
- (10,1,3,10),
- (11,2,3,11),
- (12,3,3,12),
- (13,4,3,13),
- (14,5,3,14),
- (15,6,3,15),
- (16,7,3,16),
- (17,8,3,17),
- (18,1,4,18),
- (19,2,4,19);
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
 
@@ -3537,16 +3006,15 @@ CREATE TABLE `org_hierarchy` (
   PRIMARY KEY  (`id`),
   KEY `fk_orghierarchy_statusmaster_id` (`status_master_id`),
   CONSTRAINT `fk_orghierarchy_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`org_hierarchy`
 --
 
 /*!40000 ALTER TABLE `org_hierarchy` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `org_hierarchy` WRITE;
-INSERT INTO `watererp`.`org_hierarchy` VALUES  (1,'Ministry Of Waters',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
+INSERT INTO `org_hierarchy` (`id`,`hierarchy_name`,`parent_hierarchy_id`,`creation_date`,`last_modified_date`,`status_master_id`) VALUES 
+ (1,'Ministry Of Waters',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (2,'Board Of Directors',1,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (3,'Energy & Water Utilities Regulatory Authority',2,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (4,'Managing Director',2,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
@@ -3558,7 +3026,8 @@ INSERT INTO `watererp`.`org_hierarchy` VALUES  (1,'Ministry Of Waters',0,'2016-0
  (10,'Technical Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (11,'Commercial Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (12,'Finance Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
- (13,'Human Resource & Administration Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
+ (13,'Human Resource & Administration Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',2);
+INSERT INTO `org_hierarchy` (`id`,`hierarchy_name`,`parent_hierarchy_id`,`creation_date`,`last_modified_date`,`status_master_id`) VALUES 
  (14,'Officer, GIS, Planning, Design & Construction',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (15,'Officer, Operation & Maintance - NRW, Water Supply and Sanitation',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (16,'Billing Officer',11,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
@@ -3569,11 +3038,9 @@ INSERT INTO `watererp`.`org_hierarchy` VALUES  (1,'Ministry Of Waters',0,'2016-0
  (21,'Zonal Supervisers',16,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (22,'Assistant Accountant(Revenue)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (23,'Assistant Accountant(Expenditure)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
- (24,'Technical Zonal Supervisor',15,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
+ (24,'Technical Zonal Supervisor',15,'2016-03-18 00:00:00','2016-03-18 00:00:00',2);
+INSERT INTO `org_hierarchy` (`id`,`hierarchy_name`,`parent_hierarchy_id`,`creation_date`,`last_modified_date`,`status_master_id`) VALUES 
  (25,'Customer',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `org_hierarchy` ENABLE KEYS */;
 
 
@@ -3606,20 +3073,6 @@ CREATE TABLE `org_role_hierarchy` (
 -- Table structure for table `watererp`.`org_role_instance`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `watererp`.`org_role_instance`;
-CREATE TABLE  `watererp`.`org_role_instance` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `org_role_name` varchar(255) DEFAULT NULL,
-  `parent_org_role_id` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL DEFAULT NULL,
-  `last_modified_date` timestamp NULL DEFAULT NULL,
-  `is_head` int(11) DEFAULT NULL,
-  `status_master_id` bigint(20) DEFAULT NULL,
-  `org_role_hierarchy_id` bigint(20) DEFAULT NULL,
-  `departments_master_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-=======
 DROP TABLE IF EXISTS `org_role_instance`;
 CREATE TABLE `org_role_instance` (
   `id` bigint(20) NOT NULL auto_increment,
@@ -3627,28 +3080,26 @@ CREATE TABLE `org_role_instance` (
   `parent_org_role_id` int(11) default NULL,
   `creation_date` timestamp NULL default NULL,
   `last_modified_date` timestamp NULL default NULL,
-  `is_head` timestamp NULL default NULL,
+  `is_head` int(11) default NULL,
   `status_master_id` bigint(20) default NULL,
   `org_role_hierarchy_id` bigint(20) default NULL,
   `departments_master_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
->>>>>>> refs/heads/bhaskar2
   KEY `fk_orgroleinstance_statusmaster_id` (`status_master_id`),
   KEY `fk_orgroleinstance_orgrolehierarchy_id` (`org_role_hierarchy_id`),
   KEY `fk_orgroleinstance_departmentsmaster_id` (`departments_master_id`),
   CONSTRAINT `fk_orgroleinstance_departmentsmaster_id` FOREIGN KEY (`departments_master_id`) REFERENCES `departments_master` (`id`),
   CONSTRAINT `fk_orgroleinstance_orgrolehierarchy_id` FOREIGN KEY (`org_role_hierarchy_id`) REFERENCES `org_role_hierarchy` (`id`),
   CONSTRAINT `fk_orgroleinstance_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`org_role_instance`
 --
 
 /*!40000 ALTER TABLE `org_role_instance` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `org_role_instance` WRITE;
-INSERT INTO `watererp`.`org_role_instance` VALUES  (1,'Ministry Of Waters',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+INSERT INTO `org_role_instance` (`id`,`org_role_name`,`parent_org_role_id`,`creation_date`,`last_modified_date`,`is_head`,`status_master_id`,`org_role_hierarchy_id`,`departments_master_id`) VALUES 
+ (1,'Ministry Of Waters',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (2,'Board Of Directors',1,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (3,'Energy & Water Utilities Regulatory Authority',2,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (4,'Managing Director',2,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
@@ -3657,7 +3108,8 @@ INSERT INTO `watererp`.`org_role_instance` VALUES  (1,'Ministry Of Waters',0,'20
  (7,'Public Relations Officer',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (8,'HPMU',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (9,'Stores & Supplies Officer',8,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
- (10,'Technical Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (10,'Technical Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL);
+INSERT INTO `org_role_instance` (`id`,`org_role_name`,`parent_org_role_id`,`creation_date`,`last_modified_date`,`is_head`,`status_master_id`,`org_role_hierarchy_id`,`departments_master_id`) VALUES 
  (11,'Commercial Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (12,'Finance Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (13,'Human Resource & Administration Manager',4,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
@@ -3666,16 +3118,14 @@ INSERT INTO `watererp`.`org_role_instance` VALUES  (1,'Ministry Of Waters',0,'20
  (16,'Billing Officer',11,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (17,'Credit Control Officer',11,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (18,'ICT & Customer Care Officer',11,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
- (19,'Accountant',12,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (19,'Accountant',12,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL);
+INSERT INTO `org_role_instance` (`id`,`org_role_name`,`parent_org_role_id`,`creation_date`,`last_modified_date`,`is_head`,`status_master_id`,`org_role_hierarchy_id`,`departments_master_id`) VALUES 
  (20,'Human Resource & Administration Section',13,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (21,'Zonal Supervisers',16,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (22,'Assistant Accountant(Revenue)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (23,'Assistant Accountant(Expenditure)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (24,'Technical Zonal Supervisor',15,'2016-03-21 00:00:00','2016-03-21 00:00:00',1,2,NULL,NULL),
  (25,'Customer',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `org_role_instance` ENABLE KEYS */;
 
 
@@ -3712,53 +3162,43 @@ DROP TABLE IF EXISTS `payment_types`;
 CREATE TABLE `payment_types` (
   `id` bigint(20) NOT NULL auto_increment,
   `payment_mode` varchar(255) NOT NULL,
-<<<<<<< HEAD
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-=======
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`payment_types`
 --
 
 /*!40000 ALTER TABLE `payment_types` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `payment_types` WRITE;
-INSERT INTO `watererp`.`payment_types` VALUES  (1,'Cash'),
+INSERT INTO `payment_types` (`id`,`payment_mode`) VALUES 
+ (1,'Cash'),
  (2,'Demand Draft (DD)'),
  (3,'Cheque');
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `payment_types` ENABLE KEYS */;
 
 
 --
--- Definition of table `watererp`.`percentage_master`
+-- Table structure for table `watererp`.`percentage_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`percentage_master`;
-CREATE TABLE  `watererp`.`percentage_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `percent_type` varchar(255) DEFAULT NULL,
-  `percent_value` double DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `percentage_master`;
+CREATE TABLE `percentage_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `percent_type` varchar(255) default NULL,
+  `percent_value` double default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`percentage_master`
 --
 
 /*!40000 ALTER TABLE `percentage_master` DISABLE KEYS */;
-LOCK TABLES `percentage_master` WRITE;
-INSERT INTO `watererp`.`percentage_master` VALUES  (1,'Supervision',10),
+INSERT INTO `percentage_master` (`id`,`percent_type`,`percent_value`) VALUES 
+ (1,'Supervision',10),
  (2,'Labour Charges',20),
  (3,'Site Survey',5),
  (4,'Connection Fee of A & B',20);
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `percentage_master` ENABLE KEYS */;
 
 
@@ -3788,27 +3228,27 @@ INSERT INTO `pipe_size_master` (`id`,`pipe_size`) VALUES
 
 
 --
--- Definition of table `watererp`.`proceedings`
+-- Table structure for table `watererp`.`proceedings`
 --
 
-DROP TABLE IF EXISTS `watererp`.`proceedings`;
-CREATE TABLE  `watererp`.`proceedings` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sub_total_a` double DEFAULT NULL,
-  `supervision_charge` double DEFAULT NULL,
-  `labour_charge` double DEFAULT NULL,
-  `site_survey` double DEFAULT NULL,
-  `sub_total_b` double DEFAULT NULL,
-  `connection_fee` double DEFAULT NULL,
-  `water_meter_shs` double DEFAULT NULL,
-  `application_form_fee` double DEFAULT NULL,
-  `grand_total` double DEFAULT NULL,
-  `supervision_percent` double DEFAULT NULL,
-  `labour_charge_percent` double DEFAULT NULL,
-  `site_survey_percent` double DEFAULT NULL,
-  `connection_fee_percent` double DEFAULT NULL,
-  `application_txn_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+DROP TABLE IF EXISTS `proceedings`;
+CREATE TABLE `proceedings` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `sub_total_a` double default NULL,
+  `supervision_charge` double default NULL,
+  `labour_charge` double default NULL,
+  `site_survey` double default NULL,
+  `sub_total_b` double default NULL,
+  `connection_fee` double default NULL,
+  `water_meter_shs` double default NULL,
+  `application_form_fee` double default NULL,
+  `grand_total` double default NULL,
+  `supervision_percent` double default NULL,
+  `labour_charge_percent` double default NULL,
+  `site_survey_percent` double default NULL,
+  `connection_fee_percent` double default NULL,
+  `application_txn_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
   KEY `fk_proceedings_supervisionpercent_id` (`supervision_percent`),
   KEY `fk_proceedings_labourchargepercent_id` (`labour_charge_percent`),
   KEY `fk_proceedings_sitesurveypercent_id` (`site_survey_percent`),
@@ -3822,8 +3262,6 @@ CREATE TABLE  `watererp`.`proceedings` (
 --
 
 /*!40000 ALTER TABLE `proceedings` DISABLE KEYS */;
-LOCK TABLES `proceedings` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `proceedings` ENABLE KEYS */;
 
 
@@ -3908,21 +3346,17 @@ CREATE TABLE `req_org_workflow_mapping` (
   CONSTRAINT `fk_reqorgworkflowmapping_requestmaster_id` FOREIGN KEY (`request_master_id`) REFERENCES `request_master` (`id`),
   CONSTRAINT `fk_reqorgworkflowmapping_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_reqorgworkflowmapping_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`req_org_workflow_mapping`
 --
 
 /*!40000 ALTER TABLE `req_org_workflow_mapping` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `req_org_workflow_mapping` WRITE;
-INSERT INTO `watererp`.`req_org_workflow_mapping` VALUES  (1,'2016-03-21 00:00:00','2016-03-21 00:00:00',1,1,25,2),
+INSERT INTO `req_org_workflow_mapping` (`id`,`creation_date`,`last_modified_date`,`workflow_master_id`,`request_master_id`,`org_role_instance_id`,`status_master_id`) VALUES 
+ (1,'2016-03-21 00:00:00','2016-03-21 00:00:00',1,1,25,2),
  (2,'2016-03-21 00:00:00','2016-03-21 00:00:00',1,1,10,2),
  (3,NULL,NULL,NULL,NULL,NULL,NULL);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `req_org_workflow_mapping` ENABLE KEYS */;
 
 
@@ -3942,23 +3376,19 @@ CREATE TABLE `request_master` (
   PRIMARY KEY  (`id`),
   KEY `fk_requestmaster_statusmaster_id` (`status_master_id`),
   CONSTRAINT `fk_requestmaster_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`request_master`
 --
 
 /*!40000 ALTER TABLE `request_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `request_master` WRITE;
-INSERT INTO `watererp`.`request_master` VALUES  (1,'REQUISITION','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,0,2),
+INSERT INTO `request_master` (`id`,`request_type`,`creation_date`,`last_modified_date`,`description`,`internal_flag`,`status_master_id`) VALUES 
+ (1,'REQUISITION','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,0,2),
  (2,'LEAVE','2016-03-26 00:00:00','2016-03-26 00:00:00',NULL,0,2),
  (3,'INCORRECT BILL','2016-03-31 00:00:00','2016-03-31 00:00:00',NULL,0,2),
  (4,'WATER LEAKAGE','2016-03-31 00:00:00','2016-03-31 00:00:00',NULL,0,2),
  (5,'SERVICE UNAVAILABILITY','2016-03-31 00:00:00','2016-03-31 00:00:00',NULL,0,2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `request_master` ENABLE KEYS */;
 
 
@@ -3998,21 +3428,17 @@ CREATE TABLE `request_workflow_history` (
   CONSTRAINT `fk_requestworkflowhistory_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowstagemaster_id` FOREIGN KEY (`workflow_stage_master_id`) REFERENCES `workflow_stage_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`request_workflow_history`
 --
 
 /*!40000 ALTER TABLE `request_workflow_history` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `request_workflow_history` WRITE;
-INSERT INTO `watererp`.`request_workflow_history` VALUES  (90,1,'2016-04-01 10:34:49','2016-04-01 10:34:49',NULL,'127.0.0.1',NULL,38,5,15,5,1,1,NULL,NULL),
+INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
+ (90,1,'2016-04-01 10:34:49','2016-04-01 10:34:49',NULL,'127.0.0.1',NULL,38,5,15,5,1,1,NULL,NULL),
  (91,2,'2016-04-01 10:37:20','2016-04-01 10:37:20','approved at second level for feasibility','127.0.0.1',NULL,38,15,29,5,1,1,NULL,NULL),
  (93,3,'2016-04-01 11:37:29','2016-04-01 11:37:29',NULL,'127.0.0.1',NULL,38,29,20,3,1,1,NULL,NULL);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `request_workflow_history` ENABLE KEYS */;
 
 
@@ -4067,21 +3493,17 @@ CREATE TABLE `role_workflow_mapping` (
   CONSTRAINT `fk_roleworkflowmapping_requestmaster_id` FOREIGN KEY (`request_master_id`) REFERENCES `request_master` (`id`),
   CONSTRAINT `fk_roleworkflowmapping_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_roleworkflowmapping_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`role_workflow_mapping`
 --
 
 /*!40000 ALTER TABLE `role_workflow_mapping` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `role_workflow_mapping` WRITE;
-INSERT INTO `watererp`.`role_workflow_mapping` VALUES  (1,'2016-03-21 00:00:00','2016-03-21 00:00:00',2,10,1,1),
+INSERT INTO `role_workflow_mapping` (`id`,`creation_date`,`last_modified_date`,`status_master_id`,`org_role_instance_id`,`workflow_master_id`,`request_master_id`) VALUES 
+ (1,'2016-03-21 00:00:00','2016-03-21 00:00:00',2,10,1,1),
  (2,'2016-03-21 00:00:00','2016-03-21 00:00:00',2,24,1,1),
  (3,'2016-03-21 00:00:00','2016-03-21 00:00:00',2,15,1,1);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `role_workflow_mapping` ENABLE KEYS */;
 
 
@@ -4093,26 +3515,17 @@ DROP TABLE IF EXISTS `scheme_master`;
 CREATE TABLE `scheme_master` (
   `id` bigint(20) NOT NULL auto_increment,
   `scheme_name` varchar(255) NOT NULL,
-<<<<<<< HEAD
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-=======
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`scheme_master`
 --
 
 /*!40000 ALTER TABLE `scheme_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `scheme_master` WRITE;
-INSERT INTO `watererp`.`scheme_master` VALUES  (1,'Scheme 1'),
+INSERT INTO `scheme_master` (`id`,`scheme_name`) VALUES 
+ (1,'Scheme 1'),
  (2,'Scheme 2');
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `scheme_master` ENABLE KEYS */;
 
 
@@ -4143,33 +3556,33 @@ INSERT INTO `sewer_size` (`id`,`sewer_size`) VALUES
 
 
 --
--- Definition of table `watererp`.`sib_entry`
+-- Table structure for table `watererp`.`sib_entry`
 --
 
-DROP TABLE IF EXISTS `watererp`.`sib_entry`;
-CREATE TABLE  `watererp`.`sib_entry` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sib_id` bigint(20) DEFAULT NULL,
-  `so_no` varchar(255) DEFAULT NULL,
-  `so_date` timestamp NULL,
-  `demand_date` timestamp NULL,
-  `dir` varchar(255) DEFAULT NULL,
-  `div_name` varchar(255) DEFAULT NULL,
-  `inv_no` bigint(20) DEFAULT NULL,
-  `sib_date` timestamp NULL,
-  `sib_no` varchar(255) DEFAULT NULL,
-  `ir_date` timestamp NULL,
-  `ir_no` varchar(255) DEFAULT NULL,
-  `vendor_code` varchar(255) DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  `to_user` timestamp NULL,
-  `from_user` timestamp NULL,
-  `status` int(11) DEFAULT NULL,
-  `creation_date` timestamp NULL,
-  `last_modified_date` timestamp NULL,
-  `dc_no` varchar(255) DEFAULT NULL,
-  `dc_date` timestamp NULL,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS `sib_entry`;
+CREATE TABLE `sib_entry` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `sib_id` bigint(20) default NULL,
+  `so_no` varchar(255) default NULL,
+  `so_date` timestamp NULL default NULL,
+  `demand_date` timestamp NULL default NULL,
+  `dir` varchar(255) default NULL,
+  `div_name` varchar(255) default NULL,
+  `inv_no` bigint(20) default NULL,
+  `sib_date` timestamp NULL default NULL,
+  `sib_no` varchar(255) default NULL,
+  `ir_date` timestamp NULL default NULL,
+  `ir_no` varchar(255) default NULL,
+  `vendor_code` varchar(255) default NULL,
+  `remarks` varchar(255) default NULL,
+  `to_user` timestamp NULL default NULL,
+  `from_user` timestamp NULL default NULL,
+  `status` int(11) default NULL,
+  `creation_date` timestamp NULL default NULL,
+  `last_modified_date` timestamp NULL default NULL,
+  `dc_no` varchar(255) default NULL,
+  `dc_date` timestamp NULL default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -4177,8 +3590,6 @@ CREATE TABLE  `watererp`.`sib_entry` (
 --
 
 /*!40000 ALTER TABLE `sib_entry` DISABLE KEYS */;
-LOCK TABLES `sib_entry` WRITE;
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `sib_entry` ENABLE KEYS */;
 
 
@@ -4220,27 +3631,27 @@ INSERT INTO `status_master` (`id`,`status`,`description`) VALUES
 
 
 --
--- Definition of table `watererp`.`street_master`
+-- Table structure for table `watererp`.`street_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`street_master`;
-CREATE TABLE  `watererp`.`street_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `street_name` varchar(255) DEFAULT NULL,
-  `street_code` varchar(255) DEFAULT NULL,
-  `zone_master_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+DROP TABLE IF EXISTS `street_master`;
+CREATE TABLE `street_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `street_name` varchar(255) default NULL,
+  `street_code` varchar(255) default NULL,
+  `zone_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
   KEY `fk_streetmaster_zonemaster_id` (`zone_master_id`),
   CONSTRAINT `fk_streetmaster_zonemaster_id` FOREIGN KEY (`zone_master_id`) REFERENCES `zone_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`street_master`
 --
 
 /*!40000 ALTER TABLE `street_master` DISABLE KEYS */;
-LOCK TABLES `street_master` WRITE;
-INSERT INTO `watererp`.`street_master` VALUES  (1,'Street1','StreetCode1',1),
+INSERT INTO `street_master` (`id`,`street_name`,`street_code`,`zone_master_id`) VALUES 
+ (1,'Street1','StreetCode1',1),
  (2,'Street2','StreetCode2',1),
  (3,'Street3','StreetCode3',2),
  (4,'Street4','StreetCode4',2),
@@ -4248,7 +3659,6 @@ INSERT INTO `watererp`.`street_master` VALUES  (1,'Street1','StreetCode1',1),
  (6,'Street6','StreetCode6',3),
  (7,'Street7','StreetCode7',4),
  (8,'Street8','StreetCode8',4);
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `street_master` ENABLE KEYS */;
 
 
@@ -4286,30 +3696,115 @@ CREATE TABLE `sub_desig_category_master` (
 DROP TABLE IF EXISTS `tariff_category_master`;
 CREATE TABLE `tariff_category_master` (
   `id` bigint(20) NOT NULL auto_increment,
-  `tariff_name` varchar(255) NOT NULL,
-  `tariff_unit` int(11) NOT NULL,
-  `tariff_value` float NOT NULL,
-<<<<<<< HEAD
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-=======
+  `tariff_category` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`tariff_category_master`
 --
 
 /*!40000 ALTER TABLE `tariff_category_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `tariff_category_master` WRITE;
-INSERT INTO `watererp`.`tariff_category_master` VALUES  (1,'Tariff category 1',1,100),
- (2,'Tariff Category 2',2,200);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
+INSERT INTO `tariff_category_master` (`id`,`tariff_category`) VALUES 
+ (1,'Domestic'),
+ (2,'Institutional'),
+ (3,'Commercial'),
+ (4,'Industrial'),
+ (5,'Kiosks');
 /*!40000 ALTER TABLE `tariff_category_master` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`tariff_charges`
+--
+
+DROP TABLE IF EXISTS `tariff_charges`;
+CREATE TABLE `tariff_charges` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `tariff_desc` varchar(255) NOT NULL,
+  `slab_min` int(11) NOT NULL,
+  `slab_max` int(11) NOT NULL,
+  `rate` float NOT NULL,
+  `min_kl` float NOT NULL,
+  `min_unmetered_kl` float NOT NULL,
+  `tariff_master_id` bigint(20) default NULL,
+  `tariff_type_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_tariffcharges_tariffmaster_id` (`tariff_master_id`),
+  KEY `fk_tariffcharges_tarifftypemaster_id` (`tariff_type_master_id`),
+  CONSTRAINT `fk_tariffcharges_tariffmaster_id` FOREIGN KEY (`tariff_master_id`) REFERENCES `tariff_master` (`id`),
+  CONSTRAINT `fk_tariffcharges_tarifftypemaster_id` FOREIGN KEY (`tariff_type_master_id`) REFERENCES `tariff_type_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`tariff_charges`
+--
+
+/*!40000 ALTER TABLE `tariff_charges` DISABLE KEYS */;
+INSERT INTO `tariff_charges` (`id`,`tariff_desc`,`slab_min`,`slab_max`,`rate`,`min_kl`,`min_unmetered_kl`,`tariff_master_id`,`tariff_type_master_id`) VALUES 
+ (1,'Domestic - Usage',0,999999,780,10,31,1,1),
+ (2,'Domestic - Fixed',0,999999,18000,0,0,1,2),
+ (3,'Domestic - Service',0,999999,1800,0,0,1,3),
+ (4,'Domestic - Usage',0,999999,780,11,32,2,1),
+ (5,'Domestic - Fixed',0,999999,19000,0,0,2,2),
+ (6,'Domestic - Service',0,999999,1800,0,0,2,3),
+ (7,'Domestic - Usage',0,999999,800,12,33,3,1),
+ (8,'Domestic - Fixed',0,999999,19500,0,0,3,2),
+ (9,'Domestic - Service',0,999999,1820,0,0,3,3);
+/*!40000 ALTER TABLE `tariff_charges` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`tariff_master`
+--
+
+DROP TABLE IF EXISTS `tariff_master`;
+CREATE TABLE `tariff_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `tariff_name` varchar(255) NOT NULL,
+  `valid_from` timestamp NOT NULL default '0000-00-00 00:00:00' on update CURRENT_TIMESTAMP,
+  `valid_to` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `active` varchar(255) NOT NULL,
+  `tariff_category_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_tariffmaster_tariffcategorymaster_id` (`tariff_category_master_id`),
+  CONSTRAINT `fk_tariffmaster_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`tariff_master`
+--
+
+/*!40000 ALTER TABLE `tariff_master` DISABLE KEYS */;
+INSERT INTO `tariff_master` (`id`,`tariff_name`,`valid_from`,`valid_to`,`active`,`tariff_category_master_id`) VALUES 
+ (1,'Domestic - 2010 to 2015','2010-01-01 00:00:00','2015-12-31 00:00:00','1',1),
+ (2,'Domestic - 2016 Jan to Mar','2016-01-01 00:00:00','2016-03-31 00:00:00','1',1),
+ (3,'Domestic - 2016 Apr to  June','2016-04-01 00:00:00','2016-06-30 00:00:00','1',1),
+ (4,'Domestic - 2016 Jul to Dec','2016-07-01 00:00:00','2016-12-31 00:00:00','1',1);
+/*!40000 ALTER TABLE `tariff_master` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`tariff_type_master`
+--
+
+DROP TABLE IF EXISTS `tariff_type_master`;
+CREATE TABLE `tariff_type_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `tariff_type` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`tariff_type_master`
+--
+
+/*!40000 ALTER TABLE `tariff_type_master` DISABLE KEYS */;
+INSERT INTO `tariff_type_master` (`id`,`tariff_type`) VALUES 
+ (1,'Usage Charges'),
+ (2,'Fixed Charges'),
+ (3,'Service Charges');
+/*!40000 ALTER TABLE `tariff_type_master` ENABLE KEYS */;
 
 
 --
@@ -4350,7 +3845,7 @@ DROP TABLE IF EXISTS `terminal_log`;
 CREATE TABLE `terminal_log` (
   `id` bigint(20) NOT NULL auto_increment,
   `amount` float default NULL,
-  `last_modified` timestamp NULL,
+  `last_modified` timestamp NULL default NULL,
   `modified_by` varchar(255) default NULL,
   `user_id` varchar(255) default NULL,
   `bank_deposit_date` date default NULL,
@@ -4401,15 +3896,9 @@ DROP TABLE IF EXISTS `url`;
 CREATE TABLE `url` (
   `id` bigint(20) NOT NULL auto_increment,
   `url_pattern` varchar(255) NOT NULL,
-<<<<<<< HEAD
-  `version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
-=======
   `version` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`url`
@@ -4424,7 +3913,6 @@ INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES
  (5,'/menuItem2Urls',1),
  (6,'/module2MenuItems',1),
  (7,'/url2Roles',1),
-<<<<<<< HEAD
  (8,'/applicationTxns/new',1),
  (9,'/manageCashPoints',1),
  (10,'/feasibilityStudys',1),
@@ -4438,21 +3926,6 @@ INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES
  (18,'/materialMaster',1),
  (19,'/sibEntry',1),
  (20,'/billOfMaterials',1);
-UNLOCK TABLES;
-=======
- (8,'/applicationTxns/all',1),
- (9,'/manageCashPoints',1),
- (10,'/accessLists',1),
- (11,'/billFullDetailss',1),
- (12,'/collDetailss',1),
- (13,'/currentUserss',1),
- (14,'/custDetailss',1),
- (15,'/terminals',1),
- (16,'/terminalLogs',1),
- (17,'/versions',1),
- (18,'/complaintTypeMasters',1),
- (19,'/customerComplaintss',1);
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 
@@ -4470,11 +3943,7 @@ CREATE TABLE `url2_role` (
   KEY `fk_url2role_authority_name` (`authority_name`),
   CONSTRAINT `fk_url2role_authority_name` FOREIGN KEY (`authority_name`) REFERENCES `jhi_authority` (`name`),
   CONSTRAINT `fk_url2role_url_id` FOREIGN KEY (`url_id`) REFERENCES `url` (`id`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
-=======
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> refs/heads/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`url2_role`
@@ -4491,7 +3960,6 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (7,6,'ROLE_ADMIN'),
  (8,7,'ROLE_ADMIN'),
  (9,8,'ROLE_ADMIN'),
-<<<<<<< HEAD
  (11,9,'ROLE_ADMIN'),
  (12,9,'ROLE_ADMIN'),
  (13,10,'ROLE_ADMIN'),
@@ -4510,21 +3978,6 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (26,18,'ROLE_ADMIN'),
  (27,19,'ROLE_ADMIN'),
  (28,20,'ROLE_USER');
-UNLOCK TABLES;
-=======
- (11,9,'ROLE_CUSTOMER'),
- (12,9,'ROLE_ADMIN'),
- (13,10,'ROLE_ADMIN'),
- (14,11,'ROLE_ADMIN'),
- (15,12,'ROLE_ADMIN'),
- (16,13,'ROLE_ADMIN'),
- (17,14,'ROLE_ADMIN'),
- (18,15,'ROLE_ADMIN'),
- (19,16,'ROLE_ADMIN'),
- (20,17,'ROLE_ADMIN'),
- (21,18,'ROLE_ADMIN'),
- (22,19,'ROLE_ADMIN');
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 
@@ -4591,16 +4044,15 @@ CREATE TABLE `workflow` (
   CONSTRAINT `fk_workflow_relativetorole_id` FOREIGN KEY (`relative_to_role_id`) REFERENCES `workflow_relations` (`id`),
   CONSTRAINT `fk_workflow_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`),
   CONSTRAINT `fk_workflow_workflowstagemaster_id` FOREIGN KEY (`workflow_stage_master_id`) REFERENCES `workflow_stage_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`workflow`
 --
 
 /*!40000 ALTER TABLE `workflow` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `workflow` WRITE;
-INSERT INTO `watererp`.`workflow` VALUES  (1,1,1,NULL,NULL,2,NULL,10,NULL,NULL,24,4),
+INSERT INTO `workflow` (`id`,`stage_id`,`workflow_master_id`,`relative_from_role_id`,`absolute_from_role_id`,`relationship_type_id`,`relative_to_role_id`,`absolute_to_role_id`,`escalation_relationship_type_id`,`relative_escalation_to_id`,`absolute_escalation_to_id`,`workflow_stage_master_id`) VALUES 
+ (1,1,1,NULL,NULL,2,NULL,10,NULL,NULL,24,4),
  (2,2,1,NULL,10,2,NULL,24,NULL,NULL,NULL,5),
  (3,3,1,NULL,24,2,NULL,15,NULL,NULL,NULL,2),
  (4,4,1,NULL,15,2,NULL,10,NULL,NULL,NULL,2),
@@ -4609,9 +4061,6 @@ INSERT INTO `watererp`.`workflow` VALUES  (1,1,1,NULL,NULL,2,NULL,10,NULL,NULL,2
  (7,7,1,NULL,9,2,NULL,15,NULL,NULL,NULL,NULL),
  (8,8,1,NULL,15,2,NULL,16,NULL,NULL,NULL,NULL),
  (9,1,3,NULL,NULL,2,NULL,15,NULL,NULL,NULL,4);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `workflow` ENABLE KEYS */;
 
 
@@ -4630,21 +4079,17 @@ CREATE TABLE `workflow_master` (
   PRIMARY KEY  (`id`),
   KEY `fk_workflowmaster_statusmaster_id` (`status_master_id`),
   CONSTRAINT `fk_workflowmaster_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`workflow_master`
 --
 
 /*!40000 ALTER TABLE `workflow_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `workflow_master` WRITE;
-INSERT INTO `watererp`.`workflow_master` VALUES  (1,'REQUISITION',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
+INSERT INTO `workflow_master` (`id`,`workflow_name`,`to_workflow`,`creation_date`,`last_modified_date`,`status_master_id`) VALUES 
+ (1,'REQUISITION',0,'2016-03-18 00:00:00','2016-03-18 00:00:00',2),
  (2,'LEAVE',0,'2016-03-26 00:00:00','2016-03-26 00:00:00',2),
  (3,'CUSTOMER COMPLAINT',0,'2016-03-31 00:00:00','2016-03-31 00:00:00',2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `workflow_master` ENABLE KEYS */;
 
 
@@ -4660,16 +4105,15 @@ CREATE TABLE `workflow_relations` (
   PRIMARY KEY  (`id`),
   KEY `fk_workflowrelations_statusmaster_id` (`status_master_id`),
   CONSTRAINT `fk_workflowrelations_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`workflow_relations`
 --
 
 /*!40000 ALTER TABLE `workflow_relations` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `workflow_relations` WRITE;
-INSERT INTO `watererp`.`workflow_relations` VALUES  (1,'DIRECTOR',2),
+INSERT INTO `workflow_relations` (`id`,`name`,`status_master_id`) VALUES 
+ (1,'DIRECTOR',2),
  (3,'PROGRAMME DIRECTOR',2),
  (5,'ASSOCIATE DIRECTOR',2),
  (7,'PROJECT DIRECTOR',2),
@@ -4678,9 +4122,6 @@ INSERT INTO `watererp`.`workflow_relations` VALUES  (1,'DIRECTOR',2),
  (20,'BOSS',2),
  (21,'BOSSES BOSS',2),
  (22,'ADMIN',2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `workflow_relations` ENABLE KEYS */;
 
 
@@ -4696,20 +4137,16 @@ CREATE TABLE `workflow_relationships` (
   PRIMARY KEY  (`id`),
   KEY `fk_workflowrelationships_statusmaster_id` (`status_master_id`),
   CONSTRAINT `fk_workflowrelationships_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`workflow_relationships`
 --
 
 /*!40000 ALTER TABLE `workflow_relationships` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `workflow_relationships` WRITE;
-INSERT INTO `watererp`.`workflow_relationships` VALUES  (1,'Relative',2),
+INSERT INTO `workflow_relationships` (`id`,`name`,`status_master_id`) VALUES 
+ (1,'Relative',2),
  (2,'Absolute',3);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `workflow_relationships` ENABLE KEYS */;
 
 
@@ -4728,24 +4165,20 @@ CREATE TABLE `workflow_stage_master` (
   PRIMARY KEY  (`id`),
   KEY `fk_workflowstagemaster_statusmaster_id` (`status_master_id`),
   CONSTRAINT `fk_workflowstagemaster_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`workflow_stage_master`
 --
 
 /*!40000 ALTER TABLE `workflow_stage_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `workflow_stage_master` WRITE;
-INSERT INTO `watererp`.`workflow_stage_master` VALUES  (1,'Recommended','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,2),
+INSERT INTO `workflow_stage_master` (`id`,`name`,`creation_date`,`last_modified_date`,`description`,`status_master_id`) VALUES 
+ (1,'Recommended','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,2),
  (2,'Approved','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,2),
  (3,'Sanctioned','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,2),
  (4,'Waiting','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,2),
  (5,'Forwarded','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,2),
  (6,'Completed','2016-03-21 00:00:00','2016-03-21 00:00:00',NULL,2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `workflow_stage_master` ENABLE KEYS */;
 
 
@@ -4793,58 +4226,47 @@ CREATE TABLE `workflow_type_master` (
   PRIMARY KEY  (`id`),
   KEY `fk_workflowtypemaster_statusmaster_id` (`status_master_id`),
   CONSTRAINT `fk_workflowtypemaster_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`workflow_type_master`
 --
 
 /*!40000 ALTER TABLE `workflow_type_master` DISABLE KEYS */;
-<<<<<<< HEAD
-LOCK TABLES `workflow_type_master` WRITE;
-INSERT INTO `watererp`.`workflow_type_master` VALUES  (1,'GENERIC','2016-03-26 00:00:00','2016-03-26 00:00:00',NULL,2),
+INSERT INTO `workflow_type_master` (`id`,`name`,`creation_date`,`last_modified_date`,`description`,`status_master_id`) VALUES 
+ (1,'GENERIC','2016-03-26 00:00:00','2016-03-26 00:00:00',NULL,2),
  (2,'ROLE','2016-03-26 00:00:00','2016-03-26 00:00:00',NULL,2);
-UNLOCK TABLES;
-=======
->>>>>>> refs/heads/bhaskar2
 /*!40000 ALTER TABLE `workflow_type_master` ENABLE KEYS */;
-<<<<<<< HEAD
 
 
 --
--- Definition of table `watererp`.`zone_master`
+-- Table structure for table `watererp`.`zone_master`
 --
 
-DROP TABLE IF EXISTS `watererp`.`zone_master`;
-CREATE TABLE  `watererp`.`zone_master` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `zone_name` varchar(255) DEFAULT NULL,
-  `zone_code` varchar(255) DEFAULT NULL,
-  `division_master_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+DROP TABLE IF EXISTS `zone_master`;
+CREATE TABLE `zone_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `zone_name` varchar(255) default NULL,
+  `zone_code` varchar(255) default NULL,
+  `division_master_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
   KEY `fk_zonemaster_divisionmaster_id` (`division_master_id`),
   CONSTRAINT `fk_zonemaster_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`zone_master`
 --
 
 /*!40000 ALTER TABLE `zone_master` DISABLE KEYS */;
-LOCK TABLES `zone_master` WRITE;
-INSERT INTO `watererp`.`zone_master` VALUES  (1,'Zone1','ZoneCode1',1),
+INSERT INTO `zone_master` (`id`,`zone_name`,`zone_code`,`division_master_id`) VALUES 
+ (1,'Zone1','ZoneCode1',1),
  (2,'Zone2','ZoneCode2',1),
  (3,'Zone3','ZoneCode3',2),
  (4,'Zone4','ZoneCode4',2),
  (5,'Zone5','ZoneCode5',3),
  (6,'Zone6','ZoneCode6',3);
-UNLOCK TABLES;
 /*!40000 ALTER TABLE `zone_master` ENABLE KEYS */;
-
-
-
-=======
->>>>>>> refs/heads/bhaskar2
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

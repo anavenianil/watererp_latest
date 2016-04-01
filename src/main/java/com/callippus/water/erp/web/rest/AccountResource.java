@@ -7,6 +7,7 @@ import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.repository.PersistentTokenRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.security.SecurityUtils;
+import com.callippus.water.erp.service.BillingService;
 import com.callippus.water.erp.service.MailService;
 import com.callippus.water.erp.service.UserService;
 import com.callippus.water.erp.web.rest.dto.KeyAndPasswordDTO;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
@@ -42,6 +44,9 @@ public class AccountResource {
 
     @Inject
     private UserService userService;
+
+    @Inject
+    private BillingService billingService;
 
     @Inject
     private PersistentTokenRepository persistentTokenRepository;
@@ -103,6 +108,19 @@ public class AccountResource {
         return request.getRemoteUser();
     }
 
+    /**
+     * GET  /account -> get the current user.
+     */
+    @RequestMapping(value = "/billing",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void getBilling() {
+    	billingService.generateBill();
+        return;
+    }
+
+    
     /**
      * GET  /account -> get the current user.
      */
