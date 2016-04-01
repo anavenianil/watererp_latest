@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .factory('TariffCategoryMaster', function ($resource, DateUtils) {
         return $resource('api/tariffCategoryMasters/:id', {}, {
             'query': { method: 'GET', isArray: true},

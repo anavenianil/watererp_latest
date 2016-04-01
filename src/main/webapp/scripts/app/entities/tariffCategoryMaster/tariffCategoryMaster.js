@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('tariffCategoryMaster', {
