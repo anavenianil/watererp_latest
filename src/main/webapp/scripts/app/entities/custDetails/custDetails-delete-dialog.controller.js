@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
 	.controller('CustDetailsDeleteController', function($scope, $uibModalInstance, entity, CustDetails) {
 
         $scope.custDetails = entity;
