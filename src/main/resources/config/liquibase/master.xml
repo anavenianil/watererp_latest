@@ -82,5 +82,6 @@
     <include file="classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330093457_added_entity_PercentageMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160401064028_added_entity_BillOfMaterial.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

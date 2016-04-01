@@ -58,7 +58,7 @@ angular.module('watererpApp')
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
             $scope.isSaving = false;
-            //$state.go("request");
+            $state.go("feasibilityStudy");
         };
 
         var onSaveError = function (result) {
@@ -203,78 +203,3 @@ angular.module('watererpApp')
     
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*'use strict';
-
-angular.module('watererpApp').controller('FeasibilityStudyDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'FeasibilityStudy', 'DivisionMaster', 'ZoneMaster', 'StreetMaster', 'ApplicationTxn', 'User', 'CategoryMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, FeasibilityStudy, DivisionMaster, ZoneMaster, StreetMaster, ApplicationTxn, User, CategoryMaster) {
-
-        $scope.feasibilityStudy = entity;
-        $scope.divisionmasters = DivisionMaster.query();
-        $scope.zonemasters = ZoneMaster.query();
-        $scope.streetmasters = StreetMaster.query();
-        $scope.applicationtxns = ApplicationTxn.query();
-        $scope.users = User.query();
-        $scope.categorymasters = CategoryMaster.query();
-        $scope.load = function(id) {
-            FeasibilityStudy.get({id : id}, function(result) {
-                $scope.feasibilityStudy = result;
-            });
-        };
-
-        var onSaveSuccess = function (result) {
-            $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
-            $uibModalInstance.close(result);
-            $scope.isSaving = false;
-        };
-
-        var onSaveError = function (result) {
-            $scope.isSaving = false;
-        };
-
-        $scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.feasibilityStudy.id != null) {
-                FeasibilityStudy.update($scope.feasibilityStudy, onSaveSuccess, onSaveError);
-            } else {
-                FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError);
-            }
-        };
-
-        $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
-        };
-        $scope.datePickerForCreatedDate = {};
-
-        $scope.datePickerForCreatedDate.status = {
-            opened: false
-        };
-
-        $scope.datePickerForCreatedDateOpen = function($event) {
-            $scope.datePickerForCreatedDate.status.opened = true;
-        };
-        $scope.datePickerForModifiedDate = {};
-
-        $scope.datePickerForModifiedDate.status = {
-            opened: false
-        };
-
-        $scope.datePickerForModifiedDateOpen = function($event) {
-            $scope.datePickerForModifiedDate.status.opened = true;
-        };
-}]);
-*/

@@ -370,4 +370,83 @@
 			</div>
 		</div>
 	</form>
+	
+	<!-- for approval form -->
+	<div id="approveModal" class="modal" name="aproveForm">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form name="editForm" role="form" novalidate>
+					<div class="panel panel-primary">
+						<div class="panel-heading clearfix">
+							<h3 class="panel-title pull-left">Application Approval
+								Details</h3>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true" ng-click="clear()">&times;</button>
+						</div>
+						<div class="list-group">
+							<div class="list-group-item">
+								<div class="modal-body">
+									<jh-alert-error></jh-alert-error>
+									<div class="row">
+										<div class="col-sm-3">
+											<label for="field_applicationTxn">Application No. </label>
+											<input type="text" class="form-control" name="applicationTxn"
+												id="field_applicationTxn" ng-model="applicationTxn.id"
+												disabled />
+										</div>
+										<!-- <div class="col-sm-3">
+											<label for="field_fileNumber">File Number</label> <input
+												type="text" class="form-control" id="field_fileNumber"
+												name="fileNumber" ng-model="applicationTxn.fileNumber"
+												disabled />
+
+										</div> -->
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedDate">Approved
+												Date</label>
+											<div class="form-group">
+												<div class='input-group date' id='field_approvedDate'>
+													<input id="field_approvedDate" type="text"
+														class="form-control" uib-datepicker-popup="{{dateformat}}"
+														ng-model="approvalDetails.approvedDate"
+														is-open="datePickerForApprovedDate.status.opened" /> <span
+														class="input-group-btn">
+														<button type="button" class="btn btn-default"
+															ng-click="datePickerForApprovedDateOpen($event)">
+															<i class="glyphicon glyphicon-calendar"></i>
+														</button>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" for="field_remarks">Remarks</label>
+											<textarea rows="4" cols="50" class="form-control"
+												name="remarks" id="field_remarks"
+												ng-model="applicationTxn.remarks"></textarea>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal" ng-click="clear()">
+										<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+									</button>
+									<button type="button"
+										ng-disabled="editForm.$invalid || isSaving"
+										class="btn btn-primary"
+										ng-click="approvalDetailsSave(applicationTxn.id, applicationTxn.remarks)">
+										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

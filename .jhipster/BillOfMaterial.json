@@ -1,0 +1,44 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "applicationTxn",
+            "otherEntityName": "applicationTxn",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "paymentTypes",
+            "otherEntityName": "paymentTypes",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "paymentMode"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "amount",
+            "fieldType": "Double"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "bankName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "branchName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "checkDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20160401064028",
+    "dto": "no",
+    "service": "no",
+    "pagination": "no"
+}

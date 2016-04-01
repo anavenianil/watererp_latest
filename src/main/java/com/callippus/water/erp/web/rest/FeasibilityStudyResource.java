@@ -19,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.FeasibilityStudy;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -35,6 +39,15 @@ public class FeasibilityStudyResource {
         
     @Inject
     private FeasibilityStudyRepository feasibilityStudyRepository;
+    
+    @Inject
+    private WorkflowService workflowService;
+    
+    @Inject
+    private ApplicationTxnRepository applicationTxnRepository;
+    
+    @Inject
+    private ApplicationTxnWorkflowService applicationTxnWorkflowService;
     
     /**
      * POST  /feasibilityStudys -> Create a new feasibilityStudy.
@@ -52,7 +65,31 @@ public class FeasibilityStudyResource {
         feasibilityStudy.setCreatedDate(now);
         feasibilityStudy.setModifiedDate(now);
         feasibilityStudy.setStatus(0);
+        
         FeasibilityStudy result = feasibilityStudyRepository.save(feasibilityStudy);
+        
+        //to save application in workflow history
+        try{
+        	workflowService.getUserDetails();
+    		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(feasibilityStudy.getApplicationTxn().getId());
+    	    //workflowService.setRemarks(remarks);  
+    	    Integer status = applicationTxn.getStatus();
+    	    status +=1;
+    	    applicationTxn.setStatus(status);
+            workflowService.setRequestStatus(status);
+            applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
+            /*if(workflowService.getRequestStatus() == 2){
+            	applicationTxnWorkflowService.updateApplicationTxn(id);        	
+            }*/
+            applicationTxnRepository.save(applicationTxn);
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
+        
+        
+        
+        
         
         return ResponseEntity.created(new URI("/api/feasibilityStudys/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("feasibilityStudy", result.getId().toString()))
