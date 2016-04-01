@@ -22,7 +22,9 @@
                     <th><span>Amount</span></th>
                     <th><span>BankName</span></th>
                     <th><span>BranchName</span></th>
-                    <th><span>CheckDate</span></th>
+                    <th><span>CheckOrDdDate</span></th>
+                    <th><span>CheckOrDdNo</span></th>
+                    <th><span>BillDate</span></th>
                     <th><span>applicationTxn</span></th>
                     <th><span>paymentTypes</span></th>
                     <th></th>
@@ -34,7 +36,9 @@
                     <td>{{billOfMaterial.amount}}</td>
                     <td>{{billOfMaterial.bankName}}</td>
                     <td>{{billOfMaterial.branchName}}</td>
-                        <td>{{billOfMaterial.checkDate | date:'mediumDate'}}</td>
+                        <td>{{billOfMaterial.checkOrDdDate | date:'mediumDate'}}</td>
+                    <td>{{billOfMaterial.checkOrDdNo}}</td>
+                        <td>{{billOfMaterial.billDate | date:'mediumDate'}}</td>
                     <td>
                         <a ui-sref="applicationTxn.detail({id:billOfMaterial.applicationTxn.id})">{{billOfMaterial.applicationTxn.id}}</a>
                     </td>

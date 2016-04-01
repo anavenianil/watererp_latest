@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('billOfMaterial.new', {
+            /*.state('billOfMaterial.new', {
                 parent: 'billOfMaterial',
                 url: '/new',
                 data: {
@@ -55,7 +55,9 @@ angular.module('watererpApp')
                                     amount: null,
                                     bankName: null,
                                     branchName: null,
-                                    checkDate: null,
+                                    checkOrDdDate: null,
+                                    checkOrDdNo: null,
+                                    billDate: null,
                                     id: null
                                 };
                             }
@@ -66,8 +68,8 @@ angular.module('watererpApp')
                         $state.go('billOfMaterial');
                     })
                 }]
-            })
-            .state('billOfMaterial.edit', {
+            })*/
+            /*.state('billOfMaterial.edit', {
                 parent: 'billOfMaterial',
                 url: '/{id}/edit',
                 data: {
@@ -89,7 +91,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('billOfMaterial.delete', {
                 parent: 'billOfMaterial',
                 url: '/{id}/delete',
@@ -112,5 +114,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('billOfMaterial.new', {
+                parent: 'billOfMaterial',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'BillOfMaterials'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-dialog.html',
+                        controller: 'BillOfMaterialDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('billOfMaterial.edit', {
+                parent: 'billOfMaterial',
+                url: '/edit/:id',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'BillOfMaterials'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-dialog.html',
+                        controller: 'BillOfMaterialDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

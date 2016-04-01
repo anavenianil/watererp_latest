@@ -141,7 +141,9 @@ CREATE TABLE  `watererp`.`bill_of_material` (
   `amount` double DEFAULT NULL,
   `bank_name` varchar(255) DEFAULT NULL,
   `branch_name` varchar(255) DEFAULT NULL,
-  `check_date` date DEFAULT NULL,
+  `check_or_dd_date` date DEFAULT NULL,
+  `check_or_dd_no` varchar(255) DEFAULT NULL,
+  `bill_date` date DEFAULT NULL,
   `application_txn_id` bigint(20) DEFAULT NULL,
   `payment_types_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -149,7 +151,7 @@ CREATE TABLE  `watererp`.`bill_of_material` (
   KEY `fk_billofmaterial_paymenttypes_id` (`payment_types_id`),
   CONSTRAINT `fk_billofmaterial_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
   CONSTRAINT `fk_billofmaterial_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_of_material`
@@ -157,6 +159,8 @@ CREATE TABLE  `watererp`.`bill_of_material` (
 
 /*!40000 ALTER TABLE `bill_of_material` DISABLE KEYS */;
 LOCK TABLES `bill_of_material` WRITE;
+INSERT INTO `watererp`.`bill_of_material` VALUES  (1,346347,'sbi','kphb','2016-04-01','544656','2016-04-01',38,1),
+ (2,654654,'icici','kphb','2016-04-01','65456','2016-04-01',38,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `bill_of_material` ENABLE KEYS */;
 
@@ -425,7 +429,7 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-03-30 15:44:41',82,'EXECUTED','7:f7c7a5118cd1b8dad31bfb61a4aecfff','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-03-30 15:58:29',84,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160330093457','jhipster','classpath:config/liquibase/changelog/20160330093457_added_entity_PercentageMaster.xml','2016-03-30 19:02:55',85,'EXECUTED','7:939ffd4e62fb70f2288fd5eb2055b778','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_BillOfMaterial.xml','2016-04-01 12:12:28',86,'EXECUTED','7:e275da20a37792d129cde6828a7f368c','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_BillOfMaterial.xml','2016-04-01 13:00:10',86,'EXECUTED','7:4bc9d2b3db96ca1d16d623ad6adb5f8a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -2102,7 +2106,7 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+kuZ8fh+MT05jeTHFp5gmw==
  ('Hw5vcTOmIcEuAJ+K5/ttTg==',3,'o/B/WvzQojyU6CRPqa0kug==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('IgMAY7/2pqUwaRD9fRqtZA==',5,'R/v6AK3DT+5hKspBsE0QdQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('Kb8YebfE7JAJymtqjh/HBQ==',3,'z+9kxsPMTor39cwMVG6yMQ==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('Kb8YebfE7JAJymtqjh/HBQ==',3,'O/9YDo+EqyrDpaCN4C6VLw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KU6VZmBHcK3RKoGgwhLDcA==',3,'CtWXmv/L/eFLnOkikbadrw==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ltSsrr4LGe85jyi2xaM+GQ==',5,'O2cmSBS0fFhBkpiM4zdCkA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),

@@ -22,7 +22,9 @@ angular.module('watererpApp')
                 amount: null,
                 bankName: null,
                 branchName: null,
-                checkDate: null,
+                checkOrDdDate: null,
+                checkOrDdNo: null,
+                billDate: null,
                 id: null
             };
         };

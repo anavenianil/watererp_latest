@@ -27,7 +27,11 @@
             
             <column name="branch_name" type="varchar(255)"/>
             
-            <column name="check_date" type="date"/>
+            <column name="check_or_dd_date" type="date"/>
+            
+            <column name="check_or_dd_no" type="varchar(255)"/>
+            
+            <column name="bill_date" type="date"/>
             
             <column name="application_txn_id" type="bigint"/>
             <column name="payment_types_id" type="bigint"/>

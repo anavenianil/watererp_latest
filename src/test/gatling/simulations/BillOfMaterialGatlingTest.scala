@@ -67,7 +67,7 @@ class BillOfMaterialGatlingTest extends Simulation {
             .exec(http("Create new billOfMaterial")
             .post("/api/billOfMaterials")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "amount":null, "bankName":"SAMPLE_TEXT", "branchName":"SAMPLE_TEXT", "checkDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "amount":null, "bankName":"SAMPLE_TEXT", "branchName":"SAMPLE_TEXT", "checkOrDdDate":"2020-01-01T00:00:00.000Z", "checkOrDdNo":"SAMPLE_TEXT", "billDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_billOfMaterial_url")))
             .pause(10)

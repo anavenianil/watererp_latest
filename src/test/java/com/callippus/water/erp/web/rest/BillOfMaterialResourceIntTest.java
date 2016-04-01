@@ -51,8 +51,13 @@ public class BillOfMaterialResourceIntTest {
     private static final String DEFAULT_BRANCH_NAME = "AAAAA";
     private static final String UPDATED_BRANCH_NAME = "BBBBB";
 
-    private static final LocalDate DEFAULT_CHECK_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CHECK_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_CHECK_OR_DD_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CHECK_OR_DD_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_CHECK_OR_DD_NO = "AAAAA";
+    private static final String UPDATED_CHECK_OR_DD_NO = "BBBBB";
+
+    private static final LocalDate DEFAULT_BILL_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_BILL_DATE = LocalDate.now(ZoneId.systemDefault());
 
     @Inject
     private BillOfMaterialRepository billOfMaterialRepository;
@@ -83,7 +88,9 @@ public class BillOfMaterialResourceIntTest {
         billOfMaterial.setAmount(DEFAULT_AMOUNT);
         billOfMaterial.setBankName(DEFAULT_BANK_NAME);
         billOfMaterial.setBranchName(DEFAULT_BRANCH_NAME);
-        billOfMaterial.setCheckDate(DEFAULT_CHECK_DATE);
+        billOfMaterial.setCheckOrDdDate(DEFAULT_CHECK_OR_DD_DATE);
+        billOfMaterial.setCheckOrDdNo(DEFAULT_CHECK_OR_DD_NO);
+        billOfMaterial.setBillDate(DEFAULT_BILL_DATE);
     }
 
     @Test
@@ -105,7 +112,9 @@ public class BillOfMaterialResourceIntTest {
         assertThat(testBillOfMaterial.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testBillOfMaterial.getBankName()).isEqualTo(DEFAULT_BANK_NAME);
         assertThat(testBillOfMaterial.getBranchName()).isEqualTo(DEFAULT_BRANCH_NAME);
-        assertThat(testBillOfMaterial.getCheckDate()).isEqualTo(DEFAULT_CHECK_DATE);
+        assertThat(testBillOfMaterial.getCheckOrDdDate()).isEqualTo(DEFAULT_CHECK_OR_DD_DATE);
+        assertThat(testBillOfMaterial.getCheckOrDdNo()).isEqualTo(DEFAULT_CHECK_OR_DD_NO);
+        assertThat(testBillOfMaterial.getBillDate()).isEqualTo(DEFAULT_BILL_DATE);
     }
 
     @Test
@@ -122,7 +131,9 @@ public class BillOfMaterialResourceIntTest {
                 .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.doubleValue())))
                 .andExpect(jsonPath("$.[*].bankName").value(hasItem(DEFAULT_BANK_NAME.toString())))
                 .andExpect(jsonPath("$.[*].branchName").value(hasItem(DEFAULT_BRANCH_NAME.toString())))
-                .andExpect(jsonPath("$.[*].checkDate").value(hasItem(DEFAULT_CHECK_DATE.toString())));
+                .andExpect(jsonPath("$.[*].checkOrDdDate").value(hasItem(DEFAULT_CHECK_OR_DD_DATE.toString())))
+                .andExpect(jsonPath("$.[*].checkOrDdNo").value(hasItem(DEFAULT_CHECK_OR_DD_NO.toString())))
+                .andExpect(jsonPath("$.[*].billDate").value(hasItem(DEFAULT_BILL_DATE.toString())));
     }
 
     @Test
@@ -139,7 +150,9 @@ public class BillOfMaterialResourceIntTest {
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.bankName").value(DEFAULT_BANK_NAME.toString()))
             .andExpect(jsonPath("$.branchName").value(DEFAULT_BRANCH_NAME.toString()))
-            .andExpect(jsonPath("$.checkDate").value(DEFAULT_CHECK_DATE.toString()));
+            .andExpect(jsonPath("$.checkOrDdDate").value(DEFAULT_CHECK_OR_DD_DATE.toString()))
+            .andExpect(jsonPath("$.checkOrDdNo").value(DEFAULT_CHECK_OR_DD_NO.toString()))
+            .andExpect(jsonPath("$.billDate").value(DEFAULT_BILL_DATE.toString()));
     }
 
     @Test
@@ -162,7 +175,9 @@ public class BillOfMaterialResourceIntTest {
         billOfMaterial.setAmount(UPDATED_AMOUNT);
         billOfMaterial.setBankName(UPDATED_BANK_NAME);
         billOfMaterial.setBranchName(UPDATED_BRANCH_NAME);
-        billOfMaterial.setCheckDate(UPDATED_CHECK_DATE);
+        billOfMaterial.setCheckOrDdDate(UPDATED_CHECK_OR_DD_DATE);
+        billOfMaterial.setCheckOrDdNo(UPDATED_CHECK_OR_DD_NO);
+        billOfMaterial.setBillDate(UPDATED_BILL_DATE);
 
         restBillOfMaterialMockMvc.perform(put("/api/billOfMaterials")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -176,7 +191,9 @@ public class BillOfMaterialResourceIntTest {
         assertThat(testBillOfMaterial.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testBillOfMaterial.getBankName()).isEqualTo(UPDATED_BANK_NAME);
         assertThat(testBillOfMaterial.getBranchName()).isEqualTo(UPDATED_BRANCH_NAME);
-        assertThat(testBillOfMaterial.getCheckDate()).isEqualTo(UPDATED_CHECK_DATE);
+        assertThat(testBillOfMaterial.getCheckOrDdDate()).isEqualTo(UPDATED_CHECK_OR_DD_DATE);
+        assertThat(testBillOfMaterial.getCheckOrDdNo()).isEqualTo(UPDATED_CHECK_OR_DD_NO);
+        assertThat(testBillOfMaterial.getBillDate()).isEqualTo(UPDATED_BILL_DATE);
     }
 
     @Test

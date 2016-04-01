@@ -33,7 +33,17 @@
         },
         {
             "fieldId": 4,
-            "fieldName": "checkDate",
+            "fieldName": "checkOrDdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "checkOrDdNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "billDate",
             "fieldType": "LocalDate"
         }
     ],

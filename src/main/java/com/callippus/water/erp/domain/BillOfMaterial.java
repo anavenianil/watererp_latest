@@ -31,8 +31,14 @@ public class BillOfMaterial implements Serializable {
     @Column(name = "branch_name")
     private String branchName;
     
-    @Column(name = "check_date")
-    private LocalDate checkDate;
+    @Column(name = "check_or_dd_date")
+    private LocalDate checkOrDdDate;
+    
+    @Column(name = "check_or_dd_no")
+    private String checkOrDdNo;
+    
+    @Column(name = "bill_date")
+    private LocalDate billDate;
     
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
@@ -74,12 +80,28 @@ public class BillOfMaterial implements Serializable {
         this.branchName = branchName;
     }
 
-    public LocalDate getCheckDate() {
-        return checkDate;
+    public LocalDate getCheckOrDdDate() {
+        return checkOrDdDate;
     }
     
-    public void setCheckDate(LocalDate checkDate) {
-        this.checkDate = checkDate;
+    public void setCheckOrDdDate(LocalDate checkOrDdDate) {
+        this.checkOrDdDate = checkOrDdDate;
+    }
+
+    public String getCheckOrDdNo() {
+        return checkOrDdNo;
+    }
+    
+    public void setCheckOrDdNo(String checkOrDdNo) {
+        this.checkOrDdNo = checkOrDdNo;
+    }
+
+    public LocalDate getBillDate() {
+        return billDate;
+    }
+    
+    public void setBillDate(LocalDate billDate) {
+        this.billDate = billDate;
     }
 
     public ApplicationTxn getApplicationTxn() {
@@ -125,7 +147,9 @@ public class BillOfMaterial implements Serializable {
             ", amount='" + amount + "'" +
             ", bankName='" + bankName + "'" +
             ", branchName='" + branchName + "'" +
-            ", checkDate='" + checkDate + "'" +
+            ", checkOrDdDate='" + checkOrDdDate + "'" +
+            ", checkOrDdNo='" + checkOrDdNo + "'" +
+            ", billDate='" + billDate + "'" +
             '}';
     }
 }

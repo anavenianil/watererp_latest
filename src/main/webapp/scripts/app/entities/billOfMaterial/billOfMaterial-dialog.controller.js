@@ -1,22 +1,26 @@
 'use strict';
 
 angular.module('watererpApp').controller('BillOfMaterialDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillOfMaterial', 'ApplicationTxn', 'PaymentTypes',
-        function($scope, $stateParams, $uibModalInstance, entity, BillOfMaterial, ApplicationTxn, PaymentTypes) {
+        function($scope, $state, $stateParams, BillOfMaterial, ApplicationTxn, PaymentTypes) {
 
-        $scope.billOfMaterial = entity;
+        $scope.billOfMaterial = {};
         $scope.applicationtxns = ApplicationTxn.query();
         $scope.paymenttypess = PaymentTypes.query();
+        
         $scope.load = function(id) {
             BillOfMaterial.get({id : id}, function(result) {
                 $scope.billOfMaterial = result;
             });
         };
+        
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id);
+        }
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:billOfMaterialUpdate', result);
-            $uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('billOfMaterial');
         };
 
         var onSaveError = function (result) {
@@ -35,13 +39,22 @@ angular.module('watererpApp').controller('BillOfMaterialDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.datePickerForCheckDate = {};
+        $scope.datePickerForCheckOrDdDate = {};
 
-        $scope.datePickerForCheckDate.status = {
+        $scope.datePickerForCheckOrDdDate.status = {
             opened: false
         };
 
-        $scope.datePickerForCheckDateOpen = function($event) {
-            $scope.datePickerForCheckDate.status.opened = true;
+        $scope.datePickerForCheckOrDdDateOpen = function($event) {
+            $scope.datePickerForCheckOrDdDate.status.opened = true;
         };
-}]);
+        $scope.datePickerForBillDate = {};
+
+        $scope.datePickerForBillDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForBillDateOpen = function($event) {
+            $scope.datePickerForBillDate.status.opened = true;
+        };
+});

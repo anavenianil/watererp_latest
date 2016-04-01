@@ -8,21 +8,24 @@ angular.module('watererpApp')
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
-                    data.checkDate = DateUtils.convertLocaleDateFromServer(data.checkDate);
+                    data.checkOrDdDate = DateUtils.convertLocaleDateFromServer(data.checkOrDdDate);
+                    data.billDate = DateUtils.convertLocaleDateFromServer(data.billDate);
                     return data;
                 }
             },
             'update': {
                 method: 'PUT',
                 transformRequest: function (data) {
-                    data.checkDate = DateUtils.convertLocaleDateToServer(data.checkDate);
+                    data.checkOrDdDate = DateUtils.convertLocaleDateToServer(data.checkOrDdDate);
+                    data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
                     return angular.toJson(data);
                 }
             },
             'save': {
                 method: 'POST',
                 transformRequest: function (data) {
-                    data.checkDate = DateUtils.convertLocaleDateToServer(data.checkDate);
+                    data.checkOrDdDate = DateUtils.convertLocaleDateToServer(data.checkOrDdDate);
+                    data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
                     return angular.toJson(data);
                 }
             }
