@@ -1,0 +1,19 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "versionLow",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "versionHigh",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160315060107",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

@@ -176,7 +176,6 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 			message = CPSConstants.FAILED;
 			throw e;
 		}
-
 		return message;
 	}
 
@@ -191,7 +190,6 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 
 		message = super.declinedRequest(workflowService.getHistoryID(),
 				workflowService.getIpAddress(), workflowService.getRemarks());
-
 	}
 
 	@SuppressWarnings("unchecked")

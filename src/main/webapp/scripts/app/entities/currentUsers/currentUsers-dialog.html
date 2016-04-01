@@ -1,0 +1,105 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+	<!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myCurrentUsersLabel">Create or edit a CurrentUsers</h4>
+    </div> -->
+
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Current User Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="id">ID</label> <input type="text"
+								class="form-control" id="id" name="id"
+								ng-model="currentUsers.id" readonly />
+						</div>
+						<div class="col-sm-6">
+							<label class="control-label" for="field_terminalId">Terminal
+								Id</label> <input type="text" class="form-control" name="terminalId"
+								id="field_terminalId" ng-model="currentUsers.terminalId" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label class="control-label" for="field_meterReaderId">Meter
+								Reader Id</label> <input type="text" class="form-control"
+								name="meterReaderId" id="field_meterReaderId"
+								ng-model="currentUsers.meterReaderId" />
+						</div>
+						<div class="col-sm-6">
+							<label class="control-label" for="field_userId">User Id</label> <input
+								type="text" class="form-control" name="userId" id="field_userId"
+								ng-model="currentUsers.userId" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label class="control-label" for="field_requestType">Request
+								Type</label> <input type="text" class="form-control" name="requestType"
+								id="field_requestType" ng-model="currentUsers.requestType" />
+						</div>
+								        
+		    <div class="col-sm-6">
+            <label class="control-label" for="field_loginTime">Login Time</label>
+            <div class="form-group">
+            <div class='input-group date' id='field_loginTime'>            
+            <input id="field_loginTime" type="text" class="form-control" ng-click="datePickerForLoginTimeOpen($event)" uib-datepicker-popup="{{dateformat}}" ng-model="currentUsers.loginTime" is-open="datePickerForLoginTime.status.opened"/>
+            <span class="input-group-btn">
+            <!-- <span class="input-group-btn">input-group-addon -->
+                <button type="button" class="btn btn-default" ng-click="datePickerForLoginTimeOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            <!-- </span> -->
+            </span>
+        	</div>
+        	</div>
+        	</div> 
+        	
+        	
+        	<!-- BACKUP
+        	
+        	<div class="col-sm-6">
+            <label class="control-label" for="field_loginTime">Login Time</label>
+            <div class="form-group">
+            <div class='input-group date' id='field_loginTime'>            
+            <input id="field_loginTime" type="text" class="form-control" ng-click="datePickerForLoginTimeOpen($event)" uib-datepicker-popup="{{dateformat}}" ng-model="currentUsers.loginTime" is-open="datePickerForLoginTime.status.opened"/>
+            <span class="input-group-btn">
+            <span class="input-group-btn">input-group-addon
+                <button type="button" class="btn btn-default" ng-click="datePickerForLoginTimeOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            </span>
+        	</div>
+        	</div>
+        	</div> -->
+        	    
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<label class="control-label" for="field_ip">Ip</label> <input
+						type="text" class="form-control" name="ip" id="field_ip"
+						ng-model="currentUsers.ip" />
+				</div>
+			</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

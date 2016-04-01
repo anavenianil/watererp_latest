@@ -70,7 +70,10 @@ angular.module('watererpApp')
             if ($scope.feasibilityStudy.id != null) {
                 FeasibilityStudy.update($scope.feasibilityStudy, onSaveSuccess, onSaveError);
             } else {
-                FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError);
+                FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError,
+                		function(){
+                			$scope.clear();
+                });
             }
         };
 

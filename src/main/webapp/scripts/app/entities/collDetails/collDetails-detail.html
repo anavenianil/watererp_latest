@@ -1,0 +1,198 @@
+
+<div>
+    <h2><span>CollDetails</span> {{collDetails.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>ReversalRef</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.reversalRef}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ReceiptNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.receiptNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ReceiptAmt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.receiptAmt}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ReceiptDt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.receiptDt | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ReceiptTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.receiptTime}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ReceiptMode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.receiptMode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InstrNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.instrNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InstrDt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.instrDt | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InstrIssuer</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.instrIssuer}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SvrStatus</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.svrStatus}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Can</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.can}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ConsName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.consName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TerminalId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.terminalId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CollTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.collTime | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TxnStatus</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.txnStatus}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterReaderId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.meterReaderId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>UserId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.userId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Remarks</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.remarks}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SettlementId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.settlementId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ExtSettlementId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.extSettlementId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Lat</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.lat}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LongI</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.longI}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
