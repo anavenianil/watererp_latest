@@ -1,0 +1,220 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myBillDetailsLabel">Create or edit a BillDetails</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="billDetails.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_can">Can</label>
+            <input type="text" class="form-control" name="can" id="field_can"
+                    ng-model="billDetails.can"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bill_number">Bill_number</label>
+            <input type="text" class="form-control" name="bill_number" id="field_bill_number"
+                    ng-model="billDetails.bill_number"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bill_date">Bill_date</label>
+            <input id="field_bill_date" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="billDetails.bill_date" is-open="datePickerForBill_date.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForBill_dateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.bill_date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.bill_date.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bill_time">Bill_time</label>
+            <input type="text" class="form-control" name="bill_time" id="field_bill_time"
+                    ng-model="billDetails.bill_time"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_meter_make">Meter_make</label>
+            <input type="text" class="form-control" name="meter_make" id="field_meter_make"
+                    ng-model="billDetails.meter_make"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_current_bill_type">Current_bill_type</label>
+            <input type="text" class="form-control" name="current_bill_type" id="field_current_bill_type"
+                    ng-model="billDetails.current_bill_type"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_from_month">From_month</label>
+            <input type="text" class="form-control" name="from_month" id="field_from_month"
+                    ng-model="billDetails.from_month"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_to_month">To_month</label>
+            <input type="text" class="form-control" name="to_month" id="field_to_month"
+                    ng-model="billDetails.to_month"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_meter_fix_date">Meter_fix_date</label>
+            <input type="text" class="form-control" name="meter_fix_date" id="field_meter_fix_date"
+                    ng-model="billDetails.meter_fix_date"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_initial_reading">Initial_reading</label>
+            <input type="text" class="form-control" name="initial_reading" id="field_initial_reading"
+                    ng-model="billDetails.initial_reading"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_present_reading">Present_reading</label>
+            <input type="text" class="form-control" name="present_reading" id="field_present_reading"
+                    ng-model="billDetails.present_reading"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_units">Units</label>
+            <input type="text" class="form-control" name="units" id="field_units"
+                    ng-model="billDetails.units"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_water_cess">Water_cess</label>
+            <input type="text" class="form-control" name="water_cess" id="field_water_cess"
+                    ng-model="billDetails.water_cess"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sewerage_cess">Sewerage_cess</label>
+            <input type="text" class="form-control" name="sewerage_cess" id="field_sewerage_cess"
+                    ng-model="billDetails.sewerage_cess"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_service_charge">Service_charge</label>
+            <input type="text" class="form-control" name="service_charge" id="field_service_charge"
+                    ng-model="billDetails.service_charge"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_meter_service_charge">Meter_service_charge</label>
+            <input type="text" class="form-control" name="meter_service_charge" id="field_meter_service_charge"
+                    ng-model="billDetails.meter_service_charge"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_total_amount">Total_amount</label>
+            <input type="number" class="form-control" name="total_amount" id="field_total_amount"
+                    ng-model="billDetails.total_amount"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_net_payable_amount">Net_payable_amount</label>
+            <input type="number" class="form-control" name="net_payable_amount" id="field_net_payable_amount"
+                    ng-model="billDetails.net_payable_amount"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_telephone_no">Telephone_no</label>
+            <input type="text" class="form-control" name="telephone_no" id="field_telephone_no"
+                    ng-model="billDetails.telephone_no"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_meter_status">Meter_status</label>
+            <input type="text" class="form-control" name="meter_status" id="field_meter_status"
+                    ng-model="billDetails.meter_status"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mc_met_reader_code">Mc_met_reader_code</label>
+            <input type="text" class="form-control" name="mc_met_reader_code" id="field_mc_met_reader_code"
+                    ng-model="billDetails.mc_met_reader_code"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bill_flag">Bill_flag</label>
+            <input type="text" class="form-control" name="bill_flag" id="field_bill_flag"
+                    ng-model="billDetails.bill_flag"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_svr_status">Svr_status</label>
+            <input type="text" class="form-control" name="svr_status" id="field_svr_status"
+                    ng-model="billDetails.svr_status"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_terminal_id">Terminal_id</label>
+            <input type="text" class="form-control" name="terminal_id" id="field_terminal_id"
+                    ng-model="billDetails.terminal_id"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_meter_reader_id">Meter_reader_id</label>
+            <input type="text" class="form-control" name="meter_reader_id" id="field_meter_reader_id"
+                    ng-model="billDetails.meter_reader_id"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_user_id">User_id</label>
+            <input type="text" class="form-control" name="user_id" id="field_user_id"
+                    ng-model="billDetails.user_id"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mobile_no">Mobile_no</label>
+            <input type="text" class="form-control" name="mobile_no" id="field_mobile_no"
+                    ng-model="billDetails.mobile_no"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_notice_no">Notice_no</label>
+            <input type="text" class="form-control" name="notice_no" id="field_notice_no"
+                    ng-model="billDetails.notice_no"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lat">Lat</label>
+            <input type="text" class="form-control" name="lat" id="field_lat"
+                    ng-model="billDetails.lat"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_longI">LongI</label>
+            <input type="text" class="form-control" name="longI" id="field_longI"
+                    ng-model="billDetails.longI"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_nometer_amt">Nometer_amt</label>
+            <input type="text" class="form-control" name="nometer_amt" id="field_nometer_amt"
+                    ng-model="billDetails.nometer_amt"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,73 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "tariffMaster",
+            "otherEntityName": "tariffMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+	{
+            "relationshipId": 2,
+            "relationshipName": "tariffTypeMaster",
+            "otherEntityName": "tariffTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        
+	{
+            "fieldId": 1,
+            "fieldName": "tariffDesc",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "slabMin",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "slabMax",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "rate",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "minKL",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "minUnmeteredKL",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160401094431",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

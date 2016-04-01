@@ -67,7 +67,7 @@ class TariffCategoryMasterGatlingTest extends Simulation {
             .exec(http("Create new tariffCategoryMaster")
             .post("/api/tariffCategoryMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "tariffName":"SAMPLE_TEXT", "tariffUnit":"0", "tariffValue":null}""")).asJSON
+            .body(StringBody("""{"id":null, "tariffCategory":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_tariffCategoryMaster_url")))
             .pause(10)

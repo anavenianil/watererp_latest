@@ -21,16 +21,8 @@ public class TariffCategoryMaster implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "tariff_name", nullable = false)
-    private String tariffName;
-    
-    @NotNull
-    @Column(name = "tariff_unit", nullable = false)
-    private Integer tariffUnit;
-    
-    @NotNull
-    @Column(name = "tariff_value", nullable = false)
-    private Float tariffValue;
+    @Column(name = "tariff_category", nullable = false)
+    private String tariffCategory;
     
     public Long getId() {
         return id;
@@ -40,28 +32,12 @@ public class TariffCategoryMaster implements Serializable {
         this.id = id;
     }
 
-    public String getTariffName() {
-        return tariffName;
+    public String getTariffCategory() {
+        return tariffCategory;
     }
     
-    public void setTariffName(String tariffName) {
-        this.tariffName = tariffName;
-    }
-
-    public Integer getTariffUnit() {
-        return tariffUnit;
-    }
-    
-    public void setTariffUnit(Integer tariffUnit) {
-        this.tariffUnit = tariffUnit;
-    }
-
-    public Float getTariffValue() {
-        return tariffValue;
-    }
-    
-    public void setTariffValue(Float tariffValue) {
-        this.tariffValue = tariffValue;
+    public void setTariffCategory(String tariffCategory) {
+        this.tariffCategory = tariffCategory;
     }
 
     @Override
@@ -88,9 +64,7 @@ public class TariffCategoryMaster implements Serializable {
     public String toString() {
         return "TariffCategoryMaster{" +
             "id=" + id +
-            ", tariffName='" + tariffName + "'" +
-            ", tariffUnit='" + tariffUnit + "'" +
-            ", tariffValue='" + tariffValue + "'" +
+            ", tariffCategory='" + tariffCategory + "'" +
             '}';
     }
 }

@@ -1,0 +1,92 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myTariffMasterLabel">Create or edit a TariffMaster</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="tariffMaster.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_tariffName">TariffName</label>
+            <input type="text" class="form-control" name="tariffName" id="field_tariffName"
+                    ng-model="tariffMaster.tariffName"
+                    required />
+            <div ng-show="editForm.tariffName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.tariffName.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_validFrom">ValidFrom</label>
+            <input id="field_validFrom" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="tariffMaster.validFrom" is-open="datePickerForValidFrom.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForValidFromOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.validFrom.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.validFrom.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.validFrom.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_validTo">ValidTo</label>
+            <input id="field_validTo" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="tariffMaster.validTo" is-open="datePickerForValidTo.status.opened"
+            required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForValidToOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <div ng-show="editForm.validTo.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.validTo.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.validTo.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_active">Active</label>
+            <input type="text" class="form-control" name="active" id="field_active"
+                    ng-model="tariffMaster.active"
+                    required />
+            <div ng-show="editForm.active.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.active.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_tariffCategoryMaster">tariffCategoryMaster</label>
+            <select class="form-control" id="field_tariffCategoryMaster" name="tariffCategoryMaster" ng-model="tariffMaster.tariffCategoryMaster" ng-options="tariffCategoryMaster as tariffCategoryMaster.id for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

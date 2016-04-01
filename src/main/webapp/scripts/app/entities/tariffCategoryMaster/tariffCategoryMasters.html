@@ -19,18 +19,14 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="tariffName"><span>TariffName</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="tariffUnit"><span>TariffUnit</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="tariffValue"><span>TariffValue</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffCategory"><span>TariffCategory</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="tariffCategoryMaster in tariffCategoryMasters track by tariffCategoryMaster.id">
                     <td><a ui-sref="tariffCategoryMaster.detail({id:tariffCategoryMaster.id})">{{tariffCategoryMaster.id}}</a></td>
-                    <td>{{tariffCategoryMaster.tariffName}}</td>
-                    <td>{{tariffCategoryMaster.tariffUnit}}</td>
-                    <td>{{tariffCategoryMaster.tariffValue}}</td>
+                    <td>{{tariffCategoryMaster.tariffCategory}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

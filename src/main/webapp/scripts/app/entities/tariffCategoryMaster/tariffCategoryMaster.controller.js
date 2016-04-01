@@ -34,9 +34,7 @@ angular.module('watererpApp')
 
         $scope.clear = function () {
             $scope.tariffCategoryMaster = {
-                tariffName: null,
-                tariffUnit: null,
-                tariffValue: null,
+                tariffCategory: null,
                 id: null
             };
         };
