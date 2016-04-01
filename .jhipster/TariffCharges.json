@@ -48,9 +48,17 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "minKL",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
-    "changelogDate": "20160311094431",
+    "changelogDate": "20160401094431",
     "dto": "no",
     "service": "no",
     "pagination": "infinite-scroll"

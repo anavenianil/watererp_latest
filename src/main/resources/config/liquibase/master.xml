@@ -74,6 +74,6 @@
     <include file="classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160311094431_added_entity_TariffMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160311094431_added_entity_TariffTypeMaster.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCharges.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160401094431_added_entity_TariffCharges.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

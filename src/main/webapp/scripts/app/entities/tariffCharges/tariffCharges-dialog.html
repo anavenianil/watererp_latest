@@ -73,6 +73,22 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minKL">MinKL</label>
+            <input type="number" class="form-control" name="minKL" id="field_minKL"
+                    ng-model="tariffCharges.minKL"
+                    required />
+            <div ng-show="editForm.minKL.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.minKL.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.minKL.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
 
         <div class="form-group">
             <label for="field_tariffMaster">tariffMaster</label>

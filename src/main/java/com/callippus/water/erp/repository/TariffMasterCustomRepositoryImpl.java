@@ -54,18 +54,21 @@ TariffMasterCustomRepository {
 	}
 
 	
-	public List<TariffMaster> findTariffs(ZonedDateTime validFrom, ZonedDateTime validTo, float avgKL){
-		String sql = "SELECT a.id, "
+	public List<java.util.Map<String, Object>> findTariffs(ZonedDateTime validFrom, ZonedDateTime validTo, float avgKL){
+		String sql = "SELECT tariff_type_master_id,case when tariff_type_master_id=1 then sum(rate * months * avg_kl) else "
+				+ " sum(rate * months) end amount FROM (SELECT a.id tariff_master_id, "
 				+ "tariff_name, "
 				+ "valid_from, "
 				+ "valid_to, "
 				+ "tariff_category_master_id, "
 				+ "TIMESTAMPDIFF(MONTH,valid_from,valid_to) months, "
-				+ "t.id, "
+				+ "t.id tariff_charges_id, "
 				+ "t.tariff_desc, "
 				+ "t.slab_min, "
 				+ "t.slab_max, "
-				+ "t.rate, (t.rate * TIMESTAMPDIFF(MONTH,valid_from,valid_to)) amount from "
+				+ "t.rate , "
+				+ "case when t.min_kl > ? then t.min_kl else 10 end avg_kl,"
+				+ "t.tariff_type_master_id from "
 				+ "(SELECT id,tariff_name,(CASE WHEN unix_timestamp(valid_from) < ? THEN FROM_UNIXTIME(?) ELSE valid_from END) valid_from,(CASE WHEN unix_timestamp(valid_to) > ? "
 				+ "THEN FROM_UNIXTIME(?) ELSE valid_to END) valid_to, active,tariff_category_master_id "
 				+ "FROM "
@@ -73,10 +76,41 @@ TariffMasterCustomRepository {
 				+ "FROM tariff_master "
 				+ "WHERE unix_timestamp(valid_to) >=?) a "
 				+ "WHERE active=1 "
-				+ " AND unix_timestamp(valid_from) <= ?) a, "
-				+ " tariff_charges t  WHERE a.id=t.tariff_master_id "
+				+ "AND unix_timestamp(valid_from) <= ?) a, "
+				+ "tariff_charges t  WHERE a.id=t.tariff_master_id ) a "
+				+ "group by tariff_type_master_id  "
 				+ "ORDER BY unix_timestamp(valid_from)";
-/****		
+/****	
+==================================================================================		
+MySQL Sample Query
+==================================================================================		
+
+		SELECT tariff_type_master_id, case when tariff_type_master_id=1 then sum(rate * months * avg_kl) else
+       sum(rate * months) end amount
+FROM
+  (SELECT a.id,
+          tariff_name,
+          valid_from,
+          valid_to,
+          tariff_category_master_id,
+          t.rate,
+          case when t.min_kl > 10 then t.min_kl else 10 end avg_kl,
+          TIMESTAMPDIFF(MONTH,valid_from,valid_to) months,
+          t.tariff_type_master_id
+   FROM
+     (SELECT id,tariff_name,(CASE WHEN valid_from < date('2013-10-01') THEN str_to_date('2013-10-01 00:00:00', '%Y-%m-%d %H:%i:%s') ELSE valid_from END) valid_from,
+      FROM
+        (SELECT *
+         FROM tariff_master
+         WHERE unix_timestamp(valid_to) >= unix_timestamp(date('2013-10-01'))) a
+      WHERE active=1
+        AND unix_timestamp(valid_from) <= unix_timestamp(date('2016-03-01') )) a,
+       tariff_charges t
+   WHERE a.id=t.tariff_master_id) a
+group by tariff_type_master_id
+ORDER BY unix_timestamp(valid_from)
+		
+==================================================================================		
 		<html>
 		<head>
 		<title>Query select a.id, tariff_name,valid_from,valid_to,tariff_category_master_id,TIMESTAMPDIFF(MONTH,valid_from,valid_to) months,t.id,t.tariff_desc,t.slab_min,t.slab_max,t.rate from( select id,tariff_name,(case when valid_from < date('2013-10-01') then str_to_date('2013-10-01 00:00:00', '%Y-%m-%d %H:%i:%s') else valid_from end) 		 valid_from,(case when valid_to > date('2016-03-01') then str_to_date('2016-03-01 00:00:00', '%Y-%m-%d %H:%i:%s') else valid_to end) valid_to,      active,tariff_category_master_id 		 from (select * from tariff_master where unix_timestamp(valid_to) >= unix_timestamp(date('2013-10-01')))       a 		 where active=1 and unix_timestamp(valid_from) <= unix_timestamp(date('2016-03-01')      )) a, tariff_charges t      where a.id=t.tariff_master_id      order by unix_timestamp(valid_from), Thu Mar 31 18:38:22 2016
@@ -103,42 +137,13 @@ TariffMasterCustomRepository {
 		</body></html>
 ****/		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList(sql, new Object[]{validFrom.toEpochSecond(),validFrom.toEpochSecond(),
+				.queryForList(sql, new Object[]{avgKL, validFrom.toEpochSecond(),validFrom.toEpochSecond(),
 						validTo.toEpochSecond(),validTo.toEpochSecond(),validFrom.toEpochSecond(),
 						validTo.toEpochSecond()});
 
-		List<TariffMaster> items = new ArrayList<TariffMaster>();
-		
 		int i=0;
 		
-		for (Map row : rows) {
-			log.debug("This is the row:" + row);
-			TariffMaster tariffMaster = new TariffMaster();
-			tariffMaster.setId((Long) (row.get("id")));
-			tariffMaster.setTariffCategoryMaster(tcmr.findOne((Long)row.get("tariff_category_master_id")));
-			tariffMaster.setTariffName((String) row.get("tariff_name"));
-			
-			if(i != 0){
-				Timestamp ts = (Timestamp)row.get("valid_from");
-				ZonedDateTime valid_from = ZonedDateTime.ofInstant(ts.toInstant(), ZoneId.of("UTC"));
-				tariffMaster.setValidFrom(valid_from);
-			}
-			else
-				tariffMaster.setValidFrom(validFrom);
-								
-			if(i < rows.size()-1){
-				Timestamp ts2 = (Timestamp)row.get("valid_to");
-				ZonedDateTime valid_to = ZonedDateTime.ofInstant(ts2.toInstant(), ZoneId.of("UTC"));			
-				tariffMaster.setValidTo(valid_to);
-			}
-			else
-				tariffMaster.setValidTo(validTo);
-			
-			tariffMaster.setActive((String) row.get("active"));
-			items.add(tariffMaster);
-			i++;
-		}
-		log.debug("Tariffs for the period:" + items.toString());
-		return items;
+		log.debug("Output from billing query:" + rows);
+		return rows;
 	}
 }

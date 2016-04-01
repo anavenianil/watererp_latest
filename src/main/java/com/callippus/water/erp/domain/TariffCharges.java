@@ -38,6 +38,10 @@ public class TariffCharges implements Serializable {
     @Column(name = "rate", nullable = false)
     private Float rate;
 
+    @NotNull
+    @Column(name = "min_kl", nullable = false)
+    private Float minKL;
+
     @ManyToOne
     @JoinColumn(name = "tariff_master_id")
     private TariffMaster tariffMaster;
@@ -86,6 +90,14 @@ public class TariffCharges implements Serializable {
         this.rate = rate;
     }
 
+    public Float getMinKL() {
+        return minKL;
+    }
+
+    public void setMinKL(Float minKL) {
+        this.minKL = minKL;
+    }
+
     public TariffMaster getTariffMaster() {
         return tariffMaster;
     }
@@ -127,6 +139,7 @@ public class TariffCharges implements Serializable {
             ", slabMin='" + slabMin + "'" +
             ", slabMax='" + slabMax + "'" +
             ", rate='" + rate + "'" +
+            ", minKL='" + minKL + "'" +
             '}';
     }
 }

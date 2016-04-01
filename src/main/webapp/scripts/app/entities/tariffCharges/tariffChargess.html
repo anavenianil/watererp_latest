@@ -20,6 +20,7 @@
                     <th jh-sort-by="slabMin"><span>SlabMin</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="slabMax"><span>SlabMax</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="rate"><span>Rate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="minKL"><span>MinKL</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tariffMaster.id"><span>tariffMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tariffTypeMaster.id"><span>tariffTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -32,6 +33,7 @@
                     <td>{{tariffCharges.slabMin}}</td>
                     <td>{{tariffCharges.slabMax}}</td>
                     <td>{{tariffCharges.rate}}</td>
+                    <td>{{tariffCharges.minKL}}</td>
                     <td>
                         <a ui-sref="tariffMaster.detail({id:tariffCharges.tariffMaster.id})">{{tariffCharges.tariffMaster.id}}</a>
                     </td>

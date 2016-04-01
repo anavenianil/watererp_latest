@@ -262,13 +262,13 @@ INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`me
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`long_i`,`nometer_amt`) VALUES 
  (5,'617738493','31197668','2013-11-26','155200','','R','201212','201310','','0','0','165000','1650.00','577.50','110.00','0.00',2337.5,2768.88,'0000000002','R','','Y','1','A0000','0000','123','0000000000','','0','0','0'),
  (6,'617738918','D000000001','2013-11-30','173005','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,3412.75,'0000000063','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
- (7,'617757078','D000000002','2013-11-30','173050','','M','201209','201310','','0','10000','10000','2100.00','735.00','140.00','0.00',2975,2981.38,'0000000006','M','','','1','A0000','0000','123','0000000000','','0','0','0'),
- (8,'617757083','D000000003','2013-11-30','173124','','M','201209','201310','','0','100000','100000','2100.00','735.00','140.00','0.00',2975,2981.38,'0000000005','M','','','1','A0000','0000','123','0000000000','','0','0','0');
+ (7,'617757078','D000000002','2013-11-30','173050','','M','201209','201310','','0','100000','10000','2100.00','735.00','140.00','0.00',2975,2981.38,'0000000006','M','','','1','A0000','0000','123','0000000000','','0','0','0'),
+ (8,'617757083','D000000003','2013-11-30','173124','','M','201209','201310','','0','500000','100000','2100.00','735.00','140.00','0.00',2975,2981.38,'0000000005','M','','','1','A0000','0000','123','0000000000','','0','0','0');
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`long_i`,`nometer_amt`) VALUES 
  (9,'617757111','D000000004','2013-11-30','173208','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,3095.56,'0000000009','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
  (10,'617757186','D000000005','2013-11-30','173246','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,2981.38,'0000000008','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
  (11,'617771922','D000000006','2013-11-30','173352','','L','201211','201310','','0','0','180000','1800.00','630.00','120.00','0.00',2550,2550,'0000000000','L','','','1','A0000','0000','123','0000000000','','0','0','0'),
- (12,'617781451','D000000007','2013-11-30','173423','','M','201211','201310','','0','40000','40000','1800.00','630.00','120.00','0.00',2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0','0');
+ (12,'617781451','D000000007','2013-11-30','173423','','M','201211','201310','','0','400000','40000','1800.00','630.00','120.00','0.00',2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0','0');
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`mc_met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`long_i`,`nometer_amt`) VALUES 
  (13,'617781710','D000000008','2013-11-30','173449','','M','201211','201310','','0','50000','50000','1800.00','630.00','120.00','0.00',2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0','0');
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
@@ -611,9 +611,9 @@ INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_rea
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
  (10,'617757186','15','0614','MADHAPUR','0000','2012-09-26','SMT.SHIVALINGAMMA','2-62/2/A/10','GACHIBOWLI VILLAGE','','','D','0.50','F','T','12B36048','L','20131001','15','2016-03-13','0','20120801','0','2746.38','2975.00','0.00','0.00','0','F','1','0.00','6.38','20131130',235,'0000000000','0','0','0','1','0','0'),
  (11,'617771922','15','0614','MADHAPUR','0000','2012-11-01','SYED AZEEM','1-14','OLD GACHIBOWLI','','','D','0.50','F','T','','L','20131001','15','2016-03-13','0','','0','2100.00','2550.00','0.00','0.00','0','F','1','0.00','0.00','20131130',450,'0000000000','0','0','0','1','0','0'),
- (12,'617781451','15','0614','MADHAPUR','0000','2012-11-15','SRINIVAS','1-110/A/32','KONDAPUR W/S COLONY,KONDAPUR','','','D','0.50','F','T','12B53322','M','20131001','15','2016-03-13','40000','20131001','0','1750.00','0.00','0.00','0.00','0','F','1','0.00','0.00','20131130',800,'0000000000','0','0','0','1','0','0');
+ (12,'617781451','15','0614','MADHAPUR','0000','2012-11-15','SRINIVAS','1-110/A/32','KONDAPUR W/S COLONY,KONDAPUR','','','D','0.50','F','T','12B53322','M','20131001','15','2016-03-13','400000','20131001','0','1750.00','0.00','0.00','0.00','0','F','1','0.00','0.00','20131130',800,'0000000000','0','0','0','1','0','0');
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (13,'617781710','15','0614','MADHAPUR','0000','2012-11-10','K.DEVIDAS','3-618/2,P.NO.540/B','SCB NAGAR,NEW HAFEEZPET','','','D','0.50','F','T','12B53305','M','20131001','15','2016-03-13','50000','20131001','0','2338.00','0.00','0.00','0.00','0','F','2','0.00','0.00','20131130',212,'0000000000','0','0','0','1','0','0');
+ (13,'617781710','15','0614','MADHAPUR','0000','2012-11-10','K.DEVIDAS','3-618/2,P.NO.540/B','SCB NAGAR,NEW HAFEEZPET','','','D','0.50','F','T','12B53305','M','20131001','15','2016-03-13','500000','20131001','0','2338.00','0.00','0.00','0.00','0','F','2','0.00','0.00','20131130',212,'0000000000','0','0','0','1','0','0');
 /*!40000 ALTER TABLE `cust_details` ENABLE KEYS */;
 
 
@@ -805,7 +805,7 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffMaster.xml','2016-03-30 12:06:07',73,'EXECUTED','7:de67571b345cd24609fcbc1d6d8e12ab','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffTypeMaster.xml','2016-03-30 12:06:07',74,'EXECUTED','7:2fdf8de5ece58a24c9842690d2599317','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCharges.xml','2016-03-30 12:06:07',75,'EXECUTED','7:0d08d8c58279ef6ad2d32f408f3c7009','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160401094431','jhipster','classpath:config/liquibase/changelog/20160401094431_added_entity_TariffCharges.xml','2016-04-01 11:24:43',75,'EXECUTED','7:20f6db108bf2f20d8644e031016159fe','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -1470,7 +1470,13 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (112,'admin','2016-03-29 14:19:03','AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (113,'admin','2016-03-30 15:02:27','AUTHENTICATION_SUCCESS'),
- (114,'admin','2016-03-30 15:26:48','AUTHENTICATION_SUCCESS');
+ (114,'admin','2016-03-30 15:26:48','AUTHENTICATION_SUCCESS'),
+ (115,'admin','2016-03-30 16:56:02','AUTHENTICATION_SUCCESS'),
+ (116,'admin','2016-03-30 18:28:01','AUTHENTICATION_SUCCESS'),
+ (117,'admin','2016-03-31 19:09:31','AUTHENTICATION_SUCCESS'),
+ (118,'admin','2016-04-01 10:07:36','AUTHENTICATION_SUCCESS'),
+ (119,'admin','2016-04-01 10:35:52','AUTHENTICATION_SUCCESS'),
+ (120,'admin','2016-04-01 11:41:20','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -1731,7 +1737,20 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (113,'remoteAddress','0:0:0:0:0:0:0:1'),
  (113,'sessionId','7600B45F4E366F0FDFFF7B4DB5C3B9F0'),
  (114,'remoteAddress','0:0:0:0:0:0:0:1'),
- (114,'sessionId','25F5A1DF6E3AC55289BB1EED82E9B378');
+ (114,'sessionId','25F5A1DF6E3AC55289BB1EED82E9B378'),
+ (115,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (115,'sessionId','1672728C33CBDF7BC38608432E43FB69');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (116,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (116,'sessionId','28E61BD62430C198E729ED4DB68893F7'),
+ (117,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (117,'sessionId','77C2D570E258F9D771218F3F5A285A5E'),
+ (118,'remoteAddress','127.0.0.1'),
+ (118,'sessionId','B8F34910D5705763F9C46453A5FD3623'),
+ (119,'remoteAddress','127.0.0.1'),
+ (119,'sessionId','E7B4AB3FA943DCCF1DD280A97E039378'),
+ (120,'remoteAddress','127.0.0.1'),
+ (120,'sessionId','627FBACB79F7E0394CAD0BF115CFEBDE');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -1774,13 +1793,13 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('g1fO+c9MELv/ZXfY+NYkCw==',3,'5lbXjqVRwjcpvyhimhS76A==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('i0EUD52I5oNzHGicd6Ro6g==',3,'TQXcc348st0ko+lml1ZYPA==','2016-03-28','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('hwUqytVbM+hTdjqxoEC9qg==',3,'78le8JMa16Wu0gGsGPPhCQ==','2016-04-01','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('jEwMwchTTuqCLrwkSt2ARA==',3,'+3EGK4k26JImuyZpwYIppA==','2016-03-18','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nsyg6h+LdTgXwbH56+FakA==',3,'TVLj32ZdV7zQcM/9mWq5fA==','2016-03-15','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0');
+ ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
+ ('pEEiFf7B/NhJo5aEvI40wQ==',3,'TZNUHLSBFRr1XY4ecdlXzA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('q3EjfXcMrSJFW7SlKnUuSw==',3,'f/ln79tU4x1LjeMjm0/mbg==','2016-03-22','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
@@ -2756,13 +2775,14 @@ CREATE TABLE `tariff_charges` (
   `slab_min` int(11) NOT NULL,
   `slab_max` int(11) NOT NULL,
   `rate` float NOT NULL,
+  `min_kl` float NOT NULL,
   `tariff_master_id` bigint(20) default NULL,
   `tariff_type_master_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
   KEY `fk_tariffcharges_tariffmaster_id` (`tariff_master_id`),
   KEY `fk_tariffcharges_tarifftypemaster_id` (`tariff_type_master_id`),
-  CONSTRAINT `fk_tariffcharges_tariffmaster_id` FOREIGN KEY (`tariff_master_id`) REFERENCES `tariff_master` (`id`),
-  CONSTRAINT `fk_tariffcharges_tarifftypemaster_id` FOREIGN KEY (`tariff_type_master_id`) REFERENCES `tariff_type_master` (`id`)
+  CONSTRAINT `fk_tariffcharges_tarifftypemaster_id` FOREIGN KEY (`tariff_type_master_id`) REFERENCES `tariff_type_master` (`id`),
+  CONSTRAINT `fk_tariffcharges_tariffmaster_id` FOREIGN KEY (`tariff_master_id`) REFERENCES `tariff_master` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2770,16 +2790,16 @@ CREATE TABLE `tariff_charges` (
 --
 
 /*!40000 ALTER TABLE `tariff_charges` DISABLE KEYS */;
-INSERT INTO `tariff_charges` (`id`,`tariff_desc`,`slab_min`,`slab_max`,`rate`,`tariff_master_id`,`tariff_type_master_id`) VALUES 
- (1,'Domestic - Usage',0,999999,780,1,1),
- (2,'Domestic - Fixed',0,999999,18000,1,2),
- (3,'Domestic - Service',0,999999,1800,1,3),
- (4,'Domestic - Usage',0,999999,780,2,1),
- (5,'Domestic - Fixed',0,999999,19000,2,2),
- (6,'Domestic - Service',0,999999,1800,2,3),
- (7,'Domestic - Usage',0,999999,800,3,1),
- (8,'Domestic - Fixed',0,999999,19500,3,2),
- (9,'Domestic - Service',0,999999,1820,3,3);
+INSERT INTO `tariff_charges` (`id`,`tariff_desc`,`slab_min`,`slab_max`,`rate`,`min_kl`,`tariff_master_id`,`tariff_type_master_id`) VALUES 
+ (1,'Domestic - Usage',0,999999,780,31.5,1,1),
+ (2,'Domestic - Fixed',0,999999,18000,0,1,2),
+ (3,'Domestic - Service',0,999999,1800,0,1,3),
+ (4,'Domestic - Usage',0,999999,780,32.5,2,1),
+ (5,'Domestic - Fixed',0,999999,19000,0,2,2),
+ (6,'Domestic - Service',0,999999,1800,0,2,3),
+ (7,'Domestic - Usage',0,999999,800,33.5,3,1),
+ (8,'Domestic - Fixed',0,999999,19500,0,3,2),
+ (9,'Domestic - Service',0,999999,1820,0,3,3);
 /*!40000 ALTER TABLE `tariff_charges` ENABLE KEYS */;
 
 

@@ -163,9 +163,7 @@ public class BillingService {
 					}
 				}
 
-
-
-				List<TariffMaster> t = tariffMasterCustomRepository
+				List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
 						.findTariffs(zFrom, zTo, avgKL);
 				
 				kl = (float) (units / 1000.0);
