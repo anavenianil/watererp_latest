@@ -81,7 +81,10 @@ public class BillingService {
 	String monthUpto;
 	boolean hasSewer;
 	float ewura = 0.0f;
-
+	int monthsDiff = 0;
+	ZonedDateTime zFrom = null;
+	ZonedDateTime zTo = null;
+	
 	float water, sewerage, service_charge, total_amount, net_payable_amount,
 			surcharge, total_cess, from, upto, mths, avgkl, kl;
 
@@ -132,16 +135,19 @@ public class BillingService {
 				DateTime jFrom = new DateTime(d_from);
 				DateTime jTo = new DateTime(d_to);
 
-				ZonedDateTime zFrom = d_from.toInstant().atZone(
+				zFrom = d_from.toInstant().atZone(
 						ZoneId.systemDefault());
-				ZonedDateTime zTo = d_to.toInstant().atZone(
+				zTo = d_to.toInstant().atZone(
 						ZoneId.systemDefault());
 
+				log.debug("########################################");
+				log.debug("          METER BILL CASE");
+				log.debug("########################################");
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
 
 				Months d = Months.monthsBetween(jFrom, jTo);
-				int monthsDiff = d.getMonths() + 1;
+				monthsDiff = d.getMonths();
 
 				log.debug("Months:" + monthsDiff);
 
@@ -168,33 +174,63 @@ public class BillingService {
 						return;
 					}
 				}
-
-				List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-						.findTariffs(zFrom, zTo, avgKL);
-				
-				ConfigurationDetails cd = configurationDetailsRepository.findOneByName("EWURA");
-				
-				log.debug("This is the EWURA Configuration:" + cd.toString());
-				
-				for(Map charge:charges){
-					if(((Long)charge.get("tariff_type_master_id"))==1){
-						log.debug("Usage Charge:"+(Double)charge.get("amount"));
-					}
-					else if(((Long)charge.get("tariff_type_master_id"))==2){
-						log.debug("Meter Rent:"+(Double)charge.get("amount"));
-					}
-					else if(((Long)charge.get("tariff_type_master_id"))==3){
-						log.debug("Service Charge:"+(Double)charge.get("amount"));
-					}
-				}
 				
 				kl = (float) (units / 1000.0);
-			} else {
-//				avgKL = Float.parseFloat(customer.getPrevAvgKl());
-//				units = (long) (avgKL * monthsDiff * 1000.0f);
-//				log.debug("Units:" + units + " based on avgKL:" + avgKL
-//						+ " for " + monthsDiff + " months.");
+			} else if(bill_details.getCurrent_bill_type().equals("L")){
+
+				log.debug("########################################");
+				log.debug("          LOCK BILL CASE");
+				log.debug("########################################");				
+				
+				Date d_from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
+				.parse(customer.getPrevBillMonth());
+
+				Calendar date = Calendar.getInstance();
+				date.set(Calendar.DAY_OF_MONTH, 1);
+		
+				Date d_to = date.getTime();
+
+				DateTime jFrom = new DateTime(d_from);
+				DateTime jTo = new DateTime(d_to);
+
+				zFrom = d_from.toInstant().atZone(
+						ZoneId.systemDefault());
+				zTo = d_to.toInstant().atZone(
+						ZoneId.systemDefault());
+
+				log.debug("Customer Info:" + customer.toString());
+				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
+
+				Months d = Months.monthsBetween(jFrom, jTo);
+				monthsDiff = d.getMonths();
+				
+				avgKL = Float.parseFloat(customer.getPrevAvgKl());
+				unitsKL = (float) (avgKL * monthsDiff);
+				units = (long) (avgKL * monthsDiff * 1000.0f);
+				log.debug("Units:" + units + " based on avgKL:" + avgKL
+						+ " for " + monthsDiff + " months.");
 			}
+			
+			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
+					.findTariffs(zFrom, zTo, avgKL);
+			
+			ConfigurationDetails cd = configurationDetailsRepository.findOneByName("EWURA");
+			
+			log.debug("This is the EWURA Configuration:" + cd.toString());
+			
+			//Subtract Avg Water charges in case of Lock Bill scenario
+			for(Map charge:charges){
+				if(((Long)charge.get("tariff_type_master_id"))==1){
+					log.debug("Usage Charge:"+(Double)charge.get("amount"));
+				}
+				else if(((Long)charge.get("tariff_type_master_id"))==2){
+					log.debug("Meter Rent:"+(Double)charge.get("amount"));
+				}
+				else if(((Long)charge.get("tariff_type_master_id"))==3){
+					log.debug("Service Charge:"+(Double)charge.get("amount"));
+				}
+			}
+			
 			monthUpto = getPrevMonthStart();
 
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
