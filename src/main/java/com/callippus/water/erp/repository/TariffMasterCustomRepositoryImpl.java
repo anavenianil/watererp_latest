@@ -141,8 +141,6 @@ ORDER BY unix_timestamp(valid_from)
 						validTo.toEpochSecond(),validTo.toEpochSecond(),validFrom.toEpochSecond(),
 						validTo.toEpochSecond()});
 
-		int i=0;
-		
 		log.debug("Output from billing query:" + rows);
 		return rows;
 	}

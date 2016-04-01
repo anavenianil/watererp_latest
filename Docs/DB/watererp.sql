@@ -487,7 +487,8 @@ CREATE TABLE `configuration_details` (
 
 /*!40000 ALTER TABLE `configuration_details` DISABLE KEYS */;
 INSERT INTO `configuration_details` (`id`,`name`,`value`,`description`) VALUES 
- (1,'ADMIN','97',NULL);
+ (1,'ADMIN','97',NULL),
+ (2,'EWURA','1','EWURA Water Tax Charges (%)');
 /*!40000 ALTER TABLE `configuration_details` ENABLE KEYS */;
 
 
@@ -1476,7 +1477,9 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (117,'admin','2016-03-31 19:09:31','AUTHENTICATION_SUCCESS'),
  (118,'admin','2016-04-01 10:07:36','AUTHENTICATION_SUCCESS'),
  (119,'admin','2016-04-01 10:35:52','AUTHENTICATION_SUCCESS'),
- (120,'admin','2016-04-01 11:41:20','AUTHENTICATION_SUCCESS');
+ (120,'admin','2016-04-01 11:41:20','AUTHENTICATION_SUCCESS'),
+ (121,'admin','2016-04-01 12:18:30','AUTHENTICATION_SUCCESS'),
+ (122,'admin','2016-04-01 12:24:39','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -1750,7 +1753,11 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (119,'remoteAddress','127.0.0.1'),
  (119,'sessionId','E7B4AB3FA943DCCF1DD280A97E039378'),
  (120,'remoteAddress','127.0.0.1'),
- (120,'sessionId','627FBACB79F7E0394CAD0BF115CFEBDE');
+ (120,'sessionId','627FBACB79F7E0394CAD0BF115CFEBDE'),
+ (121,'remoteAddress','127.0.0.1'),
+ (121,'sessionId','51527384DB01E73DA4CEBBB7341BCCBE'),
+ (122,'remoteAddress','127.0.0.1'),
+ (122,'sessionId','CE023DF115D1A0D6A5B9F79DF5B8D34C');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -1794,18 +1801,18 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('hwUqytVbM+hTdjqxoEC9qg==',3,'78le8JMa16Wu0gGsGPPhCQ==','2016-04-01','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('jEwMwchTTuqCLrwkSt2ARA==',3,'+3EGK4k26JImuyZpwYIppA==','2016-03-18','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nsyg6h+LdTgXwbH56+FakA==',3,'TVLj32ZdV7zQcM/9mWq5fA==','2016-03-15','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('pEEiFf7B/NhJo5aEvI40wQ==',3,'TZNUHLSBFRr1XY4ecdlXzA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('pEEiFf7B/NhJo5aEvI40wQ==',3,'TZNUHLSBFRr1XY4ecdlXzA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('q3EjfXcMrSJFW7SlKnUuSw==',3,'f/ln79tU4x1LjeMjm0/mbg==','2016-03-22','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('q3EjfXcMrSJFW7SlKnUuSw==',3,'f/ln79tU4x1LjeMjm0/mbg==','2016-03-22','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('rXxoQKNaiKgwPBXkYCm5RQ==',3,'nZ3Z39G+GWqRWUQGXDRT1w==','2016-03-22','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('uBmBvYHKZMXr5UHwlzKAPA==',3,'oIXVYnHZ2CAqS/lxhNHtBQ==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
+ ('WnXIcWtIEjEAiIkVOGpepQ==',3,'Uc6rTcGyD5f/C8nQHYo2Sw==','2016-04-01','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('XDGXmczwil8KeD6KL6Yt1w==',3,'fbROZLGioPS/YUzyTyG2kg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 

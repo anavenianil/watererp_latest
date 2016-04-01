@@ -3,12 +3,14 @@ package com.callippus.water.erp.service;
 import com.callippus.water.erp.domain.Authority;
 import com.callippus.water.erp.domain.BillDetails;
 import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.PersistentToken;
 import com.callippus.water.erp.domain.TariffMaster;
 import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.repository.AuthorityRepository;
 import com.callippus.water.erp.repository.BillDetailsRepository;
+import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.PersistentTokenRepository;
 import com.callippus.water.erp.repository.TariffMasterCustomRepository;
@@ -53,6 +55,9 @@ public class BillingService {
 	private CustDetailsRepository custDetailsRepository;
 
 	@Inject
+	private ConfigurationDetailsRepository configurationDetailsRepository;
+	
+	@Inject
 	private TariffMasterCustomRepository tariffMasterCustomRepository;
 
 	// @Inject
@@ -75,6 +80,7 @@ public class BillingService {
 	float unitsKL = 0.0f;
 	String monthUpto;
 	boolean hasSewer;
+	float ewura = 0.0f;
 
 	float water, sewerage, service_charge, total_amount, net_payable_amount,
 			surcharge, total_cess, from, upto, mths, avgkl, kl;
@@ -166,6 +172,22 @@ public class BillingService {
 				List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
 						.findTariffs(zFrom, zTo, avgKL);
 				
+				ConfigurationDetails cd = configurationDetailsRepository.findOneByName("EWURA");
+				
+				log.debug("This is the EWURA Configuration:" + cd.toString());
+				
+				for(Map charge:charges){
+					if(((Long)charge.get("tariff_type_master_id"))==1){
+						log.debug("Usage Charge:"+(Double)charge.get("amount"));
+					}
+					else if(((Long)charge.get("tariff_type_master_id"))==2){
+						log.debug("Meter Rent:"+(Double)charge.get("amount"));
+					}
+					else if(((Long)charge.get("tariff_type_master_id"))==3){
+						log.debug("Service Charge:"+(Double)charge.get("amount"));
+					}
+				}
+				
 				kl = (float) (units / 1000.0);
 			} else {
 //				avgKL = Float.parseFloat(customer.getPrevAvgKl());
@@ -178,6 +200,7 @@ public class BillingService {
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			log.debug("Invalid From or To Date:" + bill_details.getFrom_month()
 					+ "::::" + bill_details.getTo_month());
 			return;
