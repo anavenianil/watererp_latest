@@ -54,8 +54,6 @@ public class AccountResource {
     @Inject
     private MailService mailService;
 
-    @Inject
-    private BillingService billingService;
     
     /**
      * POST  /register -> register the user.
@@ -110,19 +108,6 @@ public class AccountResource {
         log.debug("REST request to check if the current user is authenticated");
         return request.getRemoteUser();
     }
-
-    /**
-     * GET  /account -> get the current user.
-     */
-    @RequestMapping(value = "/billing",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public void getBilling() {
-    	billingService.generateBill();
-        return;
-    }
-
     
     /**
      * GET  /account -> get the current user.
