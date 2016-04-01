@@ -56,6 +56,9 @@ public class TariffChargesResourceIntTest {
     private static final Float DEFAULT_MIN_KL = 1F;
     private static final Float UPDATED_MIN_KL = 2F;
 
+    private static final Float DEFAULT_MIN_UNMETERED_KL = 1F;
+    private static final Float UPDATED_MIN_UNMETERED_KL = 2F;
+
     @Inject
     private TariffChargesRepository tariffChargesRepository;
 
@@ -87,6 +90,7 @@ public class TariffChargesResourceIntTest {
         tariffCharges.setSlabMax(DEFAULT_SLAB_MAX);
         tariffCharges.setRate(DEFAULT_RATE);
         tariffCharges.setMinKL(DEFAULT_MIN_KL);
+        tariffCharges.setMinUnmeteredKL(DEFAULT_MIN_UNMETERED_KL);
     }
 
     @Test
@@ -110,6 +114,7 @@ public class TariffChargesResourceIntTest {
         assertThat(testTariffCharges.getSlabMax()).isEqualTo(DEFAULT_SLAB_MAX);
         assertThat(testTariffCharges.getRate()).isEqualTo(DEFAULT_RATE);
         assertThat(testTariffCharges.getMinKL()).isEqualTo(DEFAULT_MIN_KL);
+        assertThat(testTariffCharges.getMinUnmeteredKL()).isEqualTo(DEFAULT_MIN_UNMETERED_KL);
     }
 
     @Test
@@ -204,6 +209,24 @@ public class TariffChargesResourceIntTest {
 
     @Test
     @Transactional
+    public void checkMinUnmeteredKLIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tariffChargesRepository.findAll().size();
+        // set the field null
+        tariffCharges.setMinUnmeteredKL(null);
+
+        // Create the TariffCharges, which fails.
+
+        restTariffChargesMockMvc.perform(post("/api/tariffChargess")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(tariffCharges)))
+                .andExpect(status().isBadRequest());
+
+        List<TariffCharges> tariffChargess = tariffChargesRepository.findAll();
+        assertThat(tariffChargess).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllTariffChargess() throws Exception {
         // Initialize the database
         tariffChargesRepository.saveAndFlush(tariffCharges);
@@ -217,7 +240,8 @@ public class TariffChargesResourceIntTest {
                 .andExpect(jsonPath("$.[*].slabMin").value(hasItem(DEFAULT_SLAB_MIN)))
                 .andExpect(jsonPath("$.[*].slabMax").value(hasItem(DEFAULT_SLAB_MAX)))
                 .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.doubleValue())))
-                .andExpect(jsonPath("$.[*].minKL").value(hasItem(DEFAULT_MIN_KL.doubleValue())));
+                .andExpect(jsonPath("$.[*].minKL").value(hasItem(DEFAULT_MIN_KL.doubleValue())))
+                .andExpect(jsonPath("$.[*].minUnmeteredKL").value(hasItem(DEFAULT_MIN_UNMETERED_KL.doubleValue())));
     }
 
     @Test
@@ -235,7 +259,8 @@ public class TariffChargesResourceIntTest {
             .andExpect(jsonPath("$.slabMin").value(DEFAULT_SLAB_MIN))
             .andExpect(jsonPath("$.slabMax").value(DEFAULT_SLAB_MAX))
             .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.doubleValue()))
-            .andExpect(jsonPath("$.minKL").value(DEFAULT_MIN_KL.doubleValue()));
+            .andExpect(jsonPath("$.minKL").value(DEFAULT_MIN_KL.doubleValue()))
+            .andExpect(jsonPath("$.minUnmeteredKL").value(DEFAULT_MIN_UNMETERED_KL.doubleValue()));
     }
 
     @Test
@@ -260,6 +285,7 @@ public class TariffChargesResourceIntTest {
         tariffCharges.setSlabMax(UPDATED_SLAB_MAX);
         tariffCharges.setRate(UPDATED_RATE);
         tariffCharges.setMinKL(UPDATED_MIN_KL);
+        tariffCharges.setMinUnmeteredKL(UPDATED_MIN_UNMETERED_KL);
 
         restTariffChargesMockMvc.perform(put("/api/tariffChargess")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -275,6 +301,7 @@ public class TariffChargesResourceIntTest {
         assertThat(testTariffCharges.getSlabMax()).isEqualTo(UPDATED_SLAB_MAX);
         assertThat(testTariffCharges.getRate()).isEqualTo(UPDATED_RATE);
         assertThat(testTariffCharges.getMinKL()).isEqualTo(UPDATED_MIN_KL);
+        assertThat(testTariffCharges.getMinUnmeteredKL()).isEqualTo(UPDATED_MIN_UNMETERED_KL);
     }
 
     @Test

@@ -209,10 +209,44 @@ public class BillingService {
 				units = (long) (avgKL * monthsDiff * 1000.0f);
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
+			}else if(bill_details.getCurrent_bill_type().equals("U")){
+
+				log.debug("########################################");
+				log.debug("          UNMETERED BILL CASE");
+				log.debug("########################################");				
+
+				Calendar dateFrom = Calendar.getInstance();
+				dateFrom.set(Calendar.DAY_OF_MONTH, 1);	
+				dateFrom.add(Calendar.MONTH, -1);
+				Date d_from = dateFrom.getTime();
+
+				Calendar dateTo = Calendar.getInstance();
+				dateTo.set(Calendar.DAY_OF_MONTH, 1);		
+				Date d_to = dateTo.getTime();
+
+				DateTime jFrom = new DateTime(d_from);
+				DateTime jTo = new DateTime(d_to);
+
+				zFrom = d_from.toInstant().atZone(
+						ZoneId.systemDefault());
+				zTo = d_to.toInstant().atZone(
+						ZoneId.systemDefault());
+
+				log.debug("Customer Info:" + customer.toString());
+				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
+
+				Months d = Months.monthsBetween(jFrom, jTo);
+				monthsDiff = d.getMonths();
+				
+				avgKL = Float.parseFloat(customer.getPrevAvgKl());
+				unitsKL = (float) (avgKL * monthsDiff);
+				units = (long) (avgKL * monthsDiff * 1000.0f);
+				log.debug("Units:" + units + " based on avgKL:" + avgKL
+						+ " for " + monthsDiff + " months.");
 			}
 			
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(zFrom, zTo, avgKL);
+					.findTariffs(zFrom, zTo, avgKL, bill_details.getCurrent_bill_type().equals("U")?1:0);
 			
 			ConfigurationDetails cd = configurationDetailsRepository.findOneByName("EWURA");
 			

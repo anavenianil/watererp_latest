@@ -54,20 +54,24 @@ TariffMasterCustomRepository {
 	}
 
 	
-	public List<java.util.Map<String, Object>> findTariffs(ZonedDateTime validFrom, ZonedDateTime validTo, float avgKL){
-		String sql = "SELECT tariff_type_master_id,case when tariff_type_master_id=1 then sum(rate * months * avg_kl) else "
-				+ " sum(rate * months) end amount FROM (SELECT a.id tariff_master_id, "
+	public List<java.util.Map<String, Object>> findTariffs(ZonedDateTime validFrom, ZonedDateTime validTo, float avgKL, int unmetered_flag){
+		String sql = "SELECT tariff_type_master_id,"
+				+ "case when tariff_type_master_id=1 then "
+				+ "case when 1=? then sum(rate * months * min_unmetered_kl) else sum(rate * months * avg_kl)  end "
+				+ "else  sum(rate * months) end "
+				+ "amount FROM (SELECT a.id tariff_master_id, "
 				+ "tariff_name, "
 				+ "valid_from, "
 				+ "valid_to, "
 				+ "tariff_category_master_id, "
-				+ "TIMESTAMPDIFF(MONTH,valid_from,valid_to) months, "
+				+ "TIMESTAMPDIFF(MONTH,valid_from,valid_to + interval 1 day) months, "
 				+ "t.id tariff_charges_id, "
 				+ "t.tariff_desc, "
 				+ "t.slab_min, "
 				+ "t.slab_max, "
 				+ "t.rate , "
-				+ "case when t.min_kl > ? then t.min_kl else 10 end avg_kl,"
+				+ "t.min_unmetered_kl , "
+				+ "case when t.min_kl > ? then t.min_kl else ? end avg_kl,"
 				+ "t.tariff_type_master_id from "
 				+ "(SELECT id,tariff_name,(CASE WHEN unix_timestamp(valid_from) < ? THEN FROM_UNIXTIME(?) ELSE valid_from END) valid_from,(CASE WHEN unix_timestamp(valid_to) > ? "
 				+ "THEN FROM_UNIXTIME(?) ELSE valid_to END) valid_to, active,tariff_category_master_id "
@@ -137,7 +141,7 @@ ORDER BY unix_timestamp(valid_from)
 		</body></html>
 ****/		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList(sql, new Object[]{avgKL, validFrom.toEpochSecond(),validFrom.toEpochSecond(),
+				.queryForList( sql, new Object[]{unmetered_flag, avgKL,avgKL, validFrom.toEpochSecond(),validFrom.toEpochSecond(),
 						validTo.toEpochSecond(),validTo.toEpochSecond(),validFrom.toEpochSecond(),
 						validTo.toEpochSecond()});
 

@@ -56,6 +56,14 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "minUnmeteredKL",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20160401094431",

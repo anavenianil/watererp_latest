@@ -57,6 +57,7 @@ angular.module('waterERPApp')
                                     slabMax: null,
                                     rate: null,
                                     minKL: null,
+                                    minUnmeteredKL: null,
                                     id: null
                                 };
                             }

@@ -67,7 +67,7 @@ class TariffChargesGatlingTest extends Simulation {
             .exec(http("Create new tariffCharges")
             .post("/api/tariffChargess")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "tariffDesc":"SAMPLE_TEXT", "slabMin":"0", "slabMax":"0", "rate":null, "minKL":null}""")).asJSON
+            .body(StringBody("""{"id":null, "tariffDesc":"SAMPLE_TEXT", "slabMin":"0", "slabMax":"0", "rate":null, "minKL":null, "minUnmeteredKL":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_tariffCharges_url")))
             .pause(10)

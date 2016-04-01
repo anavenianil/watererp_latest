@@ -89,6 +89,22 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minUnmeteredKL">MinUnmeteredKL</label>
+            <input type="number" class="form-control" name="minUnmeteredKL" id="field_minUnmeteredKL"
+                    ng-model="tariffCharges.minUnmeteredKL"
+                    required />
+            <div ng-show="editForm.minUnmeteredKL.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.minUnmeteredKL.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.minUnmeteredKL.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
 
         <div class="form-group">
             <label for="field_tariffMaster">tariffMaster</label>
