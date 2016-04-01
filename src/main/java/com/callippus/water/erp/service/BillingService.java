@@ -72,6 +72,7 @@ public class BillingService {
 	float factor = 0.0f;
 	float prevAvgKL = 0.0f;
 	long units = 0;
+	float unitsKL = 0.0f;
 	String monthUpto;
 	boolean hasSewer;
 
@@ -133,25 +134,26 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
 
-				List<TariffMaster> t = tariffMasterCustomRepository
-						.findTariffs(zFrom, zTo);
-
 				Months d = Months.monthsBetween(jFrom, jTo);
 				int monthsDiff = d.getMonths() + 1;
 
 				log.debug("Months:" + monthsDiff);
 
 				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
-					avgKL = (Integer
-							.parseInt(bill_details.getPresent_reading()) - Integer
-							.parseInt(bill_details.getInitial_reading()))
-							/ monthsDiff;
+					units = Long.parseLong(bill_details.getPresent_reading())
+							- Long.parseLong(bill_details.getInitial_reading());
+					
+					unitsKL = (float) units / 1000.0f;
+					
+					avgKL = unitsKL / monthsDiff;
 
 					prevAvgKL = (Float.parseFloat(customer.getPrevAvgKl()) < 1.0f ? 1.0f
 							: Float.parseFloat(customer.getPrevAvgKl()));
 
 					factor = avgKL / prevAvgKL;
 
+					log.debug("units:" + units + ", unitsKL=" + unitsKL + ", avgKL="+ avgKL + ", prevAvgKL=" + prevAvgKL+", factor="+factor);
+					
 					if (factor > 4.0f || factor < 0.25f) {
 						// Unable to process customer
 						log.debug("Meter reading for:" + customer.getId()
@@ -161,10 +163,11 @@ public class BillingService {
 					}
 				}
 
-				units = Long.parseLong(bill_details.getPresent_reading())
-						- Long.parseLong(bill_details.getInitial_reading());
-				log.debug("units:" + units);
 
+
+				List<TariffMaster> t = tariffMasterCustomRepository
+						.findTariffs(zFrom, zTo, avgKL);
+				
 				kl = (float) (units / 1000.0);
 			} else {
 //				avgKL = Float.parseFloat(customer.getPrevAvgKl());
