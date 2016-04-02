@@ -20,7 +20,6 @@
 								ng-model="customerComplaints.id" readonly
 								style="margin: 0 auto;" />
 						</div>
-
 						<div class="col-sm-4">
 							<label for="field_applicationTxn">Customer ID</label>
 							<!-- Commented Select Box Functionality -->
@@ -102,7 +101,7 @@
 								ng-model="customerComplaints.relevantDoc" />
 						</div> -->
 						<div class="col-sm-2">
-							<label>Photo</label>
+							<label>Relevant Document</label>
 							<!-- <fieldset>
 										<div ngf-drop="" ngf-select=""
 											ng-model="customerComplaints.relevantDoc1" ng-model-rejected="rejFiles"
@@ -123,8 +122,50 @@
 								ngf-accept="'image/*,application/pdf'"
 								ngf-drop-available="dropAvailable">
 								<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
-									Photo</span>
+									Relevant Document</span>
 							</button>
+						</div>
+						<div class="col-sm-3">
+							<ul style="clear: both" ng-show="rejFiles.length > 0"
+								class="response">
+								<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+									file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+							</ul>
+							<ul style="clear: both"
+								ng-show="customerComplaints.relevantDoc1.length > 0"
+								class="response">
+								<li class="sel-file"
+									ng-repeat="f in customerComplaints.relevantDoc1">
+									<!-- <img
+											ng-show="f.type.indexOf('image') > -1" ngf-src="f"
+											class="thumb" ngf-accept="'*'" style="width:100px;height:125px;">  -->
+									<!-- <span class="progress" ng-show="f.progress >= 0">
+												<div style="width: {{f.progress">{{f.progress}}%</div>
+										</span> --> <!-- <button class="button"
+												ng-click="f.upload.abort();f.upload.aborted=true"
+												ng-show="f.upload != null && f.progress < 100 && !f.upload.aborted">Abort
+											</button> --> - {{f.name}} <a ng-show="f.result"
+									href="javascript:void(0)"
+									ng-click="f.showDetail = !f.showDetail">details</a> <!-- <div ng-show="f.showDetail">
+												<br />
+
+												<div data-ng-show="f.result.result == null">{{f.result}}</div>
+												<ul>
+													<li ng-repeat="item in f.result.result">
+														<div data-ng-show="item.name">file name:
+															{{item.name}}</div>
+														<div data-ng-show="item.fieldName">name:
+															{{item.fieldName}}</div>
+														<div data-ng-show="item.size">size on the serve:
+															{{item.size}}</div>
+														<div data-ng-show="item.value">value: {{item.value}}</div>
+													</li>
+												</ul>
+												<div data-ng-show="f.result.requestHeaders" class="reqh">request
+													headers: {{f.result.requestHeaders}}</div>
+											</div> -->
+								</li>
+							</ul>
 						</div>
 					</div>
 					<div class="row">

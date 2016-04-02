@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
 	.controller('TariffCategoryMasterDeleteController', function($scope, $uibModalInstance, entity, TariffCategoryMaster) {
 
         $scope.tariffCategoryMaster = entity;
