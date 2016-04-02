@@ -60,22 +60,30 @@ public class BillDetailsResourceIntTest {
     private static final String UPDATED_FROM_MONTH = "BBBBB";
     private static final String DEFAULT_TO_MONTH = "AAAAA";
     private static final String UPDATED_TO_MONTH = "BBBBB";
-    private static final String DEFAULT_METER_FIX_DATE = "AAAAA";
-    private static final String UPDATED_METER_FIX_DATE = "BBBBB";
-    private static final String DEFAULT_INITIAL_READING = "AAAAA";
-    private static final String UPDATED_INITIAL_READING = "BBBBB";
-    private static final String DEFAULT_PRESENT_READING = "AAAAA";
-    private static final String UPDATED_PRESENT_READING = "BBBBB";
-    private static final String DEFAULT_UNITS = "AAAAA";
-    private static final String UPDATED_UNITS = "BBBBB";
-    private static final String DEFAULT_WATER_CESS = "AAAAA";
-    private static final String UPDATED_WATER_CESS = "BBBBB";
-    private static final String DEFAULT_SEWERAGE_CESS = "AAAAA";
-    private static final String UPDATED_SEWERAGE_CESS = "BBBBB";
-    private static final String DEFAULT_SERVICE_CHARGE = "AAAAA";
-    private static final String UPDATED_SERVICE_CHARGE = "BBBBB";
-    private static final String DEFAULT_METER_SERVICE_CHARGE = "AAAAA";
-    private static final String UPDATED_METER_SERVICE_CHARGE = "BBBBB";
+
+    private static final LocalDate DEFAULT_METER_FIX_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_METER_FIX_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Float DEFAULT_INITIAL_READING = 1F;
+    private static final Float UPDATED_INITIAL_READING = 2F;
+
+    private static final Float DEFAULT_PRESENT_READING = 1F;
+    private static final Float UPDATED_PRESENT_READING = 2F;
+
+    private static final Float DEFAULT_UNITS = 1F;
+    private static final Float UPDATED_UNITS = 2F;
+
+    private static final Float DEFAULT_WATER_CESS = 1F;
+    private static final Float UPDATED_WATER_CESS = 2F;
+
+    private static final Float DEFAULT_SEWERAGE_CESS = 1F;
+    private static final Float UPDATED_SEWERAGE_CESS = 2F;
+
+    private static final Float DEFAULT_SERVICE_CHARGE = 1F;
+    private static final Float UPDATED_SERVICE_CHARGE = 2F;
+
+    private static final Float DEFAULT_METER_SERVICE_CHARGE = 1F;
+    private static final Float UPDATED_METER_SERVICE_CHARGE = 2F;
 
     private static final Float DEFAULT_TOTAL_AMOUNT = 1F;
     private static final Float UPDATED_TOTAL_AMOUNT = 2F;
@@ -86,8 +94,8 @@ public class BillDetailsResourceIntTest {
     private static final String UPDATED_TELEPHONE_NO = "BBBBB";
     private static final String DEFAULT_METER_STATUS = "AAAAA";
     private static final String UPDATED_METER_STATUS = "BBBBB";
-    private static final String DEFAULT_MC_MET_READER_CODE = "AAAAA";
-    private static final String UPDATED_MC_MET_READER_CODE = "BBBBB";
+    private static final String DEFAULT_MET_READER_CODE = "AAAAA";
+    private static final String UPDATED_MET_READER_CODE = "BBBBB";
     private static final String DEFAULT_BILL_FLAG = "AAAAA";
     private static final String UPDATED_BILL_FLAG = "BBBBB";
     private static final String DEFAULT_SVR_STATUS = "AAAAA";
@@ -104,10 +112,11 @@ public class BillDetailsResourceIntTest {
     private static final String UPDATED_NOTICE_NO = "BBBBB";
     private static final String DEFAULT_LAT = "AAAAA";
     private static final String UPDATED_LAT = "BBBBB";
-    private static final String DEFAULT_LONG_I = "AAAAA";
-    private static final String UPDATED_LONG_I = "BBBBB";
-    private static final String DEFAULT_NOMETER_AMT = "AAAAA";
-    private static final String UPDATED_NOMETER_AMT = "BBBBB";
+    private static final String DEFAULT_LONGI = "AAAAA";
+    private static final String UPDATED_LONGI = "BBBBB";
+
+    private static final Float DEFAULT_NO_METER_AMT = 1F;
+    private static final Float UPDATED_NO_METER_AMT = 2F;
 
     @Inject
     private BillDetailsRepository billDetailsRepository;
@@ -136,36 +145,36 @@ public class BillDetailsResourceIntTest {
     public void initTest() {
         billDetails = new BillDetails();
         billDetails.setCan(DEFAULT_CAN);
-        billDetails.setBill_number(DEFAULT_BILL_NUMBER);
-        billDetails.setBill_date(DEFAULT_BILL_DATE);
-        billDetails.setBill_time(DEFAULT_BILL_TIME);
-        billDetails.setMeter_make(DEFAULT_METER_MAKE);
-        billDetails.setCurrent_bill_type(DEFAULT_CURRENT_BILL_TYPE);
-        billDetails.setFrom_month(DEFAULT_FROM_MONTH);
-        billDetails.setTo_month(DEFAULT_TO_MONTH);
-        billDetails.setMeter_fix_date(DEFAULT_METER_FIX_DATE);
-        billDetails.setInitial_reading(DEFAULT_INITIAL_READING);
-        billDetails.setPresent_reading(DEFAULT_PRESENT_READING);
+        billDetails.setBillNumber(DEFAULT_BILL_NUMBER);
+        billDetails.setBillDate(DEFAULT_BILL_DATE);
+        billDetails.setBillTime(DEFAULT_BILL_TIME);
+        billDetails.setMeterMake(DEFAULT_METER_MAKE);
+        billDetails.setCurrentBillType(DEFAULT_CURRENT_BILL_TYPE);
+        billDetails.setFromMonth(DEFAULT_FROM_MONTH);
+        billDetails.setToMonth(DEFAULT_TO_MONTH);
+        billDetails.setMeterFixDate(DEFAULT_METER_FIX_DATE);
+        billDetails.setInitialReading(DEFAULT_INITIAL_READING);
+        billDetails.setPresentReading(DEFAULT_PRESENT_READING);
         billDetails.setUnits(DEFAULT_UNITS);
-        billDetails.setWater_cess(DEFAULT_WATER_CESS);
-        billDetails.setSewerage_cess(DEFAULT_SEWERAGE_CESS);
-        billDetails.setService_charge(DEFAULT_SERVICE_CHARGE);
-        billDetails.setMeter_service_charge(DEFAULT_METER_SERVICE_CHARGE);
-        billDetails.setTotal_amount(DEFAULT_TOTAL_AMOUNT);
-        billDetails.setNet_payable_amount(DEFAULT_NET_PAYABLE_AMOUNT);
-        billDetails.setTelephone_no(DEFAULT_TELEPHONE_NO);
-        billDetails.setMeter_status(DEFAULT_METER_STATUS);
-        billDetails.setMc_met_reader_code(DEFAULT_MC_MET_READER_CODE);
-        billDetails.setBill_flag(DEFAULT_BILL_FLAG);
-        billDetails.setSvr_status(DEFAULT_SVR_STATUS);
-        billDetails.setTerminal_id(DEFAULT_TERMINAL_ID);
-        billDetails.setMeter_reader_id(DEFAULT_METER_READER_ID);
-        billDetails.setUser_id(DEFAULT_USER_ID);
-        billDetails.setMobile_no(DEFAULT_MOBILE_NO);
-        billDetails.setNotice_no(DEFAULT_NOTICE_NO);
+        billDetails.setWaterCess(DEFAULT_WATER_CESS);
+        billDetails.setSewerageCess(DEFAULT_SEWERAGE_CESS);
+        billDetails.setServiceCharge(DEFAULT_SERVICE_CHARGE);
+        billDetails.setMeterServiceCharge(DEFAULT_METER_SERVICE_CHARGE);
+        billDetails.setTotalAmount(DEFAULT_TOTAL_AMOUNT);
+        billDetails.setNetPayableAmount(DEFAULT_NET_PAYABLE_AMOUNT);
+        billDetails.setTelephoneNo(DEFAULT_TELEPHONE_NO);
+        billDetails.setMeterStatus(DEFAULT_METER_STATUS);
+        billDetails.setMetReaderCode(DEFAULT_MET_READER_CODE);
+        billDetails.setBillFlag(DEFAULT_BILL_FLAG);
+        billDetails.setSvrStatus(DEFAULT_SVR_STATUS);
+        billDetails.setTerminalId(DEFAULT_TERMINAL_ID);
+        billDetails.setMeterReaderId(DEFAULT_METER_READER_ID);
+        billDetails.setUserId(DEFAULT_USER_ID);
+        billDetails.setMobileNo(DEFAULT_MOBILE_NO);
+        billDetails.setNoticeNo(DEFAULT_NOTICE_NO);
         billDetails.setLat(DEFAULT_LAT);
-        billDetails.setLongI(DEFAULT_LONG_I);
-        billDetails.setNometer_amt(DEFAULT_NOMETER_AMT);
+        billDetails.setLongi(DEFAULT_LONGI);
+        billDetails.setNoMeterAmt(DEFAULT_NO_METER_AMT);
     }
 
     @Test
@@ -185,44 +194,44 @@ public class BillDetailsResourceIntTest {
         assertThat(billDetailss).hasSize(databaseSizeBeforeCreate + 1);
         BillDetails testBillDetails = billDetailss.get(billDetailss.size() - 1);
         assertThat(testBillDetails.getCan()).isEqualTo(DEFAULT_CAN);
-        assertThat(testBillDetails.getBill_number()).isEqualTo(DEFAULT_BILL_NUMBER);
-        assertThat(testBillDetails.getBill_date()).isEqualTo(DEFAULT_BILL_DATE);
-        assertThat(testBillDetails.getBill_time()).isEqualTo(DEFAULT_BILL_TIME);
-        assertThat(testBillDetails.getMeter_make()).isEqualTo(DEFAULT_METER_MAKE);
-        assertThat(testBillDetails.getCurrent_bill_type()).isEqualTo(DEFAULT_CURRENT_BILL_TYPE);
-        assertThat(testBillDetails.getFrom_month()).isEqualTo(DEFAULT_FROM_MONTH);
-        assertThat(testBillDetails.getTo_month()).isEqualTo(DEFAULT_TO_MONTH);
-        assertThat(testBillDetails.getMeter_fix_date()).isEqualTo(DEFAULT_METER_FIX_DATE);
-        assertThat(testBillDetails.getInitial_reading()).isEqualTo(DEFAULT_INITIAL_READING);
-        assertThat(testBillDetails.getPresent_reading()).isEqualTo(DEFAULT_PRESENT_READING);
+        assertThat(testBillDetails.getBillNumber()).isEqualTo(DEFAULT_BILL_NUMBER);
+        assertThat(testBillDetails.getBillDate()).isEqualTo(DEFAULT_BILL_DATE);
+        assertThat(testBillDetails.getBillTime()).isEqualTo(DEFAULT_BILL_TIME);
+        assertThat(testBillDetails.getMeterMake()).isEqualTo(DEFAULT_METER_MAKE);
+        assertThat(testBillDetails.getCurrentBillType()).isEqualTo(DEFAULT_CURRENT_BILL_TYPE);
+        assertThat(testBillDetails.getFromMonth()).isEqualTo(DEFAULT_FROM_MONTH);
+        assertThat(testBillDetails.getToMonth()).isEqualTo(DEFAULT_TO_MONTH);
+        assertThat(testBillDetails.getMeterFixDate()).isEqualTo(DEFAULT_METER_FIX_DATE);
+        assertThat(testBillDetails.getInitialReading()).isEqualTo(DEFAULT_INITIAL_READING);
+        assertThat(testBillDetails.getPresentReading()).isEqualTo(DEFAULT_PRESENT_READING);
         assertThat(testBillDetails.getUnits()).isEqualTo(DEFAULT_UNITS);
-        assertThat(testBillDetails.getWater_cess()).isEqualTo(DEFAULT_WATER_CESS);
-        assertThat(testBillDetails.getSewerage_cess()).isEqualTo(DEFAULT_SEWERAGE_CESS);
-        assertThat(testBillDetails.getService_charge()).isEqualTo(DEFAULT_SERVICE_CHARGE);
-        assertThat(testBillDetails.getMeter_service_charge()).isEqualTo(DEFAULT_METER_SERVICE_CHARGE);
-        assertThat(testBillDetails.getTotal_amount()).isEqualTo(DEFAULT_TOTAL_AMOUNT);
-        assertThat(testBillDetails.getNet_payable_amount()).isEqualTo(DEFAULT_NET_PAYABLE_AMOUNT);
-        assertThat(testBillDetails.getTelephone_no()).isEqualTo(DEFAULT_TELEPHONE_NO);
-        assertThat(testBillDetails.getMeter_status()).isEqualTo(DEFAULT_METER_STATUS);
-        assertThat(testBillDetails.getMc_met_reader_code()).isEqualTo(DEFAULT_MC_MET_READER_CODE);
-        assertThat(testBillDetails.getBill_flag()).isEqualTo(DEFAULT_BILL_FLAG);
-        assertThat(testBillDetails.getSvr_status()).isEqualTo(DEFAULT_SVR_STATUS);
-        assertThat(testBillDetails.getTerminal_id()).isEqualTo(DEFAULT_TERMINAL_ID);
-        assertThat(testBillDetails.getMeter_reader_id()).isEqualTo(DEFAULT_METER_READER_ID);
-        assertThat(testBillDetails.getUser_id()).isEqualTo(DEFAULT_USER_ID);
-        assertThat(testBillDetails.getMobile_no()).isEqualTo(DEFAULT_MOBILE_NO);
-        assertThat(testBillDetails.getNotice_no()).isEqualTo(DEFAULT_NOTICE_NO);
+        assertThat(testBillDetails.getWaterCess()).isEqualTo(DEFAULT_WATER_CESS);
+        assertThat(testBillDetails.getSewerageCess()).isEqualTo(DEFAULT_SEWERAGE_CESS);
+        assertThat(testBillDetails.getServiceCharge()).isEqualTo(DEFAULT_SERVICE_CHARGE);
+        assertThat(testBillDetails.getMeterServiceCharge()).isEqualTo(DEFAULT_METER_SERVICE_CHARGE);
+        assertThat(testBillDetails.getTotalAmount()).isEqualTo(DEFAULT_TOTAL_AMOUNT);
+        assertThat(testBillDetails.getNetPayableAmount()).isEqualTo(DEFAULT_NET_PAYABLE_AMOUNT);
+        assertThat(testBillDetails.getTelephoneNo()).isEqualTo(DEFAULT_TELEPHONE_NO);
+        assertThat(testBillDetails.getMeterStatus()).isEqualTo(DEFAULT_METER_STATUS);
+        assertThat(testBillDetails.getMetReaderCode()).isEqualTo(DEFAULT_MET_READER_CODE);
+        assertThat(testBillDetails.getBillFlag()).isEqualTo(DEFAULT_BILL_FLAG);
+        assertThat(testBillDetails.getSvrStatus()).isEqualTo(DEFAULT_SVR_STATUS);
+        assertThat(testBillDetails.getTerminalId()).isEqualTo(DEFAULT_TERMINAL_ID);
+        assertThat(testBillDetails.getMeterReaderId()).isEqualTo(DEFAULT_METER_READER_ID);
+        assertThat(testBillDetails.getUserId()).isEqualTo(DEFAULT_USER_ID);
+        assertThat(testBillDetails.getMobileNo()).isEqualTo(DEFAULT_MOBILE_NO);
+        assertThat(testBillDetails.getNoticeNo()).isEqualTo(DEFAULT_NOTICE_NO);
         assertThat(testBillDetails.getLat()).isEqualTo(DEFAULT_LAT);
-        assertThat(testBillDetails.getLongI()).isEqualTo(DEFAULT_LONG_I);
-        assertThat(testBillDetails.getNometer_amt()).isEqualTo(DEFAULT_NOMETER_AMT);
+        assertThat(testBillDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
+        assertThat(testBillDetails.getNoMeterAmt()).isEqualTo(DEFAULT_NO_METER_AMT);
     }
 
     @Test
     @Transactional
-    public void checkBill_dateIsRequired() throws Exception {
+    public void checkBillDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = billDetailsRepository.findAll().size();
         // set the field null
-        billDetails.setBill_date(null);
+        billDetails.setBillDate(null);
 
         // Create the BillDetails, which fails.
 
@@ -247,36 +256,36 @@ public class BillDetailsResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(billDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
-                .andExpect(jsonPath("$.[*].bill_number").value(hasItem(DEFAULT_BILL_NUMBER.toString())))
-                .andExpect(jsonPath("$.[*].bill_date").value(hasItem(DEFAULT_BILL_DATE.toString())))
-                .andExpect(jsonPath("$.[*].bill_time").value(hasItem(DEFAULT_BILL_TIME.toString())))
-                .andExpect(jsonPath("$.[*].meter_make").value(hasItem(DEFAULT_METER_MAKE.toString())))
-                .andExpect(jsonPath("$.[*].current_bill_type").value(hasItem(DEFAULT_CURRENT_BILL_TYPE.toString())))
-                .andExpect(jsonPath("$.[*].from_month").value(hasItem(DEFAULT_FROM_MONTH.toString())))
-                .andExpect(jsonPath("$.[*].to_month").value(hasItem(DEFAULT_TO_MONTH.toString())))
-                .andExpect(jsonPath("$.[*].meter_fix_date").value(hasItem(DEFAULT_METER_FIX_DATE.toString())))
-                .andExpect(jsonPath("$.[*].initial_reading").value(hasItem(DEFAULT_INITIAL_READING.toString())))
-                .andExpect(jsonPath("$.[*].present_reading").value(hasItem(DEFAULT_PRESENT_READING.toString())))
-                .andExpect(jsonPath("$.[*].units").value(hasItem(DEFAULT_UNITS.toString())))
-                .andExpect(jsonPath("$.[*].water_cess").value(hasItem(DEFAULT_WATER_CESS.toString())))
-                .andExpect(jsonPath("$.[*].sewerage_cess").value(hasItem(DEFAULT_SEWERAGE_CESS.toString())))
-                .andExpect(jsonPath("$.[*].service_charge").value(hasItem(DEFAULT_SERVICE_CHARGE.toString())))
-                .andExpect(jsonPath("$.[*].meter_service_charge").value(hasItem(DEFAULT_METER_SERVICE_CHARGE.toString())))
-                .andExpect(jsonPath("$.[*].total_amount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
-                .andExpect(jsonPath("$.[*].net_payable_amount").value(hasItem(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue())))
-                .andExpect(jsonPath("$.[*].telephone_no").value(hasItem(DEFAULT_TELEPHONE_NO.toString())))
-                .andExpect(jsonPath("$.[*].meter_status").value(hasItem(DEFAULT_METER_STATUS.toString())))
-                .andExpect(jsonPath("$.[*].mc_met_reader_code").value(hasItem(DEFAULT_MC_MET_READER_CODE.toString())))
-                .andExpect(jsonPath("$.[*].bill_flag").value(hasItem(DEFAULT_BILL_FLAG.toString())))
-                .andExpect(jsonPath("$.[*].svr_status").value(hasItem(DEFAULT_SVR_STATUS.toString())))
-                .andExpect(jsonPath("$.[*].terminal_id").value(hasItem(DEFAULT_TERMINAL_ID.toString())))
-                .andExpect(jsonPath("$.[*].meter_reader_id").value(hasItem(DEFAULT_METER_READER_ID.toString())))
-                .andExpect(jsonPath("$.[*].user_id").value(hasItem(DEFAULT_USER_ID.toString())))
-                .andExpect(jsonPath("$.[*].mobile_no").value(hasItem(DEFAULT_MOBILE_NO.toString())))
-                .andExpect(jsonPath("$.[*].notice_no").value(hasItem(DEFAULT_NOTICE_NO.toString())))
+                .andExpect(jsonPath("$.[*].billNumber").value(hasItem(DEFAULT_BILL_NUMBER.toString())))
+                .andExpect(jsonPath("$.[*].billDate").value(hasItem(DEFAULT_BILL_DATE.toString())))
+                .andExpect(jsonPath("$.[*].billTime").value(hasItem(DEFAULT_BILL_TIME.toString())))
+                .andExpect(jsonPath("$.[*].meterMake").value(hasItem(DEFAULT_METER_MAKE.toString())))
+                .andExpect(jsonPath("$.[*].currentBillType").value(hasItem(DEFAULT_CURRENT_BILL_TYPE.toString())))
+                .andExpect(jsonPath("$.[*].fromMonth").value(hasItem(DEFAULT_FROM_MONTH.toString())))
+                .andExpect(jsonPath("$.[*].toMonth").value(hasItem(DEFAULT_TO_MONTH.toString())))
+                .andExpect(jsonPath("$.[*].meterFixDate").value(hasItem(DEFAULT_METER_FIX_DATE.toString())))
+                .andExpect(jsonPath("$.[*].initialReading").value(hasItem(DEFAULT_INITIAL_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].presentReading").value(hasItem(DEFAULT_PRESENT_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].units").value(hasItem(DEFAULT_UNITS.doubleValue())))
+                .andExpect(jsonPath("$.[*].waterCess").value(hasItem(DEFAULT_WATER_CESS.doubleValue())))
+                .andExpect(jsonPath("$.[*].sewerageCess").value(hasItem(DEFAULT_SEWERAGE_CESS.doubleValue())))
+                .andExpect(jsonPath("$.[*].serviceCharge").value(hasItem(DEFAULT_SERVICE_CHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].meterServiceCharge").value(hasItem(DEFAULT_METER_SERVICE_CHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
+                .andExpect(jsonPath("$.[*].netPayableAmount").value(hasItem(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue())))
+                .andExpect(jsonPath("$.[*].telephoneNo").value(hasItem(DEFAULT_TELEPHONE_NO.toString())))
+                .andExpect(jsonPath("$.[*].meterStatus").value(hasItem(DEFAULT_METER_STATUS.toString())))
+                .andExpect(jsonPath("$.[*].metReaderCode").value(hasItem(DEFAULT_MET_READER_CODE.toString())))
+                .andExpect(jsonPath("$.[*].billFlag").value(hasItem(DEFAULT_BILL_FLAG.toString())))
+                .andExpect(jsonPath("$.[*].svrStatus").value(hasItem(DEFAULT_SVR_STATUS.toString())))
+                .andExpect(jsonPath("$.[*].terminalId").value(hasItem(DEFAULT_TERMINAL_ID.toString())))
+                .andExpect(jsonPath("$.[*].meterReaderId").value(hasItem(DEFAULT_METER_READER_ID.toString())))
+                .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
+                .andExpect(jsonPath("$.[*].mobileNo").value(hasItem(DEFAULT_MOBILE_NO.toString())))
+                .andExpect(jsonPath("$.[*].noticeNo").value(hasItem(DEFAULT_NOTICE_NO.toString())))
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
-                .andExpect(jsonPath("$.[*].longI").value(hasItem(DEFAULT_LONG_I.toString())))
-                .andExpect(jsonPath("$.[*].nometer_amt").value(hasItem(DEFAULT_NOMETER_AMT.toString())));
+                .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
+                .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.doubleValue())));
     }
 
     @Test
@@ -291,36 +300,36 @@ public class BillDetailsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(billDetails.getId().intValue()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
-            .andExpect(jsonPath("$.bill_number").value(DEFAULT_BILL_NUMBER.toString()))
-            .andExpect(jsonPath("$.bill_date").value(DEFAULT_BILL_DATE.toString()))
-            .andExpect(jsonPath("$.bill_time").value(DEFAULT_BILL_TIME.toString()))
-            .andExpect(jsonPath("$.meter_make").value(DEFAULT_METER_MAKE.toString()))
-            .andExpect(jsonPath("$.current_bill_type").value(DEFAULT_CURRENT_BILL_TYPE.toString()))
-            .andExpect(jsonPath("$.from_month").value(DEFAULT_FROM_MONTH.toString()))
-            .andExpect(jsonPath("$.to_month").value(DEFAULT_TO_MONTH.toString()))
-            .andExpect(jsonPath("$.meter_fix_date").value(DEFAULT_METER_FIX_DATE.toString()))
-            .andExpect(jsonPath("$.initial_reading").value(DEFAULT_INITIAL_READING.toString()))
-            .andExpect(jsonPath("$.present_reading").value(DEFAULT_PRESENT_READING.toString()))
-            .andExpect(jsonPath("$.units").value(DEFAULT_UNITS.toString()))
-            .andExpect(jsonPath("$.water_cess").value(DEFAULT_WATER_CESS.toString()))
-            .andExpect(jsonPath("$.sewerage_cess").value(DEFAULT_SEWERAGE_CESS.toString()))
-            .andExpect(jsonPath("$.service_charge").value(DEFAULT_SERVICE_CHARGE.toString()))
-            .andExpect(jsonPath("$.meter_service_charge").value(DEFAULT_METER_SERVICE_CHARGE.toString()))
-            .andExpect(jsonPath("$.total_amount").value(DEFAULT_TOTAL_AMOUNT.doubleValue()))
-            .andExpect(jsonPath("$.net_payable_amount").value(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue()))
-            .andExpect(jsonPath("$.telephone_no").value(DEFAULT_TELEPHONE_NO.toString()))
-            .andExpect(jsonPath("$.meter_status").value(DEFAULT_METER_STATUS.toString()))
-            .andExpect(jsonPath("$.mc_met_reader_code").value(DEFAULT_MC_MET_READER_CODE.toString()))
-            .andExpect(jsonPath("$.bill_flag").value(DEFAULT_BILL_FLAG.toString()))
-            .andExpect(jsonPath("$.svr_status").value(DEFAULT_SVR_STATUS.toString()))
-            .andExpect(jsonPath("$.terminal_id").value(DEFAULT_TERMINAL_ID.toString()))
-            .andExpect(jsonPath("$.meter_reader_id").value(DEFAULT_METER_READER_ID.toString()))
-            .andExpect(jsonPath("$.user_id").value(DEFAULT_USER_ID.toString()))
-            .andExpect(jsonPath("$.mobile_no").value(DEFAULT_MOBILE_NO.toString()))
-            .andExpect(jsonPath("$.notice_no").value(DEFAULT_NOTICE_NO.toString()))
+            .andExpect(jsonPath("$.billNumber").value(DEFAULT_BILL_NUMBER.toString()))
+            .andExpect(jsonPath("$.billDate").value(DEFAULT_BILL_DATE.toString()))
+            .andExpect(jsonPath("$.billTime").value(DEFAULT_BILL_TIME.toString()))
+            .andExpect(jsonPath("$.meterMake").value(DEFAULT_METER_MAKE.toString()))
+            .andExpect(jsonPath("$.currentBillType").value(DEFAULT_CURRENT_BILL_TYPE.toString()))
+            .andExpect(jsonPath("$.fromMonth").value(DEFAULT_FROM_MONTH.toString()))
+            .andExpect(jsonPath("$.toMonth").value(DEFAULT_TO_MONTH.toString()))
+            .andExpect(jsonPath("$.meterFixDate").value(DEFAULT_METER_FIX_DATE.toString()))
+            .andExpect(jsonPath("$.initialReading").value(DEFAULT_INITIAL_READING.doubleValue()))
+            .andExpect(jsonPath("$.presentReading").value(DEFAULT_PRESENT_READING.doubleValue()))
+            .andExpect(jsonPath("$.units").value(DEFAULT_UNITS.doubleValue()))
+            .andExpect(jsonPath("$.waterCess").value(DEFAULT_WATER_CESS.doubleValue()))
+            .andExpect(jsonPath("$.sewerageCess").value(DEFAULT_SEWERAGE_CESS.doubleValue()))
+            .andExpect(jsonPath("$.serviceCharge").value(DEFAULT_SERVICE_CHARGE.doubleValue()))
+            .andExpect(jsonPath("$.meterServiceCharge").value(DEFAULT_METER_SERVICE_CHARGE.doubleValue()))
+            .andExpect(jsonPath("$.totalAmount").value(DEFAULT_TOTAL_AMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.netPayableAmount").value(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.telephoneNo").value(DEFAULT_TELEPHONE_NO.toString()))
+            .andExpect(jsonPath("$.meterStatus").value(DEFAULT_METER_STATUS.toString()))
+            .andExpect(jsonPath("$.metReaderCode").value(DEFAULT_MET_READER_CODE.toString()))
+            .andExpect(jsonPath("$.billFlag").value(DEFAULT_BILL_FLAG.toString()))
+            .andExpect(jsonPath("$.svrStatus").value(DEFAULT_SVR_STATUS.toString()))
+            .andExpect(jsonPath("$.terminalId").value(DEFAULT_TERMINAL_ID.toString()))
+            .andExpect(jsonPath("$.meterReaderId").value(DEFAULT_METER_READER_ID.toString()))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
+            .andExpect(jsonPath("$.mobileNo").value(DEFAULT_MOBILE_NO.toString()))
+            .andExpect(jsonPath("$.noticeNo").value(DEFAULT_NOTICE_NO.toString()))
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
-            .andExpect(jsonPath("$.longI").value(DEFAULT_LONG_I.toString()))
-            .andExpect(jsonPath("$.nometer_amt").value(DEFAULT_NOMETER_AMT.toString()));
+            .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
+            .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.doubleValue()));
     }
 
     @Test
@@ -341,36 +350,36 @@ public class BillDetailsResourceIntTest {
 
         // Update the billDetails
         billDetails.setCan(UPDATED_CAN);
-        billDetails.setBill_number(UPDATED_BILL_NUMBER);
-        billDetails.setBill_date(UPDATED_BILL_DATE);
-        billDetails.setBill_time(UPDATED_BILL_TIME);
-        billDetails.setMeter_make(UPDATED_METER_MAKE);
-        billDetails.setCurrent_bill_type(UPDATED_CURRENT_BILL_TYPE);
-        billDetails.setFrom_month(UPDATED_FROM_MONTH);
-        billDetails.setTo_month(UPDATED_TO_MONTH);
-        billDetails.setMeter_fix_date(UPDATED_METER_FIX_DATE);
-        billDetails.setInitial_reading(UPDATED_INITIAL_READING);
-        billDetails.setPresent_reading(UPDATED_PRESENT_READING);
+        billDetails.setBillNumber(UPDATED_BILL_NUMBER);
+        billDetails.setBillDate(UPDATED_BILL_DATE);
+        billDetails.setBillTime(UPDATED_BILL_TIME);
+        billDetails.setMeterMake(UPDATED_METER_MAKE);
+        billDetails.setCurrentBillType(UPDATED_CURRENT_BILL_TYPE);
+        billDetails.setFromMonth(UPDATED_FROM_MONTH);
+        billDetails.setToMonth(UPDATED_TO_MONTH);
+        billDetails.setMeterFixDate(UPDATED_METER_FIX_DATE);
+        billDetails.setInitialReading(UPDATED_INITIAL_READING);
+        billDetails.setPresentReading(UPDATED_PRESENT_READING);
         billDetails.setUnits(UPDATED_UNITS);
-        billDetails.setWater_cess(UPDATED_WATER_CESS);
-        billDetails.setSewerage_cess(UPDATED_SEWERAGE_CESS);
-        billDetails.setService_charge(UPDATED_SERVICE_CHARGE);
-        billDetails.setMeter_service_charge(UPDATED_METER_SERVICE_CHARGE);
-        billDetails.setTotal_amount(UPDATED_TOTAL_AMOUNT);
-        billDetails.setNet_payable_amount(UPDATED_NET_PAYABLE_AMOUNT);
-        billDetails.setTelephone_no(UPDATED_TELEPHONE_NO);
-        billDetails.setMeter_status(UPDATED_METER_STATUS);
-        billDetails.setMc_met_reader_code(UPDATED_MC_MET_READER_CODE);
-        billDetails.setBill_flag(UPDATED_BILL_FLAG);
-        billDetails.setSvr_status(UPDATED_SVR_STATUS);
-        billDetails.setTerminal_id(UPDATED_TERMINAL_ID);
-        billDetails.setMeter_reader_id(UPDATED_METER_READER_ID);
-        billDetails.setUser_id(UPDATED_USER_ID);
-        billDetails.setMobile_no(UPDATED_MOBILE_NO);
-        billDetails.setNotice_no(UPDATED_NOTICE_NO);
+        billDetails.setWaterCess(UPDATED_WATER_CESS);
+        billDetails.setSewerageCess(UPDATED_SEWERAGE_CESS);
+        billDetails.setServiceCharge(UPDATED_SERVICE_CHARGE);
+        billDetails.setMeterServiceCharge(UPDATED_METER_SERVICE_CHARGE);
+        billDetails.setTotalAmount(UPDATED_TOTAL_AMOUNT);
+        billDetails.setNetPayableAmount(UPDATED_NET_PAYABLE_AMOUNT);
+        billDetails.setTelephoneNo(UPDATED_TELEPHONE_NO);
+        billDetails.setMeterStatus(UPDATED_METER_STATUS);
+        billDetails.setMetReaderCode(UPDATED_MET_READER_CODE);
+        billDetails.setBillFlag(UPDATED_BILL_FLAG);
+        billDetails.setSvrStatus(UPDATED_SVR_STATUS);
+        billDetails.setTerminalId(UPDATED_TERMINAL_ID);
+        billDetails.setMeterReaderId(UPDATED_METER_READER_ID);
+        billDetails.setUserId(UPDATED_USER_ID);
+        billDetails.setMobileNo(UPDATED_MOBILE_NO);
+        billDetails.setNoticeNo(UPDATED_NOTICE_NO);
         billDetails.setLat(UPDATED_LAT);
-        billDetails.setLongI(UPDATED_LONG_I);
-        billDetails.setNometer_amt(UPDATED_NOMETER_AMT);
+        billDetails.setLongi(UPDATED_LONGI);
+        billDetails.setNoMeterAmt(UPDATED_NO_METER_AMT);
 
         restBillDetailsMockMvc.perform(put("/api/billDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -382,36 +391,36 @@ public class BillDetailsResourceIntTest {
         assertThat(billDetailss).hasSize(databaseSizeBeforeUpdate);
         BillDetails testBillDetails = billDetailss.get(billDetailss.size() - 1);
         assertThat(testBillDetails.getCan()).isEqualTo(UPDATED_CAN);
-        assertThat(testBillDetails.getBill_number()).isEqualTo(UPDATED_BILL_NUMBER);
-        assertThat(testBillDetails.getBill_date()).isEqualTo(UPDATED_BILL_DATE);
-        assertThat(testBillDetails.getBill_time()).isEqualTo(UPDATED_BILL_TIME);
-        assertThat(testBillDetails.getMeter_make()).isEqualTo(UPDATED_METER_MAKE);
-        assertThat(testBillDetails.getCurrent_bill_type()).isEqualTo(UPDATED_CURRENT_BILL_TYPE);
-        assertThat(testBillDetails.getFrom_month()).isEqualTo(UPDATED_FROM_MONTH);
-        assertThat(testBillDetails.getTo_month()).isEqualTo(UPDATED_TO_MONTH);
-        assertThat(testBillDetails.getMeter_fix_date()).isEqualTo(UPDATED_METER_FIX_DATE);
-        assertThat(testBillDetails.getInitial_reading()).isEqualTo(UPDATED_INITIAL_READING);
-        assertThat(testBillDetails.getPresent_reading()).isEqualTo(UPDATED_PRESENT_READING);
+        assertThat(testBillDetails.getBillNumber()).isEqualTo(UPDATED_BILL_NUMBER);
+        assertThat(testBillDetails.getBillDate()).isEqualTo(UPDATED_BILL_DATE);
+        assertThat(testBillDetails.getBillTime()).isEqualTo(UPDATED_BILL_TIME);
+        assertThat(testBillDetails.getMeterMake()).isEqualTo(UPDATED_METER_MAKE);
+        assertThat(testBillDetails.getCurrentBillType()).isEqualTo(UPDATED_CURRENT_BILL_TYPE);
+        assertThat(testBillDetails.getFromMonth()).isEqualTo(UPDATED_FROM_MONTH);
+        assertThat(testBillDetails.getToMonth()).isEqualTo(UPDATED_TO_MONTH);
+        assertThat(testBillDetails.getMeterFixDate()).isEqualTo(UPDATED_METER_FIX_DATE);
+        assertThat(testBillDetails.getInitialReading()).isEqualTo(UPDATED_INITIAL_READING);
+        assertThat(testBillDetails.getPresentReading()).isEqualTo(UPDATED_PRESENT_READING);
         assertThat(testBillDetails.getUnits()).isEqualTo(UPDATED_UNITS);
-        assertThat(testBillDetails.getWater_cess()).isEqualTo(UPDATED_WATER_CESS);
-        assertThat(testBillDetails.getSewerage_cess()).isEqualTo(UPDATED_SEWERAGE_CESS);
-        assertThat(testBillDetails.getService_charge()).isEqualTo(UPDATED_SERVICE_CHARGE);
-        assertThat(testBillDetails.getMeter_service_charge()).isEqualTo(UPDATED_METER_SERVICE_CHARGE);
-        assertThat(testBillDetails.getTotal_amount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
-        assertThat(testBillDetails.getNet_payable_amount()).isEqualTo(UPDATED_NET_PAYABLE_AMOUNT);
-        assertThat(testBillDetails.getTelephone_no()).isEqualTo(UPDATED_TELEPHONE_NO);
-        assertThat(testBillDetails.getMeter_status()).isEqualTo(UPDATED_METER_STATUS);
-        assertThat(testBillDetails.getMc_met_reader_code()).isEqualTo(UPDATED_MC_MET_READER_CODE);
-        assertThat(testBillDetails.getBill_flag()).isEqualTo(UPDATED_BILL_FLAG);
-        assertThat(testBillDetails.getSvr_status()).isEqualTo(UPDATED_SVR_STATUS);
-        assertThat(testBillDetails.getTerminal_id()).isEqualTo(UPDATED_TERMINAL_ID);
-        assertThat(testBillDetails.getMeter_reader_id()).isEqualTo(UPDATED_METER_READER_ID);
-        assertThat(testBillDetails.getUser_id()).isEqualTo(UPDATED_USER_ID);
-        assertThat(testBillDetails.getMobile_no()).isEqualTo(UPDATED_MOBILE_NO);
-        assertThat(testBillDetails.getNotice_no()).isEqualTo(UPDATED_NOTICE_NO);
+        assertThat(testBillDetails.getWaterCess()).isEqualTo(UPDATED_WATER_CESS);
+        assertThat(testBillDetails.getSewerageCess()).isEqualTo(UPDATED_SEWERAGE_CESS);
+        assertThat(testBillDetails.getServiceCharge()).isEqualTo(UPDATED_SERVICE_CHARGE);
+        assertThat(testBillDetails.getMeterServiceCharge()).isEqualTo(UPDATED_METER_SERVICE_CHARGE);
+        assertThat(testBillDetails.getTotalAmount()).isEqualTo(UPDATED_TOTAL_AMOUNT);
+        assertThat(testBillDetails.getNetPayableAmount()).isEqualTo(UPDATED_NET_PAYABLE_AMOUNT);
+        assertThat(testBillDetails.getTelephoneNo()).isEqualTo(UPDATED_TELEPHONE_NO);
+        assertThat(testBillDetails.getMeterStatus()).isEqualTo(UPDATED_METER_STATUS);
+        assertThat(testBillDetails.getMetReaderCode()).isEqualTo(UPDATED_MET_READER_CODE);
+        assertThat(testBillDetails.getBillFlag()).isEqualTo(UPDATED_BILL_FLAG);
+        assertThat(testBillDetails.getSvrStatus()).isEqualTo(UPDATED_SVR_STATUS);
+        assertThat(testBillDetails.getTerminalId()).isEqualTo(UPDATED_TERMINAL_ID);
+        assertThat(testBillDetails.getMeterReaderId()).isEqualTo(UPDATED_METER_READER_ID);
+        assertThat(testBillDetails.getUserId()).isEqualTo(UPDATED_USER_ID);
+        assertThat(testBillDetails.getMobileNo()).isEqualTo(UPDATED_MOBILE_NO);
+        assertThat(testBillDetails.getNoticeNo()).isEqualTo(UPDATED_NOTICE_NO);
         assertThat(testBillDetails.getLat()).isEqualTo(UPDATED_LAT);
-        assertThat(testBillDetails.getLongI()).isEqualTo(UPDATED_LONG_I);
-        assertThat(testBillDetails.getNometer_amt()).isEqualTo(UPDATED_NOMETER_AMT);
+        assertThat(testBillDetails.getLongi()).isEqualTo(UPDATED_LONGI);
+        assertThat(testBillDetails.getNoMeterAmt()).isEqualTo(UPDATED_NO_METER_AMT);
     }
 
     @Test

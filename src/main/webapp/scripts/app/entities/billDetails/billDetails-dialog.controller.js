@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp').controller('BillDetailsDialogController',
+angular.module('waterERPApp').controller('BillDetailsDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillDetails',
         function($scope, $stateParams, $uibModalInstance, entity, BillDetails) {
 
@@ -12,7 +12,7 @@ angular.module('watererpApp').controller('BillDetailsDialogController',
         };
 
         var onSaveSuccess = function (result) {
-            $scope.$emit('watererpApp:billDetailsUpdate', result);
+            $scope.$emit('waterERPApp:billDetailsUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
         };
@@ -33,13 +33,22 @@ angular.module('watererpApp').controller('BillDetailsDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.datePickerForBill_date = {};
+        $scope.datePickerForBillDate = {};
 
-        $scope.datePickerForBill_date.status = {
+        $scope.datePickerForBillDate.status = {
             opened: false
         };
 
-        $scope.datePickerForBill_dateOpen = function($event) {
-            $scope.datePickerForBill_date.status.opened = true;
+        $scope.datePickerForBillDateOpen = function($event) {
+            $scope.datePickerForBillDate.status.opened = true;
+        };
+        $scope.datePickerForMeterFixDate = {};
+
+        $scope.datePickerForMeterFixDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForMeterFixDateOpen = function($event) {
+            $scope.datePickerForMeterFixDate.status.opened = true;
         };
 }]);

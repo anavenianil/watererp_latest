@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="srini (generated)" id="1459586264678-1">
+      <createTable tableName="bill_details">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="bill_detailsPK"/>
+         </column>
+         <column name="bill_date" type="date">
+            <constraints nullable="false"/>
+         </column>
+         <column name="bill_flag" type="VARCHAR(255)"/>
+         <column name="bill_number" type="VARCHAR(255)"/>
+         <column name="bill_time" type="VARCHAR(255)"/>
+         <column name="can" type="VARCHAR(255)"/>
+         <column name="current_bill_type" type="VARCHAR(255)"/>
+         <column name="from_month" type="VARCHAR(255)"/>
+         <column name="initial_reading" type="FLOAT"/>
+         <column name="lat" type="VARCHAR(255)"/>
+         <column name="longi" type="VARCHAR(255)"/>
+         <column name="met_reader_code" type="VARCHAR(255)"/>
+         <column name="meter_fix_date" type="date"/>
+         <column name="meter_make" type="VARCHAR(255)"/>
+         <column name="meter_reader_id" type="VARCHAR(255)"/>
+         <column name="meter_service_charge" type="FLOAT"/>
+         <column name="meter_status" type="VARCHAR(255)"/>
+         <column name="mobile_no" type="VARCHAR(255)"/>
+         <column name="net_payable_amount" type="FLOAT"/>
+         <column name="no_meter_amt" type="FLOAT"/>
+         <column name="notice_no" type="VARCHAR(255)"/>
+         <column name="present_reading" type="FLOAT"/>
+         <column name="service_charge" type="FLOAT"/>
+         <column name="sewerage_cess" type="FLOAT"/>
+         <column name="svr_status" type="VARCHAR(255)"/>
+         <column name="telephone_no" type="VARCHAR(255)"/>
+         <column name="terminal_id" type="VARCHAR(255)"/>
+         <column name="to_month" type="VARCHAR(255)"/>
+         <column name="total_amount" type="FLOAT"/>
+         <column name="units" type="FLOAT"/>
+         <column name="user_id" type="VARCHAR(255)"/>
+         <column name="water_cess" type="FLOAT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-2">
+      <createTable tableName="bill_full_details">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="bill_full_detailsPK"/>
+         </column>
+         <column name="address" type="VARCHAR(255)"/>
+         <column name="arrears" type="FLOAT"/>
+         <column name="bill_date" type="date">
+            <constraints nullable="false"/>
+         </column>
+         <column name="bill_flag" type="VARCHAR(255)"/>
+         <column name="bill_number" type="VARCHAR(255)"/>
+         <column name="bill_time" type="VARCHAR(255)"/>
+         <column name="board_meter" type="VARCHAR(255)"/>
+         <column name="can" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="category" type="VARCHAR(255)"/>
+         <column name="city" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="conn_date" type="date">
+            <constraints nullable="false"/>
+         </column>
+         <column name="cons_name" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="current_bill_type" type="VARCHAR(255)"/>
+         <column name="divcode" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="from_month" type="VARCHAR(255)"/>
+         <column name="house_no" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="hrs_surcharge" type="FLOAT"/>
+         <column name="initial_reading" type="FLOAT"/>
+         <column name="installment" type="FLOAT"/>
+         <column name="int_on_arrears" type="FLOAT"/>
+         <column name="last_pymt_amt" type="FLOAT"/>
+         <column name="last_pymt_dt" type="date">
+            <constraints nullable="false"/>
+         </column>
+         <column name="lat" type="VARCHAR(255)"/>
+         <column name="longi" type="VARCHAR(255)"/>
+         <column name="met_avg_kl" type="FLOAT"/>
+         <column name="met_cost_installment" type="FLOAT"/>
+         <column name="met_reader_code" type="VARCHAR(255)"/>
+         <column name="met_reading_dt" type="date">
+            <constraints nullable="false"/>
+         </column>
+         <column name="met_reading_mo" type="date"/>
+         <column name="meter_fix_date" type="VARCHAR(255)"/>
+         <column name="meter_make" type="VARCHAR(255)"/>
+         <column name="meter_no" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="meter_reader_id" type="VARCHAR(255)"/>
+         <column name="meter_service_charge" type="FLOAT"/>
+         <column name="meter_status" type="VARCHAR(255)"/>
+         <column name="mobile_no" type="VARCHAR(255)"/>
+         <column name="net_payable_amount" type="FLOAT"/>
+         <column name="nometer_amt" type="FLOAT"/>
+         <column name="notice_no" type="VARCHAR(255)"/>
+         <column name="other_charges" type="FLOAT"/>
+         <column name="pin_code" type="VARCHAR(255)"/>
+         <column name="pipe_size" type="FLOAT"/>
+         <column name="present_reading" type="FLOAT"/>
+         <column name="prev_avg_kl" type="FLOAT"/>
+         <column name="prev_bill_month" type="date"/>
+         <column name="prev_bill_type" type="VARCHAR(255)"/>
+         <column name="prev_reading" type="FLOAT"/>
+         <column name="res_units" type="BIGINT"/>
+         <column name="reversal_amt" type="FLOAT"/>
+         <column name="sec_code" type="VARCHAR(255)"/>
+         <column name="sec_name" type="VARCHAR(255)"/>
+         <column name="service_charge" type="FLOAT"/>
+         <column name="sewerage" type="VARCHAR(255)"/>
+         <column name="sewerage_cess" type="FLOAT"/>
+         <column name="surcharge" type="FLOAT"/>
+         <column name="svr_status" type="VARCHAR(255)"/>
+         <column name="telephone_no" type="VARCHAR(255)"/>
+         <column name="terminal_id" type="VARCHAR(255)"/>
+         <column name="to_month" type="VARCHAR(255)"/>
+         <column name="total_amount" type="FLOAT"/>
+         <column name="units" type="FLOAT"/>
+         <column name="user_id" type="VARCHAR(255)"/>
+         <column name="water_cess" type="FLOAT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-3">
+      <createTable tableName="cust_details">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="cust_detailsPK"/>
+         </column>
+         <column name="address" type="VARCHAR(255)"/>
+         <column name="arrears" type="FLOAT"/>
+         <column name="board_meter" type="VARCHAR(255)"/>
+         <column name="can" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="category" type="VARCHAR(255)"/>
+         <column name="cc_flag" type="VARCHAR(255)"/>
+         <column name="city" type="VARCHAR(255)"/>
+         <column name="conn_date" type="date"/>
+         <column name="cons_name" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="cp_flag" type="VARCHAR(255)"/>
+         <column name="div_code" type="VARCHAR(255)"/>
+         <column name="dr_flag" type="VARCHAR(255)"/>
+         <column name="house_no" type="VARCHAR(255)"/>
+         <column name="hrs_surcharge" type="VARCHAR(255)"/>
+         <column name="installment" type="FLOAT"/>
+         <column name="int_on_arrears" type="FLOAT"/>
+         <column name="last_pymt_amt" type="FLOAT"/>
+         <column name="last_pymt_dt" type="date"/>
+         <column name="lat" type="VARCHAR(255)"/>
+         <column name="longi" type="VARCHAR(255)"/>
+         <column name="met_avg_kl" type="FLOAT"/>
+         <column name="met_cost_installment" type="FLOAT"/>
+         <column name="met_reader_code" type="VARCHAR(255)"/>
+         <column name="met_reading_dt" type="date"/>
+         <column name="met_reading_mo" type="date"/>
+         <column name="meter_no" type="VARCHAR(255)"/>
+         <column name="mobile_no" type="VARCHAR(255)"/>
+         <column name="notice_flag" type="VARCHAR(255)"/>
+         <column name="other_charges" type="FLOAT"/>
+         <column name="pin_code" type="VARCHAR(255)"/>
+         <column name="pipe_size" type="FLOAT"/>
+         <column name="prev_avg_kl" type="FLOAT"/>
+         <column name="prev_bill_month" type="date"/>
+         <column name="prev_bill_type" type="VARCHAR(255)"/>
+         <column name="prev_reading" type="FLOAT"/>
+         <column name="res_units" type="BIGINT"/>
+         <column name="reversal_amt" type="FLOAT"/>
+         <column name="sec_code" type="VARCHAR(255)"/>
+         <column name="sec_name" type="VARCHAR(255)"/>
+         <column name="sewerage" type="VARCHAR(255)"/>
+         <column name="surcharge" type="FLOAT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-4">
+      <dropTable tableName="bdx"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-5">
+      <dropTable tableName="bfdx"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-6">
+      <dropTable tableName="cx"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-7">
+      <dropTable tableName="mmg_material_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-8">
+      <dropTable tableName="mmg_terms_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-9">
+      <dropTable tableName="x"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-10">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="active"
+                        tableName="tariff_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-11">
+      <dropDefaultValue columnDataType="varchar(50)"
+                        columnName="authority_name"
+                        tableName="jhi_user_authority"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-12">
+      <dropNotNullConstraint columnDataType="varchar(255)"
+                             columnName="binary_file_content_type"
+                             tableName="file_upload_master"/>
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="binary_file_content_type"
+                        tableName="file_upload_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-13">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="cash_book_entry_type"
+                        tableName="cash_book_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-14">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="code"
+                        tableName="docket_code"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-15">
+      <dropDefaultValue columnDataType="varchar(50)"
+                        columnName="created_by"
+                        tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-16">
+      <addNotNullConstraint columnDataType="datetime"
+                            columnName="created_date"
+                            tableName="jhi_user"/>
+      <dropDefaultValue columnDataType="datetime"
+                        columnName="created_date"
+                        tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-17">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="file_no"
+                        tableName="file_number"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-18">
+      <dropDefaultValue columnDataType="varchar(50)"
+                        columnName="login"
+                        tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-19">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="make_name"
+                        tableName="make_of_pipe"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-20">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="name"
+                        tableName="configuration_details"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-21">
+      <dropDefaultValue columnDataType="varchar(50)"
+                        columnName="name"
+                        tableName="jhi_authority"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-22">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="name"
+                        tableName="jhi_persistent_audit_evt_data"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-23">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="name"
+                        tableName="menu_item"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-24">
+      <dropDefaultValue columnDataType="varchar(255)" columnName="name" tableName="module"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-25">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="path"
+                        tableName="menu_item"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-26">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="payment_mode"
+                        tableName="payment_types"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-27">
+      <dropNotNullConstraint columnDataType="varchar(255)"
+                             columnName="photo_content_type"
+                             tableName="file_upload_master"/>
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="photo_content_type"
+                        tableName="file_upload_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-28">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="principal"
+                        tableName="jhi_persistent_audit_event"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-29">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="scheme_name"
+                        tableName="scheme_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-30">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="series"
+                        tableName="jhi_persistent_token"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-31">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="sewer_size"
+                        tableName="sewer_size"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-32">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="tariff_category"
+                        tableName="tariff_category_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-33">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="tariff_desc"
+                        tableName="tariff_charges"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-34">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="tariff_name"
+                        tableName="tariff_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-35">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="tariff_type"
+                        tableName="tariff_type_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-36">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="token_value"
+                        tableName="jhi_persistent_token"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-37">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="type_of_txn"
+                        tableName="transaction_type_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-38">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="url_pattern"
+                        tableName="url"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-39">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="user_id"
+                        tableName="access_list"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-40">
+      <addNotNullConstraint columnDataType="datetime"
+                            columnName="valid_from"
+                            tableName="tariff_master"/>
+      <dropDefaultValue columnDataType="datetime"
+                        columnName="valid_from"
+                        tableName="tariff_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-41">
+      <addNotNullConstraint columnDataType="datetime"
+                            columnName="valid_to"
+                            tableName="tariff_master"/>
+      <dropDefaultValue columnDataType="datetime"
+                        columnName="valid_to"
+                        tableName="tariff_master"/>
+   </changeSet>
+   <changeSet author="srini (generated)" id="1459586264678-42">
+      <dropDefaultValue columnDataType="varchar(255)"
+                        columnName="workflow_name"
+                        tableName="workflow_master"/>
+   </changeSet>
+</databaseChangeLog>

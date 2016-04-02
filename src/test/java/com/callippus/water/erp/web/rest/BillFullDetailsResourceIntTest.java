@@ -47,12 +47,12 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_CAN = "BBBBB";
     private static final String DEFAULT_DIVCODE = "AAAAA";
     private static final String UPDATED_DIVCODE = "BBBBB";
-    private static final String DEFAULT_SECCODE = "AAAAA";
-    private static final String UPDATED_SECCODE = "BBBBB";
-    private static final String DEFAULT_SECNAME = "AAAAA";
-    private static final String UPDATED_SECNAME = "BBBBB";
-    private static final String DEFAULT_METREADERCODE = "AAAAA";
-    private static final String UPDATED_METREADERCODE = "BBBBB";
+    private static final String DEFAULT_SEC_CODE = "AAAAA";
+    private static final String UPDATED_SEC_CODE = "BBBBB";
+    private static final String DEFAULT_SEC_NAME = "AAAAA";
+    private static final String UPDATED_SEC_NAME = "BBBBB";
+    private static final String DEFAULT_MET_READER_CODE = "AAAAA";
+    private static final String UPDATED_MET_READER_CODE = "BBBBB";
 
     private static final LocalDate DEFAULT_CONN_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CONN_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -68,8 +68,9 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_PIN_CODE = "BBBBB";
     private static final String DEFAULT_CATEGORY = "AAAAA";
     private static final String UPDATED_CATEGORY = "BBBBB";
-    private static final String DEFAULT_PIPE_SIZE = "AAAAA";
-    private static final String UPDATED_PIPE_SIZE = "BBBBB";
+
+    private static final Float DEFAULT_PIPE_SIZE = 1F;
+    private static final Float UPDATED_PIPE_SIZE = 2F;
     private static final String DEFAULT_BOARD_METER = "AAAAA";
     private static final String UPDATED_BOARD_METER = "BBBBB";
     private static final String DEFAULT_SEWERAGE = "AAAAA";
@@ -78,37 +79,51 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_METER_NO = "BBBBB";
     private static final String DEFAULT_PREV_BILL_TYPE = "AAAAA";
     private static final String UPDATED_PREV_BILL_TYPE = "BBBBB";
-    private static final String DEFAULT_PREV_BILL_MONTH = "AAAAA";
-    private static final String UPDATED_PREV_BILL_MONTH = "BBBBB";
-    private static final String DEFAULT_PREV_AVG_KL = "AAAAA";
-    private static final String UPDATED_PREV_AVG_KL = "BBBBB";
+
+    private static final LocalDate DEFAULT_PREV_BILL_MONTH = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_PREV_BILL_MONTH = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Float DEFAULT_PREV_AVG_KL = 1F;
+    private static final Float UPDATED_PREV_AVG_KL = 2F;
 
     private static final LocalDate DEFAULT_MET_READING_DT = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_MET_READING_DT = LocalDate.now(ZoneId.systemDefault());
-    private static final String DEFAULT_PREV_READING = "AAAAA";
-    private static final String UPDATED_PREV_READING = "BBBBB";
-    private static final String DEFAULT_MET_READING_MO = "AAAAA";
-    private static final String UPDATED_MET_READING_MO = "BBBBB";
-    private static final String DEFAULT_MET_AVG_KL = "AAAAA";
-    private static final String UPDATED_MET_AVG_KL = "BBBBB";
-    private static final String DEFAULT_ARREARS = "AAAAA";
-    private static final String UPDATED_ARREARS = "BBBBB";
-    private static final String DEFAULT_REVERSAL_AMT = "AAAAA";
-    private static final String UPDATED_REVERSAL_AMT = "BBBBB";
-    private static final String DEFAULT_INSTALLMENT = "AAAAA";
-    private static final String UPDATED_INSTALLMENT = "BBBBB";
-    private static final String DEFAULT_OTHER_CHARGES = "AAAAA";
-    private static final String UPDATED_OTHER_CHARGES = "BBBBB";
-    private static final String DEFAULT_SUR_CHARGE = "AAAAA";
-    private static final String UPDATED_SUR_CHARGE = "BBBBB";
-    private static final String DEFAULT_HRS_SUR_CHARGE = "AAAAA";
-    private static final String UPDATED_HRS_SUR_CHARGE = "BBBBB";
-    private static final String DEFAULT_RES_UNITS = "AAAAA";
-    private static final String UPDATED_RES_UNITS = "BBBBB";
-    private static final String DEFAULT_MET_COST_INSTALLMENT = "AAAAA";
-    private static final String UPDATED_MET_COST_INSTALLMENT = "BBBBB";
-    private static final String DEFAULT_INT_ON_ARREARS = "AAAAA";
-    private static final String UPDATED_INT_ON_ARREARS = "BBBBB";
+
+    private static final Float DEFAULT_PREV_READING = 1F;
+    private static final Float UPDATED_PREV_READING = 2F;
+
+    private static final LocalDate DEFAULT_MET_READING_MO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_MET_READING_MO = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Float DEFAULT_MET_AVG_KL = 1F;
+    private static final Float UPDATED_MET_AVG_KL = 2F;
+
+    private static final Float DEFAULT_ARREARS = 1F;
+    private static final Float UPDATED_ARREARS = 2F;
+
+    private static final Float DEFAULT_REVERSAL_AMT = 1F;
+    private static final Float UPDATED_REVERSAL_AMT = 2F;
+
+    private static final Float DEFAULT_INSTALLMENT = 1F;
+    private static final Float UPDATED_INSTALLMENT = 2F;
+
+    private static final Float DEFAULT_OTHER_CHARGES = 1F;
+    private static final Float UPDATED_OTHER_CHARGES = 2F;
+
+    private static final Float DEFAULT_SURCHARGE = 1F;
+    private static final Float UPDATED_SURCHARGE = 2F;
+
+    private static final Float DEFAULT_HRS_SURCHARGE = 1F;
+    private static final Float UPDATED_HRS_SURCHARGE = 2F;
+
+    private static final Long DEFAULT_RES_UNITS = 1L;
+    private static final Long UPDATED_RES_UNITS = 2L;
+
+    private static final Float DEFAULT_MET_COST_INSTALLMENT = 1F;
+    private static final Float UPDATED_MET_COST_INSTALLMENT = 2F;
+
+    private static final Float DEFAULT_INT_ON_ARREARS = 1F;
+    private static final Float UPDATED_INT_ON_ARREARS = 2F;
 
     private static final LocalDate DEFAULT_LAST_PYMT_DT = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_LAST_PYMT_DT = LocalDate.now(ZoneId.systemDefault());
@@ -132,20 +147,27 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_TO_MONTH = "BBBBB";
     private static final String DEFAULT_METER_FIX_DATE = "AAAAA";
     private static final String UPDATED_METER_FIX_DATE = "BBBBB";
-    private static final String DEFAULT_INITIAL_READING = "AAAAA";
-    private static final String UPDATED_INITIAL_READING = "BBBBB";
-    private static final String DEFAULT_PRESENT_READING = "AAAAA";
-    private static final String UPDATED_PRESENT_READING = "BBBBB";
-    private static final String DEFAULT_UNITS = "AAAAA";
-    private static final String UPDATED_UNITS = "BBBBB";
-    private static final String DEFAULT_WATER_CESS = "AAAAA";
-    private static final String UPDATED_WATER_CESS = "BBBBB";
-    private static final String DEFAULT_SEWERAGE_CESS = "AAAAA";
-    private static final String UPDATED_SEWERAGE_CESS = "BBBBB";
-    private static final String DEFAULT_SERVICE_CHARGE = "AAAAA";
-    private static final String UPDATED_SERVICE_CHARGE = "BBBBB";
-    private static final String DEFAULT_METER_SERVICE_CHARGE = "AAAAA";
-    private static final String UPDATED_METER_SERVICE_CHARGE = "BBBBB";
+
+    private static final Float DEFAULT_INITIAL_READING = 1F;
+    private static final Float UPDATED_INITIAL_READING = 2F;
+
+    private static final Float DEFAULT_PRESENT_READING = 1F;
+    private static final Float UPDATED_PRESENT_READING = 2F;
+
+    private static final Float DEFAULT_UNITS = 1F;
+    private static final Float UPDATED_UNITS = 2F;
+
+    private static final Float DEFAULT_WATER_CESS = 1F;
+    private static final Float UPDATED_WATER_CESS = 2F;
+
+    private static final Float DEFAULT_SEWERAGE_CESS = 1F;
+    private static final Float UPDATED_SEWERAGE_CESS = 2F;
+
+    private static final Float DEFAULT_SERVICE_CHARGE = 1F;
+    private static final Float UPDATED_SERVICE_CHARGE = 2F;
+
+    private static final Float DEFAULT_METER_SERVICE_CHARGE = 1F;
+    private static final Float UPDATED_METER_SERVICE_CHARGE = 2F;
 
     private static final Float DEFAULT_TOTAL_AMOUNT = 1F;
     private static final Float UPDATED_TOTAL_AMOUNT = 2F;
@@ -156,8 +178,6 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_TELEPHONE_NO = "BBBBB";
     private static final String DEFAULT_METER_STATUS = "AAAAA";
     private static final String UPDATED_METER_STATUS = "BBBBB";
-    private static final String DEFAULT_MC_MET_READER_CODE = "AAAAA";
-    private static final String UPDATED_MC_MET_READER_CODE = "BBBBB";
     private static final String DEFAULT_BILL_FLAG = "AAAAA";
     private static final String UPDATED_BILL_FLAG = "BBBBB";
     private static final String DEFAULT_SVR_STATUS = "AAAAA";
@@ -174,10 +194,11 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_NOTICE_NO = "BBBBB";
     private static final String DEFAULT_LAT = "AAAAA";
     private static final String UPDATED_LAT = "BBBBB";
-    private static final String DEFAULT_LONG_I = "AAAAA";
-    private static final String UPDATED_LONG_I = "BBBBB";
-    private static final String DEFAULT_NOMETER_AMT = "AAAAA";
-    private static final String UPDATED_NOMETER_AMT = "BBBBB";
+    private static final String DEFAULT_LONGI = "AAAAA";
+    private static final String UPDATED_LONGI = "BBBBB";
+
+    private static final Float DEFAULT_NOMETER_AMT = 1F;
+    private static final Float UPDATED_NOMETER_AMT = 2F;
 
     @Inject
     private BillFullDetailsRepository billFullDetailsRepository;
@@ -207,9 +228,9 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails = new BillFullDetails();
         billFullDetails.setCan(DEFAULT_CAN);
         billFullDetails.setDivcode(DEFAULT_DIVCODE);
-        billFullDetails.setSeccode(DEFAULT_SECCODE);
-        billFullDetails.setSecname(DEFAULT_SECNAME);
-        billFullDetails.setMetreadercode(DEFAULT_METREADERCODE);
+        billFullDetails.setSecCode(DEFAULT_SEC_CODE);
+        billFullDetails.setSecName(DEFAULT_SEC_NAME);
+        billFullDetails.setMetReaderCode(DEFAULT_MET_READER_CODE);
         billFullDetails.setConnDate(DEFAULT_CONN_DATE);
         billFullDetails.setConsName(DEFAULT_CONS_NAME);
         billFullDetails.setHouseNo(DEFAULT_HOUSE_NO);
@@ -232,8 +253,8 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setReversalAmt(DEFAULT_REVERSAL_AMT);
         billFullDetails.setInstallment(DEFAULT_INSTALLMENT);
         billFullDetails.setOtherCharges(DEFAULT_OTHER_CHARGES);
-        billFullDetails.setSurCharge(DEFAULT_SUR_CHARGE);
-        billFullDetails.setHrsSurCharge(DEFAULT_HRS_SUR_CHARGE);
+        billFullDetails.setSurcharge(DEFAULT_SURCHARGE);
+        billFullDetails.setHrsSurcharge(DEFAULT_HRS_SURCHARGE);
         billFullDetails.setResUnits(DEFAULT_RES_UNITS);
         billFullDetails.setMetCostInstallment(DEFAULT_MET_COST_INSTALLMENT);
         billFullDetails.setIntOnArrears(DEFAULT_INT_ON_ARREARS);
@@ -258,7 +279,6 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setNetPayableAmount(DEFAULT_NET_PAYABLE_AMOUNT);
         billFullDetails.setTelephoneNo(DEFAULT_TELEPHONE_NO);
         billFullDetails.setMeterStatus(DEFAULT_METER_STATUS);
-        billFullDetails.setMcMetReaderCode(DEFAULT_MC_MET_READER_CODE);
         billFullDetails.setBillFlag(DEFAULT_BILL_FLAG);
         billFullDetails.setSvrStatus(DEFAULT_SVR_STATUS);
         billFullDetails.setTerminalId(DEFAULT_TERMINAL_ID);
@@ -267,7 +287,7 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setMobileNo(DEFAULT_MOBILE_NO);
         billFullDetails.setNoticeNo(DEFAULT_NOTICE_NO);
         billFullDetails.setLat(DEFAULT_LAT);
-        billFullDetails.setLongI(DEFAULT_LONG_I);
+        billFullDetails.setLongi(DEFAULT_LONGI);
         billFullDetails.setNometerAmt(DEFAULT_NOMETER_AMT);
     }
 
@@ -289,9 +309,9 @@ public class BillFullDetailsResourceIntTest {
         BillFullDetails testBillFullDetails = billFullDetailss.get(billFullDetailss.size() - 1);
         assertThat(testBillFullDetails.getCan()).isEqualTo(DEFAULT_CAN);
         assertThat(testBillFullDetails.getDivcode()).isEqualTo(DEFAULT_DIVCODE);
-        assertThat(testBillFullDetails.getSeccode()).isEqualTo(DEFAULT_SECCODE);
-        assertThat(testBillFullDetails.getSecname()).isEqualTo(DEFAULT_SECNAME);
-        assertThat(testBillFullDetails.getMetreadercode()).isEqualTo(DEFAULT_METREADERCODE);
+        assertThat(testBillFullDetails.getSecCode()).isEqualTo(DEFAULT_SEC_CODE);
+        assertThat(testBillFullDetails.getSecName()).isEqualTo(DEFAULT_SEC_NAME);
+        assertThat(testBillFullDetails.getMetReaderCode()).isEqualTo(DEFAULT_MET_READER_CODE);
         assertThat(testBillFullDetails.getConnDate()).isEqualTo(DEFAULT_CONN_DATE);
         assertThat(testBillFullDetails.getConsName()).isEqualTo(DEFAULT_CONS_NAME);
         assertThat(testBillFullDetails.getHouseNo()).isEqualTo(DEFAULT_HOUSE_NO);
@@ -314,8 +334,8 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getReversalAmt()).isEqualTo(DEFAULT_REVERSAL_AMT);
         assertThat(testBillFullDetails.getInstallment()).isEqualTo(DEFAULT_INSTALLMENT);
         assertThat(testBillFullDetails.getOtherCharges()).isEqualTo(DEFAULT_OTHER_CHARGES);
-        assertThat(testBillFullDetails.getSurCharge()).isEqualTo(DEFAULT_SUR_CHARGE);
-        assertThat(testBillFullDetails.getHrsSurCharge()).isEqualTo(DEFAULT_HRS_SUR_CHARGE);
+        assertThat(testBillFullDetails.getSurcharge()).isEqualTo(DEFAULT_SURCHARGE);
+        assertThat(testBillFullDetails.getHrsSurcharge()).isEqualTo(DEFAULT_HRS_SURCHARGE);
         assertThat(testBillFullDetails.getResUnits()).isEqualTo(DEFAULT_RES_UNITS);
         assertThat(testBillFullDetails.getMetCostInstallment()).isEqualTo(DEFAULT_MET_COST_INSTALLMENT);
         assertThat(testBillFullDetails.getIntOnArrears()).isEqualTo(DEFAULT_INT_ON_ARREARS);
@@ -340,7 +360,6 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getNetPayableAmount()).isEqualTo(DEFAULT_NET_PAYABLE_AMOUNT);
         assertThat(testBillFullDetails.getTelephoneNo()).isEqualTo(DEFAULT_TELEPHONE_NO);
         assertThat(testBillFullDetails.getMeterStatus()).isEqualTo(DEFAULT_METER_STATUS);
-        assertThat(testBillFullDetails.getMcMetReaderCode()).isEqualTo(DEFAULT_MC_MET_READER_CODE);
         assertThat(testBillFullDetails.getBillFlag()).isEqualTo(DEFAULT_BILL_FLAG);
         assertThat(testBillFullDetails.getSvrStatus()).isEqualTo(DEFAULT_SVR_STATUS);
         assertThat(testBillFullDetails.getTerminalId()).isEqualTo(DEFAULT_TERMINAL_ID);
@@ -349,7 +368,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getMobileNo()).isEqualTo(DEFAULT_MOBILE_NO);
         assertThat(testBillFullDetails.getNoticeNo()).isEqualTo(DEFAULT_NOTICE_NO);
         assertThat(testBillFullDetails.getLat()).isEqualTo(DEFAULT_LAT);
-        assertThat(testBillFullDetails.getLongI()).isEqualTo(DEFAULT_LONG_I);
+        assertThat(testBillFullDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
         assertThat(testBillFullDetails.getNometerAmt()).isEqualTo(DEFAULT_NOMETER_AMT);
     }
 
@@ -546,9 +565,9 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(billFullDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
                 .andExpect(jsonPath("$.[*].divcode").value(hasItem(DEFAULT_DIVCODE.toString())))
-                .andExpect(jsonPath("$.[*].seccode").value(hasItem(DEFAULT_SECCODE.toString())))
-                .andExpect(jsonPath("$.[*].secname").value(hasItem(DEFAULT_SECNAME.toString())))
-                .andExpect(jsonPath("$.[*].metreadercode").value(hasItem(DEFAULT_METREADERCODE.toString())))
+                .andExpect(jsonPath("$.[*].secCode").value(hasItem(DEFAULT_SEC_CODE.toString())))
+                .andExpect(jsonPath("$.[*].secName").value(hasItem(DEFAULT_SEC_NAME.toString())))
+                .andExpect(jsonPath("$.[*].metReaderCode").value(hasItem(DEFAULT_MET_READER_CODE.toString())))
                 .andExpect(jsonPath("$.[*].connDate").value(hasItem(DEFAULT_CONN_DATE.toString())))
                 .andExpect(jsonPath("$.[*].consName").value(hasItem(DEFAULT_CONS_NAME.toString())))
                 .andExpect(jsonPath("$.[*].houseNo").value(hasItem(DEFAULT_HOUSE_NO.toString())))
@@ -556,26 +575,26 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
                 .andExpect(jsonPath("$.[*].pinCode").value(hasItem(DEFAULT_PIN_CODE.toString())))
                 .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
-                .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.toString())))
+                .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.doubleValue())))
                 .andExpect(jsonPath("$.[*].boardMeter").value(hasItem(DEFAULT_BOARD_METER.toString())))
                 .andExpect(jsonPath("$.[*].sewerage").value(hasItem(DEFAULT_SEWERAGE.toString())))
                 .andExpect(jsonPath("$.[*].meterNo").value(hasItem(DEFAULT_METER_NO.toString())))
                 .andExpect(jsonPath("$.[*].prevBillType").value(hasItem(DEFAULT_PREV_BILL_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].prevBillMonth").value(hasItem(DEFAULT_PREV_BILL_MONTH.toString())))
-                .andExpect(jsonPath("$.[*].prevAvgKl").value(hasItem(DEFAULT_PREV_AVG_KL.toString())))
+                .andExpect(jsonPath("$.[*].prevAvgKl").value(hasItem(DEFAULT_PREV_AVG_KL.doubleValue())))
                 .andExpect(jsonPath("$.[*].metReadingDt").value(hasItem(DEFAULT_MET_READING_DT.toString())))
-                .andExpect(jsonPath("$.[*].prevReading").value(hasItem(DEFAULT_PREV_READING.toString())))
+                .andExpect(jsonPath("$.[*].prevReading").value(hasItem(DEFAULT_PREV_READING.doubleValue())))
                 .andExpect(jsonPath("$.[*].metReadingMo").value(hasItem(DEFAULT_MET_READING_MO.toString())))
-                .andExpect(jsonPath("$.[*].metAvgKl").value(hasItem(DEFAULT_MET_AVG_KL.toString())))
-                .andExpect(jsonPath("$.[*].arrears").value(hasItem(DEFAULT_ARREARS.toString())))
-                .andExpect(jsonPath("$.[*].reversalAmt").value(hasItem(DEFAULT_REVERSAL_AMT.toString())))
-                .andExpect(jsonPath("$.[*].installment").value(hasItem(DEFAULT_INSTALLMENT.toString())))
-                .andExpect(jsonPath("$.[*].otherCharges").value(hasItem(DEFAULT_OTHER_CHARGES.toString())))
-                .andExpect(jsonPath("$.[*].surCharge").value(hasItem(DEFAULT_SUR_CHARGE.toString())))
-                .andExpect(jsonPath("$.[*].hrsSurCharge").value(hasItem(DEFAULT_HRS_SUR_CHARGE.toString())))
-                .andExpect(jsonPath("$.[*].resUnits").value(hasItem(DEFAULT_RES_UNITS.toString())))
-                .andExpect(jsonPath("$.[*].metCostInstallment").value(hasItem(DEFAULT_MET_COST_INSTALLMENT.toString())))
-                .andExpect(jsonPath("$.[*].intOnArrears").value(hasItem(DEFAULT_INT_ON_ARREARS.toString())))
+                .andExpect(jsonPath("$.[*].metAvgKl").value(hasItem(DEFAULT_MET_AVG_KL.doubleValue())))
+                .andExpect(jsonPath("$.[*].arrears").value(hasItem(DEFAULT_ARREARS.doubleValue())))
+                .andExpect(jsonPath("$.[*].reversalAmt").value(hasItem(DEFAULT_REVERSAL_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].installment").value(hasItem(DEFAULT_INSTALLMENT.doubleValue())))
+                .andExpect(jsonPath("$.[*].otherCharges").value(hasItem(DEFAULT_OTHER_CHARGES.doubleValue())))
+                .andExpect(jsonPath("$.[*].surcharge").value(hasItem(DEFAULT_SURCHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].hrsSurcharge").value(hasItem(DEFAULT_HRS_SURCHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].resUnits").value(hasItem(DEFAULT_RES_UNITS.intValue())))
+                .andExpect(jsonPath("$.[*].metCostInstallment").value(hasItem(DEFAULT_MET_COST_INSTALLMENT.doubleValue())))
+                .andExpect(jsonPath("$.[*].intOnArrears").value(hasItem(DEFAULT_INT_ON_ARREARS.doubleValue())))
                 .andExpect(jsonPath("$.[*].lastPymtDt").value(hasItem(DEFAULT_LAST_PYMT_DT.toString())))
                 .andExpect(jsonPath("$.[*].lastPymtAmt").value(hasItem(DEFAULT_LAST_PYMT_AMT.doubleValue())))
                 .andExpect(jsonPath("$.[*].billNumber").value(hasItem(DEFAULT_BILL_NUMBER.toString())))
@@ -586,18 +605,17 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].fromMonth").value(hasItem(DEFAULT_FROM_MONTH.toString())))
                 .andExpect(jsonPath("$.[*].toMonth").value(hasItem(DEFAULT_TO_MONTH.toString())))
                 .andExpect(jsonPath("$.[*].meterFixDate").value(hasItem(DEFAULT_METER_FIX_DATE.toString())))
-                .andExpect(jsonPath("$.[*].initialReading").value(hasItem(DEFAULT_INITIAL_READING.toString())))
-                .andExpect(jsonPath("$.[*].presentReading").value(hasItem(DEFAULT_PRESENT_READING.toString())))
-                .andExpect(jsonPath("$.[*].units").value(hasItem(DEFAULT_UNITS.toString())))
-                .andExpect(jsonPath("$.[*].waterCess").value(hasItem(DEFAULT_WATER_CESS.toString())))
-                .andExpect(jsonPath("$.[*].sewerageCess").value(hasItem(DEFAULT_SEWERAGE_CESS.toString())))
-                .andExpect(jsonPath("$.[*].serviceCharge").value(hasItem(DEFAULT_SERVICE_CHARGE.toString())))
-                .andExpect(jsonPath("$.[*].meterServiceCharge").value(hasItem(DEFAULT_METER_SERVICE_CHARGE.toString())))
+                .andExpect(jsonPath("$.[*].initialReading").value(hasItem(DEFAULT_INITIAL_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].presentReading").value(hasItem(DEFAULT_PRESENT_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].units").value(hasItem(DEFAULT_UNITS.doubleValue())))
+                .andExpect(jsonPath("$.[*].waterCess").value(hasItem(DEFAULT_WATER_CESS.doubleValue())))
+                .andExpect(jsonPath("$.[*].sewerageCess").value(hasItem(DEFAULT_SEWERAGE_CESS.doubleValue())))
+                .andExpect(jsonPath("$.[*].serviceCharge").value(hasItem(DEFAULT_SERVICE_CHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].meterServiceCharge").value(hasItem(DEFAULT_METER_SERVICE_CHARGE.doubleValue())))
                 .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
                 .andExpect(jsonPath("$.[*].netPayableAmount").value(hasItem(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue())))
                 .andExpect(jsonPath("$.[*].telephoneNo").value(hasItem(DEFAULT_TELEPHONE_NO.toString())))
                 .andExpect(jsonPath("$.[*].meterStatus").value(hasItem(DEFAULT_METER_STATUS.toString())))
-                .andExpect(jsonPath("$.[*].mcMetReaderCode").value(hasItem(DEFAULT_MC_MET_READER_CODE.toString())))
                 .andExpect(jsonPath("$.[*].billFlag").value(hasItem(DEFAULT_BILL_FLAG.toString())))
                 .andExpect(jsonPath("$.[*].svrStatus").value(hasItem(DEFAULT_SVR_STATUS.toString())))
                 .andExpect(jsonPath("$.[*].terminalId").value(hasItem(DEFAULT_TERMINAL_ID.toString())))
@@ -606,8 +624,8 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].mobileNo").value(hasItem(DEFAULT_MOBILE_NO.toString())))
                 .andExpect(jsonPath("$.[*].noticeNo").value(hasItem(DEFAULT_NOTICE_NO.toString())))
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
-                .andExpect(jsonPath("$.[*].longI").value(hasItem(DEFAULT_LONG_I.toString())))
-                .andExpect(jsonPath("$.[*].nometerAmt").value(hasItem(DEFAULT_NOMETER_AMT.toString())));
+                .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
+                .andExpect(jsonPath("$.[*].nometerAmt").value(hasItem(DEFAULT_NOMETER_AMT.doubleValue())));
     }
 
     @Test
@@ -623,9 +641,9 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.id").value(billFullDetails.getId().intValue()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
             .andExpect(jsonPath("$.divcode").value(DEFAULT_DIVCODE.toString()))
-            .andExpect(jsonPath("$.seccode").value(DEFAULT_SECCODE.toString()))
-            .andExpect(jsonPath("$.secname").value(DEFAULT_SECNAME.toString()))
-            .andExpect(jsonPath("$.metreadercode").value(DEFAULT_METREADERCODE.toString()))
+            .andExpect(jsonPath("$.secCode").value(DEFAULT_SEC_CODE.toString()))
+            .andExpect(jsonPath("$.secName").value(DEFAULT_SEC_NAME.toString()))
+            .andExpect(jsonPath("$.metReaderCode").value(DEFAULT_MET_READER_CODE.toString()))
             .andExpect(jsonPath("$.connDate").value(DEFAULT_CONN_DATE.toString()))
             .andExpect(jsonPath("$.consName").value(DEFAULT_CONS_NAME.toString()))
             .andExpect(jsonPath("$.houseNo").value(DEFAULT_HOUSE_NO.toString()))
@@ -633,26 +651,26 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
             .andExpect(jsonPath("$.pinCode").value(DEFAULT_PIN_CODE.toString()))
             .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
-            .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.toString()))
+            .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.doubleValue()))
             .andExpect(jsonPath("$.boardMeter").value(DEFAULT_BOARD_METER.toString()))
             .andExpect(jsonPath("$.sewerage").value(DEFAULT_SEWERAGE.toString()))
             .andExpect(jsonPath("$.meterNo").value(DEFAULT_METER_NO.toString()))
             .andExpect(jsonPath("$.prevBillType").value(DEFAULT_PREV_BILL_TYPE.toString()))
             .andExpect(jsonPath("$.prevBillMonth").value(DEFAULT_PREV_BILL_MONTH.toString()))
-            .andExpect(jsonPath("$.prevAvgKl").value(DEFAULT_PREV_AVG_KL.toString()))
+            .andExpect(jsonPath("$.prevAvgKl").value(DEFAULT_PREV_AVG_KL.doubleValue()))
             .andExpect(jsonPath("$.metReadingDt").value(DEFAULT_MET_READING_DT.toString()))
-            .andExpect(jsonPath("$.prevReading").value(DEFAULT_PREV_READING.toString()))
+            .andExpect(jsonPath("$.prevReading").value(DEFAULT_PREV_READING.doubleValue()))
             .andExpect(jsonPath("$.metReadingMo").value(DEFAULT_MET_READING_MO.toString()))
-            .andExpect(jsonPath("$.metAvgKl").value(DEFAULT_MET_AVG_KL.toString()))
-            .andExpect(jsonPath("$.arrears").value(DEFAULT_ARREARS.toString()))
-            .andExpect(jsonPath("$.reversalAmt").value(DEFAULT_REVERSAL_AMT.toString()))
-            .andExpect(jsonPath("$.installment").value(DEFAULT_INSTALLMENT.toString()))
-            .andExpect(jsonPath("$.otherCharges").value(DEFAULT_OTHER_CHARGES.toString()))
-            .andExpect(jsonPath("$.surCharge").value(DEFAULT_SUR_CHARGE.toString()))
-            .andExpect(jsonPath("$.hrsSurCharge").value(DEFAULT_HRS_SUR_CHARGE.toString()))
-            .andExpect(jsonPath("$.resUnits").value(DEFAULT_RES_UNITS.toString()))
-            .andExpect(jsonPath("$.metCostInstallment").value(DEFAULT_MET_COST_INSTALLMENT.toString()))
-            .andExpect(jsonPath("$.intOnArrears").value(DEFAULT_INT_ON_ARREARS.toString()))
+            .andExpect(jsonPath("$.metAvgKl").value(DEFAULT_MET_AVG_KL.doubleValue()))
+            .andExpect(jsonPath("$.arrears").value(DEFAULT_ARREARS.doubleValue()))
+            .andExpect(jsonPath("$.reversalAmt").value(DEFAULT_REVERSAL_AMT.doubleValue()))
+            .andExpect(jsonPath("$.installment").value(DEFAULT_INSTALLMENT.doubleValue()))
+            .andExpect(jsonPath("$.otherCharges").value(DEFAULT_OTHER_CHARGES.doubleValue()))
+            .andExpect(jsonPath("$.surcharge").value(DEFAULT_SURCHARGE.doubleValue()))
+            .andExpect(jsonPath("$.hrsSurcharge").value(DEFAULT_HRS_SURCHARGE.doubleValue()))
+            .andExpect(jsonPath("$.resUnits").value(DEFAULT_RES_UNITS.intValue()))
+            .andExpect(jsonPath("$.metCostInstallment").value(DEFAULT_MET_COST_INSTALLMENT.doubleValue()))
+            .andExpect(jsonPath("$.intOnArrears").value(DEFAULT_INT_ON_ARREARS.doubleValue()))
             .andExpect(jsonPath("$.lastPymtDt").value(DEFAULT_LAST_PYMT_DT.toString()))
             .andExpect(jsonPath("$.lastPymtAmt").value(DEFAULT_LAST_PYMT_AMT.doubleValue()))
             .andExpect(jsonPath("$.billNumber").value(DEFAULT_BILL_NUMBER.toString()))
@@ -663,18 +681,17 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.fromMonth").value(DEFAULT_FROM_MONTH.toString()))
             .andExpect(jsonPath("$.toMonth").value(DEFAULT_TO_MONTH.toString()))
             .andExpect(jsonPath("$.meterFixDate").value(DEFAULT_METER_FIX_DATE.toString()))
-            .andExpect(jsonPath("$.initialReading").value(DEFAULT_INITIAL_READING.toString()))
-            .andExpect(jsonPath("$.presentReading").value(DEFAULT_PRESENT_READING.toString()))
-            .andExpect(jsonPath("$.units").value(DEFAULT_UNITS.toString()))
-            .andExpect(jsonPath("$.waterCess").value(DEFAULT_WATER_CESS.toString()))
-            .andExpect(jsonPath("$.sewerageCess").value(DEFAULT_SEWERAGE_CESS.toString()))
-            .andExpect(jsonPath("$.serviceCharge").value(DEFAULT_SERVICE_CHARGE.toString()))
-            .andExpect(jsonPath("$.meterServiceCharge").value(DEFAULT_METER_SERVICE_CHARGE.toString()))
+            .andExpect(jsonPath("$.initialReading").value(DEFAULT_INITIAL_READING.doubleValue()))
+            .andExpect(jsonPath("$.presentReading").value(DEFAULT_PRESENT_READING.doubleValue()))
+            .andExpect(jsonPath("$.units").value(DEFAULT_UNITS.doubleValue()))
+            .andExpect(jsonPath("$.waterCess").value(DEFAULT_WATER_CESS.doubleValue()))
+            .andExpect(jsonPath("$.sewerageCess").value(DEFAULT_SEWERAGE_CESS.doubleValue()))
+            .andExpect(jsonPath("$.serviceCharge").value(DEFAULT_SERVICE_CHARGE.doubleValue()))
+            .andExpect(jsonPath("$.meterServiceCharge").value(DEFAULT_METER_SERVICE_CHARGE.doubleValue()))
             .andExpect(jsonPath("$.totalAmount").value(DEFAULT_TOTAL_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.netPayableAmount").value(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.telephoneNo").value(DEFAULT_TELEPHONE_NO.toString()))
             .andExpect(jsonPath("$.meterStatus").value(DEFAULT_METER_STATUS.toString()))
-            .andExpect(jsonPath("$.mcMetReaderCode").value(DEFAULT_MC_MET_READER_CODE.toString()))
             .andExpect(jsonPath("$.billFlag").value(DEFAULT_BILL_FLAG.toString()))
             .andExpect(jsonPath("$.svrStatus").value(DEFAULT_SVR_STATUS.toString()))
             .andExpect(jsonPath("$.terminalId").value(DEFAULT_TERMINAL_ID.toString()))
@@ -683,8 +700,8 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.mobileNo").value(DEFAULT_MOBILE_NO.toString()))
             .andExpect(jsonPath("$.noticeNo").value(DEFAULT_NOTICE_NO.toString()))
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
-            .andExpect(jsonPath("$.longI").value(DEFAULT_LONG_I.toString()))
-            .andExpect(jsonPath("$.nometerAmt").value(DEFAULT_NOMETER_AMT.toString()));
+            .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
+            .andExpect(jsonPath("$.nometerAmt").value(DEFAULT_NOMETER_AMT.doubleValue()));
     }
 
     @Test
@@ -706,9 +723,9 @@ public class BillFullDetailsResourceIntTest {
         // Update the billFullDetails
         billFullDetails.setCan(UPDATED_CAN);
         billFullDetails.setDivcode(UPDATED_DIVCODE);
-        billFullDetails.setSeccode(UPDATED_SECCODE);
-        billFullDetails.setSecname(UPDATED_SECNAME);
-        billFullDetails.setMetreadercode(UPDATED_METREADERCODE);
+        billFullDetails.setSecCode(UPDATED_SEC_CODE);
+        billFullDetails.setSecName(UPDATED_SEC_NAME);
+        billFullDetails.setMetReaderCode(UPDATED_MET_READER_CODE);
         billFullDetails.setConnDate(UPDATED_CONN_DATE);
         billFullDetails.setConsName(UPDATED_CONS_NAME);
         billFullDetails.setHouseNo(UPDATED_HOUSE_NO);
@@ -731,8 +748,8 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setReversalAmt(UPDATED_REVERSAL_AMT);
         billFullDetails.setInstallment(UPDATED_INSTALLMENT);
         billFullDetails.setOtherCharges(UPDATED_OTHER_CHARGES);
-        billFullDetails.setSurCharge(UPDATED_SUR_CHARGE);
-        billFullDetails.setHrsSurCharge(UPDATED_HRS_SUR_CHARGE);
+        billFullDetails.setSurcharge(UPDATED_SURCHARGE);
+        billFullDetails.setHrsSurcharge(UPDATED_HRS_SURCHARGE);
         billFullDetails.setResUnits(UPDATED_RES_UNITS);
         billFullDetails.setMetCostInstallment(UPDATED_MET_COST_INSTALLMENT);
         billFullDetails.setIntOnArrears(UPDATED_INT_ON_ARREARS);
@@ -757,7 +774,6 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setNetPayableAmount(UPDATED_NET_PAYABLE_AMOUNT);
         billFullDetails.setTelephoneNo(UPDATED_TELEPHONE_NO);
         billFullDetails.setMeterStatus(UPDATED_METER_STATUS);
-        billFullDetails.setMcMetReaderCode(UPDATED_MC_MET_READER_CODE);
         billFullDetails.setBillFlag(UPDATED_BILL_FLAG);
         billFullDetails.setSvrStatus(UPDATED_SVR_STATUS);
         billFullDetails.setTerminalId(UPDATED_TERMINAL_ID);
@@ -766,7 +782,7 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setMobileNo(UPDATED_MOBILE_NO);
         billFullDetails.setNoticeNo(UPDATED_NOTICE_NO);
         billFullDetails.setLat(UPDATED_LAT);
-        billFullDetails.setLongI(UPDATED_LONG_I);
+        billFullDetails.setLongi(UPDATED_LONGI);
         billFullDetails.setNometerAmt(UPDATED_NOMETER_AMT);
 
         restBillFullDetailsMockMvc.perform(put("/api/billFullDetailss")
@@ -780,9 +796,9 @@ public class BillFullDetailsResourceIntTest {
         BillFullDetails testBillFullDetails = billFullDetailss.get(billFullDetailss.size() - 1);
         assertThat(testBillFullDetails.getCan()).isEqualTo(UPDATED_CAN);
         assertThat(testBillFullDetails.getDivcode()).isEqualTo(UPDATED_DIVCODE);
-        assertThat(testBillFullDetails.getSeccode()).isEqualTo(UPDATED_SECCODE);
-        assertThat(testBillFullDetails.getSecname()).isEqualTo(UPDATED_SECNAME);
-        assertThat(testBillFullDetails.getMetreadercode()).isEqualTo(UPDATED_METREADERCODE);
+        assertThat(testBillFullDetails.getSecCode()).isEqualTo(UPDATED_SEC_CODE);
+        assertThat(testBillFullDetails.getSecName()).isEqualTo(UPDATED_SEC_NAME);
+        assertThat(testBillFullDetails.getMetReaderCode()).isEqualTo(UPDATED_MET_READER_CODE);
         assertThat(testBillFullDetails.getConnDate()).isEqualTo(UPDATED_CONN_DATE);
         assertThat(testBillFullDetails.getConsName()).isEqualTo(UPDATED_CONS_NAME);
         assertThat(testBillFullDetails.getHouseNo()).isEqualTo(UPDATED_HOUSE_NO);
@@ -805,8 +821,8 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getReversalAmt()).isEqualTo(UPDATED_REVERSAL_AMT);
         assertThat(testBillFullDetails.getInstallment()).isEqualTo(UPDATED_INSTALLMENT);
         assertThat(testBillFullDetails.getOtherCharges()).isEqualTo(UPDATED_OTHER_CHARGES);
-        assertThat(testBillFullDetails.getSurCharge()).isEqualTo(UPDATED_SUR_CHARGE);
-        assertThat(testBillFullDetails.getHrsSurCharge()).isEqualTo(UPDATED_HRS_SUR_CHARGE);
+        assertThat(testBillFullDetails.getSurcharge()).isEqualTo(UPDATED_SURCHARGE);
+        assertThat(testBillFullDetails.getHrsSurcharge()).isEqualTo(UPDATED_HRS_SURCHARGE);
         assertThat(testBillFullDetails.getResUnits()).isEqualTo(UPDATED_RES_UNITS);
         assertThat(testBillFullDetails.getMetCostInstallment()).isEqualTo(UPDATED_MET_COST_INSTALLMENT);
         assertThat(testBillFullDetails.getIntOnArrears()).isEqualTo(UPDATED_INT_ON_ARREARS);
@@ -831,7 +847,6 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getNetPayableAmount()).isEqualTo(UPDATED_NET_PAYABLE_AMOUNT);
         assertThat(testBillFullDetails.getTelephoneNo()).isEqualTo(UPDATED_TELEPHONE_NO);
         assertThat(testBillFullDetails.getMeterStatus()).isEqualTo(UPDATED_METER_STATUS);
-        assertThat(testBillFullDetails.getMcMetReaderCode()).isEqualTo(UPDATED_MC_MET_READER_CODE);
         assertThat(testBillFullDetails.getBillFlag()).isEqualTo(UPDATED_BILL_FLAG);
         assertThat(testBillFullDetails.getSvrStatus()).isEqualTo(UPDATED_SVR_STATUS);
         assertThat(testBillFullDetails.getTerminalId()).isEqualTo(UPDATED_TERMINAL_ID);
@@ -840,7 +855,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getMobileNo()).isEqualTo(UPDATED_MOBILE_NO);
         assertThat(testBillFullDetails.getNoticeNo()).isEqualTo(UPDATED_NOTICE_NO);
         assertThat(testBillFullDetails.getLat()).isEqualTo(UPDATED_LAT);
-        assertThat(testBillFullDetails.getLongI()).isEqualTo(UPDATED_LONG_I);
+        assertThat(testBillFullDetails.getLongi()).isEqualTo(UPDATED_LONGI);
         assertThat(testBillFullDetails.getNometerAmt()).isEqualTo(UPDATED_NOMETER_AMT);
     }
 

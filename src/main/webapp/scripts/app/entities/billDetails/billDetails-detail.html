@@ -20,82 +20,82 @@
             </tr>
             <tr>
                 <td>
-                    <span>Bill_number</span>
+                    <span>BillNumber</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.bill_number}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Bill_date</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.bill_date | date:'mediumDate'}}</span>
+                    <span class="form-control-static">{{billDetails.billNumber}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Bill_time</span>
+                    <span>BillDate</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.bill_time}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Meter_make</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.meter_make}}</span>
+                    <span class="form-control-static">{{billDetails.billDate | date:'mediumDate'}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Current_bill_type</span>
+                    <span>BillTime</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.current_bill_type}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>From_month</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.from_month}}</span>
+                    <span class="form-control-static">{{billDetails.billTime}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>To_month</span>
+                    <span>MeterMake</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.to_month}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Meter_fix_date</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.meter_fix_date}}</span>
+                    <span class="form-control-static">{{billDetails.meterMake}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Initial_reading</span>
+                    <span>CurrentBillType</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.initial_reading}}</span>
+                    <span class="form-control-static">{{billDetails.currentBillType}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Present_reading</span>
+                    <span>FromMonth</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.present_reading}}</span>
+                    <span class="form-control-static">{{billDetails.fromMonth}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ToMonth</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.toMonth}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterFixDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.meterFixDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InitialReading</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.initialReading}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PresentReading</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.presentReading}}</span>
                 </td>
             </tr>
             <tr>
@@ -108,130 +108,130 @@
             </tr>
             <tr>
                 <td>
-                    <span>Water_cess</span>
+                    <span>WaterCess</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.water_cess}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Sewerage_cess</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.sewerage_cess}}</span>
+                    <span class="form-control-static">{{billDetails.waterCess}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Service_charge</span>
+                    <span>SewerageCess</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.service_charge}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Meter_service_charge</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.meter_service_charge}}</span>
+                    <span class="form-control-static">{{billDetails.sewerageCess}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Total_amount</span>
+                    <span>ServiceCharge</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.total_amount}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Net_payable_amount</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.net_payable_amount}}</span>
+                    <span class="form-control-static">{{billDetails.serviceCharge}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Telephone_no</span>
+                    <span>MeterServiceCharge</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.telephone_no}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Meter_status</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.meter_status}}</span>
+                    <span class="form-control-static">{{billDetails.meterServiceCharge}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Mc_met_reader_code</span>
+                    <span>TotalAmount</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.mc_met_reader_code}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Bill_flag</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.bill_flag}}</span>
+                    <span class="form-control-static">{{billDetails.totalAmount}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Svr_status</span>
+                    <span>NetPayableAmount</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.svr_status}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Terminal_id</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.terminal_id}}</span>
+                    <span class="form-control-static">{{billDetails.netPayableAmount}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Meter_reader_id</span>
+                    <span>TelephoneNo</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.meter_reader_id}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>User_id</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billDetails.user_id}}</span>
+                    <span class="form-control-static">{{billDetails.telephoneNo}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Mobile_no</span>
+                    <span>MeterStatus</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.mobile_no}}</span>
+                    <span class="form-control-static">{{billDetails.meterStatus}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Notice_no</span>
+                    <span>MetReaderCode</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.notice_no}}</span>
+                    <span class="form-control-static">{{billDetails.metReaderCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>BillFlag</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.billFlag}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>SvrStatus</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.svrStatus}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TerminalId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.terminalId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterReaderId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.meterReaderId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>UserId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.userId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MobileNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.mobileNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>NoticeNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billDetails.noticeNo}}</span>
                 </td>
             </tr>
             <tr>
@@ -244,18 +244,18 @@
             </tr>
             <tr>
                 <td>
-                    <span>LongI</span>
+                    <span>Longi</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.longI}}</span>
+                    <span class="form-control-static">{{billDetails.longi}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Nometer_amt</span>
+                    <span>NoMeterAmt</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billDetails.nometer_amt}}</span>
+                    <span class="form-control-static">{{billDetails.noMeterAmt}}</span>
                 </td>
             </tr>
             </tbody>

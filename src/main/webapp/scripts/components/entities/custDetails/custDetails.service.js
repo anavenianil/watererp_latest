@@ -9,7 +9,10 @@ angular.module('waterERPApp')
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
                     data.connDate = DateUtils.convertLocaleDateFromServer(data.connDate);
+                    data.prevBillMonth = DateUtils.convertLocaleDateFromServer(data.prevBillMonth);
                     data.metReadingDt = DateUtils.convertLocaleDateFromServer(data.metReadingDt);
+                    data.metReadingMo = DateUtils.convertLocaleDateFromServer(data.metReadingMo);
+                    data.lastPymtDt = DateUtils.convertLocaleDateFromServer(data.lastPymtDt);
                     return data;
                 }
             },
@@ -17,7 +20,10 @@ angular.module('waterERPApp')
                 method: 'PUT',
                 transformRequest: function (data) {
                     data.connDate = DateUtils.convertLocaleDateToServer(data.connDate);
+                    data.prevBillMonth = DateUtils.convertLocaleDateToServer(data.prevBillMonth);
                     data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
+                    data.metReadingMo = DateUtils.convertLocaleDateToServer(data.metReadingMo);
+                    data.lastPymtDt = DateUtils.convertLocaleDateToServer(data.lastPymtDt);
                     return angular.toJson(data);
                 }
             },
@@ -25,7 +31,10 @@ angular.module('waterERPApp')
                 method: 'POST',
                 transformRequest: function (data) {
                     data.connDate = DateUtils.convertLocaleDateToServer(data.connDate);
+                    data.prevBillMonth = DateUtils.convertLocaleDateToServer(data.prevBillMonth);
                     data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
+                    data.metReadingMo = DateUtils.convertLocaleDateToServer(data.metReadingMo);
+                    data.lastPymtDt = DateUtils.convertLocaleDateToServer(data.lastPymtDt);
                     return angular.toJson(data);
                 }
             }
