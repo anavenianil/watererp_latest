@@ -67,7 +67,7 @@ class ApplicationTxnGatlingTest extends Simulation {
             .exec(http("Create new applicationTxn")
             .post("/api/applicationTxns")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "fullName":"SAMPLE_TEXT", "homeOrOfficeNumber":null, "regionalNumber":null, "faxNumber":null, "plotNumber":"SAMPLE_TEXT", "area":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "villageExecutiveOffice":"SAMPLE_TEXT", "villageExecutiveOfficeNumber":"SAMPLE_TEXT", "poBox":"SAMPLE_TEXT", "requestedDate":"2020-01-01T00:00:00.000Z", "photo":"SAMPLE_TEXT", "fileNumber":"SAMPLE_TEXT", "createdDate":"2020-01-01T00:00:00.000Z", "updatedDate":"2020-01-01T00:00:00.000Z", "status":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "fullName":"SAMPLE_TEXT", "homeOrOfficeNumber":null, "regionalNumber":null, "faxNumber":null, "plotNumber":"SAMPLE_TEXT", "area":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "villageExecutiveOffice":"SAMPLE_TEXT", "villageExecutiveOfficeNumber":"SAMPLE_TEXT", "poBox":"SAMPLE_TEXT", "requestedDate":"2020-01-01T00:00:00.000Z", "photo":"SAMPLE_TEXT", "fileNumber":"SAMPLE_TEXT", "createdDate":"2020-01-01T00:00:00.000Z", "updatedDate":"2020-01-01T00:00:00.000Z", "status":"0", "detailAddress":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_applicationTxn_url")))
             .pause(10)

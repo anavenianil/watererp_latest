@@ -53,6 +53,8 @@
             
             <column name="status" type="integer"/>
             
+            <column name="detail_address" type="varchar(255)"/>
+            
             <column name="category_master_id" type="bigint"/>
             <column name="customer_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->

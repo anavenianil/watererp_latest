@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster, UploadUtil) {
+    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster, UploadUtil, DateUtils, DateService) {
 
     	$scope.applicationTxn = {};
     	$scope.categoryMasters = CategoryMaster.query();
@@ -12,8 +12,10 @@ angular.module('watererpApp')
                 });
          }
     	
-    	$scope.applicationTxn.requestedDate = new Date();
-    	
+    	//$scope.applicationTxn.requestedDate = new Date();
+    	//$scope.applicationTxn.requestedDate = DateUtils.convertDateTimeFromServer(new Date());
+    	$scope.applicationTxn.requestedDate = DateService.getServerDate();
+    	console.log($scope.applicationTxn.requestedDate);
         /*$scope.load = function(id) {
             ApplicationTxn.get({id : id}, function(result) {
                 $scope.applicationTxn = result;

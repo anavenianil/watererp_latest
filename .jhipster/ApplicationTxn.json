@@ -95,6 +95,11 @@
             "fieldId": 16,
             "fieldName": "status",
             "fieldType": "Integer"
+        },
+        {
+            "fieldId": 17,
+            "fieldName": "detailAddress",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160229075018",

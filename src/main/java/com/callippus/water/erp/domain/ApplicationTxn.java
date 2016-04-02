@@ -70,6 +70,9 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "status")
     private Integer status;
     
+    @Column(name = "detail_address")
+    private String detailAddress;
+    
     @ManyToOne
     @JoinColumn(name = "category_master_id")
     private CategoryMaster categoryMaster;
@@ -214,6 +217,14 @@ public class ApplicationTxn implements Serializable {
         this.status = status;
     }
 
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+    
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
+    }
+
     public CategoryMaster getCategoryMaster() {
         return categoryMaster;
     }
@@ -270,6 +281,7 @@ public class ApplicationTxn implements Serializable {
             ", createdDate='" + createdDate + "'" +
             ", updatedDate='" + updatedDate + "'" +
             ", status='" + status + "'" +
+            ", detailAddress='" + detailAddress + "'" +
             '}';
     }
 }

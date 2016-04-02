@@ -89,6 +89,8 @@ public class ApplicationTxnResourceIntTest {
 
     private static final Integer DEFAULT_STATUS = 1;
     private static final Integer UPDATED_STATUS = 2;
+    private static final String DEFAULT_DETAIL_ADDRESS = "AAAAA";
+    private static final String UPDATED_DETAIL_ADDRESS = "BBBBB";
 
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
@@ -132,6 +134,7 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setCreatedDate(DEFAULT_CREATED_DATE);
         applicationTxn.setUpdatedDate(DEFAULT_UPDATED_DATE);
         applicationTxn.setStatus(DEFAULT_STATUS);
+        applicationTxn.setDetailAddress(DEFAULT_DETAIL_ADDRESS);
     }
 
     @Test
@@ -166,6 +169,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testApplicationTxn.getDetailAddress()).isEqualTo(DEFAULT_DETAIL_ADDRESS);
     }
 
     @Test
@@ -194,7 +198,8 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].fileNumber").value(hasItem(DEFAULT_FILE_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].updatedDate").value(hasItem(DEFAULT_UPDATED_DATE_STR)))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+                .andExpect(jsonPath("$.[*].detailAddress").value(hasItem(DEFAULT_DETAIL_ADDRESS.toString())));
     }
 
     @Test
@@ -223,7 +228,8 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.fileNumber").value(DEFAULT_FILE_NUMBER.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE_STR))
             .andExpect(jsonPath("$.updatedDate").value(DEFAULT_UPDATED_DATE_STR))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.detailAddress").value(DEFAULT_DETAIL_ADDRESS.toString()));
     }
 
     @Test
@@ -259,6 +265,7 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setCreatedDate(UPDATED_CREATED_DATE);
         applicationTxn.setUpdatedDate(UPDATED_UPDATED_DATE);
         applicationTxn.setStatus(UPDATED_STATUS);
+        applicationTxn.setDetailAddress(UPDATED_DETAIL_ADDRESS);
 
         restApplicationTxnMockMvc.perform(put("/api/applicationTxns")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -285,6 +292,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testApplicationTxn.getDetailAddress()).isEqualTo(UPDATED_DETAIL_ADDRESS);
     }
 
     @Test
