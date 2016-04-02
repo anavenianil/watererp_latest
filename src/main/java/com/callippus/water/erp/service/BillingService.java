@@ -127,8 +127,8 @@ public class BillingService {
 					.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
 
-				LocalDate dFrom = customer.getMetReadingMo();
-				LocalDate dTo = LocalDate.now();
+				dFrom = customer.getMetReadingMo();
+				dTo = LocalDate.now();
 
 				log.debug("########################################");
 				log.debug("          METER BILL CASE");
@@ -165,14 +165,14 @@ public class BillingService {
 				}
 				
 				kl = (float) (units / 1000.0);
-			} else if(bill_details.getCurrentBillType().equals("L")){
+			} else if(bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("R")){
 
 				log.debug("########################################");
 				log.debug("          LOCK BILL CASE");
 				log.debug("########################################");				
 				
-				LocalDate dFrom = customer.getPrevBillMonth();
-				LocalDate dTo = LocalDate.now();
+				dFrom = customer.getPrevBillMonth();
+				dTo = LocalDate.now();
 
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
 
@@ -192,8 +192,8 @@ public class BillingService {
 				log.debug("          UNMETERED BILL CASE");
 				log.debug("########################################");				
 
-				LocalDate dFrom = customer.getPrevBillMonth();
-				LocalDate dTo = LocalDate.now();
+				dFrom = customer.getPrevBillMonth();
+				dTo = LocalDate.now();
 
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
 
@@ -244,7 +244,7 @@ public class BillingService {
 			bfd.setConsName(customer.getConsName());
 			bfd.setMetReadingDt(LocalDate.now());
 			
-			LocalDate dFrom = customer.getLastPymtDt();						
+			dFrom = customer.getLastPymtDt();						
 			bfd.setLastPymtDt(dFrom);
 			bfd.setBillDate(bill_details.getBillDate());
 			
@@ -566,7 +566,7 @@ public class BillingService {
 				&& !bill_details.getCurrentBillType().equals("U"))
 			return CustValidation.INVALID_BILL_TYPE;
 
-		if (customer.getMetReadingMo().equals("")
+		if (customer.getMetReadingMo()== null
 				&& bill_details.getCurrentBillType().equals("M"))
 			return CustValidation.INVALID_PREV_BILL_MONTH;
 
