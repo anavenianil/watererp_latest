@@ -1,7 +1,6 @@
 package com.callippus.water.erp.repository;
 
 import com.callippus.water.erp.domain.TariffMaster;
-import com.callippus.water.erp.service.BillingService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,12 +9,8 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.Timestamp;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -54,7 +49,7 @@ TariffMasterCustomRepository {
 	}
 
 	
-	public List<java.util.Map<String, Object>> findTariffs(ZonedDateTime validFrom, ZonedDateTime validTo, float avgKL, int unmetered_flag){
+	public List<java.util.Map<String, Object>> findTariffs(LocalDate validFrom, LocalDate validTo, float avgKL, int unmetered_flag){
 		String sql = "SELECT tariff_type_master_id,"
 				+ "case when tariff_type_master_id=1 then "
 				+ "case when 1=? then sum(rate * months * min_unmetered_kl) else sum(rate * months * avg_kl)  end "
@@ -73,17 +68,17 @@ TariffMasterCustomRepository {
 				+ "t.min_unmetered_kl , "
 				+ "case when t.min_kl > ? then t.min_kl else ? end avg_kl,"
 				+ "t.tariff_type_master_id from "
-				+ "(SELECT id,tariff_name,(CASE WHEN unix_timestamp(valid_from) < ? THEN FROM_UNIXTIME(?) ELSE valid_from END) valid_from,(CASE WHEN unix_timestamp(valid_to) > ? "
+				+ "(SELECT id,tariff_name,(CASE WHEN (valid_from) < ? THEN FROM_UNIXTIME(?) ELSE valid_from END) valid_from,(CASE WHEN (valid_to) > ? "
 				+ "THEN FROM_UNIXTIME(?) ELSE valid_to END) valid_to, active,tariff_category_master_id "
 				+ "FROM "
 				+ "(SELECT * "
 				+ "FROM tariff_master "
-				+ "WHERE unix_timestamp(valid_to) >=?) a "
+				+ "WHERE (valid_to) >=?) a "
 				+ "WHERE active=1 "
-				+ "AND unix_timestamp(valid_from) <= ?) a, "
+				+ "AND (valid_from) <= ?) a, "
 				+ "tariff_charges t  WHERE a.id=t.tariff_master_id ) a "
 				+ "group by tariff_type_master_id  "
-				+ "ORDER BY unix_timestamp(valid_from)";
+				+ "ORDER BY (valid_from)";
 /****	
 ==================================================================================		
 MySQL Sample Query
@@ -140,10 +135,13 @@ ORDER BY unix_timestamp(valid_from)
 		</table>
 		</body></html>
 ****/		
+		
+		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
+		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
+		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList( sql, new Object[]{unmetered_flag, avgKL,avgKL, validFrom.toEpochSecond(),validFrom.toEpochSecond(),
-						validTo.toEpochSecond(),validTo.toEpochSecond(),validFrom.toEpochSecond(),
-						validTo.toEpochSecond()});
+				.queryForList( sql, new Object[]{unmetered_flag, avgKL,avgKL, from,from,
+						to,to,from,to});
 
 		log.debug("Output from billing query:" + rows);
 		return rows;

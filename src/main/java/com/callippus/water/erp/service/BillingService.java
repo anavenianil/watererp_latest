@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
@@ -78,14 +79,14 @@ public class BillingService {
 	float avgKL = 0.0f;
 	float factor = 0.0f;
 	float prevAvgKL = 0.0f;
-	long units = 0;
+	float units = 0;
 	float unitsKL = 0.0f;
 	String monthUpto;
 	boolean hasSewer;
 	float ewura = 0.0f;
 	int monthsDiff = 0;
-	ZonedDateTime zFrom = null;
-	ZonedDateTime zTo = null;
+	LocalDate dFrom = null;
+	LocalDate dTo = null;
 	
 	float water, sewerage, service_charge, total_amount, net_payable_amount,
 			surcharge, total_cess, from, upto, mths, avgkl, kl;
@@ -118,51 +119,37 @@ public class BillingService {
 
 		try {
 
-			 if (!bill_details.getCurrent_bill_type().equals("M"))
-				 bill_details.setPresent_reading(customer.getPrevReading());
+			 if (!bill_details.getCurrentBillType().equals("M"))
+				 bill_details.setPresentReading(customer.getPrevReading());
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
 					.getPrevBillType().equals("M"))
-					&& bill_details.getCurrent_bill_type().equals("M")) {
+					&& bill_details.getCurrentBillType().equals("M")) {
 
-				Date d_from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
-						.parse(customer.getMetReadingMo());
-
-				Calendar date = Calendar.getInstance();
-				date.set(Calendar.DAY_OF_MONTH, 1);
-
-				Date d_to = date.getTime();
-
-				DateTime jFrom = new DateTime(d_from);
-				DateTime jTo = new DateTime(d_to);
-
-				zFrom = d_from.toInstant().atZone(
-						ZoneId.systemDefault());
-				zTo = d_to.toInstant().atZone(
-						ZoneId.systemDefault());
+				LocalDate dFrom = customer.getMetReadingMo();
+				LocalDate dTo = LocalDate.now();
 
 				log.debug("########################################");
 				log.debug("          METER BILL CASE");
 				log.debug("########################################");
 				log.debug("Customer Info:" + customer.toString());
-				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
+				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 
-				Months d = Months.monthsBetween(jFrom, jTo);
-				monthsDiff = d.getMonths();
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
 
 				log.debug("Months:" + monthsDiff);
 
 				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
-					units = Long.parseLong(bill_details.getPresent_reading())
-							- Long.parseLong(bill_details.getInitial_reading());
+					units = bill_details.getPresentReading()
+							- bill_details.getInitialReading();
 					
 					unitsKL = (float) units / 1000.0f;
 					
 					avgKL = unitsKL / monthsDiff;
 
-					prevAvgKL = (Float.parseFloat(customer.getPrevAvgKl()) < 1.0f ? 1.0f
-							: Float.parseFloat(customer.getPrevAvgKl()));
+					prevAvgKL = customer.getPrevAvgKl() < 1.0f ? 1.0f
+							: customer.getPrevAvgKl();
 
 					factor = avgKL / prevAvgKL;
 
@@ -171,84 +158,60 @@ public class BillingService {
 					if (factor > 4.0f || factor < 0.25f) {
 						// Unable to process customer
 						log.debug("Meter reading for:" + customer.getId()
-								+ ": is ::" + bill_details.getPresent_reading()
+								+ ": is ::" + bill_details.getPresentReading()
 								+ ". This is too high or too low.");
 						return;
 					}
 				}
 				
 				kl = (float) (units / 1000.0);
-			} else if(bill_details.getCurrent_bill_type().equals("L")){
+			} else if(bill_details.getCurrentBillType().equals("L")){
 
 				log.debug("########################################");
 				log.debug("          LOCK BILL CASE");
 				log.debug("########################################");				
 				
-				Date d_from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
-				.parse(customer.getPrevBillMonth());
+				LocalDate dFrom = customer.getPrevBillMonth();
+				LocalDate dTo = LocalDate.now();
 
-				Calendar date = Calendar.getInstance();
-				date.set(Calendar.DAY_OF_MONTH, 1);
-		
-				Date d_to = date.getTime();
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
 
-				DateTime jFrom = new DateTime(d_from);
-				DateTime jTo = new DateTime(d_to);
-
-				zFrom = d_from.toInstant().atZone(
-						ZoneId.systemDefault());
-				zTo = d_to.toInstant().atZone(
-						ZoneId.systemDefault());
+				log.debug("Months:" + monthsDiff);
 
 				log.debug("Customer Info:" + customer.toString());
-				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
-
-				Months d = Months.monthsBetween(jFrom, jTo);
-				monthsDiff = d.getMonths();
+				log.debug("From:" + dFrom + ", To:" + dTo);
 				
-				avgKL = Float.parseFloat(customer.getPrevAvgKl());
+				avgKL = customer.getPrevAvgKl();
 				unitsKL = (float) (avgKL * monthsDiff);
-				units = (long) (avgKL * monthsDiff * 1000.0f);
+				units = (float) (avgKL * monthsDiff * 1000.0f);
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
-			}else if(bill_details.getCurrent_bill_type().equals("U")){
+			}else if(bill_details.getCurrentBillType().equals("U")){
 
 				log.debug("########################################");
 				log.debug("          UNMETERED BILL CASE");
 				log.debug("########################################");				
 
-				Calendar dateFrom = Calendar.getInstance();
-				dateFrom.set(Calendar.DAY_OF_MONTH, 1);	
-				dateFrom.add(Calendar.MONTH, -1);
-				Date d_from = dateFrom.getTime();
+				LocalDate dFrom = customer.getPrevBillMonth();
+				LocalDate dTo = LocalDate.now();
 
-				Calendar dateTo = Calendar.getInstance();
-				dateTo.set(Calendar.DAY_OF_MONTH, 1);		
-				Date d_to = dateTo.getTime();
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
 
-				DateTime jFrom = new DateTime(d_from);
-				DateTime jTo = new DateTime(d_to);
-
-				zFrom = d_from.toInstant().atZone(
-						ZoneId.systemDefault());
-				zTo = d_to.toInstant().atZone(
-						ZoneId.systemDefault());
+				log.debug("Months:" + monthsDiff);
 
 				log.debug("Customer Info:" + customer.toString());
-				log.debug("From:" + zFrom.toString() + ", To:" + zTo.toString());
-
-				Months d = Months.monthsBetween(jFrom, jTo);
-				monthsDiff = d.getMonths();
+				log.debug("From:" + dFrom + ", To:" + dTo);
 				
-				avgKL = Float.parseFloat(customer.getPrevAvgKl());
+				
+				avgKL = customer.getPrevAvgKl();
 				unitsKL = (float) (avgKL * monthsDiff);
-				units = (long) (avgKL * monthsDiff * 1000.0f);
+				units = (float) (avgKL * monthsDiff * 1000.0f);
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
 			}
 			
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(zFrom, zTo, avgKL, bill_details.getCurrent_bill_type().equals("U")?1:0);
+					.findTariffs(dFrom, dTo, avgKL, bill_details.getCurrentBillType().equals("U")?1:0);
 			
 			ConfigurationDetails cd = configurationDetailsRepository.findOneByName("EWURA");
 			
@@ -281,11 +244,9 @@ public class BillingService {
 			bfd.setConsName(customer.getConsName());
 			bfd.setMetReadingDt(LocalDate.now());
 			
-			Date d_from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
-			.parse(customer.getLastPymtDt());
-						
-			bfd.setLastPymtDt(d_from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-			bfd.setBillDate(bill_details.getBill_date());
+			LocalDate dFrom = customer.getLastPymtDt();						
+			bfd.setLastPymtDt(dFrom);
+			bfd.setBillDate(bill_details.getBillDate());
 			
 			bfdRepository.save(bfd);
 			
@@ -293,8 +254,8 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.debug("Invalid From or To Date:" + bill_details.getFrom_month()
-					+ "::::" + bill_details.getTo_month());
+			log.debug("Invalid From or To Date:" + bill_details.getFromMonth()
+					+ "::::" + bill_details.getToMonth());
 			return;
 		}
 
@@ -569,21 +530,20 @@ public class BillingService {
 	public CustValidation getCustInfo(CustDetails customer,
 			BillDetails bill_details) {
 
-		if (Float.parseFloat(customer.getPipeSize()) < 0.5f)
+		if (customer.getPipeSize() < 0.5f)
 			return CustValidation.INVALID_PIPESIZE;
 
 		if (customer.getPrevBillMonth() == null
 				|| customer.getPrevBillMonth().equals(""))
 			return CustValidation.INVALID_PREV_BILL_MONTH;
 
-		if (Integer.parseInt(customer.getPrevBillMonth()) < 20050101)
+		if (customer.getPrevBillMonth().isBefore(LocalDate.of(2005,01,01)))
 			return CustValidation.NOT_IMPLEMENTED;
 
 		if (!categories.contains(customer.getCategory().trim()))
 			return CustValidation.INVALID_CATEGORY;
 
-		if (Integer.parseInt(bill_details.getPresent_reading()) < Integer
-				.parseInt(bill_details.getInitial_reading()))
+		if (bill_details.getPresentReading() < bill_details.getInitialReading())
 			return CustValidation.INVALID_METER_READING;
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH:mm");
@@ -595,19 +555,19 @@ public class BillingService {
 
 		if ((customer.getPrevBillType().equals("M") || customer
 				.getPrevBillType().equals("L"))
-				&& bill_details.getCurrent_bill_type().equals("U"))
+				&& bill_details.getCurrentBillType().equals("U"))
 			return CustValidation.INVALID_BILL_TYPE;
 
 		if (customer.getPrevBillType().equals("R")
-				&& !bill_details.getCurrent_bill_type().equals("R"))
+				&& !bill_details.getCurrentBillType().equals("R"))
 			return CustValidation.INVALID_BILL_TYPE;
 
 		if (customer.getPrevBillType().equals("U")
-				&& !bill_details.getCurrent_bill_type().equals("U"))
+				&& !bill_details.getCurrentBillType().equals("U"))
 			return CustValidation.INVALID_BILL_TYPE;
 
 		if (customer.getMetReadingMo().equals("")
-				&& bill_details.getCurrent_bill_type().equals("M"))
+				&& bill_details.getCurrentBillType().equals("M"))
 			return CustValidation.INVALID_PREV_BILL_MONTH;
 
 		return CustValidation.SUCCESS;

@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 
+	public CustDetails findByCan(String can);
 }
