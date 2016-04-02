@@ -2,13 +2,16 @@ package com.callippus.water.erp.service;
 
 import com.callippus.water.erp.domain.Authority;
 import com.callippus.water.erp.domain.BillDetails;
+import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.PersistentToken;
 import com.callippus.water.erp.domain.TariffMaster;
 import com.callippus.water.erp.domain.User;
+import com.callippus.water.erp.mappings.BillMapper;
 import com.callippus.water.erp.repository.AuthorityRepository;
 import com.callippus.water.erp.repository.BillDetailsRepository;
+import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.PersistentTokenRepository;
@@ -19,9 +22,9 @@ import com.callippus.water.erp.service.util.RandomUtil;
 import com.callippus.water.erp.web.rest.dto.ManagedUserDTO;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.LocalDate;
 
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
@@ -59,8 +62,8 @@ public class BillingService {
 	@Inject
 	private TariffMasterCustomRepository tariffMasterCustomRepository;
 
-	// @Inject
-	// private BillFullDetails bfd;
+	 @Inject
+	 private BillFullDetailsRepository bfdRepository;
 
 	enum Status {
 		SUCCESS, FAILURE
@@ -115,8 +118,8 @@ public class BillingService {
 
 		try {
 
-			// if (!bill_details.getCurrent_bill_type().equals("M"))
-			// bfd.setPresentReading(customer.getPrevReading());
+			 if (!bill_details.getCurrent_bill_type().equals("M"))
+				 bill_details.setPresent_reading(customer.getPrevReading());
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
@@ -266,6 +269,26 @@ public class BillingService {
 			
 			monthUpto = getPrevMonthStart();
 
+			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details);
+			
+			log.debug("This is the BillFullDetails:"+bfd);
+
+			bfd.setHouseNo(customer.getHouseNo());
+			bfd.setMeterNo(customer.getMeterNo());
+			bfd.setConnDate(customer.getConnDate());
+			bfd.setCity(customer.getCity());
+			bfd.setDivcode(customer.getDivCode());
+			bfd.setConsName(customer.getConsName());
+			bfd.setMetReadingDt(LocalDate.now());
+			
+			Date d_from = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH)
+			.parse(customer.getLastPymtDt());
+						
+			bfd.setLastPymtDt(d_from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			bfd.setBillDate(bill_details.getBill_date());
+			
+			bfdRepository.save(bfd);
+			
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
 
 		} catch (Exception e) {
