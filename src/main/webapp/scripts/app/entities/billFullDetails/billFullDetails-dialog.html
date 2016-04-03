@@ -26,13 +26,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_divcode">Divcode</label>
-            <input type="text" class="form-control" name="divcode" id="field_divcode"
-                    ng-model="billFullDetails.divcode"
+            <label class="control-label" for="field_divCode">DivCode</label>
+            <input type="text" class="form-control" name="divCode" id="field_divCode"
+                    ng-model="billFullDetails.divCode"
                     required />
-            <div ng-show="editForm.divcode.$invalid">
+            <div ng-show="editForm.divCode.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.divcode.$error.required">
+                    ng-show="editForm.divCode.$error.required">
                     This field is required.
                 </p>
             </div>
@@ -239,7 +239,7 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_hrsSurcharge">HrsSurcharge</label>
-            <input type="number" class="form-control" name="hrsSurcharge" id="field_hrsSurcharge"
+            <input type="text" class="form-control" name="hrsSurcharge" id="field_hrsSurcharge"
                     ng-model="billFullDetails.hrsSurcharge"
                      />
         </div>
@@ -333,9 +333,11 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_meterFixDate">MeterFixDate</label>
-            <input type="text" class="form-control" name="meterFixDate" id="field_meterFixDate"
-                    ng-model="billFullDetails.meterFixDate"
-                     />
+            <input id="field_meterFixDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="billFullDetails.meterFixDate" is-open="datePickerForMeterFixDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForMeterFixDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_initialReading">InitialReading</label>
@@ -458,9 +460,9 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_nometerAmt">NometerAmt</label>
-            <input type="number" class="form-control" name="nometerAmt" id="field_nometerAmt"
-                    ng-model="billFullDetails.nometerAmt"
+            <label class="control-label" for="field_noMeterAmt">NoMeterAmt</label>
+            <input type="number" class="form-control" name="noMeterAmt" id="field_noMeterAmt"
+                    ng-model="billFullDetails.noMeterAmt"
                      />
         </div>
 

@@ -232,18 +232,11 @@ public class BillingService {
 			
 			monthUpto = getPrevMonthStart();
 
-			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details);
+			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
+			bfd.setId(null);
 			
 			log.debug("This is the BillFullDetails:"+bfd);
 
-			bfd.setHouseNo(customer.getHouseNo());
-			bfd.setMeterNo(customer.getMeterNo());
-			bfd.setConnDate(customer.getConnDate());
-			bfd.setCity(customer.getCity());
-			bfd.setDivcode(customer.getDivCode());
-			bfd.setConsName(customer.getConsName());
-			bfd.setMetReadingDt(LocalDate.now());
-			
 			dFrom = customer.getLastPymtDt();						
 			bfd.setLastPymtDt(dFrom);
 			bfd.setBillDate(bill_details.getBillDate());

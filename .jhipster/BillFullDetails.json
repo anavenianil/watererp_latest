@@ -11,7 +11,7 @@
         },
         {
             "fieldId": 2,
-            "fieldName": "divcode",
+            "fieldName": "divCode",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -168,7 +168,7 @@
         {
             "fieldId": 29,
             "fieldName": "hrsSurcharge",
-            "fieldType": "Float"
+            "fieldType": "String"
         },
         {
             "fieldId": 30,
@@ -239,7 +239,7 @@
         {
             "fieldId": 42,
             "fieldName": "meterFixDate",
-            "fieldType": "String"
+            "fieldType": "LocalDate"
         },
         {
             "fieldId": 43,
@@ -343,7 +343,7 @@
         },
         {
             "fieldId": 63,
-            "fieldName": "nometerAmt",
+            "fieldName": "noMeterAmt",
             "fieldType": "Float"
         }
     ],

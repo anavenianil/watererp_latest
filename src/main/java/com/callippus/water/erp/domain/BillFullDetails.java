@@ -26,8 +26,8 @@ public class BillFullDetails implements Serializable {
     private String can;
 
     @NotNull
-    @Column(name = "divcode", nullable = false)
-    private String divcode;
+    @Column(name = "div_code", nullable = false)
+    private String divCode;
 
     @Column(name = "sec_code")
     private String secCode;
@@ -114,7 +114,7 @@ public class BillFullDetails implements Serializable {
     private Float surcharge;
 
     @Column(name = "hrs_surcharge")
-    private Float hrsSurcharge;
+    private String hrsSurcharge;
 
     @Column(name = "res_units")
     private Long resUnits;
@@ -155,7 +155,7 @@ public class BillFullDetails implements Serializable {
     private String toMonth;
 
     @Column(name = "meter_fix_date")
-    private String meterFixDate;
+    private LocalDate meterFixDate;
 
     @Column(name = "initial_reading")
     private Float initialReading;
@@ -217,8 +217,8 @@ public class BillFullDetails implements Serializable {
     @Column(name = "longi")
     private String longi;
 
-    @Column(name = "nometer_amt")
-    private Float nometerAmt;
+    @Column(name = "no_meter_amt")
+    private Float noMeterAmt;
 
     public Long getId() {
         return id;
@@ -236,12 +236,12 @@ public class BillFullDetails implements Serializable {
         this.can = can;
     }
 
-    public String getDivcode() {
-        return divcode;
+    public String getDivCode() {
+        return divCode;
     }
 
-    public void setDivcode(String divcode) {
-        this.divcode = divcode;
+    public void setDivCode(String divCode) {
+        this.divCode = divCode;
     }
 
     public String getSecCode() {
@@ -452,11 +452,11 @@ public class BillFullDetails implements Serializable {
         this.surcharge = surcharge;
     }
 
-    public Float getHrsSurcharge() {
+    public String getHrsSurcharge() {
         return hrsSurcharge;
     }
 
-    public void setHrsSurcharge(Float hrsSurcharge) {
+    public void setHrsSurcharge(String hrsSurcharge) {
         this.hrsSurcharge = hrsSurcharge;
     }
 
@@ -556,11 +556,11 @@ public class BillFullDetails implements Serializable {
         this.toMonth = toMonth;
     }
 
-    public String getMeterFixDate() {
+    public LocalDate getMeterFixDate() {
         return meterFixDate;
     }
 
-    public void setMeterFixDate(String meterFixDate) {
+    public void setMeterFixDate(LocalDate meterFixDate) {
         this.meterFixDate = meterFixDate;
     }
 
@@ -724,12 +724,12 @@ public class BillFullDetails implements Serializable {
         this.longi = longi;
     }
 
-    public Float getNometerAmt() {
-        return nometerAmt;
+    public Float getNoMeterAmt() {
+        return noMeterAmt;
     }
 
-    public void setNometerAmt(Float nometerAmt) {
-        this.nometerAmt = nometerAmt;
+    public void setNoMeterAmt(Float noMeterAmt) {
+        this.noMeterAmt = noMeterAmt;
     }
 
     @Override
@@ -754,7 +754,7 @@ public class BillFullDetails implements Serializable {
         return "BillFullDetails{" +
             "id=" + id +
             ", can='" + can + "'" +
-            ", divcode='" + divcode + "'" +
+            ", divCode='" + divCode + "'" +
             ", secCode='" + secCode + "'" +
             ", secName='" + secName + "'" +
             ", metReaderCode='" + metReaderCode + "'" +
@@ -815,7 +815,7 @@ public class BillFullDetails implements Serializable {
             ", noticeNo='" + noticeNo + "'" +
             ", lat='" + lat + "'" +
             ", longi='" + longi + "'" +
-            ", nometerAmt='" + nometerAmt + "'" +
+            ", noMeterAmt='" + noMeterAmt + "'" +
             '}';
     }
 }

@@ -53,7 +53,7 @@ angular.module('waterERPApp')
                             entity: function () {
                                 return {
                                     can: null,
-                                    divcode: null,
+                                    divCode: null,
                                     secCode: null,
                                     secName: null,
                                     metReaderCode: null,
@@ -114,7 +114,7 @@ angular.module('waterERPApp')
                                     noticeNo: null,
                                     lat: null,
                                     longi: null,
-                                    nometerAmt: null,
+                                    noMeterAmt: null,
                                     id: null
                                 };
                             }

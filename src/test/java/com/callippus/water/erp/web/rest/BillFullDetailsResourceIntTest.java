@@ -45,8 +45,8 @@ public class BillFullDetailsResourceIntTest {
 
     private static final String DEFAULT_CAN = "AAAAA";
     private static final String UPDATED_CAN = "BBBBB";
-    private static final String DEFAULT_DIVCODE = "AAAAA";
-    private static final String UPDATED_DIVCODE = "BBBBB";
+    private static final String DEFAULT_DIV_CODE = "AAAAA";
+    private static final String UPDATED_DIV_CODE = "BBBBB";
     private static final String DEFAULT_SEC_CODE = "AAAAA";
     private static final String UPDATED_SEC_CODE = "BBBBB";
     private static final String DEFAULT_SEC_NAME = "AAAAA";
@@ -112,9 +112,8 @@ public class BillFullDetailsResourceIntTest {
 
     private static final Float DEFAULT_SURCHARGE = 1F;
     private static final Float UPDATED_SURCHARGE = 2F;
-
-    private static final Float DEFAULT_HRS_SURCHARGE = 1F;
-    private static final Float UPDATED_HRS_SURCHARGE = 2F;
+    private static final String DEFAULT_HRS_SURCHARGE = "AAAAA";
+    private static final String UPDATED_HRS_SURCHARGE = "BBBBB";
 
     private static final Long DEFAULT_RES_UNITS = 1L;
     private static final Long UPDATED_RES_UNITS = 2L;
@@ -145,8 +144,9 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_FROM_MONTH = "BBBBB";
     private static final String DEFAULT_TO_MONTH = "AAAAA";
     private static final String UPDATED_TO_MONTH = "BBBBB";
-    private static final String DEFAULT_METER_FIX_DATE = "AAAAA";
-    private static final String UPDATED_METER_FIX_DATE = "BBBBB";
+
+    private static final LocalDate DEFAULT_METER_FIX_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_METER_FIX_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Float DEFAULT_INITIAL_READING = 1F;
     private static final Float UPDATED_INITIAL_READING = 2F;
@@ -197,8 +197,8 @@ public class BillFullDetailsResourceIntTest {
     private static final String DEFAULT_LONGI = "AAAAA";
     private static final String UPDATED_LONGI = "BBBBB";
 
-    private static final Float DEFAULT_NOMETER_AMT = 1F;
-    private static final Float UPDATED_NOMETER_AMT = 2F;
+    private static final Float DEFAULT_NO_METER_AMT = 1F;
+    private static final Float UPDATED_NO_METER_AMT = 2F;
 
     @Inject
     private BillFullDetailsRepository billFullDetailsRepository;
@@ -227,7 +227,7 @@ public class BillFullDetailsResourceIntTest {
     public void initTest() {
         billFullDetails = new BillFullDetails();
         billFullDetails.setCan(DEFAULT_CAN);
-        billFullDetails.setDivcode(DEFAULT_DIVCODE);
+        billFullDetails.setDivCode(DEFAULT_DIV_CODE);
         billFullDetails.setSecCode(DEFAULT_SEC_CODE);
         billFullDetails.setSecName(DEFAULT_SEC_NAME);
         billFullDetails.setMetReaderCode(DEFAULT_MET_READER_CODE);
@@ -288,7 +288,7 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setNoticeNo(DEFAULT_NOTICE_NO);
         billFullDetails.setLat(DEFAULT_LAT);
         billFullDetails.setLongi(DEFAULT_LONGI);
-        billFullDetails.setNometerAmt(DEFAULT_NOMETER_AMT);
+        billFullDetails.setNoMeterAmt(DEFAULT_NO_METER_AMT);
     }
 
     @Test
@@ -308,7 +308,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(billFullDetailss).hasSize(databaseSizeBeforeCreate + 1);
         BillFullDetails testBillFullDetails = billFullDetailss.get(billFullDetailss.size() - 1);
         assertThat(testBillFullDetails.getCan()).isEqualTo(DEFAULT_CAN);
-        assertThat(testBillFullDetails.getDivcode()).isEqualTo(DEFAULT_DIVCODE);
+        assertThat(testBillFullDetails.getDivCode()).isEqualTo(DEFAULT_DIV_CODE);
         assertThat(testBillFullDetails.getSecCode()).isEqualTo(DEFAULT_SEC_CODE);
         assertThat(testBillFullDetails.getSecName()).isEqualTo(DEFAULT_SEC_NAME);
         assertThat(testBillFullDetails.getMetReaderCode()).isEqualTo(DEFAULT_MET_READER_CODE);
@@ -369,7 +369,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getNoticeNo()).isEqualTo(DEFAULT_NOTICE_NO);
         assertThat(testBillFullDetails.getLat()).isEqualTo(DEFAULT_LAT);
         assertThat(testBillFullDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
-        assertThat(testBillFullDetails.getNometerAmt()).isEqualTo(DEFAULT_NOMETER_AMT);
+        assertThat(testBillFullDetails.getNoMeterAmt()).isEqualTo(DEFAULT_NO_METER_AMT);
     }
 
     @Test
@@ -392,10 +392,10 @@ public class BillFullDetailsResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDivcodeIsRequired() throws Exception {
+    public void checkDivCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = billFullDetailsRepository.findAll().size();
         // set the field null
-        billFullDetails.setDivcode(null);
+        billFullDetails.setDivCode(null);
 
         // Create the BillFullDetails, which fails.
 
@@ -564,7 +564,7 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(billFullDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
-                .andExpect(jsonPath("$.[*].divcode").value(hasItem(DEFAULT_DIVCODE.toString())))
+                .andExpect(jsonPath("$.[*].divCode").value(hasItem(DEFAULT_DIV_CODE.toString())))
                 .andExpect(jsonPath("$.[*].secCode").value(hasItem(DEFAULT_SEC_CODE.toString())))
                 .andExpect(jsonPath("$.[*].secName").value(hasItem(DEFAULT_SEC_NAME.toString())))
                 .andExpect(jsonPath("$.[*].metReaderCode").value(hasItem(DEFAULT_MET_READER_CODE.toString())))
@@ -591,7 +591,7 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].installment").value(hasItem(DEFAULT_INSTALLMENT.doubleValue())))
                 .andExpect(jsonPath("$.[*].otherCharges").value(hasItem(DEFAULT_OTHER_CHARGES.doubleValue())))
                 .andExpect(jsonPath("$.[*].surcharge").value(hasItem(DEFAULT_SURCHARGE.doubleValue())))
-                .andExpect(jsonPath("$.[*].hrsSurcharge").value(hasItem(DEFAULT_HRS_SURCHARGE.doubleValue())))
+                .andExpect(jsonPath("$.[*].hrsSurcharge").value(hasItem(DEFAULT_HRS_SURCHARGE.toString())))
                 .andExpect(jsonPath("$.[*].resUnits").value(hasItem(DEFAULT_RES_UNITS.intValue())))
                 .andExpect(jsonPath("$.[*].metCostInstallment").value(hasItem(DEFAULT_MET_COST_INSTALLMENT.doubleValue())))
                 .andExpect(jsonPath("$.[*].intOnArrears").value(hasItem(DEFAULT_INT_ON_ARREARS.doubleValue())))
@@ -625,7 +625,7 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].noticeNo").value(hasItem(DEFAULT_NOTICE_NO.toString())))
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
                 .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
-                .andExpect(jsonPath("$.[*].nometerAmt").value(hasItem(DEFAULT_NOMETER_AMT.doubleValue())));
+                .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.doubleValue())));
     }
 
     @Test
@@ -640,7 +640,7 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(billFullDetails.getId().intValue()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
-            .andExpect(jsonPath("$.divcode").value(DEFAULT_DIVCODE.toString()))
+            .andExpect(jsonPath("$.divCode").value(DEFAULT_DIV_CODE.toString()))
             .andExpect(jsonPath("$.secCode").value(DEFAULT_SEC_CODE.toString()))
             .andExpect(jsonPath("$.secName").value(DEFAULT_SEC_NAME.toString()))
             .andExpect(jsonPath("$.metReaderCode").value(DEFAULT_MET_READER_CODE.toString()))
@@ -667,7 +667,7 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.installment").value(DEFAULT_INSTALLMENT.doubleValue()))
             .andExpect(jsonPath("$.otherCharges").value(DEFAULT_OTHER_CHARGES.doubleValue()))
             .andExpect(jsonPath("$.surcharge").value(DEFAULT_SURCHARGE.doubleValue()))
-            .andExpect(jsonPath("$.hrsSurcharge").value(DEFAULT_HRS_SURCHARGE.doubleValue()))
+            .andExpect(jsonPath("$.hrsSurcharge").value(DEFAULT_HRS_SURCHARGE.toString()))
             .andExpect(jsonPath("$.resUnits").value(DEFAULT_RES_UNITS.intValue()))
             .andExpect(jsonPath("$.metCostInstallment").value(DEFAULT_MET_COST_INSTALLMENT.doubleValue()))
             .andExpect(jsonPath("$.intOnArrears").value(DEFAULT_INT_ON_ARREARS.doubleValue()))
@@ -701,7 +701,7 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.noticeNo").value(DEFAULT_NOTICE_NO.toString()))
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
             .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
-            .andExpect(jsonPath("$.nometerAmt").value(DEFAULT_NOMETER_AMT.doubleValue()));
+            .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.doubleValue()));
     }
 
     @Test
@@ -722,7 +722,7 @@ public class BillFullDetailsResourceIntTest {
 
         // Update the billFullDetails
         billFullDetails.setCan(UPDATED_CAN);
-        billFullDetails.setDivcode(UPDATED_DIVCODE);
+        billFullDetails.setDivCode(UPDATED_DIV_CODE);
         billFullDetails.setSecCode(UPDATED_SEC_CODE);
         billFullDetails.setSecName(UPDATED_SEC_NAME);
         billFullDetails.setMetReaderCode(UPDATED_MET_READER_CODE);
@@ -783,7 +783,7 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setNoticeNo(UPDATED_NOTICE_NO);
         billFullDetails.setLat(UPDATED_LAT);
         billFullDetails.setLongi(UPDATED_LONGI);
-        billFullDetails.setNometerAmt(UPDATED_NOMETER_AMT);
+        billFullDetails.setNoMeterAmt(UPDATED_NO_METER_AMT);
 
         restBillFullDetailsMockMvc.perform(put("/api/billFullDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -795,7 +795,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(billFullDetailss).hasSize(databaseSizeBeforeUpdate);
         BillFullDetails testBillFullDetails = billFullDetailss.get(billFullDetailss.size() - 1);
         assertThat(testBillFullDetails.getCan()).isEqualTo(UPDATED_CAN);
-        assertThat(testBillFullDetails.getDivcode()).isEqualTo(UPDATED_DIVCODE);
+        assertThat(testBillFullDetails.getDivCode()).isEqualTo(UPDATED_DIV_CODE);
         assertThat(testBillFullDetails.getSecCode()).isEqualTo(UPDATED_SEC_CODE);
         assertThat(testBillFullDetails.getSecName()).isEqualTo(UPDATED_SEC_NAME);
         assertThat(testBillFullDetails.getMetReaderCode()).isEqualTo(UPDATED_MET_READER_CODE);
@@ -856,7 +856,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getNoticeNo()).isEqualTo(UPDATED_NOTICE_NO);
         assertThat(testBillFullDetails.getLat()).isEqualTo(UPDATED_LAT);
         assertThat(testBillFullDetails.getLongi()).isEqualTo(UPDATED_LONGI);
-        assertThat(testBillFullDetails.getNometerAmt()).isEqualTo(UPDATED_NOMETER_AMT);
+        assertThat(testBillFullDetails.getNoMeterAmt()).isEqualTo(UPDATED_NO_METER_AMT);
     }
 
     @Test

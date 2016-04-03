@@ -14,6 +14,7 @@ angular.module('waterERPApp')
                     data.metReadingMo = DateUtils.convertLocaleDateFromServer(data.metReadingMo);
                     data.lastPymtDt = DateUtils.convertLocaleDateFromServer(data.lastPymtDt);
                     data.billDate = DateUtils.convertLocaleDateFromServer(data.billDate);
+                    data.meterFixDate = DateUtils.convertLocaleDateFromServer(data.meterFixDate);
                     return data;
                 }
             },
@@ -26,6 +27,7 @@ angular.module('waterERPApp')
                     data.metReadingMo = DateUtils.convertLocaleDateToServer(data.metReadingMo);
                     data.lastPymtDt = DateUtils.convertLocaleDateToServer(data.lastPymtDt);
                     data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
+                    data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
                     return angular.toJson(data);
                 }
             },
@@ -38,6 +40,7 @@ angular.module('waterERPApp')
                     data.metReadingMo = DateUtils.convertLocaleDateToServer(data.metReadingMo);
                     data.lastPymtDt = DateUtils.convertLocaleDateToServer(data.lastPymtDt);
                     data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
+                    data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
                     return angular.toJson(data);
                 }
             }

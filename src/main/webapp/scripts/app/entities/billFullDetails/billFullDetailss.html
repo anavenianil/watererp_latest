@@ -17,7 +17,7 @@
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="divcode"><span>Divcode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="divCode"><span>DivCode</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="secCode"><span>SecCode</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="secName"><span>SecName</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="metReaderCode"><span>MetReaderCode</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -78,7 +78,7 @@
                     <th jh-sort-by="noticeNo"><span>NoticeNo</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lat"><span>Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="longi"><span>Longi</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="nometerAmt"><span>NometerAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noMeterAmt"><span>NoMeterAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -86,7 +86,7 @@
                 <tr ng-repeat="billFullDetails in billFullDetailss track by billFullDetails.id">
                     <td><a ui-sref="billFullDetails.detail({id:billFullDetails.id})">{{billFullDetails.id}}</a></td>
                     <td>{{billFullDetails.can}}</td>
-                    <td>{{billFullDetails.divcode}}</td>
+                    <td>{{billFullDetails.divCode}}</td>
                     <td>{{billFullDetails.secCode}}</td>
                     <td>{{billFullDetails.secName}}</td>
                     <td>{{billFullDetails.metReaderCode}}</td>
@@ -126,7 +126,7 @@
                     <td>{{billFullDetails.currentBillType}}</td>
                     <td>{{billFullDetails.fromMonth}}</td>
                     <td>{{billFullDetails.toMonth}}</td>
-                    <td>{{billFullDetails.meterFixDate}}</td>
+                        <td>{{billFullDetails.meterFixDate | date:'mediumDate'}}</td>
                     <td>{{billFullDetails.initialReading}}</td>
                     <td>{{billFullDetails.presentReading}}</td>
                     <td>{{billFullDetails.units}}</td>
@@ -147,7 +147,7 @@
                     <td>{{billFullDetails.noticeNo}}</td>
                     <td>{{billFullDetails.lat}}</td>
                     <td>{{billFullDetails.longi}}</td>
-                    <td>{{billFullDetails.nometerAmt}}</td>
+                    <td>{{billFullDetails.noMeterAmt}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="billFullDetails.detail({id:billFullDetails.id})"

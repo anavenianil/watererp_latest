@@ -87,4 +87,13 @@ angular.module('waterERPApp').controller('BillFullDetailsDialogController',
         $scope.datePickerForBillDateOpen = function($event) {
             $scope.datePickerForBillDate.status.opened = true;
         };
+        $scope.datePickerForMeterFixDate = {};
+
+        $scope.datePickerForMeterFixDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForMeterFixDateOpen = function($event) {
+            $scope.datePickerForMeterFixDate.status.opened = true;
+        };
 }]);

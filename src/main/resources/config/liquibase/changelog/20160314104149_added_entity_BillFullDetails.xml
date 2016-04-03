@@ -24,7 +24,7 @@
             <column name="can" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="divcode" type="varchar(255)">
+            <column name="div_code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="sec_code" type="varchar(255)"/>
@@ -65,7 +65,7 @@
             <column name="installment" type="${floatType}"/>
             <column name="other_charges" type="${floatType}"/>
             <column name="surcharge" type="${floatType}"/>
-            <column name="hrs_surcharge" type="${floatType}"/>
+            <column name="hrs_surcharge" type="varchar(255)"/>
             <column name="res_units" type="bigint"/>
             <column name="met_cost_installment" type="${floatType}"/>
             <column name="int_on_arrears" type="${floatType}"/>
@@ -82,7 +82,7 @@
             <column name="current_bill_type" type="varchar(255)"/>
             <column name="from_month" type="varchar(255)"/>
             <column name="to_month" type="varchar(255)"/>
-            <column name="meter_fix_date" type="varchar(255)"/>
+            <column name="meter_fix_date" type="date"/>
             <column name="initial_reading" type="${floatType}"/>
             <column name="present_reading" type="${floatType}"/>
             <column name="units" type="${floatType}"/>
@@ -103,7 +103,7 @@
             <column name="notice_no" type="varchar(255)"/>
             <column name="lat" type="varchar(255)"/>
             <column name="longi" type="varchar(255)"/>
-            <column name="nometer_amt" type="${floatType}"/>
+            <column name="no_meter_amt" type="${floatType}"/>
         </createTable>
         
     </changeSet>
