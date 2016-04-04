@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .factory('BillFullDetails', function ($resource, DateUtils) {
         return $resource('api/billFullDetailss/:id', {}, {
             'query': { method: 'GET', isArray: true},

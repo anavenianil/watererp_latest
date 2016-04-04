@@ -1,20 +1,24 @@
 'use strict';
 
-angular.module('waterERPApp').controller('BillDetailsDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillDetails',
-        function($scope, $stateParams, $uibModalInstance, entity, BillDetails) {
+angular.module('watererpApp').controller('BillDetailsDialogController',
+        function($scope, $stateParams, BillDetails, $state) {
 
-        $scope.billDetails = entity;
+        $scope.billDetails = {};
         $scope.load = function(id) {
             BillDetails.get({id : id}, function(result) {
                 $scope.billDetails = result;
             });
         };
+        
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id);
+        }
 
         var onSaveSuccess = function (result) {
-            $scope.$emit('waterERPApp:billDetailsUpdate', result);
-            $uibModalInstance.close(result);
+            $scope.$emit('watererpApp:billDetailsUpdate', result);
+            //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('billDetails');
         };
 
         var onSaveError = function (result) {
@@ -33,22 +37,13 @@ angular.module('waterERPApp').controller('BillDetailsDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.datePickerForBillDate = {};
+        $scope.datePickerForBill_date = {};
 
-        $scope.datePickerForBillDate.status = {
+        $scope.datePickerForBill_date.status = {
             opened: false
         };
 
-        $scope.datePickerForBillDateOpen = function($event) {
-            $scope.datePickerForBillDate.status.opened = true;
+        $scope.datePickerForBill_dateOpen = function($event) {
+            $scope.datePickerForBill_date.status.opened = true;
         };
-        $scope.datePickerForMeterFixDate = {};
-
-        $scope.datePickerForMeterFixDate.status = {
-            opened: false
-        };
-
-        $scope.datePickerForMeterFixDateOpen = function($event) {
-            $scope.datePickerForMeterFixDate.status.opened = true;
-        };
-}]);
+});

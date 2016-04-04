@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('billDetails', {
@@ -85,36 +85,36 @@ angular.module('waterERPApp')
                             entity: function () {
                                 return {
                                     can: null,
-                                    billNumber: null,
-                                    billDate: null,
-                                    billTime: null,
-                                    meterMake: null,
-                                    currentBillType: null,
-                                    fromMonth: null,
-                                    toMonth: null,
-                                    meterFixDate: null,
-                                    initialReading: null,
-                                    presentReading: null,
+                                    bill_number: null,
+                                    bill_date: null,
+                                    bill_time: null,
+                                    meter_make: null,
+                                    current_bill_type: null,
+                                    from_month: null,
+                                    to_month: null,
+                                    meter_fix_date: null,
+                                    initial_reading: null,
+                                    present_reading: null,
                                     units: null,
-                                    waterCess: null,
-                                    sewerageCess: null,
-                                    serviceCharge: null,
-                                    meterServiceCharge: null,
-                                    totalAmount: null,
-                                    netPayableAmount: null,
-                                    telephoneNo: null,
-                                    meterStatus: null,
-                                    metReaderCode: null,
-                                    billFlag: null,
-                                    svrStatus: null,
-                                    terminalId: null,
-                                    meterReaderId: null,
-                                    userId: null,
-                                    mobileNo: null,
-                                    noticeNo: null,
+                                    water_cess: null,
+                                    sewerage_cess: null,
+                                    service_charge: null,
+                                    meter_service_charge: null,
+                                    total_amount: null,
+                                    net_payable_amount: null,
+                                    telephone_no: null,
+                                    meter_status: null,
+                                    mc_met_reader_code: null,
+                                    bill_flag: null,
+                                    svr_status: null,
+                                    terminal_id: null,
+                                    meter_reader_id: null,
+                                    user_id: null,
+                                    mobile_no: null,
+                                    notice_no: null,
                                     lat: null,
-                                    longi: null,
-                                    noMeterAmt: null,
+                                    longI: null,
+                                    nometer_amt: null,
                                     id: null
                                 };
                             }

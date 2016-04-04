@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .controller('BillFullDetailsDetailController', function ($scope, $rootScope, $stateParams, entity, BillFullDetails) {
         $scope.billFullDetails = entity;
         $scope.load = function (id) {
@@ -8,7 +8,7 @@ angular.module('waterERPApp')
                 $scope.billFullDetails = result;
             });
         };
-        var unsubscribe = $rootScope.$on('waterERPApp:billFullDetailsUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('watererpApp:billFullDetailsUpdate', function(event, result) {
             $scope.billFullDetails = result;
         });
         $scope.$on('$destroy', unsubscribe);

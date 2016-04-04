@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp').controller('CustDetailsDialogController',
+angular.module('watererpApp').controller('CustDetailsDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails',
         function($scope, $stateParams, $uibModalInstance, entity, CustDetails) {
 
@@ -12,7 +12,7 @@ angular.module('waterERPApp').controller('CustDetailsDialogController',
         };
 
         var onSaveSuccess = function (result) {
-            $scope.$emit('waterERPApp:custDetailsUpdate', result);
+            $scope.$emit('watererpApp:custDetailsUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
         };

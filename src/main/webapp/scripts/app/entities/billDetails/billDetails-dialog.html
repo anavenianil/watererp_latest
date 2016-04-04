@@ -1,13 +1,22 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
-    <div class="modal-header">
+    <!-- <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
         <h4 class="modal-title" id="myBillDetailsLabel">Create or edit a BillDetails</h4>
-    </div>
+    </div> -->
+    
+    <div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Bill Details</h3>
+		</div>
+		<div class="list-group">
+	<div class="list-group-item">
+			
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
+        <div class="row">
         <div class="form-group">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
@@ -39,6 +48,8 @@
                 </p>
             </div>
         </div>
+        </div>
+        <div class="row">
         <div class="form-group">
             <label class="control-label" for="field_billTime">BillTime</label>
             <input type="text" class="form-control" name="billTime" id="field_billTime"
@@ -63,6 +74,8 @@
                     ng-model="billDetails.fromMonth"
                      />
         </div>
+        </div>
+        <div class="row">
         <div class="form-group">
             <label class="control-label" for="field_toMonth">ToMonth</label>
             <input type="text" class="form-control" name="toMonth" id="field_toMonth"
@@ -89,6 +102,8 @@
                     ng-model="billDetails.presentReading"
                      />
         </div>
+        </div>
+        <div class="row">
         <div class="form-group">
             <label class="control-label" for="field_units">Units</label>
             <input type="number" class="form-control" name="units" id="field_units"
@@ -113,6 +128,8 @@
                     ng-model="billDetails.serviceCharge"
                      />
         </div>
+        </div>
+        <div class="row">
         <div class="form-group">
             <label class="control-label" for="field_meterServiceCharge">MeterServiceCharge</label>
             <input type="number" class="form-control" name="meterServiceCharge" id="field_meterServiceCharge"
@@ -137,6 +154,8 @@
                     ng-model="billDetails.telephoneNo"
                      />
         </div>
+        </div>
+        <div class="row">
         <div class="form-group">
             <label class="control-label" for="field_meterStatus">MeterStatus</label>
             <input type="text" class="form-control" name="meterStatus" id="field_meterStatus"
@@ -161,6 +180,8 @@
                     ng-model="billDetails.svrStatus"
                      />
         </div>
+        </div>
+        <div class="row">
         <div class="form-group">
             <label class="control-label" for="field_terminalId">TerminalId</label>
             <input type="text" class="form-control" name="terminalId" id="field_terminalId"
@@ -185,6 +206,8 @@
                     ng-model="billDetails.mobileNo"
                      />
         </div>
+        </div>
+        <div class="row">
         <div class="form-group">
             <label class="control-label" for="field_noticeNo">NoticeNo</label>
             <input type="text" class="form-control" name="noticeNo" id="field_noticeNo"
@@ -209,8 +232,12 @@
                     ng-model="billDetails.noMeterAmt"
                      />
         </div>
+        </div>
 
     </div>
+    
+    
+    </div></div></div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
