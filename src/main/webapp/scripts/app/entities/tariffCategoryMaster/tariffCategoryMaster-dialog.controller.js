@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp').controller('TariffCategoryMasterDialogController',
+angular.module('watererpApp').controller('TariffCategoryMasterDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'TariffCategoryMaster',
         function($scope, $stateParams, $uibModalInstance, entity, TariffCategoryMaster) {
 
@@ -12,7 +12,7 @@ angular.module('waterERPApp').controller('TariffCategoryMasterDialogController',
         };
 
         var onSaveSuccess = function (result) {
-            $scope.$emit('waterERPApp:tariffCategoryMasterUpdate', result);
+            $scope.$emit('watererpApp:tariffCategoryMasterUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
         };

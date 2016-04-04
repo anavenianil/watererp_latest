@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustomerComplaintsDialogController', function ($scope, $state, CustomerComplaints, ParseLinks, $stateParams, ApplicationTxn, ComplaintTypeMaster) {
+    .controller('CustomerComplaintsDialogController', function ($scope, $state, CustomerComplaints, ParseLinks, $stateParams, ApplicationTxn, ComplaintTypeMaster, UploadUtil, DateService) {
     $scope.customerComplaints = {};
     $scope.customerComplaints.complaintDate = new Date();////////  This code is to per populate system date in Complaint Date Field
+    //$scope.customerComplaints.complaintDate = DateService.getServerDate();
     $scope.applicationtxns = ApplicationTxn.query();
     $scope.complainttypemasters = ComplaintTypeMaster.query();
     $scope.load = function(id) {
@@ -52,7 +53,6 @@ angular.module('watererpApp')
     
     
     $scope.customerComplaints.applicationTxn = {};
-    $scope.customerComplaints.applicationTxn.customer = {};
     //$scope.customerComplaints.connectionTypeMaster = {};
     $scope.customerComplaints.applicationTxn.categoryMaster = {};
     $scope.getApplicationTxn = function(fileNo){
@@ -60,7 +60,7 @@ angular.module('watererpApp')
     	ApplicationTxn.get({id : fileNo}, function(result) {
             $scope.applicationTxn = result;
             $scope.customerComplaints.applicationTxn.categoryMaster.categoryName = $scope.applicationTxn.categoryMaster.categoryName;
-            $scope.customerComplaints.applicationTxn.customer.firstName = $scope.applicationTxn.customer.firstName;
+            $scope.customerComplaints.applicationTxn.fullName = $scope.applicationTxn.fullName;
             $scope.customerComplaints.applicationTxn.street = $scope.applicationTxn.street;
             //$scope.customerComplaints.connectionTypeMaster.id = $scope.applicationTxn.connectionTypeMaster.id;
             $scope.customerComplaints.applicationTxn.constituency = $scope.applicationTxn.constituency;
@@ -68,6 +68,25 @@ angular.module('watererpApp')
         });	
     }
     
+    
+    $scope.$watch('customerComplaints.relevantDoc1', function (files) {
+        $scope.formUpload = false;
+        if (files != null) {
+            for (var i = 0; i < files.length; i++) {
+                $scope.errorMsg = null;
+                (function (file) {
+                	UploadUtil.uploadUsingUpload(file, $scope, 'waterErp');
+                })(files[i]);
+            }
+        }
+    });
+    
+    $scope.getReqParams = function() {
+		return $scope.generateErrorOnServer ? '?errorCode='
+				+ $scope.serverErrorCode + '&errorMessage='
+				+ $scope.serverErrorMsg : '';
+	};
+	
  });
 
 

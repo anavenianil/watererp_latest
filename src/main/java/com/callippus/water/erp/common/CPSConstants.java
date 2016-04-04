@@ -2,6 +2,9 @@ package com.callippus.water.erp.common;
 
 public class CPSConstants {
 	
+		//CUSTOMERCOMPLAINTS
+	public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
+	//public static final String CUSTOMERCOMPLAINTSID = "";
 		//Requisition
 		public static final String REQUISITION = "requisition";
 		public static final String REQUISITIONREQUEST_R ="Requisition_r";
