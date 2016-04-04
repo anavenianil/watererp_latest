@@ -14,11 +14,12 @@ import com.callippus.water.erp.repository.TariffMasterCustomRepository;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,8 +73,8 @@ public class BillingService {
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
 
-	float total_amount, net_payable_amount,
-			surcharge, total_cess,kl ;
+	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f,
+			total_cess = 0.0f, kl = 0.0f;
 
 	public void generateBill() {
 
@@ -81,12 +82,31 @@ public class BillingService {
 		processBills(bd);
 	}
 
+	public void init() {
+		avgKL = 0.0f;
+		factor = 0.0f;
+		prevAvgKL = 0.0f;
+		units = 0;
+		unitsKL = 0.0f;
+		hasSewer = false;
+		ewura = 0.0f;
+		monthsDiff = 0;
+		dFrom = null;
+		dTo = null;
+
+		total_amount = 0.0f;
+		net_payable_amount = 0.0f;
+		surcharge = 0.0f;
+		total_cess = 0.0f;
+		kl = 0.0f;
+	}
+
 	public void processBills(List<BillDetails> bd) {
 		bd.forEach(bill_details -> process_bill(bill_details));
 	}
 
 	public void process_bill(BillDetails bill_details) {
-
+		init();
 		log.debug("Process customer with CAN:" + bill_details.getCan());
 		CustDetails customer = custDetailsRepository.findByCan(bill_details
 				.getCan());
@@ -203,22 +223,24 @@ public class BillingService {
 
 			log.debug("This is the EWURA Configuration:" + cd.toString());
 
-
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
 			bfd.setId(null);
-			
+
 			// Subtract Avg Water charges in case of Lock Bill scenario
-			for (Map<String,Object> charge : charges) {
+			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
 					log.debug("Usage Charge:" + (Double) charge.get("amount"));
-					bfd.setWaterCess(((Double) charge.get("amount")).floatValue());
+					bfd.setWaterCess(((Double) charge.get("amount"))
+							.floatValue());
 				} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 					log.debug("Meter Rent:" + (Double) charge.get("amount"));
-					bfd.setMeterServiceCharge(((Double) charge.get("amount")).floatValue());
+					bfd.setMeterServiceCharge(((Double) charge.get("amount"))
+							.floatValue());
 				} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
 					log.debug("Service Charge:" + (Double) charge.get("amount"));
-					bfd.setServiceCharge(((Double) charge.get("amount")).floatValue());
+					bfd.setServiceCharge(((Double) charge.get("amount"))
+							.floatValue());
 				}
 			}
 
@@ -229,18 +251,27 @@ public class BillingService {
 			log.debug("This is the SEWERAGE Charge Configuration:"
 					+ cd.toString());
 
-			if(hasSewer)
-				bfd.setSewerageCess(Float.parseFloat(cd.getValue()) * bfd.getWaterCess() / 100.0f);
-			
-			Float total = bfd.getWaterCess() + bfd.getMeterServiceCharge() + bfd.getServiceCharge() + bfd.getSewerageCess();
-			
-			bfd.setTotalAmount(CPSUtils.round(total.floatValue(),2));
-			
-			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears() + bfd.getArrears();
-			bfd.setNetPayableAmount(CPSUtils.round(netPayable.floatValue(),2));
-								
+			if (hasSewer)
+				bfd.setSewerageCess(Float.parseFloat(cd.getValue())
+						* bfd.getWaterCess() / 100.0f);
+
+			Float total = bfd.getWaterCess() + bfd.getMeterServiceCharge()
+					+ bfd.getServiceCharge() + bfd.getSewerageCess();
+
+			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
+
+			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears()
+					+ bfd.getArrears();
+			bfd.setNetPayableAmount(CPSUtils.round(netPayable.floatValue(), 2));
+
+			LocalDateTime date = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hhmmss");
+
+			bfd.setBillDate(date.toLocalDate());
+			bfd.setBillTime(date.format(formatter));
+
 			bfd.setUnits(units);
-			
+
 			log.debug("This is the BillFullDetails:" + bfd);
 
 			bfdRepository.save(bfd);
