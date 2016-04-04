@@ -72,6 +72,8 @@ public class BillingService {
 	int monthsDiff = 0;
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
+	
+	ConfigurationDetails cd = null;
 
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f,
 			total_cess = 0.0f, kl = 0.0f;
@@ -218,10 +220,6 @@ public class BillingService {
 					.findTariffs(dFrom, dTo, avgKL, bill_details
 							.getCurrentBillType().equals("U") ? 1 : 0);
 
-			ConfigurationDetails cd = configurationDetailsRepository
-					.findOneByName("EWURA");
-
-			log.debug("This is the EWURA Configuration:" + cd.toString());
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
@@ -244,6 +242,7 @@ public class BillingService {
 				}
 			}
 
+
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
 
 			cd = configurationDetailsRepository.findOneByName("SEWERAGE");
@@ -254,9 +253,17 @@ public class BillingService {
 			if (hasSewer)
 				bfd.setSewerageCess(Float.parseFloat(cd.getValue())
 						* bfd.getWaterCess() / 100.0f);
+			
+			cd = configurationDetailsRepository
+					.findOneByName("EWURA");
 
+			log.debug("This is the EWURA Configuration:" + cd.toString());
+			float ewura = ((bfd.getWaterCess() + bfd.getSewerageCess()) * Float.parseFloat(cd.getValue())) / 100.0f;
+						
+			bfd.setSurcharge(CPSUtils.round(ewura, 2));
+			
 			Float total = bfd.getWaterCess() + bfd.getMeterServiceCharge()
-					+ bfd.getServiceCharge() + bfd.getSewerageCess();
+					+ bfd.getServiceCharge() + bfd.getSewerageCess() + bfd.getSurcharge() + bfd.getOtherCharges();
 
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
