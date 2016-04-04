@@ -5,6 +5,7 @@ angular.module('watererpApp')
         var _identity,
             _authenticated = false;
         var module2MenuItems = {};
+        var orgRole = {};
 
         return {
             isIdentityResolved: function () {
@@ -74,6 +75,11 @@ angular.module('watererpApp')
     						module2MenuItems = response;
     					});
                 
+                $http.get("/api/empMastersForOrgRole").success(
+                		function(response){
+                			orgRole = response;
+                		});
+                
                 return deferred.promise;
             },
             getLogonUser: function () {
@@ -83,6 +89,10 @@ angular.module('watererpApp')
             geModuleMenus: function(){
             	//console.log("principal.service.js: Returning Module2menu_items:" + JSON.stringify(module2menu_items));
             	return module2MenuItems;
+            },
+            
+            getOrgRole: function(){
+            	return orgRole;
             }
         };
     });

@@ -1,7 +1,7 @@
 <div>
 	<h2>ApplicationTxns</h2>
 	<jh-alert></jh-alert>
-	<div class="container-fluid">
+	<!-- <div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-4 no-padding-left">
 				<button class="btn btn-primary" ui-sref="applicationTxn.new">
@@ -10,101 +10,131 @@
 				</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<br />
-	<div class="table-responsive">
-		<table class="jh-table table table-striped">
-			<thead>
-				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
-					<th jh-sort-by="id"><span>ID</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="fullName"><span>FullName</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="homeOrOficeNumber"><span>HomeOrOficeNumber</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="regionalNumber"><span>RegionalNumber</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="faxNumber"><span>FaxNumber</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="plotNumber"><span>PlotNumber</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="area"><span>Area</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="street"><span>Street</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="villageExecutiveOffice"><span>VillageExecutiveOffice</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="villageExecutiveOfficeNumber"><span>VillageExecutiveOfficeNumber</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="category"><span>Category</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="poBox"><span>PoBox</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="requestedDate"><span>RequestedDate</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="photo"><span>Photo</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="fileNumber"><span>FileNumber</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="createdDate"><span>CreatedDate</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="updatedDate"><span>UpdatedDate</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="status"><span>Status</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody infinite-scroll="loadPage(page + 1)"
-				infinite-scroll-disabled="links['last'] == page">
-				<tr
-					ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
-					<td><a ui-sref="applicationTxn.detail({id:applicationTxn.id})">{{applicationTxn.id}}</a></td>
-					<td>{{applicationTxn.fullName}}</td>
-					<td>{{applicationTxn.homeOrOficeNumber}}</td>
-					<td>{{applicationTxn.regionalNumber}}</td>
-					<td>{{applicationTxn.faxNumber}}</td>
-					<td>{{applicationTxn.plotNumber}}</td>
-					<td>{{applicationTxn.area}}</td>
-					<td>{{applicationTxn.street}}</td>
-					<td>{{applicationTxn.villageExecutiveOffice}}</td>
-					<td>{{applicationTxn.villageExecutiveOfficeNumber}}</td>
-					<td>{{applicationTxn.categoryMaster.categoryName}}</td>
-					<td>{{applicationTxn.poBox}}</td>
-					<td>{{applicationTxn.requestedDate | date:'medium'}}</td>
-					<!-- <td>{{applicationTxn.photo}}</td> -->
-					<td><div ng-hide="applicationTxn.photo === ''">
-							<a href="{{applicationTxn.photo}}">Download</a>&nbsp;<span
-								class="glyphicon glyphicon-download"></span>
-						</div></td>
-					<td>{{applicationTxn.fileNumber}}</td>
-					<td>{{applicationTxn.createdDate | date:'medium'}}</td>
-					<td>{{applicationTxn.updatedDate | date:'medium'}}</td>
-					<td>{{applicationTxn.status}}</td>
-					<td class="text-right">
-						<div class="btn-group flex-btn-group-container">
-							<button type="submit"
-								ui-sref="applicationTxn.detail({id:applicationTxn.id})"
-								class="btn btn-info btn-sm">
-								<span class="glyphicon glyphicon-eye-open"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-							<button type="submit"
-								ui-sref="applicationTxn.edit({id:applicationTxn.id})"
-								class="btn btn-primary btn-sm">
-								<span class="glyphicon glyphicon-pencil"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-							<button type="submit"
-								ui-sref="applicationTxn.delete({id:applicationTxn.id})"
-								class="btn btn-danger btn-sm">
-								<span class="glyphicon glyphicon-remove-circle"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Connection</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="table-responsive">
+					<div class="row">
+						<div class="col-sm-3">
+							<label>File Number</label> <input list="applicationTxn" type=""
+								class="form-control" ng-model="applicationTxnId" />
+							<datalist id="applicationTxn">
+								<option ng-repeat="applicationTxn in applicationTxns"
+									value="{{applicationTxn.id}}">
+							</datalist>
 						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+						<span> <br>
+							<button type="button"
+								class="btn btn-primary glyphicon glyphicon-search"
+								ui-sref="applicationTxn.detail({id:applicationTxnId})"></button>
+						</span>
+					</div>
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+								<th jh-sort-by="id"><span>ID</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="fullName"><span>Full Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="category"><span>Category</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="area"><span>Area</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="status"><span>Status</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+
+								<!-- <th jh-sort-by="homeOrOficeNumber"><span>HomeOrOficeNumber</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="regionalNumber"><span>RegionalNumber</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="faxNumber"><span>FaxNumber</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="plotNumber"><span>PlotNumber</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								
+								<th jh-sort-by="street"><span>Street</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="villageExecutiveOffice"><span>VillageExecutiveOffice</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="villageExecutiveOfficeNumber"><span>VillageExecutiveOfficeNumber</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								
+								<th jh-sort-by="poBox"><span>PoBox</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="requestedDate"><span>RequestedDate</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="photo"><span>Photo</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="fileNumber"><span>FileNumber</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="createdDate"><span>CreatedDate</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="updatedDate"><span>UpdatedDate</span> <span
+									class="glyphicon glyphicon-sort"></span></th> -->
+
+								<th></th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<tr
+								ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
+								<td><a
+									ui-sref="applicationTxn.detail({id:applicationTxn.id})">{{applicationTxn.id}}</a></td>
+								<td>{{applicationTxn.fullName}}</td>
+								<td>{{applicationTxn.categoryMaster.categoryName}}</td>
+								<td>{{applicationTxn.area}}</td>
+								<td>{{applicationTxn.status}}</td>
+
+								<!-- <td>{{applicationTxn.homeOrOficeNumber}}</td>
+								<td>{{applicationTxn.regionalNumber}}</td>
+								<td>{{applicationTxn.faxNumber}}</td>
+								<td>{{applicationTxn.plotNumber}}</td>
+								<td>{{applicationTxn.street}}</td>
+								<td>{{applicationTxn.villageExecutiveOffice}}</td>
+								<td>{{applicationTxn.villageExecutiveOfficeNumber}}</td>
+								<td>{{applicationTxn.poBox}}</td>
+								<td>{{applicationTxn.requestedDate | date:'medium'}}</td>
+								<td><div ng-hide="applicationTxn.photo === ''">
+										<a href="{{applicationTxn.photo}}">Download</a>&nbsp;<span
+											class="glyphicon glyphicon-download"></span>
+									</div></td>
+								<td>{{applicationTxn.fileNumber}}</td>
+								<td>{{applicationTxn.createdDate | date:'medium'}}</td>
+								<td>{{applicationTxn.updatedDate | date:'medium'}}</td> -->
+
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit"
+											ui-sref="applicationTxn.detail({id:applicationTxn.id})"
+											class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-eye-open"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<button type="submit"
+											ui-sref="applicationTxn.edit({id:applicationTxn.id})"
+											class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<button type="submit"
+											ui-sref="applicationTxn.delete({id:applicationTxn.id})"
+											class="btn btn-danger btn-sm">
+											<span class="glyphicon glyphicon-remove-circle"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

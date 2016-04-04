@@ -7,6 +7,7 @@ angular.module('watererpApp')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        
         $scope.loadAll = function() {
             ApplicationTxn.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -15,6 +16,11 @@ angular.module('watererpApp')
                 }
             });
         };
+        
+//        $scope.getApplicationTxn = function(id){
+//        	$state.go('applicationTxn.detail');
+//        }
+        
         $scope.reset = function() {
             $scope.page = 0;
             $scope.applicationTxns = [];

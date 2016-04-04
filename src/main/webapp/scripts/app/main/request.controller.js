@@ -15,6 +15,6 @@ angular.module('watererpApp').controller(
 							});
 			};
 
-			$scope.load($stateParams.type,$stateParams.action_type);
+			$scope.load($stateParams.type, $stateParams.action_type);
 
 		});
