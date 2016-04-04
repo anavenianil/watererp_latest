@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('billFullDetails', {
@@ -43,38 +43,6 @@ angular.module('watererpApp')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'BillFullDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/billFullDetails/billFullDetails-dialog.html',
-                        controller: 'BillFullDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            .state('billFullDetails.edit', {
-                parent: 'billFullDetails',
-                url: '/edit/:id',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'BillFullDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/billFullDetails/billFullDetails-dialog.html',
-                        controller: 'BillFullDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            /*.state('billFullDetails.new', {
-                parent: 'billFullDetails',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -85,10 +53,10 @@ angular.module('watererpApp')
                             entity: function () {
                                 return {
                                     can: null,
-                                    divcode: null,
-                                    seccode: null,
-                                    secname: null,
-                                    metreadercode: null,
+                                    divCode: null,
+                                    secCode: null,
+                                    secName: null,
+                                    metReaderCode: null,
                                     connDate: null,
                                     consName: null,
                                     houseNo: null,
@@ -111,8 +79,8 @@ angular.module('watererpApp')
                                     reversalAmt: null,
                                     installment: null,
                                     otherCharges: null,
-                                    surCharge: null,
-                                    hrsSurCharge: null,
+                                    surcharge: null,
+                                    hrsSurcharge: null,
                                     resUnits: null,
                                     metCostInstallment: null,
                                     intOnArrears: null,
@@ -137,7 +105,6 @@ angular.module('watererpApp')
                                     netPayableAmount: null,
                                     telephoneNo: null,
                                     meterStatus: null,
-                                    mcMetReaderCode: null,
                                     billFlag: null,
                                     svrStatus: null,
                                     terminalId: null,
@@ -146,8 +113,8 @@ angular.module('watererpApp')
                                     mobileNo: null,
                                     noticeNo: null,
                                     lat: null,
-                                    longI: null,
-                                    nometerAmt: null,
+                                    longi: null,
+                                    noMeterAmt: null,
                                     id: null
                                 };
                             }
@@ -181,7 +148,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })*/
+            })
             .state('billFullDetails.delete', {
                 parent: 'billFullDetails',
                 url: '/{id}/delete',

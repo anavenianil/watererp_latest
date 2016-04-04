@@ -68,8 +68,9 @@ public class CustDetailsResourceIntTest {
     private static final String UPDATED_PIN_CODE = "BBBBB";
     private static final String DEFAULT_CATEGORY = "AAAAA";
     private static final String UPDATED_CATEGORY = "BBBBB";
-    private static final String DEFAULT_PIPE_SIZE = "AAAAA";
-    private static final String UPDATED_PIPE_SIZE = "BBBBB";
+
+    private static final Float DEFAULT_PIPE_SIZE = 1F;
+    private static final Float UPDATED_PIPE_SIZE = 2F;
     private static final String DEFAULT_BOARD_METER = "AAAAA";
     private static final String UPDATED_BOARD_METER = "BBBBB";
     private static final String DEFAULT_SEWERAGE = "AAAAA";
@@ -78,39 +79,53 @@ public class CustDetailsResourceIntTest {
     private static final String UPDATED_METER_NO = "BBBBB";
     private static final String DEFAULT_PREV_BILL_TYPE = "AAAAA";
     private static final String UPDATED_PREV_BILL_TYPE = "BBBBB";
-    private static final String DEFAULT_PREV_BILL_MONTH = "AAAAA";
-    private static final String UPDATED_PREV_BILL_MONTH = "BBBBB";
-    private static final String DEFAULT_PREV_AVG_KL = "AAAAA";
-    private static final String UPDATED_PREV_AVG_KL = "BBBBB";
+
+    private static final LocalDate DEFAULT_PREV_BILL_MONTH = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_PREV_BILL_MONTH = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Float DEFAULT_PREV_AVG_KL = 1F;
+    private static final Float UPDATED_PREV_AVG_KL = 2F;
 
     private static final LocalDate DEFAULT_MET_READING_DT = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_MET_READING_DT = LocalDate.now(ZoneId.systemDefault());
-    private static final String DEFAULT_PREV_READING = "AAAAA";
-    private static final String UPDATED_PREV_READING = "BBBBB";
-    private static final String DEFAULT_MET_READING_MO = "AAAAA";
-    private static final String UPDATED_MET_READING_MO = "BBBBB";
-    private static final String DEFAULT_MET_AVG_KL = "AAAAA";
-    private static final String UPDATED_MET_AVG_KL = "BBBBB";
-    private static final String DEFAULT_ARREARS = "AAAAA";
-    private static final String UPDATED_ARREARS = "BBBBB";
-    private static final String DEFAULT_REVERSAL_AMT = "AAAAA";
-    private static final String UPDATED_REVERSAL_AMT = "BBBBB";
-    private static final String DEFAULT_INSTALLMENT = "AAAAA";
-    private static final String UPDATED_INSTALLMENT = "BBBBB";
-    private static final String DEFAULT_OTHER_CHARGES = "AAAAA";
-    private static final String UPDATED_OTHER_CHARGES = "BBBBB";
-    private static final String DEFAULT_SURCHARGE = "AAAAA";
-    private static final String UPDATED_SURCHARGE = "BBBBB";
+
+    private static final Float DEFAULT_PREV_READING = 1F;
+    private static final Float UPDATED_PREV_READING = 2F;
+
+    private static final LocalDate DEFAULT_MET_READING_MO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_MET_READING_MO = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Float DEFAULT_MET_AVG_KL = 1F;
+    private static final Float UPDATED_MET_AVG_KL = 2F;
+
+    private static final Float DEFAULT_ARREARS = 1F;
+    private static final Float UPDATED_ARREARS = 2F;
+
+    private static final Float DEFAULT_REVERSAL_AMT = 1F;
+    private static final Float UPDATED_REVERSAL_AMT = 2F;
+
+    private static final Float DEFAULT_INSTALLMENT = 1F;
+    private static final Float UPDATED_INSTALLMENT = 2F;
+
+    private static final Float DEFAULT_OTHER_CHARGES = 1F;
+    private static final Float UPDATED_OTHER_CHARGES = 2F;
+
+    private static final Float DEFAULT_SURCHARGE = 1F;
+    private static final Float UPDATED_SURCHARGE = 2F;
     private static final String DEFAULT_HRS_SURCHARGE = "AAAAA";
     private static final String UPDATED_HRS_SURCHARGE = "BBBBB";
-    private static final String DEFAULT_RES_UNITS = "AAAAA";
-    private static final String UPDATED_RES_UNITS = "BBBBB";
-    private static final String DEFAULT_MET_COST_INSTALLMENT = "AAAAA";
-    private static final String UPDATED_MET_COST_INSTALLMENT = "BBBBB";
-    private static final String DEFAULT_INT_ON_ARREARS = "AAAAA";
-    private static final String UPDATED_INT_ON_ARREARS = "BBBBB";
-    private static final String DEFAULT_LAST_PYMT_DT = "AAAAA";
-    private static final String UPDATED_LAST_PYMT_DT = "BBBBB";
+
+    private static final Long DEFAULT_RES_UNITS = 1L;
+    private static final Long UPDATED_RES_UNITS = 2L;
+
+    private static final Float DEFAULT_MET_COST_INSTALLMENT = 1F;
+    private static final Float UPDATED_MET_COST_INSTALLMENT = 2F;
+
+    private static final Float DEFAULT_INT_ON_ARREARS = 1F;
+    private static final Float UPDATED_INT_ON_ARREARS = 2F;
+
+    private static final LocalDate DEFAULT_LAST_PYMT_DT = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_LAST_PYMT_DT = LocalDate.now(ZoneId.systemDefault());
 
     private static final Float DEFAULT_LAST_PYMT_AMT = 1F;
     private static final Float UPDATED_LAST_PYMT_AMT = 2F;
@@ -316,26 +331,26 @@ public class CustDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
                 .andExpect(jsonPath("$.[*].pinCode").value(hasItem(DEFAULT_PIN_CODE.toString())))
                 .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
-                .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.toString())))
+                .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.doubleValue())))
                 .andExpect(jsonPath("$.[*].boardMeter").value(hasItem(DEFAULT_BOARD_METER.toString())))
                 .andExpect(jsonPath("$.[*].sewerage").value(hasItem(DEFAULT_SEWERAGE.toString())))
                 .andExpect(jsonPath("$.[*].meterNo").value(hasItem(DEFAULT_METER_NO.toString())))
                 .andExpect(jsonPath("$.[*].prevBillType").value(hasItem(DEFAULT_PREV_BILL_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].prevBillMonth").value(hasItem(DEFAULT_PREV_BILL_MONTH.toString())))
-                .andExpect(jsonPath("$.[*].prevAvgKl").value(hasItem(DEFAULT_PREV_AVG_KL.toString())))
+                .andExpect(jsonPath("$.[*].prevAvgKl").value(hasItem(DEFAULT_PREV_AVG_KL.doubleValue())))
                 .andExpect(jsonPath("$.[*].metReadingDt").value(hasItem(DEFAULT_MET_READING_DT.toString())))
-                .andExpect(jsonPath("$.[*].prevReading").value(hasItem(DEFAULT_PREV_READING.toString())))
+                .andExpect(jsonPath("$.[*].prevReading").value(hasItem(DEFAULT_PREV_READING.doubleValue())))
                 .andExpect(jsonPath("$.[*].metReadingMo").value(hasItem(DEFAULT_MET_READING_MO.toString())))
-                .andExpect(jsonPath("$.[*].metAvgKl").value(hasItem(DEFAULT_MET_AVG_KL.toString())))
-                .andExpect(jsonPath("$.[*].arrears").value(hasItem(DEFAULT_ARREARS.toString())))
-                .andExpect(jsonPath("$.[*].reversalAmt").value(hasItem(DEFAULT_REVERSAL_AMT.toString())))
-                .andExpect(jsonPath("$.[*].installment").value(hasItem(DEFAULT_INSTALLMENT.toString())))
-                .andExpect(jsonPath("$.[*].otherCharges").value(hasItem(DEFAULT_OTHER_CHARGES.toString())))
-                .andExpect(jsonPath("$.[*].surcharge").value(hasItem(DEFAULT_SURCHARGE.toString())))
+                .andExpect(jsonPath("$.[*].metAvgKl").value(hasItem(DEFAULT_MET_AVG_KL.doubleValue())))
+                .andExpect(jsonPath("$.[*].arrears").value(hasItem(DEFAULT_ARREARS.doubleValue())))
+                .andExpect(jsonPath("$.[*].reversalAmt").value(hasItem(DEFAULT_REVERSAL_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].installment").value(hasItem(DEFAULT_INSTALLMENT.doubleValue())))
+                .andExpect(jsonPath("$.[*].otherCharges").value(hasItem(DEFAULT_OTHER_CHARGES.doubleValue())))
+                .andExpect(jsonPath("$.[*].surcharge").value(hasItem(DEFAULT_SURCHARGE.doubleValue())))
                 .andExpect(jsonPath("$.[*].hrsSurcharge").value(hasItem(DEFAULT_HRS_SURCHARGE.toString())))
-                .andExpect(jsonPath("$.[*].resUnits").value(hasItem(DEFAULT_RES_UNITS.toString())))
-                .andExpect(jsonPath("$.[*].metCostInstallment").value(hasItem(DEFAULT_MET_COST_INSTALLMENT.toString())))
-                .andExpect(jsonPath("$.[*].intOnArrears").value(hasItem(DEFAULT_INT_ON_ARREARS.toString())))
+                .andExpect(jsonPath("$.[*].resUnits").value(hasItem(DEFAULT_RES_UNITS.intValue())))
+                .andExpect(jsonPath("$.[*].metCostInstallment").value(hasItem(DEFAULT_MET_COST_INSTALLMENT.doubleValue())))
+                .andExpect(jsonPath("$.[*].intOnArrears").value(hasItem(DEFAULT_INT_ON_ARREARS.doubleValue())))
                 .andExpect(jsonPath("$.[*].lastPymtDt").value(hasItem(DEFAULT_LAST_PYMT_DT.toString())))
                 .andExpect(jsonPath("$.[*].lastPymtAmt").value(hasItem(DEFAULT_LAST_PYMT_AMT.doubleValue())))
                 .andExpect(jsonPath("$.[*].mobileNo").value(hasItem(DEFAULT_MOBILE_NO.toString())))
@@ -370,26 +385,26 @@ public class CustDetailsResourceIntTest {
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
             .andExpect(jsonPath("$.pinCode").value(DEFAULT_PIN_CODE.toString()))
             .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
-            .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.toString()))
+            .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.doubleValue()))
             .andExpect(jsonPath("$.boardMeter").value(DEFAULT_BOARD_METER.toString()))
             .andExpect(jsonPath("$.sewerage").value(DEFAULT_SEWERAGE.toString()))
             .andExpect(jsonPath("$.meterNo").value(DEFAULT_METER_NO.toString()))
             .andExpect(jsonPath("$.prevBillType").value(DEFAULT_PREV_BILL_TYPE.toString()))
             .andExpect(jsonPath("$.prevBillMonth").value(DEFAULT_PREV_BILL_MONTH.toString()))
-            .andExpect(jsonPath("$.prevAvgKl").value(DEFAULT_PREV_AVG_KL.toString()))
+            .andExpect(jsonPath("$.prevAvgKl").value(DEFAULT_PREV_AVG_KL.doubleValue()))
             .andExpect(jsonPath("$.metReadingDt").value(DEFAULT_MET_READING_DT.toString()))
-            .andExpect(jsonPath("$.prevReading").value(DEFAULT_PREV_READING.toString()))
+            .andExpect(jsonPath("$.prevReading").value(DEFAULT_PREV_READING.doubleValue()))
             .andExpect(jsonPath("$.metReadingMo").value(DEFAULT_MET_READING_MO.toString()))
-            .andExpect(jsonPath("$.metAvgKl").value(DEFAULT_MET_AVG_KL.toString()))
-            .andExpect(jsonPath("$.arrears").value(DEFAULT_ARREARS.toString()))
-            .andExpect(jsonPath("$.reversalAmt").value(DEFAULT_REVERSAL_AMT.toString()))
-            .andExpect(jsonPath("$.installment").value(DEFAULT_INSTALLMENT.toString()))
-            .andExpect(jsonPath("$.otherCharges").value(DEFAULT_OTHER_CHARGES.toString()))
-            .andExpect(jsonPath("$.surcharge").value(DEFAULT_SURCHARGE.toString()))
+            .andExpect(jsonPath("$.metAvgKl").value(DEFAULT_MET_AVG_KL.doubleValue()))
+            .andExpect(jsonPath("$.arrears").value(DEFAULT_ARREARS.doubleValue()))
+            .andExpect(jsonPath("$.reversalAmt").value(DEFAULT_REVERSAL_AMT.doubleValue()))
+            .andExpect(jsonPath("$.installment").value(DEFAULT_INSTALLMENT.doubleValue()))
+            .andExpect(jsonPath("$.otherCharges").value(DEFAULT_OTHER_CHARGES.doubleValue()))
+            .andExpect(jsonPath("$.surcharge").value(DEFAULT_SURCHARGE.doubleValue()))
             .andExpect(jsonPath("$.hrsSurcharge").value(DEFAULT_HRS_SURCHARGE.toString()))
-            .andExpect(jsonPath("$.resUnits").value(DEFAULT_RES_UNITS.toString()))
-            .andExpect(jsonPath("$.metCostInstallment").value(DEFAULT_MET_COST_INSTALLMENT.toString()))
-            .andExpect(jsonPath("$.intOnArrears").value(DEFAULT_INT_ON_ARREARS.toString()))
+            .andExpect(jsonPath("$.resUnits").value(DEFAULT_RES_UNITS.intValue()))
+            .andExpect(jsonPath("$.metCostInstallment").value(DEFAULT_MET_COST_INSTALLMENT.doubleValue()))
+            .andExpect(jsonPath("$.intOnArrears").value(DEFAULT_INT_ON_ARREARS.doubleValue()))
             .andExpect(jsonPath("$.lastPymtDt").value(DEFAULT_LAST_PYMT_DT.toString()))
             .andExpect(jsonPath("$.lastPymtAmt").value(DEFAULT_LAST_PYMT_AMT.doubleValue()))
             .andExpect(jsonPath("$.mobileNo").value(DEFAULT_MOBILE_NO.toString()))

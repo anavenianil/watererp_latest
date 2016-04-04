@@ -19,32 +19,33 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffMaster.id"><span>Tariff Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffTypeMaster.id"><span>Tariff Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tariffDesc"><span>TariffDesc</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="slabMin"><span>SlabMin</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="slabMax"><span>SlabMax</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="rate"><span>Rate</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="minKL"><span>MinKL</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="minUnmeteredKL"><span>MinUnmeteredKL</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="tariffMaster.id"><span>tariffMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="tariffTypeMaster.id"><span>tariffTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="tariffCharges in tariffChargess track by tariffCharges.id">
                     <td><a ui-sref="tariffCharges.detail({id:tariffCharges.id})">{{tariffCharges.id}}</a></td>
+                    <td>
+                        <a ui-sref="tariffMaster.detail({id:tariffCharges.tariffMaster.id})">{{tariffCharges.tariffMaster.tariffName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="tariffTypeMaster.detail({id:tariffCharges.tariffTypeMaster.id})">{{tariffCharges.tariffTypeMaster.tariffType}}</a>
+                    </td>                    
                     <td>{{tariffCharges.tariffDesc}}</td>
                     <td>{{tariffCharges.slabMin}}</td>
                     <td>{{tariffCharges.slabMax}}</td>
                     <td>{{tariffCharges.rate}}</td>
                     <td>{{tariffCharges.minKL}}</td>
                     <td>{{tariffCharges.minUnmeteredKL}}</td>
-                    <td>
-                        <a ui-sref="tariffMaster.detail({id:tariffCharges.tariffMaster.id})">{{tariffCharges.tariffMaster.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="tariffTypeMaster.detail({id:tariffCharges.tariffTypeMaster.id})">{{tariffCharges.tariffTypeMaster.id}}</a>
-                    </td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

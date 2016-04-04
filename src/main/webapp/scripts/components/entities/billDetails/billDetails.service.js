@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .factory('BillDetails', function ($resource, DateUtils) {
         return $resource('api/billDetailss/:id', {}, {
             'query': { method: 'GET', isArray: true},
@@ -8,21 +8,24 @@ angular.module('watererpApp')
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
-                    data.bill_date = DateUtils.convertLocaleDateFromServer(data.bill_date);
+                    data.billDate = DateUtils.convertLocaleDateFromServer(data.billDate);
+                    data.meterFixDate = DateUtils.convertLocaleDateFromServer(data.meterFixDate);
                     return data;
                 }
             },
             'update': {
                 method: 'PUT',
                 transformRequest: function (data) {
-                    data.bill_date = DateUtils.convertLocaleDateToServer(data.bill_date);
+                    data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
+                    data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
                     return angular.toJson(data);
                 }
             },
             'save': {
                 method: 'POST',
                 transformRequest: function (data) {
-                    data.bill_date = DateUtils.convertLocaleDateToServer(data.bill_date);
+                    data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
+                    data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
                     return angular.toJson(data);
                 }
             }

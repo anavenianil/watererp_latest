@@ -101,7 +101,7 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_pipeSize">PipeSize</label>
-            <input type="text" class="form-control" name="pipeSize" id="field_pipeSize"
+            <input type="number" class="form-control" name="pipeSize" id="field_pipeSize"
                     ng-model="custDetails.pipeSize"
                      />
         </div>
@@ -131,13 +131,15 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_prevBillMonth">PrevBillMonth</label>
-            <input type="text" class="form-control" name="prevBillMonth" id="field_prevBillMonth"
-                    ng-model="custDetails.prevBillMonth"
-                     />
+            <input id="field_prevBillMonth" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.prevBillMonth" is-open="datePickerForPrevBillMonth.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForPrevBillMonthOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_prevAvgKl">PrevAvgKl</label>
-            <input type="text" class="form-control" name="prevAvgKl" id="field_prevAvgKl"
+            <input type="number" class="form-control" name="prevAvgKl" id="field_prevAvgKl"
                     ng-model="custDetails.prevAvgKl"
                      />
         </div>
@@ -151,49 +153,51 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_prevReading">PrevReading</label>
-            <input type="text" class="form-control" name="prevReading" id="field_prevReading"
+            <input type="number" class="form-control" name="prevReading" id="field_prevReading"
                     ng-model="custDetails.prevReading"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_metReadingMo">MetReadingMo</label>
-            <input type="text" class="form-control" name="metReadingMo" id="field_metReadingMo"
-                    ng-model="custDetails.metReadingMo"
-                     />
+            <input id="field_metReadingMo" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.metReadingMo" is-open="datePickerForMetReadingMo.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForMetReadingMoOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_metAvgKl">MetAvgKl</label>
-            <input type="text" class="form-control" name="metAvgKl" id="field_metAvgKl"
+            <input type="number" class="form-control" name="metAvgKl" id="field_metAvgKl"
                     ng-model="custDetails.metAvgKl"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_arrears">Arrears</label>
-            <input type="text" class="form-control" name="arrears" id="field_arrears"
+            <input type="number" class="form-control" name="arrears" id="field_arrears"
                     ng-model="custDetails.arrears"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_reversalAmt">ReversalAmt</label>
-            <input type="text" class="form-control" name="reversalAmt" id="field_reversalAmt"
+            <input type="number" class="form-control" name="reversalAmt" id="field_reversalAmt"
                     ng-model="custDetails.reversalAmt"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_installment">Installment</label>
-            <input type="text" class="form-control" name="installment" id="field_installment"
+            <input type="number" class="form-control" name="installment" id="field_installment"
                     ng-model="custDetails.installment"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_otherCharges">OtherCharges</label>
-            <input type="text" class="form-control" name="otherCharges" id="field_otherCharges"
+            <input type="number" class="form-control" name="otherCharges" id="field_otherCharges"
                     ng-model="custDetails.otherCharges"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_surcharge">Surcharge</label>
-            <input type="text" class="form-control" name="surcharge" id="field_surcharge"
+            <input type="number" class="form-control" name="surcharge" id="field_surcharge"
                     ng-model="custDetails.surcharge"
                      />
         </div>
@@ -205,27 +209,29 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_resUnits">ResUnits</label>
-            <input type="text" class="form-control" name="resUnits" id="field_resUnits"
+            <input type="number" class="form-control" name="resUnits" id="field_resUnits"
                     ng-model="custDetails.resUnits"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_metCostInstallment">MetCostInstallment</label>
-            <input type="text" class="form-control" name="metCostInstallment" id="field_metCostInstallment"
+            <input type="number" class="form-control" name="metCostInstallment" id="field_metCostInstallment"
                     ng-model="custDetails.metCostInstallment"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_intOnArrears">IntOnArrears</label>
-            <input type="text" class="form-control" name="intOnArrears" id="field_intOnArrears"
+            <input type="number" class="form-control" name="intOnArrears" id="field_intOnArrears"
                     ng-model="custDetails.intOnArrears"
                      />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_lastPymtDt">LastPymtDt</label>
-            <input type="text" class="form-control" name="lastPymtDt" id="field_lastPymtDt"
-                    ng-model="custDetails.lastPymtDt"
-                     />
+            <input id="field_lastPymtDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.lastPymtDt" is-open="datePickerForLastPymtDt.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForLastPymtDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_lastPymtAmt">LastPymtAmt</label>
