@@ -1,20 +1,24 @@
 'use strict';
 
 angular.module('watererpApp').controller('BillDetailsDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillDetails',
-        function($scope, $stateParams, $uibModalInstance, entity, BillDetails) {
+        function($scope, $stateParams, BillDetails, $state) {
 
-        $scope.billDetails = entity;
+        $scope.billDetails = {};
         $scope.load = function(id) {
             BillDetails.get({id : id}, function(result) {
                 $scope.billDetails = result;
             });
         };
+        
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id);
+        }
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:billDetailsUpdate', result);
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('billDetails');
         };
 
         var onSaveError = function (result) {
@@ -42,4 +46,4 @@ angular.module('watererpApp').controller('BillDetailsDialogController',
         $scope.datePickerForBill_dateOpen = function($event) {
             $scope.datePickerForBill_date.status.opened = true;
         };
-}]);
+});

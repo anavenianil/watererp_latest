@@ -1,14 +1,21 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
-    <div class="modal-header">
+    <!-- <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
         <h4 class="modal-title" id="myBillDetailsLabel">Create or edit a BillDetails</h4>
-    </div>
+    </div> -->
+    <div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Bill Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
-        <div class="form-group">
+        <div class="row">
+        <div class="col-sm-4">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="billDetails.id" readonly />
@@ -39,7 +46,9 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
             <label class="control-label" for="field_bill_time">Bill_time</label>
             <input type="text" class="form-control" name="bill_time" id="field_bill_time"
                     ng-model="billDetails.bill_time"
@@ -63,7 +72,9 @@
                     ng-model="billDetails.from_month"
                      />
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
             <label class="control-label" for="field_to_month">To_month</label>
             <input type="text" class="form-control" name="to_month" id="field_to_month"
                     ng-model="billDetails.to_month"
@@ -87,7 +98,9 @@
                     ng-model="billDetails.present_reading"
                      />
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
             <label class="control-label" for="field_units">Units</label>
             <input type="text" class="form-control" name="units" id="field_units"
                     ng-model="billDetails.units"
@@ -111,7 +124,9 @@
                     ng-model="billDetails.service_charge"
                      />
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
             <label class="control-label" for="field_meter_service_charge">Meter_service_charge</label>
             <input type="text" class="form-control" name="meter_service_charge" id="field_meter_service_charge"
                     ng-model="billDetails.meter_service_charge"
@@ -135,7 +150,9 @@
                     ng-model="billDetails.telephone_no"
                      />
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
             <label class="control-label" for="field_meter_status">Meter_status</label>
             <input type="text" class="form-control" name="meter_status" id="field_meter_status"
                     ng-model="billDetails.meter_status"
@@ -159,7 +176,9 @@
                     ng-model="billDetails.svr_status"
                      />
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
             <label class="control-label" for="field_terminal_id">Terminal_id</label>
             <input type="text" class="form-control" name="terminal_id" id="field_terminal_id"
                     ng-model="billDetails.terminal_id"
@@ -189,7 +208,9 @@
                     ng-model="billDetails.notice_no"
                      />
         </div>
-        <div class="form-group">
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
             <label class="control-label" for="field_lat">Lat</label>
             <input type="text" class="form-control" name="lat" id="field_lat"
                     ng-model="billDetails.lat"
@@ -207,6 +228,8 @@
                     ng-model="billDetails.nometer_amt"
                      />
         </div>
+        </div>
+        </div></div></div>
 
     </div>
     <div class="modal-footer">
