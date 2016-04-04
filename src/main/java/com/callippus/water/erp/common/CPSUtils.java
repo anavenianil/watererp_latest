@@ -1,6 +1,7 @@
 package com.callippus.water.erp.common;
 
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -485,6 +486,19 @@ public class CPSUtils {
 		return result;
 	}
 
+    /**
+     * Round to certain number of decimals
+     * 
+     * @param d
+     * @param decimalPlace
+     * @return
+     */
+    public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
+	
 	public static float round(float number) throws Exception {
 		try {
 			number = (float) Math.round(number);

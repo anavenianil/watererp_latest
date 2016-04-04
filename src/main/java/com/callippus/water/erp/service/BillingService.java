@@ -1,5 +1,6 @@
 package com.callippus.water.erp.service;
 
+import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.Authority;
 import com.callippus.water.erp.domain.BillDetails;
 import com.callippus.water.erp.domain.BillFullDetails;
@@ -59,12 +60,12 @@ public class BillingService {
 
 	@Inject
 	private ConfigurationDetailsRepository configurationDetailsRepository;
-	
+
 	@Inject
 	private TariffMasterCustomRepository tariffMasterCustomRepository;
 
-	 @Inject
-	 private BillFullDetailsRepository bfdRepository;
+	@Inject
+	private BillFullDetailsRepository bfdRepository;
 
 	enum Status {
 		SUCCESS, FAILURE
@@ -87,7 +88,7 @@ public class BillingService {
 	int monthsDiff = 0;
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
-	
+
 	float water, sewerage, service_charge, total_amount, net_payable_amount,
 			surcharge, total_cess, from, upto, mths, avgkl, kl;
 
@@ -119,8 +120,8 @@ public class BillingService {
 
 		try {
 
-			 if (!bill_details.getCurrentBillType().equals("M"))
-				 bill_details.setPresentReading(customer.getPrevReading());
+			if (!bill_details.getCurrentBillType().equals("M"))
+				bill_details.setPresentReading(customer.getPrevReading());
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
@@ -136,16 +137,16 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
 				log.debug("Months:" + monthsDiff);
 
 				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
 					units = bill_details.getPresentReading()
 							- bill_details.getInitialReading();
-					
+
 					unitsKL = (float) units / 1000.0f;
-					
+
 					avgKL = unitsKL / monthsDiff;
 
 					prevAvgKL = customer.getPrevAvgKl() < 1.0f ? 1.0f
@@ -153,8 +154,10 @@ public class BillingService {
 
 					factor = avgKL / prevAvgKL;
 
-					log.debug("units:" + units + ", unitsKL=" + unitsKL + ", avgKL="+ avgKL + ", prevAvgKL=" + prevAvgKL+", factor="+factor);
-					
+					log.debug("units:" + units + ", unitsKL=" + unitsKL
+							+ ", avgKL=" + avgKL + ", prevAvgKL=" + prevAvgKL
+							+ ", factor=" + factor);
+
 					if (factor > 4.0f || factor < 0.25f) {
 						// Unable to process customer
 						log.debug("Meter reading for:" + customer.getId()
@@ -163,87 +166,103 @@ public class BillingService {
 						return;
 					}
 				}
-				
+
 				kl = (float) (units / 1000.0);
-			} else if(bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("R")){
+			} else if (bill_details.getCurrentBillType().equals("L")
+					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");
 				log.debug("          LOCK BILL CASE");
-				log.debug("########################################");				
-				
+				log.debug("########################################");
+
 				dFrom = customer.getPrevBillMonth();
 				dTo = LocalDate.now();
 
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
 				log.debug("Months:" + monthsDiff);
 
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
-				
+
 				avgKL = customer.getPrevAvgKl();
 				unitsKL = (float) (avgKL * monthsDiff);
 				units = (float) (avgKL * monthsDiff * 1000.0f);
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
-			}else if(bill_details.getCurrentBillType().equals("U")){
+			} else if (bill_details.getCurrentBillType().equals("U")) {
 
 				log.debug("########################################");
 				log.debug("          UNMETERED BILL CASE");
-				log.debug("########################################");				
+				log.debug("########################################");
 
 				dFrom = customer.getPrevBillMonth();
 				dTo = LocalDate.now();
 
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom,dTo);
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
 				log.debug("Months:" + monthsDiff);
 
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
-				
-				
+
 				avgKL = customer.getPrevAvgKl();
 				unitsKL = (float) (avgKL * monthsDiff);
 				units = (float) (avgKL * monthsDiff * 1000.0f);
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
 			}
-			
-			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(dFrom, dTo, avgKL, bill_details.getCurrentBillType().equals("U")?1:0);
-			
-			ConfigurationDetails cd = configurationDetailsRepository.findOneByName("EWURA");
-			
-			log.debug("This is the EWURA Configuration:" + cd.toString());
-			
-			//Subtract Avg Water charges in case of Lock Bill scenario
-			for(Map charge:charges){
-				if(((Long)charge.get("tariff_type_master_id"))==1){
-					log.debug("Usage Charge:"+(Double)charge.get("amount"));
-				}
-				else if(((Long)charge.get("tariff_type_master_id"))==2){
-					log.debug("Meter Rent:"+(Double)charge.get("amount"));
-				}
-				else if(((Long)charge.get("tariff_type_master_id"))==3){
-					log.debug("Service Charge:"+(Double)charge.get("amount"));
-				}
-			}
-			
-			monthUpto = getPrevMonthStart();
 
-			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
+			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
+					.findTariffs(dFrom, dTo, avgKL, bill_details
+							.getCurrentBillType().equals("U") ? 1 : 0);
+
+			ConfigurationDetails cd = configurationDetailsRepository
+					.findOneByName("EWURA");
+
+			log.debug("This is the EWURA Configuration:" + cd.toString());
+
+
+			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
+					customer);
 			bfd.setId(null);
 			
-			log.debug("This is the BillFullDetails:"+bfd);
+			// Subtract Avg Water charges in case of Lock Bill scenario
+			for (Map charge : charges) {
+				if (((Long) charge.get("tariff_type_master_id")) == 1) {
+					log.debug("Usage Charge:" + (Double) charge.get("amount"));
+					bfd.setWaterCess(((Double) charge.get("amount")).floatValue());
+				} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
+					log.debug("Meter Rent:" + (Double) charge.get("amount"));
+					bfd.setMeterServiceCharge(((Double) charge.get("amount")).floatValue());
+				} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
+					log.debug("Service Charge:" + (Double) charge.get("amount"));
+					bfd.setServiceCharge(((Double) charge.get("amount")).floatValue());
+				}
+			}
 
-			dFrom = customer.getLastPymtDt();						
-			bfd.setLastPymtDt(dFrom);
-			bfd.setBillDate(bill_details.getBillDate());
-			
-			bfdRepository.save(bfd);
-			
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
+
+			cd = configurationDetailsRepository.findOneByName("SEWERAGE");
+
+			log.debug("This is the SEWERAGE Charge Configuration:"
+					+ cd.toString());
+
+			if(hasSewer)
+				bfd.setSewerageCess(Float.parseFloat(cd.getValue()) * bfd.getWaterCess() / 100.0f);
+			
+			Float total = bfd.getWaterCess() + bfd.getMeterServiceCharge() + bfd.getServiceCharge() + bfd.getSewerageCess();
+			
+			bfd.setTotalAmount(CPSUtils.round(total.floatValue(),2));
+			
+			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears() + bfd.getArrears();
+			bfd.setNetPayableAmount(CPSUtils.round(netPayable.floatValue(),2));
+								
+			bfd.setUnits(units);
+			
+			log.debug("This is the BillFullDetails:" + bfd);
+
+			bfdRepository.save(bfd);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -530,7 +549,7 @@ public class BillingService {
 				|| customer.getPrevBillMonth().equals(""))
 			return CustValidation.INVALID_PREV_BILL_MONTH;
 
-		if (customer.getPrevBillMonth().isBefore(LocalDate.of(2005,01,01)))
+		if (customer.getPrevBillMonth().isBefore(LocalDate.of(2005, 01, 01)))
 			return CustValidation.NOT_IMPLEMENTED;
 
 		if (!categories.contains(customer.getCategory().trim()))
@@ -559,7 +578,7 @@ public class BillingService {
 				&& !bill_details.getCurrentBillType().equals("U"))
 			return CustValidation.INVALID_BILL_TYPE;
 
-		if (customer.getMetReadingMo()== null
+		if (customer.getMetReadingMo() == null
 				&& bill_details.getCurrentBillType().equals("M"))
 			return CustValidation.INVALID_PREV_BILL_MONTH;
 
