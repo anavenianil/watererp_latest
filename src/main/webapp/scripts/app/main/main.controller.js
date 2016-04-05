@@ -42,6 +42,20 @@ angular.module('watererpApp').controller('MainController',
 
 			});
 			
+			$scope.getDetails = function(type) {
+				console.log(type);
+				
+				if(type==='REQUISITION')
+				{ 
+					$state.go('applicationTxn'); 
+				}
+				else if(type==='CUSTOMERCOMPLAINTS'){
+					
+				}
+				 
+
+			}
+			
 		});
 
 

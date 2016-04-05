@@ -26,7 +26,7 @@ public class BillFullDetails implements Serializable {
     private String can;
 
     @NotNull
-    @Column(name = "div_code", nullable = false)
+    @Column(name = "divcode", nullable = false)
     private String divCode;
 
     @Column(name = "sec_code")
@@ -217,7 +217,7 @@ public class BillFullDetails implements Serializable {
     @Column(name = "longi")
     private String longi;
 
-    @Column(name = "no_meter_amt")
+    @Column(name = "nometer_amt")
     private Float noMeterAmt;
 
     public Long getId() {
