@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the CollDetails entity.
+ * Performance test for the CustMeterMapping entity.
  */
-class CollDetailsGatlingTest extends Simulation {
+class CustMeterMappingGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class CollDetailsGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the CollDetails entity")
+    val scn = scenario("Test the CustMeterMapping entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class CollDetailsGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all collDetailss")
-            .get("/api/collDetailss")
+            exec(http("Get all custMeterMappings")
+            .get("/api/custMeterMappings")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new collDetails")
-            .post("/api/collDetailss")
+            .exec(http("Create new custMeterMapping")
+            .post("/api/custMeterMappings")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "reversalRef":"SAMPLE_TEXT", "receiptNo":"SAMPLE_TEXT", "receiptAmt":null, "receiptDt":"2020-01-01T00:00:00.000Z", "receiptMode":"SAMPLE_TEXT", "instrNo":"SAMPLE_TEXT", "instrDt":"2020-01-01T00:00:00.000Z", "instrIssuer":"SAMPLE_TEXT", "svrStatus":"SAMPLE_TEXT", "can":"SAMPLE_TEXT", "consName":"SAMPLE_TEXT", "terminalId":"SAMPLE_TEXT", "collTime":"2020-01-01T00:00:00.000Z", "txnStatus":"SAMPLE_TEXT", "meterReaderId":"SAMPLE_TEXT", "userId":"SAMPLE_TEXT", "remarks":"SAMPLE_TEXT", "settlementId":"SAMPLE_TEXT", "extSettlementId":"SAMPLE_TEXT", "lat":"SAMPLE_TEXT", "longI":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "fromDate":"2020-01-01T00:00:00.000Z", "toDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_collDetails_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_custMeterMapping_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created collDetails")
-                .get("${new_collDetails_url}")
+                exec(http("Get created custMeterMapping")
+                .get("${new_custMeterMapping_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created collDetails")
-            .delete("${new_collDetails_url}")
+            .exec(http("Delete created custMeterMapping")
+            .delete("${new_custMeterMapping_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

@@ -1,30 +1,31 @@
 'use strict';
 
 angular.module('waterERPApp')
-    .factory('CollDetails', function ($resource, DateUtils) {
-        return $resource('api/collDetailss/:id', {}, {
+    .factory('CustMeterMapping', function ($resource, DateUtils) {
+        return $resource('api/custMeterMappings/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
-                    data.receiptDt = DateUtils.convertDateTimeFromServer(data.receiptDt);
-                    data.instrDt = DateUtils.convertLocaleDateFromServer(data.instrDt);
-                    data.collTime = DateUtils.convertDateTimeFromServer(data.collTime);
+                    data.fromDate = DateUtils.convertLocaleDateFromServer(data.fromDate);
+                    data.toDate = DateUtils.convertLocaleDateFromServer(data.toDate);
                     return data;
                 }
             },
             'update': {
                 method: 'PUT',
                 transformRequest: function (data) {
-                    data.instrDt = DateUtils.convertLocaleDateToServer(data.instrDt);
+                    data.fromDate = DateUtils.convertLocaleDateToServer(data.fromDate);
+                    data.toDate = DateUtils.convertLocaleDateToServer(data.toDate);
                     return angular.toJson(data);
                 }
             },
             'save': {
                 method: 'POST',
                 transformRequest: function (data) {
-                    data.instrDt = DateUtils.convertLocaleDateToServer(data.instrDt);
+                    data.fromDate = DateUtils.convertLocaleDateToServer(data.fromDate);
+                    data.toDate = DateUtils.convertLocaleDateToServer(data.toDate);
                     return angular.toJson(data);
                 }
             }

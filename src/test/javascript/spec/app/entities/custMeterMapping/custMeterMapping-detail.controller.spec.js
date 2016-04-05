@@ -2,33 +2,37 @@
 
 describe('Controller Tests', function() {
 
-    describe('CollDetails Detail Controller', function() {
+    describe('CustMeterMapping Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockCollDetails;
+        var MockEntity, MockCustMeterMapping, MockCustDetails, MockMeterDetails;
         var createController;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
-            MockCollDetails = jasmine.createSpy('MockCollDetails');
+            MockCustMeterMapping = jasmine.createSpy('MockCustMeterMapping');
+            MockCustDetails = jasmine.createSpy('MockCustDetails');
+            MockMeterDetails = jasmine.createSpy('MockMeterDetails');
             
 
             var locals = {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
-                'CollDetails': MockCollDetails
+                'CustMeterMapping': MockCustMeterMapping,
+                'CustDetails': MockCustDetails,
+                'MeterDetails': MockMeterDetails
             };
             createController = function() {
-                $injector.get('$controller')("CollDetailsDetailController", locals);
+                $injector.get('$controller')("CustMeterMappingDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'waterERPApp:collDetailsUpdate';
+                var eventType = 'waterERPApp:custMeterMappingUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

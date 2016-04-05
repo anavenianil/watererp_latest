@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .controller('CollDetailsDetailController', function ($scope, $rootScope, $stateParams, entity, CollDetails) {
         $scope.collDetails = entity;
         $scope.load = function (id) {
@@ -8,7 +8,7 @@ angular.module('watererpApp')
                 $scope.collDetails = result;
             });
         };
-        var unsubscribe = $rootScope.$on('watererpApp:collDetailsUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('waterERPApp:collDetailsUpdate', function(event, result) {
             $scope.collDetails = result;
         });
         $scope.$on('$destroy', unsubscribe);

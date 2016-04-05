@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('waterERPApp')
-	.controller('CollDetailsDeleteController', function($scope, $uibModalInstance, entity, CollDetails) {
+	.controller('MeterDetailsDeleteController', function($scope, $uibModalInstance, entity, MeterDetails) {
 
-        $scope.collDetails = entity;
+        $scope.meterDetails = entity;
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
         $scope.confirmDelete = function (id) {
-            CollDetails.delete({id: id},
+            MeterDetails.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
                 });

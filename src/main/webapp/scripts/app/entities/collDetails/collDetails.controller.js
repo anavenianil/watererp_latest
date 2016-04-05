@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .controller('CollDetailsController', function ($scope, $state, CollDetails, ParseLinks) {
 
         $scope.collDetailss = [];
@@ -38,7 +38,6 @@ angular.module('watererpApp')
                 receiptNo: null,
                 receiptAmt: null,
                 receiptDt: null,
-                receiptTime: null,
                 receiptMode: null,
                 instrNo: null,
                 instrDt: null,
