@@ -23,70 +23,67 @@ public class CollDetails implements Serializable {
 
     @Column(name = "reversal_ref")
     private String reversalRef;
-    
+
     @Column(name = "receipt_no")
     private String receiptNo;
-    
+
     @Column(name = "receipt_amt")
-    private String receiptAmt;
-    
+    private Float receiptAmt;
+
     @Column(name = "receipt_dt")
-    private LocalDate receiptDt;
-    
-    @Column(name = "receipt_time")
-    private String receiptTime;
-    
+    private ZonedDateTime receiptDt;
+
     @Column(name = "receipt_mode")
     private String receiptMode;
-    
+
     @Column(name = "instr_no")
     private String instrNo;
-    
+
     @Column(name = "instr_dt")
     private LocalDate instrDt;
-    
+
     @Column(name = "instr_issuer")
     private String instrIssuer;
-    
+
     @Column(name = "svr_status")
     private String svrStatus;
-    
+
     @Column(name = "can")
     private String can;
-    
+
     @Column(name = "cons_name")
     private String consName;
-    
+
     @Column(name = "terminal_id")
     private String terminalId;
-    
+
     @Column(name = "coll_time")
     private ZonedDateTime collTime;
-    
+
     @Column(name = "txn_status")
     private String txnStatus;
-    
+
     @Column(name = "meter_reader_id")
     private String meterReaderId;
-    
+
     @Column(name = "user_id")
     private String userId;
-    
+
     @Column(name = "remarks")
     private String remarks;
-    
+
     @Column(name = "settlement_id")
     private String settlementId;
-    
+
     @Column(name = "ext_settlement_id")
     private String extSettlementId;
-    
+
     @Column(name = "lat")
     private String lat;
-    
+
     @Column(name = "long_i")
     private String longI;
-    
+
     public Long getId() {
         return id;
     }
@@ -98,7 +95,7 @@ public class CollDetails implements Serializable {
     public String getReversalRef() {
         return reversalRef;
     }
-    
+
     public void setReversalRef(String reversalRef) {
         this.reversalRef = reversalRef;
     }
@@ -106,39 +103,31 @@ public class CollDetails implements Serializable {
     public String getReceiptNo() {
         return receiptNo;
     }
-    
+
     public void setReceiptNo(String receiptNo) {
         this.receiptNo = receiptNo;
     }
 
-    public String getReceiptAmt() {
+    public Float getReceiptAmt() {
         return receiptAmt;
     }
-    
-    public void setReceiptAmt(String receiptAmt) {
+
+    public void setReceiptAmt(Float receiptAmt) {
         this.receiptAmt = receiptAmt;
     }
 
-    public LocalDate getReceiptDt() {
+    public ZonedDateTime getReceiptDt() {
         return receiptDt;
     }
-    
-    public void setReceiptDt(LocalDate receiptDt) {
-        this.receiptDt = receiptDt;
-    }
 
-    public String getReceiptTime() {
-        return receiptTime;
-    }
-    
-    public void setReceiptTime(String receiptTime) {
-        this.receiptTime = receiptTime;
+    public void setReceiptDt(ZonedDateTime receiptDt) {
+        this.receiptDt = receiptDt;
     }
 
     public String getReceiptMode() {
         return receiptMode;
     }
-    
+
     public void setReceiptMode(String receiptMode) {
         this.receiptMode = receiptMode;
     }
@@ -146,7 +135,7 @@ public class CollDetails implements Serializable {
     public String getInstrNo() {
         return instrNo;
     }
-    
+
     public void setInstrNo(String instrNo) {
         this.instrNo = instrNo;
     }
@@ -154,7 +143,7 @@ public class CollDetails implements Serializable {
     public LocalDate getInstrDt() {
         return instrDt;
     }
-    
+
     public void setInstrDt(LocalDate instrDt) {
         this.instrDt = instrDt;
     }
@@ -162,7 +151,7 @@ public class CollDetails implements Serializable {
     public String getInstrIssuer() {
         return instrIssuer;
     }
-    
+
     public void setInstrIssuer(String instrIssuer) {
         this.instrIssuer = instrIssuer;
     }
@@ -170,7 +159,7 @@ public class CollDetails implements Serializable {
     public String getSvrStatus() {
         return svrStatus;
     }
-    
+
     public void setSvrStatus(String svrStatus) {
         this.svrStatus = svrStatus;
     }
@@ -178,7 +167,7 @@ public class CollDetails implements Serializable {
     public String getCan() {
         return can;
     }
-    
+
     public void setCan(String can) {
         this.can = can;
     }
@@ -186,7 +175,7 @@ public class CollDetails implements Serializable {
     public String getConsName() {
         return consName;
     }
-    
+
     public void setConsName(String consName) {
         this.consName = consName;
     }
@@ -194,7 +183,7 @@ public class CollDetails implements Serializable {
     public String getTerminalId() {
         return terminalId;
     }
-    
+
     public void setTerminalId(String terminalId) {
         this.terminalId = terminalId;
     }
@@ -202,7 +191,7 @@ public class CollDetails implements Serializable {
     public ZonedDateTime getCollTime() {
         return collTime;
     }
-    
+
     public void setCollTime(ZonedDateTime collTime) {
         this.collTime = collTime;
     }
@@ -210,7 +199,7 @@ public class CollDetails implements Serializable {
     public String getTxnStatus() {
         return txnStatus;
     }
-    
+
     public void setTxnStatus(String txnStatus) {
         this.txnStatus = txnStatus;
     }
@@ -218,7 +207,7 @@ public class CollDetails implements Serializable {
     public String getMeterReaderId() {
         return meterReaderId;
     }
-    
+
     public void setMeterReaderId(String meterReaderId) {
         this.meterReaderId = meterReaderId;
     }
@@ -226,7 +215,7 @@ public class CollDetails implements Serializable {
     public String getUserId() {
         return userId;
     }
-    
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -234,7 +223,7 @@ public class CollDetails implements Serializable {
     public String getRemarks() {
         return remarks;
     }
-    
+
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
@@ -242,7 +231,7 @@ public class CollDetails implements Serializable {
     public String getSettlementId() {
         return settlementId;
     }
-    
+
     public void setSettlementId(String settlementId) {
         this.settlementId = settlementId;
     }
@@ -250,7 +239,7 @@ public class CollDetails implements Serializable {
     public String getExtSettlementId() {
         return extSettlementId;
     }
-    
+
     public void setExtSettlementId(String extSettlementId) {
         this.extSettlementId = extSettlementId;
     }
@@ -258,7 +247,7 @@ public class CollDetails implements Serializable {
     public String getLat() {
         return lat;
     }
-    
+
     public void setLat(String lat) {
         this.lat = lat;
     }
@@ -266,7 +255,7 @@ public class CollDetails implements Serializable {
     public String getLongI() {
         return longI;
     }
-    
+
     public void setLongI(String longI) {
         this.longI = longI;
     }
@@ -280,9 +269,6 @@ public class CollDetails implements Serializable {
             return false;
         }
         CollDetails collDetails = (CollDetails) o;
-        if(collDetails.id == null || id == null) {
-            return false;
-        }
         return Objects.equals(id, collDetails.id);
     }
 
@@ -299,7 +285,6 @@ public class CollDetails implements Serializable {
             ", receiptNo='" + receiptNo + "'" +
             ", receiptAmt='" + receiptAmt + "'" +
             ", receiptDt='" + receiptDt + "'" +
-            ", receiptTime='" + receiptTime + "'" +
             ", receiptMode='" + receiptMode + "'" +
             ", instrNo='" + instrNo + "'" +
             ", instrDt='" + instrDt + "'" +

@@ -281,6 +281,14 @@
                     ng-model="custDetails.longi"
                      />
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_meterFixDate">MeterFixDate</label>
+            <input id="field_meterFixDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.meterFixDate" is-open="datePickerForMeterFixDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForMeterFixDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
 
     </div>
     <div class="modal-footer">

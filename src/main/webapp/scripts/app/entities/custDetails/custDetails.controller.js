@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks) {
 
         $scope.custDetailss = [];
@@ -75,6 +75,7 @@ angular.module('watererpApp')
                 drFlag: null,
                 lat: null,
                 longi: null,
+                meterFixDate: null,
                 id: null
             };
         };

@@ -144,6 +144,9 @@ public class CustDetailsResourceIntTest {
     private static final String DEFAULT_LONGI = "AAAAA";
     private static final String UPDATED_LONGI = "BBBBB";
 
+    private static final LocalDate DEFAULT_METER_FIX_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_METER_FIX_DATE = LocalDate.now(ZoneId.systemDefault());
+
     @Inject
     private CustDetailsRepository custDetailsRepository;
 
@@ -211,6 +214,7 @@ public class CustDetailsResourceIntTest {
         custDetails.setDrFlag(DEFAULT_DR_FLAG);
         custDetails.setLat(DEFAULT_LAT);
         custDetails.setLongi(DEFAULT_LONGI);
+        custDetails.setMeterFixDate(DEFAULT_METER_FIX_DATE);
     }
 
     @Test
@@ -270,6 +274,7 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getDrFlag()).isEqualTo(DEFAULT_DR_FLAG);
         assertThat(testCustDetails.getLat()).isEqualTo(DEFAULT_LAT);
         assertThat(testCustDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
+        assertThat(testCustDetails.getMeterFixDate()).isEqualTo(DEFAULT_METER_FIX_DATE);
     }
 
     @Test
@@ -359,7 +364,8 @@ public class CustDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].noticeFlag").value(hasItem(DEFAULT_NOTICE_FLAG.toString())))
                 .andExpect(jsonPath("$.[*].drFlag").value(hasItem(DEFAULT_DR_FLAG.toString())))
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
-                .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())));
+                .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
+                .andExpect(jsonPath("$.[*].meterFixDate").value(hasItem(DEFAULT_METER_FIX_DATE.toString())));
     }
 
     @Test
@@ -413,7 +419,8 @@ public class CustDetailsResourceIntTest {
             .andExpect(jsonPath("$.noticeFlag").value(DEFAULT_NOTICE_FLAG.toString()))
             .andExpect(jsonPath("$.drFlag").value(DEFAULT_DR_FLAG.toString()))
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
-            .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()));
+            .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
+            .andExpect(jsonPath("$.meterFixDate").value(DEFAULT_METER_FIX_DATE.toString()));
     }
 
     @Test
@@ -474,6 +481,7 @@ public class CustDetailsResourceIntTest {
         custDetails.setDrFlag(UPDATED_DR_FLAG);
         custDetails.setLat(UPDATED_LAT);
         custDetails.setLongi(UPDATED_LONGI);
+        custDetails.setMeterFixDate(UPDATED_METER_FIX_DATE);
 
         restCustDetailsMockMvc.perform(put("/api/custDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -525,6 +533,7 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getDrFlag()).isEqualTo(UPDATED_DR_FLAG);
         assertThat(testCustDetails.getLat()).isEqualTo(UPDATED_LAT);
         assertThat(testCustDetails.getLongi()).isEqualTo(UPDATED_LONGI);
+        assertThat(testCustDetails.getMeterFixDate()).isEqualTo(UPDATED_METER_FIX_DATE);
     }
 
     @Test

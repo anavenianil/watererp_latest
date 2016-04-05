@@ -67,7 +67,7 @@ class CollDetailsGatlingTest extends Simulation {
             .exec(http("Create new collDetails")
             .post("/api/collDetailss")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "reversalRef":"SAMPLE_TEXT", "receiptNo":"SAMPLE_TEXT", "receiptAmt":"SAMPLE_TEXT", "receiptDt":"2020-01-01T00:00:00.000Z", "receiptTime":"SAMPLE_TEXT", "receiptMode":"SAMPLE_TEXT", "instrNo":"SAMPLE_TEXT", "instrDt":"2020-01-01T00:00:00.000Z", "instrIssuer":"SAMPLE_TEXT", "svrStatus":"SAMPLE_TEXT", "can":"SAMPLE_TEXT", "consName":"SAMPLE_TEXT", "terminalId":"SAMPLE_TEXT", "collTime":"2020-01-01T00:00:00.000Z", "txnStatus":"SAMPLE_TEXT", "meterReaderId":"SAMPLE_TEXT", "userId":"SAMPLE_TEXT", "remarks":"SAMPLE_TEXT", "settlementId":"SAMPLE_TEXT", "extSettlementId":"SAMPLE_TEXT", "lat":"SAMPLE_TEXT", "longI":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "reversalRef":"SAMPLE_TEXT", "receiptNo":"SAMPLE_TEXT", "receiptAmt":null, "receiptDt":"2020-01-01T00:00:00.000Z", "receiptMode":"SAMPLE_TEXT", "instrNo":"SAMPLE_TEXT", "instrDt":"2020-01-01T00:00:00.000Z", "instrIssuer":"SAMPLE_TEXT", "svrStatus":"SAMPLE_TEXT", "can":"SAMPLE_TEXT", "consName":"SAMPLE_TEXT", "terminalId":"SAMPLE_TEXT", "collTime":"2020-01-01T00:00:00.000Z", "txnStatus":"SAMPLE_TEXT", "meterReaderId":"SAMPLE_TEXT", "userId":"SAMPLE_TEXT", "remarks":"SAMPLE_TEXT", "settlementId":"SAMPLE_TEXT", "extSettlementId":"SAMPLE_TEXT", "lat":"SAMPLE_TEXT", "longI":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_collDetails_url")))
             .pause(10)

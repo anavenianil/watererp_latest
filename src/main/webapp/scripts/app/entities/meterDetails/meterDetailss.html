@@ -1,0 +1,56 @@
+<div>
+    <h2>MeterDetailss</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="meterDetails.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new MeterDetails</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterId"><span>MeterId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterType"><span>MeterType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterMake"><span>MeterMake</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="min"><span>Min</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="max"><span>Max</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="meterDetails in meterDetailss track by meterDetails.id">
+                    <td><a ui-sref="meterDetails.detail({id:meterDetails.id})">{{meterDetails.id}}</a></td>
+                    <td>{{meterDetails.meterId}}</td>
+                    <td>{{meterDetails.meterType}}</td>
+                    <td>{{meterDetails.meterMake}}</td>
+                    <td>{{meterDetails.min}}</td>
+                    <td>{{meterDetails.max}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="meterDetails.detail({id:meterDetails.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="meterDetails.edit({id:meterDetails.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="meterDetails.delete({id:meterDetails.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

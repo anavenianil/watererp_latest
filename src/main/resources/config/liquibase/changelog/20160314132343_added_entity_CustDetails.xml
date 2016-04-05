@@ -66,6 +66,7 @@
             <column name="dr_flag" type="varchar(255)"/>
             <column name="lat" type="varchar(255)"/>
             <column name="longi" type="varchar(255)"/>
+            <column name="meter_fix_date" type="date"/>
         </createTable>
         
     </changeSet>

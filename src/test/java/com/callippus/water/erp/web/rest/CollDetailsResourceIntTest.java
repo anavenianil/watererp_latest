@@ -52,13 +52,13 @@ public class CollDetailsResourceIntTest {
     private static final String UPDATED_REVERSAL_REF = "BBBBB";
     private static final String DEFAULT_RECEIPT_NO = "AAAAA";
     private static final String UPDATED_RECEIPT_NO = "BBBBB";
-    private static final String DEFAULT_RECEIPT_AMT = "AAAAA";
-    private static final String UPDATED_RECEIPT_AMT = "BBBBB";
 
-    private static final LocalDate DEFAULT_RECEIPT_DT = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_RECEIPT_DT = LocalDate.now(ZoneId.systemDefault());
-    private static final String DEFAULT_RECEIPT_TIME = "AAAAA";
-    private static final String UPDATED_RECEIPT_TIME = "BBBBB";
+    private static final Float DEFAULT_RECEIPT_AMT = 1F;
+    private static final Float UPDATED_RECEIPT_AMT = 2F;
+
+    private static final ZonedDateTime DEFAULT_RECEIPT_DT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_RECEIPT_DT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_RECEIPT_DT_STR = dateTimeFormatter.format(DEFAULT_RECEIPT_DT);
     private static final String DEFAULT_RECEIPT_MODE = "AAAAA";
     private static final String UPDATED_RECEIPT_MODE = "BBBBB";
     private static final String DEFAULT_INSTR_NO = "AAAAA";
@@ -127,7 +127,6 @@ public class CollDetailsResourceIntTest {
         collDetails.setReceiptNo(DEFAULT_RECEIPT_NO);
         collDetails.setReceiptAmt(DEFAULT_RECEIPT_AMT);
         collDetails.setReceiptDt(DEFAULT_RECEIPT_DT);
-        collDetails.setReceiptTime(DEFAULT_RECEIPT_TIME);
         collDetails.setReceiptMode(DEFAULT_RECEIPT_MODE);
         collDetails.setInstrNo(DEFAULT_INSTR_NO);
         collDetails.setInstrDt(DEFAULT_INSTR_DT);
@@ -167,7 +166,6 @@ public class CollDetailsResourceIntTest {
         assertThat(testCollDetails.getReceiptNo()).isEqualTo(DEFAULT_RECEIPT_NO);
         assertThat(testCollDetails.getReceiptAmt()).isEqualTo(DEFAULT_RECEIPT_AMT);
         assertThat(testCollDetails.getReceiptDt()).isEqualTo(DEFAULT_RECEIPT_DT);
-        assertThat(testCollDetails.getReceiptTime()).isEqualTo(DEFAULT_RECEIPT_TIME);
         assertThat(testCollDetails.getReceiptMode()).isEqualTo(DEFAULT_RECEIPT_MODE);
         assertThat(testCollDetails.getInstrNo()).isEqualTo(DEFAULT_INSTR_NO);
         assertThat(testCollDetails.getInstrDt()).isEqualTo(DEFAULT_INSTR_DT);
@@ -200,9 +198,8 @@ public class CollDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(collDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].reversalRef").value(hasItem(DEFAULT_REVERSAL_REF.toString())))
                 .andExpect(jsonPath("$.[*].receiptNo").value(hasItem(DEFAULT_RECEIPT_NO.toString())))
-                .andExpect(jsonPath("$.[*].receiptAmt").value(hasItem(DEFAULT_RECEIPT_AMT.toString())))
-                .andExpect(jsonPath("$.[*].receiptDt").value(hasItem(DEFAULT_RECEIPT_DT.toString())))
-                .andExpect(jsonPath("$.[*].receiptTime").value(hasItem(DEFAULT_RECEIPT_TIME.toString())))
+                .andExpect(jsonPath("$.[*].receiptAmt").value(hasItem(DEFAULT_RECEIPT_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].receiptDt").value(hasItem(DEFAULT_RECEIPT_DT_STR)))
                 .andExpect(jsonPath("$.[*].receiptMode").value(hasItem(DEFAULT_RECEIPT_MODE.toString())))
                 .andExpect(jsonPath("$.[*].instrNo").value(hasItem(DEFAULT_INSTR_NO.toString())))
                 .andExpect(jsonPath("$.[*].instrDt").value(hasItem(DEFAULT_INSTR_DT.toString())))
@@ -235,9 +232,8 @@ public class CollDetailsResourceIntTest {
             .andExpect(jsonPath("$.id").value(collDetails.getId().intValue()))
             .andExpect(jsonPath("$.reversalRef").value(DEFAULT_REVERSAL_REF.toString()))
             .andExpect(jsonPath("$.receiptNo").value(DEFAULT_RECEIPT_NO.toString()))
-            .andExpect(jsonPath("$.receiptAmt").value(DEFAULT_RECEIPT_AMT.toString()))
-            .andExpect(jsonPath("$.receiptDt").value(DEFAULT_RECEIPT_DT.toString()))
-            .andExpect(jsonPath("$.receiptTime").value(DEFAULT_RECEIPT_TIME.toString()))
+            .andExpect(jsonPath("$.receiptAmt").value(DEFAULT_RECEIPT_AMT.doubleValue()))
+            .andExpect(jsonPath("$.receiptDt").value(DEFAULT_RECEIPT_DT_STR))
             .andExpect(jsonPath("$.receiptMode").value(DEFAULT_RECEIPT_MODE.toString()))
             .andExpect(jsonPath("$.instrNo").value(DEFAULT_INSTR_NO.toString()))
             .andExpect(jsonPath("$.instrDt").value(DEFAULT_INSTR_DT.toString()))
@@ -278,7 +274,6 @@ public class CollDetailsResourceIntTest {
         collDetails.setReceiptNo(UPDATED_RECEIPT_NO);
         collDetails.setReceiptAmt(UPDATED_RECEIPT_AMT);
         collDetails.setReceiptDt(UPDATED_RECEIPT_DT);
-        collDetails.setReceiptTime(UPDATED_RECEIPT_TIME);
         collDetails.setReceiptMode(UPDATED_RECEIPT_MODE);
         collDetails.setInstrNo(UPDATED_INSTR_NO);
         collDetails.setInstrDt(UPDATED_INSTR_DT);
@@ -310,7 +305,6 @@ public class CollDetailsResourceIntTest {
         assertThat(testCollDetails.getReceiptNo()).isEqualTo(UPDATED_RECEIPT_NO);
         assertThat(testCollDetails.getReceiptAmt()).isEqualTo(UPDATED_RECEIPT_AMT);
         assertThat(testCollDetails.getReceiptDt()).isEqualTo(UPDATED_RECEIPT_DT);
-        assertThat(testCollDetails.getReceiptTime()).isEqualTo(UPDATED_RECEIPT_TIME);
         assertThat(testCollDetails.getReceiptMode()).isEqualTo(UPDATED_RECEIPT_MODE);
         assertThat(testCollDetails.getInstrNo()).isEqualTo(UPDATED_INSTR_NO);
         assertThat(testCollDetails.getInstrDt()).isEqualTo(UPDATED_INSTR_DT);

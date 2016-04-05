@@ -146,6 +146,9 @@ public class CustDetails implements Serializable {
     @Column(name = "longi")
     private String longi;
 
+    @Column(name = "meter_fix_date")
+    private LocalDate meterFixDate;
+
     public Long getId() {
         return id;
     }
@@ -482,6 +485,14 @@ public class CustDetails implements Serializable {
         this.longi = longi;
     }
 
+    public LocalDate getMeterFixDate() {
+        return meterFixDate;
+    }
+
+    public void setMeterFixDate(LocalDate meterFixDate) {
+        this.meterFixDate = meterFixDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -544,6 +555,7 @@ public class CustDetails implements Serializable {
             ", drFlag='" + drFlag + "'" +
             ", lat='" + lat + "'" +
             ", longi='" + longi + "'" +
+            ", meterFixDate='" + meterFixDate + "'" +
             '}';
     }
 }
