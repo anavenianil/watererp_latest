@@ -477,12 +477,12 @@ CREATE TABLE `category_pipe_size_mapping` (
 
 
 --
--- Table structure for table `watererp`.`coll_details`
+-- Table structure for table `watererp`.`cdx`
 --
 
-DROP TABLE IF EXISTS `coll_details`;
-CREATE TABLE `coll_details` (
-  `id` bigint(20) NOT NULL auto_increment,
+DROP TABLE IF EXISTS `cdx`;
+CREATE TABLE `cdx` (
+  `id` bigint(20) NOT NULL default '0',
   `reversal_ref` varchar(255) default NULL,
   `receipt_no` varchar(255) default NULL,
   `receipt_amt` varchar(255) default NULL,
@@ -504,6 +504,47 @@ CREATE TABLE `coll_details` (
   `settlement_id` varchar(255) default NULL,
   `ext_settlement_id` varchar(255) default NULL,
   `lat` varchar(255) default NULL,
+  `long_i` varchar(255) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`cdx`
+--
+
+/*!40000 ALTER TABLE `cdx` DISABLE KEYS */;
+INSERT INTO `cdx` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_time`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`) VALUES 
+ (1,'ReversalRef1','ReceiptNo1','ReceiptAmt1','2016-03-18','ReceiptTime1','ReceiptMode1',NULL,'2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI1'),
+ (2,'ReversalRef2','ReceiptNo2','ReceiptAmt2','2016-03-18','ReceiptTime2','ReceiptMode2','InstrNo2','2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI2');
+/*!40000 ALTER TABLE `cdx` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`coll_details`
+--
+
+DROP TABLE IF EXISTS `coll_details`;
+CREATE TABLE `coll_details` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `reversal_ref` varchar(255) default NULL,
+  `receipt_no` varchar(255) default NULL,
+  `receipt_amt` float default NULL,
+  `receipt_dt` timestamp NULL,
+  `receipt_mode` varchar(255) default NULL,
+  `instr_no` varchar(255) default NULL,
+  `instr_dt` date default NULL,
+  `instr_issuer` varchar(255) default NULL,
+  `svr_status` varchar(255) default NULL,
+  `can` varchar(255) default NULL,
+  `cons_name` varchar(255) default NULL,
+  `terminal_id` varchar(255) default NULL,
+  `coll_time` timestamp NULL,
+  `txn_status` varchar(255) default NULL,
+  `meter_reader_id` varchar(255) default NULL,
+  `user_id` varchar(255) default NULL,
+  `remarks` varchar(255) default NULL,
+  `settlement_id` varchar(255) default NULL,
+  `ext_settlement_id` varchar(255) default NULL,
+  `lat` varchar(255) default NULL,
   `long_i` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -513,9 +554,6 @@ CREATE TABLE `coll_details` (
 --
 
 /*!40000 ALTER TABLE `coll_details` DISABLE KEYS */;
-INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_time`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`) VALUES 
- (1,'ReversalRef1','ReceiptNo1','ReceiptAmt1','2016-03-18','ReceiptTime1','ReceiptMode1',NULL,'2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI1'),
- (2,'ReversalRef2','ReceiptNo2','ReceiptAmt2','2016-03-18','ReceiptTime2','ReceiptMode2','InstrNo2','2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI2');
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -992,7 +1030,8 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-04-05 09:42:29',94,'EXECUTED','7:36065f70761e00da68fb3c8d80ebaa03','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-04-05 09:42:29',95,'EXECUTED','7:676b41cabaa3375b2480adb58c2e6eaf','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-04-05 09:42:30',96,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-04-05 09:42:30',96,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-04-05 10:03:54',97,'EXECUTED','7:39fa07a5f43b75af1e24047ae6969f4e','createTable, dropDefaultValue (x2)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
