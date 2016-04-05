@@ -38,7 +38,6 @@ angular.module('watererpApp')
                 receiptNo: null,
                 receiptAmt: null,
                 receiptDt: null,
-                receiptTime: null,
                 receiptMode: null,
                 instrNo: null,
                 instrDt: null,

@@ -14,100 +14,95 @@
         {
             "fieldId": 3,
             "fieldName": "receiptAmt",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 4,
             "fieldName": "receiptDt",
-            "fieldType": "LocalDate"
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldId": 5,
-            "fieldName": "receiptTime",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 6,
             "fieldName": "receiptMode",
             "fieldType": "String"
         },
         {
-            "fieldId": 7,
+            "fieldId": 6,
             "fieldName": "instrNo",
             "fieldType": "String"
         },
         {
-            "fieldId": 8,
+            "fieldId": 7,
             "fieldName": "instrDt",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 9,
+            "fieldId": 8,
             "fieldName": "instrIssuer",
             "fieldType": "String"
         },
         {
-            "fieldId": 10,
+            "fieldId": 9,
             "fieldName": "svrStatus",
             "fieldType": "String"
         },
         {
-            "fieldId": 11,
+            "fieldId": 10,
             "fieldName": "can",
             "fieldType": "String"
         },
         {
-            "fieldId": 12,
+            "fieldId": 11,
             "fieldName": "consName",
             "fieldType": "String"
         },
         {
-            "fieldId": 13,
+            "fieldId": 12,
             "fieldName": "terminalId",
             "fieldType": "String"
         },
         {
-            "fieldId": 14,
+            "fieldId": 13,
             "fieldName": "collTime",
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldId": 15,
+            "fieldId": 14,
             "fieldName": "txnStatus",
             "fieldType": "String"
         },
         {
-            "fieldId": 16,
+            "fieldId": 15,
             "fieldName": "meterReaderId",
             "fieldType": "String"
         },
         {
-            "fieldId": 17,
+            "fieldId": 16,
             "fieldName": "userId",
             "fieldType": "String"
         },
         {
-            "fieldId": 18,
+            "fieldId": 17,
             "fieldName": "remarks",
             "fieldType": "String"
         },
         {
-            "fieldId": 19,
+            "fieldId": 18,
             "fieldName": "settlementId",
             "fieldType": "String"
         },
         {
-            "fieldId": 20,
+            "fieldId": 19,
             "fieldName": "extSettlementId",
             "fieldType": "String"
         },
         {
-            "fieldId": 21,
+            "fieldId": 20,
             "fieldName": "lat",
             "fieldType": "String"
         },
         {
-            "fieldId": 22,
+            "fieldId": 21,
             "fieldName": "longI",
             "fieldType": "String"
         }

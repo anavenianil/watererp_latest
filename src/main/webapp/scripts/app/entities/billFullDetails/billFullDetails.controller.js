@@ -35,10 +35,10 @@ angular.module('watererpApp')
         $scope.clear = function () {
             $scope.billFullDetails = {
                 can: null,
-                divcode: null,
-                seccode: null,
-                secname: null,
-                metreadercode: null,
+                divCode: null,
+                secCode: null,
+                secName: null,
+                metReaderCode: null,
                 connDate: null,
                 consName: null,
                 houseNo: null,
@@ -61,8 +61,8 @@ angular.module('watererpApp')
                 reversalAmt: null,
                 installment: null,
                 otherCharges: null,
-                surCharge: null,
-                hrsSurCharge: null,
+                surcharge: null,
+                hrsSurcharge: null,
                 resUnits: null,
                 metCostInstallment: null,
                 intOnArrears: null,
@@ -87,7 +87,6 @@ angular.module('watererpApp')
                 netPayableAmount: null,
                 telephoneNo: null,
                 meterStatus: null,
-                mcMetReaderCode: null,
                 billFlag: null,
                 svrStatus: null,
                 terminalId: null,
@@ -96,8 +95,8 @@ angular.module('watererpApp')
                 mobileNo: null,
                 noticeNo: null,
                 lat: null,
-                longI: null,
-                nometerAmt: null,
+                longi: null,
+                noMeterAmt: null,
                 id: null
             };
         };

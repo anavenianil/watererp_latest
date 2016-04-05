@@ -8,7 +8,7 @@ angular.module('watererpApp')
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
-                    data.receiptDt = DateUtils.convertLocaleDateFromServer(data.receiptDt);
+                    data.receiptDt = DateUtils.convertDateTimeFromServer(data.receiptDt);
                     data.instrDt = DateUtils.convertLocaleDateFromServer(data.instrDt);
                     data.collTime = DateUtils.convertDateTimeFromServer(data.collTime);
                     return data;
@@ -17,7 +17,6 @@ angular.module('watererpApp')
             'update': {
                 method: 'PUT',
                 transformRequest: function (data) {
-                    data.receiptDt = DateUtils.convertLocaleDateToServer(data.receiptDt);
                     data.instrDt = DateUtils.convertLocaleDateToServer(data.instrDt);
                     return angular.toJson(data);
                 }
@@ -25,7 +24,6 @@ angular.module('watererpApp')
             'save': {
                 method: 'POST',
                 transformRequest: function (data) {
-                    data.receiptDt = DateUtils.convertLocaleDateToServer(data.receiptDt);
                     data.instrDt = DateUtils.convertLocaleDateToServer(data.instrDt);
                     return angular.toJson(data);
                 }

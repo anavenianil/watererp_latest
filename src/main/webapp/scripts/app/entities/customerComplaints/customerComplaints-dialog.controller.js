@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustomerComplaintsDialogController', function ($scope, $state, CustomerComplaints, ParseLinks, $stateParams, ApplicationTxn, ComplaintTypeMaster) {
+    .controller('CustomerComplaintsDialogController', function ($scope, $state, CustomerComplaints, ParseLinks, $stateParams, ApplicationTxn, ComplaintTypeMaster, UploadUtil) {
     $scope.customerComplaints = {};
     $scope.customerComplaints.complaintDate = new Date();////////  This code is to per populate system date in Complaint Date Field
+    //$scope.customerComplaints.complaintDate = DateService.getServerDate();
     $scope.applicationtxns = ApplicationTxn.query();
     $scope.complainttypemasters = ComplaintTypeMaster.query();
     $scope.load = function(id) {

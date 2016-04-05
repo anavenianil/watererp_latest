@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster, UploadUtil, DateUtils, DateService) {
+    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster, UploadUtil, DateUtils) {
 
     	$scope.applicationTxn = {};
     	$scope.categoryMasters = CategoryMaster.query();

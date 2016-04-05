@@ -1,0 +1,37 @@
+{
+    "relationships": [
+            {
+            "relationshipId": 1,
+            "relationshipName": "custDetails",
+            "otherEntityName": "custDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "meterDetails",
+            "otherEntityName": "meterDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "fromDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "toDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20160405010101",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

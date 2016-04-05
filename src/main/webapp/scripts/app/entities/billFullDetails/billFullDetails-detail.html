@@ -20,34 +20,34 @@
             </tr>
             <tr>
                 <td>
-                    <span>Divcode</span>
+                    <span>DivCode</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.divcode}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Seccode</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billFullDetails.seccode}}</span>
+                    <span class="form-control-static">{{billFullDetails.divCode}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Secname</span>
+                    <span>SecCode</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.secname}}</span>
+                    <span class="form-control-static">{{billFullDetails.secCode}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Metreadercode</span>
+                    <span>SecName</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.metreadercode}}</span>
+                    <span class="form-control-static">{{billFullDetails.secName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MetReaderCode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billFullDetails.metReaderCode}}</span>
                 </td>
             </tr>
             <tr>
@@ -151,7 +151,7 @@
                     <span>PrevBillMonth</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.prevBillMonth}}</span>
+                    <span class="form-control-static">{{billFullDetails.prevBillMonth | date:'mediumDate'}}</span>
                 </td>
             </tr>
             <tr>
@@ -183,7 +183,7 @@
                     <span>MetReadingMo</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.metReadingMo}}</span>
+                    <span class="form-control-static">{{billFullDetails.metReadingMo | date:'mediumDate'}}</span>
                 </td>
             </tr>
             <tr>
@@ -228,18 +228,18 @@
             </tr>
             <tr>
                 <td>
-                    <span>SurCharge</span>
+                    <span>Surcharge</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.surCharge}}</span>
+                    <span class="form-control-static">{{billFullDetails.surcharge}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>HrsSurCharge</span>
+                    <span>HrsSurcharge</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.hrsSurCharge}}</span>
+                    <span class="form-control-static">{{billFullDetails.hrsSurcharge}}</span>
                 </td>
             </tr>
             <tr>
@@ -343,7 +343,7 @@
                     <span>MeterFixDate</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.meterFixDate}}</span>
+                    <span class="form-control-static">{{billFullDetails.meterFixDate | date:'mediumDate'}}</span>
                 </td>
             </tr>
             <tr>
@@ -436,14 +436,6 @@
             </tr>
             <tr>
                 <td>
-                    <span>McMetReaderCode</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billFullDetails.mcMetReaderCode}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span>BillFlag</span>
                 </td>
                 <td>
@@ -508,18 +500,18 @@
             </tr>
             <tr>
                 <td>
-                    <span>LongI</span>
+                    <span>Longi</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.longI}}</span>
+                    <span class="form-control-static">{{billFullDetails.longi}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>NometerAmt</span>
+                    <span>NoMeterAmt</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billFullDetails.nometerAmt}}</span>
+                    <span class="form-control-static">{{billFullDetails.noMeterAmt}}</span>
                 </td>
             </tr>
             </tbody>

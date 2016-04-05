@@ -43,38 +43,6 @@ angular.module('watererpApp')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'CollDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/collDetails/collDetails-dialog.html',
-                        controller: 'CollDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            .state('collDetails.edit', {
-                parent: 'collDetails',
-                url: '/edit/:id',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'CollDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/collDetails/collDetails-dialog.html',
-                        controller: 'CollDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            /*.state('collDetails.new', {
-                parent: 'collDetails',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -88,7 +56,6 @@ angular.module('watererpApp')
                                     receiptNo: null,
                                     receiptAmt: null,
                                     receiptDt: null,
-                                    receiptTime: null,
                                     receiptMode: null,
                                     instrNo: null,
                                     instrDt: null,
@@ -139,7 +106,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })*/
+            })
             .state('collDetails.delete', {
                 parent: 'collDetails',
                 url: '/{id}/delete',

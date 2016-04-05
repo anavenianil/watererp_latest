@@ -16,10 +16,9 @@ angular.module('watererpApp').controller('MainController',
 					$scope.approvedRequests = data;
 				});
 
-				/*
-				 * ApplicationTxnService.getMyRequests().then(function(data) {
-				 * $scope.myRequests = data; });
-				 */
+				/*ApplicationTxnService.getMyRequests().then(function(data) {
+					$scope.myRequests = data;
+				});*/
 			}
 			
 
@@ -43,7 +42,6 @@ angular.module('watererpApp').controller('MainController',
 
 			});
 			
-
 			$scope.getDetails = function(type) {
 				console.log(type);
 				
@@ -51,10 +49,11 @@ angular.module('watererpApp').controller('MainController',
 				{ 
 					$state.go('applicationTxn'); 
 				}
-				else if(type==='INCORRECT BILL')
-				{
+				else if(type==='INCORRECT BILL'){
 					$state.go('customerComplaints'); 
- 				}
+				}
+				 
+
 			}
 			
 		});
@@ -68,10 +67,13 @@ angular.module('watererpApp').controller('MainController',
 
 
 
-/*
- * 'use strict';
- * 
- * angular.module('watererpApp') .controller('MainController', function ($scope,
- * Principal) { Principal.identity().then(function(account) { $scope.account =
- * account; $scope.isAuthenticated = Principal.isAuthenticated; }); });
- */
+/*'use strict';
+
+angular.module('watererpApp')
+    .controller('MainController', function ($scope, Principal) {
+        Principal.identity().then(function(account) {
+            $scope.account = account;
+            $scope.isAuthenticated = Principal.isAuthenticated;
+        });
+    });
+*/

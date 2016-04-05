@@ -24,205 +24,202 @@ public class BillFullDetails implements Serializable {
     @NotNull
     @Column(name = "can", nullable = false)
     private String can;
-    
+
     @NotNull
     @Column(name = "divcode", nullable = false)
-    private String divcode;
-    
-    @Column(name = "seccode")
-    private String seccode;
-    
-    @Column(name = "secname")
-    private String secname;
-    
-    @Column(name = "metreadercode")
-    private String metreadercode;
-    
+    private String divCode;
+
+    @Column(name = "sec_code")
+    private String secCode;
+
+    @Column(name = "sec_name")
+    private String secName;
+
+    @Column(name = "met_reader_code")
+    private String metReaderCode;
+
     @NotNull
     @Column(name = "conn_date", nullable = false)
     private LocalDate connDate;
-    
+
     @NotNull
     @Column(name = "cons_name", nullable = false)
     private String consName;
-    
+
     @NotNull
     @Column(name = "house_no", nullable = false)
     private String houseNo;
-    
+
     @Column(name = "address")
     private String address;
-    
+
     @NotNull
     @Column(name = "city", nullable = false)
     private String city;
-    
+
     @Column(name = "pin_code")
     private String pinCode;
-    
+
     @Column(name = "category")
     private String category;
-    
+
     @Column(name = "pipe_size")
-    private String pipeSize;
-    
+    private Float pipeSize;
+
     @Column(name = "board_meter")
     private String boardMeter;
-    
+
     @Column(name = "sewerage")
     private String sewerage;
-    
+
     @NotNull
     @Column(name = "meter_no", nullable = false)
     private String meterNo;
-    
+
     @Column(name = "prev_bill_type")
     private String prevBillType;
-    
+
     @Column(name = "prev_bill_month")
-    private String prevBillMonth;
-    
+    private LocalDate prevBillMonth;
+
     @Column(name = "prev_avg_kl")
-    private String prevAvgKl;
-    
+    private Float prevAvgKl;
+
     @NotNull
     @Column(name = "met_reading_dt", nullable = false)
     private LocalDate metReadingDt;
-    
+
     @Column(name = "prev_reading")
-    private String prevReading;
-    
+    private Float prevReading;
+
     @Column(name = "met_reading_mo")
-    private String metReadingMo;
-    
+    private LocalDate metReadingMo;
+
     @Column(name = "met_avg_kl")
-    private String metAvgKl;
-    
+    private Float metAvgKl;
+
     @Column(name = "arrears")
-    private String arrears;
-    
+    private Float arrears;
+
     @Column(name = "reversal_amt")
-    private String reversalAmt;
-    
+    private Float reversalAmt;
+
     @Column(name = "installment")
-    private String installment;
-    
+    private Float installment;
+
     @Column(name = "other_charges")
-    private String otherCharges;
-    
-    @Column(name = "sur_charge")
-    private String surCharge;
-    
-    @Column(name = "hrs_sur_charge")
-    private String hrsSurCharge;
-    
+    private Float otherCharges;
+
+    @Column(name = "surcharge")
+    private Float surcharge;
+
+    @Column(name = "hrs_surcharge")
+    private String hrsSurcharge;
+
     @Column(name = "res_units")
-    private String resUnits;
-    
+    private Long resUnits;
+
     @Column(name = "met_cost_installment")
-    private String metCostInstallment;
-    
+    private Float metCostInstallment;
+
     @Column(name = "int_on_arrears")
-    private String intOnArrears;
-    
+    private Float intOnArrears;
+
     @NotNull
     @Column(name = "last_pymt_dt", nullable = false)
     private LocalDate lastPymtDt;
-    
+
     @Column(name = "last_pymt_amt")
     private Float lastPymtAmt;
-    
+
     @Column(name = "bill_number")
     private String billNumber;
-    
+
     @NotNull
     @Column(name = "bill_date", nullable = false)
     private LocalDate billDate;
-    
+
     @Column(name = "bill_time")
     private String billTime;
-    
+
     @Column(name = "meter_make")
     private String meterMake;
-    
+
     @Column(name = "current_bill_type")
     private String currentBillType;
-    
+
     @Column(name = "from_month")
     private String fromMonth;
-    
+
     @Column(name = "to_month")
     private String toMonth;
-    
+
     @Column(name = "meter_fix_date")
-    private String meterFixDate;
-    
+    private LocalDate meterFixDate;
+
     @Column(name = "initial_reading")
-    private String initialReading;
-    
+    private Float initialReading;
+
     @Column(name = "present_reading")
-    private String presentReading;
-    
+    private Float presentReading;
+
     @Column(name = "units")
-    private String units;
-    
+    private Float units;
+
     @Column(name = "water_cess")
-    private String waterCess;
-    
+    private Float waterCess;
+
     @Column(name = "sewerage_cess")
-    private String sewerageCess;
-    
+    private Float sewerageCess;
+
     @Column(name = "service_charge")
-    private String serviceCharge;
-    
+    private Float serviceCharge;
+
     @Column(name = "meter_service_charge")
-    private String meterServiceCharge;
-    
+    private Float meterServiceCharge;
+
     @Column(name = "total_amount")
     private Float totalAmount;
-    
+
     @Column(name = "net_payable_amount")
     private Float netPayableAmount;
-    
+
     @Column(name = "telephone_no")
     private String telephoneNo;
-    
+
     @Column(name = "meter_status")
     private String meterStatus;
-    
-    @Column(name = "mc_met_reader_code")
-    private String mcMetReaderCode;
-    
+
     @Column(name = "bill_flag")
     private String billFlag;
-    
+
     @Column(name = "svr_status")
     private String svrStatus;
-    
+
     @Column(name = "terminal_id")
     private String terminalId;
-    
+
     @Column(name = "meter_reader_id")
     private String meterReaderId;
-    
+
     @Column(name = "user_id")
     private String userId;
-    
+
     @Column(name = "mobile_no")
     private String mobileNo;
-    
+
     @Column(name = "notice_no")
     private String noticeNo;
-    
+
     @Column(name = "lat")
     private String lat;
-    
-    @Column(name = "long_i")
-    private String longI;
-    
+
+    @Column(name = "longi")
+    private String longi;
+
     @Column(name = "nometer_amt")
-    private String nometerAmt;
-    
+    private Float noMeterAmt;
+
     public Long getId() {
         return id;
     }
@@ -234,47 +231,47 @@ public class BillFullDetails implements Serializable {
     public String getCan() {
         return can;
     }
-    
+
     public void setCan(String can) {
         this.can = can;
     }
 
-    public String getDivcode() {
-        return divcode;
-    }
-    
-    public void setDivcode(String divcode) {
-        this.divcode = divcode;
+    public String getDivCode() {
+        return divCode;
     }
 
-    public String getSeccode() {
-        return seccode;
-    }
-    
-    public void setSeccode(String seccode) {
-        this.seccode = seccode;
+    public void setDivCode(String divCode) {
+        this.divCode = divCode;
     }
 
-    public String getSecname() {
-        return secname;
-    }
-    
-    public void setSecname(String secname) {
-        this.secname = secname;
+    public String getSecCode() {
+        return secCode;
     }
 
-    public String getMetreadercode() {
-        return metreadercode;
+    public void setSecCode(String secCode) {
+        this.secCode = secCode;
     }
-    
-    public void setMetreadercode(String metreadercode) {
-        this.metreadercode = metreadercode;
+
+    public String getSecName() {
+        return secName;
+    }
+
+    public void setSecName(String secName) {
+        this.secName = secName;
+    }
+
+    public String getMetReaderCode() {
+        return metReaderCode;
+    }
+
+    public void setMetReaderCode(String metReaderCode) {
+        this.metReaderCode = metReaderCode;
     }
 
     public LocalDate getConnDate() {
         return connDate;
     }
-    
+
     public void setConnDate(LocalDate connDate) {
         this.connDate = connDate;
     }
@@ -282,7 +279,7 @@ public class BillFullDetails implements Serializable {
     public String getConsName() {
         return consName;
     }
-    
+
     public void setConsName(String consName) {
         this.consName = consName;
     }
@@ -290,7 +287,7 @@ public class BillFullDetails implements Serializable {
     public String getHouseNo() {
         return houseNo;
     }
-    
+
     public void setHouseNo(String houseNo) {
         this.houseNo = houseNo;
     }
@@ -298,7 +295,7 @@ public class BillFullDetails implements Serializable {
     public String getAddress() {
         return address;
     }
-    
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -306,7 +303,7 @@ public class BillFullDetails implements Serializable {
     public String getCity() {
         return city;
     }
-    
+
     public void setCity(String city) {
         this.city = city;
     }
@@ -314,7 +311,7 @@ public class BillFullDetails implements Serializable {
     public String getPinCode() {
         return pinCode;
     }
-    
+
     public void setPinCode(String pinCode) {
         this.pinCode = pinCode;
     }
@@ -322,23 +319,23 @@ public class BillFullDetails implements Serializable {
     public String getCategory() {
         return category;
     }
-    
+
     public void setCategory(String category) {
         this.category = category;
     }
 
-    public String getPipeSize() {
+    public Float getPipeSize() {
         return pipeSize;
     }
-    
-    public void setPipeSize(String pipeSize) {
+
+    public void setPipeSize(Float pipeSize) {
         this.pipeSize = pipeSize;
     }
 
     public String getBoardMeter() {
         return boardMeter;
     }
-    
+
     public void setBoardMeter(String boardMeter) {
         this.boardMeter = boardMeter;
     }
@@ -346,7 +343,7 @@ public class BillFullDetails implements Serializable {
     public String getSewerage() {
         return sewerage;
     }
-    
+
     public void setSewerage(String sewerage) {
         this.sewerage = sewerage;
     }
@@ -354,7 +351,7 @@ public class BillFullDetails implements Serializable {
     public String getMeterNo() {
         return meterNo;
     }
-    
+
     public void setMeterNo(String meterNo) {
         this.meterNo = meterNo;
     }
@@ -362,135 +359,135 @@ public class BillFullDetails implements Serializable {
     public String getPrevBillType() {
         return prevBillType;
     }
-    
+
     public void setPrevBillType(String prevBillType) {
         this.prevBillType = prevBillType;
     }
 
-    public String getPrevBillMonth() {
+    public LocalDate getPrevBillMonth() {
         return prevBillMonth;
     }
-    
-    public void setPrevBillMonth(String prevBillMonth) {
+
+    public void setPrevBillMonth(LocalDate prevBillMonth) {
         this.prevBillMonth = prevBillMonth;
     }
 
-    public String getPrevAvgKl() {
+    public Float getPrevAvgKl() {
         return prevAvgKl;
     }
-    
-    public void setPrevAvgKl(String prevAvgKl) {
+
+    public void setPrevAvgKl(Float prevAvgKl) {
         this.prevAvgKl = prevAvgKl;
     }
 
     public LocalDate getMetReadingDt() {
         return metReadingDt;
     }
-    
+
     public void setMetReadingDt(LocalDate metReadingDt) {
         this.metReadingDt = metReadingDt;
     }
 
-    public String getPrevReading() {
+    public Float getPrevReading() {
         return prevReading;
     }
-    
-    public void setPrevReading(String prevReading) {
+
+    public void setPrevReading(Float prevReading) {
         this.prevReading = prevReading;
     }
 
-    public String getMetReadingMo() {
+    public LocalDate getMetReadingMo() {
         return metReadingMo;
     }
-    
-    public void setMetReadingMo(String metReadingMo) {
+
+    public void setMetReadingMo(LocalDate metReadingMo) {
         this.metReadingMo = metReadingMo;
     }
 
-    public String getMetAvgKl() {
+    public Float getMetAvgKl() {
         return metAvgKl;
     }
-    
-    public void setMetAvgKl(String metAvgKl) {
+
+    public void setMetAvgKl(Float metAvgKl) {
         this.metAvgKl = metAvgKl;
     }
 
-    public String getArrears() {
+    public Float getArrears() {
         return arrears;
     }
-    
-    public void setArrears(String arrears) {
+
+    public void setArrears(Float arrears) {
         this.arrears = arrears;
     }
 
-    public String getReversalAmt() {
+    public Float getReversalAmt() {
         return reversalAmt;
     }
-    
-    public void setReversalAmt(String reversalAmt) {
+
+    public void setReversalAmt(Float reversalAmt) {
         this.reversalAmt = reversalAmt;
     }
 
-    public String getInstallment() {
+    public Float getInstallment() {
         return installment;
     }
-    
-    public void setInstallment(String installment) {
+
+    public void setInstallment(Float installment) {
         this.installment = installment;
     }
 
-    public String getOtherCharges() {
+    public Float getOtherCharges() {
         return otherCharges;
     }
-    
-    public void setOtherCharges(String otherCharges) {
+
+    public void setOtherCharges(Float otherCharges) {
         this.otherCharges = otherCharges;
     }
 
-    public String getSurCharge() {
-        return surCharge;
-    }
-    
-    public void setSurCharge(String surCharge) {
-        this.surCharge = surCharge;
+    public Float getSurcharge() {
+        return surcharge;
     }
 
-    public String getHrsSurCharge() {
-        return hrsSurCharge;
-    }
-    
-    public void setHrsSurCharge(String hrsSurCharge) {
-        this.hrsSurCharge = hrsSurCharge;
+    public void setSurcharge(Float surcharge) {
+        this.surcharge = surcharge;
     }
 
-    public String getResUnits() {
+    public String getHrsSurcharge() {
+        return hrsSurcharge;
+    }
+
+    public void setHrsSurcharge(String hrsSurcharge) {
+        this.hrsSurcharge = hrsSurcharge;
+    }
+
+    public Long getResUnits() {
         return resUnits;
     }
-    
-    public void setResUnits(String resUnits) {
+
+    public void setResUnits(Long resUnits) {
         this.resUnits = resUnits;
     }
 
-    public String getMetCostInstallment() {
+    public Float getMetCostInstallment() {
         return metCostInstallment;
     }
-    
-    public void setMetCostInstallment(String metCostInstallment) {
+
+    public void setMetCostInstallment(Float metCostInstallment) {
         this.metCostInstallment = metCostInstallment;
     }
 
-    public String getIntOnArrears() {
+    public Float getIntOnArrears() {
         return intOnArrears;
     }
-    
-    public void setIntOnArrears(String intOnArrears) {
+
+    public void setIntOnArrears(Float intOnArrears) {
         this.intOnArrears = intOnArrears;
     }
 
     public LocalDate getLastPymtDt() {
         return lastPymtDt;
     }
-    
+
     public void setLastPymtDt(LocalDate lastPymtDt) {
         this.lastPymtDt = lastPymtDt;
     }
@@ -498,7 +495,7 @@ public class BillFullDetails implements Serializable {
     public Float getLastPymtAmt() {
         return lastPymtAmt;
     }
-    
+
     public void setLastPymtAmt(Float lastPymtAmt) {
         this.lastPymtAmt = lastPymtAmt;
     }
@@ -506,7 +503,7 @@ public class BillFullDetails implements Serializable {
     public String getBillNumber() {
         return billNumber;
     }
-    
+
     public void setBillNumber(String billNumber) {
         this.billNumber = billNumber;
     }
@@ -514,7 +511,7 @@ public class BillFullDetails implements Serializable {
     public LocalDate getBillDate() {
         return billDate;
     }
-    
+
     public void setBillDate(LocalDate billDate) {
         this.billDate = billDate;
     }
@@ -522,7 +519,7 @@ public class BillFullDetails implements Serializable {
     public String getBillTime() {
         return billTime;
     }
-    
+
     public void setBillTime(String billTime) {
         this.billTime = billTime;
     }
@@ -530,7 +527,7 @@ public class BillFullDetails implements Serializable {
     public String getMeterMake() {
         return meterMake;
     }
-    
+
     public void setMeterMake(String meterMake) {
         this.meterMake = meterMake;
     }
@@ -538,7 +535,7 @@ public class BillFullDetails implements Serializable {
     public String getCurrentBillType() {
         return currentBillType;
     }
-    
+
     public void setCurrentBillType(String currentBillType) {
         this.currentBillType = currentBillType;
     }
@@ -546,7 +543,7 @@ public class BillFullDetails implements Serializable {
     public String getFromMonth() {
         return fromMonth;
     }
-    
+
     public void setFromMonth(String fromMonth) {
         this.fromMonth = fromMonth;
     }
@@ -554,79 +551,79 @@ public class BillFullDetails implements Serializable {
     public String getToMonth() {
         return toMonth;
     }
-    
+
     public void setToMonth(String toMonth) {
         this.toMonth = toMonth;
     }
 
-    public String getMeterFixDate() {
+    public LocalDate getMeterFixDate() {
         return meterFixDate;
     }
-    
-    public void setMeterFixDate(String meterFixDate) {
+
+    public void setMeterFixDate(LocalDate meterFixDate) {
         this.meterFixDate = meterFixDate;
     }
 
-    public String getInitialReading() {
+    public Float getInitialReading() {
         return initialReading;
     }
-    
-    public void setInitialReading(String initialReading) {
+
+    public void setInitialReading(Float initialReading) {
         this.initialReading = initialReading;
     }
 
-    public String getPresentReading() {
+    public Float getPresentReading() {
         return presentReading;
     }
-    
-    public void setPresentReading(String presentReading) {
+
+    public void setPresentReading(Float presentReading) {
         this.presentReading = presentReading;
     }
 
-    public String getUnits() {
+    public Float getUnits() {
         return units;
     }
-    
-    public void setUnits(String units) {
+
+    public void setUnits(Float units) {
         this.units = units;
     }
 
-    public String getWaterCess() {
+    public Float getWaterCess() {
         return waterCess;
     }
-    
-    public void setWaterCess(String waterCess) {
+
+    public void setWaterCess(Float waterCess) {
         this.waterCess = waterCess;
     }
 
-    public String getSewerageCess() {
+    public Float getSewerageCess() {
         return sewerageCess;
     }
-    
-    public void setSewerageCess(String sewerageCess) {
+
+    public void setSewerageCess(Float sewerageCess) {
         this.sewerageCess = sewerageCess;
     }
 
-    public String getServiceCharge() {
+    public Float getServiceCharge() {
         return serviceCharge;
     }
-    
-    public void setServiceCharge(String serviceCharge) {
+
+    public void setServiceCharge(Float serviceCharge) {
         this.serviceCharge = serviceCharge;
     }
 
-    public String getMeterServiceCharge() {
+    public Float getMeterServiceCharge() {
         return meterServiceCharge;
     }
-    
-    public void setMeterServiceCharge(String meterServiceCharge) {
+
+    public void setMeterServiceCharge(Float meterServiceCharge) {
         this.meterServiceCharge = meterServiceCharge;
     }
 
     public Float getTotalAmount() {
         return totalAmount;
     }
-    
+
     public void setTotalAmount(Float totalAmount) {
         this.totalAmount = totalAmount;
     }
@@ -634,7 +631,7 @@ public class BillFullDetails implements Serializable {
     public Float getNetPayableAmount() {
         return netPayableAmount;
     }
-    
+
     public void setNetPayableAmount(Float netPayableAmount) {
         this.netPayableAmount = netPayableAmount;
     }
@@ -642,7 +639,7 @@ public class BillFullDetails implements Serializable {
     public String getTelephoneNo() {
         return telephoneNo;
     }
-    
+
     public void setTelephoneNo(String telephoneNo) {
         this.telephoneNo = telephoneNo;
     }
@@ -650,23 +647,15 @@ public class BillFullDetails implements Serializable {
     public String getMeterStatus() {
         return meterStatus;
     }
-    
+
     public void setMeterStatus(String meterStatus) {
         this.meterStatus = meterStatus;
-    }
-
-    public String getMcMetReaderCode() {
-        return mcMetReaderCode;
-    }
-    
-    public void setMcMetReaderCode(String mcMetReaderCode) {
-        this.mcMetReaderCode = mcMetReaderCode;
     }
 
     public String getBillFlag() {
         return billFlag;
     }
-    
+
     public void setBillFlag(String billFlag) {
         this.billFlag = billFlag;
     }
@@ -674,7 +663,7 @@ public class BillFullDetails implements Serializable {
     public String getSvrStatus() {
         return svrStatus;
     }
-    
+
     public void setSvrStatus(String svrStatus) {
         this.svrStatus = svrStatus;
     }
@@ -682,7 +671,7 @@ public class BillFullDetails implements Serializable {
     public String getTerminalId() {
         return terminalId;
     }
-    
+
     public void setTerminalId(String terminalId) {
         this.terminalId = terminalId;
     }
@@ -690,7 +679,7 @@ public class BillFullDetails implements Serializable {
     public String getMeterReaderId() {
         return meterReaderId;
     }
-    
+
     public void setMeterReaderId(String meterReaderId) {
         this.meterReaderId = meterReaderId;
     }
@@ -698,7 +687,7 @@ public class BillFullDetails implements Serializable {
     public String getUserId() {
         return userId;
     }
-    
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -706,7 +695,7 @@ public class BillFullDetails implements Serializable {
     public String getMobileNo() {
         return mobileNo;
     }
-    
+
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
@@ -714,7 +703,7 @@ public class BillFullDetails implements Serializable {
     public String getNoticeNo() {
         return noticeNo;
     }
-    
+
     public void setNoticeNo(String noticeNo) {
         this.noticeNo = noticeNo;
     }
@@ -722,25 +711,25 @@ public class BillFullDetails implements Serializable {
     public String getLat() {
         return lat;
     }
-    
+
     public void setLat(String lat) {
         this.lat = lat;
     }
 
-    public String getLongI() {
-        return longI;
-    }
-    
-    public void setLongI(String longI) {
-        this.longI = longI;
+    public String getLongi() {
+        return longi;
     }
 
-    public String getNometerAmt() {
-        return nometerAmt;
+    public void setLongi(String longi) {
+        this.longi = longi;
     }
-    
-    public void setNometerAmt(String nometerAmt) {
-        this.nometerAmt = nometerAmt;
+
+    public Float getNoMeterAmt() {
+        return noMeterAmt;
+    }
+
+    public void setNoMeterAmt(Float noMeterAmt) {
+        this.noMeterAmt = noMeterAmt;
     }
 
     @Override
@@ -752,9 +741,6 @@ public class BillFullDetails implements Serializable {
             return false;
         }
         BillFullDetails billFullDetails = (BillFullDetails) o;
-        if(billFullDetails.id == null || id == null) {
-            return false;
-        }
         return Objects.equals(id, billFullDetails.id);
     }
 
@@ -768,10 +754,10 @@ public class BillFullDetails implements Serializable {
         return "BillFullDetails{" +
             "id=" + id +
             ", can='" + can + "'" +
-            ", divcode='" + divcode + "'" +
-            ", seccode='" + seccode + "'" +
-            ", secname='" + secname + "'" +
-            ", metreadercode='" + metreadercode + "'" +
+            ", divCode='" + divCode + "'" +
+            ", secCode='" + secCode + "'" +
+            ", secName='" + secName + "'" +
+            ", metReaderCode='" + metReaderCode + "'" +
             ", connDate='" + connDate + "'" +
             ", consName='" + consName + "'" +
             ", houseNo='" + houseNo + "'" +
@@ -794,8 +780,8 @@ public class BillFullDetails implements Serializable {
             ", reversalAmt='" + reversalAmt + "'" +
             ", installment='" + installment + "'" +
             ", otherCharges='" + otherCharges + "'" +
-            ", surCharge='" + surCharge + "'" +
-            ", hrsSurCharge='" + hrsSurCharge + "'" +
+            ", surcharge='" + surcharge + "'" +
+            ", hrsSurcharge='" + hrsSurcharge + "'" +
             ", resUnits='" + resUnits + "'" +
             ", metCostInstallment='" + metCostInstallment + "'" +
             ", intOnArrears='" + intOnArrears + "'" +
@@ -820,7 +806,6 @@ public class BillFullDetails implements Serializable {
             ", netPayableAmount='" + netPayableAmount + "'" +
             ", telephoneNo='" + telephoneNo + "'" +
             ", meterStatus='" + meterStatus + "'" +
-            ", mcMetReaderCode='" + mcMetReaderCode + "'" +
             ", billFlag='" + billFlag + "'" +
             ", svrStatus='" + svrStatus + "'" +
             ", terminalId='" + terminalId + "'" +
@@ -829,8 +814,8 @@ public class BillFullDetails implements Serializable {
             ", mobileNo='" + mobileNo + "'" +
             ", noticeNo='" + noticeNo + "'" +
             ", lat='" + lat + "'" +
-            ", longI='" + longI + "'" +
-            ", nometerAmt='" + nometerAmt + "'" +
+            ", longi='" + longi + "'" +
+            ", noMeterAmt='" + noMeterAmt + "'" +
             '}';
     }
 }

@@ -11,7 +11,7 @@
         },
         {
             "fieldId": 2,
-            "fieldName": "divcode",
+            "fieldName": "divCode",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -19,17 +19,17 @@
         },
         {
             "fieldId": 3,
-            "fieldName": "seccode",
+            "fieldName": "secCode",
             "fieldType": "String"
         },
         {
             "fieldId": 4,
-            "fieldName": "secname",
+            "fieldName": "secName",
             "fieldType": "String"
         },
         {
             "fieldId": 5,
-            "fieldName": "metreadercode",
+            "fieldName": "metReaderCode",
             "fieldType": "String"
         },
         {
@@ -82,7 +82,7 @@
         {
             "fieldId": 13,
             "fieldName": "pipeSize",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 14,
@@ -110,12 +110,12 @@
         {
             "fieldId": 18,
             "fieldName": "prevBillMonth",
-            "fieldType": "String"
+            "fieldType": "LocalDate"
         },
         {
             "fieldId": 19,
             "fieldName": "prevAvgKl",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 20,
@@ -128,62 +128,62 @@
         {
             "fieldId": 21,
             "fieldName": "prevReading",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 22,
             "fieldName": "metReadingMo",
-            "fieldType": "String"
+            "fieldType": "LocalDate"
         },
         {
             "fieldId": 23,
             "fieldName": "metAvgKl",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 24,
             "fieldName": "arrears",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 25,
             "fieldName": "reversalAmt",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 26,
             "fieldName": "installment",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 27,
             "fieldName": "otherCharges",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 28,
-            "fieldName": "surCharge",
-            "fieldType": "String"
+            "fieldName": "surcharge",
+            "fieldType": "Float"
         },
         {
             "fieldId": 29,
-            "fieldName": "hrsSurCharge",
+            "fieldName": "hrsSurcharge",
             "fieldType": "String"
         },
         {
             "fieldId": 30,
             "fieldName": "resUnits",
-            "fieldType": "String"
+            "fieldType": "Long"
         },
         {
             "fieldId": 31,
             "fieldName": "metCostInstallment",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 32,
             "fieldName": "intOnArrears",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 33,
@@ -239,42 +239,42 @@
         {
             "fieldId": 42,
             "fieldName": "meterFixDate",
-            "fieldType": "String"
+            "fieldType": "LocalDate"
         },
         {
             "fieldId": 43,
             "fieldName": "initialReading",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 44,
             "fieldName": "presentReading",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 45,
             "fieldName": "units",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 46,
             "fieldName": "waterCess",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 47,
             "fieldName": "sewerageCess",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 48,
             "fieldName": "serviceCharge",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 49,
             "fieldName": "meterServiceCharge",
-            "fieldType": "String"
+            "fieldType": "Float"
         },
         {
             "fieldId": 50,
@@ -298,58 +298,53 @@
         },
         {
             "fieldId": 54,
-            "fieldName": "mcMetReaderCode",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 55,
             "fieldName": "billFlag",
             "fieldType": "String"
         },
         {
-            "fieldId": 56,
+            "fieldId": 55,
             "fieldName": "svrStatus",
             "fieldType": "String"
         },
         {
-            "fieldId": 57,
+            "fieldId": 56,
             "fieldName": "terminalId",
             "fieldType": "String"
         },
         {
-            "fieldId": 58,
+            "fieldId": 57,
             "fieldName": "meterReaderId",
             "fieldType": "String"
         },
         {
-            "fieldId": 59,
+            "fieldId": 58,
             "fieldName": "userId",
             "fieldType": "String"
         },        
         {
-            "fieldId": 60,
+            "fieldId": 59,
             "fieldName": "mobileNo",
             "fieldType": "String"
         },
         {
-            "fieldId": 61,
+            "fieldId": 60,
             "fieldName": "noticeNo",
             "fieldType": "String"
         },
         {
-            "fieldId": 62,
+            "fieldId": 61,
             "fieldName": "lat",
             "fieldType": "String"
         },
         {
-            "fieldId": 63,
-            "fieldName": "longI",
+            "fieldId": 62,
+            "fieldName": "longi",
             "fieldType": "String"
         },
         {
-            "fieldId": 64,
-            "fieldName": "nometerAmt",
-            "fieldType": "String"
+            "fieldId": 63,
+            "fieldName": "noMeterAmt",
+            "fieldType": "Float"
         }
     ],
     "changelogDate": "20160314104149",

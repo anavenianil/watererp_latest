@@ -75,6 +75,7 @@ angular.module('watererpApp')
                 drFlag: null,
                 lat: null,
                 longi: null,
+                meterFixDate: null,
                 id: null
             };
         };

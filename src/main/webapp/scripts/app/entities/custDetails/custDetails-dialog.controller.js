@@ -42,6 +42,15 @@ angular.module('watererpApp').controller('CustDetailsDialogController',
         $scope.datePickerForConnDateOpen = function($event) {
             $scope.datePickerForConnDate.status.opened = true;
         };
+        $scope.datePickerForPrevBillMonth = {};
+
+        $scope.datePickerForPrevBillMonth.status = {
+            opened: false
+        };
+
+        $scope.datePickerForPrevBillMonthOpen = function($event) {
+            $scope.datePickerForPrevBillMonth.status.opened = true;
+        };
         $scope.datePickerForMetReadingDt = {};
 
         $scope.datePickerForMetReadingDt.status = {
@@ -50,5 +59,32 @@ angular.module('watererpApp').controller('CustDetailsDialogController',
 
         $scope.datePickerForMetReadingDtOpen = function($event) {
             $scope.datePickerForMetReadingDt.status.opened = true;
+        };
+        $scope.datePickerForMetReadingMo = {};
+
+        $scope.datePickerForMetReadingMo.status = {
+            opened: false
+        };
+
+        $scope.datePickerForMetReadingMoOpen = function($event) {
+            $scope.datePickerForMetReadingMo.status.opened = true;
+        };
+        $scope.datePickerForLastPymtDt = {};
+
+        $scope.datePickerForLastPymtDt.status = {
+            opened: false
+        };
+
+        $scope.datePickerForLastPymtDtOpen = function($event) {
+            $scope.datePickerForLastPymtDt.status.opened = true;
+        };
+        $scope.datePickerForMeterFixDate = {};
+
+        $scope.datePickerForMeterFixDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForMeterFixDateOpen = function($event) {
+            $scope.datePickerForMeterFixDate.status.opened = true;
         };
 }]);
