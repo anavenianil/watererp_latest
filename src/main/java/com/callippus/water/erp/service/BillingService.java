@@ -74,7 +74,7 @@ public class BillingService {
 	LocalDate dTo = null;
 	int newMeterFlag = 0;
 	int unMeteredFlag = 0;
-	
+
 	ConfigurationDetails cd = null;
 
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f,
@@ -105,7 +105,7 @@ public class BillingService {
 		surcharge = 0.0f;
 		total_cess = 0.0f;
 		kl = 0.0f;
-		
+
 	}
 
 	public void processBills(List<BillDetails> bd) {
@@ -127,7 +127,6 @@ public class BillingService {
 		}
 
 		try {
-
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
@@ -136,21 +135,35 @@ public class BillingService {
 					.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
 
-				dFrom = customer.getMetReadingMo();
-				dTo = LocalDate.now();
+				dFrom = LocalDate.of(
+						Integer.parseInt(bill_details.getFromMonth().substring(
+								0, 4)),
+						Integer.parseInt(bill_details.getFromMonth().substring(
+								4, 6)), 1);
+				dTo = LocalDate.of(
+						Integer.parseInt(bill_details.getToMonth().substring(0,
+								4)),
+						Integer.parseInt(bill_details.getToMonth().substring(4,
+								6)), 1);
 
-				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(), customer.getMetReadingDt());
-				
-				newMeterFlag = (days < 15? 1:0);
-				
-				log.debug("########################################");
-				log.debug("          METER BILL CASE");
-				log.debug("########################################");
+				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
+						customer.getMetReadingDt());
+
+				newMeterFlag = (days < 15 ? 1 : 0);
+
+				if (newMeterFlag == 1) {
+					log.debug("########################################");
+					log.debug("          NEW METER BILL CASE (" + days + " days)");
+					log.debug("########################################");
+				} else {
+					log.debug("########################################");
+					log.debug("          METER BILL CASE (" + days + " days)");
+					log.debug("########################################");
+				}
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
-
 				log.debug("Months:" + monthsDiff);
 
 				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
@@ -225,9 +238,9 @@ public class BillingService {
 						+ " for " + monthsDiff + " months.");
 			}
 
-			unMeteredFlag = (bill_details
-					.getCurrentBillType().equals("U") ? 1 : 0);
-			
+			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1
+					: 0);
+
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
 					.findTariffs(dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
@@ -262,17 +275,18 @@ public class BillingService {
 			if (hasSewer)
 				bfd.setSewerageCess(Float.parseFloat(cd.getValue())
 						* bfd.getWaterCess() / 100.0f);
-			
-			cd = configurationDetailsRepository
-					.findOneByName("EWURA");
+
+			cd = configurationDetailsRepository.findOneByName("EWURA");
 
 			log.debug("This is the EWURA Configuration:" + cd.toString());
-			float ewura = ((bfd.getWaterCess() + bfd.getSewerageCess()) * Float.parseFloat(cd.getValue())) / 100.0f;
-						
+			float ewura = ((bfd.getWaterCess() + bfd.getSewerageCess()) * Float
+					.parseFloat(cd.getValue())) / 100.0f;
+
 			bfd.setSurcharge(CPSUtils.round(ewura, 2));
-			
+
 			Float total = bfd.getWaterCess() + bfd.getMeterServiceCharge()
-					+ bfd.getServiceCharge() + bfd.getSewerageCess() + bfd.getSurcharge() + bfd.getOtherCharges();
+					+ bfd.getServiceCharge() + bfd.getSewerageCess()
+					+ bfd.getSurcharge() + bfd.getOtherCharges();
 
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 

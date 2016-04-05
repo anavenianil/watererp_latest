@@ -53,7 +53,7 @@ TariffMasterCustomRepository {
 		String sql = "SELECT tariff_type_master_id,"
 				+ "case when tariff_type_master_id=1 then "
 				+ "case when 1=? then sum(rate * months * min_unmetered_kl) else sum(rate * months * avg_kl)  end " //Unmetered Flag
-				+ "else CASE WHEN 1=? THEN 0 ELSE sum(rate * months) END end " //New Meter Flag
+				+ "else CASE WHEN 1=? THEN SUM(0) ELSE sum(rate * months) END end " //New Meter Flag
 				+ "amount FROM (SELECT a.id tariff_master_id, "
 				+ "tariff_name, "
 				+ "valid_from, "
