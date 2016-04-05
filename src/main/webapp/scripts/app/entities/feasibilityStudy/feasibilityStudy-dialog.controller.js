@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('FeasibilityStudyDialogController', function ($scope, $stateParams, ParseLinks, $state, FeasibilityStudy, DivisionMaster, ZoneMaster,
-    		StreetMaster, ApplicationTxn, User, CategoryMaster) {
+    		StreetMaster, ApplicationTxn, User, CategoryMaster, ApplicationTxnService) {
     	
     	$scope.feasibilityStudy = {};
         $scope.divisionmasters = DivisionMaster.query();
@@ -58,27 +58,33 @@ angular.module('watererpApp')
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
             $scope.isSaving = false;
-            $state.go("feasibilityStudy");
+            $state.go("applicationTxn");
         };
 
         var onSaveError = function (result) {
             $scope.isSaving = false;
         };
 
+        
         $scope.save = function () {
+        	ApplicationTxnService.approveRequest($scope.feasibilityStudy.applicationTxn.id, $scope.feasibilityStudy.remarks);
             $scope.isSaving = true;
             if ($scope.feasibilityStudy.id != null) {
                 FeasibilityStudy.update($scope.feasibilityStudy, onSaveSuccess, onSaveError);
             } else {
-                FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError,
-                		function(){
-                			$scope.clear();
-                });
+                FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError);
             }
         };
+        
+        /*$scope.approvalDetailsSave = function(id, remarks){
+        	$('#approveModal').modal('hide');
+        	//console.log(JSON.stringify($scope.approvalDetails));
+        	ApplicationTxnService.approveRequest(id, remarks);
+        	$state.go('applicationTxn');
+        }*/
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         };
         $scope.datePickerForCreatedDate = {};
 

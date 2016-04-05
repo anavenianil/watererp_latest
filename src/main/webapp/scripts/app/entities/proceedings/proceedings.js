@@ -152,7 +152,7 @@ angular.module('watererpApp')
             })
             .state('proceedingsForAppTxn', {
                 parent: 'proceedings',
-                url: '/ForAppTxn/:applicationId',
+                url: '/ForAppTxn/:applicationTxnId',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'Proceedings'

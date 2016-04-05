@@ -69,7 +69,7 @@ public class FeasibilityStudyResource {
         FeasibilityStudy result = feasibilityStudyRepository.save(feasibilityStudy);
         
         //to save application in workflow history
-        try{
+        /*try{
         	workflowService.getUserDetails();
     		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(feasibilityStudy.getApplicationTxn().getId());
     	    //workflowService.setRemarks(remarks);  
@@ -78,14 +78,14 @@ public class FeasibilityStudyResource {
     	    applicationTxn.setStatus(status);
             workflowService.setRequestStatus(status);
             applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
-            /*if(workflowService.getRequestStatus() == 2){
+            if(workflowService.getRequestStatus() == 2){
             	applicationTxnWorkflowService.updateApplicationTxn(id);        	
-            }*/
+            }
             applicationTxnRepository.save(applicationTxn);
         }
         catch(Exception e){
         	System.out.println(e);
-        }
+        }*/
         
         
         

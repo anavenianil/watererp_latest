@@ -204,7 +204,7 @@ public class ApplicationTxnResource {
         workflowService.setRequestStatus(status);
         applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
         /*if(workflowService.getRequestStatus() == 2){
-        	applicationTxnWorkflowService.updateApplicationTxn(id);        	
+        	applicationTxnWorkflowService.updateApplicationTxn(id);
         }*/
         applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok().build();

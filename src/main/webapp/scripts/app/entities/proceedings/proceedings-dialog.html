@@ -23,217 +23,218 @@
 								ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
 								<option value=""></option>
 							</select> -->
-								<label>File Number</label> <input list="applicationTxn" type=""
-									class="form-control" ng-model="proceedings.applicationTxn.id"
-									 />
-								<datalist id="applicationTxn">
-									<option ng-repeat="applicationTxn in applicationTxns"
-										value="{{applicationTxn.id}}">
-								</datalist>
-							</div>
-							<span> <br>
-								<button type="button"
-									class="btn btn-primary glyphicon glyphicon-search"
-									ng-click="getApplicationTxn(proceedings.applicationTxn.id)"></button>
-							</span>
+							<label>File Number</label> <input list="applicationTxn" type=""
+								class="form-control" ng-model="proceedings.applicationTxn.id" />
+							<datalist id="applicationTxn">
+								<option ng-repeat="applicationTxn in applicationTxns"
+									value="{{applicationTxn.id}}">
+							</datalist>
 						</div>
+						<span> <br>
+							<button type="button"
+								class="btn btn-primary glyphicon glyphicon-search"
+								ng-click="getApplicationTxn(proceedings.applicationTxn.id)"></button>
+						</span>
 					</div>
-					<br>
-					<fieldset>
-						<legend>Items Required</legend>
-						<div class="row">
-							<div class="col-sm-3">
-								<label for="field_materialMaster">Material Name</label>
-							</div>
-							<!-- <div class="col-sm-2">
+				</div>
+				<br>
+				<fieldset>
+					<legend>Items Required</legend>
+					<div class="row">
+						<div class="col-sm-3">
+							<label for="field_materialMaster">Material Name</label>
+						</div>
+						<!-- <div class="col-sm-2">
 								<label class="control-label" for="field_description">Description</label>
 							</div> -->
-							<div class="col-sm-2">
-								<label class="control-label" for="field_unit">Unit</label>
-							</div>
-							<div class="col-sm-2">
-								<label class="control-label" for="field_quantity">Quantity</label>
-							</div>
-							<div class="col-sm-2">
-								<label class="control-label" for="field_ratePerShs">Rate
-									@ Shs</label>
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_amount">Amount</label>
-							</div>
+						<div class="col-sm-2">
+							<label class="control-label" for="field_unit">Unit</label>
 						</div>
-						<hr>
+						<div class="col-sm-2">
+							<label class="control-label" for="field_quantity">Quantity</label>
+						</div>
+						<div class="col-sm-2">
+							<label class="control-label" for="field_ratePerShs">Rate
+								@ Shs</label>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_amount">Amount</label>
+						</div>
+					</div>
+					<hr>
 
-						<div ng-repeat="x in itemArr track by $index">
-							<div class="row">
-								<div class="col-sm-3">
-									<select class="form-control" id="field_materialMaster"
-										name="materialMaster"
-										ng-model="proceedings.itemRequireds[x].materialMaster"
-										ng-change="getMaterialDetail(proceedings.itemRequireds[x].materialMaster.id, x)"
-										ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
-										<option value=""></option>
-									</select>
-								</div>
-								<!-- <div class="col-sm-2">
+					<div ng-repeat="x in itemArr track by $index">
+						<div class="row">
+							<div class="col-sm-3">
+								<select class="form-control" id="field_materialMaster"
+									name="materialMaster"
+									ng-model="proceedings.itemRequireds[x].materialMaster"
+									ng-change="getMaterialDetail(proceedings.itemRequireds[x].materialMaster.id, x)"
+									ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
+									<option value=""></option>
+								</select>
+							</div>
+							<!-- <div class="col-sm-2">
 									<input type="text" class="form-control" name="description"
 										id="field_description"
 										ng-model="proceedings.itemRequireds[x].description" />
 								</div> -->
-								<div class="col-sm-2">
-									<input type="text" class="form-control" name="unit"
-										id="field_unit" ng-model="proceedings.itemRequireds[x].unit" />
-								</div>
-								<div class="col-sm-2">
-
-									<input type="number" class="form-control" name="quantity"
-										id="field_quantity"
-										ng-change="calculateRate(proceedings.itemRequireds[x].quantity, proceedings.itemRequireds[x].ratePerShs, x)"
-										ng-model="proceedings.itemRequireds[x].quantity" />
-								</div>
-								<div class="col-sm-2">
-									<input type="number" class="form-control" name="ratePerShs"
-										id="field_ratePerShs"
-										ng-model="proceedings.itemRequireds[x].ratePerShs" readonly />
-								</div>
-								<div class="col-sm-3">
-									<input type="number" class="form-control" name="amount"
-										id="field_amount"
-										ng-model="proceedings.itemRequireds[x].amount" readonly />
-								</div>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" name="unit"
+									id="field_unit" ng-model="proceedings.itemRequireds[x].unit" />
 							</div>
-							<br>
+							<div class="col-sm-2">
+
+								<input type="number" class="form-control" name="quantity"
+									id="field_quantity"
+									ng-change="calculateRate(proceedings.itemRequireds[x].quantity, proceedings.itemRequireds[x].ratePerShs, x)"
+									ng-model="proceedings.itemRequireds[x].quantity" />
+							</div>
+							<div class="col-sm-2">
+								<input type="number" class="form-control" name="ratePerShs"
+									id="field_ratePerShs"
+									ng-model="proceedings.itemRequireds[x].ratePerShs" readonly />
+							</div>
+							<div class="col-sm-3">
+								<input type="number" class="form-control" name="amount"
+									id="field_amount"
+									ng-model="proceedings.itemRequireds[x].amount" readonly />
+							</div>
 						</div>
 						<br>
-						<button type="button" class="btn btn-primary"
-							ng-click="createItemArr()">
-							<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
-								Items</span>
-						</button>
-						<!-- <button type="button" class="btn btn-danger"
+					</div>
+					<br>
+					<button type="button" class="btn btn-primary"
+						ng-click="createItemArr()">
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+							Items</span>
+					</button>
+					<!-- <button type="button" class="btn btn-danger"
 							ng-click="removeItemArr()">
 							<span class="glyphicon glyphicon-remove"></span>&nbsp;<span>Remove
 								Items</span>
 						</button> -->
-					</fieldset>
-					<hr>
-					<br>
-					<div class="row">
-						<div class="col-sm-10">
-							<label class="control-label" for="field_subTotalA">SubTotalA</label>
-						</div>
-						<div class="col-sm-2">
-							<input type="number" class="form-control" name="subTotalA"
-								id="field_subTotalA" ng-model="proceedings.subTotalA" readonly />
-						</div>
+				</fieldset>
+				<hr>
+				<br>
+				<div class="row">
+					<div class="col-sm-10">
+						<label class="control-label" for="field_subTotalA">SubTotalA</label>
 					</div>
-					<br>
-					<hr>
-					<div class="row">
-						<div class="col-sm-2">
-							<label for="field_supervisionPercent">Supervision (%)</label>
-						</div>
-						<div class="col-sm-1">
-							<!-- <select class="form-control" id="field_supervisionPercent"
+					<div class="col-sm-2">
+						<input type="number" class="form-control" name="subTotalA"
+							id="field_subTotalA" ng-model="proceedings.subTotalA" readonly />
+					</div>
+				</div>
+				<br>
+				<hr>
+				<div class="row">
+					<div class="col-sm-2">
+						<label for="field_supervisionPercent">Supervision (%)</label>
+					</div>
+					<div class="col-sm-1">
+						<!-- <select class="form-control" id="field_supervisionPercent"
 								name="supervisionPercent"
 								ng-model="proceedings.supervisionPercentType"
 								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
 								<option value=""></option>
 							</select> -->
-							<input type="number" class="form-control"
-								name="supervisionPercent" id="field_supervisionPercent"
-								ng-model="proceedings.supervisionPercent" readonly />
-						</div>
-						<div class="col-sm-2 col-md-offset-7">
-							<!-- <label class="control-label" for="field_supervisionCharge">SupervisionCharge</label> -->
-							<input type="number" class="form-control"
-								name="supervisionCharge" id="field_supervisionCharge"
-								ng-model="proceedings.supervisionCharge" readonly />
-						</div>
+						<input type="number" class="form-control"
+							name="supervisionPercent" id="field_supervisionPercent"
+							ng-model="proceedings.supervisionPercent" readonly />
 					</div>
-					<br>
-					<div class="row">
-						<div class="col-sm-2">
-							<label class="control-label" for="field_labourCharge">Labour
-								Charges (%)</label>
-						</div>
-						<div class="col-sm-1">
-							<!-- <label for="field_labourChargePercent">labourChargePercent</label> -->
-							<!-- <select class="form-control" id="field_labourChargePercent"
+					<div class="col-sm-2 col-md-offset-7">
+						<!-- <label class="control-label" for="field_supervisionCharge">SupervisionCharge</label> -->
+						<input type="number" class="form-control" name="supervisionCharge"
+							id="field_supervisionCharge"
+							ng-model="proceedings.supervisionCharge" readonly />
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-2">
+						<label class="control-label" for="field_labourCharge">Labour
+							Charges (%)</label>
+					</div>
+					<div class="col-sm-1">
+						<!-- <label for="field_labourChargePercent">labourChargePercent</label> -->
+						<!-- <select class="form-control" id="field_labourChargePercent"
 								name="labourChargePercent"
 								ng-model="proceedings.labourChargePercent"
 								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
 								<option value=""></option>
 							</select> -->
-							<input type="number" class="form-control"
-								name="labourChargePercent" id="field_labourChargePercent"
-								ng-model="proceedings.labourChargePercent" readonly />
-						</div>
-						<div class="col-sm-2 col-md-offset-7">
-							<input type="number" class="form-control" name="labourCharge"
-								id="field_labourCharge" ng-model="proceedings.labourCharge"
-								readonly />
-						</div>
+						<input type="number" class="form-control"
+							name="labourChargePercent" id="field_labourChargePercent"
+							ng-model="proceedings.labourChargePercent" readonly />
 					</div>
-					<br>
-					<div class="row">
-						<div class="col-sm-2">
-							<label class="control-label" for="field_siteSurvey">SiteSurvey (%)</label>
-						</div>
-						<div class="col-sm-1">
-							<!-- <label for="field_siteSurveyPercent">siteSurveyPercent</label> -->
-							<!-- <select class="form-control" id="field_siteSurveyPercent"
+					<div class="col-sm-2 col-md-offset-7">
+						<input type="number" class="form-control" name="labourCharge"
+							id="field_labourCharge" ng-model="proceedings.labourCharge"
+							readonly />
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-2">
+						<label class="control-label" for="field_siteSurvey">SiteSurvey
+							(%)</label>
+					</div>
+					<div class="col-sm-1">
+						<!-- <label for="field_siteSurveyPercent">siteSurveyPercent</label> -->
+						<!-- <select class="form-control" id="field_siteSurveyPercent"
 								name="siteSurveyPercent"
 								ng-model="proceedings.siteSurveyPercent"
 								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
 								<option value=""></option>
 							</select> -->
-							<input type="number" class="form-control"
-								name="siteSurveyPercent" id="field_siteSurveyPercent"
-								ng-model="proceedings.siteSurveyPercent" readonly />
-						</div>
-						<div class="col-sm-2 col-md-offset-7">
-							<input type="number" class="form-control" name="siteSurvey"
-								id="field_siteSurvey" ng-model="proceedings.siteSurvey" readonly />
-						</div>
+						<input type="number" class="form-control" name="siteSurveyPercent"
+							id="field_siteSurveyPercent"
+							ng-model="proceedings.siteSurveyPercent" readonly />
 					</div>
-					<br>
-					<hr>
-					<div class="row">
-						<div class="col-sm-10">
-							<label class="control-label" for="field_subTotalB">SubTotalB</label>
-						</div>
-						<div class="col-sm-2">
-							<input type="number" class="form-control" name="subTotalB"
-								id="field_subTotalB" ng-model="proceedings.subTotalB" readonly />
-						</div>
+					<div class="col-sm-2 col-md-offset-7">
+						<input type="number" class="form-control" name="siteSurvey"
+							id="field_siteSurvey" ng-model="proceedings.siteSurvey" readonly />
 					</div>
-					<br>
-					<hr>
-					<div class="row">
-						<div class="col-sm-2">
-							<label for="field_ConnectionFeePercent">Connection Fee of A & B (%)</label>
-						</div>
-						<div class="col-sm-1">
-							<!-- <select class="form-control" id="field_ConnectionFeePercent"
+				</div>
+				<br>
+				<hr>
+				<div class="row">
+					<div class="col-sm-10">
+						<label class="control-label" for="field_subTotalB">SubTotalB</label>
+					</div>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" name="subTotalB"
+							id="field_subTotalB" ng-model="proceedings.subTotalB" readonly />
+					</div>
+				</div>
+				<br>
+				<hr>
+				<div class="row">
+					<div class="col-sm-2">
+						<label for="field_ConnectionFeePercent">Connection Fee of
+							A & B (%)</label>
+					</div>
+					<div class="col-sm-1">
+						<!-- <select class="form-control" id="field_ConnectionFeePercent"
 								name="ConnectionFeePercent"
 								ng-model="proceedings.connectionFeePercent"
 								ng-options="percentageMaster as percentageMaster.percentValue for percentageMaster in percentagemasters track by percentageMaster.id">
 								<option value=""></option>
 							</select> -->
-							<input type="number" class="form-control"
-								name="connectionFeePercent" id="field_connectionFeePercent"
-								ng-model="proceedings.connectionFeePercent" readonly />
-						</div>
-						<div class="col-sm-2 col-md-offset-7">
-							<!-- <label class="control-label" for="field_connectionFee">ConnectionFee</label> -->
-							<input type="number" class="form-control" name="connectionFee"
-								id="field_connectionFee" ng-model="proceedings.connectionFee"
-								readonly />
-						</div>
+						<input type="number" class="form-control"
+							name="connectionFeePercent" id="field_connectionFeePercent"
+							ng-model="proceedings.connectionFeePercent" readonly />
 					</div>
-					<br>
-					<!-- <div class="row">
+					<div class="col-sm-2 col-md-offset-7">
+						<!-- <label class="control-label" for="field_connectionFee">ConnectionFee</label> -->
+						<input type="number" class="form-control" name="connectionFee"
+							id="field_connectionFee" ng-model="proceedings.connectionFee"
+							readonly />
+					</div>
+				</div>
+				<br>
+				<!-- <div class="row">
 						<div class="col-sm-10">
 							<label class="control-label" for="field_waterMeterShs">WaterMeterShs</label>
 						</div>
@@ -243,42 +244,52 @@
 						</div>
 					</div>
 					<br> -->
-					<hr>
+				<hr>
+				<div class="row">
+					<div class="col-sm-10">
+						<label class="control-label" for="field_applicationFormFee">Application
+							Form Fee</label>
+					</div>
+					<div class="col-sm-2">
+						<input type="number" class="form-control"
+							name="applicationFormFee" id="field_applicationFormFee"
+							ng-model="proceedings.applicationFormFee" readonly />
+					</div>
+				</div>
+				<br>
+				<hr>
+				<div class="row">
+					<div class="col-sm-10">
+						<label class="control-label" for="field_grandTotal">GrandTotal</label>
+					</div>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" name="grandTotal"
+							id="field_grandTotal" ng-model="proceedings.grandTotal" readonly />
+					</div>
+				</div>
+
+				<fieldset>
+					<legend></legend>
 					<div class="row">
-						<div class="col-sm-10">
-							<label class="control-label" for="field_applicationFormFee">Application
-								Form Fee</label>
-						</div>
-						<div class="col-sm-2">
-							<input type="number" class="form-control"
-								name="applicationFormFee" id="field_applicationFormFee"
-								ng-model="proceedings.applicationFormFee" readonly />
+						<div class="col-sm-12">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<textarea rows="2" cols="30" class="form-control" name="remarks"
+								id="field_remarks" ng-model="proceedings.remarks"></textarea>
 						</div>
 					</div>
-					<br>
-					<hr>
-					<div class="row">
-						<div class="col-sm-10">
-							<label class="control-label" for="field_grandTotal">GrandTotal</label>
-						</div>
-						<div class="col-sm-2">
-							<input type="number" class="form-control" name="grandTotal"
-								id="field_grandTotal" ng-model="proceedings.grandTotal" readonly />
-						</div>
-					</div>
-					<hr>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-					</button>
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-					</button>
-				</div>
+				</fieldset>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal"
+					ng-click="clear()">
+					<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+				</button>
+				<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					class="btn btn-primary">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+				</button>
 			</div>
 		</div>
+	</div>
 	</div>
 </form>

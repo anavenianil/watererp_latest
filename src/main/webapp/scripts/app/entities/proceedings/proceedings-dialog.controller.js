@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('watererpApp').controller('ProceedingsDialogController',
-        function($scope, $state, $stateParams, Proceedings, PercentageMaster, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks) {
+        function($scope, $state, $stateParams, Proceedings, PercentageMaster, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks, 
+        		ApplicationTxnService) {
 
         $scope.proceedings = {};
         //$scope.percentagemasters = PercentageMaster.query();
@@ -9,6 +10,9 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.itemrequireds = ItemRequired.query();
         $scope.materialmasters = MaterialMaster.query();
         $scope.proceedings.itemRequired = {};
+        
+        
+        
         
         $scope.getApplicationTxns = function(){
         	$scope.applicationTxns = [];
@@ -25,7 +29,12 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.getApplicationTxn = function(fileNo){
         	ApplicationTxn.get({id : fileNo}, function(result) {
                 $scope.applicationTxn = result;
+                $scope.proceedings.applicationTxn ={};
+                $scope.proceedings.applicationTxn.id =  $scope.applicationTxn.id;
             });	
+        }
+        if($stateParams.applicationTxnId != null){
+        	$scope.getApplicationTxn($stateParams.applicationTxnId);
         }
         
         $scope.loadAllPercentageMaster = function() {
@@ -79,6 +88,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         };
 
         $scope.save = function () {
+        	ApplicationTxnService.approveRequest($scope.proceedings.applicationTxn.id, $scope.proceedings.remarks);
             $scope.isSaving = true;
             if ($scope.proceedings.id != null) {
                 Proceedings.update($scope.proceedings, onSaveSuccess, onSaveError);

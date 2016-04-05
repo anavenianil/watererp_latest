@@ -5,7 +5,7 @@ angular.module('watererpApp')
     		ApplicationTxnService, RequestWorkflowHistory, ParseLinks) {
         $scope.applicationTxn = entity;
         
-        //$scope.approvalDetails = {};
+        $scope.approvalDetails = {};
         
         $scope.load = function (id) {
             ApplicationTxn.get({id: id}, function(result) {
@@ -21,13 +21,11 @@ angular.module('watererpApp')
         $scope.$on('$destroy', unsubscribe);
         
         //$scope.status = null;
-        /*$scope.getApplicationTxn = function (id, status) {
+        $scope.getApplicationTxn = function (id) {
         	$scope.approvalDetails.approvedDate = new Date();
         	$('#approveModal').modal('show');
-            ApplicationTxn.get({id: id}, function(result) {
-                $scope.applicationTxn = result;
-            });
-        };*/
+            $scope.load(id);
+        };
         
         
         $scope.getWorkflowHistoryByDomainId = function() {
