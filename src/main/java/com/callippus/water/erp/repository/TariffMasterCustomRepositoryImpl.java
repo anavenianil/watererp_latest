@@ -49,11 +49,11 @@ TariffMasterCustomRepository {
 	}
 
 	
-	public List<java.util.Map<String, Object>> findTariffs(LocalDate validFrom, LocalDate validTo, float avgKL, int unmetered_flag){
+	public List<java.util.Map<String, Object>> findTariffs(LocalDate validFrom, LocalDate validTo, float avgKL, int unMeteredFlag, int newMeterFlag){
 		String sql = "SELECT tariff_type_master_id,"
 				+ "case when tariff_type_master_id=1 then "
-				+ "case when 1=? then sum(rate * months * min_unmetered_kl) else sum(rate * months * avg_kl)  end "
-				+ "else CASE WHEN TIMESTAMPDIFF(day,valid_from,valid_to) < 15 THEN 0 ELSE sum(rate * months) END end "
+				+ "case when 1=? then sum(rate * months * min_unmetered_kl) else sum(rate * months * avg_kl)  end " //Unmetered Flag
+				+ "else CASE WHEN 1=? THEN 0 ELSE sum(rate * months) END end " //New Meter Flag
 				+ "amount FROM (SELECT a.id tariff_master_id, "
 				+ "tariff_name, "
 				+ "valid_from, "
@@ -140,7 +140,7 @@ MySQL Sample Query
 		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
 		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList( sql, new Object[]{unmetered_flag, avgKL,avgKL, from,from,
+				.queryForList( sql, new Object[]{unMeteredFlag, newMeterFlag, avgKL,avgKL, from,from,
 						to,to,from,to});
 
 		log.debug("Output from billing query:" + rows);

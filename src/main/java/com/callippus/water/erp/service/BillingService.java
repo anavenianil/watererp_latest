@@ -72,6 +72,8 @@ public class BillingService {
 	int monthsDiff = 0;
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
+	int newMeterFlag = 0;
+	int unMeteredFlag = 0;
 	
 	ConfigurationDetails cd = null;
 
@@ -95,12 +97,15 @@ public class BillingService {
 		monthsDiff = 0;
 		dFrom = null;
 		dTo = null;
+		newMeterFlag = 0;
+		unMeteredFlag = 0;
 
 		total_amount = 0.0f;
 		net_payable_amount = 0.0f;
 		surcharge = 0.0f;
 		total_cess = 0.0f;
 		kl = 0.0f;
+		
 	}
 
 	public void processBills(List<BillDetails> bd) {
@@ -134,6 +139,10 @@ public class BillingService {
 				dFrom = customer.getMetReadingMo();
 				dTo = LocalDate.now();
 
+				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(), customer.getMetReadingDt());
+				
+				newMeterFlag = (days < 15? 1:0);
+				
 				log.debug("########################################");
 				log.debug("          METER BILL CASE");
 				log.debug("########################################");
@@ -216,10 +225,11 @@ public class BillingService {
 						+ " for " + monthsDiff + " months.");
 			}
 
+			unMeteredFlag = (bill_details
+					.getCurrentBillType().equals("U") ? 1 : 0);
+			
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(dFrom, dTo, avgKL, bill_details
-							.getCurrentBillType().equals("U") ? 1 : 0);
-
+					.findTariffs(dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
@@ -241,7 +251,6 @@ public class BillingService {
 							.floatValue());
 				}
 			}
-
 
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
 
