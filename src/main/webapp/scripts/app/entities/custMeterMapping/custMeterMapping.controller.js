@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .controller('CustMeterMappingController', function ($scope, $state, CustMeterMapping, ParseLinks) {
 
         $scope.custMeterMappings = [];

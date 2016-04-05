@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
 	.controller('CustMeterMappingDeleteController', function($scope, $uibModalInstance, entity, CustMeterMapping) {
 
         $scope.custMeterMapping = entity;

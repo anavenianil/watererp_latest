@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .factory('CustMeterMapping', function ($resource, DateUtils) {
         return $resource('api/custMeterMappings/:id', {}, {
             'query': { method: 'GET', isArray: true},

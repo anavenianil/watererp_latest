@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('collDetails', {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .controller('CustMeterMappingDetailController', function ($scope, $rootScope, $stateParams, entity, CustMeterMapping, CustDetails, MeterDetails) {
         $scope.custMeterMapping = entity;
         $scope.load = function (id) {
@@ -8,7 +8,7 @@ angular.module('waterERPApp')
                 $scope.custMeterMapping = result;
             });
         };
-        var unsubscribe = $rootScope.$on('waterERPApp:custMeterMappingUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('watererpApp:custMeterMappingUpdate', function(event, result) {
             $scope.custMeterMapping = result;
         });
         $scope.$on('$destroy', unsubscribe);

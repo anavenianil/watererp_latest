@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('waterERPApp')
+angular.module('watererpApp')
     .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks) {
 
         $scope.custDetailss = [];
