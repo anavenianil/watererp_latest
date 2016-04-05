@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/customerComplaintss',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustomerComplaintss'
                 },
                 views: {
@@ -42,7 +42,7 @@ angular.module('watererpApp')
                 parent: 'customerComplaints',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustomerComplaintss'
                 },
                 views: {

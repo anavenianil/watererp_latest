@@ -51,8 +51,10 @@ angular.module('watererpApp').controller('MainController',
 				{ 
 					$state.go('applicationTxn'); 
 				}
-				 
-
+				else if(type==='INCORRECT BILL')
+				{
+					$state.go('customerComplaints'); 
+ 				}
 			}
 			
 		});
