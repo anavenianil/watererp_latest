@@ -78,4 +78,13 @@ angular.module('waterERPApp').controller('CustDetailsDialogController',
         $scope.datePickerForLastPymtDtOpen = function($event) {
             $scope.datePickerForLastPymtDt.status.opened = true;
         };
+        $scope.datePickerForMeterFixDate = {};
+
+        $scope.datePickerForMeterFixDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForMeterFixDateOpen = function($event) {
+            $scope.datePickerForMeterFixDate.status.opened = true;
+        };
 }]);

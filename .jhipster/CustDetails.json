@@ -211,6 +211,11 @@
             "fieldId": 41,
             "fieldName": "longi",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 42,
+            "fieldName": "meterFixDate",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20160314132343",

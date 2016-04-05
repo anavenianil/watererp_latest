@@ -20,7 +20,8 @@ public interface BillMapper {
         @Mapping(source = "cust_details.metReaderCode", target = "metReaderCode"),
         @Mapping(source = "cust_details.mobileNo", target = "mobileNo"),
         @Mapping(source = "bill_details.lat", target = "lat"),
-        @Mapping(source = "bill_details.longi", target = "longi")
+        @Mapping(source = "bill_details.longi", target = "longi"),
+        @Mapping(source = "cust_details.meterFixDate", target = "meterFixDate")
     })
     BillFullDetails bdToBfd(BillDetails bill_details, CustDetails cust_details);
     

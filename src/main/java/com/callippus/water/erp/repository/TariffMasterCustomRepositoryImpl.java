@@ -53,7 +53,7 @@ TariffMasterCustomRepository {
 		String sql = "SELECT tariff_type_master_id,"
 				+ "case when tariff_type_master_id=1 then "
 				+ "case when 1=? then sum(rate * months * min_unmetered_kl) else sum(rate * months * avg_kl)  end "
-				+ "else  sum(rate * months) end "
+				+ "else CASE WHEN TIMESTAMPDIFF(day,valid_from,valid_to) < 15 THEN 0 ELSE sum(rate * months) END end "
 				+ "amount FROM (SELECT a.id tariff_master_id, "
 				+ "tariff_name, "
 				+ "valid_from, "
@@ -86,28 +86,28 @@ MySQL Sample Query
 
 		SELECT tariff_type_master_id, case when tariff_type_master_id=1 then sum(rate * months * avg_kl) else
        sum(rate * months) end amount
-FROM
-  (SELECT a.id,
-          tariff_name,
-          valid_from,
-          valid_to,
-          tariff_category_master_id,
-          t.rate,
-          case when t.min_kl > 10 then t.min_kl else 10 end avg_kl,
-          TIMESTAMPDIFF(MONTH,valid_from,valid_to) months,
-          t.tariff_type_master_id
-   FROM
-     (SELECT id,tariff_name,(CASE WHEN valid_from < date('2013-10-01') THEN str_to_date('2013-10-01 00:00:00', '%Y-%m-%d %H:%i:%s') ELSE valid_from END) valid_from,
-      FROM
-        (SELECT *
-         FROM tariff_master
-         WHERE unix_timestamp(valid_to) >= unix_timestamp(date('2013-10-01'))) a
-      WHERE active=1
-        AND unix_timestamp(valid_from) <= unix_timestamp(date('2016-03-01') )) a,
-       tariff_charges t
-   WHERE a.id=t.tariff_master_id) a
-group by tariff_type_master_id
-ORDER BY unix_timestamp(valid_from)
+			FROM
+			  (SELECT a.id,
+			          tariff_name,
+			          valid_from,
+			          valid_to,
+			          tariff_category_master_id,
+			          t.rate,
+			          case when t.min_kl > 10 then t.min_kl else 10 end avg_kl,
+			          TIMESTAMPDIFF(MONTH,valid_from,valid_to) months,
+			          t.tariff_type_master_id
+			   FROM
+			     (SELECT id,tariff_name,(CASE WHEN valid_from < date('2013-10-01') THEN str_to_date('2013-10-01 00:00:00', '%Y-%m-%d %H:%i:%s') ELSE valid_from END) valid_from,
+			      FROM
+			        (SELECT *
+			         FROM tariff_master
+			         WHERE unix_timestamp(valid_to) >= unix_timestamp(date('2013-10-01'))) a
+			      WHERE active=1
+			        AND unix_timestamp(valid_from) <= unix_timestamp(date('2016-03-01') )) a,
+			       tariff_charges t
+			   WHERE a.id=t.tariff_master_id) a
+			group by tariff_type_master_id
+			ORDER BY unix_timestamp(valid_from)
 		
 ==================================================================================		
 		<html>

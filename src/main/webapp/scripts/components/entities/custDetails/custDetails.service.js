@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('watererpApp')
+angular.module('waterERPApp')
     .factory('CustDetails', function ($resource, DateUtils) {
         return $resource('api/custDetailss/:id', {}, {
             'query': { method: 'GET', isArray: true},
@@ -13,6 +13,7 @@ angular.module('watererpApp')
                     data.metReadingDt = DateUtils.convertLocaleDateFromServer(data.metReadingDt);
                     data.metReadingMo = DateUtils.convertLocaleDateFromServer(data.metReadingMo);
                     data.lastPymtDt = DateUtils.convertLocaleDateFromServer(data.lastPymtDt);
+                    data.meterFixDate = DateUtils.convertLocaleDateFromServer(data.meterFixDate);
                     return data;
                 }
             },
@@ -24,6 +25,7 @@ angular.module('watererpApp')
                     data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
                     data.metReadingMo = DateUtils.convertLocaleDateToServer(data.metReadingMo);
                     data.lastPymtDt = DateUtils.convertLocaleDateToServer(data.lastPymtDt);
+                    data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
                     return angular.toJson(data);
                 }
             },
@@ -35,6 +37,7 @@ angular.module('watererpApp')
                     data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
                     data.metReadingMo = DateUtils.convertLocaleDateToServer(data.metReadingMo);
                     data.lastPymtDt = DateUtils.convertLocaleDateToServer(data.lastPymtDt);
+                    data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
                     return angular.toJson(data);
                 }
             }
