@@ -83,8 +83,13 @@ public class CustomerComplaintsWorkflowService extends RequestProcessService{
 		String message = "";
 		try {
 
-			setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
+			String complainType = customerComplaints.getComplaintTypeMaster().getComplaintType();
+			if(CPSConstants.INCORRECTBILL.equals(complainType)){
+				setRequestType(CPSConstants.INCORRECTBILL);
+			}
+			//setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
 			//setRequestTypeID(CPSConstants.CUSTOMERCOMPLAINTSID);
+			
 
 			setMessage("success");
 
@@ -164,7 +169,12 @@ public class CustomerComplaintsWorkflowService extends RequestProcessService{
 			workflowService.setHistoryID(l.get(i).getId().toString());
 			workflowService.setDomain_object_id(l.get(i).getDomainObject()
 					.toString());
-			workflowService.setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
+			
+			String complainType = customerComplaints.getComplaintTypeMaster().getComplaintType();
+			if(CPSConstants.INCORRECTBILL.equals(complainType)){
+				workflowService.setRequestType(CPSConstants.INCORRECTBILL);
+			}
+			//workflowService.setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
 			workflowService.getHistoryID();
 			workflowService.setStageID(l.get(i).getRequestStage().toString());
 			workflowService.setStatus(Integer.parseInt(l.get(i)

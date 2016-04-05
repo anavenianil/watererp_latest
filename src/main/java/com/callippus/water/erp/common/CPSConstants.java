@@ -4,6 +4,9 @@ public class CPSConstants {
 	
 		//CUSTOMERCOMPLAINTS
 	public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
+	public static final String INCORRECTBILL = "Incorrect Bill";
+	//public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
+	//public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
 	//public static final String CUSTOMERCOMPLAINTSID = "";
 		//Requisition
 		public static final String REQUISITION = "requisition";

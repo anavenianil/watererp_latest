@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustomerComplaints;
 import com.callippus.water.erp.repository.CustomerComplaintsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -149,4 +151,31 @@ public class CustomerComplaintsResource {
         customerComplaintsRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("customerComplaints", id.toString())).build();
     }
+    
+    
+    /**
+     * this will approve the Customer Complaints Request
+     */
+	@RequestMapping(value = "/customerComplaints/approveCustomerCompaints", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<Void> approveApplication(@RequestParam(value = "id", required = false) Long id,
+						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
+
+		workflowService.getUserDetails();
+		workflowService.getRequestType();
+		CustomerComplaints customerComplaints = customerComplaintsRepository.findOne(id);
+	    workflowService.setRemarks(remarks);  
+	    //Integer status = customerComplaints.getStatus();
+	   // status +=1;
+	    //customerComplaints.setStatus(status);
+       // workflowService.setRequestStatus(status);
+        customerComplaintsWorkflowService.approvedApplicationTxnRequest(customerComplaints);
+        /*if(workflowService.getRequestStatus() == 2){
+        	applicationTxnWorkflowService.updateApplicationTxn(id);        	
+        }*/
+        customerComplaintsRepository.save(customerComplaints);
+        return ResponseEntity.ok().build();
+	}
 }

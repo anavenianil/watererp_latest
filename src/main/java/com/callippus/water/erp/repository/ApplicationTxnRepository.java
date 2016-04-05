@@ -13,5 +13,7 @@ public interface ApplicationTxnRepository extends JpaRepository<ApplicationTxn,L
 	
 	Page<ApplicationTxn> findByStatus(Pageable pageable, Integer status);
 	
+	Page<ApplicationTxn> findAllByOrderByStatusAsc(Pageable pageable);
+	
 
 }

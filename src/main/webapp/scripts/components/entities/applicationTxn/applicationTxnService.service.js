@@ -22,6 +22,11 @@ angular.module('watererpApp')
                 return $http.get('api/applicationTxns/getRequests/' + type + '/' + action_type).then(function (response) {
                     return response.data;
                 });
+            },
+            approveCustomerComplaints: function (id, remarks) {
+                return $http.get('api/customerComplaints/approveCustomerCompaints', {params: {id: id, remarks: remarks}}).then(function (response) {
+                    return response.data;
+                });
             }
             /*,
             getMyRequests: function () {

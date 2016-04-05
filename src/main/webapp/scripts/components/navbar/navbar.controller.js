@@ -5,22 +5,28 @@ angular.module('watererpApp')
         $scope.isAuthenticated = Principal.isAuthenticated;
         $scope.$state = $state;
         $scope.module2MenuItems = {};
+        $scope.orgRole = {};
         //$scope.inProduction = ENV === 'prod';
 
         $scope.logout = function () {
             Auth.logout();
-            $state.go('home');
+            //$state.go('home');
+            $state.go('login');
+            $scope.userRole ="";
         };
         
         $scope.getLogin = function()
         {
         	$scope.user = Principal.getLogonUser();
+        	$scope.orgRole = Principal.getOrgRole();
         	//console.log("User is: "+JSON.stringify($scope.user));
         	if($scope.user == null){
         		$scope.navbarUserId = "";
+        		$scope.userRole ="";
         	}
         	else{
         		$scope.navbarUserId = $scope.user.firstName + " "+$scope.user.lastName +"("+$scope.user.login+")";
+        		$scope.userRole = $scope.orgRole.orgRoleName;
         	}
             //for navbar module and menu_items
             if ($scope.isAuthenticated()) {
@@ -31,11 +37,4 @@ angular.module('watererpApp')
                
         	return $scope.isAuthenticated();
         }
-        
-        /*if ($scope.isAuthenticated()) {
-			$http.get("/api/rest/module2MenuItems/role").success(
-					function(response) {
-						$scope.module2MenuItems = response;
-					});
-		}*/
     });

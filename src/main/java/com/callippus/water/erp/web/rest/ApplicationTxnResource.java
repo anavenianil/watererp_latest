@@ -144,7 +144,7 @@ public class ApplicationTxnResource {
         //Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
         Page<ApplicationTxn> page;
         if(status == null){
-        	page = applicationTxnRepository.findAll(pageable);
+        	page = applicationTxnRepository.findAllByOrderByStatusAsc(pageable);
         }
         else
         {
