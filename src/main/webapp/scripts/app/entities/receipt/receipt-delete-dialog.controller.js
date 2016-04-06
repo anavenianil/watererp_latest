@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('watererpApp')
-	.controller('BillOfMaterialDeleteController', function($scope, $uibModalInstance, entity, BillOfMaterial) {
+	.controller('ReceiptDeleteController', function($scope, $uibModalInstance, entity, Receipt) {
 
-        $scope.billOfMaterial = entity;
+        $scope.receipt = entity;
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
         $scope.confirmDelete = function (id) {
-            BillOfMaterial.delete({id: id},
+            Receipt.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
                 });

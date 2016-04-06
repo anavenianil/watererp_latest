@@ -1,9 +1,8 @@
-
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create Bill Of Material</h3>
+			<h3 class="panel-title pull-left">Create receipt</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -13,12 +12,12 @@
 						<div class="col-sm-4">
 							<label for="id">ID</label> <input type="text"
 								class="form-control" id="id" name="id"
-								ng-model="billOfMaterial.id" readonly />
+								ng-model="receipt.id" readonly />
 						</div>
 						<div class="col-sm-4">
 							<label for="field_applicationTxn">Application No.</label> <select
 								class="form-control" id="field_applicationTxn"
-								name="applicationTxn" ng-model="billOfMaterial.applicationTxn"
+								name="applicationTxn" ng-model="receipt.applicationTxn"
 								ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
 								<option value=""></option>
 							</select>
@@ -29,7 +28,7 @@
 								<div class='input-group date' id='field_billDate'>
 									<input id="field_billDate" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="billOfMaterial.billDate"
+										ng-model="receipt.billDate"
 										is-open="datePickerForBillDate.status.opened" /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
@@ -45,7 +44,7 @@
 						<div class="col-sm-4">
 							<label for="field_paymentTypes">Payment Type</label> <select
 								class="form-control" id="field_paymentTypes" name="paymentTypes"
-								ng-model="billOfMaterial.paymentTypes"
+								ng-model="receipt.paymentTypes"
 								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id">
 								<option value=""></option>
 							</select>
@@ -56,7 +55,7 @@
 								<div class='input-group date' id='field_checkOrDdDate'>
 									<input id="field_checkOrDdDate" type="text"
 										class="form-control" uib-datepicker-popup="{{dateformat}}"
-										ng-model="billOfMaterial.checkOrDdDate"
+										ng-model="receipt.checkOrDdDate"
 										is-open="datePickerForCheckOrDdDate.status.opened" /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
@@ -70,24 +69,24 @@
 						<div class="col-sm-4">
 							<label class="control-label" for="field_checkOrDdNo">Check/DD No.</label>
 							<input type="text" class="form-control" name="checkOrDdNo"
-								id="field_checkOrDdNo" ng-model="billOfMaterial.checkOrDdNo" />
+								id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_amount">Amount</label> <input
 								type="number" class="form-control" name="amount"
-								id="field_amount" ng-model="billOfMaterial.amount" />
+								id="field_amount" ng-model="receipt.amount" />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_bankName">Bank Name</label>
 							<input type="text" class="form-control" name="bankName"
-								id="field_bankName" ng-model="billOfMaterial.bankName" />
+								id="field_bankName" ng-model="receipt.bankName" />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_branchName">Branch Name</label>
 							<input type="text" class="form-control" name="branchName"
-								id="field_branchName" ng-model="billOfMaterial.branchName" />
+								id="field_branchName" ng-model="receipt.branchName" />
 						</div>
 					</div>
 				</div>

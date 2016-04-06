@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('BillOfMaterialController', function ($scope, $state, BillOfMaterial) {
+    .controller('ReceiptController', function ($scope, $state, Receipt) {
 
-        $scope.billOfMaterials = [];
+        $scope.receipts = [];
         $scope.loadAll = function() {
-            BillOfMaterial.query(function(result) {
-               $scope.billOfMaterials = result;
+            Receipt.query(function(result) {
+               $scope.receipts = result;
             });
         };
         $scope.loadAll();
@@ -18,7 +18,7 @@ angular.module('watererpApp')
         };
 
         $scope.clear = function () {
-            $scope.billOfMaterial = {
+            $scope.receipt = {
                 amount: null,
                 bankName: null,
                 branchName: null,

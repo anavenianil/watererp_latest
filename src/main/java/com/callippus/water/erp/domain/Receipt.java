@@ -11,12 +11,12 @@ import java.util.Set;
 import java.util.Objects;
 
 /**
- * A BillOfMaterial.
+ * A Receipt.
  */
 @Entity
-@Table(name = "bill_of_material")
+@Table(name = "receipt")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class BillOfMaterial implements Serializable {
+public class Receipt implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -128,11 +128,11 @@ public class BillOfMaterial implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        BillOfMaterial billOfMaterial = (BillOfMaterial) o;
-        if(billOfMaterial.id == null || id == null) {
+        Receipt receipt = (Receipt) o;
+        if(receipt.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, billOfMaterial.id);
+        return Objects.equals(id, receipt.id);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class BillOfMaterial implements Serializable {
 
     @Override
     public String toString() {
-        return "BillOfMaterial{" +
+        return "Receipt{" +
             "id=" + id +
             ", amount='" + amount + "'" +
             ", bankName='" + bankName + "'" +

@@ -1,13 +1,13 @@
 <div>
-    <h2>BillOfMaterials</h2>
+    <h2>Receipts</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="billOfMaterial.new" >
+                <button class="btn btn-primary" ui-sref="receipt.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span 
-                       >Create new BillOfMaterial
+                       >Create new Receipt
                     </span>
                 </button>
             </div>
@@ -31,36 +31,36 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="billOfMaterial in billOfMaterials track by billOfMaterial.id">
-                    <td><a ui-sref="billOfMaterial.detail({id:billOfMaterial.id})">{{billOfMaterial.id}}</a></td>
-                    <td>{{billOfMaterial.amount}}</td>
-                    <td>{{billOfMaterial.bankName}}</td>
-                    <td>{{billOfMaterial.branchName}}</td>
-                        <td>{{billOfMaterial.checkOrDdDate | date:'mediumDate'}}</td>
-                    <td>{{billOfMaterial.checkOrDdNo}}</td>
-                        <td>{{billOfMaterial.billDate | date:'mediumDate'}}</td>
+                <tr ng-repeat="receipt in receipts track by receipt.id">
+                    <td><a ui-sref="receipt.detail({id:receipt.id})">{{receipt.id}}</a></td>
+                    <td>{{receipt.amount}}</td>
+                    <td>{{receipt.bankName}}</td>
+                    <td>{{receipt.branchName}}</td>
+                        <td>{{receipt.checkOrDdDate | date:'mediumDate'}}</td>
+                    <td>{{receipt.checkOrDdNo}}</td>
+                        <td>{{receipt.billDate | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="applicationTxn.detail({id:billOfMaterial.applicationTxn.id})">{{billOfMaterial.applicationTxn.id}}</a>
+                        <a ui-sref="applicationTxn.detail({id:receipt.applicationTxn.id})">{{receipt.applicationTxn.id}}</a>
                     </td>
                     <td>
-                        <a ui-sref="paymentTypes.detail({id:billOfMaterial.paymentTypes.id})">{{billOfMaterial.paymentTypes.paymentMode}}</a>
+                        <a ui-sref="paymentTypes.detail({id:receipt.paymentTypes.id})">{{receipt.paymentTypes.paymentMode}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="billOfMaterial.detail({id:billOfMaterial.id})"
+                                    ui-sref="receipt.detail({id:receipt.id})"
                                     class="btn btn-info btn-sm"> 
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="billOfMaterial.edit({id:billOfMaterial.id})"
+                                    ui-sref="receipt.edit({id:receipt.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="billOfMaterial.delete({id:billOfMaterial.id})"
+                                    ui-sref="receipt.delete({id:receipt.id})"
                                     class="btn btn-danger btn-sm">                                    
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>

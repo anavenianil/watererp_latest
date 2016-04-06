@@ -3,51 +3,51 @@
 angular.module('watererpApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('billOfMaterial', {
+            .state('receipt', {
                 parent: 'entity',
-                url: '/billOfMaterials',
+                url: '/receipts',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'BillOfMaterials'
+                    pageTitle: 'Receipts'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterials.html',
-                        controller: 'BillOfMaterialController'
+                        templateUrl: 'scripts/app/entities/receipt/receipts.html',
+                        controller: 'ReceiptController'
                     }
                 },
                 resolve: {
                 }
             })
-            .state('billOfMaterial.detail', {
+            .state('receipt.detail', {
                 parent: 'entity',
-                url: '/billOfMaterial/{id}',
+                url: '/receipt/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'BillOfMaterial'
+                    pageTitle: 'Receipt'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-detail.html',
-                        controller: 'BillOfMaterialDetailController'
+                        templateUrl: 'scripts/app/entities/receipt/receipt-detail.html',
+                        controller: 'ReceiptDetailController'
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'BillOfMaterial', function($stateParams, BillOfMaterial) {
-                        return BillOfMaterial.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'Receipt', function($stateParams, Receipt) {
+                        return Receipt.get({id : $stateParams.id});
                     }]
                 }
             })
-            /*.state('billOfMaterial.new', {
-                parent: 'billOfMaterial',
+            /*.state('receipt.new', {
+                parent: 'receipt',
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-dialog.html',
-                        controller: 'BillOfMaterialDialogController',
+                        templateUrl: 'scripts/app/entities/receipt/receipt-dialog.html',
+                        controller: 'ReceiptDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -63,85 +63,85 @@ angular.module('watererpApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('billOfMaterial', null, { reload: true });
+                        $state.go('receipt', null, { reload: true });
                     }, function() {
-                        $state.go('billOfMaterial');
+                        $state.go('receipt');
                     })
                 }]
             })*/
-            /*.state('billOfMaterial.edit', {
-                parent: 'billOfMaterial',
+            /*.state('receipt.edit', {
+                parent: 'receipt',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-dialog.html',
-                        controller: 'BillOfMaterialDialogController',
+                        templateUrl: 'scripts/app/entities/receipt/receipt-dialog.html',
+                        controller: 'ReceiptDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['BillOfMaterial', function(BillOfMaterial) {
-                                return BillOfMaterial.get({id : $stateParams.id});
+                            entity: ['Receipt', function(Receipt) {
+                                return Receipt.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('billOfMaterial', null, { reload: true });
+                        $state.go('receipt', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })*/
-            .state('billOfMaterial.delete', {
-                parent: 'billOfMaterial',
+            .state('receipt.delete', {
+                parent: 'receipt',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-delete-dialog.html',
-                        controller: 'BillOfMaterialDeleteController',
+                        templateUrl: 'scripts/app/entities/receipt/receipt-delete-dialog.html',
+                        controller: 'ReceiptDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['BillOfMaterial', function(BillOfMaterial) {
-                                return BillOfMaterial.get({id : $stateParams.id});
+                            entity: ['Receipt', function(Receipt) {
+                                return Receipt.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('billOfMaterial', null, { reload: true });
+                        $state.go('receipt', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('billOfMaterial.new', {
-                parent: 'billOfMaterial',
+            .state('receipt.new', {
+                parent: 'receipt',
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'BillOfMaterials'
+                    pageTitle: 'Receipts'
                 },
                 views: {
                     'content@': {
-                    	templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-dialog.html',
-                        controller: 'BillOfMaterialDialogController'
+                    	 templateUrl: 'scripts/app/entities/receipt/receipt-dialog.html',
+                         controller: 'ReceiptDialogController'
                     }
                 },
                 resolve: {
                 }
             })
-            .state('billOfMaterial.edit', {
-                parent: 'billOfMaterial',
+            .state('receipt.edit', {
+                parent: 'receipt',
                 url: '/edit/:id',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'BillOfMaterials'
+                    pageTitle: 'Receipts'
                 },
                 views: {
                     'content@': {
-                    	templateUrl: 'scripts/app/entities/billOfMaterial/billOfMaterial-dialog.html',
-                        controller: 'BillOfMaterialDialogController'
+                    	 templateUrl: 'scripts/app/entities/receipt/receipt-dialog.html',
+                         controller: 'ReceiptDialogController'
                     }
                 },
                 resolve: {

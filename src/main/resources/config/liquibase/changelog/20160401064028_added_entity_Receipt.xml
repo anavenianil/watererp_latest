@@ -14,10 +14,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity BillOfMaterial.
+        Added the entity Receipt.
     -->
     <changeSet id="20160401064028" author="jhipster">
-        <createTable tableName="bill_of_material">
+        <createTable tableName="receipt">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -39,14 +39,14 @@
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="application_txn_id"
-                                 baseTableName="bill_of_material"
-                                 constraintName="fk_billofmaterial_applicationtxn_id"
+                                 baseTableName="receipt"
+                                 constraintName="fk_receipt_applicationtxn_id"
                                  referencedColumnNames="id"
                                  referencedTableName="application_txn"/>
 
         <addForeignKeyConstraint baseColumnNames="payment_types_id"
-                                 baseTableName="bill_of_material"
-                                 constraintName="fk_billofmaterial_paymenttypes_id"
+                                 baseTableName="receipt"
+                                 constraintName="fk_receipt_paymenttypes_id"
                                  referencedColumnNames="id"
                                  referencedTableName="payment_types"/>
 

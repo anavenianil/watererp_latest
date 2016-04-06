@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the BillOfMaterial entity.
+ * Performance test for the Receipt entity.
  */
-class BillOfMaterialGatlingTest extends Simulation {
+class ReceiptGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class BillOfMaterialGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the BillOfMaterial entity")
+    val scn = scenario("Test the Receipt entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class BillOfMaterialGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all billOfMaterials")
-            .get("/api/billOfMaterials")
+            exec(http("Get all receipts")
+            .get("/api/receipts")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new billOfMaterial")
-            .post("/api/billOfMaterials")
+            .exec(http("Create new receipt")
+            .post("/api/receipts")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "amount":null, "bankName":"SAMPLE_TEXT", "branchName":"SAMPLE_TEXT", "checkOrDdDate":"2020-01-01T00:00:00.000Z", "checkOrDdNo":"SAMPLE_TEXT", "billDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_billOfMaterial_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_receipt_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created billOfMaterial")
-                .get("${new_billOfMaterial_url}")
+                exec(http("Get created receipt")
+                .get("${new_receipt_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created billOfMaterial")
-            .delete("${new_billOfMaterial_url}")
+            .exec(http("Delete created receipt")
+            .delete("${new_receipt_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

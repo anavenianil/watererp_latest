@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>BillOfMaterial</span> {{billOfMaterial.id}}</h2>
+    <h2><span>Receipt</span> {{receipt.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -15,7 +15,7 @@
                     <span>Amount</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billOfMaterial.amount}}</span>
+                    <span class="form-control-static">{{receipt.amount}}</span>
                 </td>
             </tr>
             <tr>
@@ -23,7 +23,7 @@
                     <span>BankName</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billOfMaterial.bankName}}</span>
+                    <span class="form-control-static">{{receipt.bankName}}</span>
                 </td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
                     <span>BranchName</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billOfMaterial.branchName}}</span>
+                    <span class="form-control-static">{{receipt.branchName}}</span>
                 </td>
             </tr>
             <tr>
@@ -39,7 +39,7 @@
                     <span>CheckOrDdDate</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billOfMaterial.checkOrDdDate | date:'mediumDate'}}</span>
+                    <span class="form-control-static">{{receipt.checkOrDdDate | date:'mediumDate'}}</span>
                 </td>
             </tr>
             <tr>
@@ -47,7 +47,7 @@
                     <span>CheckOrDdNo</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billOfMaterial.checkOrDdNo}}</span>
+                    <span class="form-control-static">{{receipt.checkOrDdNo}}</span>
                 </td>
             </tr>
             <tr>
@@ -55,7 +55,7 @@
                     <span>BillDate</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billOfMaterial.billDate | date:'mediumDate'}}</span>
+                    <span class="form-control-static">{{receipt.billDate | date:'mediumDate'}}</span>
                 </td>
             </tr>
             <tr>
@@ -63,7 +63,7 @@
                     <span>applicationTxn</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:billOfMaterial.applicationTxn.id})">{{billOfMaterial.applicationTxn.id}}</a>
+                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:receipt.applicationTxn.id})">{{receipt.applicationTxn.id}}</a>
                 </td>
             </tr>
             <tr>
@@ -71,7 +71,7 @@
                     <span>paymentTypes</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="paymentTypes.detail({id:billOfMaterial.paymentTypes.id})">{{billOfMaterial.paymentTypes.paymentMode}}</a>
+                    <a class="form-control-static" ui-sref="paymentTypes.detail({id:receipt.paymentTypes.id})">{{receipt.paymentTypes.paymentMode}}</a>
                 </td>
             </tr>
             </tbody>

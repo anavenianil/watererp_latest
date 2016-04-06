@@ -1,26 +1,24 @@
 'use strict';
 
-angular.module('watererpApp').controller('BillOfMaterialDialogController',
-        function($scope, $state, $stateParams, BillOfMaterial, ApplicationTxn, PaymentTypes) {
+angular.module('watererpApp').controller('ReceiptDialogController',
+        function($scope, $stateParams, $state, Receipt, ApplicationTxn, PaymentTypes) {
 
-        $scope.billOfMaterial = {};
+        $scope.receipt = {};
         $scope.applicationtxns = ApplicationTxn.query();
         $scope.paymenttypess = PaymentTypes.query();
-        
         $scope.load = function(id) {
-            BillOfMaterial.get({id : id}, function(result) {
-                $scope.billOfMaterial = result;
+            Receipt.get({id : id}, function(result) {
+                $scope.receipt = result;
             });
         };
-        
+
         if($stateParams.id != null){
         	$scope.load($stateParams.id);
         }
-
         var onSaveSuccess = function (result) {
-            $scope.$emit('watererpApp:billOfMaterialUpdate', result);
+            $scope.$emit('watererpApp:receiptUpdate', result);
             $scope.isSaving = false;
-            $state.go('billOfMaterial');
+            $state.go('receipt');
         };
 
         var onSaveError = function (result) {
@@ -29,10 +27,10 @@ angular.module('watererpApp').controller('BillOfMaterialDialogController',
 
         $scope.save = function () {
             $scope.isSaving = true;
-            if ($scope.billOfMaterial.id != null) {
-                BillOfMaterial.update($scope.billOfMaterial, onSaveSuccess, onSaveError);
+            if ($scope.receipt.id != null) {
+                Receipt.update($scope.receipt, onSaveSuccess, onSaveError);
             } else {
-                BillOfMaterial.save($scope.billOfMaterial, onSaveSuccess, onSaveError);
+                Receipt.save($scope.receipt, onSaveSuccess, onSaveError);
             }
         };
 
