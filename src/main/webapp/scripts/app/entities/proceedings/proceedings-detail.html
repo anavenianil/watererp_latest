@@ -1,134 +1,221 @@
-
 <div>
-    <h2><span>Proceedings</span> {{proceedings.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <span>SubTotalA</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.subTotalA}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SupervisionCharge</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.supervisionCharge}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>LabourCharge</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.labourCharge}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SiteSurvey</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.siteSurvey}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>SubTotalB</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.subTotalB}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>ConnectionFee</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.connectionFee}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>WaterMeterShs</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.waterMeterShs}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>ApplicationFormFee</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.applicationFormFee}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>GrandTotal</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{proceedings.grandTotal}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>supervisionPercent</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="percentageMaster.detail({id:proceedings.supervisionPercent.id})">{{proceedings.supervisionPercent.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>labourChargePercent</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="percentageMaster.detail({id:proceedings.labourChargePercent.id})">{{proceedings.labourChargePercent.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>siteSurveyPercent</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="percentageMaster.detail({id:proceedings.siteSurveyPercent.id})">{{proceedings.siteSurveyPercent.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>ConnectionFeePercent</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="percentageMaster.detail({id:proceedings.connectionFeePercent.id})">{{proceedings.connectionFeePercent.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>applicationTxn</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="applicationTxn.detail({id:proceedings.applicationTxn.id})">{{proceedings.applicationTxn.id}}</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+	<div>
+		<h2>
+			<span>Proceedings</span> {{proceedings.id}}
+		</h2>
+		<div>
+			<div class="panel panel-primary">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title pull-left">Proceedings for New
+						Connection</h3>
+				</div>
+				<div class="list-group">
+					<div class="list-group-item">
+						<br> <br>
+						<fieldset>
+							<legend>Bill Of Materials</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_materialMaster">Material Name</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_unit">Unit</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_quantity">Quantity</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_ratePerShs">Rate
+										@ Shs</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_amount">Amount</label>
+								</div>
+							</div>
+							<hr>
+							<div ng-repeat="itemRequired in itemRequireds track by $index">
+								<div class="row">
+									<div class="col-sm-4">
+										<span>{{itemRequired.materialMaster.materialName}}</span>
+									</div>
+									<div class="col-sm-2">
+										<span>{{itemRequired.unit}}</span>
+									</div>
+									<div class="col-sm-2">
+										<span>{{itemRequired.quantity}}</span>
+									</div>
+									<div class="col-sm-2">
+										<span>{{itemRequired.ratePerShs}}</span>
+									</div>
+									<div class="col-sm-2">
+										<span>{{itemRequired.amount}}</span>
+									</div>
+								</div>
+							</div>
+							<hr>
+							<br>
+							<div class="row">
+								<div class="col-sm-10">
+									<label> A. Sub Total </label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.subTotalA}}</h5>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-10">
+									<label> Supervision (%)</label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.supervisionCharge}}</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10">
+									<label>Labour Charges (%)</label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.labourCharge}}</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10">
+									<label>SiteSurvey (%)</label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.siteSurvey}}</h5>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-10">
+									<label>SubTotalB</label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.subTotalB}}</h5>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-10">
+									<label>Connection Fee of A & B (%)</label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.connectionFee}}</h5>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-10">
+									<label>Application Form Fee</label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.applicationFormFee}}</h5>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-10">
+									<label>GrandTotal</label>
+								</div>
+								<div class="col-sm-2">
+									<h5 class="list-group-item-heading">{{proceedings.grandTotal}}</h5>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+					</div>
+				</div>
+			</div>
 
-    <button type="submit"
-            onclick="window.history.back()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
+			<button type="button" class="btn btn-success pull-right"
+				ng-click="getApplicationTxn(proceedings.applicationTxn.id)">
+				<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+			</button>
+
+			<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+
+			<button type="button" class="btn btn-danger pull-right"
+				ng-click="decline()">
+				<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
+			</button>
+		</div>
+
+		<button type="submit" onclick="window.history.back()"
+			class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+				Back</span>
+		</button>
+	</div>
+	<div id="approveModal" class="modal" name="aproveForm">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form name="editForm" role="form" novalidate>
+					<div class="panel panel-primary">
+						<div class="panel-heading clearfix">
+							<h3 class="panel-title pull-left">Application Approval
+								Details</h3>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true" ng-click="clear()">&times;</button>
+						</div>
+						<div class="list-group">
+							<div class="list-group-item">
+								<div class="modal-body">
+									<jh-alert-error></jh-alert-error>
+									<div class="row">
+										<div class="col-sm-3">
+											<label for="field_applicationTxn">Application No. </label> <input
+												type="text" class="form-control" name="applicationTxn"
+												id="field_applicationTxn" ng-model="applicationTxnId"
+												disabled />
+										</div>
+										<div class="col-sm-3">
+											<label class="control-label" for="field_approvedDate">Approved
+												Date</label>
+											<div class="form-group">
+												<div class='input-group date' id='field_approvedDate'>
+													<input id="field_approvedDate" type="text"
+														class="form-control" uib-datepicker-popup="{{dateformat}}"
+														ng-model="approvalDetails.approvedDate"
+														is-open="datePickerForApprovedDate.status.opened" /> <span
+														class="input-group-btn">
+														<button type="button" class="btn btn-default"
+															ng-click="datePickerForApprovedDateOpen($event)">
+															<i class="glyphicon glyphicon-calendar"></i>
+														</button>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<label class="control-label" for="field_remarks">Remarks</label>
+											<textarea rows="4" cols="50" class="form-control"
+												name="remarks" id="field_remarks" max="20"
+												ng-model="proceedings.remarks"></textarea>
+										</div>
+									</div>
+									<br>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal" ng-click="clear()">
+										<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+									</button>
+									<button type="button"
+										ng-disabled="editForm.$invalid || isSaving"
+										class="btn btn-primary"
+										ng-click="approvalDetailsSave(proceedings.applicationTxn.id, proceedings.remarks)">
+										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

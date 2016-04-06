@@ -146,5 +146,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('receiptForAppTxn', {
+                parent: 'receipt',
+                url: '/receiptForAppTxn/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Receipt'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/receipt/receipt-dialog.html',
+                        controller: 'ReceiptDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

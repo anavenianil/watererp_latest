@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('ReceiptDialogController',
-        function($scope, $stateParams, $state, Receipt, ApplicationTxn, PaymentTypes) {
+        function($scope, $stateParams, $state, Receipt, ApplicationTxn, PaymentTypes, ApplicationTxnService) {
 
         $scope.receipt = {};
         $scope.applicationtxns = ApplicationTxn.query();
@@ -26,6 +26,7 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         };
 
         $scope.save = function () {
+        	ApplicationTxnService.approveRequest($scope.receipt.applicationTxn.id, $scope.receipt.remarks);
             $scope.isSaving = true;
             if ($scope.receipt.id != null) {
                 Receipt.update($scope.receipt, onSaveSuccess, onSaveError);

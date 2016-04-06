@@ -150,23 +150,43 @@
 
 
 		<!-- ng-show="{{applicationTxn.status==0}}" -->
-		<button type="button" class="btn btn-success pull-right"  ng-show="applicationTxn.status === 0"
+		<button type="button" class="btn btn-success pull-right"  
+			ng-show="applicationTxn.status === 0 || applicationTxn.status === 1"
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===1"
+			ng-show="applicationTxn.status===2"
 			ui-sref="feasibilityStudyForAppTxn({applicationId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create
 			Feasibility
 		</button>
 		
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===2"
+			ng-show="applicationTxn.status===3"
 			ui-sref="proceedingsForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create
 			Proceedings
+		</button>
+		
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===4"
+			ui-sref="proceedings.detail({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Review
+			Proceedings
+		</button>
+		
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===5"
+			ui-sref="proceedings.detail({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Issues Items
+		</button>
+		
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===6"
+			ui-sref="receiptForAppTxn({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
 
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
