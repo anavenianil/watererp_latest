@@ -37,8 +37,7 @@
 					<table class="jh-table table table-striped">
 						<thead>
 							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
-								<th jh-sort-by="id"><span>ID</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
+								<th><span>S.No.</span></th>
 								<th jh-sort-by="fullName"><span>Full Name</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="category"><span>Category</span> <span
@@ -84,8 +83,7 @@
 							infinite-scroll-disabled="links['last'] == page">
 							<tr
 								ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
-								<td><a
-									ui-sref="applicationTxn.detail({id:applicationTxn.id})">{{applicationTxn.id}}</a></td>
+								<td>{{$index+1}}</td>
 								<td>{{applicationTxn.fullName}}</td>
 								<td>{{applicationTxn.categoryMaster.categoryName}}</td>
 								<td>{{applicationTxn.area}}</td>

@@ -27,6 +27,11 @@ angular.module('watererpApp')
                 return $http.get('api/customerComplaints/approveCustomerCompaints', {params: {id: id, remarks: remarks}}).then(function (response) {
                     return response.data;
                 });
+            },
+            declineRequest: function (id) {
+                return $http.get('api/applicationTxns/declineRequest', {params: {id: id}}).then(function (response) {
+                    return response.data;
+                });
             }
             /*,
             getMyRequests: function () {
@@ -35,12 +40,7 @@ angular.module('watererpApp')
                 });
             }*/
         
-        /*,
-            declineRequest: function (id) {
-                return $http.get('api/applicationTxns/declineRequest', {params: {id: id}}).then(function (response) {
-                    return response.data;
-                });
-            }*/
+        
             /*,
             search: function (applicationTxnNo, applicationTxnDt, proposedDt, statusSearch) {
                 return $http.get('api/applicationTxns/search', {params: {applicationTxnNo: applicationTxnNo, applicationTxnDt: applicationTxnDt, proposedDt: proposedDt, statusSearch: statusSearch}}).then(function (response) {

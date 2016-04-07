@@ -54,7 +54,7 @@ angular.module('watererpApp')
 			ApplicationTxnService.declineRequest(id).then(
 					function(data) {
 						$scope.applicationTxn = data;
-						$state.go('home');
+						$state.go('applicationTxn');
 					});
 		};
 

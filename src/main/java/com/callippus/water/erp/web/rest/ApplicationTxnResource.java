@@ -214,7 +214,7 @@ public class ApplicationTxnResource {
     /**
      * Decline the request
      */
-    /*@RequestMapping(value = "/applicationTxns/declineRequest",
+    @RequestMapping(value = "/applicationTxns/declineRequest",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -225,7 +225,7 @@ public class ApplicationTxnResource {
 		
 		applicationTxnWorkflowService.declineRequest(id);
 		return ResponseEntity.ok().build();
-	}*/
+	}
     
     
     /**
