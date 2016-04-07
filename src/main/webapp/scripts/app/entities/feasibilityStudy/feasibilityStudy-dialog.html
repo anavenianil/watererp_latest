@@ -11,26 +11,6 @@
 					<div class="modal-body">
 						<jh-alert-error></jh-alert-error>
 						<div class="row">
-							<!-- <div class="col-sm-4">
-								<label for="field_applicationTxn">applicationTxn</label> <select
-									class="form-control" id="field_applicationTxn"
-									name="applicationTxn"
-									ng-change="getApplicationTxn(feasibilityStudy.applicationTxn.id)"
-									ng-model="feasibilityStudy.applicationTxn"
-									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationTxns track by applicationTxn.id">
-									<option value=""></option>
-								</select>
-							</div> -->
-							<!-- <div class="col-sm-3">
-								<label>File Number</label> <input type="text"
-									class="form-control" id="field_fileNo" name="fileNo"
-									ng-model="feasibilityStudy.fileNo">
-							</div>
-							<span> <br>
-								<button type="button"
-									class="btn btn-primary glyphicon glyphicon-search"
-									ng-click="getApplicationTxn(feasibilityStudy.fileNo)"></button>
-							</span> -->
 							<div class="col-sm-3">
 								<label>File Number</label> <input list="applicationTxn" type=""
 									class="form-control"
@@ -102,53 +82,6 @@
 						<fieldset>
 							<legend>Connection Details</legend>
 							<div class="row">
-								<!-- <div class="col-sm-4">
-									<label for="id">ID</label> <input type="text"
-										class="form-control" id="id" name="id"
-										ng-model="feasibilityStudy.id" readonly />
-								</div>
-								<div class="col-sm-4">
-									<label class="control-label" for="field_createdDate">CreatedDate</label>
-									<div class="form-group">
-										<div class="input-group date" id="field_createdDate">
-											<input id="field_createdDate" type="text"
-												class="form-control" uib-datepicker-popup="{{dateformat}}"
-												ng-model="feasibilityStudy.createdDate"
-												is-open="datePickerForCreatedDate.status.opened" /> <span
-												class="input-group-btn">
-												<button type="button" class="btn btn-default"
-													ng-click="datePickerForCreatedDateOpen($event)">
-													<i class="glyphicon glyphicon-calendar"></i>
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-sm-4">
-									<label class="control-label" for="field_modifiedDate">ModifiedDate</label>
-									<div class="form-group">
-										<div class="input-group date" id="field_modifiedDate">
-											<input id="field_modifiedDate" type="text"
-												class="form-control" uib-datepicker-popup="{{dateformat}}"
-												ng-model="feasibilityStudy.modifiedDate"
-												is-open="datePickerForModifiedDate.status.opened" /> <span
-												class="input-group-btn">
-												<button type="button" class="btn btn-default"
-													ng-click="datePickerForModifiedDateOpen($event)">
-													<i class="glyphicon glyphicon-calendar"></i>
-												</button>
-											</span>
-										</div>
-									</div>
-								</div> 
-								<div class="col-sm-4">
-									<label class="control-label" for="field_status">Status</label>
-									<input type="text" class="form-control" name="status"
-										id="field_status" ng-model="feasibilityStudy.status" />
-								</div> -->
-							</div>
-							<div class="row">
 								<div class="col-sm-4">
 									<label for="field_categoryMaster">categoryMaster</label> <select
 										class="form-control" id="field_categoryMaster"
@@ -203,7 +136,7 @@
 										class="form-control" id="field_preparedBy" name="preparedBy"
 										ng-model="feasibilityStudy.preparedBy"
 										ng-change="getpreparedByName(feasibilityStudy.preparedBy)"
-										ng-options="user as user.login for user in users track by user.id">
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
 										<option value=""></option>
 									</select>
 									<!-- <input list="preparedBy" type="" class="form-control"
@@ -227,6 +160,7 @@
 											<input id="field_preparedDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
 												ng-model="feasibilityStudy.preparedDate"
+												max-date="maxDate"
 												is-open="datePickerForPreparedDate.status.opened" /> <span
 												class="input-group-btn">
 												<button type="button" class="btn btn-default"
@@ -245,7 +179,7 @@
 										id="field_approvedByZonalHead" name="approvedByZonalHead"
 										ng-model="feasibilityStudy.approvedByZonalHead"
 										ng-change="getZonalHeadName(feasibilityStudy.approvedByZonalHead)"
-										ng-options="user as user.login for user in users track by user.id">
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
 										<option value=""></option>
 									</select>
 								</div>
@@ -262,6 +196,7 @@
 											<input id="field_zonalHeadApprovalDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
 												ng-model="feasibilityStudy.zonalHeadApprovalDate"
+												max-date="maxDate"
 												is-open="datePickerForZonalHeadApprovalDate.status.opened" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-default"
@@ -281,7 +216,7 @@
 										name="inspectionByDepartmentHead"
 										ng-model="feasibilityStudy.inspectionByDepartmentHead"
 										ng-change="getDeparmentHeadName(feasibilityStudy.inspectionByDepartmentHead)"
-										ng-options="user as user.login for user in users track by user.id">
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
 										<option value=""></option>
 									</select>
 								</div>
@@ -301,6 +236,7 @@
 											<input id="field_deptHeadInspectedDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
 												ng-model="feasibilityStudy.deptHeadInspectedDate"
+												max-date="maxDate"
 												is-open="datePickerForDeptHeadInspectedDate.status.opened" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-default"
@@ -321,7 +257,7 @@
 										name="approvedByOperationManager"
 										ng-model="feasibilityStudy.approvedByOperationManager"
 										ng-change="getOperationManagerName(feasibilityStudy.approvedByOperationManager)"
-										ng-options="user as user.login for user in users track by user.id">
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
 										<option value=""></option>
 									</select>
 								</div>

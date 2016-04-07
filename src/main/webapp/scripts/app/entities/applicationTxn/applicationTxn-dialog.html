@@ -16,12 +16,12 @@
 										class="form-control" id="id" name="id"
 										ng-model="applicationTxn.id" readonly />
 								</div>
-								<div class="col-sm-3">
+								<!-- <div class="col-sm-3">
 									<label class="control-label" for="field_fileNumber">File
 										Number</label> <input type="text" class="form-control"
 										name="fileNumber" id="field_fileNumber"
 										ng-model="applicationTxn.fileNumber" readonly />
-								</div>
+								</div> -->
 								<div class="col-sm-3">
 									<label class="control-label" for="field_requestedDate">Requested
 										Date</label>
@@ -30,6 +30,7 @@
 											<input id="field_requestedDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
 												ng-model="applicationTxn.requestedDate"
+												max-date="dtmax"
 												is-open="datePickerForRequestedDate.status.opened" required />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-default"
@@ -138,7 +139,21 @@
 										id="field_poBox" ng-model="applicationTxn.poBox" required />
 								</div>
 							</div>
-							<br>
+						</fieldset>
+						<br>
+						<fieldset>
+							<div class="row">
+								<div class="col-sm-12">
+									<label class="control-label" for="field_detailAddress">Address
+										Details</label>
+									<textarea rows="4" cols="50" class="form-control"
+										name="detailAddress" id="field_detailAddress" maxlength="255"
+										style="resize: none" ng-model="applicationTxn.detailAddress"></textarea>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
 							<div class="row">
 								<div class="col-sm-6">
 									<label class="control-label" for="field_villageExecutiveOffice">Village
@@ -158,15 +173,7 @@
 								</div>
 							</div>
 							<br>
-							<div class="row">
-								<div class="col-sm-12">
-									<label class="control-label" for="field_detailAddress">Address
-										Details</label>
-									<textarea rows="4" cols="50" class="form-control"
-										name="detailAddress" id="field_detailAddress" maxlength="255"
-										style="resize: none" ng-model="applicationTxn.detailAddress"></textarea>
-								</div>
-							</div>
+
 						</fieldset>
 						<br>
 						<fieldset>
@@ -206,9 +213,13 @@
 						<!-- <h4 class="modal-title">Confirmation message</h4> -->
 					</div>
 					<div class="modal-body">
-						<p><h3>Request Submitted Successfully!</h3></p>
+						<p>
+						<h3>Request Submitted Successfully!</h3>
+						</p>
 						<div>
-							<h4><label>Application No.:&nbsp;&nbsp; </label>{{applicationTxn.id}}</h4>
+							<h4>
+								<label>Application No.:&nbsp;&nbsp; </label>{{applicationTxn.id}}
+							</h4>
 						</div>
 						<!-- <div>
 							<label>File No.: </label>{{applicationTxn.fileNumber}}

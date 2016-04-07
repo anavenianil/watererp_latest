@@ -58,7 +58,7 @@
 					<fieldset>
 						<legend></legend>
 						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-3" ng-hide="applicationTxn.fileNumber===null">
 								<label>File Number</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.fileNumber}}</h5>
 							</div>
@@ -172,22 +172,26 @@
 		
 		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===4"
-			ui-sref="proceedings.detail({applicationTxnId:applicationTxn.id})">
+			ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Review
 			Proceedings
 		</button>
 		
-		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===5"
-			ui-sref="proceedings.detail({applicationTxnId:applicationTxn.id})">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Issues Items
-		</button>
+		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 		
 		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===6"
 			ui-sref="receiptForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
+		
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===5"
+			ui-sref="itemRequiredForApplicationTxn({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Items
+		</button>
+		
+		
 
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
@@ -241,6 +245,7 @@
 													<input id="field_approvedDate" type="text"
 														class="form-control" uib-datepicker-popup="{{dateformat}}"
 														ng-model="approvalDetails.approvedDate"
+														max-date="maxDate"
 														is-open="datePickerForApprovedDate.status.opened" /> <span
 														class="input-group-btn">
 														<button type="button" class="btn btn-default"

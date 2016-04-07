@@ -11,7 +11,6 @@
 				</div>
 				<div class="list-group">
 					<div class="list-group-item">
-						<br> <br>
 						<fieldset>
 							<legend>Bill Of Materials</legend>
 							<div class="row">
@@ -117,7 +116,7 @@
 							<hr>
 							<div class="row">
 								<div class="col-sm-10">
-									<label>GrandTotal</label>
+									<label>Grand Total</label>
 								</div>
 								<div class="col-sm-2">
 									<h5 class="list-group-item-heading">{{proceedings.grandTotal}}</h5>
@@ -129,7 +128,7 @@
 				</div>
 			</div>
 
-			<button type="button" class="btn btn-success pull-right"
+			<!-- <button type="button" class="btn btn-success pull-right"
 				ng-click="getApplicationTxn(proceedings.applicationTxn.id)">
 				<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 			</button>
@@ -139,6 +138,10 @@
 			<button type="button" class="btn btn-danger pull-right"
 				ng-click="decline()">
 				<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
+			</button> -->
+			<button type="button" class="btn btn-success pull-right"
+				ui-sref="receiptForAppTxn({applicationTxnId:proceedings.applicationTxn.id})">
+				<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 			</button>
 		</div>
 

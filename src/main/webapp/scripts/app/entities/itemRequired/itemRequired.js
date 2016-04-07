@@ -113,5 +113,21 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('itemRequiredForApplicationTxn', {
+                parent: 'entity',
+                url: '/itemRequireds/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'ItemRequireds'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/itemRequired/itemRequireds.html',
+                        controller: 'ItemRequiredController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

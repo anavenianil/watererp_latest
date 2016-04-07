@@ -165,5 +165,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('proceedingsDetailForAppTxn', {
+                parent: 'proceedings',
+                url: '/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Proceedings'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/proceedings/proceedings-detail.html',
+                        controller: 'ProceedingsDetailController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

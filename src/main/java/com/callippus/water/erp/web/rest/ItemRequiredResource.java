@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.ItemRequired;
+import com.callippus.water.erp.domain.Proceedings;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ItemRequiredRepository;
 import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -43,6 +46,9 @@ public class ItemRequiredResource {
     
     @Inject
     private ProceedingsRepository proceedingsRepository;
+    
+    @Inject
+    private ApplicationTxnRepository applicationTxnRepository;
     
     /**
      * POST  /itemRequireds -> Create a new itemRequired.
@@ -88,17 +94,23 @@ public class ItemRequiredResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<ItemRequired>> getAllItemRequireds(Pageable pageable,
-    		@RequestParam(value = "proceedingsId", required = false) Long proceedingsId)
+    		@RequestParam(value = "proceedingsId", required = false) Long proceedingsId,
+    		@RequestParam(value = "applicationTxnId", required = false) Long applicationTxnId)
         throws URISyntaxException {
         log.debug("REST request to get a page of ItemRequireds");
         //Page<ItemRequired> page = itemRequiredRepository.findAll(pageable);
         Page<ItemRequired> page;
-        if(proceedingsId == null){
-        	page = itemRequiredRepository.findAll(pageable);
+        if(proceedingsId != null){
+        	page = itemRequiredRepository.findByProceedings(pageable, proceedingsId);
+        }
+        else if(applicationTxnId != null){
+        	ApplicationTxn applicationTxn = applicationTxnRepository.findOne(applicationTxnId);
+        	Proceedings proceedings = proceedingsRepository.findByApplicationTxn(applicationTxn);
+        	page = itemRequiredRepository.findByProceedings(pageable, proceedings.getId());
         }
         else
         {
-        	page = itemRequiredRepository.findByProceedings(pageable, proceedingsId);
+        	page = itemRequiredRepository.findAll(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/itemRequireds");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

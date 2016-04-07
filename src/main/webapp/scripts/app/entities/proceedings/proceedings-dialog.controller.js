@@ -11,9 +11,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.materialmasters = MaterialMaster.query();
         $scope.proceedings.itemRequired = {};
         
-        
-        
-        
+
         $scope.getApplicationTxns = function(){
         	$scope.applicationTxns = [];
         	ApplicationTxn.query({page: $scope.page, status: 0}, function(result, headers) {
@@ -80,7 +78,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
             $scope.$emit('watererpApp:proceedingsUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('proceedings');
+            $state.go('applicationTxn');
         };
 
         var onSaveError = function (result) {

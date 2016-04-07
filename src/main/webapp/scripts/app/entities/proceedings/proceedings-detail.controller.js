@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ProceedingsDetailController', function ($scope, $rootScope, $stateParams, entity, Proceedings, PercentageMaster, 
-    		ApplicationTxn, ItemRequired, ParseLinks, ApplicationTxnService, $state) {
-        $scope.proceedings = entity;
+    .controller('ProceedingsDetailController', function ($scope, $rootScope, $stateParams, Proceedings, PercentageMaster, 
+    		ApplicationTxn, ItemRequired, ParseLinks, ApplicationTxnService, $state, ProceedingsService) {
+        $scope.proceedings = {};
         $scope.approvalDetails = {};
         $scope.load = function (id) {
             Proceedings.get({id: id}, function(result) {
@@ -19,6 +19,13 @@ angular.module('watererpApp')
                 for (var i = 0; i < result.length; i++) {
                     $scope.itemRequireds.push(result[i]);
                 }
+            });
+        }
+        
+        if($stateParams.applicationTxnId != null){
+        	ProceedingsService.get({applicationTxn: $stateParams.applicationTxnId}, function(result) {
+                $scope.proceedings = result;
+                $scope.itemRequireds = $scope.proceedings.itemRequireds;
             });
         }
         

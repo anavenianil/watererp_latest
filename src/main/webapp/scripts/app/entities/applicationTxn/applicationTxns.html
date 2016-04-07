@@ -1,16 +1,6 @@
 <div>
 	<h2>ApplicationTxns</h2>
 	<jh-alert></jh-alert>
-	<!-- <div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-4 no-padding-left">
-				<button class="btn btn-primary" ui-sref="applicationTxn.new">
-					<span class="glyphicon glyphicon-plus"></span> <span>Create
-						new ApplicationTxn </span>
-				</button>
-			</div>
-		</div>
-	</div> -->
 	<br />
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -21,7 +11,7 @@
 				<div class="table-responsive">
 					<div class="row">
 						<div class="col-sm-3">
-							<label>File Number</label> <input list="applicationTxn" type=""
+							<label>Application No.</label> <input list="applicationTxn" type=""
 								class="form-control" ng-model="applicationTxnId" />
 							<datalist id="applicationTxn">
 								<option ng-repeat="applicationTxn in applicationTxns"
@@ -34,6 +24,7 @@
 								ui-sref="applicationTxn.detail({id:applicationTxnId})"></button>
 						</span>
 					</div>
+					<hr>
 					<table class="jh-table table table-striped">
 						<thead>
 							<tr jh-sort="predicate" ascending="reverse" callback="reset()">

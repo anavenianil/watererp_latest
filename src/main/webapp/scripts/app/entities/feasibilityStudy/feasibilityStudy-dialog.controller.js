@@ -20,6 +20,8 @@ angular.module('watererpApp')
             });
         }
         
+        $scope.maxDate = new Date();
+        
         //get applicationTxn by id
         $scope.getApplicationTxn = function(fileNo){
         	ApplicationTxn.get({id : fileNo}, function(result) {

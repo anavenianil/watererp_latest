@@ -65,31 +65,8 @@ public class FeasibilityStudyResource {
         feasibilityStudy.setCreatedDate(now);
         feasibilityStudy.setModifiedDate(now);
         feasibilityStudy.setStatus(0);
-        
+
         FeasibilityStudy result = feasibilityStudyRepository.save(feasibilityStudy);
-        
-        //to save application in workflow history
-        /*try{
-        	workflowService.getUserDetails();
-    		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(feasibilityStudy.getApplicationTxn().getId());
-    	    //workflowService.setRemarks(remarks);  
-    	    Integer status = applicationTxn.getStatus();
-    	    status +=1;
-    	    applicationTxn.setStatus(status);
-            workflowService.setRequestStatus(status);
-            applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
-            if(workflowService.getRequestStatus() == 2){
-            	applicationTxnWorkflowService.updateApplicationTxn(id);        	
-            }
-            applicationTxnRepository.save(applicationTxn);
-        }
-        catch(Exception e){
-        	System.out.println(e);
-        }*/
-        
-        
-        
-        
         
         return ResponseEntity.created(new URI("/api/feasibilityStudys/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("feasibilityStudy", result.getId().toString()))

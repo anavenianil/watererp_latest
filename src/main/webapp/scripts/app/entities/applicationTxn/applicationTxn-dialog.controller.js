@@ -13,6 +13,7 @@ angular.module('watererpApp')
          }
     	
     	$scope.applicationTxn.requestedDate = new Date();
+    	$scope.dtmax = new Date();
     	//$scope.applicationTxn.requestedDate = DateUtils.convertDateTimeFromServer(new Date());
     	/*$scope.applicationTxn.requestedDate = DateService.getServerDate();
     	console.log($scope.applicationTxn.requestedDate);*/

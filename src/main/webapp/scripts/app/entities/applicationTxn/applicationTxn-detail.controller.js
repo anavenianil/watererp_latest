@@ -7,6 +7,8 @@ angular.module('watererpApp')
         
         $scope.approvalDetails = {};
         
+        $scope.maxDate = new Date();
+        
         $scope.load = function (id) {
             ApplicationTxn.get({id: id}, function(result) {
                 $scope.applicationTxn = result;
@@ -44,7 +46,6 @@ angular.module('watererpApp')
         
         $scope.approvalDetailsSave = function(id, remarks){
         	$('#approveModal').modal('hide');
-        	//console.log(JSON.stringify($scope.approvalDetails));
         	ApplicationTxnService.approveRequest(id, remarks);
         	$state.go('applicationTxn');
         }
