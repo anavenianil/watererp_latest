@@ -142,7 +142,7 @@ public class BillingService {
 					&& bill_details.getCurrentBillType().equals("M")) {
 
 				dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
-				dTo =  bill_details.getMetReadingDt().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1);
+				dTo =  bill_details.getMetReadingDt().withDayOfMonth(1);
 
 				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
 						customer.getMetReadingDt());
