@@ -12,18 +12,10 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Description</span>
+                    <span>Provided</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{itemRequired.description}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Unit</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{itemRequired.unit}}</span>
+                    <span class="form-control-static">{{itemRequired.provided}}</span>
                 </td>
             </tr>
             <tr>
@@ -80,6 +72,14 @@
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="proceedings.detail({id:itemRequired.proceedings.id})">{{itemRequired.proceedings.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>uom</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="uom.detail({id:itemRequired.uom.id})">{{itemRequired.uom.id}}</a>
                 </td>
             </tr>
             </tbody>

@@ -22,7 +22,7 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         
         if($stateParams.applicationTxnId != null){
         	//alert($stateParams.applicationTxnId);
-        	ProceedingsService.get({applicationTxn: $stateParams.applicationTxnId}, function(result) {
+        	ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
                 $scope.proceedings = result;
                 $scope.receipt.applicationTxn = $scope.proceedings.applicationTxn; 
                 $scope.receipt.amount = $scope.proceedings.grandTotal;

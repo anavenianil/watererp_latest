@@ -1,182 +1,82 @@
 <div>
-	<form name="editForm" role="form" novalidate ng-submit="save()">
-
-		<div class="panel panel-primary">
-			<div class="panel-heading clearfix">
-				<h3 class="panel-title pull-left">Create A Connection</h3>
-			</div>
-			<div class="list-group">
-				<div class="list-group-item">
-					<div class="modal-body">
-						<jh-alert-error></jh-alert-error>
-						<div class="row">
-							<div class="col-sm-3">
-								<label for="id">ID</label>
-							</div>
-							<div class="col-sm-3">
-								<label for="field_materialMaster">Material</label>
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_quantity">Quantity
-									Required</label>
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_provided">Provided</label>
-							</div>
-						</div>
-
-						<div class="row" ng-repeat="itemRequired in itemRequireds">
-							<div class="col-sm-3">
-								<input type="text" class="form-control" id="id" name="id"
-									ng-model="itemRequired.id" readonly />
-							</div>
-							<div class="col-sm-3">
-								<input type="text" class="form-control" name="materialMaster"
-									id="field_materialMaster"
-									ng-model="itemRequired.materialMaster.materialName" disabled />
-								<!--  <select
-									class="form-control" id="field_materialMaster"
-									name="materialMaster" ng-model="itemRequired.materialMaster"
-									ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
-									<option value=""></option>
-								</select> -->
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" name="quantity"
-									id="field_quantity" ng-model="itemRequired.quantity" disabled />
-							</div>
-							<div class="col-sm-3">
-								<input type="number" class="form-control" name="provided"
-									id="field_provided" ng-model="itemRequired.provided"
-									max=itemRequired.quantity />
-							</div>
-						</div>
-						<br>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							ng-click="clear()">
-							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-						</button>
-						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-							class="btn btn-primary">
-							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
+    <h2>ItemRequireds</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="itemRequired.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new ItemRequired
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="provided"><span>Provided</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantity"><span>Quantity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ratePerShs"><span>RatePerShs</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="materialMaster.materialName"><span>materialMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applicationTxn.id"><span>applicationTxn</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="feasibilityStudy.id"><span>feasibilityStudy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="proceedings.id"><span>proceedings</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="uom.id"><span>uom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="itemRequired in itemRequireds track by itemRequired.id">
+                    <td><a ui-sref="itemRequired.detail({id:itemRequired.id})">{{itemRequired.id}}</a></td>
+                    <td>{{itemRequired.provided}}</td>
+                    <td>{{itemRequired.quantity}}</td>
+                    <td>{{itemRequired.ratePerShs}}</td>
+                    <td>{{itemRequired.amount}}</td>
+                    <td>
+                        <a ui-sref="materialMaster.detail({id:itemRequired.materialMaster.id})">{{itemRequired.materialMaster.materialName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="applicationTxn.detail({id:itemRequired.applicationTxn.id})">{{itemRequired.applicationTxn.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="feasibilityStudy.detail({id:itemRequired.feasibilityStudy.id})">{{itemRequired.feasibilityStudy.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="proceedings.detail({id:itemRequired.proceedings.id})">{{itemRequired.proceedings.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="uom.detail({id:itemRequired.uom.id})">{{itemRequired.uom.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="itemRequired.detail({id:itemRequired.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="itemRequired.edit({id:itemRequired.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="itemRequired.delete({id:itemRequired.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div>
-	<h2>ItemRequireds</h2>
-	<jh-alert></jh-alert>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-4 no-padding-left">
-				<button class="btn btn-primary" ui-sref="itemRequired.new">
-					<span class="glyphicon glyphicon-plus"></span> <span>Create
-						new ItemRequired </span>
-				</button>
-			</div>
-		</div>
-	</div>
-	<br />
-	<div class="table-responsive">
-		<table class="jh-table table table-striped">
-			<thead>
-				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
-					<th jh-sort-by="id"><span>ID</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="description"><span>Description</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="unit"><span>Unit</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="quantity"><span>Quantity</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="ratePerShs"><span>RatePerShs</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="amount"><span>Amount</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="materialMaster.materialName"><span>materialMaster</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="applicationTxn.id"><span>applicationTxn</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="feasibilityStudy.id"><span>feasibilityStudy</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="proceedings.id"><span>proceedings</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody infinite-scroll="loadPage(page + 1)"
-				infinite-scroll-disabled="links['last'] == page">
-				<tr
-					ng-repeat="itemRequired in itemRequireds track by itemRequired.id">
-					<td><a ui-sref="itemRequired.detail({id:itemRequired.id})">{{itemRequired.id}}</a></td>
-					<td>{{itemRequired.description}}</td>
-					<td>{{itemRequired.unit}}</td>
-					<td>{{itemRequired.quantity}}</td>
-					<td>{{itemRequired.ratePerShs}}</td>
-					<td>{{itemRequired.amount}}</td>
-					<td><a
-						ui-sref="materialMaster.detail({id:itemRequired.materialMaster.id})">{{itemRequired.materialMaster.materialName}}</a>
-					</td>
-					<td><a
-						ui-sref="applicationTxn.detail({id:itemRequired.applicationTxn.id})">{{itemRequired.applicationTxn.id}}</a>
-					</td>
-					<td><a
-						ui-sref="feasibilityStudy.detail({id:itemRequired.feasibilityStudy.id})">{{itemRequired.feasibilityStudy.id}}</a>
-					</td>
-					<td><a
-						ui-sref="proceedings.detail({id:itemRequired.proceedings.id})">{{itemRequired.proceedings.id}}</a>
-					</td>
-					<td class="text-right">
-						<div class="btn-group flex-btn-group-container">
-							<button type="submit"
-								ui-sref="itemRequired.detail({id:itemRequired.id})"
-								class="btn btn-info btn-sm">
-								<span class="glyphicon glyphicon-eye-open"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-							<button type="submit"
-								ui-sref="itemRequired.edit({id:itemRequired.id})"
-								class="btn btn-primary btn-sm">
-								<span class="glyphicon glyphicon-pencil"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-							<button type="submit"
-								ui-sref="itemRequired.delete({id:itemRequired.id})"
-								class="btn btn-danger btn-sm">
-								<span class="glyphicon glyphicon-remove-circle"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
- -->

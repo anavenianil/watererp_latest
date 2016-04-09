@@ -168,14 +168,14 @@ angular.module('watererpApp')
             })
             .state('proceedingsDetailForAppTxn', {
                 parent: 'proceedings',
-                url: '/:applicationTxnId',
+                url: '/ForAppTxnDetail/:applicationTxnId',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'Proceedings'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/proceedings/proceedings-detail.html',
+                    	templateUrl: 'scripts/app/entities/proceedings/proceedings-detail.html',
                         controller: 'ProceedingsDetailController'
                     }
                 },

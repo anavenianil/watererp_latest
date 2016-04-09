@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('itemRequired.new', {
+            /*.state('itemRequired.new', {
                 parent: 'itemRequired',
                 url: '/new',
                 data: {
@@ -52,8 +52,7 @@ angular.module('watererpApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    description: null,
-                                    unit: null,
+                                    provided: null,
                                     quantity: null,
                                     ratePerShs: null,
                                     amount: null,
@@ -67,8 +66,8 @@ angular.module('watererpApp')
                         $state.go('itemRequired');
                     })
                 }]
-            })
-            .state('itemRequired.edit', {
+            })*/
+            /*.state('itemRequired.edit', {
                 parent: 'itemRequired',
                 url: '/{id}/edit',
                 data: {
@@ -90,7 +89,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('itemRequired.delete', {
                 parent: 'itemRequired',
                 url: '/{id}/delete',
@@ -114,17 +113,49 @@ angular.module('watererpApp')
                     })
                 }]
             })
-            .state('itemRequiredForApplicationTxn', {
-                parent: 'entity',
-                url: '/itemRequireds/:applicationTxnId',
+            .state('itemRequired.new', {
+                parent: 'itemRequired',
+                url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'ItemRequireds'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/itemRequired/itemRequireds.html',
-                        controller: 'ItemRequiredController'
+                    	templateUrl: 'scripts/app/entities/itemRequired/itemRequired-dialog.html',
+                        controller: 'ItemRequiredDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('itemRequired.edit', {
+                parent: 'itemRequired',
+                url: '/edit/:id',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'ItemRequireds'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/itemRequired/itemRequired-dialog.html',
+                        controller: 'ItemRequiredDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+             .state('itemRequiredForApplicationTxn', {
+                parent: 'itemRequired',
+                url: '/provide/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'ItemRequireds'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/itemRequired/itemRequired-dialog.html',
+                        controller: 'ItemRequiredDialogController'
                     }
                 },
                 resolve: {

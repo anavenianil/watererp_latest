@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,11 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.Proceedings;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ItemRequiredRepository;
 import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -45,6 +48,9 @@ public class ProceedingsResource {
     @Inject
     private ItemRequiredRepository itemRequiredRepository;
     
+    @Inject
+    private ApplicationTxnRepository applicationTxnRepository;
+    
     /**
      * POST  /proceedingss -> Create a new proceedings.
      */
@@ -57,7 +63,15 @@ public class ProceedingsResource {
         if (proceedings.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("proceedings", "idexists", "A new proceedings cannot already have an ID")).body(null);
         }
+        ApplicationTxn applicationTxn = proceedings.getApplicationTxn();
+        List<ItemRequired> itemRequireds = proceedings.getItemRequireds();
+        Iterator<ItemRequired> iterator = itemRequireds.iterator();
+        while(iterator.hasNext()){
+          iterator.next().setApplicationTxn(applicationTxn);
+        }
+        
         Proceedings result = proceedingsRepository.save(proceedings);
+        
         return ResponseEntity.created(new URI("/api/proceedingss/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("proceedings", result.getId().toString()))
             .body(result);
@@ -130,12 +144,13 @@ public class ProceedingsResource {
     /**
      * GET  /proceedingss/:applicationTxn -> get the "applicationTxn" proceedings.
      */
-    @RequestMapping(value = "/proceedingss/custom/{applicationTxn}",
+    @RequestMapping(value = "/proceedingss/custom/{applicationTxnId}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Proceedings> getProceedingsByApplicationTxn(@PathVariable ApplicationTxn applicationTxn) {
-        log.debug("REST request to get Proceedings : {}", applicationTxn);
+    public ResponseEntity<Proceedings> getProceedingsByApplicationTxn(@PathVariable Long applicationTxnId) {
+        log.debug("REST request to get Proceedings : {}", applicationTxnId);
+        ApplicationTxn applicationTxn = applicationTxnRepository.getOne(applicationTxnId);
         Proceedings proceedings = proceedingsRepository.findByApplicationTxn(applicationTxn);
         List<ItemRequired> itemRequireds = itemRequiredRepository.findByProceedings(proceedings);
         proceedings.setItemRequireds(itemRequireds);

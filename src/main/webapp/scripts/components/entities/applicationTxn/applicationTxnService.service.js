@@ -32,6 +32,11 @@ angular.module('watererpApp')
                 return $http.get('api/applicationTxns/declineRequest', {params: {id: id}}).then(function (response) {
                     return response.data;
                 });
+            },
+            getProceedings: function (applicationTxnId) {
+                return $http.get('api/proceedingss/custom', {params: {applicationTxnId: applicationTxnId}}).then(function (response) {
+                    return response.data;
+                });
             }
             /*,
             getMyRequests: function () {

@@ -2,20 +2,15 @@
 
 describe('Controller Tests', function() {
 
-    describe('ItemRequired Detail Controller', function() {
+    describe('Uom Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockItemRequired, MockMaterialMaster, MockApplicationTxn, MockFeasibilityStudy, MockProceedings, MockUom;
+        var MockEntity, MockUom;
         var createController;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
-            MockItemRequired = jasmine.createSpy('MockItemRequired');
-            MockMaterialMaster = jasmine.createSpy('MockMaterialMaster');
-            MockApplicationTxn = jasmine.createSpy('MockApplicationTxn');
-            MockFeasibilityStudy = jasmine.createSpy('MockFeasibilityStudy');
-            MockProceedings = jasmine.createSpy('MockProceedings');
             MockUom = jasmine.createSpy('MockUom');
             
 
@@ -23,22 +18,17 @@ describe('Controller Tests', function() {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
-                'ItemRequired': MockItemRequired,
-                'MaterialMaster': MockMaterialMaster,
-                'ApplicationTxn': MockApplicationTxn,
-                'FeasibilityStudy': MockFeasibilityStudy,
-                'Proceedings': MockProceedings,
                 'Uom': MockUom
             };
             createController = function() {
-                $injector.get('$controller')("ItemRequiredDetailController", locals);
+                $injector.get('$controller')("UomDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'watererpApp:itemRequiredUpdate';
+                var eventType = 'watererpApp:uomUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

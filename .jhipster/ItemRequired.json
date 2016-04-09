@@ -27,31 +27,33 @@
             "otherEntityName": "proceedings",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "uom",
+            "otherEntityName": "uom",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "description",
-            "fieldType": "String"
+            "fieldName": "provided",
+            "fieldType": "Integer"
         },
         {
             "fieldId": 2,
-            "fieldName": "unit",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 3,
             "fieldName": "quantity",
             "fieldType": "Integer"
         },
         {
-            "fieldId": 4,
+            "fieldId": 3,
             "fieldName": "ratePerShs",
             "fieldType": "BigDecimal"
         },
         {
-            "fieldId": 5,
+            "fieldId": 4,
             "fieldName": "amount",
             "fieldType": "BigDecimal"
         }

@@ -1,15 +1,21 @@
+
 'use strict';
 
 angular.module('watererpApp').controller('ProceedingsDialogController',
         function($scope, $state, $stateParams, Proceedings, PercentageMaster, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks, 
-        		ApplicationTxnService) {
+        		ApplicationTxnService, Uom) {
 
         $scope.proceedings = {};
         //$scope.percentagemasters = PercentageMaster.query();
         //$scope.applicationtxns = ApplicationTxn.query();
         $scope.itemrequireds = ItemRequired.query();
         $scope.materialmasters = MaterialMaster.query();
+        $scope.uoms = Uom.query();
         $scope.proceedings.itemRequired = {};
+        $scope.applicationTxnId = $stateParams.applicationTxnId;
+        $scope.proceedings.itemRequireds = [];
+        $scope.count = 0;
+        $scope.itemArr = [];
         
 
         $scope.getApplicationTxns = function(){
@@ -33,6 +39,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         }
         if($stateParams.applicationTxnId != null){
         	$scope.getApplicationTxn($stateParams.applicationTxnId);
+        	
         }
         
         $scope.loadAllPercentageMaster = function() {
@@ -99,14 +106,14 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
             $uibModalInstance.dismiss('cancel');
         };
         
-        $scope.proceedings.itemRequireds = [];
-        $scope.count = 0;
-        $scope.itemArr = [];
+
         $scope.createItemArr = function(){
        		$scope.itemArr.push($scope.count);
        		$scope.proceedings.itemRequireds[$scope.count]= {};
        		$scope.count = $scope.count +1;
         }
+        
+
         
         /*$scope.removeItemArr = function(){
         	$scope.itemArr.length -=1;

@@ -1,14 +1,20 @@
 package com.callippus.water.erp.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A ItemRequired.
@@ -22,11 +28,8 @@ public class ItemRequired implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "description")
-    private String description;
-    
-    @Column(name = "unit")
-    private String unit;
+    @Column(name = "provided")
+    private Integer provided;
     
     @Column(name = "quantity")
     private Integer quantity;
@@ -52,6 +55,10 @@ public class ItemRequired implements Serializable {
     @ManyToOne
     @JoinColumn(name = "proceedings_id")
     private Proceedings proceedings;
+    
+    @ManyToOne
+    @JoinColumn(name = "uom_id")
+    private Uom uom;
 
     public Long getId() {
         return id;
@@ -61,20 +68,12 @@ public class ItemRequired implements Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getProvided() {
+        return provided;
     }
     
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-    
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setProvided(Integer provided) {
+        this.provided = provided;
     }
 
     public Integer getQuantity() {
@@ -133,7 +132,15 @@ public class ItemRequired implements Serializable {
         this.proceedings = proceedings;
     }
 
-    @Override
+    public Uom getUom() {
+		return uom;
+	}
+
+	public void setUom(Uom uom) {
+		this.uom = uom;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -157,8 +164,7 @@ public class ItemRequired implements Serializable {
     public String toString() {
         return "ItemRequired{" +
             "id=" + id +
-            ", description='" + description + "'" +
-            ", unit='" + unit + "'" +
+            ", provided='" + provided + "'" +
             ", quantity='" + quantity + "'" +
             ", ratePerShs='" + ratePerShs + "'" +
             ", amount='" + amount + "'" +

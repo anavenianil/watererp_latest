@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('watererpApp')
-    .factory('ProceedingsService', function ($resource, DateUtils) {
-        return $resource('api/proceedingss/custom/:applicationTxnId', {}, {
+    .factory('Uom', function ($resource, DateUtils) {
+        return $resource('api/uoms/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
