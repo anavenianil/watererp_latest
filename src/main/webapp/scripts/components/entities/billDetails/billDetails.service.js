@@ -10,6 +10,7 @@ angular.module('watererpApp')
                     data = angular.fromJson(data);
                     data.billDate = DateUtils.convertLocaleDateFromServer(data.billDate);
                     data.meterFixDate = DateUtils.convertLocaleDateFromServer(data.meterFixDate);
+                    data.metReadingDt = DateUtils.convertLocaleDateFromServer(data.metReadingDt);
                     return data;
                 }
             },
@@ -18,6 +19,7 @@ angular.module('watererpApp')
                 transformRequest: function (data) {
                     data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
                     data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
+                    data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
                     return angular.toJson(data);
                 }
             },
@@ -26,6 +28,7 @@ angular.module('watererpApp')
                 transformRequest: function (data) {
                     data.billDate = DateUtils.convertLocaleDateToServer(data.billDate);
                     data.meterFixDate = DateUtils.convertLocaleDateToServer(data.meterFixDate);
+                    data.metReadingDt = DateUtils.convertLocaleDateToServer(data.metReadingDt);
                     return angular.toJson(data);
                 }
             }

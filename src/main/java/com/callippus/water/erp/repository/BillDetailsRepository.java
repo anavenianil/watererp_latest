@@ -10,5 +10,5 @@ import java.util.List;
  * Spring Data JPA repository for the BillDetails entity.
  */
 public interface BillDetailsRepository extends JpaRepository<BillDetails,Long> {
-
+	public BillDetails findByCan(String can);
 }

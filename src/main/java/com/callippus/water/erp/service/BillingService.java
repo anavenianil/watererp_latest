@@ -111,6 +111,12 @@ public class BillingService {
 	public void processBills(List<BillDetails> bd) {
 		bd.forEach(bill_details -> process_bill(bill_details));
 	}
+	
+	public void process_bill(String can)
+	{
+		BillDetails bill_details  = billDetailsRepository.findByCan(can);
+		process_bill(bill_details);
+	}
 
 	public void process_bill(BillDetails bill_details) {
 		init();
@@ -135,16 +141,8 @@ public class BillingService {
 					.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
 
-				dFrom = LocalDate.of(
-						Integer.parseInt(bill_details.getFromMonth().substring(
-								0, 4)),
-						Integer.parseInt(bill_details.getFromMonth().substring(
-								4, 6)), 1);
-				dTo = LocalDate.of(
-						Integer.parseInt(bill_details.getToMonth().substring(0,
-								4)),
-						Integer.parseInt(bill_details.getToMonth().substring(4,
-								6)), 1);
+				dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
+				dTo =  bill_details.getMetReadingDt().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1);
 
 				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
 						customer.getMetReadingDt());
@@ -163,7 +161,7 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo) + 1;
 				log.debug("Months:" + monthsDiff);
 
 				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {

@@ -118,6 +118,9 @@ public class BillDetailsResourceIntTest {
     private static final Float DEFAULT_NO_METER_AMT = 1F;
     private static final Float UPDATED_NO_METER_AMT = 2F;
 
+    private static final LocalDate DEFAULT_MET_READING_DT = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_MET_READING_DT = LocalDate.now(ZoneId.systemDefault());
+
     @Inject
     private BillDetailsRepository billDetailsRepository;
 
@@ -175,6 +178,7 @@ public class BillDetailsResourceIntTest {
         billDetails.setLat(DEFAULT_LAT);
         billDetails.setLongi(DEFAULT_LONGI);
         billDetails.setNoMeterAmt(DEFAULT_NO_METER_AMT);
+        billDetails.setMetReadingDt(DEFAULT_MET_READING_DT);
     }
 
     @Test
@@ -224,6 +228,7 @@ public class BillDetailsResourceIntTest {
         assertThat(testBillDetails.getLat()).isEqualTo(DEFAULT_LAT);
         assertThat(testBillDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
         assertThat(testBillDetails.getNoMeterAmt()).isEqualTo(DEFAULT_NO_METER_AMT);
+        assertThat(testBillDetails.getMetReadingDt()).isEqualTo(DEFAULT_MET_READING_DT);
     }
 
     @Test
@@ -285,7 +290,8 @@ public class BillDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].noticeNo").value(hasItem(DEFAULT_NOTICE_NO.toString())))
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
                 .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
-                .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.doubleValue())));
+                .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].metReadingDt").value(hasItem(DEFAULT_MET_READING_DT.toString())));
     }
 
     @Test
@@ -329,7 +335,8 @@ public class BillDetailsResourceIntTest {
             .andExpect(jsonPath("$.noticeNo").value(DEFAULT_NOTICE_NO.toString()))
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
             .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
-            .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.doubleValue()));
+            .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.doubleValue()))
+            .andExpect(jsonPath("$.metReadingDt").value(DEFAULT_MET_READING_DT.toString()));
     }
 
     @Test
@@ -380,6 +387,7 @@ public class BillDetailsResourceIntTest {
         billDetails.setLat(UPDATED_LAT);
         billDetails.setLongi(UPDATED_LONGI);
         billDetails.setNoMeterAmt(UPDATED_NO_METER_AMT);
+        billDetails.setMetReadingDt(UPDATED_MET_READING_DT);
 
         restBillDetailsMockMvc.perform(put("/api/billDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -421,6 +429,7 @@ public class BillDetailsResourceIntTest {
         assertThat(testBillDetails.getLat()).isEqualTo(UPDATED_LAT);
         assertThat(testBillDetails.getLongi()).isEqualTo(UPDATED_LONGI);
         assertThat(testBillDetails.getNoMeterAmt()).isEqualTo(UPDATED_NO_METER_AMT);
+        assertThat(testBillDetails.getMetReadingDt()).isEqualTo(UPDATED_MET_READING_DT);
     }
 
     @Test

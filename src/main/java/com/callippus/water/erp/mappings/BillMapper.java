@@ -21,7 +21,8 @@ public interface BillMapper {
         @Mapping(source = "cust_details.mobileNo", target = "mobileNo"),
         @Mapping(source = "bill_details.lat", target = "lat"),
         @Mapping(source = "bill_details.longi", target = "longi"),
-        @Mapping(source = "cust_details.meterFixDate", target = "meterFixDate")
+        @Mapping(source = "cust_details.meterFixDate", target = "meterFixDate"),
+        @Mapping(source = "bill_details.metReadingDt", target = "metReadingDt")
     })
     BillFullDetails bdToBfd(BillDetails bill_details, CustDetails cust_details);
     
