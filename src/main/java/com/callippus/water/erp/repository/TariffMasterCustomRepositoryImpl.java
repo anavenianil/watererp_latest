@@ -78,7 +78,7 @@ TariffMasterCustomRepository {
 				+ "AND (valid_from) <= ?) a, "
 				+ "tariff_charges t,cust_details c "
 				+ "WHERE c.can = ? "
-				+ " AND ? BETWEEN SLAB_MIN AND SLAB_MAX "
+				+ " AND ? BETWEEN SLAB_MIN + 0.00001 AND SLAB_MAX "
 				+ "	AND c.tariff_category_master_id+0=a.tariff_category_master_id+0 "
 				+ " and a.id=t.tariff_master_id) a "
 				+ " group by tariff_type_master_id  "
