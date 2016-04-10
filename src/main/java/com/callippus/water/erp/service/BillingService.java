@@ -59,7 +59,7 @@ public class BillingService {
 		ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS
 	};
 
-	List<Integer> categories = Arrays.asList(1, 2, 3);
+	List<Long> categories = Arrays.asList(1L, 2L, 3L);
 
 	float avgKL = 0.0f;
 	float factor = 0.0f;
@@ -141,7 +141,7 @@ public class BillingService {
 					.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
 
-				dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
+				dFrom = customer.getMetReadingMo().plus(1,ChronoUnit.MONTHS);
 				dTo =  bill_details.getMetReadingDt().withDayOfMonth(1);
 
 				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
