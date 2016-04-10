@@ -66,8 +66,8 @@ public class CustDetailsResourceIntTest {
     private static final String UPDATED_CITY = "BBBBB";
     private static final String DEFAULT_PIN_CODE = "AAAAA";
     private static final String UPDATED_PIN_CODE = "BBBBB";
-    private static final String DEFAULT_CATEGORY = "AAAAA";
-    private static final String UPDATED_CATEGORY = "BBBBB";
+    private static final String DEFAULT_CATEGORY_UNUSED = "AAAAA";
+    private static final String UPDATED_CATEGORY_UNUSED = "BBBBB";
 
     private static final Float DEFAULT_PIPE_SIZE = 1F;
     private static final Float UPDATED_PIPE_SIZE = 2F;
@@ -184,7 +184,7 @@ public class CustDetailsResourceIntTest {
         custDetails.setAddress(DEFAULT_ADDRESS);
         custDetails.setCity(DEFAULT_CITY);
         custDetails.setPinCode(DEFAULT_PIN_CODE);
-        custDetails.setCategory(DEFAULT_CATEGORY);
+        custDetails.setCategoryUnused(DEFAULT_CATEGORY_UNUSED);
         custDetails.setPipeSize(DEFAULT_PIPE_SIZE);
         custDetails.setBoardMeter(DEFAULT_BOARD_METER);
         custDetails.setSewerage(DEFAULT_SEWERAGE);
@@ -244,7 +244,7 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testCustDetails.getCity()).isEqualTo(DEFAULT_CITY);
         assertThat(testCustDetails.getPinCode()).isEqualTo(DEFAULT_PIN_CODE);
-        assertThat(testCustDetails.getCategory()).isEqualTo(DEFAULT_CATEGORY);
+        assertThat(testCustDetails.getCategoryUnused()).isEqualTo(DEFAULT_CATEGORY_UNUSED);
         assertThat(testCustDetails.getPipeSize()).isEqualTo(DEFAULT_PIPE_SIZE);
         assertThat(testCustDetails.getBoardMeter()).isEqualTo(DEFAULT_BOARD_METER);
         assertThat(testCustDetails.getSewerage()).isEqualTo(DEFAULT_SEWERAGE);
@@ -335,7 +335,7 @@ public class CustDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())))
                 .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
                 .andExpect(jsonPath("$.[*].pinCode").value(hasItem(DEFAULT_PIN_CODE.toString())))
-                .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
+                .andExpect(jsonPath("$.[*].categoryUnused").value(hasItem(DEFAULT_CATEGORY_UNUSED.toString())))
                 .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.doubleValue())))
                 .andExpect(jsonPath("$.[*].boardMeter").value(hasItem(DEFAULT_BOARD_METER.toString())))
                 .andExpect(jsonPath("$.[*].sewerage").value(hasItem(DEFAULT_SEWERAGE.toString())))
@@ -390,7 +390,7 @@ public class CustDetailsResourceIntTest {
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
             .andExpect(jsonPath("$.pinCode").value(DEFAULT_PIN_CODE.toString()))
-            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
+            .andExpect(jsonPath("$.categoryUnused").value(DEFAULT_CATEGORY_UNUSED.toString()))
             .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.doubleValue()))
             .andExpect(jsonPath("$.boardMeter").value(DEFAULT_BOARD_METER.toString()))
             .andExpect(jsonPath("$.sewerage").value(DEFAULT_SEWERAGE.toString()))
@@ -451,7 +451,7 @@ public class CustDetailsResourceIntTest {
         custDetails.setAddress(UPDATED_ADDRESS);
         custDetails.setCity(UPDATED_CITY);
         custDetails.setPinCode(UPDATED_PIN_CODE);
-        custDetails.setCategory(UPDATED_CATEGORY);
+        custDetails.setCategoryUnused(UPDATED_CATEGORY_UNUSED);
         custDetails.setPipeSize(UPDATED_PIPE_SIZE);
         custDetails.setBoardMeter(UPDATED_BOARD_METER);
         custDetails.setSewerage(UPDATED_SEWERAGE);
@@ -503,7 +503,7 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testCustDetails.getCity()).isEqualTo(UPDATED_CITY);
         assertThat(testCustDetails.getPinCode()).isEqualTo(UPDATED_PIN_CODE);
-        assertThat(testCustDetails.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testCustDetails.getCategoryUnused()).isEqualTo(UPDATED_CATEGORY_UNUSED);
         assertThat(testCustDetails.getPipeSize()).isEqualTo(UPDATED_PIPE_SIZE);
         assertThat(testCustDetails.getBoardMeter()).isEqualTo(UPDATED_BOARD_METER);
         assertThat(testCustDetails.getSewerage()).isEqualTo(UPDATED_SEWERAGE);

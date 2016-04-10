@@ -36,7 +36,7 @@
             <column name="address" type="varchar(255)"/>
             <column name="city" type="varchar(255)"/>
             <column name="pin_code" type="varchar(255)"/>
-            <column name="category" type="varchar(255)"/>
+            <column name="category_unused" type="varchar(255)"/>
             <column name="pipe_size" type="${floatType}"/>
             <column name="board_meter" type="varchar(255)"/>
             <column name="sewerage" type="varchar(255)"/>
@@ -67,7 +67,14 @@
             <column name="lat" type="varchar(255)"/>
             <column name="longi" type="varchar(255)"/>
             <column name="meter_fix_date" type="date"/>
+            <column name="tariff_category_master_id" type="bigint"/>
         </createTable>
         
+        <addForeignKeyConstraint baseColumnNames="tariff_category_master_id"
+                                 baseTableName="cust_details"
+                                 constraintName="fk_custdetails_tariffcategorymaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tariff_category_master"/>
+
     </changeSet>
 </databaseChangeLog>

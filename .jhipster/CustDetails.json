@@ -1,5 +1,13 @@
 {
-    "relationships": [],
+   "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldId": 1,
@@ -64,7 +72,7 @@
         },
         {
             "fieldId": 12,
-            "fieldName": "category",
+            "fieldName": "categoryUnused",
             "fieldType": "String"
         },
         {

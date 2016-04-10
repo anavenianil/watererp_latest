@@ -59,7 +59,7 @@ public class BillingService {
 		ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS
 	};
 
-	List<String> categories = Arrays.asList("D", "DS", "N");
+	List<Integer> categories = Arrays.asList(1, 2, 3);
 
 	float avgKL = 0.0f;
 	float factor = 0.0f;
@@ -161,7 +161,7 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo) + 1;
+				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 				log.debug("Months:" + monthsDiff);
 
 				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
@@ -198,8 +198,8 @@ public class BillingService {
 				log.debug("          LOCK BILL CASE");
 				log.debug("########################################");
 
-				dFrom = customer.getPrevBillMonth();
-				dTo = LocalDate.now();
+				dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
+				dTo = bill_details.getBillDate().withDayOfMonth(1);
 
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
@@ -219,8 +219,8 @@ public class BillingService {
 				log.debug("          UNMETERED BILL CASE");
 				log.debug("########################################");
 
-				dFrom = customer.getPrevBillMonth();
-				dTo = LocalDate.now();
+				dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
+				dTo = bill_details.getBillDate().withDayOfMonth(1);
 
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
@@ -240,7 +240,8 @@ public class BillingService {
 					: 0);
 
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
+					.findTariffs(bill_details
+							.getCan(), dFrom, dTo, avgKL,   unMeteredFlag, newMeterFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
@@ -338,7 +339,7 @@ public class BillingService {
 		if (customer.getPrevBillMonth().isBefore(LocalDate.of(2005, 01, 01)))
 			return CustValidation.NOT_IMPLEMENTED;
 
-		if (!categories.contains(customer.getCategory().trim()))
+		if (!categories.contains(customer.getTariffCategoryMaster().getId()))
 			return CustValidation.INVALID_CATEGORY;
 
 		if (bill_details.getPresentReading() < bill_details.getInitialReading())

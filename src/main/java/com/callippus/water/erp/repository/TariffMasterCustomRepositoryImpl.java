@@ -49,7 +49,7 @@ TariffMasterCustomRepository {
 	}
 
 	
-	public List<java.util.Map<String, Object>> findTariffs(LocalDate validFrom, LocalDate validTo, float avgKL, int unMeteredFlag, int newMeterFlag){
+	public List<java.util.Map<String, Object>> findTariffs(String can, LocalDate validFrom, LocalDate validTo, float avgKL, int unMeteredFlag, int newMeterFlag){
 		String sql = "SELECT tariff_type_master_id,"
 				+ "case when tariff_type_master_id=1 then "
 				+ "case when 1=? then sum(rate * months * min_unmetered_kl) else sum(rate * months * avg_kl)  end " //Unmetered Flag
@@ -58,7 +58,7 @@ TariffMasterCustomRepository {
 				+ "tariff_name, "
 				+ "valid_from, "
 				+ "valid_to, "
-				+ "tariff_category_master_id, "
+				+ "c.tariff_category_master_id, "
 				+ "TIMESTAMPDIFF(MONTH,valid_from,valid_to + interval 1 day) months, "
 				+ "t.id tariff_charges_id, "
 				+ "t.tariff_desc, "
@@ -69,16 +69,20 @@ TariffMasterCustomRepository {
 				+ "case when t.min_kl > ? then t.min_kl else ? end avg_kl,"
 				+ "t.tariff_type_master_id from "
 				+ "(SELECT id,tariff_name,(CASE WHEN (valid_from) < ? THEN STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s') ELSE valid_from END) valid_from,(CASE WHEN (valid_to) > ? "
-				+ "THEN STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s') ELSE valid_to END) valid_to, active,tariff_category_master_id "
+				+ "THEN STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s') ELSE valid_to END) valid_to, active,a.tariff_category_master_id "
 				+ "FROM "
 				+ "(SELECT * "
 				+ "FROM tariff_master "
 				+ "WHERE (valid_to) >=?) a "
 				+ "WHERE active=1 "
 				+ "AND (valid_from) <= ?) a, "
-				+ "tariff_charges t  WHERE a.id=t.tariff_master_id ) a "
-				+ "group by tariff_type_master_id  "
-				+ "ORDER BY (valid_from)";
+				+ "tariff_charges t,cust_details c "
+				+ "WHERE c.can = ? "
+				+ " AND ? BETWEEN SLAB_MIN AND SLAB_MAX "
+				+ "	AND c.tariff_category_master_id+0=a.tariff_category_master_id+0 "
+				+ " and a.id=t.tariff_master_id) a "
+				+ " group by tariff_type_master_id  "
+				+ " ORDER BY (valid_from)";
 /****	
 ==================================================================================		
 MySQL Sample Query
@@ -141,7 +145,7 @@ MySQL Sample Query
 		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
 				.queryForList( sql, new Object[]{unMeteredFlag, newMeterFlag, avgKL,avgKL, from,from,
-						to,to,from,to});
+						to,to,from,to, can, avgKL});
 
 		log.debug("Output from billing query:" + rows);
 		return rows;

@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -56,8 +58,8 @@ public class CustDetails implements Serializable {
     @Column(name = "pin_code")
     private String pinCode;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "category_unused")
+    private String categoryUnused;
 
     @Column(name = "pipe_size")
     private Float pipeSize;
@@ -148,6 +150,10 @@ public class CustDetails implements Serializable {
 
     @Column(name = "meter_fix_date")
     private LocalDate meterFixDate;
+
+    @ManyToOne
+    @JoinColumn(name = "tariff_category_master_id")
+    private TariffCategoryMaster tariffCategoryMaster;
 
     public Long getId() {
         return id;
@@ -245,12 +251,12 @@ public class CustDetails implements Serializable {
         this.pinCode = pinCode;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryUnused() {
+        return categoryUnused;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryUnused(String categoryUnused) {
+        this.categoryUnused = categoryUnused;
     }
 
     public Float getPipeSize() {
@@ -493,6 +499,14 @@ public class CustDetails implements Serializable {
         this.meterFixDate = meterFixDate;
     }
 
+    public TariffCategoryMaster getTariffCategoryMaster() {
+        return tariffCategoryMaster;
+    }
+
+    public void setTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster) {
+        this.tariffCategoryMaster = tariffCategoryMaster;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -525,7 +539,7 @@ public class CustDetails implements Serializable {
             ", address='" + address + "'" +
             ", city='" + city + "'" +
             ", pinCode='" + pinCode + "'" +
-            ", category='" + category + "'" +
+            ", categoryUnused='" + categoryUnused + "'" +
             ", pipeSize='" + pipeSize + "'" +
             ", boardMeter='" + boardMeter + "'" +
             ", sewerage='" + sewerage + "'" +
