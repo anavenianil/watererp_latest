@@ -139,6 +139,7 @@ public class BillingService {
 		if(bfdRepository.findByCanAndPrevBillMonth(bill_details.getCan(), bill_details.getBillDate().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1)) != null){
 			log.debug("Unable to process customer:" + customer.getId()
 					+ ", getCustInfo returned::" + CustValidation.ALREADY_BILLED.name());
+			return;
 		}
 		
 		try {
