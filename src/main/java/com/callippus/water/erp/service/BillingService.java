@@ -313,9 +313,14 @@ public class BillingService {
 			if(bill_details.getCurrentBillType().equals("M"))
 			{
 				bfd.setMetReadingMo(bill_details.getMetReadingDt().withDayOfMonth(1));
-				bfd.setPrevAvgKl(avgKL);
+				bfd.setMetAvgKl(avgKL);
 			}
+			
+			bfd.setMeterStatus(bill_details.getCurrentBillType());
 
+			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
+			bfd.setToMonth(dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
+			
 			bfd.setUnits(units);
 
 			log.debug("This is the BillFullDetails:" + bfd);
