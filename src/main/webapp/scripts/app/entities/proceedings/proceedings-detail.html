@@ -144,6 +144,13 @@
 				ui-sref="receiptForAppTxn({applicationTxnId:proceedings.applicationTxn.id})">
 				<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 			</button>
+			
+			<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+			
+			<button type="button" class="btn btn-success pull-right"  
+				ng-click="getApplicationTxn(proceedings.applicationTxn.id)">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+		</button>
 		</div>
 
 		<button type="submit" onclick="window.history.back()"
@@ -171,7 +178,7 @@
 										<div class="col-sm-3">
 											<label for="field_applicationTxn">Application No. </label> <input
 												type="text" class="form-control" name="applicationTxn"
-												id="field_applicationTxn" ng-model="applicationTxnId"
+												id="field_applicationTxn" ng-model="applicationTxn"
 												disabled />
 										</div>
 										<div class="col-sm-3">

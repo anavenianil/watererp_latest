@@ -3,7 +3,7 @@
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create A Connection</h3>
+			<h4 class="panel-title pull-left">Issue Items for the application No.: {{applicationTxnId}}</h4>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -30,7 +30,7 @@
 								<label for="field_uom">uom</label> <select class="form-control"
 									id="field_uom_{{$index}}" name="uom"
 									ng-model="itemRequired.itemRequiredArr[x].uom"
-									ng-options="uom as uom.id for uom in uoms track by uom.id" disabled>
+									ng-options="uom as uom.value for uom in uoms track by uom.id" disabled>
 									<option value=""></option>
 								</select>
 							</div>
@@ -45,7 +45,7 @@
 								<input type="number" class="form-control" name="provided"
 									id="field_provided_{{$index}}"
 									ng-change="validate($index, itemRequired.itemRequiredArr[x].quantity, itemRequired.itemRequiredArr[x].provided)"
-									min="0" max="maxVal"
+									min="0" max="{{maxVal}}"
 									ng-model="itemRequired.itemRequiredArr[x].provided" />
 							</div>
 						</div>
@@ -120,7 +120,7 @@
 					</button>
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Items Issued</span>
 					</button>
 				</div>
 			</div>

@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller('ItemRequiredDialogController',
         function($scope, $stateParams, $state, ItemRequired, MaterialMaster, ApplicationTxn, FeasibilityStudy, Proceedings, Uom, ParseLinks,
-        		ApplicationTxnService) {
+        		ApplicationTxnService, ProceedingsService) {
 
         $scope.itemRequired = {};
         $scope.materialmasters = MaterialMaster.query();
@@ -12,6 +12,8 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         $scope.uoms = Uom.query();
         $scope.itemRequired.itemRequiredArr = [];
         $scope.applicationTxnId = $stateParams.applicationTxnId;
+        $scope.proceedings = {};
+       
         
         $scope.load = function(id) {
             ItemRequired.get({id : id}, function(result) {
@@ -50,7 +52,14 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         	for(var i=0; i<$scope.itemRequireds.length;i++){
         		$scope.itemRequired.itemRequiredArr[i] = {};
         		$scope.itemRequired.itemRequiredArr[i] = $scope.itemRequireds[i];
+        		$scope.itemRequired.itemRequiredArr[i].provided = $scope.itemRequireds[i].quantity;
         	}
+        }
+        
+        $scope.getProceedings = function(){
+	        ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
+	            $scope.proceedings = result;
+	        });
         }
         
         $scope.createItemArr = [];
@@ -66,6 +75,7 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
             		}
             		$scope.makeArray();
             		$scope.display();
+            		$scope.getProceedings();
             	});
         }
         
@@ -73,8 +83,8 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:itemRequiredUpdate', result);
-            $uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('applicationTxn');
         };
 
         var onSaveError = function (result) {
@@ -83,13 +93,20 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
 
         $scope.save = function () {
         	ApplicationTxnService.approveRequest($scope.applicationTxnId, $scope.itemRequired.remarks);
+        	 $scope.proceedings.itemRequireds = [];
+        	 $state.go('applicationTxn');
         	for (var item in $scope.itemRequired.itemRequiredArr) {
-        		$scope.itemRequired[item] = {};
-        		
+        		/*$scope.itemRequired[item] = {};
         		$scope.itemRequired[item] = $scope.itemRequired.itemRequiredArr[item];
-        		ItemRequired.update($scope.itemRequired[item], onSaveSuccess, onSaveError);
+        		ItemRequired.update($scope.itemRequired[item], onSaveSuccess, onSaveError);*/
+        		$scope.proceedings.itemRequireds.push($scope.itemRequired.itemRequiredArr[item]);
         	}
         	
+        	if ($scope.proceedings.id != null) {
+                Proceedings.update($scope.proceedings, onSaveSuccess, onSaveError);
+            } else {
+                //Proceedings.save($scope.proceedings, onSaveSuccess, onSaveError);
+            }
             /*$scope.isSaving = true;
             if ($scope.itemRequired.id != null) {
                 ItemRequired.update($scope.itemRequired, onSaveSuccess, onSaveError);
@@ -102,6 +119,9 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         $scope.validate = function(indexVal, quantity, provide){
         	console.log(indexVal + " " + quantity + " " + provide);
         	$scope.maxVal = quantity;
+        	if(provide > quantity){
+        		alert("Provide can't exceed the given quantity");
+        	}
         	console.log("max val:"+$scope.maxVal);
         }
 

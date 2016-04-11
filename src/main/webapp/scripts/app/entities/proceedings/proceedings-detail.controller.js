@@ -5,6 +5,7 @@ angular.module('watererpApp')
     		ApplicationTxn, ItemRequired, ParseLinks, ApplicationTxnService, $state, ProceedingsService) {
         $scope.proceedings = {};
         $scope.approvalDetails = {};
+        $scope.applicationTxnId = $stateParams.applicationTxnId;
         
         $scope.load = function (id) {
             Proceedings.get({id: id}, function(result) {
@@ -15,10 +16,13 @@ angular.module('watererpApp')
         if($stateParams.applicationTxnId !=null){
         	ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
                 $scope.proceedings = result;
-                $scope.itemRequireds = $scope.proceedings.itemRequireds
+                $scope.itemRequireds = $scope.proceedings.itemRequireds;
+                
             });
         	
         }
+        
+        
         
         
         /*if($stateParams.id != null){
@@ -55,7 +59,7 @@ angular.module('watererpApp')
         
         $scope.getApplicationTxn = function (id) {
         	$scope.approvalDetails.approvedDate = new Date();
-        	$scope.applicationTxnId = id;
+        	$scope.applicationTxn = id;
         	$('#approveModal').modal('show');
         	
         };

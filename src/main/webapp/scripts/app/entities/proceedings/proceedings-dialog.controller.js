@@ -39,7 +39,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         }
         if($stateParams.applicationTxnId != null){
         	$scope.getApplicationTxn($stateParams.applicationTxnId);
-        	
         }
         
         $scope.loadAllPercentageMaster = function() {
