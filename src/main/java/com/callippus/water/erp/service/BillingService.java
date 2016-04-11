@@ -72,6 +72,7 @@ public class BillingService {
 	int monthsDiff = 0;
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
+	LocalDate curBillMonth = null;
 	int newMeterFlag = 0;
 	int unMeteredFlag = 0;
 
@@ -97,6 +98,7 @@ public class BillingService {
 		monthsDiff = 0;
 		dFrom = null;
 		dTo = null;
+		curBillMonth = null;
 		newMeterFlag = 0;
 		unMeteredFlag = 0;
 
@@ -125,6 +127,8 @@ public class BillingService {
 				.getCan());
 		CustValidation retVal = getCustInfo(customer, bill_details);
 
+		curBillMonth = bill_details.getMetReadingDt().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1);
+		
 		if (retVal != CustValidation.SUCCESS) {
 			// Unable to process customer
 			log.debug("Unable to process customer:" + customer.getId()
@@ -132,6 +136,11 @@ public class BillingService {
 			return;
 		}
 
+		if(bfdRepository.findByCanAndPrevBillMonth(bill_details.getCan(), bill_details.getBillDate().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1)) != null){
+			log.debug("Unable to process customer:" + customer.getId()
+					+ ", getCustInfo returned::" + CustValidation.ALREADY_BILLED.name());
+		}
+		
 		try {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
@@ -247,6 +256,7 @@ public class BillingService {
 					customer);
 			bfd.setId(null);
 
+			
 			// Subtract Avg Water charges in case of Lock Bill scenario
 			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
@@ -298,7 +308,7 @@ public class BillingService {
 
 			bfd.setBillDate(date.toLocalDate());
 			bfd.setBillTime(date.format(formatter));
-			bfd.setPrevBillMonth(customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS));
+			bfd.setPrevBillMonth(bill_details.getBillDate().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1));
 			
 			if(bill_details.getCurrentBillType().equals("M"))
 			{
