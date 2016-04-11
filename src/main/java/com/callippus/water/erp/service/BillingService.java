@@ -298,6 +298,13 @@ public class BillingService {
 
 			bfd.setBillDate(date.toLocalDate());
 			bfd.setBillTime(date.format(formatter));
+			bfd.setPrevBillMonth(customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS));
+			
+			if(bill_details.getCurrentBillType().equals("M"))
+			{
+				bfd.setMetReadingMo(bill_details.getMetReadingDt().withDayOfMonth(1));
+				bfd.setPrevAvgKl(avgKL);
+			}
 
 			bfd.setUnits(units);
 
