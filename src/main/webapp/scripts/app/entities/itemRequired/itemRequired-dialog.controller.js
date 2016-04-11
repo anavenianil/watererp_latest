@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('watererpApp').controller('ItemRequiredDialogController',
-        function($scope, $stateParams, $state, ItemRequired, MaterialMaster, ApplicationTxn, FeasibilityStudy, Proceedings, Uom, ParseLinks) {
+        function($scope, $stateParams, $state, ItemRequired, MaterialMaster, ApplicationTxn, FeasibilityStudy, Proceedings, Uom, ParseLinks,
+        		ApplicationTxnService) {
 
         $scope.itemRequired = {};
         $scope.materialmasters = MaterialMaster.query();
@@ -9,6 +10,8 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         $scope.feasibilitystudys = FeasibilityStudy.query();
         $scope.proceedingss = Proceedings.query();
         $scope.uoms = Uom.query();
+        $scope.itemRequired.itemRequiredArr = [];
+        $scope.applicationTxnId = $stateParams.applicationTxnId;
         
         $scope.load = function(id) {
             ItemRequired.get({id : id}, function(result) {
@@ -20,7 +23,38 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         	$scope.load($stateParams.id);
         }
         
+        $scope.arr = [];
+        $scope.makeArray = function () {
+        	$scope.itemRequired.itemrequiredArr = [];
+            $scope.arr.length = 0;
+            for (var i = 0; i < parseInt($scope.itemRequireds.length); i++) {
+                $scope.arr.push(i);
+                $scope.itemRequired.itemrequiredArr[i] = {};
+                $scope.itemRequired.itemrequiredArr[i].id;
+                $scope.itemRequired.itemrequiredArr[i].provided;
+                $scope.itemRequired.itemrequiredArr[i].quantity;
+                $scope.itemRequired.itemrequiredArr[i].materialMaster = {};
+                $scope.itemRequired.itemrequiredArr[i].materialMaster.id;
+                $scope.itemRequired.itemrequiredArr[i].uom={};
+                $scope.itemRequired.itemrequiredArr[i].uom.id={};
+                $scope.itemRequired.itemrequiredArr[i].amount;
+                $scope.itemRequired.itemrequiredArr[i].ratePerShs;
+                $scope.itemRequired.itemrequiredArr[i].proceedings ={};
+                $scope.itemRequired.itemrequiredArr[i].proceedings.id;
+                $scope.itemRequired.itemrequiredArr[i].applicationTxn = {};
+                $scope.itemRequired.itemrequiredArr[i].applicationTxn.id;
+            }
+        };
+        
+        $scope.display = function(){
+        	for(var i=0; i<$scope.itemRequireds.length;i++){
+        		$scope.itemRequired.itemRequiredArr[i] = {};
+        		$scope.itemRequired.itemRequiredArr[i] = $scope.itemRequireds[i];
+        	}
+        }
+        
         $scope.createItemArr = [];
+        
         if($stateParams.applicationTxnId !=null){
         	$scope.itemRequireds =[];
         	console.log($stateParams.applicationTxnId);
@@ -30,18 +64,12 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
             		for (var i = 0; i < result.length; i++) {
             			$scope.itemRequireds.push(result[i]);
             		}
-            		/*for(var i=0;i<$scope.itemRequireds.length; i++){
-            			$scope.itemRequired[i] = $scope.itemRequireds[i];
-            			//$("#field_quantity_"+i).val($scope.itemRequired[i].quantity);
-            		}*/
+            		$scope.makeArray();
+            		$scope.display();
             	});
         }
         
-        /*$scope.createItemArr = function(){
-       		$scope.itemArr.push($scope.count);
-       		$scope.proceedings.itemRequireds[$scope.count]= {};
-       		$scope.count = $scope.count +1;
-        }*/
+
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:itemRequiredUpdate', result);
@@ -54,39 +82,28 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         };
 
         $scope.save = function () {
-        	/*for(var i=0;i<$scope.itemRequireds.length;i++){
-        		var id ="id_"+i;
-        		var quantity = "field_quantity_"+i;
-        		var ratePerShs  = "field_ratePerShs_"+i;
-        		var amount  = "field_amount_"+i;
-        		var materialMaster  = "field_materialMaster_"+i;
-        		var applicationTxn  = "field_applicationTxn_"+i;
-        		var proceedings  = "field_proceedings_"+i;
-        		var uom  = "field_uom_"+i;
-        		var provided = "field_provided_"+i;
-        		$scope.itemRequired.provided = document.getElementById(provided).value;
-        		$scope.itemRequired.quantity = document.getElementById(quantity).value;
-        		$scope.itemRequired.ratePerShs = document.getElementById(ratePerShs).value;
-        		$scope.itemRequired.amount = document.getElementById(amount).value;
-        		$scope.itemRequired.materialMaster = {};
-        		$scope.itemRequired.materialMaster.id = document.getElementById(materialMaster).value;
-        		$scope.itemRequired.applicationTxn = {};
-        		$scope.itemRequired.applicationTxn.id = document.getElementById(applicationTxn).value;
-        		$scope.itemRequired.proceedings = {}
-        		$scope.itemRequired.proceedings.id = document.getElementById(proceedings).value;
-        		$scope.itemRequired.uom = {};
-        		$scope.itemRequired.uom.id = document.getElementById(uom).value;
-        		$scope.itemRequired.provided = document.getElementById(provided).value;
-        		//$scope.itemRequired.provided = document.getElementById("field_provided_"+i).value;
-        		ItemRequired.update($scope.itemRequired, onSaveSuccess, onSaveError);
-        	}*/
-            $scope.isSaving = true;
+        	ApplicationTxnService.approveRequest($scope.applicationTxnId, $scope.itemRequired.remarks);
+        	for (var item in $scope.itemRequired.itemRequiredArr) {
+        		$scope.itemRequired[item] = {};
+        		
+        		$scope.itemRequired[item] = $scope.itemRequired.itemRequiredArr[item];
+        		ItemRequired.update($scope.itemRequired[item], onSaveSuccess, onSaveError);
+        	}
+        	
+            /*$scope.isSaving = true;
             if ($scope.itemRequired.id != null) {
                 ItemRequired.update($scope.itemRequired, onSaveSuccess, onSaveError);
             } else {
                 ItemRequired.save($scope.itemRequired, onSaveSuccess, onSaveError);
-            }
+            }*/
         };
+        
+        
+        $scope.validate = function(indexVal, quantity, provide){
+        	console.log(indexVal + " " + quantity + " " + provide);
+        	$scope.maxVal = quantity;
+        	console.log("max val:"+$scope.maxVal);
+        }
 
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
