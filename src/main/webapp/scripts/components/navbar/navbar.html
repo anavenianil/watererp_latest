@@ -11,7 +11,8 @@
 				class="navbar-version">v{{VERSION}}</span></a> -->
 			<div ng-switch="getLogin()">
 				<div class="navbar-brand" ng-model="navbarUserId">
-					{{navbarUserId}}<br>{{userRole}}</div>
+					{{navbarUserId}}<br>{{userRole}}
+				</div>
 			</div>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar-collapse"
@@ -50,125 +51,179 @@
 					</span>
 				</a>
 					<ul class="dropdown-menu">
-						<li ui-sref-active="active"><a ui-sref="sewerSize"
+						<!-- <li ui-sref-active="active"><a ui-sref="sewerSize"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Sewer
-									size</span></a></li>
-						<li ui-sref-active="active"><a
+									size</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a
 							ui-sref="applicationTypeMaster" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Application
-									type master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="connectionTypeMaster"
+									type master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="connectionTypeMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Connection
-									type master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="categoryMaster"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Category
-									master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="pipeSizeMaster"
+									type master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="pipeSizeMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Pipe
-									size master</span></a></li>
-						<li ui-sref-active="active"><a
+									size master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a
 							ui-sref="categoryPipeSizeMapping" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Category
-									pipe size mapping</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="fileNumber"
+									pipe size mapping</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="fileNumber"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>File
-									number</span></a></li>
-						<li ui-sref-active="active"><a
+									number</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a
 							ui-sref="transactionTypeMaster" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Transaction
-									type master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="cashBookMaster"
+									type master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="cashBookMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Cash
-									book master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="paymentTypes"
+									book master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="customer"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Payment
-									types</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="customer"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Customer</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="manageCashPoint"
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Customer</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="manageCashPoint"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Manage
-									cash point</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="statusMaster"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Status
-									master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="designationMaster"
+									cash point</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="designationMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Designation
-									master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="feasibilityStatus"
+									master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="feasibilityStatus"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Feasibility
-									status</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="approvalDetails"
+									status</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="approvalDetails"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Approval
-									details</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="reAllotment"
+									details</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="reAllotment"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Re
-									allotment</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="configurationDetails"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Configuration
-									details</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="desigCategoryMaster"
+									allotment</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="desigCategoryMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Desig
-									category master</span></a></li>
-						<li ui-sref-active="active"><a
+									category master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a
 							ui-sref="subDesigCategoryMaster" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Sub
-									desig category master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="groupMaster"
+									desig category master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="groupMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Group
-									master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="orgHierarchy"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Org
-									hierarchy</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="designationMappings"
+									master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="designationMappings"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Designation
-									mappings</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="departmentsHierarchy"
+									mappings</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="departmentsHierarchy"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Departments
-									hierarchy</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="departmentTypeMaster"
+									hierarchy</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="departmentTypeMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Department
-									type master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="departmentsMaster"
+									type master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="orgRoleInstance"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Org
+									role instance</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="orgRolesMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Org
+									roles master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a
+							ui-sref="reqDesigWorkflowMapping" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Req
+									desig workflow mapping</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a
+							ui-sref="requestWorkflowMapping" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Request
+									workflow mapping</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="workflowTxnDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Workflow
+									txn details</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="schemeMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Scheme
+									master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="makeOfPipe"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Make
+									of pipe</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="mainWaterSize"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Main
+									water size</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="mainSewerageSize"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Main
+									sewerage size</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="docketCode"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Docket
+									code</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="itemDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Item
+									details</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="customer"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Customer</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="custDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>custDetails</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="custDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>custDetails</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="collDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>collDetails</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="departmentsMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Departments
-									master</span></a></li>
+									master</span></a></li> -->
+						<!-- <li ui-sref-active="active"><a ui-sref="fileUploadMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>File
+									upload master</span></a></li> -->
 						<li ui-sref-active="active"><a ui-sref="orgRoleHierarchy"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Org
 									role hierarchy</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="orgRoleInstance"
+						<li ui-sref-active="active"><a ui-sref="statusMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Status
+									master</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="paymentTypes"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Payment
+									types</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="categoryMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Category
+									master</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="configurationDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Configuration
+									details</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="orgHierarchy"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Org
-									role instance</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="orgRolesMaster"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Org
-									roles master</span></a></li>
+									hierarchy</span></a></li>
 						<li ui-sref-active="active"><a ui-sref="workflowTypeMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Workflow
@@ -203,11 +258,6 @@
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Workflow
 									relationships</span></a></li>
 						<li ui-sref-active="active"><a
-							ui-sref="reqDesigWorkflowMapping" data-toggle="collapse"
-							data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Req
-									desig workflow mapping</span></a></li>
-						<li ui-sref-active="active"><a
 							ui-sref="reqOrgWorkflowMapping" data-toggle="collapse"
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Req
@@ -216,15 +266,6 @@
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Role
 									workflow mapping</span></a></li>
-						<li ui-sref-active="active"><a
-							ui-sref="requestWorkflowMapping" data-toggle="collapse"
-							data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Request
-									workflow mapping</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="workflowTxnDetails"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Workflow
-									txn details</span></a></li>
 						<li ui-sref-active="active"><a ui-sref="workflow"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Workflow</span></a></li>
@@ -233,51 +274,14 @@
 							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Request
 									workflow history</span></a></li>
-
-						<li ui-sref-active="active"><a ui-sref="schemeMaster"
+						<li ui-sref-active="active"><a ui-sref="tariffCategoryMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Scheme
-									master</span></a></li>
-						<li ui-sref-active="active"><a
-							ui-sref="tariffCategoryMaster" data-toggle="collapse"
-							data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Tariff
 									category master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="makeOfPipe"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Make
-									of pipe</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="mainWaterSize"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Main
-									water size</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="mainSewerageSize"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Main
-									sewerage size</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="docketCode"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Docket
-									code</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="itemDetails"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Item
-									details</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="itemRequired"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Item
-									required</span></a></li>
 						<li ui-sref-active="active"><a ui-sref="orgRoleInstance"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Org
 									role instance</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="applicationTxn"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Application
-									txn</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="customer"
-							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Customer</span></a></li>
 						<li ui-sref-active="active"><a ui-sref="divisionMaster"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Division
@@ -290,50 +294,61 @@
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
 								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Street
 									master</span></a></li>
-						<li ui-sref-active="active"><a ui-sref="fileUploadMaster"
+						<li ui-sref-active="active"><a ui-sref="itemRequired"
 							data-toggle="collapse" data-target=".navbar-collapse.in"><span
-								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>File
-									upload master</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="itemRequired" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Item required</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="proceedings" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Proceedings</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="percentageMaster" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Percentage master</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="applicationTxn" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Application txn</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="receipt" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Receipt</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="tariffCategoryMaster" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Tariff category master</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="tariffTypeMaster" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Tariff type master</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="tariffMaster" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Tariff master</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="tariffCharges" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Tariff charges</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="billDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Bill details</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="custDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Cust details</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="billDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >billDetails</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="custDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >custDetails</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="billFullDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >billFullDetails</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="custDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >custDetails</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="meterDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >meterDetails</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="custMeterMapping" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >custMeterMapping</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="collDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >collDetails</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="collDetails" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Coll details</span></a></li>
-<li ui-sref-active="active" ><a ui-sref="instrumentIssuerMaster" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                        &#xA0;<span >Instrument issuer master</span></a></li>
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Item
+									required</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="proceedings"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Proceedings</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="percentageMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Percentage
+									master</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="applicationTxn"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Application
+									txn</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="receipt"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Receipt</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="tariffTypeMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Tariff
+									type master</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="tariffMaster"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Tariff
+									master</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="tariffCharges"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Tariff
+									charges</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="custDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Cust
+									details</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="billDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>BillDetails</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="billFullDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>billFullDetails</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="meterDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>meterDetails</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="custMeterMapping"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>custMeterMapping</span></a></li>
+						<li ui-sref-active="active"><a ui-sref="collDetails"
+							data-toggle="collapse" data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Coll
+									details</span></a></li>
+						<li ui-sref-active="active"><a
+							ui-sref="instrumentIssuerMaster" data-toggle="collapse"
+							data-target=".navbar-collapse.in"><span
+								class="glyphicon glyphicon-asterisk"></span> &#xA0;<span>Instrument
+									issuer master</span></a></li>
 						<!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
 					</ul></li>
 				<li ng-class="{active: $state.includes('account')}"

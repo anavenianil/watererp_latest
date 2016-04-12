@@ -1,21 +1,24 @@
 'use strict';
 
 angular.module('watererpApp').controller('CustMeterMappingDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustMeterMapping', 'CustDetails', 'MeterDetails',
-        function($scope, $stateParams, $uibModalInstance, entity, CustMeterMapping, CustDetails, MeterDetails) {
+        function($scope, $stateParams, $state, CustMeterMapping, CustDetails, MeterDetails) {
 
-        $scope.custMeterMapping = entity;
+        $scope.custMeterMapping = {};
         $scope.custdetailss = CustDetails.query();
         $scope.meterdetailss = MeterDetails.query();
+        
         $scope.load = function(id) {
             CustMeterMapping.get({id : id}, function(result) {
                 $scope.custMeterMapping = result;
             });
         };
+        
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id);
+        }
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:custMeterMappingUpdate', result);
-            $uibModalInstance.close(result);
             $scope.isSaving = false;
         };
 
@@ -53,4 +56,4 @@ angular.module('watererpApp').controller('CustMeterMappingDialogController',
         $scope.datePickerForToDateOpen = function($event) {
             $scope.datePickerForToDate.status.opened = true;
         };
-}]);
+});
