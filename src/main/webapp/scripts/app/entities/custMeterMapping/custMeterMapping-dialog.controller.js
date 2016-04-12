@@ -1,20 +1,25 @@
 'use strict';
 
 angular.module('watererpApp').controller('CustMeterMappingDialogController',
-        function($scope, $stateParams, $state, CustMeterMapping, CustDetails, MeterDetails) {
+        function($scope, $stateParams, $state, CustMeterMapping, CustDetails, MeterDetails, ApplicationTxn) {
 
         $scope.custMeterMapping = {};
         $scope.custdetailss = CustDetails.query();
         $scope.meterdetailss = MeterDetails.query();
         
-        if($stateParams.applicationTxnId != null){
-        	console.log($stateParams.applicationTxnId);
-        }
         $scope.load = function(id) {
             CustMeterMapping.get({id : id}, function(result) {
                 $scope.custMeterMapping = result;
             });
         };
+        
+        if($stateParams.applicationTxnId != null){
+        	console.log("applicationTxnId: "+$stateParams.applicationTxnId);
+        	ApplicationTxn.get({id : $stateParams.applicationTxnId}, function(result) {
+                $scope.applicationTxn = result;
+            });	
+        }
+        
         
         if($stateParams.id != null){
         	$scope.load($stateParams.id);

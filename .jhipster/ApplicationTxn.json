@@ -13,6 +13,13 @@
             "otherEntityName": "customer",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "meterDetails",
+            "otherEntityName": "meterDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -99,6 +106,26 @@
         {
             "fieldId": 17,
             "fieldName": "detailAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 18,
+            "fieldName": "meterReading",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 19,
+            "fieldName": "connectionDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 20,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 21,
+            "fieldName": "can",
             "fieldType": "String"
         }
     ],

@@ -37,53 +37,54 @@
 										required.</p>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_toDate">ToDate</label>
-								<div class="form-group">
-									<div class="input-group date">
-										<input id="field_toDate" type="text" class="form-control"
-											uib-datepicker-popup="{{dateformat}}"
-											ng-model="custMeterMapping.toDate"
-											is-open="datePickerForToDate.status.opened" /> <span
-											class="input-group-btn">
-											<button type="button" class="btn btn-default"
-												ng-click="datePickerForToDateOpen($event)">
-												<i class="glyphicon glyphicon-calendar"></i>
-											</button>
-										</span>
-									</div>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_toDate">ToDate</label>
+							<div class="form-group">
+								<div class="input-group date">
+									<input id="field_toDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="custMeterMapping.toDate"
+										is-open="datePickerForToDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForToDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label for="field_custDetails">custDetails</label> <select
-									class="form-control" id="field_custDetails" name="custDetails"
-									ng-model="custMeterMapping.custDetails"
-									ng-options="custDetails as custDetails.id for custDetails in custdetailss track by custDetails.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-4">
-								<label for="field_meterDetails">meterDetails</label> <select
-									class="form-control" id="field_meterDetails"
-									name="meterDetails" ng-model="custMeterMapping.meterDetails"
-									ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
-									<option value=""></option>
-								</select>
-							</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="field_custDetails">custDetails</label> <select
+								class="form-control" id="field_custDetails" name="custDetails"
+								ng-model="custMeterMapping.custDetails"
+								ng-options="custDetails as custDetails.id for custDetails in custdetailss track by custDetails.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_meterDetails">meterDetails</label> <select
+								class="form-control" id="field_meterDetails" name="meterDetails"
+								ng-model="custMeterMapping.meterDetails"
+								ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
+								<option value=""></option>
+							</select>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							ng-click="clear()">
-							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-						</button>
-						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-							class="btn btn-primary">
-							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-						</button>
-					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
 				</div>
 			</div>
 		</div>

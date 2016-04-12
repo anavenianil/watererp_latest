@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -91,6 +92,15 @@ public class ApplicationTxnResourceIntTest {
     private static final Integer UPDATED_STATUS = 2;
     private static final String DEFAULT_DETAIL_ADDRESS = "AAAAA";
     private static final String UPDATED_DETAIL_ADDRESS = "BBBBB";
+    private static final String DEFAULT_METER_READING = "AAAAA";
+    private static final String UPDATED_METER_READING = "BBBBB";
+
+    private static final LocalDate DEFAULT_CONNECTION_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CONNECTION_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_REMARKS = "AAAAA";
+    private static final String UPDATED_REMARKS = "BBBBB";
+    private static final String DEFAULT_CAN = "AAAAA";
+    private static final String UPDATED_CAN = "BBBBB";
 
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
@@ -135,6 +145,10 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setUpdatedDate(DEFAULT_UPDATED_DATE);
         applicationTxn.setStatus(DEFAULT_STATUS);
         applicationTxn.setDetailAddress(DEFAULT_DETAIL_ADDRESS);
+        applicationTxn.setMeterReading(DEFAULT_METER_READING);
+        applicationTxn.setConnectionDate(DEFAULT_CONNECTION_DATE);
+        applicationTxn.setRemarks(DEFAULT_REMARKS);
+        applicationTxn.setCan(DEFAULT_CAN);
     }
 
     @Test
@@ -170,6 +184,10 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testApplicationTxn.getDetailAddress()).isEqualTo(DEFAULT_DETAIL_ADDRESS);
+        assertThat(testApplicationTxn.getMeterReading()).isEqualTo(DEFAULT_METER_READING);
+        assertThat(testApplicationTxn.getConnectionDate()).isEqualTo(DEFAULT_CONNECTION_DATE);
+        assertThat(testApplicationTxn.getRemarks()).isEqualTo(DEFAULT_REMARKS);
+        assertThat(testApplicationTxn.getCan()).isEqualTo(DEFAULT_CAN);
     }
 
     @Test
@@ -199,7 +217,11 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].updatedDate").value(hasItem(DEFAULT_UPDATED_DATE_STR)))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-                .andExpect(jsonPath("$.[*].detailAddress").value(hasItem(DEFAULT_DETAIL_ADDRESS.toString())));
+                .andExpect(jsonPath("$.[*].detailAddress").value(hasItem(DEFAULT_DETAIL_ADDRESS.toString())))
+                .andExpect(jsonPath("$.[*].meterReading").value(hasItem(DEFAULT_METER_READING.toString())))
+                .andExpect(jsonPath("$.[*].connectionDate").value(hasItem(DEFAULT_CONNECTION_DATE.toString())))
+                .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
+                .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())));
     }
 
     @Test
@@ -229,7 +251,11 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE_STR))
             .andExpect(jsonPath("$.updatedDate").value(DEFAULT_UPDATED_DATE_STR))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.detailAddress").value(DEFAULT_DETAIL_ADDRESS.toString()));
+            .andExpect(jsonPath("$.detailAddress").value(DEFAULT_DETAIL_ADDRESS.toString()))
+            .andExpect(jsonPath("$.meterReading").value(DEFAULT_METER_READING.toString()))
+            .andExpect(jsonPath("$.connectionDate").value(DEFAULT_CONNECTION_DATE.toString()))
+            .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
+            .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()));
     }
 
     @Test
@@ -266,6 +292,10 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setUpdatedDate(UPDATED_UPDATED_DATE);
         applicationTxn.setStatus(UPDATED_STATUS);
         applicationTxn.setDetailAddress(UPDATED_DETAIL_ADDRESS);
+        applicationTxn.setMeterReading(UPDATED_METER_READING);
+        applicationTxn.setConnectionDate(UPDATED_CONNECTION_DATE);
+        applicationTxn.setRemarks(UPDATED_REMARKS);
+        applicationTxn.setCan(UPDATED_CAN);
 
         restApplicationTxnMockMvc.perform(put("/api/applicationTxns")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -293,6 +323,10 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
         assertThat(testApplicationTxn.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testApplicationTxn.getDetailAddress()).isEqualTo(UPDATED_DETAIL_ADDRESS);
+        assertThat(testApplicationTxn.getMeterReading()).isEqualTo(UPDATED_METER_READING);
+        assertThat(testApplicationTxn.getConnectionDate()).isEqualTo(UPDATED_CONNECTION_DATE);
+        assertThat(testApplicationTxn.getRemarks()).isEqualTo(UPDATED_REMARKS);
+        assertThat(testApplicationTxn.getCan()).isEqualTo(UPDATED_CAN);
     }
 
     @Test

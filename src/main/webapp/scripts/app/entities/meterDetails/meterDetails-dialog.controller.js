@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('MeterDetailsDialogController',
-        function($scope, $stateParams, MeterDetails) {
+        function($scope, $stateParams, MeterDetails, $state) {
 
         $scope.meterDetails = {};
         $scope.load = function(id) {
