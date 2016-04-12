@@ -1,0 +1,42 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "billFullDetails",
+            "otherEntityName": "billFullDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "can",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "fromDt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "toDt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160412143549",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

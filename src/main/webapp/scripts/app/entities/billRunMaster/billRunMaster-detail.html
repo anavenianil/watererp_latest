@@ -1,0 +1,62 @@
+
+<div>
+    <h2><span>BillRunMaster</span> {{billRunMaster.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Date</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunMaster.date | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Area</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunMaster.area}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Success</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunMaster.success}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Failed</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunMaster.failed}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunMaster.status}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

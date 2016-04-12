@@ -142,7 +142,7 @@ public class AccountResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public void getBilling(@PathVariable String can) {
-    	billingService.process_bill(can);
+    	billingService.generateSingleBill(can);
         return;
     }
 

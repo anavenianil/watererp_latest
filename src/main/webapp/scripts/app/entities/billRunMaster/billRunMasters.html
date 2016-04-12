@@ -1,0 +1,56 @@
+<div>
+    <h2>BillRunMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="billRunMaster.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new BillRunMaster</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="area"><span>Area</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="success"><span>Success</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="failed"><span>Failed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="billRunMaster in billRunMasters track by billRunMaster.id">
+                    <td><a ui-sref="billRunMaster.detail({id:billRunMaster.id})">{{billRunMaster.id}}</a></td>
+                        <td>{{billRunMaster.date | date:'mediumDate'}}</td>
+                    <td>{{billRunMaster.area}}</td>
+                    <td>{{billRunMaster.success}}</td>
+                    <td>{{billRunMaster.failed}}</td>
+                    <td>{{billRunMaster.status}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="billRunMaster.detail({id:billRunMaster.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="billRunMaster.edit({id:billRunMaster.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="billRunMaster.delete({id:billRunMaster.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

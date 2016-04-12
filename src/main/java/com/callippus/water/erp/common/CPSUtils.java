@@ -1,6 +1,5 @@
 package com.callippus.water.erp.common;
 
-
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -41,16 +40,21 @@ public class CPSUtils {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static boolean compareStrings(String firstValue, String secondValue) throws Exception {
-		if (firstValue != null && secondValue != null && firstValue.equalsIgnoreCase(secondValue))
+	public static boolean compareStrings(String firstValue, String secondValue)
+			throws Exception {
+		if (firstValue != null && secondValue != null
+				&& firstValue.equalsIgnoreCase(secondValue))
 			return true;
 		return false;
 	}
-	public static boolean compareString(String firstValue, String secondValue){
-		if (firstValue != null && secondValue != null && firstValue.equalsIgnoreCase(secondValue))
+
+	public static boolean compareString(String firstValue, String secondValue) {
+		if (firstValue != null && secondValue != null
+				&& firstValue.equalsIgnoreCase(secondValue))
 			return true;
 		return false;
 	}
+
 	@SuppressWarnings("unchecked")
 	public static boolean checkList(List list) throws Exception {
 		if (list != null && list.size() > 0)
@@ -66,7 +70,8 @@ public class CPSUtils {
 	}
 
 	public static boolean isNullOrEmpty(Object value) throws Exception {
-		if (value != null && !value.toString().equalsIgnoreCase("")&& !value.toString().equalsIgnoreCase("null"))
+		if (value != null && !value.toString().equalsIgnoreCase("")
+				&& !value.toString().equalsIgnoreCase("null"))
 			return false;
 		return true;
 	}
@@ -108,7 +113,8 @@ public class CPSUtils {
 		}
 		return today;
 	}
-	public static String formatDate(Date date) throws Exception{
+
+	public static String formatDate(Date date) throws Exception {
 		String formatDate = null;
 		SimpleDateFormat df = null;
 		try {
@@ -121,7 +127,8 @@ public class CPSUtils {
 		}
 		return formatDate;
 	}
-	public static String formatDate1(Date date) throws Exception{
+
+	public static String formatDate1(Date date) throws Exception {
 		String formatDate = null;
 		SimpleDateFormat df = null;
 		try {
@@ -134,6 +141,7 @@ public class CPSUtils {
 		}
 		return formatDate;
 	}
+
 	public static String formattedDate(String date) throws Exception {
 		String dateFormatted = null;
 		SimpleDateFormat df = null;
@@ -149,6 +157,7 @@ public class CPSUtils {
 		}
 		return dateFormatted;
 	}
+
 	public static String formattedDateWithTime(String date) throws Exception {
 		String dateFormatted = null;
 		SimpleDateFormat df = null;
@@ -220,7 +229,8 @@ public class CPSUtils {
 		return result;
 	}
 
-	public static boolean bothNullOrNot(String firstValue, String secondValue) throws Exception {
+	public static boolean bothNullOrNot(String firstValue, String secondValue)
+			throws Exception {
 		boolean status = false;
 		try {
 			if (isNullOrEmpty(firstValue) && isNullOrEmpty(secondValue)) {
@@ -247,7 +257,8 @@ public class CPSUtils {
 		int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
 		try {
 			DateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-			prevDate = formatter.format(((Date) formatter.parse(currentDate)).getTime() - MILLIS_IN_DAY);
+			prevDate = formatter.format(((Date) formatter.parse(currentDate))
+					.getTime() - MILLIS_IN_DAY);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -259,7 +270,8 @@ public class CPSUtils {
 		int MILLIS_IN_DAY = 1000 * 60 * 60 * 24;
 		try {
 			DateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-			nextDate = formatter.format(((Date) formatter.parse(currentDate)).getTime() + MILLIS_IN_DAY);
+			nextDate = formatter.format(((Date) formatter.parse(currentDate))
+					.getTime() + MILLIS_IN_DAY);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -289,14 +301,16 @@ public class CPSUtils {
 		String convertedDate = null;
 		try {
 			String[] dateArr = date.split("-");
-			convertedDate = dateArr[0] + "-" + monthMap.get(dateArr[1]) + "-" + dateArr[2];
+			convertedDate = dateArr[0] + "-" + monthMap.get(dateArr[1]) + "-"
+					+ dateArr[2];
 		} catch (Exception e) {
 			throw e;
 		}
 		return convertedDate;
 	}
 
-	public static String daysDifference(String startDate, String endDate) throws Exception {
+	public static String daysDifference(String startDate, String endDate)
+			throws Exception {
 		String days = "0";
 		Calendar scal = Calendar.getInstance();
 		Calendar ecal = Calendar.getInstance();
@@ -304,23 +318,30 @@ public class CPSUtils {
 		String[] endDateArr = new String[3];
 		try {
 			// build Month
-			if(!CPSUtils.isNull(startDate) && !CPSUtils.isNull(endDate)) {
+			if (!CPSUtils.isNull(startDate) && !CPSUtils.isNull(endDate)) {
 				monthMap();
 				startDate = convertMonthDate(startDate);
 				endDate = convertMonthDate(endDate);
 				startDateArr = startDate.split("-");
 				endDateArr = endDate.split("-");
 
-				scal.set(Integer.valueOf(startDateArr[2]) - 1900, Integer.valueOf(startDateArr[1]) - 1, Integer.valueOf(startDateArr[0]));
-				ecal.set(Integer.valueOf(endDateArr[2]) - 1900, Integer.valueOf(endDateArr[1]) - 1, Integer.valueOf(endDateArr[0]));
-				days = String.valueOf(((ecal.getTime().getTime() - scal.getTime().getTime()) / (1000 * 60 * 60 * 24)) - 1);
+				scal.set(Integer.valueOf(startDateArr[2]) - 1900,
+						Integer.valueOf(startDateArr[1]) - 1,
+						Integer.valueOf(startDateArr[0]));
+				ecal.set(Integer.valueOf(endDateArr[2]) - 1900,
+						Integer.valueOf(endDateArr[1]) - 1,
+						Integer.valueOf(endDateArr[0]));
+				days = String.valueOf(((ecal.getTime().getTime() - scal
+						.getTime().getTime()) / (1000 * 60 * 60 * 24)) - 1);
 			}
 		} catch (Exception e) {
 			throw e;
 		}
 		return days;
 	}
-	public static String daysDifferenceWithTimeWithOutMonthString(String startDate, String endDate) throws Exception {
+
+	public static String daysDifferenceWithTimeWithOutMonthString(
+			String startDate, String endDate) throws Exception {
 		String days = "0";
 		Calendar scal = Calendar.getInstance();
 		Calendar ecal = Calendar.getInstance();
@@ -328,18 +349,24 @@ public class CPSUtils {
 		String[] endDateArr = new String[3];
 		try {
 			// build Month
-			if(!CPSUtils.isNull(startDate) && !CPSUtils.isNull(endDate)) {
+			if (!CPSUtils.isNull(startDate) && !CPSUtils.isNull(endDate)) {
 				startDateArr = startDate.split(" ")[0].split("-");
 				endDateArr = endDate.split(" ")[0].split("-");
-				scal.set(Integer.valueOf(startDateArr[2]), Integer.valueOf(startDateArr[1]) - 1, Integer.valueOf(startDateArr[0]));
-				ecal.set(Integer.valueOf(endDateArr[2]), Integer.valueOf(endDateArr[1]) - 1, Integer.valueOf(endDateArr[0]));
-				days = String.valueOf(((ecal.getTime().getTime() - scal.getTime().getTime()) / (1000 * 60 * 60 * 24)));
+				scal.set(Integer.valueOf(startDateArr[2]),
+						Integer.valueOf(startDateArr[1]) - 1,
+						Integer.valueOf(startDateArr[0]));
+				ecal.set(Integer.valueOf(endDateArr[2]),
+						Integer.valueOf(endDateArr[1]) - 1,
+						Integer.valueOf(endDateArr[0]));
+				days = String.valueOf(((ecal.getTime().getTime() - scal
+						.getTime().getTime()) / (1000 * 60 * 60 * 24)));
 			}
 		} catch (Exception e) {
 			throw e;
 		}
 		return days;
 	}
+
 	public static int yearsDifference(String date) throws Exception {
 		SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 		Date date1 = null;
@@ -355,10 +382,12 @@ public class CPSUtils {
 
 			// different date might have different offset
 			cal1.setTime(date1);
-			long ldate1 = date1.getTime() + cal1.get(Calendar.ZONE_OFFSET) + cal1.get(Calendar.DST_OFFSET);
+			long ldate1 = date1.getTime() + cal1.get(Calendar.ZONE_OFFSET)
+					+ cal1.get(Calendar.DST_OFFSET);
 
 			cal2.setTime(date2);
-			long ldate2 = date2.getTime() + cal2.get(Calendar.ZONE_OFFSET) + cal2.get(Calendar.DST_OFFSET);
+			long ldate2 = date2.getTime() + cal2.get(Calendar.ZONE_OFFSET)
+					+ cal2.get(Calendar.DST_OFFSET);
 
 			// Use integer calculation, truncate the decimals
 			int hr1 = (int) (ldate1 / 3600000); // 60*60*1000
@@ -368,10 +397,12 @@ public class CPSUtils {
 			int days2 = (int) hr2 / 24;
 
 			int dateDiff = days2 - days1;
-			int weekOffset = (cal2.get(Calendar.DAY_OF_WEEK) - cal1.get(Calendar.DAY_OF_WEEK)) < 0 ? 1 : 0;
+			int weekOffset = (cal2.get(Calendar.DAY_OF_WEEK) - cal1
+					.get(Calendar.DAY_OF_WEEK)) < 0 ? 1 : 0;
 			int weekDiff = dateDiff / 7 + weekOffset;
 			yearDiff = cal2.get(Calendar.YEAR) - cal1.get(Calendar.YEAR);
-			int monthDiff = yearDiff * 12 + cal2.get(Calendar.MONTH) - cal1.get(Calendar.MONTH);
+			int monthDiff = yearDiff * 12 + cal2.get(Calendar.MONTH)
+					- cal1.get(Calendar.MONTH);
 
 			// System.out.println("Year difference : " + yearDiff);
 
@@ -381,7 +412,8 @@ public class CPSUtils {
 		return yearDiff;
 	}
 
-	public static boolean isGreaterOrNot(String value1, int value2) throws Exception {
+	public static boolean isGreaterOrNot(String value1, int value2)
+			throws Exception {
 		boolean status = false;
 		try {
 			if (!isNullOrEmpty(value1)) {
@@ -451,7 +483,8 @@ public class CPSUtils {
 		}
 	}
 
-	public static String addNoOfDays(String fromDate, String noOfDays) throws Exception {
+	public static String addNoOfDays(String fromDate, String noOfDays)
+			throws Exception {
 		String result = null;
 		try {
 			DateFormat formatter = new SimpleDateFormat("dd-MMM-yy");
@@ -468,7 +501,8 @@ public class CPSUtils {
 		return result;
 	}
 
-	public static String addNoOfMonths(String fromDate, String noOfMonths) throws Exception {
+	public static String addNoOfMonths(String fromDate, String noOfMonths)
+			throws Exception {
 		String result = null;
 		try {
 			DateFormat formatter = new SimpleDateFormat("dd-MMM-yy");
@@ -486,19 +520,19 @@ public class CPSUtils {
 		return result;
 	}
 
-    /**
-     * Round to certain number of decimals
-     * 
-     * @param d
-     * @param decimalPlace
-     * @return
-     */
-    public static float round(float d, int decimalPlace) {
-        BigDecimal bd = new BigDecimal(Float.toString(d));
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-        return bd.floatValue();
-    }
-	
+	/**
+	 * Round to certain number of decimals
+	 * 
+	 * @param d
+	 * @param decimalPlace
+	 * @return
+	 */
+	public static float round(float d, int decimalPlace) {
+		BigDecimal bd = new BigDecimal(Float.toString(d));
+		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+		return bd.floatValue();
+	}
+
 	public static float round(float number) throws Exception {
 		try {
 			number = (float) Math.round(number);
@@ -508,7 +542,8 @@ public class CPSUtils {
 
 			// DecimalFormat df = new DecimalFormat("#.##");
 			// String[] val = String.valueOf(df.format(number)).split("\\.");
-			// if (val.length ==1 || Integer.valueOf(val[1]) == 5 || Integer.valueOf(val[1]) == 0) {
+			// if (val.length ==1 || Integer.valueOf(val[1]) == 5 ||
+			// Integer.valueOf(val[1]) == 0) {
 			// return number;
 			// } else if (Integer.valueOf(val[1]) < 50) {
 			// return Float.valueOf(val[0]);
@@ -521,7 +556,8 @@ public class CPSUtils {
 		return number;
 	}
 
-	public static String appendValue(String oldValue, String newValue, String delimeter) throws Exception {
+	public static String appendValue(String oldValue, String newValue,
+			String delimeter) throws Exception {
 		if (isNullOrEmpty(oldValue)) {
 			if (isNullOrEmpty(newValue)) {
 				return "";
@@ -553,114 +589,125 @@ public class CPSUtils {
 		daysMap.put("Dec", "31");
 		return Integer.parseInt(daysMap.get(month));
 	}
-	public static boolean compareTwoDates(Date d1, Date d2) throws Exception{
-		boolean b=false;
-			if(d1.getYear()==d2.getYear())
-			{
-				if(d1.getMonth()==d2.getMonth()){
-					if(d1.getDay()==d2.getDay()){
-						b=true;
-					}
+
+	public static boolean compareTwoDates(Date d1, Date d2) throws Exception {
+		boolean b = false;
+		if (d1.getYear() == d2.getYear()) {
+			if (d1.getMonth() == d2.getMonth()) {
+				if (d1.getDay() == d2.getDay()) {
+					b = true;
 				}
 			}
+		}
 		return b;
 	}
-	public static boolean compareTwoDate(Date d1, Date d2){
-		boolean b=false;
-			if(d1.getYear()==d2.getYear())
-			{
-				if(d1.getMonth()==d2.getMonth()){
-					if(d1.getDay()==d2.getDay()){
-						b=true;
-					}
+
+	public static boolean compareTwoDate(Date d1, Date d2) {
+		boolean b = false;
+		if (d1.getYear() == d2.getYear()) {
+			if (d1.getMonth() == d2.getMonth()) {
+				if (d1.getDay() == d2.getDay()) {
+					b = true;
 				}
 			}
+		}
 		return b;
 	}
-	public static int compareTwoDatesUptoYear(Date targetDate,Date baseDate)throws Exception{
-		int returnValue=0;
-		if(targetDate.getYear()<baseDate.getYear())
-			returnValue=-1;
-		else if(targetDate.getYear()>baseDate.getYear())
-			returnValue=1;
-		else if(targetDate.getYear()==baseDate.getYear())
-			returnValue=0;
-		
-		return  returnValue;
+
+	public static int compareTwoDatesUptoYear(Date targetDate, Date baseDate)
+			throws Exception {
+		int returnValue = 0;
+		if (targetDate.getYear() < baseDate.getYear())
+			returnValue = -1;
+		else if (targetDate.getYear() > baseDate.getYear())
+			returnValue = 1;
+		else if (targetDate.getYear() == baseDate.getYear())
+			returnValue = 0;
+
+		return returnValue;
 	}
+
 	@SuppressWarnings("deprecation")
-	public static int compareTwoDatesUptoMonth(Date targetDate,Date baseDate)throws Exception{
-		int	returnValue=compareTwoDatesUptoYear(targetDate,baseDate);
-		if(returnValue==0){
-			if(targetDate.getMonth()==baseDate.getMonth()){
-				returnValue=0;
-			}else if(targetDate.getMonth()>baseDate.getMonth()){
-				returnValue=1;
-			}else if(targetDate.getMonth()<baseDate.getMonth()){
-				returnValue=-1;
+	public static int compareTwoDatesUptoMonth(Date targetDate, Date baseDate)
+			throws Exception {
+		int returnValue = compareTwoDatesUptoYear(targetDate, baseDate);
+		if (returnValue == 0) {
+			if (targetDate.getMonth() == baseDate.getMonth()) {
+				returnValue = 0;
+			} else if (targetDate.getMonth() > baseDate.getMonth()) {
+				returnValue = 1;
+			} else if (targetDate.getMonth() < baseDate.getMonth()) {
+				returnValue = -1;
 			}
 		}
-		return  returnValue;
+		return returnValue;
 	}
+
 	@SuppressWarnings("deprecation")
-	public static int compareTwoDatesUptoDate(Date targetDate,Date baseDate)throws Exception{
-		int	returnValue=compareTwoDatesUptoMonth(targetDate,baseDate);
-		if(returnValue==0){
-			if(targetDate.getDate()==baseDate.getDate()){
-				returnValue=0;
-			}else if(targetDate.getDate()>baseDate.getDate()){
-				returnValue=1;
-			}else if(targetDate.getDate()<baseDate.getDate()){
-				returnValue=-1;
+	public static int compareTwoDatesUptoDate(Date targetDate, Date baseDate)
+			throws Exception {
+		int returnValue = compareTwoDatesUptoMonth(targetDate, baseDate);
+		if (returnValue == 0) {
+			if (targetDate.getDate() == baseDate.getDate()) {
+				returnValue = 0;
+			} else if (targetDate.getDate() > baseDate.getDate()) {
+				returnValue = 1;
+			} else if (targetDate.getDate() < baseDate.getDate()) {
+				returnValue = -1;
 			}
 		}
-		return  returnValue;
+		return returnValue;
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	public static int compareTwoDatesUptoDateWithTime(String targetDate,String baseDate)throws Exception{
-		Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(targetDate.toString().split(" ")[0]);
-		Date bDate = new SimpleDateFormat("yyyy-MM-dd").parse(baseDate.toString().split(" ")[0]);
-		int	returnValue=compareTwoDatesUptoDate(tDate,bDate);
-		
-		int thrs = Integer.parseInt(targetDate.toString().split(" ")[1].split(":")[0]);
-		int tmin = Integer.parseInt(targetDate.toString().split(" ")[1].split(":")[1]);
-		int bhrs = Integer.parseInt(baseDate.toString().split(" ")[1].split(":")[0]);
-		int bmin = Integer.parseInt(baseDate.toString().split(" ")[1].split(":")[1]);
-		if(returnValue==0){
-			
-			if(thrs == bhrs){
-				returnValue=0;
-			}else if(thrs > bhrs){
-				returnValue=1;
-			}else if(thrs < bhrs){
-				returnValue=-1;
-			}	
+	public static int compareTwoDatesUptoDateWithTime(String targetDate,
+			String baseDate) throws Exception {
+		Date tDate = new SimpleDateFormat("yyyy-MM-dd").parse(targetDate
+				.toString().split(" ")[0]);
+		Date bDate = new SimpleDateFormat("yyyy-MM-dd").parse(baseDate
+				.toString().split(" ")[0]);
+		int returnValue = compareTwoDatesUptoDate(tDate, bDate);
+
+		int thrs = Integer.parseInt(targetDate.toString().split(" ")[1]
+				.split(":")[0]);
+		int tmin = Integer.parseInt(targetDate.toString().split(" ")[1]
+				.split(":")[1]);
+		int bhrs = Integer.parseInt(baseDate.toString().split(" ")[1]
+				.split(":")[0]);
+		int bmin = Integer.parseInt(baseDate.toString().split(" ")[1]
+				.split(":")[1]);
+		if (returnValue == 0) {
+
+			if (thrs == bhrs) {
+				returnValue = 0;
+			} else if (thrs > bhrs) {
+				returnValue = 1;
+			} else if (thrs < bhrs) {
+				returnValue = -1;
+			}
 		}
-		if(returnValue==0){
-			if(tmin == bmin){
-				returnValue=0;
-			}else if(tmin > bmin){
-				returnValue=1;
-			}else if(tmin < bmin){
-				returnValue=-1;
-			}	
+		if (returnValue == 0) {
+			if (tmin == bmin) {
+				returnValue = 0;
+			} else if (tmin > bmin) {
+				returnValue = 1;
+			} else if (tmin < bmin) {
+				returnValue = -1;
+			}
 		}
-		
-		return  returnValue;
+
+		return returnValue;
 	}
-	/*public static int compareDatesInBetweenDateWithTime(Date startDate,Date midDate, Date endDate) throws Exception{
-		int returnValue=0;
-		int	returnValue1 = compareTwoDatesUptoDateWithTime(midDate,startDate);
-		int returnValue2 = compareTwoDatesUptoDateWithTime(endDate,midDate);
-		 if(returnValue1==1 && returnValue2==1){
-			 return returnValue=1;	
-		 }else if(returnValue1==0 || returnValue2==0){
-			 return returnValue=0;
-		 }else{
-			 return returnValue=-1;
-		 }
-	}*/
+
+	/*
+	 * public static int compareDatesInBetweenDateWithTime(Date startDate,Date
+	 * midDate, Date endDate) throws Exception{ int returnValue=0; int
+	 * returnValue1 = compareTwoDatesUptoDateWithTime(midDate,startDate); int
+	 * returnValue2 = compareTwoDatesUptoDateWithTime(endDate,midDate);
+	 * if(returnValue1==1 && returnValue2==1){ return returnValue=1; }else
+	 * if(returnValue1==0 || returnValue2==0){ return returnValue=0; }else{
+	 * return returnValue=-1; } }
+	 */
 	public static int getNoofDaysInMonth(int month) throws Exception {
 		final HashMap<Integer, Integer> daysMapInInteger = new HashMap<Integer, Integer>();
 		daysMapInInteger.put(1, 31);
@@ -677,45 +724,63 @@ public class CPSUtils {
 		daysMapInInteger.put(12, 31);
 		return daysMapInInteger.get(month);
 	}
-	public static String convertFirstLetterToUpperCase(String s)throws Exception{
-		s=s.toLowerCase();
-		String nst="";
-		StringTokenizer st=new StringTokenizer(s, " ");
-		while(st.hasMoreTokens()){
-			String token=st.nextToken();
-		    token=(token.substring(0,1).toUpperCase()).concat(token.substring(1));
-			nst=nst+token+" "; 
+
+	public static String convertFirstLetterToUpperCase(String s)
+			throws Exception {
+		s = s.toLowerCase();
+		String nst = "";
+		StringTokenizer st = new StringTokenizer(s, " ");
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+			token = (token.substring(0, 1).toUpperCase()).concat(token
+					.substring(1));
+			nst = nst + token + " ";
 		}
-		nst=nst.substring(0,nst.length()-1);
+		nst = nst.substring(0, nst.length() - 1);
 		return nst;
 	}
-	public static String timeDifference(String maxTime,String minTime)throws Exception{
-		String timeDiff=null;
-		int hrDiff=Integer.parseInt(maxTime.split(":")[0].trim())-Integer.parseInt(minTime.split(":")[0].trim());
-		int minDiff=Integer.parseInt(maxTime.split(":")[1].trim())-Integer.parseInt(minTime.split(":")[1].trim());
-		if(minDiff<0){
-			hrDiff=hrDiff-1;
-			minDiff=60+minDiff;
-		}else if(minDiff>60){
-			hrDiff=hrDiff+1;
-			minDiff=minDiff-60;
-		}else if(minDiff==60){
-			hrDiff=hrDiff+1;
-			minDiff=minDiff-60;
+
+	public static String timeDifference(String maxTime, String minTime)
+			throws Exception {
+		String timeDiff = null;
+		int hrDiff = Integer.parseInt(maxTime.split(":")[0].trim())
+				- Integer.parseInt(minTime.split(":")[0].trim());
+		int minDiff = Integer.parseInt(maxTime.split(":")[1].trim())
+				- Integer.parseInt(minTime.split(":")[1].trim());
+		if (minDiff < 0) {
+			hrDiff = hrDiff - 1;
+			minDiff = 60 + minDiff;
+		} else if (minDiff > 60) {
+			hrDiff = hrDiff + 1;
+			minDiff = minDiff - 60;
+		} else if (minDiff == 60) {
+			hrDiff = hrDiff + 1;
+			minDiff = minDiff - 60;
 		}
-		timeDiff=hrDiff+":"+minDiff;
+		timeDiff = hrDiff + ":" + minDiff;
 		return timeDiff;
 	}
-	public static boolean compareTwoDatesDays(Date d1, Date d2) throws Exception{
-		boolean b=false;
-			if(d1.getYear()==d2.getYear())
-			{
-				if(d1.getMonth()==d2.getMonth()){
-					if(d1.getDate()==d2.getDate()){
-						b=true;
-					}
+
+	public static boolean compareTwoDatesDays(Date d1, Date d2)
+			throws Exception {
+		boolean b = false;
+		if (d1.getYear() == d2.getYear()) {
+			if (d1.getMonth() == d2.getMonth()) {
+				if (d1.getDate() == d2.getDate()) {
+					b = true;
 				}
 			}
+		}
 		return b;
 	}
+
+	public static String stackTraceToString(Throwable e) {
+		StringBuilder sb = new StringBuilder();
+		for (StackTraceElement element : e.getStackTrace()) {
+			sb.append(element.toString());
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
+
 }
