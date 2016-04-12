@@ -7,6 +7,9 @@ angular.module('watererpApp').controller('CustMeterMappingDialogController',
         $scope.custdetailss = CustDetails.query();
         $scope.meterdetailss = MeterDetails.query();
         
+        if($stateParams.applicationTxnId != null){
+        	console.log($stateParams.applicationTxnId);
+        }
         $scope.load = function(id) {
             CustMeterMapping.get({id : id}, function(result) {
                 $scope.custMeterMapping = result;

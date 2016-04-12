@@ -142,5 +142,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('custMeterMappingForMeterAllot', {
+                parent: 'custMeterMapping',
+                url: '/ForMeterAllot/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustMeterMappings'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custMeterMapping/custMeterMapping-dialog.html',
+                        controller: 'CustMeterMappingDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });
