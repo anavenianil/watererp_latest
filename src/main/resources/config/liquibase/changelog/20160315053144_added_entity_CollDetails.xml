@@ -65,6 +65,7 @@
             
             <column name="payment_types_id" type="bigint"/>
             <column name="instrument_issuer_master_id" type="bigint"/>
+            <column name="collection_type_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="coll_details" columnName="receipt_dt" columnDataType="datetime"/>
@@ -83,6 +84,12 @@
                                  constraintName="fk_colldetails_instrumentissuermaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="instrument_issuer_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="collection_type_master_id"
+                                 baseTableName="coll_details"
+                                 constraintName="fk_colldetails_collectiontypemaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="collection_type_master"/>
 
     </changeSet>
 </databaseChangeLog>
