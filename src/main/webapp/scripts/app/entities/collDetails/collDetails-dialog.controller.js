@@ -11,6 +11,7 @@ angular.module('watererpApp')
         $scope.custDetailss = CustDetails.query();
         $scope.custDetails = {};
         $scope.collDetails = {};
+        $scope.collDetails.receiptDt = new Date();
         
         //$scope.paymenttypess1 = PaymentTypes1.query();instrumentIssuerMasters
         $scope.reverse = true;
@@ -125,20 +126,69 @@ angular.module('watererpApp')
         };
         
         $scope.getCustDetails = function(can){
+        	//$scope.getCollDetails(can);
         	CustDetailsService.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.collDetails.consName = $scope.custDetails.consName;
                 $scope.collDetails.can = $scope.custDetails.can;
+                
+                //console.info($scope.collDetails.consName);
+                //console.info($scope.collDetails.can);
+                if($scope.collDetails.consName.length > 0 && $scope.collDetails.can.length > 0){
+                	document.getElementById("field_receiptAmt").disabled=false;
+                	document.getElementById("field_receiptDt1").disabled=false;
+                	document.getElementById("field_receiptDtBtn").disabled=false;
+                	document.getElementById("field_paymentTypes").disabled=false;
+                }else{
+                	document.getElementById("field_receiptAmt").disabled=true;
+                	document.getElementById("field_receiptDt1").disabled=true;
+                	document.getElementById("field_receiptDtBtn").disabled=true;
+                	document.getElementById("field_paymentTypes").disabled=true;
+                }
+                
+                
+                //console.info($scope.collDetailss[0].receiptNo);
+                //console.info($scope.collDetails.receiptNo);
                 //$scope.collDetails.instrumentissuermaster = $scope.custDetails.instrumentissuermaster;
             });
         }
         
-        $scope.setFocus = function(){
-        	//alert("setFocus");
-        	document.getElementById("field_custDetails").focus;
+        /*$scope.getCollDetails = function(can){
+        	CollDetailsCan.get({can : can}, function(result) {
+                $scope.collDetailsCan = result;
+                $scope.collDetailsCan.receiptNo = $scope.custDetailsCan.receiptNo;
+                $scope.collDetails.can = $scope.custDetails.can;
+                //console.info($scope.collDetailss[0].receiptNo);
+                //console.info($scope.collDetails.receiptNo);
+                //$scope.collDetails.instrumentissuermaster = $scope.custDetails.instrumentissuermaster;
+            });
+        }*/
+        $scope.collDetails.custDetails = {};
+        $scope.collDetails.custDetails.can = '';
+        $scope.disEnableSearch = function(enableSearch){ 
+        	//console.info(!isNaN($scope.collDetails.custDetails.can));
+        	//console.info($scope.collDetailss);
+        	//alert("disEnableSearch	"+$scope.collDetails.custDetails.can);
+        	
+        	/*if(isNaN($scope.collDetails.custDetails.can)){
+        		console.info("$scope.collDetails.custDetails.can	"+$scope.collDetails.custDetails.can);
+        		document.getElementById("searchCAN").style.visibility = "visible";
+        		$scope.collDetails.custDetails.can = '';
+        		console.info("$scope.collDetails.custDetails.can	"+$scope.collDetails.custDetails.can);
+        	}
+        	*/
+        	
+        	
+        	if($scope.collDetails.custDetails.can.length > 0 && !isNaN($scope.collDetails.custDetails.can)){
+        		document.getElementById("submitSearch").disabled=false;
+        		console.info(document.getElementById("field_consName").value);
+        	}
+        	else{
+        		document.getElementById("submitSearch").disabled=true;
+        	}
+        	//return !(false);
         }
         
-                
         $scope.disEnableInstr = function(paymentMode){
         	//alert("receiptMode	"+paymentMode);	field_paymentTypes
         	if($scope.collDetails.paymentTypes!=null){
@@ -150,6 +200,7 @@ angular.module('watererpApp')
         		document.getElementById("field_instrDt").disabled=true;
         		document.getElementById("field_receiptDtBtn").disabled=true;
         		document.getElementById("field_instrumentIssuerMaster").disabled=true;
+        		document.getElementById("submitSave").disabled=false;
         		$scope.collDetails.instrNo ='';
         		$scope.collDetails.instrDt ='';
         		$scope.collDetails.instrumentIssuerMaster=null;
@@ -164,6 +215,7 @@ angular.module('watererpApp')
         		document.getElementById("field_instrDt").disabled=false;
         		document.getElementById("field_receiptDtBtn").disabled=false;
         		document.getElementById("field_instrumentIssuerMaster").disabled=false;
+        		document.getElementById("submitSave").disabled=true;
         	}
         	}else{
         		document.getElementById("field_instrNo").disabled=false;

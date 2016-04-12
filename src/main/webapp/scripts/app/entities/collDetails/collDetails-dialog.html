@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="save()">
 	<!-- <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -19,7 +18,7 @@
             <input type="text" class="form-control" id="id" name="id" ng-model="collDetails.id"/>
         </div> -->
 
-						<div class="col-sm-4 col-md-offset-4">
+						<div class="col-sm-4 col-md-offset-4" ng-class="{ 'has-error' : editForm.field_custDetails.$invalid && !editForm.field_custDetails.$pristine }">
 							<label for="field_applicationTxn">Search by CAN</label>
 							<!-- Commented Select Box Functionality -->
 							<!-- <select class="form-control" id="field_applicationTxn" name="applicationTxn"
@@ -28,24 +27,24 @@
 							<!-- <div class="col-sm-4"> -->
 							<div class="form-group">
 								<div class='input-group date' id='field_custDetails'>
-									<input list="custDetails" type="text" id="field_custDetails"
-										class="form-control" ng-model="collDetails.custDetails.can"/>
-
+									<input list="custDetails" type="text" id="field_custDetails" name="field_custDetails"
+										class="form-control" ng-model="collDetails.custDetails.can" ng-change="disEnableSearch(collDetails.custDetails.can)" ng-pattern="/^[0-9]*$/" ng-minlength="1" ng-maxlength="255"/>
 									<datalist id="custDetails">
 										<option ng-repeat="custDetails in custDetailss"
 											value="{{custDetails.can}}">
 									</datalist>
 									<span class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="getCustDetails(collDetails.custDetails.can)">
+										<button type="button" class="btn btn-default" id="submitSearch"
+											ng-click="getCustDetails(collDetails.custDetails.can)" ng-disabled="true">
 											<i class="glyphicon glyphicon-search"></i>
 										</button>
 									</span>
 								</div>
+								<p ng-show="editForm.field_custDetails.$error.pattern" id="searchCAN" class="help-block">Only numbers.</p>
+								<p ng-show="editForm.field_custDetails.$error.minlength" class="help-block">CAN number is too short.</p>
+            					<p ng-show="editForm.field_custDetails.$error.maxlength" class="help-block">CAN number is too long.</p>
 							</div>
 						</div>
-
-
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
@@ -84,24 +83,25 @@
 						</div>
 					</div> -->
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }">
 							<label class="control-label" for="field_receiptAmt">Receipt
 								Amount</label> <input type="number" class="form-control"
 								name="receiptAmt" id="field_receiptAmt"
-								ng-model="collDetails.receiptAmt" />
+								ng-model="collDetails.receiptAmt" ng-pattern="/^[0-9]*$/" ng-disabled="true"/>
+								<p ng-show="editForm.receiptAmt.$error.pattern" class="help-block">Only numbers.</p>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptDt">Receipt
 								Date</label>
 							<div class="form-group">
 								<div class='input-group' id='field_receiptDt'>
-									<input id="field_receiptDt" type="text" class="form-control"
+									<input id="field_receiptDt1" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.receiptDt"
-										is-open="datePickerForReceiptDt.status.opened" />
+										is-open="datePickerForReceiptDt.status.opened" ng-disabled="true"/>
 									<span class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="datePickerForReceiptDtOpen($event)">
+										<button type="button" class="btn btn-default" id='field_receiptDtBtn'
+											ng-click="datePickerForReceiptDtOpen($event)" ng-disabled="true">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
@@ -119,26 +119,26 @@
 								class="form-control" id="field_paymentTypes" name="paymentTypes"
 								ng-model="collDetails.paymentTypes"
 								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id" 
-								ng-change="disEnableInstr(collDetails.paymentTypes.paymentMode)">
+								ng-change="disEnableInstr(collDetails.paymentTypes.paymentMode)" ng-disabled="true">
 								<option value=""></option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }">
 							<label class="control-label" for="field_instrNo">Instrument
-								No</label> <input type="text" class="form-control" name="instrNo"
-								id="field_instrNo" ng-model="collDetails.instrNo" />
+								No</label> <input type="text" class="form-control" name="field_instrNo"
+								id="field_instrNo" ng-model="collDetails.instrNo"  ng-disabled="true"/>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_instrDt">Instrument
 								Date</label>
 							<div class="form-group">
 								<div class='input-group' id='field_receiptDt'>
-									<input id="field_instrDt" type="text" class="form-control"
+									<input id="field_instrDt" name="field_instrDt" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt"
-										is-open="datePickerForInstrDt.status.opened"/>
+										is-open="datePickerForInstrDt.status.opened" ng-disabled="true"/>
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default" id='field_receiptDtBtn'
 											ng-click="datePickerForInstrDtOpen($event)">
@@ -169,7 +169,7 @@
 							<select class="form-control" id="field_instrumentIssuerMaster"
 								name="instrumentIssuerMaster"
 								ng-model="collDetails.instrumentIssuerMaster"
-								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id">
+								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"  ng-disabled="true">
 								<option value=""></option>
 							</select>
 						</div>
@@ -322,7 +322,9 @@
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 					</button>
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					<!-- <button type="submit" ng-disabled="editForm.$invalid || isSaving" ng-disabled="true"
+						class="btn btn-primary" id="submitSave"> -->
+					<button type="submit" ng-disabled="true"
 						class="btn btn-primary" id="submitSave">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 					</button>
