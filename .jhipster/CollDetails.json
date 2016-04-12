@@ -1,5 +1,20 @@
 {
-    "relationships": [],
+    "relationships": [
+    {
+            "relationshipId": 1,
+            "relationshipName": "paymentTypes",
+            "otherEntityName": "paymentTypes",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     },
+     {
+            "relationshipId": 2,
+            "relationshipName": "instrumentIssuerMaster",
+            "otherEntityName": "instrumentIssuerMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     }
+        ],
     "fields": [
         {
             "fieldId": 1,
