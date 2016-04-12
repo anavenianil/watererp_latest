@@ -178,6 +178,22 @@
                     <span class="form-control-static">{{collDetails.longI}}</span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <span>paymentTypes</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="paymentTypes.detail({id:collDetails.paymentTypes.id})">{{collDetails.paymentTypes.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>instrumentIssuerMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="instrumentIssuerMaster.detail({id:collDetails.instrumentIssuerMaster.id})">{{collDetails.instrumentIssuerMaster.id}}</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
