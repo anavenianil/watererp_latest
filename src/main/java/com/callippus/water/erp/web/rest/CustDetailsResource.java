@@ -5,6 +5,7 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -101,6 +103,23 @@ public class CustDetailsResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+    /**
+     * GET  /custDetailss/:id -> get the "id" custDetails.
+     */
+    @RequestMapping(value = "/custDetailss/search/{can}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<CustDetails> getCustDetails1(@PathVariable String can) {
+        log.debug("REST request to get CustDetails : {}", can);
+        CustDetails custDetails = custDetailsRepository.findByCan(can);
+        return Optional.ofNullable(custDetails)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     /**
      * DELETE  /custDetailss/:id -> delete the "id" custDetails.
@@ -113,5 +132,22 @@ public class CustDetailsResource {
         log.debug("REST request to delete CustDetails : {}", id);
         custDetailsRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("custDetails", id.toString())).build();
+    }
+    
+    /**
+     * GET  /custDetailss/:can -> get the "can" custDetails.
+     */
+    @RequestMapping(value = "/custDetailss/search",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<CustDetails> getCustDetailsCan(@RequestParam(value = "can", required = false) String can) {
+        log.debug("REST request to get CustDetails : {}", can);
+        CustDetails custDetails = custDetailsRepository.findByCan(can);
+        return Optional.ofNullable(custDetails)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

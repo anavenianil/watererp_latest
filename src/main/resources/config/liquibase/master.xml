@@ -20,7 +20,6 @@
     <include file="classpath:config/liquibase/changelog/20160229073210_added_entity_StatusMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229073547_added_entity_DesignationMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229073648_added_entity_FeasibilityStatus.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160229074020_added_entity_ApprovalDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229084044_added_entity_ConfigurationDetails.xml" relativeToChangelogFile="false"/>
@@ -62,16 +61,11 @@
     <include file="classpath:config/liquibase/changelog/20160311094820_added_entity_MainWaterSize.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160311094904_added_entity_MainSewerageSize.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160311095014_added_entity_DocketCode.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160311100455_added_entity_FeasibilityStudy.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160315083447_added_entity_Proceedings.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160317071301_added_entity_ItemDetails.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160317100956_added_entity_ItemRequired.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160324101153_added_entity_DivisionMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160324101330_added_entity_ZoneMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160324101502_added_entity_StreetMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160328051857_added_entity_FileUploadMaster.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160328131639_added_entity_FileUploadMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330052554_added_entity_ItemCategoryMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330052808_added_entity_ItemSubCategoryMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330053134_added_entity_ItemCodeMaster.xml" relativeToChangelogFile="false"/>
@@ -79,7 +73,6 @@
     <include file="classpath:config/liquibase/changelog/20160330054006_added_entity_ItemSubCodeMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330054928_added_entity_MaterialMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330055745_added_entity_SibEntry.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330093457_added_entity_PercentageMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml" relativeToChangelogFile="false"/>
@@ -93,5 +86,6 @@
     <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml" relativeToChangelogFile="false"/>    
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>
