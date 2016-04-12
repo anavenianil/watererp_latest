@@ -115,6 +115,9 @@ public class BillDetails implements Serializable {
     @Column(name = "no_meter_amt")
     private Float noMeterAmt;
 
+    @Column(name = "met_reading_dt")
+    private LocalDate metReadingDt;
+
     public Long getId() {
         return id;
     }
@@ -371,6 +374,14 @@ public class BillDetails implements Serializable {
         this.noMeterAmt = noMeterAmt;
     }
 
+    public LocalDate getMetReadingDt() {
+        return metReadingDt;
+    }
+
+    public void setMetReadingDt(LocalDate metReadingDt) {
+        this.metReadingDt = metReadingDt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -423,6 +434,7 @@ public class BillDetails implements Serializable {
             ", lat='" + lat + "'" +
             ", longi='" + longi + "'" +
             ", noMeterAmt='" + noMeterAmt + "'" +
+            ", metReadingDt='" + metReadingDt + "'" +
             '}';
     }
 }

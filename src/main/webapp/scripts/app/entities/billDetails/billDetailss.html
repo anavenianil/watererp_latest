@@ -47,6 +47,7 @@
                     <th jh-sort-by="lat"><span>Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="longi"><span>Longi</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="noMeterAmt"><span>NoMeterAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReadingDt"><span>MetReadingDt</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -84,6 +85,7 @@
                     <td>{{billDetails.lat}}</td>
                     <td>{{billDetails.longi}}</td>
                     <td>{{billDetails.noMeterAmt}}</td>
+                        <td>{{billDetails.metReadingDt | date:'mediumDate'}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="billDetails.detail({id:billDetails.id})"

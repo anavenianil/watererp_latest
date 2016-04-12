@@ -54,6 +54,7 @@
             <column name="lat" type="varchar(255)"/>
             <column name="longi" type="varchar(255)"/>
             <column name="no_meter_amt" type="${floatType}"/>
+            <column name="met_reading_dt" type="date"/>
         </createTable>
         
     </changeSet>

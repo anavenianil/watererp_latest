@@ -100,10 +100,10 @@
             </tr>
             <tr>
                 <td>
-                    <span>Category</span>
+                    <span>CategoryUnused</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{custDetails.category}}</span>
+                    <span class="form-control-static">{{custDetails.categoryUnused}}</span>
                 </td>
             </tr>
             <tr>
@@ -344,6 +344,14 @@
                 </td>
                 <td>
                     <span class="form-control-static">{{custDetails.meterFixDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>tariffCategoryMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="tariffCategoryMaster.detail({id:custDetails.tariffCategoryMaster.id})">{{custDetails.tariffCategoryMaster.id}}</a>
                 </td>
             </tr>
             </tbody>

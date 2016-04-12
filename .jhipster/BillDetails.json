@@ -157,6 +157,11 @@
             "fieldId": 31,
             "fieldName": "noMeterAmt",
             "fieldType": "Float"
+        },
+        {
+            "fieldId": 32,
+            "fieldName": "metReadingDt",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20160314104149",

@@ -27,7 +27,7 @@
                     <th jh-sort-by="address"><span>Address</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="city"><span>City</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="pinCode"><span>PinCode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="category"><span>Category</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryUnused"><span>CategoryUnused</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="pipeSize"><span>PipeSize</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="boardMeter"><span>BoardMeter</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sewerage"><span>Sewerage</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -58,6 +58,7 @@
                     <th jh-sort-by="lat"><span>Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="longi"><span>Longi</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="meterFixDate"><span>MeterFixDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffCategoryMaster.id"><span>tariffCategoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -75,7 +76,7 @@
                     <td>{{custDetails.address}}</td>
                     <td>{{custDetails.city}}</td>
                     <td>{{custDetails.pinCode}}</td>
-                    <td>{{custDetails.category}}</td>
+                    <td>{{custDetails.categoryUnused}}</td>
                     <td>{{custDetails.pipeSize}}</td>
                     <td>{{custDetails.boardMeter}}</td>
                     <td>{{custDetails.sewerage}}</td>
@@ -106,6 +107,9 @@
                     <td>{{custDetails.lat}}</td>
                     <td>{{custDetails.longi}}</td>
                         <td>{{custDetails.meterFixDate | date:'mediumDate'}}</td>
+                    <td>
+                        <a ui-sref="tariffCategoryMaster.detail({id:custDetails.tariffCategoryMaster.id})">{{custDetails.tariffCategoryMaster.id}}</a>
+                    </td>
                     <td>
                         <button type="submit"
                                 ui-sref="custDetails.detail({id:custDetails.id})"
