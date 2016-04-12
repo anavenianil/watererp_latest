@@ -63,7 +63,7 @@ angular.module('watererpApp')
                                     address: null,
                                     city: null,
                                     pinCode: null,
-                                    category: null,
+                                    categoryUnused: null,
                                     pipeSize: null,
                                     boardMeter: null,
                                     sewerage: null,

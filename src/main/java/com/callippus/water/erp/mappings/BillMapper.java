@@ -18,10 +18,12 @@ public interface BillMapper {
         @Mapping(target = "id", constant = "0"),
         @Mapping(source = "cust_details.can", target = "can"),
         @Mapping(source = "cust_details.metReaderCode", target = "metReaderCode"),
+        @Mapping(source = "cust_details.tariffCategoryMaster.id", target = "category"),
         @Mapping(source = "cust_details.mobileNo", target = "mobileNo"),
         @Mapping(source = "bill_details.lat", target = "lat"),
         @Mapping(source = "bill_details.longi", target = "longi"),
-        @Mapping(source = "cust_details.meterFixDate", target = "meterFixDate")
+        @Mapping(source = "cust_details.meterFixDate", target = "meterFixDate"),
+        @Mapping(source = "bill_details.metReadingDt", target = "metReadingDt")
     })
     BillFullDetails bdToBfd(BillDetails bill_details, CustDetails cust_details);
     

@@ -65,6 +65,7 @@ angular.module('watererpApp')
                 lat: null,
                 longi: null,
                 noMeterAmt: null,
+                metReadingDt: null,
                 id: null
             };
         };

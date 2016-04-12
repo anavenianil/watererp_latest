@@ -134,6 +134,18 @@ public class AccountResource {
         return;
     }
 
+    /**
+     * GET  /account -> get the current user.
+     */
+    @RequestMapping(value = "/billing/{can}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void getBilling(@PathVariable String can) {
+    	billingService.process_bill(can);
+        return;
+    }
+
     
     /**
      * POST  /account -> update the current user information.

@@ -1,6 +1,6 @@
 {
   "generator-jhipster": {
-    "baseName": "WaterERP",
+    "baseName": "watererp",
     "packageName": "com.callippus.water.erp",
     "packageFolder": "com/callippus/water/erp",
     "authenticationType": "session",
