@@ -72,7 +72,6 @@ public class BillingService {
 	int monthsDiff = 0;
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
-	LocalDate curBillMonth = null;
 	int newMeterFlag = 0;
 	int unMeteredFlag = 0;
 
@@ -98,7 +97,6 @@ public class BillingService {
 		monthsDiff = 0;
 		dFrom = null;
 		dTo = null;
-		curBillMonth = null;
 		newMeterFlag = 0;
 		unMeteredFlag = 0;
 
@@ -127,8 +125,6 @@ public class BillingService {
 				.getCan());
 		CustValidation retVal = getCustInfo(customer, bill_details);
 
-		curBillMonth = bill_details.getMetReadingDt().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1);
-		
 		if (retVal != CustValidation.SUCCESS) {
 			// Unable to process customer
 			log.debug("Unable to process customer:" + customer.getId()
@@ -136,7 +132,7 @@ public class BillingService {
 			return;
 		}
 
-		if(bfdRepository.findByCanAndPrevBillMonth(bill_details.getCan(), bill_details.getBillDate().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1)) != null){
+		if(bfdRepository.findByCanAndToMonth(bill_details.getCan(), bill_details.getToMonth()) != null){
 			log.debug("Unable to process customer:" + customer.getId()
 					+ ", getCustInfo returned::" + CustValidation.ALREADY_BILLED.name());
 			return;
@@ -146,13 +142,13 @@ public class BillingService {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
+			dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
+			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
 					.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
-
-				dFrom = customer.getMetReadingMo().plus(1,ChronoUnit.MONTHS);
-				dTo =  bill_details.getMetReadingDt().withDayOfMonth(1);
 
 				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
 						customer.getMetReadingDt());
@@ -208,9 +204,6 @@ public class BillingService {
 				log.debug("          LOCK BILL CASE");
 				log.debug("########################################");
 
-				dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
-				dTo = bill_details.getBillDate().withDayOfMonth(1);
-
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
 				log.debug("Months:" + monthsDiff);
@@ -228,9 +221,6 @@ public class BillingService {
 				log.debug("########################################");
 				log.debug("          UNMETERED BILL CASE");
 				log.debug("########################################");
-
-				dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
-				dTo = bill_details.getBillDate().withDayOfMonth(1);
 
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
@@ -309,7 +299,6 @@ public class BillingService {
 
 			bfd.setBillDate(date.toLocalDate());
 			bfd.setBillTime(date.format(formatter));
-			bfd.setPrevBillMonth(bill_details.getBillDate().minus(1,ChronoUnit.MONTHS).withDayOfMonth(1));
 			
 			if(bill_details.getCurrentBillType().equals("M"))
 			{
@@ -318,16 +307,22 @@ public class BillingService {
 			}
 			
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
-
-			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
-			bfd.setToMonth(dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
 			
 			bfd.setUnits(units);
 
 			log.debug("This is the BillFullDetails:" + bfd);
 
 			bfdRepository.save(bfd);
-
+			
+			customer.setPrevBillType(bill_details.getCurrentBillType());
+			customer.setPrevBillMonth(dTo);
+			customer.setArrears(CPSUtils.round(netPayable.floatValue(), 2));
+			customer.setPrevReading(bill_details.getPresentReading());
+			customer.setMetReadingDt(bill_details.getMetReadingDt());
+			customer.setMetReadingMo(bill_details.getMetReadingDt().withDayOfMonth(1));
+			
+			custDetailsRepository.save(customer);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.debug("Invalid From or To Date:" + bill_details.getFromMonth()
@@ -370,9 +365,6 @@ public class BillingService {
 
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -1);
-
-		if (getPrevMonthStart().equals(customer.getPrevBillMonth()))
-			return CustValidation.ALREADY_BILLED;
 
 		if ((customer.getPrevBillType().equals("M") || customer
 				.getPrevBillType().equals("L"))

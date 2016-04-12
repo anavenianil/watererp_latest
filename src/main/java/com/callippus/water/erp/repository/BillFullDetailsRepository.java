@@ -11,5 +11,5 @@ import java.util.List;
  * Spring Data JPA repository for the BillFullDetails entity.
  */
 public interface BillFullDetailsRepository extends JpaRepository<BillFullDetails,Long> {
-	public BillFullDetails findByCanAndPrevBillMonth(String can, LocalDate PrevBillMonth);
+	public BillFullDetails findByCanAndToMonth(String can, String toMonth);
 }
