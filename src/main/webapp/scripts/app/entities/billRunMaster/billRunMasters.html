@@ -27,7 +27,7 @@
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="billRunMaster in billRunMasters track by billRunMaster.id">
                     <td><a ui-sref="billRunMaster.detail({id:billRunMaster.id})">{{billRunMaster.id}}</a></td>
-                        <td>{{billRunMaster.date | date:'mediumDate'}}</td>
+                    <td>{{billRunMaster.date | date:'medium'}}</td>
                     <td>{{billRunMaster.area}}</td>
                     <td>{{billRunMaster.success}}</td>
                     <td>{{billRunMaster.failed}}</td>

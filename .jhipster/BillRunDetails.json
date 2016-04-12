@@ -6,6 +6,13 @@
             "otherEntityName": "billFullDetails",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+     },
+     {
+            "relationshipId": 2,
+            "relationshipName": "billRunMaster",
+            "otherEntityName": "billRunMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
      }
     ],
     "fields": [
@@ -17,12 +24,12 @@
         {
             "fieldId": 2,
             "fieldName": "fromDt",
-            "fieldType": "LocalDate"
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldId": 3,
             "fieldName": "toDt",
-            "fieldType": "LocalDate"
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldId": 4,

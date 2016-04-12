@@ -22,18 +22,29 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="can" type="varchar(255)"/>
-            <column name="from_dt" type="date"/>
-            <column name="to_dt" type="date"/>
+            <column name="from_dt" type="timestamp"/>
+            <column name="to_dt" type="timestamp"/>
             <column name="status" type="integer"/>
             <column name="remarks" type="varchar(255)"/>
             <column name="bill_full_details_id" type="bigint"/>
+            <column name="bill_run_master_id" type="bigint"/>
         </createTable>
+        <dropDefaultValue tableName="bill_run_details" columnName="from_dt" columnDataType="datetime"/>
+
+        <dropDefaultValue tableName="bill_run_details" columnName="to_dt" columnDataType="datetime"/>
+
         
         <addForeignKeyConstraint baseColumnNames="bill_full_details_id"
                                  baseTableName="bill_run_details"
                                  constraintName="fk_billrundetails_billfulldetails_id"
                                  referencedColumnNames="id"
                                  referencedTableName="bill_full_details"/>
+
+        <addForeignKeyConstraint baseColumnNames="bill_run_master_id"
+                                 baseTableName="bill_run_details"
+                                 constraintName="fk_billrundetails_billrunmaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bill_run_master"/>
 
     </changeSet>
 </databaseChangeLog>

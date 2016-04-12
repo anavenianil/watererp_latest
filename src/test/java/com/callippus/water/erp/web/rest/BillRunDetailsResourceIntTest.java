@@ -23,7 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -43,14 +45,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class BillRunDetailsResourceIntTest {
 
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
+
     private static final String DEFAULT_CAN = "AAAAA";
     private static final String UPDATED_CAN = "BBBBB";
 
-    private static final LocalDate DEFAULT_FROM_DT = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_FROM_DT = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_FROM_DT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_FROM_DT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_FROM_DT_STR = dateTimeFormatter.format(DEFAULT_FROM_DT);
 
-    private static final LocalDate DEFAULT_TO_DT = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_TO_DT = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_TO_DT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_TO_DT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_TO_DT_STR = dateTimeFormatter.format(DEFAULT_TO_DT);
 
     private static final Integer DEFAULT_STATUS = 1;
     private static final Integer UPDATED_STATUS = 2;
@@ -125,8 +131,8 @@ public class BillRunDetailsResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(billRunDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
-                .andExpect(jsonPath("$.[*].fromDt").value(hasItem(DEFAULT_FROM_DT.toString())))
-                .andExpect(jsonPath("$.[*].toDt").value(hasItem(DEFAULT_TO_DT.toString())))
+                .andExpect(jsonPath("$.[*].fromDt").value(hasItem(DEFAULT_FROM_DT_STR)))
+                .andExpect(jsonPath("$.[*].toDt").value(hasItem(DEFAULT_TO_DT_STR)))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())));
     }
@@ -143,8 +149,8 @@ public class BillRunDetailsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(billRunDetails.getId().intValue()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
-            .andExpect(jsonPath("$.fromDt").value(DEFAULT_FROM_DT.toString()))
-            .andExpect(jsonPath("$.toDt").value(DEFAULT_TO_DT.toString()))
+            .andExpect(jsonPath("$.fromDt").value(DEFAULT_FROM_DT_STR))
+            .andExpect(jsonPath("$.toDt").value(DEFAULT_TO_DT_STR))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()));
     }

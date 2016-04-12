@@ -4,7 +4,7 @@
         {
             "fieldId": 1,
             "fieldName": "date",
-            "fieldType": "LocalDate"
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldId": 2,

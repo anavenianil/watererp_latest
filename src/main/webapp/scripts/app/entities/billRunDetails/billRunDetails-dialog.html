@@ -54,6 +54,12 @@
                 <option value=""></option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="field_billRunMaster">billRunMaster</label>
+            <select class="form-control" id="field_billRunMaster" name="billRunMaster" ng-model="billRunDetails.billRunMaster" ng-options="billRunMaster as billRunMaster.id for billRunMaster in billrunmasters track by billRunMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

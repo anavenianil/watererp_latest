@@ -23,7 +23,7 @@
                     <span>FromDt</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billRunDetails.fromDt | date:'mediumDate'}}</span>
+                    <span class="form-control-static">{{billRunDetails.fromDt | date:'medium'}}</span>
                 </td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
                     <span>ToDt</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{billRunDetails.toDt | date:'mediumDate'}}</span>
+                    <span class="form-control-static">{{billRunDetails.toDt | date:'medium'}}</span>
                 </td>
             </tr>
             <tr>
@@ -56,6 +56,14 @@
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>billRunMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="billRunMaster.detail({id:billRunDetails.billRunMaster.id})">{{billRunDetails.billRunMaster.id}}</a>
                 </td>
             </tr>
             </tbody>

@@ -2,7 +2,7 @@ package com.callippus.water.erp.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +21,7 @@ public class BillRunMaster implements Serializable {
     private Long id;
 
     @Column(name = "date")
-    private LocalDate date;
+    private ZonedDateTime date;
 
     @Column(name = "area")
     private Integer area;
@@ -43,11 +43,11 @@ public class BillRunMaster implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
 

@@ -22,6 +22,7 @@
                     <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="billFullDetails.id"><span>billFullDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="billRunMaster.id"><span>billRunMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,12 +30,15 @@
                 <tr ng-repeat="billRunDetails in billRunDetailss track by billRunDetails.id">
                     <td><a ui-sref="billRunDetails.detail({id:billRunDetails.id})">{{billRunDetails.id}}</a></td>
                     <td>{{billRunDetails.can}}</td>
-                        <td>{{billRunDetails.fromDt | date:'mediumDate'}}</td>
-                        <td>{{billRunDetails.toDt | date:'mediumDate'}}</td>
+                    <td>{{billRunDetails.fromDt | date:'medium'}}</td>
+                    <td>{{billRunDetails.toDt | date:'medium'}}</td>
                     <td>{{billRunDetails.status}}</td>
                     <td>{{billRunDetails.remarks}}</td>
                     <td>
                         <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="billRunMaster.detail({id:billRunDetails.billRunMaster.id})">{{billRunDetails.billRunMaster.id}}</a>
                     </td>
                     <td>
                         <button type="submit"

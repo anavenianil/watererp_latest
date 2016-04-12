@@ -2,7 +2,7 @@ package com.callippus.water.erp.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,10 +26,10 @@ public class BillRunDetails implements Serializable {
     private String can;
 
     @Column(name = "from_dt")
-    private LocalDate fromDt;
+    private ZonedDateTime fromDt;
 
     @Column(name = "to_dt")
-    private LocalDate toDt;
+    private ZonedDateTime toDt;
 
     @Column(name = "status")
     private Integer status;
@@ -40,6 +40,10 @@ public class BillRunDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name = "bill_full_details_id")
     private BillFullDetails billFullDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "bill_run_master_id")
+    private BillRunMaster billRunMaster;
 
     public Long getId() {
         return id;
@@ -57,19 +61,19 @@ public class BillRunDetails implements Serializable {
         this.can = can;
     }
 
-    public LocalDate getFromDt() {
+    public ZonedDateTime getFromDt() {
         return fromDt;
     }
 
-    public void setFromDt(LocalDate fromDt) {
+    public void setFromDt(ZonedDateTime fromDt) {
         this.fromDt = fromDt;
     }
 
-    public LocalDate getToDt() {
+    public ZonedDateTime getToDt() {
         return toDt;
     }
 
-    public void setToDt(LocalDate toDt) {
+    public void setToDt(ZonedDateTime toDt) {
         this.toDt = toDt;
     }
 
@@ -95,6 +99,14 @@ public class BillRunDetails implements Serializable {
 
     public void setBillFullDetails(BillFullDetails billFullDetails) {
         this.billFullDetails = billFullDetails;
+    }
+
+    public BillRunMaster getBillRunMaster() {
+        return billRunMaster;
+    }
+
+    public void setBillRunMaster(BillRunMaster billRunMaster) {
+        this.billRunMaster = billRunMaster;
     }
 
     @Override

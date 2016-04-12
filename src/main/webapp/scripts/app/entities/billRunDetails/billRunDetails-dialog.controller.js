@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('watererpApp').controller('BillRunDetailsDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillRunDetails', 'BillFullDetails',
-        function($scope, $stateParams, $uibModalInstance, entity, BillRunDetails, BillFullDetails) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillRunDetails', 'BillFullDetails', 'BillRunMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, BillRunDetails, BillFullDetails, BillRunMaster) {
 
         $scope.billRunDetails = entity;
         $scope.billfulldetailss = BillFullDetails.query();
+        $scope.billrunmasters = BillRunMaster.query();
         $scope.load = function(id) {
             BillRunDetails.get({id : id}, function(result) {
                 $scope.billRunDetails = result;
