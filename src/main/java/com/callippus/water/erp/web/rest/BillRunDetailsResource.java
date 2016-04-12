@@ -102,6 +102,21 @@ public class BillRunDetailsResource {
     }
 
     /**
+     * GET  /billRunDetailss/billRun/:id -> get the "id" billRunMaster.
+     */
+    @RequestMapping(value = "/billRunDetailss/billRun/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<BillRunDetails>> getBillRunDetailsByBillRunId(@PathVariable Long id, Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of BillRunDetailss");
+        Page<BillRunDetails> page = billRunDetailsRepository.findByBillRunId(id, pageable); 
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/billRunDetailss/billRun/" + id);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * DELETE  /billRunDetailss/:id -> delete the "id" billRunDetails.
      */
     @RequestMapping(value = "/billRunDetailss/{id}",
