@@ -40,7 +40,7 @@
 										</button>
 									</span>
 								</div>
-								<p ng-show="editForm.field_custDetails.$error.pattern" id="searchCAN" class="help-block">Only numbers.</p>
+								<p ng-show="editForm.field_custDetails.$error.pattern" class="help-block">Only numbers.</p>
 								<p ng-show="editForm.field_custDetails.$error.minlength" class="help-block">CAN number is too short.</p>
             					<p ng-show="editForm.field_custDetails.$error.maxlength" class="help-block">CAN number is too long.</p>
 							</div>
@@ -83,7 +83,7 @@
 						</div>
 					</div> -->
 					<div class="row">
-						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }">
+						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }" ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_receiptAmt">Receipt
 								Amount</label> <input type="number" class="form-control"
 								name="receiptAmt" id="field_receiptAmt"
@@ -125,10 +125,11 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }">
+						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }" ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_instrNo">Instrument
 								No</label> <input type="text" class="form-control" name="field_instrNo"
 								id="field_instrNo" ng-model="collDetails.instrNo"  ng-disabled="true"/>
+								<p ng-show="!collDetails.instrNo.length">Please enter Instrument Number!</p>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_instrDt">Instrument

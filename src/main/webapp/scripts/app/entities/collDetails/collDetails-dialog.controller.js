@@ -229,12 +229,6 @@ angular.module('watererpApp')
         }
     });
 
-
-
-
-
-
-
 /*'use strict';
 
 angular.module('watererpApp').controller('CollDetailsDialogController',
