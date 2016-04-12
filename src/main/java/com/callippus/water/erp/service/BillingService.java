@@ -142,7 +142,7 @@ public class BillingService {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
-			dFrom = customer.getPrevBillMonth().plus(1,ChronoUnit.MONTHS);
+			dFrom = customer.getPrevBillMonth();
 			dTo = bill_details.getBillDate().withDayOfMonth(1);
 			
 			// Previously Metered or Locked and currently Metered
