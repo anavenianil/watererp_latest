@@ -132,7 +132,7 @@ public class BillingService {
 			return;
 		}
 
-		if(bfdRepository.findByCanAndToMonth(bill_details.getCan(), bill_details.getToMonth()) != null){
+		if(bfdRepository.findByCanAndToMonth(customer.getCan(), customer.getPrevBillMonth().format(DateTimeFormatter.ofPattern("yyyyMM"))) != null){
 			log.debug("Unable to process customer:" + customer.getId()
 					+ ", getCustInfo returned::" + CustValidation.ALREADY_BILLED.name());
 			return;
@@ -309,6 +309,8 @@ public class BillingService {
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
 			
 			bfd.setUnits(units);
+			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
+			bfd.setToMonth(dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
 
 			log.debug("This is the BillFullDetails:" + bfd);
 
