@@ -72,20 +72,27 @@ CREATE TABLE `application_txn` (
   `village_executive_office` varchar(255) default NULL,
   `village_executive_office_number` varchar(255) default NULL,
   `po_box` varchar(255) default NULL,
-  `requested_date` timestamp NULL default NULL,
+  `requested_date` timestamp NULL,
   `photo` varchar(255) default NULL,
   `file_number` varchar(255) default NULL,
-  `created_date` timestamp NULL default NULL,
-  `updated_date` timestamp NULL default NULL,
+  `created_date` timestamp NULL,
+  `updated_date` timestamp NULL,
   `status` int(11) default NULL,
   `detail_address` varchar(255) default NULL,
+  `meter_reading` varchar(255) default NULL,
+  `connection_date` date default NULL,
+  `remarks` varchar(255) default NULL,
+  `can` varchar(255) default NULL,
   `category_master_id` bigint(20) default NULL,
   `customer_id` bigint(20) default NULL,
+  `meter_details_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
   KEY `fk_applicationtxn_categorymaster_id` (`category_master_id`),
   KEY `fk_applicationtxn_customer_id` (`customer_id`),
-  CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
-  CONSTRAINT `fk_applicationtxn_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`)
+  KEY `fk_applicationtxn_meterdetails_id` (`meter_details_id`),
+  CONSTRAINT `fk_applicationtxn_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
+  CONSTRAINT `fk_applicationtxn_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
+  CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -123,41 +130,6 @@ INSERT INTO `application_type_master` (`id`,`application_type`,`created_date`,`u
  (3,'Filling Station','2016-03-03 00:00:00','2016-03-03 00:00:00','1','abc','abc'),
  (4,'General','2016-03-03 00:00:00','2016-03-03 00:00:00','1','abc','abc');
 /*!40000 ALTER TABLE `application_type_master` ENABLE KEYS */;
-
-
---
--- Table structure for table `watererp`.`approval_details`
---
-
-DROP TABLE IF EXISTS `approval_details`;
-CREATE TABLE `approval_details` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `remarks` varchar(255) default NULL,
-  `approved_date` timestamp NULL default NULL,
-  `approved_emp_no` varchar(255) default NULL,
-  `approved_emp_name` varchar(255) default NULL,
-  `approved_emp_desig` varchar(255) default NULL,
-  `customer_id` bigint(20) default NULL,
-  `feasibility_status_id` bigint(20) default NULL,
-  `designation_master_id` bigint(20) default NULL,
-  `application_txn_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `fk_approvaldetails_customer_id` (`customer_id`),
-  KEY `fk_approvaldetails_feasibilitystatus_id` (`feasibility_status_id`),
-  KEY `fk_approvaldetails_designationmaster_id` (`designation_master_id`),
-  KEY `fk_approvaldetails_applicationtxn_id` (`application_txn_id`),
-  CONSTRAINT `fk_approvaldetails_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
-  CONSTRAINT `fk_approvaldetails_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
-  CONSTRAINT `fk_approvaldetails_designationmaster_id` FOREIGN KEY (`designation_master_id`) REFERENCES `designation_master` (`id`),
-  CONSTRAINT `fk_approvaldetails_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`approval_details`
---
-
-/*!40000 ALTER TABLE `approval_details` DISABLE KEYS */;
-/*!40000 ALTER TABLE `approval_details` ENABLE KEYS */;
 
 
 --
@@ -312,41 +284,6 @@ INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`me
 
 
 --
--- Table structure for table `watererp`.`bill_of_material`
---
-
-DROP TABLE IF EXISTS `bill_of_material`;
-CREATE TABLE `bill_of_material` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `amount` double default NULL,
-  `bank_name` varchar(255) default NULL,
-  `branch_name` varchar(255) default NULL,
-  `check_or_dd_date` date default NULL,
-  `check_or_dd_no` varchar(255) default NULL,
-  `bill_date` date default NULL,
-  `application_txn_id` bigint(20) default NULL,
-  `payment_types_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `fk_billofmaterial_applicationtxn_id` (`application_txn_id`),
-  KEY `fk_billofmaterial_paymenttypes_id` (`payment_types_id`),
-  CONSTRAINT `fk_billofmaterial_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
-  CONSTRAINT `fk_billofmaterial_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`bill_of_material`
---
-
-/*!40000 ALTER TABLE `bill_of_material` DISABLE KEYS */;
-INSERT INTO `bill_of_material` (`id`,`amount`,`bank_name`,`branch_name`,`check_or_dd_date`,`check_or_dd_no`,`bill_date`,`application_txn_id`,`payment_types_id`) VALUES 
- (1,346347,'sbi','kphb','2016-04-01','544656','2016-04-01',38,1),
- (2,654654,'icici','kphb','2016-04-01','65456','2016-04-01',38,2),
- (3,116565,'ksdjs','hksdjhksljhd','2016-04-01','64554','2016-04-01',38,3),
- (4,34634,'34sdg','gsga','2016-04-01','46346','2016-04-01',38,1);
-/*!40000 ALTER TABLE `bill_of_material` ENABLE KEYS */;
-
-
---
 -- Table structure for table `watererp`.`bill_run_details`
 --
 
@@ -494,7 +431,7 @@ CREATE TABLE `coll_details` (
   `reversal_ref` varchar(255) default NULL,
   `receipt_no` varchar(255) default NULL,
   `receipt_amt` float default NULL,
-  `receipt_dt` timestamp NULL default NULL,
+  `receipt_dt` timestamp NULL,
   `receipt_mode` varchar(255) default NULL,
   `instr_no` varchar(255) default NULL,
   `instr_dt` date default NULL,
@@ -503,7 +440,7 @@ CREATE TABLE `coll_details` (
   `can` varchar(255) default NULL,
   `cons_name` varchar(255) default NULL,
   `terminal_id` varchar(255) default NULL,
-  `coll_time` timestamp NULL default NULL,
+  `coll_time` timestamp NULL,
   `txn_status` varchar(255) default NULL,
   `meter_reader_id` varchar(255) default NULL,
   `user_id` varchar(255) default NULL,
@@ -514,9 +451,12 @@ CREATE TABLE `coll_details` (
   `long_i` varchar(255) default NULL,
   `payment_types_id` bigint(20) default NULL,
   `instrument_issuer_master_id` bigint(20) default NULL,
+  `collection_type_master_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
   KEY `fk_colldetails_paymenttypes_id` (`payment_types_id`),
   KEY `fk_colldetails_instrumentissuermaster_id` (`instrument_issuer_master_id`),
+  KEY `fk_colldetails_collectiontypemaster_id` (`collection_type_master_id`),
+  CONSTRAINT `fk_colldetails_collectiontypemaster_id` FOREIGN KEY (`collection_type_master_id`) REFERENCES `collection_type_master` (`id`),
   CONSTRAINT `fk_colldetails_instrumentissuermaster_id` FOREIGN KEY (`instrument_issuer_master_id`) REFERENCES `instrument_issuer_master` (`id`),
   CONSTRAINT `fk_colldetails_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -527,6 +467,25 @@ CREATE TABLE `coll_details` (
 
 /*!40000 ALTER TABLE `coll_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`collection_type_master`
+--
+
+DROP TABLE IF EXISTS `collection_type_master`;
+CREATE TABLE `collection_type_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `coll_name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`collection_type_master`
+--
+
+/*!40000 ALTER TABLE `collection_type_master` DISABLE KEYS */;
+/*!40000 ALTER TABLE `collection_type_master` ENABLE KEYS */;
 
 
 --
@@ -2649,34 +2608,6 @@ CREATE TABLE `customer` (
 
 
 --
--- Table structure for table `watererp`.`customer_complaints`
---
-
-DROP TABLE IF EXISTS `customer_complaints`;
-CREATE TABLE `customer_complaints` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `remarks` varchar(255) default NULL,
-  `relevant_doc` varchar(255) default NULL,
-  `complaint_by` varchar(255) default NULL,
-  `complaint_date` date default NULL,
-  `application_txn_id` bigint(20) default NULL,
-  `complaint_type_master_id` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `fk_customercomplaints_applicationtxn_id` (`application_txn_id`),
-  KEY `fk_customercomplaints_complainttypemaster_id` (`complaint_type_master_id`),
-  CONSTRAINT `fk_customercomplaints_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
-  CONSTRAINT `fk_customercomplaints_complainttypemaster_id` FOREIGN KEY (`complaint_type_master_id`) REFERENCES `complaint_type_master` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`customer_complaints`
---
-
-/*!40000 ALTER TABLE `customer_complaints` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customer_complaints` ENABLE KEYS */;
-
-
---
 -- Table structure for table `watererp`.`databasechangelog`
 --
 
@@ -2785,31 +2716,32 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160330054928','jhipster','classpath:config/liquibase/changelog/20160330054928_added_entity_MaterialMaster.xml','2016-03-30 11:28:48',79,'EXECUTED','7:983fd1500db22988ac26254293296036','createTable, dropDefaultValue (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160330055745','jhipster','classpath:config/liquibase/changelog/20160330055745_added_entity_SibEntry.xml','2016-03-30 11:28:49',80,'EXECUTED','7:da7d47c69cd368ff14809fae56104b33','createTable, dropDefaultValue (x9)','',NULL,'3.4.2',NULL,NULL),
  ('20160330093457','jhipster','classpath:config/liquibase/changelog/20160330093457_added_entity_PercentageMaster.xml','2016-03-30 19:02:55',85,'EXECUTED','7:939ffd4e62fb70f2288fd5eb2055b778','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_BillOfMaterial.xml','2016-04-01 13:00:10',86,'EXECUTED','7:4bc9d2b3db96ca1d16d623ad6adb5f8a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml','2016-04-01 15:34:53',87,'EXECUTED','7:c01f3faca05eff0386e65260cc81849e','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffCategoryMaster.xml','2016-04-01 15:34:53',87,'EXECUTED','7:c01f3faca05eff0386e65260cc81849e','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffTypeMaster.xml','2016-04-01 15:34:53',88,'EXECUTED','7:2fdf8de5ece58a24c9842690d2599317','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffMaster.xml','2016-04-01 15:34:54',89,'EXECUTED','7:de67571b345cd24609fcbc1d6d8e12ab','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160401094431','jhipster','classpath:config/liquibase/changelog/20160401094431_added_entity_TariffCharges.xml','2016-04-01 15:34:56',90,'EXECUTED','7:84a4098f6e6489da14e4b14c2d948a2c','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-04-03 16:37:33',93,'EXECUTED','7:1d7e8751c1e0e86930e4f6e3c3f39010','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-04-03 16:37:33',93,'EXECUTED','7:1d7e8751c1e0e86930e4f6e3c3f39010','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-04-05 09:42:29',95,'EXECUTED','7:676b41cabaa3375b2480adb58c2e6eaf','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-04-05 09:42:29',95,'EXECUTED','7:676b41cabaa3375b2480adb58c2e6eaf','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-04-05 09:42:30',96,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160406042024','jhipster','classpath:config/liquibase/changelog/20160406042024_added_entity_InstrumentIssuerMaster.xml','2016-04-06 10:33:04',98,'EXECUTED','7:e6ddd2edc49130805cd0d945da5c8bff','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-12 13:09:09',99,'EXECUTED','7:a854bf3c0a5a10cd0ed141e80c70f5e4','createTable, dropDefaultValue (x3), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-12 13:09:11',100,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-04-12 13:09:14',101,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
- ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-04-12 13:09:15',102,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-04-12 13:09:15',103,'EXECUTED','7:68db58ac422a749fec3dc3ab31930f41','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml','2016-04-12 13:09:15',104,'EXECUTED','7:c759f81b18397b40cc05e2759e68e9e9','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-04-12 13:09:16',105,'EXECUTED','7:a6212010b6b0806261cb83574604c99f','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+ ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-04-12 13:09:16',105,'EXECUTED','7:a6212010b6b0806261cb83574604c99f','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160409042538','jhipster','classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml','2016-04-12 13:09:17',107,'EXECUTED','7:16829833f2d3e87199a121db96980eaf','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-04-12 13:09:17',106,'EXECUTED','7:eae16397a7a7ea262a69cd7f91df3d75','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160409042538','jhipster','classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml','2016-04-12 13:09:17',107,'EXECUTED','7:16829833f2d3e87199a121db96980eaf','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-04-12 13:09:18',108,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160412142749','jhipster','classpath:config/liquibase/changelog/20160412142749_added_entity_BillRunMaster.xml','2016-04-13 11:50:30',109,'EXECUTED','7:b34ea10d67f40bb5c95e7ad4be486e01','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-04-13 11:50:30',110,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-04-13 11:50:30',110,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-13 12:52:55',111,'EXECUTED','7:6958119a3e7c83241e310c06bd884282','createTable, dropDefaultValue (x3), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-13 12:52:57',112,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-04-13 12:53:00',113,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
+ ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-04-13 12:53:01',114,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-04-13 12:53:01',115,'EXECUTED','7:68db58ac422a749fec3dc3ab31930f41','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-04-13 12:53:01',116,'EXECUTED','7:9bb21c849c62b60681b4122c4a95e67b','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-04-13 12:53:02',117,'EXECUTED','7:86e8348b225c581edd72d5d4787583ad','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-04-13 12:53:03',118,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -3209,12 +3141,12 @@ INSERT INTO `feasibility_status` (`id`,`status`) VALUES
 DROP TABLE IF EXISTS `feasibility_study`;
 CREATE TABLE `feasibility_study` (
   `id` bigint(20) NOT NULL auto_increment,
-  `created_date` timestamp NULL default NULL,
-  `modified_date` timestamp NULL default NULL,
-  `prepared_date` timestamp NULL default NULL,
-  `zonal_head_approval_date` timestamp NULL default NULL,
-  `dept_head_inspected_date` timestamp NULL default NULL,
-  `operation_mangrapprove_date` timestamp NULL default NULL,
+  `created_date` timestamp NULL,
+  `modified_date` timestamp NULL,
+  `prepared_date` timestamp NULL,
+  `zonal_head_approval_date` timestamp NULL,
+  `dept_head_inspected_date` timestamp NULL,
+  `operation_mangrapprove_date` timestamp NULL,
   `status` int(11) default NULL,
   `division_master_id` bigint(20) default NULL,
   `zone_master_id` bigint(20) default NULL,
@@ -5648,8 +5580,8 @@ DROP TABLE IF EXISTS `request_workflow_history`;
 CREATE TABLE `request_workflow_history` (
   `id` bigint(20) NOT NULL auto_increment,
   `request_stage` int(11) default NULL,
-  `assigned_date` timestamp NULL default NULL,
-  `actioned_date` timestamp NULL default NULL,
+  `assigned_date` timestamp NULL,
+  `actioned_date` timestamp NULL,
   `remarks` varchar(255) default NULL,
   `ip_address` varchar(255) default NULL,
   `assigned_role` int(11) default NULL,
