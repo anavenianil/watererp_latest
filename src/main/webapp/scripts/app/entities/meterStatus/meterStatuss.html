@@ -1,13 +1,13 @@
 <div>
-    <h2>MeterDetailss</h2>
+    <h2>MeterStatuss</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="meterDetails.new" >
+                <button class="btn btn-primary" ui-sref="meterStatus.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span 
-                       >Create new MeterDetails
+                       >Create new MeterStatus
                     </span>
                 </button>
             </div>
@@ -19,42 +19,30 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterId"><span>MeterId</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterType"><span>MeterType</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterMake"><span>MeterMake</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="min"><span>Min</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="max"><span>Max</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterStatus.id"><span>meterStatus</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="meterDetails in meterDetailss track by meterDetails.id">
-                    <td><a ui-sref="meterDetails.detail({id:meterDetails.id})">{{meterDetails.id}}</a></td>
-                    <td>{{meterDetails.meterId}}</td>
-                    <td>{{meterDetails.meterType}}</td>
-                    <td>{{meterDetails.meterMake}}</td>
-                    <td>{{meterDetails.min}}</td>
-                    <td>{{meterDetails.max}}</td>
-                    <td>
-                        <a ui-sref="meterStatus.detail({id:meterDetails.meterStatus.id})">{{meterDetails.meterStatus.status}}</a>
-                    </td>
+                <tr ng-repeat="meterStatus in meterStatuss track by meterStatus.id">
+                    <td><a ui-sref="meterStatus.detail({id:meterStatus.id})">{{meterStatus.id}}</a></td>
+                    <td>{{meterStatus.status}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="meterDetails.detail({id:meterDetails.id})"
+                                    ui-sref="meterStatus.detail({id:meterStatus.id})"
                                     class="btn btn-info btn-sm"> 
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="meterDetails.edit({id:meterDetails.id})"
+                                    ui-sref="meterStatus.edit({id:meterStatus.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="meterDetails.delete({id:meterDetails.id})"
+                                    ui-sref="meterStatus.delete({id:meterStatus.id})"
                                     class="btn btn-danger btn-sm">                                    
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Receipt entity.
+ * Performance test for the MeterStatus entity.
  */
-class ReceiptGatlingTest extends Simulation {
+class MeterStatusGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class ReceiptGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the Receipt entity")
+    val scn = scenario("Test the MeterStatus entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class ReceiptGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all receipts")
-            .get("/api/receipts")
+            exec(http("Get all meterStatuss")
+            .get("/api/meterStatuss")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new receipt")
-            .post("/api/receipts")
+            .exec(http("Create new meterStatus")
+            .post("/api/meterStatuss")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "amount":null, "bankName":"SAMPLE_TEXT", "branchName":"SAMPLE_TEXT", "checkOrDdDate":"2020-01-01T00:00:00.000Z", "checkOrDdNo":"SAMPLE_TEXT", "receiptDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "status":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_receipt_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_meterStatus_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created receipt")
-                .get("${new_receipt_url}")
+                exec(http("Get created meterStatus")
+                .get("${new_meterStatus_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created receipt")
-            .delete("${new_receipt_url}")
+            .exec(http("Delete created meterStatus")
+            .delete("${new_meterStatus_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

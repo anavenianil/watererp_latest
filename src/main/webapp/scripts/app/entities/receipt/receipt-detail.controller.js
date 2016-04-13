@@ -12,8 +12,5 @@ angular.module('watererpApp')
             $scope.receipt = result;
         });
         $scope.$on('$destroy', unsubscribe);
-        
-       
-        
 
     });

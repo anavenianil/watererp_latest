@@ -43,7 +43,7 @@
         },
         {
             "fieldId": 6,
-            "fieldName": "billDate",
+            "fieldName": "receiptDate",
             "fieldType": "LocalDate"
         }
     ],

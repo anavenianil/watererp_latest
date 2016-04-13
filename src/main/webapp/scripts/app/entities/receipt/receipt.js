@@ -57,7 +57,7 @@ angular.module('watererpApp')
                                     branchName: null,
                                     checkOrDdDate: null,
                                     checkOrDdNo: null,
-                                    billDate: null,
+                                    receiptDate: null,
                                     id: null
                                 };
                             }

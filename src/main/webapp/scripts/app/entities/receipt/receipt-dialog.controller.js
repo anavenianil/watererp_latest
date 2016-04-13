@@ -8,7 +8,7 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         $scope.paymenttypess = PaymentTypes.query();
         
         $scope.maxDate = new Date();
-        $scope.receipt.billDate = new Date();
+        $scope.receipt.receiptDate = new Date();
         
         $scope.load = function(id) {
             Receipt.get({id : id}, function(result) {
@@ -62,13 +62,13 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         $scope.datePickerForCheckOrDdDateOpen = function($event) {
             $scope.datePickerForCheckOrDdDate.status.opened = true;
         };
-        $scope.datePickerForBillDate = {};
+        $scope.datePickerForReceiptDate = {};
 
-        $scope.datePickerForBillDate.status = {
+        $scope.datePickerForReceiptDate.status = {
             opened: false
         };
 
-        $scope.datePickerForBillDateOpen = function($event) {
-            $scope.datePickerForBillDate.status.opened = true;
+        $scope.datePickerForReceiptDateOpen = function($event) {
+            $scope.datePickerForReceiptDate.status.opened = true;
         };
 });
