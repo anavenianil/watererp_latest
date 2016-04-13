@@ -73,3 +73,11 @@ To setup this project in Jenkins, use the following configuration:
 [Karma]: http://karma-runner.github.io/
 [Jasmine]: http://jasmine.github.io/2.0/introduction.html
 [Protractor]: https://angular.github.io/protractor/
+
+# Dependent tables for dropping
+SELECT
+TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+FROM
+INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+REFERENCED_TABLE_NAME = 'application_txn';

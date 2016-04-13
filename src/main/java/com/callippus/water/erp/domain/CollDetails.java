@@ -1,15 +1,21 @@
 package com.callippus.water.erp.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A CollDetails.
@@ -93,6 +99,10 @@ public class CollDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name = "instrument_issuer_master_id")
     private InstrumentIssuerMaster instrumentIssuerMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "collection_type_master_id")
+    private CollectionTypeMaster collectionTypeMaster;
 
     public Long getId() {
         return id;
@@ -284,6 +294,14 @@ public class CollDetails implements Serializable {
 
     public void setInstrumentIssuerMaster(InstrumentIssuerMaster instrumentIssuerMaster) {
         this.instrumentIssuerMaster = instrumentIssuerMaster;
+    }
+
+    public CollectionTypeMaster getCollectionTypeMaster() {
+        return collectionTypeMaster;
+    }
+
+    public void setCollectionTypeMaster(CollectionTypeMaster collectionTypeMaster) {
+        this.collectionTypeMaster = collectionTypeMaster;
     }
 
     @Override

@@ -1,0 +1,49 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "billFullDetails",
+            "otherEntityName": "billFullDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     },
+     {
+            "relationshipId": 2,
+            "relationshipName": "billRunMaster",
+            "otherEntityName": "billRunMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "can",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "fromDt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "toDt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160412143549",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

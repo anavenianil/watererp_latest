@@ -45,8 +45,6 @@ public class AccountResource {
     @Inject
     private UserService userService;
 
-    @Inject
-    private BillingService billingService;
 
     @Inject
     private PersistentTokenRepository persistentTokenRepository;
@@ -120,30 +118,6 @@ public class AccountResource {
         return Optional.ofNullable(userService.getUserWithAuthorities())
             .map(user -> new ResponseEntity<>(new UserDTO(user), HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
-    }
-
-    /**
-     * GET  /account -> get the current user.
-     */
-    @RequestMapping(value = "/billing",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public void getBilling() {
-    	billingService.generateBill();
-        return;
-    }
-
-    /**
-     * GET  /account -> get the current user.
-     */
-    @RequestMapping(value = "/billing/{can}",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public void getBilling(@PathVariable String can) {
-    	billingService.process_bill(can);
-        return;
     }
 
     

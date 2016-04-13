@@ -1,0 +1,78 @@
+
+<div>
+    <h2><span>BillRunDetails</span> {{billRunDetails.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Can</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunDetails.can}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>FromDt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunDetails.fromDt | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ToDt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunDetails.toDt | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunDetails.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Remarks</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{billRunDetails.remarks}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>billFullDetails</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>billRunMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="billRunMaster.detail({id:billRunDetails.billRunMaster.id})">{{billRunDetails.billRunMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

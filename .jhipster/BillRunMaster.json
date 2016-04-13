@@ -1,0 +1,34 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "area",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "success",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "failed",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "status",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160412142749",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

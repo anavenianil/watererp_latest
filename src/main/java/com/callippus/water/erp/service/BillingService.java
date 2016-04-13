@@ -3,11 +3,15 @@ package com.callippus.water.erp.service;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.BillDetails;
 import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.domain.BillRunDetails;
+import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.mappings.BillMapper;
 import com.callippus.water.erp.repository.BillDetailsRepository;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
+import com.callippus.water.erp.repository.BillRunDetailsRepository;
+import com.callippus.water.erp.repository.BillRunMasterRepository;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.TariffMasterCustomRepository;
@@ -15,6 +19,7 @@ import com.callippus.water.erp.repository.TariffMasterCustomRepository;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -36,6 +41,12 @@ public class BillingService {
 
 	private final Logger log = LoggerFactory.getLogger(BillingService.class);
 
+	@Inject
+	private BillRunMasterRepository billRunMasterRepository;
+	
+	@Inject
+	private BillRunDetailsRepository billRunDetailsRepository;
+	
 	@Inject
 	private BillDetailsRepository billDetailsRepository;
 
@@ -74,19 +85,46 @@ public class BillingService {
 	LocalDate dTo = null;
 	int newMeterFlag = 0;
 	int unMeteredFlag = 0;
+	int successRecords = 0;
+	int failedRecords = 0;
+	BillRunDetails brd = null;
+	BillRunMaster br = null;
 
 	ConfigurationDetails cd = null;
 
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f,
 			total_cess = 0.0f, kl = 0.0f;
 
-	public void generateBill() {
-
+	public BillRunMaster generateBill() {		
+		initBillRun();
+		
 		List<BillDetails> bd = billDetailsRepository.findAll();
 		processBills(bd);
+		
+		return br;
 	}
 
-	public void init() {
+	public BillRunMaster generateSingleBill(String can) {		
+		initBillRun();
+		
+		process_bill(can);
+		
+		return br;
+	}
+
+	public void initBillRun()
+	{
+		br = new BillRunMaster();
+		br.setArea("0");
+		br.setDate(ZonedDateTime.now());
+		br.setSuccess(0);
+		br.setFailed(0);
+		br.setStatus("I");
+		
+		billRunMasterRepository.save(br);		
+	}
+	
+	public void initBill(String can) {
 		avgKL = 0.0f;
 		factor = 0.0f;
 		prevAvgKL = 0.0f;
@@ -105,7 +143,13 @@ public class BillingService {
 		surcharge = 0.0f;
 		total_cess = 0.0f;
 		kl = 0.0f;
-
+		
+		brd = new BillRunDetails();
+		brd.setCan(can);
+		brd.setFromDt(ZonedDateTime.now());
+		brd.setStatus(9);
+		brd.setRemarks("In Process");
+		brd.setBillRunMaster(br);
 	}
 
 	public void processBills(List<BillDetails> bd) {
@@ -119,22 +163,62 @@ public class BillingService {
 	}
 
 	public void process_bill(BillDetails bill_details) {
-		init();
+		if(bill_details == null)
+			return;
+		
+		initBill(bill_details.getCan());
+		
 		log.debug("Process customer with CAN:" + bill_details.getCan());
 		CustDetails customer = custDetailsRepository.findByCan(bill_details
 				.getCan());
+		
+		if(customer == null)
+		{
+			log.debug("Customer not found in CUST_DETAILS for CAN:" + bill_details
+					.getCan());
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(0);
+			brd.setRemarks("Failed with error:" + "Customer not found in CUST_DETAILS for CAN:" + bill_details
+					.getCan());
+			billRunDetailsRepository.save(brd);
+			
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+			
+			return;			
+		}
+		
 		CustValidation retVal = getCustInfo(customer, bill_details);
 
 		if (retVal != CustValidation.SUCCESS) {
 			// Unable to process customer
 			log.debug("Unable to process customer:" + customer.getId()
 					+ ", getCustInfo returned::" + retVal.name());
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(0);
+			brd.setRemarks("Failed with error:" + retVal.name());
+			billRunDetailsRepository.save(brd);
+			
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+			
 			return;
 		}
 
 		if(bfdRepository.findByCanAndToMonth(customer.getCan(), customer.getPrevBillMonth().format(DateTimeFormatter.ofPattern("yyyyMM"))) != null){
 			log.debug("Unable to process customer:" + customer.getId()
 					+ ", getCustInfo returned::" + CustValidation.ALREADY_BILLED.name());
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(0);
+			brd.setRemarks("Failed with error:" + CustValidation.ALREADY_BILLED.name());
+			billRunDetailsRepository.save(brd);
+			
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+						
 			return;
 		}
 		
@@ -325,10 +409,30 @@ public class BillingService {
 			
 			custDetailsRepository.save(customer);
 			
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(1);
+			brd.setRemarks("Success");
+			brd.setBillFullDetails(bfd);
+			billRunDetailsRepository.save(brd);
+			
+			br.setSuccess(++successRecords);
+			br.setStatus("C");
+			billRunMasterRepository.save(br);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.debug("Invalid From or To Date:" + bill_details.getFromMonth()
 					+ "::::" + bill_details.getToMonth());
+			
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(0);
+			brd.setRemarks("Failed with error:" + CPSUtils.stackTraceToString(e));
+			billRunDetailsRepository.save(brd);
+			
+			br.setFailed(++failedRecords);
+			br.setStatus("C");
+			billRunMasterRepository.save(br);
+									
 			return;
 		}
 	}
