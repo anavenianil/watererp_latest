@@ -51,9 +51,8 @@ public class BillRunMasterResourceIntTest {
     private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_DATE_STR = dateTimeFormatter.format(DEFAULT_DATE);
-
-    private static final Integer DEFAULT_AREA = 1;
-    private static final Integer UPDATED_AREA = 2;
+    private static final String DEFAULT_AREA = "AAAAA";
+    private static final String UPDATED_AREA = "BBBBB";
 
     private static final Integer DEFAULT_SUCCESS = 1;
     private static final Integer UPDATED_SUCCESS = 2;
@@ -131,7 +130,7 @@ public class BillRunMasterResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(billRunMaster.getId().intValue())))
                 .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE_STR)))
-                .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA)))
+                .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.toString())))
                 .andExpect(jsonPath("$.[*].success").value(hasItem(DEFAULT_SUCCESS)))
                 .andExpect(jsonPath("$.[*].failed").value(hasItem(DEFAULT_FAILED)))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
@@ -149,7 +148,7 @@ public class BillRunMasterResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(billRunMaster.getId().intValue()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE_STR))
-            .andExpect(jsonPath("$.area").value(DEFAULT_AREA))
+            .andExpect(jsonPath("$.area").value(DEFAULT_AREA.toString()))
             .andExpect(jsonPath("$.success").value(DEFAULT_SUCCESS))
             .andExpect(jsonPath("$.failed").value(DEFAULT_FAILED))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));

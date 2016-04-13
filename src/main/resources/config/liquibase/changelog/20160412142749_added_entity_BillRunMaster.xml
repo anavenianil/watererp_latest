@@ -22,7 +22,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="date" type="timestamp"/>
-            <column name="area" type="integer"/>
+            <column name="area" type="varchar(255)"/>
             <column name="success" type="integer"/>
             <column name="failed" type="integer"/>
             <column name="status" type="varchar(255)"/>

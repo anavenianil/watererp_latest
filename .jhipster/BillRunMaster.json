@@ -9,7 +9,7 @@
         {
             "fieldId": 2,
             "fieldName": "area",
-            "fieldType": "Integer"
+            "fieldType": "String"
         },
         {
             "fieldId": 3,

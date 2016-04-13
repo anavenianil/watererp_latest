@@ -115,7 +115,7 @@ public class BillingService {
 	public void initBillRun()
 	{
 		br = new BillRunMaster();
-		br.setArea(0);
+		br.setArea("0");
 		br.setDate(ZonedDateTime.now());
 		br.setSuccess(0);
 		br.setFailed(0);

@@ -31,11 +31,10 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class BillRunMasterResource {
 
-	private final Logger log = LoggerFactory
-			.getLogger(BillRunMasterResource.class);
-
-	@Inject
-	private BillRunMasterRepository billRunMasterRepository;
+    private final Logger log = LoggerFactory.getLogger(BillRunMasterResource.class);
+        
+    @Inject
+    private BillRunMasterRepository billRunMasterRepository;
 
 	@Inject
 	private BillingService billingService;
@@ -81,64 +80,66 @@ public class BillRunMasterResource {
 								result.getId().toString())).body(result);
 	}
 
-	/**
-	 * PUT /billRunMasters -> Updates an existing billRunMaster.
-	 */
-	@RequestMapping(value = "/billRunMasters", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	public ResponseEntity<BillRunMaster> updateBillRunMaster(
-			@RequestBody BillRunMaster billRunMaster) throws URISyntaxException {
-		log.debug("REST request to update BillRunMaster : {}", billRunMaster);
-		if (billRunMaster.getId() == null) {
-			return createBillRunMaster(billRunMaster);
-		}
-		BillRunMaster result = billRunMasterRepository.save(billRunMaster);
-		return ResponseEntity
-				.ok()
-				.headers(
-						HeaderUtil.createEntityUpdateAlert("billRunMaster",
-								billRunMaster.getId().toString())).body(result);
-	}
+    /**
+     * PUT  /billRunMasters -> Updates an existing billRunMaster.
+     */
+    @RequestMapping(value = "/billRunMasters",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<BillRunMaster> updateBillRunMaster(@RequestBody BillRunMaster billRunMaster) throws URISyntaxException {
+        log.debug("REST request to update BillRunMaster : {}", billRunMaster);
+        if (billRunMaster.getId() == null) {
+            return createBillRunMaster(billRunMaster);
+        }
+        BillRunMaster result = billRunMasterRepository.save(billRunMaster);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("billRunMaster", billRunMaster.getId().toString()))
+            .body(result);
+    }
 
-	/**
-	 * GET /billRunMasters -> get all the billRunMasters.
-	 */
-	@RequestMapping(value = "/billRunMasters", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	public ResponseEntity<List<BillRunMaster>> getAllBillRunMasters(
-			Pageable pageable) throws URISyntaxException {
-		log.debug("REST request to get a page of BillRunMasters");
-		Page<BillRunMaster> page = billRunMasterRepository.findAll(pageable);
-		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
-				page, "/api/billRunMasters");
-		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-	}
+    /**
+     * GET  /billRunMasters -> get all the billRunMasters.
+     */
+    @RequestMapping(value = "/billRunMasters",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<BillRunMaster>> getAllBillRunMasters(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of BillRunMasters");
+        Page<BillRunMaster> page = billRunMasterRepository.findAll(pageable); 
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/billRunMasters");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
-	/**
-	 * GET /billRunMasters/:id -> get the "id" billRunMaster.
-	 */
-	@RequestMapping(value = "/billRunMasters/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	public ResponseEntity<BillRunMaster> getBillRunMaster(@PathVariable Long id) {
-		log.debug("REST request to get BillRunMaster : {}", id);
-		BillRunMaster billRunMaster = billRunMasterRepository.findOne(id);
-		return Optional.ofNullable(billRunMaster)
-				.map(result -> new ResponseEntity<>(result, HttpStatus.OK))
-				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-	}
+    /**
+     * GET  /billRunMasters/:id -> get the "id" billRunMaster.
+     */
+    @RequestMapping(value = "/billRunMasters/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<BillRunMaster> getBillRunMaster(@PathVariable Long id) {
+        log.debug("REST request to get BillRunMaster : {}", id);
+        BillRunMaster billRunMaster = billRunMasterRepository.findOne(id);
+        return Optional.ofNullable(billRunMaster)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
-	/**
-	 * DELETE /billRunMasters/:id -> delete the "id" billRunMaster.
-	 */
-	@RequestMapping(value = "/billRunMasters/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	public ResponseEntity<Void> deleteBillRunMaster(@PathVariable Long id) {
-		log.debug("REST request to delete BillRunMaster : {}", id);
-		billRunMasterRepository.delete(id);
-		return ResponseEntity
-				.ok()
-				.headers(
-						HeaderUtil.createEntityDeletionAlert("billRunMaster",
-								id.toString())).build();
-	}
+    /**
+     * DELETE  /billRunMasters/:id -> delete the "id" billRunMaster.
+     */
+    @RequestMapping(value = "/billRunMasters/{id}",
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Void> deleteBillRunMaster(@PathVariable Long id) {
+        log.debug("REST request to delete BillRunMaster : {}", id);
+        billRunMasterRepository.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("billRunMaster", id.toString())).build();
+    }
 }

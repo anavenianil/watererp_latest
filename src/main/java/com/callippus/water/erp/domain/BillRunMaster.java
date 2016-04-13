@@ -24,7 +24,7 @@ public class BillRunMaster implements Serializable {
     private ZonedDateTime date;
 
     @Column(name = "area")
-    private Integer area;
+    private String area;
 
     @Column(name = "success")
     private Integer success;
@@ -51,11 +51,11 @@ public class BillRunMaster implements Serializable {
         this.date = date;
     }
 
-    public Integer getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
