@@ -1,9 +1,4 @@
 <form name="editForm" role="form" novalidate ng-submit="save()">
-	<!-- <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myCollDetailsLabel">Create or edit a CollDetails</h4>
-    </div> col-sm-4-->
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Collection Details</h3>
@@ -13,18 +8,8 @@
 				<div class="modal-body">
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
-						<!-- <div class="col-sm-4 col-md-offset-4">
-            <label for="id">Search by CAN</label>
-            <input type="text" class="form-control" id="id" name="id" ng-model="collDetails.id"/>
-        </div> -->
-
 						<div class="col-sm-4 col-md-offset-4" ng-class="{ 'has-error' : editForm.field_custDetails.$invalid && !editForm.field_custDetails.$pristine }">
 							<label for="field_applicationTxn">Search by CAN</label>
-							<!-- Commented Select Box Functionality -->
-							<!-- <select class="form-control" id="field_applicationTxn" name="applicationTxn"
-							 ng-model="customerComplaints.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-  						<option value=""></option></select> -->
-							<!-- <div class="col-sm-4"> -->
 							<div class="form-group">
 								<div class='input-group date' id='field_custDetails'>
 									<input list="custDetails" type="text" id="field_custDetails" name="field_custDetails"
@@ -54,11 +39,6 @@
 					</div>
 					</div>
 					<div class="row">
-						<!-- <div class="col-sm-4">
-							<label class="control-label" for="field_can">Can</label> <input
-								type="text" class="form-control" name="can" id="field_can"
-								ng-model="collDetails.can" readonly />
-						</div> -->
 						<div class="col-sm-4">
 							<label class="control-label" for="field_consName">Consumer
 								Name</label> <input type="text" class="form-control" name="consName"
@@ -76,31 +56,20 @@
 								ng-model="collDetails.collectionTypeMaster"
 								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id" 
 								>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="field_paymentTypes">Receipt Mode</label> 
+							<select
+								class="form-control" id="field_paymentTypes" name="paymentTypes"
+								ng-model="collDetails.paymentTypes"
+								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id" 
+								ng-change="disEnableInstr(collDetails.paymentTypes.paymentMode)" ng-disabled="true">
 								<option value=""></option>
 							</select>
 						</div>
-						
-					</div>
-
-
-					<!-- <div class="row">
-						<div class="col-sm-4">
-							<label for="id">ID</label> <input type="text"
-								class="form-control" id="id" name="id" ng-model="collDetails.id"
-								readonly />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_reversalRef">Reversal
-								Ref</label> <input type="text" class="form-control" name="reversalRef"
-								id="field_reversalRef" ng-model="collDetails.reversalRef" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_receiptNo">Receipt
-								No</label> <input type="text" class="form-control" name="receiptNo"
-								id="field_receiptNo" ng-model="collDetails.receiptNo" />
-						</div>
-					</div> -->
-					<div class="row">
 						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }" ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_receiptAmt">Receipt
 								Amount</label> <input type="number" class="form-control"
@@ -125,22 +94,7 @@
 									</span>
 								</div>
 							</div>
-						</div>
-						<!-- <div class="col-sm-4">
-           					 <label class="control-label" for="field_receiptMode">Receipt Mode</label>
-            				<input type="text" class="form-control" name="receiptMode" id="field_receiptMode"
-                    		ng-model="collDetails.receiptMode"/>
-        				</div> -->
-						<div class="col-sm-4">
-							<label for="field_paymentTypes">Receipt Mode</label> 
-							<select
-								class="form-control" id="field_paymentTypes" name="paymentTypes"
-								ng-model="collDetails.paymentTypes"
-								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id" 
-								ng-change="disEnableInstr(collDetails.paymentTypes.paymentMode)" ng-disabled="true">
-								<option value=""></option>
-							</select>
-						</div>
+						</div>						
 					</div>
 					<div class="row">
 						<div class="col-sm-4" ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }" ng-pattern="/^[0-9]*$/">
@@ -157,14 +111,15 @@
 									<input id="field_instrDt" name="field_instrDt" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt"
-										is-open="datePickerForInstrDt.status.opened" ng-disabled="true"/>
+										is-open="datePickerForInstrDt.status.opened" ng-disabled="true" ng-required='!collDetails.paymentTypes'/>
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default" id='field_receiptDtBtn'
 											ng-click="datePickerForInstrDtOpen($event)">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
-								</div>									
+								</div>
+								<p ng-show='editForm.collDetails.instrDt.$error.required'>This field is required.</p>
 							</div>
 							<div ng-show="editForm.collDetails.instrDt.$invalid">
                 		<p class="help-block" ng-show="editForm.collDetails.instrDt.$error.required">
@@ -173,18 +128,9 @@
             			</div>
 													
 						</div>
-						
-						<!-- <div class="col-sm-4">
-            <label class="control-label" for="field_instrIssuer">Instrument Issuer</label>
-            <input type="text" class="form-control" name="instrIssuer" id="field_instrIssuer"
-                    ng-model="collDetails.instrIssuer"
-                     />
-        </div> -->
 						<div class="col-sm-4">
 							<label class="control-label" for="field_instrIssuer">Instrument
 								Issuer</label>
-							<!--  <input type="text" class="form-control" name="instrIssuer" id="field_instrIssuer" ng-model="collDetails.instrIssuer"/> -->
-
 							<select class="form-control" id="field_instrumentIssuerMaster"
 								name="instrumentIssuerMaster"
 								ng-model="collDetails.instrumentIssuerMaster"
@@ -192,157 +138,13 @@
 								<option value=""></option>
 							</select>
 						</div>
-
-						<!-- <div class="col-sm-4">
-		<label for="field_paymentTypes">Instrument Issuer</label> 
-		<select
-			class="form-control" id="field_instrumentIssuerMaster" name="instrumentIssuerMaster"
-			ng-model="collDetails.instrIssuer"
-			ng-options="paymentTypes1 as paymentTypes1.paymentMode for paymentTypes1 in paymenttypess1 track by paymentTypes1.id">
-			<option value=""></option>
-		</select>
-		</div> -->
 					</div>
-					<!-- <div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_svrStatus">Server
-								Status</label> <input type="text" class="form-control" name="svrStatus"
-								id="field_svrStatus" ng-model="collDetails.svrStatus" />
-						</div>
-			<div class="col-sm-4">
-            <label class="control-label" for="field_can">Can</label>
-            <input type="text" class="form-control" name="can" id="field_can"
-                    ng-model="collDetails.can"
-                     />
-        	</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_can">Can</label> <input
-								type="text" class="form-control" name="can" id="field_can"
-								ng-model="collDetails.can" readonly />
-						</div> 
-						<div class="col-sm-4">
-							<label class="control-label" for="field_consName">Cons
-								Name</label> <input type="text" class="form-control" name="consName"
-								id="field_consName" ng-model="collDetails.consName" readonly />
-						</div>
-					</div> -->
-					<!-- <div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_terminalId">Terminal
-								Id</label> <input type="text" class="form-control" name="terminalId"
-								id="field_terminalId" ng-model="collDetails.terminalId" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_collTime">Collection
-								Time</label>
-							<div class="form-group">
-								<div class='input-group' id='field_receiptDt'>
-									<input id="field_collTime" type="text" class="form-control"
-										uib-datepicker-popup="{{dateformat}}"
-										ng-model="collDetails.collTime"
-										is-open="datePickerForCollTime.status.opened" />
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="datePickerForCollTimeOpen($event)">
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button>
-									</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_txnStatus">Transaction
-								Status</label> <input type="text" class="form-control" name="txnStatus"
-								id="field_txnStatus" ng-model="collDetails.txnStatus" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_meterReaderId">Meter
-								Reader Id</label> <input type="text" class="form-control"
-								name="meterReaderId" id="field_meterReaderId"
-								ng-model="collDetails.meterReaderId" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_userId">User Id</label> <input
-								type="text" class="form-control" name="userId" id="field_userId"
-								ng-model="collDetails.userId" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_remarks">Remarks</label>
-							<input type="text" class="form-control" name="remarks"
-								id="field_remarks" ng-model="collDetails.remarks" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_settlementId">Settlement
-								Id</label> <input type="text" class="form-control" name="settlementId"
-								id="field_settlementId" ng-model="collDetails.settlementId" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_extSettlementId">Ext
-								Settlement Id</label> <input type="text" class="form-control"
-								name="extSettlementId" id="field_extSettlementId"
-								ng-model="collDetails.extSettlementId" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_lat">Lat</label> <input
-								type="text" class="form-control" name="lat" id="field_lat"
-								ng-model="collDetails.lat" />
-						</div>
-						
-						
-						<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_svrStatus">Server
-								Status</label> <input type="text" class="form-control" name="svrStatus"
-								id="field_svrStatus" ng-model="collDetails.svrStatus" />
-						</div>
-			<div class="col-sm-4">
-            <label class="control-label" for="field_can">Can</label>
-            <input type="text" class="form-control" name="can" id="field_can"
-                    ng-model="collDetails.can"
-                     />
-        	</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_can">Can</label> <input
-								type="text" class="form-control" name="can" id="field_can"
-								ng-model="collDetails.can" readonly />
-						</div> 
-						<div class="col-sm-4">
-							<label class="control-label" for="field_consName">Cons
-								Name</label> <input type="text" class="form-control" name="consName"
-								id="field_consName" ng-model="collDetails.consName" readonly />
-						</div>
-					</div>
-					</div>
-					<div class="row">
-					<div class="col-sm-4">
-							<label class="control-label" for="field_reversalRef">Reversal
-								Ref</label> <input type="text" class="form-control" name="reversalRef"
-								id="field_reversalRef" ng-model="collDetails.reversalRef" />
-						</div>
-					<div class="col-sm-4">
-							<label class="control-label" for="field_lat">Lat</label> <input
-								type="text" class="form-control" name="lat" id="field_lat"
-								ng-model="collDetails.lat" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_longI">LongI</label> <input
-								type="text" class="form-control" name="longI" id="field_longI"
-								ng-model="collDetails.longI" />
-						</div>
-					</div> -->
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 					</button>
-					<!-- <button type="submit" ng-disabled="editForm.$invalid || isSaving" ng-disabled="true"
-						class="btn btn-primary" id="submitSave"> -->
 					<button type="submit" ng-disabled="true"
 						class="btn btn-primary" id="submitSave">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>

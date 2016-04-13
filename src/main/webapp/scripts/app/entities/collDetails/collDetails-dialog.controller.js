@@ -10,9 +10,13 @@ angular.module('watererpApp')
         $scope.instrumentissuermasters = InstrumentIssuerMaster.query();
         $scope.custDetailss = CustDetails.query();
         $scope.collectionTypeMasters = CollectionTypeMaster.query();
+        
         $scope.custDetails = {};
         $scope.collDetails = {};
         $scope.collDetails.receiptDt = new Date();
+        //$scope.collDetails.instrDt = new Date();
+        $scope.collDetails.collectionTypeMaster = {};
+        $scope.collDetails.collectionTypeMaster.id = 1;
         
         //$scope.paymenttypess1 = PaymentTypes1.query();instrumentIssuerMasters
         $scope.reverse = true;
@@ -41,6 +45,7 @@ angular.module('watererpApp')
         if($stateParams.id != null){        
         	CollDetails.get({id : $scope.collDetailsId}, function(result) {
             $scope.collDetails = result;
+            $scope.getCustDetails($scope.collDetails.can);
             $scope.disEnableInstr($scope.collDetails.paymentTypes.paymentMode);
         });
     	}
@@ -194,7 +199,6 @@ angular.module('watererpApp')
         	else{
         		document.getElementById("submitSearch").disabled=true;
         	}
-        	//return !(false);
         }
         
         $scope.disEnableInstr = function(paymentMode){
