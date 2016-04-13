@@ -11,9 +11,23 @@ angular.module('watererpApp')
                     data.requestedDate = DateUtils.convertDateTimeFromServer(data.requestedDate);
                     data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
                     data.updatedDate = DateUtils.convertDateTimeFromServer(data.updatedDate);
+                    data.connectionDate = DateUtils.convertLocaleDateFromServer(data.connectionDate);
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': {
+                method: 'PUT',
+                transformRequest: function (data) {
+                    data.connectionDate = DateUtils.convertLocaleDateToServer(data.connectionDate);
+                    return angular.toJson(data);
+                }
+            },
+            'save': {
+                method: 'POST',
+                transformRequest: function (data) {
+                    data.connectionDate = DateUtils.convertLocaleDateToServer(data.connectionDate);
+                    return angular.toJson(data);
+                }
+            }
         });
     });

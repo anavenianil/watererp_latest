@@ -1,14 +1,21 @@
 package com.callippus.water.erp.domain;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
 
 /**
  * A ApplicationTxn.
@@ -73,6 +80,18 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "detail_address")
     private String detailAddress;
     
+    @Column(name = "meter_reading")
+    private String meterReading;
+    
+    @Column(name = "connection_date")
+    private LocalDate connectionDate;
+    
+    @Column(name = "remarks")
+    private String remarks;
+    
+    @Column(name = "can")
+    private String can;
+    
     @ManyToOne
     @JoinColumn(name = "category_master_id")
     private CategoryMaster categoryMaster;
@@ -80,6 +99,11 @@ public class ApplicationTxn implements Serializable {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+    
+    @ManyToOne
+    @JoinColumn(name = "meter_details_id")
+    private MeterDetails meterDetails;
+    
 
     public Long getId() {
         return id;
@@ -241,7 +265,47 @@ public class ApplicationTxn implements Serializable {
         this.customer = customer;
     }
 
-    @Override
+    public String getMeterReading() {
+		return meterReading;
+	}
+
+	public void setMeterReading(String meterReading) {
+		this.meterReading = meterReading;
+	}
+
+	public LocalDate getConnectionDate() {
+		return connectionDate;
+	}
+
+	public void setConnectionDate(LocalDate connectionDate) {
+		this.connectionDate = connectionDate;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getCan() {
+		return can;
+	}
+
+	public void setCan(String can) {
+		this.can = can;
+	}
+
+	public MeterDetails getMeterDetails() {
+		return meterDetails;
+	}
+
+	public void setMeterDetails(MeterDetails meterDetails) {
+		this.meterDetails = meterDetails;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -282,6 +346,10 @@ public class ApplicationTxn implements Serializable {
             ", updatedDate='" + updatedDate + "'" +
             ", status='" + status + "'" +
             ", detailAddress='" + detailAddress + "'" +
+            ", meterReading='" + meterReading + "'" +
+            ", connectionDate='" + connectionDate + "'" +
+            ", remarks='" + remarks + "'" +
+            ", can='" + can + "'" +
             '}';
     }
 }

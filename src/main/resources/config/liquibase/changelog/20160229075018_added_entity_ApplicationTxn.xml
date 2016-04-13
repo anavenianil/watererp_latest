@@ -55,8 +55,17 @@
             
             <column name="detail_address" type="varchar(255)"/>
             
+            <column name="meter_reading" type="varchar(255)"/>
+            
+            <column name="connection_date" type="date"/>
+            
+            <column name="remarks" type="varchar(255)"/>
+            
+            <column name="can" type="varchar(255)"/>
+            
             <column name="category_master_id" type="bigint"/>
             <column name="customer_id" type="bigint"/>
+            <column name="meter_details_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="application_txn" columnName="requested_date" columnDataType="datetime"/>
@@ -77,6 +86,12 @@
                                  constraintName="fk_applicationtxn_customer_id"
                                  referencedColumnNames="id"
                                  referencedTableName="customer"/>
+
+        <addForeignKeyConstraint baseColumnNames="meter_details_id"
+                                 baseTableName="application_txn"
+                                 constraintName="fk_applicationtxn_meterdetails_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_details"/>
 
     </changeSet>
 </databaseChangeLog>
