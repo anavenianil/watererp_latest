@@ -47,11 +47,18 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-4">
+					<div class="col-sm-4 col-md-offset-4">
+					<label class="control-label" for="field_can">Can</label> <input
+								type="text" class="form-control" name="can" id="field_can"
+								ng-model="collDetails.can" readonly />
+					</div>
+					</div>
+					<div class="row">
+						<!-- <div class="col-sm-4">
 							<label class="control-label" for="field_can">Can</label> <input
 								type="text" class="form-control" name="can" id="field_can"
 								ng-model="collDetails.can" readonly />
-						</div>
+						</div> -->
 						<div class="col-sm-4">
 							<label class="control-label" for="field_consName">Consumer
 								Name</label> <input type="text" class="form-control" name="consName"
@@ -62,6 +69,17 @@
 								No</label> <input type="text" class="form-control" name="receiptNo"
 								id="field_receiptNo" ng-model="collDetails.receiptNo" />
 						</div>
+						<div class="col-sm-4">
+							<label for="field_paymentTypes">Collection Type</label> 
+							<select
+								class="form-control" id="field_collectionTypeMaster" name="collectionTypeMaster"
+								ng-model="collDetails.collectionTypeMaster"
+								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id" 
+								>
+								<option value=""></option>
+							</select>
+						</div>
+						
 					</div>
 
 

@@ -85,7 +85,8 @@
     <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160406042024_added_entity_InstrumentIssuerMaster.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml" relativeToChangelogFile="false"/>    
     <include file="classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml" relativeToChangelogFile="false"/>    
     <include file="classpath:config/liquibase/changelog/20160412142749_added_entity_BillRunMaster.xml" relativeToChangelogFile="false"/>

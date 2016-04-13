@@ -2,18 +2,15 @@
 
 describe('Controller Tests', function() {
 
-    describe('CollDetails Detail Controller', function() {
+    describe('CollectionTypeMaster Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockCollDetails, MockPaymentTypes, MockInstrumentIssuerMaster, MockCollectionTypeMaster;
+        var MockEntity, MockCollectionTypeMaster;
         var createController;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
-            MockCollDetails = jasmine.createSpy('MockCollDetails');
-            MockPaymentTypes = jasmine.createSpy('MockPaymentTypes');
-            MockInstrumentIssuerMaster = jasmine.createSpy('MockInstrumentIssuerMaster');
             MockCollectionTypeMaster = jasmine.createSpy('MockCollectionTypeMaster');
             
 
@@ -21,20 +18,17 @@ describe('Controller Tests', function() {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
-                'CollDetails': MockCollDetails,
-                'PaymentTypes': MockPaymentTypes,
-                'InstrumentIssuerMaster': MockInstrumentIssuerMaster,
                 'CollectionTypeMaster': MockCollectionTypeMaster
             };
             createController = function() {
-                $injector.get('$controller')("CollDetailsDetailController", locals);
+                $injector.get('$controller')("CollectionTypeMasterDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'watererpApp:collDetailsUpdate';
+                var eventType = 'watererpApp:collectionTypeMasterUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

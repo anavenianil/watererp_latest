@@ -2,13 +2,14 @@
 
 angular.module('watererpApp')
     .controller('CollDetailsDialogController', function ($scope, $state, CollDetails, ParseLinks, $stateParams, PaymentTypes, 
-    		InstrumentIssuerMaster, CustDetails, CustDetailsService) {
+    		InstrumentIssuerMaster, CustDetails, CustDetailsService, CollectionTypeMaster) {
 
         $scope.collDetailss = [];
         $scope.predicate = 'id';
         $scope.paymenttypess = PaymentTypes.query();
         $scope.instrumentissuermasters = InstrumentIssuerMaster.query();
         $scope.custDetailss = CustDetails.query();
+        $scope.collectionTypeMasters = CollectionTypeMaster.query();
         $scope.custDetails = {};
         $scope.collDetails = {};
         $scope.collDetails.receiptDt = new Date();
@@ -164,8 +165,10 @@ angular.module('watererpApp')
             });
         }*/
         $scope.collDetails.custDetails = {};
-        $scope.collDetails.custDetails.can = '';
+        //$scope.collDetails.custDetails.can = '';
         $scope.disEnableSearch = function(enableSearch){ 
+        	$scope.enableSearch = enableSearch;
+
         	//console.info(!isNaN($scope.collDetails.custDetails.can));
         	//console.info($scope.collDetailss);
         	//alert("disEnableSearch	"+$scope.collDetails.custDetails.can);
@@ -178,9 +181,14 @@ angular.module('watererpApp')
         	}
         	*/
         	
-        	
-        	if($scope.collDetails.custDetails.can.length > 0 && !isNaN($scope.collDetails.custDetails.can)){
+        	console.info("disEnableSearch	disEnableSearch	"+$scope.enableSearch);
+        	//$scope.collDetails.custDetails.can = '';
+        	if($scope.enableSearch==undefined){
+        		$scope.enableSearch='';
+        	}        	
+        	if($scope.enableSearch.length > 0 && !isNaN($scope.enableSearch)){
         		document.getElementById("submitSearch").disabled=false;
+        		
         		console.info(document.getElementById("field_consName").value);
         	}
         	else{
