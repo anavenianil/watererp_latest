@@ -1,18 +1,21 @@
 <div>
     <h2>MeterDetailss</h2>
     <jh-alert></jh-alert>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" ui-sref="meterDetails.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new MeterDetails</span>
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="meterDetails.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new MeterDetails
+                    </span>
                 </button>
             </div>
         </div>
     </div>
-
+    <br/>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -21,6 +24,7 @@
                     <th jh-sort-by="meterMake"><span>MeterMake</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="min"><span>Min</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="max"><span>Max</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,22 +36,28 @@
                     <td>{{meterDetails.meterMake}}</td>
                     <td>{{meterDetails.min}}</td>
                     <td>{{meterDetails.max}}</td>
-                    <td>
-                        <button type="submit"
-                                ui-sref="meterDetails.detail({id:meterDetails.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="meterDetails.edit({id:meterDetails.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="meterDetails.delete({id:meterDetails.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
-                        </button>
+                    <td>{{meterDetails.status}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="meterDetails.detail({id:meterDetails.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="meterDetails.edit({id:meterDetails.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="meterDetails.delete({id:meterDetails.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

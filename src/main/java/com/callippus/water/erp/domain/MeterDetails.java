@@ -23,19 +23,22 @@ public class MeterDetails implements Serializable {
     @NotNull
     @Column(name = "meter_id", nullable = false)
     private String meterId;
-
+    
     @Column(name = "meter_type")
     private String meterType;
-
+    
     @Column(name = "meter_make")
     private String meterMake;
-
+    
     @Column(name = "min")
     private Float min;
-
+    
     @Column(name = "max")
     private Float max;
-
+    
+    @Column(name = "status")
+    private Integer status;
+    
     public Long getId() {
         return id;
     }
@@ -47,7 +50,7 @@ public class MeterDetails implements Serializable {
     public String getMeterId() {
         return meterId;
     }
-
+    
     public void setMeterId(String meterId) {
         this.meterId = meterId;
     }
@@ -55,7 +58,7 @@ public class MeterDetails implements Serializable {
     public String getMeterType() {
         return meterType;
     }
-
+    
     public void setMeterType(String meterType) {
         this.meterType = meterType;
     }
@@ -63,7 +66,7 @@ public class MeterDetails implements Serializable {
     public String getMeterMake() {
         return meterMake;
     }
-
+    
     public void setMeterMake(String meterMake) {
         this.meterMake = meterMake;
     }
@@ -71,7 +74,7 @@ public class MeterDetails implements Serializable {
     public Float getMin() {
         return min;
     }
-
+    
     public void setMin(Float min) {
         this.min = min;
     }
@@ -79,9 +82,17 @@ public class MeterDetails implements Serializable {
     public Float getMax() {
         return max;
     }
-
+    
     public void setMax(Float max) {
         this.max = max;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+    
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
@@ -93,6 +104,9 @@ public class MeterDetails implements Serializable {
             return false;
         }
         MeterDetails meterDetails = (MeterDetails) o;
+        if(meterDetails.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, meterDetails.id);
     }
 
@@ -110,6 +124,7 @@ public class MeterDetails implements Serializable {
             ", meterMake='" + meterMake + "'" +
             ", min='" + min + "'" +
             ", max='" + max + "'" +
+            ", status='" + status + "'" +
             '}';
     }
 }
