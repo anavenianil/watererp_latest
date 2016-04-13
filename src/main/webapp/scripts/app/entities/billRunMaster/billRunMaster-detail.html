@@ -59,4 +59,17 @@
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
+    
+        
+        <button type="submit"
+            ui-sref="billRunMaster"
+            class="btn btn-info">
+        <span class="glyphicon"></span>&nbsp;<span> View Bill Run Master</span>
+    
+    
+        <button type="submit"
+            ui-sref="billRunDetailsByRunId({billRunId:billRunMaster.id})"
+            class="btn btn-info">
+        <span class="glyphicon"></span>&nbsp;<span> View Bill Run Details</span>
+    </button>
 </div>

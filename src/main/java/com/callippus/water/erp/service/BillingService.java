@@ -95,17 +95,21 @@ public class BillingService {
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f,
 			total_cess = 0.0f, kl = 0.0f;
 
-	public void generateBill() {		
+	public BillRunMaster generateBill() {		
 		initBillRun();
 		
 		List<BillDetails> bd = billDetailsRepository.findAll();
 		processBills(bd);
+		
+		return br;
 	}
 
-	public void generateSingleBill(String can) {		
+	public BillRunMaster generateSingleBill(String can) {		
 		initBillRun();
 		
 		process_bill(can);
+		
+		return br;
 	}
 
 	public void initBillRun()
