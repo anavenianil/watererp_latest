@@ -15,4 +15,9 @@ angular.module('watererpApp')
             },
             'update': { method:'PUT' }
         });
+    })
+    .factory('BillRunDetailsByRunId', function ($resource, DateUtils) {
+    	return $resource('api/billRunDetailss/billRun/:id', {}, {
+    		'query': { method: 'GET', isArray: true}
+        });
     });

@@ -19,6 +19,26 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
+            .state('billRunDetailsByRunId', {
+                parent: 'entity',
+                url: '/billRunDetailss/billRun/{billRunId}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'BillRunDetails by Bill Run'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/billRunDetails/billRunDetailss.html',
+                        controller: 'BillRunDetailsController'
+                    }
+                },
+                resolve: {
+//                    entity: ['$stateParams', 'BillRunDetailsByRunId', function($stateParams, BillRunDetailsByRunId) {
+//                    	console.log("Entered here." + JSON.stringify(BillRunDetailsByRunId))
+//                        return BillRunDetailsByRunId.get({id : $stateParams.billRunId});
+//                    }]
+                }
+            })
             .state('billRunDetails.detail', {
                 parent: 'entity',
                 url: '/billRunDetails/{id}',
