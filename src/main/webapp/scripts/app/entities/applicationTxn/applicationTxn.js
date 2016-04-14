@@ -161,5 +161,22 @@ angular.module('watererpApp')
                 resolve: {
                 	
                 }
+            })
+            .state('applicationTxnIssueMeter', {
+                parent: 'applicationTxn',
+                url: '/issueMeter/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'IssueMeter'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/applicationTxn/issueMeter-dialog.html',
+                        controller: 'IssueMeterDialogController'
+                    }
+                },
+                resolve: {
+                	
+                }
             });
     });

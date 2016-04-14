@@ -1,0 +1,77 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Issue Meter</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row col-md-offset-2">
+						<div class="col-sm-4">
+							<label for="id">Application Id</label> <input type="text"
+								class="form-control" id="id" name="id"
+								ng-model="applicationTxn.id" readonly />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_connectionDate">Connection Date</label>
+							<div class="form-group">
+								<div class="input-group date" id="field_connectionDate">
+									<input id="field_connectionDate" type="text"
+										class="form-control" uib-datepicker-popup="{{dateformat}}"
+										ng-model="applicationTxn.connectionDate"
+										is-open="datePickerForConnectionDate.status.opened"
+										max-date="dtmax" required />
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForConnectionDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row col-md-offset-2">
+						<div class="col-sm-4">
+							<label for="field_meterDetails">Meter Details</label> <select
+								class="form-control" id="field_meterDetails" name="meterDetails"
+								ng-model="applicationTxn.meterDetails"
+								ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_meterReading">Meter
+								Reading</label> <input type="text" class="form-control"
+								name="meterReading" id="field_meterReading"
+								ng-model="applicationTxn.meterReading" />
+						</div>
+					</div>
+					<br>
+					<div class="row col-md-offset-2">
+						<div class="col-sm-8">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<textarea rows="2" cols="30" class="form-control" name="remarks"
+								id="field_remarks" style="resize: none" 
+								ng-model="applicationTxn.remarks"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
