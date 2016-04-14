@@ -1,4 +1,30 @@
+<style>
+.typeahead-demo .custom-popup-wrapper {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	background-color: #f9f9f9;
+}
 
+.typeahead-demo .custom-popup-wrapper>.message {
+	padding: 10px 20px;
+	border-bottom: 1px solid #ddd;
+	color: #868686;
+}
+
+.typeahead-demo .custom-popup-wrapper>.dropdown-menu {
+	position: static;
+	float: none;
+	display: block;
+	min-width: 160px;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+</style>
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
     <div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -52,8 +78,6 @@
                     ng-model="billDetails.address" readonly/>
         </div>        
         </div>
-        
-        
         <div class="row">
         <div class="col-sm-4">
             <label for="id">ID</label>
@@ -104,26 +128,14 @@
         </div>
         </div>
         <div class="row">
-        <!-- <div class="col-sm-4">
-            <label class="control-label" for="field_currentBillType">Current Bill Type</label>
-            <input type="text" class="form-control" name="currentBillType" id="field_currentBillType"
-                    ng-model="billDetails.currentBillType"
-                     />
-        </div> -->
         <div class="col-sm-4">
             <label class="control-label" for="field_currentBillType">Current Bill Type</label>
-            <select name="currentBillType" id="field_currentBillType" ng-model="billDetails.currentBillType">
+            <select class="form-control"  id="field_currentBillType"
+             name="currentBillType" 
+             ng-model="billDetails.currentBillType">
       		<option ng-repeat="currentBillType in billDetails.currentBillTypes" value="{{currentBillType.id}}">{{currentBillType.name}}</option>
     		</select>
         </div>
-        
-        
-        <!-- <div class="col-sm-4">
-            <label class="control-label" for="field_fromMonth">From Month</label>
-            <input type="text" class="form-control" name="fromMonth" id="field_fromMonth"
-                    ng-model="billDetails.fromMonth"
-                     />
-        </div> -->
          <div class="col-sm-4">
             <label class="control-label" for="field_fromMonth">From Month</label>
             <div class="form-group">
@@ -321,7 +333,6 @@
             </div>
         </div>
         </div>
-
     </div>
     </div></div></div>
     <div class="modal-footer">
