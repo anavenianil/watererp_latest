@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -36,6 +37,8 @@ public class CustDetailsResource {
     @Inject
     private CustDetailsRepository custDetailsRepository;
     
+	@Inject
+	private CustDetailsCustomRepository custDetailsCustomRepository;    
     /**
      * POST  /custDetailss -> Create a new custDetails.
      */
@@ -121,6 +124,22 @@ public class CustDetailsResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /**
+     * GET  /custDetailss/searchCAN/:searchTerm
+     */
+    @RequestMapping(value = "/custDetailss/searchCAN/{searchTerm}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<String>> searchCANLike(@PathVariable String searchTerm) {
+        log.debug("REST request to get CustDetails : {}", searchTerm);
+        List<String> canList = custDetailsCustomRepository.searchCAN(searchTerm);
+        return Optional.ofNullable(canList)
+            .map(result -> new ResponseEntity<>(
+            		canList,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
     /**
      * DELETE  /custDetailss/:id -> delete the "id" custDetails.
      */
