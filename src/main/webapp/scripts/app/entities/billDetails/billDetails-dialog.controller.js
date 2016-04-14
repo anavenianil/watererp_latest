@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('BillDetailsDialogController', function ($scope, $state, BillDetails, ParseLinks, $stateParams) {
+    .controller('BillDetailsDialogController', function ($scope, $state, BillDetails, CustDetails, CustDetailsService, ParseLinks, $stateParams) {
 
         $scope.billDetailss = [];
         $scope.billDetails = {};
         $scope.predicate = 'id';
+        $scope.collDetails = {};
+        $scope.custDetailss = CustDetails.query();
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
@@ -31,6 +33,7 @@ angular.module('watererpApp')
         if($stateParams.id != null){       	
         	 BillDetails.get({id : $scope.billDetailsId}, function(result) {
                  $scope.billDetails = result;
+                 $scope.getCustDetails($scope.billDetails.can);
              });
     	}        
         
@@ -97,6 +100,50 @@ angular.module('watererpApp')
                 metReadingDt: null,
                 id: null
             };
+        };
+        
+        
+        $scope.disEnableSearch = function(enableSearch){ 
+            $scope.enableSearch = enableSearch;
+            	if($scope.enableSearch==undefined){
+            		$scope.enableSearch='';
+            	}        	
+            	if($scope.enableSearch.length > 0 && !isNaN($scope.enableSearch)){
+            		document.getElementById("submitSearch").disabled=false;
+            	}
+            	else{
+            		document.getElementById("submitSearch").disabled=true;
+            	}
+            }
+        
+        $scope.getCustDetails = function(can){
+        	CustDetailsService.get({can : can}, function(result) {
+                $scope.custDetails = result;
+                $scope.billDetails.consName = $scope.custDetails.consName;
+                $scope.billDetails.can = $scope.custDetails.can;
+                $scope.billDetails.address = $scope.custDetails.address;
+                $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
+            });
+        }
+        
+        $scope.billDetails = {
+        		currentBillType: null,
+        		currentBillTypes: [
+        	      {id: 'M', name: 'METERED'},
+        	      {id: 'U', name: 'UNMETERED'},
+        	      {id: 'L', name: 'LOCKED'},
+        	      {id: 'R', name: 'RUNNING'},
+        	    ],
+        	   };
+        
+        $scope.datePickerForFromMonth = {};
+
+        $scope.datePickerForFromMonth.status = {
+            opened: false
+        };
+
+        $scope.datePickerForFromMonthOpen = function($event) {
+            $scope.datePickerForFromMonth.status.opened = true;
         };        
         
         $scope.datePickerForBillDate = {};
