@@ -41,8 +41,8 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
                 $scope.itemRequired.itemrequiredArr[i].uom.id={};
                 $scope.itemRequired.itemrequiredArr[i].amount;
                 $scope.itemRequired.itemrequiredArr[i].ratePerShs;
-                $scope.itemRequired.itemrequiredArr[i].proceedings ={};
-                $scope.itemRequired.itemrequiredArr[i].proceedings.id;
+                /*$scope.itemRequired.itemrequiredArr[i].proceedings ={};
+                $scope.itemRequired.itemrequiredArr[i].proceedings.id;*/
                 $scope.itemRequired.itemrequiredArr[i].applicationTxn = {};
                 $scope.itemRequired.itemrequiredArr[i].applicationTxn.id;
             }

@@ -28,6 +28,11 @@
             "fieldId": 5,
             "fieldName": "max",
             "fieldType": "Float"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "status",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20160405010101",

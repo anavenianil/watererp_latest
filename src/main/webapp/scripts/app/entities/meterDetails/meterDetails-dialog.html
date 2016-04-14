@@ -48,6 +48,25 @@
 								type="number" class="form-control" name="max" id="field_max"
 								ng-model="meterDetails.max" />
 						</div>
+						<!-- <div class="col-sm-4">
+							<label class="control-label" for="field_status">Status</label> <input
+								type="number" class="form-control" name="status"
+								id="field_status" ng-model="meterDetails.status" />
+						</div> -->
+						<div class="col-sm-4">
+							<label class="control-label" for="field_status">Status</label> <select
+								class="form-control" name="status"
+								ng-model="meterDetails.status" required>
+								<option value="0">Alloted</option>
+								<option value="1">Unallotted</option>
+							</select>
+							<div
+								ng-show="editForm.status.$invalid && editForm.status.$dirty || editForm.status.$touched"
+								class="has-error">
+								<p class="help-block" ng-show="editForm.status.$error.required">This
+									Field is required</p>
+							</div>
+						</div>
 
 					</div>
 				</div>

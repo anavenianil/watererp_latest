@@ -41,5 +41,9 @@ angular.module('watererpApp')
                     return angular.toJson(data);
                 }
             }
+        })            
+    }).factory('CustDetailsSearch', function ($resource) {
+    	return $resource('api/custDetailss/searchCAN/:searchTerm', {}, {
+    		'query': { method: 'GET', isArray: true}
         });
     });

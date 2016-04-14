@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('watererpApp').controller('EmpMasterDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpMaster', 'User', 'OrgRoleInstance', 'DesignationMaster', 'StatusMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, EmpMaster, User, OrgRoleInstance, DesignationMaster, StatusMaster) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpMaster', 'User', 'OrgRoleInstance', 'StatusMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, EmpMaster, User, OrgRoleInstance, StatusMaster) {
 
         $scope.empMaster = entity;
         $scope.users = User.query();
         $scope.orgroleinstances = OrgRoleInstance.query();
-        $scope.designationmasters = DesignationMaster.query();
+        //$scope.designationmasters = DesignationMaster.query();
         $scope.statusmasters = StatusMaster.query();
         $scope.load = function(id) {
             EmpMaster.get({id : id}, function(result) {
