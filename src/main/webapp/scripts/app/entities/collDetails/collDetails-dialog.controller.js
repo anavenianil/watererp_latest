@@ -6,6 +6,7 @@ angular.module('watererpApp').controller(
 				PaymentTypes, InstrumentIssuerMaster, CustDetails,
 				CustDetailsService, CollectionTypeMaster, $http) {
 
+			$scope.isValidCust = false;
 			$scope.instrEnabled = true;
 			$scope.paymenttypess = PaymentTypes.query();
 			$scope.instrumentissuermasters = InstrumentIssuerMaster.query();
@@ -26,23 +27,84 @@ angular.module('watererpApp').controller(
 			var onSaveError = function(result) {
 				$scope.isSaving = false;
 			};
-			
-			 $scope.getLocation = function(val) {
-				 if(val != null && val.length > 2)
-				    return $http.get('api/custDetailss/searchCAN/' + val, {
-				        params: {
-				          address: val,
-				          sensor: false
-				        }
-				      }).then(function(response){
-				    	  var res = response.data.map(function(item){
-				          return item;
-				        });
 
-					      return res;
-				      });
-			 }
+			$scope.getLocation = function(val) {
+				$scope.isValidCust = false;
+				if (val != null && val.length > 2)
+					return $http.get('api/custDetailss/searchCAN/' + val, {
+						params : {
+							address : val,
+							sensor : false
+						}
+					}).then(function(response) {
+						var res = response.data.map(function(item) {
+							return item;
+						});
+
+						return res;
+					});
+			}
 			
+			$scope.validate = function() {
+				
+				if (!$scope.isValidCust)
+					return true;
+
+				if (!$scope.editForm.receiptAmt.$dirty)
+					return true;
+
+				if (!$scope.editForm.paymentTypes.$dirty)
+					return true;
+
+				if (!$scope.editForm.collectionTypeMaster.$dirty)
+					return true;
+
+				if ($scope.editForm.receiptAmt.$invalid)
+					return true;
+
+				if ($scope.editForm.paymentTypes.$invalid)
+					return true;
+
+				if ($scope.editForm.collectionTypeMaster.$invalid)
+					return true;
+
+				if ($scope.instrEnabled) {
+
+					if (!$scope.editForm.field_instrNo.$dirty)
+						return true;
+
+					if (!$scope.editForm.field_instrDt.$dirty)
+						return true;
+
+					if (!$scope.editForm.instrumentIssuerMaster.$dirty)
+						return true;
+
+					if ($scope.editForm.field_instrNo.$invalid)
+						return true;
+
+					if ($scope.editForm.field_instrDt.$invalid)
+						return true;
+
+					if ($scope.editForm.instrumentIssuerMaster.$invalid)
+						return true;
+
+				}
+
+				return false;
+
+			}
+
+			$scope.onSelect = function($item, $model, $label) {
+				console.log($item);
+				var arr = $item.split("-");
+				$scope.collDetails = {};
+				$scope.collDetails.can = arr[0];
+				$scope.collDetails.consName = arr[1];
+				$scope.collDetails.address = arr[2];
+				$scope.custInfo = "";
+				$scope.isValidCust = true;
+			};
+
 			$scope.save = function() {
 				$scope.isSaving = true;
 
@@ -92,7 +154,6 @@ angular.module('watererpApp').controller(
 					$scope.collDetails.can = $scope.custDetails.can;
 				});
 			}
-
 
 			$scope.resetInstr = function(paymentMode) {
 				if (paymentMode === 'Cash') {

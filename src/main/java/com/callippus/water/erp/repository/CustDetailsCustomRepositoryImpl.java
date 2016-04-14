@@ -50,9 +50,9 @@ public class CustDetailsCustomRepositoryImpl extends
 	 */
 	public List<String> searchCAN(@Param("searchTerm") String searchTerm){
 
-		String sql = "SELECT can +'-'+cons_name+'-'+address from cust_details where can like ? limit 10";
+		String sql = "SELECT concat(can ,' - ',cons_name,' - ',address) can from cust_details where can like ? or cons_name like ? or address like ? limit 10";
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList(sql, new Object[] {"%" + searchTerm + "%"});
+				.queryForList(sql, new Object[] {"%" + searchTerm + "%","%" + searchTerm + "%","%" + searchTerm + "%"});
 
 		List<String> items = new ArrayList<String>();
 
