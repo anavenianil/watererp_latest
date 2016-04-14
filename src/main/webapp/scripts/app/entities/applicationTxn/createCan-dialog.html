@@ -1,0 +1,106 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Create CAN</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<fieldset>
+							<legend>Applicant Detail</legend>
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Full Name</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.fullName}}</h5>
+								</div>
+							</div>
+						</fieldset>
+						<hr>
+						<fieldset>
+							<legend>Address</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Division</label>
+									<h5 class="list-group-item-heading">{{feasibilityStudy.divisionMaster.divisionName}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Zone</label>
+									<h5 class="list-group-item-heading">{{feasibilityStudy.zoneMaster.zoneName}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Street</label>
+									<h5 class="list-group-item-heading">{{feasibilityStudy.streetMaster.streetName}}</h5>
+								</div>
+							</div>
+						</fieldset>
+						<hr>
+						<fieldset>
+							<legend>Connection Detail</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Category</label>
+									<h5 class="list-group-item-heading">{{feasibilityStudy.categoryMaster.categoryName}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label> Meter Id</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.meterDetails.meterId}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Meter Reading</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.meterReading}}</h5>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-4">
+									<label>Connection Date</label>
+									<h5 class="list-group-item-heading">{{applicationTxn.connectionDate}}</h5>
+								</div>
+								<div class="col-sm-4">
+									<label>Total Aomount</label>
+									<h5 class="list-group-item-heading">{{proceedings.grandTotal}}</h5>
+								</div>
+							</div>
+						</fieldset>
+						<hr>
+						<fieldset>
+							<legend>Create CAN</legend>
+							<div class="col-sm-6">
+								<label class="control-label" for="field_can">CAN Number</label>
+								<input type="xz" class="form-control" name="can" id="field_can"
+									ng-model="applicationTxn.can" required />
+							</div>
+							<button type="button" class="btn btn-success pull-right"
+								ng-show="applicationTxn.status===7"
+								ng-click="canGenerate(feasibilityStudy.id)">
+								<span class="glyphicon glyphicon-check"></span>&nbsp;Create CAN
+							</button>
+							<div class="row">
+								<div class="col-sm-6">
+									<label class="control-label" for="field_remarks">Remarks</label>
+									<textarea rows="2" cols="30" class="form-control"
+										name="remarks" id="field_remarks" style="resize: none"
+										ng-model="approvalDetails.remarks"></textarea>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

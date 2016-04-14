@@ -50,13 +50,6 @@ angular.module('watererpApp')
         }
         $scope.getApplicationTxns();
         
-       
-        /*$scope.load = function(id) {
-            FeasibilityStudy.get({id : id}, function(result) {
-                $scope.feasibilityStudy = result;
-            });
-        };*/
-
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
             $scope.isSaving = false;

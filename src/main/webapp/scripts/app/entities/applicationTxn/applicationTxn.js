@@ -178,5 +178,22 @@ angular.module('watererpApp')
                 resolve: {
                 	
                 }
+            })
+            .state('applicationTxnCreateCan', {
+                parent: 'applicationTxn',
+                url: '/createCan/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CreateCan'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/applicationTxn/createCan-dialog.html',
+                        controller: 'CreateCanDialogController'
+                    }
+                },
+                resolve: {
+                	
+                }
             });
     });

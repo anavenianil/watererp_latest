@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -57,6 +59,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private ApplicationTxnCustomRepository applicationTxnCustomRepository;
+    
+    @Inject
+    private FeasibilityStudyRepository feasibilityStudyRepository;
     
     
     /**
@@ -286,7 +291,7 @@ public class ApplicationTxnResource {
     @Timed
 	public ResponseEntity<List<RequestWorkflowHistory>> getAllApprovedRequests(HttpServletResponse response, @PathVariable String type)
 			throws Exception {
-		log.debug("REST request to get Requisition : {}");
+		log.debug("REST request to get getApproved Request : {}");
 		List<RequestWorkflowHistory> requestWorkflowHistorysStatus = applicationTxnCustomRepository
 				.listAllApprovedRequests(type);
 
@@ -294,4 +299,22 @@ public class ApplicationTxnResource {
 				HttpStatus.OK);
 	}
 
+    /**
+     * this will generate can
+     */
+	@RequestMapping(value = "/applicationTxns/can", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<String> generateCan(@RequestParam(value = "feasibilityId", required = false) String feasibilityId)
+			throws Exception{
+		log.debug("REST request to get CAN : {}");
+		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(Long.parseLong(feasibilityId));
+		String division = feasibility.getDivisionMaster().getDivisionCode();
+		String street = feasibility.getStreetMaster().getStreetCode();
+		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
+		String can = applicationTxnRepository.findByCan(division, street);
+		can = division + street + can;
+        return new ResponseEntity<>(can, HttpStatus.OK);
+	}
 }

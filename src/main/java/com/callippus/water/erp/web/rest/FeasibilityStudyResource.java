@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.FeasibilityStudy;
+import com.callippus.water.erp.domain.ItemRequired;
+import com.callippus.water.erp.domain.Proceedings;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -133,5 +135,23 @@ public class FeasibilityStudyResource {
         log.debug("REST request to delete FeasibilityStudy : {}", id);
         feasibilityStudyRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("feasibilityStudy", id.toString())).build();
+    }
+    
+    /**
+     * GET  /feasibilityStudys/:applicationTxnId -> get the "applicationTxn" feasibilityStudy.
+     */
+    @RequestMapping(value = "/feasibilityStudyss/custom/{applicationTxnId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<FeasibilityStudy> getFeasibilityStudyByApplicationTxn(@PathVariable Long applicationTxnId) {
+        log.debug("REST request to get Proceedings : {}", applicationTxnId);
+        ApplicationTxn applicationTxn = applicationTxnRepository.getOne(applicationTxnId);
+        FeasibilityStudy feasibilityStudy = feasibilityStudyRepository.findByApplicationTxn(applicationTxn);
+        return Optional.ofNullable(feasibilityStudy)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

@@ -19,4 +19,9 @@ angular.module('watererpApp')
             },
             'update': { method:'PUT' }
         });
+    })
+    .factory('GetFeasibilityStudy', function ($resource, DateUtils) {
+    	return $resource('api/feasibilityStudyss/custom/:applicationTxnId', {}, {
+    		'query': { method: 'GET', isArray: true}
+        });
     });

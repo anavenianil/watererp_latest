@@ -37,6 +37,11 @@ angular.module('watererpApp')
                 return $http.get('api/proceedingss/custom', {params: {applicationTxnId: applicationTxnId}}).then(function (response) {
                     return response.data;
                 });
+            },
+            generateCan: function (feasibilityId) {
+                return $http.get('api/applicationTxns/can', {params: {feasibilityId: feasibilityId}}).then(function (response) {
+                    return response.data;
+                });
             }
             /*,
             getMyRequests: function () {
