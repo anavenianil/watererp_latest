@@ -50,7 +50,7 @@ public class CustDetailsCustomRepositoryImpl extends
 	 */
 	public List<String> searchCAN(@Param("searchTerm") String searchTerm){
 
-		String sql = "SELECT can from cust_details where can like ? limit 10";
+		String sql = "SELECT can +'-'+cons_name+'-'+address from cust_details where can like ? limit 10";
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
 				.queryForList(sql, new Object[] {"%" + searchTerm + "%"});
 

@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller(
 		'CollDetailsDialogController',
-		function($scope, $state, CollDetails, CustDetailsSearch, ParseLinks, $stateParams,
+		function($scope, $state, CollDetails, ParseLinks, $stateParams,
 				PaymentTypes, InstrumentIssuerMaster, CustDetails,
 				CustDetailsService, CollectionTypeMaster, $http) {
 
@@ -26,36 +26,21 @@ angular.module('watererpApp').controller(
 			var onSaveError = function(result) {
 				$scope.isSaving = false;
 			};
-
+			
 			 $scope.getLocation = function(val) {
-				    return $http.get('//maps.googleapis.com/maps/api/geocode/json', {
+				 if(val != null && val.length > 2)
+				    return $http.get('api/custDetailss/searchCAN/' + val, {
 				        params: {
 				          address: val,
 				          sensor: false
 				        }
 				      }).then(function(response){
-				    	  var res = response.data.results.map(function(item){
-				          return item.formatted_address;
+				    	  var res = response.data.map(function(item){
+				          return item;
 				        });
-				    	  console.log("This is the response:" + JSON.stringify(res));
-					      
+
 					      return res;
 				      });
-				 
-				 console.log("Called getLocation with val:" + val);
-					if (val != null &&  val.length > 2) {
-						CustDetailsSearch.query({
-							searchTerm: val
-						}, function(result, headers) {
-						      var res = result.map(function(item){
-							        return item;
-							      });
-						      
-						      console.log("This is the response:" + JSON.stringify(res));
-						      
-						      return res;
-						});
-					} 
 			 }
 			
 			$scope.save = function() {
