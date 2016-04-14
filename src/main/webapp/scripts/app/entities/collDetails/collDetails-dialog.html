@@ -43,8 +43,8 @@
 							<div class="form-group"
 								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
 
-									<input type="text" ng-model="custInfo"
-										placeholder="Search for CAN or Name or Address"
+									<input type="text" ng-model="custInfo" typeahead-min-length="3"
+										placeholder="Search CAN or Name or Address (Min 3 chars)"
 										uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
 										typeahead-loading="loadingCANs"
 										typeahead-on-select='onSelect($item, $model, $label)'
@@ -52,14 +52,7 @@
 									<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
 									<div ng-show="noResults">
 										<i class="glyphicon glyphicon-remove"></i> No CANs Found
-									</div>
-								
-								<p ng-show="editForm.field_custDetails.$error.required"
-									class="help-block">Only numbers.</p>
-								<p ng-show="editForm.field_custDetails.$error.minlength"
-									class="help-block">CAN number is too short.</p>
-								<p ng-show="editForm.field_custDetails.$error.maxlength"
-									class="help-block">CAN number is too long.</p>
+									</div>							
 							</div>
 						</div>
 					</div>
@@ -123,7 +116,7 @@
 						<div class="col-sm-4">
 							<label for="field_paymentTypes">Receipt Mode</label> <select
 								class="form-control" id="field_paymentTypes" name="paymentTypes"
-								ng-model="collDetails.paymentTypes"
+								ng-model="collDetails.paymentTypes" required="required" 
 								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
 								ng-change="resetInstr(collDetails.paymentTypes.paymentMode)">
 							</select>
@@ -133,7 +126,7 @@
 							<label for="field_paymentTypes">Collection Type</label> 
 							<select
 								class="form-control" id="field_collectionTypeMaster"
-								name="collectionTypeMaster"
+								name="collectionTypeMaster" required="required" 
 								ng-model="collDetails.collectionTypeMaster"
 								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id">
 							</select>
