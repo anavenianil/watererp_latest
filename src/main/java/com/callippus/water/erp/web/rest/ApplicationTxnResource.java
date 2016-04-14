@@ -302,7 +302,7 @@ public class ApplicationTxnResource {
     /**
      * this will generate can
      */
-	@RequestMapping(value = "/applicationTxns/can", 
+	/*@RequestMapping(value = "/applicationTxns/can/{feasibilityId}", 
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
@@ -316,5 +316,5 @@ public class ApplicationTxnResource {
 		String can = applicationTxnRepository.findByCan(division, street);
 		can = division + street + can;
         return new ResponseEntity<>(can, HttpStatus.OK);
-	}
+	}*/
 }

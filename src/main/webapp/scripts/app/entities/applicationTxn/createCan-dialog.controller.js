@@ -35,11 +35,11 @@ angular.module('watererpApp')
             $scope.load($stateParams.applicationTxnId); 
     	}
     	
-    	$scope.canGenerate = function(feasibilityId){
+    	/*$scope.canGenerate = function(feasibilityId){
 	    	ApplicationTxnService.generateCan({feasibilityId : feasibilityId}, function(result){
 	    		$scope.canNo = result;
 	    	});
-    	}
+    	}*/
     	
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
