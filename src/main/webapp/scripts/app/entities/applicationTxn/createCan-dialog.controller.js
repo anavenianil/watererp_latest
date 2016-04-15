@@ -20,6 +20,7 @@ angular.module('watererpApp').controller(
 					id : id
 				}, function(result) {
 					$scope.applicationTxn = result;
+					$scope.applicationTxn.remarks = '';
 				});
 			}
 
@@ -50,6 +51,8 @@ angular.module('watererpApp').controller(
 			}
 
 			var onSaveSuccess = function(result) {
+				ApplicationTxnService.approveRequest($scope.applicationTxn.id,
+						$scope.applicationTxn.remarks);
 				$scope.$emit('watererpApp:applicationTxnUpdate', result);
 				$scope.isSaving = false;
 				$state.go('applicationTxn');
@@ -60,8 +63,6 @@ angular.module('watererpApp').controller(
 			};
 
 			$scope.save = function() {
-				ApplicationTxnService.approveRequest($scope.applicationTxn.id,
-						$scope.applicationTxn.remarks);
 				$scope.isSaving = true;
 				if ($scope.applicationTxn.id != null) {
 					ApplicationTxn.update($scope.applicationTxn, onSaveSuccess,

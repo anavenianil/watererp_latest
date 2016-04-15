@@ -29,6 +29,8 @@
 						<thead>
 							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
 								<th><span>S.No.</span></th>
+								<th jh-sort-by="id"><span>Application No.</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="fullName"><span>Full Name</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="category"><span>Category</span> <span
@@ -75,6 +77,7 @@
 							<tr
 								ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
 								<td>{{$index+1}}</td>
+								<td>{{applicationTxn.id}}</td>
 								<td>{{applicationTxn.fullName}}</td>
 								<td>{{applicationTxn.categoryMaster.categoryName}}</td>
 								<td>{{applicationTxn.area}}</td>
