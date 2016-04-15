@@ -1,75 +1,78 @@
+<form name="editForm" role="form" novalidate ng-submit="save()">
 
-<div>
-    <h2><span>BillRunMaster</span> {{billRunMaster.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Field</th>
-                <th>Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <span>Date</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billRunMaster.date | date:'medium'}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Area</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billRunMaster.area}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Success</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billRunMaster.success}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Failed</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billRunMaster.failed}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Status</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{billRunMaster.status}}</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+	<div>
+		<h2>
+			<span>BillRunMaster</span> {{billRunMaster.id}}
+		</h2>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Field</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span>Date</span></td>
+						<td><span class="form-control-static">{{billRunMaster.date
+								| date:'medium'}}</span></td>
+					</tr>
+					<tr>
+						<td><span>Area</span></td>
+						<td><span class="form-control-static">{{billRunMaster.area}}</span>
+						</td>
+					</tr>
+					<tr>
+						<td><span>Success</span></td>
+						<td><span class="form-control-static">{{billRunMaster.success}}</span>
+						</td>
+					</tr>
+					<tr>
+						<td><span>Failed</span></td>
+						<td><span class="form-control-static">{{billRunMaster.failed}}</span>
+						</td>
+					</tr>
+					<tr>
+						<td><span>Status</span></td>
+						<td><span class="form-control-static">{{billRunMaster.status}}</span>
+						<div ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
+							<span class="form-control-static">
+								<button type="submit" class="btn btn-primary">
+									<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Commit</span>
+								</button>
+						</span></td>
+						</div>
+						
+						<div ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
+							<span class="form-control-static">
+								<button type="submit" class="btn btn-primary" ng-click="save('Cancel')">
+									<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Cancel</span>
+								</button>
+						</span></td>
+						</div>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-    <button type="submit"
-            onclick="window.history.back()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
-    
-        
-        <button type="submit"
-            ui-sref="billRunMaster"
-            class="btn btn-info">
-        <span class="glyphicon"></span>&nbsp;<span> View Bill Run Master</span>
-    
-    
-        <button type="submit"
-            ui-sref="billRunDetailsByRunId({billRunId:billRunMaster.id})"
-            class="btn btn-info">
-        <span class="glyphicon"></span>&nbsp;<span> View Bill Run Details</span>
-    </button>
-</div>
+		<button type="submit" onclick="window.history.back()"
+			class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+				Back</span>
+		</button>
+
+
+		<button type="submit" ui-sref="billRunMaster" class="btn btn-info">
+			<span class="glyphicon"></span>&nbsp;<span> View Bill Run
+				Master</span>
+
+
+			<button type="submit"
+				ui-sref="billRunDetailsByRunId({billRunId:billRunMaster.id})"
+				class="btn btn-info">
+				<span class="glyphicon"></span>&nbsp;<span> View Bill Run
+					Details</span>
+			</button>
+	</div>
+</form>

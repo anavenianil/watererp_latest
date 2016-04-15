@@ -96,6 +96,11 @@ public class BillRunMasterResource {
             return createBillRunMaster(billRunMaster);
         }
         
+        if(billRunMaster.getStatus().equalsIgnoreCase("cancel")){
+        	status = billingService.cancelBillRun(billRunMaster.getId());
+        }
+        
+        
         if(billRunMaster.getStatus().equalsIgnoreCase("commit")){
         	status = billingService.commitBillRun(billRunMaster.getId());
         }

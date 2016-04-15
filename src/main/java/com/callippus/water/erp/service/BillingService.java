@@ -71,7 +71,24 @@ public class BillingService {
 	};
 
 	enum BrdStatus {
-		INIT, FAILED, SUCCESS, FAILED_COMMIT, COMMITTED;
+		INIT (0), FAILED (1), SUCCESS(2), FAILED_COMMIT(3), COMMITTED(4);
+		
+	    private int _value;
+
+	    BrdStatus(int Value) {
+	        this._value = Value;
+	    }
+
+	    public int getValue() {
+	            return _value;
+	    }
+
+	    public static BrdStatus fromInt(int i) {
+	        for (BrdStatus b : BrdStatus .values()) {
+	            if (b.getValue() == i) { return b; }
+	        }
+	        return null;
+	    }
 	}
 
 	List<Long> categories = Arrays.asList(1L, 2L, 3L);
@@ -107,9 +124,10 @@ public class BillingService {
 		processBills(bd);
 
 		if (failedRecords > 0)
-			br.setStatus("P");
+			br.setStatus("Completed with Errors");
 		else
-			br.setStatus("C");
+			br.setStatus("Completed Successfully");
+		
 		billRunMasterRepository.save(br);
 
 		return br;
@@ -121,20 +139,53 @@ public class BillingService {
 		process_bill(can);
 
 		if (failedRecords > 0)
-			br.setStatus("P");
+			br.setStatus("Completed with Errors");
 		else
-			br.setStatus("C");
+			br.setStatus("Completed Successfully");
+		
 		billRunMasterRepository.save(br);
 
 		return br;
 	}
 
+	public String cancelBillRun(long billRunId) {
+		try {
+			BillRunMaster brm = billRunMasterRepository.findOne(billRunId);
+
+			if(brm.getStatus().equalsIgnoreCase("COMMITTED"))
+				return "Bill run already COMMITTED";
+			
+			if(brm.getStatus().equalsIgnoreCase("CANCELLED"))
+				return "Bill run already CANCELLED";
+						
+			if(brm.getStatus().equalsIgnoreCase("IN PROCESS"))
+				return "Cannot COMMIT IN PROCESS Bill run";
+									
+			brm.setStatus("CANCELLED");
+			
+			return "CANCEL Success!";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "CANCEL Failed:" + e.getMessage();
+		}
+	}
+	
 	public String commitBillRun(long billRunId) {
 		try {
+			BillRunMaster brm = billRunMasterRepository.findOne(billRunId);
+
+			if(brm.getStatus().equalsIgnoreCase("COMMITTED"))
+				return "Bill run already COMMITTED";
+			
+			if(brm.getStatus().equalsIgnoreCase("CANCELLED"))
+				return "Bill run already CANCELLED";
+						
+			if(brm.getStatus().equalsIgnoreCase("IN PROCESS"))
+				return "Cannot COMMIT IN PROCESS Bill run";
+													
 			billRunDetailsRepository.findByBillRunId(billRunId).forEach(
 					bill_run_detail -> commit(bill_run_detail));
 
-			BillRunMaster brm = billRunMasterRepository.findOne(billRunId);
 
 			brm.setStatus("COMMITTED");
 			
@@ -161,11 +212,11 @@ public class BillingService {
 
 			custDetailsRepository.save(customer);
 
-			brd.setStatus(BrdStatus.COMMITTED.ordinal());
+			brd.setStatus(BrdStatus.COMMITTED.getValue());
 			billRunDetailsRepository.save(brd);
 		} catch (Exception e) {
-			brd.setRemarks(CPSUtils.stackTraceToString(e));
-			brd.setStatus(BrdStatus.FAILED_COMMIT.ordinal());
+			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0,254));
+			brd.setStatus(BrdStatus.FAILED_COMMIT.getValue());
 			billRunDetailsRepository.save(brd);
 		}
 	}
@@ -176,7 +227,7 @@ public class BillingService {
 		br.setDate(ZonedDateTime.now());
 		br.setSuccess(0);
 		br.setFailed(0);
-		br.setStatus("I");
+		br.setStatus("In Process");
 
 		billRunMasterRepository.save(br);
 	}
@@ -253,7 +304,7 @@ public class BillingService {
 					+ ", getCustInfo returned::" + retVal.name());
 
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.ordinal());
+			brd.setStatus(BrdStatus.FAILED.getValue());
 			brd.setRemarks("Failed with error:" + retVal.name());
 			billRunDetailsRepository.save(brd);
 
@@ -272,13 +323,12 @@ public class BillingService {
 					+ CustValidation.ALREADY_BILLED.name());
 
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.ordinal());
+			brd.setStatus(BrdStatus.FAILED.getValue());
 			brd.setRemarks("Failed with error:"
 					+ CustValidation.ALREADY_BILLED.name());
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
-			br.setStatus("P");
 			billRunMasterRepository.save(br);
 
 			return;
@@ -463,13 +513,13 @@ public class BillingService {
 			bfdRepository.save(bfd);
 
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.SUCCESS.ordinal());
+			brd.setStatus(BrdStatus.SUCCESS.getValue());
 			brd.setRemarks("Success");
 			brd.setBillFullDetails(bfd);
 			billRunDetailsRepository.save(brd);
 
 			br.setSuccess(++successRecords);
-			br.setStatus("C");
+			br.setStatus("Completed Successfully");
 			billRunMasterRepository.save(br);
 
 		} catch (Exception e) {
@@ -478,7 +528,7 @@ public class BillingService {
 					+ "::::" + bill_details.getToMonth());
 
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.ordinal());
+			brd.setStatus(BrdStatus.FAILED.getValue());
 			brd.setRemarks("Failed with error:"
 					+ CPSUtils.stackTraceToString(e));
 			billRunDetailsRepository.save(brd);
