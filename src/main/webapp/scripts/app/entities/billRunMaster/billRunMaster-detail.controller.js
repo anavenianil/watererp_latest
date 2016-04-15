@@ -9,11 +9,13 @@ angular.module('watererpApp')
                 $scope.billRunMaster = result;
             });
         };
-        
-        var onSaveSuccess = function (result) {
-            $scope.isSaving = false;
-        };
 
+        var onSaveSuccess = function (result) {
+            $scope.$emit('watererpApp:billRunMasterUpdate', result);
+            $scope.isSaving = false;
+            $scope.load($scope.billRunMaster.id);
+        };
+        
         var onSaveError = function (result) {
             $scope.isSaving = false;
         };
