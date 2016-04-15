@@ -43,10 +43,10 @@ public class BillingService {
 
 	@Inject
 	private BillRunMasterRepository billRunMasterRepository;
-	
+
 	@Inject
 	private BillRunDetailsRepository billRunDetailsRepository;
-	
+
 	@Inject
 	private BillDetailsRepository billDetailsRepository;
 
@@ -69,6 +69,10 @@ public class BillingService {
 	enum CustValidation {
 		ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS
 	};
+
+	enum BrdStatus {
+		INIT, FAILED, SUCCESS, FAILED_COMMIT, COMMITTED;
+	}
 
 	List<Long> categories = Arrays.asList(1L, 2L, 3L);
 
@@ -95,35 +99,88 @@ public class BillingService {
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f,
 			total_cess = 0.0f, kl = 0.0f;
 
-	public BillRunMaster generateBill() {		
+	public BillRunMaster generateBill() {
 		initBillRun();
-		
+
 		List<BillDetails> bd = billDetailsRepository.findAll();
+
 		processBills(bd);
-		
+
+		if (failedRecords > 0)
+			br.setStatus("P");
+		else
+			br.setStatus("C");
+		billRunMasterRepository.save(br);
+
 		return br;
 	}
 
-	public BillRunMaster generateSingleBill(String can) {		
+	public BillRunMaster generateSingleBill(String can) {
 		initBillRun();
-		
+
 		process_bill(can);
-		
+
+		if (failedRecords > 0)
+			br.setStatus("P");
+		else
+			br.setStatus("C");
+		billRunMasterRepository.save(br);
+
 		return br;
 	}
 
-	public void initBillRun()
-	{
+	public String commitBillRun(long billRunId) {
+		try {
+			billRunDetailsRepository.findByBillRunId(billRunId).forEach(
+					bill_run_detail -> commit(bill_run_detail));
+
+			BillRunMaster brm = billRunMasterRepository.findOne(billRunId);
+
+			brm.setStatus("COMMITTED");
+			
+			return "COMMIT Success!";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "COMMIT Failed:" + e.getMessage();
+		}
+	}
+
+	public void commit(BillRunDetails brd) {
+		try {
+			CustDetails customer = custDetailsRepository
+					.findByCan(brd.getCan());
+			BillFullDetails bfd = brd.getBillFullDetails();
+
+			customer.setPrevBillType(bfd.getCurrentBillType());
+			customer.setPrevBillMonth(bfd.getBillDate().withDayOfMonth(1));
+			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
+					.floatValue(), 2));
+			customer.setPrevReading(bfd.getPresentReading());
+			customer.setMetReadingDt(bfd.getMetReadingDt());
+			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
+
+			custDetailsRepository.save(customer);
+
+			brd.setStatus(BrdStatus.COMMITTED.ordinal());
+			billRunDetailsRepository.save(brd);
+		} catch (Exception e) {
+			brd.setRemarks(CPSUtils.stackTraceToString(e));
+			brd.setStatus(BrdStatus.FAILED_COMMIT.ordinal());
+			billRunDetailsRepository.save(brd);
+		}
+	}
+
+	public void initBillRun() {
 		br = new BillRunMaster();
 		br.setArea("0");
 		br.setDate(ZonedDateTime.now());
 		br.setSuccess(0);
 		br.setFailed(0);
 		br.setStatus("I");
-		
-		billRunMasterRepository.save(br);		
+
+		billRunMasterRepository.save(br);
 	}
-	
+
 	public void initBill(String can) {
 		avgKL = 0.0f;
 		factor = 0.0f;
@@ -143,7 +200,7 @@ public class BillingService {
 		surcharge = 0.0f;
 		total_cess = 0.0f;
 		kl = 0.0f;
-		
+
 		brd = new BillRunDetails();
 		brd.setCan(can);
 		brd.setFromDt(ZonedDateTime.now());
@@ -155,40 +212,39 @@ public class BillingService {
 	public void processBills(List<BillDetails> bd) {
 		bd.forEach(bill_details -> process_bill(bill_details));
 	}
-	
-	public void process_bill(String can)
-	{
-		BillDetails bill_details  = billDetailsRepository.findByCan(can);
+
+	public void process_bill(String can) {
+		BillDetails bill_details = billDetailsRepository.findByCan(can);
 		process_bill(bill_details);
 	}
 
 	public void process_bill(BillDetails bill_details) {
-		if(bill_details == null)
+		if (bill_details == null)
 			return;
-		
+
 		initBill(bill_details.getCan());
-		
+
 		log.debug("Process customer with CAN:" + bill_details.getCan());
 		CustDetails customer = custDetailsRepository.findByCan(bill_details
 				.getCan());
-		
-		if(customer == null)
-		{
-			log.debug("Customer not found in CUST_DETAILS for CAN:" + bill_details
-					.getCan());
+
+		if (customer == null) {
+			log.debug("Customer not found in CUST_DETAILS for CAN:"
+					+ bill_details.getCan());
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(0);
-			brd.setRemarks("Failed with error:" + "Customer not found in CUST_DETAILS for CAN:" + bill_details
-					.getCan());
+			brd.setRemarks("Failed with error:"
+					+ "Customer not found in CUST_DETAILS for CAN:"
+					+ bill_details.getCan());
 			billRunDetailsRepository.save(brd);
-			
+
 			br.setFailed(++failedRecords);
 			billRunMasterRepository.save(br);
-			
-			return;			
+
+			return;
 		}
-		
+
 		CustValidation retVal = getCustInfo(customer, bill_details);
 
 		if (retVal != CustValidation.SUCCESS) {
@@ -197,38 +253,44 @@ public class BillingService {
 					+ ", getCustInfo returned::" + retVal.name());
 
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(0);
+			brd.setStatus(BrdStatus.FAILED.ordinal());
 			brd.setRemarks("Failed with error:" + retVal.name());
 			billRunDetailsRepository.save(brd);
-			
+
 			br.setFailed(++failedRecords);
 			billRunMasterRepository.save(br);
-			
+
 			return;
 		}
 
-		if(bfdRepository.findByCanAndToMonth(customer.getCan(), customer.getPrevBillMonth().format(DateTimeFormatter.ofPattern("yyyyMM"))) != null){
+		if (bfdRepository.findByCanAndToMonth(
+				customer.getCan(),
+				customer.getPrevBillMonth().format(
+						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
 			log.debug("Unable to process customer:" + customer.getId()
-					+ ", getCustInfo returned::" + CustValidation.ALREADY_BILLED.name());
+					+ ", getCustInfo returned::"
+					+ CustValidation.ALREADY_BILLED.name());
 
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(0);
-			brd.setRemarks("Failed with error:" + CustValidation.ALREADY_BILLED.name());
+			brd.setStatus(BrdStatus.FAILED.ordinal());
+			brd.setRemarks("Failed with error:"
+					+ CustValidation.ALREADY_BILLED.name());
 			billRunDetailsRepository.save(brd);
-			
+
 			br.setFailed(++failedRecords);
+			br.setStatus("P");
 			billRunMasterRepository.save(br);
-						
+
 			return;
 		}
-		
+
 		try {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getPrevBillMonth();
 			dTo = bill_details.getBillDate().withDayOfMonth(1);
-			
+
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
 					.getPrevBillType().equals("M"))
@@ -241,7 +303,8 @@ public class BillingService {
 
 				if (newMeterFlag == 1) {
 					log.debug("########################################");
-					log.debug("          NEW METER BILL CASE (" + days + " days)");
+					log.debug("          NEW METER BILL CASE (" + days
+							+ " days)");
 					log.debug("########################################");
 				} else {
 					log.debug("########################################");
@@ -324,14 +387,13 @@ public class BillingService {
 					: 0);
 
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(bill_details
-							.getCan(), dFrom, dTo, avgKL,   unMeteredFlag, newMeterFlag);
+					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL,
+							unMeteredFlag, newMeterFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
 			bfd.setId(null);
 
-			
 			// Subtract Avg Water charges in case of Lock Bill scenario
 			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
@@ -383,15 +445,15 @@ public class BillingService {
 
 			bfd.setBillDate(date.toLocalDate());
 			bfd.setBillTime(date.format(formatter));
-			
-			if(bill_details.getCurrentBillType().equals("M"))
-			{
-				bfd.setMetReadingMo(bill_details.getMetReadingDt().withDayOfMonth(1));
+
+			if (bill_details.getCurrentBillType().equals("M")) {
+				bfd.setMetReadingMo(bill_details.getMetReadingDt()
+						.withDayOfMonth(1));
 				bfd.setMetAvgKl(avgKL);
 			}
-			
+
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
-			
+
 			bfd.setUnits(units);
 			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
 			bfd.setToMonth(dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
@@ -399,40 +461,31 @@ public class BillingService {
 			log.debug("This is the BillFullDetails:" + bfd);
 
 			bfdRepository.save(bfd);
-			
-			customer.setPrevBillType(bill_details.getCurrentBillType());
-			customer.setPrevBillMonth(dTo);
-			customer.setArrears(CPSUtils.round(netPayable.floatValue(), 2));
-			customer.setPrevReading(bill_details.getPresentReading());
-			customer.setMetReadingDt(bill_details.getMetReadingDt());
-			customer.setMetReadingMo(bill_details.getMetReadingDt().withDayOfMonth(1));
-			
-			custDetailsRepository.save(customer);
-			
+
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(1);
+			brd.setStatus(BrdStatus.SUCCESS.ordinal());
 			brd.setRemarks("Success");
 			brd.setBillFullDetails(bfd);
 			billRunDetailsRepository.save(brd);
-			
+
 			br.setSuccess(++successRecords);
 			br.setStatus("C");
 			billRunMasterRepository.save(br);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.debug("Invalid From or To Date:" + bill_details.getFromMonth()
 					+ "::::" + bill_details.getToMonth());
-			
+
 			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(0);
-			brd.setRemarks("Failed with error:" + CPSUtils.stackTraceToString(e));
+			brd.setStatus(BrdStatus.FAILED.ordinal());
+			brd.setRemarks("Failed with error:"
+					+ CPSUtils.stackTraceToString(e));
 			billRunDetailsRepository.save(brd);
-			
+
 			br.setFailed(++failedRecords);
-			br.setStatus("C");
 			billRunMasterRepository.save(br);
-									
+
 			return;
 		}
 	}

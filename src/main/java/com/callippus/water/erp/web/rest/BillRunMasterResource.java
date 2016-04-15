@@ -89,12 +89,21 @@ public class BillRunMasterResource {
     @Timed
     public ResponseEntity<BillRunMaster> updateBillRunMaster(@RequestBody BillRunMaster billRunMaster) throws URISyntaxException {
         log.debug("REST request to update BillRunMaster : {}", billRunMaster);
+        
+        String status = null;
+        
         if (billRunMaster.getId() == null) {
             return createBillRunMaster(billRunMaster);
         }
-        BillRunMaster result = billRunMasterRepository.save(billRunMaster);
+        
+        if(billRunMaster.getStatus().equalsIgnoreCase("commit")){
+        	status = billingService.commitBillRun(billRunMaster.getId());
+        }
+        
+        BillRunMaster result = billRunMasterRepository.findOne(billRunMaster.getId()); //Get updated values
+        
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("billRunMaster", billRunMaster.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("billRunMaster:", billRunMaster.getId().toString()+", status:" + status))
             .body(result);
     }
 

@@ -14,5 +14,8 @@ import java.util.List;
  */
 public interface BillRunDetailsRepository extends JpaRepository<BillRunDetails,Long> {
 	@Query("SELECT brd FROM BillRunDetails brd WHERE brd.billRunMaster.id=:id")
-	public Page<BillRunDetails> findByBillRunId(@Param("id") Long id, Pageable pageable);
+	public Page<BillRunDetails> findByBillRunId(@Param("id") Long id, Pageable pageable); //For Front-end
+	
+	@Query("SELECT brd FROM BillRunDetails brd WHERE brd.billRunMaster.id=:id")
+	public List<BillRunDetails> findByBillRunId(@Param("id") Long id);//For Back-end (During commit,...)
 }
