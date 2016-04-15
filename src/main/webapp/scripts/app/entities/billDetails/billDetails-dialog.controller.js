@@ -1,13 +1,12 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('BillDetailsDialogController', function ($scope, $state, BillDetails, CustDetails, CustDetailsService, ParseLinks, $stateParams) {
+    .controller('BillDetailsDialogController', function ($scope, $state, BillDetails, CustDetails, CustDetailsService, ParseLinks, $stateParams, $http) {
 
         $scope.billDetailss = [];
         $scope.billDetails = {};
         $scope.predicate = 'id';
         $scope.collDetails = {};
-        $scope.custDetailss = CustDetails.query();
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
@@ -47,6 +46,8 @@ angular.module('watererpApp')
         var onSaveError = function (result) {
             $scope.isSaving = false;
         };
+        
+        
 
         $scope.save = function () {
             $scope.isSaving = true;
@@ -62,6 +63,34 @@ angular.module('watererpApp')
             $scope.reset();
             $scope.clear();
         };
+        
+        $scope.getLocation = function(val) {
+			$scope.isValidCust = false;
+			
+			return $http.get('api/custDetailss/searchCAN/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+
+				return res;
+			});
+		}
+        
+        $scope.onSelect = function($item, $model, $label) {
+			console.log($item);
+			var arr = $item.split("-");
+			$scope.billDetails = {};
+			$scope.billDetails.can = arr[0];
+			$scope.billDetails.consName = arr[1];
+			$scope.billDetails.address = arr[2];
+			$scope.custInfo = "";
+			$scope.isValidCust = true;
+		};
 
         
         $scope.clear = function () {
@@ -135,6 +164,16 @@ angular.module('watererpApp')
         	      {id: 'R', name: 'RUNNING'},
         	    ],
         	   };
+        
+        $scope.datePickerForToMonth = {};
+
+        $scope.datePickerForToMonth.status = {
+            opened: false
+        };
+
+        $scope.datePickerForToMonthOpen = function($event) {
+            $scope.datePickerForToMonth.status.opened = true;
+        }; 
         
         $scope.datePickerForFromMonth = {};
 
