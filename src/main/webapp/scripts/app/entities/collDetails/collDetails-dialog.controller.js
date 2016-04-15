@@ -31,7 +31,12 @@ angular.module('watererpApp').controller(
 			$scope.getLocation = function(val) {
 				$scope.isValidCust = false;
 				
-				return $http.get('api/custDetailss/searchCAN/' + val).then(function(response) {
+				return $http.get('api/custDetailss/searchCAN/' + val, {
+					params : {
+						address : val,
+						sensor : false
+					}
+				}).then(function(response) {
 					var res = response.data.map(function(item) {
 						return item;
 					});

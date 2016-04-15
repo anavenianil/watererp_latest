@@ -1,39 +1,27 @@
 'use strict';
 
-angular.module('watererpApp')
-    .controller('BillDetailsDialogController', function ($scope, $state, BillDetails, CustDetails, CustDetailsService, ParseLinks, $stateParams) {
+angular.module('watererpApp').controller(
+		'BillDetailsDialogController', 
+		function ($scope, $state, BillDetails, CustDetails, CustDetailsService, 
+				 ParseLinks, $stateParams, $http) {
 
         $scope.billDetailss = [];
-        $scope.billDetails = {};
         $scope.predicate = 'id';
+        $scope.billDetails = {};
         $scope.collDetails = {};
-        $scope.custDetailss = CustDetails.query();
+        var date  = new Date();
+        $scope.billDetails.billDate = date;
+        $scope.billDetails.toMonth = new Date(date.getFullYear(), date.getMonth(), 1);
         $scope.reverse = true;
         $scope.page = 0;
-        $scope.loadAll = function() {
-            BillDetails.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.billDetailss.push(result[i]);
-                }
-            });
-        };
-        $scope.reset = function() {
-            $scope.page = 0;
-            $scope.billDetailss = [];
-            $scope.loadAll();
-        };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
-        };
-        $scope.loadAll();
+        
         
         $scope.billDetailsId = $stateParams.id;
         if($stateParams.id != null){       	
         	 BillDetails.get({id : $scope.billDetailsId}, function(result) {
                  $scope.billDetails = result;
                  $scope.getCustDetails($scope.billDetails.can);
+                 
              });
     	}        
         
@@ -46,7 +34,7 @@ angular.module('watererpApp')
 
         var onSaveError = function (result) {
             $scope.isSaving = false;
-        };
+        };        
 
         $scope.save = function () {
             $scope.isSaving = true;
@@ -62,6 +50,36 @@ angular.module('watererpApp')
             $scope.reset();
             $scope.clear();
         };
+        
+        $scope.getLocation = function(val) {
+			$scope.isValidCust = false;
+			
+			return $http.get('api/custDetailss/searchCAN/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+
+				return res;
+			});
+		}
+        
+        $scope.onSelect = function($item, $model, $label) {
+        	$scope.clear();
+        	$scope.billDetails.billDate = new Date();
+			console.log($item);
+			var arr = $item.split("-");
+			$scope.billDetails.can = arr[0];
+			$scope.billDetails.consName = arr[1];
+			$scope.billDetails.address = arr[2];
+			$scope.custInfo = "";
+			$scope.getCustDetails($scope.billDetails.can);
+			$scope.isValidCust = true;
+		};
 
         
         $scope.clear = function () {
@@ -72,6 +90,12 @@ angular.module('watererpApp')
                 billTime: null,
                 meterMake: null,
                 currentBillType: null,
+                currentBillTypes: [
+                         	      {id: 'M', name: 'METERED'},
+                         	      {id: 'U', name: 'UNMETERED'},
+                         	      {id: 'L', name: 'LOCKED'},
+                         	      {id: 'R', name: 'REPAIR'},
+                         	    ],
                 fromMonth: null,
                 toMonth: null,
                 meterFixDate: null,
@@ -102,19 +126,13 @@ angular.module('watererpApp')
             };
         };
         
-        
-        $scope.disEnableSearch = function(enableSearch){ 
-            $scope.enableSearch = enableSearch;
-            	if($scope.enableSearch==undefined){
-            		$scope.enableSearch='';
-            	}        	
-            	if($scope.enableSearch.length > 0 && !isNaN($scope.enableSearch)){
-            		document.getElementById("submitSearch").disabled=false;
-            	}
-            	else{
-            		document.getElementById("submitSearch").disabled=true;
-            	}
-            }
+        $scope.toggleMeterReadingDate = function(cbtyp){
+        	if(cbtyp==='M'){
+        		$scope.billDetails.metReadingDt = $scope.billDetails.billDate;
+        	}else{
+        		$scope.billDetails.metReadingDt = null;
+        	}
+        }
         
         $scope.getCustDetails = function(can){
         	CustDetailsService.get({can : can}, function(result) {
@@ -123,18 +141,22 @@ angular.module('watererpApp')
                 $scope.billDetails.can = $scope.custDetails.can;
                 $scope.billDetails.address = $scope.custDetails.address;
                 $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
+                var date2 = new Date($scope.billDetails.prevBillMonth);
+                $scope.billDetails.fromMonth = new Date(date2.getFullYear(), date2.getMonth()+1, date2.getDate());
+                $scope.billDetails.prevReading = $scope.custDetails.prevReading;
+                $scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
             });
         }
         
-        $scope.billDetails = {
-        		currentBillType: null,
-        		currentBillTypes: [
-        	      {id: 'M', name: 'METERED'},
-        	      {id: 'U', name: 'UNMETERED'},
-        	      {id: 'L', name: 'LOCKED'},
-        	      {id: 'R', name: 'RUNNING'},
-        	    ],
-        	   };
+        $scope.datePickerForToMonth = {};
+
+        $scope.datePickerForToMonth.status = {
+            opened: false
+        };
+
+        $scope.datePickerForToMonthOpen = function($event) {
+            $scope.datePickerForToMonth.status.opened = true;
+        }; 
         
         $scope.datePickerForFromMonth = {};
 
