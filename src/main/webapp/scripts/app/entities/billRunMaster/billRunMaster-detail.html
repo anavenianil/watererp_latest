@@ -36,20 +36,23 @@
 					<tr>
 						<td><span>Status</span></td>
 						<td><span class="form-control-static">{{billRunMaster.status}}</span>
-						<div ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
-							<span class="form-control-static">
-								<button type="submit" class="btn btn-primary">
-									<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Commit</span>
-								</button>
-						</span></td>
-						</div>
-						
-						<div ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
-							<span class="form-control-static">
-								<button type="submit" class="btn btn-primary" ng-click="save('Cancel')">
-									<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Cancel</span>
-								</button>
-						</span></td>
+							<div
+								ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
+								<span class="form-control-static">
+									<button type="submit" class="btn btn-primary">
+										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Commit</span>
+									</button>
+								</span>
+							</div>
+
+							<div
+								ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
+								<span class="form-control-static">
+									<button type="button" class="btn btn-primary"
+										ng-click="save('Cancel')">
+										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Cancel</span>
+									</button>
+								</span></td>
 						</div>
 					</tr>
 				</tbody>
