@@ -72,23 +72,29 @@
 						</div>
 					</div>
 					<div class="row">
-						<!-- <div class="col-sm-4">
-							<label for="id">ID</label> <input type="text"
-								class="form-control" id="id" name="id" ng-model="billDetails.id"
-								readonly />
-						</div>
 						<div class="col-sm-4">
-							<label class="control-label" for="field_can">CAN</label> <input
-								type="text" class="form-control" name="can" id="field_can"
-								ng-model="billDetails.can" readonly />
-						</div> -->
-						<div class="col-sm-4">
-							<label class="control-label" for="field_billNumber">Bill
-								Number</label> <input type="text" class="form-control" name="billNumber"
-								id="field_billNumber" ng-model="billDetails.billNumber" />
+							<label class="control-label" for="field_prevMetReadingDt">Last Bill
+								Date</label>
+							<div class="form-group">
+								<div class='input-group' id='field_prevMetReadingDt'>
+									<input id="field_billDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="billDetails.prevMetReadingDt"
+										is-open="datePickerForPrevMetReadingDt.status.opened" readonly/> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForPrevMetReadingDtOpen($event)" disabled>
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+							<div ng-show="editForm.prevMetReadingDt.$invalid">
+								<p class="help-block"
+									ng-show="editForm.prevMetReadingDt.$error.required">This field is
+									required.</p>
+							</div>
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_billDate">Bill
 								Date</label>
@@ -113,39 +119,30 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<label class="control-label" for="field_billTime">Bill
-								Time</label> <input type="text" class="form-control" name="billTime"
-								id="field_billTime" ng-model="billDetails.billTime" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_meterMake">Meter
-								Make</label> <input type="text" class="form-control" name="meterMake"
-								id="field_meterMake" ng-model="billDetails.meterMake" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
 							<label class="control-label" for="field_currentBillType">Current
 								Bill Type</label> <select class="form-control"
 								id="field_currentBillType" name="currentBillType"
-								ng-model="billDetails.currentBillType">
+								ng-model="billDetails.currentBillType" 
+								ng-change="toggleMeterReadingDate(billDetails.currentBillType)" 
+								required>
 								<option
 									ng-repeat="currentBillType in billDetails.currentBillTypes"
 									value="{{currentBillType.id}}">{{currentBillType.name}}</option>
 							</select>
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-4">
-							<label class="control-label" for="field_fromMonth">From
-								Month</label>
+							<label class="control-label" for="field_prevBillMonth">Previous Bill Month</label>
 							<div class="form-group">
-								<div class='input-group' id='field_fromMonth'>
+								<div class='input-group' id='field_prevBillMonth'>
 									<input id="field_fromMonth" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="billDetails.prevBillMonth"
-										is-open="datePickerForFromMonth.status.opened" required /> <span
+										is-open="datePickerForprevBillMonth.status.opened" readonly/> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
-											ng-click="datePickerForFromMonthOpen($event)">
+											ng-click="datePickerForPrevBillMonthOpen($event)" disabled>
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
@@ -157,14 +154,31 @@
 									required.</p>
 							</div>
 						</div>
-						<!-- <div class="col-sm-4">
-							<label class="control-label" for="field_toMonth">To Month</label>
-							<input type="text" class="form-control" name="toMonth"
-								id="field_toMonth" ng-model="billDetails.toMonth" />
-						</div> -->
 						<div class="col-sm-4">
-							<label class="control-label" for="field_toMonth">To
+							<label class="control-label" for="field_fromMonth">From
 								Month</label>
+							<div class="form-group">
+								<div class='input-group' id='field_fromMonth'>
+									<input id="field_fromMonth" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="billDetails.fromMonth"
+										is-open="datePickerForFromMonth.status.opened" readonly/> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForFromMonthOpen($event)" disabled>
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+							<div ng-show="editForm.fromMonth.$invalid">
+								<p class="help-block"
+									ng-show="editForm.fromMonth.$error.required">This field is
+									required.</p>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_toMonth">To Month</label>
 							<div class="form-group">
 								<div class='input-group' id='field_toMonth'>
 									<input id="field_toMonth" type="text" class="form-control"
@@ -180,197 +194,58 @@
 								</div>
 							</div>
 							<div ng-show="editForm.toMonth.$invalid">
-								<p class="help-block"
-									ng-show="editForm.toMonth.$error.required">This field is
-									required.</p>
+								<p class="help-block" ng-show="editForm.toMonth.$error.required">This field is required.</p>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
-							<label class="control-label" for="field_meterFixDate">Meter
-								Fix Date</label>
+							<label class="control-label" for="field_prevBillMonth">Previous Meter Reading Date</label>
 							<div class="form-group">
-								<div class='input-group' id='field_meterFixDate'>
-									<input id="field_meterFixDate" type="text" class="form-control"
+								<div class='input-group' id='field_prevMetReadingDt'>
+									<input id="field_fromMonth" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="billDetails.meterFixDate"
-										is-open="datePickerForMeterFixDate.status.opened" />
-									<span class="input-group-btn">
+										ng-model="billDetails.prevMetReadingDt"
+										is-open="datePickerForprevBillMonth.status.opened" readonly/> <span
+										class="input-group-btn">
 										<button type="button" class="btn btn-default"
-											ng-click="datePickerForMeterFixDateOpen($event)">
+											ng-click="datePickerForPrevBillMonthOpen($event)" disabled>
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
 								</div>
 							</div>
+							<div ng-show="editForm.fromMonth.$invalid">
+								<p class="help-block"
+									ng-show="editForm.fromMonth.$error.required">This field is
+									required.</p>
+							</div>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_initialReading">Initial
-								Reading</label> <input type="number" class="form-control"
+								/ Previous Reading</label> <input type="number" class="form-control"
 								name="initialReading" id="field_initialReading"
-								ng-model="billDetails.initialReading" />
+								ng-model="billDetails.prevReading" readonly/>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_presentReading">Present
 								Reading</label> <input type="number" class="form-control"
 								name="presentReading" id="field_presentReading"
-								ng-model="billDetails.presentReading" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_units">Units</label> <input
-								type="number" class="form-control" name="units" id="field_units"
-								ng-model="billDetails.units" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_waterCess">Water
-								Cess</label> <input type="number" class="form-control" name="waterCess"
-								id="field_waterCess" ng-model="billDetails.waterCess" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_sewerageCess">Sewerage
-								Cess</label> <input type="number" class="form-control"
-								name="sewerageCess" id="field_sewerageCess"
-								ng-model="billDetails.sewerageCess" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_serviceCharge">Service
-								Charge</label> <input type="number" class="form-control"
-								name="serviceCharge" id="field_serviceCharge"
-								ng-model="billDetails.serviceCharge" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_meterServiceCharge">Meter
-								Service Charge</label> <input type="number" class="form-control"
-								name="meterServiceCharge" id="field_meterServiceCharge"
-								ng-model="billDetails.meterServiceCharge" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_totalAmount">Total
-								Amount</label> <input type="number" class="form-control"
-								name="totalAmount" id="field_totalAmount"
-								ng-model="billDetails.totalAmount" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_netPayableAmount">Net
-								Payable Amount</label> <input type="number" class="form-control"
-								name="netPayableAmount" id="field_netPayableAmount"
-								ng-model="billDetails.netPayableAmount" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_telephoneNo">Telephone
-								No</label> <input type="text" class="form-control" name="telephoneNo"
-								id="field_telephoneNo" ng-model="billDetails.telephoneNo" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_meterStatus">Meter
-								Status</label> <input type="text" class="form-control"
-								name="meterStatus" id="field_meterStatus"
-								ng-model="billDetails.meterStatus" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_metReaderCode">Meter
-								Reader Code</label> <input type="text" class="form-control"
-								name="metReaderCode" id="field_metReaderCode"
-								ng-model="billDetails.metReaderCode" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_billFlag">Bill
-								Flag</label> <input type="text" class="form-control" name="billFlag"
-								id="field_billFlag" ng-model="billDetails.billFlag" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_svrStatus">Server
-								Status</label> <input type="text" class="form-control" name="svrStatus"
-								id="field_svrStatus" ng-model="billDetails.svrStatus" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_terminalId">Terminal
-								Id</label> <input type="text" class="form-control" name="terminalId"
-								id="field_terminalId" ng-model="billDetails.terminalId" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_meterReaderId">Meter
-								Reader Id</label> <input type="text" class="form-control"
-								name="meterReaderId" id="field_meterReaderId"
-								ng-model="billDetails.meterReaderId" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_userId">User Id</label> <input
-								type="text" class="form-control" name="userId" id="field_userId"
-								ng-model="billDetails.userId" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_mobileNo">Mobile
-								No</label> <input type="text" class="form-control" name="mobileNo"
-								id="field_mobileNo" ng-model="billDetails.mobileNo" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_noticeNo">Notice
-								No</label> <input type="text" class="form-control" name="noticeNo"
-								id="field_noticeNo" ng-model="billDetails.noticeNo" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_lat">Lat</label> <input
-								type="text" class="form-control" name="lat" id="field_lat"
-								ng-model="billDetails.lat" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label class="control-label" for="field_longi">Longi</label> <input
-								type="text" class="form-control" name="longi" id="field_longi"
-								ng-model="billDetails.longi" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_noMeterAmt">No
-								Meter Amt</label> <input type="text" class="form-control"
-								name="noMeterAmt" id="field_noMeterAmt"
-								ng-model="billDetails.noMeterAmt" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_metReadingDt">Meter
-								Reading Date</label>
-							<div class="form-group">
-								<div class='input-group' id='field_metReadingDt'>
-									<input id="field_metReadingDt" type="text" class="form-control"
-										uib-datepicker-popup="{{dateformat}}"
-										ng-model="billDetails.metReadingDt"
-										is-open="datePickerForMetReadingDt.status.opened" />
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="datePickerForMetReadingDtOpen($event)">
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button>
-									</span>
-								</div>
-							</div>
+								ng-model="billDetails.presentReading" required/>
 						</div>
 					</div>
 				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal"
-			ng-click="clear()">
-			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-		</button>
-		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-			class="btn btn-primary">
-			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-		</button>
 	</div>
 </form>

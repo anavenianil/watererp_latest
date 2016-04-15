@@ -89,9 +89,7 @@ angular.module('watererpApp').controller(
 						return true;
 
 				}
-
 				return false;
-
 			}
 
 			$scope.onSelect = function($item, $model, $label) {
@@ -140,23 +138,8 @@ angular.module('watererpApp').controller(
 				$scope.datePickerForCollTime.status.opened = true;
 			};
 
-			$scope.getCustDetails = function(can) {
-				if ($scope.editForm.field_custDetails.$invalid) {
-					$scope.clear();
-					return;
-				}
-
-				CustDetailsService.get({
-					can : can
-				}, function(result) {
-					$scope.custDetails = result;
-					$scope.collDetails.consName = $scope.custDetails.consName;
-					$scope.collDetails.can = $scope.custDetails.can;
-				});
-			}
-
 			$scope.resetInstr = function(paymentMode) {
-				if (paymentMode === 'Cash') {
+				if (paymentMode === 'CASH') {
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;
