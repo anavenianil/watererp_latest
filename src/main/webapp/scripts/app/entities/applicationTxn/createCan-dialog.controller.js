@@ -44,24 +44,9 @@ angular.module('watererpApp').controller(
 			}
 
 			$scope.canGenerate = function(feasibilityId) {
-				
-				ApplicationTxnService.generateCan1(feasibilityId).then(
-						function(response) {
-							$scope.applicationTxn.can = response;
-						});
-//				
-//				return $http.get('api/applicationTxns/can', {
-//					params : {
-//						feasibilityId : feasibilityId
-//					}
-//				}).then(function(response) {
-//					var res = response.data.map(function(item) {
-//						console.log("Item:" + item);
-//						$scope.applicationTxn.can = item;
-//					});
-//
-//				});
-
+				ApplicationTxnService.generateCan(feasibilityId).then(function(response) {
+					$scope.applicationTxn.can = response;
+				});				
 			}
 
 			var onSaveSuccess = function(result) {
@@ -82,7 +67,8 @@ angular.module('watererpApp').controller(
 					ApplicationTxn.update($scope.applicationTxn, onSaveSuccess,
 							onSaveError);
 				} else {
-					//ApplicationTxn.save($scope.applicationTxn, onSaveSuccess, onSaveError);
+					// ApplicationTxn.save($scope.applicationTxn, onSaveSuccess,
+					// onSaveError);
 					alert("Not Saved");
 				}
 			};

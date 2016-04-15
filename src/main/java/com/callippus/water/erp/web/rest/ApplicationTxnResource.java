@@ -303,11 +303,11 @@ public class ApplicationTxnResource {
     /**
      * this will generate can
      */
-	@RequestMapping(value = "/applicationTxns/can1", 
+	@RequestMapping(value = "/applicationTxns/can", 
 			method = RequestMethod.GET, 
 			produces = MediaType.TEXT_PLAIN_VALUE)
 	@Timed
-	public ResponseEntity<String> generateCan1(@RequestParam(value = "feasibilityId", required = false) Long feasibilityId)
+	public ResponseEntity<String> generateCan(@RequestParam(value = "feasibilityId", required = false) Long feasibilityId)
 			throws Exception{
 		log.debug("REST request to get CAN : {}");
 		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(feasibilityId);
@@ -330,39 +330,5 @@ public class ApplicationTxnResource {
         		newCan,
                     HttpStatus.OK);
 		
-	}
-    
-    
-    /**
-     * this will generate can
-     */
-	@RequestMapping(value = "/applicationTxns/can", 
-			method = RequestMethod.GET, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	public ResponseEntity<List<String>> generateCan(@RequestParam(value = "feasibilityId", required = false) Long feasibilityId)
-			throws Exception{
-		log.debug("REST request to get CAN : {}");
-		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(feasibilityId);
-		String division = feasibility.getDivisionMaster().getDivisionName();
-		String street = feasibility.getStreetMaster().getStreetCode();
-		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
-		Integer can = applicationTxnRepository.findByCan(division, street);
-		if(can == null){
-			can =1;
-		}
-		else{
-			can = can+1;
-		}
-		String s1 = String.format("%04d", can);
-
-		List<String> canList = new ArrayList<String>();
-		String newCan = division + street + s1.toString();
-		canList.add(newCan);
-		
-        return new ResponseEntity<List<String>>(
-        		canList,
-                    HttpStatus.OK);
-		
-	}
+	}        
 }

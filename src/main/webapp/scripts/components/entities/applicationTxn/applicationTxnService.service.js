@@ -68,24 +68,9 @@ angular.module('watererpApp').factory(
 						params : {
 							feasibilityId : feasibilityId
 						}
-					}).then(
-							function(response) {
-								return response.data;
-							});
-				},
-				generateCan1 : function(feasibilityId) {
-					return $http(
-							{								
-								url : 'api/applicationTxns/can1?feasibilityId='
-										+ feasibilityId,
-								method : 'GET',
-								responseType : 'text'
-							}).then(
-							function(response) {
-								console.log("This is the response:"
-										+ JSON.stringify(response));
-								return response.data;
-							});
+					}).then(function(response) {
+						return response.data;
+					});
 				}
 			/*
 			 * , getMyRequests: function () { return
