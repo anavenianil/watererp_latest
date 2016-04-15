@@ -28,7 +28,7 @@ public class OrgSpecificWorkflowService {//extends WorkflowService{
 	 * @return workflow id
 	 */
 	public WorkflowService initWorkflow() throws Exception {
-		log.debug("::<<<OrgSpecificWorkflowService<<<<<<<<Method>>>>>>>>>>>>>>>initWorkflow()>>>>>>>>>");
+		log.debug("::<<<OrgSpecificWorkflowServiceMethod>>>initWorkflow()>");
 		
 		try {
 			workflowService.setWorkflowType(CPSConstants.ORGSPECIFIC);

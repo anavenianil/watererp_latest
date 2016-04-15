@@ -38,7 +38,7 @@ public class UserLevelWorkflowService {// extends WorkflowService {
      **/
      
     public void checkUserAutoDelegate() throws Exception {
-    	log.debug("::<<<UserLevelWorkflowService<<<<<<<<Method>>>>>>>>>>>>>>>checkUserAutoDelegate()>>>>>>>>>");
+    	log.debug("::UserLevelWorkflowService<<MethodcheckUserAutoDelegate()");
         String requesterType = null;
         String updateNoOfRequests = null;
         String sfid = null;
@@ -113,7 +113,7 @@ public class UserLevelWorkflowService {// extends WorkflowService {
     }
 
     public void checkUserNormalConfiguration( String assignType) throws Exception {
-    	log.debug("::<<<UserLevelWorkflowService<<<<<<<<Method>>>>>>>>>>>>>>>checkUserNormalConfiguration(String assignType)>>>>>>>>>");
+    	log.debug("::UserLevelWorkflowService<<MethodcheckUserNormalConfiguration(String assignType)");
 		
 		String getDelegatedID = "select id,delegate,gazetted_type,delegation_type,case when delegation_type="
 				+ CPSConstants.STATUSINSTANCE
@@ -151,7 +151,7 @@ public class UserLevelWorkflowService {// extends WorkflowService {
 			
     
     public void checkUserTreeConfiguration(String assignType) throws Exception {
-    	log.debug("::<<<UserLevelWorkflowService<<<<<<<<Method>>>>>>>>>>>>>>>checkUserTreeConfiguration(String assignType)>>>>>>>>>");
+    	log.debug("::UserLevelWorkflowService<<MethodcheckUserTreeConfiguration(String assignType)");
 		
 		/*String getDelegatedID = "select id,delegate, gazetted_type, delegation_type, case when delegation_type="+CPSConstants.STATUSINSTANCE+" then delegate||'' "
 				+ "else null end roleID from (select id,delegate,gazetted_type,delegation_type from t_user_specific_configuration where id=(select case when "
