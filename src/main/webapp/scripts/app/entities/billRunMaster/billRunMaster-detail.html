@@ -1,9 +1,32 @@
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-	<div>
-		<h2>
-			<span>BillRunMaster</span> {{billRunMaster.id}}
-		</h2>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">
+				Bill Run Master <span class="label" class="label"
+					ng-class="{ 'label-success'   : billRunMaster.status === 'COMMITTED', 'label-warning'   : billRunMaster.status === 'COMPLETED', 'label-danger'   :  billRunMaster.status === 'CANCELLED'">
+					{{billRunMaster.status}}</span>
+			</h3>
+
+			<div class="pull-right">
+
+				<button type="button" ng-disabled="editForm.$invalid"
+					ng-show="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'"
+					class="btn btn-success" ng-click="save('Commit')">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Cancel</span>
+				</button>
+
+				<button type="button" ng-disabled="editForm.$invalid"
+					ng-show="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'"
+					class="btn btn-danger" ng-click="save('Cancel')">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Cancel</span>
+				</button>
+
+			</div>
+		</div>
+
+
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -13,6 +36,10 @@
 					</tr>
 				</thead>
 				<tbody>
+					<tr>
+						<td><span>Run Id</span></td>
+						<td><span class="form-control-static">{{billRunMaster.id}}</span></td>
+					</tr>
 					<tr>
 						<td><span>Date</span></td>
 						<td><span class="form-control-static">{{billRunMaster.date
@@ -36,29 +63,10 @@
 					<tr>
 						<td><span>Status</span></td>
 						<td><span class="form-control-static">{{billRunMaster.status}}</span>
-							<div
-								ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
-								<span class="form-control-static">
-									<button type="submit" class="btn btn-primary">
-										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Commit</span>
-									</button>
-								</span>
-							</div>
-
-							<div
-								ng-if="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'">
-								<span class="form-control-static">
-									<button type="button" class="btn btn-primary"
-										ng-click="save('Cancel')">
-										<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Cancel</span>
-									</button>
-								</span></td>
-						</div>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-
 		<button type="submit" onclick="window.history.back()"
 			class="btn btn-info">
 			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
@@ -69,13 +77,13 @@
 		<button type="submit" ui-sref="billRunMaster" class="btn btn-info">
 			<span class="glyphicon"></span>&nbsp;<span> View Bill Run
 				Master</span>
+		</button>
 
-
-			<button type="submit"
-				ui-sref="billRunDetailsByRunId({billRunId:billRunMaster.id})"
-				class="btn btn-info">
-				<span class="glyphicon"></span>&nbsp;<span> View Bill Run
-					Details</span>
-			</button>
+		<button type="submit"
+			ui-sref="billRunDetailsByRunId({billRunId:billRunMaster.id})"
+			class="btn btn-info">
+			<span class="glyphicon"></span>&nbsp;<span> View Bill Run
+				Details</span>
+		</button>
 	</div>
 </form>
