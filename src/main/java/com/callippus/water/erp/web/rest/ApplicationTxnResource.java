@@ -3,6 +3,7 @@ package com.callippus.water.erp.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -27,9 +28,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -57,6 +60,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private ApplicationTxnCustomRepository applicationTxnCustomRepository;
+    
+    @Inject
+    private FeasibilityStudyRepository feasibilityStudyRepository;
     
     
     /**
@@ -286,7 +292,7 @@ public class ApplicationTxnResource {
     @Timed
 	public ResponseEntity<List<RequestWorkflowHistory>> getAllApprovedRequests(HttpServletResponse response, @PathVariable String type)
 			throws Exception {
-		log.debug("REST request to get Requisition : {}");
+		log.debug("REST request to get getApproved Request : {}");
 		List<RequestWorkflowHistory> requestWorkflowHistorysStatus = applicationTxnCustomRepository
 				.listAllApprovedRequests(type);
 
@@ -294,4 +300,35 @@ public class ApplicationTxnResource {
 				HttpStatus.OK);
 	}
 
+    /**
+     * this will generate can
+     */
+	@RequestMapping(value = "/applicationTxns/can", 
+			method = RequestMethod.GET, 
+			produces = MediaType.TEXT_PLAIN_VALUE)
+	@Timed
+	public ResponseEntity<String> generateCan(@RequestParam(value = "feasibilityId", required = false) Long feasibilityId)
+			throws Exception{
+		log.debug("REST request to get CAN : {}");
+		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(feasibilityId);
+		String division = feasibility.getDivisionMaster().getDivisionName();
+		String street = feasibility.getStreetMaster().getStreetCode();
+		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
+		Integer can = applicationTxnRepository.findByCan(division, street);
+		if(can == null){
+			can =1;
+		}
+		else{
+			can = can+1;
+		}
+		String s1 = String.format("%04d", can);
+
+		String newCan = division + street + s1.toString();
+
+		
+        return new ResponseEntity<String>(
+        		newCan,
+                    HttpStatus.OK);
+		
+	}        
 }

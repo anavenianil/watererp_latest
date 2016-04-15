@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('watererpApp').controller('CustMeterMappingDialogController',
-        function($scope, $stateParams, $state, CustMeterMapping, CustDetails, MeterDetails, ApplicationTxn) {
+        function($scope, $stateParams, $state, CustMeterMapping, CustDetails, MeterDetails, ApplicationTxn, ApplicationTxnService) {
 
         $scope.custMeterMapping = {};
         $scope.custdetailss = CustDetails.query();
         $scope.meterdetailss = MeterDetails.query();
+        $scope.applicationTxn = {};
+        $scope.applicationTxnId = $stateParams.applicationTxnId;
         
         $scope.load = function(id) {
             CustMeterMapping.get({id : id}, function(result) {
@@ -13,13 +15,16 @@ angular.module('watererpApp').controller('CustMeterMappingDialogController',
             });
         };
         
-        if($stateParams.applicationTxnId != null){
+        if($stateParams.id != null){
+        	$scope.load($stateParams);
+        }
+        
+       /* if($stateParams.applicationTxnId != null){
         	console.log("applicationTxnId: "+$stateParams.applicationTxnId);
         	ApplicationTxn.get({id : $stateParams.applicationTxnId}, function(result) {
                 $scope.applicationTxn = result;
             });	
-        }
-        
+        }*/
         
         if($stateParams.id != null){
         	$scope.load($stateParams.id);
@@ -28,6 +33,7 @@ angular.module('watererpApp').controller('CustMeterMappingDialogController',
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:custMeterMappingUpdate', result);
             $scope.isSaving = false;
+            //$state.go('applicationTxn');
         };
 
         var onSaveError = function (result) {

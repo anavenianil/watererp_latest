@@ -62,7 +62,7 @@
 							<label for="field_custDetails">custDetails</label> <select
 								class="form-control" id="field_custDetails" name="custDetails"
 								ng-model="custMeterMapping.custDetails"
-								ng-options="custDetails as custDetails.id for custDetails in custdetailss track by custDetails.id">
+								ng-options="custDetails as custDetails.can for custDetails in custdetailss track by custDetails.id">
 								<option value=""></option>
 							</select>
 						</div>
@@ -70,9 +70,21 @@
 							<label for="field_meterDetails">meterDetails</label> <select
 								class="form-control" id="field_meterDetails" name="meterDetails"
 								ng-model="custMeterMapping.meterDetails"
-								ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
+								ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
 								<option value=""></option>
 							</select>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_meterReading">Meter Reading</label>
+							<input type="text" class="form-control" name="meterReading"
+								id="field_meterReading" ng-model="applicationTxn.meterReading" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<textarea rows="2" cols="30" class="form-control" name="remarks"
+								id="field_remarks" ng-model="applicationTxn.remarks"></textarea>
 						</div>
 					</div>
 				</div>

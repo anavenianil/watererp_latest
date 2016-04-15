@@ -39,7 +39,6 @@ angular.module('watererpApp')
                 meterMake: null,
                 min: null,
                 max: null,
-                status: null,
                 id: null
             };
         };

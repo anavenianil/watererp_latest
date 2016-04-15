@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('watererpApp').controller('MeterDetailsDialogController',
-        function($scope, $stateParams, MeterDetails, $state) {
+        function($scope, $stateParams, MeterDetails, $state, MeterStatus) {
 
         $scope.meterDetails = {};
+        $scope.meterStatuss = MeterStatus.query();
         $scope.load = function(id) {
             MeterDetails.get({id : id}, function(result) {
                 $scope.meterDetails = result;

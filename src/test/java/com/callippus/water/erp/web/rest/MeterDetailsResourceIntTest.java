@@ -54,9 +54,6 @@ public class MeterDetailsResourceIntTest {
     private static final Float DEFAULT_MAX = 1F;
     private static final Float UPDATED_MAX = 2F;
 
-    private static final Integer DEFAULT_STATUS = 1;
-    private static final Integer UPDATED_STATUS = 2;
-
     @Inject
     private MeterDetailsRepository meterDetailsRepository;
 
@@ -88,7 +85,6 @@ public class MeterDetailsResourceIntTest {
         meterDetails.setMeterMake(DEFAULT_METER_MAKE);
         meterDetails.setMin(DEFAULT_MIN);
         meterDetails.setMax(DEFAULT_MAX);
-        meterDetails.setStatus(DEFAULT_STATUS);
     }
 
     @Test
@@ -112,7 +108,6 @@ public class MeterDetailsResourceIntTest {
         assertThat(testMeterDetails.getMeterMake()).isEqualTo(DEFAULT_METER_MAKE);
         assertThat(testMeterDetails.getMin()).isEqualTo(DEFAULT_MIN);
         assertThat(testMeterDetails.getMax()).isEqualTo(DEFAULT_MAX);
-        assertThat(testMeterDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -148,8 +143,7 @@ public class MeterDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].meterType").value(hasItem(DEFAULT_METER_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].meterMake").value(hasItem(DEFAULT_METER_MAKE.toString())))
                 .andExpect(jsonPath("$.[*].min").value(hasItem(DEFAULT_MIN.doubleValue())))
-                .andExpect(jsonPath("$.[*].max").value(hasItem(DEFAULT_MAX.doubleValue())))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
+                .andExpect(jsonPath("$.[*].max").value(hasItem(DEFAULT_MAX.doubleValue())));
     }
 
     @Test
@@ -167,8 +161,7 @@ public class MeterDetailsResourceIntTest {
             .andExpect(jsonPath("$.meterType").value(DEFAULT_METER_TYPE.toString()))
             .andExpect(jsonPath("$.meterMake").value(DEFAULT_METER_MAKE.toString()))
             .andExpect(jsonPath("$.min").value(DEFAULT_MIN.doubleValue()))
-            .andExpect(jsonPath("$.max").value(DEFAULT_MAX.doubleValue()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
+            .andExpect(jsonPath("$.max").value(DEFAULT_MAX.doubleValue()));
     }
 
     @Test
@@ -193,7 +186,6 @@ public class MeterDetailsResourceIntTest {
         meterDetails.setMeterMake(UPDATED_METER_MAKE);
         meterDetails.setMin(UPDATED_MIN);
         meterDetails.setMax(UPDATED_MAX);
-        meterDetails.setStatus(UPDATED_STATUS);
 
         restMeterDetailsMockMvc.perform(put("/api/meterDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -209,7 +201,6 @@ public class MeterDetailsResourceIntTest {
         assertThat(testMeterDetails.getMeterMake()).isEqualTo(UPDATED_METER_MAKE);
         assertThat(testMeterDetails.getMin()).isEqualTo(UPDATED_MIN);
         assertThat(testMeterDetails.getMax()).isEqualTo(UPDATED_MAX);
-        assertThat(testMeterDetails.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

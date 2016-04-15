@@ -161,5 +161,39 @@ angular.module('watererpApp')
                 resolve: {
                 	
                 }
+            })
+            .state('applicationTxnIssueMeter', {
+                parent: 'applicationTxn',
+                url: '/issueMeter/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'IssueMeter'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/applicationTxn/issueMeter-dialog.html',
+                        controller: 'IssueMeterDialogController'
+                    }
+                },
+                resolve: {
+                	
+                }
+            })
+            .state('applicationTxnCreateCan', {
+                parent: 'applicationTxn',
+                url: '/createCan/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CreateCan'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/applicationTxn/createCan-dialog.html',
+                        controller: 'CreateCanDialogController'
+                    }
+                },
+                resolve: {
+                	
+                }
             });
     });

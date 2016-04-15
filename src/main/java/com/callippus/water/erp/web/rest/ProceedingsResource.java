@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.Proceedings;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
@@ -154,6 +155,24 @@ public class ProceedingsResource {
         Proceedings proceedings = proceedingsRepository.findByApplicationTxn(applicationTxn);
         List<ItemRequired> itemRequireds = itemRequiredRepository.findByProceedings(proceedings);
         proceedings.setItemRequireds(itemRequireds);
+        return Optional.ofNullable(proceedings)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
+    /**
+     * GET  /feasibilityStudys/:applicationTxnId -> get the "applicationTxn" feasibilityStudy.
+     */
+    @RequestMapping(value = "/proceedingss/forAppTxn/{applicationTxnId}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Proceedings> getProceedingsByApplication(@PathVariable Long applicationTxnId) {
+        log.debug("REST request to get Proceedings : {}", applicationTxnId);
+        ApplicationTxn applicationTxn = applicationTxnRepository.getOne(applicationTxnId);
+        Proceedings proceedings = proceedingsRepository.findByApplicationTxn(applicationTxn);
         return Optional.ofNullable(proceedings)
             .map(result -> new ResponseEntity<>(
                 result,

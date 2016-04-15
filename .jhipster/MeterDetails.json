@@ -1,5 +1,13 @@
 {
-    "relationships": [],
+    "relationships": [
+    	{
+            "relationshipId": 1,
+            "relationshipName": "meterStatus",
+            "otherEntityName": "meterStatus",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+     ],
     "fields": [
         {
             "fieldId": 1,
@@ -28,11 +36,6 @@
             "fieldId": 5,
             "fieldName": "max",
             "fieldType": "Float"
-        },
-        {
-            "fieldId": 6,
-            "fieldName": "status",
-            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20160405010101",

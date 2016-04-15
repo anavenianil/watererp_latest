@@ -43,6 +43,38 @@ angular.module('watererpApp')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
+                    pageTitle: 'BillDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/billDetails/billDetails-dialog.html',
+                        controller: 'BillDetailsDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('billDetails.edit', {
+                parent: 'billDetails',
+                url: '/edit/:id',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'BillDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/billDetails/billDetails-dialog.html',
+                        controller: 'BillDetailsDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            /*.state('billDetails.new', {
+                parent: 'billDetails',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -117,7 +149,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('billDetails.delete', {
                 parent: 'billDetails',
                 url: '/{id}/delete',

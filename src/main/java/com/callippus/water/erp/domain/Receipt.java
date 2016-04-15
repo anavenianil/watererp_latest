@@ -37,8 +37,8 @@ public class Receipt implements Serializable {
     @Column(name = "check_or_dd_no")
     private String checkOrDdNo;
     
-    @Column(name = "bill_date")
-    private LocalDate billDate;
+    @Column(name = "receipt_date")
+    private LocalDate receiptDate;
     
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
@@ -96,12 +96,12 @@ public class Receipt implements Serializable {
         this.checkOrDdNo = checkOrDdNo;
     }
 
-    public LocalDate getBillDate() {
-        return billDate;
+    public LocalDate getReceiptDate() {
+        return receiptDate;
     }
     
-    public void setBillDate(LocalDate billDate) {
-        this.billDate = billDate;
+    public void setReceiptDate(LocalDate receiptDate) {
+        this.receiptDate = receiptDate;
     }
 
     public ApplicationTxn getApplicationTxn() {
@@ -149,7 +149,7 @@ public class Receipt implements Serializable {
             ", branchName='" + branchName + "'" +
             ", checkOrDdDate='" + checkOrDdDate + "'" +
             ", checkOrDdNo='" + checkOrDdNo + "'" +
-            ", billDate='" + billDate + "'" +
+            ", receiptDate='" + receiptDate + "'" +
             '}';
     }
 }

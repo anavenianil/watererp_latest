@@ -94,5 +94,6 @@
     <include file="classpath:config/liquibase/changelog/20160412142749_added_entity_BillRunMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml" relativeToChangelogFile="false"/>
 
+    <include file="classpath:config/liquibase/changelog/20160413093028_added_entity_MeterStatus.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>
