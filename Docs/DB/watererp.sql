@@ -440,7 +440,21 @@ INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,
  (107,'617757186','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,11),
  (108,'617771922','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,11),
  (109,'617781451','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,11),
- (110,'617781710','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,11);
+ (110,'617781710','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,11),
+ (111,'032153790','2016-04-16 13:09:30','2016-04-16 13:09:30',1,'Failed with error:ALREADY_BILLED',NULL,12);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (112,'011100304','2016-04-16 13:09:30','2016-04-16 13:09:30',1,'Failed with error:ALREADY_BILLED',NULL,12),
+ (113,'613577519','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,12),
+ (114,'617738493','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,12),
+ (115,'617738918','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,12),
+ (116,'617757078','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,12),
+ (117,'617757083','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,12),
+ (118,'617757111','2016-04-16 13:09:30','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,12),
+ (119,'617757186','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,12);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (120,'617771922','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,12),
+ (121,'617781451','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,12),
+ (122,'617781710','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,12);
 /*!40000 ALTER TABLE `bill_run_details` ENABLE KEYS */;
 
 
@@ -475,7 +489,8 @@ INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) V
  (8,'2016-04-15 11:21:45','0',0,48,'CANCELLED'),
  (9,'2016-04-15 11:53:38','0',0,60,'CANCELLED'),
  (10,'2016-04-15 15:09:33','0',0,12,'COMMITTED'),
- (11,'2016-04-15 19:15:23','0',0,12,'CANCELLED');
+ (11,'2016-04-15 19:15:23','0',0,12,'CANCELLED'),
+ (12,'2016-04-16 13:09:30','0',0,12,'CANCELLED');
 /*!40000 ALTER TABLE `bill_run_master` ENABLE KEYS */;
 
 
@@ -3662,6 +3677,7 @@ CREATE TABLE `jhi_authority` (
 INSERT INTO `jhi_authority` (`name`) VALUES 
  ('ROLE_ADMIN'),
  ('ROLE_BILLRUN'),
+ ('ROLE_BILLRUN_MANAGER'),
  ('ROLE_CUSTOMER'),
  ('ROLE_EMPLOYEE'),
  ('ROLE_USER');
@@ -4017,7 +4033,15 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (308,'admin','2016-04-16 11:37:25','AUTHENTICATION_SUCCESS'),
  (309,'billrunuser','2016-04-16 11:46:09','AUTHENTICATION_SUCCESS'),
  (310,'admin','2016-04-16 11:53:00','AUTHENTICATION_SUCCESS'),
- (311,'billrunuser','2016-04-16 11:54:58','AUTHENTICATION_SUCCESS');
+ (311,'billrunuser','2016-04-16 11:54:58','AUTHENTICATION_SUCCESS'),
+ (312,'billrunuser','2016-04-16 12:22:23','AUTHENTICATION_SUCCESS'),
+ (313,'admin','2016-04-16 12:43:14','AUTHENTICATION_SUCCESS'),
+ (314,'billrunuser','2016-04-16 13:09:14','AUTHENTICATION_SUCCESS'),
+ (315,'admin','2016-04-16 15:06:34','AUTHENTICATION_SUCCESS'),
+ (316,'billrunmgr','2016-04-16 17:30:45','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (317,'billrunuser','2016-04-16 17:39:57','AUTHENTICATION_SUCCESS'),
+ (318,'billrunmgr','2016-04-16 17:44:26','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -4692,7 +4716,22 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (310,'remoteAddress','0:0:0:0:0:0:0:1'),
  (310,'sessionId','9DE82C3900C2689A1B330FB394C83587'),
  (311,'remoteAddress','0:0:0:0:0:0:0:1'),
- (311,'sessionId','8C9DF7764BB5F76331FD09B94E0542C0');
+ (311,'sessionId','8C9DF7764BB5F76331FD09B94E0542C0'),
+ (312,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (312,'sessionId','2F2C8288C3F6902409842477E3CA9A91'),
+ (313,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (313,'sessionId','490A74A0C2F737528F8405F605BC032F'),
+ (314,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (314,'sessionId','4F3E502C6B2BAA7D273BF4BEDECA7FD2'),
+ (315,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (315,'sessionId','7E163D42816608A071526DCF66FA6251'),
+ (316,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (316,'sessionId','1903E0005826676F779BFE5DBBD4CF79'),
+ (317,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (317,'sessionId','D3549569B7838E8A3F85413733FA3E3B'),
+ (318,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (318,'sessionId','9B54A04ADD5BE27E80F86539365307B3');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -4743,43 +4782,43 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('BFMeF7yubUPWeHMlxnpHhg==',3,'86Dlw7pit1sjL3P4rA601A==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('bh/be/AQUN2jP5F1P7kdSQ==',3,'kn71wIORmJGn7dP9vuFMTQ==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('BjFH2opb4XBhsUUySQHY/Q==',31,'qfmgGGe5OA0hlfbNXwOxUg==','2016-04-16','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('C0yHTgCTgnXcC62bNAch3g==',15,'QM8xVxLqO6GowIcWRmrfyw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('cDuDRxT54VRDENf238evFw==',3,'qL156YzlR0uNU4rfJVaZGw==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('DEqQipDM3iLfE1PFx+mwRA==',3,'rlSkhLwJf+8q3MOatcrcDA==','2016-02-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('fNpzeb666xEusKesIpiVaA==',15,'EB7kPB3Prax0zRKgFghQUg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('fNpzeb666xEusKesIpiVaA==',15,'EB7kPB3Prax0zRKgFghQUg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('gjgSoEiEm2u4z82bxneQbA==',15,'Q5ukTsruzqRjPjl2jNIIBA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('hFKfqjPrW8Z/amqU43M89g==',5,'OCMXKNowMoVsmqZ2jGSrxQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Hw5vcTOmIcEuAJ+K5/ttTg==',3,'o/B/WvzQojyU6CRPqa0kug==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('IgMAY7/2pqUwaRD9fRqtZA==',5,'R/v6AK3DT+5hKspBsE0QdQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('Kb8YebfE7JAJymtqjh/HBQ==',3,'NLNenPNKYp99JL0VakVcDw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('Kb8YebfE7JAJymtqjh/HBQ==',3,'NLNenPNKYp99JL0VakVcDw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KU6VZmBHcK3RKoGgwhLDcA==',3,'CtWXmv/L/eFLnOkikbadrw==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('lqqkRZHMgCV5ZRZsdmOctA==',3,'Sqs4OVQ6a8Sm5+xrE5sxsg==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ltSsrr4LGe85jyi2xaM+GQ==',5,'O2cmSBS0fFhBkpiM4zdCkA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mJ9QRewb5tZnJtq1JS6BeQ==',3,'Y4wzvxHQSVqsUa7uMIa7ug==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nicdzpFVE7fA8XUEciBnBg==',15,'jjnMZHjRSEuYg7FgpryrNw==','2016-03-29','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nK0IBkLMvCyRtRagV7xkIA==',15,'O271OweAwksyy+Yei161xA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('PpZTKOgtRshlEF2Y5H8Nzw==',3,'2oilX1ZtHFQ62F6g/CMZMg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('qFVuu+uRSBJTp3pUTFHbiw==',3,'0mje7iCbeSAXZrqoHwhF0A==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('R6uDzkAd46IU0D3H4E0FVA==',3,'XcfBIoCDayNepzQsEjnkJg==','2016-03-17','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('qFVuu+uRSBJTp3pUTFHbiw==',3,'0mje7iCbeSAXZrqoHwhF0A==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('R6uDzkAd46IU0D3H4E0FVA==',3,'XcfBIoCDayNepzQsEjnkJg==','2016-03-17','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('TN6nvrS4DAcjld/PAsVu3w==',3,'pWLUEigr2nT7tCBerVO3rw==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('uBmBvYHKZMXr5UHwlzKAPA==',3,'oIXVYnHZ2CAqS/lxhNHtBQ==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('UDMPyK37cLIktTJg9P5RrQ==',3,'ShKdK3zme2OSRapV6fqKMw==','2016-03-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('VIfFPnt0gziwkjLAhpv/MA==',30,'L/f3c0ZLuccN5K6uLCkQ/Q==','2016-04-16','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('Waj7OoRQvtqW2FGm3rwFHw==',3,'DScvaJTEMdPTgvNKd4KoRg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
@@ -4867,7 +4906,8 @@ INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`e
  (27,'sf0027','$2a$10$F58do6ARzxNnWwXFF3WVa.oH4Cnwfu9GGESf5c64Av7PnAVDDHQfu','Nobert','Kamba','sf0027@localhost','','en','88464590975638599993',NULL,'anonymousUser','2016-03-18 12:53:16',NULL,'sf0027','2016-03-28 12:57:46'),
  (28,'sf0028','$2a$10$K.A7jrXE..8CIm7SoeVMBepZyR2WdpZeQpPyUOfY429jeBaL.OMju','Francis','Hume','sf0028@localhost','','en','71805558970907066489',NULL,'anonymousUser','2016-03-18 12:53:33',NULL,'sf0028','2016-03-28 12:58:11'),
  (29,'sf0029','$2a$10$L1IXkaggwuSLeeF0fRR9CeMb/Qq6IM7EXLJI/jsdfFSOUQWf4oPHS',NULL,NULL,'sf0029@localhost','','en','68914493240806760364',NULL,'anonymousUser','2016-03-21 16:19:52',NULL,'admin','2016-03-21 16:20:23'),
- (30,'billrunuser','$2a$10$I.tUzJDgXrahq.VwnsPWB.0ttM55FfufrXt1LJ1wJHQdNHQjXj8em','Bill Run','User','srinigattu@gmail.com','','en',NULL,NULL,'admin','2016-04-16 05:48:43',NULL,'anonymousUser','2016-04-16 05:53:57');
+ (30,'billrunuser','$2a$10$I.tUzJDgXrahq.VwnsPWB.0ttM55FfufrXt1LJ1wJHQdNHQjXj8em','Bill Run','User','srinigattu@gmail.com','','en',NULL,NULL,'admin','2016-04-16 05:48:43',NULL,'anonymousUser','2016-04-16 05:53:57'),
+ (31,'billrunmgr','$2a$10$8OUigJFHCFBPGqcDxXaEw./lNGSnb9NalwH4b1nzUawcfBTQlVMEm','Bill Run','Manager','srinivas@callippus.co.uk','','en',NULL,NULL,'admin','2016-04-16 17:25:28',NULL,'anonymousUser','2016-04-16 17:30:29');
 /*!40000 ALTER TABLE `jhi_user` ENABLE KEYS */;
 
 
@@ -4894,6 +4934,7 @@ INSERT INTO `jhi_user_authority` (`user_id`,`authority_name`) VALUES
  (1,'ROLE_ADMIN'),
  (3,'ROLE_ADMIN'),
  (30,'ROLE_BILLRUN'),
+ (31,'ROLE_BILLRUN_MANAGER'),
  (5,'ROLE_CUSTOMER'),
  (1,'ROLE_USER'),
  (3,'ROLE_USER'),
@@ -5131,7 +5172,8 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (28,'Version','#/versions','2016-03-15 00:00:00'),
  (29,'Complaint Type Master','#/complaintTypeMasters','2016-03-29 00:00:00'),
  (30,'Customer Complaints','#/customerComplaintss','2016-03-29 00:00:00'),
- (31,'Bill Run Master','#/billRunMasters','2016-04-01 00:00:00');
+ (31,'Bill Run Master','#/billRunMasters','2016-04-01 00:00:00'),
+ (32,'New Bill Run','#/billRunMasters/new','2016-04-01 00:00:00');
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -5351,7 +5393,8 @@ INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VAL
  (28,8,4,28),
  (29,2,5,29),
  (30,1,5,30),
- (31,1,6,31);
+ (31,1,6,31),
+ (32,2,6,32);
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
 
@@ -6407,7 +6450,9 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (38,30,'ROLE_ADMIN'),
  (39,30,'ROLE_CUSTOMER'),
  (40,31,'ROLE_BILLRUN'),
- (41,32,'ROLE_BILLRUN');
+ (41,32,'ROLE_BILLRUN'),
+ (42,31,'ROLE_BILLRUN_MANAGER'),
+ (43,32,'ROLE_BILLRUN_MANAGER');
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 

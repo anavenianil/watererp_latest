@@ -9,8 +9,7 @@
 					{{billRunMaster.status}}</span>
 			</h3>
 
-			<div class="pull-right">
-
+			<div has-authority="ROLE_BILLRUN_MANAGER" class="pull-right">
 				<button type="button" ng-disabled="editForm.$invalid"
 					ng-show="billRunMaster.status != 'COMMITTED' && billRunMaster.status != 'CANCELLED' && billRunMaster.status != 'IN PROCESS'"
 					class="btn btn-success" ng-click="save('Commit')">
