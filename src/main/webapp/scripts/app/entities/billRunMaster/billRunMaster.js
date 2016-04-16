@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/billRunMasters',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_BILLRUN'],
                     pageTitle: 'BillRunMasters'
                 },
                 views: {
@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/billRunMaster/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_BILLRUN'],
                     pageTitle: 'BillRunMaster'
                 },
                 views: {
@@ -42,7 +42,7 @@ angular.module('watererpApp')
                 parent: 'billRunMaster',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_BILLRUN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -72,7 +72,7 @@ angular.module('watererpApp')
                 parent: 'billRunMaster',
                 url: '/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_BILLRUN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -95,7 +95,7 @@ angular.module('watererpApp')
                 parent: 'billRunMaster',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_BILLRUN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
