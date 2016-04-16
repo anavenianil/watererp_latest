@@ -20,11 +20,19 @@ public interface CustDetailsMapper {
         @Mapping(source = "cust_details.metReaderCode", target = "metReaderCode"),
         @Mapping(source = "cust_details.tariffCategoryMaster.id", target = "category"),
         @Mapping(source = "cust_details.mobileNo", target = "mobileNo"),
-        @Mapping(source = "bill_details.lat", target = "lat"),
+        @Mapping(source = "bill_details.lat", target = "lat"),d
         @Mapping(source = "bill_details.longi", target = "longi"),
         @Mapping(source = "cust_details.meterFixDate", target = "meterFixDate"),
         @Mapping(source = "bill_details.metReadingDt", target = "metReadingDt")
     })*/
+	@Mappings({
+		@Mapping(target = "mobileNo", source="homeOrOfficeNo"),
+		@Mapping(target = "secName", source = "street"),
+		@Mapping(target = "address", source = "detailAddress"),
+		@Mapping(target = "pincode", source = "poBox"),
+		@Mapping(target = "meterFixDate", source= "connectionDate"),
+		@Mapping(target = "consName", source= "fullName")
+	})
     CustDetails appTxnToCustDetails(ApplicationTxn applicationTxn);
     
     

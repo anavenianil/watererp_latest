@@ -7,7 +7,6 @@ angular.module('watererpApp')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
-        
         $scope.loadAll = function() {
             ApplicationTxn.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -16,11 +15,6 @@ angular.module('watererpApp')
                 }
             });
         };
-        
-//        $scope.getApplicationTxn = function(id){
-//        	$state.go('applicationTxn.detail');
-//        }
-        
         $scope.reset = function() {
             $scope.page = 0;
             $scope.applicationTxns = [];
@@ -40,26 +34,36 @@ angular.module('watererpApp')
 
         $scope.clear = function () {
             $scope.applicationTxn = {
-                fullName: null,
-                homeOrOficeNumber: null,
-                regionalNumber: null,
-                faxNumber: null,
-                plotNumber: null,
-                area: null,
+                firstName: null,
+                middleName: null,
+                lastName: null,
+                organization: null,
+                organizationName: null,
+                designation: null,
+                mobileNo: null,
+                officeNo: null,
+                email: null,
                 street: null,
-                villageExecutiveOffice: null,
-                villageExecutiveOfficeNumber: null,
-                house: null,
-                institution: null,
-                business: null,
-                industry: null,
-                poBox: null,
-                requestedDate: null,
+                plotNo: null,
+                blockNo: null,
+                tanescoMeter: null,
+                waterConnectionUse: null,
+                bStreet: null,
+                ward: null,
+                dma: null,
+                bPlotNo: null,
+                regiterMobile: null,
+                attachedDocType: null,
+                idNumber: null,
+                propertyDoc: null,
+                can: null,
                 photo: null,
-                fileNumber: null,
-                createdDate: null,
-                updatedDate: null,
                 status: null,
+                meterReading: null,
+                connectionDate: null,
+                remarks: null,
+                meterNo: null,
+                approvedDate: null,
                 id: null
             };
         };

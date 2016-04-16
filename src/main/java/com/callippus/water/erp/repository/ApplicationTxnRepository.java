@@ -1,5 +1,7 @@
 package com.callippus.water.erp.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,8 +14,14 @@ import com.callippus.water.erp.domain.ApplicationTxn;
  * Spring Data JPA repository for the ApplicationTxn entity.
  */
 public interface ApplicationTxnRepository extends JpaRepository<ApplicationTxn,Long> {
-	
-	Page<ApplicationTxn> findByStatus(Pageable pageable, Integer status);
+
+    @Query("select applicationTxn from ApplicationTxn applicationTxn where applicationTxn.user.login = ?#{principal.username}")
+    List<ApplicationTxn> findByUserIsCurrentUser();
+
+    @Query("select applicationTxn from ApplicationTxn applicationTxn where applicationTxn.requestAt.login = ?#{principal.username}")
+    List<ApplicationTxn> findByRequestAtIsCurrentUser();
+    
+    Page<ApplicationTxn> findByStatus(Pageable pageable, Integer status);
 	
 	Page<ApplicationTxn> findAllByOrderByStatusAsc(Pageable pageable);
 	
@@ -21,6 +29,5 @@ public interface ApplicationTxnRepository extends JpaRepository<ApplicationTxn,L
 	@Query("select max(SUBSTRING(can, 5, 8))  "
 			+ "from ApplicationTxn at where SUBSTRING(can, 1,2)=:division and SUBSTRING(can, 3,2)=:street")
 	Integer findByCan(@Param("division")String division, @Param("street")String street);
-	
 
 }

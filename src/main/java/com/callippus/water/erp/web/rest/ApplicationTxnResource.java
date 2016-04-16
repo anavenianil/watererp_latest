@@ -3,7 +3,6 @@ package com.callippus.water.erp.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -28,10 +27,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -64,6 +66,9 @@ public class ApplicationTxnResource {
     @Inject
     private FeasibilityStudyRepository feasibilityStudyRepository;
     
+    @Inject
+    private CustDetailsRepository custDetailsRepository;
+    
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -85,9 +90,9 @@ public class ApplicationTxnResource {
         	applicationTxn.setStatus(0);
         }
         
-        ZonedDateTime now = ZonedDateTime.now();
+       /* ZonedDateTime now = ZonedDateTime.now();
         applicationTxn.setCreatedDate(now);
-        applicationTxn.setUpdatedDate(now);
+        applicationTxn.setUpdatedDate(now);*/
 
         applicationTxn.setPhoto("");
         applicationTxnRepository.save(applicationTxn);
@@ -127,10 +132,11 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
-        ZonedDateTime now = ZonedDateTime.now();
-        applicationTxn.setUpdatedDate(now);
-        
+        //ZonedDateTime now = ZonedDateTime.now();
+        //applicationTxn.setUpdatedDate(now);
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+        /*CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
+        custDetailsRepository.save(custDetails);*/
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);

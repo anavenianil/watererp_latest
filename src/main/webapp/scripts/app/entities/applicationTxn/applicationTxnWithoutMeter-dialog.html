@@ -251,6 +251,36 @@
 								</div>
 							</div>
 						</fieldset>
+						<fieldset>
+							<legend>Approval Details</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_user">Approved By</label> <select
+										class="form-control" id="field_user" name="user"
+										ng-model="applicationTxn.user"
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_approvedDate">ApprovedDate</label>
+									<div class="form-group">
+										<div class='input-group date' id='field_approvedDate'>
+											<input id="field_approvedDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="applicationTxn.approvedDate"
+												is-open="datePickerForApprovedDate.status.opened" /> <span
+												class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForApprovedDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
 						<!-- hidden fields -->
 						<fieldset ng-hide="true">
 							<legend>Extra</legend>
@@ -258,11 +288,6 @@
 								<label class="control-label" for="field_can">Can</label> <input
 									type="text" class="form-control" name="can" id="field_can"
 									ng-model="applicationTxn.can" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_photo">Photo</label> <input
-									type="text" class="form-control" name="photo" id="field_photo"
-									ng-model="applicationTxn.photo" />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_status">Status</label> <input
@@ -297,19 +322,7 @@
 								<input type="text" class="form-control" name="meterNo"
 									id="field_meterNo" ng-model="applicationTxn.meterNo" />
 							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_approvedDate">ApprovedDate</label>
-								<input id="field_approvedDate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="applicationTxn.approvedDate"
-									is-open="datePickerForApprovedDate.status.opened" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="datePickerForApprovedDateOpen($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
-							</div>
+
 							<div class="col-sm-4">
 								<label for="field_meterDetails">meterDetails</label> <select
 									class="form-control" id="field_meterDetails"
@@ -318,14 +331,7 @@
 									<option value=""></option>
 								</select>
 							</div>
-							<div class="col-sm-4">
-								<label for="field_user">user</label> <select
-									class="form-control" id="field_user" name="user"
-									ng-model="applicationTxn.user"
-									ng-options="user as user.id for user in users track by user.id">
-									<option value=""></option>
-								</select>
-							</div>
+
 							<div class="col-sm-4">
 								<label for="field_requestAt">requestAt</label> <select
 									class="form-control" id="field_requestAt" name="requestAt"
