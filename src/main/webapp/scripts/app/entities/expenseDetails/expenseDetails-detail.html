@@ -1,0 +1,86 @@
+
+<div>
+    <h2><span>ExpenseDetails</span> {{expenseDetails.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>ExpenseNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{expenseDetails.expenseNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ExpenseAmt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{expenseDetails.expenseAmt}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ExpenseDt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{expenseDetails.expenseDt | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InstrNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{expenseDetails.instrNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>InstrDt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{expenseDetails.instrDt | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>paymentTypes</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="paymentTypes.detail({id:expenseDetails.paymentTypes.id})">{{expenseDetails.paymentTypes.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>instrumentIssuerMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="instrumentIssuerMaster.detail({id:expenseDetails.instrumentIssuerMaster.id})">{{expenseDetails.instrumentIssuerMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>collectionTypeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="collectionTypeMaster.detail({id:expenseDetails.collectionTypeMaster.id})">{{expenseDetails.collectionTypeMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

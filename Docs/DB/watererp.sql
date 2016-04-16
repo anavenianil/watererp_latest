@@ -3304,6 +3304,9 @@ CREATE TABLE `expense_details` (
 --
 
 /*!40000 ALTER TABLE `expense_details` DISABLE KEYS */;
+INSERT INTO `expense_details` (`id`,`expense_no`,`expense_amt`,`expense_dt`,`instr_no`,`instr_dt`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
+ (1,'1111',1111,'2016-04-16 00:00:00',NULL,NULL,1,NULL,1),
+ (2,'2222',2222,'2016-04-16 00:00:00',NULL,NULL,1,NULL,2);
 /*!40000 ALTER TABLE `expense_details` ENABLE KEYS */;
 
 
@@ -4038,6 +4041,12 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (299,'admin','2016-04-12 18:38:02','AUTHENTICATION_SUCCESS'),
  (300,'admin','2016-04-13 14:22:08','AUTHENTICATION_SUCCESS'),
  (301,'admin','2016-04-13 14:22:26','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (302,'admin','2016-04-16 10:20:31','AUTHENTICATION_SUCCESS'),
+ (303,'admin','2016-04-16 12:19:34','AUTHENTICATION_SUCCESS'),
+ (304,'admin','2016-04-16 14:01:21','AUTHENTICATION_SUCCESS'),
+ (305,'admin','2016-04-16 17:11:06','AUTHENTICATION_SUCCESS'),
+ (306,'admin','2016-04-16 17:15:10','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -4691,7 +4700,17 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (300,'remoteAddress','127.0.0.1'),
  (300,'sessionId','200F65BFEF3B4B03FEF7157C5824A25F'),
  (301,'remoteAddress','127.0.0.1'),
- (301,'sessionId','A47E0923CCC3F5F37D0743C58F0A63A5');
+ (301,'sessionId','A47E0923CCC3F5F37D0743C58F0A63A5'),
+ (302,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (302,'sessionId','54DF770F7B3762E3535ECB81ABC91AC3'),
+ (303,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (303,'sessionId','640B965B5885BC5B02C8A1936B690DE9'),
+ (304,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (304,'sessionId','476E0CE92287DD050EF7688BBC6FFF44'),
+ (305,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (305,'sessionId','3BA8E6624C6694C27BA32C32C2C49866'),
+ (306,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (306,'sessionId','B257B74029BA020A62A2D51D8FC5342B');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
