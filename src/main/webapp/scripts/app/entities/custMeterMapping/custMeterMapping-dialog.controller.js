@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('CustMeterMappingDialogController',
-        function($scope, $stateParams, $state, CustMeterMapping, CustDetails, MeterDetails, ApplicationTxn, ApplicationTxnService) {
+        function($scope, $stateParams, $http, $state, CustMeterMapping, CustDetails, MeterDetails, ApplicationTxn, ApplicationTxnService) {
 
         $scope.custMeterMapping = {};
         $scope.custdetailss = CustDetails.query();
@@ -70,4 +70,32 @@ angular.module('watererpApp').controller('CustMeterMappingDialogController',
         $scope.datePickerForToDateOpen = function($event) {
             $scope.datePickerForToDate.status.opened = true;
         };
+        
+        $scope.getLocation = function(val) {
+			$scope.isValidCust = false;
+			if (val != null && val.length > 2)
+				return $http.get('api/custDetailss/searchCAN/' + val, {
+					params : {
+						address : val,
+						sensor : false
+					}
+				}).then(function(response) {
+					var res = response.data.map(function(item) {
+						return item;
+					});
+
+					return res;
+				});
+		}
+        
+        $scope.onSelect = function($item, $model, $label) {
+			console.log($item);
+			/*var arr = $item.split("-");
+			$scope.cust = {};
+			$scope.collDetails.can = arr[0];
+			$scope.collDetails.consName = arr[1];
+			$scope.collDetails.address = arr[2];
+			$scope.custInfo = "";
+			$scope.isValidCust = true;*/
+		};
 });
