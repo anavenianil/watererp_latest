@@ -76,7 +76,7 @@ public class BillRunMasterResource {
 		return ResponseEntity
 				.ok()
 				.headers(
-						HeaderUtil.createEntityUpdateAlert("billRunMaster",
+						HeaderUtil.createAlert("New Bill Run initiated with Id:",
 								result.getId().toString())).body(result);
 	}
 
