@@ -18,7 +18,7 @@
         <div class="col-sm-4">
             <label class="control-label" for="field_expenseNo">Expense No</label>
             <input type="text" class="form-control" name="expenseNo" id="field_expenseNo"
-                    ng-model="expenseDetails.expenseNo"
+                    ng-model="expenseDetails.expenseNo" readonly
                      />
         </div>
         <div class="col-sm-4">
@@ -33,11 +33,13 @@
             </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" ng-class="{ 'has-error' : editForm.expenseAmt.$invalid && !editForm.expenseAmt.$pristine }"
+							ng-pattern="/^[0-9]*$/">
             <label class="control-label" for="field_expenseAmt">Expense Amount</label>
             <input type="number" class="form-control" name="expenseAmt" id="field_expenseAmt"
-                    ng-model="expenseDetails.expenseAmt"
+                    ng-model="expenseDetails.expenseAmt" required="required" min="1"
                      />
+			<p ng-show="pattern">Expense Amount must be numeric.</p>
         </div>
         </div>
         <div class="row">
@@ -87,7 +89,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary" >
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>
     </div>

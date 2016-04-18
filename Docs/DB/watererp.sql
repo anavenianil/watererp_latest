@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.0.24-community-nt-log
+-- Server version	5.0.24-community-nt
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -663,6 +663,48 @@ CREATE TABLE `category_pipe_size_mapping` (
 
 
 --
+-- Table structure for table `watererp`.`cdx`
+--
+
+DROP TABLE IF EXISTS `cdx`;
+CREATE TABLE `cdx` (
+  `id` bigint(20) NOT NULL default '0',
+  `reversal_ref` varchar(255) default NULL,
+  `receipt_no` varchar(255) default NULL,
+  `receipt_amt` varchar(255) default NULL,
+  `receipt_dt` date default NULL,
+  `receipt_time` varchar(255) default NULL,
+  `receipt_mode` varchar(255) default NULL,
+  `instr_no` varchar(255) default NULL,
+  `instr_dt` date default NULL,
+  `instr_issuer` varchar(255) default NULL,
+  `svr_status` varchar(255) default NULL,
+  `can` varchar(255) default NULL,
+  `cons_name` varchar(255) default NULL,
+  `terminal_id` varchar(255) default NULL,
+  `coll_time` timestamp NULL default NULL,
+  `txn_status` varchar(255) default NULL,
+  `meter_reader_id` varchar(255) default NULL,
+  `user_id` varchar(255) default NULL,
+  `remarks` varchar(255) default NULL,
+  `settlement_id` varchar(255) default NULL,
+  `ext_settlement_id` varchar(255) default NULL,
+  `lat` varchar(255) default NULL,
+  `long_i` varchar(255) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`cdx`
+--
+
+/*!40000 ALTER TABLE `cdx` DISABLE KEYS */;
+INSERT INTO `cdx` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_time`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`) VALUES 
+ (1,'ReversalRef1','ReceiptNo1','ReceiptAmt1','2016-03-18','ReceiptTime1','ReceiptMode1',NULL,'2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI1'),
+ (2,'ReversalRef2','ReceiptNo2','ReceiptAmt2','2016-03-18','ReceiptTime2','ReceiptMode2','InstrNo2','2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI2');
+/*!40000 ALTER TABLE `cdx` ENABLE KEYS */;
+
+
+--
 -- Table structure for table `watererp`.`coll_details`
 --
 
@@ -672,7 +714,7 @@ CREATE TABLE `coll_details` (
   `reversal_ref` varchar(255) default NULL,
   `receipt_no` varchar(255) default NULL,
   `receipt_amt` float default NULL,
-  `receipt_dt` timestamp NULL,
+  `receipt_dt` timestamp NULL default NULL,
   `receipt_mode` varchar(255) default NULL,
   `instr_no` varchar(255) default NULL,
   `instr_dt` date default NULL,
@@ -681,7 +723,7 @@ CREATE TABLE `coll_details` (
   `can` varchar(255) default NULL,
   `cons_name` varchar(255) default NULL,
   `terminal_id` varchar(255) default NULL,
-  `coll_time` timestamp NULL,
+  `coll_time` timestamp NULL default NULL,
   `txn_status` varchar(255) default NULL,
   `meter_reader_id` varchar(255) default NULL,
   `user_id` varchar(255) default NULL,
@@ -727,6 +769,15 @@ CREATE TABLE `collection_type_master` (
 --
 
 /*!40000 ALTER TABLE `collection_type_master` DISABLE KEYS */;
+INSERT INTO `collection_type_master` (`id`,`coll_name`,`txn_type`) VALUES 
+ (1,'BILL PAYMENT','C'),
+ (2,'NEW CONNECTION','C'),
+ (3,'PENALTY','C'),
+ (4,'RECONNECTION','C'),
+ (5,'EXPENSE 1','E'),
+ (6,'EXPENSE 2','E'),
+ (7,'EXPENSE 3','E'),
+ (8,'EXPENSE 4','E');
 /*!40000 ALTER TABLE `collection_type_master` ENABLE KEYS */;
 
 
@@ -2874,6 +2925,82 @@ CREATE TABLE `customer_complaints` (
 
 
 --
+-- Table structure for table `watererp`.`cx`
+--
+
+DROP TABLE IF EXISTS `cx`;
+CREATE TABLE `cx` (
+  `id` bigint(20) NOT NULL default '0',
+  `can` varchar(255) NOT NULL,
+  `div_code` varchar(255) default NULL,
+  `sec_code` varchar(255) default NULL,
+  `sec_name` varchar(255) default NULL,
+  `met_reader_code` varchar(255) default NULL,
+  `conn_date` date default NULL,
+  `cons_name` varchar(255) NOT NULL,
+  `house_no` varchar(255) default NULL,
+  `address` varchar(255) default NULL,
+  `city` varchar(255) default NULL,
+  `pin_code` varchar(255) default NULL,
+  `category` varchar(255) default NULL,
+  `pipe_size` float default NULL,
+  `board_meter` varchar(255) default NULL,
+  `sewerage` varchar(255) default NULL,
+  `meter_no` varchar(255) default NULL,
+  `prev_bill_type` varchar(255) default NULL,
+  `prev_bill_month` date default NULL,
+  `prev_avg_kl` float default NULL,
+  `met_reading_dt` date default NULL,
+  `prev_reading` float default NULL,
+  `met_reading_mo` date default NULL,
+  `met_avg_kl` float default NULL,
+  `arrears` float default NULL,
+  `reversal_amt` float default NULL,
+  `installment` float default NULL,
+  `other_charges` float default NULL,
+  `surcharge` float default NULL,
+  `hrs_surcharge` varchar(255) default NULL,
+  `res_units` bigint(20) default NULL,
+  `met_cost_installment` float default NULL,
+  `int_on_arrears` float default NULL,
+  `last_pymt_dt` date default NULL,
+  `last_pymt_amt` float default NULL,
+  `mobile_no` varchar(255) default NULL,
+  `cc_flag` varchar(255) default NULL,
+  `cp_flag` varchar(255) default NULL,
+  `notice_flag` varchar(255) default NULL,
+  `dr_flag` varchar(255) default NULL,
+  `lat` varchar(255) default NULL,
+  `longi` varchar(255) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`cx`
+--
+
+/*!40000 ALTER TABLE `cx` DISABLE KEYS */;
+INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (1,'613427474','15','0614','MADHAPUR','0000','2005-04-19','R.PRATIBHA ANNAPURNA','5-109/10/22','RADHE NAGAR COLONY,GACHIBOWLI','','500032','D',0.5,'F','T','05505137','U','2013-10-01',10,'2016-03-13',0,NULL,10,680.06,0,0,0,0,'F',0,0,5.06,'2013-11-30',2000,'0000000000','1','1','0','1','0','0'),
+ (2,'613472557','15','0614','MADHAPUR','0000','2005-05-25','N.MANJULATHA','PLOT NO.21','RADHE NAGAR COLONY,H.S.DARGA','','500032','D',0.5,'F','T','05-1-005551','R','2013-10-01',10,'2016-03-13',0,NULL,10,2785.07,0,0,0,0,'F',0,0,9.57,'2013-11-30',200,'0000000000','0','0','0','1','0','0'),
+ (3,'613472562','15','0614','MADHAPUR','0000','2005-05-25','G.MURALI MOHAN','H.NO.33','RADHE NAGAR COLONY,H.S.DARGA.','','500032','D',0.5,'F','T','05-1-004920','R','2013-10-01',15,'2016-03-13',0,NULL,0,6924.29,0,0,0,0,'F',0,0,61.94,'2013-11-30',250,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (4,'613577519','15','0614','MADHAPUR','0000','2005-09-21','K.V.V.BALA SUBRAMANA','PLOT NO.19 SY.47','RADHA NAGAR RAIDURGA,MADHAPUR','','500032','D',0.5,'F','T','05-1-0017909','R','2013-10-01',15,'2016-03-13',0,NULL,6,31417.3,0,0,0,0,'F',0,0,329.73,'2013-11-30',247,'0000000000','0','0','0','1','0','0'),
+ (5,'617738493','15','0614','MADHAPUR','0000','2012-08-11','VANIN','3-615/3','PLOT NO. 195','','','D',0.5,'F','T','12B40628','R','2013-10-01',15,'2016-03-13',0,NULL,15,2508.88,0,0,0,0,'F',1,0,6.38,'2013-11-30',260,'0000000000','0','0','0','1','0','0'),
+ (6,'617738918','15','0614','MADHAPUR','0000','2012-07-14','K RAVI','1-60/30/138/135','ANJAIAH NAGAR,GACHIBOWLI','','','D',0.5,'F','T','12A19467','L','2013-10-01',15,'2016-03-13',0,'2012-06-01',0,3032.75,3400,0,0,0,'F',1,0,12.75,'2013-11-30',380,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (7,'617757078','15','0614','MADHAPUR','0000','2012-09-10','MALOTH.LACHIRAM NAYAK','1-57/31','RAJEEV NAGAR,GACHIBOWLI','','','D',0.5,'F','T','12B92564','M','2013-10-01',15,'2016-03-13',10000,'2013-10-01',0,2481.38,0,0,0,0,'F',1,0,6.38,'2013-11-30',500,'0000000000','0','0','0','1','0','0'),
+ (8,'617757083','15','0614','MADHAPUR','0000','2012-09-15','P HIMA BINDU','1-58/103','RAJEEV NAGAR,GACHIBOWLI','','','D',0.5,'F','T','11B35430','M','2013-10-01',15,'2016-03-13',100000,'2013-10-01',0,2581.38,0,0,0,0,'F',1,0,6.38,'2013-11-30',400,'0000000000','0','0','0','1','0','0'),
+ (9,'617757111','15','0614','MADHAPUR','0000','2012-08-20','JAFFAR BEE','H.NO.2-63/2/A3','CHINNA ANJAIAH NAGAR,GACHIBOWL','','','D',0.5,'F','T','12B40792','L','2013-10-01',15,'2016-03-13',0,'2012-07-01',0,2995.56,3187.5,0,0,0,'F',1,0,8.06,'2013-11-30',100,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (10,'617757186','15','0614','MADHAPUR','0000','2012-09-26','SMT.SHIVALINGAMMA','2-62/2/A/10','GACHIBOWLI VILLAGE','','','D',0.5,'F','T','12B36048','L','2013-10-01',15,'2016-03-13',0,'2012-08-01',0,2746.38,2975,0,0,0,'F',1,0,6.38,'2013-11-30',235,'0000000000','0','0','0','1','0','0'),
+ (11,'617771922','15','0614','MADHAPUR','0000','2012-11-01','SYED AZEEM','1-14','OLD GACHIBOWLI','','','D',0.5,'F','T','','L','2013-10-01',15,'2016-03-13',0,NULL,0,2100,2550,0,0,0,'F',1,0,0,'2013-11-30',450,'0000000000','0','0','0','1','0','0'),
+ (12,'617781451','15','0614','MADHAPUR','0000','2012-11-15','SRINIVAS','1-110/A/32','KONDAPUR W/S COLONY,KONDAPUR','','','D',0.5,'F','T','12B53322','M','2013-10-01',15,'2016-03-13',400000,'2013-10-01',0,1750,0,0,0,0,'F',1,0,0,'2013-11-30',800,'0000000000','0','0','0','1','0','0');
+INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
+ (13,'617781710','15','0614','MADHAPUR','0000','2012-11-10','K.DEVIDAS','3-618/2,P.NO.540/B','SCB NAGAR,NEW HAFEEZPET','','','D',0.5,'F','T','12B53305','M','2013-10-01',15,'2016-03-13',500000,'2013-10-01',0,2338,0,0,0,0,'F',2,0,0,'2013-11-30',212,'0000000000','0','0','0','1','0','0');
+/*!40000 ALTER TABLE `cx` ENABLE KEYS */;
+
+
+--
 -- Table structure for table `watererp`.`databasechangelog`
 --
 
@@ -3392,7 +3519,7 @@ CREATE TABLE `expense_details` (
   `id` bigint(20) NOT NULL auto_increment,
   `expense_no` varchar(255) default NULL,
   `expense_amt` float default NULL,
-  `expense_dt` timestamp NULL,
+  `expense_dt` timestamp NULL default NULL,
   `instr_no` varchar(255) default NULL,
   `instr_dt` date default NULL,
   `payment_types_id` bigint(20) default NULL,
@@ -3443,12 +3570,12 @@ INSERT INTO `feasibility_status` (`id`,`status`) VALUES
 DROP TABLE IF EXISTS `feasibility_study`;
 CREATE TABLE `feasibility_study` (
   `id` bigint(20) NOT NULL auto_increment,
-  `created_date` timestamp NULL,
-  `modified_date` timestamp NULL,
-  `prepared_date` timestamp NULL,
-  `zonal_head_approval_date` timestamp NULL,
-  `dept_head_inspected_date` timestamp NULL,
-  `operation_mangrapprove_date` timestamp NULL,
+  `created_date` timestamp NULL default NULL,
+  `modified_date` timestamp NULL default NULL,
+  `prepared_date` timestamp NULL default NULL,
+  `zonal_head_approval_date` timestamp NULL default NULL,
+  `dept_head_inspected_date` timestamp NULL default NULL,
+  `operation_mangrapprove_date` timestamp NULL default NULL,
   `status` int(11) default NULL,
   `division_master_id` bigint(20) default NULL,
   `zone_master_id` bigint(20) default NULL,
@@ -4168,7 +4295,10 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (317,'billrunuser','2016-04-16 17:39:57','AUTHENTICATION_SUCCESS'),
  (318,'billrunmgr','2016-04-16 17:44:26','AUTHENTICATION_SUCCESS'),
  (319,'admin','2016-04-18 10:38:23','AUTHENTICATION_SUCCESS'),
- (320,'billrunuser','2016-04-18 10:52:08','AUTHENTICATION_SUCCESS');
+ (320,'billrunuser','2016-04-18 10:52:08','AUTHENTICATION_SUCCESS'),
+ (321,'admin','2016-04-18 14:30:16','AUTHENTICATION_SUCCESS'),
+ (322,'admin','2016-04-18 15:46:00','AUTHENTICATION_SUCCESS'),
+ (323,'admin','2016-04-18 17:34:50','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -4862,7 +4992,13 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (319,'remoteAddress','0:0:0:0:0:0:0:1'),
  (319,'sessionId','C95807D88D4AF0465D03AC34708BB614'),
  (320,'remoteAddress','0:0:0:0:0:0:0:1'),
- (320,'sessionId','B1B44C550403E983DF85086F5B04536D');
+ (320,'sessionId','B1B44C550403E983DF85086F5B04536D'),
+ (321,'remoteAddress','127.0.0.1'),
+ (321,'sessionId','9BE899E953A222DC3661ED5971AC8243'),
+ (322,'remoteAddress','127.0.0.1'),
+ (322,'sessionId','479E0DF30B45F3E3CB86B9B290994C58'),
+ (323,'remoteAddress','127.0.0.1'),
+ (323,'sessionId','F7A92FF5362687D9809C92189649B8AD');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -4919,48 +5055,49 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('fNpzeb666xEusKesIpiVaA==',15,'EB7kPB3Prax0zRKgFghQUg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('gCiedSGoLS/6IZ8DH5UOoQ==',3,'ImV3hU9fz+1erFCsHjvCvA==','2016-04-18','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('gjgSoEiEm2u4z82bxneQbA==',15,'Q5ukTsruzqRjPjl2jNIIBA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('H5h1sXuT/PROO3BRuTQoxQ==',3,'8Mdnjzl+cjTeaivY6fzJyg==','2016-03-08','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('hFKfqjPrW8Z/amqU43M89g==',5,'OCMXKNowMoVsmqZ2jGSrxQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Hw5vcTOmIcEuAJ+K5/ttTg==',3,'o/B/WvzQojyU6CRPqa0kug==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('IgMAY7/2pqUwaRD9fRqtZA==',5,'R/v6AK3DT+5hKspBsE0QdQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('Kb8YebfE7JAJymtqjh/HBQ==',3,'NLNenPNKYp99JL0VakVcDw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('Kb8YebfE7JAJymtqjh/HBQ==',3,'NLNenPNKYp99JL0VakVcDw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KU6VZmBHcK3RKoGgwhLDcA==',3,'CtWXmv/L/eFLnOkikbadrw==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('lqqkRZHMgCV5ZRZsdmOctA==',3,'Sqs4OVQ6a8Sm5+xrE5sxsg==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ltSsrr4LGe85jyi2xaM+GQ==',5,'O2cmSBS0fFhBkpiM4zdCkA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mJ9QRewb5tZnJtq1JS6BeQ==',3,'Y4wzvxHQSVqsUa7uMIa7ug==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nicdzpFVE7fA8XUEciBnBg==',15,'jjnMZHjRSEuYg7FgpryrNw==','2016-03-29','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nK0IBkLMvCyRtRagV7xkIA==',15,'O271OweAwksyy+Yei161xA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('PpZTKOgtRshlEF2Y5H8Nzw==',3,'2oilX1ZtHFQ62F6g/CMZMg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('qFVuu+uRSBJTp3pUTFHbiw==',3,'0mje7iCbeSAXZrqoHwhF0A==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('R6uDzkAd46IU0D3H4E0FVA==',3,'XcfBIoCDayNepzQsEjnkJg==','2016-03-17','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('qFVuu+uRSBJTp3pUTFHbiw==',3,'0mje7iCbeSAXZrqoHwhF0A==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('R6uDzkAd46IU0D3H4E0FVA==',3,'XcfBIoCDayNepzQsEjnkJg==','2016-03-17','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('TN6nvrS4DAcjld/PAsVu3w==',3,'pWLUEigr2nT7tCBerVO3rw==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('uBmBvYHKZMXr5UHwlzKAPA==',3,'oIXVYnHZ2CAqS/lxhNHtBQ==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('UDMPyK37cLIktTJg9P5RrQ==',3,'ShKdK3zme2OSRapV6fqKMw==','2016-03-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('Waj7OoRQvtqW2FGm3rwFHw==',3,'DScvaJTEMdPTgvNKd4KoRg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('wtWMmV27ptr0Uutob4MNiQ==',3,'kzJYJannR0ZBgbGhEbYHqQ==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('Waj7OoRQvtqW2FGm3rwFHw==',3,'DScvaJTEMdPTgvNKd4KoRg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('wtWMmV27ptr0Uutob4MNiQ==',3,'kzJYJannR0ZBgbGhEbYHqQ==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('x4RtQD81f5es8yJniJlwMg==',3,'3Uiil1Q8ezwtbjsEjH7MaQ==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('XDGXmczwil8KeD6KL6Yt1w==',3,'fbROZLGioPS/YUzyTyG2kg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('xf8lo1lE43DIRysCXswyzQ==',3,'BRRKxIW3118BhhPFt6AyXA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('xGIKoFe4g2VAv1/PRp0JLA==',3,'vsc1u7uz/s2rs9AmUbdl+g==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('Y0+K+WI0X0yusnSLJDqyPA==',3,'rDvuHhLtRMzJOhkb63MQ7g==','2016-04-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('Y14PvuTMLFbPHaMU7KlW9A==',3,'yHJLgjbsyzRXqkVlnn1+bA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('Y0+K+WI0X0yusnSLJDqyPA==',3,'rDvuHhLtRMzJOhkb63MQ7g==','2016-04-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('Y14PvuTMLFbPHaMU7KlW9A==',3,'yHJLgjbsyzRXqkVlnn1+bA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('yC0cZ89A6opEpVDUp7MPLA==',3,'JNF2a3Nb1kSNcOuOEsAR4Q==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('yeGR7p45ZYo74KGrWntAZA==',3,'ytU215AgvrBXIiLMgsecaw==','2016-04-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ynZOMTxODvqkNvAvZyrabw==',30,'/neHN/ixIp/JbDwgJM2N3A==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -5295,7 +5432,7 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (20,'Bill Of Material','#/billOfMaterials','2016-04-01 00:00:00'),
  (21,'Access List','#/accessLists','2016-03-15 00:00:00'),
  (22,'Bill Full Details','#/billFullDetailss','2016-03-15 00:00:00'),
- (23,'Collection Details','#/collDetailss','2016-03-15 00:00:00'),
+ (23,'Collection Details','#/collDetailss/new','2016-03-15 00:00:00'),
  (24,'Current Users','#/currentUserss','2016-03-15 00:00:00'),
  (25,'Customer Details','#/custDetailss','2016-03-15 00:00:00'),
  (26,'Terminal','#/terminals','2016-03-15 00:00:00'),
@@ -5305,6 +5442,8 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (30,'Customer Complaints','#/customerComplaintss','2016-03-29 00:00:00'),
  (31,'Bill Run Master','#/billRunMasters','2016-04-01 00:00:00'),
  (32,'New Bill Run','#/billRunMasters/new','2016-04-01 00:00:00');
+INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
+ (33,'Bill Details','#/billDetailss/new','2016-04-18 00:00:00');
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -5361,7 +5500,8 @@ INSERT INTO `menu_item2_url` (`id`,`menu_item_id`,`url_id`) VALUES
  (29,29,29),
  (30,30,30),
  (31,31,31),
- (32,32,32);
+ (32,32,32),
+ (33,33,33);
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
 
 
@@ -5537,17 +5677,18 @@ INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VAL
  (19,7,3,19),
  (20,7,2,20),
  (21,1,4,21),
- (22,2,4,22),
- (23,3,4,23),
- (24,4,4,24),
- (25,5,4,25),
- (26,6,4,26),
- (27,7,4,27),
- (28,8,4,28),
+ (22,3,4,22),
+ (23,4,4,23),
+ (24,5,4,24),
+ (25,6,4,25),
+ (26,7,4,26),
+ (27,8,4,27),
+ (28,9,4,28),
  (29,2,5,29),
  (30,1,5,30),
  (31,2,6,31),
- (32,1,6,32);
+ (32,1,6,32),
+ (33,2,4,33);
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
 
@@ -6538,7 +6679,8 @@ INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES
  (29,'/complaintTypeMasters',1),
  (30,'/customerComplaintss',1),
  (31,'/billRunMasters',1),
- (32,'/billRunDetails',1);
+ (32,'/billRunDetails',1),
+ (33,'/billDetailss',1);
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 
@@ -6606,6 +6748,8 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (41,32,'ROLE_BILLRUN'),
  (42,31,'ROLE_BILLRUN_MANAGER'),
  (43,32,'ROLE_BILLRUN_MANAGER');
+INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES 
+ (44,33,'ROLE_ADMIN');
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 

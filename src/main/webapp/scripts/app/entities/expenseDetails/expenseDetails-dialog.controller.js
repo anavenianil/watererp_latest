@@ -3,12 +3,23 @@
 angular.module('watererpApp')
     .controller('ExpenseDetailsDialogController', 
     		function ($scope, $state, ExpenseDetails, PaymentTypes, InstrumentIssuerMaster, CollectionTypeMaster, ParseLinks, $stateParams) {
+    	$scope.expenseDetails = {};
+    	$scope.collectiontypemasters = [];
+    	$scope.expenseDetails.expenseDt = new Date();
     	$scope.expenseDetailsId = $stateParams.id;
     	$scope.load = function(id) {
             ExpenseDetails.get({id : id}, function(result) {
                 $scope.expenseDetails = result;
             });
         };
+        
+        CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'E'}, function(result, headers) {
+            $scope.links = ParseLinks.parse(headers('link'));
+            for (var i = 0; i < result.length; i++) {
+                $scope.collectiontypemasters.push(result[i]);
+            }
+        });
+        
         if($scope.expenseDetailsId!=null)
         $scope.load($scope.expenseDetailsId);       
     	
@@ -34,7 +45,7 @@ angular.module('watererpApp')
     	
     	$scope.paymenttypess = PaymentTypes.query();
         $scope.instrumentissuermasters = InstrumentIssuerMaster.query();
-        $scope.collectiontypemasters = CollectionTypeMaster.query();
+        //$scope.collectiontypemasters = CollectionTypeMaster.query();
         
         $scope.datePickerForExpenseDt = {};
 
