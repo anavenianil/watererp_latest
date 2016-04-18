@@ -126,6 +126,7 @@ public class ApplicationTxnResource {
         }
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
+        custDetails.setId(null);
         custDetailsRepository.save(custDetails);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))

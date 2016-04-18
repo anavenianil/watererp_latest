@@ -24,9 +24,29 @@
             <column name="from_date" type="date">
                 <constraints nullable="false" />
             </column>
+            
             <column name="to_date" type="date"/>
+            
+            <column name="can" type="varchar(255)"/>
+            
+            <column name="reason_for_change" type="varchar(255)"/>
+            
+            <column name="existing_meter_number" type="varchar(255)"/>
+            
+            <column name="existing_meter_reading" type="${floatType}"/>
+            
+            <column name="new_meter_number" type="varchar(255)"/>
+            
+            <column name="new_meter_reading" type="${floatType}"/>
+            
+            <column name="remarks" type="varchar(255)"/>
+            
+            <column name="approved_date" type="date"/>
+            
             <column name="cust_details_id" type="bigint"/>
             <column name="meter_details_id" type="bigint"/>
+            <column name="user_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="cust_details_id"
@@ -40,6 +60,12 @@
                                  constraintName="fk_custmetermapping_meterdetails_id"
                                  referencedColumnNames="id"
                                  referencedTableName="meter_details"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="cust_meter_mapping"
+                                 constraintName="fk_custmetermapping_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -26,10 +26,34 @@ public class CustMeterMapping implements Serializable {
     @NotNull
     @Column(name = "from_date", nullable = false)
     private LocalDate fromDate;
-
+    
     @Column(name = "to_date")
     private LocalDate toDate;
-
+    
+    @Column(name = "can")
+    private String can;
+    
+    @Column(name = "reason_for_change")
+    private String reasonForChange;
+    
+    @Column(name = "existing_meter_number")
+    private String existingMeterNumber;
+    
+    @Column(name = "existing_meter_reading")
+    private Float existingMeterReading;
+    
+    @Column(name = "new_meter_number")
+    private String newMeterNumber;
+    
+    @Column(name = "new_meter_reading")
+    private Float newMeterReading;
+    
+    @Column(name = "remarks")
+    private String remarks;
+    
+    @Column(name = "approved_date")
+    private LocalDate approvedDate;
+    
     @ManyToOne
     @JoinColumn(name = "cust_details_id")
     private CustDetails custDetails;
@@ -37,6 +61,10 @@ public class CustMeterMapping implements Serializable {
     @ManyToOne
     @JoinColumn(name = "meter_details_id")
     private MeterDetails meterDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -49,7 +77,7 @@ public class CustMeterMapping implements Serializable {
     public LocalDate getFromDate() {
         return fromDate;
     }
-
+    
     public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
     }
@@ -57,9 +85,73 @@ public class CustMeterMapping implements Serializable {
     public LocalDate getToDate() {
         return toDate;
     }
-
+    
     public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
+    }
+
+    public String getCan() {
+        return can;
+    }
+    
+    public void setCan(String can) {
+        this.can = can;
+    }
+
+    public String getReasonForChange() {
+        return reasonForChange;
+    }
+    
+    public void setReasonForChange(String reasonForChange) {
+        this.reasonForChange = reasonForChange;
+    }
+
+    public String getExistingMeterNumber() {
+        return existingMeterNumber;
+    }
+    
+    public void setExistingMeterNumber(String existingMeterNumber) {
+        this.existingMeterNumber = existingMeterNumber;
+    }
+
+    public Float getExistingMeterReading() {
+        return existingMeterReading;
+    }
+    
+    public void setExistingMeterReading(Float existingMeterReading) {
+        this.existingMeterReading = existingMeterReading;
+    }
+
+    public String getNewMeterNumber() {
+        return newMeterNumber;
+    }
+    
+    public void setNewMeterNumber(String newMeterNumber) {
+        this.newMeterNumber = newMeterNumber;
+    }
+
+    public Float getNewMeterReading() {
+        return newMeterReading;
+    }
+    
+    public void setNewMeterReading(Float newMeterReading) {
+        this.newMeterReading = newMeterReading;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+    
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public LocalDate getApprovedDate() {
+        return approvedDate;
+    }
+    
+    public void setApprovedDate(LocalDate approvedDate) {
+        this.approvedDate = approvedDate;
     }
 
     public CustDetails getCustDetails() {
@@ -78,6 +170,14 @@ public class CustMeterMapping implements Serializable {
         this.meterDetails = meterDetails;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -87,6 +187,9 @@ public class CustMeterMapping implements Serializable {
             return false;
         }
         CustMeterMapping custMeterMapping = (CustMeterMapping) o;
+        if(custMeterMapping.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, custMeterMapping.id);
     }
 
@@ -101,6 +204,14 @@ public class CustMeterMapping implements Serializable {
             "id=" + id +
             ", fromDate='" + fromDate + "'" +
             ", toDate='" + toDate + "'" +
+            ", can='" + can + "'" +
+            ", reasonForChange='" + reasonForChange + "'" +
+            ", existingMeterNumber='" + existingMeterNumber + "'" +
+            ", existingMeterReading='" + existingMeterReading + "'" +
+            ", newMeterNumber='" + newMeterNumber + "'" +
+            ", newMeterReading='" + newMeterReading + "'" +
+            ", remarks='" + remarks + "'" +
+            ", approvedDate='" + approvedDate + "'" +
             '}';
     }
 }

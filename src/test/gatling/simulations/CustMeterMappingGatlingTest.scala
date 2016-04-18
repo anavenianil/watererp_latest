@@ -67,7 +67,7 @@ class CustMeterMappingGatlingTest extends Simulation {
             .exec(http("Create new custMeterMapping")
             .post("/api/custMeterMappings")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "fromDate":"2020-01-01T00:00:00.000Z", "toDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "fromDate":"2020-01-01T00:00:00.000Z", "toDate":"2020-01-01T00:00:00.000Z", "can":"SAMPLE_TEXT", "reasonForChange":"SAMPLE_TEXT", "existingMeterNumber":"SAMPLE_TEXT", "existingMeterReading":null, "newMeterNumber":"SAMPLE_TEXT", "newMeterReading":null, "remarks":"SAMPLE_TEXT", "approvedDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_custMeterMapping_url")))
             .pause(10)
