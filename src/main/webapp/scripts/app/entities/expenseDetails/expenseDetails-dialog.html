@@ -42,10 +42,32 @@
         </div>
         <div class="row">
         <div class="col-sm-4">
+            <label for="field_paymentTypes">Expense Mode</label>
+            <select class="form-control" id="field_paymentTypes" name="paymentTypes" ng-model="expenseDetails.paymentTypes" ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <label for="field_collectionTypeMaster">Expense Type</label>
+            <select class="form-control" id="field_collectionTypeMaster" name="collectionTypeMaster" ng-model="expenseDetails.collectionTypeMaster" ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectiontypemasters track by collectionTypeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        </div>
+        <div class="row">
+        
+        
+        <div class="col-sm-4">
             <label class="control-label" for="field_instrNo">Instrument No</label>
             <input type="text" class="form-control" name="instrNo" id="field_instrNo"
                     ng-model="expenseDetails.instrNo"
                      />
+        </div>
+        <div class="col-sm-4">
+            <label for="field_instrumentIssuerMaster">Instrument Issuer</label>
+            <select class="form-control" id="field_instrumentIssuerMaster" name="instrumentIssuerMaster" ng-model="expenseDetails.instrumentIssuerMaster" ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id">
+                <option value=""></option>
+            </select>
         </div>
         <div class="col-sm-4">
             <label class="control-label" for="field_instrDt">Instrument Date</label>
@@ -58,26 +80,6 @@
             </span>
             </div>
             </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label for="field_paymentTypes">Payment Types</label>
-            <select class="form-control" id="field_paymentTypes" name="paymentTypes" ng-model="expenseDetails.paymentTypes" ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="col-sm-4">
-            <label for="field_instrumentIssuerMaster">Instrument Issuer</label>
-            <select class="form-control" id="field_instrumentIssuerMaster" name="instrumentIssuerMaster" ng-model="expenseDetails.instrumentIssuerMaster" ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="col-sm-4">
-            <label for="field_collectionTypeMaster">Expense Type</label>
-            <select class="form-control" id="field_collectionTypeMaster" name="collectionTypeMaster" ng-model="expenseDetails.collectionTypeMaster" ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectiontypemasters track by collectionTypeMaster.id">
-                <option value=""></option>
-            </select>
         </div>
         </div>
     </div>
