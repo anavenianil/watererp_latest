@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CollectionTypeMasterController', function ($scope, $state, CollectionTypeMaster, ParseLinks) {
+    .controller('ExpenseDetailsController', function ($scope, $state, ExpenseDetails, ParseLinks) {
 
-        $scope.collectionTypeMasters = [];
+        $scope.expenseDetailss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            CollectionTypeMaster.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            ExpenseDetails.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.collectionTypeMasters.push(result[i]);
+                    $scope.expenseDetailss.push(result[i]);
                 }
             });
         };
         $scope.reset = function() {
             $scope.page = 0;
-            $scope.collectionTypeMasters = [];
+            $scope.expenseDetailss = [];
             $scope.loadAll();
         };
         $scope.loadPage = function(page) {
@@ -33,9 +33,12 @@ angular.module('watererpApp')
         };
 
         $scope.clear = function () {
-            $scope.collectionTypeMaster = {
-                collName: null,
-                txnType: null,
+            $scope.expenseDetails = {
+                expenseNo: null,
+                expenseAmt: null,
+                expenseDt: null,
+                instrNo: null,
+                instrDt: null,
                 id: null
             };
         };

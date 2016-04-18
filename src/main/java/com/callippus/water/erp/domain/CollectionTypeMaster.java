@@ -22,6 +22,9 @@ public class CollectionTypeMaster implements Serializable {
     @Column(name = "coll_name")
     private String collName;
     
+    @Column(name = "txn_type")
+    private String txnType;
+    
     public Long getId() {
         return id;
     }
@@ -36,6 +39,14 @@ public class CollectionTypeMaster implements Serializable {
     
     public void setCollName(String collName) {
         this.collName = collName;
+    }
+
+    public String getTxnType() {
+        return txnType;
+    }
+    
+    public void setTxnType(String txnType) {
+        this.txnType = txnType;
     }
 
     @Override
@@ -63,6 +74,7 @@ public class CollectionTypeMaster implements Serializable {
         return "CollectionTypeMaster{" +
             "id=" + id +
             ", collName='" + collName + "'" +
+            ", txnType='" + txnType + "'" +
             '}';
     }
 }

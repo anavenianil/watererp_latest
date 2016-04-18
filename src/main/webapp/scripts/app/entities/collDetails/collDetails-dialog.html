@@ -74,7 +74,6 @@
 						</div>
 					</div>
 					<div class="row">
-
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptNo">Receipt
 								No</label> <input type="text" class="form-control" name="receiptNo"
@@ -130,15 +129,6 @@
 								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id">
 							</select>
 						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_instrIssuer">Instrument
-								Issuer</label> <select class="form-control"
-								id="field_instrumentIssuerMaster" name="instrumentIssuerMaster"
-								ng-model="collDetails.instrumentIssuerMaster"
-								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
-								ng-disabled="!instrEnabled">
-							</select>
-						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4"
@@ -151,6 +141,15 @@
 							<p
 								ng-show="instrEnabled && collDetails.instrNo.$isDirty && !collDetails.instrNo.length">Please
 								enter Instrument Number!</p>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_instrIssuer">Instrument
+								Issuer</label> <select class="form-control"
+								id="field_instrumentIssuerMaster" name="instrumentIssuerMaster"
+								ng-model="collDetails.instrumentIssuerMaster"
+								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
+								ng-disabled="!instrEnabled">
+							</select>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_instrDt">Instrument
