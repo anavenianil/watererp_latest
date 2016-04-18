@@ -43,6 +43,8 @@ public class CollectionTypeMasterResourceIntTest {
 
     private static final String DEFAULT_COLL_NAME = "AAAAA";
     private static final String UPDATED_COLL_NAME = "BBBBB";
+    private static final String DEFAULT_TXN_TYPE = "AAAAA";
+    private static final String UPDATED_TXN_TYPE = "BBBBB";
 
     @Inject
     private CollectionTypeMasterRepository collectionTypeMasterRepository;
@@ -71,6 +73,7 @@ public class CollectionTypeMasterResourceIntTest {
     public void initTest() {
         collectionTypeMaster = new CollectionTypeMaster();
         collectionTypeMaster.setCollName(DEFAULT_COLL_NAME);
+        collectionTypeMaster.setTxnType(DEFAULT_TXN_TYPE);
     }
 
     @Test
@@ -90,6 +93,7 @@ public class CollectionTypeMasterResourceIntTest {
         assertThat(collectionTypeMasters).hasSize(databaseSizeBeforeCreate + 1);
         CollectionTypeMaster testCollectionTypeMaster = collectionTypeMasters.get(collectionTypeMasters.size() - 1);
         assertThat(testCollectionTypeMaster.getCollName()).isEqualTo(DEFAULT_COLL_NAME);
+        assertThat(testCollectionTypeMaster.getTxnType()).isEqualTo(DEFAULT_TXN_TYPE);
     }
 
     @Test
@@ -103,7 +107,8 @@ public class CollectionTypeMasterResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(collectionTypeMaster.getId().intValue())))
-                .andExpect(jsonPath("$.[*].collName").value(hasItem(DEFAULT_COLL_NAME.toString())));
+                .andExpect(jsonPath("$.[*].collName").value(hasItem(DEFAULT_COLL_NAME.toString())))
+                .andExpect(jsonPath("$.[*].txnType").value(hasItem(DEFAULT_TXN_TYPE.toString())));
     }
 
     @Test
@@ -117,7 +122,8 @@ public class CollectionTypeMasterResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(collectionTypeMaster.getId().intValue()))
-            .andExpect(jsonPath("$.collName").value(DEFAULT_COLL_NAME.toString()));
+            .andExpect(jsonPath("$.collName").value(DEFAULT_COLL_NAME.toString()))
+            .andExpect(jsonPath("$.txnType").value(DEFAULT_TXN_TYPE.toString()));
     }
 
     @Test
@@ -138,6 +144,7 @@ public class CollectionTypeMasterResourceIntTest {
 
         // Update the collectionTypeMaster
         collectionTypeMaster.setCollName(UPDATED_COLL_NAME);
+        collectionTypeMaster.setTxnType(UPDATED_TXN_TYPE);
 
         restCollectionTypeMasterMockMvc.perform(put("/api/collectionTypeMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -149,6 +156,7 @@ public class CollectionTypeMasterResourceIntTest {
         assertThat(collectionTypeMasters).hasSize(databaseSizeBeforeUpdate);
         CollectionTypeMaster testCollectionTypeMaster = collectionTypeMasters.get(collectionTypeMasters.size() - 1);
         assertThat(testCollectionTypeMaster.getCollName()).isEqualTo(UPDATED_COLL_NAME);
+        assertThat(testCollectionTypeMaster.getTxnType()).isEqualTo(UPDATED_TXN_TYPE);
     }
 
     @Test

@@ -16,24 +16,11 @@
         <jh-alert-error></jh-alert-error>
         <div class="row">
         <div class="col-sm-4">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="expenseDetails.id" readonly />
-        </div>
-        <div class="col-sm-4">
             <label class="control-label" for="field_expenseNo">Expense No</label>
             <input type="text" class="form-control" name="expenseNo" id="field_expenseNo"
                     ng-model="expenseDetails.expenseNo"
                      />
         </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_expenseAmt">Expense Amount</label>
-            <input type="number" class="form-control" name="expenseAmt" id="field_expenseAmt"
-                    ng-model="expenseDetails.expenseAmt"
-                     />
-        </div>
-        </div>
-        <div class="row">
         <div class="col-sm-4">
             <label class="control-label" for="field_expenseDt">Expense Date</label>
             <div class="form-group">
@@ -46,6 +33,14 @@
             </div>
             </div>
         </div>
+        <div class="col-sm-4">
+            <label class="control-label" for="field_expenseAmt">Expense Amount</label>
+            <input type="number" class="form-control" name="expenseAmt" id="field_expenseAmt"
+                    ng-model="expenseDetails.expenseAmt"
+                     />
+        </div>
+        </div>
+        <div class="row">
         <div class="col-sm-4">
             <label class="control-label" for="field_instrNo">Instrument No</label>
             <input type="text" class="form-control" name="instrNo" id="field_instrNo"

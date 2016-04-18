@@ -9,7 +9,8 @@ angular.module('watererpApp')
                 $scope.expenseDetails = result;
             });
         };
-        $scope.load($scope.expenseDetailsId)
+        if($scope.expenseDetailsId!=null)
+        $scope.load($scope.expenseDetailsId);       
     	
     	var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:expenseDetailsUpdate', result);
