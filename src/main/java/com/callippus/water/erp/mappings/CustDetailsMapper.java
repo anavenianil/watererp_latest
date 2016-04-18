@@ -26,6 +26,7 @@ public interface CustDetailsMapper {
 		@Mapping(target = "address", source= "ward"),
 		@Mapping(target = "city", source= "dma"),
 		@Mapping(target = "pinCode", source= "bPlotNo")
+		
 	})
     CustDetails appTxnToCustDetails(ApplicationTxn applicationTxn);
     

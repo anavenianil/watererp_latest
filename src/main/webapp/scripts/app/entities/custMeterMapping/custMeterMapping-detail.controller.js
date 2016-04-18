@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustMeterMappingDetailController', function ($scope, $rootScope, $stateParams, entity, CustMeterMapping, CustDetails, MeterDetails, User) {
+    .controller('CustMeterMappingDetailController', function ($scope, $rootScope, $stateParams, entity, CustMeterMapping, CustDetails, MeterDetails) {
         $scope.custMeterMapping = entity;
         $scope.load = function (id) {
             CustMeterMapping.get({id: id}, function(result) {

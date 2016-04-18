@@ -21,17 +21,8 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fromDate"><span>FromDate</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="toDate"><span>ToDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="reasonForChange"><span>ReasonForChange</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="existingMeterNumber"><span>ExistingMeterNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="existingMeterReading"><span>ExistingMeterReading</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="newMeterNumber"><span>NewMeterNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="newMeterReading"><span>NewMeterReading</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="approvedDate"><span>ApprovedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="custDetails.id"><span>custDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="meterDetails.id"><span>meterDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.id"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,22 +31,11 @@
                     <td><a ui-sref="custMeterMapping.detail({id:custMeterMapping.id})">{{custMeterMapping.id}}</a></td>
                         <td>{{custMeterMapping.fromDate | date:'mediumDate'}}</td>
                         <td>{{custMeterMapping.toDate | date:'mediumDate'}}</td>
-                    <td>{{custMeterMapping.can}}</td>
-                    <td>{{custMeterMapping.reasonForChange}}</td>
-                    <td>{{custMeterMapping.existingMeterNumber}}</td>
-                    <td>{{custMeterMapping.existingMeterReading}}</td>
-                    <td>{{custMeterMapping.newMeterNumber}}</td>
-                    <td>{{custMeterMapping.newMeterReading}}</td>
-                    <td>{{custMeterMapping.remarks}}</td>
-                        <td>{{custMeterMapping.approvedDate | date:'mediumDate'}}</td>
                     <td>
                         <a ui-sref="custDetails.detail({id:custMeterMapping.custDetails.id})">{{custMeterMapping.custDetails.id}}</a>
                     </td>
                     <td>
                         <a ui-sref="meterDetails.detail({id:custMeterMapping.meterDetails.id})">{{custMeterMapping.meterDetails.id}}</a>
-                    </td>
-                    <td>
-                        {{custMeterMapping.user.id}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

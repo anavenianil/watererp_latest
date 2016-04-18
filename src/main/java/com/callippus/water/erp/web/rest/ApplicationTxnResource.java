@@ -30,11 +30,13 @@ import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
+import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -68,6 +70,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private CustDetailsRepository custDetailsRepository;
+    
+    @Inject
+    private TariffCategoryMasterRepository tariffCategoryMasterRepository;
     
     
     /**
@@ -125,9 +130,14 @@ public class ApplicationTxnResource {
             return createApplicationTxn(request, applicationTxn);
         }
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-        CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
-        custDetails.setId(null);
-        custDetailsRepository.save(custDetails);
+        
+        if(applicationTxn.getCan()!= null && applicationTxn.getConnectionDate() != null){
+        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
+            TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(result.getCategoryMaster().getId());
+            custDetails.setTariffCategoryMaster(tcm);
+            custDetails.setId(null);
+            custDetailsRepository.save(custDetails);
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);

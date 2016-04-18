@@ -226,12 +226,18 @@
 			ui-sref="applicationTxnIssueMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Meter
 		</button>
-
+		
 		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===7"
+			ui-sref="applicationTxnClose({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Complete
+		</button>
+		
+		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===7"
 			ui-sref="applicationTxnCreateCan({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create CAN
-		</button>
+		</button> -->
 
 
 		<!-- <button type="button" class="btn btn-success pull-right"

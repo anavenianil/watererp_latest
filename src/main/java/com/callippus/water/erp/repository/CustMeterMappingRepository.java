@@ -11,7 +11,4 @@ import java.util.List;
  */
 public interface CustMeterMappingRepository extends JpaRepository<CustMeterMapping,Long> {
 
-    @Query("select custMeterMapping from CustMeterMapping custMeterMapping where custMeterMapping.user.login = ?#{principal.username}")
-    List<CustMeterMapping> findByUserIsCurrentUser();
-
 }

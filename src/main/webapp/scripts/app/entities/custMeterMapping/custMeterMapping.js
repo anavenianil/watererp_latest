@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            /*.state('custMeterMapping.new', {
+            .state('custMeterMapping.new', {
                 parent: 'custMeterMapping',
                 url: '/new',
                 data: {
@@ -64,8 +64,8 @@ angular.module('watererpApp')
                         $state.go('custMeterMapping');
                     })
                 }]
-            })*/
-            /*.state('custMeterMapping.edit', {
+            })
+            .state('custMeterMapping.edit', {
                 parent: 'custMeterMapping',
                 url: '/{id}/edit',
                 data: {
@@ -87,7 +87,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })*/
+            })
             .state('custMeterMapping.delete', {
                 parent: 'custMeterMapping',
                 url: '/{id}/delete',
@@ -110,53 +110,5 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
-            .state('custMeterMapping.new', {
-                parent: 'custMeterMapping',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'CustMeterMappings'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/custMeterMapping/custMeterMapping-dialog.html',
-                        controller: 'CustMeterMappingDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            .state('custMeterMapping.edit', {
-                parent: 'custMeterMapping',
-                url: '/edit/:id',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'CustMeterMappings'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/custMeterMapping/custMeterMapping-dialog.html',
-                        controller: 'CustMeterMappingDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            .state('custMeterMappingForMeterAllot', {
-                parent: 'custMeterMapping',
-                url: '/ForMeterAllot/:applicationTxnId',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'CustMeterMappings'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/custMeterMapping/custMeterMapping-dialog.html',
-                        controller: 'CustMeterMappingDialogController'
-                    }
-                },
-                resolve: {
-                }
             });
     });
