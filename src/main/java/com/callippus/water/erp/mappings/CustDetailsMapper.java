@@ -14,17 +14,19 @@ import com.callippus.water.erp.domain.CustDetails;
 public interface CustDetailsMapper {
 	CustDetailsMapper INSTANCE = Mappers.getMapper( CustDetailsMapper.class );
     
-    /*@Mappings({
-        @Mapping(target = "id", constant = "0"),
-        @Mapping(source = "cust_details.can", target = "can"),
-        @Mapping(source = "cust_details.metReaderCode", target = "metReaderCode"),
-        @Mapping(source = "cust_details.tariffCategoryMaster.id", target = "category"),
-        @Mapping(source = "cust_details.mobileNo", target = "mobileNo"),
-        @Mapping(source = "bill_details.lat", target = "lat"),
-        @Mapping(source = "bill_details.longi", target = "longi"),
-        @Mapping(source = "cust_details.meterFixDate", target = "meterFixDate"),
-        @Mapping(source = "bill_details.metReadingDt", target = "metReadingDt")
-    })*/
+
+	@Mappings({
+		@Mapping(target = "id", constant = "0"),
+		@Mapping(target = "divCode", source = "street"),
+		@Mapping(target = "secCode", source = "blockNo"),
+		@Mapping(target = "secName", source= "bStreet"),
+		@Mapping(target = "connDate", source= "connectionDate"),
+		@Mapping(target = "consName", source= "firstName"),
+		@Mapping(target = "houseNo", source= "plotNo"),
+		@Mapping(target = "address", source= "ward"),
+		@Mapping(target = "city", source= "dma"),
+		@Mapping(target = "pinCode", source= "bPlotNo")
+	})
     CustDetails appTxnToCustDetails(ApplicationTxn applicationTxn);
     
     

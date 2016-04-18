@@ -195,5 +195,22 @@ angular.module('watererpApp')
                 resolve: {
                 	
                 }
+            })
+             .state('applicationTxn.withoutMeter', {
+                parent: 'applicationTxn',
+                url: '/withoutMeter',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'ApplicationTxn'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/applicationTxn/applicationTxnWithoutMeter-dialog.html',
+                        controller: 'ApplicationTxnDialogController'
+                    }
+                },
+                resolve: {
+                	
+                }
             });
     });

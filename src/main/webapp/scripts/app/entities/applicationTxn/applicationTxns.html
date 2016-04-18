@@ -11,8 +11,8 @@
 				<div class="table-responsive">
 					<div class="row">
 						<div class="col-sm-3">
-							<label>Application No.</label> <input list="applicationTxn" type=""
-								class="form-control" ng-model="applicationTxnId" />
+							<label>Application No.</label> <input list="applicationTxn"
+								type="" class="form-control" ng-model="applicationTxnId" />
 							<datalist id="applicationTxn">
 								<option ng-repeat="applicationTxn in applicationTxns"
 									value="{{applicationTxn.id}}">
@@ -31,11 +31,15 @@
 								<th><span>S.No.</span></th>
 								<th jh-sort-by="id"><span>Application No.</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="fullName"><span>Full Name</span> <span
+								<th jh-sort-by="fullName"><span>First Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="fullName"><span>Middle Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="fullName"><span>Last Name</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="category"><span>Category</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="area"><span>Area</span> <span
+								<th jh-sort-by="area"><span>DMA</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="status"><span>Status</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
@@ -78,9 +82,11 @@
 								ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
 								<td>{{$index+1}}</td>
 								<td>{{applicationTxn.id}}</td>
-								<td>{{applicationTxn.fullName}}</td>
+								<td>{{applicationTxn.firstName}}</td>
+								<td>{{applicationTxn.middleName}}</td>
+								<td>{{applicationTxn.lastName}}</td>
 								<td>{{applicationTxn.categoryMaster.categoryName}}</td>
-								<td>{{applicationTxn.area}}</td>
+								<td>{{applicationTxn.dma}}</td>
 								<td>{{applicationTxn.status}}</td>
 
 								<!-- <td>{{applicationTxn.homeOrOficeNumber}}</td>

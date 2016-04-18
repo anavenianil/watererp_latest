@@ -1,21 +1,14 @@
 package com.callippus.water.erp.domain;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.LocalDate;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
 
 /**
  * A ApplicationTxn.
@@ -29,59 +22,86 @@ public class ApplicationTxn implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "first_name")
+    private String firstName;
     
-    @Column(name = "home_or_office_number")
-    private Long homeOrOfficeNumber;
+    @Column(name = "middle_name")
+    private String middleName;
     
-    @Column(name = "regional_number")
-    private Long regionalNumber;
+    @Column(name = "last_name")
+    private String lastName;
     
-    @Column(name = "fax_number")
-    private Long faxNumber;
+    @Column(name = "organization")
+    private Boolean organization;
     
-    @Column(name = "plot_number")
-    private String plotNumber;
+    @Column(name = "organization_name")
+    private String organizationName;
     
-    @Column(name = "area")
-    private String area;
+    @Column(name = "designation")
+    private String designation;
+    
+    @Column(name = "mobile_no")
+    private Long mobileNo;
+    
+    @Column(name = "office_no")
+    private Long officeNo;
+    
+    @Column(name = "email")
+    private String email;
     
     @Column(name = "street")
     private String street;
     
-    @Column(name = "village_executive_office")
-    private String villageExecutiveOffice;
+    @Column(name = "plot_no")
+    private String plotNo;
     
-    @Column(name = "village_executive_office_number")
-    private String villageExecutiveOfficeNumber;
+    @Column(name = "block_no")
+    private String blockNo;
     
-    @Column(name = "po_box")
-    private String poBox;
+    @Column(name = "tanesco_meter")
+    private String tanescoMeter;
     
-    @Column(name = "requested_date")
-    private ZonedDateTime requestedDate;
+    @Column(name = "water_connection_use")
+    private String waterConnectionUse;
+    
+    @Column(name = "b_street")
+    private String bStreet;
+    
+    @Column(name = "ward")
+    private String ward;
+    
+    @Column(name = "dma")
+    private String dma;
+    
+    @Column(name = "b_plot_no")
+    private String bPlotNo;
+    
+    @Column(name = "regiter_mobile")
+    private Long regiterMobile;
+    
+    @Column(name = "attached_doc_type")
+    private String attachedDocType;
+    
+    @Column(name = "id_number")
+    private String idNumber;
+    
+    @Column(name = "property_doc")
+    private String propertyDoc;
+    
+    @Column(name = "can")
+    private String can;
     
     @Column(name = "photo")
     private String photo;
     
-    @Column(name = "file_number")
-    private String fileNumber;
-    
-    @Column(name = "created_date")
-    private ZonedDateTime createdDate;
-    
-    @Column(name = "updated_date")
-    private ZonedDateTime updatedDate;
-    
     @Column(name = "status")
     private Integer status;
     
-    @Column(name = "detail_address")
-    private String detailAddress;
-    
     @Column(name = "meter_reading")
-    private String meterReading;
+    private Float meterReading;
+    
+    @Column(name = "requested_date")
+    private LocalDate requestedDate;
     
     @Column(name = "connection_date")
     private LocalDate connectionDate;
@@ -89,21 +109,27 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "remarks")
     private String remarks;
     
-    @Column(name = "can")
-    private String can;
+    @Column(name = "meter_no")
+    private String meterNo;
+    
+    @Column(name = "approved_date")
+    private LocalDate approvedDate;
     
     @ManyToOne
     @JoinColumn(name = "category_master_id")
     private CategoryMaster categoryMaster;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-    
-    @ManyToOne
     @JoinColumn(name = "meter_details_id")
     private MeterDetails meterDetails;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "request_at_id")
+    private User requestAt;
 
     public Long getId() {
         return id;
@@ -113,52 +139,76 @@ public class ApplicationTxn implements Serializable {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
     
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Long getHomeOrOfficeNumber() {
-        return homeOrOfficeNumber;
+    public String getMiddleName() {
+        return middleName;
     }
     
-    public void setHomeOrOfficeNumber(Long homeOrOfficeNumber) {
-        this.homeOrOfficeNumber = homeOrOfficeNumber;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public Long getRegionalNumber() {
-        return regionalNumber;
+    public String getLastName() {
+        return lastName;
     }
     
-    public void setRegionalNumber(Long regionalNumber) {
-        this.regionalNumber = regionalNumber;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Long getFaxNumber() {
-        return faxNumber;
+    public Boolean getOrganization() {
+        return organization;
     }
     
-    public void setFaxNumber(Long faxNumber) {
-        this.faxNumber = faxNumber;
+    public void setOrganization(Boolean organization) {
+        this.organization = organization;
     }
 
-    public String getPlotNumber() {
-        return plotNumber;
+    public String getOrganizationName() {
+        return organizationName;
     }
     
-    public void setPlotNumber(String plotNumber) {
-        this.plotNumber = plotNumber;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
-    public String getArea() {
-        return area;
+    public String getDesignation() {
+        return designation;
     }
     
-    public void setArea(String area) {
-        this.area = area;
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public Long getMobileNo() {
+        return mobileNo;
+    }
+    
+    public void setMobileNo(Long mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public Long getOfficeNo() {
+        return officeNo;
+    }
+    
+    public void setOfficeNo(Long officeNo) {
+        this.officeNo = officeNo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getStreet() {
@@ -169,36 +219,108 @@ public class ApplicationTxn implements Serializable {
         this.street = street;
     }
 
-    public String getVillageExecutiveOffice() {
-        return villageExecutiveOffice;
+    public String getPlotNo() {
+        return plotNo;
     }
     
-    public void setVillageExecutiveOffice(String villageExecutiveOffice) {
-        this.villageExecutiveOffice = villageExecutiveOffice;
+    public void setPlotNo(String plotNo) {
+        this.plotNo = plotNo;
     }
 
-    public String getVillageExecutiveOfficeNumber() {
-        return villageExecutiveOfficeNumber;
+    public String getBlockNo() {
+        return blockNo;
     }
     
-    public void setVillageExecutiveOfficeNumber(String villageExecutiveOfficeNumber) {
-        this.villageExecutiveOfficeNumber = villageExecutiveOfficeNumber;
+    public void setBlockNo(String blockNo) {
+        this.blockNo = blockNo;
     }
 
-    public String getPoBox() {
-        return poBox;
+    public String getTanescoMeter() {
+        return tanescoMeter;
     }
     
-    public void setPoBox(String poBox) {
-        this.poBox = poBox;
+    public void setTanescoMeter(String tanescoMeter) {
+        this.tanescoMeter = tanescoMeter;
     }
 
-    public ZonedDateTime getRequestedDate() {
-        return requestedDate;
+    public String getWaterConnectionUse() {
+        return waterConnectionUse;
     }
     
-    public void setRequestedDate(ZonedDateTime requestedDate) {
-        this.requestedDate = requestedDate;
+    public void setWaterConnectionUse(String waterConnectionUse) {
+        this.waterConnectionUse = waterConnectionUse;
+    }
+
+    public String getbStreet() {
+        return bStreet;
+    }
+    
+    public void setbStreet(String bStreet) {
+        this.bStreet = bStreet;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+    
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getDma() {
+        return dma;
+    }
+    
+    public void setDma(String dma) {
+        this.dma = dma;
+    }
+
+    public String getbPlotNo() {
+        return bPlotNo;
+    }
+    
+    public void setbPlotNo(String bPlotNo) {
+        this.bPlotNo = bPlotNo;
+    }
+
+    public Long getRegiterMobile() {
+        return regiterMobile;
+    }
+    
+    public void setRegiterMobile(Long regiterMobile) {
+        this.regiterMobile = regiterMobile;
+    }
+
+    public String getAttachedDocType() {
+        return attachedDocType;
+    }
+    
+    public void setAttachedDocType(String attachedDocType) {
+        this.attachedDocType = attachedDocType;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+    
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public String getPropertyDoc() {
+        return propertyDoc;
+    }
+    
+    public void setPropertyDoc(String propertyDoc) {
+        this.propertyDoc = propertyDoc;
+    }
+
+    public String getCan() {
+        return can;
+    }
+    
+    public void setCan(String can) {
+        this.can = can;
     }
 
     public String getPhoto() {
@@ -209,30 +331,6 @@ public class ApplicationTxn implements Serializable {
         this.photo = photo;
     }
 
-    public String getFileNumber() {
-        return fileNumber;
-    }
-    
-    public void setFileNumber(String fileNumber) {
-        this.fileNumber = fileNumber;
-    }
-
-    public ZonedDateTime getCreatedDate() {
-        return createdDate;
-    }
-    
-    public void setCreatedDate(ZonedDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public ZonedDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-    
-    public void setUpdatedDate(ZonedDateTime updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -241,12 +339,52 @@ public class ApplicationTxn implements Serializable {
         this.status = status;
     }
 
-    public String getDetailAddress() {
-        return detailAddress;
+    public Float getMeterReading() {
+        return meterReading;
     }
     
-    public void setDetailAddress(String detailAddress) {
-        this.detailAddress = detailAddress;
+    public void setMeterReading(Float meterReading) {
+        this.meterReading = meterReading;
+    }
+
+    public LocalDate getRequestedDate() {
+        return requestedDate;
+    }
+    
+    public void setRequestedDate(LocalDate requestedDate) {
+        this.requestedDate = requestedDate;
+    }
+
+    public LocalDate getConnectionDate() {
+        return connectionDate;
+    }
+    
+    public void setConnectionDate(LocalDate connectionDate) {
+        this.connectionDate = connectionDate;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+    
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getMeterNo() {
+        return meterNo;
+    }
+    
+    public void setMeterNo(String meterNo) {
+        this.meterNo = meterNo;
+    }
+
+    public LocalDate getApprovedDate() {
+        return approvedDate;
+    }
+    
+    public void setApprovedDate(LocalDate approvedDate) {
+        this.approvedDate = approvedDate;
     }
 
     public CategoryMaster getCategoryMaster() {
@@ -257,55 +395,31 @@ public class ApplicationTxn implements Serializable {
         this.categoryMaster = categoryMaster;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public MeterDetails getMeterDetails() {
+        return meterDetails;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setMeterDetails(MeterDetails meterDetails) {
+        this.meterDetails = meterDetails;
     }
 
-    public String getMeterReading() {
-		return meterReading;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setMeterReading(String meterReading) {
-		this.meterReading = meterReading;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public LocalDate getConnectionDate() {
-		return connectionDate;
-	}
+    public User getRequestAt() {
+        return requestAt;
+    }
 
-	public void setConnectionDate(LocalDate connectionDate) {
-		this.connectionDate = connectionDate;
-	}
+    public void setRequestAt(User user) {
+        this.requestAt = user;
+    }
 
-	public String getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
-	public String getCan() {
-		return can;
-	}
-
-	public void setCan(String can) {
-		this.can = can;
-	}
-
-	public MeterDetails getMeterDetails() {
-		return meterDetails;
-	}
-
-	public void setMeterDetails(MeterDetails meterDetails) {
-		this.meterDetails = meterDetails;
-	}
-
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -329,27 +443,37 @@ public class ApplicationTxn implements Serializable {
     public String toString() {
         return "ApplicationTxn{" +
             "id=" + id +
-            ", fullName='" + fullName + "'" +
-            ", homeOrOfficeNumber='" + homeOrOfficeNumber + "'" +
-            ", regionalNumber='" + regionalNumber + "'" +
-            ", faxNumber='" + faxNumber + "'" +
-            ", plotNumber='" + plotNumber + "'" +
-            ", area='" + area + "'" +
+            ", firstName='" + firstName + "'" +
+            ", middleName='" + middleName + "'" +
+            ", lastName='" + lastName + "'" +
+            ", organization='" + organization + "'" +
+            ", organizationName='" + organizationName + "'" +
+            ", designation='" + designation + "'" +
+            ", mobileNo='" + mobileNo + "'" +
+            ", officeNo='" + officeNo + "'" +
+            ", email='" + email + "'" +
             ", street='" + street + "'" +
-            ", villageExecutiveOffice='" + villageExecutiveOffice + "'" +
-            ", villageExecutiveOfficeNumber='" + villageExecutiveOfficeNumber + "'" +
-            ", poBox='" + poBox + "'" +
-            ", requestedDate='" + requestedDate + "'" +
+            ", plotNo='" + plotNo + "'" +
+            ", blockNo='" + blockNo + "'" +
+            ", tanescoMeter='" + tanescoMeter + "'" +
+            ", waterConnectionUse='" + waterConnectionUse + "'" +
+            ", bStreet='" + bStreet + "'" +
+            ", ward='" + ward + "'" +
+            ", dma='" + dma + "'" +
+            ", bPlotNo='" + bPlotNo + "'" +
+            ", regiterMobile='" + regiterMobile + "'" +
+            ", attachedDocType='" + attachedDocType + "'" +
+            ", idNumber='" + idNumber + "'" +
+            ", propertyDoc='" + propertyDoc + "'" +
+            ", can='" + can + "'" +
             ", photo='" + photo + "'" +
-            ", fileNumber='" + fileNumber + "'" +
-            ", createdDate='" + createdDate + "'" +
-            ", updatedDate='" + updatedDate + "'" +
             ", status='" + status + "'" +
-            ", detailAddress='" + detailAddress + "'" +
             ", meterReading='" + meterReading + "'" +
+            ", requestedDate='" + requestedDate + "'" +
             ", connectionDate='" + connectionDate + "'" +
             ", remarks='" + remarks + "'" +
-            ", can='" + can + "'" +
+            ", meterNo='" + meterNo + "'" +
+            ", approvedDate='" + approvedDate + "'" +
             '}';
     }
 }

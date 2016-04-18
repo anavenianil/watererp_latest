@@ -9,15 +9,22 @@
         },
         {
             "relationshipId": 2,
-            "relationshipName": "customer",
-            "otherEntityName": "customer",
+            "relationshipName": "meterDetails",
+            "otherEntityName": "meterDetails",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 3,
-            "relationshipName": "meterDetails",
-            "otherEntityName": "meterDetails",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "requestAt",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
@@ -25,108 +32,158 @@
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "fullName",
+            "fieldName": "firstName",
             "fieldType": "String"
         },
         {
             "fieldId": 2,
-            "fieldName": "homeOrOfficeNumber",
-            "fieldType": "Long"
+            "fieldName": "middleName",
+            "fieldType": "String"
         },
         {
             "fieldId": 3,
-            "fieldName": "regionalNumber",
-            "fieldType": "Long"
+            "fieldName": "lastName",
+            "fieldType": "String"
         },
         {
             "fieldId": 4,
-            "fieldName": "faxNumber",
-            "fieldType": "Long"
+            "fieldName": "organization",
+            "fieldType": "Boolean"
         },
         {
             "fieldId": 5,
-            "fieldName": "plotNumber",
+            "fieldName": "organizationName",
             "fieldType": "String"
         },
         {
             "fieldId": 6,
-            "fieldName": "area",
+            "fieldName": "designation",
             "fieldType": "String"
         },
         {
             "fieldId": 7,
-            "fieldName": "street",
-            "fieldType": "String"
+            "fieldName": "mobileNo",
+            "fieldType": "Long"
         },
         {
             "fieldId": 8,
-            "fieldName": "villageExecutiveOffice",
-            "fieldType": "String"
+            "fieldName": "officeNo",
+            "fieldType": "Long"
         },
         {
             "fieldId": 9,
-            "fieldName": "villageExecutiveOfficeNumber",
+            "fieldName": "email",
             "fieldType": "String"
         },
         {
             "fieldId": 10,
-            "fieldName": "poBox",
+            "fieldName": "street",
             "fieldType": "String"
         },
         {
             "fieldId": 11,
-            "fieldName": "requestedDate",
-            "fieldType": "ZonedDateTime"
+            "fieldName": "plotNo",
+            "fieldType": "String"
         },
         {
             "fieldId": 12,
-            "fieldName": "photo",
+            "fieldName": "blockNo",
             "fieldType": "String"
         },
         {
             "fieldId": 13,
-            "fieldName": "fileNumber",
+            "fieldName": "tanescoMeter",
             "fieldType": "String"
         },
         {
             "fieldId": 14,
-            "fieldName": "createdDate",
-            "fieldType": "ZonedDateTime"
+            "fieldName": "waterConnectionUse",
+            "fieldType": "String"
         },
         {
             "fieldId": 15,
-            "fieldName": "updatedDate",
-            "fieldType": "ZonedDateTime"
+            "fieldName": "bStreet",
+            "fieldType": "String"
         },
         {
             "fieldId": 16,
-            "fieldName": "status",
-            "fieldType": "Integer"
+            "fieldName": "ward",
+            "fieldType": "String"
         },
         {
             "fieldId": 17,
-            "fieldName": "detailAddress",
+            "fieldName": "dma",
             "fieldType": "String"
         },
         {
             "fieldId": 18,
-            "fieldName": "meterReading",
+            "fieldName": "bPlotNo",
             "fieldType": "String"
         },
         {
             "fieldId": 19,
-            "fieldName": "connectionDate",
-            "fieldType": "LocalDate"
+            "fieldName": "regiterMobile",
+            "fieldType": "Long"
         },
         {
             "fieldId": 20,
-            "fieldName": "remarks",
+            "fieldName": "attachedDocType",
             "fieldType": "String"
         },
         {
             "fieldId": 21,
+            "fieldName": "idNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 22,
+            "fieldName": "propertyDoc",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 23,
             "fieldName": "can",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 24,
+            "fieldName": "photo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 25,
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 26,
+            "fieldName": "meterReading",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 27,
+            "fieldName": "requestedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 28,
+            "fieldName": "connectionDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 29,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 30,
+            "fieldName": "meterNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 31,
+            "fieldName": "approvedDate",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20160229075018",
