@@ -43,16 +43,16 @@
 							<div class="form-group"
 								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
 
-									<input type="text" ng-model="custInfo" typeahead-min-length="3"
-										placeholder="Search CAN or Name or Address (Min 3 chars)"
-										uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
-										typeahead-loading="loadingCANs"
-										typeahead-on-select='onSelect($item, $model, $label)'
-										typeahead-no-results="noResults" class="form-control">
-									<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
-									<div ng-show="noResults">
-										<i class="glyphicon glyphicon-remove"></i> No CANs Found
-									</div>							
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search CAN or Name or Address (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								</div>
 							</div>
 						</div>
 					</div>
@@ -103,8 +103,8 @@
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_receiptAmt">Receipt
 								Amount</label> <input type="number" class="form-control"
-								name="receiptAmt" required="required" min="1" id="field_receiptAmt"
-								ng-model="collDetails.receiptAmt"  />
+								name="receiptAmt" required="required" min="1"
+								id="field_receiptAmt" ng-model="collDetails.receiptAmt" />
 							<p ng-show="editForm.receiptAmt.$error.pattern"
 								class="help-block">Only numbers.</p>
 						</div>
@@ -114,7 +114,7 @@
 						<div class="col-sm-4">
 							<label for="field_paymentTypes">Receipt Mode</label> <select
 								class="form-control" id="field_paymentTypes" name="paymentTypes"
-								ng-model="collDetails.paymentTypes" required="required" 
+								ng-model="collDetails.paymentTypes" required="required"
 								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
 								ng-change="resetInstr(collDetails.paymentTypes.paymentMode)">
 							</select>
@@ -124,7 +124,7 @@
 							<label for="field_paymentTypes">Collection Type</label> 
 							<select
 								class="form-control" id="field_collectionTypeMaster"
-								name="collectionTypeMaster" required="required" 
+								name="collectionTypeMaster" required="required"
 								ng-model="collDetails.collectionTypeMaster"
 								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id">
 							</select>
@@ -156,8 +156,9 @@
 								Date</label>
 							<div class="form-group">
 								<div class='input-group' id='field_receiptDt'>
-									<input id="field_instrDt" placeholder="YYYY-MM-DD" name="field_instrDt" type="text"
-										class="form-control" uib-datepicker-popup="{{dateformat}}"
+									<input id="field_instrDt" placeholder="YYYY-MM-DD"
+										name="field_instrDt" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt"
 										is-open="datePickerForInstrDt.status.opened"
 										ng-disabled="!instrEnabled" /> <span class="input-group-btn">
@@ -176,14 +177,22 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_remarks">Remarks</label> <input
+								type="text" class="form-control" name="remarks"
+								id="field_remarks" ng-model="collDetails.remarks" />
+						</div>
+					</div>
 				</div>
+				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 					</button>
-					<button type="submit" ng-disabled="validate()" class="btn btn-primary"
-						id="submitSave">
+					<button type="submit" ng-disabled="validate()"
+						class="btn btn-primary" id="submitSave">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 					</button>
 				</div>

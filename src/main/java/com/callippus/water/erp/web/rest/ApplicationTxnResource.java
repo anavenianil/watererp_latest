@@ -27,9 +27,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -58,6 +63,12 @@ public class ApplicationTxnResource {
     @Inject
     private ApplicationTxnCustomRepository applicationTxnCustomRepository;
     
+    @Inject
+    private FeasibilityStudyRepository feasibilityStudyRepository;
+    
+    @Inject
+    private CustDetailsRepository custDetailsRepository;
+    
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -72,17 +83,10 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationTxn", "idexists", "A new applicationTxn cannot already have an ID")).body(null);
         }
-      //file number format(Division - Property Number - House No - Connection No) : DO4 - 064 - 1 - 1
-        //String fileNumber = "D"+applicationTxn.getWard() +"-"+applicationTxn.getGovtOfficialNo()+"-"+applicationTxn.getsHouseNo();
-        //applicationTxn.setFileNumber(fileNumber);
         if(applicationTxn.getStatus()==null){
         	applicationTxn.setStatus(0);
         }
         
-        ZonedDateTime now = ZonedDateTime.now();
-        applicationTxn.setCreatedDate(now);
-        applicationTxn.setUpdatedDate(now);
-
         applicationTxn.setPhoto("");
         applicationTxnRepository.save(applicationTxn);
         
@@ -91,7 +95,7 @@ public class ApplicationTxnResource {
         UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-      //this is for workflow
+        //this is for workflow
         try{
         	workflowService.getUserDetails();
         	applicationTxnWorkflowService.createTxn(applicationTxn);
@@ -99,7 +103,6 @@ public class ApplicationTxnResource {
         catch(Exception e){
         	System.out.println(e);
         }
-        
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))
@@ -121,10 +124,9 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
-        ZonedDateTime now = ZonedDateTime.now();
-        applicationTxn.setUpdatedDate(now);
-        
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+        CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
+        custDetailsRepository.save(custDetails);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);
@@ -286,7 +288,7 @@ public class ApplicationTxnResource {
     @Timed
 	public ResponseEntity<List<RequestWorkflowHistory>> getAllApprovedRequests(HttpServletResponse response, @PathVariable String type)
 			throws Exception {
-		log.debug("REST request to get Requisition : {}");
+		log.debug("REST request to get getApproved Request : {}");
 		List<RequestWorkflowHistory> requestWorkflowHistorysStatus = applicationTxnCustomRepository
 				.listAllApprovedRequests(type);
 
@@ -294,4 +296,35 @@ public class ApplicationTxnResource {
 				HttpStatus.OK);
 	}
 
+    /**
+     * this will generate can
+     */
+	@RequestMapping(value = "/applicationTxns/can", 
+			method = RequestMethod.GET, 
+			produces = MediaType.TEXT_PLAIN_VALUE)
+	@Timed
+	public ResponseEntity<String> generateCan(@RequestParam(value = "feasibilityId", required = false) Long feasibilityId)
+			throws Exception{
+		log.debug("REST request to get CAN : {}");
+		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(feasibilityId);
+		String division = feasibility.getDivisionMaster().getDivisionName();
+		String street = feasibility.getStreetMaster().getStreetCode();
+		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
+		Integer can = applicationTxnRepository.findByCan(division, street);
+		if(can == null){
+			can =1;
+		}
+		else{
+			can = can+1;
+		}
+		String s1 = String.format("%04d", can);
+
+		String newCan = division + street + s1.toString();
+
+		
+        return new ResponseEntity<String>(
+        		newCan,
+                    HttpStatus.OK);
+		
+	}        
 }

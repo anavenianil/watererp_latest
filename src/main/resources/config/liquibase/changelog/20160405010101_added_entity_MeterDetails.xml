@@ -33,10 +33,15 @@
             
             <column name="max" type="${floatType}"/>
             
-            <column name="status" type="integer"/>
-            
+            <column name="meter_status_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
+        <addForeignKeyConstraint baseColumnNames="meter_status_id"
+                                 baseTableName="meter_details"
+                                 constraintName="fk_meterdetails_meterstatus_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_status"/>
+
     </changeSet>
 </databaseChangeLog>

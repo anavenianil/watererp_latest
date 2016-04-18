@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.0.24-community-nt
+-- Server version	5.0.24-community-nt-log
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -62,37 +62,50 @@ INSERT INTO `access_list` (`id`,`user_id`) VALUES
 DROP TABLE IF EXISTS `application_txn`;
 CREATE TABLE `application_txn` (
   `id` bigint(20) NOT NULL auto_increment,
-  `full_name` varchar(255) default NULL,
-  `home_or_office_number` bigint(20) default NULL,
-  `regional_number` bigint(20) default NULL,
-  `fax_number` bigint(20) default NULL,
-  `plot_number` varchar(255) default NULL,
-  `area` varchar(255) default NULL,
+  `first_name` varchar(255) default NULL,
+  `middle_name` varchar(255) default NULL,
+  `last_name` varchar(255) default NULL,
+  `organization` bit(1) default NULL,
+  `organization_name` varchar(255) default NULL,
+  `designation` varchar(255) default NULL,
+  `mobile_no` bigint(20) default NULL,
+  `office_no` bigint(20) default NULL,
+  `email` varchar(255) default NULL,
   `street` varchar(255) default NULL,
-  `village_executive_office` varchar(255) default NULL,
-  `village_executive_office_number` varchar(255) default NULL,
-  `po_box` varchar(255) default NULL,
-  `requested_date` timestamp NULL default NULL,
+  `plot_no` varchar(255) default NULL,
+  `block_no` varchar(255) default NULL,
+  `tanesco_meter` varchar(255) default NULL,
+  `water_connection_use` varchar(255) default NULL,
+  `b_street` varchar(255) default NULL,
+  `ward` varchar(255) default NULL,
+  `dma` varchar(255) default NULL,
+  `b_plot_no` varchar(255) default NULL,
+  `regiter_mobile` bigint(20) default NULL,
+  `attached_doc_type` varchar(255) default NULL,
+  `id_number` varchar(255) default NULL,
+  `property_doc` varchar(255) default NULL,
+  `can` varchar(255) default NULL,
   `photo` varchar(255) default NULL,
-  `file_number` varchar(255) default NULL,
-  `created_date` timestamp NULL default NULL,
-  `updated_date` timestamp NULL default NULL,
   `status` int(11) default NULL,
-  `detail_address` varchar(255) default NULL,
-  `meter_reading` varchar(255) default NULL,
+  `meter_reading` float default NULL,
+  `requested_date` date default NULL,
   `connection_date` date default NULL,
   `remarks` varchar(255) default NULL,
-  `can` varchar(255) default NULL,
+  `meter_no` varchar(255) default NULL,
+  `approved_date` date default NULL,
   `category_master_id` bigint(20) default NULL,
-  `customer_id` bigint(20) default NULL,
   `meter_details_id` bigint(20) default NULL,
+  `user_id` bigint(20) default NULL,
+  `request_at_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
   KEY `fk_applicationtxn_categorymaster_id` (`category_master_id`),
-  KEY `fk_applicationtxn_customer_id` (`customer_id`),
   KEY `fk_applicationtxn_meterdetails_id` (`meter_details_id`),
-  CONSTRAINT `fk_applicationtxn_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
+  KEY `fk_applicationtxn_user_id` (`user_id`),
+  KEY `fk_applicationtxn_requestat_id` (`request_at_id`),
+  CONSTRAINT `fk_applicationtxn_requestat_id` FOREIGN KEY (`request_at_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_applicationtxn_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
-  CONSTRAINT `fk_applicationtxn_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
+  CONSTRAINT `fk_applicationtxn_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
+  CONSTRAINT `fk_applicationtxn_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -100,10 +113,6 @@ CREATE TABLE `application_txn` (
 --
 
 /*!40000 ALTER TABLE `application_txn` DISABLE KEYS */;
-INSERT INTO `application_txn` (`id`,`full_name`,`home_or_office_number`,`regional_number`,`fax_number`,`plot_number`,`area`,`street`,`village_executive_office`,`village_executive_office_number`,`po_box`,`requested_date`,`photo`,`file_number`,`created_date`,`updated_date`,`status`,`detail_address`,`meter_reading`,`connection_date`,`remarks`,`can`,`category_master_id`,`customer_id`,`meter_details_id`) VALUES 
- (1,'ss',11,11,11,'11','ss','ss','ss','11','11','2016-04-13 15:25:04','/api/download/1_9ec3018413e194ccb8868b105a0241f4_bill.png',NULL,'2016-04-13 15:25:59','2016-04-13 15:25:59',0,'11',NULL,NULL,NULL,NULL,2,NULL,NULL),
- (2,'ee',1,1,1,'1','a','a','a','d','1','2016-04-13 15:28:39','/api/download/2_80f0bd292f26a930ade3d9d3ecae9055_MMG.jpg',NULL,'2016-04-13 15:30:29','2016-04-13 15:30:29',0,'a',NULL,NULL,NULL,NULL,1,NULL,NULL),
- (3,'fxgg',11,11,11,'11','sdf','gd','sfds','11','11','2016-04-13 15:37:30','/api/download/3_9e7792c1d6c9804a807d5d71572e7c20_bill.png',NULL,'2016-04-13 15:38:03','2016-04-13 15:38:03',0,'sfd',NULL,NULL,NULL,NULL,2,NULL,NULL);
 /*!40000 ALTER TABLE `application_txn` ENABLE KEYS */;
 
 
@@ -199,12 +208,7 @@ INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`me
  (11,'617771922','D000000006','2013-11-30','173352','','L','201211','201310','2016-04-02',0,0,180000,1800,630,120,0,2550,2550,'0000000000','L','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
  (12,'617781451','D000000007','2013-11-30','173423','','M','201603','201604','2016-04-02',0,16000,40000,1800,630,120,0,2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09');
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`) VALUES 
- (13,'617781710','D000000008','2013-11-30','173449','','M','201603','201604','2016-04-02',0,50000,50000,1800,630,120,0,2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (34,'617756734','55555','2016-04-14','55555','55555','M',NULL,'55555','2016-04-14',55555,55555,55555,55555,55555,55555,55555,55555,55555,'55555','M','55555','55555','55555','55555','55555','55555','55555','55555','55555','55555',55555,'2016-04-14'),
- (38,'617818256','11','2016-04-15','11:11',NULL,'M',NULL,'2016-04-14T18:30:00.000Z',NULL,NULL,111,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-15'),
- (39,'617797990','11111','2016-04-15','11:11',NULL,'U',NULL,'2016-04-14T18:30:00.000Z',NULL,NULL,1111,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`) VALUES 
- (42,'617828744',NULL,'2016-04-15',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-14T18:30:00.000Z',NULL,NULL,162300,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-15');
+ (13,'617781710','D000000008','2013-11-30','173449','','M','201603','201604','2016-04-02',0,50000,50000,1800,630,120,0,2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09');
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 
 
@@ -309,8 +313,8 @@ CREATE TABLE `bill_run_details` (
   PRIMARY KEY  (`id`),
   KEY `fk_billrundetails_billfulldetails_id` (`bill_full_details_id`),
   KEY `fk_billrundetails_billrunmaster_id` (`bill_run_master_id`),
-  CONSTRAINT `fk_billrundetails_billrunmaster_id` FOREIGN KEY (`bill_run_master_id`) REFERENCES `bill_run_master` (`id`),
-  CONSTRAINT `fk_billrundetails_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`)
+  CONSTRAINT `fk_billrundetails_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
+  CONSTRAINT `fk_billrundetails_billrunmaster_id` FOREIGN KEY (`bill_run_master_id`) REFERENCES `bill_run_master` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -319,20 +323,232 @@ CREATE TABLE `bill_run_details` (
 
 /*!40000 ALTER TABLE `bill_run_details` DISABLE KEYS */;
 INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
- (1,'032153790','2016-04-13 11:52:18','2016-04-13 11:52:18',0,'Failed with error:ALREADY_BILLED',NULL,1),
- (2,'011100304','2016-04-13 11:52:18','2016-04-13 11:52:19',0,'Failed with error:ALREADY_BILLED',NULL,1),
- (3,'613577519','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,1),
- (4,'617738493','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,1),
- (5,'617738918','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,1),
- (6,'617757078','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,1),
- (7,'617757083','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,1),
- (8,'617757111','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,1);
+ (1,'032153790','2016-04-13 11:52:18','2016-04-13 11:52:18',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (2,'011100304','2016-04-13 11:52:18','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (3,'613577519','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (4,'617738493','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1);
 INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
- (9,'617757186','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,1),
- (10,'617771922','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,1),
- (11,'617781451','2016-04-13 11:52:19','2016-04-13 11:52:19',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,1),
- (12,'617781710','2016-04-13 11:52:19','2016-04-13 11:52:20',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,1),
- (13,'032153790','2016-04-13 12:02:19','2016-04-13 12:02:20',0,'Failed with error:ALREADY_BILLED',NULL,2);
+ (5,'617738918','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (6,'617757078','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (7,'617757083','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (8,'617757111','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (9,'617757186','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (10,'617771922','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (11,'617781451','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
+ (12,'617781710','2016-04-13 11:52:19','2016-04-13 11:52:20',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (13,'032153790','2016-04-13 12:02:19','2016-04-13 12:02:20',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,2),
+ (14,'032153790','2016-04-13 14:23:31','2016-04-13 14:23:31',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,3),
+ (15,'032153790','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (16,'011100304','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (17,'613577519','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (18,'617738493','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (19,'617738918','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (20,'617757078','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (21,'617757083','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (22,'617757111','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (23,'617757186','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (24,'617771922','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (25,'617781451','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (26,'617781710','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
+ (27,'032153790','2016-04-15 11:14:44','2016-04-15 11:14:44',1,'Failed with error:ALREADY_BILLED',NULL,5),
+ (28,'011100304','2016-04-15 11:14:44','2016-04-15 11:14:44',1,'Failed with error:ALREADY_BILLED',NULL,5),
+ (29,'613577519','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,5);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (30,'617738493','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,5),
+ (31,'617738918','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,5),
+ (32,'617757078','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,5),
+ (33,'617757083','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,5),
+ (34,'617757111','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,5),
+ (35,'617757186','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,5),
+ (36,'617771922','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,5);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (37,'617781451','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,5),
+ (38,'617781710','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,5),
+ (39,'032153790','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (40,'011100304','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (41,'613577519','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (42,'617738493','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (43,'617738918','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (44,'617757078','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (45,'617757083','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (46,'617757111','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (47,'617757186','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (48,'617771922','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (49,'617781451','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (50,'617781710','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
+ (51,'032153790','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (52,'011100304','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (53,'613577519','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (54,'617738493','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (55,'617738918','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (56,'617757078','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (57,'617757083','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (58,'617757111','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (59,'617757186','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (60,'617771922','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (61,'617781451','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (62,'617781710','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
+ (63,'032153790','2016-04-15 11:21:46','2016-04-15 11:21:46',1,'Failed with error:ALREADY_BILLED',NULL,8),
+ (64,'011100304','2016-04-15 11:21:46','2016-04-15 11:21:46',1,'Failed with error:ALREADY_BILLED',NULL,8),
+ (65,'613577519','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,8),
+ (66,'617738493','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,8),
+ (67,'617738918','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,8),
+ (68,'617757078','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,8);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (69,'617757083','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,8),
+ (70,'617757111','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,8),
+ (71,'617757186','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,8),
+ (72,'617771922','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,8),
+ (73,'617781451','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,8),
+ (74,'617781710','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,8),
+ (75,'032153790','2016-04-15 11:53:38','2016-04-15 11:53:38',1,'Failed with error:ALREADY_BILLED',NULL,9);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (76,'011100304','2016-04-15 11:53:39','2016-04-15 11:53:39',1,'Failed with error:ALREADY_BILLED',NULL,9),
+ (77,'613577519','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,9),
+ (78,'617738493','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,9),
+ (79,'617738918','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,9),
+ (80,'617757078','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,9),
+ (81,'617757083','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,9),
+ (82,'617757111','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,9),
+ (83,'617757186','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,9);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (84,'617771922','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,9),
+ (85,'617781451','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,9),
+ (86,'617781710','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,9),
+ (87,'032153790','2016-04-15 15:09:33','2016-04-15 15:09:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (88,'011100304','2016-04-15 15:09:33','2016-04-15 15:09:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (89,'613577519','2016-04-15 15:09:33','2016-04-15 15:09:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (90,'617738493','2016-04-15 15:09:33','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (91,'617738918','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (92,'617757078','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (93,'617757083','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (94,'617757111','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (95,'617757186','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (96,'617771922','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (97,'617781451','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (98,'617781710','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
+ (99,'032153790','2016-04-15 19:15:23','2016-04-15 19:15:23',1,'Failed with error:ALREADY_BILLED',NULL,11),
+ (100,'011100304','2016-04-15 19:15:23','2016-04-15 19:15:24',1,'Failed with error:ALREADY_BILLED',NULL,11),
+ (101,'613577519','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,11),
+ (102,'617738493','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,11),
+ (103,'617738918','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,11),
+ (104,'617757078','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,11);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (105,'617757083','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,11),
+ (106,'617757111','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,11),
+ (107,'617757186','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,11),
+ (108,'617771922','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,11),
+ (109,'617781451','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,11),
+ (110,'617781710','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,11),
+ (111,'032153790','2016-04-16 13:09:30','2016-04-16 13:09:30',1,'Failed with error:ALREADY_BILLED',NULL,12);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (112,'011100304','2016-04-16 13:09:30','2016-04-16 13:09:30',1,'Failed with error:ALREADY_BILLED',NULL,12),
+ (113,'613577519','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,12),
+ (114,'617738493','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,12),
+ (115,'617738918','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,12),
+ (116,'617757078','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,12),
+ (117,'617757083','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,12),
+ (118,'617757111','2016-04-16 13:09:30','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,12),
+ (119,'617757186','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,12);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (120,'617771922','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,12),
+ (121,'617781451','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,12),
+ (122,'617781710','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,12),
+ (123,'032153790','2016-04-16 17:59:11','2016-04-16 17:59:11',1,'Failed with error:ALREADY_BILLED',NULL,13),
+ (124,'011100304','2016-04-16 17:59:11','2016-04-16 17:59:11',1,'Failed with error:ALREADY_BILLED',NULL,13),
+ (125,'613577519','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,13),
+ (126,'617738493','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,13),
+ (127,'617738918','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,13);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (128,'617757078','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,13),
+ (129,'617757083','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,13),
+ (130,'617757111','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,13),
+ (131,'617757186','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,13),
+ (132,'617771922','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,13),
+ (133,'617781451','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,13),
+ (134,'617781710','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,13);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (135,'032153790','2016-04-16 18:03:00','2016-04-16 18:03:00',1,'Failed with error:ALREADY_BILLED',NULL,14),
+ (136,'011100304','2016-04-16 18:03:00','2016-04-16 18:03:00',1,'Failed with error:ALREADY_BILLED',NULL,14),
+ (137,'613577519','2016-04-16 18:03:00','2016-04-16 18:03:00',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,14),
+ (138,'617738493','2016-04-16 18:03:00','2016-04-16 18:03:00',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,14),
+ (139,'617738918','2016-04-16 18:03:00','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,14),
+ (140,'617757078','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,14),
+ (141,'617757083','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,14),
+ (142,'617757111','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,14);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (143,'617757186','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,14),
+ (144,'617771922','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,14),
+ (145,'617781451','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,14),
+ (146,'617781710','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,14),
+ (147,'032153790','2016-04-18 10:38:29','2016-04-18 10:38:29',1,'Failed with error:ALREADY_BILLED',NULL,15),
+ (148,'011100304','2016-04-18 10:38:29','2016-04-18 10:38:29',1,'Failed with error:ALREADY_BILLED',NULL,15),
+ (149,'613577519','2016-04-18 10:38:29','2016-04-18 10:38:29',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,15),
+ (150,'617738493','2016-04-18 10:38:29','2016-04-18 10:38:29',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,15);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (151,'617738918','2016-04-18 10:38:29','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,15),
+ (152,'617757078','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,15),
+ (153,'617757083','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,15),
+ (154,'617757111','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,15),
+ (155,'617757186','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,15),
+ (156,'617771922','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,15),
+ (157,'617781451','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,15);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (158,'617781710','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,15),
+ (159,'032153790','2016-04-18 11:09:00','2016-04-18 11:09:00',1,'Failed with error:ALREADY_BILLED',NULL,16),
+ (160,'011100304','2016-04-18 11:09:01','2016-04-18 11:09:01',1,'Failed with error:ALREADY_BILLED',NULL,16),
+ (161,'613577519','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,16),
+ (162,'617738493','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,16),
+ (163,'617738918','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,16),
+ (164,'617757078','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,16),
+ (165,'617757083','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,16);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (166,'617757111','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,16),
+ (167,'617757186','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,16),
+ (168,'617771922','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,16),
+ (169,'617781451','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,16),
+ (170,'617781710','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,16),
+ (171,'032153790','2016-04-18 11:09:44','2016-04-18 11:09:44',1,'Failed with error:ALREADY_BILLED',NULL,17),
+ (172,'011100304','2016-04-18 11:09:44','2016-04-18 11:09:44',1,'Failed with error:ALREADY_BILLED',NULL,17),
+ (173,'613577519','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,17);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (174,'617738493','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,17),
+ (175,'617738918','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,17),
+ (176,'617757078','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,17),
+ (177,'617757083','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,17),
+ (178,'617757111','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,17),
+ (179,'617757186','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,17),
+ (180,'617771922','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,17);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (181,'617781451','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,17),
+ (182,'617781710','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,17),
+ (183,'032153790','2016-04-18 11:28:48','2016-04-18 11:28:48',1,'Failed with error:ALREADY_BILLED',NULL,18),
+ (184,'011100304','2016-04-18 11:28:48','2016-04-18 11:28:48',1,'Failed with error:ALREADY_BILLED',NULL,18),
+ (185,'613577519','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,18),
+ (186,'617738493','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,18),
+ (187,'617738918','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,18),
+ (188,'617757078','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,18);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`) VALUES 
+ (189,'617757083','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,18),
+ (190,'617757111','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,18),
+ (191,'617757186','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,18),
+ (192,'617771922','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,18),
+ (193,'617781451','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,18),
+ (194,'617781710','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,18);
 /*!40000 ALTER TABLE `bill_run_details` ENABLE KEYS */;
 
 
@@ -357,8 +573,24 @@ CREATE TABLE `bill_run_master` (
 
 /*!40000 ALTER TABLE `bill_run_master` DISABLE KEYS */;
 INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
- (1,'2016-04-13 11:52:17','0',0,12,'I'),
- (2,'2016-04-13 12:02:19','0',0,1,'I');
+ (1,'2016-04-13 11:52:17','0',0,12,'COMMITTED'),
+ (2,'2016-04-13 12:02:19','0',0,1,'COMMITTED'),
+ (3,'2016-04-13 14:23:31','0',0,1,'COMMITTED'),
+ (4,'2016-04-14 18:14:05','0',0,12,'COMMITTED'),
+ (5,'2016-04-15 11:14:44','0',0,12,'CANCELLED'),
+ (6,'2016-04-15 11:15:15','0',0,24,'COMMITTED'),
+ (7,'2016-04-15 11:20:33','0',0,36,'COMMITTED'),
+ (8,'2016-04-15 11:21:45','0',0,48,'CANCELLED'),
+ (9,'2016-04-15 11:53:38','0',0,60,'CANCELLED'),
+ (10,'2016-04-15 15:09:33','0',0,12,'COMMITTED'),
+ (11,'2016-04-15 19:15:23','0',0,12,'CANCELLED'),
+ (12,'2016-04-16 13:09:30','0',0,12,'CANCELLED'),
+ (13,'2016-04-16 17:59:11','0',0,12,'Completed with Errors'),
+ (14,'2016-04-16 18:03:00','0',0,24,'Completed with Errors'),
+ (15,'2016-04-18 10:38:29','0',0,36,'Completed with Errors'),
+ (16,'2016-04-18 11:09:00','0',0,12,'Completed with Errors'),
+ (17,'2016-04-18 11:09:44','0',0,24,'Completed with Errors'),
+ (18,'2016-04-18 11:28:47','0',0,12,'Completed with Errors');
 /*!40000 ALTER TABLE `bill_run_master` ENABLE KEYS */;
 
 
@@ -431,48 +663,6 @@ CREATE TABLE `category_pipe_size_mapping` (
 
 
 --
--- Table structure for table `watererp`.`cdx`
---
-
-DROP TABLE IF EXISTS `cdx`;
-CREATE TABLE `cdx` (
-  `id` bigint(20) NOT NULL default '0',
-  `reversal_ref` varchar(255) default NULL,
-  `receipt_no` varchar(255) default NULL,
-  `receipt_amt` varchar(255) default NULL,
-  `receipt_dt` date default NULL,
-  `receipt_time` varchar(255) default NULL,
-  `receipt_mode` varchar(255) default NULL,
-  `instr_no` varchar(255) default NULL,
-  `instr_dt` date default NULL,
-  `instr_issuer` varchar(255) default NULL,
-  `svr_status` varchar(255) default NULL,
-  `can` varchar(255) default NULL,
-  `cons_name` varchar(255) default NULL,
-  `terminal_id` varchar(255) default NULL,
-  `coll_time` timestamp NULL default NULL,
-  `txn_status` varchar(255) default NULL,
-  `meter_reader_id` varchar(255) default NULL,
-  `user_id` varchar(255) default NULL,
-  `remarks` varchar(255) default NULL,
-  `settlement_id` varchar(255) default NULL,
-  `ext_settlement_id` varchar(255) default NULL,
-  `lat` varchar(255) default NULL,
-  `long_i` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`cdx`
---
-
-/*!40000 ALTER TABLE `cdx` DISABLE KEYS */;
-INSERT INTO `cdx` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_time`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`) VALUES 
- (1,'ReversalRef1','ReceiptNo1','ReceiptAmt1','2016-03-18','ReceiptTime1','ReceiptMode1',NULL,'2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI1'),
- (2,'ReversalRef2','ReceiptNo2','ReceiptAmt2','2016-03-18','ReceiptTime2','ReceiptMode2','InstrNo2','2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI2');
-/*!40000 ALTER TABLE `cdx` ENABLE KEYS */;
-
-
---
 -- Table structure for table `watererp`.`coll_details`
 --
 
@@ -537,15 +727,6 @@ CREATE TABLE `collection_type_master` (
 --
 
 /*!40000 ALTER TABLE `collection_type_master` DISABLE KEYS */;
-INSERT INTO `collection_type_master` (`id`,`coll_name`,`txn_type`) VALUES 
- (1,'BILL PAYMENT','C'),
- (2,'NEW CONNECTION','C'),
- (3,'RECONNECTION','C'),
- (4,'PENALTY','C'),
- (5,'EXPENSE 1','E'),
- (6,'EXPENSE 2','E'),
- (7,'EXPENSE 3','E'),
- (8,'EXPENSE 4','E');
 /*!40000 ALTER TABLE `collection_type_master` ENABLE KEYS */;
 
 
@@ -2615,8 +2796,8 @@ CREATE TABLE `cust_meter_mapping` (
   PRIMARY KEY  (`id`),
   KEY `fk_custmetermapping_custdetails_id` (`cust_details_id`),
   KEY `fk_custmetermapping_meterdetails_id` (`meter_details_id`),
-  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
-  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
+  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
+  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2690,82 +2871,6 @@ CREATE TABLE `customer_complaints` (
 
 /*!40000 ALTER TABLE `customer_complaints` DISABLE KEYS */;
 /*!40000 ALTER TABLE `customer_complaints` ENABLE KEYS */;
-
-
---
--- Table structure for table `watererp`.`cx`
---
-
-DROP TABLE IF EXISTS `cx`;
-CREATE TABLE `cx` (
-  `id` bigint(20) NOT NULL default '0',
-  `can` varchar(255) NOT NULL,
-  `div_code` varchar(255) default NULL,
-  `sec_code` varchar(255) default NULL,
-  `sec_name` varchar(255) default NULL,
-  `met_reader_code` varchar(255) default NULL,
-  `conn_date` date default NULL,
-  `cons_name` varchar(255) NOT NULL,
-  `house_no` varchar(255) default NULL,
-  `address` varchar(255) default NULL,
-  `city` varchar(255) default NULL,
-  `pin_code` varchar(255) default NULL,
-  `category` varchar(255) default NULL,
-  `pipe_size` float default NULL,
-  `board_meter` varchar(255) default NULL,
-  `sewerage` varchar(255) default NULL,
-  `meter_no` varchar(255) default NULL,
-  `prev_bill_type` varchar(255) default NULL,
-  `prev_bill_month` date default NULL,
-  `prev_avg_kl` float default NULL,
-  `met_reading_dt` date default NULL,
-  `prev_reading` float default NULL,
-  `met_reading_mo` date default NULL,
-  `met_avg_kl` float default NULL,
-  `arrears` float default NULL,
-  `reversal_amt` float default NULL,
-  `installment` float default NULL,
-  `other_charges` float default NULL,
-  `surcharge` float default NULL,
-  `hrs_surcharge` varchar(255) default NULL,
-  `res_units` bigint(20) default NULL,
-  `met_cost_installment` float default NULL,
-  `int_on_arrears` float default NULL,
-  `last_pymt_dt` date default NULL,
-  `last_pymt_amt` float default NULL,
-  `mobile_no` varchar(255) default NULL,
-  `cc_flag` varchar(255) default NULL,
-  `cp_flag` varchar(255) default NULL,
-  `notice_flag` varchar(255) default NULL,
-  `dr_flag` varchar(255) default NULL,
-  `lat` varchar(255) default NULL,
-  `longi` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`cx`
---
-
-/*!40000 ALTER TABLE `cx` DISABLE KEYS */;
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (1,'613427474','15','0614','MADHAPUR','0000','2005-04-19','R.PRATIBHA ANNAPURNA','5-109/10/22','RADHE NAGAR COLONY,GACHIBOWLI','','500032','D',0.5,'F','T','05505137','U','2013-10-01',10,'2016-03-13',0,NULL,10,680.06,0,0,0,0,'F',0,0,5.06,'2013-11-30',2000,'0000000000','1','1','0','1','0','0'),
- (2,'613472557','15','0614','MADHAPUR','0000','2005-05-25','N.MANJULATHA','PLOT NO.21','RADHE NAGAR COLONY,H.S.DARGA','','500032','D',0.5,'F','T','05-1-005551','R','2013-10-01',10,'2016-03-13',0,NULL,10,2785.07,0,0,0,0,'F',0,0,9.57,'2013-11-30',200,'0000000000','0','0','0','1','0','0'),
- (3,'613472562','15','0614','MADHAPUR','0000','2005-05-25','G.MURALI MOHAN','H.NO.33','RADHE NAGAR COLONY,H.S.DARGA.','','500032','D',0.5,'F','T','05-1-004920','R','2013-10-01',15,'2016-03-13',0,NULL,0,6924.29,0,0,0,0,'F',0,0,61.94,'2013-11-30',250,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (4,'613577519','15','0614','MADHAPUR','0000','2005-09-21','K.V.V.BALA SUBRAMANA','PLOT NO.19 SY.47','RADHA NAGAR RAIDURGA,MADHAPUR','','500032','D',0.5,'F','T','05-1-0017909','R','2013-10-01',15,'2016-03-13',0,NULL,6,31417.3,0,0,0,0,'F',0,0,329.73,'2013-11-30',247,'0000000000','0','0','0','1','0','0'),
- (5,'617738493','15','0614','MADHAPUR','0000','2012-08-11','VANIN','3-615/3','PLOT NO. 195','','','D',0.5,'F','T','12B40628','R','2013-10-01',15,'2016-03-13',0,NULL,15,2508.88,0,0,0,0,'F',1,0,6.38,'2013-11-30',260,'0000000000','0','0','0','1','0','0'),
- (6,'617738918','15','0614','MADHAPUR','0000','2012-07-14','K RAVI','1-60/30/138/135','ANJAIAH NAGAR,GACHIBOWLI','','','D',0.5,'F','T','12A19467','L','2013-10-01',15,'2016-03-13',0,'2012-06-01',0,3032.75,3400,0,0,0,'F',1,0,12.75,'2013-11-30',380,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (7,'617757078','15','0614','MADHAPUR','0000','2012-09-10','MALOTH.LACHIRAM NAYAK','1-57/31','RAJEEV NAGAR,GACHIBOWLI','','','D',0.5,'F','T','12B92564','M','2013-10-01',15,'2016-03-13',10000,'2013-10-01',0,2481.38,0,0,0,0,'F',1,0,6.38,'2013-11-30',500,'0000000000','0','0','0','1','0','0'),
- (8,'617757083','15','0614','MADHAPUR','0000','2012-09-15','P HIMA BINDU','1-58/103','RAJEEV NAGAR,GACHIBOWLI','','','D',0.5,'F','T','11B35430','M','2013-10-01',15,'2016-03-13',100000,'2013-10-01',0,2581.38,0,0,0,0,'F',1,0,6.38,'2013-11-30',400,'0000000000','0','0','0','1','0','0'),
- (9,'617757111','15','0614','MADHAPUR','0000','2012-08-20','JAFFAR BEE','H.NO.2-63/2/A3','CHINNA ANJAIAH NAGAR,GACHIBOWL','','','D',0.5,'F','T','12B40792','L','2013-10-01',15,'2016-03-13',0,'2012-07-01',0,2995.56,3187.5,0,0,0,'F',1,0,8.06,'2013-11-30',100,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (10,'617757186','15','0614','MADHAPUR','0000','2012-09-26','SMT.SHIVALINGAMMA','2-62/2/A/10','GACHIBOWLI VILLAGE','','','D',0.5,'F','T','12B36048','L','2013-10-01',15,'2016-03-13',0,'2012-08-01',0,2746.38,2975,0,0,0,'F',1,0,6.38,'2013-11-30',235,'0000000000','0','0','0','1','0','0'),
- (11,'617771922','15','0614','MADHAPUR','0000','2012-11-01','SYED AZEEM','1-14','OLD GACHIBOWLI','','','D',0.5,'F','T','','L','2013-10-01',15,'2016-03-13',0,NULL,0,2100,2550,0,0,0,'F',1,0,0,'2013-11-30',450,'0000000000','0','0','0','1','0','0'),
- (12,'617781451','15','0614','MADHAPUR','0000','2012-11-15','SRINIVAS','1-110/A/32','KONDAPUR W/S COLONY,KONDAPUR','','','D',0.5,'F','T','12B53322','M','2013-10-01',15,'2016-03-13',400000,'2013-10-01',0,1750,0,0,0,0,'F',1,0,0,'2013-11-30',800,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (13,'617781710','15','0614','MADHAPUR','0000','2012-11-10','K.DEVIDAS','3-618/2,P.NO.540/B','SCB NAGAR,NEW HAFEEZPET','','','D',0.5,'F','T','12B53305','M','2013-10-01',15,'2016-03-13',500000,'2013-10-01',0,2338,0,0,0,0,'F',2,0,0,'2013-11-30',212,'0000000000','0','0','0','1','0','0');
-/*!40000 ALTER TABLE `cx` ENABLE KEYS */;
 
 
 --
@@ -2883,29 +2988,30 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffMaster.xml','2016-04-01 15:34:54',89,'EXECUTED','7:de67571b345cd24609fcbc1d6d8e12ab','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160401094431','jhipster','classpath:config/liquibase/changelog/20160401094431_added_entity_TariffCharges.xml','2016-04-01 15:34:56',90,'EXECUTED','7:84a4098f6e6489da14e4b14c2d948a2c','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-04-03 16:37:33',93,'EXECUTED','7:1d7e8751c1e0e86930e4f6e3c3f39010','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-04-05 09:42:29',95,'EXECUTED','7:0fd80d99e3a222669ac0fcbe98a3754e','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160406042024','jhipster','classpath:config/liquibase/changelog/20160406042024_added_entity_InstrumentIssuerMaster.xml','2016-04-06 10:33:04',98,'EXECUTED','7:e6ddd2edc49130805cd0d945da5c8bff','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-04-05 09:42:30',96,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160406042024','jhipster','classpath:config/liquibase/changelog/20160406042024_added_entity_InstrumentIssuerMaster.xml','2016-04-06 10:33:04',98,'EXECUTED','7:e6ddd2edc49130805cd0d945da5c8bff','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml','2016-04-12 13:09:15',104,'EXECUTED','7:c759f81b18397b40cc05e2759e68e9e9','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-04-12 13:09:16',105,'EXECUTED','7:a6212010b6b0806261cb83574604c99f','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160409042538','jhipster','classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml','2016-04-12 13:09:17',107,'EXECUTED','7:16829833f2d3e87199a121db96980eaf','createTable','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160409042538','jhipster','classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml','2016-04-12 13:09:17',107,'EXECUTED','7:16829833f2d3e87199a121db96980eaf','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160412142749','jhipster','classpath:config/liquibase/changelog/20160412142749_added_entity_BillRunMaster.xml','2016-04-13 11:50:30',109,'EXECUTED','7:b34ea10d67f40bb5c95e7ad4be486e01','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-04-13 11:50:30',110,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-13 12:52:55',111,'EXECUTED','7:6958119a3e7c83241e310c06bd884282','createTable, dropDefaultValue (x3), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-13 12:52:57',112,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL);
+ ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-04-13 11:50:30',110,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-04-13 12:53:00',113,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
- ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-04-13 12:53:01',114,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-04-13 12:53:01',115,'EXECUTED','7:68db58ac422a749fec3dc3ab31930f41','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-04-13 12:53:03',118,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
- ('20160329064157','jhipster','classpath:config/liquibase/changelog/20160329064157_added_entity_ComplaintTypeMaster.xml','2016-04-15 19:03:50',119,'EXECUTED','7:925d2a76e3b71e5bc7daf39c4f8ee2b5','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-13 12:52:57',112,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
+ ('20160329064157','jhipster','classpath:config/liquibase/changelog/20160329064157_added_entity_ComplaintTypeMaster.xml','2016-04-13 13:19:32',120,'EXECUTED','7:925d2a76e3b71e5bc7daf39c4f8ee2b5','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160413093028','jhipster','classpath:config/liquibase/changelog/20160413093028_added_entity_MeterStatus.xml','2016-04-18 12:57:45',121,'EXECUTED','7:4d7c1ce6ba1e28d5591ed0f73c0058a8','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-04-18 12:57:45',122,'EXECUTED','7:5a4422703a44b3283529717af68a7e91','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-04-18 12:57:46',123,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-04-15 19:03:51',120,'EXECUTED','7:4447d052e2e7f65df6e84f8092a18afb','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-04-18 11:04:46',121,'EXECUTED','7:1128b00324be2ae65e6b38b670f60e36','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-04-18 11:04:47',122,'EXECUTED','7:86e8348b225c581edd72d5d4787583ad','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-04-18 11:04:48',123,'EXECUTED','7:5fc5d42163edf25d27484172b6a31d64','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+ ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-18 12:57:47',124,'EXECUTED','7:4ca16e73840d443a23431ee76e2b3f73','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
+ ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-04-18 13:01:24',125,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
+ ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-04-18 13:01:24',126,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-04-18 13:01:24',127,'EXECUTED','7:74e096fa5e9ab1d7a353aefc6702527a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-04-18 13:01:24',128,'EXECUTED','7:1128b00324be2ae65e6b38b670f60e36','createTable','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-04-18 13:01:26',129,'EXECUTED','7:86e8348b225c581edd72d5d4787583ad','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
+ ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-04-18 13:01:27',130,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
+ ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-04-18 13:01:27',131,'EXECUTED','7:4447d052e2e7f65df6e84f8092a18afb','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-04-18 13:01:28',132,'EXECUTED','7:5fc5d42163edf25d27484172b6a31d64','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -3337,12 +3443,12 @@ INSERT INTO `feasibility_status` (`id`,`status`) VALUES
 DROP TABLE IF EXISTS `feasibility_study`;
 CREATE TABLE `feasibility_study` (
   `id` bigint(20) NOT NULL auto_increment,
-  `created_date` timestamp NULL default NULL,
-  `modified_date` timestamp NULL default NULL,
-  `prepared_date` timestamp NULL default NULL,
-  `zonal_head_approval_date` timestamp NULL default NULL,
-  `dept_head_inspected_date` timestamp NULL default NULL,
-  `operation_mangrapprove_date` timestamp NULL default NULL,
+  `created_date` timestamp NULL,
+  `modified_date` timestamp NULL,
+  `prepared_date` timestamp NULL,
+  `zonal_head_approval_date` timestamp NULL,
+  `dept_head_inspected_date` timestamp NULL,
+  `operation_mangrapprove_date` timestamp NULL,
   `status` int(11) default NULL,
   `division_master_id` bigint(20) default NULL,
   `zone_master_id` bigint(20) default NULL,
@@ -3472,9 +3578,9 @@ CREATE TABLE `instrument_issuer_master` (
 
 /*!40000 ALTER TABLE `instrument_issuer_master` DISABLE KEYS */;
 INSERT INTO `instrument_issuer_master` (`id`,`instrument_issuer`) VALUES 
- (1,'ISSUER1'),
- (2,'ISSUER2'),
- (3,'ISSUER3');
+ (1,'issuer1'),
+ (2,'issuer2'),
+ (3,'issuer3');
 /*!40000 ALTER TABLE `instrument_issuer_master` ENABLE KEYS */;
 
 
@@ -3695,6 +3801,8 @@ CREATE TABLE `jhi_authority` (
 /*!40000 ALTER TABLE `jhi_authority` DISABLE KEYS */;
 INSERT INTO `jhi_authority` (`name`) VALUES 
  ('ROLE_ADMIN'),
+ ('ROLE_BILLRUN'),
+ ('ROLE_BILLRUN_MANAGER'),
  ('ROLE_CUSTOMER'),
  ('ROLE_EMPLOYEE'),
  ('ROLE_USER');
@@ -4038,14 +4146,29 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (297,'admin','2016-04-12 16:42:49','AUTHENTICATION_SUCCESS'),
  (298,'admin','2016-04-12 17:07:08','AUTHENTICATION_SUCCESS'),
  (299,'admin','2016-04-12 18:38:02','AUTHENTICATION_SUCCESS'),
- (300,'admin','2016-04-13 14:22:08','AUTHENTICATION_SUCCESS'),
- (301,'admin','2016-04-13 14:22:26','AUTHENTICATION_SUCCESS');
+ (300,'sf0015','2016-04-13 13:28:30','AUTHENTICATION_SUCCESS'),
+ (301,'admin','2016-04-13 13:28:49','AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
- (302,'admin','2016-04-16 10:20:31','AUTHENTICATION_SUCCESS'),
- (303,'admin','2016-04-16 12:19:34','AUTHENTICATION_SUCCESS'),
- (304,'admin','2016-04-16 14:01:21','AUTHENTICATION_SUCCESS'),
- (305,'admin','2016-04-16 17:11:06','AUTHENTICATION_SUCCESS'),
- (306,'admin','2016-04-16 17:15:10','AUTHENTICATION_SUCCESS');
+ (302,'admin','2016-04-15 15:06:37','AUTHENTICATION_SUCCESS'),
+ (303,'admin','2016-04-15 15:06:42','AUTHENTICATION_SUCCESS'),
+ (304,'billrunuser','2016-04-16 05:49:54','AUTHENTICATION_FAILURE'),
+ (305,'admin','2016-04-16 05:50:10','AUTHENTICATION_SUCCESS'),
+ (306,'billrunuser','2016-04-16 05:54:11','AUTHENTICATION_SUCCESS'),
+ (307,'admin','2016-04-16 05:54:49','AUTHENTICATION_SUCCESS'),
+ (308,'admin','2016-04-16 11:37:25','AUTHENTICATION_SUCCESS'),
+ (309,'billrunuser','2016-04-16 11:46:09','AUTHENTICATION_SUCCESS'),
+ (310,'admin','2016-04-16 11:53:00','AUTHENTICATION_SUCCESS'),
+ (311,'billrunuser','2016-04-16 11:54:58','AUTHENTICATION_SUCCESS'),
+ (312,'billrunuser','2016-04-16 12:22:23','AUTHENTICATION_SUCCESS'),
+ (313,'admin','2016-04-16 12:43:14','AUTHENTICATION_SUCCESS'),
+ (314,'billrunuser','2016-04-16 13:09:14','AUTHENTICATION_SUCCESS'),
+ (315,'admin','2016-04-16 15:06:34','AUTHENTICATION_SUCCESS'),
+ (316,'billrunmgr','2016-04-16 17:30:45','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (317,'billrunuser','2016-04-16 17:39:57','AUTHENTICATION_SUCCESS'),
+ (318,'billrunmgr','2016-04-16 17:44:26','AUTHENTICATION_SUCCESS'),
+ (319,'admin','2016-04-18 10:38:23','AUTHENTICATION_SUCCESS'),
+ (320,'billrunuser','2016-04-18 10:52:08','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -4696,20 +4819,50 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (298,'sessionId','6D21A0A107AB497036F38822DF3019B2'),
  (299,'remoteAddress','0:0:0:0:0:0:0:1'),
  (299,'sessionId','DC4BCD4C9CAD397114A90283F6CD0EF4'),
- (300,'remoteAddress','127.0.0.1'),
- (300,'sessionId','200F65BFEF3B4B03FEF7157C5824A25F'),
- (301,'remoteAddress','127.0.0.1'),
- (301,'sessionId','A47E0923CCC3F5F37D0743C58F0A63A5'),
+ (300,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (300,'sessionId','66B8729D086BC6A3CAF9E29BA5D02DBB'),
+ (301,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (301,'sessionId','D9239A9C8F9A5DB94FF28D6B3D4E3CD7'),
  (302,'remoteAddress','0:0:0:0:0:0:0:1'),
- (302,'sessionId','54DF770F7B3762E3535ECB81ABC91AC3'),
+ (302,'sessionId','7A80F2747E789302AE7AEB41D7937FA6'),
  (303,'remoteAddress','0:0:0:0:0:0:0:1'),
- (303,'sessionId','640B965B5885BC5B02C8A1936B690DE9'),
- (304,'remoteAddress','0:0:0:0:0:0:0:1'),
- (304,'sessionId','476E0CE92287DD050EF7688BBC6FFF44'),
+ (303,'sessionId','0AA80D72F8B32E63BDB46ECF6E762435'),
+ (304,'message','Bad credentials'),
+ (304,'type','org.springframework.security.authentication.BadCredentialsException'),
  (305,'remoteAddress','0:0:0:0:0:0:0:1'),
- (305,'sessionId','3BA8E6624C6694C27BA32C32C2C49866'),
+ (305,'sessionId','273EB5F1A4C7B8171617A5136DEB7ED1'),
  (306,'remoteAddress','0:0:0:0:0:0:0:1'),
- (306,'sessionId','B257B74029BA020A62A2D51D8FC5342B');
+ (306,'sessionId','703E44E2351A104800BAFD5D4C3F0FAD'),
+ (307,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (307,'sessionId','7254CABF4255E21CF2AD15F6E5660CD3'),
+ (308,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (308,'sessionId','8A6577C5415D4ECCA271302E2FF09723'),
+ (309,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (309,'sessionId','C787CB233310712312D6B4367D64320F'),
+ (310,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (310,'sessionId','9DE82C3900C2689A1B330FB394C83587'),
+ (311,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (311,'sessionId','8C9DF7764BB5F76331FD09B94E0542C0'),
+ (312,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (312,'sessionId','2F2C8288C3F6902409842477E3CA9A91'),
+ (313,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (313,'sessionId','490A74A0C2F737528F8405F605BC032F'),
+ (314,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (314,'sessionId','4F3E502C6B2BAA7D273BF4BEDECA7FD2'),
+ (315,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (315,'sessionId','7E163D42816608A071526DCF66FA6251'),
+ (316,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (316,'sessionId','1903E0005826676F779BFE5DBBD4CF79'),
+ (317,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (317,'sessionId','D3549569B7838E8A3F85413733FA3E3B'),
+ (318,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (318,'sessionId','9B54A04ADD5BE27E80F86539365307B3'),
+ (319,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (319,'sessionId','C95807D88D4AF0465D03AC34708BB614'),
+ (320,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (320,'sessionId','B1B44C550403E983DF85086F5B04536D');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -4778,13 +4931,13 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KU6VZmBHcK3RKoGgwhLDcA==',3,'CtWXmv/L/eFLnOkikbadrw==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('lqqkRZHMgCV5ZRZsdmOctA==',3,'Sqs4OVQ6a8Sm5+xrE5sxsg==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ltSsrr4LGe85jyi2xaM+GQ==',5,'O2cmSBS0fFhBkpiM4zdCkA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mJ9QRewb5tZnJtq1JS6BeQ==',3,'Y4wzvxHQSVqsUa7uMIa7ug==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('nhPyY9rXtBVRZ+qT5T9uwQ==',3,'XnQlpOF70aXhsnej7OWLug==','2016-04-13','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nicdzpFVE7fA8XUEciBnBg==',15,'jjnMZHjRSEuYg7FgpryrNw==','2016-03-29','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nK0IBkLMvCyRtRagV7xkIA==',15,'O271OweAwksyy+Yei161xA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
@@ -4793,24 +4946,24 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('R6uDzkAd46IU0D3H4E0FVA==',3,'XcfBIoCDayNepzQsEjnkJg==','2016-03-17','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('S1GAV9aSPF32lcInQpui/w==',3,'geEddSY/xq1k6/S7FA3Xug==','2016-04-18','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('TN6nvrS4DAcjld/PAsVu3w==',3,'pWLUEigr2nT7tCBerVO3rw==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('uBmBvYHKZMXr5UHwlzKAPA==',3,'oIXVYnHZ2CAqS/lxhNHtBQ==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('UDMPyK37cLIktTJg9P5RrQ==',3,'ShKdK3zme2OSRapV6fqKMw==','2016-03-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w8R34xrr8QJmlP5bdbRg0Q==',3,'xrnCE2P4+F4Gm2wY/shF3w==','2016-03-02','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
- ('Waj7OoRQvtqW2FGm3rwFHw==',3,'DScvaJTEMdPTgvNKd4KoRg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('Waj7OoRQvtqW2FGm3rwFHw==',3,'DScvaJTEMdPTgvNKd4KoRg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('wtWMmV27ptr0Uutob4MNiQ==',3,'kzJYJannR0ZBgbGhEbYHqQ==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('wtWMmV27ptr0Uutob4MNiQ==',3,'kzJYJannR0ZBgbGhEbYHqQ==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('WWghGZDKONZwm9s4KmCiUQ==',3,'Kj+0GXNB2l6R0JtRxqHw/Q==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('x4nyB9VRFeiND5t0i1DU8Q==',3,'cEW9l632DDQaJ+cxS1szpw==','2016-02-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('x4RtQD81f5es8yJniJlwMg==',3,'3Uiil1Q8ezwtbjsEjH7MaQ==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('XDGXmczwil8KeD6KL6Yt1w==',3,'fbROZLGioPS/YUzyTyG2kg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('xf8lo1lE43DIRysCXswyzQ==',3,'BRRKxIW3118BhhPFt6AyXA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('xGIKoFe4g2VAv1/PRp0JLA==',3,'vsc1u7uz/s2rs9AmUbdl+g==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
-INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('xGIKoFe4g2VAv1/PRp0JLA==',3,'vsc1u7uz/s2rs9AmUbdl+g==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('Y0+K+WI0X0yusnSLJDqyPA==',3,'rDvuHhLtRMzJOhkb63MQ7g==','2016-04-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('Y14PvuTMLFbPHaMU7KlW9A==',3,'yHJLgjbsyzRXqkVlnn1+bA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('Y14PvuTMLFbPHaMU7KlW9A==',3,'yHJLgjbsyzRXqkVlnn1+bA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('yC0cZ89A6opEpVDUp7MPLA==',3,'JNF2a3Nb1kSNcOuOEsAR4Q==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('yeGR7p45ZYo74KGrWntAZA==',3,'ytU215AgvrBXIiLMgsecaw==','2016-04-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('ynZOMTxODvqkNvAvZyrabw==',30,'/neHN/ixIp/JbDwgJM2N3A==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('zFE08dIb3ttfqV37i6eHKA==',3,'4X2BHKVSVF8Lb6nvKk79IQ==','2016-04-12','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('zy6YAeHzjqbMHb8NPwiMQg==',3,'RfJrmS7MnC9GxnetOTdgpg==','2016-03-11','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
@@ -4883,7 +5036,9 @@ INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`e
 INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
  (27,'sf0027','$2a$10$F58do6ARzxNnWwXFF3WVa.oH4Cnwfu9GGESf5c64Av7PnAVDDHQfu','Nobert','Kamba','sf0027@localhost','','en','88464590975638599993',NULL,'anonymousUser','2016-03-18 12:53:16',NULL,'sf0027','2016-03-28 12:57:46'),
  (28,'sf0028','$2a$10$K.A7jrXE..8CIm7SoeVMBepZyR2WdpZeQpPyUOfY429jeBaL.OMju','Francis','Hume','sf0028@localhost','','en','71805558970907066489',NULL,'anonymousUser','2016-03-18 12:53:33',NULL,'sf0028','2016-03-28 12:58:11'),
- (29,'sf0029','$2a$10$L1IXkaggwuSLeeF0fRR9CeMb/Qq6IM7EXLJI/jsdfFSOUQWf4oPHS',NULL,NULL,'sf0029@localhost','','en','68914493240806760364',NULL,'anonymousUser','2016-03-21 16:19:52',NULL,'admin','2016-03-21 16:20:23');
+ (29,'sf0029','$2a$10$L1IXkaggwuSLeeF0fRR9CeMb/Qq6IM7EXLJI/jsdfFSOUQWf4oPHS',NULL,NULL,'sf0029@localhost','','en','68914493240806760364',NULL,'anonymousUser','2016-03-21 16:19:52',NULL,'admin','2016-03-21 16:20:23'),
+ (30,'billrunuser','$2a$10$I.tUzJDgXrahq.VwnsPWB.0ttM55FfufrXt1LJ1wJHQdNHQjXj8em','Bill Run','User','srinigattu@gmail.com','','en',NULL,NULL,'admin','2016-04-16 05:48:43',NULL,'anonymousUser','2016-04-16 05:53:57'),
+ (31,'billrunmgr','$2a$10$8OUigJFHCFBPGqcDxXaEw./lNGSnb9NalwH4b1nzUawcfBTQlVMEm','Bill Run','Manager','srinivas@callippus.co.uk','','en',NULL,NULL,'admin','2016-04-16 17:25:28',NULL,'anonymousUser','2016-04-16 17:30:29');
 /*!40000 ALTER TABLE `jhi_user` ENABLE KEYS */;
 
 
@@ -4909,6 +5064,8 @@ CREATE TABLE `jhi_user_authority` (
 INSERT INTO `jhi_user_authority` (`user_id`,`authority_name`) VALUES 
  (1,'ROLE_ADMIN'),
  (3,'ROLE_ADMIN'),
+ (30,'ROLE_BILLRUN'),
+ (31,'ROLE_BILLRUN_MANAGER'),
  (5,'ROLE_CUSTOMER'),
  (1,'ROLE_USER'),
  (3,'ROLE_USER'),
@@ -5138,7 +5295,7 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (20,'Bill Of Material','#/billOfMaterials','2016-04-01 00:00:00'),
  (21,'Access List','#/accessLists','2016-03-15 00:00:00'),
  (22,'Bill Full Details','#/billFullDetailss','2016-03-15 00:00:00'),
- (23,'Collection Details','#/collDetailss/new','2016-03-15 00:00:00'),
+ (23,'Collection Details','#/collDetailss','2016-03-15 00:00:00'),
  (24,'Current Users','#/currentUserss','2016-03-15 00:00:00'),
  (25,'Customer Details','#/custDetailss','2016-03-15 00:00:00'),
  (26,'Terminal','#/terminals','2016-03-15 00:00:00'),
@@ -5146,7 +5303,8 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (28,'Version','#/versions','2016-03-15 00:00:00'),
  (29,'Complaint Type Master','#/complaintTypeMasters','2016-03-29 00:00:00'),
  (30,'Customer Complaints','#/customerComplaintss','2016-03-29 00:00:00'),
- (31,'Bill Details','#/billDetailss/new','2016-04-12 00:00:00');
+ (31,'Bill Run Master','#/billRunMasters','2016-04-01 00:00:00'),
+ (32,'New Bill Run','#/billRunMasters/new','2016-04-01 00:00:00');
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -5202,7 +5360,8 @@ INSERT INTO `menu_item2_url` (`id`,`menu_item_id`,`url_id`) VALUES
  (28,28,28),
  (29,29,29),
  (30,30,30),
- (31,31,31);
+ (31,31,31),
+ (32,32,32);
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
 
 
@@ -5218,7 +5377,10 @@ CREATE TABLE `meter_details` (
   `meter_make` varchar(255) default NULL,
   `min` float default NULL,
   `max` float default NULL,
-  PRIMARY KEY  (`id`)
+  `meter_status_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_meterdetails_meterstatus_id` (`meter_status_id`),
+  CONSTRAINT `fk_meterdetails_meterstatus_id` FOREIGN KEY (`meter_status_id`) REFERENCES `meter_status` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -5227,6 +5389,25 @@ CREATE TABLE `meter_details` (
 
 /*!40000 ALTER TABLE `meter_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `meter_details` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`meter_status`
+--
+
+DROP TABLE IF EXISTS `meter_status`;
+CREATE TABLE `meter_status` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `status` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`meter_status`
+--
+
+/*!40000 ALTER TABLE `meter_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `meter_status` ENABLE KEYS */;
 
 
 --
@@ -5307,7 +5488,8 @@ INSERT INTO `module` (`id`,`name`,`priority`,`modified_date`) VALUES
  (2,'Connection',2,'2016-03-10 00:00:00'),
  (3,'Items Details',3,'2016-03-30 00:00:00'),
  (4,'Billing and Collection',3,'2016-03-15 00:00:00'),
- (5,'Customer Care',4,'2016-03-29 00:00:00');
+ (5,'Customer Care',4,'2016-03-29 00:00:00'),
+ (6,'Bill Cycle Run',5,'2016-04-04 00:00:00');
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 
 
@@ -5364,7 +5546,8 @@ INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VAL
  (28,8,4,28),
  (29,2,5,29),
  (30,1,5,30),
- (31,9,4,31);
+ (31,2,6,31),
+ (32,1,6,32);
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
 
@@ -5548,9 +5731,9 @@ CREATE TABLE `payment_types` (
 
 /*!40000 ALTER TABLE `payment_types` DISABLE KEYS */;
 INSERT INTO `payment_types` (`id`,`payment_mode`) VALUES 
- (1,'CASH'),
- (2,'DEMAND DRAFT (DD)'),
- (3,'CHEQUE');
+ (1,'Cash'),
+ (2,'Demand Draft (DD)'),
+ (3,'Cheque');
 /*!40000 ALTER TABLE `payment_types` ENABLE KEYS */;
 
 
@@ -5677,7 +5860,7 @@ CREATE TABLE `receipt` (
   `branch_name` varchar(255) default NULL,
   `check_or_dd_date` date default NULL,
   `check_or_dd_no` varchar(255) default NULL,
-  `bill_date` date default NULL,
+  `receipt_date` date default NULL,
   `application_txn_id` bigint(20) default NULL,
   `payment_types_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
@@ -6354,7 +6537,8 @@ INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES
  (28,'/versions',1),
  (29,'/complaintTypeMasters',1),
  (30,'/customerComplaintss',1),
- (31,'/billDetailss/new',1);
+ (31,'/billRunMasters',1),
+ (32,'/billRunDetails',1);
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 
@@ -6418,7 +6602,10 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (37,29,'ROLE_ADMIN'),
  (38,30,'ROLE_ADMIN'),
  (39,30,'ROLE_CUSTOMER'),
- (40,31,'ROLE_ADMIN');
+ (40,31,'ROLE_BILLRUN'),
+ (41,32,'ROLE_BILLRUN'),
+ (42,31,'ROLE_BILLRUN_MANAGER'),
+ (43,32,'ROLE_BILLRUN_MANAGER');
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 

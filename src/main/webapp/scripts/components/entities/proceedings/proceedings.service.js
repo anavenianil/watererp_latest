@@ -13,4 +13,9 @@ angular.module('watererpApp')
             },
             'update': { method:'PUT' }
         });
+    })
+    .factory('GetProceedings', function ($resource, DateUtils) {
+    	return $resource('api/proceedingss/forAppTxn/:applicationTxnId', {}, {
+    		'query': { method: 'GET', isArray: true}
+        });
     });

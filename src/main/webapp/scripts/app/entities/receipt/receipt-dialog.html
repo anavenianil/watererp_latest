@@ -2,7 +2,7 @@
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create receipt</h3>
+			<h3 class="panel-title pull-left">Create Receipt</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -15,17 +15,17 @@
 								readonly />
 						</div>
 						<div class="col-sm-4">
-							<label class="control-label" for="field_billDate">Receipt
+							<label class="control-label" for="field_receiptDate">Receipt
 								Date</label>
 							<div class="form-group">
-								<div class='input-group date' id='field_billDate'>
-									<input id="field_billDate" type="text" class="form-control"
+								<div class='input-group date' id='field_receiptDate'>
+									<input id="field_receiptDate" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="receipt.billDate" max_date="maxDate"
-										is-open="datePickerForBillDate.status.opened" /> <span
+										ng-model="receipt.receiptDate" max_date="maxDate"
+										is-open="datePickerForReceiptDate.status.opened" /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
-											ng-click="datePickerForBillDateOpen($event)">
+											ng-click="datePickerForReceiptDateOpen($event)">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>

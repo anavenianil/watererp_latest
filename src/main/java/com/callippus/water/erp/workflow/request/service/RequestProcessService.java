@@ -266,7 +266,7 @@ public class RequestProcessService {
 			String reqID, String refNo, String colName, String ipAddress,
 			String newValue, String prevValue, String rowNo, String desc)
 			throws Exception {
-		log.debug("<<<<<RequestProcess<<<<<<Method>>>>>>>>>>>>>>>txnRowDetails()>>>>>>>>>");
+		log.debug("    <RequestProcess    <<Method            >>>txnRowDetails()        >");
 		WorkflowTxnDetails workflowTxnDetails = null;
 
 		workflowTxnDetails = new WorkflowTxnDetails();
@@ -295,7 +295,7 @@ public class RequestProcessService {
 	 */
 	public String submitTxnDetails(ArrayList<WorkflowTxnDetails> txnDetails)
 			throws Exception {
-		log.debug("<<<<<RequestProcess<<<<<<Method>>>>>>>>>>>>>>>submitTxnDetails(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    <<Method            >>>submitTxnDetails(RequestBean rb)        >");
 		String message = null;
 		Session session = null;
 		Transaction tx = null;
@@ -329,7 +329,7 @@ public class RequestProcessService {
 	 * @return success/failure messages
 	 */
 	public String initWorkflow() throws Exception {
-		log.debug("<<<<<RequestProcess<<<<<<Method>>>>>>>>>>>>>>>initWorkflow(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    <<Method            >>>initWorkflow(RequestBean rb)        >");
 
 		/**
 		 * get the request type id & internal workflow flag
@@ -388,7 +388,7 @@ public class RequestProcessService {
 	 */
 	public String assignRequest(WorkflowService workflowService)
 			throws Exception {
-		log.debug("<<<<<RequestProcess<<<<<<Method>>>>>>>>>>>>>>>assignRequest()>>>>>>>>>");
+		log.debug("    <RequestProcess    <<Method            >>>assignRequest()        >");
 
 		if (!CPSUtils.isNullOrEmpty(workflowService.getParentID())) {
 
@@ -421,7 +421,7 @@ public class RequestProcessService {
 				workflowService.setRequestStatus(2);//for requisition
 			}
 
-			log.debug("<<<<<<<<<<<assignRequest()>>>>>>>>>Result Message>>>>"
+			log.debug("        <<<assignRequest()        >Result Message    "
 					+ workflowService.getMessage());
 		}
 		return workflowService.getMessage();
@@ -437,11 +437,11 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public String autoDelegateProcess() throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>autoDelegateProcess(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>autoDelegateProcess(RequestBean rb)        >");
 		String parentID = null;
 
 		parentID = workflowService.getParentID();
-		log.debug("Parent ID>>>>>>>" + parentID);
+		log.debug("Parent ID    >>>" + parentID);
 
 		// userLevelWorkflowService.checkUserAutoDelegate();//added on june_30
 		// by mohib
@@ -481,7 +481,7 @@ public class RequestProcessService {
 	 */
 	public WorkflowService insertHistory(WorkflowService workflowService)
 			throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>insertHistory(WorkflowService workflowService)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>insertHistory(WorkflowService workflowService)        >");
 
 		RequestWorkflowHistory rwh = new RequestWorkflowHistory();
 
@@ -518,9 +518,9 @@ public class RequestProcessService {
 
 		request_workflow_historyRepository.save(rwh);
 
-		log.debug("hisroty ID>>>>>>>" + workflowService.getHistoryID());
-		log.debug("Assigned Date>>>>>>>" + workflowService.getAssignedDate());
-		log.debug("Stage ID>>>>>>" + workflowService.getStageID());
+		log.debug("hisroty ID    >>>" + workflowService.getHistoryID());
+		log.debug("Assigned Date    >>>" + workflowService.getAssignedDate());
+		log.debug("Stage ID    >>" + workflowService.getStageID());
 
 		workflowService.setMessage(CPSConstants.SUCCESS);
 
@@ -537,7 +537,7 @@ public class RequestProcessService {
 	 */
 	public String updateRequestHistory(String historyID, String mode,
 			String ipAddress, String remarks) throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>updateRequestHistory(String historyID, String mode)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>updateRequestHistory(String historyID, String mode)        >");
 		String message = null;
 
 		/*
@@ -563,9 +563,9 @@ public class RequestProcessService {
 				//+ remarks 
 				+ "' where id=" + historyID;
 		log.debug("SQL : updateHistory > > " + updateHistory);
-		log.debug("Mode >>>>" + mode);
+		log.debug("Mode     " + mode);
 		log.debug("History ID >>>" + historyID);
-		log.debug("IP Address>>>>" + ipAddress);
+		log.debug("IP Address    " + ipAddress);
 
 		jdbcTemplate.update(updateHistory);
 
@@ -588,7 +588,7 @@ public class RequestProcessService {
 	 */
 	public String declinedRequest(String historyID, String ipAddress,
 			String remarks) throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>declinedRequest(String historyID)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>declinedRequest(String historyID)        >");
 		return updateRequestHistory(historyID, CPSConstants.DECLINED,
 				ipAddress, remarks);
 	}
@@ -602,7 +602,7 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public String delegateRequest(WorkflowService rb) throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>delegateRequest(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>delegateRequest(RequestBean rb)        >");
 
 		/**
 		 * Change the status from pending to approved status for remaining
@@ -671,7 +671,7 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public void getRequestDetails() throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>getRequestDetails(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>getRequestDetails(RequestBean rb)        >");
 		String getRequestDetails = "select domain_object,workflow_master_id,request_master_id, request_stage, assigned_to_id from request_workflow_history where id="
 				+ workflowService.getHistoryID() + "";
 		log.debug("SQL : getRequestDetails > > " + getRequestDetails);
@@ -707,7 +707,7 @@ public class RequestProcessService {
 	 */
 
 	public String escalatedRequests() throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>escalatedRequests()>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>escalatedRequests()        >");
 
 		String escalatedList = "";
 		String requestsList = "";
@@ -845,7 +845,7 @@ public class RequestProcessService {
 	 */
 	public String checkDelegatedRequestOrNot(String historyID) throws Exception {
 		String delegatedDetails = null;
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>checkDelegatedRequestOrNot(String historyID)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>checkDelegatedRequestOrNot(String historyID)        >");
 
 		String getDelegatedUserSfid = "select rwh.assigned_to_id, rwh.id from request_workflow_history rwh, status_master sm "
 				+ "where rwh.domain_object=(select domain_object from request_workflow_history where id="
@@ -864,7 +864,7 @@ public class RequestProcessService {
 			delegatedDetails = hm.get("id") + ","
 					+ hm.get("assigned_to_id").toString();
 		}
-		log.debug("delegated details>>>>history ID,assigned to:::"
+		log.debug("delegated details    history ID,assigned to:::"
 				+ delegatedDetails);
 
 		return delegatedDetails;
@@ -879,7 +879,7 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public String checkAlreadyDelegatedOrNot(String historyID) throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>checkAlreadyDelegatedOrNot(String historyID)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>checkAlreadyDelegatedOrNot(String historyID)        >");
 
 		String delegatedHistoryID = null;
 
@@ -899,7 +899,7 @@ public class RequestProcessService {
 			HashMap<String, Object> hm = (HashMap<String, Object>) rows.get(0);
 			delegatedHistoryID = hm.get("id").toString();
 		}
-		log.debug("delegatedHistoryID>>>>" + delegatedHistoryID);
+		log.debug("delegatedHistoryID    " + delegatedHistoryID);
 
 		return delegatedHistoryID;
 	}
@@ -913,7 +913,7 @@ public class RequestProcessService {
 	 */
 	public void changeDelegateOrPendingToApprove(String historyID,
 			String stageID) throws Exception {
-		log.debug("::<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>changeDelegateOrPendingToApprove(String historyID)>>>>>>>>>");
+		log.debug("::    <RequestProcess    Method            >>>changeDelegateOrPendingToApprove(String historyID)        >");
 		try {
 
 			String updateDelegatedStatus = "update request_workflow_history rwh set rwh.status_master_id="
@@ -937,7 +937,7 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public String changePendingToDelegate(String historyID) throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>changePendingToDelegate(String historyID)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>changePendingToDelegate(String historyID)        >");
 
 		String message = null;
 
@@ -965,7 +965,7 @@ public class RequestProcessService {
 	 *             //
 	 */
 	public WorkflowService approvedRequest() throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>approvedRequest(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>approvedRequest(RequestBean rb)        >");
 		String delegatedDetails = "";
 
 		// update status to approve for all the txn details those are having
@@ -1095,7 +1095,7 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public void getDetailsAndProcessRequest() throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>getDetailsAndProcessRequest(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>getDetailsAndProcessRequest(RequestBean rb)        >");
 
 		// Get the assigned sfid for a particular workflow & stage
 		workflowService.getWorkflowAssignedSfid();
@@ -1114,7 +1114,7 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public void checkPreviousWorkflows() throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>checkPreviousWorkflows(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>checkPreviousWorkflows(RequestBean rb)        >");
 
 		String getPreviousWorkflows = "select tab1.id, tab1.workflow_master_id, rwh.request_stage, rwh.domain_object from (select domain_object, workflow_master_id, "
 				+ "max(id) id from request_workflow_history where domain_object=(select domain_object from request_workflow_history where id= "
@@ -1154,7 +1154,7 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public String getHandOverWorkFlow(String workFlowID) throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>getHandOverWorkFlow(String workFlowID)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>getHandOverWorkFlow(String workFlowID)        >");
 		String handOverWorkflow = null;
 
 		String getHandOverWorkFlow = "select to_workflow from workflow_master where id="
@@ -1169,7 +1169,7 @@ public class RequestProcessService {
 			hm = (HashMap<String, Object>) rows.get(0);
 			handOverWorkflow = hm.get("to_workflow").toString();
 		}
-		log.debug("handOverWorkflow>>>>" + handOverWorkflow);
+		log.debug("handOverWorkflow    " + handOverWorkflow);
 		return handOverWorkflow;
 	}
 
@@ -1183,7 +1183,7 @@ public class RequestProcessService {
 	 */
 	public boolean checkNextWorkFlowStage(WorkflowService workflowService)
 			throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>checkNextWorkFlowStage(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>checkNextWorkFlowStage(RequestBean rb)        >");
 		boolean status = false;
 		String checkNextStage = "select workflow_master_id from workflow where workflow_master_id="
 				+ workflowService.getWorkflowID()
@@ -1197,7 +1197,7 @@ public class RequestProcessService {
 		if (rows.size() > 0) {
 			status = true;
 		}
-		log.debug("next workflow stage>>>>" + status);
+		log.debug("next workflow stage    " + status);
 		return status;
 	}
 
@@ -1211,7 +1211,7 @@ public class RequestProcessService {
 	 */
 	public WorkflowService checkAssignedWorkflow(WorkflowService workflowService)
 			throws Exception {
-		log.debug("<<<<<RequestProcess<<<<Method>>>>>>>>>>>>>>>checkAssignedWorkflow(RequestBean rb)>>>>>>>>>");
+		log.debug("    <RequestProcess    Method            >>>checkAssignedWorkflow(RequestBean rb)        >");
 
 		// Request_workflow_history request_workflow_history =
 		// request_workflow_historyRepository.findOne(new

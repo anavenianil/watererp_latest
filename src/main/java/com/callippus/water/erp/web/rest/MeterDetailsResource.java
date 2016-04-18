@@ -1,10 +1,13 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.MeterDetails;
-import com.callippus.water.erp.repository.MeterDetailsRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,14 +16,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.callippus.water.erp.domain.MeterDetails;
+import com.callippus.water.erp.domain.MeterStatus;
+import com.callippus.water.erp.repository.MeterDetailsRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing MeterDetails.
@@ -77,10 +85,19 @@ public class MeterDetailsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<MeterDetails>> getAllMeterDetailss(Pageable pageable)
+    public ResponseEntity<List<MeterDetails>> getAllMeterDetailss(Pageable pageable,
+    		@RequestParam(value = "meterStatusId", required = false) Long meterStatusId)
         throws URISyntaxException {
         log.debug("REST request to get a page of MeterDetailss");
-        Page<MeterDetails> page = meterDetailsRepository.findAll(pageable); 
+        //Page<MeterDetails> page = meterDetailsRepository.findAll(pageable);
+        Page<MeterDetails> page;
+        if(meterStatusId != null){
+        	page = meterDetailsRepository.findByMeterStatus(pageable, meterStatusId);
+        }
+        else
+        {
+        	page = meterDetailsRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meterDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

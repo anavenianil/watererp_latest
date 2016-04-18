@@ -28,7 +28,7 @@ public class DesigBasedWorkflowService {// extends WorkflowService{
 	 * @return workflow id
 	 */
 	public void initWorkflow() throws Exception {
-		log.debug("::<<<DesigBasedWorkflowService<<<<<<<<Method>>>>>>>>>>>>>>>initWorkflow()>>>>>>>>>");
+		log.debug("::DesigBasedWorkflowServiceMethod>>>initWorkflow()>");
 		try {
 			workfowService.setWorkflowType(CPSConstants.DESIG);
 			workfowService.setWorkflowID(workfowService.decideWorkFlow());

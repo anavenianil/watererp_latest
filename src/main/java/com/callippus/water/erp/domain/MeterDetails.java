@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -36,9 +38,10 @@ public class MeterDetails implements Serializable {
     @Column(name = "max")
     private Float max;
     
-    @Column(name = "status")
-    private Integer status;
-    
+    @ManyToOne
+    @JoinColumn(name = "meter_status_id")
+    private MeterStatus meterStatus;
+
     public Long getId() {
         return id;
     }
@@ -87,12 +90,12 @@ public class MeterDetails implements Serializable {
         this.max = max;
     }
 
-    public Integer getStatus() {
-        return status;
+    public MeterStatus getMeterStatus() {
+        return meterStatus;
     }
-    
-    public void setStatus(Integer status) {
-        this.status = status;
+
+    public void setMeterStatus(MeterStatus meterStatus) {
+        this.meterStatus = meterStatus;
     }
 
     @Override
@@ -124,7 +127,6 @@ public class MeterDetails implements Serializable {
             ", meterMake='" + meterMake + "'" +
             ", min='" + min + "'" +
             ", max='" + max + "'" +
-            ", status='" + status + "'" +
             '}';
     }
 }

@@ -7,8 +7,7 @@
 			<h3 class="panel-title pull-left">Requests</h3>
 		</div>
 		<div class="list-group">
-			<div class="table-responsive" 
-			ng-hide="applicationTxn.ststus===0">
+			<div class="table-responsive" ng-hide="applicationTxn.ststus===0">
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
@@ -58,10 +57,6 @@
 					<fieldset>
 						<legend></legend>
 						<div class="row">
-							<div class="col-sm-3" ng-hide="applicationTxn.fileNumber===null">
-								<label>File Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.fileNumber}}</h5>
-							</div>
 							<div class="col-sm-3">
 								<label>Application No</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.id}}</h5>
@@ -78,79 +73,121 @@
 						<legend>Applicant Details</legend>
 						<div class="row">
 							<div class="col-sm-3">
-								<label>Full Name</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.fullName}}</h5>
-							</div>
-						<!-- </div>
-						<div class="row"> -->
-							<div class="col-sm-3">
-								<label>Home/Office Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.homeOrOfficeNumber}}</h5>
+								<label>First Name</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.firstName}}</h5>
 							</div>
 							<div class="col-sm-3">
-								<label> Regional Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.regionalNumber}}</h5>
+								<label>Middle Name</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.middleName}}</h5>
 							</div>
 							<div class="col-sm-3">
-								<label> Fax Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.faxNumber}}</h5>
+								<label>Last Name</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.lastName}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Organization Name</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.organizationName}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Designation</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.designation}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label> Mobile No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.mobileNo}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Office No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.officeNo}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Email</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.email}}</h5>
 							</div>
 						</div>
 					</fieldset>
 					<br>
 					<fieldset>
-						<legend>Address</legend>
+						<legend>Property Address</legend>
 						<div class="row">
 							<div class="col-sm-3">
-								<label> Plot Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.plotNumber}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label> Area</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.area}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label> Street</label>
+								<label>Street</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.street}}</h5>
 							</div>
 							<div class="col-sm-3">
-								<label>P.O. Box</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.poBox}}</h5>
+								<label> Plot No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.plotNo}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label> Block No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.blockNo}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>TANESCO Meter/LUKU No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.tanescoMeter}}</h5>
 							</div>
 						</div>
-						<br>
+					</fieldset>
+					<fieldset>
+						<legend>Water Connection Details</legend>
 						<div class="row">
 							<div class="col-sm-3">
-								<label> Village Executive Office</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOffice}}</h5>
+								<label>Water Connection Use</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.waterConnectionUse}}</h5>
 							</div>
 							<div class="col-sm-3">
-								<label> Village Executive Office Number</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.villageExecutiveOfficeNumber}}</h5>
-							</div>
-							<div class="col-sm-6">
-								<label> Detail Address</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.detailAddress}}</h5>
+								<label>Connection Category</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.categoryMaster.categoryName}}</h5>
 							</div>
 						</div>
 					</fieldset>
 					<br>
 					<fieldset>
-						<legend>Connection Details</legend>
+						<legend>Billing Address</legend>
 						<div class="row">
 							<div class="col-sm-3">
-								<label>Category</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.categoryMaster.categoryName}}</h5>
+								<label>Street</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.bStreet}}</h5>
 							</div>
+							<div class="col-sm-3">
+								<label>Ward</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.ward}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>DMA</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.dma}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Plot No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.bPlotNo}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Regitered Mobile</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.regiterMobile}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Documents to be attached </legend>
+						<div class="col-sm-3">
+							<label>Attached Document</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.attachedDocType}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Id Number</label>
+							<h5 class="list-group-item-heading">{{applicationTxn.idNumber}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Property Ownership Document </label>
+							<h5 class="list-group-item-heading">{{applicationTxn.propertyDoc}}</h5>
 						</div>
 					</fieldset>
 				</div>
 			</div>
 		</div>
 
-
 		<!-- ng-show="{{applicationTxn.status==0}}" -->
-		<button type="button" class="btn btn-success pull-right"  
+		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status === 0 || applicationTxn.status === 1"
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
@@ -162,42 +199,51 @@
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create
 			Feasibility
 		</button>
-		
+
 		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===3"
 			ui-sref="proceedingsForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create
 			Proceedings
 		</button>
-		
+
 		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===4"
 			ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Review
 			Proceedings
 		</button>
-		
-		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-		
-		<!-- <button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===6"
-			ui-sref="receiptForAppTxn({applicationTxnId:applicationTxn.id})">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
-		</button> -->
-		
-		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===6"
-			ui-sref="custMeterMappingForMeterAllot({applicationTxnId:applicationTxn.id})">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Meter
-		</button>
-		
+
 		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===5"
 			ui-sref="itemRequiredForApplicationTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Items
 		</button>
-		
-		
+
+		<!-- ui-sref="custMeterMappingForMeterAllot({applicationTxnId:applicationTxn.id})" -->
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===6"
+			ui-sref="applicationTxnIssueMeter({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Meter
+		</button>
+
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===7"
+			ui-sref="applicationTxnCreateCan({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Create CAN
+		</button>
+
+
+		<!-- <button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===6"
+			ui-sref="receiptForAppTxn({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
+		</button> -->
+
+
+
+
+
 
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
@@ -231,8 +277,8 @@
 									<jh-alert-error></jh-alert-error>
 									<div class="row">
 										<div class="col-sm-3">
-											<label for="field_applicationTxn">Application No. </label>
-											<input type="text" class="form-control" name="applicationTxn"
+											<label for="field_applicationTxn">Application No. </label> <input
+												type="text" class="form-control" name="applicationTxn"
 												id="field_applicationTxn" ng-model="applicationTxn.id"
 												disabled />
 										</div>
@@ -250,8 +296,7 @@
 												<div class='input-group date' id='field_approvedDate'>
 													<input id="field_approvedDate" type="text"
 														class="form-control" uib-datepicker-popup="{{dateformat}}"
-														ng-model="approvalDetails.approvedDate"
-														max-date="maxDate"
+														ng-model="approvalDetails.approvedDate" max-date="maxDate"
 														is-open="datePickerForApprovedDate.status.opened" /> <span
 														class="input-group-btn">
 														<button type="button" class="btn btn-default"
@@ -267,8 +312,7 @@
 										<div class="col-sm-12">
 											<label class="control-label" for="field_remarks">Remarks</label>
 											<textarea rows="4" cols="50" class="form-control"
-												name="remarks" id="field_remarks"
-												max="20"
+												name="remarks" id="field_remarks" max="20"
 												ng-model="applicationTxn.remarks"></textarea>
 										</div>
 									</div>

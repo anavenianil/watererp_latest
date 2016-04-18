@@ -529,7 +529,7 @@ public class WorkflowService {
 	 * @throws Exception
 	 */
 	public String decideWorkFlow()throws Exception{
-		log.debug("::<<<<<WorkflowProcess<<<<<Method>>>>>>>>>>>>>>>decideWorkFlow(RequestBean requestBean)>>>>>>>>>");
+		log.debug("::<<WorkflowProcess<<MethoddecideWorkFlow(RequestBean requestBean)");
 		
 		String workflowID = null;
 		Integer id =null;
@@ -904,7 +904,7 @@ public class WorkflowService {
 	
 	public void changeDelegateOrPendingToApprove() throws Exception {
 
-		log.debug("::<<<<<TxRequestProcess<<<<Method>>>>>>>>>>>>>>>changeDelegateOrPendingToApprove(String historyID)>>>>>>>>>");
+		log.debug("::<<TxRequestProcess<MethodchangeDelegateOrPendingToApprove(String historyID)");
 		
 		try {
 			String qry =	"update request_workflow_history rwh2 set rwh2.status_master_id=?,rwh2.workflow_stage_master=?,rwh2.actioned_date=sysdate where rwh2.id in ( "

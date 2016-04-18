@@ -5,7 +5,7 @@ angular.module('watererpApp')
 
         $scope.billRunMasters = [];
         $scope.predicate = 'id';
-        $scope.reverse = true;
+        $scope.reverse = false;
         $scope.page = 0;
         $scope.loadAll = function() {
             BillRunMaster.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {

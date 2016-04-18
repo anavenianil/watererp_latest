@@ -24,7 +24,7 @@
                     <th><span>BranchName</span></th>
                     <th><span>CheckOrDdDate</span></th>
                     <th><span>CheckOrDdNo</span></th>
-                    <th><span>BillDate</span></th>
+                    <th><span>ReceiptDate</span></th>
                     <th><span>applicationTxn</span></th>
                     <th><span>paymentTypes</span></th>
                     <th></th>
@@ -38,7 +38,7 @@
                     <td>{{receipt.branchName}}</td>
                         <td>{{receipt.checkOrDdDate | date:'mediumDate'}}</td>
                     <td>{{receipt.checkOrDdNo}}</td>
-                        <td>{{receipt.billDate | date:'mediumDate'}}</td>
+                        <td>{{receipt.receiptDate | date:'mediumDate'}}</td>
                     <td>
                         <a ui-sref="applicationTxn.detail({id:receipt.applicationTxn.id})">{{receipt.applicationTxn.id}}</a>
                     </td>
