@@ -83,17 +83,10 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("applicationTxn", "idexists", "A new applicationTxn cannot already have an ID")).body(null);
         }
-      //file number format(Division - Property Number - House No - Connection No) : DO4 - 064 - 1 - 1
-        //String fileNumber = "D"+applicationTxn.getWard() +"-"+applicationTxn.getGovtOfficialNo()+"-"+applicationTxn.getsHouseNo();
-        //applicationTxn.setFileNumber(fileNumber);
         if(applicationTxn.getStatus()==null){
         	applicationTxn.setStatus(0);
         }
         
-       /* ZonedDateTime now = ZonedDateTime.now();
-        applicationTxn.setCreatedDate(now);
-        applicationTxn.setUpdatedDate(now);*/
-
         applicationTxn.setPhoto("");
         applicationTxnRepository.save(applicationTxn);
         
@@ -102,7 +95,7 @@ public class ApplicationTxnResource {
         UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-      //this is for workflow
+        //this is for workflow
         try{
         	workflowService.getUserDetails();
         	applicationTxnWorkflowService.createTxn(applicationTxn);
@@ -110,7 +103,6 @@ public class ApplicationTxnResource {
         catch(Exception e){
         	System.out.println(e);
         }
-        
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))
@@ -132,11 +124,9 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
-        //ZonedDateTime now = ZonedDateTime.now();
-        //applicationTxn.setUpdatedDate(now);
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-        /*CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
-        custDetailsRepository.save(custDetails);*/
+        CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
+        custDetailsRepository.save(custDetails);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);
