@@ -8,6 +8,7 @@ angular.module('watererpApp').controller(
 			$scope.predicate = 'id';
 			$scope.reverse = true;
 			$scope.page = 0;
+			$scope.billRunId = $stateParams.billRunId;
 
 			$scope.loadAll = function() {
 				

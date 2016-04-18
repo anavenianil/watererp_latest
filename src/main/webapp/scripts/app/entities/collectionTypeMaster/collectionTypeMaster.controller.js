@@ -35,6 +35,7 @@ angular.module('watererpApp')
         $scope.clear = function () {
             $scope.collectionTypeMaster = {
                 collName: null,
+                txnType: null,
                 id: null
             };
         };

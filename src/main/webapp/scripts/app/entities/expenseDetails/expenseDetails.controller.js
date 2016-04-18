@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('BillRunMasterController', function ($scope, $state, BillRunMaster, ParseLinks) {
+    .controller('ExpenseDetailsController', function ($scope, $state, ExpenseDetails, ParseLinks) {
 
-        $scope.billRunMasters = [];
+        $scope.expenseDetailss = [];
         $scope.predicate = 'id';
-        $scope.reverse = false;
+        $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            BillRunMaster.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            ExpenseDetails.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.billRunMasters.push(result[i]);
+                    $scope.expenseDetailss.push(result[i]);
                 }
             });
         };
         $scope.reset = function() {
             $scope.page = 0;
-            $scope.billRunMasters = [];
+            $scope.expenseDetailss = [];
             $scope.loadAll();
         };
         $scope.loadPage = function(page) {
@@ -33,12 +33,12 @@ angular.module('watererpApp')
         };
 
         $scope.clear = function () {
-            $scope.billRunMaster = {
-                date: null,
-                area: null,
-                success: null,
-                failed: null,
-                status: null,
+            $scope.expenseDetails = {
+                expenseNo: null,
+                expenseAmt: null,
+                expenseDt: null,
+                instrNo: null,
+                instrDt: null,
                 id: null
             };
         };

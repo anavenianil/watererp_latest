@@ -53,6 +53,7 @@ angular.module('watererpApp')
                             entity: function () {
                                 return {
                                     collName: null,
+                                    txnType: null,
                                     id: null
                                 };
                             }

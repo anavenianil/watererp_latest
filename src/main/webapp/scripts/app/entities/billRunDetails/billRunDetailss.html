@@ -1,16 +1,6 @@
 <div>
-    <h2>BillRunDetailss</h2>
+    <h2>Details for  <a ui-sref="billRunMaster.detail({id:billRunId})">Bill Run {{billRunId}}</a></h2>
     <jh-alert></jh-alert>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" ui-sref="billRunDetails.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new BillRunDetails</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -21,9 +11,7 @@
                     <th jh-sort-by="toDt"><span>ToDt</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="billFullDetails.id"><span>billFullDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="billRunMaster.id"><span>billRunMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <th jh-sort-by="billFullDetails.id"><span>Bill</span> <span class="glyphicon glyphicon-sort"></span></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
@@ -36,26 +24,6 @@
                     <td>{{billRunDetails.remarks}}</td>
                     <td>
                         <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="billRunMaster.detail({id:billRunDetails.billRunMaster.id})">{{billRunDetails.billRunMaster.id}}</a>
-                    </td>
-                    <td>
-                        <button type="submit"
-                                ui-sref="billRunDetails.detail({id:billRunDetails.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="billRunDetails.edit({id:billRunDetails.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="billRunDetails.delete({id:billRunDetails.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
-                        </button>
                     </td>
                 </tr>
             </tbody>

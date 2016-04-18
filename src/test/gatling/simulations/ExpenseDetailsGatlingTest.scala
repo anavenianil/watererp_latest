@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the CollectionTypeMaster entity.
+ * Performance test for the ExpenseDetails entity.
  */
-class CollectionTypeMasterGatlingTest extends Simulation {
+class ExpenseDetailsGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class CollectionTypeMasterGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the CollectionTypeMaster entity")
+    val scn = scenario("Test the ExpenseDetails entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class CollectionTypeMasterGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all collectionTypeMasters")
-            .get("/api/collectionTypeMasters")
+            exec(http("Get all expenseDetailss")
+            .get("/api/expenseDetailss")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new collectionTypeMaster")
-            .post("/api/collectionTypeMasters")
+            .exec(http("Create new expenseDetails")
+            .post("/api/expenseDetailss")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "collName":"SAMPLE_TEXT", "txnType":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "expenseNo":"SAMPLE_TEXT", "expenseAmt":null, "expenseDt":"2020-01-01T00:00:00.000Z", "instrNo":"SAMPLE_TEXT", "instrDt":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_collectionTypeMaster_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_expenseDetails_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created collectionTypeMaster")
-                .get("${new_collectionTypeMaster_url}")
+                exec(http("Get created expenseDetails")
+                .get("${new_expenseDetails_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created collectionTypeMaster")
-            .delete("${new_collectionTypeMaster_url}")
+            .exec(http("Delete created expenseDetails")
+            .delete("${new_expenseDetails_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

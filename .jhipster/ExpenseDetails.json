@@ -1,0 +1,56 @@
+{
+    "relationships": [
+    {
+            "relationshipId": 1,
+            "relationshipName": "paymentTypes",
+            "otherEntityName": "paymentTypes",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     },
+     {
+            "relationshipId": 2,
+            "relationshipName": "instrumentIssuerMaster",
+            "otherEntityName": "instrumentIssuerMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     },
+     {
+            "relationshipId": 3,
+            "relationshipName": "collectionTypeMaster",
+            "otherEntityName": "collectionTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     }
+        ],
+    "fields": [        
+        {
+            "fieldId": 1,
+            "fieldName": "expenseNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "expenseAmt",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "expenseDt",
+            "fieldType": "ZonedDateTime"
+        },        
+        {
+            "fieldId": 4,
+            "fieldName": "instrNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "instrDt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20160415064155",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

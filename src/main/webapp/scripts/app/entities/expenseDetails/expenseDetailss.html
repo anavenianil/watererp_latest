@@ -1,0 +1,76 @@
+<div>
+    <h2>ExpenseDetailss</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="expenseDetails.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new ExpenseDetails
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expenseNo"><span>ExpenseNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expenseAmt"><span>ExpenseAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expenseDt"><span>ExpenseDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="instrNo"><span>InstrNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="instrDt"><span>InstrDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="paymentTypes.id"><span>paymentTypes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="instrumentIssuerMaster.id"><span>instrumentIssuerMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="collectionTypeMaster.id"><span>collectionTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="expenseDetails in expenseDetailss track by expenseDetails.id">
+                    <td><a ui-sref="expenseDetails.detail({id:expenseDetails.id})">{{expenseDetails.id}}</a></td>
+                    <td>{{expenseDetails.expenseNo}}</td>
+                    <td>{{expenseDetails.expenseAmt}}</td>
+                    <td>{{expenseDetails.expenseDt | date:'medium'}}</td>
+                    <td>{{expenseDetails.instrNo}}</td>
+                        <td>{{expenseDetails.instrDt | date:'mediumDate'}}</td>
+                    <td>
+                        <a ui-sref="paymentTypes.detail({id:expenseDetails.paymentTypes.id})">{{expenseDetails.paymentTypes.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="instrumentIssuerMaster.detail({id:expenseDetails.instrumentIssuerMaster.id})">{{expenseDetails.instrumentIssuerMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="collectionTypeMaster.detail({id:expenseDetails.collectionTypeMaster.id})">{{expenseDetails.collectionTypeMaster.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="expenseDetails.detail({id:expenseDetails.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="expenseDetails.edit({id:expenseDetails.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="expenseDetails.delete({id:expenseDetails.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

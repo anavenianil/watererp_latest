@@ -5,6 +5,11 @@
             "fieldId": 1,
             "fieldName": "collName",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "txnType",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160412112557",
