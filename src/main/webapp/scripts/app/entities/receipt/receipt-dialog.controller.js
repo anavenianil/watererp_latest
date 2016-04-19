@@ -31,33 +31,46 @@ angular.module('watererpApp').controller('ReceiptDialogController',
             });
         }*/
         
-        //$scope.getApplicationTxn = function(id) {
-            ApplicationTxn.get({id : $stateParams.applicationTxnId}, function(result) {
-                $scope.applicationTxn = result;
-            });
-        //};
+
+        $scope.getAppTxn = function(applicationTxnId){
+        	 ApplicationTxn.get({id : $stateParams.applicationTxnId}, function(result) {
+                 $scope.applicationTxn = result;
+             });
+        }
+       
+            
+        $scope.getProceedingsByAppTxn = function(applicationTxnId){
+        	GetProceedings.get({
+    			applicationTxnId : $stateParams.applicationTxnId
+    		}, function(result) {
+    			$scope.proceedings = result;
+    			$scope.receipt.applicationTxn = $scope.proceedings.applicationTxn; 
+                $scope.receipt.amount = $scope.proceedings.grandTotal;
+    		});
+        }
         
-        GetProceedings.get({
-			applicationTxnId : $stateParams.applicationTxnId
-		}, function(result) {
-			$scope.proceedings = result;
-			$scope.receipt.applicationTxn = $scope.proceedings.applicationTxn; 
-            $scope.receipt.amount = $scope.proceedings.grandTotal;
-		});
+        $scope.getFeasibilityByAppTxn = function(applicationTxnId){
+        	GetFeasibilityStudy.get({
+    			applicationTxnId : $stateParams.applicationTxnId
+    		}, function(result) {
+    			$scope.feasibilityStudy = result;
+    			if($scope.feasibilityStudy.id !=null){
+    			ApplicationTxnService.generateCan(result.id).then(function(response) {
+    				$scope.applicationTxn.can = response;
+    			});
+    			}
+    			else{
+    				alert("feasibilityNull");
+    			}
+    		});
+        }
         
-        GetFeasibilityStudy.get({
-			applicationTxnId : $stateParams.applicationTxnId
-		}, function(result) {
-			$scope.feasibilityStudy = result;
-			if($scope.feasibilityStudy.id !=null){
-			ApplicationTxnService.generateCan(result.id).then(function(response) {
-				$scope.applicationTxn.can = response;
-			});
-			}
-			else{
-				alert("feasibilityNull");
-			}
-		});
+        if($stateParams.applicationTxnId != null){
+        	$scope.getAppTxn($stateParams.applicationTxn);
+        	$scope.getProceedingsByAppTxn($stateParams.applicationTxn);
+        	$scope.getFeasibilityByAppTxn($stateParams.applicationTxn);
+        }
+        
         
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:receiptUpdate', result);

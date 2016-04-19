@@ -8,6 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.CustMeterMapping;
 
 
 @Mapper
@@ -29,6 +30,17 @@ public interface CustDetailsMapper {
 		
 	})
     CustDetails appTxnToCustDetails(ApplicationTxn applicationTxn);
+	
+	
+	/*@Mappings({
+		@Mapping(target = "id", constant = "0"),
+		@Mapping(target = "fromDate", source = ""),
+		@Mapping(target = "toDate", source = ""),
+		@Mapping(target = "custDetails", source= ""),
+		@Mapping(target = "meterDetails", source= "")
+	})
+    CustMeterMapping issueMeterToCustMeterMapp(ApplicationTxn applicationTxn);*/
+	
     
     
 }

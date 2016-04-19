@@ -1,94 +1,118 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myMeterChangeLabel">Create or edit a MeterChange</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="meterChange.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_can">Can</label>
-            <input type="text" class="form-control" name="can" id="field_can"
-                    ng-model="meterChange.can"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_reasonForChange">ReasonForChange</label>
-            <input type="text" class="form-control" name="reasonForChange" id="field_reasonForChange"
-                    ng-model="meterChange.reasonForChange"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_existingMeterNumber">ExistingMeterNumber</label>
-            <input type="text" class="form-control" name="existingMeterNumber" id="field_existingMeterNumber"
-                    ng-model="meterChange.existingMeterNumber"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_existingMeterReading">ExistingMeterReading</label>
-            <input type="number" class="form-control" name="existingMeterReading" id="field_existingMeterReading"
-                    ng-model="meterChange.existingMeterReading"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_newMeterNumber">NewMeterNumber</label>
-            <input type="text" class="form-control" name="newMeterNumber" id="field_newMeterNumber"
-                    ng-model="meterChange.newMeterNumber"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_newMeterReading">NewMeterReading</label>
-            <input type="number" class="form-control" name="newMeterReading" id="field_newMeterReading"
-                    ng-model="meterChange.newMeterReading"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_remarks">Remarks</label>
-            <input type="text" class="form-control" name="remarks" id="field_remarks"
-                    ng-model="meterChange.remarks"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_approvedDate">ApprovedDate</label>
-            <input id="field_approvedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="meterChange.approvedDate" is-open="datePickerForApprovedDate.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForApprovedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-
-        <div class="form-group">
-            <label for="field_custDetails">custDetails</label>
-            <select class="form-control" id="field_custDetails" name="custDetails" ng-model="meterChange.custDetails" ng-options="custDetails as custDetails.id for custDetails in custdetailss track by custDetails.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_meterDetails">meterDetails</label>
-            <select class="form-control" id="field_meterDetails" name="meterDetails" ng-model="meterChange.meterDetails" ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_user">user</label>
-            <select class="form-control" id="field_user" name="user" ng-model="meterChange.user" ng-options="user as user.id for user in users track by user.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Create or edit Meter Change</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="id">ID</label> <input type="text"
+								class="form-control" id="id" name="id" ng-model="meterChange.id"
+								readonly />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_can">Can</label> <input
+								type="text" class="form-control" name="can" id="field_can"
+								ng-model="meterChange.can" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_reasonForChange">ReasonForChange</label>
+							<input type="text" class="form-control" name="reasonForChange"
+								id="field_reasonForChange"
+								ng-model="meterChange.reasonForChange" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_existingMeterNumber">ExistingMeterNumber</label>
+							<input type="text" class="form-control"
+								name="existingMeterNumber" id="field_existingMeterNumber"
+								ng-model="meterChange.existingMeterNumber" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_existingMeterReading">ExistingMeterReading</label>
+							<input type="number" class="form-control"
+								name="existingMeterReading" id="field_existingMeterReading"
+								ng-model="meterChange.existingMeterReading" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_newMeterNumber">NewMeterNumber</label>
+							<input type="text" class="form-control" name="newMeterNumber"
+								id="field_newMeterNumber" ng-model="meterChange.newMeterNumber" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_newMeterReading">NewMeterReading</label>
+							<input type="number" class="form-control" name="newMeterReading"
+								id="field_newMeterReading"
+								ng-model="meterChange.newMeterReading" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<input type="text" class="form-control" name="remarks"
+								id="field_remarks" ng-model="meterChange.remarks" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_approvedDate">ApprovedDate</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_approvedDate'>
+									<input id="field_approvedDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="meterChange.approvedDate"
+										is-open="datePickerForApprovedDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForApprovedDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="field_custDetails">custDetails</label> <select
+								class="form-control" id="field_custDetails" name="custDetails"
+								ng-model="meterChange.custDetails"
+								ng-options="custDetails as custDetails.id for custDetails in custdetailss track by custDetails.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_meterDetails">meterDetails</label> <select
+								class="form-control" id="field_meterDetails" name="meterDetails"
+								ng-model="meterChange.meterDetails"
+								ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_user">user</label> <select class="form-control"
+								id="field_user" name="user" ng-model="meterChange.user"
+								ng-options="user as user.id for user in users track by user.id">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </form>

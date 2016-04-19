@@ -100,7 +100,7 @@ public class ApplicationTxnResource {
         UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-        //this is for workflow
+        //this is for workflow for new request
         try{
         	workflowService.getUserDetails();
         	applicationTxnWorkflowService.createTxn(applicationTxn);
@@ -108,6 +108,11 @@ public class ApplicationTxnResource {
         catch(Exception e){
         	System.out.println(e);
         }
+        
+        //workflow when whithout meter
+        /*if(applicationTxn.getApprovedDate()!= null && applicationTxn.getUser()!=null){
+        	
+        }*/
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))

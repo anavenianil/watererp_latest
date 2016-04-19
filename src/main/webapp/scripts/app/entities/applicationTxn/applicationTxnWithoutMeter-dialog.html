@@ -281,66 +281,8 @@
 								</div>
 							</div>
 						</fieldset>
-						<!-- hidden fields -->
-						<fieldset ng-hide="true">
-							<legend>Extra</legend>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_can">Can</label> <input
-									type="text" class="form-control" name="can" id="field_can"
-									ng-model="applicationTxn.can" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_status">Status</label> <input
-									type="number" class="form-control" name="status"
-									id="field_status" ng-model="applicationTxn.status" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_meterReading">MeterReading</label>
-								<input type="number" class="form-control" name="meterReading"
-									id="field_meterReading" ng-model="applicationTxn.meterReading" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_connectionDate">ConnectionDate</label>
-								<input id="field_connectionDate" type="text"
-									class="form-control" uib-datepicker-popup="{{dateformat}}"
-									ng-model="applicationTxn.connectionDate"
-									is-open="datePickerForConnectionDate.status.opened" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="datePickerForConnectionDateOpen($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_remarks">Remarks</label>
-								<input type="text" class="form-control" name="remarks"
-									id="field_remarks" ng-model="applicationTxn.remarks" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_meterNo">MeterNo</label>
-								<input type="text" class="form-control" name="meterNo"
-									id="field_meterNo" ng-model="applicationTxn.meterNo" />
-							</div>
-
-							<div class="col-sm-4">
-								<label for="field_meterDetails">meterDetails</label> <select
-									class="form-control" id="field_meterDetails"
-									name="meterDetails" ng-model="applicationTxn.meterDetails"
-									ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
-									<option value=""></option>
-								</select>
-							</div>
-
-							<div class="col-sm-4">
-								<label for="field_requestAt">requestAt</label> <select
-									class="form-control" id="field_requestAt" name="requestAt"
-									ng-model="applicationTxn.requestAt"
-									ng-options="user as user.id for user in users track by user.id">
-									<option value=""></option>
-								</select>
-							</div>
-						</fieldset>
+						
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"
