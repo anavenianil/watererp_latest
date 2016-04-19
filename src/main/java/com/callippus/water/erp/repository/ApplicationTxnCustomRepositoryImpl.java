@@ -1,13 +1,24 @@
 package com.callippus.water.erp.repository;
 
+import java.io.InputStream;
+import java.sql.Connection;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+
+import org.hibernate.Session;
+import org.hibernate.internal.SessionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,6 +195,27 @@ public class ApplicationTxnCustomRepositoryImpl extends
 
 		return items;
 	}
+
+	@Override
+	public JasperPrint applicationTxnReports(Long id) throws JRException {
+		InputStream jasperStream = this.getClass().getResourceAsStream(
+				"/reports/ConsumersWater.jasper");
+		Map<String, Object> params = new HashMap<>();
+		
+		Session session = entityManager.unwrap(Session.class);
+		SessionImpl sessionImpl = (SessionImpl) session;
+		Connection conn = sessionImpl.connection();
+		
+		params.put("id", id.toString());
+		JasperReport jasperReport = (JasperReport) JRLoader
+				.loadObject(jasperStream);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+				params, conn);
+		
+		return jasperPrint;
+		
+	}
+	
 	
 	/**
 	 * Query that will list all Approved Requests
