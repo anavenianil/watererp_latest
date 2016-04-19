@@ -1,5 +1,7 @@
 package com.callippus.water.erp.web.rest;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -9,6 +11,10 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
@@ -24,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
@@ -31,6 +38,7 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
+import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
@@ -95,10 +103,8 @@ public class ApplicationTxnResource {
         if(applicationTxn.getStatus()==null){
         	applicationTxn.setStatus(0);
         }
-        
         applicationTxn.setPhoto("");
         applicationTxnRepository.save(applicationTxn);
-        
         HashMap<String,String> hm = new HashMap<String,String>();
         hm.put("photo", "setPhoto");
         UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
@@ -114,13 +120,7 @@ public class ApplicationTxnResource {
         }
         Long uid = Long.valueOf(workflowService.getRequestAt()) ;
         applicationTxn.setRequestAt(userRepository.findById(uid));
-        
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-        
-        //workflow when whithout meter
-        /*if(applicationTxn.getApprovedDate()!= null && applicationTxn.getUser()!=null){
-        	
-        }*/
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))
@@ -164,17 +164,17 @@ public class ApplicationTxnResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<ApplicationTxn>> getAllApplicationTxns(Pageable pageable,
-    		@RequestParam(value = "status", required = false) Integer status)
+    		@RequestParam(value = "login", required = false) String login)
         throws URISyntaxException {
         log.debug("REST request to get a page of ApplicationTxns");
         //Page<ApplicationTxn> page = applicationTxnRepository.findAll(pageable); 
         Page<ApplicationTxn> page;
-        if(status == null){
+        if(login == null){
         	page = applicationTxnRepository.findAllByOrderByStatusAsc(pageable);
         }
         else
         {
-        	page = applicationTxnRepository.findByStatus(pageable, status);
+        	page = applicationTxnRepository.findByRequestAt(pageable, login);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/applicationTxns");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -342,10 +342,7 @@ public class ApplicationTxnResource {
 			can = can+1;
 		}
 		String s1 = String.format("%04d", can);
-
 		String newCan = division + street + s1.toString();
-
-		
         return new ResponseEntity<String>(
         		newCan,
                     HttpStatus.OK);
@@ -383,5 +380,24 @@ public class ApplicationTxnResource {
 		
 		return new ResponseEntity<List<ApplicationTxn>>(applicationTxns,
 				 HttpStatus.OK);
+	}
+	
+	
+	/**
+	 * Display Requisition report
+	 */
+	@RequestMapping(value = "/applicationTxns/report/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getApplicationTxnReport(HttpServletResponse response, @PathVariable Long id) throws JRException,
+			IOException {
+
+		JasperPrint jasperPrint = applicationTxnCustomRepository
+				.applicationTxnReports(id);
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=ApplicationTxn_Report_" + id + ".pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
 }

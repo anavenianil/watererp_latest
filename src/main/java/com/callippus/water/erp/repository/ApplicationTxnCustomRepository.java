@@ -2,6 +2,9 @@ package com.callippus.water.erp.repository;
 
 import java.util.List;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
@@ -18,6 +21,10 @@ JpaRepository<ApplicationTxn, Long> {
 	List<RequestWorkflowHistory> listAllPendingRequests(String type) throws Exception;
 	List<RequestWorkflowHistory> listAllApprovedRequests(String type) throws Exception;
 	
+
 	List<ApplicationTxn> search(String whereClause);
 	
+
+	public JasperPrint applicationTxnReports(Long id) throws JRException;
+
 }

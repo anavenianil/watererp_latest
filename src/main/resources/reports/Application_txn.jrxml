@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="Id" class="java.lang.Integer">
+	<parameter name="Id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE  ENTER YOUY ID]]></parameterDescription>
 		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
 	</parameter>

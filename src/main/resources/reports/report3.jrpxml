@@ -1,0 +1,2990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperPrint xmlns="http://jasperreports.sourceforge.net/jasperreports/print" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/print http://jasperreports.sourceforge.net/xsd/jasperprint.xsd" name="report3" pageWidth="917" pageHeight="1183" topMargin="20" leftMargin="20" bottomMargin="20" rightMargin="20" orientation="Landscape" locale="en_US" timezone="Asia/Calcutta">
+	<property name="net.sf.jasperreports.export.xml.start.page.index" value="0"/>
+	<property name="net.sf.jasperreports.export.xml.end.page.index" value="0"/>
+	<property name="net.sf.jasperreports.export.xml.page.count" value="1"/>
+	<origin band="background"/>
+	<origin band="title"/>
+	<origin band="pageHeader"/>
+	<origin band="columnHeader"/>
+	<origin band="detail"/>
+	<origin band="columnFooter"/>
+	<origin band="pageFooter"/>
+	<origin band="summary"/>
+	<origin band="noData"/>
+	<page>
+		<text textHeight="20.698242" lineSpacingFactor="1.1499023" leadingOffset="-3.5200195">
+			<reportElement uuid="79432744-cf5a-46ae-bf4c-5f50bb9a7dd7" mode="Opaque" x="162" y="31" width="289" height="35" backcolor="#00FFFF" origin="1" srcId="1" printId="1"/>
+			<font fontName="Arial" size="18"/>
+			<textContent><![CDATA[Request Master Report Generating]]></textContent>
+		</text>
+		<text textHeight="15.09375" lineSpacingFactor="1.2578125" leadingOffset="-2.6367188">
+			<reportElement uuid="b7090fc9-7a0e-4ede-99ee-c5ef54d1ca9b" mode="Opaque" x="517" y="117" width="189" height="20" backcolor="#00CC33" origin="2" srcId="2" printId="1"/>
+			<font size="12"/>
+			<textContent><![CDATA[--Compiled By Jaspersoft Report ]]></textContent>
+		</text>
+		<text textHeight="13.798828" lineSpacingFactor="1.1499023" leadingOffset="-2.3466797">
+			<reportElement uuid="e35a450d-e7b5-4812-b787-39cfcf83f5d1" mode="Opaque" x="20" y="180" width="34" height="20" backcolor="#00FFFF" origin="3" srcId="3" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<font fontName="Arial" size="12"/>
+			<textContent><![CDATA[id]]></textContent>
+		</text>
+		<text textHeight="13.798828" lineSpacingFactor="1.1499023" leadingOffset="-2.3466797">
+			<reportElement uuid="c632abfa-142a-4b6b-b3f3-b583ac514335" mode="Opaque" x="54" y="180" width="83" height="20" backcolor="#00FFFF" origin="3" srcId="4" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<font fontName="Arial" size="12"/>
+			<textContent><![CDATA[request_type]]></textContent>
+		</text>
+		<text textHeight="13.798828" lineSpacingFactor="1.1499023" leadingOffset="-2.3466797">
+			<reportElement uuid="afb2c6a6-9eb3-46e9-ad9c-3ca4df7795d1" mode="Opaque" x="137" y="180" width="88" height="20" backcolor="#00FFFF" origin="3" srcId="5" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<font fontName="Arial" size="12"/>
+			<textContent><![CDATA[creation_date]]></textContent>
+		</text>
+		<text textHeight="13.798828" lineSpacingFactor="1.1499023" leadingOffset="-2.3466797">
+			<reportElement uuid="c67cf174-8738-4aea-8e3d-a99ff1c1c0cf" mode="Opaque" x="225" y="180" width="136" height="20" backcolor="#00FFFF" origin="3" srcId="6" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<font fontName="Arial" size="12"/>
+			<textContent><![CDATA[last_modified_date]]></textContent>
+		</text>
+		<text textHeight="13.798828" lineSpacingFactor="1.1499023" leadingOffset="-2.3466797">
+			<reportElement uuid="0eb47818-8f42-4784-a7d6-1964569e476e" mode="Opaque" x="361" y="180" width="141" height="20" backcolor="#00FFFF" origin="3" srcId="7" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<font fontName="Arial" size="12"/>
+			<textContent><![CDATA[description]]></textContent>
+		</text>
+		<text textHeight="13.798828" lineSpacingFactor="1.1499023" leadingOffset="-2.3466797">
+			<reportElement uuid="f02663c4-2bdd-42c7-b6e6-aaf6e72ed538" mode="Opaque" x="502" y="180" width="97" height="20" backcolor="#00FFFF" origin="3" srcId="8" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<font fontName="Arial" size="12"/>
+			<textContent><![CDATA[internal_flag]]></textContent>
+		</text>
+		<text textHeight="13.798828" lineSpacingFactor="1.1499023" leadingOffset="-2.3466797">
+			<reportElement uuid="df7c5fe0-3810-49b6-85dc-cb712037aeb8" mode="Opaque" x="599" y="180" width="126" height="20" backcolor="#00FFFF" origin="3" srcId="9" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<font fontName="Arial" size="12"/>
+			<textContent><![CDATA[status_master_id]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="201" width="34" height="20" origin="4" srcId="10" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[1]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="201" width="83" height="20" origin="4" srcId="11" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[REQUISITION]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="201" width="88" height="20" origin="4" srcId="12" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="201" width="136" height="20" origin="4" srcId="13" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="201" width="141" height="20" origin="4" srcId="14" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="201" width="97" height="20" origin="4" srcId="15" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="201" width="126" height="20" origin="4" srcId="16" printId="1"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="222" width="34" height="20" origin="4" srcId="10" printId="2"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="222" width="83" height="20" origin="4" srcId="11" printId="2"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[MEASUREMENT ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="222" width="88" height="20" origin="4" srcId="12" printId="2"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="222" width="136" height="20" origin="4" srcId="13" printId="2"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="222" width="141" height="20" origin="4" srcId="14" printId="2"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="222" width="97" height="20" origin="4" srcId="15" printId="2"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="222" width="126" height="20" origin="4" srcId="16" printId="2"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="243" width="34" height="20" origin="4" srcId="10" printId="3"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[3]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="243" width="83" height="20" origin="4" srcId="11" printId="3"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[ADDRESS]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="243" width="88" height="20" origin="4" srcId="12" printId="3"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="243" width="136" height="20" origin="4" srcId="13" printId="3"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="243" width="141" height="20" origin="4" srcId="14" printId="3"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="243" width="97" height="20" origin="4" srcId="15" printId="3"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="243" width="126" height="20" origin="4" srcId="16" printId="3"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="264" width="34" height="20" origin="4" srcId="10" printId="4"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[4]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="264" width="83" height="20" origin="4" srcId="11" printId="4"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[FAMILY]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="264" width="88" height="20" origin="4" srcId="12" printId="4"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="264" width="136" height="20" origin="4" srcId="13" printId="4"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="264" width="141" height="20" origin="4" srcId="14" printId="4"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="264" width="97" height="20" origin="4" srcId="15" printId="4"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="264" width="126" height="20" origin="4" srcId="16" printId="4"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="285" width="34" height="20" origin="4" srcId="10" printId="5"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[5]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="285" width="83" height="20" origin="4" srcId="11" printId="5"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[NOMINEE]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="285" width="88" height="20" origin="4" srcId="12" printId="5"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="285" width="136" height="20" origin="4" srcId="13" printId="5"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="285" width="141" height="20" origin="4" srcId="14" printId="5"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="285" width="97" height="20" origin="4" srcId="15" printId="5"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="285" width="126" height="20" origin="4" srcId="16" printId="5"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="306" width="34" height="20" origin="4" srcId="10" printId="6"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[6]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="306" width="83" height="20" origin="4" srcId="11" printId="6"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LEAVE CANCEL]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="306" width="88" height="20" origin="4" srcId="12" printId="6"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="306" width="136" height="20" origin="4" srcId="13" printId="6"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="306" width="141" height="20" origin="4" srcId="14" printId="6"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="306" width="97" height="20" origin="4" srcId="15" printId="6"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="306" width="126" height="20" origin="4" srcId="16" printId="6"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="327" width="34" height="20" origin="4" srcId="10" printId="7"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="327" width="83" height="20" origin="4" srcId="11" printId="7"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LEAVE ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="327" width="88" height="20" origin="4" srcId="12" printId="7"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="327" width="136" height="20" origin="4" srcId="13" printId="7"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="327" width="141" height="20" origin="4" srcId="14" printId="7"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="327" width="97" height="20" origin="4" srcId="15" printId="7"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="327" width="126" height="20" origin="4" srcId="16" printId="7"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="348" width="34" height="20" origin="4" srcId="10" printId="8"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[15]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="348" width="83" height="20" origin="4" srcId="11" printId="8"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[CGHS]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="348" width="88" height="20" origin="4" srcId="12" printId="8"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="348" width="136" height="20" origin="4" srcId="13" printId="8"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="348" width="141" height="20" origin="4" srcId="14" printId="8"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="348" width="97" height="20" origin="4" srcId="15" printId="8"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="348" width="126" height="20" origin="4" srcId="16" printId="8"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="369" width="34" height="20" origin="4" srcId="10" printId="9"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[16]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="369" width="83" height="20" origin="4" srcId="11" printId="9"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LOAN]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="369" width="88" height="20" origin="4" srcId="12" printId="9"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="369" width="136" height="20" origin="4" srcId="13" printId="9"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="369" width="141" height="20" origin="4" srcId="14" printId="9"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="369" width="97" height="20" origin="4" srcId="15" printId="9"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="369" width="126" height="20" origin="4" srcId="16" printId="9"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="390" width="34" height="20" origin="4" srcId="10" printId="10"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[17]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="390" width="83" height="20" origin="4" srcId="11" printId="10"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[CGHS ADVANCE]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="390" width="88" height="20" origin="4" srcId="12" printId="10"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="390" width="136" height="20" origin="4" srcId="13" printId="10"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="390" width="141" height="20" origin="4" srcId="14" printId="10"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="390" width="97" height="20" origin="4" srcId="15" printId="10"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="390" width="126" height="20" origin="4" srcId="16" printId="10"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="411" width="34" height="20" origin="4" srcId="10" printId="11"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[18]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="411" width="83" height="20" origin="4" srcId="11" printId="11"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[CGHS ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="411" width="88" height="20" origin="4" srcId="12" printId="11"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="411" width="136" height="20" origin="4" srcId="13" printId="11"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="411" width="141" height="20" origin="4" srcId="14" printId="11"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="411" width="97" height="20" origin="4" srcId="15" printId="11"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="411" width="126" height="20" origin="4" srcId="16" printId="11"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="432" width="34" height="20" origin="4" srcId="10" printId="12"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[19]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="432" width="83" height="20" origin="4" srcId="11" printId="12"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[NON CGHS ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="432" width="88" height="20" origin="4" srcId="12" printId="12"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="432" width="136" height="20" origin="4" srcId="13" printId="12"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="432" width="141" height="20" origin="4" srcId="14" printId="12"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="432" width="97" height="20" origin="4" srcId="15" printId="12"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="432" width="126" height="20" origin="4" srcId="16" printId="12"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="453" width="34" height="20" origin="4" srcId="10" printId="13"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[20]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="453" width="83" height="20" origin="4" srcId="11" printId="13"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[CGHS ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="453" width="88" height="20" origin="4" srcId="12" printId="13"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="453" width="136" height="20" origin="4" srcId="13" printId="13"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="453" width="141" height="20" origin="4" srcId="14" printId="13"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="453" width="97" height="20" origin="4" srcId="15" printId="13"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="453" width="126" height="20" origin="4" srcId="16" printId="13"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="474" width="34" height="20" origin="4" srcId="10" printId="14"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[21]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="474" width="83" height="20" origin="4" srcId="11" printId="14"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC APPROVAL ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="474" width="88" height="20" origin="4" srcId="12" printId="14"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="474" width="136" height="20" origin="4" srcId="13" printId="14"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="474" width="141" height="20" origin="4" srcId="14" printId="14"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="474" width="97" height="20" origin="4" srcId="15" printId="14"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="474" width="126" height="20" origin="4" srcId="16" printId="14"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="495" width="34" height="20" origin="4" srcId="10" printId="15"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[22]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="495" width="83" height="20" origin="4" srcId="11" printId="15"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC APPROVAL]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="495" width="88" height="20" origin="4" srcId="12" printId="15"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="495" width="136" height="20" origin="4" srcId="13" printId="15"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="495" width="141" height="20" origin="4" srcId="14" printId="15"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="495" width="97" height="20" origin="4" srcId="15" printId="15"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="495" width="126" height="20" origin="4" srcId="16" printId="15"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="516" width="34" height="20" origin="4" srcId="10" printId="16"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[23]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="516" width="83" height="20" origin="4" srcId="11" printId="16"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[CGHS ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="516" width="88" height="20" origin="4" srcId="12" printId="16"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="516" width="136" height="20" origin="4" srcId="13" printId="16"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="516" width="141" height="20" origin="4" srcId="14" printId="16"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="516" width="97" height="20" origin="4" srcId="15" printId="16"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="516" width="126" height="20" origin="4" srcId="16" printId="16"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="537" width="34" height="20" origin="4" srcId="10" printId="17"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[24]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="537" width="83" height="20" origin="4" srcId="11" printId="17"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC REFUND]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="537" width="88" height="20" origin="4" srcId="12" printId="17"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="537" width="136" height="20" origin="4" srcId="13" printId="17"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="537" width="141" height="20" origin="4" srcId="14" printId="17"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="537" width="97" height="20" origin="4" srcId="15" printId="17"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="537" width="126" height="20" origin="4" srcId="16" printId="17"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="558" width="34" height="20" origin="4" srcId="10" printId="18"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[25]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="558" width="83" height="20" origin="4" srcId="11" printId="18"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="558" width="88" height="20" origin="4" srcId="12" printId="18"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="558" width="136" height="20" origin="4" srcId="13" printId="18"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="558" width="141" height="20" origin="4" srcId="14" printId="18"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="558" width="97" height="20" origin="4" srcId="15" printId="18"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="558" width="126" height="20" origin="4" srcId="16" printId="18"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="579" width="34" height="20" origin="4" srcId="10" printId="19"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[26]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="579" width="83" height="20" origin="4" srcId="11" printId="19"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="579" width="88" height="20" origin="4" srcId="12" printId="19"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="579" width="136" height="20" origin="4" srcId="13" printId="19"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="579" width="141" height="20" origin="4" srcId="14" printId="19"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="579" width="97" height="20" origin="4" srcId="15" printId="19"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="579" width="126" height="20" origin="4" srcId="16" printId="19"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="600" width="34" height="20" origin="4" srcId="10" printId="20"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[27]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="600" width="83" height="20" origin="4" srcId="11" printId="20"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[NON CGHS ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="600" width="88" height="20" origin="4" srcId="12" printId="20"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="600" width="136" height="20" origin="4" srcId="13" printId="20"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="600" width="141" height="20" origin="4" srcId="14" printId="20"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="600" width="97" height="20" origin="4" srcId="15" printId="20"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="600" width="126" height="20" origin="4" srcId="16" printId="20"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="621" width="34" height="20" origin="4" srcId="10" printId="21"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[30]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="621" width="83" height="20" origin="4" srcId="11" printId="21"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC ADVANCE]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="621" width="88" height="20" origin="4" srcId="12" printId="21"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="621" width="136" height="20" origin="4" srcId="13" printId="21"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="621" width="141" height="20" origin="4" srcId="14" printId="21"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="621" width="97" height="20" origin="4" srcId="15" printId="21"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="621" width="126" height="20" origin="4" srcId="16" printId="21"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="642" width="34" height="20" origin="4" srcId="10" printId="22"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[32]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="642" width="83" height="20" origin="4" srcId="11" printId="22"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC CANCEL]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="642" width="88" height="20" origin="4" srcId="12" printId="22"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="642" width="136" height="20" origin="4" srcId="13" printId="22"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="642" width="141" height="20" origin="4" srcId="14" printId="22"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="642" width="97" height="20" origin="4" srcId="15" printId="22"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="642" width="126" height="20" origin="4" srcId="16" printId="22"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="663" width="34" height="20" origin="4" srcId="10" printId="23"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[35]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="663" width="83" height="20" origin="4" srcId="11" printId="23"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[HOUSE ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="663" width="88" height="20" origin="4" srcId="12" printId="23"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="663" width="136" height="20" origin="4" srcId="13" printId="23"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="663" width="141" height="20" origin="4" srcId="14" printId="23"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="663" width="97" height="20" origin="4" srcId="15" printId="23"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="663" width="126" height="20" origin="4" srcId="16" printId="23"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="684" width="34" height="20" origin="4" srcId="10" printId="24"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[38]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="684" width="83" height="20" origin="4" srcId="11" printId="24"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[FPA]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="684" width="88" height="20" origin="4" srcId="12" printId="24"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="684" width="136" height="20" origin="4" srcId="13" printId="24"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="684" width="141" height="20" origin="4" srcId="14" printId="24"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="684" width="97" height="20" origin="4" srcId="15" printId="24"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="684" width="126" height="20" origin="4" srcId="16" printId="24"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="705" width="34" height="20" origin="4" srcId="10" printId="25"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[40]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="705" width="83" height="20" origin="4" srcId="11" printId="25"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LOAN ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="705" width="88" height="20" origin="4" srcId="12" printId="25"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="705" width="136" height="20" origin="4" srcId="13" printId="25"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="705" width="141" height="20" origin="4" srcId="14" printId="25"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="705" width="97" height="20" origin="4" srcId="15" printId="25"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="705" width="126" height="20" origin="4" srcId="16" printId="25"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="726" width="34" height="20" origin="4" srcId="10" printId="26"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[41]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="726" width="83" height="20" origin="4" srcId="11" printId="26"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[LTC APPR CUM ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="726" width="88" height="20" origin="4" srcId="12" printId="26"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="726" width="136" height="20" origin="4" srcId="13" printId="26"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="726" width="141" height="20" origin="4" srcId="14" printId="26"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="726" width="97" height="20" origin="4" srcId="15" printId="26"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="726" width="126" height="20" origin="4" srcId="16" printId="26"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="747" width="34" height="20" origin="4" srcId="10" printId="27"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[43]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="747" width="83" height="20" origin="4" srcId="11" printId="27"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[NEW QUARTER]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="747" width="88" height="20" origin="4" srcId="12" printId="27"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="747" width="136" height="20" origin="4" srcId="13" printId="27"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="747" width="141" height="20" origin="4" srcId="14" printId="27"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="747" width="97" height="20" origin="4" srcId="15" printId="27"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="747" width="126" height="20" origin="4" srcId="16" printId="27"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="768" width="34" height="20" origin="4" srcId="10" printId="28"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[45]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="768" width="83" height="20" origin="4" srcId="11" printId="28"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TADA TD ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="768" width="88" height="20" origin="4" srcId="12" printId="28"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="768" width="136" height="20" origin="4" srcId="13" printId="28"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="768" width="141" height="20" origin="4" srcId="14" printId="28"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="768" width="97" height="20" origin="4" srcId="15" printId="28"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="768" width="126" height="20" origin="4" srcId="16" printId="28"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="789" width="34" height="20" origin="4" srcId="10" printId="29"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[46]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="789" width="83" height="20" origin="4" srcId="11" printId="29"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TADA TD ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="789" width="88" height="20" origin="4" srcId="12" printId="29"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="789" width="136" height="20" origin="4" srcId="13" printId="29"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="789" width="141" height="20" origin="4" srcId="14" printId="29"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="789" width="97" height="20" origin="4" srcId="15" printId="29"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="789" width="126" height="20" origin="4" srcId="16" printId="29"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="810" width="34" height="20" origin="4" srcId="10" printId="30"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[47]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="810" width="83" height="20" origin="4" srcId="11" printId="30"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TADA TD ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="810" width="88" height="20" origin="4" srcId="12" printId="30"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="810" width="136" height="20" origin="4" srcId="13" printId="30"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="810" width="141" height="20" origin="4" srcId="14" printId="30"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="810" width="97" height="20" origin="4" srcId="15" printId="30"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="810" width="126" height="20" origin="4" srcId="16" printId="30"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="831" width="34" height="20" origin="4" srcId="10" printId="31"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[48]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="831" width="83" height="20" origin="4" srcId="11" printId="31"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TADA TD ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="831" width="88" height="20" origin="4" srcId="12" printId="31"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="831" width="136" height="20" origin="4" srcId="13" printId="31"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="831" width="141" height="20" origin="4" srcId="14" printId="31"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="831" width="97" height="20" origin="4" srcId="15" printId="31"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="831" width="126" height="20" origin="4" srcId="16" printId="31"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="852" width="34" height="20" origin="4" srcId="10" printId="32"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[49]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="852" width="83" height="20" origin="4" srcId="11" printId="32"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TADA TD ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="852" width="88" height="20" origin="4" srcId="12" printId="32"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="852" width="136" height="20" origin="4" srcId="13" printId="32"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="852" width="141" height="20" origin="4" srcId="14" printId="32"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="852" width="97" height="20" origin="4" srcId="15" printId="32"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="852" width="126" height="20" origin="4" srcId="16" printId="32"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="873" width="34" height="20" origin="4" srcId="10" printId="33"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[50]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="873" width="83" height="20" origin="4" srcId="11" printId="33"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[CHANGE ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="873" width="88" height="20" origin="4" srcId="12" printId="33"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="873" width="136" height="20" origin="4" srcId="13" printId="33"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="873" width="141" height="20" origin="4" srcId="14" printId="33"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="873" width="97" height="20" origin="4" srcId="15" printId="33"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="873" width="126" height="20" origin="4" srcId="16" printId="33"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="894" width="34" height="20" origin="4" srcId="10" printId="34"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[51]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="894" width="83" height="20" origin="4" srcId="11" printId="34"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[MOVABLE ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="894" width="88" height="20" origin="4" srcId="12" printId="34"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="894" width="136" height="20" origin="4" srcId="13" printId="34"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="894" width="141" height="20" origin="4" srcId="14" printId="34"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="894" width="97" height="20" origin="4" srcId="15" printId="34"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="894" width="126" height="20" origin="4" srcId="16" printId="34"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="915" width="34" height="20" origin="4" srcId="10" printId="35"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[52]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="915" width="83" height="20" origin="4" srcId="11" printId="35"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TUITION FEE]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="915" width="88" height="20" origin="4" srcId="12" printId="35"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="915" width="136" height="20" origin="4" srcId="13" printId="35"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="915" width="141" height="20" origin="4" srcId="14" printId="35"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="915" width="97" height="20" origin="4" srcId="15" printId="35"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="915" width="126" height="20" origin="4" srcId="16" printId="35"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="936" width="34" height="20" origin="4" srcId="10" printId="36"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[53]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="936" width="83" height="20" origin="4" srcId="11" printId="36"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[MT VEHICLE]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="936" width="88" height="20" origin="4" srcId="12" printId="36"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="936" width="136" height="20" origin="4" srcId="13" printId="36"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="936" width="141" height="20" origin="4" srcId="14" printId="36"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="936" width="97" height="20" origin="4" srcId="15" printId="36"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="936" width="126" height="20" origin="4" srcId="16" printId="36"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="957" width="34" height="20" origin="4" srcId="10" printId="37"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[55]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="957" width="83" height="20" origin="4" srcId="11" printId="37"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TELEPHONE ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="957" width="88" height="20" origin="4" srcId="12" printId="37"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="957" width="136" height="20" origin="4" srcId="13" printId="37"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="957" width="141" height="20" origin="4" srcId="14" printId="37"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="957" width="97" height="20" origin="4" srcId="15" printId="37"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="957" width="126" height="20" origin="4" srcId="16" printId="37"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="978" width="34" height="20" origin="4" srcId="10" printId="38"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[80]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="978" width="83" height="20" origin="4" srcId="11" printId="38"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[TRAINING ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="978" width="88" height="20" origin="4" srcId="12" printId="38"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="978" width="136" height="20" origin="4" srcId="13" printId="38"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="978" width="141" height="20" origin="4" srcId="14" printId="38"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="978" width="97" height="20" origin="4" srcId="15" printId="38"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="978" width="126" height="20" origin="4" srcId="16" printId="38"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="999" width="34" height="20" origin="4" srcId="10" printId="39"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[81]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="999" width="83" height="20" origin="4" srcId="11" printId="39"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[CANCEL ]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="999" width="88" height="20" origin="4" srcId="12" printId="39"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="999" width="136" height="20" origin="4" srcId="13" printId="39"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="999" width="141" height="20" origin="4" srcId="14" printId="39"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="999" width="97" height="20" origin="4" srcId="15" printId="39"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="999" width="126" height="20" origin="4" srcId="16" printId="39"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="1020" width="34" height="20" origin="4" srcId="10" printId="40"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[82]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="1020" width="83" height="20" origin="4" srcId="11" printId="40"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[REQUISITION_A]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="1020" width="88" height="20" origin="4" srcId="12" printId="40"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="1020" width="136" height="20" origin="4" srcId="13" printId="40"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="1020" width="141" height="20" origin="4" srcId="14" printId="40"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="1020" width="97" height="20" origin="4" srcId="15" printId="40"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="1020" width="126" height="20" origin="4" srcId="16" printId="40"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="54b0a7a0-7dc4-4273-b3cd-d5bea38ac86e" x="20" y="1041" width="34" height="20" origin="4" srcId="10" printId="41"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[83]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="f380c923-a5fa-4041-bebc-ea70659b068a" x="54" y="1041" width="83" height="20" origin="4" srcId="11" printId="41"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[REQUISITION_R]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="fa18ec81-7028-40ea-9081-0c557880cca5" x="137" y="1041" width="88" height="20" origin="4" srcId="12" printId="41"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.sql.Timestamp" pattern="M/d/yy h:mm a">
+			<reportElement uuid="d746254b-3973-4e3b-bf28-44b20ecf6dfc" x="225" y="1041" width="136" height="20" origin="4" srcId="13" printId="41"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[7/20/15 6:29 PM]]></textContent>
+		</text>
+		<text textAlignment="Left" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="bedca5a4-6240-4bd2-9c20-03330383a193" x="361" y="1041" width="141" height="20" origin="4" srcId="14" printId="41"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[null]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Integer">
+			<reportElement uuid="82949bc9-df52-4099-9dfd-3f9bbe9c753f" x="502" y="1041" width="97" height="20" origin="4" srcId="15" printId="41"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[0]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.lang.Long">
+			<reportElement uuid="8ebc0abc-3b0e-4b7b-8e2e-2d8781e75c29" x="599" y="1041" width="126" height="20" origin="4" srcId="16" printId="41"/>
+			<box>
+				<topPen lineWidth="1.0"/>
+				<leftPen lineWidth="1.0"/>
+				<bottomPen lineWidth="1.0"/>
+				<rightPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[2]]></textContent>
+		</text>
+		<text textAlignment="Right" textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="65aac22b-6ebe-42d4-b070-ee839aa75a7f" x="287" y="1142" width="80" height="20" origin="6" srcId="17" printId="1"/>
+			<textContent><![CDATA[Page 1 of]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656">
+			<reportElement uuid="dca185ea-2076-4412-bd75-5b3254455392" x="367" y="1142" width="40" height="20" origin="6" srcId="18" printId="1"/>
+			<textContent><![CDATA[ 1]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.util.Date" pattern="dd/MM/yyyy">
+			<reportElement uuid="bbaac610-8755-4bfe-bf59-a448bbf59adf" x="22" y="1142" width="100" height="20" origin="6" srcId="19" printId="1"/>
+			<textContent><![CDATA[31/03/2016]]></textContent>
+		</text>
+		<text textHeight="12.578125" lineSpacingFactor="1.2578125" leadingOffset="-2.1972656" valueClass="java.util.Date" pattern="HH.mm">
+			<reportElement uuid="c2a095d1-338f-44ec-bd8e-0a9febd46722" x="705" y="1143" width="100" height="20" origin="6" srcId="20" printId="1"/>
+			<textContent><![CDATA[17.05]]></textContent>
+		</text>
+	</page>
+</jasperPrint>

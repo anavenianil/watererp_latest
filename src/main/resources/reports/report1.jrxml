@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name=" SampleReport1" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="feb5f72c-378a-441a-8703-1524657b6078">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="b2041ecb-b25f-4734-a05b-921be864882b"/>
+	<parameter name="id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Please Enter Your Id.......]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="name" class="java.lang.String">
+		<parameterDescription><![CDATA[PLlease Enter Your Name.....]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$F{name}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM `group_master` g where id=$P{id} and name=$P{name}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="creation_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_modified_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="Total_ids" class="java.lang.Number" calculation="Sum">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+	</variable>
+	<variable name="CountStatus" class="java.lang.Number" calculation="Count">
+		<variableExpression><![CDATA[$F{status_master_id}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{status_master_id}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="45" y="3" width="360" height="53" forecolor="#00FFFF" backcolor="#0000FF" uuid="61a6a315-1b18-46e5-a92a-40cb161c8082"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true" isUnderline="false" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<text><![CDATA[LIST OF GROUP MASTERS]]></text>
+			</staticText>
+			<textField evaluationTime="Auto" isBlankWhenNull="true">
+				<reportElement x="77" y="69" width="108" height="20" uuid="649829fe-b75d-4d6e-a819-cb51efb50556"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{Total_ids}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="69" width="66" height="20" uuid="87465aa8-9af0-43ee-9816-9d6fddda2e60"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total      ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="336" y="33" width="191" height="19" backcolor="#FF3333" uuid="62156349-a29c-443e-a025-fee6b5103f05"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[----This Is JhasperSoft Report....com]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="11" y="18" width="534" height="19" backcolor="#33FFFF" uuid="7396dced-d07a-4872-ae7a-0575913b1d11"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[  id              name                 creation_date         last_modified_date                    status_master_id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="11" y="0" width="37" height="20" uuid="a3ea677d-7859-49b3-b8ea-6a4c72ee5933"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="0" width="68" height="20" uuid="96fde176-958d-4e94-9986-deacbb6b3264"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="0" width="93" height="20" uuid="3c75abcc-72d5-4cc4-af21-b7b8bf5d2d02"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{creation_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="0" width="151" height="20" uuid="ebdff763-113f-4751-bce6-3aba4c6bee1d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{last_modified_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="185" height="20" uuid="7673ecfd-8b0d-4a9e-b945-6b4a1a4e9e73"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{status_master_id}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="128">
+			<subreport>
+				<reportElement x="11" y="72" width="198" height="56" uuid="28cc57ec-864c-495f-992b-5d708ae88770"/>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="name">
+					<subreportParameterExpression><![CDATA[$P{name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Documents and Settings\\santhosh\\Desktop\\JasperIreports\\subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Opaque" x="11" y="20" width="220" height="28" backcolor="#00FFFF" uuid="dced7ecc-78a6-4f9f-848c-29628d67bf72"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="18"/>
+				</textElement>
+				<text><![CDATA[SubReport Information]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="125" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="125" uuid="ce1d35f0-8180-45da-a356-003f49632bc5"/>
+				<imageExpression><![CDATA["C:\\Documents and Settings\\santhosh\\Desktop\\html&css\\Blue hills.jpg"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="269" y="40" width="100" height="1" uuid="3a9f5f93-9ce7-43b3-866a-9111ac2de7f5"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="114" splitType="Stretch">
+			<textField>
+				<reportElement x="209" y="83" width="80" height="20" uuid="c620aa6c-5ada-453e-ab13-d92b0d1f48d9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="289" y="83" width="40" height="20" uuid="e9e0ef27-1e8c-4bff-bd8a-8319c4b405f1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="402" y="64" width="153" height="50" uuid="370f14c0-c29a-4cb2-a884-b72f5dfc2b47"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39 (Extended)" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="113" splitType="Stretch">
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" mode="Opaque" x="36" y="92" width="366" height="20" backcolor="#33FF00" uuid="d0357c86-9d12-46ec-bae5-b755c89bba7a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Thanking For Giving This Opprtunity To Me......................]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="48" y="0" width="68" height="20" uuid="b4b37e40-4697-45fd-b360-36a3214b9d87"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{Total_ids}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="0" width="37" height="20" uuid="183413f8-7c3a-47ee-8114-b6050ad4ec03"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="0" width="151" height="20" uuid="872e0366-28a9-4d57-8991-8c2eb86b7ce3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Totalcountmaster_Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="0" width="185" height="20" uuid="952e13f0-421e-422a-8499-4107436d55f0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{CountStatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="18" width="555" height="20" backcolor="#99FF99" uuid="41ea3d9c-3f92-4780-9651-0039b546ad53"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[                                              Sorry No Data Found]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

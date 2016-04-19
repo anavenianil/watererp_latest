@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnController', function ($scope, $state, ApplicationTxn, ParseLinks, DateUtils, ApplicationTxnService) {
+    .controller('ApplicationTxnController', function ($scope, $state, ApplicationTxn, ParseLinks, DateUtils, ApplicationTxnService, Principal) {
 
         $scope.applicationTxns = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        
+        $scope.user = Principal.getLogonUser();
+        console.log($scope.user);
+        
         $scope.loadAll = function() {
             ApplicationTxn.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -15,6 +19,15 @@ angular.module('watererpApp')
                 }
             });
         };
+        
+        /*$scope.loadAll = function() {
+            ApplicationTxn.query({page: $scope.page, size: 20, login: $scope.user.login}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.applicationTxns.push(result[i]);
+                }
+            });
+        };*/
         $scope.reset = function() {
             $scope.page = 0;
             $scope.applicationTxns = [];

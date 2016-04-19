@@ -51,6 +51,10 @@
 						{{applicationTxn.status===0?'Pending':(requisition.status===1?'In
 						Feasibility':'Approved')}}</span> -->
 				</h3>
+				<div class="pull-right">
+					<a type="button" href="/api/applicationTxns/report/{{applicationTxn.id}}"
+						class="pull-right btn btn-warning">Download as PDF</a>
+				</div>
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
@@ -226,13 +230,13 @@
 			ui-sref="applicationTxnIssueMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Meter
 		</button>
-		
+
 		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===7"
 			ui-sref="applicationTxnClose({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Complete
 		</button>
-		
+
 		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===7"
 			ui-sref="applicationTxnCreateCan({applicationTxnId:applicationTxn.id})">
