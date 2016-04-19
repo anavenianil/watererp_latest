@@ -4302,7 +4302,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (322,'admin','2016-04-18 15:46:00','AUTHENTICATION_SUCCESS'),
  (323,'admin','2016-04-18 17:34:50','AUTHENTICATION_SUCCESS'),
  (324,'admin','2016-04-19 12:24:27','AUTHENTICATION_SUCCESS'),
- (325,'admin','2016-04-19 13:30:30','AUTHENTICATION_SUCCESS');
+ (325,'admin','2016-04-19 13:30:30','AUTHENTICATION_SUCCESS'),
+ (326,'admin','2016-04-19 14:08:25','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -5006,7 +5007,9 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (324,'remoteAddress','0:0:0:0:0:0:0:1'),
  (324,'sessionId','A532B92FD36BCC210D82B2B4F890216B'),
  (325,'remoteAddress','0:0:0:0:0:0:0:1'),
- (325,'sessionId','560B555BADDDB358BED5E7EEFAD2D2A8');
+ (325,'sessionId','560B555BADDDB358BED5E7EEFAD2D2A8'),
+ (326,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (326,'sessionId','91A304E8A7CF087B116831F83BBF48BD');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5063,7 +5066,7 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('fNpzeb666xEusKesIpiVaA==',15,'EB7kPB3Prax0zRKgFghQUg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('gCiedSGoLS/6IZ8DH5UOoQ==',3,'jwxC0rye5oKmSv/dEwEZlA==','2016-04-19','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('gCiedSGoLS/6IZ8DH5UOoQ==',3,'7s8BES5O3g/Ah/0Ks2rjGA==','2016-04-19','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('gjgSoEiEm2u4z82bxneQbA==',15,'Q5ukTsruzqRjPjl2jNIIBA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),

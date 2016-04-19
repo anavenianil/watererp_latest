@@ -59,7 +59,7 @@
 								<option value=""></option>
 							</select>
 						</div>
-						<div class="col-sm-4">
+						<!-- <div class="col-sm-4">
 							<label for="field_collectionTypeMaster">Expense Type</label> <select
 								class="form-control" id="field_collectionTypeMaster"
 								name="collectionTypeMaster"
@@ -67,6 +67,24 @@
 								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectiontypemasters track by collectionTypeMaster.id">
 								<option value=""></option>
 							</select>
+						</div> -->
+						<div class="col-sm-4">
+							<label for="field_applicationTxn">Search By Expense Type</label>
+
+							<div class="form-group"
+								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search Expense Type (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="row">
