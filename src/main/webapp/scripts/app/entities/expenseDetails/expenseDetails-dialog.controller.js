@@ -35,6 +35,13 @@ angular.module('watererpApp').controller(
 					return res;
 				});
 			}
+			
+			$scope.onSelect = function($item, $model, $label) {
+				console.log($item);
+				var arr = $item.split("-");
+				$scope.custInfo = $item;
+				$scope.isValidCust = true;
+			};
 
 			$scope.validate = function() {
 				if (!$scope.editForm.expenseAmt.$dirty)
