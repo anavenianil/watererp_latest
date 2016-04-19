@@ -749,6 +749,8 @@ CREATE TABLE `coll_details` (
 --
 
 /*!40000 ALTER TABLE `coll_details` DISABLE KEYS */;
+INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
+ (1,NULL,NULL,11,'2016-04-19 00:00:00',NULL,'11','2016-04-19',NULL,NULL,'617830977 ',' V.BHAGYAMMA ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,2,2);
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -4298,7 +4300,9 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (320,'billrunuser','2016-04-18 10:52:08','AUTHENTICATION_SUCCESS'),
  (321,'admin','2016-04-18 14:30:16','AUTHENTICATION_SUCCESS'),
  (322,'admin','2016-04-18 15:46:00','AUTHENTICATION_SUCCESS'),
- (323,'admin','2016-04-18 17:34:50','AUTHENTICATION_SUCCESS');
+ (323,'admin','2016-04-18 17:34:50','AUTHENTICATION_SUCCESS'),
+ (324,'admin','2016-04-19 12:24:27','AUTHENTICATION_SUCCESS'),
+ (325,'admin','2016-04-19 13:30:30','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -4998,7 +5002,11 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (322,'remoteAddress','127.0.0.1'),
  (322,'sessionId','479E0DF30B45F3E3CB86B9B290994C58'),
  (323,'remoteAddress','127.0.0.1'),
- (323,'sessionId','F7A92FF5362687D9809C92189649B8AD');
+ (323,'sessionId','F7A92FF5362687D9809C92189649B8AD'),
+ (324,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (324,'sessionId','A532B92FD36BCC210D82B2B4F890216B'),
+ (325,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (325,'sessionId','560B555BADDDB358BED5E7EEFAD2D2A8');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5055,7 +5063,7 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
  ('F2kB3vVrHHh0k5/n0nIzKA==',3,'70Zv5H6ShoO3S9SvA5QpCg==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('fNpzeb666xEusKesIpiVaA==',15,'EB7kPB3Prax0zRKgFghQUg==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('gCiedSGoLS/6IZ8DH5UOoQ==',3,'ImV3hU9fz+1erFCsHjvCvA==','2016-04-18','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('gCiedSGoLS/6IZ8DH5UOoQ==',3,'jwxC0rye5oKmSv/dEwEZlA==','2016-04-19','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('gDSEliPWD8ZBpMxy4sKgzw==',5,'JU7tUQKbDIftXBBphqfxHg==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('gjgSoEiEm2u4z82bxneQbA==',15,'Q5ukTsruzqRjPjl2jNIIBA==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -5872,9 +5880,9 @@ CREATE TABLE `payment_types` (
 
 /*!40000 ALTER TABLE `payment_types` DISABLE KEYS */;
 INSERT INTO `payment_types` (`id`,`payment_mode`) VALUES 
- (1,'Cash'),
- (2,'Demand Draft (DD)'),
- (3,'Cheque');
+ (1,'CASH'),
+ (2,'DEMAND DRAFT (DD)'),
+ (3,'CHEQUE');
 /*!40000 ALTER TABLE `payment_types` ENABLE KEYS */;
 
 

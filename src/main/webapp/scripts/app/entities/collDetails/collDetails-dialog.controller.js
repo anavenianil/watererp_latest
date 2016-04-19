@@ -166,7 +166,7 @@ angular.module('watererpApp').controller(
 			}
 
 			$scope.resetInstr = function(paymentMode) {
-				if (paymentMode === 'Cash') {
+				if (paymentMode === 'CASH') {
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;

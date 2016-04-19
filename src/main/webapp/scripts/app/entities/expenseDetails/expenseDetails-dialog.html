@@ -1,99 +1,130 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <!-- <div class="modal-header">
+	<!-- <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
         <h4 class="modal-title" id="myExpenseDetailsLabel">Create or edit a ExpenseDetails</h4>
     </div> -->
-    <div class="panel panel-primary">
+	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Expense Details</h3>
 		</div>
 		<div class="list-group">
-	<div class="list-group-item">
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="row">
-        <div class="col-sm-4">
-            <label class="control-label" for="field_expenseNo">Expense No</label>
-            <input type="text" class="form-control" name="expenseNo" id="field_expenseNo"
-                    ng-model="expenseDetails.expenseNo" readonly
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_expenseDt">Expense Date</label>
-            <div class="form-group">
-			<div class='input-group' id='field_expenseDt'>
-            <input id="field_expenseDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="expenseDetails.expenseDt" is-open="datePickerForExpenseDt.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForExpenseDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-            </div>
-            </div>
-        </div>
-        <div class="col-sm-4" ng-class="{ 'has-error' : editForm.expenseAmt.$invalid && !editForm.expenseAmt.$pristine }"
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_expenseNo">Expense
+								No</label> <input type="text" class="form-control" name="expenseNo"
+								id="field_expenseNo" ng-model="expenseDetails.expenseNo"
+								readonly />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_expenseDt">Expense
+								Date</label>
+							<div class="form-group">
+								<div class='input-group' id='field_expenseDt'>
+									<input id="field_expenseDt" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="expenseDetails.expenseDt"
+										is-open="datePickerForExpenseDt.status.opened" />
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForExpenseDtOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4"
+							ng-class="{ 'has-error' : editForm.expenseAmt.$invalid && !editForm.expenseAmt.$pristine }"
 							ng-pattern="/^[0-9]*$/">
-            <label class="control-label" for="field_expenseAmt">Expense Amount</label>
-            <input type="number" class="form-control" name="expenseAmt" id="field_expenseAmt"
-                    ng-model="expenseDetails.expenseAmt" required="required" min="1"
-                     />
-			<p ng-show="pattern">Expense Amount must be numeric.</p>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-sm-4">
-            <label for="field_paymentTypes">Expense Mode</label>
-            <select class="form-control" id="field_paymentTypes" name="paymentTypes" ng-model="expenseDetails.paymentTypes" ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="col-sm-4">
-            <label for="field_collectionTypeMaster">Expense Type</label>
-            <select class="form-control" id="field_collectionTypeMaster" name="collectionTypeMaster" ng-model="expenseDetails.collectionTypeMaster" ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectiontypemasters track by collectionTypeMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        </div>
-        <div class="row">
-        
-        
-        <div class="col-sm-4">
-            <label class="control-label" for="field_instrNo">Instrument No</label>
-            <input type="text" class="form-control" name="instrNo" id="field_instrNo"
-                    ng-model="expenseDetails.instrNo"
-                     />
-        </div>
-        <div class="col-sm-4">
-            <label for="field_instrumentIssuerMaster">Instrument Issuer</label>
-            <select class="form-control" id="field_instrumentIssuerMaster" name="instrumentIssuerMaster" ng-model="expenseDetails.instrumentIssuerMaster" ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="col-sm-4">
-            <label class="control-label" for="field_instrDt">Instrument Date</label>
-            <div class="form-group">
-			<div class='input-group' id='field_instrDt'>
-            <input id="field_instrDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="expenseDetails.instrDt" is-open="datePickerForInstrDt.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForInstrDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary" >
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
-    </div>
-    </div>
-    </div>
+							<label class="control-label" for="field_expenseAmt">Expense
+								Amount</label> <input type="number" class="form-control"
+								name="expenseAmt" id="field_expenseAmt"
+								ng-model="expenseDetails.expenseAmt" required="required" min="1" />
+							<p ng-show="pattern">Expense Amount must be numeric.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="field_paymentTypes">Expense Mode</label> <select
+								class="form-control" id="field_paymentTypes" name="paymentTypes"
+								ng-model="expenseDetails.paymentTypes"
+								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
+								ng-change="resetInstr(expenseDetails.paymentTypes.paymentMode)">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_collectionTypeMaster">Expense Type</label> <select
+								class="form-control" id="field_collectionTypeMaster"
+								name="collectionTypeMaster"
+								ng-model="expenseDetails.collectionTypeMaster"
+								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectiontypemasters track by collectionTypeMaster.id">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+
+
+						<div class="col-sm-4"
+							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
+							ng-pattern="/^[0-9]*$/">
+							<label class="control-label" for="field_instrNo">Instrument
+								No</label> <input type="text" class="form-control" name="instrNo"
+								id="field_instrNo" ng-model="expenseDetails.instrNo"
+								ng-disabled="!instrEnabled" />
+							<p
+								ng-show="instrEnabled && expenseDetails.instrNo.$isDirty && !expenseDetails.instrNo.length">Please
+								enter Instrument Number!</p>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_instrumentIssuerMaster">Instrument
+								Issuer</label> <select class="form-control"
+								id="field_instrumentIssuerMaster" name="instrumentIssuerMaster"
+								ng-model="expenseDetails.instrumentIssuerMaster"
+								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
+								ng-disabled="!instrEnabled">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_instrDt">Instrument
+								Date</label>
+							<div class="form-group">
+								<div class='input-group' id='field_instrDt'>
+									<input id="field_instrDt" name="instrDt" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="expenseDetails.instrDt"
+										is-open="datePickerForInstrDt.status.opened"
+										ng-disabled="!instrEnabled" /> <span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForInstrDtOpen($event)"
+											ng-disabled="!instrEnabled">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="validate()"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </form>
