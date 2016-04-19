@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="feasibilities_subreport2" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8e664c21-ee09-48b5-8058-71bf07b4a15a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select distinct j.first_name,j.created_date from jhi_user j join feasibility_study f where j.id=f.approved_by_zonal_head_id;]]>
+	</queryString>
+	<field name="first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="2" width="181" height="20" uuid="ddf62f24-8d72-451b-a1bd-1a446b89d762"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[approved_by_zonal_head_name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="223" y="2" width="92" height="20" uuid="d59da726-8cd1-44fe-b30b-239ad9a44581"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="10" width="158" height="14" uuid="ba7c7df5-dc29-4eea-bab3-f16697ec2248"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[.......................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="0" width="152" height="20" uuid="5a23a1b0-65d5-4796-882a-564a86333be0"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[dept_head_inspected_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="4" width="170" height="20" uuid="8dbc5ff0-69d5-414e-be24-56e5c905c1ab"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[.............................................................]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="517" y="0" width="149" height="20" uuid="840f2e85-f69d-48a2-8d88-0fbaa6806406"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{created_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

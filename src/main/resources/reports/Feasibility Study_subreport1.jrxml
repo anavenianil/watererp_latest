@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Feasibility Study_subreport1" language="groovy" pageWidth="700" pageHeight="802" columnWidth="700" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="05133fb4-a446-4573-b826-1400e7dff9e9">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="44"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select distinct j.first_name,j.created_date from jhi_user j join feasibility_study f where j.id=f.approved_by_zonal_head_id;]]>
+	</queryString>
+	<field name="first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="386" y="-1" width="121" height="20" uuid="dd4e7833-4db1-4f8b-b6d3-573215fb1094"/>
+				<text><![CDATA[zonal_head_approval_date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="174" y="-1" width="148" height="20" uuid="8c06862d-200b-4ee5-97de-5b7e39759af9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="-1" width="149" height="20" uuid="11de6d55-2f5e-4b6d-8ed7-b922f0bdee7b"/>
+				<text><![CDATA[approved_by_zonal_head_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="2" width="158" height="20" uuid="1fedc6f3-a8e8-4584-89a3-5c5ecbadd264"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[.......................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="2" width="151" height="20" uuid="f4677071-1995-4b7c-9004-1a8bf9044a26"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[.....................................................]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="505" y="-3" width="142" height="20" uuid="a1ea3719-48b6-4a83-808b-f7f978423ab6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{created_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sample" language="groovy" pageWidth="800" pageHeight="842" columnWidth="760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="d102e2de-a404-4f03-b5c6-0490103da88a">
+	<property name="ireport.zoom" value="1.0000000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="request Id" class="java.lang.Integer">
+		<parameterDescription><![CDATA[PLEASE ENTER YOUR REQUEST  ID]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$F{request_type_id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM `doi2`.`t_request_master` t  ]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="request_type_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="request_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="creation_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_modified_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="internal_flag" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="124" y="13" width="270" height="46" backcolor="#00FFFF" uuid="a4db0b85-d7a6-49b8-9aec-ddbfdcdfcc12"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[             Sample]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="441" y="21" width="100" height="20" backcolor="#999999" uuid="e12690a4-27e9-4282-8c3e-d50e120f3def"/>
+				<text><![CDATA[TESTING]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="152" height="20" uuid="ee87a4bc-6edc-452b-a0b5-67f9a81c0a71"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="0" width="152" height="20" uuid="20ef7e54-ea2b-44a5-b938-dffe6eee2370"/>
+				<text><![CDATA[request_type_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="0" width="152" height="20" uuid="4e83d61a-96eb-415d-bc0f-52ff725b7354"/>
+				<text><![CDATA[request_type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="0" width="152" height="20" uuid="8fe8f508-85a2-4474-b0a5-f2d7727b7eaa"/>
+				<text><![CDATA[status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="608" y="0" width="152" height="20" uuid="b0071faf-b86e-4a9d-9a24-734484c927f9"/>
+				<text><![CDATA[status_master_id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="152" height="20" uuid="974155bd-7331-4e54-ba72-1b0fca9062b7"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="0" width="152" height="20" uuid="1242564a-d1cd-4f0b-aaaa-f03a98474715"/>
+				<textFieldExpression><![CDATA[$F{request_type_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="304" y="0" width="152" height="20" uuid="7c211c69-2f9d-47d5-8c07-6552bc7ddd9a"/>
+				<textFieldExpression><![CDATA[$F{request_type}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="456" y="0" width="152" height="20" uuid="3fa7dc2c-a6f8-4783-b812-5797e789400c"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="608" y="0" width="152" height="20" uuid="4b88ef35-63b2-4a0e-877d-20f393c65ad5"/>
+				<textFieldExpression><![CDATA[$F{status_master_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="61">
+			<staticText>
+				<reportElement mode="Opaque" x="218" y="10" width="323" height="20" backcolor="#00FFFF" uuid="c58ee82c-16de-4139-942c-9a3ec31fffbb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SORRY YOU ENTERED INVALID REQUEST ID]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

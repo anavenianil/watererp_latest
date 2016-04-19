@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sample2" language="groovy" pageWidth="800" pageHeight="842" columnWidth="760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14900b13-dacd-44fa-8f6b-41551ca2f154">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="137"/>
+	<subDataset name="New Dataset 1" uuid="a1a28248-2e7e-4f09-91ce-10d8cb4e56b2">
+		<group name="requestchart" isStartNewPage="true"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT * FROM `doi2`.`t_request_master` t]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="request_type_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="request_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="creation_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_modified_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="internal_flag" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="224" y="10" width="270" height="44" backcolor="#00FFFF" uuid="42126690-cb01-4149-9c3d-82b063804587"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[             Sample]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="596" y="0" width="100" height="20" backcolor="#999999" uuid="9b8cf163-0261-48cc-b869-97fdac05e71c"/>
+				<text><![CDATA[TESTING]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="152" height="20" uuid="4287f935-f905-46e1-a081-30cc56cf4754"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="0" width="152" height="20" uuid="a6190372-b42b-4b70-85d4-3170896dd1b4"/>
+				<text><![CDATA[request_type_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="0" width="152" height="20" uuid="70bab2d3-d395-442b-b59e-82b9e239b2fe"/>
+				<text><![CDATA[request_type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="0" width="152" height="20" uuid="cc2b2298-9372-46f0-b55a-d5c5bf0eb679"/>
+				<text><![CDATA[status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="608" y="0" width="152" height="20" uuid="13ccf25a-0554-4d35-b6f2-54bbcafa0777"/>
+				<text><![CDATA[status_master_id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="152" height="20" uuid="8d6d087d-e096-4678-849e-173742846711"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="152" y="0" width="152" height="20" uuid="736822eb-7cde-4ca3-846a-26814082ab16"/>
+				<textFieldExpression><![CDATA[$F{request_type_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="304" y="0" width="152" height="20" uuid="5b9923df-778c-47b8-a588-e47787f0ce8d"/>
+				<textFieldExpression><![CDATA[$F{request_type}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="456" y="0" width="152" height="20" uuid="46a677da-fda4-4cde-8661-a6923c86dc1c"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="608" y="0" width="152" height="20" uuid="c8036135-bef6-4fbf-8161-9fd10bb58261"/>
+				<textFieldExpression><![CDATA[$F{status_master_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="5" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="266" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{request_type_id}]]></printWhenExpression>
+			<pie3DChart>
+				<chart>
+					<reportElement x="68" y="15" width="426" height="240" uuid="090bc819-3e3a-4254-95c0-2146a24557ee"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{request_type_id}]]></keyExpression>
+					<valueExpression><![CDATA[$F{request_type}]]></valueExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</summary>
+</jasperReport>
