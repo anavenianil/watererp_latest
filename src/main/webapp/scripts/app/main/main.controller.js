@@ -43,15 +43,14 @@ angular.module('watererpApp').controller('MainController',
 			});
 			
 			$scope.getDetails = function(type) {
-				console.log(type);
-				
-				if(type==='REQUISITION')
+				if(type==='REQUISITION' || type ==='WITHOUTMETER')
 				{ 
 					$state.go('applicationTxn'); 
 				}
 				else if(type==='INCORRECT BILL'){
 					$state.go('customerComplaints'); 
 				}
+				
 				 
 
 			}

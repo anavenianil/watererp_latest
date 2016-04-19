@@ -30,11 +30,13 @@ import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
+import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -69,6 +71,9 @@ public class ApplicationTxnResource {
     @Inject
     private CustDetailsRepository custDetailsRepository;
     
+    @Inject
+    private TariffCategoryMasterRepository tariffCategoryMasterRepository;
+    
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -95,7 +100,7 @@ public class ApplicationTxnResource {
         UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-        //this is for workflow
+        //this is for workflow for new request
         try{
         	workflowService.getUserDetails();
         	applicationTxnWorkflowService.createTxn(applicationTxn);
@@ -103,6 +108,11 @@ public class ApplicationTxnResource {
         catch(Exception e){
         	System.out.println(e);
         }
+        
+        //workflow when whithout meter
+        /*if(applicationTxn.getApprovedDate()!= null && applicationTxn.getUser()!=null){
+        	
+        }*/
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))
@@ -125,8 +135,14 @@ public class ApplicationTxnResource {
             return createApplicationTxn(request, applicationTxn);
         }
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
-        CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
-        custDetailsRepository.save(custDetails);
+        
+        if(applicationTxn.getCan()!= null && applicationTxn.getConnectionDate() != null){
+        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
+            TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(result.getCategoryMaster().getId());
+            custDetails.setTariffCategoryMaster(tcm);
+            custDetails.setId(null);
+            custDetailsRepository.save(custDetails);
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);

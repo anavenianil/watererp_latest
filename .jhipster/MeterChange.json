@@ -1,0 +1,72 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "custDetails",
+            "otherEntityName": "custDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "meterDetails",
+            "otherEntityName": "meterDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "can",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "reasonForChange",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "existingMeterNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "existingMeterReading",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "newMeterNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "newMeterReading",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "approvedDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20160419095001",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}
+
