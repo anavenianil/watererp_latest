@@ -15,8 +15,18 @@ angular.module('watererpApp').controller(
 			$scope.custDetails = {};
 			$scope.collDetails = {};
 			$scope.collDetails.custDetails = {};
+			$scope.collectionTypeMasters = [];
+			$scope.collDetails.collectionTypeMaster = {};
 
 			$scope.collDetails.receiptDt = new Date();
+			
+			CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'C'}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.collectionTypeMasters.push(result[i]);
+                }
+                $scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
+            });
 
 			var onSaveSuccess = function(result) {
 				$scope.$emit('watererpApp:collDetailsUpdate', result);
@@ -156,7 +166,7 @@ angular.module('watererpApp').controller(
 			}
 
 			$scope.resetInstr = function(paymentMode) {
-				if (paymentMode === 'Cash') {
+				if (paymentMode === 'CASH') {
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;

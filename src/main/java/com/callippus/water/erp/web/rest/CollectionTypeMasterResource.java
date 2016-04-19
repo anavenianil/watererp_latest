@@ -2,9 +2,11 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.CollectionTypeMaster;
+import com.callippus.water.erp.domain.DivisionMaster;
 import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -76,10 +79,18 @@ public class CollectionTypeMasterResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<CollectionTypeMaster>> getAllCollectionTypeMasters(Pageable pageable)
+    public ResponseEntity<List<CollectionTypeMaster>> getAllCollectionTypeMasters(Pageable pageable,
+    		@RequestParam(value = "txnType", required = false) String txnType)
         throws URISyntaxException {
         log.debug("REST request to get a page of CollectionTypeMasters");
-        Page<CollectionTypeMaster> page = collectionTypeMasterRepository.findAll(pageable); 
+        //Page<CollectionTypeMaster> page = collectionTypeMasterRepository.findAll(pageable); 
+        Page<CollectionTypeMaster> page;
+        if(txnType == null){
+        	 page = collectionTypeMasterRepository.findAll(pageable);
+        }
+        else{
+        	page = collectionTypeMasterRepository.findByTxnType(pageable, txnType);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/collectionTypeMasters");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
