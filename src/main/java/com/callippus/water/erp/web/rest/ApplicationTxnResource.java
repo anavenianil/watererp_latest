@@ -2,7 +2,6 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -37,6 +37,7 @@ import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
+import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -74,6 +75,9 @@ public class ApplicationTxnResource {
     @Inject
     private TariffCategoryMasterRepository tariffCategoryMasterRepository;
     
+    @Inject
+    private UserRepository userRepository;
+    
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -99,7 +103,7 @@ public class ApplicationTxnResource {
         hm.put("photo", "setPhoto");
         UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
         
-        ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+        //ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         //this is for workflow for new request
         try{
         	workflowService.getUserDetails();
@@ -108,6 +112,10 @@ public class ApplicationTxnResource {
         catch(Exception e){
         	System.out.println(e);
         }
+        Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+        applicationTxn.setRequestAt(userRepository.findById(uid));
+        
+        ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         //workflow when whithout meter
         /*if(applicationTxn.getApprovedDate()!= null && applicationTxn.getUser()!=null){
@@ -342,5 +350,38 @@ public class ApplicationTxnResource {
         		newCan,
                     HttpStatus.OK);
 		
-	}        
+	} 
+	
+	
+	@RequestMapping(value = "/applicationTxns/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<ApplicationTxn>> search(
+			@RequestParam(value = "applicationTxnNo", required = false) String applicationTxnNo,
+			@RequestParam(value = "applicationTxnDt", required = false) LocalDateTime applicationTxnDt,
+			@RequestParam(value = "statusSearch", required = false) String statusSearch
+			)
+			throws URISyntaxException, Exception {
+		log.debug("ApplicationTxn -------- search: {}");
+		List<ApplicationTxn> applicationTxns;
+		
+		workflowService.getUserDetails();
+		Long userId = Long.parseLong(workflowService.getSfID());
+
+		String whereClause = "requestAt.id=" + userId +" ";
+		
+		if(applicationTxnNo != null && !applicationTxnNo.equals(""))
+			whereClause += "and id =" + applicationTxnNo ;
+
+		if(applicationTxnDt != null && !applicationTxnDt.equals(""))
+			whereClause += "and date(requested_date) = '" + applicationTxnDt.toString("yyyy-MM-dd")  +"' ";
+		
+		if(statusSearch != null && !statusSearch.equals(""))
+			whereClause += "and status = " + statusSearch +" ";
+
+		applicationTxns = applicationTxnCustomRepository.search(
+					whereClause);
+		
+		return new ResponseEntity<List<ApplicationTxn>>(applicationTxns,
+				 HttpStatus.OK);
+	}
 }

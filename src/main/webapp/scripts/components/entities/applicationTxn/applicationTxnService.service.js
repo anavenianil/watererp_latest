@@ -71,22 +71,25 @@ angular.module('watererpApp').factory(
 					}).then(function(response) {
 						return response.data;
 					});
+				},
+				search : function(applicationTxnNo, applicationTxnDt, statusSearch) {
+					return $http.get('api/applicationTxns/search', {
+						params : {
+							applicationTxnNo : applicationTxnNo,
+							applicationTxnDt : applicationTxnDt,
+							statusSearch : statusSearch
+						}
+					}).then(function(response) {
+						return response.data;
+					});
 				}
 			/*
 			 * , getMyRequests: function () { return
 			 * $http.get('api/applicationTxns/getMyRequests').then(function
-			 * (response) { return response.data; }); }
+			 * (response) { return response.data; }); },
 			 */
 
 			/*
-			 * , search: function (applicationTxnNo, applicationTxnDt,
-			 * proposedDt, statusSearch) { return
-			 * $http.get('api/applicationTxns/search', {params:
-			 * {applicationTxnNo: applicationTxnNo, applicationTxnDt:
-			 * applicationTxnDt, proposedDt: proposedDt, statusSearch:
-			 * statusSearch}}).then(function (response) { return response.data;
-			 * }); },
-			 * 
 			 * findByStatus : function(applicationTxnStatus){ return
 			 * $http.get('api/applicationTxn/byStatus', {params:
 			 * {applicationTxnStatus:applicationTxnStatus}}).then(function(response){

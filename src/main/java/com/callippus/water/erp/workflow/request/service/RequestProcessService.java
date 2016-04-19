@@ -501,6 +501,7 @@ public class RequestProcessService {
 				.getSfID())));
 		rwh.setAssignedTo(userRepository.findById(new Long(workflowService
 				.getParentID())));
+		workflowService.setRequestAt(rwh.getAssignedTo().getId().toString());//additional Added by mohib for applicationTxn
 		workflowService.getStatus();
 		rwh.setStatusMaster(statusMasterRepository.findOne(new Long(3)));// 3-PENDING
 		rwh.setIpAddress(workflowService.getIpAddress());

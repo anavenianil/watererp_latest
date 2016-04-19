@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -247,4 +248,12 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		return items;
 	}
 
+	
+	@SuppressWarnings("unchecked")
+	public List<ApplicationTxn> search(String whereClause) {
+
+		String sql = "from ApplicationTxn req where " + whereClause;
+		Query query = entityManager.createQuery(sql);
+		return (List<ApplicationTxn>) query.getResultList();
+	}
 }

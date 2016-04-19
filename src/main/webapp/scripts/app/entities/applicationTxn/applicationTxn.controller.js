@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnController', function ($scope, $state, ApplicationTxn, ParseLinks) {
+    .controller('ApplicationTxnController', function ($scope, $state, ApplicationTxn, ParseLinks, DateUtils, ApplicationTxnService) {
 
         $scope.applicationTxns = [];
         $scope.predicate = 'id';
@@ -67,4 +67,30 @@ angular.module('watererpApp')
                 id: null
             };
         };
+        
+        $scope.datePickerForapplicationTxnDt = {};
+
+        $scope.datePickerForapplicationTxnDt.status = {
+            opened: false
+        };
+
+        $scope.datePickerForapplicationTxnDtOpen = function($event) {
+            $scope.datePickerForapplicationTxnDt.status.opened = true;
+        };
+        
+        $scope.onSearch = function() {
+
+        	var applicationTxnNo = document.getElementById("applicationTxnId").value;
+            console.log("applicationTxnNo: "+applicationTxnNo);
+            
+            var applicationTxnDt = DateUtils.convertLocaleDateToServer($scope.applicationTxnDt);
+            console.log("applicationTxnDt: "+$scope.applicationTxnDt);
+            
+            var statusSearch = document.getElementById("statusSearch").value;
+            console.log("statusSearch: "+statusSearch);
+            
+            ApplicationTxnService.search(applicationTxnNo, applicationTxnDt, statusSearch).then(function (data) {
+                $scope.applicationTxns = data;
+            });
+        }
     });

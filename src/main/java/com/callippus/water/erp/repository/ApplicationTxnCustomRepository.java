@@ -18,4 +18,6 @@ JpaRepository<ApplicationTxn, Long> {
 	List<RequestWorkflowHistory> listAllPendingRequests(String type) throws Exception;
 	List<RequestWorkflowHistory> listAllApprovedRequests(String type) throws Exception;
 	
+	List<ApplicationTxn> search(String whereClause);
+	
 }

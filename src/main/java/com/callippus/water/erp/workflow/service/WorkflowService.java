@@ -115,11 +115,25 @@ public class WorkflowService {
 	
 	private Integer requestStatus; // for requisition status
 	
+	private String requestAt;
+	
 	// =================Workflow Process=================
 
 	
 
 	
+
+	public String getRequestAt() {
+		return requestAt;
+	}
+
+	public void setRequestAt(String requestAt) {
+		this.requestAt = requestAt;
+	}
+
+	public StatusMasterRepository getStatusMasterRepository() {
+		return statusMasterRepository;
+	}
 
 	public String getDomain_object_id() {
 		return domain_object_id;
