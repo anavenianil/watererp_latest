@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -44,6 +45,7 @@ import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
@@ -85,6 +87,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private UserRepository userRepository;
+    
+    @Inject
+    private ReportsCustomRepository reportsRepository;
     
     
     /**
@@ -390,9 +395,12 @@ public class ApplicationTxnResource {
 	@ResponseBody
 	public void getApplicationTxnReport(HttpServletResponse response, @PathVariable Long id) throws JRException,
 			IOException {
+		
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("id",id);
 
-		JasperPrint jasperPrint = applicationTxnCustomRepository
-				.applicationTxnReports(id);
+		JasperPrint jasperPrint = reportsRepository
+				.generateReport("/reports/Application_txn.jasper", params);
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
 				"inline; filename=ApplicationTxn_Report_" + id + ".pdf");

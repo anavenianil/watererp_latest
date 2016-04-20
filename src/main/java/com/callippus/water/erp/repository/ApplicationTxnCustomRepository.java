@@ -23,8 +23,5 @@ JpaRepository<ApplicationTxn, Long> {
 	
 
 	List<ApplicationTxn> search(String whereClause);
-	
-
-	public JasperPrint applicationTxnReports(Long id) throws JRException;
 
 }
