@@ -207,7 +207,7 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		SessionImpl sessionImpl = (SessionImpl) session;
 		Connection conn = sessionImpl.connection();
 		
-		params.put("Id", id);
+		params.put("id", id);
 		JasperReport jasperReport = (JasperReport) JRLoader
 				.loadObject(jasperStream);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
