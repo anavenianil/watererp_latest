@@ -153,7 +153,7 @@ public class ApplicationTxnResource {
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
-        if(applicationTxn.getCan()!= null && applicationTxn.getConnectionDate() != null){
+        if(applicationTxn.getStatus()==7){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
             TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(result.getCategoryMaster().getId());
             custDetails.setTariffCategoryMaster(tcm);
