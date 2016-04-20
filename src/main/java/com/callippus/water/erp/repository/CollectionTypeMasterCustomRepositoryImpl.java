@@ -39,17 +39,20 @@ CollectionTypeMasterCustomRepository {
 	}
 
 	@Override
-	public List<String> searchEXP(String searchTerm) {
+	public List<CollectionTypeMaster> searchEXP(String searchTerm) {
 		// TODO Auto-generated method stub
 		
-		String sql = "SELECT coll_name exp_type from collection_type_master where coll_name like ? and txn_type = ? limit 10";
+		String sql = "SELECT id,coll_name exp_type from collection_type_master where coll_name like ? and txn_type = ? limit 10";
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
 				.queryForList(sql, new Object[] {"%" + searchTerm + "%","E"});
-
-		List<String> items = new ArrayList<String>();
+		CollectionTypeMaster collectionTypeMaster;
+		List<CollectionTypeMaster> items = new ArrayList<CollectionTypeMaster>();
 
 		for (Map row : rows) {
-			items.add((String)row.get("exp_type"));
+			collectionTypeMaster = new CollectionTypeMaster();
+			collectionTypeMaster.setId((Long)row.get("id"));			
+			collectionTypeMaster.setCollName((String)row.get("exp_type"));
+			items.add(collectionTypeMaster);
 		}
 		return items;
 	}

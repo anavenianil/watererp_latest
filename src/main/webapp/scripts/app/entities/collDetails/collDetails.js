@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/collDetailss',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
                     pageTitle: 'CollDetailss'
                 },
                 views: {
@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/collDetails/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
                     pageTitle: 'CollDetails'
                 },
                 views: {
@@ -42,7 +42,7 @@ angular.module('watererpApp')
                 parent: 'collDetails',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
                     pageTitle: 'CollDetailss'
                 },
                 views: {
@@ -58,7 +58,7 @@ angular.module('watererpApp')
                 parent: 'collDetails',
                 url: '/edit/:id',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
                     pageTitle: 'CollDetailss'
                 },
                 views: {
@@ -74,7 +74,7 @@ angular.module('watererpApp')
                 parent: 'collDetails',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({

@@ -5,6 +5,7 @@ angular.module('watererpApp').controller(
 		function($scope, $state, ExpenseDetails, PaymentTypes,
 				InstrumentIssuerMaster, CollectionTypeMaster, ParseLinks,
 				$stateParams, $http) {
+			$scope.isValidExpense = false;
 			$scope.instrEnabled = true;
 			$scope.expenseDetails = {};
 			$scope.collectiontypemasters = [];
@@ -19,7 +20,7 @@ angular.module('watererpApp').controller(
 			};
 
 			$scope.getLocation = function(val) {
-				//$scope.isValidCust = false;
+				$scope.isValidExpense = false;
 				//console.log(val);
 
 				return $http.get('api/collectionTypeMasters/searchEXP/' + val, {
@@ -38,12 +39,13 @@ angular.module('watererpApp').controller(
 			
 			$scope.onSelect = function($item, $model, $label) {
 				console.log($item);
-				var arr = $item.split("-");
-				$scope.custInfo = $item;
-				$scope.isValidCust = true;
+				$scope.expenseDetails.collectionTypeMaster = $item;
+				$scope.isValidExpense = true;
 			};
 
 			$scope.validate = function() {
+				if (!$scope.isValidExpense)
+					return true;
 				if (!$scope.editForm.expenseAmt.$dirty)
 					return true;
 				if (!$scope.editForm.paymentTypes.$dirty)
@@ -72,19 +74,6 @@ angular.module('watererpApp').controller(
 				}
 				return false;
 			}
-
-			// This code is used to get Expense Types from
-			// collection_type_master table based on txn_type E.
-			CollectionTypeMaster.query({
-				page : $scope.page,
-				size : 20,
-				txnType : 'E'
-			}, function(result, headers) {
-				$scope.links = ParseLinks.parse(headers('link'));
-				for (var i = 0; i < result.length; i++) {
-					$scope.collectiontypemasters.push(result[i]);
-				}
-			});
 
 			if ($scope.expenseDetailsId != null)
 				$scope.load($scope.expenseDetailsId);

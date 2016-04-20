@@ -7,5 +7,5 @@ import com.callippus.water.erp.domain.CollectionTypeMaster;
 
 public interface CollectionTypeMasterCustomRepository  extends
 JpaRepository<CollectionTypeMaster, Long> {	
-	public List<String> searchEXP(@Param("searchTerm") String searchTerm);
+	public List<CollectionTypeMaster> searchEXP(@Param("searchTerm") String searchTerm);
 }
