@@ -17,7 +17,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -36,14 +35,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
-import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
@@ -90,6 +90,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private ReportsCustomRepository reportsRepository;
+    
+    @Inject
+    private CustMeterMappingRepository custMeterMappingRepository;
     
     
     /**
@@ -155,7 +158,15 @@ public class ApplicationTxnResource {
             TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(result.getCategoryMaster().getId());
             custDetails.setTariffCategoryMaster(tcm);
             custDetails.setId(null);
-            custDetailsRepository.save(custDetails);
+            CustDetails cd = custDetailsRepository.save(custDetails);
+            
+            //saving to CustMetermMapping
+            CustMeterMapping custMeterMapping =new CustMeterMapping();
+            custMeterMapping.setId(null);
+            custMeterMapping.setCustDetails(cd);
+            custMeterMapping.setMeterDetails(applicationTxn.getMeterDetails());
+            custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
+            custMeterMappingRepository.save(custMeterMapping);
         }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
