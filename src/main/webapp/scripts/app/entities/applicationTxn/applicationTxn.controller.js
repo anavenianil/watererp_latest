@@ -9,10 +9,19 @@ angular.module('watererpApp')
         $scope.page = 0;
         
         $scope.user = Principal.getLogonUser();
-        console.log($scope.user);
+        //console.log($scope.user);
+        
+        /*$scope.loadAll = function() {
+            ApplicationTxn.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.applicationTxns.push(result[i]);
+                }
+            });
+        };*/
         
         $scope.loadAll = function() {
-            ApplicationTxn.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            ApplicationTxn.query({page: $scope.page, size: 20, login: $scope.user.login}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.applicationTxns.push(result[i]);
@@ -20,14 +29,6 @@ angular.module('watererpApp')
             });
         };
         
-        /*$scope.loadAll = function() {
-            ApplicationTxn.query({page: $scope.page, size: 20, login: $scope.user.login}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.applicationTxns.push(result[i]);
-                }
-            });
-        };*/
         $scope.reset = function() {
             $scope.page = 0;
             $scope.applicationTxns = [];
@@ -92,7 +93,6 @@ angular.module('watererpApp')
         };
         
         $scope.onSearch = function() {
-
         	var applicationTxnNo = document.getElementById("applicationTxnId").value;
             console.log("applicationTxnNo: "+applicationTxnNo);
             

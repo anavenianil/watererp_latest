@@ -142,6 +142,8 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
+        Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+        applicationTxn.setRequestAt(userRepository.findById(uid));
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         if(applicationTxn.getCan()!= null && applicationTxn.getConnectionDate() != null){
@@ -232,6 +234,8 @@ public class ApplicationTxnResource {
         /*if(workflowService.getRequestStatus() == 2){
         	applicationTxnWorkflowService.updateApplicationTxn(id);
         }*/
+        Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+        applicationTxn.setRequestAt(userRepository.findById(uid));
         applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok().build();
 	}
@@ -361,19 +365,20 @@ public class ApplicationTxnResource {
 		log.debug("ApplicationTxn -------- search: {}");
 		List<ApplicationTxn> applicationTxns;
 		
-		workflowService.getUserDetails();
+		/*workflowService.getUserDetails();
 		Long userId = Long.parseLong(workflowService.getSfID());
 
-		String whereClause = "requestAt.id=" + userId +" ";
+		String whereClause = "requestAt.id=" + userId +" ";*/
+		String whereClause = null;
 		
 		if(applicationTxnNo != null && !applicationTxnNo.equals(""))
-			whereClause += "and id =" + applicationTxnNo ;
+			whereClause = "and id =" + applicationTxnNo ;
 
 		if(applicationTxnDt != null && !applicationTxnDt.equals(""))
-			whereClause += "and date(requested_date) = '" + applicationTxnDt.toString("yyyy-MM-dd")  +"' ";
+			whereClause = "and date(requested_date) = '" + applicationTxnDt.toString("yyyy-MM-dd")  +"' ";
 		
 		if(statusSearch != null && !statusSearch.equals(""))
-			whereClause += "and status = " + statusSearch +" ";
+			whereClause = "and status = " + statusSearch +" ";
 
 		applicationTxns = applicationTxnCustomRepository.search(
 					whereClause);
