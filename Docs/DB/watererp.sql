@@ -196,10 +196,7 @@ CREATE TABLE `bill_details` (
 
 /*!40000 ALTER TABLE `bill_details` DISABLE KEYS */;
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`mtr_reader_id`) VALUES 
- (1,'617818256',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,352400,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (2,'617822212',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,253400,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (3,'617822212',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,253400,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
- (4,'617822212',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,253477,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,14);
+ (10,'617822212',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,253000,253400,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,14);
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 
 
@@ -740,8 +737,6 @@ CREATE TABLE `coll_details` (
 --
 
 /*!40000 ALTER TABLE `coll_details` DISABLE KEYS */;
-INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
- (1,NULL,NULL,11,'2016-04-19 00:00:00',NULL,'11','2016-04-19',NULL,NULL,'617830977 ',' V.BHAGYAMMA ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,2,2);
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -3532,6 +3527,8 @@ CREATE TABLE `expense_details` (
 --
 
 /*!40000 ALTER TABLE `expense_details` DISABLE KEYS */;
+INSERT INTO `expense_details` (`id`,`expense_no`,`expense_amt`,`expense_dt`,`instr_no`,`instr_dt`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
+ (6,NULL,1200,'2016-04-20 18:53:33',NULL,NULL,1,NULL,6);
 /*!40000 ALTER TABLE `expense_details` ENABLE KEYS */;
 
 
@@ -3923,6 +3920,7 @@ INSERT INTO `jhi_authority` (`name`) VALUES
  ('ROLE_ADMIN'),
  ('ROLE_BILLRUN'),
  ('ROLE_BILLRUN_MANAGER'),
+ ('ROLE_CASHIER'),
  ('ROLE_CUSTOMER'),
  ('ROLE_EMPLOYEE'),
  ('ROLE_USER');
@@ -4302,7 +4300,17 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (331,'admin','2016-04-20 11:49:46','AUTHENTICATION_SUCCESS'),
  (332,'admin','2016-04-20 14:44:43','AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
- (333,'admin','2016-04-20 14:48:43','AUTHENTICATION_SUCCESS');
+ (333,'admin','2016-04-20 14:48:43','AUTHENTICATION_SUCCESS'),
+ (334,'admin','2016-04-20 17:06:09','AUTHENTICATION_SUCCESS'),
+ (335,'admin','2016-04-20 17:09:10','AUTHENTICATION_SUCCESS'),
+ (336,'cashier','2016-04-20 17:13:14','AUTHENTICATION_SUCCESS'),
+ (337,'admin','2016-04-20 17:14:27','AUTHENTICATION_SUCCESS'),
+ (338,'cashier','2016-04-20 17:44:21','AUTHENTICATION_SUCCESS'),
+ (339,'cashier','2016-04-20 17:53:38','AUTHENTICATION_SUCCESS'),
+ (340,'cashier','2016-04-20 17:56:06','AUTHENTICATION_SUCCESS'),
+ (341,'admin','2016-04-20 17:57:44','AUTHENTICATION_SUCCESS'),
+ (342,'cashier','2016-04-20 18:22:13','AUTHENTICATION_SUCCESS'),
+ (343,'admin','2016-04-20 18:22:53','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -5023,7 +5031,28 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (332,'remoteAddress','127.0.0.1'),
  (332,'sessionId','521A29491DE0876BC199151F278878C3'),
  (333,'remoteAddress','127.0.0.1'),
- (333,'sessionId','0E20B2EAD23B7F564ECA77671EEDC23B');
+ (333,'sessionId','0E20B2EAD23B7F564ECA77671EEDC23B'),
+ (334,'remoteAddress','127.0.0.1'),
+ (334,'sessionId','72904D5137081F6451A2F3C634611105'),
+ (335,'remoteAddress','127.0.0.1'),
+ (335,'sessionId','AE2F6C489DB220912AB6B5BD6043C7DC'),
+ (336,'remoteAddress','127.0.0.1'),
+ (336,'sessionId','4D56592C1650B1CCD44CC61553F446EE'),
+ (337,'remoteAddress','127.0.0.1'),
+ (337,'sessionId','94EEA94FFFE89AF71533EF796AAE8252'),
+ (338,'remoteAddress','127.0.0.1'),
+ (338,'sessionId','BB144A8E82437BCB901664CEEFB82B7E');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (339,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (339,'sessionId','185B05F526B6DFD1913A17E1E55836C8'),
+ (340,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (340,'sessionId','FB0F006B3515C72CFCBD02B50F3A23DE'),
+ (341,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (341,'sessionId','B19A6D1B5F2B80E1679728247D683ECC'),
+ (342,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (342,'sessionId','660159098BB4D52BED905171A6B3BD9B'),
+ (343,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (343,'sessionId','F690239B960809BEB8107BD0D9D7ED8D');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5208,7 +5237,8 @@ INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`e
  (36,'sf0033','$2a$10$xackKRecfhkVg55E/39BQOKDMc4R/PZ13QbUKhIxK6pC0muMQlUbS',NULL,NULL,'sf0033@localhost','','en','89634622497267965050',NULL,'anonymousUser','2016-04-20 14:47:40',NULL,'admin','2016-04-20 14:49:08'),
  (37,'sf0034','$2a$10$oSlecOefI4dS3tkglpMrz.D6ZPSBI/A2TQ4g4fFCKIipJb7RmWrTu',NULL,NULL,'sf0034@localhost','','en','33959352930458661266',NULL,'anonymousUser','2016-04-20 14:48:07',NULL,'admin','2016-04-20 14:49:10');
 INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
- (38,'sf0035','$2a$10$yJU/rhzonrE90a54kCxkoex4V17kj6dY/N5W9iqsaiqfHUaUSay4K',NULL,NULL,'sf0035@localhost','','en','62319485221954799935',NULL,'anonymousUser','2016-04-20 14:48:37',NULL,'admin','2016-04-20 14:49:12');
+ (38,'sf0035','$2a$10$yJU/rhzonrE90a54kCxkoex4V17kj6dY/N5W9iqsaiqfHUaUSay4K',NULL,NULL,'sf0035@localhost','','en','62319485221954799935',NULL,'anonymousUser','2016-04-20 14:48:37',NULL,'admin','2016-04-20 14:49:12'),
+ (39,'cashier','$2a$10$f1aWBfkhPvWk3oqJ/iY8QuS/1hj1KeYVGhsfOB7tT8BhqiLdqXPFe',NULL,NULL,'cashier@localhost','','en','32060675379252967770',NULL,'anonymousUser','2016-04-20 17:05:59',NULL,'admin','2016-04-20 17:06:30');
 /*!40000 ALTER TABLE `jhi_user` ENABLE KEYS */;
 
 
@@ -5236,6 +5266,7 @@ INSERT INTO `jhi_user_authority` (`user_id`,`authority_name`) VALUES
  (3,'ROLE_ADMIN'),
  (30,'ROLE_BILLRUN'),
  (31,'ROLE_BILLRUN_MANAGER'),
+ (39,'ROLE_CASHIER'),
  (5,'ROLE_CUSTOMER'),
  (1,'ROLE_USER'),
  (3,'ROLE_USER'),
@@ -5471,7 +5502,7 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (20,'Bill Of Material','#/billOfMaterials','2016-04-01 00:00:00'),
  (21,'Access List','#/accessLists','2016-03-15 00:00:00'),
  (22,'Bill Full Details','#/billFullDetailss','2016-03-15 00:00:00'),
- (23,'Collection Details','#/collDetailss/new','2016-03-15 00:00:00'),
+ (23,'New Collection Details','#/collDetailss/new','2016-03-15 00:00:00'),
  (24,'Current Users','#/currentUserss','2016-03-15 00:00:00'),
  (25,'Customer Details','#/custDetailss','2016-03-15 00:00:00'),
  (26,'Terminal','#/terminals','2016-03-15 00:00:00'),
@@ -5482,7 +5513,8 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (31,'Bill Run Master','#/billRunMasters','2016-04-01 00:00:00'),
  (32,'New Bill Run','#/billRunMasters/new','2016-04-01 00:00:00');
 INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
- (33,'Bill Details','#/billDetailss/new','2016-04-18 00:00:00');
+ (33,'Bill Details','#/billDetailss/new','2016-04-18 00:00:00'),
+ (34,'Collection Details','#/collDetailss','2016-04-18 00:00:00');
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -5540,7 +5572,8 @@ INSERT INTO `menu_item2_url` (`id`,`menu_item_id`,`url_id`) VALUES
  (30,30,30),
  (31,31,31),
  (32,32,32),
- (33,33,33);
+ (33,33,33),
+ (34,34,23);
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
 
 
@@ -5727,7 +5760,8 @@ INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VAL
  (30,1,5,30),
  (31,2,6,31),
  (32,1,6,32),
- (33,2,4,33);
+ (33,2,4,33),
+ (34,2,4,34);
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
 
@@ -6788,7 +6822,8 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (42,31,'ROLE_BILLRUN_MANAGER'),
  (43,32,'ROLE_BILLRUN_MANAGER');
 INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES 
- (44,33,'ROLE_ADMIN');
+ (44,33,'ROLE_ADMIN'),
+ (45,23,'ROLE_CASHIER');
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 

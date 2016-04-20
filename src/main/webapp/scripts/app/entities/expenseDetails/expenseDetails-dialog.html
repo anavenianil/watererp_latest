@@ -78,7 +78,7 @@
 									name="collectionTypeMaster" ng-model="expenseDetails.collectionTypeMaster" typeahead-min-length="3"
 									placeholder="Search Expense Type (Min 3 chars)"
 									uib-typeahead="collectionTypeMaster.collName for collectionTypeMaster in getLocation($viewValue)"
-									typeahead-loading="loadingCANs"
+									typeahead-loading="loadingCANs" autocomplete="off"
 									typeahead-on-select='onSelect($item, $model, $label)'
 									typeahead-no-results="noResults" class="form-control">
 								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>

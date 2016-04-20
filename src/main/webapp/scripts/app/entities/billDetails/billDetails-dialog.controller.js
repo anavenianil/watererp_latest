@@ -140,7 +140,7 @@ angular.module('watererpApp').controller(
                 $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
                 var date2 = new Date($scope.billDetails.prevBillMonth);
                 $scope.billDetails.fromMonth = new Date(date2.getFullYear(), date2.getMonth()+1, date2.getDate());
-                $scope.billDetails.prevReading = $scope.custDetails.prevReading;
+                $scope.billDetails.initialReading = $scope.custDetails.prevReading;
                 $scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
                 $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.metReadingDt;
             });
