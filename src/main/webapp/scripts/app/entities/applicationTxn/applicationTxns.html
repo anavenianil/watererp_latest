@@ -1,5 +1,5 @@
 <div>
-	<h2>ApplicationTxns</h2>
+	<h2>Application : </h2>
 	<jh-alert></jh-alert>
 	<br />
 	<div class="panel panel-primary">
@@ -15,11 +15,15 @@
 									id="statusSearch" ng-model="statusSearch"
 									ng-change="onSearch()">
 									<option value="" label="All">Select Status</option>
-									<option value="0" label="Pending Submission">Pending
-										Submission</option>
-									<option value="1" label="Pending Approval">Pending
-										Approval</option>
-									<option value="2" label="Approved">Approved</option>
+									<option value="0" label="Pending Submission">Pending Approval</option>
+									<option value="1" label="Pending Approval">Forwarded</option>
+									<option value="2" label="In Feasibility">In Feasibility</option>
+									<option value="3" label="In Proceedings">In Proceedings</option>
+									<option value="4" label="In Receipt Generation">In Receipt Generation</option>
+									<option value="5" label="In Stores">In Stores</option>
+									<option value="6" label="Waiting for Meter">Waiting for Meter</option>
+									<option value="7" label="CAN Generation">CAN Generation</option>
+									<option value="8" label="Completed">Completed</option>
 								</select>
 							</div>
 							<div class="col-md-4">

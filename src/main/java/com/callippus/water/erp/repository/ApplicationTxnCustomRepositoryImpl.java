@@ -263,7 +263,7 @@ public class ApplicationTxnCustomRepositoryImpl extends
 	@SuppressWarnings("unchecked")
 	public List<ApplicationTxn> search(String whereClause) {
 
-		String sql = "from ApplicationTxn req where " + whereClause;
+		String sql = "from ApplicationTxn at where " + whereClause;
 		Query query = entityManager.createQuery(sql);
 		return (List<ApplicationTxn>) query.getResultList();
 	}

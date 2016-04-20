@@ -17,7 +17,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -36,14 +35,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
-import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
@@ -90,6 +90,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private ReportsCustomRepository reportsRepository;
+    
+    @Inject
+    private CustMeterMappingRepository custMeterMappingRepository;
     
     
     /**
@@ -147,14 +150,23 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
+        
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
-        if(applicationTxn.getCan()!= null && applicationTxn.getConnectionDate() != null){
+        if(applicationTxn.getStatus()==7){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
             TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(result.getCategoryMaster().getId());
             custDetails.setTariffCategoryMaster(tcm);
             custDetails.setId(null);
-            custDetailsRepository.save(custDetails);
+            CustDetails cd = custDetailsRepository.save(custDetails);
+            
+            //saving to CustMetermMapping
+            CustMeterMapping custMeterMapping =new CustMeterMapping();
+            custMeterMapping.setId(null);
+            custMeterMapping.setCustDetails(cd);
+            custMeterMapping.setMeterDetails(applicationTxn.getMeterDetails());
+            custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
+            custMeterMappingRepository.save(custMeterMapping);
         }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
@@ -237,6 +249,10 @@ public class ApplicationTxnResource {
         /*if(workflowService.getRequestStatus() == 2){
         	applicationTxnWorkflowService.updateApplicationTxn(id);
         }*/
+        if(workflowService.getRequestAt()!=null){
+        	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+            applicationTxn.setRequestAt(userRepository.findById(uid));
+        }
         applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok().build();
 	}
@@ -359,26 +375,27 @@ public class ApplicationTxnResource {
 	@Timed
 	public ResponseEntity<List<ApplicationTxn>> search(
 			@RequestParam(value = "applicationTxnNo", required = false) String applicationTxnNo,
-			@RequestParam(value = "applicationTxnDt", required = false) LocalDateTime applicationTxnDt,
+			@RequestParam(value = "applicationTxnDt", required = false) String applicationTxnDt,
 			@RequestParam(value = "statusSearch", required = false) String statusSearch
 			)
 			throws URISyntaxException, Exception {
 		log.debug("ApplicationTxn -------- search: {}");
 		List<ApplicationTxn> applicationTxns;
 		
-		workflowService.getUserDetails();
+		/*workflowService.getUserDetails();
 		Long userId = Long.parseLong(workflowService.getSfID());
 
-		String whereClause = "requestAt.id=" + userId +" ";
+		String whereClause = "requestAt.id=" + userId +" ";*/
+		String whereClause = null;
 		
 		if(applicationTxnNo != null && !applicationTxnNo.equals(""))
-			whereClause += "and id =" + applicationTxnNo ;
+			whereClause = " at.id =" + applicationTxnNo ;
 
 		if(applicationTxnDt != null && !applicationTxnDt.equals(""))
-			whereClause += "and date(requested_date) = '" + applicationTxnDt.toString("yyyy-MM-dd")  +"' ";
+			whereClause = " date(requested_date) = '" + applicationTxnDt  +"' ";
 		
 		if(statusSearch != null && !statusSearch.equals(""))
-			whereClause += "and status = " + statusSearch +" ";
+			whereClause = " status = " + statusSearch +" ";
 
 		applicationTxns = applicationTxnCustomRepository.search(
 					whereClause);

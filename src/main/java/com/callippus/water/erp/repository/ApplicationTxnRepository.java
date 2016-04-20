@@ -28,9 +28,12 @@ public interface ApplicationTxnRepository extends JpaRepository<ApplicationTxn,L
 	Page<ApplicationTxn> findAllByOrderByStatusAsc(Pageable pageable);
 	
 	
-	@Query("Select at from ApplicationTxn at where at.requestAt.login =:login")
+	//@Query("Select at from ApplicationTxn at where at.requestAt.login =:login")
 	/*@Query("SELECT at FROM ApplicationTxn at where at.requestAt=:login and at.id in("
 			+ "select rwh.domainObject FROM RequestWorkflowHistory rwh where rwh.statusMaster=:3)")*/
+	@Query("SELECT at FROM ApplicationTxn at where at.requestAt.id=(select u.id from User u where u.login=:login) and at.id in"
+			+ "(select rwh.domainObject FROM RequestWorkflowHistory rwh where rwh.statusMaster.id=3 and rwh.assignedTo.id="
+			+ "(select u.id from User u where u.login=:login))")
 	Page<ApplicationTxn> findByRequestAt(Pageable pageable, @Param("login")String login);
 	
 	//@Query("select max(SUBSTRING(can, 1, 2)) division, max(SUBSTRING(can, 3, 2)) street, max(SUBSTRING(can, 5, 8)) num  from ApplicationTxn at where SUBSTRING(can, 1,2)=:division and SUBSTRING(can, 3,2)=:street")
