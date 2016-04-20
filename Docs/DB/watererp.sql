@@ -184,7 +184,10 @@ CREATE TABLE `bill_details` (
   `longi` varchar(255) default NULL,
   `no_meter_amt` float default NULL,
   `met_reading_dt` date default NULL,
-  PRIMARY KEY  (`id`)
+  `mtr_reader_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_billdetails_mtrreader_id` (`mtr_reader_id`),
+  CONSTRAINT `fk_billdetails_mtrreader_id` FOREIGN KEY (`mtr_reader_id`) REFERENCES `jhi_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -192,23 +195,11 @@ CREATE TABLE `bill_details` (
 --
 
 /*!40000 ALTER TABLE `bill_details` DISABLE KEYS */;
-INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`) VALUES 
- (1,'032153790','31197684','2016-04-11','155200','','M','201212','201310','2016-04-02',1.921e+006,1e+007,110000,1650,577.5,110,0,2337.5,2680.06,'1111111111','R','','Y','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (2,'617797689','31197746','2013-11-26','155200','','M','201212','201310','2016-04-02',75000,1e+006,110000,1650,577.5,110,0,2337.5,2985.07,'2222222222','U','','Y','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (3,'011100304','31197513','2016-05-10','155200','','R','201212','201310','2016-04-02',0,0,165000,1650,577.5,110,0,2337.5,7174.29,'0000000000','R','','Y','1','A0000','0000','123','0000000000','0000131130172628','0','0',0,'2016-04-09'),
- (4,'613577519','31197514','2013-11-26','155200','','R','201212','201310','2016-04-02',0,0,165000,1650,577.5,110,0,2337.5,31664.3,'0000000563','R','','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0,'2016-04-09');
-INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`) VALUES 
- (5,'617738493','31197668','2013-11-26','155200','','R','201212','201310','2016-04-02',0,0,165000,1650,577.5,110,0,2337.5,2768.88,'0000000002','R','','Y','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (6,'617738918','D000000001','2013-11-30','173005','','L','201211','201310','2016-04-02',0,0,180000,1800,630,120,0,2550,3412.75,'0000000063','L','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (7,'617757078','D000000002','2013-11-30','173050','','M','201603','201604','2016-04-02',0,12000,10000,2100,735,140,0,2975,2981.38,'0000000006','U','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (8,'617757083','D000000003','2013-11-30','173124','','M','201603','201604','2016-04-02',0,15000,100000,2100,735,140,0,2975,2981.38,'0000000005','M','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09');
-INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`) VALUES 
- (9,'617757111','D000000004','2013-11-30','173208','','L','201211','201310','2016-04-02',0,0,180000,1800,630,120,0,2550,3095.56,'0000000009','L','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (10,'617757186','D000000005','2013-11-30','173246','','L','201211','201310','2016-04-02',0,0,180000,1800,630,120,0,2550,2981.38,'0000000008','L','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (11,'617771922','D000000006','2013-11-30','173352','','L','201211','201310','2016-04-02',0,0,180000,1800,630,120,0,2550,2550,'0000000000','L','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09'),
- (12,'617781451','D000000007','2013-11-30','173423','','M','201603','201604','2016-04-02',0,16000,40000,1800,630,120,0,2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09');
-INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`) VALUES 
- (13,'617781710','D000000008','2013-11-30','173449','','M','201603','201604','2016-04-02',0,50000,50000,1800,630,120,0,2550,2550,'0000000002','M','','','1','A0000','0000','123','0000000000','','0','0',0,'2016-04-09');
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`mtr_reader_id`) VALUES 
+ (1,'617818256',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,352400,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+ (2,'617822212',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,253400,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+ (3,'617822212',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,253400,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+ (4,'617822212',NULL,'2016-04-20',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-04-19T18:30:00.000Z',NULL,NULL,253477,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,14);
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 
 
@@ -3119,28 +3110,28 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-04-03 16:37:33',93,'EXECUTED','7:1d7e8751c1e0e86930e4f6e3c3f39010','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160406042024','jhipster','classpath:config/liquibase/changelog/20160406042024_added_entity_InstrumentIssuerMaster.xml','2016-04-06 10:33:04',98,'EXECUTED','7:e6ddd2edc49130805cd0d945da5c8bff','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml','2016-04-12 13:09:15',104,'EXECUTED','7:c759f81b18397b40cc05e2759e68e9e9','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-04-12 13:09:16',105,'EXECUTED','7:a6212010b6b0806261cb83574604c99f','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160409042538','jhipster','classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml','2016-04-12 13:09:17',107,'EXECUTED','7:16829833f2d3e87199a121db96980eaf','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160412142749','jhipster','classpath:config/liquibase/changelog/20160412142749_added_entity_BillRunMaster.xml','2016-04-13 11:50:30',109,'EXECUTED','7:b34ea10d67f40bb5c95e7ad4be486e01','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-04-13 11:50:30',110,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-04-13 11:50:30',110,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-13 12:52:57',112,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-13 12:52:57',112,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
  ('20160329064157','jhipster','classpath:config/liquibase/changelog/20160329064157_added_entity_ComplaintTypeMaster.xml','2016-04-13 13:19:32',120,'EXECUTED','7:925d2a76e3b71e5bc7daf39c4f8ee2b5','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160413093028','jhipster','classpath:config/liquibase/changelog/20160413093028_added_entity_MeterStatus.xml','2016-04-18 12:57:45',121,'EXECUTED','7:4d7c1ce6ba1e28d5591ed0f73c0058a8','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-04-18 12:57:45',122,'EXECUTED','7:5a4422703a44b3283529717af68a7e91','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-04-18 12:57:46',123,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-04-18 12:57:46',123,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-18 12:57:47',124,'EXECUTED','7:4ca16e73840d443a23431ee76e2b3f73','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-18 12:57:47',124,'EXECUTED','7:4ca16e73840d443a23431ee76e2b3f73','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-04-18 13:01:24',125,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
  ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-04-18 13:01:24',126,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-04-18 13:01:24',127,'EXECUTED','7:74e096fa5e9ab1d7a353aefc6702527a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-04-18 13:01:24',128,'EXECUTED','7:1128b00324be2ae65e6b38b670f60e36','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-04-18 13:01:24',128,'EXECUTED','7:1128b00324be2ae65e6b38b670f60e36','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-04-18 13:01:26',129,'EXECUTED','7:86e8348b225c581edd72d5d4787583ad','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-04-18 13:01:26',129,'EXECUTED','7:86e8348b225c581edd72d5d4787583ad','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
  ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-04-18 13:01:27',130,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-04-18 13:01:27',131,'EXECUTED','7:4447d052e2e7f65df6e84f8092a18afb','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-04-18 13:01:28',132,'EXECUTED','7:5fc5d42163edf25d27484172b6a31d64','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+ ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-04-18 13:01:28',132,'EXECUTED','7:5fc5d42163edf25d27484172b6a31d64','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
+ ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml','2016-04-20 13:04:13',133,'EXECUTED','7:733335b9da14f88444841a0b0d6d2e72','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -3707,9 +3698,9 @@ CREATE TABLE `instrument_issuer_master` (
 
 /*!40000 ALTER TABLE `instrument_issuer_master` DISABLE KEYS */;
 INSERT INTO `instrument_issuer_master` (`id`,`instrument_issuer`) VALUES 
- (1,'issuer1'),
- (2,'issuer2'),
- (3,'issuer3');
+ (1,'ISSUER1'),
+ (2,'ISSUER2'),
+ (3,'ISSUER3');
 /*!40000 ALTER TABLE `instrument_issuer_master` ENABLE KEYS */;
 
 
@@ -4303,7 +4294,15 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (323,'admin','2016-04-18 17:34:50','AUTHENTICATION_SUCCESS'),
  (324,'admin','2016-04-19 12:24:27','AUTHENTICATION_SUCCESS'),
  (325,'admin','2016-04-19 13:30:30','AUTHENTICATION_SUCCESS'),
- (326,'admin','2016-04-19 14:08:25','AUTHENTICATION_SUCCESS');
+ (326,'admin','2016-04-19 14:08:25','AUTHENTICATION_SUCCESS'),
+ (327,'admin','2016-04-19 18:38:55','AUTHENTICATION_SUCCESS'),
+ (328,'admin','2016-04-19 18:51:34','AUTHENTICATION_SUCCESS'),
+ (329,'admin','2016-04-20 09:46:10','AUTHENTICATION_SUCCESS'),
+ (330,'admin','2016-04-20 10:48:32','AUTHENTICATION_SUCCESS'),
+ (331,'admin','2016-04-20 11:49:46','AUTHENTICATION_SUCCESS'),
+ (332,'admin','2016-04-20 14:44:43','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (333,'admin','2016-04-20 14:48:43','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -5009,7 +5008,22 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (325,'remoteAddress','0:0:0:0:0:0:0:1'),
  (325,'sessionId','560B555BADDDB358BED5E7EEFAD2D2A8'),
  (326,'remoteAddress','0:0:0:0:0:0:0:1'),
- (326,'sessionId','91A304E8A7CF087B116831F83BBF48BD');
+ (326,'sessionId','91A304E8A7CF087B116831F83BBF48BD'),
+ (327,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (327,'sessionId','B577D3BC17B7EE35056D29C8277DDC10');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (328,'remoteAddress','192.168.1.18'),
+ (328,'sessionId','C496C9F14E0257DEDF32D817123D1A9E'),
+ (329,'remoteAddress','127.0.0.1'),
+ (329,'sessionId','0FCF903686A0AA1A25D4BD76C9398C33'),
+ (330,'remoteAddress','127.0.0.1'),
+ (330,'sessionId','7BAFE51BF609BBE66AB88995A130039D'),
+ (331,'remoteAddress','127.0.0.1'),
+ (331,'sessionId','50FF4B924E17A9EE8AE360162043841A'),
+ (332,'remoteAddress','127.0.0.1'),
+ (332,'sessionId','521A29491DE0876BC199151F278878C3'),
+ (333,'remoteAddress','127.0.0.1'),
+ (333,'sessionId','0E20B2EAD23B7F564ECA77671EEDC23B');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5187,6 +5201,14 @@ INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`e
  (29,'sf0029','$2a$10$L1IXkaggwuSLeeF0fRR9CeMb/Qq6IM7EXLJI/jsdfFSOUQWf4oPHS',NULL,NULL,'sf0029@localhost','','en','68914493240806760364',NULL,'anonymousUser','2016-03-21 16:19:52',NULL,'admin','2016-03-21 16:20:23'),
  (30,'billrunuser','$2a$10$I.tUzJDgXrahq.VwnsPWB.0ttM55FfufrXt1LJ1wJHQdNHQjXj8em','Bill Run','User','srinigattu@gmail.com','','en',NULL,NULL,'admin','2016-04-16 05:48:43',NULL,'anonymousUser','2016-04-16 05:53:57'),
  (31,'billrunmgr','$2a$10$8OUigJFHCFBPGqcDxXaEw./lNGSnb9NalwH4b1nzUawcfBTQlVMEm','Bill Run','Manager','srinivas@callippus.co.uk','','en',NULL,NULL,'admin','2016-04-16 17:25:28',NULL,'anonymousUser','2016-04-16 17:30:29');
+INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
+ (33,'sf0030','$2a$10$yremBjUIdQ1bQn8xhIwhsu8Xiqg7bSQF0ACgD/elT3OVGGjefSlc2',NULL,NULL,'sf0030@localhost','','en','18047759059876052260',NULL,'anonymousUser','2016-04-20 14:44:17',NULL,'admin','2016-04-20 14:45:06'),
+ (34,'sf0031','$2a$10$8XD7PwUN77G3Q8q1GURd2OmTUjVmVY3KCo8sRGZSUdiWHngLkZA/W',NULL,NULL,'sf0031@localhost','','en','57865325453913873591',NULL,'anonymousUser','2016-04-20 14:46:38',NULL,'admin','2016-04-20 14:49:04'),
+ (35,'sf0032','$2a$10$zplH9Kzu9re4/RPXOHkThOSXnsEWLl4d3mkDHNYYZ.3NKzvQMLgZ.',NULL,NULL,'sf0032@localhost','','en','33099043545601188579',NULL,'anonymousUser','2016-04-20 14:47:14',NULL,'admin','2016-04-20 14:49:06'),
+ (36,'sf0033','$2a$10$xackKRecfhkVg55E/39BQOKDMc4R/PZ13QbUKhIxK6pC0muMQlUbS',NULL,NULL,'sf0033@localhost','','en','89634622497267965050',NULL,'anonymousUser','2016-04-20 14:47:40',NULL,'admin','2016-04-20 14:49:08'),
+ (37,'sf0034','$2a$10$oSlecOefI4dS3tkglpMrz.D6ZPSBI/A2TQ4g4fFCKIipJb7RmWrTu',NULL,NULL,'sf0034@localhost','','en','33959352930458661266',NULL,'anonymousUser','2016-04-20 14:48:07',NULL,'admin','2016-04-20 14:49:10');
+INSERT INTO `jhi_user` (`id`,`login`,`password_hash`,`first_name`,`last_name`,`email`,`activated`,`lang_key`,`activation_key`,`reset_key`,`created_by`,`created_date`,`reset_date`,`last_modified_by`,`last_modified_date`) VALUES 
+ (38,'sf0035','$2a$10$yJU/rhzonrE90a54kCxkoex4V17kj6dY/N5W9iqsaiqfHUaUSay4K',NULL,NULL,'sf0035@localhost','','en','62319485221954799935',NULL,'anonymousUser','2016-04-20 14:48:37',NULL,'admin','2016-04-20 14:49:12');
 /*!40000 ALTER TABLE `jhi_user` ENABLE KEYS */;
 
 
@@ -5241,7 +5263,13 @@ INSERT INTO `jhi_user_authority` (`user_id`,`authority_name`) VALUES
  (26,'ROLE_USER'),
  (27,'ROLE_USER'),
  (28,'ROLE_USER'),
- (29,'ROLE_USER');
+ (29,'ROLE_USER'),
+ (33,'ROLE_USER'),
+ (34,'ROLE_USER'),
+ (35,'ROLE_USER'),
+ (36,'ROLE_USER'),
+ (37,'ROLE_USER'),
+ (38,'ROLE_USER');
 /*!40000 ALTER TABLE `jhi_user_authority` ENABLE KEYS */;
 
 

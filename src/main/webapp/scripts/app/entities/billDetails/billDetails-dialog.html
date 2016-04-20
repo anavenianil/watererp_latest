@@ -205,7 +205,7 @@
 								<div class='input-group' id='field_prevMetReadingDt'>
 									<input id="field_fromMonth" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="billDetails.prevMetReadingDt"
+										ng-model="billDetails.prevMetReadingDt1"
 										is-open="datePickerForprevBillMonth.status.opened" readonly/> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
@@ -233,6 +233,17 @@
 								name="presentReading" id="field_presentReading"
 								ng-model="billDetails.presentReading" required/>
 						</div>
+					</div>
+					<div class="row">
+					<div class="col-sm-4">
+							<label for="field_paymentTypes">Meter Reader</label> 
+							<select
+								class="form-control" id="field_collectionTypeMaster"
+								name="collectionTypeMaster" required="required"
+								ng-model="billDetails.mtrReader"
+								ng-options='user as (user.firstName + " " + user.lastName + " (" + user.login +")") for user in users track by user.id'>
+							</select>
+						</div>				
 					</div>
 				</div>
 				<div class="modal-footer">

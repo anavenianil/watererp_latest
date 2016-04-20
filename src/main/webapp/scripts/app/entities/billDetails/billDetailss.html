@@ -1,18 +1,21 @@
 <div>
     <h2>BillDetailss</h2>
     <jh-alert></jh-alert>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" ui-sref="billDetails.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new BillDetails</span>
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="billDetails.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new BillDetails
+                    </span>
                 </button>
             </div>
         </div>
     </div>
-
+    <br/>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -48,6 +51,7 @@
                     <th jh-sort-by="longi"><span>Longi</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="noMeterAmt"><span>NoMeterAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="metReadingDt"><span>MetReadingDt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mtrReader.id"><span>mtrReader</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -87,21 +91,29 @@
                     <td>{{billDetails.noMeterAmt}}</td>
                         <td>{{billDetails.metReadingDt | date:'mediumDate'}}</td>
                     <td>
-                        <button type="submit"
-                                ui-sref="billDetails.detail({id:billDetails.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="billDetails.edit({id:billDetails.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="billDetails.delete({id:billDetails.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
-                        </button>
+                        {{billDetails.mtrReader.id}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="billDetails.detail({id:billDetails.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="billDetails.edit({id:billDetails.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="billDetails.delete({id:billDetails.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

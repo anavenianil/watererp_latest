@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -23,100 +25,104 @@ public class BillDetails implements Serializable {
 
     @Column(name = "can")
     private String can;
-
+    
     @Column(name = "bill_number")
     private String billNumber;
-
+    
     @NotNull
     @Column(name = "bill_date", nullable = false)
     private LocalDate billDate;
-
+    
     @Column(name = "bill_time")
     private String billTime;
-
+    
     @Column(name = "meter_make")
     private String meterMake;
-
+    
     @Column(name = "current_bill_type")
     private String currentBillType;
-
+    
     @Column(name = "from_month")
     private String fromMonth;
-
+    
     @Column(name = "to_month")
     private String toMonth;
-
+    
     @Column(name = "meter_fix_date")
     private LocalDate meterFixDate;
-
+    
     @Column(name = "initial_reading")
     private Float initialReading;
-
+    
     @Column(name = "present_reading")
     private Float presentReading;
-
+    
     @Column(name = "units")
     private Float units;
-
+    
     @Column(name = "water_cess")
     private Float waterCess;
-
+    
     @Column(name = "sewerage_cess")
     private Float sewerageCess;
-
+    
     @Column(name = "service_charge")
     private Float serviceCharge;
-
+    
     @Column(name = "meter_service_charge")
     private Float meterServiceCharge;
-
+    
     @Column(name = "total_amount")
     private Float totalAmount;
-
+    
     @Column(name = "net_payable_amount")
     private Float netPayableAmount;
-
+    
     @Column(name = "telephone_no")
     private String telephoneNo;
-
+    
     @Column(name = "meter_status")
     private String meterStatus;
-
+    
     @Column(name = "met_reader_code")
     private String metReaderCode;
-
+    
     @Column(name = "bill_flag")
     private String billFlag;
-
+    
     @Column(name = "svr_status")
     private String svrStatus;
-
+    
     @Column(name = "terminal_id")
     private String terminalId;
-
+    
     @Column(name = "meter_reader_id")
     private String meterReaderId;
-
+    
     @Column(name = "user_id")
     private String userId;
-
+    
     @Column(name = "mobile_no")
     private String mobileNo;
-
+    
     @Column(name = "notice_no")
     private String noticeNo;
-
+    
     @Column(name = "lat")
     private String lat;
-
+    
     @Column(name = "longi")
     private String longi;
-
+    
     @Column(name = "no_meter_amt")
     private Float noMeterAmt;
-
+    
     @Column(name = "met_reading_dt")
     private LocalDate metReadingDt;
+    
+    @ManyToOne
+    @JoinColumn(name = "mtr_reader_id")
+    private User mtrReader;
 
     public Long getId() {
         return id;
@@ -129,7 +135,7 @@ public class BillDetails implements Serializable {
     public String getCan() {
         return can;
     }
-
+    
     public void setCan(String can) {
         this.can = can;
     }
@@ -137,7 +143,7 @@ public class BillDetails implements Serializable {
     public String getBillNumber() {
         return billNumber;
     }
-
+    
     public void setBillNumber(String billNumber) {
         this.billNumber = billNumber;
     }
@@ -145,7 +151,7 @@ public class BillDetails implements Serializable {
     public LocalDate getBillDate() {
         return billDate;
     }
-
+    
     public void setBillDate(LocalDate billDate) {
         this.billDate = billDate;
     }
@@ -153,7 +159,7 @@ public class BillDetails implements Serializable {
     public String getBillTime() {
         return billTime;
     }
-
+    
     public void setBillTime(String billTime) {
         this.billTime = billTime;
     }
@@ -161,7 +167,7 @@ public class BillDetails implements Serializable {
     public String getMeterMake() {
         return meterMake;
     }
-
+    
     public void setMeterMake(String meterMake) {
         this.meterMake = meterMake;
     }
@@ -169,7 +175,7 @@ public class BillDetails implements Serializable {
     public String getCurrentBillType() {
         return currentBillType;
     }
-
+    
     public void setCurrentBillType(String currentBillType) {
         this.currentBillType = currentBillType;
     }
@@ -177,7 +183,7 @@ public class BillDetails implements Serializable {
     public String getFromMonth() {
         return fromMonth;
     }
-
+    
     public void setFromMonth(String fromMonth) {
         this.fromMonth = fromMonth;
     }
@@ -185,7 +191,7 @@ public class BillDetails implements Serializable {
     public String getToMonth() {
         return toMonth;
     }
-
+    
     public void setToMonth(String toMonth) {
         this.toMonth = toMonth;
     }
@@ -193,7 +199,7 @@ public class BillDetails implements Serializable {
     public LocalDate getMeterFixDate() {
         return meterFixDate;
     }
-
+    
     public void setMeterFixDate(LocalDate meterFixDate) {
         this.meterFixDate = meterFixDate;
     }
@@ -201,7 +207,7 @@ public class BillDetails implements Serializable {
     public Float getInitialReading() {
         return initialReading;
     }
-
+    
     public void setInitialReading(Float initialReading) {
         this.initialReading = initialReading;
     }
@@ -209,7 +215,7 @@ public class BillDetails implements Serializable {
     public Float getPresentReading() {
         return presentReading;
     }
-
+    
     public void setPresentReading(Float presentReading) {
         this.presentReading = presentReading;
     }
@@ -217,7 +223,7 @@ public class BillDetails implements Serializable {
     public Float getUnits() {
         return units;
     }
-
+    
     public void setUnits(Float units) {
         this.units = units;
     }
@@ -225,7 +231,7 @@ public class BillDetails implements Serializable {
     public Float getWaterCess() {
         return waterCess;
     }
-
+    
     public void setWaterCess(Float waterCess) {
         this.waterCess = waterCess;
     }
@@ -233,7 +239,7 @@ public class BillDetails implements Serializable {
     public Float getSewerageCess() {
         return sewerageCess;
     }
-
+    
     public void setSewerageCess(Float sewerageCess) {
         this.sewerageCess = sewerageCess;
     }
@@ -241,7 +247,7 @@ public class BillDetails implements Serializable {
     public Float getServiceCharge() {
         return serviceCharge;
     }
-
+    
     public void setServiceCharge(Float serviceCharge) {
         this.serviceCharge = serviceCharge;
     }
@@ -249,7 +255,7 @@ public class BillDetails implements Serializable {
     public Float getMeterServiceCharge() {
         return meterServiceCharge;
     }
-
+    
     public void setMeterServiceCharge(Float meterServiceCharge) {
         this.meterServiceCharge = meterServiceCharge;
     }
@@ -257,7 +263,7 @@ public class BillDetails implements Serializable {
     public Float getTotalAmount() {
         return totalAmount;
     }
-
+    
     public void setTotalAmount(Float totalAmount) {
         this.totalAmount = totalAmount;
     }
@@ -265,7 +271,7 @@ public class BillDetails implements Serializable {
     public Float getNetPayableAmount() {
         return netPayableAmount;
     }
-
+    
     public void setNetPayableAmount(Float netPayableAmount) {
         this.netPayableAmount = netPayableAmount;
     }
@@ -273,7 +279,7 @@ public class BillDetails implements Serializable {
     public String getTelephoneNo() {
         return telephoneNo;
     }
-
+    
     public void setTelephoneNo(String telephoneNo) {
         this.telephoneNo = telephoneNo;
     }
@@ -281,7 +287,7 @@ public class BillDetails implements Serializable {
     public String getMeterStatus() {
         return meterStatus;
     }
-
+    
     public void setMeterStatus(String meterStatus) {
         this.meterStatus = meterStatus;
     }
@@ -289,7 +295,7 @@ public class BillDetails implements Serializable {
     public String getMetReaderCode() {
         return metReaderCode;
     }
-
+    
     public void setMetReaderCode(String metReaderCode) {
         this.metReaderCode = metReaderCode;
     }
@@ -297,7 +303,7 @@ public class BillDetails implements Serializable {
     public String getBillFlag() {
         return billFlag;
     }
-
+    
     public void setBillFlag(String billFlag) {
         this.billFlag = billFlag;
     }
@@ -305,7 +311,7 @@ public class BillDetails implements Serializable {
     public String getSvrStatus() {
         return svrStatus;
     }
-
+    
     public void setSvrStatus(String svrStatus) {
         this.svrStatus = svrStatus;
     }
@@ -313,7 +319,7 @@ public class BillDetails implements Serializable {
     public String getTerminalId() {
         return terminalId;
     }
-
+    
     public void setTerminalId(String terminalId) {
         this.terminalId = terminalId;
     }
@@ -321,7 +327,7 @@ public class BillDetails implements Serializable {
     public String getMeterReaderId() {
         return meterReaderId;
     }
-
+    
     public void setMeterReaderId(String meterReaderId) {
         this.meterReaderId = meterReaderId;
     }
@@ -329,7 +335,7 @@ public class BillDetails implements Serializable {
     public String getUserId() {
         return userId;
     }
-
+    
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -337,7 +343,7 @@ public class BillDetails implements Serializable {
     public String getMobileNo() {
         return mobileNo;
     }
-
+    
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
@@ -345,7 +351,7 @@ public class BillDetails implements Serializable {
     public String getNoticeNo() {
         return noticeNo;
     }
-
+    
     public void setNoticeNo(String noticeNo) {
         this.noticeNo = noticeNo;
     }
@@ -353,7 +359,7 @@ public class BillDetails implements Serializable {
     public String getLat() {
         return lat;
     }
-
+    
     public void setLat(String lat) {
         this.lat = lat;
     }
@@ -361,7 +367,7 @@ public class BillDetails implements Serializable {
     public String getLongi() {
         return longi;
     }
-
+    
     public void setLongi(String longi) {
         this.longi = longi;
     }
@@ -369,7 +375,7 @@ public class BillDetails implements Serializable {
     public Float getNoMeterAmt() {
         return noMeterAmt;
     }
-
+    
     public void setNoMeterAmt(Float noMeterAmt) {
         this.noMeterAmt = noMeterAmt;
     }
@@ -377,9 +383,17 @@ public class BillDetails implements Serializable {
     public LocalDate getMetReadingDt() {
         return metReadingDt;
     }
-
+    
     public void setMetReadingDt(LocalDate metReadingDt) {
         this.metReadingDt = metReadingDt;
+    }
+
+    public User getMtrReader() {
+        return mtrReader;
+    }
+
+    public void setMtrReader(User user) {
+        this.mtrReader = user;
     }
 
     @Override
@@ -391,6 +405,9 @@ public class BillDetails implements Serializable {
             return false;
         }
         BillDetails billDetails = (BillDetails) o;
+        if(billDetails.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, billDetails.id);
     }
 

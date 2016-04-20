@@ -2,7 +2,7 @@
     "relationships": [
     {
             "relationshipId": 1,
-            "relationshipName": "user",
+            "relationshipName": "mtrReader",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"

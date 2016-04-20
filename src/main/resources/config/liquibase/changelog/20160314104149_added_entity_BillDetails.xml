@@ -22,40 +22,80 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="can" type="varchar(255)"/>
+            
             <column name="bill_number" type="varchar(255)"/>
+            
             <column name="bill_date" type="date">
                 <constraints nullable="false" />
             </column>
+            
             <column name="bill_time" type="varchar(255)"/>
+            
             <column name="meter_make" type="varchar(255)"/>
+            
             <column name="current_bill_type" type="varchar(255)"/>
+            
             <column name="from_month" type="varchar(255)"/>
+            
             <column name="to_month" type="varchar(255)"/>
+            
             <column name="meter_fix_date" type="date"/>
+            
             <column name="initial_reading" type="${floatType}"/>
+            
             <column name="present_reading" type="${floatType}"/>
+            
             <column name="units" type="${floatType}"/>
+            
             <column name="water_cess" type="${floatType}"/>
+            
             <column name="sewerage_cess" type="${floatType}"/>
+            
             <column name="service_charge" type="${floatType}"/>
+            
             <column name="meter_service_charge" type="${floatType}"/>
+            
             <column name="total_amount" type="${floatType}"/>
+            
             <column name="net_payable_amount" type="${floatType}"/>
+            
             <column name="telephone_no" type="varchar(255)"/>
+            
             <column name="meter_status" type="varchar(255)"/>
+            
             <column name="met_reader_code" type="varchar(255)"/>
+            
             <column name="bill_flag" type="varchar(255)"/>
+            
             <column name="svr_status" type="varchar(255)"/>
+            
             <column name="terminal_id" type="varchar(255)"/>
+            
             <column name="meter_reader_id" type="varchar(255)"/>
+            
             <column name="user_id" type="varchar(255)"/>
+            
             <column name="mobile_no" type="varchar(255)"/>
+            
             <column name="notice_no" type="varchar(255)"/>
+            
             <column name="lat" type="varchar(255)"/>
+            
             <column name="longi" type="varchar(255)"/>
+            
             <column name="no_meter_amt" type="${floatType}"/>
+            
             <column name="met_reading_dt" type="date"/>
+            
+            <column name="mtr_reader_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
+        <addForeignKeyConstraint baseColumnNames="mtr_reader_id"
+                                 baseTableName="bill_details"
+                                 constraintName="fk_billdetails_mtrreader_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>
