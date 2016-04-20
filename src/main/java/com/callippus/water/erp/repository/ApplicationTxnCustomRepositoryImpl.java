@@ -196,27 +196,6 @@ public class ApplicationTxnCustomRepositoryImpl extends
 
 		return items;
 	}
-
-	@Override
-	public JasperPrint applicationTxnReports(Long id) throws JRException {
-		InputStream jasperStream = this.getClass().getResourceAsStream(
-				"/reports/Application_txn.jasper");
-		Map<String, Object> params = new HashMap<>();
-		
-		Session session = entityManager.unwrap(Session.class);
-		SessionImpl sessionImpl = (SessionImpl) session;
-		Connection conn = sessionImpl.connection();
-		
-		params.put("id", id);
-		JasperReport jasperReport = (JasperReport) JRLoader
-				.loadObject(jasperStream);
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
-				params, conn);
-		
-		return jasperPrint;
-		
-	}
-	
 	
 	/**
 	 * Query that will list all Approved Requests
