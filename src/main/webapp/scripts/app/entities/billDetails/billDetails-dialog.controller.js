@@ -92,9 +92,9 @@ angular.module('watererpApp').controller(
                 currentBillType: null,
                 currentBillTypes: [
                          	      {id: 'M', name: 'METERED'},
-                         	      {id: 'U', name: 'UNMETERED'},
+                         	      {id: 'S', name: 'STUCK'},
                          	      {id: 'L', name: 'LOCKED'},
-                         	      {id: 'R', name: 'REPAIR'},
+                         	      {id: 'B', name: 'BURNT'},
                          	    ],
                 fromMonth: null,
                 toMonth: null,
