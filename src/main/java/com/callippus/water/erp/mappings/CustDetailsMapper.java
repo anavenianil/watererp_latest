@@ -32,14 +32,14 @@ public interface CustDetailsMapper {
     CustDetails appTxnToCustDetails(ApplicationTxn applicationTxn);
 	
 	
-	/*@Mappings({
+	@Mappings({
 		@Mapping(target = "id", constant = "0"),
-		@Mapping(target = "fromDate", source = ""),
-		@Mapping(target = "toDate", source = ""),
-		@Mapping(target = "custDetails", source= ""),
-		@Mapping(target = "meterDetails", source= "")
+		@Mapping(target = "fromDate", source = "connectionDate"),
+		//@Mapping(target = "toDate", source = ""),
+		@Mapping(target = "custDetails", source= "")//,
+		//@Mapping(target = "meterDetails", source= "")
 	})
-    CustMeterMapping issueMeterToCustMeterMapp(ApplicationTxn applicationTxn);*/
+    CustMeterMapping issueMeterToCustMeterMapp(ApplicationTxn applicationTxn);
 	
     
     

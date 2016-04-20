@@ -147,8 +147,7 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
-        Long uid = Long.valueOf(workflowService.getRequestAt()) ;
-        applicationTxn.setRequestAt(userRepository.findById(uid));
+        
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         if(applicationTxn.getCan()!= null && applicationTxn.getConnectionDate() != null){
@@ -239,8 +238,10 @@ public class ApplicationTxnResource {
         /*if(workflowService.getRequestStatus() == 2){
         	applicationTxnWorkflowService.updateApplicationTxn(id);
         }*/
-        Long uid = Long.valueOf(workflowService.getRequestAt()) ;
-        applicationTxn.setRequestAt(userRepository.findById(uid));
+        if(workflowService.getRequestAt()!=null){
+        	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+            applicationTxn.setRequestAt(userRepository.findById(uid));
+        }
         applicationTxnRepository.save(applicationTxn);
         return ResponseEntity.ok().build();
 	}
@@ -363,7 +364,7 @@ public class ApplicationTxnResource {
 	@Timed
 	public ResponseEntity<List<ApplicationTxn>> search(
 			@RequestParam(value = "applicationTxnNo", required = false) String applicationTxnNo,
-			@RequestParam(value = "applicationTxnDt", required = false) LocalDateTime applicationTxnDt,
+			@RequestParam(value = "applicationTxnDt", required = false) String applicationTxnDt,
 			@RequestParam(value = "statusSearch", required = false) String statusSearch
 			)
 			throws URISyntaxException, Exception {
@@ -377,13 +378,13 @@ public class ApplicationTxnResource {
 		String whereClause = null;
 		
 		if(applicationTxnNo != null && !applicationTxnNo.equals(""))
-			whereClause = "and id =" + applicationTxnNo ;
+			whereClause = " at.id =" + applicationTxnNo ;
 
 		if(applicationTxnDt != null && !applicationTxnDt.equals(""))
-			whereClause = "and date(requested_date) = '" + applicationTxnDt.toString("yyyy-MM-dd")  +"' ";
+			whereClause = " date(requested_date) = '" + applicationTxnDt  +"' ";
 		
 		if(statusSearch != null && !statusSearch.equals(""))
-			whereClause = "and status = " + statusSearch +" ";
+			whereClause = " status = " + statusSearch +" ";
 
 		applicationTxns = applicationTxnCustomRepository.search(
 					whereClause);
