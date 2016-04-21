@@ -13,7 +13,11 @@ angular.module('watererpApp')
                     'content@': {
                         templateUrl: 'scripts/app/main/main.html',
                         controller: 'MainController'
-                    }
+                    },
+        			'billing@' : {
+        				templateUrl : 'scripts/app/main/billing.html',
+        				controller : 'BillingController'
+        			}
                 },
                 resolve: {
                     
