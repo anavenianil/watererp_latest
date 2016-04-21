@@ -69,9 +69,14 @@ public class FeasibilityStudyResource {
         feasibilityStudy.setStatus(0);
 
         FeasibilityStudy result = feasibilityStudyRepository.save(feasibilityStudy);
+        ApplicationTxn applicationTxn = applicationTxnRepository.findOne(feasibilityStudy.getApplicationTxn().getId());
+        applicationTxn.setDivisionMaster(feasibilityStudy.getDivisionMaster());
+        applicationTxn.setStreetMaster(feasibilityStudy.getStreetMaster());
+        
+        applicationTxnRepository.save(applicationTxn);
         
         return ResponseEntity.created(new URI("/api/feasibilityStudys/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("feasibilityStudy", result.getId().toString()))
+            .headers(HeaderUtil.createAlert("New Feasibility Study initiated.", result.getId().toString()))
             .body(result);
     }
 

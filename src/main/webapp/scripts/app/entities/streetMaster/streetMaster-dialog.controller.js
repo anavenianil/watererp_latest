@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('watererpApp').controller('StreetMasterDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'StreetMaster', 'ZoneMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, StreetMaster, ZoneMaster) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'StreetMaster', 'DivisionMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, StreetMaster, DivisionMaster) {
 
         $scope.streetMaster = entity;
-        $scope.zonemasters = ZoneMaster.query();
+        $scope.divisionmasters = DivisionMaster.query();
         $scope.load = function(id) {
             StreetMaster.get({id : id}, function(result) {
                 $scope.streetMaster = result;

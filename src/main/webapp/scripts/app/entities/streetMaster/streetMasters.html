@@ -20,8 +20,8 @@
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="streetName"><span>StreetName</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="streetCode"><span>StreetCode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="zoneMaster.zoneName"><span>zoneMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="streetNo"><span>StreetNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="divisionMaster.id"><span>divisionMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,9 +29,9 @@
                 <tr ng-repeat="streetMaster in streetMasters track by streetMaster.id">
                     <td><a ui-sref="streetMaster.detail({id:streetMaster.id})">{{streetMaster.id}}</a></td>
                     <td>{{streetMaster.streetName}}</td>
-                    <td>{{streetMaster.streetCode}}</td>
+                    <td>{{streetMaster.streetNo}}</td>
                     <td>
-                        <a ui-sref="zoneMaster.detail({id:streetMaster.zoneMaster.id})">{{streetMaster.zoneMaster.zoneName}}</a>
+                        <a ui-sref="divisionMaster.detail({id:streetMaster.divisionMaster.id})">{{streetMaster.divisionMaster.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

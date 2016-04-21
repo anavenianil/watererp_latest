@@ -2,8 +2,8 @@
     "relationships": [
     	{
             "relationshipId": 1,
-            "relationshipName": "categoryMaster",
-            "otherEntityName": "categoryMaster",
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
@@ -25,6 +25,20 @@
             "relationshipId": 4,
             "relationshipName": "requestAt",
             "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "divisionMaster",
+            "otherEntityName": "divisionMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "streetMaster",
+            "otherEntityName": "streetMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
@@ -122,7 +136,7 @@
         },
         {
             "fieldId": 19,
-            "fieldName": "regiterMobile",
+            "fieldName": "registeredMobile",
             "fieldType": "Long"
         },
         {

@@ -32,10 +32,10 @@
                         <td>{{custMeterMapping.fromDate | date:'mediumDate'}}</td>
                         <td>{{custMeterMapping.toDate | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="custDetails.detail({id:custMeterMapping.custDetails.id})">{{custMeterMapping.custDetails.id}}</a>
+                        <a ui-sref="custDetails.detail({id:custMeterMapping.custDetails.id})">{{custMeterMapping.custDetails.can}}</a>
                     </td>
                     <td>
-                        <a ui-sref="meterDetails.detail({id:custMeterMapping.meterDetails.id})">{{custMeterMapping.meterDetails.id}}</a>
+                        <a ui-sref="meterDetails.detail({id:custMeterMapping.meterDetails.id})">{{custMeterMapping.meterDetails.meterId}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

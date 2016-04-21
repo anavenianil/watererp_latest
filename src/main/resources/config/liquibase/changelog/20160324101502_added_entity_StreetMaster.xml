@@ -23,17 +23,17 @@
             </column>
             <column name="street_name" type="varchar(255)"/>
             
-            <column name="street_code" type="varchar(255)"/>
+            <column name="street_no" type="varchar(255)"/>
             
-            <column name="zone_master_id" type="bigint"/>
+            <column name="division_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
-        <addForeignKeyConstraint baseColumnNames="zone_master_id"
+        <addForeignKeyConstraint baseColumnNames="division_master_id"
                                  baseTableName="street_master"
-                                 constraintName="fk_streetmaster_zonemaster_id"
+                                 constraintName="fk_streetmaster_divisionmaster_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="zone_master"/>
+                                 referencedTableName="division_master"/>
 
     </changeSet>
 </databaseChangeLog>

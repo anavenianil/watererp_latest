@@ -56,7 +56,7 @@ angular.module('watererpApp').controller('ReceiptDialogController',
     			$scope.feasibilityStudy = result;
     			if($scope.feasibilityStudy.id !=null){
     			ApplicationTxnService.generateCan(result.id).then(function(response) {
-    				$scope.applicationTxn.can = response;
+    				$scope.receipt.applicationTxn.can = response;
     			});
     			}
     			else{
@@ -85,9 +85,9 @@ angular.module('watererpApp').controller('ReceiptDialogController',
 
         $scope.save = function () {
             $scope.isSaving = true;
-            if ($scope.applicationTxn.id != null) {
+            /*if ($scope.applicationTxn.id != null) {
                 ApplicationTxn.update($scope.applicationTxn);
-            } 
+            } */
             if ($scope.receipt.id != null) {
                 Receipt.update($scope.receipt, onSaveSuccess, onSaveError);
             } else {

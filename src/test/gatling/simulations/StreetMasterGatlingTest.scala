@@ -67,7 +67,7 @@ class StreetMasterGatlingTest extends Simulation {
             .exec(http("Create new streetMaster")
             .post("/api/streetMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "streetName":"SAMPLE_TEXT", "streetCode":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "streetName":"SAMPLE_TEXT", "streetNo":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_streetMaster_url")))
             .pause(10)

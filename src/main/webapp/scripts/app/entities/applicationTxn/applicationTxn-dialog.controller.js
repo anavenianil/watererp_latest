@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, CategoryMaster, 
+    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
     		UploadUtil, DateUtils, User) {
 
     	$scope.applicationTxn = {};
-    	$scope.categorymasters = CategoryMaster.query();
+    	$scope.tariffcategorymasters = TariffCategoryMaster.query();
     	$scope.users = User.query();
     	
     	if($stateParams.id != null){

@@ -20,15 +20,15 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_streetCode">StreetCode</label>
-            <input type="text" class="form-control" name="streetCode" id="field_streetCode"
-                    ng-model="streetMaster.streetCode"
+            <label class="control-label" for="field_streetNo">StreetNo</label>
+            <input type="text" class="form-control" name="streetNo" id="field_streetNo"
+                    ng-model="streetMaster.streetNo"
                      />
         </div>
 
         <div class="form-group">
-            <label for="field_zoneMaster">zoneMaster</label>
-            <select class="form-control" id="field_zoneMaster" name="zoneMaster" ng-model="streetMaster.zoneMaster" ng-options="zoneMaster as zoneMaster.zoneName for zoneMaster in zonemasters track by zoneMaster.id">
+            <label for="field_divisionMaster">divisionMaster</label>
+            <select class="form-control" id="field_divisionMaster" name="divisionMaster" ng-model="streetMaster.divisionMaster" ng-options="divisionMaster as divisionMaster.id for divisionMaster in divisionmasters track by divisionMaster.id">
                 <option value=""></option>
             </select>
         </div>

@@ -74,7 +74,7 @@ public class ProceedingsResource {
         Proceedings result = proceedingsRepository.save(proceedings);
         
         return ResponseEntity.created(new URI("/api/proceedingss/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("proceedings", result.getId().toString()))
+            .headers(HeaderUtil.createAlert("New Proceedings initiated", result.getId().toString()))
             .body(result);
     }
 

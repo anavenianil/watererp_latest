@@ -43,8 +43,8 @@ public class StreetMasterResourceIntTest {
 
     private static final String DEFAULT_STREET_NAME = "AAAAA";
     private static final String UPDATED_STREET_NAME = "BBBBB";
-    private static final String DEFAULT_STREET_CODE = "AAAAA";
-    private static final String UPDATED_STREET_CODE = "BBBBB";
+    private static final String DEFAULT_STREET_NO = "AAAAA";
+    private static final String UPDATED_STREET_NO = "BBBBB";
 
     @Inject
     private StreetMasterRepository streetMasterRepository;
@@ -73,7 +73,7 @@ public class StreetMasterResourceIntTest {
     public void initTest() {
         streetMaster = new StreetMaster();
         streetMaster.setStreetName(DEFAULT_STREET_NAME);
-        streetMaster.setStreetCode(DEFAULT_STREET_CODE);
+        streetMaster.setStreetNo(DEFAULT_STREET_NO);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class StreetMasterResourceIntTest {
         assertThat(streetMasters).hasSize(databaseSizeBeforeCreate + 1);
         StreetMaster testStreetMaster = streetMasters.get(streetMasters.size() - 1);
         assertThat(testStreetMaster.getStreetName()).isEqualTo(DEFAULT_STREET_NAME);
-        assertThat(testStreetMaster.getStreetCode()).isEqualTo(DEFAULT_STREET_CODE);
+        assertThat(testStreetMaster.getStreetNo()).isEqualTo(DEFAULT_STREET_NO);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class StreetMasterResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(streetMaster.getId().intValue())))
                 .andExpect(jsonPath("$.[*].streetName").value(hasItem(DEFAULT_STREET_NAME.toString())))
-                .andExpect(jsonPath("$.[*].streetCode").value(hasItem(DEFAULT_STREET_CODE.toString())));
+                .andExpect(jsonPath("$.[*].streetNo").value(hasItem(DEFAULT_STREET_NO.toString())));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class StreetMasterResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(streetMaster.getId().intValue()))
             .andExpect(jsonPath("$.streetName").value(DEFAULT_STREET_NAME.toString()))
-            .andExpect(jsonPath("$.streetCode").value(DEFAULT_STREET_CODE.toString()));
+            .andExpect(jsonPath("$.streetNo").value(DEFAULT_STREET_NO.toString()));
     }
 
     @Test
@@ -144,7 +144,7 @@ public class StreetMasterResourceIntTest {
 
         // Update the streetMaster
         streetMaster.setStreetName(UPDATED_STREET_NAME);
-        streetMaster.setStreetCode(UPDATED_STREET_CODE);
+        streetMaster.setStreetNo(UPDATED_STREET_NO);
 
         restStreetMasterMockMvc.perform(put("/api/streetMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -156,7 +156,7 @@ public class StreetMasterResourceIntTest {
         assertThat(streetMasters).hasSize(databaseSizeBeforeUpdate);
         StreetMaster testStreetMaster = streetMasters.get(streetMasters.size() - 1);
         assertThat(testStreetMaster.getStreetName()).isEqualTo(UPDATED_STREET_NAME);
-        assertThat(testStreetMaster.getStreetCode()).isEqualTo(UPDATED_STREET_CODE);
+        assertThat(testStreetMaster.getStreetNo()).isEqualTo(UPDATED_STREET_NO);
     }
 
     @Test
