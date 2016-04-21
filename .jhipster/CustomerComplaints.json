@@ -2,13 +2,6 @@
     "relationships": [
         {
             "relationshipId": 1,
-            "relationshipName": "applicationTxn",
-            "otherEntityName": "applicationTxn",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 2,
             "relationshipName": "complaintTypeMaster",
             "otherEntityName": "complaintTypeMaster",
             "relationshipType": "many-to-one",
@@ -35,6 +28,11 @@
             "fieldId": 4,
             "fieldName": "complaintDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "can",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160329064343",

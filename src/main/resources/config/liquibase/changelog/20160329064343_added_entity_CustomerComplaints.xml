@@ -29,17 +29,12 @@
             
             <column name="complaint_date" type="date"/>
             
-            <column name="application_txn_id" type="bigint"/>
+            <column name="can" type="varchar(255)"/>
+            
             <column name="complaint_type_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
-        <addForeignKeyConstraint baseColumnNames="application_txn_id"
-                                 baseTableName="customer_complaints"
-                                 constraintName="fk_customercomplaints_applicationtxn_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="application_txn"/>
-
         <addForeignKeyConstraint baseColumnNames="complaint_type_master_id"
                                  baseTableName="customer_complaints"
                                  constraintName="fk_customercomplaints_complainttypemaster_id"

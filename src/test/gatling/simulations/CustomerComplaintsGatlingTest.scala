@@ -67,7 +67,7 @@ class CustomerComplaintsGatlingTest extends Simulation {
             .exec(http("Create new customerComplaints")
             .post("/api/customerComplaintss")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "remarks":"SAMPLE_TEXT", "relevantDoc":"SAMPLE_TEXT", "complaintBy":"SAMPLE_TEXT", "complaintDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "remarks":"SAMPLE_TEXT", "relevantDoc":"SAMPLE_TEXT", "complaintBy":"SAMPLE_TEXT", "complaintDate":"2020-01-01T00:00:00.000Z", "can":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_customerComplaints_url")))
             .pause(10)

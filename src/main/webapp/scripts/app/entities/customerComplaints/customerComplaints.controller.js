@@ -38,6 +38,7 @@ angular.module('watererpApp')
                 relevantDoc: null,
                 complaintBy: null,
                 complaintDate: null,
+                can: null,
                 id: null
             };
         };

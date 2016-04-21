@@ -34,10 +34,9 @@ public class CustomerComplaints implements Serializable {
     @Column(name = "complaint_date")
     private LocalDate complaintDate;
     
-    @ManyToOne
-    @JoinColumn(name = "application_txn_id")
-    private ApplicationTxn applicationTxn;
-
+    @Column(name = "can")
+    private String can;
+    
     @ManyToOne
     @JoinColumn(name = "complaint_type_master_id")
     private ComplaintTypeMaster complaintTypeMaster;
@@ -82,12 +81,12 @@ public class CustomerComplaints implements Serializable {
         this.complaintDate = complaintDate;
     }
 
-    public ApplicationTxn getApplicationTxn() {
-        return applicationTxn;
+    public String getCan() {
+        return can;
     }
-
-    public void setApplicationTxn(ApplicationTxn applicationTxn) {
-        this.applicationTxn = applicationTxn;
+    
+    public void setCan(String can) {
+        this.can = can;
     }
 
     public ComplaintTypeMaster getComplaintTypeMaster() {
@@ -126,6 +125,7 @@ public class CustomerComplaints implements Serializable {
             ", relevantDoc='" + relevantDoc + "'" +
             ", complaintBy='" + complaintBy + "'" +
             ", complaintDate='" + complaintDate + "'" +
+            ", can='" + can + "'" +
             '}';
     }
 }
