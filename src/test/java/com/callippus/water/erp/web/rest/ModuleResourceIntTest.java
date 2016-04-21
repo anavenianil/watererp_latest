@@ -56,6 +56,8 @@ public class ModuleResourceIntTest {
     private static final ZonedDateTime DEFAULT_MODIFIED_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_MODIFIED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_MODIFIED_DATE_STR = dateTimeFormatter.format(DEFAULT_MODIFIED_DATE);
+    private static final String DEFAULT_SERVER_URL = "AAAAA";
+    private static final String UPDATED_SERVER_URL = "BBBBB";
 
     @Inject
     private ModuleRepository moduleRepository;
@@ -86,6 +88,7 @@ public class ModuleResourceIntTest {
         module.setName(DEFAULT_NAME);
         module.setPriority(DEFAULT_PRIORITY);
         module.setModifiedDate(DEFAULT_MODIFIED_DATE);
+        module.setServerUrl(DEFAULT_SERVER_URL);
     }
 
     @Test
@@ -107,6 +110,7 @@ public class ModuleResourceIntTest {
         assertThat(testModule.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testModule.getPriority()).isEqualTo(DEFAULT_PRIORITY);
         assertThat(testModule.getModifiedDate()).isEqualTo(DEFAULT_MODIFIED_DATE);
+        assertThat(testModule.getServerUrl()).isEqualTo(DEFAULT_SERVER_URL);
     }
 
     @Test
@@ -140,7 +144,8 @@ public class ModuleResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(module.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
-                .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE_STR)));
+                .andExpect(jsonPath("$.[*].modifiedDate").value(hasItem(DEFAULT_MODIFIED_DATE_STR)))
+                .andExpect(jsonPath("$.[*].serverUrl").value(hasItem(DEFAULT_SERVER_URL.toString())));
     }
 
     @Test
@@ -156,7 +161,8 @@ public class ModuleResourceIntTest {
             .andExpect(jsonPath("$.id").value(module.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.priority").value(DEFAULT_PRIORITY))
-            .andExpect(jsonPath("$.modifiedDate").value(DEFAULT_MODIFIED_DATE_STR));
+            .andExpect(jsonPath("$.modifiedDate").value(DEFAULT_MODIFIED_DATE_STR))
+            .andExpect(jsonPath("$.serverUrl").value(DEFAULT_SERVER_URL.toString()));
     }
 
     @Test
@@ -179,6 +185,7 @@ public class ModuleResourceIntTest {
         module.setName(UPDATED_NAME);
         module.setPriority(UPDATED_PRIORITY);
         module.setModifiedDate(UPDATED_MODIFIED_DATE);
+        module.setServerUrl(UPDATED_SERVER_URL);
 
         restModuleMockMvc.perform(put("/api/modules")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -192,6 +199,7 @@ public class ModuleResourceIntTest {
         assertThat(testModule.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testModule.getPriority()).isEqualTo(UPDATED_PRIORITY);
         assertThat(testModule.getModifiedDate()).isEqualTo(UPDATED_MODIFIED_DATE);
+        assertThat(testModule.getServerUrl()).isEqualTo(UPDATED_SERVER_URL);
     }
 
     @Test

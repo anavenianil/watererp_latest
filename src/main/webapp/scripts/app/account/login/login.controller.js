@@ -22,7 +22,9 @@ angular.module('watererpApp')
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
                 } else {
-                    $rootScope.back();
+                	console.log("Reached here:1")
+                	$state.go('home');
+//                    $rootScope.back();
                 }
             }).catch(function () {
                 $scope.authenticationError = true;

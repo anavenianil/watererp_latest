@@ -14,9 +14,9 @@ angular.module('watererpApp')
                         templateUrl: 'scripts/app/main/main.html',
                         controller: 'MainController'
                     },
-        			'billing@' : {
-        				templateUrl : 'scripts/app/main/billing.html',
-        				controller : 'BillingController'
+        			'dashboard@' : {
+        				templateUrl : 'scripts/app/main/dashboard.html',
+        				controller : 'DashboardController'
         			}
                 },
                 resolve: {

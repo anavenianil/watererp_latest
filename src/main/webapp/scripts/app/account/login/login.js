@@ -14,6 +14,10 @@ angular.module('watererpApp')
                     'content@': {
                         templateUrl: 'scripts/app/account/login/login.html',
                         controller: 'LoginController'
+                    },
+                    'dashboard@': {
+                        templateUrl: 'scripts/app/account/login/login.html',
+                        controller: 'LoginController'
                     }
                 },
                 resolve: {

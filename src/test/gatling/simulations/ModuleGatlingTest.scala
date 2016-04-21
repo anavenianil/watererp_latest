@@ -67,7 +67,7 @@ class ModuleGatlingTest extends Simulation {
             .exec(http("Create new module")
             .post("/api/modules")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "priority":"0", "modifiedDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "priority":"0", "modifiedDate":"2020-01-01T00:00:00.000Z", "serverUrl":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_module_url")))
             .pause(10)

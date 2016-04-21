@@ -10,8 +10,7 @@ angular.module('watererpApp')
 
         $scope.logout = function () {
             Auth.logout();
-            //$state.go('home');
-            $state.go('login');
+            window.location = '/';
             $scope.userRole ="";
         };
         
