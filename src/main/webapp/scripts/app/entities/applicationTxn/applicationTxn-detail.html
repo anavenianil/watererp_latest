@@ -52,7 +52,8 @@
 						Feasibility':'Approved')}}</span> -->
 				</h3>
 				<div class="pull-right">
-					<a type="button" href="/api/applicationTxns/report/{{applicationTxn.id}}"
+					<a type="button"
+						href="/api/applicationTxns/report/{{applicationTxn.id}}"
 						class="pull-right btn btn-warning">Download as PDF</a>
 				</div>
 			</div>
@@ -141,12 +142,12 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Connection Category</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.categoryMaster.categoryName}}</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.tariffCategoryMaster.tariffCategory}}</h5>
 							</div>
 						</div>
 					</fieldset>
 					<br>
-					<fieldset>
+					<fieldset ng-hide="true">
 						<legend>Billing Address</legend>
 						<div class="row">
 							<div class="col-sm-3">
@@ -173,17 +174,19 @@
 					</fieldset>
 					<fieldset>
 						<legend>Documents to be attached </legend>
-						<div class="col-sm-3">
-							<label>Attached Document</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.attachedDocType}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Id Number</label>
-							<h5 class="list-group-item-heading">{{applicationTxn.idNumber}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Property Ownership Document </label>
-							<h5 class="list-group-item-heading">{{applicationTxn.propertyDoc}}</h5>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Attached Document</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.attachedDocType}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Id Number</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.idNumber}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Property Ownership Document </label>
+								<h5 class="list-group-item-heading">{{applicationTxn.propertyDoc}}</h5>
+							</div>
 						</div>
 					</fieldset>
 				</div>

@@ -20,7 +20,7 @@
 								<label for="field_materialMaster">Items</label> <select
 									class="form-control" id="field_materialMaster_{{$index}}"
 									name="materialMaster"
-									ng-model="itemRequired.itemRequiredArr[x].materialMaster"
+									ng-model="proceedings.itemRequireds[x].materialMaster"
 									ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id"
 									disabled>
 									<option value=""></option>
@@ -29,7 +29,7 @@
 							<div class="col-sm-3">
 								<label for="field_uom">uom</label> <select class="form-control"
 									id="field_uom_{{$index}}" name="uom"
-									ng-model="itemRequired.itemRequiredArr[x].uom"
+									ng-model="proceedings.itemRequireds[x].uom"
 									ng-options="uom as uom.value for uom in uoms track by uom.id" disabled>
 									<option value=""></option>
 								</select>
@@ -38,7 +38,7 @@
 								<label class="control-label" for="field_quantity">Quantity</label>
 								<input type="number" class="form-control" name="quantity"
 									id="field_quantity_{{$index}}"
-									ng-model="itemRequired.itemRequiredArr[x].quantity" disabled/>
+									ng-model="proceedings.itemRequireds[x].quantity" disabled/>
 							</div>
 							<div class="col-sm-3">
 								<label class="control-label" for="field_provided">Provided</label>
@@ -46,7 +46,7 @@
 									id="field_provided_{{$index}}"
 									ng-change="validate($index, itemRequired.itemRequiredArr[x].quantity, itemRequired.itemRequiredArr[x].provided)"
 									min="0" max="{{maxVal}}"
-									ng-model="itemRequired.itemRequiredArr[x].provided" />
+									ng-model="proceedings.itemRequireds[x].provided" />
 							</div>
 						</div>
 					</div>
@@ -108,7 +108,7 @@
 									<label class="control-label" for="field_remarks">Remarks</label>
 									<textarea rows="2" cols="30" class="form-control"
 										name="remarks" id="field_remarks"
-										ng-model="itemRequired.remarks"></textarea>
+										ng-model="proceedings.applicationTxn.remarks"></textarea>
 								</div>
 							</div>
 						</fieldset>

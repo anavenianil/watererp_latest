@@ -83,8 +83,8 @@ public class ApplicationTxnResourceIntTest {
     private static final String DEFAULT_B_PLOT_NO = "AAAAA";
     private static final String UPDATED_B_PLOT_NO = "BBBBB";
 
-    private static final Long DEFAULT_REGITER_MOBILE = 1L;
-    private static final Long UPDATED_REGITER_MOBILE = 2L;
+    private static final Long DEFAULT_REGISTERED_MOBILE = 1L;
+    private static final Long UPDATED_REGISTERED_MOBILE = 2L;
     private static final String DEFAULT_ATTACHED_DOC_TYPE = "AAAAA";
     private static final String UPDATED_ATTACHED_DOC_TYPE = "BBBBB";
     private static final String DEFAULT_ID_NUMBER = "AAAAA";
@@ -159,7 +159,7 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setWard(DEFAULT_WARD);
         applicationTxn.setDma(DEFAULT_DMA);
         applicationTxn.setbPlotNo(DEFAULT_B_PLOT_NO);
-        applicationTxn.setRegiterMobile(DEFAULT_REGITER_MOBILE);
+        applicationTxn.setRegisteredMobile(DEFAULT_REGISTERED_MOBILE);
         applicationTxn.setAttachedDocType(DEFAULT_ATTACHED_DOC_TYPE);
         applicationTxn.setIdNumber(DEFAULT_ID_NUMBER);
         applicationTxn.setPropertyDoc(DEFAULT_PROPERTY_DOC);
@@ -208,7 +208,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getWard()).isEqualTo(DEFAULT_WARD);
         assertThat(testApplicationTxn.getDma()).isEqualTo(DEFAULT_DMA);
         assertThat(testApplicationTxn.getbPlotNo()).isEqualTo(DEFAULT_B_PLOT_NO);
-        assertThat(testApplicationTxn.getRegiterMobile()).isEqualTo(DEFAULT_REGITER_MOBILE);
+        assertThat(testApplicationTxn.getRegisteredMobile()).isEqualTo(DEFAULT_REGISTERED_MOBILE);
         assertThat(testApplicationTxn.getAttachedDocType()).isEqualTo(DEFAULT_ATTACHED_DOC_TYPE);
         assertThat(testApplicationTxn.getIdNumber()).isEqualTo(DEFAULT_ID_NUMBER);
         assertThat(testApplicationTxn.getPropertyDoc()).isEqualTo(DEFAULT_PROPERTY_DOC);
@@ -252,7 +252,7 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].ward").value(hasItem(DEFAULT_WARD.toString())))
                 .andExpect(jsonPath("$.[*].dma").value(hasItem(DEFAULT_DMA.toString())))
                 .andExpect(jsonPath("$.[*].bPlotNo").value(hasItem(DEFAULT_B_PLOT_NO.toString())))
-                .andExpect(jsonPath("$.[*].regiterMobile").value(hasItem(DEFAULT_REGITER_MOBILE.intValue())))
+                .andExpect(jsonPath("$.[*].registeredMobile").value(hasItem(DEFAULT_REGISTERED_MOBILE.intValue())))
                 .andExpect(jsonPath("$.[*].attachedDocType").value(hasItem(DEFAULT_ATTACHED_DOC_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].propertyDoc").value(hasItem(DEFAULT_PROPERTY_DOC.toString())))
@@ -296,7 +296,7 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.ward").value(DEFAULT_WARD.toString()))
             .andExpect(jsonPath("$.dma").value(DEFAULT_DMA.toString()))
             .andExpect(jsonPath("$.bPlotNo").value(DEFAULT_B_PLOT_NO.toString()))
-            .andExpect(jsonPath("$.regiterMobile").value(DEFAULT_REGITER_MOBILE.intValue()))
+            .andExpect(jsonPath("$.registeredMobile").value(DEFAULT_REGISTERED_MOBILE.intValue()))
             .andExpect(jsonPath("$.attachedDocType").value(DEFAULT_ATTACHED_DOC_TYPE.toString()))
             .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
             .andExpect(jsonPath("$.propertyDoc").value(DEFAULT_PROPERTY_DOC.toString()))
@@ -346,7 +346,7 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setWard(UPDATED_WARD);
         applicationTxn.setDma(UPDATED_DMA);
         applicationTxn.setbPlotNo(UPDATED_B_PLOT_NO);
-        applicationTxn.setRegiterMobile(UPDATED_REGITER_MOBILE);
+        applicationTxn.setRegisteredMobile(UPDATED_REGISTERED_MOBILE);
         applicationTxn.setAttachedDocType(UPDATED_ATTACHED_DOC_TYPE);
         applicationTxn.setIdNumber(UPDATED_ID_NUMBER);
         applicationTxn.setPropertyDoc(UPDATED_PROPERTY_DOC);
@@ -387,7 +387,7 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getWard()).isEqualTo(UPDATED_WARD);
         assertThat(testApplicationTxn.getDma()).isEqualTo(UPDATED_DMA);
         assertThat(testApplicationTxn.getbPlotNo()).isEqualTo(UPDATED_B_PLOT_NO);
-        assertThat(testApplicationTxn.getRegiterMobile()).isEqualTo(UPDATED_REGITER_MOBILE);
+        assertThat(testApplicationTxn.getRegisteredMobile()).isEqualTo(UPDATED_REGISTERED_MOBILE);
         assertThat(testApplicationTxn.getAttachedDocType()).isEqualTo(UPDATED_ATTACHED_DOC_TYPE);
         assertThat(testApplicationTxn.getIdNumber()).isEqualTo(UPDATED_ID_NUMBER);
         assertThat(testApplicationTxn.getPropertyDoc()).isEqualTo(UPDATED_PROPERTY_DOC);

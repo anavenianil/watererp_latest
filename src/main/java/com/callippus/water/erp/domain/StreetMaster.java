@@ -24,12 +24,12 @@ public class StreetMaster implements Serializable {
     @Column(name = "street_name")
     private String streetName;
     
-    @Column(name = "street_code")
-    private String streetCode;
+    @Column(name = "street_no")
+    private String streetNo;
     
     @ManyToOne
-    @JoinColumn(name = "zone_master_id")
-    private ZoneMaster zoneMaster;
+    @JoinColumn(name = "division_master_id")
+    private DivisionMaster divisionMaster;
 
     public Long getId() {
         return id;
@@ -47,20 +47,20 @@ public class StreetMaster implements Serializable {
         this.streetName = streetName;
     }
 
-    public String getStreetCode() {
-        return streetCode;
+    public String getStreetNo() {
+        return streetNo;
     }
     
-    public void setStreetCode(String streetCode) {
-        this.streetCode = streetCode;
+    public void setStreetNo(String streetNo) {
+        this.streetNo = streetNo;
     }
 
-    public ZoneMaster getZoneMaster() {
-        return zoneMaster;
+    public DivisionMaster getDivisionMaster() {
+        return divisionMaster;
     }
 
-    public void setZoneMaster(ZoneMaster zoneMaster) {
-        this.zoneMaster = zoneMaster;
+    public void setDivisionMaster(DivisionMaster divisionMaster) {
+        this.divisionMaster = divisionMaster;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class StreetMaster implements Serializable {
         return "StreetMaster{" +
             "id=" + id +
             ", streetName='" + streetName + "'" +
-            ", streetCode='" + streetCode + "'" +
+            ", streetNo='" + streetNo + "'" +
             '}';
     }
 }

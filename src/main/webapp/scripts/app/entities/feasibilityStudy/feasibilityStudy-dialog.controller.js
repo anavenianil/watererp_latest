@@ -6,7 +6,7 @@ angular.module('watererpApp')
     	
     	$scope.feasibilityStudy = {};
         $scope.divisionmasters = DivisionMaster.query();
-        //$scope.zonemasters = ZoneMaster.query();
+        $scope.zonemasters = ZoneMaster.query();
         //$scope.streetmasters = StreetMaster.query();
         //$scope.applicationtxns = ApplicationTxn.query();
         $scope.users = User.query();
@@ -28,8 +28,8 @@ angular.module('watererpApp')
                 $scope.applicationTxn = result;
                 $scope.feasibilityStudy.applicationTxn = $scope.applicationTxn;
                 $scope.feasibilityStudy.applicationTxn.id = $scope.applicationTxn.id;
-                $scope.feasibilityStudy.categoryMaster = {};
-                $scope.feasibilityStudy.categoryMaster.id = $scope.applicationTxn.categoryMaster.id;
+                $scope.feasibilityStudy.tariffCategoryMaster = {};
+                $scope.feasibilityStudy.tariffCategoryMaster.id = $scope.applicationTxn.tariffCategoryMaster.id;
             });	
         }
         
@@ -62,12 +62,13 @@ angular.module('watererpApp')
 
         
         $scope.save = function () {
-        	ApplicationTxnService.approveRequest($scope.feasibilityStudy.applicationTxn.id, $scope.feasibilityStudy.remarks);
             $scope.isSaving = true;
             if ($scope.feasibilityStudy.id != null) {
                 FeasibilityStudy.update($scope.feasibilityStudy, onSaveSuccess, onSaveError);
             } else {
-                FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError);
+                FeasibilityStudy.save($scope.feasibilityStudy, onSaveSuccess, onSaveError, function () {
+                	console.log("hello");
+                });
             }
         };
         
@@ -167,7 +168,7 @@ angular.module('watererpApp')
             }
         };
         
-        $scope.getZone = function(divisionId){
+        /*$scope.getZone = function(divisionId){
         	$scope.zoneMasters = [];
             ZoneMaster.query({page: $scope.page, size: 20, divisionId : divisionId}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -175,11 +176,11 @@ angular.module('watererpApp')
                     $scope.zoneMasters.push(result[i]);
                 }
             });
-        }
+        }*/
         
-        $scope.getStreet = function(zoneId){
+        $scope.getStreet = function(divisionId){
         	$scope.streetMasters = [];
-            StreetMaster.query({page: $scope.page, size: 20, zoneId: zoneId}, function(result, headers) {
+            StreetMaster.query({page: $scope.page, size: 20, divisionId: divisionId}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.streetMasters.push(result[i]);

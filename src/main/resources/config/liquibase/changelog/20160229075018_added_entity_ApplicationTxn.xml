@@ -57,7 +57,7 @@
             
             <column name="b_plot_no" type="varchar(255)"/>
             
-            <column name="regiter_mobile" type="bigint"/>
+            <column name="registered_mobile" type="bigint"/>
             
             <column name="attached_doc_type" type="varchar(255)"/>
             
@@ -83,18 +83,20 @@
             
             <column name="approved_date" type="date"/>
             
-            <column name="category_master_id" type="bigint"/>
+            <column name="tariff_category_master_id" type="bigint"/>
             <column name="meter_details_id" type="bigint"/>
             <column name="user_id" type="bigint"/>
             <column name="request_at_id" type="bigint"/>
+            <column name="division_master_id" type="bigint"/>
+            <column name="street_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
-        <addForeignKeyConstraint baseColumnNames="category_master_id"
+        <addForeignKeyConstraint baseColumnNames="tariff_category_master_id"
                                  baseTableName="application_txn"
-                                 constraintName="fk_applicationtxn_categorymaster_id"
+                                 constraintName="fk_applicationtxn_tariffcategorymaster_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="category_master"/>
+                                 referencedTableName="tariff_category_master"/>
 
         <addForeignKeyConstraint baseColumnNames="meter_details_id"
                                  baseTableName="application_txn"
@@ -113,6 +115,18 @@
                                  constraintName="fk_applicationtxn_requestat_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="division_master_id"
+                                 baseTableName="application_txn"
+                                 constraintName="fk_applicationtxn_divisionmaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="division_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="street_master_id"
+                                 baseTableName="application_txn"
+                                 constraintName="fk_applicationtxn_streetmaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="street_master"/>
 
     </changeSet>
 </databaseChangeLog>

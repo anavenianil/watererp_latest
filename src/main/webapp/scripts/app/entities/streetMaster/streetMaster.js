@@ -53,7 +53,7 @@ angular.module('watererpApp')
                             entity: function () {
                                 return {
                                     streetName: null,
-                                    streetCode: null,
+                                    streetNo: null,
                                     id: null
                                 };
                             }

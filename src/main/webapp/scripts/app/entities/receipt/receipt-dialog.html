@@ -17,7 +17,7 @@
 						<div class="col-sm-4">
 							<label class="control-label" for="field_can">CAN No.</label> <input
 								type="text" class="form-control" name="can" id="field_can"
-								ng-model="applicationTxn.can" readonly />
+								ng-model="receipt.applicationTxn.can" readonly />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptDate">Receipt
@@ -105,7 +105,7 @@
 							<div class="col-sm-12">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="receipt.remarks"></textarea>
+									id="field_remarks" ng-model="receipt.applicationTxn.remarks"></textarea>
 							</div>
 						</div>
 					</fieldset>

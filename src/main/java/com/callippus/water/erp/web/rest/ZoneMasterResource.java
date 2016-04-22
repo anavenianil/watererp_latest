@@ -84,19 +84,10 @@ public class ZoneMasterResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<ZoneMaster>> getAllZoneMasters(Pageable pageable,
-    		@RequestParam(value = "divisionId", required = false) DivisionMaster divisionId)
+    public ResponseEntity<List<ZoneMaster>> getAllZoneMasters(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of ZoneMasters");
-        //Page<ZoneMaster> page = zoneMasterRepository.findAll(pageable); 
-        Page<ZoneMaster> page;
-        if(divisionId == null){
-        	page = zoneMasterRepository.findAll(pageable);
-        }
-        else
-        {
-        	page = zoneMasterRepository.findByDivisionMaster(pageable, divisionId);
-        }
+        Page<ZoneMaster> page = zoneMasterRepository.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/zoneMasters");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

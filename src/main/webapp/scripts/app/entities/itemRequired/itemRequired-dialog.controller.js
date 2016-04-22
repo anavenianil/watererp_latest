@@ -5,14 +5,16 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         		ApplicationTxnService, ProceedingsService) {
 
         $scope.itemRequired = {};
-        $scope.materialmasters = MaterialMaster.query();
-        $scope.applicationtxns = ApplicationTxn.query();
-        $scope.feasibilitystudys = FeasibilityStudy.query();
-        $scope.proceedingss = Proceedings.query();
-        $scope.uoms = Uom.query();
+        //$scope.materialmasters = MaterialMaster.query();
+        //$scope.applicationtxns = ApplicationTxn.query();
+        //$scope.feasibilitystudys = FeasibilityStudy.query();
+        //$scope.proceedingss = Proceedings.query();
+        //$scope.uoms = Uom.query();
         $scope.itemRequired.itemRequiredArr = [];
         $scope.applicationTxnId = $stateParams.applicationTxnId;
         $scope.proceedings = {};
+        
+        
        
         
         $scope.load = function(id) {
@@ -26,7 +28,8 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         }
         
         $scope.arr = [];
-        $scope.makeArray = function () {
+        
+        /*$scope.makeArray = function () {
         	$scope.itemRequired.itemrequiredArr = [];
             $scope.arr.length = 0;
             for (var i = 0; i < parseInt($scope.itemRequireds.length); i++) {
@@ -41,20 +44,20 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
                 $scope.itemRequired.itemrequiredArr[i].uom.id={};
                 $scope.itemRequired.itemrequiredArr[i].amount;
                 $scope.itemRequired.itemrequiredArr[i].ratePerShs;
-                /*$scope.itemRequired.itemrequiredArr[i].proceedings ={};
-                $scope.itemRequired.itemrequiredArr[i].proceedings.id;*/
+                $scope.itemRequired.itemrequiredArr[i].proceedings ={};
+                $scope.itemRequired.itemrequiredArr[i].proceedings.id;
                 $scope.itemRequired.itemrequiredArr[i].applicationTxn = {};
                 $scope.itemRequired.itemrequiredArr[i].applicationTxn.id;
             }
-        };
+        };*/
         
-        $scope.display = function(){
+        /*$scope.display = function(){
         	for(var i=0; i<$scope.itemRequireds.length;i++){
         		$scope.itemRequired.itemRequiredArr[i] = {};
         		$scope.itemRequired.itemRequiredArr[i] = $scope.itemRequireds[i];
         		$scope.itemRequired.itemRequiredArr[i].provided = $scope.itemRequireds[i].quantity;
         	}
-        }
+        }*/
         
         $scope.getProceedings = function(){
 	        ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
@@ -62,7 +65,7 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
 	        });
         }
         
-        $scope.createItemArr = [];
+        /*$scope.createItemArr = [];
         
         if($stateParams.applicationTxnId !=null){
         	$scope.itemRequireds =[];
@@ -77,7 +80,7 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
             		$scope.display();
             		$scope.getProceedings();
             	});
-        }
+        }*/
         
 
 
@@ -92,7 +95,6 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         };
 
         $scope.save = function () {
-        	ApplicationTxnService.approveRequest($scope.applicationTxnId, $scope.itemRequired.remarks);
         	 $scope.proceedings.itemRequireds = [];
         	 $state.go('applicationTxn');
         	for (var item in $scope.itemRequired.itemRequiredArr) {

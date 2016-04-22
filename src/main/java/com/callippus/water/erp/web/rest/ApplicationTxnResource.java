@@ -150,13 +150,15 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
+        if(applicationTxn.getMeterDetails()!=null){
+        	applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
+        }
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         if(applicationTxn.getStatus()==7){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
-            TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(result.getCategoryMaster().getId());
-            custDetails.setTariffCategoryMaster(tcm);
+            
             custDetails.setId(null);
             CustDetails cd = custDetailsRepository.save(custDetails);
             
@@ -353,7 +355,7 @@ public class ApplicationTxnResource {
 		log.debug("REST request to get CAN : {}");
 		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(feasibilityId);
 		String division = feasibility.getDivisionMaster().getDivisionName();
-		String street = feasibility.getStreetMaster().getStreetCode();
+		String street = feasibility.getStreetMaster().getStreetNo();
 		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
 		Integer can = applicationTxnRepository.findByCan(division, street);
 		if(can == null){

@@ -1,22 +1,30 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.Receipt;
-import com.callippus.water.erp.repository.ReceiptRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.Receipt;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.ReceiptRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing Receipt.
@@ -29,6 +37,12 @@ public class ReceiptResource {
         
     @Inject
     private ReceiptRepository receiptRepository;
+    
+    @Inject
+    private ApplicationTxnRepository applicationTxnRepository;
+    
+    @Inject
+    private ApplicationTxnWorkflowService applicationTxnWorkflowService;
     
     /**
      * POST  /receipts -> Create a new receipt.
@@ -43,6 +57,16 @@ public class ReceiptResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("receipt", "idexists", "A new receipt cannot already have an ID")).body(null);
         }
         Receipt result = receiptRepository.save(receipt);
+        ApplicationTxn applicationTxn = applicationTxnRepository.findOne(receipt.getApplicationTxn().getId());
+        applicationTxn.setCan(receipt.getApplicationTxn().getCan());
+        applicationTxn.setRemarks(receipt.getApplicationTxn().getRemarks());
+        applicationTxnRepository.save(applicationTxn);
+        try{
+        	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
         return ResponseEntity.created(new URI("/api/receipts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("receipt", result.getId().toString()))
             .body(result);

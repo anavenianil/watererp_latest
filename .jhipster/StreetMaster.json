@@ -2,10 +2,10 @@
     "relationships": [
         {
             "relationshipId": 1,
-            "relationshipName": "zoneMaster",
-            "otherEntityName": "zoneMaster",
+            "relationshipName": "divisionMaster",
+            "otherEntityName": "divisionMaster",
             "relationshipType": "many-to-one",
-            "otherEntityField": "zoneName"
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -16,7 +16,7 @@
         },
         {
             "fieldId": 2,
-            "fieldName": "streetCode",
+            "fieldName": "streetNo",
             "fieldType": "String"
         }
     ],

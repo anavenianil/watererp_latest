@@ -35,7 +35,7 @@ angular.module('watererpApp')
         $scope.clear = function () {
             $scope.streetMaster = {
                 streetName: null,
-                streetCode: null,
+                streetNo: null,
                 id: null
             };
         };

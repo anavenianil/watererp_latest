@@ -19,6 +19,7 @@ import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.workflow.request.service.RequestProcessService;
 import com.callippus.water.erp.workflow.service.WorkflowService;
 
@@ -27,6 +28,13 @@ import com.callippus.water.erp.workflow.service.WorkflowService;
 public class ApplicationTxnWorkflowService extends RequestProcessService {
 	private final Logger log = LoggerFactory
 			.getLogger(ApplicationTxnWorkflowService.class);
+	
+	
+	/*@Inject 
+	private ApplicationTxnWorkflowService applicationTxnWorkflowService;*/
+	
+	@Inject
+	private UserRepository userRepository;
 
 	private String message;
 	private ApplicationTxn applicationTxnDetails;
@@ -269,6 +277,31 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 		 */
 
 		return message;
+	}
+	
+	
+	/*
+	 * Method to approve a request
+	 */
+	public void approveRequest(Long id, String remarks) throws Exception{
+		log.debug("ApplicationTxnCustomRepository -------- approveRequest(): {}");
+		
+		workflowService.getUserDetails();
+	    
+		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
+	    workflowService.setRemarks(remarks);  
+	    Integer status = applicationTxn.getStatus();
+	    status +=1;
+	    applicationTxn.setStatus(status);
+        workflowService.setRequestStatus(status);
+        //applicationTxnWorkflowService.
+        approvedApplicationTxnRequest(applicationTxn);
+
+        if(workflowService.getRequestAt()!=null){
+        	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+            applicationTxn.setRequestAt(userRepository.findById(uid));
+        }
+        applicationTxnRepository.save(applicationTxn);
 	}
 
 }

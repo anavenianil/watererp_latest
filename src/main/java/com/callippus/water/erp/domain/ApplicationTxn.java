@@ -76,8 +76,8 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "b_plot_no")
     private String bPlotNo;
     
-    @Column(name = "regiter_mobile")
-    private Long regiterMobile;
+    @Column(name = "registered_mobile")
+    private Long registeredMobile;
     
     @Column(name = "attached_doc_type")
     private String attachedDocType;
@@ -116,8 +116,8 @@ public class ApplicationTxn implements Serializable {
     private LocalDate approvedDate;
     
     @ManyToOne
-    @JoinColumn(name = "category_master_id")
-    private CategoryMaster categoryMaster;
+    @JoinColumn(name = "tariff_category_master_id")
+    private TariffCategoryMaster tariffCategoryMaster;
 
     @ManyToOne
     @JoinColumn(name = "meter_details_id")
@@ -130,6 +130,14 @@ public class ApplicationTxn implements Serializable {
     @ManyToOne
     @JoinColumn(name = "request_at_id")
     private User requestAt;
+
+    @ManyToOne
+    @JoinColumn(name = "division_master_id")
+    private DivisionMaster divisionMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "street_master_id")
+    private StreetMaster streetMaster;
 
     public Long getId() {
         return id;
@@ -283,12 +291,12 @@ public class ApplicationTxn implements Serializable {
         this.bPlotNo = bPlotNo;
     }
 
-    public Long getRegiterMobile() {
-        return regiterMobile;
+    public Long getRegisteredMobile() {
+        return registeredMobile;
     }
     
-    public void setRegiterMobile(Long regiterMobile) {
-        this.regiterMobile = regiterMobile;
+    public void setRegisteredMobile(Long registeredMobile) {
+        this.registeredMobile = registeredMobile;
     }
 
     public String getAttachedDocType() {
@@ -387,12 +395,12 @@ public class ApplicationTxn implements Serializable {
         this.approvedDate = approvedDate;
     }
 
-    public CategoryMaster getCategoryMaster() {
-        return categoryMaster;
+    public TariffCategoryMaster getTariffCategoryMaster() {
+        return tariffCategoryMaster;
     }
 
-    public void setCategoryMaster(CategoryMaster categoryMaster) {
-        this.categoryMaster = categoryMaster;
+    public void setTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster) {
+        this.tariffCategoryMaster = tariffCategoryMaster;
     }
 
     public MeterDetails getMeterDetails() {
@@ -417,6 +425,22 @@ public class ApplicationTxn implements Serializable {
 
     public void setRequestAt(User user) {
         this.requestAt = user;
+    }
+
+    public DivisionMaster getDivisionMaster() {
+        return divisionMaster;
+    }
+
+    public void setDivisionMaster(DivisionMaster divisionMaster) {
+        this.divisionMaster = divisionMaster;
+    }
+
+    public StreetMaster getStreetMaster() {
+        return streetMaster;
+    }
+
+    public void setStreetMaster(StreetMaster streetMaster) {
+        this.streetMaster = streetMaster;
     }
 
     @Override
@@ -461,7 +485,7 @@ public class ApplicationTxn implements Serializable {
             ", ward='" + ward + "'" +
             ", dma='" + dma + "'" +
             ", bPlotNo='" + bPlotNo + "'" +
-            ", regiterMobile='" + regiterMobile + "'" +
+            ", registeredMobile='" + registeredMobile + "'" +
             ", attachedDocType='" + attachedDocType + "'" +
             ", idNumber='" + idNumber + "'" +
             ", propertyDoc='" + propertyDoc + "'" +
