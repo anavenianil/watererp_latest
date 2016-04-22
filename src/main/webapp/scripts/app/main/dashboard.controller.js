@@ -2,8 +2,8 @@
 
 angular.module('watererpApp').controller(
 		'DashboardController',
-		function($scope, $state, $rootScope, Account, User, $location,
-				 Auth, Principal) {
+		function($scope, $state, $rootScope, Module, Account, User, $location,
+				Auth, Principal) {
 			$scope.pendingRequests = [];
 			$scope.approvedRequests = [];
 			$scope.myRequests = [];
@@ -18,7 +18,7 @@ angular.module('watererpApp').controller(
 
 			$scope.getLogin = function() {
 				$scope.user = Principal.getLogonUser();
-				//console.log("User is: "+JSON.stringify($scope.user));
+				// console.log("User is: "+JSON.stringify($scope.user));
 				if ($scope.user == null) {
 					$scope.navbarUserId = "";
 				} else {
@@ -26,7 +26,7 @@ angular.module('watererpApp').controller(
 							+ $scope.user.lastName + "(" + $scope.user.login
 							+ ")";
 				}
-				//for navbar module and menu_items
+				// for navbar module and menu_items
 				if ($scope.isAuthenticated()) {
 					$scope.module2menu_items = Principal.geModuleMenus();
 				} else
@@ -35,7 +35,7 @@ angular.module('watererpApp').controller(
 				return $scope.isAuthenticated();
 			}
 
-			//added by mohib to display names in navar.html
+			// added by mohib to display names in navar.html
 			Account.get(function(result) {
 				$scope.account = result.data;
 				User.get({

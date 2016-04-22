@@ -22,7 +22,6 @@ angular.module('watererpApp')
                 if ($rootScope.previousStateName === 'register') {
                     $state.go('home');
                 } else {
-                	console.log("Reached here:1")
                 	$state.go('home');
 //                    $rootScope.back();
                 }

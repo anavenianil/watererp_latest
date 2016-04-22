@@ -35,14 +35,14 @@
 						href="javascript:;">
 						<span>
 							<span class="glyphicon glyphicon-th-list"></span>
-							<span class="hidden-tablet"> Billing & Collection </span>
+							<span class="hidden-tablet"> {{module.module_name}} </span>
 							<b class="caret"></b>
 						</span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="ng-scope" ui-sref-active="active"
 							ng-repeat="menu_node in module2MenuItems | unique: 'menu_item_id'">
-							<a ng-if="4 == menu_node.module_id"
+							<a ng-if="module.module_id == menu_node.module_id"
 								href="{{menu_node.path}}">
 								<span>
 									<span class="glyphicon glyphicon-user"></span>
