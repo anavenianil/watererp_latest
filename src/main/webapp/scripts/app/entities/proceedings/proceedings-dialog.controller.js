@@ -95,7 +95,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         };
 
         $scope.save = function () {
-        	ApplicationTxnService.approveRequest($scope.proceedings.applicationTxn.id, $scope.proceedings.remarks);
+        	//ApplicationTxnService.approveRequest($scope.proceedings.applicationTxn.id, $scope.proceedings.remarks);
             $scope.isSaving = true;
             if ($scope.proceedings.id != null) {
                 Proceedings.update($scope.proceedings, onSaveSuccess, onSaveError);

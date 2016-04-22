@@ -51,7 +51,6 @@ angular.module('watererpApp')
         $scope.getApplicationTxns();
         
         var onSaveSuccess = function (result) {
-        	ApplicationTxnService.approveRequest($scope.feasibilityStudy.applicationTxn.id, $scope.feasibilityStudy.remarks);
             $scope.$emit('watererpApp:feasibilityStudyUpdate', result);
             $scope.isSaving = false;
             $state.go("applicationTxn");

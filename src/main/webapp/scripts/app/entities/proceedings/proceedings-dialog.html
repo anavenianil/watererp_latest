@@ -77,8 +77,7 @@
 							<div class="col-sm-2">
 								<!-- <input type="text" class="form-control" name="unit"
 									id="field_unit" ng-model="proceedings.itemRequireds[x].unit" /> -->
-								<select class="form-control" id="field_uom"
-									name="uom"
+								<select class="form-control" id="field_uom" name="uom"
 									ng-model="proceedings.itemRequireds[x].uom"
 									ng-options="uom as uom.value for uom in uoms track by uom.id">
 									<option value=""></option>
@@ -275,7 +274,7 @@
 						<div class="col-sm-12">
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<textarea rows="2" cols="30" class="form-control" name="remarks"
-								id="field_remarks" ng-model="proceedings.remarks"></textarea>
+								id="field_remarks" ng-model="proceedings.applicationTxn.remarks"></textarea>
 						</div>
 					</div>
 				</fieldset>

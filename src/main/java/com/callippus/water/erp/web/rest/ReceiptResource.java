@@ -23,6 +23,7 @@ import com.callippus.water.erp.domain.Receipt;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -40,6 +41,9 @@ public class ReceiptResource {
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
     
+    @Inject
+    private ApplicationTxnWorkflowService applicationTxnWorkflowService;
+    
     /**
      * POST  /receipts -> Create a new receipt.
      */
@@ -55,7 +59,14 @@ public class ReceiptResource {
         Receipt result = receiptRepository.save(receipt);
         ApplicationTxn applicationTxn = applicationTxnRepository.findOne(receipt.getApplicationTxn().getId());
         applicationTxn.setCan(receipt.getApplicationTxn().getCan());
+        applicationTxn.setRemarks(receipt.getApplicationTxn().getRemarks());
         applicationTxnRepository.save(applicationTxn);
+        try{
+        	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
         return ResponseEntity.created(new URI("/api/receipts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("receipt", result.getId().toString()))
             .body(result);

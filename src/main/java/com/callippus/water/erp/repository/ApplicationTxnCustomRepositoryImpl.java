@@ -1,10 +1,7 @@
 package com.callippus.water.erp.repository;
 
-import java.io.InputStream;
-import java.sql.Connection;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,14 +9,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-
-import org.hibernate.Session;
-import org.hibernate.internal.SessionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +20,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
+import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
 import com.callippus.water.erp.workflow.service.WorkflowService;
 
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -57,6 +47,12 @@ public class ApplicationTxnCustomRepositoryImpl extends
 	
 	@Inject
 	private RequestMasterRepository requestMasterRepository;
+	
+	@Inject 
+	private ApplicationTxnRepository applicationTxnRepository;
+	
+	@Inject
+	private ApplicationTxnWorkflowService applicationTxnWorkflowService;
 
 	/*
 	 * @Inject WorkflowServiceRepository workflowServiceRepository;
@@ -267,4 +263,29 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		Query query = entityManager.createQuery(sql);
 		return (List<ApplicationTxn>) query.getResultList();
 	}
+	
+	
+	
+	/*
+	 * Method to approve a request
+	 */
+	/*public void approveRequest(Long id, String remarks) throws Exception{
+		log.debug("ApplicationTxnCustomRepository -------- approveRequest(): {}");
+		
+		workflowService.getUserDetails();
+	    
+		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
+	    workflowService.setRemarks(remarks);  
+	    Integer status = applicationTxn.getStatus();
+	    status +=1;
+	    applicationTxn.setStatus(status);
+        workflowService.setRequestStatus(status);
+        applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
+
+        if(workflowService.getRequestAt()!=null){
+        	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+            applicationTxn.setRequestAt(userRepository.findById(uid));
+        }
+        applicationTxnRepository.save(applicationTxn);
+	}*/
 }

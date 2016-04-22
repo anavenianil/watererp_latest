@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
-import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.Proceedings;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
@@ -32,6 +30,7 @@ import com.callippus.water.erp.repository.ItemRequiredRepository;
 import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -51,6 +50,10 @@ public class ProceedingsResource {
     
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
+    
+    @Inject
+    private ApplicationTxnWorkflowService applicationTxnWorkflowService;
+    
     
     /**
      * POST  /proceedingss -> Create a new proceedings.
@@ -72,7 +75,12 @@ public class ProceedingsResource {
         }
         
         Proceedings result = proceedingsRepository.save(proceedings);
-        
+        try{
+        	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
         return ResponseEntity.created(new URI("/api/proceedingss/" + result.getId()))
             .headers(HeaderUtil.createAlert("New Proceedings initiated", result.getId().toString()))
             .body(result);

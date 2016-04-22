@@ -51,6 +51,9 @@ public class FeasibilityStudyResource {
     @Inject
     private ApplicationTxnWorkflowService applicationTxnWorkflowService;
     
+    @Inject
+    private ApplicationTxnResource applicationTxnResource; 
+    
     /**
      * POST  /feasibilityStudys -> Create a new feasibilityStudy.
      */
@@ -74,6 +77,13 @@ public class FeasibilityStudyResource {
         applicationTxn.setStreetMaster(feasibilityStudy.getStreetMaster());
         
         applicationTxnRepository.save(applicationTxn);
+        try{
+        	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
+        
         
         return ResponseEntity.created(new URI("/api/feasibilityStudys/" + result.getId()))
             .headers(HeaderUtil.createAlert("New Feasibility Study initiated.", result.getId().toString()))

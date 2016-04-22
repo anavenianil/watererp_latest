@@ -23,5 +23,7 @@ JpaRepository<ApplicationTxn, Long> {
 	
 
 	List<ApplicationTxn> search(String whereClause);
+	
+	//void approveRequest(Long id, String remarks) throws Exception;
 
 }

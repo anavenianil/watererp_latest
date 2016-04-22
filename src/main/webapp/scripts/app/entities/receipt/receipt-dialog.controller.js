@@ -75,7 +75,6 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:receiptUpdate', result);
             $scope.isSaving = false;
-            ApplicationTxnService.approveRequest($scope.receipt.applicationTxn.id, $scope.receipt.remarks);
             $state.go('applicationTxn');
         };
 
@@ -85,9 +84,6 @@ angular.module('watererpApp').controller('ReceiptDialogController',
 
         $scope.save = function () {
             $scope.isSaving = true;
-            /*if ($scope.applicationTxn.id != null) {
-                ApplicationTxn.update($scope.applicationTxn);
-            } */
             if ($scope.receipt.id != null) {
                 Receipt.update($scope.receipt, onSaveSuccess, onSaveError);
             } else {
