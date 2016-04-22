@@ -26,10 +26,10 @@ public class CustMeterMapping implements Serializable {
     @NotNull
     @Column(name = "from_date", nullable = false)
     private LocalDate fromDate;
-
+    
     @Column(name = "to_date")
     private LocalDate toDate;
-
+    
     @ManyToOne
     @JoinColumn(name = "cust_details_id")
     private CustDetails custDetails;
@@ -49,7 +49,7 @@ public class CustMeterMapping implements Serializable {
     public LocalDate getFromDate() {
         return fromDate;
     }
-
+    
     public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
     }
@@ -57,7 +57,7 @@ public class CustMeterMapping implements Serializable {
     public LocalDate getToDate() {
         return toDate;
     }
-
+    
     public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
     }
@@ -87,6 +87,9 @@ public class CustMeterMapping implements Serializable {
             return false;
         }
         CustMeterMapping custMeterMapping = (CustMeterMapping) o;
+        if(custMeterMapping.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, custMeterMapping.id);
     }
 

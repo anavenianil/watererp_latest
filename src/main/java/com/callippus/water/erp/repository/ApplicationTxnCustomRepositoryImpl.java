@@ -1,13 +1,25 @@
 package com.callippus.water.erp.repository;
 
+import java.io.InputStream;
+import java.sql.Connection;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+
+import org.hibernate.Session;
+import org.hibernate.internal.SessionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -247,4 +259,12 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		return items;
 	}
 
+	
+	@SuppressWarnings("unchecked")
+	public List<ApplicationTxn> search(String whereClause) {
+
+		String sql = "from ApplicationTxn at where " + whereClause;
+		Query query = entityManager.createQuery(sql);
+		return (List<ApplicationTxn>) query.getResultList();
+	}
 }

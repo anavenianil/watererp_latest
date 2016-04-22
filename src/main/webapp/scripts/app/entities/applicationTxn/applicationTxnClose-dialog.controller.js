@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller(
-		'CreateCanDialogController',
+		'applicationTxnCloseDialogController',
 		function($scope, $http, $state, $stateParams, ApplicationTxn,
 				ParseLinks, DateUtils, ApplicationTxnService,
 				GetFeasibilityStudy, GetProceedings) {

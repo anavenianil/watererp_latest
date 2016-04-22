@@ -79,11 +79,19 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 	}
 
 	public String initWorkflow(ApplicationTxn applicationTxn) throws Exception {
+		log.debug("ApplicationTxnWorkflowService --> initWorkflow");
 		String message = "";
 		try {
-
-			setRequestType(CPSConstants.REQUISITION);
-			setRequestTypeID(CPSConstants.REQUISITIONREQUESTID);
+			
+			if(applicationTxn.getApprovedDate() != null && applicationTxn.getUser() !=null){
+				setRequestType(CPSConstants.WITHOUTMETER);
+				//setRequestTypeID(CPSConstants.REQUISITIONREQUESTID);
+			}
+			else
+			{
+				setRequestType(CPSConstants.REQUISITION);
+				setRequestTypeID(CPSConstants.REQUISITIONREQUESTID);
+			}
 
 			setMessage("success");
 
@@ -102,8 +110,13 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 				
 
 				message = super.initWorkflow();
-
-				setMessage(CPSConstants.REQUISITION);
+				if(applicationTxn.getApprovedDate() != null && applicationTxn.getUser() !=null){
+					setMessage(CPSConstants.WITHOUTMETER);
+				}
+				else{
+					setMessage(CPSConstants.REQUISITION);
+				}
+				
 
 			} else {
 				setMessage(CPSConstants.FAILED);

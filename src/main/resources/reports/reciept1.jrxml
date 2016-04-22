@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciept1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="f87bd37b-c742-4b32-aad6-1831c85ce2a3">
+	<property name="ireport.zoom" value="0.9090909090909094"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="165"/>
+	<parameter name="Reciept Id" class="java.lang.String">
+		<parameterDescription><![CDATA[PLEASE ENTER RECIEPT ID]]></parameterDescription>
+	</parameter>
+	<queryString language="plsql">
+		<![CDATA[SELECT * FROM coll_details c join  payment_types p on c.payment_types_id=p.id where c.id=$P{Reciept Id}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="reversal_ref" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="receipt_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="receipt_amt" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="receipt_dt" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="receipt_mode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="instr_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="instr_dt" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="instr_issuer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="svr_status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="can" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cons_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="terminal_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="coll_time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="txn_status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="meter_reader_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="user_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="settlement_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ext_settlement_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="long_i" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="payment_types_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="instrument_issuer_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="collection_type_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="payment_mode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="321" splitType="Stretch">
+			<staticText>
+				<reportElement x="204" y="240" width="224" height="21" uuid="3422ca0a-7b17-466c-b991-4ef1fb5f9162"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MANEJA WA MKOA , NSSF - KIGOMA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="28" width="238" height="21" uuid="35c8aaa5-da92-45c8-b1a1-a9585b7bc68c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MJINI(KUWASA -KIGOMA)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="189" width="135" height="21" uuid="99b6c555-1bb3-4db2-a44a-2ebc20150159"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nimepokea  kutoka kwa]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="320" width="803" height="1" uuid="6a70e729-705b-4de0-a0ff-07d4d6263ab5"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="160" width="86" height="21" uuid="3621ed2a-46e3-4ec6-af42-d8d9a6f82937"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Received from]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="56" width="53" height="21" uuid="e7cfda55-583d-4580-9a07-3c1f2c7cd407"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECIEPT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-2" y="1" width="2" height="319" uuid="21be90a7-0a6a-47f8-8356-9144406dc512"/>
+			</line>
+			<line>
+				<reportElement x="801" y="2" width="1" height="319" uuid="82ac2174-83e8-4221-a16b-0b205c3cca13"/>
+			</line>
+			<staticText>
+				<reportElement x="315" y="7" width="455" height="21" uuid="e5fed96a-8276-43ab-8196-c7a137cee29e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KIGOMA / UJIJIURBAN WATER SUPPLYAND SANITATION AUTHORITY(KUWASA -  KIGOMA)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="7" width="238" height="21" uuid="0883fa8d-fe77-4f17-9510-e444b869324f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MAMLAKA YA MAJI SAFI NA MAJI TAKA KIGOMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="77" width="75" height="21" uuid="f0a814c6-bcc9-452b-a38e-66dc94ca23bf"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STAKABADHI]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="1" width="801" height="1" uuid="3e25411a-2ee3-40d8-9045-ad061fa2c384"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="77" width="170" height="21" uuid="327b4630-077b-4c8f-847d-445a998aa08c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[P.O.Box 812  Tel:028-2803621]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="555" y="77" width="186" height="21" uuid="ffac60b9-51a9-495a-ae01-849d036dfd55"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Namabari ya huduma kwa wateja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="111" width="170" height="21" uuid="66faa964-1d0f-4c9d-802d-9b1a647b830a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[P.O.Box 812  Tel:028-2803621]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="630" y="287" width="100" height="20" uuid="e222d061-48a2-4901-88f7-90162452010b"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receipt_amt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="764" y="248" width="21" height="21" uuid="ce63306f-52de-4308-b16f-2e25b4a5028c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cts]]></text>
+			</staticText>
+			<line>
+				<reportElement x="648" y="274" width="1" height="45" uuid="5cc2b15b-c42a-40cc-a656-1e15dbfb3415"/>
+			</line>
+			<line>
+				<reportElement x="702" y="274" width="1" height="45" uuid="20df3dc5-f5b9-4c86-a2a1-76cfe56de74f"/>
+			</line>
+			<line>
+				<reportElement x="599" y="273" width="1" height="45" uuid="c189e799-fb5b-444d-b36b-fa5590b75f66"/>
+			</line>
+			<line>
+				<reportElement x="615" y="274" width="1" height="45" uuid="fcfe166d-5da9-4378-a0b1-2605e670506f"/>
+			</line>
+			<line>
+				<reportElement x="583" y="274" width="1" height="45" uuid="e1c5cfc4-b921-4800-aa49-f9f6c1e02131"/>
+			</line>
+			<line>
+				<reportElement x="721" y="275" width="1" height="44" uuid="4e784230-29ce-4e95-8cf5-f41e77c68ee4"/>
+			</line>
+			<line>
+				<reportElement x="568" y="274" width="1" height="45" uuid="3c4cc492-2ada-4b6f-857e-01378f741a86"/>
+			</line>
+			<staticText>
+				<reportElement x="634" y="248" width="33" height="21" uuid="73c2d1e7-389f-4745-b419-c77dbbdbaa4e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tsh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="277" width="47" height="21" uuid="0721d154-e108-4f01-84af-6c2db9bbecba"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Kiasi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="252" width="47" height="21" uuid="07519186-5aca-45cc-841a-c77b0f52624a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="552" y="244" width="1" height="75" uuid="1d2ac0e5-6364-4503-93ef-051d0a9e9bd0"/>
+			</line>
+			<line>
+				<reportElement x="684" y="274" width="1" height="45" uuid="11eb6cbc-409b-4e97-863e-df276a5a9b62"/>
+			</line>
+			<line>
+				<reportElement x="553" y="273" width="246" height="1" uuid="30465693-1eef-4c10-81fc-54945a88935c"/>
+			</line>
+			<line>
+				<reportElement x="754" y="243" width="1" height="76" uuid="efabe393-cd34-4bbc-851d-0dd8bae50310"/>
+			</line>
+			<line>
+				<reportElement x="751" y="244" width="1" height="75" uuid="634037d5-5313-4f49-b321-27bbbcfd0cd5"/>
+			</line>
+			<line>
+				<reportElement x="631" y="274" width="1" height="45" uuid="f5ff1e83-f1bb-4442-a859-977f5c3969c7"/>
+			</line>
+			<line>
+				<reportElement x="774" y="275" width="1" height="44" uuid="247b7af3-dd9c-4070-ac66-a03ac65c007d"/>
+			</line>
+			<line>
+				<reportElement x="737" y="275" width="1" height="44" uuid="320fcfd4-43ae-4365-99d8-abc18415f469"/>
+			</line>
+			<line>
+				<reportElement x="666" y="274" width="1" height="45" uuid="69e70c4d-d2f1-4c61-ac7b-d57bcbb9214b"/>
+			</line>
+			<line>
+				<reportElement x="553" y="243" width="245" height="1" uuid="131cef63-adbe-4ff0-a10e-7e47431befd3"/>
+			</line>
+		</band>
+		<band height="49">
+			<line>
+				<reportElement x="0" y="48" width="801" height="1" uuid="ba841071-657a-44d7-a554-5cc08f363bfb"/>
+			</line>
+			<staticText>
+				<reportElement x="32" y="4" width="193" height="20" uuid="aab22076-cb80-4c93-bd9b-3c8f95127ee4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[The sum of Tanzanian Shilling in words]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="24" width="193" height="20" uuid="d772c986-2d87-4752-9678-b42c0981dd2c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Jumla ya Shillingi kwa maneno]]></text>
+			</staticText>
+			<line>
+				<reportElement x="801" y="0" width="1" height="1" uuid="b0d40935-5285-4bb8-82b9-fbbae3abad1d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-1" width="1" height="49" uuid="7b38716c-b149-457e-9612-81ae72c62ae7"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="48" uuid="dfdd8950-ca26-4e31-91d0-f33bc44d4f2f"/>
+			</line>
+		</band>
+		<band height="52">
+			<line>
+				<reportElement x="801" y="0" width="1" height="50" uuid="39d14fc1-47a4-4c7c-a5b0-07fb34e4a8e6"/>
+			</line>
+			<line>
+				<reportElement x="-2" y="-63" width="1" height="1" uuid="84b3d2cc-6db6-46f7-acf2-16f617df013d"/>
+			</line>
+			<staticText>
+				<reportElement x="309" y="12" width="62" height="20" uuid="90113e18-5fe3-42c2-9b5b-fdb74938ec09"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[And cents]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="51" width="800" height="1" uuid="a685aa3c-952d-43c8-9daa-a27e567f9470"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="50" uuid="32c6694c-b66d-405d-a209-d6ca4e11e7c7"/>
+			</line>
+		</band>
+		<band height="158">
+			<staticText>
+				<reportElement x="38" y="5" width="76" height="20" uuid="371188bd-9952-4967-b838-bcbfb8a415a7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[In respect of]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="25" width="76" height="20" uuid="928d05ea-e010-44f9-8d4d-66e7c5b2b1a8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Kwa malipo ya]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="5" width="107" height="20" uuid="d497f95e-b107-4308-89eb-84d4af94568e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Water Meter Rent]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="33" width="80" height="20" uuid="5b06c69e-f3ab-416c-a62e-0d7cd7fc6670"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Water Sales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="64" width="107" height="20" uuid="d39abdf6-e0a6-483b-a275-3bd10d432974"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Water Service]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="84" width="80" height="20" uuid="304f3b4b-9c0d-49eb-9f8a-27182d57e218"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Charges]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="113" width="107" height="20" uuid="9fc9c339-fecd-4609-ba45-341affb3d665"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Water Other]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="133" width="80" height="20" uuid="b2c72866-44ff-45e9-aeb7-bea443ceb373"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Charges]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="157" width="801" height="1" uuid="f07e5fb6-8692-43f6-8118-d1f8cb1c0863"/>
+			</line>
+			<line>
+				<reportElement x="801" y="0" width="1" height="157" uuid="b44424cf-79d3-4b43-81c1-380e0c99a9dc"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-1" width="1" height="158" uuid="0333f05c-9893-4666-bde4-51087f8bf546"/>
+			</line>
+			<staticText>
+				<reportElement x="325" y="5" width="25" height="20" uuid="b080722a-cbba-408a-b359-8a00742f472c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tsh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="33" width="25" height="20" uuid="0f96f9a8-087d-42b1-9a69-4b10eff98585"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tsh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="64" width="25" height="20" uuid="83f2168f-8b84-42d6-9831-6db58535acb4"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tsh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="113" width="25" height="20" uuid="a5506362-cbd7-4db6-b5e4-0d7dcef83309"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tsh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="626" y="5" width="43" height="20" uuid="ed92dcfd-fb7d-4685-a796-1af20b7bbf05"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Acc No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="626" y="30" width="53" height="20" uuid="ba356d41-fb88-44ea-bec2-6ef8d117bc49"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[umelipia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="706" y="6" width="52" height="17" uuid="dd73a456-ceda-4191-b61e-37c504de3370"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{can}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="699" y="33" width="86" height="20" uuid="caa15857-5ffc-4a8e-bce3-2083c922c520"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coll_time}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="157">
+			<staticText>
+				<reportElement x="13" y="5" width="67" height="19" uuid="2c812f0e-4b23-46ed-af19-fe9ca948d016"/>
+				<text><![CDATA[By Cash/Chq.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="36" width="67" height="19" uuid="8946a8e4-92c0-45cd-8559-b54544cdbaac"/>
+				<text><![CDATA[Kwa Cash/Chq]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="114" y="16" width="117" height="19" uuid="dca076a7-11ff-423d-a1b7-fe14b3614077"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment_mode}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="59" width="571" height="1" uuid="b967086d-fef5-47b3-a433-13aad1480e2c"/>
+			</line>
+			<line>
+				<reportElement x="251" y="0" width="1" height="59" uuid="24e8a015-e38f-400f-94df-6fb6ac985eef"/>
+			</line>
+			<staticText>
+				<reportElement x="271" y="5" width="44" height="19" uuid="76e41d48-6f18-4c0d-8aba-8c8d8b78532e"/>
+				<text><![CDATA[Chq No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="36" width="44" height="19" uuid="81e8db47-fd82-4b30-94ef-81ba8ecb4ecb"/>
+				<text><![CDATA[Hundi Na]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="74" width="156" height="20" uuid="3eb3f841-f45f-4fd1-8fd7-36042f258fef"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Receiving Officer Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="100" width="156" height="20" uuid="34225d5b-7935-4606-bef5-51032c4f7d44"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Sahihi ya mpokeaji]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="132" width="86" height="20" uuid="c66dd4fb-a77b-4b8a-bde3-5a09836108d6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Issued By :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="155" width="802" height="1" uuid="64abd258-c40a-4255-89da-6e9460b572d3"/>
+			</line>
+			<line>
+				<reportElement x="292" y="60" width="1" height="95" uuid="6e95718d-9376-4a47-ac9f-7b6598f667b2"/>
+			</line>
+			<staticText>
+				<reportElement x="309" y="74" width="62" height="20" uuid="bf7bc846-2f9b-48de-b4cb-8c73059ee86f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Title/ Cheo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="396" y="60" width="1" height="95" uuid="50943d64-652a-44af-8865-26bca82870a2"/>
+			</line>
+			<staticText>
+				<reportElement x="427" y="74" width="75" height="20" uuid="b5427c7e-c54c-4b9f-9444-223400f9d3e3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Date/Tarehe]]></text>
+			</staticText>
+			<line>
+				<reportElement x="570" y="0" width="1" height="155" uuid="d64fa8d3-cf50-4681-8cd6-93f7af7a6d8d"/>
+			</line>
+			<staticText>
+				<reportElement x="635" y="15" width="100" height="20" uuid="db3b97a4-85d4-4a51-910d-444b312be6c9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Station/ Kituo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="74" width="88" height="20" uuid="9118c4a1-6cd0-4d14-8a40-97e8f434ac04"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Head Quarters]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="369" y="24" width="66" height="20" uuid="cde7ac7e-7e18-4bfc-b1a6-874f41a3f91d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{instr_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="24" width="80" height="20" uuid="158e78dc-6b2d-4b0e-b63a-3b912fa624b6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{instr_dt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="586" y="112" width="116" height="20" uuid="ce7eb152-2356-4b21-b7ee-8c01cc334aec"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Accounting Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="1" height="155" uuid="241ed865-f120-473b-8ac2-6b832cb64abf"/>
+			</line>
+			<textField>
+				<reportElement x="718" y="112" width="80" height="20" uuid="9591d833-2523-4146-b968-991ebcec527f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receipt_dt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="112" width="77" height="20" uuid="42c4cf64-55c3-421f-95cf-af8dbbeb87f5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receipt_dt}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="801" y="0" width="1" height="156" uuid="b8bbe468-27d3-489f-bdcb-5140bf26c3d2"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

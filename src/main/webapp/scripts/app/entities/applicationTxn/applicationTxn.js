@@ -179,17 +179,17 @@ angular.module('watererpApp')
                 	
                 }
             })
-            .state('applicationTxnCreateCan', {
+            .state('applicationTxnClose', {
                 parent: 'applicationTxn',
-                url: '/createCan/:applicationTxnId',
+                url: '/close/:applicationTxnId',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'CreateCan'
+                    pageTitle: 'applicationTxnClose'
                 },
                 views: {
                     'content@': {
-                    	templateUrl: 'scripts/app/entities/applicationTxn/createCan-dialog.html',
-                        controller: 'CreateCanDialogController'
+                    	templateUrl: 'scripts/app/entities/applicationTxn/applicationTxnClose-dialog.html',
+                        controller: 'applicationTxnCloseDialogController'
                     }
                 },
                 resolve: {

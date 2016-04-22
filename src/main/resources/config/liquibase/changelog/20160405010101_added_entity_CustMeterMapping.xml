@@ -24,9 +24,12 @@
             <column name="from_date" type="date">
                 <constraints nullable="false" />
             </column>
+            
             <column name="to_date" type="date"/>
+            
             <column name="cust_details_id" type="bigint"/>
             <column name="meter_details_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="cust_details_id"

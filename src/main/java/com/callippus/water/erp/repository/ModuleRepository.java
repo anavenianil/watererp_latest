@@ -10,5 +10,4 @@ import java.util.List;
  * Spring Data JPA repository for the Module entity.
  */
 public interface ModuleRepository extends JpaRepository<Module,Long> {
-
 }

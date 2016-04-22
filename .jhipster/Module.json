@@ -18,6 +18,11 @@
             "fieldId": 3,
             "fieldName": "modifiedDate",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "serverUrl",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160309103544",

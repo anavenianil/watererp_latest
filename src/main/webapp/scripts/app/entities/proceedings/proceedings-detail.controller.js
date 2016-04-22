@@ -13,6 +13,10 @@ angular.module('watererpApp')
             });
         };
         
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id);
+        }
+        
         if($stateParams.applicationTxnId !=null){
         	ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
                 $scope.proceedings = result;

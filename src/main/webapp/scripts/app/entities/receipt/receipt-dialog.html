@@ -2,17 +2,22 @@
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create Receipt</h3>
+			<h3 class="panel-title pull-left">Create Receipt: {{receipt.id}}</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
 				<div class="modal-body">
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
-						<div class="col-sm-4">
+						<!-- <div class="col-sm-4">
 							<label for="id">Receipt No.</label> <input type="text"
 								class="form-control" id="id" name="id" ng-model="receipt.id"
 								readonly />
+						</div> -->
+						<div class="col-sm-4">
+							<label class="control-label" for="field_can">CAN No.</label> <input
+								type="text" class="form-control" name="can" id="field_can"
+								ng-model="applicationTxn.can" readonly />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptDate">Receipt
@@ -36,7 +41,8 @@
 							<label for="field_applicationTxn">Application No.</label> <select
 								class="form-control" id="field_applicationTxn"
 								name="applicationTxn" ng-model="receipt.applicationTxn"
-								ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+								ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id"
+								readonly>
 								<option value=""></option>
 							</select>
 						</div>
@@ -54,7 +60,7 @@
 						<div class="col-sm-4">
 							<label class="control-label" for="field_amount">Amount</label> <input
 								type="number" class="form-control" name="amount"
-								id="field_amount" ng-model="receipt.amount" />
+								id="field_amount" ng-model="receipt.amount" readonly />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_checkOrDdDate">Check/DD

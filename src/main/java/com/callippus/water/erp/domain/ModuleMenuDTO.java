@@ -10,8 +10,15 @@ public class ModuleMenuDTO {
 	String module_name;
 	String menu_name;
 	String path;
+	String server_url;
 	
 	
+	public String getServer_url() {
+		return server_url;
+	}
+	public void setServer_url(String server_url) {
+		this.server_url = server_url;
+	}
 	public String getPath() {
 		return path;
 	}
