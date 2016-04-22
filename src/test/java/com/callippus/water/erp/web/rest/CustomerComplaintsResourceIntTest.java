@@ -52,6 +52,8 @@ public class CustomerComplaintsResourceIntTest {
 
     private static final LocalDate DEFAULT_COMPLAINT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_COMPLAINT_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_CAN = "AAAAA";
+    private static final String UPDATED_CAN = "BBBBB";
 
     @Inject
     private CustomerComplaintsRepository customerComplaintsRepository;
@@ -83,6 +85,7 @@ public class CustomerComplaintsResourceIntTest {
         customerComplaints.setRelevantDoc(DEFAULT_RELEVANT_DOC);
         customerComplaints.setComplaintBy(DEFAULT_COMPLAINT_BY);
         customerComplaints.setComplaintDate(DEFAULT_COMPLAINT_DATE);
+        customerComplaints.setCan(DEFAULT_CAN);
     }
 
     @Test
@@ -105,6 +108,7 @@ public class CustomerComplaintsResourceIntTest {
         assertThat(testCustomerComplaints.getRelevantDoc()).isEqualTo(DEFAULT_RELEVANT_DOC);
         assertThat(testCustomerComplaints.getComplaintBy()).isEqualTo(DEFAULT_COMPLAINT_BY);
         assertThat(testCustomerComplaints.getComplaintDate()).isEqualTo(DEFAULT_COMPLAINT_DATE);
+        assertThat(testCustomerComplaints.getCan()).isEqualTo(DEFAULT_CAN);
     }
 
     @Test
@@ -121,7 +125,8 @@ public class CustomerComplaintsResourceIntTest {
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
                 .andExpect(jsonPath("$.[*].relevantDoc").value(hasItem(DEFAULT_RELEVANT_DOC.toString())))
                 .andExpect(jsonPath("$.[*].complaintBy").value(hasItem(DEFAULT_COMPLAINT_BY.toString())))
-                .andExpect(jsonPath("$.[*].complaintDate").value(hasItem(DEFAULT_COMPLAINT_DATE.toString())));
+                .andExpect(jsonPath("$.[*].complaintDate").value(hasItem(DEFAULT_COMPLAINT_DATE.toString())))
+                .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())));
     }
 
     @Test
@@ -138,7 +143,8 @@ public class CustomerComplaintsResourceIntTest {
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
             .andExpect(jsonPath("$.relevantDoc").value(DEFAULT_RELEVANT_DOC.toString()))
             .andExpect(jsonPath("$.complaintBy").value(DEFAULT_COMPLAINT_BY.toString()))
-            .andExpect(jsonPath("$.complaintDate").value(DEFAULT_COMPLAINT_DATE.toString()));
+            .andExpect(jsonPath("$.complaintDate").value(DEFAULT_COMPLAINT_DATE.toString()))
+            .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()));
     }
 
     @Test
@@ -162,6 +168,7 @@ public class CustomerComplaintsResourceIntTest {
         customerComplaints.setRelevantDoc(UPDATED_RELEVANT_DOC);
         customerComplaints.setComplaintBy(UPDATED_COMPLAINT_BY);
         customerComplaints.setComplaintDate(UPDATED_COMPLAINT_DATE);
+        customerComplaints.setCan(UPDATED_CAN);
 
         restCustomerComplaintsMockMvc.perform(put("/api/customerComplaintss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -176,6 +183,7 @@ public class CustomerComplaintsResourceIntTest {
         assertThat(testCustomerComplaints.getRelevantDoc()).isEqualTo(UPDATED_RELEVANT_DOC);
         assertThat(testCustomerComplaints.getComplaintBy()).isEqualTo(UPDATED_COMPLAINT_BY);
         assertThat(testCustomerComplaints.getComplaintDate()).isEqualTo(UPDATED_COMPLAINT_DATE);
+        assertThat(testCustomerComplaints.getCan()).isEqualTo(UPDATED_CAN);
     }
 
     @Test

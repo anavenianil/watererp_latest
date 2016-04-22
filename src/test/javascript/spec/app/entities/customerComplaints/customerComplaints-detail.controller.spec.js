@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('CustomerComplaints Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockCustomerComplaints, MockApplicationTxn, MockComplaintTypeMaster;
+        var MockEntity, MockCustomerComplaints, MockComplaintTypeMaster;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,7 +12,6 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockCustomerComplaints = jasmine.createSpy('MockCustomerComplaints');
-            MockApplicationTxn = jasmine.createSpy('MockApplicationTxn');
             MockComplaintTypeMaster = jasmine.createSpy('MockComplaintTypeMaster');
             
 
@@ -21,7 +20,6 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
                 'CustomerComplaints': MockCustomerComplaints,
-                'ApplicationTxn': MockApplicationTxn,
                 'ComplaintTypeMaster': MockComplaintTypeMaster
             };
             createController = function() {

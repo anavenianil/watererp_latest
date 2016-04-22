@@ -1,3 +1,31 @@
+<style>
+.typeahead-demo .custom-popup-wrapper {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	background-color: #f9f9f9;
+}
+
+.typeahead-demo .custom-popup-wrapper>.message {
+	padding: 10px 20px;
+	border-bottom: 1px solid #ddd;
+	color: #868686;
+}
+
+.typeahead-demo .custom-popup-wrapper>.dropdown-menu {
+	position: static;
+	float: none;
+	display: block;
+	min-width: 160px;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+</style>
+
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
 	<!-- <div class="modal-header">
@@ -14,6 +42,26 @@
 				<div class="modal-body">
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<label for="field_applicationTxn">Search By CAN</label>
+
+							<div class="form-group"
+								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search CAN or Name or Address (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-4 col-md-offset-2">
 							<label for="id">ID</label> <input type="text"
 								class="form-control" id="id" name="id"
@@ -21,11 +69,17 @@
 								style="margin: 0 auto;" />
 						</div>
 						<div class="col-sm-4">
+							<label>CAN</label> <input type="text" class="form-control"
+								id="field_can" name="can"
+								ng-model="customerComplaints.can"
+								disabled>
+						</div>
+						<!-- <div class="col-sm-4">
 							<label for="field_applicationTxn">Customer ID</label>
-							<!-- Commented Select Box Functionality -->
-							<!-- <select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="customerComplaints.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-      						<option value=""></option></select> -->
-							<!-- <div class="col-sm-4"> -->
+							Commented Select Box Functionality
+							<select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="customerComplaints.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+      						<option value=""></option></select>
+							<div class="col-sm-4">
 							<div class="form-group">
 								<div class='input-group date' id='field_applicationTxn'>
 									<input list="applicationTxn" type="" id="field_applicationTxn"
@@ -44,30 +98,30 @@
 									</span>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="row">
 						<div class="col-md-4 col-md-offset-2">
 							<label>Customer Name</label> <input type="text"
-								class="form-control" id="field_fullName" name="fullName"
-								ng-model="customerComplaints.applicationTxn.fullName" disabled>
+								class="form-control" id="field_consName" name="consName"
+								ng-model="customerComplaints.custDetails.consName" disabled>
 						</div>
 						<div class="col-sm-4">
 							<label>Category</label> <input type="text" class="form-control"
 								id="field_categoryName" name="categoryName"
-								ng-model="customerComplaints.applicationTxn.categoryMaster.categoryName"
+								ng-model="customerComplaints.tariffCategory"
 								disabled>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4 col-md-offset-2">
-							<label>Division</label> <input type="text" class="form-control"
+							<label>DMA</label> <input type="text" class="form-control"
 								id="field_constituency" name="constituency"
 								ng-model="customerComplaints.applicationTxn.constituency"
 								disabled>
 						</div>
 						<div class="col-sm-4">
-							<label>Zone</label> <input type="text" class="form-control"
+							<label>Ward</label> <input type="text" class="form-control"
 								id="field_area" name="area"
 								ng-model="customerComplaints.applicationTxn.area" disabled>
 						</div>
@@ -79,7 +133,7 @@
 								ng-model="customerComplaints.applicationTxn.street" disabled>
 						</div>
 						<div class="col-sm-4">
-							<label for="field_complaintTypeMaster">Complaint Type<!-- {{applicationTxn.id}} --></label>
+							<label for="field_complaintTypeMaster">Complaint Type</label>
 							<select class="form-control" id="field_complaintTypeMaster"
 								name="complaintTypeMaster"
 								ng-model="customerComplaints.complaintTypeMaster"
