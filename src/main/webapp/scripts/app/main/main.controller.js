@@ -49,11 +49,9 @@ angular.module('watererpApp').controller('MainController',
 				{ 
 					$state.go('applicationTxn'); 
 				}
-				else if(type==='INCORRECT BILL'){
+				else if(type==='INCORRECT BILL' || type==='WATER LEAKAGE'){
 					$state.go('customerComplaints'); 
 				}
-				 
-
 			}
 			
 		});

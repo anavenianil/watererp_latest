@@ -84,8 +84,15 @@ public class CustomerComplaintsWorkflowService extends RequestProcessService{
 		try {
 
 			String complainType = customerComplaints.getComplaintTypeMaster().getComplaintType();
-			if(CPSConstants.INCORRECTBILL.equals(complainType)){
+			if(CPSConstants.INCORRECTBILL.equalsIgnoreCase(complainType)){
 				setRequestType(CPSConstants.INCORRECTBILL);
+			}
+			else
+			if(CPSConstants.WATERLEAKAGE.equalsIgnoreCase(complainType)){
+					setRequestType(CPSConstants.WATERLEAKAGE);
+			}
+			else if(CPSConstants.SERVICEUNAVAILABILITY.equalsIgnoreCase(complainType)){
+					setRequestType(CPSConstants.SERVICEUNAVAILABILITY);
 			}
 			//setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
 			//setRequestTypeID(CPSConstants.CUSTOMERCOMPLAINTSID);
@@ -98,8 +105,7 @@ public class CustomerComplaintsWorkflowService extends RequestProcessService{
 				/*
 				 * inserting data into Request_workflow_history table
 				 */
-				workflowService.setDomain_object_id(customerComplaints.getId()
-						.toString());
+				workflowService.setDomain_object_id(customerComplaints.getId().toString());
 				workflowService.setRequestID(getRequestID());
 				workflowService.setRequestType(getRequestType());
 				workflowService.setRequestTypeID(getRequestTypeID());
