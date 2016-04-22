@@ -126,9 +126,9 @@ public class CollectionTypeMasterResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<String>> searchEXPLike(@PathVariable String searchTerm) {
+    public ResponseEntity<List<CollectionTypeMaster>> searchEXPLike(@PathVariable String searchTerm) {
         log.debug("REST request to get CollectionTypeMasters : {}", searchTerm);
-        List<String> expList = collectionTypeMasterCustomRepository.searchEXP(searchTerm);
+        List<CollectionTypeMaster> expList = collectionTypeMasterCustomRepository.searchEXP(searchTerm);
         return Optional.ofNullable(expList)
             .map(result -> new ResponseEntity<>(
             		expList,

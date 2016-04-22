@@ -37,6 +37,7 @@ angular.module('watererpApp')
                 name: null,
                 priority: null,
                 modifiedDate: null,
+                serverUrl: null,
                 id: null
             };
         };

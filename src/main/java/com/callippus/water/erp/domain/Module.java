@@ -24,13 +24,16 @@ public class Module implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-    
+
     @Column(name = "priority")
     private Integer priority;
-    
+
     @Column(name = "modified_date")
     private ZonedDateTime modifiedDate;
-    
+
+    @Column(name = "server_url")
+    private String serverUrl;
+
     public Long getId() {
         return id;
     }
@@ -42,7 +45,7 @@ public class Module implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -50,7 +53,7 @@ public class Module implements Serializable {
     public Integer getPriority() {
         return priority;
     }
-    
+
     public void setPriority(Integer priority) {
         this.priority = priority;
     }
@@ -58,9 +61,17 @@ public class Module implements Serializable {
     public ZonedDateTime getModifiedDate() {
         return modifiedDate;
     }
-    
+
     public void setModifiedDate(ZonedDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
     }
 
     @Override
@@ -72,9 +83,6 @@ public class Module implements Serializable {
             return false;
         }
         Module module = (Module) o;
-        if(module.id == null || id == null) {
-            return false;
-        }
         return Objects.equals(id, module.id);
     }
 
@@ -90,6 +98,7 @@ public class Module implements Serializable {
             ", name='" + name + "'" +
             ", priority='" + priority + "'" +
             ", modifiedDate='" + modifiedDate + "'" +
+            ", serverUrl='" + serverUrl + "'" +
             '}';
     }
 }

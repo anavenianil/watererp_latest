@@ -24,12 +24,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
             <column name="priority" type="integer"/>
-            
             <column name="modified_date" type="timestamp"/>
-            
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+            <column name="server_url" type="varchar(255)"/>
         </createTable>
         <dropDefaultValue tableName="module" columnName="modified_date" columnDataType="datetime"/>
 

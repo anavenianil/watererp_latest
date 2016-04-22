@@ -3,8 +3,14 @@ package com.callippus.water.erp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,10 +22,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -33,6 +45,9 @@ public class BillFullDetailsResource {
         
     @Inject
     private BillFullDetailsRepository billFullDetailsRepository;
+    
+    @Inject
+    private ReportsCustomRepository reportsRepository;
     
     /**
      * POST  /billFullDetailss -> Create a new billFullDetails.
@@ -114,4 +129,28 @@ public class BillFullDetailsResource {
         billFullDetailsRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("billFullDetails", id.toString())).build();
     }
+    
+	
+	
+	/**
+	 * Bill report
+	 */
+	@RequestMapping(value = "/billFullDetailss/report/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getApplicationTxnReport(HttpServletResponse response, @PathVariable Long id) throws JRException,
+			IOException {
+		
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("id",id);
+
+		JasperPrint jasperPrint = reportsRepository
+				.generateReport("/reports/Bill.jasper", params);
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=Bill_" + id + ".pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+
 }

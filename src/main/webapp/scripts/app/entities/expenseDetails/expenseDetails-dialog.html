@@ -74,22 +74,21 @@
 							<div class="form-group"
 								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
 
-								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+								<input type="text"
+									name="collectionTypeMaster" ng-model="expenseDetails.collectionTypeMaster" typeahead-min-length="3"
 									placeholder="Search Expense Type (Min 3 chars)"
-									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
-									typeahead-loading="loadingCANs"
+									uib-typeahead="collectionTypeMaster.collName for collectionTypeMaster in getLocation($viewValue)"
+									typeahead-loading="loadingCANs" autocomplete="off"
 									typeahead-on-select='onSelect($item, $model, $label)'
 									typeahead-no-results="noResults" class="form-control">
 								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
 								<div ng-show="noResults">
-									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+									<i class="glyphicon glyphicon-remove"></i> No Expense Type's Found
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row">
-
-
 						<div class="col-sm-4"
 							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
 							ng-pattern="/^[0-9]*$/">

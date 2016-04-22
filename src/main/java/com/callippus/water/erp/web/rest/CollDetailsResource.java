@@ -3,8 +3,13 @@ package com.callippus.water.erp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.repository.CollDetailsRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +22,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -34,6 +44,10 @@ public class CollDetailsResource {
         
     @Inject
     private CollDetailsRepository collDetailsRepository;
+    
+
+    @Inject
+    private ReportsCustomRepository reportsRepository;
     
     /**
      * POST  /collDetailss -> Create a new collDetails.
@@ -115,4 +129,28 @@ public class CollDetailsResource {
         collDetailsRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("collDetails", id.toString())).build();
     }
+    
+	
+	
+	/**
+	 * Display Requisition report
+	 */
+	@RequestMapping(value = "/collDetailss/report/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getApplicationTxnReport(HttpServletResponse response, @PathVariable Long id) throws JRException,
+			IOException {
+		
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("id",id);
+
+		JasperPrint jasperPrint = reportsRepository
+				.generateReport("/reports/Receipt.jasper", params);
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=Receipt_" + id + ".pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+    
 }

@@ -1,0 +1,131 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!-- <a class="navbar-brand" href="#/"><span>jhipster</span> <span class="navbar-version">v{{VERSION}}</span></a> -->
+			<!-- <div ng-switch="isAuthenticated()"> -->
+			<div ng-switch="getLogin()">
+				<div class="navbar-brand" ng-model="navbarUserId">
+					{{navbarUserId}}</div>
+			</div>
+		</div>
+		<div class="collapse navbar-collapse" ng-switch="isAuthenticated()">
+			<ul class="nav navbar-nav nav-pills navbar-right">
+				<!--  for showing modules and items end -->
+
+
+				<li ng-class="{active: $state.includes('account')}"
+					class="dropdown pointer">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="">
+						<span>
+							<span class="glyphicon glyphicon-user"></span>
+							<span class="hidden-tablet"> Account </span>
+							<b class="caret"></b>
+						</span>
+					</a>
+					<ul class="dropdown-menu">
+						<li ui-sref-active="active" ng-switch-when="true">
+							<a ui-sref="settings">
+								<span class="glyphicon glyphicon-wrench"></span>
+								&#xA0;
+								<span>Settings</span>
+							</a>
+						</li>
+						<li ui-sref-active="active" ng-switch-when="true">
+							<a ui-sref="password">
+								<span class="glyphicon glyphicon-lock"></span>
+								&#xA0;
+								<span>Password</span>
+							</a>
+						</li>
+						<li ui-sref-active="active" ng-switch-when="true">
+							<a ui-sref="sessions">
+								<span class="glyphicon glyphicon-cloud"></span>
+								&#xA0;
+								<span>Sessions</span>
+							</a>
+						</li>
+						<li ui-sref-active="active" ng-switch-when="true">
+							<a href ng-click="myLogout()">
+								<span class="glyphicon glyphicon-log-out"></span>
+								&#xA0;
+								<span>Log out</span>
+							</a>
+						</li>
+						<li ui-sref-active="active" ng-switch-when="false">
+							<a ui-sref="login">
+								<span class="glyphicon glyphicon-log-in"></span>
+								&#xA0;
+								<span>Authenticate</span>
+							</a>
+						</li>
+
+						<li ui-sref-active="active" ng-switch-when="false">
+							<a ui-sref="register">
+								<span class="glyphicon glyphicon-plus-sign"></span>
+								&#xA0;
+								<span>Register</span>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+
+
+<div class="row clearfix" style="margin-top: 20px;">
+	<div class="col-md-4"
+		ng-repeat="module_node in module2menu_items | unique: 'module_id'">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<span class="glyphicon glyphicon-th-list"></span>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div>
+							<span class="hidden-tablet"> {{module_node.module_name}} </span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<a href="/{{module_node.server_url}}">
+				<div class="panel-footer">
+					<span class="pull-left">View Details</span> <span
+						class="pull-right"><span
+						class="glyphicon glyphicon-circle-arrow-right"></span> </span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

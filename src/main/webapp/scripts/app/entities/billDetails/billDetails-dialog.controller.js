@@ -3,7 +3,7 @@
 angular.module('watererpApp').controller(
 		'BillDetailsDialogController', 
 		function ($scope, $state, BillDetails, CustDetails, CustDetailsService, 
-				 ParseLinks, $stateParams, $http) {
+				 ParseLinks, $stateParams, $http, User) {
 
         $scope.billDetailss = [];
         $scope.predicate = 'id';
@@ -12,16 +12,15 @@ angular.module('watererpApp').controller(
         var date  = new Date();
         $scope.billDetails.billDate = date;
         $scope.billDetails.toMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        $scope.users = User.query();
         $scope.reverse = true;
         $scope.page = 0;
-        
         
         $scope.billDetailsId = $stateParams.id;
         if($stateParams.id != null){       	
         	 BillDetails.get({id : $scope.billDetailsId}, function(result) {
                  $scope.billDetails = result;
                  $scope.getCustDetails($scope.billDetails.can);
-                 
              });
     	}        
         
@@ -44,7 +43,6 @@ angular.module('watererpApp').controller(
                 BillDetails.save($scope.billDetails, onSaveSuccess, onSaveError);
             }
         };
-
 
         $scope.refresh = function () {
             $scope.reset();
@@ -92,9 +90,9 @@ angular.module('watererpApp').controller(
                 currentBillType: null,
                 currentBillTypes: [
                          	      {id: 'M', name: 'METERED'},
-                         	      {id: 'U', name: 'UNMETERED'},
+                         	      {id: 'S', name: 'STUCK'},
                          	      {id: 'L', name: 'LOCKED'},
-                         	      {id: 'R', name: 'REPAIR'},
+                         	      {id: 'B', name: 'BURNT'},
                          	    ],
                 fromMonth: null,
                 toMonth: null,
@@ -128,12 +126,11 @@ angular.module('watererpApp').controller(
         
         $scope.toggleMeterReadingDate = function(cbtyp){
         	if(cbtyp==='M'){
-        		$scope.billDetails.metReadingDt = $scope.billDetails.billDate;
+        		$scope.billDetails.prevMetReadingDt1 = $scope.billDetails.billDate;
         	}else{
-        		$scope.billDetails.metReadingDt = null;
+        		$scope.billDetails.prevMetReadingDt1 = $scope.billDetails.prevMetReadingDt;
         	}
         }
-        
         $scope.getCustDetails = function(can){
         	CustDetailsService.get({can : can}, function(result) {
                 $scope.custDetails = result;
@@ -143,8 +140,9 @@ angular.module('watererpApp').controller(
                 $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
                 var date2 = new Date($scope.billDetails.prevBillMonth);
                 $scope.billDetails.fromMonth = new Date(date2.getFullYear(), date2.getMonth()+1, date2.getDate());
-                $scope.billDetails.prevReading = $scope.custDetails.prevReading;
+                $scope.billDetails.initialReading = $scope.custDetails.prevReading;
                 $scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
+                $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.metReadingDt;
             });
         }
         
