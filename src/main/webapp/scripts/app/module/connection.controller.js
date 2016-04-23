@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller(
-		'MainController',
+		'ConnectionController',
 		function($scope, $state, $rootScope, Account, User,
 				ApplicationTxnService, Principal) {
 			$scope.pendingRequests = [];
