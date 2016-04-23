@@ -1,18 +1,33 @@
 'use strict';
 
 angular.module('watererpApp').controller('MeterChangeDialogController',
-        function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN) {
+        function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN, ParseLinks) {
 
         $scope.meterChange = {};
         $scope.custdetailss = CustDetails.query();
-        $scope.meterdetailss = MeterDetails.query();
+        //$scope.meterdetailss = MeterDetails.query();
         $scope.users = User.query();
         $scope.meterChangeStatuss = [{"id":1,"status":"Meter Stuck"},{"id":2,"status":"Meter Break"}];
+        
+        $scope.CustDetailsId;
+        
+        
         $scope.load = function(id) {
             MeterChange.get({id : id}, function(result) {
                 $scope.meterChange = result;
             });
         };
+        
+        $scope.loadAllUnallottedMeter = function() {
+    		$scope.meterdetailss = [];
+            MeterDetails.query({page: $scope.page, size: 20, meterStatusId: 2}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.meterdetailss.push(result[i]);
+                }
+            });
+        };
+        $scope.loadAllUnallottedMeter();
         
         if($stateParams.id != null){
         	$scope.load($stateParams.id);
@@ -73,9 +88,10 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.meterChange.custDetails = $scope.custDetails;
+                $scope.custDetailsId = $scope.custDetails.id;
                 $scope.meterChange.existingMeterNumber = $scope.custDetails.meterNo;
                 $scope.meterChange.existingMeterReading = $scope.custDetails.prevReading;
-                $scope.meterChange.custDetails.id = $scope.custDetails.id;
+                $scope.meterChange.custDetails.id = $scope.custDetailsId;
             });
         };
         
@@ -92,6 +108,9 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			$scope.isValidCust = true;
 		};
 		
+		$scope.getReason = function(status){
+			$scope.meterChange.reasonForChange = status;
+		}
 		
        
         

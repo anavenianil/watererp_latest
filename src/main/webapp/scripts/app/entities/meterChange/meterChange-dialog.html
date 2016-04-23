@@ -62,14 +62,14 @@
 									class="form-control" id="field_street" name="street"
 									ng-model="meterChange.custDetails.secCode" readonly />
 							</div>
-							<div class="col-sm-4">
+							<!-- <div class="col-sm-4">
 								<label for="field_custDetails">Cust Details</label> <select
 									class="form-control" id="field_custDetails" name="custDetails"
 									ng-model="meterChange.custDetails"
 									ng-options="custDetails as custDetails.mobileNo for custDetails in custdetailss track by custDetails.id">
 									<option value=""></option>
 								</select>
-							</div>
+							</div> -->
 						</div>
 					</fieldset>
 					<fieldset>
@@ -79,13 +79,13 @@
 								<label class="control-label" for="field_existingMeterNumber">Existing
 									Meter Number</label> <input type="text" class="form-control"
 									name="existingMeterNumber" id="field_existingMeterNumber"
-									ng-model="meterChange.existingMeterNumber" />
+									ng-model="meterChange.existingMeterNumber" readonly/>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_existingMeterReading">Existing
 									Meter Reading</label> <input type="number" class="form-control"
 									name="existingMeterReading" id="field_existingMeterReading"
-									ng-model="meterChange.existingMeterReading" />
+									ng-model="meterChange.existingMeterReading" readonly/>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_reasonForChange">Reason
@@ -94,7 +94,8 @@
 								name="reasonForChange" id="field_reasonForChange"
 								ng-model="meterChange.reasonForChange" /> -->
 								<select class="form-control" id="field_reasonForChange"
-									name="reasonForChange" ng-model="meterChange.reasonForChange"
+									name="reasonForChange" ng-model="meterChange.reasonForChange1"
+									ng-change="getReason(meterChange.reasonForChange1.status)"
 									ng-options="meterChangeStatus as meterChangeStatus.status for meterChangeStatus in meterChangeStatuss track by meterChangeStatus.status">
 									<option value=""></option>
 								</select>
