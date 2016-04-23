@@ -1,68 +1,86 @@
 <div>
-    <h2>CustomerComplaintss</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="customerComplaints.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new CustomerComplaints
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="relevantDoc"><span>RelevantDoc</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="complaintBy"><span>ComplaintBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="complaintDate"><span>ComplaintDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="complaintTypeMaster.complaintType"><span>complaintTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="customerComplaints in customerComplaintss track by customerComplaints.id">
-                    <td><a ui-sref="customerComplaints.detail({id:customerComplaints.id})">{{customerComplaints.id}}</a></td>
-                    <td>{{customerComplaints.remarks}}</td>
-                    <td>{{customerComplaints.relevantDoc}}</td>
-                    <td>{{customerComplaints.complaintBy}}</td>
-                        <td>{{customerComplaints.complaintDate | date:'mediumDate'}}</td>
-                    <td>{{customerComplaints.can}}</td>
-                    <td>
-                        <a ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.complaintTypeMaster.complaintType}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="customerComplaints.detail({id:customerComplaints.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="customerComplaints.edit({id:customerComplaints.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="customerComplaints.delete({id:customerComplaints.id})"
-                                    class="btn btn-danger btn-sm">                                    
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+	<h2>CustomerComplaintss</h2>
+	<jh-alert></jh-alert>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="customerComplaints.new">
+					<span class="glyphicon glyphicon-plus"></span> <span>Create
+						new CustomerComplaints </span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">CustomerComplaints</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="table-responsive">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+								<th jh-sort-by="id"><span>ID</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="remarks"><span>Remarks</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="relevantDoc"><span>RelevantDoc</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="complaintBy"><span>ComplaintBy</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="complaintDate"><span>ComplaintDate</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="can"><span>Can</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="complaintTypeMaster.complaintType"><span>complaintTypeMaster</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<tr
+								ng-repeat="customerComplaints in customerComplaintss track by customerComplaints.id">
+								<td><a
+									ui-sref="customerComplaints.detail({id:customerComplaints.id})">{{customerComplaints.id}}</a></td>
+								<td>{{customerComplaints.remarks}}</td>
+								<td>{{customerComplaints.relevantDoc}}</td>
+								<td>{{customerComplaints.complaintBy}}</td>
+								<td>{{customerComplaints.complaintDate |
+									date:'mediumDate'}}</td>
+								<td>{{customerComplaints.can}}</td>
+								<td><a
+									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.complaintTypeMaster.complaintType}}</a>
+								</td>
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit"
+											ui-sref="customerComplaints.detail({id:customerComplaints.id})"
+											class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-eye-open"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<button type="submit"
+											ui-sref="customerComplaints.edit({id:customerComplaints.id})"
+											class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<button type="submit"
+											ui-sref="customerComplaints.delete({id:customerComplaints.id})"
+											class="btn btn-danger btn-sm">
+											<span class="glyphicon glyphicon-remove-circle"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

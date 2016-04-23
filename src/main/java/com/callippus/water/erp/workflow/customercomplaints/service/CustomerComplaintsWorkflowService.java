@@ -160,7 +160,7 @@ public class CustomerComplaintsWorkflowService extends RequestProcessService{
 	 **/
 
 	@SuppressWarnings("unchecked")
-	public String approvedApplicationTxnRequest(CustomerComplaints customerComplaints)
+	public String approvedCustomerComplaintsRequest(CustomerComplaints customerComplaints)
 			throws Exception {
 		String message = null;
 		List<RequestWorkflowHistory> l = null;
@@ -177,7 +177,7 @@ public class CustomerComplaintsWorkflowService extends RequestProcessService{
 					.toString());
 			
 			String complainType = customerComplaints.getComplaintTypeMaster().getComplaintType();
-			if(CPSConstants.INCORRECTBILL.equals(complainType)){
+			if(CPSConstants.INCORRECTBILL.equalsIgnoreCase(complainType)){
 				workflowService.setRequestType(CPSConstants.INCORRECTBILL);
 			}
 			//workflowService.setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);

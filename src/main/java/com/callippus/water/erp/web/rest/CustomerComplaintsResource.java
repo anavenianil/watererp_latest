@@ -171,11 +171,13 @@ public class CustomerComplaintsResource {
 	   // status +=1;
 	    //customerComplaints.setStatus(status);
        // workflowService.setRequestStatus(status);
-        customerComplaintsWorkflowService.approvedApplicationTxnRequest(customerComplaints);
+        customerComplaintsWorkflowService.approvedCustomerComplaintsRequest(customerComplaints);
         /*if(workflowService.getRequestStatus() == 2){
         	applicationTxnWorkflowService.updateApplicationTxn(id);        	
         }*/
-        customerComplaintsRepository.save(customerComplaints);
+        //customerComplaintsRepository.save(customerComplaints);
         return ResponseEntity.ok().build();
 	}
+	
+
 }
