@@ -20,6 +20,10 @@ angular.module('watererpApp')
 					moduleName = parts[parts.length - 1];
 				}
 				//console.log(moduleName); // "billingAndCollectionMain"
+				
+				moduleName = moduleName.slice(0,-4); 
+				
+				//console.log(moduleName); // "billingAndCollection
 
 				var matches = Principal.geModuleMenus().filter(
 						function(val, index, array) {

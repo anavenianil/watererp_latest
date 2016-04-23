@@ -22,6 +22,23 @@ angular.module('watererpApp')
                 resolve: {
                     
                 }
+            }).state('moduleDashboard', {
+                parent: 'site',
+                url: '/module/:moduleName',
+                data: {
+                    authorities: []
+                },
+                views: {
+                    'content@': {
+                        templateUrl: function( params ) {
+                        	console.log("These are the params:" + JSON.stringify(params))
+                            return 'scripts/app/module/' + params.moduleName + '.html';
+                        } //Controller is specified inside template
+                    }
+                },
+                resolve: {
+                    
+                }
             })
             .state('request', {
             	parent : 'site',
