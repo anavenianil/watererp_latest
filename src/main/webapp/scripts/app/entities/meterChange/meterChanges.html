@@ -19,17 +19,17 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="reasonForChange"><span>ReasonForChange</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="existingMeterNumber"><span>ExistingMeterNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="existingMeterReading"><span>ExistingMeterReading</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="newMeterNumber"><span>NewMeterNumber</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="newMeterReading"><span>NewMeterReading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="can"><span>CAN</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reasonForChange"><span>Reason For Change</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="existingMeterNumber"><span>Existing Meter Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="existingMeterReading"><span>Existing Meter Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newMeterNumber"><span>New Meter Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newMeterReading"><span>New Meter Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="approvedDate"><span>ApprovedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="custDetails.id"><span>custDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterDetails.id"><span>meterDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.id"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="approvedDate"><span>Approved Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="custDetails.id"><span>Cust Details</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterDetails.id"><span>Meter Details</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.id"><span>Approved By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -45,13 +45,13 @@
                     <td>{{meterChange.remarks}}</td>
                         <td>{{meterChange.approvedDate | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="custDetails.detail({id:meterChange.custDetails.id})">{{meterChange.custDetails.id}}</a>
+                        <a ui-sref="custDetails.detail({id:meterChange.custDetails.id})">{{meterChange.custDetails.can}}</a>
                     </td>
                     <td>
-                        <a ui-sref="meterDetails.detail({id:meterChange.meterDetails.id})">{{meterChange.meterDetails.id}}</a>
+                        <a ui-sref="meterDetails.detail({id:meterChange.meterDetails.id})">{{meterChange.meterDetails.meterId}}</a>
                     </td>
                     <td>
-                        {{meterChange.user.id}}
+                        {{meterChange.user.login}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
