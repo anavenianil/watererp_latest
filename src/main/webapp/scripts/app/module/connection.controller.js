@@ -1,13 +1,27 @@
 'use strict';
 
-angular.module('watererpApp').controller('BillCycleRunController',
-		function($scope, $state, $rootScope, Account, User, Principal) {
+angular.module('watererpApp').controller(
+		'MainController',
+		function($scope, $state, $rootScope, Account, User,
+				ApplicationTxnService, Principal) {
 			$scope.pendingRequests = [];
 			$scope.approvedRequests = [];
 			$scope.myRequests = [];
 
 			$scope.loadAll = function() {
 
+				ApplicationTxnService.getPendingRequests().then(function(data) {
+					$scope.pendingRequests = data;
+				});
+
+				ApplicationTxnService.getApprovedRequests().then(
+						function(data) {
+							$scope.approvedRequests = data;
+						});
+
+				/*ApplicationTxnService.getMyRequests().then(function(data) {
+					$scope.myRequests = data;
+				});*/
 			}
 
 			Principal.identity().then(function(account) {
@@ -25,6 +39,18 @@ angular.module('watererpApp').controller('BillCycleRunController',
 
 					});
 					$scope.loadAll();
+
 				}
+
 			});
+
+			$scope.getDetails = function(type) {
+				if (type === 'REQUISITION' || type === 'WITHOUTMETER') {
+					$state.go('applicationTxn');
+				} else if (type === 'INCORRECT BILL') {
+					$state.go('customerComplaints');
+				}
+
+			}
+
 		});
