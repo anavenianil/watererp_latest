@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
+import com.callippus.water.erp.domain.CustomerComplaints;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
@@ -156,4 +158,22 @@ public class MeterChangeResource {
         meterChangeRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("meterChange", id.toString())).build();
     }
+    
+    
+    /**
+     * this will approve the Meter Change Request
+     */
+	@RequestMapping(value = "/meterChanges/aprove", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<Void> approveMeterChange(@RequestParam(value = "id", required = false) Long id,
+						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
+		workflowService.getUserDetails();
+		workflowService.getRequestType();
+		MeterChange meterChange = meterChangeRepository.findOne(id);
+	    workflowService.setRemarks(remarks);  
+        meterChangeWorkflowService.approvedMeterChangeRequest(meterChange);
+        return ResponseEntity.ok().build();
+	}
 }

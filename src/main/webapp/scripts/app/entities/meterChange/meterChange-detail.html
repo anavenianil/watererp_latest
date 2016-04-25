@@ -70,6 +70,11 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="col-sm-12">
+			<label class="control-label" for="field_remarks">Remarks</label>
+			<textarea rows="4" cols="50" class="form-control" name="remarks"
+				id="field_remarks" max="20" ng-model="meterChange.remarks"></textarea>
+		</div>
 	</div>
 
 	<button type="submit" onclick="window.history.back()"
@@ -78,7 +83,7 @@
 			Back</span>
 	</button>
 	<button type="button" class="btn btn-success pull-right"
-		ng-click="getMeterChange(meterChange.id)">
+		ng-click="approvalMeterChange(meterChange.id, meterChange.remarks)">
 		<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 	</button>
 </div>
