@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/customerComplaints/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustomerComplaints'
                 },
                 views: {

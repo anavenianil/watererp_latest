@@ -153,7 +153,7 @@ public class CustDetailsResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("custDetails", id.toString())).build();
     }
     
-    /**
+/*    *//**
      * GET  /custDetailss/:can -> get the "can" custDetails.
      *//*
     @RequestMapping(value = "/custDetailss/search",

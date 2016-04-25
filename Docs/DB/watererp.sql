@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.0.24-community-nt
+-- Server version	5.0.24-community-nt-log
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -4391,7 +4391,16 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (401,'admin','2016-04-21 16:52:41','AUTHENTICATION_SUCCESS'),
  (402,'admin','2016-04-21 16:53:37','AUTHENTICATION_SUCCESS'),
  (403,'admin','2016-04-22 15:54:26','AUTHENTICATION_SUCCESS'),
- (404,'sf0015','2016-04-22 15:56:35','AUTHENTICATION_SUCCESS');
+ (404,'sf0015','2016-04-22 15:56:35','AUTHENTICATION_SUCCESS'),
+ (405,'billrunuser','2016-04-22 19:24:33','AUTHENTICATION_SUCCESS'),
+ (406,'billrunuser','2016-04-23 10:45:01','AUTHENTICATION_SUCCESS'),
+ (407,'billrunuser','2016-04-23 14:07:57','AUTHENTICATION_SUCCESS'),
+ (408,'admin','2016-04-23 14:38:18','AUTHENTICATION_SUCCESS'),
+ (409,'admin','2016-04-23 15:21:55','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (410,'billrunuser','2016-04-23 15:27:29','AUTHENTICATION_SUCCESS'),
+ (411,'admin','2016-04-24 10:15:50','AUTHENTICATION_SUCCESS'),
+ (412,'admin','2016-04-25 07:58:30','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -5261,7 +5270,24 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (403,'remoteAddress','0:0:0:0:0:0:0:1'),
  (403,'sessionId','496EB9607AD208C02ED13F2CBBE51612'),
  (404,'remoteAddress','0:0:0:0:0:0:0:1'),
- (404,'sessionId','941A6A47DA2FE8943189764BB57660E4');
+ (404,'sessionId','941A6A47DA2FE8943189764BB57660E4'),
+ (405,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (405,'sessionId','8ABBBCE1920629C47A93F40EE3B5C1FB'),
+ (406,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (406,'sessionId','44EE26A8ED1D6CA2F8D702A01E31117B'),
+ (407,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (407,'sessionId','51C8158C3D8CCEC6557567E7D86BD1FE'),
+ (408,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (408,'sessionId','8CF646E777AB9097AD5F34E4A06F08AD'),
+ (409,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (409,'sessionId','677DCEEE62F550C47956335412A7941F'),
+ (410,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (410,'sessionId','A3349B9F0C509A074CB52BE18D5E69CF'),
+ (411,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (411,'sessionId','4E6562FA7D277396C76D10C5850EDE36'),
+ (412,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (412,'sessionId','42BB7CF10DA62E69E449B0FA3B6F65CA');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5943,12 +5969,12 @@ CREATE TABLE `module` (
 
 /*!40000 ALTER TABLE `module` DISABLE KEYS */;
 INSERT INTO `module` (`id`,`name`,`priority`,`modified_date`,`server_url`) VALUES 
- (1,'Role Management',1,'2016-03-09 00:00:00','roleManagementMain'),
- (2,'Connection',2,'2016-03-10 00:00:00','connectionMain'),
- (3,'Items Details',3,'2016-03-30 00:00:00','itemDetailsMain'),
- (4,'Billing and Collection',3,'2016-03-15 00:00:00','billingAndCollectionMain'),
- (5,'Customer Care',4,'2016-03-29 00:00:00','customerCareMain'),
- (6,'Bill Cycle Run',5,'2016-04-04 00:00:00','billCycleRunMain');
+ (1,'Role Management',1,'2016-03-09 00:00:00','roleManagement'),
+ (2,'Connection',2,'2016-03-10 00:00:00','connection'),
+ (3,'Items Details',3,'2016-03-30 00:00:00','itemDetails'),
+ (4,'Billing and Collection',3,'2016-03-15 00:00:00','billingAndCollection'),
+ (5,'Customer Care',4,'2016-03-29 00:00:00','customerCare'),
+ (6,'Bill Cycle Run',5,'2016-04-04 00:00:00','billCycleRun');
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 
 
@@ -7132,7 +7158,9 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (45,34,'ROLE_USER'),
  (46,35,'ROLE_ADMIN'),
  (47,36,'ROLE_BILLRUN'),
- (48,37,'ROLE_BILLRUN');
+ (48,37,'ROLE_BILLRUN'),
+ (49,31,'ROLE_ADMIN'),
+ (50,32,'ROLE_ADMIN');
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 

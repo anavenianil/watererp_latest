@@ -8,6 +8,7 @@ angular.module('watererpApp').controller(
         $scope.billDetailss = [];
         $scope.predicate = 'id';
         $scope.billDetails = {};
+        $scope.currentBillTypes = [{id: 'M', name: 'METERED'},{id: 'S', name: 'STUCK'},{id: 'L', name: 'LOCKED'},{id: 'B', name: 'BURNT'}];
         $scope.collDetails = {};
         var date  = new Date();
         $scope.billDetails.billDate = date;
@@ -67,7 +68,6 @@ angular.module('watererpApp').controller(
 		}
         
         $scope.onSelect = function($item, $model, $label) {
-        	$scope.clear();
         	$scope.billDetails.billDate = new Date();
 			console.log($item);
 			var arr = $item.split("-");
@@ -78,51 +78,6 @@ angular.module('watererpApp').controller(
 			$scope.getCustDetails($scope.billDetails.can);
 			$scope.isValidCust = true;
 		};
-
-        
-        $scope.clear = function () {
-            $scope.billDetails = {
-                can: null,
-                billNumber: null,
-                billDate: null,
-                billTime: null,
-                meterMake: null,
-                currentBillType: null,
-                currentBillTypes: [
-                         	      {id: 'M', name: 'METERED'},
-                         	      {id: 'S', name: 'STUCK'},
-                         	      {id: 'L', name: 'LOCKED'},
-                         	      {id: 'B', name: 'BURNT'},
-                         	    ],
-                fromMonth: null,
-                toMonth: null,
-                meterFixDate: null,
-                initialReading: null,
-                presentReading: null,
-                units: null,
-                waterCess: null,
-                sewerageCess: null,
-                serviceCharge: null,
-                meterServiceCharge: null,
-                totalAmount: null,
-                netPayableAmount: null,
-                telephoneNo: null,
-                meterStatus: null,
-                metReaderCode: null,
-                billFlag: null,
-                svrStatus: null,
-                terminalId: null,
-                meterReaderId: null,
-                userId: null,
-                mobileNo: null,
-                noticeNo: null,
-                lat: null,
-                longi: null,
-                noMeterAmt: null,
-                metReadingDt: null,
-                id: null
-            };
-        };
         
         $scope.toggleMeterReadingDate = function(cbtyp){
         	if(cbtyp==='M'){
