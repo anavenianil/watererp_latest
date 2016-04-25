@@ -116,8 +116,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
        		$scope.count = $scope.count +1;
         }
         
-        
-        
         //calculations for proceedings
         $scope.calculateRate = function(){
         	for(var i=0; i<$scope.itemArr.length; i++){
@@ -125,13 +123,10 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         		var rate = $scope.proceedings.itemRequireds[i].ratePerShs;
         		$scope.proceedings.itemRequireds[i].amount = quantity * rate;
         	}
-        	
         	$scope.proceedings.subTotalA = 0;
-        	
         	for(var i=0; i<$scope.itemArr.length; i++){
         		$scope.proceedings.subTotalA = $scope.proceedings.subTotalA + $scope.proceedings.itemRequireds[i].amount;
         	}
-        	
         	$scope.proceedings.supervisionCharge = ($scope.proceedings.subTotalA * $scope.proceedings.supervisionPercent)/100;
         	$scope.proceedings.labourCharge = ($scope.proceedings.subTotalA * $scope.proceedings.labourChargePercent)/100;
         	$scope.proceedings.siteSurvey = ($scope.proceedings.subTotalA * $scope.proceedings.siteSurveyPercent)/100;

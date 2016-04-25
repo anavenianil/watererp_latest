@@ -29,6 +29,8 @@ import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.MeterChangeRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.callippus.water.erp.workflow.meterchange.service.MeterChangeWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -48,6 +50,12 @@ public class MeterChangeResource {
     
     @Inject
     private CustDetailsRepository custDetailsRepository;
+    
+    @Inject
+    private MeterChangeWorkflowService meterChangeWorkflowService;
+    
+    @Inject
+    private WorkflowService workflowService;
     
     /**
      * POST  /meterChanges -> Create a new meterChange.
@@ -73,13 +81,13 @@ public class MeterChangeResource {
         custDetails.setPrevReading(meterChange.getNewMeterReading());
         custDetailsRepository.save(custDetails);
         //this is for workflow for new request
-        /*try{
+        try{
         	workflowService.getUserDetails();
-        	applicationTxnWorkflowService.createTxn(meterChange);
+        	meterChangeWorkflowService.createTxn(meterChange);
         }
         catch(Exception e){
         	System.out.println(e);
-        }*/
+        }
         
         return ResponseEntity.created(new URI("/api/meterChanges/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("meterChange", result.getId().toString()))
