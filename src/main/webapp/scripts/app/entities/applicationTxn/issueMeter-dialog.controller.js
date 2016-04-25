@@ -24,6 +24,7 @@ angular.module('watererpApp')
     	$scope.load = function(id){
     		ApplicationTxn.get({id : id}, function(result) {
                 $scope.applicationTxn = result;
+                $scope.applicationTxn.remarks = "";
             });
     	}
     	if($stateParams.id != null){
@@ -31,13 +32,12 @@ angular.module('watererpApp')
          }
     	
     	if($stateParams.applicationTxnId != null){
-            $scope.load($stateParams.applicationTxnId); 
+            $scope.load($stateParams.applicationTxnId);
     	}
  	
     	
     	
         var onSaveSuccess = function (result) {
-        	ApplicationTxnService.approveRequest($scope.applicationTxn.id, $scope.applicationTxn.remarks);
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
             $state.go('applicationTxn');
@@ -48,7 +48,6 @@ angular.module('watererpApp')
         };
 
         $scope.save = function () {
-        	//ApplicationTxnService.approveRequest($scope.applicationTxn.id, $scope.applicationTxn.remarks);
             $scope.isSaving = true;
             if ($scope.applicationTxn.id != null) {
                 ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
