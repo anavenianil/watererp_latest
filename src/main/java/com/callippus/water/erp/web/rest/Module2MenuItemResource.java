@@ -129,7 +129,7 @@ public class Module2MenuItemResource {
     /**
      * GET  /rest/module2menu_items -> get all the module2menu_items.
      */
-    @RequestMapping(value = "/rest/module2MenuItems/role",
+    @RequestMapping(value = "/module2MenuItems/role",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

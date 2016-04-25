@@ -70,7 +70,7 @@ angular.module('watererpApp')
                         deferred.resolve(_identity);
                     });
                 
-                $http.get("/api/rest/module2MenuItems/role").success(
+                $http.get("/api/module2MenuItems/role").success(
     					function(response) {
     						module2MenuItems = response;
     					});
