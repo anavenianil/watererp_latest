@@ -1,9 +1,12 @@
 package com.callippus.water.erp.config;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -35,126 +38,133 @@ import com.callippus.water.erp.web.filter.CsrfCookieGeneratorFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Inject
-    private Environment env;
+	private final Logger log = LoggerFactory
+			.getLogger(SecurityConfiguration.class);
 
-    @Inject
-    private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+	@Inject
+	private Environment env;
 
-    @Inject
-    private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
+	@Inject
+	private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
 
-    @Inject
-    private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
+	@Inject
+	private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
 
-    @Inject
-    private Http401UnauthorizedEntryPoint authenticationEntryPoint;
+	@Inject
+	private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
 
-    @Inject
-    private UserDetailsService userDetailsService;
+	@Inject
+	private Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
-    @Inject
-    private RememberMeServices rememberMeServices;
-    
-    @Inject
+	@Inject
+	private UserDetailsService userDetailsService;
+
+	@Inject
+	private RememberMeServices rememberMeServices;
+
+	@Inject
 	private PermissionMap permissionMap;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Inject
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
+	@Inject
+	public void configureGlobal(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(
+				passwordEncoder());
+	}
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-            .antMatchers("/scripts/**/*.{js,html}")
-            .antMatchers("/bower_components/**")
-            .antMatchers("/i18n/**")
-            .antMatchers("/assets/**")
-            .antMatchers("/swagger-ui/index.html")
-            .antMatchers("/test/**");
-    }
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/scripts/**/*.{js,html}")
+				.antMatchers("/bower_components/**").antMatchers("/i18n/**")
+				.antMatchers("/assets/**")
+				.antMatchers("/swagger-ui/index.html").antMatchers("/test/**");
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .csrf()
-        .and()
-            .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
-            .exceptionHandling()
-            .accessDeniedHandler(new CustomAccessDeniedHandler())
-            .authenticationEntryPoint(authenticationEntryPoint)
-        .and()
-            .rememberMe()
-            .rememberMeServices(rememberMeServices)
-            .rememberMeParameter("remember-me")
-            .key(env.getProperty("jhipster.security.rememberme.key"))
-        .and()
-            .formLogin()
-            .loginProcessingUrl("/api/authentication")
-            .successHandler(ajaxAuthenticationSuccessHandler)
-            .failureHandler(ajaxAuthenticationFailureHandler)
-            .usernameParameter("j_username")
-            .passwordParameter("j_password")
-            .permitAll()
-        .and()
-            .logout()
-            .logoutUrl("/api/logout")
-            .logoutSuccessHandler(ajaxLogoutSuccessHandler)
-            .deleteCookies("JSESSIONID", "CSRF-TOKEN")
-            .permitAll()
-        .and()
-            .headers()
-            .frameOptions()
-            .disable();
-        
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry interceptUrlRegistry = 
-        http.authorizeRequests()
-            .antMatchers("/api/register").permitAll()
-            .antMatchers("/api/activate").permitAll()
-            .antMatchers("/api/authenticate").permitAll()
-            .antMatchers("/api/account/reset_password/init").permitAll()
-            .antMatchers("/api/account/reset_password/finish").permitAll()
-            .antMatchers("/api/logs/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/audits/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/**").authenticated()
-            .antMatchers("/metrics/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/health/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/trace/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/dump/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/shutdown/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/beans/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/configprops/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/info/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/autoconfig/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/env/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/trace/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/mappings/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/liquibase/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/v2/api-docs/**").permitAll()
-            .antMatchers("/configuration/security").permitAll()
-            .antMatchers("/configuration/ui").permitAll()
-            .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN);
-            
-            Map<String, String> viewPermissions = permissionMap.getPermissions();
-	
-			for (Map.Entry<String, String> entry : viewPermissions.entrySet()) {
-				interceptUrlRegistry.antMatchers(entry.getKey()).hasAuthority(
-						entry.getValue());
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf()
+				.and()
+				.addFilterAfter(new CsrfCookieGeneratorFilter(),
+						CsrfFilter.class).exceptionHandling()
+				.accessDeniedHandler(new CustomAccessDeniedHandler())
+				.authenticationEntryPoint(authenticationEntryPoint).and()
+				.rememberMe().rememberMeServices(rememberMeServices)
+				.rememberMeParameter("remember-me")
+				.key(env.getProperty("jhipster.security.rememberme.key")).and()
+				.formLogin().loginProcessingUrl("/api/authentication")
+				.successHandler(ajaxAuthenticationSuccessHandler)
+				.failureHandler(ajaxAuthenticationFailureHandler)
+				.usernameParameter("j_username")
+				.passwordParameter("j_password").permitAll().and().logout()
+				.logoutUrl("/api/logout")
+				.logoutSuccessHandler(ajaxLogoutSuccessHandler)
+				.deleteCookies("JSESSIONID", "CSRF-TOKEN").permitAll().and()
+				.headers().frameOptions().disable();
+
+		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry interceptUrlRegistry = http
+				.authorizeRequests().antMatchers("/api/register").permitAll()
+				.antMatchers("/api/activate").permitAll()
+				.antMatchers("/api/authenticate").permitAll()
+				.antMatchers("/api/account/reset_password/init").permitAll()
+				.antMatchers("/api/account/reset_password/finish").permitAll()
+				.antMatchers("/api/logs/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/api/audits/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/metrics/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/health/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/trace/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/dump/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/shutdown/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/beans/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/configprops/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/info/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/autoconfig/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/env/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/trace/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/mappings/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/liquibase/**")
+				.hasAuthority(AuthoritiesConstants.ADMIN)
+				.antMatchers("/v2/api-docs/**").permitAll()
+				.antMatchers("/configuration/security").permitAll()
+				.antMatchers("/configuration/ui").permitAll()
+				.antMatchers("/swagger-ui/index.html")
+				.hasAuthority(AuthoritiesConstants.ADMIN);
+
+		Map<String, List<String>> viewPermissions = permissionMap
+				.getPermissions();
+
+		for (Map.Entry<String, List<String>> entry : viewPermissions.entrySet()) {
+			for (String value : entry.getValue()) {
+				interceptUrlRegistry.antMatchers("/api" + entry.getKey())
+						.hasAuthority(value);
+				log.debug("Creating antMatcher for :::" + "/api"
+						+ entry.getKey() + ", Role:" + value);
+			}
 		}
-			interceptUrlRegistry.antMatchers("/protected/**").authenticated() ;
 
-    }
+		interceptUrlRegistry.antMatchers("/protected/**").authenticated();
+	}
 
-    @Bean
-    public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
-        return new SecurityEvaluationContextExtension();
-    }
+	@Bean
+	public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
+		return new SecurityEvaluationContextExtension();
+	}
 }

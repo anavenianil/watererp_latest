@@ -1,5 +1,6 @@
 package com.callippus.water.erp.security;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,18 +22,25 @@ private final Logger log = LoggerFactory.getLogger(PermissionMap.class);
     @Inject
     private Url2RoleRepository url2RoleRepository;
     
-	public Map<String, String> getPermissions() {
+	public Map<String, List<String>> getPermissions() {
 		
 		List<Url2Role> list = url2RoleRepository.findAll();
 				
-		Map<String, String> hm = new HashMap<String, String>();
-		for (Url2Role url2Role : list) {			
-			hm.put(url2Role.getUrl().getUrlPattern(),url2Role.getAuthority().getName());
+		Map<String, List<String>> hm = new HashMap<String, List<String>>();
+		for (Url2Role url2Role : list) {
+			List<String> valueList = null;
+			if(hm.get(url2Role.getUrl().getUrlPattern()) == null){
+				valueList = new ArrayList<String>();
+			}
+			else
+				valueList = hm.get(url2Role.getUrl().getUrlPattern());
+			
+			valueList.add(url2Role.getAuthority().getName());
+			
+			hm.put(url2Role.getUrl().getUrlPattern(),valueList);
 		}
 		log.debug("Created HashMap of URL Patterns and Roles:" + hm.toString());
 		
 		return hm;
-
-	}
-	
+	}	
 }
