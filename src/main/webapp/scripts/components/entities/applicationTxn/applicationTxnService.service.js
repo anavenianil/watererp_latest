@@ -82,6 +82,16 @@ angular.module('watererpApp').factory(
 					}).then(function(response) {
 						return response.data;
 					});
+				},
+				approveCustComplaint : function(id, remarks) {
+					return $http.get('api/customerComplaints/approveCustomerCompaints', {
+						params : {
+							id : id,
+							remarks : remarks
+						}
+					}).then(function(response) {
+						return response.data;
+					});
 				}
 			/*
 			 * , getMyRequests: function () { return

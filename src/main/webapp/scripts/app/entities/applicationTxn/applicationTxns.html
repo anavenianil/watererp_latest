@@ -1,5 +1,5 @@
 <div>
-	<h2>Application : </h2>
+	<h2>Application :</h2>
 	<jh-alert></jh-alert>
 	<br />
 	<div class="panel panel-primary">
@@ -9,50 +9,51 @@
 		<div class="list-group">
 			<div class="list-group-item">
 				<div class="table-responsive">
-				<div class="row">
-							<div class="col-md-4">
-								<select class="input-sm form-control"
-									id="statusSearch" ng-model="statusSearch"
-									ng-change="onSearch()">
-									<option value="" label="All">Select Status</option>
-									<option value="0" label="Pending Submission">Pending Approval</option>
-									<option value="1" label="Pending Approval">Forwarded</option>
-									<option value="2" label="In Feasibility">In Feasibility</option>
-									<option value="3" label="In Proceedings">In Proceedings</option>
-									<option value="4" label="In Receipt Generation">In Receipt Generation</option>
-									<option value="5" label="In Stores">In Stores</option>
-									<option value="6" label="Waiting for Meter">Waiting for Meter</option>
-									<option value="7" label="CAN Generation">CAN Generation</option>
-									<option value="8" label="Completed">Completed</option>
-								</select>
-							</div>
-							<div class="col-md-4">
-								<input type="text" class="input-sm form-control"
-									id="applicationTxnId" placeholder="Search By Application No"
-									name="applicationTxnId" ng-model="applicationTxnId"
-									ng-change="onSearch()" />
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group">
-									<div class='input-group date' id='field_requestedDate'>
-										<input id="field_requestedDate" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
-											ng-model="applicationTxnDt" 
-											max-date="dtmax" placeholder="Search By Application Date"
-											is-open="datePickerForapplicationTxnDt.status.opened" 
-											ng-change="onSearch()" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-default"
-												ng-click="datePickerForapplicationTxnDtOpen($event)">
-												<i class="glyphicon glyphicon-calendar"></i>
-											</button>
-										</span>
-									</div>
+					<div class="row">
+						<div class="col-md-4">
+							<select class="input-sm form-control" id="statusSearch"
+								ng-model="statusSearch" ng-change="onSearch()">
+								<option value="" label="All">Select Status</option>
+								<option value="0" label="Pending Submission">Pending
+									Approval</option>
+								<option value="1" label="Pending Approval">Forwarded</option>
+								<option value="2" label="In Feasibility">In Feasibility</option>
+								<option value="3" label="In Proceedings">In Proceedings</option>
+								<option value="4" label="In Receipt Generation">In
+									Receipt Generation</option>
+								<option value="5" label="In Stores">In Stores</option>
+								<option value="6" label="Waiting for Meter">Waiting for
+									Meter</option>
+								<option value="7" label="CAN Generation">CAN Generation</option>
+								<option value="8" label="Completed">Completed</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="input-sm form-control"
+								id="applicationTxnId" placeholder="Search By Application No"
+								name="applicationTxnId" ng-model="applicationTxnId"
+								ng-change="onSearch()" />
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<div class='input-group date' id='field_requestedDate'>
+									<input id="field_requestedDate" type="text"
+										class="form-control" uib-datepicker-popup="{{dateformat}}"
+										ng-model="applicationTxnDt" max-date="dtmax"
+										placeholder="Search By Application Date"
+										is-open="datePickerForapplicationTxnDt.status.opened"
+										ng-change="onSearch()" /> <span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForapplicationTxnDtOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
 								</div>
 							</div>
-							
-
 						</div>
+
+
+					</div>
 					<!-- <div class="row">
 						<div class="col-sm-3">
 							<label>Application No.</label> <input list="applicationTxn"

@@ -153,9 +153,9 @@ public class CustDetailsResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("custDetails", id.toString())).build();
     }
     
-    /**
+/*    *//**
      * GET  /custDetailss/:can -> get the "can" custDetails.
-     */
+     *//*
     @RequestMapping(value = "/custDetailss/search",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -168,5 +168,5 @@ public class CustDetailsResource {
                 result,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+    }*/
 }

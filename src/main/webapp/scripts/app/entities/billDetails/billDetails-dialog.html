@@ -120,7 +120,14 @@
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_currentBillType">Current
-								Bill Type</label> <select class="form-control"
+								Bill Type</label> 
+								<select class="form-control" id="field_currentBillType" 
+								name="currentBillType" ng-model="billDetails.currentBillType" 
+								ng-change="toggleMeterReadingDate(billDetails.currentBillType)" 
+								required>
+								<option ng-repeat="currentBillType in currentBillTypes" value="{{currentBillType.id}}">{{currentBillType.name}}</option>
+								</select>
+								<!-- <select class="form-control"
 								id="field_currentBillType" name="currentBillType"
 								ng-model="billDetails.currentBillType" 
 								ng-change="toggleMeterReadingDate(billDetails.currentBillType)" 
@@ -128,7 +135,7 @@
 								<option
 									ng-repeat="currentBillType in billDetails.currentBillTypes"
 									value="{{currentBillType.id}}">{{currentBillType.name}}</option>
-							</select>
+							</select> -->
 						</div>
 					</div>
 					<div class="row">
