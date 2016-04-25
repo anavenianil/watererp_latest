@@ -1,0 +1,89 @@
+<div ng-Controller="ConnectionController">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title pull-left">Pending Requests</h3>
+				</div>
+				<span ng-show="pendingRequests.length == 0">No Pending
+					Requests</span>
+				<div class="table-responsive" ng-hide="pendingRequests.length == 0">
+					<table class="clickableTable table table-striped">
+						<thead>
+							<tr>
+								<th>Requisitions</th>
+								<th>Count</th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<!-- <tr ng-repeat="request in pendingRequests"
+								ui-sref="request({type:'pending',action_type:request.id})"> -->
+							<tr ng-repeat="request in pendingRequests"
+								ng-click="getDetails(request.type)">
+								<td>{{request.type}}</td>
+								<td class="traligncentercss">{{request.count}}</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title pull-left">My Requests</h3>
+				</div>
+				<div ng-show="myRequests.length == 0">No Requests exist.</div>
+				<div class="table-responsive" ng-hide="myRequests.length == 0">
+					<table class="clickableTable table table-striped">
+						<thead>
+							<tr>
+								<th>Requisitions</th>
+								<th>Count</th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<tr ng-repeat="request in myRequests"
+								ui-sref="request({type:'myRequest',action_type:request.id})">
+								<td>{{request.type}}</td>
+								<td class="traligncentercss">{{request.count}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading clearfix">
+					<h3 class="panel-title pull-left">Requests Approved/Declined
+						by me</h3>
+				</div>
+				<div ng-show="approvedRequests.length == 0">No Approved
+					Requests</div>
+				<div class="table-responsive" ng-hide="approvedRequests.length == 0">
+					<table class="clickableTable table table-striped">
+						<thead>
+							<tr>
+								<th>Requisitions</th>
+								<th class="traligncentercss">Count</th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<tr ng-repeat="request in approvedRequests"
+								ui-sref="request({type:'approved',action_type:request.id})">
+								<td>{{request.type}}</td>
+								<td>{{request.count}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

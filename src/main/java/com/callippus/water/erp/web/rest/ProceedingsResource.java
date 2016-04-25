@@ -98,7 +98,17 @@ public class ProceedingsResource {
         if (proceedings.getId() == null) {
             return createProceedings(proceedings);
         }
+        
         Proceedings result = proceedingsRepository.save(proceedings);
+        ApplicationTxn applicationTxn = proceedings.getApplicationTxn();
+        applicationTxn.setRemarks(proceedings.getApplicationTxn().getRemarks());
+        //applicationTxnRepository.save(applicationTxn);
+        try{
+        	applicationTxnWorkflowService.approveRequest(proceedings.getApplicationTxn().getId(), applicationTxn.getRemarks());
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("proceedings", proceedings.getId().toString()))
             .body(result);

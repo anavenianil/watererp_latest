@@ -46,4 +46,9 @@ angular.module('watererpApp')
     	return $resource('api/custDetailss/searchCAN/:searchTerm', {}, {
     		'query': { method: 'GET', isArray: true}
         });
+    })
+    .factory('CustDetailsSearchCAN', function ($resource) {
+    	return $resource('api/custDetailss/search/:can', {}, {
+    		'query': { method: 'GET', isArray: true}
+        });
     });

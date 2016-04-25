@@ -170,6 +170,14 @@ public class ApplicationTxnResource {
             custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
             custMeterMappingRepository.save(custMeterMapping);
         }
+        if(applicationTxn.getStatus() == 6|| applicationTxn.getStatus()==7){
+        	 try{
+             	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+             }
+             catch(Exception e){
+             	System.out.println(e);
+             }
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
             .body(result);
