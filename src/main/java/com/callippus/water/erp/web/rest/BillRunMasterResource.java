@@ -72,6 +72,13 @@ public class BillRunMasterResource {
 			} else if (param.length() == 9) {
 				result = billingService.generateSingleBill(param);
 			}
+			else
+			{
+				return ResponseEntity
+						.ok()
+						.headers(
+								HeaderUtil.createAlert("Invalid CAN length of "+param.length()+" chars.", "")).body(result);
+			}
 		}
 		return ResponseEntity
 				.ok()

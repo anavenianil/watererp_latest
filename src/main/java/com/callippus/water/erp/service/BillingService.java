@@ -496,12 +496,25 @@ public class BillingService {
 					+ bfd.getServiceCharge() + bfd.getSewerageCess()
 					+ bfd.getSurcharge() + bfd.getOtherCharges();
 
+			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") "
+					+ "+ Meter Svc Charge(" + bfd.getMeterServiceCharge() + ") "
+					+ "+ Service Charge (" + bfd.getServiceCharge()+ ") "
+					+ "+ SewerageCess (" + bfd.getSewerageCess()+ ") "
+					+ "+ Surcharge (" + bfd.getSurcharge()+ ") "
+					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") "
+					+ "= Total (" + total + ") ");
+			
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
 			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears()
 					+ bfd.getArrears();
 			bfd.setNetPayableAmount(CPSUtils.round(netPayable.floatValue(), 2));
 
+			log.debug("Net Payable = Total (" + bfd.getTotalAmount() + ") "
+					+ "+ Int on Arrears (" + bfd.getIntOnArrears() + ") "
+					+ "+ Arrears (" + bfd.getArrears()+ ") "
+					+ "= Net Payable  (" + netPayable+ ") ");
+						
 			LocalDateTime date = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hhmmss");
 
