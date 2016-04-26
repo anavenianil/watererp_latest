@@ -19,16 +19,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
+import com.callippus.water.erp.domain.CustomerComplaints;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.MeterChangeRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.callippus.water.erp.workflow.meterchange.service.MeterChangeWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -48,6 +52,12 @@ public class MeterChangeResource {
     
     @Inject
     private CustDetailsRepository custDetailsRepository;
+    
+    @Inject
+    private MeterChangeWorkflowService meterChangeWorkflowService;
+    
+    @Inject
+    private WorkflowService workflowService;
     
     /**
      * POST  /meterChanges -> Create a new meterChange.
@@ -73,13 +83,13 @@ public class MeterChangeResource {
         custDetails.setPrevReading(meterChange.getNewMeterReading());
         custDetailsRepository.save(custDetails);
         //this is for workflow for new request
-        /*try{
+        try{
         	workflowService.getUserDetails();
-        	applicationTxnWorkflowService.createTxn(meterChange);
+        	meterChangeWorkflowService.createTxn(meterChange);
         }
         catch(Exception e){
         	System.out.println(e);
-        }*/
+        }
         
         return ResponseEntity.created(new URI("/api/meterChanges/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("meterChange", result.getId().toString()))
@@ -148,4 +158,22 @@ public class MeterChangeResource {
         meterChangeRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("meterChange", id.toString())).build();
     }
+    
+    
+    /**
+     * this will approve the Meter Change Request
+     */
+	@RequestMapping(value = "/meterChanges/aprove", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<Void> approveMeterChange(@RequestParam(value = "id", required = false) Long id,
+						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
+		workflowService.getUserDetails();
+		workflowService.getRequestType();
+		MeterChange meterChange = meterChangeRepository.findOne(id);
+	    workflowService.setRemarks(remarks);  
+        meterChangeWorkflowService.approvedMeterChangeRequest(meterChange);
+        return ResponseEntity.ok().build();
+	}
 }

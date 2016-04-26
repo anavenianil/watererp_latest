@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('MeterChangeDetailController', function ($scope, $rootScope, $stateParams, entity, MeterChange, CustDetails, MeterDetails, User) {
+    .controller('MeterChangeDetailController', function ($scope, $rootScope, $stateParams, entity, MeterChange, CustDetails, MeterDetails, User,
+    		ApplicationTxnService) {
         $scope.meterChange = entity;
         $scope.load = function (id) {
             MeterChange.get({id: id}, function(result) {
@@ -12,5 +13,11 @@ angular.module('watererpApp')
             $scope.meterChange = result;
         });
         $scope.$on('$destroy', unsubscribe);
+        
+        
+        $scope.approvalMeterChange = function(id, remarks){
+        	ApplicationTxnService.approveMeterChange(id, remarks);
+        	$state.go('meterChange');
+        }
 
     });

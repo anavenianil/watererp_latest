@@ -92,6 +92,16 @@ angular.module('watererpApp').factory(
 					}).then(function(response) {
 						return response.data;
 					});
+				},
+				approveMeterChange : function(id, remarks) {
+					return $http.get('api/meterChanges/aprove', {
+						params : {
+							id : id,
+							remarks : remarks
+						}
+					}).then(function(response) {
+						return response.data;
+					});
 				}
 			/*
 			 * , getMyRequests: function () { return
