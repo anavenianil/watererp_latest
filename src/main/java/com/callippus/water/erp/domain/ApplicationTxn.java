@@ -79,9 +79,6 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "registered_mobile")
     private Long registeredMobile;
     
-    @Column(name = "attached_doc_type")
-    private String attachedDocType;
-    
     @Column(name = "id_number")
     private String idNumber;
     
@@ -115,6 +112,12 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "approved_date")
     private LocalDate approvedDate;
     
+    @Column(name = "deed_doc")
+    private String deedDoc;
+    
+    @Column(name = "agreement_doc")
+    private String agreementDoc;
+    
     @ManyToOne
     @JoinColumn(name = "tariff_category_master_id")
     private TariffCategoryMaster tariffCategoryMaster;
@@ -138,6 +141,10 @@ public class ApplicationTxn implements Serializable {
     @ManyToOne
     @JoinColumn(name = "street_master_id")
     private StreetMaster streetMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "id_proof_master_id")
+    private IdProofMaster idProofMaster;
 
     public Long getId() {
         return id;
@@ -299,14 +306,6 @@ public class ApplicationTxn implements Serializable {
         this.registeredMobile = registeredMobile;
     }
 
-    public String getAttachedDocType() {
-        return attachedDocType;
-    }
-    
-    public void setAttachedDocType(String attachedDocType) {
-        this.attachedDocType = attachedDocType;
-    }
-
     public String getIdNumber() {
         return idNumber;
     }
@@ -395,6 +394,22 @@ public class ApplicationTxn implements Serializable {
         this.approvedDate = approvedDate;
     }
 
+    public String getDeedDoc() {
+        return deedDoc;
+    }
+    
+    public void setDeedDoc(String deedDoc) {
+        this.deedDoc = deedDoc;
+    }
+
+    public String getAgreementDoc() {
+        return agreementDoc;
+    }
+    
+    public void setAgreementDoc(String agreementDoc) {
+        this.agreementDoc = agreementDoc;
+    }
+
     public TariffCategoryMaster getTariffCategoryMaster() {
         return tariffCategoryMaster;
     }
@@ -443,6 +458,14 @@ public class ApplicationTxn implements Serializable {
         this.streetMaster = streetMaster;
     }
 
+    public IdProofMaster getIdProofMaster() {
+        return idProofMaster;
+    }
+
+    public void setIdProofMaster(IdProofMaster idProofMaster) {
+        this.idProofMaster = idProofMaster;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -486,7 +509,6 @@ public class ApplicationTxn implements Serializable {
             ", dma='" + dma + "'" +
             ", bPlotNo='" + bPlotNo + "'" +
             ", registeredMobile='" + registeredMobile + "'" +
-            ", attachedDocType='" + attachedDocType + "'" +
             ", idNumber='" + idNumber + "'" +
             ", propertyDoc='" + propertyDoc + "'" +
             ", can='" + can + "'" +
@@ -498,6 +520,8 @@ public class ApplicationTxn implements Serializable {
             ", remarks='" + remarks + "'" +
             ", meterNo='" + meterNo + "'" +
             ", approvedDate='" + approvedDate + "'" +
+            ", deedDoc='" + deedDoc + "'" +
+            ", agreementDoc='" + agreementDoc + "'" +
             '}';
     }
 }

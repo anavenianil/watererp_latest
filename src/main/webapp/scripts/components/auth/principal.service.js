@@ -74,11 +74,12 @@ angular.module('watererpApp')
     					function(response) {
     						module2MenuItems = response;
     					});
-//                
-//                $http.get("/api/empMastersForOrgRole").success(
-//                		function(response){
-//                			orgRole = response;
-//                		});
+                
+                //to show organisation in navbar
+                $http.get("/api/empMastersForOrgRole").success(
+                		function(response){
+                			orgRole = response;
+                		});
                 
                 return deferred.promise;
             },

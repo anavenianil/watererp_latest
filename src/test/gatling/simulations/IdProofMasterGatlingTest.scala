@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the ApplicationTxn entity.
+ * Performance test for the IdProofMaster entity.
  */
-class ApplicationTxnGatlingTest extends Simulation {
+class IdProofMasterGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class ApplicationTxnGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the ApplicationTxn entity")
+    val scn = scenario("Test the IdProofMaster entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class ApplicationTxnGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all applicationTxns")
-            .get("/api/applicationTxns")
+            exec(http("Get all idProofMasters")
+            .get("/api/idProofMasters")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new applicationTxn")
-            .post("/api/applicationTxns")
+            .exec(http("Create new idProofMaster")
+            .post("/api/idProofMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "firstName":"SAMPLE_TEXT", "middleName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "organization":null, "organizationName":"SAMPLE_TEXT", "designation":"SAMPLE_TEXT", "mobileNo":null, "officeNo":null, "email":"SAMPLE_TEXT", "street":"SAMPLE_TEXT", "plotNo":"SAMPLE_TEXT", "blockNo":"SAMPLE_TEXT", "tanescoMeter":"SAMPLE_TEXT", "waterConnectionUse":"SAMPLE_TEXT", "bStreet":"SAMPLE_TEXT", "ward":"SAMPLE_TEXT", "dma":"SAMPLE_TEXT", "bPlotNo":"SAMPLE_TEXT", "registeredMobile":null, "idNumber":"SAMPLE_TEXT", "propertyDoc":"SAMPLE_TEXT", "can":"SAMPLE_TEXT", "photo":"SAMPLE_TEXT", "status":"0", "meterReading":null, "requestedDate":"2020-01-01T00:00:00.000Z", "connectionDate":"2020-01-01T00:00:00.000Z", "remarks":"SAMPLE_TEXT", "meterNo":"SAMPLE_TEXT", "approvedDate":"2020-01-01T00:00:00.000Z", "deedDoc":"SAMPLE_TEXT", "agreementDoc":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "idProof":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_applicationTxn_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_idProofMaster_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created applicationTxn")
-                .get("${new_applicationTxn_url}")
+                exec(http("Get created idProofMaster")
+                .get("${new_idProofMaster_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created applicationTxn")
-            .delete("${new_applicationTxn_url}")
+            .exec(http("Delete created idProofMaster")
+            .delete("${new_idProofMaster_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

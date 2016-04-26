@@ -59,8 +59,6 @@
             
             <column name="registered_mobile" type="bigint"/>
             
-            <column name="attached_doc_type" type="varchar(255)"/>
-            
             <column name="id_number" type="varchar(255)"/>
             
             <column name="property_doc" type="varchar(255)"/>
@@ -83,12 +81,17 @@
             
             <column name="approved_date" type="date"/>
             
+            <column name="deed_doc" type="varchar(255)"/>
+            
+            <column name="agreement_doc" type="varchar(255)"/>
+            
             <column name="tariff_category_master_id" type="bigint"/>
             <column name="meter_details_id" type="bigint"/>
             <column name="user_id" type="bigint"/>
             <column name="request_at_id" type="bigint"/>
             <column name="division_master_id" type="bigint"/>
             <column name="street_master_id" type="bigint"/>
+            <column name="id_proof_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -127,6 +130,12 @@
                                  constraintName="fk_applicationtxn_streetmaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="street_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_proof_master_id"
+                                 baseTableName="application_txn"
+                                 constraintName="fk_applicationtxn_idproofmaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="id_proof_master"/>
 
     </changeSet>
 </databaseChangeLog>

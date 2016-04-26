@@ -1,13 +1,13 @@
 <div>
-    <h2>DivisionMasters</h2>
+    <h2>IdProofMasters</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="divisionMaster.new" >
+                <button class="btn btn-primary" ui-sref="idProofMaster.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span 
-                       >Create new DivisionMaster
+                       >Create new IdProofMaster
                     </span>
                 </button>
             </div>
@@ -17,34 +17,32 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="divisionName"><span>Division Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="divisionCode"><span>Division Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>IdProof</span></th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="divisionMaster in divisionMasters track by divisionMaster.id">
-                    <td><a ui-sref="divisionMaster.detail({id:divisionMaster.id})">{{divisionMaster.id}}</a></td>
-                    <td>{{divisionMaster.divisionName}}</td>
-                    <td>{{divisionMaster.divisionCode}}</td>
+            <tbody>
+                <tr ng-repeat="idProofMaster in idProofMasters track by idProofMaster.id">
+                    <td><a ui-sref="idProofMaster.detail({id:idProofMaster.id})">{{idProofMaster.id}}</a></td>
+                    <td>{{idProofMaster.idProof}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="divisionMaster.detail({id:divisionMaster.id})"
+                                    ui-sref="idProofMaster.detail({id:idProofMaster.id})"
                                     class="btn btn-info btn-sm"> 
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="divisionMaster.edit({id:divisionMaster.id})"
+                                    ui-sref="idProofMaster.edit({id:idProofMaster.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="divisionMaster.delete({id:divisionMaster.id})"
+                                    ui-sref="idProofMaster.delete({id:idProofMaster.id})"
                                     class="btn btn-danger btn-sm">                                    
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>

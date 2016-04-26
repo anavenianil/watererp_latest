@@ -212,6 +212,15 @@
 							<legend>Documents to be attached </legend>
 							<div class="row">
 								<div class="col-sm-6">
+									<label for="field_idProofMaster">Any among these</label> <select
+										class="form-control" id="field_idProofMaster"
+										name="idProofMaster" ng-model="applicationTxn.idProofMaster"
+										ng-change="disableOrg(applicationTxn.idProofMaster.id)"
+										ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idProofMasters track by idProofMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<!-- <div class="col-sm-6">
 									<label>Any among these</label>
 									<div class="radio">
 										<label class="radio-inline"> <input type="radio"
@@ -233,7 +242,7 @@
 											ng-model="applicationTxn.attachedDocType4">Other Id
 										</label>
 									</div>
-								</div>
+								</div> -->
 								<!-- <div class="col-sm-3">
 								<label class="control-label" for="field_attachedDocType">Selected
 									document</label> <input type="text" class="form-control"
@@ -251,24 +260,15 @@
 								<div class="col-sm-4">
 									<label class="control-label" for="field_propertyDoc">Property
 										Ownership Document</label> <br> <input type="checkbox"
-										ng-model="checkboxModel.value1"
+										ng-model="applicationTxn.deedDoc"
 										ng-true-value="'Tittle Deed/Offer letter'"
-										ng-change="getPropertyVal(checkboxModel.value1,checkboxModel.value2)"
-										ng-false-value="">&nbsp;<span>Tittle Deed/Offer
-										letter </span><br> <input type="checkbox"
-										ng-model="checkboxModel.value2"
-										ng-change="getPropertyVal(checkboxModel.value1, checkboxModel.value2)"
+										ng-false-value="'Not Submitted'">&nbsp;<span>Tittle
+										Deed/Offer letter </span><br> <input type="checkbox"
+										ng-model="applicationTxn.agreementDoc"
 										ng-true-value="'Rented Property-lease-Rent Agreement'"
-										ng-false-value="">&nbsp;<span>Rented Property-
-										lease-Rent Agreement </span>
+										ng-false-value="'Not Submitted'">&nbsp;<span>Rented
+										Property- lease-Rent Agreement </span>
 								</div>
-								<div class="col-sm-6" ng-hide="true">
-									<label class="control-label" for="field_propertyDoc">Property
-										Ownership Document</label> <input type="text" class="form-control"
-										name="propertyDoc" id="field_propertyDoc"
-										ng-model="applicationTxn.propertyDoc" />
-								</div>
-
 							</div>
 						</fieldset>
 						<!-- hidden fields -->

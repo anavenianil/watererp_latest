@@ -2,11 +2,12 @@
 
 angular.module('watererpApp')
     .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
-    		UploadUtil, DateUtils, User) {
+    		UploadUtil, DateUtils, User, IdProofMaster) {
 
     	$scope.applicationTxn = {};
     	$scope.tariffcategorymasters = TariffCategoryMaster.query();
     	$scope.users = User.query();
+    	$scope.idProofMasters = IdProofMaster.query();
     	
     	if($stateParams.id != null){
                 ApplicationTxn.get({id : $stateParams.id}, function(result) {
@@ -120,25 +121,13 @@ angular.module('watererpApp')
 					+ $scope.serverErrorMsg : '';
 		};
 		
-		$scope.getDocType = function(docType){
-			if(docType === 1){
-				$scope.applicationTxn.attachedDocType = "Driving License";
-			}
-			if(docType === 2){
-				$scope.applicationTxn.attachedDocType = "Voter's Id";
-			}
-			if(docType === 3){
-				$scope.applicationTxn.attachedDocType = "Passport";
-			}
-			if(docType === 4){
-				$scope.applicationTxn.attachedDocType = "Other Id";
-			}
-		}
 		
 		$scope.disableOrg = function(categoryId){
-			$scope.applicationTxn.organization = false;
-			$scope.applicationTxn.organizationName = "";
-			$scope.applicationTxn.designation = "";
+			if(categoryId === 1){
+				$scope.applicationTxn.organization = false;
+				$scope.applicationTxn.organizationName = "";
+				$scope.applicationTxn.designation = "";
+			}
 		}
 		
 		$scope.getPropertyVal = function(val1, val2){
