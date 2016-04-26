@@ -22,8 +22,7 @@ public class GetUploadedFile {
 			}
 			return files;
 		} catch (IOException x) {
-			throw new RuntimeException(String.format(
-					"error reading folder %s: %s", dir, x.getMessage()), x);
+			return files; //Will be empty
 		}
 	}
 }
