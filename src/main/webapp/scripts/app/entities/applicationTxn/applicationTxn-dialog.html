@@ -34,6 +34,28 @@
 							</div>
 						</div>
 						<fieldset>
+							<legend>Water Connection Details</legend>
+							<div class="row">
+								<div class="col-sm-6">
+									<label class="control-label" for="field_waterConnectionUse">Water
+										Connection Use</label> <input type="text" class="form-control"
+										name="waterConnectionUse" id="field_waterConnectionUse"
+										ng-model="applicationTxn.waterConnectionUse" />
+								</div>
+								<div class="col-sm-6">
+									<label for="field_tariffCategoryMaster">Connection
+										Category</label> <select class="form-control"
+										id="field_tariffCategoryMaster" name="tariffCategoryMaster"
+										ng-model="applicationTxn.tariffCategoryMaster"
+										ng-change="disableOrg(applicationTxn.tariffCategoryMaster.id)"
+										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
 							<legend>Applicant Details</legend>
 							<div class="row">
 								<div class="col-sm-3">
@@ -84,6 +106,7 @@
 								<div class="col-sm-4">
 									<label class="control-label" for="field_organization">Organization</label>
 									<input type="checkbox" class="form-control" name="organization"
+										ng-disabled="applicationTxn.tariffCategoryMaster.id===1"
 										id="field_organization" ng-model="applicationTxn.organization" />
 								</div>
 								<div class="col-sm-4">
@@ -91,11 +114,12 @@
 										Name</label> <input type="text" class="form-control"
 										name="organizationName" id="field_organizationName"
 										ng-model="applicationTxn.organizationName"
-										ng-disabled="!applicationTxn.organization" />
+										ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===1" />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_designation">Designation</label>
 									<input type="text" class="form-control" name="designation"
+										ng-disabled="applicationTxn.tariffCategoryMaster.id===1"
 										id="field_designation" ng-model="applicationTxn.designation" />
 								</div>
 							</div>
@@ -145,26 +169,6 @@
 										Meter/LUKU No.</label> <input type="text" class="form-control"
 										name="tanescoMeter" id="field_tanescoMeter"
 										ng-model="applicationTxn.tanescoMeter" />
-								</div>
-							</div>
-						</fieldset>
-						<br>
-						<fieldset>
-							<legend>Water Connection Details</legend>
-							<div class="row">
-								<div class="col-sm-6">
-									<label class="control-label" for="field_waterConnectionUse">Water
-										Connection Use</label> <input type="text" class="form-control"
-										name="waterConnectionUse" id="field_waterConnectionUse"
-										ng-model="applicationTxn.waterConnectionUse" />
-								</div>
-								<div class="col-sm-6">
-									<label for="field_tariffCategoryMaster">Connection Category</label> <select
-										class="form-control" id="field_tariffCategoryMaster"
-										name="tariffCategoryMaster" ng-model="applicationTxn.tariffCategoryMaster"
-										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
-										<option value=""></option>
-									</select>
 								</div>
 							</div>
 						</fieldset>
@@ -246,10 +250,25 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<label class="control-label" for="field_propertyDoc">Property
+										Ownership Document</label> <br> <input type="checkbox"
+										ng-model="checkboxModel.value1"
+										ng-true-value="'Tittle Deed/Offer letter'"
+										ng-change="getPropertyVal(checkboxModel.value1,checkboxModel.value2)"
+										ng-false-value="">&nbsp;<span>Tittle Deed/Offer
+										letter </span><br> <input type="checkbox"
+										ng-model="checkboxModel.value2"
+										ng-change="getPropertyVal(checkboxModel.value1, checkboxModel.value2)"
+										ng-true-value="'Rented Property-lease-Rent Agreement'"
+										ng-false-value="">&nbsp;<span>Rented Property-
+										lease-Rent Agreement </span>
+								</div>
+								<div class="col-sm-6" ng-hide="true">
+									<label class="control-label" for="field_propertyDoc">Property
 										Ownership Document</label> <input type="text" class="form-control"
 										name="propertyDoc" id="field_propertyDoc"
 										ng-model="applicationTxn.propertyDoc" />
 								</div>
+
 							</div>
 						</fieldset>
 						<!-- hidden fields -->

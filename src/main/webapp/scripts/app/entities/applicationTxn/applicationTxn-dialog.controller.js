@@ -135,5 +135,25 @@ angular.module('watererpApp')
 			}
 		}
 		
+		$scope.disableOrg = function(categoryId){
+			$scope.applicationTxn.organization = false;
+			$scope.applicationTxn.organizationName = "";
+			$scope.applicationTxn.designation = "";
+		}
+		
+		$scope.getPropertyVal = function(val1, val2){
+			$scope.applicationTxn.propertyDoc ="";
+			if (val1 == null){
+				$scope.applicationTxn.propertyDoc = val2;
+			}
+			if (val2 == null){
+				$scope.applicationTxn.propertyDoc = val1;
+			}
+			else
+			{
+				$scope.applicationTxn.propertyDoc = val1 +" & " + val2;
+			}
+			console.log($scope.applicationTxn.propertyDoc);
+		}
 		
     });
