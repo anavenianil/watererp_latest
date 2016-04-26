@@ -222,6 +222,10 @@ public class BillingService {
 	}
 
 	public void initBillRun() {
+		
+		successRecords = 0;
+		failedRecords = 0;
+		
 		br = new BillRunMaster();
 		br.setArea("0");
 		br.setDate(ZonedDateTime.now());
@@ -318,7 +322,7 @@ public class BillingService {
 				customer.getCan(),
 				customer.getPrevBillMonth().format(
 						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
-			log.debug("Unable to process customer:" + customer.getId()
+			log.debug("Unable to process customer:" + customer.getCan()
 					+ ", getCustInfo returned::"
 					+ CustValidation.ALREADY_BILLED.name());
 
