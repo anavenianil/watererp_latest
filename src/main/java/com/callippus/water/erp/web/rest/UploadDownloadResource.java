@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -56,6 +57,13 @@ public class UploadDownloadResource implements ResourceLoaderAware {
 			bytes = file.getBytes();
 			String tempDir = request.getServletContext().getRealPath(
 					"/WEB-INF/assets/tempDir");
+			
+			File f = new File(tempDir);
+			
+			if(!f.isDirectory())
+			{
+				f.mkdirs();
+			}
 
 			FileOutputStream fos = new FileOutputStream(tempDir
 					+ File.separator + "upload_" + request.getSession().getId()
@@ -74,6 +82,17 @@ public class UploadDownloadResource implements ResourceLoaderAware {
 		String assetPath = ((String) request
 				.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE))
 				.substring("/api/download/".length());
+
+		String saveDir = request.getServletContext().getRealPath(
+				"/WEB-INF/assets/saveDir");
+		
+		File f = new File(saveDir);
+		
+		if(!f.isDirectory())
+		{
+			f.mkdirs();
+		}
+				
 		Resource resource = resourceLoader
 				.getResource("WEB-INF/assets/saveDir/" + assetPath);
 
