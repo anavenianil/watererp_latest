@@ -14,7 +14,7 @@
 								class="form-control" id="id" name="id" ng-model="receipt.id"
 								readonly />
 						</div> -->
-						<div class="col-sm-4">
+						<div class="col-sm-4" ng-hide="true">
 							<label class="control-label" for="field_can">CAN No.</label> <input
 								type="text" class="form-control" name="can" id="field_can"
 								ng-model="receipt.applicationTxn.can" readonly />
@@ -42,7 +42,7 @@
 								class="form-control" id="field_applicationTxn"
 								name="applicationTxn" ng-model="receipt.applicationTxn"
 								ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id"
-								readonly>
+								disabled>
 								<option value=""></option>
 							</select>
 						</div>
