@@ -254,7 +254,25 @@
 						<fieldset>
 							<legend>Approval Details</legend>
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="col-sm-3">
+									<label for="field_divisionMaster">DMA</label> <select
+										class="form-control" id="field_divisionMaster"
+										name="divisionMaster"
+										ng-model="applicationTxn.divisionMaster"
+										ng-change="getStreet(feasibilityStudy.divisionMaster.id)"
+										ng-options="divisionMaster as divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label for="field_streetMaster">Street</label> <select
+										class="form-control" id="field_streetMaster"
+										name="streetMaster" ng-model="applicationTxn.streetMaster"
+										ng-options="streetMaster as streetMaster.streetNo for streetMaster in streetMasters track by streetMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-3">
 									<label for="field_user">Approved By</label> <select
 										class="form-control" id="field_user" name="user"
 										ng-model="applicationTxn.user"
@@ -262,7 +280,7 @@
 										<option value=""></option>
 									</select>
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-3">
 									<label class="control-label" for="field_approvedDate">ApprovedDate</label>
 									<div class="form-group">
 										<div class='input-group date' id='field_approvedDate'>
@@ -281,8 +299,8 @@
 								</div>
 							</div>
 						</fieldset>
-						
-						
+
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"
