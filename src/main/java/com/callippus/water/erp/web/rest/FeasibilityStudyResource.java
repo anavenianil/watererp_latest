@@ -73,6 +73,7 @@ public class FeasibilityStudyResource {
 
         FeasibilityStudy result = feasibilityStudyRepository.save(feasibilityStudy);
         ApplicationTxn applicationTxn = applicationTxnRepository.findOne(feasibilityStudy.getApplicationTxn().getId());
+        applicationTxn.setRemarks(feasibilityStudy.getApplicationTxn().getRemarks());
         applicationTxn.setDivisionMaster(feasibilityStudy.getDivisionMaster());
         applicationTxn.setStreetMaster(feasibilityStudy.getStreetMaster());
         

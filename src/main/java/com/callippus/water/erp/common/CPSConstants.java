@@ -2,6 +2,7 @@ package com.callippus.water.erp.common;
 
 public class CPSConstants {
 	
+	public static final String METERCHANGE = "Meter Change";
 	public static final String WITHOUTMETER = "withoutMeter";
 		//CUSTOMERCOMPLAINTS
 	public static final String CUSTOMERCOMPLAINTS = "customerComplaints";

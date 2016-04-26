@@ -14,9 +14,9 @@
 							<!-- <th>Req. Id</th>
 							<th>Req. No.</th> -->
 							<th>From</th>
-							<th>To</th>
-							<th>Actioned Date</th>
 							<th>Remarks</th>
+							<th>Actioned Date</th>
+							<th>To</th>
 							<th>Status</th>
 							<th>IP Address</th>
 						</tr>
@@ -27,10 +27,10 @@
 							<td>{{item.fileNumber}}</td> -->
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
-							<td>{{item.remarks}}</td>
 							<td>{{item.statusMaster.status}}</td>
 							<td>{{item.ipAddress}}</td>
 						</tr>
@@ -67,9 +67,9 @@
 								<h5 class="list-group-item-heading">{{applicationTxn.id}}</h5>
 							</div>
 							<div class="col-sm-3">
-								<label>RequestDate</label>
+								<label>Request Date</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.requestedDate
-									| date:'medium'}}</h5>
+									| date:'mediumDate'}}</h5>
 							</div>
 						</div>
 					</fieldset>

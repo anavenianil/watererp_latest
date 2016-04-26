@@ -12,6 +12,7 @@ angular.module('watererpApp').controller(
 			$scope.proceedings.streetMaster = {};
 			$scope.divisionCode = '';
 			$scope.streetNo = '';
+			$scope.applicationTxn.can = "";
 
 			$scope.dtmax = new Date();
 
@@ -35,6 +36,22 @@ angular.module('watererpApp').controller(
 			}, function(result) {
 				$scope.proceedings = result;
 			});
+			
+			$scope.getFeasibilityByAppTxn = function(applicationTxnId){
+	        	GetFeasibilityStudy.get({
+	    			applicationTxnId : $stateParams.applicationTxnId
+	    		}, function(result) {
+	    			$scope.feasibilityStudy = result;
+	    			if($scope.feasibilityStudy.id !=null){
+	    			ApplicationTxnService.generateCan(result.id).then(function(response) {
+	    				$scope.applicationTxn.can = response;
+	    			});
+	    			}
+	    			else{
+	    				alert("feasibilityNull");
+	    			}
+	    		});
+	        }
 
 			if ($stateParams.id != null) {
 				$scope.load($stateParams.id);
@@ -42,13 +59,14 @@ angular.module('watererpApp').controller(
 
 			if ($stateParams.applicationTxnId != null) {
 				$scope.load($stateParams.applicationTxnId);
+				$scope.getFeasibilityByAppTxn($stateParams.applicationTxnId);
 			}
 
-			$scope.canGenerate = function(feasibilityId) {
+			/*$scope.canGenerate = function(feasibilityId) {
 				ApplicationTxnService.generateCan(feasibilityId).then(function(response) {
 					$scope.applicationTxn.can = response;
 				});				
-			}
+			}*/
 
 			var onSaveSuccess = function(result) {
 				//ApplicationTxnService.approveRequest($scope.applicationTxn.id,	$scope.applicationTxn.remarks);
@@ -88,4 +106,5 @@ angular.module('watererpApp').controller(
 			$scope.clear = function() {
 				$scope.applicationTxn = {};
 			}
+			
 		});

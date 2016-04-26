@@ -215,13 +215,17 @@ public class BillingService {
 			brd.setStatus(BrdStatus.COMMITTED.getValue());
 			billRunDetailsRepository.save(brd);
 		} catch (Exception e) {
-			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0,254));
+			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0,200));
 			brd.setStatus(BrdStatus.FAILED_COMMIT.getValue());
 			billRunDetailsRepository.save(brd);
 		}
 	}
 
 	public void initBillRun() {
+		
+		successRecords = 0;
+		failedRecords = 0;
+		
 		br = new BillRunMaster();
 		br.setArea("0");
 		br.setDate(ZonedDateTime.now());
@@ -318,7 +322,7 @@ public class BillingService {
 				customer.getCan(),
 				customer.getPrevBillMonth().format(
 						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
-			log.debug("Unable to process customer:" + customer.getId()
+			log.debug("Unable to process customer:" + customer.getCan()
 					+ ", getCustInfo returned::"
 					+ CustValidation.ALREADY_BILLED.name());
 
@@ -340,6 +344,14 @@ public class BillingService {
 
 			dFrom = customer.getPrevBillMonth();
 			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			
+			long billDays = ChronoUnit.DAYS.between(dFrom,
+					dTo);
+			
+			if(billDays  <= 0)
+			{
+				throw new Exception("Invalid From:" + dFrom.format(DateTimeFormatter.ofPattern("yyyyMM"))+" and To:" + dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
+			}
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
@@ -530,7 +542,7 @@ public class BillingService {
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
 			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e));
+					+ CPSUtils.stackTraceToString(e).substring(0,200));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
