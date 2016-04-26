@@ -1,7 +1,7 @@
 
 <div>
 	<h2>
-		<span>CustomerComplaints</span> {{customerComplaints.id}}
+		<span>Customer Complaint Number : </span>{{customerComplaints.id}}
 	</h2>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -40,7 +40,48 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Complaints</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item"></div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label>Complaint Type</label>
+					<h5 class="list-group-item-heading">{{customerComplaints.complaintTypeMaster.complaintType}}</h5>
+				</div>
+			</div>
+			<fieldset>
+				<legend>Bill Details</legend>
+				<div class="row">
+					<div class="col-sm-4">
+								<label class="control-label" for="field_billMonth">Bill Month
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_billMonth'>
+										<input id="field_billMonth" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="customerComplaints.billMonth" max-date="dtmax"
+											is-open="datePickerForBillMonth.status.opened"
+											ng-change="getBillDetail(customerComplaints.billMonth)" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForBillMonthOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+
+
+
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
@@ -56,17 +97,17 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span>RelevantDoc</span></td>
+					<td><span>Relevant Document</span></td>
 					<td><span class="form-control-static">{{customerComplaints.relevantDoc}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>ComplaintBy</span></td>
+					<td><span>Complaint By</span></td>
 					<td><span class="form-control-static">{{customerComplaints.complaintBy}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>ComplaintDate</span></td>
+					<td><span>Complaint Date</span></td>
 					<td><span class="form-control-static">{{customerComplaints.complaintDate
 							| date:'mediumDate'}}</span></td>
 				</tr>
@@ -76,7 +117,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span>complaintTypeMaster</span></td>
+					<td><span>Complaint Type</span></td>
 					<td><a class="form-control-static"
 						ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.complaintTypeMaster.complaintType}}</a>
 					</td>
@@ -91,7 +132,7 @@
 			Back</span>
 	</button>
 	<button type="button" class="btn btn-success pull-right"
-			ng-click="approve(customerComplaints.id)">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-		</button>
+		ng-click="approve(customerComplaints.id)">
+		<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+	</button>
 </div>

@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface BillFullDetailsRepository extends JpaRepository<BillFullDetails,Long> {
 	public BillFullDetails findByCanAndToMonth(String can, String toMonth);
+	
+	public BillFullDetails findByCanAndBillDate(String can, LocalDate billDate);
 }
