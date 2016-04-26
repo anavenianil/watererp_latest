@@ -58,7 +58,7 @@ angular.module('watererpApp')
                 parent: 'customerComplaints',
                 url: '/edit/:id',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustomerComplaintss'
                 },
                 views: {
@@ -70,62 +70,11 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
-            /*.state('customerComplaints.new', {
-                parent: 'customerComplaints',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
-                },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-                        templateUrl: 'scripts/app/entities/customerComplaints/customerComplaints-dialog.html',
-                        controller: 'CustomerComplaintsDialogController',
-                        size: 'lg',
-                        resolve: {
-                            entity: function () {
-                                return {
-                                    remarks: null,
-                                    relevantDoc: null,
-                                    complaintBy: null,
-                                    id: null
-                                };
-                            }
-                        }
-                    }).result.then(function(result) {
-                        $state.go('customerComplaints', null, { reload: true });
-                    }, function() {
-                        $state.go('customerComplaints');
-                    })
-                }]
-            })
-            .state('customerComplaints.edit', {
-                parent: 'customerComplaints',
-                url: '/{id}/edit',
-                data: {
-                    authorities: ['ROLE_USER'],
-                },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-                        templateUrl: 'scripts/app/entities/customerComplaints/customerComplaints-dialog.html',
-                        controller: 'CustomerComplaintsDialogController',
-                        size: 'lg',
-                        resolve: {
-                            entity: ['CustomerComplaints', function(CustomerComplaints) {
-                                return CustomerComplaints.get({id : $stateParams.id});
-                            }]
-                        }
-                    }).result.then(function(result) {
-                        $state.go('customerComplaints', null, { reload: true });
-                    }, function() {
-                        $state.go('^');
-                    })
-                }]
-            })*/
             .state('customerComplaints.delete', {
                 parent: 'customerComplaints',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
