@@ -1,0 +1,29 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "merchantCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "merchantName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "merchantKey",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "currency",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160427084244",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

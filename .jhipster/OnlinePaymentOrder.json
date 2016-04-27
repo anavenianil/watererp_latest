@@ -1,0 +1,37 @@
+{
+    "relationships": [
+    {
+            "relationshipId": 1,
+            "relationshipName": "merchantMaster",
+            "otherEntityName": "merchantMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "serviceCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "amount",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "payBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "userDefinedField",
+            "fieldType": "String" 
+        }
+    ],
+    "changelogDate": "20160427084544",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

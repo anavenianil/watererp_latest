@@ -1,0 +1,50 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myMerchantMasterLabel">Create or edit a MerchantMaster</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="merchantMaster.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_merchantCode">MerchantCode</label>
+            <input type="text" class="form-control" name="merchantCode" id="field_merchantCode"
+                    ng-model="merchantMaster.merchantCode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_merchantName">MerchantName</label>
+            <input type="text" class="form-control" name="merchantName" id="field_merchantName"
+                    ng-model="merchantMaster.merchantName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_merchantKey">MerchantKey</label>
+            <input type="text" class="form-control" name="merchantKey" id="field_merchantKey"
+                    ng-model="merchantMaster.merchantKey"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_currency">Currency</label>
+            <input type="text" class="form-control" name="currency" id="field_currency"
+                    ng-model="merchantMaster.currency"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

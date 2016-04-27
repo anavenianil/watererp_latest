@@ -67,6 +67,7 @@
     <include file="classpath:config/liquibase/changelog/20160413093028_added_entity_MeterStatus.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160426103301_added_entity_IdProofMaster.xml" relativeToChangelogFile="false"/>    
     <include file="classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml" relativeToChangelogFile="false"/>    
     <include file="classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160330052554_added_entity_ItemCategoryMaster.xml" relativeToChangelogFile="false"/>
@@ -97,6 +98,7 @@
 
     <include file="classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160419095001_added_entity_MeterChange.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160426103301_added_entity_IdProofMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160427084244_added_entity_MerchantMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160427084544_added_entity_OnlinePaymentOrder.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>
