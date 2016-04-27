@@ -10,11 +10,6 @@
 						<jh-alert-error></jh-alert-error>
 						<div class="row">
 							<div class="col-sm-4">
-								<label for="id">ID</label> <input type="text"
-									class="form-control" id="id" name="id"
-									ng-model="applicationTxn.id" readonly />
-							</div>
-							<div class="col-sm-4">
 								<label class="control-label" for="field_requestedDate">Requested
 									Date</label>
 								<div class="form-group">
@@ -37,12 +32,6 @@
 							<legend>Water Connection Details</legend>
 							<div class="row">
 								<div class="col-sm-6">
-									<label class="control-label" for="field_waterConnectionUse">Water
-										Connection Use</label> <input type="text" class="form-control"
-										name="waterConnectionUse" id="field_waterConnectionUse"
-										ng-model="applicationTxn.waterConnectionUse" />
-								</div>
-								<div class="col-sm-6">
 									<label for="field_tariffCategoryMaster">Connection
 										Category</label> <select class="form-control"
 										id="field_tariffCategoryMaster" name="tariffCategoryMaster"
@@ -51,6 +40,12 @@
 										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
 										<option value=""></option>
 									</select>
+								</div>
+								<div class="col-sm-6">
+									<label class="control-label" for="field_waterConnectionUse">Water
+										Connection Use</label> <input type="text" class="form-control"
+										name="waterConnectionUse" id="field_waterConnectionUse"
+										ng-model="applicationTxn.waterConnectionUse" />
 								</div>
 							</div>
 						</fieldset>

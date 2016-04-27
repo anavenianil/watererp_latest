@@ -124,7 +124,7 @@
 									<label for="field_streetMaster">Street</label> <select
 										class="form-control" id="field_streetMaster"
 										name="streetMaster" ng-model="feasibilityStudy.streetMaster"
-										ng-options="streetMaster as streetMaster.streetNo for streetMaster in streetMasters track by streetMaster.id">
+										ng-options="streetMaster as streetMaster.streetNo +'-'+ streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id">
 										<option value=""></option>
 									</select>
 								</div>
