@@ -2,20 +2,45 @@
 
 angular.module('watererpApp').controller(
 		'CustomerComplaintsDetailController',
-		function($scope, $filter, $rootScope, $stateParams, entity,
+		function($scope, $filter, $rootScope, $stateParams, 
 				CustomerComplaints, ComplaintTypeMaster,
 				RequestWorkflowHistory, ParseLinks, ApplicationTxnService,
-				BillFullDetailsSvc, DateUtils) {
-			$scope.customerComplaints = entity;
+				BillFullDetailsSvc, DateUtils, BillFullDetailsBillMonths, BillFullDetails) {
+			
+			$scope.customerComplaints = {};
+			$scope.billFullDetailss = [];
+			$scope.can = $scope.customerComplaints.can;
+			$scope.customerComplaints.billMonth = new Date();
 			//$scope.customerComplaints.can ='';
 
+			$scope.getBillDetails = function(can) {
+	            BillFullDetails.query({page: $scope.page, size: 20, can:can}, function(result, headers) {
+	                $scope.links = ParseLinks.parse(headers('link'));
+	                for (var i = 0; i < result.length; i++) {
+	                    $scope.billFullDetailss.push(result[i]);
+	                }
+	            });
+	        };
 			$scope.load = function(id) {
 				CustomerComplaints.get({
 					id : id
 				}, function(result) {
 					$scope.customerComplaints = result;
+					$scope.getBillDetails($scope.customerComplaints.can);
+					
 				});
 			};
+				
+			$scope.getBillById = function (id) {
+	            BillFullDetails.get({id: id}, function(result) {
+	                $scope.billFullDetails = result;
+	            });
+	        };
+						
+			if($stateParams.id != null){
+				$scope.load($stateParams.id);
+			}
+			
 			var unsubscribe = $rootScope.$on(
 					'watererpApp:customerComplaintsUpdate', function(event,
 							result) {
@@ -37,19 +62,8 @@ angular.module('watererpApp').controller(
 				});
 			};*/
 			
-			$scope.getWorkflowHistoryByDomainId = function() {
-	        	$scope.requestWorkflowHistorys = [];
-	            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id, requestId: 3}, function(result, headers) {
-	                $scope.links = ParseLinks.parse(headers('link'));
-	                for (var i = 0; i < result.length; i++) {
-	                    $scope.requestWorkflowHistorys.push(result[i]);
-	                }
-	            });
-	        };
-	        
-			if ($stateParams.id != null) {
-				$scope.getWorkflowHistoryByDomainId();
-			}
+			
+			
 
 			$scope.approve = function(id) {
 				ApplicationTxnService.approveCustComplaint(id);
@@ -80,6 +94,20 @@ angular.module('watererpApp').controller(
 									} else
 										$scope.billFullDetails = result;
 								});
+			}
+			
+			$scope.getWorkflowHistoryByDomainId = function() {
+	        	$scope.requestWorkflowHistorys = [];
+	            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id, requestId: 3}, function(result, headers) {
+	                $scope.links = ParseLinks.parse(headers('link'));
+	                for (var i = 0; i < result.length; i++) {
+	                    $scope.requestWorkflowHistorys.push(result[i]);
+	                }
+	            });
+	        };
+	        
+	        if ($stateParams.id != null) {
+				$scope.getWorkflowHistoryByDomainId();
 			}
 
 		});

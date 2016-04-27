@@ -33,9 +33,9 @@ angular.module('watererpApp')
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'CustomerComplaints', function($stateParams, CustomerComplaints) {
+                   /* entity: ['$stateParams', 'CustomerComplaints', function($stateParams, CustomerComplaints) {
                         return CustomerComplaints.get({id : $stateParams.id});
-                    }]
+                    }]*/
                 }
             })
             .state('customerComplaints.new', {
