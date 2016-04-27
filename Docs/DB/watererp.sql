@@ -1018,7 +1018,8 @@ INSERT INTO `configuration_details` (`id`,`name`,`value`,`description`) VALUES
  (5,'LABOUR CHARGES','20','Used in proceedings'),
  (6,'SITE SURVEY','5','Used in proceedings'),
  (7,'CONNECTION FEE OF A & B','20','Used in proceedings'),
- (8,'APPLICATION FORM FEE','1000','Used in proceedings');
+ (8,'APPLICATION FORM FEE','1000','Used in proceedings'),
+ (9,'ONLINE_PAYMENT_SERVER_URL','http://crystal.tekmindz.com/maxcompp/payapi/v1/unifiedorder','This server will be invoked for making online payments');
 /*!40000 ALTER TABLE `configuration_details` ENABLE KEYS */;
 
 

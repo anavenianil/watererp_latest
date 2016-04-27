@@ -1,10 +1,15 @@
 package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.OnlinePaymentOrder;
+import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.OnlinePaymentOrderRepository;
+import com.callippus.water.erp.service.BillingService;
+import com.callippus.water.erp.service.OnlinePaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -32,7 +38,11 @@ public class OnlinePaymentOrderResource {
         
     @Inject
     private OnlinePaymentOrderRepository onlinePaymentOrderRepository;
-    
+
+
+	@Inject
+	private OnlinePaymentService onlinePaymentService;
+	
     /**
      * POST  /onlinePaymentOrders -> Create a new onlinePaymentOrder.
      */
@@ -42,13 +52,16 @@ public class OnlinePaymentOrderResource {
     @Timed
     public ResponseEntity<OnlinePaymentOrder> createOnlinePaymentOrder(@RequestBody OnlinePaymentOrder onlinePaymentOrder) throws URISyntaxException {
         log.debug("REST request to save OnlinePaymentOrder : {}", onlinePaymentOrder);
+
         if (onlinePaymentOrder.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("onlinePaymentOrder", "idexists", "A new onlinePaymentOrder cannot already have an ID")).body(null);
         }
-        OnlinePaymentOrder result = onlinePaymentOrderRepository.save(onlinePaymentOrder);
-        return ResponseEntity.created(new URI("/api/onlinePaymentOrders/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("onlinePaymentOrder", result.getId().toString()))
-            .body(result);
+        
+        String result = onlinePaymentService.processOrder(onlinePaymentOrder);
+        
+        return ResponseEntity.created(new URI("/api/onlinePaymentOrders/" ))
+            .headers(HeaderUtil.createEntityCreationAlert("onlinePaymentOrder", ""))
+            .body(onlinePaymentOrder);
     }
 
     /**
