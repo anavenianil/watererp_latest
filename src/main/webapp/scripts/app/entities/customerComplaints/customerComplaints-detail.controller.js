@@ -23,7 +23,7 @@ angular.module('watererpApp').controller(
 					});
 			$scope.$on('$destroy', unsubscribe);
 
-			$scope.getWorkflowHistoryByDomainId = function() {
+			/*$scope.getWorkflowHistoryByDomainId = function() {
 				$scope.requestWorkflowHistorys = [];
 				RequestWorkflowHistory.query({
 					page : $scope.page,
@@ -35,7 +35,18 @@ angular.module('watererpApp').controller(
 						$scope.requestWorkflowHistorys.push(result[i]);
 					}
 				});
-			};
+			};*/
+			
+			$scope.getWorkflowHistoryByDomainId = function() {
+	        	$scope.requestWorkflowHistorys = [];
+	            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id, requestId: 3}, function(result, headers) {
+	                $scope.links = ParseLinks.parse(headers('link'));
+	                for (var i = 0; i < result.length; i++) {
+	                    $scope.requestWorkflowHistorys.push(result[i]);
+	                }
+	            });
+	        };
+	        
 			if ($stateParams.id != null) {
 				$scope.getWorkflowHistoryByDomainId();
 			}
