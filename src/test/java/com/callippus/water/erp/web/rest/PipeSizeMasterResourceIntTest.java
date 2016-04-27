@@ -42,8 +42,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PipeSizeMasterResourceIntTest {
 
 
-    private static final Integer DEFAULT_PIPE_SIZE = 1;
-    private static final Integer UPDATED_PIPE_SIZE = 2;
+    private static final Float DEFAULT_PIPE_SIZE = 1F;
+    private static final Float UPDATED_PIPE_SIZE = 2F;
 
     @Inject
     private PipeSizeMasterRepository pipeSizeMasterRepository;
@@ -122,7 +122,7 @@ public class PipeSizeMasterResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(pipeSizeMaster.getId().intValue())))
-                .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE)));
+                .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.doubleValue())));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class PipeSizeMasterResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(pipeSizeMaster.getId().intValue()))
-            .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE));
+            .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.doubleValue()));
     }
 
     @Test

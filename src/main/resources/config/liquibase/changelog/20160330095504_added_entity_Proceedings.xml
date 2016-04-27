@@ -48,6 +48,7 @@
             <column name="connection_fee_percent" type="double"/>
             
             <column name="application_txn_id" type="bigint"/>
+            <column name="pipe_size_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -56,6 +57,12 @@
                                  constraintName="fk_proceedings_applicationtxn_id"
                                  referencedColumnNames="id"
                                  referencedTableName="application_txn"/>
+
+        <addForeignKeyConstraint baseColumnNames="pipe_size_master_id"
+                                 baseTableName="proceedings"
+                                 constraintName="fk_proceedings_pipesizemaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pipe_size_master"/>
 
     </changeSet>
 </databaseChangeLog>

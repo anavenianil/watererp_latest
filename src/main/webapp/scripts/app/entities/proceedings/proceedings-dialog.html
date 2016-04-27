@@ -12,17 +12,21 @@
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
 						<div class="col-sm-3">
-							<label for="id">ID</label> <input type="text"
-								class="form-control" id="id" name="id" ng-model="proceedings.id"
-								readonly />
+							<label>Application No.</label> <input type="text"
+								class="form-control" name="applicationTxn"
+								id="field_applicationTxn"
+								ng-model="proceedings.applicationTxn.id" readonly />
 						</div>
 						<div class="col-sm-3">
-							<!-- <label for="field_applicationTxn">applicationTxn</label> <select
-								class="form-control" id="field_applicationTxn"
-								name="applicationTxn" ng-model="proceedings.applicationTxn"
-								ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
+							<label for="field_pipeSizeMaster">Pipe Size</label> <select
+								class="form-control" id="field_pipeSizeMaster"
+								name="applicationTxn" ng-model="proceedings.pipeSizeMaster"
+								ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipeSizeMasters track by pipeSizeMaster.id">
 								<option value=""></option>
-							</select> -->
+							</select>
+						</div>
+
+						<!-- <div class="col-sm-3">
 							<label>File Number</label> <input list="applicationTxn" type=""
 								class="form-control" ng-model="proceedings.applicationTxn.id" />
 							<datalist id="applicationTxn">
@@ -34,9 +38,10 @@
 							<button type="button"
 								class="btn btn-primary glyphicon glyphicon-search"
 								ng-click="getApplicationTxn(proceedings.applicationTxn.id)"></button>
-						</span>
+						</span> -->
 					</div>
 				</div>
+
 				<br>
 				<fieldset>
 					<legend>Items Required</legend>
@@ -89,13 +94,13 @@
 									ng-model="proceedings.itemRequireds[x].quantity" />
 							</div>
 							<div class="col-sm-2">
-								<input type="number" class="form-control text-right" name="ratePerShs"
-									id="field_ratePerShs"
+								<input type="number" class="form-control text-right"
+									name="ratePerShs" id="field_ratePerShs"
 									ng-model="proceedings.itemRequireds[x].ratePerShs" readonly />
 							</div>
 							<div class="col-sm-2">
-								<input type="number" class="form-control text-right" name="amount"
-									id="field_amount"
+								<input type="number" class="form-control text-right"
+									name="amount" id="field_amount"
 									ng-model="proceedings.itemRequireds[x].amount" readonly />
 							</div>
 						</div>
@@ -118,8 +123,9 @@
 						<label class="control-label" for="field_subTotalA">SubTotalA</label>
 					</div>
 					<div class="col-sm-2">
-						<input type="number" class="form-control text-right" name="subTotalA"
-							id="field_subTotalA" ng-model="proceedings.subTotalA" readonly />
+						<input type="number" class="form-control text-right"
+							name="subTotalA" id="field_subTotalA"
+							ng-model="proceedings.subTotalA" readonly />
 					</div>
 				</div>
 				<br>
@@ -135,8 +141,8 @@
 					</div>
 					<div class="col-sm-2 col-md-offset-7">
 						<!-- <label class="control-label" for="field_supervisionCharge">SupervisionCharge</label> -->
-						<input type="number" class="form-control text-right" name="supervisionCharge"
-							id="field_supervisionCharge"
+						<input type="number" class="form-control text-right"
+							name="supervisionCharge" id="field_supervisionCharge"
 							ng-model="proceedings.supervisionCharge" readonly />
 					</div>
 				</div>
@@ -153,9 +159,9 @@
 							ng-model="proceedings.labourChargePercent" readonly />
 					</div>
 					<div class="col-sm-2 col-md-offset-7">
-						<input type="number" class="form-control text-right" name="labourCharge"
-							id="field_labourCharge" ng-model="proceedings.labourCharge"
-							readonly />
+						<input type="number" class="form-control text-right"
+							name="labourCharge" id="field_labourCharge"
+							ng-model="proceedings.labourCharge" readonly />
 					</div>
 				</div>
 				<br>
@@ -171,8 +177,9 @@
 							ng-model="proceedings.siteSurveyPercent" readonly />
 					</div>
 					<div class="col-sm-2 col-md-offset-7">
-						<input type="number" class="form-control text-right" name="siteSurvey"
-							id="field_siteSurvey" ng-model="proceedings.siteSurvey" readonly />
+						<input type="number" class="form-control text-right"
+							name="siteSurvey" id="field_siteSurvey"
+							ng-model="proceedings.siteSurvey" readonly />
 					</div>
 				</div>
 				<br>
@@ -182,8 +189,9 @@
 						<label class="control-label" for="field_subTotalB">SubTotalB</label>
 					</div>
 					<div class="col-sm-2">
-						<input type="number" class="form-control text-right" name="subTotalB"
-							id="field_subTotalB" ng-model="proceedings.subTotalB" readonly />
+						<input type="number" class="form-control text-right"
+							name="subTotalB" id="field_subTotalB"
+							ng-model="proceedings.subTotalB" readonly />
 					</div>
 				</div>
 				<br>
@@ -200,9 +208,9 @@
 					</div>
 					<div class="col-sm-2 col-md-offset-7">
 						<!-- <label class="control-label" for="field_connectionFee">ConnectionFee</label> -->
-						<input type="number" class="form-control text-right" name="connectionFee"
-							id="field_connectionFee" ng-model="proceedings.connectionFee"
-							readonly />
+						<input type="number" class="form-control text-right"
+							name="connectionFee" id="field_connectionFee"
+							ng-model="proceedings.connectionFee" readonly />
 					</div>
 				</div>
 				<br>
@@ -225,8 +233,9 @@
 						<label class="control-label" for="field_grandTotal">GrandTotal</label>
 					</div>
 					<div class="col-sm-2">
-						<input type="number" class="form-control text-right" name="grandTotal"
-							id="field_grandTotal" ng-model="proceedings.grandTotal" readonly />
+						<input type="number" class="form-control text-right"
+							name="grandTotal" id="field_grandTotal"
+							ng-model="proceedings.grandTotal" readonly />
 					</div>
 				</div>
 
@@ -252,6 +261,5 @@
 				</button>
 			</div>
 		</div>
-	</div>
 	</div>
 </form>

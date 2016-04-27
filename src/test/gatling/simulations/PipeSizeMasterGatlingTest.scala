@@ -67,7 +67,7 @@ class PipeSizeMasterGatlingTest extends Simulation {
             .exec(http("Create new pipeSizeMaster")
             .post("/api/pipeSizeMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "pipeSize":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "pipeSize":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_pipeSizeMaster_url")))
             .pause(10)

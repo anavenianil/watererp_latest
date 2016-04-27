@@ -38,13 +38,14 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
-import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
+import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.repository.UserRepository;
@@ -93,6 +94,12 @@ public class ApplicationTxnResource {
     
     @Inject
     private CustMeterMappingRepository custMeterMappingRepository;
+    
+    @Inject
+    private ConfigurationDetailsRepository configurationDetailsRepository;
+    
+    @Inject
+    private ProceedingsRepository proceedingsRepository;
     
     
     /**
@@ -162,6 +169,14 @@ public class ApplicationTxnResource {
             custDetails.setId(null);
             custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
             custDetails.setAddress(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
+            
+            custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
+            custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
+            custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
+            custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
+            
+            custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+            
             CustDetails cd = custDetailsRepository.save(custDetails);
             
             //saving to CustMetermMapping
