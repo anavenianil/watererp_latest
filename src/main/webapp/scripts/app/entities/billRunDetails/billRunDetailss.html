@@ -24,7 +24,7 @@
                     <td>{{billRunDetails.status}}</td>
                     <td>{{billRunDetails.remarks}}</td>
                     <td>
-                        <a ui-sref="billRunDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
+                        <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
                     </td>
                     <td>
                         <a ng-class="{'glyphicon glyphicon-save-file': billRunDetails.billFullDetails.id!=null}" href="/api/billFullDetailss/report/{{billRunDetails.billFullDetails.id}}"></a>

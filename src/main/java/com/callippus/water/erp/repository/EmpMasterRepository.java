@@ -11,13 +11,13 @@ import com.callippus.water.erp.domain.OrgRoleInstance;
 /**
  * Spring Data JPA repository for the EmpMaster entity.
  */
-public interface EmpMasterRepository extends JpaRepository<EmpMaster,Long> {
+public interface EmpMasterRepository extends JpaRepository<EmpMaster, Long> {
 
-    @Query("select empMaster from EmpMaster empMaster where empMaster.user.login = ?#{principal.username}")
-    List<EmpMaster> findByUserIsCurrentUser();
-    
-    @Query("select empMaster.officeId from EmpMaster empMaster where empMaster.user.login = ?#{principal.username}")
-    //@Query("select ori.orgRoleName from OrgRoleInstance ori where ori.id=(select em.officeId from EmpMaster em where em.user.id=(select u.id from User u where u.login=?#{principal.username}))")
-    OrgRoleInstance findOneOfficeId();
+	@Query("select empMaster from EmpMaster empMaster where empMaster.user.login = ?#{principal.username}")
+	List<EmpMaster> findByUserIsCurrentUser();
+
+	@Query("select empMaster.officeId from EmpMaster empMaster where empMaster.user.login = ?#{principal.username}")
+	// @Query("select ori.orgRoleName from OrgRoleInstance ori where ori.id=(select em.officeId from EmpMaster em where em.user.id=(select u.id from User u where u.login=?#{principal.username}))")
+	OrgRoleInstance findOneOfficeId();
 
 }

@@ -1,0 +1,14 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "idProof",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160426103301",
+    "dto": "no",
+    "service": "no",
+    "pagination": "no"
+}

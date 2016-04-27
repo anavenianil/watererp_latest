@@ -160,6 +160,8 @@ public class ApplicationTxnResource {
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
             
             custDetails.setId(null);
+            custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            custDetails.setAddress(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             CustDetails cd = custDetailsRepository.save(custDetails);
             
             //saving to CustMetermMapping
@@ -362,7 +364,7 @@ public class ApplicationTxnResource {
 			throws Exception{
 		log.debug("REST request to get CAN : {}");
 		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(feasibilityId);
-		String division = feasibility.getDivisionMaster().getDivisionName();
+		String division = feasibility.getDivisionMaster().getDivisionCode();
 		String street = feasibility.getStreetMaster().getStreetNo();
 		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
 		Integer can = applicationTxnRepository.findByCan(division, street);

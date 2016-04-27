@@ -93,6 +93,8 @@
 								<label>Organization Name</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.organizationName}}</h5>
 							</div>
+						</div>
+						<div class="row">
 							<div class="col-sm-3">
 								<label>Designation</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.designation}}</h5>
@@ -167,8 +169,8 @@
 								<h5 class="list-group-item-heading">{{applicationTxn.bPlotNo}}</h5>
 							</div>
 							<div class="col-sm-3">
-								<label>Regitered Mobile</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.regiterMobile}}</h5>
+								<label>Registered Mobile</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.registeredMobile}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -177,15 +179,16 @@
 						<div class="row">
 							<div class="col-sm-3">
 								<label>Attached Document</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.attachedDocType}}</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.idProofMaster.idProof}}</h5>
 							</div>
 							<div class="col-sm-3">
 								<label>Id Number</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.idNumber}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-6">
 								<label>Property Ownership Document </label>
-								<h5 class="list-group-item-heading">{{applicationTxn.propertyDoc}}</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.deedDoc}}</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.agreementDoc}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -239,33 +242,13 @@
 			ui-sref="applicationTxnClose({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Complete
 		</button>
-
-		<!-- <button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===7"
-			ui-sref="applicationTxnCreateCan({applicationTxnId:applicationTxn.id})">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Create CAN
-		</button> -->
-
-
-		<!-- <button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===6"
-			ui-sref="receiptForAppTxn({applicationTxnId:applicationTxn.id})">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
-		</button> -->
-
-
-
-
-
-
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-danger pull-right"
+			ng-show="applicationTxn.status<8"
 			ng-click="declineRequest(applicationTxn.id)">
 			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
 		</button>
-
-
 		<button type="submit" onclick="window.history.back()"
 			class="btn btn-info">
 			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
