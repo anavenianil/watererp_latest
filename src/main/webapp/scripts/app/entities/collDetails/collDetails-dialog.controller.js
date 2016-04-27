@@ -105,7 +105,6 @@ angular.module('watererpApp').controller(
 			}
 
 			$scope.onSelect = function($item, $model, $label) {
-				console.log($item);
 				var arr = $item.split("-");
 				$scope.collDetails = {};
 				$scope.collDetails.can = arr[0];
@@ -166,7 +165,7 @@ angular.module('watererpApp').controller(
 			}
 
 			$scope.resetInstr = function(paymentMode) {
-				if (paymentMode === 'CASH') {
+				if (paymentMode.toUpperCase() === 'CASH') {
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;
