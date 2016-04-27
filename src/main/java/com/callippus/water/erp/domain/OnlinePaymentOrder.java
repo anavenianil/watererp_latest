@@ -2,6 +2,7 @@ package com.callippus.water.erp.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,6 +33,15 @@ public class OnlinePaymentOrder implements Serializable {
 
     @Column(name = "user_defined_field")
     private String userDefinedField;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "order_time")
+    private ZonedDateTime orderTime;
 
     @ManyToOne
     @JoinColumn(name = "merchant_master_id")
@@ -77,6 +87,30 @@ public class OnlinePaymentOrder implements Serializable {
         this.userDefinedField = userDefinedField;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public ZonedDateTime getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(ZonedDateTime orderTime) {
+        this.orderTime = orderTime;
+    }
+
     public MerchantMaster getMerchantMaster() {
         return merchantMaster;
     }
@@ -110,6 +144,9 @@ public class OnlinePaymentOrder implements Serializable {
             ", amount='" + amount + "'" +
             ", payBy='" + payBy + "'" +
             ", userDefinedField='" + userDefinedField + "'" +
+            ", email='" + email + "'" +
+            ", phone='" + phone + "'" +
+            ", orderTime='" + orderTime + "'" +
             '}';
     }
 }

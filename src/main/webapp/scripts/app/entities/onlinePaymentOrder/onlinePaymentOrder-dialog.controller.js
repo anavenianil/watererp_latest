@@ -34,4 +34,13 @@ angular.module('watererpApp').controller('OnlinePaymentOrderDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+        $scope.datePickerForOrderTime = {};
+
+        $scope.datePickerForOrderTime.status = {
+            opened: false
+        };
+
+        $scope.datePickerForOrderTimeOpen = function($event) {
+            $scope.datePickerForOrderTime.status.opened = true;
+        };
 }]);

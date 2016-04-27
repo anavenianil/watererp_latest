@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('OnlinePaymentOrderController', function ($scope, $state, OnlinePaymentOrder, ParseLinks) {
+    .controller('OnlinePaymentCallbackController', function ($scope, $state, OnlinePaymentCallback, ParseLinks) {
 
-        $scope.onlinePaymentOrders = [];
+        $scope.onlinePaymentCallbacks = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            OnlinePaymentOrder.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            OnlinePaymentCallback.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.onlinePaymentOrders.push(result[i]);
+                    $scope.onlinePaymentCallbacks.push(result[i]);
                 }
             });
         };
         $scope.reset = function() {
             $scope.page = 0;
-            $scope.onlinePaymentOrders = [];
+            $scope.onlinePaymentCallbacks = [];
             $scope.loadAll();
         };
         $scope.loadPage = function(page) {
@@ -33,14 +33,14 @@ angular.module('watererpApp')
         };
 
         $scope.clear = function () {
-            $scope.onlinePaymentOrder = {
+            $scope.onlinePaymentCallback = {
+                currency: null,
+                paymentMode: null,
                 serviceCode: null,
-                amount: null,
-                payBy: null,
+                message: null,
+                responseCode: null,
+                totalAmountPaid: null,
                 userDefinedField: null,
-                email: null,
-                phone: null,
-                orderTime: null,
                 id: null
             };
         };

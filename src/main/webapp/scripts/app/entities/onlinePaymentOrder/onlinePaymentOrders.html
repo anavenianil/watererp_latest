@@ -20,6 +20,9 @@
                     <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="payBy"><span>PayBy</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="userDefinedField"><span>UserDefinedField</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phone"><span>Phone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderTime"><span>OrderTime</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="merchantMaster.id"><span>merchantMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -31,6 +34,9 @@
                     <td>{{onlinePaymentOrder.amount}}</td>
                     <td>{{onlinePaymentOrder.payBy}}</td>
                     <td>{{onlinePaymentOrder.userDefinedField}}</td>
+                    <td>{{onlinePaymentOrder.email}}</td>
+                    <td>{{onlinePaymentOrder.phone}}</td>
+                    <td>{{onlinePaymentOrder.orderTime | date:'medium'}}</td>
                     <td>
                         <a ui-sref="merchantMaster.detail({id:onlinePaymentOrder.merchantMaster.id})">{{onlinePaymentOrder.merchantMaster.id}}</a>
                     </td>

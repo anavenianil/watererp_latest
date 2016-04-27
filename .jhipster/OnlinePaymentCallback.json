@@ -6,46 +6,53 @@
             "otherEntityName": "merchantMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+     },    
+     {
+            "relationshipId": 2,
+            "relationshipName": "onlinePaymentOrder",
+            "otherEntityName": "onlinePaymentOrder",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
      }
     ],
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "serviceCode",
+            "fieldName": "currency",
             "fieldType": "String"
         },
         {
             "fieldId": 2,
-            "fieldName": "amount",
+            "fieldName": "paymentMode",
             "fieldType": "String"
         },
         {
             "fieldId": 3,
-            "fieldName": "payBy",
+            "fieldName": "serviceCode",
             "fieldType": "String"
         },
         {
             "fieldId": 4,
-            "fieldName": "userDefinedField",
-            "fieldType": "String" 
+            "fieldName": "message",
+            "fieldType": "String"
         },
         {
             "fieldId": 5,
-            "fieldName": "email",
-            "fieldType": "String" 
+            "fieldName": "responseCode",
+            "fieldType": "String"
         },
         {
             "fieldId": 6,
-            "fieldName": "phone",
-            "fieldType": "String" 
+            "fieldName": "totalAmountPaid",
+            "fieldType": "Float"
         },
         {
             "fieldId": 7,
-            "fieldName": "orderTime",
-            "fieldType": "ZonedDateTime" 
+            "fieldName": "userDefinedField",
+            "fieldType": "String"
         }
     ],
-    "changelogDate": "20160427084544",
+    "changelogDate": "20160427105244",
     "dto": "no",
     "service": "no",
     "pagination": "infinite-scroll"

@@ -23,6 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,6 +45,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class OnlinePaymentOrderResourceIntTest {
 
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
+
     private static final String DEFAULT_SERVICE_CODE = "AAAAA";
     private static final String UPDATED_SERVICE_CODE = "BBBBB";
     private static final String DEFAULT_AMOUNT = "AAAAA";
@@ -49,6 +55,14 @@ public class OnlinePaymentOrderResourceIntTest {
     private static final String UPDATED_PAY_BY = "BBBBB";
     private static final String DEFAULT_USER_DEFINED_FIELD = "AAAAA";
     private static final String UPDATED_USER_DEFINED_FIELD = "BBBBB";
+    private static final String DEFAULT_EMAIL = "AAAAA";
+    private static final String UPDATED_EMAIL = "BBBBB";
+    private static final String DEFAULT_PHONE = "AAAAA";
+    private static final String UPDATED_PHONE = "BBBBB";
+
+    private static final ZonedDateTime DEFAULT_ORDER_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_ORDER_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_ORDER_TIME_STR = dateTimeFormatter.format(DEFAULT_ORDER_TIME);
 
     @Inject
     private OnlinePaymentOrderRepository onlinePaymentOrderRepository;
@@ -80,6 +94,9 @@ public class OnlinePaymentOrderResourceIntTest {
         onlinePaymentOrder.setAmount(DEFAULT_AMOUNT);
         onlinePaymentOrder.setPayBy(DEFAULT_PAY_BY);
         onlinePaymentOrder.setUserDefinedField(DEFAULT_USER_DEFINED_FIELD);
+        onlinePaymentOrder.setEmail(DEFAULT_EMAIL);
+        onlinePaymentOrder.setPhone(DEFAULT_PHONE);
+        onlinePaymentOrder.setOrderTime(DEFAULT_ORDER_TIME);
     }
 
     @Test
@@ -102,6 +119,9 @@ public class OnlinePaymentOrderResourceIntTest {
         assertThat(testOnlinePaymentOrder.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testOnlinePaymentOrder.getPayBy()).isEqualTo(DEFAULT_PAY_BY);
         assertThat(testOnlinePaymentOrder.getUserDefinedField()).isEqualTo(DEFAULT_USER_DEFINED_FIELD);
+        assertThat(testOnlinePaymentOrder.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testOnlinePaymentOrder.getPhone()).isEqualTo(DEFAULT_PHONE);
+        assertThat(testOnlinePaymentOrder.getOrderTime()).isEqualTo(DEFAULT_ORDER_TIME);
     }
 
     @Test
@@ -118,7 +138,10 @@ public class OnlinePaymentOrderResourceIntTest {
                 .andExpect(jsonPath("$.[*].serviceCode").value(hasItem(DEFAULT_SERVICE_CODE.toString())))
                 .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.toString())))
                 .andExpect(jsonPath("$.[*].payBy").value(hasItem(DEFAULT_PAY_BY.toString())))
-                .andExpect(jsonPath("$.[*].userDefinedField").value(hasItem(DEFAULT_USER_DEFINED_FIELD.toString())));
+                .andExpect(jsonPath("$.[*].userDefinedField").value(hasItem(DEFAULT_USER_DEFINED_FIELD.toString())))
+                .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+                .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
+                .andExpect(jsonPath("$.[*].orderTime").value(hasItem(DEFAULT_ORDER_TIME_STR)));
     }
 
     @Test
@@ -135,7 +158,10 @@ public class OnlinePaymentOrderResourceIntTest {
             .andExpect(jsonPath("$.serviceCode").value(DEFAULT_SERVICE_CODE.toString()))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.toString()))
             .andExpect(jsonPath("$.payBy").value(DEFAULT_PAY_BY.toString()))
-            .andExpect(jsonPath("$.userDefinedField").value(DEFAULT_USER_DEFINED_FIELD.toString()));
+            .andExpect(jsonPath("$.userDefinedField").value(DEFAULT_USER_DEFINED_FIELD.toString()))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
+            .andExpect(jsonPath("$.orderTime").value(DEFAULT_ORDER_TIME_STR));
     }
 
     @Test
@@ -159,6 +185,9 @@ public class OnlinePaymentOrderResourceIntTest {
         onlinePaymentOrder.setAmount(UPDATED_AMOUNT);
         onlinePaymentOrder.setPayBy(UPDATED_PAY_BY);
         onlinePaymentOrder.setUserDefinedField(UPDATED_USER_DEFINED_FIELD);
+        onlinePaymentOrder.setEmail(UPDATED_EMAIL);
+        onlinePaymentOrder.setPhone(UPDATED_PHONE);
+        onlinePaymentOrder.setOrderTime(UPDATED_ORDER_TIME);
 
         restOnlinePaymentOrderMockMvc.perform(put("/api/onlinePaymentOrders")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -173,6 +202,9 @@ public class OnlinePaymentOrderResourceIntTest {
         assertThat(testOnlinePaymentOrder.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testOnlinePaymentOrder.getPayBy()).isEqualTo(UPDATED_PAY_BY);
         assertThat(testOnlinePaymentOrder.getUserDefinedField()).isEqualTo(UPDATED_USER_DEFINED_FIELD);
+        assertThat(testOnlinePaymentOrder.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testOnlinePaymentOrder.getPhone()).isEqualTo(UPDATED_PHONE);
+        assertThat(testOnlinePaymentOrder.getOrderTime()).isEqualTo(UPDATED_ORDER_TIME);
     }
 
     @Test

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the OnlinePaymentOrder entity.
+ * Performance test for the OnlinePaymentCallback entity.
  */
-class OnlinePaymentOrderGatlingTest extends Simulation {
+class OnlinePaymentCallbackGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class OnlinePaymentOrderGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the OnlinePaymentOrder entity")
+    val scn = scenario("Test the OnlinePaymentCallback entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class OnlinePaymentOrderGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all onlinePaymentOrders")
-            .get("/api/onlinePaymentOrders")
+            exec(http("Get all onlinePaymentCallbacks")
+            .get("/api/onlinePaymentCallbacks")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new onlinePaymentOrder")
-            .post("/api/onlinePaymentOrders")
+            .exec(http("Create new onlinePaymentCallback")
+            .post("/api/onlinePaymentCallbacks")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "serviceCode":"SAMPLE_TEXT", "amount":"SAMPLE_TEXT", "payBy":"SAMPLE_TEXT", "userDefinedField":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT", "orderTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "currency":"SAMPLE_TEXT", "paymentMode":"SAMPLE_TEXT", "serviceCode":"SAMPLE_TEXT", "message":"SAMPLE_TEXT", "responseCode":"SAMPLE_TEXT", "totalAmountPaid":null, "userDefinedField":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_onlinePaymentOrder_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_onlinePaymentCallback_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created onlinePaymentOrder")
-                .get("${new_onlinePaymentOrder_url}")
+                exec(http("Get created onlinePaymentCallback")
+                .get("${new_onlinePaymentCallback_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created onlinePaymentOrder")
-            .delete("${new_onlinePaymentOrder_url}")
+            .exec(http("Delete created onlinePaymentCallback")
+            .delete("${new_onlinePaymentCallback_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

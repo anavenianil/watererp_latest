@@ -14,30 +14,35 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity OnlinePaymentOrder.
+        Added the entity OnlinePaymentCallback.
     -->
-    <changeSet id="20160427084544" author="jhipster">
-        <createTable tableName="online_payment_order">
+    <changeSet id="20160427105244" author="jhipster">
+        <createTable tableName="online_payment_callback">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="currency" type="varchar(255)"/>
+            <column name="payment_mode" type="varchar(255)"/>
             <column name="service_code" type="varchar(255)"/>
-            <column name="amount" type="varchar(255)"/>
-            <column name="pay_by" type="varchar(255)"/>
+            <column name="message" type="varchar(255)"/>
+            <column name="response_code" type="varchar(255)"/>
+            <column name="total_amount_paid" type="${floatType}"/>
             <column name="user_defined_field" type="varchar(255)"/>
-            <column name="email" type="varchar(255)"/>
-            <column name="phone" type="varchar(255)"/>
-            <column name="order_time" type="timestamp"/>
             <column name="merchant_master_id" type="bigint"/>
+            <column name="online_payment_order_id" type="bigint"/>
         </createTable>
-        <dropDefaultValue tableName="online_payment_order" columnName="order_time" columnDataType="datetime"/>
-
         
         <addForeignKeyConstraint baseColumnNames="merchant_master_id"
-                                 baseTableName="online_payment_order"
-                                 constraintName="fk_onlinepaymentorder_merchantmaster_id"
+                                 baseTableName="online_payment_callback"
+                                 constraintName="fk_onlinepaymentcallback_merchantmaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="merchant_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="online_payment_order_id"
+                                 baseTableName="online_payment_callback"
+                                 constraintName="fk_onlinepaymentcallback_onlinepaymentorder_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="online_payment_order"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the OnlinePaymentOrder entity.
+ * Performance test for the OnlinePaymentResponse entity.
  */
-class OnlinePaymentOrderGatlingTest extends Simulation {
+class OnlinePaymentResponseGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class OnlinePaymentOrderGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the OnlinePaymentOrder entity")
+    val scn = scenario("Test the OnlinePaymentResponse entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class OnlinePaymentOrderGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all onlinePaymentOrders")
-            .get("/api/onlinePaymentOrders")
+            exec(http("Get all onlinePaymentResponses")
+            .get("/api/onlinePaymentResponses")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new onlinePaymentOrder")
-            .post("/api/onlinePaymentOrders")
+            .exec(http("Create new onlinePaymentResponse")
+            .post("/api/onlinePaymentResponses")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "serviceCode":"SAMPLE_TEXT", "amount":"SAMPLE_TEXT", "payBy":"SAMPLE_TEXT", "userDefinedField":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT", "orderTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "responseCode":"SAMPLE_TEXT", "responseTime":"2020-01-01T00:00:00.000Z", "redirectUrl":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_onlinePaymentOrder_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_onlinePaymentResponse_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created onlinePaymentOrder")
-                .get("${new_onlinePaymentOrder_url}")
+                exec(http("Get created onlinePaymentResponse")
+                .get("${new_onlinePaymentResponse_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created onlinePaymentOrder")
-            .delete("${new_onlinePaymentOrder_url}")
+            .exec(http("Delete created onlinePaymentResponse")
+            .delete("${new_onlinePaymentResponse_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

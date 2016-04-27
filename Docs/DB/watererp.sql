@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.0.24-community-nt
+-- Server version	5.0.24-community-nt-log
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -888,48 +888,6 @@ CREATE TABLE `category_pipe_size_mapping` (
 
 /*!40000 ALTER TABLE `category_pipe_size_mapping` DISABLE KEYS */;
 /*!40000 ALTER TABLE `category_pipe_size_mapping` ENABLE KEYS */;
-
-
---
--- Table structure for table `watererp`.`cdx`
---
-
-DROP TABLE IF EXISTS `cdx`;
-CREATE TABLE `cdx` (
-  `id` bigint(20) NOT NULL default '0',
-  `reversal_ref` varchar(255) default NULL,
-  `receipt_no` varchar(255) default NULL,
-  `receipt_amt` varchar(255) default NULL,
-  `receipt_dt` date default NULL,
-  `receipt_time` varchar(255) default NULL,
-  `receipt_mode` varchar(255) default NULL,
-  `instr_no` varchar(255) default NULL,
-  `instr_dt` date default NULL,
-  `instr_issuer` varchar(255) default NULL,
-  `svr_status` varchar(255) default NULL,
-  `can` varchar(255) default NULL,
-  `cons_name` varchar(255) default NULL,
-  `terminal_id` varchar(255) default NULL,
-  `coll_time` timestamp NULL default NULL,
-  `txn_status` varchar(255) default NULL,
-  `meter_reader_id` varchar(255) default NULL,
-  `user_id` varchar(255) default NULL,
-  `remarks` varchar(255) default NULL,
-  `settlement_id` varchar(255) default NULL,
-  `ext_settlement_id` varchar(255) default NULL,
-  `lat` varchar(255) default NULL,
-  `long_i` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`cdx`
---
-
-/*!40000 ALTER TABLE `cdx` DISABLE KEYS */;
-INSERT INTO `cdx` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_time`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`) VALUES 
- (1,'ReversalRef1','ReceiptNo1','ReceiptAmt1','2016-03-18','ReceiptTime1','ReceiptMode1',NULL,'2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI1'),
- (2,'ReversalRef2','ReceiptNo2','ReceiptAmt2','2016-03-18','ReceiptTime2','ReceiptMode2','InstrNo2','2016-03-18',NULL,NULL,NULL,NULL,NULL,'2016-03-18 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'LongI2');
-/*!40000 ALTER TABLE `cdx` ENABLE KEYS */;
 
 
 --
@@ -3167,82 +3125,6 @@ INSERT INTO `customer_complaints` (`id`,`remarks`,`relevant_doc`,`complaint_by`,
 
 
 --
--- Table structure for table `watererp`.`cx`
---
-
-DROP TABLE IF EXISTS `cx`;
-CREATE TABLE `cx` (
-  `id` bigint(20) NOT NULL default '0',
-  `can` varchar(255) NOT NULL,
-  `div_code` varchar(255) default NULL,
-  `sec_code` varchar(255) default NULL,
-  `sec_name` varchar(255) default NULL,
-  `met_reader_code` varchar(255) default NULL,
-  `conn_date` date default NULL,
-  `cons_name` varchar(255) NOT NULL,
-  `house_no` varchar(255) default NULL,
-  `address` varchar(255) default NULL,
-  `city` varchar(255) default NULL,
-  `pin_code` varchar(255) default NULL,
-  `category` varchar(255) default NULL,
-  `pipe_size` float default NULL,
-  `board_meter` varchar(255) default NULL,
-  `sewerage` varchar(255) default NULL,
-  `meter_no` varchar(255) default NULL,
-  `prev_bill_type` varchar(255) default NULL,
-  `prev_bill_month` date default NULL,
-  `prev_avg_kl` float default NULL,
-  `met_reading_dt` date default NULL,
-  `prev_reading` float default NULL,
-  `met_reading_mo` date default NULL,
-  `met_avg_kl` float default NULL,
-  `arrears` float default NULL,
-  `reversal_amt` float default NULL,
-  `installment` float default NULL,
-  `other_charges` float default NULL,
-  `surcharge` float default NULL,
-  `hrs_surcharge` varchar(255) default NULL,
-  `res_units` bigint(20) default NULL,
-  `met_cost_installment` float default NULL,
-  `int_on_arrears` float default NULL,
-  `last_pymt_dt` date default NULL,
-  `last_pymt_amt` float default NULL,
-  `mobile_no` varchar(255) default NULL,
-  `cc_flag` varchar(255) default NULL,
-  `cp_flag` varchar(255) default NULL,
-  `notice_flag` varchar(255) default NULL,
-  `dr_flag` varchar(255) default NULL,
-  `lat` varchar(255) default NULL,
-  `longi` varchar(255) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`cx`
---
-
-/*!40000 ALTER TABLE `cx` DISABLE KEYS */;
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (1,'613427474','15','0614','MADHAPUR','0000','2005-04-19','R.PRATIBHA ANNAPURNA','5-109/10/22','RADHE NAGAR COLONY,GACHIBOWLI','','500032','D',0.5,'F','T','05505137','U','2013-10-01',10,'2016-03-13',0,NULL,10,680.06,0,0,0,0,'F',0,0,5.06,'2013-11-30',2000,'0000000000','1','1','0','1','0','0'),
- (2,'613472557','15','0614','MADHAPUR','0000','2005-05-25','N.MANJULATHA','PLOT NO.21','RADHE NAGAR COLONY,H.S.DARGA','','500032','D',0.5,'F','T','05-1-005551','R','2013-10-01',10,'2016-03-13',0,NULL,10,2785.07,0,0,0,0,'F',0,0,9.57,'2013-11-30',200,'0000000000','0','0','0','1','0','0'),
- (3,'613472562','15','0614','MADHAPUR','0000','2005-05-25','G.MURALI MOHAN','H.NO.33','RADHE NAGAR COLONY,H.S.DARGA.','','500032','D',0.5,'F','T','05-1-004920','R','2013-10-01',15,'2016-03-13',0,NULL,0,6924.29,0,0,0,0,'F',0,0,61.94,'2013-11-30',250,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (4,'613577519','15','0614','MADHAPUR','0000','2005-09-21','K.V.V.BALA SUBRAMANA','PLOT NO.19 SY.47','RADHA NAGAR RAIDURGA,MADHAPUR','','500032','D',0.5,'F','T','05-1-0017909','R','2013-10-01',15,'2016-03-13',0,NULL,6,31417.3,0,0,0,0,'F',0,0,329.73,'2013-11-30',247,'0000000000','0','0','0','1','0','0'),
- (5,'617738493','15','0614','MADHAPUR','0000','2012-08-11','VANIN','3-615/3','PLOT NO. 195','','','D',0.5,'F','T','12B40628','R','2013-10-01',15,'2016-03-13',0,NULL,15,2508.88,0,0,0,0,'F',1,0,6.38,'2013-11-30',260,'0000000000','0','0','0','1','0','0'),
- (6,'617738918','15','0614','MADHAPUR','0000','2012-07-14','K RAVI','1-60/30/138/135','ANJAIAH NAGAR,GACHIBOWLI','','','D',0.5,'F','T','12A19467','L','2013-10-01',15,'2016-03-13',0,'2012-06-01',0,3032.75,3400,0,0,0,'F',1,0,12.75,'2013-11-30',380,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (7,'617757078','15','0614','MADHAPUR','0000','2012-09-10','MALOTH.LACHIRAM NAYAK','1-57/31','RAJEEV NAGAR,GACHIBOWLI','','','D',0.5,'F','T','12B92564','M','2013-10-01',15,'2016-03-13',10000,'2013-10-01',0,2481.38,0,0,0,0,'F',1,0,6.38,'2013-11-30',500,'0000000000','0','0','0','1','0','0'),
- (8,'617757083','15','0614','MADHAPUR','0000','2012-09-15','P HIMA BINDU','1-58/103','RAJEEV NAGAR,GACHIBOWLI','','','D',0.5,'F','T','11B35430','M','2013-10-01',15,'2016-03-13',100000,'2013-10-01',0,2581.38,0,0,0,0,'F',1,0,6.38,'2013-11-30',400,'0000000000','0','0','0','1','0','0'),
- (9,'617757111','15','0614','MADHAPUR','0000','2012-08-20','JAFFAR BEE','H.NO.2-63/2/A3','CHINNA ANJAIAH NAGAR,GACHIBOWL','','','D',0.5,'F','T','12B40792','L','2013-10-01',15,'2016-03-13',0,'2012-07-01',0,2995.56,3187.5,0,0,0,'F',1,0,8.06,'2013-11-30',100,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (10,'617757186','15','0614','MADHAPUR','0000','2012-09-26','SMT.SHIVALINGAMMA','2-62/2/A/10','GACHIBOWLI VILLAGE','','','D',0.5,'F','T','12B36048','L','2013-10-01',15,'2016-03-13',0,'2012-08-01',0,2746.38,2975,0,0,0,'F',1,0,6.38,'2013-11-30',235,'0000000000','0','0','0','1','0','0'),
- (11,'617771922','15','0614','MADHAPUR','0000','2012-11-01','SYED AZEEM','1-14','OLD GACHIBOWLI','','','D',0.5,'F','T','','L','2013-10-01',15,'2016-03-13',0,NULL,0,2100,2550,0,0,0,'F',1,0,0,'2013-11-30',450,'0000000000','0','0','0','1','0','0'),
- (12,'617781451','15','0614','MADHAPUR','0000','2012-11-15','SRINIVAS','1-110/A/32','KONDAPUR W/S COLONY,KONDAPUR','','','D',0.5,'F','T','12B53322','M','2013-10-01',15,'2016-03-13',400000,'2013-10-01',0,1750,0,0,0,0,'F',1,0,0,'2013-11-30',800,'0000000000','0','0','0','1','0','0');
-INSERT INTO `cx` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`) VALUES 
- (13,'617781710','15','0614','MADHAPUR','0000','2012-11-10','K.DEVIDAS','3-618/2,P.NO.540/B','SCB NAGAR,NEW HAFEEZPET','','','D',0.5,'F','T','12B53305','M','2013-10-01',15,'2016-03-13',500000,'2013-10-01',0,2338,0,0,0,0,'F',2,0,0,'2013-11-30',212,'0000000000','0','0','0','1','0','0');
-/*!40000 ALTER TABLE `cx` ENABLE KEYS */;
-
-
---
 -- Table structure for table `watererp`.`databasechangelog`
 --
 
@@ -3380,12 +3262,14 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-04-22 19:18:19',140,'EXECUTED','7:6e10c08ddf0df1489b5948c505662df4','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160426103301','jhipster','classpath:config/liquibase/changelog/20160426103301_added_entity_IdProofMaster.xml','2016-04-27 09:12:30',141,'EXECUTED','7:94a5cf42044a1b16758e77fdaf7ee4a5','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160427084244','jhipster','classpath:config/liquibase/changelog/20160427084244_added_entity_MerchantMaster.xml','2016-04-27 09:15:33',146,'EXECUTED','7:6c558187f8cb1283d0f35b86b24e3d8f','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160427084544','jhipster','classpath:config/liquibase/changelog/20160427084544_added_entity_OnlinePaymentOrder.xml','2016-04-27 09:15:33',147,'EXECUTED','7:8dfd7a5b42d9a13dbc4b8b450c3b2d41','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-27 09:19:48',148,'EXECUTED','7:bc3817fceaf1e83b90459c81f129b3ab','createTable, addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL);
+ ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-04-27 09:19:48',148,'EXECUTED','7:bc3817fceaf1e83b90459c81f129b3ab','createTable, addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
+ ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-04-27 09:19:50',149,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-04-27 09:19:50',149,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
  ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-04-27 09:19:50',150,'EXECUTED','7:5a186495ca7843f3c9eafd0f1e6025b6','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-04-27 09:19:51',151,'EXECUTED','7:74e096fa5e9ab1d7a353aefc6702527a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+ ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-04-27 09:19:51',151,'EXECUTED','7:74e096fa5e9ab1d7a353aefc6702527a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160427084544','jhipster','classpath:config/liquibase/changelog/20160427084544_added_entity_OnlinePaymentOrder.xml','2016-04-27 11:24:06',152,'EXECUTED','7:b7af29c448e281fa91ebb1977e9a1949','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160427104544','jhipster','classpath:config/liquibase/changelog/20160427104544_added_entity_OnlinePaymentResponse.xml','2016-04-27 11:24:07',153,'EXECUTED','7:22777342fbdee7e45f241adad109e865','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160427105244','jhipster','classpath:config/liquibase/changelog/20160427105244_added_entity_OnlinePaymentCallback.xml','2016-04-27 11:24:07',154,'EXECUTED','7:537fa3ba05cacd4a5c25a5c6e4807f65','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -6153,7 +6037,9 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
 INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
  (33,'Meter Change','#/meterChanges','2016-04-19 00:00:00'),
  (34,'Without Meter','#/applicationTxns/withoutMeter','2016-04-20 00:00:00'),
- (35,'Bill Details','#/billDetailss/new','2016-04-18 00:00:00');
+ (35,'Bill Details','#/billDetailss/new','2016-04-18 00:00:00'),
+ (36,'Merchant Master','#/merchantMasters','2016-04-18 00:00:00'),
+ (37,'Online Payment Order','#/onlinePaymentOrder','2016-04-18 00:00:00');
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -6213,8 +6099,9 @@ INSERT INTO `menu_item2_url` (`id`,`menu_item_id`,`url_id`) VALUES
  (32,32,32),
  (33,33,33),
  (34,34,34),
- (35,NULL,NULL),
- (36,35,35);
+ (35,35,35),
+ (36,36,39),
+ (37,37,40);
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
 
 
@@ -6407,9 +6294,10 @@ INSERT INTO `module` (`id`,`name`,`priority`,`modified_date`,`server_url`) VALUE
  (1,'Role Management',1,'2016-03-09 00:00:00','roleManagement'),
  (2,'Connection',2,'2016-03-10 00:00:00','connection'),
  (3,'Items Details',3,'2016-03-30 00:00:00','itemDetails'),
- (4,'Billing and Collection',3,'2016-03-15 00:00:00','billingAndCollection'),
- (5,'Customer Care',4,'2016-03-29 00:00:00','customerCare'),
- (6,'Bill Cycle Run',5,'2016-04-04 00:00:00','billCycleRun');
+ (4,'Billing and Collection',4,'2016-03-15 00:00:00','billingAndCollection'),
+ (5,'Customer Care',5,'2016-03-29 00:00:00','customerCare'),
+ (6,'Bill Cycle Run',6,'2016-04-04 00:00:00','billCycleRun'),
+ (7,'Online Payment',7,'2016-04-04 00:00:00','onlinePayment');
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 
 
@@ -6470,8 +6358,41 @@ INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VAL
  (32,1,6,32),
  (33,8,2,33),
  (34,9,2,34),
- (35,2,4,35);
+ (35,2,4,35),
+ (36,1,7,36),
+ (37,2,7,37);
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`online_payment_callback`
+--
+
+DROP TABLE IF EXISTS `online_payment_callback`;
+CREATE TABLE `online_payment_callback` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `currency` varchar(255) default NULL,
+  `payment_mode` varchar(255) default NULL,
+  `service_code` varchar(255) default NULL,
+  `message` varchar(255) default NULL,
+  `response_code` varchar(255) default NULL,
+  `total_amount_paid` float default NULL,
+  `user_defined_field` varchar(255) default NULL,
+  `merchant_master_id` bigint(20) default NULL,
+  `online_payment_order_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_onlinepaymentcallback_merchantmaster_id` (`merchant_master_id`),
+  KEY `fk_onlinepaymentcallback_onlinepaymentorder_id` (`online_payment_order_id`),
+  CONSTRAINT `fk_onlinepaymentcallback_onlinepaymentorder_id` FOREIGN KEY (`online_payment_order_id`) REFERENCES `online_payment_order` (`id`),
+  CONSTRAINT `fk_onlinepaymentcallback_merchantmaster_id` FOREIGN KEY (`merchant_master_id`) REFERENCES `merchant_master` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`online_payment_callback`
+--
+
+/*!40000 ALTER TABLE `online_payment_callback` DISABLE KEYS */;
+/*!40000 ALTER TABLE `online_payment_callback` ENABLE KEYS */;
 
 
 --
@@ -6485,6 +6406,9 @@ CREATE TABLE `online_payment_order` (
   `amount` varchar(255) default NULL,
   `pay_by` varchar(255) default NULL,
   `user_defined_field` varchar(255) default NULL,
+  `email` varchar(255) default NULL,
+  `phone` varchar(255) default NULL,
+  `order_time` timestamp NULL,
   `merchant_master_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
   KEY `fk_onlinepaymentorder_merchantmaster_id` (`merchant_master_id`),
@@ -6497,6 +6421,30 @@ CREATE TABLE `online_payment_order` (
 
 /*!40000 ALTER TABLE `online_payment_order` DISABLE KEYS */;
 /*!40000 ALTER TABLE `online_payment_order` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`online_payment_response`
+--
+
+DROP TABLE IF EXISTS `online_payment_response`;
+CREATE TABLE `online_payment_response` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `response_code` varchar(255) default NULL,
+  `response_time` timestamp NULL,
+  `redirect_url` varchar(255) default NULL,
+  `online_payment_order_id` bigint(20) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `fk_onlinepaymentresponse_onlinepaymentorder_id` (`online_payment_order_id`),
+  CONSTRAINT `fk_onlinepaymentresponse_onlinepaymentorder_id` FOREIGN KEY (`online_payment_order_id`) REFERENCES `online_payment_order` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`online_payment_response`
+--
+
+/*!40000 ALTER TABLE `online_payment_response` DISABLE KEYS */;
+/*!40000 ALTER TABLE `online_payment_response` ENABLE KEYS */;
 
 
 --
@@ -7360,62 +7308,6 @@ INSERT INTO `tariff_type_master` (`id`,`tariff_type`) VALUES
 
 
 --
--- Table structure for table `watererp`.`temp_module2_menu_item`
---
-
-DROP TABLE IF EXISTS `temp_module2_menu_item`;
-CREATE TABLE `temp_module2_menu_item` (
-  `id` bigint(20) NOT NULL default '0',
-  `priority` int(11) default NULL,
-  `module_id` bigint(20) default NULL,
-  `menu_item_id` bigint(20) default NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `watererp`.`temp_module2_menu_item`
---
-
-/*!40000 ALTER TABLE `temp_module2_menu_item` DISABLE KEYS */;
-INSERT INTO `temp_module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VALUES 
- (1,1,2,2),
- (2,1,1,1),
- (3,2,1,3),
- (4,3,1,4),
- (5,4,1,5),
- (6,5,1,6),
- (7,6,1,7),
- (8,2,2,8),
- (9,6,2,9),
- (10,3,2,10),
- (11,4,2,11),
- (12,5,2,12),
- (13,1,3,13),
- (14,2,3,14),
- (15,3,3,15),
- (16,4,3,16),
- (17,5,3,17),
- (18,6,3,18),
- (19,7,3,19),
- (20,7,2,20),
- (21,1,4,21),
- (22,2,4,22),
- (23,3,4,23),
- (24,4,4,24),
- (25,5,4,25),
- (26,6,4,26),
- (27,7,4,27),
- (28,8,4,28),
- (29,2,5,29),
- (30,1,5,30),
- (31,2,6,31),
- (32,1,6,32),
- (33,8,2,33),
- (34,9,2,34),
- (35,2,4,35);
-/*!40000 ALTER TABLE `temp_module2_menu_item` ENABLE KEYS */;
-
-
---
 -- Table structure for table `watererp`.`terminal`
 --
 
@@ -7575,7 +7467,9 @@ INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES
  (36,'/account',1),
  (37,'/logout',1);
 INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES 
- (38,'/authentication',1);
+ (38,'/authentication',1),
+ (39,'/merchantMaster',1),
+ (40,'/onlinePaymentOrder',1);
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 
@@ -7655,7 +7549,9 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (54,38,'ROLE_BILLRUN'),
  (55,31,'ROLE_ADMIN'),
  (56,32,'ROLE_ADMIN'),
- (57,30,'ROLE_USER');
+ (57,30,'ROLE_USER'),
+ (58,39,'ROLE_ADMIN'),
+ (59,40,'ROLE_ADMIN');
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 

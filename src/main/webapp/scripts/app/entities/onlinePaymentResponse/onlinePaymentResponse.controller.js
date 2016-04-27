@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('OnlinePaymentOrderController', function ($scope, $state, OnlinePaymentOrder, ParseLinks) {
+    .controller('OnlinePaymentResponseController', function ($scope, $state, OnlinePaymentResponse, ParseLinks) {
 
-        $scope.onlinePaymentOrders = [];
+        $scope.onlinePaymentResponses = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            OnlinePaymentOrder.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            OnlinePaymentResponse.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.onlinePaymentOrders.push(result[i]);
+                    $scope.onlinePaymentResponses.push(result[i]);
                 }
             });
         };
         $scope.reset = function() {
             $scope.page = 0;
-            $scope.onlinePaymentOrders = [];
+            $scope.onlinePaymentResponses = [];
             $scope.loadAll();
         };
         $scope.loadPage = function(page) {
@@ -33,14 +33,10 @@ angular.module('watererpApp')
         };
 
         $scope.clear = function () {
-            $scope.onlinePaymentOrder = {
-                serviceCode: null,
-                amount: null,
-                payBy: null,
-                userDefinedField: null,
-                email: null,
-                phone: null,
-                orderTime: null,
+            $scope.onlinePaymentResponse = {
+                responseCode: null,
+                responseTime: null,
+                redirectUrl: null,
                 id: null
             };
         };

@@ -56,6 +56,9 @@ angular.module('watererpApp')
                                     amount: null,
                                     payBy: null,
                                     userDefinedField: null,
+                                    email: null,
+                                    phone: null,
+                                    orderTime: null,
                                     id: null
                                 };
                             }
