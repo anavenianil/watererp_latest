@@ -4590,7 +4590,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (450,'admin','2016-04-27 10:32:33','AUTHENTICATION_SUCCESS'),
  (451,'customer','2016-04-27 10:42:08','AUTHENTICATION_SUCCESS'),
  (452,'sf0023','2016-04-27 10:49:15','AUTHENTICATION_SUCCESS'),
- (453,'sf0016','2016-04-27 10:49:26','AUTHENTICATION_SUCCESS');
+ (453,'sf0016','2016-04-27 10:49:26','AUTHENTICATION_SUCCESS'),
+ (454,'admin','2016-04-27 11:37:44','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -5563,7 +5564,9 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (452,'remoteAddress','0:0:0:0:0:0:0:1'),
  (452,'sessionId','BE3CA9AECCF3B456184F8BB4B652D6A2'),
  (453,'remoteAddress','0:0:0:0:0:0:0:1'),
- (453,'sessionId','8A5E4F3EAB5E3DB454E8BA1F51D4D74B');
+ (453,'sessionId','8A5E4F3EAB5E3DB454E8BA1F51D4D74B'),
+ (454,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (454,'sessionId','9C6D205CB7DE44D6943CA183F1561A8B');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5590,11 +5593,11 @@ CREATE TABLE `jhi_persistent_token` (
 
 /*!40000 ALTER TABLE `jhi_persistent_token` DISABLE KEYS */;
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('+7U0yycBuHmv+/d33EOmkw==',3,'dMDREmAGWqyusdVWQQ7vYA==','2016-04-27','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('+kuZ8fh+MT05jeTHFp5gmw==',5,'/FPZJ9OhXHNXmMOFgz7obg==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('+Pk/ksqHFtjiZEpwz8IVFw==',3,'mxORTPY9bPxFOvMgRBlUAg==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('+x9pYUuhC9mbEe9rwtR11Q==',3,'moGQ9xPllsRoWmPrNGPN5A==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('/29bYPrVgu1d1Sc7jw0g/A==',3,'8LwcwLZFkj1AZCc96MulbA==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('05WEHC7HjC8z2MUy6LvcGQ==',3,'IPXby/q/37liTuo9FNpGBw==','2016-04-27','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('1+QXFJmIy6UbwHIQ6pxyqw==',15,'HCEI/JsrSbkhfqKDPYVlNQ==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('1/89/HnVJ0I06ozibiv32Q==',3,'CLNg9gJlNZ5pis+a+Q7wXg==','2016-04-01','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
@@ -6039,7 +6042,9 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (34,'Without Meter','#/applicationTxns/withoutMeter','2016-04-20 00:00:00'),
  (35,'Bill Details','#/billDetailss/new','2016-04-18 00:00:00'),
  (36,'Merchant Master','#/merchantMasters','2016-04-18 00:00:00'),
- (37,'Online Payment Order','#/onlinePaymentOrder','2016-04-18 00:00:00');
+ (37,'Online Payment Order','#/onlinePaymentOrders','2016-04-18 00:00:00'),
+ (38,'Online Payment Response','#/onlinePaymentResponses','2016-04-18 00:00:00'),
+ (39,'Online Payment Callback','#/onlinePaymentCallbacks','2016-04-18 00:00:00');
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -6101,7 +6106,9 @@ INSERT INTO `menu_item2_url` (`id`,`menu_item_id`,`url_id`) VALUES
  (34,34,34),
  (35,35,35),
  (36,36,39),
- (37,37,40);
+ (37,37,40),
+ (38,38,41),
+ (39,39,42);
 /*!40000 ALTER TABLE `menu_item2_url` ENABLE KEYS */;
 
 
@@ -6360,7 +6367,9 @@ INSERT INTO `module2_menu_item` (`id`,`priority`,`module_id`,`menu_item_id`) VAL
  (34,9,2,34),
  (35,2,4,35),
  (36,1,7,36),
- (37,2,7,37);
+ (37,2,7,37),
+ (38,3,7,38),
+ (39,4,7,39);
 /*!40000 ALTER TABLE `module2_menu_item` ENABLE KEYS */;
 
 
@@ -7469,7 +7478,9 @@ INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES
 INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES 
  (38,'/authentication',1),
  (39,'/merchantMaster',1),
- (40,'/onlinePaymentOrder',1);
+ (40,'/onlinePaymentOrder',1),
+ (41,'/onlinePaymentResponse',1),
+ (42,'/onlinePaymentCallback',1);
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 
@@ -7551,7 +7562,9 @@ INSERT INTO `url2_role` (`id`,`url_id`,`authority_name`) VALUES
  (56,32,'ROLE_ADMIN'),
  (57,30,'ROLE_USER'),
  (58,39,'ROLE_ADMIN'),
- (59,40,'ROLE_ADMIN');
+ (59,40,'ROLE_ADMIN'),
+ (60,41,'ROLE_ADMIN'),
+ (61,42,'ROLE_ADMIN');
 /*!40000 ALTER TABLE `url2_role` ENABLE KEYS */;
 
 
