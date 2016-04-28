@@ -22,7 +22,7 @@ public class PipeSizeMaster implements Serializable {
 
     @NotNull
     @Column(name = "pipe_size", nullable = false)
-    private Integer pipeSize;
+    private Float pipeSize;
     
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class PipeSizeMaster implements Serializable {
         this.id = id;
     }
 
-    public Integer getPipeSize() {
+    public Float getPipeSize() {
         return pipeSize;
     }
     
-    public void setPipeSize(Integer pipeSize) {
+    public void setPipeSize(Float pipeSize) {
         this.pipeSize = pipeSize;
     }
 

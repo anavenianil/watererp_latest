@@ -76,11 +76,13 @@
 								<th><span>S.No.</span></th>
 								<th jh-sort-by="id"><span>Application No.</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="fullName"><span>First Name</span> <span
+								<th jh-sort-by="fullName"><span>Full Name</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="fullName"><span>Middle Name</span> <span
+								<!-- <th jh-sort-by="fullName"><span>Middle Name</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="fullName"><span>Last Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th> -->
+								<th jh-sort-by="can"><span>CAN</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="category"><span>Category</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
@@ -127,9 +129,10 @@
 								ng-repeat="applicationTxn in applicationTxns track by applicationTxn.id">
 								<td>{{$index+1}}</td>
 								<td>{{applicationTxn.id}}</td>
-								<td>{{applicationTxn.firstName}}</td>
-								<td>{{applicationTxn.middleName}}</td>
-								<td>{{applicationTxn.lastName}}</td>
+								<td>{{applicationTxn.firstName}}&nbsp;{{applicationTxn.middleName}}&nbsp;{{applicationTxn.lastName}}</td>
+								<!-- <td>{{applicationTxn.middleName}}</td>
+								<td>{{applicationTxn.lastName}}</td> -->
+								<td>{{applicationTxn.can}}</td>
 								<td>{{applicationTxn.tariffCategoryMaster.tariffCategory}}</td>
 								<td>{{applicationTxn.divisionMaster.divisionName}}</td>
 								<td>{{applicationTxn.status}}</td>

@@ -13,6 +13,13 @@
             "otherEntityName": "itemRequired",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "proceedings"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "pipeSizeMaster",
+            "otherEntityName": "pipeSizeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityRelationshipName": "proceedings"
         }
     ],
     "fields": [

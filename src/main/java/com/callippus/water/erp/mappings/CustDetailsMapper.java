@@ -14,7 +14,6 @@ import com.callippus.water.erp.domain.CustMeterMapping;
 @Mapper
 public interface CustDetailsMapper {
 	CustDetailsMapper INSTANCE = Mappers.getMapper( CustDetailsMapper.class );
-    
 
 	@Mappings({
 		@Mapping(target = "id", constant = "0"),
@@ -22,14 +21,22 @@ public interface CustDetailsMapper {
 		@Mapping(target = "secCode", source = "blockNo"),
 		@Mapping(target = "secName", source= "bStreet"),
 		@Mapping(target = "connDate", source= "connectionDate"),
-		@Mapping(target = "consName", source= "firstName"),
+		@Mapping(target = "meterFixDate", source= "connectionDate"),
+		@Mapping(target = "metReadingDt", source= "connectionDate"),
 		@Mapping(target = "houseNo", source= "plotNo"),
 		@Mapping(target = "address", source= "ward"),
-		@Mapping(target = "city", source= "dma"),
-		@Mapping(target = "pinCode", source= "bPlotNo"),
 		@Mapping(target = "prevReading", source= "meterReading"),
-		@Mapping(target = "meterFixDate", source= "connectionDate"),
-		@Mapping(target = "metReadingDt", source= "connectionDate")
+		@Mapping(target = "longi", constant= "0"),
+		@Mapping(target = "lat", constant= "0"),
+		@Mapping(target = "drFlag", constant= "0"),
+		@Mapping(target = "noticeFlag", constant= "0"),
+		@Mapping(target = "cpFlag", constant= "0"),
+		@Mapping(target = "ccFlag", constant= "0"),
+		@Mapping(target = "resUnits", constant= "1"),
+		@Mapping(target = "hrsSurcharge", constant= "0.0"),
+		@Mapping(target = "surcharge", constant= "0.0"),
+		@Mapping(target = "otherCharges", constant= "0.0"),
+		@Mapping(target = "prevBillType", constant= "M")
 	})
     CustDetails appTxnToCustDetails(ApplicationTxn applicationTxn);
 	

@@ -67,7 +67,7 @@ class ProceedingsGatlingTest extends Simulation {
             .exec(http("Create new proceedings")
             .post("/api/proceedingss")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "subTotalA":null, "supervisionCharge":null, "labourCharge":null, "siteSurvey":null, "subTotalB":null, "connectionFee":null, "waterMeterShs":null, "applicationFormFee":null, "grandTotal":null}""")).asJSON
+            .body(StringBody("""{"id":null, "subTotalA":null, "supervisionCharge":null, "labourCharge":null, "siteSurvey":null, "subTotalB":null, "connectionFee":null, "waterMeterShs":null, "applicationFormFee":null, "grandTotal":null, "supervisionPercent":null, "labourChargePercent":null, "siteSurveyPercent":null, "ConnectionFeePercent":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_proceedings_url")))
             .pause(10)
