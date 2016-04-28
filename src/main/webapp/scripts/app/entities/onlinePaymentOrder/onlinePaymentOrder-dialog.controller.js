@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('OnlinePaymentOrderDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'OnlinePaymentOrder', 'OnlinePaymentResponseSvc', 'MerchantMaster',
+    ['$scope', '$stateParams', '$window', '$uibModalInstance', 'entity', 'OnlinePaymentOrder', 'OnlinePaymentResponseSvc', 'MerchantMaster',
         function($scope, $stateParams, $window, $uibModalInstance, entity, OnlinePaymentOrder, OnlinePaymentResponseSvc, MerchantMaster) {
 
         $scope.onlinePaymentOrder = entity;
@@ -15,10 +15,10 @@ angular.module('watererpApp').controller('OnlinePaymentOrderDialogController',
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:onlinePaymentOrderUpdate', result);
             $uibModalInstance.close(result);
+            console.log("This is the result:" + JSON.stringify(result));
             $scope.isSaving = false;
-            OnlinePaymentResponseSvc.findByOrder({orderId : result}, function(result) {
-                $scope.onlinePaymentResponse = result;
-                $window.location.href = $scope.onlinePaymentResponse.redirectUrl;
+            OnlinePaymentResponseSvc.findByOrder(result.id).then( function(result) {
+                $window.location.href = result.redirectUrl;
             });
             
             
