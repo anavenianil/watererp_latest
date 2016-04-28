@@ -1,24 +1,13 @@
 package com.callippus.water.erp.service;
 
 import com.callippus.water.erp.common.CPSUtils;
-import com.callippus.water.erp.domain.BillDetails;
-import com.callippus.water.erp.domain.BillFullDetails;
-import com.callippus.water.erp.domain.BillRunDetails;
-import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.domain.ConfigurationDetails;
-import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.OnlinePaymentOrder;
 import com.callippus.water.erp.domain.OnlinePaymentResponse;
-import com.callippus.water.erp.mappings.BillMapper;
-import com.callippus.water.erp.repository.BillDetailsRepository;
-import com.callippus.water.erp.repository.BillFullDetailsRepository;
-import com.callippus.water.erp.repository.BillRunDetailsRepository;
-import com.callippus.water.erp.repository.BillRunMasterRepository;
+import com.callippus.water.erp.domain.UnifiedPayment;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
-import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.OnlinePaymentOrderRepository;
-import com.callippus.water.erp.repository.TariffMasterCustomRepository;
-import com.ning.http.client.providers.netty.util.HttpUtils;
+import com.callippus.water.erp.repository.OnlinePaymentResponseRepository;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -27,30 +16,16 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
-import net.sf.saxon.functions.ParseXml;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 import javax.inject.Inject;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import java.util.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 /**
  * Service class for managing users.
@@ -59,7 +34,7 @@ import java.util.*;
 @Transactional
 public class OnlinePaymentService {
 
-	private final Logger log = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(OnlinePaymentService.class);
 
 	@Inject
@@ -67,19 +42,22 @@ public class OnlinePaymentService {
 
 	@Inject
 	private OnlinePaymentOrderRepository onlinePaymentOrderRepository;
+	
+	@Inject
+	private OnlinePaymentResponseRepository onlinePaymentResponseRepository;
 
 	enum Status {
 		SUCCESS, FAILURE
 	};
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		String xml = "<OrderRequest> <Currency>TSh</Currency> <MerchantKey>5b56ca5b-a882-4224-b3e7-b558e93e6cb0</MerchantKey> <MerchantCode>Test001</MerchantCode> <MerchantName>testmerchant</MerchantName> <ServiceCode>TESTS001</ServiceCode> <PayBy>TIGOPESADIR</PayBy> <Amount>1</Amount> <UserDefinedField>abcd</UserDefinedField> <Parameters> <Parameter name=\"Email\">test@gmail.com</Parameter> <Parameter name=\"Phone\">1234567895</Parameter> </Parameters> </OrderRequest> ";
 
-		String responseXml = "<?xml version='1.0' encoding='UTF8'?><UnifiedPayment><ResponseCode>100</ResponseCode><RedirectUrl>http://IP:PORT/maxcompp/directp</RedirectUrl></UnifiedPayment>";
-		parseXML(responseXml);
+		String responseXml = "<?xml version='1.0' encoding='UTF8'?><UnifiedPayment><ResponseCode>100</ResponseCode><RedirectUrl>http://IP:PORT/maxcompp/directp aymentreceipt.xhtml?txnref=6125783711&amp;name=VCN Test&amp;paymentmode=TESTMOD</RedirectUrl></UnifiedPayment>";
+		UnifiedPayment unifiedPaymentResponse = parseUnifiedPaymentResponse(responseXml);
+		log.debug("This is the unifiedPaymentResponse:" + unifiedPaymentResponse);
 	}
-	
+
 	public String processOrder(OnlinePaymentOrder onlinePaymentOrder) {
 		OnlinePaymentOrder result = onlinePaymentOrderRepository
 				.save(onlinePaymentOrder);
@@ -88,14 +66,26 @@ public class OnlinePaymentService {
 				.findOneByName("ONLINE_PAYMENT_SERVER_URL");
 
 		String xml = buildXML(onlinePaymentOrder);
-
+		OnlinePaymentResponse onlinePaymentResponse = null;
 		try {
 			String response = postXML(xml, new URL(cd.getValue()));
+			
+			UnifiedPayment unifiedPaymentResponse = parseUnifiedPaymentResponse(response);
+			
+			onlinePaymentResponse = new OnlinePaymentResponse();
+			onlinePaymentResponse.setRedirectUrl(unifiedPaymentResponse.getRedirectUrl());
+			onlinePaymentResponse.setResponseCode(unifiedPaymentResponse.getResponseCode());
+			onlinePaymentResponse.setResponseTime(ZonedDateTime.now());
+			onlinePaymentResponse.setOnlinePaymentOrder(result);
+			
+			onlinePaymentResponseRepository.save(onlinePaymentResponse);
+			
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			return "";
 		}
 
-		return "";
+		return onlinePaymentResponse.getRedirectUrl();
 	}
 
 	public String buildXML(OnlinePaymentOrder onlinePaymentOrder) {
@@ -182,42 +172,21 @@ public class OnlinePaymentService {
 		}
 	}
 
-	public static String parseXML(String xml) {
+	public static UnifiedPayment parseUnifiedPaymentResponse(String xml) {
+		UnifiedPayment unifiedPaymentResponse = null;
 		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory
-					.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
+			JAXBContext jaxbContext = JAXBContext.newInstance(UnifiedPayment.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-			// Load the input XML document, parse it and return an instance of
-			// the
-			// Document class.
-			Document document = builder.parse(new InputSource(new StringReader(xml)));
-
-			OnlinePaymentResponse response = new OnlinePaymentResponse();
-			NodeList nodeList = document.getElementsByTagName("ResponseCode");
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				Node node = nodeList.item(i);
-
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element elem = (Element) node;
-
-					// Get the value of the ID attribute.
-					String ID = node.getAttributes().getNamedItem("ResponseCode")
-							.getNodeValue();
-
-					// Get the value of all sub-elements.
-					String firstname = elem.getElementsByTagName("RedirectUrl")
-							.item(0).getChildNodes().item(0).getNodeValue();
-
-				}
-			}
+			unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
+			StringReader reader = new StringReader(xml);
+			unifiedPaymentResponse = (UnifiedPayment) unmarshaller.unmarshal(reader);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
-		finally
-		{
-			return "";
-		}
+		
+		return unifiedPaymentResponse;
+		
 	}
 
 }

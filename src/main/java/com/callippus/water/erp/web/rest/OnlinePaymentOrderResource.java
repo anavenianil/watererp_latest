@@ -34,96 +34,121 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class OnlinePaymentOrderResource {
 
-    private final Logger log = LoggerFactory.getLogger(OnlinePaymentOrderResource.class);
-        
-    @Inject
-    private OnlinePaymentOrderRepository onlinePaymentOrderRepository;
+	private final Logger log = LoggerFactory
+			.getLogger(OnlinePaymentOrderResource.class);
 
+	@Inject
+	private OnlinePaymentOrderRepository onlinePaymentOrderRepository;
 
 	@Inject
 	private OnlinePaymentService onlinePaymentService;
-	
-    /**
-     * POST  /onlinePaymentOrders -> Create a new onlinePaymentOrder.
-     */
-    @RequestMapping(value = "/onlinePaymentOrders",
-        method = RequestMethod.POST,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<OnlinePaymentOrder> createOnlinePaymentOrder(@RequestBody OnlinePaymentOrder onlinePaymentOrder) throws URISyntaxException {
-        log.debug("REST request to save OnlinePaymentOrder : {}", onlinePaymentOrder);
 
-        if (onlinePaymentOrder.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("onlinePaymentOrder", "idexists", "A new onlinePaymentOrder cannot already have an ID")).body(null);
-        }
-        
-        String result = onlinePaymentService.processOrder(onlinePaymentOrder);
-        
-        return ResponseEntity.created(new URI("/api/onlinePaymentOrders/" ))
-            .headers(HeaderUtil.createEntityCreationAlert("onlinePaymentOrder", ""))
-            .body(onlinePaymentOrder);
-    }
+	/**
+	 * POST /onlinePaymentOrders -> Create a new onlinePaymentOrder.
+	 */
+	@RequestMapping(value = "/onlinePaymentOrders", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<OnlinePaymentOrder> createOnlinePaymentOrder(
+			@RequestBody OnlinePaymentOrder onlinePaymentOrder)
+			throws URISyntaxException {
+		log.debug("REST request to save OnlinePaymentOrder : {}",
+				onlinePaymentOrder);
 
-    /**
-     * PUT  /onlinePaymentOrders -> Updates an existing onlinePaymentOrder.
-     */
-    @RequestMapping(value = "/onlinePaymentOrders",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<OnlinePaymentOrder> updateOnlinePaymentOrder(@RequestBody OnlinePaymentOrder onlinePaymentOrder) throws URISyntaxException {
-        log.debug("REST request to update OnlinePaymentOrder : {}", onlinePaymentOrder);
-        if (onlinePaymentOrder.getId() == null) {
-            return createOnlinePaymentOrder(onlinePaymentOrder);
-        }
-        OnlinePaymentOrder result = onlinePaymentOrderRepository.save(onlinePaymentOrder);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("onlinePaymentOrder", onlinePaymentOrder.getId().toString()))
-            .body(result);
-    }
+		if (onlinePaymentOrder.getId() != null) {
+			return ResponseEntity
+					.badRequest()
+					.headers(
+							HeaderUtil
+									.createFailureAlert("onlinePaymentOrder",
+											"idexists",
+											"A new onlinePaymentOrder cannot already have an ID"))
+					.body(null);
+		}
 
-    /**
-     * GET  /onlinePaymentOrders -> get all the onlinePaymentOrders.
-     */
-    @RequestMapping(value = "/onlinePaymentOrders",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<List<OnlinePaymentOrder>> getAllOnlinePaymentOrders(Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of OnlinePaymentOrders");
-        Page<OnlinePaymentOrder> page = onlinePaymentOrderRepository.findAll(pageable); 
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/onlinePaymentOrders");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+		String redirectUrl = onlinePaymentService
+				.processOrder(onlinePaymentOrder);
+		if (!redirectUrl.equals("")) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Location", redirectUrl);
 
-    /**
-     * GET  /onlinePaymentOrders/:id -> get the "id" onlinePaymentOrder.
-     */
-    @RequestMapping(value = "/onlinePaymentOrders/{id}",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<OnlinePaymentOrder> getOnlinePaymentOrder(@PathVariable Long id) {
-        log.debug("REST request to get OnlinePaymentOrder : {}", id);
-        OnlinePaymentOrder onlinePaymentOrder = onlinePaymentOrderRepository.findOne(id);
-        return Optional.ofNullable(onlinePaymentOrder)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+			return new ResponseEntity<OnlinePaymentOrder>(null, headers,
+					HttpStatus.FOUND);
+		} else {
+			return ResponseEntity
+					.ok()
+					.headers(
+							HeaderUtil
+									.createAlert(
+											"Error transacting with Unified Payment Portal",
+											"")).body(onlinePaymentOrder);
+		}
+	}
 
-    /**
-     * DELETE  /onlinePaymentOrders/:id -> delete the "id" onlinePaymentOrder.
-     */
-    @RequestMapping(value = "/onlinePaymentOrders/{id}",
-        method = RequestMethod.DELETE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<Void> deleteOnlinePaymentOrder(@PathVariable Long id) {
-        log.debug("REST request to delete OnlinePaymentOrder : {}", id);
-        onlinePaymentOrderRepository.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("onlinePaymentOrder", id.toString())).build();
-    }
+	/**
+	 * PUT /onlinePaymentOrders -> Updates an existing onlinePaymentOrder.
+	 */
+	@RequestMapping(value = "/onlinePaymentOrders", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<OnlinePaymentOrder> updateOnlinePaymentOrder(
+			@RequestBody OnlinePaymentOrder onlinePaymentOrder)
+			throws URISyntaxException {
+		log.debug("REST request to update OnlinePaymentOrder : {}",
+				onlinePaymentOrder);
+		if (onlinePaymentOrder.getId() == null) {
+			return createOnlinePaymentOrder(onlinePaymentOrder);
+		}
+		OnlinePaymentOrder result = onlinePaymentOrderRepository
+				.save(onlinePaymentOrder);
+		return ResponseEntity
+				.ok()
+				.headers(
+						HeaderUtil.createEntityUpdateAlert(
+								"onlinePaymentOrder", onlinePaymentOrder
+										.getId().toString())).body(result);
+	}
+
+	/**
+	 * GET /onlinePaymentOrders -> get all the onlinePaymentOrders.
+	 */
+	@RequestMapping(value = "/onlinePaymentOrders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<OnlinePaymentOrder>> getAllOnlinePaymentOrders(
+			Pageable pageable) throws URISyntaxException {
+		log.debug("REST request to get a page of OnlinePaymentOrders");
+		Page<OnlinePaymentOrder> page = onlinePaymentOrderRepository
+				.findAll(pageable);
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
+				page, "/api/onlinePaymentOrders");
+		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	}
+
+	/**
+	 * GET /onlinePaymentOrders/:id -> get the "id" onlinePaymentOrder.
+	 */
+	@RequestMapping(value = "/onlinePaymentOrders/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<OnlinePaymentOrder> getOnlinePaymentOrder(
+			@PathVariable Long id) {
+		log.debug("REST request to get OnlinePaymentOrder : {}", id);
+		OnlinePaymentOrder onlinePaymentOrder = onlinePaymentOrderRepository
+				.findOne(id);
+		return Optional.ofNullable(onlinePaymentOrder)
+				.map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+
+	/**
+	 * DELETE /onlinePaymentOrders/:id -> delete the "id" onlinePaymentOrder.
+	 */
+	@RequestMapping(value = "/onlinePaymentOrders/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<Void> deleteOnlinePaymentOrder(@PathVariable Long id) {
+		log.debug("REST request to delete OnlinePaymentOrder : {}", id);
+		onlinePaymentOrderRepository.delete(id);
+		return ResponseEntity
+				.ok()
+				.headers(
+						HeaderUtil.createEntityDeletionAlert(
+								"onlinePaymentOrder", id.toString())).build();
+	}
 }
