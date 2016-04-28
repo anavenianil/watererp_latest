@@ -1,14 +1,17 @@
 package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.OnlinePaymentResponse;
 import com.callippus.water.erp.repository.OnlinePaymentResponseRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,8 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -113,4 +118,19 @@ public class OnlinePaymentResponseResource {
         onlinePaymentResponseRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("onlinePaymentResponse", id.toString())).build();
     }
+    
+
+    @RequestMapping(value = "/onlinePaymentResponses", method = RequestMethod.GET,
+            params = {"orderId"})
+		    public ResponseEntity<OnlinePaymentResponse> getOnlinePaymentResponseByOrderId(@RequestParam(value = "orderId") Long orderId) {
+		        log.debug("REST request to getOnlinePaymentResponse : {}, orderId: {}", orderId);
+		        OnlinePaymentResponse opr = onlinePaymentResponseRepository.findByOrder(orderId);
+		        return Optional.ofNullable(opr)
+		            .map(result -> new ResponseEntity<>(
+		                result,
+		                HttpStatus.OK))
+		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		    }
+        
+    
 }
