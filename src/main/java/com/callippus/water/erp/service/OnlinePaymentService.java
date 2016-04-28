@@ -80,18 +80,16 @@ public class OnlinePaymentService {
 		
 		OnlinePaymentCallback opc = new OnlinePaymentCallback();
 		
-		OnlinePaymentService ops = new OnlinePaymentService();
-		
 		opc.setCurrency(pgResponse.getCurrency());
 		opc.setPaymentMode(pgResponse.getPaymentMode());
 		opc.setResponseCode(pgResponse.getResponseCode());
 		opc.setServiceCode(pgResponse.getServiceCode());
 		opc.setTotalAmountPaid(pgResponse.getTotalAmountPaid());
 		opc.setUserDefinedField(pgResponse.getUserDefinedField());
-		opc.setMerchantMaster(ops.merchantMasterRepository.getByMerchantCode(pgResponse.getMerchantCode()) );
-		opc.setOnlinePaymentOrder(ops.onlinePaymentOrderRepository.findOne(pgResponse.getMerchantRefNumber()));
+		opc.setMerchantMaster(merchantMasterRepository.getByMerchantCode(pgResponse.getMerchantCode()) );
+		opc.setOnlinePaymentOrder(onlinePaymentOrderRepository.findOne(pgResponse.getMerchantRefNumber()));
 		
-		opc = ops.onlinePaymentCallbackRepository.save(opc);
+		opc = onlinePaymentCallbackRepository.save(opc);
 		
 		log.debug("This is the opc after save:" + opc);
 		
