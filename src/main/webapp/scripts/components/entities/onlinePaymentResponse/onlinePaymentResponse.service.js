@@ -26,7 +26,7 @@ angular.module('watererpApp').factory(
 		function($http) {
 			return {
 				findByOrder : function(orderId) {
-					return $http.get('api/billFullDetailss', {
+					return $http.get('api/onlinePaymentResponses', {
 						params : {
 							orderId : orderId
 						}

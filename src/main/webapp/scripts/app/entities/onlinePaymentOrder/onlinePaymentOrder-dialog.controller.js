@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('OnlinePaymentOrderDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'OnlinePaymentOrder', 'MerchantMaster',
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'OnlinePaymentOrder', 'OnlinePaymentResponseSvc', 'MerchantMaster',
         function($scope, $stateParams, $window, $uibModalInstance, entity, OnlinePaymentOrder, OnlinePaymentResponseSvc, MerchantMaster) {
 
         $scope.onlinePaymentOrder = entity;
