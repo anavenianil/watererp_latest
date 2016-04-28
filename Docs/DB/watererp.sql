@@ -3485,16 +3485,16 @@ CREATE TABLE `division_master` (
 
 /*!40000 ALTER TABLE `division_master` DISABLE KEYS */;
 INSERT INTO `division_master` (`id`,`division_name`,`division_code`) VALUES 
- (1,'D1','DCode1'),
- (2,'D2','DCode2'),
- (3,'D3','DCode3'),
- (4,'D4','DCode4'),
- (5,'D5','DCode5'),
- (6,'D6','DCode6'),
- (7,'D7','DCode7'),
- (8,'D8','DCode8'),
- (9,'D9','DCode9'),
- (10,'D10','DCode10');
+ (1,'Division1','01'),
+ (2,'Division2','02'),
+ (3,'Division3','03'),
+ (4,'Division4','04'),
+ (5,'Division5','05'),
+ (6,'Division6','06'),
+ (7,'Division7','07'),
+ (8,'Division8','08'),
+ (9,'Division9','09'),
+ (10,'Division10','10');
 /*!40000 ALTER TABLE `division_master` ENABLE KEYS */;
 
 
@@ -3576,7 +3576,8 @@ INSERT INTO `emp_master` (`id`,`user_id`,`office_id_id`,`designation_master_id`,
  (25,26,21,NULL,21,2),
  (26,27,22,NULL,22,2),
  (27,28,23,NULL,23,2),
- (28,29,24,NULL,24,2);
+ (28,29,24,NULL,24,2),
+ (29,3,26,NULL,26,2);
 /*!40000 ALTER TABLE `emp_master` ENABLE KEYS */;
 
 
@@ -3836,6 +3837,11 @@ CREATE TABLE `id_proof_master` (
 --
 
 /*!40000 ALTER TABLE `id_proof_master` DISABLE KEYS */;
+INSERT INTO `id_proof_master` (`id`,`id_proof`) VALUES 
+ (1,'OTHER ID'),
+ (2,'DRIVING LICENSE'),
+ (3,'VOTER\'S ID'),
+ (4,'PASSPORT');
 /*!40000 ALTER TABLE `id_proof_master` ENABLE KEYS */;
 
 
@@ -6591,7 +6597,8 @@ INSERT INTO `org_role_instance` (`id`,`org_role_name`,`parent_org_role_id`,`crea
  (22,'Assistant Accountant(Revenue)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (23,'Assistant Accountant(Expenditure)',19,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
  (24,'Technical Zonal Supervisor',15,'2016-03-21 00:00:00','2016-03-21 00:00:00',1,2,NULL,NULL),
- (25,'Customer',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL);
+ (25,'Customer',10,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL),
+ (26,'ADMIN',1,'2016-03-18 00:00:00','2016-03-18 00:00:00',1,2,NULL,NULL);
 /*!40000 ALTER TABLE `org_role_instance` ENABLE KEYS */;
 
 
@@ -7856,13 +7863,6 @@ CREATE TABLE `zone_master` (
 --
 
 /*!40000 ALTER TABLE `zone_master` DISABLE KEYS */;
-INSERT INTO `zone_master` (`id`,`zone_name`,`zone_code`,`division_master_id`) VALUES 
- (1,'Zone1','ZoneCode1',1),
- (2,'Zone2','ZoneCode2',1),
- (3,'Zone3','ZoneCode3',2),
- (4,'Zone4','ZoneCode4',2),
- (5,'Zone5','ZoneCode5',3),
- (6,'Zone6','ZoneCode6',3);
 /*!40000 ALTER TABLE `zone_master` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
