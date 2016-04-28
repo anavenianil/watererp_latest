@@ -97,7 +97,7 @@ public class OnlinePaymentService {
 	}
 
 	@Transactional(rollbackFor=Exception.class)
-	public String processOrder(OnlinePaymentOrder onlinePaymentOrder) throws Exception {
+	public OnlinePaymentOrder processOrder(OnlinePaymentOrder onlinePaymentOrder) throws Exception {
 		OnlinePaymentOrder result = onlinePaymentOrderRepository
 				.save(onlinePaymentOrder);
 
@@ -134,7 +134,7 @@ public class OnlinePaymentService {
 			throw e;
 		}
 
-		return onlinePaymentResponse.getRedirectUrl();
+		return result;
 	}
 
 	public String buildXML(OnlinePaymentOrder onlinePaymentOrder) {

@@ -65,22 +65,11 @@ public class OnlinePaymentOrderResource {
 					.body(null);
 		}
 
-		String redirectUrl = onlinePaymentService
+		OnlinePaymentOrder result = onlinePaymentService
 				.processOrder(onlinePaymentOrder);
-		if (redirectUrl.startsWith("http://")) {
-			HttpHeaders headers = new HttpHeaders();
-
-			return new ResponseEntity<OnlinePaymentOrder>(null, headers,
-					HttpStatus.FOUND);
-		} else {
-			return ResponseEntity
-					.ok()
-					.headers(
-							HeaderUtil
-									.createAlert(
-											"Error transacting with Unified Payment Portal",
-											redirectUrl)).body(onlinePaymentOrder);
-		}
+        return ResponseEntity.created(new URI("/api/onlinePaymentResponses/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("onlinePaymentResponse", result.getId().toString()))
+                .body(result);
 	}
 
 	/**
