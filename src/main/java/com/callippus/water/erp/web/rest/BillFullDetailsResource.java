@@ -100,10 +100,19 @@ public class BillFullDetailsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<BillFullDetails>> getAllBillFullDetailss(Pageable pageable)
+    public ResponseEntity<List<BillFullDetails>> getAllBillFullDetailss(Pageable pageable,
+    		@RequestParam(value = "can", required = false) String can)
         throws URISyntaxException {
         log.debug("REST request to get a page of BillFullDetailss");
-        Page<BillFullDetails> page = billFullDetailsRepository.findAll(pageable); 
+        //Page<BillFullDetails> page = billFullDetailsRepository.findAll(pageable); 
+        Page<BillFullDetails> page;
+        if(can == null){
+        	page = billFullDetailsRepository.findAll(pageable);
+        }
+        else
+        {
+        	page = billFullDetailsRepository.findByCan(pageable, can);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/billFullDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -173,5 +182,17 @@ public class BillFullDetailsResource {
 		                HttpStatus.OK))
 		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 		    }
+    
+    /*@RequestMapping(value = "/billFullDetailss/forCAN/{can}", method = RequestMethod.GET,
+            params = {"can"})
+		    public ResponseEntity<BillFullDetails> getBillDetailss(@RequestParam(value = "can") String can) {
+		        log.debug("REST request to get Proceedings : {} ", can);
+		        BillFullDetails billFullDetails = billFullDetailsRepository.findByCan(can);
+		        return Optional.ofNullable(billFullDetails)
+		            .map(result -> new ResponseEntity<>(
+		                result,
+		                HttpStatus.OK))
+		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		    }*/
 
 }

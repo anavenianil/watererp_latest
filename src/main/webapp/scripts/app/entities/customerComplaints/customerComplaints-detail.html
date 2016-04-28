@@ -43,45 +43,36 @@
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Complaints</h3>
+			<h3 class="panel-title pull-left">Bill Details</h3>
 		</div>
 		<div class="list-group">
-			<div class="list-group-item"></div>
-			<div class="row">
-				<div class="col-sm-3">
-					<label>Complaint Type</label>
-					<h5 class="list-group-item-heading">{{customerComplaints.complaintTypeMaster.complaintType}}</h5>
-				</div>
-			</div>
-			<fieldset>
-				<legend>Bill Details</legend>
 				<div class="row">
 					<div class="col-sm-4">
-								<label class="control-label" for="field_billMonth">Bill Month
-									Date</label>
-								<div class="form-group">
-									<div class='input-group date' id='field_billMonth'>
-										<input id="field_billMonth" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
-											ng-model="customerComplaints.billMonth" max-date="dtmax"
-											is-open="datePickerForBillMonth.status.opened"
-											ng-change="getBillDetail(customerComplaints.billMonth)" required />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-default"
-												ng-click="datePickerForBillMonthOpen($event)">
-												<i class="glyphicon glyphicon-calendar"></i>
-											</button>
-										</span>
-									</div>
-								</div>
-							</div>
+						<label for="field_paymentTypes">Bill Month</label>
+						<select
+							class="form-control" id="field_collectionTypeMaster"
+							name="collectionTypeMaster" required="required"
+							ng-model="customerComplaints.billFullDetails"
+							ng-options="billFullDetails as billFullDetails.billDate for billFullDetails in billFullDetailss track by billFullDetails.id"
+							ng-change="getBillById(customerComplaints.billFullDetails.id)"
+							>
+						</select>
+					</div>
+					<div class="col-sm-4">
+						<label for="field_paymentTypes">Total Amount</label>
+						<input
+								type="text" class="form-control" name="totalAmount"
+								id="field_totalAmount" ng-model="customerComplaints.billFullDetails.totalAmount" />
+					</div>
+					<div class="col-sm-4">
+						<label for="field_paymentTypes">Net Payable Amount</label>
+						<input
+								type="text" class="form-control" name="netPayableAmount"
+								id="field_netPayableAmount" ng-model="customerComplaints.billFullDetails.netPayableAmount" />
+					</div>
 				</div>
-			</fieldset>
 		</div>
 	</div>
-
-
-
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
@@ -125,7 +116,6 @@
 			</tbody>
 		</table>
 	</div>
-
 	<button type="submit" onclick="window.history.back()"
 		class="btn btn-info">
 		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>

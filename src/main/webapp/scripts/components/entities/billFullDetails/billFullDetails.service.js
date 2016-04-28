@@ -103,4 +103,20 @@ angular
 							});
 						}
 					};
+				}).factory(
+				'BillFullDetailsBillMonths',
+				function($http) {
+					return {
+						findByCan : function(can) {
+							return $http.get('api/billFullDetailss/forCAN', {
+								params : {
+									can : can,
+								}
+							}).then(function successCallback(response) {
+								return response.data;
+							}, function errorCallback(response) {
+								return "error";
+							});
+						}
+					};
 				});
