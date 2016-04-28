@@ -27,7 +27,7 @@ angular.module('watererpApp').controller(
 				}, function(result) {
 					$scope.customerComplaints = result;
 					$scope.getBillDetails($scope.customerComplaints.can);
-					
+					$scope.customerComplaints.remarks = "";
 				});
 			};
 				
@@ -66,7 +66,11 @@ angular.module('watererpApp').controller(
 			
 
 			$scope.approve = function(id) {
-				ApplicationTxnService.approveCustComplaint(id);
+				//ApplicationTxnService.approveCustComplaint(id);
+				if ($scope.customerComplaints.id != null) {
+					CustomerComplaints.update(
+							$scope.customerComplaints
+							);}
 			}
 
 			$scope.datePickerForBillMonth = {};

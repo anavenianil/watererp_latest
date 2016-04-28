@@ -24,8 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustomerComplaints;
+import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerComplaintsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -51,6 +52,8 @@ public class CustomerComplaintsResource {
     @Inject
     private CustomerComplaintsWorkflowService customerComplaintsWorkflowService;
     
+    @Inject
+    private CustDetailsRepository custDetailsRepository;
     /**
      * POST  /customerComplaintss -> Create a new customerComplaints.
      */
@@ -72,7 +75,7 @@ public class CustomerComplaintsResource {
         HashMap<String,String> hm = new HashMap<String,String>();
         hm.put("relevantDoc", "setRelevantDoc");
         UploadDownloadResource.setValues(customerComplaints, hm, request, customerComplaints.getId());
-        
+        customerComplaints.setStatus(0);
         CustomerComplaints result = customerComplaintsRepository.save(customerComplaints);
         
         try{
@@ -101,7 +104,14 @@ public class CustomerComplaintsResource {
         if (customerComplaints.getId() == null) {
             return createCustomerComplaints(request,customerComplaints);
         }
+        if(customerComplaints.getStatus() == 4){
+        	CustDetails custDetails = custDetailsRepository.findByCan(customerComplaints.getCan());
+        	custDetails.setOtherCharges(customerComplaints.getAdjustmentAmt());
+        	custDetailsRepository.save(custDetails);
+        }
+        customerComplaints.setStatus(customerComplaints.getStatus()+1);
         CustomerComplaints result = customerComplaintsRepository.save(customerComplaints);
+        approveApplication(customerComplaints.getId(), customerComplaints.getRemarks());        
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("customerComplaints", customerComplaints.getId().toString()))
             .body(result);
@@ -178,6 +188,4 @@ public class CustomerComplaintsResource {
         //customerComplaintsRepository.save(customerComplaints);
         return ResponseEntity.ok().build();
 	}
-	
-
 }

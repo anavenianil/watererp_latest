@@ -33,6 +33,16 @@
             "fieldId": 5,
             "fieldName": "can",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "adjustmentAmt",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "status",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20160329064343",

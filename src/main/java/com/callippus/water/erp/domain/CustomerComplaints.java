@@ -37,6 +37,12 @@ public class CustomerComplaints implements Serializable {
     @Column(name = "can")
     private String can;
     
+    @Column(name = "adjustment_amt")
+    private Float adjustmentAmt;
+    
+    @Column(name = "status")
+    private Integer status;
+    
     @ManyToOne
     @JoinColumn(name = "complaint_type_master_id")
     private ComplaintTypeMaster complaintTypeMaster;
@@ -89,6 +95,22 @@ public class CustomerComplaints implements Serializable {
         this.can = can;
     }
 
+    public Float getAdjustmentAmt() {
+        return adjustmentAmt;
+    }
+    
+    public void setAdjustmentAmt(Float adjustmentAmt) {
+        this.adjustmentAmt = adjustmentAmt;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+    
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public ComplaintTypeMaster getComplaintTypeMaster() {
         return complaintTypeMaster;
     }
@@ -126,6 +148,8 @@ public class CustomerComplaints implements Serializable {
             ", complaintBy='" + complaintBy + "'" +
             ", complaintDate='" + complaintDate + "'" +
             ", can='" + can + "'" +
+            ", adjustmentAmt='" + adjustmentAmt + "'" +
+            ", status='" + status + "'" +
             '}';
     }
 }

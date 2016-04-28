@@ -157,8 +157,7 @@ public class ApplicationTxnResource {
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         if(applicationTxn.getStatus()==7){
-        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
-            
+        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
             custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
             custDetails.setAddress(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
