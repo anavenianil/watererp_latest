@@ -50,7 +50,7 @@ public class OnlinePaymentOrderResource {
 	@Timed
 	public ResponseEntity<OnlinePaymentOrder> createOnlinePaymentOrder(
 			@RequestBody OnlinePaymentOrder onlinePaymentOrder)
-			throws URISyntaxException {
+			throws URISyntaxException, Exception {
 		log.debug("REST request to save OnlinePaymentOrder : {}",
 				onlinePaymentOrder);
 
@@ -67,9 +67,8 @@ public class OnlinePaymentOrderResource {
 
 		String redirectUrl = onlinePaymentService
 				.processOrder(onlinePaymentOrder);
-		if (!redirectUrl.equals("")) {
+		if (redirectUrl.startsWith("http://")) {
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Location", redirectUrl);
 
 			return new ResponseEntity<OnlinePaymentOrder>(null, headers,
 					HttpStatus.FOUND);
@@ -80,7 +79,7 @@ public class OnlinePaymentOrderResource {
 							HeaderUtil
 									.createAlert(
 											"Error transacting with Unified Payment Portal",
-											"")).body(onlinePaymentOrder);
+											redirectUrl)).body(onlinePaymentOrder);
 		}
 	}
 
@@ -91,7 +90,7 @@ public class OnlinePaymentOrderResource {
 	@Timed
 	public ResponseEntity<OnlinePaymentOrder> updateOnlinePaymentOrder(
 			@RequestBody OnlinePaymentOrder onlinePaymentOrder)
-			throws URISyntaxException {
+			throws URISyntaxException, Exception {
 		log.debug("REST request to update OnlinePaymentOrder : {}",
 				onlinePaymentOrder);
 		if (onlinePaymentOrder.getId() == null) {
