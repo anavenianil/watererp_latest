@@ -31,7 +31,7 @@
                 <tr ng-repeat="empMaster in empMasters track by empMaster.id">
                     <td><a ui-sref="empMaster.detail({id:empMaster.id})">{{empMaster.id}}</a></td>
                     <td>
-                        {{empMaster.user.login}}
+                        {{empMaster.user.firstName}}&nbsp;{{empMaster.user.lastName}}({{empMaster.user.login}})
                     </td>
                     <td>
                         <a ui-sref="orgRoleInstance.detail({id:empMaster.officeId.id})">{{empMaster.officeId.orgRoleName}}</a>

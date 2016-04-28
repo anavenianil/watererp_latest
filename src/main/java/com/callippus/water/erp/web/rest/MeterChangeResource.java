@@ -73,6 +73,10 @@ public class MeterChangeResource {
         }
         MeterChange result = meterChangeRepository.save(meterChange);
         
+        CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(meterChange.getCustDetails(), null);
+        cmpOld.setToDate(meterChange.getApprovedDate());
+        custMeterMappingRepository.save(cmpOld);
+        
         CustMeterMapping custMeterMapping = new CustMeterMapping();
         custMeterMapping.setMeterDetails(meterChange.getMeterDetails());
         custMeterMapping.setCustDetails(meterChange.getCustDetails());

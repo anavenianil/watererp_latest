@@ -52,5 +52,8 @@ angular.module('watererpApp').controller(
 				if (type === 'REQUISITION' || type === 'WITHOUTMETER') {
 					$state.go('applicationTxn');
 				}
+				if (type === 'METER CHANGE'){
+					$state.go('meterChange');
+				}
 			}
 		});
