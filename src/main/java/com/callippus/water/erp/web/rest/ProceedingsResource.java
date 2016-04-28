@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +63,7 @@ public class ProceedingsResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<Proceedings> createProceedings(@RequestBody Proceedings proceedings) throws URISyntaxException {
         log.debug("REST request to save Proceedings : {}", proceedings);
         if (proceedings.getId() != null) {
@@ -79,7 +81,7 @@ public class ProceedingsResource {
         	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
         }
         catch(Exception e){
-        	System.out.println(e);
+        	e.printStackTrace();
         }
         return ResponseEntity.created(new URI("/api/proceedingss/" + result.getId()))
             .headers(HeaderUtil.createAlert("New Proceedings initiated", result.getId().toString()))
@@ -107,7 +109,7 @@ public class ProceedingsResource {
         	applicationTxnWorkflowService.approveRequest(proceedings.getApplicationTxn().getId(), applicationTxn.getRemarks());
         }
         catch(Exception e){
-        	System.out.println(e);
+        	e.printStackTrace();
         }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("proceedings", proceedings.getId().toString()))
