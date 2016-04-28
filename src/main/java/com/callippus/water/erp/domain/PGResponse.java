@@ -1,131 +1,119 @@
 package com.callippus.water.erp.domain;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="OrderResponse")
-public class PGResponse
-{
-	@XmlElement	
-    private String MerchantCode;
+@XmlRootElement(name = "OrderResponse")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class PGResponse {
+	@XmlElement(name = "MerchantCode")
+	private String merchantCode;
 
-	@XmlElement
-	private String PaymentMode;
+	@XmlElement(name = "PaymentMode")
+	private String paymentMode;
 
-	@XmlElement
-    private String MerchantRefNumber;
+	@XmlElement(name = "MerchantRefNumber")
+	private Long merchantRefNumber;
 
-	@XmlElement
-    private String UserDefinedField;
+	@XmlElement(name = "UserDefinedField")
+	private String userDefinedField;
 
-	@XmlElement
-    private String Message;
+	@XmlElement(name = "Message")
+	private String message;
 
-	@XmlElement
-    private String ServiceCode;
+	@XmlElement(name = "ServiceCode")
+	private String serviceCode;
 
-	@XmlElement
-    private String ResponseCode;
+	@XmlElement(name = "ResponseCode")
+	private String responseCode;
 
-	@XmlElement
-    private String Currency;
+	@XmlElement(name = "Currency")
+	private String currency;
 
-	@XmlElement
-    private String TotalAmountPaid;
+	@XmlElement(name = "TotalAmountPaid")
+	private Float totalAmountPaid;
 
-    public String getMerchantCode ()
-    {
-        return MerchantCode;
-    }
+	public String getMerchantCode() {
+		return merchantCode;
+	}
 
-    public void setMerchantCode (String MerchantCode)
-    {
-        this.MerchantCode = MerchantCode;
-    }
+	public void setMerchantCode(String merchantCode) {
+		this.merchantCode = merchantCode;
+	}
 
-    public String getPaymentMode ()
-    {
-        return PaymentMode;
-    }
+	public String getPaymentMode() {
+		return paymentMode;
+	}
 
-    public void setPaymentMode (String PaymentMode)
-    {
-        this.PaymentMode = PaymentMode;
-    }
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+	
+	public Long getMerchantRefNumber() {
+		return merchantRefNumber;
+	}
 
-    public String getMerchantRefNumber ()
-    {
-        return MerchantRefNumber;
-    }
+	public void setMerchantRefNumber(Long merchantRefNumber) {
+		this.merchantRefNumber = merchantRefNumber;
+	}
 
-    public void setMerchantRefNumber (String MerchantRefNumber)
-    {
-        this.MerchantRefNumber = MerchantRefNumber;
-    }
+	public String getUserDefinedField() {
+		return userDefinedField;
+	}
 
-    public String getUserDefinedField ()
-    {
-        return UserDefinedField;
-    }
+	public void setUserDefinedField(String userDefinedField) {
+		this.userDefinedField = userDefinedField;
+	}
 
-    public void setUserDefinedField (String UserDefinedField)
-    {
-        this.UserDefinedField = UserDefinedField;
-    }
+	public String getMessage() {
+		return message;
+	}
 
-    public String getMessage ()
-    {
-        return Message;
-    }
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
-    public void setMessage (String Message)
-    {
-        this.Message = Message;
-    }
+	public String getServiceCode() {
+		return serviceCode;
+	}
 
-    public String getServiceCode ()
-    {
-        return ServiceCode;
-    }
+	public void setServiceCode(String serviceCode) {
+		this.serviceCode = serviceCode;
+	}
 
-    public void setServiceCode (String ServiceCode)
-    {
-        this.ServiceCode = ServiceCode;
-    }
+	public String getResponseCode() {
+		return responseCode;
+	}
 
-    public String getResponseCode ()
-    {
-        return ResponseCode;
-    }
+	public void setResponseCode(String responseCode) {
+		this.responseCode = responseCode;
+	}
 
-    public void setResponseCode (String ResponseCode)
-    {
-        this.ResponseCode = ResponseCode;
-    }
+	public String getCurrency() {
+		return currency;
+	}
 
-    public String getCurrency ()
-    {
-        return Currency;
-    }
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
 
-    public void setCurrency (String Currency)
-    {
-        this.Currency = Currency;
-    }
+	public Float getTotalAmountPaid() {
+		return totalAmountPaid;
+	}
 
-    public String getTotalAmountPaid ()
-    {
-        return TotalAmountPaid;
-    }
+	public void setTotalAmountPaid(Float totalAmountPaid) {
+		this.totalAmountPaid = totalAmountPaid;
+	}
 
-    public void setTotalAmountPaid (String TotalAmountPaid)
-    {
-        this.TotalAmountPaid = TotalAmountPaid;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [MerchantCode = "+MerchantCode+", PaymentMode = "+PaymentMode+", MerchantRefNumber = "+MerchantRefNumber+", UserDefinedField = "+UserDefinedField+", Message = "+Message+", ServiceCode = "+ServiceCode+", ResponseCode = "+ResponseCode+", Currency = "+Currency+", TotalAmountPaid = "+TotalAmountPaid+"]";
-    }
+	@Override
+	public String toString() {
+		return "ClassPojo [MerchantCode = " + merchantCode + ", PaymentMode = "
+				+ paymentMode + ", MerchantRefNumber = " + merchantRefNumber
+				+ ", UserDefinedField = " + userDefinedField + ", Message = "
+				+ message + ", ServiceCode = " + serviceCode
+				+ ", ResponseCode = " + responseCode + ", Currency = "
+				+ currency + ", TotalAmountPaid = " + totalAmountPaid + "]";
+	}
 }

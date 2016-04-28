@@ -2,13 +2,17 @@ package com.callippus.water.erp.service;
 
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ConfigurationDetails;
+import com.callippus.water.erp.domain.OnlinePaymentCallback;
 import com.callippus.water.erp.domain.OnlinePaymentOrder;
 import com.callippus.water.erp.domain.OnlinePaymentResponse;
 import com.callippus.water.erp.domain.PGResponse;
 import com.callippus.water.erp.domain.UnifiedPayment;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
+import com.callippus.water.erp.repository.MerchantMasterRepository;
+import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
 import com.callippus.water.erp.repository.OnlinePaymentOrderRepository;
 import com.callippus.water.erp.repository.OnlinePaymentResponseRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -21,6 +25,7 @@ import java.time.ZonedDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,10 +51,13 @@ public class OnlinePaymentService {
 	
 	@Inject
 	private OnlinePaymentResponseRepository onlinePaymentResponseRepository;
+	
+	@Inject
+	private OnlinePaymentCallbackRepository onlinePaymentCallbackRepository;
+	
+	@Inject
+	private MerchantMasterRepository merchantMasterRepository;
 
-	enum Status {
-		SUCCESS, FAILURE
-	};
 
 	public static void main(String[] args) {
 		String xml = "<OrderRequest> <Currency>TSh</Currency> <MerchantKey>5b56ca5b-a882-4224-b3e7-b558e93e6cb0</MerchantKey> <MerchantCode>Test001</MerchantCode> <MerchantName>testmerchant</MerchantName> <ServiceCode>TESTS001</ServiceCode> <PayBy>TIGOPESADIR</PayBy> <Amount>1</Amount> <UserDefinedField>abcd</UserDefinedField> <Parameters> <Parameter name=\"Email\">test@gmail.com</Parameter> <Parameter name=\"Phone\">1234567895</Parameter> </Parameters> </OrderRequest> ";
@@ -59,12 +67,37 @@ public class OnlinePaymentService {
 		log.debug("This is the unifiedPaymentResponse:" + unifiedPaymentResponse);
 		
 		
-		String merchantResponseXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>     <Currency>TSh</Currency>     <MerchantCode>test-code</MerchantCode>     <MerchantRefNumber>9312171800</MerchantRefNumber>     <PaymentMode>PAYMENTMODE</PaymentMode>     <ServiceCode>test-service</ServiceCode>     <Message>SUCCESS</Message>     <ResponseCode>200</ResponseCode>     <TotalAmountPaid>280.0</TotalAmountPaid> <UserDefinedField>123</UserDefinedField> </OrderResponse>";
+		String merchantResponseXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>     <Currency>TSh</Currency>     <MerchantCode>Test001</MerchantCode>     <MerchantRefNumber>9312171800</MerchantRefNumber>     <PaymentMode>PAYMENTMODE</PaymentMode>     <ServiceCode>test-service</ServiceCode>     <Message>SUCCESS</Message>     <ResponseCode>200</ResponseCode>     <TotalAmountPaid>280.0</TotalAmountPaid> <UserDefinedField>123</UserDefinedField> </OrderResponse>";
 		PGResponse pgResponse = parsePGResponse(merchantResponseXML);
 		
+
 		log.debug("This is the PGResponse:" + pgResponse);
 	}
 
+	public String processPGResponse(String pgResponseXML) {
+		
+		PGResponse pgResponse = parsePGResponse(pgResponseXML);
+		
+		OnlinePaymentCallback opc = new OnlinePaymentCallback();
+		
+		OnlinePaymentService ops = new OnlinePaymentService();
+		
+		opc.setCurrency(pgResponse.getCurrency());
+		opc.setPaymentMode(pgResponse.getPaymentMode());
+		opc.setResponseCode(pgResponse.getResponseCode());
+		opc.setServiceCode(pgResponse.getServiceCode());
+		opc.setTotalAmountPaid(pgResponse.getTotalAmountPaid());
+		opc.setUserDefinedField(pgResponse.getUserDefinedField());
+		opc.setMerchantMaster(ops.merchantMasterRepository.getByMerchantCode(pgResponse.getMerchantCode()) );
+		opc.setOnlinePaymentOrder(ops.onlinePaymentOrderRepository.findOne(pgResponse.getMerchantRefNumber()));
+		
+		opc = ops.onlinePaymentCallbackRepository.save(opc);
+		
+		log.debug("This is the opc after save:" + opc);
+		
+		return "Successfully saved with id:" + opc.getId().toString();
+	}	
+	
 	public String processOrder(OnlinePaymentOrder onlinePaymentOrder) {
 		OnlinePaymentOrder result = onlinePaymentOrderRepository
 				.save(onlinePaymentOrder);

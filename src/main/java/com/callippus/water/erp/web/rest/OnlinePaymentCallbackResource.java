@@ -3,8 +3,10 @@ package com.callippus.water.erp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.OnlinePaymentCallback;
 import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
+import com.callippus.water.erp.service.OnlinePaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -33,24 +36,39 @@ public class OnlinePaymentCallbackResource {
     @Inject
     private OnlinePaymentCallbackRepository onlinePaymentCallbackRepository;
     
+    @Inject
+    private OnlinePaymentService onlinePaymentService;
+    
     /**
      * POST  /onlinePaymentCallbacks -> Create a new onlinePaymentCallback.
      */
     @RequestMapping(value = "/onlinePaymentCallbacks",
-        method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+        method = RequestMethod.POST, consumes = {MediaType.APPLICATION_XML_VALUE},
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<OnlinePaymentCallback> createOnlinePaymentCallback(@RequestBody OnlinePaymentCallback onlinePaymentCallback) throws URISyntaxException {
-        log.debug("REST request to save OnlinePaymentCallback : {}", onlinePaymentCallback);
-        if (onlinePaymentCallback.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("onlinePaymentCallback", "idexists", "A new onlinePaymentCallback cannot already have an ID")).body(null);
-        }
-        OnlinePaymentCallback result = onlinePaymentCallbackRepository.save(onlinePaymentCallback);
-        return ResponseEntity.created(new URI("/api/onlinePaymentCallbacks/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("onlinePaymentCallback", result.getId().toString()))
-            .body(result);
+    public ResponseEntity<String> createOnlinePaymentCallback(@RequestBody String xml) throws URISyntaxException {
+    	
+    	String response = onlinePaymentService.processPGResponse(xml);
+        return ResponseEntity.ok().
+        		body(response);
     }
 
+    @RequestMapping(value = "/onlinePaymentCallbacks",
+            method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+        public ResponseEntity<OnlinePaymentCallback> createOnlinePaymentCallback(@RequestBody OnlinePaymentCallback onlinePaymentCallback) throws URISyntaxException {
+            log.debug("REST request to save OnlinePaymentCallback : {}", onlinePaymentCallback);
+            if (onlinePaymentCallback.getId() != null) {
+                return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("onlinePaymentCallback", "idexists", "A new onlinePaymentCallback cannot already have an ID")).body(null);
+            }
+            OnlinePaymentCallback result = onlinePaymentCallbackRepository.save(onlinePaymentCallback);
+            return ResponseEntity.created(new URI("/api/onlinePaymentCallbacks/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("onlinePaymentCallback", result.getId().toString()))
+                .body(result);
+        }
+
+    
     /**
      * PUT  /onlinePaymentCallbacks -> Updates an existing onlinePaymentCallback.
      */
