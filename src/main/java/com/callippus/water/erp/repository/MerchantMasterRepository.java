@@ -10,5 +10,5 @@ import java.util.List;
  * Spring Data JPA repository for the MerchantMaster entity.
  */
 public interface MerchantMasterRepository extends JpaRepository<MerchantMaster,Long> {
-
+	public MerchantMaster getByMerchantCode(String merchantCode);
 }

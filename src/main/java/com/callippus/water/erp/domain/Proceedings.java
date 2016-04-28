@@ -75,6 +75,10 @@ public class Proceedings implements Serializable {
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
     private ApplicationTxn applicationTxn;
+    
+    @ManyToOne
+    @JoinColumn(name = "pipe_size_master_id")
+    private PipeSizeMaster pipeSizeMaster;
 
     //@OneToMany(mappedBy = "proceedings", cascade = CascadeType.ALL)
     //@JsonIgnore
@@ -211,7 +215,15 @@ public class Proceedings implements Serializable {
         this.itemRequireds = itemRequireds;
     }
 
-    @Override
+    public PipeSizeMaster getPipeSizeMaster() {
+		return pipeSizeMaster;
+	}
+
+	public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
+		this.pipeSizeMaster = pipeSizeMaster;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -3,9 +3,11 @@
 angular.module('watererpApp').controller(
 		'CustomerComplaintsDetailController',
 		function($scope, $filter, $rootScope, $stateParams, 
-				CustomerComplaints, ComplaintTypeMaster,
+				CustomerComplaints, ComplaintTypeMaster, Principal,
 				RequestWorkflowHistory, ParseLinks, ApplicationTxnService,
 				BillFullDetailsSvc, DateUtils, BillFullDetailsBillMonths, BillFullDetails) {
+			
+	        $scope.orgRole = Principal.getOrgRole();	        
 			
 			$scope.customerComplaints = {};
 			$scope.billFullDetailss = [];

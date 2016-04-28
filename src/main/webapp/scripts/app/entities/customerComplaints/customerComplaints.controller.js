@@ -6,6 +6,7 @@ angular.module('watererpApp')
         $scope.customerComplaintss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
+
         $scope.page = 0;
         $scope.loadAll = function() {
             CustomerComplaints.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {

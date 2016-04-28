@@ -69,6 +69,18 @@ public class ProceedingsResourceIntTest {
     private static final Double DEFAULT_GRAND_TOTAL = 1D;
     private static final Double UPDATED_GRAND_TOTAL = 2D;
 
+    private static final Double DEFAULT_SUPERVISION_PERCENT = 1D;
+    private static final Double UPDATED_SUPERVISION_PERCENT = 2D;
+
+    private static final Double DEFAULT_LABOUR_CHARGE_PERCENT = 1D;
+    private static final Double UPDATED_LABOUR_CHARGE_PERCENT = 2D;
+
+    private static final Double DEFAULT_SITE_SURVEY_PERCENT = 1D;
+    private static final Double UPDATED_SITE_SURVEY_PERCENT = 2D;
+
+    private static final Double DEFAULT_CONNECTION_FEE_PERCENT = 1D;
+    private static final Double UPDATED_CONNECTION_FEE_PERCENT = 2D;
+
     @Inject
     private ProceedingsRepository proceedingsRepository;
 
@@ -104,6 +116,10 @@ public class ProceedingsResourceIntTest {
         proceedings.setWaterMeterShs(DEFAULT_WATER_METER_SHS);
         proceedings.setApplicationFormFee(DEFAULT_APPLICATION_FORM_FEE);
         proceedings.setGrandTotal(DEFAULT_GRAND_TOTAL);
+        proceedings.setSupervisionPercent(DEFAULT_SUPERVISION_PERCENT);
+        proceedings.setLabourChargePercent(DEFAULT_LABOUR_CHARGE_PERCENT);
+        proceedings.setSiteSurveyPercent(DEFAULT_SITE_SURVEY_PERCENT);
+        proceedings.setConnectionFeePercent(DEFAULT_CONNECTION_FEE_PERCENT);
     }
 
     @Test
@@ -131,6 +147,10 @@ public class ProceedingsResourceIntTest {
         assertThat(testProceedings.getWaterMeterShs()).isEqualTo(DEFAULT_WATER_METER_SHS);
         assertThat(testProceedings.getApplicationFormFee()).isEqualTo(DEFAULT_APPLICATION_FORM_FEE);
         assertThat(testProceedings.getGrandTotal()).isEqualTo(DEFAULT_GRAND_TOTAL);
+        assertThat(testProceedings.getSupervisionPercent()).isEqualTo(DEFAULT_SUPERVISION_PERCENT);
+        assertThat(testProceedings.getLabourChargePercent()).isEqualTo(DEFAULT_LABOUR_CHARGE_PERCENT);
+        assertThat(testProceedings.getSiteSurveyPercent()).isEqualTo(DEFAULT_SITE_SURVEY_PERCENT);
+        assertThat(testProceedings.getConnectionFeePercent()).isEqualTo(DEFAULT_CONNECTION_FEE_PERCENT);
     }
 
     @Test
@@ -152,7 +172,11 @@ public class ProceedingsResourceIntTest {
                 .andExpect(jsonPath("$.[*].connectionFee").value(hasItem(DEFAULT_CONNECTION_FEE.doubleValue())))
                 .andExpect(jsonPath("$.[*].waterMeterShs").value(hasItem(DEFAULT_WATER_METER_SHS.doubleValue())))
                 .andExpect(jsonPath("$.[*].applicationFormFee").value(hasItem(DEFAULT_APPLICATION_FORM_FEE.doubleValue())))
-                .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())));
+                .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())))
+                .andExpect(jsonPath("$.[*].supervisionPercent").value(hasItem(DEFAULT_SUPERVISION_PERCENT.doubleValue())))
+                .andExpect(jsonPath("$.[*].labourChargePercent").value(hasItem(DEFAULT_LABOUR_CHARGE_PERCENT.doubleValue())))
+                .andExpect(jsonPath("$.[*].siteSurveyPercent").value(hasItem(DEFAULT_SITE_SURVEY_PERCENT.doubleValue())))
+                .andExpect(jsonPath("$.[*].ConnectionFeePercent").value(hasItem(DEFAULT_CONNECTION_FEE_PERCENT.doubleValue())));
     }
 
     @Test
@@ -174,7 +198,11 @@ public class ProceedingsResourceIntTest {
             .andExpect(jsonPath("$.connectionFee").value(DEFAULT_CONNECTION_FEE.doubleValue()))
             .andExpect(jsonPath("$.waterMeterShs").value(DEFAULT_WATER_METER_SHS.doubleValue()))
             .andExpect(jsonPath("$.applicationFormFee").value(DEFAULT_APPLICATION_FORM_FEE.doubleValue()))
-            .andExpect(jsonPath("$.grandTotal").value(DEFAULT_GRAND_TOTAL.doubleValue()));
+            .andExpect(jsonPath("$.grandTotal").value(DEFAULT_GRAND_TOTAL.doubleValue()))
+            .andExpect(jsonPath("$.supervisionPercent").value(DEFAULT_SUPERVISION_PERCENT.doubleValue()))
+            .andExpect(jsonPath("$.labourChargePercent").value(DEFAULT_LABOUR_CHARGE_PERCENT.doubleValue()))
+            .andExpect(jsonPath("$.siteSurveyPercent").value(DEFAULT_SITE_SURVEY_PERCENT.doubleValue()))
+            .andExpect(jsonPath("$.ConnectionFeePercent").value(DEFAULT_CONNECTION_FEE_PERCENT.doubleValue()));
     }
 
     @Test
@@ -203,6 +231,10 @@ public class ProceedingsResourceIntTest {
         proceedings.setWaterMeterShs(UPDATED_WATER_METER_SHS);
         proceedings.setApplicationFormFee(UPDATED_APPLICATION_FORM_FEE);
         proceedings.setGrandTotal(UPDATED_GRAND_TOTAL);
+        proceedings.setSupervisionPercent(UPDATED_SUPERVISION_PERCENT);
+        proceedings.setLabourChargePercent(UPDATED_LABOUR_CHARGE_PERCENT);
+        proceedings.setSiteSurveyPercent(UPDATED_SITE_SURVEY_PERCENT);
+        proceedings.setConnectionFeePercent(UPDATED_CONNECTION_FEE_PERCENT);
 
         restProceedingsMockMvc.perform(put("/api/proceedingss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -222,6 +254,10 @@ public class ProceedingsResourceIntTest {
         assertThat(testProceedings.getWaterMeterShs()).isEqualTo(UPDATED_WATER_METER_SHS);
         assertThat(testProceedings.getApplicationFormFee()).isEqualTo(UPDATED_APPLICATION_FORM_FEE);
         assertThat(testProceedings.getGrandTotal()).isEqualTo(UPDATED_GRAND_TOTAL);
+        assertThat(testProceedings.getSupervisionPercent()).isEqualTo(UPDATED_SUPERVISION_PERCENT);
+        assertThat(testProceedings.getLabourChargePercent()).isEqualTo(UPDATED_LABOUR_CHARGE_PERCENT);
+        assertThat(testProceedings.getSiteSurveyPercent()).isEqualTo(UPDATED_SITE_SURVEY_PERCENT);
+        assertThat(testProceedings.getConnectionFeePercent()).isEqualTo(UPDATED_CONNECTION_FEE_PERCENT);
     }
 
     @Test

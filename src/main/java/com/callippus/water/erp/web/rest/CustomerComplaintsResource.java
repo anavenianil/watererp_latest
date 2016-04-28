@@ -106,7 +106,7 @@ public class CustomerComplaintsResource {
         }
         if(customerComplaints.getStatus() == 4){
         	CustDetails custDetails = custDetailsRepository.findByCan(customerComplaints.getCan());
-        	custDetails.setOtherCharges(customerComplaints.getAdjustmentAmt());
+        	custDetails.setOtherCharges(custDetails.getOtherCharges() +  customerComplaints.getAdjustmentAmt());
         	custDetailsRepository.save(custDetails);
         }
         customerComplaints.setStatus(customerComplaints.getStatus()+1);
