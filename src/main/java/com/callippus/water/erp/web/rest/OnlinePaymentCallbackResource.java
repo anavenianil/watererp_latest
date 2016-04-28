@@ -37,7 +37,7 @@ public class OnlinePaymentCallbackResource {
      * POST  /onlinePaymentCallbacks -> Create a new onlinePaymentCallback.
      */
     @RequestMapping(value = "/onlinePaymentCallbacks",
-        method = RequestMethod.POST,
+        method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<OnlinePaymentCallback> createOnlinePaymentCallback(@RequestBody OnlinePaymentCallback onlinePaymentCallback) throws URISyntaxException {

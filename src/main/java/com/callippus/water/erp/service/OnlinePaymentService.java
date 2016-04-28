@@ -4,6 +4,7 @@ import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.OnlinePaymentOrder;
 import com.callippus.water.erp.domain.OnlinePaymentResponse;
+import com.callippus.water.erp.domain.PGResponse;
 import com.callippus.water.erp.domain.UnifiedPayment;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.OnlinePaymentOrderRepository;
@@ -56,6 +57,12 @@ public class OnlinePaymentService {
 		String responseXml = "<?xml version='1.0' encoding='UTF8'?><UnifiedPayment><ResponseCode>100</ResponseCode><RedirectUrl>http://IP:PORT/maxcompp/directp aymentreceipt.xhtml?txnref=6125783711&amp;name=VCN Test&amp;paymentmode=TESTMOD</RedirectUrl></UnifiedPayment>";
 		UnifiedPayment unifiedPaymentResponse = parseUnifiedPaymentResponse(responseXml);
 		log.debug("This is the unifiedPaymentResponse:" + unifiedPaymentResponse);
+		
+		
+		String merchantResponseXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>     <Currency>TSh</Currency>     <MerchantCode>test-code</MerchantCode>     <MerchantRefNumber>9312171800</MerchantRefNumber>     <PaymentMode>PAYMENTMODE</PaymentMode>     <ServiceCode>test-service</ServiceCode>     <Message>SUCCESS</Message>     <ResponseCode>200</ResponseCode>     <TotalAmountPaid>280.0</TotalAmountPaid> <UserDefinedField>123</UserDefinedField> </OrderResponse>";
+		PGResponse pgResponse = parsePGResponse(merchantResponseXML);
+		
+		log.debug("This is the PGResponse:" + pgResponse);
 	}
 
 	public String processOrder(OnlinePaymentOrder onlinePaymentOrder) {
@@ -182,11 +189,30 @@ public class OnlinePaymentService {
 			StringReader reader = new StringReader(xml);
 			unifiedPaymentResponse = (UnifiedPayment) unmarshaller.unmarshal(reader);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		
 		return unifiedPaymentResponse;
 		
 	}
 
+
+	public static PGResponse parsePGResponse(String xml) {
+		PGResponse pgResponse = null;
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(PGResponse.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+			unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
+			StringReader reader = new StringReader(xml);
+			pgResponse = (PGResponse) unmarshaller.unmarshal(reader);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return pgResponse;
+		
+	}
+
+	
 }
