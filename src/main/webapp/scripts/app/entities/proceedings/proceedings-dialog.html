@@ -21,7 +21,7 @@
 							<label for="field_pipeSizeMaster">Pipe Size</label> <select
 								class="form-control" id="field_pipeSizeMaster"
 								name="applicationTxn" ng-model="proceedings.pipeSizeMaster"
-								ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipeSizeMasters track by pipeSizeMaster.id">
+								ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipeSizeMasters track by pipeSizeMaster.id" required>
 								<option value=""></option>
 							</select>
 						</div>
