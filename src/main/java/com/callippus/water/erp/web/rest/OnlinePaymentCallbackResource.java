@@ -47,8 +47,17 @@ public class OnlinePaymentCallbackResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<String> createOnlinePaymentCallback(@RequestBody String xml) throws URISyntaxException {
+    	String response = null;
+    	try
+    	{
+    		response = onlinePaymentService.processPGResponse(xml);
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    		response = e.getMessage();
+    	}
     	
-    	String response = onlinePaymentService.processPGResponse(xml);
         return ResponseEntity.ok().
         		body(response);
     }

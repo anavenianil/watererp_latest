@@ -2,6 +2,7 @@ package com.callippus.water.erp.service;
 
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ConfigurationDetails;
+import com.callippus.water.erp.domain.MerchantMaster;
 import com.callippus.water.erp.domain.OnlinePaymentCallback;
 import com.callippus.water.erp.domain.OnlinePaymentOrder;
 import com.callippus.water.erp.domain.OnlinePaymentResponse;
@@ -72,10 +73,14 @@ public class OnlinePaymentService {
 		log.debug("This is the PGResponse:" + pgResponse);
 	}
 
-	public String processPGResponse(String pgResponseXML) {
+	@Transactional(rollbackFor=Exception.class)
+	public String processPGResponse(String pgResponseXML) throws Exception{
 
 		PGResponse pgResponse = parsePGResponse(pgResponseXML);
 
+		if(pgResponse == null)
+			throw new Exception ("Unable to parse response");
+		
 		OnlinePaymentCallback opc = new OnlinePaymentCallback();
 
 		opc.setCurrency(pgResponse.getCurrency());
@@ -84,10 +89,22 @@ public class OnlinePaymentService {
 		opc.setServiceCode(pgResponse.getServiceCode());
 		opc.setTotalAmountPaid(pgResponse.getTotalAmountPaid());
 		opc.setUserDefinedField(pgResponse.getUserDefinedField());
-		opc.setMerchantMaster(merchantMasterRepository
-				.getByMerchantCode(pgResponse.getMerchantCode()));
-		opc.setOnlinePaymentOrder(onlinePaymentOrderRepository
-				.findOne(pgResponse.getMerchantRefNumber()));
+		
+		MerchantMaster mm = merchantMasterRepository
+				.getByMerchantCode(pgResponse.getMerchantCode());
+		
+		if(mm == null)
+			throw new Exception ("Invalid Merchant Code");
+		
+		opc.setMerchantMaster(mm);
+		
+		OnlinePaymentOrder opo = onlinePaymentOrderRepository
+				.findOne(pgResponse.getMerchantRefNumber());
+		
+		if(opo == null)
+			throw new Exception ("Invalid Merchant Ref Number");
+		
+		opc.setOnlinePaymentOrder(opo);
 
 		opc = onlinePaymentCallbackRepository.save(opc);
 
