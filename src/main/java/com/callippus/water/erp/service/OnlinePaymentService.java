@@ -207,7 +207,7 @@ public class OnlinePaymentService {
 				+ "   </Parameters>" + "</OrderRequest>";
 	}
 
-	public String postXML(String xmlString, URL url) {
+	public String postXML(String xmlString, URL url) throws Exception {
 
 		HttpURLConnection connection = null;
 		try {
@@ -248,7 +248,7 @@ public class OnlinePaymentService {
 					+ CPSUtils.stackTraceToString(e));
 
 			e.printStackTrace();
-			return e.getMessage();
+			throw e;
 
 		} finally {
 

@@ -38,7 +38,7 @@ angular.module('watererpApp').controller(
 				$scope.isSaving = false;
 			};
 
-			$scope.getLocation = function(val) {
+			$scope.getCustomer = function(val) {
 				$scope.isValidCust = false;
 				
 				return $http.get('api/custDetailss/searchCAN/' + val, {

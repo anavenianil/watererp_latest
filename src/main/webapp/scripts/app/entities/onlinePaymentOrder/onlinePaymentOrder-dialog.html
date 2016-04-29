@@ -18,7 +18,7 @@
 
 								<input type="text" ng-model="custInfo" typeahead-min-length="3"
 									placeholder="Search CAN or Name or Address (Min 3 chars)"
-									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									uib-typeahead="custInfo for custInfo in getCustomer($viewValue)"
 									typeahead-loading="loadingCANs"
 									typeahead-on-select='onSelect($item, $model, $label)'
 									typeahead-no-results="noResults" class="form-control">
@@ -52,7 +52,7 @@
 					<div class="row">
 						<div class="col-sm-4"
 							ng-class="{ 'has-error' : editForm.amount.$invalid && !editForm.amount.$pristine }"
-							ng-pattern="/^[0-9]*$/>
+							ng-pattern="/^[0-9]*$/">
 							<label class="
 							control-label" for="field_amount">
 							Receipt Amount
@@ -67,16 +67,16 @@
 							<label for="field_payBy">Payment Mode</label>
 							<select class="form-control" id="field_payBy" name="payBy"
 								ng-model="onlinePaymentOrder.payBy" required="required">
-								<options>Tigo Pesa</options>
-								<options>Credit Card</options>
-								<options>Debit Card</options>
-								<options>Net Banking</options>
+								<option value="TIGOPESADIR">Tigo Pesa</option>
+								<option value="Credit Card">Credit Card</option>
+								<option value="Debit Card">Debit Card</option>
+								<option value="Net Banking">Net Banking</option>
 							</select>
 						</div>
 						<div class="col-sm-4"
-							ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }">
+							ng-class="{ 'has-error' : editForm.email.$invalid && !editForm.email.$pristine }">
 							<label class="control-label" for="field_email">Email</label>
-							<input type="number" class="form-control" name="email"
+							<input type="text" class="form-control" name="email"
 								required="required" min="1" id="field_email"
 								ng-model="onlinePaymentOrder.email" />
 							<p ng-show="editForm.email.$error.pattern" class="help-block">Invalid

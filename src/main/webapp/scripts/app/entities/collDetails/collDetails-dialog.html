@@ -18,7 +18,7 @@
 
 								<input type="text" ng-model="custInfo" typeahead-min-length="3"
 									placeholder="Search CAN or Name or Address (Min 3 chars)"
-									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									uib-typeahead="custInfo for custInfo in getCustomer($viewValue)"
 									typeahead-loading="loadingCANs"
 									typeahead-on-select='onSelect($item, $model, $label)'
 									typeahead-no-results="noResults" class="form-control">
