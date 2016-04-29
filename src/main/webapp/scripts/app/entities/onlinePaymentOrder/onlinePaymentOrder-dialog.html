@@ -76,7 +76,7 @@
 						<div class="col-sm-4"
 							ng-class="{ 'has-error' : editForm.email.$invalid && !editForm.email.$pristine }">
 							<label class="control-label" for="field_email">Email</label>
-							<input type="text" class="form-control" name="email"
+							<input  type="email" class="form-control" name="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
 								required="required" min="1" id="field_email"
 								ng-model="onlinePaymentOrder.email" />
 							<p ng-show="editForm.email.$error.pattern" class="help-block">Invalid
