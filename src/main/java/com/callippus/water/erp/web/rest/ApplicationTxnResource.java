@@ -25,6 +25,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -151,6 +152,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<ApplicationTxn> updateApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to update ApplicationTxn : {}", applicationTxn);
