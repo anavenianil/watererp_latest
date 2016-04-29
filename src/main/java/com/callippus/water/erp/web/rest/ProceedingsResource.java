@@ -101,7 +101,11 @@ public class ProceedingsResource {
             return createProceedings(proceedings);
         }
         
-        Proceedings result = proceedingsRepository.save(proceedings);
+//        Proceedings result = proceedingsRepository.save(proceedings);
+        List<ItemRequired> items = proceedings.getItemRequireds();
+        
+        itemRequiredRepository.save(items);
+        
         ApplicationTxn applicationTxn = proceedings.getApplicationTxn();
         applicationTxn.setRemarks(proceedings.getApplicationTxn().getRemarks());
         //applicationTxnRepository.save(applicationTxn);
@@ -113,7 +117,7 @@ public class ProceedingsResource {
         }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("proceedings", proceedings.getId().toString()))
-            .body(result);
+            .body(proceedings);
     }
 
     /**
