@@ -2,9 +2,10 @@
 
 angular.module('watererpApp')
     .controller('ApplicationTxnDetailController', function ($state, $scope, $rootScope, $stateParams, entity, ApplicationTxn, 
-    		ApplicationTxnService, RequestWorkflowHistory, ParseLinks) {
+    		ApplicationTxnService, RequestWorkflowHistory, ParseLinks, Principal) {
         $scope.applicationTxn = entity;
         
+        $scope.orgRole = Principal.getOrgRole();
         $scope.approvalDetails = {};
         
         $scope.maxDate = new Date();

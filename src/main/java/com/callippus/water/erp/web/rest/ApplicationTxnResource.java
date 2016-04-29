@@ -263,6 +263,7 @@ public class ApplicationTxnResource {
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
+	@Transactional
 	public ResponseEntity<Void> approveApplication(@RequestParam(value = "id", required = false) Long id,
 						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
 
