@@ -3,9 +3,11 @@
 angular.module('watererpApp').controller(
 		'CustomerComplaintsDetailController',
 		function($scope, $filter, $rootScope, $stateParams, 
-				CustomerComplaints, ComplaintTypeMaster,
+				CustomerComplaints, ComplaintTypeMaster, Principal,
 				RequestWorkflowHistory, ParseLinks, ApplicationTxnService,
 				BillFullDetailsSvc, DateUtils, BillFullDetailsBillMonths, BillFullDetails) {
+			
+	        $scope.orgRole = Principal.getOrgRole();	        
 			
 			$scope.customerComplaints = {};
 			$scope.billFullDetailss = [];
@@ -27,7 +29,7 @@ angular.module('watererpApp').controller(
 				}, function(result) {
 					$scope.customerComplaints = result;
 					$scope.getBillDetails($scope.customerComplaints.can);
-					
+					$scope.customerComplaints.remarks = "";
 				});
 			};
 				
@@ -66,7 +68,11 @@ angular.module('watererpApp').controller(
 			
 
 			$scope.approve = function(id) {
-				ApplicationTxnService.approveCustComplaint(id);
+				//ApplicationTxnService.approveCustComplaint(id);
+				if ($scope.customerComplaints.id != null) {
+					CustomerComplaints.update(
+							$scope.customerComplaints
+							);}
 			}
 
 			$scope.datePickerForBillMonth = {};
