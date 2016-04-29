@@ -116,7 +116,7 @@
 										name="divisionMaster"
 										ng-model="feasibilityStudy.divisionMaster"
 										ng-change="getStreet(feasibilityStudy.divisionMaster.id)"
-										ng-options="divisionMaster as divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
+										ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
 										<option value=""></option>
 									</select>
 								</div>
