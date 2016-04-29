@@ -1,76 +1,118 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myOnlinePaymentOrderLabel">Create or edit a OnlinePaymentOrder</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="onlinePaymentOrder.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_serviceCode">ServiceCode</label>
-            <input type="text" class="form-control" name="serviceCode" id="field_serviceCode"
-                    ng-model="onlinePaymentOrder.serviceCode"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_amount">Amount</label>
-            <input type="text" class="form-control" name="amount" id="field_amount"
-                    ng-model="onlinePaymentOrder.amount"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_payBy">PayBy</label>
-            <input type="text" class="form-control" name="payBy" id="field_payBy"
-                    ng-model="onlinePaymentOrder.payBy"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_userDefinedField">UserDefinedField</label>
-            <input type="text" class="form-control" name="userDefinedField" id="field_userDefinedField"
-                    ng-model="onlinePaymentOrder.userDefinedField"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_email">Email</label>
-            <input type="text" class="form-control" name="email" id="field_email"
-                    ng-model="onlinePaymentOrder.email"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_phone">Phone</label>
-            <input type="text" class="form-control" name="phone" id="field_phone"
-                    ng-model="onlinePaymentOrder.phone"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_orderTime">OrderTime</label>
-            <input id="field_orderTime" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="onlinePaymentOrder.orderTime" is-open="datePickerForOrderTime.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForOrderTimeOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Online Payment</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<label for="field_applicationTxn">Search By CAN</label>
 
-        <div class="form-group">
-            <label for="field_merchantMaster">merchantMaster</label>
-            <select class="form-control" id="field_merchantMaster" name="merchantMaster" ng-model="onlinePaymentOrder.merchantMaster" ng-options="merchantMaster as merchantMaster.id for merchantMaster in merchantmasters track by merchantMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+							<div class="form-group"
+								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search CAN or Name or Address (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i>
+									No CANs Found
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_userDefinedField">Can</label>
+							<input type="text" class="form-control" name="userDefinedField"
+								id="field_userDefinedField"
+								ng-model="onlinePaymentOrder.userDefinedField" readonly />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_consName">Consumer
+								Name</label>
+							<input type="text" class="form-control" name="consName"
+								id="field_consName" ng-model="consName" readonly />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_address">Address</label>
+							<input type="text" class="form-control" name="address"
+								id="field_address" ng-model="address" readonly />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4"
+							ng-class="{ 'has-error' : editForm.amount.$invalid && !editForm.amount.$pristine }"
+							ng-pattern="/^[0-9]*$/>
+							<label class="
+							control-label" for="field_amount">
+							Receipt Amount
+							</label>
+							<input type="number" class="form-control" name="amount"
+								required="required" min="1" id="field_amount"
+								ng-model="onlinePaymentOrder.amount" />
+							<p ng-show="editForm.amount.$error.pattern" class="help-block">Only
+								numbers.</p>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_payBy">Payment Mode</label>
+							<select class="form-control" id="field_payBy" name="payBy"
+								ng-model="onlinePaymentOrder.payBy" required="required">
+								<options>Tigo Pesa</options>
+								<options>Credit Card</options>
+								<options>Debit Card</options>
+								<options>Net Banking</options>
+							</select>
+						</div>
+						<div class="col-sm-4"
+							ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }">
+							<label class="control-label" for="field_email">Email</label>
+							<input type="number" class="form-control" name="email"
+								required="required" min="1" id="field_email"
+								ng-model="onlinePaymentOrder.email" />
+							<p ng-show="editForm.email.$error.pattern" class="help-block">Invalid
+								E-mail.</p>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-sm-4"
+							ng-class="{ 'has-error' : editForm.phone.$invalid && !editForm.phone.$pristine }"
+							ng-pattern="/^[0-9]*$/">
+							<label class="control-label" for="field_phone">Phone</label>
+							<input type="number" class="form-control" name="phone"
+								required="required" min="1" id="field_phone"
+								ng-model="onlinePaymentOrder.phone" />
+							<p ng-show="editForm.phone.$error.pattern" class="help-block">Only
+								numbers.</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>
+						&nbsp;
+						<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="validate()"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>
+						&nbsp;
+						<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </form>

@@ -115,10 +115,27 @@ public class OnlinePaymentService {
 
 	@Transactional(rollbackFor=Exception.class)
 	public OnlinePaymentOrder processOrder(OnlinePaymentOrder onlinePaymentOrder) throws Exception {
+		
+		ConfigurationDetails cd = configurationDetailsRepository
+				.findOneByName("ONLINE_PAYMENT_SERVICE_CODE");
+		
+		onlinePaymentOrder.setServiceCode(cd.getValue());
+		onlinePaymentOrder.setOrderTime(ZonedDateTime.now());
+		
+		cd = configurationDetailsRepository
+				.findOneByName("ONLINE_PAYMENT_MERCHANT_CODE");
+		MerchantMaster mm = merchantMasterRepository
+				.getByMerchantCode(cd.getValue());
+		
+		if(mm == null)
+			throw new Exception ("Invalid Merchant Code");
+		
+		onlinePaymentOrder.setMerchantMaster(mm);
+		
 		OnlinePaymentOrder result = onlinePaymentOrderRepository
 				.save(onlinePaymentOrder);
 
-		ConfigurationDetails cd = configurationDetailsRepository
+		cd = configurationDetailsRepository
 				.findOneByName("ONLINE_PAYMENT_SERVER_URL");
 
 		String xml = buildXML(onlinePaymentOrder);

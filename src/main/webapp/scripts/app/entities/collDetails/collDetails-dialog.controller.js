@@ -57,6 +57,9 @@ angular.module('watererpApp').controller(
 
 			$scope.validate = function() {
 
+				if($scope.isSaving)
+					return true;
+				
 				if (!$scope.isValidCust)
 					return true;
 
