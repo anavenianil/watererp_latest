@@ -110,6 +110,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<ApplicationTxn> createApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to save ApplicationTxn : {}", applicationTxn);
@@ -169,7 +170,7 @@ public class ApplicationTxnResource {
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
             custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
-            custDetails.setAddress(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
+            custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             
             custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
             custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
