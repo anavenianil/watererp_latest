@@ -2,13 +2,11 @@
 
 angular.module('watererpApp').controller(
 		'OnlinePaymentOrderDialogController',
-		function($scope, $http, $stateParams, $window, $uibModalInstance, entity,
-				OnlinePaymentOrder, OnlinePaymentResponseSvc, MerchantMaster) {
+		function($scope, $stateParams, $http, $window, OnlinePaymentOrder,
+				OnlinePaymentResponseSvc, MerchantMaster) {
 
-			$scope.custDetails = {};
+			$scope.onlinePaymentOrder = {};
 			$scope.isValidCust = false;
-
-			$scope.onlinePaymentOrder = entity;
 			$scope.merchantmasters = MerchantMaster.query();
 
 			$scope.load = function(id) {
@@ -21,7 +19,7 @@ angular.module('watererpApp').controller(
 
 			var onSaveSuccess = function(result) {
 				$scope.$emit('watererpApp:onlinePaymentOrderUpdate', result);
-				$uibModalInstance.close(result);
+				//$uibModalInstance.close(result);
 				console.log("This is the result:" + JSON.stringify(result));
 				$scope.isSaving = false;
 				OnlinePaymentResponseSvc.findByOrder(result.id).then(
