@@ -2,11 +2,11 @@
 
 angular.module('watererpApp').controller(
 		'CustomerComplaintsDetailController',
-		function($scope, $filter, $rootScope, $stateParams, 
+		function($scope, $state, $filter, $rootScope, $stateParams, 
 				CustomerComplaints, ComplaintTypeMaster, Principal,
 				RequestWorkflowHistory, ParseLinks, ApplicationTxnService,
 				BillFullDetailsSvc, DateUtils, BillFullDetailsBillMonths, BillFullDetails) {
-			
+			//This code is used to get the role name / designation.
 	        $scope.orgRole = Principal.getOrgRole();	        
 			
 			$scope.customerComplaints = {};
@@ -28,7 +28,8 @@ angular.module('watererpApp').controller(
 					id : id
 				}, function(result) {
 					$scope.customerComplaints = result;
-					$scope.getBillDetails($scope.customerComplaints.can);
+					$scope.getBillDetails($scope.customerComplaints.can);					
+					$scope.customerComplaints.remarks1 = $scope.customerComplaints.remarks;
 					$scope.customerComplaints.remarks = "";
 				});
 			};
@@ -50,29 +51,12 @@ angular.module('watererpApp').controller(
 					});
 			$scope.$on('$destroy', unsubscribe);
 
-			/*$scope.getWorkflowHistoryByDomainId = function() {
-				$scope.requestWorkflowHistorys = [];
-				RequestWorkflowHistory.query({
-					page : $scope.page,
-					size : 20,
-					dimainObjectId : $stateParams.id
-				}, function(result, headers) {
-					$scope.links = ParseLinks.parse(headers('link'));
-					for (var i = 0; i < result.length; i++) {
-						$scope.requestWorkflowHistorys.push(result[i]);
-					}
-				});
-			};*/
-			
-			
-			
-
 			$scope.approve = function(id) {
 				//ApplicationTxnService.approveCustComplaint(id);
 				if ($scope.customerComplaints.id != null) {
-					CustomerComplaints.update(
-							$scope.customerComplaints
-							);}
+					CustomerComplaints.update($scope.customerComplaints);
+					$scope.getWorkflowHistoryByDomainId();
+				}
 			}
 
 			$scope.datePickerForBillMonth = {};
@@ -89,7 +73,6 @@ angular.module('watererpApp').controller(
 				var dateFormat = 'yyyy-MM-dd';
 				var billDateISO = $filter('date')(billDate, dateFormat);
 
-				console.log(billDateISO);
 				$scope.can = $scope.customerComplaints.can;
 
 				BillFullDetailsSvc
@@ -115,5 +98,4 @@ angular.module('watererpApp').controller(
 	        if ($stateParams.id != null) {
 				$scope.getWorkflowHistoryByDomainId();
 			}
-
 		});

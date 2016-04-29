@@ -12,6 +12,7 @@ angular.module('watererpApp').controller(
         $scope.collDetails = {};
         var date  = new Date();
         $scope.billDetails.billDate = date;
+        $scope.billDetails.metReadingDt = date;
         $scope.billDetails.toMonth = new Date(date.getFullYear(), date.getMonth(), 1);
         $scope.users = User.query();
         $scope.reverse = true;
@@ -68,7 +69,7 @@ angular.module('watererpApp').controller(
 		}
         
         $scope.onSelect = function($item, $model, $label) {
-        	$scope.billDetails.billDate = new Date();
+        	$scope.billDetails.metReadingDt = new Date();
 			console.log($item);
 			var arr = $item.split("-");
 			$scope.billDetails.can = arr[0];
@@ -81,7 +82,7 @@ angular.module('watererpApp').controller(
         
         $scope.toggleMeterReadingDate = function(cbtyp){
         	if(cbtyp==='M'){
-        		$scope.billDetails.prevMetReadingDt1 = $scope.billDetails.billDate;
+        		$scope.billDetails.prevMetReadingDt1 = $scope.billDetails.metReadingDt;
         	}else{
         		$scope.billDetails.prevMetReadingDt1 = $scope.billDetails.prevMetReadingDt;
         	}
