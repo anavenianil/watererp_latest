@@ -107,7 +107,7 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		log.debug("listApprovedRequests: {}");
 		workflowService.getUserDetails();
 		String sql = "select id,request_type,count from ( "
-				+ "			SELECT  request_master_id id,(select request_type from request_master where id=a.request_master_id) request_type,count(*) count "
+				+ "			SELECT  request_master_id id,(select request_type from request_master where id=a.request_master_id) request_type,count(distinct domain_object) count "
 				+ "			FROM request_workflow_history a where status_master_id in (5,7,9)  and assigned_to_id="
 				+ workflowService.getSfID() + " group by request_master_id "
 				+ "			) a";
@@ -210,8 +210,7 @@ public class ApplicationTxnCustomRepositoryImpl extends
 				+ " and   r.status_master_id in (5,7,9) and assigned_to_id="
 				+ workflowService.getSfID()
 				+ " and  r.request_master_id="
-				+ type;
-		;
+				+ type +" group by r.domain_object";
 
 		log.debug("listAllApprovedRequests: {} : " + sql);
 

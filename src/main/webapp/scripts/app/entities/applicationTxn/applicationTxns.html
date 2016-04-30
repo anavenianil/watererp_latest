@@ -10,12 +10,11 @@
 			<div class="list-group-item">
 				<div class="table-responsive">
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<select class="input-sm form-control" id="statusSearch"
 								ng-model="statusSearch" ng-change="onSearch()">
 								<option value="" label="All">Select Status</option>
-								<option value="0" label="Pending">Pending
-									Approval</option>
+								<option value="0" label="Pending">Pending Approval</option>
 								<option value="1" label="Pending Approval">Forwarded</option>
 								<option value="2" label="In Feasibility">In Feasibility</option>
 								<option value="3" label="In Proceedings">In Proceedings</option>
@@ -28,13 +27,13 @@
 								<option value="8" label="Completed">Completed</option>
 							</select>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<input type="text" class="input-sm form-control"
 								id="applicationTxnId" placeholder="Search By Application No"
 								name="applicationTxnId" ng-model="applicationTxnId"
 								ng-change="onSearch()" />
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<div class="form-group">
 								<div class='input-group date' id='field_requestedDate'>
 									<input id="field_requestedDate" type="text"
@@ -50,6 +49,15 @@
 									</span>
 								</div>
 							</div>
+						</div>
+						<div class="col-md-3">
+							<select class="input-sm form-control" id="typeSearch"
+								ng-model="typeSearch" ng-change="onSearch()">
+								<option value="" label="All">Select Status</option>
+								<option value="0" label="Metered">Metered</option>
+								<option value="1" label="Without Metered">Without
+									Metered</option>
+							</select>
 						</div>
 
 
@@ -90,6 +98,7 @@
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="status"><span>Status</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
+								<th><span>Type</span></th>
 
 								<!-- <th jh-sort-by="homeOrOficeNumber"><span>HomeOrOficeNumber</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
@@ -135,7 +144,19 @@
 								<td>{{applicationTxn.can}}</td>
 								<td>{{applicationTxn.tariffCategoryMaster.tariffCategory}}</td>
 								<td>{{applicationTxn.divisionMaster.divisionName}}</td>
-								<td>{{applicationTxn.status}}</td>
+								<!-- <td>{{applicationTxn.status}}</td> -->
+								<td><span class="label"
+									ng-class="{ 'label-danger': applicationTxn.status === 0, 'label-default': applicationTxn.status === 1,
+												'label-info': applicationTxn.status === 2, 'label-primary': applicationTxn.status === 3, 
+												'label-warning': applicationTxn.status === 4, 'label-default': applicationTxn.status === 5, 
+												'label-info': applicationTxn.status === 6,  'label-primary': applicationTxn.status === 7, 
+												'label-success': applicationTxn.status === 8}">
+										{{(applicationTxn.status===0?'Pending':(applicationTxn.status===1?'Approved':(applicationTxn.status===2?'Feasibility':
+										(applicationTxn.status===3?'Proceedings':(applicationTxn.status===4?'Receipt':(applicationTxn.status===5?'Store':
+										(applicationTxn.status===6?'Meter':(applicationTxn.status===7?'CAN':'Completed'))))))))}}</span></td>
+								<td><span class="label"
+									ng-class="{ 'label-success'   : applicationTxn.user == null, 'label-danger'   : applicationTxn.user !=null}">
+										{{applicationTxn.user===null?'Metered':'Unmetered'}}</span></td>
 
 								<!-- <td>{{applicationTxn.homeOrOficeNumber}}</td>
 								<td>{{applicationTxn.regionalNumber}}</td>

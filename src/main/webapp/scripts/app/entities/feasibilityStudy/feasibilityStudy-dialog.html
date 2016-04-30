@@ -116,7 +116,8 @@
 										name="divisionMaster"
 										ng-model="feasibilityStudy.divisionMaster"
 										ng-change="getStreet(feasibilityStudy.divisionMaster.id)"
-										ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id" required>
+										ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
+										required>
 										<option value=""></option>
 									</select>
 								</div>
@@ -124,7 +125,8 @@
 									<label for="field_streetMaster">Street</label> <select
 										class="form-control" id="field_streetMaster"
 										name="streetMaster" ng-model="feasibilityStudy.streetMaster"
-										ng-options="streetMaster as streetMaster.streetNo +'-'+ streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id" required>
+										ng-options="streetMaster as streetMaster.streetNo +'-'+ streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id"
+										required>
 										<option value=""></option>
 									</select>
 								</div>

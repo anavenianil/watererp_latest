@@ -200,7 +200,7 @@ angular.module('watererpApp')
                 parent: 'applicationTxn',
                 url: '/withoutMeter',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'ApplicationTxn'
                 },
                 views: {

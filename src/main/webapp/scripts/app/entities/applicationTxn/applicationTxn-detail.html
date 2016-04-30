@@ -71,7 +71,7 @@
 								<h5 class="list-group-item-heading">{{applicationTxn.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-show="applicationTxn.can!=null">
+							<div class="col-sm-3" ng-if="applicationTxn.can!=null">
 								<label>Customer Account Number(CAN)</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.can}}</h5>
 							</div>
@@ -143,6 +143,16 @@
 								<label>Detail Address</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.dma}}</h5>
 							</div>
+							<div class="col-sm-3"
+								ng-if="applicationTxn.divisionMaster.divisionName != null">
+								<label>DMA</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.divisionMaster.divisionName}}</h5>
+							</div>
+							<div class="col-sm-3"
+								ng-if="applicationTxn.streetMaster.streetName != null">
+								<label>Street</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.streetMaster.streetName}}</h5>
+							</div>
 						</div>
 					</fieldset>
 					<fieldset>
@@ -202,6 +212,21 @@
 							</div>
 						</div>
 					</fieldset>
+					<br>
+					<fieldset ng-if="applicationTxn.user != null">
+						<legend>Approval Details </legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Approved By</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.user.firstName}}&nbsp;{{applicationTxn.user.firstName}}({{applicationTxn.user.login}})</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Approved Date</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.approvedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+						</div>
+					</fieldset>
 				</div>
 			</div>
 		</div>
@@ -212,7 +237,7 @@
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Forward
 		</button>
-		
+
 		<button type="button" class="btn btn-success pull-right"
 			ng-if="applicationTxn.status === 1 && orgRole.orgRoleName === 'Technical Zonal Supervisor'"
 			ng-click="getApplicationTxn(applicationTxn.id)">

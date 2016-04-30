@@ -72,12 +72,13 @@ angular.module('watererpApp').factory(
 						return response.data;
 					});
 				},
-				search : function(applicationTxnNo, applicationTxnDt, statusSearch) {
+				search : function(applicationTxnNo, applicationTxnDt, statusSearch, typeSearch) {
 					return $http.get('api/applicationTxns/search', {
 						params : {
 							applicationTxnNo : applicationTxnNo,
 							applicationTxnDt : applicationTxnDt,
-							statusSearch : statusSearch
+							statusSearch : statusSearch,
+							typeSearch : typeSearch
 						}
 					}).then(function(response) {
 						return response.data;

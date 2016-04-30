@@ -266,9 +266,7 @@ public class ApplicationTxnResource {
 	@Transactional
 	public ResponseEntity<Void> approveApplication(@RequestParam(value = "id", required = false) Long id,
 						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
-
 		workflowService.getUserDetails();
-	    
 		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
 	    workflowService.setRemarks(remarks);  
 	    Integer status = applicationTxn.getStatus();
@@ -406,7 +404,8 @@ public class ApplicationTxnResource {
 	public ResponseEntity<List<ApplicationTxn>> search(
 			@RequestParam(value = "applicationTxnNo", required = false) String applicationTxnNo,
 			@RequestParam(value = "applicationTxnDt", required = false) String applicationTxnDt,
-			@RequestParam(value = "statusSearch", required = false) String statusSearch
+			@RequestParam(value = "statusSearch", required = false) String statusSearch,
+			@RequestParam(value = "typeSearch", required = false) String typeSearch
 			)
 			throws URISyntaxException, Exception {
 		log.debug("ApplicationTxn -------- search: {}");
@@ -426,6 +425,15 @@ public class ApplicationTxnResource {
 		
 		if(statusSearch != null && !statusSearch.equals(""))
 			whereClause = " status = " + statusSearch +" ";
+		
+		if(typeSearch != null && !typeSearch.equals("")){
+			if(typeSearch.equals("0")){
+				whereClause = " user_id is null ";
+			}
+			else{
+				whereClause = " user_id is not null ";
+			}
+		}
 
 		applicationTxns = applicationTxnCustomRepository.search(
 					whereClause);
