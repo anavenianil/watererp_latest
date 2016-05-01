@@ -459,7 +459,7 @@ public class BillingService {
 			bfd.setWaterCess(0.00f);
 			bfd.setSewerageCess(0.00f);
 			bfd.setServiceCharge(0.00f);
-
+			bfd.setMeterServiceCharge(0.00f);
 			// Subtract Avg Water charges in case of Lock Bill scenario
 			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
