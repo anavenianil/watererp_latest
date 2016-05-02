@@ -69,7 +69,6 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         
         $scope.getLocation = function(val) {
 			$scope.isValidCust = false;
-			
 			return $http.get('api/custDetailss/searchCAN/' + val, {
 				params : {
 					address : val,
@@ -90,7 +89,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
                 $scope.meterChange.custDetails = $scope.custDetails;
                 $scope.custDetailsId = $scope.custDetails.id;
                 $scope.meterChange.existingMeterNumber = $scope.custDetails.meterNo;
-                $scope.meterChange.existingMeterReading = $scope.custDetails.prevReading;
+                //$scope.meterChange.existingMeterReading = $scope.custDetails.prevReading;
                 $scope.meterChange.custDetails.id = $scope.custDetailsId;
             });
         };
