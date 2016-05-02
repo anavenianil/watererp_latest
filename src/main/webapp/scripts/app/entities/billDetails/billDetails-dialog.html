@@ -30,7 +30,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
-							<label class="control-label" for="field_can">Can</label> <input
+							<label class="control-label" for="field_can">CAN</label> <input
 								type="text" class="form-control" name="can" id="field_can"
 								ng-model="billDetails.can" readonly />
 						</div>
@@ -70,13 +70,13 @@
 							</div>
 						</div>
 						<div class="col-sm-4">
-							<label class="control-label" for="field_billDate">Bill
+							<label class="control-label" for="field_billDate">Meter Reading
 								Date</label>
 							<div class="form-group">
 								<div class='input-group' id='field_billDate'>
 									<input id="field_billDate" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="billDetails.billDate"
+										ng-model="billDetails.metReadingDt"
 										is-open="datePickerForBillDate.status.opened" required /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
