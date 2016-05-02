@@ -26,8 +26,7 @@ public class OnlinePaymentOrder implements Serializable {
     private Long id;
 
     @NotNull
-    @Min(value = 4)
-    @Max(value = 7)
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,10}$")
     @Column(name = "service_code", nullable = false)
     private String serviceCode;
 
@@ -43,19 +42,18 @@ public class OnlinePaymentOrder implements Serializable {
     private PaymentMode payBy;
 
     @NotNull
-    @Min(value = 8)
-    @Max(value = 9)
+    @Pattern(regexp = "^[a-zA-Z0-9]{6,10}$")
     @Column(name = "user_defined_field", nullable = false)
     private String userDefinedField;
 
     @NotNull
-    @Pattern(regexp = "")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     @Column(name = "email", nullable = false)
     private String email;
 
     @NotNull
-    @Min(value = 5)
-    @Max(value = 15)
+    @Min(value = 99999999)
+    @Max(value = 9999999999L)
     @Column(name = "phone", nullable = false)
     private Long phone;
 

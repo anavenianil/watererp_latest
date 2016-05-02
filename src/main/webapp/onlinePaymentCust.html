@@ -230,14 +230,62 @@ p+p {
 				},
 				updater : function(item) {
 					var arr = item.split("-");
-					document.forms[0].userDefinedField.value = arr[0];
+					document.forms[0].userDefinedField.value = arr[0].trim();
 					document.forms[0].consName.value = arr[1];
 					document.forms[0].address.value = arr[2];
 				}
 			});
 		});
 
+		function validate()
+		{
+			var errors = [];
+			var regExUDF = /^[a-zA-Z0-9]{6,10}$/;
+			var regExEmail = /^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
+			
+			if (!regExUDF.test(document.forms[0].userDefinedField.value)) {
+				errors[errors.length] = "Enter valid CAN.";
+			}
+			
+			if (!(isNumber(document.forms[0].amount.value) && document.forms[0].amount.value > 0 && document.forms[0].amount.value < 10000000 )) {
+				errors[errors.length] = "Enter valid Amount.";
+			}
+
+			if (!regExEmail.test(document.forms[0].email.value)) {
+				errors[errors.length] = "Enter valid Email.";
+			}
+			
+			if (!(isNumber(document.forms[0].phone.value) && document.forms[0].phone.value > 99999999 && document.forms[0].phone.value < 9999999999 )) {
+				errors[errors.length] = "Enter valid Phone No.";
+			}
+			
+			 if (errors.length > 0) {
+
+				  reportErrors(errors);
+				  return false;
+			 }
+			 else
+				 return true;
+		}
+		
+		function reportErrors(errors){
+			 var msg = "Please Enter Valide Data...\n";
+			 for (var i = 0; i<errors.length; i++) {
+			 var numError = i + 1;
+			  msg += "\n" + numError + ". " + errors[i];
+			}
+			 alert(msg);
+			}
+		
+		function isNumber(n){
+		    return typeof n == 'number' && !isNaN(n) && isFinite(n);
+		 }
+		
 		function save() {
+			
+			if(!validate())
+				return;
+			
 			var onlinePaymentOrder = {};
 			onlinePaymentOrder.userDefinedField = document.forms[0].userDefinedField.value;
 			onlinePaymentOrder.amount = document.forms[0].amount.value;
@@ -278,15 +326,17 @@ p+p {
 				type : "POST",
 				contentType : "application/json; charset=utf-8",
 				success : function(response, textStatus, request) {
-					$('#le-alert').addClass('in'); 
+					$('#le-alert').addClass('alert-success').addClass('in'); 
 					location.href = request
 							.getResponseHeader('X-watererpApp-redirect');
 				},
 				error : function(response) {
-					alert(response.responseText);
+					$('#le-alert').addClass('alert-error').addClass('in').html(response.responseText);
+//					alert(response.responseText);
 				},
 				failure : function(response) {
-					alert(response.responseText);
+					$('#le-alert').addClass('alert-error').addClass('in').html(response.responseText);
+//					alert(response.responseText);
 				}
 			});
 
@@ -305,7 +355,7 @@ p+p {
 
 				<div class="list-group-item">
 					<div class="modal-body">
-									<div id="le-alert" class="alert alert-success alert-block fade">
+									<div id="le-alert" class="alert alert-block fade">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Success!</strong>
 					Payment Initiated. Please wait while you are being redirected to payment page now...
@@ -326,6 +376,7 @@ p+p {
 								<label class="control-label" for="field_userDefinedField">Can</label>
 								<input type="text" class="form-control" name="userDefinedField"
 									id="field_userDefinedField" readonly />
+									<span class="help-inline">Invalid CAN</span>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_consName">Consumer
@@ -346,6 +397,7 @@ p+p {
 									Receipt Amount </label>
 								<input type="number" class="form-control" name="amount"
 									required="required" min="1" id="field_amount" />
+									<span class="help-inline">Invalid Amount</span>
 							</div>
 							<div class="col-sm-4">
 								<label for="field_payBy">Payment Mode</label>
@@ -361,6 +413,7 @@ p+p {
 								<label class="control-label" for="field_email">Email</label>
 								<input type="email" class="form-control" name="email"
 									required="required" id="field_email" />
+									<span class="help-inline">Invalid Email</span>
 							</div>
 						</div>
 						<div class="row">
@@ -368,6 +421,7 @@ p+p {
 								<label class="control-label" for="field_phone">Phone</label>
 								<input type="number" class="form-control" name="phone"
 									required="required" id="field_phone" />
+									<span class="help-inline">Invalid phone</span>
 							</div>
 						</div>
 					</div>
