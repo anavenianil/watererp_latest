@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myApprovalDetailsLabel">Create or edit a ApprovalDetails</h4>
+        <h4 class="modal-title" id="myApprovalDetailsLabel">Create or edit a Approval Details</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -20,7 +20,7 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_approvedDate">ApprovedDate</label>
+            <label class="control-label" for="field_approvedDate">Approved Date</label>
             <input id="field_approvedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="approvalDetails.approvedDate" is-open="datePickerForApprovedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -28,44 +28,44 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_approvedEmpNo">ApprovedEmpNo</label>
+            <label class="control-label" for="field_approvedEmpNo">Approved Employee Number</label>
             <input type="text" class="form-control" name="approvedEmpNo" id="field_approvedEmpNo"
                     ng-model="approvalDetails.approvedEmpNo"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_approvedEmpName">ApprovedEmpName</label>
+            <label class="control-label" for="field_approvedEmpName">Approved Employee Name</label>
             <input type="text" class="form-control" name="approvedEmpName" id="field_approvedEmpName"
                     ng-model="approvalDetails.approvedEmpName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_approvedEmpDesig">ApprovedEmpDesig</label>
+            <label class="control-label" for="field_approvedEmpDesig">Approved Employee Design</label>
             <input type="text" class="form-control" name="approvedEmpDesig" id="field_approvedEmpDesig"
                     ng-model="approvalDetails.approvedEmpDesig"
                      />
         </div>
 
         <div class="form-group">
-            <label for="field_customer">customer</label>
+            <label for="field_customer">Customer</label>
             <select class="form-control" id="field_customer" name="customer" ng-model="approvalDetails.customer" ng-options="customer as customer.id for customer in customers track by customer.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_feasibilityStatus">feasibilityStatus</label>
+            <label for="field_feasibilityStatus">Feasibility Status</label>
             <select class="form-control" id="field_feasibilityStatus" name="feasibilityStatus" ng-model="approvalDetails.feasibilityStatus" ng-options="feasibilityStatus as feasibilityStatus.id for feasibilityStatus in feasibilitystatuss track by feasibilityStatus.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_designationMaster">designationMaster</label>
+            <label for="field_designationMaster">Designation Master</label>
             <select class="form-control" id="field_designationMaster" name="designationMaster" ng-model="approvalDetails.designationMaster" ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_applicationTxn">applicationTxn</label>
+            <label for="field_applicationTxn">Application Transaction</label>
             <select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="approvalDetails.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
                 <option value=""></option>
             </select>
