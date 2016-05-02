@@ -79,13 +79,13 @@
 								<label class="control-label" for="field_existingMeterNumber">Existing
 									Meter Number</label> <input type="text" class="form-control"
 									name="existingMeterNumber" id="field_existingMeterNumber"
-									ng-model="meterChange.existingMeterNumber" readonly/>
+									ng-model="meterChange.existingMeterNumber" readonly />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_existingMeterReading">Existing
 									Meter Reading</label> <input type="number" class="form-control"
 									name="existingMeterReading" id="field_existingMeterReading"
-									ng-model="meterChange.existingMeterReading"/>
+									ng-model="meterChange.existingMeterReading" required />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_reasonForChange">Reason
@@ -96,7 +96,8 @@
 								<select class="form-control" id="field_reasonForChange"
 									name="reasonForChange" ng-model="meterChange.reasonForChange1"
 									ng-change="getReason(meterChange.reasonForChange1.status)"
-									ng-options="meterChangeStatus as meterChangeStatus.status for meterChangeStatus in meterChangeStatuss track by meterChangeStatus.status">
+									ng-options="meterChangeStatus as meterChangeStatus.status for meterChangeStatus in meterChangeStatuss track by meterChangeStatus.status"
+									required>
 									<option value=""></option>
 								</select>
 							</div>
@@ -104,24 +105,25 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-4">
-								<label for="field_meterDetails">Meter Details</label> <select
+								<label for="field_meterDetails">New Meter Number</label> <select
 									class="form-control" id="field_meterDetails"
 									name="meterDetails" ng-model="meterChange.meterDetails"
-									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
+									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
+									required>
 									<option value=""></option>
 								</select>
 							</div>
-							<div class="col-sm-4">
+							<!-- <div class="col-sm-4">
 								<label class="control-label" for="field_newMeterNumber">New
 									Meter Number</label> <input type="text" class="form-control"
 									name="newMeterNumber" id="field_newMeterNumber"
-									ng-model="meterChange.newMeterNumber" />
-							</div>
+									ng-model="meterChange.newMeterNumber" required/>
+							</div> -->
 							<div class="col-sm-4">
 								<label class="control-label" for="field_newMeterReading">New
 									Meter Reading</label> <input type="number" class="form-control"
 									name="newMeterReading" id="field_newMeterReading"
-									ng-model="meterChange.newMeterReading" />
+									ng-model="meterChange.newMeterReading" required/>
 							</div>
 						</div>
 					</fieldset>
@@ -132,14 +134,14 @@
 								<label for="field_user">Approved By</label> <select
 									class="form-control" id="field_user" name="user"
 									ng-model="meterChange.user"
-									ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
+									ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users" required>
 									<option value=""></option>
 								</select>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<input type="text" class="form-control" name="remarks"
-									id="field_remarks" ng-model="meterChange.remarks" />
+									id="field_remarks" ng-model="meterChange.remarks" required/>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_approvedDate">Approved
@@ -149,7 +151,7 @@
 										<input id="field_approvedDate" type="text"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="meterChange.approvedDate"
-											is-open="datePickerForApprovedDate.status.opened" /> <span
+											is-open="datePickerForApprovedDate.status.opened" required/> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForApprovedDateOpen($event)">

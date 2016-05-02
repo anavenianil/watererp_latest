@@ -181,7 +181,14 @@ public class ApplicationTxnResource {
         if(applicationTxn.getStatus()==7){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
-            custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            if(applicationTxn.getMiddleName()!=null){
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            }
+            else{
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
+            }
+            
+            
             custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             
             custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
