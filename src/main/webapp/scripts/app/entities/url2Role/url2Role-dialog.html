@@ -5,7 +5,7 @@
 		<button type="button" class="close" data-dismiss="modal"
 			aria-hidden="true" ng-click="clear()">&times;</button>
 		<h4 class="modal-title" id="myUrl2RoleLabel">Create or edit a
-			Url2Role</h4>
+			Url2 Role</h4>
 	</div>
 	<div class="modal-body">
 		<jh-alert-error></jh-alert-error>
@@ -15,14 +15,14 @@
 		</div>
 
 		<div class="form-group">
-			<label for="field_url">url</label> <select class="form-control"
+			<label for="field_url">Url</label> <select class="form-control"
 				id="field_url" name="url" ng-model="url2Role.url"
 				ng-options="url as url.urlPattern for url in urls track by url.id">
 				<option value=""></option>
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="field_authority">authority</label> <select
+			<label for="field_authority">Authority</label> <select
 				class="form-control" id="field_authority" name="authority"
 				ng-model="url2Role.authority"
 				ng-options="authority as authority.name for authority in authoritys track by authority.name">

@@ -1,7 +1,7 @@
 
 <div>
 	<h2>
-		<span>CustomerComplaints</span> {{customerComplaints.id}}
+		<span>Customer Complaints</span> {{customerComplaints.id}}
 	</h2>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -56,17 +56,17 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span>RelevantDoc</span></td>
+					<td><span>Relevant Document</span></td>
 					<td><span class="form-control-static">{{customerComplaints.relevantDoc}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>ComplaintBy</span></td>
+					<td><span>Complaint By</span></td>
 					<td><span class="form-control-static">{{customerComplaints.complaintBy}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>ComplaintDate</span></td>
+					<td><span>Complaint Date</span></td>
 					<td><span class="form-control-static">{{customerComplaints.complaintDate
 							| date:'mediumDate'}}</span></td>
 				</tr>
@@ -76,7 +76,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span>complaintTypeMaster</span></td>
+					<td><span>complaint Type Master</span></td>
 					<td><a class="form-control-static"
 						ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.complaintTypeMaster.complaintType}}</a>
 					</td>

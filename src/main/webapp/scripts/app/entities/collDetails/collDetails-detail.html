@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>CollDetails</span> {{collDetails.id}}</h2>
+    <h2><span>Collection Details</span> {{collDetails.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>ReversalRef</span>
+                    <span>Reversal Reference</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.reversalRef}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ReceiptNo</span>
+                    <span>Receipt Number</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.receiptNo}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ReceiptAmt</span>
+                    <span>Receipt Amount</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.receiptAmt}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ReceiptDt</span>
+                    <span>Receipt Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.receiptDt | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ReceiptMode</span>
+                    <span>Receipt Mode</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.receiptMode}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>InstrNo</span>
+                    <span>Instrument Number</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.instrNo}}</span>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>InstrDt</span>
+                    <span>Instrument Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.instrDt | date:'mediumDate'}}</span>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>InstrIssuer</span>
+                    <span>Instrument Issuer</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.instrIssuer}}</span>
@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>SvrStatus</span>
+                    <span>Sever Status</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.svrStatus}}</span>
@@ -92,7 +92,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ConsName</span>
+                    <span>Consumer Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.consName}}</span>
@@ -100,7 +100,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>TerminalId</span>
+                    <span>Terminal Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.terminalId}}</span>
@@ -108,7 +108,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CollTime</span>
+                    <span>Collection Time</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.collTime | date:'medium'}}</span>
@@ -116,7 +116,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>TxnStatus</span>
+                    <span>Transaction Status</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.txnStatus}}</span>
@@ -124,7 +124,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>MeterReaderId</span>
+                    <span>Meter Reader Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.meterReaderId}}</span>
@@ -132,7 +132,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>UserId</span>
+                    <span>User Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.userId}}</span>
@@ -148,7 +148,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>SettlementId</span>
+                    <span>Settlement Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.settlementId}}</span>
@@ -156,7 +156,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ExtSettlementId</span>
+                    <span>Ext Settlement Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.extSettlementId}}</span>
@@ -164,7 +164,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Lat</span>
+                    <span>Latitude</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.lat}}</span>
@@ -172,7 +172,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LongI</span>
+                    <span>Longitude</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.longI}}</span>
@@ -180,7 +180,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>paymentTypes</span>
+                    <span>Payment Types</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="paymentTypes.detail({id:collDetails.paymentTypes.id})">{{collDetails.paymentTypes.id}}</a>
@@ -188,7 +188,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>instrumentIssuerMaster</span>
+                    <span>Instrument Issuer Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="instrumentIssuerMaster.detail({id:collDetails.instrumentIssuerMaster.id})">{{collDetails.instrumentIssuerMaster.id}}</a>
@@ -196,7 +196,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>collectionTypeMaster</span>
+                    <span>Collection Type Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="collectionTypeMaster.detail({id:collDetails.collectionTypeMaster.id})">{{collDetails.collectionTypeMaster.id}}</a>

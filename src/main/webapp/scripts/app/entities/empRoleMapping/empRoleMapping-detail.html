@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>EmpRoleMapping</span> {{empRoleMapping.id}}</h2>
+    <h2><span>Employee Role Mapping</span> {{empRoleMapping.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>InternalDivision</span>
+                    <span>Internal Division</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{empRoleMapping.internalDivision}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>InternalRole</span>
+                    <span>Internal Role</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{empRoleMapping.internalRole}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{empRoleMapping.creationDate | date:'medium'}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{empRoleMapping.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ParentRoleId</span>
+                    <span>Parent Role Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{empRoleMapping.parentRoleId}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>user</span>
+                    <span>User</span>
                 </td>
                 <td>
                     {{empRoleMapping.user.id}}
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>parentUser</span>
+                    <span>Parent User</span>
                 </td>
                 <td>
                     {{empRoleMapping.parentUser.id}}
@@ -68,15 +68,15 @@
             </tr>
             <tr>
                 <td>
-                    <span>orgRoleInstance</span>
-                </td>
+                    <span>Organization Role Instance</span>
+                </td> 
                 <td>
                     <a class="form-control-static" ui-sref="orgRoleInstance.detail({id:empRoleMapping.orgRoleInstance.id})">{{empRoleMapping.orgRoleInstance.id}}</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:empRoleMapping.statusMaster.id})">{{empRoleMapping.statusMaster.id}}</a>

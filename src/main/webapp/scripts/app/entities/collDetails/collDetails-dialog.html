@@ -76,7 +76,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptNo">Receipt
-								No</label> <input type="text" class="form-control" name="receiptNo"
+								Number</label> <input type="text" class="form-control" name="receiptNo"
 								id="field_receiptNo" ng-model="collDetails.receiptNo" readonly />
 						</div>
 						<div class="col-sm-4">
@@ -135,7 +135,7 @@
 							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_instrNo">Instrument
-								No</label> <input type="text" class="form-control" name="field_instrNo"
+								Number</label> <input type="text" class="form-control" name="field_instrNo"
 								id="field_instrNo" ng-model="collDetails.instrNo"
 								ng-disabled="!instrEnabled" />
 							<p
@@ -187,10 +187,10 @@
 				</div>
 				
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
+					 <button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-					</button>
+					</button> 
 					<button type="submit" ng-disabled="validate()"
 						class="btn btn-primary" id="submitSave">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>

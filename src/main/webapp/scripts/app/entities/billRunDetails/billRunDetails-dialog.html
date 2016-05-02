@@ -20,7 +20,7 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_fromDt">FromDt</label>
+            <label class="control-label" for="field_fromDt">From Date</label>
             <input id="field_fromDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="billRunDetails.fromDt" is-open="datePickerForFromDt.status.opened"
             />
             <span class="input-group-btn">
@@ -28,7 +28,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_toDt">ToDt</label>
+            <label class="control-label" for="field_toDt">To Date</label>
             <input id="field_toDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="billRunDetails.toDt" is-open="datePickerForToDt.status.opened"
             />
             <span class="input-group-btn">
@@ -49,13 +49,13 @@
         </div>
 
         <div class="form-group">
-            <label for="field_billFullDetails">billFullDetails</label>
+            <label for="field_billFullDetails">Bill Full Details</label>
             <select class="form-control" id="field_billFullDetails" name="billFullDetails" ng-model="billRunDetails.billFullDetails" ng-options="billFullDetails as billFullDetails.id for billFullDetails in billfulldetailss track by billFullDetails.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_billRunMaster">billRunMaster</label>
+            <label for="field_billRunMaster">Bill Run Master</label>
             <select class="form-control" id="field_billRunMaster" name="billRunMaster" ng-model="billRunDetails.billRunMaster" ng-options="billRunMaster as billRunMaster.id for billRunMaster in billrunmasters track by billRunMaster.id">
                 <option value=""></option>
             </select>

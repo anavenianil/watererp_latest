@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>DepartmentsMaster</span> {{departmentsMaster.id}}</h2>
+    <h2><span>Departments Master</span> {{departmentsMaster.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>DepartmentName</span>
+                    <span>Department Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsMaster.departmentName}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ParentDeparment</span>
+                    <span>Parent Department</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsMaster.parentDeparment}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsMaster.creationDate | date:'medium'}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsMaster.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>departmentsHierarchy</span>
+                    <span>Departments Hierarchy</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="departmentsHierarchy.detail({id:departmentsMaster.departmentsHierarchy.id})">{{departmentsMaster.departmentsHierarchy.id}}</a>
@@ -52,15 +52,15 @@
             </tr>
             <tr>
                 <td>
-                    <span>departmentTypeMaster</span>
-                </td>
+                    <span>Department Type Master</span>
+                </td>               
                 <td>
                     <a class="form-control-static" ui-sref="departmentTypeMaster.detail({id:departmentsMaster.departmentTypeMaster.id})">{{departmentsMaster.departmentTypeMaster.id}}</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:departmentsMaster.statusMaster.id})">{{departmentsMaster.statusMaster.id}}</a>

@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myDepartmentsHierarchyLabel">Create or edit a DepartmentsHierarchy</h4>
+        <h4 class="modal-title" id="myDepartmentsHierarchyLabel">Create or edit a Departments Hierarchy</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,19 +14,19 @@
                     ng-model="departmentsHierarchy.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_deptHierarchyName">DeptHierarchyName</label>
+            <label class="control-label" for="field_deptHierarchyName">Department Hierarchy Name</label>
             <input type="text" class="form-control" name="deptHierarchyName" id="field_deptHierarchyName"
                     ng-model="departmentsHierarchy.deptHierarchyName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_parentDeptHierarchyId">ParentDeptHierarchyId</label>
+            <label class="control-label" for="field_parentDeptHierarchyId">Parent Department Hierarchy Id</label>
             <input type="number" class="form-control" name="parentDeptHierarchyId" id="field_parentDeptHierarchyId"
                     ng-model="departmentsHierarchy.parentDeptHierarchyId"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <label class="control-label" for="field_creationDate">Creation Date</label>
             <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="departmentsHierarchy.creationDate" is-open="datePickerForCreationDate.status.opened"
             />
             <span class="input-group-btn">
@@ -34,7 +34,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
             <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="departmentsHierarchy.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            <label for="field_statusMaster">statusMaster</label>
+            <label for="field_statusMaster">Status Master</label>
             <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="departmentsHierarchy.statusMaster" ng-options="statusMaster as statusMaster.id for statusMaster in statusmasters track by statusMaster.id">
                 <option value=""></option>
             </select>

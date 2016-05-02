@@ -1,7 +1,7 @@
 
 <div>
 	<h2>
-		<span>MeterChange</span> {{meterChange.id}}
+		<span>Meter Change</span> {{meterChange.id}}
 	</h2>
 	<div class="table-responsive">
 		<table class="table table-striped">
@@ -18,27 +18,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span>ReasonForChange</span></td>
+					<td><span>Reason For Change</span></td>
 					<td><span class="form-control-static">{{meterChange.reasonForChange}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>ExistingMeterNumber</span></td>
+					<td><span>Existing Meter Number</span></td>
 					<td><span class="form-control-static">{{meterChange.existingMeterNumber}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>ExistingMeterReading</span></td>
+					<td><span>Existing Meter Reading</span></td>
 					<td><span class="form-control-static">{{meterChange.existingMeterReading}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>NewMeterNumber</span></td>
+					<td><span>New Meter Number</span></td>
 					<td><span class="form-control-static">{{meterChange.newMeterNumber}}</span>
 					</td>
 				</tr>
 				<tr>
-					<td><span>NewMeterReading</span></td>
+					<td><span>New Meter Reading</span></td>
 					<td><span class="form-control-static">{{meterChange.newMeterReading}}</span>
 					</td>
 				</tr>
@@ -48,24 +48,24 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span>ApprovedDate</span></td>
+					<td><span>Approved Date</span></td>
 					<td><span class="form-control-static">{{meterChange.approvedDate
 							| date:'mediumDate'}}</span></td>
 				</tr>
 				<tr>
-					<td><span>custDetails</span></td>
+					<td><span>Customer Details</span></td>
 					<td><a class="form-control-static"
 						ui-sref="custDetails.detail({id:meterChange.custDetails.id})">{{meterChange.custDetails.id}}</a>
 					</td>
 				</tr>
 				<tr>
-					<td><span>meterDetails</span></td>
+					<td><span>Meter Details</span></td>
 					<td><a class="form-control-static"
 						ui-sref="meterDetails.detail({id:meterChange.meterDetails.id})">{{meterChange.meterDetails.id}}</a>
 					</td>
 				</tr>
 				<tr>
-					<td><span>user</span></td>
+					<td><span>User</span></td>
 					<td>{{meterChange.user.id}}</td>
 				</tr>
 			</tbody>

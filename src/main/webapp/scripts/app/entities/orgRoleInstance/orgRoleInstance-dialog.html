@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myOrgRoleInstanceLabel">Create or edit a OrgRoleInstance</h4>
+        <h4 class="modal-title" id="myOrgRoleInstanceLabel">Create or edit a Organization Role Instance</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,19 +14,19 @@
                     ng-model="orgRoleInstance.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_orgRoleName">OrgRoleName</label>
+            <label class="control-label" for="field_orgRoleName">Organization Role Name</label>
             <input type="text" class="form-control" name="orgRoleName" id="field_orgRoleName"
                     ng-model="orgRoleInstance.orgRoleName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_parentOrgRoleId">ParentOrgRoleId</label>
+            <label class="control-label" for="field_parentOrgRoleId">Parent Organization Role Id</label>
             <input type="number" class="form-control" name="parentOrgRoleId" id="field_parentOrgRoleId"
                     ng-model="orgRoleInstance.parentOrgRoleId"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <label class="control-label" for="field_creationDate">Creation Date</label>
             <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="orgRoleInstance.creationDate" is-open="datePickerForCreationDate.status.opened"
             />
             <span class="input-group-btn">
@@ -34,7 +34,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
             <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="orgRoleInstance.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -42,26 +42,26 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_isHead">IsHead</label>
+            <label class="control-label" for="field_isHead">Is Head</label>
             <input type="number" class="form-control" name="isHead" id="field_isHead"
                     ng-model="orgRoleInstance.isHead"
                      />
         </div>
 
         <div class="form-group">
-            <label for="field_statusMaster">statusMaster</label>
-            <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="orgRoleInstance.statusMaster" ng-options="statusMaster as statusMaster.id for statusMaster in statusmasters track by statusMaster.id">
+            <label for="field_statusMaster">Status Master</label>
+            <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="orgRoleInstance.statusMaster" ng-options="statusMaster as statusMaster.id+'-'+statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_orgRoleHierarchy">orgRoleHierarchy</label>
+            <label for="field_orgRoleHierarchy">Organization Role Hierarchy</label>
             <select class="form-control" id="field_orgRoleHierarchy" name="orgRoleHierarchy" ng-model="orgRoleInstance.orgRoleHierarchy" ng-options="orgRoleHierarchy as orgRoleHierarchy.id for orgRoleHierarchy in orgrolehierarchys track by orgRoleHierarchy.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_departmentsMaster">departmentsMaster</label>
+            <label for="field_departmentsMaster">Departments Master</label>
             <select class="form-control" id="field_departmentsMaster" name="departmentsMaster" ng-model="orgRoleInstance.departmentsMaster" ng-options="departmentsMaster as departmentsMaster.id for departmentsMaster in departmentsmasters track by departmentsMaster.id">
                 <option value=""></option>
             </select>

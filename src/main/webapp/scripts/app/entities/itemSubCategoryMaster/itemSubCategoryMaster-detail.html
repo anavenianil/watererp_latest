@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>ItemSubCategoryMaster</span> {{itemSubCategoryMaster.id}}</h2>
+    <h2><span>Item Sub Category Master</span> {{itemSubCategoryMaster.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>ItemSubCategoryCode</span>
+                    <span>Item Sub Category Code</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{itemSubCategoryMaster.itemSubCategoryCode}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{itemSubCategoryMaster.creationDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{itemSubCategoryMaster.lastModifiedDate | date:'medium'}}</span>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CategoryCode</span>
+                    <span>Category Code</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{itemSubCategoryMaster.categoryCode}}</span>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>itemCategoryMaster</span>
+                    <span>Item Category Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="itemCategoryMaster.detail({id:itemSubCategoryMaster.itemCategoryMaster.id})">{{itemSubCategoryMaster.itemCategoryMaster.id}}</a>

@@ -3,7 +3,7 @@
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h4 class="panel-title pull-left">Issue Items for the application No.: {{applicationTxnId}}</h4>
+			<h4 class="panel-title pull-left">Issue Items for the Application No.: {{applicationTxnId}}</h4>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -27,7 +27,7 @@
 								</select>
 							</div>
 							<div class="col-sm-3">
-								<label for="field_uom">uom</label> <select class="form-control"
+								<label for="field_uom">Uom</label> <select class="form-control"
 									id="field_uom_{{$index}}" name="uom"
 									ng-model="itemRequired.itemRequiredArr[x].uom"
 									ng-options="uom as uom.value for uom in uoms track by uom.id" disabled>

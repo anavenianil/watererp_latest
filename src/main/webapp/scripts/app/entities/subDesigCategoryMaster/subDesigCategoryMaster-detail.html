@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>SubDesigCategoryMaster</span> {{subDesigCategoryMaster.id}}</h2>
+    <h2><span>Sub Design Category Master</span> {{subDesigCategoryMaster.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{subDesigCategoryMaster.creationDate | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified SDate</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{subDesigCategoryMaster.lastModifiedDate | date:'medium'}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>OrderBy</span>
+                    <span>Order By</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{subDesigCategoryMaster.orderBy}}</span>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:subDesigCategoryMaster.statusMaster.id})">{{subDesigCategoryMaster.statusMaster.id}}</a>

@@ -3,7 +3,7 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Create or edit a
-				FeasibilityStudy</h3>
+				Feasibility Study</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -94,14 +94,14 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
-								<label>govtOfficialNo</label> <input type="text"
+								<label>Government Official Number</label> <input type="text"
 									class="form-control" id="field_govtOfficialNo"
 									name="govtOfficialNo"
 									ng-modal="feasibilityStudy.govtOfficialNo"
 									ng-value="applicationTxn.govtOfficialNo" disabled>
 							</div>
 							<div class="col-sm-4">
-								<label>Pincode</label> <input type="text" class="form-control"
+								<label>Pin Code</label> <input type="text" class="form-control"
 									id="field_pincode" name="pincode"
 									ng-modal="feasibilityStudy.pincode"
 									ng-value="applicationTxn.pincode" disabled>
@@ -126,7 +126,7 @@
 									ng-value="applicationTxn.mobile" disabled>
 							</div>
 							<div class="col-sm-4">
-								<label>section</label> <input type="text" class="form-control"
+								<label>Section</label> <input type="text" class="form-control"
 									id="field_section" name="section"
 									ng-modal="feasibilityStudy.section"
 									ng-value="applicationTxn.section" disabled>
@@ -138,7 +138,7 @@
 						<legend>Accepted For</legend>
 						<div class="row">
 							<div class="col-sm-6">
-								<label for="field_schemeMaster">schemeMaster</label> <select
+								<label for="field_schemeMaster">Scheme Master</label> <select
 									class="form-control" id="field_schemeMaster"
 									name="schemeMaster" ng-model="feasibilityStudy.schemeMaster"
 									ng-options="schemeMaster as schemeMaster.schemeName for schemeMaster in schememasters track by schemeMaster.id">
@@ -149,13 +149,13 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-6">
-								<label class="control-label" for="field_plotAreaInSqMtrs">PlotAreaInSqMtrs</label>
+								<label class="control-label" for="field_plotAreaInSqMtrs">Plot Area In Sq Mtrs</label>
 								<input type="number" class="form-control"
 									name="plotAreaInSqMtrs" id="field_plotAreaInSqMtrs"
 									ng-model="feasibilityStudy.plotAreaInSqMtrs" />
 							</div>
 							<div class="col-sm-6">
-								<label class="control-label" for="field_plotAreaInYards">PlotAreaInYards</label>
+								<label class="control-label" for="field_plotAreaInYards">Plot Area In Yards</label>
 								<input type="number" class="form-control" name="plotAreaInYards"
 									id="field_plotAreaInYards"
 									ng-model="feasibilityStudy.plotAreaInYards" />
@@ -164,7 +164,7 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-6">
-								<label for="field_tariffCategoryMaster">tariffCategoryMaster</label>
+								<label for="field_tariffCategoryMaster">Tariff Category Master</label>
 								<select class="form-control" id="field_tariffCategoryMaster"
 									name="tariffCategoryMaster"
 									ng-model="feasibilityStudy.tariffCategoryMaster"
@@ -173,7 +173,7 @@
 								</select>
 							</div>
 							<div class="col-sm-6">
-								<label for="field_categoryMaster">categoryMaster</label> <select
+								<label for="field_categoryMaster">Category Master</label> <select
 									class="form-control" id="field_categoryMaster"
 									name="categoryMaster"
 									ng-model="feasibilityStudy.categoryMaster"
@@ -185,13 +185,13 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-6">
-								<label class="control-label" for="field_noOfFlatsOrNoOfUnits">NoOfFlatsOrNoOfUnits</label>
+								<label class="control-label" for="field_noOfFlatsOrNoOfUnits">Number Of Flats Or Number Of Units</label>
 								<input type="number" class="form-control"
 									name="noOfFlatsOrNoOfUnits" id="field_noOfFlatsOrNoOfUnits"
 									ng-model="feasibilityStudy.noOfFlatsOrNoOfUnits" />
 							</div>
 							<div class="col-sm-6">
-								<label class="control-label" for="field_noOfFloors">NoOfFloors</label>
+								<label class="control-label" for="field_noOfFloors">Number Of Floors</label>
 								<input type="number" class="form-control" name="noOfFloors"
 									id="field_noOfFloors" ng-model="feasibilityStudy.noOfFloors" />
 							</div>
@@ -199,13 +199,13 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-6">
-								<label class="control-label" for="field_totalPlinthArea">TotalPlinthArea</label>
+								<label class="control-label" for="field_totalPlinthArea">Total Plinth Area</label>
 								<input type="number" class="form-control" name="totalPlinthArea"
 									id="field_totalPlinthArea"
 									ng-model="feasibilityStudy.totalPlinthArea" />
 							</div>
 							<div class="col-sm-6">
-								<label class="control-label" for="field_waterRequirement">WaterRequirement</label>
+								<label class="control-label" for="field_waterRequirement">Water Requirement</label>
 								<input type="number" class="form-control"
 									name="waterRequirement" id="field_waterRequirement"
 									ng-model="feasibilityStudy.waterRequirement" />
@@ -216,7 +216,7 @@
 							<legend>Water Connection</legend>
 							<div class="row">
 								<div class="col-sm-4">
-									<label for="field_pipeSizeMaster">pipeSizeMaster</label> <select
+									<label for="field_pipeSizeMaster">Pipe Size Master</label> <select
 										class="form-control" id="field_pipeSizeMaster"
 										name="pipeSizeMaster"
 										ng-model="feasibilityStudy.pipeSizeMaster"
@@ -225,7 +225,7 @@
 									</select>
 								</div>
 								<div class="col-sm-4">
-									<label for="field_mainWaterSize">mainWaterSize</label> <select
+									<label for="field_mainWaterSize">Main Water Size</label> <select
 										class="form-control" id="field_mainWaterSize"
 										name="mainWaterSize" ng-model="feasibilityStudy.mainWaterSize"
 										ng-options="mainWaterSize as mainWaterSize.size for mainWaterSize in mainwatersizes track by mainWaterSize.id">
@@ -233,7 +233,7 @@
 									</select>
 								</div>
 								<div class="col-sm-4">
-									<label for="field_makeOfWaterPipe">makeOfWaterPipe</label> <select
+									<label for="field_makeOfWaterPipe">Make Of Water Pipe</label> <select
 										class="form-control" id="field_makeOfWaterPipe"
 										name="makeOfWaterPipe"
 										ng-model="feasibilityStudy.makeOfWaterPipe"
@@ -248,7 +248,7 @@
 							<legend>Sewerage Connection</legend>
 							<div class="row">
 								<div class="col-sm-4">
-									<label for="field_sewerSize">sewerSize</label> <select
+									<label for="field_sewerSize">Sewer Size</label> <select
 										class="form-control" id="field_sewerSize" name="sewerSize"
 										ng-model="feasibilityStudy.sewerSize"
 										ng-options="sewerSize as sewerSize.sewerSize for sewerSize in sewersizes track by sewerSize.id">
@@ -256,7 +256,7 @@
 									</select>
 								</div>
 								<div class="col-sm-4">
-									<label for="field_mainSewerageSize">mainSewerageSize</label> <select
+									<label for="field_mainSewerageSize">Main Sewerage Size</label> <select
 										class="form-control" id="field_mainSewerageSize"
 										name="mainSewerageSize"
 										ng-model="feasibilityStudy.mainSewerageSize"
@@ -265,7 +265,7 @@
 									</select>
 								</div>
 								<div class="col-sm-4">
-									<label for="field_makeOfSeweragePipe">makeOfSeweragePipe</label>
+									<label for="field_makeOfSeweragePipe">Make Of Sewerage Pipe</label>
 									<select class="form-control" id="field_makeOfSeweragePipe"
 										name="makeOfSeweragePipe"
 										ng-model="feasibilityStudy.makeOfSeweragePipe"
@@ -278,7 +278,7 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-6">
-								<label for="field_docketCode">docketCode</label> <select
+								<label for="field_docketCode">Docket Code</label> <select
 									class="form-control" id="field_docketCode" name="docketCode"
 									ng-model="feasibilityStudy.docketCode"
 									ng-options="docketCode as docketCode.code for docketCode in docketcodes track by docketCode.id">
@@ -286,7 +286,7 @@
 								</select>
 							</div>
 							<div class="col-sm-6">
-								<label for="field_feasibilityStatus">feasibilityStatus</label> <select
+								<label for="field_feasibilityStatus">feasibility Status</label> <select
 									class="form-control" id="field_feasibilityStatus"
 									name="feasibilityStatus"
 									ng-model="feasibilityStudy.feasibilityStatus"
