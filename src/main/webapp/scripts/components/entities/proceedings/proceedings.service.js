@@ -19,3 +19,4 @@ angular.module('watererpApp')
     		'query': { method: 'GET', isArray: true}
         });
     });
+

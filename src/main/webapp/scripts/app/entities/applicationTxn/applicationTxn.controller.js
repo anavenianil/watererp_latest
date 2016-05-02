@@ -102,7 +102,10 @@ angular.module('watererpApp')
             var statusSearch = document.getElementById("statusSearch").value;
             console.log("statusSearch: "+statusSearch);
             
-            ApplicationTxnService.search(applicationTxnNo, applicationTxnDt, statusSearch).then(function (data) {
+            var typeSearch = document.getElementById("typeSearch").value;
+            console.log("typeSearch: "+typeSearch);
+            
+            ApplicationTxnService.search(applicationTxnNo, applicationTxnDt, statusSearch, typeSearch).then(function (data) {
                 $scope.applicationTxns = data;
             });
         }

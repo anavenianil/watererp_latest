@@ -25,6 +25,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,13 +39,14 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
-import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
+import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.repository.UserRepository;
@@ -94,6 +96,12 @@ public class ApplicationTxnResource {
     @Inject
     private CustMeterMappingRepository custMeterMappingRepository;
     
+    @Inject
+    private ConfigurationDetailsRepository configurationDetailsRepository;
+    
+    @Inject
+    private ProceedingsRepository proceedingsRepository;
+    
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -102,6 +110,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<ApplicationTxn> createApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to save ApplicationTxn : {}", applicationTxn);
@@ -144,6 +153,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<ApplicationTxn> updateApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to update ApplicationTxn : {}", applicationTxn);
@@ -157,9 +167,18 @@ public class ApplicationTxnResource {
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         if(applicationTxn.getStatus()==7){
-        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);
-            
+        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
+            custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
+            
+            custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
+            custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
+            custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
+            custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
+            
+            custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+            
             CustDetails cd = custDetailsRepository.save(custDetails);
             
             //saving to CustMetermMapping
@@ -244,11 +263,10 @@ public class ApplicationTxnResource {
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
+	@Transactional
 	public ResponseEntity<Void> approveApplication(@RequestParam(value = "id", required = false) Long id,
 						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
-
 		workflowService.getUserDetails();
-	    
 		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
 	    workflowService.setRemarks(remarks);  
 	    Integer status = applicationTxn.getStatus();
@@ -362,7 +380,7 @@ public class ApplicationTxnResource {
 			throws Exception{
 		log.debug("REST request to get CAN : {}");
 		FeasibilityStudy feasibility = feasibilityStudyRepository.findOne(feasibilityId);
-		String division = feasibility.getDivisionMaster().getDivisionName();
+		String division = feasibility.getDivisionMaster().getDivisionCode();
 		String street = feasibility.getStreetMaster().getStreetNo();
 		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
 		Integer can = applicationTxnRepository.findByCan(division, street);
@@ -386,7 +404,8 @@ public class ApplicationTxnResource {
 	public ResponseEntity<List<ApplicationTxn>> search(
 			@RequestParam(value = "applicationTxnNo", required = false) String applicationTxnNo,
 			@RequestParam(value = "applicationTxnDt", required = false) String applicationTxnDt,
-			@RequestParam(value = "statusSearch", required = false) String statusSearch
+			@RequestParam(value = "statusSearch", required = false) String statusSearch,
+			@RequestParam(value = "typeSearch", required = false) String typeSearch
 			)
 			throws URISyntaxException, Exception {
 		log.debug("ApplicationTxn -------- search: {}");
@@ -406,6 +425,15 @@ public class ApplicationTxnResource {
 		
 		if(statusSearch != null && !statusSearch.equals(""))
 			whereClause = " status = " + statusSearch +" ";
+		
+		if(typeSearch != null && !typeSearch.equals("")){
+			if(typeSearch.equals("0")){
+				whereClause = " user_id is null ";
+			}
+			else{
+				whereClause = " user_id is not null ";
+			}
+		}
 
 		applicationTxns = applicationTxnCustomRepository.search(
 					whereClause);

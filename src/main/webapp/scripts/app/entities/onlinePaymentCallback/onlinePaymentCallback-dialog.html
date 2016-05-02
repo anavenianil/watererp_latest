@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myOnlinePaymentCallbackLabel">Create or edit a OnlinePaymentCallback</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="onlinePaymentCallback.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_currency">Currency</label>
+            <input type="text" class="form-control" name="currency" id="field_currency"
+                    ng-model="onlinePaymentCallback.currency"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_paymentMode">PaymentMode</label>
+            <input type="text" class="form-control" name="paymentMode" id="field_paymentMode"
+                    ng-model="onlinePaymentCallback.paymentMode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_serviceCode">ServiceCode</label>
+            <input type="text" class="form-control" name="serviceCode" id="field_serviceCode"
+                    ng-model="onlinePaymentCallback.serviceCode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_message">Message</label>
+            <input type="text" class="form-control" name="message" id="field_message"
+                    ng-model="onlinePaymentCallback.message"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_responseCode">ResponseCode</label>
+            <input type="text" class="form-control" name="responseCode" id="field_responseCode"
+                    ng-model="onlinePaymentCallback.responseCode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_totalAmountPaid">TotalAmountPaid</label>
+            <input type="number" class="form-control" name="totalAmountPaid" id="field_totalAmountPaid"
+                    ng-model="onlinePaymentCallback.totalAmountPaid"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_userDefinedField">UserDefinedField</label>
+            <input type="text" class="form-control" name="userDefinedField" id="field_userDefinedField"
+                    ng-model="onlinePaymentCallback.userDefinedField"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_merchantMaster">merchantMaster</label>
+            <select class="form-control" id="field_merchantMaster" name="merchantMaster" ng-model="onlinePaymentCallback.merchantMaster" ng-options="merchantMaster as merchantMaster.id for merchantMaster in merchantmasters track by merchantMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_onlinePaymentOrder">onlinePaymentOrder</label>
+            <select class="form-control" id="field_onlinePaymentOrder" name="onlinePaymentOrder" ng-model="onlinePaymentCallback.onlinePaymentOrder" ng-options="onlinePaymentOrder as onlinePaymentOrder.id for onlinePaymentOrder in onlinepaymentorders track by onlinePaymentOrder.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

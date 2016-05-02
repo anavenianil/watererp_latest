@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.callippus.water.erp.domain.RequestMaster;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 
 /**
@@ -23,6 +24,6 @@ public interface RequestWorkflowHistoryRepository extends JpaRepository<RequestW
     @Query("select requestWorkflowHistory from RequestWorkflowHistory requestWorkflowHistory where requestWorkflowHistory.appliedBy.login = ?#{principal.username}")
     List<RequestWorkflowHistory> findByAppliedByIsCurrentUser();
     
-    Page<RequestWorkflowHistory> findByDomainObject(Pageable pageable, Long domainObject);
+    Page<RequestWorkflowHistory> findByDomainObjectAndRequestMaster(Pageable pageable, Long domainObject, RequestMaster requestMaster);
 
 }

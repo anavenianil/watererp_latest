@@ -345,14 +345,6 @@ public class BillingService {
 			dFrom = customer.getPrevBillMonth();
 			dTo = bill_details.getBillDate().withDayOfMonth(1);
 			
-			long billDays = ChronoUnit.DAYS.between(dFrom,
-					dTo);
-			
-			if(billDays  <= 0)
-			{
-				throw new Exception("Invalid From:" + dFrom.format(DateTimeFormatter.ofPattern("yyyyMM"))+" and To:" + dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
-			}
-
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
 					.getPrevBillType().equals("M"))
@@ -368,7 +360,15 @@ public class BillingService {
 					log.debug("          NEW METER BILL CASE (" + days
 							+ " days)");
 					log.debug("########################################");
-				} else {
+				} else {				
+					long billDays = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
+							dTo);
+					
+					if(billDays  <= 0)
+					{
+						throw new Exception("Invalid From:" + dFrom.format(DateTimeFormatter.ofPattern("yyyyMM"))+" and To:" + dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
+					}
+					
 					log.debug("########################################");
 					log.debug("          METER BILL CASE (" + days + " days)");
 					log.debug("########################################");
@@ -455,7 +455,11 @@ public class BillingService {
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
 			bfd.setId(null);
-
+			
+			bfd.setWaterCess(0.00f);
+			bfd.setSewerageCess(0.00f);
+			bfd.setServiceCharge(0.00f);
+			bfd.setMeterServiceCharge(0.00f);
 			// Subtract Avg Water charges in case of Lock Bill scenario
 			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
@@ -496,12 +500,25 @@ public class BillingService {
 					+ bfd.getServiceCharge() + bfd.getSewerageCess()
 					+ bfd.getSurcharge() + bfd.getOtherCharges();
 
+			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") "
+					+ "+ Meter Svc Charge(" + bfd.getMeterServiceCharge() + ") "
+					+ "+ Service Charge (" + bfd.getServiceCharge()+ ") "
+					+ "+ SewerageCess (" + bfd.getSewerageCess()+ ") "
+					+ "+ Surcharge (" + bfd.getSurcharge()+ ") "
+					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") "
+					+ "= Total (" + total + ") ");
+			
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
 			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears()
 					+ bfd.getArrears();
 			bfd.setNetPayableAmount(CPSUtils.round(netPayable.floatValue(), 2));
 
+			log.debug("Net Payable = Total (" + bfd.getTotalAmount() + ") "
+					+ "+ Int on Arrears (" + bfd.getIntOnArrears() + ") "
+					+ "+ Arrears (" + bfd.getArrears()+ ") "
+					+ "= Net Payable  (" + netPayable+ ") ");
+						
 			LocalDateTime date = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hhmmss");
 

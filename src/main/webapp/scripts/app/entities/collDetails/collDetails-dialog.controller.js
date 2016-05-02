@@ -38,7 +38,7 @@ angular.module('watererpApp').controller(
 				$scope.isSaving = false;
 			};
 
-			$scope.getLocation = function(val) {
+			$scope.getCustomer = function(val) {
 				$scope.isValidCust = false;
 				
 				return $http.get('api/custDetailss/searchCAN/' + val, {
@@ -57,6 +57,9 @@ angular.module('watererpApp').controller(
 
 			$scope.validate = function() {
 
+				if($scope.isSaving)
+					return true;
+				
 				if (!$scope.isValidCust)
 					return true;
 
@@ -105,7 +108,6 @@ angular.module('watererpApp').controller(
 			}
 
 			$scope.onSelect = function($item, $model, $label) {
-				console.log($item);
 				var arr = $item.split("-");
 				$scope.collDetails = {};
 				$scope.collDetails.can = arr[0];
@@ -166,7 +168,7 @@ angular.module('watererpApp').controller(
 			}
 
 			$scope.resetInstr = function(paymentMode) {
-				if (paymentMode === 'CASH') {
+				if (paymentMode.toUpperCase() === 'CASH') {
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;

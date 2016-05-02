@@ -2,9 +2,10 @@
 
 angular.module('watererpApp')
     .controller('ApplicationTxnDetailController', function ($state, $scope, $rootScope, $stateParams, entity, ApplicationTxn, 
-    		ApplicationTxnService, RequestWorkflowHistory, ParseLinks) {
+    		ApplicationTxnService, RequestWorkflowHistory, ParseLinks, Principal) {
         $scope.applicationTxn = entity;
         
+        $scope.orgRole = Principal.getOrgRole();
         $scope.approvalDetails = {};
         
         $scope.maxDate = new Date();
@@ -32,7 +33,7 @@ angular.module('watererpApp')
         
         $scope.getWorkflowHistoryByDomainId = function() {
         	$scope.requestWorkflowHistorys = [];
-            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id}, function(result, headers) {
+            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id, requestId: 6}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.requestWorkflowHistorys.push(result[i]);

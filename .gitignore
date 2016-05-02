@@ -133,4 +133,9 @@ Desktop.ini
 ######################
 /src/main/webapp/WEB-INF/assets
 
-
+######################
+# Temporary reports
+######################
+/src/main/resources/reports/*.pdf
+/src/main/resources/reports/*.xlsx
+/src/main/resources/reports/*.docx

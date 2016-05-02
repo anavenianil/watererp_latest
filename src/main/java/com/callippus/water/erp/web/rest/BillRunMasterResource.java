@@ -69,8 +69,15 @@ public class BillRunMasterResource {
 			if (param.length() < 3) // It's an area
 			{
 				result = billingService.generateBill();
-			} else if (param.length() == 9) {
+			} else if (param.length() == 9 || param.length() == 8) {
 				result = billingService.generateSingleBill(param);
+			}
+			else
+			{
+				return ResponseEntity
+						.ok()
+						.headers(
+								HeaderUtil.createAlert("Invalid CAN length of "+param.length()+" chars.", "")).body(result);
 			}
 		}
 		return ResponseEntity

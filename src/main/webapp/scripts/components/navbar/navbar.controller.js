@@ -30,7 +30,7 @@ angular
 
 					$scope.logout = function() {
 						Auth.logout();
-						window.location = '/';
+						window.location = '/erpLogin.html';
 						$scope.userRole = "";
 					};
 

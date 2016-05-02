@@ -3,7 +3,7 @@
 
 angular.module('watererpApp').controller('ProceedingsDialogController',
         function($scope, $state, $stateParams, Proceedings, PercentageMaster, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks, 
-        		ApplicationTxnService, Uom, ConfigurationDetails) {
+        		ApplicationTxnService, Uom, ConfigurationDetails, PipeSizeMaster) {
 
         $scope.proceedings = {};
         //$scope.percentagemasters = PercentageMaster.query();
@@ -11,6 +11,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.itemrequireds = ItemRequired.query();
         $scope.materialmasters = MaterialMaster.query();
         $scope.uoms = Uom.query();
+        $scope.pipeSizeMasters = PipeSizeMaster.query();
         $scope.proceedings.itemRequired = {};
         $scope.applicationTxnId = $stateParams.applicationTxnId;
         $scope.proceedings.itemRequireds = [];
@@ -142,6 +143,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.removeItemArr = function() {
             var lastItem = $scope.itemArr.length-1;
             $scope.count = $scope.count +1
+            $scope.proceedings.itemRequireds[$scope.count]= {};
             $scope.itemArr.splice(lastItem);
             $scope.calculateRate();
           };

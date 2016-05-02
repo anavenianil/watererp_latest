@@ -16,15 +16,15 @@
 								ng-model="applicationTxn.id" readonly />
 						</div>
 						<div class="col-sm-4">
-							<label class="control-label" for="field_connectionDate">Connection Date</label>
+							<label class="control-label" for="field_connectionDate">Connection
+								Date</label>
 							<div class="form-group">
 								<div class="input-group date" id="field_connectionDate">
 									<input id="field_connectionDate" type="text"
 										class="form-control" uib-datepicker-popup="{{dateformat}}"
 										ng-model="applicationTxn.connectionDate"
 										is-open="datePickerForConnectionDate.status.opened"
-										max-date="dtmax" required />
-									<span class="input-group-btn">
+										max-date="dtmax" required /> <span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											ng-click="datePickerForConnectionDateOpen($event)">
 											<i class="glyphicon glyphicon-calendar"></i>
@@ -40,7 +40,8 @@
 							<label for="field_meterDetails">Meter Details</label> <select
 								class="form-control" id="field_meterDetails" name="meterDetails"
 								ng-model="applicationTxn.meterDetails"
-								ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
+								ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
+								required>
 								<option value=""></option>
 							</select>
 						</div>
@@ -48,7 +49,7 @@
 							<label class="control-label" for="field_meterReading">Meter
 								Reading</label> <input type="text" class="form-control"
 								name="meterReading" id="field_meterReading"
-								ng-model="applicationTxn.meterReading" />
+								ng-model="applicationTxn.meterReading" required />
 						</div>
 					</div>
 					<br>
@@ -56,7 +57,7 @@
 						<div class="col-sm-8">
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<textarea rows="2" cols="30" class="form-control" name="remarks"
-								id="field_remarks" style="resize: none" 
+								id="field_remarks" style="resize: none"
 								ng-model="applicationTxn.remarks"></textarea>
 						</div>
 					</div>

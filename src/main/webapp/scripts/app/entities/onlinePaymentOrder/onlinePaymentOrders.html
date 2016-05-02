@@ -1,0 +1,64 @@
+<div>
+    <h2>OnlinePaymentOrders</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="onlinePaymentOrder.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new OnlinePaymentOrder</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serviceCode"><span>ServiceCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="payBy"><span>PayBy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="userDefinedField"><span>UserDefinedField</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phone"><span>Phone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="orderTime"><span>OrderTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="merchantMaster.id"><span>merchantMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="onlinePaymentOrder in onlinePaymentOrders track by onlinePaymentOrder.id">
+                    <td><a ui-sref="onlinePaymentOrder.detail({id:onlinePaymentOrder.id})">{{onlinePaymentOrder.id}}</a></td>
+                    <td>{{onlinePaymentOrder.serviceCode}}</td>
+                    <td>{{onlinePaymentOrder.amount}}</td>
+                    <td translate="{{'watererpApp.PaymentMode.' + onlinePaymentOrder.payBy}}">{{onlinePaymentOrder.payBy}}</td>
+                    <td>{{onlinePaymentOrder.userDefinedField}}</td>
+                    <td>{{onlinePaymentOrder.email}}</td>
+                    <td>{{onlinePaymentOrder.phone}}</td>
+                    <td>{{onlinePaymentOrder.orderTime | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="merchantMaster.detail({id:onlinePaymentOrder.merchantMaster.id})">{{onlinePaymentOrder.merchantMaster.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="onlinePaymentOrder.detail({id:onlinePaymentOrder.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="onlinePaymentOrder.edit({id:onlinePaymentOrder.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="onlinePaymentOrder.delete({id:onlinePaymentOrder.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

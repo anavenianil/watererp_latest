@@ -31,6 +31,10 @@
             
             <column name="can" type="varchar(255)"/>
             
+            <column name="adjustment_amt" type="${floatType}"/>
+            
+            <column name="status" type="integer"/>
+            
             <column name="complaint_type_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>

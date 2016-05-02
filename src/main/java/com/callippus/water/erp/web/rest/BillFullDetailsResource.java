@@ -1,11 +1,18 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.BillFullDetails;
-import com.callippus.water.erp.repository.BillFullDetailsRepository;
-import com.callippus.water.erp.repository.ReportsCustomRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -15,24 +22,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.repository.BillFullDetailsRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing BillFullDetails.
@@ -92,10 +100,19 @@ public class BillFullDetailsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<BillFullDetails>> getAllBillFullDetailss(Pageable pageable)
+    public ResponseEntity<List<BillFullDetails>> getAllBillFullDetailss(Pageable pageable,
+    		@RequestParam(value = "can", required = false) String can)
         throws URISyntaxException {
         log.debug("REST request to get a page of BillFullDetailss");
-        Page<BillFullDetails> page = billFullDetailsRepository.findAll(pageable); 
+        //Page<BillFullDetails> page = billFullDetailsRepository.findAll(pageable); 
+        Page<BillFullDetails> page;
+        if(can == null){
+        	page = billFullDetailsRepository.findAll(pageable);
+        }
+        else
+        {
+        	page = billFullDetailsRepository.findByCan(pageable, can);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/billFullDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -152,5 +169,30 @@ public class BillFullDetailsResource {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+	
+	
+    @RequestMapping(value = "/billFullDetailss", method = RequestMethod.GET,
+            params = {"can", "billDate"})
+		    public ResponseEntity<BillFullDetails> getBillDetails(@RequestParam(value = "can") String can, @RequestParam(value = "billDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate billDate) {
+		        log.debug("REST request to get Proceedings : {}, bill date: {}", can, billDate);
+		        BillFullDetails billFullDetails = billFullDetailsRepository.findByCanAndBillDate(can, billDate);
+		        return Optional.ofNullable(billFullDetails)
+		            .map(result -> new ResponseEntity<>(
+		                result,
+		                HttpStatus.OK))
+		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		    }
+    
+    /*@RequestMapping(value = "/billFullDetailss/forCAN/{can}", method = RequestMethod.GET,
+            params = {"can"})
+		    public ResponseEntity<BillFullDetails> getBillDetailss(@RequestParam(value = "can") String can) {
+		        log.debug("REST request to get Proceedings : {} ", can);
+		        BillFullDetails billFullDetails = billFullDetailsRepository.findByCan(can);
+		        return Optional.ofNullable(billFullDetails)
+		            .map(result -> new ResponseEntity<>(
+		                result,
+		                HttpStatus.OK))
+		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		    }*/
 
 }

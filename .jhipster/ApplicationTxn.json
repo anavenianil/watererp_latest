@@ -41,6 +41,13 @@
             "otherEntityName": "streetMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 7,
+            "relationshipName": "idProofMaster",
+            "otherEntityName": "idProofMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -141,63 +148,68 @@
         },
         {
             "fieldId": 20,
-            "fieldName": "attachedDocType",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 21,
             "fieldName": "idNumber",
             "fieldType": "String"
         },
         {
-            "fieldId": 22,
+            "fieldId": 21,
             "fieldName": "propertyDoc",
             "fieldType": "String"
         },
         {
-            "fieldId": 23,
+            "fieldId": 22,
             "fieldName": "can",
             "fieldType": "String"
         },
         {
-            "fieldId": 24,
+            "fieldId": 23,
             "fieldName": "photo",
             "fieldType": "String"
         },
         {
-            "fieldId": 25,
+            "fieldId": 24,
             "fieldName": "status",
             "fieldType": "Integer"
         },
         {
-            "fieldId": 26,
+            "fieldId": 25,
             "fieldName": "meterReading",
             "fieldType": "Float"
         },
         {
-            "fieldId": 27,
+            "fieldId": 26,
             "fieldName": "requestedDate",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 28,
+            "fieldId": 27,
             "fieldName": "connectionDate",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 29,
+            "fieldId": 28,
             "fieldName": "remarks",
             "fieldType": "String"
         },
         {
-            "fieldId": 30,
+            "fieldId": 29,
             "fieldName": "meterNo",
             "fieldType": "String"
         },
         {
-            "fieldId": 31,
+            "fieldId": 30,
             "fieldName": "approvedDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 31,
+            "fieldName": "deedDoc",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 30,
+            "fieldName": "agreementDoc",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160229075018",

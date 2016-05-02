@@ -10,10 +10,10 @@
 				<div class="list-group-item">
 					<div class="modal-body">
 						<jh-alert-error></jh-alert-error>
-						<div class="row">
+						<div class="row" ng-hide="true">
 							<div class="col-sm-3">
-								<label>File Number</label> <input list="applicationTxn" type=""
-									class="form-control"
+								<label>Application No.</label> <input list="applicationTxn"
+									type="" class="form-control"
 									ng-model="feasibilityStudy.applicationTxn.id" />
 								<datalist id="applicationTxn">
 									<option ng-repeat="applicationTxn in applicationTxns"
@@ -116,7 +116,8 @@
 										name="divisionMaster"
 										ng-model="feasibilityStudy.divisionMaster"
 										ng-change="getStreet(feasibilityStudy.divisionMaster.id)"
-										ng-options="divisionMaster as divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
+										ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
+										required>
 										<option value=""></option>
 									</select>
 								</div>
@@ -124,11 +125,12 @@
 									<label for="field_streetMaster">Street</label> <select
 										class="form-control" id="field_streetMaster"
 										name="streetMaster" ng-model="feasibilityStudy.streetMaster"
-										ng-options="streetMaster as streetMaster.streetNo for streetMaster in streetMasters track by streetMaster.id">
+										ng-options="streetMaster as streetMaster.streetNo +'-'+ streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id"
+										required>
 										<option value=""></option>
 									</select>
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-4" ng-hide="true">
 									<label for="field_zoneMaster">Zone</label> <select
 										class="form-control" id="field_zoneMaster" name="zoneMaster"
 										ng-model="feasibilityStudy.zoneMaster"

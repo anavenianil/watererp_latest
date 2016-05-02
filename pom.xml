@@ -581,6 +581,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<mainClass>com.callippus.water.erp.Application</mainClass>
+					<layout>ZIP</layout>
 					<executable>true</executable>
 					<jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
 					<arguments>

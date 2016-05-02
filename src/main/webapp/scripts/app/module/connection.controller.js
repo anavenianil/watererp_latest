@@ -8,6 +8,13 @@ angular.module('watererpApp').controller(
 			$scope.approvedRequests = [];
 			$scope.myRequests = [];
 
+			Principal.hasAuthority("ROLE_CUSTOMER").then(function(result) {
+				console.log("This is hte result:" + JSON.stringify(result));
+				if (result) {
+					$state.go('applicationTxn.new');
+				}
+			});
+
 			$scope.loadAll = function() {
 
 				ApplicationTxnService.getPendingRequests().then(function(data) {
@@ -36,21 +43,17 @@ angular.module('watererpApp').controller(
 						login : $scope.account.login
 					}, function(result) {
 						$scope.user = result;
-
 					});
 					$scope.loadAll();
-
 				}
-
 			});
 
 			$scope.getDetails = function(type) {
 				if (type === 'REQUISITION' || type === 'WITHOUTMETER') {
 					$state.go('applicationTxn');
-				} else if (type === 'INCORRECT BILL') {
-					$state.go('customerComplaints');
 				}
-
+				if (type === 'METER CHANGE'){
+					$state.go('meterChange');
+				}
 			}
-
 		});

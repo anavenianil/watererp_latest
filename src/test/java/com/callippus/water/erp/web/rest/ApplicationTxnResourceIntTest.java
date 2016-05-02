@@ -85,8 +85,6 @@ public class ApplicationTxnResourceIntTest {
 
     private static final Long DEFAULT_REGISTERED_MOBILE = 1L;
     private static final Long UPDATED_REGISTERED_MOBILE = 2L;
-    private static final String DEFAULT_ATTACHED_DOC_TYPE = "AAAAA";
-    private static final String UPDATED_ATTACHED_DOC_TYPE = "BBBBB";
     private static final String DEFAULT_ID_NUMBER = "AAAAA";
     private static final String UPDATED_ID_NUMBER = "BBBBB";
     private static final String DEFAULT_PROPERTY_DOC = "AAAAA";
@@ -114,6 +112,10 @@ public class ApplicationTxnResourceIntTest {
 
     private static final LocalDate DEFAULT_APPROVED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_APPROVED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_DEED_DOC = "AAAAA";
+    private static final String UPDATED_DEED_DOC = "BBBBB";
+    private static final String DEFAULT_AGREEMENT_DOC = "AAAAA";
+    private static final String UPDATED_AGREEMENT_DOC = "BBBBB";
 
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
@@ -160,7 +162,6 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setDma(DEFAULT_DMA);
         applicationTxn.setbPlotNo(DEFAULT_B_PLOT_NO);
         applicationTxn.setRegisteredMobile(DEFAULT_REGISTERED_MOBILE);
-        applicationTxn.setAttachedDocType(DEFAULT_ATTACHED_DOC_TYPE);
         applicationTxn.setIdNumber(DEFAULT_ID_NUMBER);
         applicationTxn.setPropertyDoc(DEFAULT_PROPERTY_DOC);
         applicationTxn.setCan(DEFAULT_CAN);
@@ -172,6 +173,8 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setRemarks(DEFAULT_REMARKS);
         applicationTxn.setMeterNo(DEFAULT_METER_NO);
         applicationTxn.setApprovedDate(DEFAULT_APPROVED_DATE);
+        applicationTxn.setDeedDoc(DEFAULT_DEED_DOC);
+        applicationTxn.setAgreementDoc(DEFAULT_AGREEMENT_DOC);
     }
 
     @Test
@@ -209,7 +212,6 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getDma()).isEqualTo(DEFAULT_DMA);
         assertThat(testApplicationTxn.getbPlotNo()).isEqualTo(DEFAULT_B_PLOT_NO);
         assertThat(testApplicationTxn.getRegisteredMobile()).isEqualTo(DEFAULT_REGISTERED_MOBILE);
-        assertThat(testApplicationTxn.getAttachedDocType()).isEqualTo(DEFAULT_ATTACHED_DOC_TYPE);
         assertThat(testApplicationTxn.getIdNumber()).isEqualTo(DEFAULT_ID_NUMBER);
         assertThat(testApplicationTxn.getPropertyDoc()).isEqualTo(DEFAULT_PROPERTY_DOC);
         assertThat(testApplicationTxn.getCan()).isEqualTo(DEFAULT_CAN);
@@ -221,6 +223,8 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getRemarks()).isEqualTo(DEFAULT_REMARKS);
         assertThat(testApplicationTxn.getMeterNo()).isEqualTo(DEFAULT_METER_NO);
         assertThat(testApplicationTxn.getApprovedDate()).isEqualTo(DEFAULT_APPROVED_DATE);
+        assertThat(testApplicationTxn.getDeedDoc()).isEqualTo(DEFAULT_DEED_DOC);
+        assertThat(testApplicationTxn.getAgreementDoc()).isEqualTo(DEFAULT_AGREEMENT_DOC);
     }
 
     @Test
@@ -253,7 +257,6 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].dma").value(hasItem(DEFAULT_DMA.toString())))
                 .andExpect(jsonPath("$.[*].bPlotNo").value(hasItem(DEFAULT_B_PLOT_NO.toString())))
                 .andExpect(jsonPath("$.[*].registeredMobile").value(hasItem(DEFAULT_REGISTERED_MOBILE.intValue())))
-                .andExpect(jsonPath("$.[*].attachedDocType").value(hasItem(DEFAULT_ATTACHED_DOC_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].propertyDoc").value(hasItem(DEFAULT_PROPERTY_DOC.toString())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
@@ -264,7 +267,9 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].connectionDate").value(hasItem(DEFAULT_CONNECTION_DATE.toString())))
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
                 .andExpect(jsonPath("$.[*].meterNo").value(hasItem(DEFAULT_METER_NO.toString())))
-                .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())));
+                .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())))
+                .andExpect(jsonPath("$.[*].deedDoc").value(hasItem(DEFAULT_DEED_DOC.toString())))
+                .andExpect(jsonPath("$.[*].agreementDoc").value(hasItem(DEFAULT_AGREEMENT_DOC.toString())));
     }
 
     @Test
@@ -297,7 +302,6 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.dma").value(DEFAULT_DMA.toString()))
             .andExpect(jsonPath("$.bPlotNo").value(DEFAULT_B_PLOT_NO.toString()))
             .andExpect(jsonPath("$.registeredMobile").value(DEFAULT_REGISTERED_MOBILE.intValue()))
-            .andExpect(jsonPath("$.attachedDocType").value(DEFAULT_ATTACHED_DOC_TYPE.toString()))
             .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
             .andExpect(jsonPath("$.propertyDoc").value(DEFAULT_PROPERTY_DOC.toString()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
@@ -308,7 +312,9 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.connectionDate").value(DEFAULT_CONNECTION_DATE.toString()))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
             .andExpect(jsonPath("$.meterNo").value(DEFAULT_METER_NO.toString()))
-            .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()));
+            .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()))
+            .andExpect(jsonPath("$.deedDoc").value(DEFAULT_DEED_DOC.toString()))
+            .andExpect(jsonPath("$.agreementDoc").value(DEFAULT_AGREEMENT_DOC.toString()));
     }
 
     @Test
@@ -347,7 +353,6 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setDma(UPDATED_DMA);
         applicationTxn.setbPlotNo(UPDATED_B_PLOT_NO);
         applicationTxn.setRegisteredMobile(UPDATED_REGISTERED_MOBILE);
-        applicationTxn.setAttachedDocType(UPDATED_ATTACHED_DOC_TYPE);
         applicationTxn.setIdNumber(UPDATED_ID_NUMBER);
         applicationTxn.setPropertyDoc(UPDATED_PROPERTY_DOC);
         applicationTxn.setCan(UPDATED_CAN);
@@ -359,6 +364,8 @@ public class ApplicationTxnResourceIntTest {
         applicationTxn.setRemarks(UPDATED_REMARKS);
         applicationTxn.setMeterNo(UPDATED_METER_NO);
         applicationTxn.setApprovedDate(UPDATED_APPROVED_DATE);
+        applicationTxn.setDeedDoc(UPDATED_DEED_DOC);
+        applicationTxn.setAgreementDoc(UPDATED_AGREEMENT_DOC);
 
         restApplicationTxnMockMvc.perform(put("/api/applicationTxns")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -388,7 +395,6 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getDma()).isEqualTo(UPDATED_DMA);
         assertThat(testApplicationTxn.getbPlotNo()).isEqualTo(UPDATED_B_PLOT_NO);
         assertThat(testApplicationTxn.getRegisteredMobile()).isEqualTo(UPDATED_REGISTERED_MOBILE);
-        assertThat(testApplicationTxn.getAttachedDocType()).isEqualTo(UPDATED_ATTACHED_DOC_TYPE);
         assertThat(testApplicationTxn.getIdNumber()).isEqualTo(UPDATED_ID_NUMBER);
         assertThat(testApplicationTxn.getPropertyDoc()).isEqualTo(UPDATED_PROPERTY_DOC);
         assertThat(testApplicationTxn.getCan()).isEqualTo(UPDATED_CAN);
@@ -400,6 +406,8 @@ public class ApplicationTxnResourceIntTest {
         assertThat(testApplicationTxn.getRemarks()).isEqualTo(UPDATED_REMARKS);
         assertThat(testApplicationTxn.getMeterNo()).isEqualTo(UPDATED_METER_NO);
         assertThat(testApplicationTxn.getApprovedDate()).isEqualTo(UPDATED_APPROVED_DATE);
+        assertThat(testApplicationTxn.getDeedDoc()).isEqualTo(UPDATED_DEED_DOC);
+        assertThat(testApplicationTxn.getAgreementDoc()).isEqualTo(UPDATED_AGREEMENT_DOC);
     }
 
     @Test

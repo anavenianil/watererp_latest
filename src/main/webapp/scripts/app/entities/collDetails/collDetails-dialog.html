@@ -1,30 +1,3 @@
-<style>
-.typeahead-demo .custom-popup-wrapper {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 1000;
-	display: none;
-	background-color: #f9f9f9;
-}
-
-.typeahead-demo .custom-popup-wrapper>.message {
-	padding: 10px 20px;
-	border-bottom: 1px solid #ddd;
-	color: #868686;
-}
-
-.typeahead-demo .custom-popup-wrapper>.dropdown-menu {
-	position: static;
-	float: none;
-	display: block;
-	min-width: 160px;
-	background-color: transparent;
-	border: none;
-	border-radius: 0;
-	box-shadow: none;
-}
-</style>
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
@@ -45,26 +18,28 @@
 
 								<input type="text" ng-model="custInfo" typeahead-min-length="3"
 									placeholder="Search CAN or Name or Address (Min 3 chars)"
-									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									uib-typeahead="custInfo for custInfo in getCustomer($viewValue)"
 									typeahead-loading="loadingCANs"
 									typeahead-on-select='onSelect($item, $model, $label)'
 									typeahead-no-results="noResults" class="form-control">
 								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
 								<div ng-show="noResults">
-									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+									<i class="glyphicon glyphicon-remove"></i>
+									No CANs Found
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
-							<label class="control-label" for="field_can">Can</label> <input
-								type="text" class="form-control" name="can" id="field_can"
+							<label class="control-label" for="field_can">CAN</label>
+							<input type="text" class="form-control" name="can" id="field_can"
 								ng-model="collDetails.can" readonly />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_consName">Consumer
-								Name</label> <input type="text" class="form-control" name="consName"
+								Name</label>
+							<input type="text" class="form-control" name="consName"
 								id="field_consName" ng-model="collDetails.consName" readonly />
 						</div>
 						<div class="col-sm-4">
@@ -76,7 +51,8 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptNo">Receipt
-								Number</label> <input type="text" class="form-control" name="receiptNo"
+								No</label>
+							<input type="text" class="form-control" name="receiptNo"
 								id="field_receiptNo" ng-model="collDetails.receiptNo" readonly />
 						</div>
 						<div class="col-sm-4">
@@ -88,7 +64,8 @@
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.receiptDt"
 										is-open="datePickerForReceiptDt.status.opened"
-										ng-disabled="true" /> <span class="input-group-btn">
+										ng-disabled="true" />
+									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											id='field_receiptDtBtn'
 											ng-click="datePickerForReceiptDtOpen($event)">
@@ -102,9 +79,10 @@
 							ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }"
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_receiptAmt">Receipt
-								Amount</label> <input type="number" class="form-control"
-								name="receiptAmt" required="required" min="1"
-								id="field_receiptAmt" ng-model="collDetails.receiptAmt" />
+								Amount</label>
+							<input type="number" class="form-control" name="receiptAmt"
+								required="required" min="1" id="field_receiptAmt"
+								ng-model="collDetails.receiptAmt" />
 							<p ng-show="editForm.receiptAmt.$error.pattern"
 								class="help-block">Only numbers.</p>
 						</div>
@@ -112,18 +90,18 @@
 
 					<div class="row">
 						<div class="col-sm-4">
-							<label for="field_paymentTypes">Receipt Mode</label> <select
-								class="form-control" id="field_paymentTypes" name="paymentTypes"
-								ng-model="collDetails.paymentTypes" required="required"
+							<label for="field_paymentTypes">Receipt Mode</label>
+							<select class="form-control" id="field_paymentTypes"
+								name="paymentTypes" ng-model="collDetails.paymentTypes"
+								required="required"
 								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
 								ng-change="resetInstr(collDetails.paymentTypes.paymentMode)">
 							</select>
 						</div>
 
 						<div class="col-sm-4">
-							<label for="field_paymentTypes">Collection Type</label> 
-							<select
-								class="form-control" id="field_collectionTypeMaster"
+							<label for="field_paymentTypes">Collection Type</label>
+							<select class="form-control" id="field_collectionTypeMaster"
 								name="collectionTypeMaster" required="required"
 								ng-model="collDetails.collectionTypeMaster"
 								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id">
@@ -135,7 +113,8 @@
 							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_instrNo">Instrument
-								Number</label> <input type="text" class="form-control" name="field_instrNo"
+								No</label>
+							<input type="text" class="form-control" name="field_instrNo"
 								id="field_instrNo" ng-model="collDetails.instrNo"
 								ng-disabled="!instrEnabled" />
 							<p
@@ -144,8 +123,9 @@
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_instrIssuer">Instrument
-								Issuer</label> <select class="form-control"
-								id="field_instrumentIssuerMaster" name="instrumentIssuerMaster"
+								Issuer</label>
+							<select class="form-control" id="field_instrumentIssuerMaster"
+								name="instrumentIssuerMaster"
 								ng-model="collDetails.instrumentIssuerMaster"
 								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
 								ng-disabled="!instrEnabled">
@@ -161,7 +141,8 @@
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt"
 										is-open="datePickerForInstrDt.status.opened"
-										ng-disabled="!instrEnabled" /> <span class="input-group-btn">
+										ng-disabled="!instrEnabled" />
+									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											id='field_receiptDtBtn' ng-disabled="!instrEnabled"
 											ng-click="datePickerForInstrDtOpen($event)">
@@ -179,21 +160,25 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
-							<label class="control-label" for="field_remarks">Remarks</label> <input
-								type="text" class="form-control" name="remarks"
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<input type="text" class="form-control" name="remarks"
 								id="field_remarks" ng-model="collDetails.remarks" />
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="modal-footer">
-					 <button type="button" class="btn btn-default" data-dismiss="modal"
+					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-					</button> 
+						<span class="glyphicon glyphicon-ban-circle"></span>
+						&nbsp;
+						<span>Cancel</span>
+					</button>
 					<button type="submit" ng-disabled="validate()"
 						class="btn btn-primary" id="submitSave">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						<span class="glyphicon glyphicon-save"></span>
+						&nbsp;
+						<span>Save</span>
 					</button>
 				</div>
 			</div>

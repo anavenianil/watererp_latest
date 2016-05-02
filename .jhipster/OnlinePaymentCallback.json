@@ -1,0 +1,59 @@
+{
+    "relationships": [
+    {
+            "relationshipId": 1,
+            "relationshipName": "merchantMaster",
+            "otherEntityName": "merchantMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     },    
+     {
+            "relationshipId": 2,
+            "relationshipName": "onlinePaymentOrder",
+            "otherEntityName": "onlinePaymentOrder",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+     }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "currency",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "paymentMode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "serviceCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "message",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "responseCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "totalAmountPaid",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "userDefinedField",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160427105244",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

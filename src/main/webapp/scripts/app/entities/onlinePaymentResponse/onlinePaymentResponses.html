@@ -1,0 +1,56 @@
+<div>
+    <h2>OnlinePaymentResponses</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="onlinePaymentResponse.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new OnlinePaymentResponse</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="responseCode"><span>ResponseCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="responseTime"><span>ResponseTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="redirectUrl"><span>RedirectUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="onlinePaymentOrder.id"><span>onlinePaymentOrder</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="onlinePaymentResponse in onlinePaymentResponses track by onlinePaymentResponse.id">
+                    <td><a ui-sref="onlinePaymentResponse.detail({id:onlinePaymentResponse.id})">{{onlinePaymentResponse.id}}</a></td>
+                    <td>{{onlinePaymentResponse.responseCode}}</td>
+                    <td>{{onlinePaymentResponse.responseTime | date:'medium'}}</td>
+                    <td>{{onlinePaymentResponse.redirectUrl}}</td>
+                    <td>
+                        <a ui-sref="onlinePaymentOrder.detail({id:onlinePaymentResponse.onlinePaymentOrder.id})">{{onlinePaymentResponse.onlinePaymentOrder.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="onlinePaymentResponse.detail({id:onlinePaymentResponse.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="onlinePaymentResponse.edit({id:onlinePaymentResponse.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="onlinePaymentResponse.delete({id:onlinePaymentResponse.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

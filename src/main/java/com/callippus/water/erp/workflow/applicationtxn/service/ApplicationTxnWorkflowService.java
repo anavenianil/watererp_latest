@@ -18,6 +18,7 @@ import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.workflow.request.service.RequestProcessService;
@@ -184,7 +185,16 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 			workflowService.setHistoryID(l.get(i).getId().toString());
 			workflowService.setDomain_object_id(l.get(i).getDomainObject()
 					.toString());
-			workflowService.setRequestType(CPSConstants.REQUISITION);
+			
+			User user = applicationTxn.getUser();
+			if(user != null){
+				workflowService.setRequestType(CPSConstants.WITHOUTMETER);
+			}
+			else
+			{
+				workflowService.setRequestType(CPSConstants.REQUISITION);
+			}
+			
 			workflowService.getHistoryID();
 			workflowService.setStageID(l.get(i).getRequestStage().toString());
 			workflowService.setStatus(Integer.parseInt(l.get(i)
