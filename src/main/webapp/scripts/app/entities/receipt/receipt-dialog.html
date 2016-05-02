@@ -70,10 +70,11 @@
 									<input id="field_checkOrDdDate" type="text"
 										class="form-control" uib-datepicker-popup="{{dateformat}}"
 										ng-model="receipt.checkOrDdDate"
-										is-open="datePickerForCheckOrDdDate.status.opened" /> <span
+										is-open="datePickerForCheckOrDdDate.status.opened" ng-disabled="receipt.paymentTypes.id===1"/> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
-											ng-click="datePickerForCheckOrDdDateOpen($event)">
+											ng-click="datePickerForCheckOrDdDateOpen($event)"
+											ng-disabled="receipt.paymentTypes.id===1">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
@@ -85,17 +86,20 @@
 						<div class="col-sm-4">
 							<label class="control-label" for="field_checkOrDdNo">Check/DD
 								No.</label> <input type="text" class="form-control" name="checkOrDdNo"
-								id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo" />
+								id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo" 
+								ng-disabled="receipt.paymentTypes.id===1"/>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_bankName">Bank
 								Name</label> <input type="text" class="form-control" name="bankName"
-								id="field_bankName" ng-model="receipt.bankName" />
+								id="field_bankName" ng-model="receipt.bankName" 
+								ng-disabled="receipt.paymentTypes.id===1"/>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_branchName">Branch
 								Name</label> <input type="text" class="form-control" name="branchName"
-								id="field_branchName" ng-model="receipt.branchName" />
+								id="field_branchName" ng-model="receipt.branchName"
+								ng-disabled="receipt.paymentTypes.id===1"/>
 						</div>
 					</div>
 					<br>
