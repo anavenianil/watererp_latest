@@ -3,8 +3,10 @@ package com.callippus.water.erp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.OnlinePaymentOrder;
+import com.callippus.water.erp.domain.OnlinePaymentResponse;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.OnlinePaymentOrderRepository;
+import com.callippus.water.erp.repository.OnlinePaymentResponseRepository;
 import com.callippus.water.erp.service.BillingService;
 import com.callippus.water.erp.service.OnlinePaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -43,6 +45,9 @@ public class OnlinePaymentOrderResource {
 	@Inject
 	private OnlinePaymentService onlinePaymentService;
 
+	@Inject
+	private OnlinePaymentResponseRepository onlinePaymentResponseRepository;
+	
 	/**
 	 * POST /onlinePaymentOrders -> Create a new onlinePaymentOrder.
 	 */
@@ -67,8 +72,12 @@ public class OnlinePaymentOrderResource {
 
 		OnlinePaymentOrder result = onlinePaymentService
 				.processOrder(onlinePaymentOrder);
+		
+		OnlinePaymentResponse onlinePaymentResponse = onlinePaymentResponseRepository.findByOrder(result.getId());
+		
         return ResponseEntity.created(new URI("/api/onlinePaymentResponses/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("onlinePaymentResponse", result.getId().toString()))
+                .headers(HeaderUtil.createHeader("X-watererpApp-redirect", onlinePaymentResponse.getRedirectUrl()))
                 .body(result);
 	}
 

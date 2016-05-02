@@ -15,6 +15,12 @@ public class HeaderUtil {
         return headers;
     }
 
+    public static HttpHeaders createHeader(String key, String value){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(key, value);
+        return headers;    	
+    }
+    
     public static HttpHeaders createEntityCreationAlert(String entityName, String param) {
         return createAlert("A new " + entityName + " is created with identifier " + param, param);
     }
