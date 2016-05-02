@@ -33,6 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.callippus.water.erp.domain.enumeration.PaymentMode;
 
 /**
  * Test class for the OnlinePaymentOrderResource REST controller.
@@ -49,16 +50,20 @@ public class OnlinePaymentOrderResourceIntTest {
 
     private static final String DEFAULT_SERVICE_CODE = "AAAAA";
     private static final String UPDATED_SERVICE_CODE = "BBBBB";
-    private static final String DEFAULT_AMOUNT = "AAAAA";
-    private static final String UPDATED_AMOUNT = "BBBBB";
-    private static final String DEFAULT_PAY_BY = "AAAAA";
-    private static final String UPDATED_PAY_BY = "BBBBB";
+
+    private static final Float DEFAULT_AMOUNT = 1F;
+    private static final Float UPDATED_AMOUNT = 2F;
+
+
+    private static final PaymentMode DEFAULT_PAY_BY = PaymentMode.TIGOPESA;
+    private static final PaymentMode UPDATED_PAY_BY = PaymentMode.CREDITCARD;
     private static final String DEFAULT_USER_DEFINED_FIELD = "AAAAA";
     private static final String UPDATED_USER_DEFINED_FIELD = "BBBBB";
     private static final String DEFAULT_EMAIL = "AAAAA";
     private static final String UPDATED_EMAIL = "BBBBB";
-    private static final String DEFAULT_PHONE = "AAAAA";
-    private static final String UPDATED_PHONE = "BBBBB";
+
+    private static final Long DEFAULT_PHONE = 5L;
+    private static final Long UPDATED_PHONE = 6L;
 
     private static final ZonedDateTime DEFAULT_ORDER_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_ORDER_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -126,6 +131,114 @@ public class OnlinePaymentOrderResourceIntTest {
 
     @Test
     @Transactional
+    public void checkServiceCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = onlinePaymentOrderRepository.findAll().size();
+        // set the field null
+        onlinePaymentOrder.setServiceCode(null);
+
+        // Create the OnlinePaymentOrder, which fails.
+
+        restOnlinePaymentOrderMockMvc.perform(post("/api/onlinePaymentOrders")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(onlinePaymentOrder)))
+                .andExpect(status().isBadRequest());
+
+        List<OnlinePaymentOrder> onlinePaymentOrders = onlinePaymentOrderRepository.findAll();
+        assertThat(onlinePaymentOrders).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkAmountIsRequired() throws Exception {
+        int databaseSizeBeforeTest = onlinePaymentOrderRepository.findAll().size();
+        // set the field null
+        onlinePaymentOrder.setAmount(null);
+
+        // Create the OnlinePaymentOrder, which fails.
+
+        restOnlinePaymentOrderMockMvc.perform(post("/api/onlinePaymentOrders")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(onlinePaymentOrder)))
+                .andExpect(status().isBadRequest());
+
+        List<OnlinePaymentOrder> onlinePaymentOrders = onlinePaymentOrderRepository.findAll();
+        assertThat(onlinePaymentOrders).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPayByIsRequired() throws Exception {
+        int databaseSizeBeforeTest = onlinePaymentOrderRepository.findAll().size();
+        // set the field null
+        onlinePaymentOrder.setPayBy(null);
+
+        // Create the OnlinePaymentOrder, which fails.
+
+        restOnlinePaymentOrderMockMvc.perform(post("/api/onlinePaymentOrders")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(onlinePaymentOrder)))
+                .andExpect(status().isBadRequest());
+
+        List<OnlinePaymentOrder> onlinePaymentOrders = onlinePaymentOrderRepository.findAll();
+        assertThat(onlinePaymentOrders).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkUserDefinedFieldIsRequired() throws Exception {
+        int databaseSizeBeforeTest = onlinePaymentOrderRepository.findAll().size();
+        // set the field null
+        onlinePaymentOrder.setUserDefinedField(null);
+
+        // Create the OnlinePaymentOrder, which fails.
+
+        restOnlinePaymentOrderMockMvc.perform(post("/api/onlinePaymentOrders")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(onlinePaymentOrder)))
+                .andExpect(status().isBadRequest());
+
+        List<OnlinePaymentOrder> onlinePaymentOrders = onlinePaymentOrderRepository.findAll();
+        assertThat(onlinePaymentOrders).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = onlinePaymentOrderRepository.findAll().size();
+        // set the field null
+        onlinePaymentOrder.setEmail(null);
+
+        // Create the OnlinePaymentOrder, which fails.
+
+        restOnlinePaymentOrderMockMvc.perform(post("/api/onlinePaymentOrders")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(onlinePaymentOrder)))
+                .andExpect(status().isBadRequest());
+
+        List<OnlinePaymentOrder> onlinePaymentOrders = onlinePaymentOrderRepository.findAll();
+        assertThat(onlinePaymentOrders).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPhoneIsRequired() throws Exception {
+        int databaseSizeBeforeTest = onlinePaymentOrderRepository.findAll().size();
+        // set the field null
+        onlinePaymentOrder.setPhone(null);
+
+        // Create the OnlinePaymentOrder, which fails.
+
+        restOnlinePaymentOrderMockMvc.perform(post("/api/onlinePaymentOrders")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(onlinePaymentOrder)))
+                .andExpect(status().isBadRequest());
+
+        List<OnlinePaymentOrder> onlinePaymentOrders = onlinePaymentOrderRepository.findAll();
+        assertThat(onlinePaymentOrders).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllOnlinePaymentOrders() throws Exception {
         // Initialize the database
         onlinePaymentOrderRepository.saveAndFlush(onlinePaymentOrder);
@@ -136,11 +249,11 @@ public class OnlinePaymentOrderResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(onlinePaymentOrder.getId().intValue())))
                 .andExpect(jsonPath("$.[*].serviceCode").value(hasItem(DEFAULT_SERVICE_CODE.toString())))
-                .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.toString())))
+                .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.doubleValue())))
                 .andExpect(jsonPath("$.[*].payBy").value(hasItem(DEFAULT_PAY_BY.toString())))
                 .andExpect(jsonPath("$.[*].userDefinedField").value(hasItem(DEFAULT_USER_DEFINED_FIELD.toString())))
                 .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-                .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
+                .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.intValue())))
                 .andExpect(jsonPath("$.[*].orderTime").value(hasItem(DEFAULT_ORDER_TIME_STR)));
     }
 
@@ -156,11 +269,11 @@ public class OnlinePaymentOrderResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(onlinePaymentOrder.getId().intValue()))
             .andExpect(jsonPath("$.serviceCode").value(DEFAULT_SERVICE_CODE.toString()))
-            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.toString()))
+            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.payBy").value(DEFAULT_PAY_BY.toString()))
             .andExpect(jsonPath("$.userDefinedField").value(DEFAULT_USER_DEFINED_FIELD.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
-            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.intValue()))
             .andExpect(jsonPath("$.orderTime").value(DEFAULT_ORDER_TIME_STR));
     }
 

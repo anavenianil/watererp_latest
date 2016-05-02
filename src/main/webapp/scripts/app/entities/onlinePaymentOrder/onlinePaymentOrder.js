@@ -43,32 +43,55 @@ angular.module('watererpApp')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'OnlinePaymentOrders'
                 },
-                views: {
-                    'content@': {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
                         templateUrl: 'scripts/app/entities/onlinePaymentOrder/onlinePaymentOrder-dialog.html',
-                        controller: 'OnlinePaymentOrderDialogController'
-                    }
-                },
-                resolve: {
-                }
+                        controller: 'OnlinePaymentOrderDialogController',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    serviceCode: null,
+                                    amount: null,
+                                    payBy: null,
+                                    userDefinedField: null,
+                                    email: null,
+                                    phone: null,
+                                    orderTime: null,
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function(result) {
+                        $state.go('onlinePaymentOrder', null, { reload: true });
+                    }, function() {
+                        $state.go('onlinePaymentOrder');
+                    })
+                }]
             })
             .state('onlinePaymentOrder.edit', {
                 parent: 'onlinePaymentOrder',
-                url: '/edit/:id',
+                url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'OnlinePaymentOrders'
                 },
-                views: {
-                    'content@': {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
                         templateUrl: 'scripts/app/entities/onlinePaymentOrder/onlinePaymentOrder-dialog.html',
-                        controller: 'OnlinePaymentOrderDialogController'
-                    }
-                },
-                resolve: {
-                }
+                        controller: 'OnlinePaymentOrderDialogController',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['OnlinePaymentOrder', function(OnlinePaymentOrder) {
+                                return OnlinePaymentOrder.get({id : $stateParams.id});
+                            }]
+                        }
+                    }).result.then(function(result) {
+                        $state.go('onlinePaymentOrder', null, { reload: true });
+                    }, function() {
+                        $state.go('^');
+                    })
+                }]
             })
             .state('onlinePaymentOrder.delete', {
                 parent: 'onlinePaymentOrder',

@@ -67,7 +67,7 @@ class OnlinePaymentOrderGatlingTest extends Simulation {
             .exec(http("Create new onlinePaymentOrder")
             .post("/api/onlinePaymentOrders")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "serviceCode":"SAMPLE_TEXT", "amount":"SAMPLE_TEXT", "payBy":"SAMPLE_TEXT", "userDefinedField":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT", "orderTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "serviceCode":"SAMPLE_TEXT", "amount":null, "payBy":null, "userDefinedField":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "phone":null, "orderTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_onlinePaymentOrder_url")))
             .pause(10)

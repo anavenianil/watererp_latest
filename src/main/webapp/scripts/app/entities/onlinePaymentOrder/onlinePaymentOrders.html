@@ -32,7 +32,7 @@
                     <td><a ui-sref="onlinePaymentOrder.detail({id:onlinePaymentOrder.id})">{{onlinePaymentOrder.id}}</a></td>
                     <td>{{onlinePaymentOrder.serviceCode}}</td>
                     <td>{{onlinePaymentOrder.amount}}</td>
-                    <td>{{onlinePaymentOrder.payBy}}</td>
+                    <td translate="{{'watererpApp.PaymentMode.' + onlinePaymentOrder.payBy}}">{{onlinePaymentOrder.payBy}}</td>
                     <td>{{onlinePaymentOrder.userDefinedField}}</td>
                     <td>{{onlinePaymentOrder.email}}</td>
                     <td>{{onlinePaymentOrder.phone}}</td>
