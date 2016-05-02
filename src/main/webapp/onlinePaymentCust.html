@@ -12,11 +12,10 @@
 	src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript"
 	src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="bootstrap3-typeahead.min.js"></script>
 
 <link rel="stylesheet"
-	href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+	href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/assets/styles/main.css" />
 
 
@@ -237,16 +236,15 @@ p+p {
 				}
 			});
 		});
-		
-		function save()
-		{
+
+		function save() {
 			var onlinePaymentOrder = {};
 			onlinePaymentOrder.userDefinedField = document.forms[0].userDefinedField.value;
 			onlinePaymentOrder.amount = document.forms[0].amount.value;
 			onlinePaymentOrder.payBy = document.forms[0].payBy.value;
 			onlinePaymentOrder.email = document.forms[0].email.value;
 			onlinePaymentOrder.phone = document.forms[0].phone.value;
-			
+
 			function getCookie(name) {
 				var cookieValue = null;
 				if (document.cookie && document.cookie != '') {
@@ -264,10 +262,15 @@ p+p {
 				return cookieValue;
 			}
 
-			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-				jqXHR.setRequestHeader('X-CSRF-Token', getCookie("CSRF-TOKEN"));
-			});			
+			$('.close').click(function () {
+				  $(this).parent().removeClass('in'); // hides alert with Bootstrap CSS3 implem
+				});
 			
+			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+						jqXHR.setRequestHeader('X-CSRF-Token',
+								getCookie("CSRF-TOKEN"));
+					});
+
 			$.ajax({
 				url : '/api/onlinePaymentOrders',
 				data : JSON.stringify(onlinePaymentOrder),
@@ -275,8 +278,9 @@ p+p {
 				type : "POST",
 				contentType : "application/json; charset=utf-8",
 				success : function(response, textStatus, request) {
-					console.log(request.getResponseHeader('X-watererpApp-redirect'));
-//					return response(res);
+					$('#le-alert').addClass('in'); 
+					location.href = request
+							.getResponseHeader('X-watererpApp-redirect');
 				},
 				error : function(response) {
 					alert(response.responseText);
@@ -285,8 +289,7 @@ p+p {
 					alert(response.responseText);
 				}
 			});
-			
-			
+
 			return false;
 		}
 	</script>
@@ -297,9 +300,17 @@ p+p {
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">Online Payment</h3>
 			</div>
+
 			<div class="list-group">
+
 				<div class="list-group-item">
 					<div class="modal-body">
+									<div id="le-alert" class="alert alert-success alert-block fade">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Success!</strong>
+					Payment Initiated. Please wait while you are being redirected to payment page now...
+				</div>
+					
 						<div class="row">
 							<div class="col-sm-4 col-md-offset-4">
 								<label for="field_applicationTxn">Search By CAN</label>
@@ -314,19 +325,18 @@ p+p {
 							<div class="col-sm-4">
 								<label class="control-label" for="field_userDefinedField">Can</label>
 								<input type="text" class="form-control" name="userDefinedField"
-									id="field_userDefinedField"
-									ng-model="onlinePaymentOrder.userDefinedField" readonly />
+									id="field_userDefinedField" readonly />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_consName">Consumer
 									Name</label>
 								<input type="text" class="form-control" name="consName"
-									id="field_consName" ng-model="consName" readonly />
+									id="field_consName" readonly />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_address">Address</label>
 								<input type="text" class="form-control" name="address"
-									id="field_address" ng-model="address" readonly />
+									id="field_address" readonly />
 							</div>
 						</div>
 						<div class="row">
@@ -335,7 +345,7 @@ p+p {
 							control-label" for="field_amount">
 									Receipt Amount </label>
 								<input type="number" class="form-control" name="amount"
-									required="required" min="1" id="field_amount"/>
+									required="required" min="1" id="field_amount" />
 							</div>
 							<div class="col-sm-4">
 								<label for="field_payBy">Payment Mode</label>
@@ -350,14 +360,14 @@ p+p {
 							<div class="col-sm-4">
 								<label class="control-label" for="field_email">Email</label>
 								<input type="email" class="form-control" name="email"
-									required="required" id="field_email"/>
+									required="required" id="field_email" />
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
 								<label class="control-label" for="field_phone">Phone</label>
 								<input type="number" class="form-control" name="phone"
-									required="required" id="field_phone"/>
+									required="required" id="field_phone" />
 							</div>
 						</div>
 					</div>
