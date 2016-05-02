@@ -46,31 +46,6 @@
 								ng-model="customerComplaints.can"
 								disabled>
 						</div>
-						<!-- <div class="col-sm-4">
-							<label for="field_applicationTxn">Customer ID</label>
-							Commented Select Box Functionality
-							<select class="form-control" id="field_applicationTxn" name="applicationTxn" ng-model="customerComplaints.applicationTxn" ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-      						<option value=""></option></select>
-							<div class="col-sm-4">
-							<div class="form-group">
-								<div class='input-group date' id='field_applicationTxn'>
-									<input list="applicationTxn" type="" id="field_applicationTxn"
-										class="form-control"
-										ng-model="customerComplaints.applicationTxn.id" />
-
-									<datalist id="applicationTxn">
-										<option ng-repeat="applicationTxn in applicationtxns"
-											value="{{applicationTxn.id}}">
-									</datalist>
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="getApplicationTxn(customerComplaints.applicationTxn.id)">
-											<i class="glyphicon glyphicon-search"></i>
-										</button>
-									</span>
-								</div>
-							</div>
-						</div> -->
 					</div>
 					<div class="row">
 						<div class="col-md-4 col-md-offset-2">
@@ -120,27 +95,8 @@
 							<input type="text" class="form-control" name="remarks"
 								id="field_remarks" ng-model="customerComplaints.remarks" />
 						</div>
-						<!-- <div class="col-sm-4">
-							<label class="control-label" for="field_relevantDoc">Relevant
-								Document</label> <input type="text" class="form-control"
-								name="relevantDoc" id="field_relevantDoc"
-								ng-model="customerComplaints.relevantDoc" />
-						</div> -->
 						<div class="col-sm-2">
 							<label>Relevant Document</label>
-							<!-- <fieldset>
-										<div ngf-drop="" ngf-select=""
-											ng-model="customerComplaints.relevantDoc1" ng-model-rejected="rejFiles"
-											ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
-											class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
-											ngf-accept="'image/*,application/pdf'"
-											ngf-drop-available="dropAvailable">
-											<div ng-hide="dropAvailable">File Drop not available</div>
-											<div ng-show="dropAvailable">Drop Files Here</div>
-											<div>Click to select a file</div>
-										</div>
-									</fieldset>
-							 -->
 							<button type="submit" class="btn btn-primary" ngf-drop=""
 								ngf-select="" ng-model="customerComplaints.relevantDoc1"
 								ng-model-rejected="rejFiles"
@@ -163,34 +119,9 @@
 								class="response">
 								<li class="sel-file"
 									ng-repeat="f in customerComplaints.relevantDoc1">
-									<!-- <img
-											ng-show="f.type.indexOf('image') > -1" ngf-src="f"
-											class="thumb" ngf-accept="'*'" style="width:100px;height:125px;">  -->
-									<!-- <span class="progress" ng-show="f.progress >= 0">
-												<div style="width: {{f.progress">{{f.progress}}%</div>
-										</span> --> <!-- <button class="button"
-												ng-click="f.upload.abort();f.upload.aborted=true"
-												ng-show="f.upload != null && f.progress < 100 && !f.upload.aborted">Abort
-											</button> --> - {{f.name}} <a ng-show="f.result"
+									 - {{f.name}} <a ng-show="f.result"
 									href="javascript:void(0)"
-									ng-click="f.showDetail = !f.showDetail">details</a> <!-- <div ng-show="f.showDetail">
-												<br />
-
-												<div data-ng-show="f.result.result == null">{{f.result}}</div>
-												<ul>
-													<li ng-repeat="item in f.result.result">
-														<div data-ng-show="item.name">file name:
-															{{item.name}}</div>
-														<div data-ng-show="item.fieldName">name:
-															{{item.fieldName}}</div>
-														<div data-ng-show="item.size">size on the serve:
-															{{item.size}}</div>
-														<div data-ng-show="item.value">value: {{item.value}}</div>
-													</li>
-												</ul>
-												<div data-ng-show="f.result.requestHeaders" class="reqh">request
-													headers: {{f.result.requestHeaders}}</div>
-											</div> -->
+									ng-click="f.showDetail = !f.showDetail">details</a> 
 								</li>
 							</ul>
 						</div>
