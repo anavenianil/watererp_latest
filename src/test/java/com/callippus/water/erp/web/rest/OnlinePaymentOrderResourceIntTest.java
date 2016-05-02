@@ -55,15 +55,15 @@ public class OnlinePaymentOrderResourceIntTest {
     private static final Float UPDATED_AMOUNT = 2F;
 
 
-    private static final PaymentMode DEFAULT_PAY_BY = PaymentMode.TIGOPESA;
+    private static final PaymentMode DEFAULT_PAY_BY = PaymentMode.TIGOPESADIR;
     private static final PaymentMode UPDATED_PAY_BY = PaymentMode.CREDITCARD;
     private static final String DEFAULT_USER_DEFINED_FIELD = "AAAAA";
     private static final String UPDATED_USER_DEFINED_FIELD = "BBBBB";
     private static final String DEFAULT_EMAIL = "AAAAA";
     private static final String UPDATED_EMAIL = "BBBBB";
 
-    private static final Long DEFAULT_PHONE = 5L;
-    private static final Long UPDATED_PHONE = 6L;
+    private static final Long DEFAULT_PHONE = 99999999L;
+    private static final Long UPDATED_PHONE = 100000000L;
 
     private static final ZonedDateTime DEFAULT_ORDER_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_ORDER_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);

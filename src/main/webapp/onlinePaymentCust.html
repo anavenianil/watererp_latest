@@ -230,7 +230,7 @@ p+p {
 				},
 				updater : function(item) {
 					var arr = item.split("-");
-					document.forms[0].userDefinedField.value = arr[0];
+					document.forms[0].userDefinedField.value = arr[0].trim();
 					document.forms[0].consName.value = arr[1];
 					document.forms[0].address.value = arr[2];
 				}
@@ -278,15 +278,17 @@ p+p {
 				type : "POST",
 				contentType : "application/json; charset=utf-8",
 				success : function(response, textStatus, request) {
-					$('#le-alert').addClass('in'); 
+					$('#le-alert').addClass('alert-success').addClass('in'); 
 					location.href = request
 							.getResponseHeader('X-watererpApp-redirect');
 				},
 				error : function(response) {
-					alert(response.responseText);
+					$('#le-alert').addClass('alert-error').addClass('in').html(response.responseText);
+//					alert(response.responseText);
 				},
 				failure : function(response) {
-					alert(response.responseText);
+					$('#le-alert').addClass('alert-error').addClass('in').html(response.responseText);
+//					alert(response.responseText);
 				}
 			});
 
@@ -305,7 +307,7 @@ p+p {
 
 				<div class="list-group-item">
 					<div class="modal-body">
-									<div id="le-alert" class="alert alert-success alert-block fade">
+									<div id="le-alert" class="alert alert-block fade">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Success!</strong>
 					Payment Initiated. Please wait while you are being redirected to payment page now...
