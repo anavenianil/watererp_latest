@@ -3,10 +3,11 @@
 angular.module('watererpApp').controller(
 		'OnlinePaymentOrderDialogController',
 		function($scope, $stateParams, $http, $window, OnlinePaymentOrder,
-				OnlinePaymentResponseSvc) {
+				OnlinePaymentResponseSvc, MerchantMaster) {
 
 			$scope.onlinePaymentOrder = {};
 			$scope.isValidCust = false;
+			$scope.merchantmasters = MerchantMaster.query();
 
 			$scope.load = function(id) {
 				OnlinePaymentOrder.get({

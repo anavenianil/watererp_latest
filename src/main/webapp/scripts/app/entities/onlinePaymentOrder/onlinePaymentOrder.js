@@ -42,7 +42,7 @@ angular.module('watererpApp')
                 parent: 'onlinePaymentOrder',
                 url: '/new',
                 data: {
-                    authorities: [],
+                    authorities: ['ROLE_USER'],
                     pageTitle: 'OnlinePaymentOrders'
                 },
                 views: {

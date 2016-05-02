@@ -71,7 +71,7 @@
 								<h5 class="list-group-item-heading">{{applicationTxn.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-show="applicationTxn.can!=null">
+							<div class="col-sm-3" ng-if="applicationTxn.can!=null">
 								<label>Customer Account Number(CAN)</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.can}}</h5>
 							</div>
@@ -138,6 +138,22 @@
 								<h5 class="list-group-item-heading">{{applicationTxn.tanescoMeter}}</h5>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Detail Address</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.dma}}</h5>
+							</div>
+							<div class="col-sm-3"
+								ng-if="applicationTxn.divisionMaster.divisionName != null">
+								<label>DMA</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.divisionMaster.divisionName}}</h5>
+							</div>
+							<div class="col-sm-3"
+								ng-if="applicationTxn.streetMaster.streetName != null">
+								<label>Street</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.streetMaster.streetName}}</h5>
+							</div>
+						</div>
 					</fieldset>
 					<fieldset>
 						<legend>Water Connection Details</legend>
@@ -196,60 +212,80 @@
 							</div>
 						</div>
 					</fieldset>
+					<br>
+					<fieldset ng-if="applicationTxn.user != null">
+						<legend>Approval Details </legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Approved By</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.user.firstName}}&nbsp;{{applicationTxn.user.firstName}}({{applicationTxn.user.login}})</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Approved Date</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.approvedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+						</div>
+					</fieldset>
 				</div>
 			</div>
 		</div>
 
 		<!-- ng-show="{{applicationTxn.status==0}}" -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status === 0 || applicationTxn.status === 1"
+			ng-if="applicationTxn.status === 0 && orgRole.orgRoleName === 'Technical Manager'"
+			ng-click="getApplicationTxn(applicationTxn.id)">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Forward
+		</button>
+
+		<button type="button" class="btn btn-success pull-right"
+			ng-if="applicationTxn.status === 1 && orgRole.orgRoleName === 'Technical Zonal Supervisor'"
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===2"
+			ng-show="applicationTxn.status===2 && orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation'"
 			ui-sref="feasibilityStudyForAppTxn({applicationId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create
 			Feasibility
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===3"
+			ng-show="applicationTxn.status===3 && orgRole.orgRoleName === 'Technical Manager'"
 			ui-sref="proceedingsForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create
 			Proceedings
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===4"
+			ng-show="applicationTxn.status===4 && orgRole.orgRoleName === 'Assistant Accountant(Revenue)'"
 			ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Review
 			Proceedings
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===5"
+			ng-show="applicationTxn.status===5 && orgRole.orgRoleName === 'Stores & Supplies Officer'"
 			ui-sref="itemRequiredForApplicationTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Items
 		</button>
 
 		<!-- ui-sref="custMeterMappingForMeterAllot({applicationTxnId:applicationTxn.id})" -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===6"
+			ng-show="applicationTxn.status===6 && orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation'"
 			ui-sref="applicationTxnIssueMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Issue Meter
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===7"
+			ng-show="applicationTxn.status===7 && orgRole.orgRoleName === 'Billing Officer'"
 			ui-sref="applicationTxnClose({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Complete
 		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-danger pull-right"
-			ng-show="applicationTxn.status<8"
 			ng-click="declineRequest(applicationTxn.id)">
 			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
 		</button>
