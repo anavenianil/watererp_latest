@@ -237,7 +237,55 @@ p+p {
 			});
 		});
 
+		function validate()
+		{
+			var errors = [];
+			var regExUDF = /^[a-zA-Z0-9]{6,10}$/;
+			var regExEmail = /^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
+			
+			if (!regExUDF.test(document.forms[0].userDefinedField.value)) {
+				errors[errors.length] = "Enter valid CAN.";
+			}
+			
+			if (!(isNumber(document.forms[0].amount.value) && document.forms[0].amount.value > 0 && document.forms[0].amount.value < 10000000 )) {
+				errors[errors.length] = "Enter valid Amount.";
+			}
+
+			if (!regExEmail.test(document.forms[0].email.value)) {
+				errors[errors.length] = "Enter valid Email.";
+			}
+			
+			if (!(isNumber(document.forms[0].phone.value) && document.forms[0].phone.value > 99999999 && document.forms[0].phone.value < 9999999999 )) {
+				errors[errors.length] = "Enter valid Phone No.";
+			}
+			
+			 if (errors.length > 0) {
+
+				  reportErrors(errors);
+				  return false;
+			 }
+			 else
+				 return true;
+		}
+		
+		function reportErrors(errors){
+			 var msg = "Please Enter Valide Data...\n";
+			 for (var i = 0; i<errors.length; i++) {
+			 var numError = i + 1;
+			  msg += "\n" + numError + ". " + errors[i];
+			}
+			 alert(msg);
+			}
+		
+		function isNumber(n){
+		    return typeof n == 'number' && !isNaN(n) && isFinite(n);
+		 }
+		
 		function save() {
+			
+			if(!validate())
+				return;
+			
 			var onlinePaymentOrder = {};
 			onlinePaymentOrder.userDefinedField = document.forms[0].userDefinedField.value;
 			onlinePaymentOrder.amount = document.forms[0].amount.value;
@@ -328,6 +376,7 @@ p+p {
 								<label class="control-label" for="field_userDefinedField">Can</label>
 								<input type="text" class="form-control" name="userDefinedField"
 									id="field_userDefinedField" readonly />
+									<span class="help-inline">Invalid CAN</span>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_consName">Consumer
@@ -348,6 +397,7 @@ p+p {
 									Receipt Amount </label>
 								<input type="number" class="form-control" name="amount"
 									required="required" min="1" id="field_amount" />
+									<span class="help-inline">Invalid Amount</span>
 							</div>
 							<div class="col-sm-4">
 								<label for="field_payBy">Payment Mode</label>
@@ -363,6 +413,7 @@ p+p {
 								<label class="control-label" for="field_email">Email</label>
 								<input type="email" class="form-control" name="email"
 									required="required" id="field_email" />
+									<span class="help-inline">Invalid Email</span>
 							</div>
 						</div>
 						<div class="row">
@@ -370,6 +421,7 @@ p+p {
 								<label class="control-label" for="field_phone">Phone</label>
 								<input type="number" class="form-control" name="phone"
 									required="required" id="field_phone" />
+									<span class="help-inline">Invalid phone</span>
 							</div>
 						</div>
 					</div>
