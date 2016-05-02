@@ -83,7 +83,7 @@ WHERE
 REFERENCED_TABLE_NAME = 'application_txn';
 
 # Automated query for dropping
-SELECT concat('drop table ',TABLE_NAME,'; delete from databasechangelog where filename like ''%_',table_name,'.xml'';')
+SELECT concat('drop table ',TABLE_NAME,'; delete from databasechangelog where filename like ''%_',replace(table_name,'_',''),'.xml'';')
 FROM
 INFORMATION_SCHEMA.KEY_COLUMN_USAGE
 WHERE

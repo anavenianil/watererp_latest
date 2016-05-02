@@ -5,10 +5,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.ZonedDateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import com.callippus.water.erp.domain.enumeration.PaymentMode;
 
 /**
  * A OnlinePaymentOrder.
@@ -22,23 +25,39 @@ public class OnlinePaymentOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "service_code")
+    @NotNull
+    @Min(value = 4)
+    @Max(value = 7)
+    @Column(name = "service_code", nullable = false)
     private String serviceCode;
 
-    @Column(name = "amount")
-    private String amount;
+    @NotNull
+    @Min(value = 1)
+    @Max(value = 10000000)
+    @Column(name = "amount", nullable = false)
+    private Float amount;
 
-    @Column(name = "pay_by")
-    private String payBy;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "pay_by", nullable = false)
+    private PaymentMode payBy;
 
-    @Column(name = "user_defined_field")
+    @NotNull
+    @Min(value = 8)
+    @Max(value = 9)
+    @Column(name = "user_defined_field", nullable = false)
     private String userDefinedField;
 
-    @Column(name = "email")
+    @NotNull
+    @Pattern(regexp = "")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone")
-    private String phone;
+    @NotNull
+    @Min(value = 5)
+    @Max(value = 15)
+    @Column(name = "phone", nullable = false)
+    private Long phone;
 
     @Column(name = "order_time")
     private ZonedDateTime orderTime;
@@ -63,19 +82,19 @@ public class OnlinePaymentOrder implements Serializable {
         this.serviceCode = serviceCode;
     }
 
-    public String getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 
-    public String getPayBy() {
+    public PaymentMode getPayBy() {
         return payBy;
     }
 
-    public void setPayBy(String payBy) {
+    public void setPayBy(PaymentMode payBy) {
         this.payBy = payBy;
     }
 
@@ -95,11 +114,11 @@ public class OnlinePaymentOrder implements Serializable {
         this.email = email;
     }
 
-    public String getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
