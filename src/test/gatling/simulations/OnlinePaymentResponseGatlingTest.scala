@@ -67,7 +67,7 @@ class OnlinePaymentResponseGatlingTest extends Simulation {
             .exec(http("Create new onlinePaymentResponse")
             .post("/api/onlinePaymentResponses")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "responseCode":"SAMPLE_TEXT", "responseTime":"2020-01-01T00:00:00.000Z", "redirectUrl":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "responseCode":"SAMPLE_TEXT", "responseTime":"2020-01-01T00:00:00.000Z", "redirectUrl":"SAMPLE_TEXT", "merchantTxnRef":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_onlinePaymentResponse_url")))
             .pause(10)

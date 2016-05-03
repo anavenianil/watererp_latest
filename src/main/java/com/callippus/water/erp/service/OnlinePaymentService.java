@@ -15,6 +15,8 @@ import com.callippus.water.erp.repository.MerchantMasterRepository;
 import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
 import com.callippus.water.erp.repository.OnlinePaymentOrderRepository;
 import com.callippus.water.erp.repository.OnlinePaymentResponseRepository;
+import com.callippus.water.erp.service.util.URLUtil;
+import com.callippus.water.erp.service.util.XMLUtil;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 
 import java.io.BufferedReader;
@@ -27,6 +29,8 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,9 +85,9 @@ public class OnlinePaymentService {
 		log.debug("This is the unifiedPaymentResponse:"
 				+ unifiedPaymentResponse);
 
-		String merchantResponseXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>     <Currency>TSh</Currency>     <MerchantCode>Test001</MerchantCode>     <MerchantRefNumber>9312171800</MerchantRefNumber>     <PaymentMode>TIGOPESADIR</PaymentMode>     <ServiceCode>TESTS001</ServiceCode>     <Message>SUCCESS</Message>     <ResponseCode>200</ResponseCode>     <TotalAmountPaid>280.0</TotalAmountPaid> <UserDefinedField>123</UserDefinedField> </OrderResponse>";
+		String merchantResponseXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>     <Currency>TSh</Currency>     <MerchantCode>Test001</MerchantCode>     <MerchantRefNumber>9312171800</MerchantRefNumber>     <PaymentMode>TIGOPESADIR</PaymentMode>     <ServiceCode>TESTS001</ServiceCode>     <Message>SUCCESS</Message>     <ResponseCode>200</ResponseCode>     <TotalAmountPaid>-280.0</TotalAmountPaid> <UserDefinedField>123</UserDefinedField> </OrderResponse>";
 		
-		boolean isValid = validateXMLSchema("src/main/resources/schema/UnifiedResponse.xsd", merchantResponseXML);
+		boolean isValid = XMLUtil.validateXMLSchema("/schema/UnifiedResponse.xsd", merchantResponseXML);
 				
 		PGResponse pgResponse = parsePGResponse(merchantResponseXML);
 
@@ -93,7 +97,7 @@ public class OnlinePaymentService {
 	@Transactional(rollbackFor = Exception.class)
 	public String processPGResponse(String pgResponseXML) throws Exception {
 
-		boolean isValid = validateXMLSchema("/schema/UnifiedResponse.xsd", pgResponseXML);
+		boolean isValid = XMLUtil.validateXMLSchema("/schema/UnifiedResponse.xsd", pgResponseXML);
 
 		if(!isValid)
 			throw new Exception("Invalid response from Payment Gateway.");
@@ -120,13 +124,13 @@ public class OnlinePaymentService {
 
 		opc.setMerchantMaster(mm);
 
-		OnlinePaymentOrder opo = onlinePaymentOrderRepository
-				.findOne(pgResponse.getMerchantRefNumber());
+		OnlinePaymentResponse opr = onlinePaymentResponseRepository
+				.findByMerchantTxnRef(pgResponse.getMerchantRefNumber());
 
-		if (opo == null)
+		if (opr == null)
 			throw new Exception("Invalid Merchant Ref Number");
 
-		opc.setOnlinePaymentOrder(opo);
+		opc.setOnlinePaymentOrder(opr.getOnlinePaymentOrder());
 
 		opc = onlinePaymentCallbackRepository.save(opc);
 
@@ -170,7 +174,7 @@ public class OnlinePaymentService {
 		String xml = buildXML(onlinePaymentOrder);
 		OnlinePaymentResponse onlinePaymentResponse = null;
 		try {
-			String response = postXML(xml, new URL(cd.getValue()));
+			String response = URLUtil.postXML(xml, new URL(cd.getValue()));
 
 			UnifiedPayment unifiedPaymentResponse = parseUnifiedPaymentResponse(response
 					.replace("&", "&amp;"));
@@ -184,6 +188,16 @@ public class OnlinePaymentService {
 				onlinePaymentResponse = new OnlinePaymentResponse();
 				onlinePaymentResponse.setRedirectUrl(unifiedPaymentResponse
 						.getRedirectUrl());
+				
+				Map<String, List<String>> params = URLUtil.splitQuery(new URL(unifiedPaymentResponse
+						.getRedirectUrl()));
+				
+				List<String> txnRef = params.get("txnref");
+				
+				if(txnRef.size() != 1)
+					throw new Exception("Error from Unified Payment server: Missing Merchant Txn Ref");
+				
+				onlinePaymentResponse.setMerchantTxnRef(txnRef.get(0));				
 				onlinePaymentResponse.setResponseCode(unifiedPaymentResponse
 						.getResponseCode());
 				onlinePaymentResponse.setResponseTime(ZonedDateTime.now());
@@ -238,73 +252,7 @@ public class OnlinePaymentService {
 				+ "   </Parameters>" + "</OrderRequest>";
 	}
 
-	public String postXML(String xmlString, URL url) throws Exception {
 
-		HttpURLConnection connection = null;
-		try {
-			// Create connection
-			connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Content-Type", "application/xml");
-
-			connection.setRequestProperty("Content-Length",
-					"" + Integer.toString(xmlString.getBytes().length));
-			connection.setRequestProperty("Content-Language", "en-US");
-
-			connection.setUseCaches(false);
-			connection.setDoInput(true);
-			connection.setDoOutput(true);
-
-			// Send request
-			DataOutputStream wr = new DataOutputStream(
-					connection.getOutputStream());
-			wr.writeBytes(xmlString);
-			wr.flush();
-			wr.close();
-
-			// Get Response
-			InputStream is = connection.getInputStream();
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-			String line;
-			StringBuffer response = new StringBuffer();
-			while ((line = rd.readLine()) != null) {
-				response.append(line);
-				response.append('\r');
-			}
-			rd.close();
-			return response.toString();
-
-		} catch (Exception e) {
-			log.debug("Exception>>>>>>>>>>>>>>>>>>>"
-					+ CPSUtils.stackTraceToString(e));
-
-			e.printStackTrace();
-			throw e;
-
-		} finally {
-
-			if (connection != null) {
-				connection.disconnect();
-			}
-		}
-	}
-
-	public static boolean validateXMLSchema(String xsdPath, String xml) throws IOException, SAXException{
-		try {
-			SchemaFactory factory = SchemaFactory
-					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema schema = factory.newSchema(new StreamSource(OnlinePaymentService.class.getClass().getResourceAsStream(xsdPath)));
-			Validator validator = schema.newValidator();
-			validator.validate(new StreamSource(new StringReader(xml)));
-		} catch (IOException e) {
-			System.out.println("Exception: " + e.getMessage());
-			throw e;
-		} catch (SAXException e1) {
-			System.out.println("SAX Exception: " + e1.getMessage());
-			throw e1;
-		}
-		return true;
-	}
 
 	public static UnifiedPayment parseUnifiedPaymentResponse(String xml) {
 		UnifiedPayment unifiedPaymentResponse = null;

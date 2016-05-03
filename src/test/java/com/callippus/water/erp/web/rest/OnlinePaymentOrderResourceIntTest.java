@@ -56,7 +56,7 @@ public class OnlinePaymentOrderResourceIntTest {
 
 
     private static final PaymentMode DEFAULT_PAY_BY = PaymentMode.TIGOPESADIR;
-    private static final PaymentMode UPDATED_PAY_BY = PaymentMode.CREDITCARD;
+    private static final PaymentMode UPDATED_PAY_BY = PaymentMode.MPESADIR;
     private static final String DEFAULT_USER_DEFINED_FIELD = "AAAAA";
     private static final String UPDATED_USER_DEFINED_FIELD = "BBBBB";
     private static final String DEFAULT_EMAIL = "AAAAA";

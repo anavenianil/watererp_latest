@@ -55,6 +55,8 @@ public class OnlinePaymentResponseResourceIntTest {
     private static final String DEFAULT_RESPONSE_TIME_STR = dateTimeFormatter.format(DEFAULT_RESPONSE_TIME);
     private static final String DEFAULT_REDIRECT_URL = "AAAAA";
     private static final String UPDATED_REDIRECT_URL = "BBBBB";
+    private static final String DEFAULT_MERCHANT_TXN_REF = "AAAAA";
+    private static final String UPDATED_MERCHANT_TXN_REF = "BBBBB";
 
     @Inject
     private OnlinePaymentResponseRepository onlinePaymentResponseRepository;
@@ -85,6 +87,7 @@ public class OnlinePaymentResponseResourceIntTest {
         onlinePaymentResponse.setResponseCode(DEFAULT_RESPONSE_CODE);
         onlinePaymentResponse.setResponseTime(DEFAULT_RESPONSE_TIME);
         onlinePaymentResponse.setRedirectUrl(DEFAULT_REDIRECT_URL);
+        onlinePaymentResponse.setMerchantTxnRef(DEFAULT_MERCHANT_TXN_REF);
     }
 
     @Test
@@ -106,6 +109,7 @@ public class OnlinePaymentResponseResourceIntTest {
         assertThat(testOnlinePaymentResponse.getResponseCode()).isEqualTo(DEFAULT_RESPONSE_CODE);
         assertThat(testOnlinePaymentResponse.getResponseTime()).isEqualTo(DEFAULT_RESPONSE_TIME);
         assertThat(testOnlinePaymentResponse.getRedirectUrl()).isEqualTo(DEFAULT_REDIRECT_URL);
+        assertThat(testOnlinePaymentResponse.getMerchantTxnRef()).isEqualTo(DEFAULT_MERCHANT_TXN_REF);
     }
 
     @Test
@@ -121,7 +125,8 @@ public class OnlinePaymentResponseResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(onlinePaymentResponse.getId().intValue())))
                 .andExpect(jsonPath("$.[*].responseCode").value(hasItem(DEFAULT_RESPONSE_CODE.toString())))
                 .andExpect(jsonPath("$.[*].responseTime").value(hasItem(DEFAULT_RESPONSE_TIME_STR)))
-                .andExpect(jsonPath("$.[*].redirectUrl").value(hasItem(DEFAULT_REDIRECT_URL.toString())));
+                .andExpect(jsonPath("$.[*].redirectUrl").value(hasItem(DEFAULT_REDIRECT_URL.toString())))
+                .andExpect(jsonPath("$.[*].merchantTxnRef").value(hasItem(DEFAULT_MERCHANT_TXN_REF.toString())));
     }
 
     @Test
@@ -137,7 +142,8 @@ public class OnlinePaymentResponseResourceIntTest {
             .andExpect(jsonPath("$.id").value(onlinePaymentResponse.getId().intValue()))
             .andExpect(jsonPath("$.responseCode").value(DEFAULT_RESPONSE_CODE.toString()))
             .andExpect(jsonPath("$.responseTime").value(DEFAULT_RESPONSE_TIME_STR))
-            .andExpect(jsonPath("$.redirectUrl").value(DEFAULT_REDIRECT_URL.toString()));
+            .andExpect(jsonPath("$.redirectUrl").value(DEFAULT_REDIRECT_URL.toString()))
+            .andExpect(jsonPath("$.merchantTxnRef").value(DEFAULT_MERCHANT_TXN_REF.toString()));
     }
 
     @Test
@@ -160,6 +166,7 @@ public class OnlinePaymentResponseResourceIntTest {
         onlinePaymentResponse.setResponseCode(UPDATED_RESPONSE_CODE);
         onlinePaymentResponse.setResponseTime(UPDATED_RESPONSE_TIME);
         onlinePaymentResponse.setRedirectUrl(UPDATED_REDIRECT_URL);
+        onlinePaymentResponse.setMerchantTxnRef(UPDATED_MERCHANT_TXN_REF);
 
         restOnlinePaymentResponseMockMvc.perform(put("/api/onlinePaymentResponses")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -173,6 +180,7 @@ public class OnlinePaymentResponseResourceIntTest {
         assertThat(testOnlinePaymentResponse.getResponseCode()).isEqualTo(UPDATED_RESPONSE_CODE);
         assertThat(testOnlinePaymentResponse.getResponseTime()).isEqualTo(UPDATED_RESPONSE_TIME);
         assertThat(testOnlinePaymentResponse.getRedirectUrl()).isEqualTo(UPDATED_REDIRECT_URL);
+        assertThat(testOnlinePaymentResponse.getMerchantTxnRef()).isEqualTo(UPDATED_MERCHANT_TXN_REF);
     }
 
     @Test
