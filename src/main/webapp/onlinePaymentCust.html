@@ -231,8 +231,8 @@ p+p {
 								<div class="form-group  has-feedback">
 									<label class="control-label" for="field_userDefinedField">Can</label>
 									<input type="text" class="form-control" name="userDefinedField"
-										id="field_userDefinedField" pattern="/^[a-zA-Z0-9]{6,10}$/"
-										readonly />
+										id="field_userDefinedField"  pattern="^[_A-z0-9]{1,}$"  maxlength="10"
+										 />
 									<span class="glyphicon form-control-feedback"
 										aria-hidden="true"></span>
 								</div>
@@ -313,12 +313,11 @@ p+p {
 	</form>
 
 
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script
-		src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script
 		src="bower_components/bootstrap-validator/dist/validator.min.js"></script>
-	<script src="http://platform.twitter.com/widgets.js"></script>
 	<script type="text/javascript"
 		src="bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
 
