@@ -48,6 +48,15 @@ public class OnlinePaymentOrderResource {
 	@Inject
 	private OnlinePaymentResponseRepository onlinePaymentResponseRepository;
 	
+	
+	@RequestMapping(value = "/postOnlinePaymentOrders", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<OnlinePaymentOrder> createOnlinePaymentOrderOpenAPI(
+			@RequestBody OnlinePaymentOrder onlinePaymentOrder)
+			throws URISyntaxException, Exception {
+		return createOnlinePaymentOrder(onlinePaymentOrder);
+	}
+	
 	/**
 	 * POST /onlinePaymentOrders -> Create a new onlinePaymentOrder.
 	 */
