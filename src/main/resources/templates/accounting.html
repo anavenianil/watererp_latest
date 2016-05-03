@@ -28,7 +28,7 @@
 	<div class="container">
 		<div class="well" ui-view="content"></div>
 
-
+		
 	</div>
 
 	<!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
@@ -85,7 +85,6 @@
 	<script src="scripts/components/authority/authority.service.js"></script>
 	<script src="scripts/components/auth/auth.service.js"></script>
 	<script src="scripts/components/auth/principal.service.js"></script>
-	<script src="scripts/components/navbar/navbar.service.js"></script>
 	<script src="scripts/components/auth/authority.directive.js"></script>
 	<script src="scripts/components/auth/services/account.service.js"></script>
 	<script src="scripts/components/auth/services/activate.service.js"></script>
@@ -169,7 +168,7 @@
 	<script src="scripts/components/auth/provider/auth.session.service.js"></script>
 	<script src="scripts/app/account/sessions/sessions.js"></script>
 	<script src="scripts/app/account/sessions/sessions.controller.js"></script>
-	<script src="scripts/app/module/connection.controller.js"></script>
+
 
 
 	<script src="scripts/app/entities/categoryMaster/categoryMaster.js"></script>
@@ -311,18 +310,6 @@
 		src="scripts/app/entities/empRoleMapping/empRoleMapping-detail.controller.js"></script>
 	<script
 		src="scripts/components/entities/empRoleMapping/empRoleMapping.service.js"></script>
-
-	<script src="scripts/app/entities/percentageMaster/percentageMaster.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/percentageMaster/percentageMaster.service.js"></script>
 
 	<script src="scripts/app/entities/workflowMaster/workflowMaster.js"></script>
 	<script
@@ -657,7 +644,7 @@
 	<script
 		src="scripts/components/entities/materialMaster/materialMaster.service.js"></script>
 
-	<!-- <script src="scripts/app/entities/sibEntry/sibEntry.js"></script>
+	<script src="scripts/app/entities/sibEntry/sibEntry.js"></script>
 	<script src="scripts/app/entities/sibEntry/sibEntry.controller.js"></script>
 	<script
 		src="scripts/app/entities/sibEntry/sibEntry-dialog.controller.js"></script>
@@ -677,7 +664,7 @@
 	<script
 		src="scripts/app/entities/percentageMaster/percentageMaster-detail.controller.js"></script>
 	<script
-		src="scripts/components/entities/percentageMaster/percentageMaster.service.js"></script> -->
+		src="scripts/components/entities/percentageMaster/percentageMaster.service.js"></script>
 
 	<script src="scripts/app/entities/receipt/receipt.js"></script>
 	<script src="scripts/app/entities/receipt/receipt.controller.js"></script>
@@ -687,7 +674,7 @@
 	<script src="scripts/app/entities/receipt/receipt-detail.controller.js"></script>
 	<script src="scripts/components/entities/receipt/receipt.service.js"></script>
 
-	<!-- <script src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster.js"></script>
+	<script src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster.js"></script>
 	<script
 		src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster.controller.js"></script>
 	<script
@@ -757,6 +744,21 @@
 		src="scripts/app/entities/billFullDetails/billFullDetails-detail.controller.js"></script>
 	<script
 		src="scripts/components/entities/billFullDetails/billFullDetails.service.js"></script>
+
+	<script src="scripts/app/entities/custDetails/custDetails.js"></script>
+	<script
+		src="scripts/app/entities/custDetails/custDetails.controller.js"></script>
+	<script
+		src="scripts/app/entities/custDetails/custDetails-dialog.controller.js"></script>
+	<script
+		src="scripts/app/entities/custDetails/custDetails-delete-dialog.controller.js"></script>
+	<script
+		src="scripts/app/entities/custDetails/custDetails-detail.controller.js"></script>
+	<script
+		src="scripts/components/entities/custDetails/custDetails.service.js"></script>
+	<script
+		src="scripts/components/entities/custDetails/CustDetailsService.service.js"></script>
+
 
 	<script src="scripts/app/entities/collDetails/collDetails.js"></script>
 	<script
@@ -837,21 +839,7 @@
 	<script
 		src="scripts/app/entities/customerComplaints/customerComplaints-detail.controller.js"></script>
 	<script
-		src="scripts/components/entities/customerComplaints/customerComplaints.service.js"></script> -->
-
-	<script src="scripts/app/entities/custDetails/custDetails.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails.controller.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/custDetails/custDetails.service.js"></script>
-	<script
-		src="scripts/components/entities/custDetails/CustDetailsService.service.js"></script>
+		src="scripts/components/entities/customerComplaints/customerComplaints.service.js"></script>
 
 	<script src="scripts/app/entities/meterDetails/meterDetails.js"></script>
 	<script
@@ -878,7 +866,7 @@
 		src="scripts/components/entities/custMeterMapping/custMeterMapping.service.js"></script>
 
 
-	<!-- <script
+	<script
 		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster.js"></script>
 	<script
 		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster.controller.js"></script>
@@ -889,7 +877,7 @@
 	<script
 		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-detail.controller.js"></script>
 	<script
-		src="scripts/components/entities/instrumentIssuerMaster/instrumentIssuerMaster.service.js"></script> -->
+		src="scripts/components/entities/instrumentIssuerMaster/instrumentIssuerMaster.service.js"></script>
 
 
 	<script src="scripts/app/entities/uom/uom.js"></script>
@@ -899,7 +887,7 @@
 	<script src="scripts/app/entities/uom/uom-detail.controller.js"></script>
 	<script src="scripts/components/entities/uom/uom.service.js"></script>
 
-	<!-- <script src="scripts/app/entities/billRunMaster/billRunMaster.js"></script>
+	<script src="scripts/app/entities/billRunMaster/billRunMaster.js"></script>
 	<script
 		src="scripts/app/entities/billRunMaster/billRunMaster.controller.js"></script>
 	<script
@@ -921,8 +909,8 @@
 		src="scripts/app/entities/billRunDetails/billRunDetails-detail.controller.js"></script>
 	<script
 		src="scripts/components/entities/billRunDetails/billRunDetails.service.js"></script>
- -->
-	<!-- <script
+
+	<script
 		src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster.js"></script>
 	<script
 		src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster.controller.js"></script>
@@ -933,7 +921,7 @@
 	<script
 		src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster-detail.controller.js"></script>
 	<script
-		src="scripts/components/entities/collectionTypeMaster/collectionTypeMaster.service.js"></script> -->
+		src="scripts/components/entities/collectionTypeMaster/collectionTypeMaster.service.js"></script>
 
 	<script src="scripts/app/entities/meterStatus/meterStatus.js"></script>
 	<script
@@ -948,7 +936,7 @@
 		src="scripts/components/entities/meterStatus/meterStatus.service.js"></script>
 
 
-	<!-- <script src="scripts/app/entities/expenseDetails/expenseDetails.js"></script>
+	<script src="scripts/app/entities/expenseDetails/expenseDetails.js"></script>
 	<script
 		src="scripts/app/entities/expenseDetails/expenseDetails.controller.js"></script>
 	<script
@@ -958,7 +946,7 @@
 	<script
 		src="scripts/app/entities/expenseDetails/expenseDetails-detail.controller.js"></script>
 	<script
-		src="scripts/components/entities/expenseDetails/expenseDetails.service.js"></script> -->
+		src="scripts/components/entities/expenseDetails/expenseDetails.service.js"></script>
 
 	<script src="scripts/app/entities/meterChange/meterChange.js"></script>
 	<script
@@ -971,26 +959,6 @@
 		src="scripts/app/entities/meterChange/meterChange-detail.controller.js"></script>
 	<script
 		src="scripts/components/entities/meterChange/meterChange.service.js"></script>
-
-	<script
-		src="scripts/app/entities/designationChange/designationChange.js"></script>
-	<script
-		src="scripts/components/entities/designationMaster/designationMaster.service.js"></script>
-		
-		<script
-		src="scripts/app/entities/org_roleInstance/orgRoleInstance.js"></script>
-	<script
-		src="scripts/components/entities/orgRoleInstance/orgRoleInstance.service.js"></script>
-		<script
-		src="scripts/app/entities/departmentsMaster/departmentsMaster.js"></script>
-	<script
-		src="scripts/components/entities/departmentsMaster/departmentsMaster.service.js"></script>
-		
-		<script
-		src="scripts/app/entities/idProofMaster/idProofMaster.js"></script>
-	<script
-		src="scripts/components/entities/idProofMaster/idProofMaster.service.js"></script>
-		
 	<!-- endbuild -->
 </body>
 </html>

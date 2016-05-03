@@ -3,7 +3,7 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Create or edit a
-				MaterialMaster</h3>
+				Material Master</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -16,53 +16,53 @@
 								ng-model="materialMaster.id" readonly />
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_materialName">MaterialName</label>
+							<label class="control-label" for="field_materialName">Material Name</label>
 							<input type="text" class="form-control" name="materialName"
 								id="field_materialName" ng-model="materialMaster.materialName" />
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_consumableFlag">ConsumableFlag</label>
+							<label class="control-label" for="field_consumableFlag">Consumable Flag</label>
 							<input type="text" class="form-control" name="consumableFlag"
 								id="field_consumableFlag"
 								ng-model="materialMaster.consumableFlag" />
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_uomId">UomId</label> <input
+							<label class="control-label" for="field_uomId">Uom Id</label> <input
 								type="text" class="form-control" name="uomId" id="field_uomId"
 								ng-model="materialMaster.uomId" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3">
-							<label class="control-label" for="field_categoryId">CategoryId</label>
+							<label class="control-label" for="field_categoryId">Category Id</label>
 							<input type="number" class="form-control" name="categoryId"
 								id="field_categoryId" ng-model="materialMaster.categoryId" />
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_subCategoryId">SubCategoryId</label>
+							<label class="control-label" for="field_subCategoryId">SubCategory Id</label>
 							<input type="number" class="form-control" name="subCategoryId"
 								id="field_subCategoryId" ng-model="materialMaster.subCategoryId" />
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_itemCodeId">ItemCodeId</label>
+							<label class="control-label" for="field_itemCodeId">Item Code Id</label>
 							<input type="number" class="form-control" name="itemCodeId"
 								id="field_itemCodeId" ng-model="materialMaster.itemCodeId" />
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_itemSubCodeId">ItemSubCodeId</label>
+							<label class="control-label" for="field_itemSubCodeId">Item SubCode Id</label>
 							<input type="number" class="form-control" name="itemSubCodeId"
 								id="field_itemSubCodeId" ng-model="materialMaster.itemSubCodeId" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-3">
-							<label class="control-label" for="field_rateContractFlag">RateContractFlag</label>
+							<label class="control-label" for="field_rateContractFlag">Rate Contract Flag</label>
 							<input type="text" class="form-control" name="rateContractFlag"
 								id="field_rateContractFlag"
 								ng-model="materialMaster.rateContractFlag" />
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_unitRate">UnitRate</label>
+							<label class="control-label" for="field_unitRate">Unit Rate</label>
 							<input type="number" class="form-control" name="unitRate"
 								id="field_unitRate" ng-model="materialMaster.unitRate" />
 						</div>
@@ -79,7 +79,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-3">
-							<label class="control-label" for="field_creationDate">CreationDate</label>
+							<label class="control-label" for="field_creationDate">Creation Date</label>
 							<div class="form-group">
 								<div class='input-group date' id='field_creationDate'>
 									<input id="field_creationDate" type="text" class="form-control"
@@ -96,7 +96,7 @@
 							</div>
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+							<label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
 							<div class="form-group">
 								<div class='input-group date' id='field_lastModifiedDate'>
 									<input id="field_lastModifiedDate" type="text"
@@ -113,7 +113,7 @@
 							</div>
 						</div>
 						<div class="col-sm-3">
-							<label class="control-label" for="field_companyCodeId">CompanyCodeId</label>
+							<label class="control-label" for="field_companyCodeId">Company Code Id</label>
 							<input type="number" class="form-control" name="companyCodeId"
 								id="field_companyCodeId" ng-model="materialMaster.companyCodeId" />
 						</div>
@@ -121,10 +121,10 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
+					 <button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-					</button>
+					</button> 
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>

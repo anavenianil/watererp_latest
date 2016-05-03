@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myDesignationMasterLabel">Create or edit a DesignationMaster</h4>
+        <h4 class="modal-title" id="myDesignationMasterLabel">Create or edit a Designation Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -20,7 +20,7 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <label class="control-label" for="field_creationDate">Creation Date</label>
             <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="designationMaster.creationDate" is-open="datePickerForCreationDate.status.opened"
             />
             <span class="input-group-btn">
@@ -28,7 +28,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
             <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="designationMaster.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -42,13 +42,13 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_orderNo">OrderNo</label>
+            <label class="control-label" for="field_orderNo">Order Number</label>
             <input type="number" class="form-control" name="orderNo" id="field_orderNo"
                     ng-model="designationMaster.orderNo"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_serviceType">ServiceType</label>
+            <label class="control-label" for="field_serviceType">Service Type</label>
             <input type="text" class="form-control" name="serviceType" id="field_serviceType"
                     ng-model="designationMaster.serviceType"
                      />
@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            <label for="field_statusMaster">statusMaster</label>
+            <label for="field_statusMaster">Status Master</label>
             <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="designationMaster.statusMaster" ng-options="statusMaster as statusMaster.id for statusMaster in statusmasters track by statusMaster.id">
                 <option value=""></option>
             </select>

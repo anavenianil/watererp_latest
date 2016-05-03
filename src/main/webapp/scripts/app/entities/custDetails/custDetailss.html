@@ -1,11 +1,11 @@
 <div>
-    <h2>CustDetailss</h2>
+    <h2>Customer Detailss</h2>
     <jh-alert></jh-alert>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <button class="btn btn-primary" ui-sref="custDetails.new">
-                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new CustDetails</span>
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Customer Details</span>
                 </button>
             </div>
         </div>
@@ -17,48 +17,48 @@
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="divCode"><span>DivCode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="secCode"><span>SecCode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="secName"><span>SecName</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="metReaderCode"><span>MetReaderCode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="connDate"><span>ConnDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="consName"><span>ConsName</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="houseNo"><span>HouseNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="divCode"><span>Division Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secCode"><span>Section Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secName"><span>Section Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReaderCode"><span>Meter Reader Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="connDate"><span>Connection Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="consName"><span>Consumer Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="houseNo"><span>House No</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="address"><span>Address</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="city"><span>City</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="pinCode"><span>PinCode</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="categoryUnused"><span>CategoryUnused</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="pipeSize"><span>PipeSize</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="boardMeter"><span>BoardMeter</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pinCode"><span>Pin Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryUnused"><span>Category Unused</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pipeSize"><span>Pipe Size</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="boardMeter"><span>Board Meter</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sewerage"><span>Sewerage</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterNo"><span>MeterNo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="prevBillType"><span>PrevBillType</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="prevBillMonth"><span>PrevBillMonth</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="prevAvgKl"><span>PrevAvgKl</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="metReadingDt"><span>MetReadingDt</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="prevReading"><span>PrevReading</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="metReadingMo"><span>MetReadingMo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="metAvgKl"><span>MetAvgKl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterNo"><span>Meter Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevBillType"><span>Previous Bill Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevBillMonth"><span>Previous Bill Month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevAvgKl"><span>Previous Average kiloliter </span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReadingDt"><span>Meter Reading Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevReading"><span>Previous Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReadingMo"><span>Meter Reading Month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metAvgKl"><span>Meter Average kiloliter </span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="arrears"><span>Arrears</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="reversalAmt"><span>ReversalAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reversalAmt"><span>Reversal Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="installment"><span>Installment</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="otherCharges"><span>OtherCharges</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="otherCharges"><span>Other Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="surcharge"><span>Surcharge</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="hrsSurcharge"><span>HrsSurcharge</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="resUnits"><span>ResUnits</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="metCostInstallment"><span>MetCostInstallment</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="intOnArrears"><span>IntOnArrears</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastPymtDt"><span>LastPymtDt</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastPymtAmt"><span>LastPymtAmt</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="mobileNo"><span>MobileNo</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="ccFlag"><span>CcFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="cpFlag"><span>CpFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="noticeFlag"><span>NoticeFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="drFlag"><span>DrFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lat"><span>Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="longi"><span>Longi</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="meterFixDate"><span>MeterFixDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="tariffCategoryMaster.id"><span>tariffCategoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hrsSurcharge"><span>Hours Surcharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="resUnits"><span>Residential Units</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metCostInstallment"><span>Meter Cost Installment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="intOnArrears"><span>Int On Arrears</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastPymtDt"><span>Last Payment Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastPymtAmt"><span>Last Payment Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobileNo"><span>Mobile Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                   <!--  <th jh-sort-by="ccFlag"><span>CcFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cpFlag"><span>CpFlag</span> <span class="glyphicon glyphicon-sort"></span></th>  -->
+                    <th jh-sort-by="noticeFlag"><span>Notice Flag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="drFlag"><span>Dr Flag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lat"><span>Latitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longi"><span>Longitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterFixDate"><span>Meter Fix Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffCategoryMaster.id"><span>Tariff Category Master</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>

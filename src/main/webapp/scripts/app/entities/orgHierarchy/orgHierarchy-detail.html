@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>OrgHierarchy</span> {{orgHierarchy.id}}</h2>
+    <h2><span>Organization Hierarchy</span> {{orgHierarchy.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>HierarchyName</span>
+                    <span>Hierarchy Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgHierarchy.hierarchyName}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ParentHierarchyId</span>
+                    <span>Parent Hierarchy Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgHierarchy.parentHierarchyId}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgHierarchy.creationDate | date:'medium'}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgHierarchy.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:orgHierarchy.statusMaster.id})">{{orgHierarchy.statusMaster.id}}</a>

@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>OrgRoleInstance</span> {{orgRoleInstance.id}}</h2>
+    <h2><span>Organization Role Instance</span> {{orgRoleInstance.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>OrgRoleName</span>
+                    <span>Organization Role Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgRoleInstance.orgRoleName}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ParentOrgRoleId</span>
+                    <span>Parent Organization Role Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgRoleInstance.parentOrgRoleId}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgRoleInstance.creationDate | date:'medium'}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgRoleInstance.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>IsHead</span>
+                    <span>Is Head</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{orgRoleInstance.isHead}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:orgRoleInstance.statusMaster.id})">{{orgRoleInstance.statusMaster.id}}</a>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>orgRoleHierarchy</span>
+                    <span>Organization Role Hierarchy</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="orgRoleHierarchy.detail({id:orgRoleInstance.orgRoleHierarchy.id})">{{orgRoleInstance.orgRoleHierarchy.id}}</a>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>departmentsMaster</span>
+                    <span>Departments Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="departmentsMaster.detail({id:orgRoleInstance.departmentsMaster.id})">{{orgRoleInstance.departmentsMaster.id}}</a>

@@ -125,12 +125,12 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<label class="control-label" for="field_mobileNo">Mobile
-										No.</label> <input type="number" class="form-control" name="mobileNo"
+										Number</label> <input type="number" class="form-control" name="mobileNo"
 										id="field_mobileNo" ng-model="applicationTxn.mobileNo" />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_officeNo">Office
-										No.</label> <input type="number" class="form-control" name="officeNo"
+										Number</label> <input type="number" class="form-control" name="officeNo"
 										id="field_officeNo" ng-model="applicationTxn.officeNo" />
 								</div>
 								<div class="col-sm-4">
@@ -214,7 +214,7 @@
 						</fieldset>
 						<br>
 						<fieldset>
-							<legend>Documents to be attached </legend>
+							<legend>Documents to be Attached </legend>
 							<div class="row">
 								<div class="col-sm-6">
 									<label for="field_idProofMaster">Any among these</label> <select
@@ -295,12 +295,12 @@
 									id="field_status" ng-model="applicationTxn.status" />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_meterReading">MeterReading</label>
+								<label class="control-label" for="field_meterReading">Meter Reading</label>
 								<input type="number" class="form-control" name="meterReading"
 									id="field_meterReading" ng-model="applicationTxn.meterReading" />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_connectionDate">ConnectionDate</label>
+								<label class="control-label" for="field_connectionDate">Connection Date</label>
 								<input id="field_connectionDate" type="text"
 									class="form-control" uib-datepicker-popup="{{dateformat}}"
 									ng-model="applicationTxn.connectionDate"
@@ -318,12 +318,12 @@
 									id="field_remarks" ng-model="applicationTxn.remarks" />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_meterNo">MeterNo</label>
+								<label class="control-label" for="field_meterNo">Meter Number</label>
 								<input type="text" class="form-control" name="meterNo"
 									id="field_meterNo" ng-model="applicationTxn.meterNo" />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_approvedDate">ApprovedDate</label>
+								<label class="control-label" for="field_approvedDate">Approved Date</label>
 								<input id="field_approvedDate" type="text" class="form-control"
 									uib-datepicker-popup="{{dateformat}}"
 									ng-model="applicationTxn.approvedDate"
@@ -336,7 +336,7 @@
 								</span>
 							</div>
 							<div class="col-sm-4">
-								<label for="field_meterDetails">meterDetails</label> <select
+								<label for="field_meterDetails">Meter Details</label> <select
 									class="form-control" id="field_meterDetails"
 									name="meterDetails" ng-model="applicationTxn.meterDetails"
 									ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
@@ -344,7 +344,7 @@
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<label for="field_user">user</label> <select
+								<label for="field_user">User</label> <select
 									class="form-control" id="field_user" name="user"
 									ng-model="applicationTxn.user"
 									ng-options="user as user.id for user in users track by user.id">
@@ -352,7 +352,7 @@
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<label for="field_requestAt">requestAt</label> <select
+								<label for="field_requestAt">Request At</label> <select
 									class="form-control" id="field_requestAt" name="requestAt"
 									ng-model="applicationTxn.requestAt"
 									ng-options="user as user.id for user in users track by user.id">
@@ -362,10 +362,10 @@
 						</fieldset>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
+						 <button type="button" class="btn btn-default" data-dismiss="modal"
 							ng-click="clear()">
 							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-						</button>
+						</button> 
 						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 							class="btn btn-primary">
 							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Submit</span>

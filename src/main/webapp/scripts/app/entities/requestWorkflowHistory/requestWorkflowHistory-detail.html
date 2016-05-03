@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>RequestWorkflowHistory</span> {{requestWorkflowHistory.id}}</h2>
+    <h2><span>Request Work Flow History</span> {{requestWorkflowHistory.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>RequestStage</span>
+                    <span>Request Stage</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowHistory.requestStage}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>AssignedDate</span>
+                    <span>Assigned Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowHistory.assignedDate | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ActionedDate</span>
+                    <span>Actioned Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowHistory.actionedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>IpAddress</span>
+                    <span>Ip Address</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowHistory.ipAddress}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>AssignedRole</span>
+                    <span>Assigned Role</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowHistory.assignedRole}}</span>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>DomainObject</span>
+                    <span>Domain Object</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowHistory.domainObject}}</span>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>assignedFrom</span>
+                    <span>Assigned From</span>
                 </td>
                 <td>
                     {{requestWorkflowHistory.assignedFrom.id}}
@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>assignedTo</span>
+                    <span>Assigned To</span>
                 </td>
                 <td>
                     {{requestWorkflowHistory.assignedTo.id}}
@@ -84,7 +84,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:requestWorkflowHistory.statusMaster.id})">{{requestWorkflowHistory.statusMaster.id}}</a>
@@ -92,7 +92,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>requestMaster</span>
+                    <span>Request Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="requestMaster.detail({id:requestWorkflowHistory.requestMaster.id})">{{requestWorkflowHistory.requestMaster.id}}</a>
@@ -100,7 +100,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>workflowMaster</span>
+                    <span>Work Flow Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="workflowMaster.detail({id:requestWorkflowHistory.workflowMaster.id})">{{requestWorkflowHistory.workflowMaster.id}}</a>
@@ -108,7 +108,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>workflowStageMaster</span>
+                    <span>Work Flow Stage Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="workflowStageMaster.detail({id:requestWorkflowHistory.workflowStageMaster.id})">{{requestWorkflowHistory.workflowStageMaster.id}}</a>
@@ -116,7 +116,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>appliedBy</span>
+                    <span>Applied By</span>
                 </td>
                 <td>
                     {{requestWorkflowHistory.appliedBy.id}}

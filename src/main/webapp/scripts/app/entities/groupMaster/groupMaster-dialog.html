@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myGroupMasterLabel">Create or edit a GroupMaster</h4>
+        <h4 class="modal-title" id="myGroupMasterLabel">Create or edit a Group Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -20,7 +20,7 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <label class="control-label" for="field_creationDate">Creation Date</label>
             <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="groupMaster.creationDate" is-open="datePickerForCreationDate.status.opened"
             />
             <span class="input-group-btn">
@@ -28,7 +28,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
             <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="groupMaster.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            <label for="field_statusMaster">statusMaster</label>
+            <label for="field_statusMaster">Status Master</label>
             <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="groupMaster.statusMaster" ng-options="statusMaster as statusMaster.id for statusMaster in statusmasters track by statusMaster.id">
                 <option value=""></option>
             </select>

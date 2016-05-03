@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>TariffMaster</span> {{tariffMaster.id}}</h2>
+    <h2><span>Tariff Master</span> {{tariffMaster.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>TariffName</span>
+                    <span>Tariff Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffMaster.tariffName}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ValidFrom</span>
+                    <span>Valid From</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffMaster.validFrom | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ValidTo</span>
+                    <span>Valid To</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffMaster.validTo | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>tariffCategoryMaster</span>
+                    <span>Tariff Category Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="tariffCategoryMaster.detail({id:tariffMaster.tariffCategoryMaster.id})">{{tariffMaster.tariffCategoryMaster.id}}</a>

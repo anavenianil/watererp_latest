@@ -5,7 +5,7 @@
 		<button type="button" class="close" data-dismiss="modal"
 			aria-hidden="true" ng-click="clear()">&times;</button>
 		<h4 class="modal-title" id="myModule2MenuItemLabel">Create or
-			edit a Module2MenuItem</h4>
+			edit a Module2 Menu Item</h4>
 	</div>
 	<div class="modal-body">
 		<jh-alert-error></jh-alert-error>
@@ -20,14 +20,14 @@
 		</div>
 
 		<div class="form-group">
-			<label for="field_module">module</label> <select class="form-control"
+			<label for="field_module">Module</label> <select class="form-control"
 				id="field_module" name="module" ng-model="module2MenuItem.module"
 				ng-options="module as module.name for module in modules track by module.id">
 				<option value=""></option>
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="field_menuItem">menuItem</label> <select
+			<label for="field_menuItem">Menu Item</label> <select
 				class="form-control" id="field_menuItem" name="menuItem"
 				ng-model="module2MenuItem.menuItem"
 				ng-options="menuItem as menuItem.name for menuItem in menuitems track by menuItem.id">

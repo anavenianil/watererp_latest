@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>DesignationMaster</span> {{designationMaster.id}}</h2>
+    <h2><span>Designation Master</span> {{designationMaster.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{designationMaster.creationDate | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{designationMaster.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>OrderNo</span>
+                    <span>Order Number</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{designationMaster.orderNo}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ServiceType</span>
+                    <span>Service Type</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{designationMaster.serviceType}}</span>
@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:designationMaster.statusMaster.id})">{{designationMaster.statusMaster.id}}</a>

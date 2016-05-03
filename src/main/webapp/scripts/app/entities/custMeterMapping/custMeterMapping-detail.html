@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>CustMeterMapping</span> {{custMeterMapping.id}}</h2>
+    <h2><span>Customer Meter Mapping</span> {{custMeterMapping.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>FromDate</span>
+                    <span>From Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{custMeterMapping.fromDate | date:'mediumDate'}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ToDate</span>
+                    <span>To Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{custMeterMapping.toDate | date:'mediumDate'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>custDetails</span>
+                    <span>Customer Details</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="custDetails.detail({id:custMeterMapping.custDetails.id})">{{custMeterMapping.custDetails.id}}</a>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>meterDetails</span>
+                    <span>Meter Details</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="meterDetails.detail({id:custMeterMapping.meterDetails.id})">{{custMeterMapping.meterDetails.id}}</a>

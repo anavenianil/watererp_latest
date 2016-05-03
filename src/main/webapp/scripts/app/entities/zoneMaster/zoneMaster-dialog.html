@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myZoneMasterLabel">Create or edit a ZoneMaster</h4>
+        <h4 class="modal-title" id="myZoneMasterLabel">Create or edit a Zone Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,20 +14,20 @@
                     ng-model="zoneMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_zoneName">ZoneName</label>
+            <label class="control-label" for="field_zoneName">Zone Name</label>
             <input type="text" class="form-control" name="zoneName" id="field_zoneName"
                     ng-model="zoneMaster.zoneName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_zoneCode">ZoneCode</label>
+            <label class="control-label" for="field_zoneCode">Zone Code</label>
             <input type="text" class="form-control" name="zoneCode" id="field_zoneCode"
                     ng-model="zoneMaster.zoneCode"
                      />
         </div>
 
         <div class="form-group">
-            <label for="field_divisionMaster">divisionMaster</label>
+            <label for="field_divisionMaster">Division Master</label>
             <select class="form-control" id="field_divisionMaster" name="divisionMaster" ng-model="zoneMaster.divisionMaster" ng-options="divisionMaster as divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
                 <option value=""></option>
             </select>

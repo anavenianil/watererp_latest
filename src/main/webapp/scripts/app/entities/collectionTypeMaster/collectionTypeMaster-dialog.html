@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myCollectionTypeMasterLabel">Create or edit a CollectionTypeMaster</h4>
+        <h4 class="modal-title" id="myCollectionTypeMasterLabel">Create or edit a Collection Type Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,13 +14,13 @@
                     ng-model="collectionTypeMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_collName">CollName</label>
+            <label class="control-label" for="field_collName">Collection Name</label>
             <input type="text" class="form-control" name="collName" id="field_collName"
                     ng-model="collectionTypeMaster.collName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_txnType">TxnType</label>
+            <label class="control-label" for="field_txnType">Transaction Type</label>
             <input type="text" class="form-control" name="txnType" id="field_txnType"
                     ng-model="collectionTypeMaster.txnType"
                      />

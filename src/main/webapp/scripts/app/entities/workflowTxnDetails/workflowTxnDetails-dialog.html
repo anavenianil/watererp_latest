@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myWorkflowTxnDetailsLabel">Create or edit a WorkflowTxnDetails</h4>
+        <h4 class="modal-title" id="myWorkflowTxnDetailsLabel">Create or edit a  Work Flow Transaction Details</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,43 +14,43 @@
                     ng-model="workflowTxnDetails.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_requestId">RequestId</label>
+            <label class="control-label" for="field_requestId">Request Id</label>
             <input type="number" class="form-control" name="requestId" id="field_requestId"
                     ng-model="workflowTxnDetails.requestId"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_referenceNumber">ReferenceNumber</label>
+            <label class="control-label" for="field_referenceNumber">Reference Number</label>
             <input type="text" class="form-control" name="referenceNumber" id="field_referenceNumber"
                     ng-model="workflowTxnDetails.referenceNumber"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_rowNumber">RowNumber</label>
+            <label class="control-label" for="field_rowNumber">Row Number</label>
             <input type="number" class="form-control" name="rowNumber" id="field_rowNumber"
                     ng-model="workflowTxnDetails.rowNumber"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_columnName">ColumnName</label>
+            <label class="control-label" for="field_columnName">Column Name</label>
             <input type="text" class="form-control" name="columnName" id="field_columnName"
                     ng-model="workflowTxnDetails.columnName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_previousValue">PreviousValue</label>
+            <label class="control-label" for="field_previousValue">Previous Value</label>
             <input type="text" class="form-control" name="previousValue" id="field_previousValue"
                     ng-model="workflowTxnDetails.previousValue"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_newValue">NewValue</label>
+            <label class="control-label" for="field_newValue">New Value</label>
             <input type="text" class="form-control" name="newValue" id="field_newValue"
                     ng-model="workflowTxnDetails.newValue"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_ipAddress">IpAddress</label>
+            <label class="control-label" for="field_ipAddress">Ip Address</label>
             <input type="text" class="form-control" name="ipAddress" id="field_ipAddress"
                     ng-model="workflowTxnDetails.ipAddress"
                      />
@@ -63,7 +63,7 @@
         </div>
 
         <div class="form-group">
-            <label for="field_requestMaster">requestMaster</label>
+            <label for="field_requestMaster">Request Master</label>
             <select class="form-control" id="field_requestMaster" name="requestMaster" ng-model="workflowTxnDetails.requestMaster" ng-options="requestMaster as requestMaster.id for requestMaster in requestmasters track by requestMaster.id">
                 <option value=""></option>
             </select>
