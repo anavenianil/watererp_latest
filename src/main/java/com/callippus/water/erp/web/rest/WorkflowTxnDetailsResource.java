@@ -113,4 +113,23 @@ public class WorkflowTxnDetailsResource {
         workflowTxnDetailsRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("workflowTxnDetails", id.toString())).build();
     }
+    
+    
+    /**
+     * POST  /workflowTxnDetailss -> Create a new workflowTxnDetailsArr.
+     */
+    @RequestMapping(value = "/workflowTxnDetailsArr",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<WorkflowTxnDetails> createWorkflowTxnDetailsArr(@RequestBody List<WorkflowTxnDetails> workflowTxnDetails) throws URISyntaxException {
+        log.debug("REST request to save WorkflowTxnDetails : {}", workflowTxnDetails);
+/*        if (workflowTxnDetails.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("workflowTxnDetails", "idexists", "A new workflowTxnDetails cannot already have an ID")).body(null);
+        }*/
+        workflowTxnDetailsRepository.save(workflowTxnDetails);
+        return ResponseEntity.created(new URI("/api/workflowTxnDetailss/"))
+            .headers(HeaderUtil.createEntityCreationAlert("workflowTxnDetails",""))
+            .body(null);
+    }
 }

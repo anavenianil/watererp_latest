@@ -1,12 +1,45 @@
 'use strict';
 
-angular.module('watererpApp').controller('CustDetailsDialogController',
+angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
-        function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN) {
+        function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
+        		WorkflowTxnDetails, PipeSizeMaster) {
 
         //$scope.custDetails = entity;
 		$scope.custDetails = {};
         $scope.tariffcategorymasters = TariffCategoryMaster.query();
+        $scope.pipeSizeMasters = PipeSizeMaster.query();
+        $scope.requestMasters = [ {
+			id : "8",
+			requestType : "CONNECTION CATEGORY"
+		}, {
+			id : "9",
+			requestType : "PIPE SIZE"
+		}, {
+			id : "10",
+			requestType : "CHANGE NAME"
+		}, {
+			id : "11",
+			requestType : "CONNECTION TERMINATION"
+		} ];
+        
+        $scope.workflowTxnDetails = [];
+        $scope.workflowTxnDetails[0] = {};
+        $scope.workflowTxnDetails[1] = {};
+        
+        
+        $scope.workflowTxnDetails[0].columnName="prevReading";
+	    $scope.workflowTxnDetails[0].requestMaster = {};
+	    $scope.workflowTxnDetails[0].requestMaster.id = 8;
+	       
+	    $scope.workflowTxnDetails[1].columnName="TarrifCategoryMaster";
+	    $scope.workflowTxnDetails[1].requestMaster = {};
+	    $scope.workflowTxnDetails[1].requestMaster.id = 8; 
+                        
+        
+        
+        console.log($scope.changeCases);
+        $scope.dtmax = new Date();
         $scope.load = function(id) {
             CustDetails.get({id : id}, function(result) {
                 $scope.custDetails = result;
@@ -40,60 +73,18 @@ angular.module('watererpApp').controller('CustDetailsDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.datePickerForConnDate = {};
+        
+        $scope.datePickerForRequestedDate = {};
 
-        $scope.datePickerForConnDate.status = {
+        $scope.datePickerForRequestedDate.status = {
             opened: false
         };
 
-        $scope.datePickerForConnDateOpen = function($event) {
-            $scope.datePickerForConnDate.status.opened = true;
+        $scope.datePickerForRequestedDateOpen = function($event) {
+            $scope.datePickerForRequestedDate.status.opened = true;
         };
-        $scope.datePickerForPrevBillMonth = {};
-
-        $scope.datePickerForPrevBillMonth.status = {
-            opened: false
-        };
-
-        $scope.datePickerForPrevBillMonthOpen = function($event) {
-            $scope.datePickerForPrevBillMonth.status.opened = true;
-        };
-        $scope.datePickerForMetReadingDt = {};
-
-        $scope.datePickerForMetReadingDt.status = {
-            opened: false
-        };
-
-        $scope.datePickerForMetReadingDtOpen = function($event) {
-            $scope.datePickerForMetReadingDt.status.opened = true;
-        };
-        $scope.datePickerForMetReadingMo = {};
-
-        $scope.datePickerForMetReadingMo.status = {
-            opened: false
-        };
-
-        $scope.datePickerForMetReadingMoOpen = function($event) {
-            $scope.datePickerForMetReadingMo.status.opened = true;
-        };
-        $scope.datePickerForLastPymtDt = {};
-
-        $scope.datePickerForLastPymtDt.status = {
-            opened: false
-        };
-
-        $scope.datePickerForLastPymtDtOpen = function($event) {
-            $scope.datePickerForLastPymtDt.status.opened = true;
-        };
-        $scope.datePickerForMeterFixDate = {};
-
-        $scope.datePickerForMeterFixDate.status = {
-            opened: false
-        };
-
-        $scope.datePickerForMeterFixDateOpen = function($event) {
-            $scope.datePickerForMeterFixDate.status.opened = true;
-        };
+        
+        
         
         //to search CAN
         $scope.getLocation = function(val) {
@@ -115,6 +106,8 @@ angular.module('watererpApp').controller('CustDetailsDialogController',
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
+                $scope.workflowTxnDetails[0].previousValue = $scope.custDetails.prevReading;
+                $scope.workflowTxnDetails[1].previousValue = $scope.custDetails.tariffCategoryMaster;
             });
         };
         
@@ -130,4 +123,21 @@ angular.module('watererpApp').controller('CustDetailsDialogController',
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
 		};
+		
+		
+		$scope.saveChanges = function(){
+			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
+			
+			$scope.workflowTxnDetails[1].previousValue = $scope.workflowTxnDetails[1].previousValue.id;
+			
+			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowTxnDetails).then(function(response) {
+				console.log("Server response:" + JSON.stringify(response));
+//				var res = response.data.map(function(item) {
+//					return item;
+//				});
+//				return res;
+			});
+//			  WorkflowTxnDetails.save($scope.workflowTxnDetailsArr, onSaveSuccess, onSaveError);
+		}
+		
 }/*]*/);
