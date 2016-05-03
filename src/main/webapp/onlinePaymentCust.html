@@ -243,12 +243,14 @@ p+p {
 			var errors = [];
 			var regExUDF = /^[a-zA-Z0-9]{6,10}$/;
 			var regExEmail = /^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
+			var regExAmount = 	/^[0-9]{1,7}$/;
+			var regExPhone = 	/^[0-9]{9,12}$/;
 			
 			if (!regExUDF.test(document.forms[0].userDefinedField.value)) {
 				errors[errors.length] = "Enter valid CAN.";
 			}
 			
-			if (!(isNumber(document.forms[0].amount.value) && document.forms[0].amount.value > 0 && document.forms[0].amount.value < 10000000 )) {
+			if (!regExAmount.test(document.forms[0].amount.value)) {
 				errors[errors.length] = "Enter valid Amount.";
 			}
 
@@ -256,7 +258,7 @@ p+p {
 				errors[errors.length] = "Enter valid Email.";
 			}
 			
-			if (!(isNumber(document.forms[0].phone.value) && document.forms[0].phone.value > 99999999 && document.forms[0].phone.value < 9999999999 )) {
+			if (!regExPhone.test(document.forms[0].phone.value)) {
 				errors[errors.length] = "Enter valid Phone No.";
 			}
 			
