@@ -115,6 +115,7 @@ public class OnlinePaymentService {
 		opc.setServiceCode(pgResponse.getServiceCode());
 		opc.setTotalAmountPaid(pgResponse.getTotalAmountPaid());
 		opc.setUserDefinedField(pgResponse.getUserDefinedField());
+		opc.setMerchantTxnRef(pgResponse.getMerchantRefNumber());
 
 		MerchantMaster mm = merchantMasterRepository
 				.getByMerchantCode(pgResponse.getMerchantCode());

@@ -50,6 +50,11 @@
             "fieldId": 7,
             "fieldName": "userDefinedField",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "merchantTxnRef",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160427105244",
