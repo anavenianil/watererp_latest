@@ -231,8 +231,8 @@ p+p {
 								<div class="form-group  has-feedback">
 									<label class="control-label" for="field_userDefinedField">Can</label>
 									<input type="text" class="form-control" name="userDefinedField"
-										id="field_userDefinedField"  pattern="^[_A-z0-9]{1,}$"  maxlength="10"
-										 />
+										id="field_userDefinedField" required="required" pattern="^[_A-z0-9]{8,}$"  maxlength="10"
+										  />
 									<span class="glyphicon form-control-feedback"
 										aria-hidden="true"></span>
 								</div>
@@ -252,8 +252,7 @@ p+p {
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group  has-feedback">
-									<label class="
-							control-label" for="field_amount">
+									<label class="control-label" for="field_amount">
 										Receipt Amount </label>
 									<input type="number" class="form-control" name="amount"
 										required="required" min="1" max="9999999" id="field_amount" />
@@ -327,6 +326,7 @@ p+p {
 			if (e.isDefaultPrevented()) {
 				return false;
 			} else {
+				$("#field_userDefinedField").change();
 				return save();
 			}
 		})
@@ -364,6 +364,7 @@ p+p {
 					document.forms[0].userDefinedField.value = arr[0].trim();
 					document.forms[0].consName.value = arr[1];
 					document.forms[0].address.value = arr[2];
+					$("#field_userDefinedField").change();
 				}
 			});
 		});
