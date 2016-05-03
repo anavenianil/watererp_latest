@@ -156,6 +156,52 @@ input[type=number] {
 
 
 	<script type="text/javascript">
+	
+	var allVars = $.getUrlVars();
+	
+	if(allVars["response"] !== null && allVars["ref"] !== null && allVars["response"].toLowerCase() === "success")
+		{
+		$.ajax({
+			url : '/api/onlinePaymentCallbackByTxnRef/' + allVars["ref"],
+			data : "",
+			dataType : "json",
+			type : "GET",
+			contentType : "application/json; charset=utf-8",
+			success : function(response, textStatus, request) {
+				console.log("This is the response:" + JSON.stringify(response));
+				var successMsg = '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong>Payment Completed. Please wait while you are being redirected to payment page now...'
+
+				$('#le-alert').addClass('alert-success').addClass(
+						'in').html(successMsg);
+			},
+			error : function(response) {
+				$('#le-alert').addClass('alert-danger').addClass(
+						'in').html(response.responseJSON.message);
+			},
+			failure : function(response) {
+				$('#le-alert').addClass('alert-danger').addClass(
+						'in').html(response.responseJSON.message);
+			}
+		});
+		}
+	
+    $.extend({
+        getUrlVars: function(){
+          var vars = [], hash;
+          var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+          for(var i = 0; i < hashes.length; i++)
+          {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+          }
+          return vars;
+        },
+        getUrlVar: function(name){
+          return $.getUrlVars()[name];
+        }
+      });
+	
 		$('#form').validator().on('submit', function(e) {
 			if (e.isDefaultPrevented()) {
 				return false;
