@@ -947,8 +947,10 @@ CREATE TABLE `coll_details` (
 
 /*!40000 ALTER TABLE `coll_details` DISABLE KEYS */;
 INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
- (1,NULL,NULL,11,'2016-04-19 00:00:00',NULL,'11','2016-04-19',NULL,NULL,'617830977 ',' V.BHAGYAMMA ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,2,2),
- (2,NULL,NULL,234,NULL,NULL,NULL,NULL,NULL,NULL,'617803425 ',' KAMISHETTYRAJENDRA PRASAD  AND OTHERS ',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1);
+ (12,NULL,NULL,123,'2016-05-03 15:57:05',NULL,'111111','2016-05-03',NULL,NULL,NULL,'SATHELLI NAGAMANI',NULL,NULL,'R',NULL,NULL,'Remark 1',NULL,NULL,NULL,NULL,2,1,1),
+ (13,NULL,NULL,123,'2016-05-03 16:10:11',NULL,'2222','2016-05-02',NULL,NULL,'617803425 ',' KAMISHETTYRAJENDRA PRASAD  AND OTHERS ',NULL,NULL,'C',NULL,NULL,'Remark 1',NULL,NULL,NULL,NULL,2,2,1),
+ (14,NULL,NULL,1234,'2016-05-03 16:35:41',NULL,'123321','2016-05-03',NULL,NULL,'617803425 ',' KAMISHETTYRAJENDRA PRASAD  AND OTHERS ',NULL,NULL,'C',NULL,NULL,NULL,NULL,NULL,NULL,NULL,2,2,1),
+ (15,NULL,NULL,123321,'2016-05-03 16:38:22',NULL,'123321','2016-05-03',NULL,NULL,NULL,'SANTWANA HAJRA',NULL,NULL,'R',NULL,NULL,'Remark 123321',NULL,NULL,NULL,NULL,2,2,1);
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -3298,6 +3300,8 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160427084544','jhipster','classpath:config/liquibase/changelog/20160427084544_added_entity_OnlinePaymentOrder.xml','2016-05-02 14:07:41',157,'EXECUTED','7:c89108e03c232e11ba95545a3077646e','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160427104544','jhipster','classpath:config/liquibase/changelog/20160427104544_added_entity_OnlinePaymentResponse.xml','2016-05-02 14:07:41',158,'EXECUTED','7:22777342fbdee7e45f241adad109e865','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160427105244','jhipster','classpath:config/liquibase/changelog/20160427105244_added_entity_OnlinePaymentCallback.xml','2016-05-02 14:07:42',159,'EXECUTED','7:537fa3ba05cacd4a5c25a5c6e4807f65','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160503041249','jhipster','classpath:config/liquibase/changelog/20160503041249_added_entity_RevenueTypeMaster.xml','2016-05-03 09:48:19',160,'EXECUTED','7:47e3555eee069585ccb21daa674b3687','createTable','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -3889,9 +3893,9 @@ CREATE TABLE `instrument_issuer_master` (
 
 /*!40000 ALTER TABLE `instrument_issuer_master` DISABLE KEYS */;
 INSERT INTO `instrument_issuer_master` (`id`,`instrument_issuer`) VALUES 
- (1,'issuer1'),
- (2,'issuer2'),
- (3,'issuer3');
+ (1,'ISSUER1'),
+ (2,'ISSUER2'),
+ (3,'ISSUER3');
 /*!40000 ALTER TABLE `instrument_issuer_master` ENABLE KEYS */;
 
 
@@ -5867,7 +5871,7 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('1+QXFJmIy6UbwHIQ6pxyqw==',15,'HCEI/JsrSbkhfqKDPYVlNQ==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('1/89/HnVJ0I06ozibiv32Q==',3,'CLNg9gJlNZ5pis+a+Q7wXg==','2016-04-01','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('1RORucTHfZzc1hvcvEZFFw==',3,'rbc+z/09A7SCVbTMv9Hxgg==','2016-05-02','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
+ ('1RORucTHfZzc1hvcvEZFFw==',3,'QuUYh37oSWu+OnY53vpT8A==','2016-05-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('1V84cfVn/t71qSFvl+nJZw==',29,'nsyfHwdYGyWza9xnxrDHig==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('2LjYAaKNZjnF1v/HIkjwsg==',30,'OqLtMTUUzaxLP2dP2WF4UA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('2uRUyClVWXV8AlYMNeuJOw==',3,'PErAzkiwxOnl+ZDZP6T7JQ==','2016-03-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -6917,9 +6921,9 @@ CREATE TABLE `payment_types` (
 
 /*!40000 ALTER TABLE `payment_types` DISABLE KEYS */;
 INSERT INTO `payment_types` (`id`,`payment_mode`) VALUES 
- (1,'Cash'),
- (2,'Demand Draft (DD)'),
- (3,'Cheque');
+ (1,'CASH'),
+ (2,'DEMAND DRAFT (DD)'),
+ (3,'CHEQUE');
 /*!40000 ALTER TABLE `payment_types` ENABLE KEYS */;
 
 
@@ -7250,6 +7254,28 @@ CREATE TABLE `request_workflow_mapping` (
 
 /*!40000 ALTER TABLE `request_workflow_mapping` DISABLE KEYS */;
 /*!40000 ALTER TABLE `request_workflow_mapping` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`revenue_type_master`
+--
+
+DROP TABLE IF EXISTS `revenue_type_master`;
+CREATE TABLE `revenue_type_master` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `revenue_type` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`revenue_type_master`
+--
+
+/*!40000 ALTER TABLE `revenue_type_master` DISABLE KEYS */;
+INSERT INTO `revenue_type_master` (`id`,`revenue_type`) VALUES 
+ (1,'RENT'),
+ (2,'SCRAPE SALE');
+/*!40000 ALTER TABLE `revenue_type_master` ENABLE KEYS */;
 
 
 --

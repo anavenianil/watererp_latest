@@ -10,7 +10,7 @@ angular.module('watererpApp').controller(
 			$scope.instrEnabled = true;
 			$scope.paymenttypess = PaymentTypes.query();
 			$scope.instrumentissuermasters = InstrumentIssuerMaster.query();
-			$scope.collectionTypeMasters = CollectionTypeMaster.query();
+			//$scope.collectionTypeMasters = CollectionTypeMaster.query();
 
 			$scope.custDetails = {};
 			$scope.collDetails = {};
@@ -19,6 +19,8 @@ angular.module('watererpApp').controller(
 			$scope.collDetails.collectionTypeMaster = {};
 
 			$scope.collDetails.receiptDt = new Date();
+			
+			$scope.collDetails.txnStatus = "C";
 			
 			CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'C'}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -69,8 +71,8 @@ angular.module('watererpApp').controller(
 				if (!$scope.editForm.paymentTypes.$dirty)
 					return true;
 
-				if (!$scope.editForm.collectionTypeMaster.$dirty)
-					return true;
+				/*if (!$scope.editForm.collectionTypeMaster.$dirty)
+					return true;*/
 
 				if ($scope.editForm.receiptAmt.$invalid)
 					return true;
@@ -78,8 +80,8 @@ angular.module('watererpApp').controller(
 				if ($scope.editForm.paymentTypes.$invalid)
 					return true;
 
-				if ($scope.editForm.collectionTypeMaster.$invalid)
-					return true;
+				/*if ($scope.editForm.collectionTypeMaster.$invalid)
+					return true;*/
 
 				if ($scope.instrEnabled) {
 
@@ -110,9 +112,13 @@ angular.module('watererpApp').controller(
 			$scope.onSelect = function($item, $model, $label) {
 				var arr = $item.split("-");
 				$scope.collDetails = {};
+				$scope.collDetails.collectionTypeMaster = {};
 				$scope.collDetails.can = arr[0];
 				$scope.collDetails.consName = arr[1];
 				$scope.collDetails.address = arr[2];
+				$scope.collDetails.receiptDt = new Date();
+				$scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
+				$scope.collDetails.txnStatus = "C";
 				$scope.custInfo = "";
 				$scope.isValidCust = true;
 			};
