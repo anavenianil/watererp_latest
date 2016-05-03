@@ -56,8 +56,9 @@
 				</xs:element>
 				<xs:element name="TotalAmountPaid">
 					<xs:simpleType>
-						<xs:restriction base="xs:string">
-							<xs:maxLength value="8" />
+						<xs:restriction base="xs:float">
+							<xs:minInclusive value="1" />
+							<xs:maxInclusive value="9999999" />
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
