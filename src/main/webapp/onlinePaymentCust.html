@@ -63,7 +63,7 @@ input[type=number] {
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group  has-feedback">
-									<label class="control-label" for="field_userDefinedField">Can</label>
+									<label class="control-label" for="field_userDefinedField">CAN</label>
 									<input type="text" class="form-control" name="userDefinedField"
 										id="field_userDefinedField" required="required" pattern="^[_A-z0-9]{8,}$"  maxlength="10"
 										  />
@@ -242,8 +242,7 @@ input[type=number] {
 			$('#le-alert').html('');
 			$('#le-alert').addClass('alert-success').addClass('in').html("<strong>Initiating Payment. Please Wait...</strong>")
 
-			$
-					.ajax({
+			$.ajax({
 						url : '/api/postOnlinePaymentOrders',
 						data : JSON.stringify(onlinePaymentOrder),
 						dataType : "json",
@@ -259,13 +258,13 @@ input[type=number] {
 									.getResponseHeader('X-watererpApp-redirect');
 						},
 						error : function(response) {
-							$('#le-alert').addClass('alert-error').addClass(
-									'in').html(response.responseText);
+							$('#le-alert').addClass('alert-danger').addClass(
+									'in').html(response.responseJSON.message);
 							//					alert(response.responseText);
 						},
 						failure : function(response) {
-							$('#le-alert').addClass('alert-error').addClass(
-									'in').html(response.responseText);
+							$('#le-alert').addClass('alert-danger').addClass(
+									'in').html(response.responseJSON.message);
 							//					alert(response.responseText);
 						}
 					});
