@@ -28,19 +28,30 @@ Online Payment has been implemented a separate standalone HTML + Bootstrap appli
 ```
   - A standalone API UnifiedPayment (`/api/unifiedPGResponse`) has also been written to enable back-end incoming request from the Payment Gateway (3rd Party app). To enable this, SecurityConfiguration.java has been modified as follows:
 
-### Was earlier
 
+### Was earlier
 ```sh
   http.csrf()
 				.and()
 				.addFilterAfter(new CsrfCookieGeneratorFilter(),  
 ```
 
+```sh
+				.antMatchers("/api/account/reset_password/finish").permitAll()
+				.antMatchers("/api/**").authenticated()
+```
 ### Is Now
 ```sh
   http.csrf().ignoringAntMatchers("/api/unifiedPGResponse")
 				.and()
 				.addFilterAfter(new CsrfCookieGeneratorFilter(),  
+```
+```sh
+				.antMatchers("/api/account/reset_password/finish").permitAll()
+				.antMatchers("/api/unifiedPGResponse").permitAll()
+				.antMatchers("/api/custDetailss/searchCAN/").permitAll()
+				.antMatchers("/api/onlinePaymentOrders").permitAll()
+				.antMatchers("/api/**").authenticated()
 ```
 
 **Finally, the URL to access: ** [Online Cust Payment]
