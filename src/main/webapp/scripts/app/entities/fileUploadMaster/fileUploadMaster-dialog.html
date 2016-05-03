@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myFileUploadMasterLabel">Create or edit a FileUploadMaster</h4>
+        <h4 class="modal-title" id="myFileUploadMasterLabel">Create or edit a File Upload Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -37,12 +37,12 @@
                     ng-model="fileUploadMaster.photoContentType" />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_textFile">TextFile</label>
+            <label class="control-label" for="field_textFile">Text File</label>
                 <textarea class="form-control" name="textFile" id="field_textFile"
                     ng-model="fileUploadMaster.textFile"  />
         </div>
         <div class="form-group" ngf-drop ngf-change="setBinaryFile($file, fileUploadMaster)">
-            <label class="control-label" for="field_binaryFile">BinaryFile</label>
+            <label class="control-label" for="field_binaryFile">Binary File</label>
             <div>
                 <div class="help-block clearfix">
                     <span class="pull-left">{{abbreviate(fileUploadMaster.binaryFile)}} {{fileUploadMaster.binaryFileContentType}} {{byteSize(fileUploadMaster.binaryFile)}}</span>

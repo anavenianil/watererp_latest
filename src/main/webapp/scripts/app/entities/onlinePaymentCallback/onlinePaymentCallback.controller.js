@@ -41,6 +41,7 @@ angular.module('watererpApp')
                 responseCode: null,
                 totalAmountPaid: null,
                 userDefinedField: null,
+                merchantTxnRef: null,
                 id: null
             };
         };

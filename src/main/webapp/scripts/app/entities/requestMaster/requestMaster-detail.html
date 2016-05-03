@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>RequestMaster</span> {{requestMaster.id}}</h2>
+    <h2><span>Request Master</span> {{requestMaster.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>RequestType</span>
+                    <span>Request Type</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.requestType}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.creationDate | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>InternalFlag</span>
+                    <span>Internal Flag</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.internalFlag}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:requestMaster.statusMaster.id})">{{requestMaster.statusMaster.id}}</a>

@@ -5,7 +5,7 @@
 		<button type="button" class="close" data-dismiss="modal"
 			aria-hidden="true" ng-click="clear()">&times;</button>
 		<h4 class="modal-title" id="myOrgHierarchyLabel">Create or edit a
-			OrgHierarchy</h4>
+			Organization Hierarchy</h4>
 	</div>
 	<div class="modal-body">
 		<jh-alert-error></jh-alert-error>
@@ -14,18 +14,18 @@
 				id="id" name="id" ng-model="orgHierarchy.id" readonly />
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_hierarchyName">HierarchyName</label>
+			<label class="control-label" for="field_hierarchyName">Hierarchy Name</label>
 			<input type="text" class="form-control" name="hierarchyName"
 				id="field_hierarchyName" ng-model="orgHierarchy.hierarchyName" />
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_parentHierarchyId">ParentHierarchyId</label>
+			<label class="control-label" for="field_parentHierarchyId">Parent Hierarchy Id</label>
 			<input type="number" class="form-control" name="parentHierarchyId"
 				id="field_parentHierarchyId"
 				ng-model="orgHierarchy.parentHierarchyId" />
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_creationDate">CreationDate</label>
+			<label class="control-label" for="field_creationDate">Creation Date</label>
 			<input id="field_creationDate" type="text" class="form-control"
 				uib-datepicker-popup="{{dateformat}}"
 				ng-model="orgHierarchy.creationDate"
@@ -38,7 +38,7 @@
 			</span>
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+			<label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
 			<input id="field_lastModifiedDate" type="text" class="form-control"
 				uib-datepicker-popup="{{dateformat}}"
 				ng-model="orgHierarchy.lastModifiedDate"
@@ -52,7 +52,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="field_statusMaster">statusMaster</label> <select
+			<label for="field_statusMaster">Status Master</label> <select
 				class="form-control" id="field_statusMaster" name="statusMaster"
 				ng-model="orgHierarchy.statusMaster"
 				ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id">

@@ -1,10 +1,10 @@
-
+  
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myItemSubCodeMasterLabel">Create or edit a ItemSubCodeMaster</h4>
+        <h4 class="modal-title" id="myItemSubCodeMasterLabel">Create or edit a Item Sub Code Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,19 +14,19 @@
                     ng-model="itemSubCodeMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemCodeId">ItemCodeId</label>
+            <label class="control-label" for="field_itemCodeId">Item Code Id</label>
             <input type="number" class="form-control" name="itemCodeId" id="field_itemCodeId"
                     ng-model="itemSubCodeMaster.itemCodeId"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemSubCode">ItemSubCode</label>
+            <label class="control-label" for="field_itemSubCode">Item Sub Code</label>
             <input type="text" class="form-control" name="itemSubCode" id="field_itemSubCode"
                     ng-model="itemSubCodeMaster.itemSubCode"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemName">ItemName</label>
+            <label class="control-label" for="field_itemName">Item Name</label>
             <input type="text" class="form-control" name="itemName" id="field_itemName"
                     ng-model="itemSubCodeMaster.itemName"
                      />
@@ -44,7 +44,7 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <label class="control-label" for="field_creationDate">Creation Date</label>
             <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="itemSubCodeMaster.creationDate" is-open="datePickerForCreationDate.status.opened"
             />
             <span class="input-group-btn">
@@ -52,7 +52,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
             <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="itemSubCodeMaster.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -60,13 +60,13 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemCcodeId">ItemCcodeId</label>
+            <label class="control-label" for="field_itemCcodeId">Item Code Id</label>
             <input type="number" class="form-control" name="itemCcodeId" id="field_itemCcodeId"
                     ng-model="itemSubCodeMaster.itemCcodeId"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemCategoryId">ItemCategoryId</label>
+            <label class="control-label" for="field_itemCategoryId">Item Category Id</label>
             <input type="number" class="form-control" name="itemCategoryId" id="field_itemCategoryId"
                     ng-model="itemSubCodeMaster.itemCategoryId"
                     required />
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemSubCategoryID">ItemSubCategoryID</label>
+            <label class="control-label" for="field_itemSubCategoryID">Item Sub Category ID</label>
             <input type="number" class="form-control" name="itemSubCategoryID" id="field_itemSubCategoryID"
                     ng-model="itemSubCodeMaster.itemSubCategoryID"
                      />

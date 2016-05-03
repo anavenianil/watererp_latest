@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myTariffMasterLabel">Create or edit a TariffMaster</h4>
+        <h4 class="modal-title" id="myTariffMasterLabel">Create or edit a Tariff Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,7 +14,7 @@
                     ng-model="tariffMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_tariffName">TariffName</label>
+            <label class="control-label" for="field_tariffName">Tariff Name</label>
             <input type="text" class="form-control" name="tariffName" id="field_tariffName"
                     ng-model="tariffMaster.tariffName"
                     required />
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_validFrom">ValidFrom</label>
+            <label class="control-label" for="field_validFrom">Valid From</label>
             <input id="field_validFrom" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="tariffMaster.validFrom" is-open="datePickerForValidFrom.status.opened"
             required/>
             <span class="input-group-btn">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_validTo">ValidTo</label>
+            <label class="control-label" for="field_validTo">Valid To</label>
             <input id="field_validTo" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="tariffMaster.validTo" is-open="datePickerForValidTo.status.opened"
             required/>
             <span class="input-group-btn">
@@ -75,8 +75,8 @@
         </div>
 
         <div class="form-group">
-            <label for="field_tariffCategoryMaster">tariffCategoryMaster</label>
-            <select class="form-control" id="field_tariffCategoryMaster" name="tariffCategoryMaster" ng-model="tariffMaster.tariffCategoryMaster" ng-options="tariffCategoryMaster as tariffCategoryMaster.id for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+            <label for="field_tariffCategoryMaster">Tariff Category Master</label>
+            <select class="form-control" id="field_tariffCategoryMaster" name="tariffCategoryMaster" ng-model="tariffMaster.tariffCategoryMaster" ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
                 <option value=""></option>
             </select>
         </div>

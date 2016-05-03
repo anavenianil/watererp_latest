@@ -17,7 +17,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_expenseNo">Expense
-								No</label> <input type="text" class="form-control" name="expenseNo"
+								Number</label> <input type="text" class="form-control" name="expenseNo"
 								id="field_expenseNo" ng-model="expenseDetails.expenseNo"
 								readonly />
 						</div>
@@ -93,12 +93,12 @@
 							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_instrNo">Instrument
-								No</label> <input type="text" class="form-control" name="instrNo"
+								Number</label> <input type="text" class="form-control" name="instrNo"
 								id="field_instrNo" ng-model="expenseDetails.instrNo"
 								ng-disabled="!instrEnabled" />
 							<p
 								ng-show="instrEnabled && expenseDetails.instrNo.$isDirty && !expenseDetails.instrNo.length">Please
-								enter Instrument Number!</p>
+								Enter Instrument Number!</p>
 						</div>
 						<div class="col-sm-4">
 							<label for="field_instrumentIssuerMaster">Instrument

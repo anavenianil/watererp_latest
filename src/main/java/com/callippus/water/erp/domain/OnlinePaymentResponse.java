@@ -31,6 +31,9 @@ public class OnlinePaymentResponse implements Serializable {
     @Column(name = "redirect_url")
     private String redirectUrl;
 
+    @Column(name = "merchant_txn_ref")
+    private String merchantTxnRef;
+
     @ManyToOne
     @JoinColumn(name = "online_payment_order_id")
     private OnlinePaymentOrder onlinePaymentOrder;
@@ -67,6 +70,14 @@ public class OnlinePaymentResponse implements Serializable {
         this.redirectUrl = redirectUrl;
     }
 
+    public String getMerchantTxnRef() {
+        return merchantTxnRef;
+    }
+
+    public void setMerchantTxnRef(String merchantTxnRef) {
+        this.merchantTxnRef = merchantTxnRef;
+    }
+
     public OnlinePaymentOrder getOnlinePaymentOrder() {
         return onlinePaymentOrder;
     }
@@ -99,6 +110,7 @@ public class OnlinePaymentResponse implements Serializable {
             ", responseCode='" + responseCode + "'" +
             ", responseTime='" + responseTime + "'" +
             ", redirectUrl='" + redirectUrl + "'" +
+            ", merchantTxnRef='" + merchantTxnRef + "'" +
             '}';
     }
 }

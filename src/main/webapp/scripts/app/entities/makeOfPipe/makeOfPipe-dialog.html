@@ -1,10 +1,10 @@
-
+ 
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myMakeOfPipeLabel">Create or edit a MakeOfPipe</h4>
+        <h4 class="modal-title" id="myMakeOfPipeLabel">Create or edit a Make Of Pipe</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,7 +14,7 @@
                     ng-model="makeOfPipe.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_makeName">MakeName</label>
+            <label class="control-label" for="field_makeName">Make Name</label>
             <input type="text" class="form-control" name="makeName" id="field_makeName"
                     ng-model="makeOfPipe.makeName"
                     required />

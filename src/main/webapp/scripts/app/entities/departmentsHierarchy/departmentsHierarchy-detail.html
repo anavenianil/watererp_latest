@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>DepartmentsHierarchy</span> {{departmentsHierarchy.id}}</h2>
+    <h2><span>Departments Hierarchy</span> {{departmentsHierarchy.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>DeptHierarchyName</span>
+                    <span>Department Hierarchy Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsHierarchy.deptHierarchyName}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ParentDeptHierarchyId</span>
+                    <span>Parent Department Hierarchy Id</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsHierarchy.parentDeptHierarchyId}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsHierarchy.creationDate | date:'medium'}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{departmentsHierarchy.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:departmentsHierarchy.statusMaster.id})">{{departmentsHierarchy.statusMaster.id}}</a>

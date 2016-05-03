@@ -56,6 +56,8 @@ public class OnlinePaymentCallbackResourceIntTest {
     private static final Float UPDATED_TOTAL_AMOUNT_PAID = 2F;
     private static final String DEFAULT_USER_DEFINED_FIELD = "AAAAA";
     private static final String UPDATED_USER_DEFINED_FIELD = "BBBBB";
+    private static final String DEFAULT_MERCHANT_TXN_REF = "AAAAA";
+    private static final String UPDATED_MERCHANT_TXN_REF = "BBBBB";
 
     @Inject
     private OnlinePaymentCallbackRepository onlinePaymentCallbackRepository;
@@ -90,6 +92,7 @@ public class OnlinePaymentCallbackResourceIntTest {
         onlinePaymentCallback.setResponseCode(DEFAULT_RESPONSE_CODE);
         onlinePaymentCallback.setTotalAmountPaid(DEFAULT_TOTAL_AMOUNT_PAID);
         onlinePaymentCallback.setUserDefinedField(DEFAULT_USER_DEFINED_FIELD);
+        onlinePaymentCallback.setMerchantTxnRef(DEFAULT_MERCHANT_TXN_REF);
     }
 
     @Test
@@ -115,6 +118,7 @@ public class OnlinePaymentCallbackResourceIntTest {
         assertThat(testOnlinePaymentCallback.getResponseCode()).isEqualTo(DEFAULT_RESPONSE_CODE);
         assertThat(testOnlinePaymentCallback.getTotalAmountPaid()).isEqualTo(DEFAULT_TOTAL_AMOUNT_PAID);
         assertThat(testOnlinePaymentCallback.getUserDefinedField()).isEqualTo(DEFAULT_USER_DEFINED_FIELD);
+        assertThat(testOnlinePaymentCallback.getMerchantTxnRef()).isEqualTo(DEFAULT_MERCHANT_TXN_REF);
     }
 
     @Test
@@ -134,7 +138,8 @@ public class OnlinePaymentCallbackResourceIntTest {
                 .andExpect(jsonPath("$.[*].message").value(hasItem(DEFAULT_MESSAGE.toString())))
                 .andExpect(jsonPath("$.[*].responseCode").value(hasItem(DEFAULT_RESPONSE_CODE.toString())))
                 .andExpect(jsonPath("$.[*].totalAmountPaid").value(hasItem(DEFAULT_TOTAL_AMOUNT_PAID.doubleValue())))
-                .andExpect(jsonPath("$.[*].userDefinedField").value(hasItem(DEFAULT_USER_DEFINED_FIELD.toString())));
+                .andExpect(jsonPath("$.[*].userDefinedField").value(hasItem(DEFAULT_USER_DEFINED_FIELD.toString())))
+                .andExpect(jsonPath("$.[*].merchantTxnRef").value(hasItem(DEFAULT_MERCHANT_TXN_REF.toString())));
     }
 
     @Test
@@ -154,7 +159,8 @@ public class OnlinePaymentCallbackResourceIntTest {
             .andExpect(jsonPath("$.message").value(DEFAULT_MESSAGE.toString()))
             .andExpect(jsonPath("$.responseCode").value(DEFAULT_RESPONSE_CODE.toString()))
             .andExpect(jsonPath("$.totalAmountPaid").value(DEFAULT_TOTAL_AMOUNT_PAID.doubleValue()))
-            .andExpect(jsonPath("$.userDefinedField").value(DEFAULT_USER_DEFINED_FIELD.toString()));
+            .andExpect(jsonPath("$.userDefinedField").value(DEFAULT_USER_DEFINED_FIELD.toString()))
+            .andExpect(jsonPath("$.merchantTxnRef").value(DEFAULT_MERCHANT_TXN_REF.toString()));
     }
 
     @Test
@@ -181,6 +187,7 @@ public class OnlinePaymentCallbackResourceIntTest {
         onlinePaymentCallback.setResponseCode(UPDATED_RESPONSE_CODE);
         onlinePaymentCallback.setTotalAmountPaid(UPDATED_TOTAL_AMOUNT_PAID);
         onlinePaymentCallback.setUserDefinedField(UPDATED_USER_DEFINED_FIELD);
+        onlinePaymentCallback.setMerchantTxnRef(UPDATED_MERCHANT_TXN_REF);
 
         restOnlinePaymentCallbackMockMvc.perform(put("/api/onlinePaymentCallbacks")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -198,6 +205,7 @@ public class OnlinePaymentCallbackResourceIntTest {
         assertThat(testOnlinePaymentCallback.getResponseCode()).isEqualTo(UPDATED_RESPONSE_CODE);
         assertThat(testOnlinePaymentCallback.getTotalAmountPaid()).isEqualTo(UPDATED_TOTAL_AMOUNT_PAID);
         assertThat(testOnlinePaymentCallback.getUserDefinedField()).isEqualTo(UPDATED_USER_DEFINED_FIELD);
+        assertThat(testOnlinePaymentCallback.getMerchantTxnRef()).isEqualTo(UPDATED_MERCHANT_TXN_REF);
     }
 
     @Test

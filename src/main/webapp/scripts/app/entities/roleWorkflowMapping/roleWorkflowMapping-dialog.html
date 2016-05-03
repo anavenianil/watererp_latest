@@ -5,7 +5,7 @@
 		<button type="button" class="close" data-dismiss="modal"
 			aria-hidden="true" ng-click="clear()">&times;</button>
 		<h4 class="modal-title" id="myRoleWorkflowMappingLabel">Create or
-			edit a RoleWorkflowMapping</h4>
+			edit a  Role Work Flow Mapping</h4>
 	</div>
 	<div class="modal-body">
 		<jh-alert-error></jh-alert-error>
@@ -14,7 +14,7 @@
 				id="id" name="id" ng-model="roleWorkflowMapping.id" readonly />
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_creationDate">CreationDate</label>
+			<label class="control-label" for="field_creationDate">Creation Date</label>
 			<input id="field_creationDate" type="text" class="form-control"
 				uib-datepicker-popup="{{dateformat}}"
 				ng-model="roleWorkflowMapping.creationDate"
@@ -27,7 +27,7 @@
 			</span>
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+			<label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
 			<input id="field_lastModifiedDate" type="text" class="form-control"
 				uib-datepicker-popup="{{dateformat}}"
 				ng-model="roleWorkflowMapping.lastModifiedDate"
@@ -41,15 +41,15 @@
 		</div>
 
 		<div class="form-group">
-			<label for="field_statusMaster">statusMaster</label> <select
+			<label for="field_statusMaster">Status Master</label> <select
 				class="form-control" id="field_statusMaster" name="statusMaster"
 				ng-model="roleWorkflowMapping.statusMaster"
-				ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
+				ng-options="statusMaster as statusMaster.id+'-'+statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
 				<option value=""></option>
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="field_orgRoleInstance">orgRoleInstance</label> <select
+			<label for="field_orgRoleInstance">Organization Role Instance</label> <select
 				class="form-control" id="field_orgRoleInstance"
 				name="orgRoleInstance"
 				ng-model="roleWorkflowMapping.orgRoleInstance"
@@ -58,7 +58,7 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="field_workflowMaster">workflowMaster</label> <select
+			<label for="field_workflowMaster">Work Flow Master</label> <select
 				class="form-control" id="field_workflowMaster" name="workflowMaster"
 				ng-model="roleWorkflowMapping.workflowMaster"
 				ng-options="workflowMaster as workflowMaster.workflowName for workflowMaster in workflowmasters track by workflowMaster.id">
@@ -66,7 +66,7 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="field_requestMaster">requestMaster</label> <select
+			<label for="field_requestMaster">Request Master</label> <select
 				class="form-control" id="field_requestMaster" name="requestMaster"
 				ng-model="roleWorkflowMapping.requestMaster"
 				ng-options="requestMaster as requestMaster.requestType for requestMaster in requestmasters track by requestMaster.id">

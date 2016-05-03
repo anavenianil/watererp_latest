@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myItemCodeMasterLabel">Create or edit a ItemCodeMaster</h4>
+        <h4 class="modal-title" id="myItemCodeMasterLabel">Create or edit a Item Code Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,13 +14,13 @@
                     ng-model="itemCodeMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemCode">ItemCode</label>
+            <label class="control-label" for="field_itemCode">Item Code</label>
             <input type="text" class="form-control" name="itemCode" id="field_itemCode"
                     ng-model="itemCodeMaster.itemCode"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_itemName">ItemName</label>
+            <label class="control-label" for="field_itemName">Item Name</label>
             <input type="text" class="form-control" name="itemName" id="field_itemName"
                     ng-model="itemCodeMaster.itemName"
                      />
@@ -38,7 +38,7 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_creationDate">CreationDate</label>
+            <label class="control-label" for="field_creationDate">Creation Date</label>
             <input id="field_creationDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="itemCodeMaster.creationDate" is-open="datePickerForCreationDate.status.opened"
             />
             <span class="input-group-btn">
@@ -46,7 +46,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_lastModifiedDate">LastModifiedDate</label>
+            <label class="control-label" for="field_lastModifiedDate">Last Modified Date</label>
             <input id="field_lastModifiedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="itemCodeMaster.lastModifiedDate" is-open="datePickerForLastModifiedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -55,13 +55,13 @@
         </div>
 
         <div class="form-group">
-            <label for="field_itemCategoryMaster">itemCategoryMaster</label>
+            <label for="field_itemCategoryMaster">Item Category Master</label>
             <select class="form-control" id="field_itemCategoryMaster" name="itemCategoryMaster" ng-model="itemCodeMaster.itemCategoryMaster" ng-options="itemCategoryMaster as itemCategoryMaster.id for itemCategoryMaster in itemcategorymasters track by itemCategoryMaster.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_itemSubCategoryMaster">itemSubCategoryMaster</label>
+            <label for="field_itemSubCategoryMaster">Item Sub Category Master</label>
             <select class="form-control" id="field_itemSubCategoryMaster" name="itemSubCategoryMaster" ng-model="itemCodeMaster.itemSubCategoryMaster" ng-options="itemSubCategoryMaster as itemSubCategoryMaster.id for itemSubCategoryMaster in itemsubcategorymasters track by itemSubCategoryMaster.id">
                 <option value=""></option>
             </select>
@@ -70,7 +70,7 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
+        </button>  
         <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>

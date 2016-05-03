@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>RequestWorkflowMapping</span> {{requestWorkflowMapping.id}}</h2>
+    <h2><span>Request Work Flow Mapping</span> {{requestWorkflowMapping.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>CreationDate</span>
+                    <span>Creation Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowMapping.creationDate | date:'medium'}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>LastModifiedDate</span>
+                    <span>Last Modified Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestWorkflowMapping.lastModifiedDate | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>statusMaster</span>
+                    <span>Status Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:requestWorkflowMapping.statusMaster.id})">{{requestWorkflowMapping.statusMaster.id}}</a>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>workflowMaster</span>
+                    <span>Work flow Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="workflowMaster.detail({id:requestWorkflowMapping.workflowMaster.id})">{{requestWorkflowMapping.workflowMaster.id}}</a>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>requestMaster</span>
+                    <span>Request Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="requestMaster.detail({id:requestWorkflowMapping.requestMaster.id})">{{requestWorkflowMapping.requestMaster.id}}</a>

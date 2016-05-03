@@ -6,7 +6,7 @@
 		<button type="button" class="close" data-dismiss="modal"
 			aria-hidden="true" ng-click="clear()">&times;</button>
 		<h4 class="modal-title" id="myCustMeterMappingLabel">Create or
-			edit a CustMeterMapping</h4>
+			edit a Customer Meter Mapping</h4>
 	</div>
 	<div class="modal-body">
 		<jh-alert-error></jh-alert-error>
@@ -15,7 +15,7 @@
 				id="id" name="id" ng-model="custMeterMapping.id" readonly />
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_fromDate">FromDate</label> <input
+			<label class="control-label" for="field_fromDate">From Date</label> <input
 				id="field_fromDate" type="text" class="form-control"
 				uib-datepicker-popup="{{dateformat}}"
 				ng-model="custMeterMapping.fromDate"
@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label" for="field_toDate">ToDate</label> <input
+			<label class="control-label" for="field_toDate">To Date</label> <input
 				id="field_toDate" type="text" class="form-control"
 				uib-datepicker-popup="{{dateformat}}"
 				ng-model="custMeterMapping.toDate"
@@ -46,7 +46,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="field_custDetails">custDetails</label> <select
+			<label for="field_custDetails">Customer Details</label> <select
 				class="form-control" id="field_custDetails" name="custDetails"
 				ng-model="custMeterMapping.custDetails"
 				ng-options="custDetails as custDetails.can for custDetails in custdetailss track by custDetails.id">
@@ -54,9 +54,9 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="field_meterDetails">meterDetails</label> <select
+			<label for="field_meterDetails">Meter Details</label> <select
 				class="form-control" id="field_meterDetails" name="meterDetails"
-				ng-model="custMeterMapping.meterDetails"
+				ng-model="custMeterMapping.meterDetails"     
 				ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
 				<option value=""></option>
 			</select>

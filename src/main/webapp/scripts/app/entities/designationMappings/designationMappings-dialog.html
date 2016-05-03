@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myDesignationMappingsLabel">Create or edit a DesignationMappings</h4>
+        <h4 class="modal-title" id="myDesignationMappingsLabel">Create or edit a Designation Mappings</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -21,25 +21,25 @@
         </div>
 
         <div class="form-group">
-            <label for="field_desigCategoryMaster">desigCategoryMaster</label>
+            <label for="field_desigCategoryMaster">Design Category Master</label>
             <select class="form-control" id="field_desigCategoryMaster" name="desigCategoryMaster" ng-model="designationMappings.desigCategoryMaster" ng-options="desigCategoryMaster as desigCategoryMaster.id for desigCategoryMaster in desigcategorymasters track by desigCategoryMaster.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_subDesigCategoryMaster">subDesigCategoryMaster</label>
+            <label for="field_subDesigCategoryMaster">Sub Design Category Master</label>
             <select class="form-control" id="field_subDesigCategoryMaster" name="subDesigCategoryMaster" ng-model="designationMappings.subDesigCategoryMaster" ng-options="subDesigCategoryMaster as subDesigCategoryMaster.id for subDesigCategoryMaster in subdesigcategorymasters track by subDesigCategoryMaster.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_designationMaster">designationMaster</label>
+            <label for="field_designationMaster">Designation Master</label>
             <select class="form-control" id="field_designationMaster" name="designationMaster" ng-model="designationMappings.designationMaster" ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_groupMaster">groupMaster</label>
+            <label for="field_groupMaster">Group Master</label>
             <select class="form-control" id="field_groupMaster" name="groupMaster" ng-model="designationMappings.groupMaster" ng-options="groupMaster as groupMaster.id for groupMaster in groupmasters track by groupMaster.id">
                 <option value=""></option>
             </select>

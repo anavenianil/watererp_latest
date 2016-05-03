@@ -42,6 +42,9 @@ public class OnlinePaymentCallback implements Serializable {
     @Column(name = "user_defined_field")
     private String userDefinedField;
 
+    @Column(name = "merchant_txn_ref")
+    private String merchantTxnRef;
+
     @ManyToOne
     @JoinColumn(name = "merchant_master_id")
     private MerchantMaster merchantMaster;
@@ -114,6 +117,14 @@ public class OnlinePaymentCallback implements Serializable {
         this.userDefinedField = userDefinedField;
     }
 
+    public String getMerchantTxnRef() {
+        return merchantTxnRef;
+    }
+
+    public void setMerchantTxnRef(String merchantTxnRef) {
+        this.merchantTxnRef = merchantTxnRef;
+    }
+
     public MerchantMaster getMerchantMaster() {
         return merchantMaster;
     }
@@ -158,6 +169,7 @@ public class OnlinePaymentCallback implements Serializable {
             ", responseCode='" + responseCode + "'" +
             ", totalAmountPaid='" + totalAmountPaid + "'" +
             ", userDefinedField='" + userDefinedField + "'" +
+            ", merchantTxnRef='" + merchantTxnRef + "'" +
             '}';
     }
 }

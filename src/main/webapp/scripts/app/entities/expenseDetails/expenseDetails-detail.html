@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>ExpenseDetails</span> {{expenseDetails.id}}</h2>
+    <h2><span>Expense Details</span> {{expenseDetails.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>ExpenseNo</span>
+                    <span>Expense Number</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{expenseDetails.expenseNo}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ExpenseAmt</span>
+                    <span>Expense Amount</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{expenseDetails.expenseAmt}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ExpenseDt</span>
+                    <span>Expense Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{expenseDetails.expenseDt | date:'medium'}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>InstrNo</span>
+                    <span>Instrument Number</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{expenseDetails.instrNo}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>InstrDt</span>
+                    <span>Instrument Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{expenseDetails.instrDt | date:'mediumDate'}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>paymentTypes</span>
+                    <span>Payment Types</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="paymentTypes.detail({id:expenseDetails.paymentTypes.id})">{{expenseDetails.paymentTypes.id}}</a>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>instrumentIssuerMaster</span>
+                    <span>Instrument Issuer Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="instrumentIssuerMaster.detail({id:expenseDetails.instrumentIssuerMaster.id})">{{expenseDetails.instrumentIssuerMaster.id}}</a>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>collectionTypeMaster</span>
+                    <span>Collection Type Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="collectionTypeMaster.detail({id:expenseDetails.collectionTypeMaster.id})">{{expenseDetails.collectionTypeMaster.id}}</a>

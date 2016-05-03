@@ -1,6 +1,11 @@
 package com.callippus.water.erp.web.rest.errors;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;
@@ -41,6 +46,23 @@ public class ExceptionTranslator {
         return ex.getErrorDTO();
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorDTO processConstraintViolationException(ConstraintViolationException ex) {
+    	Set<ConstraintViolation<?>> c = ex.getConstraintViolations();
+        ErrorDTO dto = new ErrorDTO(ErrorConstants.ERR_VALIDATION);
+    	for (ConstraintViolation<?> constraintViolation : c) {
+//    	    message += constraintViolation.getRootBeanClass() + " " + constraintViolation.getPropertyPath() + " " + constraintViolation.getMessage()
+//					+ " " + constraintViolation.getRootBean() + ", invalid value: [" + constraintViolation.getInvalidValue() + "]\n";
+//    	    message += constraintViolation.getPropertyPath() + ":" + constraintViolation.getMessage() + "\n";
+    	    dto.add("",constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage() );
+    	}
+    	
+        return dto;    	
+    }
+    
+    
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
