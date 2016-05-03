@@ -87,7 +87,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().ignoringAntMatchers("/api/unifiedPGResponse")
+		http.csrf()
+				.ignoringAntMatchers("/api/unifiedPGResponse")
+				.ignoringAntMatchers("/api/custDetailss/searchCAN/")
+				.ignoringAntMatchers("/api/onlinePaymentOrders")
 				.and()
 				.addFilterAfter(new CsrfCookieGeneratorFilter(),
 						CsrfFilter.class).exceptionHandling()
