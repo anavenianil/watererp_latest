@@ -214,5 +214,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('custDetails.nameChange', {
+                parent: 'custDetails',
+                url: '/nameChange',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetailsNameChange.html',
+                        controller: 'CustDetailsNameChangeController'
+                    }
+                },
+                resolve: {
+                }
             });
     });
