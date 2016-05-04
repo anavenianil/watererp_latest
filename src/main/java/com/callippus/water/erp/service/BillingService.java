@@ -67,28 +67,30 @@ public class BillingService {
 	};
 
 	enum CustValidation {
-		ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS
+		ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_METER_READING_MONTH, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS
 	};
 
 	enum BrdStatus {
-		INIT (0), FAILED (1), SUCCESS(2), FAILED_COMMIT(3), COMMITTED(4);
-		
-	    private int _value;
+		INIT(0), FAILED(1), SUCCESS(2), FAILED_COMMIT(3), COMMITTED(4);
 
-	    BrdStatus(int Value) {
-	        this._value = Value;
-	    }
+		private int _value;
 
-	    public int getValue() {
-	            return _value;
-	    }
+		BrdStatus(int Value) {
+			this._value = Value;
+		}
 
-	    public static BrdStatus fromInt(int i) {
-	        for (BrdStatus b : BrdStatus .values()) {
-	            if (b.getValue() == i) { return b; }
-	        }
-	        return null;
-	    }
+		public int getValue() {
+			return _value;
+		}
+
+		public static BrdStatus fromInt(int i) {
+			for (BrdStatus b : BrdStatus.values()) {
+				if (b.getValue() == i) {
+					return b;
+				}
+			}
+			return null;
+		}
 	}
 
 	List<Long> categories = Arrays.asList(1L, 2L, 3L);
@@ -127,7 +129,7 @@ public class BillingService {
 			br.setStatus("Completed with Errors");
 		else
 			br.setStatus("Completed Successfully");
-		
+
 		billRunMasterRepository.save(br);
 
 		return br;
@@ -142,7 +144,7 @@ public class BillingService {
 			br.setStatus("Completed with Errors");
 		else
 			br.setStatus("Completed Successfully");
-		
+
 		billRunMasterRepository.save(br);
 
 		return br;
@@ -152,43 +154,42 @@ public class BillingService {
 		try {
 			BillRunMaster brm = billRunMasterRepository.findOne(billRunId);
 
-			if(brm.getStatus().equalsIgnoreCase("COMMITTED"))
+			if (brm.getStatus().equalsIgnoreCase("COMMITTED"))
 				return "Bill run already COMMITTED";
-			
-			if(brm.getStatus().equalsIgnoreCase("CANCELLED"))
+
+			if (brm.getStatus().equalsIgnoreCase("CANCELLED"))
 				return "Bill run already CANCELLED";
-						
-			if(brm.getStatus().equalsIgnoreCase("IN PROCESS"))
+
+			if (brm.getStatus().equalsIgnoreCase("IN PROCESS"))
 				return "Cannot COMMIT IN PROCESS Bill run";
-									
+
 			brm.setStatus("CANCELLED");
-			
+
 			return "CANCEL Success!";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "CANCEL Failed:" + e.getMessage();
 		}
 	}
-	
+
 	public String commitBillRun(long billRunId) {
 		try {
 			BillRunMaster brm = billRunMasterRepository.findOne(billRunId);
 
-			if(brm.getStatus().equalsIgnoreCase("COMMITTED"))
+			if (brm.getStatus().equalsIgnoreCase("COMMITTED"))
 				return "Bill run already COMMITTED";
-			
-			if(brm.getStatus().equalsIgnoreCase("CANCELLED"))
+
+			if (brm.getStatus().equalsIgnoreCase("CANCELLED"))
 				return "Bill run already CANCELLED";
-						
-			if(brm.getStatus().equalsIgnoreCase("IN PROCESS"))
+
+			if (brm.getStatus().equalsIgnoreCase("IN PROCESS"))
 				return "Cannot COMMIT IN PROCESS Bill run";
-													
+
 			billRunDetailsRepository.findByBillRunId(billRunId).forEach(
 					bill_run_detail -> commit(bill_run_detail));
 
-
 			brm.setStatus("COMMITTED");
-			
+
 			return "COMMIT Success!";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -215,17 +216,17 @@ public class BillingService {
 			brd.setStatus(BrdStatus.COMMITTED.getValue());
 			billRunDetailsRepository.save(brd);
 		} catch (Exception e) {
-			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0,200));
+			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0, 200));
 			brd.setStatus(BrdStatus.FAILED_COMMIT.getValue());
 			billRunDetailsRepository.save(brd);
 		}
 	}
 
 	public void initBillRun() {
-		
+
 		successRecords = 0;
 		failedRecords = 0;
-		
+
 		br = new BillRunMaster();
 		br.setArea("0");
 		br.setDate(ZonedDateTime.now());
@@ -300,6 +301,9 @@ public class BillingService {
 			return;
 		}
 
+		if (customer.getPrevBillMonth() == null)
+			newMeterFlag = 1;
+
 		CustValidation retVal = getCustInfo(customer, bill_details);
 
 		if (retVal != CustValidation.SUCCESS) {
@@ -318,7 +322,7 @@ public class BillingService {
 			return;
 		}
 
-		if (bfdRepository.findByCanAndToMonth(
+		if (newMeterFlag == 0 && bfdRepository.findByCanAndToMonth(
 				customer.getCan(),
 				customer.getPrevBillMonth().format(
 						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
@@ -342,9 +346,13 @@ public class BillingService {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
-			dFrom = customer.getPrevBillMonth();
-			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			if(newMeterFlag == 1)
+				dFrom = customer.getMeterFixDate();
+			else
+				dFrom = customer.getPrevBillMonth();
 			
+			dTo = bill_details.getBillDate().withDayOfMonth(1);
+
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
 					.getPrevBillType().equals("M"))
@@ -360,15 +368,19 @@ public class BillingService {
 					log.debug("          NEW METER BILL CASE (" + days
 							+ " days)");
 					log.debug("########################################");
-				} else {				
-					long billDays = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
-							dTo);
-					
-					if(billDays  <= 0)
-					{
-						throw new Exception("Invalid From:" + dFrom.format(DateTimeFormatter.ofPattern("yyyyMM"))+" and To:" + dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
+				} else {
+					long billDays = ChronoUnit.DAYS.between(
+							customer.getMeterFixDate(), dTo);
+
+					if (billDays <= 0) {
+						throw new Exception("Invalid From:"
+								+ dFrom.format(DateTimeFormatter
+										.ofPattern("yyyyMM"))
+								+ " and To:"
+								+ dTo.format(DateTimeFormatter
+										.ofPattern("yyyyMM")));
 					}
-					
+
 					log.debug("########################################");
 					log.debug("          METER BILL CASE (" + days + " days)");
 					log.debug("########################################");
@@ -455,7 +467,7 @@ public class BillingService {
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
 			bfd.setId(null);
-			
+
 			bfd.setWaterCess(0.00f);
 			bfd.setSewerageCess(0.00f);
 			bfd.setServiceCharge(0.00f);
@@ -501,13 +513,13 @@ public class BillingService {
 					+ bfd.getSurcharge() + bfd.getOtherCharges();
 
 			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") "
-					+ "+ Meter Svc Charge(" + bfd.getMeterServiceCharge() + ") "
-					+ "+ Service Charge (" + bfd.getServiceCharge()+ ") "
-					+ "+ SewerageCess (" + bfd.getSewerageCess()+ ") "
-					+ "+ Surcharge (" + bfd.getSurcharge()+ ") "
+					+ "+ Meter Svc Charge(" + bfd.getMeterServiceCharge()
+					+ ") " + "+ Service Charge (" + bfd.getServiceCharge()
+					+ ") " + "+ SewerageCess (" + bfd.getSewerageCess() + ") "
+					+ "+ Surcharge (" + bfd.getSurcharge() + ") "
 					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") "
 					+ "= Total (" + total + ") ");
-			
+
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
 			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears()
@@ -516,9 +528,9 @@ public class BillingService {
 
 			log.debug("Net Payable = Total (" + bfd.getTotalAmount() + ") "
 					+ "+ Int on Arrears (" + bfd.getIntOnArrears() + ") "
-					+ "+ Arrears (" + bfd.getArrears()+ ") "
-					+ "= Net Payable  (" + netPayable+ ") ");
-						
+					+ "+ Arrears (" + bfd.getArrears() + ") "
+					+ "= Net Payable  (" + netPayable + ") ");
+
 			LocalDateTime date = LocalDateTime.now();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hhmmss");
 
@@ -559,7 +571,7 @@ public class BillingService {
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
 			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e).substring(0,200));
+					+ CPSUtils.stackTraceToString(e).substring(0, 200));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
@@ -588,39 +600,42 @@ public class BillingService {
 		if (customer.getPipeSize() < 0.5f)
 			return CustValidation.INVALID_PIPESIZE;
 
-		if (customer.getPrevBillMonth() == null
-				|| customer.getPrevBillMonth().equals(""))
-			return CustValidation.INVALID_PREV_BILL_MONTH;
-
-		if (customer.getPrevBillMonth().isBefore(LocalDate.of(2005, 01, 01)))
-			return CustValidation.NOT_IMPLEMENTED;
-
 		if (!categories.contains(customer.getTariffCategoryMaster().getId()))
 			return CustValidation.INVALID_CATEGORY;
 
 		if (bill_details.getPresentReading() < bill_details.getInitialReading())
 			return CustValidation.INVALID_METER_READING;
 
+		if (customer.getMetReadingMo() == null
+				&& bill_details.getCurrentBillType().equals("M"))
+			return CustValidation.INVALID_METER_READING_MONTH;
+
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -1);
 
-		if ((customer.getPrevBillType().equals("M") || customer
-				.getPrevBillType().equals("L"))
-				&& bill_details.getCurrentBillType().equals("U"))
-			return CustValidation.INVALID_BILL_TYPE;
+		if (newMeterFlag == 0) {
+			if (customer.getPrevBillMonth() == null
+					|| customer.getPrevBillMonth().equals(""))
+				return CustValidation.INVALID_PREV_BILL_MONTH;
 
-		if (customer.getPrevBillType().equals("R")
-				&& !bill_details.getCurrentBillType().equals("R"))
-			return CustValidation.INVALID_BILL_TYPE;
+			if (customer.getPrevBillMonth()
+					.isBefore(LocalDate.of(2005, 01, 01)))
+				return CustValidation.NOT_IMPLEMENTED;
 
-		if (customer.getPrevBillType().equals("U")
-				&& !bill_details.getCurrentBillType().equals("U"))
-			return CustValidation.INVALID_BILL_TYPE;
+			if ((customer.getPrevBillType().equals("M") || customer
+					.getPrevBillType().equals("L"))
+					&& bill_details.getCurrentBillType().equals("U"))
+				return CustValidation.INVALID_BILL_TYPE;
 
-		if (customer.getMetReadingMo() == null
-				&& bill_details.getCurrentBillType().equals("M"))
-			return CustValidation.INVALID_PREV_BILL_MONTH;
+			if (customer.getPrevBillType().equals("R")
+					&& !bill_details.getCurrentBillType().equals("R"))
+				return CustValidation.INVALID_BILL_TYPE;
 
+			if (customer.getPrevBillType().equals("U")
+					&& !bill_details.getCurrentBillType().equals("U"))
+				return CustValidation.INVALID_BILL_TYPE;
+		}
+		
 		return CustValidation.SUCCESS;
 	}
 

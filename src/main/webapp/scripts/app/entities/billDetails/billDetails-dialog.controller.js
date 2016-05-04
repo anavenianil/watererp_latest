@@ -12,6 +12,17 @@ angular.module('watererpApp').controller(
         $scope.collDetails = {};
         var date  = new Date();
         $scope.billDetails.billDate = date;
+        
+        var currentTime = new Date();
+    	var hours = currentTime.getHours();
+    	var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
+    	if (minutes < 10)
+    	minutes = "0" + minutes;
+        if (seconds < 10)
+    	seconds = "0" + seconds;
+        
+        $scope.billDetails.billTime = hours + "" + minutes + "" + seconds;   
         $scope.billDetails.metReadingDt = date;
         $scope.billDetails.toMonth = new Date(date.getFullYear(), date.getMonth(), 1);
         $scope.users = User.query();
@@ -94,11 +105,19 @@ angular.module('watererpApp').controller(
                 $scope.billDetails.can = $scope.custDetails.can;
                 $scope.billDetails.address = $scope.custDetails.address;
                 $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
+                if($scope.billDetails.prevBillMonth == null){
+                $scope.billDetails.fromMonth=$scope.custDetails.meterFixDate;                
+                $scope.billDetails.initialReading = $scope.custDetails.prevReading;
+                $scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;
+                $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.meterFixDate;            
+                }else{
                 var date2 = new Date($scope.billDetails.prevBillMonth);
                 $scope.billDetails.fromMonth = new Date(date2.getFullYear(), date2.getMonth()+1, date2.getDate());
                 $scope.billDetails.initialReading = $scope.custDetails.prevReading;
                 $scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
                 $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.metReadingDt;
+                }
+                
             });
         }
         

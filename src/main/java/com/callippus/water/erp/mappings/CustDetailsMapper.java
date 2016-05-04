@@ -35,7 +35,7 @@ public interface CustDetailsMapper {
 		@Mapping(target = "hrsSurcharge", constant= "0.0"),
 		@Mapping(target = "surcharge", constant= "0.0"),
 		@Mapping(target = "otherCharges", constant= "0.0"),
-		@Mapping(target = "prevBillType", constant= "M"),
+//		@Mapping(target = "prevBillType", constant= "M"),
 		@Mapping(target = "prevAvgKl", constant= "0.0"),
 		@Mapping(target = "lastPymtAmt", constant= "0.0"),
 		@Mapping(target = "metAvgKl", constant= "0.0"),
@@ -43,10 +43,10 @@ public interface CustDetailsMapper {
 		@Mapping(target = "reversalAmt", constant= "0.0"),
 		@Mapping(target = "installment", constant= "0.0"),
 		@Mapping(target = "metCostInstallment", constant= "0.0"),
-		@Mapping(target = "intOnArrears", constant= "0.0"),
+//		@Mapping(target = "intOnArrears", constant= "0.0"),
 		@Mapping(target = "metReadingMo", source= "connectionDate"),
-		@Mapping(target = "prevBillMonth", source= "connectionDate"),
-		@Mapping(target = "lastPymtDt", source= "connectionDate"),
+//		@Mapping(target = "prevBillMonth", source= "connectionDate"),
+//		@Mapping(target = "lastPymtDt", source= "connectionDate"),
 	})
     CustDetails appTxnToCustDetails(ApplicationTxn applicationTxn);
 	
