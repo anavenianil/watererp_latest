@@ -1,6 +1,5 @@
 package com.callippus.water.erp.repository;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.callippus.water.erp.domain.CustomerComplaints;
-import com.callippus.water.erp.domain.ModuleMenuDTO;
 
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CustomerComplaintsCustomRepositoryImpl extends
@@ -61,23 +59,4 @@ public class CustomerComplaintsCustomRepositoryImpl extends
 
 		return items;
 	}
-
-	/**
-	 * List count of pending request
-	 */
-	public List<String> searchCAN(@Param("searchTerm") String searchTerm){
-
-		String sql = "SELECT concat(can ,' - ',cons_name,' - ',address) can from cust_details where can like ? or cons_name like ? or address like ? limit 10";
-		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList(sql, new Object[] {"%" + searchTerm + "%","%" + searchTerm + "%","%" + searchTerm + "%"});
-
-		List<String> items = new ArrayList<String>();
-
-		for (Map row : rows) {
-			items.add((String)row.get("can"));
-		}
-
-		return items;
-	}
-
 }

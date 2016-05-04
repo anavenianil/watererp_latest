@@ -33,8 +33,7 @@ angular.module('watererpApp')
             $scope.clear();
         };
         
-        $scope.getLocation = function(val){
-        	console.log("getLocation	"+val);///customerComplaintss/searchCustomerComplaint
+        $scope.getCustomerComplaint = function(val){
         	return $http.get('api/customerComplaintss/searchCustomerComplaint/' + val, {
 				params : {
 					address : val,
@@ -47,9 +46,30 @@ angular.module('watererpApp')
 
 				return res;
 			});
-        	
-        	
         }
+        
+        $scope.onSelect = function($item, $model, $label) {
+			console.log($item);
+			var arr = $item.split("-");
+
+			/*$scope.collDetails.can = arr[0];
+			$scope.collDetails.consName = arr[1];
+			$scope.collDetails.address = arr[2];
+			$scope.custInfo = "";
+			$scope.isValidCust = true;
+
+			CustDetailsService
+					.get(
+							{
+								can : $scope.collDetails.can
+							},
+							function(result) {
+								$scope.custDetails = result;
+								$scope.customerComplaints.custDetails.consName = $scope.custDetails.consName;
+								$scope.customerComplaints.can = $scope.custDetails.can;
+								$scope.customerComplaints.tariffCategory = $scope.custDetails.tariffCategoryMaster.tariffCategory;
+							});*/
+		};
 
         $scope.clear = function () {
             $scope.customerComplaints = {

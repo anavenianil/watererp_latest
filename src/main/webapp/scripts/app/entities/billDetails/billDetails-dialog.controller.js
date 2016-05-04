@@ -106,9 +106,10 @@ angular.module('watererpApp').controller(
                 $scope.billDetails.address = $scope.custDetails.address;
                 $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
                 if($scope.billDetails.prevBillMonth == null){
+                //$scope.billDetails.prevMetReadingDt = "";
                 $scope.billDetails.fromMonth=$scope.custDetails.meterFixDate;                
                 $scope.billDetails.initialReading = $scope.custDetails.prevReading;
-                $scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;
+                //$scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;
                 $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.meterFixDate;            
                 }else{
                 var date2 = new Date($scope.billDetails.prevBillMonth);
