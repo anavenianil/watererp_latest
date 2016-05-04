@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustomerComplaintsController', function ($scope, $state, CustomerComplaints, ParseLinks) {
+    .controller('CustomerComplaintsController', function ($scope, $state, CustomerComplaints, ParseLinks, $http) {
 
         $scope.customerComplaintss = [];
         $scope.predicate = 'id';
@@ -32,6 +32,24 @@ angular.module('watererpApp')
             $scope.reset();
             $scope.clear();
         };
+        
+        $scope.getLocation = function(val){
+        	console.log("getLocation	"+val);///customerComplaintss/searchCustomerComplaint
+        	return $http.get('api/customerComplaintss/searchCustomerComplaint/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+
+				return res;
+			});
+        	
+        	
+        }
 
         $scope.clear = function () {
             $scope.customerComplaints = {

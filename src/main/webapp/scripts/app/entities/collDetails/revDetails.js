@@ -8,7 +8,7 @@ angular.module('watererpApp')
             url: '/revDetails/new',
             data: {
                 authorities: ['ROLE_CASHIER','ROLE_USER'],
-                pageTitle: 'CollDetailss'
+                pageTitle: 'Revenue Details'
             },
             views: {
                 'content@': {
@@ -19,4 +19,20 @@ angular.module('watererpApp')
             resolve: {
             }
         })
+        .state('revDetailss', {
+                parent: 'entity',
+                url: '/revDetails',
+                data: {
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
+                    pageTitle: 'Revenue Details'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/collDetails/revDetailss.html',
+                        controller: 'RevDetailsController' 
+                    }
+                },
+                resolve: {
+                }
+            })
     });

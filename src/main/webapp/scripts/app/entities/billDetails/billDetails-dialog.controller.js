@@ -105,11 +105,19 @@ angular.module('watererpApp').controller(
                 $scope.billDetails.can = $scope.custDetails.can;
                 $scope.billDetails.address = $scope.custDetails.address;
                 $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
+                if($scope.billDetails.prevBillMonth == null){
+                $scope.billDetails.fromMonth=$scope.custDetails.meterFixDate;                
+                $scope.billDetails.initialReading = $scope.custDetails.prevReading;
+                $scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;
+                $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.meterFixDate;            
+                }else{
                 var date2 = new Date($scope.billDetails.prevBillMonth);
                 $scope.billDetails.fromMonth = new Date(date2.getFullYear(), date2.getMonth()+1, date2.getDate());
                 $scope.billDetails.initialReading = $scope.custDetails.prevReading;
                 $scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
                 $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.metReadingDt;
+                }
+                
             });
         }
         

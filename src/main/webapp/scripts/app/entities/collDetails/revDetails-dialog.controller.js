@@ -23,18 +23,18 @@ angular.module('watererpApp').controller(
 			
 			$scope.collDetails.txnStatus = "R";
 			
-			CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'C'}, function(result, headers) {
+			/*CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'C'}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.collectionTypeMasters.push(result[i]);
                 }
                 $scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
-            });
+            });*/
 
 			var onSaveSuccess = function(result) {
 				$scope.$emit('watererpApp:collDetailsUpdate', result);
 				$scope.isSaving = false;
-				$state.go('collDetails');
+				$state.go('revDetailss');
 			};
 
 			var onSaveError = function(result) {

@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustomerComplaints;
+import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.CustomerComplaintsCustomRepository;
 import com.callippus.water.erp.repository.CustomerComplaintsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -45,6 +47,9 @@ public class CustomerComplaintsResource {
         
     @Inject
     private CustomerComplaintsRepository customerComplaintsRepository;
+    
+    @Inject
+	private CustomerComplaintsCustomRepository customerComplaintsCustomRepository; 
     
     @Inject
     private WorkflowService workflowService;
@@ -145,6 +150,23 @@ public class CustomerComplaintsResource {
         return Optional.ofNullable(customerComplaints)
             .map(result -> new ResponseEntity<>(
                 result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
+    /**
+     * GET  /customerComplaintss/searchCustomerComplaint/:searchTerm
+     */
+    @RequestMapping(value = "/customerComplaintss/searchCustomerComplaint/{searchTerm}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<String>> searchCustomerComplaintLike(@PathVariable String searchTerm) {
+        log.debug("REST request to get CustomerComplaints : {}", searchTerm);
+        List<String> complaintList = customerComplaintsCustomRepository.searchCustomerComplaint(searchTerm);
+        return Optional.ofNullable(complaintList)
+            .map(result -> new ResponseEntity<>(
+            		complaintList,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

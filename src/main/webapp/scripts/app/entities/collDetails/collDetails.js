@@ -12,7 +12,23 @@ angular.module('watererpApp')
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/collDetails/collDetailss.html',
+                        templateUrl: 'scripts/app/entities/collDetails/revDetailss.html',
+                        controller: 'CollDetailsController' 
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('collDetails1', {
+                parent: 'entity',
+                url: '/collDetailss',
+                data: {
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
+                    pageTitle: 'CollDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/collDetails/revDetailss.html',
                         controller: 'CollDetailsController' 
                     }
                 },
