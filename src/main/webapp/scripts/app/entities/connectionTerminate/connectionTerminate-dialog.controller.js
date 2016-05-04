@@ -36,7 +36,7 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+           // $uibModalInstance.dismiss('cancel');
         };
         $scope.datePickerForRequestDate = {};
 
@@ -77,6 +77,7 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
+                $scope.connectionTerminate.can = $scope.custDetails.can; 
             });
         };
         

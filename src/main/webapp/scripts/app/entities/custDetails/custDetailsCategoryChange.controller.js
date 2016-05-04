@@ -9,7 +9,11 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
 		$scope.custDetails = {};
         $scope.tariffcategorymasters = TariffCategoryMaster.query();
         $scope.pipeSizeMasters = PipeSizeMaster.query();
-        $scope.requestMasters = [ {
+        //$scope.requestWorkflowHistory = {};
+        $scope.workflowDTO = {};
+        $scope.workflowDTO.requestWorkflowHistory = {};
+        $scope.workflowDTO.workflowTxnDetailss = {};
+        /*$scope.requestMasters = [ {
 			id : "8",
 			requestType : "CONNECTION CATEGORY"
 		}, {
@@ -21,20 +25,20 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
 		}, {
 			id : "11",
 			requestType : "CONNECTION TERMINATION"
-		} ];
+		} ];*/
         
-        $scope.workflowTxnDetails = [];
-        $scope.workflowTxnDetails[0] = {};
-        $scope.workflowTxnDetails[1] = {};
+        $scope.workflowDTO.workflowTxnDetailss = [];
+        $scope.workflowDTO.workflowTxnDetailss[0] = {};
+        $scope.workflowDTO.workflowTxnDetailss[1] = {};
         
         
-        $scope.workflowTxnDetails[0].columnName="prevReading";
-	    $scope.workflowTxnDetails[0].requestMaster = {};
-	    $scope.workflowTxnDetails[0].requestMaster.id = 8;
+        $scope.workflowDTO.workflowTxnDetailss[0].columnName="prevReading";
+	    $scope.workflowDTO.workflowTxnDetailss[0].requestMaster = {};
+	    $scope.workflowDTO.workflowTxnDetailss[0].requestMaster.id = 8;
 	       
-	    $scope.workflowTxnDetails[1].columnName="TarrifCategoryMaster";
-	    $scope.workflowTxnDetails[1].requestMaster = {};
-	    $scope.workflowTxnDetails[1].requestMaster.id = 8; 
+	    $scope.workflowDTO.workflowTxnDetailss[1].columnName="TarrifCategoryMaster";
+	    $scope.workflowDTO.workflowTxnDetailss[1].requestMaster = {};
+	    $scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8; 
                         
         
         
@@ -106,8 +110,8 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
-                $scope.workflowTxnDetails[0].previousValue = $scope.custDetails.prevReading;
-                $scope.workflowTxnDetails[1].previousValue = $scope.custDetails.tariffCategoryMaster;
+                $scope.workflowDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
+                $scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.custDetails.tariffCategoryMaster.id;
             });
         };
         
@@ -126,11 +130,11 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
 		
 		
 		$scope.saveChanges = function(){
-			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
+			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowDTO.workflowTxnDetailss));
+			console.log("WorkflowDTO data being posted to server:" + JSON.stringify($scope.workflowDTO));
+			$scope.workflowDTO.workflowTxnDetailss[1].previousValue = 3;//$scope.workflowDTO.workflowTxnDetails[1].previousValue.id;
 			
-			$scope.workflowTxnDetails[1].previousValue = $scope.workflowTxnDetails[1].previousValue.id;
-			
-			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowTxnDetails).then(function(response) {
+			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowDTO).then(function(response) {
 				console.log("Server response:" + JSON.stringify(response));
 //				var res = response.data.map(function(item) {
 //					return item;

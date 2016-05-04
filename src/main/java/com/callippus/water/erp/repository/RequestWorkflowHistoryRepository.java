@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.callippus.water.erp.domain.RequestMaster;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.WorkflowMaster;
 
 /**
  * Spring Data JPA repository for the RequestWorkflowHistory entity.
@@ -25,5 +26,7 @@ public interface RequestWorkflowHistoryRepository extends JpaRepository<RequestW
     List<RequestWorkflowHistory> findByAppliedByIsCurrentUser();
     
     Page<RequestWorkflowHistory> findByDomainObjectAndRequestMaster(Pageable pageable, Long domainObject, RequestMaster requestMaster);
+    
+    Page<RequestWorkflowHistory> findByDomainObjectAndWorkflowMaster(Pageable pageable, Long domainObject, WorkflowMaster workflowMaster);
 
 }
