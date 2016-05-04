@@ -1,0 +1,282 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true" ng-click="clear()">&times;</button>
+			<h3 class="panel-title pull-left">Customer Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<label for="field_SearchCan">Search By CAN</label>
+
+							<div class="form-group"
+								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search CAN or Name or Address (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<br>
+					<fieldset>
+						<legend>Customer Information</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_can">Can</label> <input
+									type="text" class="form-control" name="can" id="field_can"
+									ng-model="custDetails.can" required disabled />
+								<div ng-show="editForm.can.$invalid">
+									<p class="help-block" ng-show="editForm.can.$error.required">
+										This field is required.</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_consName">Consumer
+									Name</label> <input type="text" class="form-control" name="consName"
+									id="field_consName" ng-model="custDetails.consName" required
+									disabled />
+								<div ng-show="editForm.consName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.consName.$error.required">This field is
+										required.</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_mobileNo">Mobile
+									No.</label> <input type="text" class="form-control" name="mobileNo"
+									id="field_mobileNo" ng-model="custDetails.mobileNo" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_email">Email
+									Address</label> <input type="text" class="form-control" name="email"
+									id="field_email" ng-model="custDetails.email" disabled />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_houseNo">HouseNo</label>
+								<input type="text" class="form-control" name="houseNo"
+									id="field_houseNo" ng-model="custDetails.houseNo" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_secName">SecName</label>
+								<input type="text" class="form-control" name="secName"
+									id="field_secName" ng-model="custDetails.secName" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_secCode">SecCode</label>
+								<input type="text" class="form-control" name="secCode"
+									id="field_secCode" ng-model="custDetails.secCode" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_city">City</label> <input
+									type="text" class="form-control" name="city" id="field_city"
+									ng-model="custDetails.city" disabled />
+							</div>
+						</div>
+
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<label class="control-label" for="field_address">Address
+									Detail</label>
+								<textarea rows="2" cols="30" class="form-control" name="address"
+									id="field_address" style="resize: none"
+									ng-model="custDetails.address" disabled></textarea>
+							</div>
+						</div>
+					</fieldset>
+					<hr>
+					<br>
+					<fieldset>
+						<legend>Connection Termination</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label class="control-label" for="field_can">CAN</label> <input
+									type="text" class="form-control" name="can" id="field_can"
+									ng-model="connectionTerminate.can" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_requestDate">Request Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_requestDate'>
+										<input id="field_requestDate" type="text" class="form-control"
+											uib-datepicker-popup="{{dateformat}}"
+											ng-model="connectionTerminate.requestDate"
+											is-open="datePickerForRequestDate.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForRequestDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="col-sm-4">
+								<label class="control-label" for="field_meterRecovered">Meter Recovered</label>
+								<input type="checkbox" class="form-control"
+									name="meterRecovered" id="field_meterRecovered"
+									ng-model="connectionTerminate.meterRecovered" />
+							</div> -->
+							<div class="col-sm-4">
+								<label class="control-label" for="field_meterRecovered">Meter Recovered</label>
+								<div class="radio">
+									<label class="radio-inline"> <input type="radio"
+										name="meterRecovered"
+										ng-model="connectionTerminate.meterRecovered"
+										ng-value="true">Yes
+									</label> &nbsp;&nbsp;&nbsp;&nbsp;<label class="radio-inline"> <input type="radio"
+										name="meterRecovered"
+										ng-model="connectionTerminate.meterRecovered"
+										ng-value="false">No
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<label class="control-label" for="field_lastMeterReading">Last Meter Reading</label>
+								<input type="number" class="form-control"
+									name="lastMeterReading" id="field_lastMeterReading"
+									ng-model="connectionTerminate.lastMeterReading" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_meterRecoveredDate">Meter Recovered Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_meterRecoveredDate'>
+										<input id="field_meterRecoveredDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="connectionTerminate.meterRecoveredDate"
+											is-open="datePickerForMeterRecoveredDate.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForMeterRecoveredDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<label for="field_meterDetails">Meter Number</label> <select
+									class="form-control" id="field_meterDetails"
+									name="meterDetails" ng-model="connectionTerminate.meterDetails"
+									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
+									<option value=""></option>
+								</select>
+							</div>
+						</div>
+
+
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+
+<!-- <form name="editForm" role="form" novalidate ng-submit="save()">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myConnectionTerminateLabel">Create or
+			edit a ConnectionTerminate</h4>
+	</div>
+	<div class="modal-body">
+		<jh-alert-error></jh-alert-error>
+		<div class="form-group">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="connectionTerminate.id" readonly />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_can">Can</label> <input
+				type="text" class="form-control" name="can" id="field_can"
+				ng-model="connectionTerminate.can" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_requestDate">RequestDate</label>
+			<input id="field_requestDate" type="text" class="form-control"
+				uib-datepicker-popup="{{dateformat}}"
+				ng-model="connectionTerminate.requestDate"
+				is-open="datePickerForRequestDate.status.opened" /> <span
+				class="input-group-btn">
+				<button type="button" class="btn btn-default"
+					ng-click="datePickerForRequestDateOpen($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_meterRecovered">MeterRecovered</label>
+			<input type="checkbox" class="form-control" name="meterRecovered"
+				id="field_meterRecovered"
+				ng-model="connectionTerminate.meterRecovered" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_lastMeterReading">LastMeterReading</label>
+			<input type="number" class="form-control" name="lastMeterReading"
+				id="field_lastMeterReading"
+				ng-model="connectionTerminate.lastMeterReading" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_meterRecoveredDate">MeterRecoveredDate</label>
+			<input id="field_meterRecoveredDate" type="text" class="form-control"
+				uib-datepicker-popup="{{dateformat}}"
+				ng-model="connectionTerminate.meterRecoveredDate"
+				is-open="datePickerForMeterRecoveredDate.status.opened" />
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default"
+					ng-click="datePickerForMeterRecoveredDateOpen($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</div>
+
+		<div class="form-group">
+			<label for="field_meterDetails">meterDetails</label> <select
+				class="form-control" id="field_meterDetails" name="meterDetails"
+				ng-model="connectionTerminate.meterDetails"
+				ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
+				<option value=""></option>
+			</select>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
+</form> -->
