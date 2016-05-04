@@ -354,8 +354,8 @@ public class BillingService {
 			dTo = bill_details.getBillDate().withDayOfMonth(1);
 
 			// Previously Metered or Locked and currently Metered
-			if ((customer.getPrevBillType().equals("L") || customer
-					.getPrevBillType().equals("M"))
+			if ((newMeterFlag == 1 || (customer.getPrevBillType().equals("L") || customer
+					.getPrevBillType().equals("M")))
 					&& bill_details.getCurrentBillType().equals("M")) {
 
 				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),

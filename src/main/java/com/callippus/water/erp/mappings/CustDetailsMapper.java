@@ -43,7 +43,7 @@ public interface CustDetailsMapper {
 		@Mapping(target = "reversalAmt", constant= "0.0"),
 		@Mapping(target = "installment", constant= "0.0"),
 		@Mapping(target = "metCostInstallment", constant= "0.0"),
-//		@Mapping(target = "intOnArrears", constant= "0.0"),
+		@Mapping(target = "intOnArrears", constant= "0.0"),
 		@Mapping(target = "metReadingMo", source= "connectionDate"),
 //		@Mapping(target = "prevBillMonth", source= "connectionDate"),
 //		@Mapping(target = "lastPymtDt", source= "connectionDate"),

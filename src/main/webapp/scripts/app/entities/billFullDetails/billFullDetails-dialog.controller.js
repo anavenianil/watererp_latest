@@ -1,44 +1,20 @@
 'use strict';
 
-angular.module('watererpApp')
-    .controller('BillFullDetailsDialogController', function ($scope, $state, BillFullDetails, ParseLinks, $stateParams) {
+angular.module('watererpApp').controller('BillFullDetailsDialogController',
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BillFullDetails',
+        function($scope, $stateParams, $uibModalInstance, entity, BillFullDetails) {
 
-        $scope.billFullDetailss = [];
-        $scope.predicate = 'id';
-        $scope.reverse = true;
-        $scope.page = 0;
-        $scope.loadAll = function() {
-            BillFullDetails.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.billFullDetailss.push(result[i]);
-                }
+        $scope.billFullDetails = entity;
+        $scope.load = function(id) {
+            BillFullDetails.get({id : id}, function(result) {
+                $scope.billFullDetails = result;
             });
         };
-        $scope.reset = function() {
-            $scope.page = 0;
-            $scope.billFullDetailss = [];
-            $scope.loadAll();
-        };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
-        };
-        $scope.loadAll();        
-        
-        $scope.billFullDetailsId = $stateParams.id;
-        $scope.billFullDetails = {};
-        if($stateParams.id != null){        
-        BillFullDetails.get({id : $scope.billFullDetailsId}, function(result) {
-            $scope.billFullDetails = result;
-        });
-    	}
-        
+
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:billFullDetailsUpdate', result);
-            //$uibModalInstance.close(result);
+            $uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('billFullDetails');
         };
 
         var onSaveError = function (result) {
@@ -53,7 +29,10 @@ angular.module('watererpApp')
                 BillFullDetails.save($scope.billFullDetails, onSaveSuccess, onSaveError);
             }
         };
-        
+
+        $scope.clear = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
         $scope.datePickerForConnDate = {};
 
         $scope.datePickerForConnDate.status = {
@@ -63,6 +42,15 @@ angular.module('watererpApp')
         $scope.datePickerForConnDateOpen = function($event) {
             $scope.datePickerForConnDate.status.opened = true;
         };
+        $scope.datePickerForPrevBillMonth = {};
+
+        $scope.datePickerForPrevBillMonth.status = {
+            opened: false
+        };
+
+        $scope.datePickerForPrevBillMonthOpen = function($event) {
+            $scope.datePickerForPrevBillMonth.status.opened = true;
+        };
         $scope.datePickerForMetReadingDt = {};
 
         $scope.datePickerForMetReadingDt.status = {
@@ -71,6 +59,15 @@ angular.module('watererpApp')
 
         $scope.datePickerForMetReadingDtOpen = function($event) {
             $scope.datePickerForMetReadingDt.status.opened = true;
+        };
+        $scope.datePickerForMetReadingMo = {};
+
+        $scope.datePickerForMetReadingMo.status = {
+            opened: false
+        };
+
+        $scope.datePickerForMetReadingMoOpen = function($event) {
+            $scope.datePickerForMetReadingMo.status.opened = true;
         };
         $scope.datePickerForLastPymtDt = {};
 
@@ -90,80 +87,13 @@ angular.module('watererpApp')
         $scope.datePickerForBillDateOpen = function($event) {
             $scope.datePickerForBillDate.status.opened = true;
         };
+        $scope.datePickerForMeterFixDate = {};
 
-
-        $scope.refresh = function () {
-            $scope.reset();
-            $scope.clear();
+        $scope.datePickerForMeterFixDate.status = {
+            opened: false
         };
 
-        $scope.clear = function () {
-            $scope.billFullDetails = {
-                can: null,
-                divcode: null,
-                seccode: null,
-                secname: null,
-                metreadercode: null,
-                connDate: null,
-                consName: null,
-                houseNo: null,
-                address: null,
-                city: null,
-                pinCode: null,
-                category: null,
-                pipeSize: null,
-                boardMeter: null,
-                sewerage: null,
-                meterNo: null,
-                prevBillType: null,
-                prevBillMonth: null,
-                prevAvgKl: null,
-                metReadingDt: null,
-                prevReading: null,
-                metReadingMo: null,
-                metAvgKl: null,
-                arrears: null,
-                reversalAmt: null,
-                installment: null,
-                otherCharges: null,
-                surCharge: null,
-                hrsSurCharge: null,
-                resUnits: null,
-                metCostInstallment: null,
-                intOnArrears: null,
-                lastPymtDt: null,
-                lastPymtAmt: null,
-                billNumber: null,
-                billDate: null,
-                billTime: null,
-                meterMake: null,
-                currentBillType: null,
-                fromMonth: null,
-                toMonth: null,
-                meterFixDate: null,
-                initialReading: null,
-                presentReading: null,
-                units: null,
-                waterCess: null,
-                sewerageCess: null,
-                serviceCharge: null,
-                meterServiceCharge: null,
-                totalAmount: null,
-                netPayableAmount: null,
-                telephoneNo: null,
-                meterStatus: null,
-                mcMetReaderCode: null,
-                billFlag: null,
-                svrStatus: null,
-                terminalId: null,
-                meterReaderId: null,
-                userId: null,
-                mobileNo: null,
-                noticeNo: null,
-                lat: null,
-                longI: null,
-                nometerAmt: null,
-                id: null
-            };
-        };  
-    });
+        $scope.datePickerForMeterFixDateOpen = function($event) {
+            $scope.datePickerForMeterFixDate.status.opened = true;
+        };
+}]);
