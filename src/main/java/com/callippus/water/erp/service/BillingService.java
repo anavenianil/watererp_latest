@@ -354,11 +354,11 @@ public class BillingService {
 				log.debug("Months:" + monthsDiff);
 
 				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
-					units = bill_details.getPresentReading()
+					unitsKL = bill_details.getPresentReading()
 							- bill_details.getInitialReading();
 
-					unitsKL = (float) units / 1000.0f;
-
+					units = unitsKL * 1000.0f;
+					
 					avgKL = unitsKL / monthsDiff;
 
 					if (prevAvgKL != 0) {
@@ -379,7 +379,7 @@ public class BillingService {
 					}
 				}
 
-				kl = (float) (units / 1000.0);
+				kl = (float) (unitsKL);
 			} else if (bill_details.getCurrentBillType().equals("L")
 					|| bill_details.getCurrentBillType().equals("R")) {
 
@@ -513,7 +513,7 @@ public class BillingService {
 
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
 
-			bfd.setUnits(units);
+			bfd.setUnits(unitsKL);
 			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
 			bfd.setToMonth(dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
 

@@ -107,75 +107,64 @@ hr {
 
 		var allVars = $.getUrlVars();
 
-		if (allVars["response"] !== null && allVars["ref"] !== null
-				&& allVars["response"].toLowerCase() === "success") {
-			$
-					.ajax({
-						url : '/api/onlinePaymentCallbackByTxnRef/'
-								+ allVars["ref"],
-						data : "",
-						dataType : "json",
-						type : "GET",
-						contentType : "application/json; charset=utf-8",
-						success : function(response, textStatus, request) {
-							console.log("This is the response:"
-									+ JSON.stringify(response));
-							var successMsg = '<p><h3>Success! Payment Completed. </h3> <hr size="3"/> </p>';
-							successMsg += "<p style='color:#777 !important; font-weight:bold;'>"
-									+ "Merchant Txn Ref : "
-									+ "<span style='color:#444 !important;font-weight:normal !important;'>"
-									+ response.merchantTxnRef
-									+ "</span>"
-									+ "</p>";
-							successMsg += "<p style='color:#777 !important; font-weight:bold;'>"
-									+ "Amount : "
-									+ "<span style='color:#444 !important;font-weight:normal !important;'>"
-									+ response.totalAmountPaid
-									+ " "
-									+ response.currency + "</span>" + "</p>";
-							successMsg += "<p style='color:#777 !important; font-weight:bold;'>"
-									+ "Payment Mode : "
-									+ "<span style='color:#444 !important;font-weight:normal !important;'>"
-									+ response.onlinePaymentOrder.payBy
-									+ "</span>" + "</p>" + "<br/>";
+		$
+				.ajax({
+					url : '/api/onlinePaymentCallbackByOrderId/'
+							+ allVars["ref"],
+					data : "",
+					dataType : "json",
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					success : function(response, textStatus, request) {
+						console.log("This is the response:"
+								+ JSON.stringify(response));
+						var msg;
 
-							$('#le-alert').html(successMsg);
-						},
-						error : function(response) {
+						if (response.responseCode === '200') {
+							msg = '<p><h3>Success! Payment Completed. </h3> <hr size="3"/> </p>';
 
-							var successMsg = '<p><h3>Success! Payment Succeeded, but further information unavailable. </h3> <hr size="3"/> </p>';
+						} else {
+							msg = '<p><h3>Failed! Payment Failed. </h3> <hr size="3"/> </p>';
 
-							$('#le-alert').html(successMsg);
-						},
-						failure : function(response) {
-							var successMsg = '<p><h3>Success! Payment Succeeded, but further information unavailable. </h3> <hr size="3"/> </p>';
-
-							$('#le-alert').html(successMsg);
+							msg += "<p style='color:#777 !important; font-weight:bold;'>"
+									+ "<span style='color:red !important;font-weight:normal !important;'>"
+									+ "Please contact our Online Customer Care for further details."
+									+ "</span>" + "</p>";
 						}
-					});
-		} else {
-			var failureMsg = '<p><h3>Failure! Payment Processing Failed</h3> <hr size="3"/> </p>';
 
-			if (allVars["ref"] !== null &&  typeof  allVars["ref"] !== 'undefined') {
-				failureMsg += "<p style='color:#777 !important; font-weight:bold;'>"
-						+ "Merchant Txn Ref : "
-						+ "<span style='color:#444 !important;font-weight:normal !important;'>"
-						+ allVars["ref"] + "</span>" + "</p>";
-			}
+						msg += "<p style='color:#777 !important; font-weight:bold;'>"
+								+ "Merchant Txn Ref : "
+								+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+								+ response.merchantTxnRef + "</span>" + "</p>";
 
-			if (allVars["message"] !== null && typeof allVars["message"] !== 'undefined') {
-				failureMsg += "<p style='color:#777 !important; font-weight:bold;'>"
-						+ "Message from Payment Gateway : "
-						+ "<span style='color:#444 !important;font-weight:normal !important;'>"
-						+ allVars["message"] + "</span>" + "</p>";
-			}
+						msg += "<p style='color:#777 !important; font-weight:bold;'>"
+								+ "Amount : "
+								+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+								+ response.totalAmountPaid
+								+ " "
+								+ response.currency + "</span>" + "</p>";
 
-			failureMsg += "<p style='color:red !important; font-weight:bold;'>"
-					+ "Please contact our Online Team for further information. "
-					+ "</p>";
+						msg += "<p style='color:#777 !important; font-weight:bold;'>"
+								+ "Payment Mode : "
+								+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+								+ response.onlinePaymentOrder.payBy
+								+ "</span>"
+								+ "</p>" + "<br/>";
 
-			$('#le-alert').html(failureMsg);
-		}
+						$('#le-alert').html(msg);
+					},
+					error : function(response) {
+
+						var successMsg = '<p><h3>Payment information unavailable. </h3> <hr size="3"/> </p>';
+
+						$('#le-alert').html(successMsg);
+					},
+					failure : function(response) {
+						var successMsg = '<p><h3>Payment information unavailable. </h3> <hr size="3"/> </p>';
+
+						$('#le-alert').html(successMsg);
+					}
+				});
 	</script>
 </body>
 </html>

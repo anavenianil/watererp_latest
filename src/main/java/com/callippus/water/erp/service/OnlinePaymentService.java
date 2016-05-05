@@ -241,7 +241,7 @@ public class OnlinePaymentService {
 				+ onlinePaymentOrder.getAmount()
 				+ "</Amount>"
 				+ "   <UserDefinedField>"
-				+ onlinePaymentOrder.getUserDefinedField()
+				+ onlinePaymentOrder.getId()
 				+ "</UserDefinedField>"
 				+ "   <Parameters>"
 				+ "      <Parameter name=\"Email\">"
