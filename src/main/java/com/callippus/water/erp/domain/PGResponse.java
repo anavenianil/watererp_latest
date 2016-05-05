@@ -15,7 +15,7 @@ public class PGResponse {
 	private String paymentMode;
 
 	@XmlElement(name = "MerchantRefNumber")
-	private Long merchantRefNumber;
+	private String merchantRefNumber;
 
 	@XmlElement(name = "UserDefinedField")
 	private String userDefinedField;
@@ -51,11 +51,11 @@ public class PGResponse {
 		this.paymentMode = paymentMode;
 	}
 	
-	public Long getMerchantRefNumber() {
+	public String getMerchantRefNumber() {
 		return merchantRefNumber;
 	}
 
-	public void setMerchantRefNumber(Long merchantRefNumber) {
+	public void setMerchantRefNumber(String merchantRefNumber) {
 		this.merchantRefNumber = merchantRefNumber;
 	}
 

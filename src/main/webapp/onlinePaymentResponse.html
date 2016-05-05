@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Customer Online Payment Response</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width" />
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<style>
+hr {
+	height: 12px;
+	border: 0;
+	box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+.my-panel {
+	margin: 5px !important;
+}
+</style>
+</head>
+
+<body>
+	<!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  	<![endif]-->
+
+
+	<div class="panel panel-primary my-panel">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Customer Online Payment
+				Response</h3>
+		</div>
+		<div class="panel-body">
+			<div class="list-group">
+				<div class="list-group-item">
+					<div id="le-alert"></div>
+				</div>
+			</div>
+
+		</div>
+		<div class="panel-footer">
+			<div class="form-group">
+				<button type="button" class="btn btn-warning" onclick="home()">
+					<span class="glyphicon glyphicon-home"></span>
+					&nbsp;
+					<span>Home</span>
+				</button>
+				<button type="button" class="btn btn-success" onclick="newPayment()">
+					<span class="glyphicon glyphicon-new-window"></span>
+					&nbsp;
+					<span>Initiate Another Payment</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript">
+		function home() {
+			if (!window.location.origin) {
+				window.location.origin = window.location.protocol
+						+ "//"
+						+ window.location.hostname
+						+ (window.location.port ? ':' + window.location.port
+								: '');
+			}
+
+			var path = window.location.origin;
+			location.href = path;
+		}
+
+		function newPayment() {
+			if (!window.location.origin) {
+				window.location.origin = window.location.protocol
+						+ "//"
+						+ window.location.hostname
+						+ (window.location.port ? ':' + window.location.port
+								: '');
+			}
+
+			var path = window.location.origin;
+			location.href = path + "/onlinePaymentCust.html";
+		}
+
+		$.extend({
+			getUrlVars : function() {
+				var vars = [], hash;
+				var hashes = window.location.href.slice(
+						window.location.href.indexOf('?') + 1).split('&');
+				for (var i = 0; i < hashes.length; i++) {
+					hash = hashes[i].split('=');
+					vars.push(hash[0]);
+					vars[hash[0]] = hash[1];
+				}
+				return vars;
+			},
+			getUrlVar : function(name) {
+				return $.getUrlVars()[name];
+			}
+		});
+
+		var allVars = $.getUrlVars();
+
+		if (allVars["response"] !== null && allVars["ref"] !== null
+				&& allVars["response"].toLowerCase() === "success") {
+			$
+					.ajax({
+						url : '/api/onlinePaymentCallbackByTxnRef/'
+								+ allVars["ref"],
+						data : "",
+						dataType : "json",
+						type : "GET",
+						contentType : "application/json; charset=utf-8",
+						success : function(response, textStatus, request) {
+							console.log("This is the response:"
+									+ JSON.stringify(response));
+							var successMsg = '<p><h3>Success! Payment Completed. </h3> <hr size="3"/> </p>';
+							successMsg += "<p style='color:#777 !important; font-weight:bold;'>"
+									+ "Merchant Txn Ref : "
+									+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+									+ response.merchantTxnRef
+									+ "</span>"
+									+ "</p>";
+							successMsg += "<p style='color:#777 !important; font-weight:bold;'>"
+									+ "Amount : "
+									+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+									+ response.totalAmountPaid
+									+ " "
+									+ response.currency + "</span>" + "</p>";
+							successMsg += "<p style='color:#777 !important; font-weight:bold;'>"
+									+ "Payment Mode : "
+									+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+									+ response.onlinePaymentOrder.payBy
+									+ "</span>" + "</p>" + "<br/>";
+
+							$('#le-alert').html(successMsg);
+						},
+						error : function(response) {
+
+							var successMsg = '<p><h3>Success! Payment Succeeded, but further information unavailable. </h3> <hr size="3"/> </p>';
+
+							$('#le-alert').html(successMsg);
+						},
+						failure : function(response) {
+							var successMsg = '<p><h3>Success! Payment Succeeded, but further information unavailable. </h3> <hr size="3"/> </p>';
+
+							$('#le-alert').html(successMsg);
+						}
+					});
+		} else {
+			var failureMsg = '<p><h3>Failure! Payment Processing Failed</h3> <hr size="3"/> </p>';
+
+			if (allVars["ref"] !== null &&  typeof  allVars["ref"] !== 'undefined') {
+				failureMsg += "<p style='color:#777 !important; font-weight:bold;'>"
+						+ "Merchant Txn Ref : "
+						+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+						+ allVars["ref"] + "</span>" + "</p>";
+			}
+
+			if (allVars["message"] !== null && typeof allVars["message"] !== 'undefined') {
+				failureMsg += "<p style='color:#777 !important; font-weight:bold;'>"
+						+ "Message from Payment Gateway : "
+						+ "<span style='color:#444 !important;font-weight:normal !important;'>"
+						+ allVars["message"] + "</span>" + "</p>";
+			}
+
+			failureMsg += "<p style='color:red !important; font-weight:bold;'>"
+					+ "Please contact our Online Team for further information. "
+					+ "</p>";
+
+			$('#le-alert').html(failureMsg);
+		}
+	</script>
+</body>
+</html>

@@ -24,6 +24,7 @@
             <column name="response_code" type="varchar(255)"/>
             <column name="response_time" type="timestamp"/>
             <column name="redirect_url" type="varchar(255)"/>
+            <column name="merchant_txn_ref" type="varchar(255)"/>
             <column name="online_payment_order_id" type="bigint"/>
         </createTable>
         <dropDefaultValue tableName="online_payment_response" columnName="response_time" columnDataType="datetime"/>

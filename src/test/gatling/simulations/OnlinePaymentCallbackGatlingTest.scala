@@ -67,7 +67,7 @@ class OnlinePaymentCallbackGatlingTest extends Simulation {
             .exec(http("Create new onlinePaymentCallback")
             .post("/api/onlinePaymentCallbacks")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "currency":"SAMPLE_TEXT", "paymentMode":"SAMPLE_TEXT", "serviceCode":"SAMPLE_TEXT", "message":"SAMPLE_TEXT", "responseCode":"SAMPLE_TEXT", "totalAmountPaid":null, "userDefinedField":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "currency":"SAMPLE_TEXT", "paymentMode":"SAMPLE_TEXT", "serviceCode":"SAMPLE_TEXT", "message":"SAMPLE_TEXT", "responseCode":"SAMPLE_TEXT", "totalAmountPaid":null, "userDefinedField":"SAMPLE_TEXT", "merchantTxnRef":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_onlinePaymentCallback_url")))
             .pause(10)

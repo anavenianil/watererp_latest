@@ -1,0 +1,75 @@
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:simpleType name="currencyType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TSh" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="merchCodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Za-z0-9]{4,8}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="merchantRefType">
+		<xs:restriction base="xs:positiveInteger" />
+	</xs:simpleType>
+
+	<xs:simpleType name="paymentModeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TIGOPESADIR" />
+			<xs:enumeration value="CREDITCARD" />
+			<xs:enumeration value="DEBITCARD" />
+			<xs:enumeration value="NETBANKING" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="servCodeType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[A-Za-z0-9]{4,8}" />
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:element name="OrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element type="currencyType" name="Currency" />
+				<xs:element type="merchCodeType" name="MerchantCode" />
+				<xs:element type="merchantRefType" name="MerchantRefNumber" />
+				<xs:element type="paymentModeType" name="PaymentMode" />
+				<xs:element type="servCodeType" name="ServiceCode" />
+				<xs:element name="Message">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="255" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="ResponseCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:short">
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="TotalAmountPaid">
+					<xs:simpleType>
+						<xs:restriction base="xs:float">
+							<xs:minInclusive value="1" />
+							<xs:maxInclusive value="9999999" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="UserDefinedField">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="255" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

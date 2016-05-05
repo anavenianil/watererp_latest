@@ -117,7 +117,7 @@ CREATE TABLE  `watererp`.`application_txn` (
   CONSTRAINT `fk_applicationtxn_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
   CONSTRAINT `fk_applicationtxn_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`),
   CONSTRAINT `fk_applicationtxn_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`application_txn`
@@ -125,10 +125,10 @@ CREATE TABLE  `watererp`.`application_txn` (
 
 /*!40000 ALTER TABLE `application_txn` DISABLE KEYS */;
 LOCK TABLES `application_txn` WRITE;
-INSERT INTO `watererp`.`application_txn` VALUES  (21,'mohib',NULL,'khan',0x01,'Callippus','Programmer',9390148141,9390148141,'thisismohib@gmail.com','12','1-35-462','58','56465','54645',NULL,NULL,'kphb, Kukatally, Hydderabad',NULL,NULL,'312',NULL,'04060001','/api/download/21_0f4e489847888109094b0cce5c93b223_workflow.jpeg',8,654987,'2016-05-02','2016-05-02','completed','MeterId2',NULL,'Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',3,2,NULL,21,4,6,3),
- (22,'mohib',NULL,'khan',0x00,'','',9390148141,9390148141,'thisismohib@gmail.com','545','65465','65465','65465','54654',NULL,NULL,'kphb, kukatpally, hyderabad',NULL,NULL,'147852',NULL,NULL,'/api/download/22_633aca4abf01584b5d259a33800c7659_workflow.jpeg',0,NULL,'2016-05-04',NULL,NULL,NULL,NULL,'Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',1,NULL,NULL,15,NULL,NULL,2),
- (23,'khan',NULL,'mohib',0x01,'callippus','programmer',8686356232,9390148141,'khan_mohib@rediffmail.com','45','5464','56465','654','564',NULL,NULL,'begumpet, secunderabad',NULL,NULL,'1478552',NULL,NULL,'',0,NULL,'2016-05-04',NULL,NULL,NULL,NULL,'Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',2,NULL,NULL,15,NULL,NULL,3),
- (24,'khan',NULL,'mohib',0x01,'callippus','programmer',8686356232,NULL,'thisismohibkhan@gmail.com','45','654','564564','564',NULL,NULL,NULL,'Begumpet, secunderabad',NULL,NULL,'456456',NULL,NULL,'',1,NULL,'2016-05-04',NULL,NULL,NULL,'2016-05-04','Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',2,NULL,9,21,6,7,3);
+INSERT INTO `watererp`.`application_txn` VALUES  (18,'mohib','nefasat','khan',0x01,'Callippus','Programmer',9390148141,7646,'6546465','654654','213321','32131','321321','64546',NULL,NULL,'hkkhkhkh\njhgjhgj\nhkjh',NULL,NULL,'654654',NULL,NULL,'/api/download/18_e6bceb07c87301507da5d10c4e1dbc57_workflow.jpeg',0,NULL,'2016-04-30',NULL,NULL,NULL,NULL,'Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',2,NULL,NULL,15,NULL,NULL,2),
+ (19,'654654','5465465','46546',0x00,'','',654654,65465,'4654','665445','654654','65465','4654','6564',NULL,NULL,'64565464\n6554654',NULL,NULL,'654654',NULL,NULL,'',1,NULL,'2016-04-30',NULL,NULL,NULL,'2016-04-29','Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',3,NULL,16,21,2,2,1),
+ (20,'654654','654654','654654',0x01,'54654','654654',654654,65465465,'4654654','654654','654654','654654','654654','6464',NULL,NULL,'654654654',NULL,NULL,'654654',NULL,NULL,'',1,NULL,'2016-04-30',NULL,NULL,NULL,'2016-04-30','Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',3,NULL,14,21,5,5,3),
+ (21,'Tejasree',NULL,'Mamidipaka',0x00,'','',9949976058,4040068050,'ravimrb@yahoo.com','Subhodaya Nagar','Plot No: 11',NULL,NULL,'Residential purpose',NULL,NULL,'Plot No: 11, \nNear Hanuman Temple,\nKukatpally - 500 072',NULL,NULL,'124G87K',NULL,'02020001','',8,9,'2016-05-04','2016-04-12','','MeterId3',NULL,'Tittle Deed/Offer letter',NULL,1,3,NULL,21,2,2,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `application_txn` ENABLE KEYS */;
 
@@ -206,7 +206,7 @@ CREATE TABLE  `watererp`.`bill_details` (
   PRIMARY KEY (`id`),
   KEY `fk_billdetails_mtrreader_id` (`mtr_reader_id`),
   CONSTRAINT `fk_billdetails_mtrreader_id` FOREIGN KEY (`mtr_reader_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_details`
@@ -232,7 +232,8 @@ INSERT INTO `watererp`.`bill_details` VALUES  (1,'011100304','31197684','2016-04
  (16,'617803425',NULL,'2016-04-29',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-03-31T18:30:00.000Z',NULL,750000,750100,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-29',14),
  (17,'617797569',NULL,'2016-04-29',NULL,NULL,'S','2014-01-31T18:30:00.000Z','2016-03-31T18:30:00.000Z',NULL,0,100,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,14),
  (18,'617797569',NULL,'2016-04-29',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-03-31T18:30:00.000Z',NULL,0,100,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-29',14),
- (19,'617797569',NULL,'2016-04-29',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-03-31T18:30:00.000Z',NULL,0,122,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-27',14);
+ (19,'617797569',NULL,'2016-04-29',NULL,NULL,'M','2014-01-31T18:30:00.000Z','2016-03-31T18:30:00.000Z',NULL,0,122,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-27',14),
+ (20,'02020001',NULL,'2016-05-04','183632',NULL,'M','2016-04-11T18:30:00.000Z','2016-04-30T18:30:00.000Z',NULL,9,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-04',18);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 
@@ -276,7 +277,7 @@ CREATE TABLE  `watererp`.`bill_full_details` (
   `res_units` bigint(20) DEFAULT NULL,
   `met_cost_installment` float DEFAULT NULL,
   `int_on_arrears` float DEFAULT NULL,
-  `last_pymt_dt` date NOT NULL,
+  `last_pymt_dt` date DEFAULT NULL,
   `last_pymt_amt` float DEFAULT NULL,
   `bill_number` varchar(255) DEFAULT NULL,
   `bill_date` date NOT NULL,
@@ -308,7 +309,7 @@ CREATE TABLE  `watererp`.`bill_full_details` (
   `longi` varchar(255) DEFAULT NULL,
   `no_meter_amt` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_full_details`
@@ -316,57 +317,7 @@ CREATE TABLE  `watererp`.`bill_full_details` (
 
 /*!40000 ALTER TABLE `bill_full_details` DISABLE KEYS */;
 LOCK TABLES `bill_full_details` WRITE;
-INSERT INTO `watererp`.`bill_full_details` VALUES  (93,'617803425','03','0333','VIJAYNAGAR COLONY','8500','1987-10-10','DEEPAK RUPANI AND OTHERS','10-3-14','OKAZ APARTMENTS','','500028','2',2,'F','T','H2013-070041','M','2016-04-01',696,'2016-04-09',10000000,'2016-04-01',0,3885.95,0,0,0,18.15,'F',64,0,0,'2014-02-25',9416,'31197684','2016-04-12','061441','','M','201604','201604','2013-01-01',1921000,10000000,0,1650,165,110,0,1943.15,5829.1,'1111111111','M','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (94,'011100304','01','0111','BAHADURPURA','8500','1995-06-05','MOHD SIRAJ','19-5-32/13/50/A/4','KISHAN BAGH','','500064','2',0.5,'T','T','97518389','R','2016-05-01',15,'2016-04-09',0,'2016-04-01',0,5493.91,0,0,0,18.15,'F',1,0,47.81,'2012-11-29',425,'31197513','2016-04-12','061441','','R','201605','201605','2013-01-01',0,0,0,1650,165,110,0,1943.15,7484.87,'0000000000','R','Y','1','A0000','0000','123','0000000000','0000131130172628','0','0',0),
- (95,'061224612','06','0612','BANJARA HILLS','8500','1980-01-01','RAMULU, P.','6-3-346/4','DWARAKAPURI COLONY','','500082','1',1,'F','T','98540275','R','2014-01-01',23,'2016-04-09',0,'0001-01-01',23,0,0,0,0,5328.18,'F',10,0,0,'2014-02-19',2045,'31197514','2016-04-25','064254','','R','201401','201604','2013-01-01',0,0,621000,484380,48438,48600,489000,1075750,1075750,'0000000563','R','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0),
- (96,'612657362','07','0733','LALAPET','8500','2003-05-08','A.NARAHARI RAO','12-1-356','LALAPET,TARN','','500017','2',0.75,'T','T','','R','2014-01-01',37,'2016-04-09',0,'0001-01-01',0,0.55,0,0,0,18.15,'F',12,0,0,'2014-02-13',1478,'31197668','2016-04-25','064255','','R','201401','201604','2013-01-01',0,0,999000,1650,165,110,0,1943.15,1943.7,'0000000002','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (97,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-25','064255','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (98,'061224612','06','0612','BANJARA HILLS','8500','1980-01-01','RAMULU, P.','6-3-346/4','DWARAKAPURI COLONY','','500082','1',1,'F','T','98540275','R','2014-01-01',23,'2016-04-09',0,'0001-01-01',23,0,0,0,0,5328.18,'F',10,0,0,'2014-02-19',2045,'31197514','2016-04-26','082956','','R','201401','201604','2013-01-01',0,0,621000,484380,48438,48600,489000,1075750,1075750,'0000000563','R','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0),
- (99,'612657362','07','0733','LALAPET','8500','2003-05-08','A.NARAHARI RAO','12-1-356','LALAPET,TARN','','500017','2',0.75,'T','T','','R','2014-01-01',37,'2016-04-09',0,'0001-01-01',0,0.55,0,0,0,18.15,'F',12,0,0,'2014-02-13',1478,'31197668','2016-04-26','082956','','R','201401','201604','2013-01-01',0,0,999000,1650,165,110,0,1943.15,1943.7,'0000000002','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (100,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','082956','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (101,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','085123','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (102,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','085430','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (103,'011100319','01','0111','BAHADURPURA','8500','0001-01-01','ABDUL MAJID, MD.','19-5-17/A/57','BAHADURPURA','','500064','1',0.5,'F','T','06029990','R','2014-01-01',15,'2016-04-09',0,'0001-01-01',0,0.5,0,0,0,3474.9,'F',1,0,0,'2014-02-04',212,'31197746','2016-04-26','085542','','R','201401','201604','2013-01-01',75000,0,405000,315900,31590,48600,489000,888565,888565,'2222222222','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (104,'061224612','06','0612','BANJARA HILLS','8500','1980-01-01','RAMULU, P.','6-3-346/4','DWARAKAPURI COLONY','','500082','1',1,'F','T','98540275','R','2014-01-01',23,'2016-04-09',0,'0001-01-01',23,0,0,0,0,5328.18,'F',10,0,0,'2014-02-19',2045,'31197514','2016-04-26','085554','','R','201401','201604','2013-01-01',0,0,621000,484380,48438,48600,489000,1075750,1075750,'0000000563','R','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0),
- (105,'612657362','07','0733','LALAPET','8500','2003-05-08','A.NARAHARI RAO','12-1-356','LALAPET,TARN','','500017','2',0.75,'T','T','','R','2014-01-01',37,'2016-04-09',0,'0001-01-01',0,0.55,0,0,0,18.15,'F',12,0,0,'2014-02-13',1478,'31197668','2016-04-26','085600','','R','201401','201604','2013-01-01',0,0,999000,1650,165,110,0,1943.15,1943.7,'0000000002','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (106,'612756456','07','0724','SEETHAPALMANDI','8500','2003-10-27','G.MUTHYALAMMA','11-2-472/15/A','NAMALAGUNDU','','500017','2',0.75,'T','T','','R','2014-02-01',90,'2016-04-09',0,'0001-01-01',0,2450.43,0,0,0,19.8,'F',7,0,0,'2014-02-06',1234,'D000000001','2016-04-26','085602','','R','201402','201604','2013-01-01',0,0,2340000,1800,180,120,0,2119.8,4570.23,'0000000063','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (107,'617263729','09','0917','BHAGYANAGAR','8500','2011-01-06','V.SRIKANTH GOUD','4-35-564/74A PLOT NO 74PA','BALAKRISHNA NAGAR KUKATPALLY','','','1',0.75,'F','T','10C1634','R','2014-01-01',33,'2016-04-09',0,'0001-01-01',26,16249.3,0,0,0,7644.78,'F',3,0,208.55,'2012-02-23',579.25,'D000000003','2016-04-26','085603','','R','201401','201604','2013-01-01',0,0,891000,694980,69498,48600,489000,1309720,1326180,'0000000005','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (108,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','085603','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (109,'617803425','10','1041','VANASTHALIPURAM (DIV 10)','8500','2012-11-18','B.JAYAPAUL RAO','PLOT NO.112','SREENIVASAPURAM,VANASTHALIPURA','','','1',0.5,'F','T','12B451062','U','2014-01-01',15,'2016-04-09',70000,'2013-03-01',15,0.5,0,0,0,7207.2,'F',0,0,0,'2014-02-12',627,'D000000005','2016-04-26','085603','','U','201401','201604','2013-01-01',0,70000,405000,655200,65520,48600,489000,1265530,1265530,'0000000008','U','','1','A0000','0000','123','0000000000','','0','0',0),
- (110,'061224612','06','0612','BANJARA HILLS','8500','1980-01-01','RAMULU, P.','6-3-346/4','DWARAKAPURI COLONY','','500082','1',1,'F','T','98540275','R','2014-01-01',23,'2016-04-09',0,'0001-01-01',23,0,0,0,0,5328.18,'F',10,0,0,'2014-02-19',2045,'31197514','2016-04-26','085945','','R','201401','201604','2013-01-01',0,0,621000,484380,48438,48600,489000,1075750,1075750,'0000000563','R','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0),
- (111,'612657362','07','0733','LALAPET','8500','2003-05-08','A.NARAHARI RAO','12-1-356','LALAPET,TARN','','500017','2',0.75,'T','T','','R','2014-01-01',37,'2016-04-09',0,'0001-01-01',0,0.55,0,0,0,18.15,'F',12,0,0,'2014-02-13',1478,'31197668','2016-04-26','085945','','R','201401','201604','2013-01-01',0,0,999000,1650,165,110,0,1943.15,1943.7,'0000000002','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (112,'612756456','07','0724','SEETHAPALMANDI','8500','2003-10-27','G.MUTHYALAMMA','11-2-472/15/A','NAMALAGUNDU','','500017','2',0.75,'T','T','','R','2014-02-01',90,'2016-04-09',0,'0001-01-01',0,2450.43,0,0,0,19.8,'F',7,0,0,'2014-02-06',1234,'D000000001','2016-04-26','085945','','R','201402','201604','2013-01-01',0,0,2340000,1800,180,120,0,2119.8,4570.23,'0000000063','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (113,'617263729','09','0917','BHAGYANAGAR','8500','2011-01-06','V.SRIKANTH GOUD','4-35-564/74A PLOT NO 74PA','BALAKRISHNA NAGAR KUKATPALLY','','','1',0.75,'F','T','10C1634','R','2014-01-01',33,'2016-04-09',0,'0001-01-01',26,16249.3,0,0,0,7644.78,'F',3,0,208.55,'2012-02-23',579.25,'D000000003','2016-04-26','085945','','R','201401','201604','2013-01-01',0,0,891000,694980,69498,48600,489000,1309720,1326180,'0000000005','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (114,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','085946','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (115,'617803425','10','1041','VANASTHALIPURAM (DIV 10)','8500','2012-11-18','B.JAYAPAUL RAO','PLOT NO.112','SREENIVASAPURAM,VANASTHALIPURA','','','1',0.5,'F','T','12B451062','U','2014-01-01',15,'2016-04-09',70000,'2013-03-01',15,0.5,0,0,0,7207.2,'F',0,0,0,'2014-02-12',627,'D000000005','2016-04-26','085946','','U','201401','201604','2013-01-01',0,70000,405000,655200,65520,48600,489000,1265530,1265530,'0000000008','U','','1','A0000','0000','123','0000000000','','0','0',0),
- (116,'011100304','01','0111','BAHADURPURA','8500','1995-06-05','MOHD SIRAJ','19-5-32/13/50/A/4','KISHAN BAGH','','500064','2',0.5,'T','T','97518389','R','2014-05-01',15,'2016-04-09',0,'2016-04-01',0,7484.87,0,0,0,18.15,'F',1,0,47.81,'2012-11-29',425,'31197684','2016-04-26','090939','','R','201405','201604','2013-01-01',1921000,0,345000,1650,165,110,0,1943.15,9475.83,'1111111111','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (117,'061224612','06','0612','BANJARA HILLS','8500','1980-01-01','RAMULU, P.','6-3-346/4','DWARAKAPURI COLONY','','500082','1',1,'F','T','98540275','R','2014-01-01',23,'2016-04-09',0,'0001-01-01',23,0,0,0,0,5328.18,'F',10,0,0,'2014-02-19',2045,'31197514','2016-04-26','090939','','R','201401','201604','2013-01-01',0,0,621000,484380,48438,48600,489000,1075750,1075750,'0000000563','R','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0),
- (118,'612657362','07','0733','LALAPET','8500','2003-05-08','A.NARAHARI RAO','12-1-356','LALAPET,TARN','','500017','2',0.75,'T','T','','R','2014-01-01',37,'2016-04-09',0,'0001-01-01',0,0.55,0,0,0,18.15,'F',12,0,0,'2014-02-13',1478,'31197668','2016-04-26','090939','','R','201401','201604','2013-01-01',0,0,999000,1650,165,110,0,1943.15,1943.7,'0000000002','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (119,'612756456','07','0724','SEETHAPALMANDI','8500','2003-10-27','G.MUTHYALAMMA','11-2-472/15/A','NAMALAGUNDU','','500017','2',0.75,'T','T','','R','2014-02-01',90,'2016-04-09',0,'0001-01-01',0,2450.43,0,0,0,19.8,'F',7,0,0,'2014-02-06',1234,'D000000001','2016-04-26','090940','','R','201402','201604','2013-01-01',0,0,2340000,1800,180,120,0,2119.8,4570.23,'0000000063','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (120,'617263729','09','0917','BHAGYANAGAR','8500','2011-01-06','V.SRIKANTH GOUD','4-35-564/74A PLOT NO 74PA','BALAKRISHNA NAGAR KUKATPALLY','','','1',0.75,'F','T','10C1634','R','2014-01-01',33,'2016-04-09',0,'0001-01-01',26,16249.3,0,0,0,7644.78,'F',3,0,208.55,'2012-02-23',579.25,'D000000003','2016-04-26','090940','','R','201401','201604','2013-01-01',0,0,891000,694980,69498,48600,489000,1309720,1326180,'0000000005','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (121,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','090940','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (122,'617803425','10','1041','VANASTHALIPURAM (DIV 10)','8500','2012-11-18','B.JAYAPAUL RAO','PLOT NO.112','SREENIVASAPURAM,VANASTHALIPURA','','','1',0.5,'F','T','12B451062','U','2014-01-01',15,'2016-04-09',70000,'2013-03-01',15,0.5,0,0,0,7207.2,'F',0,0,0,'2014-02-12',627,'D000000005','2016-04-26','090940','','U','201401','201604','2013-01-01',0,70000,405000,655200,65520,48600,489000,1265530,1265530,'0000000008','U','','1','A0000','0000','123','0000000000','','0','0',0),
- (123,'061224612','06','0612','BANJARA HILLS','8500','1980-01-01','RAMULU, P.','6-3-346/4','DWARAKAPURI COLONY','','500082','1',1,'F','T','98540275','R','2014-01-01',23,'2016-04-09',0,'0001-01-01',23,0,0,0,0,5328.18,'F',10,0,0,'2014-02-19',2045,'31197514','2016-04-26','091555','','R','201401','201604','2013-01-01',0,0,621000,484380,48438,48600,489000,1075750,1075750,'0000000563','R','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0),
- (124,'612657362','07','0733','LALAPET','8500','2003-05-08','A.NARAHARI RAO','12-1-356','LALAPET,TARN','','500017','2',0.75,'T','T','','R','2014-01-01',37,'2016-04-09',0,'0001-01-01',0,0.55,0,0,0,18.15,'F',12,0,0,'2014-02-13',1478,'31197668','2016-04-26','091556','','R','201401','201604','2013-01-01',0,0,999000,1650,165,110,0,1943.15,1943.7,'0000000002','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (125,'612756456','07','0724','SEETHAPALMANDI','8500','2003-10-27','G.MUTHYALAMMA','11-2-472/15/A','NAMALAGUNDU','','500017','2',0.75,'T','T','','R','2014-02-01',90,'2016-04-09',0,'0001-01-01',0,2450.43,0,0,0,19.8,'F',7,0,0,'2014-02-06',1234,'D000000001','2016-04-26','091556','','R','201402','201604','2013-01-01',0,0,2340000,1800,180,120,0,2119.8,4570.23,'0000000063','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (126,'617209206','09','0917','BHAGYANAGAR','8500','2010-11-03','T.RAMA KRISHNA','4-32-1/201 PLOT NO 201','SAPTHAGIRI COLONY KUKATPALLY.','','','1',0.75,'F','T','10-1-2216','R','2014-01-01',50,'2016-04-09',0,'0001-01-01',0,0,0,0,0,11583,'F',5,0,0,'2014-02-21',1059.5,'D000000002','2016-04-26','091556','','R','201401','201604','2013-01-01',0,0,1350000,1053000,105300,48600,489000,1707480,1707480,'0000000006','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (127,'617263729','09','0917','BHAGYANAGAR','8500','2011-01-06','V.SRIKANTH GOUD','4-35-564/74A PLOT NO 74PA','BALAKRISHNA NAGAR KUKATPALLY','','','1',0.75,'F','T','10C1634','R','2014-01-01',33,'2016-04-09',0,'0001-01-01',26,16249.3,0,0,0,7644.78,'F',3,0,208.55,'2012-02-23',579.25,'D000000003','2016-04-26','091556','','R','201401','201604','2013-01-01',0,0,891000,694980,69498,48600,489000,1309720,1326180,'0000000005','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (128,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','091556','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (129,'617803425','10','1041','VANASTHALIPURAM (DIV 10)','8500','2012-11-18','B.JAYAPAUL RAO','PLOT NO.112','SREENIVASAPURAM,VANASTHALIPURA','','','1',0.5,'F','T','12B451062','U','2014-01-01',15,'2016-04-09',70000,'2013-03-01',15,0.5,0,0,0,7207.2,'F',0,0,0,'2014-02-12',627,'D000000005','2016-04-26','091556','','U','201401','201604','2013-01-01',0,70000,405000,655200,65520,48600,489000,1265530,1265530,'0000000008','U','','1','A0000','0000','123','0000000000','','0','0',0),
- (130,'617786147','06','0624','S.R.NAGAR','8500','2012-12-01','PURSHOTAM DAS CHANDAK','7-1-451/14','AMEERPET','','','1',0.5,'F','T','','R','2014-01-01',24,'2016-04-09',0,'0001-01-01',0,0,0,0,0,5559.84,'F',0,0,0,'2014-02-11',1065,'D000000006','2016-04-26','091557','','R','201401','201604','2013-01-01',0,0,648000,505440,50544,48600,489000,1099140,1099140,'0000000000','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (131,'011100304','01','0111','BAHADURPURA','8500','1995-06-05','MOHD SIRAJ','19-5-32/13/50/A/4','KISHAN BAGH','','500064','2',0.5,'T','T','97518389','R','2014-05-01',15,'2016-04-09',0,'2016-04-01',0,7484.87,0,0,0,18.15,'F',1,0,47.81,'2012-11-29',425,'31197684','2016-04-26','091832','','R','201405','201604','2013-01-01',0,0,345000,1650,165,110,0,1943.15,9475.83,'1111111111','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (132,'011100319','01','0111','BAHADURPURA','8500','0001-01-01','ABDUL MAJID, MD.','19-5-17/A/57','BAHADURPURA','','500064','1',0.5,'F','T','06029990','R','2014-01-01',15,'2016-04-09',75000,'0001-01-01',0,0.5,0,0,0,3474.9,'F',1,0,0,'2014-02-04',212,'31197746','2016-04-26','091832','','R','201401','201604','2013-01-01',75000,75000,405000,315900,31590,48600,489000,888565,888565,'2222222222','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (133,'061224612','06','0612','BANJARA HILLS','8500','1980-01-01','RAMULU, P.','6-3-346/4','DWARAKAPURI COLONY','','500082','1',1,'F','T','98540275','R','2014-01-01',23,'2016-04-09',0,'0001-01-01',23,0,0,0,0,5328.18,'F',10,0,0,'2014-02-19',2045,'31197514','2016-04-26','091833','','R','201401','201604','2013-01-01',0,0,621000,484380,48438,48600,489000,1075750,1075750,'0000000563','R','Y','1','A0000','0000','123','0000000000','0000131130172738','0','0',0),
- (134,'612657362','07','0733','LALAPET','8500','2003-05-08','A.NARAHARI RAO','12-1-356','LALAPET,TARN','','500017','2',0.75,'T','T','','R','2014-01-01',37,'2016-04-09',0,'0001-01-01',0,0.55,0,0,0,18.15,'F',12,0,0,'2014-02-13',1478,'31197668','2016-04-26','091833','','R','201401','201604','2013-01-01',0,0,999000,1650,165,110,0,1943.15,1943.7,'0000000002','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (135,'612756456','07','0724','SEETHAPALMANDI','8500','2003-10-27','G.MUTHYALAMMA','11-2-472/15/A','NAMALAGUNDU','','500017','2',0.75,'T','T','','R','2014-02-01',90,'2016-04-09',0,'0001-01-01',0,2450.43,0,0,0,19.8,'F',7,0,0,'2014-02-06',1234,'D000000001','2016-04-26','091833','','R','201402','201604','2013-01-01',0,0,2340000,1800,180,120,0,2119.8,4570.23,'0000000063','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (136,'617209206','09','0917','BHAGYANAGAR','8500','2010-11-03','T.RAMA KRISHNA','4-32-1/201 PLOT NO 201','SAPTHAGIRI COLONY KUKATPALLY.','','','1',0.75,'F','T','10-1-2216','R','2014-01-01',50,'2016-04-09',0,'0001-01-01',0,0,0,0,0,11583,'F',5,0,0,'2014-02-21',1059.5,'D000000002','2016-04-26','091833','','R','201401','201604','2013-01-01',0,0,1350000,1053000,105300,48600,489000,1707480,1707480,'0000000006','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (137,'617263729','09','0917','BHAGYANAGAR','8500','2011-01-06','V.SRIKANTH GOUD','4-35-564/74A PLOT NO 74PA','BALAKRISHNA NAGAR KUKATPALLY','','','1',0.75,'F','T','10C1634','R','2014-01-01',33,'2016-04-09',0,'0001-01-01',26,16249.3,0,0,0,7644.78,'F',3,0,208.55,'2012-02-23',579.25,'D000000003','2016-04-26','091833','','R','201401','201604','2013-01-01',0,0,891000,694980,69498,48600,489000,1309720,1326180,'0000000005','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (138,'617756734','06','0612','BANJARA HILLS','8500','2012-09-28','ADEEB  ALI','8-2-318/19/C','ZEHRA NAGAR','','','1',0.75,'F','T','1982','M','2014-01-01',4,'2016-04-09',426000,'2014-01-01',4,0.12,0,0,0,2548.26,'F',1,0,0,'2014-02-19',579,'D000000004','2016-04-26','091833','','L','201401','201604','2013-01-01',0,426000,108000,231660,23166,48600,489000,794974,794974,'0000000009','L','','1','A0000','0000','123','0000000000','','0','0',0),
- (139,'617803425','10','1041','VANASTHALIPURAM (DIV 10)','8500','2012-11-18','B.JAYAPAUL RAO','PLOT NO.112','SREENIVASAPURAM,VANASTHALIPURA','','','1',0.5,'F','T','12B451062','U','2014-01-01',15,'2016-04-09',70000,'2013-03-01',15,0.5,0,0,0,7207.2,'F',0,0,0,'2014-02-12',627,'D000000005','2016-04-26','091833','','U','201401','201604','2013-01-01',0,70000,405000,655200,65520,48600,489000,1265530,1265530,'0000000008','U','','1','A0000','0000','123','0000000000','','0','0',0),
- (140,'617786147','06','0624','S.R.NAGAR','8500','2012-12-01','PURSHOTAM DAS CHANDAK','7-1-451/14','AMEERPET','','','1',0.5,'F','T','','R','2014-01-01',24,'2016-04-09',0,'0001-01-01',0,0,0,0,0,5559.84,'F',0,0,0,'2014-02-11',1065,'D000000006','2016-04-26','091833','','R','201401','201604','2013-01-01',0,0,648000,505440,50544,48600,489000,1099140,1099140,'0000000000','R','','1','A0000','0000','123','0000000000','','0','0',0),
- (141,'011100304','01','0111','BAHADURPURA','8500','1995-06-05','MOHD SIRAJ','19-5-32/13/50/A/4','KISHAN BAGH','','500064','1',0.5,'T','T','97518389','R','2014-05-01',15,'2016-04-09',0,'2016-04-01',0,7484.87,0,0,0,2960.1,'F',1,0,47.81,'2012-11-29',425,'31197684','2016-04-26','045821','','R','201405','201604','2013-01-01',0,0,345000,269100,26910,41400,417000,757370,764903,'1111111111','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (142,'011100304','01','0111','BAHADURPURA','8500','1995-06-05','MOHD SIRAJ','19-5-32/13/50/A/4','KISHAN BAGH','','500064','1',0.5,'T','T','97518389','R','2014-05-01',15,'2016-04-09',0,'2016-04-01',0,7484.87,0,0,0,2960.1,'F',1,0,47.81,'2012-11-29',425,'31197684','2016-04-26','050148','','R','201405','201604','2013-01-01',0,0,345000,269100,26910,41400,417000,757370,764903,'1111111111','R','Y','1','A0000','0000','123','0000000000','','0','0',0),
- (143,'011100304','01','0111','BAHADURPURA','8500','1995-06-05','MOHD SIRAJ','19-5-32/13/50/A/4','KISHAN BAGH','','500064','1',0.5,'T','T','97518389','R','2014-05-01',15,'2016-04-09',0,'2016-04-01',0,7484.87,0,0,0,2960.1,'F',1,0,47.81,'2012-11-29',425,'31197684','2016-04-26','054221','','R','201405','201604','2013-01-01',0,0,345000,269100,26910,41400,417000,757370,764903,'1111111111','R','Y','1','A0000','0000','123','0000000000','','0','0',0);
+INSERT INTO `watererp`.`bill_full_details` VALUES  (1,'02020001','Subhodaya Nagar',NULL,'DMA2 Street2',NULL,'2016-04-12','Tejasree Mamidipaka','Plot No: 11','Plot No: 11, \nNear Hanuman Temple,\nKukatpally - 500 072','KIGOMA','812','1',0.75,'T','F','MeterId3',NULL,NULL,0,'2016-05-04',9,'2016-05-01',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,NULL,'2016-05-04','071135',NULL,'M','201604','201605','2016-04-12',9,20,0,0,0,0,0,0,0,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949976058',NULL,NULL,NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `bill_full_details` ENABLE KEYS */;
 
@@ -390,7 +341,7 @@ CREATE TABLE  `watererp`.`bill_run_details` (
   KEY `fk_billrundetails_billrunmaster_id` (`bill_run_master_id`),
   CONSTRAINT `fk_billrundetails_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
   CONSTRAINT `fk_billrundetails_billrunmaster_id` FOREIGN KEY (`bill_run_master_id`) REFERENCES `bill_run_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_run_details`
@@ -398,312 +349,7 @@ CREATE TABLE  `watererp`.`bill_run_details` (
 
 /*!40000 ALTER TABLE `bill_run_details` DISABLE KEYS */;
 LOCK TABLES `bill_run_details` WRITE;
-INSERT INTO `watererp`.`bill_run_details` VALUES  (1,'032153790','2016-04-13 11:52:18','2016-04-13 11:52:18',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',93,1),
- (2,'011100304','2016-04-13 11:52:18','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (3,'613577519','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (4,'617738493','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (5,'617738918','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (6,'617757078','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (7,'617757083','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (8,'617757111','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (9,'617757186','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (10,'617771922','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (11,'617781451','2016-04-13 11:52:19','2016-04-13 11:52:19',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (12,'617781710','2016-04-13 11:52:19','2016-04-13 11:52:20',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,1),
- (13,'032153790','2016-04-13 12:02:19','2016-04-13 12:02:20',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,2),
- (14,'032153790','2016-04-13 14:23:31','2016-04-13 14:23:31',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:171)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:152)\ncom.callippus.water.erp.service.BillingService$$Lambda$51/2065319834.accept(Unknown Source)\nja',NULL,3),
- (15,'032153790','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (16,'011100304','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (17,'613577519','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (18,'617738493','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (19,'617738918','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (20,'617757078','2016-04-14 18:14:05','2016-04-14 18:14:05',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (21,'617757083','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (22,'617757111','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (23,'617757186','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (24,'617771922','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (25,'617781451','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (26,'617781710','2016-04-14 18:14:06','2016-04-14 18:14:06',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,4),
- (27,'032153790','2016-04-15 11:14:44','2016-04-15 11:14:44',1,'Failed with error:ALREADY_BILLED',NULL,5),
- (28,'011100304','2016-04-15 11:14:44','2016-04-15 11:14:44',1,'Failed with error:ALREADY_BILLED',NULL,5),
- (29,'613577519','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,5),
- (30,'617738493','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,5),
- (31,'617738918','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,5),
- (32,'617757078','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,5),
- (33,'617757083','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,5),
- (34,'617757111','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,5),
- (35,'617757186','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,5),
- (36,'617771922','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,5),
- (37,'617781451','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,5),
- (38,'617781710','2016-04-15 11:14:44','2016-04-15 11:14:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,5),
- (39,'032153790','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (40,'011100304','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (41,'613577519','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (42,'617738493','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (43,'617738918','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (44,'617757078','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (45,'617757083','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (46,'617757111','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (47,'617757186','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (48,'617771922','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (49,'617781451','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (50,'617781710','2016-04-15 11:15:15','2016-04-15 11:15:15',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,6),
- (51,'032153790','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (52,'011100304','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (53,'613577519','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (54,'617738493','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (55,'617738918','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (56,'617757078','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (57,'617757083','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (58,'617757111','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (59,'617757186','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (60,'617771922','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (61,'617781451','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (62,'617781710','2016-04-15 11:20:33','2016-04-15 11:20:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$52/1341185581.accept(Unknown Source)\nja',NULL,7),
- (63,'032153790','2016-04-15 11:21:46','2016-04-15 11:21:46',1,'Failed with error:ALREADY_BILLED',NULL,8),
- (64,'011100304','2016-04-15 11:21:46','2016-04-15 11:21:46',1,'Failed with error:ALREADY_BILLED',NULL,8),
- (65,'613577519','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,8),
- (66,'617738493','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,8),
- (67,'617738918','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,8),
- (68,'617757078','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,8),
- (69,'617757083','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,8),
- (70,'617757111','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,8),
- (71,'617757186','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,8),
- (72,'617771922','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,8),
- (73,'617781451','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,8),
- (74,'617781710','2016-04-15 11:21:46','2016-04-15 11:21:46',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,8),
- (75,'032153790','2016-04-15 11:53:38','2016-04-15 11:53:38',1,'Failed with error:ALREADY_BILLED',NULL,9),
- (76,'011100304','2016-04-15 11:53:39','2016-04-15 11:53:39',1,'Failed with error:ALREADY_BILLED',NULL,9),
- (77,'613577519','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,9),
- (78,'617738493','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,9),
- (79,'617738918','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,9),
- (80,'617757078','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,9),
- (81,'617757083','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,9),
- (82,'617757111','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,9),
- (83,'617757186','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,9),
- (84,'617771922','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,9),
- (85,'617781451','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,9),
- (86,'617781710','2016-04-15 11:53:39','2016-04-15 11:53:39',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,9),
- (87,'032153790','2016-04-15 15:09:33','2016-04-15 15:09:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (88,'011100304','2016-04-15 15:09:33','2016-04-15 15:09:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (89,'613577519','2016-04-15 15:09:33','2016-04-15 15:09:33',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (90,'617738493','2016-04-15 15:09:33','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (91,'617738918','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (92,'617757078','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (93,'617757083','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (94,'617757111','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (95,'617757186','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (96,'617771922','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (97,'617781451','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (98,'617781710','2016-04-15 15:09:34','2016-04-15 15:09:34',3,'com.callippus.water.erp.service.BillingService.commit(BillingService.java:205)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:187)\ncom.callippus.water.erp.service.BillingService$$Lambda$61/64701594.accept(Unknown Source)\njava',NULL,10),
- (99,'032153790','2016-04-15 19:15:23','2016-04-15 19:15:23',1,'Failed with error:ALREADY_BILLED',NULL,11),
- (100,'011100304','2016-04-15 19:15:23','2016-04-15 19:15:24',1,'Failed with error:ALREADY_BILLED',NULL,11),
- (101,'613577519','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,11),
- (102,'617738493','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,11),
- (103,'617738918','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,11),
- (104,'617757078','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,11),
- (105,'617757083','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,11),
- (106,'617757111','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,11),
- (107,'617757186','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,11),
- (108,'617771922','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,11),
- (109,'617781451','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,11),
- (110,'617781710','2016-04-15 19:15:24','2016-04-15 19:15:24',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,11),
- (111,'032153790','2016-04-16 13:09:30','2016-04-16 13:09:30',1,'Failed with error:ALREADY_BILLED',NULL,12),
- (112,'011100304','2016-04-16 13:09:30','2016-04-16 13:09:30',1,'Failed with error:ALREADY_BILLED',NULL,12),
- (113,'613577519','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,12),
- (114,'617738493','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,12),
- (115,'617738918','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,12),
- (116,'617757078','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,12),
- (117,'617757083','2016-04-16 13:09:30','2016-04-16 13:09:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,12),
- (118,'617757111','2016-04-16 13:09:30','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,12),
- (119,'617757186','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,12),
- (120,'617771922','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,12),
- (121,'617781451','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,12),
- (122,'617781710','2016-04-16 13:09:31','2016-04-16 13:09:31',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,12),
- (123,'032153790','2016-04-16 17:59:11','2016-04-16 17:59:11',1,'Failed with error:ALREADY_BILLED',NULL,13),
- (124,'011100304','2016-04-16 17:59:11','2016-04-16 17:59:11',1,'Failed with error:ALREADY_BILLED',NULL,13),
- (125,'613577519','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,13),
- (126,'617738493','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,13),
- (127,'617738918','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,13),
- (128,'617757078','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,13),
- (129,'617757083','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,13),
- (130,'617757111','2016-04-16 17:59:11','2016-04-16 17:59:11',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,13),
- (131,'617757186','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,13),
- (132,'617771922','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,13),
- (133,'617781451','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,13),
- (134,'617781710','2016-04-16 17:59:12','2016-04-16 17:59:12',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,13),
- (135,'032153790','2016-04-16 18:03:00','2016-04-16 18:03:00',1,'Failed with error:ALREADY_BILLED',NULL,14),
- (136,'011100304','2016-04-16 18:03:00','2016-04-16 18:03:00',1,'Failed with error:ALREADY_BILLED',NULL,14),
- (137,'613577519','2016-04-16 18:03:00','2016-04-16 18:03:00',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,14),
- (138,'617738493','2016-04-16 18:03:00','2016-04-16 18:03:00',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,14),
- (139,'617738918','2016-04-16 18:03:00','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,14),
- (140,'617757078','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,14),
- (141,'617757083','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,14),
- (142,'617757111','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,14),
- (143,'617757186','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,14),
- (144,'617771922','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,14),
- (145,'617781451','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,14),
- (146,'617781710','2016-04-16 18:03:01','2016-04-16 18:03:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,14),
- (147,'032153790','2016-04-18 10:38:29','2016-04-18 10:38:29',1,'Failed with error:ALREADY_BILLED',NULL,15),
- (148,'011100304','2016-04-18 10:38:29','2016-04-18 10:38:29',1,'Failed with error:ALREADY_BILLED',NULL,15),
- (149,'613577519','2016-04-18 10:38:29','2016-04-18 10:38:29',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,15),
- (150,'617738493','2016-04-18 10:38:29','2016-04-18 10:38:29',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,15),
- (151,'617738918','2016-04-18 10:38:29','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,15),
- (152,'617757078','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,15),
- (153,'617757083','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,15),
- (154,'617757111','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,15),
- (155,'617757186','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,15),
- (156,'617771922','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,15),
- (157,'617781451','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,15),
- (158,'617781710','2016-04-18 10:38:30','2016-04-18 10:38:30',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,15),
- (159,'032153790','2016-04-18 11:09:00','2016-04-18 11:09:00',1,'Failed with error:ALREADY_BILLED',NULL,16),
- (160,'011100304','2016-04-18 11:09:01','2016-04-18 11:09:01',1,'Failed with error:ALREADY_BILLED',NULL,16),
- (161,'613577519','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,16),
- (162,'617738493','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,16),
- (163,'617738918','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,16),
- (164,'617757078','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,16),
- (165,'617757083','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,16),
- (166,'617757111','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,16),
- (167,'617757186','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,16),
- (168,'617771922','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,16),
- (169,'617781451','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,16),
- (170,'617781710','2016-04-18 11:09:01','2016-04-18 11:09:01',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,16),
- (171,'032153790','2016-04-18 11:09:44','2016-04-18 11:09:44',1,'Failed with error:ALREADY_BILLED',NULL,17),
- (172,'011100304','2016-04-18 11:09:44','2016-04-18 11:09:44',1,'Failed with error:ALREADY_BILLED',NULL,17),
- (173,'613577519','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,17),
- (174,'617738493','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,17),
- (175,'617738918','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,17),
- (176,'617757078','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,17),
- (177,'617757083','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,17),
- (178,'617757111','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,17),
- (179,'617757186','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,17),
- (180,'617771922','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,17),
- (181,'617781451','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,17),
- (182,'617781710','2016-04-18 11:09:44','2016-04-18 11:09:44',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,17),
- (183,'032153790','2016-04-18 11:28:48','2016-04-18 11:28:48',1,'Failed with error:ALREADY_BILLED',NULL,18),
- (184,'011100304','2016-04-18 11:28:48','2016-04-18 11:28:48',1,'Failed with error:ALREADY_BILLED',NULL,18),
- (185,'613577519','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:613577519',NULL,18),
- (186,'617738493','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738493',NULL,18),
- (187,'617738918','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617738918',NULL,18),
- (188,'617757078','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757078',NULL,18),
- (189,'617757083','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757083',NULL,18),
- (190,'617757111','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757111',NULL,18),
- (191,'617757186','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617757186',NULL,18),
- (192,'617771922','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617771922',NULL,18),
- (193,'617781451','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781451',NULL,18),
- (194,'617781710','2016-04-18 11:28:48','2016-04-18 11:28:48',0,'Failed with error:Customer not found in CUST_DETAILS for CAN:617781710',NULL,18),
- (200,'011100304','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,23),
- (201,'011100319','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,23),
- (202,'032153790','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:ALREADY_BILLED',NULL,23),
- (203,'061224612','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:com.callippus.water.erp.service.BillingService.process_bill(BillingService.java:349)\ncom.callippus.water.erp.service.BillingService.lambda$1(BillingService.java:264)\ncom.callippus.water.erp.service.Bi',NULL,23),
- (204,'612657362','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:com.callippus.water.erp.service.BillingService.process_bill(BillingService.java:349)\ncom.callippus.water.erp.service.BillingService.lambda$1(BillingService.java:264)\ncom.callippus.water.erp.service.Bi',NULL,23),
- (205,'612756456','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,23),
- (206,'617209206','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,23),
- (207,'617263729','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,23),
- (208,'617756734','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:com.callippus.water.erp.service.BillingService.process_bill(BillingService.java:349)\ncom.callippus.water.erp.service.BillingService.lambda$1(BillingService.java:264)\ncom.callippus.water.erp.service.Bi',NULL,23),
- (209,'617783704','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,23),
- (210,'617786147','2016-04-25 18:36:40','2016-04-25 18:36:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,23),
- (211,'617789082','2016-04-25 18:36:40','2016-04-25 18:36:41',1,'Failed with error:com.callippus.water.erp.service.BillingService.process_bill(BillingService.java:349)\ncom.callippus.water.erp.service.BillingService.lambda$1(BillingService.java:264)\ncom.callippus.water.erp.service.Bi',NULL,23),
- (215,'011100304','2016-04-25 18:42:54','2016-04-25 18:42:54',1,'Failed with error:INVALID_BILL_TYPE',NULL,25),
- (216,'011100319','2016-04-25 18:42:54','2016-04-25 18:42:54',1,'Failed with error:INVALID_BILL_TYPE',NULL,25),
- (217,'032153790','2016-04-25 18:42:54','2016-04-25 18:42:54',1,'Failed with error:ALREADY_BILLED',NULL,25),
- (218,'061224612','2016-04-25 18:42:54','2016-04-25 18:42:55',2,'Success',95,25),
- (219,'612657362','2016-04-25 18:42:55','2016-04-25 18:42:55',2,'Success',96,25),
- (220,'612756456','2016-04-25 18:42:55','2016-04-25 18:42:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,25),
- (221,'617209206','2016-04-25 18:42:55','2016-04-25 18:42:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,25),
- (222,'617263729','2016-04-25 18:42:55','2016-04-25 18:42:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,25),
- (223,'617756734','2016-04-25 18:42:55','2016-04-25 18:42:55',2,'Success',97,25),
- (224,'617783704','2016-04-25 18:42:55','2016-04-25 18:42:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,25),
- (225,'617786147','2016-04-25 18:42:55','2016-04-25 18:42:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,25),
- (226,'011100304','2016-04-26 08:29:55','2016-04-26 08:29:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,26),
- (227,'011100319','2016-04-26 08:29:55','2016-04-26 08:29:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,26),
- (228,'032153790','2016-04-26 08:29:55','2016-04-26 08:29:55',1,'Failed with error:ALREADY_BILLED',NULL,26),
- (229,'061224612','2016-04-26 08:29:55','2016-04-26 08:29:56',2,'Success',98,26),
- (230,'612657362','2016-04-26 08:29:56','2016-04-26 08:29:56',2,'Success',99,26),
- (231,'612756456','2016-04-26 08:29:56','2016-04-26 08:29:56',1,'Failed with error:INVALID_BILL_TYPE',NULL,26),
- (232,'617209206','2016-04-26 08:29:56','2016-04-26 08:29:56',1,'Failed with error:INVALID_BILL_TYPE',NULL,26),
- (233,'617263729','2016-04-26 08:29:56','2016-04-26 08:29:56',1,'Failed with error:INVALID_BILL_TYPE',NULL,26),
- (234,'617756734','2016-04-26 08:29:56','2016-04-26 08:29:56',2,'Success',100,26),
- (235,'617783704','2016-04-26 08:29:56','2016-04-26 08:29:56',1,'Failed with error:INVALID_BILL_TYPE',NULL,26),
- (236,'617786147','2016-04-26 08:29:56','2016-04-26 08:29:56',1,'Failed with error:INVALID_BILL_TYPE',NULL,26),
- (237,'011100304','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (238,'011100319','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (239,'032153790','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:ALREADY_BILLED',NULL,27),
- (240,'061224612','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (241,'612657362','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (242,'612756456','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (243,'617209206','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (244,'617263729','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (245,'617756734','2016-04-26 08:51:23','2016-04-26 08:51:23',2,'Success',101,27),
- (246,'617783704','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (247,'617786147','2016-04-26 08:51:23','2016-04-26 08:51:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,27),
- (248,'011100304','2016-04-26 08:52:01','2016-04-26 08:52:30',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (249,'011100319','2016-04-26 08:52:30','2016-04-26 08:52:48',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (250,'032153790','2016-04-26 08:52:48','2016-04-26 08:52:55',1,'Failed with error:ALREADY_BILLED',NULL,28),
- (251,'061224612','2016-04-26 08:52:55','2016-04-26 08:53:15',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (252,'612657362','2016-04-26 08:53:15','2016-04-26 08:53:37',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (253,'612756456','2016-04-26 08:53:37','2016-04-26 08:53:55',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (254,'617209206','2016-04-26 08:53:55','2016-04-26 08:54:04',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (255,'617263729','2016-04-26 08:54:04','2016-04-26 08:54:23',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (256,'617756734','2016-04-26 08:54:23','2016-04-26 08:54:30',2,'Success',102,28),
- (257,'617783704','2016-04-26 08:54:30','2016-04-26 08:54:54',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (258,'617786147','2016-04-26 08:54:54','2016-04-26 08:55:02',1,'Failed with error:INVALID_BILL_TYPE',NULL,28),
- (259,'011100304','2016-04-26 08:55:26','2016-04-26 08:55:37',1,'Failed with error:ALREADY_BILLED',NULL,29),
- (260,'011100319','2016-04-26 08:55:37','2016-04-26 08:55:42',2,'Success',103,29),
- (261,'032153790','2016-04-26 08:55:42','2016-04-26 08:55:49',1,'Failed with error:ALREADY_BILLED',NULL,29),
- (262,'061224612','2016-04-26 08:55:49','2016-04-26 08:55:54',2,'Success',104,29),
- (263,'612657362','2016-04-26 08:55:54','2016-04-26 08:56:00',2,'Success',105,29),
- (264,'612756456','2016-04-26 08:56:00','2016-04-26 08:56:02',2,'Success',106,29),
- (265,'617209206','2016-04-26 08:56:02','2016-04-26 08:56:03',1,'Failed with error:INVALID_BILL_TYPE',NULL,29),
- (266,'617263729','2016-04-26 08:56:03','2016-04-26 08:56:03',2,'Success',107,29),
- (267,'617756734','2016-04-26 08:56:03','2016-04-26 08:56:03',2,'Success',108,29),
- (268,'617783704','2016-04-26 08:56:03','2016-04-26 08:56:03',2,'Success',109,29),
- (269,'617786147','2016-04-26 08:56:03','2016-04-26 08:56:03',1,'Failed with error:INVALID_BILL_TYPE',NULL,29),
- (270,'011100304','2016-04-26 08:59:44','2016-04-26 08:59:44',1,'Failed with error:ALREADY_BILLED',NULL,30),
- (271,'011100319','2016-04-26 08:59:45','2016-04-26 08:59:45',1,'Failed with error:INVALID_METER_READING',NULL,30),
- (272,'032153790','2016-04-26 08:59:45','2016-04-26 08:59:45',1,'Failed with error:ALREADY_BILLED',NULL,30),
- (273,'061224612','2016-04-26 08:59:45','2016-04-26 08:59:45',2,'Success',110,30),
- (274,'612657362','2016-04-26 08:59:45','2016-04-26 08:59:45',2,'Success',111,30),
- (275,'612756456','2016-04-26 08:59:45','2016-04-26 08:59:45',2,'Success',112,30),
- (276,'617209206','2016-04-26 08:59:45','2016-04-26 08:59:45',1,'Failed with error:INVALID_BILL_TYPE',NULL,30),
- (277,'617263729','2016-04-26 08:59:45','2016-04-26 08:59:45',2,'Success',113,30),
- (278,'617756734','2016-04-26 08:59:45','2016-04-26 08:59:46',2,'Success',114,30),
- (279,'617783704','2016-04-26 08:59:46','2016-04-26 08:59:46',2,'Success',115,30),
- (280,'617786147','2016-04-26 08:59:46','2016-04-26 08:59:46',1,'Failed with error:INVALID_BILL_TYPE',NULL,30),
- (281,'011100304','2016-04-26 09:01:54','2016-04-26 09:09:27',1,'Failed with error:ALREADY_BILLED',NULL,31),
- (282,'011100304','2016-04-26 09:09:39','2016-04-26 09:09:39',2,'Success',116,32),
- (283,'011100319','2016-04-26 09:09:39','2016-04-26 09:09:39',1,'Failed with error:INVALID_METER_READING',NULL,32),
- (284,'061224612','2016-04-26 09:09:39','2016-04-26 09:09:39',2,'Success',117,32),
- (285,'612657362','2016-04-26 09:09:39','2016-04-26 09:09:39',2,'Success',118,32),
- (286,'612756456','2016-04-26 09:09:39','2016-04-26 09:09:40',2,'Success',119,32),
- (287,'617209206','2016-04-26 09:09:40','2016-04-26 09:09:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,32),
- (288,'617263729','2016-04-26 09:09:40','2016-04-26 09:09:40',2,'Success',120,32),
- (289,'617756734','2016-04-26 09:09:40','2016-04-26 09:09:40',2,'Success',121,32),
- (290,'617783704','2016-04-26 09:09:40','2016-04-26 09:09:40',2,'Success',122,32),
- (291,'617786147','2016-04-26 09:09:40','2016-04-26 09:09:40',1,'Failed with error:INVALID_BILL_TYPE',NULL,32),
- (292,'011100304','2016-04-26 09:15:55','2016-04-26 09:15:55',1,'Failed with error:INVALID_METER_READING',NULL,33),
- (293,'011100319','2016-04-26 09:15:55','2016-04-26 09:15:55',1,'Failed with error:INVALID_METER_READING',NULL,33),
- (294,'061224612','2016-04-26 09:15:55','2016-04-26 09:15:55',2,'Success',123,33),
- (295,'612657362','2016-04-26 09:15:55','2016-04-26 09:15:56',2,'Success',124,33),
- (296,'612756456','2016-04-26 09:15:56','2016-04-26 09:15:56',2,'Success',125,33),
- (297,'617209206','2016-04-26 09:15:56','2016-04-26 09:15:56',2,'Success',126,33),
- (298,'617263729','2016-04-26 09:15:56','2016-04-26 09:15:56',2,'Success',127,33),
- (299,'617756734','2016-04-26 09:15:56','2016-04-26 09:15:56',2,'Success',128,33),
- (300,'617783704','2016-04-26 09:15:56','2016-04-26 09:15:56',2,'Success',129,33),
- (301,'617786147','2016-04-26 09:15:56','2016-04-26 09:15:57',2,'Success',130,33),
- (302,'011100304','2016-04-26 09:18:32','2016-04-26 09:18:32',2,'Success',131,34),
- (303,'011100319','2016-04-26 09:18:32','2016-04-26 09:18:33',2,'Success',132,34),
- (304,'061224612','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',133,34),
- (305,'612657362','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',134,34),
- (306,'612756456','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',135,34),
- (307,'617209206','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',136,34),
- (308,'617263729','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',137,34),
- (309,'617756734','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',138,34),
- (310,'617783704','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',139,34),
- (311,'617786147','2016-04-26 09:18:33','2016-04-26 09:18:33',2,'Success',140,34),
- (312,'011100304','2016-04-26 16:58:21','2016-04-26 16:58:21',2,'Success',141,35),
- (313,'011100304','2016-04-26 17:00:55','2016-04-26 17:01:48',2,'Success',142,36),
- (314,'011100304','2016-04-26 17:42:15','2016-04-26 17:42:21',2,'Success',143,37);
+INSERT INTO `watererp`.`bill_run_details` VALUES  (1,'02020001','2016-05-04 19:11:34','2016-05-04 19:11:35',2,'Success',1,42);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `bill_run_details` ENABLE KEYS */;
 
@@ -721,7 +367,7 @@ CREATE TABLE  `watererp`.`bill_run_master` (
   `failed` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_run_master`
@@ -762,7 +408,9 @@ INSERT INTO `watererp`.`bill_run_master` VALUES  (1,'2016-04-13 11:52:17','0',0,
  (34,'2016-04-26 09:18:32','0',10,0,'Completed Successfully'),
  (35,'2016-04-26 16:58:16','0',1,0,'Completed Successfully'),
  (36,'2016-04-26 17:00:48','0',1,0,'Completed Successfully'),
- (37,'2016-04-26 17:42:11','0',1,0,'Completed Successfully');
+ (37,'2016-04-26 17:42:11','0',1,0,'Completed Successfully'),
+ (38,'2016-05-04 18:41:04','0',0,0,'Completed Successfully'),
+ (42,'2016-05-04 19:11:34','0',1,0,'Completed Successfully');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `bill_run_master` ENABLE KEYS */;
 
@@ -1000,7 +648,7 @@ CREATE TABLE  `watererp`.`connection_terminate` (
   PRIMARY KEY (`id`),
   KEY `fk_connectionterminate_meterdetails_id` (`meter_details_id`),
   CONSTRAINT `fk_connectionterminate_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`connection_terminate`
@@ -1008,7 +656,6 @@ CREATE TABLE  `watererp`.`connection_terminate` (
 
 /*!40000 ALTER TABLE `connection_terminate` DISABLE KEYS */;
 LOCK TABLES `connection_terminate` WRITE;
-INSERT INTO `watererp`.`connection_terminate` VALUES  (1,'04060001','2016-05-04',0x01,369147,'2016-05-05',3);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `connection_terminate` ENABLE KEYS */;
 
@@ -1117,7 +764,7 @@ CREATE TABLE  `watererp`.`cust_details` (
   PRIMARY KEY (`id`),
   KEY `fk_custdetails_tariffcategorymaster_id` (`tariff_category_master_id`),
   CONSTRAINT `fk_custdetails_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1642 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1643 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`cust_details`
@@ -2546,7 +2193,10 @@ INSERT INTO `watererp`.`cust_details` VALUES  (1440,'618008144','10','0261','L.B
  (1628,'615713082','14','1422','UPPAL','8927','2008-11-20','Y.YESURATNAM','PLOT NO 6','Raj Nagar','','','1',0.75,'F','T','08-1-1518','R','2014-03-01',50,'0001-01-01',0,'0001-01-01',0,4196.46,0,0,0,0,'F',0,0,0,'2014-02-17',2120,'0000000000','0','0','0','0','0','0','2013-01-01',1),
  (1629,'617983202','13','1303','YAPRAL (Div13)','8927','2013-12-22','B NORMAN','5-8-30/22','GOVARDHANPURI COLONY YAPRAL','','','1',0.5,'F','T','SA 133233','M','2014-05-01',59,'2014-01-10',7000,'2013-12-01',59,20322.1,0,0,0,0,'F',1,0,0,'2014-02-03',700,'0000000000','0','0','0','0','0','0','2013-01-01',1),
  (1630,'618004780','01','0111','BAHADURPURA','8927','2013-12-28','MOHAMMED. AZAM','19-4-439/9','B N K ,COLONY, TADBUN','','','1',0.5,'F','T','SLUM','M','2014-03-01',25,'2013-12-28',0,'2013-11-01',25,4454,0,0,0,0,'F',0,0,0,'0001-01-01',0,'0000000000','0','0','0','0','0','0','2013-01-01',1),
- (1641,'04060001','12','58','DMA4 Street6',NULL,'2016-05-02','mohib khan','1-35-462','kphb, Kukatally, Hydderabad','KIGOMA','812',NULL,20,'T','F','MeterId1','M','2016-05-02',0,'2016-05-02',23232,'2016-05-02',0,0,0,0,0,0,'0.0',1,0,0,'2016-05-02',0,'9390148141','0','0','0','0','0','0','2016-05-02',3);
+ (1637,'D9100001','KPHB','22',NULL,NULL,'2016-04-26','MOHIB','10','KPHB',NULL,NULL,NULL,NULL,NULL,NULL,'MeterId2',NULL,NULL,NULL,'2016-04-26',56465,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'9390148141',NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-26',1),
+ (1638,'06070001','87987','987987',NULL,NULL,'2016-04-28','aqaf  sdgsd','987','DMA6 Street7','KIGOMA','812',NULL,15,'T','F','MeterId3','M',NULL,NULL,'2016-04-28',235,NULL,NULL,NULL,NULL,NULL,0,0,'0.0',1,NULL,NULL,NULL,NULL,'987987','0','0','0','0','0','0','2016-04-28',1),
+ (1639,'04060001','654','4654','DMA4 Street6',NULL,'2016-04-29','654654 654654 654654','65465','65445465\n5454\nshfjkn\nal;skfj','KIGOMA','812',NULL,15,'T','F','MeterId3','M','2016-04-29',0,'2016-04-29',6346350,'2016-04-29',0,0,0,0,0,0,'0.0',1,0,0,'2016-04-29',0,'564654','0','0','0','0','0','0','2016-04-29',2),
+ (1642,'02020001','Subhodaya Nagar',NULL,'DMA2 Street2',NULL,'2016-04-12','Tejasree Mamidipaka','Plot No: 11','Plot No: 11, \nNear Hanuman Temple,\nKukatpally - 500 072','KIGOMA','812',NULL,0.75,'T','F','MeterId3',NULL,NULL,0,'2016-04-12',9,'2016-04-12',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0','2016-04-12',1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cust_details` ENABLE KEYS */;
 
@@ -2567,7 +2217,7 @@ CREATE TABLE  `watererp`.`cust_meter_mapping` (
   KEY `fk_custmetermapping_meterdetails_id` (`meter_details_id`),
   CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
   CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`cust_meter_mapping`
@@ -2575,9 +2225,10 @@ CREATE TABLE  `watererp`.`cust_meter_mapping` (
 
 /*!40000 ALTER TABLE `cust_meter_mapping` DISABLE KEYS */;
 LOCK TABLES `cust_meter_mapping` WRITE;
-INSERT INTO `watererp`.`cust_meter_mapping` VALUES  (7,'2016-05-02','2016-05-18',1641,2),
- (8,'2016-05-18','2016-05-03',1641,3),
- (9,'2016-05-03',NULL,1641,1);
+INSERT INTO `watererp`.`cust_meter_mapping` VALUES  (1,'2016-04-26',NULL,1637,2),
+ (2,'2016-04-28',NULL,1638,3),
+ (3,'2016-04-29',NULL,1639,3),
+ (6,'2016-04-12',NULL,1642,3);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `cust_meter_mapping` ENABLE KEYS */;
 
@@ -2745,12 +2396,10 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffTypeMaster.xml','2016-04-01 15:34:53',88,'EXECUTED','7:2fdf8de5ece58a24c9842690d2599317','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160311094431','jhipster','classpath:config/liquibase/changelog/20160311094431_added_entity_TariffMaster.xml','2016-04-01 15:34:54',89,'EXECUTED','7:de67571b345cd24609fcbc1d6d8e12ab','createTable, dropDefaultValue (x2), addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160401094431','jhipster','classpath:config/liquibase/changelog/20160401094431_added_entity_TariffCharges.xml','2016-04-01 15:34:56',90,'EXECUTED','7:84a4098f6e6489da14e4b14c2d948a2c','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-04-03 16:37:33',93,'EXECUTED','7:1d7e8751c1e0e86930e4f6e3c3f39010','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160406042024','jhipster','classpath:config/liquibase/changelog/20160406042024_added_entity_InstrumentIssuerMaster.xml','2016-04-06 10:33:04',98,'EXECUTED','7:e6ddd2edc49130805cd0d945da5c8bff','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-04-12 13:09:16',105,'EXECUTED','7:a6212010b6b0806261cb83574604c99f','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160409042538','jhipster','classpath:config/liquibase/changelog/20160409042538_added_entity_Uom.xml','2016-04-12 13:09:17',107,'EXECUTED','7:16829833f2d3e87199a121db96980eaf','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160412142749','jhipster','classpath:config/liquibase/changelog/20160412142749_added_entity_BillRunMaster.xml','2016-04-13 11:50:30',109,'EXECUTED','7:b34ea10d67f40bb5c95e7ad4be486e01','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
- ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-04-13 11:50:30',110,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-13 12:52:57',112,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
  ('20160329064157','jhipster','classpath:config/liquibase/changelog/20160329064157_added_entity_ComplaintTypeMaster.xml','2016-04-13 13:19:32',120,'EXECUTED','7:925d2a76e3b71e5bc7daf39c4f8ee2b5','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160413093028','jhipster','classpath:config/liquibase/changelog/20160413093028_added_entity_MeterStatus.xml','2016-04-18 12:57:45',121,'EXECUTED','7:4d7c1ce6ba1e28d5591ed0f73c0058a8','createTable','',NULL,'3.4.2',NULL,NULL),
@@ -2775,9 +2424,12 @@ INSERT INTO `watererp`.`databasechangelog` VALUES  ('00000000000001','jhipster',
  ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-05-02 14:07:40',155,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-05-02 14:07:40',156,'EXECUTED','7:a8f621ed8b7a57ffbe0c5187791018c5','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160427084544','jhipster','classpath:config/liquibase/changelog/20160427084544_added_entity_OnlinePaymentOrder.xml','2016-05-02 14:07:41',157,'EXECUTED','7:c89108e03c232e11ba95545a3077646e','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160427104544','jhipster','classpath:config/liquibase/changelog/20160427104544_added_entity_OnlinePaymentResponse.xml','2016-05-02 14:07:41',158,'EXECUTED','7:22777342fbdee7e45f241adad109e865','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160427105244','jhipster','classpath:config/liquibase/changelog/20160427105244_added_entity_OnlinePaymentCallback.xml','2016-05-02 14:07:42',159,'EXECUTED','7:537fa3ba05cacd4a5c25a5c6e4807f65','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160504065608','jhipster','classpath:config/liquibase/changelog/20160504065608_added_entity_ConnectionTerminate.xml','2016-05-04 12:27:30',160,'EXECUTED','7:77b9eddf440cf38d04fe73c2b25a4aaf','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
+ ('20160427104544','jhipster','classpath:config/liquibase/changelog/20160427104544_added_entity_OnlinePaymentResponse.xml','2016-05-03 17:04:09',158,'EXECUTED','7:446fb20c8df2e6211ae618789b57766b','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160427105244','jhipster','classpath:config/liquibase/changelog/20160427105244_added_entity_OnlinePaymentCallback.xml','2016-05-03 17:04:09',159,'EXECUTED','7:c8e948a9e513be117924fe3c630468fb','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160503041249','jhipster','classpath:config/liquibase/changelog/20160503041249_added_entity_RevenueTypeMaster.xml','2016-05-04 17:19:51',160,'EXECUTED','7:47e3555eee069585ccb21daa674b3687','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-05-04 19:10:30',161,'EXECUTED','7:c7da16dca565af42e3b6bdbc49321f77','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-05-04 19:10:31',162,'EXECUTED','7:89a48463be2097d3f10a053281a0979b','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160504065608','jhipster','classpath:config/liquibase/changelog/20160504065608_added_entity_ConnectionTerminate.xml','2016-05-05 10:38:39',163,'EXECUTED','7:77b9eddf440cf38d04fe73c2b25a4aaf','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
@@ -2801,7 +2453,7 @@ CREATE TABLE  `watererp`.`databasechangeloglock` (
 
 /*!40000 ALTER TABLE `databasechangeloglock` DISABLE KEYS */;
 LOCK TABLES `databasechangeloglock` WRITE;
-INSERT INTO `watererp`.`databasechangeloglock` VALUES  (1,0x01,'2016-05-04 15:07:17','192.168.1.2 (192.168.1.2)');
+INSERT INTO `watererp`.`databasechangeloglock` VALUES  (1,0x00,NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `databasechangeloglock` ENABLE KEYS */;
 
@@ -3264,7 +2916,7 @@ CREATE TABLE  `watererp`.`feasibility_study` (
   CONSTRAINT `fk_feasibilitystudy_preparedby_id` FOREIGN KEY (`prepared_by_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_feasibilitystudy_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_zonemaster_id` FOREIGN KEY (`zone_master_id`) REFERENCES `zone_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`feasibility_study`
@@ -3272,7 +2924,7 @@ CREATE TABLE  `watererp`.`feasibility_study` (
 
 /*!40000 ALTER TABLE `feasibility_study` DISABLE KEYS */;
 LOCK TABLES `feasibility_study` WRITE;
-INSERT INTO `watererp`.`feasibility_study` VALUES  (1,'2016-05-02 18:03:59','2016-05-02 18:03:59','2016-05-02 00:00:00','2016-05-01 00:00:00','2016-05-02 00:00:00','2016-05-01 00:00:00',0,4,NULL,6,21,12,10,17,18,NULL);
+INSERT INTO `watererp`.`feasibility_study` VALUES  (6,'2016-05-04 16:22:48','2016-05-04 16:22:48','2016-05-04 00:00:00','2016-05-04 00:00:00','2016-05-04 00:00:00','2016-05-04 00:00:00',0,2,NULL,2,21,10,18,19,14,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `feasibility_study` ENABLE KEYS */;
 
@@ -3553,8 +3205,8 @@ CREATE TABLE  `watererp`.`item_required` (
 
 /*!40000 ALTER TABLE `item_required` DISABLE KEYS */;
 LOCK TABLES `item_required` WRITE;
-INSERT INTO `watererp`.`item_required` VALUES  (1,2,2,'30000.00','60000.00',3,21,NULL,1,2),
- (2,2,2,'2000.00','4000.00',5,21,NULL,1,1);
+INSERT INTO `watererp`.`item_required` VALUES  (1,4,4,'30000.00','120000.00',3,21,NULL,1,3),
+ (2,2,2,'2000.00','4000.00',5,21,NULL,1,3);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `item_required` ENABLE KEYS */;
 
@@ -3663,7 +3315,7 @@ CREATE TABLE  `watererp`.`jhi_persistent_audit_event` (
   `event_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `idx_persistent_audit_event` (`principal`,`event_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=538 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=532 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`jhi_persistent_audit_event`
@@ -4176,34 +3828,28 @@ INSERT INTO `watererp`.`jhi_persistent_audit_event` VALUES  (1,'admin','2016-02-
  (503,'sf0029','2016-04-30 18:08:24','AUTHENTICATION_SUCCESS'),
  (504,'sf0029','2016-04-30 18:13:08','AUTHENTICATION_SUCCESS'),
  (505,'sf0015','2016-04-30 18:16:34','AUTHENTICATION_SUCCESS'),
- (510,'user','2016-05-02 14:56:57','AUTHENTICATION_SUCCESS'),
- (511,'admin','2016-05-02 14:57:12','AUTHENTICATION_SUCCESS'),
- (512,'sf0015','2016-05-02 14:57:53','AUTHENTICATION_SUCCESS'),
- (513,'customer','2016-05-02 14:58:22','AUTHENTICATION_SUCCESS'),
- (514,'sf0015','2016-05-02 16:29:54','AUTHENTICATION_SUCCESS'),
- (515,'customer','2016-05-02 17:58:06','AUTHENTICATION_SUCCESS'),
- (516,'sf0015','2016-05-02 18:00:46','AUTHENTICATION_SUCCESS'),
- (517,'sf0029','2016-05-02 18:01:40','AUTHENTICATION_SUCCESS'),
- (518,'sf0020','2016-05-02 18:02:50','AUTHENTICATION_SUCCESS'),
- (519,'sf0015','2016-05-02 18:04:22','AUTHENTICATION_SUCCESS'),
- (520,'sf0027','2016-05-02 18:09:31','AUTHENTICATION_SUCCESS'),
- (521,'sf0014','2016-05-02 18:10:58','AUTHENTICATION_SUCCESS'),
- (522,'sf0020','2016-05-02 18:12:38','AUTHENTICATION_SUCCESS'),
- (523,'sf0021','2016-05-02 18:14:34','AUTHENTICATION_SUCCESS'),
- (524,'sf0015','2016-05-03 09:55:35','AUTHENTICATION_SUCCESS'),
- (525,'admin','2016-05-03 10:14:52','AUTHENTICATION_SUCCESS'),
- (526,'admin','2016-05-03 10:37:44','AUTHENTICATION_SUCCESS'),
- (527,'admin','2016-05-04 10:03:05','AUTHENTICATION_FAILURE'),
- (528,'admin','2016-05-04 10:03:09','AUTHENTICATION_SUCCESS'),
- (529,'sf0015','2016-05-04 14:01:39','AUTHENTICATION_FAILURE'),
- (530,'sf0015','2016-05-04 14:01:43','AUTHENTICATION_SUCCESS'),
- (531,'sf0015','2016-05-04 17:21:25','AUTHENTICATION_SUCCESS'),
- (532,'admin','2016-05-04 18:11:51','AUTHENTICATION_SUCCESS'),
- (533,'sf0015','2016-05-04 18:22:11','AUTHENTICATION_SUCCESS'),
- (534,'sf0015','2016-05-04 18:56:20','AUTHENTICATION_SUCCESS'),
- (535,'customer','2016-05-04 18:58:27','AUTHENTICATION_SUCCESS'),
- (536,'customer','2016-05-04 19:00:23','AUTHENTICATION_SUCCESS'),
- (537,'sf0015','2016-05-04 19:02:10','AUTHENTICATION_SUCCESS');
+ (510,'admin','2016-05-02 14:35:06','AUTHENTICATION_SUCCESS'),
+ (511,'admin','2016-05-04 16:07:34','AUTHENTICATION_SUCCESS'),
+ (512,'admin','2016-05-04 16:14:12','AUTHENTICATION_SUCCESS'),
+ (513,'customer','2016-05-04 16:17:07','AUTHENTICATION_SUCCESS'),
+ (514,'sf0015','2016-05-04 16:19:29','AUTHENTICATION_SUCCESS'),
+ (515,'sf0029','2016-05-04 16:20:37','AUTHENTICATION_SUCCESS'),
+ (516,'sf0020','2016-05-04 16:21:40','AUTHENTICATION_SUCCESS'),
+ (517,'sf0015','2016-05-04 16:23:11','AUTHENTICATION_SUCCESS'),
+ (518,'sf0027','2016-05-04 16:24:55','AUTHENTICATION_SUCCESS'),
+ (519,'sf0014','2016-05-04 16:26:02','AUTHENTICATION_SUCCESS'),
+ (520,'sf0020','2016-05-04 16:27:00','AUTHENTICATION_SUCCESS'),
+ (521,'sf0021','2016-05-04 16:28:08','AUTHENTICATION_SUCCESS'),
+ (522,'admin','2016-05-04 16:29:43','AUTHENTICATION_SUCCESS'),
+ (523,'sf0014','2016-05-04 18:11:50','AUTHENTICATION_SUCCESS'),
+ (524,'sf0015','2016-05-04 18:12:30','AUTHENTICATION_SUCCESS'),
+ (525,'sf0015','2016-05-04 18:15:15','AUTHENTICATION_SUCCESS'),
+ (526,'sf0020','2016-05-04 18:19:23','AUTHENTICATION_SUCCESS'),
+ (527,'sf0021','2016-05-04 18:21:37','AUTHENTICATION_SUCCESS'),
+ (528,'admin','2016-05-04 18:22:43','AUTHENTICATION_SUCCESS'),
+ (529,'admin','2016-05-04 18:40:01','AUTHENTICATION_SUCCESS'),
+ (530,'billrunusr','2016-05-04 19:12:32','AUTHENTICATION_FAILURE'),
+ (531,'billrunuser','2016-05-04 19:12:43','AUTHENTICATION_SUCCESS');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
@@ -5247,61 +4893,49 @@ INSERT INTO `watererp`.`jhi_persistent_audit_evt_data` VALUES  (1,'remoteAddress
  (509,'remoteAddress','0:0:0:0:0:0:0:1'),
  (509,'sessionId','4E49A4A9A960A3896A547621708A298D'),
  (510,'remoteAddress','0:0:0:0:0:0:0:1'),
- (510,'sessionId','976CD6BCD0F85D92146A764BED15271E'),
- (511,'remoteAddress','0:0:0:0:0:0:0:1'),
- (511,'sessionId','97C93C6D65C71CD368ED58C558BE45EC'),
- (512,'remoteAddress','0:0:0:0:0:0:0:1'),
- (512,'sessionId','BD3EC07D87E05BF488FD48AE47D2BC18'),
- (513,'remoteAddress','0:0:0:0:0:0:0:1'),
- (513,'sessionId','965178E3148B900188AA0BB8B3F4D3C6'),
- (514,'remoteAddress','0:0:0:0:0:0:0:1'),
- (514,'sessionId','493A531548016ABEB03B82670B6EC8A0'),
- (515,'remoteAddress','0:0:0:0:0:0:0:1'),
- (515,'sessionId','EDA675C52B274DB02E944898D5BCD0AA'),
- (516,'remoteAddress','0:0:0:0:0:0:0:1'),
- (516,'sessionId','505BEEAACD151BBD96B3A8FB5F6BF727'),
- (517,'remoteAddress','0:0:0:0:0:0:0:1'),
- (517,'sessionId','6B45E20796FA9ECBC10508C5DD5CE74F'),
- (518,'remoteAddress','0:0:0:0:0:0:0:1'),
- (518,'sessionId','7B89088E1E8D6FF90616D334505C9258'),
- (519,'remoteAddress','0:0:0:0:0:0:0:1'),
- (519,'sessionId','F7BB24A9E76DF769FD91F852E312E682'),
- (520,'remoteAddress','0:0:0:0:0:0:0:1'),
- (520,'sessionId','0149AD570C63A33F5A4C159EC367BA55'),
- (521,'remoteAddress','0:0:0:0:0:0:0:1'),
- (521,'sessionId','25050A1B0294F852B0A583CBBFA93894'),
- (522,'remoteAddress','0:0:0:0:0:0:0:1'),
- (522,'sessionId','C53AE066E98EC5E0223D5CD875A7E525'),
- (523,'remoteAddress','0:0:0:0:0:0:0:1'),
- (523,'sessionId','0DE3B8855124BF41A4B87BBDEB2B027C'),
- (524,'remoteAddress','0:0:0:0:0:0:0:1'),
- (524,'sessionId','E7D33B424EE27EFC15ED97C1568811CB'),
- (525,'remoteAddress','0:0:0:0:0:0:0:1'),
- (525,'sessionId','4ABEBD73F67B0287154135F8A82579FE'),
- (526,'remoteAddress','0:0:0:0:0:0:0:1'),
- (526,'sessionId','E04ECC287019B75B071AA51AFFFEFBF7'),
- (527,'message','Bad credentials'),
- (527,'type','org.springframework.security.authentication.BadCredentialsException'),
- (528,'remoteAddress','0:0:0:0:0:0:0:1'),
- (528,'sessionId','76DAFF8C0F1433E9D45A4BB5AB7077D1'),
- (529,'message','Bad credentials'),
- (529,'type','org.springframework.security.authentication.BadCredentialsException'),
- (530,'remoteAddress','0:0:0:0:0:0:0:1'),
- (530,'sessionId','C9DF35E9D0B963D2276314F49B8BA82A'),
- (531,'remoteAddress','0:0:0:0:0:0:0:1'),
- (531,'sessionId','53A88235FDC07D95C26B8623FBAE45E0'),
- (532,'remoteAddress','0:0:0:0:0:0:0:1'),
- (532,'sessionId','887C46A863C54B5D1E4E35FE37FEB024'),
- (533,'remoteAddress','0:0:0:0:0:0:0:1'),
- (533,'sessionId','81092E05E07C6C532404437582FBA6D8'),
- (534,'remoteAddress','0:0:0:0:0:0:0:1'),
- (534,'sessionId','DAF498DF2A6A87EBDF421A389B9A98D0'),
- (535,'remoteAddress','0:0:0:0:0:0:0:1'),
- (535,'sessionId','152971FE79CA8D4E116403981AD6E840'),
- (536,'remoteAddress','0:0:0:0:0:0:0:1'),
- (536,'sessionId','AD45DD5DB0A5D3FEEA09378181BBC64D'),
- (537,'remoteAddress','0:0:0:0:0:0:0:1'),
- (537,'sessionId','7871D22A8C5405CF06A5065ED5E22248');
+ (510,'sessionId','15A21E5FA25D7A69E37021FAE55E80C3'),
+ (511,'remoteAddress','192.168.1.23'),
+ (511,'sessionId','E3953D43AF65919C5A8E2D341B85C068'),
+ (512,'remoteAddress','192.168.1.23'),
+ (512,'sessionId','A56D0A508B0A1B8ED906B1F4DD050433'),
+ (513,'remoteAddress','192.168.1.23'),
+ (513,'sessionId','805A06EE5B66FABC858862F6684B38BD'),
+ (514,'remoteAddress','192.168.1.23'),
+ (514,'sessionId','E5E0B5DA26C9E8BB67BF16CD5F082DF2'),
+ (515,'remoteAddress','192.168.1.23'),
+ (515,'sessionId','F423BE5ECD83B3FBEBB44EBDC6436E4F'),
+ (516,'remoteAddress','192.168.1.23'),
+ (516,'sessionId','4512DD37D1AF77C13899E61A5D6CB92E'),
+ (517,'remoteAddress','192.168.1.23'),
+ (517,'sessionId','649DD7B50584680A82ADDBC4522E9D80'),
+ (518,'remoteAddress','192.168.1.23'),
+ (518,'sessionId','3AC5A4EDFC5B576E5EA9F04CAF3ECB34'),
+ (519,'remoteAddress','192.168.1.23'),
+ (519,'sessionId','4D04BB74D02DAF2C1D1F3135997E406A'),
+ (520,'remoteAddress','192.168.1.23'),
+ (520,'sessionId','92292261E179A5D1C1D6D4E5E58D145C'),
+ (521,'remoteAddress','192.168.1.23'),
+ (521,'sessionId','679BA26C86853E27CABBEB0C0DBC1757'),
+ (522,'remoteAddress','192.168.1.23'),
+ (522,'sessionId','1EC65ABA4EB75CABC157E903EB37FA54'),
+ (523,'remoteAddress','192.168.1.23'),
+ (523,'sessionId','42EC69E89CEAE7CD9B6A3FC000D98769'),
+ (524,'remoteAddress','192.168.1.23'),
+ (524,'sessionId','D1E8D348B282AAE99F2C81653F8AD196'),
+ (525,'remoteAddress','192.168.1.23'),
+ (525,'sessionId','40C803BF6F45E7E58F7509C42A8DFC34'),
+ (526,'remoteAddress','192.168.1.23'),
+ (526,'sessionId','17AF298971C5B5F48B5590662D4668BA'),
+ (527,'remoteAddress','192.168.1.23'),
+ (527,'sessionId','57FA980FE862A9350F35BDFD7A53B3F0'),
+ (528,'remoteAddress','192.168.1.23'),
+ (528,'sessionId','530E569719D35DEF201EAF8890029148'),
+ (529,'remoteAddress','192.168.1.23'),
+ (529,'sessionId','FC8FD3443621870CB96F40DFED30A8C6'),
+ (530,'message','Bad credentials'),
+ (530,'type','org.springframework.security.authentication.BadCredentialsException'),
+ (531,'remoteAddress','192.168.1.23'),
+ (531,'sessionId','90945C8BE38FB7A629C06C519C8D81CA');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
@@ -5358,7 +4992,6 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+7U0yycBuHmv+/d33EOmkw==
  ('bh/be/AQUN2jP5F1P7kdSQ==',3,'kn71wIORmJGn7dP9vuFMTQ==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('BjuoMFmske3TrzieL4XAlg==',3,'Ln/wXnsNTA7acj8Ouqoi+Q==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('C0yHTgCTgnXcC62bNAch3g==',15,'QM8xVxLqO6GowIcWRmrfyw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('C3N2hOqYkWYGjct9D8XXHQ==',15,'+GL0INs/KiaT9Zwn20y7Rw==','2016-05-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('cDuDRxT54VRDENf238evFw==',3,'qL156YzlR0uNU4rfJVaZGw==','2016-03-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('DEqQipDM3iLfE1PFx+mwRA==',3,'rlSkhLwJf+8q3MOatcrcDA==','2016-02-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('E4Oy802QfILWTBjkwYm95A==',3,'PeGsLDuZMTMKFV/0eIveBQ==','2016-03-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'),
@@ -5376,25 +5009,23 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+7U0yycBuHmv+/d33EOmkw==
  ('Hw5vcTOmIcEuAJ+K5/ttTg==',3,'o/B/WvzQojyU6CRPqa0kug==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('IgMAY7/2pqUwaRD9fRqtZA==',5,'R/v6AK3DT+5hKspBsE0QdQ==','2016-03-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ihEf0pcPskdgqK7cOFzTJw==',21,'TdMRgg17krhlPYtJrkjWXA==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('iz0o1r4UXtSjqNCy95lvVw==',3,'iiSx8LtYtS0Cb+AfotAPyQ==','2016-05-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('jRDH7snELmCidi4buUDLww==',5,'/gjFefbhA17/a1ZM8SLTsw==','2016-03-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Jt1tQaRUywvgCflDNZISJg==',3,'kDuQ5LaUwKjGAmkNe8eMCg==','2016-04-27','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('K++xLoIoHmqvx6bylUXI7w==',15,'8QSZuIBgEyusWhQxg26Wbw==','2016-05-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('k2Tiai7BXpQHEwfZgrhj6g==',16,'EoRRRHI4yUgdB7cEkJz0rQ==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('Kb8YebfE7JAJymtqjh/HBQ==',3,'NLNenPNKYp99JL0VakVcDw==','2016-04-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KktZvzrrvQS+oXZvzgcTUg==',3,'u31QC6MQA9wwAxm5BJQjyw==','2016-03-14','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('KU6VZmBHcK3RKoGgwhLDcA==',3,'CtWXmv/L/eFLnOkikbadrw==','2016-03-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('lqqkRZHMgCV5ZRZsdmOctA==',3,'Sqs4OVQ6a8Sm5+xrE5sxsg==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ltSsrr4LGe85jyi2xaM+GQ==',5,'O2cmSBS0fFhBkpiM4zdCkA==','2016-03-31','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('Mi6MLXJPl0/RJj05s09iMQ==',3,'NerOglc8HIpbaSpJJ3m5fA==','2016-05-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('mJ9QRewb5tZnJtq1JS6BeQ==',3,'Y4wzvxHQSVqsUa7uMIa7ug==','2016-03-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mLyebPZIjbx7SSunOdf+Wg==',3,'41vTjgSojIAoGzh7zCvKlA==','2016-03-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('mN78rTbpO1zJ3NSIXBQ2wg==',30,'A009nxRkiVkn8Up1bOtQfQ==','2016-05-04','192.168.1.23','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mwRI6gjdS4jSIbBL/M9S/A==',5,'YfiL0mj0bauty4dctUuzzw==','2016-03-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('N0VbVqugqcpOaPe2ycnLMQ==',3,'YsBBSdNhwbDeIWaz442tHQ==','2016-03-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nicdzpFVE7fA8XUEciBnBg==',15,'jjnMZHjRSEuYg7FgpryrNw==','2016-03-29','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('nK0IBkLMvCyRtRagV7xkIA==',15,'O271OweAwksyy+Yei161xA==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ny63voHlh1g5DzOlyLwYTQ==',27,'ZAFbKrGGRPl7EtKIpaxgqA==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('OdjpWmFxlpmaMB0NqCjjhw==',5,'yVDIF8/edL2fmSwDDbDNpA==','2016-05-02','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('okQTOzV9n/m5XLnmzP2ukA==',3,'oNqf7v9FXgwNcCGM4d10Ow==','2016-05-03','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('omL/EzrvAvwVEbBKTEH5aw==',30,'CseC8BLe5lXIEbYKOM4Abw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('P0e/MdJF+ZPyjCmmCP/VLA==',3,'X1UpUG5k1rbHVscMv8bt+g==','2016-03-01','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('pMyOIrgHgrCeHf9U1k1jig==',15,'JN5k9M/NYqnv3OyrQgjchw==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
@@ -5402,7 +5033,6 @@ INSERT INTO `watererp`.`jhi_persistent_token` VALUES  ('+7U0yycBuHmv+/d33EOmkw==
  ('qFVuu+uRSBJTp3pUTFHbiw==',3,'0mje7iCbeSAXZrqoHwhF0A==','2016-03-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('QNKrooOpjWJXpm7AAOEFQQ==',20,'DMvylSUGtrldSFzxyjrKXw==','2016-04-19','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('R6uDzkAd46IU0D3H4E0FVA==',3,'XcfBIoCDayNepzQsEjnkJg==','2016-03-17','127.0.0.1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('rwaS3bgpm3ozvjtvs2pr0A==',21,'150vuJ1ZRLPVnrWHsv1UgQ==','2016-05-02','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('rXIEaYCdRMm4gzrZtlo3+Q==',3,'TgmeEQSq33s5paxqyFtkmQ==','2016-02-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'),
  ('TN6nvrS4DAcjld/PAsVu3w==',3,'pWLUEigr2nT7tCBerVO3rw==','2016-03-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('uBmBvYHKZMXr5UHwlzKAPA==',3,'oIXVYnHZ2CAqS/lxhNHtBQ==','2016-03-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -5910,7 +5540,7 @@ CREATE TABLE  `watererp`.`meter_change` (
   CONSTRAINT `fk_meterchange_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
   CONSTRAINT `fk_meterchange_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
   CONSTRAINT `fk_meterchange_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`meter_change`
@@ -5918,8 +5548,6 @@ CREATE TABLE  `watererp`.`meter_change` (
 
 /*!40000 ALTER TABLE `meter_change` DISABLE KEYS */;
 LOCK TABLES `meter_change` WRITE;
-INSERT INTO `watererp`.`meter_change` VALUES  (6,'04060001','Meter Stuck','MeterId2',147852,'123456',10,'approved','2016-05-18',1641,3,14),
- (7,'04060001','Meter Stuck','123456',1478,NULL,23232,'654654','2016-05-03',1641,1,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `meter_change` ENABLE KEYS */;
 
@@ -5940,7 +5568,7 @@ CREATE TABLE  `watererp`.`meter_details` (
   PRIMARY KEY (`id`),
   KEY `fk_meterdetails_meterstatus_id` (`meter_status_id`),
   CONSTRAINT `fk_meterdetails_meterstatus_id` FOREIGN KEY (`meter_status_id`) REFERENCES `meter_status` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`meter_details`
@@ -5950,9 +5578,7 @@ CREATE TABLE  `watererp`.`meter_details` (
 LOCK TABLES `meter_details` WRITE;
 INSERT INTO `watererp`.`meter_details` VALUES  (1,'MeterId1','type1','make1',1,999999,1),
  (2,'MeterId2','Type2','make2',1,99999,1),
- (3,'MeterId3','type3','make3',1,99999,1),
- (4,'MeterId4','type4','make4',1,99999,2),
- (5,'MeterId5','type5','make5',1,99999,2);
+ (3,'MeterId3','type3','make3',1,99999,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `meter_details` ENABLE KEYS */;
 
@@ -5975,7 +5601,7 @@ CREATE TABLE  `watererp`.`meter_status` (
 /*!40000 ALTER TABLE `meter_status` DISABLE KEYS */;
 LOCK TABLES `meter_status` WRITE;
 INSERT INTO `watererp`.`meter_status` VALUES  (1,'Allotted'),
- (2,'Unallotted');
+ (2,'Unalloted');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `meter_status` ENABLE KEYS */;
 
@@ -6154,6 +5780,7 @@ CREATE TABLE  `watererp`.`online_payment_callback` (
   `response_code` varchar(255) DEFAULT NULL,
   `total_amount_paid` float DEFAULT NULL,
   `user_defined_field` varchar(255) DEFAULT NULL,
+  `merchant_txn_ref` varchar(255) DEFAULT NULL,
   `merchant_master_id` bigint(20) DEFAULT NULL,
   `online_payment_order_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -6161,7 +5788,7 @@ CREATE TABLE  `watererp`.`online_payment_callback` (
   KEY `fk_onlinepaymentcallback_onlinepaymentorder_id` (`online_payment_order_id`),
   CONSTRAINT `fk_onlinepaymentcallback_merchantmaster_id` FOREIGN KEY (`merchant_master_id`) REFERENCES `merchant_master` (`id`),
   CONSTRAINT `fk_onlinepaymentcallback_onlinepaymentorder_id` FOREIGN KEY (`online_payment_order_id`) REFERENCES `online_payment_order` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`online_payment_callback`
@@ -6169,6 +5796,7 @@ CREATE TABLE  `watererp`.`online_payment_callback` (
 
 /*!40000 ALTER TABLE `online_payment_callback` DISABLE KEYS */;
 LOCK TABLES `online_payment_callback` WRITE;
+INSERT INTO `watererp`.`online_payment_callback` VALUES  (1,'TSh','TIGOPESADIR','TESTS001',NULL,'2009',280,'123','6828618857',2,11);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `online_payment_callback` ENABLE KEYS */;
 
@@ -6191,7 +5819,7 @@ CREATE TABLE  `watererp`.`online_payment_order` (
   PRIMARY KEY (`id`),
   KEY `fk_onlinepaymentorder_merchantmaster_id` (`merchant_master_id`),
   CONSTRAINT `fk_onlinepaymentorder_merchantmaster_id` FOREIGN KEY (`merchant_master_id`) REFERENCES `merchant_master` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`online_payment_order`
@@ -6199,6 +5827,16 @@ CREATE TABLE  `watererp`.`online_payment_order` (
 
 /*!40000 ALTER TABLE `online_payment_order` DISABLE KEYS */;
 LOCK TABLES `online_payment_order` WRITE;
+INSERT INTO `watererp`.`online_payment_order` VALUES  (1,'TESTS001',12354,'TIGOPESADIR','617783704','test@gmail.com',1234567890,'2016-05-02 16:47:25',2),
+ (3,'TESTS001',1234,'TIGOPESADIR','617999021','test@gmail.com',123456789,'2016-05-03 08:23:56',2),
+ (4,'TESTS001',123,'TIGOPESADIR','061224612','test@gmail.com',123456789,'2016-05-03 09:38:13',2),
+ (5,'TESTS001',12,'TIGOPESADIR','617783704','test@gmail.com',1234567890,'2016-05-03 09:40:47',2),
+ (6,'TESTS001',12,'TIGOPESADIR','617999021','test@gmail.com',123455678,'2016-05-03 09:48:46',2),
+ (7,'TESTS001',1234,'TIGOPESADIR','617999021','test@gmail.com',1234567890,'2016-05-03 10:22:51',2),
+ (8,'TESTS001',123,'TIGOPESADIR','617790069','test@gmail.com',1234567890,'2016-05-03 10:59:13',2),
+ (9,'TESTS001',123,'TIGOPESADIR','617999021','test@gmail.com',123456789,'2016-05-03 11:00:13',2),
+ (10,'TESTS001',1234,'TIGOPESADIR','617783704','test@gmail.com',123456789,'2016-05-03 16:47:30',2),
+ (11,'TESTS001',123,'TIGOPESADIR','617999021','test@gmail.com',123456789,'2016-05-03 17:05:45',2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `online_payment_order` ENABLE KEYS */;
 
@@ -6213,11 +5851,12 @@ CREATE TABLE  `watererp`.`online_payment_response` (
   `response_code` varchar(255) DEFAULT NULL,
   `response_time` timestamp NULL DEFAULT NULL,
   `redirect_url` varchar(255) DEFAULT NULL,
+  `merchant_txn_ref` varchar(255) DEFAULT NULL,
   `online_payment_order_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_onlinepaymentresponse_onlinepaymentorder_id` (`online_payment_order_id`),
   CONSTRAINT `fk_onlinepaymentresponse_onlinepaymentorder_id` FOREIGN KEY (`online_payment_order_id`) REFERENCES `online_payment_order` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`online_payment_response`
@@ -6225,6 +5864,7 @@ CREATE TABLE  `watererp`.`online_payment_response` (
 
 /*!40000 ALTER TABLE `online_payment_response` DISABLE KEYS */;
 LOCK TABLES `online_payment_response` WRITE;
+INSERT INTO `watererp`.`online_payment_response` VALUES  (1,'100','2016-05-03 17:05:46','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6828618857&name=null&paymentmode=TIGOPESADIR','6828618857',11);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `online_payment_response` ENABLE KEYS */;
 
@@ -6455,7 +6095,7 @@ CREATE TABLE  `watererp`.`pipe_size_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `pipe_size` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`pipe_size_master`
@@ -6463,8 +6103,9 @@ CREATE TABLE  `watererp`.`pipe_size_master` (
 
 /*!40000 ALTER TABLE `pipe_size_master` DISABLE KEYS */;
 LOCK TABLES `pipe_size_master` WRITE;
-INSERT INTO `watererp`.`pipe_size_master` VALUES  (1,15),
- (2,20);
+INSERT INTO `watererp`.`pipe_size_master` VALUES  (1,0.5),
+ (2,0.75),
+ (3,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `pipe_size_master` ENABLE KEYS */;
 
@@ -6504,7 +6145,7 @@ CREATE TABLE  `watererp`.`proceedings` (
 
 /*!40000 ALTER TABLE `proceedings` DISABLE KEYS */;
 LOCK TABLES `proceedings` WRITE;
-INSERT INTO `watererp`.`proceedings` VALUES  (1,64000,6400,12800,3200,86400,17280,NULL,1000,104680,10,20,5,20,21,2);
+INSERT INTO `watererp`.`proceedings` VALUES  (1,124000,12400,24800,6200,167400,33480,NULL,1000,201880,10,20,5,20,21,2);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `proceedings` ENABLE KEYS */;
 
@@ -6558,7 +6199,7 @@ CREATE TABLE  `watererp`.`receipt` (
   KEY `fk_receipt_paymenttypes_id` (`payment_types_id`),
   CONSTRAINT `fk_receipt_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
   CONSTRAINT `fk_receipt_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`receipt`
@@ -6566,7 +6207,7 @@ CREATE TABLE  `watererp`.`receipt` (
 
 /*!40000 ALTER TABLE `receipt` DISABLE KEYS */;
 LOCK TABLES `receipt` WRITE;
-INSERT INTO `watererp`.`receipt` VALUES  (1,104680,'65465','654654','2016-05-03','564654','2016-05-02',21,2);
+INSERT INTO `watererp`.`receipt` VALUES  (5,201880,NULL,NULL,NULL,NULL,'2016-05-04',21,1);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `receipt` ENABLE KEYS */;
 
@@ -6723,7 +6364,7 @@ CREATE TABLE  `watererp`.`request_workflow_history` (
   CONSTRAINT `fk_requestworkflowhistory_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowstagemaster_id` FOREIGN KEY (`workflow_stage_master_id`) REFERENCES `workflow_stage_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`request_workflow_history`
@@ -6731,19 +6372,23 @@ CREATE TABLE  `watererp`.`request_workflow_history` (
 
 /*!40000 ALTER TABLE `request_workflow_history` DISABLE KEYS */;
 LOCK TABLES `request_workflow_history` WRITE;
-INSERT INTO `watererp`.`request_workflow_history` VALUES  (93,1,'2016-05-02 18:00:16','2016-05-02 18:00:16',NULL,'127.0.0.1',NULL,21,5,15,5,1,1,NULL,NULL),
- (94,2,'2016-05-02 18:01:24','2016-05-02 18:01:24',NULL,'127.0.0.1',NULL,21,15,29,5,1,1,NULL,NULL),
- (95,3,'2016-05-02 18:02:24','2016-05-02 18:02:24',NULL,'127.0.0.1',NULL,21,29,20,5,1,1,NULL,NULL),
- (96,4,'2016-05-02 18:03:59','2016-05-02 18:03:59','feasibility','127.0.0.1',NULL,21,20,15,5,1,1,NULL,NULL),
- (97,5,'2016-05-02 18:08:58','2016-05-02 18:08:58','qwf','127.0.0.1',NULL,21,15,27,5,1,1,NULL,NULL),
- (98,6,'2016-05-02 18:10:32','2016-05-02 18:10:32','654654','127.0.0.1',NULL,21,27,14,5,1,1,NULL,NULL),
- (99,7,'2016-05-02 18:12:16','2016-05-02 18:12:16','items issued','127.0.0.1',NULL,21,14,20,5,1,1,NULL,NULL),
- (100,8,'2016-05-02 18:13:40','2016-05-02 18:13:40','65465','127.0.0.1',NULL,21,20,21,9,1,1,NULL,NULL),
- (101,1,'2016-05-04 18:25:42','2016-05-04 18:25:42',NULL,'127.0.0.1',NULL,54,15,15,3,8,8,NULL,NULL),
- (102,1,'2016-05-04 18:55:33','2016-05-04 18:55:33',NULL,'127.0.0.1',NULL,22,15,15,3,1,1,NULL,NULL),
- (103,1,'2016-05-04 18:59:58','2016-05-04 18:59:58',NULL,'127.0.0.1',NULL,23,5,15,3,1,1,NULL,NULL),
- (104,1,'2016-05-04 19:01:55','2016-05-04 19:01:55',NULL,'127.0.0.1',NULL,24,5,15,5,6,5,NULL,NULL),
- (105,2,'2016-05-04 19:03:04','2016-05-04 19:03:04',NULL,'127.0.0.1',NULL,24,15,21,3,6,5,NULL,NULL);
+INSERT INTO `watererp`.`request_workflow_history` VALUES  (56,1,'2016-04-30 17:58:37','2016-04-30 17:58:37',NULL,'169.254.178.179',NULL,16,5,23,5,4,7,NULL,NULL),
+ (57,2,'2016-04-30 18:05:20','2016-04-30 18:05:20','','169.254.178.179',NULL,16,23,15,5,4,7,NULL,NULL),
+ (58,3,'2016-04-30 18:07:04','2016-04-30 18:07:04','','169.254.178.179',NULL,16,15,29,5,4,7,NULL,NULL),
+ (59,4,'2016-04-30 18:16:02','2016-04-30 18:16:02','','169.254.178.179',NULL,16,29,15,9,4,7,NULL,NULL),
+ (88,1,'2016-04-30 15:46:56','2016-04-30 15:46:56',NULL,'127.0.0.1',NULL,18,5,15,3,1,1,NULL,NULL),
+ (89,1,'2016-04-30 15:47:48','2016-04-30 15:47:48',NULL,'127.0.0.1',NULL,19,5,15,5,6,5,NULL,NULL),
+ (90,2,'2016-04-30 18:08:57','2016-04-30 18:08:57','asfawf','127.0.0.1',NULL,19,15,21,9,1,5,NULL,NULL),
+ (91,1,'2016-04-30 18:28:23','2016-04-30 18:28:23',NULL,'127.0.0.1',NULL,20,5,15,5,6,5,NULL,NULL),
+ (92,2,'2016-04-30 18:32:15','2016-04-30 18:32:15',NULL,'127.0.0.1',NULL,20,15,21,3,6,5,NULL,NULL),
+ (93,1,'2016-05-04 16:19:02','2016-05-04 16:19:02',NULL,'169.254.197.57',NULL,21,5,15,5,1,1,NULL,NULL),
+ (94,2,'2016-05-04 16:20:08','2016-05-04 16:20:08','Application Forwarded','169.254.197.57',NULL,21,15,29,5,1,1,NULL,NULL),
+ (95,3,'2016-05-04 16:21:23','2016-05-04 16:21:23','Can give new connection','169.254.197.57',NULL,21,29,20,5,1,1,NULL,NULL),
+ (96,4,'2016-05-04 16:22:49','2016-05-04 16:22:49','Feasibility completed','169.254.197.57',NULL,21,20,15,5,1,1,NULL,NULL),
+ (97,5,'2016-05-04 16:24:32','2016-05-04 16:24:32','Given list of required materials','169.254.197.57',NULL,21,15,27,5,1,1,NULL,NULL),
+ (98,6,'2016-05-04 16:25:42','2016-05-04 16:25:42','paid','169.254.197.57',NULL,21,27,14,5,1,1,NULL,NULL),
+ (99,7,'2016-05-04 16:26:37','2016-05-04 16:26:37','issued','169.254.197.57',NULL,21,14,20,5,1,1,NULL,NULL),
+ (101,8,'2016-05-04 18:21:08','2016-05-04 18:21:08','Meter 3 issued on 12th april','169.254.197.57',NULL,21,20,21,9,1,1,NULL,NULL);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `request_workflow_history` ENABLE KEYS */;
 
@@ -6777,6 +6422,27 @@ CREATE TABLE  `watererp`.`request_workflow_mapping` (
 LOCK TABLES `request_workflow_mapping` WRITE;
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `request_workflow_mapping` ENABLE KEYS */;
+
+
+--
+-- Definition of table `watererp`.`revenue_type_master`
+--
+
+DROP TABLE IF EXISTS `watererp`.`revenue_type_master`;
+CREATE TABLE  `watererp`.`revenue_type_master` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `revenue_type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`revenue_type_master`
+--
+
+/*!40000 ALTER TABLE `revenue_type_master` DISABLE KEYS */;
+LOCK TABLES `revenue_type_master` WRITE;
+UNLOCK TABLES;
+/*!40000 ALTER TABLE `revenue_type_master` ENABLE KEYS */;
 
 
 --
@@ -7641,7 +7307,7 @@ CREATE TABLE  `watererp`.`workflow_txn_details` (
   PRIMARY KEY (`id`),
   KEY `fk_workflowtxndetails_requestmaster_id` (`request_master_id`),
   CONSTRAINT `fk_workflowtxndetails_requestmaster_id` FOREIGN KEY (`request_master_id`) REFERENCES `request_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`workflow_txn_details`
@@ -7649,54 +7315,6 @@ CREATE TABLE  `watererp`.`workflow_txn_details` (
 
 /*!40000 ALTER TABLE `workflow_txn_details` DISABLE KEYS */;
 LOCK TABLES `workflow_txn_details` WRITE;
-INSERT INTO `watererp`.`workflow_txn_details` VALUES  (8,NULL,NULL,NULL,NULL,'23232','147852',NULL,NULL,NULL),
- (9,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL,NULL),
- (10,NULL,NULL,NULL,'prevReading','23232','147852',NULL,NULL,8),
- (11,NULL,NULL,NULL,'TarrifCategoryMaster',NULL,'1',NULL,NULL,8),
- (12,NULL,NULL,NULL,'prevReading','23232','147',NULL,NULL,8),
- (13,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (14,NULL,NULL,NULL,NULL,'23232','1258',NULL,NULL,NULL),
- (15,NULL,NULL,NULL,NULL,'3','2',NULL,NULL,NULL),
- (16,NULL,NULL,NULL,'prevReading','23232','14785',NULL,NULL,8),
- (17,NULL,NULL,NULL,'TarrifCategoryMaster','3','1',NULL,NULL,8),
- (18,NULL,NULL,NULL,'PipeSize','20','15',NULL,NULL,9),
- (19,NULL,NULL,NULL,'prevReading','23232','12345',NULL,NULL,8),
- (20,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (21,NULL,NULL,NULL,'prevReading','23232','1478',NULL,NULL,8),
- (22,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (23,NULL,NULL,NULL,'PipeSize','20','15',NULL,NULL,9),
- (24,NULL,NULL,NULL,'consName','mohib khan','mkhan',NULL,NULL,9),
- (25,NULL,NULL,NULL,'mobileNo','9390148141','868656232',NULL,NULL,9),
- (26,NULL,NULL,NULL,'email',NULL,'khan_mohib',NULL,NULL,9),
- (27,NULL,NULL,NULL,'idProof',NULL,'1',NULL,NULL,9),
- (28,NULL,NULL,NULL,'idNumber',NULL,'753951',NULL,NULL,9),
- (29,NULL,NULL,NULL,'consName','mohib khan','khanmohib',NULL,NULL,9),
- (30,NULL,NULL,NULL,'mobileNo','9390148141','9390111935',NULL,NULL,9),
- (31,NULL,NULL,NULL,'email',NULL,'khan.mohib',NULL,NULL,9),
- (32,NULL,NULL,NULL,'idProof',NULL,'4',NULL,NULL,9),
- (33,NULL,NULL,NULL,'idNumber',NULL,'147852ps',NULL,NULL,9),
- (34,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (35,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (36,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (37,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (38,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (39,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (40,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (41,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (42,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (43,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (44,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (45,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (46,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (47,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (48,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (49,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (50,NULL,NULL,NULL,'prevReading','23232','564654',NULL,NULL,8),
- (51,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (52,NULL,NULL,NULL,'prevReading','23232','21325',NULL,NULL,8),
- (53,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8),
- (54,NULL,NULL,NULL,'prevReading','23232','654654',NULL,NULL,8),
- (55,NULL,NULL,NULL,'TarrifCategoryMaster','3','2',NULL,NULL,8);
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `workflow_txn_details` ENABLE KEYS */;
 

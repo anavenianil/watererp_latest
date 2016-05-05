@@ -38,7 +38,7 @@ public class CustDetailsResource {
     private CustDetailsRepository custDetailsRepository;
     
 	@Inject
-	private CustDetailsCustomRepository custDetailsCustomRepository;    
+	private CustDetailsCustomRepository custDetailsCustomRepository;
     /**
      * POST  /custDetailss -> Create a new custDetails.
      */

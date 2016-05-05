@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -92,10 +93,18 @@ public class CollDetailsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<CollDetails>> getAllCollDetailss(Pageable pageable)
+    public ResponseEntity<List<CollDetails>> getAllCollDetailss(Pageable pageable,    		
+    		@RequestParam(value = "txnStatus", required = false) String txnStatus
+    		)
         throws URISyntaxException {
         log.debug("REST request to get a page of CollDetailss");
-        Page<CollDetails> page = collDetailsRepository.findAll(pageable); 
+        Page<CollDetails> page;
+        if(txnStatus == null){
+         page = collDetailsRepository.findAll(pageable); 
+        }
+        else{
+        page = collDetailsRepository.findByTxnStatus(pageable,txnStatus); 
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/collDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -48,7 +48,7 @@ public class OnlinePaymentOrderResource {
 	@Inject
 	private OnlinePaymentResponseRepository onlinePaymentResponseRepository;
 	
-	
+	//This method is only for security purposes to expose the /onlinePaymentOrders method without logon
 	@RequestMapping(value = "/postOnlinePaymentOrders", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<OnlinePaymentOrder> createOnlinePaymentOrderOpenAPI(

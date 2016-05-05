@@ -28,6 +28,7 @@
             <column name="response_code" type="varchar(255)"/>
             <column name="total_amount_paid" type="${floatType}"/>
             <column name="user_defined_field" type="varchar(255)"/>
+            <column name="merchant_txn_ref" type="varchar(255)"/>
             <column name="merchant_master_id" type="bigint"/>
             <column name="online_payment_order_id" type="bigint"/>
         </createTable>

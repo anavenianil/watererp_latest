@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Application_txn" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dda6da65-b38f-480d-bc59-fcdbc727f9cf">
-	<property name="ireport.zoom" value="1.1000000000000019"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Application_txn" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="dda6da65-b38f-480d-bc59-fcdbc727f9cf">
+	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="213"/>
-	<property name="ireport.callouts" value="##Tue May 03 14:47:11 IST 2016"/>
-	<parameter name="Id" class="java.lang.Long">
+	<property name="ireport.y" value="544"/>
+	<parameter name="Id" class="java.lang.Integer">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR ID]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT * , concat(first_name,middle_name,last_name)full_name FROM `watererp`.`application_txn` a where id=$P{Id}]]>
+		<![CDATA[SELECT * FROM `watererp`.`application_txn` a where id=$P{Id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -130,7 +129,6 @@
 	<field name="id_proof_master_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="full_name" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -162,14 +160,14 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Miss/Mr's]]></text>
+				<text><![CDATA[MIss/Mr's]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="56" y="27" width="150" height="13" uuid="d6cb272e-5e83-4298-817b-592653c6be59"/>
 				<text><![CDATA[....................................................]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="306" y="27" width="84" height="14" uuid="14d1f432-b6c4-46cb-ba13-2d4a31285187"/>
+				<reportElement x="307" y="25" width="84" height="20" uuid="14d1f432-b6c4-46cb-ba13-2d4a31285187"/>
 				<text><![CDATA[....................................................]]></text>
 			</staticText>
 			<staticText>
@@ -191,18 +189,18 @@
 				<text><![CDATA[...............................]]></text>
 			</staticText>
 			<textField>
+				<reportElement x="84" y="20" width="100" height="20" uuid="fd432c6e-4507-4d1d-ac8c-ca6d0eee3d90"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
 				<reportElement x="553" y="20" width="100" height="20" uuid="9e3298dc-576c-4d8a-9b7c-de44e4758fa4"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mobile_no}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="88" y="20" width="100" height="20" uuid="df2cc8e7-ace1-43b3-b556-c8f8f52dafd4"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="549">
@@ -213,13 +211,13 @@
 				<reportElement x="2" y="30" width="1" height="390" uuid="bb3df295-8c83-4ef7-932b-bb04e2285581"/>
 			</line>
 			<line>
-				<reportElement x="2" y="30" width="1" height="443" uuid="2e8bd1e4-96de-46d9-a6ec-2c3b29ac9dd0"/>
+				<reportElement x="2" y="30" width="1" height="453" uuid="2e8bd1e4-96de-46d9-a6ec-2c3b29ac9dd0"/>
 			</line>
 			<line>
-				<reportElement x="3" y="473" width="707" height="1" uuid="0e82690d-5596-433e-afe7-5e396c09e47d"/>
+				<reportElement x="3" y="483" width="707" height="1" uuid="0e82690d-5596-433e-afe7-5e396c09e47d"/>
 			</line>
 			<line>
-				<reportElement x="710" y="29" width="1" height="445" uuid="6cbd60c8-3860-4468-a5bc-f7a06ae17690"/>
+				<reportElement x="710" y="29" width="1" height="454" uuid="6cbd60c8-3860-4468-a5bc-f7a06ae17690"/>
 			</line>
 			<line>
 				<reportElement mode="Opaque" x="3" y="78" width="707" height="1" backcolor="#33FFFF" uuid="248fbcdd-48b0-4f00-8e47-71e64fbad967"/>
@@ -227,9 +225,9 @@
 			<staticText>
 				<reportElement mode="Opaque" x="3" y="30" width="707" height="48" forecolor="#000000" backcolor="#ACA899" uuid="7d2b940c-6ad1-43c9-966f-ba5e62bef3a9"/>
 				<textElement>
-					<font fontName="SansSerif" size="14" isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[                                                         TAARIFA KAMILIZA MWOMBAJI]]></text>
+				<text><![CDATA[                                                                 TAARIFA KAMILIZA MWOMBAJI]]></text>
 			</staticText>
 			<line>
 				<reportElement mode="Opaque" x="2" y="29" width="710" height="1" backcolor="#33FFFF" uuid="fb22d5b6-7ad1-4e72-ad55-2e5d45daae6a"/>
@@ -275,119 +273,92 @@
 				<text><![CDATA[ FAX NUMBER]]></text>
 			</staticText>
 			<line>
-				<reportElement mode="Opaque" x="2" y="361" width="707" height="1" backcolor="#33FFFF" uuid="aab5bf95-5bce-42f7-b5f1-b8e3e468bdef"/>
+				<reportElement mode="Opaque" x="2" y="371" width="707" height="1" backcolor="#33FFFF" uuid="aab5bf95-5bce-42f7-b5f1-b8e3e468bdef"/>
 			</line>
 			<line>
-				<reportElement mode="Opaque" x="2" y="243" width="707" height="1" backcolor="#33FFFF" uuid="777a7b16-6186-4b43-8efb-625a52c37b40"/>
+				<reportElement mode="Opaque" x="2" y="253" width="707" height="1" backcolor="#33FFFF" uuid="777a7b16-6186-4b43-8efb-625a52c37b40"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="3" y="198" width="706" height="45" backcolor="#ACA899" uuid="8f82b407-e298-46a5-a71b-6d50d912f748"/>
+				<reportElement mode="Opaque" x="3" y="198" width="706" height="55" backcolor="#ACA899" uuid="8f82b407-e298-46a5-a71b-6d50d912f748"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[                                                   JAARIFA ZA ENEO/KIWANJA KINACHOOMBEWAMAJI]]></text>
 			</staticText>
 			<line>
-				<reportElement mode="Opaque" x="2" y="303" width="707" height="1" backcolor="#33FFFF" uuid="b5bb77ce-acbd-488f-b8da-48f9ca864aa0"/>
+				<reportElement mode="Opaque" x="2" y="313" width="707" height="1" backcolor="#33FFFF" uuid="b5bb77ce-acbd-488f-b8da-48f9ca864aa0"/>
 			</line>
 			<staticText>
-				<reportElement x="19" y="252" width="100" height="20" uuid="14a6b71e-af78-4002-b496-373fd5cc3fcd"/>
+				<reportElement x="19" y="262" width="100" height="20" uuid="14a6b71e-af78-4002-b496-373fd5cc3fcd"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[PLOT NUMBER]]></text>
 			</staticText>
 			<line>
-				<reportElement x="205" y="244" width="1" height="59" uuid="5cc45d4c-821d-4039-ad78-306e837d104d"/>
+				<reportElement x="205" y="254" width="1" height="59" uuid="5cc45d4c-821d-4039-ad78-306e837d104d"/>
 			</line>
 			<staticText>
-				<reportElement x="218" y="252" width="100" height="20" uuid="f75c7869-80ad-45a1-82df-8af4ed3af769"/>
+				<reportElement x="218" y="262" width="100" height="20" uuid="f75c7869-80ad-45a1-82df-8af4ed3af769"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[        AREA]]></text>
 			</staticText>
 			<line>
-				<reportElement x="403" y="244" width="1" height="60" uuid="83ece1b2-b0f7-45cb-b8d7-adafe6f5c6e4"/>
+				<reportElement x="403" y="254" width="1" height="60" uuid="83ece1b2-b0f7-45cb-b8d7-adafe6f5c6e4"/>
 			</line>
 			<staticText>
-				<reportElement x="425" y="252" width="100" height="20" uuid="ef4fcbd6-cf8f-447b-af36-bd3e684c7afe"/>
+				<reportElement x="425" y="262" width="100" height="20" uuid="ef4fcbd6-cf8f-447b-af36-bd3e684c7afe"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[        STREET]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="424" y="276" width="100" height="20" uuid="9086b3c5-5dc6-4965-9e9e-7173f92873ca"/>
+				<reportElement x="424" y="286" width="100" height="20" uuid="9086b3c5-5dc6-4965-9e9e-7173f92873ca"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{street}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="205" y="298" width="1" height="63" uuid="6fbd6f91-ebf4-4b69-aa8e-aa8c764b8a93"/>
+				<reportElement x="205" y="308" width="1" height="63" uuid="6fbd6f91-ebf4-4b69-aa8e-aa8c764b8a93"/>
 			</line>
 			<staticText>
-				<reportElement x="12" y="312" width="187" height="20" uuid="c4626767-1805-4812-8223-a32894176770"/>
+				<reportElement x="12" y="322" width="187" height="20" uuid="c4626767-1805-4812-8223-a32894176770"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[VILLAGE EXECUTIVE OFFICER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="312" width="318" height="20" uuid="05dcc310-d6cd-4852-a6a0-c0ef03213d9a"/>
+				<reportElement x="209" y="322" width="318" height="20" uuid="05dcc310-d6cd-4852-a6a0-c0ef03213d9a"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[VILLAGE EXECUTIVE OFFICER NUMBER]]></text>
 			</staticText>
 			<line>
-				<reportElement mode="Opaque" x="2" y="410" width="707" height="1" backcolor="#33FFFF" uuid="93fee488-089b-42f4-adcb-46567b6d78e0"/>
+				<reportElement mode="Opaque" x="2" y="420" width="707" height="1" backcolor="#33FFFF" uuid="93fee488-089b-42f4-adcb-46567b6d78e0"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="3" y="362" width="706" height="48" backcolor="#ACA899" uuid="aa4cc889-8248-430c-8829-5e41e62fba8b"/>
+				<reportElement mode="Opaque" x="3" y="372" width="706" height="48" backcolor="#ACA899" uuid="aa4cc889-8248-430c-8829-5e41e62fba8b"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[                                                     MATUMIZI YA MAJI(WEKA ALAMA YA )]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="12" y="415" width="54" height="20" uuid="c4ef4021-f1e0-4588-ac54-35bae75c9fdd"/>
+			<line>
+				<reportElement x="457" y="420" width="1" height="63" uuid="1019f5d7-8e04-47d4-baf6-ca3960f5d675"/>
+			</line>
+			<textField>
+				<reportElement x="168" y="84" width="100" height="20" uuid="98fb4156-99ee-40df-b1d5-28c8977db1ac"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[HOUSE]]></text>
-			</staticText>
-			<line>
-				<reportElement x="249" y="410" width="1" height="63" uuid="aa0a70bc-7df7-4f1c-87ab-d341f21ada16"/>
-			</line>
-			<line>
-				<reportElement x="87" y="410" width="1" height="63" uuid="41131aa6-1207-4728-ae0d-3295417273de"/>
-			</line>
-			<staticText>
-				<reportElement x="99" y="415" width="85" height="20" uuid="f60d7ae0-89fe-4c19-9dfa-d828db748567"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[INSTITUTION]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="280" y="415" width="111" height="20" uuid="fd6fef18-d877-4e61-afab-237d91cdc806"/>
-				<textElement>
-					<font size="12" isBold="false" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[BUSINESS]]></text>
-			</staticText>
-			<line>
-				<reportElement x="457" y="410" width="1" height="63" uuid="1019f5d7-8e04-47d4-baf6-ca3960f5d675"/>
-			</line>
-			<staticText>
-				<reportElement x="495" y="415" width="111" height="20" uuid="9273084e-0c85-42b3-a5bc-230df82cf2ae"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[INDUSTRY]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="22" y="164" width="100" height="20" uuid="2a9b591d-5c52-4385-8bcf-d0c1b20d79ef"/>
 				<textElement>
@@ -403,18 +374,18 @@
 				<textFieldExpression><![CDATA[$F{office_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="22" y="278" width="100" height="20" uuid="ac3990cc-8bc2-424f-8781-4280c00e3f11"/>
+				<reportElement x="22" y="288" width="100" height="20" uuid="ac3990cc-8bc2-424f-8781-4280c00e3f11"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{plot_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="158" y="84" width="100" height="20" uuid="feb11713-3739-41da-87a3-33b546dbae30"/>
+				<reportElement x="0" y="421" width="182" height="20" uuid="d18c534d-7fee-4080-914c-388a0948b5f5"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{tariff_category_master_id}==1?'DOMESTIC':($F{tariff_category_master_id}==2?'INSTITUTIONAL':($F{tariff_category_master_id}==3?'COMMERCIAL':'NONE')))]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

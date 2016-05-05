@@ -15,4 +15,6 @@ public interface OnlinePaymentResponseRepository extends JpaRepository<OnlinePay
 
 	@Query("SELECT opr FROM OnlinePaymentResponse opr WHERE opr.onlinePaymentOrder.id=:orderId")
 	public OnlinePaymentResponse findByOrder(@Param("orderId") Long orderId);
+	
+	public OnlinePaymentResponse findByMerchantTxnRef(String merchantTxnRef);
 }

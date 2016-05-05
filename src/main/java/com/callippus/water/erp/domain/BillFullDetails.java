@@ -125,8 +125,7 @@ public class BillFullDetails implements Serializable {
     @Column(name = "int_on_arrears")
     private Float intOnArrears;
 
-    @NotNull
-    @Column(name = "last_pymt_dt", nullable = false)
+    @Column(name = "last_pymt_dt")
     private LocalDate lastPymtDt;
 
     @Column(name = "last_pymt_amt")
