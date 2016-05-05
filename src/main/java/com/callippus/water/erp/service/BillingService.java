@@ -25,6 +25,8 @@ import java.time.temporal.ChronoUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,7 @@ import java.util.*;
 /**
  * Service class for managing users.
  */
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Service
 @Transactional
 public class BillingService {
@@ -274,92 +277,24 @@ public class BillingService {
 		process_bill(bill_details);
 	}
 
-	public void process_bill(BillDetails bill_details) {
-		if (bill_details == null)
+	public void process_bill_new_meter(BillDetails bill_details,
+			CustDetails customer) {
+
+		if (!validateCust(customer, bill_details))
 			return;
-
-		initBill(bill_details.getCan());
-
-		log.debug("Process customer with CAN:" + bill_details.getCan());
-		CustDetails customer = custDetailsRepository.findByCan(bill_details
-				.getCan());
-
-		if (customer == null) {
-			log.debug("Customer not found in CUST_DETAILS for CAN:"
-					+ bill_details.getCan());
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(0);
-			brd.setRemarks("Failed with error:"
-					+ "Customer not found in CUST_DETAILS for CAN:"
-					+ bill_details.getCan());
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
-			return;
-		}
-
-		if (customer.getPrevBillMonth() == null)
-			newMeterFlag = 1;
-
-		CustValidation retVal = getCustInfo(customer, bill_details);
-
-		if (retVal != CustValidation.SUCCESS) {
-			// Unable to process customer
-			log.debug("Unable to process customer:" + customer.getId()
-					+ ", getCustInfo returned::" + retVal.name());
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:" + retVal.name());
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
-			return;
-		}
-
-		if (newMeterFlag == 0 && bfdRepository.findByCanAndToMonth(
-				customer.getCan(),
-				customer.getPrevBillMonth().format(
-						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
-			log.debug("Unable to process customer:" + customer.getCan()
-					+ ", getCustInfo returned::"
-					+ CustValidation.ALREADY_BILLED.name());
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:"
-					+ CustValidation.ALREADY_BILLED.name());
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
-			return;
-		}
 
 		try {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
-			if(newMeterFlag == 1)
-				dFrom = customer.getMeterFixDate();
-			else
-				dFrom = customer.getPrevBillMonth();
-			
+			dFrom = customer.getMeterFixDate();
 			dTo = bill_details.getBillDate().withDayOfMonth(1);
 
-			// Previously Metered or Locked and currently Metered
-			if ((newMeterFlag == 1 || (customer.getPrevBillType().equals("L") || customer
-					.getPrevBillType().equals("M")))
-					&& bill_details.getCurrentBillType().equals("M")) {
+			// Currently Metered
+			if (bill_details.getCurrentBillType().equals("M")) {
 
 				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
-						customer.getMetReadingDt());
+						bill_details.getMetReadingDt());
 
 				newMeterFlag = (days < 15 ? 1 : 0);
 
@@ -388,6 +323,31 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 
+				process_bill_common(customer, bill_details, dFrom, dTo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.debug(CPSUtils.stackTraceToString(e));
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(BrdStatus.FAILED.getValue());
+			brd.setRemarks("Failed with error:"
+					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return;
+		}
+
+	}
+
+	public void process_bill_common(CustDetails customer,
+			BillDetails bill_details, LocalDate dFrom, LocalDate dTo) {
+
+		try {
+			if (!bill_details.getCurrentBillType().equals("M")) {
 				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 				log.debug("Months:" + monthsDiff);
 
@@ -565,9 +525,8 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.debug("Invalid From or To Date:" + bill_details.getFromMonth()
-					+ "::::" + bill_details.getToMonth());
-
+			log.debug(CPSUtils.stackTraceToString(e));
+			
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
 			brd.setRemarks("Failed with error:"
@@ -581,6 +540,125 @@ public class BillingService {
 		}
 	}
 
+	public void process_bill_normal(BillDetails bill_details,
+			CustDetails customer) {
+
+		if (!validateCust(customer, bill_details))
+			return;
+
+		if (bfdRepository.findByCanAndToMonth(
+				customer.getCan(),
+				customer.getPrevBillMonth().format(
+						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
+			log.debug("Unable to process customer:" + customer.getCan()
+					+ ", getCustInfo returned::"
+					+ CustValidation.ALREADY_BILLED.name());
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(BrdStatus.FAILED.getValue());
+			brd.setRemarks("Failed with error:"
+					+ CustValidation.ALREADY_BILLED.name());
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return;
+		}
+
+		try {
+			if (!bill_details.getCurrentBillType().equals("M"))
+				bill_details.setPresentReading(customer.getPrevReading());
+
+			dFrom = customer.getPrevBillMonth();
+
+			dTo = bill_details.getBillDate().withDayOfMonth(1);
+
+			// Previously Metered or Locked and currently Metered
+			if ((customer.getPrevBillType().equals("L") || customer
+					.getPrevBillType().equals("M"))
+					&& bill_details.getCurrentBillType().equals("M")) {
+
+				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
+						customer.getMetReadingDt());
+
+					long billDays = ChronoUnit.DAYS.between(
+							customer.getMeterFixDate(), dTo);
+
+					if (billDays <= 0) {
+						throw new Exception("Invalid From:"
+								+ dFrom.format(DateTimeFormatter
+										.ofPattern("yyyyMM"))
+								+ " and To:"
+								+ dTo.format(DateTimeFormatter
+										.ofPattern("yyyyMM")));
+					}
+
+					log.debug("########################################");
+					log.debug("          METER BILL CASE (" + days + " days)");
+					log.debug("########################################");
+				
+				log.debug("Customer Info:" + customer.toString());
+				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
+			}
+			
+			process_bill_common(customer,bill_details,dFrom,dTo);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			log.debug(CPSUtils.stackTraceToString(e));
+			
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(BrdStatus.FAILED.getValue());
+			brd.setRemarks("Failed with error:"
+					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return;			
+		}
+	}
+
+	public void process_bill(BillDetails bill_details) {
+		if (bill_details == null)
+			return;
+
+		initBill(bill_details.getCan());
+
+		log.debug("Process customer with CAN:" + bill_details.getCan());
+		CustDetails customer = custDetailsRepository.findByCan(bill_details
+				.getCan());
+
+		if (customer == null) {
+			log.debug("Customer not found in CUST_DETAILS for CAN:"
+					+ bill_details.getCan());
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(0);
+			brd.setRemarks("Failed with error:"
+					+ "Customer not found in CUST_DETAILS for CAN:"
+					+ bill_details.getCan());
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return;
+		}
+
+		if (customer.getPrevBillMonth() == null) {
+			process_bill_new_meter(bill_details, customer);
+			return;
+		} else {
+			process_bill_normal(bill_details, customer);
+			return;
+		}
+
+	}
+
 	public String getPrevMonthStart() {
 		Calendar aCalendar = Calendar.getInstance();
 		// add -1 month to current month
@@ -592,6 +670,29 @@ public class BillingService {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
 		return formatter.format(date);
+	}
+
+	public boolean validateCust(CustDetails customer, BillDetails bill_details) {
+
+		CustValidation retVal = getCustInfo(customer, bill_details);
+
+		if (retVal != CustValidation.SUCCESS) {
+			// Unable to process customer
+			log.debug("Unable to process customer:" + customer.getId()
+					+ ", getCustInfo returned::" + retVal.name());
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(BrdStatus.FAILED.getValue());
+			brd.setRemarks("Failed with error:" + retVal.name());
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return false;
+		}
+
+		return true;
 	}
 
 	public CustValidation getCustInfo(CustDetails customer,
@@ -635,7 +736,7 @@ public class BillingService {
 					&& !bill_details.getCurrentBillType().equals("U"))
 				return CustValidation.INVALID_BILL_TYPE;
 		}
-		
+
 		return CustValidation.SUCCESS;
 	}
 
