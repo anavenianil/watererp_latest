@@ -443,6 +443,10 @@ public class BillingService {
 			// Subtract Avg Water charges in case of Lock Bill scenario
 			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
+					
+					bfd.setNoMeterAmt(((Double) charge.get("rate"))
+							.floatValue());
+					
 					log.debug("Usage Charge:" + (Double) charge.get("amount"));
 					bfd.setWaterCess(((Double) charge.get("amount"))
 							.floatValue());

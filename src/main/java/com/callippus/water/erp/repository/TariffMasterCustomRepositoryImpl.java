@@ -53,7 +53,7 @@ public class TariffMasterCustomRepositoryImpl extends
 	public List<java.util.Map<String, Object>> findTariffs(String can,
 			LocalDate validFrom, LocalDate validTo, float avgKL,
 			int unMeteredFlag, int newMeterFlag, int newMeterNoSvcFlag) {
-		String sql = "SELECT tariff_type_master_id, "+
+		String sql = "SELECT tariff_type_master_id, avg(rate) rate,"+
 				"       CASE "+
 				"           WHEN tariff_type_master_id=1 THEN CASE "+
 				"                                                 WHEN 1=? THEN sum(rate * months * min_unmetered_kl) "+
