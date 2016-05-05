@@ -15,7 +15,7 @@ public class Invoice
         return userDefinedField;
     }
 
-    public void setUserDefinedField (String UserDefinedField)
+    public void setUserDefinedField (String userDefinedField)
     {
         this.userDefinedField = userDefinedField;
     }
