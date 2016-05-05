@@ -1,6 +1,5 @@
 package com.callippus.water.erp.service;
 
-import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.MerchantMaster;
@@ -17,16 +16,9 @@ import com.callippus.water.erp.repository.OnlinePaymentOrderRepository;
 import com.callippus.water.erp.repository.OnlinePaymentResponseRepository;
 import com.callippus.water.erp.service.util.URLUtil;
 import com.callippus.water.erp.service.util.XMLUtil;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.io.StringReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -34,19 +26,12 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.xml.sax.SAXException;
 
 import javax.inject.Inject;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Validator;
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 /**
  * Service class for managing users.
