@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.OnlinePaymentCallback;
+import com.callippus.water.erp.domain.OnlinePaymentResponse;
 import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
 import com.callippus.water.erp.service.OnlinePaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -128,6 +129,25 @@ public class OnlinePaymentCallbackResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+    /**
+     * GET  /onlinePaymentCallbackByTxnRef/:id -> get the "id" onlinePaymentResponse.
+     */
+    @RequestMapping(value = "/onlinePaymentCallbackByTxnRef/{merchantTxnRef}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<OnlinePaymentCallback> getOnlinePaymentCallbackByTxnRef(@PathVariable String merchantTxnRef) {
+        log.debug("REST request to get getOnlinePaymentResponseByTxnRef : {}", merchantTxnRef);
+        OnlinePaymentCallback onlinePaymentResponse = onlinePaymentCallbackRepository.findByMerchantTxnRef(merchantTxnRef);
+        return Optional.ofNullable(onlinePaymentResponse)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    
     /**
      * DELETE  /onlinePaymentCallbacks/:id -> delete the "id" onlinePaymentCallback.
      */

@@ -188,10 +188,7 @@
         {
             "fieldId": 33,
             "fieldName": "lastPymtDt",
-            "fieldType": "LocalDate",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "LocalDate"
         },
         {
             "fieldId": 34,

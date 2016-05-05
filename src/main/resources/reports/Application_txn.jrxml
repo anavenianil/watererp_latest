@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Application_txn" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="dda6da65-b38f-480d-bc59-fcdbc727f9cf">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="544"/>
 	<parameter name="Id" class="java.lang.Integer">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR ID]]></parameterDescription>
 	</parameter>
@@ -349,43 +349,9 @@
 				</textElement>
 				<text><![CDATA[                                                     MATUMIZI YA MAJI(WEKA ALAMA YA )]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="12" y="425" width="54" height="20" uuid="c4ef4021-f1e0-4588-ac54-35bae75c9fdd"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[HOUSE]]></text>
-			</staticText>
-			<line>
-				<reportElement x="249" y="420" width="1" height="63" uuid="aa0a70bc-7df7-4f1c-87ab-d341f21ada16"/>
-			</line>
-			<line>
-				<reportElement x="87" y="420" width="1" height="63" uuid="41131aa6-1207-4728-ae0d-3295417273de"/>
-			</line>
-			<staticText>
-				<reportElement x="99" y="425" width="85" height="20" uuid="f60d7ae0-89fe-4c19-9dfa-d828db748567"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[INSTITUTION]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="280" y="425" width="111" height="20" uuid="fd6fef18-d877-4e61-afab-237d91cdc806"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[BUSINESS]]></text>
-			</staticText>
 			<line>
 				<reportElement x="457" y="420" width="1" height="63" uuid="1019f5d7-8e04-47d4-baf6-ca3960f5d675"/>
 			</line>
-			<staticText>
-				<reportElement x="495" y="425" width="111" height="20" uuid="9273084e-0c85-42b3-a5bc-230df82cf2ae"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[INDUSTRY]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="168" y="84" width="100" height="20" uuid="98fb4156-99ee-40df-b1d5-28c8977db1ac"/>
 				<textElement>
@@ -413,6 +379,13 @@
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{plot_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="421" width="182" height="20" uuid="d18c534d-7fee-4080-914c-388a0948b5f5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tariff_category_master_id}==1?'DOMESTIC':($F{tariff_category_master_id}==2?'INSTITUTIONAL':($F{tariff_category_master_id}==3?'COMMERCIAL':'NONE')))]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
