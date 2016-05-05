@@ -517,8 +517,9 @@ public class RequestProcessService {
 		rwh.setActionedDate(now);
 		rwh.setAssignedDate(now);
 
-		request_workflow_historyRepository.save(rwh);
-
+		RequestWorkflowHistory requestWorkflowHistory = request_workflow_historyRepository.save(rwh);
+		workflowService.setRequestWorkflowHistoryId(requestWorkflowHistory.getId());
+		
 		log.debug("hisroty ID    >>>" + workflowService.getHistoryID());
 		log.debug("Assigned Date    >>>" + workflowService.getAssignedDate());
 		log.debug("Stage ID    >>" + workflowService.getStageID());

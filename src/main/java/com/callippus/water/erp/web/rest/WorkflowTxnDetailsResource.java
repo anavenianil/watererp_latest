@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.WorkflowTxnDetailsRepository;
@@ -91,10 +94,18 @@ public class WorkflowTxnDetailsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<WorkflowTxnDetails>> getAllWorkflowTxnDetailss(Pageable pageable)
+    public ResponseEntity<List<WorkflowTxnDetails>> getAllWorkflowTxnDetailss(Pageable pageable,
+    		@RequestParam(value = "requestId", required = false) Integer requestId)
         throws URISyntaxException {
         log.debug("REST request to get a page of WorkflowTxnDetailss");
-        Page<WorkflowTxnDetails> page = workflowTxnDetailsRepository.findAll(pageable); 
+        //Page<WorkflowTxnDetails> page = workflowTxnDetailsRepository.findAll(pageable);
+        Page<WorkflowTxnDetails> page;
+        if(requestId == null){
+        	page = workflowTxnDetailsRepository.findAll(pageable);
+        }
+        else{
+        	page = workflowTxnDetailsRepository.findByRequestId(pageable, requestId);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/workflowTxnDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -145,11 +156,16 @@ public class WorkflowTxnDetailsResource {
         try{
         	workflowService.getUserDetails();
         	custDetailsChangeWorkflowService.createTxn(wtd);
-        	workflowService.getRequestID();
+        	
+            Iterator<WorkflowTxnDetails> iterator = workflowTxnDetailss.iterator();
+            while(iterator.hasNext()){
+              iterator.next().setRequestId(Integer.valueOf(workflowService.getRequestWorkflowHistoryId().toString()));
+            }
         }
         catch(Exception e){
         	System.out.println(e);
         }
+        workflowTxnDetailsRepository.save(workflowDTO.getWorkflowTxnDetailss());
         
         return ResponseEntity.created(new URI("/api/workflowTxnDetailss/"))
             .headers(HeaderUtil.createEntityCreationAlert("workflowTxnDetails",""))

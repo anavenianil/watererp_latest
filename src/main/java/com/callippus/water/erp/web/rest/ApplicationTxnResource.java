@@ -402,7 +402,7 @@ public class ApplicationTxnResource {
 		String division = feasibility.getDivisionMaster().getDivisionCode();
 		String street = feasibility.getStreetMaster().getStreetNo();
 		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
-		Integer can = applicationTxnRepository.findByCan(division, street);
+		Integer can = custDetailsRepository.findByCan(division, street);
 		if(can == null){
 			can =1;
 		}
@@ -461,6 +461,23 @@ public class ApplicationTxnResource {
 				 HttpStatus.OK);
 	}
 	
+	
+	/**
+     * GET  /ApplicationTxns/:id -> get the "id" applicationTxn.
+     */
+    @RequestMapping(value = "/applicationTxns/searchCan/{can}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ApplicationTxn> getApplicationTxn(@PathVariable String can) {
+        log.debug("REST request to get CustDetails : {}", can);
+        ApplicationTxn applicationTxn = applicationTxnRepository.findByCan(can);
+        return Optional.ofNullable(applicationTxn)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 	
 	/**
 	 * Display Requisition report
