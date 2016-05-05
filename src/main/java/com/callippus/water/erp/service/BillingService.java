@@ -208,7 +208,10 @@ public class BillingService {
 			BillFullDetails bfd = brd.getBillFullDetails();
 
 			customer.setPrevBillType(bfd.getCurrentBillType());
-			customer.setPrevBillMonth(bfd.getBillDate().withDayOfMonth(1));
+			
+			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			
+			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth()+"01", date_format));
 			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
 					.floatValue(), 2));
 			customer.setPrevReading(bfd.getPresentReading());
@@ -519,7 +522,7 @@ public class BillingService {
 
 			bfd.setUnits(unitsKL);
 			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
-			bfd.setToMonth(dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
+			bfd.setToMonth(bill_details.getToMonth());
 
 			log.debug("This is the BillFullDetails:" + bfd);
 

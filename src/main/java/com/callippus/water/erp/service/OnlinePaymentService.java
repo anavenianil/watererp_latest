@@ -85,7 +85,7 @@ public class OnlinePaymentService {
 		log.debug("This is the unifiedPaymentResponse:"
 				+ unifiedPaymentResponse);
 
-		String merchantResponseXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>     <Currency>TSh</Currency>     <MerchantCode>Test001</MerchantCode>     <MerchantRefNumber>9312171800</MerchantRefNumber>     <PaymentMode>TIGOPESADIR</PaymentMode>     <ServiceCode>TESTS001</ServiceCode>     <Message>SUCCESS</Message>     <ResponseCode>200</ResponseCode>     <TotalAmountPaid>-280.0</TotalAmountPaid> <UserDefinedField>123</UserDefinedField> </OrderResponse>";
+		String merchantResponseXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>6418940697</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>1099.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>";
 		
 		boolean isValid = XMLUtil.validateXMLSchema("/schema/UnifiedResponse.xsd", merchantResponseXML);
 				
@@ -114,7 +114,7 @@ public class OnlinePaymentService {
 		opc.setResponseCode(pgResponse.getResponseCode());
 		opc.setServiceCode(pgResponse.getServiceCode());
 		opc.setTotalAmountPaid(pgResponse.getTotalAmountPaid());
-		opc.setUserDefinedField(pgResponse.getUserDefinedField());
+		opc.setUserDefinedField(pgResponse.getUserDefinedFields().getInvoice().getUserDefinedField());
 		opc.setMerchantTxnRef(pgResponse.getMerchantRefNumber());
 
 		MerchantMaster mm = merchantMasterRepository
