@@ -47,28 +47,21 @@ angular.module('watererpApp')
 				return res;
 			});
         }
+        $scope.load = function(id) {
+        	$scope.customerComplaintss=[];
+			CustomerComplaints.get({
+				id : id
+			}, function(result) {
+				//$scope.customerComplaints = result;
+				$scope.customerComplaintss.push(result);
+			});
+		};
         
         $scope.onSelect = function($item, $model, $label) {
-			console.log($item);
 			var arr = $item.split("-");
-
-			/*$scope.collDetails.can = arr[0];
-			$scope.collDetails.consName = arr[1];
-			$scope.collDetails.address = arr[2];
-			$scope.custInfo = "";
-			$scope.isValidCust = true;
-
-			CustDetailsService
-					.get(
-							{
-								can : $scope.collDetails.can
-							},
-							function(result) {
-								$scope.custDetails = result;
-								$scope.customerComplaints.custDetails.consName = $scope.custDetails.consName;
-								$scope.customerComplaints.can = $scope.custDetails.can;
-								$scope.customerComplaints.tariffCategory = $scope.custDetails.tariffCategoryMaster.tariffCategory;
-							});*/
+			$scope.complaintInfo = "";
+			$scope.load(arr[2]);
+			
 		};
 
         $scope.clear = function () {

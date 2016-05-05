@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span>ConnectionTerminate</span> {{connectionTerminate.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Can</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{connectionTerminate.can}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>RequestDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{connectionTerminate.requestDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterRecovered</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{connectionTerminate.meterRecovered}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LastMeterReading</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{connectionTerminate.lastMeterReading}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterRecoveredDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{connectionTerminate.meterRecoveredDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>meterDetails</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="meterDetails.detail({id:connectionTerminate.meterDetails.id})">{{connectionTerminate.meterDetails.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
