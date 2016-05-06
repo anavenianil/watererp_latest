@@ -5,6 +5,7 @@
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Bill Details</h3>
 		</div>
+
 		<div class="list-group">
 			<div class="list-group-item">
 				<div class="modal-body">
@@ -56,13 +57,7 @@
 							<div class="form-group">
 								<div class='input-group' id='field_fromMonth'>
 									<input id="field_fromMonth" type="text" class="form-control"
-										uib-datepicker-popup="{{dateformat}}"
 										ng-model="billDetails.fromMonth" readonly />
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default"  disabled>
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button>
-									</span>
 								</div>
 							</div>
 						</div>
@@ -71,18 +66,8 @@
 							<div class="form-group">
 								<div class='input-group' id='field_toMonth'>
 									<input id="field_toMonth" type="text" class="form-control"
-										uib-datepicker-popup="{{dateformat}}"
 										ng-model="billDetails.toMonth" disabled />
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default" disabled>
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button>
-									</span>
 								</div>
-							</div>
-							<div ng-show="editForm.toMonth.$invalid">
-								<p class="help-block" ng-show="editForm.toMonth.$error.required">This
-									field is required.</p>
 							</div>
 						</div>
 					</div>
@@ -96,7 +81,7 @@
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="billDetails.prevBillMonth" readonly />
 									<span class="input-group-btn">
-										<button type="button" class="btn btn-default"  disabled>
+										<button type="button" class="btn btn-default" disabled>
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
@@ -146,7 +131,7 @@
 								<div class='input-group' id='field_metReadingDt'>
 									<input id="field_metReadingDt" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="billDetails.metReadingDt"
+										ng-model="billDetails.metReadingDt" ng-change="setToMonth()"
 										is-open="datePickerForMetReadingDt.status.opened" required />
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"

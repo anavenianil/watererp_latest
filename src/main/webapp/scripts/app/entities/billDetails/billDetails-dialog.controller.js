@@ -64,7 +64,7 @@ angular
 						$scope.reset();
 						$scope.clear();
 					};
-
+					
 					$scope.getLocation = function(val) {
 						$scope.isValidCust = false;
 
@@ -99,9 +99,14 @@ angular
 			        };
 
 			        $scope.datePickerForMetReadingDtOpen = function($event) {
-			            $scope.datePickerForMetReadingDt.status.opened = true;
+			            $scope.datePickerForMetReadingDt.status.opened = true;			            
 			        };
 
+			        $scope.setToMonth = function()
+			        {
+			        	$scope.billDetails.toMonth = $filter('date')($scope.billDetails.metReadingDt, "yyyyMM") ;
+			        }
+			        
 					$scope.getCustDetails = function(can) {
 						CustDetailsService
 								.get(
