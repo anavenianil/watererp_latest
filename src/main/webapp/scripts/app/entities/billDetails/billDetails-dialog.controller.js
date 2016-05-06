@@ -48,7 +48,11 @@ angular
 					};
 
 					$scope.save = function() {
-						$scope.billDetails.billDate = $scope.billDetails.metReadingDt;
+						
+						var toDate = $scope.billDetails.toMonth + "01"; //YYYYMMDD
+						var pattern = /(\d{4})(\d{2})(\d{2})/;
+						$scope.billDetails.billDate = new Date(toDate.replace(pattern, '$1-$2-$3'));
+						
 						console.log("About to push billDetails:"
 								+ JSON.stringify($scope.billDetails))
 						$scope.isSaving = true;

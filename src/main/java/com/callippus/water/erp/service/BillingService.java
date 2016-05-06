@@ -347,16 +347,17 @@ public class BillingService {
 	public void process_bill_common(CustDetails customer,
 			BillDetails bill_details, LocalDate dFrom, LocalDate dTo) {
 
-		try {
+		try {			
+			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
+
+			if (monthsDiff == 0)
+				monthsDiff = 1;
+
+			log.debug("Months:" + monthsDiff);
+			
 			if (bill_details.getCurrentBillType().equals("M")) {
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
 
-				if (monthsDiff == 0)
-					monthsDiff = 1;
-
-				log.debug("Months:" + monthsDiff);
-
-				if (!customer.getPrevReading().equals("0") && monthsDiff != 0) {
+				if (!customer.getPrevReading().equals("0")) {
 					unitsKL = bill_details.getPresentReading()
 							- bill_details.getInitialReading();
 
@@ -390,13 +391,6 @@ public class BillingService {
 				log.debug("          LOCK BILL CASE");
 				log.debug("########################################");
 
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
-
-				if (monthsDiff == 0)
-					monthsDiff = 1;
-
-				log.debug("Months:" + monthsDiff);
-
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
@@ -410,13 +404,6 @@ public class BillingService {
 				log.debug("########################################");
 				log.debug("          UNMETERED BILL CASE");
 				log.debug("########################################");
-
-				long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
-
-				if (monthsDiff == 0)
-					monthsDiff = 1;
-
-				log.debug("Months:" + monthsDiff);
 
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
@@ -521,7 +508,7 @@ public class BillingService {
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
 
 			bfd.setUnits(unitsKL);
-			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
+			bfd.setFromMonth(bill_details.getFromMonth());
 			bfd.setToMonth(bill_details.getToMonth());
 
 			log.debug("This is the BillFullDetails:" + bfd);
@@ -594,9 +581,6 @@ public class BillingService {
 					.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
 
-				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
-						customer.getMetReadingDt());
-
 				long billDays = ChronoUnit.DAYS.between(
 						customer.getMeterFixDate(), dTo);
 
@@ -608,7 +592,7 @@ public class BillingService {
 				}
 
 				log.debug("########################################");
-				log.debug("          METER BILL CASE (" + days + " days)");
+				log.debug("          METER BILL CASE (" + billDays + " days)");
 				log.debug("########################################");
 
 				log.debug("Customer Info:" + customer.toString());
