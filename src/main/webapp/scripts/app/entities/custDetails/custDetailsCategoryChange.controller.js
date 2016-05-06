@@ -4,14 +4,10 @@ angular
 		.module('watererpApp')
 		.controller(
 				'CustDetailsCategoryChangeController',
-				/*
-				 * ['$scope', '$stateParams', '$uibModalInstance', 'entity',
-				 * 'CustDetails', 'TariffCategoryMaster',
-				 */
-				function($scope, $stateParams, /* $uibModalInstance, entity, */
-				CustDetails, TariffCategoryMaster, $state, $http,
+				function($scope, $stateParams, CustDetails,
+						TariffCategoryMaster, $state, $http,
 						CustDetailsSearchCAN, WorkflowTxnDetails,
-						PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks) {
+						PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks, RequestWorkflowHistory) {
 
 					$scope.custDetails = {};
 					$scope.tariffcategorymasters = TariffCategoryMaster.query();
@@ -20,11 +16,22 @@ angular
 					$scope.workflowDTO.requestWorkflowHistory = {};
 					$scope.workflowDTO.workflowTxnDetailss = {};
 					$scope.applicationTxn = {};
-
+					$scope.workflowDTO.workflowTxnDetailss = [];
+					
 					console.log("These are the state:"
 							+ JSON.stringify($state.current.name));
 
-					$scope.workflowDTO.workflowTxnDetailss = [];
+					$scope.getWorkflowHistoryByDomainId = function(domainId) {
+			        	$scope.requestWorkflowHistorys = [];
+			            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: domainId, requestId: 8}, function(result, headers) {
+			                $scope.links = ParseLinks.parse(headers('link'));
+			                for (var i = 0; i < result.length; i++) {
+			                    $scope.requestWorkflowHistorys.push(result[i]);
+			                }
+			                $scope.workflowDTO.requestWorkflowHistory.assignedDate = $scope.requestWorkflowHistorys[0].assignedDate;
+			            });
+			        };
+					
 
 					if ($state.current.name === "custDetails.categoryChange") {
 						$scope.workflowDTO.workflowTxnDetailss[0] = {};
@@ -75,14 +82,14 @@ angular
 						// $uibModalInstance.dismiss('cancel');
 					};
 
-					$scope.datePickerForRequestedDate = {};
+					$scope.datePickerForAssignedDate = {};
 
-					$scope.datePickerForRequestedDate.status = {
+					$scope.datePickerForAssignedDate.status = {
 						opened : false
 					};
 
-					$scope.datePickerForRequestedDateOpen = function($event) {
-						$scope.datePickerForRequestedDate.status.opened = true;
+					$scope.datePickerForAssignedDateOpen = function($event) {
+						$scope.datePickerForAssignedDate.status.opened = true;
 					};
 
 					$scope.disableOrg = function(categoryId) {
@@ -123,21 +130,15 @@ angular
 										function(result) {
 											$scope.custDetails = result;
 											$scope.workflowDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
-											// $scope.workflowDTO.previousValue
-											// =
-											// $scope.custDetails.tariffCategoryMaster;
-											//$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.custDetails.tariffCategoryMaster.id;
-											$scope.workflowDTO.workflowTxnDetailss[1].previousValue = parseInt($scope.custDetails.tariffCategoryMaster.id,10)
+											$scope.workflowDTO.workflowTxnDetailss[1].previousValue = parseInt(
+													$scope.custDetails.tariffCategoryMaster.id,
+													10)
 										});
 					};
 
 					// getApplicationTxn by CAN
 					$scope.getApplicationTxn = function(can) {
-						ApplicationTxnSearchCAN
-								.get(
-										{
-											can : can
-										},
+						ApplicationTxnSearchCAN.get({can : can},
 										function(result) {
 											$scope.applicationTxn = result;
 											$scope.workflowDTO.workflowTxnDetailss[2].previousValue = $scope.applicationTxn.organization;
@@ -163,7 +164,6 @@ angular
 					};
 
 					$scope.saveChanges = function() {
-
 						$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.workflowDTO.workflowTxnDetailss[1].previousValue.id;
 						console.log("WorkflowDTO data being posted to server:"
 								+ JSON.stringify($scope.workflowDTO));
@@ -182,32 +182,41 @@ angular
 					}
 
 					$scope.getWorkflowTxnDetails = function(requestId) {
-						WorkflowTxnDetails
-								.query(
-										{
-											page : $scope.page,
-											size : 20,
-											requestId : requestId
-										},
-										function(result, headers) {
-											$scope.links = ParseLinks
-													.parse(headers('link'));
-											for (var i = 0; i < result.length; i++) {
-												if (i == 1) {
-													result[i].previousValue = parseInt(
-															result[i].previousValue,
-															10);
-													result[i].newValue = parseInt(
-															result[i].newValue,
-															10);
-												}
-												$scope.workflowDTO.workflowTxnDetailss
-														.push(result[i]);
-											}
-										});
+						WorkflowTxnDetails.query({
+							page : $scope.page,
+							size : 20,
+							requestId : requestId
+						}, function(result, headers) {
+							$scope.links = ParseLinks.parse(headers('link'));
+							for (var i = 0; i < result.length; i++) {
+								if (i == 1) {
+									result[i].previousValue = parseInt(
+											result[i].previousValue, 10);
+									result[i].newValue = parseInt(
+											result[i].newValue, 10);
+								}
+								$scope.workflowDTO.workflowTxnDetailss
+										.push(result[i]);
+							}
+							
+							$scope.getCustDetails($scope.workflowDTO.workflowTxnDetailss[0].referenceNumber);
+							$scope.getWorkflowHistoryByDomainId($scope.workflowDTO.workflowTxnDetailss[0].id);
+						});
 					};
 
 					if ($stateParams.requestId != null) {
 						$scope.getWorkflowTxnDetails($stateParams.requestId);
 					}
-				}/*]*/);
+					
+					//approve a request
+					$scope.approve = function(workflowDTO){
+			        	console.log(workflowDTO);
+			        	return $http.post('/api/workflowTxnDetailsApprove',
+								$scope.workflowDTO).then(
+								function(response) {
+									console.log("Server response:"
+											+ JSON.stringify(response));
+								});
+						//ApplicationTxnService.approveRequest(id, remarks);
+			        }
+				});
