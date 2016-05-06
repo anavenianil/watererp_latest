@@ -199,6 +199,22 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
+            .state('custDetails.categoryChangeEdit', {
+                parent: 'custDetails',
+                url: '/categoryChangeEdit/:requestId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetailsCategoryChange.html',
+                        controller: 'CustDetailsCategoryChangeController'
+                    }
+                },
+                resolve: {
+                }
+            })
             .state('custDetails.pipeSizeChange', {
                 parent: 'custDetails',
                 url: '/pipeSizeChange',

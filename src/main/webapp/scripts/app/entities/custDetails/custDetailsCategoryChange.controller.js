@@ -3,33 +3,27 @@
 angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster) {
+        		WorkflowTxnDetails, PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks) {
 
-        //$scope.custDetails = entity;
 		$scope.custDetails = {};
         $scope.tariffcategorymasters = TariffCategoryMaster.query();
         $scope.pipeSizeMasters = PipeSizeMaster.query();
-        //$scope.requestWorkflowHistory = {};
         $scope.workflowDTO = {};
         $scope.workflowDTO.requestWorkflowHistory = {};
         $scope.workflowDTO.workflowTxnDetailss = {};
-        /*$scope.requestMasters = [ {
-			id : "8",
-			requestType : "CONNECTION CATEGORY"
-		}, {
-			id : "9",
-			requestType : "PIPE SIZE"
-		}, {
-			id : "10",
-			requestType : "CHANGE NAME"
-		}, {
-			id : "11",
-			requestType : "CONNECTION TERMINATION"
-		} ];*/
+        $scope.applicationTxn = {};
+
+        
         
         $scope.workflowDTO.workflowTxnDetailss = [];
         $scope.workflowDTO.workflowTxnDetailss[0] = {};
         $scope.workflowDTO.workflowTxnDetailss[1] = {};
+        
+        $scope.workflowDTO.workflowTxnDetailss[2] = {};
+        $scope.workflowDTO.workflowTxnDetailss[3] = {};
+        $scope.workflowDTO.workflowTxnDetailss[4] = {};
+        $scope.workflowDTO.workflowTxnDetailss[5] = {};
+        $scope.workflowDTO.workflowTxnDetailss[6] = {};
         
         
         $scope.workflowDTO.workflowTxnDetailss[0].columnName="prevReading";
@@ -38,44 +32,38 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
 	       
 	    $scope.workflowDTO.workflowTxnDetailss[1].columnName="TarrifCategoryMaster";
 	    $scope.workflowDTO.workflowTxnDetailss[1].requestMaster = {};
-	    $scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8; 
-                        
+	    $scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8;
+	    
+	    $scope.workflowDTO.workflowTxnDetailss[2].columnName="organisation";
+	    $scope.workflowDTO.workflowTxnDetailss[2].requestMaster = {};
+	    $scope.workflowDTO.workflowTxnDetailss[2].requestMaster.id = 8;
+	    
+	    $scope.workflowDTO.workflowTxnDetailss[3].columnName="organisationName";
+	    $scope.workflowDTO.workflowTxnDetailss[3].requestMaster = {};
+	    $scope.workflowDTO.workflowTxnDetailss[3].requestMaster.id = 8;
+	    
+	    $scope.workflowDTO.workflowTxnDetailss[4].columnName="designation";
+	    $scope.workflowDTO.workflowTxnDetailss[4].requestMaster = {};
+	    $scope.workflowDTO.workflowTxnDetailss[4].requestMaster.id = 8;
+	    
+	    $scope.workflowDTO.workflowTxnDetailss[5].columnName="deedDoc";
+	    $scope.workflowDTO.workflowTxnDetailss[5].requestMaster = {};
+	    $scope.workflowDTO.workflowTxnDetailss[5].requestMaster.id = 8;
+	    
+	    $scope.workflowDTO.workflowTxnDetailss[6].columnName="agreementDoc";
+	    $scope.workflowDTO.workflowTxnDetailss[6].requestMaster = {};
+	    $scope.workflowDTO.workflowTxnDetailss[6].requestMaster.id = 8;                
         
         
-        console.log($scope.changeCases);
         $scope.dtmax = new Date();
-        $scope.load = function(id) {
-            CustDetails.get({id : id}, function(result) {
-                $scope.custDetails = result;
-            });
-        };
         
         if($stateParams.id != null){
         	$scope.load($stateParams.id);
         }
-
-        var onSaveSuccess = function (result) {
-            $scope.$emit('watererpApp:custDetailsUpdate', result);
-            //$uibModalInstance.close(result);
-            $scope.isSaving = false;
-            $state.go('custDetails');
-        };
-
-        var onSaveError = function (result) {
-            $scope.isSaving = false;
-        };
-
-        $scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.custDetails.id != null) {
-                CustDetails.update($scope.custDetails, onSaveSuccess, onSaveError);
-            } else {
-                CustDetails.save($scope.custDetails, onSaveSuccess, onSaveError);
-            }
-        };
+     
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         };
         
         $scope.datePickerForRequestedDate = {};
@@ -88,6 +76,16 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
             $scope.datePickerForRequestedDate.status.opened = true;
         };
         
+        $scope.disableOrg = function(categoryId){
+        	console.log("Category id: "+categoryId);
+			if(categoryId === 1){
+				$scope.workflowDTO.workflowTxnDetailss[2] = false;
+				$scope.workflowDTO.workflowTxnDetailss[3] = "";
+				$scope.workflowDTO.workflowTxnDetailss[4] = "";
+				$scope.workflowDTO.workflowTxnDetailss[5] = "";
+				$scope.workflowDTO.workflowTxnDetailss[6] = "";
+			}
+		}
         
         
         //to search CAN
@@ -107,13 +105,28 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
 			});
 		}
         
+        //get cust details by CAN
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.workflowDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
+                $scope.workflowDTO.previousValue = $scope.custDetails.tariffCategoryMaster;
                 $scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.custDetails.tariffCategoryMaster.id;
             });
         };
+        
+        //getApplicationTxn by CAN
+        $scope.getApplicationTxn = function(can) {
+        	ApplicationTxnSearchCAN.get({can : can}, function(result) {
+                $scope.applicationTxn = result;
+                $scope.workflowDTO.workflowTxnDetailss[2].previousValue = $scope.applicationTxn.organization;
+                $scope.workflowDTO.workflowTxnDetailss[3].previousValue = $scope.applicationTxn.organizationName;
+                $scope.workflowDTO.workflowTxnDetailss[4].previousValue = $scope.applicationTxn.designation
+                $scope.workflowDTO.workflowTxnDetailss[5].previousValue = $scope.applicationTxn.deedDoc;
+                $scope.workflowDTO.workflowTxnDetailss[6].previousValue = $scope.applicationTxn.agreementDoc;
+            });
+        };
+        
         
         //when selected searched CAN in DropDown
         $scope.onSelect = function($item, $model, $label) {
@@ -124,15 +137,14 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
 			$scope.custDetails.name = arr[1];
 			$scope.custDetails.address = arr[2];
 			$scope.getCustDetails($scope.custDetails.can);
+			$scope.getApplicationTxn($scope.custDetails.can);
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
 		};
 		
 		
 		$scope.saveChanges = function(){
-			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowDTO.workflowTxnDetailss));
 			console.log("WorkflowDTO data being posted to server:" + JSON.stringify($scope.workflowDTO));
-			$scope.workflowDTO.workflowTxnDetailss[1].previousValue = 3;//$scope.workflowDTO.workflowTxnDetails[1].previousValue.id;
 			
 			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowDTO).then(function(response) {
 				console.log("Server response:" + JSON.stringify(response));
@@ -141,7 +153,18 @@ angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
 //				});
 //				return res;
 			});
-//			  WorkflowTxnDetails.save($scope.workflowTxnDetailsArr, onSaveSuccess, onSaveError);
 		}
 		
+		$scope.getWorkflowTxnDetails = function(requestId) {
+            WorkflowTxnDetails.query({page: $scope.page, size: 20, requestId: requestId}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.workflowDTO.workflowTxnDetailss.push(result[i]);
+                }
+            });
+        };
+        
+        if($stateParams.requestId != null){
+        	$scope.getWorkflowTxnDetails($stateParams.requestId);
+        }
 }/*]*/);
