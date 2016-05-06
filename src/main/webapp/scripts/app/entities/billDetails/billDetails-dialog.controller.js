@@ -4,7 +4,7 @@ angular
 		.module('watererpApp')
 		.controller(
 				'BillDetailsDialogController',
-				function($scope, $state, BillDetails, CustDetails,
+				function($scope, $state, $filter, BillDetails, CustDetails,
 						CustDetailsService, ParseLinks, $stateParams, $http,
 						User) {
 
@@ -48,6 +48,8 @@ angular
 					};
 
 					$scope.save = function() {
+						$scope.billDetails.billDate = $scope.billDetails.metReadingDt;
+						console.log("About to push billDetails:" + JSON.stringify($scope.billDetails))
 						$scope.isSaving = true;
 						if ($scope.billDetails.id != null) {
 							BillDetails.update($scope.billDetails,
@@ -113,13 +115,11 @@ angular
 											$scope.billDetails.address = $scope.custDetails.address;
 											$scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
 											if ($scope.billDetails.prevBillMonth == null) {
-												$scope.billDetails.fromMonth = $scope.custDetails.meterFixDate;
+												$scope.billDetails.fromMonth = $filter('date')($scope.custDetails.meterFixDate, "yyyyMM") ;
 												$scope.billDetails.initialReading = $scope.custDetails.prevReading;
-												$scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;
+												$scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;												
 											} else {
-												var date2 = new Date(
-														$scope.billDetails.prevBillMonth);
-												$scope.billDetails.fromMonth = date2.getFullYear() + date2.getMonth();
+												$scope.billDetails.fromMonth = $filter('date')($scope.billDetails.prevBillMonth, "yyyyMM");
 												$scope.billDetails.initialReading = $scope.custDetails.prevReading;
 												$scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
 											}
