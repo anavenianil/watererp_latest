@@ -41,12 +41,21 @@ public class BillDetailsResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<BillDetails> createBillDetails(@Valid @RequestBody BillDetails billDetails) throws URISyntaxException {
-        log.debug("REST request to save BillDetails : {}", billDetails);
+    public ResponseEntity<BillDetails> createBillDetails(@Valid @RequestBody BillDetails billDetails) throws URISyntaxException, Exception {
+    	log.debug("REST request to save BillDetails : {}", billDetails);
+        
         if (billDetails.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("billDetails", "idexists", "A new billDetails cannot already have an ID")).body(null);
         }
+        
+        BillDetails bd = billDetailsRepository.findValidBillForCan(billDetails.getCan());
+        
+        if(bd != null){
+        	throw new Exception("Previous meter reading with id in Unbilled state. Please CANCEL or BILL before proceeding:"+ bd.getId().toString());
+        }
+        
         BillDetails result = billDetailsRepository.save(billDetails);
+        
         return ResponseEntity.created(new URI("/api/billDetailss/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("billDetails", result.getId().toString()))
             .body(result);
@@ -59,7 +68,7 @@ public class BillDetailsResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<BillDetails> updateBillDetails(@Valid @RequestBody BillDetails billDetails) throws URISyntaxException {
+    public ResponseEntity<BillDetails> updateBillDetails(@Valid @RequestBody BillDetails billDetails) throws URISyntaxException, Exception {
         log.debug("REST request to update BillDetails : {}", billDetails);
         if (billDetails.getId() == null) {
             return createBillDetails(billDetails);
@@ -102,6 +111,22 @@ public class BillDetailsResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /**
+     * GET  /billDetailss/findByCan/:can -> get the "can" billDetails.
+     */
+    @RequestMapping(value = "/billDetailss/findByCan/{can}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<BillDetails> findByCan(@PathVariable String can) {
+        log.debug("REST request to get BillDetails : {}", can);
+        BillDetails billDetails = billDetailsRepository.findValidBillForCan(can);
+        return Optional.ofNullable(billDetails)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
     /**
      * DELETE  /billDetailss/:id -> delete the "id" billDetails.
      */

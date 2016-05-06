@@ -4,10 +4,11 @@ angular
 		.module('watererpApp')
 		.controller(
 				'BillDetailsDialogController',
-				function($scope, $state, $filter, BillDetails, CustDetails,
+				function($scope, $state, $filter, BillDetails, BillDetailsSvc, CustDetails,
 						CustDetailsService, ParseLinks, $stateParams, $http,
 						User) {
 
+					$scope.recordExists = false;
 					$scope.billDetailss = [];
 					$scope.predicate = 'id';
 					$scope.billDetails = {};
@@ -48,11 +49,13 @@ angular
 					};
 
 					$scope.save = function() {
-						
+						$scope.billDetails.status = 'INITIATED';
+						$scope.billDetails.insertDt = new Date();
 						var toDate = $scope.billDetails.toMonth + "01"; //YYYYMMDD
 						var pattern = /(\d{4})(\d{2})(\d{2})/;
-						$scope.billDetails.billDate = new Date(toDate.replace(pattern, '$1-$2-$3'));
-						
+						$scope.billDetails.billDate = new Date(toDate.replace(
+								pattern, '$1-$2-$3'));
+
 						console.log("About to push billDetails:"
 								+ JSON.stringify($scope.billDetails))
 						$scope.isSaving = true;
@@ -72,6 +75,7 @@ angular
 
 					$scope.getLocation = function(val) {
 						$scope.isValidCust = false;
+						$scope.recordExists = false;
 
 						return $http.get('api/custDetailss/searchCAN/' + val, {
 							params : {
@@ -89,7 +93,7 @@ angular
 
 					$scope.onSelect = function($item, $model, $label) {
 						var arr = $item.split("-");
-						$scope.billDetails.can = arr[0];
+						$scope.billDetails.can = arr[0].trim();
 						$scope.billDetails.consName = arr[1];
 						$scope.billDetails.address = arr[2];
 						$scope.custInfo = "";
@@ -135,9 +139,9 @@ angular
 					}
 
 					$scope.checkDates = function() {
-						
+
 						$scope.billDetails.forceManual = false;
-						
+
 						if ($scope.billDetails.fromMonth != null
 								&& typeof $scope.billDetails.fromMonth != "undefined"
 								&& $scope.billDetails.toMonth != null
@@ -170,6 +174,16 @@ angular
 					}
 
 					$scope.getCustDetails = function(can) {
+
+						BillDetailsSvc.findByCan({
+							can : can
+						}).then(function(result) {
+							if(result != null && result !== 'error'){
+								$scope.billDetails = result;
+								$scope.recordExists = true;
+							}
+						});
+
 						CustDetailsService
 								.get(
 										{

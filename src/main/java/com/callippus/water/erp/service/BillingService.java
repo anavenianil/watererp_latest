@@ -7,6 +7,7 @@ import com.callippus.water.erp.domain.BillRunDetails;
 import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.enumeration.BillingStatus;
 import com.callippus.water.erp.mappings.BillMapper;
 import com.callippus.water.erp.repository.BillDetailsRepository;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
@@ -206,6 +207,7 @@ public class BillingService {
 			CustDetails customer = custDetailsRepository
 					.findByCan(brd.getCan());
 			BillFullDetails bfd = brd.getBillFullDetails();
+			BillDetails bd = brd.getBillDetails();
 
 			customer.setPrevBillType(bfd.getCurrentBillType());
 			
@@ -219,6 +221,9 @@ public class BillingService {
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
 
 			custDetailsRepository.save(customer);
+			
+			bd.setStatus(BillingStatus.COMMITTED);
+			billDetailsRepository.save(bd);
 
 			brd.setStatus(BrdStatus.COMMITTED.getValue());
 			billRunDetailsRepository.save(brd);
@@ -277,7 +282,7 @@ public class BillingService {
 	}
 
 	public void process_bill(String can) {
-		BillDetails bill_details = billDetailsRepository.findByCan(can);
+		BillDetails bill_details = billDetailsRepository.findValidBillForCan(can);
 		process_bill(bill_details);
 	}
 
