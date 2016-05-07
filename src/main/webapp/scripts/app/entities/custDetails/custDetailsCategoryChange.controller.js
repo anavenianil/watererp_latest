@@ -1,147 +1,234 @@
 'use strict';
 
-angular.module('watererpApp').controller('CustDetailsCategoryChangeController',
-   /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
-        function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster) {
+angular
+		.module('watererpApp')
+		.controller(
+				'CustDetailsCategoryChangeController',
+				function($scope, $stateParams, CustDetails,
+						TariffCategoryMaster, $state, $http,
+						CustDetailsSearchCAN, WorkflowTxnDetails,
+						PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks, RequestWorkflowHistory) {
 
-        //$scope.custDetails = entity;
-		$scope.custDetails = {};
-        $scope.tariffcategorymasters = TariffCategoryMaster.query();
-        $scope.pipeSizeMasters = PipeSizeMaster.query();
-        //$scope.requestWorkflowHistory = {};
-        $scope.workflowDTO = {};
-        $scope.workflowDTO.requestWorkflowHistory = {};
-        $scope.workflowDTO.workflowTxnDetailss = {};
-        /*$scope.requestMasters = [ {
-			id : "8",
-			requestType : "CONNECTION CATEGORY"
-		}, {
-			id : "9",
-			requestType : "PIPE SIZE"
-		}, {
-			id : "10",
-			requestType : "CHANGE NAME"
-		}, {
-			id : "11",
-			requestType : "CONNECTION TERMINATION"
-		} ];*/
-        
-        $scope.workflowDTO.workflowTxnDetailss = [];
-        $scope.workflowDTO.workflowTxnDetailss[0] = {};
-        $scope.workflowDTO.workflowTxnDetailss[1] = {};
-        
-        
-        $scope.workflowDTO.workflowTxnDetailss[0].columnName="prevReading";
-	    $scope.workflowDTO.workflowTxnDetailss[0].requestMaster = {};
-	    $scope.workflowDTO.workflowTxnDetailss[0].requestMaster.id = 8;
-	       
-	    $scope.workflowDTO.workflowTxnDetailss[1].columnName="TarrifCategoryMaster";
-	    $scope.workflowDTO.workflowTxnDetailss[1].requestMaster = {};
-	    $scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8; 
-                        
-        
-        
-        console.log($scope.changeCases);
-        $scope.dtmax = new Date();
-        $scope.load = function(id) {
-            CustDetails.get({id : id}, function(result) {
-                $scope.custDetails = result;
-            });
-        };
-        
-        if($stateParams.id != null){
-        	$scope.load($stateParams.id);
-        }
+					$scope.custDetails = {};
+					$scope.tariffcategorymasters = TariffCategoryMaster.query();
+					$scope.pipeSizeMasters = PipeSizeMaster.query();
+					$scope.workflowDTO = {};
+					$scope.workflowDTO.requestWorkflowHistory = {};
+					$scope.workflowDTO.workflowTxnDetailss = {};
+					$scope.applicationTxn = {};
+					$scope.workflowDTO.workflowTxnDetailss = [];
+					$scope.referenceNo = "";
+					
+					console.log("These are the state:"
+							+ JSON.stringify($state.current.name));
 
-        var onSaveSuccess = function (result) {
-            $scope.$emit('watererpApp:custDetailsUpdate', result);
-            //$uibModalInstance.close(result);
-            $scope.isSaving = false;
-            $state.go('custDetails');
-        };
+					$scope.getWorkflowHistoryByDomainId = function(domainId) {
+			        	$scope.requestWorkflowHistorys = [];
+			            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: domainId, requestId: 8}, function(result, headers) {
+			                $scope.links = ParseLinks.parse(headers('link'));
+			                for (var i = 0; i < result.length; i++) {
+			                    $scope.requestWorkflowHistorys.push(result[i]);
+			                }
+			                $scope.workflowDTO.requestWorkflowHistory.assignedDate = $scope.requestWorkflowHistorys[0].assignedDate;
+			            });
+			        };
+					
 
-        var onSaveError = function (result) {
-            $scope.isSaving = false;
-        };
+					if ($state.current.name === "custDetails.categoryChange") {
+						$scope.workflowDTO.workflowTxnDetailss[0] = {};
+						$scope.workflowDTO.workflowTxnDetailss[1] = {};
 
-        $scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.custDetails.id != null) {
-                CustDetails.update($scope.custDetails, onSaveSuccess, onSaveError);
-            } else {
-                CustDetails.save($scope.custDetails, onSaveSuccess, onSaveError);
-            }
-        };
+						$scope.workflowDTO.workflowTxnDetailss[2] = {};
+						$scope.workflowDTO.workflowTxnDetailss[3] = {};
+						$scope.workflowDTO.workflowTxnDetailss[4] = {};
+						$scope.workflowDTO.workflowTxnDetailss[5] = {};
+						$scope.workflowDTO.workflowTxnDetailss[6] = {};
 
-        $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
-        };
-        
-        $scope.datePickerForRequestedDate = {};
+						$scope.workflowDTO.workflowTxnDetailss[0].columnName = "prevReading";
+						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster = {};
+						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[0].referenceNumber = $scope.referenceNo;
 
-        $scope.datePickerForRequestedDate.status = {
-            opened: false
-        };
+						$scope.workflowDTO.workflowTxnDetailss[1].columnName = "TarrifCategoryMaster";
+						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster = {};
+						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[1].referenceNumber = $scope.referenceNo;
 
-        $scope.datePickerForRequestedDateOpen = function($event) {
-            $scope.datePickerForRequestedDate.status.opened = true;
-        };
-        
-        
-        
-        //to search CAN
-        $scope.getLocation = function(val) {
-			$scope.isValidCust = false;
-			return $http.get('api/custDetailss/searchCAN/' + val, {
-				params : {
-					address : val,
-					sensor : false
-				}
-			}).then(function(response) {
-				var res = response.data.map(function(item) {
-					return item;
+						$scope.workflowDTO.workflowTxnDetailss[2].columnName = "organisation";
+						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster = {};
+						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[2].referenceNumber = $scope.referenceNo;
+
+						$scope.workflowDTO.workflowTxnDetailss[3].columnName = "organisationName";
+						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster = {};
+						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[3].referenceNumber = $scope.referenceNo;
+
+						$scope.workflowDTO.workflowTxnDetailss[4].columnName = "designation";
+						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster = {};
+						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[4].referenceNumber = $scope.referenceNo;
+
+						$scope.workflowDTO.workflowTxnDetailss[5].columnName = "deedDoc";
+						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster = {};
+						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[5].referenceNumber = $scope.referenceNo;
+
+						$scope.workflowDTO.workflowTxnDetailss[6].columnName = "agreementDoc";
+						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster = {};
+						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[6].referenceNumber = $scope.referenceNo;
+					}
+
+					$scope.dtmax = new Date();
+
+					if ($stateParams.id != null) {
+						$scope.load($stateParams.id);
+					}
+
+					$scope.clear = function() {
+						// $uibModalInstance.dismiss('cancel');
+					};
+
+					$scope.datePickerForAssignedDate = {};
+
+					$scope.datePickerForAssignedDate.status = {
+						opened : false
+					};
+
+					$scope.datePickerForAssignedDateOpen = function($event) {
+						$scope.datePickerForAssignedDate.status.opened = true;
+					};
+
+					$scope.disableOrg = function(categoryId) {
+						console.log("Category id: " + categoryId);
+						if (categoryId === 1) {
+							$scope.workflowDTO.workflowTxnDetailss[2] = false;
+							$scope.workflowDTO.workflowTxnDetailss[3] = "";
+							$scope.workflowDTO.workflowTxnDetailss[4] = "";
+							$scope.workflowDTO.workflowTxnDetailss[5] = "";
+							$scope.workflowDTO.workflowTxnDetailss[6] = "";
+						}
+					}
+
+					// to search CAN
+					$scope.getLocation = function(val) {
+						$scope.isValidCust = false;
+						return $http.get('api/custDetailss/searchCAN/' + val, {
+							params : {
+								address : val,
+								sensor : false
+							}
+						}).then(function(response) {
+							var res = response.data.map(function(item) {
+								return item;
+							});
+
+							return res;
+						});
+					}
+
+					// get cust details by CAN
+					$scope.getCustDetails = function(can) {
+						CustDetailsSearchCAN
+								.get(
+										{
+											can : can
+										},
+										function(result) {
+											$scope.custDetails = result;
+											$scope.workflowDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
+											$scope.workflowDTO.workflowTxnDetailss[1].previousValue = parseInt(
+													$scope.custDetails.tariffCategoryMaster.id,
+													10)
+										});
+					};
+
+					// getApplicationTxn by CAN
+					$scope.getApplicationTxn = function(can) {
+						ApplicationTxnSearchCAN.get({can : can},
+										function(result) {
+											$scope.applicationTxn = result;
+											$scope.workflowDTO.workflowTxnDetailss[2].previousValue = $scope.applicationTxn.organization;
+											$scope.workflowDTO.workflowTxnDetailss[3].previousValue = $scope.applicationTxn.organizationName;
+											$scope.workflowDTO.workflowTxnDetailss[4].previousValue = $scope.applicationTxn.designation
+											$scope.workflowDTO.workflowTxnDetailss[5].previousValue = $scope.applicationTxn.deedDoc;
+											$scope.workflowDTO.workflowTxnDetailss[6].previousValue = $scope.applicationTxn.agreementDoc;
+										});
+					};
+
+					// when selected searched CAN in DropDown
+					$scope.onSelect = function($item, $model, $label) {
+						console.log($item);
+						var arr = $item.split("-");
+						$scope.custDetails = {};
+						$scope.custDetails.can = arr[0].trim();
+						$scope.custDetails.name = arr[1];
+						$scope.custDetails.address = arr[2];
+						$scope.getCustDetails($scope.custDetails.can);
+						$scope.getApplicationTxn($scope.custDetails.can);
+						$scope.custInfo = "";
+						$scope.isValidCust = true;
+						$scope.referenceNo = $scope.custDetails.can;
+					};
+
+					$scope.saveChanges = function() {
+						//$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.workflowDTO.workflowTxnDetailss[1].previousValue.id;
+						for(var i=0; i<$scope.workflowDTO.workflowTxnDetailss.length;i++){
+							$scope.workflowDTO.workflowTxnDetailss[i].referenceNumber = $scope.referenceNo;
+						}
+						console.log("WorkflowDTO data being posted to server:"
+								+ JSON.stringify($scope.workflowDTO));
+
+						return $http.post('/api/workflowTxnDetailsArr',
+								$scope.workflowDTO).then(
+								function(response) {
+									console.log("Server response:"
+											+ JSON.stringify(response));
+									// var res =
+									// response.data.map(function(item) {
+									// return item;
+									// });
+									// return res;
+								});
+					}
+
+					$scope.getWorkflowTxnDetails = function(requestId) {
+						WorkflowTxnDetails.query({
+							page : $scope.page,
+							size : 20,
+							requestId : requestId
+						}, function(result, headers) {
+							$scope.links = ParseLinks.parse(headers('link'));
+							for (var i = 0; i < result.length; i++) {
+								if (i == 1) {
+									result[i].previousValue = parseInt(
+											result[i].previousValue, 10);
+									result[i].newValue = parseInt(
+											result[i].newValue, 10);
+								}
+								$scope.workflowDTO.workflowTxnDetailss
+										.push(result[i]);
+							}
+							
+							$scope.getCustDetails($scope.workflowDTO.workflowTxnDetailss[0].referenceNumber);
+							$scope.getWorkflowHistoryByDomainId($scope.workflowDTO.workflowTxnDetailss[0].id);
+						});
+					};
+
+					if ($stateParams.requestId != null) {
+						$scope.getWorkflowTxnDetails($stateParams.requestId);
+					}
+					
+					//approve a request
+					$scope.approve = function(workflowDTO){
+			        	console.log(workflowDTO);
+			        	return $http.post('/api/workflowTxnDetailsApprove',
+								$scope.workflowDTO).then(
+								function(response) {
+									console.log("Server response:"
+											+ JSON.stringify(response));
+								});
+						//ApplicationTxnService.approveRequest(id, remarks);
+			        }
 				});
-
-				return res;
-			});
-		}
-        
-        $scope.getCustDetails = function(can) {
-			CustDetailsSearchCAN.get({can : can}, function(result) {
-                $scope.custDetails = result;
-                $scope.workflowDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
-                $scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.custDetails.tariffCategoryMaster.id;
-            });
-        };
-        
-        //when selected searched CAN in DropDown
-        $scope.onSelect = function($item, $model, $label) {
-			console.log($item);
-			var arr = $item.split("-");
-			$scope.custDetails = {};
-			$scope.custDetails.can = arr[0].trim();
-			$scope.custDetails.name = arr[1];
-			$scope.custDetails.address = arr[2];
-			$scope.getCustDetails($scope.custDetails.can);
-			$scope.custInfo = ""; 
-			$scope.isValidCust = true;
-		};
-		
-		
-		$scope.saveChanges = function(){
-			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowDTO.workflowTxnDetailss));
-			console.log("WorkflowDTO data being posted to server:" + JSON.stringify($scope.workflowDTO));
-			$scope.workflowDTO.workflowTxnDetailss[1].previousValue = 3;//$scope.workflowDTO.workflowTxnDetails[1].previousValue.id;
-			
-			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowDTO).then(function(response) {
-				console.log("Server response:" + JSON.stringify(response));
-//				var res = response.data.map(function(item) {
-//					return item;
-//				});
-//				return res;
-			});
-//			  WorkflowTxnDetails.save($scope.workflowTxnDetailsArr, onSaveSuccess, onSaveError);
-		}
-		
-}/*]*/);

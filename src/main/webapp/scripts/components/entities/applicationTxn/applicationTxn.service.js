@@ -33,4 +33,9 @@ angular.module('watererpApp')
                 }
             }
         });
+    })
+    .factory('ApplicationTxnSearchCAN', function ($resource) {
+    	return $resource('api/applicationTxns/searchCan/:can', {}, {
+    		'query': { method: 'GET', isArray: true}
+        });
     });

@@ -16,5 +16,19 @@ angular.module('watererpApp').controller(
 			};
 
 			$scope.load($stateParams.type, $stateParams.action_type);
+			
+			
+			$scope.getDetails = function(requestId, requestTypeId, domainObjectId){
+				console.log("request Id:" +requestId);
+				console.log("request Type: "+requestTypeId);
+				console.log("domainObject: "+domainObjectId);
+				if(requestTypeId===1 || requestTypeId===6){//CONNECTION CATEGORY
+					$state.go('applicationTxn.detail',{id:domainObjectId, requestTypeId:requestTypeId});
+					//applicationTxn.detail({id:item.domainObject})
+				}
+				if(requestTypeId===8){//CONNECTION CATEGORY
+					$state.go('custDetails.categoryChangeEdit',{requestId:requestId});
+				}
+			}
 
 		});

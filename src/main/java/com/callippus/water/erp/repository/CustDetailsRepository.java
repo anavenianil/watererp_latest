@@ -14,5 +14,10 @@ import com.callippus.water.erp.domain.CustDetails;
 public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 	public CustDetails findByCan(String can);
 	
+	
+	@Query("select max(SUBSTRING(can, 5, 8))  "
+			+ "from CustDetails at where SUBSTRING(can, 1,2)=:division and SUBSTRING(can, 3,2)=:street")
+	Integer findByCan(@Param("division")String division, @Param("street")String street); 
+	
 
 }

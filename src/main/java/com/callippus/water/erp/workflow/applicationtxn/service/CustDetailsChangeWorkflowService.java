@@ -180,14 +180,19 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 			workflowService.setDomain_object_id(l.get(i).getDomainObject()
 					.toString());
 			
-			/*User user = workflowTxnDetails.getUser();
-			if(user != null){
-				workflowService.setRequestType(CPSConstants.WITHOUTMETER);
+			//User user = workflowTxnDetails.getUser();
+			if(workflowTxnDetails.getRequestMaster().getId()==8){
+				workflowService.setRequestType(CPSConstants.CONNECTIONCATEGORY);
 			}
-			else
-			{
-				workflowService.setRequestType(CPSConstants.REQUISITION);
-			}*/
+			if(workflowTxnDetails.getRequestMaster().getId()==9){
+				workflowService.setRequestType(CPSConstants.PIPESIZE);
+			}
+			if(workflowTxnDetails.getRequestMaster().getId()==10){
+				workflowService.setRequestType(CPSConstants.CHANGENAME);
+			}
+			if(workflowTxnDetails.getRequestMaster().getId()==11){
+				workflowService.setRequestType(CPSConstants.CONNECTIONTERMINATION);
+			}
 			
 			workflowService.getHistoryID();
 			workflowService.setStageID(l.get(i).getRequestStage().toString());

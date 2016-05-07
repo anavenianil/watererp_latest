@@ -9,7 +9,6 @@
 					<thead>
 						<tr>
 							<th>Req. Id</th>
-							<th>Req. No.</th>
 							<th>From</th>
 							<th>To</th>
 							<th>Actioned Date</th>
@@ -20,10 +19,11 @@
 					</thead>
 					<tbody infinite-scroll="loadPage(page + 1)"
 						infinite-scroll-disabled="links['last'] == page">
+						<!-- <tr ng-repeat="item in requests"
+							ui-sref="applicationTxn.detail({id:item.domainObject})"> -->
 						<tr ng-repeat="item in requests"
-							ui-sref="applicationTxn.detail({id:item.domainObject})">
-							<td>{{item.domainObject}}</td>
-							<td>{{item.fileNumber}}</td>
+							ng-click="getDetails(item.id,item.requestMaster.id, item.domainObject)">
+							<td>{{item.id}}</td>
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
 							<td>{{item.assignedTo.firstName}}
