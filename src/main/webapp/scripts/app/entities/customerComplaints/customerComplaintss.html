@@ -17,8 +17,8 @@
 				<div class="form-group"
 					ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
 
-					<input type="text" ng-model="complaintInfo" typeahead-min-length="3"
-						placeholder="Search CAN or Name or Complaint ID (Min 3 chars)"
+					<input type="text" ng-model="complaintInfo" typeahead-min-length="1"
+						placeholder="Search CAN or Name or Complaint ID (Min 1 chars)"
 						uib-typeahead="complaintInfo for complaintInfo in getCustomerComplaint($viewValue)"
 						typeahead-loading="loadingCANs"
 						typeahead-on-select='onSelect($item, $model, $label)'

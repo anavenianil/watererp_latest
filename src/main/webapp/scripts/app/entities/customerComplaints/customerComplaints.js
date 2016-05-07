@@ -21,7 +21,7 @@ angular.module('watererpApp')
             })
             .state('customerComplaints.detail', {
                 parent: 'entity',
-                url: '/customerComplaints/{id}',
+                url: '/customerComplaints/{id}/{requestTypeId}',
                 data: {
                     authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustomerComplaints'

@@ -24,11 +24,12 @@ angular.module('watererpApp').controller(
 				console.log("domainObject: "+domainObjectId);
 				if(requestTypeId===1 || requestTypeId===6){//CONNECTION CATEGORY
 					$state.go('applicationTxn.detail',{id:domainObjectId, requestTypeId:requestTypeId});
-					//applicationTxn.detail({id:item.domainObject})
 				}
 				if(requestTypeId===8){//CONNECTION CATEGORY
 					$state.go('custDetails.categoryChangeEdit',{requestId:requestId});
 				}
+				if(requestTypeId===4){//CONNECTION CATEGORY
+					$state.go('customerComplaints.detail',{id:domainObjectId, requestTypeId:requestTypeId});				}
 			}
 
 		});
