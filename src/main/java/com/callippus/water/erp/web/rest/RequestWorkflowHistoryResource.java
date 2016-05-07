@@ -90,7 +90,7 @@ public class RequestWorkflowHistoryResource {
     @Timed
     public ResponseEntity<List<RequestWorkflowHistory>> getAllRequestWorkflowHistorys(Pageable pageable,
     		@RequestParam(value = "dimainObjectId", required = false) Long domainObject,
-    		@RequestParam(value = "requestId", required = false) Long requestId)
+    		@RequestParam(value = "requestTypeId", required = false) Long requestTypeId)
         throws URISyntaxException {
         log.debug("REST request to get a page of RequestWorkflowHistorys");
         //Page<RequestWorkflowHistory> page = requestWorkflowHistoryRepository.findAll(pageable);
@@ -100,7 +100,7 @@ public class RequestWorkflowHistoryResource {
         }
         else
         {
-        	RequestMaster requestMaster = requestMasterRepository.findOne(requestId);
+        	RequestMaster requestMaster = requestMasterRepository.findOne(requestTypeId);
         	page = requestWorkflowHistoryRepository.findByDomainObjectAndRequestMaster(pageable, domainObject, requestMaster);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/requestWorkflowHistorys");

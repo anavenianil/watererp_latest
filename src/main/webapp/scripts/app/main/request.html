@@ -22,7 +22,7 @@
 						<!-- <tr ng-repeat="item in requests"
 							ui-sref="applicationTxn.detail({id:item.domainObject})"> -->
 						<tr ng-repeat="item in requests"
-							ng-click="getDetails(item.id,item.requestMaster.id)">
+							ng-click="getDetails(item.id,item.requestMaster.id, item.domainObject)">
 							<td>{{item.id}}</td>
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>

@@ -17,6 +17,7 @@ angular
 					$scope.workflowDTO.workflowTxnDetailss = {};
 					$scope.applicationTxn = {};
 					$scope.workflowDTO.workflowTxnDetailss = [];
+					$scope.referenceNo = "";
 					
 					console.log("These are the state:"
 							+ JSON.stringify($state.current.name));
@@ -46,30 +47,37 @@ angular
 						$scope.workflowDTO.workflowTxnDetailss[0].columnName = "prevReading";
 						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster = {};
 						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[0].referenceNumber = $scope.referenceNo;
 
 						$scope.workflowDTO.workflowTxnDetailss[1].columnName = "TarrifCategoryMaster";
 						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster = {};
 						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[1].referenceNumber = $scope.referenceNo;
 
 						$scope.workflowDTO.workflowTxnDetailss[2].columnName = "organisation";
 						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster = {};
 						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[2].referenceNumber = $scope.referenceNo;
 
 						$scope.workflowDTO.workflowTxnDetailss[3].columnName = "organisationName";
 						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster = {};
 						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[3].referenceNumber = $scope.referenceNo;
 
 						$scope.workflowDTO.workflowTxnDetailss[4].columnName = "designation";
 						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster = {};
 						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[4].referenceNumber = $scope.referenceNo;
 
 						$scope.workflowDTO.workflowTxnDetailss[5].columnName = "deedDoc";
 						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster = {};
 						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[5].referenceNumber = $scope.referenceNo;
 
 						$scope.workflowDTO.workflowTxnDetailss[6].columnName = "agreementDoc";
 						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster = {};
 						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster.id = 8;
+						$scope.workflowDTO.workflowTxnDetailss[6].referenceNumber = $scope.referenceNo;
 					}
 
 					$scope.dtmax = new Date();
@@ -161,10 +169,14 @@ angular
 						$scope.getApplicationTxn($scope.custDetails.can);
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
+						$scope.referenceNo = $scope.custDetails.can;
 					};
 
 					$scope.saveChanges = function() {
-						$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.workflowDTO.workflowTxnDetailss[1].previousValue.id;
+						//$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.workflowDTO.workflowTxnDetailss[1].previousValue.id;
+						for(var i=0; i<$scope.workflowDTO.workflowTxnDetailss.length;i++){
+							$scope.workflowDTO.workflowTxnDetailss[i].referenceNumber = $scope.referenceNo;
+						}
 						console.log("WorkflowDTO data being posted to server:"
 								+ JSON.stringify($scope.workflowDTO));
 
