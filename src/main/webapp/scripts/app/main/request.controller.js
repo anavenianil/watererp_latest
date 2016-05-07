@@ -28,7 +28,7 @@ angular.module('watererpApp').controller(
 				if(requestTypeId===8){//CONNECTION CATEGORY
 					$state.go('custDetails.categoryChangeEdit',{requestId:requestId});
 				}
-				if(requestTypeId===4){//CONNECTION CATEGORY
+				if(requestTypeId===4 || requestTypeId===3){//CONNECTION CATEGORY
 					$state.go('customerComplaints.detail',{id:domainObjectId, requestTypeId:requestTypeId});				}
 			}
 
