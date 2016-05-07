@@ -153,7 +153,7 @@ public class WorkflowTxnDetailsResource {
         WorkflowTxnDetails wtd = workflowDTO.getWorkflowTxnDetailss().get(0);
         List<WorkflowTxnDetails> workflowTxnDetailss = workflowTxnDetailsRepository.save(workflowDTO.getWorkflowTxnDetailss());
         
-        try{
+       /* try{
         	workflowService.getUserDetails();
         	custDetailsChangeWorkflowService.createTxn(wtd);
         	
@@ -164,7 +164,7 @@ public class WorkflowTxnDetailsResource {
         }
         catch(Exception e){
         	System.out.println(e);
-        }
+        }*/
         workflowTxnDetailsRepository.save(workflowDTO.getWorkflowTxnDetailss());
         
         return ResponseEntity.created(new URI("/api/workflowTxnDetailss/"))
@@ -175,7 +175,7 @@ public class WorkflowTxnDetailsResource {
     
     
     
-    @RequestMapping(value = "/workflowTxnDetailsApprove",
+   /* @RequestMapping(value = "/workflowTxnDetailsApprove",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
         @Timed
@@ -196,5 +196,5 @@ public class WorkflowTxnDetailsResource {
             return ResponseEntity.created(new URI("/api/workflowTxnDetailss/"))
                 .headers(HeaderUtil.createEntityCreationAlert("workflowTxnDetails",""))
                 .body(null);
-        }
+        }*/
 }

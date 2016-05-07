@@ -52,24 +52,36 @@ angular.module('watererpApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    requestDate: null,
                                     firstName: null,
                                     middleName: null,
                                     lastName: null,
-                                    houseNo: null,
-                                    govtOfficialNo: null,
-                                    ward: null,
-                                    street: null,
-                                    pincode: null,
-                                    block: null,
-                                    area: null,
-                                    section: null,
-                                    constituency: null,
+                                    organization: null,
+                                    organizationName: null,
+                                    designation: null,
+                                    mobileNo: null,
+                                    officeNo: null,
                                     email: null,
-                                    telOffice: null,
-                                    telHome: null,
-                                    mobile: null,
-                                    fileNumber: null,
+                                    street: null,
+                                    plotNo: null,
+                                    blockNo: null,
+                                    tanescoMeter: null,
+                                    waterConnectionUse: null,
+                                    bStreet: null,
+                                    ward: null,
+                                    bPlotNo: null,
+                                    registeredMobile: null,
+                                    idNumber: null,
+                                    can: null,
+                                    photo: null,
+                                    status: null,
+                                    meterReading: null,
+                                    requestedDate: null,
+                                    connectionDate: null,
+                                    remarks: null,
+                                    meterNo: null,
+                                    approvedDate: null,
+                                    deedDoc: null,
+                                    agreementDoc: null,
                                     id: null
                                 };
                             }
@@ -126,5 +138,69 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('customer.categoryChange', {
+                parent: 'customer',
+                url: '/categoryChange',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Customer'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerCategoryChange.html',
+                        controller: 'CustomerCategoryChangeController'
+                    }
+                },
+                resolve: {
+                }
+            })
+             .state('customer.categoryChangeDetail', {
+                parent: 'customer',
+                url: '/categoryChange/:id/:requestTypeId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Customer'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerCategoryChange-detail.html',
+                        controller: 'CustomerCategoryChangeDetailController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('customer.pipeSizeChange', {
+                parent: 'customer',
+                url: '/pipeSizeChange',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Customers'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerPipeSizeChange.html',
+                        controller: 'CustomerPipeSizeChangeController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('customer.nameChange', {
+                parent: 'customer',
+                url: '/nameChange',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Customers'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerNameChange.html',
+                        controller: 'CustomerNameChangeController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

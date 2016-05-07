@@ -1,98 +1,150 @@
 {
     "relationships": [
-    
-     ],
-    "fields": [
+    	{
+            "relationshipId": 1,
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+    	{
+            "relationshipId": 2,
+            "relationshipName": "presentCategory",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
         {
+            "relationshipId": 3,
+            "relationshipName": "newProofMaster",
+            "otherEntityName": "idProofMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "statusMaster",
+            "otherEntityName": "statusMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "pipeSizeMaster",
+            "otherEntityName": "pipeSizeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityRelationshipName": "proceedings"
+        },
+         {
+            "relationshipId": 6,
+            "relationshipName": "requestedPipeSizeMaster",
+            "otherEntityName": "pipeSizeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityRelationshipName": "proceedings"
+        }
+    ],
+    "fields": [
+     	{
             "fieldId": 1,
-            "fieldName": "requestDate",
-            "fieldType": "ZonedDateTime"
+            "fieldName": "meterReading",
+            "fieldType": "Float"
         },
         {
             "fieldId": 2,
-            "fieldName": "firstName",
-            "fieldType": "String"
+            "fieldName": "presentReading",
+            "fieldType": "Float"
         },
         {
             "fieldId": 3,
-            "fieldName": "middleName",
-            "fieldType": "String"
+            "fieldName": "organization",
+            "fieldType": "Boolean"
         },
         {
             "fieldId": 4,
-            "fieldName": "lastName",
+            "fieldName": "organizationName",
             "fieldType": "String"
         },
         {
             "fieldId": 5,
-            "fieldName": "houseNo",
+            "fieldName": "designation",
             "fieldType": "String"
         },
         {
             "fieldId": 6,
-            "fieldName": "govtOfficialNo",
+            "fieldName": "deedDoc",
             "fieldType": "String"
         },
         {
             "fieldId": 7,
-            "fieldName": "ward",
+            "fieldName": "agreementDoc",
             "fieldType": "String"
         },
         {
             "fieldId": 8,
-            "fieldName": "street",
+            "fieldName": "remarks",
             "fieldType": "String"
         },
         {
             "fieldId": 9,
-            "fieldName": "pincode",
-            "fieldType": "String"
+            "fieldName": "requestedDate",
+            "fieldType": "LocalDate"
         },
         {
             "fieldId": 10,
-            "fieldName": "block",
+            "fieldName": "can",
             "fieldType": "String"
         },
         {
             "fieldId": 11,
-            "fieldName": "area",
+            "fieldName": "firstName",
             "fieldType": "String"
         },
         {
             "fieldId": 12,
-            "fieldName": "section",
+            "fieldName": "middleName",
             "fieldType": "String"
         },
         {
             "fieldId": 13,
-            "fieldName": "constituency",
+            "fieldName": "lastName",
             "fieldType": "String"
         },
         {
             "fieldId": 14,
+            "fieldName": "mobileNo",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 15,
             "fieldName": "email",
             "fieldType": "String"
         },
         {
-            "fieldId": 15,
-            "fieldName": "telOffice",
-            "fieldType": "String"
-        },
-        {
             "fieldId": 16,
-            "fieldName": "telHome",
+            "fieldName": "idNumber",
             "fieldType": "String"
         },
         {
             "fieldId": 17,
-            "fieldName": "mobile",
+            "fieldName": "photo",
             "fieldType": "String"
         },
         {
             "fieldId": 18,
-            "fieldName": "fileNumber",
+            "fieldName": "status",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 19,
+            "fieldName": "approvedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 20,
+            "fieldName": "changeType",
             "fieldType": "String"
         }
+        
     ],
     "changelogDate": "20160229071846",
     "dto": "no",

@@ -48,7 +48,7 @@ angular.module('watererpApp').controller(
 				}
 			});
 
-			$scope.getDetails = function(type) {
+			/*$scope.getDetails = function(type) {
 				if (type === 'REQUISITION' || type === 'WITHOUTMETER') {
 					$state.go('applicationTxn');
 				}
@@ -58,5 +58,5 @@ angular.module('watererpApp').controller(
 				if (type === 'CONNECTION CATEGORY'){
 					$state.go('workflowTxnDetails');
 				}
-			}
+			}*/
 		});

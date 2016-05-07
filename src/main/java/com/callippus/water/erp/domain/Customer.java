@@ -2,10 +2,12 @@ package com.callippus.water.erp.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -20,8 +22,35 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "request_date")
-    private ZonedDateTime requestDate;
+    @Column(name = "meter_reading")
+    private Float meterReading;
+    
+    @Column(name = "present_reading")
+    private Float presentReading;
+    
+    @Column(name = "organization")
+    private Boolean organization;
+    
+    @Column(name = "organization_name")
+    private String organizationName;
+    
+    @Column(name = "designation")
+    private String designation;
+    
+    @Column(name = "deed_doc")
+    private String deedDoc;
+    
+    @Column(name = "agreement_doc")
+    private String agreementDoc;
+    
+    @Column(name = "remarks")
+    private String remarks;
+    
+    @Column(name = "requested_date")
+    private LocalDate requestedDate;
+    
+    @Column(name = "can")
+    private String can;
     
     @Column(name = "first_name")
     private String firstName;
@@ -32,48 +61,51 @@ public class Customer implements Serializable {
     @Column(name = "last_name")
     private String lastName;
     
-    @Column(name = "house_no")
-    private String houseNo;
-    
-    @Column(name = "govt_official_no")
-    private String govtOfficialNo;
-    
-    @Column(name = "ward")
-    private String ward;
-    
-    @Column(name = "street")
-    private String street;
-    
-    @Column(name = "pincode")
-    private String pincode;
-    
-    @Column(name = "block")
-    private String block;
-    
-    @Column(name = "area")
-    private String area;
-    
-    @Column(name = "section")
-    private String section;
-    
-    @Column(name = "constituency")
-    private String constituency;
+    @Column(name = "mobile_no")
+    private Long mobileNo;
     
     @Column(name = "email")
     private String email;
     
-    @Column(name = "tel_office")
-    private String telOffice;
+    @Column(name = "id_number")
+    private String idNumber;
     
-    @Column(name = "tel_home")
-    private String telHome;
+    @Column(name = "photo")
+    private String photo;
     
-    @Column(name = "mobile")
-    private String mobile;
+    @Column(name = "status")
+    private Integer status;
     
-    @Column(name = "file_number")
-    private String fileNumber;
+    @Column(name = "approved_date")
+    private LocalDate approvedDate;
     
+    @Column(name = "change_type")
+    private String changeType;
+    
+    @ManyToOne
+    @JoinColumn(name = "tariff_category_master_id")
+    private TariffCategoryMaster tariffCategoryMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "present_category_id")
+    private TariffCategoryMaster presentCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "new_proof_master_id")
+    private IdProofMaster newProofMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "status_master_id")
+    private StatusMaster statusMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "pipe_size_master_id")
+    private PipeSizeMaster pipeSizeMaster;
+
+    @ManyToOne
+    @JoinColumn(name = "requested_pipe_size_master_id")
+    private PipeSizeMaster requestedPipeSizeMaster;
+
     public Long getId() {
         return id;
     }
@@ -82,12 +114,84 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public ZonedDateTime getRequestDate() {
-        return requestDate;
+    public Float getMeterReading() {
+        return meterReading;
     }
     
-    public void setRequestDate(ZonedDateTime requestDate) {
-        this.requestDate = requestDate;
+    public void setMeterReading(Float meterReading) {
+        this.meterReading = meterReading;
+    }
+
+    public Float getPresentReading() {
+        return presentReading;
+    }
+    
+    public void setPresentReading(Float presentReading) {
+        this.presentReading = presentReading;
+    }
+
+    public Boolean getOrganization() {
+        return organization;
+    }
+    
+    public void setOrganization(Boolean organization) {
+        this.organization = organization;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+    
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+    
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getDeedDoc() {
+        return deedDoc;
+    }
+    
+    public void setDeedDoc(String deedDoc) {
+        this.deedDoc = deedDoc;
+    }
+
+    public String getAgreementDoc() {
+        return agreementDoc;
+    }
+    
+    public void setAgreementDoc(String agreementDoc) {
+        this.agreementDoc = agreementDoc;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+    
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public LocalDate getRequestedDate() {
+        return requestedDate;
+    }
+    
+    public void setRequestedDate(LocalDate requestedDate) {
+        this.requestedDate = requestedDate;
+    }
+
+    public String getCan() {
+        return can;
+    }
+    
+    public void setCan(String can) {
+        this.can = can;
     }
 
     public String getFirstName() {
@@ -114,76 +218,12 @@ public class Customer implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getHouseNo() {
-        return houseNo;
+    public Long getMobileNo() {
+        return mobileNo;
     }
     
-    public void setHouseNo(String houseNo) {
-        this.houseNo = houseNo;
-    }
-
-    public String getGovtOfficialNo() {
-        return govtOfficialNo;
-    }
-    
-    public void setGovtOfficialNo(String govtOfficialNo) {
-        this.govtOfficialNo = govtOfficialNo;
-    }
-
-    public String getWard() {
-        return ward;
-    }
-    
-    public void setWard(String ward) {
-        this.ward = ward;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-    
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getPincode() {
-        return pincode;
-    }
-    
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
-    }
-
-    public String getBlock() {
-        return block;
-    }
-    
-    public void setBlock(String block) {
-        this.block = block;
-    }
-
-    public String getArea() {
-        return area;
-    }
-    
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getSection() {
-        return section;
-    }
-    
-    public void setSection(String section) {
-        this.section = section;
-    }
-
-    public String getConstituency() {
-        return constituency;
-    }
-    
-    public void setConstituency(String constituency) {
-        this.constituency = constituency;
+    public void setMobileNo(Long mobileNo) {
+        this.mobileNo = mobileNo;
     }
 
     public String getEmail() {
@@ -194,36 +234,92 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    public String getTelOffice() {
-        return telOffice;
+    public String getIdNumber() {
+        return idNumber;
     }
     
-    public void setTelOffice(String telOffice) {
-        this.telOffice = telOffice;
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
-    public String getTelHome() {
-        return telHome;
+    public String getPhoto() {
+        return photo;
     }
     
-    public void setTelHome(String telHome) {
-        this.telHome = telHome;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public String getMobile() {
-        return mobile;
+    public Integer getStatus() {
+        return status;
     }
     
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public String getFileNumber() {
-        return fileNumber;
+    public LocalDate getApprovedDate() {
+        return approvedDate;
     }
     
-    public void setFileNumber(String fileNumber) {
-        this.fileNumber = fileNumber;
+    public void setApprovedDate(LocalDate approvedDate) {
+        this.approvedDate = approvedDate;
+    }
+
+    public String getChangeType() {
+        return changeType;
+    }
+    
+    public void setChangeType(String changeType) {
+        this.changeType = changeType;
+    }
+
+    public TariffCategoryMaster getTariffCategoryMaster() {
+        return tariffCategoryMaster;
+    }
+
+    public void setTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster) {
+        this.tariffCategoryMaster = tariffCategoryMaster;
+    }
+
+    public TariffCategoryMaster getPresentCategory() {
+        return presentCategory;
+    }
+
+    public void setPresentCategory(TariffCategoryMaster tariffCategoryMaster) {
+        this.presentCategory = tariffCategoryMaster;
+    }
+
+    public IdProofMaster getNewProofMaster() {
+        return newProofMaster;
+    }
+
+    public void setNewProofMaster(IdProofMaster idProofMaster) {
+        this.newProofMaster = idProofMaster;
+    }
+
+    public StatusMaster getStatusMaster() {
+        return statusMaster;
+    }
+
+    public void setStatusMaster(StatusMaster statusMaster) {
+        this.statusMaster = statusMaster;
+    }
+
+    public PipeSizeMaster getPipeSizeMaster() {
+        return pipeSizeMaster;
+    }
+
+    public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
+        this.pipeSizeMaster = pipeSizeMaster;
+    }
+
+    public PipeSizeMaster getRequestedPipeSizeMaster() {
+        return requestedPipeSizeMaster;
+    }
+
+    public void setRequestedPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
+        this.requestedPipeSizeMaster = pipeSizeMaster;
     }
 
     @Override
@@ -250,24 +346,26 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer{" +
             "id=" + id +
-            ", requestDate='" + requestDate + "'" +
+            ", meterReading='" + meterReading + "'" +
+            ", presentReading='" + presentReading + "'" +
+            ", organization='" + organization + "'" +
+            ", organizationName='" + organizationName + "'" +
+            ", designation='" + designation + "'" +
+            ", deedDoc='" + deedDoc + "'" +
+            ", agreementDoc='" + agreementDoc + "'" +
+            ", remarks='" + remarks + "'" +
+            ", requestedDate='" + requestedDate + "'" +
+            ", can='" + can + "'" +
             ", firstName='" + firstName + "'" +
             ", middleName='" + middleName + "'" +
             ", lastName='" + lastName + "'" +
-            ", houseNo='" + houseNo + "'" +
-            ", govtOfficialNo='" + govtOfficialNo + "'" +
-            ", ward='" + ward + "'" +
-            ", street='" + street + "'" +
-            ", pincode='" + pincode + "'" +
-            ", block='" + block + "'" +
-            ", area='" + area + "'" +
-            ", section='" + section + "'" +
-            ", constituency='" + constituency + "'" +
+            ", mobileNo='" + mobileNo + "'" +
             ", email='" + email + "'" +
-            ", telOffice='" + telOffice + "'" +
-            ", telHome='" + telHome + "'" +
-            ", mobile='" + mobile + "'" +
-            ", fileNumber='" + fileNumber + "'" +
+            ", idNumber='" + idNumber + "'" +
+            ", photo='" + photo + "'" +
+            ", status='" + status + "'" +
+            ", approvedDate='" + approvedDate + "'" +
+            ", changeType='" + changeType + "'" +
             '}';
     }
 }

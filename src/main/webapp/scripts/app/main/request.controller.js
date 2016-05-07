@@ -22,12 +22,12 @@ angular.module('watererpApp').controller(
 				console.log("request Id:" +requestId);
 				console.log("request Type: "+requestTypeId);
 				console.log("domainObject: "+domainObjectId);
-				if(requestTypeId===1 || requestTypeId===6){//CONNECTION CATEGORY
+				if(requestTypeId===1 || requestTypeId===6){//NEW CONNECTION
 					$state.go('applicationTxn.detail',{id:domainObjectId, requestTypeId:requestTypeId});
-					//applicationTxn.detail({id:item.domainObject})
 				}
 				if(requestTypeId===8){//CONNECTION CATEGORY
-					$state.go('custDetails.categoryChangeEdit',{requestId:requestId});
+					//$state.go('custDetails.categoryChangeEdit',{requestId:requestId, requestTypeId:requestTypeId});
+					$state.go('customer.categoryChangeDetail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
 			}
 

@@ -3,13 +3,17 @@
 angular
 		.module('watererpApp')
 		.controller(
-				'CustDetailsCategoryChangeController',
+				'CustomerCategoryChangeController',
 				function($scope, $stateParams, CustDetails,
 						TariffCategoryMaster, $state, $http,
 						CustDetailsSearchCAN, WorkflowTxnDetails,
-						PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks, RequestWorkflowHistory) {
+						PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks, RequestWorkflowHistory, Customer) {
 
+					$scope.customer = {};
+					$scope.customer.changeType = "CONNECTIONCATEGORY";
+					
 					$scope.custDetails = {};
+					
 					$scope.tariffcategorymasters = TariffCategoryMaster.query();
 					$scope.pipeSizeMasters = PipeSizeMaster.query();
 					$scope.workflowDTO = {};
@@ -19,10 +23,13 @@ angular
 					$scope.workflowDTO.workflowTxnDetailss = [];
 					$scope.referenceNo = "";
 					
+					
+					
+					
 					console.log("These are the state:"
 							+ JSON.stringify($state.current.name));
 
-					$scope.getWorkflowHistoryByDomainId = function(domainId) {
+					/*$scope.getWorkflowHistoryByDomainId = function(domainId) {
 			        	$scope.requestWorkflowHistorys = [];
 			            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: domainId, requestTypeId: $stateParams.requestTypeId}, function(result, headers) {
 			                $scope.links = ParseLinks.parse(headers('link'));
@@ -31,54 +38,10 @@ angular
 			                }
 			                $scope.workflowDTO.requestWorkflowHistory.assignedDate = $scope.requestWorkflowHistorys[0].assignedDate;
 			            });
-			        };
+			        };*/
 					
 
-					if ($state.current.name === "custDetails.categoryChange") {
-						$scope.workflowDTO.workflowTxnDetailss[0] = {};
-						$scope.workflowDTO.workflowTxnDetailss[1] = {};
-
-						$scope.workflowDTO.workflowTxnDetailss[2] = {};
-						$scope.workflowDTO.workflowTxnDetailss[3] = {};
-						$scope.workflowDTO.workflowTxnDetailss[4] = {};
-						$scope.workflowDTO.workflowTxnDetailss[5] = {};
-						$scope.workflowDTO.workflowTxnDetailss[6] = {};
-
-						$scope.workflowDTO.workflowTxnDetailss[0].columnName = "prevReading";
-						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[0].referenceNumber = $scope.referenceNo;
-
-						$scope.workflowDTO.workflowTxnDetailss[1].columnName = "TarrifCategoryMaster";
-						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[1].referenceNumber = $scope.referenceNo;
-
-						$scope.workflowDTO.workflowTxnDetailss[2].columnName = "organisation";
-						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[2].referenceNumber = $scope.referenceNo;
-
-						$scope.workflowDTO.workflowTxnDetailss[3].columnName = "organisationName";
-						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[3].referenceNumber = $scope.referenceNo;
-
-						$scope.workflowDTO.workflowTxnDetailss[4].columnName = "designation";
-						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[4].referenceNumber = $scope.referenceNo;
-
-						$scope.workflowDTO.workflowTxnDetailss[5].columnName = "deedDoc";
-						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[5].referenceNumber = $scope.referenceNo;
-
-						$scope.workflowDTO.workflowTxnDetailss[6].columnName = "agreementDoc";
-						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[6].referenceNumber = $scope.referenceNo;
-					}
+					
 
 					$scope.dtmax = new Date();
 
@@ -90,17 +53,17 @@ angular
 						// $uibModalInstance.dismiss('cancel');
 					};
 
-					$scope.datePickerForAssignedDate = {};
+					$scope.datePickerForRequestedDate = {};
 
-					$scope.datePickerForAssignedDate.status = {
+					$scope.datePickerForRequestedDate.status = {
 						opened : false
 					};
 
-					$scope.datePickerForAssignedDateOpen = function($event) {
-						$scope.datePickerForAssignedDate.status.opened = true;
+					$scope.datePickerForRequestedDateOpen = function($event) {
+						$scope.datePickerForRequestedDate.status.opened = true;
 					};
 
-					$scope.disableOrg = function(categoryId) {
+					/*$scope.disableOrg = function(categoryId) {
 						console.log("Category id: " + categoryId);
 						if (categoryId === 1) {
 							$scope.workflowDTO.workflowTxnDetailss[2] = false;
@@ -109,7 +72,7 @@ angular
 							$scope.workflowDTO.workflowTxnDetailss[5] = "";
 							$scope.workflowDTO.workflowTxnDetailss[6] = "";
 						}
-					}
+					}*/
 
 					// to search CAN
 					$scope.getLocation = function(val) {
@@ -130,32 +93,20 @@ angular
 
 					// get cust details by CAN
 					$scope.getCustDetails = function(can) {
-						CustDetailsSearchCAN
-								.get(
-										{
-											can : can
-										},
-										function(result) {
+						CustDetailsSearchCAN.get({can : can},function(result) {
 											$scope.custDetails = result;
-											$scope.workflowDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
-											$scope.workflowDTO.workflowTxnDetailss[1].previousValue = parseInt(
-													$scope.custDetails.tariffCategoryMaster.id,
-													10)
+											$scope.customer.meterReading = $scope.custDetails.prevReading;
+											$scope.customer.tariffCategoryMaster = $scope.custDetails.tariffCategoryMaster;
 										});
 					};
 
 					// getApplicationTxn by CAN
-					$scope.getApplicationTxn = function(can) {
+					/*$scope.getApplicationTxn = function(can) {
 						ApplicationTxnSearchCAN.get({can : can},
 										function(result) {
 											$scope.applicationTxn = result;
-											$scope.workflowDTO.workflowTxnDetailss[2].previousValue = $scope.applicationTxn.organization;
-											$scope.workflowDTO.workflowTxnDetailss[3].previousValue = $scope.applicationTxn.organizationName;
-											$scope.workflowDTO.workflowTxnDetailss[4].previousValue = $scope.applicationTxn.designation
-											$scope.workflowDTO.workflowTxnDetailss[5].previousValue = $scope.applicationTxn.deedDoc;
-											$scope.workflowDTO.workflowTxnDetailss[6].previousValue = $scope.applicationTxn.agreementDoc;
 										});
-					};
+					};*/
 
 					// when selected searched CAN in DropDown
 					$scope.onSelect = function($item, $model, $label) {
@@ -166,17 +117,35 @@ angular
 						$scope.custDetails.name = arr[1];
 						$scope.custDetails.address = arr[2];
 						$scope.getCustDetails($scope.custDetails.can);
-						$scope.getApplicationTxn($scope.custDetails.can);
+						//$scope.getApplicationTxn($scope.custDetails.can);
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
 						$scope.referenceNo = $scope.custDetails.can;
+						$scope.customer.can = $scope.custDetails.can
 					};
+					
+					var onSaveSuccess = function (result) {
+			            $scope.isSaving = false;
+			            $state.go("customer");
+			        };
+
+			        var onSaveError = function (result) {
+			            $scope.isSaving = false;
+			        };
+					$scope.save = function () {
+			            $scope.isSaving = true;
+			            if ($scope.customer.id != null) {
+			                Customer.update($scope.customer, onSaveSuccess, onSaveError);
+			            } else {
+			                Customer.save($scope.customer, onSaveSuccess, onSaveError);
+			            }
+			        };
 
 					$scope.saveChanges = function() {
 						//$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.workflowDTO.workflowTxnDetailss[1].previousValue.id;
-						for(var i=0; i<$scope.workflowDTO.workflowTxnDetailss.length;i++){
+						/*for(var i=0; i<$scope.workflowDTO.workflowTxnDetailss.length;i++){
 							$scope.workflowDTO.workflowTxnDetailss[i].referenceNumber = $scope.referenceNo;
-						}
+						}*/
 						console.log("WorkflowDTO data being posted to server:"
 								+ JSON.stringify($scope.workflowDTO));
 
@@ -193,7 +162,7 @@ angular
 								});
 					}
 
-					$scope.getWorkflowTxnDetails = function(requestId) {
+					/*$scope.getWorkflowTxnDetails = function(requestId) {
 						$scope.workflowDTO.workflowTxnDetailss[0] ={};
 						WorkflowTxnDetails.query({
 							page : $scope.page,
@@ -202,19 +171,11 @@ angular
 						}, function(result, headers) {
 							$scope.links = ParseLinks.parse(headers('link'));
 							for (var i = 0; i < result.length; i++) {
-								if (i == 1) {
-									result[i].previousValue = parseInt(
-											result[i].previousValue, 10);
-									result[i].newValue = parseInt(
-											result[i].newValue, 10);
-								}
 								$scope.workflowDTO.workflowTxnDetailss
 										.push(result[i]);
 							}
-							$scope.getCustDetails($scope.workflowDTO.workflowTxnDetailss[0].referenceNumber);
-							$scope.getWorkflowHistoryByDomainId($scope.workflowDTO.workflowTxnDetailss[0].id);
 						});
-					};
+					};*/
 
 					if ($stateParams.requestId != null) {
 						$scope.getWorkflowTxnDetails($stateParams.requestId);
