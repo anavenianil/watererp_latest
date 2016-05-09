@@ -68,7 +68,16 @@
             </tr>
             <tr>
                 <td>
-                    <span>Merchant Master</span>
+
+                    <span>MerchantTxnRef</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{onlinePaymentCallback.merchantTxnRef}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>merchantMaster</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="merchantMaster.detail({id:onlinePaymentCallback.merchantMaster.id})">{{onlinePaymentCallback.merchantMaster.id}}</a>

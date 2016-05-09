@@ -37,8 +37,10 @@ public interface ApplicationTxnRepository extends JpaRepository<ApplicationTxn,L
 	Page<ApplicationTxn> findByRequestAt(Pageable pageable, @Param("login")String login);
 	
 	//@Query("select max(SUBSTRING(can, 1, 2)) division, max(SUBSTRING(can, 3, 2)) street, max(SUBSTRING(can, 5, 8)) num  from ApplicationTxn at where SUBSTRING(can, 1,2)=:division and SUBSTRING(can, 3,2)=:street")
-	@Query("select max(SUBSTRING(can, 5, 8))  "
+	/*@Query("select max(SUBSTRING(can, 5, 8))  "
 			+ "from ApplicationTxn at where SUBSTRING(can, 1,2)=:division and SUBSTRING(can, 3,2)=:street")
-	Integer findByCan(@Param("division")String division, @Param("street")String street);
+	Integer findByCan(@Param("division")String division, @Param("street")String street);*/
+	
+	public ApplicationTxn findByCan(String can);
 
 }

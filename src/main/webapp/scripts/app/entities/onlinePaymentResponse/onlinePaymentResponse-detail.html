@@ -36,7 +36,16 @@
             </tr>
             <tr>
                 <td>
-                    <span>Online Payment Order</span>
+                    <span>MerchantTxnRef</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{onlinePaymentResponse.merchantTxnRef}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>onlinePaymentOrder</span>
+
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="onlinePaymentOrder.detail({id:onlinePaymentResponse.onlinePaymentOrder.id})">{{onlinePaymentResponse.onlinePaymentOrder.id}}</a>

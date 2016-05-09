@@ -117,11 +117,19 @@ public class WorkflowService {
 	
 	private String requestAt;
 	
+	private Long requestWorkflowHistoryId;
+	
 	// =================Workflow Process=================
 
 	
 
-	
+	public Long getRequestWorkflowHistoryId() {
+		return requestWorkflowHistoryId;
+	}
+
+	public void setRequestWorkflowHistoryId(Long requestWorkflowHistoryId) {
+		this.requestWorkflowHistoryId = requestWorkflowHistoryId;
+	}
 
 	public String getRequestAt() {
 		return requestAt;

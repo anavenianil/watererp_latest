@@ -518,24 +518,6 @@ public class BillFullDetailsResourceIntTest {
 
     @Test
     @Transactional
-    public void checkLastPymtDtIsRequired() throws Exception {
-        int databaseSizeBeforeTest = billFullDetailsRepository.findAll().size();
-        // set the field null
-        billFullDetails.setLastPymtDt(null);
-
-        // Create the BillFullDetails, which fails.
-
-        restBillFullDetailsMockMvc.perform(post("/api/billFullDetailss")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(billFullDetails)))
-                .andExpect(status().isBadRequest());
-
-        List<BillFullDetails> billFullDetailss = billFullDetailsRepository.findAll();
-        assertThat(billFullDetailss).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkBillDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = billFullDetailsRepository.findAll().size();
         // set the field null

@@ -24,6 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -31,6 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.callippus.water.erp.domain.enumeration.BillingStatus;
 
 /**
  * Test class for the BillDetailsResource REST controller.
@@ -42,6 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 @IntegrationTest
 public class BillDetailsResourceIntTest {
+
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
 
     private static final String DEFAULT_CAN = "AAAAA";
     private static final String UPDATED_CAN = "BBBBB";
@@ -121,6 +127,17 @@ public class BillDetailsResourceIntTest {
     private static final LocalDate DEFAULT_MET_READING_DT = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_MET_READING_DT = LocalDate.now(ZoneId.systemDefault());
 
+    private static final Boolean DEFAULT_IS_ROUNDING = false;
+    private static final Boolean UPDATED_IS_ROUNDING = true;
+
+    private static final ZonedDateTime DEFAULT_INSERT_DT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_INSERT_DT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_INSERT_DT_STR = dateTimeFormatter.format(DEFAULT_INSERT_DT);
+
+
+    private static final BillingStatus DEFAULT_STATUS = BillingStatus.INITIATED;
+    private static final BillingStatus UPDATED_STATUS = BillingStatus.COMMITTED;
+
     @Inject
     private BillDetailsRepository billDetailsRepository;
 
@@ -179,6 +196,9 @@ public class BillDetailsResourceIntTest {
         billDetails.setLongi(DEFAULT_LONGI);
         billDetails.setNoMeterAmt(DEFAULT_NO_METER_AMT);
         billDetails.setMetReadingDt(DEFAULT_MET_READING_DT);
+        billDetails.setIsRounding(DEFAULT_IS_ROUNDING);
+        billDetails.setInsertDt(DEFAULT_INSERT_DT);
+        billDetails.setStatus(DEFAULT_STATUS);
     }
 
     @Test
@@ -229,6 +249,9 @@ public class BillDetailsResourceIntTest {
         assertThat(testBillDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
         assertThat(testBillDetails.getNoMeterAmt()).isEqualTo(DEFAULT_NO_METER_AMT);
         assertThat(testBillDetails.getMetReadingDt()).isEqualTo(DEFAULT_MET_READING_DT);
+        assertThat(testBillDetails.getIsRounding()).isEqualTo(DEFAULT_IS_ROUNDING);
+        assertThat(testBillDetails.getInsertDt()).isEqualTo(DEFAULT_INSERT_DT);
+        assertThat(testBillDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -237,6 +260,24 @@ public class BillDetailsResourceIntTest {
         int databaseSizeBeforeTest = billDetailsRepository.findAll().size();
         // set the field null
         billDetails.setBillDate(null);
+
+        // Create the BillDetails, which fails.
+
+        restBillDetailsMockMvc.perform(post("/api/billDetailss")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(billDetails)))
+                .andExpect(status().isBadRequest());
+
+        List<BillDetails> billDetailss = billDetailsRepository.findAll();
+        assertThat(billDetailss).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = billDetailsRepository.findAll().size();
+        // set the field null
+        billDetails.setStatus(null);
 
         // Create the BillDetails, which fails.
 
@@ -291,7 +332,10 @@ public class BillDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
                 .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
                 .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.doubleValue())))
-                .andExpect(jsonPath("$.[*].metReadingDt").value(hasItem(DEFAULT_MET_READING_DT.toString())));
+                .andExpect(jsonPath("$.[*].metReadingDt").value(hasItem(DEFAULT_MET_READING_DT.toString())))
+                .andExpect(jsonPath("$.[*].isRounding").value(hasItem(DEFAULT_IS_ROUNDING.booleanValue())))
+                .andExpect(jsonPath("$.[*].insertDt").value(hasItem(DEFAULT_INSERT_DT_STR)))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -336,7 +380,10 @@ public class BillDetailsResourceIntTest {
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
             .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
             .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.doubleValue()))
-            .andExpect(jsonPath("$.metReadingDt").value(DEFAULT_MET_READING_DT.toString()));
+            .andExpect(jsonPath("$.metReadingDt").value(DEFAULT_MET_READING_DT.toString()))
+            .andExpect(jsonPath("$.isRounding").value(DEFAULT_IS_ROUNDING.booleanValue()))
+            .andExpect(jsonPath("$.insertDt").value(DEFAULT_INSERT_DT_STR))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -388,6 +435,9 @@ public class BillDetailsResourceIntTest {
         billDetails.setLongi(UPDATED_LONGI);
         billDetails.setNoMeterAmt(UPDATED_NO_METER_AMT);
         billDetails.setMetReadingDt(UPDATED_MET_READING_DT);
+        billDetails.setIsRounding(UPDATED_IS_ROUNDING);
+        billDetails.setInsertDt(UPDATED_INSERT_DT);
+        billDetails.setStatus(UPDATED_STATUS);
 
         restBillDetailsMockMvc.perform(put("/api/billDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -430,6 +480,9 @@ public class BillDetailsResourceIntTest {
         assertThat(testBillDetails.getLongi()).isEqualTo(UPDATED_LONGI);
         assertThat(testBillDetails.getNoMeterAmt()).isEqualTo(UPDATED_NO_METER_AMT);
         assertThat(testBillDetails.getMetReadingDt()).isEqualTo(UPDATED_MET_READING_DT);
+        assertThat(testBillDetails.getIsRounding()).isEqualTo(UPDATED_IS_ROUNDING);
+        assertThat(testBillDetails.getInsertDt()).isEqualTo(UPDATED_INSERT_DT);
+        assertThat(testBillDetails.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

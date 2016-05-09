@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('custDetails.new', {
+            /*.state('custDetails.new', {
                 parent: 'custDetails',
                 url: '/new',
                 data: {
@@ -104,8 +104,8 @@ angular.module('watererpApp')
                         $state.go('custDetails');
                     })
                 }]
-            })
-            .state('custDetails.edit', {
+            })*/
+            /*.state('custDetails.edit', {
                 parent: 'custDetails',
                 url: '/{id}/edit',
                 data: {
@@ -127,7 +127,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('custDetails.delete', {
                 parent: 'custDetails',
                 url: '/{id}/delete',
@@ -150,5 +150,101 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('custDetails.new', {
+                parent: 'custDetails',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetails-dialog.html',
+                        controller: 'CustDetailsDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('custDetails.edit', {
+                parent: 'custDetails',
+                url: '/edit/:id',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetails-dialog.html',
+                        controller: 'CustDetailsDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('custDetails.categoryChange', {
+                parent: 'custDetails',
+                url: '/categoryChange',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetailsCategoryChange.html',
+                        controller: 'CustDetailsCategoryChangeController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('custDetails.categoryChangeEdit', {
+                parent: 'custDetails',
+                url: '/categoryChangeEdit/:requestId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetailsCategoryChange.html',
+                        controller: 'CustDetailsCategoryChangeController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('custDetails.pipeSizeChange', {
+                parent: 'custDetails',
+                url: '/pipeSizeChange',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetailsPipeSizeChange.html',
+                        controller: 'CustDetailsPipeSizeChangeController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('custDetails.nameChange', {
+                parent: 'custDetails',
+                url: '/nameChange',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/custDetails/custDetailsNameChange.html',
+                        controller: 'CustDetailsNameChangeController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

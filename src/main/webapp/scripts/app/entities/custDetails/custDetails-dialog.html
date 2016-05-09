@@ -1,309 +1,387 @@
 
-<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true" ng-click="clear()">&times;</button>
+			<h3 class="panel-title pull-left">Customer Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<!-- <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myCustDetailsLabel">Create or edit a
+			CustDetails</h4>
+		</div> -->
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<label for="field_SearchCan">Search By CAN</label>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myCustDetailsLabel">Create or edit a Customer Details</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="custDetails.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_can">Can</label>
-            <input type="text" class="form-control" name="can" id="field_can"
-                    ng-model="custDetails.can"
-                    required />
-            <div ng-show="editForm.can.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.can.$error.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_divCode">Division Code</label>
-            <input type="text" class="form-control" name="divCode" id="field_divCode"
-                    ng-model="custDetails.divCode"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_secCode">Section Code</label>
-            <input type="text" class="form-control" name="secCode" id="field_secCode"
-                    ng-model="custDetails.secCode"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_secName">Section Name</label>
-            <input type="text" class="form-control" name="secName" id="field_secName"
-                    ng-model="custDetails.secName"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_metReaderCode">Meter Reader Code</label>
-            <input type="text" class="form-control" name="metReaderCode" id="field_metReaderCode"
-                    ng-model="custDetails.metReaderCode"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_connDate">Connection Date</label>
-            <input id="field_connDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.connDate" is-open="datePickerForConnDate.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForConnDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_consName">Consumer Name</label>
-            <input type="text" class="form-control" name="consName" id="field_consName"
-                    ng-model="custDetails.consName"
-                    required />
-            <div ng-show="editForm.consName.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.consName.$error.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_houseNo">House No</label>
-            <input type="text" class="form-control" name="houseNo" id="field_houseNo"
-                    ng-model="custDetails.houseNo"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_address">Address</label>
-            <input type="text" class="form-control" name="address" id="field_address"
-                    ng-model="custDetails.address"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_city">City</label>
-            <input type="text" class="form-control" name="city" id="field_city"
-                    ng-model="custDetails.city"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_pinCode">Pin Code</label>
-            <input type="text" class="form-control" name="pinCode" id="field_pinCode"
-                    ng-model="custDetails.pinCode"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_categoryUnused">Category Unused</label>
-            <input type="text" class="form-control" name="categoryUnused" id="field_categoryUnused"
-                    ng-model="custDetails.categoryUnused"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_pipeSize">Pipe Size</label>
-            <input type="number" class="form-control" name="pipeSize" id="field_pipeSize"
-                    ng-model="custDetails.pipeSize"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_boardMeter">Board Meter</label>
-            <input type="text" class="form-control" name="boardMeter" id="field_boardMeter"
-                    ng-model="custDetails.boardMeter"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_sewerage">Sewerage</label>
-            <input type="text" class="form-control" name="sewerage" id="field_sewerage"
-                    ng-model="custDetails.sewerage"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_meterNo">Meter Number</label>
-            <input type="text" class="form-control" name="meterNo" id="field_meterNo"
-                    ng-model="custDetails.meterNo"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_prevBillType">Previous Bill Type</label>
-            <input type="text" class="form-control" name="prevBillType" id="field_prevBillType"
-                    ng-model="custDetails.prevBillType"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_prevBillMonth">Previous Bill Month</label>
-            <input id="field_prevBillMonth" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.prevBillMonth" is-open="datePickerForPrevBillMonth.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForPrevBillMonthOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_prevAvgKl">Previous Average Kiloliter</label>
-            <input type="number" class="form-control" name="prevAvgKl" id="field_prevAvgKl"
-                    ng-model="custDetails.prevAvgKl"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_metReadingDt">Meter Reading Date</label>
-            <input id="field_metReadingDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.metReadingDt" is-open="datePickerForMetReadingDt.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForMetReadingDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_prevReading">Previous Reading</label>
-            <input type="number" class="form-control" name="prevReading" id="field_prevReading"
-                    ng-model="custDetails.prevReading"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_metReadingMo">Meter Reading Month</label>
-            <input id="field_metReadingMo" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.metReadingMo" is-open="datePickerForMetReadingMo.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForMetReadingMoOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_metAvgKl">Meter Average Kiloliter</label>
-            <input type="number" class="form-control" name="metAvgKl" id="field_metAvgKl"
-                    ng-model="custDetails.metAvgKl"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_arrears">Arrears</label>
-            <input type="number" class="form-control" name="arrears" id="field_arrears"
-                    ng-model="custDetails.arrears"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_reversalAmt">Reversal Amount</label>
-            <input type="number" class="form-control" name="reversalAmt" id="field_reversalAmt"
-                    ng-model="custDetails.reversalAmt"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_installment">Installment</label>
-            <input type="number" class="form-control" name="installment" id="field_installment"
-                    ng-model="custDetails.installment"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_otherCharges">Other Charges</label>
-            <input type="number" class="form-control" name="otherCharges" id="field_otherCharges"
-                    ng-model="custDetails.otherCharges"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_surcharge">Surcharge</label>
-            <input type="number" class="form-control" name="surcharge" id="field_surcharge"
-                    ng-model="custDetails.surcharge"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_hrsSurcharge">Hours Surcharge</label>
-            <input type="text" class="form-control" name="hrsSurcharge" id="field_hrsSurcharge"
-                    ng-model="custDetails.hrsSurcharge"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_resUnits">Residential Units</label>
-            <input type="number" class="form-control" name="resUnits" id="field_resUnits"
-                    ng-model="custDetails.resUnits"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_metCostInstallment">Meter Cost Installment</label>
-            <input type="number" class="form-control" name="metCostInstallment" id="field_metCostInstallment"
-                    ng-model="custDetails.metCostInstallment"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_intOnArrears">Int On Arrears</label>
-            <input type="number" class="form-control" name="intOnArrears" id="field_intOnArrears"
-                    ng-model="custDetails.intOnArrears"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_lastPymtDt">Last Payment Date</label>
-            <input id="field_lastPymtDt" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.lastPymtDt" is-open="datePickerForLastPymtDt.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForLastPymtDtOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_lastPymtAmt">Last Payment Amount</label>
-            <input type="number" class="form-control" name="lastPymtAmt" id="field_lastPymtAmt"
-                    ng-model="custDetails.lastPymtAmt"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_mobileNo">Mobile Number</label>
-            <input type="text" class="form-control" name="mobileNo" id="field_mobileNo"
-                    ng-model="custDetails.mobileNo"
-                     />
-        </div>
-       <!--  <div class="form-group">
-            <label class="control-label" for="field_ccFlag">CcFlag</label>
-            <input type="text" class="form-control" name="ccFlag" id="field_ccFlag"
-                    ng-model="custDetails.ccFlag"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_cpFlag">CpFlag</label>
-            <input type="text" class="form-control" name="cpFlag" id="field_cpFlag"
-                    ng-model="custDetails.cpFlag"
-                     />
-        </div>  -->
-        
-        <div class="form-group">
-            <label class="control-label" for="field_noticeFlag">Notice Flag</label>
-            <input type="text" class="form-control" name="noticeFlag" id="field_noticeFlag"
-                    ng-model="custDetails.noticeFlag"
-                     />
-        </div>
-        <!--   <div class="form-group">
-            <label class="control-label" for="field_drFlag">DrFlag</label>
-            <input type="text" class="form-control" name="drFlag" id="field_drFlag"
-                    ng-model="custDetails.drFlag"
-                     />
-        </div>  -->
-        <div class="form-group">
-            <label class="control-label" for="field_lat">Latitude</label>
-            <input type="text" class="form-control" name="lat" id="field_lat"
-                    ng-model="custDetails.lat"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_longi">Longitude</label>
-            <input type="text" class="form-control" name="longi" id="field_longi"
-                    ng-model="custDetails.longi"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_meterFixDate">Meter Fix Date</label>
-            <input id="field_meterFixDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="custDetails.meterFixDate" is-open="datePickerForMeterFixDate.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForMeterFixDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
+							<div class="form-group"
+								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search CAN or Name or Address (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								</div>
+							</div>
+						</div>
+					</div>
 
-        <div class="form-group">
-            <label for="field_tariffCategoryMaster">Tariff Category Master</label>
-            <select class="form-control" id="field_tariffCategoryMaster" name="tariffCategoryMaster" ng-model="custDetails.tariffCategoryMaster" ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+
+
+					<hr>
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+							<label for="id">ID</label> <input type="text"
+								class="form-control" id="id" name="id" ng-model="custDetails.id"
+								readonly />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_can">Can</label> <input
+								type="text" class="form-control" name="can" id="field_can"
+								ng-model="custDetails.can" required />
+							<div ng-show="editForm.can.$invalid">
+								<p class="help-block" ng-show="editForm.can.$error.required">
+									This field is required.</p>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_divCode">DivCode</label>
+							<input type="text" class="form-control" name="divCode"
+								id="field_divCode" ng-model="custDetails.divCode" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_secCode">SecCode</label>
+							<input type="text" class="form-control" name="secCode"
+								id="field_secCode" ng-model="custDetails.secCode" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_secName">SecName</label>
+							<input type="text" class="form-control" name="secName"
+								id="field_secName" ng-model="custDetails.secName" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_metReaderCode">MetReaderCode</label>
+							<input type="text" class="form-control" name="metReaderCode"
+								id="field_metReaderCode" ng-model="custDetails.metReaderCode" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_connDate">ConnDate</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_connDate'>
+									<input id="field_connDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="custDetails.connDate"
+										is-open="datePickerForConnDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForConnDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_consName">ConsName</label>
+							<input type="text" class="form-control" name="consName"
+								id="field_consName" ng-model="custDetails.consName" required />
+							<div ng-show="editForm.consName.$invalid">
+								<p class="help-block"
+									ng-show="editForm.consName.$error.required">This field is
+									required.</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_houseNo">HouseNo</label>
+							<input type="text" class="form-control" name="houseNo"
+								id="field_houseNo" ng-model="custDetails.houseNo" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_address">Address</label>
+							<input type="text" class="form-control" name="address"
+								id="field_address" ng-model="custDetails.address" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_city">City</label> <input
+								type="text" class="form-control" name="city" id="field_city"
+								ng-model="custDetails.city" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_pinCode">PinCode</label>
+							<input type="text" class="form-control" name="pinCode"
+								id="field_pinCode" ng-model="custDetails.pinCode" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_categoryUnused">CategoryUnused</label>
+							<input type="text" class="form-control" name="categoryUnused"
+								id="field_categoryUnused" ng-model="custDetails.categoryUnused" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_pipeSize">PipeSize</label>
+							<input type="number" class="form-control" name="pipeSize"
+								id="field_pipeSize" ng-model="custDetails.pipeSize" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_boardMeter">BoardMeter</label>
+							<input type="text" class="form-control" name="boardMeter"
+								id="field_boardMeter" ng-model="custDetails.boardMeter" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_sewerage">Sewerage</label>
+							<input type="text" class="form-control" name="sewerage"
+								id="field_sewerage" ng-model="custDetails.sewerage" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_meterNo">MeterNo</label>
+							<input type="text" class="form-control" name="meterNo"
+								id="field_meterNo" ng-model="custDetails.meterNo" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_prevBillType">PrevBillType</label>
+							<input type="text" class="form-control" name="prevBillType"
+								id="field_prevBillType" ng-model="custDetails.prevBillType" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_prevBillMonth">PrevBillMonth</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_prevBillMonth'>
+									<input id="field_prevBillMonth" type="text"
+										class="form-control" uib-datepicker-popup="{{dateformat}}"
+										ng-model="custDetails.prevBillMonth"
+										is-open="datePickerForPrevBillMonth.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForPrevBillMonthOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_prevAvgKl">PrevAvgKl</label>
+							<input type="number" class="form-control" name="prevAvgKl"
+								id="field_prevAvgKl" ng-model="custDetails.prevAvgKl" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_metReadingDt">MetReadingDt</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_metReadingDt'>
+									<input id="field_metReadingDt" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="custDetails.metReadingDt"
+										is-open="datePickerForMetReadingDt.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForMetReadingDtOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_prevReading">PrevReading</label>
+							<input type="number" class="form-control" name="prevReading"
+								id="field_prevReading" ng-model="custDetails.prevReading" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_metReadingMo">MetReadingMo</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_metReadingMo'>
+									<input id="field_metReadingMo" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="custDetails.metReadingMo"
+										is-open="datePickerForMetReadingMo.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForMetReadingMoOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_metAvgKl">MetAvgKl</label>
+							<input type="number" class="form-control" name="metAvgKl"
+								id="field_metAvgKl" ng-model="custDetails.metAvgKl" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_arrears">Arrears</label>
+							<input type="number" class="form-control" name="arrears"
+								id="field_arrears" ng-model="custDetails.arrears" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_reversalAmt">ReversalAmt</label>
+							<input type="number" class="form-control" name="reversalAmt"
+								id="field_reversalAmt" ng-model="custDetails.reversalAmt" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_installment">Installment</label>
+							<input type="number" class="form-control" name="installment"
+								id="field_installment" ng-model="custDetails.installment" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_otherCharges">OtherCharges</label>
+							<input type="number" class="form-control" name="otherCharges"
+								id="field_otherCharges" ng-model="custDetails.otherCharges" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_surcharge">Surcharge</label>
+							<input type="number" class="form-control" name="surcharge"
+								id="field_surcharge" ng-model="custDetails.surcharge" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_hrsSurcharge">HrsSurcharge</label>
+							<input type="text" class="form-control" name="hrsSurcharge"
+								id="field_hrsSurcharge" ng-model="custDetails.hrsSurcharge" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_resUnits">ResUnits</label>
+							<input type="number" class="form-control" name="resUnits"
+								id="field_resUnits" ng-model="custDetails.resUnits" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_metCostInstallment">MetCostInstallment</label>
+							<input type="number" class="form-control"
+								name="metCostInstallment" id="field_metCostInstallment"
+								ng-model="custDetails.metCostInstallment" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_intOnArrears">IntOnArrears</label>
+							<input type="number" class="form-control" name="intOnArrears"
+								id="field_intOnArrears" ng-model="custDetails.intOnArrears" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_lastPymtDt">LastPymtDt</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_lastPymtDt'>
+									<input id="field_lastPymtDt" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="custDetails.lastPymtDt"
+										is-open="datePickerForLastPymtDt.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForLastPymtDtOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_lastPymtAmt">LastPymtAmt</label>
+							<input type="number" class="form-control" name="lastPymtAmt"
+								id="field_lastPymtAmt" ng-model="custDetails.lastPymtAmt" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_mobileNo">MobileNo</label>
+							<input type="text" class="form-control" name="mobileNo"
+								id="field_mobileNo" ng-model="custDetails.mobileNo" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_ccFlag">CcFlag</label> <input
+								type="text" class="form-control" name="ccFlag" id="field_ccFlag"
+								ng-model="custDetails.ccFlag" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_cpFlag">CpFlag</label> <input
+								type="text" class="form-control" name="cpFlag" id="field_cpFlag"
+								ng-model="custDetails.cpFlag" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_noticeFlag">NoticeFlag</label>
+							<input type="text" class="form-control" name="noticeFlag"
+								id="field_noticeFlag" ng-model="custDetails.noticeFlag" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_drFlag">DrFlag</label> <input
+								type="text" class="form-control" name="drFlag" id="field_drFlag"
+								ng-model="custDetails.drFlag" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_lat">Lat</label> <input
+								type="text" class="form-control" name="lat" id="field_lat"
+								ng-model="custDetails.lat" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_longi">Longi</label> <input
+								type="text" class="form-control" name="longi" id="field_longi"
+								ng-model="custDetails.longi" />
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_meterFixDate">MeterFixDate</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_meterFixDate'>
+									<input id="field_meterFixDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="custDetails.meterFixDate"
+										is-open="datePickerForMeterFixDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForMeterFixDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<label for="field_tariffCategoryMaster">Tariff Category
+								Master</label> <select class="form-control"
+								id="field_tariffCategoryMaster" name="tariffCategoryMaster"
+								ng-model="custDetails.tariffCategoryMaster"
+								ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+								<option value=""></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </form>

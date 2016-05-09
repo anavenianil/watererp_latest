@@ -38,6 +38,8 @@ import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
+import com.callippus.water.erp.domain.MeterDetails;
+import com.callippus.water.erp.domain.MeterStatus;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
@@ -46,6 +48,8 @@ import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
+import com.callippus.water.erp.repository.MeterDetailsRepository;
+import com.callippus.water.erp.repository.MeterStatusRepository;
 import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
@@ -102,6 +106,11 @@ public class ApplicationTxnResource {
     @Inject
     private ProceedingsRepository proceedingsRepository;
     
+    @Inject
+    private MeterDetailsRepository meterDetailsRepository;
+    
+    @Inject
+    private MeterStatusRepository meterStatusRepository;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -162,6 +171,9 @@ public class ApplicationTxnResource {
         }
         if(applicationTxn.getMeterDetails()!=null){
         	applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
+        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
+        		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+        		meterDetailsRepository.save(meterDetails);
         }
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
@@ -169,7 +181,14 @@ public class ApplicationTxnResource {
         if(applicationTxn.getStatus()==7){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
-            custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            if(applicationTxn.getMiddleName()!=null){
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            }
+            else{
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
+            }
+            
+            
             custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             
             custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
@@ -383,7 +402,7 @@ public class ApplicationTxnResource {
 		String division = feasibility.getDivisionMaster().getDivisionCode();
 		String street = feasibility.getStreetMaster().getStreetNo();
 		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
-		Integer can = applicationTxnRepository.findByCan(division, street);
+		Integer can = custDetailsRepository.findByCan(division, street);
 		if(can == null){
 			can =1;
 		}
@@ -442,6 +461,23 @@ public class ApplicationTxnResource {
 				 HttpStatus.OK);
 	}
 	
+	
+	/**
+     * GET  /ApplicationTxns/:id -> get the "id" applicationTxn.
+     */
+    @RequestMapping(value = "/applicationTxns/searchCan/{can}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ApplicationTxn> getApplicationTxn(@PathVariable String can) {
+        log.debug("REST request to get CustDetails : {}", can);
+        ApplicationTxn applicationTxn = applicationTxnRepository.findByCan(can);
+        return Optional.ofNullable(applicationTxn)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 	
 	/**
 	 * Display Requisition report

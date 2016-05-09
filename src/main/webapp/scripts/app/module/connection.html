@@ -17,10 +17,10 @@
 						</thead>
 						<tbody infinite-scroll="loadPage(page + 1)"
 							infinite-scroll-disabled="links['last'] == page">
-							<!-- <tr ng-repeat="request in pendingRequests"
-								ui-sref="request({type:'pending',action_type:request.id})"> -->
 							<tr ng-repeat="request in pendingRequests"
-								ng-click="getDetails(request.type)">
+								ui-sref="request({type:'pending',action_type:request.id})">
+							<!-- <tr ng-repeat="request in pendingRequests"
+								ng-click="getDetails(request.type)"> -->
 								<td>{{request.type}}</td>
 								<td class="traligncentercss">{{request.count}}</td>
 							</tr>

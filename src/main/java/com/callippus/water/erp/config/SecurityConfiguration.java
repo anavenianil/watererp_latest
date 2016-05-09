@@ -87,7 +87,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().ignoringAntMatchers("/api/unifiedPGResponse")
+		http.csrf()
+				.ignoringAntMatchers("/api/unifiedPGResponse")
+				.ignoringAntMatchers("/api/onlinePaymentCallbackByOrderId/*")
 				.and()
 				.addFilterAfter(new CsrfCookieGeneratorFilter(),
 						CsrfFilter.class).exceptionHandling()
@@ -113,6 +115,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/account/reset_password/init").permitAll()
 				.antMatchers("/api/account/reset_password/finish").permitAll()
 				.antMatchers("/api/unifiedPGResponse").permitAll()
+				.antMatchers("/api/custDetailss/searchCAN/*").permitAll()
+				.antMatchers("/api/postOnlinePaymentOrders").permitAll()
+				.antMatchers("/api/onlinePaymentCallbackByOrderId/*").permitAll()
 				.antMatchers("/api/**").authenticated()
 				.antMatchers("/api/logs/**")
 				.hasAuthority(AuthoritiesConstants.ADMIN)

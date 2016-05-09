@@ -16,5 +16,14 @@ angular.module('watererpApp').controller(
 			};
 
 			$scope.load($stateParams.type, $stateParams.action_type);
+			
+			
+			$scope.getDetails = function(requestId, requestType){
+				console.log("request Id:" +requestId);
+				console.log("request Type: "+requestType);
+				if(requestType===8){//CONNECTION CATEGORY
+					$state.go('custDetails.categoryChangeEdit',{requestId:requestId});
+				}
+			}
 
 		});

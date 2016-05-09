@@ -23,6 +23,11 @@
             "fieldId": 3,
             "fieldName": "redirectUrl",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "merchantTxnRef",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160427104544",

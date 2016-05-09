@@ -1,0 +1,247 @@
+
+<form name="editForm" role="form" novalidate ng-submit="saveChanges()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true" ng-click="clear()">&times;</button>
+			<h3 class="panel-title pull-left">Customer Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<!-- <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myCustDetailsLabel">Create or edit a
+			CustDetails</h4>
+		</div> -->
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<label for="field_SearchCan">Search By CAN</label>
+							<div class="form-group"
+								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search CAN or Name or Address (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<fieldset>
+						<legend>Customer Information</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_can">Can</label> <input
+									type="text" class="form-control" name="can" id="field_can"
+									ng-model="custDetails.can" required disabled />
+								<div ng-show="editForm.can.$invalid">
+									<p class="help-block" ng-show="editForm.can.$error.required">
+										This field is required.</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_consName">Consumer
+									Name</label> <input type="text" class="form-control" name="consName"
+									id="field_consName" ng-model="custDetails.consName" required
+									disabled />
+								<div ng-show="editForm.consName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.consName.$error.required">This field is
+										required.</p>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_mobileNo">Mobile
+									No.</label> <input type="text" class="form-control" name="mobileNo"
+									id="field_mobileNo" ng-model="custDetails.mobileNo" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_email">Email
+									Address</label> <input type="text" class="form-control" name="email"
+									id="field_email" ng-model="custDetails.email" disabled />
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_houseNo">HouseNo</label>
+								<input type="text" class="form-control" name="houseNo"
+									id="field_houseNo" ng-model="custDetails.houseNo" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_secName">SecName</label>
+								<input type="text" class="form-control" name="secName"
+									id="field_secName" ng-model="custDetails.secName" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_secCode">SecCode</label>
+								<input type="text" class="form-control" name="secCode"
+									id="field_secCode" ng-model="custDetails.secCode" disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_city">City</label> <input
+									type="text" class="form-control" name="city" id="field_city"
+									ng-model="custDetails.city" disabled />
+							</div>
+						</div>
+
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<label class="control-label" for="field_address">Address
+									Detail</label>
+								<textarea rows="2" cols="30" class="form-control" name="address"
+									id="field_address" style="resize: none"
+									ng-model="custDetails.address" disabled></textarea>
+							</div>
+						</div>
+					</fieldset>
+					<hr>
+					<!-- <div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<select class="input-sm form-control" id="changeCase"
+								ng-model="changeCase"
+								ng-options="requestMaster as requestMaster.requestType for requestMaster in requestMasters track by requestMaster.id">
+								<option value="" label="">Select Case</option>
+								<option value="0" label="Connection Category">Connection
+									Category</option>
+								<option value="1" label="Pipe Size">Pipe Size</option>
+								<option value="2" label="Change Name">Change Name</option>
+								<option value="3" label="Connection Termination">Connection
+									Termination</option>
+							</select>
+						</div>
+					</div>
+					<hr> -->
+					<br>
+					<fieldset>
+						<legend>Change Connection Category</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_previousValue">Previous
+									Reading</label> <input type="number" class="form-control"
+									name="previousValue" id="field_previousValue"
+									ng-model="workflowDTO.workflowTxnDetailss[0].previousValue"
+									disabled />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_newValue">Present
+									Reading</label> <input type="number" class="form-control"
+									name="newValue" id="field_newValue"
+									ng-model="workflowDTO.workflowTxnDetailss[0].newValue" />
+							</div>
+							<div class="col-sm-3">
+								<label for="field_tariffCategoryMaster">Previous
+									Category </label> <select class="form-control"
+									id="field_tariffCategoryMaster" name="tariffCategoryMaster"
+									ng-model="workflowDTO.previousValue"
+									ng-options="tariffCategoryMaster.id as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
+									disabled>
+									<option value=""></option>
+								</select>
+							</div>
+							<div class="col-sm-3">
+								<label for="field_tariffCategoryMaster">Change Category
+								</label> <select class="form-control" id="field_tariffCategoryMaster"
+									name="tariffCategoryMaster"
+									ng-change="disableOrg(workflowDTO.workflowTxnDetailss[1].newValue)"
+									ng-model="workflowDTO.workflowTxnDetailss[1].newValue"
+									ng-options="tariffCategoryMaster.id as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+									<option value=""></option>
+								</select>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4">
+								<label class="control-label" for="field_organization">Organization</label>
+								<input type="checkbox" class="form-control" name="organization"
+									id="field_organization"
+									ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
+									ng-model="workflowDTO.workflowTxnDetailss[2].newValue" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_organizationName">Organization
+									Name</label> <input type="text" class="form-control"
+									name="organizationName" id="field_organizationName"
+									ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
+									ng-model="workflowDTO.workflowTxnDetailss[3].newValue" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_designation">Designation</label>
+								<input type="text" class="form-control" name="designation"
+									ng-model="workflowDTO.workflowTxnDetailss[4].newValue"
+									ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
+									id="field_designation" />
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4">
+								<label class="control-label" for="field_propertyDoc">Property
+									Ownership Document</label> <br> <input type="checkbox"
+									ng-model="workflowDTO.workflowTxnDetailss[5].newValue"
+									ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
+									ng-true-value="'Tittle Deed/Offer letter'"
+									ng-false-value="'Not Submitted'">&nbsp;<span>Tittle
+									Deed/Offer letter </span><br> <input type="checkbox"
+									ng-model="workflowDTO.workflowTxnDetailss[6].newValue"
+									ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
+									ng-true-value="'Rented Property-lease-Rent Agreement'"
+									ng-false-value="'Not Submitted'">&nbsp;<span>Rented
+									Property- lease-Rent Agreement </span>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4">
+								<label class="control-label" for="field_requestedDate">Requested
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_requestedDate'>
+										<input id="field_requestedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="workflowDTO.requestWorkflowHistory.requestedDate"
+											max-date="dtmax"
+											is-open="datePickerForRequestedDate.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForRequestedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-8">
+								<label class="control-label" for="field_remarks">Remarks</label>
+								<textarea rows="1" cols="30" class="form-control" name="remarks"
+									id="field_remarks" style="resize: none"
+									ng-model="workflowDTO.requestWorkflowHistory.remarks"></textarea>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

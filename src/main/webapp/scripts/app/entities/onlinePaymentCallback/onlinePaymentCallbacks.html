@@ -20,9 +20,11 @@
                     <th jh-sort-by="paymentMode"><span>Payment Mode</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="serviceCode"><span>Service Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="message"><span>Message</span> <span class="glyphicon glyphicon-sort"></span></th>
+
                     <th jh-sort-by="responseCode"><span>Response Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="totalAmountPaid"><span>Total Amount Paid</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="userDefinedField"><span>User Defined Field</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="merchantTxnRef"><span>Merchant Txn Ref</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="merchantMaster.id"><span>Merchant Master</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="onlinePaymentOrder.id"><span>Online Payment Order</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -38,6 +40,7 @@
                     <td>{{onlinePaymentCallback.responseCode}}</td>
                     <td>{{onlinePaymentCallback.totalAmountPaid}}</td>
                     <td>{{onlinePaymentCallback.userDefinedField}}</td>
+                    <td>{{onlinePaymentCallback.merchantTxnRef}}</td>
                     <td>
                         <a ui-sref="merchantMaster.detail({id:onlinePaymentCallback.merchantMaster.id})">{{onlinePaymentCallback.merchantMaster.id}}</a>
                     </td>

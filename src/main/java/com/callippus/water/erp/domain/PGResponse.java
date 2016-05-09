@@ -15,10 +15,10 @@ public class PGResponse {
 	private String paymentMode;
 
 	@XmlElement(name = "MerchantRefNumber")
-	private Long merchantRefNumber;
+	private String merchantRefNumber;
 
-	@XmlElement(name = "UserDefinedField")
-	private String userDefinedField;
+	@XmlElement(name = "UserDefinedFields")
+    private UserDefinedFields userDefinedFields;
 
 	@XmlElement(name = "Message")
 	private String message;
@@ -34,6 +34,9 @@ public class PGResponse {
 
 	@XmlElement(name = "TotalAmountPaid")
 	private Float totalAmountPaid;
+	
+	@XmlElement(name = "ValidationNumber")
+	private String validationNumber;	
 
 	public String getMerchantCode() {
 		return merchantCode;
@@ -51,20 +54,20 @@ public class PGResponse {
 		this.paymentMode = paymentMode;
 	}
 	
-	public Long getMerchantRefNumber() {
+	public String getMerchantRefNumber() {
 		return merchantRefNumber;
 	}
 
-	public void setMerchantRefNumber(Long merchantRefNumber) {
+	public void setMerchantRefNumber(String merchantRefNumber) {
 		this.merchantRefNumber = merchantRefNumber;
 	}
 
-	public String getUserDefinedField() {
-		return userDefinedField;
+	public UserDefinedFields getUserDefinedFields() {
+		return userDefinedFields;
 	}
 
-	public void setUserDefinedField(String userDefinedField) {
-		this.userDefinedField = userDefinedField;
+	public void setUserDefinedFields(UserDefinedFields userDefinedFields) {
+		this.userDefinedFields = userDefinedFields;
 	}
 
 	public String getMessage() {
@@ -107,11 +110,20 @@ public class PGResponse {
 		this.totalAmountPaid = totalAmountPaid;
 	}
 
+	
+	public String getValidationNumber() {
+		return validationNumber;
+	}
+
+	public void setValidationNumber(String validationNumber) {
+		this.validationNumber = validationNumber;
+	}
+
 	@Override
 	public String toString() {
 		return "ClassPojo [MerchantCode = " + merchantCode + ", PaymentMode = "
 				+ paymentMode + ", MerchantRefNumber = " + merchantRefNumber
-				+ ", UserDefinedField = " + userDefinedField + ", Message = "
+				+ ", UserDefinedFields = " + userDefinedFields.toString() + ", Message = "
 				+ message + ", ServiceCode = " + serviceCode
 				+ ", ResponseCode = " + responseCode + ", Currency = "
 				+ currency + ", TotalAmountPaid = " + totalAmountPaid + "]";

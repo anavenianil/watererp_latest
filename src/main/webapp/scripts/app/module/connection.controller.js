@@ -55,5 +55,8 @@ angular.module('watererpApp').controller(
 				if (type === 'METER CHANGE'){
 					$state.go('meterChange');
 				}
+				if (type === 'CONNECTION CATEGORY'){
+					$state.go('workflowTxnDetails');
+				}
 			}
 		});
