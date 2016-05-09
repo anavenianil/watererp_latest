@@ -363,8 +363,16 @@ public class BillingService {
 			if (bill_details.getCurrentBillType().equals("M")) {
 
 				if (!customer.getPrevReading().equals("0")) {
+					if(bill_details.getIsRounding())
+					{
+						unitsKL = bill_details.getPresentReading() + 999
+								- bill_details.getInitialReading();
+					}
+					else
+					{
 					unitsKL = bill_details.getPresentReading()
 							- bill_details.getInitialReading();
+					}
 
 					units = unitsKL * 1000.0f;
 					
