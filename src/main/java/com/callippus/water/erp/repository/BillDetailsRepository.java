@@ -13,9 +13,9 @@ import java.util.List;
 public interface BillDetailsRepository extends JpaRepository<BillDetails,Long> {
 
     @Query("select billDetails from BillDetails billDetails where billDetails.mtrReader.login = ?#{principal.username}")
-    List<BillDetails> findByUserIsCurrentUser();
+    List<BillDetails> findByMtrReaderIsCurrentUser();
+
     
     @Query("select bd from BillDetails bd where bd.status='INITIATED' and bd.can=:can")
     public BillDetails findValidBillForCan(@Param("can") String can);
-
 }

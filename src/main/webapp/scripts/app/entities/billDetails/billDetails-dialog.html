@@ -1,4 +1,5 @@
 
+
 <form name="editForm" role="form" novalidate ng-submit="save()"
 	show-validation>
 	<div class="panel panel-primary">
@@ -180,8 +181,15 @@
 								<label class="control-label" for="field_presentReading">Present
 									Reading</label>
 								<input type="number" class="form-control" name="presentReading"
-									id="field_presentReading" ng-model="billDetails.presentReading"
+									id="field_presentReading" ng-model="billDetails.presentReading" ng-change="checkPrevious()"
 									required />
+								<div ng-show="editForm.presentReading.$invalid">
+									<p class="help-block"
+										ng-show="editForm.presentReading.$error.required">This field
+										is required.</p>
+									<p class="help-block"
+										ng-show="editForm.presentReading.$error.ltPrevious">Value is lesser than Previous Reading.</p>
+								</div>
 							</div>
 
 						</div>
@@ -193,6 +201,17 @@
 									ng-model="billDetails.mtrReader"
 									ng-options='user as (user.firstName + " " + user.lastName + " (" + user.login +")") for user in users track by user.id'>
 								</select>
+							</div>
+							<div class="col-sm-4">
+							</div>
+							<div class="col-sm-4"  ng-show="isRounding">
+								<label for="field_paymentTypes">Meter Rounding</label>
+								<div class="form-group">
+									<div class='input-group' id='field_mtrRounding'>
+										<input id="field_mtrRounding" type="checkbox"
+											class="form-control" ng-model="billDetails.mtrRounding" />
+									</div>
+								</div>
 							</div>
 						</div>
 

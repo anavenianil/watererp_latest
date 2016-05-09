@@ -123,6 +123,9 @@ public class BillDetails implements Serializable {
     @Column(name = "met_reading_dt")
     private LocalDate metReadingDt;
 
+    @Column(name = "is_rounding")
+    private Boolean isRounding;
+
     @Column(name = "insert_dt")
     private ZonedDateTime insertDt;
 
@@ -399,6 +402,14 @@ public class BillDetails implements Serializable {
         this.metReadingDt = metReadingDt;
     }
 
+    public Boolean getIsRounding() {
+        return isRounding;
+    }
+
+    public void setIsRounding(Boolean isRounding) {
+        this.isRounding = isRounding;
+    }
+
     public ZonedDateTime getInsertDt() {
         return insertDt;
     }
@@ -476,6 +487,7 @@ public class BillDetails implements Serializable {
             ", longi='" + longi + "'" +
             ", noMeterAmt='" + noMeterAmt + "'" +
             ", metReadingDt='" + metReadingDt + "'" +
+            ", isRounding='" + isRounding + "'" +
             ", insertDt='" + insertDt + "'" +
             ", status='" + status + "'" +
             '}';

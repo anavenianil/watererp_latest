@@ -4,14 +4,15 @@ angular
 		.module('watererpApp')
 		.controller(
 				'BillDetailsDialogController',
-				function($scope, $state, $filter, BillDetails, BillDetailsSvc, CustDetails,
-						CustDetailsService, ParseLinks, $stateParams, $http,
-						User) {
+				function($scope, $state, $filter, BillDetails, BillDetailsSvc,
+						CustDetails, CustDetailsService, ParseLinks,
+						$stateParams, $http, User) {
 
 					$scope.recordExists = false;
 					$scope.billDetailss = [];
 					$scope.predicate = 'id';
 					$scope.billDetails = {};
+					$scope.isRounding = false;
 					$scope.currentBillTypes = [ {
 						id : 'M',
 						name : 'METERED'
@@ -137,12 +138,36 @@ angular
 						}
 
 					}
-					
+
+					$scope.checkPrevious = function() {
+						$scope.billDetails.mtrRounding = false;
+						if ($scope.billDetails.initialReading > $scope.billDetails.presentReading) {
+
+							if ($scope.billDetails.initialReading > 900
+									&& $scope.billDetails.presentReading < 100) {
+								$scope.isRounding = true;
+								$scope.editForm.presentReading.$setValidity(
+										"ltPrevious", true);
+								return true;
+							} else {
+								$scope.isRounding = false;
+								$scope.editForm.presentReading.$setValidity(
+										"ltPrevious", false);
+								return true;
+							}
+						} else {
+							$scope.isRounding = false;
+							$scope.editForm.presentReading.$setValidity(
+									"ltPrevious", true);
+							return true;
+						}
+					}
+
 					$scope.cancel = function() {
 						BillDetailsSvc.cancelBillForCan({
 							can : $scope.billDetails.can
 						}).then(function(result) {
-							if(result != null && result !== 'error'){
+							if (result != null && result !== 'error') {
 								$scope.recordExists = false;
 								$scope.billDetailss = [];
 								$scope.predicate = 'id';
@@ -153,7 +178,7 @@ angular
 							}
 						});
 					}
-					
+
 					$scope.checkDates = function() {
 
 						$scope.billDetails.forceManual = false;
@@ -194,7 +219,7 @@ angular
 						BillDetailsSvc.findByCan({
 							can : can
 						}).then(function(result) {
-							if(result != null && result !== ''){
+							if (result != null && result !== '') {
 								$scope.billDetails = result;
 								$scope.recordExists = true;
 							}

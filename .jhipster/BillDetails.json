@@ -171,13 +171,18 @@
             "fieldName": "metReadingDt",
             "fieldType": "LocalDate"
         },
-        {
+	{
             "fieldId": 33,
+            "fieldName": "isRounding",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldId": 34,
             "fieldName": "insertDt",
             "fieldType": "ZonedDateTime"
         },
 	{
-            "fieldId": 34,
+            "fieldId": 35,
             "fieldName": "status",
             "fieldType": "BillingStatus",
             "fieldValues": "INITIATED, COMMITTED, CANCELLED",

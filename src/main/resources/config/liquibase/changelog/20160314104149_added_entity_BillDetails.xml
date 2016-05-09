@@ -55,6 +55,7 @@
             <column name="longi" type="varchar(255)"/>
             <column name="no_meter_amt" type="${floatType}"/>
             <column name="met_reading_dt" type="date"/>
+            <column name="is_rounding" type="bit"/>
             <column name="insert_dt" type="timestamp"/>
             <column name="status" type="varchar(255)">
                 <constraints nullable="false" />
