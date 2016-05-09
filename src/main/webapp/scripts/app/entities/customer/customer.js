@@ -143,7 +143,7 @@ angular.module('watererpApp')
                 parent: 'customer',
                 url: '/categoryChange',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'Customer'
                 },
                 views: {
@@ -159,7 +159,7 @@ angular.module('watererpApp')
                 parent: 'customer',
                 url: '/categoryChange/:id/:requestTypeId',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'Customer'
                 },
                 views: {
@@ -175,7 +175,7 @@ angular.module('watererpApp')
                 parent: 'customer',
                 url: '/pipeSizeChange',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'Customers'
                 },
                 views: {
@@ -191,7 +191,7 @@ angular.module('watererpApp')
                 parent: 'customer',
                 url: '/nameChange',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'Customers'
                 },
                 views: {

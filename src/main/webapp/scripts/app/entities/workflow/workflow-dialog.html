@@ -16,8 +16,7 @@
 						</div>
 						<div class="col-sm-3">
 							<label class="control-label" for="field_stageId">Stage Id</label>
-							<input type="number" class="form-control" name="stageId"
-								min="1"
+							<input type="number" class="form-control" name="stageId" min="1"
 								id="field_stageId" ng-model="workflow.stageId" />
 						</div>
 
@@ -30,9 +29,9 @@
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<label for="field_workflowStageMaster">Work Flow Stage Master</label>
-							<select class="form-control" id="field_workflowStageMaster"
-								name="workflowStageMaster"
+							<label for="field_workflowStageMaster">Work Flow Stage
+								Master</label> <select class="form-control"
+								id="field_workflowStageMaster" name="workflowStageMaster"
 								ng-model="workflow.workflowStageMaster"
 								ng-options="workflowStageMaster as workflowStageMaster.name for workflowStageMaster in workflowstagemasters track by workflowStageMaster.id">
 								<option value=""></option>
@@ -45,6 +44,7 @@
 							<label for="field_relativeFromRole">Relative From Role</label> <select
 								class="form-control" id="field_relativeFromRole"
 								name="relativeFromRole" ng-model="workflow.relativeFromRole"
+								ng-disabled="workflow.stageId===1"
 								ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
 								<option value=""></option>
 							</select>
@@ -53,6 +53,7 @@
 							<label for="field_absoluteFromRole">Absolute From Role</label> <select
 								class="form-control" id="field_absoluteFromRole"
 								name="absoluteFromRole" ng-model="workflow.absoluteFromRole"
+								ng-disabled="workflow.stageId===1"
 								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 								<option value=""></option>
 							</select>
@@ -69,6 +70,7 @@
 							<label for="field_relativeToRole">Relative To Role</label> <select
 								class="form-control" id="field_relativeToRole"
 								name="relativeToRole" ng-model="workflow.relativeToRole"
+								ng-disabled="workflow.relationshipType.id===2"
 								ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
 								<option value=""></option>
 							</select>
@@ -80,13 +82,14 @@
 							<label for="field_absoluteToRole">Absolute To Role</label> <select
 								class="form-control" id="field_absoluteToRole"
 								name="absoluteToRole" ng-model="workflow.absoluteToRole"
+								ng-disabled="workflow.relationshipType.id===1"
 								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 								<option value=""></option>
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<label for="field_escalationRelationshipType">Escalation Relationship Type</label>
-							<select class="form-control"
+							<label for="field_escalationRelationshipType">Escalation
+								Relationship Type</label> <select class="form-control"
 								id="field_escalationRelationshipType"
 								name="escalationRelationshipType"
 								ng-model="workflow.escalationRelationshipType"
@@ -95,19 +98,21 @@
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<label for="field_relativeEscalationTo">Relative Escalation To</label>
-							<select class="form-control" id="field_relativeEscalationTo"
-								name="relativeEscalationTo"
+							<label for="field_relativeEscalationTo">Relative
+								Escalation To</label> <select class="form-control"
+								id="field_relativeEscalationTo" name="relativeEscalationTo"
 								ng-model="workflow.relativeEscalationTo"
-								ng-options="workflowRelations as workflowRelations.id for workflowRelations in workflowrelationss track by workflowRelations.id">
+								ng-disabled="workflow.escalationRelationshipType.id===2"
+								ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
 								<option value=""></option>
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<label for="field_absoluteEscalationTo">Absolute Escalation To</label>
-							<select class="form-control" id="field_absoluteEscalationTo"
-								name="absoluteEscalationTo"
+							<label for="field_absoluteEscalationTo">Absolute
+								Escalation To</label> <select class="form-control"
+								id="field_absoluteEscalationTo" name="absoluteEscalationTo"
 								ng-model="workflow.absoluteEscalationTo"
+								ng-disabled="workflow.escalationRelationshipType.id===1"
 								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 								<option value=""></option>
 							</select>
