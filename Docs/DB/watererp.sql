@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.5.27
+-- Server version	5.5.40
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -201,7 +201,7 @@ CREATE TABLE `bill_details` (
   `no_meter_amt` float DEFAULT NULL,
   `met_reading_dt` date DEFAULT NULL,
   `is_rounding` bit(1) DEFAULT NULL,
-  `insert_dt` timestamp NULL,
+  `insert_dt` timestamp NULL DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   `mtr_reader_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -313,8 +313,8 @@ DROP TABLE IF EXISTS `bill_run_details`;
 CREATE TABLE `bill_run_details` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `can` varchar(255) DEFAULT NULL,
-  `from_dt` timestamp NULL,
-  `to_dt` timestamp NULL,
+  `from_dt` timestamp NULL DEFAULT NULL,
+  `to_dt` timestamp NULL DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `remarks` varchar(255) DEFAULT NULL,
   `bill_full_details_id` bigint(20) DEFAULT NULL,
@@ -5900,7 +5900,7 @@ CREATE TABLE `menu_item` (
   `path` varchar(255) NOT NULL,
   `modified_date` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`menu_item`
@@ -5949,10 +5949,69 @@ INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES
  (37,'Online Payment Order','#/onlinePaymentOrders','2016-04-18 00:00:00'),
  (38,'Online Payment Response','#/onlinePaymentResponses','2016-04-18 00:00:00'),
  (39,'Online Payment Callback','#/onlinePaymentCallbacks','2016-04-18 00:00:00'),
- (40,'Customer Category Change','#/custDetailss/categoryChange','2016-05-03 00:00:00'),
+ (40,'Customer Category Change','#/customers/categoryChange','2016-05-03 00:00:00'),
  (41,'Pipe Size Change','#/custDetailss/pipeSizeChange','2016-05-03 00:00:00'),
  (42,'Name Change','#/custDetailss/nameChange','2016-05-03 00:00:00'),
- (43,'Connection Termination','#/connectionTerminates/new','2016-05-03 00:00:00');
+ (43,'Connection Termination','#/connectionTerminates/new','2016-05-03 00:00:00'),
+ (44,'Application Type Master','#/application_type_masters','2016-05-03 00:00:00'),
+ (45,'Bill Run Details','#/bill_run_detailss','2016-05-03 00:00:00'),
+ (46,'Cash Book Master','#/cash_book_masters','2016-05-03 00:00:00');
+INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
+ (47,'Category Master','#/category_masters','2016-05-03 00:00:00'),
+ (48,'Category Pipe Size Mapping','#/category_pipe_size_mappings','2016-05-03 00:00:00'),
+ (49,'Collection Type Master','#/collection_type_masters','2016-05-03 00:00:00'),
+ (50,'Configuration Details','#/configuration_detailss','2016-05-03 00:00:00'),
+ (51,'Connection Type Master','#/connection_type_masters','2016-05-03 00:00:00'),
+ (52,'Customer Meter Mapping','#/cust_meter_mappings','2016-05-03 00:00:00'),
+ (53,'Customer','#/customers','2016-05-03 00:00:00'),
+ (54,'Data Base Change Log','#/databasechangelogs','2016-05-03 00:00:00'),
+ (55,'Data Base Change Log Lock','#/databasechangeloglocks','2016-05-03 00:00:00'),
+ (56,'Department Type Master','#/department_type_masters','2016-05-03 00:00:00'),
+ (57,'Departments Hierarchy','#/departments_hierarchys','2016-05-03 00:00:00'),
+ (58,'Departments Master','#/departments_masters','2016-05-03 00:00:00'),
+ (59,'Design Category Master','#/desig_category_masters','2016-05-03 00:00:00'),
+ (60,'Designation Mappings','#/designation_mappingss','2016-05-03 00:00:00');
+INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
+ (61,'Designation Master','#/designation_masters','2016-05-03 00:00:00'),
+ (62,'Division Master','#/division_masters','2016-05-03 00:00:00'),
+ (63,'Docket Code','#/docket_codes','2016-05-03 00:00:00'),
+ (64,'Employee Master','#/emp_masters','2016-05-03 00:00:00'),
+ (65,'Employee Role Mapping ','#/emp_role_mappings','2016-05-03 00:00:00'),
+ (66,'Expense Detaills','#/expense_detailss','2016-05-03 00:00:00'),
+ (67,'Feasibility Status','#/feasibility_statuss','2016-05-03 00:00:00'),
+ (68,'File Number','#/file_numbers','2016-05-03 00:00:00'),
+ (69,'File Upload Master','#/file_upload_masters','2016-05-03 00:00:00'),
+ (70,'Group Master','#/group_masters','2016-05-03 00:00:00'),
+ (71,'Id Proof Master','#/id_proof_masters','2016-05-03 00:00:00'),
+ (72,'Instument Issuer Master ','#/instrument_issuer_masters','2016-05-03 00:00:00'),
+ (73,'Item Details','#/item_detailss','2016-05-03 00:00:00'),
+ (74,'Item Required','#/item_requireds','2016-05-03 00:00:00'),
+ (75,'Main Sewerage Size','#/main_sewerage_sizes','2016-05-03 00:00:00');
+INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
+ (76,'Main Water Size','#/main_water_sizes','2016-05-03 00:00:00'),
+ (77,'Make Of Pipe','#/make_of_pipes','2016-05-03 00:00:00'),
+ (78,'Meter Details','#/meter_detailss','2016-05-03 00:00:00'),
+ (79,'Meter Status','#/meter_statuss','2016-05-03 00:00:00'),
+ (80,'MMG Material Master','#/mmg_material_masters','2016-05-03 00:00:00'),
+ (81,'MMG Terms Master','#/mmg_terms_masters','2016-05-03 00:00:00'),
+ (82,'Organization Hierarchy','#/org_hierarchys','2016-05-03 00:00:00'),
+ (83,'Organization Role Hierarchy','#/org_role_hierarchys','2016-05-03 00:00:00'),
+ (84,'Organization Role Instance','#/org_role_instances','2016-05-03 00:00:00'),
+ (85,'Organization Role Master','#/org_roles_masters','2016-05-03 00:00:00'),
+ (86,'Payment Types','#/payment_typess','2016-05-03 00:00:00'),
+ (87,'Percentage Master','#/percentage_masters','2016-05-03 00:00:00'),
+ (88,'Piipe Size Master','#/pipe_size_masters','2016-05-03 00:00:00'),
+ (89,'Proceedings','#/proceedingss','2016-05-03 00:00:00'),
+ (90,'Reallotment','#/re_allotments','2016-05-03 00:00:00');
+INSERT INTO `menu_item` (`id`,`name`,`path`,`modified_date`) VALUES 
+ (91,'Request Design Work Flow Mapping','#/req_desig_workflow_mappings','2016-05-03 00:00:00'),
+ (92,'Request Organization Work Flow Mapping','#/req_org_workflow_mappings','2016-05-03 00:00:00'),
+ (93,'Request Master','#/request_masters','2016-05-03 00:00:00'),
+ (94,'Request Work Flow History','#/request_workflow_historys','2016-05-03 00:00:00'),
+ (95,'Request Work Flow mapping','#/request_workflow_mappings','2016-05-03 00:00:00'),
+ (96,'Revenue Type Master','#/revenue_type_masters','2016-05-03 00:00:00'),
+ (97,'Role  Work Flow Mapping','#/role_workflow_mappings','2016-05-03 00:00:00'),
+ (98,'Schema Master','#/scheme_masters','2016-05-03 00:00:00');
 /*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
 
 
@@ -7402,7 +7461,7 @@ CREATE TABLE `url` (
   `url_pattern` varchar(255) NOT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`url`
@@ -7453,10 +7512,65 @@ INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES
  (40,'/onlinePaymentOrder',1),
  (41,'/onlinePaymentResponse',1),
  (42,'/onlinePaymentCallback',1),
- (43,'/custDetailss/categoryChange',1),
+ (43,'/customers/categoryChange',1),
  (44,'/custDetailss/pipeSizeChange',1),
  (45,'/custDetailss/nameChange',1),
- (46,'/connectionTerminates/new',1);
+ (46,'/connectionTerminates/new',1),
+ (47,'/application_type_masters',1),
+ (48,'/bill_run_detailss',1),
+ (49,'/cash_book_masters',1),
+ (50,'/category_masters',1),
+ (51,'/category_pipe_size_mappings',1),
+ (52,'/collection_type_masters',1),
+ (53,'/configuration_detailss',1),
+ (54,'/connection_type_masters',1),
+ (55,'/cust_meter_mappings',1),
+ (56,'/customers',1),
+ (57,'/databasechangelogs',1),
+ (58,'/databasechangeloglocks',1),
+ (59,'/department_type_masters',1),
+ (60,'/departments_hierarchys',1),
+ (61,'/departments_masters',1),
+ (62,'/desig_category_masters',1),
+ (63,'/designation_mappingss',1),
+ (64,'/designation_masters',1),
+ (65,'/division_masters',1),
+ (66,'/docket_codes',1),
+ (67,'/emp_masters',1);
+INSERT INTO `url` (`id`,`url_pattern`,`version`) VALUES 
+ (68,'/emp_role_mappings',1),
+ (69,'/expense_detailss',1),
+ (70,'/feasibility_statuss',1),
+ (71,'/file_numbers',1),
+ (72,'/file_upload_masters',1),
+ (73,'/group_masters',1),
+ (74,'/id_proof_masters',1),
+ (75,' /item_detailss',1),
+ (76,'/item_requireds',1),
+ (77,'/main_sewerage_sizes',1),
+ (78,'/main_water_sizes',1),
+ (79,'/make_of_pipes',1),
+ (80,'/meter_detailss',1),
+ (81,'/meter_statuss',1),
+ (82,'/mmg_material_masters',1),
+ (83,'/mmg_terms_masters',1),
+ (84,'/org_hierarchys',1),
+ (85,'/org_role_hierarchys',1),
+ (86,'/org_role_instances',1),
+ (87,'/org_roles_masters',1),
+ (88,'/payment_typess',1),
+ (89,'/percentage_masters',1),
+ (90,'/pipe_size_masters',1),
+ (91,'/proceedingss',1),
+ (92,'/re_allotments',1),
+ (93,'/req_desig_workflow_mappings',1),
+ (94,'/req_org_workflow_mappings',1),
+ (95,'/request_masters',1),
+ (96,'/request_workflow_historys',1),
+ (97,'/request_workflow_mappings',1),
+ (98,'/revenue_type_masters',1),
+ (99,'/role_workflow_mappings',1),
+ (100,'/scheme_masters',1);
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 
