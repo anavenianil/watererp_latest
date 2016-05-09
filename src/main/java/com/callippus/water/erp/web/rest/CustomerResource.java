@@ -63,6 +63,7 @@ public class CustomerResource {
         }
         Customer result = customerRepository.save(customer);
         try{
+        	workflowService.setRemarks(customer.getRemarks());
         	workflowService.getUserDetails();
         	custDetailsChangeWorkflowService.createTxn(customer);
         }
@@ -142,9 +143,10 @@ public class CustomerResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
         @Timed
         public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(@RequestBody Customer customer) throws URISyntaxException {
-            log.debug("REST request to save WorkflowTxnDetails : {}", customer);
+            log.debug("REST request to save Customer : {}", customer);
             
             try{
+            	workflowService.setRemarks(customer.getRemarks());
             	workflowService.getUserDetails();
             	custDetailsChangeWorkflowService.approvedCahangeCaseRequest(customer);
             }
@@ -153,8 +155,8 @@ public class CustomerResource {
             }
             customerRepository.save(customer);
             
-            return ResponseEntity.created(new URI("/api/workflowTxnDetailss/"))
-                .headers(HeaderUtil.createEntityCreationAlert("workflowTxnDetails",""))
+            return ResponseEntity.created(new URI("/api/customersApprove/"))
+                .headers(HeaderUtil.createEntityCreationAlert("customer",""))
                 .body(null);
         }
 }

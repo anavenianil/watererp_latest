@@ -17,8 +17,6 @@ angular
 					$scope.getCustDetails = function(can) {
 						CustDetailsSearchCAN.get({can : can},function(result) {
 											$scope.custDetails = result;
-											$scope.customer.meterReading = $scope.custDetails.prevReading;
-											$scope.customer.tariffCategoryMaster = $scope.custDetails.tariffCategoryMaster;
 										});
 					};
 					
