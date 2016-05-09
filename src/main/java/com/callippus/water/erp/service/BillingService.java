@@ -299,7 +299,7 @@ public class BillingService {
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
-			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			dTo = bill_details.getMetReadingDt();
 
 			// Currently Metered
 			if (bill_details.getCurrentBillType().equals("M")) {
