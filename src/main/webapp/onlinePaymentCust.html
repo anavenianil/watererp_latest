@@ -243,21 +243,21 @@ p+p {
 			var regExUDF = /^[a-zA-Z0-9]{6,10}$/;
 			var regExEmail = /^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
 			
-			if (!regExUDF.test(document.forms[0].userDefinedField.value)) {
-				errors[errors.length] = "Enter valid CAN.";
-			}
+// 			if (!regExUDF.test(document.forms[0].userDefinedField.value)) {
+// 				errors[errors.length] = "Enter valid CAN.";
+// 			}
 			
-			if (!(isNumber(document.forms[0].amount.value) && document.forms[0].amount.value > 0 && document.forms[0].amount.value < 10000000 )) {
-				errors[errors.length] = "Enter valid Amount.";
-			}
+// 			if (!(isNumber(document.forms[0].amount.value) && document.forms[0].amount.value > 0 && document.forms[0].amount.value < 10000000 )) {
+// 				errors[errors.length] = "Enter valid Amount.";
+// 			}
 
-			if (!regExEmail.test(document.forms[0].email.value)) {
-				errors[errors.length] = "Enter valid Email.";
-			}
+// 			if (!regExEmail.test(document.forms[0].email.value)) {
+// 				errors[errors.length] = "Enter valid Email.";
+// 			}
 			
-			if (!(isNumber(document.forms[0].phone.value) && document.forms[0].phone.value > 99999999 && document.forms[0].phone.value < 9999999999 )) {
-				errors[errors.length] = "Enter valid Phone No.";
-			}
+// 			if (!(isNumber(document.forms[0].phone.value) && document.forms[0].phone.value > 99999999 && document.forms[0].phone.value < 9999999999 )) {
+// 				errors[errors.length] = "Enter valid Phone No.";
+// 			}
 			
 			 if (errors.length > 0) {
 
@@ -413,7 +413,7 @@ p+p {
 								<label class="control-label" for="field_email">Email</label>
 								<input type="email" class="form-control" name="email"
 									required="required" id="field_email" />
-									<span class="help-inline">Invalid Email</span>
+									<span class="help-inline">Invalid Email</span> 
 							</div>
 						</div>
 						<div class="row">
@@ -442,8 +442,6 @@ p+p {
 		</div>
 
 	</form>
-
-
 
 </body>
 </html>
