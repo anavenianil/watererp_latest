@@ -12,6 +12,7 @@ angular
 					$scope.billDetailss = [];
 					$scope.predicate = 'id';
 					$scope.billDetails = {};
+					$scope.billDetails.isRounding = false;
 					$scope.isRounding = false;
 					$scope.currentBillTypes = [ {
 						id : 'M',
