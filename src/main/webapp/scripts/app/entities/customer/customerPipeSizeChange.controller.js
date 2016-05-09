@@ -3,7 +3,7 @@
 angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster, Customer) {
+        		WorkflowTxnDetails, PipeSizeMaster, Customer, GetPipeSizeDetail) {
 
         //$scope.custDetails = entity;
 		$scope.custDetails = {};
@@ -75,13 +75,15 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
-                $scope.workflowTxnDetails.previousValue = $scope.custDetails.pipeSize;
+                $scope.getPipeSizeDetail(result.pipeSize);
+                $scope.customer.can = result.can;
+                //$scope.workflowTxnDetails.previousValue = $scope.custDetails.pipeSize;
             });
         };
         
         //when selected searched CAN in DropDown
         $scope.onSelect = function($item, $model, $label) {
-			console.log($item);
+			//console.log($item);
 			var arr = $item.split("-");
 			$scope.custDetails = {};
 			$scope.custDetails.can = arr[0].trim();
@@ -90,6 +92,15 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 			$scope.getCustDetails($scope.custDetails.can);
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
+		};
+		
+		
+		$scope.getPipeSizeDetail = function(pipeSize) {
+			GetPipeSizeDetail.findByPipeSize(pipeSize).then(
+							function(result) {
+								$scope.pipeSizeMaster = result;
+								$scope.customer.pipeSizeMaster = result;
+							});
 		};
 		
 		/*$scope.saveChanges = function(){

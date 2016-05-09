@@ -1,10 +1,13 @@
 package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.PipeSizeMaster;
+import com.callippus.water.erp.domain.Proceedings;
 import com.callippus.water.erp.repository.PipeSizeMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -113,5 +117,23 @@ public class PipeSizeMasterResource {
         log.debug("REST request to delete PipeSizeMaster : {}", id);
         pipeSizeMasterRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("pipeSizeMaster", id.toString())).build();
+    }
+    /**
+     * GET  /pipeSizeMasters/:pipeSize -> get the "pipeSizeDetails"
+     */
+    @RequestMapping(value = "/pipeSizeMasters/forPipeSize",
+        method = RequestMethod.GET,
+        params = {"pipeSize"}/*,
+        produces = MediaType.APPLICATION_JSON_VALUE*/)
+    @Timed
+    public ResponseEntity<PipeSizeMaster> getPipeSizeDetails(@RequestParam(value = "pipeSize") String pipeSize) {
+        log.debug("REST request to get PipeSizeMaster : {}", pipeSize);
+        
+        PipeSizeMaster pipeSizeMaster = pipeSizeMasterRepository.findByPipeSize(Float.parseFloat(pipeSize));
+        return Optional.ofNullable(pipeSizeMaster)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
