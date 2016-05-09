@@ -7,6 +7,21 @@
 		</div>
 
 		<div class="list-group">
+			<div ng-show="recordExists">
+				<div class="row danger">
+					<div class="col-sm-8">
+						Last meter reading is not BILLED. Do you want to CANCEL it?						
+					</div>
+					<div class="col-sm-4 pull-right">
+						<button type="button" class="btn btn-default"
+							ng-click="cancel()">
+							<span class="glyphicon glyphicon-ban-circle"></span>
+							&nbsp;
+							<span>Cancel</span>
+						</button>
+					</div>
+				</div>
+			</div>
 			<fieldset ng-disabled="recordExists">
 				<div class="list-group-item">
 					<div class="modal-body">

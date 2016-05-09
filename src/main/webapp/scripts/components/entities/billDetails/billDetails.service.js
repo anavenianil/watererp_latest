@@ -58,12 +58,16 @@ angular
 						console.log("This is the response in billDetails.service.js:" + JSON.stringify(response));
 						return response.data;
 					}, function errorCallback(response) {
-						console.log("This is the response in billDetails.service.js:" + JSON.stringify(response));
-						if(response.status == 404)
-							return null;
-						else
+							return "error";
+					});
+				},
+				cancelBillForCan : function(can) {
+					return $http.put('api/billDetailss/cancelBillForCan/' + can.can).then(function successCallback(response) {
+						return response.data;
+					}, function errorCallback(response) {
 							return "error";
 					});
 				}
+
 			};
 		});

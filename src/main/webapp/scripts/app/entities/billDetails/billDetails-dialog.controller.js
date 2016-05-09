@@ -137,7 +137,23 @@ angular
 						}
 
 					}
-
+					
+					$scope.cancel = function() {
+						BillDetailsSvc.cancelBillForCan({
+							can : $scope.billDetails.can
+						}).then(function(result) {
+							if(result != null && result !== 'error'){
+								$scope.recordExists = false;
+								$scope.billDetailss = [];
+								$scope.predicate = 'id';
+								$scope.billDetails = {};
+								$scope.isValidCust = false;
+								$scope.custDetails = {};
+								$state.go('billDetails.new');
+							}
+						});
+					}
+					
 					$scope.checkDates = function() {
 
 						$scope.billDetails.forceManual = false;
@@ -178,7 +194,7 @@ angular
 						BillDetailsSvc.findByCan({
 							can : can
 						}).then(function(result) {
-							if(result != null && result !== 'error'){
+							if(result != null && result !== ''){
 								$scope.billDetails = result;
 								$scope.recordExists = true;
 							}
