@@ -283,7 +283,7 @@ public class ApplicationTxnResource {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional
-	public ResponseEntity<Void> approveApplication(@RequestParam(value = "id", required = false) Long id,
+	public ResponseEntity<ApplicationTxn> approveApplication(@RequestParam(value = "id", required = false) Long id,
 						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
 		workflowService.getUserDetails();
 		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
@@ -300,8 +300,12 @@ public class ApplicationTxnResource {
         	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
             applicationTxn.setRequestAt(userRepository.findById(uid));
         }
-        applicationTxnRepository.save(applicationTxn);
-        return ResponseEntity.ok().build();
+        ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+        
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert("applicationTxn", applicationTxn.getId().toString()))
+                .body(result);
+        
 	}
 	    
     
