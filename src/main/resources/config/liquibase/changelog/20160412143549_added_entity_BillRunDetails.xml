@@ -28,6 +28,7 @@
             <column name="remarks" type="varchar(255)"/>
             <column name="bill_full_details_id" type="bigint"/>
             <column name="bill_run_master_id" type="bigint"/>
+            <column name="bill_details_id" type="bigint"/>
         </createTable>
         <dropDefaultValue tableName="bill_run_details" columnName="from_dt" columnDataType="datetime"/>
 
@@ -45,6 +46,12 @@
                                  constraintName="fk_billrundetails_billrunmaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="bill_run_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="bill_details_id"
+                                 baseTableName="bill_run_details"
+                                 constraintName="fk_billrundetails_billdetails_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bill_details"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -52,8 +52,8 @@ public class TariffMasterCustomRepositoryImpl extends
 
 	public List<java.util.Map<String, Object>> findTariffs(String can,
 			LocalDate validFrom, LocalDate validTo, float avgKL,
-			int unMeteredFlag, int newMeterFlag) {
-		String sql = "SELECT tariff_type_master_id, "+
+			int unMeteredFlag, int newMeterFlag, int newMeterNoSvcFlag) {
+		String sql = "SELECT tariff_type_master_id, avg(rate) rate,"+
 				"       CASE "+
 				"           WHEN tariff_type_master_id=1 THEN CASE "+
 				"                                                 WHEN 1=? THEN sum(rate * months * min_unmetered_kl) "+
@@ -70,7 +70,7 @@ public class TariffMasterCustomRepositoryImpl extends
 				"          valid_from, "+
 				"          valid_to, "+
 				"          c.tariff_category_master_id, "+
-				"          TIMESTAMPDIFF(MONTH,valid_from,valid_to + interval 1 DAY) months, "+
+				"          case when Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) = 0 then 1 else Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) end months, "+
 				"          t.id tariff_charges_id, "+
 				"          t.tariff_desc, "+
 				"          t.slab_min, "+
@@ -78,7 +78,7 @@ public class TariffMasterCustomRepositoryImpl extends
 				"          t.rate, "+
 				"          t.min_unmetered_kl, "+
 				"          CASE "+
-				"              WHEN t.min_kl > ? THEN t.min_kl "+
+				"              WHEN t.min_kl > ? and 0 = ? THEN t.min_kl "+
 				"              ELSE ? "+
 				"          END avg_kl, "+
 				"              t.tariff_type_master_id "+
@@ -116,7 +116,7 @@ public class TariffMasterCustomRepositoryImpl extends
 		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
 
 		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(
-				sql, new Object[] { unMeteredFlag, newMeterFlag, avgKL, avgKL,
+				sql, new Object[] { unMeteredFlag, newMeterNoSvcFlag, avgKL, newMeterFlag, avgKL,
 						from, from, to, to, from, to, from, to, can, avgKL });	
 		
 		log.debug("Output from billing query:" + rows);

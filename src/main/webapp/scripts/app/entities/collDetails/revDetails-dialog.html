@@ -7,24 +7,23 @@
 		<div class="list-group">
 			<div class="list-group-item">
 				<div class="modal-body">
-					<jh-alert-error></jh-alert-error> 
+					<jh-alert-error></jh-alert-error>
 					<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptNo">Reference
-								Name</label>
-							<input type="text" class="form-control" name="consName"
-								id="field_consName" ng-model="collDetails.consName"/>
+								Name</label> <input type="text" class="form-control" name="consName"
+								id="field_consName" ng-model="collDetails.consName" />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptDt">Revenue
 								Date</label>
 							<div class="form-group">
 								<div class='input-group' id='field_receiptDt'>
-									<input id="field_receiptDt" name="field_receiptDt" type="text" class="form-control" placeholder="YYYY-MM-DD"
+									<input id="field_receiptDt" name="field_receiptDt" type="text"
+										class="form-control" placeholder="YYYY-MM-DD"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.receiptDt"
-										is-open="datePickerForReceiptDt.status.opened"
-										 />
+										is-open="datePickerForReceiptDt.status.opened" />
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											id='field_receiptDtBtn'
@@ -39,10 +38,9 @@
 							ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }"
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_receiptAmt">Revenue
-								Amount</label>
-							<input type="number" class="form-control" name="receiptAmt"
-								required="required" min="1" id="field_receiptAmt"
-								ng-model="collDetails.receiptAmt" />
+								Amount</label> <input type="number" class="form-control"
+								name="receiptAmt" required="required" min="1"
+								id="field_receiptAmt" ng-model="collDetails.receiptAmt" />
 							<p ng-show="editForm.receiptAmt.$error.pattern"
 								class="help-block">Only numbers.</p>
 						</div>
@@ -50,31 +48,21 @@
 
 					<div class="row">
 						<div class="col-sm-4">
-							<label for="field_paymentTypes">Revenue Mode</label>
-							<select class="form-control" id="field_paymentTypes"
-								name="paymentTypes" ng-model="collDetails.paymentTypes"
-								required="required"
+							<label for="field_paymentTypes">Revenue Mode</label> <select
+								class="form-control" id="field_paymentTypes" name="paymentTypes"
+								ng-model="collDetails.paymentTypes" required="required"
 								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
 								ng-change="resetInstr(collDetails.paymentTypes.paymentMode)">
 							</select>
 						</div>
-
-						<!-- <div class="col-sm-4">
-							<label for="field_paymentTypes">Revenue Type</label>
-							<select class="form-control" id="field_collectionTypeMaster"
-								name="collectionTypeMaster" required="required"
-								ng-model="collDetails.collectionTypeMaster"
-								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id">
-							</select>
-						</div> -->
 						<div class="col-sm-4">
-							<label for="field_paymentTypes">Revenue Type</label>
-							<select class="form-control" id="field_collectionTypeMaster"
+							<label for="field_paymentTypes">Revenue Type</label> <select
+								class="form-control" id="field_collectionTypeMaster"
 								name="collectionTypeMaster" required="required"
 								ng-model="collDetails.collectionTypeMaster"
 								ng-options="revenueTypeMaster as revenueTypeMaster.revenueType for revenueTypeMaster in revenueTypeMasters track by revenueTypeMaster.id">
 							</select>
-						</div>						
+						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<input type="text" class="form-control" name="remarks"
@@ -86,8 +74,7 @@
 							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_instrNo">Instrument
-								No</label>
-							<input type="text" class="form-control" name="field_instrNo"
+								No</label> <input type="text" class="form-control" name="field_instrNo"
 								id="field_instrNo" ng-model="collDetails.instrNo"
 								ng-disabled="!instrEnabled" />
 							<p
@@ -96,9 +83,8 @@
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_instrIssuer">Instrument
-								Issuer</label>
-							<select class="form-control" id="field_instrumentIssuerMaster"
-								name="instrumentIssuerMaster"
+								Issuer</label> <select class="form-control"
+								id="field_instrumentIssuerMaster" name="instrumentIssuerMaster"
 								ng-model="collDetails.instrumentIssuerMaster"
 								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
 								ng-disabled="!instrEnabled">
@@ -114,8 +100,7 @@
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt"
 										is-open="datePickerForInstrDt.status.opened"
-										ng-disabled="!instrEnabled" />
-									<span class="input-group-btn">
+										ng-disabled="!instrEnabled" /> <span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											id='field_receiptDtBtn' ng-disabled="!instrEnabled"
 											ng-click="datePickerForInstrDtOpen($event)">
@@ -131,23 +116,16 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						
-					</div>
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>
-						&nbsp;
-						<span>Cancel</span>
+						<span class="glyphicon glyphicon-ban-circle"></span> &nbsp; <span>Cancel</span>
 					</button>
 					<button type="submit" ng-disabled="validate()"
 						class="btn btn-primary" id="submitSave">
-						<span class="glyphicon glyphicon-save"></span>
-						&nbsp;
-						<span>Save</span>
+						<span class="glyphicon glyphicon-save"></span> &nbsp; <span>Save</span>
 					</button>
 				</div>
 			</div>

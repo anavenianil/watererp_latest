@@ -45,6 +45,10 @@ public class BillRunDetails implements Serializable {
     @JoinColumn(name = "bill_run_master_id")
     private BillRunMaster billRunMaster;
 
+    @ManyToOne
+    @JoinColumn(name = "bill_details_id")
+    private BillDetails billDetails;
+
     public Long getId() {
         return id;
     }
@@ -107,6 +111,14 @@ public class BillRunDetails implements Serializable {
 
     public void setBillRunMaster(BillRunMaster billRunMaster) {
         this.billRunMaster = billRunMaster;
+    }
+
+    public BillDetails getBillDetails() {
+        return billDetails;
+    }
+
+    public void setBillDetails(BillDetails billDetails) {
+        this.billDetails = billDetails;
     }
 
     @Override

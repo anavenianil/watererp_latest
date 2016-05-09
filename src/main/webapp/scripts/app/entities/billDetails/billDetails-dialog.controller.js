@@ -1,172 +1,259 @@
 'use strict';
 
-angular.module('watererpApp').controller(
-		'BillDetailsDialogController', 
-		function ($scope, $state, BillDetails, CustDetails, CustDetailsService, 
-				 ParseLinks, $stateParams, $http, User) {
+angular
+		.module('watererpApp')
+		.controller(
+				'BillDetailsDialogController',
+				function($scope, $state, $filter, BillDetails, BillDetailsSvc,
+						CustDetails, CustDetailsService, ParseLinks,
+						$stateParams, $http, User) {
 
-        $scope.billDetailss = [];
-        $scope.predicate = 'id';
-        $scope.billDetails = {};
-        $scope.currentBillTypes = [{id: 'M', name: 'METERED'},{id: 'S', name: 'STUCK'},{id: 'L', name: 'LOCKED'},{id: 'B', name: 'BURNT'}];
-        $scope.collDetails = {};
-        var date  = new Date();
-        $scope.billDetails.billDate = date;
-        
-        var currentTime = new Date();
-    	var hours = currentTime.getHours();
-    	var minutes = currentTime.getMinutes();
-        var seconds = currentTime.getSeconds();
-    	if (minutes < 10)
-    	minutes = "0" + minutes;
-        if (seconds < 10)
-    	seconds = "0" + seconds;
-        
-        $scope.billDetails.billTime = hours + "" + minutes + "" + seconds;   
-        $scope.billDetails.metReadingDt = date;
-        $scope.billDetails.toMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-        $scope.users = User.query();
-        $scope.reverse = true;
-        $scope.page = 0;
-        
-        $scope.billDetailsId = $stateParams.id;
-        if($stateParams.id != null){       	
-        	 BillDetails.get({id : $scope.billDetailsId}, function(result) {
-                 $scope.billDetails = result;
-                 $scope.getCustDetails($scope.billDetails.can);
-             });
-    	}        
-        
-        var onSaveSuccess = function (result) {
-            $scope.$emit('watererpApp:billDetailsUpdate', result);
-            $scope.isSaving = false;
-            $scope.billDetails.id = result.id;
-            $state.go('billDetails');
-        };
+					$scope.recordExists = false;
+					$scope.billDetailss = [];
+					$scope.predicate = 'id';
+					$scope.billDetails = {};
+					$scope.isRounding = false;
+					$scope.currentBillTypes = [ {
+						id : 'M',
+						name : 'METERED'
+					}, {
+						id : 'S',
+						name : 'STUCK'
+					}, {
+						id : 'L',
+						name : 'LOCKED'
+					}, {
+						id : 'B',
+						name : 'BURNT'
+					} ];
+					$scope.users = User.query();
 
-        var onSaveError = function (result) {
-            $scope.isSaving = false;
-        };        
+					$scope.billDetailsId = $stateParams.id;
+					if ($stateParams.id != null) {
+						BillDetails.get({
+							id : $scope.billDetailsId
+						}, function(result) {
+							$scope.billDetails = result;
+							$scope.getCustDetails($scope.billDetails.can);
+						});
+					}
 
-        $scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.billDetails.id != null) {
-                BillDetails.update($scope.billDetails, onSaveSuccess, onSaveError);
-            } else {
-                BillDetails.save($scope.billDetails, onSaveSuccess, onSaveError);
-            }
-        };
+					var onSaveSuccess = function(result) {
+						$scope.$emit('watererpApp:billDetailsUpdate', result);
+						$scope.isSaving = false;
+						$scope.billDetails.id = result.id;
+						$state.go('billDetails');
+					};
 
-        $scope.refresh = function () {
-            $scope.reset();
-            $scope.clear();
-        };
-        
-        $scope.getLocation = function(val) {
-			$scope.isValidCust = false;
-			
-			return $http.get('api/custDetailss/searchCAN/' + val, {
-				params : {
-					address : val,
-					sensor : false
-				}
-			}).then(function(response) {
-				var res = response.data.map(function(item) {
-					return item;
+					var onSaveError = function(result) {
+						$scope.isSaving = false;
+					};
+
+					$scope.save = function() {
+						$scope.billDetails.status = 'INITIATED';
+						$scope.billDetails.insertDt = new Date();
+						var toDate = $scope.billDetails.toMonth + "01"; //YYYYMMDD
+						var pattern = /(\d{4})(\d{2})(\d{2})/;
+						$scope.billDetails.billDate = new Date(toDate.replace(
+								pattern, '$1-$2-$3'));
+
+						console.log("About to push billDetails:"
+								+ JSON.stringify($scope.billDetails))
+						$scope.isSaving = true;
+						if ($scope.billDetails.id != null) {
+							BillDetails.update($scope.billDetails,
+									onSaveSuccess, onSaveError);
+						} else {
+							BillDetails.save($scope.billDetails, onSaveSuccess,
+									onSaveError);
+						}
+					};
+
+					$scope.refresh = function() {
+						$scope.reset();
+						$scope.clear();
+					};
+
+					$scope.getLocation = function(val) {
+						$scope.isValidCust = false;
+						$scope.recordExists = false;
+
+						return $http.get('api/custDetailss/searchCAN/' + val, {
+							params : {
+								address : val,
+								sensor : false
+							}
+						}).then(function(response) {
+							var res = response.data.map(function(item) {
+								return item;
+							});
+
+							return res;
+						});
+					}
+
+					$scope.onSelect = function($item, $model, $label) {
+						var arr = $item.split("-");
+						$scope.billDetails.can = arr[0].trim();
+						$scope.billDetails.consName = arr[1];
+						$scope.billDetails.address = arr[2];
+						$scope.custInfo = "";
+						$scope.getCustDetails($scope.billDetails.can);
+						$scope.isValidCust = true;
+					};
+
+					$scope.datePickerForMetReadingDt = {};
+
+					$scope.datePickerForMetReadingDt.status = {
+						opened : false
+					};
+
+					$scope.datePickerForMetReadingDtOpen = function($event) {
+						$scope.datePickerForMetReadingDt.status.opened = true;
+					};
+
+					$scope.setToMonth = function() {
+						$scope.billDetails.toMonth = $filter('date')(
+								$scope.billDetails.metReadingDt, "yyyyMM");
+					}
+
+					$scope.setToMonthManual = function() {
+
+						if ($scope.billDetails.forceManual == true) {
+							var toMonthNo = parseInt($scope.billDetails.toMonth
+									.substr(0, 4), 10)
+									* 12
+									+ parseInt($scope.billDetails.toMonth
+											.substr(4, 2), 10);
+							// Subtract one month for Manual.
+							var newToMonthYear = ~~((toMonthNo - 1) / 12);
+							var newToMonthMonth = (toMonthNo - 1) % 12;
+							$scope.billDetails.toMonth = ""
+									+ newToMonthYear
+									+ ""
+									+ (newToMonthMonth < 10 ? "0"
+											+ newToMonthMonth : newToMonthMonth);
+						} else {
+							$scope.setToMonth();
+						}
+
+					}
+
+					$scope.checkPrevious = function() {
+						$scope.billDetails.mtrRounding = false;
+						if ($scope.billDetails.initialReading > $scope.billDetails.presentReading) {
+
+							if ($scope.billDetails.initialReading > 900
+									&& $scope.billDetails.presentReading < 100) {
+								$scope.isRounding = true;
+								$scope.editForm.presentReading.$setValidity(
+										"ltPrevious", true);
+								return true;
+							} else {
+								$scope.isRounding = false;
+								$scope.editForm.presentReading.$setValidity(
+										"ltPrevious", false);
+								return true;
+							}
+						} else {
+							$scope.isRounding = false;
+							$scope.editForm.presentReading.$setValidity(
+									"ltPrevious", true);
+							return true;
+						}
+					}
+
+					$scope.cancel = function() {
+						BillDetailsSvc.cancelBillForCan({
+							can : $scope.billDetails.can
+						}).then(function(result) {
+							if (result != null && result !== 'error') {
+								$scope.recordExists = false;
+								$scope.billDetailss = [];
+								$scope.predicate = 'id';
+								$scope.billDetails = {};
+								$scope.isValidCust = false;
+								$scope.custDetails = {};
+								$state.go('billDetails.new');
+							}
+						});
+					}
+
+					$scope.checkDates = function() {
+
+						$scope.billDetails.forceManual = false;
+
+						if ($scope.billDetails.fromMonth != null
+								&& typeof $scope.billDetails.fromMonth != "undefined"
+								&& $scope.billDetails.toMonth != null
+								&& typeof $scope.billDetails.toMonth != "undefined") {
+
+							var fromMonthNo = parseInt(
+									$scope.billDetails.fromMonth.substr(0, 4),
+									10)
+									* 12
+									+ parseInt($scope.billDetails.fromMonth
+											.substr(4, 2), 10);
+							var toMonthNo = parseInt($scope.billDetails.toMonth
+									.substr(0, 4), 10)
+									* 12
+									+ parseInt($scope.billDetails.toMonth
+											.substr(4, 2), 10);
+
+							var months = toMonthNo - fromMonthNo;
+
+							console.log("From Month: " + fromMonthNo
+									+ ", To Month:" + toMonthNo + ", months="
+									+ months);
+
+							if (months > 1)
+								return false
+							else
+								return true
+						} else
+							return true;
+					}
+
+					$scope.getCustDetails = function(can) {
+
+						BillDetailsSvc.findByCan({
+							can : can
+						}).then(function(result) {
+							if (result != null && result !== '') {
+								$scope.billDetails = result;
+								$scope.recordExists = true;
+							}
+						});
+
+						CustDetailsService
+								.get(
+										{
+											can : can
+										},
+										function(result) {
+											$scope.custDetails = result;
+											$scope.billDetails.consName = $scope.custDetails.consName;
+											$scope.billDetails.can = $scope.custDetails.can;
+											$scope.billDetails.address = $scope.custDetails.address;
+											$scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
+											if ($scope.billDetails.prevBillMonth == null) {
+												$scope.billDetails.fromMonth = $filter(
+														'date')
+														(
+																$scope.custDetails.meterFixDate,
+																"yyyyMM");
+												$scope.billDetails.initialReading = $scope.custDetails.prevReading;
+												$scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;
+											} else {
+												$scope.billDetails.fromMonth = $filter(
+														'date')
+														(
+																$scope.billDetails.prevBillMonth,
+																"yyyyMM");
+												$scope.billDetails.initialReading = $scope.custDetails.prevReading;
+												$scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
+											}
+
+										});
+					}
 				});
-
-				return res;
-			});
-		}
-        
-        $scope.onSelect = function($item, $model, $label) {
-        	$scope.billDetails.metReadingDt = new Date();
-			console.log($item);
-			var arr = $item.split("-");
-			$scope.billDetails.can = arr[0];
-			$scope.billDetails.consName = arr[1];
-			$scope.billDetails.address = arr[2];
-			$scope.custInfo = "";
-			$scope.getCustDetails($scope.billDetails.can);
-			$scope.isValidCust = true;
-		};
-        
-        $scope.toggleMeterReadingDate = function(cbtyp){
-        	if(cbtyp==='M'){
-        		$scope.billDetails.prevMetReadingDt1 = $scope.billDetails.metReadingDt;
-        	}else{
-        		$scope.billDetails.prevMetReadingDt1 = $scope.billDetails.prevMetReadingDt;
-        	}
-        }
-        $scope.getCustDetails = function(can){
-        	CustDetailsService.get({can : can}, function(result) {
-                $scope.custDetails = result;
-                $scope.billDetails.consName = $scope.custDetails.consName;
-                $scope.billDetails.can = $scope.custDetails.can;
-                $scope.billDetails.address = $scope.custDetails.address;
-                $scope.billDetails.prevBillMonth = $scope.custDetails.prevBillMonth;
-                if($scope.billDetails.prevBillMonth == null){
-                $scope.billDetails.fromMonth=$scope.custDetails.meterFixDate;                
-                $scope.billDetails.initialReading = $scope.custDetails.prevReading;
-                $scope.billDetails.prevMetReadingDt = $scope.custDetails.meterFixDate;
-                $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.meterFixDate;            
-                }else{
-                var date2 = new Date($scope.billDetails.prevBillMonth);
-                $scope.billDetails.fromMonth = new Date(date2.getFullYear(), date2.getMonth()+1, date2.getDate());
-                $scope.billDetails.initialReading = $scope.custDetails.prevReading;
-                $scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
-                $scope.billDetails.prevMetReadingDt1 = $scope.custDetails.metReadingDt;
-                }
-                
-            });
-        }
-        
-        $scope.datePickerForToMonth = {};
-
-        $scope.datePickerForToMonth.status = {
-            opened: false
-        };
-
-        $scope.datePickerForToMonthOpen = function($event) {
-            $scope.datePickerForToMonth.status.opened = true;
-        }; 
-        
-        $scope.datePickerForFromMonth = {};
-
-        $scope.datePickerForFromMonth.status = {
-            opened: false
-        };
-
-        $scope.datePickerForFromMonthOpen = function($event) {
-            $scope.datePickerForFromMonth.status.opened = true;
-        };        
-        
-        $scope.datePickerForBillDate = {};
-
-        $scope.datePickerForBillDate.status = {
-            opened: false
-        };
-
-        $scope.datePickerForBillDateOpen = function($event) {
-            $scope.datePickerForBillDate.status.opened = true;
-        };
-        $scope.datePickerForMeterFixDate = {};
-
-        $scope.datePickerForMeterFixDate.status = {
-            opened: false
-        };
-
-        $scope.datePickerForMeterFixDateOpen = function($event) {
-            $scope.datePickerForMeterFixDate.status.opened = true;
-        };
-        $scope.datePickerForMetReadingDt = {};
-
-        $scope.datePickerForMetReadingDt.status = {
-            opened: false
-        };
-
-        $scope.datePickerForMetReadingDtOpen = function($event) {
-            $scope.datePickerForMetReadingDt.status.opened = true;
-        };
-        
-    });

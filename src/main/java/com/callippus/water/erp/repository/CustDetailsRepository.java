@@ -12,6 +12,8 @@ import com.callippus.water.erp.domain.CustDetails;
  * Spring Data JPA repository for the CustDetails entity.
  */
 public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
+	
+//	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public CustDetails findByCan(String can);
 	
 	

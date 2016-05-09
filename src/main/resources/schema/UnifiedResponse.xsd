@@ -62,12 +62,25 @@
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:element>
-				<xs:element name="UserDefinedField">
-					<xs:simpleType>
-						<xs:restriction base="xs:string">
-							<xs:maxLength value="255" />
-						</xs:restriction>
-					</xs:simpleType>
+				<xs:element type="xs:long" name="ValidationNumber" />
+				<xs:element name="UserDefinedFields">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="invoice">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="UserDefinedField">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:maxLength value="255" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
 		</xs:complexType>

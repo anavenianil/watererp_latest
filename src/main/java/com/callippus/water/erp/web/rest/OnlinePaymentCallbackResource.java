@@ -129,24 +129,22 @@ public class OnlinePaymentCallbackResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
     /**
-     * GET  /onlinePaymentCallbackByTxnRef/:id -> get the "id" onlinePaymentResponse.
+     * GET  /onlinePaymentCallbackByOrderId/:id -> get the "id" onlinePaymentResponse.
      */
-    @RequestMapping(value = "/onlinePaymentCallbackByTxnRef/{merchantTxnRef}",
+    @RequestMapping(value = "/onlinePaymentCallbackByOrderId/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<OnlinePaymentCallback> getOnlinePaymentCallbackByTxnRef(@PathVariable String merchantTxnRef) {
-        log.debug("REST request to get getOnlinePaymentResponseByTxnRef : {}", merchantTxnRef);
-        OnlinePaymentCallback onlinePaymentResponse = onlinePaymentCallbackRepository.findByMerchantTxnRef(merchantTxnRef);
+    public ResponseEntity<OnlinePaymentCallback> getOnlinePaymentCallbackByOrderId(@PathVariable Long id) {
+        log.debug("REST request to get getOnlinePaymentResponseByTxnRef : {}", id);
+        OnlinePaymentCallback onlinePaymentResponse = onlinePaymentCallbackRepository.findByOnlinePaymentOrderId(id);
         return Optional.ofNullable(onlinePaymentResponse)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
     
     /**
      * DELETE  /onlinePaymentCallbacks/:id -> delete the "id" onlinePaymentCallback.
