@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>OnlinePaymentResponse</span> {{onlinePaymentResponse.id}}</h2>
+    <h2><span>Online Payment Response</span> {{onlinePaymentResponse.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>ResponseCode</span>
+                    <span>Response Code</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{onlinePaymentResponse.responseCode}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ResponseTime</span>
+                    <span>Response Time</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{onlinePaymentResponse.responseTime | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>RedirectUrl</span>
+                    <span>Redirect Url</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{onlinePaymentResponse.redirectUrl}}</span>
@@ -45,6 +45,7 @@
             <tr>
                 <td>
                     <span>onlinePaymentOrder</span>
+
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="onlinePaymentOrder.detail({id:onlinePaymentResponse.onlinePaymentOrder.id})">{{onlinePaymentResponse.onlinePaymentOrder.id}}</a>

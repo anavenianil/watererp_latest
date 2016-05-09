@@ -1,33 +1,13 @@
 <div>
-	<h2>Customer Complaints</h2>
+	<h2>Customer Complaintss</h2>
 	<jh-alert></jh-alert>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-4 no-padding-left">
 				<button class="btn btn-primary" ui-sref="customerComplaints.new">
 					<span class="glyphicon glyphicon-plus"></span> <span>Create
-						new Customer Complaint </span>
+						new Customer Complaints </span>
 				</button>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-4 col-md-offset-4">
-				<label for="field_applicationTxn">Search By CAN</label>
-
-				<div class="form-group"
-					ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
-
-					<input type="text" ng-model="complaintInfo" typeahead-min-length="3"
-						placeholder="Search CAN or Name or Complaint ID (Min 3 chars)"
-						uib-typeahead="complaintInfo for complaintInfo in getCustomerComplaint($viewValue)"
-						typeahead-loading="loadingCANs"
-						typeahead-on-select='onSelect($item, $model, $label)'
-						typeahead-no-results="noResults" class="form-control"> <i
-						ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
-					<div ng-show="noResults">
-						<i class="glyphicon glyphicon-remove"></i> No Complaint's Found
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -46,16 +26,16 @@
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="remarks"><span>Remarks</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="relevantDoc"><span>Relevant Document</span>
-									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="relevantDoc"><span>Relevant Document</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="complaintBy"><span>Complaint By</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="complaintDate"><span>Complaint Date</span>
-									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="complaintDate"><span>Complaint Date</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="can"><span>Can</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="complaintTypeMaster.complaintType"><span>Complaint
-										Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="complaintTypeMaster.complaintType"><span>complaint Type Master</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
 								<th></th>
 							</tr>
 						</thead>

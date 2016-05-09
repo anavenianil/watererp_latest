@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>ApprovalDetails</span> {{approvalDetails.id}}</h2>
+    <h2><span>Approval Details</span> {{approvalDetails.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ApprovedDate</span>
+                    <span>Approved Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{approvalDetails.approvedDate | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ApprovedEmpNo</span>
+                    <span>Approved Employee Number</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{approvalDetails.approvedEmpNo}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ApprovedEmpName</span>
+                    <span>Approved Employee Name</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{approvalDetails.approvedEmpName}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>ApprovedEmpDesig</span>
+                    <span>Approved Employee Design</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{approvalDetails.approvedEmpDesig}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>customer</span>
+                    <span>Customer</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="customer.detail({id:approvalDetails.customer.id})">{{approvalDetails.customer.id}}</a>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>feasibilityStatus</span>
+                    <span>Feasibility Status</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="feasibilityStatus.detail({id:approvalDetails.feasibilityStatus.id})">{{approvalDetails.feasibilityStatus.id}}</a>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>designationMaster</span>
+                    <span>Designation Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="designationMaster.detail({id:approvalDetails.designationMaster.id})">{{approvalDetails.designationMaster.id}}</a>
@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>applicationTxn</span>
+                    <span>Application Transaction</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="applicationTxn.detail({id:approvalDetails.applicationTxn.id})">{{approvalDetails.applicationTxn.id}}</a>
