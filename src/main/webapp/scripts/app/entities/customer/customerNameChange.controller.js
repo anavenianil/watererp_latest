@@ -3,14 +3,14 @@
 angular.module('watererpApp').controller('CustomerNameChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster, IdProofMaster, Customer) {
+        		WorkflowTxnDetails, PipeSizeMaster, IdProofMaster, Customer, UploadUtil) {
 
         //$scope.custDetails = entity;
 		$scope.custDetails = {};
 		$scope.customer = {};
-        $scope.tariffcategorymasters = TariffCategoryMaster.query();
-        $scope.pipeSizeMasters = PipeSizeMaster.query();
         $scope.idproofmasters = IdProofMaster.query();
+        $scope.customer.changeType = "CHANGENAME";
+        $scope.customer.can = "";
         //$scope.requestMasters = [ {id : "10",requestType : "CHANGE NAME"}];
         
         /*$scope.workflowTxnDetails = [];
@@ -55,10 +55,10 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         }
 
         var onSaveSuccess = function (result) {
-            $scope.$emit('watererpApp:custDetailsUpdate', result);
+            $scope.$emit('watererpApp:customerUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            //$state.go('custDetails');
+            $state.go('home');
         };
 
         var onSaveError = function (result) {
@@ -75,7 +75,7 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         };
         
         $scope.datePickerForRequestedDate = {};
@@ -127,9 +127,28 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
 			$scope.custDetails.name = arr[1];
 			$scope.custDetails.address = arr[2];
 			$scope.getCustDetails($scope.custDetails.can);
+			$scope.customer.can = $scope.custDetails.can;
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
 		};
+		
+		 $scope.$watch('customer.photo1', function (files) {
+	            $scope.formUpload = false;
+	            if (files != null) {
+	                for (var i = 0; i < files.length; i++) {
+	                    $scope.errorMsg = null;
+	                    (function (file) {
+	                    	UploadUtil.uploadUsingUpload(file, $scope, 'waterErp');
+	                    })(files[i]);
+	                }
+	            }
+	        });
+	        
+	        $scope.getReqParams = function() {
+				return $scope.generateErrorOnServer ? '?errorCode='
+						+ $scope.serverErrorCode + '&errorMessage='
+						+ $scope.serverErrorMsg : '';
+			};
 		
 		
 		/*$scope.saveChanges = function(){

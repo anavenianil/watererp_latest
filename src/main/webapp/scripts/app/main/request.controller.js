@@ -29,8 +29,11 @@ angular.module('watererpApp').controller(
 					//$state.go('custDetails.categoryChangeEdit',{requestId:requestId, requestTypeId:requestTypeId});
 					$state.go('customer.categoryChangeDetail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
-				if(requestTypeId===9){
+				if(requestTypeId===9){//PIPE SIZE CHANGE
 					$state.go('customer.pipeSizeChangeDetail',{id:domainObjectId, requestTypeId:requestTypeId});
+				}
+				if(requestTypeId===10){//NAME CHANGE
+					$state.go('customer.nameChangeDetail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
 			}
 

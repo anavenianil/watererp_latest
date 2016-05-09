@@ -2,10 +2,12 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,11 +58,18 @@ public class CustomerResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws URISyntaxException {
+    public ResponseEntity<Customer> createCustomer(HttpServletRequest request,
+    		@RequestBody Customer customer) throws URISyntaxException, Exception {
         log.debug("REST request to save Customer : {}", customer);
         if (customer.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("customer", "idexists", "A new customer cannot already have an ID")).body(null);
         }
+        customer.setPhoto("");
+        customerRepository.save(customer);
+        HashMap<String,String> hm = new HashMap<String,String>();
+        hm.put("photo", "setPhoto");
+        UploadDownloadResource.setValues(customer, hm, request, customer.getId());
+        customer.setStatus(0);
         Customer result = customerRepository.save(customer);
         try{
         	workflowService.setRemarks(customer.getRemarks());
@@ -82,10 +91,11 @@ public class CustomerResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws URISyntaxException {
+    public ResponseEntity<Customer> updateCustomer(HttpServletRequest request,
+    		@RequestBody Customer customer) throws URISyntaxException, Exception {
         log.debug("REST request to update Customer : {}", customer);
         if (customer.getId() == null) {
-            return createCustomer(customer);
+            return createCustomer(request, customer);
         }
         Customer result = customerRepository.save(customer);
         return ResponseEntity.ok()
@@ -144,7 +154,8 @@ public class CustomerResource {
         @Timed
         public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(@RequestBody Customer customer) throws URISyntaxException {
             log.debug("REST request to save Customer : {}", customer);
-            
+            Customer customerDb = customerRepository.findOne(customer.getId());
+            customer.setStatus(customerDb.getStatus() +1);
             try{
             	workflowService.setRemarks(customer.getRemarks());
             	workflowService.getUserDetails();
