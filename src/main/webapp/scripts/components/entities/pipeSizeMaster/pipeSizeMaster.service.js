@@ -13,4 +13,20 @@ angular.module('watererpApp')
             },
             'update': { method:'PUT' }
         });
-    });
+    })
+    .factory('GetPipeSizeDetail',
+				function($http) {
+					return {
+						findByPipeSize : function(pipeSize) {
+							return $http.get('api/pipeSizeMasters/forPipeSize', {
+								params : {
+									pipeSize : pipeSize,
+								}
+							}).then(function successCallback(response) {
+								return response.data;
+							}, function errorCallback(response) {
+								return "error";
+							});
+						}
+					};
+				});

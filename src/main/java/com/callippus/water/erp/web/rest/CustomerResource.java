@@ -1,10 +1,14 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.Customer;
-import com.callippus.water.erp.repository.CustomerRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,13 +17,21 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.callippus.water.erp.domain.Customer;
+import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.WorkflowTxnDetails;
+import com.callippus.water.erp.repository.CustomerRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.callippus.water.erp.workflow.applicationtxn.service.CustDetailsChangeWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing Customer.
@@ -33,6 +45,12 @@ public class CustomerResource {
     @Inject
     private CustomerRepository customerRepository;
     
+    @Inject
+    private WorkflowService workflowService;
+    
+    @Inject
+    private CustDetailsChangeWorkflowService custDetailsChangeWorkflowService;
+    
     /**
      * POST  /customers -> Create a new customer.
      */
@@ -40,12 +58,27 @@ public class CustomerResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws URISyntaxException {
+    public ResponseEntity<Customer> createCustomer(HttpServletRequest request,
+    		@RequestBody Customer customer) throws URISyntaxException, Exception {
         log.debug("REST request to save Customer : {}", customer);
         if (customer.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("customer", "idexists", "A new customer cannot already have an ID")).body(null);
         }
+        customer.setPhoto("");
+        customerRepository.save(customer);
+        HashMap<String,String> hm = new HashMap<String,String>();
+        hm.put("photo", "setPhoto");
+        UploadDownloadResource.setValues(customer, hm, request, customer.getId());
+        customer.setStatus(0);
         Customer result = customerRepository.save(customer);
+        try{
+        	workflowService.setRemarks(customer.getRemarks());
+        	workflowService.getUserDetails();
+        	custDetailsChangeWorkflowService.createTxn(customer);
+        }
+        catch(Exception e){
+        	System.out.println(e);
+        }
         return ResponseEntity.created(new URI("/api/customers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("customer", result.getId().toString()))
             .body(result);
@@ -58,10 +91,11 @@ public class CustomerResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws URISyntaxException {
+    public ResponseEntity<Customer> updateCustomer(HttpServletRequest request,
+    		@RequestBody Customer customer) throws URISyntaxException, Exception {
         log.debug("REST request to update Customer : {}", customer);
         if (customer.getId() == null) {
-            return createCustomer(customer);
+            return createCustomer(request, customer);
         }
         Customer result = customerRepository.save(customer);
         return ResponseEntity.ok()
@@ -113,4 +147,27 @@ public class CustomerResource {
         customerRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("customer", id.toString())).build();
     }
+    
+    @RequestMapping(value = "/customersApprove",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+        public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(@RequestBody Customer customer) throws URISyntaxException {
+            log.debug("REST request to save Customer : {}", customer);
+            Customer customerDb = customerRepository.findOne(customer.getId());
+            customer.setStatus(customerDb.getStatus() +1);
+            try{
+            	workflowService.setRemarks(customer.getRemarks());
+            	workflowService.getUserDetails();
+            	custDetailsChangeWorkflowService.approvedCahangeCaseRequest(customer);
+            }
+            catch(Exception e){
+            	System.out.println(e);
+            }
+            customerRepository.save(customer);
+            
+            return ResponseEntity.created(new URI("/api/customersApprove/"))
+                .headers(HeaderUtil.createEntityCreationAlert("customer",""))
+                .body(null);
+        }
 }

@@ -7,11 +7,11 @@
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR ID]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT *,sum(service_charge + meter_service_charge) meter,c.cons_name as cust_cons_name,c.house_no as cust_house_no,c.address as cust_address, c.city as cust_city,c.pin_code  as cust_pin_code ,
+		<![CDATA[SELECT *,date_format(str_to_date(201603,'%Y%m'),'%M %Y') bill_month,sum(service_charge + meter_service_charge) meter,c.cons_name as cust_cons_name,c.house_no as cust_house_no,c.address as cust_address, c.city as cust_city,c.pin_code  as cust_pin_code ,
  (select street_name from street_master where street_no=(select subString(can, 3,2) from bill_full_details where id=$P{id}))street_name,
 (select ((select water_cess from bill_full_details where id =$P{id})*
 (SELECT surcharge FROM bill_full_details where id =$P{id}))/100) val
- FROM bill_full_details b  left join `tariff_category_master` t on b.id=t.id left join cust_details c on b.can=c.can where b.id=$P{id} group by b.id]]>
+ FROM bill_full_details b  left join `tariff_category_master` t on b.id=t.id left join cust_details c on b.can=c.can where b.id=$P{id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -226,6 +226,7 @@
 	<field name="tariff_category_master_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="bill_month" class="java.lang.String"/>
 	<field name="meter" class="java.lang.Double"/>
 	<field name="cust_cons_name" class="java.lang.String"/>
 	<field name="cust_house_no" class="java.lang.String"/>
@@ -518,7 +519,7 @@
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{to_month}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bill_month}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="246" y="45" width="298" height="15" uuid="9bbd658c-1b29-49f2-90a4-d2250458cfdd"/>

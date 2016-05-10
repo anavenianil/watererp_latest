@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
+import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.repository.WorkflowStageMasterRepository;
 import com.callippus.water.erp.repository.WorkflowTxnDetailsRepository;
@@ -36,8 +38,12 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 	
 	@Inject
 	private WorkflowStageMasterRepository workflowStageMasterRepository;
+	
+	@Inject
+	private CustomerRepository customerRepository;
 
 	private String message;
+	
 	private WorkflowTxnDetails workflowTxnDetails;
 	
 	
@@ -73,11 +79,11 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 	@Autowired(required = true)
 	private JdbcTemplate jdbcTemplate;
 
-	public String createTxn(WorkflowTxnDetails workflowTxnDetails) throws Exception {
+	public String createTxn(Customer customer) throws Exception {
 		log.debug("WorkflowTxnDetailsWorkflowService --> createTxn");
 		String message = "";
 
-		message = initWorkflow(workflowTxnDetails);
+		message = initWorkflow(customer);
 
 		return message;
 	}
@@ -90,20 +96,20 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 
 
 
-	public String initWorkflow(WorkflowTxnDetails workflowTxnDetails) throws Exception {
+	public String initWorkflow(Customer customer) throws Exception {
 		log.debug("WorkflowTxnDetailsWorkflowService --> initWorkflow");
 		String message = "";
 		try {
-			if(workflowTxnDetails.getRequestMaster().getId()==8){
+			if("CONNECTIONCATEGORY".equals(customer.getChangeType())){
 				setRequestType(CPSConstants.CONNECTIONCATEGORY);
 			}
-			if(workflowTxnDetails.getRequestMaster().getId()==9){
+			if("PIPESIZE".equals(customer.getChangeType())){
 				setRequestType(CPSConstants.PIPESIZE);
 			}
-			if(workflowTxnDetails.getRequestMaster().getId()==10){
+			if("CHANGENAME".equals(customer.getChangeType())){
 				setRequestType(CPSConstants.CHANGENAME);
 			}
-			if(workflowTxnDetails.getRequestMaster().getId()==11){
+			if("CONNECTIONTERMINATION".equals(customer.getChangeType())){
 				setRequestType(CPSConstants.CONNECTIONTERMINATION);
 			}
 
@@ -114,7 +120,7 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 				/*
 				 * inserting data into Request_workflow_history table
 				 */
-				workflowService.setDomain_object_id(workflowTxnDetails.getId()
+				workflowService.setDomain_object_id(customer.getId()
 						.toString());
 				workflowService.setRequestID(getRequestID());
 				workflowService.setRequestType(getRequestType());
@@ -133,14 +139,14 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 		return message;
 	}
 
-	public void applicationTxnRequest(WorkflowTxnDetails workflowTxnDetails)
+	/*public void applicationTxnRequest(WorkflowTxnDetails workflowTxnDetails)
 			throws Exception {
 		log.debug("ApplicationTxnWorkflowDetails --> onSubmit --> param=saveRequestDetails");
 		if (CPSUtils.compareStrings(message, CPSConstants.YES)) {
 			setDesignationID(workflowService.getDesignationID());
 			message = initWorkflow(workflowTxnDetails);
 		}
-	}
+	}*/
 
 	/**
 	 * check employee exist or not
@@ -164,14 +170,14 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 	 **/
 
 	@SuppressWarnings("unchecked")
-	public String approvedWorkflowTxnDetailsRequest(WorkflowTxnDetails workflowTxnDetails)
+	public String approvedCahangeCaseRequest(Customer customer)
 			throws Exception {
 		String message = null;
 		List<RequestWorkflowHistory> l = null;
 		try {
 			Query query = entityManager.createQuery(
 					"from RequestWorkflowHistory r where domainObject="
-							+ workflowTxnDetails.getId(),
+							+ customer.getId(),
 					RequestWorkflowHistory.class);
 
 			l = query.getResultList();
@@ -180,14 +186,19 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 			workflowService.setDomain_object_id(l.get(i).getDomainObject()
 					.toString());
 			
-			/*User user = workflowTxnDetails.getUser();
-			if(user != null){
-				workflowService.setRequestType(CPSConstants.WITHOUTMETER);
+			//User user = workflowTxnDetails.getUser();
+			if("CONNECTIONCATEGORY".equals(customer.getChangeType())){
+				workflowService.setRequestType(CPSConstants.CONNECTIONCATEGORY);
 			}
-			else
-			{
-				workflowService.setRequestType(CPSConstants.REQUISITION);
-			}*/
+			if("PIPESIZE".equals(customer.getChangeType())){
+				workflowService.setRequestType(CPSConstants.PIPESIZE);
+			}
+			if("CHANGENAME".equals(customer.getChangeType())){
+				workflowService.setRequestType(CPSConstants.CHANGENAME);
+			}
+			if("CONNECTIONTERMINATION".equals(customer.getChangeType())){
+				workflowService.setRequestType(CPSConstants.CONNECTIONTERMINATION);
+			}
 			
 			workflowService.getHistoryID();
 			workflowService.setStageID(l.get(i).getRequestStage().toString());
@@ -292,20 +303,21 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 		
 		workflowService.getUserDetails();
 	    
-		WorkflowTxnDetails workflowTxnDetails = workflowTxnDetailsRepository.findOne(id);
+		///WorkflowTxnDetails workflowTxnDetails = workflowTxnDetailsRepository.findOne(id);
+		Customer customer = customerRepository.findOne(id);
 	    workflowService.setRemarks(remarks);  
 	    /*Integer status = applicationTxn.getStatus();
 	    status +=1;
 	    workflowTxnDetails.setStatus(status);
         workflowService.setRequestStatus(status);*/
         //applicationTxnWorkflowService.
-        approvedWorkflowTxnDetailsRequest(workflowTxnDetails);
+	    approvedCahangeCaseRequest(customer);
 
         /*if(workflowService.getRequestAt()!=null){
         	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
         	workflowTxnDetails.setRequestAt(userRepository.findById(uid));
         }*/
-        workflowTxnDetailsRepository.save(workflowTxnDetails);
+	    customerRepository.save(customer);
 	}
 
 }

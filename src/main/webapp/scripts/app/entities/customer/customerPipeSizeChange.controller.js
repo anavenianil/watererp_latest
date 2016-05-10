@@ -1,36 +1,19 @@
 'use strict';
 
-angular.module('watererpApp').controller('CustDetailsPipeSizeChangeController',
+angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster) {
+        		WorkflowTxnDetails, PipeSizeMaster, Customer, GetPipeSizeDetail) {
 
         //$scope.custDetails = entity;
 		$scope.custDetails = {};
-        $scope.pipeSizeMasters = PipeSizeMaster.query();
+        $scope.pipesizemasters = PipeSizeMaster.query();
         //$scope.custDetails.pipeSizeMaster = {};
         $scope.workflowTxnDetails = {};
-        $scope.requestMasters = [ {
-				id : "8",
-				requestType : "CONNECTION CATEGORY"
-			}, {
-				id : "9",
-				requestType : "PIPE SIZE"
-			}, {
-				id : "10",
-				requestType : "CHANGE NAME"
-			}, {
-				id : "11",
-				requestType : "CONNECTION TERMINATION"
-			} ];
-        
+        $scope.customer = {};
+        $scope.customer.changeType = "PIPESIZE";
         
         $scope.dtmax = new Date();
-        $scope.load = function(id) {
-            CustDetails.get({id : id}, function(result) {
-                $scope.custDetails = result;
-            });
-        };
         
         if($stateParams.id != null){
         	$scope.load($stateParams.id);
@@ -40,7 +23,7 @@ angular.module('watererpApp').controller('CustDetailsPipeSizeChangeController',
             $scope.$emit('watererpApp:custDetailsUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('custDetails');
+            //$state.go('customer');
         };
 
         var onSaveError = function (result) {
@@ -49,15 +32,15 @@ angular.module('watererpApp').controller('CustDetailsPipeSizeChangeController',
 
         $scope.save = function () {
             $scope.isSaving = true;
-            if ($scope.custDetails.id != null) {
-                CustDetails.update($scope.custDetails, onSaveSuccess, onSaveError);
+            if ($scope.customer.id != null) {
+            	Customer.update($scope.customer, onSaveSuccess, onSaveError);
             } else {
-                CustDetails.save($scope.custDetails, onSaveSuccess, onSaveError);
+            	Customer.save($scope.customer, onSaveSuccess, onSaveError);
             }
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         };
         
         $scope.datePickerForRequestedDate = {};
@@ -92,13 +75,15 @@ angular.module('watererpApp').controller('CustDetailsPipeSizeChangeController',
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
-                $scope.workflowTxnDetails.previousValue = $scope.custDetails.pipeSize;
+                $scope.getPipeSizeDetail(result.pipeSize);
+                $scope.customer.can = result.can;
+                //$scope.workflowTxnDetails.previousValue = $scope.custDetails.pipeSize;
             });
         };
         
         //when selected searched CAN in DropDown
         $scope.onSelect = function($item, $model, $label) {
-			console.log($item);
+			//console.log($item);
 			var arr = $item.split("-");
 			$scope.custDetails = {};
 			$scope.custDetails.can = arr[0].trim();
@@ -109,25 +94,29 @@ angular.module('watererpApp').controller('CustDetailsPipeSizeChangeController',
 			$scope.isValidCust = true;
 		};
 		
-		$scope.saveChanges = function(){
+		
+		$scope.getPipeSizeDetail = function(pipeSize) {
+			GetPipeSizeDetail.findByPipeSize(pipeSize).then(
+							function(result) {
+								$scope.pipeSizeMaster = result;
+								$scope.customer.pipeSizeMaster = result;
+							});
+		};
+		
+		/*$scope.saveChanges = function(){
 			$scope.workflowTxnDetails.requestMaster = {}
 			$scope.workflowTxnDetails.requestMaster.id = 9;
 			$scope.workflowTxnDetails.columnName  = "PipeSize";
 			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
 			WorkflowTxnDetails.save($scope.workflowTxnDetails, onSaveSuccess, onSaveError);
-		}
+		}*/
 		
 		
-		$scope.saveChanges1 = function(){
+		/*$scope.saveChanges1 = function(){
 			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
-			
 			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowTxnDetails).then(function(response) {
 				console.log("Server response:" + JSON.stringify(response));
-//				var res = response.data.map(function(item) {
-//					return item;
-//				});
-//				return res;
 			});
-		}
+		}*/
 		
 }/*]*/);

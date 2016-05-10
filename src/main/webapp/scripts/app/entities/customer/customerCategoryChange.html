@@ -1,48 +1,11 @@
 <div>
-	<div class="panel panel-primary">
-		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Requests</h3>
-		</div>
-		<div class="list-group">
-			<div class="table-responsive" ng-hide="applicationTxn.ststus===0">
-				<table class="clickableTable table table-striped">
-					<thead>
-						<tr>
-							<!-- <th>Req. Id</th>
-							<th>Req. No.</th> -->
-							<th>From</th>
-							<th>Remarks</th>
-							<th>Actioned Date</th>
-							<th>To</th>
-							<th>Status</th>
-							<th>IP Address</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="item in requestWorkflowHistorys">
-							<!-- <td>{{item.domainObject}}</td>
-							<td>{{item.fileNumber}}</td> -->
-							<td>{{item.assignedFrom.firstName}}
-								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
-							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
-							<td>{{item.assignedTo.firstName}}
-								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							<td>{{item.statusMaster.status}}</td>
-							<td>{{item.ipAddress}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<form name="editForm" role="form" novalidate ng-submit="saveChanges()"
+	<form name="editForm" role="form" novalidate ng-submit="save()"
 		show-validation>
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-hidden="true" ng-click="clear()">&times;</button>
-				<h3 class="panel-title pull-left">Customer Details</h3>
+				<h3 class="panel-title pull-left">Category Change</h3>
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
@@ -164,35 +127,32 @@
 							<legend>Change Connection Category</legend>
 							<div class="row">
 								<div class="col-sm-3">
-									<label class="control-label" for="field_previousValue">Previous
+									<label class="control-label" for="field_previousReading">Previous
 										Reading</label> <input type="text" class="form-control"
-										name="previousValue" id="field_previousValue"
-										ng-model="workflowDTO.workflowTxnDetailss[0].previousValue"
-										disabled />
+										name="previousReading" id="field_previousReading"
+										ng-model="customer.meterReading" disabled />
 								</div>
 								<div class="col-sm-3">
-									<label class="control-label" for="field_newValue">Present
+									<label class="control-label" for="field_presentReading">Present
 										Reading</label> <input type="text" class="form-control"
-										name="newValue" id="field_newValue"
-										ng-model="workflowDTO.workflowTxnDetailss[0].newValue" />
+										name="presentReading" id="field_presentReading"
+										ng-model="customer.presentReading" />
 								</div>
 								<div class="col-sm-3">
 									<label for="field_tariffCategoryMaster">Previous
-										Category </label> <select class="form-control"
+										Category Master</label> <select class="form-control"
 										id="field_tariffCategoryMaster" name="tariffCategoryMaster"
-										ng-model="workflowDTO.workflowTxnDetailss[1].previousValue"
-										ng-options="tariffCategoryMaster.id as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters"
+										ng-model="customer.tariffCategoryMaster"
+										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
 										disabled>
 										<option value=""></option>
 									</select>
 								</div>
 								<div class="col-sm-3">
-									<label for="field_tariffCategoryMaster">Change Category
-									</label> <select class="form-control" id="field_tariffCategoryMaster"
-										name="tariffCategoryMaster"
-										ng-change="disableOrg(workflowDTO.workflowTxnDetailss[1].newValue)"
-										ng-model="workflowDTO.workflowTxnDetailss[1].newValue"
-										ng-options="tariffCategoryMaster.id as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters">
+									<label for="field_presentCategory">Change Category</label> <select
+										class="form-control" id="field_presentCategory"
+										name="presentCategory" ng-model="customer.presentCategory"
+										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -202,23 +162,18 @@
 								<div class="col-sm-4">
 									<label class="control-label" for="field_organization">Organization</label>
 									<input type="checkbox" class="form-control" name="organization"
-										id="field_organization"
-										ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
-										ng-model="workflowDTO.workflowTxnDetailss[2].newValue" />
+										id="field_organization" ng-model="customer.organization" />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_organizationName">Organization
 										Name</label> <input type="text" class="form-control"
 										name="organizationName" id="field_organizationName"
-										ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
-										ng-model="workflowDTO.workflowTxnDetailss[3].newValue" />
+										ng-model="customer.organizationName" />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_designation">Designation</label>
 									<input type="text" class="form-control" name="designation"
-										ng-model="workflowDTO.workflowTxnDetailss[4].newValue"
-										ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
-										id="field_designation" />
+										ng-model="customer.designation" id="field_designation" />
 								</div>
 							</div>
 							<br>
@@ -226,13 +181,11 @@
 								<div class="col-sm-4">
 									<label class="control-label" for="field_propertyDoc">Property
 										Ownership Document</label> <br> <input type="checkbox"
-										ng-model="workflowDTO.workflowTxnDetailss[5].newValue"
-										ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
+										ng-model="customer.deedDoc"
 										ng-true-value="'Tittle Deed/Offer letter'"
 										ng-false-value="'Not Submitted'">&nbsp;<span>Tittle
 										Deed/Offer letter </span><br> <input type="checkbox"
-										ng-model="workflowDTO.workflowTxnDetailss[6].newValue"
-										ng-disabled="workflowDTO.workflowTxnDetailss[1].newValue===1"
+										ng-model="customer.agreementDoc"
 										ng-true-value="'Rented Property-lease-Rent Agreement'"
 										ng-false-value="'Not Submitted'">&nbsp;<span>Rented
 										Property- lease-Rent Agreement </span>
@@ -241,18 +194,17 @@
 							<br>
 							<div class="row">
 								<div class="col-sm-4">
-									<label class="control-label" for="field_assignedDate">Requested
+									<label class="control-label" for="field_requestedDate">Requested
 										Date</label>
 									<div class="form-group">
-										<div class='input-group date' id='field_assignedDate'>
-											<input id="field_assignedDate" type="text"
+										<div class='input-group date' id='field_requestedDate'>
+											<input id="field_requestedDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
-												ng-model="workflowDTO.requestWorkflowHistory.assignedDate"
-												max-date="dtmax"
-												is-open="datePickerForAssignedDate.status.opened" /> <span
+												ng-model="customer.requestedDate" max-date="dtmax"
+												is-open="datePickerForRequestedDate.status.opened" /> <span
 												class="input-group-btn">
 												<button type="button" class="btn btn-default"
-													ng-click="datePickerForAssignedDateOpen($event)">
+													ng-click="datePickerForRequestedDateOpen($event)">
 													<i class="glyphicon glyphicon-calendar"></i>
 												</button>
 											</span>
@@ -263,26 +215,17 @@
 									<label class="control-label" for="field_remarks">Remarks</label>
 									<textarea rows="1" cols="30" class="form-control"
 										name="remarks" id="field_remarks" style="resize: none"
-										ng-model="workflowDTO.requestWorkflowHistory.remarks"></textarea>
+										ng-model="customer.remarks"></textarea>
 								</div>
 							</div>
 						</fieldset>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger pull-right"
-						ng-click="decline()">
-							<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
-						</button>
-						<button type="button" class="btn btn-success pull-right"
-						ng-click="approve(workflowDTO)">
-							<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-						</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal"
 							ng-click="clear()">
 							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 						</button>
-						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-							class="btn btn-primary">
+						<button type="submit" class="btn btn-primary">
 							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 						</button>
 					</div>

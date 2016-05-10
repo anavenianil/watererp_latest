@@ -18,4 +18,7 @@ public interface BillDetailsRepository extends JpaRepository<BillDetails,Long> {
     
     @Query("select bd from BillDetails bd where bd.status='INITIATED' and bd.can=:can")
     public BillDetails findValidBillForCan(@Param("can") String can);
+        
+    @Query("select bd from BillDetails bd where bd.status='INITIATED'")
+    public List<BillDetails>  findAllInitiated();
 }

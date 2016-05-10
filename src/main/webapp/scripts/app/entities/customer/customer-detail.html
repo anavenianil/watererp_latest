@@ -12,15 +12,87 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Request Date</span>
+                    <span>MeterReading</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{customer.requestDate | date:'medium'}}</span>
+                    <span class="form-control-static">{{customer.meterReading}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>First Name</span>
+                    <span>PresentReading</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.presentReading}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Organization</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.organization}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>OrganizationName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.organizationName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Designation</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.designation}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DeedDoc</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.deedDoc}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>AgreementDoc</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.agreementDoc}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Remarks</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.remarks}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>RequestedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.requestedDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Can</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.can}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>FirstName</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{customer.firstName}}</span>
@@ -28,7 +100,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Middle Name</span>
+                    <span>MiddleName</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{customer.middleName}}</span>
@@ -36,7 +108,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Last Name</span>
+                    <span>LastName</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{customer.lastName}}</span>
@@ -44,74 +116,10 @@
             </tr>
             <tr>
                 <td>
-                    <span>House No</span>
+                    <span>MobileNo</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{customer.houseNo}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Govrnment Official Number</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.govtOfficialNo}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Ward</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.ward}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Street</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.street}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Pin Code</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.pincode}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Block</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.block}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Area</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.area}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Section</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.section}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Constituency</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.constituency}}</span>
+                    <span class="form-control-static">{{customer.mobileNo}}</span>
                 </td>
             </tr>
             <tr>
@@ -124,34 +132,90 @@
             </tr>
             <tr>
                 <td>
-                    <span>Tel Office</span>
+                    <span>IdNumber</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{customer.telOffice}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Tel Home</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{customer.telHome}}</span>
+                    <span class="form-control-static">{{customer.idNumber}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Mobile</span>
+                    <span>Photo</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{customer.mobile}}</span>
+                    <span class="form-control-static">{{customer.photo}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>File Number</span>
+                    <span>Status</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{customer.fileNumber}}</span>
+                    <span class="form-control-static">{{customer.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ApprovedDate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.approvedDate | date:'mediumDate'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ChangeType</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{customer.changeType}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>tariffCategoryMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="tariffCategoryMaster.detail({id:customer.tariffCategoryMaster.id})">{{customer.tariffCategoryMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>presentCategory</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="tariffCategoryMaster.detail({id:customer.presentCategory.id})">{{customer.presentCategory.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>newProofMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="idProofMaster.detail({id:customer.newProofMaster.id})">{{customer.newProofMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>statusMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="statusMaster.detail({id:customer.statusMaster.id})">{{customer.statusMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>pipeSizeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="pipeSizeMaster.detail({id:customer.pipeSizeMaster.id})">{{customer.pipeSizeMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>requestedPipeSizeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="pipeSizeMaster.detail({id:customer.requestedPipeSizeMaster.id})">{{customer.requestedPipeSizeMaster.id}}</a>
                 </td>
             </tr>
             </tbody>

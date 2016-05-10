@@ -126,7 +126,7 @@ public class BillingService {
 	public BillRunMaster generateBill() {
 		initBillRun();
 
-		List<BillDetails> bd = billDetailsRepository.findAll();
+		List<BillDetails> bd = billDetailsRepository.findAllInitiated();
 
 		processBills(bd);
 
@@ -299,7 +299,7 @@ public class BillingService {
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
-			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			dTo = bill_details.getMetReadingDt();
 
 			// Currently Metered
 			if (bill_details.getCurrentBillType().equals("M")) {
@@ -363,8 +363,16 @@ public class BillingService {
 			if (bill_details.getCurrentBillType().equals("M")) {
 
 				if (!customer.getPrevReading().equals("0")) {
+					if(bill_details.getIsRounding())
+					{
+						unitsKL = bill_details.getPresentReading() + 999
+								- bill_details.getInitialReading();
+					}
+					else
+					{
 					unitsKL = bill_details.getPresentReading()
 							- bill_details.getInitialReading();
+					}
 
 					units = unitsKL * 1000.0f;
 					
@@ -625,8 +633,10 @@ public class BillingService {
 	public void process_bill(BillDetails bill_details) {
 		if (bill_details == null)
 			return;
-
+		
 		initBill(bill_details.getCan());
+
+		brd.setBillDetails(bill_details);
 
 		log.debug("Process customer with CAN:" + bill_details.getCan());
 		CustDetails customer = custDetailsRepository.findByCan(bill_details

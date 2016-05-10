@@ -21,7 +21,7 @@ angular.module('watererpApp')
             })
             .state('applicationTxn.detail', {
                 parent: 'entity',
-                url: '/applicationTxn/{id}',
+                url: '/applicationTxn/{id}/{requestTypeId}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'ApplicationTxn'

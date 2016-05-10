@@ -7,188 +7,25 @@
 <title>Customer Online Payment</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width" />
-
-<script type="text/javascript"
-	src="bower_components/jquery/dist/jquery.js"></script>
-<script type="text/javascript"
-	src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="bootstrap3-typeahead.min.js"></script>
-
-<link rel="stylesheet"
-	href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/assets/styles/main.css" />
+<link
+	href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
 
 <style>
 /********* Customer Online Payment CSS *********************/
 /* scaffolding */
 /* ----------- */
-html {
-	overflow-y: scroll;
-	*overflow-x: hidden;
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.container {
-	max-width: 750px;
-	margin: 0 auto;
-	text-align: center;
+input[type=number] {
+    -moz-appearance:textfield;
 }
-
-.tt-menu, .gist {
-	text-align: left;
-}
-
-/* base styles */
-/* ----------- */
-html {
-	font: normal normal normal 18px/1.2 "Helvetica Neue", Roboto, "Segoe UI",
-		Calibri, sans-serif;
-	color: #292f33;
-}
-
-a {
-	color: #03739c;
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-.table-of-contents li {
-	display: inline-block;
-	*display: inline;
-	zoom: 1;
-}
-
-.table-of-contents li a {
-	font-size: 16px;
-	color: #999;
-}
-
-p+p {
-	margin: 30px 0 0 0;
-}
-
-/* site theme */
-/* ---------- */
-.title {
-	margin: 20px 0 0 0;
-	font-size: 64px;
-}
-
-.example {
-	padding: 30px 0;
-}
-
-.example-name {
-	margin: 20px 0;
-	font-size: 32px;
-}
-
-.demo {
-	position: relative;
-	*z-index: 1;
-	margin: 50px 0;
-}
-
-.typeahead, .tt-query, .tt-hint {
-	width: 396px;
-	height: 30px;
-	padding: 8px 12px;
-	font-size: 24px;
-	line-height: 30px;
-	border: 2px solid #ccc;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	outline: none;
-}
-
-.typeahead {
-	background-color: #fff;
-}
-
-.typeahead:focus {
-	border: 2px solid #0097cf;
-}
-
-.tt-query {
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-.tt-hint {
-	color: #999
-}
-
-.tt-menu {
-	width: 422px;
-	margin: 12px 0;
-	padding: 8px 0;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-	box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-}
-
-.tt-suggestion {
-	padding: 3px 20px;
-	font-size: 18px;
-	line-height: 24px;
-}
-
-.tt-suggestion:hover {
-	cursor: pointer;
-	color: #fff;
-	background-color: #0097cf;
-}
-
-.tt-suggestion.tt-cursor {
-	color: #fff;
-	background-color: #0097cf;
-}
-
-.tt-suggestion p {
-	margin: 0;
-}
-
-.gist {
-	font-size: 10px;
-}
-
-/* example specific styles */
-/* ----------------------- */
-#custom-templates .empty-message {
-	padding: 5px 10px;
-	text-align: center;
-}
-
-#multiple-datasets .league-name {
-	margin: 0 20px 5px 20px;
-	padding: 3px 0;
-	border-bottom: 1px solid #ccc;
-}
-
-#scrollable-dropdown-menu .tt-menu {
-	max-height: 150px;
-	overflow-y: auto;
-}
-
-.dropdown-item {
-	font-size: 12px;
-}
-
-#rtl-support .tt-menu {
-	text-align: right;
-}
-
 /********* Customer Online Payment CSS *********************/
 </style>
 
@@ -199,7 +36,137 @@ p+p {
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   	<![endif]-->
 
+
+	<form id="form" role="form" data-toggle="validator">
+
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">Online Payment</h3>
+			</div>
+
+			<div class="list-group">
+
+				<div class="list-group-item">
+					<div class="modal-body">
+						<div id="le-alert" class="alert alert-block fade"></div>
+
+						<div class="row">
+							<div class="col-sm-4 col-md-offset-4 form-group">
+								<label for="field_applicationTxn">Search By CAN</label>
+								<div class="form-group">
+									<input type="text"
+										placeholder="Search CAN or Name or Address (Min 3 chars)"
+										id="canSearch" class="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group  has-feedback">
+									<label class="control-label" for="field_userDefinedField">CAN</label>
+									<input type="text" class="form-control" name="userDefinedField"
+										id="field_userDefinedField" required="required" pattern="^[_A-z0-9]{8,}$"  maxlength="10"
+										  />
+									<span class="glyphicon form-control-feedback"
+										aria-hidden="true"></span>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_consName">Consumer
+									Name</label>
+								<input type="text" class="form-control" name="consName"
+									id="field_consName" readonly />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_address">Address</label>
+								<input type="text" class="form-control" name="address"
+									id="field_address" readonly />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group  has-feedback">
+									<label class="control-label" for="field_amount">
+										Receipt Amount </label>
+									<input type="number" class="form-control" name="amount"
+										required="required" min="1" max="9999999" id="field_amount" />
+									<span class="glyphicon form-control-feedback"
+										aria-hidden="true"></span>
+								</div>
+							</div>
+							<div class="col-sm-4 form-group">
+								<label for="field_payBy">Payment Mode</label>
+								<select class="form-control" id="field_payBy" name="payBy"
+									required="required">
+									<option value="TIGOPESADIR">Tigo Pesa</option>
+									<option value="Credit Card">Credit Card</option>
+									<option value="Debit Card">Debit Card</option>
+									<option value="Net Banking">Net Banking</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group  has-feedback">
+									<label class="control-label" for="field_email">Email</label>
+									<input type="email" class="form-control" name="email"
+										required="required" id="field_email" />
+									<span class="glyphicon form-control-feedback"
+										aria-hidden="true"></span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group  has-feedback">
+									<label class="control-label" for="field_phone">Phone</label>
+									<input type="number" class="form-control" name="phone"
+										required="required" min="99999999" max="99999999999"
+										id="field_phone" />
+									<span class="glyphicon form-control-feedback"
+										aria-hidden="true"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group modal-footer">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">
+							<span class="glyphicon glyphicon-ban-circle"></span>
+							&nbsp;
+							<span>Cancel</span>
+						</button>
+						<button type="submit" class="btn btn-success">
+							<span class="glyphicon glyphicon-save"></span>
+							&nbsp;
+							<span>Initiate Payment</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script
+		src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script
+		src="bower_components/bootstrap-validator/dist/validator.min.js"></script>
+	<script type="text/javascript"
+		src="bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js"></script>
+
+
 	<script type="text/javascript">
+
+	
+		$('#form').validator().on('submit', function(e) {
+			if (e.isDefaultPrevented()) {
+				return false;
+			} else {
+				$("#field_userDefinedField").change();
+				return save();
+			}
+		})
+
 		$(function() {
 			$('[id*=canSearch]').typeahead({
 				hint : true,
@@ -233,59 +200,13 @@ p+p {
 					document.forms[0].userDefinedField.value = arr[0].trim();
 					document.forms[0].consName.value = arr[1];
 					document.forms[0].address.value = arr[2];
+					$("#field_userDefinedField").change();
 				}
 			});
 		});
 
-		function validate()
-		{
-			var errors = [];
-			var regExUDF = /^[a-zA-Z0-9]{6,10}$/;
-			var regExEmail = /^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
-			
-			if (!regExUDF.test(document.forms[0].userDefinedField.value)) {
-				errors[errors.length] = "Enter valid CAN.";
-			}
-			
-			if (!(isNumber(document.forms[0].amount.value) && document.forms[0].amount.value > 0 && document.forms[0].amount.value < 10000000 )) {
-				errors[errors.length] = "Enter valid Amount.";
-			}
-
-			if (!regExEmail.test(document.forms[0].email.value)) {
-				errors[errors.length] = "Enter valid Email.";
-			}
-			
-			if (!(isNumber(document.forms[0].phone.value) && document.forms[0].phone.value > 99999999 && document.forms[0].phone.value < 9999999999 )) {
-				errors[errors.length] = "Enter valid Phone No.";
-			}
-			
-			 if (errors.length > 0) {
-
-				  reportErrors(errors);
-				  return false;
-			 }
-			 else
-				 return true;
-		}
-		
-		function reportErrors(errors){
-			 var msg = "Please Enter Valide Data...\n";
-			 for (var i = 0; i<errors.length; i++) {
-			 var numError = i + 1;
-			  msg += "\n" + numError + ". " + errors[i];
-			}
-			 alert(msg);
-			}
-		
-		function isNumber(n){
-		    return typeof n == 'number' && !isNaN(n) && isFinite(n);
-		 }
-		
 		function save() {
-			
-			if(!validate())
-				return;
-			
+
 			var onlinePaymentOrder = {};
 			onlinePaymentOrder.userDefinedField = document.forms[0].userDefinedField.value;
 			onlinePaymentOrder.amount = document.forms[0].amount.value;
@@ -310,140 +231,48 @@ p+p {
 				return cookieValue;
 			}
 
-			$('.close').click(function () {
-				  $(this).parent().removeClass('in'); // hides alert with Bootstrap CSS3 implem
-				});
-			
-			$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+			$('.close').click(function() {
+				$(this).parent().removeClass('in'); // hides alert with Bootstrap CSS3 implem
+			});
+
+			$
+					.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 						jqXHR.setRequestHeader('X-CSRF-Token',
 								getCookie("CSRF-TOKEN"));
 					});
 
+			$('#le-alert').html('');
+			$('#le-alert').addClass('alert-success').addClass('in').html("<strong>Initiating Payment. Please Wait...</strong>")
+
 			$.ajax({
-				url : '/api/onlinePaymentOrders',
-				data : JSON.stringify(onlinePaymentOrder),
-				dataType : "json",
-				type : "POST",
-				contentType : "application/json; charset=utf-8",
-				success : function(response, textStatus, request) {
-					$('#le-alert').addClass('alert-success').addClass('in'); 
-					location.href = request
-							.getResponseHeader('X-watererpApp-redirect');
-				},
-				error : function(response) {
-					$('#le-alert').addClass('alert-error').addClass('in').html(response.responseText);
-//					alert(response.responseText);
-				},
-				failure : function(response) {
-					$('#le-alert').addClass('alert-error').addClass('in').html(response.responseText);
-//					alert(response.responseText);
-				}
-			});
+						url : '/api/postOnlinePaymentOrders',
+						data : JSON.stringify(onlinePaymentOrder),
+						dataType : "json",
+						type : "POST",
+						contentType : "application/json; charset=utf-8",
+						success : function(response, textStatus, request) {
+
+							var successMsg = '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong>Payment Initiated. Please wait while you are being redirected to payment page now...'
+
+							$('#le-alert').addClass('alert-success').addClass(
+									'in').html(successMsg);
+							location.href = request
+									.getResponseHeader('X-watererpApp-redirect');
+						},
+						error : function(response) {
+							$('#le-alert').addClass('alert-danger').addClass(
+									'in').html(response.responseJSON.message);
+							//					alert(response.responseText);
+						},
+						failure : function(response) {
+							$('#le-alert').addClass('alert-danger').addClass(
+									'in').html(response.responseJSON.message);
+							//					alert(response.responseText);
+						}
+					});
 
 			return false;
 		}
 	</script>
-
-	<form name="editForm" role="form" novalidate>
-
-		<div class="panel panel-primary">
-			<div class="panel-heading clearfix">
-				<h3 class="panel-title pull-left">Online Payment</h3>
-			</div>
-
-			<div class="list-group">
-
-				<div class="list-group-item">
-					<div class="modal-body">
-									<div id="le-alert" class="alert alert-block fade">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Success!</strong>
-					Payment Initiated. Please wait while you are being redirected to payment page now...
-				</div>
-					
-						<div class="row">
-							<div class="col-sm-4 col-md-offset-4">
-								<label for="field_applicationTxn">Search By CAN</label>
-								<div class="form-group">
-									<input type="text"
-										placeholder="Search CAN or Name or Address (Min 3 chars)"
-										id="canSearch" class="form-control" />
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label class="control-label" for="field_userDefinedField">Can</label>
-								<input type="text" class="form-control" name="userDefinedField"
-									id="field_userDefinedField" readonly />
-									<span class="help-inline">Invalid CAN</span>
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_consName">Consumer
-									Name</label>
-								<input type="text" class="form-control" name="consName"
-									id="field_consName" readonly />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_address">Address</label>
-								<input type="text" class="form-control" name="address"
-									id="field_address" readonly />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label class="
-							control-label" for="field_amount">
-									Receipt Amount </label>
-								<input type="number" class="form-control" name="amount"
-									required="required" min="1" id="field_amount" />
-									<span class="help-inline">Invalid Amount</span>
-							</div>
-							<div class="col-sm-4">
-								<label for="field_payBy">Payment Mode</label>
-								<select class="form-control" id="field_payBy" name="payBy"
-									required="required">
-									<option value="TIGOPESADIR">Tigo Pesa</option>
-									<option value="Credit Card">Credit Card</option>
-									<option value="Debit Card">Debit Card</option>
-									<option value="Net Banking">Net Banking</option>
-								</select>
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_email">Email</label>
-								<input type="email" class="form-control" name="email"
-									required="required" id="field_email" />
-									<span class="help-inline">Invalid Email</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label class="control-label" for="field_phone">Phone</label>
-								<input type="number" class="form-control" name="phone"
-									required="required" id="field_phone" />
-									<span class="help-inline">Invalid phone</span>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">
-							<span class="glyphicon glyphicon-ban-circle"></span>
-							&nbsp;
-							<span>Cancel</span>
-						</button>
-						<button type="button" onclick="save()" class="btn btn-success">
-							<span class="glyphicon glyphicon-save"></span>
-							&nbsp;
-							<span>Initiate Payment</span>
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</form>
-
-
-
 </body>
 </html>

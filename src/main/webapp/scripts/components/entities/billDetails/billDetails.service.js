@@ -55,7 +55,6 @@ angular
 			return {
 				findByCan : function(can) {
 					return $http.get('api/billDetailss/findByCan/' + can.can).then(function successCallback(response) {
-						console.log("This is the response in billDetails.service.js:" + JSON.stringify(response));
 						return response.data;
 					}, function errorCallback(response) {
 							return "error";
