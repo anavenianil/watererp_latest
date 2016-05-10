@@ -203,6 +203,24 @@
 									Number</label> <input type="text" class="form-control" name="idNumber"
 									id="field_idNumber" ng-model="customer.idNumber" />
 							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_requestedDate">Requested
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_requestedDate'>
+										<input id="field_requestedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="customer.requestedDate" max-date="dtmax"
+											is-open="datePickerForRequestedDate.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForRequestedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
 						</div>
 					</fieldset>
 				</div>

@@ -126,7 +126,7 @@ angular
 					
 					var onSaveSuccess = function (result) {
 			            $scope.isSaving = false;
-			            $state.go("customer");
+			            $state.go('customer.categoryChangeList');
 			        };
 
 			        var onSaveError = function (result) {

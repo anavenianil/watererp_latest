@@ -58,7 +58,7 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
             $scope.$emit('watererpApp:customerUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('home');
+            $state.go('customer.nameChangeList');
         };
 
         var onSaveError = function (result) {
@@ -150,6 +150,8 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
 						+ $scope.serverErrorMsg : '';
 			};
 		
+			
+			
 		
 		/*$scope.saveChanges = function(){
 			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
