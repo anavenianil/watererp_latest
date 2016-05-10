@@ -561,7 +561,7 @@ public class BillingService {
 		if (!validateCust(customer, bill_details))
 			return;
 
-		if (bfdRepository.findByCanAndToMonth(
+		if (billRunDetailsRepository.findByCanAndToMonth(
 				customer.getCan(),
 				customer.getPrevBillMonth().format(
 						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
