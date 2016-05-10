@@ -126,7 +126,7 @@ public class BillingService {
 	public BillRunMaster generateBill() {
 		initBillRun();
 
-		List<BillDetails> bd = billDetailsRepository.findAll();
+		List<BillDetails> bd = billDetailsRepository.findAllInitiated();
 
 		processBills(bd);
 
@@ -633,8 +633,10 @@ public class BillingService {
 	public void process_bill(BillDetails bill_details) {
 		if (bill_details == null)
 			return;
-
+		
 		initBill(bill_details.getCan());
+
+		brd.setBillDetails(bill_details);
 
 		log.debug("Process customer with CAN:" + bill_details.getCan());
 		CustDetails customer = custDetailsRepository.findByCan(bill_details
