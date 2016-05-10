@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('watererpApp').controller('CustomerDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Customer',
-        function($scope, $stateParams, $uibModalInstance, entity, Customer) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Customer', 'TariffCategoryMaster', 'IdProofMaster', 'StatusMaster', 'PipeSizeMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, Customer, TariffCategoryMaster, IdProofMaster, StatusMaster, PipeSizeMaster) {
 
         $scope.customer = entity;
+        $scope.tariffcategorymasters = TariffCategoryMaster.query();
+        $scope.idproofmasters = IdProofMaster.query();
+        $scope.statusmasters = StatusMaster.query();
+        $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.load = function(id) {
             Customer.get({id : id}, function(result) {
                 $scope.customer = result;
@@ -33,13 +37,22 @@ angular.module('watererpApp').controller('CustomerDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.datePickerForRequestDate = {};
+        $scope.datePickerForRequestedDate = {};
 
-        $scope.datePickerForRequestDate.status = {
+        $scope.datePickerForRequestedDate.status = {
             opened: false
         };
 
-        $scope.datePickerForRequestDateOpen = function($event) {
-            $scope.datePickerForRequestDate.status.opened = true;
+        $scope.datePickerForRequestedDateOpen = function($event) {
+            $scope.datePickerForRequestedDate.status.opened = true;
+        };
+        $scope.datePickerForApprovedDate = {};
+
+        $scope.datePickerForApprovedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForApprovedDateOpen = function($event) {
+            $scope.datePickerForApprovedDate.status.opened = true;
         };
 }]);

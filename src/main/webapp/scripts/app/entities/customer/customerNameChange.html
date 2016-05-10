@@ -1,20 +1,14 @@
 
-<form name="editForm" role="form" novalidate ng-submit="saveChanges()"
+<form name="editForm" role="form" novalidate ng-submit="save()"
 	show-validation>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<button type="button" class="close" data-dismiss="modal"
 				aria-hidden="true" ng-click="clear()">&times;</button>
-			<h3 class="panel-title pull-left">Customer Details</h3>
+			<h3 class="panel-title pull-left">Customer Name Change</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
-				<!-- <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"
-			aria-hidden="true" ng-click="clear()">&times;</button>
-		<h4 class="modal-title" id="myCustDetailsLabel">Create or edit a
-			CustDetails</h4>
-		</div> -->
 				<div class="modal-body">
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
@@ -53,8 +47,7 @@
 							<div class="col-sm-3">
 								<label class="control-label" for="field_consName">Consumer
 									Name</label> <input type="text" class="form-control" name="consName"
-									id="field_consName"
-									ng-model="workflowTxnDetails[0].previousValue" required
+									id="field_consName" ng-model="custDetails.consName" required
 									disabled />
 								<div ng-show="editForm.consName.$invalid">
 									<p class="help-block"
@@ -65,15 +58,14 @@
 							<div class="col-sm-3">
 								<label class="control-label" for="field_mobileNo">Mobile
 									No.</label> <input type="text" class="form-control" name="mobileNo"
-									id="field_mobileNo"
-									ng-model="workflowTxnDetails[1].previousValue" disabled />
+									id="field_mobileNo" ng-model="custDetails.mobileNo" disabled />
 							</div>
 							<div class="col-sm-3">
 								<label class="control-label" for="field_email">Email
 									Address</label> <input type="text" class="form-control" name="email"
-									id="field_email" ng-model="workflowTxnDetails[2].previousValue"
-									disabled />
+									id="field_email" ng-model="custDetails.email" disabled />
 							</div>
+
 						</div>
 
 						<div class="row">
@@ -131,66 +123,88 @@
 						<legend>Change of Name</legend>
 						<div class="row">
 							<div class="col-sm-4">
-								<label class="control-label" for="field_consName">Consumer
-									Name</label> <input type="text" class="form-control" name="consName"
-									id="field_consName" ng-model="workflowTxnDetails[0].newValue" />
-								<div ng-show="editForm.consName.$invalid">
+								<label class="control-label" for="field_firstName">First
+									Name</label> <input type="text" class="form-control" name="firstName"
+									id="field_firstName" ng-model="customer.firstName" />
+								<div ng-show="editForm.firstName.$invalid">
 									<p class="help-block"
-										ng-show="editForm.consName.$error.required">This field is
+										ng-show="editForm.firstName.$error.required">This field is
 										required.</p>
 								</div>
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_mobileNo">Mobile
-									No.</label> <input type="text" class="form-control" name="mobileNo"
-									id="field_mobileNo" ng-model="workflowTxnDetails[1].newValue" />
+								<label class="control-label" for="field_middleName">Middle
+									Name</label> <input type="text" class="form-control" name="middleName"
+									id="field_middleName" ng-model="customer.middleName" />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_email">Email
-									Address</label> <input type="text" class="form-control" name="email"
-									id="field_email" ng-model="workflowTxnDetails[2].newValue" />
+								<label class="control-label" for="field_lastName">Last
+									Name</label> <input type="text" class="form-control" name="lastName"
+									id="field_lastName" ng-model="customer.lastName" />
+								<div ng-show="editForm.lastName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.lastName.$error.required">This field is
+										required.</p>
+								</div>
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="col-sm-4">
-								<label for="field_idProofMaster">Any among these</label> <select
-									class="form-control" id="field_idProofMaster"
-									name="idProofMaster" ng-model="workflowTxnDetails[3].newValue"
-									ng-options="idProofMaster.id as idProofMaster.idProof for idProofMaster in idProofMasters track by idProofMaster.id">
+								<label class="control-label" for="field_mobileNo">Mobile
+									No.</label> <input type="text" class="form-control" name="mobileNo"
+									id="field_mobileNo" ng-model="customer.mobileNo" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_email">Email
+									Address</label> <input type="text" class="form-control" name="email"
+									id="field_email" ng-model="customer.email" />
+							</div>
+							<div class="col-sm-1">
+								<label>Photo</label>
+								<button type="submit" class="btn btn-primary" ngf-drop=""
+									ngf-select="" ng-model="customer.photo1"
+									ng-model-rejected="rejFiles"
+									ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+									class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+									ngf-accept="'image/*,application/pdf'"
+									ngf-drop-available="dropAvailable">
+									<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
+										Photo</span>
+								</button>
+							</div>
+							<div class="col-sm-2">
+								<ul style="clear: both" ng-show="rejFiles.length > 0"
+									class="response">
+									<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+										file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+								</ul>
+								<ul style="clear: both" ng-show="customer.photo1.length > 0"
+									class="response">
+									<li class="sel-file" ng-repeat="f in customer.photo1">-
+										{{f.name}} <a ng-show="f.result" href="javascript:void(0)"
+										ng-click="f.showDetail = !f.showDetail">details</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4">
+								<label for="field_newProofMaster">Id Proof(Any among
+									these)</label> <select class="form-control" id="field_newProofMaster"
+									name="newProofMaster" ng-model="customer.newProofMaster"
+									ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idproofmasters track by idProofMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_idNumber">Number
-									of ID</label> <input type="text" class="form-control" name="idNumber"
-									id="field_idNumber" ng-model="workflowTxnDetails[4].newValue" />
+								<label class="control-label" for="field_idNumber">Id
+									Number</label> <input type="text" class="form-control" name="idNumber"
+									id="field_idNumber" ng-model="customer.idNumber" />
 							</div>
 						</div>
 					</fieldset>
-					<!-- <fieldset>
-						<legend>Connection Termination</legend>
-						<div class="col-sm-3">
-							<label class="control-label" for="field_requestedDate">Requested
-								Date</label>
-							<div class="form-group">
-								<div class='input-group date' id='field_requestedDate'>
-									<input id="field_requestedDate" type="text"
-										class="form-control" uib-datepicker-popup="{{dateformat}}"
-										ng-model="applicationTxn.requestedDate" max-date="dtmax"
-										is-open="datePickerForRequestedDate.status.opened" /> <span
-										class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="datePickerForRequestedDateOpen($event)">
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button>
-									</span>
-								</div>
-							</div>
-						</div>
-						Meter Recovered from Location(yes/no), Last meter reading, meter
-						recovered date
-					</fieldset> -->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"

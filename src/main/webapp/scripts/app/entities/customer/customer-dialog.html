@@ -14,83 +14,89 @@
                     ng-model="customer.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_requestDate">Request Date</label>
-            <input id="field_requestDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="customer.requestDate" is-open="datePickerForRequestDate.status.opened"
+            <label class="control-label" for="field_meterReading">MeterReading</label>
+            <input type="number" class="form-control" name="meterReading" id="field_meterReading"
+                    ng-model="customer.meterReading"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_presentReading">PresentReading</label>
+            <input type="number" class="form-control" name="presentReading" id="field_presentReading"
+                    ng-model="customer.presentReading"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_organization">Organization</label>
+            <input type="checkbox" class="form-control" name="organization" id="field_organization"
+                    ng-model="customer.organization"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_organizationName">OrganizationName</label>
+            <input type="text" class="form-control" name="organizationName" id="field_organizationName"
+                    ng-model="customer.organizationName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_designation">Designation</label>
+            <input type="text" class="form-control" name="designation" id="field_designation"
+                    ng-model="customer.designation"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_deedDoc">DeedDoc</label>
+            <input type="text" class="form-control" name="deedDoc" id="field_deedDoc"
+                    ng-model="customer.deedDoc"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_agreementDoc">AgreementDoc</label>
+            <input type="text" class="form-control" name="agreementDoc" id="field_agreementDoc"
+                    ng-model="customer.agreementDoc"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_remarks">Remarks</label>
+            <input type="text" class="form-control" name="remarks" id="field_remarks"
+                    ng-model="customer.remarks"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_requestedDate">RequestedDate</label>
+            <input id="field_requestedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="customer.requestedDate" is-open="datePickerForRequestedDate.status.opened"
             />
             <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForRequestDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                <button type="button" class="btn btn-default" ng-click="datePickerForRequestedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_firstName">First Name</label>
+            <label class="control-label" for="field_can">Can</label>
+            <input type="text" class="form-control" name="can" id="field_can"
+                    ng-model="customer.can"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_firstName">FirstName</label>
             <input type="text" class="form-control" name="firstName" id="field_firstName"
                     ng-model="customer.firstName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_middleName">Middle Name</label>
+            <label class="control-label" for="field_middleName">MiddleName</label>
             <input type="text" class="form-control" name="middleName" id="field_middleName"
                     ng-model="customer.middleName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_lastName">Last Name</label>
+            <label class="control-label" for="field_lastName">LastName</label>
             <input type="text" class="form-control" name="lastName" id="field_lastName"
                     ng-model="customer.lastName"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_houseNo">House No</label>
-            <input type="text" class="form-control" name="houseNo" id="field_houseNo"
-                    ng-model="customer.houseNo"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_govtOfficialNo">Govrnment Official Number</label>
-            <input type="text" class="form-control" name="govtOfficialNo" id="field_govtOfficialNo"
-                    ng-model="customer.govtOfficialNo"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_ward">Ward</label>
-            <input type="text" class="form-control" name="ward" id="field_ward"
-                    ng-model="customer.ward"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_street">Street</label>
-            <input type="text" class="form-control" name="street" id="field_street"
-                    ng-model="customer.street"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_pincode">Pin Code</label>
-            <input type="text" class="form-control" name="pincode" id="field_pincode"
-                    ng-model="customer.pincode"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_block">Block</label>
-            <input type="text" class="form-control" name="block" id="field_block"
-                    ng-model="customer.block"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_area">Area</label>
-            <input type="text" class="form-control" name="area" id="field_area"
-                    ng-model="customer.area"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_section">Section</label>
-            <input type="text" class="form-control" name="section" id="field_section"
-                    ng-model="customer.section"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_constituency">Constituency</label>
-            <input type="text" class="form-control" name="constituency" id="field_constituency"
-                    ng-model="customer.constituency"
+            <label class="control-label" for="field_mobileNo">MobileNo</label>
+            <input type="number" class="form-control" name="mobileNo" id="field_mobileNo"
+                    ng-model="customer.mobileNo"
                      />
         </div>
         <div class="form-group">
@@ -100,30 +106,74 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_telOffice">Tel Office</label>
-            <input type="text" class="form-control" name="telOffice" id="field_telOffice"
-                    ng-model="customer.telOffice"
+            <label class="control-label" for="field_idNumber">IdNumber</label>
+            <input type="text" class="form-control" name="idNumber" id="field_idNumber"
+                    ng-model="customer.idNumber"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_telHome">Tel Home</label>
-            <input type="text" class="form-control" name="telHome" id="field_telHome"
-                    ng-model="customer.telHome"
+            <label class="control-label" for="field_photo">Photo</label>
+            <input type="text" class="form-control" name="photo" id="field_photo"
+                    ng-model="customer.photo"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_mobile">Mobile</label>
-            <input type="text" class="form-control" name="mobile" id="field_mobile"
-                    ng-model="customer.mobile"
+            <label class="control-label" for="field_status">Status</label>
+            <input type="number" class="form-control" name="status" id="field_status"
+                    ng-model="customer.status"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_fileNumber">File Number</label>
-            <input type="text" class="form-control" name="fileNumber" id="field_fileNumber"
-                    ng-model="customer.fileNumber"
+            <label class="control-label" for="field_approvedDate">ApprovedDate</label>
+            <input id="field_approvedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="customer.approvedDate" is-open="datePickerForApprovedDate.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForApprovedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_changeType">ChangeType</label>
+            <input type="text" class="form-control" name="changeType" id="field_changeType"
+                    ng-model="customer.changeType"
                      />
         </div>
 
+        <div class="form-group">
+            <label for="field_tariffCategoryMaster">tariffCategoryMaster</label>
+            <select class="form-control" id="field_tariffCategoryMaster" name="tariffCategoryMaster" ng-model="customer.tariffCategoryMaster" ng-options="tariffCategoryMaster as tariffCategoryMaster.id for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_presentCategory">presentCategory</label>
+            <select class="form-control" id="field_presentCategory" name="presentCategory" ng-model="customer.presentCategory" ng-options="tariffCategoryMaster as tariffCategoryMaster.id for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_newProofMaster">newProofMaster</label>
+            <select class="form-control" id="field_newProofMaster" name="newProofMaster" ng-model="customer.newProofMaster" ng-options="idProofMaster as idProofMaster.id for idProofMaster in idproofmasters track by idProofMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_statusMaster">statusMaster</label>
+            <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="customer.statusMaster" ng-options="statusMaster as statusMaster.id for statusMaster in statusmasters track by statusMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_pipeSizeMaster">pipeSizeMaster</label>
+            <select class="form-control" id="field_pipeSizeMaster" name="pipeSizeMaster" ng-model="customer.pipeSizeMaster" ng-options="pipeSizeMaster as pipeSizeMaster.id for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_requestedPipeSizeMaster">requestedPipeSizeMaster</label>
+            <select class="form-control" id="field_requestedPipeSizeMaster" name="requestedPipeSizeMaster" ng-model="customer.requestedPipeSizeMaster" ng-options="pipeSizeMaster as pipeSizeMaster.id for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

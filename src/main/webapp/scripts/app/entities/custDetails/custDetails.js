@@ -201,7 +201,7 @@ angular.module('watererpApp')
             })
             .state('custDetails.categoryChangeEdit', {
                 parent: 'custDetails',
-                url: '/categoryChangeEdit/:requestId',
+                url: '/categoryChangeEdit/:requestId/:requestTypeId',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'CustDetailss'
@@ -215,7 +215,7 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
-            .state('custDetails.pipeSizeChange', {
+            /*.state('custDetails.pipeSizeChange', {
                 parent: 'custDetails',
                 url: '/pipeSizeChange',
                 data: {
@@ -246,5 +246,5 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
-            });
+            })*/;
     });

@@ -1,0 +1,175 @@
+<div>
+	<h2>
+		<span>Category Change.: </span> {{customer.id}}
+	</h2>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Requests</h3>
+		</div>
+		<div class="list-group">
+			<div class="table-responsive" ng-hide="applicationTxn.ststus===0">
+				<table class="clickableTable table table-striped">
+					<thead>
+						<tr>
+							<!-- <th>Req. Id</th>
+							<th>Req. No.</th> -->
+							<th>From</th>
+							<th>Remarks</th>
+							<th>Actioned Date</th>
+							<th>To</th>
+							<th>Status</th>
+							<th>IP Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in requestWorkflowHistorys">
+							<!-- <td>{{item.domainObject}}</td>
+							<td>{{item.fileNumber}}</td> -->
+							<td>{{item.assignedFrom.firstName}}
+								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.assignedTo.firstName}}
+								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
+							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.ipAddress}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">
+					Application For Category Change
+					<!-- <span class="label" class="label"
+						ng-class="{	'label-success'	: applicationTxn.status === 2, 
+										'label-warning'	: applicationTxn.status === 1, 
+										'label-danger'	: applicationTxn.status === 0}">
+						{{applicationTxn.status===0?'Pending':(requisition.status===1?'In
+						Feasibility':'Approved')}}</span> -->
+				</h3>
+				<!-- <div class="pull-right">
+					<a type="button"
+						href="/api/applicationTxns/report/{{applicationTxn.id}}"
+						class="pull-right btn btn-warning">Download as PDF</a>
+				</div> -->
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<fieldset>
+						<legend>Applicant Details</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>First Name</label>
+								<h5 class="list-group-item-heading">{{custDetails.consName}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label> Mobile Number</label>
+								<h5 class="list-group-item-heading">{{custDetails.mobileNo}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Email</label>
+								<h5 class="list-group-item-heading">{{custDetails.email}}</h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Organization</label>
+								<h5 class="list-group-item-heading">{{customer.organization}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Organization Name</label>
+								<h5 class="list-group-item-heading">{{customer.organizationName}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Designation</label>
+								<h5 class="list-group-item-heading">{{customer.designation}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend></legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Change Case No</label>
+								<h5 class="list-group-item-heading">{{customer.id}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Request Date</label>
+								<h5 class="list-group-item-heading">{{customer.requestedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+							<div class="col-sm-3" ng-if="custdetails.can!=null">
+								<label>Customer Account Number(CAN)</label>
+								<h5 class="list-group-item-heading">{{customer.can}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Category Details</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Previous Reading</label>
+								<h5 class="list-group-item-heading">{{customer.meterReading}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Present Reading</label>
+								<h5 class="list-group-item-heading">{{customer.presentReading}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Previous Category</label>
+								<h5 class="list-group-item-heading">{{customer.tariffCategoryMaster.tariffCategory}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>New Category</label>
+								<h5 class="list-group-item-heading">{{customer.presentCategory.tariffCategory}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend>Documents to be Attached </legend>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Property Ownership Document </label>
+								<h5 class="list-group-item-heading">{{customer.deedDoc}}</h5>
+								<h5 class="list-group-item-heading">{{customer.agreementDoc}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+					<legend></legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<textarea rows="2" cols="30" class="form-control" name="remarks"
+								id="field_remarks" ng-model="customer.remarks"></textarea>
+						</div>
+					</div>
+				</fieldset>
+					<br>
+				</div>
+			</div>
+		</div>
+
+		<button type="button" class="btn btn-success pull-right"
+			ng-if="orgRole.orgRoleName === 'Technical Manager'"
+			ng-click="approve(customer)">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+		</button>
+
+		<button type="button" class="btn btn-danger pull-right"
+			ng-click="declineRequest(applicationTxn.id)">
+			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
+		</button>
+		<button type="submit" onclick="window.history.back()"
+			class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+				Back</span>
+		</button>
+	</div>
+</div>

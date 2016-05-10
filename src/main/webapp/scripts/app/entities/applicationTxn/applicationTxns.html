@@ -1,5 +1,5 @@
 <div>
-	<h2>Application :</h2>
+	<h2>Application </h2>
 	<jh-alert></jh-alert>
 	<br />
 	<div class="panel panel-primary">
@@ -174,11 +174,12 @@
 								<td>{{applicationTxn.fileNumber}}</td>
 								<td>{{applicationTxn.createdDate | date:'medium'}}</td>
 								<td>{{applicationTxn.updatedDate | date:'medium'}}</td> -->
-
+								
+								<!-- ui-sref="applicationTxn.detail({id:applicationTxn.id, requestTypeId:1})" -->
 								<td class="text-right">
 									<div class="btn-group flex-btn-group-container">
-										<button type="submit"
-											ui-sref="applicationTxn.detail({id:applicationTxn.id})"
+										<button type="button"
+											ng-click="goToState(applicationTxn.id, applicationTxn.user)"			
 											class="btn btn-info btn-sm">
 											<span class="glyphicon glyphicon-eye-open"></span> <span
 												class="hidden-xs hidden-sm"></span>

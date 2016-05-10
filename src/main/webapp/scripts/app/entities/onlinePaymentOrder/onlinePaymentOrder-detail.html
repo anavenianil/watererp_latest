@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>OnlinePaymentOrder</span> {{onlinePaymentOrder.id}}</h2>
+    <h2><span>Online Payment Order</span> {{onlinePaymentOrder.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>ServiceCode</span>
+                    <span>Service Code</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{onlinePaymentOrder.serviceCode}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>PayBy</span>
+                    <span>Pay By</span>
                 </td>
                 <td>
                     <span class="form-control-static" translate="{{'watererpApp.PaymentMode.' + onlinePaymentOrder.payBy}}">{{onlinePaymentOrder.payBy}}</span>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>UserDefinedField</span>
+                    <span>User Defined Field</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{onlinePaymentOrder.userDefinedField}}</span>
@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>OrderTime</span>
+                    <span>Order Time</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{onlinePaymentOrder.orderTime | date:'medium'}}</span>
@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>merchantMaster</span>
+                    <span>Merchant Master</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="merchantMaster.detail({id:onlinePaymentOrder.merchantMaster.id})">{{onlinePaymentOrder.merchantMaster.id}}</a>

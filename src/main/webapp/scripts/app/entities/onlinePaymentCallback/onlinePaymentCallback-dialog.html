@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myOnlinePaymentCallbackLabel">Create or edit a OnlinePaymentCallback</h4>
+        <h4 class="modal-title" id="myOnlinePaymentCallbackLabel">Create or edit a Online Payment Callback</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -20,13 +20,13 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_paymentMode">PaymentMode</label>
+            <label class="control-label" for="field_paymentMode">Payment Mode</label>
             <input type="text" class="form-control" name="paymentMode" id="field_paymentMode"
                     ng-model="onlinePaymentCallback.paymentMode"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_serviceCode">ServiceCode</label>
+            <label class="control-label" for="field_serviceCode">Service Code</label>
             <input type="text" class="form-control" name="serviceCode" id="field_serviceCode"
                     ng-model="onlinePaymentCallback.serviceCode"
                      />
@@ -38,19 +38,19 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_responseCode">ResponseCode</label>
+            <label class="control-label" for="field_responseCode">Response Code</label>
             <input type="text" class="form-control" name="responseCode" id="field_responseCode"
                     ng-model="onlinePaymentCallback.responseCode"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_totalAmountPaid">TotalAmountPaid</label>
+            <label class="control-label" for="field_totalAmountPaid">Total Amount Paid</label>
             <input type="number" class="form-control" name="totalAmountPaid" id="field_totalAmountPaid"
                     ng-model="onlinePaymentCallback.totalAmountPaid"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_userDefinedField">UserDefinedField</label>
+            <label class="control-label" for="field_userDefinedField">User Defined Field</label>
             <input type="text" class="form-control" name="userDefinedField" id="field_userDefinedField"
                     ng-model="onlinePaymentCallback.userDefinedField"
                      />
@@ -63,13 +63,13 @@
         </div>
 
         <div class="form-group">
-            <label for="field_merchantMaster">merchantMaster</label>
+            <label for="field_merchantMaster">Merchant Master</label>
             <select class="form-control" id="field_merchantMaster" name="merchantMaster" ng-model="onlinePaymentCallback.merchantMaster" ng-options="merchantMaster as merchantMaster.id for merchantMaster in merchantmasters track by merchantMaster.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="field_onlinePaymentOrder">onlinePaymentOrder</label>
+            <label for="field_onlinePaymentOrder">Online Payment Order</label>
             <select class="form-control" id="field_onlinePaymentOrder" name="onlinePaymentOrder" ng-model="onlinePaymentCallback.onlinePaymentOrder" ng-options="onlinePaymentOrder as onlinePaymentOrder.id for onlinePaymentOrder in onlinepaymentorders track by onlinePaymentOrder.id">
                 <option value=""></option>
             </select>

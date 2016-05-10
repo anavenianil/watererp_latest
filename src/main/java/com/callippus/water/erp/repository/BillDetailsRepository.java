@@ -3,6 +3,7 @@ package com.callippus.water.erp.repository;
 import com.callippus.water.erp.domain.BillDetails;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -12,8 +13,12 @@ import java.util.List;
 public interface BillDetailsRepository extends JpaRepository<BillDetails,Long> {
 
     @Query("select billDetails from BillDetails billDetails where billDetails.mtrReader.login = ?#{principal.username}")
-    List<BillDetails> findByUserIsCurrentUser();
-    
-    public BillDetails findByCan(String can);
+    List<BillDetails> findByMtrReaderIsCurrentUser();
 
+    
+    @Query("select bd from BillDetails bd where bd.status='INITIATED' and bd.can=:can")
+    public BillDetails findValidBillForCan(@Param("can") String can);
+        
+    @Query("select bd from BillDetails bd where bd.status='INITIATED'")
+    public List<BillDetails>  findAllInitiated();
 }

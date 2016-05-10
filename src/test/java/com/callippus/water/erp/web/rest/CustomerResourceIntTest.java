@@ -23,9 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -45,46 +43,53 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class CustomerResourceIntTest {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
 
+    private static final Float DEFAULT_METER_READING = 1F;
+    private static final Float UPDATED_METER_READING = 2F;
 
-    private static final ZonedDateTime DEFAULT_REQUEST_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_REQUEST_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_REQUEST_DATE_STR = dateTimeFormatter.format(DEFAULT_REQUEST_DATE);
+    private static final Float DEFAULT_PRESENT_READING = 1F;
+    private static final Float UPDATED_PRESENT_READING = 2F;
+
+    private static final Boolean DEFAULT_ORGANIZATION = false;
+    private static final Boolean UPDATED_ORGANIZATION = true;
+    private static final String DEFAULT_ORGANIZATION_NAME = "AAAAA";
+    private static final String UPDATED_ORGANIZATION_NAME = "BBBBB";
+    private static final String DEFAULT_DESIGNATION = "AAAAA";
+    private static final String UPDATED_DESIGNATION = "BBBBB";
+    private static final String DEFAULT_DEED_DOC = "AAAAA";
+    private static final String UPDATED_DEED_DOC = "BBBBB";
+    private static final String DEFAULT_AGREEMENT_DOC = "AAAAA";
+    private static final String UPDATED_AGREEMENT_DOC = "BBBBB";
+    private static final String DEFAULT_REMARKS = "AAAAA";
+    private static final String UPDATED_REMARKS = "BBBBB";
+
+    private static final LocalDate DEFAULT_REQUESTED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_REQUESTED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_CAN = "AAAAA";
+    private static final String UPDATED_CAN = "BBBBB";
     private static final String DEFAULT_FIRST_NAME = "AAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBB";
     private static final String DEFAULT_MIDDLE_NAME = "AAAAA";
     private static final String UPDATED_MIDDLE_NAME = "BBBBB";
     private static final String DEFAULT_LAST_NAME = "AAAAA";
     private static final String UPDATED_LAST_NAME = "BBBBB";
-    private static final String DEFAULT_HOUSE_NO = "AAAAA";
-    private static final String UPDATED_HOUSE_NO = "BBBBB";
-    private static final String DEFAULT_GOVT_OFFICIAL_NO = "AAAAA";
-    private static final String UPDATED_GOVT_OFFICIAL_NO = "BBBBB";
-    private static final String DEFAULT_WARD = "AAAAA";
-    private static final String UPDATED_WARD = "BBBBB";
-    private static final String DEFAULT_STREET = "AAAAA";
-    private static final String UPDATED_STREET = "BBBBB";
-    private static final String DEFAULT_PINCODE = "AAAAA";
-    private static final String UPDATED_PINCODE = "BBBBB";
-    private static final String DEFAULT_BLOCK = "AAAAA";
-    private static final String UPDATED_BLOCK = "BBBBB";
-    private static final String DEFAULT_AREA = "AAAAA";
-    private static final String UPDATED_AREA = "BBBBB";
-    private static final String DEFAULT_SECTION = "AAAAA";
-    private static final String UPDATED_SECTION = "BBBBB";
-    private static final String DEFAULT_CONSTITUENCY = "AAAAA";
-    private static final String UPDATED_CONSTITUENCY = "BBBBB";
+
+    private static final Long DEFAULT_MOBILE_NO = 1L;
+    private static final Long UPDATED_MOBILE_NO = 2L;
     private static final String DEFAULT_EMAIL = "AAAAA";
     private static final String UPDATED_EMAIL = "BBBBB";
-    private static final String DEFAULT_TEL_OFFICE = "AAAAA";
-    private static final String UPDATED_TEL_OFFICE = "BBBBB";
-    private static final String DEFAULT_TEL_HOME = "AAAAA";
-    private static final String UPDATED_TEL_HOME = "BBBBB";
-    private static final String DEFAULT_MOBILE = "AAAAA";
-    private static final String UPDATED_MOBILE = "BBBBB";
-    private static final String DEFAULT_FILE_NUMBER = "AAAAA";
-    private static final String UPDATED_FILE_NUMBER = "BBBBB";
+    private static final String DEFAULT_ID_NUMBER = "AAAAA";
+    private static final String UPDATED_ID_NUMBER = "BBBBB";
+    private static final String DEFAULT_PHOTO = "AAAAA";
+    private static final String UPDATED_PHOTO = "BBBBB";
+
+    private static final Integer DEFAULT_STATUS = 1;
+    private static final Integer UPDATED_STATUS = 2;
+
+    private static final LocalDate DEFAULT_APPROVED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_APPROVED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_CHANGE_TYPE = "AAAAA";
+    private static final String UPDATED_CHANGE_TYPE = "BBBBB";
 
     @Inject
     private CustomerRepository customerRepository;
@@ -112,24 +117,26 @@ public class CustomerResourceIntTest {
     @Before
     public void initTest() {
         customer = new Customer();
-        customer.setRequestDate(DEFAULT_REQUEST_DATE);
+        customer.setMeterReading(DEFAULT_METER_READING);
+        customer.setPresentReading(DEFAULT_PRESENT_READING);
+        customer.setOrganization(DEFAULT_ORGANIZATION);
+        customer.setOrganizationName(DEFAULT_ORGANIZATION_NAME);
+        customer.setDesignation(DEFAULT_DESIGNATION);
+        customer.setDeedDoc(DEFAULT_DEED_DOC);
+        customer.setAgreementDoc(DEFAULT_AGREEMENT_DOC);
+        customer.setRemarks(DEFAULT_REMARKS);
+        customer.setRequestedDate(DEFAULT_REQUESTED_DATE);
+        customer.setCan(DEFAULT_CAN);
         customer.setFirstName(DEFAULT_FIRST_NAME);
         customer.setMiddleName(DEFAULT_MIDDLE_NAME);
         customer.setLastName(DEFAULT_LAST_NAME);
-        customer.setHouseNo(DEFAULT_HOUSE_NO);
-        customer.setGovtOfficialNo(DEFAULT_GOVT_OFFICIAL_NO);
-        customer.setWard(DEFAULT_WARD);
-        customer.setStreet(DEFAULT_STREET);
-        customer.setPincode(DEFAULT_PINCODE);
-        customer.setBlock(DEFAULT_BLOCK);
-        customer.setArea(DEFAULT_AREA);
-        customer.setSection(DEFAULT_SECTION);
-        customer.setConstituency(DEFAULT_CONSTITUENCY);
+        customer.setMobileNo(DEFAULT_MOBILE_NO);
         customer.setEmail(DEFAULT_EMAIL);
-        customer.setTelOffice(DEFAULT_TEL_OFFICE);
-        customer.setTelHome(DEFAULT_TEL_HOME);
-        customer.setMobile(DEFAULT_MOBILE);
-        customer.setFileNumber(DEFAULT_FILE_NUMBER);
+        customer.setIdNumber(DEFAULT_ID_NUMBER);
+        customer.setPhoto(DEFAULT_PHOTO);
+        customer.setStatus(DEFAULT_STATUS);
+        customer.setApprovedDate(DEFAULT_APPROVED_DATE);
+        customer.setChangeType(DEFAULT_CHANGE_TYPE);
     }
 
     @Test
@@ -148,24 +155,26 @@ public class CustomerResourceIntTest {
         List<Customer> customers = customerRepository.findAll();
         assertThat(customers).hasSize(databaseSizeBeforeCreate + 1);
         Customer testCustomer = customers.get(customers.size() - 1);
-        assertThat(testCustomer.getRequestDate()).isEqualTo(DEFAULT_REQUEST_DATE);
+        assertThat(testCustomer.getMeterReading()).isEqualTo(DEFAULT_METER_READING);
+        assertThat(testCustomer.getPresentReading()).isEqualTo(DEFAULT_PRESENT_READING);
+        assertThat(testCustomer.getOrganization()).isEqualTo(DEFAULT_ORGANIZATION);
+        assertThat(testCustomer.getOrganizationName()).isEqualTo(DEFAULT_ORGANIZATION_NAME);
+        assertThat(testCustomer.getDesignation()).isEqualTo(DEFAULT_DESIGNATION);
+        assertThat(testCustomer.getDeedDoc()).isEqualTo(DEFAULT_DEED_DOC);
+        assertThat(testCustomer.getAgreementDoc()).isEqualTo(DEFAULT_AGREEMENT_DOC);
+        assertThat(testCustomer.getRemarks()).isEqualTo(DEFAULT_REMARKS);
+        assertThat(testCustomer.getRequestedDate()).isEqualTo(DEFAULT_REQUESTED_DATE);
+        assertThat(testCustomer.getCan()).isEqualTo(DEFAULT_CAN);
         assertThat(testCustomer.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testCustomer.getMiddleName()).isEqualTo(DEFAULT_MIDDLE_NAME);
         assertThat(testCustomer.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
-        assertThat(testCustomer.getHouseNo()).isEqualTo(DEFAULT_HOUSE_NO);
-        assertThat(testCustomer.getGovtOfficialNo()).isEqualTo(DEFAULT_GOVT_OFFICIAL_NO);
-        assertThat(testCustomer.getWard()).isEqualTo(DEFAULT_WARD);
-        assertThat(testCustomer.getStreet()).isEqualTo(DEFAULT_STREET);
-        assertThat(testCustomer.getPincode()).isEqualTo(DEFAULT_PINCODE);
-        assertThat(testCustomer.getBlock()).isEqualTo(DEFAULT_BLOCK);
-        assertThat(testCustomer.getArea()).isEqualTo(DEFAULT_AREA);
-        assertThat(testCustomer.getSection()).isEqualTo(DEFAULT_SECTION);
-        assertThat(testCustomer.getConstituency()).isEqualTo(DEFAULT_CONSTITUENCY);
+        assertThat(testCustomer.getMobileNo()).isEqualTo(DEFAULT_MOBILE_NO);
         assertThat(testCustomer.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testCustomer.getTelOffice()).isEqualTo(DEFAULT_TEL_OFFICE);
-        assertThat(testCustomer.getTelHome()).isEqualTo(DEFAULT_TEL_HOME);
-        assertThat(testCustomer.getMobile()).isEqualTo(DEFAULT_MOBILE);
-        assertThat(testCustomer.getFileNumber()).isEqualTo(DEFAULT_FILE_NUMBER);
+        assertThat(testCustomer.getIdNumber()).isEqualTo(DEFAULT_ID_NUMBER);
+        assertThat(testCustomer.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testCustomer.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testCustomer.getApprovedDate()).isEqualTo(DEFAULT_APPROVED_DATE);
+        assertThat(testCustomer.getChangeType()).isEqualTo(DEFAULT_CHANGE_TYPE);
     }
 
     @Test
@@ -179,24 +188,26 @@ public class CustomerResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(customer.getId().intValue())))
-                .andExpect(jsonPath("$.[*].requestDate").value(hasItem(DEFAULT_REQUEST_DATE_STR)))
+                .andExpect(jsonPath("$.[*].meterReading").value(hasItem(DEFAULT_METER_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].presentReading").value(hasItem(DEFAULT_PRESENT_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].organization").value(hasItem(DEFAULT_ORGANIZATION.booleanValue())))
+                .andExpect(jsonPath("$.[*].organizationName").value(hasItem(DEFAULT_ORGANIZATION_NAME.toString())))
+                .andExpect(jsonPath("$.[*].designation").value(hasItem(DEFAULT_DESIGNATION.toString())))
+                .andExpect(jsonPath("$.[*].deedDoc").value(hasItem(DEFAULT_DEED_DOC.toString())))
+                .andExpect(jsonPath("$.[*].agreementDoc").value(hasItem(DEFAULT_AGREEMENT_DOC.toString())))
+                .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
+                .andExpect(jsonPath("$.[*].requestedDate").value(hasItem(DEFAULT_REQUESTED_DATE.toString())))
+                .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
                 .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
                 .andExpect(jsonPath("$.[*].middleName").value(hasItem(DEFAULT_MIDDLE_NAME.toString())))
                 .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
-                .andExpect(jsonPath("$.[*].houseNo").value(hasItem(DEFAULT_HOUSE_NO.toString())))
-                .andExpect(jsonPath("$.[*].govtOfficialNo").value(hasItem(DEFAULT_GOVT_OFFICIAL_NO.toString())))
-                .andExpect(jsonPath("$.[*].ward").value(hasItem(DEFAULT_WARD.toString())))
-                .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET.toString())))
-                .andExpect(jsonPath("$.[*].pincode").value(hasItem(DEFAULT_PINCODE.toString())))
-                .andExpect(jsonPath("$.[*].block").value(hasItem(DEFAULT_BLOCK.toString())))
-                .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.toString())))
-                .andExpect(jsonPath("$.[*].section").value(hasItem(DEFAULT_SECTION.toString())))
-                .andExpect(jsonPath("$.[*].constituency").value(hasItem(DEFAULT_CONSTITUENCY.toString())))
+                .andExpect(jsonPath("$.[*].mobileNo").value(hasItem(DEFAULT_MOBILE_NO.intValue())))
                 .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-                .andExpect(jsonPath("$.[*].telOffice").value(hasItem(DEFAULT_TEL_OFFICE.toString())))
-                .andExpect(jsonPath("$.[*].telHome").value(hasItem(DEFAULT_TEL_HOME.toString())))
-                .andExpect(jsonPath("$.[*].mobile").value(hasItem(DEFAULT_MOBILE.toString())))
-                .andExpect(jsonPath("$.[*].fileNumber").value(hasItem(DEFAULT_FILE_NUMBER.toString())));
+                .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
+                .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+                .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())))
+                .andExpect(jsonPath("$.[*].changeType").value(hasItem(DEFAULT_CHANGE_TYPE.toString())));
     }
 
     @Test
@@ -210,24 +221,26 @@ public class CustomerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(customer.getId().intValue()))
-            .andExpect(jsonPath("$.requestDate").value(DEFAULT_REQUEST_DATE_STR))
+            .andExpect(jsonPath("$.meterReading").value(DEFAULT_METER_READING.doubleValue()))
+            .andExpect(jsonPath("$.presentReading").value(DEFAULT_PRESENT_READING.doubleValue()))
+            .andExpect(jsonPath("$.organization").value(DEFAULT_ORGANIZATION.booleanValue()))
+            .andExpect(jsonPath("$.organizationName").value(DEFAULT_ORGANIZATION_NAME.toString()))
+            .andExpect(jsonPath("$.designation").value(DEFAULT_DESIGNATION.toString()))
+            .andExpect(jsonPath("$.deedDoc").value(DEFAULT_DEED_DOC.toString()))
+            .andExpect(jsonPath("$.agreementDoc").value(DEFAULT_AGREEMENT_DOC.toString()))
+            .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
+            .andExpect(jsonPath("$.requestedDate").value(DEFAULT_REQUESTED_DATE.toString()))
+            .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.middleName").value(DEFAULT_MIDDLE_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
-            .andExpect(jsonPath("$.houseNo").value(DEFAULT_HOUSE_NO.toString()))
-            .andExpect(jsonPath("$.govtOfficialNo").value(DEFAULT_GOVT_OFFICIAL_NO.toString()))
-            .andExpect(jsonPath("$.ward").value(DEFAULT_WARD.toString()))
-            .andExpect(jsonPath("$.street").value(DEFAULT_STREET.toString()))
-            .andExpect(jsonPath("$.pincode").value(DEFAULT_PINCODE.toString()))
-            .andExpect(jsonPath("$.block").value(DEFAULT_BLOCK.toString()))
-            .andExpect(jsonPath("$.area").value(DEFAULT_AREA.toString()))
-            .andExpect(jsonPath("$.section").value(DEFAULT_SECTION.toString()))
-            .andExpect(jsonPath("$.constituency").value(DEFAULT_CONSTITUENCY.toString()))
+            .andExpect(jsonPath("$.mobileNo").value(DEFAULT_MOBILE_NO.intValue()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
-            .andExpect(jsonPath("$.telOffice").value(DEFAULT_TEL_OFFICE.toString()))
-            .andExpect(jsonPath("$.telHome").value(DEFAULT_TEL_HOME.toString()))
-            .andExpect(jsonPath("$.mobile").value(DEFAULT_MOBILE.toString()))
-            .andExpect(jsonPath("$.fileNumber").value(DEFAULT_FILE_NUMBER.toString()));
+            .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
+            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()))
+            .andExpect(jsonPath("$.changeType").value(DEFAULT_CHANGE_TYPE.toString()));
     }
 
     @Test
@@ -247,24 +260,26 @@ public class CustomerResourceIntTest {
 		int databaseSizeBeforeUpdate = customerRepository.findAll().size();
 
         // Update the customer
-        customer.setRequestDate(UPDATED_REQUEST_DATE);
+        customer.setMeterReading(UPDATED_METER_READING);
+        customer.setPresentReading(UPDATED_PRESENT_READING);
+        customer.setOrganization(UPDATED_ORGANIZATION);
+        customer.setOrganizationName(UPDATED_ORGANIZATION_NAME);
+        customer.setDesignation(UPDATED_DESIGNATION);
+        customer.setDeedDoc(UPDATED_DEED_DOC);
+        customer.setAgreementDoc(UPDATED_AGREEMENT_DOC);
+        customer.setRemarks(UPDATED_REMARKS);
+        customer.setRequestedDate(UPDATED_REQUESTED_DATE);
+        customer.setCan(UPDATED_CAN);
         customer.setFirstName(UPDATED_FIRST_NAME);
         customer.setMiddleName(UPDATED_MIDDLE_NAME);
         customer.setLastName(UPDATED_LAST_NAME);
-        customer.setHouseNo(UPDATED_HOUSE_NO);
-        customer.setGovtOfficialNo(UPDATED_GOVT_OFFICIAL_NO);
-        customer.setWard(UPDATED_WARD);
-        customer.setStreet(UPDATED_STREET);
-        customer.setPincode(UPDATED_PINCODE);
-        customer.setBlock(UPDATED_BLOCK);
-        customer.setArea(UPDATED_AREA);
-        customer.setSection(UPDATED_SECTION);
-        customer.setConstituency(UPDATED_CONSTITUENCY);
+        customer.setMobileNo(UPDATED_MOBILE_NO);
         customer.setEmail(UPDATED_EMAIL);
-        customer.setTelOffice(UPDATED_TEL_OFFICE);
-        customer.setTelHome(UPDATED_TEL_HOME);
-        customer.setMobile(UPDATED_MOBILE);
-        customer.setFileNumber(UPDATED_FILE_NUMBER);
+        customer.setIdNumber(UPDATED_ID_NUMBER);
+        customer.setPhoto(UPDATED_PHOTO);
+        customer.setStatus(UPDATED_STATUS);
+        customer.setApprovedDate(UPDATED_APPROVED_DATE);
+        customer.setChangeType(UPDATED_CHANGE_TYPE);
 
         restCustomerMockMvc.perform(put("/api/customers")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -275,24 +290,26 @@ public class CustomerResourceIntTest {
         List<Customer> customers = customerRepository.findAll();
         assertThat(customers).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customers.get(customers.size() - 1);
-        assertThat(testCustomer.getRequestDate()).isEqualTo(UPDATED_REQUEST_DATE);
+        assertThat(testCustomer.getMeterReading()).isEqualTo(UPDATED_METER_READING);
+        assertThat(testCustomer.getPresentReading()).isEqualTo(UPDATED_PRESENT_READING);
+        assertThat(testCustomer.getOrganization()).isEqualTo(UPDATED_ORGANIZATION);
+        assertThat(testCustomer.getOrganizationName()).isEqualTo(UPDATED_ORGANIZATION_NAME);
+        assertThat(testCustomer.getDesignation()).isEqualTo(UPDATED_DESIGNATION);
+        assertThat(testCustomer.getDeedDoc()).isEqualTo(UPDATED_DEED_DOC);
+        assertThat(testCustomer.getAgreementDoc()).isEqualTo(UPDATED_AGREEMENT_DOC);
+        assertThat(testCustomer.getRemarks()).isEqualTo(UPDATED_REMARKS);
+        assertThat(testCustomer.getRequestedDate()).isEqualTo(UPDATED_REQUESTED_DATE);
+        assertThat(testCustomer.getCan()).isEqualTo(UPDATED_CAN);
         assertThat(testCustomer.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testCustomer.getMiddleName()).isEqualTo(UPDATED_MIDDLE_NAME);
         assertThat(testCustomer.getLastName()).isEqualTo(UPDATED_LAST_NAME);
-        assertThat(testCustomer.getHouseNo()).isEqualTo(UPDATED_HOUSE_NO);
-        assertThat(testCustomer.getGovtOfficialNo()).isEqualTo(UPDATED_GOVT_OFFICIAL_NO);
-        assertThat(testCustomer.getWard()).isEqualTo(UPDATED_WARD);
-        assertThat(testCustomer.getStreet()).isEqualTo(UPDATED_STREET);
-        assertThat(testCustomer.getPincode()).isEqualTo(UPDATED_PINCODE);
-        assertThat(testCustomer.getBlock()).isEqualTo(UPDATED_BLOCK);
-        assertThat(testCustomer.getArea()).isEqualTo(UPDATED_AREA);
-        assertThat(testCustomer.getSection()).isEqualTo(UPDATED_SECTION);
-        assertThat(testCustomer.getConstituency()).isEqualTo(UPDATED_CONSTITUENCY);
+        assertThat(testCustomer.getMobileNo()).isEqualTo(UPDATED_MOBILE_NO);
         assertThat(testCustomer.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testCustomer.getTelOffice()).isEqualTo(UPDATED_TEL_OFFICE);
-        assertThat(testCustomer.getTelHome()).isEqualTo(UPDATED_TEL_HOME);
-        assertThat(testCustomer.getMobile()).isEqualTo(UPDATED_MOBILE);
-        assertThat(testCustomer.getFileNumber()).isEqualTo(UPDATED_FILE_NUMBER);
+        assertThat(testCustomer.getIdNumber()).isEqualTo(UPDATED_ID_NUMBER);
+        assertThat(testCustomer.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testCustomer.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testCustomer.getApprovedDate()).isEqualTo(UPDATED_APPROVED_DATE);
+        assertThat(testCustomer.getChangeType()).isEqualTo(UPDATED_CHANGE_TYPE);
     }
 
     @Test

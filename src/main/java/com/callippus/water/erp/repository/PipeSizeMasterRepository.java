@@ -10,5 +10,6 @@ import java.util.List;
  * Spring Data JPA repository for the PipeSizeMaster entity.
  */
 public interface PipeSizeMasterRepository extends JpaRepository<PipeSizeMaster,Long> {
+	PipeSizeMaster findByPipeSize(Float pipeSize);
 
 }

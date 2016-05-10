@@ -24,7 +24,7 @@ angular
 
 					$scope.getWorkflowHistoryByDomainId = function(domainId) {
 			        	$scope.requestWorkflowHistorys = [];
-			            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: domainId, requestId: 8}, function(result, headers) {
+			            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: domainId, requestTypeId: $stateParams.requestTypeId}, function(result, headers) {
 			                $scope.links = ParseLinks.parse(headers('link'));
 			                for (var i = 0; i < result.length; i++) {
 			                    $scope.requestWorkflowHistorys.push(result[i]);
@@ -194,6 +194,7 @@ angular
 					}
 
 					$scope.getWorkflowTxnDetails = function(requestId) {
+						$scope.workflowDTO.workflowTxnDetailss[0] ={};
 						WorkflowTxnDetails.query({
 							page : $scope.page,
 							size : 20,
@@ -210,7 +211,6 @@ angular
 								$scope.workflowDTO.workflowTxnDetailss
 										.push(result[i]);
 							}
-							
 							$scope.getCustDetails($scope.workflowDTO.workflowTxnDetailss[0].referenceNumber);
 							$scope.getWorkflowHistoryByDomainId($scope.workflowDTO.workflowTxnDetailss[0].id);
 						});

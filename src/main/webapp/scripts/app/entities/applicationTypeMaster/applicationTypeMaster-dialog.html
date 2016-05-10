@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myApplicationTypeMasterLabel">Create or edit a ApplicationTypeMaster</h4>
+        <h4 class="modal-title" id="myApplicationTypeMasterLabel">Create or edit a Application Type Master</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,13 +14,13 @@
                     ng-model="applicationTypeMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_applicationType">ApplicationType</label>
+            <label class="control-label" for="field_applicationType">Application Type</label>
             <input type="text" class="form-control" name="applicationType" id="field_applicationType"
                     ng-model="applicationTypeMaster.applicationType"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_createdDate">CreatedDate</label>
+            <label class="control-label" for="field_createdDate">Created Date</label>
             <input id="field_createdDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="applicationTypeMaster.createdDate" is-open="datePickerForCreatedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -28,7 +28,7 @@
             </span>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_updatedDate">UpdatedDate</label>
+            <label class="control-label" for="field_updatedDate">Updated Date</label>
             <input id="field_updatedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="applicationTypeMaster.updatedDate" is-open="datePickerForUpdatedDate.status.opened"
             />
             <span class="input-group-btn">
@@ -42,13 +42,13 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_createdBy">CreatedBy</label>
+            <label class="control-label" for="field_createdBy">Created By</label>
             <input type="text" class="form-control" name="createdBy" id="field_createdBy"
                     ng-model="applicationTypeMaster.createdBy"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_updatedBy">UpdatedBy</label>
+            <label class="control-label" for="field_updatedBy">Updated By</label>
             <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
                     ng-model="applicationTypeMaster.updatedBy"
                      />
