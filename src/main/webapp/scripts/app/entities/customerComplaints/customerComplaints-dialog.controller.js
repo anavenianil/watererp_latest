@@ -5,11 +5,10 @@ angular
 		.controller(
 				'CustomerComplaintsDialogController',
 				function($scope, $state, CustomerComplaints, ParseLinks,
-						$stateParams,  ComplaintTypeMaster,
-						UploadUtil, CustDetailsService, $http) {
+						$stateParams, ComplaintTypeMaster, UploadUtil,
+						CustDetailsService, $http) {
 					$scope.customerComplaints = {};
-					// This code is to per populate system date in Complaint
-					// Date Field
+					// This code is to per populate system date in Complaint Date Field
 					$scope.customerComplaints.complaintDate = new Date();
 					$scope.complainttypemasters = ComplaintTypeMaster.query();
 					$scope.load = function(id) {
@@ -59,7 +58,9 @@ angular
 											can : $scope.collDetails.can
 										},
 										function(result) {
+
 											$scope.custDetails = result;
+											$scope.customerComplaints.custDetails = {};
 											$scope.customerComplaints.custDetails.consName = $scope.custDetails.consName;
 											$scope.customerComplaints.can = $scope.custDetails.can;
 											$scope.customerComplaints.tariffCategory = $scope.custDetails.tariffCategoryMaster.tariffCategory;
@@ -70,8 +71,10 @@ angular
 						$scope.$emit('watererpApp:customerComplaintsUpdate',
 								result);
 						// $uibModalInstance.close(result);
+						$scope.customerComplaints.id = result.id;
 						$scope.isSaving = false;
-						$state.go('customerComplaints');
+						$('#saveSuccessfullyModal').modal('show');
+						//$state.go('customerComplaints');
 					};
 
 					var onSaveError = function(result) {
@@ -79,6 +82,7 @@ angular
 					};
 
 					$scope.save = function() {
+
 						$scope.isSaving = true;
 						if ($scope.customerComplaints.id != null) {
 							CustomerComplaints.update(
@@ -91,7 +95,16 @@ angular
 					};
 
 					$scope.clear = function() {
-						$uibModalInstance.dismiss('cancel');
+						//$uibModalInstance.dismiss('cancel');
+						$scope.customerComplaints = {
+							remarks : null,
+							relevantDoc : null,
+							complaintBy : null,
+							complaintBy : null,
+							can : null,
+							id : null
+						};
+						$scope.customerComplaints.complaintDate = new Date();
 					};
 					$scope.datePickerForComplaintDate = {};
 

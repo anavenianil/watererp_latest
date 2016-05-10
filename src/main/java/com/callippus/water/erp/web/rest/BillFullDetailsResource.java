@@ -182,17 +182,5 @@ public class BillFullDetailsResource {
 		                HttpStatus.OK))
 		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 		    }
-    
-    /*@RequestMapping(value = "/billFullDetailss/forCAN/{can}", method = RequestMethod.GET,
-            params = {"can"})
-		    public ResponseEntity<BillFullDetails> getBillDetailss(@RequestParam(value = "can") String can) {
-		        log.debug("REST request to get Proceedings : {} ", can);
-		        BillFullDetails billFullDetails = billFullDetailsRepository.findByCan(can);
-		        return Optional.ofNullable(billFullDetails)
-		            .map(result -> new ResponseEntity<>(
-		                result,
-		                HttpStatus.OK))
-		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-		    }*/
 
 }

@@ -149,6 +149,7 @@
                     <td>{{billFullDetails.longi}}</td>
                     <td>{{billFullDetails.noMeterAmt}}</td>
                     <td>
+                        <a ng-class="{'glyphicon glyphicon-save-file': billFullDetails.id!=null}" href="/api/billFullDetailss/report/{{billFullDetails.id}}"></a>
                         <button type="submit"
                                 ui-sref="billFullDetails.detail({id:billFullDetails.id})"
                                 class="btn btn-info btn-sm">

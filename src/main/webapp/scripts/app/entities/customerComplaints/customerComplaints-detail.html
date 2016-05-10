@@ -173,7 +173,7 @@
 			Back</span>
 	</button>
 	<button type="button" class="btn btn-success pull-right"
-		ng-click="approve(customerComplaints.id)">
+		ng-click="approve(customerComplaints.id)" ng-disable="customerComplaints.status === 0 && orgRole.orgRoleName === 'ICT & Customer Care Officer'">
 		<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 	</button>
 </div>
