@@ -141,6 +141,9 @@ public class BillingService {
 	}
 
 	public BillRunMaster generateSingleBill(String can) {
+		
+		List<BillRunDetails> brd = billRunDetailsRepository.findTop3ByCanAndStatusOrderByIdDesc("02020003",4);
+		
 		initBillRun();
 
 		process_bill(can);
@@ -562,9 +565,8 @@ public class BillingService {
 			return;
 
 		if (billRunDetailsRepository.findByCanAndToMonth(
-				customer.getCan(),
-				customer.getPrevBillMonth().format(
-						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
+				bill_details.getCan(),
+				bill_details.getToMonth()) != null) {
 			log.debug("Unable to process customer:" + customer.getCan()
 					+ ", getCustInfo returned::"
 					+ CustValidation.ALREADY_BILLED.name());

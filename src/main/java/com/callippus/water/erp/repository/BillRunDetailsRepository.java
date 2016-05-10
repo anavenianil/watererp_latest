@@ -23,4 +23,6 @@ public interface BillRunDetailsRepository extends JpaRepository<BillRunDetails,L
 	@Query("SELECT brd FROM BillRunDetails brd WHERE brd.status=4 and brd.can=:can and brd.billFullDetails.toMonth=:toMonth")
 	public BillRunDetails findByCanAndToMonth(@Param("can") String can, @Param("toMonth") String toMonth);
 	
+	public List<BillRunDetails> findTop3ByCanAndStatusOrderByIdDesc(@Param("can") String can, @Param("status") Integer status);
+	
 }

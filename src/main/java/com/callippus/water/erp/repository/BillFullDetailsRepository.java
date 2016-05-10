@@ -15,4 +15,5 @@ public interface BillFullDetailsRepository extends JpaRepository<BillFullDetails
 	public BillFullDetails findByCanAndBillDate(String can, LocalDate billDate);
 	
 	public Page<BillFullDetails> findByCan(Pageable page, String can);
+	
 }
