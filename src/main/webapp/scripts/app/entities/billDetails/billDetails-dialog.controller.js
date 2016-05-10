@@ -58,8 +58,6 @@ angular
 						$scope.billDetails.billDate = new Date(toDate.replace(
 								pattern, '$1-$2-$3'));
 
-						console.log("About to push billDetails:"
-								+ JSON.stringify($scope.billDetails))
 						$scope.isSaving = true;
 						if ($scope.billDetails.id != null) {
 							BillDetails.update($scope.billDetails,
@@ -141,7 +139,7 @@ angular
 					}
 
 					$scope.checkPrevious = function() {
-						$scope.billDetails.mtrRounding = false;
+						$scope.billDetails.isRounding = false;
 						if ($scope.billDetails.initialReading > $scope.billDetails.presentReading) {
 
 							if ($scope.billDetails.initialReading > 900
@@ -202,10 +200,6 @@ angular
 											.substr(4, 2), 10);
 
 							var months = toMonthNo - fromMonthNo;
-
-							console.log("From Month: " + fromMonthNo
-									+ ", To Month:" + toMonthNo + ", months="
-									+ months);
 
 							if (months > 1)
 								return false
