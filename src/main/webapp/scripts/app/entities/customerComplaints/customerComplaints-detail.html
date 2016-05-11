@@ -142,7 +142,12 @@
 							</tr>
 						</tbody>
 					</table>
-					<table class="table table-striped">
+			<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+    		<h3 class="panel-title pull-left">Previous Bill Details</h3>
+			</div>
+			</div>
+			<table class="table table-striped">
 			<thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span></th>
@@ -151,7 +156,7 @@
                     <th jh-sort-by="toDt"><span>To Date</span></th>
                     <th jh-sort-by="status"><span>Status</span></th>
                     <th jh-sort-by="remarks"><span>Remarks</span></th>
-                    <th jh-sort-by="billFullDetails.id"><span>Bill</span></th>
+                    <!-- <th jh-sort-by="billFullDetails.id"><span>Bill</span></th> -->
                     <th jh-sort-by="billFullDetails.id"><span>PDF</span></th>
                 </tr>
             </thead>
@@ -163,9 +168,9 @@
                     <td>{{billRunDetails.toDt | date:'medium'}}</td>
                     <td>{{billRunDetails.status}}</td>
                     <td>{{billRunDetails.remarks}}</td>
-                    <td>
-                        <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
-                    </td>
+                    <!-- <td>
+                         <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
+                    </td> -->
                     <td>
                         <a ng-class="{'glyphicon glyphicon-save-file': billRunDetails.billFullDetails.id!=null}" href="/api/billFullDetailss/report/{{billRunDetails.billFullDetails.id}}"></a>
                     </td>
@@ -208,7 +213,7 @@
 	</button> -->
 	<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
-			ng-click="declineRequest(applicationTxn.id)">
+			ng-click="declineRequest(customerComplaints.id)">
 			<span class="glyphicon glyphicon-remove-circle"></span>
 			&nbsp;Decline
 		</button>
