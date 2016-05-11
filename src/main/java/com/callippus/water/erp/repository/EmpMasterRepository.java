@@ -11,7 +11,7 @@ import com.callippus.water.erp.domain.OrgRoleInstance;
 /**
  * Spring Data JPA repository for the EmpMaster entity.
  */
-public interface EmpMasterRepository extends JpaRepository<EmpMaster, Long> {
+public interface EmpMasterRepository extends JpaRepository<EmpMaster,Long> {
 
 	@Query("select empMaster from EmpMaster empMaster where empMaster.user.login = ?#{principal.username}")
 	List<EmpMaster> findByUserIsCurrentUser();
