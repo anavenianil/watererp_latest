@@ -67,16 +67,28 @@ angular.module('watererpApp').controller(
 						ret = true;
 					break;
 				case 2:
+					if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
+						ret = true;
 					break;
 				case 3:
+					if ($scope.orgRole.orgRoleName === 'Technical Manager')
+						ret = true;
 					break;
 				case 4:
+					if ($scope.orgRole.orgRoleName === 'Assistant Accountant(Revenue)')
+						ret = true;
 					break;
 				case 5:
+					if ($scope.orgRole.orgRoleName === 'Stores & Supplies Officer')
+						ret = true;
 					break;
 				case 6:
+					if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
+						ret = true;
 					break;
 				case 7:
+					if ($scope.orgRole.orgRoleName === 'Billing Officer')
+						ret = true;
 					break;
 				case 8:
 					break;
@@ -84,7 +96,6 @@ angular.module('watererpApp').controller(
 					break;
 
 				}
-
 				return ret;
 			}
 

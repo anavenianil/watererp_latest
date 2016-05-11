@@ -45,7 +45,7 @@ public class BillRunMasterResource {
 	@RequestMapping(value = "/billRunMasters", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<BillRunMaster> createBillRunMaster(
-			@RequestBody BillRunMaster billRunMaster) throws URISyntaxException {
+			@RequestBody BillRunMaster billRunMaster) throws URISyntaxException, Exception {
 		log.debug("REST request to save BillRunMaster : {}", billRunMaster);
 		
 		BillRunMaster result =  null;
@@ -94,7 +94,7 @@ public class BillRunMasterResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<BillRunMaster> updateBillRunMaster(@RequestBody BillRunMaster billRunMaster) throws URISyntaxException {
+    public ResponseEntity<BillRunMaster> updateBillRunMaster(@RequestBody BillRunMaster billRunMaster) throws URISyntaxException, Exception {
         log.debug("REST request to update BillRunMaster : {}", billRunMaster);
         
         String status = null;

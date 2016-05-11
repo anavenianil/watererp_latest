@@ -126,6 +126,18 @@
 		</div>
 
 		<button type="button" class="btn btn-success pull-right"
+			ng-show="canDecline()" ng-click="approve(customer)">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
+		</button>
+
+		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+
+		<button type="button" class="btn btn-danger pull-right"
+			ng-show="canDecline()" ng-disabled="isSaving"
+			ng-click="declineRequest(customer.id)">
+			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
+		</button>
+		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-if="orgRole.orgRoleName === 'Technical Manager' || orgRole.orgRoleName === 'Billing Officer'"
 			ng-click="approve(customer)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
@@ -134,7 +146,7 @@
 		<button type="button" class="btn btn-danger pull-right"
 			ng-click="declineRequest(applicationTxn.id)">
 			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
-		</button>
+		</button> -->
 		<button type="submit" onclick="window.history.back()"
 			class="btn btn-info">
 			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>

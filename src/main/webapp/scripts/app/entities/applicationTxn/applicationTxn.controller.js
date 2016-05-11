@@ -20,6 +20,17 @@ angular.module('watererpApp')
             });
         };*/
         
+        $scope.goToState = function(domainObjectId, user){
+			if(user!=null){
+				$state.go('applicationTxn.detail',{id:domainObjectId, requestTypeId:6});
+			}
+			else
+			{
+				$state.go('applicationTxn.detail',{id:domainObjectId, requestTypeId:1});
+			}
+			
+		}
+        
         $scope.loadAll = function() {
             ApplicationTxn.query({page: $scope.page, size: 20, login: $scope.user.login}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));

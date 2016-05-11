@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/connectionTerminates',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_CUSTOMER','ROLE_CUSTOMER'],
                     pageTitle: 'ConnectionTerminates'
                 },
                 views: {
@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/connectionTerminate/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                     pageTitle: 'ConnectionTerminate'
                 },
                 views: {
@@ -42,7 +42,7 @@ angular.module('watererpApp')
                 parent: 'connectionTerminate',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -72,7 +72,7 @@ angular.module('watererpApp')
                 parent: 'connectionTerminate',
                 url: '/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -95,7 +95,7 @@ angular.module('watererpApp')
                 parent: 'connectionTerminate',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -118,7 +118,7 @@ angular.module('watererpApp')
                 parent: 'connectionTerminate',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                     pageTitle: 'ConnectionTerminates'
                 },
                 views: {
@@ -134,7 +134,7 @@ angular.module('watererpApp')
                 parent: 'connectionTerminate',
                 url: '/edit/:id',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                     pageTitle: 'ConnectionTerminates'
                 },
                 views: {

@@ -119,6 +119,12 @@ public class OnlinePaymentService {
 		opc.setOnlinePaymentOrder(opr.getOnlinePaymentOrder());
 
 		opc = onlinePaymentCallbackRepository.save(opc);
+		
+		CustDetails customer = custDetailsRepository.findByCanForUpdate(opr.getOnlinePaymentOrder().getUserDefinedField());
+		
+		customer.setArrears(customer.getArrears() - pgResponse.getTotalAmountPaid());
+		
+		custDetailsRepository.save(customer);
 
 		log.debug("This is the opc after save:" + opc);
 

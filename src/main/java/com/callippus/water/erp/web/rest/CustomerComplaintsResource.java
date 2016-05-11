@@ -114,8 +114,11 @@ public class CustomerComplaintsResource {
         	custDetails.setOtherCharges(custDetails.getOtherCharges() +  customerComplaints.getAdjustmentAmt());
         	custDetailsRepository.save(custDetails);
         }
-        customerComplaints.setStatus(customerComplaints.getStatus()+1);
-        CustomerComplaints result = customerComplaintsRepository.save(customerComplaints);
+        //customerComplaints.setStatus(customerComplaints.getStatus()+1);
+        CustomerComplaints customerComplaints1 = customerComplaintsRepository.findOne(customerComplaints.getId());
+        customerComplaints1.setStatus(customerComplaints1.getStatus()+1);
+        customerComplaints1.setAdjustmentAmt(customerComplaints.getAdjustmentAmt());
+        CustomerComplaints result = customerComplaintsRepository.save(customerComplaints1);
         approveApplication(customerComplaints.getId(), customerComplaints.getRemarks());        
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("customerComplaints", customerComplaints.getId().toString()))

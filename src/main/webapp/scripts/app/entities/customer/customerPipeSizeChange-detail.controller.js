@@ -69,12 +69,30 @@ angular
 					//approve a request
 					$scope.approve = function(customer){
 			        	//console.log(customer);
-			        	return $http.post('/api/customersApprove',
+			        	return $http.post('/api/customers/customersApprove',
 								customer).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
 									$state.go('request');
+									$state.go('customer.pipeSizeList');
 								});
 			        }
+					
+					$scope.canDecline = function() {
+						var ret = false;
+						switch ($scope.customer.status) {
+						case 0:
+							if ($scope.orgRole.id === 10)
+								ret = true;
+							break;
+						case 1:
+							if ($scope.orgRole.id === 16)
+								ret = true;
+							break;
+						default:
+							break;
+						}
+						return ret;
+					}
 				});

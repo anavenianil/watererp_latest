@@ -171,6 +171,22 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
+            .state('customer.categoryChangeList', {
+                parent: 'customer',
+                url: '/categoryChanges',
+                data: {
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    pageTitle: 'Customers'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerCategoryChangeList.html',
+                        controller: 'CustomerCategoryChangeListController'
+                    }
+                },
+                resolve: {
+                }
+            })
             .state('customer.pipeSizeChange', {
                 parent: 'customer',
                 url: '/pipeSizeChange',
@@ -203,6 +219,22 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
+            .state('customer.pipeSizeList', {
+                parent: 'customer',
+                url: '/pipeSizes',
+                data: {
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    pageTitle: 'Customers'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerPipeSizeList.html',
+                        controller: 'CustomerPipeSizeListController'
+                    }
+                },
+                resolve: {
+                }
+            })
             .state('customer.nameChange', {
                 parent: 'customer',
                 url: '/nameChange',
@@ -230,6 +262,22 @@ angular.module('watererpApp')
                     'content@': {
                     	templateUrl: 'scripts/app/entities/customer/customerNameChange-detail.html',
                         controller: 'CustomerNameChangeDetailController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('customer.nameChangeList', {
+                parent: 'customer',
+                url: '/nameChanges',
+                data: {
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    pageTitle: 'Customers'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerNameChangeList.html',
+                        controller: 'CustomerNameChangeListController'
                     }
                 },
                 resolve: {
