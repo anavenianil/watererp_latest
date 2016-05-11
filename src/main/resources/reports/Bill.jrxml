@@ -9,7 +9,7 @@
 	<queryString>
 		<![CDATA[SELECT *,
        Date_format(Str_to_date(to_month, '%Y%m'), '%M %Y') bill_month,
-       Sum(service_charge + meter_service_charge)          meter,
+       service_charge + meter_service_charge          meter,
        c.cons_name                                         AS cust_cons_name,
        c.house_no                                          AS cust_house_no,
        c.address                                           AS cust_address,
