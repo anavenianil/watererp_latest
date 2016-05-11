@@ -142,8 +142,6 @@ public class BillingService {
 
 	public BillRunMaster generateSingleBill(String can) {
 		
-		List<BillRunDetails> brd = billRunDetailsRepository.findTop3ByCanAndStatusOrderByIdDesc("02020003",4);
-		
 		initBillRun();
 
 		process_bill(can);

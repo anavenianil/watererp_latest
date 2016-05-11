@@ -3,15 +3,30 @@
 	<property name="ireport.zoom" value="1.100000000000015"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="128"/>
-	<parameter name="canid" class="java.lang.Long">
+	<parameter name="id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR CAN ID]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT *, date_format(str_to_date(to_month,'%Y%m'),'%M %Y') bill_month,sum(service_charge + meter_service_charge) meter,c.cons_name as cust_cons_name,c.house_no as cust_house_no,c.address as cust_address, c.city as cust_city,c.pin_code  as cust_pin_code ,c.meter_no as cust_meter_no, c.pipe_size as cust_pipe_size,
- (select street_name from street_master where street_no=(select subString(can, 3,2) from bill_full_details where can=$P{canid}))street_name,
-b.surcharge as val
-
- FROM bill_full_details b  left join `tariff_category_master` t on b.id=t.id left join cust_details c on c.can=b.can where b.can=$P{canid}]]>
+		<![CDATA[SELECT *,
+       Date_format(Str_to_date(to_month, '%Y%m'), '%M %Y') bill_month,
+       Sum(service_charge + meter_service_charge)          meter,
+       c.cons_name                                         AS cust_cons_name,
+       c.house_no                                          AS cust_house_no,
+       c.address                                           AS cust_address,
+       c.city                                              AS cust_city,
+       c.pin_code                                          AS cust_pin_code,
+       c.meter_no                                          AS cust_meter_no,
+       c.pipe_size                                         AS cust_pipe_size,
+       (SELECT street_name
+        FROM   street_master
+        WHERE  street_no = Substring(b.can, 3, 2))      street_name,
+       b.surcharge                                         AS val
+FROM   bill_full_details b
+       JOIN cust_details c
+              ON c.can = b.can
+       JOIN tariff_category_master t
+              ON t.id = c.tariff_category_master_id
+WHERE  b.id=$P{id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
