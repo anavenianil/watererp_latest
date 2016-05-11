@@ -34,9 +34,37 @@
             "otherEntityName": "statusMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "reportingTo",
+            "otherEntityName": "designationMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
-    "fields": [],
+    "fields": [
+    	{
+            "fieldId": 1,
+            "fieldName": "dateOfBirth",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "joiningDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "maritalStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "employeeType",
+            "fieldType": "String"
+        }
+    ],
     "changelogDate": "20160229093926",
     "dto": "no",
     "service": "no",

@@ -23,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,6 +43,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class EmpMasterResourceIntTest {
 
+
+    private static final LocalDate DEFAULT_DATE_OF_BIRTH = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE_OF_BIRTH = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_JOINING_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_JOINING_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MARITAL_STATUS = "AAAAA";
+    private static final String UPDATED_MARITAL_STATUS = "BBBBB";
+    private static final String DEFAULT_EMPLOYEE_TYPE = "AAAAA";
+    private static final String UPDATED_EMPLOYEE_TYPE = "BBBBB";
 
     @Inject
     private EmpMasterRepository empMasterRepository;
@@ -68,6 +80,10 @@ public class EmpMasterResourceIntTest {
     @Before
     public void initTest() {
         empMaster = new EmpMaster();
+        empMaster.setDateOfBirth(DEFAULT_DATE_OF_BIRTH);
+        empMaster.setJoiningDate(DEFAULT_JOINING_DATE);
+        empMaster.setMaritalStatus(DEFAULT_MARITAL_STATUS);
+        empMaster.setEmployeeType(DEFAULT_EMPLOYEE_TYPE);
     }
 
     @Test
@@ -86,6 +102,10 @@ public class EmpMasterResourceIntTest {
         List<EmpMaster> empMasters = empMasterRepository.findAll();
         assertThat(empMasters).hasSize(databaseSizeBeforeCreate + 1);
         EmpMaster testEmpMaster = empMasters.get(empMasters.size() - 1);
+        assertThat(testEmpMaster.getDateOfBirth()).isEqualTo(DEFAULT_DATE_OF_BIRTH);
+        assertThat(testEmpMaster.getJoiningDate()).isEqualTo(DEFAULT_JOINING_DATE);
+        assertThat(testEmpMaster.getMaritalStatus()).isEqualTo(DEFAULT_MARITAL_STATUS);
+        assertThat(testEmpMaster.getEmployeeType()).isEqualTo(DEFAULT_EMPLOYEE_TYPE);
     }
 
     @Test
@@ -98,7 +118,11 @@ public class EmpMasterResourceIntTest {
         restEmpMasterMockMvc.perform(get("/api/empMasters?sort=id,desc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(empMaster.getId().intValue())));
+                .andExpect(jsonPath("$.[*].id").value(hasItem(empMaster.getId().intValue())))
+                .andExpect(jsonPath("$.[*].dateOfBirth").value(hasItem(DEFAULT_DATE_OF_BIRTH.toString())))
+                .andExpect(jsonPath("$.[*].joiningDate").value(hasItem(DEFAULT_JOINING_DATE.toString())))
+                .andExpect(jsonPath("$.[*].maritalStatus").value(hasItem(DEFAULT_MARITAL_STATUS.toString())))
+                .andExpect(jsonPath("$.[*].employeeType").value(hasItem(DEFAULT_EMPLOYEE_TYPE.toString())));
     }
 
     @Test
@@ -111,7 +135,11 @@ public class EmpMasterResourceIntTest {
         restEmpMasterMockMvc.perform(get("/api/empMasters/{id}", empMaster.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(empMaster.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(empMaster.getId().intValue()))
+            .andExpect(jsonPath("$.dateOfBirth").value(DEFAULT_DATE_OF_BIRTH.toString()))
+            .andExpect(jsonPath("$.joiningDate").value(DEFAULT_JOINING_DATE.toString()))
+            .andExpect(jsonPath("$.maritalStatus").value(DEFAULT_MARITAL_STATUS.toString()))
+            .andExpect(jsonPath("$.employeeType").value(DEFAULT_EMPLOYEE_TYPE.toString()));
     }
 
     @Test
@@ -131,6 +159,10 @@ public class EmpMasterResourceIntTest {
 		int databaseSizeBeforeUpdate = empMasterRepository.findAll().size();
 
         // Update the empMaster
+        empMaster.setDateOfBirth(UPDATED_DATE_OF_BIRTH);
+        empMaster.setJoiningDate(UPDATED_JOINING_DATE);
+        empMaster.setMaritalStatus(UPDATED_MARITAL_STATUS);
+        empMaster.setEmployeeType(UPDATED_EMPLOYEE_TYPE);
 
         restEmpMasterMockMvc.perform(put("/api/empMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -141,6 +173,10 @@ public class EmpMasterResourceIntTest {
         List<EmpMaster> empMasters = empMasterRepository.findAll();
         assertThat(empMasters).hasSize(databaseSizeBeforeUpdate);
         EmpMaster testEmpMaster = empMasters.get(empMasters.size() - 1);
+        assertThat(testEmpMaster.getDateOfBirth()).isEqualTo(UPDATED_DATE_OF_BIRTH);
+        assertThat(testEmpMaster.getJoiningDate()).isEqualTo(UPDATED_JOINING_DATE);
+        assertThat(testEmpMaster.getMaritalStatus()).isEqualTo(UPDATED_MARITAL_STATUS);
+        assertThat(testEmpMaster.getEmployeeType()).isEqualTo(UPDATED_EMPLOYEE_TYPE);
     }
 
     @Test

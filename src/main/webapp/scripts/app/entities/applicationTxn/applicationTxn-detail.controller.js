@@ -96,7 +96,6 @@ angular.module('watererpApp').controller(
 					break;
 
 				}
-
 				return ret;
 			}
 
