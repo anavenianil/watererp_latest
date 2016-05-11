@@ -123,11 +123,14 @@ public class BillingService {
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f,
 			total_cess = 0.0f, kl = 0.0f;
 
-	public BillRunMaster generateBill() {
+	public BillRunMaster generateBill() throws Exception {
 		initBillRun();
 
-		List<BillDetails> bd = billDetailsRepository.findAll();
+		List<BillDetails> bd = billDetailsRepository.findAllInitiated();
 
+		if(bd.size() == 0)
+			throw new Exception("No new meter readings available to run bills.");
+		
 		processBills(bd);
 
 		if (failedRecords > 0)
@@ -140,7 +143,8 @@ public class BillingService {
 		return br;
 	}
 
-	public BillRunMaster generateSingleBill(String can) {
+	public BillRunMaster generateSingleBill(String can)  throws Exception{
+		
 		initBillRun();
 
 		process_bill(can);
@@ -205,7 +209,7 @@ public class BillingService {
 	public void commit(BillRunDetails brd) {
 		try {
 			CustDetails customer = custDetailsRepository
-					.findByCan(brd.getCan());
+					.findByCanForUpdate(brd.getCan());
 			BillFullDetails bfd = brd.getBillFullDetails();
 			BillDetails bd = brd.getBillDetails();
 
@@ -281,8 +285,12 @@ public class BillingService {
 		bd.forEach(bill_details -> process_bill(bill_details));
 	}
 
-	public void process_bill(String can) {
+	public void process_bill(String can) throws Exception {
 		BillDetails bill_details = billDetailsRepository.findValidBillForCan(can);
+		
+		if(bill_details == null)
+				throw new Exception("No new meter readings available to run bill.");
+		
 		process_bill(bill_details);
 	}
 
@@ -299,7 +307,7 @@ public class BillingService {
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
-			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			dTo = bill_details.getMetReadingDt();
 
 			// Currently Metered
 			if (bill_details.getCurrentBillType().equals("M")) {
@@ -561,10 +569,9 @@ public class BillingService {
 		if (!validateCust(customer, bill_details))
 			return;
 
-		if (bfdRepository.findByCanAndToMonth(
-				customer.getCan(),
-				customer.getPrevBillMonth().format(
-						DateTimeFormatter.ofPattern("yyyyMM"))) != null) {
+		if (billRunDetailsRepository.findByCanAndToMonth(
+				bill_details.getCan(),
+				bill_details.getToMonth()) != null) {
 			log.debug("Unable to process customer:" + customer.getCan()
 					+ ", getCustInfo returned::"
 					+ CustValidation.ALREADY_BILLED.name());
@@ -633,8 +640,10 @@ public class BillingService {
 	public void process_bill(BillDetails bill_details) {
 		if (bill_details == null)
 			return;
-
+		
 		initBill(bill_details.getCan());
+
+		brd.setBillDetails(bill_details);
 
 		log.debug("Process customer with CAN:" + bill_details.getCan());
 		CustDetails customer = custDetailsRepository.findByCan(bill_details

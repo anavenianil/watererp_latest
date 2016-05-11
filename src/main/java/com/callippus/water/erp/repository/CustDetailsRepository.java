@@ -2,7 +2,10 @@ package com.callippus.water.erp.repository;
 
 import java.util.List;
 
+import javax.persistence.LockModeType;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -13,8 +16,11 @@ import com.callippus.water.erp.domain.CustDetails;
  */
 public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 	
-//	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public CustDetails findByCan(String can);
+	
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+	@Query("select c from CustDetails c where c.can = :can")
+	public CustDetails findByCanForUpdate(@Param("can") String can);
 	
 	
 	@Query("select max(SUBSTRING(can, 5, 8))  "

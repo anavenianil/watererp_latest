@@ -21,6 +21,10 @@
 			<id>spring-milestones</id>
 			<url>http://repo.spring.io/milestone</url>
 		</repository>
+		<repository>
+			<id>fdvsolution.public</id>
+			<url>http://nexus.fdvs.com.ar/content/groups/public/</url>
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -363,6 +367,12 @@
 			<groupId>fr.ippon.spark.metrics</groupId>
 			<artifactId>metrics-spark-reporter</artifactId>
 			<version>${metrics-spark-reporter.version}</version>
+		</dependency>
+		<!-- jasper fonts file -->
+		<dependency>
+			<groupId>ar.com.fdvs</groupId>
+			<artifactId>DynamicJasper-core-fonts</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<!-- jhipster-needle-maven-add-dependency -->
 	</dependencies>
