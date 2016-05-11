@@ -8,12 +8,13 @@ angular
 						$http, CustomerComplaints, ComplaintTypeMaster,
 						Principal, RequestWorkflowHistory, ParseLinks,
 						ApplicationTxnService, BillFullDetailsSvc, DateUtils,
-						BillFullDetailsBillMonths, BillFullDetails) {
+						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails) {
 					// This code is used to get the role name / designation.
 					$scope.orgRole = Principal.getOrgRole();
 
 					$scope.customerComplaints = {};
 					$scope.billFullDetailss = [];
+					$scope.billRunDetailss = [];
 					$scope.can = $scope.customerComplaints.can;
 					$scope.customerComplaints.billMonth = new Date();
 					// $scope.customerComplaints.can ='';
@@ -42,7 +43,7 @@ angular
 													.getBillDetails($scope.customerComplaints.can);
 											$scope.customerComplaints.remarks1 = $scope.customerComplaints.remarks;
 											$scope.customerComplaints.remarks = "";
-											// $scope.getPrevBillDetails($scope.customerComplaints.can);
+											$scope.getBillRunDetails($scope.customerComplaints.can,4);
 										});
 					};
 
@@ -66,11 +67,20 @@ angular
 							});
 					$scope.$on('$destroy', unsubscribe);
 
+					var onSaveSuccess = function(result) {
+						$scope.isSaving = false;
+						$state.go('customerComplaints');
+					};
+
+					var onSaveError = function(result) {
+						$scope.isSaving = false;
+					};
+					
 					$scope.approve = function(id) {
 						// ApplicationTxnService.approveCustComplaint(id);
 						if ($scope.customerComplaints.id != null) {
 							CustomerComplaints
-									.update($scope.customerComplaints);
+									.update($scope.customerComplaints, onSaveSuccess, onSaveError);
 							$scope.getWorkflowHistoryByDomainId();
 						}
 					}
@@ -119,22 +129,44 @@ angular
 						$scope.getWorkflowHistoryByDomainId();
 					}
 					
-					//This function is not in use.
-					$scope.getPrevBillDetails = function(can) {
-						return $http.get(
-								'api/billFullDetailss/searchPrevBillDetails/'
-										+ can, {
-									params : {
-										address : can,
-										sensor : false
-									}
-								}).then(function(response) {
-							var res = response.data.map(function(item) {
-								return item;
-							});
+					$scope.getBillRunDetails = function(can, status) {
+			            BillRunDetails.query({page: $scope.page, size: 20, can: can, status:status}, function(result, headers) {
+			                $scope.links = ParseLinks.parse(headers('link'));
+			                for (var i = 0; i < result.length; i++) {
+			                    $scope.billRunDetailss.push(result[i]);
+			                }
+			            });
+			        };
+			        
+			        $scope.canDecline = function() {
+						var ret = false;
+						switch ($scope.customerComplaints.status) {
+						case 0:
+							if ($scope.orgRole.id === 18)
+								ret = true;
+							break;
+						case 1:
+							if ($scope.orgRole.orgRoleName === 'Technical Zonal Supervisor')
+								ret = true;
+							break;
+						case 2:
+							if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
+								ret = true;
+							break;
+						case 3:
+							if ($scope.orgRole.orgRoleName === 'Technical Manager')
+								ret = true;
+							break;
+						case 4:
+							if ($scope.orgRole.orgRoleName === 'Assistant Accountant(Revenue)')
+								ret = true;
+							break;
+						default:
+							break;
 
-							return res;
-						});
+						}
+
+						return ret;
 					}
 
 				});
