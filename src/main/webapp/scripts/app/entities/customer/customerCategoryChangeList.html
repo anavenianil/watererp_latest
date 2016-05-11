@@ -1,0 +1,117 @@
+<div>
+	<h2>Category Change Lists</h2>
+	<jh-alert></jh-alert>
+	<!-- <div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="customer.categoryChange">
+					<span class="glyphicon glyphicon-plus"></span> <span>Create
+						new Customer </span>
+				</button>
+			</div>
+		</div>
+	</div> -->
+	<br />
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Connection Category Change</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="table-responsive">
+					<!-- <div class="row">
+						<div class="col-md-3">
+							<select class="input-sm form-control" id="statusSearch"
+								ng-model="statusSearch" ng-change="onSearch()">
+								<option value="" label="All">Select Status</option>
+								<option value="0" label="Pending">Pending Approval</option>
+								<option value="1" label="Pending Approval">Forwarded</option>
+								<option value="2" label="In Feasibility">In Receipt</option>
+								<option value="3" label="In Proceedings">Completed</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<input type="text" class="input-sm form-control" id="customerId"
+								placeholder="Search By Application No" name="customerId"
+								ng-model="customerId" ng-change="onSearch()" />
+						</div>
+					</div> -->
+					<br>
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+								<th jh-sort-by="id"><span>ID</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="can"><span>Can</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="meterReading"><span>Previous Meter
+										Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="presentReading"><span>Present
+										Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="tariffCategoryMaster.id"><span>Previous
+										Category</span><span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="presentCategory.id"><span>Changed
+										Category</span><span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="organization"><span>Organization</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="organizationName"><span>Organization
+										Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="designation"><span>Designation</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="deedDoc"><span>Deed Document</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="agreementDoc"><span>Agreement
+										Document</span><span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="requestedDate"><span>Requested Date</span><span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="approvedDate"><span>ApprovedDate</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<tr ng-repeat="customer in customers track by customer.id">
+								<td>{{customer.id}}</td>
+								<td>{{customer.can}}</td>
+								<td>{{customer.meterReading}}</td>
+								<td>{{customer.presentReading}}</td>
+								<td>{{customer.tariffCategoryMaster.tariffCategory}}</td>
+								<td>{{customer.presentCategory.tariffCategory}}</td>
+								<td>{{customer.organization}}</td>
+								<td>{{customer.organizationName}}</td>
+								<td>{{customer.designation}}</td>
+								<td>{{customer.deedDoc}}</td>
+								<td>{{customer.agreementDoc}}</td>
+								<td>{{customer.requestedDate | date:'mediumDate'}}</td>
+								<td>{{customer.approvedDate | date:'mediumDate'}}</td>
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit"
+											ui-sref="customer.categoryChangeDetail({id:customer.id, requestTypeId:8})"
+											class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-eye-open"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<button type="submit"
+											ui-sref="customer.edit({id:customer.id})"
+											class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<button type="submit"
+											ui-sref="customer.delete({id:customer.id})"
+											class="btn btn-danger btn-sm">
+											<span class="glyphicon glyphicon-remove-circle"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

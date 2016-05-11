@@ -23,7 +23,7 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
             $scope.$emit('watererpApp:custDetailsUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            //$state.go('customer');
+            $state.go('customer.pipeSizeList');
         };
 
         var onSaveError = function (result) {
@@ -102,6 +102,7 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 								$scope.customer.pipeSizeMaster = result;
 							});
 		};
+		
 		
 		/*$scope.saveChanges = function(){
 			$scope.workflowTxnDetails.requestMaster = {}
