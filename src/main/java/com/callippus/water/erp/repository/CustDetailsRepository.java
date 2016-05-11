@@ -19,7 +19,8 @@ public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 	public CustDetails findByCan(String can);
 	
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
-	public CustDetails findByCanForUpdate(String can);
+	@Query("select c from CustDetails c where c.can = :can")
+	public CustDetails findByCanForUpdate(@Param("can") String can);
 	
 	
 	@Query("select max(SUBSTRING(can, 5, 8))  "
