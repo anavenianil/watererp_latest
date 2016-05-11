@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.MeterStatus;
+import com.callippus.water.erp.domain.PipeSizeMaster;
 import com.callippus.water.erp.repository.MeterDetailsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -130,5 +131,24 @@ public class MeterDetailsResource {
         log.debug("REST request to delete MeterDetails : {}", id);
         meterDetailsRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("meterDetails", id.toString())).build();
+    }
+    
+    /**
+     * GET  /meterDetailss/:meterDetails -> get the "meterDetails"
+     */
+    @RequestMapping(value = "/meterDetailss/forMeterId",
+        method = RequestMethod.GET,
+        params = {"meterId"}/*,
+        produces = MediaType.APPLICATION_JSON_VALUE*/)
+    @Timed
+    public ResponseEntity<MeterDetails> getMeterDetails(@RequestParam(value = "meterId") String meterId) {
+        log.debug("REST request to get MeterDetails : {}", meterId);
+        
+        MeterDetails meterDetails = meterDetailsRepository.findByMeterId(meterId);
+        return Optional.ofNullable(meterDetails)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

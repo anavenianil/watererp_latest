@@ -75,17 +75,26 @@
 					<fieldset>
 						<legend>Meter Details</legend>
 						<div class="row">
-							<div class="col-sm-4">
+							<!-- <div class="col-sm-4">
 								<label class="control-label" for="field_existingMeterNumber">Existing
 									Meter Number</label> <input type="text" class="form-control"
 									name="existingMeterNumber" id="field_existingMeterNumber"
 									ng-model="meterChange.existingMeterNumber" readonly />
+							</div> -->
+							<div class="col-sm-4">
+								<label for="field_existingMeterNumber">Existing Meter Number</label> <select
+									class="form-control" id="field_prevMeterNo"
+									name="prevMeterNo" ng-model="meterChange.prevMeterNo"
+									ng-options="meterDetails as meterDetails.meterId for meterDetails in prevMeterDetailss track by meterDetails.id"
+									required disabled>
+									<option value=""></option>
+								</select>
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_existingMeterReading">Existing
+								<label class="control-label" for="field_prevMeterReading">Existing
 									Meter Reading</label> <input type="number" class="form-control"
-									name="existingMeterReading" id="field_existingMeterReading"
-									ng-model="meterChange.existingMeterReading" required />
+									name="prevMeterReading" id="field_prevMeterReading"
+									ng-model="meterChange.prevMeterReading" required />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_reasonForChange">Reason
@@ -105,9 +114,9 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-4">
-								<label for="field_meterDetails">New Meter Number</label> <select
-									class="form-control" id="field_meterDetails"
-									name="meterDetails" ng-model="meterChange.meterDetails"
+								<label for="field_newMeterNo">New Meter Number</label> <select
+									class="form-control" id="field_newMeterNo"
+									name="newMeterNo" ng-model="meterChange.newMeterNo"
 									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
 									required>
 									<option value=""></option>
