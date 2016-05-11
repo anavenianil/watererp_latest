@@ -9,11 +9,14 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
         $scope.orgroleinstances = OrgRoleInstance.query();
         $scope.designationmasters = DesignationMaster.query();
         $scope.statusmasters = StatusMaster.query();
+        $scope.employeestatuss= [{"id":"1", "value":"MARRIED"},{"id":"2", "value":"UNMARRIED"}];
         $scope.load = function(id) {
             EmpMaster.get({id : id}, function(result) {
                 $scope.empMaster = result;
             });
         };
+        
+        $scope.dtMax = new Date();
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:empMasterUpdate', result);

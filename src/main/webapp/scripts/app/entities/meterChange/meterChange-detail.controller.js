@@ -21,16 +21,16 @@ angular.module('watererpApp')
         	$state.go('meterChange');
         }
         
-        $scope.getWorkflowHistoryByDomainId = function() {
+        $scope.getWorkflowHistoryByDomainId = function(requestTypeId) {
         	$scope.requestWorkflowHistorys = [];
-            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id, requestId: 7}, function(result, headers) {
+            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id, requestTypeId: requestTypeId}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.requestWorkflowHistorys.push(result[i]);
                 }
             });
         };
-        if($stateParams.id != null){
-        	$scope.getWorkflowHistoryByDomainId($stateParams.id);
+        if($stateParams.requestTypeId != null){
+        	$scope.getWorkflowHistoryByDomainId($stateParams.requestTypeId);
         }
     });
