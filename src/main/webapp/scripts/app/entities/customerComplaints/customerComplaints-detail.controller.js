@@ -19,18 +19,7 @@ angular
 					$scope.customerComplaints.billMonth = new Date();
 					// $scope.customerComplaints.can ='';
 
-					$scope.getBillDetails = function(can) {
-						BillFullDetails.query({
-							page : $scope.page,
-							size : 20,
-							can : can
-						}, function(result, headers) {
-							$scope.links = ParseLinks.parse(headers('link'));
-							for (var i = 0; i < result.length; i++) {
-								$scope.billFullDetailss.push(result[i]);
-							}
-						});
-					};
+
 					$scope.load = function(id) {
 						CustomerComplaints
 								.get(
@@ -39,8 +28,6 @@ angular
 										},
 										function(result) {
 											$scope.customerComplaints = result;
-											$scope
-													.getBillDetails($scope.customerComplaints.can);
 											$scope.customerComplaints.remarks1 = $scope.customerComplaints.remarks;
 											$scope.customerComplaints.remarks = "";
 											$scope.getBillRunDetails($scope.customerComplaints.can,4);

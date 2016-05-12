@@ -64,7 +64,7 @@
 							<tr
 								ng-repeat="customerComplaints in customerComplaintss track by customerComplaints.id">
 								<td><a
-									ui-sref="customerComplaints.detail({id:customerComplaints.id})">{{customerComplaints.id}}</a></td>
+									ui-sref="customerComplaints.detail({id:customerComplaints.id, requestTypeId:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.id}}</a></td>
 								<td>{{customerComplaints.remarks}}</td>
 								<td>{{customerComplaints.relevantDoc}}</td>
 								<td>{{customerComplaints.complaintBy}}</td>
