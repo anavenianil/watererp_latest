@@ -622,7 +622,9 @@ INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`rece
  (10,NULL,NULL,4000,'2016-05-12 15:47:26',NULL,NULL,NULL,NULL,NULL,'617857694 ',' V.PRASAD ',NULL,NULL,'C',NULL,NULL,'paid4',NULL,NULL,NULL,NULL,1,NULL,1);
 INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
  (11,NULL,NULL,6000,'2016-05-12 15:48:12',NULL,'45628','2016-05-12',NULL,NULL,'617871900 ',' VENKATA SATYA SAI SUDHA RANI AND OTHERS ',NULL,NULL,'C',NULL,NULL,'paid5',NULL,NULL,NULL,NULL,3,1,1),
- (12,NULL,NULL,1212,'2016-05-12 15:50:17',NULL,NULL,NULL,NULL,NULL,'617805102 ',' ISUKAPALLI VENKATA LAKSHMI NARASIMHA PRASAD ',NULL,NULL,'C',NULL,NULL,'remarks 1',NULL,NULL,NULL,NULL,1,NULL,1);
+ (12,NULL,NULL,1212,'2016-05-12 15:50:17',NULL,NULL,NULL,NULL,NULL,'617805102 ',' ISUKAPALLI VENKATA LAKSHMI NARASIMHA PRASAD ',NULL,NULL,'C',NULL,NULL,'remarks 1',NULL,NULL,NULL,NULL,1,NULL,1),
+ (16,NULL,NULL,123,'2016-05-12 17:50:30',NULL,'ABC','2016-05-12',NULL,NULL,NULL,'ABC',NULL,NULL,'R',NULL,NULL,'ABC',NULL,NULL,NULL,NULL,2,2,1),
+ (17,NULL,NULL,123,'2016-05-12 18:15:57',NULL,'PQR','2016-05-12',NULL,NULL,NULL,'PQR',NULL,NULL,'R',NULL,NULL,'PQR',NULL,NULL,NULL,NULL,2,2,1);
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -4661,7 +4663,8 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (705,'sf0023','2016-05-12 10:01:41','AUTHENTICATION_SUCCESS'),
  (706,'admin','2016-05-12 14:16:54','AUTHENTICATION_SUCCESS'),
  (707,'admin','2016-05-12 15:46:50','AUTHENTICATION_SUCCESS'),
- (708,'admin','2016-05-12 15:56:53','AUTHENTICATION_SUCCESS');
+ (708,'admin','2016-05-12 15:56:53','AUTHENTICATION_SUCCESS'),
+ (709,'admin','2016-05-12 18:56:09','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -6169,7 +6172,9 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (707,'remoteAddress','192.168.1.5'),
  (707,'sessionId','F63F3B549BEA485016E3BDB04B6825E3'),
  (708,'remoteAddress','0:0:0:0:0:0:0:1'),
- (708,'sessionId','65513B004A14ABEFC994522E67392C0B');
+ (708,'sessionId','65513B004A14ABEFC994522E67392C0B'),
+ (709,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (709,'sessionId','28EFC4852A87FA18F73A5B094170F284');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -6228,14 +6233,14 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('N5tURezUqhBwraYfORpoOg==',3,'Z7l8+8dlatnIze1ZddxZoQ==','2016-05-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('n9nNNmpWA1FwZTUoGhPv9Q==',5,'pLMfwNuJj5ACRc+bYLLKdQ==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
- ('Nc455/4oupH9sHsVKE3rvw==',3,'gSrO/4gnfG3RSa6+SYNxyg==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('ny63voHlh1g5DzOlyLwYTQ==',27,'ZAFbKrGGRPl7EtKIpaxgqA==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('odIcxtIiUMAAdHvLI1fZ0g==',3,'6hyclrvKtc4YTW6j6ulqLw==','2016-05-11','110.224.236.177','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
  ('omL/EzrvAvwVEbBKTEH5aw==',30,'CseC8BLe5lXIEbYKOM4Abw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('pMyOIrgHgrCeHf9U1k1jig==',15,'JN5k9M/NYqnv3OyrQgjchw==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('pMyOIrgHgrCeHf9U1k1jig==',15,'JN5k9M/NYqnv3OyrQgjchw==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('q7XsLPGhgLfQI03IAy+sMg==',15,'f96/QO7HrHkS+8H1N6VIWw==','2016-05-09','110.224.230.23','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('q7XsLPGhgLfQI03IAy+sMg==',15,'f96/QO7HrHkS+8H1N6VIWw==','2016-05-09','110.224.230.23','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('QNKrooOpjWJXpm7AAOEFQQ==',20,'DMvylSUGtrldSFzxyjrKXw==','2016-04-19','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('Tlgbix/WUw3N7YFaR4+YCA==',3,'MPjdww/7fSNJ5oKEUL4TTg==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('uuRMPqbtEBc6QVsYIXN2pA==',21,'oeCuCAeQjxjpbYtfS8o4/w==','2016-04-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('V9rQqqIRC/goYf0v4KMZ3g==',30,'d8YPqVoG4JnyxyH1XvqOyA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('vCltSl9MsKd488jrCU8XQw==',5,'m9uZJi+jxdO842VU7ckQzA==','2016-05-10','122.170.237.113','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),

@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller(
 		'RevDetailsDialogController',
-		function($scope, $state, CollDetails, ParseLinks, $stateParams,
+		function($scope, $state, CollDetails, RevDetails, ParseLinks, $stateParams,
 				PaymentTypes, InstrumentIssuerMaster, CustDetails,
 				CustDetailsService, CollectionTypeMaster, RevenueTypeMaster, $http) {
 
@@ -68,7 +68,7 @@ angular.module('watererpApp').controller(
 
 			$scope.save = function() {
 				$scope.isSaving = true;
-				CollDetails.save($scope.collDetails, onSaveSuccess, onSaveError);
+				RevDetails.save($scope.collDetails, onSaveSuccess, onSaveError);
 			};
 
 			$scope.datePickerForReceiptDt = {};
