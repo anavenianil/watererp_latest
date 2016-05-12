@@ -36,7 +36,11 @@ angular.module('watererpApp').controller(
 					$state.go('customer.nameChangeDetail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
 				if(requestTypeId===4 || requestTypeId===3){//CONNECTION CATEGORY
-					$state.go('customerComplaints.detail',{id:domainObjectId, requestTypeId:requestTypeId});				}
+					$state.go('customerComplaints.detail',{id:domainObjectId, requestTypeId:requestTypeId});
+				}
+				if(requestTypeId===7){//METER CHANGE
+					$state.go('meterChange.detail',{id:domainObjectId, requestTypeId:requestTypeId});
+				}
 			}
 
 		});

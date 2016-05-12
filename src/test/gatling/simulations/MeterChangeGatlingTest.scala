@@ -67,7 +67,7 @@ class MeterChangeGatlingTest extends Simulation {
             .exec(http("Create new meterChange")
             .post("/api/meterChanges")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "can":"SAMPLE_TEXT", "reasonForChange":"SAMPLE_TEXT", "existingMeterNumber":"SAMPLE_TEXT", "existingMeterReading":null, "newMeterNumber":"SAMPLE_TEXT", "newMeterReading":null, "remarks":"SAMPLE_TEXT", "approvedDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "can":"SAMPLE_TEXT", "reasonForChange":"SAMPLE_TEXT", "prevMeterReading":null, "newMeterReading":null, "remarks":"SAMPLE_TEXT", "approvedDate":"2020-01-01T00:00:00.000Z", "status":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_meterChange_url")))
             .pause(10)

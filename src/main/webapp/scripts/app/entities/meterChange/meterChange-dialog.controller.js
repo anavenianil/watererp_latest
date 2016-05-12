@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('watererpApp').controller('MeterChangeDialogController',
-        function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN, ParseLinks) {
+        function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN, ParseLinks,
+        		GetMeterDetails) {
 
         $scope.meterChange = {};
         $scope.custdetailss = CustDetails.query();
@@ -83,14 +84,26 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			});
 		}
         
+        
+        $scope.getMeterDetails = function(meterId) {
+        	$scope.prevMeterDetailss = [];
+			GetMeterDetails.findByMeterId(meterId).then(
+							function(result) {
+								$scope.meterChange.prevMeterNo = result;
+								$scope.prevMeterDetailss.push(result);
+								console.log($scope.prevMeterDetailss);
+							});
+		};
+        
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.meterChange.custDetails = $scope.custDetails;
                 $scope.custDetailsId = $scope.custDetails.id;
-                $scope.meterChange.existingMeterNumber = $scope.custDetails.meterNo;
+                //$scope.meterChange.existingMeterNumber = $scope.custDetails.meterNo;
                 //$scope.meterChange.existingMeterReading = $scope.custDetails.prevReading;
                 $scope.meterChange.custDetails.id = $scope.custDetailsId;
+                $scope.getMeterDetails($scope.custDetails.meterNo);
             });
         };
         
@@ -111,6 +124,6 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			$scope.meterChange.reasonForChange = status;
 		}
 		
-       
+		
         
 });

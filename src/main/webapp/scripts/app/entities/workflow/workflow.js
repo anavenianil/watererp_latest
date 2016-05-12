@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('workflow.new', {
+            /*.state('workflow.new', {
                 parent: 'workflow',
                 url: '/new',
                 data: {
@@ -63,8 +63,8 @@ angular.module('watererpApp')
                         $state.go('workflow');
                     })
                 }]
-            })
-            .state('workflow.edit', {
+            })*/
+            /*.state('workflow.edit', {
                 parent: 'workflow',
                 url: '/{id}/edit',
                 data: {
@@ -86,7 +86,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('workflow.delete', {
                 parent: 'workflow',
                 url: '/{id}/delete',
@@ -109,5 +109,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('workflow.new', {
+                parent: 'workflow',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Workflows'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/workflow/workflow-dialog.html',
+                        controller: 'WorkflowDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('workflow.edit', {
+                parent: 'workflow',
+                url: '/edit/:id',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Workflows'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/workflow/workflow-dialog.html',
+                        controller: 'WorkflowDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

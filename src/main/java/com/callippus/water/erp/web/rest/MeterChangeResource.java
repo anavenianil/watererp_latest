@@ -82,13 +82,17 @@ public class MeterChangeResource {
         if (meterChange.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("meterChange", "idexists", "A new meterChange cannot already have an ID")).body(null);
         }
+        if(meterChange.getStatus()==null){
+        	meterChange.setStatus(0);
+        }
         MeterChange result = meterChangeRepository.save(meterChange);
         
-        if(meterChange.getMeterDetails()!=null){
-        	MeterDetails oldMeter = meterChange.getMeterDetails();
-        	oldMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
-        	meterDetailsRepository.save(oldMeter);
-        	MeterDetails meterDetails = meterChange.getMeterDetails();
+        if(meterChange.getPrevMeterNo()!=null){
+        	MeterDetails prevMeter = meterChange.getPrevMeterNo();
+        	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
+        	meterDetailsRepository.save(prevMeter);
+        	
+        	MeterDetails meterDetails = meterChange.getNewMeterNo();
         	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
         	meterDetailsRepository.save(meterDetails);
         }
@@ -98,15 +102,14 @@ public class MeterChangeResource {
         custMeterMappingRepository.save(cmpOld);
         
         CustMeterMapping custMeterMapping = new CustMeterMapping();
-        custMeterMapping.setMeterDetails(meterChange.getMeterDetails());
+        custMeterMapping.setMeterDetails(meterChange.getNewMeterNo());
         custMeterMapping.setCustDetails(meterChange.getCustDetails());
         custMeterMapping.setFromDate(meterChange.getApprovedDate());
         custMeterMappingRepository.save(custMeterMapping);
         CustDetails custDetails = meterChange.getCustDetails();
-        custDetails.setMeterNo(meterChange.getMeterDetails().getMeterId());
+        custDetails.setMeterNo(meterChange.getNewMeterNo().getMeterId());
         custDetails.setPrevReading(meterChange.getNewMeterReading());
         custDetailsRepository.save(custDetails);
-        
         
         //this is for workflow for new request
         try{
@@ -193,6 +196,7 @@ public class MeterChangeResource {
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
+	@Transactional
 	public ResponseEntity<Void> approveMeterChange(@RequestParam(value = "id", required = false) Long id,
 						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
 		workflowService.getUserDetails();

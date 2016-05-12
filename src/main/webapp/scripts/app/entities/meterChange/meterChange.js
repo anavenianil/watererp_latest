@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/meterChanges',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'MeterChanges'
                 },
                 views: {
@@ -21,7 +21,7 @@ angular.module('watererpApp')
             })
             .state('meterChange.detail', {
                 parent: 'entity',
-                url: '/meterChange/{id}',
+                url: '/meterChange/{id}/{requestTypeId}',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'MeterChange'
@@ -121,7 +121,7 @@ angular.module('watererpApp')
                 parent: 'meterChange',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'MeterChanges'
                 },
                 views: {
@@ -137,7 +137,7 @@ angular.module('watererpApp')
                 parent: 'meterChange',
                 url: '/edit/:id',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'MeterChanges'
                 },
                 views: {
