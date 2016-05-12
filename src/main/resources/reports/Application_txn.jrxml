@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Application_txn" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="dda6da65-b38f-480d-bc59-fcdbc727f9cf">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="54"/>
+	<property name="ireport.y" value="240"/>
 	<property name="ireport.callouts" value="##Tue May 03 14:47:11 IST 2016"/>
 	<parameter name="Id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR ID]]></parameterDescription>
@@ -169,7 +169,7 @@
 				<text><![CDATA[....................................................................]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="306" y="27" width="84" height="14" uuid="14d1f432-b6c4-46cb-ba13-2d4a31285187"/>
+				<reportElement x="306" y="27" width="135" height="14" uuid="14d1f432-b6c4-46cb-ba13-2d4a31285187"/>
 				<text><![CDATA[....................................................]]></text>
 			</staticText>
 			<staticText>
@@ -187,11 +187,11 @@
 				<text><![CDATA[Phone Number]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="553" y="26" width="100" height="20" uuid="dd59c8ea-9b08-4fff-a0d6-e0a09f0c06d6"/>
-				<text><![CDATA[...............................]]></text>
+				<reportElement x="553" y="26" width="141" height="20" uuid="dd59c8ea-9b08-4fff-a0d6-e0a09f0c06d6"/>
+				<text><![CDATA[.................................................]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="553" y="20" width="100" height="20" uuid="9e3298dc-576c-4d8a-9b7c-de44e4758fa4"/>
+				<reportElement x="553" y="20" width="138" height="20" uuid="9e3298dc-576c-4d8a-9b7c-de44e4758fa4"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -205,7 +205,7 @@
 				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="549">
+		<band height="475">
 			<line>
 				<reportElement x="338" y="8" width="1" height="1" uuid="b6b773e1-6978-4db7-a264-702d9be4d5e0"/>
 			</line>
@@ -318,7 +318,7 @@
 				<text><![CDATA[        STREET]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="424" y="276" width="100" height="20" uuid="9086b3c5-5dc6-4965-9e9e-7173f92873ca"/>
+				<reportElement x="405" y="272" width="148" height="20" uuid="9086b3c5-5dc6-4965-9e9e-7173f92873ca"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -352,7 +352,7 @@
 				<text><![CDATA[                                                     MATUMIZI YA MAJI(WEKA ALAMA YA )]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="415" width="54" height="20" uuid="c4ef4021-f1e0-4588-ac54-35bae75c9fdd"/>
+				<reportElement x="12" y="415" width="85" height="20" uuid="c4ef4021-f1e0-4588-ac54-35bae75c9fdd"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -389,21 +389,21 @@
 				<text><![CDATA[INDUSTRY]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="22" y="164" width="100" height="20" uuid="2a9b591d-5c52-4385-8bcf-d0c1b20d79ef"/>
+				<reportElement x="22" y="164" width="164" height="20" uuid="2a9b591d-5c52-4385-8bcf-d0c1b20d79ef"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{office_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="218" y="164" width="100" height="20" uuid="b0bc265d-b5da-4b10-9ba3-ed79d1f9955d"/>
+				<reportElement x="241" y="164" width="128" height="20" uuid="b0bc265d-b5da-4b10-9ba3-ed79d1f9955d"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{office_no}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="22" y="278" width="100" height="20" uuid="ac3990cc-8bc2-424f-8781-4280c00e3f11"/>
+				<reportElement x="18" y="274" width="136" height="20" uuid="ac3990cc-8bc2-424f-8781-4280c00e3f11"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -436,6 +436,13 @@
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="527" y="445" width="167" height="20" uuid="0a0e05ec-d671-4c14-a886-a47fdc6e525b"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tariff_category_master_id}==4?'YES':'-')]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
