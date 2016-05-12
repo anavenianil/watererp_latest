@@ -440,7 +440,7 @@ public class BillingService {
 					: 0);
 
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL,
+					.findTariffs(bill_details.getCan(), dFrom, dTo, unitsKL,
 							unMeteredFlag, newMeterFlag, newMeterNoSvcFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
