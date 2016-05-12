@@ -8,30 +8,28 @@ angular
 						$http, CustomerComplaints, ComplaintTypeMaster,
 						Principal, RequestWorkflowHistory, ParseLinks,
 						ApplicationTxnService, BillFullDetailsSvc, DateUtils,
-						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails) {
+						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN) {
 					// This code is used to get the role name / designation.
 					$scope.orgRole = Principal.getOrgRole();
 
 					$scope.customerComplaints = {};
 					$scope.billFullDetailss = [];
 					$scope.billRunDetailss = [];
+					var len = $scope.billRunDetailss.length;
+					console.log(len);
 					$scope.can = $scope.customerComplaints.can;
 					$scope.customerComplaints.billMonth = new Date();
 					// $scope.customerComplaints.can ='';
 
-
 					$scope.load = function(id) {
-						CustomerComplaints
-								.get(
-										{
-											id : id
-										},
-										function(result) {
-											$scope.customerComplaints = result;
-											$scope.customerComplaints.remarks1 = $scope.customerComplaints.remarks;
-											$scope.customerComplaints.remarks = "";
-											$scope.getBillRunDetails($scope.customerComplaints.can,4);
-										});
+						CustomerComplaints.get({
+							id : id
+						}, function(result) {
+							$scope.customerComplaints = result;
+							$scope.customerComplaints.remarks1 = $scope.customerComplaints.remarks;
+							$scope.customerComplaints.remarks = "";
+							$scope.getBillRunDetails($scope.customerComplaints.can,4);
+						});
 					};
 
 					$scope.getBillById = function(id) {
@@ -117,13 +115,23 @@ angular
 					}
 					
 					$scope.getBillRunDetails = function(can, status) {
+						$scope.getCustDetails(can);
 			            BillRunDetails.query({page: $scope.page, size: 20, can: can, status:status}, function(result, headers) {
 			                $scope.links = ParseLinks.parse(headers('link'));
 			                for (var i = 0; i < result.length; i++) {
+			                	              	
 			                    $scope.billRunDetailss.push(result[i]);
+			                    //console.log($scope.billRunDetailss[i]);
+			                    console.log(result[i]);
 			                }
 			            });
 			        };
+			        
+			        $scope.getCustDetails = function(can) {
+						CustDetailsSearchCAN.get({can : can}, function(result) {
+			                $scope.custDetails = result;
+			            });
+			        };    
 			        
 			        $scope.canDecline = function() {
 						var ret = false;

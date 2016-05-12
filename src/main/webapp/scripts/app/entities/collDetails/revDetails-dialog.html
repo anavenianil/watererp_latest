@@ -10,9 +10,12 @@
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
 						<div class="col-sm-4">
-							<label class="control-label" for="field_receiptNo">Reference
-								Name</label> <input type="text" class="form-control" name="consName"
-								id="field_consName" ng-model="collDetails.consName" />
+							<label for="field_paymentTypes">Revenue Type</label> <select
+								class="form-control" id="field_collectionTypeMaster"
+								name="collectionTypeMaster" required="required"
+								ng-model="collDetails.collectionTypeMaster"
+								ng-options="revenueTypeMaster as revenueTypeMaster.revenueType for revenueTypeMaster in revenueTypeMasters track by revenueTypeMaster.id">
+							</select>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptDt">Revenue
@@ -45,7 +48,6 @@
 								class="help-block">Only numbers.</p>
 						</div>
 					</div>
-
 					<div class="row">
 						<div class="col-sm-4">
 							<label for="field_paymentTypes">Revenue Mode</label> <select
@@ -56,12 +58,9 @@
 							</select>
 						</div>
 						<div class="col-sm-4">
-							<label for="field_paymentTypes">Revenue Type</label> <select
-								class="form-control" id="field_collectionTypeMaster"
-								name="collectionTypeMaster" required="required"
-								ng-model="collDetails.collectionTypeMaster"
-								ng-options="revenueTypeMaster as revenueTypeMaster.revenueType for revenueTypeMaster in revenueTypeMasters track by revenueTypeMaster.id">
-							</select>
+							<label class="control-label" for="field_receiptNo">Reference
+								Name</label> <input type="text" class="form-control" name="consName"
+								id="field_consName" ng-model="collDetails.consName" />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_remarks">Remarks</label>

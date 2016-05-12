@@ -100,18 +100,18 @@
 
 							</tr>
 							<tr>
-								<td><span>Can</span></td>
+								<td><span>CAN</span></td>
 								<td><span class="form-control-static">{{customerComplaints.can}}</span>
 								</td>
 							</tr>
 							<tr>
 								<td><span>Customer Name</span></td>
-								<td><span class="form-control-static">{{billFullDetailss[0].consName}}</span>
+								<td><span class="form-control-static">{{custDetails.consName}}</span>
 								</td>
 							</tr>
 							<tr>
 								<td><span>Category</span></td>
-								<td><span class="form-control-static">{{billFullDetailss[0].category}}</span>
+								<td><span class="form-control-static">{{custDetails.tariffCategoryMaster.tariffCategory}}</span>
 								</td>
 							</tr>
 							<tr>
@@ -151,7 +151,7 @@
 			<thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span></th>
-                    <th jh-sort-by="can"><span>Can</span></th>
+                    <th jh-sort-by="can"><span>CAN</span></th>
                     <th jh-sort-by="fromDt"><span>From Date</span></th>
                     <th jh-sort-by="toDt"><span>To Date</span></th>
                     <th jh-sort-by="status"><span>Status</span></th>
@@ -193,7 +193,7 @@
 						<div class="col-sm-4">
 							<label for="field_remarks">Remarks</label> <input type="text"
 								class="form-control" name="remarks" id="field_remarks"
-								ng-model="customerComplaints.remarks" />
+								ng-model="customerComplaints.remarks"/>
 						</div>
 					</div>
 				</div>
@@ -211,12 +211,14 @@
 		ng-click="approve(customerComplaints.id)" ng-if="orgRole.orgRoleName === 'Commercial Manager'" ng-disable="customerComplaints.status === 0 && orgRole.orgRoleName === 'ICT & Customer Care Officer'">
 		<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 	</button> -->
+	
 	<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
 			ng-click="declineRequest(customerComplaints.id)">
 			<span class="glyphicon glyphicon-remove-circle"></span>
 			&nbsp;Decline
 		</button>
+		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 	<button type="button" class="btn btn-success pull-right"
 			ng-show="canDecline()"
 			ng-click="approve(customerComplaints.id)">

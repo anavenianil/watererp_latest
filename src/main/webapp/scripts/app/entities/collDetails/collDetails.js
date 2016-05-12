@@ -12,7 +12,7 @@ angular.module('watererpApp')
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/collDetails/revDetailss.html',
+                        templateUrl: 'scripts/app/entities/collDetails/collDetailss.html',
                         controller: 'CollDetailsController' 
                     }
                 },
