@@ -8,42 +8,28 @@ angular
 						$http, CustomerComplaints, ComplaintTypeMaster,
 						Principal, RequestWorkflowHistory, ParseLinks,
 						ApplicationTxnService, BillFullDetailsSvc, DateUtils,
-						BillFullDetailsBillMonths, BillFullDetails) {
+						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN) {
 					// This code is used to get the role name / designation.
 					$scope.orgRole = Principal.getOrgRole();
 
 					$scope.customerComplaints = {};
 					$scope.billFullDetailss = [];
+					$scope.billRunDetailss = [];
+					var len = $scope.billRunDetailss.length;
+					console.log(len);
 					$scope.can = $scope.customerComplaints.can;
 					$scope.customerComplaints.billMonth = new Date();
 					// $scope.customerComplaints.can ='';
 
-					$scope.getBillDetails = function(can) {
-						BillFullDetails.query({
-							page : $scope.page,
-							size : 20,
-							can : can
-						}, function(result, headers) {
-							$scope.links = ParseLinks.parse(headers('link'));
-							for (var i = 0; i < result.length; i++) {
-								$scope.billFullDetailss.push(result[i]);
-							}
-						});
-					};
 					$scope.load = function(id) {
-						CustomerComplaints
-								.get(
-										{
-											id : id
-										},
-										function(result) {
-											$scope.customerComplaints = result;
-											$scope
-													.getBillDetails($scope.customerComplaints.can);
-											$scope.customerComplaints.remarks1 = $scope.customerComplaints.remarks;
-											$scope.customerComplaints.remarks = "";
-											// $scope.getPrevBillDetails($scope.customerComplaints.can);
-										});
+						CustomerComplaints.get({
+							id : id
+						}, function(result) {
+							$scope.customerComplaints = result;
+							$scope.customerComplaints.remarks1 = $scope.customerComplaints.remarks;
+							$scope.customerComplaints.remarks = "";
+							$scope.getBillRunDetails($scope.customerComplaints.can,4);
+						});
 					};
 
 					$scope.getBillById = function(id) {
@@ -66,11 +52,20 @@ angular
 							});
 					$scope.$on('$destroy', unsubscribe);
 
+					var onSaveSuccess = function(result) {
+						$scope.isSaving = false;
+						$state.go('customerComplaints');
+					};
+
+					var onSaveError = function(result) {
+						$scope.isSaving = false;
+					};
+					
 					$scope.approve = function(id) {
 						// ApplicationTxnService.approveCustComplaint(id);
 						if ($scope.customerComplaints.id != null) {
 							CustomerComplaints
-									.update($scope.customerComplaints);
+									.update($scope.customerComplaints, onSaveSuccess, onSaveError);
 							$scope.getWorkflowHistoryByDomainId();
 						}
 					}
@@ -119,22 +114,51 @@ angular
 						$scope.getWorkflowHistoryByDomainId();
 					}
 					
-					//This function is not in use.
-					$scope.getPrevBillDetails = function(can) {
-						return $http.get(
-								'api/billFullDetailss/searchPrevBillDetails/'
-										+ can, {
-									params : {
-										address : can,
-										sensor : false
-									}
-								}).then(function(response) {
-							var res = response.data.map(function(item) {
-								return item;
-							});
-
-							return res;
-						});
+					$scope.getBillRunDetails = function(can, status) {
+						$scope.getCustDetails(can);
+			            BillRunDetails.query({page: $scope.page, size: 20, can: can, status:status}, function(result, headers) {
+			                $scope.links = ParseLinks.parse(headers('link'));
+			                for (var i = 0; i < result.length; i++) {
+			                	              	
+			                    $scope.billRunDetailss.push(result[i]);
+			                    //console.log($scope.billRunDetailss[i]);
+			                    console.log(result[i]);
+			                }
+			            });
+			        };
+			        
+			        $scope.getCustDetails = function(can) {
+						CustDetailsSearchCAN.get({can : can}, function(result) {
+			                $scope.custDetails = result;
+			            });
+			        };    
+			        
+			        $scope.canDecline = function() {
+						var ret = false;
+						switch ($scope.customerComplaints.status) {
+						case 0:
+							if ($scope.orgRole.id === 18)
+								ret = true;
+							break;
+						case 1:
+							if ($scope.orgRole.id === 11)
+								ret = true;
+							break;
+						case 2:
+							if ($scope.orgRole.id === 12)
+								ret = true;
+							break;
+						case 3:
+							if ($scope.orgRole.id === 4)
+								ret = true;
+							break;
+						case 4:
+							if ($scope.orgRole.id === 16)
+								ret = true;
+							break;
+						default:
+							break;
+						}
+						return ret;
 					}
-
 				});

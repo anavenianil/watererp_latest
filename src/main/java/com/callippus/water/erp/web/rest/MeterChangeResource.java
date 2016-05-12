@@ -216,13 +216,21 @@ public class MeterChangeResource {
     		method = RequestMethod.POST, 
     		produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	//@Transactional
 	public ResponseEntity<MeterChange> approveMeterChange(
 			@RequestBody MeterChange meterChange) throws URISyntaxException {
 		log.debug("REST request to approve MeterChange : {}", meterChange);
 		//MeterChange meterChange = meterChangeRepository.findOne(meterChange.getId());
 		
 		if(meterChange.getStatus()==1){
+			MeterDetails prevMeter = meterChange.getPrevMeterNo();
+        	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));//Status would be according to meter(burnt or stuck)
+        	meterDetailsRepository.save(prevMeter);
+
+        	MeterDetails meterDetails = meterChange.getNewMeterNo();
+        	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+        	meterDetailsRepository.save(meterDetails);
+			
 			CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(meterChange.getCustDetails(), null);
 	        cmpOld.setToDate(meterChange.getApprovedDate());
 	        custMeterMappingRepository.save(cmpOld);
