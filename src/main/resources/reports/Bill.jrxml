@@ -17,7 +17,7 @@
        c.pin_code                                          AS cust_pin_code,
        c.meter_no                                          AS cust_meter_no,
        c.pipe_size                                         AS cust_pipe_size,
-      c.met_reading_dt                                  AS cust_meter_read_dt,
+       b.met_reading_dt                                  AS cust_meter_read_dt,
  (SELECT street_name
         FROM   street_master
         WHERE  street_no = Substring(b.can, 3, 2))      street_name,

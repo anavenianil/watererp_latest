@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -51,8 +53,59 @@ public class TariffMasterCustomRepositoryImpl extends
 	}
 
 	public List<java.util.Map<String, Object>> findTariffs(String can,
-			LocalDate validFrom, LocalDate validTo, float avgKL,
+			LocalDate validFrom, LocalDate validTo, float kl,
 			int unMeteredFlag, int newMeterFlag, int newMeterNoSvcFlag) {
+		
+		String sql1 = "select sum(months) months from (SELECT "+
+				"          case when Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) = 0 then 1 else Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) end months "+
+				"   FROM  "+
+				"     (SELECT id, "+
+				"               tariff_name, "+
+				"               (CASE WHEN (valid_from) < ? THEN STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s') ELSE valid_from END) valid_from, "+
+				"               (CASE WHEN (valid_to) > ? THEN STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s') ELSE valid_to END) valid_to, "+
+				"               active, "+
+				"               a.tariff_category_master_id "+
+				"   FROM "+
+				"     (SELECT * "+
+				"      FROM tariff_master "+
+				"      WHERE (valid_from) >=? "+
+				"        AND (valid_to) <= ? "+
+				"        AND ACTIVE = 1 "+
+				"      UNION SELECT * "+
+				"      FROM tariff_master "+
+				"      WHERE ? BETWEEN valid_from AND valid_to "+
+				"        AND ACTIVE = 1 "+
+				"      UNION SELECT * "+
+				"      FROM tariff_master "+
+				"      WHERE ? BETWEEN valid_from AND valid_to "+
+				"        AND ACTIVE = 1)a) a, "+
+				"       tariff_charges t, "+
+				"       cust_details c "+
+				"   WHERE c.can = ? "+
+				"     AND ? BETWEEN SLAB_MIN + 0.00001 AND SLAB_MAX "+
+				"     AND c.tariff_category_master_id+0=a.tariff_category_master_id+0 "+
+				"     AND a.id=t.tariff_master_id "+
+				"     and t.tariff_type_master_id=1 "+
+				"     ) a";
+		
+
+		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
+		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
+
+		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(
+				sql1, new Object[] { from, from, to, to, from, to, from, to, can, kl });	
+		
+		log.debug("Output from billing query for no of months:" + rows);		
+
+		float months = 0.0f;
+		
+		for (Map<String, Object> row : rows) {				
+			months = ((BigDecimal) row.get("months"))
+						.floatValue();
+		}
+		
+		float avgKL = kl / months;
+		
 		String sql = "SELECT tariff_type_master_id, avg(rate) rate,"+
 				"       CASE "+
 				"           WHEN tariff_type_master_id=1 THEN CASE "+
@@ -112,14 +165,11 @@ public class TariffMasterCustomRepositoryImpl extends
 				"GROUP BY tariff_type_master_id "+
 				"ORDER BY (valid_from) ";
 
-		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
-		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
-
-		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(
+		List<java.util.Map<String, Object>> rows1 = jdbcTemplate.queryForList(
 				sql, new Object[] { unMeteredFlag, newMeterNoSvcFlag, avgKL, newMeterFlag, avgKL,
 						from, from, to, to, from, to, from, to, can, avgKL });	
 		
-		log.debug("Output from billing query:" + rows);
-		return rows;
+		log.debug("Output from billing query:" + rows1);
+		return rows1;
 	}
 }
