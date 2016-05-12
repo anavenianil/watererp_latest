@@ -67,6 +67,7 @@
             <column name="lat" type="varchar(255)"/>
             <column name="longi" type="varchar(255)"/>
             <column name="meter_fix_date" type="date"/>
+            <column name="lock_charges" type="${floatType}"/>
             <column name="tariff_category_master_id" type="bigint"/>
         </createTable>
         

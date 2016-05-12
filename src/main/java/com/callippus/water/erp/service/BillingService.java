@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -104,6 +105,7 @@ public class BillingService {
 	float prevAvgKL = 0.0f;
 	float units = 0;
 	float unitsKL = 0.0f;
+	float minAvgKL = 0.0f;
 	String monthUpto;
 	boolean hasSewer;
 	float ewura = 0.0f;
@@ -208,15 +210,33 @@ public class BillingService {
 
 	public void commit(BillRunDetails brd) {
 		try {
-			CustDetails customer = custDetailsRepository
-					.findByCanForUpdate(brd.getCan());
 			BillFullDetails bfd = brd.getBillFullDetails();
 			BillDetails bd = brd.getBillDetails();
+			
+			bd.setStatus(BillingStatus.COMMITTED);
+			billDetailsRepository.save(bd);
 
+			brd.setStatus(BrdStatus.COMMITTED.getValue());
+			billRunDetailsRepository.save(brd);
+			
+			List<BillRunDetails> brdList =  billRunDetailsRepository.findTop3ByCanAndStatusOrderByIdDesc(brd.getCan(), BrdStatus.COMMITTED.getValue());
+			
+			float kl = 0.0f;
+			
+			for(BillRunDetails brd1:brdList){
+				kl = kl+brd1.getBillFullDetails().getUnits();
+			}
+						
+			prevAvgKL = kl / 3;
+			
+			prevAvgKL = (prevAvgKL < minAvgKL ? minAvgKL:prevAvgKL); 
+			
+			CustDetails customer = custDetailsRepository
+					.findByCanForUpdate(brd.getCan());
 			customer.setPrevBillType(bfd.getCurrentBillType());
 			
 			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
-			
+			customer.setPrevAvgKl(prevAvgKL);
 			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth()+"01", date_format));
 			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
 					.floatValue(), 2));
@@ -224,13 +244,8 @@ public class BillingService {
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
 
-			custDetailsRepository.save(customer);
-			
-			bd.setStatus(BillingStatus.COMMITTED);
-			billDetailsRepository.save(bd);
+			custDetailsRepository.saveAndFlush(customer);
 
-			brd.setStatus(BrdStatus.COMMITTED.getValue());
-			billRunDetailsRepository.save(brd);
 		} catch (Exception e) {
 			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0, 200));
 			brd.setStatus(BrdStatus.FAILED_COMMIT.getValue());
@@ -242,7 +257,11 @@ public class BillingService {
 
 		successRecords = 0;
 		failedRecords = 0;
-
+		
+		cd = configurationDetailsRepository.findOneByName("MIN_AVG_KL");
+		
+		minAvgKL = Float.parseFloat(cd.getValue());
+		
 		br = new BillRunMaster();
 		br.setArea("0");
 		br.setDate(ZonedDateTime.now());
@@ -721,7 +740,7 @@ public class BillingService {
 		if (!categories.contains(customer.getTariffCategoryMaster().getId()))
 			return CustValidation.INVALID_CATEGORY;
 
-		if (bill_details.getPresentReading() < bill_details.getInitialReading())
+		if (bill_details.getCurrentBillType().equals("M") && bill_details.getPresentReading() < bill_details.getInitialReading())
 			return CustValidation.INVALID_METER_READING;
 
 		if (customer.getMetReadingMo() == null

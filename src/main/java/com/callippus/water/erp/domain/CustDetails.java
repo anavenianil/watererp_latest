@@ -151,6 +151,9 @@ public class CustDetails implements Serializable {
     @Column(name = "meter_fix_date")
     private LocalDate meterFixDate;
 
+    @Column(name = "lock_charges")
+    private Float lockCharges;
+
     @ManyToOne
     @JoinColumn(name = "tariff_category_master_id")
     private TariffCategoryMaster tariffCategoryMaster;
@@ -499,6 +502,14 @@ public class CustDetails implements Serializable {
         this.meterFixDate = meterFixDate;
     }
 
+    public Float getLockCharges() {
+        return lockCharges;
+    }
+
+    public void setLockCharges(Float lockCharges) {
+        this.lockCharges = lockCharges;
+    }
+
     public TariffCategoryMaster getTariffCategoryMaster() {
         return tariffCategoryMaster;
     }
@@ -570,6 +581,7 @@ public class CustDetails implements Serializable {
             ", lat='" + lat + "'" +
             ", longi='" + longi + "'" +
             ", meterFixDate='" + meterFixDate + "'" +
+            ", lockCharges='" + lockCharges + "'" +
             '}';
     }
 }

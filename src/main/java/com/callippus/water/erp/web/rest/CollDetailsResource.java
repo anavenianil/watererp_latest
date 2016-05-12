@@ -81,7 +81,7 @@ public class CollDetailsResource {
 		
 		customer.setArrears(customer.getArrears() - collDetails.getReceiptAmt());
 		
-		custDetailsRepository.save(customer);
+		custDetailsRepository.saveAndFlush(customer);
 
 		return ResponseEntity
 				.created(new URI("/api/collDetailss/" + result.getId()))
