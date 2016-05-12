@@ -243,6 +243,7 @@ public class BillingService {
 			customer.setPrevReading(bfd.getPresentReading());
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
+			customer.setLockCharges(bfd.getLockCharges());
 
 			custDetailsRepository.saveAndFlush(customer);
 
@@ -480,6 +481,12 @@ public class BillingService {
 					log.debug("Usage Charge:" + (Double) charge.get("amount"));
 					bfd.setWaterCess(((Double) charge.get("amount"))
 							.floatValue());
+					
+					if(bill_details.getCurrentBillType().equals("M"))
+						bfd.setLockCharges(-1 * customer.getLockCharges());
+					else
+						bfd.setLockCharges(bfd.getWaterCess() + customer.getLockCharges());
+					
 				} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 					log.debug("Meter Rent:" + (Double) charge.get("amount"));
 					bfd.setMeterServiceCharge(((Double) charge.get("amount"))
