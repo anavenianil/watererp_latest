@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
+import com.callippus.water.erp.repository.BillRunDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -53,6 +54,9 @@ public class BillFullDetailsResource {
         
     @Inject
     private BillFullDetailsRepository billFullDetailsRepository;
+    
+    @Inject
+    private BillRunDetailsRepository billRunDetailsRepository;
     
     @Inject
     private ReportsCustomRepository reportsRepository;

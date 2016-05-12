@@ -142,6 +142,41 @@
 							</tr>
 						</tbody>
 					</table>
+			<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+    		<h3 class="panel-title pull-left">Previous Bill Details</h3>
+			</div>
+			</div>
+			<table class="table table-striped">
+			<thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span></th>
+                    <th jh-sort-by="can"><span>Can</span></th>
+                    <th jh-sort-by="fromDt"><span>From Date</span></th>
+                    <th jh-sort-by="toDt"><span>To Date</span></th>
+                    <th jh-sort-by="status"><span>Status</span></th>
+                    <th jh-sort-by="remarks"><span>Remarks</span></th>
+                    <!-- <th jh-sort-by="billFullDetails.id"><span>Bill</span></th> -->
+                    <th jh-sort-by="billFullDetails.id"><span>PDF</span></th>
+                </tr>
+            </thead>
+					<tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="billRunDetails in billRunDetailss track by billRunDetails.id">
+                    <td><a ui-sref="billRunDetails.detail({id:billRunDetails.id})">{{billRunDetails.id}}</a></td>
+                    <td>{{billRunDetails.can}}</td>
+                    <td>{{billRunDetails.fromDt | date:'medium'}}</td>
+                    <td>{{billRunDetails.toDt | date:'medium'}}</td>
+                    <td>{{billRunDetails.status}}</td>
+                    <td>{{billRunDetails.remarks}}</td>
+                    <!-- <td>
+                         <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
+                    </td> -->
+                    <td>
+                        <a ng-class="{'glyphicon glyphicon-save-file': billRunDetails.billFullDetails.id!=null}" href="/api/billFullDetailss/report/{{billRunDetails.billFullDetails.id}}"></a>
+                    </td>
+                </tr>
+            </tbody>
+			</table>
 				</div>
 			</div>
 		</div>
@@ -172,8 +207,20 @@
 		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
 			Back</span>
 	</button>
-	<button type="button" class="btn btn-success pull-right"
-		ng-click="approve(customerComplaints.id)" ng-disable="customerComplaints.status === 0 && orgRole.orgRoleName === 'ICT & Customer Care Officer'">
+	<!-- <button type="button" class="btn btn-success pull-right"
+		ng-click="approve(customerComplaints.id)" ng-if="orgRole.orgRoleName === 'Commercial Manager'" ng-disable="customerComplaints.status === 0 && orgRole.orgRoleName === 'ICT & Customer Care Officer'">
 		<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-	</button>
+	</button> -->
+	<button type="button" class="btn btn-danger pull-right"
+			ng-show="canDecline()" ng-disabled="isSaving"
+			ng-click="declineRequest(customerComplaints.id)">
+			<span class="glyphicon glyphicon-remove-circle"></span>
+			&nbsp;Decline
+		</button>
+	<button type="button" class="btn btn-success pull-right"
+			ng-show="canDecline()"
+			ng-click="approve(customerComplaints.id)">
+			<span class="glyphicon glyphicon-check"></span>
+			&nbsp;Approve
+		</button>
 </div>

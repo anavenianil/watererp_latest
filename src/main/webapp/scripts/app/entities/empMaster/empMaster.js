@@ -52,6 +52,10 @@ angular.module('watererpApp')
                         resolve: {
                             entity: function () {
                                 return {
+                                    dateOfBirth: null,
+                                    joiningDate: null,
+                                    maritalStatus: null,
+                                    employeeType: null,
                                     id: null
                                 };
                             }

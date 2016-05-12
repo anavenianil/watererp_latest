@@ -21,11 +21,20 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="date_of_birth" type="date"/>
+            
+            <column name="joining_date" type="date"/>
+            
+            <column name="marital_status" type="varchar(255)"/>
+            
+            <column name="employee_type" type="varchar(255)"/>
+            
             <column name="user_id" type="bigint"/>
             <column name="office_id_id" type="bigint"/>
             <column name="designation_master_id" type="bigint"/>
             <column name="directorate_id_id" type="bigint"/>
             <column name="status_master_id" type="bigint"/>
+            <column name="reporting_to_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -58,6 +67,12 @@
                                  constraintName="fk_empmaster_statusmaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="status_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="reporting_to_id"
+                                 baseTableName="emp_master"
+                                 constraintName="fk_empmaster_reportingto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="designation_master"/>
 
     </changeSet>
 </databaseChangeLog>
