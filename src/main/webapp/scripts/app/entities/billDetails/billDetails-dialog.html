@@ -159,14 +159,10 @@
 										<input id="field_metReadingDt" type="text"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="billDetails.metReadingDt" ng-change="setToMonth()"
-											is-open="datePickerForMetReadingDt.status.opened"
-											ng-disabled="isMetReadingDisabled"
-											ng-required="!isMetReadingDisabled" />
+											is-open="datePickerForMetReadingDt.status.opened" />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
-												ng-click="datePickerForMetReadingDtOpen($event)"
-												ng-disabled="isMetReadingDisabled"
-												ng-required="!isMetReadingDisabled">
+												ng-click="datePickerForMetReadingDtOpen($event)">
 												<i class="glyphicon glyphicon-calendar"></i>
 											</button>
 										</span>

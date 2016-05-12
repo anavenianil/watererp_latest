@@ -97,7 +97,6 @@ angular
 						if($scope.billDetails.currentBillType !== "M"){
 							$scope.isMetReadingDisabled = true;
 							$scope.billDetails.presentReading = null;
-							$scope.billDetails.metReadingDt = null;
 						}
 						else
 							$scope.isMetReadingDisabled = false;
