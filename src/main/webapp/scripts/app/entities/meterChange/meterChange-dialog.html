@@ -46,9 +46,9 @@
 									ng-model="meterChange.name" readonly />
 							</div>
 							<div class="col-sm-4">
-								<label for="address">Address</label> <input type="text"
-									class="form-control" id="field_address" name="address"
-									ng-model="meterChange.address" readonly />
+								<label for="mobileNo">mobileNo</label> <input type="text"
+									class="form-control" id="field_mobileNo" name="mobileNo"
+									ng-model="meterChange.custDetails.mobileNo" readonly />
 							</div>
 						</div>
 						<div class="row">
@@ -61,6 +61,11 @@
 								<label for="street">Street</label> <input type="text"
 									class="form-control" id="field_street" name="street"
 									ng-model="meterChange.custDetails.secCode" readonly />
+							</div>
+							<div class="col-sm-4">
+								<label for="address">Address</label> <input type="text"
+									class="form-control" id="field_address" name="address"
+									ng-model="meterChange.address" readonly />
 							</div>
 							<!-- <div class="col-sm-4">
 								<label for="field_custDetails">Cust Details</label> <select
@@ -112,13 +117,12 @@
 							</div>
 						</div>
 						<br>
-						<div class="row">
+						<div class="row" ng-show="canShow()">
 							<div class="col-sm-4">
 								<label for="field_newMeterNo">New Meter Number</label> <select
 									class="form-control" id="field_newMeterNo"
 									name="newMeterNo" ng-model="meterChange.newMeterNo"
-									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
-									required>
+									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
 									<option value=""></option>
 								</select>
 							</div>
@@ -132,25 +136,25 @@
 								<label class="control-label" for="field_newMeterReading">New
 									Meter Reading</label> <input type="number" class="form-control"
 									name="newMeterReading" id="field_newMeterReading"
-									ng-model="meterChange.newMeterReading" required/>
+									ng-model="meterChange.newMeterReading"/>
 							</div>
 						</div>
 					</fieldset>
-					<fieldset>
+					<fieldset ng-show="canShow()">
 						<legend>Approval Details</legend>
 						<div class="row">
 							<div class="col-sm-4">
 								<label for="field_user">Approved By</label> <select
 									class="form-control" id="field_user" name="user"
 									ng-model="meterChange.user"
-									ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users" required>
+									ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
 									<option value=""></option>
 								</select>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<input type="text" class="form-control" name="remarks"
-									id="field_remarks" ng-model="meterChange.remarks" required/>
+									id="field_remarks" ng-model="meterChange.remarks"/>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_approvedDate">Approved
@@ -160,7 +164,7 @@
 										<input id="field_approvedDate" type="text"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="meterChange.approvedDate"
-											is-open="datePickerForApprovedDate.status.opened" required/> <span
+											is-open="datePickerForApprovedDate.status.opened"/> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForApprovedDateOpen($event)">
