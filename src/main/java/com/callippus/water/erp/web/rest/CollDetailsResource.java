@@ -80,6 +80,8 @@ public class CollDetailsResource {
 		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
 		
 		customer.setArrears(customer.getArrears() - collDetails.getReceiptAmt());
+		
+		custDetailsRepository.save(customer);
 
 		return ResponseEntity
 				.created(new URI("/api/collDetailss/" + result.getId()))

@@ -14,6 +14,7 @@ angular
 					$scope.billDetails = {};
 					$scope.billDetails.isRounding = false;
 					$scope.isRounding = false;
+					$scope.isMetReadingDisabled = false;
 					$scope.currentBillTypes = [ {
 						id : 'M',
 						name : 'METERED'
@@ -91,6 +92,17 @@ angular
 						});
 					}
 
+					$scope.checkMetReadingField = function()
+					{
+						if($scope.billDetails.currentBillType !== "M"){
+							$scope.isMetReadingDisabled = true;
+							$scope.billDetails.presentReading = null;
+							$scope.billDetails.metReadingDt = null;
+						}
+						else
+							$scope.isMetReadingDisabled = false;
+					}
+					
 					$scope.onSelect = function($item, $model, $label) {
 						var arr = $item.split("-");
 						$scope.billDetails.can = arr[0].trim();
@@ -100,7 +112,7 @@ angular
 						$scope.getCustDetails($scope.billDetails.can);
 						$scope.isValidCust = true;
 					};
-
+					
 					$scope.datePickerForMetReadingDt = {};
 
 					$scope.datePickerForMetReadingDt.status = {
@@ -173,6 +185,7 @@ angular
 								$scope.billDetails = {};
 								$scope.isValidCust = false;
 								$scope.custDetails = {};
+								$scope.isMetReadingDisabled = false;
 								$state.go('billDetails.new');
 							}
 						});
