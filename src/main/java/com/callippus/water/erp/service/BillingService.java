@@ -243,12 +243,15 @@ public class BillingService {
 			customer.setPrevReading(bfd.getPresentReading());
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
-			customer.setLockCharges(bfd.getLockCharges());
+			if(bfd.getCurrentBillType().equals("M"))
+				customer.setLockCharges(0.0f);
+			else
+				customer.setLockCharges(bfd.getLockCharges());
 
 			custDetailsRepository.saveAndFlush(customer);
 
 		} catch (Exception e) {
-			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			brd.setStatus(BrdStatus.FAILED_COMMIT.getValue());
 			billRunDetailsRepository.save(brd);
 		}
@@ -365,8 +368,7 @@ public class BillingService {
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
@@ -386,6 +388,9 @@ public class BillingService {
 			if (monthsDiff == 0)
 				monthsDiff = 1;
 
+			if(monthsDiff < 0)
+				throw new Exception("Invalid From/To Dates");
+			
 			log.debug("Months:" + monthsDiff);
 			
 			if (bill_details.getCurrentBillType().equals("M")) {
@@ -425,7 +430,7 @@ public class BillingService {
 				}
 
 				kl = (float) (unitsKL);
-			} else if (bill_details.getCurrentBillType().equals("L")
+			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("S") || bill_details.getCurrentBillType().equals("B")
 					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");
@@ -471,6 +476,8 @@ public class BillingService {
 			bfd.setSewerageCess(0.00f);
 			bfd.setServiceCharge(0.00f);
 			bfd.setMeterServiceCharge(0.00f);
+			bfd.setLockCharges(0.00f);
+			
 			// Subtract Avg Water charges in case of Lock Bill scenario
 			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
@@ -482,10 +489,22 @@ public class BillingService {
 					bfd.setWaterCess(((Double) charge.get("amount"))
 							.floatValue());
 					
-					if(bill_details.getCurrentBillType().equals("M"))
-						bfd.setLockCharges(-1 * customer.getLockCharges());
+					if(bill_details.getCurrentBillType().equals("M")){
+						if(customer.getLockCharges() == null)	
+							bfd.setLockCharges(0.0f);							
+						else
+						{
+							bfd.setLockCharges(-1 * customer.getLockCharges());
+							bfd.setWaterCess(bfd.getWaterCess() + bfd.getLockCharges());
+						}
+					}
 					else
-						bfd.setLockCharges(bfd.getWaterCess() + customer.getLockCharges());
+					{
+						if(customer.getLockCharges() != null)
+							bfd.setLockCharges(bfd.getWaterCess() + customer.getLockCharges());
+						else
+							bfd.setLockCharges(bfd.getWaterCess());
+					}
 					
 				} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 					log.debug("Meter Rent:" + (Double) charge.get("amount"));
@@ -578,8 +597,7 @@ public class BillingService {
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
@@ -652,8 +670,7 @@ public class BillingService {
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);

@@ -59,6 +59,7 @@ public class BillDetailsResource {
 					.body(null);
 		}
 
+		//Check already whether Meter Reader details have been entered, but not billed.
 		BillDetails bd = billDetailsRepository.findValidBillForCan(billDetails
 				.getCan());
 
@@ -68,6 +69,16 @@ public class BillDetailsResource {
 							+ bd.getId().toString());
 		}
 
+		//Check already whether Meter Reader details have been entered AND billed.
+		bd = billDetailsRepository.findValidBillForCanAndMonth(billDetails
+				.getCan(), billDetails.getToMonth());
+
+		if (bd != null) {
+			throw new Exception(
+					"CAN already billed for the month:" + billDetails.getToMonth());
+		}
+
+		
 		BillDetails result = billDetailsRepository.save(billDetails);
 
 		return ResponseEntity

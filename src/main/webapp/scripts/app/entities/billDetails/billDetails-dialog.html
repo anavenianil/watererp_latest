@@ -21,6 +21,11 @@
 					</div>
 				</div>
 			</div>
+			<div ng-show="alreadyRun">
+				<div class="row danger">
+					<div class="col-sm-8">Bill Already Run for this month.</div>
+				</div>
+			</div>
 			<fieldset ng-disabled="recordExists">
 				<div class="list-group-item">
 					<div class="modal-body">

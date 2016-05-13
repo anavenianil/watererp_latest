@@ -9,6 +9,7 @@ angular
 						$stateParams, $http, User) {
 
 					$scope.recordExists = false;
+					$scope.alreadyRun = false;
 					$scope.billDetailss = [];
 					$scope.predicate = 'id';
 					$scope.billDetails = {};
@@ -228,7 +229,10 @@ angular
 						}).then(function(result) {
 							if (result != null && result !== '') {
 								$scope.billDetails = result;
-								$scope.recordExists = true;
+								if($scope.billDetails.status === 'INITIATED')
+									$scope.recordExists = true;
+								else if($scope.billDetails.status === 'COMMITTED')
+										$scope.alreadyRun = true;
 							}
 						});
 
