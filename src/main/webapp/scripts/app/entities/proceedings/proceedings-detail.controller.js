@@ -13,17 +13,15 @@ angular.module('watererpApp')
             });
         };
         
-        if($stateParams.id != null){
+        /*if($stateParams.id != null){
         	$scope.load($stateParams.id);
-        }
+        }*/
         
         if($stateParams.applicationTxnId !=null){
         	ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
                 $scope.proceedings = result;
                 $scope.itemRequireds = $scope.proceedings.itemRequireds;
-                
             });
-        	
         }
         
         

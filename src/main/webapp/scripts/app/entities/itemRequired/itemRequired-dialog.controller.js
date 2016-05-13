@@ -55,7 +55,8 @@ angular.module('watererpApp').controller('ItemRequiredDialogController',
         	console.log(indexVal + " " + quantity + " " + provide);
         	$scope.maxVal = quantity;
         	if(provide > quantity){
-        		alert("Provide can't exceed the given quantity");
+        		$scope.message = "Provide can't exceed the given quantity";
+        		$scope.proceedings.itemRequireds[indexVal].provided = 0;
         	}
         	console.log("max val:"+$scope.maxVal);
         }
