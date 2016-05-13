@@ -8,13 +8,15 @@
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
-							<th>Req. Id</th>
+							<th>Req. No</th>
+							<th>Request Type</th>
 							<th>From</th>
+							<th>To</th>
 							<th>Remarks</th>
 							<th>Actioned Date</th>
-							<th>To</th>
-							<th>Status</th>
 							<th>IP Address</th>
+							<th>Status</th>
+
 						</tr>
 					</thead>
 					<tbody infinite-scroll="loadPage(page + 1)"
@@ -23,16 +25,16 @@
 							ui-sref="applicationTxn.detail({id:item.domainObject})"> -->
 						<tr ng-repeat="item in requests"
 							ng-click="getDetails(item.id,item.requestMaster.id, item.domainObject)">
-							<td>{{item.id}}</td>
+							<td>{{item.domainObject}}</td>
+							<td>{{item.requestMaster.requestType}}</td>
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
-								<td>{{item.remarks}}</td>
-								<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							
-							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.actionedDate | date:'mediumDate'}}</td>
 							<td>{{item.ipAddress}}</td>
+							<td>{{item.statusMaster.status}}</td>
 						</tr>
 					</tbody>
 				</table>

@@ -6,9 +6,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         		ApplicationTxnService, Uom, ConfigurationDetails, PipeSizeMaster) {
 
         $scope.proceedings = {};
-        //$scope.percentagemasters = PercentageMaster.query();
-        //$scope.applicationtxns = ApplicationTxn.query();
-        $scope.itemrequireds = ItemRequired.query();
+        //$scope.itemrequireds = ItemRequired.query();
         $scope.materialmasters = MaterialMaster.query();
         $scope.uoms = Uom.query();
         $scope.pipeSizeMasters = PipeSizeMaster.query();
@@ -49,7 +47,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
                     $scope.configurationDetailss.push(result[i]);
                 }
                 $.each($scope.configurationDetailss, function(){
-                	//console.log(this.percentType);
                 	if(this.name == "SUPERVISION"){
                 		$scope.proceedings.supervisionPercentText = this.name;
                 		$scope.proceedings.supervisionPercent = parseInt(this.value);
@@ -86,7 +83,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:proceedingsUpdate', result);
-            //$uibModalInstance.close(result);
             $scope.isSaving = false;
             $state.go('applicationTxn');
         };
@@ -96,7 +92,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         };
 
         $scope.save = function () {
-        	//ApplicationTxnService.approveRequest($scope.proceedings.applicationTxn.id, $scope.proceedings.remarks);
             $scope.isSaving = true;
             if ($scope.proceedings.id != null) {
                 Proceedings.update($scope.proceedings, onSaveSuccess, onSaveError);
@@ -106,7 +101,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         };
 
         $scope.clear = function() {
-            //$uibModalInstance.dismiss('cancel');
         };
         
 
@@ -134,17 +128,16 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         	$scope.proceedings.subTotalB = $scope.proceedings.subTotalA  + $scope.proceedings.supervisionCharge 
         										+ $scope.proceedings.labourCharge +$scope.proceedings.siteSurvey;
         	$scope.proceedings.connectionFee = ($scope.proceedings.subTotalB * $scope.proceedings.connectionFeePercent)/100;
-        	//$scope.proceedings.applicationFormFee = 1000;
         	$scope.proceedings.grandTotal = $scope.proceedings.subTotalB + $scope.proceedings.connectionFee 
         									+ $scope.proceedings.applicationFormFee;
         }
         
         //for removing items
-        $scope.removeItemArr = function() {
-            var lastItem = $scope.itemArr.length-1;
-            $scope.count = $scope.count +1
-            $scope.proceedings.itemRequireds[$scope.count]= {};
-            $scope.itemArr.splice(lastItem);
+        $scope.removeItemArr = function(indexId) {
+        	//$scope.itemArr.length = $scope.itemArr.length-1;
+            $scope.count = $scope.count -1;
+            //$scope.proceedings.itemRequireds[$scope.count]= {};
+            $scope.itemArr.splice(indexId, 1);
             $scope.calculateRate();
           };
           

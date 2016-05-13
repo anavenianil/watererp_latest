@@ -505,7 +505,7 @@ public class RequestProcessService {
 		workflowService.getStatus();
 		rwh.setStatusMaster(statusMasterRepository.findOne(new Long(3)));// 3-PENDING
 		rwh.setIpAddress(workflowService.getIpAddress());
-		rwh.setRemarks(workflowService.getRemarks());
+		//rwh.setRemarks(workflowService.getRemarks());
 		rwh.setDomainObject(new Long(
 				workflowService.getDomain_object_id()));
 
@@ -561,8 +561,8 @@ public class RequestProcessService {
 				+ mode
 				+ "')),ip_address='"
 				+ ipAddress
-				//+ "',remarks='"
-				//+ remarks 
+				+ "',remarks='"
+				+ remarks 
 				+ "' where id=" + historyID;
 		log.debug("SQL : updateHistory > > " + updateHistory);
 		log.debug("Mode     " + mode);
