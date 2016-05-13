@@ -75,9 +75,9 @@ angular.module('watererpApp').controller(
 			CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'R'}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.collectionTypeMasters.push(result[i]);
                     $scope.revenueTypeMasters.push(result[i]);
                 }
+                $scope.collDetails.collectionTypeMaster.id = $scope.revenueTypeMasters[0].id;
             });
 
 			$scope.datePickerForReceiptDt = {};

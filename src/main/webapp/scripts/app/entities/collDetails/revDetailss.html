@@ -18,91 +18,46 @@
 				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
 					<th jh-sort-by="id"><span>ID</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<!-- <th jh-sort-by="reversalRef"><span>Reversal Reference</span> <span
+					<th jh-sort-by="collectionTypeMaster.id"><span>Revenue Type</span>
+						<span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="receiptDt"><span>Date</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="receiptNo"><span>Receipt Number</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
 					<th jh-sort-by="receiptAmt"><span>Amount</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="receiptDt"><span>Receipt Date</span> <span
+					<th jh-sort-by="paymentTypes.id"><span>Payment Mode</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="receiptMode"><span>Receipt Mode</span> <span
+					<th jh-sort-by="consName"><span>Approved By</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="instrNo"><span>Instrument Number</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="instrDt"><span>Instrument Date</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="instrIssuer"><span>Instrument Issuer</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<!-- <th jh-sort-by="svrStatus"><span>Server Status</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="can"><span>Can</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
-					<th jh-sort-by="consName"><span>Consumer Name</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<!-- <th jh-sort-by="terminalId"><span>Terminal Id</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="collTime"><span>Collection Time</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
-					<th jh-sort-by="txnStatus"><span>Transaction Status</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<!-- <th jh-sort-by="meterReaderId"><span>Meter Reader Id</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="userId"><span>User Id</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
-					<th jh-sort-by="remarks"><span>Remarks</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<!-- <th jh-sort-by="settlementId"><span>Settlement Id</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="extSettlementId"><span>Ext Settlement Id</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="lat"><span>Latitude</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="longI"><span>Longitude</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
-					<th jh-sort-by="paymentTypes.id"><span>payment Types</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="instrumentIssuerMaster.id"><span>Instrument Issuer Master</span>
 						<span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="collectionTypeMaster.id"><span>Collection Type Master</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="remarks"><span>Remarks</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody infinite-scroll="loadPage(page + 1)"
 				infinite-scroll-disabled="links['last'] == page">
 				<tr ng-repeat="collDetails in collDetailss track by collDetails.id">
-					<td><a ui-sref="collDetails.detail({id:collDetails.id})">{{collDetails.id}}</a></td>
-					<!-- <td>{{collDetails.reversalRef}}</td>
-					<td>{{collDetails.receiptNo}}</td> -->
-					<td>{{collDetails.receiptAmt}}</td>
+					<td><a ui-sref="revDetails.detail({id:collDetails.id})">{{collDetails.id}}</a></td>
+					<td><a
+						ui-sref="collectionTypeMaster.detail({id:collDetails.collectionTypeMaster.id})">{{collDetails.collectionTypeMaster.collName}}</a>
+					</td>
 					<td>{{collDetails.receiptDt | date:'medium'}}</td>
-					<td>{{collDetails.receiptMode}}</td>
-					<td>{{collDetails.instrNo}}</td>
-					<td>{{collDetails.instrDt | date:'mediumDate'}}</td>
-					<td>{{collDetails.instrIssuer}}</td>
-					<!-- <td>{{collDetails.svrStatus}}</td>
-					<td>{{collDetails.can}}</td> -->
-					<td>{{collDetails.consName}}</td>
-					<!-- <td>{{collDetails.terminalId}}</td>
-					<td>{{collDetails.collTime | date:'medium'}}</td> -->
-					<td>{{collDetails.txnStatus}}</td>
-					<!-- <td>{{collDetails.meterReaderId}}</td>
-					<td>{{collDetails.userId}}</td> -->
-					<td>{{collDetails.remarks}}</td>
-					<!-- <td>{{collDetails.settlementId}}</td>
-					<td>{{collDetails.extSettlementId}}</td>
-					<td>{{collDetails.lat}}</td>
-					<td>{{collDetails.longI}}</td> -->
+					<td>{{collDetails.receiptAmt}}</td>
 					<td><a
 						ui-sref="paymentTypes.detail({id:collDetails.paymentTypes.id})">{{collDetails.paymentTypes.paymentMode}}</a>
 					</td>
+					<td>{{collDetails.consName}}</td>
+					<td>{{collDetails.instrNo}}</td>
+					<td>{{collDetails.instrDt | date:'mediumDate'}}</td>
 					<td><a
 						ui-sref="instrumentIssuerMaster.detail({id:collDetails.instrumentIssuerMaster.id})">{{collDetails.instrumentIssuerMaster.instrumentIssuer}}</a>
 					</td>
-					<td><a
-						ui-sref="collectionTypeMaster.detail({id:collDetails.collectionTypeMaster.id})">{{collDetails.collectionTypeMaster.id}}</a>
-					</td>
+					<td>{{collDetails.remarks}}</td>
 					<td class="text-right">
 						<div class="btn-group flex-btn-group-container">
 
