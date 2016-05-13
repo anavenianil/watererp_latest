@@ -221,19 +221,34 @@ public class BillingService {
 			
 			float kl = 0.0f;
 			
-			for(BillRunDetails brd1:brdList){
-				kl = kl+brd1.getBillFullDetails().getUnits();
-			}
-						
-			prevAvgKL = kl / 3;
+			int i=0;
+			LocalDate fromDt = null, toDt = null;
 			
-			prevAvgKL = (prevAvgKL < minAvgKL ? minAvgKL:prevAvgKL); 
+			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			for(BillRunDetails brd1:brdList){
+				if(i == 0){
+					toDt = LocalDate.parse(brd1.getBillFullDetails().getToMonth()+"01", date_format);
+					toDt = toDt.withDayOfMonth(toDt.lengthOfMonth());
+				}
+
+				fromDt = LocalDate.parse(brd1.getBillFullDetails().getFromMonth() + "01", date_format);
+
+				kl = kl+brd1.getBillFullDetails().getUnits();
+				i++;
+			}
+			
+			long months = ChronoUnit.MONTHS.between(fromDt,toDt.plusDays(1));
+			
+			if(months > 0)
+				prevAvgKL = kl / months;
+			else
+				prevAvgKL = minAvgKL; 
+			
+			log.debug("From Dt:" + fromDt + ", To Dt:" + toDt + ", Prev AvgKL: " + prevAvgKL);
 			
 			CustDetails customer = custDetailsRepository
 					.findByCanForUpdate(brd.getCan());
-			customer.setPrevBillType(bfd.getCurrentBillType());
-			
-			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			customer.setPrevBillType(bfd.getCurrentBillType());						
 			customer.setPrevAvgKl(prevAvgKL);
 			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth()+"01", date_format));
 			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
@@ -434,8 +449,8 @@ public class BillingService {
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
 				avgKL = customer.getPrevAvgKl();
-				unitsKL = (float) (avgKL * monthsDiff);
-				units = (float) (avgKL * monthsDiff * 1000.0f);
+				unitsKL = 0.0f;
+				units = 0.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
 			} else if (bill_details.getCurrentBillType().equals("U")) {
@@ -448,8 +463,8 @@ public class BillingService {
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
 				avgKL = customer.getPrevAvgKl();
-				unitsKL = (float) (avgKL * monthsDiff);
-				units = (float) (avgKL * monthsDiff * 1000.0f);
+				unitsKL = 0.0f;
+				units = 0.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
 			}
