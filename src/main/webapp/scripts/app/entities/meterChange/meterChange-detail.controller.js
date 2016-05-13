@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('MeterChangeDetailController', function ($scope, $rootScope, $stateParams, MeterChange, CustDetails, MeterDetails, User,
-    		ApplicationTxnService, RequestWorkflowHistory, ParseLinks, $state, Principal, $http) {
+    		ApplicationTxnService, RequestWorkflowHistory, ParseLinks, $state, Principal, $http, $window) {
         $scope.meterChange = {};
         
         $scope.orgRole = Principal.getOrgRole();
@@ -111,7 +111,19 @@ angular.module('watererpApp')
 					function(response) {
 						console.log("Server response:"
 								+ JSON.stringify(response));
-						$state.go('meterChange');
+						$window.history.back();
+					});
+        }
+		
+		// to decline a request
+		$scope.declineRequest = function(meterChange){
+        	return $http.post('/api/meterChanges/declineRequest',
+					meterChange ).then(
+					function(response) {
+						console.log("Server response:"
+								+ JSON.stringify(response));
+						//$state.go('meterChange');
+						$window.history.back();
 					});
         }
     });

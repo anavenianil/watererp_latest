@@ -216,11 +216,10 @@ public class MeterChangeResource {
     		method = RequestMethod.POST, 
     		produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	//@Transactional
+	@Transactional
 	public ResponseEntity<MeterChange> approveMeterChange(
 			@RequestBody MeterChange meterChange) throws URISyntaxException {
 		log.debug("REST request to approve MeterChange : {}", meterChange);
-		//MeterChange meterChange = meterChangeRepository.findOne(meterChange.getId());
 		
 		if(meterChange.getStatus()==1){
 			MeterDetails prevMeter = meterChange.getPrevMeterNo();
@@ -268,16 +267,30 @@ public class MeterChangeResource {
     /**
      * Decline the request
      */
-    @RequestMapping(value = "/meterChangs/declineRequest",
-            method = RequestMethod.GET,
+    @RequestMapping(value = "/meterChanges/declineRequest",
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-	public ResponseEntity<Void> declineRequests(
-			@RequestParam(value = "id", required = false) Long id, HttpServletResponse response)
+	public ResponseEntity<MeterChange> declineRequests(
+			@RequestBody MeterChange meterChange)
 			throws Exception {
-		log.debug("REST request to get Requisition : {}", id);
+		log.debug("REST request to declineRequest() for Meter Change  : {}", meterChange);
 		
-		meterChangeWorkflowService.declineRequest(id);
-		return ResponseEntity.ok().build();
+		MeterDetails prevMeter = meterChange.getPrevMeterNo();
+    	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));//Status would be according to meter(burnt or stuck)
+    	meterDetailsRepository.save(prevMeter);
+    	
+    	if(meterChange.getNewMeterNo() != null){
+    		MeterDetails meterDetails = meterChange.getNewMeterNo();
+        	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
+        	meterDetailsRepository.save(meterDetails);
+    	}
+    	meterChange.setStatus(3);
+    	meterChangeRepository.save(meterChange);
+		workflowService.setRemarks(meterChange.getRemarks());
+		meterChangeWorkflowService.declineRequest(meterChange.getId());
+		return ResponseEntity.created(new URI("/api/meterChanges/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("meterChange", ""))
+				.body(null);
 	}
 }
