@@ -9,11 +9,13 @@ angular
 						$stateParams, $http, User) {
 
 					$scope.recordExists = false;
+					$scope.alreadyRun = false;
 					$scope.billDetailss = [];
 					$scope.predicate = 'id';
 					$scope.billDetails = {};
 					$scope.billDetails.isRounding = false;
 					$scope.isRounding = false;
+					$scope.isMetReadingDisabled = false;
 					$scope.currentBillTypes = [ {
 						id : 'M',
 						name : 'METERED'
@@ -91,6 +93,16 @@ angular
 						});
 					}
 
+					$scope.checkMetReadingField = function()
+					{
+						if($scope.billDetails.currentBillType !== "M"){
+							$scope.isMetReadingDisabled = true;
+							$scope.billDetails.presentReading = null;
+						}
+						else
+							$scope.isMetReadingDisabled = false;
+					}
+					
 					$scope.onSelect = function($item, $model, $label) {
 						var arr = $item.split("-");
 						$scope.billDetails.can = arr[0].trim();
@@ -100,7 +112,7 @@ angular
 						$scope.getCustDetails($scope.billDetails.can);
 						$scope.isValidCust = true;
 					};
-
+					
 					$scope.datePickerForMetReadingDt = {};
 
 					$scope.datePickerForMetReadingDt.status = {
@@ -173,6 +185,7 @@ angular
 								$scope.billDetails = {};
 								$scope.isValidCust = false;
 								$scope.custDetails = {};
+								$scope.isMetReadingDisabled = false;
 								$state.go('billDetails.new');
 							}
 						});
@@ -216,7 +229,10 @@ angular
 						}).then(function(result) {
 							if (result != null && result !== '') {
 								$scope.billDetails = result;
-								$scope.recordExists = true;
+								if($scope.billDetails.status === 'INITIATED')
+									$scope.recordExists = true;
+								else if($scope.billDetails.status === 'COMMITTED')
+										$scope.alreadyRun = true;
 							}
 						});
 

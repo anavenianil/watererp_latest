@@ -224,6 +224,11 @@
             "fieldId": 42,
             "fieldName": "meterFixDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 43,
+            "fieldName": "lockCharges",
+            "fieldType": "Float"
         }
     ],
     "changelogDate": "20160314132343",

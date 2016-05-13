@@ -219,6 +219,9 @@ public class BillFullDetails implements Serializable {
     @Column(name = "no_meter_amt")
     private Float noMeterAmt;
 
+    @Column(name = "lock_charges")
+    private Float lockCharges;
+
     public Long getId() {
         return id;
     }
@@ -731,6 +734,14 @@ public class BillFullDetails implements Serializable {
         this.noMeterAmt = noMeterAmt;
     }
 
+    public Float getLockCharges() {
+        return lockCharges;
+    }
+
+    public void setLockCharges(Float lockCharges) {
+        this.lockCharges = lockCharges;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -815,6 +826,7 @@ public class BillFullDetails implements Serializable {
             ", lat='" + lat + "'" +
             ", longi='" + longi + "'" +
             ", noMeterAmt='" + noMeterAmt + "'" +
+            ", lockCharges='" + lockCharges + "'" +
             '}';
     }
 }

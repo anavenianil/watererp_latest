@@ -783,4 +783,10 @@ public class CPSUtils {
 		return sb.toString();
 	}
 
+	public static String getStackLimited(String prefix, Throwable e, int length){
+		String message = prefix + "\n" +  e.getMessage() + "\n" + stackTraceToString(e);
+
+		return message.substring(0,length);
+	}
+	
 }
