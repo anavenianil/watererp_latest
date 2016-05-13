@@ -28,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -330,12 +329,12 @@ public class BillingService {
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
-			dTo = bill_details.getMetReadingDt();
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
 			// Currently Metered
 			if (bill_details.getCurrentBillType().equals("M")) {
 
-				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
+				long days = ChronoUnit.DAYS.between(dFrom,
 						dTo);
 
 				newMeterNoSvcFlag = (days < 15 ? 1 : 0);
@@ -383,12 +382,12 @@ public class BillingService {
 			BillDetails bill_details, LocalDate dFrom, LocalDate dTo) {
 
 		try {			
-			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
+			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
 
-			if (monthsDiff == 0)
+			if(monthsDiff == 0)
 				monthsDiff = 1;
-
-			if(monthsDiff < 0)
+				
+			if (monthsDiff < 0)
 				throw new Exception("Invalid From/To Dates");
 			
 			log.debug("Months:" + monthsDiff);
@@ -465,7 +464,7 @@ public class BillingService {
 					: 0);
 
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(bill_details.getCan(), dFrom, dTo, unitsKL,
+					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL,
 							unMeteredFlag, newMeterFlag, newMeterNoSvcFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
@@ -573,9 +572,11 @@ public class BillingService {
 
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
 
-			bfd.setUnits(unitsKL);
-			bfd.setFromMonth(bill_details.getFromMonth());
-			bfd.setToMonth(bill_details.getToMonth());
+			bfd.setUnits(unitsKL);						
+			bfd.setFromMonth(dFrom.format(DateTimeFormatter
+					.ofPattern("yyyyMM")));
+			bfd.setToMonth(dTo.format(DateTimeFormatter
+					.ofPattern("yyyyMM")));
 
 			log.debug("This is the BillFullDetails:" + bfd);
 
@@ -636,9 +637,9 @@ public class BillingService {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
-			dFrom = customer.getPrevBillMonth();
+			dFrom = customer.getPrevBillMonth().plusMonths(1);
 
-			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer

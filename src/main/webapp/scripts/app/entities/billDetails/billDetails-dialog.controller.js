@@ -259,7 +259,7 @@ angular
 												$scope.billDetails.fromMonth = $filter(
 														'date')
 														(
-																$scope.billDetails.prevBillMonth,
+																moment($scope.billDetails.prevBillMonth).add(1,'months').toDate(),
 																"yyyyMM");
 												$scope.billDetails.initialReading = $scope.custDetails.prevReading;
 												$scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
