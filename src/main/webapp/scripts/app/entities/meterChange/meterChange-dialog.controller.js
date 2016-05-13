@@ -2,12 +2,13 @@
 
 angular.module('watererpApp').controller('MeterChangeDialogController',
         function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN, ParseLinks,
-        		GetMeterDetails) {
+        		GetMeterDetails, Principal) {
 
         $scope.meterChange = {};
         $scope.custdetailss = CustDetails.query();
         //$scope.meterdetailss = MeterDetails.query();
         $scope.users = User.query();
+        $scope.orgRole = Principal.getOrgRole();
         $scope.meterChangeStatuss = [{"id":1,"status":"Meter Stuck"},{"id":2,"status":"Meter Break"}];
         
         $scope.CustDetailsId;
@@ -16,6 +17,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         $scope.load = function(id) {
             MeterChange.get({id : id}, function(result) {
                 $scope.meterChange = result;
+                $scope.meterChange.remarks = "";
             });
         };
         
@@ -91,7 +93,6 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 							function(result) {
 								$scope.meterChange.prevMeterNo = result;
 								$scope.prevMeterDetailss.push(result);
-								console.log($scope.prevMeterDetailss);
 							});
 		};
         
@@ -122,6 +123,50 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 		
 		$scope.getReason = function(status){
 			$scope.meterChange.reasonForChange = status;
+		}
+		
+		$scope.canShow = function() {
+			var ret = false;
+			switch ($scope.meterChange.status) {
+			case 0:
+				if ($scope.orgRole.id === 20)
+					ret = true;
+				break;
+			case 1:
+				if ($scope.orgRole.orgRoleName === 'Technical Zonal Supervisor')
+					ret = true;
+				break;
+			case 2:
+				if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
+					ret = true;
+				break;
+			case 3:
+				if ($scope.orgRole.orgRoleName === 'Technical Manager')
+					ret = true;
+				break;
+			case 4:
+				if ($scope.orgRole.orgRoleName === 'Assistant Accountant(Revenue)')
+					ret = true;
+				break;
+			case 5:
+				if ($scope.orgRole.orgRoleName === 'Stores & Supplies Officer')
+					ret = true;
+				break;
+			case 6:
+				if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
+					ret = true;
+				break;
+			case 7:
+				if ($scope.orgRole.orgRoleName === 'Billing Officer')
+					ret = true;
+				break;
+			case 8:
+				break;
+			default:
+				break;
+
+			}
+			return ret;
 		}
 		
 		

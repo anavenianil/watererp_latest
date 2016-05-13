@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -642,7 +643,7 @@ public class CPSUtils {
 		}
 		return returnValue;
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	public static int compareTwoDatesUptoDate(Date targetDate, Date baseDate)
 			throws Exception {
@@ -783,4 +784,10 @@ public class CPSUtils {
 		return sb.toString();
 	}
 
+	public static String getStackLimited(String prefix, Throwable e, int length){
+		String message = prefix + "\n" +  e.getMessage() + "\n" + stackTraceToString(e);
+
+		return message.substring(0,length);
+	}
+	
 }

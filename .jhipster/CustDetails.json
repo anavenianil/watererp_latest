@@ -6,6 +6,27 @@
             "otherEntityName": "tariffCategoryMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "pipeSizeMaster",
+            "otherEntityName": "pipeSizeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "divisionMaster",
+            "otherEntityName": "divisionMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "streetMaster",
+            "otherEntityName": "streetMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -224,6 +245,30 @@
             "fieldId": 42,
             "fieldName": "meterFixDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 43,
+            "fieldName": "lockCharges",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 44,
+            "fieldName": "idNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 45,
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+	    {
+            "fieldId": 46,
+            "fieldName": "status",
+            "fieldType": "CustStatus",
+            "fieldValues": "ACTIVE, TERMINATED",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20160314132343",

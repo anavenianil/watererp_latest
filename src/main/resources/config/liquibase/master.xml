@@ -64,7 +64,6 @@
     <include file="classpath:config/liquibase/changelog/20160324101502_added_entity_StreetMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160413093028_added_entity_MeterStatus.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160426103301_added_entity_IdProofMaster.xml" relativeToChangelogFile="false"/>    
     <include file="classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml" relativeToChangelogFile="false"/>    
     <include file="classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml" relativeToChangelogFile="false"/>
@@ -83,6 +82,7 @@
     <include file="classpath:config/liquibase/changelog/20160401094431_added_entity_TariffCharges.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160406042024_added_entity_InstrumentIssuerMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml" relativeToChangelogFile="false"/>

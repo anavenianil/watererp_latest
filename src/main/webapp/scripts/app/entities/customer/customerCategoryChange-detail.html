@@ -156,21 +156,20 @@
 			</div>
 		</div>
 
-		
+
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="canDecline()"
-			ng-click="approve(customer)">
+			ng-show="canDecline()" ng-click="approve(customer)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>
-		
+
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-		
+
 		<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
 			ng-click="declineRequest(customer.id)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
-		
+
 		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-if="orgRole.orgRoleName === 'Technical Manager'"
 			ng-click="approve(customer)">
@@ -185,5 +184,31 @@
 			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
 				Back</span>
 		</button>
+	</div>
+	<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="confirmForm">
+					<div class="modal-header"></div>
+					<div class="modal-body">
+						<p>
+						<h3>Request Submitted Successfully!</h3>
+						</p>
+						<div>
+							<h4>
+								<label>Application No.:&nbsp;&nbsp; </label>{{customer.id}}
+							</h4>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>

@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -53,6 +55,11 @@ public class TariffMasterCustomRepositoryImpl extends
 	public List<java.util.Map<String, Object>> findTariffs(String can,
 			LocalDate validFrom, LocalDate validTo, float avgKL,
 			int unMeteredFlag, int newMeterFlag, int newMeterNoSvcFlag) {
+		
+
+		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
+		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
+
 		String sql = "SELECT tariff_type_master_id, avg(rate) rate,"+
 				"       CASE "+
 				"           WHEN tariff_type_master_id=1 THEN CASE "+
@@ -112,14 +119,11 @@ public class TariffMasterCustomRepositoryImpl extends
 				"GROUP BY tariff_type_master_id "+
 				"ORDER BY (valid_from) ";
 
-		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
-		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
-
-		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(
+		List<java.util.Map<String, Object>> rows1 = jdbcTemplate.queryForList(
 				sql, new Object[] { unMeteredFlag, newMeterNoSvcFlag, avgKL, newMeterFlag, avgKL,
 						from, from, to, to, from, to, from, to, can, avgKL });	
 		
-		log.debug("Output from billing query:" + rows);
-		return rows;
+		log.debug("Output from billing query:" + rows1);
+		return rows1;
 	}
 }

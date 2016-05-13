@@ -104,6 +104,7 @@ public class BillingService {
 	float prevAvgKL = 0.0f;
 	float units = 0;
 	float unitsKL = 0.0f;
+	float minAvgKL = 0.0f;
 	String monthUpto;
 	boolean hasSewer;
 	float ewura = 0.0f;
@@ -208,31 +209,48 @@ public class BillingService {
 
 	public void commit(BillRunDetails brd) {
 		try {
-			CustDetails customer = custDetailsRepository
-					.findByCanForUpdate(brd.getCan());
 			BillFullDetails bfd = brd.getBillFullDetails();
 			BillDetails bd = brd.getBillDetails();
-
-			customer.setPrevBillType(bfd.getCurrentBillType());
-			
-			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
-			
-			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth()+"01", date_format));
-			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
-					.floatValue(), 2));
-			customer.setPrevReading(bfd.getPresentReading());
-			customer.setMetReadingDt(bfd.getMetReadingDt());
-			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
-
-			custDetailsRepository.save(customer);
 			
 			bd.setStatus(BillingStatus.COMMITTED);
 			billDetailsRepository.save(bd);
 
 			brd.setStatus(BrdStatus.COMMITTED.getValue());
 			billRunDetailsRepository.save(brd);
+			
+			List<BillRunDetails> brdList =  billRunDetailsRepository.findTop3ByCanAndStatusOrderByIdDesc(brd.getCan(), BrdStatus.COMMITTED.getValue());
+			
+			float kl = 0.0f;
+			
+			for(BillRunDetails brd1:brdList){
+				kl = kl+brd1.getBillFullDetails().getUnits();
+			}
+						
+			prevAvgKL = kl / 3;
+			
+			prevAvgKL = (prevAvgKL < minAvgKL ? minAvgKL:prevAvgKL); 
+			
+			CustDetails customer = custDetailsRepository
+					.findByCanForUpdate(brd.getCan());
+			customer.setPrevBillType(bfd.getCurrentBillType());
+			
+			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			customer.setPrevAvgKl(prevAvgKL);
+			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth()+"01", date_format));
+			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
+					.floatValue(), 2));
+			customer.setPrevReading(bfd.getPresentReading());
+			customer.setMetReadingDt(bfd.getMetReadingDt());
+			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
+			if(bfd.getCurrentBillType().equals("M"))
+				customer.setLockCharges(0.0f);
+			else
+				customer.setLockCharges(bfd.getLockCharges());
+
+			custDetailsRepository.saveAndFlush(customer);
+
 		} catch (Exception e) {
-			brd.setRemarks(CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			brd.setStatus(BrdStatus.FAILED_COMMIT.getValue());
 			billRunDetailsRepository.save(brd);
 		}
@@ -242,7 +260,11 @@ public class BillingService {
 
 		successRecords = 0;
 		failedRecords = 0;
-
+		
+		cd = configurationDetailsRepository.findOneByName("MIN_AVG_KL");
+		
+		minAvgKL = Float.parseFloat(cd.getValue());
+		
 		br = new BillRunMaster();
 		br.setArea("0");
 		br.setDate(ZonedDateTime.now());
@@ -307,12 +329,12 @@ public class BillingService {
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
-			dTo = bill_details.getMetReadingDt();
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
 			// Currently Metered
 			if (bill_details.getCurrentBillType().equals("M")) {
 
-				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
+				long days = ChronoUnit.DAYS.between(dFrom,
 						dTo);
 
 				newMeterNoSvcFlag = (days < 15 ? 1 : 0);
@@ -345,8 +367,7 @@ public class BillingService {
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
@@ -361,11 +382,14 @@ public class BillingService {
 			BillDetails bill_details, LocalDate dFrom, LocalDate dTo) {
 
 		try {			
-			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
+			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
 
-			if (monthsDiff == 0)
+			if(monthsDiff == 0)
 				monthsDiff = 1;
-
+				
+			if (monthsDiff < 0)
+				throw new Exception("Invalid From/To Dates");
+			
 			log.debug("Months:" + monthsDiff);
 			
 			if (bill_details.getCurrentBillType().equals("M")) {
@@ -405,7 +429,7 @@ public class BillingService {
 				}
 
 				kl = (float) (unitsKL);
-			} else if (bill_details.getCurrentBillType().equals("L")
+			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("S") || bill_details.getCurrentBillType().equals("B")
 					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");
@@ -451,6 +475,8 @@ public class BillingService {
 			bfd.setSewerageCess(0.00f);
 			bfd.setServiceCharge(0.00f);
 			bfd.setMeterServiceCharge(0.00f);
+			bfd.setLockCharges(0.00f);
+			
 			// Subtract Avg Water charges in case of Lock Bill scenario
 			for (Map<String, Object> charge : charges) {
 				if (((Long) charge.get("tariff_type_master_id")) == 1) {
@@ -461,6 +487,24 @@ public class BillingService {
 					log.debug("Usage Charge:" + (Double) charge.get("amount"));
 					bfd.setWaterCess(((Double) charge.get("amount"))
 							.floatValue());
+					
+					if(bill_details.getCurrentBillType().equals("M")){
+						if(customer.getLockCharges() == null)	
+							bfd.setLockCharges(0.0f);							
+						else
+						{
+							bfd.setLockCharges(-1 * customer.getLockCharges());
+							bfd.setWaterCess(bfd.getWaterCess() + bfd.getLockCharges());
+						}
+					}
+					else
+					{
+						if(customer.getLockCharges() != null)
+							bfd.setLockCharges(bfd.getWaterCess() + customer.getLockCharges());
+						else
+							bfd.setLockCharges(bfd.getWaterCess());
+					}
+					
 				} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 					log.debug("Meter Rent:" + (Double) charge.get("amount"));
 					bfd.setMeterServiceCharge(((Double) charge.get("amount"))
@@ -528,9 +572,11 @@ public class BillingService {
 
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
 
-			bfd.setUnits(unitsKL);
-			bfd.setFromMonth(bill_details.getFromMonth());
-			bfd.setToMonth(bill_details.getToMonth());
+			bfd.setUnits(unitsKL);						
+			bfd.setFromMonth(dFrom.format(DateTimeFormatter
+					.ofPattern("yyyyMM")));
+			bfd.setToMonth(dTo.format(DateTimeFormatter
+					.ofPattern("yyyyMM")));
 
 			log.debug("This is the BillFullDetails:" + bfd);
 
@@ -552,8 +598,7 @@ public class BillingService {
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
@@ -592,9 +637,9 @@ public class BillingService {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
-			dFrom = customer.getPrevBillMonth();
+			dFrom = customer.getPrevBillMonth().plusMonths(1);
 
-			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer
@@ -626,8 +671,7 @@ public class BillingService {
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:"
-					+ CPSUtils.stackTraceToString(e).substring(0, 200));
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			billRunDetailsRepository.save(brd);
 
 			br.setFailed(++failedRecords);
@@ -721,7 +765,7 @@ public class BillingService {
 		if (!categories.contains(customer.getTariffCategoryMaster().getId()))
 			return CustValidation.INVALID_CATEGORY;
 
-		if (bill_details.getPresentReading() < bill_details.getInitialReading())
+		if (bill_details.getCurrentBillType().equals("M") && bill_details.getPresentReading() < bill_details.getInitialReading())
 			return CustValidation.INVALID_METER_READING;
 
 		if (customer.getMetReadingMo() == null
