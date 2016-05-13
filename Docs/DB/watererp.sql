@@ -624,7 +624,8 @@ INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`rece
  (11,NULL,NULL,6000,'2016-05-12 15:48:12',NULL,'45628','2016-05-12',NULL,NULL,'617871900 ',' VENKATA SATYA SAI SUDHA RANI AND OTHERS ',NULL,NULL,'C',NULL,NULL,'paid5',NULL,NULL,NULL,NULL,3,1,1),
  (12,NULL,NULL,1212,'2016-05-12 15:50:17',NULL,NULL,NULL,NULL,NULL,'617805102 ',' ISUKAPALLI VENKATA LAKSHMI NARASIMHA PRASAD ',NULL,NULL,'C',NULL,NULL,'remarks 1',NULL,NULL,NULL,NULL,1,NULL,1),
  (16,NULL,NULL,123,'2016-05-12 17:50:30',NULL,'ABC','2016-05-12',NULL,NULL,NULL,'ABC',NULL,NULL,'R',NULL,NULL,'ABC',NULL,NULL,NULL,NULL,2,2,1),
- (17,NULL,NULL,123,'2016-05-12 18:15:57',NULL,'PQR','2016-05-12',NULL,NULL,NULL,'PQR',NULL,NULL,'R',NULL,NULL,'PQR',NULL,NULL,NULL,NULL,2,2,1);
+ (17,NULL,NULL,123,'2016-05-12 18:15:57',NULL,'PQR','2016-05-12',NULL,NULL,NULL,'PQR',NULL,NULL,'R',NULL,NULL,'PQR',NULL,NULL,NULL,NULL,2,2,1),
+ (18,NULL,NULL,123,'2016-05-13 09:47:41',NULL,'ABC123','2016-05-13',NULL,NULL,NULL,'DR.MOHAMMAD ABDUL AZEEMSADIQ',NULL,NULL,'R',NULL,NULL,'REMARK 1',NULL,NULL,NULL,NULL,2,2,1);
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -653,7 +654,9 @@ INSERT INTO `collection_type_master` (`id`,`coll_name`,`txn_type`) VALUES
  (5,'EXPENSE 1','E'),
  (6,'EXPENSE 2','E'),
  (7,'EXPENSE 3','E'),
- (8,'EXPENSE 4','E');
+ (8,'EXPENSE 4','E'),
+ (9,'RENT','R'),
+ (10,'SCRAPE SALE','R');
 /*!40000 ALTER TABLE `collection_type_master` ENABLE KEYS */;
 
 
@@ -6240,7 +6243,7 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('q7XsLPGhgLfQI03IAy+sMg==',15,'f96/QO7HrHkS+8H1N6VIWw==','2016-05-09','110.224.230.23','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('QNKrooOpjWJXpm7AAOEFQQ==',20,'DMvylSUGtrldSFzxyjrKXw==','2016-04-19','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('Tlgbix/WUw3N7YFaR4+YCA==',3,'MPjdww/7fSNJ5oKEUL4TTg==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
+ ('Tlgbix/WUw3N7YFaR4+YCA==',3,'LEQmwPQ+tFVO/YbhtVHcgg==','2016-05-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('uuRMPqbtEBc6QVsYIXN2pA==',21,'oeCuCAeQjxjpbYtfS8o4/w==','2016-04-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('V9rQqqIRC/goYf0v4KMZ3g==',30,'d8YPqVoG4JnyxyH1XvqOyA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('vCltSl9MsKd488jrCU8XQw==',5,'m9uZJi+jxdO842VU7ckQzA==','2016-05-10','122.170.237.113','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),

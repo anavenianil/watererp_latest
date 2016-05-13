@@ -10,8 +10,9 @@ angular.module('watererpApp').controller(
 			$scope.instrEnabled = true;
 			$scope.paymenttypess = PaymentTypes.query();
 			$scope.instrumentissuermasters = InstrumentIssuerMaster.query();
-			$scope.collectionTypeMasters = CollectionTypeMaster.query();
-			$scope.revenueTypeMasters = RevenueTypeMaster.query();
+			//$scope.collectionTypeMasters = CollectionTypeMaster.query();
+			//$scope.revenueTypeMasters = RevenueTypeMaster.query();
+			$scope.revenueTypeMasters = [];
 			
 			$scope.custDetails = {};
 			$scope.collDetails = {};
@@ -70,6 +71,14 @@ angular.module('watererpApp').controller(
 				$scope.isSaving = true;
 				RevDetails.save($scope.collDetails, onSaveSuccess, onSaveError);
 			};
+			
+			CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'R'}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.collectionTypeMasters.push(result[i]);
+                    $scope.revenueTypeMasters.push(result[i]);
+                }
+            });
 
 			$scope.datePickerForReceiptDt = {};
 
