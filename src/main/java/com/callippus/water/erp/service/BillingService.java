@@ -226,6 +226,9 @@ public class BillingService {
 			
 			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
 			for(BillRunDetails brd1:brdList){
+				if(!brd1.getBillFullDetails().getCurrentBillType().equals("M"))
+					continue;
+				
 				if(i == 0){
 					toDt = LocalDate.parse(brd1.getBillFullDetails().getToMonth()+"01", date_format);
 					toDt = toDt.withDayOfMonth(toDt.lengthOfMonth());
@@ -401,7 +404,7 @@ public class BillingService {
 			
 			log.debug("Months:" + monthsDiff);
 			
-			if (bill_details.getCurrentBillType().equals("M")) {
+			if (bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L"))) {
 
 				if (!customer.getPrevReading().equals("0")) {
 					if(bill_details.getIsRounding())
@@ -438,7 +441,23 @@ public class BillingService {
 				}
 
 				kl = (float) (unitsKL);
-			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("S") || bill_details.getCurrentBillType().equals("B")
+			} else if(bill_details.getCurrentBillType().equals("M")) //Moved from Stuck/Burnt to Metered in the middle of the month
+			{
+
+				log.debug("########################################");
+				log.debug("    STUCK/BURNT TO METERED BILL CASE");
+				log.debug("########################################");
+
+				log.debug("Customer Info:" + customer.toString());
+				log.debug("From:" + dFrom + ", To:" + dTo);
+
+				avgKL = customer.getPrevAvgKl();
+				unitsKL = 0.0f;
+				units = 0.0f;
+				log.debug("Units:" + units + " based on avgKL:" + avgKL
+						+ " for " + monthsDiff + " months.");
+			}			
+			else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("S") || bill_details.getCurrentBillType().equals("B")
 					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");

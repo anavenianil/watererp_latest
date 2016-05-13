@@ -119,6 +119,7 @@ angular.module('watererpApp').controller(
 				$scope.collDetails.receiptDt = new Date();
 				$scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
 				$scope.collDetails.txnStatus = "C";
+				$scope.getCustDetails(arr[0].trim());
 				$scope.custInfo = "";
 				$scope.isValidCust = true;
 			};
@@ -159,17 +160,10 @@ angular.module('watererpApp').controller(
 			};
 
 			$scope.getCustDetails = function(can) {
-				if ($scope.editForm.field_custDetails.$invalid) {
-					$scope.clear();
-					return;
-				}
-
 				CustDetailsService.get({
 					can : can
 				}, function(result) {
 					$scope.custDetails = result;
-					$scope.collDetails.consName = $scope.custDetails.consName;
-					$scope.collDetails.can = $scope.custDetails.can;
 				});
 			}
 
