@@ -54,21 +54,23 @@ public class TariffMasterCustomRepositoryImpl extends
 
 	public List<java.util.Map<String, Object>> findTariffs(String can,
 			LocalDate validFrom, LocalDate validTo, float avgKL,
-			int unMeteredFlag, int newMeterFlag, int newMeterNoSvcFlag) {
+			int unMeteredFlag, int newMeterFlag) {
 		
 
 		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
 		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
 
-		String sql = "SELECT tariff_type_master_id, avg(rate) rate,"+
+		String sql = "select tariff_type_master_id, avg(rate) rate,sum(amount) amount from " + 
+				"(" +
+				"SELECT tariff_type_master_id, rate,"+
 				"       CASE "+
 				"           WHEN tariff_type_master_id=1 THEN CASE "+
-				"                                                 WHEN 1=? THEN sum(rate * months * min_unmetered_kl) "+
-				"                                                 ELSE sum(rate * months * avg_kl) "+
+				"                                                 WHEN 1=? THEN rate * months * min_unmetered_kl "+
+				"                                                 ELSE rate * months * avg_kl "+
 				"                                             END "+
 				"           ELSE CASE "+
-				"                    WHEN 1=? THEN SUM(0) "+
-				"                    ELSE sum(rate * months) "+
+				"                    WHEN Timestampdiff(day, valid_from, valid_to + INTERVAL 1 day) < 15 THEN 0 "+
+				"                    ELSE rate * months "+
 				"                END "+
 				"       END amount "+
 				"FROM "+
@@ -116,11 +118,11 @@ public class TariffMasterCustomRepositoryImpl extends
 				"     AND ? BETWEEN SLAB_MIN + 0.00001 AND SLAB_MAX "+
 				"     AND c.tariff_category_master_id+0=a.tariff_category_master_id+0 "+
 				"     AND a.id=t.tariff_master_id) a "+
-				"GROUP BY tariff_type_master_id "+
-				"ORDER BY (valid_from) ";
+				"	) a " +
+				"GROUP BY tariff_type_master_id ";
 
 		List<java.util.Map<String, Object>> rows1 = jdbcTemplate.queryForList(
-				sql, new Object[] { unMeteredFlag, newMeterNoSvcFlag, avgKL, newMeterFlag, avgKL,
+				sql, new Object[] { unMeteredFlag, avgKL, newMeterFlag, avgKL,
 						from, from, to, to, from, to, from, to, can, avgKL });	
 		
 		log.debug("Output from billing query:" + rows1);

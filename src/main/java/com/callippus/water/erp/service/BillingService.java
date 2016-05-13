@@ -112,7 +112,6 @@ public class BillingService {
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
 	int newMeterFlag = 0;
-	int newMeterNoSvcFlag = 0;
 	int unMeteredFlag = 0;
 	int successRecords = 0;
 	int failedRecords = 0;
@@ -335,10 +334,8 @@ public class BillingService {
 			if (bill_details.getCurrentBillType().equals("M")) {
 
 				long days = ChronoUnit.DAYS.between(dFrom,
-						dTo);
-
-				newMeterNoSvcFlag = (days < 15 ? 1 : 0);
-
+						dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
+				
 				if (days <= 0) {
 					throw new Exception("Invalid From:"
 							+ dFrom.format(DateTimeFormatter
@@ -382,12 +379,9 @@ public class BillingService {
 			BillDetails bill_details, LocalDate dFrom, LocalDate dTo) {
 
 		try {			
-			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
+			long monthsDiff = ChronoUnit.MONTHS.between(dFrom.withDayOfMonth(1), dTo.plusDays(1));
 
-			if(monthsDiff == 0)
-				monthsDiff = 1;
-				
-			if (monthsDiff < 0)
+			if (monthsDiff <= 0)
 				throw new Exception("Invalid From/To Dates");
 			
 			log.debug("Months:" + monthsDiff);
@@ -465,7 +459,7 @@ public class BillingService {
 
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
 					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL,
-							unMeteredFlag, newMeterFlag, newMeterNoSvcFlag);
+							unMeteredFlag, newMeterFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);

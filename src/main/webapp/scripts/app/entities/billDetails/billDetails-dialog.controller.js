@@ -214,7 +214,7 @@ angular
 
 							var months = toMonthNo - fromMonthNo;
 
-							if (months > 1)
+							if (months > 0)
 								return false
 							else
 								return true
