@@ -56,6 +56,15 @@ angular.module('watererpApp')
 				$scope.customerComplaintss.push(result);
 			});
 		};
+		
+		 $scope.getRequestTypeId = function(domainId,requestType) {
+     		if(requestType == 1){//INCORRECT BILL
+     			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:3});
+     		}
+     		if(requestType == 2){//INCORRECT BILL
+     			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:4});
+     		}
+	        }
         
         $scope.onSelect = function($item, $model, $label) {
 			var arr = $item.split("-");

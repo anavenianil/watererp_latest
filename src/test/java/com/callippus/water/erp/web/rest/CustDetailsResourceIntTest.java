@@ -31,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 
 /**
  * Test class for the CustDetailsResource REST controller.
@@ -149,6 +150,13 @@ public class CustDetailsResourceIntTest {
 
     private static final Float DEFAULT_LOCK_CHARGES = 1F;
     private static final Float UPDATED_LOCK_CHARGES = 2F;
+    private static final String DEFAULT_ID_NUMBER = "AAAAA";
+    private static final String UPDATED_ID_NUMBER = "BBBBB";
+    private static final String DEFAULT_EMAIL = "AAAAA";
+    private static final String UPDATED_EMAIL = "BBBBB";
+    
+    private static final CustStatus DEFAULT_STATUS = CustStatus.ACTIVE;
+    private static final CustStatus UPDATED_STATUS = CustStatus.TERMINATED;
 
     @Inject
     private CustDetailsRepository custDetailsRepository;
@@ -219,6 +227,9 @@ public class CustDetailsResourceIntTest {
         custDetails.setLongi(DEFAULT_LONGI);
         custDetails.setMeterFixDate(DEFAULT_METER_FIX_DATE);
         custDetails.setLockCharges(DEFAULT_LOCK_CHARGES);
+        custDetails.setIdNumber(DEFAULT_ID_NUMBER);
+        custDetails.setEmail(DEFAULT_EMAIL);
+        custDetails.setStatus(DEFAULT_STATUS);
     }
 
     @Test
@@ -280,6 +291,9 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
         assertThat(testCustDetails.getMeterFixDate()).isEqualTo(DEFAULT_METER_FIX_DATE);
         assertThat(testCustDetails.getLockCharges()).isEqualTo(DEFAULT_LOCK_CHARGES);
+        assertThat(testCustDetails.getIdNumber()).isEqualTo(DEFAULT_ID_NUMBER);
+        assertThat(testCustDetails.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testCustDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -306,6 +320,24 @@ public class CustDetailsResourceIntTest {
         int databaseSizeBeforeTest = custDetailsRepository.findAll().size();
         // set the field null
         custDetails.setConsName(null);
+
+        // Create the CustDetails, which fails.
+
+        restCustDetailsMockMvc.perform(post("/api/custDetailss")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(custDetails)))
+                .andExpect(status().isBadRequest());
+
+        List<CustDetails> custDetailss = custDetailsRepository.findAll();
+        assertThat(custDetailss).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = custDetailsRepository.findAll().size();
+        // set the field null
+        custDetails.setStatus(null);
 
         // Create the CustDetails, which fails.
 
@@ -371,7 +403,10 @@ public class CustDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
                 .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
                 .andExpect(jsonPath("$.[*].meterFixDate").value(hasItem(DEFAULT_METER_FIX_DATE.toString())))
-                .andExpect(jsonPath("$.[*].lockCharges").value(hasItem(DEFAULT_LOCK_CHARGES.doubleValue())));
+                .andExpect(jsonPath("$.[*].lockCharges").value(hasItem(DEFAULT_LOCK_CHARGES.doubleValue())))
+                .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
+                .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -427,7 +462,10 @@ public class CustDetailsResourceIntTest {
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
             .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
             .andExpect(jsonPath("$.meterFixDate").value(DEFAULT_METER_FIX_DATE.toString()))
-            .andExpect(jsonPath("$.lockCharges").value(DEFAULT_LOCK_CHARGES.doubleValue()));
+            .andExpect(jsonPath("$.lockCharges").value(DEFAULT_LOCK_CHARGES.doubleValue()))
+            .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -490,6 +528,9 @@ public class CustDetailsResourceIntTest {
         custDetails.setLongi(UPDATED_LONGI);
         custDetails.setMeterFixDate(UPDATED_METER_FIX_DATE);
         custDetails.setLockCharges(UPDATED_LOCK_CHARGES);
+        custDetails.setIdNumber(UPDATED_ID_NUMBER);
+        custDetails.setEmail(UPDATED_EMAIL);
+        custDetails.setStatus(UPDATED_STATUS);
 
         restCustDetailsMockMvc.perform(put("/api/custDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -543,6 +584,9 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getLongi()).isEqualTo(UPDATED_LONGI);
         assertThat(testCustDetails.getMeterFixDate()).isEqualTo(UPDATED_METER_FIX_DATE);
         assertThat(testCustDetails.getLockCharges()).isEqualTo(UPDATED_LOCK_CHARGES);
+        assertThat(testCustDetails.getIdNumber()).isEqualTo(UPDATED_ID_NUMBER);
+        assertThat(testCustDetails.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testCustDetails.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

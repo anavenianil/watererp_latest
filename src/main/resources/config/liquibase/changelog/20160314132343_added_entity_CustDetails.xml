@@ -24,51 +24,106 @@
             <column name="can" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            
             <column name="div_code" type="varchar(255)"/>
+            
             <column name="sec_code" type="varchar(255)"/>
+            
             <column name="sec_name" type="varchar(255)"/>
+            
             <column name="met_reader_code" type="varchar(255)"/>
+            
             <column name="conn_date" type="date"/>
+            
             <column name="cons_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            
             <column name="house_no" type="varchar(255)"/>
+            
             <column name="address" type="varchar(255)"/>
+            
             <column name="city" type="varchar(255)"/>
+            
             <column name="pin_code" type="varchar(255)"/>
+            
             <column name="category_unused" type="varchar(255)"/>
+            
             <column name="pipe_size" type="${floatType}"/>
+            
             <column name="board_meter" type="varchar(255)"/>
+            
             <column name="sewerage" type="varchar(255)"/>
+            
             <column name="meter_no" type="varchar(255)"/>
+            
             <column name="prev_bill_type" type="varchar(255)"/>
+            
             <column name="prev_bill_month" type="date"/>
+            
             <column name="prev_avg_kl" type="${floatType}"/>
+            
             <column name="met_reading_dt" type="date"/>
+            
             <column name="prev_reading" type="${floatType}"/>
+            
             <column name="met_reading_mo" type="date"/>
+            
             <column name="met_avg_kl" type="${floatType}"/>
+            
             <column name="arrears" type="${floatType}"/>
+            
             <column name="reversal_amt" type="${floatType}"/>
+            
             <column name="installment" type="${floatType}"/>
+            
             <column name="other_charges" type="${floatType}"/>
+            
             <column name="surcharge" type="${floatType}"/>
+            
             <column name="hrs_surcharge" type="varchar(255)"/>
+            
             <column name="res_units" type="bigint"/>
+            
             <column name="met_cost_installment" type="${floatType}"/>
+            
             <column name="int_on_arrears" type="${floatType}"/>
+            
             <column name="last_pymt_dt" type="date"/>
+            
             <column name="last_pymt_amt" type="${floatType}"/>
+            
             <column name="mobile_no" type="varchar(255)"/>
+            
             <column name="cc_flag" type="varchar(255)"/>
+            
             <column name="cp_flag" type="varchar(255)"/>
+            
             <column name="notice_flag" type="varchar(255)"/>
+            
             <column name="dr_flag" type="varchar(255)"/>
+            
             <column name="lat" type="varchar(255)"/>
+            
             <column name="longi" type="varchar(255)"/>
+            
             <column name="meter_fix_date" type="date"/>
+            
             <column name="lock_charges" type="${floatType}"/>
+            
+            <column name="id_number" type="varchar(255)"/>
+            
+            <column name="email" type="varchar(255)"/>
+            
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
             <column name="tariff_category_master_id" type="bigint"/>
+            <column name="pipe_size_master_id" type="bigint"/>
+            <column name="division_master_id" type="bigint"/>
+            <column name="street_master_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="tariff_category_master_id"
@@ -76,6 +131,24 @@
                                  constraintName="fk_custdetails_tariffcategorymaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="tariff_category_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="pipe_size_master_id"
+                                 baseTableName="cust_details"
+                                 constraintName="fk_custdetails_pipesizemaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pipe_size_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="division_master_id"
+                                 baseTableName="cust_details"
+                                 constraintName="fk_custdetails_divisionmaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="division_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="street_master_id"
+                                 baseTableName="cust_details"
+                                 constraintName="fk_custdetails_streetmaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="street_master"/>
 
     </changeSet>
 </databaseChangeLog>

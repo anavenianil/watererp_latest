@@ -33,9 +33,9 @@ angular.module('watererpApp')
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'MeterChange', function($stateParams, MeterChange) {
+                    /*entity: ['$stateParams', 'MeterChange', function($stateParams, MeterChange) {
                         return MeterChange.get({id : $stateParams.id});
-                    }]
+                    }]*/
                 }
             })
             /*.state('meterChange.new', {
