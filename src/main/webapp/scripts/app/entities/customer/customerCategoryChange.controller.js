@@ -62,18 +62,19 @@ angular
 					$scope.datePickerForRequestedDateOpen = function($event) {
 						$scope.datePickerForRequestedDate.status.opened = true;
 					};
-
-					/*$scope.disableOrg = function(categoryId) {
-						console.log("Category id: " + categoryId);
-						if (categoryId === 1) {
-							$scope.workflowDTO.workflowTxnDetailss[2] = false;
-							$scope.workflowDTO.workflowTxnDetailss[3] = "";
-							$scope.workflowDTO.workflowTxnDetailss[4] = "";
-							$scope.workflowDTO.workflowTxnDetailss[5] = "";
-							$scope.workflowDTO.workflowTxnDetailss[6] = "";
+					
+					$scope.validateCategory = function(prevCategory, presentCategory){
+						if(prevCategory===presentCategory){
+							alert("Selected Category Same as Previous");
+							$scope.customer.presentCategory = {};
 						}
-					}*/
+						
+					}
 
+
+
+					
+					
 					// to search CAN
 					$scope.getLocation = function(val) {
 						$scope.isValidCust = false;
@@ -125,6 +126,7 @@ angular
 					};
 					
 					var onSaveSuccess = function (result) {
+						$('#saveSuccessfullyModal').modal('show');
 			            $scope.isSaving = false;
 			            $state.go('customer.categoryChangeList');
 			        };
