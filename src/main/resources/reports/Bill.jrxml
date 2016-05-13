@@ -2,12 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bill" language="groovy" pageWidth="1000" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ede3c4b4-7e79-4194-9047-9d7e39b76875">
 	<property name="ireport.zoom" value="1.100000000000015"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="163"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR CAN ID]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT *,
+		<![CDATA[SELECT *,(SELECT present_reading - prev_reading from  bill_full_details      where id=$P{id})cubic_meter,
+
        Date_format(Str_to_date(to_month, '%Y%m'), '%M %Y') bill_month,
        service_charge + meter_service_charge          meter,
        c.cons_name                                         AS cust_cons_name,
@@ -242,6 +243,7 @@ WHERE  b.id=$P{id}]]>
 	<field name="tariff_category" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="cubic_meter" class="java.lang.Double"/>
 	<field name="bill_month" class="java.lang.String"/>
 	<field name="meter" class="java.lang.Double"/>
 	<field name="cust_cons_name" class="java.lang.String"/>
@@ -543,7 +545,7 @@ WHERE  b.id=$P{id}]]>
 				<reportElement x="244" y="186" width="100" height="16" uuid="7cb3da07-24cd-4a78-9f25-bccaceef16f0"/>
 				<textFieldExpression><![CDATA[$F{street_name}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="395" y="20" width="100" height="20" uuid="0e186c32-1c66-4c21-83b6-a118f41e0586"/>
 				<textFieldExpression><![CDATA[$F{bill_month}]]></textFieldExpression>
 			</textField>
@@ -551,15 +553,15 @@ WHERE  b.id=$P{id}]]>
 				<reportElement x="246" y="159" width="101" height="13" uuid="e9754db6-ee69-4da0-b9f3-0590724e8ee7"/>
 				<textFieldExpression><![CDATA[$F{cust_house_no}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="334" y="134" width="100" height="15" uuid="126bba60-8b84-4c66-b302-2816956d559f"/>
 				<textFieldExpression><![CDATA[$F{cust_meter_no}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="475" y="131" width="100" height="17" uuid="5d951639-f33a-47e3-9823-6189f5fb1716"/>
 				<textFieldExpression><![CDATA[$F{cust_pipe_size}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="451" y="188" width="111" height="18" uuid="f257f30f-96b4-44d4-9f58-16f5c22f0bcf"/>
 				<textFieldExpression><![CDATA[$F{cust_meter_read_dt}]]></textFieldExpression>
 			</textField>
@@ -827,6 +829,11 @@ WHERE  b.id=$P{id}]]>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{no_meter_amt}]]></textFieldExpression>
 			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="445" y="118" width="76" height="16" uuid="c8713a7c-1a08-4003-9799-eeb4abc10031"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{cubic_meter}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
@@ -843,14 +850,14 @@ WHERE  b.id=$P{id}]]>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<text><![CDATA[ (b) This account is due for payment in full within 15 days from the date of billing]]></text>
+				<text><![CDATA[ (b) This account is due for payment in full within  7 days from the date of billing]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="28" y="19" width="569" height="20" uuid="e5029419-3832-4ccb-8f14-c6665257d257"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
-				<text><![CDATA[NB 1: Disconnected accounts will bear a reconnection fee of Tshs:15000]]></text>
+				<text><![CDATA[NB 1: Disconnected accounts will bear a reconnection fee of Tshs:15,000]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="41" width="76" height="15" uuid="60a6a81b-9762-4212-b4b7-8b7c78750574"/>
@@ -888,21 +895,21 @@ WHERE  b.id=$P{id}]]>
 				<text><![CDATA[Please produce this bill intact when making payment.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="27" y="164" width="468" height="20" uuid="72160c4d-8580-4b00-aa03-c63f3775c575"/>
+				<reportElement x="26" y="163" width="579" height="20" uuid="72160c4d-8580-4b00-aa03-c63f3775c575"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ (c) Cheques should be made a payable to the Managing Director, Kigoma Urban]]></text>
+				<text><![CDATA[ (c) Cheques should be made a payable to the Managing Director-KUWASA, KIGOMA/UJIJI  URBAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="37" y="186" width="458" height="20" uuid="4ee3b457-70a7-453d-8fae-4851ea9b36ee"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Water And Sewerage Authority.]]></text>
+				<text><![CDATA[WATER AND SANITATION AUTHORITY.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="26" y="205" width="471" height="20" uuid="33807a9a-a913-44a6-a00e-f7be0c29b639"/>
+				<reportElement x="26" y="209" width="471" height="20" uuid="33807a9a-a913-44a6-a00e-f7be0c29b639"/>
 				<textElement>
 					<font fontName="Times New Roman" size="12"/>
 				</textElement>
