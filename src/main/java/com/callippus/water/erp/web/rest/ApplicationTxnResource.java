@@ -41,6 +41,7 @@ import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.MeterStatus;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
@@ -201,6 +202,8 @@ public class ApplicationTxnResource {
             custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
             
             custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+            
+            custDetails.setStatus(CustStatus.ACTIVE);
             
             CustDetails cd = custDetailsRepository.save(custDetails);
             
