@@ -41,6 +41,7 @@ import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.MeterStatus;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
@@ -201,6 +202,8 @@ public class ApplicationTxnResource {
             custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
             
             custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+            custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
+            custDetails.setStatus(CustStatus.ACTIVE);
             
             CustDetails cd = custDetailsRepository.save(custDetails);
             
@@ -320,11 +323,14 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
 	public ResponseEntity<Void> declineRequests(
 			@RequestParam(value = "id", required = false) Long id, HttpServletResponse response)
 			throws Exception {
 		log.debug("REST request to get Requisition : {}", id);
-		
+		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
+		applicationTxn.setStatus(8);
+		applicationTxnRepository.save(applicationTxn);
 		applicationTxnWorkflowService.declineRequest(id);
 		return ResponseEntity.ok().build();
 	}
@@ -488,7 +494,7 @@ public class ApplicationTxnResource {
     }
 	
 	/**
-	 * Display Requisition report
+	 * Display Application report
 	 */
 	@RequestMapping(value = "/applicationTxns/report/{id}", method = RequestMethod.GET)
 	@ResponseBody

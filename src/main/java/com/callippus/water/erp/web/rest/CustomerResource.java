@@ -201,7 +201,11 @@ public class CustomerResource {
 	            else{
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getLastName());
 	            }
+			custDetails.setMobileNo(customer.getMobileNo().toString());
+			custDetails.setEmail(customer.getEmail());
+			custDetails.setIdNumber(customer.getIdNumber());
 		}
+		
 		/*if("CONNECTIONTERMINATION".equals(customer.getChangeType())){
 			
 		}*/

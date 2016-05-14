@@ -109,17 +109,27 @@
 							<div class="col-sm-4">
 								<label class="control-label" for="field_can">CAN</label> <input
 									type="text" class="form-control" name="can" id="field_can"
-									ng-model="connectionTerminate.can" disabled/>
+									ng-model="connectionTerminate.can" disabled />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_requestDate">Request Date</label>
+								<label for="field_meterDetails">Meter Number</label> <select
+									class="form-control" id="field_meterDetails"
+									name="meterDetails" ng-model="connectionTerminate.meterDetails"
+									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
+									disabled>
+									<option value=""></option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_requestDate">Request
+									Date</label>
 								<div class="form-group">
 									<div class='input-group date' id='field_requestDate'>
 										<input id="field_requestDate" type="text" class="form-control"
 											uib-datepicker-popup="{{dateformat}}"
-											ng-model="connectionTerminate.requestDate"
-											is-open="datePickerForRequestDate.status.opened" required/> <span
-											class="input-group-btn">
+											ng-model="connectionTerminate.requestDate" max-date="maxDt"
+											is-open="datePickerForRequestDate.status.opened" required />
+										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForRequestDateOpen($event)">
 												<i class="glyphicon glyphicon-calendar"></i>
@@ -134,35 +144,38 @@
 									name="meterRecovered" id="field_meterRecovered"
 									ng-model="connectionTerminate.meterRecovered" />
 							</div> -->
-							<div class="col-sm-4">
-								<label class="control-label" for="field_meterRecovered">Meter Recovered</label>
-								<div class="radio">
-									<label class="radio-inline"> <input type="radio"
-										name="meterRecovered"
-										ng-model="connectionTerminate.meterRecovered"
-										ng-value="true">Yes
-									</label> &nbsp;&nbsp;&nbsp;&nbsp;<label class="radio-inline"> <input type="radio"
-										name="meterRecovered"
-										ng-model="connectionTerminate.meterRecovered"
-										ng-value="false">No
-									</label>
-								</div>
-							</div>
+							
+
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
-								<label class="control-label" for="field_lastMeterReading">Last Meter Reading</label>
-								<input type="number" class="form-control"
-									name="lastMeterReading" id="field_lastMeterReading"
-									ng-model="connectionTerminate.lastMeterReading"/>
+								<label class="control-label" for="field_meterRecovered">Meter
+									Recovered</label>
+								<div class="radio">
+									<label class="radio-inline"> <input type="radio"
+										name="meterRecovered"
+										ng-model="connectionTerminate.meterRecovered" ng-value="true">Yes
+									</label> &nbsp;&nbsp;&nbsp;&nbsp;<label class="radio-inline"> <input
+										type="radio" name="meterRecovered"
+										ng-model="connectionTerminate.meterRecovered" ng-value="false">No
+									</label>
+								</div>
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_meterRecoveredDate">Meter Recovered Date</label>
+								<label class="control-label" for="field_lastMeterReading">Last
+									Meter Reading</label> <input type="number" class="form-control"
+									name="lastMeterReading" id="field_lastMeterReading"
+									ng-model="connectionTerminate.lastMeterReading" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_meterRecoveredDate">Meter
+									Recovered Date</label>
 								<div class="form-group">
 									<div class='input-group date' id='field_meterRecoveredDate'>
 										<input id="field_meterRecoveredDate" type="text"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="connectionTerminate.meterRecoveredDate"
+											max-date="maxDt"
 											is-open="datePickerForMeterRecoveredDate.status.opened" /> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -173,14 +186,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<label for="field_meterDetails">Meter Number</label> <select
-									class="form-control" id="field_meterDetails"
-									name="meterDetails" ng-model="connectionTerminate.meterDetails"
-									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
-									<option value=""></option>
-								</select>
-							</div>
+
 						</div>
 
 
