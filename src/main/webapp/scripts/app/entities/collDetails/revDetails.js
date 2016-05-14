@@ -38,6 +38,22 @@ angular.module('watererpApp')
                     }]
                 }
             })
+        .state('revDetails.edit', {
+                parent: 'revDetails',
+                url: '/edit/:id',
+                data: {
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
+                    pageTitle: 'Revenue Details'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/collDetails/revDetails-dialog.html',
+                        controller: 'RevDetailsDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
         .state('revDetailss', {
                 parent: 'entity',
                 url: '/revDetails',
