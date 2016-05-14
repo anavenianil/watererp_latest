@@ -169,16 +169,20 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
-        if(applicationTxn.getMeterDetails()!=null){
+        if(applicationTxn.getStatus()==6){
         	applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
         	MeterDetails meterDetails = applicationTxn.getMeterDetails();
-        		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+        		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
         		meterDetailsRepository.save(meterDetails);
         }
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         if(applicationTxn.getStatus()==7){
+        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
+    		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+    		meterDetailsRepository.save(meterDetails);
+    		
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
             if(applicationTxn.getMiddleName()!=null){

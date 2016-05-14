@@ -175,7 +175,7 @@ public class ProceedingsResource {
     @Timed
     public ResponseEntity<Proceedings> getProceedingsByApplicationTxn(@PathVariable Long applicationTxnId) {
         log.debug("REST request to get Proceedings : {}", applicationTxnId);
-        ApplicationTxn applicationTxn = applicationTxnRepository.getOne(applicationTxnId);
+        ApplicationTxn applicationTxn = applicationTxnRepository.findOne(applicationTxnId);
         Proceedings proceedings = proceedingsRepository.findByApplicationTxn(applicationTxn);
         List<ItemRequired> itemRequireds = itemRequiredRepository.findByProceedings(proceedings);
         proceedings.setItemRequireds(itemRequireds);
