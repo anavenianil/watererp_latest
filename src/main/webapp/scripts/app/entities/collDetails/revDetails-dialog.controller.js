@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller(
 		'RevDetailsDialogController',
-		function($scope, $state, CollDetails, ParseLinks, $stateParams,
+		function($scope, $state, CollDetails, RevDetails, ParseLinks, $stateParams,
 				PaymentTypes, InstrumentIssuerMaster, CustDetails,
 				CustDetailsService, CollectionTypeMaster, RevenueTypeMaster, $http) {
 
@@ -10,8 +10,9 @@ angular.module('watererpApp').controller(
 			$scope.instrEnabled = true;
 			$scope.paymenttypess = PaymentTypes.query();
 			$scope.instrumentissuermasters = InstrumentIssuerMaster.query();
-			$scope.collectionTypeMasters = CollectionTypeMaster.query();
-			$scope.revenueTypeMasters = RevenueTypeMaster.query();
+			//$scope.collectionTypeMasters = CollectionTypeMaster.query();
+			//$scope.revenueTypeMasters = RevenueTypeMaster.query();
+			$scope.revenueTypeMasters = [];
 			
 			$scope.custDetails = {};
 			$scope.collDetails = {};
@@ -68,8 +69,16 @@ angular.module('watererpApp').controller(
 
 			$scope.save = function() {
 				$scope.isSaving = true;
-				CollDetails.save($scope.collDetails, onSaveSuccess, onSaveError);
+				RevDetails.save($scope.collDetails, onSaveSuccess, onSaveError);
 			};
+			
+			CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'R'}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.revenueTypeMasters.push(result[i]);
+                }
+                $scope.collDetails.collectionTypeMaster.id = $scope.revenueTypeMasters[0].id;
+            });
 
 			$scope.datePickerForReceiptDt = {};
 

@@ -1,5 +1,5 @@
 #How to make a new customer from an existing customer
-``delete from bill_run_details where can='02020004';``
+``delete from bill_run_details where can='02020005';``
 
 ``delete from bill_details where can='02020005';``
 

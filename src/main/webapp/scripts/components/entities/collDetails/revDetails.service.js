@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .factory('CollDetails', function ($resource, DateUtils) {
+    .factory('RevDetails', function ($resource, DateUtils) {
         return $resource('api/revDetailss/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {

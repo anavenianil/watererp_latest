@@ -28,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -113,7 +112,6 @@ public class BillingService {
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
 	int newMeterFlag = 0;
-	int newMeterNoSvcFlag = 0;
 	int unMeteredFlag = 0;
 	int successRecords = 0;
 	int failedRecords = 0;
@@ -223,19 +221,37 @@ public class BillingService {
 			
 			float kl = 0.0f;
 			
-			for(BillRunDetails brd1:brdList){
-				kl = kl+brd1.getBillFullDetails().getUnits();
-			}
-						
-			prevAvgKL = kl / 3;
+			int i=0;
+			LocalDate fromDt = null, toDt = null;
 			
-			prevAvgKL = (prevAvgKL < minAvgKL ? minAvgKL:prevAvgKL); 
+			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			for(BillRunDetails brd1:brdList){
+				if(!brd1.getBillFullDetails().getCurrentBillType().equals("M"))
+					continue;
+				
+				if(i == 0){
+					toDt = LocalDate.parse(brd1.getBillFullDetails().getToMonth()+"01", date_format);
+					toDt = toDt.withDayOfMonth(toDt.lengthOfMonth());
+				}
+
+				fromDt = LocalDate.parse(brd1.getBillFullDetails().getFromMonth() + "01", date_format);
+
+				kl = kl+brd1.getBillFullDetails().getUnits();
+				i++;
+			}
+			
+			long months = ChronoUnit.MONTHS.between(fromDt,toDt.plusDays(1));
+			
+			if(months > 0)
+				prevAvgKL = kl / months;
+			else
+				prevAvgKL = minAvgKL; 
+			
+			log.debug("From Dt:" + fromDt + ", To Dt:" + toDt + ", Prev AvgKL: " + prevAvgKL);
 			
 			CustDetails customer = custDetailsRepository
 					.findByCanForUpdate(brd.getCan());
-			customer.setPrevBillType(bfd.getCurrentBillType());
-			
-			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMMdd");
+			customer.setPrevBillType(bfd.getCurrentBillType());						
 			customer.setPrevAvgKl(prevAvgKL);
 			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth()+"01", date_format));
 			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
@@ -330,16 +346,14 @@ public class BillingService {
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
-			dTo = bill_details.getMetReadingDt();
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
 			// Currently Metered
 			if (bill_details.getCurrentBillType().equals("M")) {
 
-				long days = ChronoUnit.DAYS.between(customer.getMeterFixDate(),
-						dTo);
-
-				newMeterNoSvcFlag = (days < 15 ? 1 : 0);
-
+				long days = ChronoUnit.DAYS.between(dFrom,
+						dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
+				
 				if (days <= 0) {
 					throw new Exception("Invalid From:"
 							+ dFrom.format(DateTimeFormatter
@@ -383,17 +397,14 @@ public class BillingService {
 			BillDetails bill_details, LocalDate dFrom, LocalDate dTo) {
 
 		try {			
-			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo);
+			long monthsDiff = ChronoUnit.MONTHS.between(dFrom.withDayOfMonth(1), dTo.plusDays(1));
 
-			if (monthsDiff == 0)
-				monthsDiff = 1;
-
-			if(monthsDiff < 0)
+			if (monthsDiff <= 0)
 				throw new Exception("Invalid From/To Dates");
 			
 			log.debug("Months:" + monthsDiff);
 			
-			if (bill_details.getCurrentBillType().equals("M")) {
+			if (bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L"))) {
 
 				if (!customer.getPrevReading().equals("0")) {
 					if(bill_details.getIsRounding())
@@ -430,7 +441,23 @@ public class BillingService {
 				}
 
 				kl = (float) (unitsKL);
-			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("S") || bill_details.getCurrentBillType().equals("B")
+			} else if(bill_details.getCurrentBillType().equals("M")) //Moved from Stuck/Burnt to Metered in the middle of the month
+			{
+
+				log.debug("########################################");
+				log.debug("    STUCK/BURNT TO METERED BILL CASE");
+				log.debug("########################################");
+
+				log.debug("Customer Info:" + customer.toString());
+				log.debug("From:" + dFrom + ", To:" + dTo);
+
+				avgKL = customer.getPrevAvgKl();
+				unitsKL = 0.0f;
+				units = 0.0f;
+				log.debug("Units:" + units + " based on avgKL:" + avgKL
+						+ " for " + monthsDiff + " months.");
+			}			
+			else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("S") || bill_details.getCurrentBillType().equals("B")
 					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");
@@ -441,8 +468,8 @@ public class BillingService {
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
 				avgKL = customer.getPrevAvgKl();
-				unitsKL = (float) (avgKL * monthsDiff);
-				units = (float) (avgKL * monthsDiff * 1000.0f);
+				unitsKL = 0.0f;
+				units = 0.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
 			} else if (bill_details.getCurrentBillType().equals("U")) {
@@ -455,8 +482,8 @@ public class BillingService {
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
 				avgKL = customer.getPrevAvgKl();
-				unitsKL = (float) (avgKL * monthsDiff);
-				units = (float) (avgKL * monthsDiff * 1000.0f);
+				unitsKL = 0.0f;
+				units = 0.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL
 						+ " for " + monthsDiff + " months.");
 			}
@@ -465,8 +492,8 @@ public class BillingService {
 					: 0);
 
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(bill_details.getCan(), dFrom, dTo, unitsKL,
-							unMeteredFlag, newMeterFlag, newMeterNoSvcFlag);
+					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL,
+							unMeteredFlag, newMeterFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details,
 					customer);
@@ -489,7 +516,7 @@ public class BillingService {
 					bfd.setWaterCess(((Double) charge.get("amount"))
 							.floatValue());
 					
-					if(bill_details.getCurrentBillType().equals("M")){
+					if(bill_details.getCurrentBillType().equals("M") && customer.getPrevBillType().equals("L")){
 						if(customer.getLockCharges() == null)	
 							bfd.setLockCharges(0.0f);							
 						else
@@ -498,7 +525,7 @@ public class BillingService {
 							bfd.setWaterCess(bfd.getWaterCess() + bfd.getLockCharges());
 						}
 					}
-					else
+					else if(bill_details.getCurrentBillType().equals("L"))
 					{
 						if(customer.getLockCharges() != null)
 							bfd.setLockCharges(bfd.getWaterCess() + customer.getLockCharges());
@@ -573,9 +600,11 @@ public class BillingService {
 
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
 
-			bfd.setUnits(unitsKL);
-			bfd.setFromMonth(bill_details.getFromMonth());
-			bfd.setToMonth(bill_details.getToMonth());
+			bfd.setUnits(unitsKL);						
+			bfd.setFromMonth(dFrom.format(DateTimeFormatter
+					.ofPattern("yyyyMM")));
+			bfd.setToMonth(dTo.format(DateTimeFormatter
+					.ofPattern("yyyyMM")));
 
 			log.debug("This is the BillFullDetails:" + bfd);
 
@@ -636,9 +665,9 @@ public class BillingService {
 			if (!bill_details.getCurrentBillType().equals("M"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
-			dFrom = customer.getPrevBillMonth();
+			dFrom = customer.getPrevBillMonth().plusMonths(1);
 
-			dTo = bill_details.getBillDate().withDayOfMonth(1);
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer

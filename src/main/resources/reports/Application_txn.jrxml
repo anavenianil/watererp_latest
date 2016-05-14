@@ -2,13 +2,15 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Application_txn" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="dda6da65-b38f-480d-bc59-fcdbc727f9cf">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.y" value="32"/>
 	<property name="ireport.callouts" value="##Tue May 03 14:47:11 IST 2016"/>
 	<parameter name="Id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR ID]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT * , concat(first_name,' ',middle_name,' ',last_name)full_name FROM `watererp`.`application_txn` a where id=$P{Id}]]>
+		<![CDATA[SELECT *,concat(IFNULL(first_name,""),' ',IFNULL(middle_name,""),' ',IFNULL(last_name,"") )full_name FROM `watererp`.`application_txn` a
+left join `tariff_category_master` t on t.id=a.tariff_category_master_id
+where a.id=$P{Id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -128,6 +130,9 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="id_proof_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tariff_category" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="full_name" class="java.lang.String"/>
@@ -431,18 +436,18 @@
 				<textFieldExpression><![CDATA[($F{tariff_category_master_id}==3?'YES':'-')]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="154" y="83" width="172" height="20" isRemoveLineWhenBlank="true" uuid="73523f25-5b68-4142-95d1-f7485b318962"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
 				<reportElement x="527" y="445" width="167" height="20" uuid="0a0e05ec-d671-4c14-a886-a47fdc6e525b"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{tariff_category_master_id}==4?'YES':'-')]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="84" width="244" height="20" uuid="3f8c68a9-9e15-4c4b-aaec-15cfaf7a1b22"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

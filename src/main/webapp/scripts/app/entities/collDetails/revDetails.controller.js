@@ -1,12 +1,17 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('RevDetailsController', function ($scope, $state, CollDetails, ParseLinks) {
+    .controller('RevDetailsController', function ($scope, $state, CollDetails, ParseLinks, RevenueTypeMaster) {
 
         $scope.collDetailss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.getRevenueTypeById = function(id) {
+            RevenueTypeMaster.get({id : id}, function(result) {
+                $scope.revenueTypeMaster = result;
+            });
+        };
         
         $scope.loadAll = function() {
             CollDetails.query({page: $scope.page, size: 20, txnStatus : 'R', sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
@@ -16,6 +21,7 @@ angular.module('watererpApp')
                 }
             });
         };
+        
         $scope.reset = function() {
             $scope.page = 0;
             $scope.collDetailss = [];
