@@ -13,8 +13,10 @@ angular
 					$scope.billDetailss = [];
 					$scope.predicate = 'id';
 					$scope.billDetails = {};
+					$scope.billDetails.forceManual = null;
 					$scope.billDetails.isRounding = false;
 					$scope.isRounding = false;
+					$scope.isForceManual = false;
 					$scope.isMetReadingDisabled = false;
 					$scope.currentBillTypes = [ {
 						id : 'M',
@@ -123,14 +125,21 @@ angular
 						$scope.datePickerForMetReadingDt.status.opened = true;
 					};
 
+					$scope.setToMonthAndCheck = function() {
+						$scope.setToMonth();
+						$scope.checkDates();
+					}
+					
+
 					$scope.setToMonth = function() {
 						$scope.billDetails.toMonth = $filter('date')(
 								$scope.billDetails.metReadingDt, "yyyyMM");
 					}
+					
 
 					$scope.setToMonthManual = function() {
 
-						if ($scope.billDetails.forceManual == true) {
+						if ($scope.billDetails.forceManual == 1) {
 							var toMonthNo = parseInt($scope.billDetails.toMonth
 									.substr(0, 4), 10)
 									* 12
@@ -192,8 +201,7 @@ angular
 					}
 
 					$scope.checkDates = function() {
-
-						$scope.billDetails.forceManual = false;
+						$scope.billDetails.forceManual = null;
 
 						if ($scope.billDetails.fromMonth != null
 								&& typeof $scope.billDetails.fromMonth != "undefined"
@@ -214,12 +222,16 @@ angular
 
 							var months = toMonthNo - fromMonthNo;
 
-							if (months > 0)
-								return false
-							else
-								return true
+							if (months > 0){
+								$scope.isForceManual = true;
+							}
+							else{
+								$scope.isForceManual = false;
+							}
 						} else
-							return true;
+							{
+							$scope.isForceManual = false;
+							}
 					}
 
 					$scope.getCustDetails = function(can) {
