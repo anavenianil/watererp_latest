@@ -119,10 +119,12 @@ angular
 			            BillRunDetails.query({page: $scope.page, size: 20, can: can, status:status}, function(result, headers) {
 			                $scope.links = ParseLinks.parse(headers('link'));
 			                for (var i = 0; i < result.length; i++) {
-			                	              	
 			                    $scope.billRunDetailss.push(result[i]);
-			                    //console.log($scope.billRunDetailss[i]);
-			                    console.log(result[i]);
+			                    console.log(result[i].billFullDetails.fromMonth.substr(4, 2));
+			                    console.log(new Date('2016-04'));
+			                    var d = new Date('2016-04');
+			                    console.log(d.substr(0,8));
+			                    console.log(result[i].billFullDetails.toMonth);
 			                }
 			            });
 			        };

@@ -129,6 +129,18 @@ angular.module('watererpApp').controller(
 				CollDetails
 						.save($scope.collDetails, onSaveSuccess, onSaveError);
 			};
+			
+			$scope.load = function(id) {
+				CollDetails.get({
+					id : id
+				}, function(result) {
+					$scope.collDetails = result;
+				});
+			};
+
+			if ($stateParams.id != null) {
+				$scope.load($stateParams.id);
+			}
 
 			$scope.datePickerForReceiptDt = {};
 

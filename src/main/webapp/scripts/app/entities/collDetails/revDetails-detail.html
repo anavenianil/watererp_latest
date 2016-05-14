@@ -12,31 +12,15 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Reversal Reference</span>
+                    <span>Revenue Type</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{collDetails.reversalRef}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Receipt Number</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.receiptNo}}</span>
+                    {{collDetails.collectionTypeMaster.collName}}
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Receipt Amount</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.receiptAmt}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Receipt Date</span>
+                    <span>Date</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.receiptDt | date:'medium'}}</span>
@@ -44,10 +28,26 @@
             </tr>
             <tr>
                 <td>
-                    <span>Receipt Mode</span>
+                    <span>Amount</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{collDetails.receiptMode}}</span>
+                    <span class="form-control-static">{{collDetails.receiptAmt}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Payment Mode</span>
+                </td>
+                <td>
+                    {{collDetails.paymentTypes.paymentMode}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Approved By</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{collDetails.consName}}</span>
                 </td>
             </tr>
             <tr>
@@ -71,71 +71,7 @@
                     <span>Instrument Issuer</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{collDetails.instrIssuer}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Sever Status</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.svrStatus}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>CAN</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.can}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Approved By</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.consName}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Terminal Id</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.terminalId}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Collection Time</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.collTime | date:'medium'}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Transaction Status</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.txnStatus}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Meter Reader Id</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.meterReaderId}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>User Id</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.userId}}</span>
+                    {{collDetails.instrumentIssuerMaster.instrumentIssuer}}
                 </td>
             </tr>
             <tr>
@@ -144,62 +80,6 @@
                 </td>
                 <td>
                     <span class="form-control-static">{{collDetails.remarks}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Settlement Id</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.settlementId}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Ext Settlement Id</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.extSettlementId}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Latitude</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.lat}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Longitude</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{collDetails.longI}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Payment Types</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="paymentTypes.detail({id:collDetails.paymentTypes.id})">{{collDetails.paymentTypes.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Instrument Issuer Master</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="instrumentIssuerMaster.detail({id:collDetails.instrumentIssuerMaster.id})">{{collDetails.instrumentIssuerMaster.id}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span>Revenue Type</span>
-                </td>
-                <td>
-                    <a class="form-control-static" ui-sref="collectionTypeMaster.detail({id:collDetails.collectionTypeMaster.id})">{{collDetails.collectionTypeMaster.id}}</a>
                 </td>
             </tr>
             </tbody>
