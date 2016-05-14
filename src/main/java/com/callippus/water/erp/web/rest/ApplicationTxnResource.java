@@ -202,7 +202,7 @@ public class ApplicationTxnResource {
             custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
             
             custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
-            
+            custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
             custDetails.setStatus(CustStatus.ACTIVE);
             
             CustDetails cd = custDetailsRepository.save(custDetails);
@@ -323,11 +323,14 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
 	public ResponseEntity<Void> declineRequests(
 			@RequestParam(value = "id", required = false) Long id, HttpServletResponse response)
 			throws Exception {
 		log.debug("REST request to get Requisition : {}", id);
-		
+		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
+		applicationTxn.setStatus(8);
+		applicationTxnRepository.save(applicationTxn);
 		applicationTxnWorkflowService.declineRequest(id);
 		return ResponseEntity.ok().build();
 	}
@@ -491,7 +494,7 @@ public class ApplicationTxnResource {
     }
 	
 	/**
-	 * Display Requisition report
+	 * Display Application report
 	 */
 	@RequestMapping(value = "/applicationTxns/report/{id}", method = RequestMethod.GET)
 	@ResponseBody
