@@ -65,20 +65,20 @@
 						</div>
 					</div>
 					<hr>
-					<fieldset ng-repeat="x in itemArr">
+					<fieldset ng-repeat="item in proceedings.itemRequireds track by $index">
 						<div class="row">
 							<div class="col-sm-3">
 								<select class="form-control" id="field_materialMaster"
 									name="materialMaster"
-									ng-model="proceedings.itemRequireds[x].materialMaster"
-									ng-change="getMaterialDetail(proceedings.itemRequireds[x].materialMaster.id, x)"
+									ng-model="item.materialMaster"
+									ng-change="getMaterialDetail(item.materialMaster.id, $index)"
 									ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
 							<div class="col-sm-2">
 								<select class="form-control" id="field_uom" name="uom"
-									ng-model="proceedings.itemRequireds[x].uom"
+									ng-model="item.uom"
 									ng-options="uom as uom.value for uom in uoms track by uom.id">
 									<option value=""></option>
 								</select>
@@ -87,21 +87,21 @@
 
 								<input type="number" class="form-control" name="quantity"
 									id="field_quantity" ng-change="calculateRate()" min="0"
-									ng-model="proceedings.itemRequireds[x].quantity" />
+									ng-model="item.quantity" />
 							</div>
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
 									name="ratePerShs" id="field_ratePerShs"
-									ng-model="proceedings.itemRequireds[x].ratePerShs" readonly />
+									ng-model="item.ratePerShs" readonly />
 							</div>
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
 									name="amount" id="field_amount"
-									ng-model="proceedings.itemRequireds[x].amount" readonly />
+									ng-model="item.amount" readonly />
 							</div>
 							<div class="col-sm-1">
 								<button type="button" class="btn btn-danger"
-									ng-hide="itemArr.length<1" ng-click="removeItemArr(x)">
+									ng-hide="proceedings.itemRequireds.length<1" ng-click="removeItemArr($index)">
 									<span class="glyphicon glyphicon-remove-circle"></span>
 								</button>
 							</div>

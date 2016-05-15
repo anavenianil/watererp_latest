@@ -14,8 +14,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.applicationTxnId = $stateParams.applicationTxnId;
         $scope.proceedings.itemRequireds = [];
         $scope.count = 0;
-        $scope.itemArr = [];
-        
 
         $scope.getApplicationTxns = function(){
         	$scope.applicationTxns = [];
@@ -106,20 +104,19 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
 
         //create array for items
         $scope.createItemArr = function(){
-       		$scope.itemArr.push($scope.count);
        		$scope.proceedings.itemRequireds[$scope.count]= {};
        		$scope.count = $scope.count +1;
         }
         
         //calculations for proceedings
         $scope.calculateRate = function(){
-        	for(var i=0; i<$scope.itemArr.length; i++){
+        	for(var i=0; i<$scope.proceedings.itemRequireds.length; i++){
         		var quantity = $scope.proceedings.itemRequireds[i].quantity;
         		var rate = $scope.proceedings.itemRequireds[i].ratePerShs;
         		$scope.proceedings.itemRequireds[i].amount = quantity * rate;
         	}
         	$scope.proceedings.subTotalA = 0;
-        	for(var i=0; i<$scope.itemArr.length; i++){
+        	for(var i=0; i<$scope.proceedings.itemRequireds.length; i++){
         		$scope.proceedings.subTotalA = $scope.proceedings.subTotalA + $scope.proceedings.itemRequireds[i].amount;
         	}
         	$scope.proceedings.supervisionCharge = ($scope.proceedings.subTotalA * $scope.proceedings.supervisionPercent)/100;
@@ -136,7 +133,6 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.removeItemArr = function(indexId) {
             $scope.count = $scope.count -1;
             $scope.proceedings.itemRequireds.splice(indexId, 1);
-            $scope.itemArr.splice($scope.count, 1);
             $scope.calculateRate();
           };
           
