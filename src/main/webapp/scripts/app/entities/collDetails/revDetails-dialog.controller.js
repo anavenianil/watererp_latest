@@ -39,8 +39,8 @@ angular.module('watererpApp').controller(
 
 				if($scope.isSaving)
 					return true;
-				/*if (!$scope.editForm.consName.$dirty)
-					return true;*/
+				if (!$scope.editForm.consName.$dirty)
+					return true;
 				if ($scope.editForm.consName.$invalid)
 					return true;
 				if ($scope.editForm.field_receiptDt.$invalid)
@@ -71,18 +71,6 @@ angular.module('watererpApp').controller(
 				$scope.isSaving = true;
 				RevDetails.save($scope.collDetails, onSaveSuccess, onSaveError);
 			};
-			
-			$scope.load = function(id) {
-				CollDetails.get({
-					id : id
-				}, function(result) {
-					$scope.collDetails = result;
-				});
-			};
-
-			if ($stateParams.id != null) {
-				$scope.load($stateParams.id);
-			}
 			
 			CollectionTypeMaster.query({page: $scope.page, size: 20, txnType : 'R'}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));

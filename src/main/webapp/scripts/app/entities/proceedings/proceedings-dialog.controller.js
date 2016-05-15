@@ -134,10 +134,9 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         
         //for removing items
         $scope.removeItemArr = function(indexId) {
-        	//$scope.itemArr.length = $scope.itemArr.length-1;
             $scope.count = $scope.count -1;
-            //$scope.proceedings.itemRequireds[$scope.count]= {};
-            $scope.itemArr.splice(indexId, 1);
+            $scope.proceedings.itemRequireds.splice(indexId, 1);
+            $scope.itemArr.splice($scope.count, 1);
             $scope.calculateRate();
           };
           
