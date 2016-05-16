@@ -206,8 +206,8 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		String sql = "SELECT  r.id, r.request_stage, r.assigned_date, from_unixtime(unix_timestamp(r.actioned_date)) as A, r.remarks, "
 				+ " r.ip_address, r.assigned_role, r.domain_object, r.assigned_from_id, r.assigned_to_id, r.status_master_id, "
 				+ " r.request_master_id, r.workflow_master_id, r.workflow_stage_master_id, r.applied_by_id "
-				+ " FROM  request_workflow_history r, application_txn tr where tr.id=r.domain_object  "
-				+ " and   r.status_master_id in (5,7,9) and assigned_to_id="
+				+ " FROM  request_workflow_history r where  "
+				+ "  r.status_master_id in (5,7,9) and assigned_to_id="
 				+ workflowService.getSfID()
 				+ " and  r.request_master_id="
 				+ type +" group by r.domain_object";

@@ -21,7 +21,7 @@ angular.module('watererpApp')
             })
             .state('connectionTerminate.detail', {
                 parent: 'entity',
-                url: '/connectionTerminate/{id}',
+                url: '/connectionTerminate/{id}/{requestTypeId}',
                 data: {
                     authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                     pageTitle: 'ConnectionTerminate'
