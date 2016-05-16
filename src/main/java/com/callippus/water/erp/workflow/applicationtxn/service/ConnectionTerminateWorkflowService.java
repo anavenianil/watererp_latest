@@ -18,10 +18,9 @@ import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.ConnectionTerminate;
-import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
-import com.callippus.water.erp.repository.CustomerRepository;
+import com.callippus.water.erp.repository.ConnectionTerminateRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.repository.WorkflowStageMasterRepository;
 import com.callippus.water.erp.repository.WorkflowTxnDetailsRepository;
@@ -41,7 +40,7 @@ public class ConnectionTerminateWorkflowService extends RequestProcessService {
 	private WorkflowStageMasterRepository workflowStageMasterRepository;
 	
 	@Inject
-	private CustomerRepository customerRepository;
+	private ConnectionTerminateRepository connectionTerminateRepository;
 
 	private String message;
 	
@@ -160,14 +159,14 @@ public class ConnectionTerminateWorkflowService extends RequestProcessService {
 	 **/
 
 	@SuppressWarnings("unchecked")
-	public String approvedCahangeCaseRequest(Customer customer)
+	public String approvedCahangeCaseRequest(ConnectionTerminate connectionTerminate)
 			throws Exception {
 		String message = null;
 		List<RequestWorkflowHistory> l = null;
 		try {
 			Query query = entityManager.createQuery(
 					"from RequestWorkflowHistory r where domainObject="
-							+ customer.getId(),
+							+ connectionTerminate.getId(),
 					RequestWorkflowHistory.class);
 
 			l = query.getResultList();
@@ -199,7 +198,7 @@ public class ConnectionTerminateWorkflowService extends RequestProcessService {
 	public void declineRequest(Long id) throws Exception {
 		log.debug("ApplicationTxnWorkflowService --> declineRequest--" + id);
 
-		DeclineApplicationTxnRequest(id);
+		declineConnectionTerminateRequest(id);
 		workflowService.getUserDetails();
 
 		message = super.declinedRequest(workflowService.getHistoryID(),
@@ -207,7 +206,7 @@ public class ConnectionTerminateWorkflowService extends RequestProcessService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String DeclineApplicationTxnRequest(Long id) throws Exception {
+	public String declineConnectionTerminateRequest(Long id) throws Exception {
 		String message = null;
 		List<RequestWorkflowHistory> l = null;
 		try {
@@ -221,7 +220,6 @@ public class ConnectionTerminateWorkflowService extends RequestProcessService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			message = CPSConstants.FAILED;
 			throw e;
 		}
@@ -280,22 +278,10 @@ public class ConnectionTerminateWorkflowService extends RequestProcessService {
 		log.debug("ApplicationTxnCustomRepository -------- approveRequest(): {}");
 		
 		workflowService.getUserDetails();
-	    
-		///WorkflowTxnDetails workflowTxnDetails = workflowTxnDetailsRepository.findOne(id);
-		Customer customer = customerRepository.findOne(id);
+		ConnectionTerminate connectionTerminate = connectionTerminateRepository.findOne(id);
 	    workflowService.setRemarks(remarks);  
-	    /*Integer status = applicationTxn.getStatus();
-	    status +=1;
-	    workflowTxnDetails.setStatus(status);
-        workflowService.setRequestStatus(status);*/
-        //applicationTxnWorkflowService.
-	    approvedCahangeCaseRequest(customer);
-
-        /*if(workflowService.getRequestAt()!=null){
-        	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
-        	workflowTxnDetails.setRequestAt(userRepository.findById(uid));
-        }*/
-	    customerRepository.save(customer);
+	    approvedCahangeCaseRequest(connectionTerminate);
+	    connectionTerminateRepository.save(connectionTerminate);
 	}
 
 }

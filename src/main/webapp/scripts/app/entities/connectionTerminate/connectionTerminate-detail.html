@@ -36,52 +36,118 @@
 			</div>
 		</div>
 	</div>
-	<div></div>
-	
-	<!-- <div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Field</th>
-					<th>Value</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><span>Can</span></td>
-					<td><span class="form-control-static">{{connectionTerminate.can}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>RequestDate</span></td>
-					<td><span class="form-control-static">{{connectionTerminate.requestDate
-							| date:'mediumDate'}}</span></td>
-				</tr>
-				<tr>
-					<td><span>MeterRecovered</span></td>
-					<td><span class="form-control-static">{{connectionTerminate.meterRecovered}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>LastMeterReading</span></td>
-					<td><span class="form-control-static">{{connectionTerminate.lastMeterReading}}</span>
-					</td>
-				</tr>
-				<tr>
-					<td><span>MeterRecoveredDate</span></td>
-					<td><span class="form-control-static">{{connectionTerminate.meterRecoveredDate
-							| date:'mediumDate'}}</span></td>
-				</tr>
-				<tr>
-					<td><span>meterDetails</span></td>
-					<td><a class="form-control-static"
-						ui-sref="meterDetails.detail({id:connectionTerminate.meterDetails.id})">{{connectionTerminate.meterDetails.id}}</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div> -->
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Connection Termination</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<fieldset>
+					<legend>Customer Details</legend>
+					<div class="row">
+						<div class="col-sm-3">
+							<label>CAN</label>
+							<h5 class="list-group-item-heading">{{custDetails.can}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Name</label>
+							<h5 class="list-group-item-heading">{{custDetails.consName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Mobile Number</label>
+							<h5 class="list-group-item-heading">{{custDetails.mobileNo}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>E-mail</label>
+							<h5 class="list-group-item-heading">{{custDetails.email}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>Meter Info.</legend>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_meterRecovered">Meter
+								Recovered</label>
+							<div class="radio">
+								<label class="radio-inline"> <input type="radio"
+									name="meterRecovered"
+									ng-model="connectionTerminate.meterRecovered" ng-value="true">Yes
+								</label> &nbsp;&nbsp;&nbsp;&nbsp;<label class="radio-inline"> <input
+									type="radio" name="meterRecovered"
+									ng-model="workflowDTO.connectionTerminate.meterRecovered"
+									ng-value="false">No
+								</label>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_lastMeterReading">Last
+								Meter Reading</label> <input type="number" class="form-control"
+								name="lastMeterReading" id="field_lastMeterReading"
+								ng-model="workflowDTO.connectionTerminate.lastMeterReading" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_meterRecoveredDate">Meter
+								Recovered Date</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_meterRecoveredDate'>
+									<input id="field_meterRecoveredDate" type="text"
+										class="form-control" uib-datepicker-popup="{{dateformat}}"
+										ng-model="workflowDTO.connectionTerminate.meterRecoveredDate"
+										max-date="maxDt"
+										is-open="datePickerForMeterRecoveredDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForMeterRecoveredDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<div class="col-sm-4">
+					<label class="control-label" for="field_approvedDate">Meter
+						Recovered Date</label>
+					<div class="form-group">
+						<div class='input-group date' id='field_approvedDate'>
+							<input id="field_approvedDate" type="text"
+								class="form-control" uib-datepicker-popup="{{dateformat}}"
+								ng-model="workflowDTO.approvedDate"
+								max-date="maxDt"
+								is-open="datePickerForapprovedDate.status.opened" /> <span
+								class="input-group-btn">
+								<button type="button" class="btn btn-default"
+									ng-click="datePickerForapprovedDateOpen($event)">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<label class="control-label" for="field_remarks">Remarks</label>
+						<textarea rows="4" cols="50" class="form-control" name="remarks"
+							id="field_remarks" max="20" ng-model="workflowDTO.remarks"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button type="button" class="btn btn-success pull-right"
+		ng-show="canDecline()" ng-click="approve(workflowDTO)">
+		<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
+	</button>
 
+	<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+
+	<button type="button" class="btn btn-danger pull-right"
+		ng-show="canDecline()" ng-disabled="isSaving"
+		ng-click="declineRequest(workflowDTO)">
+		<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
+	</button>
 	<button type="submit" onclick="window.history.back()"
 		class="btn btn-info">
 		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>

@@ -7,6 +7,7 @@ public class WorkflowDTO {
 	//private WorkflowTxnDetails workflowTxnDetails;
 	private List<WorkflowTxnDetails> workflowTxnDetailss;
 	private RequestWorkflowHistory requestWorkflowHistory;
+	private ConnectionTerminate connectionTerminate;
 	private String remarks;
 	
 	/*public WorkflowTxnDetails getWorkflowTxnDetails() {
@@ -29,6 +30,13 @@ public class WorkflowDTO {
 	public void setRequestWorkflowHistory(
 			RequestWorkflowHistory requestWorkflowHistory) {
 		this.requestWorkflowHistory = requestWorkflowHistory;
+	}
+	
+	public ConnectionTerminate getConnectionTerminate() {
+		return connectionTerminate;
+	}
+	public void setConnectionTerminate(ConnectionTerminate connectionTerminate) {
+		this.connectionTerminate = connectionTerminate;
 	}
 	
 	public String getRemarks() {

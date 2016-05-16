@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,9 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ConnectionTerminate;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.CustMeterMapping;
+import com.callippus.water.erp.domain.MeterDetails;
+import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.ConnectionTerminateRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.CustMeterMappingRepository;
+import com.callippus.water.erp.repository.MeterDetailsRepository;
+import com.callippus.water.erp.repository.MeterStatusRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ConnectionTerminateWorkflowService;
@@ -53,6 +60,15 @@ public class ConnectionTerminateResource {
     
     @Inject
     private CustDetailsRepository custDetailsRepository;
+    
+    @Inject
+    private MeterStatusRepository meterStatusRepository;
+    
+    @Inject
+    private MeterDetailsRepository meterDetailsRepository;
+    
+    @Inject
+    private CustMeterMappingRepository custMeterMappingRepository;
     
     /**
      * POST  /connectionTerminates -> Create a new connectionTerminate.
@@ -152,4 +168,42 @@ public class ConnectionTerminateResource {
         connectionTerminateRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("connectionTerminate", id.toString())).build();
     }
+    
+    @RequestMapping(value = "/connectionTerminates/approve", 
+    		method = RequestMethod.POST, 
+    		produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional
+	public ResponseEntity<ConnectionTerminate> approveCategoryChange(
+			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
+		log.debug("REST request to terminate Connection : {}", workflowDTO);
+
+		ConnectionTerminate connectionTerminate = workflowDTO.getConnectionTerminate();
+		
+		connectionTerminateRepository.save(connectionTerminate);
+		
+		CustDetails custDetails = custDetailsRepository.findByCan(connectionTerminate.getCan());
+		custDetails.setStatus(CustStatus.TERMINATED);
+		custDetailsRepository.save(custDetails);
+		
+		MeterDetails meterDetails = connectionTerminate.getMeterDetails();
+		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
+		meterDetailsRepository.save(meterDetails);
+		
+		CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(custDetails, null);
+        //cmpOld.setToDate(connectionTerminate.get);
+        custMeterMappingRepository.save(cmpOld);
+        
+		try {
+			workflowService.setRemarks(workflowDTO.getRemarks());
+			workflowService.getUserDetails();
+			connectionTerminateWorkflowService
+					.approvedCahangeCaseRequest(connectionTerminate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.created(new URI("/api/connectionTerminates/"))
+				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
+				.body(null);
+	}
 }
