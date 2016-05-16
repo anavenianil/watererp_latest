@@ -116,8 +116,8 @@
 							</tr>
 							<tr>
 								<td><span>Complaint Type</span></td>
-								<td><a class="form-control-static"
-									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.complaintTypeMaster.complaintType}}</a>
+								<td><!-- <a class="form-control-static"
+									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})"> -->{{customerComplaints.complaintTypeMaster.complaintType}}<!-- </a> -->
 								</td>
 							</tr>
 							<tr>
@@ -164,8 +164,8 @@
                 <tr ng-repeat="billRunDetails in billRunDetailss track by billRunDetails.id">
                     <td><a ui-sref="billRunDetails.detail({id:billRunDetails.id})">{{billRunDetails.id}}</a></td>
                     <td>{{billRunDetails.can}}</td>
-                    <td>{{billRunDetails.fromDt | date:'medium'}}</td>
-                    <td>{{billRunDetails.toDt | date:'medium'}}</td>
+                    <td>{{billRunDetails.billFullDetails.fromMonth}}</td>
+                    <td>{{billRunDetails.billFullDetails.toMonth}}</td>
                     <td>{{billRunDetails.status}}</td>
                     <td>{{billRunDetails.remarks}}</td>
                     <!-- <td>

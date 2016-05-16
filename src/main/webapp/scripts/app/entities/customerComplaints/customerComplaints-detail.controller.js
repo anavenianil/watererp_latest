@@ -15,6 +15,7 @@ angular
 					$scope.customerComplaints = {};
 					$scope.billFullDetailss = [];
 					$scope.billRunDetailss = [];
+					$scope.month = [];
 					var len = $scope.billRunDetailss.length;
 					console.log(len);
 					$scope.can = $scope.customerComplaints.can;
@@ -121,9 +122,27 @@ angular
 			                for (var i = 0; i < result.length; i++) {
 			                    $scope.billRunDetailss.push(result[i]);
 			                    console.log(result[i].billFullDetails.fromMonth.substr(4, 2));
+			                    console.log(result[i].billFullDetails.fromMonth.substr(0, 4));
 			                    console.log(new Date('2016-04'));
-			                    var d = new Date('2016-04');
-			                    console.log(d.substr(0,8));
+			                    var d = new Date(result[i].billFullDetails.fromMonth.substr(0, 4)+'-'+result[i].billFullDetails.fromMonth.substr(4, 2));
+			                    var d1 = new Date(result[i].billFullDetails.toMonth.substr(0, 4)+'-'+result[i].billFullDetails.toMonth.substr(4, 2));
+			                    
+			                    $scope.month[0] = "Jan";
+			                    $scope.month[1] = "Feb";
+			                    $scope.month[2] = "Mar";
+			                    $scope.month[3] = "Apr";
+			                    $scope.month[4] = "May";
+			                    $scope.month[5] = "Jun";
+			                    $scope.month[6] = "Jul";
+			                    $scope.month[7] = "Aug";
+			                    $scope.month[8] = "Sep";
+			                    $scope.month[9] = "Oct";
+			                    $scope.month[10] = "Nov";
+			                    $scope.month[11] = "Dec";
+			                    console.log($scope.month[d.getMonth()]+" "+result[i].billFullDetails.fromMonth.substr(0,4));
+			                    console.log($scope.month[d1.getMonth()]+" "+result[i].billFullDetails.toMonth.substr(0,4));
+			                    result[i].billFullDetails.fromMonth = $scope.month[d.getMonth()]+" "+result[i].billFullDetails.fromMonth.substr(0,4);
+			                    result[i].billFullDetails.toMonth = $scope.month[d1.getMonth()]+" "+result[i].billFullDetails.toMonth.substr(0,4);
 			                    console.log(result[i].billFullDetails.toMonth);
 			                }
 			            });
