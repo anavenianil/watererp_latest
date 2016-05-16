@@ -5,7 +5,7 @@ angular
 		.controller(
 				'CustomerComplaintsDetailController',
 				function($scope, $state, $filter, $rootScope, $stateParams,
-						$http, CustomerComplaints, ComplaintTypeMaster,
+						$http, $window, CustomerComplaints, ComplaintTypeMaster,
 						Principal, RequestWorkflowHistory, ParseLinks,
 						ApplicationTxnService, BillFullDetailsSvc, DateUtils,
 						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN) {
@@ -55,7 +55,8 @@ angular
 
 					var onSaveSuccess = function(result) {
 						$scope.isSaving = false;
-						$state.go('customerComplaints');
+						//$state.go('customerComplaints');
+						$window.history.back();
 					};
 
 					var onSaveError = function(result) {
@@ -121,12 +122,9 @@ angular
 			                $scope.links = ParseLinks.parse(headers('link'));
 			                for (var i = 0; i < result.length; i++) {
 			                    $scope.billRunDetailss.push(result[i]);
-			                    console.log(result[i].billFullDetails.fromMonth.substr(4, 2));
-			                    console.log(result[i].billFullDetails.fromMonth.substr(0, 4));
-			                    console.log(new Date('2016-04'));
+			                    $scope.billFullDetailss.push(result[i].billFullDetails);
 			                    var d = new Date(result[i].billFullDetails.fromMonth.substr(0, 4)+'-'+result[i].billFullDetails.fromMonth.substr(4, 2));
 			                    var d1 = new Date(result[i].billFullDetails.toMonth.substr(0, 4)+'-'+result[i].billFullDetails.toMonth.substr(4, 2));
-			                    
 			                    $scope.month[0] = "Jan";
 			                    $scope.month[1] = "Feb";
 			                    $scope.month[2] = "Mar";
@@ -139,11 +137,8 @@ angular
 			                    $scope.month[9] = "Oct";
 			                    $scope.month[10] = "Nov";
 			                    $scope.month[11] = "Dec";
-			                    console.log($scope.month[d.getMonth()]+" "+result[i].billFullDetails.fromMonth.substr(0,4));
-			                    console.log($scope.month[d1.getMonth()]+" "+result[i].billFullDetails.toMonth.substr(0,4));
 			                    result[i].billFullDetails.fromMonth = $scope.month[d.getMonth()]+" "+result[i].billFullDetails.fromMonth.substr(0,4);
 			                    result[i].billFullDetails.toMonth = $scope.month[d1.getMonth()]+" "+result[i].billFullDetails.toMonth.substr(0,4);
-			                    console.log(result[i].billFullDetails.toMonth);
 			                }
 			            });
 			        };
@@ -158,23 +153,23 @@ angular
 						var ret = false;
 						switch ($scope.customerComplaints.status) {
 						case 0:
-							if ($scope.orgRole.id === 18)
+							if ($scope.orgRole.id === 18)	//ICT & Customer Care Officer
 								ret = true;
 							break;
 						case 1:
-							if ($scope.orgRole.id === 11)
+							if ($scope.orgRole.id === 11 || $scope.orgRole.id === 10)	//Commercial Manager || Technical Manager
 								ret = true;
 							break;
 						case 2:
-							if ($scope.orgRole.id === 12)
+							if ($scope.orgRole.id === 12 || $scope.orgRole.id === 24)	//Finance Manager || Technical Zonal Supervisor
 								ret = true;
 							break;
 						case 3:
-							if ($scope.orgRole.id === 4)
+							if ($scope.orgRole.id === 4 || $scope.orgRole.id === 10)	//Managing Director || Technical Manager
 								ret = true;
 							break;
 						case 4:
-							if ($scope.orgRole.id === 16)
+							if ($scope.orgRole.id === 16)	//Billing Officer
 								ret = true;
 							break;
 						default:
