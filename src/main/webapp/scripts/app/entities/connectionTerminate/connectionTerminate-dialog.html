@@ -31,7 +31,11 @@
 						</div>
 					</div>
 					<hr>
-					<br>
+					<div class="row">
+						<div class=" col-sm-4 col-md-offset-4">
+							<span ng-model="arrearsMessage"><h4 class="danger">{{arrearsMessage}}</h4></span>
+						</div>
+					</div>
 					<fieldset>
 						<legend>Customer Information</legend>
 						<div class="row">
@@ -69,11 +73,12 @@
 
 						<div class="row">
 							<div class="col-sm-3">
-								<label class="control-label" for="field_houseNo">House No.</label>
-								<input type="text" class="form-control" name="houseNo"
-									id="field_houseNo" ng-model="custDetails.houseNo" disabled />
+								<label class="control-label" for="field_houseNo">House
+									No./Plot No.</label> <input type="text" class="form-control"
+									name="houseNo" id="field_houseNo"
+									ng-model="custDetails.houseNo" disabled />
 							</div>
-							<div class="col-sm-3">
+							<!-- <div class="col-sm-3">
 								<label class="control-label" for="field_secName">SecName</label>
 								<input type="text" class="form-control" name="secName"
 									id="field_secName" ng-model="custDetails.secName" disabled />
@@ -82,6 +87,24 @@
 								<label class="control-label" for="field_secCode">SecCode</label>
 								<input type="text" class="form-control" name="secCode"
 									id="field_secCode" ng-model="custDetails.secCode" disabled />
+							</div> -->
+							<div class="col-sm-3">
+								<label for="field_divisionMaster">DMA</label> <select
+									class="form-control" id="field_divisionMaster"
+									name="divisionMaster" ng-model="custDetails.divisionMaster"
+									ng-options="divisionMaster as divisionMaster.divisionName+'('+ divisionMaster.divisionCode+')' for divisionMaster in divisionmasters track by divisionMaster.id"
+									required disabled>
+									<option value=""></option>
+								</select>
+							</div>
+							<div class="col-sm-3">
+								<label for="field_streetMaster">Street</label> <select
+									class="form-control" id="field_streetMaster"
+									name="streetMaster" ng-model="custDetails.streetMaster"
+									ng-options="streetMaster as streetMaster.streetName +'('+ streetMaster.streetNo +')' for streetMaster in streetMasters track by streetMaster.id"
+									required disabled>
+									<option value=""></option>
+								</select>
 							</div>
 							<div class="col-sm-3">
 								<label class="control-label" for="field_city">City</label> <input
@@ -144,10 +167,10 @@
 									name="meterRecovered" id="field_meterRecovered"
 									ng-model="connectionTerminate.meterRecovered" />
 							</div> -->
-							
+
 
 						</div>
-						<div class="row">
+						<div class="row" ng-if="orgRole.id === 10">
 							<div class="col-sm-4">
 								<label class="control-label" for="field_meterRecovered">Meter
 									Recovered</label>

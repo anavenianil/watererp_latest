@@ -2,11 +2,13 @@
 
 angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ ConnectionTerminate, MeterDetails, $http, CustDetailsSearchCAN, 
-        		ParseLinks, GetMeterDetails, $state) {
+        		ParseLinks, GetMeterDetails, $state, StreetMaster, DivisionMaster) {
 
         $scope.connectionTerminate = {};
         $scope.custDetails = {};
         $scope.maxDt = new Date();
+        $scope.divisionmasters = DivisionMaster.query();
+        $scope.streetMasters = StreetMaster.query();
         //$scope.meterdetailss = MeterDetails.query();
         $scope.load = function(id) {
             ConnectionTerminate.get({id : id}, function(result) {
@@ -102,7 +104,9 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.connectionTerminate.can = $scope.custDetails.can; 
-                $scope.getMeterDetail($scope.custDetails.meterNo)
+                $scope.getMeterDetail($scope.custDetails.meterNo);
+                $scope.arrearsMessage = "Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
+                //console.log($scope.divisionmasters);
             });
         };
         

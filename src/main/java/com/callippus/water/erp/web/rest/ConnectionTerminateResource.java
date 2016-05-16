@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,7 @@ public class ConnectionTerminateResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<ConnectionTerminate> createConnectionTerminate(@RequestBody ConnectionTerminate connectionTerminate) throws URISyntaxException {
         log.debug("REST request to save ConnectionTerminate : {}", connectionTerminate);
         if (connectionTerminate.getId() != null) {
@@ -67,8 +69,15 @@ public class ConnectionTerminateResource {
         }
         CustDetails custDetails= custDetailsRepository.findByCan(connectionTerminate.getCan());
         if(custDetails.getStatus()==CustStatus.TERMINATED){
-        	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("connectionTerminate", "idexists", "Connection Already Terminated")).body(null);
+        	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("connectionTerminate", "idexists", "Connection already terminated")).body(null);
         }
+        if(custDetails.getStatus()==CustStatus.PROCESSING){
+        	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("connectionTerminate", "idexists", "Request already submitted for termination")).body(null);
+        }
+        if(custDetails.getStatus()==CustStatus.ACTIVE){
+        	custDetails.setStatus(CustStatus.PROCESSING);
+        }
+        custDetailsRepository.save(custDetails);
         ConnectionTerminate result = connectionTerminateRepository.save(connectionTerminate);
         try {
 			workflowService.getUserDetails();

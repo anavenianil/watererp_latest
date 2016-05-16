@@ -41,6 +41,9 @@ angular.module('watererpApp').controller(
 				if(requestTypeId===7){//METER CHANGE
 					$state.go('meterChange.detail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
+				if(requestTypeId===11){//CONNECTION TERMINATION
+					$state.go('connectionTerminate.detail',{id:domainObjectId, requestTypeId:requestTypeId});
+				}
 			}
 
 		});
