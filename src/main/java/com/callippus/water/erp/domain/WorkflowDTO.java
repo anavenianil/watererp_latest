@@ -10,6 +10,7 @@ public class WorkflowDTO {
 	private List<WorkflowTxnDetails> workflowTxnDetailss;
 	private RequestWorkflowHistory requestWorkflowHistory;
 	private ConnectionTerminate connectionTerminate;
+	private Customer customer;
 	private String remarks;
 	private ZonedDateTime approvedDate;
 	
@@ -19,10 +20,17 @@ public class WorkflowDTO {
 	public void setWorkflowTxnDetails(WorkflowTxnDetails workflowTxnDetails) {
 		this.workflowTxnDetails = workflowTxnDetails;
 	}*/
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	
 	public List<WorkflowTxnDetails> getWorkflowTxnDetailss() {
 		return workflowTxnDetailss;
 	}
+	
 	public void setWorkflowTxnDetailss(List<WorkflowTxnDetails> workflowTxnDetailss) {
 		this.workflowTxnDetailss = workflowTxnDetailss;
 	}

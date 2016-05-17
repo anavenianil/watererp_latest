@@ -5,13 +5,26 @@ angular
 		.controller(
 				'CustomerCategoryChangeDetailController',
 				function($scope, $stateParams, CustDetails,
-						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal) {
+						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal, $window) {
 
 					$scope.customer = {};
 					$scope.customer.changeType = "CONNECTIONCATEGORY";
 					
+					$scope.workflowDTO = {};
+					$scope.workflowDTO.customer = {};
+					
 					$scope.custDetails = {};
 					$scope.orgRole = Principal.getOrgRole();
+					
+					$scope.datePickerForApprovedDate = {};
+
+			        $scope.datePickerForApprovedDate.status = {
+			            opened: false
+			        };
+
+			        $scope.datePickerForApprovedDateOpen = function($event) {
+			            $scope.datePickerForApprovedDate.status.opened = true;
+			        };
 					
 					//$scope.tariffcategorymasters = TariffCategoryMaster.query();
 					//$scope.pipeSizeMasters = PipeSizeMaster.query();
@@ -36,6 +49,7 @@ angular
 			                $scope.customer = result;
 			                $scope.getCustDetails($scope.customer.can);
 			                $scope.customer.remarks = "";
+			                $scope.workflowDTO.customer = $scope.customer; 
 			            });
 			        };
 					
@@ -104,9 +118,16 @@ angular
 			        	return $http.post('/api/customers/customersApprove',
 								customer).then(
 								function(response) {
-									console.log("Server response:"
-											+ JSON.stringify(response));
 									$state.go('customer.categoryChangeList');
+								});
+			        }
+					
+					//declineRequest
+					$scope.declineRequest = function(workflowDTO){
+			        	return $http.post('/api/customers/declineRequest',
+								workflowDTO).then(
+								function(response) {
+									$window.history.back();
 								});
 			        }
 					
