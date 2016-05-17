@@ -233,7 +233,7 @@ public class CustomerResource {
 			@RequestBody WorkflowDTO workflowDTO)
 			throws Exception {
 		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
-		
+		customerRepository.save(workflowDTO.getCustomer());
 		workflowService.setRemarks(workflowDTO.getCustomer().getRemarks());
 		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
 		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
