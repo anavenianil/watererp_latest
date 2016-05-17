@@ -33,9 +33,9 @@ angular.module('watererpApp')
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'ConnectionTerminate', function($stateParams, ConnectionTerminate) {
+                    /*entity: ['$stateParams', 'ConnectionTerminate', function($stateParams, ConnectionTerminate) {
                         return ConnectionTerminate.get({id : $stateParams.id});
-                    }]
+                    }]*/
                 }
             })
             /*.state('connectionTerminate.new', {

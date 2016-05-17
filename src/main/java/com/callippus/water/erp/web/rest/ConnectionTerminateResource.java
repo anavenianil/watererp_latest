@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.domain.ConnectionTerminate;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
+import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
@@ -169,6 +170,11 @@ public class ConnectionTerminateResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("connectionTerminate", id.toString())).build();
     }
     
+    
+    
+    /**
+     * APPROVE  /connectionTerminates/approve -> terminate the "CAN" connectionTerminate.
+     */
     @RequestMapping(value = "/connectionTerminates/approve", 
     		method = RequestMethod.POST, 
     		produces = MediaType.APPLICATION_JSON_VALUE)
@@ -191,11 +197,12 @@ public class ConnectionTerminateResource {
 		meterDetailsRepository.save(meterDetails);
 		
 		CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(custDetails, null);
-        //cmpOld.setToDate(connectionTerminate.get);
+        cmpOld.setToDate(connectionTerminate.getMeterRecoveredDate());
         custMeterMappingRepository.save(cmpOld);
         
 		try {
 			workflowService.setRemarks(workflowDTO.getRemarks());
+			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
 			workflowService.getUserDetails();
 			connectionTerminateWorkflowService
 					.approvedCahangeCaseRequest(connectionTerminate);
@@ -203,6 +210,30 @@ public class ConnectionTerminateResource {
 			e.printStackTrace();
 		}
 		return ResponseEntity.created(new URI("/api/connectionTerminates/"))
+				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
+				.body(null);
+	}
+    
+    /**
+     * Decline the request
+     */
+    @RequestMapping(value = "/connectionTerminates/declineRequest",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+	public ResponseEntity<ConnectionTerminate> declineRequests(
+			@RequestBody WorkflowDTO workflowDTO)
+			throws Exception {
+		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
+		
+		workflowService.setRemarks(workflowDTO.getRemarks());
+		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+		CustDetails custDetails = custDetailsRepository.findByCan(workflowDTO.getConnectionTerminate().getCan());
+		custDetails.setStatus(CustStatus.ACTIVE);
+		custDetailsRepository.save(custDetails);
+		connectionTerminateWorkflowService.declineRequest(workflowDTO.getConnectionTerminate().getId());
+		return ResponseEntity.created(new URI("/api/connectionTerminates/declineRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
 				.body(null);
 	}

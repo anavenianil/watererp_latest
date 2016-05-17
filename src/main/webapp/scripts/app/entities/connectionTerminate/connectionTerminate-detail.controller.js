@@ -1,19 +1,33 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ConnectionTerminateDetailController', function ($scope, $rootScope, $stateParams, entity, ConnectionTerminate, 
+    .controller('ConnectionTerminateDetailController', function ($scope, $rootScope, $stateParams, ConnectionTerminate, 
     		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window) {
-        $scope.connectionTerminate = entity;
+        $scope.connectionTerminate = {};
         $scope.workflowDTO = {};
-        $scope.workflowDTO.connectionTerminate = entity;
+        //$scope.workflowDTO.connectionTerminate = entity;
         $scope.custDetails = {};
         
         $scope.orgRole = Principal.getOrgRole();
+        
+		
+		$scope.getCustDetails = function(can) {
+			CustDetailsSearchCAN.get({can : can}, function(result) {
+                $scope.custDetails = result;
+            });
+        };
+		
         $scope.load = function (id) {
             ConnectionTerminate.get({id: id}, function(result) {
                 $scope.connectionTerminate = result;
+                $scope.workflowDTO.connectionTerminate = result;
+                $scope.getCustDetails($scope.connectionTerminate.can);
             });
         };
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id)
+        }
+        
         
         var unsubscribe = $rootScope.$on('watererpApp:connectionTerminateUpdate', function(event, result) {
             $scope.connectionTerminate = result;
@@ -31,12 +45,8 @@ angular.module('watererpApp')
         };
         $scope.getWorkflowHistoryByDomainId();
         
-        $scope.getCustDetails = function(can) {
-			CustDetailsSearchCAN.get({can : can},function(result) {
-								$scope.custDetails = result;
-							});
-		};
-		$scope.getCustDetails($scope.connectionTerminate.can);
+        
+		//$scope.getCustDetails($scope.connectionTerminate.can);
 		
 		$scope.datePickerForMeterRecoveredDate = {};
 
@@ -46,6 +56,16 @@ angular.module('watererpApp')
 
         $scope.datePickerForMeterRecoveredDateOpen = function($event) {
             $scope.datePickerForMeterRecoveredDate.status.opened = true;
+        };
+        
+        $scope.datePickerForApprovedDate = {};
+
+        $scope.datePickerForApprovedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForApprovedDateOpen = function($event) {
+            $scope.datePickerForApprovedDate.status.opened = true;
         };
         
 		$scope.canDecline = function() {
@@ -66,19 +86,15 @@ angular.module('watererpApp')
         	return $http.post('/api/connectionTerminates/approve',
 					workflowDTO).then(
 					function(response) {
-						console.log("Server response:"
-								+ JSON.stringify(response));
 						$window.history.back();
 					});
         }
 		
 		
-		$scope.declineRequest = function(meterChange){
+		$scope.declineRequest = function(workflowDTO){
         	return $http.post('/api/connectionTerminates/declineRequest',
 					workflowDTO ).then(
 					function(response) {
-						console.log("Server response:"
-								+ JSON.stringify(response));
 						$window.history.back();
 					});
         }

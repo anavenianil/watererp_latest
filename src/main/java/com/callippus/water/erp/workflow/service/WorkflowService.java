@@ -1,6 +1,7 @@
 package com.callippus.water.erp.workflow.service;
 
 import java.net.InetAddress;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,9 +120,17 @@ public class WorkflowService {
 	
 	private Long requestWorkflowHistoryId;
 	
+	private ZonedDateTime approvedDate;
+	
 	// =================Workflow Process=================
 
-	
+	public ZonedDateTime getApprovedDate() {
+		return approvedDate;
+	}
+
+	public void setApprovedDate(ZonedDateTime approvedDate) {
+		this.approvedDate = approvedDate;
+	}
 
 	public Long getRequestWorkflowHistoryId() {
 		return requestWorkflowHistoryId;
