@@ -127,7 +127,12 @@
 							</tr>
 							<tr>
 								<td><span>Relevant Document</span></td>
-								<td><span class="form-control-static">{{customerComplaints.relevantDoc}}</span>
+								<td>
+								<div ng-hide="customerComplaints.relevantDoc === ''">
+								<span class="form-control-static">
+								<a href="{{customerComplaints.relevantDoc}}">Download&nbsp;<span
+										class="glyphicon glyphicon-download"></span></a></span>
+								</div>
 								</td>
 							</tr>
 							<tr>
