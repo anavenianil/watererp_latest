@@ -9,14 +9,17 @@ angular.module('watererpApp').controller(
 			$scope.myRequests = [];
 			$scope.$state = $state;
 			$scope.isAuthenticated = Principal.isAuthenticated;
-			Principal.getModuleMenus().then(
-					function(response) {
-						$scope.module2menu_items = response;
-					});
+			$scope.module2menu_items = {};
+			
+			if ($scope.isAuthenticated()) {
+				Principal.getModuleMenus().then(function(response) {
+					$scope.module2menu_items = response;
+				});
+			}
 
 			$scope.myLogout = function() {
 				Auth.logout();
-				window.location = '/';
+				window.location = '/erpLogin.html';
 			};
 
 			$scope.getLogin = function() {
