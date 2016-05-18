@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -85,6 +86,7 @@ public class CustomerComplaintsResource {
         
         try{
         	workflowService.getUserDetails();
+        	workflowService.setAssignedDate(ZonedDateTime.now().toString());
         	customerComplaintsWorkflowService.createTxn(customerComplaints);
         }
         catch(Exception e){
@@ -111,6 +113,7 @@ public class CustomerComplaintsResource {
         }
         if(customerComplaints.getStatus() == 4){
         	CustDetails custDetails = custDetailsRepository.findByCan(customerComplaints.getCan());
+        	System.out.println(custDetails);
         	custDetails.setOtherCharges(custDetails.getOtherCharges() +  customerComplaints.getAdjustmentAmt());
         	custDetailsRepository.save(custDetails);
         }
@@ -201,7 +204,8 @@ public class CustomerComplaintsResource {
 		workflowService.getUserDetails();
 		workflowService.getRequestType();
 		CustomerComplaints customerComplaints = customerComplaintsRepository.findOne(id);
-	    workflowService.setRemarks(remarks);  
+	    workflowService.setRemarks(remarks); 
+	    workflowService.setApprovedDate(ZonedDateTime.now());
 	    //Integer status = customerComplaints.getStatus();
 	   // status +=1;
 	    //customerComplaints.setStatus(status);

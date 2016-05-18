@@ -10,7 +10,11 @@ angular
 						ApplicationTxnService, BillFullDetailsSvc, DateUtils,
 						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN) {
 					// This code is used to get the role name / designation.
-					$scope.orgRole = Principal.getOrgRole();
+					//$scope.orgRole = Principal.getOrgRole();
+					
+					Principal.getOrgRole().then(function(response) {
+						$scope.orgRole = response;
+					});
 
 					$scope.customerComplaints = {};
 					$scope.billFullDetailss = [];
