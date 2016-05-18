@@ -11,14 +11,12 @@
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
-							<!-- <th>Req. Id</th>
-							<th>Req. No.</th> -->
 							<th>From</th>
+							<th>To</th>
 							<th>Remarks</th>
 							<th>Actioned Date</th>
-							<th>To</th>
-							<th>Status</th>
 							<th>IP Address</th>
+							<th>Status</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,12 +25,13 @@
 							<td>{{item.fileNumber}}</td> -->
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
-							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.ipAddress}}</td>
+							<td>{{item.statusMaster.status}}</td>
+
 						</tr>
 					</tbody>
 				</table>
@@ -63,6 +62,10 @@
 						<legend>Applicant Details</legend>
 						<div class="row">
 							<div class="col-sm-3">
+								<label>Customer Account Number(CAN)</label>
+								<h5 class="list-group-item-heading">{{customer.can}}</h5>
+							</div>
+							<div class="col-sm-3">
 								<label>Full Name</label>
 								<h5 class="list-group-item-heading">{{custDetails.consName}}</h5>
 							</div>
@@ -73,25 +76,6 @@
 							<div class="col-sm-3">
 								<label>Email</label>
 								<h5 class="list-group-item-heading">{{custDetails.email}}</h5>
-							</div>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend></legend>
-						<div class="row">
-							<div class="col-sm-3">
-								<label>Change Case No</label>
-								<h5 class="list-group-item-heading">{{customer.id}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Requested Date</label>
-								<h5 class="list-group-item-heading">{{customer.requestedDate
-									| date:'mediumDate'}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Customer Account Number(CAN)</label>
-								<h5 class="list-group-item-heading">{{customer.can}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -128,18 +112,41 @@
 									<a href="{{customer.photo}}">Download</a>&nbsp;<span
 										class="glyphicon glyphicon-download"></span>
 								</div>
-								<!-- <h5 class="list-group-item-heading">{{customer.email}}</h5> -->
 							</div>
 						</div>
 						<br>
+						<hr>
 						<div class="row">
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label>ID Proof(Submitted)</label>
 								<h5 class="list-group-item-heading">{{customer.newProofMaster.idProof}}</h5>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<label>ID Number</label>
 								<h5 class="list-group-item-heading">{{customer.idNumber}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Requested Date</label>
+								<h5 class="list-group-item-heading">{{customer.requestedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_changedDate">Changed
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_changedDate'>
+										<input id="field_changedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="workflowDTO.customer.approvedDate" max-date="maxDt"
+											is-open="datePickerForChangedDate.status.opened" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForChangedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</fieldset>
@@ -159,9 +166,14 @@
 			</div>
 		</div>
 
-		<button type="button" class="btn btn-success pull-right"
+		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-show="canDecline()"
-			ng-click="approve(customer)">
+			ui-sref="receiptForNameChange({customerId:customer.id})">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
+		</button> -->
+
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="canDecline()" ng-click="approve(customer)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
@@ -177,13 +189,13 @@
 			ng-click="approve(customer)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete
 		</button> -->
-		
+
 		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-show="canDecline()" ng-click="approve(customer)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button> -->
 
-		
+
 
 		<!-- <button type="button" class="btn btn-danger pull-right"
 			ng-click="declineRequest(applicationTxn.id)">

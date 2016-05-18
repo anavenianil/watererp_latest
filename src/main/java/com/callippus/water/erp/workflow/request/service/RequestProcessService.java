@@ -516,9 +516,12 @@ public class RequestProcessService {
 				workflowService.getWorkflowID())));
 		ZonedDateTime now = ZonedDateTime.now();
 		//rwh.setActionedDate(now);
-		
-		rwh.setAssignedDate(requestWorkflowHistoryRepository.findOne(Long.parseLong(workflowService.getHistoryID())).getActionedDate());
-
+		if(workflowService.getHistoryID() != null){
+			rwh.setAssignedDate(requestWorkflowHistoryRepository.findOne(Long.parseLong(workflowService.getHistoryID())).getActionedDate());
+		}
+		else{
+			rwh.setAssignedDate(ZonedDateTime.parse(workflowService.getAssignedDate()));
+		}
 		RequestWorkflowHistory requestWorkflowHistory = requestWorkflowHistoryRepository.save(rwh);
 		workflowService.setRequestWorkflowHistoryId(requestWorkflowHistory.getId());
 		
@@ -544,13 +547,14 @@ public class RequestProcessService {
 		log.debug("<RequestProcess Method >>>updateRequestHistory(String historyID, String mode)>");
 		String message = null;
 		//ZonedDateTime dateTime = ZonedDateTime.parse(actionedDate);
-
-		RequestWorkflowHistory requestWorkflowHistory = requestWorkflowHistoryRepository.findOne(Long.parseLong(historyID));
-		requestWorkflowHistory.setRemarks(remarks);
-		requestWorkflowHistory.setIpAddress(ipAddress);
-		requestWorkflowHistory.setActionedDate(approvedDate);
-		requestWorkflowHistory.setStatusMaster(statusMasterRepository.findByStatus(mode.toUpperCase()));
-		requestWorkflowHistoryRepository.save(requestWorkflowHistory);
+		if(historyID!=null){
+			RequestWorkflowHistory requestWorkflowHistory = requestWorkflowHistoryRepository.findOne(Long.parseLong(historyID));
+			requestWorkflowHistory.setRemarks(remarks);
+			requestWorkflowHistory.setIpAddress(ipAddress);
+			requestWorkflowHistory.setActionedDate(approvedDate);
+			requestWorkflowHistory.setStatusMaster(statusMasterRepository.findByStatus(mode.toUpperCase()));
+			requestWorkflowHistoryRepository.save(requestWorkflowHistory);
+		}
 		
 		/*String updateHistory = "update request_workflow_history set status_master_id=(select id from status_master where status=upper('"
 				+ mode
@@ -559,7 +563,7 @@ public class RequestProcessService {
 				+ "',remarks='"
 				+ remarks
 				+ "', actioned_date= '"
-				+ approvedDate.toLocalDateTime()
+				+ approvedDate
 				+ "' where id="
 				+ historyID;
 		log.debug("SQL : updateHistory > > " + updateHistory);

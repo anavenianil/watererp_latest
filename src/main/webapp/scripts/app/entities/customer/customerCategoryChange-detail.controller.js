@@ -11,10 +11,14 @@ angular
 					$scope.customer.changeType = "CONNECTIONCATEGORY";
 					
 					$scope.workflowDTO = {};
-					$scope.workflowDTO.customer = {};
+					//$scope.workflowDTO.customer = {};
 					
 					$scope.custDetails = {};
-					$scope.orgRole = Principal.getOrgRole();
+					//$scope.orgRole = Principal.getOrgRole();
+					$scope.orgRole = {};
+					Principal.getOrgRole().then(function(response) {
+						$scope.orgRole = response;
+					});
 					
 					$scope.datePickerForApprovedDate = {};
 
@@ -46,10 +50,11 @@ angular
 					
 					$scope.load = function (id) {
 			            Customer.get({id: id}, function(result) {
-			                $scope.customer = result;
-			                $scope.getCustDetails($scope.customer.can);
+			            	$scope.customer = result;
+			            	$scope.workflowDTO.customer = result;
+			                $scope.getCustDetails(result.can);
 			                $scope.customer.remarks = "";
-			                $scope.workflowDTO.customer = $scope.customer; 
+			                //$scope.workflowDTO.customer = $scope.customer; 
 			            });
 			        };
 					
@@ -114,9 +119,9 @@ angular
 					}*/
 				
 					//approve a request
-					$scope.approve = function(customer){
+					$scope.approve = function(workflowDTO){
 			        	return $http.post('/api/customers/customersApprove',
-								customer).then(
+								workflowDTO).then(
 								function(response) {
 									$state.go('customer.categoryChangeList');
 								});
@@ -135,7 +140,7 @@ angular
 						var ret = false;
 						switch ($scope.customer.status) {
 						case 0:
-							if ($scope.orgRole.orgRoleName === 'Technical Manager')
+							if ($scope.orgRole.id === 10)
 								ret = true;
 							break;
 						case 1:

@@ -168,7 +168,7 @@
 							<div class="col-sm-9">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="customer.remarks" required></textarea>
+									id="field_remarks" ng-model="workflowDTO.remarks" required></textarea>
 							</div>
 						</div>
 					</fieldset>
@@ -179,7 +179,7 @@
 
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="canDecline()" ng-click="approve(customer)">
+			ng-show="canDecline()" ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>
 
