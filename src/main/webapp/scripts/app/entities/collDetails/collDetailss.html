@@ -1,5 +1,5 @@
 <div>
-	<h2>Collection Detailss</h2>
+	<h2>Collection Details</h2>
 	<jh-alert></jh-alert>
 	<div class="container-fluid">
 		<div class="row">
@@ -18,10 +18,14 @@
 				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
 					<th jh-sort-by="id"><span>ID</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="reversalRef"><span>Reversal Reference</span> <span
+			   		<th jh-sort-by="can"><span>CAN</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="consName"><span>Consumer Name</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<!-- <th jh-sort-by="reversalRef"><span>Reversal Reference</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="receiptNo"><span>Receipt Number</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
+						class="glyphicon glyphicon-sort"></span></th> -->
 					<th jh-sort-by="receiptAmt"><span>Receipt Amount</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="receiptDt"><span>Receipt Date</span> <span
@@ -35,10 +39,6 @@
 					<th jh-sort-by="instrIssuer"><span>Instrument Issuer</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="svrStatus"><span>Server Status</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="can"><span>CAN</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="consName"><span>Consumer Name</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="terminalId"><span>Terminal Id</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
@@ -73,8 +73,10 @@
 				infinite-scroll-disabled="links['last'] == page">
 				<tr ng-repeat="collDetails in collDetailss track by collDetails.id">
 					<td><a ui-sref="collDetails.detail({id:collDetails.id})">{{collDetails.id}}</a></td>
-					<td>{{collDetails.reversalRef}}</td>
-					<td>{{collDetails.receiptNo}}</td>
+					<td>{{collDetails.can}}</td>
+					<td>{{collDetails.consName}}</td>
+					<!-- <td>{{collDetails.reversalRef}}</td>
+					<td>{{collDetails.receiptNo}}</td> -->
 					<td>{{collDetails.receiptAmt}}</td>
 					<td>{{collDetails.receiptDt | date:'medium'}}</td>
 					<td>{{collDetails.receiptMode}}</td>
@@ -82,8 +84,6 @@
 					<td>{{collDetails.instrDt | date:'mediumDate'}}</td>
 					<td>{{collDetails.instrIssuer}}</td>
 					<td>{{collDetails.svrStatus}}</td>
-					<td>{{collDetails.can}}</td>
-					<td>{{collDetails.consName}}</td>
 					<td>{{collDetails.terminalId}}</td>
 					<td>{{collDetails.collTime | date:'medium'}}</td>
 					<td>{{collDetails.txnStatus}}</td>

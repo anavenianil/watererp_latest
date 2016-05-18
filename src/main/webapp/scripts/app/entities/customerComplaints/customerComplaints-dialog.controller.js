@@ -97,7 +97,6 @@ angular
 					};
 
 					$scope.clear = function() {
-						//$uibModalInstance.dismiss('cancel');
 						$scope.customerComplaints = {
 							remarks : null,
 							relevantDoc : null,
@@ -108,6 +107,7 @@ angular
 						};
 						$scope.customerComplaints.complaintDate = new Date();
 					};
+					
 					$scope.datePickerForComplaintDate = {};
 
 					$scope.datePickerForComplaintDate.status = {

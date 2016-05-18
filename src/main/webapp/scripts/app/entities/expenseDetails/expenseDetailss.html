@@ -1,5 +1,5 @@
 <div>
-    <h2>Expense Detailss</h2>
+    <h2>Expense Details</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
@@ -7,7 +7,7 @@
                 <button class="btn btn-primary" ui-sref="expenseDetails.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span 
-                       >Create new Expense Details
+                       >Create New Expense Details
                     </span>
                 </button>
             </div>
@@ -33,19 +33,19 @@
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="expenseDetails in expenseDetailss track by expenseDetails.id">
                     <td><a ui-sref="expenseDetails.detail({id:expenseDetails.id})">{{expenseDetails.id}}</a></td>
-                    <td>{{expenseDetails.expenseNo}}</td>
+                    <td>{{expenseDetails.id}}</td>
                     <td>{{expenseDetails.expenseAmt}}</td>
                     <td>{{expenseDetails.expenseDt | date:'medium'}}</td>
                     <td>{{expenseDetails.instrNo}}</td>
                         <td>{{expenseDetails.instrDt | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="paymentTypes.detail({id:expenseDetails.paymentTypes.id})">{{expenseDetails.paymentTypes.id}}</a>
+                        {{expenseDetails.paymentTypes.paymentMode}}
                     </td>
                     <td>
-                        <a ui-sref="instrumentIssuerMaster.detail({id:expenseDetails.instrumentIssuerMaster.id})">{{expenseDetails.instrumentIssuerMaster.id}}</a>
+                        {{expenseDetails.instrumentIssuerMaster.instrumentIssuer}}
                     </td>
                     <td>
-                        <a ui-sref="collectionTypeMaster.detail({id:expenseDetails.collectionTypeMaster.id})">{{expenseDetails.collectionTypeMaster.id}}</a>
+                        {{expenseDetails.collectionTypeMaster.collName}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
