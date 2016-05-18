@@ -137,7 +137,7 @@ public class RequestProcessService {
 	private StatusMasterRepository statusMasterRepository;
 
 	@Inject
-	private RequestWorkflowHistoryRepository request_workflow_historyRepository;
+	private RequestWorkflowHistoryRepository requestWorkflowHistoryRepository;
 
 	@Inject
 	private UserRepository userRepository;
@@ -414,7 +414,8 @@ public class RequestProcessService {
 			workflowService.setMessage(updateRequestHistory(
 					workflowService.getHistoryID(), CPSConstants.COMPLETED,
 					workflowService.getIpAddress(),
-					workflowService.getRemarks()));
+					workflowService.getRemarks(),
+					workflowService.getApprovedDate()));
 			if (CPSUtils.compareStrings(workflowService.getMessage(),
 					CPSConstants.SUCCESS)) {
 				workflowService.setMessage(CPSConstants.UPDATE);
@@ -455,7 +456,7 @@ public class RequestProcessService {
 			log.debug("Employee has configured auto delegate configuration");
 			workflowService.setMessage(updateRequestHistory(
 					workflowService.getHistoryID(), CPSConstants.DELEGATED,
-					workflowService.getIpAddress(), ""));
+					workflowService.getIpAddress(), "", workflowService.getApprovedDate()));
 			if (CPSUtils.compareStrings(CPSConstants.SUCCESS,
 					workflowService.getMessage())) {
 				insertHistory(workflowService);
@@ -514,10 +515,10 @@ public class RequestProcessService {
 		rwh.setWorkflowMaster(workflowMasterRepository.findOne(new Long(
 				workflowService.getWorkflowID())));
 		ZonedDateTime now = ZonedDateTime.now();
-		rwh.setActionedDate(now);
+		//rwh.setActionedDate(now);
 		rwh.setAssignedDate(now);
 
-		RequestWorkflowHistory requestWorkflowHistory = request_workflow_historyRepository.save(rwh);
+		RequestWorkflowHistory requestWorkflowHistory = requestWorkflowHistoryRepository.save(rwh);
 		workflowService.setRequestWorkflowHistoryId(requestWorkflowHistory.getId());
 		
 		log.debug("hisroty ID    >>>" + workflowService.getHistoryID());
@@ -538,38 +539,35 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public String updateRequestHistory(String historyID, String mode,
-			String ipAddress, String remarks) throws Exception {
-		log.debug("    <RequestProcess    Method            >>>updateRequestHistory(String historyID, String mode)        >");
+			String ipAddress, String remarks, ZonedDateTime approvedDate) throws Exception {
+		log.debug("<RequestProcess Method >>>updateRequestHistory(String historyID, String mode)>");
 		String message = null;
+		//ZonedDateTime dateTime = ZonedDateTime.parse(actionedDate);
 
-		/*
-		 * String updateHistory =
-		 * "update t_request_workflow_history set status_id=(select id from t_status_master where status=upper('"
-		 * + mode +
-		 * "')),actioned_date="+CPSUtils.getCurrentDateWithTime()+",ip_address='"
-		 * + ipAddress + "',remarks=" + remarks + " where id=" + historyID + "";
-		 */
-
-		/*
-		 * String getRequestStatus
-		 * ="select id from t_status_master where status=upper('"+mode+"')";
-		 * String request = jdbcTemplate.queryForObject(getRequestStatus,
-		 * String.class);
-		 */
-
-		String updateHistory = "update request_workflow_history set status_master_id=(select id from status_master where status=upper('"
+		RequestWorkflowHistory requestWorkflowHistory = requestWorkflowHistoryRepository.findOne(Long.parseLong(historyID));
+		requestWorkflowHistory.setRemarks(remarks);
+		requestWorkflowHistory.setIpAddress(ipAddress);
+		requestWorkflowHistory.setActionedDate(approvedDate);
+		requestWorkflowHistory.setStatusMaster(statusMasterRepository.findByStatus(mode.toUpperCase()));
+		requestWorkflowHistoryRepository.save(requestWorkflowHistory);
+		
+		/*String updateHistory = "update request_workflow_history set status_master_id=(select id from status_master where status=upper('"
 				+ mode
 				+ "')),ip_address='"
 				+ ipAddress
 				+ "',remarks='"
-				+ remarks 
-				+ "' where id=" + historyID;
+				+ remarks
+				+ "', actioned_date= '"
+				+ approvedDate.toLocalDateTime()
+				+ "' where id="
+				+ historyID;
 		log.debug("SQL : updateHistory > > " + updateHistory);
 		log.debug("Mode     " + mode);
-		log.debug("History ID >>>" + historyID);
+		log.debug("History ID" + historyID);
 		log.debug("IP Address    " + ipAddress);
+		log.debug("Actioned Date "+approvedDate);
 
-		jdbcTemplate.update(updateHistory);
+		jdbcTemplate.update(updateHistory);*/
 
 		/*
 		 * List<java.util.Map<String, Object>> rows = jdbcTemplate
@@ -589,10 +587,10 @@ public class RequestProcessService {
 	 * @throws Exception
 	 */
 	public String declinedRequest(String historyID, String ipAddress,
-			String remarks) throws Exception {
+			String remarks, ZonedDateTime approvedDate) throws Exception {
 		log.debug("    <RequestProcess    Method            >>>declinedRequest(String historyID)        >");
 		return updateRequestHistory(historyID, CPSConstants.DECLINED,
-				ipAddress, remarks);
+				ipAddress, remarks, approvedDate);
 	}
 
 	/**
@@ -617,7 +615,7 @@ public class RequestProcessService {
 		 */
 		workflowService.setMessage(updateRequestHistory(
 				workflowService.getHistoryID(), CPSConstants.DELEGATED,
-				workflowService.getIpAddress(), workflowService.getRemarks()));// DELEGATED
+				workflowService.getIpAddress(), workflowService.getRemarks(), workflowService.getApprovedDate()));// DELEGATED
 
 		log.debug("Messge >>> " + workflowService.getMessage());
 
@@ -805,7 +803,7 @@ public class RequestProcessService {
 				// escalation record is exist for this workflow & stage
 				workflowService.setMessage(updateRequestHistory(reqDetails[0],
 						CPSConstants.ESCALATED, workflowService.getIpAddress(),
-						""));// ESCALATED
+						"", workflowService.getApprovedDate()));// ESCALATED
 
 				if (CPSUtils.compareStrings(workflowService.getMessage(),
 						CPSConstants.SUCCESS)) {
@@ -990,7 +988,7 @@ public class RequestProcessService {
 			workflowService.setMessage(updateRequestHistory(
 					workflowService.getHistoryID(), CPSConstants.APPROVED,
 					workflowService.getIpAddress(),
-					workflowService.getRemarks()));
+					workflowService.getRemarks(), workflowService.getApprovedDate()));
 
 			workflowService.setMessage(initWorkflow());
 		} else {
@@ -1006,7 +1004,8 @@ public class RequestProcessService {
 				workflowService.setMessage(updateRequestHistory(
 						workflowService.getHistoryID(), CPSConstants.APPROVED,
 						workflowService.getIpAddress(),
-						workflowService.getRemarks()));
+						workflowService.getRemarks(),
+						workflowService.getApprovedDate()));
 
 				if (!CPSUtils.isNullOrEmpty(delegatedDetails)) {
 					// If the request was delegated
@@ -1014,7 +1013,8 @@ public class RequestProcessService {
 							delegatedDetails.split(",")[0],
 							CPSConstants.APPROVED,
 							workflowService.getIpAddress(),
-							workflowService.getRemarks()));
+							workflowService.getRemarks(),
+							workflowService.getApprovedDate()));
 				}
 
 				// Next work flow stage exists
@@ -1045,7 +1045,8 @@ public class RequestProcessService {
 								workflowService.getHistoryID(),
 								CPSConstants.COMPLETED,
 								workflowService.getIpAddress(),
-								workflowService.getRemarks()));
+								workflowService.getRemarks(),
+								workflowService.getApprovedDate()));
 						log.debug("Workflows completed");
 
 						if (!CPSUtils.isNullOrEmpty(delegatedDetails)) {
@@ -1054,7 +1055,8 @@ public class RequestProcessService {
 									delegatedDetails.split(",")[0],
 									CPSConstants.COMPLETED,
 									workflowService.getIpAddress(),
-									workflowService.getRemarks()));
+									workflowService.getRemarks(),
+									workflowService.getApprovedDate()));
 						}
 						/**
 						 * No previous workflows were exists so update in the DB
@@ -1074,7 +1076,8 @@ public class RequestProcessService {
 							workflowService.getHistoryID(),
 							CPSConstants.APPROVED,
 							workflowService.getIpAddress(),
-							workflowService.getRemarks()));
+							workflowService.getRemarks(),
+							workflowService.getApprovedDate()));
 
 					// get the next assigned parent ID
 					// getDetailsAndProcessRequest();

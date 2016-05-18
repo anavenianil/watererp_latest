@@ -11,14 +11,12 @@
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
-							<!-- <th>Req. Id</th>
-							<th>Req. No.</th> -->
 							<th>From</th>
+							<th>To</th>
 							<th>Remarks</th>
 							<th>Actioned Date</th>
-							<th>To</th>
-							<th>Status</th>
 							<th>IP Address</th>
+							<th>Status</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,12 +25,13 @@
 							<td>{{item.fileNumber}}</td> -->
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
-							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.ipAddress}}</td>
+							<td>{{item.statusMaster.status}}</td>
+
 						</tr>
 					</tbody>
 				</table>
@@ -60,71 +59,75 @@
 			<div class="list-group">
 				<div class="list-group-item">
 					<fieldset>
+						<legend>Category Change Request Details</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>Request No.</label>
+								<h5 class="list-group-item-heading">{{customer.id}}</h5>
+							</div>
+
+							<div class="col-sm-4">
+								<label>Customer Account Number(CAN)</label>
+								<h5 class="list-group-item-heading">{{customer.can}}</h5>
+							</div>
+							<div class="col-sm-4">
+								<label>Request Date</label>
+								<h5 class="list-group-item-heading">{{customer.requestedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
 						<legend>Applicant Details</legend>
 						<div class="row">
-							<div class="col-sm-3">
-								<label>First Name</label>
+							<div class="col-sm-4">
+								<label>Customer Name</label>
 								<h5 class="list-group-item-heading">{{custDetails.consName}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label> Mobile Number</label>
 								<h5 class="list-group-item-heading">{{custDetails.mobileNo}}</h5>
 							</div>
-							<div class="col-sm-3">
-								<label>Email</label>
+							<div class="col-sm-4">
+								<label>E-mail</label>
 								<h5 class="list-group-item-heading">{{custDetails.email}}</h5>
 							</div>
 						</div>
+						<br>
 						<div class="row">
-							<div class="col-sm-3">
+							<!-- <div class="col-sm-3">
 								<label>Organization</label>
 								<h5 class="list-group-item-heading">{{customer.organization}}</h5>
-							</div>
-							<div class="col-sm-3">
+							</div> -->
+							<div class="col-sm-4">
 								<label>Organization Name</label>
 								<h5 class="list-group-item-heading">{{customer.organizationName}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>Designation</label>
 								<h5 class="list-group-item-heading">{{customer.designation}}</h5>
 							</div>
 						</div>
 					</fieldset>
-					<fieldset>
-						<legend></legend>
-						<div class="row">
-							<div class="col-sm-3">
-								<label>Change Case No</label>
-								<h5 class="list-group-item-heading">{{customer.id}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Request Date</label>
-								<h5 class="list-group-item-heading">{{customer.requestedDate
-									| date:'mediumDate'}}</h5>
-							</div>
-							<div class="col-sm-3" ng-if="custdetails.can!=null">
-								<label>Customer Account Number(CAN)</label>
-								<h5 class="list-group-item-heading">{{customer.can}}</h5>
-							</div>
-						</div>
-					</fieldset>
+
 					<br>
 					<fieldset>
 						<legend>Category Details</legend>
 						<div class="row">
-							<div class="col-sm-3">
+							<!-- <div class="col-sm-3">
 								<label>Previous Reading</label>
 								<h5 class="list-group-item-heading">{{customer.meterReading}}</h5>
-							</div>
-							<div class="col-sm-3">
+							</div> -->
+
+							<div class="col-sm-4">
 								<label>Present Reading</label>
 								<h5 class="list-group-item-heading">{{customer.presentReading}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>Previous Category</label>
 								<h5 class="list-group-item-heading">{{customer.tariffCategoryMaster.tariffCategory}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>New Category</label>
 								<h5 class="list-group-item-heading">{{customer.presentCategory.tariffCategory}}</h5>
 							</div>
@@ -132,7 +135,7 @@
 					</fieldset>
 					<br>
 					<fieldset>
-						<legend>Documents to be Attached </legend>
+						<legend>Attached Documents</legend>
 						<div class="row">
 							<div class="col-sm-6">
 								<label>Property Ownership Document </label>
@@ -144,10 +147,28 @@
 					<fieldset>
 						<legend></legend>
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_approvedDate">Approved
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_approvedDate'>
+										<input id="field_approvedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="workflowDTO.approvedDate" max-date="maxDt"
+											is-open="datePickerForApprovedDate.status.opened" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForApprovedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-9">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="customer.remarks"></textarea>
+									id="field_remarks" ng-model="customer.remarks" required></textarea>
 							</div>
 						</div>
 					</fieldset>
@@ -166,7 +187,7 @@
 
 		<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
-			ng-click="declineRequest(customer.id)">
+			ng-click="declineRequest(workflowDTO)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
 

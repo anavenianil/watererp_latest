@@ -23,6 +23,6 @@ public interface EmpMasterRepository extends JpaRepository<EmpMaster,Long> {
 	
 
 	@Query("select empMaster.officeId from EmpMaster empMaster where empMaster.statusMaster.id=2 and empMaster.user.id = :userId")
-	Integer findActiveOfficeId(@Param("userId") Long userId);
+	OrgRoleInstance findActiveOfficeId(@Param("userId") Long userId);
 
 }
