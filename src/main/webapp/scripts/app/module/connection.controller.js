@@ -9,7 +9,6 @@ angular.module('watererpApp').controller(
 			$scope.myRequests = [];
 
 			Principal.hasAuthority("ROLE_CUSTOMER").then(function(result) {
-				console.log("This is hte result:" + JSON.stringify(result));
 				if (result) {
 					$state.go('applicationTxn.new');
 				}
