@@ -15,7 +15,7 @@
                     <span>Expense Number</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{expenseDetails.expenseNo}}</span>
+                    <span class="form-control-static">{{expenseDetails.id}}</span>
                 </td>
             </tr>
             <tr>
@@ -55,23 +55,23 @@
                     <span>Payment Types</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="paymentTypes.detail({id:expenseDetails.paymentTypes.id})">{{expenseDetails.paymentTypes.id}}</a>
+                    {{expenseDetails.paymentTypes.paymentMode}}
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Instrument Issuer Master</span>
+                    <span>Instrument Issuer</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="instrumentIssuerMaster.detail({id:expenseDetails.instrumentIssuerMaster.id})">{{expenseDetails.instrumentIssuerMaster.id}}</a>
+                    {{expenseDetails.instrumentIssuerMaster.instrumentIssuer}}
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Collection Type Master</span>
+                    <span>Collection Type</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="collectionTypeMaster.detail({id:expenseDetails.collectionTypeMaster.id})">{{expenseDetails.collectionTypeMaster.id}}</a>
+                    {{expenseDetails.collectionTypeMaster.collName}}
                 </td>
             </tr>
             </tbody>
