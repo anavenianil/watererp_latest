@@ -246,10 +246,10 @@ public class WorkflowService {
 //		
 //		Integer o = jdbcTemplate.queryForObject(sql, Integer.class);
 		
-		Integer o = empMasterRepository.findActiveOfficeId(Long.parseLong(userID));
+		OrgRoleInstance orgRoleInstance = empMasterRepository.findActiveOfficeId(Long.parseLong(userID));
 		
-		if(o != null)
-			return o.toString();
+		if(orgRoleInstance != null)
+			return orgRoleInstance.getId().toString();
 		else
 			return null;
 	}
