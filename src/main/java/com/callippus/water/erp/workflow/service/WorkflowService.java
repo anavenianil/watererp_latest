@@ -240,13 +240,18 @@ public class WorkflowService {
 	 */
 	public String getOfficeID(String userID) throws Exception{
 		log.debug(" getOfficeID: {}", userID);
-
-		String sql = "select office_id_id from  emp_master where status_master_id=2 and user_id="
-				+ userID;
+//
+//		String sql = "select office_id_id from  emp_master where status_master_id=2 and user_id="
+//				+ userID;
+//		
+//		Integer o = jdbcTemplate.queryForObject(sql, Integer.class);
 		
-		Integer o = jdbcTemplate.queryForObject(sql, Integer.class);
+		Integer o = empMasterRepository.findActiveOfficeId(Long.parseLong(userID));
 		
-		return o.toString();
+		if(o != null)
+			return o.toString();
+		else
+			return null;
 	}
 	
 	/**

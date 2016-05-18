@@ -87,4 +87,10 @@ SELECT concat('drop table ',TABLE_NAME,'; delete from databasechangelog where fi
 FROM
 INFORMATION_SCHEMA.KEY_COLUMN_USAGE
 WHERE
-REFERENCED_TABLE_NAME = 'application_txn';
+REFERENCED_TABLE_NAME = 'application_txn'
+union
+select concat('drop table ',REFERENCED_TABLE_NAME,'; delete from databasechangelog where filename like ''%_',replace(REFERENCED_TABLE_NAME,'_',''),'.xml'';')
+FROM
+INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+REFERENCED_TABLE_NAME = 'application_txn'

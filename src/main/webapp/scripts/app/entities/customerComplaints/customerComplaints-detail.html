@@ -40,8 +40,8 @@
 			</div>
 		</div>
 	</div>
-
-	<div ng-if="orgRole.orgRoleName === 'Commercial Manager'"
+<!-- 11 is Commercial Manager -->
+	<div ng-if="orgRole.id === 11"
 		class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Bill Details</h3>
@@ -116,8 +116,8 @@
 							</tr>
 							<tr>
 								<td><span>Complaint Type</span></td>
-								<td><a class="form-control-static"
-									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.complaintTypeMaster.complaintType}}</a>
+								<td><!-- <a class="form-control-static"
+									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})"> -->{{customerComplaints.complaintTypeMaster.complaintType}}<!-- </a> -->
 								</td>
 							</tr>
 							<tr>
@@ -142,6 +142,7 @@
 							</tr>
 						</tbody>
 					</table>
+			<div ng-if="customerComplaints.complaintTypeMaster.complaintType === 'INCORRECT BILL'">
 			<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
     		<h3 class="panel-title pull-left">Previous Bill Details</h3>
@@ -164,8 +165,8 @@
                 <tr ng-repeat="billRunDetails in billRunDetailss track by billRunDetails.id">
                     <td><a ui-sref="billRunDetails.detail({id:billRunDetails.id})">{{billRunDetails.id}}</a></td>
                     <td>{{billRunDetails.can}}</td>
-                    <td>{{billRunDetails.fromDt | date:'medium'}}</td>
-                    <td>{{billRunDetails.toDt | date:'medium'}}</td>
+                    <td>{{billRunDetails.billFullDetails.fromMonth}}</td>
+                    <td>{{billRunDetails.billFullDetails.toMonth}}</td>
                     <td>{{billRunDetails.status}}</td>
                     <td>{{billRunDetails.remarks}}</td>
                     <!-- <td>
@@ -177,6 +178,7 @@
                 </tr>
             </tbody>
 			</table>
+			</div>
 				</div>
 			</div>
 		</div>
@@ -217,12 +219,12 @@
 			ng-click="declineRequest(customerComplaints.id)">
 			<span class="glyphicon glyphicon-remove-circle"></span>
 			&nbsp;Decline
-		</button>
+	</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 	<button type="button" class="btn btn-success pull-right"
 			ng-show="canDecline()"
 			ng-click="approve(customerComplaints.id)">
 			<span class="glyphicon glyphicon-check"></span>
 			&nbsp;Approve
-		</button>
+	</button>
 </div>

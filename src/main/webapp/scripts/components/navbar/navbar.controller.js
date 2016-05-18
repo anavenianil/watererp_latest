@@ -13,6 +13,20 @@ angular
 					$scope.orgRole = {};
 					// $scope.inProduction = ENV === 'prod';
 
+					if ($scope.isAuthenticated()) {
+						Principal.getModuleMenus().then(function(response) {
+							$scope.module2MenuItems = response;
+
+							$scope.module = Navbar.getCurrentModule(response);
+						});
+					}
+					
+//
+//					Principal.getOrgRole().then(function(response) {
+//						$scope.orgRole = response;
+//					});
+
+					
 					$scope.getByKey = function(key) {
 						var found = null;
 
@@ -36,7 +50,7 @@ angular
 
 					$scope.getLogin = function() {
 						$scope.user = Principal.getLogonUser();
-						$scope.orgRole = Principal.getOrgRole();
+
 						// console.log("User is: "+JSON.stringify($scope.user));
 						if ($scope.user == null) {
 							$scope.navbarUserId = "";
@@ -48,14 +62,9 @@ angular
 							$scope.userRole = $scope.orgRole.orgRoleName;
 						}
 						// for navbar module and menu_items
-						if ($scope.isAuthenticated()) {
-							$scope.module2MenuItems = Principal.geModuleMenus();
-						} else
-							$scope.module2MenuItems = {};
+
 
 						return $scope.isAuthenticated();
 					}
-
-					$scope.module = Navbar.getCurrentModule();
 
 				});

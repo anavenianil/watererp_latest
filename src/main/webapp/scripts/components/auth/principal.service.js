@@ -4,8 +4,8 @@ angular.module('watererpApp')
     .factory('Principal', function Principal($q, Account, $http) {
         var _identity,
             _authenticated = false;
-        var module2MenuItems = {};
-        var orgRole = {};
+        var _module2MenuItems;
+        var _orgRole;
 
         return {
             isIdentityResolved: function () {
@@ -49,19 +49,22 @@ angular.module('watererpApp')
                     _identity = undefined;
                 }
 
-                // check and see if we have retrieved the identity data from the server.
+                // check and see if we have retrieved the identity data from the
+				// server.
                 // if we have, reuse it by immediately resolving
                 if (angular.isDefined(_identity)) {
                     deferred.resolve(_identity);
 
                     return deferred.promise;
                 }
-
-                // retrieve the identity data from the server, update the identity object, and then resolve.
+                
+                // retrieve the identity data from the server, update the
+				// identity object, and then resolve.
                 Account.get().$promise
                     .then(function (account) {
                         _identity = account.data;
                         _authenticated = true;
+
                         deferred.resolve(_identity);
                     })
                     .catch(function() {
@@ -70,30 +73,64 @@ angular.module('watererpApp')
                         deferred.resolve(_identity);
                     });
                 
-                $http.get("/api/module2MenuItems/role").success(
-    					function(response) {
-    						module2MenuItems = response;
-    					});
-                
-                //to show organisation in navbar
-                $http.get("/api/empMastersForOrgRole").success(
-                		function(response){
-                			orgRole = response;
-                		});
-                
                 return deferred.promise;
             },
             getLogonUser: function () {
-            	//console.log("principal.service.js: Returning User:" + JSON.stringify(_identity));
+            	// console.log("principal.service.js: Returning User:" +
+				// JSON.stringify(_identity));
             	return _identity;
             },
-            geModuleMenus: function(){
-            	//console.log("principal.service.js: Returning Module2menu_items:" + JSON.stringify(module2menu_items));
-            	return module2MenuItems;
-            },
-            
+            getModuleMenus: function(){ 
+            	var deferred = $q.defer();
+
+                // check and see if we have retrieved the _module2MenuItems data from the
+				// server.
+                // if we have, reuse it by immediately resolving
+                if (angular.isDefined(_module2MenuItems)) {
+                    deferred.resolve(_module2MenuItems);
+
+                    return deferred.promise;
+                }
+                
+                // retrieve the identity data from the server, update the
+				// identity object, and then resolve.
+
+            	$http.get("/api/module2MenuItems/role").then(
+            			function (response) {
+            				_module2MenuItems = response.data;
+            				 deferred.resolve(_module2MenuItems);
+				}).catch(function() {
+					_module2MenuItems = null;
+					deferred.resolve(_module2MenuItems);
+                });
+            	
+                return deferred.promise;
+    		},                         
             getOrgRole: function(){
-            	return orgRole;
+               	var deferred = $q.defer();
+
+                // check and see if we have retrieved the _module2MenuItems data from the
+				// server.
+                // if we have, reuse it by immediately resolving
+                if (angular.isDefined(_orgRole)) {
+                    deferred.resolve(_orgRole);
+
+                    return deferred.promise;
+                }
+                
+                // retrieve the _orgRole data from the server, update the
+				// identity object, and then resolve.
+
+            	$http.get("/api/module2MenuItems/role").$promise.then(
+            			function (response) {
+            				_orgRole = response.data;
+            				 deferred.resolve(_module2MenuItems);
+				}).catch(function() {
+					_orgRole = null;
+					deferred.resolve(_orgRole);
+                });
+            	
+                return deferred.promise;
             }
         };
     });

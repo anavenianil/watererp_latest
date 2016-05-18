@@ -70,7 +70,7 @@
     "postinstall": "bower install && webdriver-manager update",
     "update-webdriver": "webdriver-manager update",
     "ci-test": "istanbul cover tape \"src/test/javascript/spec/**/*.js\" > test.tap && istanbul report clover",
-#    "test": "node_modules/.bin/karma start ./src/test/javascript/karma.conf.js"
+    "test": "node_modules/.bin/karma start ./src/test/javascript/karma.conf.js",
     "test": "grunt test"
   }
 }
