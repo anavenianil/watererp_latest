@@ -3,13 +3,16 @@
 angular.module('watererpApp').controller(
 		'DashboardController',
 		function($scope, $state, $rootScope, Module, Account, User, $location,
-				Auth, Principal) {
+				$http, Auth, Principal) {
 			$scope.pendingRequests = [];
 			$scope.approvedRequests = [];
 			$scope.myRequests = [];
 			$scope.$state = $state;
 			$scope.isAuthenticated = Principal.isAuthenticated;
-			$scope.module2menu_items = {};
+			Principal.getModuleMenus().then(
+					function(response) {
+						$scope.module2menu_items = response;
+					});
 
 			$scope.myLogout = function() {
 				Auth.logout();
@@ -26,11 +29,6 @@ angular.module('watererpApp').controller(
 							+ $scope.user.lastName + "(" + $scope.user.login
 							+ ")";
 				}
-				// for navbar module and menu_items
-				if ($scope.isAuthenticated()) {
-					$scope.module2menu_items = Principal.geModuleMenus();
-				} else
-					$scope.module2menu_items = {};
 
 				return $scope.isAuthenticated();
 			}

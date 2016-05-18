@@ -79,6 +79,10 @@ public class ApplicationTxnCustomRepositoryImpl extends
 	public List<RequestCountDTO> countPendingRequests() throws Exception {
 		log.debug("listAllPendingRequests: {}");
 		workflowService.getUserDetails();
+		
+		if(workflowService.getSfID() == null || workflowService.getOrganisationID() == null) //Workflow not mapped for user in EmpMaster or Office Id not set
+			return null; 
+			
 		String sql = "select id,request_type,count from ( "
 				+ "	SELECT request_master_id id,(select request_type from request_master where id=a.request_master_id) request_type,count(*) count "
 				+ "	FROM request_workflow_history a where status_master_id=3 and assigned_to_id="
@@ -106,6 +110,11 @@ public class ApplicationTxnCustomRepositoryImpl extends
 	public List<RequestCountDTO> countApprovedRequests() throws Exception {
 		log.debug("listApprovedRequests: {}");
 		workflowService.getUserDetails();
+				
+		if(workflowService.getSfID() == null || workflowService.getOrganisationID() == null) //Workflow not mapped for user in EmpMaster or Office Id not set
+			return null; 
+			
+		
 		String sql = "select id,request_type,count from ( "
 				+ "			SELECT  request_master_id id,(select request_type from request_master where id=a.request_master_id) request_type,count(distinct domain_object) count "
 				+ "			FROM request_workflow_history a where status_master_id in (5,7,9)  and assigned_to_id="
@@ -136,14 +145,10 @@ public class ApplicationTxnCustomRepositoryImpl extends
 			throws Exception {
 		log.debug("listAllPendingRequests: {}");
 		workflowService.getUserDetails();
-
-		/*String sql = "SELECT  r.id, r.request_stage, r.assigned_date, from_unixtime(unix_timestamp(r.actioned_date)) as A, r.remarks, r.ip_address, "
-				+ "r.assigned_role, r.domain_object, r.assigned_from_id, r.assigned_to_id, r.status_master_id, r.request_master_id, r.workflow_master_id,"
-				+ " r.workflow_stage_master_id, r.applied_by_id FROM  request_workflow_history r, application_txn tr where r.domain_object=tr.id  "
-				+ " and r.status_master_id=3 and assigned_to_id="
-				+ workflowService.getSfID()
-				+ " and r.request_master_id="
-				+ type;*/
+		
+		if(workflowService.getSfID() == null || workflowService.getOrganisationID() == null) //Workflow not mapped for user in EmpMaster or Office Id not set
+			return null; 
+			
 		
 		String sql = "SELECT  r.id, r.request_stage, r.assigned_date, from_unixtime(unix_timestamp(r.actioned_date)) as A, r.remarks, r.ip_address, "
 				+ "r.assigned_role, r.domain_object, r.assigned_from_id, r.assigned_to_id, r.status_master_id, r.request_master_id, r.workflow_master_id,"
@@ -202,7 +207,10 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		List<RequestWorkflowHistory> list = null;
 		log.debug("listAllPendingRequests: {}");
 		workflowService.getUserDetails();
-
+		
+		if(workflowService.getSfID() == null || workflowService.getOrganisationID() == null) //Workflow not mapped for user in EmpMaster or Office Id not set
+			return null; 
+					
 		String sql = "SELECT  r.id, r.request_stage, r.assigned_date, from_unixtime(unix_timestamp(r.actioned_date)) as A, r.remarks, "
 				+ " r.ip_address, r.assigned_role, r.domain_object, r.assigned_from_id, r.assigned_to_id, r.status_master_id, "
 				+ " r.request_master_id, r.workflow_master_id, r.workflow_stage_master_id, r.applied_by_id "
@@ -263,28 +271,4 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		return (List<ApplicationTxn>) query.getResultList();
 	}
 	
-	
-	
-	/*
-	 * Method to approve a request
-	 */
-	/*public void approveRequest(Long id, String remarks) throws Exception{
-		log.debug("ApplicationTxnCustomRepository -------- approveRequest(): {}");
-		
-		workflowService.getUserDetails();
-	    
-		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
-	    workflowService.setRemarks(remarks);  
-	    Integer status = applicationTxn.getStatus();
-	    status +=1;
-	    applicationTxn.setStatus(status);
-        workflowService.setRequestStatus(status);
-        applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
-
-        if(workflowService.getRequestAt()!=null){
-        	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
-            applicationTxn.setRequestAt(userRepository.findById(uid));
-        }
-        applicationTxnRepository.save(applicationTxn);
-	}*/
 }
