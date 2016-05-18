@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -54,6 +56,9 @@ public class ProceedingsResource {
     
     @Inject
     private ApplicationTxnWorkflowService applicationTxnWorkflowService;
+    
+    @Inject
+    private WorkflowService workflowService;
     
     
     /**
@@ -78,6 +83,7 @@ public class ProceedingsResource {
         
         Proceedings result = proceedingsRepository.save(proceedings);
         try{
+        	workflowService.setApprovedDate(ZonedDateTime.now());
         	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
         }
         catch(Exception e){
@@ -106,11 +112,12 @@ public class ProceedingsResource {
         
         itemRequiredRepository.save(items);
         
-        ApplicationTxn applicationTxn = proceedings.getApplicationTxn();
-        applicationTxn.setRemarks(proceedings.getApplicationTxn().getRemarks());
+        //ApplicationTxn applicationTxn = proceedings.getApplicationTxn();
+        //applicationTxn.setRemarks(proceedings.getApplicationTxn().getRemarks());
         //applicationTxnRepository.save(applicationTxn);
         try{
-        	applicationTxnWorkflowService.approveRequest(proceedings.getApplicationTxn().getId(), applicationTxn.getRemarks());
+        	workflowService.setApprovedDate(ZonedDateTime.now());
+        	applicationTxnWorkflowService.approveRequest(proceedings.getApplicationTxn().getId(), proceedings.getApplicationTxn().getRemarks());
         }
         catch(Exception e){
         	e.printStackTrace();

@@ -516,7 +516,8 @@ public class RequestProcessService {
 				workflowService.getWorkflowID())));
 		ZonedDateTime now = ZonedDateTime.now();
 		//rwh.setActionedDate(now);
-		rwh.setAssignedDate(now);
+		
+		rwh.setAssignedDate(requestWorkflowHistoryRepository.findOne(Long.parseLong(workflowService.getHistoryID())).getActionedDate());
 
 		RequestWorkflowHistory requestWorkflowHistory = requestWorkflowHistoryRepository.save(rwh);
 		workflowService.setRequestWorkflowHistoryId(requestWorkflowHistory.getId());

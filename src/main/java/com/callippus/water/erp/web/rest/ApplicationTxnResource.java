@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,6 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
-import com.callippus.water.erp.domain.MeterStatus;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
@@ -217,7 +217,8 @@ public class ApplicationTxnResource {
         }
         if(applicationTxn.getStatus() == 6|| applicationTxn.getStatus()==7){
         	 try{
-             	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+        		 workflowService.setApprovedDate(ZonedDateTime.now());
+        		 applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
              }
              catch(Exception e){
              	System.out.println(e);
@@ -291,10 +292,12 @@ public class ApplicationTxnResource {
 	@Timed
 	@Transactional
 	public ResponseEntity<ApplicationTxn> approveApplication(@RequestParam(value = "id", required = false) Long id,
-						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
+						@RequestParam(value = "remarks", required = false) String remarks,
+						@RequestParam(value = "approvedDate", required = false) String approvedDate)throws Exception{
 		workflowService.getUserDetails();
 		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
-	    workflowService.setRemarks(remarks);  
+	    workflowService.setRemarks(remarks);
+	    workflowService.setApprovedDate(ZonedDateTime.parse(approvedDate));
 	    Integer status = applicationTxn.getStatus();
 	    status +=1;
 	    applicationTxn.setStatus(status);
