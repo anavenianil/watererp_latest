@@ -121,10 +121,10 @@ angular.module('watererpApp')
                 // retrieve the _orgRole data from the server, update the
 				// identity object, and then resolve.
 
-            	$http.get("/api/module2MenuItems/role").then(
+            	$http.get("/api/empMastersForOrgRole").then(
             			function (response) {
             				_orgRole = response.data;
-            				 deferred.resolve(_module2MenuItems);
+            				 deferred.resolve(_orgRole);
 				}).catch(function() {
 					_orgRole = null;
 					deferred.resolve(_orgRole);

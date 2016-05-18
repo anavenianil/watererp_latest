@@ -357,6 +357,8 @@ CREATE TABLE `bill_run_details` (
 --
 
 /*!40000 ALTER TABLE `bill_run_details` DISABLE KEYS */;
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`,`bill_details_id`) VALUES 
+ (1,'02020005','2016-07-01 00:00:00','2016-07-01 00:00:00',4,'ABC',10,110,29);
 /*!40000 ALTER TABLE `bill_run_details` ENABLE KEYS */;
 
 
@@ -767,6 +769,8 @@ CREATE TABLE `cust_details` (
 --
 
 /*!40000 ALTER TABLE `cust_details` DISABLE KEYS */;
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`) VALUES 
+ (1,'02020005','ABC','DEF','PQR','14',NULL,'Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'abc@abc.abc','ACTIVE',1,1,1,1);
 /*!40000 ALTER TABLE `cust_details` ENABLE KEYS */;
 
 
@@ -884,10 +888,7 @@ CREATE TABLE `customer_complaints` (
 
 /*!40000 ALTER TABLE `customer_complaints` DISABLE KEYS */;
 INSERT INTO `customer_complaints` (`id`,`remarks`,`relevant_doc`,`complaint_by`,`complaint_date`,`can`,`adjustment_amt`,`status`,`complaint_type_master_id`) VALUES 
- (4,'wrong billing','','Jagadesh','2016-05-09','03030001',NULL,3,1),
- (5,'ok','','Patrick','2016-05-10','02020004',NULL,3,1),
- (6,'fixed','','water leak at our connection','2016-05-10','02020004',NULL,3,2),
- (7,'Leak at junction','','Patrick A','2016-05-11','02020004',NULL,2,2);
+ (8,'INCORRECT BILL','/api/download/8_9946f1db16b2832367449fbf37d20bd3_bill.png','Punna Reddy','2016-05-18','02020005',NULL,0,1);
 /*!40000 ALTER TABLE `customer_complaints` ENABLE KEYS */;
 
 
@@ -2804,6 +2805,24 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (807,'customer','2016-05-18 12:02:53','AUTHENTICATION_SUCCESS'),
  (808,'admin','2016-05-18 12:09:11','AUTHENTICATION_SUCCESS'),
  (809,'admin','2016-05-18 12:22:42','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (810,'admin','2016-05-18 16:08:43','AUTHENTICATION_SUCCESS'),
+ (811,'customer','2016-05-18 16:09:12','AUTHENTICATION_SUCCESS'),
+ (812,'customer','2016-05-18 16:47:31','AUTHENTICATION_SUCCESS'),
+ (813,'customer','2016-05-18 16:48:20','AUTHENTICATION_SUCCESS'),
+ (814,'customer','2016-05-18 16:53:17','AUTHENTICATION_SUCCESS'),
+ (815,'customer','2016-05-18 16:56:09','AUTHENTICATION_SUCCESS'),
+ (816,'sf0015','2016-05-18 17:24:45','AUTHENTICATION_SUCCESS'),
+ (817,'admin','2016-05-18 17:27:30','AUTHENTICATION_SUCCESS'),
+ (818,'sf0015','2016-05-18 17:29:52','AUTHENTICATION_SUCCESS'),
+ (819,'admin','2016-05-18 17:31:08','AUTHENTICATION_SUCCESS'),
+ (820,'sf0015','2016-05-18 17:31:42','AUTHENTICATION_SUCCESS'),
+ (821,'admin','2016-05-18 17:36:49','AUTHENTICATION_FAILURE'),
+ (822,'admin','2016-05-18 17:36:54','AUTHENTICATION_SUCCESS'),
+ (823,'sf0015','2016-05-18 17:38:40','AUTHENTICATION_SUCCESS'),
+ (824,'customer','2016-05-18 17:45:40','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (825,'sf0023','2016-05-18 17:50:25','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -4523,7 +4542,41 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (808,'remoteAddress','0:0:0:0:0:0:0:1'),
  (808,'sessionId','1E7F33021E007B8D7FC767911FB8A966'),
  (809,'remoteAddress','0:0:0:0:0:0:0:1'),
- (809,'sessionId','38E2355286AA14137DD36888DC93D838');
+ (809,'sessionId','38E2355286AA14137DD36888DC93D838'),
+ (810,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (810,'sessionId','AF0678CBE684F2AD81818B8BB8381351'),
+ (811,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (811,'sessionId','654A92AA84112101E731329937DA24A4'),
+ (812,'remoteAddress','192.168.1.25'),
+ (812,'sessionId','80413795AFE6EFE0DE315D0201086739'),
+ (813,'remoteAddress','192.168.1.25');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (813,'sessionId','DCE369927DFAF658DE54BF671D9ED756'),
+ (814,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (814,'sessionId','0B4520F33E91D96F41D706B01907ECC8'),
+ (815,'remoteAddress','192.168.1.18'),
+ (815,'sessionId','C81E348EE40DA192C36E8CF14879DC39'),
+ (816,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (816,'sessionId','C4CA1A26AFBD4AAC47F38DA7EAD7D9EF'),
+ (817,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (817,'sessionId','0B0B3D7B5C7F3B837FDFCE51F3C27BEC'),
+ (818,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (818,'sessionId','731E08BAC48391F8777439C425B45D90'),
+ (819,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (819,'sessionId','0A2B8B6B0A92596981DEE29AC3B4FBC1'),
+ (820,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (820,'sessionId','1E00EB8CA82E5D283902C0B1AB6A0979'),
+ (821,'message','Bad credentials'),
+ (821,'type','org.springframework.security.authentication.BadCredentialsException'),
+ (822,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (822,'sessionId','32F3EB24938572D5B8BDDEC21EAB4F95'),
+ (823,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (823,'sessionId','378FCCC2521EB7CB67AA068EA2BFAD52'),
+ (824,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (824,'sessionId','89D6687195FC21ECB106851813101AF8'),
+ (825,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (825,'sessionId','3D246F7369A7B0B8EF352814653AF9BF');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -4566,15 +4619,15 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('BqSGG3u7I3FNEGIS4YTdnA==',30,'TVPCFvOjZvfNKQfOcumCGA==','2016-05-06','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ChkJAcPJOneYygJ35FjR9g==',31,'6F9B28Pl70WP5rM5Q5Q0/w==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('CIgQNZ8FKQM/DmDaYobODA==',5,'LkuxvzX39a043nNr+JZ3Sw==','2016-05-18','192.168.1.25','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('DaK7uQT48/cKNPmvfHNy7g==',31,'nWj1dWsWeqKsrAzGShVYtA==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('DbAm0z5VPEc+EtXrkXdvKw==',3,'Yous7+mwwzsCcw6ZF1OdMg==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('e5qNbeFco2eWENKj/+RW1g==',3,'niUqrvzC03eynQfROEZDqA==','2016-05-06','192.168.1.4','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('EG3kGgtX3liShbfTTaAgiA==',5,'aD22faP9jxmf7wdLDd9hMA==','2016-05-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ePbL4hkUt4E52k/aBtE/MA==',21,'UsBLX/CfktztTx7Od1cTzA==','2016-04-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('F8sJ+cN9mT4bgFb0qWuElQ==',30,'1r74O2dQgko/ccI8eUYcGA==','2016-04-26','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('fFTdM+jQgj3eMZD9eWBg6Q==',3,'PYCkcHlcu1gFjJRbHkERHg==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('F8sJ+cN9mT4bgFb0qWuElQ==',30,'1r74O2dQgko/ccI8eUYcGA==','2016-04-26','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
- ('GUw8CDpqGDAMktUvnNt/nw==',3,'fRhBBd7JTWSERZeuZqAcsQ==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
+ ('fFTdM+jQgj3eMZD9eWBg6Q==',3,'PYCkcHlcu1gFjJRbHkERHg==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('h2bUpKDi3+XLdwZvYfctSg==',16,'0kDBdHEYWPkiv5WGMUyl8w==','2016-04-27','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('hfGksqBgjUnqndHWJ3/5wA==',30,'FbXszKhHyDuqmM8FnVRRUw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('HoUZ0JlyDpz02Gjz/PKAIw==',15,'uK6UIkCTlVGzDiCNbYrLpw==','2016-04-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -4607,12 +4660,13 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('vnR7DP8oSYXDmF+mnmU1kg==',21,'/81Dy452hRlZFVFwMvjsag==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w19dFvKWblZHPQ4qBmRwOQ==',3,'niw5it4bdTF1FOsKFYODRQ==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('w1Nmyt/SjDBpsfj1ryl5lg==',23,'/Og8l0b6xZrleFmYRPw11w==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'),
  ('Wcl3JtiPVeESKHgkm9DWVA==',30,'2E/wOFh/Y8+Y89I+G+sIQA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('wHOaPe95y0bFDhv7rwp+pQ==',3,'G5PATNutbflLHCMZntNdzA==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('wlsxEVx3DOGE5elnLj7U8Q==',3,'OA+2jIAtEEIKEr1jUU54UA==','2016-04-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('XQG+pOIkmGVy/h3BRMq+Pw==',30,'rmKrD1xN8nP8aLEDALqvFA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('YCy7O8uNAqrw7SFOZCRH7Q==',15,'96gB2HojQE8BSXPuGXHk7A==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('XQG+pOIkmGVy/h3BRMq+Pw==',30,'rmKrD1xN8nP8aLEDALqvFA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('YCy7O8uNAqrw7SFOZCRH7Q==',15,'96gB2HojQE8BSXPuGXHk7A==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('yeGR7p45ZYo74KGrWntAZA==',3,'ytU215AgvrBXIiLMgsecaw==','2016-04-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ynZOMTxODvqkNvAvZyrabw==',30,'/neHN/ixIp/JbDwgJM2N3A==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ZeWv40JzO9chd/3DLw5QZw==',3,'7qpybtDxl+Azh/kyfSI5dg==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
@@ -5989,129 +6043,7 @@ CREATE TABLE `request_workflow_history` (
 
 /*!40000 ALTER TABLE `request_workflow_history` DISABLE KEYS */;
 INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (56,1,'2016-04-30 23:28:37','2016-04-30 23:28:37',NULL,'169.254.178.179',NULL,16,5,23,5,4,7,NULL,NULL),
- (57,2,'2016-04-30 23:35:20','2016-04-30 23:35:20','','169.254.178.179',NULL,16,23,15,5,4,7,NULL,NULL),
- (58,3,'2016-04-30 23:37:04','2016-04-30 23:37:04','','169.254.178.179',NULL,16,15,29,5,4,7,NULL,NULL),
- (59,4,'2016-04-30 23:46:02','2016-04-30 23:46:02','','169.254.178.179',NULL,16,29,15,9,4,7,NULL,NULL),
- (88,1,'2016-04-30 21:16:56','2016-04-30 21:16:56',NULL,'199.193.255.167',NULL,18,5,15,5,1,1,NULL,NULL),
- (89,1,'2016-04-30 21:17:48','2016-04-30 21:17:48',NULL,'127.0.0.1',NULL,19,5,15,5,6,5,NULL,NULL),
- (90,2,'2016-04-30 23:38:57','2016-04-30 23:38:57','asfawf','127.0.0.1',NULL,19,15,21,9,1,5,NULL,NULL),
- (91,1,'2016-04-30 23:58:23','2016-04-30 23:58:23',NULL,'127.0.0.1',NULL,20,5,15,5,6,5,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (92,2,'2016-05-01 00:02:15','2016-05-01 00:02:15',NULL,'127.0.0.1',NULL,20,15,21,3,6,5,NULL,NULL),
- (93,1,'2016-05-04 21:49:02','2016-05-04 21:49:02',NULL,'169.254.197.57',NULL,21,5,15,5,1,1,NULL,NULL),
- (94,2,'2016-05-04 21:50:08','2016-05-04 21:50:08','Application Forwarded','169.254.197.57',NULL,21,15,29,5,1,1,NULL,NULL),
- (95,3,'2016-05-04 21:51:23','2016-05-04 21:51:23','Can give new connection','169.254.197.57',NULL,21,29,20,5,1,1,NULL,NULL),
- (96,4,'2016-05-04 21:52:49','2016-05-04 21:52:49','Feasibility completed','169.254.197.57',NULL,21,20,15,5,1,1,NULL,NULL),
- (97,5,'2016-05-04 21:54:32','2016-05-04 21:54:32','Given list of required materials','169.254.197.57',NULL,21,15,27,5,1,1,NULL,NULL),
- (98,6,'2016-05-04 21:55:42','2016-05-04 21:55:42','paid','169.254.197.57',NULL,21,27,14,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (99,7,'2016-05-04 21:56:37','2016-05-04 21:56:37','issued','169.254.197.57',NULL,21,14,20,5,1,1,NULL,NULL),
- (101,8,'2016-05-04 23:51:08','2016-05-04 23:51:08','Meter 3 issued on 12th april','169.254.197.57',NULL,21,20,21,9,1,1,NULL,NULL),
- (102,1,'2016-05-09 20:41:35','2016-05-09 20:41:35',NULL,'127.0.0.1',NULL,1,5,15,5,9,9,NULL,NULL),
- (103,2,'2016-05-09 20:43:25','2016-05-09 20:43:25',NULL,'127.0.0.1',NULL,1,15,21,9,9,9,NULL,NULL),
- (104,1,'2016-05-09 20:53:24','2016-05-09 20:53:24','Pipe change request','127.0.0.1',NULL,2,5,15,5,9,9,NULL,NULL),
- (105,2,'2016-05-09 20:55:04','2016-05-09 20:55:04','pipe changed approved','127.0.0.1',NULL,2,15,21,9,9,9,NULL,NULL),
- (106,1,'2016-05-09 16:37:37','2016-05-09 16:37:37',NULL,'199.193.255.167',NULL,22,5,15,5,1,1,NULL,NULL),
- (107,1,'2016-05-09 16:41:21','2016-05-09 16:41:21',NULL,'199.193.255.167',NULL,23,5,15,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (108,1,'2016-05-09 16:47:22','2016-05-09 16:47:22',NULL,'199.193.255.167',NULL,24,5,15,5,1,1,NULL,NULL),
- (109,1,'2016-05-09 16:58:40','2016-05-09 16:58:40',NULL,'199.193.255.167',NULL,25,5,15,5,1,1,NULL,NULL),
- (110,2,'2016-05-09 17:01:30','2016-05-09 17:01:30',NULL,'199.193.255.167',NULL,22,15,29,5,1,1,NULL,NULL),
- (111,2,'2016-05-09 17:01:44','2016-05-09 17:01:44',NULL,'199.193.255.167',NULL,23,15,29,5,1,1,NULL,NULL),
- (112,2,'2016-05-09 17:02:17','2016-05-09 17:02:17',NULL,'199.193.255.167',NULL,24,15,29,5,1,1,NULL,NULL),
- (113,2,'2016-05-09 17:02:30','2016-05-09 17:02:30',NULL,'199.193.255.167',NULL,25,15,29,5,1,1,NULL,NULL),
- (114,3,'2016-05-09 17:09:19','2016-05-09 17:09:19','Approved','199.193.255.167',NULL,22,29,20,5,1,1,NULL,NULL),
- (115,3,'2016-05-09 17:09:32','2016-05-09 17:09:32','Approved','199.193.255.167',NULL,23,29,20,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (116,3,'2016-05-09 17:09:42','2016-05-09 17:09:42','Approved','199.193.255.167',NULL,24,29,20,5,1,1,NULL,NULL),
- (117,3,'2016-05-09 17:09:52','2016-05-09 17:09:52','Approved','199.193.255.167',NULL,25,29,20,5,1,1,NULL,NULL),
- (118,4,'2016-05-09 17:13:01','2016-05-09 17:13:01','Approved','199.193.255.167',NULL,22,20,15,5,1,1,NULL,NULL),
- (119,4,'2016-05-09 17:13:44','2016-05-09 17:13:44','Approved','199.193.255.167',NULL,23,20,15,5,1,1,NULL,NULL),
- (120,4,'2016-05-09 17:14:22','2016-05-09 17:14:22','Approved','199.193.255.167',NULL,24,20,15,5,1,1,NULL,NULL),
- (121,4,'2016-05-09 17:15:02','2016-05-09 17:15:02','Approved','199.193.255.167',NULL,25,20,15,5,1,1,NULL,NULL),
- (122,5,'2016-05-09 17:17:06','2016-05-09 17:17:06','Approved','199.193.255.167',NULL,22,15,27,5,1,1,NULL,NULL),
- (123,5,'2016-05-09 17:17:39','2016-05-09 17:17:39','Approved','199.193.255.167',NULL,23,15,27,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (124,5,'2016-05-09 17:18:23','2016-05-09 17:18:23','Approved','199.193.255.167',NULL,24,15,27,5,1,1,NULL,NULL),
- (125,5,'2016-05-09 17:19:00','2016-05-09 17:19:00','Approved','199.193.255.167',NULL,25,15,27,5,1,1,NULL,NULL),
- (126,6,'2016-05-09 17:20:55','2016-05-09 17:20:55','Payment Done','199.193.255.167',NULL,22,27,14,5,1,1,NULL,NULL),
- (127,6,'2016-05-09 17:21:59','2016-05-09 17:21:59','Payment Done','199.193.255.167',NULL,23,27,14,5,1,1,NULL,NULL),
- (128,6,'2016-05-09 17:23:07','2016-05-09 17:23:07','Payment Done','199.193.255.167',NULL,24,27,14,5,1,1,NULL,NULL),
- (129,6,'2016-05-09 17:23:29','2016-05-09 17:23:29','Payment Done','199.193.255.167',NULL,25,27,14,5,1,1,NULL,NULL),
- (130,7,'2016-05-09 17:27:20','2016-05-09 17:27:20','Approved','199.193.255.167',NULL,22,14,20,5,1,1,NULL,NULL),
- (131,7,'2016-05-09 17:27:30','2016-05-09 17:27:30','Approved','199.193.255.167',NULL,23,14,20,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (132,7,'2016-05-09 17:27:41','2016-05-09 17:27:41','Approived','199.193.255.167',NULL,24,14,20,5,1,1,NULL,NULL),
- (133,7,'2016-05-09 17:28:04','2016-05-09 17:28:04','Approved','199.193.255.167',NULL,25,14,20,5,1,1,NULL,NULL),
- (134,8,'2016-05-09 17:32:16','2016-05-09 17:32:16','Approved','199.193.255.167',NULL,22,20,21,9,1,1,NULL,NULL),
- (135,8,'2016-05-09 17:32:41','2016-05-09 17:32:41','Approved','199.193.255.167',NULL,23,20,21,9,1,1,NULL,NULL),
- (136,8,'2016-05-09 17:33:08','2016-05-09 17:33:08','Approved','199.193.255.167',NULL,24,20,21,9,1,1,NULL,NULL),
- (137,8,'2016-05-09 17:35:27','2016-05-09 17:35:27','Approved','199.193.255.167',NULL,25,20,21,9,1,1,NULL,NULL),
- (138,1,'2016-05-09 18:43:45','2016-05-09 18:43:45',NULL,'199.193.255.167',NULL,28,5,15,5,1,1,NULL,NULL),
- (139,2,'2016-05-09 18:45:18','2016-05-09 18:45:18','Approved','199.193.255.167',NULL,28,15,29,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (140,3,'2016-05-09 18:48:19','2016-05-09 18:48:19','Approved','199.193.255.167',NULL,28,29,20,5,1,1,NULL,NULL),
- (141,4,'2016-05-09 18:50:41','2016-05-09 18:50:41','Approved','199.193.255.167',NULL,28,20,15,5,1,1,NULL,NULL),
- (142,2,'2016-05-09 18:54:08','2016-05-09 18:54:08',NULL,'199.193.255.167',NULL,18,15,29,3,1,1,NULL,NULL),
- (143,5,'2016-05-09 18:59:19','2016-05-09 18:59:19','Approved','199.193.255.167',NULL,28,15,27,5,1,1,NULL,NULL),
- (144,6,'2016-05-09 19:02:15','2016-05-09 19:02:15','Payment done','199.193.255.167',NULL,28,27,14,5,1,1,NULL,NULL),
- (145,7,'2016-05-09 19:03:32','2016-05-09 19:03:32','Approve','199.193.255.167',NULL,28,14,20,5,1,1,NULL,NULL),
- (146,8,'2016-05-09 19:05:36','2016-05-09 19:05:36','Approved','199.193.255.167',NULL,28,20,21,3,1,1,NULL,NULL),
- (147,1,'2016-05-10 10:50:50','2016-05-10 10:50:50',NULL,'199.193.255.167',NULL,2,5,23,5,3,4,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (148,2,'2016-05-10 10:51:29','2016-05-10 10:51:29','Billing Mistake','199.193.255.167',NULL,2,5,16,5,3,4,NULL,NULL),
- (149,3,'2016-05-10 11:08:20','2016-05-10 11:08:20','wrong billing','199.193.255.167',NULL,2,5,17,5,3,4,NULL,NULL),
- (150,1,'2016-05-10 11:44:30','2016-05-10 11:44:30',NULL,'199.193.255.167',NULL,29,5,15,5,1,1,NULL,NULL),
- (151,2,'2016-05-10 12:02:52','2016-05-10 12:02:52','Approved','199.193.255.167',NULL,29,15,29,5,1,1,NULL,NULL),
- (152,3,'2016-05-10 12:08:14','2016-05-10 12:08:14','Approved','199.193.255.167',NULL,29,29,20,5,1,1,NULL,NULL),
- (153,4,'2016-05-10 12:38:41','2016-05-10 12:38:41','Approved','199.193.255.167',NULL,29,20,15,3,1,1,NULL,NULL),
- (154,4,'2016-05-10 14:03:35','2016-05-10 14:03:35','Billing Mistake','199.193.255.167',NULL,2,5,9,3,3,4,NULL,NULL),
- (155,1,'2016-05-10 14:13:58','2016-05-10 14:13:58',NULL,'199.193.255.167',NULL,3,5,23,5,4,7,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (156,2,'2016-05-10 14:16:06','2016-05-10 14:16:06','Approved','199.193.255.167',NULL,3,23,15,5,4,7,NULL,NULL),
- (157,3,'2016-05-10 14:16:18','2016-05-10 14:16:18','Approved','199.193.255.167',NULL,3,23,29,3,4,7,NULL,NULL),
- (158,1,'2016-05-10 15:17:34','2016-05-10 15:17:34',NULL,'199.193.255.167',NULL,4,5,23,5,3,4,NULL,NULL),
- (159,1,'2016-05-10 17:57:57','2016-05-10 17:57:57',NULL,'199.193.255.167',NULL,30,5,15,5,1,1,NULL,NULL),
- (160,2,'2016-05-10 18:00:37','2016-05-10 18:00:37','Pl check feasibility','199.193.255.167',NULL,30,15,29,5,1,1,NULL,NULL),
- (161,3,'2016-05-10 18:02:55','2016-05-10 18:02:55','We can give new connection','199.193.255.167',NULL,30,29,20,5,1,1,NULL,NULL),
- (162,4,'2016-05-10 18:07:12','2016-05-10 18:07:12','Accepted','199.193.255.167',NULL,30,20,15,5,1,1,NULL,NULL),
- (163,5,'2016-05-10 18:12:13','2016-05-10 18:12:13','pl issue the items after payment','199.193.255.167',NULL,30,15,27,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (164,6,'2016-05-10 18:14:11','2016-05-10 18:14:11','paid','199.193.255.167',NULL,30,27,14,5,1,1,NULL,NULL),
- (165,7,'2016-05-10 18:16:55','2016-05-10 18:16:55','items issued','199.193.255.167',NULL,30,14,20,5,1,1,NULL,NULL),
- (166,8,'2016-05-10 18:20:07','2016-05-10 18:20:07','Meterid 2 is given','199.193.255.167',NULL,30,20,21,9,1,1,NULL,NULL),
- (167,1,'2016-05-10 18:48:21','2016-05-10 18:48:21',NULL,'199.193.255.167',NULL,5,5,23,5,3,4,NULL,NULL),
- (168,2,'2016-05-10 18:50:51','2016-05-10 18:50:51','see the bill','199.193.255.167',NULL,5,23,16,5,3,4,NULL,NULL),
- (169,3,'2016-05-10 18:53:49','2016-05-10 18:53:49','adjusted some amount','199.193.255.167',NULL,5,17,17,5,3,4,NULL,NULL),
- (170,4,'2016-05-10 18:55:28','2016-05-10 18:55:28','ok','199.193.255.167',NULL,5,9,9,3,3,4,NULL,NULL),
- (171,1,'2016-05-10 18:57:28','2016-05-10 18:57:28',NULL,'199.193.255.167',NULL,6,5,23,5,4,7,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (172,2,'2016-05-10 18:58:54','2016-05-10 18:58:54','forwarded to Technical Manager','199.193.255.167',NULL,6,23,15,5,4,7,NULL,NULL),
- (173,3,'2016-05-10 19:00:47','2016-05-10 19:00:47','problem will fixed by tomorrow','199.193.255.167',NULL,6,15,29,5,4,7,NULL,NULL),
- (174,4,'2016-05-10 19:02:27','2016-05-10 19:02:27','fixed','199.193.255.167',NULL,6,29,15,3,4,7,NULL,NULL),
- (175,2,'2016-05-11 09:49:25','2016-05-11 09:49:25','Approved','199.193.255.167',NULL,4,23,16,5,3,4,NULL,NULL),
- (176,3,'2016-05-11 09:49:31','2016-05-11 09:49:31','Approved','199.193.255.167',NULL,4,23,17,5,3,4,NULL,NULL),
- (177,4,'2016-05-11 09:49:34','2016-05-11 09:49:34','Approved','199.193.255.167',NULL,4,23,9,3,3,4,NULL,NULL),
- (178,1,'2016-05-11 10:30:27','2016-05-11 10:30:27',NULL,'199.193.255.167',NULL,7,5,23,5,4,7,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (179,2,'2016-05-11 10:31:37','2016-05-11 10:31:37','forwarded to Jones','199.193.255.167',NULL,7,23,15,5,4,7,NULL,NULL),
- (180,3,'2016-05-11 10:33:09','2016-05-11 10:33:09','forwarded to superviosr','199.193.255.167',NULL,7,15,29,3,4,7,NULL,NULL),
- (181,1,'2016-05-11 11:05:23','2016-05-11 11:05:23',NULL,'199.193.255.167',NULL,31,5,15,5,6,5,NULL,NULL),
- (182,2,'2016-05-11 11:07:57','2016-05-11 11:07:57','Approved','199.193.255.167',NULL,31,15,21,3,6,5,NULL,NULL),
- (183,1,'2016-05-11 15:08:34','2016-05-11 15:08:34',NULL,'199.193.255.167',NULL,32,5,15,5,1,1,NULL,NULL),
- (184,2,'2016-05-11 15:10:15','2016-05-11 15:10:15','Approved','199.193.255.167',NULL,32,15,29,5,1,1,NULL,NULL),
- (185,3,'2016-05-11 15:11:57','2016-05-11 15:11:57','Approved','199.193.255.167',NULL,32,29,20,5,1,1,NULL,NULL),
- (186,4,'2016-05-11 15:15:17','2016-05-11 15:15:17','Approved','199.193.255.167',NULL,32,20,15,5,1,1,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (187,5,'2016-05-11 15:17:54','2016-05-11 15:17:54',NULL,'199.193.255.167',NULL,32,15,27,5,1,1,NULL,NULL),
- (188,6,'2016-05-11 15:19:47','2016-05-11 15:19:47','Payment done','199.193.255.167',NULL,32,27,14,5,1,1,NULL,NULL),
- (189,7,'2016-05-11 15:21:43','2016-05-11 15:21:43','Approved','199.193.255.167',NULL,32,14,20,5,1,1,NULL,NULL),
- (190,8,'2016-05-11 15:24:11','2016-05-11 15:24:11','Approved','199.193.255.167',NULL,32,20,21,9,1,1,NULL,NULL),
- (191,1,'2016-05-12 10:20:13','2016-05-12 10:20:13',NULL,'199.193.255.167',NULL,33,5,15,5,1,1,NULL,NULL),
- (192,2,'2016-05-12 10:25:28','2016-05-12 10:25:28','Approved','199.193.255.167',NULL,33,15,29,5,1,1,NULL,NULL),
- (193,3,'2016-05-12 10:31:43','2016-05-12 10:31:43','Approved','199.193.255.167',NULL,33,29,20,5,1,1,NULL,NULL),
- (194,4,'2016-05-12 10:35:35','2016-05-12 10:35:35','Approved','199.193.255.167',NULL,33,20,15,3,1,1,NULL,NULL);
+ (195,1,'2016-05-18 17:50:00',NULL,NULL,'169.254.178.179',NULL,8,5,23,3,3,4,NULL,NULL);
 /*!40000 ALTER TABLE `request_workflow_history` ENABLE KEYS */;
 
 

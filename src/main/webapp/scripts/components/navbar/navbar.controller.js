@@ -21,10 +21,10 @@ angular
 						});
 					}
 					
-//
-//					Principal.getOrgRole().then(function(response) {
-//						$scope.orgRole = response;
-//					});
+
+					Principal.getOrgRole().then(function(response) {
+						$scope.orgRole = response;
+					});
 
 					
 					$scope.getByKey = function(key) {

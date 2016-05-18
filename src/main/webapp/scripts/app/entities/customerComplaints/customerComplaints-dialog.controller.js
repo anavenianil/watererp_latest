@@ -61,9 +61,10 @@ angular
 											$scope.custDetails = result;
 											$scope.customerComplaints.custDetails = {};
 											$scope.customerComplaints.custDetails.consName = $scope.custDetails.consName;
-											var arr1 = $scope.custDetails.secName.split(" ");
+											/*var arr1 = $scope.custDetails.secName.split(" ");
 											$scope.customerComplaints.custDetails.secName = arr1[0];
-											$scope.customerComplaints.custDetails.street = arr1[1];
+											$scope.customerComplaints.custDetails.street = arr1[1];*/
+											//$scope.custDetails.divisionMaster.divisionName;
 											$scope.customerComplaints.can = $scope.custDetails.can;
 											$scope.customerComplaints.tariffCategory = $scope.custDetails.tariffCategoryMaster.tariffCategory;
 										});

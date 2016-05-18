@@ -6,8 +6,15 @@ angular.module('watererpApp').controller(
 				ApplicationTxn, ApplicationTxnService, RequestWorkflowHistory,
 				ParseLinks, Principal) {
 			$scope.applicationTxn = entity;
+			
+			$scope.orgRole = {};
 
-			$scope.orgRole = Principal.getOrgRole();
+			//$scope.orgRole = Principal.getOrgRole();
+			
+			Principal.getOrgRole().then(function(response) {
+				$scope.orgRole = response;
+			});
+			
 			$scope.approvalDetails = {};
 
 			$scope.maxDate = new Date();
@@ -99,9 +106,9 @@ angular.module('watererpApp').controller(
 				return ret;
 			}
 
-			$scope.approvalDetailsSave = function(id, remarks) {
+			$scope.approvalDetailsSave = function(id, remarks, approvedDate) {
 				$('#approveModal').modal('hide');
-				ApplicationTxnService.approveRequest(id, remarks).then(function(data) {
+				ApplicationTxnService.approveRequest(id, remarks, approvedDate).then(function(data) {
 					$scope.applicationTxn = data;
 					$state.go('applicationTxn');
 				});
