@@ -541,7 +541,7 @@ CREATE TABLE  `watererp`.`collection_type_master` (
   `coll_name` varchar(255) DEFAULT NULL,
   `txn_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`collection_type_master`
@@ -556,7 +556,9 @@ INSERT INTO `watererp`.`collection_type_master` VALUES  (1,'BILL PAYMENT','C'),
  (5,'EXPENSE 1','E'),
  (6,'EXPENSE 2','E'),
  (7,'EXPENSE 3','E'),
- (8,'EXPENSE 4','E');
+ (8,'EXPENSE 4','E'),
+ (9,'Rent','R'),
+ (10,'Scrap Sale','R');
 UNLOCK TABLES;
 /*!40000 ALTER TABLE `collection_type_master` ENABLE KEYS */;
 
