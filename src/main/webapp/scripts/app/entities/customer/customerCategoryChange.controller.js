@@ -29,20 +29,6 @@ angular
 					console.log("These are the state:"
 							+ JSON.stringify($state.current.name));
 
-					/*$scope.getWorkflowHistoryByDomainId = function(domainId) {
-			        	$scope.requestWorkflowHistorys = [];
-			            RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: domainId, requestTypeId: $stateParams.requestTypeId}, function(result, headers) {
-			                $scope.links = ParseLinks.parse(headers('link'));
-			                for (var i = 0; i < result.length; i++) {
-			                    $scope.requestWorkflowHistorys.push(result[i]);
-			                }
-			                $scope.workflowDTO.requestWorkflowHistory.assignedDate = $scope.requestWorkflowHistorys[0].assignedDate;
-			            });
-			        };*/
-					
-
-					
-
 					$scope.dtmax = new Date();
 
 					if ($stateParams.id != null) {
@@ -102,12 +88,12 @@ angular
 					};
 
 					// getApplicationTxn by CAN
-					/*$scope.getApplicationTxn = function(can) {
+					$scope.getApplicationTxn = function(can) {
 						ApplicationTxnSearchCAN.get({can : can},
 										function(result) {
 											$scope.applicationTxn = result;
 										});
-					};*/
+					};
 
 					// when selected searched CAN in DropDown
 					$scope.onSelect = function($item, $model, $label) {
@@ -118,7 +104,7 @@ angular
 						$scope.custDetails.name = arr[1];
 						$scope.custDetails.address = arr[2];
 						$scope.getCustDetails($scope.custDetails.can);
-						//$scope.getApplicationTxn($scope.custDetails.can);
+						$scope.getApplicationTxn($scope.custDetails.can);
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
 						$scope.referenceNo = $scope.custDetails.can;
@@ -144,10 +130,6 @@ angular
 			        };
 
 					$scope.saveChanges = function() {
-						//$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.workflowDTO.workflowTxnDetailss[1].previousValue.id;
-						/*for(var i=0; i<$scope.workflowDTO.workflowTxnDetailss.length;i++){
-							$scope.workflowDTO.workflowTxnDetailss[i].referenceNumber = $scope.referenceNo;
-						}*/
 						console.log("WorkflowDTO data being posted to server:"
 								+ JSON.stringify($scope.workflowDTO));
 
@@ -156,35 +138,16 @@ angular
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
-									// var res =
-									// response.data.map(function(item) {
-									// return item;
-									// });
-									// return res;
 								});
 					}
 
-					/*$scope.getWorkflowTxnDetails = function(requestId) {
-						$scope.workflowDTO.workflowTxnDetailss[0] ={};
-						WorkflowTxnDetails.query({
-							page : $scope.page,
-							size : 20,
-							requestId : requestId
-						}, function(result, headers) {
-							$scope.links = ParseLinks.parse(headers('link'));
-							for (var i = 0; i < result.length; i++) {
-								$scope.workflowDTO.workflowTxnDetailss
-										.push(result[i]);
-							}
-						});
-					};*/
 
 					if ($stateParams.requestId != null) {
 						$scope.getWorkflowTxnDetails($stateParams.requestId);
 					}
 					
 					//approve a request
-					$scope.approve = function(workflowDTO){
+					/*$scope.approve = function(workflowDTO){
 			        	console.log(workflowDTO);
 			        	return $http.post('/api/workflowTxnDetailsApprove',
 								$scope.workflowDTO).then(
@@ -192,6 +155,5 @@ angular
 									console.log("Server response:"
 											+ JSON.stringify(response));
 								});
-						//ApplicationTxnService.approveRequest(id, remarks);
-			        }
+			        }*/
 				});

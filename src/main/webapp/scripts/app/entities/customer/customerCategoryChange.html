@@ -107,58 +107,63 @@
 						<fieldset>
 							<legend>Change Connection Category</legend>
 							<div class="row">
-								<!-- <div class="col-sm-3">
-									<label class="control-label" for="field_previousReading">Previous
-										Reading</label> <input type="text" class="form-control"
-										name="previousReading" id="field_previousReading"
-										ng-model="customer.meterReading" disabled />
-								</div> -->
-
 								<div class="col-sm-4">
 									<label for="field_tariffCategoryMaster">Previous
 										Category Master</label> <select class="form-control"
 										id="field_tariffCategoryMaster" name="tariffCategoryMaster"
 										ng-model="customer.tariffCategoryMaster"
 										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
-										disabled>
+										disabled required>
 										<option value=""></option>
 									</select>
 								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_organizationName">Organization
+										Name</label> <input type="text" class="form-control"
+										name="organizationName" id="field_organizationName"
+										ng-model="applicationTxn.organizationName"
+										disabled/>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_designation">Designation</label>
+									<input type="text" class="form-control" name="designation"
+										ng-model="applicationTxn.designation" id="field_designation"
+										disabled/>
+								</div>
+							</div>
+							<br>
+							<div class="row">
 								<div class="col-sm-4">
 									<label for="field_presentCategory">Change Category</label> <select
 										class="form-control" id="field_presentCategory"
 										ng-change="validateCategory(customer.tariffCategoryMaster.id, customer.presentCategory.id)"
 										name="presentCategory" ng-model="customer.presentCategory"
-										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
+										required>
 										<option value=""></option>
 									</select>
 								</div>
 								<div class="col-sm-4">
-									<label class="control-label" for="field_presentReading">Present
-										Reading</label> <input type="text" class="form-control"
-										name="presentReading" id="field_presentReading"
-										ng-model="customer.presentReading" />
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<!-- <div class="col-sm-4">
-									<label class="control-label" for="field_organization">Organization</label>
-									<input type="checkbox" class="form-control" name="organization"
-										id="field_organization" ng-model="customer.organization" />
-								</div> -->
-								<div class="col-sm-4">
 									<label class="control-label" for="field_organizationName">Organization
 										Name</label> <input type="text" class="form-control"
 										name="organizationName" id="field_organizationName"
-										ng-model="customer.organizationName" 
-										ng-disabled="customer.tariffCategoryMaster.id===1"/>
+										ng-model="customer.organizationName"
+										ng-disabled="customer.presentCategory.id===1" />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_designation">Designation</label>
 									<input type="text" class="form-control" name="designation"
-										ng-model="customer.designation" id="field_designation" 
-										ng-disabled="customer.tariffCategoryMaster.id===1"/>
+										ng-model="customer.designation" id="field_designation"
+										ng-disabled="customer.presentCategory.id===1" />
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_presentReading">Present
+										Reading</label> <input type="text" class="form-control"
+										name="presentReading" id="field_presentReading"
+										ng-model="customer.presentReading" required />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_propertyDoc">Property
@@ -185,8 +190,8 @@
 											<input id="field_requestedDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
 												ng-model="customer.requestedDate" max-date="dtmax"
-												is-open="datePickerForRequestedDate.status.opened" /> <span
-												class="input-group-btn">
+												is-open="datePickerForRequestedDate.status.opened" required />
+											<span class="input-group-btn">
 												<button type="button" class="btn btn-default"
 													ng-click="datePickerForRequestedDateOpen($event)">
 													<i class="glyphicon glyphicon-calendar"></i>
@@ -199,17 +204,19 @@
 									<label class="control-label" for="field_remarks">Remarks</label>
 									<textarea rows="1" cols="30" class="form-control"
 										name="remarks" id="field_remarks" style="resize: none"
-										ng-model="customer.remarks"></textarea>
+										ng-model="customer.remarks" required></textarea>
 								</div>
 							</div>
 						</fieldset>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							ng-click="clear()">
-							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+						<button type="button" onclick="window.history.back()"
+							class="btn btn-info pull-left">
+							<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+								Back</span>
 						</button>
-						<button type="submit" class="btn btn-primary">
+						<button type="submit" class="btn btn-primary"
+							ng-disabled="editForm.$invalid || isSaving">
 							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 						</button>
 					</div>
