@@ -63,7 +63,7 @@ public class CustomerResource {
 	 */
 	@RequestMapping(value = "/customers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> createCustomer(HttpServletRequest request,
 			@RequestBody Customer customer) throws URISyntaxException,
 			Exception {
@@ -162,7 +162,7 @@ public class CustomerResource {
 
 	@RequestMapping(value = "/customers/customersApprove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(
 			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
 		log.debug("REST request to save Customer : {}", workflowDTO);
@@ -221,7 +221,7 @@ public class CustomerResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> declineRequests(
 			@RequestBody WorkflowDTO workflowDTO)
 			throws Exception {
