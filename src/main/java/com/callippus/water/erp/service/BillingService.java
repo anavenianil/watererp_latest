@@ -256,6 +256,7 @@ public class BillingService {
 			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth()+"01", date_format));
 			customer.setArrears(CPSUtils.round(bfd.getNetPayableAmount()
 					.floatValue(), 2));
+			customer.setOtherCharges(0.0f);
 			customer.setPrevReading(bfd.getPresentReading());
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
@@ -404,7 +405,7 @@ public class BillingService {
 			
 			log.debug("Months:" + monthsDiff);
 			
-			if (bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L"))) {
+			if (bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType() == null || customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L"))) {
 
 				if (!customer.getPrevReading().equals("0")) {
 					if(bill_details.getIsRounding())
@@ -516,7 +517,7 @@ public class BillingService {
 					bfd.setWaterCess(((Double) charge.get("amount"))
 							.floatValue());
 					
-					if(bill_details.getCurrentBillType().equals("M") && customer.getPrevBillType().equals("L")){
+					if(bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType() == null || customer.getPrevBillType().equals("L"))){
 						if(customer.getLockCharges() == null)	
 							bfd.setLockCharges(0.0f);							
 						else
