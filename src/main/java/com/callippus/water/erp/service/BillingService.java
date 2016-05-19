@@ -516,7 +516,7 @@ public class BillingService {
 					bfd.setWaterCess(((Double) charge.get("amount"))
 							.floatValue());
 					
-					if(bill_details.getCurrentBillType().equals("M") && customer.getPrevBillType().equals("L")){
+					if(bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType() == null || customer.getPrevBillType().equals("L"))){
 						if(customer.getLockCharges() == null)	
 							bfd.setLockCharges(0.0f);							
 						else
