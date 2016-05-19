@@ -404,7 +404,7 @@ public class BillingService {
 			
 			log.debug("Months:" + monthsDiff);
 			
-			if (bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L"))) {
+			if (bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType() == null || customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L"))) {
 
 				if (!customer.getPrevReading().equals("0")) {
 					if(bill_details.getIsRounding())
