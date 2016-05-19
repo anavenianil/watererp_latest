@@ -19,12 +19,16 @@ angular
 
 							$scope.module = Navbar.getCurrentModule(response);
 						});
+						
+
+						console.log("GetOrgRole called.");
+						Principal.getOrgRole().then(function(response) {
+							console.log("GetOrgRole Reponse received:" + JSON.stringify(response));
+							$scope.orgRole = response;
+						});
 					}
 					
-//
-//					Principal.getOrgRole().then(function(response) {
-//						$scope.orgRole = response;
-//					});
+
 
 					
 					$scope.getByKey = function(key) {
