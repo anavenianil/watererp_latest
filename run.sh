@@ -7,7 +7,7 @@ grunt test
 sudo SPRING_PROFILES_ACTIVE=fast /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Dmaven.test.failure.ignore=true test
 
 ##### E2E Testing ###############
-a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
+a=`ps -ef|grep java|grep jenkins.war|awk '{print $2}'`
 if [ -n "$a" ]; then
 	echo "Killing:" $a
 	kill -9 $a
