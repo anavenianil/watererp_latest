@@ -140,10 +140,11 @@ public class ApplicationTxnResource {
         //this is for workflow for new request
         try{
         	workflowService.getUserDetails();
+        	workflowService.setAssignedDate(ZonedDateTime.now().toString());
         	applicationTxnWorkflowService.createTxn(applicationTxn);
         }
         catch(Exception e){
-        	System.out.println(e);
+        	e.printStackTrace();
         }
         Long uid = Long.valueOf(workflowService.getRequestAt()) ;
         applicationTxn.setRequestAt(userRepository.findById(uid));
