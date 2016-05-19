@@ -7,11 +7,15 @@ angular
 				function($scope, $stateParams, CustDetails,
 						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal) {
 
-					$scope.customer = {};
-					$scope.customer.changeType = "PIPESIZE";
+					$scope.workflowDTO = {};
+					$scope.workflowDTO.customer = {};
+					$scope.workflowDTO.customer.changeType = "PIPESIZE";
 					
 					$scope.custDetails = {};
-					$scope.orgRole = Principal.getOrgRole();
+					//$scope.orgRole = Principal.getOrgRole();
+					Principal.getOrgRole().then(function(response) {
+						$scope.orgRole = response;
+					});
 					
 					// get cust details by CAN
 					$scope.getCustDetails = function(can) {
@@ -22,9 +26,8 @@ angular
 					
 					$scope.load = function (id) {
 			            Customer.get({id: id}, function(result) {
-			                $scope.customer = result;
-			                $scope.getCustDetails($scope.customer.can);
-			                $scope.customer.remarks = "";
+			                $scope.workflowDTO.customer = result;
+			                $scope.getCustDetails(result.can);
 			            });
 			        };
 					
@@ -67,10 +70,10 @@ angular
 
 					
 					//approve a request
-					$scope.approve = function(customer){
+					$scope.approve = function(workflowDTO){
 			        	//console.log(customer);
 			        	return $http.post('/api/customers/customersApprove',
-								customer).then(
+								workflowDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
@@ -98,4 +101,14 @@ angular
 						}
 						return ret;
 					}
+					
+					$scope.datePickerForChangedDate = {};
+
+			        $scope.datePickerForChangedDate.status = {
+			            opened: false
+			        };
+
+			        $scope.datePickerForChangedDateOpen = function($event) {
+			            $scope.datePickerForChangedDate.status.opened = true;
+			        };
 				});

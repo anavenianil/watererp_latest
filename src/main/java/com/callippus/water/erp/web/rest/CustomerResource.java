@@ -26,12 +26,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.callippus.water.erp.domain.ConnectionTerminate;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
-import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -65,18 +63,13 @@ public class CustomerResource {
 	 */
 	@RequestMapping(value = "/customers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
+	@Transactional
 	public ResponseEntity<Customer> createCustomer(HttpServletRequest request,
 			@RequestBody Customer customer) throws URISyntaxException,
 			Exception {
 		log.debug("REST request to save Customer : {}", customer);
 		if (customer.getId() != null) {
-			return ResponseEntity
-					.badRequest()
-					.headers(
-							HeaderUtil.createFailureAlert("customer",
-									"idexists",
-									"A new customer cannot already have an ID"))
-					.body(null);
+			return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("customer","idexists","A new customer cannot already have an ID")).body(null);
 		}
 		customer.setPhoto("");
 		customerRepository.save(customer);
@@ -87,17 +80,14 @@ public class CustomerResource {
 		customer.setStatus(0);
 		Customer result = customerRepository.save(customer);
 		try {
+			workflowService.setAssignedDate(ZonedDateTime.now().toString());
 			workflowService.setRemarks(customer.getRemarks());
 			workflowService.getUserDetails();
 			custDetailsChangeWorkflowService.createTxn(customer);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
-		return ResponseEntity
-				.created(new URI("/api/customers/" + result.getId()))
-				.headers(
-						HeaderUtil.createEntityCreationAlert("customer", result
-								.getId().toString())).body(result);
+		return ResponseEntity.created(new URI("/api/customers/" + result.getId())).headers(HeaderUtil.createEntityCreationAlert("customer", result.getId().toString())).body(result);
 	}
 
 	/**
@@ -174,13 +164,15 @@ public class CustomerResource {
 	@Timed
 	@Transactional
 	public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(
-			@RequestBody Customer customer) throws URISyntaxException {
-		log.debug("REST request to save Customer : {}", customer);
+			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
+		log.debug("REST request to save Customer : {}", workflowDTO);
+		Customer customer = workflowDTO.getCustomer();
 		Customer customerDb = customerRepository.findOne(customer.getId());
 		customer.setStatus(customerDb.getStatus() + 1);
 		try {
-			workflowService.setRemarks(customer.getRemarks());
+			workflowService.setRemarks(workflowDTO.getRemarks());
 			workflowService.getUserDetails();
+			workflowService.setApprovedDate(ZonedDateTime.now());
 			custDetailsChangeWorkflowService
 					.approvedCahangeCaseRequest(customer);
 		} catch (Exception e) {
