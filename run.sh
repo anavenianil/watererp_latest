@@ -9,7 +9,7 @@
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then
 	echo "Killing:" $a
-	kill -9 $a
+	sudo kill -9 $a
 fi
 sudo BUILD_ID=dontKillMe nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Pfast spring-boot:run &
 #sleep 60
