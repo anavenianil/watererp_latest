@@ -78,7 +78,7 @@ public class CollDetailsResource {
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
 		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
-		
+		System.out.println(customer);
 		customer.setArrears(customer.getArrears() - collDetails.getReceiptAmt());
 		
 		custDetailsRepository.saveAndFlush(customer);
