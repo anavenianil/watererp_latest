@@ -124,7 +124,7 @@ angular.module('watererpApp')
             	$http.get("/api/empMastersForOrgRole").then(
             			function (response) {
             				_orgRole = response.data;
-            				 deferred.resolve(_module2MenuItems);
+            				 deferred.resolve(_orgRole);
 				}).catch(function() {
 					_orgRole = null;
 					deferred.resolve(_orgRole);

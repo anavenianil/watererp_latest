@@ -27,10 +27,7 @@ angular
 							$scope.orgRole = response;
 						});
 					}
-					
-
-
-					
+										
 					$scope.getByKey = function(key) {
 						var found = null;
 

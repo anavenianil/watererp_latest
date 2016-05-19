@@ -11,28 +11,25 @@
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
-							<!-- <th>Req. Id</th>
-							<th>Req. No.</th> -->
 							<th>From</th>
+							<th>To</th>
 							<th>Remarks</th>
 							<th>Actioned Date</th>
-							<th>To</th>
-							<th>Status</th>
 							<th>IP Address</th>
+							<th>Status</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="item in requestWorkflowHistorys">
-							<!-- <td>{{item.domainObject}}</td>
-							<td>{{item.fileNumber}}</td> -->
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
-							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.remarks}}</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.ipAddress}}</td>
+							<td>{{item.statusMaster.status}}</td>
+
 						</tr>
 					</tbody>
 				</table>
@@ -63,6 +60,10 @@
 						<legend>Applicant Details</legend>
 						<div class="row">
 							<div class="col-sm-3">
+								<label>Customer Account Number(CAN)</label>
+								<h5 class="list-group-item-heading">{{customer.can}}</h5>
+							</div>
+							<div class="col-sm-3">
 								<label>First Name</label>
 								<h5 class="list-group-item-heading">{{custDetails.consName}}</h5>
 							</div>
@@ -80,19 +81,12 @@
 					<fieldset>
 						<legend></legend>
 						<div class="row">
-							<div class="col-sm-3">
+							<!-- <div class="col-sm-3">
 								<label>Change Case No</label>
 								<h5 class="list-group-item-heading">{{customer.id}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Requested Date</label>
-								<h5 class="list-group-item-heading">{{customer.requestedDate
-									| date:'mediumDate'}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Customer Account Number(CAN)</label>
-								<h5 class="list-group-item-heading">{{customer.can}}</h5>
-							</div>
+							</div> -->
+
+
 						</div>
 					</fieldset>
 					<br>
@@ -107,16 +101,57 @@
 								<label>Requested Pipe Size</label>
 								<h5 class="list-group-item-heading">{{customer.requestedPipeSizeMaster.pipeSize}}</h5>
 							</div>
+							<div class="col-sm-3">
+								<label>Requested Date</label>
+								<h5 class="list-group-item-heading">{{customer.requestedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_changedDate">Changed
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_changedDate'>
+										<input id="field_changedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="workflowDTO.customer.approvedDate" max-date="maxDt"
+											is-open="datePickerForChangedDate.status.opened" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForChangedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
 						</div>
 					</fieldset>
 					<br>
 					<fieldset>
 						<legend></legend>
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_approvedDate">Approved
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_approvedDate'>
+										<input id="field_approvedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="workflowDTO.approvedDate" max-date="maxDt"
+											is-open="datePickerForApprovedDate.status.opened" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForApprovedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-9">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="customer.remarks"></textarea>
+									id="field_remarks" ng-model="customer.remarks" required></textarea>
 							</div>
 						</div>
 					</fieldset>
@@ -134,7 +169,7 @@
 
 		<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
-			ng-click="declineRequest(customer.id)">
+			ng-click="declineRequest(workflowDTO)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
 		<!-- <button type="button" class="btn btn-success pull-right"

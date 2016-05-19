@@ -5,13 +5,35 @@ angular
 		.controller(
 				'CustomerPipeSizeChangeDetailController',
 				function($scope, $stateParams, CustDetails,
-						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal) {
+						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal, $window) {
 
 					$scope.customer = {};
 					$scope.customer.changeType = "PIPESIZE";
-					
+					$scope.workflowDTO = {};
+					$scope.workflowDTO.customer = {};
 					$scope.custDetails = {};
 					$scope.orgRole = Principal.getOrgRole();
+					
+					$scope.datePickerForApprovedDate = {};
+
+			        $scope.datePickerForApprovedDate.status = {
+			            opened: false
+			        };
+
+			        $scope.datePickerForApprovedDateOpen = function($event) {
+			            $scope.datePickerForApprovedDate.status.opened = true;
+			        };
+			        
+			        
+			        $scope.datePickerForChangedDate = {};
+
+			        $scope.datePickerForChangedDate.status = {
+			            opened: false
+			        };
+
+			        $scope.datePickerForChangedDateOpen = function($event) {
+			            $scope.datePickerForChangedDate.status.opened = true;
+			        };
 					
 					// get cust details by CAN
 					$scope.getCustDetails = function(can) {
@@ -25,6 +47,7 @@ angular
 			                $scope.customer = result;
 			                $scope.getCustDetails($scope.customer.can);
 			                $scope.customer.remarks = "";
+			                $scope.workflowDTO.customer = result;
 			            });
 			        };
 					
@@ -76,6 +99,15 @@ angular
 											+ JSON.stringify(response));
 									$state.go('request');
 									$state.go('customer.pipeSizeList');
+								});
+			        }
+					
+					//declineRequest
+					$scope.declineRequest = function(workflowDTO){
+			        	return $http.post('/api/customers/declineRequest',
+								workflowDTO).then(
+								function(response) {
+									$window.history.back();
 								});
 			        }
 					

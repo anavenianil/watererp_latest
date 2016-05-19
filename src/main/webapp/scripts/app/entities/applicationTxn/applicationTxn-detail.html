@@ -328,7 +328,7 @@
 												<div class='input-group date' id='field_approvedDate'>
 													<input id="field_approvedDate" type="text"
 														class="form-control" uib-datepicker-popup="{{dateformat}}"
-														ng-model="approvalDetails.approvedDate" max-date="maxDate"
+														ng-model="applicationTxn.approvedDate" max-date="maxDate"
 														is-open="datePickerForApprovedDate.status.opened" /> <span
 														class="input-group-btn">
 														<button type="button" class="btn btn-default"
@@ -358,7 +358,7 @@
 									<button type="button"
 										ng-disabled="editForm.$invalid || isSaving"
 										class="btn btn-primary"
-										ng-click="approvalDetailsSave(applicationTxn.id, applicationTxn.remarks)">
+										ng-click="approvalDetailsSave(applicationTxn.id, applicationTxn.remarks, applicationTxn.approvedDate)">
 										<span class="glyphicon glyphicon-save"></span> &nbsp; <span>Save</span>
 									</button>
 								</div>

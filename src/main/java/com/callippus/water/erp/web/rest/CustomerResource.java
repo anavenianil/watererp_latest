@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -25,9 +26,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.ConnectionTerminate;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
+import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -213,6 +217,28 @@ public class CustomerResource {
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customer", ""))
+				.body(null);
+	}
+	
+	
+	 /**
+     * Decline the request
+     */
+    @RequestMapping(value = "/customers/declineRequest",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+	public ResponseEntity<Customer> declineRequests(
+			@RequestBody WorkflowDTO workflowDTO)
+			throws Exception {
+		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
+		customerRepository.save(workflowDTO.getCustomer());
+		workflowService.setRemarks(workflowDTO.getCustomer().getRemarks());
+		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
+		return ResponseEntity.created(new URI("/api/connectionTerminates/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
 				.body(null);
 	}
 }

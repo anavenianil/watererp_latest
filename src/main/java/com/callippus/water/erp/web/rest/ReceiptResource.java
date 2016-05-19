@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
+import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
 
 /**
@@ -44,6 +47,8 @@ public class ReceiptResource {
     @Inject
     private ApplicationTxnWorkflowService applicationTxnWorkflowService;
     
+    @Inject WorkflowService workflowService;
+    
     /**
      * POST  /receipts -> Create a new receipt.
      */
@@ -51,6 +56,7 @@ public class ReceiptResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<Receipt> createReceipt(@RequestBody Receipt receipt) throws URISyntaxException {
         log.debug("REST request to save Receipt : {}", receipt);
         if (receipt.getId() != null) {
@@ -62,10 +68,11 @@ public class ReceiptResource {
         applicationTxn.setRemarks(receipt.getApplicationTxn().getRemarks());
         applicationTxnRepository.save(applicationTxn);
         try{
+        	workflowService.setApprovedDate(ZonedDateTime.now());
         	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
         }
         catch(Exception e){
-        	System.out.println(e);
+        	e.printStackTrace();
         }
         return ResponseEntity.created(new URI("/api/receipts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("receipt", result.getId().toString()))
