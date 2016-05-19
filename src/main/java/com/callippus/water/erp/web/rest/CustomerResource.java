@@ -187,7 +187,8 @@ public class CustomerResource {
 		}
 		
 		if("PIPESIZE".equals(customer.getChangeType()) && customer.getStatus()==2){
-			custDetails.setPipeSize(customer.getPipeSizeMaster().getPipeSize());
+			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
+			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
 		}
 		
 		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==3){

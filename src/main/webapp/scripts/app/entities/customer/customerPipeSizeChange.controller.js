@@ -76,14 +76,13 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.getPipeSizeDetail(result.pipeSize);
+                $scope.oldPipeId = result.pipeSize.id;
                 $scope.customer.can = result.can;
-                //$scope.workflowTxnDetails.previousValue = $scope.custDetails.pipeSize;
             });
         };
         
         //when selected searched CAN in DropDown
         $scope.onSelect = function($item, $model, $label) {
-			//console.log($item);
 			var arr = $item.split("-");
 			$scope.custDetails = {};
 			$scope.custDetails.can = arr[0].trim();
@@ -104,20 +103,13 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 		};
 		
 		
-		/*$scope.saveChanges = function(){
-			$scope.workflowTxnDetails.requestMaster = {}
-			$scope.workflowTxnDetails.requestMaster.id = 9;
-			$scope.workflowTxnDetails.columnName  = "PipeSize";
-			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
-			WorkflowTxnDetails.save($scope.workflowTxnDetails, onSaveSuccess, onSaveError);
-		}*/
+		$scope.pipeCheck = function(oldPipeId, newPipeId){
+			if(oldPipeId == newPipeId){
+				$scope.customer.requestedPipeSizeMaster = "";
+				alert("Pipe should be different.");
+			}
+		}
 		
 		
-		/*$scope.saveChanges1 = function(){
-			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
-			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowTxnDetails).then(function(response) {
-				console.log("Server response:" + JSON.stringify(response));
-			});
-		}*/
 		
 }/*]*/);
