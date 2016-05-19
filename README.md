@@ -29,7 +29,7 @@ Add the `-h` flag on any command to see how you can use it. For example, `bower 
 #JENKINS Integration
 Jenkins is running on http://webmail.callippus.co.uk:9090/. 
 It's configured with WebHook URL:  http://webmail.callippus.co.uk:9090/job/watererp/build?token=JHGFGKGFHGFDJH
-
+Right now this has been removed as proper Authentication in Jenkins is still not configured.
 
 # Building for production
 
