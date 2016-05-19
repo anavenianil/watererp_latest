@@ -41,7 +41,7 @@
 		</div>
 	</div>
 <!-- 11 is Commercial Manager -->
-	<div ng-if="orgRole.id === 11"
+	<div ng-if="orgRole.id === 11 && canDecline()"
 		class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Bill Details</h3>
@@ -189,7 +189,7 @@
 		</div>
 	</div>
 
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" ng-show="canDecline()">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Remarks</h3>
 		</div>
