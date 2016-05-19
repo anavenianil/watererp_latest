@@ -142,6 +142,24 @@
 								<h5 class="list-group-item-heading">{{customer.deedDoc}}</h5>
 								<h5 class="list-group-item-heading">{{customer.agreementDoc}}</h5>
 							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_changedDate">Changed
+									Date </label>
+								<div class="form-group">
+									<div class='input-group date' id='field_changedDate'>
+										<input id="field_changedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="workflowDTO.customer.approvedDate" max-date="maxDt"
+											is-open="datePickerForChangedDate.status.opened" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForChangedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
 						</div>
 					</fieldset>
 					<fieldset>

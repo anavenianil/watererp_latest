@@ -14,6 +14,7 @@ angular
 					//$scope.workflowDTO.customer = {};
 					
 					$scope.custDetails = {};
+					$scope.maxDt = new Date();
 					//$scope.orgRole = Principal.getOrgRole();
 					$scope.orgRole = {};
 					Principal.getOrgRole().then(function(response) {
@@ -28,6 +29,17 @@ angular
 
 			        $scope.datePickerForApprovedDateOpen = function($event) {
 			            $scope.datePickerForApprovedDate.status.opened = true;
+			        };
+			        
+			        
+			        $scope.datePickerForChangedDate = {};
+
+			        $scope.datePickerForChangedDate.status = {
+			            opened: false
+			        };
+
+			        $scope.datePickerForChangedDateOpen = function($event) {
+			            $scope.datePickerForChangedDate.status.opened = true;
 			        };
 					
 					//$scope.tariffcategorymasters = TariffCategoryMaster.query();

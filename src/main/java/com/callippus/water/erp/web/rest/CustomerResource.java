@@ -172,18 +172,18 @@ public class CustomerResource {
 		try {
 			workflowService.setRemarks(workflowDTO.getRemarks());
 			workflowService.getUserDetails();
-			workflowService.setApprovedDate(ZonedDateTime.now());
+			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
 			custDetailsChangeWorkflowService
 					.approvedCahangeCaseRequest(customer);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		customerRepository.save(customer);
 		
 		CustDetails custDetails = custDetailsRepository.findByCan(customer.getCan());
 		
 		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
-			custDetails.setTariffCategoryMaster(customer.getTariffCategoryMaster());
+			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}
 		
 		if("PIPESIZE".equals(customer.getChangeType()) && customer.getStatus()==2){
