@@ -60,7 +60,7 @@ public class FeasibilityStudyResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<FeasibilityStudy> createFeasibilityStudy(@RequestBody FeasibilityStudy feasibilityStudy) throws URISyntaxException {
         log.debug("REST request to save FeasibilityStudy : {}", feasibilityStudy);
         if (feasibilityStudy.getId() != null) {

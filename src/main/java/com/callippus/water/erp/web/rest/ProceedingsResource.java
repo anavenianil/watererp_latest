@@ -101,6 +101,7 @@ public class ProceedingsResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<Proceedings> updateProceedings(@RequestBody Proceedings proceedings) throws URISyntaxException {
         log.debug("REST request to update Proceedings : {}", proceedings);
         if (proceedings.getId() == null) {

@@ -120,7 +120,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<ApplicationTxn> createApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to save ApplicationTxn : {}", applicationTxn);
@@ -164,7 +164,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<ApplicationTxn> updateApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to update ApplicationTxn : {}", applicationTxn);
@@ -291,7 +291,7 @@ public class ApplicationTxnResource {
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<ApplicationTxn> approveApplication(@RequestParam(value = "id", required = false) Long id,
 						@RequestParam(value = "remarks", required = false) String remarks,
 						@RequestParam(value = "approvedDate", required = false) String approvedDate)throws Exception{
@@ -327,7 +327,7 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Void> declineRequests(
 			@RequestParam(value = "id", required = false) Long id, HttpServletResponse response)
 			throws Exception {

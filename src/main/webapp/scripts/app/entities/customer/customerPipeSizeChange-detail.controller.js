@@ -8,12 +8,15 @@ angular
 						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal, $window) {
 
 					$scope.customer = {};
-					$scope.customer.changeType = "PIPESIZE";
 					$scope.workflowDTO = {};
 					$scope.workflowDTO.customer = {};
+					$scope.workflowDTO.customer.changeType = "PIPESIZE";
 					$scope.custDetails = {};
-					$scope.orgRole = Principal.getOrgRole();
-					
+					$scope.orgRole = {};
+					Principal.getOrgRole().then(function(response) {
+						$scope.orgRole = response;
+					});					
+					$scope.maxDt = new Date();
 					$scope.datePickerForApprovedDate = {};
 
 			        $scope.datePickerForApprovedDate.status = {
