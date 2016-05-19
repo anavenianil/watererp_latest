@@ -10,10 +10,16 @@ angular.module('watererpApp').controller(
 			$scope.$state = $state;
 			$scope.isAuthenticated = Principal.isAuthenticated;
 			$scope.module2menu_items = {};
+			$scope.orgRole = {};
 			
 			if ($scope.isAuthenticated()) {
 				Principal.getModuleMenus().then(function(response) {
 					$scope.module2menu_items = response;
+				});
+				
+				
+				Principal.getOrgRole().then(function(response) {
+					$scope.orgRole = response;
 				});
 			}
 
@@ -25,12 +31,15 @@ angular.module('watererpApp').controller(
 			$scope.getLogin = function() {
 				$scope.user = Principal.getLogonUser();
 				// console.log("User is: "+JSON.stringify($scope.user));
+				// console.log("User is: "+JSON.stringify($scope.user));
 				if ($scope.user == null) {
 					$scope.navbarUserId = "";
+					$scope.userRole = "";
 				} else {
 					$scope.navbarUserId = $scope.user.firstName + " "
-							+ $scope.user.lastName + "(" + $scope.user.login
-							+ ")";
+							+ $scope.user.lastName + "("
+							+ $scope.user.login + ")";
+					$scope.userRole = $scope.orgRole.orgRoleName;
 				}
 
 				return $scope.isAuthenticated();
