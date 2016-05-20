@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('ProceedingsDialogController',
-        function($scope, $state, $stateParams, Proceedings, PercentageMaster, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks, 
+        function($scope, $state, $stateParams, Proceedings, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks, 
         		ApplicationTxnService, Uom, ConfigurationDetails, PipeSizeMaster) {
 
         $scope.proceedings = {};

@@ -26,20 +26,6 @@
 								<option value=""></option>
 							</select>
 						</div>
-
-						<!-- <div class="col-sm-3">
-							<label>File Number</label> <input list="applicationTxn" type=""
-								class="form-control" ng-model="proceedings.applicationTxn.id" />
-							<datalist id="applicationTxn">
-								<option ng-repeat="applicationTxn in applicationTxns"
-									value="{{applicationTxn.id}}">
-							</datalist>
-						</div>
-						<span> <br>
-							<button type="button"
-								class="btn btn-primary glyphicon glyphicon-search"
-								ng-click="getApplicationTxn(proceedings.applicationTxn.id)"></button>
-						</span> -->
 					</div>
 				</div>
 
@@ -243,7 +229,7 @@
 						<div class="col-sm-12">
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<textarea rows="2" cols="30" class="form-control" name="remarks"
-								id="field_remarks" ng-model="proceedings.applicationTxn.remarks"></textarea>
+								id="field_remarks" ng-model="proceedings.applicationTxn.remarks" required></textarea>
 						</div>
 					</div>
 				</fieldset>
