@@ -11,6 +11,7 @@ if [ -n "$a" ]; then
 	echo "Killing:" $a
 	sudo kill -9 $a
 fi
+pwd
 sudo BUILD_ID=dontKillMe nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Pfast spring-boot:run &
 #sleep 60
 #/var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/Node/bin/npm install
