@@ -7,7 +7,7 @@
 			<h3 class="panel-title pull-left">Requests</h3>
 		</div>
 		<div class="list-group">
-			<div class="table-responsive" ng-hide="applicationTxn.ststus===0">
+			<div class="table-responsive">
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
@@ -28,7 +28,7 @@
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
 							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.actionedDate | date:'mediumDate'}}</td>
 							<td>{{item.ipAddress}}</td>
 							<td>{{item.statusMaster.status}}</td>
 
@@ -175,6 +175,10 @@
 			ng-show="canDecline()" ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
+		<button type="button" class="btn btn-success pull-right"
+				ui-sref="receiptForNameChange({customerId:workflowDTO.customer.id})">
+				<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
+			</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-danger pull-right"
