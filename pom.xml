@@ -38,7 +38,7 @@
 	</prerequisites>
 
 	<properties>
-		<jasperreports.version>6.1.0</jasperreports.version>
+		<jasperreports.version>5.6.0</jasperreports.version>
 		<hikaricp.version>2.4.1</hikaricp.version>
 		<assertj-core.version>3.1.0</assertj-core.version>
 		<awaitility.version>1.4.0</awaitility.version>
