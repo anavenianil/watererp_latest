@@ -38,6 +38,7 @@ angular
 					};
 
 					$scope.getBillById = function(id) {
+						$scope.customerComplaints.adjustmentBillId=id;
 						BillFullDetails.get({
 							id : id
 						}, function(result) {

@@ -121,6 +121,7 @@ public class CustomerComplaintsResource {
         CustomerComplaints customerComplaints1 = customerComplaintsRepository.findOne(customerComplaints.getId());
         customerComplaints1.setStatus(customerComplaints1.getStatus()+1);
         customerComplaints1.setAdjustmentAmt(customerComplaints.getAdjustmentAmt());
+        customerComplaints1.setAdjustmentBillId(customerComplaints.getAdjustmentBillId());
         CustomerComplaints result = customerComplaintsRepository.save(customerComplaints1);
         approveApplication(customerComplaints.getId(), customerComplaints.getRemarks());        
         return ResponseEntity.ok()

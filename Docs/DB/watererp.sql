@@ -878,6 +878,7 @@ CREATE TABLE `customer_complaints` (
   `complaint_date` date default NULL,
   `can` varchar(255) default NULL,
   `adjustment_amt` float default NULL,
+  `adjustment_bill_id` varchar(255) default NULL,
   `status` int(11) default NULL,
   `complaint_type_master_id` bigint(20) default NULL,
   PRIMARY KEY  (`id`),
@@ -890,10 +891,8 @@ CREATE TABLE `customer_complaints` (
 --
 
 /*!40000 ALTER TABLE `customer_complaints` DISABLE KEYS */;
-INSERT INTO `customer_complaints` (`id`,`remarks`,`relevant_doc`,`complaint_by`,`complaint_date`,`can`,`adjustment_amt`,`status`,`complaint_type_master_id`) VALUES 
- (12,'Wrong Billing','/api/download/12_7b0215072843f7f0578d25b5ce83d95f_16294.png','Punna','2016-05-19','02020005',NULL,0,NULL),
- (13,'Wrong billing','/api/download/13_3cce4cee73963afc9874bece8153c28e_16294.png','Punna','2016-05-19','02020005',5000,5,1),
- (14,'Water Leakage','/api/download/14_d69903a7623d9b4aab455af8eb8ad1a4_16294.png','Punna Reddy','2016-05-19','02020005',NULL,4,2);
+INSERT INTO `customer_complaints` (`id`,`remarks`,`relevant_doc`,`complaint_by`,`complaint_date`,`can`,`adjustment_amt`,`adjustment_bill_id`,`status`,`complaint_type_master_id`) VALUES 
+ (4,'Remarks 1','/api/download/4_23b758df488fb85bb008003b4c6e9f2c_bill.png','Punna Reddy Chilukuri','2016-05-20','02020005',-222,'10',2,1);
 /*!40000 ALTER TABLE `customer_complaints` ENABLE KEYS */;
 
 
@@ -1029,7 +1028,6 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-05-02 14:07:38',154,'EXECUTED','7:b7446d7e9934ac87de93b1c42cf3107a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-05-02 14:07:40',155,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
- ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-05-02 14:07:40',156,'EXECUTED','7:a8f621ed8b7a57ffbe0c5187791018c5','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160427084544','jhipster','classpath:config/liquibase/changelog/20160427084544_added_entity_OnlinePaymentOrder.xml','2016-05-02 14:07:41',157,'EXECUTED','7:c89108e03c232e11ba95545a3077646e','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160427104544','jhipster','classpath:config/liquibase/changelog/20160427104544_added_entity_OnlinePaymentResponse.xml','2016-05-03 17:04:09',158,'EXECUTED','7:446fb20c8df2e6211ae618789b57766b','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160427105244','jhipster','classpath:config/liquibase/changelog/20160427105244_added_entity_OnlinePaymentCallback.xml','2016-05-03 17:04:09',159,'EXECUTED','7:c8e948a9e513be117924fe3c630468fb','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
@@ -1046,7 +1044,8 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-05-17 09:15:21',173,'EXECUTED','7:208b28854110ec930d0f7348946c1469','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
  ('20160419095001','jhipster','classpath:config/liquibase/changelog/20160419095001_added_entity_MeterChange.xml','2016-05-17 09:15:22',174,'EXECUTED','7:bc8ec5c09f0aaedab3a493d844a5ef5a','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160517040011','jhipster','classpath:config/liquibase/changelog/20160517040011_added_entity_Hetero.xml','2016-05-17 09:33:14',175,'EXECUTED','7:f0aab1f3ff08628ff2ff55d6c6e0ba47','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL);
+ ('20160517040011','jhipster','classpath:config/liquibase/changelog/20160517040011_added_entity_Hetero.xml','2016-05-17 09:33:14',175,'EXECUTED','7:f0aab1f3ff08628ff2ff55d6c6e0ba47','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
+ ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-05-20 12:40:57',176,'EXECUTED','7:a18a503542bb9fe3740bba6f53169a9d','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -2880,7 +2879,20 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (872,'admin','2016-05-19 18:59:08','AUTHENTICATION_SUCCESS'),
  (873,'sf0016','2016-05-19 19:00:42','AUTHENTICATION_SUCCESS'),
  (874,'admin','2016-05-20 11:26:39','AUTHENTICATION_SUCCESS'),
- (875,'sf0016','2016-05-20 11:27:02','AUTHENTICATION_SUCCESS');
+ (875,'sf0016','2016-05-20 11:27:02','AUTHENTICATION_SUCCESS'),
+ (876,'admin','2016-05-20 12:59:03','AUTHENTICATION_SUCCESS'),
+ (877,'sf0023','2016-05-20 13:01:40','AUTHENTICATION_SUCCESS'),
+ (878,'customer','2016-05-20 14:02:40','AUTHENTICATION_SUCCESS'),
+ (879,'sf0023','2016-05-20 14:11:48','AUTHENTICATION_SUCCESS'),
+ (880,'sf0016','2016-05-20 14:21:59','AUTHENTICATION_SUCCESS'),
+ (881,'customer','2016-05-20 18:13:56','AUTHENTICATION_SUCCESS'),
+ (882,'sf0023','2016-05-20 18:16:13','AUTHENTICATION_SUCCESS'),
+ (883,'sf0016','2016-05-20 18:17:13','AUTHENTICATION_SUCCESS'),
+ (884,'customer','2016-05-20 18:21:23','AUTHENTICATION_SUCCESS'),
+ (885,'sf0023','2016-05-20 18:22:44','AUTHENTICATION_SUCCESS'),
+ (886,'sf0016','2016-05-20 18:23:28','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (887,'sf0016','2016-05-20 18:31:08','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -4739,7 +4751,32 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (874,'sessionId','85DC659A77D84D7B5C597B530A61F4DD'),
  (875,'remoteAddress','0:0:0:0:0:0:0:1');
 INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
- (875,'sessionId','FE76665CCE38C543EAC9A7495B33CCED');
+ (875,'sessionId','FE76665CCE38C543EAC9A7495B33CCED'),
+ (876,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (876,'sessionId','5324A7B5DDA6AEC4333761E7DD6231E8'),
+ (877,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (877,'sessionId','48EA411686483164EE42372151BB6D26'),
+ (878,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (878,'sessionId','09160A031EB4186A1CA56FEC33A026E2'),
+ (879,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (879,'sessionId','2FA1DEDE92BD8DCBFC84384F39C7EF5C'),
+ (880,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (880,'sessionId','5A6DBD23C41F33CF1180CCDC3BA5D0AB'),
+ (881,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (881,'sessionId','F38F63CDEDCAD7B19108D1C2E3D9FD0E'),
+ (882,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (882,'sessionId','380D4B2BD5BF1A216AFC1641C57ED95B'),
+ (883,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (883,'sessionId','EF14890E8FC36230F20337EED731D98F'),
+ (884,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (884,'sessionId','389C394198D371814FFB04E9032E6D84'),
+ (885,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (885,'sessionId','E73D1950EA86051F2908D72075BE6C68'),
+ (886,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (886,'sessionId','DCAFCB18BD1E3169D287B583478B38BD'),
+ (887,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (887,'sessionId','F9DF8E67B3920414329D962E40DD9118');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -4815,19 +4852,19 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('QNKrooOpjWJXpm7AAOEFQQ==',20,'DMvylSUGtrldSFzxyjrKXw==','2016-04-19','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('QnOVEcUN7EljG4/UD6aXXA==',3,'YZtjIP/DY6zaxa37xPsGWQ==','2016-05-13','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('shPh5FTXeL6vvAymUqZWhA==',16,'ipG4gIPxvyFPIfAF3t//rA==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('T53sqN50j/yG+Xy1nwQZEA==',3,'aNXX3d+8jixBot4xU/iyMA==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('tSOtngv/3diHOsCJo6rYOg==',31,'Epepxgsy2Z5mG5jhhc9fQw==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('uuRMPqbtEBc6QVsYIXN2pA==',21,'oeCuCAeQjxjpbYtfS8o4/w==','2016-04-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('V9rQqqIRC/goYf0v4KMZ3g==',30,'d8YPqVoG4JnyxyH1XvqOyA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('vCltSl9MsKd488jrCU8XQw==',5,'m9uZJi+jxdO842VU7ckQzA==','2016-05-10','122.170.237.113','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0');
+ ('V9rQqqIRC/goYf0v4KMZ3g==',30,'d8YPqVoG4JnyxyH1XvqOyA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('vCltSl9MsKd488jrCU8XQw==',5,'m9uZJi+jxdO842VU7ckQzA==','2016-05-10','122.170.237.113','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('vehx07ryxugUHCENmGBUSA==',30,'tSECGXgNhKq8auv6nZmQuw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('vnR7DP8oSYXDmF+mnmU1kg==',21,'/81Dy452hRlZFVFwMvjsag==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w19dFvKWblZHPQ4qBmRwOQ==',3,'niw5it4bdTF1FOsKFYODRQ==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Wcl3JtiPVeESKHgkm9DWVA==',30,'2E/wOFh/Y8+Y89I+G+sIQA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('wHOaPe95y0bFDhv7rwp+pQ==',3,'G5PATNutbflLHCMZntNdzA==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('wlsxEVx3DOGE5elnLj7U8Q==',3,'OA+2jIAtEEIKEr1jUU54UA==','2016-04-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('xg+CfrYeTi8Zl88Si7Du6A==',16,'+6+BH5S6TdRfLj6u3LiBGA==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0');
+ ('wlsxEVx3DOGE5elnLj7U8Q==',3,'OA+2jIAtEEIKEr1jUU54UA==','2016-04-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('XQG+pOIkmGVy/h3BRMq+Pw==',30,'rmKrD1xN8nP8aLEDALqvFA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('YCy7O8uNAqrw7SFOZCRH7Q==',15,'96gB2HojQE8BSXPuGXHk7A==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
@@ -6208,16 +6245,9 @@ CREATE TABLE `request_workflow_history` (
 
 /*!40000 ALTER TABLE `request_workflow_history` DISABLE KEYS */;
 INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (212,1,'2016-05-19 16:51:41','2016-05-19 16:52:49','Approved','169.254.178.179',NULL,13,5,23,5,3,4,NULL,NULL),
- (213,2,'2016-05-19 16:52:49','2016-05-19 16:53:53','Adjustment Approved','169.254.178.179',NULL,13,23,16,5,3,4,NULL,NULL),
- (214,3,'2016-05-19 16:53:53','2016-05-19 16:54:46','Approved','169.254.178.179',NULL,13,16,17,5,3,4,NULL,NULL),
- (215,4,'2016-05-19 16:54:46','2016-05-19 16:55:36','Approved','169.254.178.179',NULL,13,17,9,5,3,4,NULL,NULL),
- (216,5,'2016-05-19 16:55:36','2016-05-19 16:56:17','Approved','169.254.178.179',NULL,13,9,21,9,3,4,NULL,NULL),
- (217,1,'2016-05-19 17:01:19','2016-05-19 17:02:43','Approved','169.254.178.179',NULL,14,5,23,5,4,7,NULL,NULL),
- (218,2,'2016-05-19 17:02:43','2016-05-19 17:03:21','Approved','169.254.178.179',NULL,14,23,15,5,4,7,NULL,NULL),
- (219,3,'2016-05-19 17:03:21','2016-05-19 17:06:01','Approved','169.254.178.179',NULL,14,15,29,5,4,7,NULL,NULL);
-INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
- (220,4,'2016-05-19 17:06:01','2016-05-19 17:06:51','Approved','169.254.178.179',NULL,14,29,15,9,4,7,NULL,NULL);
+ (227,1,'2016-05-20 18:22:21','2016-05-20 18:23:11','EEEE','169.254.178.179',NULL,4,5,23,5,3,4,NULL,NULL),
+ (228,2,'2016-05-20 18:23:11','2016-05-20 18:24:09','PQR','169.254.178.179',NULL,4,23,16,5,3,4,NULL,NULL),
+ (229,3,'2016-05-20 18:24:09',NULL,NULL,'169.254.178.179',NULL,4,16,17,3,3,4,NULL,NULL);
 /*!40000 ALTER TABLE `request_workflow_history` ENABLE KEYS */;
 
 
