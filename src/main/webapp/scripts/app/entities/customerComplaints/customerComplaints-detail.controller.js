@@ -125,6 +125,7 @@ angular
 			            BillRunDetails.query({page: $scope.page, size: 20, can: can, status:status}, function(result, headers) {
 			                $scope.links = ParseLinks.parse(headers('link'));
 			                for (var i = 0; i < result.length; i++) {
+			                	console.log(result.length);
 			                    $scope.billRunDetailss.push(result[i]);
 			                    $scope.billFullDetailss.push(result[i].billFullDetails);
 			                    var d = new Date(result[i].billFullDetails.fromMonth.substr(0, 4)+'-'+result[i].billFullDetails.fromMonth.substr(4, 2));

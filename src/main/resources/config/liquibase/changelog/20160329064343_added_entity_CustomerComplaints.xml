@@ -33,6 +33,8 @@
             
             <column name="adjustment_amt" type="${floatType}"/>
             
+            <column name="adjustment_bill_id" type="varchar(255)"/>
+            
             <column name="status" type="integer"/>
             
             <column name="complaint_type_master_id" type="bigint"/>

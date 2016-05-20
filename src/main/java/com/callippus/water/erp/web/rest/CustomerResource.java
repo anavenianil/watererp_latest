@@ -212,12 +212,6 @@ public class CustomerResource {
 			custDetails.setIdNumber(customer.getIdNumber());
 			
 		}
-		
-		
-		
-		/*if("CONNECTIONTERMINATION".equals(customer.getChangeType())){
-			
-		}*/
 		custDetailsRepository.save(custDetails);
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
