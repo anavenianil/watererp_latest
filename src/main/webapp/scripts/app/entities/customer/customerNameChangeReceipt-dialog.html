@@ -1,0 +1,148 @@
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Create Receipt: {{receipt.id}}</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4" ng-hide="true">
+							<label class="control-label" for="field_can">CAN No.</label> <input
+								type="text" class="form-control" name="can" id="field_can"
+								ng-model="workflowDTO.receipt.can" readonly required />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_receiptDate">Receipt
+								Date</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_receiptDate'>
+									<input id="field_receiptDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="workflowDTO.receipt.receiptDate" max_date="maxDate"
+										is-open="datePickerForReceiptDate.status.opened" required /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForReceiptDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<label for="field_can">CAN</label> <input type="text"
+								class="form-control" name="can" id="field_can"
+								ng-model="workflowDTO.receipt.can" readonly required />
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label for="field_paymentTypes">Payment Type</label> <select
+								class="form-control" id="field_paymentTypes" name="paymentTypes"
+								ng-model="workflowDTO.receipt.paymentTypes"
+								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
+								required>
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_amount">Amount</label> <input
+								type="number" class="form-control" name="amount"
+								id="field_amount" ng-model="workflowDTO.receipt.amount" readonly />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_checkOrDdDate">Check/DD
+								Date</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_checkOrDdDate'>
+									<input id="field_checkOrDdDate" type="text"
+										class="form-control" uib-datepicker-popup="{{dateformat}}"
+										ng-model="workflowDTO.receipt.checkOrDdDate"
+										is-open="datePickerForCheckOrDdDate.status.opened"
+										ng-disabled="workflowDTO.receipt.paymentTypes.id===1" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForCheckOrDdDateOpen($event)"
+											ng-disabled="workflowDTO.receipt.paymentTypes.id===1">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_checkOrDdNo">Check/DD
+								No.</label> <input type="text" class="form-control" name="checkOrDdNo"
+								id="field_checkOrDdNo"
+								ng-model="workflowDTO.receipt.checkOrDdNo"
+								ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_bankName">Bank
+								Name</label> <input type="text" class="form-control" name="bankName"
+								id="field_bankName" ng-model="receipt.bankName"
+								ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_branchName">Branch
+								Name</label> <input type="text" class="form-control" name="branchName"
+								id="field_branchName" ng-model="receipt.branchName"
+								ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
+						</div>
+					</div>
+					<br>
+					<fieldset>
+						<legend></legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_approvedDate">Approved
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_approvedDate'>
+										<input id="field_approvedDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="workflowDTO.approvedDate" max-date="maxDt"
+											is-open="datePickerForApprovedDate.status.opened" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForApprovedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-9">
+								<label class="control-label" for="field_remarks">Remarks</label>
+								<textarea rows="2" cols="30" class="form-control" name="remarks"
+									id="field_remarks" ng-model="workflowDTO.remarks" required></textarea>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="window.history.back()"
+						class="btn btn-info pull-left">
+						<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
+							Back</span>
+					</button>
+					<button type="button" class="btn btn-success pull-right"
+						ng-disabled="editForm.$invalid || isSaving"
+						ng-click="approve(workflowDTO)">
+						<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+					</button>
+					<!-- <button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

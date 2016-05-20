@@ -170,19 +170,28 @@
 				</div>
 			</div>
 		</div>
+		<button type="button" class="btn btn-success pull-right"
+			ng-disabled="editForm.$invalid || isSaving"
+			ng-if="workflowDTO.customer.status === 0 && orgRole.id === 10"
+			ng-click="approve(workflowDTO)">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
+		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="canDecline()" ng-click="approve(workflowDTO)">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+			ui-sref="receiptForNameChange({customerId:workflowDTO.customer.id})"
+			ng-if="workflowDTO.customer.status === 1 && orgRole.id === 22">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
 		<button type="button" class="btn btn-success pull-right"
-				ui-sref="receiptForNameChange({customerId:workflowDTO.customer.id})">
-				<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
-			</button>
+			ng-disabled="editForm.$invalid || isSaving"
+			ng-if="workflowDTO.customer.status === 2 && orgRole.id === 16"
+			ng-click="approve(workflowDTO)">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
+		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-danger pull-right"
-			ng-show="canDecline()" ng-disabled="isSaving"
+			ng-show="canDecline()" ng-disabled="editForm.$invalid || isSaving"
 			ng-click="declineRequest(workflowDTO)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>

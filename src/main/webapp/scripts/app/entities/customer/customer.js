@@ -284,7 +284,7 @@ angular.module('watererpApp')
                 }
             })
             .state('receiptForNameChange', {
-                parent: 'receipt',
+                parent: 'customer',
                 url: '/receiptForNameChange/:customerId',
                 data: {
                     authorities: ['ROLE_USER'],

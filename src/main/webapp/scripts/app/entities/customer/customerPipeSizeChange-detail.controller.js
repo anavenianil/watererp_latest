@@ -100,7 +100,7 @@ angular
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
-									$state.go('request');
+									//$state.go('request');
 									$state.go('customer.pipeSizeList');
 								});
 			        }
