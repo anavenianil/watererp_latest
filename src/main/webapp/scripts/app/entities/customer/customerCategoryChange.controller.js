@@ -6,7 +6,7 @@ angular
 				'CustomerCategoryChangeController',
 				function($scope, $stateParams, CustDetails,
 						TariffCategoryMaster, $state, $http,
-						CustDetailsSearchCAN, WorkflowTxnDetails,
+						CustDetailsSearchCAN, 
 						PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks, RequestWorkflowHistory, Customer) {
 
 					$scope.customer = {};
