@@ -40,6 +40,9 @@ public class CustomerComplaints implements Serializable {
     @Column(name = "adjustment_amt")
     private Float adjustmentAmt;
     
+    @Column(name = "adjustment_bill_id")
+    private String adjustmentBillId;
+    
     @Column(name = "status")
     private Integer status;
     
@@ -103,6 +106,14 @@ public class CustomerComplaints implements Serializable {
         this.adjustmentAmt = adjustmentAmt;
     }
 
+    public String getAdjustmentBillId() {
+        return adjustmentBillId;
+    }
+    
+    public void setAdjustmentBillId(String adjustmentBillId) {
+        this.adjustmentBillId = adjustmentBillId;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -149,6 +160,7 @@ public class CustomerComplaints implements Serializable {
             ", complaintDate='" + complaintDate + "'" +
             ", can='" + can + "'" +
             ", adjustmentAmt='" + adjustmentAmt + "'" +
+            ", adjustmentBillId='" + adjustmentBillId + "'" +
             ", status='" + status + "'" +
             '}';
     }
