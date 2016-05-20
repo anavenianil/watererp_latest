@@ -78,7 +78,7 @@ public class ConnectionTerminateResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<ConnectionTerminate> createConnectionTerminate(@RequestBody ConnectionTerminate connectionTerminate) throws URISyntaxException {
         log.debug("REST request to save ConnectionTerminate : {}", connectionTerminate);
         if (connectionTerminate.getId() != null) {
@@ -98,9 +98,10 @@ public class ConnectionTerminateResource {
         ConnectionTerminate result = connectionTerminateRepository.save(connectionTerminate);
         try {
 			workflowService.getUserDetails();
+			workflowService.setAssignedDate(ZonedDateTime.now().toString());
 			connectionTerminateWorkflowService.createTxn(result);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
         return ResponseEntity.created(new URI("/api/connectionTerminates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", result.getId().toString()))
@@ -179,7 +180,7 @@ public class ConnectionTerminateResource {
     		method = RequestMethod.POST, 
     		produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<ConnectionTerminate> approveCategoryChange(
 			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
 		log.debug("REST request to terminate Connection : {}", workflowDTO);
@@ -221,7 +222,7 @@ public class ConnectionTerminateResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<ConnectionTerminate> declineRequests(
 			@RequestBody WorkflowDTO workflowDTO)
 			throws Exception {
