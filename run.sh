@@ -11,7 +11,8 @@ if [ -n "$a" ]; then
 	echo "Killing:" $a
 	sudo kill -9 $a
 fi
-sudo BUILD_ID=dontKillMe nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Pfast spring-boot:run &
+pwd
+sudo BUILD_ID=dontKillMe nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
 #sleep 60
 #/var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/Node/bin/npm install
 #sudo grunt protractor-xvfb
