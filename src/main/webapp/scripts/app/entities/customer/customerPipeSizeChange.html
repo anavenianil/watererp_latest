@@ -106,38 +106,10 @@
 						</div>
 					</fieldset>
 					<hr>
-					<!-- <div class="row">
-						<div class="col-sm-4 col-md-offset-4">
-							<select class="input-sm form-control" id="changeCase"
-								ng-model="changeCase"
-								ng-options="requestMaster as requestMaster.requestType for requestMaster in requestMasters track by requestMaster.id">
-								<option value="" label="">Select Case</option>
-								<option value="0" label="Connection Category">Connection
-									Category</option>
-								<option value="1" label="Pipe Size">Pipe Size</option>
-								<option value="2" label="Change Name">Change Name</option>
-								<option value="3" label="Connection Termination">Connection
-									Termination</option>
-							</select>
-						</div>
-					</div>
-					<hr> -->
 					<br>
 					<fieldSet>
 						<legend>Change Pipe Size</legend>
 						<div class="row">
-							<!-- <div class="col-sm-3">
-								<label class="control-label" for="field_pipeSize">Present
-									Pipe Size</label> <input type="number" class="form-control"
-									name="pipeSize" id="field_pipeSize"
-									ng-model="workflowTxnDetails.previousValue" disabled />
-							</div> -->
-							<!-- <div class="col-sm-3">
-								<label class="control-label" for="field_pipeSize">New
-									Pipe Size</label> <input type="number" class="form-control"
-									name="pipeSize" id="field_pipeSize"
-									ng-model="workflowTxnDetails.newValue" />
-							</div> -->
 							<div class="col-sm-3">
 								<label for="field_pipeSizeMaster">Present Pipe Size</label> <select
 									class="form-control" id="field_pipeSizeMaster"
@@ -160,6 +132,24 @@
 								</select>
 							</div>
 							<div class="col-sm-3">
+								<label class="control-label" for="field_meterReading">Meter
+									Reading(Last Billed)</label> <input type="number" class="form-control"
+									name="meterReading" id="field_meterReading"
+									ng-model="customer.meterReading" disabled required />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_presentReading">Present
+									Reading</label> <input type="number" class="form-control"
+									name="presentReading" id="field_presentReading"
+									ng-model="customer.presentReading"
+									min="0" 
+									ng-blur="checkReading(customer.meterReading, customer.presentReading)"
+									required />
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
 								<label class="control-label" for="field_requestedDate">Requested
 									Date</label>
 								<div class="form-group">
@@ -167,8 +157,8 @@
 										<input id="field_requestedDate" type="text"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="customer.requestedDate" max-date="dtmax"
-											is-open="datePickerForRequestedDate.status.opened" required/> <span
-											class="input-group-btn">
+											is-open="datePickerForRequestedDate.status.opened" required />
+										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForRequestedDateOpen($event)">
 												<i class="glyphicon glyphicon-calendar"></i>
@@ -177,9 +167,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-9">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
 									id="field_remarks" style="resize: none"

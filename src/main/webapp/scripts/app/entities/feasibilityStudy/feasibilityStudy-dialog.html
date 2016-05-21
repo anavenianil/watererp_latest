@@ -10,22 +10,6 @@
 				<div class="list-group-item">
 					<div class="modal-body">
 						<jh-alert-error></jh-alert-error>
-						<div class="row" ng-hide="true">
-							<div class="col-sm-3">
-								<label>Application No.</label> <input list="applicationTxn"
-									type="" class="form-control"
-									ng-model="feasibilityStudy.applicationTxn.id" />
-								<datalist id="applicationTxn">
-									<option ng-repeat="applicationTxn in applicationTxns"
-										value="{{applicationTxn.id}}">
-								</datalist>
-							</div>
-							<span> <br>
-								<button type="button"
-									class="btn btn-primary glyphicon glyphicon-search"
-									ng-click="getApplicationTxn(feasibilityStudy.applicationTxn.id)"></button>
-							</span>
-						</div>
 						<fieldset>
 							<legend>Applicant Details</legend>
 							<div class="row">
@@ -127,14 +111,6 @@
 										name="streetMaster" ng-model="feasibilityStudy.streetMaster"
 										ng-options="streetMaster as streetMaster.streetNo +'-'+ streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id"
 										required>
-										<option value=""></option>
-									</select>
-								</div>
-								<div class="col-sm-4" ng-hide="true">
-									<label for="field_zoneMaster">Zone</label> <select
-										class="form-control" id="field_zoneMaster" name="zoneMaster"
-										ng-model="feasibilityStudy.zoneMaster"
-										ng-options="zoneMaster as zoneMaster.zoneName for zoneMaster in zonemasters track by zoneMaster.id">
 										<option value=""></option>
 									</select>
 								</div>
@@ -312,7 +288,7 @@
 									<label class="control-label" for="field_remarks">Remarks</label>
 									<textarea rows="2" cols="30" class="form-control"
 										name="remarks" id="field_remarks"
-										ng-model="feasibilityStudy.applicationTxn.remarks"></textarea>
+										ng-model="feasibilityStudy.applicationTxn.remarks" required></textarea>
 								</div>
 							</div>
 						</fieldset>

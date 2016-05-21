@@ -3,7 +3,7 @@
 angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster, Customer, GetPipeSizeDetail) {
+        		PipeSizeMaster, Customer, GetPipeSizeDetail) {
 
         //$scope.custDetails = entity;
 		$scope.custDetails = {};
@@ -76,8 +76,8 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.getPipeSizeDetail(result.pipeSize);
-                $scope.oldPipeId = result.pipeSize.id;
                 $scope.customer.can = result.can;
+                $scope.customer.meterReading = result.prevReading;
             });
         };
         
@@ -106,10 +106,16 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 		$scope.pipeCheck = function(oldPipeId, newPipeId){
 			if(oldPipeId == newPipeId){
 				$scope.customer.requestedPipeSizeMaster = "";
-				alert("Pipe should be different.");
+				alert("Pipe Size should be different.");
 			}
 		}
 		
-		
+		$scope.checkReading = function(oldReading, presentReading){
+			//alert(oldReading+","+ presentReading);
+			if(presentReading < oldReading){
+				$scope.customer.presentReading = "";
+				alert("Present reading should be greater than old reading");
+			}
+		}
 		
 }/*]*/);

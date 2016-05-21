@@ -5,7 +5,7 @@ angular
 		.controller(
 				'CustomerCategoryChangeDetailController',
 				function($scope, $stateParams, CustDetails,
-						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal, $window) {
+						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal, $window, ApplicationTxnSearchCAN) {
 
 					$scope.customer = {};
 					$scope.customer.changeType = "CONNECTIONCATEGORY";
@@ -42,14 +42,13 @@ angular
 			            $scope.datePickerForChangedDate.status.opened = true;
 			        };
 					
-					//$scope.tariffcategorymasters = TariffCategoryMaster.query();
-					//$scope.pipeSizeMasters = PipeSizeMaster.query();
-					//$scope.workflowDTO = {};
-					//$scope.workflowDTO.requestWorkflowHistory = {};
-					//$scope.workflowDTO.workflowTxnDetailss = {};
-					//$scope.applicationTxn = {};
-					//$scope.workflowDTO.workflowTxnDetailss = [];
-					
+			        // getApplicationTxn by CAN
+					$scope.getApplicationTxn = function(can) {
+						ApplicationTxnSearchCAN.get({can : can},
+										function(result) {
+											$scope.applicationTxn = result;
+										});
+					};
 					
 					// get cust details by CAN
 					$scope.getCustDetails = function(can) {
@@ -65,6 +64,7 @@ angular
 			            	$scope.customer = result;
 			            	$scope.workflowDTO.customer = result;
 			                $scope.getCustDetails(result.can);
+			                $scope.getApplicationTxn(result.can);
 			                $scope.customer.remarks = "";
 			                //$scope.workflowDTO.customer = $scope.customer; 
 			            });

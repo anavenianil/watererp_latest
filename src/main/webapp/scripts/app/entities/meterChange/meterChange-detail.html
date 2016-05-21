@@ -7,18 +7,16 @@
 			<h3 class="panel-title pull-left">Requests</h3>
 		</div>
 		<div class="list-group">
-			<div class="table-responsive" ng-hide="applicationTxn.ststus===0">
+			<div class="table-responsive">
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
-							<!-- <th>Req. Id</th>
-							<th>Req. No.</th> -->
 							<th>From</th>
-							<th>Remarks</th>
-							<th>Actioned Date</th>
 							<th>To</th>
-							<th>Status</th>
+							<th>Actioned Date</th>
+							<th>Remarks</th>
 							<th>IP Address</th>
+							<th>Status</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -27,12 +25,13 @@
 							<td>{{item.fileNumber}}</td> -->
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
-							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							<td>{{item.statusMaster.status}}</td>
+							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.remarks}}</td>
 							<td>{{item.ipAddress}}</td>
+							<td>{{item.statusMaster.status}}</td>
+
 						</tr>
 					</tbody>
 				</table>
@@ -118,8 +117,6 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Approved Date</label>
-								<!-- <h5 class="list-group-item-heading">{{meterChange.approvedDate
-									| date:'mediumDate'}}</h5> -->
 								<div class="form-group">
 									<div class='input-group date' id='field_approvedDate'>
 										<input id="field_approvedDate" type="text"
@@ -155,7 +152,7 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Approve Date</label>
-								<h5 class="list-group-item-heading">{{meterChange.reasonForChange}}</h5>
+								<h5 class="list-group-item-heading">{{meterChange.approvedDate | date:'mediumDate'}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -166,7 +163,7 @@
 							<div class="col-sm-12">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="4" cols="50" class="form-control" name="remarks"
-									id="field_remarks" max="20" ng-model="meterChange.remarks"></textarea>
+									id="field_remarks" max="20" ng-model="meterChange.remarks" required></textarea>
 							</div>
 						</div>
 					</fieldset>
@@ -175,14 +172,14 @@
 		</div>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-click="approve(meterChange)"
+			ng-click="approve(meterChange)" ng-disabled="editForm.$invalid || isSaving"
 			ng-show="meterChange.status===1 && orgRole.id === 10">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 		<button type="submit" class="btn btn-success pull-right"
+			ng-disabled="editForm.$invalid || isSaving"
 			ng-show="meterChange.status===0 && orgRole.id === 15">
-			<span class="glyphicon glyphicon-check"></span>
-			&nbsp;Issue Meter
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
 
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>

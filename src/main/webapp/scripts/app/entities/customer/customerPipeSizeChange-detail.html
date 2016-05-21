@@ -26,7 +26,7 @@
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
 							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.actionedDate | date:'mediumDate'}}</td>
 							<td>{{item.ipAddress}}</td>
 							<td>{{item.statusMaster.status}}</td>
 
@@ -39,9 +39,8 @@
 	<div>
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
-				<h3 class="panel-title pull-left">
-					Application For Pipe Size Change
-				</h3>
+				<h3 class="panel-title pull-left">Application For Pipe Size
+					Change</h3>
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
@@ -79,6 +78,17 @@
 								<h5 class="list-group-item-heading">{{customer.requestedPipeSizeMaster.pipeSize}}</h5>
 							</div>
 							<div class="col-sm-3">
+								<label>Previous Reading(Last Billed)</label>
+								<h5 class="list-group-item-heading">{{customer.meterReading}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Present Reading</label>
+								<h5 class="list-group-item-heading">{{customer.presentReading}}</h5>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
 								<label>Requested Date</label>
 								<h5 class="list-group-item-heading">{{customer.requestedDate
 									| date:'mediumDate'}}</h5>
@@ -88,8 +98,8 @@
 									Date</label>
 								<div class="form-group">
 									<div class='input-group date' id='field_changedDate'>
-										<input id="field_changedDate" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
+										<input id="field_changedDate" type="text" class="form-control"
+											uib-datepicker-popup="{{dateformat}}"
 											ng-model="workflowDTO.customer.approvedDate" max-date="maxDt"
 											is-open="datePickerForChangedDate.status.opened" required />
 										<span class="input-group-btn">
@@ -101,12 +111,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</fieldset>
-					<br>
-					<fieldset>
-						<legend></legend>
-						<div class="row">
 							<div class="col-sm-3">
 								<label class="control-label" for="field_approvedDate">Approved
 									Date</label>
@@ -125,7 +129,13 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-9">
+						</div>
+					</fieldset>
+					<br>
+					<fieldset>
+						<legend></legend>
+						<div class="row">
+							<div class="col-sm-12">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
 									id="field_remarks" ng-model="workflowDTO.remarks" required></textarea>
@@ -136,9 +146,8 @@
 				</div>
 			</div>
 		</div>
-
 		<button type="button" class="btn btn-success pull-right"
-			ng-disabled="isSaving" ng-show="canDecline()" 
+			ng-disabled="editForm.$invalid || isSaving" ng-show="canDecline()"
 			ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>

@@ -1,6 +1,5 @@
 package com.callippus.water.erp.domain;
 
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -11,9 +10,17 @@ public class WorkflowDTO {
 	private RequestWorkflowHistory requestWorkflowHistory;
 	private ConnectionTerminate connectionTerminate;
 	private Customer customer;
+	private Receipt receipt;
 	private String remarks;
 	private ZonedDateTime approvedDate;
 	
+	
+	public Receipt getReceipt() {
+		return receipt;
+	}
+	public void setReceipt(Receipt receipt) {
+		this.receipt = receipt;
+	}
 	/*public WorkflowTxnDetails getWorkflowTxnDetails() {
 		return workflowTxnDetails;
 	}

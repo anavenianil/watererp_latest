@@ -67,7 +67,7 @@ class ReceiptGatlingTest extends Simulation {
             .exec(http("Create new receipt")
             .post("/api/receipts")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "amount":null, "bankName":"SAMPLE_TEXT", "branchName":"SAMPLE_TEXT", "checkOrDdDate":"2020-01-01T00:00:00.000Z", "checkOrDdNo":"SAMPLE_TEXT", "receiptDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "amount":null, "bankName":"SAMPLE_TEXT", "branchName":"SAMPLE_TEXT", "checkOrDdDate":"2020-01-01T00:00:00.000Z", "checkOrDdNo":"SAMPLE_TEXT", "receiptDate":"2020-01-01T00:00:00.000Z", "can":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_receipt_url")))
             .pause(10)

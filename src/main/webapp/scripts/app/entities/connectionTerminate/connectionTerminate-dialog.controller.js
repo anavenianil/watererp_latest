@@ -105,7 +105,15 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
                 $scope.custDetails = result;
                 $scope.connectionTerminate.can = $scope.custDetails.can; 
                 $scope.getMeterDetail($scope.custDetails.meterNo);
-                $scope.arrearsMessage = "Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
+                //$scope.custDetails.arrears = 10;
+                if($scope.custDetails.arrears > 0){
+                	$scope.isSaving = true;
+                	$scope.arrearsMessage = "Clear Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
+                }
+                else{
+                	$scope.arrearsMessage = "No Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
+                }
+                
                 //console.log($scope.divisionmasters);
             });
         };

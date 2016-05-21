@@ -104,21 +104,6 @@
 							</div>
 						</div>
 					</fieldset>
-					<!-- <div class="row">
-						<div class="col-sm-4 col-md-offset-4">
-							<select class="input-sm form-control" id="changeCase"
-								ng-model="workflowTxnDetails.requestMaster"
-								ng-options="requestMaster as requestMaster.requestType for requestMaster in requestMasters track by requestMaster.id">
-								<option value="" label="">Select Case</option>
-								<option value="0" label="Connection Category">Connection
-									Category</option>
-								<option value="1" label="Pipe Size">Pipe Size</option>
-								<option value="2" label="Change Name">Change Name</option>
-								<option value="3" label="Connection Termination">Connection
-									Termination</option>
-							</select>
-						</div>
-					</div> -->
 					<hr>
 					<br>
 					<fieldset>
@@ -227,9 +212,10 @@
 					</fieldset>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					<button type="button" onclick="window.history.back()"
+						class="btn btn-info pull-left">
+						<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+							Back</span>
 					</button>
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">

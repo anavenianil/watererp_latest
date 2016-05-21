@@ -8,7 +8,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         $scope.custdetailss = CustDetails.query();
         //$scope.meterdetailss = MeterDetails.query();
         $scope.users = User.query();
-        $scope.orgRole = Principal.getOrgRole();
+
         $scope.meterChangeStatuss = [{"id":1,"status":"Meter Stuck"},{"id":2,"status":"Meter Break"}];
         
         $scope.CustDetailsId;

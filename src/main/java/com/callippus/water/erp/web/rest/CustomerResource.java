@@ -32,6 +32,7 @@ import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
+import com.callippus.water.erp.repository.ReceiptRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.CustDetailsChangeWorkflowService;
@@ -58,12 +59,15 @@ public class CustomerResource {
 
 	@Inject
 	private CustDetailsRepository custDetailsRepository;
+	
+	@Inject
+	private ReceiptRepository receiptRepository;
 	/**
 	 * POST /customers -> Create a new customer.
 	 */
 	@RequestMapping(value = "/customers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> createCustomer(HttpServletRequest request,
 			@RequestBody Customer customer) throws URISyntaxException,
 			Exception {
@@ -162,7 +166,7 @@ public class CustomerResource {
 
 	@RequestMapping(value = "/customers/customersApprove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(
 			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
 		log.debug("REST request to save Customer : {}", workflowDTO);
@@ -190,6 +194,11 @@ public class CustomerResource {
 			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
 			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
 		}
+		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==2){
+			if(workflowDTO.getReceipt()!=null){
+				receiptRepository.save(workflowDTO.getReceipt());
+			}
+		}
 		
 		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==3){
 			 if(customer.getMiddleName()!=null){
@@ -201,11 +210,8 @@ public class CustomerResource {
 			custDetails.setMobileNo(customer.getMobileNo().toString());
 			custDetails.setEmail(customer.getEmail());
 			custDetails.setIdNumber(customer.getIdNumber());
-		}
-		
-		/*if("CONNECTIONTERMINATION".equals(customer.getChangeType())){
 			
-		}*/
+		}
 		custDetailsRepository.save(custDetails);
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
@@ -221,7 +227,7 @@ public class CustomerResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> declineRequests(
 			@RequestBody WorkflowDTO workflowDTO)
 			throws Exception {

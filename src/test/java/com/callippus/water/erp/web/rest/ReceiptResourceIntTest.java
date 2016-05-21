@@ -58,6 +58,8 @@ public class ReceiptResourceIntTest {
 
     private static final LocalDate DEFAULT_RECEIPT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_RECEIPT_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_CAN = "AAAAA";
+    private static final String UPDATED_CAN = "BBBBB";
 
     @Inject
     private ReceiptRepository receiptRepository;
@@ -91,6 +93,7 @@ public class ReceiptResourceIntTest {
         receipt.setCheckOrDdDate(DEFAULT_CHECK_OR_DD_DATE);
         receipt.setCheckOrDdNo(DEFAULT_CHECK_OR_DD_NO);
         receipt.setReceiptDate(DEFAULT_RECEIPT_DATE);
+        receipt.setCan(DEFAULT_CAN);
     }
 
     @Test
@@ -115,6 +118,7 @@ public class ReceiptResourceIntTest {
         assertThat(testReceipt.getCheckOrDdDate()).isEqualTo(DEFAULT_CHECK_OR_DD_DATE);
         assertThat(testReceipt.getCheckOrDdNo()).isEqualTo(DEFAULT_CHECK_OR_DD_NO);
         assertThat(testReceipt.getReceiptDate()).isEqualTo(DEFAULT_RECEIPT_DATE);
+        assertThat(testReceipt.getCan()).isEqualTo(DEFAULT_CAN);
     }
 
     @Test
@@ -133,7 +137,8 @@ public class ReceiptResourceIntTest {
                 .andExpect(jsonPath("$.[*].branchName").value(hasItem(DEFAULT_BRANCH_NAME.toString())))
                 .andExpect(jsonPath("$.[*].checkOrDdDate").value(hasItem(DEFAULT_CHECK_OR_DD_DATE.toString())))
                 .andExpect(jsonPath("$.[*].checkOrDdNo").value(hasItem(DEFAULT_CHECK_OR_DD_NO.toString())))
-                .andExpect(jsonPath("$.[*].receiptDate").value(hasItem(DEFAULT_RECEIPT_DATE.toString())));
+                .andExpect(jsonPath("$.[*].receiptDate").value(hasItem(DEFAULT_RECEIPT_DATE.toString())))
+                .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())));
     }
 
     @Test
@@ -152,7 +157,8 @@ public class ReceiptResourceIntTest {
             .andExpect(jsonPath("$.branchName").value(DEFAULT_BRANCH_NAME.toString()))
             .andExpect(jsonPath("$.checkOrDdDate").value(DEFAULT_CHECK_OR_DD_DATE.toString()))
             .andExpect(jsonPath("$.checkOrDdNo").value(DEFAULT_CHECK_OR_DD_NO.toString()))
-            .andExpect(jsonPath("$.receiptDate").value(DEFAULT_RECEIPT_DATE.toString()));
+            .andExpect(jsonPath("$.receiptDate").value(DEFAULT_RECEIPT_DATE.toString()))
+            .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()));
     }
 
     @Test
@@ -178,6 +184,7 @@ public class ReceiptResourceIntTest {
         receipt.setCheckOrDdDate(UPDATED_CHECK_OR_DD_DATE);
         receipt.setCheckOrDdNo(UPDATED_CHECK_OR_DD_NO);
         receipt.setReceiptDate(UPDATED_RECEIPT_DATE);
+        receipt.setCan(UPDATED_CAN);
 
         restReceiptMockMvc.perform(put("/api/receipts")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -194,6 +201,7 @@ public class ReceiptResourceIntTest {
         assertThat(testReceipt.getCheckOrDdDate()).isEqualTo(UPDATED_CHECK_OR_DD_DATE);
         assertThat(testReceipt.getCheckOrDdNo()).isEqualTo(UPDATED_CHECK_OR_DD_NO);
         assertThat(testReceipt.getReceiptDate()).isEqualTo(UPDATED_RECEIPT_DATE);
+        assertThat(testReceipt.getCan()).isEqualTo(UPDATED_CAN);
     }
 
     @Test

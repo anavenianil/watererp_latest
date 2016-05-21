@@ -3,7 +3,7 @@
 angular.module('watererpApp').controller('CustomerNameChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster, IdProofMaster, Customer, UploadUtil) {
+        		PipeSizeMaster, IdProofMaster, Customer, UploadUtil) {
 
         //$scope.custDetails = entity;
 		$scope.custDetails = {};

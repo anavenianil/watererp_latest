@@ -8,7 +8,10 @@ angular.module('watererpApp')
         //$scope.workflowDTO.connectionTerminate = entity;
         $scope.custDetails = {};
         
-        $scope.orgRole = Principal.getOrgRole();
+        //$scope.orgRole = Principal.getOrgRole();
+        Principal.getOrgRole().then(function(response) {
+			$scope.orgRole = response;
+		});
         
 		
 		$scope.getCustDetails = function(can) {

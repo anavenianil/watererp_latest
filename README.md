@@ -4,6 +4,7 @@ This application was generated using JHipster, you can find documentation and he
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
+
 1. [Node.js][]: We use Node to run a development web server and build the project.
    Depending on your system, you can install Node either from source or as a pre-packaged bundle.
 
@@ -30,6 +31,7 @@ Add the `-h` flag on any command to see how you can use it. For example, `bower 
 Jenkins is running on http://webmail.callippus.co.uk:9090/. 
 It's configured with WebHook URL:  http://webmail.callippus.co.uk:9090/job/watererp/build?token=JHGFGKGFHGFDJH
 Right now this has been removed as proper Authentication in Jenkins is still not configured.
+Do not forget to install tools in Jenkins before configuring this.
 
 # Building for production
 
