@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,7 +80,7 @@ public class MeterChangeResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<MeterChange> createMeterChange(@RequestBody MeterChange meterChange) throws URISyntaxException {
         log.debug("REST request to save MeterChange : {}", meterChange);
         if (meterChange.getId() != null) {
@@ -102,10 +103,11 @@ public class MeterChangeResource {
           //this is for workflow for new request
             try{
             	workflowService.getUserDetails();
+            	workflowService.setAssignedDate(ZonedDateTime.now().toString());
             	meterChangeWorkflowService.createTxn(meterChange);
             }
             catch(Exception e){
-            	System.out.println(e);
+            	e.printStackTrace();
             }
         }
         return ResponseEntity.created(new URI("/api/meterChanges/" + result.getId()))
@@ -120,7 +122,7 @@ public class MeterChangeResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    //@Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<MeterChange> updateMeterChange(@RequestBody MeterChange meterChange) throws URISyntaxException {
         log.debug("REST request to update MeterChange : {}", meterChange);
         if (meterChange.getId() == null) {
@@ -141,7 +143,7 @@ public class MeterChangeResource {
         try{
         	approveMeterChange(meterChange);
         }catch(Exception e){
-        	System.out.println(e);
+        	e.printStackTrace();
         }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("meterChange", meterChange.getId().toString()))
@@ -216,7 +218,7 @@ public class MeterChangeResource {
     		method = RequestMethod.POST, 
     		produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<MeterChange> approveMeterChange(
 			@RequestBody MeterChange meterChange) throws URISyntaxException {
 		log.debug("REST request to approve MeterChange : {}", meterChange);
@@ -246,11 +248,12 @@ public class MeterChangeResource {
 		}
 		try {
 			workflowService.setRemarks(meterChange.getRemarks());
+			workflowService.setApprovedDate(ZonedDateTime.now());
 			workflowService.getUserDetails();
 			meterChangeWorkflowService
 					.approvedMeterChangeRequest(meterChange);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 		if(meterChange.getStatus() >= 0){
@@ -271,6 +274,7 @@ public class MeterChangeResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    //@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<MeterChange> declineRequests(
 			@RequestBody MeterChange meterChange)
 			throws Exception {
@@ -286,8 +290,11 @@ public class MeterChangeResource {
         	meterDetailsRepository.save(meterDetails);
     	}
     	meterChange.setStatus(3);
+    	meterChange.setNewMeterNo(null);
+    	meterChange.setNewMeterReading(null);
     	meterChangeRepository.save(meterChange);
 		workflowService.setRemarks(meterChange.getRemarks());
+		workflowService.setApprovedDate(ZonedDateTime.now());
 		meterChangeWorkflowService.declineRequest(meterChange.getId());
 		return ResponseEntity.created(new URI("/api/meterChanges/declineRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("meterChange", ""))

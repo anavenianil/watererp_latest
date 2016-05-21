@@ -5,11 +5,15 @@ angular.module('watererpApp')
     		ApplicationTxnService, RequestWorkflowHistory, ParseLinks, $state, Principal, $http, $window) {
         $scope.meterChange = {};
         
-        $scope.orgRole = Principal.getOrgRole();
         $scope.users = User.query();
         
         $scope.maxDt= new Date(); 
-        
+
+        $scope.orgRole = {};
+		Principal.getOrgRole().then(function(response) {
+			$scope.orgRole = response;
+		});
+		
         $scope.load = function (id) {
             MeterChange.get({id: id}, function(result) {
                 $scope.meterChange = result;

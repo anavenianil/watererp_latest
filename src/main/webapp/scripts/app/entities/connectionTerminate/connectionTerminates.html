@@ -1,75 +1,74 @@
 <div>
-	<h2>ConnectionTerminates</h2>
+	<h2>Connection Termination</h2>
 	<jh-alert></jh-alert>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-4 no-padding-left">
-				<button class="btn btn-primary" ui-sref="connectionTerminate.new">
-					<span class="glyphicon glyphicon-plus"></span> <span>Create
-						new ConnectionTerminate </span>
-				</button>
+	<br />
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Connection Termination List</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="table-responsive">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+								<th jh-sort-by="id"><span>ID</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="can"><span>CAN</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="requestDate"><span>Request Date</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="meterRecovered"><span>Meter
+										Recovered</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="lastMeterReading"><span>Last Meter
+										Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="meterRecoveredDate"><span>Meter
+										Recovered Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="meterDetails.id"><span>Meter No.</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<tr
+								ng-repeat="connectionTerminate in connectionTerminates track by connectionTerminate.id">
+								<td><a
+									ui-sref="connectionTerminate.detail({id:connectionTerminate.id})">{{connectionTerminate.id}}</a></td>
+								<td>{{connectionTerminate.can}}</td>
+								<td>{{connectionTerminate.requestDate | date:'mediumDate'}}</td>
+								<td>{{connectionTerminate.meterRecovered}}</td>
+								<td>{{connectionTerminate.lastMeterReading}}</td>
+								<td>{{connectionTerminate.meterRecoveredDate |
+									date:'mediumDate'}}</td>
+								<td>{{connectionTerminate.meterDetails.meterId}}</td>
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit"
+											ui-sref="connectionTerminate.detail({id:connectionTerminate.id, requestTypeId:11})"
+											class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-eye-open"></span>&nbsp;View<span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<!-- <button type="submit"
+											ui-sref="connectionTerminate.edit({id:connectionTerminate.id})"
+											class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<button type="submit"
+											ui-sref="connectionTerminate.delete({id:connectionTerminate.id})"
+											class="btn btn-danger btn-sm">
+											<span class="glyphicon glyphicon-remove-circle"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button> -->
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
-	<br />
-	<div class="table-responsive">
-		<table class="jh-table table table-striped">
-			<thead>
-				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
-					<th jh-sort-by="id"><span>ID</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="can"><span>CAN</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="requestDate"><span>Request Date</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="meterRecovered"><span>Meter Recovered</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="lastMeterReading"><span>Last Meter
-							Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="meterRecoveredDate"><span>Meter
-							Recovered Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="meterDetails.id"><span>Meter No.</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody infinite-scroll="loadPage(page + 1)"
-				infinite-scroll-disabled="links['last'] == page">
-				<tr
-					ng-repeat="connectionTerminate in connectionTerminates track by connectionTerminate.id">
-					<td><a
-						ui-sref="connectionTerminate.detail({id:connectionTerminate.id})">{{connectionTerminate.id}}</a></td>
-					<td>{{connectionTerminate.can}}</td>
-					<td>{{connectionTerminate.requestDate | date:'mediumDate'}}</td>
-					<td>{{connectionTerminate.meterRecovered}}</td>
-					<td>{{connectionTerminate.lastMeterReading}}</td>
-					<td>{{connectionTerminate.meterRecoveredDate |
-						date:'mediumDate'}}</td>
-					<td>{{connectionTerminate.meterDetails.meterId}}</td>
-					<td class="text-right">
-						<div class="btn-group flex-btn-group-container">
-							<button type="submit"
-								ui-sref="connectionTerminate.detail({id:connectionTerminate.id, requestTypeId:11})"
-								class="btn btn-info btn-sm">
-								<span class="glyphicon glyphicon-eye-open"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-							<button type="submit"
-								ui-sref="connectionTerminate.edit({id:connectionTerminate.id})"
-								class="btn btn-primary btn-sm">
-								<span class="glyphicon glyphicon-pencil"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-							<button type="submit"
-								ui-sref="connectionTerminate.delete({id:connectionTerminate.id})"
-								class="btn btn-danger btn-sm">
-								<span class="glyphicon glyphicon-remove-circle"></span> <span
-									class="hidden-xs hidden-sm"></span>
-							</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
 </div>

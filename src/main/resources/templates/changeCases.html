@@ -88,12 +88,12 @@
 	<script src="scripts/components/navbar/navbar.service.js"></script>
 	<script src="scripts/components/auth/authority.directive.js"></script>
 	<script src="scripts/components/auth/services/account.service.js"></script>
-	
+
 	<script src="scripts/components/auth/services/activate.service.js"></script>
 	<script src="scripts/components/auth/services/password.service.js"></script>
 	<script src="scripts/components/auth/services/register.service.js"></script>
 
- 	
+
 	<script src="scripts/components/form/form.directive.js"></script>
 
 	<script src="scripts/components/form/maxbytes.directive.js"></script>
@@ -174,676 +174,73 @@
 	<script src="scripts/components/auth/provider/auth.session.service.js"></script>
 	<script src="scripts/app/account/sessions/sessions.js"></script>
 	<script src="scripts/app/account/sessions/sessions.controller.js"></script>
-	<script src="scripts/app/module/connection.controller.js"></script>
+	<script src="scripts/app/module/changeCases.controller.js"></script>
 
-
-	<script src="scripts/app/entities/categoryMaster/categoryMaster.js"></script>
-	<script
-		src="scripts/app/entities/categoryMaster/categoryMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/categoryMaster/categoryMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/categoryMaster/categoryMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/categoryMaster/categoryMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/categoryMaster/categoryMaster.service.js"></script>
-
-	<script src="scripts/app/entities/paymentTypes/paymentTypes.js"></script>
-	<script
-		src="scripts/app/entities/paymentTypes/paymentTypes.controller.js"></script>
-	<script
-		src="scripts/app/entities/paymentTypes/paymentTypes-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/paymentTypes/paymentTypes-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/paymentTypes/paymentTypes-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/paymentTypes/paymentTypes.service.js"></script>
-
-
-	<script src="scripts/app/entities/statusMaster/statusMaster.js"></script>
-	<script
-		src="scripts/app/entities/statusMaster/statusMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/statusMaster/statusMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/statusMaster/statusMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/statusMaster/statusMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/statusMaster/statusMaster.service.js"></script>
-
-	<script src="scripts/app/entities/applicationTxn/applicationTxn.js"></script>
-	<script
-		src="scripts/app/entities/applicationTxn/applicationTxn.controller.js"></script>
-	<script
-		src="scripts/app/entities/applicationTxn/applicationTxn-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/applicationTxn/issueMeter-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/applicationTxn/applicationTxnClose-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/applicationTxn/applicationTxn-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/applicationTxn/applicationTxn-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/applicationTxn/applicationTxn.service.js"></script>
+	<!-- Module related script -->
 	<script
 		src="scripts/components/entities/applicationTxn/applicationTxnService.service.js"></script>
-
+	<script src="scripts/app/entities/customer/customer.js"></script>
 	<script
-		src="scripts/app/entities/configurationDetails/configurationDetails.js"></script>
-	<script
-		src="scripts/app/entities/configurationDetails/configurationDetails.controller.js"></script>
-	<script
-		src="scripts/app/entities/configurationDetails/configurationDetails-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/configurationDetails/configurationDetails-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/configurationDetails/configurationDetails-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/configurationDetails/configurationDetails.service.js"></script>
-
-	<script src="scripts/app/entities/orgHierarchy/orgHierarchy.js"></script>
-	<script
-		src="scripts/app/entities/orgHierarchy/orgHierarchy.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgHierarchy/orgHierarchy-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgHierarchy/orgHierarchy-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgHierarchy/orgHierarchy-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/orgHierarchy/orgHierarchy.service.js"></script>
-
-	<script src="scripts/app/entities/orgRoleHierarchy/orgRoleHierarchy.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleHierarchy/orgRoleHierarchy.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleHierarchy/orgRoleHierarchy-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleHierarchy/orgRoleHierarchy-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleHierarchy/orgRoleHierarchy-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/orgRoleHierarchy/orgRoleHierarchy.service.js"></script>
-
-	<script src="scripts/app/entities/orgRoleInstance/orgRoleInstance.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleInstance/orgRoleInstance.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleInstance/orgRoleInstance-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleInstance/orgRoleInstance-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/orgRoleInstance/orgRoleInstance-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/orgRoleInstance/orgRoleInstance.service.js"></script>
-
-	<script
-		src="scripts/app/entities/workflowTypeMaster/workflowTypeMaster.js"></script>
-	<script
-		src="scripts/app/entities/workflowTypeMaster/workflowTypeMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowTypeMaster/workflowTypeMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowTypeMaster/workflowTypeMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowTypeMaster/workflowTypeMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/workflowTypeMaster/workflowTypeMaster.service.js"></script>
-
-	<script src="scripts/app/entities/empMaster/empMaster.js"></script>
-	<script src="scripts/app/entities/empMaster/empMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/empMaster/empMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/empMaster/empMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/empMaster/empMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/empMaster/empMaster.service.js"></script>
-
-	<script src="scripts/app/entities/empRoleMapping/empRoleMapping.js"></script>
-	<script
-		src="scripts/app/entities/empRoleMapping/empRoleMapping.controller.js"></script>
-	<script
-		src="scripts/app/entities/empRoleMapping/empRoleMapping-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/empRoleMapping/empRoleMapping-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/empRoleMapping/empRoleMapping-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/empRoleMapping/empRoleMapping.service.js"></script>
-
-	<script src="scripts/app/entities/percentageMaster/percentageMaster.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/percentageMaster/percentageMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/percentageMaster/percentageMaster.service.js"></script>
-
-	<script src="scripts/app/entities/workflowMaster/workflowMaster.js"></script>
-	<script
-		src="scripts/app/entities/workflowMaster/workflowMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowMaster/workflowMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowMaster/workflowMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowMaster/workflowMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/workflowMaster/workflowMaster.service.js"></script>
-
-	<script src="scripts/app/entities/requestMaster/requestMaster.js"></script>
-	<script
-		src="scripts/app/entities/requestMaster/requestMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/requestMaster/requestMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/requestMaster/requestMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/requestMaster/requestMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/requestMaster/requestMaster.service.js"></script>
-
-	<script
-		src="scripts/app/entities/workflowStageMaster/workflowStageMaster.js"></script>
-	<script
-		src="scripts/app/entities/workflowStageMaster/workflowStageMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowStageMaster/workflowStageMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowStageMaster/workflowStageMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowStageMaster/workflowStageMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/workflowStageMaster/workflowStageMaster.service.js"></script>
-
-	<script
-		src="scripts/app/entities/workflowRelations/workflowRelations.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelations/workflowRelations.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelations/workflowRelations-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelations/workflowRelations-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelations/workflowRelations-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/workflowRelations/workflowRelations.service.js"></script>
-
-	<script
-		src="scripts/app/entities/workflowRelationships/workflowRelationships.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelationships/workflowRelationships.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelationships/workflowRelationships-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelationships/workflowRelationships-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowRelationships/workflowRelationships-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/workflowRelationships/workflowRelationships.service.js"></script>
-
-	<script
-		src="scripts/app/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping.js"></script>
-	<script
-		src="scripts/app/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping.controller.js"></script>
-	<script
-		src="scripts/app/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping.service.js"></script>
-
-	<script
-		src="scripts/app/entities/roleWorkflowMapping/roleWorkflowMapping.js"></script>
-	<script
-		src="scripts/app/entities/roleWorkflowMapping/roleWorkflowMapping.controller.js"></script>
-	<script
-		src="scripts/app/entities/roleWorkflowMapping/roleWorkflowMapping-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/roleWorkflowMapping/roleWorkflowMapping-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/roleWorkflowMapping/roleWorkflowMapping-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/roleWorkflowMapping/roleWorkflowMapping.service.js"></script>
-
-	<script src="scripts/app/entities/workflow/workflow.js"></script>
-	<script src="scripts/app/entities/workflow/workflow.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflow/workflow-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflow/workflow-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflow/workflow-detail.controller.js"></script>
-	<script src="scripts/components/entities/workflow/workflow.service.js"></script>
-
-	<script
-		src="scripts/app/entities/requestWorkflowHistory/requestWorkflowHistory.js"></script>
-	<script
-		src="scripts/app/entities/requestWorkflowHistory/requestWorkflowHistory.controller.js"></script>
-	<script
-		src="scripts/app/entities/requestWorkflowHistory/requestWorkflowHistory-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/requestWorkflowHistory/requestWorkflowHistory-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/requestWorkflowHistory/requestWorkflowHistory-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/requestWorkflowHistory/requestWorkflowHistory.service.js"></script>
-
-	<script src="scripts/app/entities/module/module.js"></script>
-	<script src="scripts/app/entities/module/module.controller.js"></script>
-	<script src="scripts/app/entities/module/module-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/module/module-delete-dialog.controller.js"></script>
-	<script src="scripts/app/entities/module/module-detail.controller.js"></script>
-	<script src="scripts/components/entities/module/module.service.js"></script>
-
-	<script src="scripts/app/entities/menuItem/menuItem.js"></script>
-	<script src="scripts/app/entities/menuItem/menuItem.controller.js"></script>
-	<script
-		src="scripts/app/entities/menuItem/menuItem-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/menuItem/menuItem-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/menuItem/menuItem-detail.controller.js"></script>
-	<script src="scripts/components/entities/menuItem/menuItem.service.js"></script>
-
-	<script src="scripts/app/entities/url/url.js"></script>
-	<script src="scripts/app/entities/url/url.controller.js"></script>
-	<script src="scripts/app/entities/url/url-dialog.controller.js"></script>
-	<script src="scripts/app/entities/url/url-delete-dialog.controller.js"></script>
-	<script src="scripts/app/entities/url/url-detail.controller.js"></script>
-	<script src="scripts/components/entities/url/url.service.js"></script>
-
-	<script src="scripts/app/entities/menuItem2Url/menuItem2Url.js"></script>
-	<script
-		src="scripts/app/entities/menuItem2Url/menuItem2Url.controller.js"></script>
-	<script
-		src="scripts/app/entities/menuItem2Url/menuItem2Url-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/menuItem2Url/menuItem2Url-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/menuItem2Url/menuItem2Url-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/menuItem2Url/menuItem2Url.service.js"></script>
-
-	<script src="scripts/app/entities/module2MenuItem/module2MenuItem.js"></script>
-	<script
-		src="scripts/app/entities/module2MenuItem/module2MenuItem.controller.js"></script>
-	<script
-		src="scripts/app/entities/module2MenuItem/module2MenuItem-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/module2MenuItem/module2MenuItem-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/module2MenuItem/module2MenuItem-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/module2MenuItem/module2MenuItem.service.js"></script>
-
-	<script src="scripts/app/entities/url2Role/url2Role.js"></script>
-	<script src="scripts/app/entities/url2Role/url2Role.controller.js"></script>
-	<script
-		src="scripts/app/entities/url2Role/url2Role-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/url2Role/url2Role-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/url2Role/url2Role-detail.controller.js"></script>
-	<script src="scripts/components/entities/url2Role/url2Role.service.js"></script>
-
-	<script
-		src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster.js"></script>
-	<script
-		src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/tariffCategoryMaster/tariffCategoryMaster.service.js"></script>
-
-	<script src="scripts/app/entities/feasibilityStudy/feasibilityStudy.js"></script>
-	<script
-		src="scripts/app/entities/feasibilityStudy/feasibilityStudy.controller.js"></script>
-	<script
-		src="scripts/app/entities/feasibilityStudy/feasibilityStudy-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/feasibilityStudy/feasibilityStudy-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/feasibilityStudy/feasibilityStudy-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/feasibilityStudy/feasibilityStudy.service.js"></script>
-
-	<script src="scripts/app/entities/proceedings/proceedings.js"></script>
-	<script
-		src="scripts/app/entities/proceedings/proceedings.controller.js"></script>
-	<script
-		src="scripts/app/entities/proceedings/proceedings-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/proceedings/proceedings-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/proceedings/proceedings-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/proceedings/proceedings.service.js"></script>
-	<script
-		src="scripts/components/entities/proceedings/proceedingsService.service.js"></script>
-
-	<script src="scripts/app/entities/itemRequired/itemRequired.js"></script>
-	<script
-		src="scripts/app/entities/itemRequired/itemRequired.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemRequired/itemRequired-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemRequired/itemRequired-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemRequired/itemRequired-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/itemRequired/itemRequired.service.js"></script>
-
-	<script src="scripts/app/entities/divisionMaster/divisionMaster.js"></script>
-	<script
-		src="scripts/app/entities/divisionMaster/divisionMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/divisionMaster/divisionMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/divisionMaster/divisionMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/divisionMaster/divisionMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/divisionMaster/divisionMaster.service.js"></script>
-
-	<script src="scripts/app/entities/zoneMaster/zoneMaster.js"></script>
-	<script src="scripts/app/entities/zoneMaster/zoneMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/zoneMaster/zoneMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/zoneMaster/zoneMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/zoneMaster/zoneMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/zoneMaster/zoneMaster.service.js"></script>
-
-	<script src="scripts/app/entities/streetMaster/streetMaster.js"></script>
-	<script
-		src="scripts/app/entities/streetMaster/streetMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/streetMaster/streetMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/streetMaster/streetMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/streetMaster/streetMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/streetMaster/streetMaster.service.js"></script>
-
-	<script
-		src="scripts/app/entities/itemCategoryMaster/itemCategoryMaster.js"></script>
-	<script
-		src="scripts/app/entities/itemCategoryMaster/itemCategoryMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCategoryMaster/itemCategoryMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCategoryMaster/itemCategoryMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCategoryMaster/itemCategoryMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/itemCategoryMaster/itemCategoryMaster.service.js"></script>
-
-	<script
-		src="scripts/app/entities/itemSubCategoryMaster/itemSubCategoryMaster.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCategoryMaster/itemSubCategoryMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCategoryMaster/itemSubCategoryMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCategoryMaster/itemSubCategoryMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCategoryMaster/itemSubCategoryMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/itemSubCategoryMaster/itemSubCategoryMaster.service.js"></script>
-
-	<script src="scripts/app/entities/itemCodeMaster/itemCodeMaster.js"></script>
-	<script
-		src="scripts/app/entities/itemCodeMaster/itemCodeMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCodeMaster/itemCodeMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCodeMaster/itemCodeMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCodeMaster/itemCodeMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/itemCodeMaster/itemCodeMaster.service.js"></script>
-
-	<script
-		src="scripts/app/entities/itemCompanyMaster/itemCompanyMaster.js"></script>
-	<script
-		src="scripts/app/entities/itemCompanyMaster/itemCompanyMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCompanyMaster/itemCompanyMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCompanyMaster/itemCompanyMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemCompanyMaster/itemCompanyMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/itemCompanyMaster/itemCompanyMaster.service.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCodeMaster/itemSubCodeMaster.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCodeMaster/itemSubCodeMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCodeMaster/itemSubCodeMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCodeMaster/itemSubCodeMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/itemSubCodeMaster/itemSubCodeMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/itemSubCodeMaster/itemSubCodeMaster.service.js"></script>
-
-	<script src="scripts/app/entities/materialMaster/materialMaster.js"></script>
-	<script
-		src="scripts/app/entities/materialMaster/materialMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/materialMaster/materialMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/materialMaster/materialMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/materialMaster/materialMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/materialMaster/materialMaster.service.js"></script>
-
-	<script src="scripts/app/entities/receipt/receipt.js"></script>
-	<script src="scripts/app/entities/receipt/receipt.controller.js"></script>
-	<script src="scripts/app/entities/receipt/receipt-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/receipt/receipt-delete-dialog.controller.js"></script>
-	<script src="scripts/app/entities/receipt/receipt-detail.controller.js"></script>
-	<script src="scripts/components/entities/receipt/receipt.service.js"></script>
-
-
-	<script src="scripts/app/entities/custDetails/custDetails.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails.controller.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/custDetails/custDetails-detail.controller.js"></script>
+		src="scripts/app/entities/customer/customerCategoryChange.controller.js"></script>
 	<script
 		src="scripts/components/entities/custDetails/custDetails.service.js"></script>
 	<script
-		src="scripts/components/entities/custDetails/CustDetailsService.service.js"></script>
-
+		src="scripts/components/entities/tariffCategoryMaster/tariffCategoryMaster.service.js"></script>
 	<script
-		src="scripts/app/entities/custDetails/custDetailsCategoryChange.controller.js"></script>
+		src="scripts/components/entities/pipeSizeMaster/pipeSizeMaster.service.js"></script>
+	<script
+		src="scripts/components/entities/applicationTxn/applicationTxn.service.js"></script>
+	<script
+		src="scripts/components/entities/requestWorkflowHistory/requestWorkflowHistory.service.js"></script>
+	<script src="scripts/components/entities/customer/customer.service.js"></script>
 	<script
 		src="scripts/app/entities/customer/customerCategoryChangeList.controller.js"></script>
-
+	<script
+		src="scripts/app/entities/customer/customerCategoryChange-detail.controller.js"></script>
 	<script
 		src="scripts/app/entities/customer/customerPipeSizeChange.controller.js"></script>
 	<script
-		src="scripts/app/entities/customer/customerPipeSizeChange-detail.controller.js"></script>
-	<script
 		src="scripts/app/entities/customer/customerPipeSizeList.controller.js"></script>
+	<script
+		src="scripts/app/entities/customer/customerPipeSizeChange-detail.controller.js"></script>
 	<script
 		src="scripts/app/entities/customer/customerNameChange.controller.js"></script>
 	<script
+		src="scripts/app/entities/customer/customerNameChangeList.controller.js"></script>
+	<script
 		src="scripts/app/entities/customer/customerNameChange-detail.controller.js"></script>
 	<script
-		src="scripts/app/entities/customer/customerNameChangeList.controller.js"></script>
-
-	<script src="scripts/app/entities/meterDetails/meterDetails.js"></script>
+		src="scripts/components/entities/idProofMaster/idProofMaster.service.js"></script>
 	<script
-		src="scripts/app/entities/meterDetails/meterDetails.controller.js"></script>
+		src="scripts/app/entities/customer/customerNameChangeReceipt-dialog.controller.js"></script>
+	<script src="scripts/components/entities/receipt/receipt.service.js"></script>
 	<script
-		src="scripts/app/entities/meterDetails/meterDetails-dialog.controller.js"></script>
+		src="scripts/components/entities/paymentTypes/paymentTypes.service.js"></script>
 	<script
-		src="scripts/app/entities/meterDetails/meterDetails-delete-dialog.controller.js"></script>
+		src="scripts/app/entities/connectionTerminate/connectionTerminate.js"></script>
 	<script
-		src="scripts/app/entities/meterDetails/meterDetails-detail.controller.js"></script>
+		src="scripts/app/entities/connectionTerminate/connectionTerminate-dialog.controller.js"></script>
+	<script
+		src="scripts/components/entities/connectionTerminate/connectionTerminate.service.js"></script>
 	<script
 		src="scripts/components/entities/meterDetails/meterDetails.service.js"></script>
-
-	<script src="scripts/app/entities/custMeterMapping/custMeterMapping.js"></script>
 	<script
-		src="scripts/app/entities/custMeterMapping/custMeterMapping.controller.js"></script>
+		src="scripts/components/entities/divisionMaster/divisionMaster.service.js"></script>
 	<script
-		src="scripts/app/entities/custMeterMapping/custMeterMapping-dialog.controller.js"></script>
+		src="scripts/components/entities/streetMaster/streetMaster.service.js"></script>
 	<script
-		src="scripts/app/entities/custMeterMapping/custMeterMapping-delete-dialog.controller.js"></script>
+		src="scripts/app/entities/connectionTerminate/connectionTerminate.controller.js"></script>
 	<script
-		src="scripts/app/entities/custMeterMapping/custMeterMapping-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/custMeterMapping/custMeterMapping.service.js"></script>
-
-
-	<!-- <script
-		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster.js"></script>
-	<script
-		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/instrumentIssuerMaster/instrumentIssuerMaster.service.js"></script> -->
-
-
-	<script src="scripts/app/entities/uom/uom.js"></script>
-	<script src="scripts/app/entities/uom/uom.controller.js"></script>
-	<script src="scripts/app/entities/uom/uom-dialog.controller.js"></script>
-	<script src="scripts/app/entities/uom/uom-delete-dialog.controller.js"></script>
-	<script src="scripts/app/entities/uom/uom-detail.controller.js"></script>
-	<script src="scripts/components/entities/uom/uom.service.js"></script>
-
-	<script src="scripts/app/entities/meterStatus/meterStatus.js"></script>
-	<script
-		src="scripts/app/entities/meterStatus/meterStatus.controller.js"></script>
-	<script
-		src="scripts/app/entities/meterStatus/meterStatus-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/meterStatus/meterStatus-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/meterStatus/meterStatus-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/meterStatus/meterStatus.service.js"></script>
-
-	<script src="scripts/app/entities/pipeSizeMaster/pipeSizeMaster.js"></script>
-	<script
-		src="scripts/app/entities/pipeSizeMaster/pipeSizeMaster.controller.js"></script>
-	<script
-		src="scripts/app/entities/pipeSizeMaster/pipeSizeMaster-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/pipeSizeMaster/pipeSizeMaster-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/pipeSizeMaster/pipeSizeMaster-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/pipeSizeMaster/pipeSizeMaster.service.js"></script>
-
+		src="scripts/app/entities/connectionTerminate/connectionTerminate-detail.controller.js"></script>
 	<script src="scripts/app/entities/meterChange/meterChange.js"></script>
 	<script
 		src="scripts/app/entities/meterChange/meterChange.controller.js"></script>
 	<script
+		src="scripts/components/entities/meterChange/meterChange.service.js"></script>
+	<script
 		src="scripts/app/entities/meterChange/meterChange-dialog.controller.js"></script>
 	<script
-		src="scripts/app/entities/meterChange/meterChange-delete-dialog.controller.js"></script>
-	<script
 		src="scripts/app/entities/meterChange/meterChange-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/meterChange/meterChange.service.js"></script>
-
-	<script
-		src="scripts/app/entities/designationMaster/designationMaster.js"></script>
-	<script
-		src="scripts/components/entities/designationMaster/designationMaster.service.js"></script>
-
-	<script
-		src="scripts/app/entities/departmentsMaster/departmentsMaster.js"></script>
-	<script
-		src="scripts/components/entities/departmentsMaster/departmentsMaster.service.js"></script>
-
-	<script src="scripts/app/entities/idProofMaster/idProofMaster.js"></script>
-	<script
-		src="scripts/components/entities/idProofMaster/idProofMaster.service.js"></script>
-
-	<script
-		src="scripts/app/entities/workflowTxnDetails/workflowTxnDetails.js"></script>
-	<script
-		src="scripts/components/entities/workflowTxnDetails/workflowTxnDetails.service.js"></script>
-	<script
-		src="scripts/app/entities/workflowTxnDetails/workflowTxnDetails-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowTxnDetails/workflowTxnDetails-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowTxnDetails/workflowTxnDetails-detail.controller.js"></script>
-	<script
-		src="scripts/app/entities/workflowTxnDetails/workflowTxnDetails.controller.js"></script>
-
-	<script
-		src="scripts/app/entities/connectionTerminate/connectionTerminate.js"></script>
-	<script
-		src="scripts/app/entities/connectionTerminate/connectionTerminate.controller.js"></script>
-	<script
-		src="scripts/app/entities/connectionTerminate/connectionTerminate-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/connectionTerminate/connectionTerminate-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/connectionTerminate/connectionTerminate-detail.controller.js"></script>
-	<script
-		src="scripts/components/entities/connectionTerminate/connectionTerminate.service.js"></script>
-
-	<script src="scripts/app/entities/customer/customer.js"></script>
-	<script src="scripts/app/entities/customer/customer.controller.js"></script>
-	<script
-		src="scripts/app/entities/customer/customer-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/customer/customer-delete-dialog.controller.js"></script>
-	<script
-		src="scripts/app/entities/customer/customer-detail.controller.js"></script>
-	<script src="scripts/components/entities/customer/customer.service.js"></script>
-	<script
-		src="scripts/app/entities/customer/customerCategoryChange.controller.js"></script>
-	<script
-		src="scripts/app/entities/customer/customerCategoryChange-detail.controller.js"></script>
-	<script
-		src="scripts/app/entities/customer/customerNameChangeReceipt-dialog.controller.js"></script>
-	
-
-
-
-
 	<!-- endbuild -->
 </body>
 </html>
