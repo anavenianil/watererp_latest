@@ -32,26 +32,6 @@ public class VersionProperties {
 	String buildTime; // =${git.build.time}
 	String buildHost; // =${git.build.host}
 	String buildVersion; // =${git.build.version}
-
-	VersionProperties gitRepositoryState = null;
-
-	public VersionProperties getGitRepositoryState() {
-		try {
-			if (gitRepositoryState == null) {
-				Properties properties = new Properties();
-				properties.load(getClass().getClassLoader().getResourceAsStream("config/git.properties"));
-
-				gitRepositoryState = new VersionProperties(properties);
-			}
-		} catch (Exception e) {
-		}
-		return gitRepositoryState;
-	}
-
-	public VersionProperties()
-	{
-		
-	}
 	
 	public VersionProperties(Properties properties) {
 		this.tags = String.valueOf(properties.get("git.tags"));

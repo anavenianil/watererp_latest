@@ -17,6 +17,10 @@ angular.module('watererpApp')
         			'dashboard@' : {
         				templateUrl : 'scripts/app/main/dashboard.html',
         				controller : 'DashboardController'
+        			},
+        			'footer@' : {
+        				templateUrl : 'scripts/app/main/footer.html',
+        				controller : 'FooterController'
         			}
                 },
                 resolve: {

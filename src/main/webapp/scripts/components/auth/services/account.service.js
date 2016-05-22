@@ -12,4 +12,16 @@ angular.module('watererpApp')
                 }
             }
         });
-    });
+    }).factory(
+			'AccountService',
+			function($http) {
+				return {
+					getVersion : function(can) {
+						return $http.get('api/version').then(function successCallback(response) {
+							return response.data;
+						}, function errorCallback(response) {
+							return "error";
+						});
+					}
+				};
+			});
