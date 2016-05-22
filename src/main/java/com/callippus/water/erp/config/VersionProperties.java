@@ -39,7 +39,7 @@ public class VersionProperties {
 		try {
 			if (gitRepositoryState == null) {
 				Properties properties = new Properties();
-				properties.load(getClass().getClassLoader().getResourceAsStream("git.properties"));
+				properties.load(getClass().getClassLoader().getResourceAsStream("config/git.properties"));
 
 				gitRepositoryState = new VersionProperties(properties);
 			}
