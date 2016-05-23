@@ -15,7 +15,7 @@
 
 
 --
--- Create schema watererp
+-- Create schema watererp 
 --
 
 CREATE DATABASE IF NOT EXISTS watererp;
