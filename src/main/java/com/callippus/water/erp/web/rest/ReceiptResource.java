@@ -64,7 +64,9 @@ public class ReceiptResource {
         }
         Receipt result = receiptRepository.save(receipt);
         ApplicationTxn applicationTxn = applicationTxnRepository.findOne(receipt.getApplicationTxn().getId());
-        applicationTxn.setCan(receipt.getApplicationTxn().getCan());
+        if(receipt.getCan()!=null){
+        	applicationTxn.setCan(receipt.getApplicationTxn().getCan());
+        }
         applicationTxn.setRemarks(receipt.getApplicationTxn().getRemarks());
         applicationTxnRepository.save(applicationTxn);
         try{
