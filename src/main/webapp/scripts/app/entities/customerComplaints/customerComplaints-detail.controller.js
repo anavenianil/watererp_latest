@@ -11,7 +11,7 @@ angular
 						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN) {
 					// This code is used to get the role name / designation.
 					//$scope.orgRole = Principal.getOrgRole();
-					
+					$scope.orgRole = {};
 					Principal.getOrgRole().then(function(response) {
 						$scope.orgRole = response;
 					});
@@ -38,10 +38,13 @@ angular
 					};
 
 					$scope.getBillById = function(id) {
+						$scope.customerComplaints.adjustmentBillId = id;
 						BillFullDetails.get({
 							id : id
 						}, function(result) {
 							$scope.billFullDetails = result;
+							$scope.customerComplaints.adjustmentBillId = $scope.billFullDetails.id;
+		                	$scope.customerComplaints.billFullDetails = $scope.billFullDetails;
 
 						});
 					};
@@ -144,6 +147,12 @@ angular
 			                    $scope.month[11] = "Dec";
 			                    result[i].billFullDetails.fromMonth = $scope.month[d.getMonth()]+" "+result[i].billFullDetails.fromMonth.substr(0,4);
 			                    result[i].billFullDetails.toMonth = $scope.month[d1.getMonth()]+" "+result[i].billFullDetails.toMonth.substr(0,4);
+			                }
+			                if($scope.customerComplaints.adjustmentBillId != null){
+			                	$scope.getBillById($scope.customerComplaints.adjustmentBillId);
+			                	/*$scope.customerComplaints.adjustmentBillId = $scope.billFullDetails.id;
+			                	$scope.customerComplaints.billFullDetails.netPayableAmount = $scope.billFullDetails.netPayableAmount;*/
+			                	
 			                }
 			            });
 			        };
