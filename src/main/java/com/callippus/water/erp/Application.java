@@ -2,6 +2,7 @@ package com.callippus.water.erp;
 
 import com.callippus.water.erp.config.Constants;
 import com.callippus.water.erp.config.JHipsterProperties;
+import com.callippus.water.erp.config.VersionProperties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
