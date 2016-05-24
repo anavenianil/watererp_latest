@@ -84,6 +84,7 @@
 							<label class="control-label" for="field_lastMeterReading">Last
 								Meter Reading</label> <input type="number" class="form-control"
 								name="lastMeterReading" id="field_lastMeterReading"
+								ng-disabled="workflowDTO.connectionTerminate.meterRecovered==false"
 								ng-model="workflowDTO.connectionTerminate.lastMeterReading" />
 						</div>
 						<div class="col-sm-3">
@@ -95,10 +96,12 @@
 										class="form-control" uib-datepicker-popup="{{dateformat}}"
 										ng-model="workflowDTO.connectionTerminate.meterRecoveredDate"
 										max-date="maxDt"
+										ng-disabled="workflowDTO.connectionTerminate.meterRecovered==false"
 										is-open="datePickerForMeterRecoveredDate.status.opened" /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
-											ng-click="datePickerForMeterRecoveredDateOpen($event)">
+											ng-click="datePickerForMeterRecoveredDateOpen($event)"
+											ng-disabled="workflowDTO.connectionTerminate.meterRecovered==false">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>

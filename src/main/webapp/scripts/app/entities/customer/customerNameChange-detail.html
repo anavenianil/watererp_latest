@@ -54,15 +54,15 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Full Name</label>
-								<h5 class="list-group-item-heading">{{custDetails.consName}}</h5>
+								<h5 class="list-group-item-heading">{{customer.previousName}}</h5>
 							</div>
 							<div class="col-sm-3">
 								<label> Mobile Number</label>
-								<h5 class="list-group-item-heading">{{custDetails.mobileNo}}</h5>
+								<h5 class="list-group-item-heading">{{customer.previousMobile}}</h5>
 							</div>
 							<div class="col-sm-3">
 								<label>Email</label>
-								<h5 class="list-group-item-heading">{{custDetails.email}}</h5>
+								<h5 class="list-group-item-heading">{{customer.previousEmail}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -117,14 +117,19 @@
 								<h5 class="list-group-item-heading">{{customer.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3" ng-if="customer.status===3">
+								<label>Changed Date</label>
+								<h5 class="list-group-item-heading">{{customer.changedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+							<div class="col-sm-3" ng-if="customer.status===2">
 								<label class="control-label" for="field_changedDate">Changed
 									Date</label>
 								<div class="form-group">
 									<div class='input-group date' id='field_changedDate'>
 										<input id="field_changedDate" type="text" class="form-control"
 											uib-datepicker-popup="{{dateformat}}"
-											ng-model="workflowDTO.customer.approvedDate" max-date="maxDt"
+											ng-model="workflowDTO.customer.changedDate" max-date="maxDt"
 											is-open="datePickerForChangedDate.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -140,7 +145,7 @@
 					<br>
 					<fieldset>
 						<legend></legend>
-						<div class="row">
+						<div class="row" ng-if="customer.status!=3">
 							<div class="col-sm-3">
 								<label class="control-label" for="field_approvedDate">Approved
 									Date</label>

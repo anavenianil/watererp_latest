@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustomerCategoryChangeListController', function ($scope, $state, Customer, ParseLinks) {
+    .controller('CustomerCategoryChangeListController', function ($scope, $state, Customer, ParseLinks, $http) {
 
         $scope.customers = [];
         $scope.predicate = 'id';
@@ -59,4 +59,32 @@ angular.module('watererpApp')
                 id: null
             };
         };
+        
+        $scope.getLocation = function(val) {
+			$scope.isValidCust = false;
+			return $http.get('api/custDetailss/searchCAN/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+
+				return res;
+			});
+		}
+        
+        $scope.onSelect = function($item, $model, $label) {
+			console.log($item);
+			var arr = $item.split("-");
+			$scope.custDetails = {};
+			$scope.custDetails.can = arr[0].trim();
+			$scope.custDetails.name = arr[1];
+			$scope.custDetails.address = arr[2];
+			$scope.custInfo = "";
+			$scope.isValidCust = true;
+			
+		};
     });

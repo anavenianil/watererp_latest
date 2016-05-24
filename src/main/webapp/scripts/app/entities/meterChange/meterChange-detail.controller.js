@@ -115,7 +115,7 @@ angular.module('watererpApp')
 					function(response) {
 						console.log("Server response:"
 								+ JSON.stringify(response));
-						$window.history.back();
+						$state.go('meterChange');
 					});
         }
 		
@@ -127,7 +127,7 @@ angular.module('watererpApp')
 						console.log("Server response:"
 								+ JSON.stringify(response));
 						//$state.go('meterChange');
-						$window.history.back();
+						$state.go('meterChange');
 					});
         }
     });
