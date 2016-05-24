@@ -14,11 +14,9 @@
     <include file="classpath:config/liquibase/changelog/20160229070707_added_entity_TransactionTypeMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229070800_added_entity_CashBookMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229070919_added_entity_PaymentTypes.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160229072353_added_entity_ManageCashPoint.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229073210_added_entity_StatusMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229073547_added_entity_DesignationMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229073648_added_entity_FeasibilityStatus.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229084044_added_entity_ConfigurationDetails.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229085139_added_entity_DesigCategoryMaster.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229085352_added_entity_SubDesigCategoryMaster.xml" relativeToChangelogFile="false"/>
@@ -101,6 +99,8 @@
     <include file="classpath:config/liquibase/changelog/20160427104544_added_entity_OnlinePaymentResponse.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160427105244_added_entity_OnlinePaymentCallback.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229071846_added_entity_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160229072353_added_entity_ManageCashPoint.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160504065608_added_entity_ConnectionTerminate.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160503041249_added_entity_RevenueTypeMaster.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
