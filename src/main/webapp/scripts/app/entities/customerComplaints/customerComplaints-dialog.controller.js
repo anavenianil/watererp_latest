@@ -104,8 +104,14 @@ angular
 							complaintBy : null,
 							complaintBy : null,
 							can : null,
-							id : null
+							id : null,
+							
 						};
+						$scope.custDetails ={
+							divisionName : null,
+							streetName : null	
+						};
+						
 						$scope.customerComplaints.complaintDate = new Date();
 					};
 					
