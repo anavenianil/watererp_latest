@@ -5,10 +5,8 @@ angular.module('watererpApp')
     		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window) {
         $scope.connectionTerminate = {};
         $scope.workflowDTO = {};
-        //$scope.workflowDTO.connectionTerminate = entity;
         $scope.custDetails = {};
-        
-        //$scope.orgRole = Principal.getOrgRole();
+        $scope.maxDt = new Date();
         Principal.getOrgRole().then(function(response) {
 			$scope.orgRole = response;
 		});
@@ -49,8 +47,6 @@ angular.module('watererpApp')
         $scope.getWorkflowHistoryByDomainId();
         
         
-		//$scope.getCustDetails($scope.connectionTerminate.can);
-		
 		$scope.datePickerForMeterRecoveredDate = {};
 
         $scope.datePickerForMeterRecoveredDate.status = {
@@ -89,7 +85,7 @@ angular.module('watererpApp')
         	return $http.post('/api/connectionTerminates/approve',
 					workflowDTO).then(
 					function(response) {
-						$window.history.back();
+						$state.go('connectionTerminate');
 					});
         }
 		
@@ -102,4 +98,10 @@ angular.module('watererpApp')
 					});
         }
 		
+		$scope.checkReading = function(prevReding, newReading){
+			if(prevReding > newReading){
+				alert("New reading should be greater than previous reading");
+				$scope.workflowDTO.connectionTerminate.lastMeterReading="";
+			}
+		}
     });

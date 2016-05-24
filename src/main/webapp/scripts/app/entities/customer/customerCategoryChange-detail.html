@@ -28,7 +28,7 @@
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
 							<td>{{item.remarks}}</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.actionedDate | date:'mediumDate'}}</td>
 							<td>{{item.ipAddress}}</td>
 							<td>{{item.statusMaster.status}}</td>
 
@@ -142,13 +142,17 @@
 								<h5 class="list-group-item-heading">{{customer.agreementDoc}}</h5>
 							</div>
 							<div class="col-sm-3">
+								<label>Requested Date</label>
+								<h5 class="list-group-item-heading">{{customer.requestedDate | date:'mediumDate'}}</h5>
+							</div>
+							<div class="col-sm-3">
 								<label class="control-label" for="field_changedDate">Changed
 									Date </label>
 								<div class="form-group">
 									<div class='input-group date' id='field_changedDate'>
 										<input id="field_changedDate" type="text" class="form-control"
 											uib-datepicker-popup="{{dateformat}}"
-											ng-model="workflowDTO.customer.approvedDate" max-date="maxDt"
+											ng-model="workflowDTO.customer.changedDate" max-date="maxDt"
 											is-open="datePickerForChangedDate.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -163,7 +167,7 @@
 					</fieldset>
 					<fieldset>
 						<legend></legend>
-						<div class="row">
+						<div class="row" ng-if="customer.status!==2">
 							<div class="col-sm-3">
 								<label class="control-label" for="field_approvedDate">Approved
 									Date</label>
