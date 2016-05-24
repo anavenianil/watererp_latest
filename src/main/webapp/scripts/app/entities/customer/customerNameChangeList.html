@@ -64,7 +64,7 @@
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="status"><span>Status</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="approvedDate"><span>Approved Date</span> <span
+								<th jh-sort-by="approvedDate"><span>Changed Date</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 
 								<th></th>
@@ -91,7 +91,7 @@
 									</div>
 								</td>
 								<td>{{customer.status}}</td>
-								<td>{{customer.approvedDate | date:'mediumDate'}}</td>
+								<td>{{customer.changedDate | date:'mediumDate'}}</td>
 								<td class="text-right">
 									<div class="btn-group flex-btn-group-container">
 										<button type="submit"

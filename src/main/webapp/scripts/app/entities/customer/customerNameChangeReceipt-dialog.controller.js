@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('NameChangeReceiptDialogController',
-        function($scope, $stateParams, $state, Receipt, PaymentTypes, Customer, CustDetailsSearchCAN, $window, $http, Principal) {
+        function($scope, $stateParams, $state, Receipt, PaymentTypes, Customer, CustDetailsSearchCAN, $window, $http, Principal, ConfigurationDetails) {
 
         //$scope.receipt = {};
         $scope.workflowDTO = {};
@@ -13,19 +13,21 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
         $scope.maxDate = new Date();
         $scope.workflowDTO.receipt.receiptDate = new Date();
         
-        $scope.workflowDTO.receipt.amount = 1000;
+        //$scope.workflowDTO.receipt.amount = 1000;
         
 
         Principal.getOrgRole().then(function(response) {
 			$scope.orgRole = response;
 		});
         
-     // get cust details by CAN
-		/*$scope.getCustDetails = function(can) {
-			CustDetailsSearchCAN.get({can : can},function(result) {
-								$scope.custDetails = result;
-							});
-		};*/
+     // get NAME_CHANGE_FEE from Configuration Table
+        $scope.getNameChangeFee = function() {
+            ConfigurationDetails.get({id : 17}, function(result) {
+                $scope.configurationDetails = result;
+                $scope.workflowDTO.receipt.amount = $scope.configurationDetails.value;
+            });
+        };
+        $scope.getNameChangeFee();
 		
         $scope.loadCustomer = function(id) {
             Customer.get({id : id}, function(result) {
@@ -48,12 +50,6 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
             $scope.isSaving = false;
         };
 
-        /*$scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.workflowDTO.customer.id != null) {
-                Customer.update($scope.customer, onSaveSuccess, onSaveError);
-            }
-        };*/
       //approve a request
 		$scope.approve = function(workflowDTO){
         	return $http.post('/api/customers/customersApprove',
@@ -112,31 +108,8 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 				if ($scope.orgRole.id === 21)
 					ret = true;
 				break;
-			case 3:
-				if ($scope.orgRole.orgRoleName === 'Technical Manager')
-					ret = true;
-				break;
-			case 4:
-				if ($scope.orgRole.orgRoleName === 'Assistant Accountant(Revenue)')
-					ret = true;
-				break;
-			case 5:
-				if ($scope.orgRole.orgRoleName === 'Stores & Supplies Officer')
-					ret = true;
-				break;
-			case 6:
-				if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
-					ret = true;
-				break;
-			case 7:
-				if ($scope.orgRole.orgRoleName === 'Billing Officer')
-					ret = true;
-				break;
-			case 8:
-				break;
 			default:
 				break;
-
 			}
 			return ret;
 		}
