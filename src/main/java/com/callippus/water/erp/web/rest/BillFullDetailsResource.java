@@ -35,7 +35,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.BillAndCollectionDTO;
 import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.repository.BillDetailsCustomRepository;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -56,6 +58,8 @@ public class BillFullDetailsResource {
     
     @Inject
     private ReportsCustomRepository reportsRepository;
+    
+    @Inject BillDetailsCustomRepository billDetailsCustomRepository;
     
     /**
      * POST  /billFullDetailss -> Create a new billFullDetails.
@@ -112,7 +116,7 @@ public class BillFullDetailsResource {
         else
         {
         	page = billFullDetailsRepository.findByCan(pageable, can);
-        }
+        } 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/billFullDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -183,4 +187,23 @@ public class BillFullDetailsResource {
 		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 		    }
 
+    
+    /**
+     * GET  /billFullDetailss/searchCAN/:searchTerm
+     */
+    @RequestMapping(value = "/billFullDetailss/searchCAN/{can}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<BillAndCollectionDTO>> searchCANLike(@PathVariable String can) {
+        log.debug("REST request to get BillFullDetails : {}", can);
+        
+        List<BillAndCollectionDTO> billAndCollectionDTO = billDetailsCustomRepository.getBillCollection(can);
+        
+        return Optional.ofNullable(billAndCollectionDTO)
+            .map(result -> new ResponseEntity<>(
+            		billAndCollectionDTO,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }

@@ -114,15 +114,20 @@ public class CollDetailsResource {
 	@Timed
 	public ResponseEntity<List<CollDetails>> getAllCollDetailss(
 			Pageable pageable,
-			@RequestParam(value = "txnStatus", required = false) String txnStatus)
+			@RequestParam(value = "txnStatus", required = false) String txnStatus,
+			@RequestParam(value = "can", required = false) String can)
 			throws URISyntaxException {
 		log.debug("REST request to get a page of CollDetailss");
 		Page<CollDetails> page;
-		if (txnStatus == null) {
-			page = collDetailsRepository.findAll(pageable);
-		} else {
+		if (txnStatus != null) {
 			page = collDetailsRepository.findByTxnStatus(pageable, txnStatus);
+		} else 
+			if(can != null) {
+				page = collDetailsRepository.findByCan(pageable, can);
 		}
+			else{
+				page = collDetailsRepository.findAll(pageable);
+			}
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
 				page, "/api/collDetailss");
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

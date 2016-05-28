@@ -166,7 +166,9 @@ public class CustomerResource {
 								id.toString())).build();
 	}
 
-	@RequestMapping(value = "/customers/customersApprove", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/customers/customersApprove", 
+			method = RequestMethod.POST, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional
 	public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(
