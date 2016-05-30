@@ -210,14 +210,8 @@ public class AccountResource {
 	@RequestMapping(value = "/version", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<VersionProperties> version() throws IOException {
 
-		if (vProps == null) {
-			Properties properties = new Properties();
-			properties.load(getClass().getClassLoader().getResourceAsStream("config/git.properties"));
-
-			vProps = new VersionProperties(properties);
-		}
 		
-		return new ResponseEntity<>(vProps, HttpStatus.OK);
+		return new ResponseEntity<>(new VersionProperties(), HttpStatus.OK);
 	}
 
 	private boolean checkPasswordLength(String password) {
