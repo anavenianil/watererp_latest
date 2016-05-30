@@ -53,7 +53,8 @@ public class AccountResource {
 	@Inject
 	private MailService mailService;
 
-	private VersionProperties vProps = null;
+	@Inject
+	private VersionProperties vProps;
 
 	/**
 	 * POST /register -> register the user.
@@ -209,9 +210,8 @@ public class AccountResource {
 
 	@RequestMapping(value = "/version", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<VersionProperties> version() throws IOException {
-
-		
-		return new ResponseEntity<>(new VersionProperties(), HttpStatus.OK);
+		log.debug("This is the properties data:" + vProps.toString());
+		return new ResponseEntity<>(vProps, HttpStatus.OK);
 	}
 
 	private boolean checkPasswordLength(String password) {
