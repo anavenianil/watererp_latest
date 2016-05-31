@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -52,6 +49,47 @@ public class TariffMasterCustomRepositoryImpl extends
 		this.entityManager = entityManager;
 	}
 
+	public List<TariffMaster> getTariffs(LocalDate validFrom, LocalDate validTo, float avgKL,
+			int unMeteredFlag, int newMeterFlag) {
+		
+		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
+		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
+
+		String sql = 
+		"  (SELECT distinct tariff_master_id " + 
+		"   FROM  "+
+		"     (SELECT id, "+
+		"               tariff_name, "+
+		"               (CASE WHEN (valid_from) < ? THEN STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s') ELSE valid_from END) valid_from, "+
+		"               (CASE WHEN (valid_to) > ? THEN STR_TO_DATE(?,'%Y-%m-%d %H:%i:%s') ELSE valid_to END) valid_to, "+
+		"               active, "+
+		"               a.tariff_category_master_id "+
+		"   FROM "+
+		"     (SELECT * "+
+		"      FROM tariff_master "+
+		"      WHERE (valid_from) >=? "+
+		"        AND (valid_to) <= ? "+
+		"        AND ACTIVE = 1 "+
+		"      UNION SELECT * "+
+		"      FROM tariff_master "+
+		"      WHERE ? BETWEEN valid_from AND valid_to "+
+		"        AND ACTIVE = 1 "+
+		"      UNION SELECT * "+
+		"      FROM tariff_master "+
+		"      WHERE ? BETWEEN valid_from AND valid_to "+
+		"        AND ACTIVE = 1)a) a, "+
+		"       tariff_charges t, "+
+		"       cust_details c "+
+		"   WHERE c.can = ? "+
+		"     AND ? BETWEEN SLAB_MIN + 0.00001 AND SLAB_MAX "+
+		"     AND c.tariff_category_master_id+0=a.tariff_category_master_id+0 "+
+		"     AND a.id=t.tariff_master_id) a ";
+
+		return null;
+		
+	}	
+	
+	
 	public List<java.util.Map<String, Object>> findTariffs(String can,
 			LocalDate validFrom, LocalDate validTo, float avgKL,
 			int unMeteredFlag, int newMeterFlag) {
