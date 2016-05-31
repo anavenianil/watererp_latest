@@ -49,14 +49,30 @@ public class TariffMasterCustomRepositoryImpl extends
 		this.entityManager = entityManager;
 	}
 
-	public List<TariffMaster> getTariffs(LocalDate validFrom, LocalDate validTo, float avgKL,
+	public List<java.util.Map<String, Object>> getTariffs(String can, LocalDate validFrom, LocalDate validTo, float avgKL,
 			int unMeteredFlag, int newMeterFlag) {
-		
+	
 		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
 		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
 
 		String sql = 
-		"  (SELECT distinct tariff_master_id " + 
+		"  (SELECT a.id tariff_master_id, "+
+		"          tariff_name, "+
+		"          valid_from, "+
+		"          valid_to, "+
+		"          c.tariff_category_master_id, "+
+		"          case when Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) = 0 then 1 else Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) end months, "+
+		"          t.id tariff_charges_id, "+
+		"          t.tariff_desc, "+
+		"          t.slab_min, "+
+		"          t.slab_max, "+
+		"          t.rate, "+
+		"          t.min_unmetered_kl, "+
+		"          CASE "+
+		"              WHEN t.min_kl > ? and 0 = ? THEN t.min_kl "+
+		"              ELSE ? "+
+		"          END avg_kl, "+
+		"              t.tariff_type_master_id "+
 		"   FROM  "+
 		"     (SELECT id, "+
 		"               tariff_name, "+
@@ -85,8 +101,12 @@ public class TariffMasterCustomRepositoryImpl extends
 		"     AND c.tariff_category_master_id+0=a.tariff_category_master_id+0 "+
 		"     AND a.id=t.tariff_master_id) a ";
 
-		return null;
+		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(
+				sql, new Object[] { avgKL, newMeterFlag, avgKL,
+						from, from, to, to, from, to, from, to, can, avgKL });	
 		
+		log.debug("Output from billing query:" + rows);
+		return rows;
 	}	
 	
 	
@@ -99,8 +119,8 @@ public class TariffMasterCustomRepositoryImpl extends
 		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
 
 		String sql = "select tariff_type_master_id, avg(rate) rate,sum(amount) amount from " + 
-				"(" +
-				"SELECT tariff_type_master_id, rate,"+
+				"( " +
+				"SELECT tariff_type_master_id, rate, "+
 				"       CASE "+
 				"           WHEN tariff_type_master_id=1 THEN CASE "+
 				"                                                 WHEN 1=? THEN rate * months * min_unmetered_kl "+
