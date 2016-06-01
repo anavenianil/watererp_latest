@@ -390,8 +390,8 @@ public class BillingService {
 			
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
-
-			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
+			
+			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(),
 					dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
@@ -402,11 +402,12 @@ public class BillingService {
 			bfd.setServiceCharge(0.00f);
 			bfd.setMeterServiceCharge(0.00f);
 			bfd.setLockCharges(0.00f);
+			bfd.setNoMeterAmt(0.00f);
 
 			if (charges.size() > 3) {
 				multipleTariffs = true; //Multiple tariffs for first bill. Pro-rata required
-				partialUnitsKL = days / totDays * unitsKL;
-				calc_charges(charges, bfd, partialUnitsKL);
+				partialUnitsKL = (float) days / (float) totDays * unitsKL;
+				calc_charges_first(charges, bfd, partialUnitsKL);
 				
 				remUnitsKL = unitsKL - partialUnitsKL;				
 				calc_units(customer, bill_details, dFrom.plusMonths(1).withDayOfMonth(1), dTo, remUnitsKL);
@@ -414,9 +415,9 @@ public class BillingService {
 				charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
 						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag);
 				
-				calc_charges(charges, bfd, remUnitsKL);
+				calc_charges_normal(charges,  bill_details, customer, bfd, remUnitsKL);
 			} else { // Single Tariff for first bill
-				calc_charges(charges, bfd, unitsKL);
+				calc_charges_first(charges, bfd, unitsKL);
 			}
 			
 			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
@@ -543,36 +544,74 @@ public class BillingService {
 		}
 	}
 
-	public void calc_charges(List<java.util.Map<String, Object>> charges, BillFullDetails bfd, float units)
+	public void calc_charges_first(List<java.util.Map<String, Object>> charges, BillFullDetails bfd, float units)
 	{
 		for (Map<String, Object> charge : charges) {
 			if (((Long) charge.get("tariff_type_master_id")) == 1) {
-				bfd.setNoMeterAmt(bfd.getNoMeterAmt() + ((Double) charge.get("rate")).floatValue());
-				bfd.setWaterCess(bfd.getWaterCess() + ((Double) charge.get("rate")).floatValue() * units);
-				log.debug("Usage Charge:" + ((Double) charge.get("rate")).floatValue() * units);
+				bfd.setNoMeterAmt(bfd.getNoMeterAmt() + (Float) charge.get("rate"));
+				bfd.setWaterCess(bfd.getWaterCess() + ((Float) charge.get("rate")).floatValue() * units);
+				log.debug("Usage Charge:" + ((Float) charge.get("rate")).floatValue() * units);
 			} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 				long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
-				float months = 0;
+				long months = 0;
 				if (days > 15) {
-					months = ((Double) charge.get("months")).floatValue() + 1;
+					months = ((Long) charge.get("months")).longValue() + 1;
 				} else {
-					months = ((Double) charge.get("months")).floatValue();
+					months = ((Long) charge.get("months")).longValue();
 				}
-				log.debug("Meter Rent:" + ((Double) charge.get("rate")).floatValue() * months);
-				bfd.setMeterServiceCharge(bfd.getMeterServiceCharge() + ((Double) charge.get("rate")).floatValue() * months);
+				log.debug("Meter Rent:" + ((Float) charge.get("rate")).floatValue() * months);
+				bfd.setMeterServiceCharge(bfd.getMeterServiceCharge() + ((Float) charge.get("rate")).floatValue() * months);
 			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
 				long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
-				float months = 0;
+				long months = 0;
 				if (days > 15) {
-					months = ((Double) charge.get("months")).floatValue() + 1;
+					months = ((Long) charge.get("months")).longValue() + 1;
 				} else {
-					months = ((Double) charge.get("months")).floatValue();
+					months = ((Long) charge.get("months")).longValue();
 				}
-				log.debug("Service Charge:" + ((Double) charge.get("rate")).floatValue() * months);
-				bfd.setServiceCharge(bfd.getServiceCharge() + ((Double) charge.get("rate")).floatValue() * months);
+				log.debug("Service Charge:" + ((Float) charge.get("rate")).floatValue() * months);
+				bfd.setServiceCharge(bfd.getServiceCharge() + ((Float) charge.get("rate")).floatValue() * months);
 			}
 		}
 	}
+	
+	public void calc_charges_normal(List<java.util.Map<String, Object>> charges, BillDetails bill_details, CustDetails customer, BillFullDetails bfd, float units)
+	{
+
+		// Subtract Avg Water charges in case of Lock Bill scenario
+		for (Map<String, Object> charge : charges) {
+			if (((Long) charge.get("tariff_type_master_id")) == 1) {
+
+				bfd.setNoMeterAmt(((Double) charge.get("rate")).floatValue());
+
+				log.debug("Usage Charge:" + (Double) charge.get("amount"));
+				bfd.setWaterCess(((Double) charge.get("amount")).floatValue());
+
+				if (bill_details.getCurrentBillType().equals("M")
+						&& (customer.getPrevBillType() == null || customer.getPrevBillType().equals("L"))) {
+					if (customer.getLockCharges() == null)
+						bfd.setLockCharges(0.0f);
+					else {
+						bfd.setLockCharges(-1 * customer.getLockCharges());
+						bfd.setWaterCess(bfd.getWaterCess() + bfd.getLockCharges());
+					}
+				} else if (bill_details.getCurrentBillType().equals("L")) {
+					if (customer.getLockCharges() != null)
+						bfd.setLockCharges(bfd.getWaterCess() + customer.getLockCharges());
+					else
+						bfd.setLockCharges(bfd.getWaterCess());
+				}
+
+			} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
+				log.debug("Meter Rent:" + (Double) charge.get("amount"));
+				bfd.setMeterServiceCharge(((Double) charge.get("amount")).floatValue());
+			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
+				log.debug("Service Charge:" + (Double) charge.get("amount"));
+				bfd.setServiceCharge(((Double) charge.get("amount")).floatValue());
+			}
+		}
+	}
+	
 	
 	public void process_bill_common(CustDetails customer, BillDetails bill_details, BillFullDetails bfd, LocalDate dFrom, LocalDate dTo) {
 
@@ -729,8 +768,9 @@ public class BillingService {
 			bfd.setServiceCharge(0.00f);
 			bfd.setMeterServiceCharge(0.00f);
 			bfd.setLockCharges(0.00f);
+			bfd.setNoMeterAmt(0.00f);
 			
-			calc_charges(charges, bfd, unitsKL);
+			calc_charges_normal(charges,  bill_details, customer, bfd,  unitsKL);
 			
 			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
 		} catch (Exception e) {

@@ -56,7 +56,7 @@ public class TariffMasterCustomRepositoryImpl extends
 		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
 
 		String sql = 
-		"  (SELECT a.id tariff_master_id, "+
+		"  SELECT a.id tariff_master_id, "+
 		"          tariff_name, "+
 		"          valid_from, "+
 		"          valid_to, "+
@@ -99,7 +99,7 @@ public class TariffMasterCustomRepositoryImpl extends
 		"   WHERE c.can = ? "+
 		"     AND ? BETWEEN SLAB_MIN + 0.00001 AND SLAB_MAX "+
 		"     AND c.tariff_category_master_id+0=a.tariff_category_master_id+0 "+
-		"     AND a.id=t.tariff_master_id) a ";
+		"     AND a.id=t.tariff_master_id ";
 
 		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(
 				sql, new Object[] { avgKL, newMeterFlag, avgKL,
