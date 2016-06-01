@@ -108,6 +108,7 @@ public class BillingService {
 	float units = 0;
 	float unitsKL = 0.0f;
 	float partialUnitsKL = 0.0f;
+	float remUnitsKL = 0.0f;
 	float minAvgKL = 0.0f;
 	String monthUpto;
 	boolean hasSewer;
@@ -322,7 +323,11 @@ public class BillingService {
 		dTo = null;
 		newMeterFlag = 0;
 		unMeteredFlag = 0;
-
+		multipleTariffs = false;
+		
+		partialUnitsKL = 0.0f;
+		remUnitsKL = 0.0f;
+		
 		total_amount = 0.0f;
 		net_payable_amount = 0.0f;
 		surcharge = 0.0f;
@@ -383,7 +388,38 @@ public class BillingService {
 			log.debug("Customer Info:" + customer.toString());
 			log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 			
-			process_bill_first(bill_details, customer);
+
+			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
+
+			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
+					dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
+
+			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
+			bfd.setId(null);
+
+			bfd.setWaterCess(0.00f);
+			bfd.setSewerageCess(0.00f);
+			bfd.setServiceCharge(0.00f);
+			bfd.setMeterServiceCharge(0.00f);
+			bfd.setLockCharges(0.00f);
+
+			if (charges.size() > 3) {
+				multipleTariffs = true; //Multiple tariffs for first bill. Pro-rata required
+				partialUnitsKL = days / totDays * unitsKL;
+				calc_charges(charges, bfd, partialUnitsKL);
+				
+				remUnitsKL = unitsKL - partialUnitsKL;				
+				calc_units(customer, bill_details, dFrom.plusMonths(1).withDayOfMonth(1), dTo, remUnitsKL);
+				
+				charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
+						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag);
+				
+				calc_charges(charges, bfd, remUnitsKL);
+			} else { // Single Tariff for first bill
+				calc_charges(charges, bfd, unitsKL);
+			}
+			
+			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -507,41 +543,12 @@ public class BillingService {
 		}
 	}
 
-	public void process_bill_first(BillDetails bill_details, CustDetails customer) {
-
-		calc_units(customer, bill_details, dFrom, dTo, unitsKL);
-
-		List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
-				dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
-
-		BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
-		bfd.setId(null);
-
-		bfd.setWaterCess(0.00f);
-		bfd.setSewerageCess(0.00f);
-		bfd.setServiceCharge(0.00f);
-		bfd.setMeterServiceCharge(0.00f);
-		bfd.setLockCharges(0.00f);
-
-		if (charges.size() > 3) {
-			multipleTariffs = true; //Multiple tariffs for first bill. Pro-rata required
-			long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
-			long totDays = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
-			partialUnitsKL = days / totDays * unitsKL;
-			calc_charges(charges, bfd, partialUnitsKL);
-			dFrom = dFrom.plusMonths(1).withDayOfMonth(1);
-		} else { // Single Tariff for first bill
-			calc_charges(charges, bfd, unitsKL);
-		}
-
-	}
-
 	public void calc_charges(List<java.util.Map<String, Object>> charges, BillFullDetails bfd, float units)
 	{
 		for (Map<String, Object> charge : charges) {
 			if (((Long) charge.get("tariff_type_master_id")) == 1) {
-				bfd.setNoMeterAmt(((Double) charge.get("rate")).floatValue());
-				bfd.setWaterCess(((Double) charge.get("rate")).floatValue() * units);
+				bfd.setNoMeterAmt(bfd.getNoMeterAmt() + ((Double) charge.get("rate")).floatValue());
+				bfd.setWaterCess(bfd.getWaterCess() + ((Double) charge.get("rate")).floatValue() * units);
 				log.debug("Usage Charge:" + ((Double) charge.get("rate")).floatValue() * units);
 			} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 				long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
@@ -552,7 +559,7 @@ public class BillingService {
 					months = ((Double) charge.get("months")).floatValue();
 				}
 				log.debug("Meter Rent:" + ((Double) charge.get("rate")).floatValue() * months);
-				bfd.setMeterServiceCharge(((Double) charge.get("rate")).floatValue() * months);
+				bfd.setMeterServiceCharge(bfd.getMeterServiceCharge() + ((Double) charge.get("rate")).floatValue() * months);
 			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
 				long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
 				float months = 0;
@@ -562,60 +569,14 @@ public class BillingService {
 					months = ((Double) charge.get("months")).floatValue();
 				}
 				log.debug("Service Charge:" + ((Double) charge.get("rate")).floatValue() * months);
-				bfd.setServiceCharge(((Double) charge.get("rate")).floatValue() * months);
+				bfd.setServiceCharge(bfd.getServiceCharge() + ((Double) charge.get("rate")).floatValue() * months);
 			}
 		}
 	}
 	
-	public void process_bill_common(CustDetails customer, BillDetails bill_details, LocalDate dFrom, LocalDate dTo) {
+	public void process_bill_common(CustDetails customer, BillDetails bill_details, BillFullDetails bfd, LocalDate dFrom, LocalDate dTo) {
 
 		try {
-			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
-
-			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
-
-			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
-			bfd.setId(null);
-
-			bfd.setWaterCess(0.00f);
-			bfd.setSewerageCess(0.00f);
-			bfd.setServiceCharge(0.00f);
-			bfd.setMeterServiceCharge(0.00f);
-			bfd.setLockCharges(0.00f);
-
-			// Subtract Avg Water charges in case of Lock Bill scenario
-			for (Map<String, Object> charge : charges) {
-				if (((Long) charge.get("tariff_type_master_id")) == 1) {
-
-					bfd.setNoMeterAmt(((Double) charge.get("rate")).floatValue());
-
-					log.debug("Usage Charge:" + (Double) charge.get("amount"));
-					bfd.setWaterCess(((Double) charge.get("amount")).floatValue());
-
-					if (bill_details.getCurrentBillType().equals("M")
-							&& (customer.getPrevBillType() == null || customer.getPrevBillType().equals("L"))) {
-						if (customer.getLockCharges() == null)
-							bfd.setLockCharges(0.0f);
-						else {
-							bfd.setLockCharges(-1 * customer.getLockCharges());
-							bfd.setWaterCess(bfd.getWaterCess() + bfd.getLockCharges());
-						}
-					} else if (bill_details.getCurrentBillType().equals("L")) {
-						if (customer.getLockCharges() != null)
-							bfd.setLockCharges(bfd.getWaterCess() + customer.getLockCharges());
-						else
-							bfd.setLockCharges(bfd.getWaterCess());
-					}
-
-				} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
-					log.debug("Meter Rent:" + (Double) charge.get("amount"));
-					bfd.setMeterServiceCharge(((Double) charge.get("amount")).floatValue());
-				} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
-					log.debug("Service Charge:" + (Double) charge.get("amount"));
-					bfd.setServiceCharge(((Double) charge.get("amount")).floatValue());
-				}
-			}
 
 			hasSewer = (customer.getSewerage().equals("T") ? true : false);
 
@@ -725,8 +686,6 @@ public class BillingService {
 
 			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
-
-			
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
@@ -756,7 +715,24 @@ public class BillingService {
 
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
-			process_bill_common(customer, bill_details, dFrom, dTo);
+			
+			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
+
+			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
+					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
+
+			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
+			bfd.setId(null);
+
+			bfd.setWaterCess(0.00f);
+			bfd.setSewerageCess(0.00f);
+			bfd.setServiceCharge(0.00f);
+			bfd.setMeterServiceCharge(0.00f);
+			bfd.setLockCharges(0.00f);
+			
+			calc_charges(charges, bfd, unitsKL);
+			
+			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.debug(CPSUtils.stackTraceToString(e));
