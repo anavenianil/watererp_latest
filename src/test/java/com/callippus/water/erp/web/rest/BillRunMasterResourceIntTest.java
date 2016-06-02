@@ -3,6 +3,7 @@ package com.callippus.water.erp.web.rest;
 import com.callippus.water.erp.Application;
 import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.repository.BillRunMasterRepository;
+import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -66,6 +67,9 @@ public class BillRunMasterResourceIntTest {
     private BillRunMasterRepository billRunMasterRepository;
 
     @Inject
+    private CustDetailsCustomRepository custDetailsCustomRepository;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -120,7 +124,15 @@ public class BillRunMasterResourceIntTest {
         // Create the BillRunMaster
 
         billRunMaster.setArea(null);
-        
+
+        try
+        {
+        custDetailsCustomRepository.loadTestData();
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
         restBillRunMasterMockMvc.perform(post("/api/billRunMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
