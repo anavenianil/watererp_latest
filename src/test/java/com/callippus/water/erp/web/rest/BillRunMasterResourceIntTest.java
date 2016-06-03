@@ -79,6 +79,7 @@ public class BillRunMasterResourceIntTest {
 	private static final String DEFAULT_STATUS = "AAAAA";
 	private static final String UPDATED_STATUS = "BBBBB";
 
+	// Expected Units, Water Cess, Rent, Lock charges after Run 1
 	static final Map<String, Float[]> expectedCharges = Arrays
 			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f, 0.0f, 0.0f } },
 					{ "08090001", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
@@ -90,6 +91,26 @@ public class BillRunMasterResourceIntTest {
 					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
+	// Expected Manual Payment, Online Payment
+	static final Map<String, Float[]> payments = Arrays
+			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f } },
+					{ "08090001", new Float[] { 3.0f, 2460.0f } }, { "04060001", new Float[] { 4.0f, 3202.76f } },
+					{ "05050001", new Float[] { 4.0f, 3246.32f } }, { "04060002", new Float[] { 19.0f, 15213.1f } },
+					{ "04060003", new Float[] { 17.0f, 13796.8f } }, { "04060004", new Float[] { 20.0f, 15880.5f } },
+					{ "05050002", new Float[] { 30.0f, 23946.3f } } })
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
+
+	// Expected Units, Water Cess, Rent, Lock charges after Run 2
+	static final Map<String, Float[]> expectedCharges2 = Arrays
+			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f, 0.0f, 0.0f } },
+					{ "08090001", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
+					{ "04060001", new Float[] { 4.0f, 3202.76f, 4630.0f, 0.0f } },
+					{ "05050001", new Float[] { 4.0f, 3246.32f, 2330.0f, 0.0f } },
+					{ "04060002", new Float[] { 19.0f, 15213.1f, 4630.0f, 0.0f } },
+					{ "04060003", new Float[] { 17.0f, 13796.8f, 2330.0f, 0.0f } },
+					{ "04060004", new Float[] { 20.0f, 15880.5f, 6930.0f, 0.0f } },
+					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } } })
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 	@Inject
 	private BillRunMasterRepository billRunMasterRepository;
 
@@ -108,22 +129,25 @@ public class BillRunMasterResourceIntTest {
 	private MockMvc restBillRunMasterMockMvc;
 
 	private BillRunMaster billRunMaster;
-	
-    @Inject
-    private CollDetailsRepository collDetailsRepository;
 
-    @Inject
-    private CollectionTypeMasterRepository collectionTypeMasterRepository;
-    
-    @Inject
-    private CustDetailsRepository custDetailsRepository;
-    
-    @Inject
-    private PaymentTypesRepository paymentTypesRepository;
+	@Inject
+	private CollDetailsRepository collDetailsRepository;
 
-    private MockMvc restCollDetailsMockMvc;
+	@Inject
+	private CollectionTypeMasterRepository collectionTypeMasterRepository;
 
-    private CollDetails collDetails;
+	@Inject
+	private CustDetailsRepository custDetailsRepository;
+
+	@Inject
+	private CustDetailsCustomRepository custDetailsCustomRepository;
+
+	@Inject
+	private PaymentTypesRepository paymentTypesRepository;
+
+	private MockMvc restCollDetailsMockMvc;
+
+	private CollDetails collDetails;
 
 	@PostConstruct
 	public void setup() {
@@ -148,55 +172,78 @@ public class BillRunMasterResourceIntTest {
 
 	@Test
 	@Transactional
-	@Rollback(false)
 	public void createBillRunMaster() throws Exception {
 		int databaseSizeBeforeCreate = billRunMasterRepository.findAll().size();
 
 		// Create the BillRunMaster
 
 		billRunMaster.setArea(null);
-		/*
-		 * try { custDetailsCustomRepository.loadTestData("/initData.sql");
-		 * custDetailsCustomRepository.loadTestData("/run1.sql"); }
-		 * catch(Exception e) { e.printStackTrace(); }
-		 */
-//		MvcResult result = restBillRunMasterMockMvc.perform(post("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
-//				.content(TestUtil.convertObjectToJsonBytes(billRunMaster))).andExpect(status().isOk()).andReturn();
-//		
-//		JSONObject content = new JSONObject(result.getResponse().getContentAsString());
-//		
-//		Long id = content.getLong("id");
-		
-		List<BillRunDetails> brdList = billRunDetailsRepository.findByBillRunId(232L);
-		
-		for(BillRunDetails brd: brdList){
-			BillFullDetails bfd = brd.getBillFullDetails();
-			Assert.assertEquals(expectedCharges.get(bfd.getCan())[0].floatValue(),bfd.getUnits().floatValue(),0.1f);
-			Assert.assertEquals(expectedCharges.get(bfd.getCan())[1].floatValue(),bfd.getWaterCess().floatValue(),1.0f);
-			Assert.assertEquals(expectedCharges.get(bfd.getCan())[2].floatValue(),bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(),1.0f);
-			
-			
-			try
-			{
 
-			CollDetailsResourceIntTest ct = new CollDetailsResourceIntTest();
-	        CollDetailsResource collDetailsResource = new CollDetailsResource();
-	        ReflectionTestUtils.setField(collDetailsResource, "collDetailsRepository", collDetailsRepository);
-	        ReflectionTestUtils.setField(collDetailsResource, "custDetailsRepository", custDetailsRepository);
-	        ReflectionTestUtils.setField(ct, "collectionTypeMasterRepository", collectionTypeMasterRepository);
-	        ReflectionTestUtils.setField(ct, "paymentTypesRepository", paymentTypesRepository);
-	        restCollDetailsMockMvc = MockMvcBuilders.standaloneSetup(collDetailsResource)
-	            .setCustomArgumentResolvers(pageableArgumentResolver)
-	            .setMessageConverters(jacksonMessageConverter).build();
-			ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), bfd.getArrears(), ZonedDateTime.now());
+		try {
+			custDetailsCustomRepository.loadTestData("/initData.sql");
+			custDetailsCustomRepository.loadTestData("/run1.sql");
+
+			MvcResult result = restBillRunMasterMockMvc
+					.perform(post("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
+							.content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
+					.andExpect(status().isOk()).andReturn();
+
+			JSONObject content = new JSONObject(result.getResponse().getContentAsString());
+
+			Long id = content.getLong("id");
+
+			List<BillRunDetails> brdList = billRunDetailsRepository.findByBillRunId(232L);
+
+			for (BillRunDetails brd : brdList) {
+				BillFullDetails bfd = brd.getBillFullDetails();
+				Assert.assertEquals(expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
+						0.1f);
+				Assert.assertEquals(expectedCharges.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
+						1.0f);
+				Assert.assertEquals(expectedCharges.get(bfd.getCan())[2].floatValue(),
+						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
+
+				CollDetailsResourceIntTest ct = new CollDetailsResourceIntTest();
+				CollDetailsResource collDetailsResource = new CollDetailsResource();
+				ReflectionTestUtils.setField(collDetailsResource, "collDetailsRepository", collDetailsRepository);
+				ReflectionTestUtils.setField(collDetailsResource, "custDetailsRepository", custDetailsRepository);
+				ReflectionTestUtils.setField(ct, "collectionTypeMasterRepository", collectionTypeMasterRepository);
+				ReflectionTestUtils.setField(ct, "paymentTypesRepository", paymentTypesRepository);
+				restCollDetailsMockMvc = MockMvcBuilders.standaloneSetup(collDetailsResource)
+						.setCustomArgumentResolvers(pageableArgumentResolver)
+						.setMessageConverters(jacksonMessageConverter).build();
+				ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), payments.get(bfd.getCan())[0],
+						ZonedDateTime.now());
+				ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), payments.get(bfd.getCan())[1],
+						ZonedDateTime.now());
+
 			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
+			
+			custDetailsCustomRepository.loadTestData("/run2.sql");
+
+			result = restBillRunMasterMockMvc
+					.perform(post("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
+							.content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			id = content.getLong("id");
+
+			brdList = billRunDetailsRepository.findByBillRunId(232L);
+
+			for (BillRunDetails brd : brdList) {
+				BillFullDetails bfd = brd.getBillFullDetails();
+				Assert.assertEquals(expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
+						0.1f);
+				Assert.assertEquals(expectedCharges2.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
+						1.0f);
+				Assert.assertEquals(expectedCharges2.get(bfd.getCan())[2].floatValue(),
+						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		
 	}
 
 }
