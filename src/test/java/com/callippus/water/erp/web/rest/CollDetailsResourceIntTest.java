@@ -6,6 +6,7 @@ import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.PaymentTypes;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
+import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.PaymentTypesRepository;
 
 import org.junit.Before;
@@ -105,10 +106,13 @@ public class CollDetailsResourceIntTest {
     private CollDetailsRepository collDetailsRepository;
 
     @Inject
-    private CollectionTypeMasterRepository collTypeMasterRepository;
-
+    private CollectionTypeMasterRepository collectionTypeMasterRepository;
+    
     @Inject
-    private PaymentTypesRepository paymentTypeMasterRepository;
+    private CustDetailsRepository custDetailsRepository;
+    
+    @Inject
+    private PaymentTypesRepository paymentTypesRepository;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -125,6 +129,7 @@ public class CollDetailsResourceIntTest {
         MockitoAnnotations.initMocks(this);
         CollDetailsResource collDetailsResource = new CollDetailsResource();
         ReflectionTestUtils.setField(collDetailsResource, "collDetailsRepository", collDetailsRepository);
+        ReflectionTestUtils.setField(collDetailsResource, "custDetailsRepository", custDetailsRepository);
         this.restCollDetailsMockMvc = MockMvcBuilders.standaloneSetup(collDetailsResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -157,14 +162,14 @@ public class CollDetailsResourceIntTest {
     }
 
     
-    public void createPayment(String can, Float amount, ZonedDateTime date) throws Exception {
+    public void createPayment(MockMvc restCollDetailsMockMvc, String can, Float amount, ZonedDateTime date) throws Exception {
     	collDetails = new CollDetails();
     	collDetails.setCan(can);
     	collDetails.setReceiptAmt(amount);
     	collDetails.setReceiptDt(date);
     	collDetails.setCollTime(ZonedDateTime.now());
-    	CollectionTypeMaster ct = collTypeMasterRepository.findOne(1L);
-    	PaymentTypes pt = paymentTypeMasterRepository.findOne(1L);
+    	CollectionTypeMaster ct = collectionTypeMasterRepository.findOne(1L);
+    	PaymentTypes pt = paymentTypesRepository.findOne(1L);
     	collDetails.setCollectionTypeMaster(ct);
     	collDetails.setPaymentTypes(pt);
 
@@ -179,15 +184,6 @@ public class CollDetailsResourceIntTest {
     @Transactional
     public void createCollDetails() throws Exception {
         int databaseSizeBeforeCreate = collDetailsRepository.findAll().size();
-
-        try
-        {
-        createPayment("05050002", 123.45f, ZonedDateTime.now());
-        }
-        catch(Exception e)
-        {
-        	e.printStackTrace();
-        }
         // Create the CollDetails
 
         restCollDetailsMockMvc.perform(post("/api/collDetailss")
