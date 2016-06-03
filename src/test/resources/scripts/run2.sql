@@ -1,4 +1,23 @@
 # Make Payments
+### Full Payment for 02020005
+
+### Partial Payment for 04060001
+
+### Full Payment for 08090001
+
+### Partial Payment for 05050001
+
+### No Payment for 05050002
+
+### Online Payment for 05050003
+
+### Partial Online Payment for 05050004
+
+### Partial Online Payment for 05050005
+
+### Partial Manual Payment for 05050004
+
+
 
 
 ### Scenario 9: Normal Customer 02020005, 1 month bill

@@ -2,7 +2,11 @@ package com.callippus.water.erp.web.rest;
 
 import com.callippus.water.erp.Application;
 import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.CollectionTypeMaster;
+import com.callippus.water.erp.domain.PaymentTypes;
 import com.callippus.water.erp.repository.CollDetailsRepository;
+import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
+import com.callippus.water.erp.repository.PaymentTypesRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -101,6 +105,12 @@ public class CollDetailsResourceIntTest {
     private CollDetailsRepository collDetailsRepository;
 
     @Inject
+    private CollectionTypeMasterRepository collTypeMasterRepository;
+
+    @Inject
+    private PaymentTypesRepository paymentTypeMasterRepository;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -146,11 +156,38 @@ public class CollDetailsResourceIntTest {
         collDetails.setLongI(DEFAULT_LONG_I);
     }
 
+    
+    public void createPayment(String can, Float amount, ZonedDateTime date) throws Exception {
+    	collDetails = new CollDetails();
+    	collDetails.setCan(can);
+    	collDetails.setReceiptAmt(amount);
+    	collDetails.setReceiptDt(date);
+    	collDetails.setCollTime(ZonedDateTime.now());
+    	CollectionTypeMaster ct = collTypeMasterRepository.findOne(1L);
+    	PaymentTypes pt = paymentTypeMasterRepository.findOne(1L);
+    	collDetails.setCollectionTypeMaster(ct);
+    	collDetails.setPaymentTypes(pt);
+
+        restCollDetailsMockMvc.perform(post("/api/collDetailss")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(collDetails)))
+                .andExpect(status().isCreated());
+    }
+    
+    
     @Test
     @Transactional
     public void createCollDetails() throws Exception {
         int databaseSizeBeforeCreate = collDetailsRepository.findAll().size();
 
+        try
+        {
+        createPayment("05050002", 123.45f, ZonedDateTime.now());
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
         // Create the CollDetails
 
         restCollDetailsMockMvc.perform(post("/api/collDetailss")
