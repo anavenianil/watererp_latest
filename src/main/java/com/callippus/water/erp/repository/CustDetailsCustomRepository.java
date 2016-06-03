@@ -12,6 +12,6 @@ JpaRepository<CustDetails, Long> {
 	   
     public List<String> searchCAN(@Param("searchTerm") String searchTerm);
     
-	public int loadTestData() throws Exception;
+	public int loadTestData(String filePath) throws Exception;
 	
 }

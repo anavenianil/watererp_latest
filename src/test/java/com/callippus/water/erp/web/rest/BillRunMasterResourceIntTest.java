@@ -127,7 +127,7 @@ public class BillRunMasterResourceIntTest {
 
         try
         {
-        custDetailsCustomRepository.loadTestData();
+        	custDetailsCustomRepository.loadTestData("/initData.sql");
         }
         catch(Exception e)
         {
