@@ -381,7 +381,7 @@ CREATE TABLE `bill_run_master` (
   `failed` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_run_master`
@@ -786,7 +786,7 @@ CREATE TABLE `cust_details` (
 
 /*!40000 ALTER TABLE `cust_details` DISABLE KEYS */;
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`) VALUES 
- (1,'02020005','ABC','DEF','PQR','14',NULL,'Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2016-04-23',NULL,NULL,0,0,NULL,NULL,3310,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-23',NULL,NULL,'abc@abc.abc','ACTIVE',1,1,1,1),
+ (1,'02020005','ABC','DEF','PQR','14',NULL,'Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','MeterId9',NULL,NULL,0,'2016-04-23',5,'2016-05-23',0,0,0,0,3310,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',NULL,'123456','abc@abc.abc','ACTIVE',1,1,1,1),
  (2,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812',NULL,0.5,'T','F','MeterId5',NULL,NULL,0,'2016-04-03',8798,'2016-05-23',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'9390148141','0','0','0','0','0','0','2016-04-03',NULL,'987','bhasker@gmail.com','ACTIVE',1,1,8,9);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`) VALUES 
  (3,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812',NULL,0.5,'T','F','MeterId2','L',NULL,0,'2016-03-03',30,'2016-06-01',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0','2016-03-03',NULL,'12421214','tejasree.m@gmail.com','ACTIVE',1,1,4,6),
