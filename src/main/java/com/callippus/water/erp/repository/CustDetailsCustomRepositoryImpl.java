@@ -46,12 +46,12 @@ public class CustDetailsCustomRepositoryImpl extends SimpleJpaRepository<CustDet
 
 	public int loadTestData(String filePath) throws Exception {
 		String sqlScript = CPSUtils.resourceToString(filePath);
-		String[] sqls = sqlScript.split(";");
+		String[] sqls = sqlScript.split("\r\n|\n\r|\r");
 		int ret = -1;
 		for (int i = 0; i < sqls.length; i++) {
 			if(sqls[i].startsWith("#") || sqls[i].trim().isEmpty())
 				continue;
-			Query q = entityManager.createNativeQuery(sqls[i]);
+			Query q = entityManager.createNativeQuery(sqls[i].replace(";", ""));
 			ret = q.executeUpdate();
 			log.debug("Executed::: " + sqls[i] + ";\n with return value:" + ret);
 		}
