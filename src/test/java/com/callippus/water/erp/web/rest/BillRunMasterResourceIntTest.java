@@ -235,6 +235,9 @@ public class BillRunMasterResourceIntTest {
 							.content(TestUtil.convertObjectToJsonBytes(brm)))
 					.andExpect(status().isOk()).andReturn();
 
+			content = new JSONObject(result.getResponse().getContentAsString());
+			
+			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"),content.getString("status"),"COMMITTED");
 			
 			custDetailsCustomRepository.loadTestData("/scripts/run2.sql");
 
