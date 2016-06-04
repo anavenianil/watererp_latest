@@ -202,11 +202,11 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
-				Assert.assertEquals(expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
+				Assert.assertEquals("Units do not match for CAN:" + bfd.getCan(), expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
 						0.1f);
-				Assert.assertEquals(expectedCharges.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
+				Assert.assertEquals("Water Cess does not match for CAN:" + bfd.getCan(),expectedCharges.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
 						1.0f);
-				Assert.assertEquals(expectedCharges.get(bfd.getCan())[2].floatValue(),
+				Assert.assertEquals("Meter Service Charge does not match for CAN:" + bfd.getCan(),expectedCharges.get(bfd.getCan())[2].floatValue(),
 						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
 
 				CollDetailsResourceIntTest ct = new CollDetailsResourceIntTest();
