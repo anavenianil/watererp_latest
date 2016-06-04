@@ -226,8 +226,8 @@ public class BillRunMasterResourceIntTest {
 				}
 
 			}
-/*
-			custDetailsCustomRepository.loadTestData("/run2.sql");
+
+			custDetailsCustomRepository.loadTestData("/scripts/run2.sql");
 
 			result = restBillRunMasterMockMvc
 					.perform(post("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -238,17 +238,17 @@ public class BillRunMasterResourceIntTest {
 
 			id = content.getLong("id");
 
-			brdList = billRunDetailsRepository.findByBillRunId(232L);
+			brdList = billRunDetailsRepository.findByBillRunId(id);
 
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
-				Assert.assertEquals(expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
+				Assert.assertEquals("Units do not match for CAN:" + bfd.getCan(), expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
 						0.1f);
-				Assert.assertEquals(expectedCharges2.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
+				Assert.assertEquals("Water Cess does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
 						1.0f);
-				Assert.assertEquals(expectedCharges2.get(bfd.getCan())[2].floatValue(),
+				Assert.assertEquals("Meter Service Charge does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[2].floatValue(),
 						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
-			}*/
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
