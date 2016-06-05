@@ -1,18 +1,5 @@
 <form name="editForm" rc-submit="save()" novalidate>
 
-	<ul>
-		<li ng-repeat="(key, errors) in editForm.$error track by $index">
-			<strong>{{ key }}</strong>
-			errors
-			<ul>
-				<li ng-repeat="e in errors">
-					{{ e.$name }} has an error:
-					<strong>{{ key }}</strong>
-					.
-				</li>
-			</ul>
-		</li>
-	</ul>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Revenue Details</h3>
