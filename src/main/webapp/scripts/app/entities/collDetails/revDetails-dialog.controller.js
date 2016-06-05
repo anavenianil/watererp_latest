@@ -10,7 +10,7 @@ angular
 						RevenueTypeMaster, $http) {
 
 					$scope.isValidCust = false;
-					$scope.instrEnabled = true;
+					$scope.instrEnabled = false;
 					$scope.paymenttypess = PaymentTypes.query();
 					$scope.instrumentissuermasters = InstrumentIssuerMaster
 							.query();
@@ -68,6 +68,30 @@ angular
 						return false;
 					}
 
+					$scope.validateInstrDt = function() {
+						var today = moment();
+						var instrDt = moment($scope.collDetails.instrDt);
+
+						var duration = moment.duration(today.diff(instrDt));
+						var months = duration.asMonths();
+
+						console.log("Months:" + months)
+						var days = duration.asDays();
+						if (days < -1)
+							$scope.editForm.instrDt.$setValidity("future",
+									false);
+						else if (months > 6) {
+							$scope.editForm.instrDt.$setValidity("veryOld",
+									false);
+						} else {
+							$scope.editForm.instrDt
+									.$setValidity("future", true);
+							$scope.editForm.instrDt.$setValidity("veryOld",
+									true);
+						}
+
+					}
+
 					$scope.validateDate = function() {
 						var today = moment();
 						var receiptDt = moment($scope.collDetails.receiptDt);
@@ -100,9 +124,9 @@ angular
 					}
 
 					$scope.save = function() {
-						if($scope.validate())
+						if ($scope.validate())
 							return;
-						
+
 						$scope.isSaving = true;
 						RevDetails.save($scope.collDetails, onSaveSuccess,
 								onSaveError);

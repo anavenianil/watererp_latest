@@ -1,9 +1,11 @@
 <form name="editForm" rc-submit="save()" novalidate>
 
+
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Revenue Details</h3>
 		</div>
+
 		<div class="list-group">
 			<div class="list-group-item">
 				<div class="modal-body">
@@ -38,7 +40,7 @@
 									</span>
 								</div>
 								<div
-									ng-show="editForm.receiptDt.$dirty && editForm.receiptDt.$invalid">
+									ng-show="(editForm.receiptDt.$dirty || rc.editForm.attempted) && editForm.receiptDt.$invalid">
 									<p class="help-block"
 										ng-show="editForm.receiptDt.$error.required">Date is
 										required.</p>
@@ -59,17 +61,19 @@
 								<input type="number" class="form-control" name="receiptAmt"
 									required="required" min="1" max="999999" id="field_receiptAmt"
 									ng-model="collDetails.receiptAmt" />
-								<p class="help-block"
-									ng-show="editForm.receiptAmt.$error.required && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Amount is
-									required.</p>
-								<p class="help-block" ng-show="editForm.receiptAmt.$error.min && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Amount
-									is required to be greater than 0.</p>
-								<p class="help-block" ng-show="editForm.receiptAmt.$error.max && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Amount
-									cannot exceed 999999.</p>
-								<p class="help-block"
-									ng-show="editForm.receiptAmt.$error.number && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Enter valid
-									number..</p>
-
+								<div
+									ng-show="(editForm.receiptAmt.$dirty || rc.editForm.attempted) && editForm.receiptAmt.$invalid">
+									<p class="help-block"
+										ng-show="editForm.receiptAmt.$error.required">Amount is
+										required.</p>
+									<p class="help-block" ng-show="editForm.receiptAmt.$error.min">Amount
+										is required to be greater than 0.</p>
+									<p class="help-block" ng-show="editForm.receiptAmt.$error.max">Amount
+										cannot exceed 999999.</p>
+									<p class="help-block"
+										ng-show="editForm.receiptAmt.$error.number">Enter valid
+										number.</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -86,9 +90,12 @@
 									ng-change="resetInstr(collDetails.paymentTypes.paymentMode)">
 								</select>
 
-								<p class="help-block"
-									ng-show="editForm.paymentTypes.$error.required">Payment
-									Type is required.</p>
+								<div
+									ng-show="(editForm.paymentTypes.$dirty || rc.editForm.attempted) && editForm.paymentTypes.$invalid">
+									<p class="help-block"
+										ng-show="editForm.paymentTypes.$error.required">Payment
+										Type is required.</p>
+								</div>
 							</div>
 						</div>
 						<div class="col-sm-4">
@@ -104,39 +111,60 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-4"
-							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
-							ng-pattern="/^[0-9]*$/">
-							<label class="control-label" for="field_instrNo">Instrument
-								No</label>
-							<input type="text" class="form-control" name="field_instrNo"
-								id="field_instrNo" ng-model="collDetails.instrNo"
-								ng-disabled="!instrEnabled" />
-							<p
-								ng-show="instrEnabled && collDetails.instrNo.$isDirty && !collDetails.instrNo.length">Please
-								Enter Instrument Number!</p>
+						<div class="col-sm-4">
+							<div class="form-group"
+								ng-class="{ 'has-error' : instrEnabled && editForm.instrNo.$invalid && 
+         (editForm.instrNo.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_instrNo">Instrument
+									No</label>
+								<input type="text" class="form-control" name="instrNo"
+									id="field_instrNo" ng-model="collDetails.instrNo"
+									ng-required="instrEnabled" ng-disabled="!instrEnabled"
+									ng-pattern="/^[0-9]*$/" />
+
+								<div
+									ng-show="(editForm.instrNo.$dirty || rc.editForm.attempted) && instrEnabled && editForm.instrNo.$invalid">
+									<p class="help-block"
+										ng-show="editForm.instrNo.$error.required">Instrument No
+										is required.</p>
+								</div>
+							</div>
 						</div>
 						<div class="col-sm-4">
-							<label class="control-label" for="field_instrIssuer">Instrument
-								Issuer</label>
-							<select class="form-control" id="field_instrumentIssuerMaster"
-								name="instrumentIssuerMaster"
-								ng-model="collDetails.instrumentIssuerMaster"
-								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
-								ng-disabled="!instrEnabled">
-							</select>
+							<div class="form-group"
+								ng-class="{ 'has-error' : instrEnabled && editForm.instrumentIssuerMaster.$invalid && 
+         (editForm.instrumentIssuerMaster.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_instrIssuer">Instrument
+									Issuer</label>
+								<select class="form-control" id="field_instrumentIssuerMaster"
+									name="instrumentIssuerMaster"
+									ng-model="collDetails.instrumentIssuerMaster"
+									ng-required="instrEnabled"
+									ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
+									ng-disabled="!instrEnabled">
+								</select>
+
+								<div
+									ng-show="(editForm.instrumentIssuerMaster.$dirty || rc.editForm.attempted) && instrEnabled && editForm.instrumentIssuerMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.instrumentIssuerMaster.$error.required">Instrument Issuer
+										is required.</p>
+								</div>
+							</div>
 						</div>
 						<div class="col-sm-4">
+							<div class="form-group"
+								ng-class="{ 'has-error' : instrEnabled && editForm.instrDt.$invalid && 
+         (editForm.instrDt.$dirty || rc.editForm.attempted)}">
 							<label class="control-label" for="field_instrDt">Instrument
 								Date</label>
-							<div class="form-group">
 								<div class='input-group' id='field_receiptDt'>
 									<input id="field_instrDt" placeholder="YYYY-MM-DD"
-										name="field_instrDt" type="text" class="form-control"
+										name="instrDt" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="collDetails.instrDt"
+										ng-model="collDetails.instrDt" ng-required="instrEnabled"
 										is-open="datePickerForInstrDt.status.opened"
-										ng-disabled="!instrEnabled" />
+										ng-change="validateInstrDt()" ng-disabled="!instrEnabled" />
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											id='field_receiptDtBtn' ng-disabled="!instrEnabled"
@@ -145,11 +173,17 @@
 										</button>
 									</span>
 								</div>
-							</div>
-							<div ng-show="editForm.collDetails.instrDt.$invalid">
-								<p class="help-block"
-									ng-show="instrEnabled && editForm.collDetails.instrDt.$error.required">
-									This field is required.</p>
+
+								<div
+									ng-show="(editForm.instrDt.$dirty || rc.editForm.attempted) && instrEnabled && editForm.instrDt.$invalid">
+									<p class="help-block"
+										ng-show="editForm.instrDt.$error.required">Instrument Date
+										is required.</p>
+									<p class="help-block" ng-show="editForm.instrDt.$error.future">
+										Instrument Date cannot be more than one day in the future.</p>
+									<p class="help-block" ng-show="editForm.instrDt.$error.veryOld">
+										Instrument Date cannot be older than six months.</p>
+								</div>
 							</div>
 						</div>
 					</div>
