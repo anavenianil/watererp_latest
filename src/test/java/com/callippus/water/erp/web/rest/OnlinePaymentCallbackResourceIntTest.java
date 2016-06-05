@@ -1,7 +1,10 @@
 package com.callippus.water.erp.web.rest;
 
 import com.callippus.water.erp.Application;
+import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.OnlinePaymentCallback;
+import com.callippus.water.erp.domain.PaymentTypes;
 import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
 
 import org.junit.Before;
@@ -23,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -95,6 +100,15 @@ public class OnlinePaymentCallbackResourceIntTest {
         onlinePaymentCallback.setMerchantTxnRef(DEFAULT_MERCHANT_TXN_REF);
     }
 
+
+    public void createPayment(MockMvc restOnlinePaymentCallbackMockMvc, String xml) throws Exception {
+        restOnlinePaymentCallbackMockMvc.perform(post("/api/unifiedPGResponse")
+                .contentType(TestUtil.APPLICATION_XML)
+                .content(xml))
+                .andExpect(status().isOk());
+    }
+    
+    
     @Test
     @Transactional
     public void createOnlinePaymentCallback() throws Exception {
