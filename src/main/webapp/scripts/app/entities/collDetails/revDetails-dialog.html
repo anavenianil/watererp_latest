@@ -1,5 +1,18 @@
-<form name="editForm" role="form" novalidate ng-submit="save()">
+<form name="editForm" rc-submit="save()" novalidate>
 
+	<ul>
+		<li ng-repeat="(key, errors) in editForm.$error track by $index">
+			<strong>{{ key }}</strong>
+			errors
+			<ul>
+				<li ng-repeat="e in errors">
+					{{ e.$name }} has an error:
+					<strong>{{ key }}</strong>
+					.
+				</li>
+			</ul>
+		</li>
+	</ul>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Revenue Details</h3>
@@ -10,8 +23,8 @@
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
 						<div class="col-sm-4">
-							<label for="field_paymentTypes">Revenue Type</label> <select
-								class="form-control" id="field_collectionTypeMaster"
+							<label for="field_paymentTypes">Revenue Type</label>
+							<select class="form-control" id="field_collectionTypeMaster"
 								name="collectionTypeMaster" required="required"
 								ng-model="collDetails.collectionTypeMaster"
 								ng-options="revenueTypeMaster as revenueTypeMaster.collName for revenueTypeMaster in revenueTypeMasters track by revenueTypeMaster.id">
@@ -19,12 +32,15 @@
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptDt">Date</label>
-							<div class="form-group">
+							<div class="form-group"
+								ng-class="{'has-error': editForm.receiptDt.$invalid && 
+         (editForm.receiptDt.$dirty || rc.editForm.attempted)}">
 								<div class='input-group' id='field_receiptDt'>
-									<input id="field_receiptDt" name="field_receiptDt" type="text"
+									<input id="field_receiptDt" name="receiptDt" type="text"
 										class="form-control" placeholder="YYYY-MM-DD"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="collDetails.receiptDt"
+										ng-change="validateDate()" ng-model="collDetails.receiptDt"
+										required="required"
 										is-open="datePickerForReceiptDt.status.opened" />
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"
@@ -34,30 +50,63 @@
 										</button>
 									</span>
 								</div>
+								<div
+									ng-show="editForm.receiptDt.$dirty && editForm.receiptDt.$invalid">
+									<p class="help-block"
+										ng-show="editForm.receiptDt.$error.required">Date is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.receiptDt.$error.veryOld">Date cannot be
+										more than six months old.</p>
+									<p class="help-block"
+										ng-show="editForm.receiptDt.$error.future">Date cannot be
+										more than one month in future.</p>
+								</div>
 							</div>
 						</div>
-						<div class="col-sm-4"
-							ng-class="{ 'has-error' : editForm.receiptAmt.$invalid && !editForm.receiptAmt.$pristine }"
-							ng-pattern="/^[0-9]*$/">
-							<label class="control-label" for="field_receiptAmt">Amount</label> 
-							<input type="number" class="form-control"
-								name="receiptAmt" required="required" min="1"
-								id="field_receiptAmt" ng-model="collDetails.receiptAmt" />
-							<p ng-show="editForm.receiptAmt.$error.pattern"
-								class="help-block">Only numbers.</p>
+						<div class="col-sm-4">
+							<div class="form-group"
+								ng-class="{'has-error': editForm.receiptAmt.$invalid && 
+         (editForm.receiptAmt.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_receiptAmt">Amount</label>
+								<input type="number" class="form-control" name="receiptAmt"
+									required="required" min="1" max="999999" id="field_receiptAmt"
+									ng-model="collDetails.receiptAmt" />
+								<p class="help-block"
+									ng-show="editForm.receiptAmt.$error.required && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Amount is
+									required.</p>
+								<p class="help-block" ng-show="editForm.receiptAmt.$error.min && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Amount
+									is required to be greater than 0.</p>
+								<p class="help-block" ng-show="editForm.receiptAmt.$error.max && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Amount
+									cannot exceed 999999.</p>
+								<p class="help-block"
+									ng-show="editForm.receiptAmt.$error.number && (editForm.receiptAmt.$dirty || rc.editForm.attempted)">Enter valid
+									number..</p>
+
+							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
-							<label for="field_paymentTypes">Payment Mode</label> <select
-								class="form-control" id="field_paymentTypes" name="paymentTypes"
-								ng-model="collDetails.paymentTypes" required="required"
-								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
-								ng-change="resetInstr(collDetails.paymentTypes.paymentMode)">
-							</select>
+							<div class="form-group"
+								ng-class="{'has-error': editForm.paymentTypes.$invalid && 
+         (editForm.paymentTypes.$dirty || rc.editForm.attempted)}">
+								<label for="field_paymentTypes">Payment Mode</label>
+								<select class="form-control" id="field_paymentTypes"
+									name="paymentTypes" ng-model="collDetails.paymentTypes"
+									required="required"
+									ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
+									ng-change="resetInstr(collDetails.paymentTypes.paymentMode)">
+								</select>
+
+								<p class="help-block"
+									ng-show="editForm.paymentTypes.$error.required">Payment
+									Type is required.</p>
+							</div>
 						</div>
 						<div class="col-sm-4">
-							<label class="control-label" for="field_receiptNo">Approved By</label> 
+							<label class="control-label" for="field_receiptNo">Approved
+								By</label>
 							<input type="text" class="form-control" name="consName"
 								id="field_consName" ng-model="collDetails.consName" />
 						</div>
@@ -72,7 +121,8 @@
 							ng-class="{ 'has-error' : editForm.field_instrNo.$invalid && !editForm.field_instrNo.$pristine }"
 							ng-pattern="/^[0-9]*$/">
 							<label class="control-label" for="field_instrNo">Instrument
-								No</label> <input type="text" class="form-control" name="field_instrNo"
+								No</label>
+							<input type="text" class="form-control" name="field_instrNo"
 								id="field_instrNo" ng-model="collDetails.instrNo"
 								ng-disabled="!instrEnabled" />
 							<p
@@ -81,8 +131,9 @@
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_instrIssuer">Instrument
-								Issuer</label> <select class="form-control"
-								id="field_instrumentIssuerMaster" name="instrumentIssuerMaster"
+								Issuer</label>
+							<select class="form-control" id="field_instrumentIssuerMaster"
+								name="instrumentIssuerMaster"
 								ng-model="collDetails.instrumentIssuerMaster"
 								ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
 								ng-disabled="!instrEnabled">
@@ -98,7 +149,8 @@
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt"
 										is-open="datePickerForInstrDt.status.opened"
-										ng-disabled="!instrEnabled" /> <span class="input-group-btn">
+										ng-disabled="!instrEnabled" />
+									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											id='field_receiptDtBtn' ng-disabled="!instrEnabled"
 											ng-click="datePickerForInstrDtOpen($event)">
@@ -119,11 +171,14 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span> &nbsp; <span>Cancel</span>
+						<span class="glyphicon glyphicon-ban-circle"></span>
+						&nbsp;
+						<span>Cancel</span>
 					</button>
-					<button type="submit" ng-disabled="validate()"
-						class="btn btn-primary" id="submitSave">
-						<span class="glyphicon glyphicon-save"></span> &nbsp; <span>Save</span>
+					<button type="submit" class="btn btn-primary" id="submitSave">
+						<span class="glyphicon glyphicon-save"></span>
+						&nbsp;
+						<span>Save</span>
 					</button>
 				</div>
 			</div>
