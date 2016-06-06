@@ -270,7 +270,8 @@ public class BillRunMasterResourceIntTest {
 				
 				for (int i = 0; paymentCallbackXMLs.get(bfd.getCan()) != null && i < paymentCallbackXMLs.get(bfd.getCan()).length
 						&& !paymentCallbackXMLs.get(bfd.getCan())[i].isEmpty(); i++) {
-					op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
+					log.debug("Posting XML:"+ paymentCallbackXMLs.get(bfd.getCan())[i]);
+					//op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
 				}
 			}
 

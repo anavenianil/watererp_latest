@@ -5,6 +5,7 @@ import com.callippus.water.erp.domain.OnlinePaymentCallback;
 import com.callippus.water.erp.domain.OnlinePaymentResponse;
 import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
 import com.callippus.water.erp.service.OnlinePaymentService;
+import com.callippus.water.erp.web.rest.dto.XmlDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 
@@ -45,9 +46,9 @@ public class OnlinePaymentCallbackResource {
      */
     @RequestMapping(value = "/unifiedPGResponse",
         method = RequestMethod.POST, consumes = {MediaType.APPLICATION_XML_VALUE},
-        produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_XML_VALUE)
     @Timed
-    public ResponseEntity<String> createOnlinePaymentCallback(@RequestBody String xml) throws URISyntaxException {
+    public ResponseEntity<String> unifiedPGResponse(@RequestBody String xml) throws URISyntaxException {
     	String response = null;
     	try
     	{
@@ -63,6 +64,16 @@ public class OnlinePaymentCallbackResource {
         		body(response);
     }
 
+    //For Integration testing only. Temporary
+    @RequestMapping(value = "/unifiedPGResponseXML",
+            method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        @Timed
+        public ResponseEntity<String> unifiedPGResponseXML(@RequestBody XmlDTO xmlDto) throws URISyntaxException {
+        	return unifiedPGResponse(xmlDto.getXml());
+        }
+
+    
     @RequestMapping(value = "/onlinePaymentCallbacks",
             method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
