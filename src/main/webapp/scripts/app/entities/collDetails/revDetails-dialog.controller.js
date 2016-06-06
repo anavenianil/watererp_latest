@@ -77,10 +77,15 @@ angular
 
 						console.log("Months:" + months)
 						var days = duration.asDays();
-						if (days < -1)
+						if (days < -1){
 							$scope.editForm.instrDt.$setValidity("future",
 									false);
+							$scope.editForm.instrDt.$setValidity("veryOld",
+									true);
+						}
 						else if (months > 6) {
+							$scope.editForm.instrDt.$setValidity("future",
+									true);
 							$scope.editForm.instrDt.$setValidity("veryOld",
 									false);
 						} else {
@@ -108,11 +113,15 @@ angular
 									+ ", receipt dt:" + receiptDt);
 							$scope.editForm.receiptDt.$setValidity("veryOld",
 									false);
+							$scope.editForm.receiptDt.$setValidity("future",
+									true);
 						} else if (months < -1) {
 							console.log("Future, today:" + today
 									+ ", receipt dt:" + receiptDt);
 							$scope.editForm.receiptDt.$setValidity("future",
 									false);
+							$scope.editForm.receiptDt.$setValidity("veryOld",
+									true);
 						} else {
 							console.log("Ok, today:" + today + ", receipt dt:"
 									+ receiptDt);
@@ -182,7 +191,7 @@ angular
 							$scope.instrEnabled = false;
 							$scope.collDetails.instrNo = null;
 							$scope.collDetails.instrDt = null;
-							$scope.collDetails.instrIssuer = null;
+							$scope.collDetails.instrumentIssuerMaster = null;
 						} else
 							$scope.instrEnabled = true;
 					}

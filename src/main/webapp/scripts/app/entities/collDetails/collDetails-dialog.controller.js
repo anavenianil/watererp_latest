@@ -7,7 +7,7 @@ angular.module('watererpApp').controller(
 				CustDetailsService, CollectionTypeMaster, $http) {
 
 			$scope.isValidCust = false;
-			$scope.instrEnabled = true;
+			$scope.instrEnabled = false;
 			$scope.paymenttypess = PaymentTypes.query();
 			$scope.instrumentissuermasters = InstrumentIssuerMaster.query();
 			//$scope.collectionTypeMasters = CollectionTypeMaster.query();
@@ -108,6 +108,7 @@ angular.module('watererpApp').controller(
 				return false;
 
 			}
+			
 
 			$scope.onSelect = function($item, $model, $label) {
 				var arr = $item.split("-");
@@ -123,6 +124,75 @@ angular.module('watererpApp').controller(
 				$scope.custInfo = "";
 				$scope.isValidCust = true;
 			};
+			$scope.validateInstrDt = function() {
+				var today = moment();
+				var instrDt = moment($scope.collDetails.instrDt);
+
+				var duration = moment.duration(today.diff(instrDt));
+				var months = duration.asMonths();
+
+				console.log("Months:" + months)
+				var days = duration.asDays();
+				if (days < -1){
+					$scope.editForm.instrDt.$setValidity("future",
+							false);
+					$scope.editForm.instrDt.$setValidity("veryOld",
+							true);
+				}
+				else if (months > 6) {
+					$scope.editForm.instrDt.$setValidity("future",
+							true);
+					$scope.editForm.instrDt.$setValidity("veryOld",
+							false);
+				} else {
+					$scope.editForm.instrDt
+							.$setValidity("future", true);
+					$scope.editForm.instrDt.$setValidity("veryOld",
+							true);
+				}
+
+			}
+
+			
+			
+			$scope.validateDate = function() {
+				var today = moment();
+				var receiptDt = moment($scope.collDetails.receiptDt);
+
+				var duration = moment.duration(today.diff(receiptDt));
+				var months = duration.asMonths();
+
+				console.log("This is today:" + today);
+				console.log("This is receipt dt:" + receiptDt);
+				console.log("Duration:" + months);
+
+				if (months > 6) {
+					console.log("Very old, today:" + today
+							+ ", receipt dt:" + receiptDt);
+					$scope.editForm.receiptDt.$setValidity("veryOld",
+							false);
+					$scope.editForm.receiptDt.$setValidity("future",
+							true);
+				} else if (months < -1) {
+					console.log("Future, today:" + today
+							+ ", receipt dt:" + receiptDt);
+					$scope.editForm.receiptDt.$setValidity("future",
+							false);
+					$scope.editForm.receiptDt.$setValidity("veryOld",
+							true);
+				} else {
+					console.log("Ok, today:" + today + ", receipt dt:"
+							+ receiptDt);
+					$scope.editForm.receiptDt.$setValidity("future",
+							true);
+					$scope.editForm.receiptDt.$setValidity("veryOld",
+							true);
+				}
+			}
+			
+			
+			
+			
 
 			$scope.save = function() {
 				$scope.isSaving = true;

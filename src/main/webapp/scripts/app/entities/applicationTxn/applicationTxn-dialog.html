@@ -1,5 +1,6 @@
 <div>
-	<form name="editForm" role="form" novalidate ng-submit="save()">
+  <form name=editForm  rc-submit="save()" novalidate">
+	<!-- <form name="editForm" role="form" novalidate ng-submit="save()"> -->
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">Create Connection</h3>
@@ -32,16 +33,28 @@
 							<legend>Water Connection Details</legend>
 							<div class="row">
 								<div class="col-sm-6">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.tariffCategoryMaster.$invalid && 
+         (editForm.tariffCategoryMaster.$dirty || rc.editForm.attempted)}">
 									<label for="field_tariffCategoryMaster">Connection
 										Category</label> <select class="form-control"
 										id="field_tariffCategoryMaster" name="tariffCategoryMaster"
 										ng-model="applicationTxn.tariffCategoryMaster"
 										ng-change="disableOrg(applicationTxn.tariffCategoryMaster.id)"
 										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
-										required>
-										<option value=""></option>
+										required="required">
+ 
+									
 									</select>
+										 <div
+									ng-show="(editForm.tariffCategoryMaster.$dirty || rc.editForm.attempted) && editForm.tariffCategoryMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.tariffCategoryMaster.$error.required">This field is
+										required.</p>
+										</div>
 								</div>
+								</div>
+							
 								<div class="col-sm-6">
 									<label class="control-label" for="field_waterConnectionUse">Water
 										Connection Use</label> <input type="text"
@@ -56,10 +69,20 @@
 							<legend>Applicant Details</legend>
 							<div class="row">
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.firstName.$invalid && 
+         (editForm.firstName.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_firstName">First
 										Name</label> <input type="text" class="form-control text-uppercase"
 										name="firstName" id="field_firstName"
 										ng-model="applicationTxn.firstName" required />
+										<div
+									ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.firstName.$error.required">This field is
+										required.</p>
+										</div>
+										</div>
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_middleName">Middle
@@ -225,7 +248,7 @@
 							ng-click="clear()">
 							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 						</button>
-						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 							class="btn btn-primary">
 							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Submit</span>
 						</button>
