@@ -254,10 +254,7 @@ public class BillRunMasterResourceIntTest {
 							ZonedDateTime.now());
 				}
 
-				log.debug("###################################################################################");
-				log.debug("Loading Online Payments");
-				log.debug("###################################################################################");
-				
+
 				OnlinePaymentCallbackResourceIntTest op = new OnlinePaymentCallbackResourceIntTest();
 				OnlinePaymentCallbackResource onlinePaymentCallbackResource = new OnlinePaymentCallbackResource();
 				ReflectionTestUtils.setField(onlinePaymentCallbackResource, "onlinePaymentCallbackRepository", onlinePaymentCallbackRepository);
@@ -271,7 +268,11 @@ public class BillRunMasterResourceIntTest {
 				for (int i = 0; paymentCallbackXMLs.get(bfd.getCan()) != null && i < paymentCallbackXMLs.get(bfd.getCan()).length
 						&& !paymentCallbackXMLs.get(bfd.getCan())[i].isEmpty(); i++) {
 					log.debug("Posting XML:"+ paymentCallbackXMLs.get(bfd.getCan())[i]);
-					//op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
+					log.debug("###################################################################################");
+					log.debug("Loading Online Payments for CAN:"+bfd.getCan());
+					log.debug("###################################################################################");
+					
+					op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
 				}
 			}
 
