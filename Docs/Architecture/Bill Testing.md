@@ -39,6 +39,10 @@ This file is run from:
 ### Scenario 13: Normal Customer, 3 months bill, Tariff Change 3rd Month
 
 
+# Executing Billing Test
+mvn -Dtest=BillRunMasterResourceIntTest test
+
+
 #How to make a new customer from an existing customer
 ``delete from bill_run_details where can='02020005';``
 

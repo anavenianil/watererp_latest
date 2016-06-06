@@ -407,6 +407,10 @@ public class BillingService {
 			if (charges.size() > 3) {
 				multipleTariffs = true; //Multiple tariffs for first bill. Pro-rata required
 				partialUnitsKL = (float) days / (float) totDays * unitsKL;
+				
+				charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(),
+						dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()), partialUnitsKL, unMeteredFlag, newMeterFlag);
+
 				calc_charges_first(charges, bfd, partialUnitsKL, dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
 				
 				remUnitsKL = unitsKL - partialUnitsKL;				

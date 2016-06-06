@@ -773,7 +773,7 @@ WHERE  b.id=$P{id}]]>
 			<textField pattern="###0.00" isBlankWhenNull="true">
 				<reportElement x="318" y="118" width="81" height="20" uuid="90671958-178d-4422-8059-dea5d311dc7c"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{prev_reading}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{initial_reading}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
 				<reportElement x="535" y="118" width="72" height="18" uuid="dee4a229-2b4d-4888-aad4-5b8c2f0a2c54"/>

@@ -1,10 +1,25 @@
 package com.callippus.water.erp.web.rest;
 
 import com.callippus.water.erp.Application;
+import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.domain.BillRunDetails;
 import com.callippus.water.erp.domain.BillRunMaster;
+import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.OnlinePaymentCallback;
+import com.callippus.water.erp.repository.BillRunDetailsRepository;
 import com.callippus.water.erp.repository.BillRunMasterRepository;
+import com.callippus.water.erp.repository.CollDetailsRepository;
+import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
 import com.callippus.water.erp.repository.CustDetailsCustomRepository;
+import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
+import com.callippus.water.erp.repository.PaymentTypesRepository;
+import com.callippus.water.erp.service.BillingService;
+import com.callippus.water.erp.service.OnlinePaymentService;
 
+import org.jfree.util.Log;
+import org.json.JSONObject;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +30,12 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,12 +45,14 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 
 /**
  * Test class for the BillRunMasterResource REST controller.
@@ -46,199 +65,238 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class BillRunMasterResourceIntTest {
 
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
+	private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+			.withZone(ZoneId.of("Z"));
 
+	private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.now();
+	private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now();
+	private static final String DEFAULT_DATE_STR = dateTimeFormatter.format(DEFAULT_DATE);
+	private static final String DEFAULT_AREA = "AAAAA";
+	private static final String UPDATED_AREA = "BBBBB";
 
-    private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.now();
-    private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now();
-    private static final String DEFAULT_DATE_STR = dateTimeFormatter.format(DEFAULT_DATE);
-    private static final String DEFAULT_AREA = "AAAAA";
-    private static final String UPDATED_AREA = "BBBBB";
+	private static final Integer DEFAULT_SUCCESS = 1;
+	private static final Integer UPDATED_SUCCESS = 2;
 
-    private static final Integer DEFAULT_SUCCESS = 1;
-    private static final Integer UPDATED_SUCCESS = 2;
+	private static final Integer DEFAULT_FAILED = 1;
+	private static final Integer UPDATED_FAILED = 2;
+	private static final String DEFAULT_STATUS = "AAAAA";
+	private static final String UPDATED_STATUS = "BBBBB";
 
-    private static final Integer DEFAULT_FAILED = 1;
-    private static final Integer UPDATED_FAILED = 2;
-    private static final String DEFAULT_STATUS = "AAAAA";
-    private static final String UPDATED_STATUS = "BBBBB";
+	// Expected Units, Water Cess, Rent, Lock charges after Run 1
+	static final Map<String, Float[]> expectedCharges = Arrays
+			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f, 0.0f, 0.0f } },
+					{ "08090001", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
+					{ "04060001", new Float[] { 4.0f, 3202.76f, 4630.0f, 0.0f } },
+					{ "05050001", new Float[] { 4.0f, 3246.32f, 2330.0f, 0.0f } },
+					{ "04060002", new Float[] { 19.0f, 15213.1f, 4630.0f, 0.0f } },
+					{ "04060003", new Float[] { 17.0f, 13796.8f, 2330.0f, 0.0f } },
+					{ "04060004", new Float[] { 20.0f, 15880.5f, 6930.0f, 0.0f } },
+					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } } })
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
+
+	// Manual Payments
+	static final Map<String, Float[]> manual_payments = Arrays
+			.stream(new Object[][] { { "02020005", new Float[] { 5794.6f } }, { "08090001", new Float[] { 4800f } },
+					{ "04060001", new Float[] { 4000f } }, { "05050001", new Float[] { 3000f, 1000f } },
+					{ "04060002", new Float[] { 0.0f } }, { "04060003", new Float[] { 0.0f } },
+					{ "04060004", new Float[] { 0.0f } }, { "05050002", new Float[] { 0.0f } } })
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
+
+	// Expected Units, Water Cess, Rent, Lock charges after Run 2
+	static final Map<String, Float[]> expectedCharges2 = Arrays
+			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f, 0.0f, 0.0f } },
+					{ "08090001", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
+					{ "04060001", new Float[] { 4.0f, 3202.76f, 4630.0f, 0.0f } },
+					{ "05050001", new Float[] { 4.0f, 3246.32f, 2330.0f, 0.0f } },
+					{ "04060002", new Float[] { 19.0f, 15213.1f, 4630.0f, 0.0f } },
+					{ "04060003", new Float[] { 17.0f, 13796.8f, 2330.0f, 0.0f } },
+					{ "04060004", new Float[] { 20.0f, 15880.5f, 6930.0f, 0.0f } },
+					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } } })
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
+	
+			static final Map<String, String[]> paymentCallbackXMLs = Arrays
+			.stream(new Object[][] { { "04060001", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>100</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>3864.79</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "05050001", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>200</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>1610.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "04060003", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>300</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>16200.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "04060004", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>400</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>22970.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "05050002", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>500</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>28820.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } } })
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (String[]) kv[1]));
+
+	
+	
+	@Inject
+	private BillRunMasterRepository billRunMasterRepository;
+
+	@Inject
+	private BillRunDetailsRepository billRunDetailsRepository;
+
+	@Inject
+	private BillingService billingService;
+
+	@Inject
+	private MappingJackson2HttpMessageConverter jacksonMessageConverter;
+
+	@Inject
+	private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
     @Inject
-    private BillRunMasterRepository billRunMasterRepository;
+    private OnlinePaymentService onlinePaymentService;
+	
+	private MockMvc restBillRunMasterMockMvc;
+
+	private BillRunMaster billRunMaster;
+
+	@Inject
+	private CollDetailsRepository collDetailsRepository;
+
+	@Inject
+	private CollectionTypeMasterRepository collectionTypeMasterRepository;
+
+	@Inject
+	private CustDetailsRepository custDetailsRepository;
+
+	@Inject
+	private CustDetailsCustomRepository custDetailsCustomRepository;
 
     @Inject
-    private CustDetailsCustomRepository custDetailsCustomRepository;
-
-    @Inject
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Inject
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    private MockMvc restBillRunMasterMockMvc;
-
-    private BillRunMaster billRunMaster;
-
-    @PostConstruct
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        BillRunMasterResource billRunMasterResource = new BillRunMasterResource();
-        ReflectionTestUtils.setField(billRunMasterResource, "billRunMasterRepository", billRunMasterRepository);
-        this.restBillRunMasterMockMvc = MockMvcBuilders.standaloneSetup(billRunMasterResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setMessageConverters(jacksonMessageConverter).build();
-    }
-
-    @Before
-    public void initTest() {
-        billRunMaster = new BillRunMaster();
-        billRunMaster.setDate(DEFAULT_DATE);
-        billRunMaster.setArea(DEFAULT_AREA);
-        billRunMaster.setSuccess(DEFAULT_SUCCESS);
-        billRunMaster.setFailed(DEFAULT_FAILED);
-        billRunMaster.setStatus(DEFAULT_STATUS);
-    }
-
-
-    @Test
-    @Transactional
-    public void createBillRun() throws Exception {
-        int databaseSizeBeforeCreate = billRunMasterRepository.findAll().size();
-
-        // Create the BillRunMaster
-
-        billRunMaster.setArea(null);
-        
-        restBillRunMasterMockMvc.perform(post("/api/billRunMasters")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
-                .andExpect(status().isCreated());
-
-    }
+    private OnlinePaymentCallbackRepository onlinePaymentCallbackRepository;
     
-    @Test
-    @Transactional
-    public void createBillRunMaster() throws Exception {
-        int databaseSizeBeforeCreate = billRunMasterRepository.findAll().size();
+	@Inject
+	private PaymentTypesRepository paymentTypesRepository;
 
-        // Create the BillRunMaster
+	private MockMvc restCollDetailsMockMvc;
+	
 
-        billRunMaster.setArea(null);
+    private MockMvc restOnlinePaymentCallbackMockMvc;
 
-        try
-        {
-        	custDetailsCustomRepository.loadTestData("/initData.sql");
-        }
-        catch(Exception e)
-        {
-        	e.printStackTrace();
-        }
-        restBillRunMasterMockMvc.perform(post("/api/billRunMasters")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
-                .andExpect(status().isCreated());
 
-        // Validate the BillRunMaster in the database
-        List<BillRunMaster> billRunMasters = billRunMasterRepository.findAll();
-        assertThat(billRunMasters).hasSize(databaseSizeBeforeCreate + 1);
-        BillRunMaster testBillRunMaster = billRunMasters.get(billRunMasters.size() - 1);
-        assertThat(testBillRunMaster.getDate()).isEqualTo(DEFAULT_DATE);
-        assertThat(testBillRunMaster.getArea()).isEqualTo(DEFAULT_AREA);
-        assertThat(testBillRunMaster.getSuccess()).isEqualTo(DEFAULT_SUCCESS);
-        assertThat(testBillRunMaster.getFailed()).isEqualTo(DEFAULT_FAILED);
-        assertThat(testBillRunMaster.getStatus()).isEqualTo(DEFAULT_STATUS);
-    }
+	private CollDetails collDetails;
 
-    @Test
-    @Transactional
-    public void getAllBillRunMasters() throws Exception {
-        // Initialize the database
-        billRunMasterRepository.saveAndFlush(billRunMaster);
+	@PostConstruct
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		BillRunMasterResource billRunMasterResource = new BillRunMasterResource();
+		ReflectionTestUtils.setField(billRunMasterResource, "billRunMasterRepository", billRunMasterRepository);
+		ReflectionTestUtils.setField(billRunMasterResource, "billingService", billingService);
+		this.restBillRunMasterMockMvc = MockMvcBuilders.standaloneSetup(billRunMasterResource)
+				.setCustomArgumentResolvers(pageableArgumentResolver).setMessageConverters(jacksonMessageConverter)
+				.build();
+	}
 
-        // Get all the billRunMasters
-        restBillRunMasterMockMvc.perform(get("/api/billRunMasters?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(billRunMaster.getId().intValue())))
-                .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE_STR)))
-                .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.toString())))
-                .andExpect(jsonPath("$.[*].success").value(hasItem(DEFAULT_SUCCESS)))
-                .andExpect(jsonPath("$.[*].failed").value(hasItem(DEFAULT_FAILED)))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
-    }
+	@Before
+	public void initTest() {
+		billRunMaster = new BillRunMaster();
+		billRunMaster.setDate(DEFAULT_DATE);
+		billRunMaster.setArea(DEFAULT_AREA);
+		billRunMaster.setSuccess(DEFAULT_SUCCESS);
+		billRunMaster.setFailed(DEFAULT_FAILED);
+		billRunMaster.setStatus(DEFAULT_STATUS);
+	}
 
-    @Test
-    @Transactional
-    public void getBillRunMaster() throws Exception {
-        // Initialize the database
-        billRunMasterRepository.saveAndFlush(billRunMaster);
+	@Test
+	@Transactional
+	@Rollback(false)
+	public void createBillRunMaster() throws Exception {
 
-        // Get the billRunMaster
-        restBillRunMasterMockMvc.perform(get("/api/billRunMasters/{id}", billRunMaster.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(billRunMaster.getId().intValue()))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE_STR))
-            .andExpect(jsonPath("$.area").value(DEFAULT_AREA.toString()))
-            .andExpect(jsonPath("$.success").value(DEFAULT_SUCCESS))
-            .andExpect(jsonPath("$.failed").value(DEFAULT_FAILED))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
-    }
+		// Create the BillRunMaster
 
-    @Test
-    @Transactional
-    public void getNonExistingBillRunMaster() throws Exception {
-        // Get the billRunMaster
-        restBillRunMasterMockMvc.perform(get("/api/billRunMasters/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
-    }
+		billRunMaster.setArea(null);
 
-    @Test
-    @Transactional
-    public void updateBillRunMaster() throws Exception {
-        // Initialize the database
-        billRunMasterRepository.saveAndFlush(billRunMaster);
+		try {
+			custDetailsCustomRepository.loadTestData("/scripts/initData.sql");
+			custDetailsCustomRepository.loadTestData("/scripts/run1.sql");
 
-		int databaseSizeBeforeUpdate = billRunMasterRepository.findAll().size();
+			MvcResult result = restBillRunMasterMockMvc
+					.perform(post("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
+							.content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
+					.andExpect(status().isOk()).andReturn();
 
-        // Update the billRunMaster
-        billRunMaster.setDate(UPDATED_DATE);
-        billRunMaster.setArea(UPDATED_AREA);
-        billRunMaster.setSuccess(UPDATED_SUCCESS);
-        billRunMaster.setFailed(UPDATED_FAILED);
-        billRunMaster.setStatus(UPDATED_STATUS);
+			JSONObject content = new JSONObject(result.getResponse().getContentAsString());
 
-        restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
-                .andExpect(status().isOk());
+			Long id = content.getLong("id");
 
-        // Validate the BillRunMaster in the database
-        List<BillRunMaster> billRunMasters = billRunMasterRepository.findAll();
-        assertThat(billRunMasters).hasSize(databaseSizeBeforeUpdate);
-        BillRunMaster testBillRunMaster = billRunMasters.get(billRunMasters.size() - 1);
-        assertThat(testBillRunMaster.getDate()).isEqualTo(UPDATED_DATE);
-        assertThat(testBillRunMaster.getArea()).isEqualTo(UPDATED_AREA);
-        assertThat(testBillRunMaster.getSuccess()).isEqualTo(UPDATED_SUCCESS);
-        assertThat(testBillRunMaster.getFailed()).isEqualTo(UPDATED_FAILED);
-        assertThat(testBillRunMaster.getStatus()).isEqualTo(UPDATED_STATUS);
-    }
+			List<BillRunDetails> brdList = billRunDetailsRepository.findByBillRunId(id);
 
-    @Test
-    @Transactional
-    public void deleteBillRunMaster() throws Exception {
-        // Initialize the database
-        billRunMasterRepository.saveAndFlush(billRunMaster);
+			for (BillRunDetails brd : brdList) {
+				BillFullDetails bfd = brd.getBillFullDetails();
+				/*				Assert.assertEquals("Run1: Units do not match for CAN:" + bfd.getCan(), expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
+						0.1f);
+				Assert.assertEquals("Run1: Water Cess does not match for CAN:" + bfd.getCan(),expectedCharges.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
+						1.0f);
+				Assert.assertEquals("Run1: Meter Service Charge does not match for CAN:" + bfd.getCan(),expectedCharges.get(bfd.getCan())[2].floatValue(),
+						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
 
-		int databaseSizeBeforeDelete = billRunMasterRepository.findAll().size();
+				CollDetailsResourceIntTest ct = new CollDetailsResourceIntTest();
+				CollDetailsResource collDetailsResource = new CollDetailsResource();
+				ReflectionTestUtils.setField(collDetailsResource, "collDetailsRepository", collDetailsRepository);
+				ReflectionTestUtils.setField(collDetailsResource, "custDetailsRepository", custDetailsRepository);
+				ReflectionTestUtils.setField(ct, "collectionTypeMasterRepository", collectionTypeMasterRepository);
+				ReflectionTestUtils.setField(ct, "paymentTypesRepository", paymentTypesRepository);
+				restCollDetailsMockMvc = MockMvcBuilders.standaloneSetup(collDetailsResource)
+						.setCustomArgumentResolvers(pageableArgumentResolver)
+						.setMessageConverters(jacksonMessageConverter).build();
 
-        // Get the billRunMaster
-        restBillRunMasterMockMvc.perform(delete("/api/billRunMasters/{id}", billRunMaster.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+				for (int i = 0; i < manual_payments.get(bfd.getCan()).length
+						&& manual_payments.get(bfd.getCan())[i] > 0.0f; i++) {
+					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), manual_payments.get(bfd.getCan())[i],
+							ZonedDateTime.now());
+				}
+				*/
 
-        // Validate the database is empty
-        List<BillRunMaster> billRunMasters = billRunMasterRepository.findAll();
-        assertThat(billRunMasters).hasSize(databaseSizeBeforeDelete - 1);
-    }
+				OnlinePaymentCallbackResourceIntTest op = new OnlinePaymentCallbackResourceIntTest();
+				OnlinePaymentCallbackResource onlinePaymentCallbackResource = new OnlinePaymentCallbackResource();
+				ReflectionTestUtils.setField(onlinePaymentCallbackResource, "onlinePaymentCallbackRepository", onlinePaymentCallbackRepository);
+				ReflectionTestUtils.setField(onlinePaymentCallbackResource, "onlinePaymentService", onlinePaymentService);
+				ReflectionTestUtils.setField(op, "onlinePaymentCallbackRepository", onlinePaymentCallbackRepository);
+				
+				restOnlinePaymentCallbackMockMvc = MockMvcBuilders.standaloneSetup(onlinePaymentCallbackResource)
+						.setCustomArgumentResolvers(pageableArgumentResolver)
+						.setMessageConverters(jacksonMessageConverter).build();
+				
+				for (int i = 0; paymentCallbackXMLs.get(bfd.getCan()) != null && i < paymentCallbackXMLs.get(bfd.getCan()).length
+						&& !paymentCallbackXMLs.get(bfd.getCan())[i].isEmpty(); i++) {
+					op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
+				}
+
+			}
+
+			BillRunMaster brm = billRunMasterRepository.findOne(id);
+			brm.setStatus("commit");
+
+			result = restBillRunMasterMockMvc
+					.perform(put("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
+							.content(TestUtil.convertObjectToJsonBytes(brm)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+			
+			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"),content.getString("status"),"COMMITTED");
+			
+			custDetailsCustomRepository.loadTestData("/scripts/run2.sql");
+
+			result = restBillRunMasterMockMvc
+					.perform(post("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
+							.content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			id = content.getLong("id");
+
+			brdList = billRunDetailsRepository.findByBillRunId(id);
+
+			for (BillRunDetails brd : brdList) {
+				BillFullDetails bfd = brd.getBillFullDetails();
+				Assert.assertEquals("Run2: Units do not match for CAN:" + bfd.getCan(), expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
+						0.1f);
+				Assert.assertEquals("Run2: Water Cess does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
+						1.0f);
+				Assert.assertEquals("Run2: Meter Service Charge does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[2].floatValue(),
+						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
