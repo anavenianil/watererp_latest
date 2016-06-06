@@ -102,10 +102,17 @@ public class OnlinePaymentCallbackResourceIntTest {
 
 
     public void createPayment(MockMvc restOnlinePaymentCallbackMockMvc, String xml) throws Exception {
+    	try
+    	{
         restOnlinePaymentCallbackMockMvc.perform(post("/api/unifiedPGResponse")
                 .contentType(TestUtil.APPLICATION_XML)
                 .content(xml))
                 .andExpect(status().isOk());
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    	}
     }
     
     

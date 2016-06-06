@@ -15,6 +15,7 @@ import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
 import com.callippus.water.erp.repository.PaymentTypesRepository;
 import com.callippus.water.erp.service.BillingService;
+import com.callippus.water.erp.service.OnlinePaymentService;
 
 import org.jfree.util.Log;
 import org.json.JSONObject;
@@ -138,6 +139,9 @@ public class BillRunMasterResourceIntTest {
 	@Inject
 	private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
+    @Inject
+    private OnlinePaymentService onlinePaymentService;
+	
 	private MockMvc restBillRunMasterMockMvc;
 
 	private BillRunMaster billRunMaster;
@@ -242,9 +246,14 @@ public class BillRunMasterResourceIntTest {
 				OnlinePaymentCallbackResourceIntTest op = new OnlinePaymentCallbackResourceIntTest();
 				OnlinePaymentCallbackResource onlinePaymentCallbackResource = new OnlinePaymentCallbackResource();
 				ReflectionTestUtils.setField(onlinePaymentCallbackResource, "onlinePaymentCallbackRepository", onlinePaymentCallbackRepository);
+				ReflectionTestUtils.setField(onlinePaymentCallbackResource, "onlinePaymentService", onlinePaymentService);
 				ReflectionTestUtils.setField(op, "onlinePaymentCallbackRepository", onlinePaymentCallbackRepository);
 				
-				for (int i = 0; i < paymentCallbackXMLs.get(bfd.getCan()).length
+				restOnlinePaymentCallbackMockMvc = MockMvcBuilders.standaloneSetup(onlinePaymentCallbackResource)
+						.setCustomArgumentResolvers(pageableArgumentResolver)
+						.setMessageConverters(jacksonMessageConverter).build();
+				
+				for (int i = 0; paymentCallbackXMLs.get(bfd.getCan()) != null && i < paymentCallbackXMLs.get(bfd.getCan()).length
 						&& !paymentCallbackXMLs.get(bfd.getCan())[i].isEmpty(); i++) {
 					op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
 				}
