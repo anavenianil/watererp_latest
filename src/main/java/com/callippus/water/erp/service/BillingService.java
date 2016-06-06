@@ -731,7 +731,7 @@ public class BillingService {
 					}
 				}
 				
-				long billDays = ChronoUnit.DAYS.between(customer.getMeterFixDate(), dTo);
+				long billDays = ChronoUnit.DAYS.between(dFrom, dTo);
 
 				if (billDays <= 0) {
 					throw new Exception("Invalid From:" + dFrom.format(DateTimeFormatter.ofPattern("yyyyMM"))
