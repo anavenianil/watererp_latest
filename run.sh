@@ -5,6 +5,7 @@
 
 ##### Integration Testing #######
 #sudo SPRING_PROFILES_ACTIVE=fast /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Dmaven.test.failure.ignore=true test
+sudo SPRING_PROFILES_ACTIVE=fast /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Dmaven.test.failure.ignore=true  -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then

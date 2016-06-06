@@ -5,14 +5,17 @@ import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.BillRunDetails;
 import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.OnlinePaymentCallback;
 import com.callippus.water.erp.repository.BillRunDetailsRepository;
 import com.callippus.water.erp.repository.BillRunMasterRepository;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
 import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.OnlinePaymentCallbackRepository;
 import com.callippus.water.erp.repository.PaymentTypesRepository;
 import com.callippus.water.erp.service.BillingService;
+import com.callippus.water.erp.service.OnlinePaymentService;
 
 import org.jfree.util.Log;
 import org.json.JSONObject;
@@ -22,6 +25,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
@@ -62,6 +67,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class BillRunMasterResourceIntTest {
 
+	 private final Logger log = LoggerFactory.getLogger(BillRunMasterResourceIntTest.class);
+	
 	private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 			.withZone(ZoneId.of("Z"));
 
@@ -99,14 +106,6 @@ public class BillRunMasterResourceIntTest {
 					{ "04060004", new Float[] { 0.0f } }, { "05050002", new Float[] { 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
-	// Online Payments
-	static final Map<String, Float[]> online_payments = Arrays
-			.stream(new Object[][] { { "02020005", new Float[] { 0.0f } }, { "08090001", new Float[] { 0.0f } },
-					{ "04060001", new Float[] { 0.0f } }, { "05050001", new Float[] { 1610.0f } },
-					{ "04060002", new Float[] { 0.0f } }, { "04060003", new Float[] { 16200.0f } },
-					{ "04060004", new Float[] { 22970.0f } }, { "05050002", new Float[] { 28820.0f } } })
-			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
-
 	// Expected Units, Water Cess, Rent, Lock charges after Run 2
 	static final Map<String, Float[]> expectedCharges2 = Arrays
 			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f, 0.0f, 0.0f } },
@@ -118,6 +117,17 @@ public class BillRunMasterResourceIntTest {
 					{ "04060004", new Float[] { 20.0f, 15880.5f, 6930.0f, 0.0f } },
 					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
+	
+			static final Map<String, String[]> paymentCallbackXMLs = Arrays
+			.stream(new Object[][] { { "04060001", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>100</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>3864.79</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "05050001", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>200</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>1610.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "04060003", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>300</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>16200.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "04060004", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>400</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>22970.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } },
+					{ "05050002", new String[] { "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?> <OrderResponse>    <Currency>TSh</Currency>    <MerchantCode>Test001</MerchantCode>    <MerchantRefNumber>500</MerchantRefNumber>    <PaymentMode>TIGOPESADIR</PaymentMode>    <ServiceCode>TESTS001</ServiceCode>    <Message>PAID</Message>    <ResponseCode>100</ResponseCode>    <TotalAmountPaid>28820.0</TotalAmountPaid>    <ValidationNumber>7523158367</ValidationNumber>    <UserDefinedFields>        <invoice>            <UserDefinedField>12</UserDefinedField>        </invoice>    </UserDefinedFields></OrderResponse>" } } })
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (String[]) kv[1]));
+
+	
+	
 	@Inject
 	private BillRunMasterRepository billRunMasterRepository;
 
@@ -133,6 +143,9 @@ public class BillRunMasterResourceIntTest {
 	@Inject
 	private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
+    @Inject
+    private OnlinePaymentService onlinePaymentService;
+	
 	private MockMvc restBillRunMasterMockMvc;
 
 	private BillRunMaster billRunMaster;
@@ -150,9 +163,16 @@ public class BillRunMasterResourceIntTest {
 	private CustDetailsCustomRepository custDetailsCustomRepository;
 
 	@Inject
+    private OnlinePaymentCallbackRepository onlinePaymentCallbackRepository;
+    
+	@Inject
 	private PaymentTypesRepository paymentTypesRepository;
 
 	private MockMvc restCollDetailsMockMvc;
+	
+
+    private MockMvc restOnlinePaymentCallbackMockMvc;
+
 
 	private CollDetails collDetails;
 
@@ -179,13 +199,19 @@ public class BillRunMasterResourceIntTest {
 
 	@Test
 	@Transactional
+	@Rollback(false)
 	public void createBillRunMaster() throws Exception {
 
 		// Create the BillRunMaster
 
+		log.debug("###################################################################################");
+		log.debug("Starting run.");
 		billRunMaster.setArea(null);
 
 		try {
+			log.debug("###################################################################################");
+			log.debug("Loading data for run1.");
+			log.debug("###################################################################################");
 			custDetailsCustomRepository.loadTestData("/scripts/initData.sql");
 			custDetailsCustomRepository.loadTestData("/scripts/run1.sql");
 
@@ -215,6 +241,9 @@ public class BillRunMasterResourceIntTest {
 				ReflectionTestUtils.setField(collDetailsResource, "custDetailsRepository", custDetailsRepository);
 				ReflectionTestUtils.setField(ct, "collectionTypeMasterRepository", collectionTypeMasterRepository);
 				ReflectionTestUtils.setField(ct, "paymentTypesRepository", paymentTypesRepository);
+				log.debug("###################################################################################");
+				log.debug("Loading Payments");
+				log.debug("###################################################################################");
 				restCollDetailsMockMvc = MockMvcBuilders.standaloneSetup(collDetailsResource)
 						.setCustomArgumentResolvers(pageableArgumentResolver)
 						.setMessageConverters(jacksonMessageConverter).build();
@@ -225,8 +254,29 @@ public class BillRunMasterResourceIntTest {
 							ZonedDateTime.now());
 				}
 
+				log.debug("###################################################################################");
+				log.debug("Loading Online Payments");
+				log.debug("###################################################################################");
+				
+				OnlinePaymentCallbackResourceIntTest op = new OnlinePaymentCallbackResourceIntTest();
+				OnlinePaymentCallbackResource onlinePaymentCallbackResource = new OnlinePaymentCallbackResource();
+				ReflectionTestUtils.setField(onlinePaymentCallbackResource, "onlinePaymentCallbackRepository", onlinePaymentCallbackRepository);
+				ReflectionTestUtils.setField(onlinePaymentCallbackResource, "onlinePaymentService", onlinePaymentService);
+				ReflectionTestUtils.setField(op, "onlinePaymentCallbackRepository", onlinePaymentCallbackRepository);
+				
+				restOnlinePaymentCallbackMockMvc = MockMvcBuilders.standaloneSetup(onlinePaymentCallbackResource)
+						.setCustomArgumentResolvers(pageableArgumentResolver)
+						.setMessageConverters(jacksonMessageConverter).build();
+				
+				for (int i = 0; paymentCallbackXMLs.get(bfd.getCan()) != null && i < paymentCallbackXMLs.get(bfd.getCan()).length
+						&& !paymentCallbackXMLs.get(bfd.getCan())[i].isEmpty(); i++) {
+					op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
+				}
 			}
 
+			log.debug("###################################################################################");
+			log.debug("Committing Bill Run");
+			log.debug("###################################################################################");
 			BillRunMaster brm = billRunMasterRepository.findOne(id);
 			brm.setStatus("commit");
 
@@ -239,6 +289,9 @@ public class BillRunMasterResourceIntTest {
 			
 			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"),content.getString("status"),"COMMITTED");
 			
+			log.debug("###################################################################################");
+			log.debug("Loading Run2.sql");
+			log.debug("###################################################################################");
 			custDetailsCustomRepository.loadTestData("/scripts/run2.sql");
 
 			result = restBillRunMasterMockMvc
@@ -252,8 +305,8 @@ public class BillRunMasterResourceIntTest {
 
 			brdList = billRunDetailsRepository.findByBillRunId(id);
 
-			for (BillRunDetails brd : brdList) {
-				BillFullDetails bfd = brd.getBillFullDetails();
+			for (BillRunDetails brd1 : brdList) {
+				BillFullDetails bfd = brd1.getBillFullDetails();
 				Assert.assertEquals("Run2: Units do not match for CAN:" + bfd.getCan(), expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
 						0.1f);
 				Assert.assertEquals("Run2: Water Cess does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
@@ -261,6 +314,10 @@ public class BillRunMasterResourceIntTest {
 				Assert.assertEquals("Run2: Meter Service Charge does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[2].floatValue(),
 						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
 			}
+			
+			log.debug("###################################################################################");
+			log.debug("Finished Run.");
+			log.debug("###################################################################################");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
