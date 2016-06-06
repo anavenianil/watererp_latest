@@ -117,7 +117,7 @@
          (editForm.instrNo.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_instrNo">Instrument
 									No</label>
-								<input type="text" class="form-control" name="instrNo"
+								<input type="number" class="form-control" name="instrNo"
 									id="field_instrNo" ng-model="collDetails.instrNo"
 									ng-required="instrEnabled" ng-disabled="!instrEnabled"
 									ng-pattern="/^[0-9]*$/" />
@@ -127,6 +127,9 @@
 									<p class="help-block"
 										ng-show="editForm.instrNo.$error.required">Instrument No
 										is required.</p>
+										<p class="help-block"
+										ng-show="editForm.instrNo.$error.number">Please
+								Enter Instrument Number!</p>
 								</div>
 							</div>
 						</div>
