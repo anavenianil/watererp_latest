@@ -102,14 +102,14 @@ public class BillRunMasterResourceIntTest {
 
 	// Expected Units, Water Cess, Rent, Lock charges after Run 2
 	static final Map<String, Float[]> expectedCharges2 = Arrays
-			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f, 0.0f, 0.0f } },
+			.stream(new Object[][] { { "02020005", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
 					{ "08090001", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
-					{ "04060001", new Float[] { 4.0f, 3202.76f, 4630.0f, 0.0f } },
-					{ "05050001", new Float[] { 4.0f, 3246.32f, 2330.0f, 0.0f } },
-					{ "04060002", new Float[] { 19.0f, 15213.1f, 4630.0f, 0.0f } },
-					{ "04060003", new Float[] { 17.0f, 13796.8f, 2330.0f, 0.0f } },
-					{ "04060004", new Float[] { 20.0f, 15880.5f, 6930.0f, 0.0f } },
-					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } } })
+					{ "04060001", new Float[] { 4.0f, 3280.0f, 2330.0f, 0.0f } },
+					{ "05050001", new Float[] { 4.0f, 3280.0f, 2330.0f, 0.0f } },
+					{ "04060002", new Float[] { 19.0f, 15580.0f, 2330.0f, 0.0f } },
+					{ "04060003", new Float[] { 17.0f, 13940.0f, 2330.0f, 0.0f } },
+					{ "04060004", new Float[] { 20.0f, 16400.0f, 2330.0f, 0.0f } },
+					{ "05050002", new Float[] { 30.0f, 24600.0f, 2330.0f, 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 	
 			static final Map<String, String[]> paymentCallbackXMLs = Arrays
