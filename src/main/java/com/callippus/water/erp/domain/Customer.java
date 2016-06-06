@@ -52,6 +52,15 @@ public class Customer implements Serializable {
     @Column(name = "can")
     private String can;
     
+    @Column(name = "previous_name")
+    private String previousName;
+    
+    @Column(name = "previous_mobile")
+    private Long previousMobile;
+    
+    @Column(name = "previous_email")
+    private String previousEmail;
+    
     @Column(name = "first_name")
     private String firstName;
     
@@ -76,8 +85,8 @@ public class Customer implements Serializable {
     @Column(name = "status")
     private Integer status;
     
-    @Column(name = "approved_date")
-    private LocalDate approvedDate;
+    @Column(name = "changed_date")
+    private LocalDate changedDate;
     
     @Column(name = "change_type")
     private String changeType;
@@ -194,6 +203,30 @@ public class Customer implements Serializable {
         this.can = can;
     }
 
+    public String getPreviousName() {
+        return previousName;
+    }
+    
+    public void setPreviousName(String previousName) {
+        this.previousName = previousName;
+    }
+
+    public Long getPreviousMobile() {
+        return previousMobile;
+    }
+    
+    public void setPreviousMobile(Long previousMobile) {
+        this.previousMobile = previousMobile;
+    }
+
+    public String getPreviousEmail() {
+        return previousEmail;
+    }
+    
+    public void setPreviousEmail(String previousEmail) {
+        this.previousEmail = previousEmail;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -258,12 +291,12 @@ public class Customer implements Serializable {
         this.status = status;
     }
 
-    public LocalDate getApprovedDate() {
-        return approvedDate;
+    public LocalDate getChangedDate() {
+        return changedDate;
     }
     
-    public void setApprovedDate(LocalDate approvedDate) {
-        this.approvedDate = approvedDate;
+    public void setChangedDate(LocalDate changedDate) {
+        this.changedDate = changedDate;
     }
 
     public String getChangeType() {
@@ -356,6 +389,9 @@ public class Customer implements Serializable {
             ", remarks='" + remarks + "'" +
             ", requestedDate='" + requestedDate + "'" +
             ", can='" + can + "'" +
+            ", previousName='" + previousName + "'" +
+            ", previousMobile='" + previousMobile + "'" +
+            ", previousEmail='" + previousEmail + "'" +
             ", firstName='" + firstName + "'" +
             ", middleName='" + middleName + "'" +
             ", lastName='" + lastName + "'" +
@@ -364,7 +400,7 @@ public class Customer implements Serializable {
             ", idNumber='" + idNumber + "'" +
             ", photo='" + photo + "'" +
             ", status='" + status + "'" +
-            ", approvedDate='" + approvedDate + "'" +
+            ", changedDate='" + changedDate + "'" +
             ", changeType='" + changeType + "'" +
             '}';
     }

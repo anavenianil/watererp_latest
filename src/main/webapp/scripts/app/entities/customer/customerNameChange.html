@@ -36,7 +36,7 @@
 						<legend>Customer Information</legend>
 						<div class="row">
 							<div class="col-sm-3">
-								<label class="control-label" for="field_can">Can</label> <input
+								<label class="control-label" for="field_can">CAN</label> <input
 									type="text" class="form-control" name="can" id="field_can"
 									ng-model="custDetails.can" required disabled />
 								<div ng-show="editForm.can.$invalid">
@@ -45,9 +45,9 @@
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<label class="control-label" for="field_consName">Consumer
-									Name</label> <input type="text" class="form-control" name="consName"
-									id="field_consName" ng-model="custDetails.consName" required
+								<label class="control-label" for="field_previousName">Consumer
+									Name</label> <input type="text" class="form-control" name="previousName"
+									id="field_consName" ng-model="customer.previousName" required
 									disabled />
 								<div ng-show="editForm.consName.$invalid">
 									<p class="help-block"
@@ -56,33 +56,35 @@
 								</div>
 							</div>
 							<div class="col-sm-3">
-								<label class="control-label" for="field_mobileNo">Mobile
-									No.</label> <input type="text" class="form-control" name="mobileNo"
-									id="field_mobileNo" ng-model="custDetails.mobileNo" disabled />
+								<label class="control-label" for="field_previousMobile">Mobile
+									No.</label> <input type="text" class="form-control" name="previousMobile"
+									id="field_previousMobile" ng-model="customer.previousMobile" disabled />
 							</div>
 							<div class="col-sm-3">
-								<label class="control-label" for="field_email">Email
-									Address</label> <input type="text" class="form-control" name="email"
-									id="field_email" ng-model="custDetails.email" disabled />
+								<label class="control-label" for="field_previousEmail">E-mail </label> <input
+									type="text" class="form-control" name="previousEmail" id="field_previousEmail"
+									ng-model="customer.previousEmail" disabled />
 							</div>
-
 						</div>
-
+						<br>
 						<div class="row">
 							<div class="col-sm-3">
-								<label class="control-label" for="field_houseNo">HouseNo</label>
-								<input type="text" class="form-control" name="houseNo"
-									id="field_houseNo" ng-model="custDetails.houseNo" disabled />
+								<label class="control-label" for="field_houseNo">House
+									No./Plot No.</label> <input type="text" class="form-control"
+									name="houseNo" id="field_houseNo"
+									ng-model="custDetails.houseNo" disabled />
 							</div>
 							<div class="col-sm-3">
-								<label class="control-label" for="field_secName">SecName</label>
-								<input type="text" class="form-control" name="secName"
-									id="field_secName" ng-model="custDetails.secName" disabled />
+								<label class="control-label" for="field_divisionMaster">DMA</label>
+								<input type="text" class="form-control" name="divisionMaster"
+									id="field_divisionMaster"
+									ng-model="custDetails.divisionMaster.divisionName" disabled />
 							</div>
 							<div class="col-sm-3">
-								<label class="control-label" for="field_secCode">SecCode</label>
-								<input type="text" class="form-control" name="secCode"
-									id="field_secCode" ng-model="custDetails.secCode" disabled />
+								<label class="control-label" for="field_streetMaster">Street</label>
+								<input type="text" class="form-control" name="streetMaster"
+									id="field_streetMaster"
+									ng-model="custDetails.streetMaster.streetName" disabled />
 							</div>
 							<div class="col-sm-3">
 								<label class="control-label" for="field_city">City</label> <input
@@ -102,21 +104,6 @@
 							</div>
 						</div>
 					</fieldset>
-					<!-- <div class="row">
-						<div class="col-sm-4 col-md-offset-4">
-							<select class="input-sm form-control" id="changeCase"
-								ng-model="workflowTxnDetails.requestMaster"
-								ng-options="requestMaster as requestMaster.requestType for requestMaster in requestMasters track by requestMaster.id">
-								<option value="" label="">Select Case</option>
-								<option value="0" label="Connection Category">Connection
-									Category</option>
-								<option value="1" label="Pipe Size">Pipe Size</option>
-								<option value="2" label="Change Name">Change Name</option>
-								<option value="3" label="Connection Termination">Connection
-									Termination</option>
-							</select>
-						</div>
-					</div> -->
 					<hr>
 					<br>
 					<fieldset>
@@ -125,7 +112,7 @@
 							<div class="col-sm-4">
 								<label class="control-label" for="field_firstName">First
 									Name</label> <input type="text" class="form-control" name="firstName"
-									id="field_firstName" ng-model="customer.firstName" />
+									id="field_firstName" ng-model="customer.firstName" required/>
 								<div ng-show="editForm.firstName.$invalid">
 									<p class="help-block"
 										ng-show="editForm.firstName.$error.required">This field is
@@ -140,7 +127,7 @@
 							<div class="col-sm-4">
 								<label class="control-label" for="field_lastName">Last
 									Name</label> <input type="text" class="form-control" name="lastName"
-									id="field_lastName" ng-model="customer.lastName" />
+									id="field_lastName" ng-model="customer.lastName" required/>
 								<div ng-show="editForm.lastName.$invalid">
 									<p class="help-block"
 										ng-show="editForm.lastName.$error.required">This field is
@@ -153,12 +140,12 @@
 							<div class="col-sm-4">
 								<label class="control-label" for="field_mobileNo">Mobile
 									No.</label> <input type="text" class="form-control" name="mobileNo"
-									id="field_mobileNo" ng-model="customer.mobileNo" />
+									id="field_mobileNo" ng-model="customer.mobileNo" required/>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_email">Email
 									Address</label> <input type="text" class="form-control" name="email"
-									id="field_email" ng-model="customer.email" />
+									id="field_email" ng-model="customer.email" required/>
 							</div>
 							<div class="col-sm-1">
 								<label>Photo</label>
@@ -194,14 +181,15 @@
 								<label for="field_newProofMaster">Id Proof(Any among
 									these)</label> <select class="form-control" id="field_newProofMaster"
 									name="newProofMaster" ng-model="customer.newProofMaster"
-									ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idproofmasters track by idProofMaster.id">
+									ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idproofmasters track by idProofMaster.id"
+									required>
 									<option value=""></option>
 								</select>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_idNumber">Id
 									Number</label> <input type="text" class="form-control" name="idNumber"
-									id="field_idNumber" ng-model="customer.idNumber" />
+									id="field_idNumber" ng-model="customer.idNumber" required/>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_requestedDate">Requested
@@ -211,7 +199,7 @@
 										<input id="field_requestedDate" type="text"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="customer.requestedDate" max-date="dtmax"
-											is-open="datePickerForRequestedDate.status.opened" /> <span
+											is-open="datePickerForRequestedDate.status.opened" required/> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForRequestedDateOpen($event)">
@@ -225,9 +213,10 @@
 					</fieldset>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					<button type="button" onclick="window.history.back()"
+						class="btn btn-info pull-left">
+						<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+							Back</span>
 					</button>
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">

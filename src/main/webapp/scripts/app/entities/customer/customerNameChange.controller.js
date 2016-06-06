@@ -3,7 +3,7 @@
 angular.module('watererpApp').controller('CustomerNameChangeController',
    /* ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustDetails', 'TariffCategoryMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ CustDetails, TariffCategoryMaster, $state, $http, CustDetailsSearchCAN,
-        		WorkflowTxnDetails, PipeSizeMaster, IdProofMaster, Customer, UploadUtil) {
+        		PipeSizeMaster, IdProofMaster, Customer, UploadUtil) {
 
         //$scope.custDetails = entity;
 		$scope.custDetails = {};
@@ -11,36 +11,6 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         $scope.idproofmasters = IdProofMaster.query();
         $scope.customer.changeType = "CHANGENAME";
         $scope.customer.can = "";
-        //$scope.requestMasters = [ {id : "10",requestType : "CHANGE NAME"}];
-        
-        /*$scope.workflowTxnDetails = [];
-        $scope.workflowTxnDetails[0] = {};
-        $scope.workflowTxnDetails[1] = {};
-        $scope.workflowTxnDetails[2] = {};
-        $scope.workflowTxnDetails[3] = {};
-        $scope.workflowTxnDetails[4] = {};
-        
-        
-        $scope.workflowTxnDetails[0].columnName="consName";
-	    $scope.workflowTxnDetails[0].requestMaster = {};
-	    $scope.workflowTxnDetails[0].requestMaster.id = 9;
-	       
-	    $scope.workflowTxnDetails[1].columnName="mobileNo";
-	    $scope.workflowTxnDetails[1].requestMaster = {};
-	    $scope.workflowTxnDetails[1].requestMaster.id = 9;
-	    
-	    $scope.workflowTxnDetails[2].columnName="email";
-	    $scope.workflowTxnDetails[2].requestMaster = {};
-	    $scope.workflowTxnDetails[2].requestMaster.id = 9;
-	    
-	    $scope.workflowTxnDetails[3].columnName="idProof";
-	    $scope.workflowTxnDetails[3].requestMaster = {};
-	    $scope.workflowTxnDetails[3].requestMaster.id = 9;
-	    
-	    $scope.workflowTxnDetails[4].columnName="idNumber";
-	    $scope.workflowTxnDetails[4].requestMaster = {};
-	    $scope.workflowTxnDetails[4].requestMaster.id = 9;*/
-                        
         
         
         $scope.dtmax = new Date();
@@ -110,11 +80,9 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
-                /*$scope.workflowTxnDetails[0].previousValue = $scope.custDetails.consName;
-                $scope.workflowTxnDetails[1].previousValue = $scope.custDetails.mobileNo;
-                $scope.workflowTxnDetails[2].previousValue = $scope.custDetails.email;
-                $scope.workflowTxnDetails[3].previousValue = $scope.custDetails.idProofMaster;
-                $scope.workflowTxnDetails[4].previousValue = $scope.custDetails.idNumber;*/
+                $scope.customer.previousName = $scope.custDetails.consName;
+                $scope.customer.previousMobile = $scope.custDetails.mobileNo;
+                $scope.customer.previousEmail = $scope.custDetails.email;
             });
         };
         

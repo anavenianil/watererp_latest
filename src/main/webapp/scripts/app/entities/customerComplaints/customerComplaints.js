@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/customerComplaintss',
                 data: {
-                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN'],
                     pageTitle: 'CustomerComplaintss'
                 },
                 views: {
@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/customerComplaints/{id}/{requestTypeId}',
                 data: {
-                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN'],
                     pageTitle: 'CustomerComplaints'
                 },
                 views: {
@@ -42,7 +42,7 @@ angular.module('watererpApp')
                 parent: 'customerComplaints',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN'],
                     pageTitle: 'CustomerComplaintss'
                 },
                 views: {
@@ -58,7 +58,7 @@ angular.module('watererpApp')
                 parent: 'customerComplaints',
                 url: '/edit/:id',
                 data: {
-                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN'],
                     pageTitle: 'CustomerComplaintss'
                 },
                 views: {
@@ -74,7 +74,7 @@ angular.module('watererpApp')
                 parent: 'customerComplaints',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({

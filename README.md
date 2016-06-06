@@ -4,6 +4,7 @@ This application was generated using JHipster, you can find documentation and he
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
+
 1. [Node.js][]: We use Node to run a development web server and build the project.
    Depending on your system, you can install Node either from source or as a pre-packaged bundle.
 
@@ -25,6 +26,12 @@ auto-refreshes when files change on your hard drive.
 Bower is used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
 specifying a newer version in `bower.json`. You can also run `bower update` and `bower install` to manage dependencies.
 Add the `-h` flag on any command to see how you can use it. For example, `bower update -h`.
+
+#JENKINS Integration
+Jenkins is running on http://webmail.callippus.co.uk:9090/. 
+It's configured with WebHook URL:  http://webmail.callippus.co.uk:9090/job/watererp/build?token=JHGFGKGFHGFDJH
+Right now this has been removed as proper Authentication in Jenkins is still not configured.
+Do not forget to install tools in Jenkins before configuring this.
 
 # Building for production
 
@@ -87,4 +94,10 @@ SELECT concat('drop table ',TABLE_NAME,'; delete from databasechangelog where fi
 FROM
 INFORMATION_SCHEMA.KEY_COLUMN_USAGE
 WHERE
-REFERENCED_TABLE_NAME = 'application_txn';
+REFERENCED_TABLE_NAME = 'application_txn'
+union
+select concat('drop table ',REFERENCED_TABLE_NAME,'; delete from databasechangelog where filename like ''%_',replace(REFERENCED_TABLE_NAME,'_',''),'.xml'';')
+FROM
+INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+REFERENCED_TABLE_NAME = 'application_txn'

@@ -1,14 +1,18 @@
-<div>
-	<h2>Application </h2>
+
+<div class="container">
+	<h2>Application</h2>
 	<jh-alert></jh-alert>
 	<br />
+	
+	<form  id="form"    role="form"  data-toggle="validator"> 
+	<!-- <form action="#" id="form-validation" methos="POST"> -->
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Connection</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
-				<div class="table-responsive">
+				<div class="table-responsive"> 
 					<div class="row">
 						<div class="col-md-3">
 							<select class="input-sm form-control" id="statusSearch"
@@ -28,11 +32,20 @@
 							</select>
 						</div>
 						<div class="col-md-3">
-							<input type="text" class="input-sm form-control"
-								id="applicationTxnId" placeholder="Search By Application No"
-								name="applicationTxnId" ng-model="applicationTxnId"
-								ng-change="onSearch()" />
-						</div>
+							<div class="form-group has-feedback">
+								<label class="control-label" for="applicationTxnId">Search 	</label>
+								
+								<input type="number" class="input-sm form-control" id="applicationTxnId"
+									placeholder="Search By Application No" name="applicationTxnId"
+									ng-model="applicationTxnId" required="required" min="1"
+									max="9999999"  ng-change="onSearch()"/> 
+									
+									 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+
+							</div>
+								</div>
+			
+						
 						<div class="col-sm-3">
 							<div class="form-group">
 								<div class='input-group date' id='field_requestedDate'>
@@ -59,7 +72,6 @@
 									Metered</option>
 							</select>
 						</div>
-
 
 					</div>
 					<!-- <div class="row">
@@ -174,17 +186,17 @@
 								<td>{{applicationTxn.fileNumber}}</td>
 								<td>{{applicationTxn.createdDate | date:'medium'}}</td>
 								<td>{{applicationTxn.updatedDate | date:'medium'}}</td> -->
-								
+
 								<!-- ui-sref="applicationTxn.detail({id:applicationTxn.id, requestTypeId:1})" -->
 								<td class="text-right">
 									<div class="btn-group flex-btn-group-container">
 										<button type="button"
-											ng-click="goToState(applicationTxn.id, applicationTxn.user)"			
+											ng-click="goToState(applicationTxn.id, applicationTxn.user)"
 											class="btn btn-info btn-sm">
-											<span class="glyphicon glyphicon-eye-open"></span> <span
-												class="hidden-xs hidden-sm"></span>
+											<span class="glyphicon glyphicon-eye-open"></span>&nbsp;View
+											<span class="hidden-xs hidden-sm"></span>
 										</button>
-										<button type="submit"
+										<!-- <button type="submit"
 											ui-sref="applicationTxn.edit({id:applicationTxn.id})"
 											class="btn btn-primary btn-sm">
 											<span class="glyphicon glyphicon-pencil"></span> <span
@@ -195,7 +207,7 @@
 											class="btn btn-danger btn-sm">
 											<span class="glyphicon glyphicon-remove-circle"></span> <span
 												class="hidden-xs hidden-sm"></span>
-										</button>
+										</button> -->
 									</div>
 								</td>
 							</tr>
@@ -205,4 +217,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+	</form>
+	</div>
+	
+	

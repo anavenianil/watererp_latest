@@ -78,11 +78,41 @@ public class CollDetailsResource {
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
 		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
-		
+		System.out.println(customer);
 		customer.setArrears(customer.getArrears() - collDetails.getReceiptAmt());
+		
+		custDetailsRepository.saveAndFlush(customer);
 
 		return ResponseEntity
 				.created(new URI("/api/collDetailss/" + result.getId()))
+				.headers(
+						HeaderUtil.createEntityCreationAlert("collDetails",
+								result.getId().toString())).body(result);
+	}
+	
+	/**
+	 * POST /revDetailss -> Create a new revDetails.
+	 */
+	@RequestMapping(value = "/revDetailss", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional
+	public ResponseEntity<CollDetails> createRevDetails(
+			@RequestBody CollDetails collDetails) throws URISyntaxException {
+		log.debug("REST request to save CollDetails : {}", collDetails);
+		if (collDetails.getId() != null) {
+			return ResponseEntity
+					.badRequest()
+					.headers(
+							HeaderUtil
+									.createFailureAlert("collDetails",
+											"idexists",
+											"A new collDetails cannot already have an ID"))
+					.body(null);
+		}
+		CollDetails result = collDetailsRepository.save(collDetails);
+		
+		return ResponseEntity
+				.created(new URI("/api/revDetailss/" + result.getId()))
 				.headers(
 						HeaderUtil.createEntityCreationAlert("collDetails",
 								result.getId().toString())).body(result);

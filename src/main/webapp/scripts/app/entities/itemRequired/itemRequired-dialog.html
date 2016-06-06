@@ -3,7 +3,8 @@
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h4 class="panel-title pull-left">Issue Items for the application No.: {{applicationTxnId}}</h4>
+			<h4 class="panel-title pull-left">Issue Items for the
+				application No.: {{applicationTxnId}}</h4>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -30,7 +31,8 @@
 								<label for="field_uom">Uom</label> <select class="form-control"
 									id="field_uom" name="uom"
 									ng-model="proceedings.itemRequireds[x].uom"
-									ng-options="uom as uom.value for uom in uoms track by uom.id" disabled>
+									ng-options="uom as uom.value for uom in uoms track by uom.id"
+									disabled>
 									<option value=""></option>
 								</select>
 							</div>
@@ -38,7 +40,7 @@
 								<label class="control-label" for="field_quantity">Quantity</label>
 								<input type="number" class="form-control" name="quantity"
 									id="field_quantity"
-									ng-model="proceedings.itemRequireds[x].quantity" disabled/>
+									ng-model="proceedings.itemRequireds[x].quantity" disabled />
 							</div>
 							<div class="col-sm-3">
 								<label class="control-label" for="field_provided">Provided</label>
@@ -50,77 +52,29 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div ng-repeat="itemRequired in itemRequireds track by $index">
+					<br>
+					<fieldset>
+						<legend></legend>
 						<div class="row">
-							<div class="col-sm-3">
-								<label for="id">ID</label> <input type="text"
-									class="form-control" id="id_{{$index}}" name="id"
-									ng-model="itemRequired.id" 
-									ng-hide="true" readonly />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_ratePerShs">RatePerShs</label>
-								<input type="number" class="form-control" name="ratePerShs"
-									id="field_ratePerShs_{{$index}}" ng-model="itemRequired.ratePerShs" 
-									ng-hide="true"/>
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_amount">Amount</label> <input
-									type="number" class="form-control" name="amount"
-									id="field_amount_{{$index}}" ng-model="itemRequired.amount" 
-									ng-hide="true"/>
-							</div>
-							<div class="col-sm-3">
-								<label for="field_applicationTxn">applicationTxn</label> <select
-									class="form-control" id="field_applicationTxn_{{$index}}"
-									name="applicationTxn" ng-model="itemRequired.applicationTxn"
-									ng-hide="true"
-									ng-options="applicationTxn as applicationTxn.id for applicationTxn in applicationtxns track by applicationTxn.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-3">
-								<label for="field_feasibilityStudy">feasibilityStudy</label> <select
-									class="form-control" id="field_feasibilityStudy_{{$index}}"
-									name="feasibilityStudy"
-									ng-model="itemRequired.feasibilityStudy"
-									ng-hide="true"
-									ng-options="feasibilityStudy as feasibilityStudy.id for feasibilityStudy in feasibilitystudys track by feasibilityStudy.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-3">
-								<label for="field_proceedings">proceedings</label> <select
-									class="form-control" id="field_proceedings_{{$index}}" name="proceedings"
-									ng-model="itemRequired.proceedings"
-									ng-hide="true"
-									ng-options="proceedings as proceedings.id for proceedings in proceedingss track by proceedings.id">
-									<option value=""></option>
-								</select>
+							<div class="col-sm-12">
+								<label class="control-label" for="field_remarks">Remarks</label>
+								<textarea rows="2" cols="30" class="form-control" name="remarks"
+									id="field_remarks"
+									ng-model="proceedings.applicationTxn.remarks" required></textarea>
 							</div>
 						</div>
-					</div> -->
-					<br>
-						<fieldset>
-							<legend></legend>
-							<div class="row">
-								<div class="col-sm-12">
-									<label class="control-label" for="field_remarks">Remarks</label>
-									<textarea rows="2" cols="30" class="form-control"
-										name="remarks" id="field_remarks"
-										ng-model="proceedings.applicationTxn.remarks"></textarea>
-								</div>
-							</div>
-						</fieldset>
+					</fieldset>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					<button type="button" onclick="window.history.back()"
+						class="btn btn-info pull-left">
+						<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
+							Back</span>
 					</button>
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Items Issued</span>
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Items
+							Issued</span>
 					</button>
 				</div>
 			</div>

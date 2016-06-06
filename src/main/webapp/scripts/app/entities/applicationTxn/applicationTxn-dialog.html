@@ -37,15 +37,17 @@
 										id="field_tariffCategoryMaster" name="tariffCategoryMaster"
 										ng-model="applicationTxn.tariffCategoryMaster"
 										ng-change="disableOrg(applicationTxn.tariffCategoryMaster.id)"
-										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
+										required>
 										<option value=""></option>
 									</select>
 								</div>
 								<div class="col-sm-6">
 									<label class="control-label" for="field_waterConnectionUse">Water
-										Connection Use</label> <input type="text" class="form-control"
-										name="waterConnectionUse" id="field_waterConnectionUse"
-										ng-model="applicationTxn.waterConnectionUse" />
+										Connection Use</label> <input type="text"
+										class="form-control text-uppercase" name="waterConnectionUse"
+										id="field_waterConnectionUse"
+										ng-model="applicationTxn.waterConnectionUse" required />
 								</div>
 							</div>
 						</fieldset>
@@ -55,18 +57,21 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label class="control-label" for="field_firstName">First
-										Name</label> <input type="text" class="form-control" name="firstName"
-										id="field_firstName" ng-model="applicationTxn.firstName" />
+										Name</label> <input type="text" class="form-control text-uppercase"
+										name="firstName" id="field_firstName"
+										ng-model="applicationTxn.firstName" required />
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_middleName">Middle
-										Name</label> <input type="text" class="form-control" name="middleName"
-										id="field_middleName" ng-model="applicationTxn.middleName" />
+										Name</label> <input type="text" class="form-control text-uppercase"
+										name="middleName" id="field_middleName"
+										ng-model="applicationTxn.middleName" />
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_lastName">Last
-										Name</label> <input type="text" class="form-control" name="lastName"
-										id="field_lastName" ng-model="applicationTxn.lastName" />
+										Name</label> <input type="text" class="form-control text-uppercase"
+										name="lastName" id="field_lastName"
+										ng-model="applicationTxn.lastName" required />
 								</div>
 								<div class="col-sm-1">
 									<label>Photo</label>
@@ -106,14 +111,14 @@
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_organizationName">Organization
-										Name</label> <input type="text" class="form-control"
+										Name</label> <input type="text" class="form-control text-uppercase"
 										name="organizationName" id="field_organizationName"
 										ng-model="applicationTxn.organizationName"
 										ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===1" />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_designation">Designation</label>
-									<input type="text" class="form-control" name="designation"
+									<input type="text" class="form-control text-uppercase" name="designation"
 										ng-disabled="applicationTxn.tariffCategoryMaster.id===1"
 										id="field_designation" ng-model="applicationTxn.designation" />
 								</div>
@@ -125,18 +130,20 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<label class="control-label" for="field_mobileNo">Mobile
-										Number</label> <input type="number" class="form-control" name="mobileNo"
-										id="field_mobileNo" ng-model="applicationTxn.mobileNo" />
+										Number</label> <input type="number" class="form-control"
+										name="mobileNo" id="field_mobileNo"
+										ng-model="applicationTxn.mobileNo" required />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_officeNo">Office
-										Number</label> <input type="number" class="form-control" name="officeNo"
-										id="field_officeNo" ng-model="applicationTxn.officeNo" />
+										Number</label> <input type="number" class="form-control"
+										name="officeNo" id="field_officeNo"
+										ng-model="applicationTxn.officeNo" />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_email">Email</label> <input
 										type="text" class="form-control" name="email" id="field_email"
-										ng-model="applicationTxn.email" />
+										ng-model="applicationTxn.email" required />
 								</div>
 							</div>
 						</fieldset>
@@ -146,22 +153,22 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label class="control-label" for="field_street">Street</label>
-									<input type="text" class="form-control" name="street"
-										id="field_street" ng-model="applicationTxn.street" />
+									<input type="text" class="form-control text-uppercase" name="street"
+										id="field_street" ng-model="applicationTxn.street" required />
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_plotNo">Plot
-										No.</label> <input type="text" class="form-control" name="plotNo"
-										id="field_plotNo" ng-model="applicationTxn.plotNo" />
+										No.</label> <input type="text" class="form-control text-uppercase" name="plotNo"
+										id="field_plotNo" ng-model="applicationTxn.plotNo" required />
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_blockNo">Block
-										No.</label> <input type="text" class="form-control" name="blockNo"
-										id="field_blockNo" ng-model="applicationTxn.blockNo" />
+										No.</label> <input type="text" class="form-control text-uppercase" name="blockNo"
+										id="field_blockNo" ng-model="applicationTxn.blockNo" required />
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_tanescoMeter">TANESCO
-										Meter/LUKU No.</label> <input type="text" class="form-control"
+										Meter/LUKU No.</label> <input type="text" class="form-control text-uppercase"
 										name="tanescoMeter" id="field_tanescoMeter"
 										ng-model="applicationTxn.tanescoMeter" />
 								</div>
@@ -171,48 +178,13 @@
 								<div class="col-sm-12">
 									<label class="control-label" for="field_dma">Address
 										Detail</label>
-									<textarea rows="2" cols="30" class="form-control" name="dma"
+									<textarea rows="2" cols="30" class="form-control text-uppercase" name="dma"
 										id="field_dma" style="resize: none"
-										ng-model="applicationTxn.dma"></textarea>
+										ng-model="applicationTxn.dma" required></textarea>
 								</div>
 							</div>
 						</fieldset>
-						<br>
-						<fieldset ng-hide="true">
-							<legend>Billing Address</legend>
-							<div class="row">
-								<div class="col-sm-4">
-									<label class="control-label" for="field_bStreet">Street</label>
-									<input type="text" class="form-control" name="bStreet"
-										id="field_bStreet" ng-model="applicationTxn.bStreet" />
-								</div>
-								<div class="col-sm-4">
-									<label class="control-label" for="field_ward">Ward</label> <input
-										type="text" class="form-control" name="ward" id="field_ward"
-										ng-model="applicationTxn.ward" />
-								</div>
-								<div class="col-sm-4">
-									<label class="control-label" for="field_dma">DMA</label> <input
-										type="text" class="form-control" name="dma" id="field_dma"
-										ng-model="applicationTxn.dma" />
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-sm-4">
-									<label class="control-label" for="field_bPlotNo">Plot
-										No.</label> <input type="text" class="form-control" name="bPlotNo"
-										id="field_bPlotNo" ng-model="applicationTxn.bPlotNo" />
-								</div>
-								<div class="col-sm-4">
-									<label class="control-label" for="field_regiterMobile">Registered
-										Mobile</label> <input type="number" class="form-control"
-										name="regiterMobile" id="field_regiterMobile"
-										ng-model="applicationTxn.regiterMobile" />
-								</div>
-							</div>
-						</fieldset>
-						<br>
+						<br> <br>
 						<fieldset>
 							<legend>Documents to be Attached </legend>
 							<div class="row">
@@ -225,38 +197,9 @@
 										<option value=""></option>
 									</select>
 								</div>
-								<!-- <div class="col-sm-6">
-									<label>Any among these</label>
-									<div class="radio">
-										<label class="radio-inline"> <input type="radio"
-											name="attachedDocType" ng-value="1"
-											ng-change="getDocType(applicationTxn.attachedDocType1)"
-											ng-model="applicationTxn.attachedDocType1">Driving
-											License
-										</label> <label class="radio-inline"> <input type="radio"
-											name="attachedDocType" ng-value="2"
-											ng-change="getDocType(applicationTxn.attachedDocType2)"
-											ng-model="applicationTxn.attachedDocType2">Voter's Id
-										</label> <label class="radio-inline"> <input type="radio"
-											name="attachedDocType" ng-value="3"
-											ng-change="getDocType(applicationTxn.attachedDocType3)"
-											ng-model="applicationTxn.attachedDocType3">Passport
-										</label> <label class="radio-inline"> <input type="radio"
-											name="attachedDocType" ng-value="4"
-											ng-change="getDocType(applicationTxn.attachedDocType4)"
-											ng-model="applicationTxn.attachedDocType4">Other Id
-										</label>
-									</div>
-								</div> -->
-								<!-- <div class="col-sm-3">
-								<label class="control-label" for="field_attachedDocType">Selected
-									document</label> <input type="text" class="form-control"
-									name="attachedDocType" id="field_attachedDocType"
-									ng-model="applicationTxn.attachedDocType" />
-							</div> -->
 								<div class="col-sm-3">
 									<label class="control-label" for="field_idNumber">Number
-										of ID</label> <input type="text" class="form-control" name="idNumber"
+										of ID</label> <input type="text" class="form-control text-uppercase" name="idNumber"
 										id="field_idNumber" ng-model="applicationTxn.idNumber" />
 								</div>
 							</div>
@@ -276,96 +219,12 @@
 								</div>
 							</div>
 						</fieldset>
-						<!-- hidden fields -->
-						<fieldset ng-hide="true">
-							<legend>Extra</legend>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_can">Can</label> <input
-									type="text" class="form-control" name="can" id="field_can"
-									ng-model="applicationTxn.can" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_photo">Photo</label> <input
-									type="text" class="form-control" name="photo" id="field_photo"
-									ng-model="applicationTxn.photo" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_status">Status</label> <input
-									type="number" class="form-control" name="status"
-									id="field_status" ng-model="applicationTxn.status" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_meterReading">Meter Reading</label>
-								<input type="number" class="form-control" name="meterReading"
-									id="field_meterReading" ng-model="applicationTxn.meterReading" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_connectionDate">Connection Date</label>
-								<input id="field_connectionDate" type="text"
-									class="form-control" uib-datepicker-popup="{{dateformat}}"
-									ng-model="applicationTxn.connectionDate"
-									is-open="datePickerForConnectionDate.status.opened" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="datePickerForConnectionDateOpen($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_remarks">Remarks</label>
-								<input type="text" class="form-control" name="remarks"
-									id="field_remarks" ng-model="applicationTxn.remarks" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_meterNo">Meter Number</label>
-								<input type="text" class="form-control" name="meterNo"
-									id="field_meterNo" ng-model="applicationTxn.meterNo" />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_approvedDate">Approved Date</label>
-								<input id="field_approvedDate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="applicationTxn.approvedDate"
-									is-open="datePickerForApprovedDate.status.opened" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="datePickerForApprovedDateOpen($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
-							</div>
-							<div class="col-sm-4">
-								<label for="field_meterDetails">Meter Details</label> <select
-									class="form-control" id="field_meterDetails"
-									name="meterDetails" ng-model="applicationTxn.meterDetails"
-									ng-options="meterDetails as meterDetails.id for meterDetails in meterdetailss track by meterDetails.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-4">
-								<label for="field_user">User</label> <select
-									class="form-control" id="field_user" name="user"
-									ng-model="applicationTxn.user"
-									ng-options="user as user.id for user in users track by user.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-4">
-								<label for="field_requestAt">Request At</label> <select
-									class="form-control" id="field_requestAt" name="requestAt"
-									ng-model="applicationTxn.requestAt"
-									ng-options="user as user.id for user in users track by user.id">
-									<option value=""></option>
-								</select>
-							</div>
-						</fieldset>
 					</div>
 					<div class="modal-footer">
-						 <button type="button" class="btn btn-default" data-dismiss="modal"
+						<button type="button" class="btn btn-default" data-dismiss="modal"
 							ng-click="clear()">
 							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-						</button> 
+						</button>
 						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 							class="btn btn-primary">
 							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Submit</span>

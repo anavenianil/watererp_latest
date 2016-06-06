@@ -70,7 +70,8 @@
 									<input id="field_checkOrDdDate" type="text"
 										class="form-control" uib-datepicker-popup="{{dateformat}}"
 										ng-model="receipt.checkOrDdDate"
-										is-open="datePickerForCheckOrDdDate.status.opened" ng-disabled="receipt.paymentTypes.id===1"/> <span
+										is-open="datePickerForCheckOrDdDate.status.opened"
+										ng-disabled="receipt.paymentTypes.id===1" /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											ng-click="datePickerForCheckOrDdDateOpen($event)"
@@ -86,20 +87,20 @@
 						<div class="col-sm-4">
 							<label class="control-label" for="field_checkOrDdNo">Check/DD
 								No.</label> <input type="text" class="form-control" name="checkOrDdNo"
-								id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo" 
-								ng-disabled="receipt.paymentTypes.id===1"/>
+								id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo"
+								ng-disabled="receipt.paymentTypes.id===1" />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_bankName">Bank
 								Name</label> <input type="text" class="form-control" name="bankName"
-								id="field_bankName" ng-model="receipt.bankName" 
-								ng-disabled="receipt.paymentTypes.id===1"/>
+								id="field_bankName" ng-model="receipt.bankName"
+								ng-disabled="receipt.paymentTypes.id===1" />
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_branchName">Branch
 								Name</label> <input type="text" class="form-control" name="branchName"
 								id="field_branchName" ng-model="receipt.branchName"
-								ng-disabled="receipt.paymentTypes.id===1"/>
+								ng-disabled="receipt.paymentTypes.id===1" />
 						</div>
 					</div>
 					<br>
@@ -109,15 +110,16 @@
 							<div class="col-sm-12">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="receipt.applicationTxn.remarks"></textarea>
+									id="field_remarks" ng-model="receipt.applicationTxn.remarks" required></textarea>
 							</div>
 						</div>
 					</fieldset>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						ng-click="clear()">
-						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					<button type="button" onclick="window.history.back()"
+						class="btn btn-info pull-left">
+						<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
+							Back</span>
 					</button>
 					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">

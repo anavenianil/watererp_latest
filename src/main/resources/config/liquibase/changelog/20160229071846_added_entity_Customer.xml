@@ -41,6 +41,12 @@
             
             <column name="can" type="varchar(255)"/>
             
+            <column name="previous_name" type="varchar(255)"/>
+            
+            <column name="previous_mobile" type="bigint"/>
+            
+            <column name="previous_email" type="varchar(255)"/>
+            
             <column name="first_name" type="varchar(255)"/>
             
             <column name="middle_name" type="varchar(255)"/>
@@ -57,7 +63,7 @@
             
             <column name="status" type="integer"/>
             
-            <column name="approved_date" type="date"/>
+            <column name="changed_date" type="date"/>
             
             <column name="change_type" type="varchar(255)"/>
             

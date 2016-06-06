@@ -9,13 +9,20 @@
         },
         {
             "relationshipId": 2,
-            "relationshipName": "meterDetails",
+            "relationshipName": "prevMeterNo",
             "otherEntityName": "meterDetails",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
             "relationshipId": 3,
+            "relationshipName": "newMeterNo",
+            "otherEntityName": "meterDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
             "relationshipName": "user",
             "otherEntityName": "user",
             "relationshipType": "many-to-one",
@@ -35,33 +42,28 @@
         },
         {
             "fieldId": 3,
-            "fieldName": "existingMeterNumber",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "existingMeterReading",
+            "fieldName": "prevMeterReading",
             "fieldType": "Float"
         },
         {
-            "fieldId": 5,
-            "fieldName": "newMeterNumber",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 6,
+            "fieldId": 4,
             "fieldName": "newMeterReading",
             "fieldType": "Float"
         },
         {
-            "fieldId": 7,
+            "fieldId": 5,
             "fieldName": "remarks",
             "fieldType": "String"
         },
         {
-            "fieldId": 8,
+            "fieldId": 6,
             "fieldName": "approvedDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "status",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20160419095001",

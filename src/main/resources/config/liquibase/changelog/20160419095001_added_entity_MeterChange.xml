@@ -25,11 +25,7 @@
             
             <column name="reason_for_change" type="varchar(255)"/>
             
-            <column name="existing_meter_number" type="varchar(255)"/>
-            
-            <column name="existing_meter_reading" type="${floatType}"/>
-            
-            <column name="new_meter_number" type="varchar(255)"/>
+            <column name="prev_meter_reading" type="${floatType}"/>
             
             <column name="new_meter_reading" type="${floatType}"/>
             
@@ -37,8 +33,11 @@
             
             <column name="approved_date" type="date"/>
             
+            <column name="status" type="integer"/>
+            
             <column name="cust_details_id" type="bigint"/>
-            <column name="meter_details_id" type="bigint"/>
+            <column name="prev_meter_no_id" type="bigint"/>
+            <column name="new_meter_no_id" type="bigint"/>
             <column name="user_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
@@ -49,9 +48,15 @@
                                  referencedColumnNames="id"
                                  referencedTableName="cust_details"/>
 
-        <addForeignKeyConstraint baseColumnNames="meter_details_id"
+        <addForeignKeyConstraint baseColumnNames="prev_meter_no_id"
                                  baseTableName="meter_change"
-                                 constraintName="fk_meterchange_meterdetails_id"
+                                 constraintName="fk_meterchange_prevmeterno_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_details"/>
+
+        <addForeignKeyConstraint baseColumnNames="new_meter_no_id"
+                                 baseTableName="meter_change"
+                                 constraintName="fk_meterchange_newmeterno_id"
                                  referencedColumnNames="id"
                                  referencedTableName="meter_details"/>
 

@@ -45,6 +45,11 @@
             "fieldId": 6,
             "fieldName": "receiptDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "can",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160401064028",

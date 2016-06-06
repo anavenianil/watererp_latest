@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.FeasibilityStudy;
-import com.callippus.water.erp.domain.ItemRequired;
-import com.callippus.water.erp.domain.Proceedings;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -61,6 +60,7 @@ public class FeasibilityStudyResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<FeasibilityStudy> createFeasibilityStudy(@RequestBody FeasibilityStudy feasibilityStudy) throws URISyntaxException {
         log.debug("REST request to save FeasibilityStudy : {}", feasibilityStudy);
         if (feasibilityStudy.getId() != null) {
@@ -79,6 +79,7 @@ public class FeasibilityStudyResource {
         
         applicationTxnRepository.save(applicationTxn);
         try{
+        	workflowService.setApprovedDate(ZonedDateTime.now());
         	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
         }
         catch(Exception e){

@@ -3,6 +3,7 @@ package com.callippus.water.erp.web.rest;
 import com.callippus.water.erp.Application;
 import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.repository.BillRunMasterRepository;
+import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,8 +49,8 @@ public class BillRunMasterResourceIntTest {
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
 
 
-    private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
-    private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.now();
+    private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now();
     private static final String DEFAULT_DATE_STR = dateTimeFormatter.format(DEFAULT_DATE);
     private static final String DEFAULT_AREA = "AAAAA";
     private static final String UPDATED_AREA = "BBBBB";
@@ -64,6 +65,9 @@ public class BillRunMasterResourceIntTest {
 
     @Inject
     private BillRunMasterRepository billRunMasterRepository;
+
+    @Inject
+    private CustDetailsCustomRepository custDetailsCustomRepository;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -95,6 +99,23 @@ public class BillRunMasterResourceIntTest {
         billRunMaster.setStatus(DEFAULT_STATUS);
     }
 
+
+    @Test
+    @Transactional
+    public void createBillRun() throws Exception {
+        int databaseSizeBeforeCreate = billRunMasterRepository.findAll().size();
+
+        // Create the BillRunMaster
+
+        billRunMaster.setArea(null);
+        
+        restBillRunMasterMockMvc.perform(post("/api/billRunMasters")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
+                .andExpect(status().isCreated());
+
+    }
+    
     @Test
     @Transactional
     public void createBillRunMaster() throws Exception {
@@ -102,6 +123,16 @@ public class BillRunMasterResourceIntTest {
 
         // Create the BillRunMaster
 
+        billRunMaster.setArea(null);
+
+        try
+        {
+        	custDetailsCustomRepository.loadTestData("/initData.sql");
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        }
         restBillRunMasterMockMvc.perform(post("/api/billRunMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(billRunMaster)))

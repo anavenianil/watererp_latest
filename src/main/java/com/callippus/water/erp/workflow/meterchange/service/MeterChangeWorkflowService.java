@@ -169,7 +169,7 @@ public class MeterChangeWorkflowService extends RequestProcessService {
 			workflowService.setHistoryID(l.get(i).getId().toString());
 			workflowService.setDomain_object_id(l.get(i).getDomainObject()
 					.toString());
-			workflowService.setRequestType(CPSConstants.REQUISITION);
+			workflowService.setRequestType(CPSConstants.METERCHANGE);
 			workflowService.getHistoryID();
 			workflowService.setStageID(l.get(i).getRequestStage().toString());
 			workflowService.setStatus(Integer.parseInt(l.get(i)
@@ -195,7 +195,8 @@ public class MeterChangeWorkflowService extends RequestProcessService {
 		workflowService.getUserDetails();
 
 		message = super.declinedRequest(workflowService.getHistoryID(),
-				workflowService.getIpAddress(), workflowService.getRemarks());
+				workflowService.getIpAddress(), workflowService.getRemarks(), workflowService.getApprovedDate()
+				);
 	}
 
 	@SuppressWarnings("unchecked")

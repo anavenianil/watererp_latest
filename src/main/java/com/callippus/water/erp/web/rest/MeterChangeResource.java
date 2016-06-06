@@ -2,10 +2,12 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
+import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.MeterDetails;
+import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.MeterChangeRepository;
@@ -76,47 +80,36 @@ public class MeterChangeResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<MeterChange> createMeterChange(@RequestBody MeterChange meterChange) throws URISyntaxException {
         log.debug("REST request to save MeterChange : {}", meterChange);
         if (meterChange.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("meterChange", "idexists", "A new meterChange cannot already have an ID")).body(null);
         }
-        MeterChange result = meterChangeRepository.save(meterChange);
-        
-        if(meterChange.getMeterDetails()!=null){
-        	MeterDetails oldMeter = meterChange.getMeterDetails();
-        	oldMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
-        	meterDetailsRepository.save(oldMeter);
-        	MeterDetails meterDetails = meterChange.getMeterDetails();
-        	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
-        	meterDetailsRepository.save(meterDetails);
+        if(meterChange.getStatus()==null){
+        	meterChange.setStatus(0);
         }
-        
-        CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(meterChange.getCustDetails(), null);
-        cmpOld.setToDate(meterChange.getApprovedDate());
-        custMeterMappingRepository.save(cmpOld);
-        
-        CustMeterMapping custMeterMapping = new CustMeterMapping();
-        custMeterMapping.setMeterDetails(meterChange.getMeterDetails());
-        custMeterMapping.setCustDetails(meterChange.getCustDetails());
-        custMeterMapping.setFromDate(meterChange.getApprovedDate());
-        custMeterMappingRepository.save(custMeterMapping);
-        CustDetails custDetails = meterChange.getCustDetails();
-        custDetails.setMeterNo(meterChange.getMeterDetails().getMeterId());
-        custDetails.setPrevReading(meterChange.getNewMeterReading());
-        custDetailsRepository.save(custDetails);
-        
-        
-        //this is for workflow for new request
-        try{
-        	workflowService.getUserDetails();
-        	meterChangeWorkflowService.createTxn(meterChange);
+        MeterDetails prevMeter = meterChange.getPrevMeterNo();
+        MeterChange result = null;
+        //check meter status
+        if("Processing".equals(prevMeter.getMeterStatus().getStatus())){
+        	//show messages request already processing
+        	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("meterChange", "idexists", "Request for meter change already submitted with this CAN")).body(null);
         }
-        catch(Exception e){
-        	System.out.println(e);
+        else{
+        	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
+        	meterDetailsRepository.save(prevMeter);
+            result = meterChangeRepository.save(meterChange);
+          //this is for workflow for new request
+            try{
+            	workflowService.getUserDetails();
+            	workflowService.setAssignedDate(ZonedDateTime.now().toString());
+            	meterChangeWorkflowService.createTxn(meterChange);
+            }
+            catch(Exception e){
+            	e.printStackTrace();
+            }
         }
-        
         return ResponseEntity.created(new URI("/api/meterChanges/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("meterChange", result.getId().toString()))
             .body(result);
@@ -129,12 +122,29 @@ public class MeterChangeResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<MeterChange> updateMeterChange(@RequestBody MeterChange meterChange) throws URISyntaxException {
         log.debug("REST request to update MeterChange : {}", meterChange);
         if (meterChange.getId() == null) {
             return createMeterChange(meterChange);
         }
+        
         MeterChange result = meterChangeRepository.save(meterChange);
+        
+        if("Processing".equals(meterChange.getPrevMeterNo().getMeterStatus().getStatus())){
+/*        	MeterDetails prevMeter = meterChange.getPrevMeterNo();
+        	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
+        	meterDetailsRepository.save(prevMeter);
+*/        	
+        	MeterDetails meterDetails = meterChange.getNewMeterNo();
+        	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
+        	meterDetailsRepository.save(meterDetails);
+        }
+        try{
+        	approveMeterChange(meterChange);
+        }catch(Exception e){
+        	e.printStackTrace();
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("meterChange", meterChange.getId().toString()))
             .body(result);
@@ -189,10 +199,11 @@ public class MeterChangeResource {
     /**
      * this will approve the Meter Change Request
      */
-	@RequestMapping(value = "/meterChanges/aprove", 
+	/*@RequestMapping(value = "/meterChanges/meterChangeApprove", 
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
+	@Transactional
 	public ResponseEntity<Void> approveMeterChange(@RequestParam(value = "id", required = false) Long id,
 						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
 		workflowService.getUserDetails();
@@ -201,5 +212,92 @@ public class MeterChangeResource {
 	    workflowService.setRemarks(remarks);  
         meterChangeWorkflowService.approvedMeterChangeRequest(meterChange);
         return ResponseEntity.ok().build();
+	}*/
+    
+    @RequestMapping(value = "/meterChanges/meterChangeApprove", 
+    		method = RequestMethod.POST, 
+    		produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<MeterChange> approveMeterChange(
+			@RequestBody MeterChange meterChange) throws URISyntaxException {
+		log.debug("REST request to approve MeterChange : {}", meterChange);
+		
+		if(meterChange.getStatus()==1){
+			MeterDetails prevMeter = meterChange.getPrevMeterNo();
+        	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));//Status would be according to meter(burnt or stuck)
+        	meterDetailsRepository.save(prevMeter);
+
+        	MeterDetails meterDetails = meterChange.getNewMeterNo();
+        	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+        	meterDetailsRepository.save(meterDetails);
+			
+			CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(meterChange.getCustDetails(), null);
+	        cmpOld.setToDate(meterChange.getApprovedDate());
+	        custMeterMappingRepository.save(cmpOld);
+	        
+	        CustMeterMapping custMeterMapping = new CustMeterMapping();
+	        custMeterMapping.setMeterDetails(meterChange.getNewMeterNo());
+	        custMeterMapping.setCustDetails(meterChange.getCustDetails());
+	        custMeterMapping.setFromDate(meterChange.getApprovedDate());
+	        custMeterMappingRepository.save(custMeterMapping);
+	        CustDetails custDetails = meterChange.getCustDetails();
+	        custDetails.setMeterNo(meterChange.getNewMeterNo().getMeterId());
+	        custDetails.setPrevReading(meterChange.getNewMeterReading());
+	        custDetailsRepository.save(custDetails);
+		}
+		try {
+			workflowService.setRemarks(meterChange.getRemarks());
+			workflowService.setApprovedDate(ZonedDateTime.now());
+			workflowService.getUserDetails();
+			meterChangeWorkflowService
+					.approvedMeterChangeRequest(meterChange);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(meterChange.getStatus() >= 0){
+        	meterChange.setStatus(meterChange.getStatus()+1);
+        }
+		meterChangeRepository.save(meterChange);
+
+		return ResponseEntity.created(new URI("/api/meterChanges/meterChangeApprove/"))
+				.headers(HeaderUtil.createEntityCreationAlert("meterChange", ""))
+				.body(null);
+	}
+    
+    
+    /**
+     * Decline the request
+     */
+    @RequestMapping(value = "/meterChanges/declineRequest",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    //@Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<MeterChange> declineRequests(
+			@RequestBody MeterChange meterChange)
+			throws Exception {
+		log.debug("REST request to declineRequest() for Meter Change  : {}", meterChange);
+		
+		MeterDetails prevMeter = meterChange.getPrevMeterNo();
+    	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));//Status would be according to meter(burnt or stuck)
+    	meterDetailsRepository.save(prevMeter);
+    	
+    	if(meterChange.getNewMeterNo() != null){
+    		MeterDetails meterDetails = meterChange.getNewMeterNo();
+        	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
+        	meterDetailsRepository.save(meterDetails);
+    	}
+    	meterChange.setStatus(3);
+    	meterChange.setNewMeterNo(null);
+    	meterChange.setNewMeterReading(null);
+    	meterChangeRepository.save(meterChange);
+		workflowService.setRemarks(meterChange.getRemarks());
+		workflowService.setApprovedDate(ZonedDateTime.now());
+		meterChangeWorkflowService.declineRequest(meterChange.getId());
+		return ResponseEntity.created(new URI("/api/meterChanges/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("meterChange", ""))
+				.body(null);
 	}
 }

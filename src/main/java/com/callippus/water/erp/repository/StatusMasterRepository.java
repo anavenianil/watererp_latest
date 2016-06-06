@@ -10,5 +10,5 @@ import java.util.List;
  * Spring Data JPA repository for the StatusMaster entity.
  */
 public interface StatusMasterRepository extends JpaRepository<StatusMaster,Long> {
-
+	StatusMaster findByStatus(String status);
 }

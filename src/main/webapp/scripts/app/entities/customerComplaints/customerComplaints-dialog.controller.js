@@ -58,10 +58,13 @@ angular
 											can : $scope.collDetails.can
 										},
 										function(result) {
-
 											$scope.custDetails = result;
 											$scope.customerComplaints.custDetails = {};
 											$scope.customerComplaints.custDetails.consName = $scope.custDetails.consName;
+											/*var arr1 = $scope.custDetails.secName.split(" ");
+											$scope.customerComplaints.custDetails.secName = arr1[0];
+											$scope.customerComplaints.custDetails.street = arr1[1];*/
+											//$scope.custDetails.divisionMaster.divisionName;
 											$scope.customerComplaints.can = $scope.custDetails.can;
 											$scope.customerComplaints.tariffCategory = $scope.custDetails.tariffCategoryMaster.tariffCategory;
 										});
@@ -95,17 +98,23 @@ angular
 					};
 
 					$scope.clear = function() {
-						//$uibModalInstance.dismiss('cancel');
 						$scope.customerComplaints = {
 							remarks : null,
 							relevantDoc : null,
 							complaintBy : null,
 							complaintBy : null,
 							can : null,
-							id : null
+							id : null,
+							
 						};
+						$scope.custDetails ={
+							divisionName : null,
+							streetName : null	
+						};
+						
 						$scope.customerComplaints.complaintDate = new Date();
 					};
+					
 					$scope.datePickerForComplaintDate = {};
 
 					$scope.datePickerForComplaintDate.status = {

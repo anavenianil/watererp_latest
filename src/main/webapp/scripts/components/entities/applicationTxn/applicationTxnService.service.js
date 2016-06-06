@@ -4,11 +4,12 @@ angular.module('watererpApp').factory(
 		'ApplicationTxnService',
 		function($http) {
 			return {
-				approveRequest : function(id, remarks) {
+				approveRequest : function(id, remarks, approvedDate) {
 					return $http.get('api/applicationTxns/approveRequest', {
 						params : {
 							id : id,
-							remarks : remarks
+							remarks : remarks,
+							approvedDate : approvedDate
 						}
 					}).then(function(response) {
 						return response.data;

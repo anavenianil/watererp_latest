@@ -47,13 +47,9 @@ public class MeterChangeResourceIntTest {
     private static final String UPDATED_CAN = "BBBBB";
     private static final String DEFAULT_REASON_FOR_CHANGE = "AAAAA";
     private static final String UPDATED_REASON_FOR_CHANGE = "BBBBB";
-    private static final String DEFAULT_EXISTING_METER_NUMBER = "AAAAA";
-    private static final String UPDATED_EXISTING_METER_NUMBER = "BBBBB";
 
-    private static final Float DEFAULT_EXISTING_METER_READING = 1F;
-    private static final Float UPDATED_EXISTING_METER_READING = 2F;
-    private static final String DEFAULT_NEW_METER_NUMBER = "AAAAA";
-    private static final String UPDATED_NEW_METER_NUMBER = "BBBBB";
+    private static final Float DEFAULT_PREV_METER_READING = 1F;
+    private static final Float UPDATED_PREV_METER_READING = 2F;
 
     private static final Float DEFAULT_NEW_METER_READING = 1F;
     private static final Float UPDATED_NEW_METER_READING = 2F;
@@ -62,6 +58,9 @@ public class MeterChangeResourceIntTest {
 
     private static final LocalDate DEFAULT_APPROVED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_APPROVED_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Integer DEFAULT_STATUS = 1;
+    private static final Integer UPDATED_STATUS = 2;
 
     @Inject
     private MeterChangeRepository meterChangeRepository;
@@ -91,12 +90,11 @@ public class MeterChangeResourceIntTest {
         meterChange = new MeterChange();
         meterChange.setCan(DEFAULT_CAN);
         meterChange.setReasonForChange(DEFAULT_REASON_FOR_CHANGE);
-        meterChange.setExistingMeterNumber(DEFAULT_EXISTING_METER_NUMBER);
-        meterChange.setExistingMeterReading(DEFAULT_EXISTING_METER_READING);
-        meterChange.setNewMeterNumber(DEFAULT_NEW_METER_NUMBER);
+        meterChange.setPrevMeterReading(DEFAULT_PREV_METER_READING);
         meterChange.setNewMeterReading(DEFAULT_NEW_METER_READING);
         meterChange.setRemarks(DEFAULT_REMARKS);
         meterChange.setApprovedDate(DEFAULT_APPROVED_DATE);
+        meterChange.setStatus(DEFAULT_STATUS);
     }
 
     @Test
@@ -117,12 +115,11 @@ public class MeterChangeResourceIntTest {
         MeterChange testMeterChange = meterChanges.get(meterChanges.size() - 1);
         assertThat(testMeterChange.getCan()).isEqualTo(DEFAULT_CAN);
         assertThat(testMeterChange.getReasonForChange()).isEqualTo(DEFAULT_REASON_FOR_CHANGE);
-        assertThat(testMeterChange.getExistingMeterNumber()).isEqualTo(DEFAULT_EXISTING_METER_NUMBER);
-        assertThat(testMeterChange.getExistingMeterReading()).isEqualTo(DEFAULT_EXISTING_METER_READING);
-        assertThat(testMeterChange.getNewMeterNumber()).isEqualTo(DEFAULT_NEW_METER_NUMBER);
+        assertThat(testMeterChange.getPrevMeterReading()).isEqualTo(DEFAULT_PREV_METER_READING);
         assertThat(testMeterChange.getNewMeterReading()).isEqualTo(DEFAULT_NEW_METER_READING);
         assertThat(testMeterChange.getRemarks()).isEqualTo(DEFAULT_REMARKS);
         assertThat(testMeterChange.getApprovedDate()).isEqualTo(DEFAULT_APPROVED_DATE);
+        assertThat(testMeterChange.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -138,12 +135,11 @@ public class MeterChangeResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(meterChange.getId().intValue())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
                 .andExpect(jsonPath("$.[*].reasonForChange").value(hasItem(DEFAULT_REASON_FOR_CHANGE.toString())))
-                .andExpect(jsonPath("$.[*].existingMeterNumber").value(hasItem(DEFAULT_EXISTING_METER_NUMBER.toString())))
-                .andExpect(jsonPath("$.[*].existingMeterReading").value(hasItem(DEFAULT_EXISTING_METER_READING.doubleValue())))
-                .andExpect(jsonPath("$.[*].newMeterNumber").value(hasItem(DEFAULT_NEW_METER_NUMBER.toString())))
+                .andExpect(jsonPath("$.[*].prevMeterReading").value(hasItem(DEFAULT_PREV_METER_READING.doubleValue())))
                 .andExpect(jsonPath("$.[*].newMeterReading").value(hasItem(DEFAULT_NEW_METER_READING.doubleValue())))
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
-                .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())));
+                .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
 
     @Test
@@ -159,12 +155,11 @@ public class MeterChangeResourceIntTest {
             .andExpect(jsonPath("$.id").value(meterChange.getId().intValue()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
             .andExpect(jsonPath("$.reasonForChange").value(DEFAULT_REASON_FOR_CHANGE.toString()))
-            .andExpect(jsonPath("$.existingMeterNumber").value(DEFAULT_EXISTING_METER_NUMBER.toString()))
-            .andExpect(jsonPath("$.existingMeterReading").value(DEFAULT_EXISTING_METER_READING.doubleValue()))
-            .andExpect(jsonPath("$.newMeterNumber").value(DEFAULT_NEW_METER_NUMBER.toString()))
+            .andExpect(jsonPath("$.prevMeterReading").value(DEFAULT_PREV_METER_READING.doubleValue()))
             .andExpect(jsonPath("$.newMeterReading").value(DEFAULT_NEW_METER_READING.doubleValue()))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
-            .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()));
+            .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
 
     @Test
@@ -186,12 +181,11 @@ public class MeterChangeResourceIntTest {
         // Update the meterChange
         meterChange.setCan(UPDATED_CAN);
         meterChange.setReasonForChange(UPDATED_REASON_FOR_CHANGE);
-        meterChange.setExistingMeterNumber(UPDATED_EXISTING_METER_NUMBER);
-        meterChange.setExistingMeterReading(UPDATED_EXISTING_METER_READING);
-        meterChange.setNewMeterNumber(UPDATED_NEW_METER_NUMBER);
+        meterChange.setPrevMeterReading(UPDATED_PREV_METER_READING);
         meterChange.setNewMeterReading(UPDATED_NEW_METER_READING);
         meterChange.setRemarks(UPDATED_REMARKS);
         meterChange.setApprovedDate(UPDATED_APPROVED_DATE);
+        meterChange.setStatus(UPDATED_STATUS);
 
         restMeterChangeMockMvc.perform(put("/api/meterChanges")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -204,12 +198,11 @@ public class MeterChangeResourceIntTest {
         MeterChange testMeterChange = meterChanges.get(meterChanges.size() - 1);
         assertThat(testMeterChange.getCan()).isEqualTo(UPDATED_CAN);
         assertThat(testMeterChange.getReasonForChange()).isEqualTo(UPDATED_REASON_FOR_CHANGE);
-        assertThat(testMeterChange.getExistingMeterNumber()).isEqualTo(UPDATED_EXISTING_METER_NUMBER);
-        assertThat(testMeterChange.getExistingMeterReading()).isEqualTo(UPDATED_EXISTING_METER_READING);
-        assertThat(testMeterChange.getNewMeterNumber()).isEqualTo(UPDATED_NEW_METER_NUMBER);
+        assertThat(testMeterChange.getPrevMeterReading()).isEqualTo(UPDATED_PREV_METER_READING);
         assertThat(testMeterChange.getNewMeterReading()).isEqualTo(UPDATED_NEW_METER_READING);
         assertThat(testMeterChange.getRemarks()).isEqualTo(UPDATED_REMARKS);
         assertThat(testMeterChange.getApprovedDate()).isEqualTo(UPDATED_APPROVED_DATE);
+        assertThat(testMeterChange.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

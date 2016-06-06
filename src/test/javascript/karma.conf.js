@@ -12,6 +12,27 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             // bower:js
+            'main/webapp/bower_components/jquery/dist/jquery.js',
+            'main/webapp/bower_components/angular/angular.js',
+            'main/webapp/bower_components/angular-aria/angular-aria.js',
+            'main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'main/webapp/bower_components/angular-cache-buster/angular-cache-buster.js',
+            'main/webapp/bower_components/angular-cookies/angular-cookies.js',
+            'main/webapp/bower_components/angular-filter/dist/angular-filter.min.js',
+            'main/webapp/bower_components/angular-local-storage/dist/angular-local-storage.js',
+            'main/webapp/bower_components/angular-loading-bar/build/loading-bar.js',
+            'main/webapp/bower_components/angular-resource/angular-resource.js',
+            'main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
+            'main/webapp/bower_components/angular-ui-router/release/angular-ui-router.js',
+            'main/webapp/bower_components/bootstrap/dist/js/bootstrap.js',
+            'main/webapp/bower_components/json3/lib/json3.js',
+            'main/webapp/bower_components/ng-file-upload/ng-file-upload.js',
+            'main/webapp/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+            'main/webapp/bower_components/bootstrap-validator/dist/validator.js',
+            'main/webapp/bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js',
+            'main/webapp/bower_components/moment/moment.js',
+            'main/webapp/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
+            'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',
             'main/webapp/scripts/app/**/*.js',
@@ -62,7 +83,7 @@ module.exports = function (config) {
         // - Safari (only Mac)
         // - PhantomJS
         // - IE (only Windows)
-        browsers: ['PhantomJS'],
+        browsers: ['Firefox'],
 
         // Continuous Integration mode
         // if true, it capture browsers, run tests and exit

@@ -342,6 +342,11 @@
             "fieldId": 63,
             "fieldName": "noMeterAmt",
             "fieldType": "Float"
+        },
+        {
+            "fieldId": 64,
+            "fieldName": "lockCharges",
+            "fieldType": "Float"
         }
     ],
     "changelogDate": "20160314104149",

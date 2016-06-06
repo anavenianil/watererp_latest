@@ -107,7 +107,6 @@ angular.module('watererpApp').controller('CustDetailsDialogController',
 				var res = response.data.map(function(item) {
 					return item;
 				});
-
 				return res;
 			});
 		}

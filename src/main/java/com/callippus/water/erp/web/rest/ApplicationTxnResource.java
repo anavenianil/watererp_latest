@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,8 +40,8 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
-import com.callippus.water.erp.domain.MeterStatus;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
@@ -119,7 +120,7 @@ public class ApplicationTxnResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<ApplicationTxn> createApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to save ApplicationTxn : {}", applicationTxn);
@@ -139,10 +140,11 @@ public class ApplicationTxnResource {
         //this is for workflow for new request
         try{
         	workflowService.getUserDetails();
+        	workflowService.setAssignedDate(ZonedDateTime.now().toString());
         	applicationTxnWorkflowService.createTxn(applicationTxn);
         }
         catch(Exception e){
-        	System.out.println(e);
+        	e.printStackTrace();
         }
         Long uid = Long.valueOf(workflowService.getRequestAt()) ;
         applicationTxn.setRequestAt(userRepository.findById(uid));
@@ -162,23 +164,27 @@ public class ApplicationTxnResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<ApplicationTxn> updateApplicationTxn(HttpServletRequest request,
     		@RequestBody ApplicationTxn applicationTxn) throws URISyntaxException, Exception {
         log.debug("REST request to update ApplicationTxn : {}", applicationTxn);
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
-        if(applicationTxn.getMeterDetails()!=null){
+        if(applicationTxn.getStatus()==6){
         	applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
         	MeterDetails meterDetails = applicationTxn.getMeterDetails();
-        		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+        		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
         		meterDetailsRepository.save(meterDetails);
         }
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         if(applicationTxn.getStatus()==7){
+        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
+    		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+    		meterDetailsRepository.save(meterDetails);
+    		
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
             if(applicationTxn.getMiddleName()!=null){
@@ -197,6 +203,8 @@ public class ApplicationTxnResource {
             custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
             
             custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+            custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
+            custDetails.setStatus(CustStatus.ACTIVE);
             
             CustDetails cd = custDetailsRepository.save(custDetails);
             
@@ -210,7 +218,8 @@ public class ApplicationTxnResource {
         }
         if(applicationTxn.getStatus() == 6|| applicationTxn.getStatus()==7){
         	 try{
-             	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+        		 workflowService.setApprovedDate(ZonedDateTime.now());
+        		 applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
              }
              catch(Exception e){
              	System.out.println(e);
@@ -282,12 +291,14 @@ public class ApplicationTxnResource {
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<ApplicationTxn> approveApplication(@RequestParam(value = "id", required = false) Long id,
-						@RequestParam(value = "remarks", required = false) String remarks)throws Exception{
+						@RequestParam(value = "remarks", required = false) String remarks,
+						@RequestParam(value = "approvedDate", required = false) String approvedDate)throws Exception{
 		workflowService.getUserDetails();
 		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
-	    workflowService.setRemarks(remarks);  
+	    workflowService.setRemarks(remarks);
+	    workflowService.setApprovedDate(ZonedDateTime.parse(approvedDate));
 	    Integer status = applicationTxn.getStatus();
 	    status +=1;
 	    applicationTxn.setStatus(status);
@@ -316,11 +327,14 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Void> declineRequests(
 			@RequestParam(value = "id", required = false) Long id, HttpServletResponse response)
 			throws Exception {
 		log.debug("REST request to get Requisition : {}", id);
-		
+		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
+		applicationTxn.setStatus(8);
+		applicationTxnRepository.save(applicationTxn);
 		applicationTxnWorkflowService.declineRequest(id);
 		return ResponseEntity.ok().build();
 	}
@@ -484,7 +498,7 @@ public class ApplicationTxnResource {
     }
 	
 	/**
-	 * Display Requisition report
+	 * Display Application report
 	 */
 	@RequestMapping(value = "/applicationTxns/report/{id}", method = RequestMethod.GET)
 	@ResponseBody

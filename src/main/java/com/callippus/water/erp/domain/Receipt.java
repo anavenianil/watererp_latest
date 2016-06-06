@@ -40,6 +40,9 @@ public class Receipt implements Serializable {
     @Column(name = "receipt_date")
     private LocalDate receiptDate;
     
+    @Column(name = "can")
+    private String can;
+    
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
     private ApplicationTxn applicationTxn;
@@ -104,6 +107,14 @@ public class Receipt implements Serializable {
         this.receiptDate = receiptDate;
     }
 
+    public String getCan() {
+        return can;
+    }
+    
+    public void setCan(String can) {
+        this.can = can;
+    }
+
     public ApplicationTxn getApplicationTxn() {
         return applicationTxn;
     }
@@ -150,6 +161,7 @@ public class Receipt implements Serializable {
             ", checkOrDdDate='" + checkOrDdDate + "'" +
             ", checkOrDdNo='" + checkOrDdNo + "'" +
             ", receiptDate='" + receiptDate + "'" +
+            ", can='" + can + "'" +
             '}';
     }
 }

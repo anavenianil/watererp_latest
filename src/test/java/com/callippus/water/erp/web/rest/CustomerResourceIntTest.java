@@ -67,6 +67,13 @@ public class CustomerResourceIntTest {
     private static final LocalDate UPDATED_REQUESTED_DATE = LocalDate.now(ZoneId.systemDefault());
     private static final String DEFAULT_CAN = "AAAAA";
     private static final String UPDATED_CAN = "BBBBB";
+    private static final String DEFAULT_PREVIOUS_NAME = "AAAAA";
+    private static final String UPDATED_PREVIOUS_NAME = "BBBBB";
+
+    private static final Long DEFAULT_PREVIOUS_MOBILE = 1L;
+    private static final Long UPDATED_PREVIOUS_MOBILE = 2L;
+    private static final String DEFAULT_PREVIOUS_EMAIL = "AAAAA";
+    private static final String UPDATED_PREVIOUS_EMAIL = "BBBBB";
     private static final String DEFAULT_FIRST_NAME = "AAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBB";
     private static final String DEFAULT_MIDDLE_NAME = "AAAAA";
@@ -86,8 +93,8 @@ public class CustomerResourceIntTest {
     private static final Integer DEFAULT_STATUS = 1;
     private static final Integer UPDATED_STATUS = 2;
 
-    private static final LocalDate DEFAULT_APPROVED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_APPROVED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_CHANGED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CHANGED_DATE = LocalDate.now(ZoneId.systemDefault());
     private static final String DEFAULT_CHANGE_TYPE = "AAAAA";
     private static final String UPDATED_CHANGE_TYPE = "BBBBB";
 
@@ -127,6 +134,9 @@ public class CustomerResourceIntTest {
         customer.setRemarks(DEFAULT_REMARKS);
         customer.setRequestedDate(DEFAULT_REQUESTED_DATE);
         customer.setCan(DEFAULT_CAN);
+        customer.setPreviousName(DEFAULT_PREVIOUS_NAME);
+        customer.setPreviousMobile(DEFAULT_PREVIOUS_MOBILE);
+        customer.setPreviousEmail(DEFAULT_PREVIOUS_EMAIL);
         customer.setFirstName(DEFAULT_FIRST_NAME);
         customer.setMiddleName(DEFAULT_MIDDLE_NAME);
         customer.setLastName(DEFAULT_LAST_NAME);
@@ -135,7 +145,7 @@ public class CustomerResourceIntTest {
         customer.setIdNumber(DEFAULT_ID_NUMBER);
         customer.setPhoto(DEFAULT_PHOTO);
         customer.setStatus(DEFAULT_STATUS);
-        customer.setApprovedDate(DEFAULT_APPROVED_DATE);
+        customer.setChangedDate(DEFAULT_CHANGED_DATE);
         customer.setChangeType(DEFAULT_CHANGE_TYPE);
     }
 
@@ -165,6 +175,9 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getRemarks()).isEqualTo(DEFAULT_REMARKS);
         assertThat(testCustomer.getRequestedDate()).isEqualTo(DEFAULT_REQUESTED_DATE);
         assertThat(testCustomer.getCan()).isEqualTo(DEFAULT_CAN);
+        assertThat(testCustomer.getPreviousName()).isEqualTo(DEFAULT_PREVIOUS_NAME);
+        assertThat(testCustomer.getPreviousMobile()).isEqualTo(DEFAULT_PREVIOUS_MOBILE);
+        assertThat(testCustomer.getPreviousEmail()).isEqualTo(DEFAULT_PREVIOUS_EMAIL);
         assertThat(testCustomer.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testCustomer.getMiddleName()).isEqualTo(DEFAULT_MIDDLE_NAME);
         assertThat(testCustomer.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
@@ -173,7 +186,7 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getIdNumber()).isEqualTo(DEFAULT_ID_NUMBER);
         assertThat(testCustomer.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testCustomer.getStatus()).isEqualTo(DEFAULT_STATUS);
-        assertThat(testCustomer.getApprovedDate()).isEqualTo(DEFAULT_APPROVED_DATE);
+        assertThat(testCustomer.getChangedDate()).isEqualTo(DEFAULT_CHANGED_DATE);
         assertThat(testCustomer.getChangeType()).isEqualTo(DEFAULT_CHANGE_TYPE);
     }
 
@@ -198,6 +211,9 @@ public class CustomerResourceIntTest {
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
                 .andExpect(jsonPath("$.[*].requestedDate").value(hasItem(DEFAULT_REQUESTED_DATE.toString())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
+                .andExpect(jsonPath("$.[*].previousName").value(hasItem(DEFAULT_PREVIOUS_NAME.toString())))
+                .andExpect(jsonPath("$.[*].previousMobile").value(hasItem(DEFAULT_PREVIOUS_MOBILE.intValue())))
+                .andExpect(jsonPath("$.[*].previousEmail").value(hasItem(DEFAULT_PREVIOUS_EMAIL.toString())))
                 .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
                 .andExpect(jsonPath("$.[*].middleName").value(hasItem(DEFAULT_MIDDLE_NAME.toString())))
                 .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
@@ -206,7 +222,7 @@ public class CustomerResourceIntTest {
                 .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-                .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())))
+                .andExpect(jsonPath("$.[*].changedDate").value(hasItem(DEFAULT_CHANGED_DATE.toString())))
                 .andExpect(jsonPath("$.[*].changeType").value(hasItem(DEFAULT_CHANGE_TYPE.toString())));
     }
 
@@ -231,6 +247,9 @@ public class CustomerResourceIntTest {
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
             .andExpect(jsonPath("$.requestedDate").value(DEFAULT_REQUESTED_DATE.toString()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
+            .andExpect(jsonPath("$.previousName").value(DEFAULT_PREVIOUS_NAME.toString()))
+            .andExpect(jsonPath("$.previousMobile").value(DEFAULT_PREVIOUS_MOBILE.intValue()))
+            .andExpect(jsonPath("$.previousEmail").value(DEFAULT_PREVIOUS_EMAIL.toString()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.middleName").value(DEFAULT_MIDDLE_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
@@ -239,7 +258,7 @@ public class CustomerResourceIntTest {
             .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
             .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()))
+            .andExpect(jsonPath("$.changedDate").value(DEFAULT_CHANGED_DATE.toString()))
             .andExpect(jsonPath("$.changeType").value(DEFAULT_CHANGE_TYPE.toString()));
     }
 
@@ -270,6 +289,9 @@ public class CustomerResourceIntTest {
         customer.setRemarks(UPDATED_REMARKS);
         customer.setRequestedDate(UPDATED_REQUESTED_DATE);
         customer.setCan(UPDATED_CAN);
+        customer.setPreviousName(UPDATED_PREVIOUS_NAME);
+        customer.setPreviousMobile(UPDATED_PREVIOUS_MOBILE);
+        customer.setPreviousEmail(UPDATED_PREVIOUS_EMAIL);
         customer.setFirstName(UPDATED_FIRST_NAME);
         customer.setMiddleName(UPDATED_MIDDLE_NAME);
         customer.setLastName(UPDATED_LAST_NAME);
@@ -278,7 +300,7 @@ public class CustomerResourceIntTest {
         customer.setIdNumber(UPDATED_ID_NUMBER);
         customer.setPhoto(UPDATED_PHOTO);
         customer.setStatus(UPDATED_STATUS);
-        customer.setApprovedDate(UPDATED_APPROVED_DATE);
+        customer.setChangedDate(UPDATED_CHANGED_DATE);
         customer.setChangeType(UPDATED_CHANGE_TYPE);
 
         restCustomerMockMvc.perform(put("/api/customers")
@@ -300,6 +322,9 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getRemarks()).isEqualTo(UPDATED_REMARKS);
         assertThat(testCustomer.getRequestedDate()).isEqualTo(UPDATED_REQUESTED_DATE);
         assertThat(testCustomer.getCan()).isEqualTo(UPDATED_CAN);
+        assertThat(testCustomer.getPreviousName()).isEqualTo(UPDATED_PREVIOUS_NAME);
+        assertThat(testCustomer.getPreviousMobile()).isEqualTo(UPDATED_PREVIOUS_MOBILE);
+        assertThat(testCustomer.getPreviousEmail()).isEqualTo(UPDATED_PREVIOUS_EMAIL);
         assertThat(testCustomer.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testCustomer.getMiddleName()).isEqualTo(UPDATED_MIDDLE_NAME);
         assertThat(testCustomer.getLastName()).isEqualTo(UPDATED_LAST_NAME);
@@ -308,7 +333,7 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getIdNumber()).isEqualTo(UPDATED_ID_NUMBER);
         assertThat(testCustomer.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testCustomer.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testCustomer.getApprovedDate()).isEqualTo(UPDATED_APPROVED_DATE);
+        assertThat(testCustomer.getChangedDate()).isEqualTo(UPDATED_CHANGED_DATE);
         assertThat(testCustomer.getChangeType()).isEqualTo(UPDATED_CHANGE_TYPE);
     }
 

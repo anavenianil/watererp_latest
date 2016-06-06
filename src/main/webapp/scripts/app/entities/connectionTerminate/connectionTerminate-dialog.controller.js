@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('watererpApp').controller('ConnectionTerminateDialogController',
-        function($scope, $stateParams, /*$uibModalInstance, entity,*/ ConnectionTerminate, MeterDetails, $http, CustDetailsSearchCAN) {
+        function($scope, $stateParams, /*$uibModalInstance, entity,*/ ConnectionTerminate, MeterDetails, $http, CustDetailsSearchCAN, 
+        		ParseLinks, GetMeterDetails, $state, StreetMaster, DivisionMaster) {
 
         $scope.connectionTerminate = {};
         $scope.custDetails = {};
-        $scope.meterdetailss = MeterDetails.query();
+        $scope.maxDt = new Date();
+        $scope.divisionmasters = DivisionMaster.query();
+        $scope.streetMasters = StreetMaster.query();
+        //$scope.meterdetailss = MeterDetails.query();
         $scope.load = function(id) {
             ConnectionTerminate.get({id : id}, function(result) {
                 $scope.connectionTerminate = result;
@@ -15,11 +19,31 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         if($stateParams.id != null){
         	$scope.load($stateParams.id);
         }
+        
+        /*$scope.loadAllAllottedMeter = function() {
+    		$scope.meterdetailss = [];
+            MeterDetails.query({page: $scope.page, size: 20, meterStatusId: 1}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.meterdetailss.push(result[i]);
+                }
+            });
+        };
+        $scope.loadAllAllottedMeter();*/
+        $scope.getMeterDetail = function(meterId){
+        	$scope.meterdetailss = [];
+        	GetMeterDetails.findByMeterId(meterId).then(function(result) {
+                $scope.meterdetailss.push(result);
+                $scope.connectionTerminate.meterDetails = result;
+            });
+    	}
+       
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:connectionTerminateUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('connectionTerminate');
         };
 
         var onSaveError = function (result) {
@@ -74,10 +98,23 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
 			});
 		}
         
+        
+        
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.connectionTerminate.can = $scope.custDetails.can; 
+                $scope.getMeterDetail($scope.custDetails.meterNo);
+                //$scope.custDetails.arrears = 10;
+                if($scope.custDetails.arrears > 0){
+                	$scope.isSaving = true;
+                	$scope.arrearsMessage = "Clear Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
+                }
+                else{
+                	$scope.arrearsMessage = "No Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
+                }
+                
+                //console.log($scope.divisionmasters);
             });
         };
         

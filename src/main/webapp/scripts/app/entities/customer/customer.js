@@ -282,5 +282,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('receiptForNameChange', {
+                parent: 'customer',
+                url: '/receiptForNameChange/:customerId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Receipt'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/customer/customerNameChangeReceipt-dialog.html',
+                        controller: 'NameChangeReceiptDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

@@ -41,52 +41,6 @@
 		</div>
 	</div>
 
-	<div ng-if="orgRole.orgRoleName === 'Commercial Manager'"
-		class="panel panel-primary">
-		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Bill Details</h3>
-		</div>
-		<div class="list-group">
-			<div class="list-group-item">
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-sm-4 col-md-offset-4">
-							<label for="field_paymentTypes">Bill Month</label> <select
-								class="form-control" id="field_collectionTypeMaster"
-								name="collectionTypeMaster" required="required"
-								ng-model="customerComplaints.billFullDetails"
-								ng-options="billFullDetails as billFullDetails.billDate for billFullDetails in billFullDetailss track by billFullDetails.id"
-								ng-change="getBillById(customerComplaints.billFullDetails.id)">
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label for="field_paymentTypes">Total Amount</label> <input
-								type="text" class="form-control" name="totalAmount"
-								id="field_totalAmount"
-								ng-model="customerComplaints.billFullDetails.totalAmount"
-								readonly />
-						</div>
-						<div class="col-sm-4">
-							<label for="field_paymentTypes">Net Payable Amount</label> <input
-								type="text" class="form-control" name="netPayableAmount"
-								id="field_netPayableAmount"
-								ng-model="customerComplaints.billFullDetails.netPayableAmount"
-								readonly />
-						</div>
-						<div class="col-sm-4">
-							<label for="field_paymentTypes">Adjustment Amount</label> <input
-								type="text" class="form-control" name="totalAmount"
-								id="field_totalAmount"
-								ng-model="customerComplaints.adjustmentAmt" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Complaint Details</h3>
@@ -100,24 +54,24 @@
 
 							</tr>
 							<tr>
-								<td><span>Can</span></td>
+								<td><span>CAN</span></td>
 								<td><span class="form-control-static">{{customerComplaints.can}}</span>
 								</td>
 							</tr>
 							<tr>
 								<td><span>Customer Name</span></td>
-								<td><span class="form-control-static">{{billFullDetailss[0].consName}}</span>
+								<td><span class="form-control-static">{{custDetails.consName}}</span>
 								</td>
 							</tr>
 							<tr>
 								<td><span>Category</span></td>
-								<td><span class="form-control-static">{{billFullDetailss[0].category}}</span>
+								<td><span class="form-control-static">{{custDetails.tariffCategoryMaster.tariffCategory}}</span>
 								</td>
 							</tr>
 							<tr>
 								<td><span>Complaint Type</span></td>
-								<td><a class="form-control-static"
-									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})">{{customerComplaints.complaintTypeMaster.complaintType}}</a>
+								<td><!-- <a class="form-control-static"
+									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})"> -->{{customerComplaints.complaintTypeMaster.complaintType}}<!-- </a> -->
 								</td>
 							</tr>
 							<tr>
@@ -127,7 +81,12 @@
 							</tr>
 							<tr>
 								<td><span>Relevant Document</span></td>
-								<td><span class="form-control-static">{{customerComplaints.relevantDoc}}</span>
+								<td>
+								<div ng-hide="customerComplaints.relevantDoc === ''">
+								<span class="form-control-static">
+								<a href="{{customerComplaints.relevantDoc}}">Download&nbsp;<span
+										class="glyphicon glyphicon-download"></span></a></span>
+								</div>
 								</td>
 							</tr>
 							<tr>
@@ -142,12 +101,105 @@
 							</tr>
 						</tbody>
 					</table>
+			<div ng-if="customerComplaints.complaintTypeMaster.complaintType === 'INCORRECT BILL'">
+			<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+    		<h3 class="panel-title pull-left">Previous Bill Details</h3>
+			</div>
+			</div>
+			<table class="table table-striped">
+			<thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span></th>
+                    <th jh-sort-by="can"><span>CAN</span></th>
+                    <th jh-sort-by="fromDt"><span>From Month</span></th>
+                    <th jh-sort-by="toDt"><span>To Month</span></th>
+                    <!-- <th jh-sort-by="status"><span>Status</span></th>
+                    <th jh-sort-by="remarks"><span>Remarks</span></th> -->
+                    <!-- <th jh-sort-by="billFullDetails.id"><span>Bill</span></th> -->
+                    <th jh-sort-by="billFullDetails.id"><span>PDF</span></th>
+                </tr>
+            </thead>
+					<tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="billRunDetails in billRunDetailss track by billRunDetails.id">
+                    <td><a ui-sref="billRunDetails.detail({id:billRunDetails.id})">{{billRunDetails.id}}</a></td>
+                    <td>{{billRunDetails.can}}</td>
+                    <td>{{billRunDetails.billFullDetails.fromMonth}}</td>
+                    <td>{{billRunDetails.billFullDetails.toMonth}}</td>
+                    <!-- <td>{{billRunDetails.status}}</td>
+                    <td>{{billRunDetails.remarks}}</td> -->
+                    <!-- <td>
+                         <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
+                    </td> -->
+                    <td>
+                        <a ng-class="{'glyphicon glyphicon-save-file': billRunDetails.billFullDetails.id!=null}" href="/api/billFullDetailss/report/{{billRunDetails.billFullDetails.id}}"></a>
+                    </td>
+                </tr>
+            </tbody>
+			</table>
+			</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 11 is Commercial Manager -->
+	<div ng-if="orgRole.id === 11 || orgRole.id === 12 || orgRole.id === 4 || orgRole.id === 16"
+		class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Adjustment Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<label for="field_paymentTypes">Bill Month</label> 
+							<select
+								class="form-control" id="field_collectionTypeMaster"
+								name="collectionTypeMaster" required="required"
+								ng-model="customerComplaints.billFullDetails"
+								ng-options="billFullDetails as billFullDetails.toMonth for billFullDetails in billFullDetailss track by billFullDetails.id"
+								ng-change="getBillById(customerComplaints.billFullDetails.id)"
+								ng-disabled="orgRole.id === 16">
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<!-- <div class="col-sm-4">
+							<label for="field_paymentTypes">Adjustment Bill Id</label> <input
+								type="text" class="form-control" name="totalAmount"
+								id="field_totalAmount"
+								ng-model="customerComplaints.adjustmentBillId"
+								readonly />
+						</div> -->
+						<!-- <div class="col-sm-4">
+							<label for="field_paymentTypes">Total Amount</label> <input
+								type="text" class="form-control" name="totalAmount"
+								id="field_totalAmount"
+								ng-model="customerComplaints.billFullDetails.totalAmount"
+								readonly />
+						</div> -->
+						<div class="col-sm-4 col-md-offset-2">
+							<label for="field_paymentTypes">Net Payable Amount</label> <input
+								type="text" class="form-control" name="netPayableAmount"
+								id="field_netPayableAmount"
+								ng-model="customerComplaints.billFullDetails.netPayableAmount"
+								readonly />
+						</div>
+						<div class="col-sm-4">
+							<label for="field_paymentTypes">Adjustment Amount</label> <input
+								type="text" class="form-control" name="totalAmount"
+								id="field_totalAmount"
+								ng-model="customerComplaints.adjustmentAmt" ng-disabled="orgRole.id === 16"/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="panel panel-primary">
+	<div class="panel panel-primary" ng-show="canDecline()">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Remarks</h3>
 		</div>
@@ -158,7 +210,7 @@
 						<div class="col-sm-4">
 							<label for="field_remarks">Remarks</label> <input type="text"
 								class="form-control" name="remarks" id="field_remarks"
-								ng-model="customerComplaints.remarks" />
+								ng-model="customerComplaints.remarks"/>
 						</div>
 					</div>
 				</div>
@@ -172,8 +224,22 @@
 		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
 			Back</span>
 	</button>
-	<button type="button" class="btn btn-success pull-right"
-		ng-click="approve(customerComplaints.id)" ng-disable="customerComplaints.status === 0 && orgRole.orgRoleName === 'ICT & Customer Care Officer'">
+	<!-- <button type="button" class="btn btn-success pull-right"
+		ng-click="approve(customerComplaints.id)" ng-if="orgRole.orgRoleName === 'Commercial Manager'" ng-disable="customerComplaints.status === 0 && orgRole.orgRoleName === 'ICT & Customer Care Officer'">
 		<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+	</button> -->
+	
+	<button type="button" class="btn btn-danger pull-right"
+			ng-show="canDecline()" ng-disabled="isSaving"
+			ng-click="declineRequest(customerComplaints.id)">
+			<span class="glyphicon glyphicon-remove-circle"></span>
+			&nbsp;Decline
+	</button>
+		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+	<button type="button" class="btn btn-success pull-right"
+			ng-show="canDecline()"
+			ng-click="approve(customerComplaints.id)">
+			<span class="glyphicon glyphicon-check"></span>
+			&nbsp;Approve
 	</button>
 </div>

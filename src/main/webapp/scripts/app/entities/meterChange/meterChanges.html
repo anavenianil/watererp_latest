@@ -1,52 +1,37 @@
 <div>
-	<h2>Meter Change</h2>
-	<div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="meterChange.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new Meter Change
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br>
+	<h2>Meter Change List</h2>
 	<jh-alert></jh-alert>
+	<br />
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Meter Change</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
-				<br />
 				<div class="table-responsive">
 					<table class="jh-table table table-striped">
 						<thead>
 							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
 								<th jh-sort-by="id"><span>ID</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="can"><span>CAN</span> <span
+								<th jh-sort-by="can"><span>Can</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="reasonForChange"><span>Reason For
-										Change</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="existingMeterNumber"><span>Existing
-										Meter Number</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="existingMeterReading"><span>Existing
-										Meter Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="newMeterNumber"><span>New Meter
-										Number</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="newMeterReading"><span>New Meter
-										Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="reasonForChange"><span>ReasonForChange</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="prevMeterReading"><span>PrevMeterReading</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="newMeterReading"><span>NewMeterReading</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="remarks"><span>Remarks</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="approvedDate"><span>Approved Date</span> <span
+								<th jh-sort-by="approvedDate"><span>ApprovedDate</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="custDetails.id"><span>Cust Details</span> <span
+								<th jh-sort-by="custDetails.id"><span>custDetails</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="meterDetails.id"><span>Meter Details</span>
-									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="prevMeterNo.id"><span>prevMeterNo</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="newMeterNo.id"><span>newMeterNo</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="user.id"><span>Approved By</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th></th>
@@ -59,28 +44,31 @@
 								<td><a ui-sref="meterChange.detail({id:meterChange.id})">{{meterChange.id}}</a></td>
 								<td>{{meterChange.can}}</td>
 								<td>{{meterChange.reasonForChange}}</td>
-								<td>{{meterChange.existingMeterNumber}}</td>
-								<td>{{meterChange.existingMeterReading}}</td>
-								<td>{{meterChange.newMeterNumber}}</td>
+								<td>{{meterChange.prevMeterReading}}</td>
 								<td>{{meterChange.newMeterReading}}</td>
 								<td>{{meterChange.remarks}}</td>
 								<td>{{meterChange.approvedDate | date:'mediumDate'}}</td>
 								<td><a
-									ui-sref="custDetails.detail({id:meterChange.custDetails.id})">{{meterChange.custDetails.can}}</a>
+									ui-sref="custDetails.detail({id:meterChange.custDetails.id})">{{meterChange.custDetails.id}}</a>
 								</td>
 								<td><a
-									ui-sref="meterDetails.detail({id:meterChange.meterDetails.id})">{{meterChange.meterDetails.meterId}}</a>
+									ui-sref="meterDetails.detail({id:meterChange.prevMeterNo.id})">{{meterChange.prevMeterNo.meterId}}</a>
 								</td>
-								<td>{{meterChange.user.login}}</td>
+								<td><a
+									ui-sref="meterDetails.detail({id:meterChange.newMeterNo.id})">{{meterChange.newMeterNo.meterId}}</a>
+								</td>
+								<td>
+									{{meterChange.user.firstName}}&nbsp;{{meterChange.user.lastName}}({{meterChange.user.login}})
+								</td>
 								<td class="text-right">
 									<div class="btn-group flex-btn-group-container">
 										<button type="submit"
-											ui-sref="meterChange.detail({id:meterChange.id})"
+											ui-sref="meterChange.detail({id:meterChange.id, requestTypeId:7})"
 											class="btn btn-info btn-sm">
-											<span class="glyphicon glyphicon-eye-open"></span> <span
+											<span class="glyphicon glyphicon-eye-open"></span>&nbsp;View<span
 												class="hidden-xs hidden-sm"></span>
 										</button>
-										<button type="submit"
+										<!-- <button type="submit"
 											ui-sref="meterChange.edit({id:meterChange.id})"
 											class="btn btn-primary btn-sm">
 											<span class="glyphicon glyphicon-pencil"></span> <span
@@ -91,8 +79,8 @@
 											class="btn btn-danger btn-sm">
 											<span class="glyphicon glyphicon-remove-circle"></span> <span
 												class="hidden-xs hidden-sm"></span>
-										</button>
-										</div>
+										</button> -->
+									</div>
 								</td>
 							</tr>
 						</tbody>

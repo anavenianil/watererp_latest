@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -27,9 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
+import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
+import com.callippus.water.erp.repository.ReceiptRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.CustDetailsChangeWorkflowService;
@@ -56,23 +59,21 @@ public class CustomerResource {
 
 	@Inject
 	private CustDetailsRepository custDetailsRepository;
+	
+	@Inject
+	private ReceiptRepository receiptRepository;
 	/**
 	 * POST /customers -> Create a new customer.
 	 */
 	@RequestMapping(value = "/customers", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> createCustomer(HttpServletRequest request,
 			@RequestBody Customer customer) throws URISyntaxException,
 			Exception {
 		log.debug("REST request to save Customer : {}", customer);
 		if (customer.getId() != null) {
-			return ResponseEntity
-					.badRequest()
-					.headers(
-							HeaderUtil.createFailureAlert("customer",
-									"idexists",
-									"A new customer cannot already have an ID"))
-					.body(null);
+			return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("customer","idexists","A new customer cannot already have an ID")).body(null);
 		}
 		customer.setPhoto("");
 		customerRepository.save(customer);
@@ -83,17 +84,14 @@ public class CustomerResource {
 		customer.setStatus(0);
 		Customer result = customerRepository.save(customer);
 		try {
+			workflowService.setAssignedDate(ZonedDateTime.now().toString());
 			workflowService.setRemarks(customer.getRemarks());
 			workflowService.getUserDetails();
 			custDetailsChangeWorkflowService.createTxn(customer);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
-		return ResponseEntity
-				.created(new URI("/api/customers/" + result.getId()))
-				.headers(
-						HeaderUtil.createEntityCreationAlert("customer", result
-								.getId().toString())).body(result);
+		return ResponseEntity.created(new URI("/api/customers/" + result.getId())).headers(HeaderUtil.createEntityCreationAlert("customer", result.getId().toString())).body(result);
 	}
 
 	/**
@@ -170,30 +168,38 @@ public class CustomerResource {
 			method = RequestMethod.POST, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	@Transactional
+	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(
-			@RequestBody Customer customer) throws URISyntaxException {
-		log.debug("REST request to save Customer : {}", customer);
+			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
+		log.debug("REST request to save Customer : {}", workflowDTO);
+		Customer customer = workflowDTO.getCustomer();
 		Customer customerDb = customerRepository.findOne(customer.getId());
 		customer.setStatus(customerDb.getStatus() + 1);
 		try {
-			workflowService.setRemarks(customer.getRemarks());
+			workflowService.setRemarks(workflowDTO.getRemarks());
 			workflowService.getUserDetails();
+			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
 			custDetailsChangeWorkflowService
 					.approvedCahangeCaseRequest(customer);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		customerRepository.save(customer);
 		
 		CustDetails custDetails = custDetailsRepository.findByCan(customer.getCan());
 		
 		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
-			custDetails.setTariffCategoryMaster(customer.getTariffCategoryMaster());
+			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}
 		
 		if("PIPESIZE".equals(customer.getChangeType()) && customer.getStatus()==2){
-			custDetails.setPipeSize(customer.getPipeSizeMaster().getPipeSize());
+			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
+			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
+		}
+		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==2){
+			if(workflowDTO.getReceipt()!=null){
+				receiptRepository.save(workflowDTO.getReceipt());
+			}
 		}
 		
 		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==3){
@@ -203,14 +209,37 @@ public class CustomerResource {
 	            else{
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getLastName());
 	            }
-		}
-		/*if("CONNECTIONTERMINATION".equals(customer.getChangeType())){
+			custDetails.setMobileNo(customer.getMobileNo().toString());
+			custDetails.setEmail(customer.getEmail());
+			custDetails.setIdNumber(customer.getIdNumber());
 			
-		}*/
+		}
 		custDetailsRepository.save(custDetails);
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customer", ""))
+				.body(null);
+	}
+	
+	
+	 /**
+     * Decline the request
+     */
+    @RequestMapping(value = "/customers/declineRequest",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<Customer> declineRequests(
+			@RequestBody WorkflowDTO workflowDTO)
+			throws Exception {
+		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
+		customerRepository.save(workflowDTO.getCustomer());
+		workflowService.setRemarks(workflowDTO.getCustomer().getRemarks());
+		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
+		return ResponseEntity.created(new URI("/api/connectionTerminates/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
 				.body(null);
 	}
 }

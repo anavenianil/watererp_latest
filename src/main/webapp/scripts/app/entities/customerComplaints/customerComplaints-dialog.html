@@ -9,7 +9,7 @@
 				<div class="modal-body">
 					<jh-alert-error></jh-alert-error>
 					<div class="row">
-						<div class="col-sm-4 col-md-offset-4">
+						<div class="col-sm-4 col-sm-offset-4">
 							<label for="field_applicationTxn">Search By CAN</label>
 
 							<div class="form-group"
@@ -29,51 +29,39 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-4 col-md-offset-2">
-							<label for="id">ID</label> <input type="text"
-								class="form-control" id="id" name="id"
-								ng-model="customerComplaints.id" readonly
-								style="margin: 0 auto;" />
-						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-4 col-sm-offset-2">
 							<label>CAN</label> <input type="text" class="form-control"
 								id="field_can" name="can"
-								ng-model="customerComplaints.can"
-								disabled>
+								ng-model="customerComplaints.can" disabled>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-md-offset-2">
+						<div class="col-sm-4">
 							<label>Customer Name</label> <input type="text"
 								class="form-control" id="field_consName" name="consName"
 								ng-model="customerComplaints.custDetails.consName" disabled>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-2">
+							<label>DMA</label> <input type="text" class="form-control"
+								id="field_constituency" name="constituency"
+								ng-model="custDetails.divisionMaster.divisionName" disabled>
+								<!-- $scope.customerComplaints.custDetails.secName -->
+						</div>
 						<div class="col-sm-4">
+							<label>Street</label> <input type="text" class="form-control"
+								id="field_street" name="street"
+								ng-model="custDetails.streetMaster.streetName" disabled>
+						</div>
+						
+					</div>
+					<div class="row">
+					<div class="col-sm-4  col-sm-offset-2">
 							<label>Category</label> <input type="text" class="form-control"
 								id="field_categoryName" name="categoryName"
 								ng-model="customerComplaints.tariffCategory"
 								disabled>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-md-offset-2">
-							<label>DMA</label> <input type="text" class="form-control"
-								id="field_constituency" name="constituency"
-								ng-model="customerComplaints.applicationTxn.constituency"
-								disabled>
-						</div>
-						<div class="col-sm-4">
-							<label>Ward</label> <input type="text" class="form-control"
-								id="field_area" name="area"
-								ng-model="customerComplaints.applicationTxn.area" disabled>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-md-offset-2">
-							<label>Street</label> <input type="text" class="form-control"
-								id="field_street" name="street"
-								ng-model="customerComplaints.applicationTxn.street" disabled>
-						</div>
+						
 						<div class="col-sm-4">
 							<label for="field_complaintTypeMaster">Complaint Type</label>
 							<select class="form-control" id="field_complaintTypeMaster"
@@ -85,7 +73,35 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-4 col-md-offset-2">
+					<div class="col-sm-4 col-sm-offset-2">
+							<label class="control-label" for="field_complaintBy">Complaint
+								By</label> <input type="text" class="form-control" name="complaintBy"
+								id="field_complaintBy" ng-model="customerComplaints.complaintBy" />
+						</div>
+						
+						<div class="col-sm-4">
+							<label class="control-label" for="field_complaintDate">Complaint
+								Date</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_complaintDate'>
+									<input id="field_complaintDate" type="text"
+										class="form-control"
+										ng-click="datePickerForComplaintDateOpen($event)"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="customerComplaints.complaintDate"
+										is-open="datePickerForComplaintDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForComplaintDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+					<div class="col-sm-4 col-sm-offset-2">
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<input type="text" class="form-control" name="remarks"
 								id="field_remarks" ng-model="customerComplaints.remarks" />
@@ -119,33 +135,6 @@
 									ng-click="f.showDetail = !f.showDetail">details</a> 
 								</li>
 							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-md-offset-2">
-							<label class="control-label" for="field_complaintBy">Complaint
-								By</label> <input type="text" class="form-control" name="complaintBy"
-								id="field_complaintBy" ng-model="customerComplaints.complaintBy" />
-						</div>
-						<div class="col-sm-4">
-							<label class="control-label" for="field_complaintDate">Complaint
-								Date</label>
-							<div class="form-group">
-								<div class='input-group date' id='field_complaintDate'>
-									<input id="field_complaintDate" type="text"
-										class="form-control"
-										ng-click="datePickerForComplaintDateOpen($event)"
-										uib-datepicker-popup="{{dateformat}}"
-										ng-model="customerComplaints.complaintDate"
-										is-open="datePickerForComplaintDate.status.opened" /> <span
-										class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="datePickerForComplaintDateOpen($event)">
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button>
-									</span>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>

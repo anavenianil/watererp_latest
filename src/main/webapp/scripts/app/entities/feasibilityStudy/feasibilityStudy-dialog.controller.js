@@ -1,16 +1,12 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('FeasibilityStudyDialogController', function ($scope, $stateParams, ParseLinks, $state, FeasibilityStudy, DivisionMaster, ZoneMaster,
-    		StreetMaster, ApplicationTxn, User, CategoryMaster, ApplicationTxnService) {
+    .controller('FeasibilityStudyDialogController', function ($scope, $stateParams, ParseLinks, $state, FeasibilityStudy, DivisionMaster,
+    		StreetMaster, ApplicationTxn, User, ApplicationTxnService) {
     	
     	$scope.feasibilityStudy = {};
         $scope.divisionmasters = DivisionMaster.query();
-        $scope.zonemasters = ZoneMaster.query();
-        //$scope.streetmasters = StreetMaster.query();
-        //$scope.applicationtxns = ApplicationTxn.query();
         $scope.users = User.query();
-        $scope.categorymasters = CategoryMaster.query();
         $scope.applicationTxn = {};
         
         if($stateParams.id != null){
@@ -72,12 +68,6 @@ angular.module('watererpApp')
             }
         };
         
-        /*$scope.approvalDetailsSave = function(id, remarks){
-        	$('#approveModal').modal('hide');
-        	//console.log(JSON.stringify($scope.approvalDetails));
-        	ApplicationTxnService.approveRequest(id, remarks);
-        	$state.go('applicationTxn');
-        }*/
 
         $scope.clear = function() {
             //$uibModalInstance.dismiss('cancel');
@@ -167,16 +157,6 @@ angular.module('watererpApp')
 	           	section: null
             }
         };
-        
-        /*$scope.getZone = function(divisionId){
-        	$scope.zoneMasters = [];
-            ZoneMaster.query({page: $scope.page, size: 20, divisionId : divisionId}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.zoneMasters.push(result[i]);
-                }
-            });
-        }*/
         
         $scope.getStreet = function(divisionId){
         	$scope.streetMasters = [];

@@ -21,7 +21,7 @@ angular.module('watererpApp')
             })
             .state('connectionTerminate.detail', {
                 parent: 'entity',
-                url: '/connectionTerminate/{id}',
+                url: '/connectionTerminate/{id}/{requestTypeId}',
                 data: {
                     authorities: ['ROLE_USER','ROLE_CUSTOMER'],
                     pageTitle: 'ConnectionTerminate'
@@ -33,9 +33,9 @@ angular.module('watererpApp')
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'ConnectionTerminate', function($stateParams, ConnectionTerminate) {
+                    /*entity: ['$stateParams', 'ConnectionTerminate', function($stateParams, ConnectionTerminate) {
                         return ConnectionTerminate.get({id : $stateParams.id});
-                    }]
+                    }]*/
                 }
             })
             /*.state('connectionTerminate.new', {

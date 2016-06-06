@@ -11,5 +11,7 @@ public interface CustDetailsCustomRepository extends
 JpaRepository<CustDetails, Long> {
 	   
     public List<String> searchCAN(@Param("searchTerm") String searchTerm);
+    
+	public int loadTestData(String filePath) throws Exception;
 	
 }

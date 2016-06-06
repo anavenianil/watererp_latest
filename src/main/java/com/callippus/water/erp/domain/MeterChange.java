@@ -28,14 +28,8 @@ public class MeterChange implements Serializable {
     @Column(name = "reason_for_change")
     private String reasonForChange;
     
-    @Column(name = "existing_meter_number")
-    private String existingMeterNumber;
-    
-    @Column(name = "existing_meter_reading")
-    private Float existingMeterReading;
-    
-    @Column(name = "new_meter_number")
-    private String newMeterNumber;
+    @Column(name = "prev_meter_reading")
+    private Float prevMeterReading;
     
     @Column(name = "new_meter_reading")
     private Float newMeterReading;
@@ -46,13 +40,20 @@ public class MeterChange implements Serializable {
     @Column(name = "approved_date")
     private LocalDate approvedDate;
     
+    @Column(name = "status")
+    private Integer status;
+    
     @ManyToOne
     @JoinColumn(name = "cust_details_id")
     private CustDetails custDetails;
 
     @ManyToOne
-    @JoinColumn(name = "meter_details_id")
-    private MeterDetails meterDetails;
+    @JoinColumn(name = "prev_meter_no_id")
+    private MeterDetails prevMeterNo;
+
+    @ManyToOne
+    @JoinColumn(name = "new_meter_no_id")
+    private MeterDetails newMeterNo;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -82,28 +83,12 @@ public class MeterChange implements Serializable {
         this.reasonForChange = reasonForChange;
     }
 
-    public String getExistingMeterNumber() {
-        return existingMeterNumber;
+    public Float getPrevMeterReading() {
+        return prevMeterReading;
     }
     
-    public void setExistingMeterNumber(String existingMeterNumber) {
-        this.existingMeterNumber = existingMeterNumber;
-    }
-
-    public Float getExistingMeterReading() {
-        return existingMeterReading;
-    }
-    
-    public void setExistingMeterReading(Float existingMeterReading) {
-        this.existingMeterReading = existingMeterReading;
-    }
-
-    public String getNewMeterNumber() {
-        return newMeterNumber;
-    }
-    
-    public void setNewMeterNumber(String newMeterNumber) {
-        this.newMeterNumber = newMeterNumber;
+    public void setPrevMeterReading(Float prevMeterReading) {
+        this.prevMeterReading = prevMeterReading;
     }
 
     public Float getNewMeterReading() {
@@ -130,6 +115,14 @@ public class MeterChange implements Serializable {
         this.approvedDate = approvedDate;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+    
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public CustDetails getCustDetails() {
         return custDetails;
     }
@@ -138,12 +131,20 @@ public class MeterChange implements Serializable {
         this.custDetails = custDetails;
     }
 
-    public MeterDetails getMeterDetails() {
-        return meterDetails;
+    public MeterDetails getPrevMeterNo() {
+        return prevMeterNo;
     }
 
-    public void setMeterDetails(MeterDetails meterDetails) {
-        this.meterDetails = meterDetails;
+    public void setPrevMeterNo(MeterDetails meterDetails) {
+        this.prevMeterNo = meterDetails;
+    }
+
+    public MeterDetails getNewMeterNo() {
+        return newMeterNo;
+    }
+
+    public void setNewMeterNo(MeterDetails meterDetails) {
+        this.newMeterNo = meterDetails;
     }
 
     public User getUser() {
@@ -180,12 +181,11 @@ public class MeterChange implements Serializable {
             "id=" + id +
             ", can='" + can + "'" +
             ", reasonForChange='" + reasonForChange + "'" +
-            ", existingMeterNumber='" + existingMeterNumber + "'" +
-            ", existingMeterReading='" + existingMeterReading + "'" +
-            ", newMeterNumber='" + newMeterNumber + "'" +
+            ", prevMeterReading='" + prevMeterReading + "'" +
             ", newMeterReading='" + newMeterReading + "'" +
             ", remarks='" + remarks + "'" +
             ", approvedDate='" + approvedDate + "'" +
+            ", status='" + status + "'" +
             '}';
     }
 }

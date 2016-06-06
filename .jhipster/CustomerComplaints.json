@@ -41,6 +41,11 @@
         },
         {
             "fieldId": 7,
+            "fieldName": "adjustmentBillId",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
             "fieldName": "status",
             "fieldType": "Integer"
         }

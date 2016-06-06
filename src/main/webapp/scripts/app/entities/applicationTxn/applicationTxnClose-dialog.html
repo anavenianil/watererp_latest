@@ -13,19 +13,29 @@
 					<fieldset>
 						<legend>Applicant Detail</legend>
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-3">
+								<label>Application No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.id}}</h5>
+							</div>
+							<div class="col-sm-3">
 								<label>Full Name</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.firstName}}&nbsp;{{applicationTxn.middleName}}&nbsp;{{applicationTxn.lastName}}</h5>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
+								<label>Mobile No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.mobileNo}}</h5>
+							</div>
+							<div class="col-sm-3">
 								<label>Customer Account Number(CAN)</label>
-								<h5 class="list-group-item-heading"><b>{{applicationTxn.can}}</b></h5>
+								<h5 class="list-group-item-heading">
+									<b>{{applicationTxn.can}}</b>
+								</h5>
 							</div>
 						</div>
 					</fieldset>
 					<hr>
 					<fieldset>
-						<legend>Address</legend>
+						<legend>Address Details</legend>
 						<div class="row">
 							<div class="col-sm-4">
 								<label>Division</label>
@@ -35,10 +45,10 @@
 								<label>Street</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.streetMaster.streetName}}</h5>
 							</div>
-							<!-- <div class="col-sm-4">
-								<label>Zone</label>
-								<h5 class="list-group-item-heading">{{feasibilityStudy.zoneMaster.zoneName}}</h5>
-							</div> -->
+							<div class="col-sm-4">
+								<label>Address</label>
+								<h5 class="list-group-item-heading">{{feasibilityStudy.address}}</h5>
+							</div>
 						</div>
 					</fieldset>
 					<hr>
@@ -62,11 +72,13 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<label>Connection Date</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.connectionDate | date:'mediumDate'}}</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.connectionDate
+									| date:'mediumDate'}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Total Amount</label>
-								<h5 class="list-group-item-heading">{{proceedings.grandTotal| number:2}}</h5>
+								<h5 class="list-group-item-heading">{{proceedings.grandTotal|
+									number:2}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -78,16 +90,17 @@
 								<!-- <label class="control-label" for="field_remarks">Remarks</label> -->
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
 									id="field_remarks" style="resize: none"
-									ng-model="applicationTxn.remarks"></textarea>
+									ng-model="applicationTxn.remarks" required></textarea>
 							</div>
 						</div>
 					</fieldset>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"
-					ng-click="clear()">
-					<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+				<button type="button" onclick="window.history.back()"
+					class="btn btn-info pull-left">
+					<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
+						Back</span>
 				</button>
 				<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 					class="btn btn-primary">

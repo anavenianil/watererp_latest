@@ -220,7 +220,7 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 		workflowService.getUserDetails();
 
 		message = super.declinedRequest(workflowService.getHistoryID(),
-				workflowService.getIpAddress(), workflowService.getRemarks());
+				workflowService.getIpAddress(), workflowService.getRemarks(),workflowService.getApprovedDate());
 	}
 
 	@SuppressWarnings("unchecked")

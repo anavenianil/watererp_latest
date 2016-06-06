@@ -1,14 +1,20 @@
 package com.callippus.water.erp.common;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import org.apache.commons.io.IOUtils;
 
 public class CPSUtils {
 	public static HashMap<String, String> monthMap = new HashMap<String, String>();
@@ -642,7 +648,7 @@ public class CPSUtils {
 		}
 		return returnValue;
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	public static int compareTwoDatesUptoDate(Date targetDate, Date baseDate)
 			throws Exception {
@@ -783,4 +789,18 @@ public class CPSUtils {
 		return sb.toString();
 	}
 
+	public static String getStackLimited(String prefix, Throwable e, int length){
+		String message = prefix + "\n" +  e.getMessage() + "\n" + stackTraceToString(e);
+
+		return message.substring(0,length);
+	}
+	
+	public static String resourceToString(String filePath) throws IOException, URISyntaxException
+	{
+	    try (InputStream inputStream = CPSUtils.class.getClass().getResourceAsStream(filePath))
+	    {
+	        return IOUtils.toString(inputStream);
+	    }
+	}
+	
 }

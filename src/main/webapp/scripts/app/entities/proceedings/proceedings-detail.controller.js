@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ProceedingsDetailController', function ($scope, $rootScope, $stateParams, Proceedings, PercentageMaster, 
+    .controller('ProceedingsDetailController', function ($scope, $rootScope, $stateParams, Proceedings,  
     		ApplicationTxn, ItemRequired, ParseLinks, ApplicationTxnService, $state, ProceedingsService) {
         $scope.proceedings = {};
         $scope.approvalDetails = {};
@@ -13,48 +13,16 @@ angular.module('watererpApp')
             });
         };
         
-        if($stateParams.id != null){
-        	$scope.load($stateParams.id);
-        }
-        
         if($stateParams.applicationTxnId !=null){
         	ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
                 $scope.proceedings = result;
                 $scope.itemRequireds = $scope.proceedings.itemRequireds;
-                
-            });
-        	
-        }
-        
-        
-        
-        
-        /*if($stateParams.id != null){
-        	$scope.itemRequireds = [];
-        	ItemRequired.query({page: $scope.page, size: 20,
-        		proceedingsId : $stateParams.id}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.itemRequireds.push(result[i]);
-                }
-            });
-        }*/
-        
-       /* if($stateParams.applicationTxnId != null){
-        	$scope.itemRequireds = [];
-        	ProceedingsService.get({applicationTxn: $stateParams.applicationTxnId}, function(result) {
-                $scope.proceedings = result;
-                //$scope.itemRequireds = $scope.proceedings.itemRequireds;
-            });
-        	ItemRequired.query({page: $scope.page, size: 20,
-        		applicationTxnId : $stateParams.applicationTxnId}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.itemRequireds.push(result[i]);
-                }
             });
         }
-        */
+        
+        
+        
+        
         
         var unsubscribe = $rootScope.$on('watererpApp:proceedingsUpdate', function(event, result) {
             $scope.proceedings = result;

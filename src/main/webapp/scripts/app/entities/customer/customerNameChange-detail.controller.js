@@ -7,11 +7,15 @@ angular
 				function($scope, $stateParams, CustDetails,
 						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal) {
 
-					$scope.customer = {};
-					$scope.customer.changeType = "PIPESIZE";
+					$scope.workflowDTO = {};
+					$scope.workflowDTO.customer = {};
+					$scope.workflowDTO.customer.changeType = "CHANGENAME";
 					
 					$scope.custDetails = {};
-					$scope.orgRole = Principal.getOrgRole();
+					//$scope.orgRole = Principal.getOrgRole();
+					Principal.getOrgRole().then(function(response) {
+						$scope.orgRole = response;
+					});
 					
 					// get cust details by CAN
 					$scope.getCustDetails = function(can) {
@@ -22,9 +26,9 @@ angular
 					
 					$scope.load = function (id) {
 			            Customer.get({id: id}, function(result) {
+			                $scope.workflowDTO.customer = result;
 			                $scope.customer = result;
-			                $scope.getCustDetails($scope.customer.can);
-			                $scope.customer.remarks = "";
+			                $scope.getCustDetails(result.can);
 			            });
 			        };
 					
@@ -49,28 +53,17 @@ angular
 
 					
 
-					$scope.dtmax = new Date();
+					$scope.maxDt = new Date();
 
 					$scope.clear = function() {
 						// $uibModalInstance.dismiss('cancel');
 					};
 
-					$scope.datePickerForAssignedDate = {};
-
-					$scope.datePickerForAssignedDate.status = {
-						opened : false
-					};
-
-					$scope.datePickerForAssignedDateOpen = function($event) {
-						$scope.datePickerForAssignedDate.status.opened = true;
-					};
-
-					
 					//approve a request
-					$scope.approve = function(customer){
+					$scope.approve = function(workflowDTO){
 			        	//console.log(customer);
 			        	return $http.post('/api/customers/customersApprove',
-								customer).then(
+								workflowDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
@@ -78,9 +71,18 @@ angular
 								});
 			        }
 					
+					//declineRequest
+					$scope.declineRequest = function(workflowDTO){
+			        	return $http.post('/api/customers/declineRequest',
+								workflowDTO).then(
+								function(response) {
+									$window.history.back();
+								});
+			        }
+					
 					$scope.canDecline = function() {
 						var ret = false;
-						switch ($scope.customer.status) {
+						switch ($scope.workflowDTO.customer.status) {
 						case 0:
 							if ($scope.orgRole.id === 10)
 								ret = true;
@@ -98,4 +100,24 @@ angular
 						}
 						return ret;
 					}
+					
+					$scope.datePickerForApprovedDate = {};
+
+					$scope.datePickerForApprovedDate.status = {
+						opened : false
+					};
+
+					$scope.datePickerForApprovedDateOpen = function($event) {
+						$scope.datePickerForApprovedDate.status.opened = true;
+					};
+					
+					$scope.datePickerForChangedDate = {};
+
+			        $scope.datePickerForChangedDate.status = {
+			            opened: false
+			        };
+
+			        $scope.datePickerForChangedDateOpen = function($event) {
+			            $scope.datePickerForChangedDate.status.opened = true;
+			        };
 				});

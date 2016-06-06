@@ -57,6 +57,8 @@ public class CustomerComplaintsResourceIntTest {
 
     private static final Float DEFAULT_ADJUSTMENT_AMT = 1F;
     private static final Float UPDATED_ADJUSTMENT_AMT = 2F;
+    private static final String DEFAULT_ADJUSTMENT_BILL_ID = "AAAAA";
+    private static final String UPDATED_ADJUSTMENT_BILL_ID = "BBBBB";
 
     private static final Integer DEFAULT_STATUS = 1;
     private static final Integer UPDATED_STATUS = 2;
@@ -93,6 +95,7 @@ public class CustomerComplaintsResourceIntTest {
         customerComplaints.setComplaintDate(DEFAULT_COMPLAINT_DATE);
         customerComplaints.setCan(DEFAULT_CAN);
         customerComplaints.setAdjustmentAmt(DEFAULT_ADJUSTMENT_AMT);
+        customerComplaints.setAdjustmentBillId(DEFAULT_ADJUSTMENT_BILL_ID);
         customerComplaints.setStatus(DEFAULT_STATUS);
     }
 
@@ -118,6 +121,7 @@ public class CustomerComplaintsResourceIntTest {
         assertThat(testCustomerComplaints.getComplaintDate()).isEqualTo(DEFAULT_COMPLAINT_DATE);
         assertThat(testCustomerComplaints.getCan()).isEqualTo(DEFAULT_CAN);
         assertThat(testCustomerComplaints.getAdjustmentAmt()).isEqualTo(DEFAULT_ADJUSTMENT_AMT);
+        assertThat(testCustomerComplaints.getAdjustmentBillId()).isEqualTo(DEFAULT_ADJUSTMENT_BILL_ID);
         assertThat(testCustomerComplaints.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
@@ -138,6 +142,7 @@ public class CustomerComplaintsResourceIntTest {
                 .andExpect(jsonPath("$.[*].complaintDate").value(hasItem(DEFAULT_COMPLAINT_DATE.toString())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
                 .andExpect(jsonPath("$.[*].adjustmentAmt").value(hasItem(DEFAULT_ADJUSTMENT_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].adjustmentBillId").value(hasItem(DEFAULT_ADJUSTMENT_BILL_ID.toString())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
 
@@ -158,6 +163,7 @@ public class CustomerComplaintsResourceIntTest {
             .andExpect(jsonPath("$.complaintDate").value(DEFAULT_COMPLAINT_DATE.toString()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
             .andExpect(jsonPath("$.adjustmentAmt").value(DEFAULT_ADJUSTMENT_AMT.doubleValue()))
+            .andExpect(jsonPath("$.adjustmentBillId").value(DEFAULT_ADJUSTMENT_BILL_ID.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
 
@@ -184,6 +190,7 @@ public class CustomerComplaintsResourceIntTest {
         customerComplaints.setComplaintDate(UPDATED_COMPLAINT_DATE);
         customerComplaints.setCan(UPDATED_CAN);
         customerComplaints.setAdjustmentAmt(UPDATED_ADJUSTMENT_AMT);
+        customerComplaints.setAdjustmentBillId(UPDATED_ADJUSTMENT_BILL_ID);
         customerComplaints.setStatus(UPDATED_STATUS);
 
         restCustomerComplaintsMockMvc.perform(put("/api/customerComplaintss")
@@ -201,6 +208,7 @@ public class CustomerComplaintsResourceIntTest {
         assertThat(testCustomerComplaints.getComplaintDate()).isEqualTo(UPDATED_COMPLAINT_DATE);
         assertThat(testCustomerComplaints.getCan()).isEqualTo(UPDATED_CAN);
         assertThat(testCustomerComplaints.getAdjustmentAmt()).isEqualTo(UPDATED_ADJUSTMENT_AMT);
+        assertThat(testCustomerComplaints.getAdjustmentBillId()).isEqualTo(UPDATED_ADJUSTMENT_BILL_ID);
         assertThat(testCustomerComplaints.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 

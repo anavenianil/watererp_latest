@@ -7,14 +7,14 @@ describe('Controller Tests', function() {
         var MockEntity, MockMeterChange, MockCustDetails, MockMeterDetails, MockUser;
         var createController;
 
-        beforeEach(inject(function($injector) {
+        beforeEach(inject(function($injector, User, MeterDetails,ApplicationTxnService, RequestWorkflowHistory) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockMeterChange = jasmine.createSpy('MockMeterChange');
             MockCustDetails = jasmine.createSpy('MockCustDetails');
-            MockMeterDetails = jasmine.createSpy('MockMeterDetails');
-            MockUser = jasmine.createSpy('MockUser');
+            MockMeterDetails = MeterDetails;
+            MockUser = User;
             
 
             var locals = {
@@ -23,8 +23,8 @@ describe('Controller Tests', function() {
                 'entity': MockEntity ,
                 'MeterChange': MockMeterChange,
                 'CustDetails': MockCustDetails,
-                'MeterDetails': MockMeterDetails,
-                'User': MockUser
+                'MeterDetails' : MockMeterDetails,
+                'User' : MockUser
             };
             createController = function() {
                 $injector.get('$controller')("MeterChangeDetailController", locals);

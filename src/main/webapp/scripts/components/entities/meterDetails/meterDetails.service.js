@@ -13,4 +13,20 @@ angular.module('watererpApp')
             },
             'update': { method:'PUT' }
         });
-    });
+    })
+    .factory('GetMeterDetails',
+				function($http) {
+					return {
+						findByMeterId : function(meterId) {
+							return $http.get('api/meterDetailss/forMeterId', {
+								params : {
+									meterId : meterId,
+								}
+							}).then(function successCallback(response) {
+								return response.data;
+							}, function errorCallback(response) {
+								return "error";
+							});
+						}
+					};
+				});

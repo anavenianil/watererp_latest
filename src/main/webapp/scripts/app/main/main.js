@@ -17,6 +17,10 @@ angular.module('watererpApp')
         			'dashboard@' : {
         				templateUrl : 'scripts/app/main/dashboard.html',
         				controller : 'DashboardController'
+        			},
+        			'footer@' : {
+        				templateUrl : 'scripts/app/main/footer.html',
+        				controller : 'FooterController'
         			}
                 },
                 resolve: {
@@ -31,7 +35,6 @@ angular.module('watererpApp')
                 views: {
                     'content@': {
                         templateUrl: function( params ) {
-                        	console.log("These are the params:" + JSON.stringify(params))
                             return 'scripts/app/module/' + params.moduleName + '.html';
                         } //Controller is specified inside template
                     }

@@ -96,51 +96,66 @@
         },
         {
             "fieldId": 11,
-            "fieldName": "firstName",
+            "fieldName": "previousName",
             "fieldType": "String"
         },
         {
             "fieldId": 12,
-            "fieldName": "middleName",
-            "fieldType": "String"
+            "fieldName": "previousMobile",
+            "fieldType": "Long"
         },
         {
             "fieldId": 13,
-            "fieldName": "lastName",
+            "fieldName": "previousEmail",
             "fieldType": "String"
         },
         {
             "fieldId": 14,
-            "fieldName": "mobileNo",
-            "fieldType": "Long"
+            "fieldName": "firstName",
+            "fieldType": "String"
         },
         {
             "fieldId": 15,
-            "fieldName": "email",
+            "fieldName": "middleName",
             "fieldType": "String"
         },
         {
             "fieldId": 16,
-            "fieldName": "idNumber",
+            "fieldName": "lastName",
             "fieldType": "String"
         },
         {
             "fieldId": 17,
+            "fieldName": "mobileNo",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 18,
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 19,
+            "fieldName": "idNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 20,
             "fieldName": "photo",
             "fieldType": "String"
         },
         {
-            "fieldId": 18,
+            "fieldId": 21,
             "fieldName": "status",
             "fieldType": "Integer"
         },
         {
-            "fieldId": 19,
-            "fieldName": "approvedDate",
+            "fieldId": 22,
+            "fieldName": "changedDate",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 20,
+            "fieldId": 23,
             "fieldName": "changeType",
             "fieldType": "String"
         }

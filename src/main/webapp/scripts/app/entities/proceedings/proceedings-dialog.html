@@ -21,24 +21,11 @@
 							<label for="field_pipeSizeMaster">Pipe Size</label> <select
 								class="form-control" id="field_pipeSizeMaster"
 								name="applicationTxn" ng-model="proceedings.pipeSizeMaster"
-								ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipeSizeMasters track by pipeSizeMaster.id" required>
+								ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipeSizeMasters track by pipeSizeMaster.id"
+								required>
 								<option value=""></option>
 							</select>
 						</div>
-
-						<!-- <div class="col-sm-3">
-							<label>File Number</label> <input list="applicationTxn" type=""
-								class="form-control" ng-model="proceedings.applicationTxn.id" />
-							<datalist id="applicationTxn">
-								<option ng-repeat="applicationTxn in applicationTxns"
-									value="{{applicationTxn.id}}">
-							</datalist>
-						</div>
-						<span> <br>
-							<button type="button"
-								class="btn btn-primary glyphicon glyphicon-search"
-								ng-click="getApplicationTxn(proceedings.applicationTxn.id)"></button>
-						</span> -->
 					</div>
 				</div>
 
@@ -46,12 +33,9 @@
 				<fieldset>
 					<legend>Items Required</legend>
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<label for="field_materialMaster">Material Name</label>
 						</div>
-						<!-- <div class="col-sm-2">
-								<label class="control-label" for="field_description">Description</label>
-							</div> -->
 						<div class="col-sm-2">
 							<label class="control-label" for="field_unit">Unit</label>
 						</div>
@@ -67,22 +51,20 @@
 						</div>
 					</div>
 					<hr>
-					<fieldset ng-repeat="x in itemArr track by $index">
+					<fieldset
+						ng-repeat="item in proceedings.itemRequireds track by $index">
 						<div class="row">
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<select class="form-control" id="field_materialMaster"
-									name="materialMaster"
-									ng-model="proceedings.itemRequireds[x].materialMaster"
-									ng-change="getMaterialDetail(proceedings.itemRequireds[x].materialMaster.id, x)"
+									name="materialMaster" ng-model="item.materialMaster"
+									ng-change="getMaterialDetail(item.materialMaster.id, $index)"
 									ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
 							<div class="col-sm-2">
-								<!-- <input type="text" class="form-control" name="unit"
-									id="field_unit" ng-model="proceedings.itemRequireds[x].unit" /> -->
 								<select class="form-control" id="field_uom" name="uom"
-									ng-model="proceedings.itemRequireds[x].uom"
+									ng-model="item.uom"
 									ng-options="uom as uom.value for uom in uoms track by uom.id">
 									<option value=""></option>
 								</select>
@@ -91,17 +73,22 @@
 
 								<input type="number" class="form-control" name="quantity"
 									id="field_quantity" ng-change="calculateRate()" min="0"
-									ng-model="proceedings.itemRequireds[x].quantity" />
+									ng-model="item.quantity" />
 							</div>
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
 									name="ratePerShs" id="field_ratePerShs"
-									ng-model="proceedings.itemRequireds[x].ratePerShs" readonly />
+									ng-model="item.ratePerShs" readonly />
 							</div>
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
-									name="amount" id="field_amount"
-									ng-model="proceedings.itemRequireds[x].amount" readonly />
+									name="amount" id="field_amount" ng-model="item.amount" readonly />
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-danger"
+									ng-click="removeItemArr($index)">
+									<span class="glyphicon glyphicon-remove-circle"></span>
+								</button>
 							</div>
 						</div>
 						<br>
@@ -111,16 +98,13 @@
 						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
 							Items</span>
 					</button>
-					<button type="button" class="btn btn-danger"
-						ng-hide="itemArr.length<1" ng-click="removeItemArr()">
-						<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>Remove</span>
-					</button>
 				</fieldset>
 				<hr>
 				<br>
 				<div class="row">
-					<div class="col-sm-10">
-						<label class="control-label" for="field_subTotalA">SubTotal A</label>
+					<div class="col-sm-9">
+						<label class="control-label" for="field_subTotalA">SubTotal
+							A</label>
 					</div>
 					<div class="col-sm-2">
 						<input type="number" class="form-control text-right"
@@ -139,8 +123,7 @@
 							name="supervisionPercent" id="field_supervisionPercent"
 							ng-model="proceedings.supervisionPercent" readonly />
 					</div>
-					<div class="col-sm-2 col-md-offset-7">
-						<!-- <label class="control-label" for="field_supervisionCharge">SupervisionCharge</label> -->
+					<div class="col-sm-2 col-md-offset-6">
 						<input type="number" class="form-control text-right"
 							name="supervisionCharge" id="field_supervisionCharge"
 							ng-model="proceedings.supervisionCharge" readonly />
@@ -153,12 +136,11 @@
 							Charges (%)</label>
 					</div>
 					<div class="col-sm-1">
-						<!-- <label for="field_labourChargePercent">labourChargePercent</label> -->
 						<input type="number" class="form-control"
 							name="labourChargePercent" id="field_labourChargePercent"
 							ng-model="proceedings.labourChargePercent" readonly />
 					</div>
-					<div class="col-sm-2 col-md-offset-7">
+					<div class="col-sm-2 col-md-offset-6">
 						<input type="number" class="form-control text-right"
 							name="labourCharge" id="field_labourCharge"
 							ng-model="proceedings.labourCharge" readonly />
@@ -167,8 +149,8 @@
 				<br>
 				<div class="row">
 					<div class="col-sm-2">
-						<label class="control-label" for="field_siteSurvey">Site Survey
-							(%)</label>
+						<label class="control-label" for="field_siteSurvey">Site
+							Survey (%)</label>
 					</div>
 					<div class="col-sm-1">
 						<!-- <label for="field_siteSurveyPercent">siteSurveyPercent</label> -->
@@ -176,7 +158,7 @@
 							id="field_siteSurveyPercent"
 							ng-model="proceedings.siteSurveyPercent" readonly />
 					</div>
-					<div class="col-sm-2 col-md-offset-7">
+					<div class="col-sm-2 col-md-offset-6">
 						<input type="number" class="form-control text-right"
 							name="siteSurvey" id="field_siteSurvey"
 							ng-model="proceedings.siteSurvey" readonly />
@@ -185,8 +167,9 @@
 				<br>
 				<hr>
 				<div class="row">
-					<div class="col-sm-10">
-						<label class="control-label" for="field_subTotalB">SubTotal B</label>
+					<div class="col-sm-9">
+						<label class="control-label" for="field_subTotalB">SubTotal
+							B</label>
 					</div>
 					<div class="col-sm-2">
 						<input type="number" class="form-control text-right"
@@ -206,7 +189,7 @@
 							name="connectionFeePercent" id="field_connectionFeePercent"
 							ng-model="proceedings.connectionFeePercent" readonly />
 					</div>
-					<div class="col-sm-2 col-md-offset-7">
+					<div class="col-sm-2 col-md-offset-6">
 						<!-- <label class="control-label" for="field_connectionFee">ConnectionFee</label> -->
 						<input type="number" class="form-control text-right"
 							name="connectionFee" id="field_connectionFee"
@@ -216,7 +199,7 @@
 				<br>
 				<hr>
 				<div class="row">
-					<div class="col-sm-10">
+					<div class="col-sm-9">
 						<label class="control-label" for="field_applicationFormFee">Application
 							Form Fee</label>
 					</div>
@@ -229,8 +212,9 @@
 				<br>
 				<hr>
 				<div class="row">
-					<div class="col-sm-10">
-						<label class="control-label" for="field_grandTotal">Grand Total</label>
+					<div class="col-sm-9">
+						<label class="control-label" for="field_grandTotal">Grand
+							Total</label>
 					</div>
 					<div class="col-sm-2">
 						<input type="number" class="form-control text-right"
@@ -245,16 +229,17 @@
 						<div class="col-sm-12">
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<textarea rows="2" cols="30" class="form-control" name="remarks"
-								id="field_remarks" ng-model="proceedings.applicationTxn.remarks"></textarea>
+								id="field_remarks" ng-model="proceedings.applicationTxn.remarks" required></textarea>
 						</div>
 					</div>
 				</fieldset>
 			</div>
 			<div class="modal-footer">
-				 <button type="button" class="btn btn-default" data-dismiss="modal"
-					ng-click="clear()">
-					<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-				</button> 
+				<button type="button" onclick="window.history.back()"
+					class="btn btn-info pull-left">
+					<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
+						Back</span>
+				</button>
 				<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 					class="btn btn-primary">
 					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>

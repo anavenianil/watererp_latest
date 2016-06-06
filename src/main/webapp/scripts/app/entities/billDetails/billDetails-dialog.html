@@ -1,5 +1,3 @@
-
-
 <form name="editForm" role="form" novalidate ng-submit="save()"
 	show-validation>
 	<div class="panel panel-primary">
@@ -10,17 +8,20 @@
 		<div class="list-group">
 			<div ng-show="recordExists">
 				<div class="row danger">
-					<div class="col-sm-8">
-						Last meter reading is not BILLED. Do you want to CANCEL it?						
-					</div>
+					<div class="col-sm-8">Last meter reading is not BILLED. Do
+						you want to CANCEL it?</div>
 					<div class="col-sm-4 pull-right">
-						<button type="button" class="btn btn-default"
-							ng-click="cancel()">
+						<button type="button" class="btn btn-default" ng-click="cancel()">
 							<span class="glyphicon glyphicon-ban-circle"></span>
 							&nbsp;
 							<span>Cancel</span>
 						</button>
 					</div>
+				</div>
+			</div>
+			<div ng-show="alreadyRun">
+				<div class="row danger">
+					<div class="col-sm-8">Bill Already Run for this month.</div>
 				</div>
 			</div>
 			<fieldset ng-disabled="recordExists">
@@ -88,14 +89,23 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4" ng-hide="checkDates()">
+							<div class="col-sm-4" ng-show="isForceManual">
 								<label class="control-label" for="field_forceManual">Set
 									Bill Month Manually</label>
 								<div class="form-group">
 									<div class='input-group' id='field_forceManual'>
-										<input id="field_forceManual" type="checkbox"
+									<label>
+											Current Month
+										<input id="field_forceManual" type="radio" name="forceManual" value="0"
 											ng-change="setToMonthManual()" class="form-control"
-											ng-model="billDetails.forceManual" />
+											ng-model="billDetails.forceManual" ng-required="isForceManual"/>
+									</label>
+									<label>		
+											Previous Month
+										<input id="field_forceManual" type="radio" name="forceManual" value="1"
+											ng-change="setToMonthManual()" class="form-control"
+											ng-model="billDetails.forceManual" ng-required="isForceManual"/>
+									</label>
 									</div>
 								</div>
 							</div>
@@ -147,8 +157,8 @@
 								<label class="control-label" for="field_currentBillType">Current
 									Bill Type{{billDetails.currentBillType}}</label>
 								<select class="form-control" id="field_currentBillType"
-									name="currentBillType" ng-model="billDetails.currentBillType"
-									required>
+									name="currentBillType" ng-change="checkMetReadingField()"
+									ng-model="billDetails.currentBillType" required>
 									<option ng-repeat="currentBillType in currentBillTypes"
 										value="{{currentBillType.id}}">{{currentBillType.name}}</option>
 								</select>
@@ -160,8 +170,8 @@
 									<div class='input-group' id='field_metReadingDt'>
 										<input id="field_metReadingDt" type="text"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
-											ng-model="billDetails.metReadingDt" ng-change="setToMonth()"
-											is-open="datePickerForMetReadingDt.status.opened" required />
+											ng-model="billDetails.metReadingDt" ng-change="setToMonthAndCheck()"
+											is-open="datePickerForMetReadingDt.status.opened" />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForMetReadingDtOpen($event)">
@@ -181,14 +191,17 @@
 								<label class="control-label" for="field_presentReading">Present
 									Reading</label>
 								<input type="number" class="form-control" name="presentReading"
-									id="field_presentReading" ng-model="billDetails.presentReading" ng-change="checkPrevious()"
-									required />
+									ng-disabled="isMetReadingDisabled"
+									ng-required="!isMetReadingDisabled" id="field_presentReading"
+									ng-model="billDetails.presentReading"
+									ng-change="checkPrevious()" />
 								<div ng-show="editForm.presentReading.$invalid">
 									<p class="help-block"
-										ng-show="editForm.presentReading.$error.required">This field
-										is required.</p>
+										ng-show="editForm.presentReading.$error.required">This
+										field is required.</p>
 									<p class="help-block"
-										ng-show="editForm.presentReading.$error.ltPrevious">Value is lesser than Previous Reading.</p>
+										ng-show="editForm.presentReading.$error.ltPrevious">Value
+										is lesser than Previous Reading.</p>
 								</div>
 							</div>
 
@@ -202,9 +215,8 @@
 									ng-options='user as (user.firstName + " " + user.lastName + " (" + user.login +")") for user in users track by user.id'>
 								</select>
 							</div>
-							<div class="col-sm-4">
-							</div>
-							<div class="col-sm-4"  ng-show="isRounding">
+							<div class="col-sm-4"></div>
+							<div class="col-sm-4" ng-show="isRounding">
 								<label for="field_paymentTypes">Meter Rounding</label>
 								<div class="form-group">
 									<div class='input-group' id='field_isRounding'>

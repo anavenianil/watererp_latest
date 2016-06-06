@@ -34,6 +34,10 @@ angular.module('watererpApp')
 
         $scope.clear = function () {
             $scope.empMaster = {
+                dateOfBirth: null,
+                joiningDate: null,
+                maritalStatus: null,
+                employeeType: null,
                 id: null
             };
         };

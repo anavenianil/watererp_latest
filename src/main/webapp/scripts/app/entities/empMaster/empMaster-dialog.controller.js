@@ -1,19 +1,22 @@
 'use strict';
 
 angular.module('watererpApp').controller('EmpMasterDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpMaster', 'User', 'OrgRoleInstance', 'StatusMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, EmpMaster, User, OrgRoleInstance, StatusMaster) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpMaster', 'User', 'OrgRoleInstance', 'DesignationMaster', 'StatusMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, EmpMaster, User, OrgRoleInstance, DesignationMaster, StatusMaster) {
 
         $scope.empMaster = entity;
         $scope.users = User.query();
         $scope.orgroleinstances = OrgRoleInstance.query();
-        //$scope.designationmasters = DesignationMaster.query();
+        $scope.designationmasters = DesignationMaster.query();
         $scope.statusmasters = StatusMaster.query();
+        $scope.employeestatuss= [{"id":"1", "value":"MARRIED"},{"id":"2", "value":"UNMARRIED"}];
         $scope.load = function(id) {
             EmpMaster.get({id : id}, function(result) {
                 $scope.empMaster = result;
             });
         };
+        
+        $scope.dtMax = new Date();
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:empMasterUpdate', result);
@@ -36,5 +39,23 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
 
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
+        };
+        $scope.datePickerForDateOfBirth = {};
+
+        $scope.datePickerForDateOfBirth.status = {
+            opened: false
+        };
+
+        $scope.datePickerForDateOfBirthOpen = function($event) {
+            $scope.datePickerForDateOfBirth.status.opened = true;
+        };
+        $scope.datePickerForJoiningDate = {};
+
+        $scope.datePickerForJoiningDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForJoiningDateOpen = function($event) {
+            $scope.datePickerForJoiningDate.status.opened = true;
         };
 }]);

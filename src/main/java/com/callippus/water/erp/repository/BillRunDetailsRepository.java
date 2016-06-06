@@ -25,4 +25,6 @@ public interface BillRunDetailsRepository extends JpaRepository<BillRunDetails,L
 	
 	public List<BillRunDetails> findTop3ByCanAndStatusOrderByIdDesc(@Param("can") String can, @Param("status") Integer status);
 	
+	public Page<BillRunDetails> findTop3ByCanAndStatusOrderByIdDesc(Pageable pageable, @Param("can") String can, @Param("status") Integer status);
+	
 }
