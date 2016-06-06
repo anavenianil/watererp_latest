@@ -5,7 +5,6 @@ import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.BillRunDetails;
 import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.domain.CollDetails;
-import com.callippus.water.erp.domain.OnlinePaymentCallback;
 import com.callippus.water.erp.repository.BillRunDetailsRepository;
 import com.callippus.water.erp.repository.BillRunMasterRepository;
 import com.callippus.water.erp.repository.CollDetailsRepository;
@@ -17,17 +16,16 @@ import com.callippus.water.erp.repository.PaymentTypesRepository;
 import com.callippus.water.erp.service.BillingService;
 import com.callippus.water.erp.service.OnlinePaymentService;
 
-import org.jfree.util.Log;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.annotation.Rollback;
@@ -41,7 +39,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
@@ -50,7 +47,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -65,6 +61,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class BillRunMasterResourceIntTest {
 
+	 private final Logger log = LoggerFactory.getLogger(BillRunMasterResourceIntTest.class);
+	
 	private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 			.withZone(ZoneId.of("Z"));
 
@@ -166,11 +164,8 @@ public class BillRunMasterResourceIntTest {
 
 	private MockMvc restCollDetailsMockMvc;
 	
-
     private MockMvc restOnlinePaymentCallbackMockMvc;
 
-
-	private CollDetails collDetails;
 
 	@PostConstruct
 	public void setup() {
@@ -200,9 +195,14 @@ public class BillRunMasterResourceIntTest {
 
 		// Create the BillRunMaster
 
+		log.debug("###################################################################################");
+		log.debug("Starting run.");
 		billRunMaster.setArea(null);
 
 		try {
+			log.debug("###################################################################################");
+			log.debug("Loading data for run1.");
+			log.debug("###################################################################################");
 			custDetailsCustomRepository.loadTestData("/scripts/initData.sql");
 			custDetailsCustomRepository.loadTestData("/scripts/run1.sql");
 
@@ -219,7 +219,7 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
-				/*				Assert.assertEquals("Run1: Units do not match for CAN:" + bfd.getCan(), expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
+				Assert.assertEquals("Run1: Units do not match for CAN:" + bfd.getCan(), expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
 						0.1f);
 				Assert.assertEquals("Run1: Water Cess does not match for CAN:" + bfd.getCan(),expectedCharges.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
 						1.0f);
@@ -232,6 +232,9 @@ public class BillRunMasterResourceIntTest {
 				ReflectionTestUtils.setField(collDetailsResource, "custDetailsRepository", custDetailsRepository);
 				ReflectionTestUtils.setField(ct, "collectionTypeMasterRepository", collectionTypeMasterRepository);
 				ReflectionTestUtils.setField(ct, "paymentTypesRepository", paymentTypesRepository);
+				log.debug("###################################################################################");
+				log.debug("Loading Payments");
+				log.debug("###################################################################################");
 				restCollDetailsMockMvc = MockMvcBuilders.standaloneSetup(collDetailsResource)
 						.setCustomArgumentResolvers(pageableArgumentResolver)
 						.setMessageConverters(jacksonMessageConverter).build();
@@ -241,7 +244,7 @@ public class BillRunMasterResourceIntTest {
 					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), manual_payments.get(bfd.getCan())[i],
 							ZonedDateTime.now());
 				}
-				*/
+				
 
 				OnlinePaymentCallbackResourceIntTest op = new OnlinePaymentCallbackResourceIntTest();
 				OnlinePaymentCallbackResource onlinePaymentCallbackResource = new OnlinePaymentCallbackResource();
@@ -255,11 +258,18 @@ public class BillRunMasterResourceIntTest {
 				
 				for (int i = 0; paymentCallbackXMLs.get(bfd.getCan()) != null && i < paymentCallbackXMLs.get(bfd.getCan()).length
 						&& !paymentCallbackXMLs.get(bfd.getCan())[i].isEmpty(); i++) {
+					log.debug("Posting XML:"+ paymentCallbackXMLs.get(bfd.getCan())[i]);
+					log.debug("###################################################################################");
+					log.debug("Loading Online Payments for CAN:"+bfd.getCan());
+					log.debug("###################################################################################");
+					
 					op.createPayment(restOnlinePaymentCallbackMockMvc, paymentCallbackXMLs.get(bfd.getCan())[i]);
 				}
-
 			}
 
+			log.debug("###################################################################################");
+			log.debug("Committing Bill Run");
+			log.debug("###################################################################################");
 			BillRunMaster brm = billRunMasterRepository.findOne(id);
 			brm.setStatus("commit");
 
@@ -272,6 +282,9 @@ public class BillRunMasterResourceIntTest {
 			
 			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"),content.getString("status"),"COMMITTED");
 			
+			log.debug("###################################################################################");
+			log.debug("Loading Run2.sql");
+			log.debug("###################################################################################");
 			custDetailsCustomRepository.loadTestData("/scripts/run2.sql");
 
 			result = restBillRunMasterMockMvc
@@ -285,8 +298,8 @@ public class BillRunMasterResourceIntTest {
 
 			brdList = billRunDetailsRepository.findByBillRunId(id);
 
-			for (BillRunDetails brd : brdList) {
-				BillFullDetails bfd = brd.getBillFullDetails();
+			for (BillRunDetails brd1 : brdList) {
+				BillFullDetails bfd = brd1.getBillFullDetails();
 				Assert.assertEquals("Run2: Units do not match for CAN:" + bfd.getCan(), expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(),
 						0.1f);
 				Assert.assertEquals("Run2: Water Cess does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(),
@@ -294,6 +307,10 @@ public class BillRunMasterResourceIntTest {
 				Assert.assertEquals("Run2: Meter Service Charge does not match for CAN:" + bfd.getCan(),expectedCharges2.get(bfd.getCan())[2].floatValue(),
 						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
 			}
+			
+			log.debug("###################################################################################");
+			log.debug("Finished Run.");
+			log.debug("###################################################################################");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
