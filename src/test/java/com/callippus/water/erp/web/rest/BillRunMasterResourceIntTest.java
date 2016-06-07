@@ -191,7 +191,7 @@ public class BillRunMasterResourceIntTest {
 		
 	// Expected Units, Water Cess, Rent, Lock charges after Run 4
 	static final Map<String, Float[]> expectedCharges4 = Arrays
-			.stream(new Object[][] { { "02020005", new Float[] { 4.0f, 3320.0f, 2330.0f, 0.0f } },
+			.stream(new Object[][] { { "02020005", new Float[] { 4.0f, 3320.0f, 2380.0f, 0.0f } },
 					{ "08090001", new Float[] { 11.0f, 5850.0f, 2380.0f, 0.0f } },
 					{ "04060001", new Float[] { 4.0f, 3320.0f, 2380.0f, 0.0f } },
 					{ "05050001", new Float[] { 8.0f, 3360.0f, 2380.0f, 0.0f } },
