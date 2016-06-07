@@ -1,6 +1,7 @@
 package com.callippus.water.erp.repository;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -90,13 +91,15 @@ implements BillDetailsCustomRepository{
 	public List<BillAndCollectionDTO> getBillCollection(String can){
 
 		String sql ="select * from "+
-		"( "+
-		"select bill_date  txn_date, 'Bill', net_payable_amount debit, 0.0 credit, 0.0 balance  from bill_run_details brd, bill_full_details bfd "+
-		"where brd.can=bfd.can and brd.status=4 and brd.can=? "+
-		"union "+
-		"select receipt_dt txn_date, 'Payment', 0.0 debit, receipt_amt credit, 0.0 balance from coll_details where can=? "+
-		") a "+
-		"order by txn_date ";
+				" 		( "+
+				"		select bill_date  txn_date, 'Bill' txn_type, cast(net_payable_amount as decimal(20,5)) debit, " +
+				" 		cast(0 as decimal (20,5)) credit, cast(0 as decimal (20,5)) balance  from bill_run_details brd, bill_full_details bfd "+
+				"		where brd.can=bfd.can and brd.status=4 and brd.can=? "+
+				"		union "+
+				"		select receipt_dt txn_date, 'Payment' txn_type, cast(0 as decimal (20,5)) debit, " +
+				"			cast(receipt_amt as decimal(20,5)) credit, cast(0 as decimal (20,5)) balance  from coll_details where can=? "+
+				"		) a "+
+				"		order by txn_date ";
 		
 		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(sql,
@@ -109,9 +112,9 @@ implements BillDetailsCustomRepository{
 			Instant instant = ((Timestamp) row.get("txn_date")).toInstant();
 			dr.setTxn_date(ZonedDateTime.ofInstant(instant, ZoneId.systemDefault()));
 			dr.setTxn_type((String) row.get("txn_type"));
-			dr.setDebit((Double) row.get("debit"));
-			dr.setCredit((Double) row.get("credit"));
-			dr.setBalance((Double) row.get("balance"));
+			dr.setDebit((BigDecimal) row.get("debit"));
+			dr.setCredit((BigDecimal) row.get("credit"));
+			dr.setBalance((BigDecimal) row.get("balance"));
 			
 			log.debug("This is the dr:" + dr.toString());
 			

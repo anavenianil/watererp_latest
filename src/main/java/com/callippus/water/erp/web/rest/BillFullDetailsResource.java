@@ -192,11 +192,11 @@ public class BillFullDetailsResource {
 		    }
 
 	/**
-	 * GET /billFullDetailss/searchCAN/:searchTerm
+	 * GET /billFullDetailss/getWaterBillDetails/:can
 	 */
-	@RequestMapping(value = "/billFullDetailss/searchCAN/{can}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/billFullDetailss/getWaterBillDetails/{can}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<List<BillAndCollectionDTO>> searchCANLike(@PathVariable String can) {
+	public ResponseEntity<List<BillAndCollectionDTO>> getWaterBillDetails(@PathVariable String can) {
 		log.debug("REST request to get BillFullDetails : {}", can);
 
 		List<BillAndCollectionDTO> billAndCollectionDTO = billDetailsCustomRepository.getBillCollection(can);

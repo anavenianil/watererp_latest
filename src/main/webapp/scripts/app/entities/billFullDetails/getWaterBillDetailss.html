@@ -11,10 +11,11 @@
 					uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
 					typeahead-loading="loadingCANs"
 					typeahead-on-select='onSelect($item, $model, $label)'
-					typeahead-no-results="noResults" class="form-control"> <i
-					ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+					typeahead-no-results="noResults" class="form-control">
+				<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
 				<div ng-show="noResults">
-					<i class="glyphicon glyphicon-remove"></i> No CANs Found
+					<i class="glyphicon glyphicon-remove"></i>
+					No CANs Found
 				</div>
 			</div>
 		</div>
@@ -23,56 +24,43 @@
 		<table class="table table-striped">
 			<thead>
 				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
-					<th jh-sort-by="id"><span>ID</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="billDate"><span> Date</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-						<th jh-sort-by="receiptDt"><span>Receipt Date</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-						<th jh-sort-by="receiptDt"><span>Particulars</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="netPayableAmount"><span>Dr</span> <span class="glyphicon glyphicon-sort"></span></th>
-							
-					<th jh-sort-by="receiptAmt"><span>Cr</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					
-					<!-- <th jh-sort-by="credit"><span>Credit</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="debit"><span>Debit</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
-						     <th jh-sort-by="balance"><span>Balance</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-						<!-- <th jh-sort-by="balance"><span>CrBalance</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
+					<th jh-sort-by="id">
+						<span>ID</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+					<th jh-sort-by="txn_date">
+						<span>Transaction Date</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+					<th jh-sort-by="txn_type">
+						<span>Transaction Type</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+					<th jh-sort-by="debit">
+						<span>Dr</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+
+					<th jh-sort-by="credit">
+						<span>Cr</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+
+					<th jh-sort-by="balance">
+						<span>Balance</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
 			</thead>
 			<tbody infinite-scroll="loadPage(page + 1)"
 				infinite-scroll-disabled="links['last'] == page">
-				
-				 <tr ng-repeat="billingList in billingLists">
-				
-				<ul>
-				<li ng-repeat="debitDTO in billingList.debitDTOs">
-				 
-					<td>{{$index+1}}</td> 
-					<td>{{debitDTO.billDate| date:'mediumDate'}}</td>
-					<td>{{debitDTO.netPayableAmount}}</td>
-					<td>{{debitDTO.balance}}</td>
-              </li>
-				<ul>
-					<li ng-repeat="creditDTO in billingList.creditDTOs">
-					
-					<td>{{creditDTO.receiptDate| date:'mediumDate'}}</td>
-					<td>{{creditDTO.collname}}</td>
-					<td>{{creditDTO.receiptAmount}}</td>		
-					<!-- <td>{{billingList.credit}}</td>
-					<td>{{billingList.debit}}</td> -->
-					<td>{{creditDTO.balance}}</td>
-					
-					</li>
-				
-			</ul>
-			</ul>		
-			</tr>
+				<tr ng-repeat="txn in txnList">
+					<td>{{$index+1}}</td>
+					<td>{{txn.txn_date| date:'mediumDate'}}</td>
+					<td>{{txn.txn_type}}</td>
+					<td>{{txn.debit}}</td>
+					<td>{{txn.credit}}</td>
+					<td>{{txn.balance}}</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
