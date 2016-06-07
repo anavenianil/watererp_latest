@@ -270,6 +270,7 @@ public class BillRunMasterResourceIntTest {
 
 	@Test
 	@Transactional
+	@Rollback(false)
 	public void createBillRunMaster() throws Exception {
 
 		// Create the BillRunMaster
