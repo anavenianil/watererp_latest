@@ -296,6 +296,22 @@ public class BillRunMasterResourceIntTest {
 
 			List<BillRunDetails> brdList = billRunDetailsRepository.findByBillRunId(id);
 
+			log.debug("###################################################################################");
+			log.debug("Committing Bill Run 1 with id:" + id);
+			log.debug("###################################################################################");
+			BillRunMaster brm = billRunMasterRepository.findOne(id);
+			brm.setStatus("commit");
+
+			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
+					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
+					"COMMITTED");
+
+			
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
 				Assert.assertEquals("Run1: Units do not match for CAN:" + bfd.getCan(),
@@ -350,21 +366,6 @@ public class BillRunMasterResourceIntTest {
 			}
 
 			log.debug("###################################################################################");
-			log.debug("Committing Bill Run 1 with id:" + id);
-			log.debug("###################################################################################");
-			BillRunMaster brm = billRunMasterRepository.findOne(id);
-			brm.setStatus("commit");
-
-			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
-					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
-					.andExpect(status().isOk()).andReturn();
-
-			content = new JSONObject(result.getResponse().getContentAsString());
-
-			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
-					"COMMITTED");
-
-			log.debug("###################################################################################");
 			log.debug("Loading Run2.sql");
 			log.debug("###################################################################################");
 			custDetailsCustomRepository.loadTestData("/scripts/run2.sql");
@@ -378,6 +379,21 @@ public class BillRunMasterResourceIntTest {
 
 			id = content.getLong("id");
 
+			log.debug("###################################################################################");
+			log.debug("Committing Bill Run 2  with id:" + id);
+			log.debug("###################################################################################");
+			brm = billRunMasterRepository.findOne(id);
+			brm.setStatus("commit");
+
+			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
+					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
+					"COMMITTED");
+			
 			brdList = billRunDetailsRepository.findByBillRunId(id);
 
 			for (BillRunDetails brd1 : brdList) {
@@ -389,8 +405,7 @@ public class BillRunMasterResourceIntTest {
 				Assert.assertEquals("Run2: Meter Service Charge does not match for CAN:" + bfd.getCan(),
 						expectedCharges2.get(bfd.getCan())[2].floatValue(),
 						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
-				
-
+					
 				CollDetailsResourceIntTest ct = new CollDetailsResourceIntTest();
 				CollDetailsResource collDetailsResource = new CollDetailsResource();
 				ReflectionTestUtils.setField(collDetailsResource, "collDetailsRepository", collDetailsRepository);
@@ -438,22 +453,6 @@ public class BillRunMasterResourceIntTest {
 			log.debug("Finished Run 2.");
 			log.debug("###################################################################################");
 			
-
-			log.debug("###################################################################################");
-			log.debug("Committing Bill Run 2  with id:" + id);
-			log.debug("###################################################################################");
-			brm = billRunMasterRepository.findOne(id);
-			brm.setStatus("commit");
-
-			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
-					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
-					.andExpect(status().isOk()).andReturn();
-
-			content = new JSONObject(result.getResponse().getContentAsString());
-
-			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
-					"COMMITTED");
-
 			
 
 			log.debug("###################################################################################");
@@ -470,6 +469,21 @@ public class BillRunMasterResourceIntTest {
 
 			id = content.getLong("id");
 
+			log.debug("###################################################################################");
+			log.debug("Committing Bill Run 3  with id:" + id);
+			log.debug("###################################################################################");
+			brm = billRunMasterRepository.findOne(id);
+			brm.setStatus("commit");
+
+			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
+					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
+					"COMMITTED");
+			
 			brdList = billRunDetailsRepository.findByBillRunId(id);
 
 			for (BillRunDetails brd1 : brdList) {
@@ -533,21 +547,6 @@ public class BillRunMasterResourceIntTest {
 			
 
 			log.debug("###################################################################################");
-			log.debug("Committing Bill Run 3  with id:" + id);
-			log.debug("###################################################################################");
-			brm = billRunMasterRepository.findOne(id);
-			brm.setStatus("commit");
-
-			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
-					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
-					.andExpect(status().isOk()).andReturn();
-
-			content = new JSONObject(result.getResponse().getContentAsString());
-
-			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
-					"COMMITTED");
-
-			log.debug("###################################################################################");
 			log.debug("Loading Run4.sql");
 			log.debug("###################################################################################");
 			custDetailsCustomRepository.loadTestData("/scripts/run4.sql");
@@ -561,6 +560,21 @@ public class BillRunMasterResourceIntTest {
 
 			id = content.getLong("id");
 
+			log.debug("###################################################################################");
+			log.debug("Committing Bill Run 4  with id:" + id);
+			log.debug("###################################################################################");
+			brm = billRunMasterRepository.findOne(id);
+			brm.setStatus("commit");
+
+			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
+					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
+					"COMMITTED");
+			
 			brdList = billRunDetailsRepository.findByBillRunId(id);
 
 			for (BillRunDetails brd1 : brdList) {
@@ -574,6 +588,10 @@ public class BillRunMasterResourceIntTest {
 						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
 			
 			}
+			
+			log.debug("###################################################################################");
+			log.debug("Finished Run 4.");
+			log.debug("###################################################################################");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
