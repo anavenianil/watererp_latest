@@ -134,8 +134,6 @@ public class OnlinePaymentService {
 		
 		log.debug("***** Customer Arrears after payment:" + customer.getArrears());
 		
-		log.debug("Customer details after making payment:" + customer);
-
 		log.debug("This is the opc after save:" + opc);
 
 		return "Successfully saved with id:" + opc.getId().toString();

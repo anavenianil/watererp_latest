@@ -419,6 +419,9 @@ public class BillingService {
 				charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
 						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag);
 				
+				if(charges.isEmpty())
+					throw new Exception("No tariffs configured.");
+				
 				calc_charges_normal(charges,  bill_details, customer, bfd, remUnitsKL);
 			} else { // Single Tariff for first bill
 				calc_charges_first(charges, bfd, unitsKL, dFrom, dTo);
@@ -571,7 +574,7 @@ public class BillingService {
 	
 	public void calc_charges_normal(List<java.util.Map<String, Object>> charges, BillDetails bill_details, CustDetails customer, BillFullDetails bfd, float units)
 	{
-
+		
 		// Subtract Avg Water charges in case of Lock Bill scenario
 		for (Map<String, Object> charge : charges) {
 			if (((Long) charge.get("tariff_type_master_id")) == 1) {
@@ -731,6 +734,8 @@ public class BillingService {
 					}
 				}
 				
+				
+				
 				long billDays = ChronoUnit.DAYS.between(dFrom, dTo);
 
 				if (billDays <= 0) {
@@ -744,8 +749,8 @@ public class BillingService {
 
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
+				log.debug("Units:" + unitsKL);
 			}
-
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
 			
@@ -754,6 +759,9 @@ public class BillingService {
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
 					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
+			if(charges.isEmpty())
+				throw new Exception("No tariffs configured.");
+			
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
 			bfd.setId(null);
 
