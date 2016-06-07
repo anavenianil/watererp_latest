@@ -1,6 +1,5 @@
 <div>
-  <form name=editForm  rc-submit="save()" novalidate">
-	<!-- <form name="editForm" role="form" novalidate ng-submit="save()"> -->
+  <form name=editForm  rc-submit="save()" novalidate>	
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">Create Connection</h3>
@@ -71,16 +70,18 @@
 								<div class="col-sm-3">
 								<div class="form-group"
 								ng-class="{'has-error': editForm.firstName.$invalid && 
-         (editForm.firstName.$dirty || rc.editForm.attempted)}">
+                                (editForm.firstName.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_firstName">First
-										Name</label> <input type="text" class="form-control text-uppercase"
+										Name</label> <input type="!number" class="form-control text-uppercase"
 										name="firstName" id="field_firstName"
-										ng-model="applicationTxn.firstName" required />
+										ng-model="applicationTxn.firstName" ng-pattern="/[A-Za-z]/"  required />
 										<div
 									ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
 									<p class="help-block"
 										ng-show="editForm.firstName.$error.required">This field is
 										required.</p>
+										<p class="help-block" 
+										ng-show="editForm.firstName.$error.!number">Enter text only</p>
 										</div>
 										</div>
 								</div>
@@ -91,11 +92,23 @@
 										ng-model="applicationTxn.middleName" />
 								</div>
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.lastName.$invalid && 
+                                (editForm.lastName.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_lastName">Last
-										Name</label> <input type="text" class="form-control text-uppercase"
+										Name</label> <input type="!number" class="form-control text-uppercase"
 										name="lastName" id="field_lastName"
-										ng-model="applicationTxn.lastName" required />
-								</div>
+										ng-model="applicationTxn.lastName" ng-pattern="/[A-Za-z]/" required />
+										<div
+									ng-show="(editForm.lastName.$dirty || rc.editForm.attempted) && editForm.lastName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.lastName.$error.required">This field is
+										required.</p>
+										<p class="help-block" 
+										ng-show="editForm.lastName.$error.!number">Enter text only</p>
+										</div>
+										</div>
+									</div>
 								<div class="col-sm-1">
 									<label>Photo</label>
 									<button type="submit" class="btn btn-primary" ngf-drop=""
@@ -152,10 +165,12 @@
 							<legend>Contact Details</legend>
 							<div class="row">
 								<div class="col-sm-4">
+								
+								
 									<label class="control-label" for="field_mobileNo">Mobile
 										Number</label> <input type="number" class="form-control"
 										name="mobileNo" id="field_mobileNo"
-										ng-model="applicationTxn.mobileNo" required />
+										ng-model="applicationTxn.mobileNo" max="10" ng-pattern="/[0-9]/" required />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_officeNo">Office
@@ -175,9 +190,20 @@
 							<legend>Property Address</legend>
 							<div class="row">
 								<div class="col-sm-3">
+								
+								<div class="form-group"
+								ng-class="{'has-error': editForm.street.$invalid && 
+                                (editForm.street.$dirty || rc.editForm.attempted)}">
+								
 									<label class="control-label" for="field_street">Street</label>
 									<input type="text" class="form-control text-uppercase" name="street"
 										id="field_street" ng-model="applicationTxn.street" required />
+												<div
+									ng-show="(editForm.street.$dirty || rc.editForm.attempted) && editForm.street.$invalid">
+									<p class="help-block"
+										ng-show="editForm.street.$error.required">This field is
+										required.</p>
+									</div></div>	
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_plotNo">Plot
@@ -199,11 +225,20 @@
 							<br>
 							<div class="row">
 								<div class="col-sm-12">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.dma.$invalid && 
+                                (editForm.dma.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_dma">Address
 										Detail</label>
 									<textarea rows="2" cols="30" class="form-control text-uppercase" name="dma"
 										id="field_dma" style="resize: none"
 										ng-model="applicationTxn.dma" required></textarea>
+										<div
+									ng-show="(editForm.dma.$dirty || rc.editForm.attempted) && editForm.dma.$invalid">
+									<p class="help-block"
+										ng-show="editForm.dma.$error.required">This field is
+										required.</p>
+									</div></div>	
 								</div>
 							</div>
 						</fieldset>
@@ -212,13 +247,22 @@
 							<legend>Documents to be Attached </legend>
 							<div class="row">
 								<div class="col-sm-6">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.idProofMaster.$invalid && 
+                                (editForm.idProofMaster.$dirty || rc.editForm.attempted)}">
 									<label for="field_idProofMaster">Any among these</label> <select
 										class="form-control" id="field_idProofMaster"
 										name="idProofMaster" ng-model="applicationTxn.idProofMaster"
 										ng-change="disableOrg(applicationTxn.idProofMaster.id)"
-										ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idProofMasters track by idProofMaster.id">
+										ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idProofMasters track by idProofMaster.id" required>
 										<option value=""></option>
 									</select>
+									<div
+									ng-show="(editForm.idProofMaster.$dirty || rc.editForm.attempted) && editForm.idProofMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.idProofMaster.$error.required">This field is
+										required.</p>
+									</div></div>
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_idNumber">Number
@@ -229,16 +273,31 @@
 							<br>
 							<div class="row">
 								<div class="col-sm-4">
-									<label class="control-label" for="field_propertyDoc">Property
-										Ownership Document</label> <br> <input type="checkbox"
+									<div class="form-group"
+								ng-class="{'has-error': editForm.propertyDoc.$invalid && 
+                                (editForm.propertyDoc.$dirty || rc.editForm.attempted)}">
+									<label class="control-label" for="field_propertyDoc" required="required" >Property
+										Ownership Document</label> <br> 
+										
+										<input type="checkbox" 
 										ng-model="applicationTxn.deedDoc"
-										ng-true-value="'Tittle Deed/Offer letter'"
-										ng-false-value="'Not Submitted'">&nbsp;<span>Tittle
-										Deed/Offer letter </span><br> <input type="checkbox"
+										ng-true-value="'Tittle Deed/Offer letter'" 
+										ng-false-value="'Not Submitted'" required>&nbsp;
+										<span>Tittle
+										Deed/Offer letter </span><br>
+										
+										 <input type="checkbox"
 										ng-model="applicationTxn.agreementDoc"
 										ng-true-value="'Rented Property-lease-Rent Agreement'"
-										ng-false-value="'Not Submitted'">&nbsp;<span>Rented
-										Property- lease-Rent Agreement </span>
+										ng-false-value="'Not Submitted'" required>&nbsp;
+										<span>Rented Property- lease-Rent Agreement </span>
+										<div
+									ng-show="(editForm.propertyDoc.$dirty || rc.editForm.attempted) && editForm.propertyDoc.$invalid">
+									<p class="help-block"
+										ng-show="editForm.propertyDoc.$error.required">This field is
+										required.</p>
+									</div></div>
+										
 								</div>
 							</div>
 						</fieldset>
