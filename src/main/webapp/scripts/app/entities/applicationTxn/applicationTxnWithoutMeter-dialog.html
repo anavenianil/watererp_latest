@@ -1,5 +1,5 @@
 <div>
-	<form name="editForm" role="form" novalidate ng-submit="save()">
+	  <form name=editForm  rc-submit="save()" novalidate>
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">Create Connection(Without Metered)</h3>
@@ -38,14 +38,25 @@
 							<legend>Water Connection Details</legend>
 							<div class="row">
 								<div class="col-sm-6">
+								
+								<div class="form-group"
+								ng-class="{'has-error': editForm.tariffCategoryMaster.$invalid && 
+         (editForm.tariffCategoryMaster.$dirty || rc.editForm.attempted)}">
 									<label for="field_tariffCategoryMaster">Connection
 										Category</label> <select class="form-control"
 										id="field_tariffCategoryMaster" name="tariffCategoryMaster"
 										ng-model="applicationTxn.tariffCategoryMaster"
 										ng-change="disableOrg(applicationTxn.tariffCategoryMaster.id)"
-										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id">
+										ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id" required>
 										<option value=""></option>
 									</select>
+									 <div
+									ng-show="(editForm.tariffCategoryMaster.$dirty || rc.editForm.attempted) && editForm.tariffCategoryMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.tariffCategoryMaster.$error.required">This field is
+										required.</p>
+										</div>
+								</div>
 								</div>
 								<div class="col-sm-6">
 									<label class="control-label" for="field_waterConnectionUse">Water
@@ -60,9 +71,21 @@
 							<legend>Applicant Details</legend>
 							<div class="row">
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.firstName.$invalid && 
+                                (editForm.firstName.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_firstName">First
-										Name</label> <input type="text" class="form-control" name="firstName"
-										id="field_firstName" ng-model="applicationTxn.firstName" />
+										Name</label> <input type="!number" class="form-control" name="firstName"
+										id="field_firstName" ng-model="applicationTxn.firstName" required />
+										<div
+									ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.firstName.$error.required">This field is
+										required.</p>
+										<p class="help-block" 
+										ng-show="editForm.firstName.$error.!number">Enter text only</p>
+										</div>
+										</div>
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_middleName">Middle
@@ -70,9 +93,22 @@
 										id="field_middleName" ng-model="applicationTxn.middleName" />
 								</div>
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.lastName.$invalid && 
+                                (editForm.lastName.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_lastName">Last
-										Name</label> <input type="text" class="form-control" name="lastName"
-										id="field_lastName" ng-model="applicationTxn.lastName" />
+										Name</label> <input type="!number" class="form-control" name="lastName"
+										id="field_lastName" ng-model="applicationTxn.lastName" required />
+										<div
+									ng-show="(editForm.lastName.$dirty || rc.editForm.attempted) && editForm.lastName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.lastName.$error.required">This field is
+										required.</p>
+										<p class="help-block" 
+										ng-show="editForm.lastName.$error.!number">Enter text only</p>
+										</div>
+										</div>
+									</div>
 								</div>
 								<div class="col-sm-1">
 									<label>Photo</label>
@@ -151,9 +187,19 @@
 							<legend>Property Address</legend>
 							<div class="row">
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.street.$invalid && 
+                                (editForm.street.$dirty || rc.editForm.attempted)}">
+								
 									<label class="control-label" for="field_street">Street</label>
 									<input type="text" class="form-control" name="street"
-										id="field_street" ng-model="applicationTxn.street" />
+										id="field_street" ng-model="applicationTxn.street" required />
+										<div
+									ng-show="(editForm.street.$dirty || rc.editForm.attempted) && editForm.street.$invalid">
+									<p class="help-block"
+										ng-show="editForm.street.$error.required">This field is
+										required.</p>
+									</div></div>	
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_plotNo">Plot
@@ -173,15 +219,29 @@
 								</div>
 							</div>
 							<br>
-							<div class="row">
+							 <div class="row">
+								
 								<div class="col-sm-12">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.dma.$invalid && 
+                                (editForm.dma.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_dma">Address
-										Detail</label>
-									<textarea rows="2" cols="30" class="form-control" name="dma"
+										Details</label>
+									<textarea rows="2" cols="30" class="form-control text-uppercase" name="dma"
 										id="field_dma" style="resize: none"
-										ng-model="applicationTxn.dma"></textarea>
+										ng-model="applicationTxn.dma" required></textarea>
+										<div
+									ng-show="(editForm.dma.$dirty || rc.editForm.attempted) && editForm.dma.$invalid">
+									<p class="help-block"
+										ng-show="editForm.dma.$error.required">This field is
+										required.</p>
+									</div></div>	
 								</div>
-							</div>
+							</div> 
+							
+					
+							
+							
 						</fieldset>
 						<br>
 						<fieldset ng-hide="true">
@@ -223,13 +283,22 @@
 							<legend>Documents to be Attached </legend>
 							<div class="row">
 								<div class="col-sm-6">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.idProofMaster.$invalid && 
+                                (editForm.idProofMaster.$dirty || rc.editForm.attempted)}">
 									<label for="field_idProofMaster">Any among these</label> <select
 										class="form-control" id="field_idProofMaster"
 										name="idProofMaster" ng-model="applicationTxn.idProofMaster"
 										ng-change="disableOrg(applicationTxn.idProofMaster.id)"
-										ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idProofMasters track by idProofMaster.id">
+										ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idProofMasters track by idProofMaster.id" required>
 										<option value=""></option>
 									</select>
+									<div
+									ng-show="(editForm.idProofMaster.$dirty || rc.editForm.attempted) && editForm.idProofMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.idProofMaster.$error.required">This field is
+										required.</p>
+									</div></div>
 								</div>
 								<!-- <div class="col-sm-6">
 									<label>Any among these</label>
@@ -287,6 +356,9 @@
 							<legend>Approval Details</legend>
 							<div class="row">
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.divisionMaster.$invalid && 
+                                (editForm.divisionMaster.$dirty || rc.editForm.attempted)}">
 									<label for="field_divisionMaster">DMA</label> <select
 										class="form-control" id="field_divisionMaster"
 										name="divisionMaster" ng-model="applicationTxn.divisionMaster"
@@ -295,8 +367,17 @@
 										required>
 										<option value=""></option>
 									</select>
+									<div
+									ng-show="(editForm.divisionMaster.$dirty || rc.editForm.attempted) && editForm.divisionMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.divisionMaster.$error.required">This field is
+										required.</p>
+									</div></div>
 								</div>
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.streetMaster.$invalid && 
+                                (editForm.streetMaster.$dirty || rc.editForm.attempted)}">
 									<label for="field_streetMaster">Street</label> <select
 										class="form-control" id="field_streetMaster"
 										name="streetMaster" ng-model="applicationTxn.streetMaster"
@@ -304,23 +385,41 @@
 										required>
 										<option value=""></option>
 									</select>
+									<div
+									ng-show="(editForm.streetMaster.$dirty || rc.editForm.attempted) && editForm.streetMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.streetMaster.$error.required">This field is
+										required.</p>
+									</div></div>	
 								</div>
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.user.$invalid && 
+                                (editForm.user.$dirty || rc.editForm.attempted)}">
 									<label for="field_user">Approved By</label> <select
 										class="form-control" id="field_user" name="user"
 										ng-model="applicationTxn.user"
-										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users" required>
 										<option value=""></option>
 									</select>
+									<div
+									ng-show="(editForm.user.$dirty || rc.editForm.attempted) && editForm.user.$invalid">
+									<p class="help-block"
+										ng-show="editForm.user.$error.required">This field is
+										required.</p>
+									</div></div>
 								</div>
 								<div class="col-sm-3">
+								<div class="form-group"
+								ng-class="{'has-error': editForm.approvedDate.$invalid && 
+                                (editForm.approvedDate.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_approvedDate">Approved Date</label>
 									<div class="form-group">
 										<div class='input-group date' id='field_approvedDate'>
 											<input id="field_approvedDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
 												ng-model="applicationTxn.approvedDate" max-date="dtmax"
-												is-open="datePickerForApprovedDate.status.opened" /> <span
+												is-open="datePickerForApprovedDate.status.opened" required/> <span
 												class="input-group-btn">
 												<button type="button" class="btn btn-default"
 													ng-click="datePickerForApprovedDateOpen($event)">
@@ -329,7 +428,13 @@
 											</span>
 										</div>
 									</div>
-								</div>
+							
+								<div
+									ng-show="(editForm.approvedDate.$dirty || rc.editForm.attempted) && editForm.approvedDate.$invalid">
+									<p class="help-block"
+										ng-show="editForm.approvedDate.$error.required">This field is
+										required.</p>
+									</div></div>
 							</div>
 						</fieldset>
 
@@ -340,21 +445,21 @@
 							ng-click="clear()">
 							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 						</button>  
-						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 							class="btn btn-primary">
 							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Submit</span>
 						</button>
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	</form>
 	<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form name="confirmForm">
+				  <form name="confirm">
 					<div class="modal-header">
-						<!-- <h4 class="modal-title">Confirmation message</h4> -->
+						<h4 class="modal-title">Confirmation message</h4>
 					</div>
 					<div class="modal-body">
 						<p>
@@ -365,9 +470,9 @@
 								<label>Application No.:&nbsp;&nbsp; </label>{{applicationTxn.id}}
 							</h4>
 						</div>
-						<!-- <div>
+						<div>
 							<label>File No.: </label>{{applicationTxn.fileNumber}}
-						</div> -->
+						</div>
 					</div>
 
 					<div class="modal-footer">
@@ -379,5 +484,5 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div> 
 </div>
