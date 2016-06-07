@@ -26,18 +26,23 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.hibernate.Session;
 import org.hibernate.internal.SessionImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.callippus.water.erp.domain.BillAndCollectionDTO;
 import com.callippus.water.erp.domain.BillDetails;
+import com.callippus.water.erp.service.BillingService;
 import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 
 public class BillDetailsCustomRepositoryImpl extends
 SimpleJpaRepository<BillDetails, Long>
 implements BillDetailsCustomRepository{
-		
+
+	private final Logger log = LoggerFactory.getLogger(BillDetailsCustomRepositoryImpl.class);
+
 	@Inject
 	BillDetailsRepository billDetailsRepository;
 	
@@ -86,10 +91,10 @@ implements BillDetailsCustomRepository{
 
 		String sql ="select * from "+
 		"( "+
-		"select bill_date  txn_date, 'Bill', net_payable_amount debit, 0 credit, 0 balance  from bill_run_details brd, bill_full_details bfd "+
+		"select bill_date  txn_date, 'Bill', net_payable_amount debit, 0.0 credit, 0.0 balance  from bill_run_details brd, bill_full_details bfd "+
 		"where brd.can=bfd.can and brd.status=4 and brd.can=? "+
 		"union "+
-		"select receipt_dt txn_date, 'Payment', 0 debit, receipt_amt credit, 0 balance from coll_details where can=? "+
+		"select receipt_dt txn_date, 'Payment', 0.0 debit, receipt_amt credit, 0.0 balance from coll_details where can=? "+
 		") a "+
 		"order by txn_date ";
 		
@@ -104,9 +109,11 @@ implements BillDetailsCustomRepository{
 			Instant instant = ((Timestamp) row.get("txn_date")).toInstant();
 			dr.setTxn_date(ZonedDateTime.ofInstant(instant, ZoneId.systemDefault()));
 			dr.setTxn_type((String) row.get("txn_type"));
-			dr.setDebit((Float) row.get("debit"));
-			dr.setCredit((Float) row.get("credit"));
-			dr.setBalance((Float) row.get("balance"));
+			dr.setDebit((Double) row.get("debit"));
+			dr.setCredit((Double) row.get("credit"));
+			dr.setBalance((Double) row.get("balance"));
+			
+			log.debug("This is the dr:" + dr.toString());
 			
 			items.add(dr);
 		}
