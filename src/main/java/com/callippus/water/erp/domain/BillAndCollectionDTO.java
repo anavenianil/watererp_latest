@@ -1,31 +1,48 @@
 package com.callippus.water.erp.domain;
 
-import java.util.List;
+import java.time.ZonedDateTime;
 
-//import java.sql.Date;
-//import java.sql.Timestamp;
-//import java.time.LocalDate;
-
-//import com.sun.jmx.snmp.Timestamp;
 public class BillAndCollectionDTO {
-
-
-	private  List<CreditDTO> creditDTO;
-	private  List<DebitDTO> debitDTO;
-	
-	public List<CreditDTO> getCreditDTO() {
-		return creditDTO;
+	ZonedDateTime txn_date;
+	String txn_type;
+	Float debit;
+	Float credit;
+	Float balance;
+	public ZonedDateTime getTxn_date() {
+		return txn_date;
 	}
-	public void setCreditDTO(List<CreditDTO> creditDTO) {
-		this.creditDTO = creditDTO;
+	public void setTxn_date(ZonedDateTime txn_date) {
+		this.txn_date = txn_date;
 	}
-	public List<DebitDTO> getDebitDTO() {
-		return debitDTO;
+	public String getTxn_type() {
+		return txn_type;
 	}
-	public void setDebitDTO(List<DebitDTO> debitDTO) {
-		this.debitDTO = debitDTO;
+	public void setTxn_type(String txn_type) {
+		this.txn_type = txn_type;
 	}
-
+	public Float getDebit() {
+		return debit;
+	}
+	public void setDebit(Float debit) {
+		this.debit = debit;
+	}
+	public Float getCredit() {
+		return credit;
+	}
+	public void setCredit(Float credit) {
+		this.credit = credit;
+	}
+	public Float getBalance() {
+		return balance;
+	}
+	public void setBalance(Float balance) {
+		this.balance = balance;
+	}
+	@Override
+	public String toString() {
+		return "BillAndCollectionDTO [txn_date=" + txn_date + ", txn_type=" + txn_type + ", debit=" + debit
+				+ ", credit=" + credit + ", balance=" + balance + "]";
+	}
 	
 	
 }

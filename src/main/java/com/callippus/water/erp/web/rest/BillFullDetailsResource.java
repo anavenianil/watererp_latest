@@ -52,162 +52,139 @@ import com.codahale.metrics.annotation.Timed;
 @RequestMapping("/api")
 public class BillFullDetailsResource {
 
-    private final Logger log = LoggerFactory.getLogger(BillFullDetailsResource.class);
-        
-    @Inject
-    private BillFullDetailsRepository billFullDetailsRepository;
-    
-    @Inject
-    private BillRunDetailsRepository billRunDetailsRepository;
-    
-    @Inject
-    private ReportsCustomRepository reportsRepository;
-    
-    @Inject BillDetailsCustomRepository billDetailsCustomRepository;
-    
-    /**
-     * POST  /billFullDetailss -> Create a new billFullDetails.
-     */
-    @RequestMapping(value = "/billFullDetailss",
-        method = RequestMethod.POST,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<BillFullDetails> createBillFullDetails(@Valid @RequestBody BillFullDetails billFullDetails) throws URISyntaxException {
-        log.debug("REST request to save BillFullDetails : {}", billFullDetails);
-        if (billFullDetails.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("billFullDetails", "idexists", "A new billFullDetails cannot already have an ID")).body(null);
-        }
-        BillFullDetails result = billFullDetailsRepository.save(billFullDetails);
-        return ResponseEntity.created(new URI("/api/billFullDetailss/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("billFullDetails", result.getId().toString()))
-            .body(result);
-    }
+	private final Logger log = LoggerFactory.getLogger(BillFullDetailsResource.class);
 
-    /**
-     * PUT  /billFullDetailss -> Updates an existing billFullDetails.
-     */
-    @RequestMapping(value = "/billFullDetailss",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<BillFullDetails> updateBillFullDetails(@Valid @RequestBody BillFullDetails billFullDetails) throws URISyntaxException {
-        log.debug("REST request to update BillFullDetails : {}", billFullDetails);
-        if (billFullDetails.getId() == null) {
-            return createBillFullDetails(billFullDetails);
-        }
-        BillFullDetails result = billFullDetailsRepository.save(billFullDetails);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("billFullDetails", billFullDetails.getId().toString()))
-            .body(result);
-    }
+	@Inject
+	private BillFullDetailsRepository billFullDetailsRepository;
 
-    /**
-     * GET  /billFullDetailss -> get all the billFullDetailss.
-     */
-    @RequestMapping(value = "/billFullDetailss",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<List<BillFullDetails>> getAllBillFullDetailss(Pageable pageable,
-    		@RequestParam(value = "can", required = false) String can)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of BillFullDetailss");
-        //Page<BillFullDetails> page = billFullDetailsRepository.findAll(pageable); 
-        Page<BillFullDetails> page;
-        if(can == null){
-        	page = billFullDetailsRepository.findAll(pageable);
-        }
-        else
-        {
-        	page = billFullDetailsRepository.findByCan(pageable, can);
-        } 
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/billFullDetailss");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+	@Inject
+	private BillRunDetailsRepository billRunDetailsRepository;
 
-    /**
-     * GET  /billFullDetailss/:id -> get the "id" billFullDetails.
-     */
-    @RequestMapping(value = "/billFullDetailss/{id}",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<BillFullDetails> getBillFullDetails(@PathVariable Long id) {
-        log.debug("REST request to get BillFullDetails : {}", id);
-        BillFullDetails billFullDetails = billFullDetailsRepository.findOne(id);
-        return Optional.ofNullable(billFullDetails)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+	@Inject
+	private ReportsCustomRepository reportsRepository;
 
-    /**
-     * DELETE  /billFullDetailss/:id -> delete the "id" billFullDetails.
-     */
-    @RequestMapping(value = "/billFullDetailss/{id}",
-        method = RequestMethod.DELETE,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<Void> deleteBillFullDetails(@PathVariable Long id) {
-        log.debug("REST request to delete BillFullDetails : {}", id);
-        billFullDetailsRepository.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("billFullDetails", id.toString())).build();
-    }
-    
-	
-	
+	@Inject
+	BillDetailsCustomRepository billDetailsCustomRepository;
+
+	/**
+	 * POST /billFullDetailss -> Create a new billFullDetails.
+	 */
+	@RequestMapping(value = "/billFullDetailss", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<BillFullDetails> createBillFullDetails(@Valid @RequestBody BillFullDetails billFullDetails)
+			throws URISyntaxException {
+		log.debug("REST request to save BillFullDetails : {}", billFullDetails);
+		if (billFullDetails.getId() != null) {
+			return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("billFullDetails", "idexists",
+					"A new billFullDetails cannot already have an ID")).body(null);
+		}
+		BillFullDetails result = billFullDetailsRepository.save(billFullDetails);
+		return ResponseEntity.created(new URI("/api/billFullDetailss/" + result.getId()))
+				.headers(HeaderUtil.createEntityCreationAlert("billFullDetails", result.getId().toString()))
+				.body(result);
+	}
+
+	/**
+	 * PUT /billFullDetailss -> Updates an existing billFullDetails.
+	 */
+	@RequestMapping(value = "/billFullDetailss", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<BillFullDetails> updateBillFullDetails(@Valid @RequestBody BillFullDetails billFullDetails)
+			throws URISyntaxException {
+		log.debug("REST request to update BillFullDetails : {}", billFullDetails);
+		if (billFullDetails.getId() == null) {
+			return createBillFullDetails(billFullDetails);
+		}
+		BillFullDetails result = billFullDetailsRepository.save(billFullDetails);
+		return ResponseEntity.ok()
+				.headers(HeaderUtil.createEntityUpdateAlert("billFullDetails", billFullDetails.getId().toString()))
+				.body(result);
+	}
+
+	/**
+	 * GET /billFullDetailss -> get all the billFullDetailss.
+	 */
+	@RequestMapping(value = "/billFullDetailss", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<BillFullDetails>> getAllBillFullDetailss(Pageable pageable,
+			@RequestParam(value = "can", required = false) String can) throws URISyntaxException {
+		log.debug("REST request to get a page of BillFullDetailss");
+		// Page<BillFullDetails> page =
+		// billFullDetailsRepository.findAll(pageable);
+		Page<BillFullDetails> page;
+		if (can == null) {
+			page = billFullDetailsRepository.findAll(pageable);
+		} else {
+			page = billFullDetailsRepository.findByCan(pageable, can);
+		}
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/billFullDetailss");
+		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	}
+
+	/**
+	 * GET /billFullDetailss/:id -> get the "id" billFullDetails.
+	 */
+	@RequestMapping(value = "/billFullDetailss/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<BillFullDetails> getBillFullDetails(@PathVariable Long id) {
+		log.debug("REST request to get BillFullDetails : {}", id);
+		BillFullDetails billFullDetails = billFullDetailsRepository.findOne(id);
+		return Optional.ofNullable(billFullDetails).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+
+	/**
+	 * DELETE /billFullDetailss/:id -> delete the "id" billFullDetails.
+	 */
+	@RequestMapping(value = "/billFullDetailss/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<Void> deleteBillFullDetails(@PathVariable Long id) {
+		log.debug("REST request to delete BillFullDetails : {}", id);
+		billFullDetailsRepository.delete(id);
+		return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("billFullDetails", id.toString()))
+				.build();
+	}
+
 	/**
 	 * Bill report
 	 */
 	@RequestMapping(value = "/billFullDetailss/report/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public void getApplicationTxnReport(HttpServletResponse response, @PathVariable Long id) throws JRException,
-			IOException {
-		
-		Map<String, Object> params = new HashMap<String,Object>();
-		params.put("id",id);
+	public void getApplicationTxnReport(HttpServletResponse response, @PathVariable Long id)
+			throws JRException, IOException {
 
-		JasperPrint jasperPrint = reportsRepository
-				.generateReport("/reports/Bill.jasper", params);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+
+		JasperPrint jasperPrint = reportsRepository.generateReport("/reports/Bill.jasper", params);
 		response.setContentType("application/x-pdf");
-		response.setHeader("Content-disposition",
-				"inline; filename=Bill_" + id + ".pdf");
+		response.setHeader("Content-disposition", "inline; filename=Bill_" + id + ".pdf");
 
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
-	
-	
-    @RequestMapping(value = "/billFullDetailss", method = RequestMethod.GET,
-            params = {"can", "billDate"})
-		    public ResponseEntity<BillFullDetails> getBillDetails(@RequestParam(value = "can") String can, @RequestParam(value = "billDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate billDate) {
-		        log.debug("REST request to get Proceedings : {}, bill date: {}", can, billDate);
-		        BillFullDetails billFullDetails = billFullDetailsRepository.findByCanAndBillDate(can, billDate);
-		        return Optional.ofNullable(billFullDetails)
-		            .map(result -> new ResponseEntity<>(
-		                result,
-		                HttpStatus.OK))
-		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-		    }
 
-    
-    /**
-     * GET  /billFullDetailss/searchCAN/:searchTerm
-     */
-    @RequestMapping(value = "/billFullDetailss/searchCAN/{can}",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<List<BillAndCollectionDTO>> searchCANLike(@PathVariable String can) {
-        log.debug("REST request to get BillFullDetails : {}", can);
-        
-        List<BillAndCollectionDTO> billAndCollectionDTO = billDetailsCustomRepository.getBillCollection(can);
-        
-        return Optional.ofNullable(billAndCollectionDTO)
-            .map(result -> new ResponseEntity<>(
-            		billAndCollectionDTO,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+	@RequestMapping(value = "/billFullDetailss", method = RequestMethod.GET, params = { "can", "billDate" })
+	public ResponseEntity<BillFullDetails> getBillDetails(@RequestParam(value = "can") String can,
+			@RequestParam(value = "billDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate billDate) {
+		log.debug("REST request to get Proceedings : {}, bill date: {}", can, billDate);
+		BillFullDetails billFullDetails = billFullDetailsRepository.findByCanAndBillDate(can, billDate);
+		return Optional.ofNullable(billFullDetails).map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+
+	/**
+	 * GET /billFullDetailss/searchCAN/:searchTerm
+	 */
+	@RequestMapping(value = "/billFullDetailss/searchCAN/{can}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<BillAndCollectionDTO>> searchCANLike(@PathVariable String can) {
+		log.debug("REST request to get BillFullDetails : {}", can);
+
+		List<BillAndCollectionDTO> billAndCollectionDTO = billDetailsCustomRepository.getBillCollection(can);
+
+		return Optional.ofNullable(billAndCollectionDTO)
+				.map(result -> new ResponseEntity<>(billAndCollectionDTO, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

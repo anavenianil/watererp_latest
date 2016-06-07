@@ -9,9 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.callippus.water.erp.domain.BillAndCollectionDTO;
 import com.callippus.water.erp.domain.BillDetails;
-import com.callippus.water.erp.domain.CreditDTO;
-import com.callippus.water.erp.domain.DebitDTO;
-
 
 
 public interface BillDetailsCustomRepository extends JpaRepository<BillDetails,Long>{

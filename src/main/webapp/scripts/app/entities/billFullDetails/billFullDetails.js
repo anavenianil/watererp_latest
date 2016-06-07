@@ -174,7 +174,7 @@ angular.module('watererpApp')
             })
             .state('getWaterBillDetails', {
                 parent: 'billFullDetails',
-                url: '/getWaterBillDetailss',
+                url: '/getWaterBillDetails',
                 data: {
                     authorities: ['ROLE_USER'],
                     pageTitle: 'WaterBillDetailss'
