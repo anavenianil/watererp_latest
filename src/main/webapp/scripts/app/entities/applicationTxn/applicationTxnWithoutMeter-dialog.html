@@ -274,24 +274,24 @@
 							</div>
 						</div>
 						<br>
-					<div class="row">
-                              <div class="col-sm-12">
+						<div class="row">
+								<div class="col-sm-12">
 								<div class="form-group"
 									ng-class="{'has-error': editForm.dma.$invalid && 
                                 (editForm.dma.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_dma">Address
-										Details</label>
-									<textarea rows="2" cols="30"
-										class="form-control text-uppercase" name="dma" id="field_dma"
-										style="resize: none" ng-model="applicationTxn.dma" required></textarea>
-									<div
+										Detail</label>
+									<textarea rows="2" cols="30" class="form-control text-uppercase" name="dma"
+										id="field_dma" style="resize: none"
+										ng-model="applicationTxn.dma" required></textarea>
+										<div
 										ng-show="(editForm.dma.$dirty || rc.editForm.attempted) && editForm.dma.$invalid">
 										<p class="help-block" ng-show="editForm.dma.$error.required">This
 											field is required.</p>
 									</div>
 								</div>
-							</div>
-						</div>		       
+								</div>
+							</div>      
 					</fieldset>
 					<br>
 					<fieldset ng-hide="true">

@@ -48,10 +48,13 @@
 								name="expenseAmt" id="field_expenseAmt" 
 								ng-model="expenseDetails.expenseAmt" required="required" min="1" max="9999999"/>
 								
-								<div ng-show="{'has-error':editForm.expenseAmt.$invalid && (editForm.expenseAmt.$dirty||rc.editForm.attempted)}">
+								<div
+										ng-show="(editForm.expenseAmt.$dirty || rc.editForm.attempted) && editForm.expenseAmt.$invalid">
+										<p class="help-block"
+											ng-show="editForm.expenseAmt.$error.required" >This field is required.</p>
+                                   
 							 <p class="help-block" ng-show="editForm.expenseAmt.$error.number" >Enter valid amount number</p> 
-							<p class="help-block" ng-show="editForm.expenseAmt.$error.required">This field is required
-						
+							
 							
 						</div>
 						</div>
