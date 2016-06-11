@@ -440,10 +440,6 @@ public class BillingService {
 			if (bill_details.getCurrentBillType().equals("M")) {
 				unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
 			}
-			else
-			{
-				
-			}
 			
 			log.debug("################################################################################");
 			log.debug("          NEW METER BILL CASE (" + days + " days this month, total days:" + totDays + " )");
@@ -883,7 +879,7 @@ public class BillingService {
 		if (customer.getPrevBillMonth() == null) {
 			process_bill_new_meter(bill_details, customer);
 			return;
-		} else if (customer.getPrevBillMonth().isBefore(customer.getMeterFixDate())) {
+		} else if (customer.getPrevBillMonth().isBefore(customer.getMeterFixDate().withDayOfMonth(1))) {
 			// Meter change scenario
 
 			process_bill_meter_change(bill_details, customer);
@@ -922,6 +918,9 @@ public class BillingService {
 				return;
 			}
 
+			dFrom = customer.getPrevBillMonth().plusMonths(1);
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
+
 			long billDays = ChronoUnit.DAYS.between(dFrom, dTo);
 
 			if (billDays <= 0) {
@@ -933,9 +932,6 @@ public class BillingService {
 			log.debug("########################################");
 			log.debug("        METER CHANGE CASE, Bill Days:" + billDays);
 			log.debug("########################################");
-
-			dFrom = customer.getPrevBillMonth().plusMonths(1);
-			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
 			log.debug("Customer Info:" + customer.toString());
 			log.debug("From:" + dFrom + ", To:" + dTo);
