@@ -27,6 +27,13 @@
             "otherEntityName": "streetMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "meterDetails",
+            "otherEntityName": "meterDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -113,156 +120,151 @@
         },
         {
             "fieldId": 16,
-            "fieldName": "meterNo",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 17,
             "fieldName": "prevBillType",
             "fieldType": "String"
         },
         {
-            "fieldId": 18,
+            "fieldId": 17,
             "fieldName": "prevBillMonth",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 19,
+            "fieldId": 18,
             "fieldName": "prevAvgKl",
             "fieldType": "Float"
         },
         {
-            "fieldId": 20,
+            "fieldId": 19,
             "fieldName": "metReadingDt",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 21,
+            "fieldId": 20,
             "fieldName": "prevReading",
             "fieldType": "Float"
         },
         {
-            "fieldId": 22,
+            "fieldId": 21,
             "fieldName": "metReadingMo",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 23,
+            "fieldId": 22,
             "fieldName": "metAvgKl",
             "fieldType": "Float"
         },
         {
-            "fieldId": 24,
+            "fieldId": 23,
             "fieldName": "arrears",
             "fieldType": "Float"
         },
         {
-            "fieldId": 25,
+            "fieldId": 24,
             "fieldName": "reversalAmt",
             "fieldType": "Float"
         },
         {
-            "fieldId": 26,
+            "fieldId": 25,
             "fieldName": "installment",
             "fieldType": "Float"
         },
         {
-            "fieldId": 27,
+            "fieldId": 26,
             "fieldName": "otherCharges",
             "fieldType": "Float"
         },
         {
-            "fieldId": 28,
+            "fieldId": 27,
             "fieldName": "surcharge",
             "fieldType": "Float"
         },
         {
-            "fieldId": 29,
+            "fieldId": 28,
             "fieldName": "hrsSurcharge",
             "fieldType": "String"
         },
         {
-            "fieldId": 30,
+            "fieldId": 29,
             "fieldName": "resUnits",
             "fieldType": "Long"
         },
         {
-            "fieldId": 31,
+            "fieldId": 30,
             "fieldName": "metCostInstallment",
             "fieldType": "Float"
         },
         {
-            "fieldId": 32,
+            "fieldId": 31,
             "fieldName": "intOnArrears",
             "fieldType": "Float"
         },
         {
-            "fieldId": 33,
+            "fieldId": 32,
             "fieldName": "lastPymtDt",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 34,
+            "fieldId": 33,
             "fieldName": "lastPymtAmt",
             "fieldType": "Float"
         },
         {
-            "fieldId": 35,
+            "fieldId": 34,
             "fieldName": "mobileNo",
             "fieldType": "String"
         },
         {
-            "fieldId": 36,
+            "fieldId": 35,
             "fieldName": "ccFlag",
             "fieldType": "String"
         },
         {
-            "fieldId": 37,
+            "fieldId": 36,
             "fieldName": "cpFlag",
             "fieldType": "String"
         },
         {
-            "fieldId": 38,
-            "fieldName": "noticeFlag",
+            "fieldId": 37,
+            "fieldName":"noticeFlag",
             "fieldType": "String"
         },
         {
-            "fieldId": 39,
+            "fieldId": 38,
             "fieldName": "drFlag",
             "fieldType": "String"
         },
         {
-            "fieldId": 40,
+            "fieldId": 39,
             "fieldName": "lat",
             "fieldType": "String"
         },
         {
-            "fieldId": 41,
+            "fieldId": 40,
             "fieldName": "longi",
             "fieldType": "String"
         },
         {
-            "fieldId": 42,
+            "fieldId": 41,
             "fieldName": "meterFixDate",
             "fieldType": "LocalDate"
         },
         {
-            "fieldId": 43,
+            "fieldId": 42,
             "fieldName": "lockCharges",
             "fieldType": "Float"
         },
         {
-            "fieldId": 44,
+            "fieldId": 43,
             "fieldName": "idNumber",
             "fieldType": "String"
         },
         {
-            "fieldId": 45,
+            "fieldId": 44,
             "fieldName": "email",
             "fieldType": "String"
         },
 	    {
-            "fieldId": 46,
+            "fieldId": 45,
             "fieldName": "status",
             "fieldType": "CustStatus",
             "fieldValues": "ACTIVE, TERMINATED, PROCESSING",

@@ -938,7 +938,7 @@ public class BillingService {
 
 			// Check if old/new meter close/open is available
 
-			MeterDetails meterDetails = meterDetailsRepository.findOne(Long.parseLong(customer.getMeterNo()));
+			MeterDetails meterDetails = customer.getMeterDetails();
 			if (meterDetails != null) {
 				MeterChange meterChangeDetails = meterChangeRepository.findByCanAndNewMeterNo(bill_details.getCan(),
 						meterDetails);

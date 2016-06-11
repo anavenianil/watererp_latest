@@ -76,8 +76,6 @@ public class CustDetailsResourceIntTest {
     private static final String UPDATED_BOARD_METER = "BBBBB";
     private static final String DEFAULT_SEWERAGE = "AAAAA";
     private static final String UPDATED_SEWERAGE = "BBBBB";
-    private static final String DEFAULT_METER_NO = "AAAAA";
-    private static final String UPDATED_METER_NO = "BBBBB";
     private static final String DEFAULT_PREV_BILL_TYPE = "AAAAA";
     private static final String UPDATED_PREV_BILL_TYPE = "BBBBB";
 
@@ -154,7 +152,8 @@ public class CustDetailsResourceIntTest {
     private static final String UPDATED_ID_NUMBER = "BBBBB";
     private static final String DEFAULT_EMAIL = "AAAAA";
     private static final String UPDATED_EMAIL = "BBBBB";
-    
+
+
     private static final CustStatus DEFAULT_STATUS = CustStatus.ACTIVE;
     private static final CustStatus UPDATED_STATUS = CustStatus.TERMINATED;
 
@@ -199,7 +198,6 @@ public class CustDetailsResourceIntTest {
         custDetails.setPipeSize(DEFAULT_PIPE_SIZE);
         custDetails.setBoardMeter(DEFAULT_BOARD_METER);
         custDetails.setSewerage(DEFAULT_SEWERAGE);
-        custDetails.setMeterNo(DEFAULT_METER_NO);
         custDetails.setPrevBillType(DEFAULT_PREV_BILL_TYPE);
         custDetails.setPrevBillMonth(DEFAULT_PREV_BILL_MONTH);
         custDetails.setPrevAvgKl(DEFAULT_PREV_AVG_KL);
@@ -263,7 +261,6 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getPipeSize()).isEqualTo(DEFAULT_PIPE_SIZE);
         assertThat(testCustDetails.getBoardMeter()).isEqualTo(DEFAULT_BOARD_METER);
         assertThat(testCustDetails.getSewerage()).isEqualTo(DEFAULT_SEWERAGE);
-        assertThat(testCustDetails.getMeterNo()).isEqualTo(DEFAULT_METER_NO);
         assertThat(testCustDetails.getPrevBillType()).isEqualTo(DEFAULT_PREV_BILL_TYPE);
         assertThat(testCustDetails.getPrevBillMonth()).isEqualTo(DEFAULT_PREV_BILL_MONTH);
         assertThat(testCustDetails.getPrevAvgKl()).isEqualTo(DEFAULT_PREV_AVG_KL);
@@ -376,7 +373,6 @@ public class CustDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.doubleValue())))
                 .andExpect(jsonPath("$.[*].boardMeter").value(hasItem(DEFAULT_BOARD_METER.toString())))
                 .andExpect(jsonPath("$.[*].sewerage").value(hasItem(DEFAULT_SEWERAGE.toString())))
-                .andExpect(jsonPath("$.[*].meterNo").value(hasItem(DEFAULT_METER_NO.toString())))
                 .andExpect(jsonPath("$.[*].prevBillType").value(hasItem(DEFAULT_PREV_BILL_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].prevBillMonth").value(hasItem(DEFAULT_PREV_BILL_MONTH.toString())))
                 .andExpect(jsonPath("$.[*].prevAvgKl").value(hasItem(DEFAULT_PREV_AVG_KL.doubleValue())))
@@ -435,7 +431,6 @@ public class CustDetailsResourceIntTest {
             .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.doubleValue()))
             .andExpect(jsonPath("$.boardMeter").value(DEFAULT_BOARD_METER.toString()))
             .andExpect(jsonPath("$.sewerage").value(DEFAULT_SEWERAGE.toString()))
-            .andExpect(jsonPath("$.meterNo").value(DEFAULT_METER_NO.toString()))
             .andExpect(jsonPath("$.prevBillType").value(DEFAULT_PREV_BILL_TYPE.toString()))
             .andExpect(jsonPath("$.prevBillMonth").value(DEFAULT_PREV_BILL_MONTH.toString()))
             .andExpect(jsonPath("$.prevAvgKl").value(DEFAULT_PREV_AVG_KL.doubleValue()))
@@ -500,7 +495,6 @@ public class CustDetailsResourceIntTest {
         custDetails.setPipeSize(UPDATED_PIPE_SIZE);
         custDetails.setBoardMeter(UPDATED_BOARD_METER);
         custDetails.setSewerage(UPDATED_SEWERAGE);
-        custDetails.setMeterNo(UPDATED_METER_NO);
         custDetails.setPrevBillType(UPDATED_PREV_BILL_TYPE);
         custDetails.setPrevBillMonth(UPDATED_PREV_BILL_MONTH);
         custDetails.setPrevAvgKl(UPDATED_PREV_AVG_KL);
@@ -556,7 +550,6 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getPipeSize()).isEqualTo(UPDATED_PIPE_SIZE);
         assertThat(testCustDetails.getBoardMeter()).isEqualTo(UPDATED_BOARD_METER);
         assertThat(testCustDetails.getSewerage()).isEqualTo(UPDATED_SEWERAGE);
-        assertThat(testCustDetails.getMeterNo()).isEqualTo(UPDATED_METER_NO);
         assertThat(testCustDetails.getPrevBillType()).isEqualTo(UPDATED_PREV_BILL_TYPE);
         assertThat(testCustDetails.getPrevBillMonth()).isEqualTo(UPDATED_PREV_BILL_MONTH);
         assertThat(testCustDetails.getPrevAvgKl()).isEqualTo(UPDATED_PREV_AVG_KL);
