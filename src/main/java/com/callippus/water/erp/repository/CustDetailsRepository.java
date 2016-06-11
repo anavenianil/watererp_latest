@@ -28,4 +28,5 @@ public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 	Integer findByCan(@Param("division")String division, @Param("street")String street); 
 	
 
+	public List<CustDetails> findByPrevBillType(String prevBillType);
 }

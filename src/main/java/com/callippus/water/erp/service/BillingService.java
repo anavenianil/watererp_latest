@@ -24,6 +24,7 @@ import com.callippus.water.erp.repository.TariffMasterCustomRepository;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -151,7 +152,9 @@ public class BillingService {
 		if (bd.size() == 0)
 			throw new Exception("No new meter readings available to run bills.");
 
-		processBills(bd);
+		processBillsWithMeter(bd);
+
+		processBillsWithoutMeter();
 
 		if (failedRecords > 0)
 			br.setStatus("Completed with Errors");
@@ -343,8 +346,63 @@ public class BillingService {
 		brd.setBillRunMaster(br);
 	}
 
-	public void processBills(List<BillDetails> bd) {
+	public void processBillsWithMeter(List<BillDetails> bd) {
 		bd.forEach(bill_details -> process_bill(bill_details));
+	}
+
+	public void processBillsWithoutMeter() {
+		List<CustDetails> customers = custDetailsRepository.findByPrevBillType("U");
+		customers.forEach(customer -> saveBillDetails(customer));
+	}
+
+	public void saveBillDetails(CustDetails customer) {
+		// Insert bill_details record for each run
+		try {
+			initBill(customer.getCan()); //Is inited again in process_bill, but right now there is no better solution
+			
+			BillDetails bill_details = new BillDetails();
+			bill_details.setCan(customer.getCan());
+			LocalDate now = LocalDate.now();
+			bill_details.setBillDate(now);
+			bill_details.setCurrentBillType("U");
+
+			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMM");
+			if (customer.getPrevBillMonth() != null) {
+				LocalDate from = customer.getPrevBillMonth().plusMonths(1);
+				String fromMonth = from.format(date_format);
+				bill_details.setFromMonth(fromMonth);
+			} else if (customer.getMeterFixDate() != null) {
+				LocalDate from = customer.getMeterFixDate();
+				String fromMonth = from.format(date_format);
+				bill_details.setFromMonth(fromMonth);
+			} else
+				throw new Exception("Unmetered Customer does not have Prev Bill Month or Meter Fix Date");
+
+			bill_details.setToMonth(now.format(date_format));
+			bill_details.setMeterFixDate(customer.getMeterFixDate());
+			bill_details.setInitialReading(null);
+			bill_details.setPresentReading(null);
+			bill_details.setMetReadingDt(now);
+			bill_details.setInsertDt(ZonedDateTime.now());
+			bill_details.setStatus(BillingStatus.INITIATED);
+			bill_details.setMeterReaderId("1");
+			
+			process_bill(bill_details);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.debug(CPSUtils.stackTraceToString(e));
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(BrdStatus.FAILED.getValue());
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return;
+		}
+
 	}
 
 	public void process_bill(String can) throws Exception {
@@ -381,12 +439,14 @@ public class BillingService {
 			if (bill_details.getCurrentBillType().equals("M")) {
 				unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
 			}
-
+			
 			log.debug("################################################################################");
 			log.debug("          NEW METER BILL CASE (" + days + " days this month, total days:" + totDays + " )");
 			log.debug("################################################################################");
 			log.debug("Customer Info:" + customer.toString());
 			log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
+			
+			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
 
@@ -449,7 +509,7 @@ public class BillingService {
 	public void calc_units(CustDetails customer, BillDetails bill_details, LocalDate dFrom, LocalDate dTo,
 			float unitsKL) {
 
-		try {
+		try {	
 			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
 
 			if (monthsDiff == 0)
@@ -481,40 +541,30 @@ public class BillingService {
 				}
 
 				kl = (float) (unitsKL);
-			} else if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S")) // Moved
-																		// from
-																		// Stuck/Burnt
-																		// to
-																		// Metered
-																		// in
-																		// the
-																		// middle
-																		// of
-																		// the
-																		// month
+			} 
+			else if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S")) // Moved from Stuck/Burnt to Metered in the middle of the month
 			{
-
 				log.debug("########################################");
 				log.debug("    STUCK OR PARTIAL METERED BILL CASE");
 				log.debug("########################################");
 
 				float consumedKL = 0.0f;
-				
+
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
 				consumedKL = bill_details.getPresentReading() - bill_details.getInitialReading();
-				
+
 				avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
 
 				unitsKL = avgKL * monthsDiff;
-				
-				unitsKL = (consumedKL > unitsKL ? consumedKL:unitsKL);
-				
+
+				unitsKL = (consumedKL > unitsKL ? consumedKL : unitsKL);
+
 				units = unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
-			} else if (bill_details.getCurrentBillType().equals("L") 
-					|| bill_details.getCurrentBillType().equals("B") || bill_details.getCurrentBillType().equals("R")) {
+			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("B")
+					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");
 				log.debug("          LOCK BILL CASE");
@@ -845,7 +895,7 @@ public class BillingService {
 		float newUnits = 0.0f;
 
 		float consumedKL = 0.0f;
-		
+
 		try {
 			if (!validateCust(customer, bill_details))
 				return;
@@ -900,7 +950,7 @@ public class BillingService {
 				if (newUnits < 0.0f)
 					newUnits = 0.0f;
 			}
-			
+
 			consumedKL = oldUnits + newUnits;
 
 			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
@@ -909,34 +959,34 @@ public class BillingService {
 				monthsDiff = 1;
 
 			log.debug("Months:" + monthsDiff);
-			
+
 			avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
 
 			unitsKL = avgKL * monthsDiff;
-			
-			unitsKL = (consumedKL > unitsKL ? consumedKL:unitsKL);
-			
+
+			unitsKL = (consumedKL > unitsKL ? consumedKL : unitsKL);
+
 			units = unitsKL * 1000.0f;
 			log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
-			
+
 			avgKL = unitsKL / monthsDiff;
 
 			if (prevAvgKL != 0) {
 				factor = avgKL / prevAvgKL;
 
-				log.debug("units:" + units + ", unitsKL=" + unitsKL + ", avgKL=" + avgKL + ", prevAvgKL="
-						+ prevAvgKL + ", factor=" + factor);
+				log.debug("units:" + units + ", unitsKL=" + unitsKL + ", avgKL=" + avgKL + ", prevAvgKL=" + prevAvgKL
+						+ ", factor=" + factor);
 
 				if (factor > 4.0f || factor < 0.25f) {
 					// Unable to process customer
-					log.debug("Meter reading for:" + customer.getId() + ": is ::"
-							+ bill_details.getPresentReading() + ". This is too high or too low.");
-					throw new Exception("Meter Reading is:" + (factor > 4.0f?"Too high":"Too Low"));
+					log.debug("Meter reading for:" + customer.getId() + ": is ::" + bill_details.getPresentReading()
+							+ ". This is too high or too low.");
+					throw new Exception("Meter Reading is:" + (factor > 4.0f ? "Too high" : "Too Low"));
 				}
 			}
-			
-			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
-					dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
+
+			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
+					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
 			if (charges.isEmpty())
 				throw new Exception("No tariffs configured.");
