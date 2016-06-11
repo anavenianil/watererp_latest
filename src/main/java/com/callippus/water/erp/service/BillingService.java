@@ -24,7 +24,6 @@ import com.callippus.water.erp.repository.TariffMasterCustomRepository;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -387,6 +386,8 @@ public class BillingService {
 			bill_details.setStatus(BillingStatus.INITIATED);
 			bill_details.setMeterReaderId("1");
 			
+			billDetailsRepository.saveAndFlush(bill_details);
+			
 			process_bill(bill_details);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -422,8 +423,8 @@ public class BillingService {
 			return;
 
 		try {
-			if (!bill_details.getCurrentBillType().equals("M"))
-				bill_details.setPresentReading(customer.getPrevReading());
+//			if (!bill_details.getCurrentBillType().equals("M"))
+//				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
 			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
@@ -439,6 +440,10 @@ public class BillingService {
 			if (bill_details.getCurrentBillType().equals("M")) {
 				unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
 			}
+			else
+			{
+				
+			}
 			
 			log.debug("################################################################################");
 			log.debug("          NEW METER BILL CASE (" + days + " days this month, total days:" + totDays + " )");
@@ -449,7 +454,8 @@ public class BillingService {
 			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
-
+			
+			//This query just to determine if multiple tariffs exist during the period
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(),
 					dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
@@ -555,11 +561,11 @@ public class BillingService {
 
 				consumedKL = bill_details.getPresentReading() - bill_details.getInitialReading();
 
-				avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL? minAvgKL : customer.getPrevAvgKl());
 
-				unitsKL = avgKL * monthsDiff;
+				this.unitsKL = avgKL * monthsDiff;
 
-				unitsKL = (consumedKL > unitsKL ? consumedKL : unitsKL);
+				this.unitsKL = (consumedKL > this.unitsKL ? consumedKL : this.unitsKL);
 
 				units = unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
@@ -573,10 +579,10 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL? minAvgKL : customer.getPrevAvgKl());
 
-				unitsKL = avgKL * monthsDiff;
-				units = unitsKL * 1000.0f;
+				this.unitsKL = avgKL * monthsDiff;
+				units = this.unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
 			} else if (bill_details.getCurrentBillType().equals("U")) {
 
@@ -587,10 +593,10 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL? minAvgKL : customer.getPrevAvgKl());
 
-				unitsKL = avgKL * monthsDiff;
-				units = unitsKL * 1000.0f;
+				this.unitsKL = avgKL * monthsDiff;
+				units = this.unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
 			}
 		} catch (Exception e) {
@@ -960,7 +966,7 @@ public class BillingService {
 
 			log.debug("Months:" + monthsDiff);
 
-			avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
+			avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL? minAvgKL : customer.getPrevAvgKl());
 
 			unitsKL = avgKL * monthsDiff;
 
