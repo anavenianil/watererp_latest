@@ -286,7 +286,12 @@
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete
 		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-
+		
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.user.id !=null"
+			ui-sref="applicationTxnCloseWithoutMeter({applicationTxnId:applicationTxn.id})">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete(W)
+		</button>
 		<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
 			ng-click="declineRequest(applicationTxn.id)">
