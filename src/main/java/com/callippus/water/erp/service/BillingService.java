@@ -339,7 +339,7 @@ public class BillingService {
 		newMeterFlag = 0;
 		unMeteredFlag = 0;
 		multipleTariffs = false;
-
+		
 		partialUnitsKL = 0.0f;
 		remUnitsKL = 0.0f;
 
