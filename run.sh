@@ -7,14 +7,15 @@ sudo ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn initialize
 
 message=$(grep git.commit.message.full target/classes/config/git.properties | sed -n -e "s/.*=//p")
 
-
-if [ -n $message ]; then
+if [ -n "$message" ]; then
 	echo "Message for this version:" $message
-	db=$(echo $tag|grep "\[DB\]")
+	db=$(echo $message|grep "\[DB\]")
 	echo "This is the db:" $db
-	if [ -n $db ]; then
-		echo "Tag contains DB, Restoring DB"
+	if [ -n "$db" ]; then
+		echo "Message contains [DB], Restoring DB"
 		mysql -u root -pmysql watererp < Docs/DB/watererp.sql
+	else
+		echo "Skipping DB script run"
 	fi
 fi
 
