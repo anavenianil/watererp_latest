@@ -289,6 +289,14 @@ public class BillingService {
 			else
 				customer.setLockCharges(bfd.getLockCharges());
 
+			List<Adjustments> adjustments = adjustmentsRepository.findByCanAndStatusAndBillFullDetails(customer.getCan(), TxnStatus.PROCESSING,bfd);
+			
+			for(Adjustments adj:adjustments){
+				adj.setStatus(TxnStatus.BILLED);
+			}
+			
+			adjustmentsRepository.save(adjustments);
+
 			custDetailsRepository.saveAndFlush(customer);
 
 		} catch (Exception e) {
@@ -710,8 +718,8 @@ public class BillingService {
 
 			bfd.setSurcharge(CPSUtils.round(ewura, 2));
 
-			List<Adjustments> adjustments = adjustmentsRepository.findByCanAndStatus(bill_details.getCan(),
-					TxnStatus.INITIATED);
+			List<Adjustments> adjustments = adjustmentsRepository.findByCanAndStatusAndBillFullDetails(bill_details.getCan(),
+					TxnStatus.INITIATED, null);
 
 			BigDecimal adjAmount = new BigDecimal(0.0);
 			for (Adjustments adj : adjustments) {
@@ -721,10 +729,13 @@ public class BillingService {
 					adjAmount.add(adj.getAmount());
 				else
 					adjAmount.subtract(adj.getAmount());
+				
+				adj.setStatus(TxnStatus.PROCESSING);
+				adjustmentsRepository.saveAndFlush(adj);
 			}
 
-			Float total = bfd.getWaterCess() + bfd.getMeterServiceCharge() + bfd.getServiceCharge()
-					+ bfd.getSewerageCess() + bfd.getSurcharge() + bfd.getOtherCharges();
+			BigDecimal total = new BigDecimal(bfd.getWaterCess() + bfd.getMeterServiceCharge() + bfd.getServiceCharge()
+					+ bfd.getSewerageCess() + bfd.getSurcharge() + bfd.getOtherCharges()).add(adjAmount);
 
 			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") " + "+ Meter Svc Charge("
 					+ bfd.getMeterServiceCharge() + ") " + "+ Service Charge (" + bfd.getServiceCharge() + ") "
@@ -733,7 +744,7 @@ public class BillingService {
 
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
-			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears() + bfd.getArrears();
+			BigDecimal netPayable = new BigDecimal(bfd.getTotalAmount() + bfd.getIntOnArrears() + bfd.getArrears());
 			bfd.setNetPayableAmount(CPSUtils.round(netPayable.floatValue(), 2));
 
 			log.debug(
