@@ -3,6 +3,21 @@ echo "Running script from PWD:" `pwd`
 ##### Unit Testing ##############
 #grunt test
 
+sudo ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn initialize
+
+tag=$(grep git.tags target/classes/config/git.properties | sed -n -e "s/.*=//p")
+
+
+if [ -n $tag ]; then
+	echo "Tag for this version:" $tag
+	db=$(echo $tag|grep "\-DB\-")
+	echo "This is the db:" $db
+	if [ -n $db ]; then
+		echo "Tag contains DB, Restoring DB"
+		mysql -u root -pmysql watererp < Docs/DB/watererp.sql
+	fi
+fi
+
 ##### Integration Testing #######
 #sudo SPRING_PROFILES_ACTIVE=fast ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn test
 sudo SPRING_PROFILES_ACTIVE=fast ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Dtest=BillRunMasterResourceIntTest test
