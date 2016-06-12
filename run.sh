@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #This facilitates run in Jenkins
 echo "Running script from PWD:" `pwd`
 ##### Unit Testing ##############
@@ -6,6 +8,8 @@ echo "Running script from PWD:" `pwd`
 sudo ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn initialize
 
 message=$(grep git.commit.message.full target/classes/config/git.properties | sed -n -e "s/.*=//p")
+
+set +e
 
 if [ -n "$message" ]; then
 	echo "Message for this version:" $message
@@ -18,6 +22,8 @@ if [ -n "$message" ]; then
 		echo "Skipping DB script run"
 	fi
 fi
+
+set -e
 
 ##### Integration Testing #######
 #sudo SPRING_PROFILES_ACTIVE=fast ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn test
