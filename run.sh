@@ -5,12 +5,12 @@ echo "Running script from PWD:" `pwd`
 
 sudo ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn initialize
 
-tag=$(grep git.tags target/classes/config/git.properties | sed -n -e "s/.*=//p")
+message=$(grep git.commit.message.full target/classes/config/git.properties | sed -n -e "s/.*=//p")
 
 
-if [ -n $tag ]; then
-	echo "Tag for this version:" $tag
-	db=$(echo $tag|grep "\-DB\-")
+if [ -n $message ]; then
+	echo "Message for this version:" $message
+	db=$(echo $tag|grep "\[DB\]")
 	echo "This is the db:" $db
 	if [ -n $db ]; then
 		echo "Tag contains DB, Restoring DB"
