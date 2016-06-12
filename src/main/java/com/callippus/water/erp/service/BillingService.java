@@ -721,17 +721,19 @@ public class BillingService {
 			List<Adjustments> adjustments = adjustmentsRepository.findByCanAndStatusAndBillFullDetails(bill_details.getCan(),
 					TxnStatus.INITIATED, null);
 
-			BigDecimal adjAmount = new BigDecimal(0.0);
+			BigDecimal adjAmount = new BigDecimal("0.00");
+			adjAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 			for (Adjustments adj : adjustments) {
+				BigDecimal adj1 = adj.getAmount();
+				adj1.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 				adj.setBillFullDetails(bfd);
 				adj.setCustDetails(customer);
 				if (adj.getTransactionTypeMaster().getTypeOfTxn().equalsIgnoreCase("Credit"))
-					adjAmount.add(adj.getAmount());
+					adjAmount = adjAmount.add(adj1);
 				else
-					adjAmount.subtract(adj.getAmount());
+					adjAmount = adjAmount.subtract(adj1);
 				
 				adj.setStatus(TxnStatus.PROCESSING);
-				adjustmentsRepository.saveAndFlush(adj);
 			}
 
 			BigDecimal total = new BigDecimal(bfd.getWaterCess() + bfd.getMeterServiceCharge() + bfd.getServiceCharge()
@@ -740,7 +742,7 @@ public class BillingService {
 			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") " + "+ Meter Svc Charge("
 					+ bfd.getMeterServiceCharge() + ") " + "+ Service Charge (" + bfd.getServiceCharge() + ") "
 					+ "+ SewerageCess (" + bfd.getSewerageCess() + ") " + "+ Surcharge (" + bfd.getSurcharge() + ") "
-					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") " + "= Total (" + total + ") ");
+					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") + Adjustments (" + adjAmount +") " + "= Total (" + total + ") ");
 
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
@@ -771,6 +773,8 @@ public class BillingService {
 			log.debug("This is the BillFullDetails:" + bfd);
 
 			bfdRepository.save(bfd);
+
+			adjustmentsRepository.save(adjustments);
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.SUCCESS.getValue());
