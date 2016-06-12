@@ -4,8 +4,8 @@ echo "Running script from PWD:" `pwd`
 #grunt test
 
 ##### Integration Testing #######
-#sudo SPRING_PROFILES_ACTIVE=fast ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Dmaven.test.failure.ignore=true test
-sudo SPRING_PROFILES_ACTIVE=fast ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Dmaven.test.failure.ignore=true  -Dtest=BillRunMasterResourceIntTest test
+#sudo SPRING_PROFILES_ACTIVE=fast ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn test
+sudo SPRING_PROFILES_ACTIVE=fast ../../tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then

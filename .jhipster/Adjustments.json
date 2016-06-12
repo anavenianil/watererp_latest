@@ -1,0 +1,75 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "custDetails",
+            "otherEntityName": "custDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "billFullDetails",
+            "otherEntityName": "billFullDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "transactionTypeMaster",
+            "otherEntityName": "transactionTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "complaintTypeMaster",
+            "otherEntityName": "complaintTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "can",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "remarks",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "txnTime",
+            "fieldType": "ZonedDateTime"
+        },
+	{
+	    "fieldId": 5,
+	    "fieldName": "status",
+	    "fieldType": "TxnStatus",
+	    "fieldValues": "INITIATED, PROCESSING, BILLED",
+	    "fieldValidateRules": [
+		"required"
+	    ]
+	}
+    ],
+    "changelogDate": "20160612095001",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}
+

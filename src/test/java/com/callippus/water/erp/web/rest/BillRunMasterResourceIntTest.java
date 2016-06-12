@@ -310,7 +310,6 @@ public class BillRunMasterResourceIntTest {
 
 			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
 					"COMMITTED");
-
 			
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
