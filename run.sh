@@ -27,15 +27,17 @@ set -e
 
 ##### Integration Testing #######
 #sudo SPRING_PROFILES_ACTIVE=fast mvn test
-sudo SPRING_PROFILES_ACTIVE=fast mvn -Dtest=BillRunMasterResourceIntTest test
+export SPRING_PROFILES_ACTIVE=fast
+sudo mvn -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then
 	echo "Killing:" $a
 	sudo kill -9 $a
 fi
-pwd
-sudo BUILD_ID=dontKillMe nohup mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
+
+export BUILD_ID=dontKillMe
+sudo nohup mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
 #sleep 60
 #npm install
 #sudo grunt protractor-xvfb
