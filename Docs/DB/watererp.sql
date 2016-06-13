@@ -1700,6 +1700,28 @@ INSERT INTO `emp_role_mapping` (`id`,`internal_division`,`internal_role`,`creati
 
 
 --
+-- Table structure for table `watererp`.`employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE `employee` (
+  `EMPID` int(11) NOT NULL auto_increment,
+  `EMPNAME` varchar(20) NOT NULL,
+  `EMPAGE` int(11) NOT NULL,
+  `SALARY` bigint(20) NOT NULL,
+  `ADDRESS` varchar(20) NOT NULL,
+  PRIMARY KEY  (`EMPID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`employee`
+--
+
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+
+
+--
 -- Table structure for table `watererp`.`expense_details`
 --
 
@@ -6878,7 +6900,11 @@ CREATE TABLE `receipt` (
   KEY `fk_receipt_paymenttypes_id` (`payment_types_id`),
   CONSTRAINT `fk_receipt_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
   CONSTRAINT `fk_receipt_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+>>>>>>> refs/remotes/origin/bhaskar2
 
 --
 -- Dumping data for table `watererp`.`receipt`
