@@ -335,7 +335,8 @@
 									<label class="control-label" for="field_propertyDoc">Property
 										Ownership Document</label> 
 										<br>
-										<p  name="propertyDoc"  id="field_propertyDoc" ng-model="applicationTxn.propertyDoc"  ></p>
+										<div  name="propertyDoc"  id="field_propertyDoc" ng-model="applicationTxn.propertyDoc" 
+										ng-change="checkForm( applicationTxn.deedDoc,applicationTxn.agreementDoc)" >
 										 
 										 <input type="checkbox" name="propertyDoc"
 										ng-model="applicationTxn.deedDoc"
@@ -355,6 +356,8 @@
 										<p class="help-block"
 											ng-show="editForm.propertyDoc.$error.required">Any one
 											check-box is required.</p>
+											
+											</div>
                                      </div>
 									</div>
 								</div>

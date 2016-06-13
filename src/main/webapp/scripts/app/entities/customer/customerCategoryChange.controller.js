@@ -146,6 +146,23 @@ angular
 						$scope.getWorkflowTxnDetails($stateParams.requestId);
 					}
 					
+					$scope.checkReading = function(prvReading, newReading){
+						if(prvReading >= newReading)
+							{
+							
+							$scope.editForm.presentReading.$setValidity(
+									"ltPrevious", true);
+							return true;
+							}
+						else
+							{
+							
+							
+							$scope.editForm.presentReading.$setValidity(
+									"ltPrevious", false);
+							return false;
+					}
+					}
 					//approve a request
 					/*$scope.approve = function(workflowDTO){
 			        	console.log(workflowDTO);
