@@ -236,7 +236,7 @@ public class ApplicationTxnResource {
             custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             custDetails.setPrevBillType("U");
             custDetails.setPipeSize(0.5f);
-            custDetails.setPipeSizeMaster(pipeSizeMasterRepository.findOne(1l));
+            custDetails.setPipeSizeMaster(pipeSizeMasterRepository.findOne(1l));//hard coded pipesize
             custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
             custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
             custDetails.setConnDate(LocalDate.now());

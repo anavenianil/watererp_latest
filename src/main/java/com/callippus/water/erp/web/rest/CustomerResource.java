@@ -186,7 +186,7 @@ public class CustomerResource {
 		}
 		customerRepository.save(customer);
 		
-		CustDetails custDetails = custDetailsRepository.findByCan(customer.getCan());
+		CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customer.getCan());
 		
 		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
 			custDetails.setTariffCategoryMaster(customer.getPresentCategory());

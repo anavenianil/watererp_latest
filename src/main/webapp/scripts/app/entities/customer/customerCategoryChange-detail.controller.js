@@ -118,18 +118,7 @@ angular
 			            }
 			        };
 
-					/*$scope.saveChanges = function() {
-						console.log("WorkflowDTO data being posted to server:"
-								+ JSON.stringify($scope.workflowDTO));
-
-						return $http.post('/api/workflowTxnDetailsArr',
-								$scope.workflowDTO).then(
-								function(response) {
-									console.log("Server response:"
-											+ JSON.stringify(response));
-								});
-					}*/
-				
+			        
 					//approve a request
 					$scope.approve = function(workflowDTO){
 			        	return $http.post('/api/customers/customersApprove',
@@ -156,7 +145,7 @@ angular
 								ret = true;
 							break;
 						case 1:
-							if ($scope.orgRole.orgRoleName === 'Billing Officer')
+							if ($scope.orgRole.id === 16)
 								ret = true;
 							break;
 						default:
