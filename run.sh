@@ -36,9 +36,8 @@ fi
 set -e
 
 ##### Integration Testing #######
-#sudo SPRING_PROFILES_ACTIVE=fast mvn test
-export SPRING_PROFILES_ACTIVE=fast
-sudo mvn -Dtest=BillRunMasterResourceIntTest test
+#sudo mvn -Dspring.profiles.active=fast  test
+sudo mvn -Dspring.profiles.active=fast -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then
@@ -46,7 +45,7 @@ if [ -n "$a" ]; then
 	sudo kill -9 $a
 fi
 
-export BUILD_ID=dontKillMe
+#export BUILD_ID=dontKillMe
 sudo nohup mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
 #sleep 60
 #npm install
