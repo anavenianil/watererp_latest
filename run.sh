@@ -10,6 +10,9 @@ sudo mvn clean initialize
 message=$(grep git.commit.message.full target/classes/config/git.properties | sed -n -e "s/.*=//p")
 
 set +e
+#If commit message contains the word [DB], watererp.sql is run in Jenkins Test server
+#If commit message contains the word [PATCH], patch.sql is run in Jenkins Test server
+#If these keys are not found, no DB script is run.
 
 if [ -n "$message" ]; then
 	echo "Message for this version:" $message
