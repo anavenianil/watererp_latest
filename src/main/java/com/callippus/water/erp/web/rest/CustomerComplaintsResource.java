@@ -1,5 +1,6 @@
 package com.callippus.water.erp.web.rest;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
@@ -9,6 +10,7 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +27,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.Adjustments;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustomerComplaints;
-import com.callippus.water.erp.repository.CustDetailsCustomRepository;
+import com.callippus.water.erp.domain.TransactionTypeMaster;
+import com.callippus.water.erp.domain.enumeration.TxnStatus;
+import com.callippus.water.erp.repository.AdjustmentsRepository;
+import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerComplaintsCustomRepository;
 import com.callippus.water.erp.repository.CustomerComplaintsRepository;
@@ -60,6 +66,12 @@ public class CustomerComplaintsResource {
     
     @Inject
     private CustDetailsRepository custDetailsRepository;
+    
+    @Inject
+    private AdjustmentsRepository  adjustmentsRepository;
+    
+    @Inject
+    private BillFullDetailsRepository billFullDetailsRepository;
     /**
      * POST  /customerComplaintss -> Create a new customerComplaints.
      */
@@ -105,6 +117,7 @@ public class CustomerComplaintsResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public ResponseEntity<CustomerComplaints> updateCustomerComplaints(HttpServletRequest request,
     		@RequestBody CustomerComplaints customerComplaints) throws URISyntaxException,Exception {
         log.debug("REST request to update CustomerComplaints : {}", customerComplaints);
@@ -113,8 +126,33 @@ public class CustomerComplaintsResource {
         }
         if(customerComplaints.getStatus() == 4){
         	CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customerComplaints.getCan());
-        	custDetails.setOtherCharges(custDetails.getOtherCharges() +  customerComplaints.getAdjustmentAmt());
-        	custDetailsRepository.save(custDetails);
+        	//custDetails.setOtherCharges(custDetails.getOtherCharges() +  customerComplaints.getAdjustmentAmt());
+        	Adjustments adjustments= new Adjustments();
+        	TransactionTypeMaster ttm = new TransactionTypeMaster();
+        	BigDecimal amount= new BigDecimal(customerComplaints.getAdjustmentAmt().toString());
+        	adjustments.setBillFullDetails(null);
+        	adjustments.setCan(customerComplaints.getCan());
+        	
+        	adjustments.setRemarks(customerComplaints.getRemarks());
+        	adjustments.setTxnTime(ZonedDateTime.now());
+        	adjustments.setStatus(TxnStatus.BILLED);
+        	adjustments.setCustDetails(custDetails);
+        	if(amount.compareTo(new BigDecimal("0")) == 0 || amount.compareTo(new BigDecimal("0")) == 1){
+        		ttm.setId(1L);
+        		ttm.setTypeOfTxn("Debit");
+        		adjustments.setAmount(amount);
+        	adjustments.setTransactionTypeMaster(ttm);
+        	}else if(amount.compareTo(new BigDecimal("0")) == -1){
+        		ttm.setId(2L);
+        		ttm.setTypeOfTxn("Credit");
+        		amount.abs();
+        		adjustments.setAmount(amount);
+        	adjustments.setTransactionTypeMaster(ttm);
+        	}
+        	adjustments.setComplaintTypeMaster(customerComplaints.getComplaintTypeMaster());
+        	
+        	
+        	adjustmentsRepository.save(adjustments);
         }
         //customerComplaints.setStatus(customerComplaints.getStatus()+1);
         CustomerComplaints customerComplaints1 = customerComplaintsRepository.findOne(customerComplaints.getId());

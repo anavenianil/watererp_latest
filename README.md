@@ -101,3 +101,6 @@ FROM
 INFORMATION_SCHEMA.KEY_COLUMN_USAGE
 WHERE
 REFERENCED_TABLE_NAME = 'application_txn'
+
+
+update `adjustments` set bill_full_details_id=null, status='INITIATED';

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import com.callippus.water.erp.domain.BillFullDetails;
 
@@ -15,6 +14,6 @@ import com.callippus.water.erp.domain.BillFullDetails;
 public interface BillFullDetailsRepository extends JpaRepository<BillFullDetails,Long> {
 	public BillFullDetails findByCanAndBillDate(String can, LocalDate billDate);
 	
-	public Page<BillFullDetails> findByCan(Pageable page, String can);
+	public Page<BillFullDetails> findByCan(Pageable pageable, String can);
 	
 }

@@ -250,12 +250,38 @@ ul#strengthBar {
 	box-shadow: none;
 }
 
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
 
 /* Align text in td verifically (top aligned by Bootstrap) */
 .jh-table > tbody > tr > td {
     vertical-align: middle;
 }
 /* end of entity tables helpers */
+
+/********* Suppress Spinners on Number Elements CSS *********************/
+/* scaffolding */
+/* ----------- */
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+/********* Suppress Spinners on Number Elements CSS *********************/
+
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
 

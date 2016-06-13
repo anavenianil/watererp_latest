@@ -14,14 +14,15 @@
 - Configure New Item as Maven Project
 - Setup BitBucket via Git
 - Setup SCM Configuration: H/15 * * * * *
-- Give goal as compile
+- Give goal as compile or Execute Script:
+sudo /bin/sh -xe /var/lib/jenkins/workspace/watererp/run.sh
 - Post build actions, Execute script:
-${WORKSPACE}/run.sh
+sudo /bin/sh -xe /var/lib/jenkins/workspace/watererp/run.sh
 
 ##Jenkins Configuration for running script
 Add this to /etc/sudoers file
 
-jenkins ALL = NOPASSWD: /bin/sh -xe /var/lib/jenkins/workspace/DOI/run.sh
+jenkins ALL = NOPASSWD: /bin/sh -xe /var/lib/jenkins/workspace/watererp/run.sh
 
 ##Installing NodeJS, Grunt, Bower, etc.,
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -

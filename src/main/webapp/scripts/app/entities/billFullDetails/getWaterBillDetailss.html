@@ -1,0 +1,67 @@
+<div>
+	<h2>Water Bill details</h2>
+	<jh-alert></jh-alert>
+	<div class="row">
+		<div class="col-sm-4 col-md-offset-4">
+			<label for="field_SearchCan">Search By CAN</label>
+			<div class="form-group"
+				ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+				<input type="text" ng-model="custInfo" typeahead-min-length="3"
+					placeholder="Search CAN or Name or Address (Min 3 chars)"
+					uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+					typeahead-loading="loadingCANs"
+					typeahead-on-select='onSelect($item, $model, $label)'
+					typeahead-no-results="noResults" class="form-control">
+				<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+				<div ng-show="noResults">
+					<i class="glyphicon glyphicon-remove"></i>
+					No CANs Found
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+					<th jh-sort-by="id">
+						<span>ID</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+					<th jh-sort-by="txn_date">
+						<span>Transaction Date</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+					<th jh-sort-by="txn_type">
+						<span>Transaction Type</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+					<th jh-sort-by="debit">
+						<span>Dr</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+
+					<th jh-sort-by="credit">
+						<span>Cr</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+
+					<th jh-sort-by="balance">
+						<span>Balance</span>
+						<span class="glyphicon glyphicon-sort"></span>
+					</th>
+			</thead>
+			<tbody infinite-scroll="loadPage(page + 1)"
+				infinite-scroll-disabled="links['last'] == page">
+				<tr ng-repeat="txn in txnList">
+					<td>{{$index+1}}</td>
+					<td>{{txn.txn_date| date:'mediumDate'}}</td>
+					<td>{{txn.txn_type}}</td>
+					<td>{{txn.debit}}</td>
+					<td>{{txn.credit}}</td>
+					<td>{{txn.balance}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

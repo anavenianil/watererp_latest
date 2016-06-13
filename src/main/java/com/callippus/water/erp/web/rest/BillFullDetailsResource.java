@@ -35,7 +35,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.BillAndCollectionDTO;
 import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.repository.BillDetailsCustomRepository;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.BillRunDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
@@ -59,8 +61,10 @@ public class BillFullDetailsResource {
     private BillRunDetailsRepository billRunDetailsRepository;
     
     @Inject
-    private ReportsCustomRepository reportsRepository;
-    
+    private ReportsCustomRepository reportsRepository;    
+
+	@Inject
+	BillDetailsCustomRepository billDetailsCustomRepository;
     /**
      * POST  /billFullDetailss -> Create a new billFullDetails.
      */
@@ -187,4 +191,19 @@ public class BillFullDetailsResource {
 		            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 		    }
 
+	/**
+	 * GET /billFullDetailss/getWaterBillDetails/:can
+	 */
+	@RequestMapping(value = "/billFullDetailss/getWaterBillDetails/{can}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<BillAndCollectionDTO>> getWaterBillDetails(@PathVariable String can) {
+		log.debug("REST request to get BillFullDetails : {}", can);
+
+		List<BillAndCollectionDTO> billAndCollectionDTO = billDetailsCustomRepository.getBillCollection(can);
+
+		return Optional.ofNullable(billAndCollectionDTO)
+				.map(result -> new ResponseEntity<>(billAndCollectionDTO, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+    
 }

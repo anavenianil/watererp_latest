@@ -48,9 +48,6 @@
             <column name="pipe_size" type="${floatType}"/>
             <column name="board_meter" type="varchar(255)"/>
             <column name="sewerage" type="varchar(255)"/>
-            <column name="meter_no" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
             <column name="prev_bill_type" type="varchar(255)"/>
             <column name="prev_bill_month" type="date"/>
             <column name="prev_avg_kl" type="${floatType}"/>
@@ -103,7 +100,14 @@
             <column name="longi" type="varchar(255)"/>
             <column name="no_meter_amt" type="${floatType}"/>
             <column name="lock_charges" type="${floatType}"/>
+            <column name="meter_details_id" type="bigint"/>
         </createTable>
         
+        <addForeignKeyConstraint baseColumnNames="meter_details_id"
+                                 baseTableName="bill_full_details"
+                                 constraintName="fk_billfulldetails_meterdetails_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meter_details"/>
+
     </changeSet>
 </databaseChangeLog>

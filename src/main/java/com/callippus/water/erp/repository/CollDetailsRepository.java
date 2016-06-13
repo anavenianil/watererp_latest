@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface CollDetailsRepository extends JpaRepository<CollDetails,Long> {
 	Page<CollDetails> findByTxnStatus(Pageable pageable, String txnStatus);
+
+	Page<CollDetails> findByCan(Pageable pageable, String can);
 }

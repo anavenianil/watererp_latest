@@ -171,5 +171,21 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('getWaterBillDetails', {
+                parent: 'billFullDetails',
+                url: '/getWaterBillDetails',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'WaterBillDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/billFullDetails/getWaterBillDetailss.html',
+                        controller: 'GetWaterBillDetailsController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

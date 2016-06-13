@@ -1,67 +1,72 @@
 package com.callippus.water.erp.config;
 
-import java.io.IOException;
-import java.util.Properties;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+@Component
+@PropertySource(value = "config/git.properties")
 public class VersionProperties {
-
+	
+	@Value("${git.tags}")
 	String tags; // =${git.tags} // comma separated tag names
+	
+	@Value("${git.branch}")
 	String branch; // =${git.branch}
+	
+	@Value("${git.dirty}")
 	String dirty; // =${git.dirty}
+	
+	@Value("${git.remote.origin.url}")
 	String remoteOriginUrl; // =${git.remote.origin.url}
 
+	@Value("${git.commit.id}")
 	String commitId; // =${git.commit.id.full} OR ${git.commit.id}
+	
+	@Value("${git.commit.id.abbrev}")
 	String commitIdAbbrev; // =${git.commit.id.abbrev}
+	
+	@Value("${git.commit.id.describe}")
 	String describe; // =${git.commit.id.describe}
+	
+	@Value("${git.commit.id.describe-short}")
 	String describeShort; // =${git.commit.id.describe-short}
+	
+	@Value("${git.commit.user.name}")
 	String commitUserName; // =${git.commit.user.name}
+	
+	@Value("${git.commit.user.email}")
 	String commitUserEmail; // =${git.commit.user.email}
+	
+	@Value("${git.commit.message.full}")
 	String commitMessageFull; // =${git.commit.message.full}
+	
+	@Value("${git.commit.message.short}")
 	String commitMessageShort; // =${git.commit.message.short}
+	
+	@Value("${git.commit.time}")
 	String commitTime; // =${git.commit.time}
+	
+	@Value("${git.closest.tag.name}")
 	String closestTagName; // =${git.closest.tag.name}
+	
+	@Value("${git.closest.tag.commit.count}")
 	String closestTagCommitCount; // =${git.closest.tag.commit.count}
 
+	@Value("${git.build.user.name}")
 	String buildUserName; // =${git.build.user.name}
-	String buildUserEmail; // =${git.build.user.email}
-	String buildTime; // =${git.build.time}
-	String buildHost; // =${git.build.host}
-	String buildVersion; // =${git.build.version}
 	
-	public VersionProperties(Properties properties) {
-		this.tags = String.valueOf(properties.get("git.tags"));
-		this.branch = String.valueOf(properties.get("git.branch"));
-		this.dirty = String.valueOf(properties.get("git.dirty"));
-		this.remoteOriginUrl = String.valueOf(properties.get("git.remote.origin.url"));
-
-		this.commitId = String.valueOf(properties.get("git.commit.id.full")); // OR
-																				// properties.get("git.commit.id")
-																				// depending
-																				// on
-																				// your
-																				// configuration
-		this.commitIdAbbrev = String.valueOf(properties.get("git.commit.id.abbrev"));
-		this.describe = String.valueOf(properties.get("git.commit.id.describe"));
-		this.describeShort = String.valueOf(properties.get("git.commit.id.describe-short"));
-		this.commitUserName = String.valueOf(properties.get("git.commit.user.name"));
-		this.commitUserEmail = String.valueOf(properties.get("git.commit.user.email"));
-		this.commitMessageFull = String.valueOf(properties.get("git.commit.message.full"));
-		this.commitMessageShort = String.valueOf(properties.get("git.commit.message.short"));
-		this.commitTime = String.valueOf(properties.get("git.commit.time"));
-		this.closestTagName = String.valueOf(properties.get("git.closest.tag.name"));
-		this.closestTagCommitCount = String.valueOf(properties.get("git.closest.tag.commit.count"));
-
-		this.buildUserName = String.valueOf(properties.get("git.build.user.name"));
-		this.buildUserEmail = String.valueOf(properties.get("git.build.user.email"));
-		this.buildTime = String.valueOf(properties.get("git.build.time"));
-		this.buildHost = String.valueOf(properties.get("git.build.host"));
-		this.buildVersion = String.valueOf(properties.get("git.build.version"));
-	}
+	@Value("${git.build.user.email}")
+	String buildUserEmail; // =${git.build.user.email}
+	
+	@Value("${git.build.time}")
+	String buildTime; // =${git.build.time}
+	
+	@Value("${git.build.host}")
+	String buildHost; // =${git.build.host}
+	
+	@Value("${git.build.version}")
+	String buildVersion; // =${git.build.version}
 
 	public String getTags() {
 		return tags;
@@ -234,5 +239,6 @@ public class VersionProperties {
 				+ buildUserName + ", buildUserEmail=" + buildUserEmail + ", buildTime=" + buildTime + ", buildHost="
 				+ buildHost + ", buildVersion=" + buildVersion + "]";
 	}
-
+	
+	
 }

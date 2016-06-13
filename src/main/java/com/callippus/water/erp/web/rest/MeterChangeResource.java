@@ -242,7 +242,7 @@ public class MeterChangeResource {
 	        custMeterMapping.setFromDate(meterChange.getApprovedDate());
 	        custMeterMappingRepository.save(custMeterMapping);
 	        CustDetails custDetails = meterChange.getCustDetails();
-	        custDetails.setMeterNo(meterChange.getNewMeterNo().getMeterId());
+	        custDetails.setMeterDetails(meterChange.getNewMeterNo());
 	        custDetails.setPrevReading(meterChange.getNewMeterReading());
 	        custDetailsRepository.save(custDetails);
 		}

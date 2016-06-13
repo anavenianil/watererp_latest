@@ -122,10 +122,18 @@ public class OnlinePaymentService {
 		
 		CustDetails customer = custDetailsRepository.findByCanForUpdate(opr.getOnlinePaymentOrder().getUserDefinedField());
 		
-		customer.setArrears(customer.getArrears() - pgResponse.getTotalAmountPaid());
+		log.debug("***** Customer Arrears before payment:" + customer.getArrears());
 		
+		log.debug("***** Customer Payment Amount:" + opc.getTotalAmountPaid());
+		
+		customer.setArrears(customer.getArrears() - pgResponse.getTotalAmountPaid());
+						
 		custDetailsRepository.save(customer);
-
+		
+		customer = custDetailsRepository.findOne(customer.getId());
+		
+		log.debug("***** Customer Arrears after payment:" + customer.getArrears());
+		
 		log.debug("This is the opc after save:" + opc);
 
 		return "Successfully saved with id:" + opc.getId().toString();

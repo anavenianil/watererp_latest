@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -71,10 +73,6 @@ public class BillFullDetails implements Serializable {
 
     @Column(name = "sewerage")
     private String sewerage;
-
-    @NotNull
-    @Column(name = "meter_no", nullable = false)
-    private String meterNo;
 
     @Column(name = "prev_bill_type")
     private String prevBillType;
@@ -222,6 +220,10 @@ public class BillFullDetails implements Serializable {
     @Column(name = "lock_charges")
     private Float lockCharges;
 
+    @ManyToOne
+    @JoinColumn(name = "meter_details_id")
+    private MeterDetails meterDetails;
+
     public Long getId() {
         return id;
     }
@@ -348,14 +350,6 @@ public class BillFullDetails implements Serializable {
 
     public void setSewerage(String sewerage) {
         this.sewerage = sewerage;
-    }
-
-    public String getMeterNo() {
-        return meterNo;
-    }
-
-    public void setMeterNo(String meterNo) {
-        this.meterNo = meterNo;
     }
 
     public String getPrevBillType() {
@@ -742,6 +736,14 @@ public class BillFullDetails implements Serializable {
         this.lockCharges = lockCharges;
     }
 
+    public MeterDetails getMeterDetails() {
+        return meterDetails;
+    }
+
+    public void setMeterDetails(MeterDetails meterDetails) {
+        this.meterDetails = meterDetails;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -778,7 +780,6 @@ public class BillFullDetails implements Serializable {
             ", pipeSize='" + pipeSize + "'" +
             ", boardMeter='" + boardMeter + "'" +
             ", sewerage='" + sewerage + "'" +
-            ", meterNo='" + meterNo + "'" +
             ", prevBillType='" + prevBillType + "'" +
             ", prevBillMonth='" + prevBillMonth + "'" +
             ", prevAvgKl='" + prevAvgKl + "'" +

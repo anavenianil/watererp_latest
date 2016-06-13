@@ -1,0 +1,76 @@
+<div>
+    <h2>Adjustmentss</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="adjustments.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Adjustments</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="can"><span>Can</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="txnTime"><span>TxnTime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="custDetails.id"><span>custDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="billFullDetails.id"><span>billFullDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="transactionTypeMaster.id"><span>transactionTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.id"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="complaintTypeMaster.id"><span>complaintTypeMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="adjustments in adjustmentss track by adjustments.id">
+                    <td><a ui-sref="adjustments.detail({id:adjustments.id})">{{adjustments.id}}</a></td>
+                    <td>{{adjustments.can}}</td>
+                    <td>{{adjustments.amount}}</td>
+                    <td>{{adjustments.remarks}}</td>
+                    <td>{{adjustments.txnTime | date:'medium'}}</td>
+                    <td translate="{{'watererpApp.TxnStatus.' + adjustments.status}}">{{adjustments.status}}</td>
+                    <td>
+                        <a ui-sref="custDetails.detail({id:adjustments.custDetails.id})">{{adjustments.custDetails.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="billFullDetails.detail({id:adjustments.billFullDetails.id})">{{adjustments.billFullDetails.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="transactionTypeMaster.detail({id:adjustments.transactionTypeMaster.id})">{{adjustments.transactionTypeMaster.id}}</a>
+                    </td>
+                    <td>
+                        {{adjustments.user.id}}
+                    </td>
+                    <td>
+                        <a ui-sref="complaintTypeMaster.detail({id:adjustments.complaintTypeMaster.id})">{{adjustments.complaintTypeMaster.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="adjustments.detail({id:adjustments.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="adjustments.edit({id:adjustments.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="adjustments.delete({id:adjustments.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

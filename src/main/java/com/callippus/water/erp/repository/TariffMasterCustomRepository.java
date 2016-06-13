@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface TariffMasterCustomRepository extends JpaRepository<TariffMaster,Long> {	
 	List<java.util.Map<String, Object>> findTariffs(String can, LocalDate validFrom, LocalDate validTo, float avgKL, int unMeteredFlag, int newMeterFlag);
+	List<java.util.Map<String, Object>> getTariffs(String can, LocalDate validFrom, LocalDate validTo, float avgKL,
+			int unMeteredFlag, int newMeterFlag);
 }
