@@ -22,10 +22,9 @@ angular.module('watererpApp').controller(
 				}, function(result) {
 					$scope.applicationTxn = result;
 					$scope.applicationTxn.remarks = '';
-					/*ApplicationTxnService.generateCan(result.id).then(function(response) {
+					ApplicationTxnService.generateCanWithoutMeter(id).then(function(response) {
 	    				$scope.applicationTxn.can = response;
-	    				
-	    			});*/
+	    			});
 				});
 			}
 

@@ -104,6 +104,15 @@ angular.module('watererpApp').factory(
 					}).then(function(response) {
 						return response.data;
 					});
+				},
+				generateCanWithoutMeter : function(applicationTxnId) {
+					return $http.get('api/applicationTxnsWM/canGen', {
+						params : {
+							applicationTxnId : applicationTxnId
+						}
+					}).then(function(response) {
+						return response.data;
+					});
 				}
 			/*
 			 * , getMyRequests: function () { return

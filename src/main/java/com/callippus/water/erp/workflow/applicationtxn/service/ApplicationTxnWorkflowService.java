@@ -299,9 +299,14 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 		workflowService.getUserDetails();
 	    
 		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
-	    workflowService.setRemarks(remarks);  
+	    workflowService.setRemarks(remarks);
 	    Integer status = applicationTxn.getStatus();
-	    status +=1;
+	    if(applicationTxn.getUser()!=null && applicationTxn.getStatus()==1){
+	    	status = 8;
+	    }else
+	    {
+	    	status +=1;
+	    }
 	    applicationTxn.setStatus(status);
         workflowService.setRequestStatus(status);
         //applicationTxnWorkflowService.
