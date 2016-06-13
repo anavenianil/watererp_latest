@@ -81,7 +81,7 @@
 												is required.</p>
 											
 												<p class="help-block" ng-pattern="/^[a-zA-Z]/"
-												ng-show="editForm.firstName.$error./^[a-zA-Z]/">Enter text  only
+												ng-show="editForm.firstName.$error.pattern">Enter text  only
 										
 												</p>
 										</div>
@@ -107,7 +107,7 @@
 												ng-show="editForm.lastName.$error.required">This field
 												is required.</p>
 											<p class="help-block" ng-pattern="/^[a-zA-Z]/"
-												ng-show="editForm.lastName.$error./^[a-zA-Z]/">Enter text only
+												ng-show="editForm.lastName.$error.pattern">Enter text only
 												</p>
 										</div>
 									</div>
@@ -415,3 +415,13 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">  
+    function onClick(){  
+alert("HAI")
+
+    if(!((document.getElementById("field_propertyDoc").checked || document.getElementById("field_propertyDoc").checked))){
+
+alert("check At least on box");
+}
+}
+    </script>
