@@ -9,29 +9,29 @@
         },
         {
             "relationshipId": 2,
-            "relationshipName": "prevMeterNo",
-            "otherEntityName": "meterDetails",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 3,
-            "relationshipName": "newMeterNo",
-            "otherEntityName": "meterDetails",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 4,
             "relationshipName": "billFullDetails",
             "otherEntityName": "billFullDetails",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
-            "relationshipId": 5,
+            "relationshipId": 3,
+            "relationshipName": "transactionTypeMaster",
+            "otherEntityName": "transactionTypeMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 4,
             "relationshipName": "user",
             "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "complaintTypeMaster",
+            "otherEntityName": "complaintTypeMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
@@ -44,36 +44,30 @@
         },
         {
             "fieldId": 2,
-            "fieldName": "reasonForChange",
-            "fieldType": "String"
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 3,
-            "fieldName": "prevMeterReading",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "newMeterReading",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 5,
             "fieldName": "remarks",
             "fieldType": "String"
         },
         {
-            "fieldId": 6,
-            "fieldName": "approvedDate",
-            "fieldType": "LocalDate"
+            "fieldId": 4,
+            "fieldName": "txnTime",
+            "fieldType": "ZonedDateTime"
         },
-        {
-            "fieldId": 7,
-            "fieldName": "status",
-            "fieldType": "Integer"
-        }
+	{
+	    "fieldId": 5,
+	    "fieldName": "status",
+	    "fieldType": "TxnStatus",
+	    "fieldValues": "INITIATED, PROCESSING, BILLED",
+	    "fieldValidateRules": [
+		"required"
+	    ]
+	}
     ],
-    "changelogDate": "20160419095001",
+    "changelogDate": "20160612095001",
     "dto": "no",
     "service": "no",
     "pagination": "infinite-scroll"

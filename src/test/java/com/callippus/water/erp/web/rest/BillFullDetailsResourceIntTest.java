@@ -75,8 +75,6 @@ public class BillFullDetailsResourceIntTest {
     private static final String UPDATED_BOARD_METER = "BBBBB";
     private static final String DEFAULT_SEWERAGE = "AAAAA";
     private static final String UPDATED_SEWERAGE = "BBBBB";
-    private static final String DEFAULT_METER_NO = "AAAAA";
-    private static final String UPDATED_METER_NO = "BBBBB";
     private static final String DEFAULT_PREV_BILL_TYPE = "AAAAA";
     private static final String UPDATED_PREV_BILL_TYPE = "BBBBB";
 
@@ -244,7 +242,6 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setPipeSize(DEFAULT_PIPE_SIZE);
         billFullDetails.setBoardMeter(DEFAULT_BOARD_METER);
         billFullDetails.setSewerage(DEFAULT_SEWERAGE);
-        billFullDetails.setMeterNo(DEFAULT_METER_NO);
         billFullDetails.setPrevBillType(DEFAULT_PREV_BILL_TYPE);
         billFullDetails.setPrevBillMonth(DEFAULT_PREV_BILL_MONTH);
         billFullDetails.setPrevAvgKl(DEFAULT_PREV_AVG_KL);
@@ -326,7 +323,6 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getPipeSize()).isEqualTo(DEFAULT_PIPE_SIZE);
         assertThat(testBillFullDetails.getBoardMeter()).isEqualTo(DEFAULT_BOARD_METER);
         assertThat(testBillFullDetails.getSewerage()).isEqualTo(DEFAULT_SEWERAGE);
-        assertThat(testBillFullDetails.getMeterNo()).isEqualTo(DEFAULT_METER_NO);
         assertThat(testBillFullDetails.getPrevBillType()).isEqualTo(DEFAULT_PREV_BILL_TYPE);
         assertThat(testBillFullDetails.getPrevBillMonth()).isEqualTo(DEFAULT_PREV_BILL_MONTH);
         assertThat(testBillFullDetails.getPrevAvgKl()).isEqualTo(DEFAULT_PREV_AVG_KL);
@@ -487,24 +483,6 @@ public class BillFullDetailsResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMeterNoIsRequired() throws Exception {
-        int databaseSizeBeforeTest = billFullDetailsRepository.findAll().size();
-        // set the field null
-        billFullDetails.setMeterNo(null);
-
-        // Create the BillFullDetails, which fails.
-
-        restBillFullDetailsMockMvc.perform(post("/api/billFullDetailss")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(billFullDetails)))
-                .andExpect(status().isBadRequest());
-
-        List<BillFullDetails> billFullDetailss = billFullDetailsRepository.findAll();
-        assertThat(billFullDetailss).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkMetReadingDtIsRequired() throws Exception {
         int databaseSizeBeforeTest = billFullDetailsRepository.findAll().size();
         // set the field null
@@ -565,7 +543,6 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].pipeSize").value(hasItem(DEFAULT_PIPE_SIZE.doubleValue())))
                 .andExpect(jsonPath("$.[*].boardMeter").value(hasItem(DEFAULT_BOARD_METER.toString())))
                 .andExpect(jsonPath("$.[*].sewerage").value(hasItem(DEFAULT_SEWERAGE.toString())))
-                .andExpect(jsonPath("$.[*].meterNo").value(hasItem(DEFAULT_METER_NO.toString())))
                 .andExpect(jsonPath("$.[*].prevBillType").value(hasItem(DEFAULT_PREV_BILL_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].prevBillMonth").value(hasItem(DEFAULT_PREV_BILL_MONTH.toString())))
                 .andExpect(jsonPath("$.[*].prevAvgKl").value(hasItem(DEFAULT_PREV_AVG_KL.doubleValue())))
@@ -642,7 +619,6 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.pipeSize").value(DEFAULT_PIPE_SIZE.doubleValue()))
             .andExpect(jsonPath("$.boardMeter").value(DEFAULT_BOARD_METER.toString()))
             .andExpect(jsonPath("$.sewerage").value(DEFAULT_SEWERAGE.toString()))
-            .andExpect(jsonPath("$.meterNo").value(DEFAULT_METER_NO.toString()))
             .andExpect(jsonPath("$.prevBillType").value(DEFAULT_PREV_BILL_TYPE.toString()))
             .andExpect(jsonPath("$.prevBillMonth").value(DEFAULT_PREV_BILL_MONTH.toString()))
             .andExpect(jsonPath("$.prevAvgKl").value(DEFAULT_PREV_AVG_KL.doubleValue()))
@@ -725,7 +701,6 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setPipeSize(UPDATED_PIPE_SIZE);
         billFullDetails.setBoardMeter(UPDATED_BOARD_METER);
         billFullDetails.setSewerage(UPDATED_SEWERAGE);
-        billFullDetails.setMeterNo(UPDATED_METER_NO);
         billFullDetails.setPrevBillType(UPDATED_PREV_BILL_TYPE);
         billFullDetails.setPrevBillMonth(UPDATED_PREV_BILL_MONTH);
         billFullDetails.setPrevAvgKl(UPDATED_PREV_AVG_KL);
@@ -799,7 +774,6 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getPipeSize()).isEqualTo(UPDATED_PIPE_SIZE);
         assertThat(testBillFullDetails.getBoardMeter()).isEqualTo(UPDATED_BOARD_METER);
         assertThat(testBillFullDetails.getSewerage()).isEqualTo(UPDATED_SEWERAGE);
-        assertThat(testBillFullDetails.getMeterNo()).isEqualTo(UPDATED_METER_NO);
         assertThat(testBillFullDetails.getPrevBillType()).isEqualTo(UPDATED_PREV_BILL_TYPE);
         assertThat(testBillFullDetails.getPrevBillMonth()).isEqualTo(UPDATED_PREV_BILL_MONTH);
         assertThat(testBillFullDetails.getPrevAvgKl()).isEqualTo(UPDATED_PREV_AVG_KL);

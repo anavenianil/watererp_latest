@@ -56,6 +56,47 @@ INSERT INTO `access_list` (`id`,`user_id`) VALUES
 
 
 --
+-- Table structure for table `watererp`.`adjustments`
+--
+
+DROP TABLE IF EXISTS `adjustments`;
+CREATE TABLE `adjustments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `can` varchar(255) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `txn_time` timestamp NULL DEFAULT NULL,
+  `status` varchar(255) NOT NULL,
+  `cust_details_id` bigint(20) DEFAULT NULL,
+  `bill_full_details_id` bigint(20) DEFAULT NULL,
+  `transaction_type_master_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `complaint_type_master_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_adjustments_custdetails_id` (`cust_details_id`),
+  KEY `fk_adjustments_billfulldetails_id` (`bill_full_details_id`),
+  KEY `fk_adjustments_transactiontypemaster_id` (`transaction_type_master_id`),
+  KEY `fk_adjustments_user_id` (`user_id`),
+  KEY `fk_adjustments_complainttypemaster_id` (`complaint_type_master_id`),
+  CONSTRAINT `fk_adjustments_complainttypemaster_id` FOREIGN KEY (`complaint_type_master_id`) REFERENCES `complaint_type_master` (`id`),
+  CONSTRAINT `fk_adjustments_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
+  CONSTRAINT `fk_adjustments_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
+  CONSTRAINT `fk_adjustments_transactiontypemaster_id` FOREIGN KEY (`transaction_type_master_id`) REFERENCES `transaction_type_master` (`id`),
+  CONSTRAINT `fk_adjustments_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `watererp`.`adjustments`
+--
+
+/*!40000 ALTER TABLE `adjustments` DISABLE KEYS */;
+INSERT INTO `adjustments` (`id`,`can`,`amount`,`remarks`,`txn_time`,`status`,`cust_details_id`,`bill_full_details_id`,`transaction_type_master_id`,`user_id`,`complaint_type_master_id`) VALUES 
+ (1,'04060002','120.00','Credit txn','2016-06-12 10:20:30','INITIATED',5,NULL,1,NULL,NULL),
+ (2,'04060002','240.00','Debit txn','2016-06-11 10:20:30','INITIATED',5,NULL,2,NULL,NULL);
+/*!40000 ALTER TABLE `adjustments` ENABLE KEYS */;
+
+
+--
 -- Table structure for table `watererp`.`application_txn`
 --
 
@@ -116,7 +157,7 @@ CREATE TABLE `application_txn` (
   CONSTRAINT `fk_applicationtxn_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
   CONSTRAINT `fk_applicationtxn_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`),
   CONSTRAINT `fk_applicationtxn_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`application_txn`
@@ -154,7 +195,8 @@ INSERT INTO `application_txn` (`id`,`first_name`,`middle_name`,`last_name`,`orga
  (40,'sudhakar',NULL,'g','\0','','',9849422222,4022222222,'sudhakar.g@gmail.com','road no 2','22','2','12345','Residential',NULL,NULL,'plot no 22,\nroad no 2,\nkphb',NULL,NULL,'2222b2222',NULL,'04060003','',8,0,'2016-06-03','2016-03-20','ok','MeterId3',NULL,'Tittle Deed/Offer letter',NULL,1,3,NULL,21,4,6,2);
 INSERT INTO `application_txn` (`id`,`first_name`,`middle_name`,`last_name`,`organization`,`organization_name`,`designation`,`mobile_no`,`office_no`,`email`,`street`,`plot_no`,`block_no`,`tanesco_meter`,`water_connection_use`,`b_street`,`ward`,`dma`,`b_plot_no`,`registered_mobile`,`id_number`,`property_doc`,`can`,`photo`,`status`,`meter_reading`,`requested_date`,`connection_date`,`remarks`,`meter_no`,`approved_date`,`deed_doc`,`agreement_doc`,`tariff_category_master_id`,`meter_details_id`,`user_id`,`request_at_id`,`division_master_id`,`street_master_id`,`id_proof_master_id`) VALUES 
  (41,'Sunitha',NULL,'b','\0','','',9849433333,40333333,'sunitha.b@gmail.com','road no 3','33','3b',NULL,'Residential',NULL,NULL,'plot no 33,\nroad no 3,\nkphb',NULL,NULL,'3333c3333',NULL,'04060004','',8,1,'2016-06-03','2016-04-10','ok','MeterId5',NULL,NULL,NULL,1,5,NULL,21,4,6,2),
- (42,'Mahesh',NULL,'S','\0','','',9849444444,4044444444,'mahesh.s@gmail.com','road no 4','44','4',NULL,'Residential',NULL,NULL,'plot no 44,\nroad no 4\nkphb',NULL,NULL,'4444d4444',NULL,'05050002','',8,1,'2016-06-03','2016-04-18','ok','Meter7',NULL,'Tittle Deed/Offer letter',NULL,1,6,NULL,21,5,5,2);
+ (42,'Mahesh',NULL,'S','\0','','',9849444444,4044444444,'mahesh.s@gmail.com','road no 4','44','4',NULL,'Residential',NULL,NULL,'plot no 44,\nroad no 4\nkphb',NULL,NULL,'4444d4444',NULL,'05050002','',8,1,'2016-06-03','2016-04-18','ok','Meter7',NULL,'Tittle Deed/Offer letter',NULL,1,6,NULL,21,5,5,2),
+ (43,'Srinivas',NULL,'gattu','','dsfsa','',99895051111,NULL,NULL,'14',NULL,NULL,NULL,NULL,NULL,NULL,'plot no 9\nnizampet road',NULL,NULL,'1234af',NULL,NULL,'',1,NULL,'2016-06-10',NULL,NULL,NULL,'2016-05-31','Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement',3,NULL,14,21,4,6,2);
 /*!40000 ALTER TABLE `application_txn` ENABLE KEYS */;
 
 
@@ -233,7 +275,7 @@ CREATE TABLE `bill_details` (
   PRIMARY KEY (`id`),
   KEY `fk_billdetails_mtrreader_id` (`mtr_reader_id`),
   CONSTRAINT `fk_billdetails_mtrreader_id` FOREIGN KEY (`mtr_reader_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`bill_details`
@@ -241,16 +283,47 @@ CREATE TABLE `bill_details` (
 
 /*!40000 ALTER TABLE `bill_details` DISABLE KEYS */;
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
- (45,'02020005',NULL,'2016-05-01',NULL,NULL,'M','201605','201605',NULL,15,18,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-27','\0','2016-06-01 16:09:21','INITIATED',10),
- (46,'08090001',NULL,'2016-05-01',NULL,NULL,'M','201604','201605',NULL,18,21,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-28','\0','2016-06-01 16:34:25','INITIATED',15),
- (47,'04060001',NULL,'2016-05-01',NULL,NULL,'M','201603','201605',NULL,18,22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-30','\0','2016-06-01 16:35:15','INITIATED',14);
+ (45,'02020005',NULL,'2016-04-01',NULL,NULL,'M','201604','201604',NULL,15,18,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-27','\0','2016-06-01 16:09:21','COMMITTED',10),
+ (46,'08090001',NULL,'2016-04-01',NULL,NULL,'M','201604','201604',NULL,18,21,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-28','\0','2016-06-01 16:34:25','COMMITTED',15),
+ (47,'04060001',NULL,'2016-04-01',NULL,NULL,'M','201603','201604',NULL,18,22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-30','\0','2016-06-01 16:35:15','COMMITTED',14);
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
- (48,'05050001',NULL,'2016-05-01',NULL,NULL,'M','201604','201605',NULL,21,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-30','\0','2016-06-01 17:21:03','INITIATED',15),
- (49,'04060002',NULL,'2016-05-01',NULL,NULL,'M','201603','201605',NULL,22,41,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-28','\0','2016-06-01 17:21:32','INITIATED',17),
- (50,'04060003',NULL,'2016-05-01',NULL,NULL,'M','201603','201605',NULL,25,42,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-29','\0','2016-06-01 17:33:00','INITIATED',15);
+ (48,'05050001',NULL,'2016-04-01',NULL,NULL,'M','201603','201604',NULL,21,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-30','\0','2016-06-01 17:21:03','COMMITTED',15),
+ (49,'04060002',NULL,'2016-04-01',NULL,NULL,'M','201603','201604',NULL,22,41,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-28','\0','2016-06-01 17:21:32','COMMITTED',17),
+ (50,'04060003',NULL,'2016-04-01',NULL,NULL,'M','201603','201604',NULL,25,42,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-29','\0','2016-06-01 17:33:00','COMMITTED',15);
 INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
- (51,'04060004',NULL,'2016-05-01',NULL,NULL,'M','201603','201605',NULL,23,43,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-30','\0','2016-06-01 17:33:34','INITIATED',15),
- (52,'05050002',NULL,'2016-05-01',NULL,NULL,'M','201603','201605',NULL,30,60,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-29','\0','2016-06-01 17:39:55','INITIATED',14);
+ (51,'04060004',NULL,'2016-04-01',NULL,NULL,'M','201602','201604',NULL,23,43,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-30','\0','2016-06-01 17:33:34','COMMITTED',15),
+ (52,'05050002',NULL,'2016-04-01',NULL,NULL,'M','201602','201604',NULL,30,60,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-04-29','\0','2016-06-01 17:39:55','COMMITTED',14),
+ (80,'02020005',NULL,'2016-05-01',NULL,NULL,'M','201605','201605',NULL,18,22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-27','\0','2016-06-01 16:09:21','COMMITTED',10);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (81,'08090001',NULL,'2016-05-01',NULL,NULL,'M','201605','201605',NULL,21,26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-28','\0','2016-06-01 16:34:25','COMMITTED',15),
+ (82,'04060001',NULL,'2016-05-01',NULL,NULL,'L','201605','201605',NULL,22,22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-30','\0','2016-06-01 16:35:15','COMMITTED',14),
+ (83,'05050001',NULL,'2016-05-01',NULL,NULL,'L','201605','201605',NULL,25,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-30','\0','2016-06-01 17:21:03','COMMITTED',15);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (84,'04060002',NULL,'2016-05-01',NULL,NULL,'M','201605','201605',NULL,41,47,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-28','\0','2016-06-01 17:21:32','COMMITTED',17),
+ (85,'04060003',NULL,'2016-05-01',NULL,NULL,'L','201605','201605',NULL,42,42,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-29','\0','2016-06-01 17:33:00','COMMITTED',15),
+ (86,'04060004',NULL,'2016-05-01',NULL,NULL,'M','201605','201605',NULL,50,60,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-30','\0','2016-06-01 17:33:34','COMMITTED',15);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (87,'05050002',NULL,'2016-05-01',NULL,NULL,'M','201605','201605',NULL,60,68,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-05-29','\0','2016-06-01 17:39:55','COMMITTED',14),
+ (90,'02020005',NULL,'2016-06-01',NULL,NULL,'M','201606','201606',NULL,22,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-27','\0','2016-06-01 16:09:21','COMMITTED',10),
+ (91,'08090001',NULL,'2016-06-01',NULL,NULL,'L','201606','201606',NULL,26,26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-28','\0','2016-06-01 16:34:25','COMMITTED',15);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (92,'04060001',NULL,'2016-06-01',NULL,NULL,'M','201606','201606',NULL,22,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-30','\0','2016-06-01 16:35:15','COMMITTED',14),
+ (93,'05050001',NULL,'2016-06-01',NULL,NULL,'L','201606','201606',NULL,25,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-30','\0','2016-06-01 17:21:03','COMMITTED',15),
+ (94,'04060002',NULL,'2016-06-01',NULL,NULL,'M','201606','201606',NULL,47,49,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-28','\0','2016-06-01 17:21:32','COMMITTED',17);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (95,'04060003',NULL,'2016-06-01',NULL,NULL,'L','201606','201606',NULL,42,42,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-29','\0','2016-06-01 17:33:00','COMMITTED',15),
+ (97,'05050002',NULL,'2016-06-01',NULL,NULL,'M','201606','201606',NULL,68,71,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-29','\0','2016-06-01 17:39:55','COMMITTED',14),
+ (100,'02020005',NULL,'2016-07-01',NULL,NULL,'M','201607','201607',NULL,25,29,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-27','\0','2016-06-01 16:09:21','COMMITTED',10);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (101,'08090001',NULL,'2016-07-01',NULL,NULL,'M','201607','201607',NULL,26,37,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-28','\0','2016-06-01 16:34:25','COMMITTED',15),
+ (102,'04060001',NULL,'2016-07-01',NULL,NULL,'M','201607','201607',NULL,32,36,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-30','\0','2016-06-01 16:35:15','COMMITTED',14),
+ (103,'05050001',NULL,'2016-07-01',NULL,NULL,'M','201607','201607',NULL,25,33,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-30','\0','2016-06-01 17:21:03','COMMITTED',15);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (104,'04060002',NULL,'2016-07-01',NULL,NULL,'M','201607','201607',NULL,49,51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-28','\0','2016-06-01 17:21:32','COMMITTED',17),
+ (105,'04060003',NULL,'2016-07-01',NULL,NULL,'L','201607','201607',NULL,42,42,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-29','\0','2016-06-01 17:33:00','COMMITTED',15),
+ (106,'04060004',NULL,'2016-07-01',NULL,NULL,'M','201607','201607',NULL,60,68,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-30','\0','2016-06-01 17:33:34','COMMITTED',15);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (107,'05050002',NULL,'2016-07-01',NULL,NULL,'M','201607','201607',NULL,71,77,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-07-29','\0','2016-06-01 17:39:55','COMMITTED',14);
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 
 
@@ -276,7 +349,6 @@ CREATE TABLE `bill_full_details` (
   `pipe_size` float DEFAULT NULL,
   `board_meter` varchar(255) DEFAULT NULL,
   `sewerage` varchar(255) DEFAULT NULL,
-  `meter_no` varchar(255) NOT NULL,
   `prev_bill_type` varchar(255) DEFAULT NULL,
   `prev_bill_month` date DEFAULT NULL,
   `prev_avg_kl` float DEFAULT NULL,
@@ -325,38 +397,64 @@ CREATE TABLE `bill_full_details` (
   `longi` varchar(255) DEFAULT NULL,
   `no_meter_amt` float DEFAULT NULL,
   `lock_charges` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=400 DEFAULT CHARSET=utf8;
+  `meter_details_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_billfulldetails_meterdetails_id` (`meter_details_id`),
+  CONSTRAINT `fk_billfulldetails_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`bill_full_details`
 --
 
 /*!40000 ALTER TABLE `bill_full_details` DISABLE KEYS */;
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (376,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086','1',0.5,'T','F','MeterId9','M',NULL,0,'2016-04-27',18,'2016-04-01',3,0,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040138',NULL,'M','201604','201604','2016-04-23',15,18,3,2460,0,0,0,2484.6,2484.6,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9989505111',NULL,NULL,NULL,820,0),
- (377,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812','1',0.5,'T','F','MeterId5','M',NULL,0,'2016-04-28',21,'2016-04-01',3,0,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040138',NULL,'M','201604','201604','2016-04-03',18,21,3,2460,0,1820,510,4814.6,4814.6,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9390148141',NULL,NULL,NULL,820,0);
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (378,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812','1',0.5,'T','F','MeterId2','M',NULL,0,'2016-04-30',22,'2016-04-01',2.06897,0,0,0,0,32.03,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040138',NULL,'M','201603','201604','2016-03-03',18,22,4,3202.76,0,3620,1010,7864.79,7864.79,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949976058',NULL,NULL,NULL,820,0),
- (379,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812','1',1,'T','F','MeterId4','M',NULL,0,'2016-04-30',25,'2016-04-01',3.15789,0,0,0,0,32.46,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040138',NULL,'M','201603','201604','2016-03-23',21,25,4,3246.32,0,1820,510,5608.78,5608.78,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849469151',NULL,NULL,NULL,820,0);
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (380,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812','1',0.5,'T','F','MeterId1','M',NULL,0,'2016-04-28',41,'2016-04-01',9.82759,0,0,0,0,152.13,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040139',NULL,'M','201603','201604','2016-03-03',22,41,19,15213.1,0,3620,1010,19995.2,19995.2,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949911111',NULL,NULL,NULL,820,0),
- (381,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812','1',0.5,'T','F','MeterId3','M',NULL,0,'2016-04-29',42,'2016-04-01',13.4211,0,0,0,0,137.97,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040139',NULL,'M','201603','201604','2016-03-23',25,42,17,13796.8,0,1820,510,16264.8,16264.8,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849422222',NULL,NULL,NULL,820,0);
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (382,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812','1',0.75,'T','F','MeterId5','M',NULL,0,'2016-04-30',43,'2016-04-01',7.01149,0,0,0,0,158.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040139',NULL,'M','201602','201604','2016-02-03',23,43,20,15880.5,0,5420,1510,22969.3,22969.3,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849433333',NULL,NULL,NULL,800,0),
- (383,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812','1',1,'T','F','Meter7','M',NULL,0,'2016-04-29',60,'2016-04-01',13.6567,0,0,0,0,239.46,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040139',NULL,'M','201602','201604','2016-02-23',30,60,30,23946.3,0,3620,1010,28815.7,28815.7,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849444444',NULL,NULL,NULL,800,0);
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (384,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086','1',0.5,'T','F','MeterId9','M','2016-04-01',3,'2016-04-27',18,'2016-04-01',3,2484.6,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-04-23',15,18,3,2460,0,0,0,2484.6,4969.2,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9989505111',NULL,NULL,NULL,820,0),
- (385,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812','1',0.5,'T','F','MeterId5','M','2016-04-01',3,'2016-04-28',21,'2016-04-01',3,4814.6,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-04-03',18,21,3,2460,0,0,0,2484.6,7299.2,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9390148141',NULL,NULL,NULL,820,0);
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (386,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812','1',0.5,'T','F','MeterId2','M','2016-04-01',2,'2016-04-30',22,'2016-04-01',4,7864.79,0,0,0,32.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-03-03',18,22,4,3280,0,0,0,3312.8,11177.6,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949976058',NULL,NULL,NULL,820,0),
- (387,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812','1',1,'T','F','MeterId4','M','2016-04-01',2,'2016-04-30',25,'2016-04-01',4,5608.78,0,0,0,32.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-03-23',21,25,4,3280,0,0,0,3312.8,8921.58,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849469151',NULL,NULL,NULL,820,0);
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (388,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812','1',0.5,'T','F','MeterId1','M','2016-04-01',9.5,'2016-04-28',41,'2016-04-01',19,19995.2,0,0,0,155.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-03-03',22,41,19,15580,0,0,0,15735.8,35731,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949911111',NULL,NULL,NULL,820,0),
- (389,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812','1',0.5,'T','F','MeterId3','M','2016-04-01',8.5,'2016-04-29',42,'2016-04-01',17,16264.8,0,0,0,139.4,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-03-23',25,42,17,13940,0,0,0,14079.4,30344.2,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849422222',NULL,NULL,NULL,820,0);
-INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`) VALUES 
- (390,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812','1',0.75,'T','F','MeterId5','M','2016-04-01',6.66667,'2016-04-30',43,'2016-04-01',20,22969.3,0,0,0,164,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-02-03',23,43,20,16400,0,0,0,16564,39533.3,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849433333',NULL,NULL,NULL,820,0),
- (391,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812','1',1,'T','F','Meter7','M','2016-04-01',10,'2016-04-29',60,'2016-04-01',30,28815.7,0,0,0,246,'0.0',1,0,0,NULL,0,NULL,'2016-06-06','040224',NULL,'M','201605','201604','2016-02-23',30,60,30,24600,0,0,0,24846,53661.7,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849444444',NULL,NULL,NULL,820,0);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (145,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086','1',0.5,'T','F','M',NULL,0,'2016-04-27',29,'2016-04-01',3,0,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060755',NULL,'M','201604','201604','2016-04-23',15,18,3,2460,0,0,0,2484.6,2484.6,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9989505111',NULL,NULL,NULL,820,0,9),
+ (146,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812','1',0.5,'T','F','M',NULL,0,'2016-04-28',37,'2016-04-01',3,0,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060756',NULL,'M','201604','201604','2016-04-03',18,21,3,2460,0,1820,510,4814.6,4814.6,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9390148141',NULL,NULL,NULL,820,0,5);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (147,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812','1',0.5,'T','F','M',NULL,0,'2016-04-30',36,'2016-04-01',2.06897,0,0,0,0,32.03,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060756',NULL,'M','201603','201604','2016-03-03',18,22,4,3202.76,0,3620,1010,7864.79,7864.79,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949976058',NULL,NULL,NULL,820,0,2),
+ (148,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812','1',1,'T','F','M',NULL,0,'2016-04-30',33,'2016-04-01',3.15789,0,0,0,0,32.46,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060756',NULL,'M','201603','201604','2016-03-23',21,25,4,3246.32,0,1820,510,5608.78,5608.78,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849469151',NULL,NULL,NULL,820,0,4);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (149,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812','1',0.5,'T','F','M',NULL,0,'2016-04-28',51,'2016-04-01',9.82759,0,0,0,0,152.13,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060820',NULL,'M','201603','201604','2016-03-03',22,41,19,15213.1,0,3620,1010,19875.2,19875.2,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949911111',NULL,NULL,NULL,820,0,1),
+ (150,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812','1',0.5,'T','F','L',NULL,0,'2016-04-29',42,'2016-04-01',13.4211,0,0,0,0,137.97,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060820',NULL,'M','201603','201604','2016-03-23',25,42,17,13796.8,0,1820,510,16264.8,16264.8,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849422222',NULL,NULL,NULL,820,0,3);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (151,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812','1',0.75,'T','F','M',NULL,0,'2016-04-30',68,'2016-04-01',7.01149,0,0,0,0,158.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060820',NULL,'M','201602','201604','2016-02-03',23,43,20,15880.5,0,5420,1510,22969.3,22969.3,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849433333',NULL,NULL,NULL,800,0,5),
+ (152,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812','1',1,'T','F','M',NULL,0,'2016-04-29',77,'2016-04-01',13.6567,0,0,0,0,239.46,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060820',NULL,'M','201602','201604','2016-02-23',30,60,30,23946.3,0,3620,1010,28815.7,28815.7,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849444444',NULL,NULL,NULL,800,0,7);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (153,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086','1',0.5,'T','F','M','2016-04-01',3,'2016-05-27',18,'2016-05-01',4,-3310,0,0,0,32.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060824',NULL,'M','201605','201605','2016-04-23',18,22,4,3280,0,1820,510,5642.8,2332.8,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9989505111',NULL,NULL,NULL,820,0,9),
+ (154,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812','1',0.5,'T','F','M','2016-04-01',3,'2016-05-28',21,'2016-05-01',5,14.6001,0,0,0,41,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060824',NULL,'M','201605','201605','2016-04-03',21,26,5,4100,0,1820,510,6471,6485.6,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9390148141',NULL,NULL,NULL,820,0,5);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (155,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812','1',0.5,'T','F','M','2016-04-01',2,'2016-05-30',22,'2016-04-01',0,0,0,0,0,16.4,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060824',NULL,'L','201605','201605','2016-03-03',22,22,2,1640,0,1820,510,3986.4,3986.4,NULL,'L',NULL,NULL,NULL,NULL,NULL,'9949976058',NULL,NULL,NULL,820,1640,2),
+ (156,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812','1',1,'T','F','M','2016-04-01',2,'2016-05-30',25,'2016-04-01',0,-1.22021,0,0,0,16.4,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','060824',NULL,'L','201605','201605','2016-03-23',25,25,2,1640,0,1820,510,3986.4,3985.18,NULL,'L',NULL,NULL,NULL,NULL,NULL,'9849469151',NULL,NULL,NULL,820,1640,4);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (157,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812','1',0.5,'T','F','M','2016-04-01',9.5,'2016-05-28',41,'2016-05-01',6,19875.2,0,0,0,49.2,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061006',NULL,'M','201605','201605','2016-03-03',41,47,6,4920,0,1820,510,7299.2,27174.4,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949911111',NULL,NULL,NULL,820,0,1),
+ (158,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812','1',0.5,'T','F','M','2016-04-01',8.5,'2016-05-29',42,'2016-04-01',0,64.8096,0,0,0,69.7,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061006',NULL,'L','201605','201605','2016-03-23',42,42,8.5,6970,0,1820,510,9369.7,9434.51,NULL,'L',NULL,NULL,NULL,NULL,NULL,'9849422222',NULL,NULL,NULL,820,6970,3);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (159,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812','1',0.75,'T','F','M','2016-04-01',6.66667,'2016-05-30',43,'2016-05-01',10,-0.740234,0,0,0,82,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061006',NULL,'M','201605','201605','2016-02-03',50,60,10,8200,0,1820,510,10612,10611.3,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849433333',NULL,NULL,NULL,820,0,5),
+ (160,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812','1',1,'T','F','M','2016-04-01',10,'2016-05-29',60,'2016-05-01',8,-4.26953,0,0,0,65.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061006',NULL,'M','201605','201605','2016-02-23',60,68,8,6560,0,1820,510,8955.6,8951.33,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849444444',NULL,NULL,NULL,820,0,7);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (161,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086','1',0.5,'T','F','M','2016-05-01',3.5,'2016-06-27',22,'2016-06-01',3,-4267.2,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061008',NULL,'M','201606','201606','2016-04-23',22,25,3,2460,0,1820,510,4814.6,547.4,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9989505111',NULL,NULL,NULL,820,0,9),
+ (162,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812','1',0.5,'T','F','M','2016-05-01',4,'2016-06-28',26,'2016-05-01',0,-14.3999,0,0,0,32.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061008',NULL,'L','201606','201606','2016-04-03',26,26,4,3280,0,1820,510,5642.8,5628.4,NULL,'L',NULL,NULL,NULL,NULL,NULL,'9390148141',NULL,NULL,NULL,820,3280,5);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (163,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812','1',0.5,'T','F','L','2016-05-01',2,'2016-06-30',22,'2016-06-01',10,-13.6001,0,0,0,65.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061008',NULL,'M','201606','201606','2016-03-03',22,32,10,6560,0,1820,510,8955.6,8942,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949976058',NULL,NULL,NULL,820,-1640,2),
+ (164,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812','1',1,'T','F','L','2016-05-01',2,'2016-06-30',25,'2016-05-01',0,-14.8201,0,0,0,16.4,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061008',NULL,'L','201606','201606','2016-03-23',25,25,2,1640,0,1820,510,3986.4,3971.58,NULL,'L',NULL,NULL,NULL,NULL,NULL,'9849469151',NULL,NULL,NULL,820,3280,4);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (165,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812','1',0.5,'T','F','M','2016-05-01',8.33333,'2016-06-28',47,'2016-06-01',2,-825.57,0,0,0,16.4,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061015',NULL,'M','201606','201606','2016-03-03',47,49,2,1640,0,1820,510,3986.4,3160.83,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949911111',NULL,NULL,NULL,820,0,1),
+ (166,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812','1',0.5,'T','F','L','2016-05-01',8.5,'2016-06-29',42,'2016-05-01',0,-565.49,0,0,0,69.7,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061015',NULL,'L','201606','201606','2016-03-23',42,42,8.5,6970,0,1820,510,9369.7,8804.21,NULL,'L',NULL,NULL,NULL,NULL,NULL,'9849422222',NULL,NULL,NULL,820,13940,3);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (167,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812','1',1,'T','F','M','2016-05-01',9.5,'2016-06-29',68,'2016-06-01',3,8951.33,0,0,0,24.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061015',NULL,'M','201606','201606','2016-02-23',68,71,3,2460,0,1820,510,4814.6,13765.9,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849444444',NULL,NULL,NULL,820,0,7),
+ (168,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086','1',0.5,'T','F','M','2016-06-01',3.33333,'2016-07-27',25,'2016-07-01',4,-4452.6,0,0,0,33.2,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'M','201607','201607','2016-04-23',25,29,4,3320,0,1850,530,5733.2,1280.6,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9989505111',NULL,NULL,NULL,830,0,9);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (169,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812','1',0.5,'T','F','L','2016-06-01',4,'2016-07-28',26,'2016-07-01',11,28.3999,0,0,0,58.5,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'M','201607','201607','2016-04-03',26,37,11,5850,0,1850,530,8288.5,8316.9,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9390148141',NULL,NULL,NULL,830,-3280,5),
+ (170,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812','1',0.5,'T','F','M','2016-06-01',3.5,'2016-07-30',32,'2016-07-01',4,-1058,0,0,0,33.2,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'M','201607','201607','2016-03-03',32,36,4,3320,0,1850,530,5733.2,4675.2,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949976058',NULL,NULL,NULL,830,0,2);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (171,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812','1',1,'T','F','L','2016-06-01',2,'2016-07-30',25,'2016-07-01',8,-28.4199,0,0,0,33.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'M','201607','201607','2016-03-23',25,33,8,3360,0,1850,530,5773.6,5745.18,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849469151',NULL,NULL,NULL,830,-3280,4),
+ (172,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812','1',0.5,'T','F','M','2016-06-01',6.75,'2016-07-28',49,'2016-07-01',2,-839.17,0,0,0,16.6,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'M','201607','201607','2016-03-03',49,51,2,1660,0,1850,530,4056.6,3217.43,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9949911111',NULL,NULL,NULL,830,0,1);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (173,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812','1',0.5,'T','F','L','2016-06-01',8.5,'2016-07-29',42,'2016-06-01',0,-595.79,0,0,0,70.55,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'L','201607','201607','2016-03-23',42,42,8.5,7055,0,1850,530,9505.55,8909.76,NULL,'L',NULL,NULL,NULL,NULL,NULL,'9849422222',NULL,NULL,NULL,830,20995,3),
+ (174,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812','1',0.75,'T','F','M','2016-05-01',7.5,'2016-07-30',60,'2016-07-01',4,111.26,0,0,0,66,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'M','201606','201607','2016-02-03',60,68,8,6600,0,3670,1040,11376,11487.3,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849433333',NULL,NULL,NULL,825,0,5);
+INSERT INTO `bill_full_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`lock_charges`,`meter_details_id`) VALUES 
+ (175,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812','1',1,'T','F','M','2016-06-01',8.2,'2016-07-29',71,'2016-07-01',6,8765.93,0,0,0,49.8,'0.0',1,0,0,NULL,0,NULL,'2016-06-12','061017',NULL,'M','201607','201607','2016-02-23',71,77,6,4980,0,1850,530,7409.8,16175.7,NULL,'M',NULL,NULL,NULL,NULL,NULL,'9849444444',NULL,NULL,NULL,830,0,7);
 /*!40000 ALTER TABLE `bill_full_details` ENABLE KEYS */;
 
 
@@ -382,7 +480,7 @@ CREATE TABLE `bill_run_details` (
   CONSTRAINT `fk_billrundetails_billdetails_id` FOREIGN KEY (`bill_details_id`) REFERENCES `bill_details` (`id`),
   CONSTRAINT `fk_billrundetails_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
   CONSTRAINT `fk_billrundetails_billrunmaster_id` FOREIGN KEY (`bill_run_master_id`) REFERENCES `bill_run_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=396 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`bill_run_details`
@@ -390,14 +488,40 @@ CREATE TABLE `bill_run_details` (
 
 /*!40000 ALTER TABLE `bill_run_details` DISABLE KEYS */;
 INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`,`bill_details_id`) VALUES 
- (380,'02020005','2016-06-06 16:02:24','2016-06-06 16:02:24',4,'Success',384,269,45),
- (381,'08090001','2016-06-06 16:02:24','2016-06-06 16:02:24',2,'Success',385,269,46),
- (382,'04060001','2016-06-06 16:02:24','2016-06-06 16:02:24',2,'Success',386,269,47),
- (383,'05050001','2016-06-06 16:02:24','2016-06-06 16:02:24',2,'Success',387,269,48),
- (384,'04060002','2016-06-06 16:02:24','2016-06-06 16:02:24',2,'Success',388,269,49),
- (385,'04060003','2016-06-06 16:02:24','2016-06-06 16:02:24',2,'Success',389,269,50),
- (386,'04060004','2016-06-06 16:02:24','2016-06-06 16:02:24',2,'Success',390,269,51),
- (387,'05050002','2016-06-06 16:02:24','2016-06-06 16:02:24',2,'Success',391,269,52);
+ (147,'02020005','2016-06-12 18:07:54','2016-06-12 18:07:55',4,'Success',145,330,45),
+ (148,'08090001','2016-06-12 18:07:55','2016-06-12 18:07:56',4,'Success',146,330,46),
+ (149,'04060001','2016-06-12 18:07:56','2016-06-12 18:07:56',4,'Success',147,330,47),
+ (150,'05050001','2016-06-12 18:07:56','2016-06-12 18:07:56',4,'Success',148,330,48),
+ (151,'04060002','2016-06-12 18:07:56','2016-06-12 18:08:20',4,'Success',149,330,49),
+ (152,'04060003','2016-06-12 18:08:20','2016-06-12 18:08:20',4,'Success',150,330,50),
+ (153,'04060004','2016-06-12 18:08:20','2016-06-12 18:08:20',4,'Success',151,330,51),
+ (154,'05050002','2016-06-12 18:08:20','2016-06-12 18:08:20',4,'Success',152,330,52),
+ (155,'02020005','2016-06-12 18:08:23','2016-06-12 18:08:24',4,'Success',153,331,80),
+ (156,'08090001','2016-06-12 18:08:24','2016-06-12 18:08:24',4,'Success',154,331,81),
+ (157,'04060001','2016-06-12 18:08:24','2016-06-12 18:08:24',4,'Success',155,331,82);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`,`bill_details_id`) VALUES 
+ (158,'05050001','2016-06-12 18:08:24','2016-06-12 18:08:24',4,'Success',156,331,83),
+ (159,'04060002','2016-06-12 18:08:24','2016-06-12 18:10:06',4,'Success',157,331,84),
+ (160,'04060003','2016-06-12 18:10:06','2016-06-12 18:10:06',4,'Success',158,331,85),
+ (161,'04060004','2016-06-12 18:10:06','2016-06-12 18:10:06',4,'Success',159,331,86),
+ (162,'05050002','2016-06-12 18:10:06','2016-06-12 18:10:06',4,'Success',160,331,87),
+ (163,'02020005','2016-06-12 18:10:08','2016-06-12 18:10:08',4,'Success',161,332,90),
+ (164,'08090001','2016-06-12 18:10:08','2016-06-12 18:10:08',4,'Success',162,332,91),
+ (165,'04060001','2016-06-12 18:10:08','2016-06-12 18:10:08',4,'Success',163,332,92),
+ (166,'05050001','2016-06-12 18:10:08','2016-06-12 18:10:08',4,'Success',164,332,93),
+ (167,'04060002','2016-06-12 18:10:08','2016-06-12 18:10:15',4,'Success',165,332,94),
+ (168,'04060003','2016-06-12 18:10:15','2016-06-12 18:10:15',4,'Success',166,332,95);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`,`bill_details_id`) VALUES 
+ (169,'05050002','2016-06-12 18:10:15','2016-06-12 18:10:15',4,'Success',167,332,97),
+ (170,'02020005','2016-06-12 18:10:17','2016-06-12 18:10:17',4,'Success',168,333,100),
+ (171,'08090001','2016-06-12 18:10:17','2016-06-12 18:10:17',4,'Success',169,333,101),
+ (172,'04060001','2016-06-12 18:10:17','2016-06-12 18:10:17',4,'Success',170,333,102),
+ (173,'05050001','2016-06-12 18:10:17','2016-06-12 18:10:17',4,'Success',171,333,103),
+ (174,'04060002','2016-06-12 18:10:17','2016-06-12 18:10:17',4,'Success',172,333,104),
+ (175,'04060003','2016-06-12 18:10:17','2016-06-12 18:10:17',3,'Failed with error:\nnull\ncom.callippus.water.erp.service.BillingService.commit(BillingService.java:269)\ncom.callippus.water.erp.service.BillingService.lambda$0(BillingService.java:223)\ncom.callippus.water.erp.service.BillingService$$Lambda$70/10661769',173,333,105),
+ (176,'04060004','2016-06-12 18:10:17','2016-06-12 18:10:17',4,'Success',174,333,106);
+INSERT INTO `bill_run_details` (`id`,`can`,`from_dt`,`to_dt`,`status`,`remarks`,`bill_full_details_id`,`bill_run_master_id`,`bill_details_id`) VALUES 
+ (177,'05050002','2016-06-12 18:10:17','2016-06-12 18:10:17',4,'Success',175,333,107);
 /*!40000 ALTER TABLE `bill_run_details` ENABLE KEYS */;
 
 
@@ -414,7 +538,7 @@ CREATE TABLE `bill_run_master` (
   `failed` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=334 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_run_master`
@@ -442,7 +566,60 @@ INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) V
  (266,'2016-06-06 15:50:49','0',8,0,'COMMITTED'),
  (267,'2016-06-06 15:52:19','0',8,0,'Completed Successfully'),
  (268,'2016-06-06 16:01:38','0',8,0,'COMMITTED'),
- (269,'2016-06-06 16:02:23','0',8,0,'Completed Successfully');
+ (269,'2016-06-06 16:02:23','0',8,0,'Completed Successfully'),
+ (271,'2016-06-10 16:24:20','0',8,0,'COMMITTED'),
+ (272,'2016-06-10 16:24:25','0',8,0,'COMMITTED'),
+ (273,'2016-06-10 16:24:28','0',7,0,'COMMITTED'),
+ (274,'2016-06-10 16:24:29','0',8,0,'COMMITTED'),
+ (275,'2016-06-10 16:43:46','0',1,0,'COMMITTED'),
+ (276,'2016-06-10 16:51:02','0',1,0,'Completed Successfully'),
+ (279,'2016-06-11 11:40:18','0',9,0,'COMMITTED'),
+ (280,'2016-06-11 11:52:29','0',9,0,'COMMITTED'),
+ (282,'2016-06-11 12:06:42','0',9,0,'COMMITTED'),
+ (284,'2016-06-11 13:07:20','0',9,0,'COMMITTED'),
+ (285,'2016-06-11 13:17:40','0',9,0,'COMMITTED'),
+ (287,'2016-06-11 14:13:33','0',9,0,'COMMITTED'),
+ (288,'2016-06-11 14:16:25','0',8,1,'COMMITTED'),
+ (289,'2016-06-11 14:19:35','0',8,0,'COMMITTED'),
+ (290,'2016-06-11 14:19:40','0',6,2,'COMMITTED');
+INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
+ (291,'2016-06-11 14:24:51','0',8,0,'COMMITTED'),
+ (292,'2016-06-11 14:24:56','0',6,2,'COMMITTED'),
+ (293,'2016-06-11 14:35:49','0',8,0,'COMMITTED'),
+ (294,'2016-06-11 14:35:55','0',8,0,'COMMITTED'),
+ (295,'2016-06-11 14:45:19','0',8,0,'COMMITTED'),
+ (296,'2016-06-11 14:45:24','0',8,0,'COMMITTED'),
+ (297,'2016-06-11 14:45:26','0',7,0,'COMMITTED'),
+ (298,'2016-06-11 14:49:22','0',8,0,'COMMITTED'),
+ (299,'2016-06-11 14:49:26','0',8,0,'COMMITTED'),
+ (300,'2016-06-11 14:49:28','0',7,0,'COMMITTED'),
+ (301,'2016-06-11 14:49:30','0',8,0,'COMMITTED'),
+ (302,'2016-06-11 14:51:41','0',8,0,'COMMITTED'),
+ (303,'2016-06-11 14:51:45','0',8,0,'COMMITTED'),
+ (304,'2016-06-11 14:51:48','0',7,0,'COMMITTED'),
+ (305,'2016-06-11 14:51:49','0',8,0,'COMMITTED'),
+ (306,'2016-06-11 16:00:04','0',0,8,'COMMITTED'),
+ (309,'2016-06-11 16:38:15','0',8,0,'COMMITTED'),
+ (310,'2016-06-11 16:38:23','0',8,0,'COMMITTED'),
+ (311,'2016-06-11 16:38:26','0',7,0,'COMMITTED'),
+ (312,'2016-06-11 16:38:29','0',8,0,'COMMITTED');
+INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
+ (313,'2016-06-12 10:37:20','0',8,0,'COMMITTED'),
+ (314,'2016-06-12 10:37:25','0',8,0,'COMMITTED'),
+ (315,'2016-06-12 10:37:27','0',7,0,'COMMITTED'),
+ (316,'2016-06-12 10:37:29','0',8,0,'COMMITTED'),
+ (318,'2016-06-12 17:32:30','0',8,0,'COMMITTED'),
+ (319,'2016-06-12 17:32:35','0',8,0,'COMMITTED'),
+ (320,'2016-06-12 17:32:38','0',7,0,'COMMITTED'),
+ (321,'2016-06-12 17:32:40','0',8,0,'COMMITTED'),
+ (322,'2016-06-12 17:43:46','0',8,0,'COMMITTED'),
+ (323,'2016-06-12 17:45:27','0',8,0,'COMMITTED'),
+ (324,'2016-06-12 17:45:42','0',7,0,'COMMITTED'),
+ (325,'2016-06-12 17:45:46','0',8,0,'COMMITTED'),
+ (330,'2016-06-12 18:07:54','0',8,0,'COMMITTED'),
+ (331,'2016-06-12 18:08:23','0',8,0,'COMMITTED'),
+ (332,'2016-06-12 18:10:08','0',7,0,'COMMITTED'),
+ (333,'2016-06-12 18:10:17','0',8,0,'COMMITTED');
 /*!40000 ALTER TABLE `bill_run_master` ENABLE KEYS */;
 
 
@@ -552,7 +729,7 @@ CREATE TABLE `coll_details` (
   CONSTRAINT `fk_colldetails_collectiontypemaster_id` FOREIGN KEY (`collection_type_master_id`) REFERENCES `collection_type_master` (`id`),
   CONSTRAINT `fk_colldetails_instrumentissuermaster_id` FOREIGN KEY (`instrument_issuer_master_id`) REFERENCES `instrument_issuer_master` (`id`),
   CONSTRAINT `fk_colldetails_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=358 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`coll_details`
@@ -572,11 +749,28 @@ INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`rece
  (67,NULL,NULL,12,'2016-06-05 17:12:04',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'R',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,9),
  (68,NULL,NULL,7,'2016-06-05 17:35:07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'R',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,9);
 INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
- (132,NULL,NULL,5794.6,'2016-06-06 16:01:39',NULL,NULL,NULL,NULL,NULL,'02020005',NULL,NULL,'2016-06-06 16:01:39',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
- (133,NULL,NULL,4800,'2016-06-06 16:01:39',NULL,NULL,NULL,NULL,NULL,'08090001',NULL,NULL,'2016-06-06 16:01:39',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
- (134,NULL,NULL,4000,'2016-06-06 16:01:40',NULL,NULL,NULL,NULL,NULL,'04060001',NULL,NULL,'2016-06-06 16:01:40',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
- (135,NULL,NULL,3000,'2016-06-06 16:01:47',NULL,NULL,NULL,NULL,NULL,'05050001',NULL,NULL,'2016-06-06 16:01:47',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
- (136,NULL,NULL,1000,'2016-06-06 16:01:47',NULL,NULL,NULL,NULL,NULL,'05050001',NULL,NULL,'2016-06-06 16:01:47',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1);
+ (339,NULL,NULL,5794.6,'2016-06-12 18:08:21',NULL,NULL,NULL,NULL,NULL,'02020005',NULL,NULL,'2016-06-12 18:08:21',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (340,NULL,NULL,4800,'2016-06-12 18:08:21',NULL,NULL,NULL,NULL,NULL,'08090001',NULL,NULL,'2016-06-12 18:08:21',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (341,NULL,NULL,4000,'2016-06-12 18:08:21',NULL,NULL,NULL,NULL,NULL,'04060001',NULL,NULL,'2016-06-12 18:08:21',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (342,NULL,NULL,3000,'2016-06-12 18:08:22',NULL,NULL,NULL,NULL,NULL,'05050001',NULL,NULL,'2016-06-12 18:08:22',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (343,NULL,NULL,1000,'2016-06-12 18:08:22',NULL,NULL,NULL,NULL,NULL,'05050001',NULL,NULL,'2016-06-12 18:08:22',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1);
+INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
+ (344,NULL,NULL,5000,'2016-06-12 18:10:06',NULL,NULL,NULL,NULL,NULL,'02020005',NULL,NULL,'2016-06-12 18:10:06',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (345,NULL,NULL,6000,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,'08090001',NULL,NULL,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (346,NULL,NULL,3000,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,'04060001',NULL,NULL,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (347,NULL,NULL,4000,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,'05050001',NULL,NULL,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (348,NULL,NULL,28000,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,'04060002',NULL,NULL,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1);
+INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
+ (349,NULL,NULL,4000,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,'04060004',NULL,NULL,'2016-06-12 18:10:07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (350,NULL,NULL,5000,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,'02020005',NULL,NULL,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (351,NULL,NULL,5600,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,'08090001',NULL,NULL,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (352,NULL,NULL,4000,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,'04060001',NULL,NULL,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (353,NULL,NULL,6000,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,'04060001',NULL,NULL,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1);
+INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`instrument_issuer_master_id`,`collection_type_master_id`) VALUES 
+ (354,NULL,NULL,4000,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,'05050001',NULL,NULL,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (355,NULL,NULL,4000,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,'04060002',NULL,NULL,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (356,NULL,NULL,9400,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,'04060003',NULL,NULL,'2016-06-12 18:10:16',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1),
+ (357,NULL,NULL,5000,'2016-06-12 18:10:17',NULL,NULL,NULL,NULL,NULL,'05050002',NULL,NULL,'2016-06-12 18:10:17',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,1);
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -772,7 +966,6 @@ CREATE TABLE `cust_details` (
   `pipe_size` float DEFAULT NULL,
   `board_meter` varchar(255) DEFAULT NULL,
   `sewerage` varchar(255) DEFAULT NULL,
-  `meter_no` varchar(255) DEFAULT NULL,
   `prev_bill_type` varchar(255) DEFAULT NULL,
   `prev_bill_month` date DEFAULT NULL,
   `prev_avg_kl` float DEFAULT NULL,
@@ -807,11 +1000,14 @@ CREATE TABLE `cust_details` (
   `pipe_size_master_id` bigint(20) DEFAULT NULL,
   `division_master_id` bigint(20) DEFAULT NULL,
   `street_master_id` bigint(20) DEFAULT NULL,
+  `meter_details_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_custdetails_tariffcategorymaster_id` (`tariff_category_master_id`),
   KEY `fk_custdetails_pipesizemaster_id` (`pipe_size_master_id`),
   KEY `fk_custdetails_divisionmaster_id` (`division_master_id`),
   KEY `fk_custdetails_streetmaster_id` (`street_master_id`),
+  KEY `fk_custdetails_meterdetails_id` (`meter_details_id`),
+  CONSTRAINT `fk_custdetails_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
   CONSTRAINT `fk_custdetails_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`),
   CONSTRAINT `fk_custdetails_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_custdetails_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
@@ -823,18 +1019,18 @@ CREATE TABLE `cust_details` (
 --
 
 /*!40000 ALTER TABLE `cust_details` DISABLE KEYS */;
-INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`) VALUES 
- (1,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','MeterId9','M','2016-04-01',3,'2016-04-27',18,'2016-04-01',0,2484.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',0,'123456','abc@abc.abc','ACTIVE',1,1,1,1),
- (2,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812',NULL,0.5,'T','F','MeterId5','M','2016-04-01',3,'2016-04-28',21,'2016-04-01',0,4814.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9390148141','0','0','0','0','0','0','2016-04-03',0,'987','bhasker@gmail.com','ACTIVE',1,1,8,9);
-INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`) VALUES 
- (3,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812',NULL,0.5,'T','F','MeterId2','M','2016-04-01',2,'2016-04-30',22,'2016-04-01',0,7864.79,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0','2016-03-03',0,'12421214','tejasree.m@gmail.com','ACTIVE',1,1,4,6),
- (4,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812',NULL,1,'T','F','MeterId4','M','2016-04-01',2,'2016-04-30',25,'2016-04-01',0,5608.78,0,0,0,0,'0.0',1,0,0,NULL,0,'9849469151','0','0','0','0','0','0','2016-03-23',0,'12151612','neha.m@gmail.com','ACTIVE',1,3,5,5);
-INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`) VALUES 
- (5,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812',NULL,0.5,'T','F','MeterId1','M','2016-04-01',9.5,'2016-04-28',41,'2016-04-01',0,19995.2,0,0,0,0,'0.0',1,0,0,NULL,0,'9949911111','0','0','0','0','0','0','2016-03-03',0,'1111a1111','rajesh.k@gmail.com','ACTIVE',1,1,4,6),
- (6,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812',NULL,0.5,'T','F','MeterId3','M','2016-04-01',8.5,'2016-04-29',42,'2016-04-01',0,16264.8,0,0,0,0,'0.0',1,0,0,NULL,0,'9849422222','0','0','0','0','0','0','2016-03-23',0,'2222b2222','sudhakar.g@gmail.com','ACTIVE',1,1,4,6);
-INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`meter_no`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`) VALUES 
- (7,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812',NULL,0.75,'T','F','MeterId5','M','2016-04-01',6.66667,'2016-04-30',43,'2016-04-01',0,22969.3,0,0,0,0,'0.0',1,0,0,NULL,0,'9849433333','0','0','0','0','0','0','2016-02-03',0,'3333c3333','sunitha.b@gmail.com','ACTIVE',1,2,4,6),
- (8,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812',NULL,1,'T','F','Meter7','M','2016-04-01',10,'2016-04-29',60,'2016-04-01',0,28815.7,0,0,0,0,'0.0',1,0,0,NULL,0,'9849444444','0','0','0','0','0','0','2016-02-23',0,'4444d4444','mahesh.s@gmail.com','ACTIVE',1,3,5,5);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (1,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',3.66667,'2016-07-27',29,'2016-07-01',0,1280.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',0,'123456','abc@abc.abc','ACTIVE',1,1,1,1,9),
+ (2,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812',NULL,0.5,'T','F','M','2016-07-01',5.33333,'2016-07-28',37,'2016-07-01',0,8316.9,0,0,0,0,'0.0',1,0,0,NULL,0,'9390148141','0','0','0','0','0','0','2016-04-03',0,'987','bhasker@gmail.com','ACTIVE',1,1,8,9,5);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (3,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812',NULL,0.5,'T','F','M','2016-07-01',7,'2016-07-30',36,'2016-07-01',0,4675.2,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0','2016-03-03',0,'12421214','tejasree.m@gmail.com','ACTIVE',1,1,4,6,2),
+ (4,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812',NULL,1,'T','F','M','2016-07-01',8,'2016-07-30',33,'2016-07-01',0,5745.18,0,0,0,0,'0.0',1,0,0,NULL,0,'9849469151','0','0','0','0','0','0','2016-03-23',0,'12151612','neha.m@gmail.com','ACTIVE',1,3,5,5,4);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (5,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812',NULL,0.5,'T','F','M','2016-07-01',3.33333,'2016-07-28',51,'2016-07-01',0,3217.43,0,0,0,0,'0.0',1,0,0,NULL,0,'9949911111','0','0','0','0','0','0','2016-03-03',0,'1111a1111','rajesh.k@gmail.com','ACTIVE',1,1,4,6,1),
+ (6,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812',NULL,0.5,'T','F','L','2016-06-01',8.5,'2016-06-29',42,'2016-06-01',0,-595.79,0,0,0,0,'0.0',1,0,0,NULL,0,'9849422222','0','0','0','0','0','0','2016-03-23',13940,'2222b2222','sudhakar.g@gmail.com','ACTIVE',1,1,4,6,3);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (7,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812',NULL,0.75,'T','F','M','2016-07-01',6.33333,'2016-07-30',68,'2016-07-01',0,11487.3,0,0,0,0,'0.0',1,0,0,NULL,0,'9849433333','0','0','0','0','0','0','2016-02-03',0,'3333c3333','sunitha.b@gmail.com','ACTIVE',1,2,4,6,5),
+ (8,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812',NULL,1,'T','F','M','2016-07-01',5.66667,'2016-07-29',77,'2016-07-01',0,16175.7,0,0,0,0,'0.0',1,0,0,NULL,0,'9849444444','0','0','0','0','0','0','2016-02-23',0,'4444d4444','mahesh.s@gmail.com','ACTIVE',1,3,5,5,7);
 /*!40000 ALTER TABLE `cust_details` ENABLE KEYS */;
 
 
@@ -852,8 +1048,8 @@ CREATE TABLE `cust_meter_mapping` (
   PRIMARY KEY (`id`),
   KEY `fk_custmetermapping_custdetails_id` (`cust_details_id`),
   KEY `fk_custmetermapping_meterdetails_id` (`meter_details_id`),
-  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
-  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
+  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
+  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
@@ -921,7 +1117,7 @@ CREATE TABLE `customer` (
   CONSTRAINT `fk_customer_requestedpipesizemaster_id` FOREIGN KEY (`requested_pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_customer_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_customer_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`customer`
@@ -930,8 +1126,9 @@ CREATE TABLE `customer` (
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
 INSERT INTO `customer` (`id`,`meter_reading`,`present_reading`,`organization`,`organization_name`,`designation`,`deed_doc`,`agreement_doc`,`remarks`,`requested_date`,`can`,`previous_name`,`previous_mobile`,`previous_email`,`first_name`,`middle_name`,`last_name`,`mobile_no`,`email`,`id_number`,`photo`,`status`,`changed_date`,`change_type`,`tariff_category_master_id`,`present_category_id`,`new_proof_master_id`,`status_master_id`,`pipe_size_master_id`,`requested_pipe_size_master_id`) VALUES 
  (1,8798,789,NULL,'Callippus','Developer','Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement','','2016-05-08','08090001',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,'2016-05-23','CONNECTIONCATEGORY',2,4,NULL,NULL,NULL,NULL),
- (2,8798,89654,NULL,NULL,NULL,'Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement','','2016-05-01','08090001',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,'2016-05-23','CONNECTIONCATEGORY',4,1,NULL,NULL,NULL,NULL),
- (3,8798,9620,NULL,NULL,NULL,NULL,NULL,'','2016-05-22','08090001',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,'2016-05-23','PIPESIZE',NULL,NULL,NULL,NULL,2,1);
+ (4,68,10,NULL,'Sai Laxmi Complex','owner','Tittle Deed/Offer letter',NULL,'','2016-06-08','04060004',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,'2016-06-09','CONNECTIONCATEGORY',1,3,NULL,NULL,NULL,NULL),
+ (5,8798,89654,NULL,NULL,NULL,'Tittle Deed/Offer letter','Rented Property-lease-Rent Agreement','','2016-05-01','08090001',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,'2016-05-23','CONNECTIONCATEGORY',4,1,NULL,NULL,NULL,NULL),
+ (6,8798,9620,NULL,NULL,NULL,NULL,NULL,'','2016-05-22','08090001',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',2,'2016-05-23','PIPESIZE',NULL,NULL,NULL,NULL,2,1);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 
 
@@ -954,7 +1151,7 @@ CREATE TABLE `customer_complaints` (
   PRIMARY KEY (`id`),
   KEY `fk_customercomplaints_complainttypemaster_id` (`complaint_type_master_id`),
   CONSTRAINT `fk_customercomplaints_complainttypemaster_id` FOREIGN KEY (`complaint_type_master_id`) REFERENCES `complaint_type_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`customer_complaints`
@@ -966,7 +1163,9 @@ INSERT INTO `customer_complaints` (`id`,`remarks`,`relevant_doc`,`complaint_by`,
  (5,'INCORRECT BILL','/api/download/5_d2ac35f915f418c60f113c29e5d4e968_bill.png','Punna Reddy','2016-05-21','02020005',-1000,'10',5,1),
  (6,'Water Leakage','/api/download/6_fc8159c9f1b62cf9850c644664789298_bill.png','Punna Reddy','2016-05-23','02020005',NULL,NULL,4,2),
  (7,'Water Leakage','/api/download/7_d29fff8cc2d7387cea1b2fa0f665347c_MMG.jpg','Punna Reddy','2016-05-23','02020005',NULL,NULL,0,1),
- (8,'Water Leakage','/api/download/8_827dc8aa0f3d8ff89f9a555e07e7ce93_MMG.jpg','Punna Reddy','2016-05-23','02020005',NULL,NULL,0,2);
+ (8,'Water Leakage','/api/download/8_827dc8aa0f3d8ff89f9a555e07e7ce93_MMG.jpg','Punna Reddy','2016-05-23','02020005',NULL,NULL,0,2),
+ (9,'extra 100 charged','','ratan','2016-06-10','02020005',NULL,NULL,0,1),
+ (10,'bill amount 200 extra','',NULL,'2016-06-10','04060002',-200,'427',5,1);
 /*!40000 ALTER TABLE `customer_complaints` ENABLE KEYS */;
 
 
@@ -1107,19 +1306,19 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160504065608','jhipster','classpath:config/liquibase/changelog/20160504065608_added_entity_ConnectionTerminate.xml','2016-05-05 10:38:39',163,'EXECUTED','7:77b9eddf440cf38d04fe73c2b25a4aaf','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillDetails.xml','2016-05-09 11:24:46',164,'EXECUTED','7:b0895b1354bdcdc8e2ba43450c1d4dde','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160229093926','jhipster','classpath:config/liquibase/changelog/20160229093926_added_entity_EmpMaster.xml','2016-05-12 17:53:12',167,'EXECUTED','7:68ed39d402d606773083015df2c45161','createTable, addForeignKeyConstraint (x6)','',NULL,'3.4.2',NULL,NULL),
- ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-05-12 18:33:41',170,'EXECUTED','7:0f528b6a210e9e5bfa75883b0a834aaa','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-05-17 09:15:18',171,'EXECUTED','7:bf3c4e50b5a33a9f0c25ee7bbb273ab7','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-05-17 09:15:19',172,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-05-17 09:15:21',173,'EXECUTED','7:208b28854110ec930d0f7348946c1469','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160419095001','jhipster','classpath:config/liquibase/changelog/20160419095001_added_entity_MeterChange.xml','2016-05-17 09:15:22',174,'EXECUTED','7:bc8ec5c09f0aaedab3a493d844a5ef5a','createTable, addForeignKeyConstraint (x4)','',NULL,'3.4.2',NULL,NULL),
  ('20160517040011','jhipster','classpath:config/liquibase/changelog/20160517040011_added_entity_Hetero.xml','2016-05-17 09:33:14',175,'EXECUTED','7:f0aab1f3ff08628ff2ff55d6c6e0ba47','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
  ('20160329064343','jhipster','classpath:config/liquibase/changelog/20160329064343_added_entity_CustomerComplaints.xml','2016-05-20 12:40:57',176,'EXECUTED','7:a18a503542bb9fe3740bba6f53169a9d','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-05-23 19:09:07',177,'EXECUTED','7:c01dba5cca3c8eae2dddad353e044b26','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160229071846','jhipster','classpath:config/liquibase/changelog/20160229071846_added_entity_Customer.xml','2016-05-24 11:53:13',178,'EXECUTED','7:47501e6cce88fe8db996be8fc1396809','createTable, addForeignKeyConstraint (x6)','',NULL,'3.4.2',NULL,NULL),
  ('20160229072353','jhipster','classpath:config/liquibase/changelog/20160229072353_added_entity_ManageCashPoint.xml','2016-05-24 11:54:43',179,'EXECUTED','7:063f36a456a8a13982a11343a8a8dddd','createTable, dropDefaultValue, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
- ('20160229074219','jhipster','classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml','2016-05-24 11:54:45',180,'EXECUTED','7:eb523405877dcf8d7dd83dc9199b8ea3','createTable, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+ ('20160229074219','jhipster','classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml','2016-05-24 11:54:45',180,'EXECUTED','7:eb523405877dcf8d7dd83dc9199b8ea3','createTable, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
+ ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-06-11 15:57:14',181,'EXECUTED','7:8c269e2ffbb5c3db5631d120fa99abd7','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-06-11 15:57:15',182,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
+ ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-06-11 16:35:23',184,'EXECUTED','7:844b0fb0485f7bc7c6d1dec18e3c99b8','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
+ ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-06-11 16:35:24',185,'EXECUTED','7:208b28854110ec930d0f7348946c1469','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
+ ('20160612095001','jhipster','classpath:config/liquibase/changelog/20160612095001_added_entity_Adjustments.xml','2016-06-12 10:36:20',186,'EXECUTED','7:dfeaa3b334a2477a806f254c74ce932b','createTable, dropDefaultValue, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -2045,7 +2244,7 @@ CREATE TABLE `jhi_persistent_audit_event` (
   `event_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `idx_persistent_audit_event` (`principal`,`event_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=1010 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1041 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`jhi_persistent_audit_event`
@@ -3122,7 +3321,40 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
  (1007,'admin','2016-06-05 14:42:10','AUTHENTICATION_SUCCESS');
 INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (1008,'admin','2016-06-07 10:16:30','AUTHENTICATION_SUCCESS'),
- (1009,'billrunmgr','2016-06-07 12:36:35','AUTHENTICATION_SUCCESS');
+ (1009,'billrunmgr','2016-06-07 12:36:35','AUTHENTICATION_SUCCESS'),
+ (1010,'sf0023','2016-06-10 16:15:46','AUTHENTICATION_SUCCESS'),
+ (1011,'sf0016','2016-06-10 16:17:28','AUTHENTICATION_SUCCESS'),
+ (1012,'sf0023','2016-06-10 16:19:33','AUTHENTICATION_SUCCESS'),
+ (1013,'customer','2016-06-10 16:20:37','AUTHENTICATION_SUCCESS'),
+ (1014,'sf0023','2016-06-10 16:21:41','AUTHENTICATION_SUCCESS'),
+ (1015,'sf0016','2016-06-10 16:32:31','AUTHENTICATION_SUCCESS'),
+ (1016,'billrunmgr','2016-06-10 16:33:17','AUTHENTICATION_SUCCESS'),
+ (1017,'sf0017','2016-06-10 16:34:25','AUTHENTICATION_SUCCESS'),
+ (1018,'sf0009','2016-06-10 16:35:27','AUTHENTICATION_SUCCESS'),
+ (1019,'sf0021','2016-06-10 16:37:10','AUTHENTICATION_SUCCESS'),
+ (1020,'customer','2016-06-10 16:38:11','AUTHENTICATION_SUCCESS'),
+ (1021,'admin','2016-06-10 16:41:39','AUTHENTICATION_SUCCESS'),
+ (1022,'billrunmgr','2016-06-10 16:43:19','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (1023,'admin','2016-06-10 16:49:05','AUTHENTICATION_SUCCESS'),
+ (1024,'billrunmgr','2016-06-10 16:50:35','AUTHENTICATION_SUCCESS'),
+ (1025,'admin','2016-06-10 16:54:50','AUTHENTICATION_SUCCESS'),
+ (1026,'customer','2016-06-10 16:57:08','AUTHENTICATION_SUCCESS'),
+ (1027,'customer','2016-06-10 17:30:42','AUTHENTICATION_SUCCESS'),
+ (1028,'customer','2016-06-10 17:41:39','AUTHENTICATION_SUCCESS'),
+ (1029,'sf0015','2016-06-10 17:46:33','AUTHENTICATION_SUCCESS'),
+ (1030,'sf0015','2016-06-10 17:49:32','AUTHENTICATION_SUCCESS'),
+ (1031,'customer','2016-06-10 17:52:33','AUTHENTICATION_SUCCESS'),
+ (1032,'sf0015','2016-06-10 17:57:04','AUTHENTICATION_SUCCESS'),
+ (1033,'customer','2016-06-10 17:58:54','AUTHENTICATION_SUCCESS'),
+ (1034,'sf0015','2016-06-10 18:01:13','AUTHENTICATION_SUCCESS'),
+ (1035,'sf0021','2016-06-10 18:03:12','AUTHENTICATION_SUCCESS'),
+ (1036,'customer','2016-06-10 18:42:39','AUTHENTICATION_SUCCESS'),
+ (1037,'sf0015','2016-06-10 18:46:39','AUTHENTICATION_SUCCESS');
+INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
+ (1038,'sf0021','2016-06-10 18:48:29','AUTHENTICATION_SUCCESS'),
+ (1039,'sf0015','2016-06-10 18:49:54','AUTHENTICATION_SUCCESS'),
+ (1040,'sf0021','2016-06-10 18:50:28','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -5262,7 +5494,71 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (1008,'sessionId','70795292CB18F4876F332C9999A05FFD'),
  (1009,'remoteAddress','192.168.1.5');
 INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
- (1009,'sessionId','E0C5CBFDC7CF523A13DF9A81CB6EE1D2');
+ (1009,'sessionId','E0C5CBFDC7CF523A13DF9A81CB6EE1D2'),
+ (1010,'remoteAddress','192.168.1.6'),
+ (1010,'sessionId','A2552AF97010D93732163E2E64AFB6CC'),
+ (1011,'remoteAddress','192.168.1.6'),
+ (1011,'sessionId','B9BC4432FC3651A27F088F0B258C6AD8'),
+ (1012,'remoteAddress','192.168.1.6'),
+ (1012,'sessionId','F8422CC37143A537DF6AEC7FE1E43B37'),
+ (1013,'remoteAddress','192.168.1.6'),
+ (1013,'sessionId','7134F296DDEC092BDEFE216DB1971F14'),
+ (1014,'remoteAddress','192.168.1.6'),
+ (1014,'sessionId','C8E57243EDE1F76355B4090579C7729C'),
+ (1015,'remoteAddress','192.168.1.6'),
+ (1015,'sessionId','B95F7BF2DCFF3C80E0D1C9725B3FDE53'),
+ (1016,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (1016,'sessionId','693E73BCB4F9B0692133B68AA3CD9883'),
+ (1017,'remoteAddress','192.168.1.6'),
+ (1017,'sessionId','0BEE61480017C2F7FA6DFAF6CB473F16'),
+ (1018,'remoteAddress','192.168.1.6'),
+ (1018,'sessionId','EAE9DBA5E001A045338067705F0C699D'),
+ (1019,'remoteAddress','192.168.1.6'),
+ (1019,'sessionId','9CA7193A6E85CCF065D125AACE6E9886');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (1020,'remoteAddress','192.168.1.6'),
+ (1020,'sessionId','D60FFF849429292AA4C56C6A5EEBF583'),
+ (1021,'remoteAddress','192.168.1.6'),
+ (1021,'sessionId','942EDBE165031AF5A547ABC96F785E1F'),
+ (1022,'remoteAddress','192.168.1.6'),
+ (1022,'sessionId','CD399557F565BD59D12BF38B8E489DF1'),
+ (1023,'remoteAddress','192.168.1.6'),
+ (1023,'sessionId','E582EE32188E1ED90B038E60BE046CD9'),
+ (1024,'remoteAddress','192.168.1.6'),
+ (1024,'sessionId','0ADDD289E2E4A890E81EC50DC2E4825E'),
+ (1025,'remoteAddress','192.168.1.6'),
+ (1025,'sessionId','FAFE901A29EF18CF67038526A98AC8A5'),
+ (1026,'remoteAddress','192.168.1.6'),
+ (1026,'sessionId','A5063CE4000EE2267EF6768524C0F66F'),
+ (1027,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (1027,'sessionId','4AE8B813A0C0BAF5F2F51D6DED33AC5A'),
+ (1028,'remoteAddress','192.168.1.6'),
+ (1028,'sessionId','E69F73BB62C17CE10FA5AC71F3B74A3B'),
+ (1029,'remoteAddress','192.168.1.6'),
+ (1029,'sessionId','87DC247E4DA2FC21DFAF82738211FFB0'),
+ (1030,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (1030,'sessionId','6BE616275BD965A0238E824ABCFE44AB'),
+ (1031,'remoteAddress','192.168.1.6'),
+ (1031,'sessionId','7029B680507C2484431CAF0B9F95B3AE'),
+ (1032,'remoteAddress','192.168.1.6'),
+ (1032,'sessionId','1751B4DCB2E79371AEA5EB70D60EE824'),
+ (1033,'remoteAddress','192.168.1.6'),
+ (1033,'sessionId','2031F91645C26FF7870B84F7951D9357'),
+ (1034,'remoteAddress','192.168.1.6'),
+ (1034,'sessionId','7D05D81E68F8A4D9C7C4E9F7BF91869F'),
+ (1035,'remoteAddress','192.168.1.6'),
+ (1035,'sessionId','1234D420B1B452D7C8CAEC7E3FF4CA2A'),
+ (1036,'remoteAddress','192.168.1.6'),
+ (1036,'sessionId','C5BCDAF8D60ED802257904046A51A2B6'),
+ (1037,'remoteAddress','192.168.1.6'),
+ (1037,'sessionId','B286B8F5D6FA469084706DDE76AF2268'),
+ (1038,'remoteAddress','192.168.1.6'),
+ (1038,'sessionId','58F41EA017341EF5C11EF7BB68A39652'),
+ (1039,'remoteAddress','192.168.1.6'),
+ (1039,'sessionId','7132C06DE7E7E07972BAA7DC3A34EFD8'),
+ (1040,'remoteAddress','192.168.1.6'),
+ (1040,'sessionId','05E23DFBC246E37046AED05D0EDC1C27');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5298,36 +5594,36 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('4oZOM9WeVb8ocnwRxVvJfA==',31,'pzo3LAfZ2YQXoPdbAIfhPg==','2016-05-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('8zfMKiZOPrVt6lXtFt/vJQ==',3,'/N+mw7gTID3HBRr0XCncMg==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('A/8QpszxZA9aBejUNkjXhA==',5,'whjMwUOFMnusG9vMgh6scw==','2016-06-10','192.168.1.6','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('Ac6XW1CPScAvp4jClsPmMA==',20,'vuJUxH0AyhlMMyPTvUprag==','2016-05-12','122.170.249.158','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('aVS1+MnWV34wggZUmJvL9w==',31,'44AoSeN/P86Yz5k5cUd7lg==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('B8febmGNzSucvnszfJn8aQ==',31,'ayhyRwskOfRp1oDNOvZ9qw==','2016-05-12','122.170.249.158','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('BgqvCpZRcut7eRM9BYGikA==',30,'5iU7rwFlZQ4Gt1dHdofdkg==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('BjuoMFmske3TrzieL4XAlg==',3,'Ln/wXnsNTA7acj8Ouqoi+Q==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('bJwJeBWy3vXr96CuWWHADQ==',31,'C0uCGBYUv55AdKVTlJ8PAw==','2016-06-07','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('BjuoMFmske3TrzieL4XAlg==',3,'Ln/wXnsNTA7acj8Ouqoi+Q==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('bJwJeBWy3vXr96CuWWHADQ==',31,'C0uCGBYUv55AdKVTlJ8PAw==','2016-06-07','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('bm32YJ9FNGzRU1uMi+22+Q==',3,'HQzoLo8TglobmdU54cPyNA==','2016-05-30','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
  ('BqSGG3u7I3FNEGIS4YTdnA==',30,'TVPCFvOjZvfNKQfOcumCGA==','2016-05-06','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ChkJAcPJOneYygJ35FjR9g==',31,'6F9B28Pl70WP5rM5Q5Q0/w==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('CIgQNZ8FKQM/DmDaYobODA==',5,'V3SYimBIqbEK8J0ezKRydw==','2016-05-18','192.168.1.25','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('CX1H2M8p7PrMlBFUiF5ejg==',16,'csVkryGOlP/Wr4j9XyWXDg==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('DaK7uQT48/cKNPmvfHNy7g==',31,'nWj1dWsWeqKsrAzGShVYtA==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('DbAm0z5VPEc+EtXrkXdvKw==',3,'Yous7+mwwzsCcw6ZF1OdMg==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0');
+ ('DaK7uQT48/cKNPmvfHNy7g==',31,'nWj1dWsWeqKsrAzGShVYtA==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('DbAm0z5VPEc+EtXrkXdvKw==',3,'Yous7+mwwzsCcw6ZF1OdMg==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('e5qNbeFco2eWENKj/+RW1g==',3,'niUqrvzC03eynQfROEZDqA==','2016-05-06','192.168.1.4','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('EG3kGgtX3liShbfTTaAgiA==',5,'aD22faP9jxmf7wdLDd9hMA==','2016-05-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ePbL4hkUt4E52k/aBtE/MA==',21,'UsBLX/CfktztTx7Od1cTzA==','2016-04-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('F8sJ+cN9mT4bgFb0qWuElQ==',30,'1r74O2dQgko/ccI8eUYcGA==','2016-04-26','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('fFTdM+jQgj3eMZD9eWBg6Q==',3,'PYCkcHlcu1gFjJRbHkERHg==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('h2bUpKDi3+XLdwZvYfctSg==',16,'0kDBdHEYWPkiv5WGMUyl8w==','2016-04-27','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('hfGksqBgjUnqndHWJ3/5wA==',30,'FbXszKhHyDuqmM8FnVRRUw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('h2bUpKDi3+XLdwZvYfctSg==',16,'0kDBdHEYWPkiv5WGMUyl8w==','2016-04-27','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('hfGksqBgjUnqndHWJ3/5wA==',30,'FbXszKhHyDuqmM8FnVRRUw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('HoUZ0JlyDpz02Gjz/PKAIw==',15,'uK6UIkCTlVGzDiCNbYrLpw==','2016-04-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('hpx7sHez6/mnrjnhZ3DX+A==',3,'VqaJz6VLNIqEid/PNNJdhw==','2016-05-10','196.41.61.82','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ihEf0pcPskdgqK7cOFzTJw==',21,'TdMRgg17krhlPYtJrkjWXA==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('JkO1Egyw+3JpnCDvarFSJQ==',31,'+rmweMdpNs/d3K82VBmA3Q==','2016-05-12','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('Jt1tQaRUywvgCflDNZISJg==',3,'kDuQ5LaUwKjGAmkNe8eMCg==','2016-04-27','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('k2Tiai7BXpQHEwfZgrhj6g==',16,'EoRRRHI4yUgdB7cEkJz0rQ==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('LpH/aaI1uL9P3sBxqUX19Q==',3,'5RNGN7AC1w/FWe/Ys3p8wQ==','2016-06-07','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('k2Tiai7BXpQHEwfZgrhj6g==',16,'EoRRRHI4yUgdB7cEkJz0rQ==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('lqqkRZHMgCV5ZRZsdmOctA==',3,'Sqs4OVQ6a8Sm5+xrE5sxsg==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('mFxt08kJ+MznP+HasUarJQ==',31,'HwEBWdjwSvPHSnqpA1yNUA==','2016-05-13','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
@@ -5340,39 +5636,43 @@ INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date
  ('odIcxtIiUMAAdHvLI1fZ0g==',3,'6hyclrvKtc4YTW6j6ulqLw==','2016-05-11','110.224.236.177','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
  ('omL/EzrvAvwVEbBKTEH5aw==',30,'CseC8BLe5lXIEbYKOM4Abw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Ou/RH69+FvylPxoHvZnbRw==',5,'e1t+qftoRCq1I2Ix/QHuUQ==','2016-05-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('Oxk4LYSJP4B0Kgl/4Jp1YQ==',5,'lWWoH0XsW/TqwOREew9mDg==','2016-05-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('PdrO87bBjGbEQ9chdqoBRA==',3,'ijuaw2/inuLXwum1fcPdlg==','2016-05-31','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('ouNW66N4shg9zlgZ5ERIpA==',23,'m0cBSjz8/eLfVupNUbKqKg==','2016-06-10','192.168.1.6','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('Oxk4LYSJP4B0Kgl/4Jp1YQ==',5,'lWWoH0XsW/TqwOREew9mDg==','2016-05-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('PdrO87bBjGbEQ9chdqoBRA==',3,'ijuaw2/inuLXwum1fcPdlg==','2016-05-31','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('PKTqBBTgNwNlyaX1s1Ks/Q==',21,'Yjev72B8yjB8ddv4IYAzdQ==','2016-06-10','192.168.1.6','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('pMyOIrgHgrCeHf9U1k1jig==',15,'JN5k9M/NYqnv3OyrQgjchw==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('q7XsLPGhgLfQI03IAy+sMg==',15,'f96/QO7HrHkS+8H1N6VIWw==','2016-05-09','110.224.230.23','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('QNKrooOpjWJXpm7AAOEFQQ==',20,'DMvylSUGtrldSFzxyjrKXw==','2016-04-19','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('QnOVEcUN7EljG4/UD6aXXA==',3,'YZtjIP/DY6zaxa37xPsGWQ==','2016-05-13','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('shPh5FTXeL6vvAymUqZWhA==',16,'ipG4gIPxvyFPIfAF3t//rA==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('T53sqN50j/yG+Xy1nwQZEA==',3,'aNXX3d+8jixBot4xU/iyMA==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
- ('tfgC0LtXvzQgiwGOttkAEg==',3,'ss13GqZmv4ugTSw1dB0zNw==','2016-06-06','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('shPh5FTXeL6vvAymUqZWhA==',16,'ipG4gIPxvyFPIfAF3t//rA==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('T53sqN50j/yG+Xy1nwQZEA==',3,'aNXX3d+8jixBot4xU/iyMA==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
+ ('tfgC0LtXvzQgiwGOttkAEg==',3,'ss13GqZmv4ugTSw1dB0zNw==','2016-06-06','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('tkZhouRzCm0FpoITe9H+Pg==',15,'+9E6soOikCp1IbkGUx4PjQ==','2016-05-23','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('tSOtngv/3diHOsCJo6rYOg==',31,'Epepxgsy2Z5mG5jhhc9fQw==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('UskT7RTuw9oGrEyoA5/p0A==',5,'sYjElW5FAVD213b3/i/07A==','2016-05-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('uuRMPqbtEBc6QVsYIXN2pA==',21,'oeCuCAeQjxjpbYtfS8o4/w==','2016-04-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('V9rQqqIRC/goYf0v4KMZ3g==',30,'d8YPqVoG4JnyxyH1XvqOyA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('vCltSl9MsKd488jrCU8XQw==',5,'m9uZJi+jxdO842VU7ckQzA==','2016-05-10','122.170.237.113','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
- ('vehx07ryxugUHCENmGBUSA==',30,'tSECGXgNhKq8auv6nZmQuw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('V9rQqqIRC/goYf0v4KMZ3g==',30,'d8YPqVoG4JnyxyH1XvqOyA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('vCltSl9MsKd488jrCU8XQw==',5,'m9uZJi+jxdO842VU7ckQzA==','2016-05-10','122.170.237.113','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
+ ('vehx07ryxugUHCENmGBUSA==',30,'tSECGXgNhKq8auv6nZmQuw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('vnR7DP8oSYXDmF+mnmU1kg==',21,'/81Dy452hRlZFVFwMvjsag==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w19dFvKWblZHPQ4qBmRwOQ==',3,'niw5it4bdTF1FOsKFYODRQ==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Wcl3JtiPVeESKHgkm9DWVA==',30,'2E/wOFh/Y8+Y89I+G+sIQA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('wHOaPe95y0bFDhv7rwp+pQ==',3,'G5PATNutbflLHCMZntNdzA==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('wlsxEVx3DOGE5elnLj7U8Q==',3,'OA+2jIAtEEIKEr1jUU54UA==','2016-04-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('XQG+pOIkmGVy/h3BRMq+Pw==',30,'rmKrD1xN8nP8aLEDALqvFA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('YCy7O8uNAqrw7SFOZCRH7Q==',15,'96gB2HojQE8BSXPuGXHk7A==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('wlsxEVx3DOGE5elnLj7U8Q==',3,'OA+2jIAtEEIKEr1jUU54UA==','2016-04-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('XQG+pOIkmGVy/h3BRMq+Pw==',30,'rmKrD1xN8nP8aLEDALqvFA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
+ ('YCy7O8uNAqrw7SFOZCRH7Q==',15,'96gB2HojQE8BSXPuGXHk7A==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('yeGR7p45ZYo74KGrWntAZA==',3,'ytU215AgvrBXIiLMgsecaw==','2016-04-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ynZOMTxODvqkNvAvZyrabw==',30,'/neHN/ixIp/JbDwgJM2N3A==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ZeWv40JzO9chd/3DLw5QZw==',3,'7qpybtDxl+Azh/kyfSI5dg==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('zFE08dIb3ttfqV37i6eHKA==',3,'4X2BHKVSVF8Lb6nvKk79IQ==','2016-04-12','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('zhd4rwE9C7X22qgUPtBn5A==',3,'cv4E4LDutK6UEVxu9T3kow==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('zti4U4Exyo6eEJVADM9M2A==',31,'TCPjsqFMABVuo1YA4kMgJQ==','2016-05-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('zhd4rwE9C7X22qgUPtBn5A==',3,'cv4E4LDutK6UEVxu9T3kow==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('zti4U4Exyo6eEJVADM9M2A==',31,'TCPjsqFMABVuo1YA4kMgJQ==','2016-05-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('ZUm+VERzKtdR8l9KHJjoCA==',15,'WNKGjhGmP8tXr92ss7AgSQ==','2016-06-10','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 /*!40000 ALTER TABLE `jhi_persistent_token` ENABLE KEYS */;
 
 
@@ -5897,43 +6197,6 @@ INSERT INTO `merchant_master` (`id`,`merchant_code`,`merchant_name`,`merchant_ke
 
 
 --
--- Table structure for table `watererp`.`meter_change`
---
-
-DROP TABLE IF EXISTS `meter_change`;
-CREATE TABLE `meter_change` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `can` varchar(255) DEFAULT NULL,
-  `reason_for_change` varchar(255) DEFAULT NULL,
-  `prev_meter_reading` float DEFAULT NULL,
-  `new_meter_reading` float DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  `approved_date` date DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `cust_details_id` bigint(20) DEFAULT NULL,
-  `prev_meter_no_id` bigint(20) DEFAULT NULL,
-  `new_meter_no_id` bigint(20) DEFAULT NULL,
-  `user_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_meterchange_custdetails_id` (`cust_details_id`),
-  KEY `fk_meterchange_prevmeterno_id` (`prev_meter_no_id`),
-  KEY `fk_meterchange_newmeterno_id` (`new_meter_no_id`),
-  KEY `fk_meterchange_user_id` (`user_id`),
-  CONSTRAINT `fk_meterchange_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
-  CONSTRAINT `fk_meterchange_newmeterno_id` FOREIGN KEY (`new_meter_no_id`) REFERENCES `meter_details` (`id`),
-  CONSTRAINT `fk_meterchange_prevmeterno_id` FOREIGN KEY (`prev_meter_no_id`) REFERENCES `meter_details` (`id`),
-  CONSTRAINT `fk_meterchange_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `watererp`.`meter_change`
---
-
-/*!40000 ALTER TABLE `meter_change` DISABLE KEYS */;
-/*!40000 ALTER TABLE `meter_change` ENABLE KEYS */;
-
-
---
 -- Table structure for table `watererp`.`meter_details`
 --
 
@@ -5957,14 +6220,14 @@ CREATE TABLE `meter_details` (
 
 /*!40000 ALTER TABLE `meter_details` DISABLE KEYS */;
 INSERT INTO `meter_details` (`id`,`meter_id`,`meter_type`,`meter_make`,`min`,`max`,`meter_status_id`) VALUES 
- (1,'MeterId1','type1','make1',1,999999,1),
+ (1,'MeterId1','type1','make1',1,999999,3),
  (2,'MeterId2','Type2','make2',1,99999,1),
- (3,'MeterId3','type3','make3',1,99999,1),
+ (3,'MeterId3','type3','make3',1,99999,3),
  (4,'MeterId4','type4','make4',1,99999,1),
  (5,'MeterId5','type5','make5',1,99999,1),
  (6,'Meter7','digital','visiontek',0,99999,1),
  (7,'Meter8','Digital','Visiontek',0,99999,2),
- (8,'Meter9','Digital','visiontek',0,99999,2),
+ (8,'MeterId9','Digital','visiontek',0,99999,2),
  (9,'Meter10','Digital','visiontek',0,99999,2),
  (10,'Meter11','Digital','visiontek',0,99999,2);
 /*!40000 ALTER TABLE `meter_details` ENABLE KEYS */;
@@ -6173,7 +6436,7 @@ CREATE TABLE `online_payment_callback` (
   KEY `fk_onlinepaymentcallback_onlinepaymentorder_id` (`online_payment_order_id`),
   CONSTRAINT `fk_onlinepaymentcallback_merchantmaster_id` FOREIGN KEY (`merchant_master_id`) REFERENCES `merchant_master` (`id`),
   CONSTRAINT `fk_onlinepaymentcallback_onlinepaymentorder_id` FOREIGN KEY (`online_payment_order_id`) REFERENCES `online_payment_order` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=239 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`online_payment_callback`
@@ -6181,12 +6444,16 @@ CREATE TABLE `online_payment_callback` (
 
 /*!40000 ALTER TABLE `online_payment_callback` DISABLE KEYS */;
 INSERT INTO `online_payment_callback` (`id`,`currency`,`payment_mode`,`service_code`,`message`,`response_code`,`total_amount_paid`,`user_defined_field`,`merchant_txn_ref`,`merchant_master_id`,`online_payment_order_id`) VALUES 
- (1,'TSh','TIGOPESADIR','TESTS001',NULL,'2009',280,'123','6828618857',2,11),
- (99,'TSh','TIGOPESADIR','TESTS001',NULL,'100',3864.79,'12','100',2,1),
- (100,'TSh','TIGOPESADIR','TESTS001',NULL,'100',1610,'12','200',2,2),
- (101,'TSh','TIGOPESADIR','TESTS001',NULL,'100',16200,'12','300',2,3),
- (102,'TSh','TIGOPESADIR','TESTS001',NULL,'100',22970,'12','400',2,4),
- (103,'TSh','TIGOPESADIR','TESTS001',NULL,'100',28820,'12','500',2,5);
+ (229,'TSh','TIGOPESADIR','TESTS001',NULL,'100',3864.79,'12','100',2,1),
+ (230,'TSh','TIGOPESADIR','TESTS001',NULL,'100',1610,'12','200',2,2),
+ (231,'TSh','TIGOPESADIR','TESTS001',NULL,'100',16200,'12','300',2,3),
+ (232,'TSh','TIGOPESADIR','TESTS001',NULL,'100',22970,'12','400',2,4),
+ (233,'TSh','TIGOPESADIR','TESTS001',NULL,'100',28820,'12','500',2,5),
+ (234,'TSh','TIGOPESADIR','TESTS001',NULL,'100',1600,'12','600',2,10),
+ (235,'TSh','TIGOPESADIR','TESTS001',NULL,'100',500,'12','700',2,11),
+ (236,'TSh','TIGOPESADIR','TESTS001',NULL,'100',1000,'12','800',2,12),
+ (237,'TSh','TIGOPESADIR','TESTS001',NULL,'100',10000,'12','900',2,13),
+ (238,'TSh','TIGOPESADIR','TESTS001',NULL,'100',6500,'12','1000',2,14);
 /*!40000 ALTER TABLE `online_payment_callback` ENABLE KEYS */;
 
 
@@ -6208,7 +6475,7 @@ CREATE TABLE `online_payment_order` (
   PRIMARY KEY (`id`),
   KEY `fk_onlinepaymentorder_merchantmaster_id` (`merchant_master_id`),
   CONSTRAINT `fk_onlinepaymentorder_merchantmaster_id` FOREIGN KEY (`merchant_master_id`) REFERENCES `merchant_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`online_payment_order`
@@ -6225,11 +6492,13 @@ INSERT INTO `online_payment_order` (`id`,`service_code`,`amount`,`pay_by`,`user_
  (7,'TESTS001',1234,'TIGOPESADIR','617999021','test@gmail.com',1234567890,'2016-05-03 15:52:51',2),
  (8,'TESTS001',123,'TIGOPESADIR','617790069','test@gmail.com',1234567890,'2016-05-03 16:29:13',2),
  (9,'TESTS001',123,'TIGOPESADIR','617999021','test@gmail.com',123456789,'2016-05-03 16:30:13',2),
- (10,'TESTS001',1234,'TIGOPESADIR','617783704','test@gmail.com',123456789,'2016-05-03 22:17:30',2);
+ (10,'TESTS001',1600,'TIGOPESADIR','02020005','test@gmail.com',1234567890,'2016-05-02 22:17:25',2);
 INSERT INTO `online_payment_order` (`id`,`service_code`,`amount`,`pay_by`,`user_defined_field`,`email`,`phone`,`order_time`,`merchant_master_id`) VALUES 
- (11,'TESTS001',123,'TIGOPESADIR','617999021','test@gmail.com',123456789,'2016-05-03 22:35:45',2),
- (12,'TESTS001',1000,'TIGOPESADIR','02020002','ravimrb@yahoo.com',9949976058,'2016-05-10 10:31:32',2),
- (13,'TESTS001',12000,'TIGOPESADIR','02020004','patrick.mbago@maxcom.com',655134858,'2016-05-10 19:06:35',2);
+ (11,'TESTS001',500,'TIGOPESADIR','08090001','test@gmail.com',1234567890,'2016-05-02 22:17:25',2),
+ (12,'TESTS001',1000,'TIGOPESADIR','04060001','test@gmail.com',123456789,'2016-05-03 13:53:56',2),
+ (13,'TESTS001',10000,'TIGOPESADIR','04060003','test@gmail.com',123456789,'2016-05-03 15:08:13',2),
+ (14,'TESTS001',6500,'TIGOPESADIR','04060004','test@gmail.com',1234567890,'2016-05-03 15:10:47',2),
+ (16,'TESTS001',2000,'TIGOPESADIR','02020005','test@gmail.com',1234567890,'2016-05-02 22:17:25',2);
 /*!40000 ALTER TABLE `online_payment_order` ENABLE KEYS */;
 
 
@@ -6248,7 +6517,7 @@ CREATE TABLE `online_payment_response` (
   PRIMARY KEY (`id`),
   KEY `fk_onlinepaymentresponse_onlinepaymentorder_id` (`online_payment_order_id`),
   CONSTRAINT `fk_onlinepaymentresponse_onlinepaymentorder_id` FOREIGN KEY (`online_payment_order_id`) REFERENCES `online_payment_order` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`online_payment_response`
@@ -6260,7 +6529,14 @@ INSERT INTO `online_payment_response` (`id`,`response_code`,`response_time`,`red
  (2,'100','2016-05-03 22:35:46','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6828618857&name=null&paymentmode=TIGOPESADIR','200',2),
  (3,'100','2016-05-10 19:06:36','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6869048643&name=null&paymentmode=TIGOPESADIR','300',3),
  (4,'100','2016-05-10 10:31:34','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=4557988987&name=null&paymentmode=TIGOPESADIR','400',4),
- (5,'100','2016-05-10 19:06:36','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6869048643&name=null&paymentmode=TIGOPESADIR','500',5);
+ (5,'100','2016-05-10 19:06:36','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6869048643&name=null&paymentmode=TIGOPESADIR','500',5),
+ (10,'100','2016-05-03 22:35:46','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6828618857&name=null&paymentmode=TIGOPESADIR','600',10),
+ (11,'100','2016-05-03 22:35:46','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6828618857&name=null&paymentmode=TIGOPESADIR','700',11);
+INSERT INTO `online_payment_response` (`id`,`response_code`,`response_time`,`redirect_url`,`merchant_txn_ref`,`online_payment_order_id`) VALUES 
+ (12,'100','2016-05-10 19:06:36','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6869048643&name=null&paymentmode=TIGOPESADIR','800',12),
+ (13,'100','2016-05-10 10:31:34','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=4557988987&name=null&paymentmode=TIGOPESADIR','900',13),
+ (14,'100','2016-05-10 19:06:36','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6869048643&name=null&paymentmode=TIGOPESADIR','1000',14),
+ (16,'100','2016-05-03 22:35:46','http://crystal.tekmindz.com:80/maxcompp/directpaymentreceipt.xhtml?txnref=6828618857&name=null&paymentmode=TIGOPESADIR','1100',16);
 /*!40000 ALTER TABLE `online_payment_response` ENABLE KEYS */;
 
 
@@ -6770,7 +7046,7 @@ CREATE TABLE `request_workflow_history` (
   CONSTRAINT `fk_requestworkflowhistory_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowmaster_id` FOREIGN KEY (`workflow_master_id`) REFERENCES `workflow_master` (`id`),
   CONSTRAINT `fk_requestworkflowhistory_workflowstagemaster_id` FOREIGN KEY (`workflow_stage_master_id`) REFERENCES `workflow_stage_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=316 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`request_workflow_history`
@@ -6864,7 +7140,19 @@ INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`ac
  (301,8,'2016-06-03 11:00:02','2016-06-03 15:26:46','ok','169.254.197.57',NULL,39,20,21,9,1,1,NULL,NULL),
  (302,8,'2016-06-03 11:00:30','2016-06-03 15:26:59','ok','169.254.197.57',NULL,40,20,21,9,1,1,NULL,NULL),
  (303,8,'2016-06-03 11:01:07','2016-06-03 15:27:17','ok','169.254.197.57',NULL,41,20,21,9,1,1,NULL,NULL),
- (304,8,'2016-06-03 11:06:34','2016-06-03 15:27:30','ok','169.254.197.57',NULL,42,20,21,9,1,1,NULL,NULL);
+ (304,8,'2016-06-03 11:06:34','2016-06-03 15:27:30','ok','169.254.197.57',NULL,42,20,21,9,1,1,NULL,NULL),
+ (305,1,'2016-06-10 16:21:16','2016-06-10 16:22:18','','169.254.197.57',NULL,10,5,23,5,3,4,NULL,NULL),
+ (306,2,'2016-06-10 16:22:18','2016-06-10 16:34:03','wrong calculation','169.254.197.57',NULL,10,23,16,5,3,4,NULL,NULL);
+INSERT INTO `request_workflow_history` (`id`,`request_stage`,`assigned_date`,`actioned_date`,`remarks`,`ip_address`,`assigned_role`,`domain_object`,`assigned_from_id`,`assigned_to_id`,`status_master_id`,`request_master_id`,`workflow_master_id`,`workflow_stage_master_id`,`applied_by_id`) VALUES 
+ (307,3,'2016-06-10 16:34:03','2016-06-10 16:35:00','ok','169.254.197.57',NULL,10,16,17,5,3,4,NULL,NULL),
+ (308,4,'2016-06-10 16:35:00','2016-06-10 16:36:30','ok','169.254.197.57',NULL,10,17,9,5,3,4,NULL,NULL),
+ (309,5,'2016-06-10 16:36:30','2016-06-10 16:37:34','ok','169.254.197.57',NULL,10,9,21,9,3,4,NULL,NULL),
+ (310,1,'2016-06-10 17:43:39',NULL,NULL,'169.254.197.57',NULL,1,5,20,3,7,6,NULL,NULL),
+ (311,1,'2016-06-10 17:53:26',NULL,NULL,'169.254.197.57',NULL,2,5,20,3,7,6,NULL,NULL),
+ (312,1,'2016-06-10 18:00:42','2016-06-10 00:00:00','ok','169.254.197.57',NULL,4,5,15,5,8,8,NULL,NULL),
+ (313,2,'2016-06-10 00:00:00','2016-06-10 00:00:00','ok','169.254.197.57',NULL,4,15,21,9,8,8,NULL,NULL),
+ (314,1,'2016-06-10 18:45:54','2016-05-31 00:00:00','sdfsda','169.254.197.57',NULL,43,5,15,5,6,5,NULL,NULL),
+ (315,2,'2016-05-31 00:00:00',NULL,NULL,'169.254.197.57',NULL,43,15,21,3,6,5,NULL,NULL);
 /*!40000 ALTER TABLE `request_workflow_history` ENABLE KEYS */;
 
 
@@ -7332,13 +7620,16 @@ CREATE TABLE `transaction_type_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type_of_txn` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`transaction_type_master`
 --
 
 /*!40000 ALTER TABLE `transaction_type_master` DISABLE KEYS */;
+INSERT INTO `transaction_type_master` (`id`,`type_of_txn`) VALUES 
+ (1,'Credit'),
+ (2,'Debit');
 /*!40000 ALTER TABLE `transaction_type_master` ENABLE KEYS */;
 
 

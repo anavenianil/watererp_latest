@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the BillFullDetails entity.
+ * Performance test for the Adjustments entity.
  */
-class BillFullDetailsGatlingTest extends Simulation {
+class AdjustmentsGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class BillFullDetailsGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the BillFullDetails entity")
+    val scn = scenario("Test the Adjustments entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class BillFullDetailsGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all billFullDetailss")
-            .get("/api/billFullDetailss")
+            exec(http("Get all adjustmentss")
+            .get("/api/adjustmentss")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new billFullDetails")
-            .post("/api/billFullDetailss")
+            .exec(http("Create new adjustments")
+            .post("/api/adjustmentss")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "can":"SAMPLE_TEXT", "divCode":"SAMPLE_TEXT", "secCode":"SAMPLE_TEXT", "secName":"SAMPLE_TEXT", "metReaderCode":"SAMPLE_TEXT", "connDate":"2020-01-01T00:00:00.000Z", "consName":"SAMPLE_TEXT", "houseNo":"SAMPLE_TEXT", "address":"SAMPLE_TEXT", "city":"SAMPLE_TEXT", "pinCode":"SAMPLE_TEXT", "category":"SAMPLE_TEXT", "pipeSize":null, "boardMeter":"SAMPLE_TEXT", "sewerage":"SAMPLE_TEXT", "prevBillType":"SAMPLE_TEXT", "prevBillMonth":"2020-01-01T00:00:00.000Z", "prevAvgKl":null, "metReadingDt":"2020-01-01T00:00:00.000Z", "prevReading":null, "metReadingMo":"2020-01-01T00:00:00.000Z", "metAvgKl":null, "arrears":null, "reversalAmt":null, "installment":null, "otherCharges":null, "surcharge":null, "hrsSurcharge":"SAMPLE_TEXT", "resUnits":null, "metCostInstallment":null, "intOnArrears":null, "lastPymtDt":"2020-01-01T00:00:00.000Z", "lastPymtAmt":null, "billNumber":"SAMPLE_TEXT", "billDate":"2020-01-01T00:00:00.000Z", "billTime":"SAMPLE_TEXT", "meterMake":"SAMPLE_TEXT", "currentBillType":"SAMPLE_TEXT", "fromMonth":"SAMPLE_TEXT", "toMonth":"SAMPLE_TEXT", "meterFixDate":"2020-01-01T00:00:00.000Z", "initialReading":null, "presentReading":null, "units":null, "waterCess":null, "sewerageCess":null, "serviceCharge":null, "meterServiceCharge":null, "totalAmount":null, "netPayableAmount":null, "telephoneNo":"SAMPLE_TEXT", "meterStatus":"SAMPLE_TEXT", "billFlag":"SAMPLE_TEXT", "svrStatus":"SAMPLE_TEXT", "terminalId":"SAMPLE_TEXT", "meterReaderId":"SAMPLE_TEXT", "userId":"SAMPLE_TEXT", "mobileNo":"SAMPLE_TEXT", "noticeNo":"SAMPLE_TEXT", "lat":"SAMPLE_TEXT", "longi":"SAMPLE_TEXT", "noMeterAmt":null, "lockCharges":null}""")).asJSON
+            .body(StringBody("""{"id":null, "can":"SAMPLE_TEXT", "amount":null, "remarks":"SAMPLE_TEXT", "txnTime":"2020-01-01T00:00:00.000Z", "status":null}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_billFullDetails_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_adjustments_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created billFullDetails")
-                .get("${new_billFullDetails_url}")
+                exec(http("Get created adjustments")
+                .get("${new_adjustments_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created billFullDetails")
-            .delete("${new_billFullDetails_url}")
+            .exec(http("Delete created adjustments")
+            .delete("${new_adjustments_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

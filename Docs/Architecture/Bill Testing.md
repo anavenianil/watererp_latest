@@ -42,6 +42,15 @@ This file is run from:
 # Executing Billing Test
 mvn -Dtest=BillRunMasterResourceIntTest test
 
+# Get All payments for customer
+select * from (
+select can,  'Cash' mode, receipt_dt, receipt_amt from coll_details where can='04060001'
+union
+SELECT op.user_defined_field can, 'Online' mode, order_time receipt_dt, total_amount_paid receipt_amt FROM `online_payment_callback` o, online_payment_order op
+where o.online_payment_order_Id = op.id
+and op.user_defined_field='04060001'
+) a
+order by receipt_dt
 
 #How to make a new customer from an existing customer
 ``delete from bill_run_details where can='02020005';``

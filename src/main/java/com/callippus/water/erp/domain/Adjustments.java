@@ -2,21 +2,25 @@ package com.callippus.water.erp.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.callippus.water.erp.domain.enumeration.TxnStatus;
+
 /**
- * A MeterChange.
+ * A Adjustments.
  */
 @Entity
-@Table(name = "meter_change")
+@Table(name = "adjustments")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class MeterChange implements Serializable {
+public class Adjustments implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,43 +29,39 @@ public class MeterChange implements Serializable {
     @Column(name = "can")
     private String can;
 
-    @Column(name = "reason_for_change")
-    private String reasonForChange;
-
-    @Column(name = "prev_meter_reading")
-    private Float prevMeterReading;
-
-    @Column(name = "new_meter_reading")
-    private Float newMeterReading;
+    @Column(name = "amount", precision=10, scale=2)
+    private BigDecimal amount;
 
     @Column(name = "remarks")
     private String remarks;
 
-    @Column(name = "approved_date")
-    private LocalDate approvedDate;
+    @Column(name = "txn_time")
+    private ZonedDateTime txnTime;
 
-    @Column(name = "status")
-    private Integer status;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private TxnStatus status;
 
     @ManyToOne
     @JoinColumn(name = "cust_details_id")
     private CustDetails custDetails;
 
     @ManyToOne
-    @JoinColumn(name = "prev_meter_no_id")
-    private MeterDetails prevMeterNo;
-
-    @ManyToOne
-    @JoinColumn(name = "new_meter_no_id")
-    private MeterDetails newMeterNo;
-
-    @ManyToOne
     @JoinColumn(name = "bill_full_details_id")
     private BillFullDetails billFullDetails;
 
     @ManyToOne
+    @JoinColumn(name = "transaction_type_master_id")
+    private TransactionTypeMaster transactionTypeMaster;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "complaint_type_master_id")
+    private ComplaintTypeMaster complaintTypeMaster;
 
     public Long getId() {
         return id;
@@ -79,28 +79,12 @@ public class MeterChange implements Serializable {
         this.can = can;
     }
 
-    public String getReasonForChange() {
-        return reasonForChange;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setReasonForChange(String reasonForChange) {
-        this.reasonForChange = reasonForChange;
-    }
-
-    public Float getPrevMeterReading() {
-        return prevMeterReading;
-    }
-
-    public void setPrevMeterReading(Float prevMeterReading) {
-        this.prevMeterReading = prevMeterReading;
-    }
-
-    public Float getNewMeterReading() {
-        return newMeterReading;
-    }
-
-    public void setNewMeterReading(Float newMeterReading) {
-        this.newMeterReading = newMeterReading;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public String getRemarks() {
@@ -111,19 +95,19 @@ public class MeterChange implements Serializable {
         this.remarks = remarks;
     }
 
-    public LocalDate getApprovedDate() {
-        return approvedDate;
+    public ZonedDateTime getTxnTime() {
+        return txnTime;
     }
 
-    public void setApprovedDate(LocalDate approvedDate) {
-        this.approvedDate = approvedDate;
+    public void setTxnTime(ZonedDateTime txnTime) {
+        this.txnTime = txnTime;
     }
 
-    public Integer getStatus() {
+    public TxnStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(TxnStatus status) {
         this.status = status;
     }
 
@@ -135,28 +119,20 @@ public class MeterChange implements Serializable {
         this.custDetails = custDetails;
     }
 
-    public MeterDetails getPrevMeterNo() {
-        return prevMeterNo;
-    }
-
-    public void setPrevMeterNo(MeterDetails meterDetails) {
-        this.prevMeterNo = meterDetails;
-    }
-
-    public MeterDetails getNewMeterNo() {
-        return newMeterNo;
-    }
-
-    public void setNewMeterNo(MeterDetails meterDetails) {
-        this.newMeterNo = meterDetails;
-    }
-
     public BillFullDetails getBillFullDetails() {
         return billFullDetails;
     }
 
     public void setBillFullDetails(BillFullDetails billFullDetails) {
         this.billFullDetails = billFullDetails;
+    }
+
+    public TransactionTypeMaster getTransactionTypeMaster() {
+        return transactionTypeMaster;
+    }
+
+    public void setTransactionTypeMaster(TransactionTypeMaster transactionTypeMaster) {
+        this.transactionTypeMaster = transactionTypeMaster;
     }
 
     public User getUser() {
@@ -167,6 +143,14 @@ public class MeterChange implements Serializable {
         this.user = user;
     }
 
+    public ComplaintTypeMaster getComplaintTypeMaster() {
+        return complaintTypeMaster;
+    }
+
+    public void setComplaintTypeMaster(ComplaintTypeMaster complaintTypeMaster) {
+        this.complaintTypeMaster = complaintTypeMaster;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -175,8 +159,8 @@ public class MeterChange implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        MeterChange meterChange = (MeterChange) o;
-        return Objects.equals(id, meterChange.id);
+        Adjustments adjustments = (Adjustments) o;
+        return Objects.equals(id, adjustments.id);
     }
 
     @Override
@@ -186,14 +170,12 @@ public class MeterChange implements Serializable {
 
     @Override
     public String toString() {
-        return "MeterChange{" +
+        return "Adjustments{" +
             "id=" + id +
             ", can='" + can + "'" +
-            ", reasonForChange='" + reasonForChange + "'" +
-            ", prevMeterReading='" + prevMeterReading + "'" +
-            ", newMeterReading='" + newMeterReading + "'" +
+            ", amount='" + amount + "'" +
             ", remarks='" + remarks + "'" +
-            ", approvedDate='" + approvedDate + "'" +
+            ", txnTime='" + txnTime + "'" +
             ", status='" + status + "'" +
             '}';
     }

@@ -1,0 +1,96 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myAdjustmentsLabel">Create or edit a Adjustments</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="adjustments.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_can">Can</label>
+            <input type="text" class="form-control" name="can" id="field_can"
+                    ng-model="adjustments.can"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="field_amount"
+                    ng-model="adjustments.amount"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_remarks">Remarks</label>
+            <input type="text" class="form-control" name="remarks" id="field_remarks"
+                    ng-model="adjustments.remarks"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_txnTime">TxnTime</label>
+            <input id="field_txnTime" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="adjustments.txnTime" is-open="datePickerForTxnTime.status.opened"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datePickerForTxnTimeOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_status">Status</label>
+            <select class="form-control" name="status" ng-model="adjustments.status" id="field_status" required>
+                <option value="INITIATED">INITIATED</option>
+                <option value="PROCESSING">PROCESSING</option>
+                <option value="BILLED">BILLED</option>
+            </select>
+            <div ng-show="editForm.status.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.status.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_custDetails">custDetails</label>
+            <select class="form-control" id="field_custDetails" name="custDetails" ng-model="adjustments.custDetails" ng-options="custDetails as custDetails.id for custDetails in custdetailss track by custDetails.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_billFullDetails">billFullDetails</label>
+            <select class="form-control" id="field_billFullDetails" name="billFullDetails" ng-model="adjustments.billFullDetails" ng-options="billFullDetails as billFullDetails.id for billFullDetails in billfulldetailss track by billFullDetails.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_transactionTypeMaster">transactionTypeMaster</label>
+            <select class="form-control" id="field_transactionTypeMaster" name="transactionTypeMaster" ng-model="adjustments.transactionTypeMaster" ng-options="transactionTypeMaster as transactionTypeMaster.id for transactionTypeMaster in transactiontypemasters track by transactionTypeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="adjustments.user" ng-options="user as user.id for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_complaintTypeMaster">complaintTypeMaster</label>
+            <select class="form-control" id="field_complaintTypeMaster" name="complaintTypeMaster" ng-model="adjustments.complaintTypeMaster" ng-options="complaintTypeMaster as complaintTypeMaster.id for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

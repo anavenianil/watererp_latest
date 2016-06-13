@@ -1,25 +1,28 @@
 package com.callippus.water.erp.service;
 
 import com.callippus.water.erp.common.CPSUtils;
+import com.callippus.water.erp.domain.Adjustments;
 import com.callippus.water.erp.domain.BillDetails;
 import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.BillRunDetails;
 import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
-import com.callippus.water.erp.domain.PGResponse;
-import com.callippus.water.erp.domain.UnifiedPayment;
+import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.enumeration.BillingStatus;
+import com.callippus.water.erp.domain.enumeration.TxnStatus;
 import com.callippus.water.erp.mappings.BillMapper;
+import com.callippus.water.erp.repository.AdjustmentsRepository;
 import com.callippus.water.erp.repository.BillDetailsRepository;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.BillRunDetailsRepository;
 import com.callippus.water.erp.repository.BillRunMasterRepository;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.MeterChangeRepository;
 import com.callippus.water.erp.repository.TariffMasterCustomRepository;
-import com.callippus.water.erp.service.util.XMLUtil;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -69,6 +72,12 @@ public class BillingService {
 	@Inject
 	private BillFullDetailsRepository bfdRepository;
 
+	@Inject
+	private MeterChangeRepository meterChangeRepository;
+
+	@Inject
+	private AdjustmentsRepository adjustmentsRepository;
+
 	enum Status {
 		SUCCESS, FAILURE
 	};
@@ -76,6 +85,29 @@ public class BillingService {
 	enum CustValidation {
 		ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_METER_READING_MONTH, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS
 	};
+
+	enum MeterChangeStatus {
+		APPROVED(2), BILLED(3);
+
+		private int _value;
+
+		MeterChangeStatus(int Value) {
+			this._value = Value;
+		}
+
+		public int getValue() {
+			return _value;
+		}
+
+		public static MeterChangeStatus fromInt(int i) {
+			for (MeterChangeStatus b : MeterChangeStatus.values()) {
+				if (b.getValue() == i) {
+					return b;
+				}
+			}
+			return null;
+		}
+	}
 
 	enum BrdStatus {
 		INIT(0), FAILED(1), SUCCESS(2), FAILED_COMMIT(3), COMMITTED(4);
@@ -124,6 +156,8 @@ public class BillingService {
 	BillRunMaster br = null;
 	boolean multipleTariffs = false;
 
+	MeterChange meterChange = null;
+
 	ConfigurationDetails cd = null;
 
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f, total_cess = 0.0f, kl = 0.0f;
@@ -132,14 +166,8 @@ public class BillingService {
 		LocalDate dFrom = null;
 		LocalDate dTo = null;
 
-		boolean tariffChangeFlag = false;
-
 		dFrom = LocalDate.of(2016, 05, 24);
 		dTo = LocalDate.of(2016, 06, 30);
-
-		long totDays = ChronoUnit.DAYS.between(dFrom, dTo.plusDays(1));
-
-		tariffChangeFlag = false;
 	}
 
 	public BillRunMaster generateBill() throws Exception {
@@ -150,7 +178,9 @@ public class BillingService {
 		if (bd.size() == 0)
 			throw new Exception("No new meter readings available to run bills.");
 
-		processBills(bd);
+		processBillsWithMeter(bd);
+
+		processBillsWithoutMeter();
 
 		if (failedRecords > 0)
 			br.setStatus("Completed with Errors");
@@ -178,6 +208,55 @@ public class BillingService {
 		return br;
 	}
 
+
+	public void process_bill(BillDetails bill_details) {
+		if (bill_details == null)
+			return;
+
+		initBill(bill_details.getCan());
+
+		brd.setBillDetails(bill_details);
+
+		log.debug("Process customer with CAN:" + bill_details.getCan());
+		CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());
+
+		if (customer == null) {
+			log.debug("Customer not found in CUST_DETAILS for CAN:" + bill_details.getCan());
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(0);
+			brd.setRemarks(
+					"Failed with error:" + "Customer not found in CUST_DETAILS for CAN:" + bill_details.getCan());
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return;
+		}
+
+		if (bill_details.getCurrentBillType().equals("M")) {
+			if (meterChange != null) {
+				getUnitsKLMeterChange(bill_details, customer);
+			}
+			else if (bill_details.getIsRounding()) {
+				unitsKL = bill_details.getPresentReading() + 999 - bill_details.getInitialReading();
+			} else {
+				unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
+			}
+		}
+
+		if (customer.getPrevBillMonth() == null) {
+			process_bill_new_meter(bill_details, customer);
+			return;
+		} else {
+			process_bill_normal(bill_details, customer);
+			return;
+		}
+
+	}
+
+	
 	public String cancelBillRun(long billRunId) {
 		try {
 			BillRunMaster brm = billRunMasterRepository.findOne(billRunId);
@@ -282,7 +361,26 @@ public class BillingService {
 			else
 				customer.setLockCharges(bfd.getLockCharges());
 
+			List<Adjustments> adjustments = adjustmentsRepository
+					.findByCanAndStatusAndBillFullDetails(customer.getCan(), TxnStatus.PROCESSING, bfd);
+
+			for (Adjustments adj : adjustments) {
+				adj.setStatus(TxnStatus.BILLED);
+			}
+
+			adjustmentsRepository.save(adjustments);
+
 			custDetailsRepository.saveAndFlush(customer);
+
+			MeterChange meterChange = meterChangeRepository.findByCanAndStatus(customer.getCan(),
+					MeterChangeStatus.APPROVED.getValue());
+
+			if (meterChange != null) {
+				meterChange.setBillFullDetails(bfd);
+				meterChange.setStatus(3);
+
+				meterChangeRepository.save(meterChange);
+			}
 
 		} catch (Exception e) {
 			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
@@ -324,15 +422,17 @@ public class BillingService {
 		newMeterFlag = 0;
 		unMeteredFlag = 0;
 		multipleTariffs = false;
-		
+
 		partialUnitsKL = 0.0f;
 		remUnitsKL = 0.0f;
-		
+
 		total_amount = 0.0f;
 		net_payable_amount = 0.0f;
 		surcharge = 0.0f;
 		total_cess = 0.0f;
 		kl = 0.0f;
+
+		meterChange = meterChangeRepository.findByCanAndStatus(can, MeterChangeStatus.APPROVED.getValue());
 
 		brd = new BillRunDetails();
 		brd.setCan(can);
@@ -342,8 +442,67 @@ public class BillingService {
 		brd.setBillRunMaster(br);
 	}
 
-	public void processBills(List<BillDetails> bd) {
+	public void processBillsWithMeter(List<BillDetails> bd) {
 		bd.forEach(bill_details -> process_bill(bill_details));
+	}
+
+	public void processBillsWithoutMeter() {
+		List<CustDetails> customers = custDetailsRepository.findByPrevBillType("U");
+		customers.forEach(customer -> saveBillDetails(customer));
+	}
+
+	public void saveBillDetails(CustDetails customer) {
+		// Insert bill_details record for each run
+		try {
+			initBill(customer.getCan()); // Is inited again in process_bill, but
+											// right now there is no better
+											// solution
+
+			BillDetails bill_details = new BillDetails();
+			bill_details.setCan(customer.getCan());
+			LocalDate now = LocalDate.now();
+			bill_details.setBillDate(now);
+			bill_details.setCurrentBillType("U");
+
+			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMM");
+			if (customer.getPrevBillMonth() != null) {
+				LocalDate from = customer.getPrevBillMonth().plusMonths(1);
+				String fromMonth = from.format(date_format);
+				bill_details.setFromMonth(fromMonth);
+			} else if (customer.getMeterFixDate() != null) {
+				LocalDate from = customer.getMeterFixDate();
+				String fromMonth = from.format(date_format);
+				bill_details.setFromMonth(fromMonth);
+			} else
+				throw new Exception("Unmetered Customer does not have Prev Bill Month or Meter Fix Date");
+
+			bill_details.setToMonth(now.format(date_format));
+			bill_details.setMeterFixDate(customer.getMeterFixDate());
+			bill_details.setInitialReading(null);
+			bill_details.setPresentReading(null);
+			bill_details.setMetReadingDt(now);
+			bill_details.setInsertDt(ZonedDateTime.now());
+			bill_details.setStatus(BillingStatus.INITIATED);
+			bill_details.setMeterReaderId("1");
+
+			billDetailsRepository.saveAndFlush(bill_details);
+
+			process_bill(bill_details);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.debug(CPSUtils.stackTraceToString(e));
+
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(BrdStatus.FAILED.getValue());
+			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
+			billRunDetailsRepository.save(brd);
+
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+
+			return;
+		}
+
 	}
 
 	public void process_bill(String can) throws Exception {
@@ -363,8 +522,8 @@ public class BillingService {
 			return;
 
 		try {
-			if (!bill_details.getCurrentBillType().equals("M"))
-				bill_details.setPresentReading(customer.getPrevReading());
+			// if (!bill_details.getCurrentBillType().equals("M"))
+			// bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getMeterFixDate();
 			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
@@ -377,20 +536,19 @@ public class BillingService {
 						+ dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
 			}
 
-			if (bill_details.getCurrentBillType().equals("M")) {
-					unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
-			}
-			
-			
+
 			log.debug("################################################################################");
-			log.debug("          NEW METER BILL CASE (" + days + " days this month, total days:" + totDays +" )");
+			log.debug("          NEW METER BILL CASE (" + days + " days this month, total days:" + totDays + " )");
 			log.debug("################################################################################");
 			log.debug("Customer Info:" + customer.toString());
 			log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
-			
+
+			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
-			
+
+			// This query just to determine if multiple tariffs exist during the
+			// period
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(),
 					dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
@@ -405,25 +563,29 @@ public class BillingService {
 			bfd.setNoMeterAmt(0.00f);
 
 			if (charges.size() > 3) {
-				multipleTariffs = true; //Multiple tariffs for first bill. Pro-rata required
+				multipleTariffs = true; // Multiple tariffs for first bill.
+										// Pro-rata required
 				partialUnitsKL = (float) days / (float) totDays * unitsKL;
-				
-				charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(),
-						dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()), partialUnitsKL, unMeteredFlag, newMeterFlag);
+
+				charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(), dFrom,
+						dFrom.withDayOfMonth(dFrom.lengthOfMonth()), partialUnitsKL, unMeteredFlag, newMeterFlag);
 
 				calc_charges_first(charges, bfd, partialUnitsKL, dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
-				
-				remUnitsKL = unitsKL - partialUnitsKL;				
+
+				remUnitsKL = unitsKL - partialUnitsKL;
 				calc_units(customer, bill_details, dFrom.plusMonths(1).withDayOfMonth(1), dTo, remUnitsKL);
-				
+
 				charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
 						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag);
-				
-				calc_charges_normal(charges,  bill_details, customer, bfd, remUnitsKL);
+
+				if (charges.isEmpty())
+					throw new Exception("No tariffs configured.");
+
+				calc_charges_normal(charges, bill_details, customer, bfd, remUnitsKL);
 			} else { // Single Tariff for first bill
 				calc_charges_first(charges, bfd, unitsKL, dFrom, dTo);
 			}
-			
+
 			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
 
 		} catch (Exception e) {
@@ -443,7 +605,8 @@ public class BillingService {
 
 	}
 
-	public void calc_units(CustDetails customer, BillDetails bill_details, LocalDate dFrom, LocalDate dTo, float unitsKL) {
+	public void calc_units(CustDetails customer, BillDetails bill_details, LocalDate dFrom, LocalDate dTo,
+			float unitsKL) {
 
 		try {
 			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
@@ -477,33 +640,36 @@ public class BillingService {
 				}
 
 				kl = (float) (unitsKL);
-			} else if (bill_details.getCurrentBillType().equals("M")) // Moved
-																		// from
-																		// Stuck/Burnt
-																		// to
-																		// Metered
-																		// in
-																		// the
-																		// middle
-																		// of
-																		// the
-																		// month
+			} else if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S")) // Moved
+																														// from
+																														// Stuck/Burnt
+																														// to
+																														// Metered
+																														// in
+																														// the
+																														// middle
+																														// of
+																														// the
+																														// month
 			{
-
 				log.debug("########################################");
-				log.debug("    STUCK/BURNT TO METERED BILL CASE");
+				log.debug("    STUCK OR PARTIAL METERED BILL CASE");
 				log.debug("########################################");
 
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
+						: customer.getPrevAvgKl());
 
-				unitsKL = avgKL * monthsDiff;
-				units = unitsKL * 1000.0f;
+				float avgUnitsKL = avgKL * monthsDiff;
+
+				this.unitsKL = (avgUnitsKL > this.unitsKL ? avgUnitsKL : this.unitsKL);
+
+				units = this.unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
-			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("S")
-					|| bill_details.getCurrentBillType().equals("B") || bill_details.getCurrentBillType().equals("R")) {
+			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("B")
+					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");
 				log.debug("          LOCK BILL CASE");
@@ -512,10 +678,11 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
+						: customer.getPrevAvgKl());
 
-				unitsKL = avgKL * monthsDiff;
-				units = unitsKL * 1000.0f;
+				this.unitsKL = avgKL * monthsDiff;
+				units = this.unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
 			} else if (bill_details.getCurrentBillType().equals("U")) {
 
@@ -526,10 +693,11 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null ? minAvgKL : customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
+						: customer.getPrevAvgKl());
 
-				unitsKL = avgKL * monthsDiff;
-				units = unitsKL * 1000.0f;
+				this.unitsKL = avgKL * monthsDiff;
+				units = this.unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
 			}
 		} catch (Exception e) {
@@ -548,12 +716,12 @@ public class BillingService {
 		}
 	}
 
-	public void calc_charges_first(List<java.util.Map<String, Object>> charges, BillFullDetails bfd, float units, LocalDate dFrom, LocalDate dTo)
-	{
+	public void calc_charges_first(List<java.util.Map<String, Object>> charges, BillFullDetails bfd, float units,
+			LocalDate dFrom, LocalDate dTo) {
 		long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
 		long months = ChronoUnit.MONTHS.between(dFrom, dTo);
-		months += (days >= 15 ? 1 : 0);	
-		
+		months += (days >= 15 ? 1 : 0);
+
 		for (Map<String, Object> charge : charges) {
 			if (((Long) charge.get("tariff_type_master_id")) == 1) {
 				bfd.setNoMeterAmt(bfd.getNoMeterAmt() + (Float) charge.get("rate"));
@@ -561,16 +729,17 @@ public class BillingService {
 				log.debug("Usage Charge:" + ((Float) charge.get("rate")).floatValue() * units);
 			} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 				log.debug("Meter Rent:" + ((Float) charge.get("rate")).floatValue() * months);
-				bfd.setMeterServiceCharge(bfd.getMeterServiceCharge() + ((Float) charge.get("rate")).floatValue() * months);
-			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {				
+				bfd.setMeterServiceCharge(
+						bfd.getMeterServiceCharge() + ((Float) charge.get("rate")).floatValue() * months);
+			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
 				log.debug("Service Charge:" + ((Float) charge.get("rate")).floatValue() * months);
 				bfd.setServiceCharge(bfd.getServiceCharge() + ((Float) charge.get("rate")).floatValue() * months);
 			}
 		}
 	}
-	
-	public void calc_charges_normal(List<java.util.Map<String, Object>> charges, BillDetails bill_details, CustDetails customer, BillFullDetails bfd, float units)
-	{
+
+	public void calc_charges_normal(List<java.util.Map<String, Object>> charges, BillDetails bill_details,
+			CustDetails customer, BillFullDetails bfd, float units) {
 
 		// Subtract Avg Water charges in case of Lock Bill scenario
 		for (Map<String, Object> charge : charges) {
@@ -605,9 +774,9 @@ public class BillingService {
 			}
 		}
 	}
-	
-	
-	public void process_bill_common(CustDetails customer, BillDetails bill_details, BillFullDetails bfd, LocalDate dFrom, LocalDate dTo) {
+
+	public void process_bill_common(CustDetails customer, BillDetails bill_details, BillFullDetails bfd,
+			LocalDate dFrom, LocalDate dTo) {
 
 		try {
 
@@ -627,17 +796,36 @@ public class BillingService {
 
 			bfd.setSurcharge(CPSUtils.round(ewura, 2));
 
-			Float total = bfd.getWaterCess() + bfd.getMeterServiceCharge() + bfd.getServiceCharge()
-					+ bfd.getSewerageCess() + bfd.getSurcharge() + bfd.getOtherCharges();
+			List<Adjustments> adjustments = adjustmentsRepository
+					.findByCanAndStatusAndBillFullDetails(bill_details.getCan(), TxnStatus.INITIATED, null);
+
+			BigDecimal adjAmount = new BigDecimal("0.00");
+			adjAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+			for (Adjustments adj : adjustments) {
+				BigDecimal adj1 = adj.getAmount();
+				adj1.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+				adj.setBillFullDetails(bfd);
+				adj.setCustDetails(customer);
+				if (adj.getTransactionTypeMaster().getTypeOfTxn().equalsIgnoreCase("Credit"))
+					adjAmount = adjAmount.add(adj1);
+				else
+					adjAmount = adjAmount.subtract(adj1);
+
+				adj.setStatus(TxnStatus.PROCESSING);
+			}
+
+			BigDecimal total = new BigDecimal(bfd.getWaterCess() + bfd.getMeterServiceCharge() + bfd.getServiceCharge()
+					+ bfd.getSewerageCess() + bfd.getSurcharge() + bfd.getOtherCharges()).add(adjAmount);
 
 			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") " + "+ Meter Svc Charge("
 					+ bfd.getMeterServiceCharge() + ") " + "+ Service Charge (" + bfd.getServiceCharge() + ") "
 					+ "+ SewerageCess (" + bfd.getSewerageCess() + ") " + "+ Surcharge (" + bfd.getSurcharge() + ") "
-					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") " + "= Total (" + total + ") ");
+					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") + Adjustments (" + adjAmount + ") " + "= Total ("
+					+ total + ") ");
 
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
-			Float netPayable = bfd.getTotalAmount() + bfd.getIntOnArrears() + bfd.getArrears();
+			BigDecimal netPayable = new BigDecimal(bfd.getTotalAmount() + bfd.getIntOnArrears() + bfd.getArrears());
 			bfd.setNetPayableAmount(CPSUtils.round(netPayable.floatValue(), 2));
 
 			log.debug(
@@ -664,6 +852,8 @@ public class BillingService {
 			log.debug("This is the BillFullDetails:" + bfd);
 
 			bfdRepository.save(bfd);
+
+			adjustmentsRepository.save(adjustments);
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.SUCCESS.getValue());
@@ -723,14 +913,6 @@ public class BillingService {
 			if ((customer.getPrevBillType().equals("L") || customer.getPrevBillType().equals("M"))
 					&& bill_details.getCurrentBillType().equals("M")) {
 
-				if (!customer.getPrevReading().equals("0")) {
-					if (bill_details.getIsRounding()) {
-						unitsKL = bill_details.getPresentReading() + 999 - bill_details.getInitialReading();
-					} else {
-						unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
-					}
-				}
-				
 				long billDays = ChronoUnit.DAYS.between(dFrom, dTo);
 
 				if (billDays <= 0) {
@@ -744,15 +926,18 @@ public class BillingService {
 
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
+				log.debug("Units:" + unitsKL);
 			}
 
-
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
-			
+
 			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
 					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
+
+			if (charges.isEmpty())
+				throw new Exception("No tariffs configured.");
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
 			bfd.setId(null);
@@ -763,9 +948,9 @@ public class BillingService {
 			bfd.setMeterServiceCharge(0.00f);
 			bfd.setLockCharges(0.00f);
 			bfd.setNoMeterAmt(0.00f);
-			
-			calc_charges_normal(charges,  bill_details, customer, bfd,  unitsKL);
-			
+
+			calc_charges_normal(charges, bill_details, customer, bfd, unitsKL);
+
 			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -783,40 +968,20 @@ public class BillingService {
 		}
 	}
 
-	public void process_bill(BillDetails bill_details) {
-		if (bill_details == null)
-			return;
+	public void getUnitsKLMeterChange(BillDetails bill_details, CustDetails customer) {
+		float oldUnits = 0.0f;
+		float newUnits = 0.0f;
 
-		initBill(bill_details.getCan());
+		oldUnits = meterChange.getPrevMeterReading() - bill_details.getInitialReading();
+		newUnits = bill_details.getPresentReading() - meterChange.getNewMeterReading();
 
-		brd.setBillDetails(bill_details);
+		if (oldUnits < 0.0f)
+			oldUnits = 0.0f;
 
-		log.debug("Process customer with CAN:" + bill_details.getCan());
-		CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());
+		if (newUnits < 0.0f)
+			newUnits = 0.0f;
 
-		if (customer == null) {
-			log.debug("Customer not found in CUST_DETAILS for CAN:" + bill_details.getCan());
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(0);
-			brd.setRemarks(
-					"Failed with error:" + "Customer not found in CUST_DETAILS for CAN:" + bill_details.getCan());
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
-			return;
-		}
-
-		if (customer.getPrevBillMonth() == null) {
-			process_bill_new_meter(bill_details, customer);
-			return;
-		} else {
-			process_bill_normal(bill_details, customer);
-			return;
-		}
-
+		unitsKL = oldUnits + newUnits;
 	}
 
 	public String getPrevMonthStart() {
