@@ -1,3 +1,5 @@
+update `adjustments` set bill_full_details_id=null, status='INITIATED' where can in ('02020005', '04060001', '05050001', '04060002', '04060003', '04060004', '05050002', '08090001')
+
 # Make CAN 02020005 new (Customer 1)
 
 delete from bill_run_details where can='02020005';
