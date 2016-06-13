@@ -182,7 +182,7 @@
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 					</button>  
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 					</button>

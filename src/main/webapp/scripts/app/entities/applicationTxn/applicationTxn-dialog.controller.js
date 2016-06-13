@@ -192,15 +192,6 @@ angular.module('watererpApp')
 }	*/
 		
 		
-		<script type="text/javascript">
-	    function onClick(){  
-	alert("HAI");
 
-	    if(!((document.getElementById("field_propertyDoc").checked || document.getElementById("field_propertyDoc").checked))){
-
-	alert("check At least on box");
-	}
-	}
-	    </script>
 	
     });
