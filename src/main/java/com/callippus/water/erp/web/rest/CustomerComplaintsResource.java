@@ -138,20 +138,17 @@ public class CustomerComplaintsResource {
         	adjustments.setStatus(TxnStatus.BILLED);
         	adjustments.setCustDetails(custDetails);
         	if(amount.compareTo(new BigDecimal("0")) == 0 || amount.compareTo(new BigDecimal("0")) == 1){
-        		ttm.setId(1L);
+        		ttm.setId(2L);
         		ttm.setTypeOfTxn("Debit");
         		adjustments.setAmount(amount);
         	adjustments.setTransactionTypeMaster(ttm);
         	}else if(amount.compareTo(new BigDecimal("0")) == -1){
-        		ttm.setId(2L);
+        		ttm.setId(1L);
         		ttm.setTypeOfTxn("Credit");
-        		amount.abs();
-        		adjustments.setAmount(amount);
+        		adjustments.setAmount(amount.abs());
         	adjustments.setTransactionTypeMaster(ttm);
         	}
         	adjustments.setComplaintTypeMaster(customerComplaints.getComplaintTypeMaster());
-        	
-        	
         	adjustmentsRepository.save(adjustments);
         }
         //customerComplaints.setStatus(customerComplaints.getStatus()+1);
