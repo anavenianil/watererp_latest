@@ -18,6 +18,5 @@ public interface MeterChangeRepository extends JpaRepository<MeterChange,Long> {
 
     MeterChange findByCanAndNewMeterNo(String can, MeterDetails newMeterNo);
     
-    @Query("select meterChange from MeterChange meterChange where meterChange.can = ? and meterchange.billFullDetails is null")
-    MeterChange getMeterChange(@Param("can")  String can);
+    MeterChange findByCanAndStatus(@Param("can")  String can, @Param("status")  Integer status);
 }
