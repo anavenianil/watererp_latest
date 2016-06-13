@@ -854,10 +854,10 @@ CREATE TABLE `customer` (
   KEY `fk_customer_statusmaster_id` (`status_master_id`),
   KEY `fk_customer_pipesizemaster_id` (`pipe_size_master_id`),
   KEY `fk_customer_requestedpipesizemaster_id` (`requested_pipe_size_master_id`),
-  CONSTRAINT `fk_customer_requestedpipesizemaster_id` FOREIGN KEY (`requested_pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_customer_newproofmaster_id` FOREIGN KEY (`new_proof_master_id`) REFERENCES `id_proof_master` (`id`),
   CONSTRAINT `fk_customer_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_customer_presentcategory_id` FOREIGN KEY (`present_category_id`) REFERENCES `tariff_category_master` (`id`),
+  CONSTRAINT `fk_customer_requestedpipesizemaster_id` FOREIGN KEY (`requested_pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_customer_statusmaster_id` FOREIGN KEY (`status_master_id`) REFERENCES `status_master` (`id`),
   CONSTRAINT `fk_customer_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1433,6 +1433,28 @@ INSERT INTO `emp_role_mapping` (`id`,`internal_division`,`internal_role`,`creati
  (26,'',NULL,'2016-03-18 05:30:00',NULL,NULL,29,NULL,24,2),
  (27,NULL,NULL,NULL,NULL,NULL,5,NULL,25,2);
 /*!40000 ALTER TABLE `emp_role_mapping` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE `employee` (
+  `EMPID` int(11) NOT NULL auto_increment,
+  `EMPNAME` varchar(20) NOT NULL,
+  `EMPAGE` int(11) NOT NULL,
+  `SALARY` bigint(20) NOT NULL,
+  `ADDRESS` varchar(20) NOT NULL,
+  PRIMARY KEY  (`EMPID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watererp`.`employee`
+--
+
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 
 
 --
@@ -5219,8 +5241,8 @@ CREATE TABLE `manage_cash_point` (
   KEY `fk_managecashpoint_paymenttypes_id` (`payment_types_id`),
   KEY `fk_managecashpoint_filenumber_id` (`file_number_id`),
   KEY `fk_managecashpoint_customer_id` (`customer_id`),
-  CONSTRAINT `fk_managecashpoint_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `fk_managecashpoint_cashbookmaster_id` FOREIGN KEY (`cash_book_master_id`) REFERENCES `cash_book_master` (`id`),
+  CONSTRAINT `fk_managecashpoint_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `fk_managecashpoint_filenumber_id` FOREIGN KEY (`file_number_id`) REFERENCES `file_number` (`id`),
   CONSTRAINT `fk_managecashpoint_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`),
   CONSTRAINT `fk_managecashpoint_transactiontypemaster_id` FOREIGN KEY (`transaction_type_master_id`) REFERENCES `transaction_type_master` (`id`)
@@ -6165,8 +6187,8 @@ CREATE TABLE `re_allotment` (
   KEY `fk_reallotment_filenumber_id` (`file_number_id`),
   KEY `fk_reallotment_customer_id` (`customer_id`),
   KEY `fk_reallotment_feasibilitystatus_id` (`feasibility_status_id`),
-  CONSTRAINT `fk_reallotment_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`),
   CONSTRAINT `fk_reallotment_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
+  CONSTRAINT `fk_reallotment_feasibilitystatus_id` FOREIGN KEY (`feasibility_status_id`) REFERENCES `feasibility_status` (`id`),
   CONSTRAINT `fk_reallotment_filenumber_id` FOREIGN KEY (`file_number_id`) REFERENCES `file_number` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -6197,8 +6219,8 @@ CREATE TABLE `receipt` (
   PRIMARY KEY  (`id`),
   KEY `fk_receipt_applicationtxn_id` (`application_txn_id`),
   KEY `fk_receipt_paymenttypes_id` (`payment_types_id`),
-  CONSTRAINT `fk_receipt_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`),
-  CONSTRAINT `fk_receipt_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`)
+  CONSTRAINT `fk_receipt_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
+  CONSTRAINT `fk_receipt_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

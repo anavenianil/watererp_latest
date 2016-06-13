@@ -112,8 +112,7 @@ public class CustomerComplaintsResource {
             return createCustomerComplaints(request,customerComplaints);
         }
         if(customerComplaints.getStatus() == 4){
-        	CustDetails custDetails = custDetailsRepository.findByCan(customerComplaints.getCan());
-        	System.out.println(custDetails);
+        	CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customerComplaints.getCan());
         	custDetails.setOtherCharges(custDetails.getOtherCharges() +  customerComplaints.getAdjustmentAmt());
         	custDetailsRepository.save(custDetails);
         }
