@@ -3,7 +3,7 @@
 	show-validation>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create CAN</h3>
+			<h3 class="panel-title pull-left">Create CAN(Without Meter)</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -59,28 +59,8 @@
 								<label>Category</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.tariffCategoryMaster.tariffCategory}}</h5>
 							</div>
-							<div class="col-sm-4">
-								<label> Meter Id</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.meterDetails.meterId}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Meter Reading</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.meterReading}}</h5>
-							</div>
 						</div>
 						<br>
-						<div class="row">
-							<div class="col-sm-4">
-								<label>Connection Date</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.connectionDate
-									| date:'mediumDate'}}</h5>
-							</div>
-							<div class="col-sm-4">
-								<label>Total Amount</label>
-								<h5 class="list-group-item-heading">{{proceedings.grandTotal|
-									number:2}}</h5>
-							</div>
-						</div>
 					</fieldset>
 					<hr>
 					<fieldset>

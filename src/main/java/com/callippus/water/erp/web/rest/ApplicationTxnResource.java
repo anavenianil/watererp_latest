@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,7 @@ import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.repository.MeterDetailsRepository;
 import com.callippus.water.erp.repository.MeterStatusRepository;
+import com.callippus.water.erp.repository.PipeSizeMasterRepository;
 import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
@@ -112,6 +114,9 @@ public class ApplicationTxnResource {
     
     @Inject
     private MeterStatusRepository meterStatusRepository;
+    
+    @Inject
+    private PipeSizeMasterRepository pipeSizeMasterRepository;
     
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
@@ -216,13 +221,36 @@ public class ApplicationTxnResource {
             custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
             custMeterMappingRepository.save(custMeterMapping);
         }
-        if(applicationTxn.getStatus() == 6|| applicationTxn.getStatus()==7){
+        /*
+         *for without metered
+         */
+        if(applicationTxn.getUser() !=null && applicationTxn.getStatus() ==1){
+        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
+            custDetails.setId(null);
+            if(applicationTxn.getMiddleName()!=null){
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            }
+            else{
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
+            }
+            custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
+            custDetails.setPrevBillType("U");
+            custDetails.setPipeSize(0.5f);
+            custDetails.setPipeSizeMaster(pipeSizeMasterRepository.findOne(1l));//hard coded pipesize
+            custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
+            custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
+            custDetails.setConnDate(LocalDate.now());
+            custDetails.setStatus(CustStatus.ACTIVE);
+            custDetailsRepository.save(custDetails);
+            
+        }
+        if(applicationTxn.getStatus() == 6|| applicationTxn.getStatus()==7 || applicationTxn.getUser()!=null){
         	 try{
         		 workflowService.setApprovedDate(ZonedDateTime.now());
         		 applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
              }
              catch(Exception e){
-             	System.out.println(e);
+            	 e.printStackTrace();
              }
         }
         return ResponseEntity.ok()
@@ -517,4 +545,31 @@ public class ApplicationTxnResource {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+	
+	//generate can for without Meter
+	@RequestMapping(value = "/applicationTxnsWM/canGen", 
+			method = RequestMethod.GET, 
+			produces = MediaType.TEXT_PLAIN_VALUE)
+	@Timed
+	public ResponseEntity<String> generateCanWM(@RequestParam(value = "applicationTxnId", required = false) Long applicationTxnId)
+			throws Exception{
+		log.debug("REST request to get CAN : {}");
+		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(applicationTxnId);
+		String division = applicationTxn.getDivisionMaster().getDivisionCode();
+		String street = applicationTxn.getStreetMaster().getStreetNo();
+		//String can = division.substring(0, 2) + "-" +street.substring(0, 2);
+		Integer can = custDetailsRepository.findByCan(division, street);
+		if(can == null){
+			can =1;
+		}
+		else{
+			can = can+1;
+		}
+		String s1 = String.format("%04d", can);
+		String newCan = division + street + s1.toString();
+        return new ResponseEntity<String>(
+        		newCan,
+                    HttpStatus.OK);
+		
+	} 
 }

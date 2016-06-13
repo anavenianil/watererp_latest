@@ -16,21 +16,17 @@
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="can"><span>Can</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="reasonForChange"><span>ReasonForChange</span>
+								<th jh-sort-by="reasonForChange"><span>Reason</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="prevMeterReading"><span>PrevMeterReading</span>
+								<th jh-sort-by="prevMeterReading"><span>Previous Reading</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="newMeterReading"><span>NewMeterReading</span>
+								<th jh-sort-by="newMeterReading"><span>New Reading</span>
 									<span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="remarks"><span>Remarks</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="approvedDate"><span>ApprovedDate</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="custDetails.id"><span>custDetails</span> <span
+								<th jh-sort-by="prevMeterNo.id"><span>Previous Meter</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="prevMeterNo.id"><span>prevMeterNo</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="newMeterNo.id"><span>newMeterNo</span> <span
+								<th jh-sort-by="newMeterNo.id"><span>New Meter</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="user.id"><span>Approved By</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
@@ -46,17 +42,9 @@
 								<td>{{meterChange.reasonForChange}}</td>
 								<td>{{meterChange.prevMeterReading}}</td>
 								<td>{{meterChange.newMeterReading}}</td>
-								<td>{{meterChange.remarks}}</td>
 								<td>{{meterChange.approvedDate | date:'mediumDate'}}</td>
-								<td><a
-									ui-sref="custDetails.detail({id:meterChange.custDetails.id})">{{meterChange.custDetails.id}}</a>
-								</td>
-								<td><a
-									ui-sref="meterDetails.detail({id:meterChange.prevMeterNo.id})">{{meterChange.prevMeterNo.meterId}}</a>
-								</td>
-								<td><a
-									ui-sref="meterDetails.detail({id:meterChange.newMeterNo.id})">{{meterChange.newMeterNo.meterId}}</a>
-								</td>
+								<td>{{meterChange.prevMeterNo.meterId}}</td>
+								<td>{{meterChange.newMeterNo.meterId}}</td>
 								<td>
 									{{meterChange.user.firstName}}&nbsp;{{meterChange.user.lastName}}({{meterChange.user.login}})
 								</td>
