@@ -157,40 +157,21 @@ angular.module('watererpApp')
 			console.log($scope.applicationTxn.propertyDoc);
 		}
 		
-/*		//bkr
-		$scope.onClick = function(){
-			alert("a");
-			  var name = angular.element($('#applicationTxn.agreementDoc')).val();
-	if(angular.element($('#applicationTxn.agreementDoc')).checked)
-		{
-		alert(name);
-		$scope.applicationTxn.propertyDoc = applicationTxn.deedDoc;
-		alert("b");
-		}
-			 
-			  
-			  
-			  //$scope.propertyDoc="hello";
-			  
-		}
-		*/
+/*$scope.checkForm=function(value1,value2){
+if(value1=="checked"|| value2=="checked")
+	{
+	$scope.editForm.applicationTxn.deedDoc.$setValidity(
+			"ltPrevious", true);
+	return true;
+	
+	}
+
+	else
+		alert("operation failed");
+}		
 		
 		
-		
-/*	$scope.function checkForm(form)
-{
-		
-		  {
-		    ...
-		    if(!form.organization.checked) {
-		      //alert("Please indicate that you accept the Terms and Conditions");
-		      form.organization.focus();
-		      return false;
-		    }
-		    return true;
-		  }
-}	*/
-		
+*/
 		
 
 	
