@@ -18,8 +18,15 @@ if [ -n "$message" ]; then
 	if [ -n "$db" ]; then
 		echo "Message contains [DB], Restoring DB"
 		mysql -u root -pmysql watererp < Docs/DB/watererp.sql
-	else
-		echo "Skipping DB script run"
+	else 
+		db=$(echo $message|grep "\[PATCH\]")
+		echo "This is the patch:" $patch
+		if [ -n "$patch" ]; then
+			echo "Message contains [PATCH], Applying Patch"
+			mysql -u root -pmysql watererp < Docs/DB/patch.sql			
+		else
+			echo "Skipping DB script run"
+		fi
 	fi
 fi
 
