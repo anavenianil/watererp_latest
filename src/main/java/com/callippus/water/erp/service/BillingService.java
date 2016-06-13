@@ -235,7 +235,7 @@ public class BillingService {
 			return;
 		}
 
-		if (bill_details.getCurrentBillType().equals("M")) {
+		if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S")) {
 			if (meterChange != null) {
 				getUnitsKLMeterChange(bill_details, customer);
 			}
@@ -535,17 +535,16 @@ public class BillingService {
 				throw new Exception("Invalid From:" + dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")) + " and To:"
 						+ dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
 			}
-
-
+			
 			log.debug("################################################################################");
-			log.debug("          NEW METER BILL CASE (" + days + " days this month, total days:" + totDays + " )");
+			log.debug("           NEW METER BILL CASE (" + days + " days this month, total days:" + totDays + " )");
 			log.debug("################################################################################");
 			log.debug("Customer Info:" + customer.toString());
 			log.debug("From:" + dFrom.toString() + ", To:" + dTo.toString());
 
 			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
-			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
+			calc_units(customer, bill_details, dFrom, dTo, unitsKL, true);
 
 			// This query just to determine if multiple tariffs exist during the
 			// period
@@ -567,19 +566,25 @@ public class BillingService {
 										// Pro-rata required
 				partialUnitsKL = (float) days / (float) totDays * unitsKL;
 
+				
 				charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(), dFrom,
 						dFrom.withDayOfMonth(dFrom.lengthOfMonth()), partialUnitsKL, unMeteredFlag, newMeterFlag);
 
 				calc_charges_first(charges, bfd, partialUnitsKL, dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
 
+				log.debug("Charges for partial units:" + partialUnitsKL + "=> " + charges);
+				
 				remUnitsKL = unitsKL - partialUnitsKL;
-				calc_units(customer, bill_details, dFrom.plusMonths(1).withDayOfMonth(1), dTo, remUnitsKL);
+				calc_units(customer, bill_details, dFrom.plusMonths(1).withDayOfMonth(1), dTo, remUnitsKL, false);
 
+
+				log.debug("Charges for remaining units:" + remUnitsKL + ", avgKL:" + avgKL + "=>" + charges);
+				
 				charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
 						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag);
 
 				if (charges.isEmpty())
-					throw new Exception("No tariffs configured.");
+					throw new Exception("No tariffs configured. ");
 
 				calc_charges_normal(charges, bill_details, customer, bfd, remUnitsKL);
 			} else { // Single Tariff for first bill
@@ -606,11 +611,15 @@ public class BillingService {
 	}
 
 	public void calc_units(CustDetails customer, BillDetails bill_details, LocalDate dFrom, LocalDate dTo,
-			float unitsKL) {
+			float unitsKL, boolean partialMonth) {
 
 		try {
 			long monthsDiff = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
 
+			long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
+			
+			float avgUnitsKL = 0.0f;
+			
 			if (monthsDiff == 0)
 				monthsDiff = 1;
 
@@ -658,21 +667,31 @@ public class BillingService {
 
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
-
+				
 				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
-						: customer.getPrevAvgKl());
+						: customer.getPrevAvgKl());				
 
-				float avgUnitsKL = avgKL * monthsDiff;
+				if(partialMonth)
+				{
+					float partialMo = (float) days / (float)  dFrom.lengthOfMonth();
+						
+					avgUnitsKL = avgKL * (partialMo + monthsDiff);
+				}
+				else 
+					avgUnitsKL = avgKL * monthsDiff;
 
-				this.unitsKL = (avgUnitsKL > this.unitsKL ? avgUnitsKL : this.unitsKL);
+				this.unitsKL = (avgUnitsKL > unitsKL ? avgUnitsKL : unitsKL);
 
 				units = this.unitsKL * 1000.0f;
+				
+				avgKL = this.unitsKL / monthsDiff;
+				
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
 			} else if (bill_details.getCurrentBillType().equals("L") || bill_details.getCurrentBillType().equals("B")
 					|| bill_details.getCurrentBillType().equals("R")) {
 
 				log.debug("########################################");
-				log.debug("          LOCK BILL CASE");
+				log.debug("          LOCK/BURNT BILL CASE");
 				log.debug("########################################");
 
 				log.debug("Customer Info:" + customer.toString());
@@ -681,7 +700,19 @@ public class BillingService {
 				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
 						: customer.getPrevAvgKl());
 
-				this.unitsKL = avgKL * monthsDiff;
+
+				if(partialMonth)
+				{
+					float partialMo = (float) days / (float)  dFrom.lengthOfMonth();
+						
+					avgUnitsKL = avgKL * (partialMo + monthsDiff);
+				}
+				else 
+					avgUnitsKL = avgKL * monthsDiff;
+				
+				this.unitsKL = (avgUnitsKL > unitsKL ? avgUnitsKL : unitsKL);
+				
+//				this.unitsKL = avgKL * monthsDiff;
 				units = this.unitsKL * 1000.0f;
 				log.debug("Units:" + units + " based on avgKL:" + avgKL + " for " + monthsDiff + " months.");
 			} else if (bill_details.getCurrentBillType().equals("U")) {
@@ -929,7 +960,7 @@ public class BillingService {
 				log.debug("Units:" + unitsKL);
 			}
 
-			calc_units(customer, bill_details, dFrom, dTo, unitsKL);
+			calc_units(customer, bill_details, dFrom, dTo, unitsKL, false);
 
 			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
