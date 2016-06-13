@@ -673,9 +673,11 @@ public class BillingService {
 
 				if(partialMonth)
 				{
+					long monthsDiff1 = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
+					
 					float partialMo = (float) days / (float)  dFrom.lengthOfMonth();
 						
-					avgUnitsKL = avgKL * (partialMo + monthsDiff);
+					avgUnitsKL = avgKL * (partialMo + monthsDiff1);
 				}
 				else 
 					avgUnitsKL = avgKL * monthsDiff;
@@ -703,9 +705,11 @@ public class BillingService {
 
 				if(partialMonth)
 				{
+					long monthsDiff1 = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
+					
 					float partialMo = (float) days / (float)  dFrom.lengthOfMonth();
 						
-					avgUnitsKL = avgKL * (partialMo + monthsDiff);
+					avgUnitsKL = avgKL * (partialMo + monthsDiff1);
 				}
 				else 
 					avgUnitsKL = avgKL * monthsDiff;

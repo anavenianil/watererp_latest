@@ -89,7 +89,15 @@ public class BillRunMasterResourceIntTest {
 					{ "04060002", new Float[] { 19.0f, 15213.1f, 4630.0f, 0.0f } },
 					{ "04060003", new Float[] { 17.0f, 13796.8f, 2330.0f, 0.0f } },
 					{ "04060004", new Float[] { 20.0f, 15880.5f, 6930.0f, 0.0f } },
-					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } } })
+					{ "05050002", new Float[] { 30.0f, 23946.3f, 4630.0f, 0.0f } },
+					{ "06020001", new Float[] { 2.0f,  1640.0f,  0.0f,    0.0f } },
+					{ "06020002", new Float[] { 3.0f,  2460.0f,  2330.0f, 0.0f } },
+					{ "06020003", new Float[] { 0.58f, 478.33f,  0.0f, 0.0f } },
+					{ "06020004", new Float[] { 2.25f, 1845.0f,  2330.0f, 0.0f } },
+					{ "06020005", new Float[] { 7.0f, 5681.0f, 2330.0f, 0.0f } },
+					{ "06020006", new Float[] { 4.70f, 3841.6f, 4630.0f, 0.0f } },
+					{ "06020007", new Float[] { 3.1f, 2566.46f, 2330.0f, 0.0f } },
+					{ "06020008", new Float[] { 4.70f, 3841.65f, 4630.0f, 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
 	// Manual Payments
@@ -97,7 +105,11 @@ public class BillRunMasterResourceIntTest {
 			.stream(new Object[][] { { "02020005", new Float[] { 5794.6f } }, { "08090001", new Float[] { 4800f } },
 					{ "04060001", new Float[] { 4000f } }, { "05050001", new Float[] { 3000f, 1000f } },
 					{ "04060002", new Float[] { 0.0f } }, { "04060003", new Float[] { 0.0f } },
-					{ "04060004", new Float[] { 0.0f } }, { "05050002", new Float[] { 0.0f } } })
+					{ "04060004", new Float[] { 0.0f } }, { "05050002", new Float[] { 0.0f } },
+					{ "06020001", new Float[] { 0.0f } }, { "06020002", new Float[] { 0.0f } },
+					{ "06020003", new Float[] { 0.0f } }, { "06020004", new Float[] { 0.0f } },
+					{ "06020005", new Float[] { 0.0f } }, { "06020006", new Float[] { 0.0f } },
+					{ "06020007", new Float[] { 0.0f } }, { "06020008", new Float[] { 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
 	static final Map<String, String[]> paymentCallbackXMLs = Arrays

@@ -119,9 +119,11 @@ public class CustomerComplaintsResource {
 	public ResponseEntity<CustomerComplaints> updateCustomerComplaints(HttpServletRequest request,
 			@RequestBody CustomerComplaints customerComplaints) throws URISyntaxException, Exception {
 		log.debug("REST request to update CustomerComplaints : {}", customerComplaints);
+		
 		if (customerComplaints.getId() == null) {
 			return createCustomerComplaints(request, customerComplaints);
 		}
+		
 		if (customerComplaints.getStatus() == 4) {
 			CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customerComplaints.getCan());
 
