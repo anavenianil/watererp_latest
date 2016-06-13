@@ -4,6 +4,7 @@ import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.MeterDetails;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface MeterChangeRepository extends JpaRepository<MeterChange,Long> {
     List<MeterChange> findByUserIsCurrentUser();
 
     MeterChange findByCanAndNewMeterNo(String can, MeterDetails newMeterNo);
+    
+    @Query("select meterChange from MeterChange meterChange where meterChange.can = ? and meterchange.billFullDetails is null")
+    MeterChange getMeterChange(@Param("can")  String can);
 }

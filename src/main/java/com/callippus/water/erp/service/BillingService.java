@@ -135,6 +135,8 @@ public class BillingService {
 	BillRunMaster br = null;
 	boolean multipleTariffs = false;
 
+	MeterChange meterChange = null;
+
 	ConfigurationDetails cd = null;
 
 	float total_amount = 0.0f, net_payable_amount = 0.0f, surcharge = 0.0f, total_cess = 0.0f, kl = 0.0f;
@@ -289,15 +291,24 @@ public class BillingService {
 			else
 				customer.setLockCharges(bfd.getLockCharges());
 
-			List<Adjustments> adjustments = adjustmentsRepository.findByCanAndStatusAndBillFullDetails(customer.getCan(), TxnStatus.PROCESSING,bfd);
-			
-			for(Adjustments adj:adjustments){
+			List<Adjustments> adjustments = adjustmentsRepository
+					.findByCanAndStatusAndBillFullDetails(customer.getCan(), TxnStatus.PROCESSING, bfd);
+
+			for (Adjustments adj : adjustments) {
 				adj.setStatus(TxnStatus.BILLED);
 			}
-			
+
 			adjustmentsRepository.save(adjustments);
 
 			custDetailsRepository.saveAndFlush(customer);
+
+			MeterChange meterChange = meterChangeRepository.getMeterChange(customer.getCan());
+
+			if (meterChange != null) {
+				meterChange.setBillFullDetails(bfd);
+
+				meterChangeRepository.save(meterChange);
+			}
 
 		} catch (Exception e) {
 			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
@@ -339,7 +350,7 @@ public class BillingService {
 		newMeterFlag = 0;
 		unMeteredFlag = 0;
 		multipleTariffs = false;
-		
+
 		partialUnitsKL = 0.0f;
 		remUnitsKL = 0.0f;
 
@@ -348,6 +359,8 @@ public class BillingService {
 		surcharge = 0.0f;
 		total_cess = 0.0f;
 		kl = 0.0f;
+
+		meterChange = meterChangeRepository.getMeterChange(can);
 
 		brd = new BillRunDetails();
 		brd.setCan(can);
@@ -718,8 +731,8 @@ public class BillingService {
 
 			bfd.setSurcharge(CPSUtils.round(ewura, 2));
 
-			List<Adjustments> adjustments = adjustmentsRepository.findByCanAndStatusAndBillFullDetails(bill_details.getCan(),
-					TxnStatus.INITIATED, null);
+			List<Adjustments> adjustments = adjustmentsRepository
+					.findByCanAndStatusAndBillFullDetails(bill_details.getCan(), TxnStatus.INITIATED, null);
 
 			BigDecimal adjAmount = new BigDecimal("0.00");
 			adjAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
@@ -732,7 +745,7 @@ public class BillingService {
 					adjAmount = adjAmount.add(adj1);
 				else
 					adjAmount = adjAmount.subtract(adj1);
-				
+
 				adj.setStatus(TxnStatus.PROCESSING);
 			}
 
@@ -742,7 +755,8 @@ public class BillingService {
 			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") " + "+ Meter Svc Charge("
 					+ bfd.getMeterServiceCharge() + ") " + "+ Service Charge (" + bfd.getServiceCharge() + ") "
 					+ "+ SewerageCess (" + bfd.getSewerageCess() + ") " + "+ Surcharge (" + bfd.getSurcharge() + ") "
-					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") + Adjustments (" + adjAmount +") " + "= Total (" + total + ") ");
+					+ "+ OtherCharges (" + bfd.getOtherCharges() + ") + Adjustments (" + adjAmount + ") " + "= Total ("
+					+ total + ") ");
 
 			bfd.setTotalAmount(CPSUtils.round(total.floatValue(), 2));
 
@@ -923,16 +937,12 @@ public class BillingService {
 			return;
 		}
 
-		if (customer.getPrevBillMonth() == null) {
+		if (meterChange != null) {
+			process_bill_meter_change(bill_details, customer);
+		} else if (customer.getPrevBillMonth() == null) {
 			process_bill_new_meter(bill_details, customer);
 			return;
-		} else if (customer.getPrevBillMonth().isBefore(customer.getMeterFixDate().withDayOfMonth(1))) {
-			// Meter change scenario
-
-			process_bill_meter_change(bill_details, customer);
-		}
-
-		else {
+		} else {
 			process_bill_normal(bill_details, customer);
 			return;
 		}
@@ -985,20 +995,16 @@ public class BillingService {
 
 			// Check if old/new meter close/open is available
 
-			MeterDetails meterDetails = customer.getMeterDetails();
-			if (meterDetails != null) {
-				MeterChange meterChangeDetails = meterChangeRepository.findByCanAndNewMeterNo(bill_details.getCan(),
-						meterDetails);
-				if (meterChangeDetails != null) {
-					oldUnits = meterChangeDetails.getPrevMeterReading() - bill_details.getInitialReading();
-					newUnits = bill_details.getPresentReading() - meterChangeDetails.getNewMeterReading();
-				}
-				if (oldUnits < 0.0f)
-					oldUnits = 0.0f;
-
-				if (newUnits < 0.0f)
-					newUnits = 0.0f;
+			if (meterChange != null) {
+				oldUnits = meterChange.getPrevMeterReading() - bill_details.getInitialReading();
+				newUnits = bill_details.getPresentReading() - meterChange.getNewMeterReading();
 			}
+
+			if (oldUnits < 0.0f)
+				oldUnits = 0.0f;
+
+			if (newUnits < 0.0f)
+				newUnits = 0.0f;
 
 			consumedKL = oldUnits + newUnits;
 
