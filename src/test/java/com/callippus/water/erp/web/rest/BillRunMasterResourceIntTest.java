@@ -194,9 +194,9 @@ public class BillRunMasterResourceIntTest {
 					{ "04060002", new Float[] { 2.0f, 1640.0f, 2330.0f, 0.0f } },
 					{ "04060003", new Float[] { 8.5f, 6970.0f, 2330.0f, 0.0f } },
 					{ "05050002", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
-					{ "06020001", new Float[] { 2.5f, 2050.0f, 2330.0f, 0.0f } },
-					{ "06020002", new Float[] { 2.5f, 2050.0f, 2330.0f, 0.0f } },
-					{ "06020003", new Float[] { 4.0f, 3280.0f, 2330.0f, 0.0f } },
+					{ "06020001", new Float[] { 6.0f, 4920.0f, 2330.0f, 0.0f } },
+					{ "06020002", new Float[] { 3.0f, 2460.0f, 2330.0f, 0.0f } },
+					{ "06020003", new Float[] { 1.0f, 820.0f, 2330.0f, 0.0f } },
 					{ "06020004", new Float[] { 5.0f, 4100.0f, 2330.0f, 0.0f } },
 					{ "06020005", new Float[] { 2.5f, 2050.0f, 2330.0f, 0.0f } },
 					{ "06020006", new Float[] { 2.5f, 2050.0f, 2330.0f, 0.0f } },
@@ -534,6 +534,7 @@ public class BillRunMasterResourceIntTest {
 			brdList = billRunDetailsRepository.findByBillRunId(id);
 
 			for (BillRunDetails brd1 : brdList) {
+				log.debug("Reached here...1:" + brd1.getCan());
 				BillFullDetails bfd = brd1.getBillFullDetails();
 				
 				Assert.assertNotNull("Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
@@ -546,6 +547,7 @@ public class BillRunMasterResourceIntTest {
 						expectedCharges3.get(bfd.getCan())[2].floatValue(),
 						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
 			
+				log.debug("Reached here...2");
 				CollDetailsResourceIntTest ct = new CollDetailsResourceIntTest();
 				CollDetailsResource collDetailsResource = new CollDetailsResource();
 				ReflectionTestUtils.setField(collDetailsResource, "collDetailsRepository", collDetailsRepository);
@@ -559,6 +561,8 @@ public class BillRunMasterResourceIntTest {
 						.setCustomArgumentResolvers(pageableArgumentResolver)
 						.setMessageConverters(jacksonMessageConverter).build();
 
+				log.debug("Reached here...3");
+				
 				for (int i = 0; i < manual_payments3.get(bfd.getCan()).length
 						&& manual_payments3.get(bfd.getCan())[i] > 0.0f; i++) {
 					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), manual_payments3.get(bfd.getCan())[i],
@@ -577,6 +581,8 @@ public class BillRunMasterResourceIntTest {
 						.setCustomArgumentResolvers(pageableArgumentResolver)
 						.setMessageConverters(jacksonMessageConverter).build();
 
+				log.debug("Reached here...4");
+				
 				for (int i = 0; paymentCallbackXMLs3.get(bfd.getCan()) != null
 						&& i < paymentCallbackXMLs3.get(bfd.getCan()).length
 						&& !paymentCallbackXMLs3.get(bfd.getCan())[i].isEmpty(); i++) {
