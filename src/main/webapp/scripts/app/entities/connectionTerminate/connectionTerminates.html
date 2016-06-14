@@ -33,8 +33,7 @@
 							infinite-scroll-disabled="links['last'] == page">
 							<tr
 								ng-repeat="connectionTerminate in connectionTerminates track by connectionTerminate.id">
-								<td><a
-									ui-sref="connectionTerminate.detail({id:connectionTerminate.id})">{{connectionTerminate.id}}</a></td>
+								<td>{{index+1}}</td>
 								<td>{{connectionTerminate.can}}</td>
 								<td>{{connectionTerminate.requestDate | date:'mediumDate'}}</td>
 								<td>{{connectionTerminate.meterRecovered}}</td>
