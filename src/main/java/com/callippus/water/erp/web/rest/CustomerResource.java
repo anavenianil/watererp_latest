@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.WorkflowDTO;
-import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
@@ -169,7 +168,7 @@ public class CustomerResource {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(
+	public ResponseEntity<Customer> approveCategoryChange(
 			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
 		log.debug("REST request to save Customer : {}", workflowDTO);
 		Customer customer = workflowDTO.getCustomer();

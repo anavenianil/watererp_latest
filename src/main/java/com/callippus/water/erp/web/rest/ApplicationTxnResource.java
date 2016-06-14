@@ -36,12 +36,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
+import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
@@ -572,4 +576,80 @@ public class ApplicationTxnResource {
                     HttpStatus.OK);
 		
 	} 
+	
+	
+	
+	//added to change stage
+	@RequestMapping(value = "/applicationTxns/approve", 
+			method = RequestMethod.POST, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<WorkflowDTO> approveApplication(
+			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
+		log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+		
+		ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+		if(CPSConstants.ISSUEMETER.equals(workflowDTO.getActionType())){
+			applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
+        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
+        		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
+        		meterDetailsRepository.save(meterDetails);
+		}
+		if(CPSConstants.CREATECAN.equals(workflowDTO.getActionType())){
+
+        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
+    		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+    		meterDetailsRepository.save(meterDetails);
+    		
+        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
+            custDetails.setId(null);
+            if(applicationTxn.getMiddleName()!=null){
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            }
+            else{
+            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
+            }
+            
+            custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
+            
+            custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
+            custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
+            custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
+            custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
+            
+            custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+            custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
+            custDetails.setStatus(CustStatus.ACTIVE);
+            
+            CustDetails cd = custDetailsRepository.save(custDetails);
+            
+            //saving to CustMetermMapping
+            CustMeterMapping custMeterMapping =new CustMeterMapping();
+            custMeterMapping.setId(null);
+            custMeterMapping.setCustDetails(cd);
+            custMeterMapping.setMeterDetails(applicationTxn.getMeterDetails());
+            custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
+            custMeterMappingRepository.save(custMeterMapping);
+        
+			
+		}
+		applicationTxnRepository.save(applicationTxn);
+		
+		if(CPSConstants.ISSUEMETER.equals(workflowDTO.getActionType()) || CPSConstants.CREATECAN.equals(workflowDTO.getActionType()) || applicationTxn.getUser()!=null){
+       	 try{
+       		 workflowService.setApprovedDate(ZonedDateTime.now());
+       		 applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+            }
+            catch(Exception e){
+           	 e.printStackTrace();
+            }
+       }
+
+		return ResponseEntity.created(new URI("/api/applicationTxns/approve"))
+				.headers(HeaderUtil.createEntityCreationAlert("applicationTxn", ""))
+				.body(null);
+	}
+	
+
 }

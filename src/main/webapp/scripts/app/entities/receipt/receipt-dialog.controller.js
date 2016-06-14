@@ -23,14 +23,6 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         	$scope.load($stateParams.id);
         }
         
-        /*if($stateParams.applicationTxnId != null){
-        	//alert($stateParams.applicationTxnId);
-        	ProceedingsService.get({applicationTxnId: $stateParams.applicationTxnId}, function(result) {
-                $scope.proceedings = result;
-                $scope.receipt.applicationTxn = $scope.proceedings.applicationTxn; 
-                $scope.receipt.amount = $scope.proceedings.grandTotal;
-            });
-        }*/
         
 
         $scope.getAppTxn = function(applicationTxnId){
@@ -52,27 +44,11 @@ angular.module('watererpApp').controller('ReceiptDialogController',
     		});
         }
         
-        /*$scope.getFeasibilityByAppTxn = function(applicationTxnId){
-        	GetFeasibilityStudy.get({
-    			applicationTxnId : $stateParams.applicationTxnId
-    		}, function(result) {
-    			$scope.feasibilityStudy = result;
-    			if($scope.feasibilityStudy.id !=null){
-    			ApplicationTxnService.generateCan(result.id).then(function(response) {
-    				$scope.receipt.applicationTxn.can = response;
-    			});
-    			}
-    			else{
-    				alert("feasibilityNull");
-    			}
-    		});
-        }*/
         
         if($stateParams.applicationTxnId != null){
         	$scope.getAppTxn($stateParams.applicationTxn);
         	$scope.getProceedingsByAppTxn($stateParams.applicationTxn);
         	$scope.receipt.applicationTxn.remarks = "";
-        	//$scope.getFeasibilityByAppTxn($stateParams.applicationTxn);
         }
         
         
