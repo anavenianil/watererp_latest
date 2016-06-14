@@ -355,6 +355,9 @@ public class BillRunMasterResourceIntTest {
 			
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
+
+				Assert.assertNotNull("Bill (BFD) Does Not Exist for CAN:" + brd.getCan(), bfd);				
+				
 				Assert.assertEquals("Run1: Units do not match for CAN:" + bfd.getCan(),
 						expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
 				Assert.assertEquals("Run1: Water Cess does not match for CAN:" + bfd.getCan(),
@@ -439,6 +442,9 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd1 : brdList) {
 				BillFullDetails bfd = brd1.getBillFullDetails();
+				
+				Assert.assertNotNull("Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
+				
 				Assert.assertEquals("Run2: Units do not match for CAN:" + bfd.getCan(),
 						expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
 				Assert.assertEquals("Run2: Water Cess does not match for CAN:" + bfd.getCan(),
@@ -529,6 +535,9 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd1 : brdList) {
 				BillFullDetails bfd = brd1.getBillFullDetails();
+				
+				Assert.assertNotNull("Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
+				
 				Assert.assertEquals("Run3: Units do not match for CAN:" + bfd.getCan(),
 						expectedCharges3.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
 				Assert.assertEquals("Run3: Water Cess does not match for CAN:" + bfd.getCan(),
@@ -620,6 +629,9 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd1 : brdList) {
 				BillFullDetails bfd = brd1.getBillFullDetails();
+
+				Assert.assertNotNull("Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
+				
 				Assert.assertEquals("Run4: Units do not match for CAN:" + bfd.getCan(),
 						expectedCharges4.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
 				Assert.assertEquals("Run4: Water Cess does not match for CAN:" + bfd.getCan(),
