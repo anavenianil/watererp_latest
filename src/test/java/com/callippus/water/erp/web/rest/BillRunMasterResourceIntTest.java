@@ -139,7 +139,7 @@ public class BillRunMasterResourceIntTest {
 					{ "05050001", new Float[] { 2.0f, 1640.0f, 2330.0f, 0.0f } },
 					{ "04060002", new Float[] { 6.0f, 4920.0f, 2330.0f, 0.0f } },
 					{ "04060003", new Float[] { 8.5f, 6970.0f, 2330.0f, 0.0f } },
-					{ "04060004", new Float[] { 10.0f, 8200.0f, 2330.0f, 0.0f } },
+					{ "04060004", new Float[] { 17.0f, 13940.0f, 2330.0f, 0.0f } },
 					{ "05050002", new Float[] { 8.0f, 6560.0f, 2330.0f, 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
@@ -149,7 +149,7 @@ public class BillRunMasterResourceIntTest {
 			.stream(new Object[][] { { "02020005", new Float[] { 5000.0f } }, { "08090001", new Float[] { 6000.0f } },
 					{ "04060001", new Float[] { 3000.0f } }, { "05050001", new Float[] { 4000f } },
 					{ "04060002", new Float[] { 28000.0f } }, { "04060003", new Float[] { 0.0f } },
-					{ "04060004", new Float[] { 4000.0f } }, { "05050002", new Float[] { 0.0f } } })
+					{ "04060004", new Float[] { 4000.0f, 5740.0f } }, { "05050002", new Float[] { 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
 	static final Map<String, String[]> paymentCallbackXMLs2 = Arrays

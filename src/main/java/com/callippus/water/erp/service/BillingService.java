@@ -139,6 +139,7 @@ public class BillingService {
 	float prevAvgKL = 0.0f;
 	float units = 0;
 	float unitsKL = 0.0f;
+	float billedUnitsKL = 0.0f;
 	float partialUnitsKL = 0.0f;
 	float remUnitsKL = 0.0f;
 	float minAvgKL = 0.0f;
@@ -244,6 +245,8 @@ public class BillingService {
 			} else {
 				unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
 			}
+			
+			billedUnitsKL = unitsKL; //All "M" cases - Will be calculated here.
 		}
 
 		if (customer.getPrevBillMonth() == null) {
@@ -414,6 +417,7 @@ public class BillingService {
 		prevAvgKL = 0.0f;
 		units = 0;
 		unitsKL = 0.0f;
+		billedUnitsKL = 0.0f;
 		hasSewer = false;
 		ewura = 0.0f;
 		monthsDiff = 0;
@@ -546,6 +550,8 @@ public class BillingService {
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL, true);
 
+			billedUnitsKL = unitsKL; //Will be calculated for Stuck and Burnt cases.
+			
 			// This query just to determine if multiple tariffs exist during the
 			// period
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(),
@@ -668,7 +674,7 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 				
-				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < 0.1f ? minAvgKL
 						: customer.getPrevAvgKl());				
 
 				if(partialMonth)
@@ -699,7 +705,7 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < 0.1f ? minAvgKL
 						: customer.getPrevAvgKl());
 
 
@@ -728,7 +734,7 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < minAvgKL ? minAvgKL
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl() < 0.1f ? minAvgKL
 						: customer.getPrevAvgKl());
 
 				this.unitsKL = avgKL * monthsDiff;
@@ -880,7 +886,7 @@ public class BillingService {
 
 			bfd.setMeterStatus(bill_details.getCurrentBillType());
 
-			bfd.setUnits(unitsKL);
+			bfd.setUnits(billedUnitsKL);
 			bfd.setFromMonth(dFrom.format(DateTimeFormatter.ofPattern("yyyyMM")));
 			bfd.setToMonth(dTo.format(DateTimeFormatter.ofPattern("yyyyMM")));
 
@@ -965,6 +971,8 @@ public class BillingService {
 			}
 
 			calc_units(customer, bill_details, dFrom, dTo, unitsKL, false);
+			
+			billedUnitsKL = unitsKL; //Will be calculated for Stuck and Burnt cases.
 
 			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
