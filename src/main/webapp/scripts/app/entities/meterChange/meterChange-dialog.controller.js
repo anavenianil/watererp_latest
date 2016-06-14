@@ -104,7 +104,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
                 //$scope.meterChange.existingMeterNumber = $scope.custDetails.meterNo;
                 //$scope.meterChange.existingMeterReading = $scope.custDetails.prevReading;
                 $scope.meterChange.custDetails.id = $scope.custDetailsId;
-                $scope.getMeterDetails($scope.custDetails.meterNo);
+                //$scope.getMeterDetails($scope.custDetails.meterNo);
             });
         };
         
