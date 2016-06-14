@@ -346,7 +346,7 @@ public class BillingService {
 			billRunDetailsRepository.save(brd);
 
 			if (commit_status == BrdStatus.FAILED_COMMIT.getValue()) {
-				log.debug("Failed Bill Run: Cannot update CustDetails for CAN:" + bd.getCan());
+				log.debug("Failed Bill Run: Cannot Commit CAN:" + bd.getCan());
 				return;
 			}
 
@@ -382,8 +382,6 @@ public class BillingService {
 					prevAvgKL = kl / months;
 			} 
 
-			log.debug("From Dt:" + fromDt + ", To Dt:" + toDt + ", Prev AvgKL: " + prevAvgKL);
-
 			CustDetails customer = custDetailsRepository.findByCanForUpdate(brd.getCan());
 			customer.setPrevBillType(bfd.getCurrentBillType());
 			customer.setPrevAvgKl(prevAvgKL);
@@ -418,6 +416,8 @@ public class BillingService {
 
 				meterChangeRepository.save(meterChange);
 			}
+			
+			log.debug("Finished committing CAN:" + bd.getCan());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -476,6 +476,8 @@ public class BillingService {
 
 		meterChange = meterChangeRepository.findByCanAndStatus(can, MeterChangeStatus.APPROVED.getValue());
 
+		log.debug("This is the meterChange record:" + meterChange);
+		
 		brd = new BillRunDetails();
 		brd.setCan(can);
 		brd.setFromDt(ZonedDateTime.now());

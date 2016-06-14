@@ -236,10 +236,14 @@ public class BillRunMasterResourceIntTest {
 					{ "04060003", new Float[] { 8.5f, 7055.0f, 2380.0f, 0.0f } },
 					{ "04060004", new Float[] { 8.0f, 6600.0f, 4710.0f, 0.0f } },
 					{ "05050002", new Float[] { 6.0f, 4980.0f, 2380.0f, 0.0f } },
-					{ "06020001", new Float[] { 0.0f } }, { "06020002", new Float[] { 0.0f } },
-					{ "06020003", new Float[] { 0.0f } }, { "06020004", new Float[] { 0.0f } },
-					{ "06020005", new Float[] { 0.0f } }, { "06020006", new Float[] { 0.0f } },
-					{ "06020007", new Float[] { 0.0f } }, { "06020008", new Float[] { 0.0f } } })
+					{ "06020001", new Float[] { 3.0f, 2490.0f, 2380.0f, 0.0f } },
+					{ "06020002", new Float[] { 4.0f, 3320.0f, 2380.0f, 0.0f } },
+					{ "06020003", new Float[] { 8.0f, 6640.0f, 2380.0f, 0.0f } },
+					{ "06020004", new Float[] { 2.0f, 1660.0f, 2380.0f, 0.0f } },
+					{ "06020005", new Float[] { 2.5f, 2075.0f, 2380.0f, 0.0f } },
+					{ "06020006", new Float[] { 2.5f, 2075.0f, 2380.0f, 0.0f } },
+					{ "06020007", new Float[] { 5.0f, 4150.0f, 2380.0f, 0.0f } },
+					{ "06020008", new Float[] { 2.5f, 2075.0f, 2380.0f, 0.0f } }})
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 	
 
