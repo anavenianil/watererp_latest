@@ -217,7 +217,7 @@ public class BillingService {
 			initBill(bill_details.getCan());
 
 			brd.setBillDetails(bill_details);
-
+			log.debug("#############################################################################");
 			log.debug("Process customer with CAN:" + bill_details.getCan());
 			CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());
 
@@ -244,7 +244,7 @@ public class BillingService {
 				} else {
 					unitsKL = bill_details.getPresentReading() - bill_details.getInitialReading();
 
-					if (unitsKL <= 0)
+					if (unitsKL < 0)
 						throw new Exception("Invalid Meter Reading");
 				}
 
@@ -333,10 +333,8 @@ public class BillingService {
 			BillFullDetails bfd = brd.getBillFullDetails();
 			BillDetails bd = brd.getBillDetails();
 			
-			prevAvgKL = 0.0f;
+			prevAvgKL = minAvgKL;
 
-
-			
 			log.debug("About to commit CAN:" + bd.getCan());
 
 			bd.setStatus(BillingStatus.COMMITTED);
@@ -383,9 +381,6 @@ public class BillingService {
 				if (months > 0)
 					prevAvgKL = kl / months;
 			} 
-			
-			if(prevAvgKL == 0.0f)
-				prevAvgKL = minAvgKL;
 
 			log.debug("From Dt:" + fromDt + ", To Dt:" + toDt + ", Prev AvgKL: " + prevAvgKL);
 
@@ -569,9 +564,6 @@ public class BillingService {
 			return;
 
 		try {
-			// if (!bill_details.getCurrentBillType().equals("M"))
-			// bill_details.setPresentReading(customer.getPrevReading());
-
 			dFrom = customer.getMeterFixDate();
 			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
@@ -1053,7 +1045,7 @@ public class BillingService {
 		float oldUnits = 0.0f;
 		float newUnits = 0.0f;
 
-		oldUnits = meterChange.getPrevMeterReading() - bill_details.getInitialReading();
+		oldUnits = meterChange.getPrevMeterReading() - customer.getPrevReading();
 		newUnits = bill_details.getPresentReading() - meterChange.getNewMeterReading();
 
 		if (oldUnits < 0.0f)
@@ -1061,8 +1053,10 @@ public class BillingService {
 
 		if (newUnits < 0.0f)
 			newUnits = 0.0f;
-
+		
 		unitsKL = oldUnits + newUnits;
+		
+		log.debug("Meter Change: Old Units:" + oldUnits +", newUnits:" + newUnits + ", total:" + unitsKL);
 	}
 
 	public String getPrevMonthStart() {
