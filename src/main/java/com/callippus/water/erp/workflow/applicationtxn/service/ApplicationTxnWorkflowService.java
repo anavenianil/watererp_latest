@@ -114,8 +114,6 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 				workflowService.setRequestID(getRequestID());
 				workflowService.setRequestType(getRequestType());
 				workflowService.setRequestTypeID(getRequestTypeID());
-				/*requisition contains login user id but there is customer in applicationtxn*/
-				// workflowService.setAppliedBy(applicationTxn.getUser().getId().toString());
 				
 
 				message = super.initWorkflow();

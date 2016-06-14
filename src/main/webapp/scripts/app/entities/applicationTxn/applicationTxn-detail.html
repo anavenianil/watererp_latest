@@ -46,12 +46,6 @@
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">
 					Application For New Connection
-					<!-- <span class="label" class="label"
-						ng-class="{	'label-success'	: applicationTxn.status === 2, 
-										'label-warning'	: applicationTxn.status === 1, 
-										'label-danger'	: applicationTxn.status === 0}">
-						{{applicationTxn.status===0?'Pending':(requisition.status===1?'In
-						Feasibility':'Approved')}}</span> -->
 				</h3>
 				<div class="pull-right">
 					<a type="button"
@@ -306,7 +300,7 @@
 	</div>
 
 	<div id="approveModal" class="modal" name="aproveForm">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<form name="editForm" role="form" novalidate>
 					<div class="panel panel-primary">
@@ -320,13 +314,13 @@
 							<div class="list-group-item">
 								<div class="modal-body">
 									<div class="row">
-										<div class="col-sm-3">
+										<div class="col-sm-6">
 											<label for="field_applicationTxn">Application No. </label> <input
 												type="text" class="form-control" name="applicationTxn"
 												id="field_applicationTxn" ng-model="applicationTxn.id"
 												disabled />
 										</div>
-										<div class="col-sm-3">
+										<div class="col-sm-6">
 											<label class="control-label" for="field_approvedDate">Approved
 												Date</label>
 											<div class="form-group">
@@ -349,7 +343,7 @@
 										<div class="col-sm-12">
 											<label class="control-label" for="field_remarks">Remarks</label>
 											<textarea rows="4" cols="50" class="form-control"
-												name="remarks" id="field_remarks" max="20"
+												name="remarks" id="field_remarks" style="resize: none" max="20"
 												ng-model="applicationTxn.remarks" required></textarea>
 										</div>
 									</div>
