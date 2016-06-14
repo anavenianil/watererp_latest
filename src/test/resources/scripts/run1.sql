@@ -14,6 +14,7 @@
 
 ### Scenario 8: New Customer 05050002, 3 months bill, Tariff Change 3rd Month, Partial Days First Month < 15
 
+delete from meter_change where can in ( '06020001','06020002','06020003','06020004');
 
 delete from bill_run_details where bill_details_id between 45 and 60;
 
