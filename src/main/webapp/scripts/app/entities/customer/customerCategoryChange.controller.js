@@ -37,6 +37,9 @@ angular
 
 					$scope.clear = function() {
 						// $uibModalInstance.dismiss('cancel');
+						$('#saveSuccessfullyModal').modal('hide');
+			            $state.go('customer.categoryChangeList');
+						
 					};
 
 					$scope.datePickerForRequestedDate = {};
@@ -54,10 +57,19 @@ angular
 							alert("Selected Category Same as Previous");
 							$scope.customer.presentCategory = {};
 						}
+						else if(presentCategory === 1)
+						{
+							
+							$scope.instrEnabled = false;
+							$scope.customer.organizationName = null;
+							} else
+								$scope.instrEnabled = true;
 						
 					}
+						
+					
 
-
+					
 
 					
 					
@@ -112,9 +124,11 @@ angular
 					};
 					
 					var onSaveSuccess = function (result) {
+						 $scope.isSaving = false;
+				            $scope.customer.id = result.id;
 						$('#saveSuccessfullyModal').modal('show');
-			            $scope.isSaving = false;
-			            $state.go('customer.categoryChangeList');
+			            
+			            //$state.go('customer.categoryChangeList');
 			        };
 
 			        var onSaveError = function (result) {

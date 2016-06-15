@@ -36,10 +36,14 @@ angular.module('watererpApp')
         };
         
         var onSaveSuccess = function (result) {
+        	
             $scope.$emit('watererpApp:meterChangeUpdate', result);
             //$uibModalInstance.close(result);
+            $scope.meterChange.id = result.id;
             $scope.isSaving = false;
-            $state.go('meterChange');
+            $('#saveSuccessfullyModal').modal('show');
+         
+           //$state.go('meterChange');
         };
 
         var onSaveError = function (result) {
@@ -108,14 +112,23 @@ angular.module('watererpApp')
 			return ret;
 		}
         
+        $scope.clear=function()
+        {
+        	$('#saveSuccessfullyModal').modal('hide');
+        	$state.go('meterChange');
+        	
+        }
       //approve a request
 		$scope.approve = function(meterChange){
+			console.log("approve");
         	return $http.post('/api/meterChanges/meterChangeApprove',
 					meterChange).then(
 					function(response) {
 						console.log("Server response:"
 								+ JSON.stringify(response));
-						$state.go('meterChange');
+						alert("approved");
+						 $('#saveSuccessfullyModal').modal('show');
+						//$state.go('meterChange');
 					});
         }
 		

@@ -156,15 +156,16 @@
                                 
 									<label class="control-label" for="field_organizationName">Organization
 										Name</label> <input type="text" class="form-control text-uppercase"
-										name="organizationName" id="field_organizationName"
+										name="organizationName" id="field_organizationName" ng-pattern="/^[a-zA-z]/"
 										ng-model="applicationTxn.organizationName" ng-enabled="applicationTxn.organization"
-										ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===1"/>
-										<div ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && editForm.organizationName.$invalid" required>
+										ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===1" required/>
+										<div  ng-pattern="/^[a-zA-z]/"										
+										ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && editForm.organizationName.$invalid" >
 											<p class="help-block"
 												ng-show="editForm.organizationName.$error.required">This field
 												is required.</p>
 											<p class="help-block"
-												ng-show="editForm.organizationName.$error.text">Enter text
+												ng-show="editForm.organizationName.$error.pattern">Enter text
 												only</p>
 										</div></div>
 								</div>

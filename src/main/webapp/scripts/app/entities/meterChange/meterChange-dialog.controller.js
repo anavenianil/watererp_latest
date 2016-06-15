@@ -40,7 +40,9 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
             $scope.$emit('watererpApp:meterChangeUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('meterChange');
+            $scope.meterChange.id  = result.id;
+            $('#saveSuccessfullyModal').modal('show');
+            //$state.go('meterChange');
         };
 
         var onSaveError = function (result) {
@@ -57,7 +59,9 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
+        	 $('#saveSuccessfullyModal').modal('hide');
+        	$state.go('meterChange');
         };
         $scope.datePickerForApprovedDate = {};
 
@@ -87,24 +91,24 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 		}
         
         
-        $scope.getMeterDetails = function(meterId) {
+        /*$scope.getMeterDetails = function(meterId) {
         	$scope.prevMeterDetailss = [];
 			GetMeterDetails.findByMeterId(meterId).then(
 							function(result) {
 								$scope.meterChange.prevMeterNo = result;
 								$scope.prevMeterDetailss.push(result);
 							});
-		};
-        
+		};*/
+        $scope.prevMeterDetailss = [];
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.meterChange.custDetails = $scope.custDetails;
+                $scope.meterChange.prevMeterReading = $scope.custDetails.prevReading;
                 $scope.custDetailsId = $scope.custDetails.id;
-                //$scope.meterChange.existingMeterNumber = $scope.custDetails.meterNo;
-                //$scope.meterChange.existingMeterReading = $scope.custDetails.prevReading;
                 $scope.meterChange.custDetails.id = $scope.custDetailsId;
-                //$scope.getMeterDetails($scope.custDetails.meterNo);
+                $scope.prevMeterDetailss.push($scope.custDetails.meterDetails);
+                $scope.meterChange.prevMeterNo = $scope.custDetails.meterDetails;    
             });
         };
         
@@ -169,6 +173,22 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			return ret;
 		}
 		
-		
+		$scope.checkReading = function(prvReading, newReading){
+			if(prvReading >= newReading)
+				{
+				
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", true);
+				return true;
+				}
+			else
+				{
+				
+				
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", false);
+				return false;
+		}
+		}
         
 });

@@ -96,6 +96,11 @@ angular
 									onSaveSuccess, onSaveError);
 						}
 					};
+					/*$scope.clear = function() {
+						alert("clear");
+						$('#saveSuccessfullyModal').model('hide');
+						$state.go('customerComplaints');
+					}*/
 
 					$scope.clear = function() {
 						$scope.customerComplaints = {
