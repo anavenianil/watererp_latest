@@ -178,7 +178,7 @@ angular
 						$scope.getWorkflowTxnDetails($stateParams.requestId);
 					}
 					
-/*<<<<<<< HEAD
+
 					$scope.checkReading = function(prvReading, newReading){
 						if(prvReading >= newReading)
 							{
@@ -206,9 +206,9 @@ angular
 											+ JSON.stringify(response));
 								});
 			        }
-=======
+
 					
 					
 					
->>>>>>> refs/remotes/origin/master*/
+
 				});
