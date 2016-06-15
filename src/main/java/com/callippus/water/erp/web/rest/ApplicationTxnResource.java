@@ -180,55 +180,13 @@ public class ApplicationTxnResource {
         if (applicationTxn.getId() == null) {
             return createApplicationTxn(request, applicationTxn);
         }
-        if(applicationTxn.getStatus()==6){
-        	applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
-        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
-        		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
-        		meterDetailsRepository.save(meterDetails);
-        }
         
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
-        if(applicationTxn.getStatus()==7){
-        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
-    		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
-    		meterDetailsRepository.save(meterDetails);
-    		
-        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
-            custDetails.setId(null);
-            if(applicationTxn.getMiddleName()!=null){
-            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
-            }
-            else{
-            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
-            }
-            
-            
-            custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
-            
-            custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
-            custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
-            custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
-            custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
-            
-            custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
-            custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
-            custDetails.setStatus(CustStatus.ACTIVE);
-            
-            CustDetails cd = custDetailsRepository.save(custDetails);
-            
-            //saving to CustMetermMapping
-            CustMeterMapping custMeterMapping =new CustMeterMapping();
-            custMeterMapping.setId(null);
-            custMeterMapping.setCustDetails(cd);
-            custMeterMapping.setMeterDetails(applicationTxn.getMeterDetails());
-            custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
-            custMeterMappingRepository.save(custMeterMapping);
-        }
         /*
          *for without metered
          */
-        if(applicationTxn.getUser() !=null && applicationTxn.getStatus() ==1){
+        if(applicationTxn.getUser() !=null){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
             if(applicationTxn.getMiddleName()!=null){
@@ -248,7 +206,7 @@ public class ApplicationTxnResource {
             custDetailsRepository.save(custDetails);
             
         }
-        if(applicationTxn.getStatus() == 6|| applicationTxn.getStatus()==7 || applicationTxn.getUser()!=null){
+        if(applicationTxn.getUser()!=null){
         	 try{
         		 workflowService.setApprovedDate(ZonedDateTime.now());
         		 applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
@@ -336,9 +294,6 @@ public class ApplicationTxnResource {
 	    applicationTxn.setStatus(status);
         workflowService.setRequestStatus(status);
         applicationTxnWorkflowService.approvedApplicationTxnRequest(applicationTxn);
-        /*if(workflowService.getRequestStatus() == 2){
-        	applicationTxnWorkflowService.updateApplicationTxn(id);
-        }*/
         if(workflowService.getRequestAt()!=null){
         	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
             applicationTxn.setRequestAt(userRepository.findById(uid));
@@ -480,10 +435,6 @@ public class ApplicationTxnResource {
 		log.debug("ApplicationTxn -------- search: {}");
 		List<ApplicationTxn> applicationTxns;
 		
-		/*workflowService.getUserDetails();
-		Long userId = Long.parseLong(workflowService.getSfID());
-
-		String whereClause = "requestAt.id=" + userId +" ";*/
 		String whereClause = null;
 		
 		if(applicationTxnNo != null && !applicationTxnNo.equals(""))
@@ -579,64 +530,22 @@ public class ApplicationTxnResource {
 	
 	
 	
-	//added to change stage
-	@RequestMapping(value = "/applicationTxns/approve", 
+	//added to change stage for issueing meter
+	@RequestMapping(value = "/applicationTxns/issueMeter", 
 			method = RequestMethod.POST, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<WorkflowDTO> approveApplication(
-			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
+	public ResponseEntity<WorkflowDTO> issueMeter(
+			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
 		log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
 		
 		ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
-		if(CPSConstants.ISSUEMETER.equals(workflowDTO.getActionType())){
 			applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
         	MeterDetails meterDetails = applicationTxn.getMeterDetails();
         		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
         		meterDetailsRepository.save(meterDetails);
-		}
-		if(CPSConstants.CREATECAN.equals(workflowDTO.getActionType())){
-
-        	MeterDetails meterDetails = applicationTxn.getMeterDetails();
-    		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
-    		meterDetailsRepository.save(meterDetails);
-    		
-        	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
-            custDetails.setId(null);
-            if(applicationTxn.getMiddleName()!=null){
-            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
-            }
-            else{
-            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
-            }
-            
-            custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
-            
-            custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
-            custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
-            custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
-            custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
-            
-            custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
-            custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
-            custDetails.setStatus(CustStatus.ACTIVE);
-            
-            CustDetails cd = custDetailsRepository.save(custDetails);
-            
-            //saving to CustMetermMapping
-            CustMeterMapping custMeterMapping =new CustMeterMapping();
-            custMeterMapping.setId(null);
-            custMeterMapping.setCustDetails(cd);
-            custMeterMapping.setMeterDetails(applicationTxn.getMeterDetails());
-            custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
-            custMeterMappingRepository.save(custMeterMapping);
-        
-			
-		}
 		applicationTxnRepository.save(applicationTxn);
-		
-		if(CPSConstants.ISSUEMETER.equals(workflowDTO.getActionType()) || CPSConstants.CREATECAN.equals(workflowDTO.getActionType()) || applicationTxn.getUser()!=null){
        	 try{
        		 workflowService.setApprovedDate(ZonedDateTime.now());
        		 applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
@@ -644,12 +553,73 @@ public class ApplicationTxnResource {
             catch(Exception e){
            	 e.printStackTrace();
             }
-       }
-
-		return ResponseEntity.created(new URI("/api/applicationTxns/approve"))
+		return ResponseEntity.created(new URI("/api/applicationTxns/issueMeter"))
 				.headers(HeaderUtil.createEntityCreationAlert("applicationTxn", ""))
 				.body(null);
 	}
+	
+	
+	
+	//added to change stage for newCustomerSave
+		@RequestMapping(value = "/applicationTxns/createNewCustomer", 
+				method = RequestMethod.POST, 
+				produces = MediaType.APPLICATION_JSON_VALUE)
+		@Timed
+		@Transactional(rollbackFor=Exception.class)
+		public ResponseEntity<WorkflowDTO> createNewCustomer(
+				@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
+			log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+			
+			ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+
+	        MeterDetails meterDetails = applicationTxn.getMeterDetails();
+	    	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
+	    	meterDetailsRepository.save(meterDetails);
+	    	
+	        CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
+	        custDetails.setId(null);
+	        if(applicationTxn.getMiddleName()!=null){
+	           	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+	        }
+	        else{
+	          	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
+	        }
+	            
+	        custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
+	            
+	        custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
+	        custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
+	        custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
+	        custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
+	           
+	        custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+	        custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
+	        custDetails.setStatus(CustStatus.ACTIVE);
+	            
+	        CustDetails cd = custDetailsRepository.save(custDetails);
+	           
+	        //saving to CustMetermMapping
+	        CustMeterMapping custMeterMapping =new CustMeterMapping();
+	        custMeterMapping.setId(null);
+	        custMeterMapping.setCustDetails(cd);
+	        custMeterMapping.setMeterDetails(applicationTxn.getMeterDetails());
+	        custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
+	        custMeterMappingRepository.save(custMeterMapping);
+				
+			applicationTxnRepository.save(applicationTxn);
+			
+	       	try{
+	       		workflowService.setApprovedDate(ZonedDateTime.now());
+	       		applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+	           }
+	            catch(Exception e){
+	           	 e.printStackTrace();
+	            }
+
+			return ResponseEntity.created(new URI("/api/applicationTxns/createNewCustomer"))
+					.headers(HeaderUtil.createEntityCreationAlert("applicationTxn", ""))
+					.body(null);
+		}
 	
 
 }

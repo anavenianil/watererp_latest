@@ -28,7 +28,7 @@
 										@ Shs</label>
 								</div>
 								<div class="col-sm-2">
-									<label class="control-label" for="field_amount">Amount</label>
+									<label class="control-label" for="field_amount">Amount(TZS)</label>
 								</div>
 							</div>
 							<hr>
@@ -44,10 +44,10 @@
 										<span>{{itemRequired.quantity}}</span>
 									</div>
 									<div class="col-sm-2">
-										<span>{{itemRequired.ratePerShs | number :2}}</span>
+										<div class="col-md-6"><span class="pull-right">{{itemRequired.ratePerShs | number :2}}</span></div>
 									</div>
 									<div class="col-sm-2">
-										<span>{{itemRequired.amount | number :2}}</span>
+									<div class="col-md-6"><span class="pull-right">{{itemRequired.amount | number :2}}</span></div>
 									</div>
 								</div>
 							</div>
@@ -58,7 +58,7 @@
 									<label> A. Sub Total </label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.subTotalA | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.subTotalA | number :2}}</h5></div>
 								</div>
 							</div>
 							<hr>
@@ -67,7 +67,7 @@
 									<label> Supervision ({{proceedings.supervisionPercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.supervisionCharge | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.supervisionCharge | number :2}}</h5></div>
 								</div>
 							</div>
 							<div class="row">
@@ -75,7 +75,7 @@
 									<label>Labour Charges ({{proceedings.labourChargePercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.labourCharge | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.labourCharge | number :2}}</h5></div>
 								</div>
 							</div>
 							<div class="row">
@@ -83,7 +83,7 @@
 									<label>Site Survey ({{proceedings.siteSurveyPercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.siteSurvey | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.siteSurvey | number :2}}</h5></div>
 								</div>
 							</div>
 							<hr>
@@ -92,7 +92,7 @@
 									<label>SubTotal B</label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.subTotalB | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.subTotalB | number :2}}</h5></div>
 								</div>
 							</div>
 							<hr>
@@ -101,7 +101,7 @@
 									<label>Connection Fee of A & B ({{proceedings.connectionFeePercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.connectionFee | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.connectionFee | number :2}}</h5></div>
 								</div>
 							</div>
 							<hr>
@@ -110,7 +110,7 @@
 									<label>Application Form Fee</label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.applicationFormFee | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.applicationFormFee | number :2}}</h5></div>
 								</div>
 							</div>
 							<hr>
@@ -119,7 +119,7 @@
 									<label>Grand Total</label>
 								</div>
 								<div class="col-sm-2">
-									<h5 class="list-group-item-heading">{{proceedings.grandTotal | number :2}}</h5>
+									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.grandTotal | number :2}}</h5></div>
 								</div>
 							</div>
 						</fieldset>

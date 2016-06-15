@@ -54,11 +54,10 @@ angular.module('watererpApp')
         
       //approve a request
 		$scope.save = function(workflowDTO){
-        	return $http.post('/api/applicationTxns/approve',
+			$scope.isSaving = true;
+        	return $http.post('/api/applicationTxns/issueMeter',
         			workflowDTO).then(
 					function(response) {
-						console.log("Server response:"
-								+ JSON.stringify(response));
 						$state.go('applicationTxn');
 					});
         }

@@ -8,7 +8,7 @@
 		<div class="list-group">
 			<div class="list-group-item">
 				<div class="modal-body">
-					<jh-alert-error></jh-alert-error>
+					<!-- <jh-alert-error></jh-alert-error> -->
 
 					<fieldset>
 						<legend>Applicant Detail</legend>
@@ -19,7 +19,7 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Full Name</label>
-								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.firstName}}&nbsp;{{workflowDTO.applicationTxn.middleName}}&nbsp;{{workflowDTO.applicationTxn.lastName}}</h5>
+								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.firstName | uppercase}}&nbsp;{{workflowDTO.applicationTxn.middleName | uppercase}}&nbsp;{{workflowDTO.applicationTxn.lastName | uppercase}}</h5>
 							</div>
 							<div class="col-sm-3">
 								<label>Mobile No.</label>
@@ -39,15 +39,15 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<label>Division</label>
-								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.divisionMaster.divisionName}}</h5>
+								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.divisionMaster.divisionName | uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Street</label>
-								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.streetMaster.streetName}}</h5>
+								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.streetMaster.streetName | uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Address</label>
-								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.dma}}</h5>
+								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.dma  | uppercase}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -57,11 +57,11 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<label>Category</label>
-								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.tariffCategoryMaster.tariffCategory}}</h5>
+								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.tariffCategoryMaster.tariffCategory | uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label> Meter Id</label>
-								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.meterDetails.meterId}}</h5>
+								<h5 class="list-group-item-heading">{{workflowDTO.applicationTxn.meterDetails.meterId | uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Meter Reading</label>

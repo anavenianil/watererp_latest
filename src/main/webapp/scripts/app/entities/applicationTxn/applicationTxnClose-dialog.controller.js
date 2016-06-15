@@ -65,14 +65,8 @@ angular.module('watererpApp').controller(
 				$scope.getFeasibilityByAppTxn($stateParams.applicationTxnId);
 			}
 
-			/*$scope.canGenerate = function(feasibilityId) {
-				ApplicationTxnService.generateCan(feasibilityId).then(function(response) {
-					$scope.applicationTxn.can = response;
-				});				
-			}*/
 
 			var onSaveSuccess = function(result) {
-				//ApplicationTxnService.approveRequest($scope.applicationTxn.id,	$scope.applicationTxn.remarks);
 				$scope.$emit('watererpApp:applicationTxnUpdate', result);
 				$scope.isSaving = false;
 				$state.go('applicationTxn');
@@ -82,31 +76,16 @@ angular.module('watererpApp').controller(
 				$scope.isSaving = false;
 			};
 
-			 //approve a request
+			 //approve a request to create new customer
 			$scope.save = function(workflowDTO){
-	        	return $http.post('/api/applicationTxns/approve',
+				$scope.isSaving = true;
+	        	return $http.post('/api/applicationTxns/createNewCustomer',
 	        			workflowDTO).then(
 						function(response) {
-							console.log("Server response:"
-									+ JSON.stringify(response));
 							$state.go('applicationTxn');
 						});
 	        }
 			
-			/*$scope.save = function() {
-				$scope.isSaving = true;
-				if ($scope.applicationTxn.id != null) {
-					ApplicationTxn.update($scope.applicationTxn, onSaveSuccess,	onSaveError);
-				} else {
-					// ApplicationTxn.save($scope.applicationTxn, onSaveSuccess,
-					// onSaveError);
-					alert("Not Saved");
-				}
-			};*/
-
-			$scope.clear = function() {
-				$uibModalInstance.dismiss('cancel');
-			};
 			$scope.datePickerForConnectionDate = {};
 
 			$scope.datePickerForConnectionDate.status = {
