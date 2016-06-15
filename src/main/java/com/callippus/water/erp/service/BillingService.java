@@ -335,8 +335,6 @@ public class BillingService {
 			
 			prevAvgKL = minAvgKL;
 
-			log.debug("About to commit CAN:" + bd.getCan());
-
 			bd.setStatus(BillingStatus.COMMITTED);
 			billDetailsRepository.save(bd);
 

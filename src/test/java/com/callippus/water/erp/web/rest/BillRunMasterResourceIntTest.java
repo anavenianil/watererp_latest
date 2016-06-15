@@ -247,6 +247,16 @@ public class BillRunMasterResourceIntTest {
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 	
 
+	// Expected Units, Water Cess, Rent, Lock charges after Run 4
+	static final Map<String, Float[]> expectedCharges5 = Arrays
+			.stream(new Object[][] { { "02020005", new Float[] { 3.67f, 3043.3f, 2380.0f, 0.0f } },
+					{ "08090001", new Float[] { 5.3f, 4426.66f, 2380.0f, 0.0f } },
+					{ "04060003", new Float[] { 33f, 27390.0f, 2380.0f, 0.0f } },
+					{ "05050002", new Float[] { 5.5f, 4565.0f, 2380.0f, 0.0f } }
+					})
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
+	
+
 	
 	@Inject
 	private BillRunMasterRepository billRunMasterRepository;
@@ -654,6 +664,58 @@ public class BillRunMasterResourceIntTest {
 			
 			log.debug("###################################################################################");
 			log.debug("Finished Run 4.");
+			log.debug("###################################################################################");
+			
+
+
+			log.debug("###################################################################################");
+			log.debug("Loading Run5.sql");
+			log.debug("###################################################################################");
+			custDetailsCustomRepository.loadTestData("/scripts/run5.sql");
+
+			result = restBillRunMasterMockMvc
+					.perform(post("/api/billRunMasters").contentType(TestUtil.APPLICATION_JSON_UTF8)
+							.content(TestUtil.convertObjectToJsonBytes(billRunMaster)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			id = content.getLong("id");
+
+			log.debug("###################################################################################");
+			log.debug("Committing Bill Run 5  with id:" + id);
+			log.debug("###################################################################################");
+			brm = billRunMasterRepository.findOne(id);
+			brm.setStatus("commit");
+
+			result = restBillRunMasterMockMvc.perform(put("/api/billRunMasters")
+					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
+					.andExpect(status().isOk()).andReturn();
+
+			content = new JSONObject(result.getResponse().getContentAsString());
+
+			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
+					"COMMITTED");
+			
+			brdList = billRunDetailsRepository.findByBillRunId(id);
+
+			for (BillRunDetails brd1 : brdList) {
+				BillFullDetails bfd = brd1.getBillFullDetails();
+
+				Assert.assertNotNull("Run5: Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
+				
+				Assert.assertEquals("Run5: Units do not match for CAN:" + bfd.getCan(),
+						expectedCharges5.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
+				Assert.assertEquals("Run4: Water Cess does not match for CAN:" + bfd.getCan(),
+						expectedCharges5.get(bfd.getCan())[1].floatValue(), bfd.getWaterCess().floatValue(), 1.0f);
+				Assert.assertEquals("Run4: Meter Service Charge does not match for CAN:" + bfd.getCan(),
+						expectedCharges5.get(bfd.getCan())[2].floatValue(),
+						bfd.getServiceCharge().floatValue() + bfd.getMeterServiceCharge().floatValue(), 1.0f);
+			
+			}
+			
+			log.debug("###################################################################################");
+			log.debug("Finished Run 5.");
 			log.debug("###################################################################################");
 			
 		} catch (Exception e) {
