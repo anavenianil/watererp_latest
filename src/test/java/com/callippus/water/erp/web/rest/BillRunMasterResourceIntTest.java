@@ -4,7 +4,6 @@ import com.callippus.water.erp.Application;
 import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.BillRunDetails;
 import com.callippus.water.erp.domain.BillRunMaster;
-import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.repository.BillRunDetailsRepository;
 import com.callippus.water.erp.repository.BillRunMasterRepository;
 import com.callippus.water.erp.repository.CollDetailsRepository;
@@ -252,7 +251,8 @@ public class BillRunMasterResourceIntTest {
 			.stream(new Object[][] { { "02020005", new Float[] { 3.67f, 3043.3f, 2380.0f, 0.0f } },
 					{ "08090001", new Float[] { 5.3f, 4426.66f, 2380.0f, 0.0f } },
 					{ "04060003", new Float[] { 33f, 27390.0f, 2380.0f, 0.0f } },
-					{ "05050002", new Float[] { 5.5f, 4565.0f, 2380.0f, 0.0f } }
+					{ "05050002", new Float[] { 5.5f, 4565.0f, 2380.0f, 0.0f } },
+					{ "06020001", new Float[] { 3.8f, 3181.66f, 2380.0f, 0.0f } }
 					})
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 	
