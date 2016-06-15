@@ -37,7 +37,7 @@ set -e
 
 ##### Integration Testing #######
 #sudo mvn -Dspring.profiles.active=fast  test
-sudo mvn -Dspring.profiles.active=fast -Dtest=BillRunMasterResourceIntTest test
+sudo mvn -Dspring.profiles.active=fast  -Dnet.sf.ehcache.disabled=true -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then
