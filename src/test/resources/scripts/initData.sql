@@ -4,7 +4,6 @@ delete from `meter_change` where can in ('02020005', '04060001', '05050001', '04
 # Make CAN 02020005 new (Customer 1)
 
 delete from bill_run_details where can='02020005';
-delete from bill_details where can='02020005';
 delete from bill_full_details where can='02020005';
 delete from coll_details where can='02020005';
 update cust_details set prev_Bill_Month=null,arrears=0.0,met_reading_dt=null,meter_fix_date='2016-04-23',lock_charges=null, prev_avg_kl=0.0,met_avg_kl=0.0 where can='02020005';

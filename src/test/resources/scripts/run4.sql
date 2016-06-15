@@ -35,4 +35,3 @@ INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`me
 
 insert `meter_change` values(10,'06020005','Testing',9,11,'Testing','2016-10-06',2,13,15,23,NULL, NULL);
 insert `meter_change` values(11,'06020007','Testing',14,12,'Testing','2016-10-06',2,15,17,24,NULL, NULL);
-
