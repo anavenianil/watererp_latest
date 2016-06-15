@@ -99,7 +99,12 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 								$scope.prevMeterDetailss.push(result);
 							});
 		};*/
+/*<<<<<<< HEAD
         $scope.prevMeterDetailss = [];
+=======
+        
+		$scope.prevMeterDetailss = [];
+>>>>>>> refs/remotes/origin/master
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
@@ -108,7 +113,11 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
                 $scope.custDetailsId = $scope.custDetails.id;
                 $scope.meterChange.custDetails.id = $scope.custDetailsId;
                 $scope.prevMeterDetailss.push($scope.custDetails.meterDetails);
+<<<<<<< HEAD
                 $scope.meterChange.prevMeterNo = $scope.custDetails.meterDetails;    
+=======
+                $scope.meterChange.prevMeterNo = $scope.custDetails.meterDetails;
+>>>>>>> refs/remotes/origin/master*/
             });
         };
         
