@@ -6,14 +6,15 @@ angular
 				'CustomerCategoryChangeController',
 				function($scope, $stateParams, CustDetails,
 						TariffCategoryMaster, $state, $http,
-						CustDetailsSearchCAN, 
-						PipeSizeMaster, ApplicationTxnSearchCAN, ParseLinks, RequestWorkflowHistory, Customer) {
+						CustDetailsSearchCAN, PipeSizeMaster,
+						ApplicationTxnSearchCAN, ParseLinks,
+						RequestWorkflowHistory, Customer) {
 
 					$scope.customer = {};
 					$scope.customer.changeType = "CONNECTIONCATEGORY";
-					
+
 					$scope.custDetails = {};
-					
+
 					$scope.tariffcategorymasters = TariffCategoryMaster.query();
 					$scope.pipeSizeMasters = PipeSizeMaster.query();
 					$scope.workflowDTO = {};
@@ -22,10 +23,7 @@ angular
 					$scope.applicationTxn = {};
 					$scope.workflowDTO.workflowTxnDetailss = [];
 					$scope.referenceNo = "";
-					
-					
-					
-					
+
 					console.log("These are the state:"
 							+ JSON.stringify($state.current.name));
 
@@ -38,8 +36,8 @@ angular
 					$scope.clear = function() {
 						// $uibModalInstance.dismiss('cancel');
 						$('#saveSuccessfullyModal').modal('hide');
-			            $state.go('customer.categoryChangeList');
-						
+						$state.go('customer.categoryChangeList');
+
 					};
 
 					$scope.datePickerForRequestedDate = {};
@@ -51,28 +49,21 @@ angular
 					$scope.datePickerForRequestedDateOpen = function($event) {
 						$scope.datePickerForRequestedDate.status.opened = true;
 					};
-					
-					$scope.validateCategory = function(prevCategory, presentCategory){
-						if(prevCategory===presentCategory){
+
+					$scope.validateCategory = function(prevCategory,
+							presentCategory) {
+						if (prevCategory === presentCategory) {
 							alert("Selected Category Same as Previous");
 							$scope.customer.presentCategory = {};
-						}
-						else if(presentCategory === 1)
-						{
-							
+						} else if (presentCategory === 1) {
+
 							$scope.instrEnabled = false;
 							$scope.customer.organizationName = null;
-							} else
-								$scope.instrEnabled = true;
-						
+						} else
+							$scope.instrEnabled = true;
+
 					}
-						
-					
 
-					
-
-					
-					
 					// to search CAN
 					$scope.getLocation = function(val) {
 						$scope.isValidCust = false;
@@ -92,7 +83,12 @@ angular
 
 					// get cust details by CAN
 					$scope.getCustDetails = function(can) {
-						CustDetailsSearchCAN.get({can : can},function(result) {
+						CustDetailsSearchCAN
+								.get(
+										{
+											can : can
+										},
+										function(result) {
 											$scope.custDetails = result;
 											$scope.customer.meterReading = $scope.custDetails.prevReading;
 											$scope.customer.tariffCategoryMaster = $scope.custDetails.tariffCategoryMaster;
@@ -101,28 +97,27 @@ angular
 
 					// getApplicationTxn by CAN
 					$scope.getApplicationTxn = function(can) {
-						ApplicationTxnSearchCAN.get({can : can},
-										function(result) {
-											$scope.applicationTxn = result;
-										});
+						ApplicationTxnSearchCAN.get({
+							can : can
+						}, function(result) {
+							$scope.applicationTxn = result;
+						});
 					};
-					
+
 					//to get active can
-					$scope.getActiveCAN = function(can){
-			        	$scope.customer.can= can;
-			        	return $http.post('/api/customers/getActiveCan',
+					$scope.getActiveCAN = function(can) {
+						$scope.customer.can = can;
+						return $http.post('/api/customers/getActiveCan',
 								$scope.customer).then(
 								function(result) {
 									//$scope.customer=response;
 									/*$scope.customer.prevOrganizationName = result.organizationName;
 									$scope.customer.prevDesignation = $scope.customer.designation;*/
-									
+
 									console.log("Server response:"
 											+ JSON.stringify(result));
 								});
-			        }
-					
-					
+					}
 
 					// when selected searched CAN in DropDown
 					$scope.onSelect = function($item, $model, $label) {
@@ -140,26 +135,28 @@ angular
 						$scope.referenceNo = $scope.custDetails.can;
 						$scope.customer.can = $scope.custDetails.can
 					};
-					
-					var onSaveSuccess = function (result) {
-						 $scope.isSaving = false;
-				            $scope.customer.id = result.id;
-						$('#saveSuccessfullyModal').modal('show');
-			            
-			            //$state.go('customer.categoryChangeList');
-			        };
 
-			        var onSaveError = function (result) {
-			            $scope.isSaving = false;
-			        };
-					$scope.save = function () {
-			            $scope.isSaving = true;
-			            if ($scope.customer.id != null) {
-			                Customer.update($scope.customer, onSaveSuccess, onSaveError);
-			            } else {
-			                Customer.save($scope.customer, onSaveSuccess, onSaveError);
-			            }
-			        };
+					var onSaveSuccess = function(result) {
+						$scope.isSaving = false;
+						$scope.customer.id = result.id;
+						$('#saveSuccessfullyModal').modal('show');
+
+						//$state.go('customer.categoryChangeList');
+					};
+
+					var onSaveError = function(result) {
+						$scope.isSaving = false;
+					};
+					$scope.save = function() {
+						$scope.isSaving = true;
+						if ($scope.customer.id != null) {
+							Customer.update($scope.customer, onSaveSuccess,
+									onSaveError);
+						} else {
+							Customer.save($scope.customer, onSaveSuccess,
+									onSaveError);
+						}
+					};
 
 					$scope.saveChanges = function() {
 						console.log("WorkflowDTO data being posted to server:"
@@ -173,42 +170,32 @@ angular
 								});
 					}
 
-
 					if ($stateParams.requestId != null) {
 						$scope.getWorkflowTxnDetails($stateParams.requestId);
 					}
-					
 
-					$scope.checkReading = function(prvReading, newReading){
-						if(prvReading >= newReading)
-							{
-							
+					$scope.checkReading = function(prvReading, newReading) {
+						if (prvReading >= newReading) {
+
 							$scope.editForm.presentReading.$setValidity(
 									"ltPrevious", true);
 							return true;
-							}
-						else
-							{
-							
-							
+						} else {
+
 							$scope.editForm.presentReading.$setValidity(
 									"ltPrevious", false);
 							return false;
-					}
+						}
 					}
 					//approve a request
-					$scope.approve = function(workflowDTO){
-			        	console.log(workflowDTO);
-			        	return $http.post('/api/workflowTxnDetailsApprove',
+					$scope.approve = function(workflowDTO) {
+						console.log(workflowDTO);
+						return $http.post('/api/workflowTxnDetailsApprove',
 								$scope.workflowDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
 								});
-			        }
-
-					
-					
-					
+					}
 
 				});
