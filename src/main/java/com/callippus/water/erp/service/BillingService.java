@@ -389,10 +389,10 @@ public class BillingService {
 			customer.setPrevReading(bfd.getPresentReading());
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
-			if (bfd.getCurrentBillType().equals("M"))
-				customer.setLockCharges(0.0f);
-			else
+			if (bfd.getCurrentBillType().equals("L"))
 				customer.setLockCharges(bfd.getLockCharges());
+			else
+				customer.setLockCharges(0.0f);
 
 			List<Adjustments> adjustments = adjustmentsRepository
 					.findByCanAndStatusAndBillFullDetails(customer.getCan(), TxnStatus.PROCESSING, bfd);
@@ -820,7 +820,7 @@ public class BillingService {
 				log.debug("Usage Charge:" + (Double) charge.get("amount"));
 				bfd.setWaterCess(bfd.getWaterCess() + ((Double) charge.get("amount")).floatValue());
 
-				if (bill_details.getCurrentBillType().equals("M")
+				if ( (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S") )
 						&& (customer.getPrevBillType() == null || customer.getPrevBillType().equals("L"))) {
 					if (customer.getLockCharges() == null)
 						bfd.setLockCharges(0.0f);

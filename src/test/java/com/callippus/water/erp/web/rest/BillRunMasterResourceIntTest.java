@@ -250,7 +250,7 @@ public class BillRunMasterResourceIntTest {
 	static final Map<String, Float[]> expectedCharges5 = Arrays
 			.stream(new Object[][] { { "02020005", new Float[] { 3.67f, 3043.3f, 2380.0f, 0.0f } },
 					{ "08090001", new Float[] { 5.3f, 4426.66f, 2380.0f, 0.0f } },
-					{ "04060003", new Float[] { 33f, 27390.0f, 2380.0f, 0.0f } },
+					{ "04060003", new Float[] { 33f, 6395.0f, 2380.0f, 0.0f } },
 					{ "05050002", new Float[] { 5.5f, 4565.0f, 2380.0f, 0.0f } },
 					{ "06020001", new Float[] { 3.8f, 3181.66f, 2380.0f, 0.0f } }
 					})
