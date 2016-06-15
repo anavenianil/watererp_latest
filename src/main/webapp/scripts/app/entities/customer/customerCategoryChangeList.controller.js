@@ -60,6 +60,16 @@ angular.module('watererpApp')
             };
         };
         
+        $scope.findByCANAndCategory = function(can) {
+        	$scope.customers = [];
+            Customer.query({page: $scope.page, size: 20, changeType:$scope.customer.changeType, can:can, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.customers.push(result[i]);
+                }
+            });
+        };
+        
         $scope.getLocation = function(val) {
 			$scope.isValidCust = false;
 			return $http.get('api/custDetailss/searchCAN/' + val, {
@@ -85,6 +95,8 @@ angular.module('watererpApp')
 			$scope.custDetails.address = arr[2];
 			$scope.custInfo = "";
 			$scope.isValidCust = true;
-			
+			$scope.findByCANAndCategory($scope.custDetails.can);
 		};
+		
+		
     });

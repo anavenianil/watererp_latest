@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.WorkflowDTO;
@@ -120,14 +121,20 @@ public class CustomerResource {
 	@Timed
 	public ResponseEntity<List<Customer>> getAllCustomers(
 			Pageable pageable,
-			@RequestParam(value = "changeType", required = false) String changeType)
+			@RequestParam(value = "changeType", required = false) String changeType,
+			@RequestParam(value = "can", required = false) String can)
 			throws URISyntaxException {
 		log.debug("REST request to get a page of Customers");
 		// Page<Customer> page = customerRepository.findAll(pageable);
 		Page<Customer> page;
-		if (changeType != null) {
+		if (changeType != null && can==null) {
 			page = customerRepository.findByChangeType(pageable, changeType);
-		} else {
+		} 
+		else if(changeType != null && can!=null){
+			page = customerRepository.findByChangeTypeAndCan(pageable, changeType, can);
+		}
+		else 
+		{
 			page = customerRepository.findAll(pageable);
 		}
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
@@ -187,7 +194,10 @@ public class CustomerResource {
 		
 		CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customer.getCan());
 		
-		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
+		/*if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
+			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
+		}*/
+		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}
 		
@@ -240,5 +250,31 @@ public class CustomerResource {
 		return ResponseEntity.created(new URI("/api/connectionTerminates/declineRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
 				.body(null);
+	}
+    
+    
+    
+    /**
+     * Get Active can to change its details
+     */
+    @RequestMapping(value = "/customers/getActiveCan",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<Customer> getAtiveCan(
+			@RequestBody Customer customer)
+			throws Exception {
+    	log.debug("REST request to getActiveCan() for Customer  : {}", customer);
+		
+    	Customer newCustomer =customerRepository.findByChangeTypeAndCan(customer.getChangeType(), customer.getCan());
+    	System.out.println(newCustomer);
+
+    	return Optional.ofNullable(customer)
+				.map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		/*return ResponseEntity.created(new URI("/api/customers/getActiveCan/"))
+				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))
+				.body(null);*/
 	}
 }

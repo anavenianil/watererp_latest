@@ -1,16 +1,6 @@
 <div>
 	<h2>Category Change Lists</h2>
 	<jh-alert></jh-alert>
-	<!-- <div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-4 no-padding-left">
-				<button class="btn btn-primary" ui-sref="customer.categoryChange">
-					<span class="glyphicon glyphicon-plus"></span> <span>Create
-						new Customer </span>
-				</button>
-			</div>
-		</div>
-	</div> -->
 	<br />
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -67,7 +57,7 @@
 						<tbody infinite-scroll="loadPage(page + 1)"
 							infinite-scroll-disabled="links['last'] == page">
 							<tr ng-repeat="customer in customers track by customer.id">
-								<td>{{customer.id}}</td>
+								<td>{{$index+1}}</td>
 								<td>{{customer.can}}</td>
 								<td>{{customer.presentReading}}</td>
 								<td>{{customer.tariffCategoryMaster.tariffCategory}}</td>
@@ -85,18 +75,6 @@
 											<span class="glyphicon glyphicon-eye-open"></span>&nbsp;View<span
 												class="hidden-xs hidden-sm"></span>
 										</button>
-										<!-- <button type="submit"
-											ui-sref="customer.edit({id:customer.id})"
-											class="btn btn-primary btn-sm">
-											<span class="glyphicon glyphicon-pencil"></span> <span
-												class="hidden-xs hidden-sm"></span>
-										</button>
-										<button type="submit"
-											ui-sref="customer.delete({id:customer.id})"
-											class="btn btn-danger btn-sm">
-											<span class="glyphicon glyphicon-remove-circle"></span> <span
-												class="hidden-xs hidden-sm"></span>
-										</button> -->
 									</div>
 								</td>
 							</tr>
