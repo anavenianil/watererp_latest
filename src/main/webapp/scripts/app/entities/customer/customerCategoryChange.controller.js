@@ -106,6 +106,23 @@ angular
 											$scope.applicationTxn = result;
 										});
 					};
+					
+					//to get active can
+					$scope.getActiveCAN = function(can){
+			        	$scope.customer.can= can;
+			        	return $http.post('/api/customers/getActiveCan',
+								$scope.customer).then(
+								function(result) {
+									//$scope.customer=response;
+									/*$scope.customer.prevOrganizationName = result.organizationName;
+									$scope.customer.prevDesignation = $scope.customer.designation;*/
+									
+									console.log("Server response:"
+											+ JSON.stringify(result));
+								});
+			        }
+					
+					
 
 					// when selected searched CAN in DropDown
 					$scope.onSelect = function($item, $model, $label) {
@@ -117,6 +134,7 @@ angular
 						$scope.custDetails.address = arr[2];
 						$scope.getCustDetails($scope.custDetails.can);
 						$scope.getApplicationTxn($scope.custDetails.can);
+						//$scope.getActiveCAN($scope.custDetails.can);
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
 						$scope.referenceNo = $scope.custDetails.can;
@@ -160,6 +178,7 @@ angular
 						$scope.getWorkflowTxnDetails($stateParams.requestId);
 					}
 					
+/*<<<<<<< HEAD
 					$scope.checkReading = function(prvReading, newReading){
 						if(prvReading >= newReading)
 							{
@@ -178,7 +197,7 @@ angular
 					}
 					}
 					//approve a request
-					/*$scope.approve = function(workflowDTO){
+					$scope.approve = function(workflowDTO){
 			        	console.log(workflowDTO);
 			        	return $http.post('/api/workflowTxnDetailsApprove',
 								$scope.workflowDTO).then(
@@ -186,5 +205,10 @@ angular
 									console.log("Server response:"
 											+ JSON.stringify(response));
 								});
-			        }*/
+			        }
+=======
+					
+					
+					
+>>>>>>> refs/remotes/origin/master*/
 				});
