@@ -84,7 +84,7 @@ public class ConnectionTerminateResource {
         if (connectionTerminate.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("connectionTerminate", "idexists", "A new connectionTerminate cannot already have an ID")).body(null);
         }
-        CustDetails custDetails= custDetailsRepository.findByCan(connectionTerminate.getCan());
+        CustDetails custDetails= custDetailsRepository.findByCanForUpdate(connectionTerminate.getCan());
         if(custDetails.getStatus()==CustStatus.TERMINATED){
         	return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("connectionTerminate", "idexists", "Connection already terminated")).body(null);
         }
@@ -189,7 +189,7 @@ public class ConnectionTerminateResource {
 		
 		connectionTerminateRepository.save(connectionTerminate);
 		
-		CustDetails custDetails = custDetailsRepository.findByCan(connectionTerminate.getCan());
+		CustDetails custDetails = custDetailsRepository.findByCanForUpdate(connectionTerminate.getCan());
 		custDetails.setStatus(CustStatus.TERMINATED);
 		custDetailsRepository.save(custDetails);
 		

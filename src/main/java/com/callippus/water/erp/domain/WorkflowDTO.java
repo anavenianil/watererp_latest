@@ -13,6 +13,8 @@ public class WorkflowDTO {
 	private Receipt receipt;
 	private String remarks;
 	private ZonedDateTime approvedDate;
+	private ApplicationTxn applicationTxn;
+	private String actionType;
 	
 	
 	public Receipt getReceipt() {
@@ -68,6 +70,18 @@ public class WorkflowDTO {
 	}
 	public void setApprovedDate(ZonedDateTime approvedDate) {
 		this.approvedDate = approvedDate;
+	}
+	public ApplicationTxn getApplicationTxn() {
+		return applicationTxn;
+	}
+	public void setApplicationTxn(ApplicationTxn applicationTxn) {
+		this.applicationTxn = applicationTxn;
+	}
+	public String getActionType() {
+		return actionType;
+	}
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
 	}
 	
 	

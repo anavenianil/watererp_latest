@@ -90,7 +90,6 @@
 										ng-model="custDetails.city" disabled />
 								</div>
 							</div>
-
 							<br>
 							<div class="row">
 								<div class="col-sm-12">
@@ -121,14 +120,13 @@
 									<label class="control-label" for="field_organizationName">Organization
 										Name</label> <input type="text" class="form-control"
 										name="organizationName" id="field_organizationName"
-										ng-model="applicationTxn.organizationName"
-										disabled/>
+										ng-model="customer.prevOrganizationName" disabled />
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_designation">Designation</label>
 									<input type="text" class="form-control" name="designation"
-										ng-model="applicationTxn.designation" id="field_designation"
-										disabled/>
+										ng-model="customer.prevDesignation" id="field_designation"
+										disabled />
 								</div>
 							</div>
 							<br>
@@ -159,6 +157,12 @@
 							</div>
 							<br>
 							<div class="row">
+								<div class="col-sm-4">
+									<label class="control-label" for="field_prevReading">Previous
+										Reading</label> <input type="text" class="form-control"
+										name="prevReading" id="field_prevReading"
+										ng-model="custDetails.prevReading" disabled />
+								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_presentReading">Present
 										Reading</label> <input type="text" class="form-control"

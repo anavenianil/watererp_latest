@@ -2,6 +2,9 @@ package com.callippus.water.erp.common;
 
 public class CPSConstants {
 	
+	public static final String ISSUEMETER = "issueMeter";
+	public static final String CREATECAN = "createCAN";
+	
 	//customer info Change case
 	public static final String CONNECTIONCATEGORY = "Connection Category";
 	public static final String PIPESIZE = "Pipe Size";

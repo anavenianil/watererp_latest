@@ -37,7 +37,7 @@
 							infinite-scroll-disabled="links['last'] == page">
 							<tr
 								ng-repeat="meterChange in meterChanges track by meterChange.id">
-								<td><a ui-sref="meterChange.detail({id:meterChange.id})">{{meterChange.id}}</a></td>
+								<td>{{$index+1}}</td>
 								<td>{{meterChange.can}}</td>
 								<td>{{meterChange.reasonForChange}}</td>
 								<td>{{meterChange.prevMeterReading}}</td>
