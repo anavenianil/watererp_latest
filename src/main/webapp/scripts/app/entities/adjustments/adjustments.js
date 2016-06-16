@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('adjustments.new', {
+            /*.state('adjustments.new', {
                 parent: 'adjustments',
                 url: '/new',
                 data: {
@@ -67,8 +67,8 @@ angular.module('watererpApp')
                         $state.go('adjustments');
                     })
                 }]
-            })
-            .state('adjustments.edit', {
+            })*/
+            /*.state('adjustments.edit', {
                 parent: 'adjustments',
                 url: '/{id}/edit',
                 data: {
@@ -90,7 +90,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('adjustments.delete', {
                 parent: 'adjustments',
                 url: '/{id}/delete',
@@ -113,5 +113,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('adjustments.new', {
+                parent: 'adjustments',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Adjustmentss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/adjustments/adjustments-dialog.html',
+                        controller: 'AdjustmentsDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('adjustments.edit', {
+                parent: 'adjustments',
+                url: '/edit/{id}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Adjustmentss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/adjustments/adjustments-dialog.html',
+                        controller: 'AdjustmentsDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

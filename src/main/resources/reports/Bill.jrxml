@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bill" language="groovy" pageWidth="1000" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ede3c4b4-7e79-4194-9047-9d7e39b76875">
 	<property name="ireport.zoom" value="1.100000000000015"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="163"/>
 	<parameter name="id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR CAN ID]]></parameterDescription>
 	</parameter>
@@ -15,7 +15,7 @@
        c.address                                           AS cust_address,
        c.city                                              AS cust_city,
        c.pin_code                                          AS cust_pin_code,
-       m.meter_id                                          AS cust_meter_no,
+       c.meter_no                                          AS cust_meter_no,
        c.pipe_size                                         AS cust_pipe_size,
       c.met_reading_dt                                  AS cust_meter_read_dt,
  (SELECT street_name
@@ -27,8 +27,6 @@ FROM   bill_full_details b
               ON c.can = b.can
        JOIN tariff_category_master t
               ON t.id = c.tariff_category_master_id
-       JOIN meter_details m
-              ON m.id = c.meter_details_id
 WHERE  b.id=$P{id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
@@ -77,6 +75,9 @@ WHERE  b.id=$P{id}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="sewerage" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="meter_no" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="prev_bill_type" class="java.lang.String">
@@ -220,12 +221,6 @@ WHERE  b.id=$P{id}]]>
 	<field name="no_meter_amt" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="lock_charges" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="meter_details_id" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="category_unused" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -241,43 +236,10 @@ WHERE  b.id=$P{id}]]>
 	<field name="dr_flag" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_number" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="email" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="status" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="tariff_category_master_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="pipe_size_master_id" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="division_master_id" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="street_master_id" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="tariff_category" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="meter_id" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="meter_type" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="min" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="max" class="java.lang.Float">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="meter_status_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="bill_month" class="java.lang.String"/>
@@ -289,7 +251,6 @@ WHERE  b.id=$P{id}]]>
 	<field name="cust_pin_code" class="java.lang.String"/>
 	<field name="cust_meter_no" class="java.lang.String"/>
 	<field name="cust_pipe_size" class="java.lang.Float"/>
-	<field name="cust_meter_read_dt" class="java.sql.Date"/>
 	<field name="street_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -812,7 +773,7 @@ WHERE  b.id=$P{id}]]>
 			<textField pattern="###0.00" isBlankWhenNull="true">
 				<reportElement x="318" y="118" width="81" height="20" uuid="90671958-178d-4422-8059-dea5d311dc7c"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{prev_reading}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{initial_reading}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
 				<reportElement x="535" y="118" width="72" height="18" uuid="dee4a229-2b4d-4888-aad4-5b8c2f0a2c54"/>

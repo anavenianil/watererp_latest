@@ -52,6 +52,7 @@ angular
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
 
+						$scope.clear();
 						CustDetailsService
 								.get(
 										{

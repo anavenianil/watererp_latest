@@ -1,25 +1,35 @@
 'use strict';
 
 angular.module('watererpApp').controller('AdjustmentsDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Adjustments', 'CustDetails', 'BillFullDetails', 'TransactionTypeMaster', 'User', 'ComplaintTypeMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, Adjustments, CustDetails, BillFullDetails, TransactionTypeMaster, User, ComplaintTypeMaster) {
+        function($scope, $stateParams,  Adjustments, CustDetails, BillFullDetails, TransactionTypeMaster, User, ComplaintTypeMaster, $state) {
 
-        $scope.adjustments = entity;
+        $scope.adjustments = {};
         $scope.custdetailss = CustDetails.query();
         $scope.billfulldetailss = BillFullDetails.query();
         $scope.transactiontypemasters = TransactionTypeMaster.query();
         $scope.users = User.query();
         $scope.complainttypemasters = ComplaintTypeMaster.query();
+        
         $scope.load = function(id) {
             Adjustments.get({id : id}, function(result) {
                 $scope.adjustments = result;
             });
         };
 
+        if($stateParams.id!=null){
+        	$scope.load($stateParams.id)
+        }
+        
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:adjustmentsUpdate', result);
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $scope.adjustments.id = result.id;
+            $('#saveSuccessfullyModal').modal('show');
+            //$state.go('adjustments');
+            $scope.rc.editForm.attempted = false;
+			$scope.editForm.$setPristine();
+			//$scope.clear();
         };
 
         var onSaveError = function (result) {
@@ -36,7 +46,9 @@ angular.module('watererpApp').controller('AdjustmentsDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
+        	$scope.adjustments = {can:null, amount:null, user:null,txnTime:null, status:null,
+        			transactionTypeMaster:null, complaintTypeMaster:null,  remarks:null };
         };
         $scope.datePickerForTxnTime = {};
 
@@ -47,4 +59,4 @@ angular.module('watererpApp').controller('AdjustmentsDialogController',
         $scope.datePickerForTxnTimeOpen = function($event) {
             $scope.datePickerForTxnTime.status.opened = true;
         };
-}]);
+});

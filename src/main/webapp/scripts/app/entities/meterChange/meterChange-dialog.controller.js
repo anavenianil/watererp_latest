@@ -16,9 +16,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         $scope.meterChangeStatuss = [{"id":1,"status":"Meter Stuck"},{"id":2,"status":"Meter Break"}];
         
         $scope.CustDetailsId;
-        
-        
-        $scope.load = function(id) {
+                $scope.load = function(id) {
             MeterChange.get({id : id}, function(result) {
                 $scope.meterChange = result;
                 $scope.meterChange.remarks = "";
@@ -86,12 +84,10 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 				var res = response.data.map(function(item) {
 					return item;
 				});
-
 				return res;
 			});
 		}
         
-               
 		$scope.prevMeterDetailss = [];
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
@@ -174,5 +170,4 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 				return false;
 				}
 		}
-		
 });
