@@ -201,17 +201,17 @@ public class CustomerResource {
 			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}
 		
-		if("PIPESIZE".equals(customer.getChangeType()) && customer.getStatus()==2){
+		if("PIPESIZE".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
 			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
 		}
-		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==2){
+		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			if(workflowDTO.getReceipt()!=null){
 				receiptRepository.save(workflowDTO.getReceipt());
 			}
 		}
 		
-		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==3){
+		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			 if(customer.getMiddleName()!=null){
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getMiddleName()+" "+customer.getLastName());
 	            }
