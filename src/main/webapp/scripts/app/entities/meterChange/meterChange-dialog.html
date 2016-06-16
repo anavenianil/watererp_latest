@@ -1,73 +1,101 @@
-<form name="editForm" role="form" novalidate ng-submit="save()">
+<div>
+	<form name="editForm" rc-submit="save()" novalidate>
 
-	<div class="panel panel-primary">
-		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Create or edit Meter Change</h3>
-		</div>
-		<div class="list-group">
-			<div class="list-group-item">
-				<div class="modal-body">
-					<jh-alert-error></jh-alert-error>
-					<div class="row">
-						<div class="col-sm-4 col-md-offset-4">
-							<label for="field_applicationTxn">Search By CAN</label>
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">Create or edit Meter Change</h3>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="modal-body">
+						<jh-alert-error></jh-alert-error>
+						<div class="row">
+							<div class="col-sm-4 col-md-offset-4">
+								<label for="field_applicationTxn">Search By CAN</label>
 
-							<div class="form-group"
-								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
-								<input type="text" ng-model="custInfo" typeahead-min-length="3"
-									placeholder="Search CAN or Name or Address (Min 3 chars)"
-									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
-									typeahead-loading="loadingCANs"
-									typeahead-on-select='onSelect($item, $model, $label)'
-									typeahead-no-results="noResults" class="form-control">
-								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
-								<div ng-show="noResults">
-									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								<div class="form-group"
+									ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+									<input type="text" ng-model="custInfo" typeahead-min-length="3"
+										placeholder="Search CAN or Name or Address (Min 3 chars)"
+										uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+										typeahead-loading="loadingCANs"
+										typeahead-on-select='onSelect($item, $model, $label)'
+										typeahead-no-results="noResults" class="form-control">
+									<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+									<div ng-show="noResults">
+										<i class="glyphicon glyphicon-remove"></i> No CANs Found
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- <div class="col-sm-4">
+						<!-- <div class="col-sm-4">
 							<label for="id">ID</label> <input type="text"
 								class="form-control" id="id" name="id" ng-model="meterChange.id"
 								readonly />
 						</div> -->
-					<fieldset>
-						<legend>Customer Details</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label class="control-label" for="field_can">CAN</label> <input
-									type="text" class="form-control" name="can" id="field_can"
-									ng-model="meterChange.can" readonly />
+						<fieldset>
+							<legend>Customer Details</legend>
+							<div class="row">
+								<div class="col-sm-4">
+								<div class="form-group"
+										ng-class="{'has-error': editForm.can.$invalid && 
+                                (editForm.can.$dirty || rc.editForm.attempted)}">
+									<label class="control-label" for="field_can">CAN</label> <input
+										type="text" class="form-control" name="can" id="field_can"
+										ng-model="meterChange.can"  required readonly />
+										<div
+									ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
+									<p class="help-block"
+										ng-show="editForm.can.$error.required">This field is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.can.$error.number">Please enter numbers only
+										.</p>
+								
 							</div>
-							<div class="col-sm-4">
-								<label for="name">Name</label> <input type="text"
-									class="form-control" id="field_name" name="name"
-									ng-model="meterChange.name" readonly />
+								</div>
+								</div>
+								<div class="col-sm-4">
+								<div class="form-group"
+										ng-class="{'has-error': editForm.name.$invalid && 
+                                (editForm.name.$dirty || rc.editForm.attempted)}">
+									<label for="name">Name</label> <input type="text"
+										class="form-control" id="field_name" name="name" 
+										ng-model="meterChange.name" required readonly />
+										<div 
+									ng-show="(editForm.name.$dirty || rc.editForm.attempted) && editForm.name.$invalid">
+									<p class="help-block"
+										ng-show="editForm.name.$error.required">This field is
+										required.</p>
+									
+								
+							
+									</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<label for="mobileNo">mobileNo</label> <input type="text"
+										class="form-control" id="field_mobileNo" name="mobileNo"
+										ng-model="meterChange.custDetails.mobileNo" readonly />
+								</div>
 							</div>
-							<div class="col-sm-4">
-								<label for="mobileNo">mobileNo</label> <input type="text"
-									class="form-control" id="field_mobileNo" name="mobileNo"
-									ng-model="meterChange.custDetails.mobileNo" readonly />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-4">
-								<label for="dma">DMA</label> <input type="text"
-									class="form-control" id="field_dma" name="dma"
-									ng-model="meterChange.custDetails.divCode" readonly />
-							</div>
-							<div class="col-sm-4">
-								<label for="street">Street</label> <input type="text"
-									class="form-control" id="field_street" name="street"
-									ng-model="meterChange.custDetails.secCode" readonly />
-							</div>
-							<div class="col-sm-4">
-								<label for="address">Address</label> <input type="text"
-									class="form-control" id="field_address" name="address"
-									ng-model="meterChange.address" readonly />
-							</div>
-							<!-- <div class="col-sm-4">
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="dma">DMA</label> <input type="text"
+										class="form-control" id="field_dma" name="dma"
+										ng-model="meterChange.custDetails.divCode" readonly />
+								</div>
+								<div class="col-sm-4">
+									<label for="street">Street</label> <input type="text"
+										class="form-control" id="field_street" name="street"
+										ng-model="meterChange.custDetails.secCode" readonly />
+								</div>
+								<div class="col-sm-4">
+									<label for="address">Address</label> <input type="text"
+										class="form-control" id="field_address" name="address"
+										ng-model="meterChange.address" readonly />
+								</div>
+								<!-- <div class="col-sm-4">
 								<label for="field_custDetails">Cust Details</label> <select
 									class="form-control" id="field_custDetails" name="custDetails"
 									ng-model="meterChange.custDetails"
@@ -75,119 +103,173 @@
 									<option value=""></option>
 								</select>
 							</div> -->
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend>Meter Details</legend>
-						<div class="row">
-							<!-- <div class="col-sm-4">
+							</div>
+						</fieldset>
+						<fieldset>
+							<legend>Meter Details</legend>
+							<div class="row">
+								<!-- <div class="col-sm-4">
 								<label class="control-label" for="field_existingMeterNumber">Existing
 									Meter Number</label> <input type="text" class="form-control"
 									name="existingMeterNumber" id="field_existingMeterNumber"
 									ng-model="meterChange.existingMeterNumber" readonly />
 							</div> -->
-							<div class="col-sm-4">
-								<label for="field_existingMeterNumber">Existing Meter Number</label> <select
-									class="form-control" id="field_prevMeterNo"
-									name="prevMeterNo" ng-model="meterChange.prevMeterNo"
-									ng-options="meterDetails as meterDetails.meterId for meterDetails in prevMeterDetailss track by meterDetails.id"
-									required disabled>
-									<option value=""></option>
-								</select>
+								<div class="col-sm-3">
+									<label for="field_existingMeterNumber">Existing Meter
+										Number</label> <select class="form-control" id="field_prevMeterNo"
+										name="prevMeterNo" ng-model="meterChange.prevMeterNo"
+										ng-options="meterDetails as meterDetails.meterId for meterDetails in prevMeterDetailss track by meterDetails.id"
+										required disabled>
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_prevMeterReading">Previous
+										Meter Reading</label> <input type="number" class="form-control"
+										name="prevMeterReading" id="field_prevMeterReading"
+										ng-model="meterChange.prevMeterReading" required disabled />
+								</div>
+								<div class="col-sm-3">
+								<div class="form-group" ng-class="{'has-error': editForm.presentReading.$invalid && 
+         (editForm.presentReading.$dirty || rc.editForm.attempted)}"> 
+									<label class="control-label" for="field_prevMeterReading">Existing
+										Meter Reading</label> <input type="number" class="form-control"
+										name="presentReading" id="field_prevMeterReading" ng-change="checkReading( meterChange.newMeterReading,meterChange.prevMeterReading)"
+										ng-model="meterChange.newMeterReading" required />
+										<div
+											ng-show="(editForm.presentReading.$dirty || rc.editForm.attempted) && editForm.presentReading.$invalid">
+											<p class="help-block"
+												ng-show="editForm.presentReading.$error.required">This field is required.</p>
+								
+									<p class="help-block"
+										ng-show="editForm.presentReading.$error.ltPrevious">Value
+										is greater than or equal to Previous Reading.</p>
+								</div>
 							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_prevMeterReading">Existing
-									Meter Reading</label> <input type="number" class="form-control"
-									name="prevMeterReading" id="field_prevMeterReading"
-									ng-model="meterChange.prevMeterReading" required />
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_reasonForChange">Reason
-									For Change</label>
-								<!-- <input type="text" class="form-control"
+								</div>
+								<div class="col-sm-3">
+								<div class="form-group" ng-class="{'has-error': editForm.reasonForChange.$invalid && 
+         (editForm.reasonForChange.$dirty || rc.editForm.attempted)}"> 
+									<label class="control-label" for="field_reasonForChange">Reason
+										For Change</label>
+									<!-- <input type="text" class="form-control"
 								name="reasonForChange" id="field_reasonForChange"
 								ng-model="meterChange.reasonForChange" /> -->
-								<select class="form-control" id="field_reasonForChange"
-									name="reasonForChange" ng-model="meterChange.reasonForChange1"
-									ng-change="getReason(meterChange.reasonForChange1.status)"
-									ng-options="meterChangeStatus as meterChangeStatus.status for meterChangeStatus in meterChangeStatuss track by meterChangeStatus.status"
-									required>
-									<option value=""></option>
-								</select>
+									<select class="form-control" id="field_reasonForChange"
+										name="reasonForChange" ng-model="meterChange.reasonForChange1"
+										ng-change="getReason(meterChange.reasonForChange1.status)"
+										ng-options="meterChangeStatus as meterChangeStatus.status for meterChangeStatus in meterChangeStatuss track by meterChangeStatus.status"
+										required>
+										<option value=""></option>
+									</select>
+									<div
+											ng-show="(editForm.reasonForChange.$dirty || rc.editForm.attempted) && editForm.reasonForChange.$invalid">
+											<p class="help-block"
+												ng-show="editForm.reasonForChange.$error.required">This field is required.</p>																	
+								</div>
 							</div>
-						</div>
-						<br>
-						<div class="row" ng-show="canShow()">
-							<div class="col-sm-4">
-								<label for="field_newMeterNo">New Meter Number</label> <select
-									class="form-control" id="field_newMeterNo"
-									name="newMeterNo" ng-model="meterChange.newMeterNo"
-									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
-									<option value=""></option>
-								</select>
+								</div>
 							</div>
-							<!-- <div class="col-sm-4">
+							<br>
+							<div class="row" ng-show="canShow()">
+								<div class="col-sm-4">
+									<label for="field_newMeterNo">New Meter Number</label> <select
+										class="form-control" id="field_newMeterNo" name="newMeterNo"
+										ng-model="meterChange.newMeterNo"
+										ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<!-- <div class="col-sm-4">
 								<label class="control-label" for="field_newMeterNumber">New
 									Meter Number</label> <input type="text" class="form-control"
 									name="newMeterNumber" id="field_newMeterNumber"
 									ng-model="meterChange.newMeterNumber" required/>
 							</div> -->
-							<div class="col-sm-4">
-								<label class="control-label" for="field_newMeterReading">New
-									Meter Reading</label> <input type="number" class="form-control"
-									name="newMeterReading" id="field_newMeterReading"
-									ng-model="meterChange.newMeterReading"/>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_newMeterReading">New
+										Meter Reading</label> <input type="number" class="form-control"
+										name="newMeterReading" id="field_newMeterReading"
+										ng-model="meterChange.newMeterReading" />
+								</div>
 							</div>
-						</div>
-					</fieldset>
-					<fieldset ng-show="canShow()">
-						<legend>Approval Details</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<label for="field_user">Approved By</label> <select
-									class="form-control" id="field_user" name="user"
-									ng-model="meterChange.user"
-									ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_remarks">Remarks</label>
-								<input type="text" class="form-control" name="remarks"
-									id="field_remarks" ng-model="meterChange.remarks"/>
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_approvedDate">Approved
-									Date</label>
-								<div class="form-group">
-									<div class='input-group date' id='field_approvedDate'>
-										<input id="field_approvedDate" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
-											ng-model="meterChange.approvedDate"
-											is-open="datePickerForApprovedDate.status.opened"/> <span
-											class="input-group-btn">
-											<button type="button" class="btn btn-default"
-												ng-click="datePickerForApprovedDateOpen($event)">
-												<i class="glyphicon glyphicon-calendar"></i>
-											</button>
-										</span>
+						</fieldset>
+						<fieldset ng-show="canShow()">
+							<legend>Approval Details</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<label for="field_user">Approved By</label> <select
+										class="form-control" id="field_user" name="user"
+										ng-model="meterChange.user"
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_remarks">Remarks</label>
+									<input type="text" class="form-control" name="remarks"
+										id="field_remarks" ng-model="meterChange.remarks" />
+								</div>
+								<div class="col-sm-4">
+									<label class="control-label" for="field_approvedDate">Approved
+										Date</label>
+									<div class="form-group">
+										<div class='input-group date' id='field_approvedDate'>
+											<input id="field_approvedDate" type="text"
+												class="form-control" uib-datepicker-popup="{{dateformat}}"
+												ng-model="meterChange.approvedDate"
+												is-open="datePickerForApprovedDate.status.opened" /> <span
+												class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="datePickerForApprovedDateOpen($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</fieldset>
-				</div>
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-default" data-dismiss="modal"
+						</fieldset>
+					</div>
+					<div class="modal-footer">
+						<!-- <button type="button" class="btn btn-default" data-dismiss="modal"
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 					</button>   -->
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-					</button>
+						<button type="submit" ng-enabled="editForm.$invalid || isSaving"
+							class="btn btn-primary">
+							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
+	</form>
+	<div id="saveSuccessfullyModal" class="modal" name="saveForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="confirmForm">
+					<div class="modal-header"></div>
+					<div class="modal-body">
+						<p>
+						<h3>Request Submitted Successfully!</h3>
+						</p>
+						<div>
+							<h4>
+								<label>Application No.:&nbsp;&nbsp; </label>{{meterChange.id}}
+							</h4>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
-</form>
+</div>

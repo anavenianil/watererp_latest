@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="save()">
+<form name=editForm rc-submit="save()" novalidate>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Create Proceedings</h3>
@@ -18,13 +18,23 @@
 								ng-model="proceedings.applicationTxn.id" readonly />
 						</div>
 						<div class="col-sm-3">
-							<label for="field_pipeSizeMaster">Pipe Size</label> <select
-								class="form-control" id="field_pipeSizeMaster"
-								name="applicationTxn" ng-model="proceedings.pipeSizeMaster"
-								ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipeSizeMasters track by pipeSizeMaster.id"
-								required>
-								<option value=""></option>
-							</select>
+							<div class="form-group"
+								ng-class="{'has-error': editForm.applicationTxn.$invalid && 
+         (editForm.applicationTxn.$dirty || rc.editForm.attempted)}">
+								<label for="field_pipeSizeMaster">Pipe Size</label> <select
+									class="form-control" id="field_pipeSizeMaster"
+									name="applicationTxn" ng-model="proceedings.pipeSizeMaster"
+									ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipeSizeMasters track by pipeSizeMaster.id"
+									required>
+									<option value=""></option>
+								</select>
+								<div
+									ng-show="(editForm.applicationTxn.$dirty || rc.editForm.attempted) && editForm.applicationTxn.$invalid">
+									<p class="help-block"
+										ng-show="editForm.applicationTxn.$error.required">This
+										field is required.</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -40,7 +50,9 @@
 							<label class="control-label" for="field_unit">Unit</label>
 						</div>
 						<div class="col-sm-2">
+
 							<label class="control-label" for="field_quantity">Quantity</label>
+
 						</div>
 						<div class="col-sm-2">
 							<label class="control-label" for="field_ratePerShs">Rate
@@ -55,25 +67,64 @@
 						ng-repeat="item in proceedings.itemRequireds track by $index">
 						<div class="row">
 							<div class="col-sm-3">
-								<select class="form-control" id="field_materialMaster"
-									name="materialMaster" ng-model="item.materialMaster"
-									ng-change="getMaterialDetail(item.materialMaster.id, $index)"
-									ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-2">
-								<select class="form-control" id="field_uom" name="uom"
-									ng-model="item.uom"
-									ng-options="uom as uom.value for uom in uoms track by uom.id">
-									<option value=""></option>
-								</select>
-							</div>
-							<div class="col-sm-2">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.materialMaster.$invalid && 
+         (editForm.materialMaster.$dirty || rc.editForm.attempted)}">
 
-								<input type="number" class="form-control" name="quantity"
-									id="field_quantity" ng-change="calculateRate()" min="0"
-									ng-model="item.quantity" />
+									<select class="form-control" id="field_materialMaster"
+										name="materialMaster" ng-model="item.materialMaster"
+										ng-change="getMaterialDetail(item.materialMaster.id, $index)"
+										ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id"
+										required>
+										<option value=""></option>
+									</select>
+									<div
+										ng-show="(editForm.materialMaster.$dirty || rc.editForm.attempted) && editForm.materialMaster.$invalid">
+										<p class="help-block"
+											ng-show="editForm.materialMaster.$error.required">This
+											field is required.</p>
+
+									</div>
+								</div>
+
+
+							</div>
+							<div class="col-sm-2">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.uom.$invalid && 
+         (editForm.uom.$dirty || rc.editForm.attempted)}">
+									<select class="form-control" id="field_uom" name="uom"
+										ng-model="item.uom"
+										ng-options="uom as uom.value for uom in uoms track by uom.id"
+										required>
+										<option value=""></option>
+									</select>
+									<div
+										ng-show="(editForm.uom.$dirty || rc.editForm.attempted) && editForm.uom.$invalid">
+										<p class="help-block" ng-show="editForm.uom.$error.required">This
+											field is required.</p>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.quantity.$invalid && 
+         (editForm.quantity.$dirty || rc.editForm.attempted)}">
+									<input type="number" class="form-control" name="quantity"
+										id="field_quantity" ng-change="calculateRate()" min="0"
+										ng-model="item.quantity" required />
+									<div
+										ng-show="(editForm.quantity.$dirty || rc.editForm.attempted) && editForm.quantity.$invalid">
+										<p class="help-block"
+											ng-show="editForm.quantity.$error.required">This field is
+											required.</p>
+										<p class="help-block"
+											ng-show="editForm.quantity.$error.number">Please enter
+											numbers only.</p>
+									</div>
+								</div>
+
 							</div>
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
@@ -227,9 +278,20 @@
 					<legend></legend>
 					<div class="row">
 						<div class="col-sm-12">
-							<label class="control-label" for="field_remarks">Remarks</label>
-							<textarea rows="2" cols="30" class="form-control" name="remarks"
-								id="field_remarks" ng-model="proceedings.applicationTxn.remarks" required></textarea>
+							<div class="form-group"
+								ng-class="{'has-error': editForm.remarks.$invalid && 
+         (editForm.remarks.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_remarks">Remarks</label>
+								<textarea rows="2" cols="30" class="form-control" name="remarks"
+									id="field_remarks"
+									ng-model="proceedings.applicationTxn.remarks" required></textarea>
+								<div
+									ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
+									<p class="help-block"
+										ng-show="editForm.remarks.$error.required">This field is
+										required.</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</fieldset>
@@ -240,7 +302,7 @@
 					<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
 						Back</span>
 				</button>
-				<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+				<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 					class="btn btn-primary">
 					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 				</button>

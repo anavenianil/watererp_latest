@@ -20,10 +20,13 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
         }
 
         var onSaveSuccess = function (result) {
+        	//$scope.clear();
             $scope.$emit('watererpApp:custDetailsUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('customer.pipeSizeList');
+            $scope.customer.id = result.id;
+            $('#saveSuccessfullyModal').modal('show');
+           // $state.go('customer.pipeSizeList');
         };
 
         var onSaveError = function (result) {
@@ -41,6 +44,8 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 
         $scope.clear = function() {
             //$uibModalInstance.dismiss('cancel');
+        	$('#saveSuccessfullyModal').modal('hide');
+        	$state.go('customer.pipeSizeList');
         };
         
         $scope.datePickerForRequestedDate = {};
@@ -109,13 +114,30 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 				alert("Pipe Size should be different.");
 			}
 		}
+		$scope.checkReading = function(prvReading, newReading){
+			if(prvReading >= newReading)
+				{
+				
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", true);
+				return true;
+				}
+			else
+				{
+				
+				
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", false);
+				return false;
+		}
+		}
 		
-		$scope.checkReading = function(oldReading, presentReading){
+	/*	$scope.checkReading = function(oldReading, presentReading){
 			//alert(oldReading+","+ presentReading);
 			if(presentReading < oldReading){
 				$scope.customer.presentReading = "";
 				alert("Present reading should be greater than old reading");
 			}
-		}
+		}*/
 		
 }/*]*/);

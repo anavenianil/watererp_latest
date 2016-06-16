@@ -1,6 +1,5 @@
-
-<form name="editForm" role="form" novalidate ng-submit="save()"
-	show-validation>
+<div>
+<form name="editForm" rc-submit="save()" novalidate>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<button type="button" class="close" data-dismiss="modal"
@@ -37,24 +36,44 @@
 						<legend>Customer Information</legend>
 						<div class="row">
 							<div class="col-sm-3">
+							<div class="form-group"
+										ng-class="{'has-error': editForm.can.$invalid && 
+                                (editForm.can.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_can">CAN</label> <input
 									type="text" class="form-control" name="can" id="field_can"
 									ng-model="custDetails.can" required disabled />
-								<div ng-show="editForm.can.$invalid">
-									<p class="help-block" ng-show="editForm.can.$error.required">
-										This field is required.</p>
+								<div
+									ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
+									<p class="help-block"
+										ng-show="editForm.can.$error.required">This field is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.can.$error.number">Please enter numbers only
+										.</p>
+								
+							</div>
 								</div>
 							</div>
 							<div class="col-sm-3">
+							<div class="form-group"
+										ng-class="{'has-error': editForm.consName.$invalid && 
+                                (editForm.consName.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_consName">Consumer
-									Name</label> <input type="text" class="form-control" name="consName"
+									Name</label> <input type="text" class="form-control" name="consName" ng-pattern="/^[a-zA-Z]/"
 									id="field_consName" ng-model="custDetails.consName" required
 									disabled />
-								<div ng-show="editForm.consName.$invalid">
+								<div ng-pattern="/^[a-zA-Z]/"
+									ng-show="(editForm.consName.$dirty || rc.editForm.attempted) && editForm.consName.$invalid">
 									<p class="help-block"
 										ng-show="editForm.consName.$error.required">This field is
 										required.</p>
-								</div>
+									<p class="help-block"
+										ng-show="editForm.consName.$error.pattern">Enter text only
+										.</p>
+								
+							
+									</div>
+									</div>
 							</div>
 							<div class="col-sm-3">
 								<label class="control-label" for="field_mobileNo">Mobile
@@ -120,6 +139,8 @@
 								</select>
 							</div>
 							<div class="col-sm-3">
+							<div class="form-group" ng-class="{'has-error': editForm.requestedPipeSizeMaster.$invalid && 
+         (editForm.requestedPipeSizeMaster.$dirty || rc.editForm.attempted)}"> 
 								<label for="field_requestedPipeSizeMaster">Requested
 									Pipe Size</label> <select class="form-control"
 									id="field_requestedPipeSizeMaster"
@@ -130,6 +151,16 @@
 									required>
 									<option value=""></option>
 								</select>
+								<div
+											ng-show="(editForm.requestedPipeSizeMaster.$dirty || rc.editForm.attempted) && editForm.requestedPipeSizeMaster.$invalid">
+											<p class="help-block"
+												ng-show="editForm.requestedPipeSizeMaster.$error.required">This field is required.</p>
+								
+									<p class="help-block"
+										ng-show="editForm.requestedPipeSizeMaster.$error.ltPrevious">Value
+										is greater than or equal to Previous Reading.</p>
+								</div>
+							</div>
 							</div>
 							<div class="col-sm-3">
 								<label class="control-label" for="field_meterReading">Meter
@@ -138,13 +169,25 @@
 									ng-model="customer.meterReading" disabled required />
 							</div>
 							<div class="col-sm-3">
+							<div class="form-group" ng-class="{'has-error': editForm.presentReading.$invalid && 
+         (editForm.presentReading.$dirty || rc.editForm.attempted)}"> 
 								<label class="control-label" for="field_presentReading">Present
 									Reading</label> <input type="number" class="form-control"
 									name="presentReading" id="field_presentReading"
 									ng-model="customer.presentReading"
 									min="0" 
-									ng-blur="checkReading(customer.meterReading, customer.presentReading)"
+									ng-blur="checkReading(customer.presentReading,customer.meterReading)"
 									required />
+									<div
+											ng-show="(editForm.presentReading.$dirty || rc.editForm.attempted) && editForm.presentReading.$invalid">
+											<p class="help-block"
+												ng-show="editForm.presentReading.$error.required">This field is required.</p>
+								
+									<p class="help-block"
+										ng-show="editForm.presentReading.$error.ltPrevious">Value
+										is greater than or equal to Previous Reading.</p>
+								</div>
+							</div>
 							</div>
 						</div>
 						<br>
@@ -152,9 +195,11 @@
 							<div class="col-sm-3">
 								<label class="control-label" for="field_requestedDate">Requested
 									Date</label>
-								<div class="form-group">
+									<div class="form-group" ng-class="{'has-error': editForm.requestedDate.$invalid && 
+         (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
+								
 									<div class='input-group date' id='field_requestedDate'>
-										<input id="field_requestedDate" type="text"
+										<input id="field_requestedDate" type="text" name="requestedDate"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="customer.requestedDate" max-date="dtmax"
 											is-open="datePickerForRequestedDate.status.opened" required />
@@ -165,6 +210,15 @@
 											</button>
 										</span>
 									</div>
+									<div
+									ng-show="(editForm.requestedDate.$dirty || rc.editForm.attempted) && editForm.requestedDate.$invalid">
+									<p class="help-block"
+										ng-show="editForm.requestedDate.$error.required">Date is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.requestedDate.$error.date">Please enter Date format
+										.</p>
+								</div>
 								</div>
 							</div>
 							<div class="col-sm-9">
@@ -182,7 +236,7 @@
 						<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
 							Back</span>
 					</button>
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 					</button>
@@ -191,3 +245,32 @@
 		</div>
 	</div>
 </form>
+	<div id="saveSuccessfullyModal" class="modal" name="saveForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="confirmForm">
+					<div class="modal-header">
+					</div>
+					<div class="modal-body">
+						<p>
+						<h3>Request Submitted Successfully!</h3>
+						</p>
+						<div>
+							<h4>
+								<label>Application No.:&nbsp;&nbsp; </label>{{customer.id}}
+							</h4>
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>

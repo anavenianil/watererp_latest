@@ -3,7 +3,6 @@
 angular.module('watererpApp')
     .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
     		UploadUtil, DateUtils, User, IdProofMaster, DivisionMaster, StreetMaster) {
-
     	$scope.applicationTxn = {};
     	$scope.tariffcategorymasters = TariffCategoryMaster.query();
     	$scope.users = User.query();
@@ -158,4 +157,22 @@ angular.module('watererpApp')
 			console.log($scope.applicationTxn.propertyDoc);
 		}
 		
+/*$scope.checkForm=function(value1,value2){
+if(value1=="checked"|| value2=="checked")
+	{
+	$scope.editForm.applicationTxn.deedDoc.$setValidity(
+			"ltPrevious", true);
+	return true;
+	
+	}
+
+	else
+		alert("operation failed");
+}		
+		
+		
+*/
+		
+
+	
     });

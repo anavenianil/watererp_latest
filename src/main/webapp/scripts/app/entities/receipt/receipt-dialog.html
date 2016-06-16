@@ -85,10 +85,19 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
+						<div class="form-group" 
+									ng-class="{'has-error': editForm.checkOrDdNo.$invalid && 
+                                (editForm.checkOrDdNo.$dirty || rc.editForm.attempted)}">
 							<label class="control-label" for="field_checkOrDdNo">Check/DD
 								No.</label> <input type="text" class="form-control" name="checkOrDdNo"
 								id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo"
-								ng-disabled="receipt.paymentTypes.id===1" />
+								ng-disabled="receipt.paymentTypes.id===1" required/>
+									<div
+										ng-show="(editForm.checkOrDdNo.$dirty || rc.editForm.attempted) && editForm.checkOrDdNo.$invalid">
+										<p class="help-block"
+											ng-show="editForm.checkOrDdNo.$error.required" >This field is required.</p>
+                                     </div>
+									</div>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_bankName">Bank

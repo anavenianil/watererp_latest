@@ -79,6 +79,8 @@ angular
 
 					$scope.clear = function() {
 						// $uibModalInstance.dismiss('cancel');
+						$('#saveSuccessfullyModal').modal('hide');
+						$state.go('customer.pipeSizeList');
 					};
 
 					$scope.datePickerForAssignedDate = {};
@@ -93,15 +95,15 @@ angular
 
 					
 					//approve a request
-					$scope.approve = function(customer){
-			        	//console.log(customer);
+					$scope.approve = function(customer){						
 			        	return $http.post('/api/customers/customersApprove',
 								customer).then(
 								function(response) {
 									console.log("Server response:"
-											+ JSON.stringify(response));
+											+ JSON.stringify(response));									
+									$('#saveSuccessfullyModal').modal('show');
 									//$state.go('request');
-									$state.go('customer.pipeSizeList');
+									//$state.go('customer.pipeSizeList');
 								});
 			        }
 					

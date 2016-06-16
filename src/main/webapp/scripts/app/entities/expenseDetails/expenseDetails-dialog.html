@@ -24,9 +24,11 @@
 						<div class="col-sm-4">
 							<label class="control-label" for="field_expenseDt">Expense
 								Date</label>
-							<div class="form-group">
+							<div class="form-group"
+								ng-class="{'has-error': editForm.date.$invalid && 
+         (editForm.date.$dirty || rc.editForm.attempted)}">
 								<div class='input-group' id='field_expenseDt'>
-									<input id="field_expenseDt" type="text" class="form-control"
+									<input id="field_expenseDt" type="date" class="form-control" name="date"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="expenseDetails.expenseDt"
 										is-open="datePickerForExpenseDt.status.opened" />
@@ -37,7 +39,12 @@
 										</button>
 									</span>
 								</div>
+								<div
+									ng-show="(editForm.date.$dirty || rc.editForm.attempted) && editForm.date.$invalid">
+										<p class="help-block"
+										ng-show="editForm.date.$error.date">Please enter date format.</p>
 							</div>
+						</div>
 						</div>
 						<div class="col-sm-4">
 						 <div class="form-group" ng-class="{'has-error':editForm.expenseAmt.$invalid && (editForm.expenseAmt.$dirty||rc.editForm.attempted)}"> 
@@ -48,10 +55,13 @@
 								name="expenseAmt" id="field_expenseAmt" 
 								ng-model="expenseDetails.expenseAmt" required="required" min="1" max="9999999"/>
 								
-								<div ng-show="{'has-error':editForm.expenseAmt.$invalid && (editForm.expenseAmt.$dirty||rc.editForm.attempted)}">
+								<div
+										ng-show="(editForm.expenseAmt.$dirty || rc.editForm.attempted) && editForm.expenseAmt.$invalid">
+										<p class="help-block"
+											ng-show="editForm.expenseAmt.$error.required" >This field is required.</p>
+                                   
 							 <p class="help-block" ng-show="editForm.expenseAmt.$error.number" >Enter valid amount number</p> 
-							<p class="help-block" ng-show="editForm.expenseAmt.$error.required">This field is required
-						
+							
 							
 						</div>
 						</div>
@@ -168,7 +178,7 @@
 								Date</label>
 								<div class='input-group' id='field_receiptDt'>
 									<input id="field_instrDt" placeholder="YYYY-MM-DD"
-										name="instrDt" type="text" class="form-control"
+										name="instrDt" type="date" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt" ng-required="instrEnabled"
 										is-open="datePickerForInstrDt.status.opened"
@@ -191,6 +201,8 @@
 										Instrument Date cannot be more than one day in the future.</p>
 									<p class="help-block" ng-show="editForm.instrDt.$error.veryOld">
 										Instrument Date cannot be older than six months.</p>
+										<p class="help-block" ng-show="editForm.instrDt.$error.date">
+										Please enter date format.</p>
 								</div>
 							</div>
 						</div>	

@@ -95,6 +95,8 @@ angular
 
 					$scope.clear = function() {
 						// $uibModalInstance.dismiss('cancel');
+						$('#saveSuccessfullyModal').modal('hide');
+						$state.go('customer.categoryChangeList');
 					};
 
 					$scope.datePickerForAssignedDate = {};
@@ -109,22 +111,27 @@ angular
 
 				
 					
-					$scope.save = function () {
+					/*$scope.save = function () {
 			            $scope.isSaving = true;
 			            if ($scope.customer.id != null) {
 			                Customer.update($scope.customer);
 			            } else {
 			                Customer.save($scope.customer);
 			            }
-			        };
+			        };*/
 
 			        
 					//approve a request
 					$scope.approve = function(workflowDTO){
+						$scope.isSaving = true;
 			        	return $http.post('/api/customers/customersApprove',
 								workflowDTO).then(
 								function(response) {
-									$state.go('customer.categoryChangeList');
+									console.log("Server response:"
+											+ JSON.stringify(response));
+									
+									//$state.go('customer.categoryChangeList');
+									$('#saveSuccessfullyModal').modal('show');
 								});
 			        }
 					
@@ -133,6 +140,8 @@ angular
 			        	return $http.post('/api/customers/declineRequest',
 								workflowDTO).then(
 								function(response) {
+									console.log("Server response:"
+											+ JSON.stringify(response));
 									$window.history.back();
 								});
 			        }
