@@ -552,6 +552,9 @@ public class BillingService {
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository.getTariffs(bill_details.getCan(),
 					dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
 
+			if (charges.isEmpty())
+				throw new Exception("No tariffs configured.");
+			
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
 			bfd.setId(null);
 
