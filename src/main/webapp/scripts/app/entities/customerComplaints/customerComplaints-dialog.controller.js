@@ -77,6 +77,9 @@ angular
 						$scope.customerComplaints.id = result.id;
 						$scope.isSaving = false;
 						$('#saveSuccessfullyModal').modal('show');
+						$scope.rc.editForm.attempted = false;
+						$scope.editForm.$setPristine();
+						$scope.clear();
 						//$state.go('customerComplaints');
 					};
 

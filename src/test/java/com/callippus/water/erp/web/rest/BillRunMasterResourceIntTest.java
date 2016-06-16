@@ -15,6 +15,7 @@ import com.callippus.water.erp.repository.PaymentTypesRepository;
 import com.callippus.water.erp.service.BillingService;
 import com.callippus.water.erp.service.OnlinePaymentService;
 
+import org.hamcrest.CoreMatchers;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -78,6 +79,14 @@ public class BillRunMasterResourceIntTest {
 	private static final Integer UPDATED_FAILED = 2;
 	private static final String DEFAULT_STATUS = "AAAAA";
 	private static final String UPDATED_STATUS = "BBBBB";
+
+	// Expected Responses after Run 0
+	static final Map<String, String> expectedResponses0 = Arrays
+			.stream(new Object[][] { { "XXXXXXXX", "Customer not found in CUST_DETAILS" },
+					{ "04060002", "Bill Date Older than 1 year" }, 
+					{ "04060003", "No tariffs configured" },
+					{ "04060004", "Failed with error:INVALID_CATEGORY" }})
+			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (String) kv[1]));
 
 	// Expected Units, Water Cess, Rent, Lock charges after Run 1
 	static final Map<String, Float[]> expectedCharges = Arrays
@@ -359,14 +368,11 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
-
-				// if(brd.getCan().equals("XXXXXXXX"))
-				// Assert.assertNull("Bill (BFD) Should Not Exist for CAN:" +
-				// brd.getCan(), bfd);
-				// else
-				// Assert.assertNotNull("Bill (BFD) Should Exist for CAN:" +
-				// brd.getCan(), bfd);
-
+				
+				if (expectedResponses0.get(brd.getCan()) != null){
+					Assert.assertThat("Run0: Expected message not matched for CAN:" + brd.getCan(), brd.getRemarks(),
+							CoreMatchers.containsString(expectedResponses0.get(brd.getCan())));
+				}
 			}
 
 		} catch (Exception e) {
@@ -378,7 +384,7 @@ public class BillRunMasterResourceIntTest {
 	@Transactional
 	public void createBillRunMaster() throws Exception {
 		initTest();
-		
+
 		log.debug("###################################################################################");
 		log.debug("Starting run.");
 		billRunMaster.setArea(null);
@@ -397,13 +403,10 @@ public class BillRunMasterResourceIntTest {
 					.andExpect(status().isOk()).andReturn();
 
 			JSONObject content = new JSONObject(result.getResponse().getContentAsString());
-			Assert.assertEquals("Success Records for Run1:", content.get("success"),16);
-			Assert.assertEquals("Failed Records for Run1:", content.get("failed"),0);
-			Assert.assertEquals("Status for Run1:", content.get("status"),"Completed Successfully");
+			Assert.assertEquals("Success Records for Run1:", 16, content.get("success"));
+			Assert.assertEquals("Failed Records for Run1:", 0, content.get("failed"));
+			Assert.assertEquals("Status for Run1:", "Completed Successfully", content.get("status") );
 
-			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
-					"COMMITTED");
-			
 			Long id = content.getLong("id");
 
 			List<BillRunDetails> brdList = billRunDetailsRepository.findByBillRunId(id);
@@ -490,9 +493,9 @@ public class BillRunMasterResourceIntTest {
 					.andExpect(status().isOk()).andReturn();
 
 			content = new JSONObject(result.getResponse().getContentAsString());
-			Assert.assertEquals("Success Records for Run2:", content.get("success"),16);
-			Assert.assertEquals("Failed Records for Run2:", content.get("failed"),0);
-			Assert.assertEquals("Status for Run2:", content.get("status"),"Completed Successfully");
+			Assert.assertEquals("Success Records for Run2:", 16, content.get("success"));
+			Assert.assertEquals("Failed Records for Run2:", 0, content.get("failed"));
+			Assert.assertEquals("Status for Run2:", "Completed Successfully", content.get("status") );
 
 			id = content.getLong("id");
 
@@ -584,9 +587,9 @@ public class BillRunMasterResourceIntTest {
 					.andExpect(status().isOk()).andReturn();
 
 			content = new JSONObject(result.getResponse().getContentAsString());
-			Assert.assertEquals("Success Records for Run3:", content.get("success"),16);
-			Assert.assertEquals("Failed Records for Run3:", content.get("failed"),0);
-			Assert.assertEquals("Status for Run3:", content.get("status"),"Completed Successfully");
+			Assert.assertEquals("Success Records for Run3:", 15, content.get("success"));
+			Assert.assertEquals("Failed Records for Run3:", 0, content.get("failed"));
+			Assert.assertEquals("Status for Run3:", "Completed Successfully", content.get("status"));
 
 			id = content.getLong("id");
 
@@ -685,9 +688,9 @@ public class BillRunMasterResourceIntTest {
 					.andExpect(status().isOk()).andReturn();
 
 			content = new JSONObject(result.getResponse().getContentAsString());
-			Assert.assertEquals("Success Records for Run4:", content.get("success"),16);
-			Assert.assertEquals("Failed Records for Run4:", content.get("failed"),0);
-			Assert.assertEquals("Status for Run4:", content.get("status"),"Completed Successfully");
+			Assert.assertEquals("Success Records for Run4:", 16, content.get("success"));
+			Assert.assertEquals("Failed Records for Run4:", 0, content.get("failed"));
+			Assert.assertEquals("Status for Run4:", "Completed Successfully", content.get("status") );
 
 			id = content.getLong("id");
 
@@ -738,7 +741,10 @@ public class BillRunMasterResourceIntTest {
 					.andExpect(status().isOk()).andReturn();
 
 			content = new JSONObject(result.getResponse().getContentAsString());
-
+			Assert.assertEquals("Success Records for Run5:", 5, content.get("success"));
+			Assert.assertEquals("Failed Records for Run5:", 0, content.get("failed"));
+			Assert.assertEquals("Status for Run5:", "Completed Successfully", content.get("status") );
+			
 			id = content.getLong("id");
 
 			log.debug("###################################################################################");
@@ -751,13 +757,6 @@ public class BillRunMasterResourceIntTest {
 					.contentType(TestUtil.APPLICATION_JSON_UTF8).content(TestUtil.convertObjectToJsonBytes(brm)))
 					.andExpect(status().isOk()).andReturn();
 
-			content = new JSONObject(result.getResponse().getContentAsString());
-			Assert.assertEquals("Success Records for Run5:", content.get("success"),16);
-			Assert.assertEquals("Failed Records for Run5:", content.get("failed"),0);
-			Assert.assertEquals("Status for Run5:", content.get("status"),"Completed Successfully");
-
-			Assert.assertEquals("Commit status for BillRun:" + content.getString("id"), content.getString("status"),
-					"COMMITTED");
 
 			brdList = billRunDetailsRepository.findByBillRunId(id);
 
