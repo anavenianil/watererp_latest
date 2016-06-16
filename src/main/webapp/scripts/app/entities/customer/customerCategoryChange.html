@@ -65,8 +65,6 @@
 											<p class="help-block"
 												ng-show="editForm.consName.$error.pattern">Enter text
 												only .</p>
-
-
 										</div>
 									</div>
 								</div>
@@ -182,7 +180,8 @@
 											ng-disabled="customer.presentCategory.id===1" required />
 										<div ng-pattern="/[a-zA-Z]+/" ng-required="instrEnabled"
 											ng-disabled="!instrEnabled"
-											ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && instrEnabled && editForm.organizationName.$invalid">
+											ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && 
+											instrEnabled && editForm.organizationName.$invalid">
 
 											<p class="help-block"
 												ng-show="editForm.organizationName.$error.required">This
@@ -224,7 +223,7 @@
 								<div class="col-sm-4">
 									<div class="form-group"
 										ng-class="{'has-error': editForm.presentReading.$invalid && 
-         (editForm.presentReading.$dirty || rc.editForm.attempted)}">
+										(editForm.presentReading.$dirty || rc.editForm.attempted)}">
 										<label class="control-label" for="field_presentReading">Present
 											Reading</label> <input type="text" class="form-control"
 											ng-change="checkReading( customer.presentReading,custDetails.prevReading)"
@@ -264,7 +263,7 @@
 										Date</label>
 									<div class="form-group"
 										ng-class="{'has-error': editForm.requestedDate.$invalid && 
-         (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
+										(editForm.requestedDate.$dirty || rc.editForm.attempted)}">
 										<div class='input-group date' id='field_requestedDate'>
 											<input id="field_requestedDate" type="text"
 												name="requestedDate" ng-type="date" class="form-control"
@@ -334,7 +333,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal"
-							ng-click="clear()">
+							ng-click="confirm()">
 							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
 						</button>
 					</div>

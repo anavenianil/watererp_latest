@@ -94,7 +94,7 @@ angular
 					$scope.dtmax = new Date();
 
 					$scope.clear = function() {
-						// $uibModalInstance.dismiss('cancel');
+						
 						$('#saveSuccessfullyModal').modal('hide');
 						$state.go('customer.categoryChangeList');
 					};

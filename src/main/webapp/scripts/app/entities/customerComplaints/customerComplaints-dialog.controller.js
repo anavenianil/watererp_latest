@@ -60,6 +60,7 @@ angular
 										function(result) {
 											$scope.custDetails = result;
 											$scope.customerComplaints.custDetails = {};
+											$scope.customerComplaint = {};
 											$scope.customerComplaints.custDetails.consName = $scope.custDetails.consName;
 											/*var arr1 = $scope.custDetails.secName.split(" ");
 											$scope.customerComplaints.custDetails.secName = arr1[0];

@@ -33,7 +33,7 @@ angular
 						$scope.load($stateParams.id);
 					}
 
-					$scope.clear = function() {
+					$scope.confirm = function() {
 						// $uibModalInstance.dismiss('cancel');
 						$('#saveSuccessfullyModal').modal('hide');
 						$state.go('customer.categoryChangeList');
@@ -124,6 +124,7 @@ angular
 						console.log($item);
 						var arr = $item.split("-");
 						$scope.custDetails = {};
+						$scope.customer = {};
 						$scope.custDetails.can = arr[0].trim();
 						$scope.custDetails.name = arr[1];
 						$scope.custDetails.address = arr[2];
