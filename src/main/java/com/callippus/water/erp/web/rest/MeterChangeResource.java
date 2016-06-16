@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
-import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.MeterDetails;
-import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.MeterChangeRepository;
@@ -223,7 +220,16 @@ public class MeterChangeResource {
 			@RequestBody MeterChange meterChange) throws URISyntaxException {
 		log.debug("REST request to approve MeterChange : {}", meterChange);
 		
-		if(meterChange.getStatus()==1){
+		try {
+			workflowService.setRemarks(meterChange.getRemarks());
+			workflowService.setApprovedDate(ZonedDateTime.now());
+			workflowService.getUserDetails();
+			meterChangeWorkflowService
+					.approvedMeterChangeRequest(meterChange);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			MeterDetails prevMeter = meterChange.getPrevMeterNo();
         	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));//Status would be according to meter(burnt or stuck)
         	meterDetailsRepository.save(prevMeter);
@@ -241,20 +247,16 @@ public class MeterChangeResource {
 	        custMeterMapping.setCustDetails(meterChange.getCustDetails());
 	        custMeterMapping.setFromDate(meterChange.getApprovedDate());
 	        custMeterMappingRepository.save(custMeterMapping);
-	        CustDetails custDetails = meterChange.getCustDetails();
+	        /**
+	         * For saving details in custDetails.
+	         * Code is commented not to save new meter no and reading 
+	         */
+	        /*CustDetails custDetails = meterChange.getCustDetails();
 	        custDetails.setMeterDetails(meterChange.getNewMeterNo());
 	        custDetails.setPrevReading(meterChange.getNewMeterReading());
-	        custDetailsRepository.save(custDetails);
+	        custDetailsRepository.save(custDetails);*/
 		}
-		try {
-			workflowService.setRemarks(meterChange.getRemarks());
-			workflowService.setApprovedDate(ZonedDateTime.now());
-			workflowService.getUserDetails();
-			meterChangeWorkflowService
-					.approvedMeterChangeRequest(meterChange);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		
 		if(meterChange.getStatus() >= 0){
         	meterChange.setStatus(meterChange.getStatus()+1);
@@ -289,7 +291,7 @@ public class MeterChangeResource {
         	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
         	meterDetailsRepository.save(meterDetails);
     	}
-    	meterChange.setStatus(3);
+    	meterChange.setStatus(2);
     	meterChange.setNewMeterNo(null);
     	meterChange.setNewMeterReading(null);
     	meterChangeRepository.save(meterChange);
@@ -299,5 +301,26 @@ public class MeterChangeResource {
 		return ResponseEntity.created(new URI("/api/meterChanges/declineRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("meterChange", ""))
 				.body(null);
+	}
+    
+    
+    /**
+     * Get Active can to change its details
+     */
+    @RequestMapping(value = "/meterChanges/getActiveCan/{can}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<MeterChange> getAtiveCan(
+			@PathVariable String can)
+			throws Exception {
+    	log.debug("REST request to getActiveCan() for MeterChange  : {}", can);
+		
+    	MeterChange meterChange = meterChangeRepository.findPending(can);
+
+    	return Optional.ofNullable(meterChange)
+				.map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
 	}
 }
