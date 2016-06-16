@@ -10,6 +10,7 @@ import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.enumeration.BillingStatus;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.domain.enumeration.TxnStatus;
 import com.callippus.water.erp.mappings.BillMapper;
 import com.callippus.water.erp.repository.AdjustmentsRepository;
@@ -209,11 +210,30 @@ public class BillingService {
 		return br;
 	}
 
+	public void process_error(String message, String can)
+	{
+		log.debug(message + ":" + can);
+
+		brd.setToDt(ZonedDateTime.now());
+		brd.setStatus(0);
+		brd.setRemarks(
+				"Failed with error:" + message +  ":" + can);
+		billRunDetailsRepository.save(brd);
+
+		br.setFailed(++failedRecords);
+		billRunMasterRepository.save(br);	
+	}
+	
 	public void process_bill(BillDetails bill_details) {
 		if (bill_details == null)
 			return;
 
 		try {
+			if (bill_details.getBillDate().isBefore(LocalDate.now().minusYears(1))) {
+				process_error("Bill Date Older than 1 year for CAN", bill_details.getCan());
+				return;
+			}
+			
 			initBill(bill_details.getCan());
 
 			brd.setBillDetails(bill_details);
@@ -222,17 +242,12 @@ public class BillingService {
 			CustDetails customer = custDetailsRepository.findByCan(bill_details.getCan());
 
 			if (customer == null) {
-				log.debug("Customer not found in CUST_DETAILS for CAN:" + bill_details.getCan());
-
-				brd.setToDt(ZonedDateTime.now());
-				brd.setStatus(0);
-				brd.setRemarks(
-						"Failed with error:" + "Customer not found in CUST_DETAILS for CAN:" + bill_details.getCan());
-				billRunDetailsRepository.save(brd);
-
-				br.setFailed(++failedRecords);
-				billRunMasterRepository.save(br);
-
+				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
+				return;
+			}
+			else if(customer.getStatus() != CustStatus.ACTIVE)
+			{
+				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
 				return;
 			}
 
@@ -260,17 +275,8 @@ public class BillingService {
 				return;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			log.debug(CPSUtils.stackTraceToString(e));
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			e.printStackTrace();			
+			process_error(CPSUtils.getStackLimited("", e, 150),brd.getCan());			
 			return;
 		}
 	}
@@ -474,8 +480,6 @@ public class BillingService {
 
 		meterChange = meterChangeRepository.findByCanAndStatus(can, MeterChangeStatus.APPROVED.getValue());
 
-		log.debug("This is the meterChange record:" + meterChange);
-		
 		brd = new BillRunDetails();
 		brd.setCan(can);
 		brd.setFromDt(ZonedDateTime.now());
@@ -496,6 +500,13 @@ public class BillingService {
 	public void saveBillDetails(CustDetails customer) {
 		// Insert bill_details record for each run
 		try {
+			
+			if(customer.getStatus() != CustStatus.ACTIVE)
+			{
+				process_error("Customer not found in CUST_DETAILS for CAN",customer.getCan());
+				return;
+			}
+			
 			initBill(customer.getCan()); // Is inited again in process_bill, but
 											// right now there is no better
 											// solution
@@ -532,16 +543,7 @@ public class BillingService {
 			process_bill(bill_details);
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.debug(CPSUtils.stackTraceToString(e));
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			process_error(CPSUtils.getStackLimited("", e, 150),brd.getCan());	
 			return;
 		}
 
@@ -635,16 +637,7 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.debug(CPSUtils.stackTraceToString(e));
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			process_error(CPSUtils.getStackLimited("", e, 150),brd.getCan());	
 			return;
 		}
 
@@ -772,16 +765,7 @@ public class BillingService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.debug(CPSUtils.stackTraceToString(e));
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			process_error(CPSUtils.getStackLimited("", e, 150),brd.getCan());	
 			return;
 		}
 	}
@@ -937,16 +921,7 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.debug(CPSUtils.stackTraceToString(e));
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			process_error(CPSUtils.getStackLimited("", e, 150),brd.getCan());	
 			return;
 		}
 	}
@@ -957,17 +932,7 @@ public class BillingService {
 			return;
 
 		if (billRunDetailsRepository.findByCanAndToMonth(bill_details.getCan(), bill_details.getToMonth()) != null) {
-			log.debug("Unable to process customer:" + customer.getCan() + ", getCustInfo returned::"
-					+ CustValidation.ALREADY_BILLED.name());
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:" + CustValidation.ALREADY_BILLED.name());
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			process_error("Failed with error:" + CustValidation.ALREADY_BILLED.name(),bill_details.getCan());	
 			return;
 		}
 
@@ -1027,16 +992,7 @@ public class BillingService {
 			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.debug(CPSUtils.stackTraceToString(e));
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			process_error(CPSUtils.getStackLimited("", e, 150),brd.getCan());	
 			return;
 		}
 	}
@@ -1078,16 +1034,7 @@ public class BillingService {
 
 		if (retVal != CustValidation.SUCCESS) {
 			// Unable to process customer
-			log.debug("Unable to process customer:" + customer.getId() + ", getCustInfo returned::" + retVal.name());
-
-			brd.setToDt(ZonedDateTime.now());
-			brd.setStatus(BrdStatus.FAILED.getValue());
-			brd.setRemarks("Failed with error:" + retVal.name());
-			billRunDetailsRepository.save(brd);
-
-			br.setFailed(++failedRecords);
-			billRunMasterRepository.save(br);
-
+			process_error("Failed with error:" + retVal.name(),brd.getCan());	
 			return false;
 		}
 
