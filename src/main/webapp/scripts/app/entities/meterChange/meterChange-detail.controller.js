@@ -126,7 +126,6 @@ angular.module('watererpApp')
 					function(response) {
 						console.log("Server response:"
 								+ JSON.stringify(response));
-						alert("approved");
 						 $('#saveSuccessfullyModal').modal('show');
 						//$state.go('meterChange');
 					});
