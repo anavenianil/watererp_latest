@@ -109,13 +109,15 @@ angular
 						$scope.customer.can = can;
 						return $http.post('/api/customers/getActiveCan',
 								$scope.customer).then(
-								function(result) {
-									//$scope.customer=response;
-									/*$scope.customer.prevOrganizationName = result.organizationName;
-									$scope.customer.prevDesignation = $scope.customer.designation;*/
+								function(response) {
 
+									$scope.custDet = [];
+									for (var i = 0; i < response.data.length; i++) {
+										$scope.txnList.push(response.data[i]);
+									}
+								
 									console.log("Server response:"
-											+ JSON.stringify(result));
+											+ JSON.stringify(response));
 								});
 					}
 
@@ -170,9 +172,6 @@ angular
 								});
 					}
 
-					if ($stateParams.requestId != null) {
-						$scope.getWorkflowTxnDetails($stateParams.requestId);
-					}
 
 					$scope.checkReading = function(prvReading, newReading) {
 						if (prvReading >= newReading) {

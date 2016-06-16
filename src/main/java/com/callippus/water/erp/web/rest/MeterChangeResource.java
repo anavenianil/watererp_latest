@@ -229,6 +229,9 @@ public class MeterChangeResource {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(meterChange.getStatus() >= 0){
+        	meterChange.setStatus(meterChange.getStatus()+1);
+        }
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			MeterDetails prevMeter = meterChange.getPrevMeterNo();
         	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));//Status would be according to meter(burnt or stuck)
@@ -255,12 +258,9 @@ public class MeterChangeResource {
 	        custDetails.setMeterDetails(meterChange.getNewMeterNo());
 	        custDetails.setPrevReading(meterChange.getNewMeterReading());
 	        custDetailsRepository.save(custDetails);*/
+	        meterChange.setStatus(CPSConstants.METERCHANGED);
 		}
-		
-		
-		if(meterChange.getStatus() >= 0){
-        	meterChange.setStatus(meterChange.getStatus()+1);
-        }
+
 		meterChangeRepository.save(meterChange);
 
 		return ResponseEntity.created(new URI("/api/meterChanges/meterChangeApprove/"))

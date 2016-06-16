@@ -98,11 +98,10 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
                 if($scope.custDetails.arrears > 0){
                 	$scope.isSaving = true;
                 	$scope.arrearsMessage = "Clear Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
-                	alert("Clear Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)");
                 }
                 else{
-                	$scope.arrearsMessage = "No Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
                 	$scope.isSaving = false;
+                	$scope.arrearsMessage = null;
                 }
             });
         };
