@@ -145,6 +145,7 @@ public class CustomerResource {
 		else 
 		{
 			page = customerRepository.findAll(pageable);
+			
 		}
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
 				page, "/api/customers");
