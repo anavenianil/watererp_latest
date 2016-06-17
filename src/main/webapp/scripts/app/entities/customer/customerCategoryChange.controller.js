@@ -107,17 +107,29 @@ angular
 					//to get active can
 					$scope.getActiveCAN = function(can) {
 						$scope.customer.can = can;
+						$scope.customer.changeType = "CONNECTIONCATEGORY";
 						return $http.post('/api/customers/getActiveCan',
 								$scope.customer).then(
 								function(response) {
-
-									$scope.custDet = [];
-									for (var i = 0; i < response.data.length; i++) {
-										$scope.txnList.push(response.data[i]);
+									$scope.custDetails = response.data.custDetails;
+									$scope.message = null;
+									if(response.data.applicationTxn != null){
+										$scope.customer.tariffCategoryMaster = response.data.applicationTxn.tariffCategoryMaster;
+										$scope.customer.prevOrganizationName = response.data.applicationTxn.organizationName;
+										$scope.customer.prevDesignation = response.data.applicationTxn.designation;
 									}
-								
-									console.log("Server response:"
-											+ JSON.stringify(response));
+									if(response.data.customer != null){
+										if(response.data.customer.status == 3){
+											$scope.customer.tariffCategoryMaster = response.data.customer.presentCategory;
+											$scope.customer.prevOrganizationName = response.data.customer.organizationName;
+											$scope.customer.prevDesignation = response.data.customer.designation;
+										}
+										else{
+											$scope.isSaving = true;
+											$scope.message = "Category change request already submitted for the the CAN: "+can;
+										}
+									}
+									console.log("Server response:"+ JSON.stringify(response.data));
 								});
 					}
 
@@ -130,9 +142,9 @@ angular
 						$scope.custDetails.can = arr[0].trim();
 						$scope.custDetails.name = arr[1];
 						$scope.custDetails.address = arr[2];
-						$scope.getCustDetails($scope.custDetails.can);
-						$scope.getApplicationTxn($scope.custDetails.can);
-						//$scope.getActiveCAN($scope.custDetails.can);
+						//$scope.getCustDetails($scope.custDetails.can);
+						//$scope.getApplicationTxn($scope.custDetails.can);
+						$scope.getActiveCAN($scope.custDetails.can);
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
 						$scope.referenceNo = $scope.custDetails.can;
@@ -151,6 +163,7 @@ angular
 						$scope.isSaving = false;
 					};
 					$scope.save = function() {
+						$scope.customer.changeType = "CONNECTIONCATEGORY";
 						$scope.isSaving = true;
 						if ($scope.customer.id != null) {
 							Customer.update($scope.customer, onSaveSuccess,

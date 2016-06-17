@@ -282,10 +282,7 @@ public class CustomerResource {
     	workflowDTO.setCustDetails(custDetailsRepository.findByCanForUpdate(customer.getCan()));
 
     	return Optional.ofNullable(workflowDTO)
-				.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
+				.map(result -> new ResponseEntity<>(workflowDTO, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-		/*return ResponseEntity.created(new URI("/api/customers/getActiveCan/"))
-				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))
-				.body(null);*/
 	}
 }
