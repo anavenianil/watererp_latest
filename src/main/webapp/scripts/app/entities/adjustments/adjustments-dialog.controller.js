@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('AdjustmentsDialogController',
-        function($scope, $stateParams,  Adjustments, CustDetails, BillFullDetails, TransactionTypeMaster, User, ComplaintTypeMaster, $state) {
+        function($scope,$http, $stateParams,  Adjustments, CustDetails, BillFullDetails, TransactionTypeMaster, User, ComplaintTypeMaster, $state) {
 
         $scope.adjustments = {};
         $scope.custdetailss = CustDetails.query();
@@ -19,6 +19,34 @@ angular.module('watererpApp').controller('AdjustmentsDialogController',
         if($stateParams.id!=null){
         	$scope.load($stateParams.id)
         }
+       
+        //to search CAN
+        $scope.getLocation = function(val) {
+			$scope.isValidCust = false;
+			return $http.get('api/custDetailss/searchCAN/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+
+				return res;
+			});
+		}
+        //when selected searched CAN in DropDown
+        $scope.onSelect = function($item, $model, $label) {
+			var arr = $item.split("-");
+			$scope.adjustments = {};
+			$scope.adjustments.can = arr[0].trim();
+			//$scope.adjustments.name = arr[1];
+			//$scope.adjustments.address = arr[2];
+			$scope.adjustInfo = ""; 
+			$scope.isValidCust = true;
+		};
+        
         
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:adjustmentsUpdate', result);
