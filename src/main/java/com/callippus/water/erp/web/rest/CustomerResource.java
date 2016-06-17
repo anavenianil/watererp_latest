@@ -30,6 +30,7 @@ import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
@@ -62,6 +63,10 @@ public class CustomerResource {
 	
 	@Inject
 	private ReceiptRepository receiptRepository;
+	
+	@Inject
+	private ApplicationTxnRepository applicationTxnRepository;
+	
 	/**
 	 * POST /customers -> Create a new customer.
 	 */
@@ -262,16 +267,22 @@ public class CustomerResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<Customer> getAtiveCan(
+	public ResponseEntity<WorkflowDTO> getAtiveCan(
 			@RequestBody Customer customer)
 			throws Exception {
     	log.debug("REST request to getActiveCan() for Customer  : {}", customer);
-		
-    	Customer newCustomer =customerRepository.findByChangeTypeAndCan(customer.getChangeType(), customer.getCan());
-    	System.out.println(newCustomer);
+		WorkflowDTO workflowDTO = new WorkflowDTO();
+    	Customer newCustomer = customerRepository.findByChangeTypeAndCan(customer.getChangeType(), customer.getCan());
+    	if(newCustomer==null){
+    		workflowDTO.setApplicationTxn(applicationTxnRepository.findByCan(customer.getCan()));
+    	}
+    	else{
+    		workflowDTO.setCustomer(newCustomer);
+    	}
+    	workflowDTO.setCustDetails(custDetailsRepository.findByCanForUpdate(customer.getCan()));
 
-    	return Optional.ofNullable(customer)
-				.map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+    	return Optional.ofNullable(workflowDTO)
+				.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 		/*return ResponseEntity.created(new URI("/api/customers/getActiveCan/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))

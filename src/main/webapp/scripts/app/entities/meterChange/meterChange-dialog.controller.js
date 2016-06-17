@@ -2,12 +2,16 @@
 
 angular.module('watererpApp').controller('MeterChangeDialogController',
         function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN, ParseLinks,
-        		GetMeterDetails, Principal) {
+        		GetMeterDetails, Principal, GetActiveCAN) {
 
         $scope.meterChange = {};
         $scope.custdetailss = CustDetails.query();
         //$scope.meterdetailss = MeterDetails.query();
         $scope.users = User.query();
+        $scope.orgRole = {};
+		Principal.getOrgRole().then(function(response) {
+			$scope.orgRole = response;
+		});
 
         $scope.meterChangeStatuss = [{"id":1,"status":"Meter Stuck"},{"id":2,"status":"Meter Break"}];
         
@@ -36,11 +40,9 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:meterChangeUpdate', result);
-            //$uibModalInstance.close(result);
             $scope.isSaving = false;
             $scope.meterChange.id  = result.id;
             $('#saveSuccessfullyModal').modal('show');
-            //$state.go('meterChange');
         };
 
         var onSaveError = function (result) {
@@ -57,8 +59,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         };
 
         $scope.clear = function() {
-            //$uibModalInstance.dismiss('cancel');
-        	 $('#saveSuccessfullyModal').modal('hide');
+        	$('#saveSuccessfullyModal').modal('hide');
         	$state.go('meterChange');
         };
         $scope.datePickerForApprovedDate = {};
@@ -87,15 +88,6 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			});
 		}
         
-        
-        /*$scope.getMeterDetails = function(meterId) {
-        	$scope.prevMeterDetailss = [];
-			GetMeterDetails.findByMeterId(meterId).then(
-							function(result) {
-								$scope.meterChange.prevMeterNo = result;
-								$scope.prevMeterDetailss.push(result);
-							});
-		};*/
 		$scope.prevMeterDetailss = [];
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
@@ -109,6 +101,26 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
             });
         };
         
+      //to get active can
+		$scope.getActiveCAN = function(can) {
+			GetActiveCAN.findByCan({
+				can : can
+			}).then(function(result) {
+				if (result != null && result !== '') {
+					$scope.isSaving = true;
+					$scope.message = "Meter change request already submitted for the the CAN: "+can;
+				}
+				else{
+					$scope.getCustDetails(can);
+					$scope.message = null;
+					$scope.isSaving = false;
+				}
+					
+			});
+		}
+		
+		
+        
         
         $scope.onSelect = function($item, $model, $label) {
 			console.log($item);
@@ -117,7 +129,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			$scope.meterChange.can = arr[0].trim();
 			$scope.meterChange.name = arr[1];
 			$scope.meterChange.address = arr[2];
-			$scope.getCustDetails($scope.meterChange.can);
+			$scope.getActiveCAN($scope.meterChange.can);
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
 		};
@@ -134,34 +146,8 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 					ret = true;
 				break;
 			case 1:
-				if ($scope.orgRole.orgRoleName === 'Technical Zonal Supervisor')
+				if ($scope.orgRole.id === 15)
 					ret = true;
-				break;
-			case 2:
-				if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
-					ret = true;
-				break;
-			case 3:
-				if ($scope.orgRole.orgRoleName === 'Technical Manager')
-					ret = true;
-				break;
-			case 4:
-				if ($scope.orgRole.orgRoleName === 'Assistant Accountant(Revenue)')
-					ret = true;
-				break;
-			case 5:
-				if ($scope.orgRole.orgRoleName === 'Stores & Supplies Officer')
-					ret = true;
-				break;
-			case 6:
-				if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
-					ret = true;
-				break;
-			case 7:
-				if ($scope.orgRole.orgRoleName === 'Billing Officer')
-					ret = true;
-				break;
-			case 8:
 				break;
 			default:
 				break;
@@ -184,5 +170,4 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 				return false;
 				}
 		}
-        
 });

@@ -27,4 +27,20 @@ angular.module('watererpApp')
                 }
             }
         });
-    });
+    })
+    /*.factory('GetActiveCAN', function ($resource, DateUtils) {
+    	return $resource('api/meterChanges/getActiveCan/:can', {}, {
+    		'query': { method: 'GET', isArray: true}
+        });
+    })*/
+    .factory('GetActiveCAN', function($http) {
+			return {
+				findByCan : function(can) {
+					return $http.get('api/meterChanges/getActiveCan/' + can.can).then(function successCallback(response) {
+						return response.data;
+					}, function errorCallback(response) {
+							return "error";
+					});
+				}
+			};
+		});
