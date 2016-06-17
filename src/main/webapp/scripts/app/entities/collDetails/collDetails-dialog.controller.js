@@ -108,7 +108,11 @@ angular.module('watererpApp').controller(
 				return false;
 
 			}
-			
+			$scope.refresh = function() {
+				$scope.reset();
+				$scope.clear();
+			};
+		
 
 			$scope.onSelect = function($item, $model, $label) {
 				var arr = $item.split("-");
@@ -123,6 +127,9 @@ angular.module('watererpApp').controller(
 				$scope.getCustDetails(arr[0].trim());
 				$scope.custInfo = "";
 				$scope.isValidCust = true;
+				//$scope.clear();
+				$scope.rc.editForm.attempted=false;
+				$scope.editForm.$setPristine();
 			};
 			$scope.validateInstrDt = function() {
 				var today = moment();
@@ -190,7 +197,11 @@ angular.module('watererpApp').controller(
 				}
 			}
 			
-			
+			$scope.clear=function()
+			{
+				$scope.collDetails={receiptAmt:null , paymentTypes:null , instrNo:null , instrumentIssuerMaster:null , field_instrDt:null
+						};
+			};
 			
 			
 
@@ -242,7 +253,7 @@ angular.module('watererpApp').controller(
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;
-					$scope.collDetails.instrIssuer = null;
+					$scope.collDetails.instrumentIssuerMaster = null;
 				} else
 					$scope.instrEnabled = true;
 			}

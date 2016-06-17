@@ -51,6 +51,9 @@ angular
 						$scope.collDetails.address = arr[2];
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
+						$scope.clear();
+						$scope.rc.editForm.attempted=false;
+						$scope.editForm.$setPristine();
 
 						$scope.clear();
 						CustDetailsService
@@ -80,7 +83,7 @@ angular
 						$('#saveSuccessfullyModal').modal('show');
 						$scope.rc.editForm.attempted = false;
 						$scope.editForm.$setPristine();
-						$scope.clear();
+						//$scope.clear();
 						//$state.go('customerComplaints');
 					};
 

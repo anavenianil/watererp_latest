@@ -76,6 +76,11 @@ angular
 						$scope.reset();
 						$scope.clear();
 					};
+					$scope.clear=function()
+					{
+						$scope.billDetails={currentBillType:null , metReadingDt:null , presentReading:null , collectionTypeMaster:null
+								};
+					};
 
 					$scope.getLocation = function(val) {
 						$scope.isValidCust = false;
@@ -113,6 +118,9 @@ angular
 						$scope.custInfo = "";
 						$scope.getCustDetails($scope.billDetails.can);
 						$scope.isValidCust = true;
+						$scope.clear();
+						$scope.rc.editForm.attempted=false;
+						$scope.editForm.$setPristine();
 					};
 					
 					$scope.datePickerForMetReadingDt = {};
