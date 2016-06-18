@@ -23,14 +23,9 @@ angular.module('watererpApp').controller(
 			}
 
 			//to search CAN
-			$scope.getLocation = function(val) {
+			$scope.getCustInfo = function(val) {
 				$scope.isValidCust = false;
-				return $http.get('api/custDetailss/searchCAN/' + val, {
-					params : {
-						address : val,
-						sensor : false
-					}
-				}).then(function(response) {
+				return $http.get('api/custDetailss/searchCAN/' + val).then(function(response) {
 					var res = response.data.map(function(item) {
 						return item;
 					});
@@ -43,8 +38,9 @@ angular.module('watererpApp').controller(
 				var arr = $item.split("-");
 				$scope.adjustments = {};
 				$scope.adjustments.can = arr[0].trim();
-				//$scope.adjustments.name = arr[1];
-				//$scope.adjustments.address = arr[2];
+				$scope.adjustments.name = arr[1];
+				$scope.adjustments.address = arr[2];
+				$scope.adjustments.custInfo = arr[0] + " | " + arr[1];
 				$scope.adjustInfo = "";
 				$scope.isValidCust = true;
 

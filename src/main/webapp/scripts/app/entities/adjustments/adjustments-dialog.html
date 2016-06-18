@@ -24,7 +24,7 @@
 								<input type="text" ng-model="adjustInfo"
 									typeahead-min-length="3"
 									placeholder="Search CAN or Name or Address (Min 3 chars)"
-									uib-typeahead="adjustInfo for adjustInfo in getLocation($viewValue)"
+									uib-typeahead="adjustInfo for adjustInfo in getCustInfo($viewValue)"
 									typeahead-loading="loadingCANs"
 									typeahead-on-select='onSelect($item, $model, $label)'
 									typeahead-no-results="noResults" class="form-control">
@@ -35,49 +35,14 @@
 								</div>
 							</div>
 						</div>
-						<br>
-						<hr>
 						<div class="row">
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.can.$invalid && 
-         (editForm.can.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_can">Can</label> <input
-										type="text" class="form-control" name="can" id="field_can"
-										ng-model="adjustments.can" required disabled />
-									<div
-										ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
-										<p class="help-block" ng-show="editForm.can.$error.required">This
-											field is required.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.amount.$invalid && 
-         (editForm.amount.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_amount">Amount</label>
-									<input type="number" class="form-control" name="amount"
-										id="field_amount" ng-model="adjustments.amount" />
-									<div
-										ng-show="(editForm.amount.$dirty || rc.editForm.attempted) && editForm.amount.$invalid">
-										<p class="help-block" ng-show="editForm.amount.$error.number">Please
-											enter valid numbers .</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<label for="field_user">User</label> <select
-									class="form-control" id="field_user" name="user"
-									ng-model="adjustments.user"
-									ng-options="user as user.firstName +' '+user.lastName for user in users track by user.firstName">
-									<option value=""></option>
-								</select>
-							</div>
+								<h4>{{adjustments.custInfo}}<h5>{{adjustments.address}}</h5></h4>
+								
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
-								<label class="control-label" for="field_txnTime">Txn Time</label>
+								<label class="control-label" for="field_txnTime">Txn
+									Time</label>
 								<div class="form-group"
 									ng-class="{'has-error': editForm.txnTime.$invalid && 
          							(editForm.txnTime.$dirty || rc.editForm.attempted)}">
@@ -106,44 +71,42 @@
 									</div>
 								</div>
 							</div>
+
+
 							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.status.$invalid && 
-         							(editForm.status.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_status">Status</label>
-									<select class="form-control" name="status"
-										ng-model="adjustments.status" id="field_status" required>
-										<option value="INITIATED">INITIATED</option>
-										<option value="PROCESSING">PROCESSING</option>
-										<option value="BILLED">BILLED</option>
-									</select>
-									<div
-										ng-show="(editForm.status.$dirty || rc.editForm.attempted) && editForm.status.$invalid">
-										<p class="help-block"
-											ng-show="editForm.status.$error.required">This field is
-											required.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group"">									
-									<label for="field_transactionTypeMaster">Transaction Type</label>
-									<select class="form-control" id="field_transactionTypeMaster"
-										name="transactionTypeMaster" 
+								<div class="form-group"">
+									<label for="field_transactionTypeMaster">Transaction
+										Type</label> <select class="form-control"
+										id="field_transactionTypeMaster" name="transactionTypeMaster"
 										ng-model="adjustments.transactionTypeMaster"
 										ng-options="transactionTypeMaster as transactionTypeMaster.typeOfTxn for transactionTypeMaster in transactiontypemasters track by transactionTypeMaster.typeoftxn">
 										<option value=""></option>
 									</select>
 								</div>
 							</div>
+							<div class="col-sm-4">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.amount.$invalid && 
+         (editForm.amount.$dirty || rc.editForm.attempted)}">
+									<label class="control-label" for="field_amount">Amount</label>
+									<input type="number" class="form-control" name="amount"
+										id="field_amount" ng-model="adjustments.amount" />
+									<div
+										ng-show="(editForm.amount.$dirty || rc.editForm.attempted) && editForm.amount.$invalid">
+										<p class="help-block" ng-show="editForm.amount.$error.number">Please
+											enter valid numbers .</p>
+									</div>
+								</div>
+							</div>
+
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group"
 									ng-class="{'has-error': editForm.customerComplaints.$invalid && 
          (editForm.customerComplaints.$dirty || rc.editForm.attempted)}">
-									<label for="field_customerComplaints">Complaints</label>
-									<select class="form-control" id="field_customerComplaints"
+									<label for="field_customerComplaints">Complaints</label> <select
+										class="form-control" id="field_customerComplaints"
 										name="customerComplaints" required
 										ng-model="adjustments.customerComplaints"
 										ng-options="customerComplaints as (customerComplaints.id + ': ' +  customerComplaints.complaintTypeMaster.complaintType + ' for amt ' + customerComplaints.adjustmentAmt + ' dtd ' + customerComplaints.complaintDate) for customerComplaints in customerComplaintss">
@@ -162,7 +125,6 @@
 								<input type="text" class="form-control" name="remarks"
 									id="field_remarks" ng-model="adjustments.remarks" />
 							</div>
-
 						</div>
 					</div>
 					<div class="modal-footer">
