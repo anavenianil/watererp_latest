@@ -60,8 +60,8 @@ public class Adjustments implements Serializable {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "complaint_type_master_id")
-    private ComplaintTypeMaster complaintTypeMaster;
+    @JoinColumn(name = "customer_complaints_id")
+    private CustomerComplaints customerComplaints;
 
     public Long getId() {
         return id;
@@ -143,12 +143,12 @@ public class Adjustments implements Serializable {
         this.user = user;
     }
 
-    public ComplaintTypeMaster getComplaintTypeMaster() {
-        return complaintTypeMaster;
+    public CustomerComplaints getCustomerComplaints() {
+        return customerComplaints;
     }
 
-    public void setComplaintTypeMaster(ComplaintTypeMaster complaintTypeMaster) {
-        this.complaintTypeMaster = complaintTypeMaster;
+    public void setCustomerComplaints(CustomerComplaints customerComplaints) {
+        this.customerComplaints = customerComplaints;
     }
 
     @Override

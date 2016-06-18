@@ -1,2 +1,2 @@
-drop table meter_change;
-delete from databasechangelog where filename like '%MeterChange%';
+drop table adjustments;
+delete from databasechangelog where filename like '%adjustments%';

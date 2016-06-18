@@ -10,5 +10,5 @@ import java.util.List;
  * Spring Data JPA repository for the CustomerComplaints entity.
  */
 public interface CustomerComplaintsRepository extends JpaRepository<CustomerComplaints,Long> {
-
+	public List<CustomerComplaints> findByCanAndStatus(String can, String status);
 }

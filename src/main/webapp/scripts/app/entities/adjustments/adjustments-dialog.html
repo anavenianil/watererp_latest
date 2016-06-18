@@ -140,19 +140,19 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group"
-									ng-class="{'has-error': editForm.complaintTypeMaster.$invalid && 
-         (editForm.complaintTypeMaster.$dirty || rc.editForm.attempted)}">
-									<label for="field_complaintTypeMaster">Complaint Type </label>
-									<select class="form-control" id="field_complaintTypeMaster"
-										name="complaintTypeMaster" required
-										ng-model="adjustments.complaintTypeMaster"
-										ng-options="complaintTypeMaster as complaintTypeMaster.complaintType for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.complaintType">
+									ng-class="{'has-error': editForm.customerComplaints.$invalid && 
+         (editForm.customerComplaints.$dirty || rc.editForm.attempted)}">
+									<label for="field_customerComplaints">Complaints</label>
+									<select class="form-control" id="field_customerComplaints"
+										name="customerComplaints" required
+										ng-model="adjustments.customerComplaints"
+										ng-options="customerComplaints as (customerComplaints.id + ': ' +  customerComplaints.complaintTypeMaster.complaintType + ' for amt ' + customerComplaints.adjustmentAmt + ' dtd ' + customerComplaints.complaintDate) for customerComplaints in customerComplaintss">
 										<option value=""></option>
 									</select>
 									<div
-										ng-show="(editForm.complaintTypeMaster.$dirty || rc.editForm.attempted) && editForm.complaintTypeMaster.$invalid">
+										ng-show="(editForm.customerComplaints.$dirty || rc.editForm.attempted) && editForm.customerComplaints.$invalid">
 										<p class="help-block"
-											ng-show="editForm.complaintTypeMaster.$error.required">This
+											ng-show="editForm.customerComplaints.$error.required">This
 											field is required.</p>
 									</div>
 								</div>
