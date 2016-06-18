@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,16 +37,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
-import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.WorkflowDTO;
-import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
@@ -95,8 +93,8 @@ public class ApplicationTxnResource {
     @Inject
     private CustDetailsRepository custDetailsRepository;
     
-    @Inject
-    private TariffCategoryMasterRepository tariffCategoryMasterRepository;
+    /*@Inject
+    private TariffCategoryMasterRepository tariffCategoryMasterRepository;*/
     
     @Inject
     private UserRepository userRepository;
@@ -201,8 +199,12 @@ public class ApplicationTxnResource {
             custDetails.setPipeSizeMaster(pipeSizeMasterRepository.findOne(1l));//hard coded pipesize
             custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
             custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
-            custDetails.setConnDate(LocalDate.now());
+            custDetails.setConnDate(applicationTxn.getConnectionDate());
             custDetails.setStatus(CustStatus.ACTIVE);
+            //For Bill effective month
+            LocalDate ld = applicationTxn.getConnectionDate().minusMonths(1l);
+    		custDetails.setPrevBillMonth(LocalDate.of(ld.getYear(), ld.getMonth(), 01));
+    		custDetails.setMeterFixDate(null);
             custDetailsRepository.save(custDetails);
             
         }

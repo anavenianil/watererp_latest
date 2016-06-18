@@ -90,7 +90,7 @@ public class CustomerResource {
 		hm.put("photo", "setPhoto");
 		UploadDownloadResource.setValues(customer, hm, request,
 				customer.getId());
-		customer.setStatus(0);
+		customer.setStatus(1);
 		Customer result = customerRepository.save(customer);
 		try {
 			workflowService.setAssignedDate(ZonedDateTime.now().toString());
