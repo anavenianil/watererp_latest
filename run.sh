@@ -20,7 +20,7 @@ if [ -n "$message" ]; then
 	echo "This is the db:" $db
 	if [ -n "$db" ]; then
 		echo "Message contains [DB], Restoring DB"
-		mysql -u root -pmysql watererp < Docs/DB/watererp.sql
+		mysql -u root -pmysql watererp < Docs/DB/testingDB.sql
 	else 
 		patch=$(echo $message|grep "\[PATCH\]")
 		echo "This is the patch:" $patch
