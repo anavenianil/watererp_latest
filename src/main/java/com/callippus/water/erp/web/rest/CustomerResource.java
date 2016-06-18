@@ -34,6 +34,7 @@ import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
+import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.CustDetailsChangeWorkflowService;
@@ -66,6 +67,9 @@ public class CustomerResource {
 	
 	@Inject
 	private ApplicationTxnRepository applicationTxnRepository;
+	
+	@Inject
+	private StatusMasterRepository statusMasterRepository;
 	
 	/**
 	 * POST /customers -> Create a new customer.
@@ -141,6 +145,7 @@ public class CustomerResource {
 		else 
 		{
 			page = customerRepository.findAll(pageable);
+			
 		}
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
 				page, "/api/customers");
@@ -202,6 +207,11 @@ public class CustomerResource {
 		/*if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
 			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}*/
+		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
+			customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()));
+			customer.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
+		}
+		
 		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}
@@ -228,6 +238,7 @@ public class CustomerResource {
 			custDetails.setIdNumber(customer.getIdNumber());
 			
 		}
+		customerRepository.save(customer);
 		custDetailsRepository.save(custDetails);
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
@@ -248,12 +259,20 @@ public class CustomerResource {
 			@RequestBody WorkflowDTO workflowDTO)
 			throws Exception {
 		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
-		customerRepository.save(workflowDTO.getCustomer());
+		
 		workflowService.setRemarks(workflowDTO.getCustomer().getRemarks());
 		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+		
 		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
-		return ResponseEntity.created(new URI("/api/connectionTerminates/declineRequest/"))
-				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
+		
+		workflowDTO.getCustomer().setStatus(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()).getId().intValue());
+		//Customer customer = 
+		customerRepository.save(workflowDTO.getCustomer());
+		
+		//customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()));
+		
+		return ResponseEntity.created(new URI("/api/customers/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))
 				.body(null);
 	}
     
@@ -282,10 +301,7 @@ public class CustomerResource {
     	workflowDTO.setCustDetails(custDetailsRepository.findByCanForUpdate(customer.getCan()));
 
     	return Optional.ofNullable(workflowDTO)
-				.map(response -> new ResponseEntity<>(response, HttpStatus.OK))
+				.map(result -> new ResponseEntity<>(workflowDTO, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-		/*return ResponseEntity.created(new URI("/api/customers/getActiveCan/"))
-				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))
-				.body(null);*/
 	}
 }

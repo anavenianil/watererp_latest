@@ -80,6 +80,7 @@ angular
 					$scope.clear = function() {
 						// $uibModalInstance.dismiss('cancel');
 						$('#saveSuccessfullyModal').modal('hide');
+						$('#declineModal').modal('hide');
 						$state.go('customer.pipeSizeList');
 					};
 
@@ -112,7 +113,9 @@ angular
 			        	return $http.post('/api/customers/declineRequest',
 								workflowDTO).then(
 								function(response) {
-									$window.history.back();
+									$('#declineModal').modal('show');
+									//$state.go('customer.pipeSizeList');
+									//$window.history.back();
 								});
 			        }
 					
