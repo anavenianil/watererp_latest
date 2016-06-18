@@ -33,40 +33,70 @@ angular
 					var onSaveSuccess = function(result) {
 						$scope.$emit('watererpApp:collDetailsUpdate', result);
 						$scope.isSaving = false;
+						$scope.collDetails.id = result.id;
 						$state.go('revDetailss');
 					};
 
 					var onSaveError = function(result) {
 						$scope.isSaving = false;
 					};
-
+					
 					$scope.validate = function() {
 
-						if ($scope.isSaving)
+						if($scope.isSaving)
 							return true;
-						if ($scope.editForm.receiptDt.$invalid)
+						
+						if (!$scope.isValidCust)
 							return true;
+
+						if (!$scope.editForm.receiptAmt.$dirty)
+							return true;
+
+						if (!$scope.editForm.paymentTypes.$dirty)
+							return true;
+
+						/*if (!$scope.editForm.collectionTypeMaster.$dirty)
+							return true;*/
+
 						if ($scope.editForm.receiptAmt.$invalid)
 							return true;
+
 						if ($scope.editForm.paymentTypes.$invalid)
 							return true;
 
+						/*if ($scope.editForm.collectionTypeMaster.$invalid)
+							return true;*/
+
 						if ($scope.instrEnabled) {
+
 							if (!$scope.editForm.field_instrNo.$dirty)
 								return true;
+
 							if (!$scope.editForm.field_instrDt.$dirty)
 								return true;
+
 							if (!$scope.editForm.instrumentIssuerMaster.$dirty)
 								return true;
+
 							if ($scope.editForm.field_instrNo.$invalid)
 								return true;
+
 							if ($scope.editForm.field_instrDt.$invalid)
 								return true;
+
 							if ($scope.editForm.instrumentIssuerMaster.$invalid)
 								return true;
+
 						}
+
 						return false;
+
 					}
+					$scope.refresh = function() {
+						$scope.reset();
+						$scope.clear();
+					};
+
 
 					$scope.validateInstrDt = function() {
 						var today = moment();
@@ -133,8 +163,8 @@ angular
 					}
 
 					$scope.save = function() {
-						if ($scope.validate())
-							return;
+						/*if ($scope.validate())
+							return;*/
 
 						$scope.isSaving = true;
 						RevDetails.save($scope.collDetails, onSaveSuccess,

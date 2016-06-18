@@ -133,7 +133,7 @@
 								<div class="form-group">
 									<div class='input-group' id='field_prevBillMonth'>
 										<input id="field_fromMonth" type="text" class="form-control"
-											uib-datepicker-popup="{{dateformat}}"
+											uib-datepicker-popup="{{dateformat}}" 
 											ng-model="billDetails.prevBillMonth" readonly />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default" disabled>
@@ -196,8 +196,8 @@
 									Reading Date</label>
 								<div class="form-group">
 									<div class='input-group' id='field_metReadingDt'>
-										<input id="field_metReadingDt" type="text" name="metReadingDt"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
+										<input id="field_metReadingDt" type="text" name="metReadingDt" ng-type="date"
+											class="form-control" uib-datepicker-popup="{{dateformat}}" placeholder="YYYY-MM-DD"
 											ng-model="billDetails.metReadingDt" ng-change="setToMonthAndCheck()"
 											is-open="datePickerForMetReadingDt.status.opened" required />
 										<span class="input-group-btn">
@@ -211,9 +211,9 @@
 								<div
 											ng-show="(editForm.metReadingDt.$dirty || rc.editForm.attempted) && editForm.metReadingDt.$invalid">
 											<p class="help-block"
-												ng-show="editForm.metReadingDt.$error.required">This field is required.</p>
-								
-						
+												ng-show="editForm.metReadingDt.$error.required">Date is required.</p>
+								<p class="help-block"
+												ng-show="editForm.metReadingDt.$error.date">Please enter date format.</p>					
 							</div>
 							</div>
                             </div>

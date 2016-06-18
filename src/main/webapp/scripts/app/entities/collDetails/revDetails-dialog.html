@@ -165,7 +165,7 @@
 								Date</label>
 								<div class='input-group' id='field_receiptDt'>
 									<input id="field_instrDt" placeholder="YYYY-MM-DD"
-										name="instrDt" type="date" class="form-control"
+										name="instrDt" type="text" class="form-control" ng-type="date"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt" ng-required="instrEnabled"
 										is-open="datePickerForInstrDt.status.opened"
