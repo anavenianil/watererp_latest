@@ -1534,8 +1534,6 @@ CREATE TABLE `databasechangeloglock` (
 --
 
 /*!40000 ALTER TABLE `databasechangeloglock` DISABLE KEYS */;
-INSERT INTO `databasechangeloglock` (`ID`,`LOCKED`,`LOCKGRANTED`,`LOCKEDBY`) VALUES 
- (1,'','2016-06-13 11:08:09','Lenovo-PC (169.254.197.57)');
 /*!40000 ALTER TABLE `databasechangeloglock` ENABLE KEYS */;
 
 
