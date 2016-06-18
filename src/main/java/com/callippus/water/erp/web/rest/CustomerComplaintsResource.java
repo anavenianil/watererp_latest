@@ -195,7 +195,7 @@ public class CustomerComplaintsResource {
 	 */
 	@RequestMapping(value = "/customerComplaints/getByCan/{can}/{status}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<List<CustomerComplaints>> getCustomerComplaints(@PathVariable String can, @PathVariable String status) {
+	public ResponseEntity<List<CustomerComplaints>> getCustomerComplaints(@PathVariable String can, @PathVariable Integer status) {
 		log.debug("REST request to get CustomerComplaints for CAN : {}", can);
 		List<CustomerComplaints> customerComplaints = customerComplaintsRepository.findByCanAndStatus(can,status);
 		return Optional.ofNullable(customerComplaints).map(result -> new ResponseEntity<List<CustomerComplaints>>(customerComplaints, HttpStatus.OK))
