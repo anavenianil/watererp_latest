@@ -133,8 +133,6 @@ public class BillingService {
 		}
 	}
 
-	List<Long> categories = Arrays.asList(1L, 2L, 3L);
-
 	float avgKL = 0.0f;
 	float factor = 0.0f;
 	float prevAvgKL = 0.0f;
@@ -1048,9 +1046,6 @@ public class BillingService {
 
 		if (customer.getPipeSize() < 0.5f)
 			return CustValidation.INVALID_PIPESIZE;
-
-		if (!categories.contains(customer.getTariffCategoryMaster().getId()))
-			return CustValidation.INVALID_CATEGORY;
 
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -1);
