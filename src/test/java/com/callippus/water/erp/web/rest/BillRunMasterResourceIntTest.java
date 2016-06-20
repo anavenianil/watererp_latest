@@ -85,7 +85,7 @@ public class BillRunMasterResourceIntTest {
 			.stream(new Object[][] { { "XXXXXXXX", "Customer not found in CUST_DETAILS" },
 					{ "04060002", "Bill Date Older than 1 year" }, 
 					{ "04060003", "No tariffs configured" },
-					{ "04060004", "Failed with error:INVALID_CATEGORY" }})
+					{ "04060004", "No tariffs configured" }})
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (String) kv[1]));
 
 	// Expected Units, Water Cess, Rent, Lock charges after Run 1
@@ -105,7 +105,11 @@ public class BillRunMasterResourceIntTest {
 					{ "06020005", new Float[] { 7.0f, 5681.0f, 2330.0f, 0.0f } },
 					{ "06020006", new Float[] { 4.70f, 3841.6f, 4630.0f, 0.0f } },
 					{ "06020007", new Float[] { 3.1f, 2566.46f, 2330.0f, 0.0f } },
-					{ "06020008", new Float[] { 4.70f, 3841.65f, 4630.0f, 0.0f } } })
+					{ "06020008", new Float[] { 4.70f, 3841.65f, 4630.0f, 0.0f } },
+					{ "06060007", new Float[] { 2.5f, 18000.00f, 10000.0f, 0.0f } },
+					{ "06060008", new Float[] { 2.5f, 18000.00f, 10000.0f, 0.0f} },
+					{ "04060005", new Float[] { 7.50f, 54000.0f, 30000.0f, 0.0f } }
+			})
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
 	// Manual Payments
@@ -117,7 +121,9 @@ public class BillRunMasterResourceIntTest {
 					{ "06020001", new Float[] { 0.0f } }, { "06020002", new Float[] { 0.0f } },
 					{ "06020003", new Float[] { 0.0f } }, { "06020004", new Float[] { 0.0f } },
 					{ "06020005", new Float[] { 0.0f } }, { "06020006", new Float[] { 0.0f } },
-					{ "06020007", new Float[] { 0.0f } }, { "06020008", new Float[] { 0.0f } } })
+					{ "06020007", new Float[] { 0.0f } }, { "06020008", new Float[] { 0.0f } }, 
+					{ "06060007", new Float[] { 0.0f } }, { "06060008", new Float[] { 0.0f } }, 
+					{ "04060005", new Float[] { 0.0f } } })
 			.collect(Collectors.toMap(kv -> (String) kv[0], kv -> (Float[]) kv[1]));
 
 	static final Map<String, String[]> paymentCallbackXMLs = Arrays
@@ -403,7 +409,7 @@ public class BillRunMasterResourceIntTest {
 					.andExpect(status().isOk()).andReturn();
 
 			JSONObject content = new JSONObject(result.getResponse().getContentAsString());
-			Assert.assertEquals("Success Records for Run1:", 16, content.get("success"));
+			Assert.assertEquals("Success Records for Run1:", 19, content.get("success"));
 			Assert.assertEquals("Failed Records for Run1:", 0, content.get("failed"));
 			Assert.assertEquals("Status for Run1:", "Completed Successfully", content.get("status") );
 
@@ -494,7 +500,7 @@ public class BillRunMasterResourceIntTest {
 
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run2:", 16, content.get("success"));
-			Assert.assertEquals("Failed Records for Run2:", 0, content.get("failed"));
+			Assert.assertEquals("Failed Records for Run2:", 3, content.get("failed"));
 			Assert.assertEquals("Status for Run2:", "Completed Successfully", content.get("status") );
 
 			id = content.getLong("id");
@@ -588,7 +594,7 @@ public class BillRunMasterResourceIntTest {
 
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run3:", 15, content.get("success"));
-			Assert.assertEquals("Failed Records for Run3:", 0, content.get("failed"));
+			Assert.assertEquals("Failed Records for Run3:", 3, content.get("failed"));
 			Assert.assertEquals("Status for Run3:", "Completed Successfully", content.get("status"));
 
 			id = content.getLong("id");
@@ -689,7 +695,7 @@ public class BillRunMasterResourceIntTest {
 
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run4:", 16, content.get("success"));
-			Assert.assertEquals("Failed Records for Run4:", 0, content.get("failed"));
+			Assert.assertEquals("Failed Records for Run4:", 3, content.get("failed"));
 			Assert.assertEquals("Status for Run4:", "Completed Successfully", content.get("status") );
 
 			id = content.getLong("id");
@@ -742,7 +748,7 @@ public class BillRunMasterResourceIntTest {
 
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run5:", 5, content.get("success"));
-			Assert.assertEquals("Failed Records for Run5:", 0, content.get("failed"));
+			Assert.assertEquals("Failed Records for Run5:", 3, content.get("failed"));
 			Assert.assertEquals("Status for Run5:", "Completed Successfully", content.get("status") );
 			
 			id = content.getLong("id");
