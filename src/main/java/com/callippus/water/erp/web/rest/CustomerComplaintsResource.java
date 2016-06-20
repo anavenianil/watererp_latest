@@ -132,7 +132,6 @@ public class CustomerComplaintsResource {
         	BigDecimal amount= new BigDecimal(customerComplaints.getAdjustmentAmt().toString());
         	adjustments.setBillFullDetails(null);
         	adjustments.setCan(customerComplaints.getCan());
-        	
         	adjustments.setRemarks(customerComplaints.getRemarks());
         	adjustments.setTxnTime(ZonedDateTime.now());
         	adjustments.setStatus(TxnStatus.BILLED);
