@@ -44,7 +44,6 @@
 									<p class="help-block"
 										ng-show="editForm.can.$error.number">Please enter numbers only
 										.</p>
-								
 							</div>
 								</div>
 						</div>
@@ -53,8 +52,8 @@
 										ng-class="{'has-error': editForm.consName.$invalid && 
                                 (editForm.consName.$dirty || rc.editForm.attempted)}">
 								
-							<label>Customer Name</label> <input type="text"
-								class="form-control" id="field_consName" name="consName"
+							<label>Customer Name</label> 
+							<input type="text"	class="form-control" id="field_consName" name="consName"
 								ng-model="customerComplaints.custDetails.consName" required disabled>
 								<div ng-pattern="/^[a-zA-Z]/"
 									ng-show="(editForm.consName.$dirty || rc.editForm.attempted) && editForm.consName.$invalid">

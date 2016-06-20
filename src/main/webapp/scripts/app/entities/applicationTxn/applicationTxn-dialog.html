@@ -73,13 +73,13 @@
 									<label class="control-label" for="field_firstName">First
 										Name</label> <input type="text" class="form-control text-uppercase"
 										name="firstName" id="field_firstName"
-										ng-model="applicationTxn.firstName" ng-pattern="/[a-zA-Z]+/" required />
+										ng-model="applicationTxn.firstName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/" required />
 										<div
 											ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.firstName.$error.required">This field
 												is required.</p>
-											<p class="help-block" ng-pattern="/[a-zA-Z]+/"
+											<p class="help-block" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 												ng-show="editForm.firstName.$error.pattern">Enter text
 												only</p>
 										</div>
@@ -98,13 +98,13 @@
 									<label class="control-label" for="field_lastName">Last
 										Name</label> <input type="text" class="form-control text-uppercase"
 										name="lastName" id="field_lastName"
-										ng-model="applicationTxn.lastName" ng-pattern="/[a-zA-Z]+/" required />
-										<div
+										ng-model="applicationTxn.lastName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/" required />
+										<div ng-pattern="/^[A-Za-z]+$/"
 											ng-show="(editForm.lastName.$dirty || rc.editForm.attempted) && editForm.lastName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.lastName.$error.required">This field
 												is required.</p>
-											<p class="help-block" ng-pattern="/[a-zA-Z]+/"
+											<p class="help-block" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 												ng-show="editForm.lastName.$error.pattern">Enter text
 												only</p>
 										</div>
@@ -156,10 +156,10 @@
                                 
 									<label class="control-label" for="field_organizationName">Organization
 										Name</label> <input type="text" class="form-control text-uppercase"
-										name="organizationName" id="field_organizationName" ng-pattern="/^[a-zA-z]/"
+										name="organizationName" id="field_organizationName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 										ng-model="applicationTxn.organizationName" ng-enabled="applicationTxn.organization"
 										ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===1" required/>
-										<div  ng-pattern="/^[a-zA-z]/"										
+										<div  ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"										
 										ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && editForm.organizationName.$invalid" >
 											<p class="help-block"
 												ng-show="editForm.organizationName.$error.required">This field
@@ -337,28 +337,26 @@
 										Ownership Document</label> 
 										<br>
 										<div  name="propertyDoc"  id="field_propertyDoc" ng-model="applicationTxn.propertyDoc" 
-										ng-change="checkForm( applicationTxn.deedDoc,applicationTxn.agreementDoc)" >
+										ng-change="checkForm(deedDoc,agreementDoc)" > 
 										 
-										 <input type="checkbox" name="propertyDoc"
+										 <input type="checkbox" name="propertyDoc" 
 										ng-model="applicationTxn.deedDoc"
 										ng-true-value="'Tittle Deed/Offer letter'"
 										ng-false-value="'Not Submitted'" required>&nbsp;<span>Tittle
 										Deed/Offer letter </span>
 										<br> 
 										
-										<input type="checkbox" name="propertyDoc"
+										<input type="checkbox" name="propertyDoc" 
 										ng-model="applicationTxn.agreementDoc"
 										ng-true-value="'Rented Property-lease-Rent Agreement'"
-										ng-false-value="'Not Submitted'" required>&nbsp;<span>Rented
-										Property- lease-Rent Agreement </span>
-								
-									<div
-										ng-show="(editForm.propertyDoc.$dirty || rc.editForm.attempted) && editForm.propertyDoc.$invalid">
+										ng-false-value="'Not Submitted'" required="true">&nbsp;<span>Rented
+										Property- lease-Rent Agreement </span>						
+										<div ng-show="(editForm.propertyDoc.$dirty || rc.editForm.attempted) && editForm.propertyDoc.$invalid">
 										<p class="help-block"
 											ng-show="editForm.propertyDoc.$error.required">Any one
 											check-box is required.</p>
 											
-											</div>
+											<!-- </div> -->
                                      </div>
 									</div>
 								</div>

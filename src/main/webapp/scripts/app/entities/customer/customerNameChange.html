@@ -115,14 +115,23 @@
 						<legend>Change of Name</legend>
 						<div class="row">
 							<div class="col-sm-4">
+							<div class="form-group"
+										ng-class="{'has-error': editForm.firstName.$invalid && 
+                                (editForm.firstName.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_firstName">First
-									Name</label> <input type="text" class="form-control" name="firstName"
-									id="field_firstName" ng-model="customer.firstName" required />
-								<div ng-show="editForm.firstName.$invalid">
-									<p class="help-block"
-										ng-show="editForm.firstName.$error.required">This field is
-										required.</p>
-								</div>
+									Name</label> <input type="text" class="form-control" name="firstName" ng-pattern="/^[a-zA-Z]/" 
+									id="field_firstName" ng-model="customer.firstName" required/>
+								<div ng-pattern="/^[a-zA-Z]/"
+											ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
+											<p class="help-block"
+												ng-show="editForm.firstName.$error.required">This field
+												is required.</p>
+											<p class="help-block"
+												ng-show="editForm.firstName.$error.pattern">Enter text
+												only .</p>
+										</div>
+									</div>
+
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_middleName">Middle
@@ -223,7 +232,7 @@
 						<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
 							Back</span>
 					</button>
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 					</button>

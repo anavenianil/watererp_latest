@@ -61,6 +61,7 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         $scope.clear = function() {
         	$('#saveSuccessfullyModal').modal('hide');
         	$state.go('meterChange');
+        
         };
         $scope.datePickerForApprovedDate = {};
 
@@ -119,7 +120,11 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			});
 		}
 		
-		
+		/*$scope.clear=function()
+		{
+			$scope.meterChange={presentReading:null , reasonForChange:null
+					};		
+		};*/
         
         
         $scope.onSelect = function($item, $model, $label) {
@@ -132,6 +137,10 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			$scope.getActiveCAN($scope.meterChange.can);
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
+			//$scope.clear();
+			$scope.rc.editForm.attempted=false;
+			$scope.editForm.$setPristine();
+			
 		};
 		
 		$scope.getReason = function(status){

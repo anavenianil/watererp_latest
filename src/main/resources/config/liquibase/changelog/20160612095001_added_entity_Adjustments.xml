@@ -32,7 +32,7 @@
             <column name="bill_full_details_id" type="bigint"/>
             <column name="transaction_type_master_id" type="bigint"/>
             <column name="user_id" type="bigint"/>
-            <column name="complaint_type_master_id" type="bigint"/>
+            <column name="customer_complaints_id" type="bigint"/>
         </createTable>
         <dropDefaultValue tableName="adjustments" columnName="txn_time" columnDataType="datetime"/>
 
@@ -61,11 +61,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="complaint_type_master_id"
+        <addForeignKeyConstraint baseColumnNames="customer_complaints_id"
                                  baseTableName="adjustments"
-                                 constraintName="fk_adjustments_complainttypemaster_id"
+                                 constraintName="fk_adjustments_customercomplaints_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="complaint_type_master"/>
+                                 referencedTableName="customer_complaints"/>
 
     </changeSet>
 </databaseChangeLog>

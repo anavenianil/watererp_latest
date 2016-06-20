@@ -30,8 +30,8 @@
         },
         {
             "relationshipId": 5,
-            "relationshipName": "complaintTypeMaster",
-            "otherEntityName": "complaintTypeMaster",
+            "relationshipName": "customerComplaints",
+            "otherEntityName": "customerComplaints",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
