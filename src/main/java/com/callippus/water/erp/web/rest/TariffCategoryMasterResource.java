@@ -1,10 +1,12 @@
 package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -77,10 +80,19 @@ public class TariffCategoryMasterResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<TariffCategoryMaster>> getAllTariffCategoryMasters(Pageable pageable)
+    public ResponseEntity<List<TariffCategoryMaster>> getAllTariffCategoryMasters(Pageable pageable,
+    		@RequestParam(value = "type", required = false) String type)
         throws URISyntaxException {
         log.debug("REST request to get a page of TariffCategoryMasters");
-        Page<TariffCategoryMaster> page = tariffCategoryMasterRepository.findAll(pageable); 
+        //Page<TariffCategoryMaster> page = tariffCategoryMasterRepository.findAll(pageable);
+        Page<TariffCategoryMaster> page;
+        if(type != null){
+			page = tariffCategoryMasterRepository.findByType(pageable, type);
+		}
+		else 
+		{
+			page = tariffCategoryMasterRepository.findAll(pageable);
+		}
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tariffCategoryMasters");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

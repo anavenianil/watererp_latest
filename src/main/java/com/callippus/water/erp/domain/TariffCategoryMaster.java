@@ -24,6 +24,10 @@ public class TariffCategoryMaster implements Serializable {
     @Column(name = "tariff_category", nullable = false)
     private String tariffCategory;
     
+    @NotNull
+    @Column(name = "type", nullable = false)
+    private String type;
+    
     public Long getId() {
         return id;
     }
@@ -38,6 +42,14 @@ public class TariffCategoryMaster implements Serializable {
     
     public void setTariffCategory(String tariffCategory) {
         this.tariffCategory = tariffCategory;
+    }
+
+    public String getType() {
+        return type;
+    }
+    
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
@@ -65,6 +77,7 @@ public class TariffCategoryMaster implements Serializable {
         return "TariffCategoryMaster{" +
             "id=" + id +
             ", tariffCategory='" + tariffCategory + "'" +
+            ", type='" + type + "'" +
             '}';
     }
 }

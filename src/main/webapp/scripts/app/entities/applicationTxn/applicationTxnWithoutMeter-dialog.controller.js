@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
+    .controller('ApplicationTxnWithoutMeterDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
     		UploadUtil, DateUtils, User, IdProofMaster, DivisionMaster, StreetMaster) {
     	$scope.applicationTxn = {};
     	//$scope.tariffcategorymasters = TariffCategoryMaster.query();
@@ -10,7 +10,7 @@ angular.module('watererpApp')
     	//$scope.streetmasters = StreetMaster.query();
     	$scope.idProofMasters = IdProofMaster.query();
     	$scope.tariffcategorymasters = [];
-    	TariffCategoryMaster.query({page: $scope.page, size: 20, type:'METERED'}, function(result, headers) {
+    	TariffCategoryMaster.query({page: $scope.page, size: 20, type:'UNMETERED'}, function(result, headers) {
             $scope.links = ParseLinks.parse(headers('link'));
             for (var i = 0; i < result.length; i++) {
                 $scope.tariffcategorymasters.push(result[i]);

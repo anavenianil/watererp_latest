@@ -37,7 +37,7 @@
 
 									<div class="form-group"
 										ng-class="{'has-error': editForm.tariffCategoryMaster.$invalid && 
-         (editForm.tariffCategoryMaster.$dirty || rc.editForm.attempted)}">
+         								(editForm.tariffCategoryMaster.$dirty || rc.editForm.attempted)}">
 										<label for="field_tariffCategoryMaster">Connection
 											Category</label> <select class="form-control"
 											id="field_tariffCategoryMaster" name="tariffCategoryMaster"
@@ -146,7 +146,7 @@
 								<div class="col-sm-4">
 									<label class="control-label" for="field_organization">Organization</label>
 									<input type="checkbox" class="form-control" name="organization"
-										ng-disabled="applicationTxn.tariffCategoryMaster.id===1"
+										ng-disabled="applicationTxn.tariffCategoryMaster.id===6"
 										id="field_organization" ng-model="applicationTxn.organization" />
 								</div>
 								<div class="col-sm-4">
@@ -159,7 +159,7 @@
 											name="organizationName" id="field_organizationName"
 											ng-model="applicationTxn.organizationName"
 											ng-enabled="applicationTxn.organization"
-											ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===1" />
+											ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===6" />
 										<div
 											ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && editForm.organizationName.$invalid"
 											required>
@@ -177,7 +177,7 @@
 									<input type="text" class="form-control text-uppercase"
 										name="designation" id="field_designation"
 										ng-model="applicationTxn.designation"
-										ng-disabled="applicationTxn.tariffCategoryMaster.id===1" />
+										ng-disabled="applicationTxn.tariffCategoryMaster.id===6" />
 								</div>
 							</div>
 							<br>
@@ -195,7 +195,6 @@
 											ng-model="applicationTxn.mobileNo" />
 										<div
 											ng-show="(editForm.mobileNo.$dirty || rc.editForm.attempted) && editForm.mobileNo.$invalid">
-
 											<p class="help-block"
 												ng-show="editForm.mobileNo.$error.number">Enter valid
 												mobile number</p>
@@ -511,6 +510,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</form>
 	<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
 		<div class="modal-dialog">

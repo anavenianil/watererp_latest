@@ -206,7 +206,7 @@ angular.module('watererpApp')
                 views: {
                     'content@': {
                     	templateUrl: 'scripts/app/entities/applicationTxn/applicationTxnWithoutMeter-dialog.html',
-                        controller: 'ApplicationTxnDialogController'
+                        controller: 'ApplicationTxnWithoutMeterDialogController'
                     }
                 },
                 resolve: {
