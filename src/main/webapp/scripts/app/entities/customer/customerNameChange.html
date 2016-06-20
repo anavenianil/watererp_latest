@@ -1,6 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="save()"
-	show-validation>
+<form name="editForm"  rc-submit="save()" novalidate>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<button type="button" class="close" data-dismiss="modal"
@@ -39,23 +38,27 @@
 						<legend>Customer Information</legend>
 						<div class="row">
 							<div class="col-sm-3">
+							<div class="form-group" ng-class="{'has-error':editForm.can.$invalid && (editForm.can.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_can">CAN</label> <input
-									type="text" class="form-control" name="can" id="field_can"
-									ng-model="custDetails.can" required disabled />
-								<div ng-show="editForm.can.$invalid">
+									type="text" class="form-control" name="can" id="field_can" required
+									ng-model="custDetails.can"  disabled />
+								<div ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid ">
 									<p class="help-block" ng-show="editForm.can.$error.required">
 										This field is required.</p>
+										</div>
 								</div>
 							</div>
 							<div class="col-sm-3">
+							<div class="form-group" ng-class="{'has-error':editForm.previousName.$invalid &&(editForm.previousName.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_previousName">Consumer
 									Name</label> <input type="text" class="form-control"
 									name="previousName" id="field_consName"
 									ng-model="customer.previousName" required disabled />
-								<div ng-show="editForm.consName.$invalid">
+								<div ng-show="editForm.previousName.$invalid &&(editForm.previousName.$dirty || rc.editForm.attempted)">
 									<p class="help-block"
-										ng-show="editForm.consName.$error.required">This field is
+										ng-show="editForm.previousName.$error.required">This field is
 										required.</p>
+								</div>
 								</div>
 							</div>
 							<div class="col-sm-3">
