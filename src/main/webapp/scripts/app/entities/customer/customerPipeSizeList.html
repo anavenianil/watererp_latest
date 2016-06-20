@@ -45,7 +45,7 @@
 						<tbody infinite-scroll="loadPage(page + 1)"
 							infinite-scroll-disabled="links['last'] == page">
 							<tr ng-repeat="customer in customers track by customer.id">
-								<td>{{index+1}}</td>
+								<td>{{$index+1}}</td>
 								<td>{{customer.can}}</td>
 								<td>{{customer.pipeSizeMaster.pipeSize}}</td>
 								<td>{{customer.requestedPipeSizeMaster.pipeSize}}</td>
