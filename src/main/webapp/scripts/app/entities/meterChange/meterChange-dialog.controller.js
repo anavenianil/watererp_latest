@@ -2,19 +2,21 @@
 
 angular.module('watererpApp').controller('MeterChangeDialogController',
         function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN, ParseLinks,
-        		GetMeterDetails, Principal) {
+        		GetMeterDetails, Principal, GetActiveCAN) {
 
         $scope.meterChange = {};
         $scope.custdetailss = CustDetails.query();
         //$scope.meterdetailss = MeterDetails.query();
         $scope.users = User.query();
+        $scope.orgRole = {};
+		Principal.getOrgRole().then(function(response) {
+			$scope.orgRole = response;
+		});
 
         $scope.meterChangeStatuss = [{"id":1,"status":"Meter Stuck"},{"id":2,"status":"Meter Break"}];
         
         $scope.CustDetailsId;
-        
-        
-        $scope.load = function(id) {
+                $scope.load = function(id) {
             MeterChange.get({id : id}, function(result) {
                 $scope.meterChange = result;
                 $scope.meterChange.remarks = "";
@@ -38,9 +40,9 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:meterChangeUpdate', result);
-            //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('meterChange');
+            $scope.meterChange.id  = result.id;
+            $('#saveSuccessfullyModal').modal('show');
         };
 
         var onSaveError = function (result) {
@@ -57,7 +59,9 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+        	$('#saveSuccessfullyModal').modal('hide');
+        	$state.go('meterChange');
+        
         };
         $scope.datePickerForApprovedDate = {};
 
@@ -81,32 +85,49 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 				var res = response.data.map(function(item) {
 					return item;
 				});
-
 				return res;
 			});
 		}
         
-        
-        $scope.getMeterDetails = function(meterId) {
-        	$scope.prevMeterDetailss = [];
-			GetMeterDetails.findByMeterId(meterId).then(
-							function(result) {
-								$scope.meterChange.prevMeterNo = result;
-								$scope.prevMeterDetailss.push(result);
-							});
-		};
-        
+		$scope.prevMeterDetailss = [];
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
+				$scope.message = null;
                 $scope.custDetails = result;
                 $scope.meterChange.custDetails = $scope.custDetails;
+                $scope.meterChange.prevMeterReading = $scope.custDetails.prevReading;
                 $scope.custDetailsId = $scope.custDetails.id;
-                //$scope.meterChange.existingMeterNumber = $scope.custDetails.meterNo;
-                //$scope.meterChange.existingMeterReading = $scope.custDetails.prevReading;
                 $scope.meterChange.custDetails.id = $scope.custDetailsId;
-                $scope.getMeterDetails($scope.custDetails.meterNo);
+                $scope.prevMeterDetailss.push($scope.custDetails.meterDetails);
+                $scope.meterChange.prevMeterNo = $scope.custDetails.meterDetails;   
+                if($scope.custDetails.meterDetails == null){
+                	$scope.message = "Meter can't be changed for Unmetered connection for the can: "+can;
+                }
             });
         };
+        
+      //to get active can
+		$scope.getActiveCAN = function(can) {
+			GetActiveCAN.findByCan({
+				can : can
+			}).then(function(result) {
+				if (result != null && result !== '') {
+					$scope.isSaving = true;
+					$scope.message = "Meter change request already submitted for the the CAN: "+can;
+				}
+				else{
+					$scope.getCustDetails(can);
+					$scope.isSaving = false;
+				}
+					
+			});
+		}
+		
+		/*$scope.clear=function()
+		{
+			$scope.meterChange={presentReading:null , reasonForChange:null
+					};		
+		};*/
         
         
         $scope.onSelect = function($item, $model, $label) {
@@ -116,9 +137,13 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			$scope.meterChange.can = arr[0].trim();
 			$scope.meterChange.name = arr[1];
 			$scope.meterChange.address = arr[2];
-			$scope.getCustDetails($scope.meterChange.can);
+			$scope.getActiveCAN($scope.meterChange.can);
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
+			//$scope.clear();
+			$scope.rc.editForm.attempted=false;
+			$scope.editForm.$setPristine();
+			
 		};
 		
 		$scope.getReason = function(status){
@@ -133,34 +158,8 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 					ret = true;
 				break;
 			case 1:
-				if ($scope.orgRole.orgRoleName === 'Technical Zonal Supervisor')
+				if ($scope.orgRole.id === 15)
 					ret = true;
-				break;
-			case 2:
-				if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
-					ret = true;
-				break;
-			case 3:
-				if ($scope.orgRole.orgRoleName === 'Technical Manager')
-					ret = true;
-				break;
-			case 4:
-				if ($scope.orgRole.orgRoleName === 'Assistant Accountant(Revenue)')
-					ret = true;
-				break;
-			case 5:
-				if ($scope.orgRole.orgRoleName === 'Stores & Supplies Officer')
-					ret = true;
-				break;
-			case 6:
-				if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
-					ret = true;
-				break;
-			case 7:
-				if ($scope.orgRole.orgRoleName === 'Billing Officer')
-					ret = true;
-				break;
-			case 8:
 				break;
 			default:
 				break;
@@ -169,6 +168,18 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			return ret;
 		}
 		
-		
-        
+		$scope.checkReading = function(prvReading, newReading){
+			if(prvReading >= newReading)
+				{
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", true);
+				return true;
+				}
+			else
+				{
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", false);
+				return false;
+				}
+		}
 });

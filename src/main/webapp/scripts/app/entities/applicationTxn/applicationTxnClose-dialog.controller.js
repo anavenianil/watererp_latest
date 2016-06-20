@@ -6,13 +6,16 @@ angular.module('watererpApp').controller(
 				ParseLinks, DateUtils, ApplicationTxnService,
 				GetFeasibilityStudy, GetProceedings) {
 
-			$scope.applicationTxn = {};
-			$scope.proceedings = {};
-			$scope.proceedings.divisionMaster = {};
-			$scope.proceedings.streetMaster = {};
-			$scope.divisionCode = '';
-			$scope.streetNo = '';
-			$scope.applicationTxn.can = "";
+			$scope.workflowDTO = {};
+			$scope.workflowDTO.applicationTxn = {};
+			$scope.workflowDTO.proceedings = {};
+			$scope.workflowDTO.proceedings.divisionMaster = {};
+			$scope.workflowDTO.proceedings.streetMaster = {};
+			$scope.workflowDTO.divisionCode = '';
+			$scope.workflowDTO.streetNo = '';
+			$scope.workflowDTO.applicationTxn.can = "";
+			
+			$scope.actionType = "createCAN";
 
 			$scope.dtmax = new Date();
 
@@ -20,21 +23,21 @@ angular.module('watererpApp').controller(
 				ApplicationTxn.get({
 					id : id
 				}, function(result) {
-					$scope.applicationTxn = result;
-					$scope.applicationTxn.remarks = '';
+					$scope.workflowDTO.applicationTxn = result;
+					$scope.workflowDTO.applicationTxn.remarks = '';
 				});
 			}
 
 			GetFeasibilityStudy.get({
 				applicationTxnId : $stateParams.applicationTxnId
 			}, function(result) {
-				$scope.feasibilityStudy = result;
+				$scope.workflowDTO.feasibilityStudy = result;
 			});
 
 			GetProceedings.get({
 				applicationTxnId : $stateParams.applicationTxnId
 			}, function(result) {
-				$scope.proceedings = result;
+				$scope.workflowDTO.proceedings = result;
 			});
 			
 			$scope.getFeasibilityByAppTxn = function(applicationTxnId){
@@ -44,7 +47,7 @@ angular.module('watererpApp').controller(
 	    			$scope.feasibilityStudy = result;
 	    			if($scope.feasibilityStudy.id !=null){
 	    			ApplicationTxnService.generateCan(result.id).then(function(response) {
-	    				$scope.applicationTxn.can = response;
+	    				$scope.workflowDTO.applicationTxn.can = response;
 	    			});
 	    			}
 	    			else{
@@ -62,14 +65,8 @@ angular.module('watererpApp').controller(
 				$scope.getFeasibilityByAppTxn($stateParams.applicationTxnId);
 			}
 
-			/*$scope.canGenerate = function(feasibilityId) {
-				ApplicationTxnService.generateCan(feasibilityId).then(function(response) {
-					$scope.applicationTxn.can = response;
-				});				
-			}*/
 
 			var onSaveSuccess = function(result) {
-				//ApplicationTxnService.approveRequest($scope.applicationTxn.id,	$scope.applicationTxn.remarks);
 				$scope.$emit('watererpApp:applicationTxnUpdate', result);
 				$scope.isSaving = false;
 				$state.go('applicationTxn');
@@ -79,20 +76,16 @@ angular.module('watererpApp').controller(
 				$scope.isSaving = false;
 			};
 
-			$scope.save = function() {
+			 //approve a request to create new customer
+			$scope.save = function(workflowDTO){
 				$scope.isSaving = true;
-				if ($scope.applicationTxn.id != null) {
-					ApplicationTxn.update($scope.applicationTxn, onSaveSuccess,	onSaveError);
-				} else {
-					// ApplicationTxn.save($scope.applicationTxn, onSaveSuccess,
-					// onSaveError);
-					alert("Not Saved");
-				}
-			};
-
-			$scope.clear = function() {
-				$uibModalInstance.dismiss('cancel');
-			};
+	        	return $http.post('/api/applicationTxns/createNewCustomer',
+	        			workflowDTO).then(
+						function(response) {
+							$state.go('applicationTxn');
+						});
+	        }
+			
 			$scope.datePickerForConnectionDate = {};
 
 			$scope.datePickerForConnectionDate.status = {

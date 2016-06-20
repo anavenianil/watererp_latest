@@ -51,7 +51,11 @@ angular
 						$scope.collDetails.address = arr[2];
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
+						$scope.clear();
+						$scope.rc.editForm.attempted=false;
+						$scope.editForm.$setPristine();
 
+						$scope.clear();
 						CustDetailsService
 								.get(
 										{
@@ -77,6 +81,9 @@ angular
 						$scope.customerComplaints.id = result.id;
 						$scope.isSaving = false;
 						$('#saveSuccessfullyModal').modal('show');
+						$scope.rc.editForm.attempted = false;
+						$scope.editForm.$setPristine();
+						//$scope.clear();
 						//$state.go('customerComplaints');
 					};
 
@@ -96,6 +103,11 @@ angular
 									onSaveSuccess, onSaveError);
 						}
 					};
+					/*$scope.clear = function() {
+						alert("clear");
+						$('#saveSuccessfullyModal').model('hide');
+						$state.go('customerComplaints');
+					}*/
 
 					$scope.clear = function() {
 						$scope.customerComplaints = {

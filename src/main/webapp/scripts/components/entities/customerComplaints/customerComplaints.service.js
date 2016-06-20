@@ -12,6 +12,7 @@ angular.module('watererpApp')
                     return data;
                 }
             },
+            'getByCan' : {method: 'GET', url:'api/customerComplaints/getByCan/:can/:status', isArray: true}, 
             'update': {
                 method: 'PUT',
                 transformRequest: function (data) {

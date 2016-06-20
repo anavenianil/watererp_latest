@@ -2,12 +2,16 @@
 
 angular.module('watererpApp')
     .controller('IssueMeterDialogController', function ($scope, $state, $stateParams, ApplicationTxn, ParseLinks, DateUtils, MeterDetails,
-    		ApplicationTxnService) {
+    		ApplicationTxnService, $http) {
 
-    	$scope.applicationTxn = {};
+    	$scope.workflowDTO = {};
+    	$scope.workflowDTO.applicationTxn = {};
+    	$scope.workflowDTO.actionType = "issueMeter";
+    	//$scope.applicationTxn = {};
     	//$scope.meterdetailss = MeterDetails.query();
-    	$scope.applicationTxn.connectionDate = new Date();
+    	$scope.workflowDTO.applicationTxn.connectionDate = new Date();
     	$scope.dtmax = new Date();
+    	
     	
     	
     	$scope.loadAllUnallottedMeter = function() {
@@ -23,8 +27,8 @@ angular.module('watererpApp')
     	
     	$scope.load = function(id){
     		ApplicationTxn.get({id : id}, function(result) {
-                $scope.applicationTxn = result;
-                $scope.applicationTxn.remarks = "";
+                $scope.workflowDTO.applicationTxn = result;
+                $scope.workflowDTO.applicationTxn.remarks = "";
             });
     	}
     	if($stateParams.id != null){
@@ -47,17 +51,20 @@ angular.module('watererpApp')
             $scope.isSaving = false;
         };
 
-        $scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.applicationTxn.id != null) {
-                ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
-            } /*else {
-                //ApplicationTxn.save($scope.applicationTxn, onSaveSuccess, onSaveError);
-            }*/
-        };
+        
+      //approve a request
+		$scope.save = function(workflowDTO){
+			$scope.isSaving = true;
+        	return $http.post('/api/applicationTxns/issueMeter',
+        			workflowDTO).then(
+					function(response) {
+						$state.go('applicationTxn');
+					});
+        }
+		
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         };
         $scope.datePickerForConnectionDate = {};
 

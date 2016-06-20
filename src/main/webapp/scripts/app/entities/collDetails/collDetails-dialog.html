@@ -1,5 +1,5 @@
 <form name="editForm" rc-submit="save()" novalidate>
-<!-- <form name="editForm" role="form" novalidate ng-submit="save()"> -->
+
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -30,9 +30,17 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
+				<div class="form-group" ng-class="{'has-error': editForm.can.$invalid && 
+										(editForm.can.$dirty || rc.editForm.attempted)}">
+                                       
 							<label class="control-label" for="field_can">CAN</label>
 							<input type="text" class="form-control" name="can" id="field_can"
-								ng-model="collDetails.can" readonly />
+								ng-model="collDetails.can" required readonly />
+								<div
+											ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
+											<p class="help-block"
+												ng-show="editForm.can.$error.required">Please enter can number.</p>
+								</div>		</div>
 						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_consName">Consumer
@@ -84,7 +92,7 @@
 								<div
 									ng-show="(editForm.receiptAmt.$dirty || rc.editForm.attempted) && editForm.receiptAmt.$invalid">
 									<p class="help-block"
-										ng-show="editForm.receiptAmt.$error.required">Amount is
+										ng-show="editForm.receiptAmt.$error.required">This field is
 										required.</p>
 									<p class="help-block" ng-show="editForm.receiptAmt.$error.min">Amount
 										is required to be greater than 0.</p>
@@ -152,9 +160,8 @@
 					
 					
 					
-					<div class="row">
-					
-								<div class="col-sm-4">
+						<div class="row">
+						<div class="col-sm-4">
 							<div class="form-group"
 								ng-class="{ 'has-error' : instrEnabled && editForm.instrNo.$invalid && 
          (editForm.instrNo.$dirty || rc.editForm.attempted)}">
@@ -167,17 +174,16 @@
 
 								<div
 									ng-show="(editForm.instrNo.$dirty || rc.editForm.attempted) && instrEnabled && editForm.instrNo.$invalid">
-								<p class="help-block"
-										ng-show="editForm.instrNo.$error.required">Instrument Numberd
-										is required.</p> 
-								
+									<p class="help-block"
+										ng-show="editForm.instrNo.$error.required">Instrument No
+										is required.</p>
 										<p class="help-block"
 										ng-show="editForm.instrNo.$error.number">Please
 								Enter Instrument Number!</p>
 								</div>
 							</div>
 						</div>
-					<div class="col-sm-4">
+						<div class="col-sm-4">
 							<div class="form-group"
 								ng-class="{ 'has-error' : instrEnabled && editForm.instrumentIssuerMaster.$invalid && 
          (editForm.instrumentIssuerMaster.$dirty || rc.editForm.attempted)}">
@@ -199,9 +205,7 @@
 								</div>
 							</div>
 						</div>
-						
-						
-							<div class="col-sm-4">
+						<div class="col-sm-4">
 							<div class="form-group"
 								ng-class="{ 'has-error' : instrEnabled && editForm.instrDt.$invalid && 
          (editForm.instrDt.$dirty || rc.editForm.attempted)}">
@@ -209,7 +213,7 @@
 								Date</label>
 								<div class='input-group' id='field_receiptDt'>
 									<input id="field_instrDt" placeholder="YYYY-MM-DD"
-										name="instrDt" type="text" class="form-control"
+										name="instrDt" type="text" class="form-control" ng-type="date"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt" ng-required="instrEnabled"
 										is-open="datePickerForInstrDt.status.opened"
@@ -232,11 +236,12 @@
 										Instrument Date cannot be more than one day in the future.</p>
 									<p class="help-block" ng-show="editForm.instrDt.$error.veryOld">
 										Instrument Date cannot be older than six months.</p>
+								<p class="help-block" ng-show="editForm.instrDt.$error.date">
+										Please enter date format.</p>
 								</div>
 							</div>
-						</div>	
+						</div>
 					</div>
-					
 		          	<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_remarks">Remarks</label>

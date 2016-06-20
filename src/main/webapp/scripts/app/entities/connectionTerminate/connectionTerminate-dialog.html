@@ -31,10 +31,8 @@
 						</div>
 					</div>
 					<hr>
-					<div class="row">
-						<div class=" col-sm-4 col-md-offset-4">
-							<span ng-model="arrearsMessage"><h4>{{arrearsMessage}}</h4></span>
-						</div>
+					<div class="alert alert-danger" ng-show="arrearsMessage!=null">
+						<strong>{{arrearsMessage}}</strong>
 					</div>
 					<fieldset>
 						<legend>Customer Information</legend>

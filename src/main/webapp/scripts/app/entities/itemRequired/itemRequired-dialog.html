@@ -43,12 +43,25 @@
 									ng-model="proceedings.itemRequireds[x].quantity" disabled />
 							</div>
 							<div class="col-sm-3">
+							<div class="form-group" 
+									ng-class="{'has-error': editForm.provided.$invalid && 
+                                (editForm.provided.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_provided">Provided</label>
 								<input type="number" class="form-control" name="provided"
 									id="field_provided"
 									ng-change="validate($index, proceedings.itemRequireds[x].quantity, proceedings.itemRequireds[x].provided)"
 									min="0" max="{{maxVal}}"
-									ng-model="proceedings.itemRequireds[x].provided" />
+									ng-model="proceedings.itemRequireds[x].provided" required />
+									<div
+										ng-show="(editForm.provided.$dirty || rc.editForm.attempted) && editForm.provided.$invalid">
+										<p class="help-block"
+											ng-show="editForm.provided.$error.required" >This field is required
+											</p>
+											<p class="help-block"
+											ng-show="editForm.provided.$error.number" >Enter numbers only
+											</p>
+                                     </div>
+									</div>
 							</div>
 						</div>
 					</div>
@@ -57,10 +70,21 @@
 						<legend></legend>
 						<div class="row">
 							<div class="col-sm-12">
+							<div class="form-group" 
+									ng-class="{'has-error': editForm.remarks.$invalid && 
+                                (editForm.remarks.$dirty || rc.remarks.attempted)}">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
 									id="field_remarks"
 									ng-model="proceedings.applicationTxn.remarks" required></textarea>
+									<div
+										ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
+										<p class="help-block"
+											ng-show="editForm.remarks.$error.required" >This field is required
+											</p>
+										
+                                     </div>
+									</div>
 							</div>
 						</div>
 					</fieldset>
@@ -71,7 +95,7 @@
 						<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
 							Back</span>
 					</button>
-					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 						class="btn btn-primary">
 						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Items
 							Issued</span>

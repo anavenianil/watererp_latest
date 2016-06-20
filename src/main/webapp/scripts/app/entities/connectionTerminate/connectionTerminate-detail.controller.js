@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('ConnectionTerminateDetailController', function ($scope, $rootScope, $stateParams, ConnectionTerminate, 
-    		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window) {
+    		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window, $state) {
         $scope.connectionTerminate = {};
         $scope.workflowDTO = {};
         $scope.custDetails = {};

@@ -86,6 +86,29 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
             });
         };
         
+        
+      //to get active can
+		$scope.getActiveCAN = function(can) {
+			$scope.customer.can = can;
+			$scope.customer.changeType = "CHANGENAME";
+			return $http.post('/api/customers/getActiveCan',
+					$scope.customer).then(
+					function(response) {
+						$scope.custDetails = response.data.custDetails;
+						$scope.message = null;
+						$scope.customer.previousName = $scope.custDetails.consName;
+						$scope.customer.previousMobile = $scope.custDetails.mobileNo;
+						$scope.customer.previousEmail = $scope.custDetails.email;
+						if(response.data.customer != null){
+								$scope.isSaving = true;
+								$scope.message = "Name change request already submitted for the the CAN: "+can;
+						}
+						else{
+							$scope.isSaving = false;
+						}
+					});
+		}
+        
         //when selected searched CAN in DropDown
         $scope.onSelect = function($item, $model, $label) {
 			//console.log($item);
@@ -94,7 +117,8 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
 			$scope.custDetails.can = arr[0].trim();
 			$scope.custDetails.name = arr[1];
 			$scope.custDetails.address = arr[2];
-			$scope.getCustDetails($scope.custDetails.can);
+			//$scope.getCustDetails($scope.custDetails.can);
+			$scope.getActiveCAN($scope.custDetails.can);
 			$scope.customer.can = $scope.custDetails.can;
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;

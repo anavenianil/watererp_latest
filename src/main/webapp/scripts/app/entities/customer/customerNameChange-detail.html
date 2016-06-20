@@ -21,8 +21,6 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="item in requestWorkflowHistorys">
-							<!-- <td>{{item.domainObject}}</td>
-							<td>{{item.fileNumber}}</td> -->
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
 							<td>{{item.assignedTo.firstName}}
@@ -117,12 +115,12 @@
 								<h5 class="list-group-item-heading">{{customer.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status===3">
+							<div class="col-sm-3" ng-if="customer.status===9">
 								<label>Changed Date</label>
 								<h5 class="list-group-item-heading">{{customer.changedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status===2">
+							<div class="col-sm-3" ng-if="customer.status===3 && orgRole.id==16">
 								<label class="control-label" for="field_changedDate">Changed
 									Date</label>
 								<div class="form-group">
@@ -145,7 +143,7 @@
 					<br>
 					<fieldset>
 						<legend></legend>
-						<div class="row" ng-if="customer.status!=3">
+						<div class="row" ng-if="canDecline()">
 							<div class="col-sm-3">
 								<label class="control-label" for="field_approvedDate">Approved
 									Date</label>
@@ -177,19 +175,19 @@
 		</div>
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="workflowDTO.customer.status === 0 && orgRole.id === 10"
+			ng-if="workflowDTO.customer.status === 1 && orgRole.id === 10"
 			ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
 			ui-sref="receiptForNameChange({customerId:workflowDTO.customer.id})"
-			ng-if="workflowDTO.customer.status === 1 && orgRole.id === 22">
+			ng-if="workflowDTO.customer.status === 2 && orgRole.id === 22">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="workflowDTO.customer.status === 2 && orgRole.id === 16"
+			ng-if="workflowDTO.customer.status === 3 && orgRole.id === 16"
 			ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>

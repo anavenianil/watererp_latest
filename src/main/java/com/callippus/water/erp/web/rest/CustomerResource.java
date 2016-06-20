@@ -26,13 +26,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.WorkflowDTO;
-import com.callippus.water.erp.domain.WorkflowTxnDetails;
+import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
+import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.CustDetailsChangeWorkflowService;
@@ -62,6 +64,13 @@ public class CustomerResource {
 	
 	@Inject
 	private ReceiptRepository receiptRepository;
+	
+	@Inject
+	private ApplicationTxnRepository applicationTxnRepository;
+	
+	@Inject
+	private StatusMasterRepository statusMasterRepository;
+	
 	/**
 	 * POST /customers -> Create a new customer.
 	 */
@@ -81,7 +90,7 @@ public class CustomerResource {
 		hm.put("photo", "setPhoto");
 		UploadDownloadResource.setValues(customer, hm, request,
 				customer.getId());
-		customer.setStatus(0);
+		customer.setStatus(1);
 		Customer result = customerRepository.save(customer);
 		try {
 			workflowService.setAssignedDate(ZonedDateTime.now().toString());
@@ -121,15 +130,22 @@ public class CustomerResource {
 	@Timed
 	public ResponseEntity<List<Customer>> getAllCustomers(
 			Pageable pageable,
-			@RequestParam(value = "changeType", required = false) String changeType)
+			@RequestParam(value = "changeType", required = false) String changeType,
+			@RequestParam(value = "can", required = false) String can)
 			throws URISyntaxException {
 		log.debug("REST request to get a page of Customers");
 		// Page<Customer> page = customerRepository.findAll(pageable);
 		Page<Customer> page;
-		if (changeType != null) {
+		if (changeType != null && can==null) {
 			page = customerRepository.findByChangeType(pageable, changeType);
-		} else {
+		} 
+		else if(changeType != null && can!=null){
+			page = customerRepository.findByChangeTypeAndCan(pageable, changeType, can);
+		}
+		else 
+		{
 			page = customerRepository.findAll(pageable);
+			
 		}
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
 				page, "/api/customers");
@@ -169,7 +185,7 @@ public class CustomerResource {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(
+	public ResponseEntity<Customer> approveCategoryChange(
 			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
 		log.debug("REST request to save Customer : {}", workflowDTO);
 		Customer customer = workflowDTO.getCustomer();
@@ -186,23 +202,31 @@ public class CustomerResource {
 		}
 		customerRepository.save(customer);
 		
-		CustDetails custDetails = custDetailsRepository.findByCan(customer.getCan());
+		CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customer.getCan());
 		
-		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
+		/*if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
+			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
+		}*/
+		if(workflowDTO.getReceipt()!=null){
+			receiptRepository.save(workflowDTO.getReceipt());
+		}
+		
+		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
+			customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()));
+			customer.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
+		}
+		
+		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}
 		
-		if("PIPESIZE".equals(customer.getChangeType()) && customer.getStatus()==2){
+		if("PIPESIZE".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
 			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
 		}
-		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==2){
-			if(workflowDTO.getReceipt()!=null){
-				receiptRepository.save(workflowDTO.getReceipt());
-			}
-		}
+			
 		
-		if("CHANGENAME".equals(customer.getChangeType()) && customer.getStatus()==3){
+		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			 if(customer.getMiddleName()!=null){
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getMiddleName()+" "+customer.getLastName());
 	            }
@@ -214,7 +238,8 @@ public class CustomerResource {
 			custDetails.setIdNumber(customer.getIdNumber());
 			
 		}
-		custDetailsRepository.save(custDetails);
+		customerRepository.save(customer);
+		//custDetailsRepository.save(custDetails); not to save in custDetails
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customer", ""))
@@ -234,12 +259,49 @@ public class CustomerResource {
 			@RequestBody WorkflowDTO workflowDTO)
 			throws Exception {
 		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
-		customerRepository.save(workflowDTO.getCustomer());
+		
 		workflowService.setRemarks(workflowDTO.getCustomer().getRemarks());
 		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+		
 		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
-		return ResponseEntity.created(new URI("/api/connectionTerminates/declineRequest/"))
-				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
+		
+		workflowDTO.getCustomer().setStatus(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()).getId().intValue());
+		//Customer customer = 
+		customerRepository.save(workflowDTO.getCustomer());
+		
+		//customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()));
+		
+		return ResponseEntity.created(new URI("/api/customers/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))
 				.body(null);
+	}
+    
+    
+    
+    /**
+     * Get Active can to change its details
+     */
+    @RequestMapping(value = "/customers/getActiveCan",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<WorkflowDTO> getAtiveCan(
+			@RequestBody Customer customer)
+			throws Exception {
+    	log.debug("REST request to getActiveCan() for Customer  : {}", customer);
+		WorkflowDTO workflowDTO = new WorkflowDTO();
+    	Customer newCustomer = customerRepository.findByChangeTypeAndCan(customer.getChangeType(), customer.getCan());
+    	if(newCustomer==null){
+    		workflowDTO.setApplicationTxn(applicationTxnRepository.findByCan(customer.getCan()));
+    	}
+    	else{
+    		workflowDTO.setCustomer(newCustomer);
+    	}
+    	workflowDTO.setCustDetails(custDetailsRepository.findByCanForUpdate(customer.getCan()));
+
+    	return Optional.ofNullable(workflowDTO)
+				.map(result -> new ResponseEntity<>(workflowDTO, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 }

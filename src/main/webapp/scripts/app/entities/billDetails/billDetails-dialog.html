@@ -1,5 +1,7 @@
 <form name="editForm" rc-submit="save()" novalidate>
+
 <!-- <form name="editForm" role="form" novalidate ng-submit="save()" -->
+
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Bill Details</h3>
@@ -50,10 +52,18 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
+							<div class="form-group" ng-class="{'has-error': editForm.can.$invalid && 
+										(editForm.can.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_can">CAN</label>
 								<input type="text" class="form-control" name="can"
-									id="field_can" ng-model="billDetails.can" readonly />
-							</div>
+									id="field_can" ng-model="billDetails.can" required readonly />
+									<div
+											ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
+											<p class="help-block"
+												ng-show="editForm.can.$error.required">Please enter can number.</p>
+								</div>		</div>
+						</div>
+							
 							<div class="col-sm-4">
 								<label class="control-label" for="field_consName">Consumer
 									Name</label>
@@ -90,7 +100,9 @@
 								</div>
 							</div>
 							<div class="col-sm-4" ng-show="isForceManual">
-								<label class="control-label" for="field_forceManual">Set
+							<div class="form-group" ng-class="{'has-error': editForm.forceManual.$invalid && 
+										(editForm.forceManual.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_forceManual" required >Set
 									Bill Month Manually</label>
 								<div class="form-group">
 									<div class='input-group' id='field_forceManual'>
@@ -106,10 +118,17 @@
 											ng-change="setToMonthManual()" class="form-control"
 											ng-model="billDetails.forceManual" ng-required="isForceManual"/>
 									</label>
+									<div
+											ng-show="(editForm.forceManual.$dirty || rc.editForm.attempted) && editForm.forceManual.$invalid">
+											<p class="help-block"
+												ng-show="editForm.forceManual.$error.required">Please select any one.</p>
 									</div>
 								</div>
 							</div>
 						</div>
+						</div>
+						</div>
+		
 						<div class="row">
 							<div class="col-sm-4">
 								<label class="control-label" for="field_prevBillMonth">Previous
@@ -117,7 +136,7 @@
 								<div class="form-group">
 									<div class='input-group' id='field_prevBillMonth'>
 										<input id="field_fromMonth" type="text" class="form-control"
-											uib-datepicker-popup="{{dateformat}}"
+											uib-datepicker-popup="{{dateformat}}" 
 											ng-model="billDetails.prevBillMonth" readonly />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default" disabled>
@@ -154,6 +173,9 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
+							<div class="form-group" ng-class="{'has-error': editForm.currentBillType.$invalid && 
+         (editForm.currentBillType.$dirty || rc.editForm.attempted)}"> 
+							
 								<label class="control-label" for="field_currentBillType">Current
 									Bill Type{{billDetails.currentBillType}}</label>
 								<select class="form-control" id="field_currentBillType"
@@ -162,16 +184,25 @@
 									<option ng-repeat="currentBillType in currentBillTypes"
 										value="{{currentBillType.id}}">{{currentBillType.name}}</option>
 								</select>
+								<div
+											ng-show="(editForm.currentBillType.$dirty || rc.editForm.attempted) && editForm.currentBillType.$invalid">
+											<p class="help-block"
+												ng-show="editForm.currentBillType.$error.required">This field is required.</p>
+								
+							</div>
+							</div>
 							</div>
 							<div class="col-sm-4">
+							<div class="form-group" ng-class="{'has-error': editForm.metReadingDt.$invalid && 
+         (editForm.metReadingDt.$dirty || rc.editForm.attempted)}"> 
 								<label class="control-label" for="field_metReadingDt">Meter
 									Reading Date</label>
 								<div class="form-group">
 									<div class='input-group' id='field_metReadingDt'>
-										<input id="field_metReadingDt" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
+										<input id="field_metReadingDt" type="text" name="metReadingDt" ng-type="date"
+											class="form-control" uib-datepicker-popup="{{dateformat}}" placeholder="YYYY-MM-DD"
 											ng-model="billDetails.metReadingDt" ng-change="setToMonthAndCheck()"
-											is-open="datePickerForMetReadingDt.status.opened" />
+											is-open="datePickerForMetReadingDt.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForMetReadingDtOpen($event)">
@@ -180,43 +211,42 @@
 										</span>
 									</div>
 								</div>
-								<div ng-show="editForm.metReadingDt.$invalid">
-									<p class="help-block"
-										ng-show="editForm.metReadingDt.$error.required">This field
-										is required.</p>
-								</div>
+								<div
+											ng-show="(editForm.metReadingDt.$dirty || rc.editForm.attempted) && editForm.metReadingDt.$invalid">
+											<p class="help-block"
+												ng-show="editForm.metReadingDt.$error.required">Date is required.</p>
+								<p class="help-block"
+												ng-show="editForm.metReadingDt.$error.date">Please enter date format.</p>					
 							</div>
-
+							</div>
+                            </div>
 							<div class="col-sm-4">
 							<div class="form-group" ng-class="{'has-error': editForm.presentReading.$invalid && 
-         (editForm.presentReading.$dirty || rc.presentReading.attempted)}"> 
-							
+         (editForm.presentReading.$dirty || rc.editForm.attempted)}"> 
 								<label class="control-label" for="field_presentReading">Present
 									Reading</label>
 								<input type="number" class="form-control" name="presentReading"
 									ng-disabled="isMetReadingDisabled"
 									ng-required="!isMetReadingDisabled" id="field_presentReading"
-									ng-model="billDetails.presentReading" min="1" max="999999" 
+									ng-model="billDetails.presentReading"
 									ng-change="checkPrevious()" />
-								<div ng-show="editForm.presentReading.$invalid">
-									<p class="help-block"
-										ng-show="editForm.presentReading.$error.required">This
-										field is required.</p>
+								<div
+											ng-show="(editForm.presentReading.$dirty || rc.editForm.attempted) && editForm.presentReading.$invalid">
+											<p class="help-block"
+												ng-show="editForm.presentReading.$error.required">This field is required.</p>
+								
 									<p class="help-block"
 										ng-show="editForm.presentReading.$error.ltPrevious">Value
 										is lesser than Previous Reading.</p>
-								 <p class="help-block" ng-show="editForm.presentReading.$error.number">Enter valid number</p>
-										 
-									
 								</div>
 							</div>
-</div>
+                          </div>
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
 								<label for="field_paymentTypes">Meter Reader</label>
 								<select class="form-control" id="field_collectionTypeMaster"
-									name="collectionTypeMaster" required="required"
+									name="collectionTypeMaster" 
 									ng-model="billDetails.mtrReader"
 									ng-options='user as (user.firstName + " " + user.lastName + " (" + user.login +")") for user in users track by user.id'>
 								</select>

@@ -38,7 +38,8 @@
 			</div>
 		</div>
 	</div>
-	<div>
+
+	<form name="editForm" rc-submit="save()" novalidate>
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">Application For Category
@@ -133,6 +134,7 @@
 						</div>
 					</fieldset>
 					<br>
+
 					<fieldset>
 						<legend>Attached Documents</legend>
 						<div class="row">
@@ -143,15 +145,18 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Requested Date</label>
-								<h5 class="list-group-item-heading">{{customer.requestedDate | date:'mediumDate'}}</h5>
+								<h5 class="list-group-item-heading">{{customer.requestedDate
+									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3" ng-show="customer.status==2">
 								<label class="control-label" for="field_changedDate">Changed
 									Date </label>
-								<div class="form-group">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.changedDate.$invalid && 
+									(editForm.changedDate.$dirty || rc.editForm.attempted)}">
 									<div class='input-group date' id='field_changedDate'>
 										<input id="field_changedDate" type="text" class="form-control"
-											uib-datepicker-popup="{{dateformat}}"
+											name="changedDate" uib-datepicker-popup="{{dateformat}}"
 											ng-model="workflowDTO.customer.changedDate" max-date="maxDt"
 											is-open="datePickerForChangedDate.status.opened" required />
 										<span class="input-group-btn">
@@ -161,20 +166,38 @@
 											</button>
 										</span>
 									</div>
+									<div
+										ng-show="(editForm.changedDate.$dirty || rc.editForm.attempted) && 
+										editForm.changedDate.$invalid">
+										<p class="help-block"
+											ng-show="editForm.changedDate.$error.required">Date is
+											required.</p>
+										<p class="help-block"
+											ng-show="editForm.changedDate.$error.date">Please enter
+											Date format .</p>
+									</div>
 								</div>
+							</div>
+							<div class="col-sm-3" ng-show="customer.status==3 || customer.status==9">
+								<label>Changed Date</label>
+								<h5 class="list-group-item-heading">{{customer.changedDate}}</h5>
 							</div>
 						</div>
 					</fieldset>
 					<fieldset>
 						<legend></legend>
-						<div class="row" ng-if="customer.status!==2">
+						<div class="row" ng-show="canDecline()">
 							<div class="col-sm-3">
+
 								<label class="control-label" for="field_approvedDate">Approved
 									Date</label>
-								<div class="form-group">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.approvedDate.$invalid && 
+									(editForm.approvedDate.$dirty || rc.editForm.attempted)}">
 									<div class='input-group date' id='field_approvedDate'>
-										<input id="field_approvedDate" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
+										<input id="field_approvedDate" type="text" name="approvedDate"
+											ng-type="date" class="form-control"
+											uib-datepicker-popup="{{dateformat}}"
 											ng-model="workflowDTO.approvedDate" max-date="maxDt"
 											is-open="datePickerForApprovedDate.status.opened" required />
 										<span class="input-group-btn">
@@ -184,12 +207,33 @@
 											</button>
 										</span>
 									</div>
+									<div
+										ng-show="(editForm.approvedDate.$dirty || rc.editForm.attempted) && 
+										editForm.approvedDate.$invalid">
+										<p class="help-block"
+											ng-show="editForm.approvedDate.$error.required">Date is
+											required.</p>
+										<p class="help-block"
+											ng-show="editForm.approvedDate.$error.date">Please enter
+											Date format .</p>
+									</div>
 								</div>
 							</div>
 							<div class="col-sm-9">
-								<label class="control-label" for="field_remarks">Remarks</label>
-								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="workflowDTO.remarks" required></textarea>
+								<div class="form-group"
+									ng-class="{'has-error': editForm.remarks.$invalid && 
+									(editForm.remarks.$dirty || rc.editForm.attempted)}">
+									<label class="control-label" for="field_remarks">Remarks</label>
+									<textarea rows="2" cols="30" class="form-control"
+										name="remarks" id="field_remarks"
+										ng-model="workflowDTO.remarks" required></textarea>
+									<div
+										ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
+										<p class="help-block"
+											ng-show="editForm.remarks.$error.required">This field is
+											required.</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</fieldset>
@@ -199,10 +243,16 @@
 		</div>
 
 
-		<button type="button" class="btn btn-success pull-right"
+		<!-- <button type="submit" class="btn btn-success pull-right" 
 			ng-show="canDecline()" ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
+		</button> -->
+		<button type="button" class="btn btn-success pull-right"
+			ng-click="approve(workflowDTO)"
+			ng-enabled="editForm.$invalid || isSaving" ng-show="canDecline()">
+			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
+
 
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
@@ -212,29 +262,21 @@
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
 
-		<!-- <button type="button" class="btn btn-success pull-right"
-			ng-if="orgRole.orgRoleName === 'Technical Manager'"
-			ng-click="approve(customer)">
-			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-		</button> -->
-		<!-- <button type="button" class="btn btn-danger pull-right"
-			ng-click="declineRequest(applicationTxn.id)">
-			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
-		</button> -->
 		<button type="submit" onclick="window.history.back()"
 			class="btn btn-info">
 			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
 				Back</span>
 		</button>
-	</div>
-	<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
+	</form>
+
+	<div id="saveSuccessfullyModal" class="modal" name="saveForm">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="confirmForm">
 					<div class="modal-header"></div>
 					<div class="modal-body">
 						<p>
-						<h3>Request Submitted Successfully!</h3>
+						<h3>Request Approved Successfully!</h3>
 						</p>
 						<div>
 							<h4>
@@ -242,7 +284,6 @@
 							</h4>
 						</div>
 					</div>
-
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal"
 							ng-click="clear()">

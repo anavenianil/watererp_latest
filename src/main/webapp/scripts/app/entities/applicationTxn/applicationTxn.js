@@ -206,7 +206,24 @@ angular.module('watererpApp')
                 views: {
                     'content@': {
                     	templateUrl: 'scripts/app/entities/applicationTxn/applicationTxnWithoutMeter-dialog.html',
-                        controller: 'ApplicationTxnDialogController'
+                        controller: 'ApplicationTxnWithoutMeterDialogController'
+                    }
+                },
+                resolve: {
+                	
+                }
+            })
+            .state('applicationTxnCloseWithoutMeter', {
+                parent: 'applicationTxn',
+                url: '/closeWM/:applicationTxnId',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'applicationTxnClose'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/applicationTxn/applicationTxnCloseWithoutMeter-dialog.html',
+                        controller: 'applicationTxnCloseWithoutMeterDialogController'
                     }
                 },
                 resolve: {

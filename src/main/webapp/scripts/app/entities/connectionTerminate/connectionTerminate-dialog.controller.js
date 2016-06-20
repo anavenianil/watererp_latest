@@ -9,7 +9,6 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         $scope.maxDt = new Date();
         $scope.divisionmasters = DivisionMaster.query();
         $scope.streetMasters = StreetMaster.query();
-        //$scope.meterdetailss = MeterDetails.query();
         $scope.load = function(id) {
             ConnectionTerminate.get({id : id}, function(result) {
                 $scope.connectionTerminate = result;
@@ -20,23 +19,13 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         	$scope.load($stateParams.id);
         }
         
-        /*$scope.loadAllAllottedMeter = function() {
-    		$scope.meterdetailss = [];
-            MeterDetails.query({page: $scope.page, size: 20, meterStatusId: 1}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.meterdetailss.push(result[i]);
-                }
-            });
-        };
-        $scope.loadAllAllottedMeter();*/
-        $scope.getMeterDetail = function(meterId){
+        /*$scope.getMeterDetail = function(meterId){
         	$scope.meterdetailss = [];
         	GetMeterDetails.findByMeterId(meterId).then(function(result) {
                 $scope.meterdetailss.push(result);
                 $scope.connectionTerminate.meterDetails = result;
             });
-    	}
+    	}*/
        
 
         var onSaveSuccess = function (result) {
@@ -99,22 +88,21 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
 		}
         
         
-        
+        $scope.meterdetailss = [];
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.connectionTerminate.can = $scope.custDetails.can; 
-                $scope.getMeterDetail($scope.custDetails.meterNo);
-                //$scope.custDetails.arrears = 10;
+                $scope.meterdetailss.push($scope.custDetails.meterDetails);
+                $scope.connectionTerminate.meterDetails = $scope.custDetails.meterDetails;
                 if($scope.custDetails.arrears > 0){
                 	$scope.isSaving = true;
                 	$scope.arrearsMessage = "Clear Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
                 }
                 else{
-                	$scope.arrearsMessage = "No Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
+                	$scope.isSaving = false;
+                	$scope.arrearsMessage = null;
                 }
-                
-                //console.log($scope.divisionmasters);
             });
         };
         

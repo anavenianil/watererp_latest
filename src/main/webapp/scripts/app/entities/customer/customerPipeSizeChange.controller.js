@@ -20,10 +20,13 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
         }
 
         var onSaveSuccess = function (result) {
+        	//$scope.clear();
             $scope.$emit('watererpApp:custDetailsUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('customer.pipeSizeList');
+            $scope.customer.id = result.id;
+            $('#saveSuccessfullyModal').modal('show');
+           // $state.go('customer.pipeSizeList');
         };
 
         var onSaveError = function (result) {
@@ -41,6 +44,8 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 
         $scope.clear = function() {
             //$uibModalInstance.dismiss('cancel');
+        	$('#saveSuccessfullyModal').modal('hide');
+        	$state.go('customer.pipeSizeList');
         };
         
         $scope.datePickerForRequestedDate = {};
@@ -72,14 +77,36 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 			});
 		}
         
-        $scope.getCustDetails = function(can) {
+        /*$scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
                 $scope.custDetails = result;
                 $scope.getPipeSizeDetail(result.pipeSize);
                 $scope.customer.can = result.can;
                 $scope.customer.meterReading = result.prevReading;
             });
-        };
+        };*/
+        
+      //to get active can
+		$scope.getActiveCAN = function(can) {
+			$scope.customer.can = can;
+			$scope.customer.changeType = "PIPESIZE";
+			return $http.post('/api/customers/getActiveCan',
+					$scope.customer).then(
+					function(response) {
+						$scope.custDetails = response.data.custDetails;
+						
+			             $scope.message = null;
+						if(response.data.customer != null){
+							$scope.isSaving = true;
+							$scope.message = "Pipe Size change request already submitted for the the CAN: "+can;
+						}
+						else{
+							$scope.customer.can = response.data.custDetails.can;
+							$scope.customer.pipeSizeMaster = response.data.custDetails.pipeSizeMaster;
+				            $scope.customer.meterReading = response.data.custDetails.prevReading;
+						}
+					});
+		}
         
         //when selected searched CAN in DropDown
         $scope.onSelect = function($item, $model, $label) {
@@ -88,19 +115,20 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 			$scope.custDetails.can = arr[0].trim();
 			$scope.custDetails.name = arr[1];
 			$scope.custDetails.address = arr[2];
-			$scope.getCustDetails($scope.custDetails.can);
+			//$scope.getCustDetails($scope.custDetails.can);
+			$scope.getActiveCAN($scope.custDetails.can);
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
 		};
 		
 		
-		$scope.getPipeSizeDetail = function(pipeSize) {
+		/*$scope.getPipeSizeDetail = function(pipeSize) {
 			GetPipeSizeDetail.findByPipeSize(pipeSize).then(
 							function(result) {
 								$scope.pipeSizeMaster = result;
 								$scope.customer.pipeSizeMaster = result;
 							});
-		};
+		};*/
 		
 		
 		$scope.pipeCheck = function(oldPipeId, newPipeId){
@@ -109,13 +137,30 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 				alert("Pipe Size should be different.");
 			}
 		}
+		$scope.checkReading = function(prvReading, newReading){
+			if(prvReading >= newReading)
+				{
+				
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", true);
+				return true;
+				}
+			else
+				{
+				
+				
+				$scope.editForm.presentReading.$setValidity(
+						"ltPrevious", false);
+				return false;
+		}
+		}
 		
-		$scope.checkReading = function(oldReading, presentReading){
+	/*	$scope.checkReading = function(oldReading, presentReading){
 			//alert(oldReading+","+ presentReading);
 			if(presentReading < oldReading){
 				$scope.customer.presentReading = "";
 				alert("Present reading should be greater than old reading");
 			}
-		}
+		}*/
 		
 }/*]*/);

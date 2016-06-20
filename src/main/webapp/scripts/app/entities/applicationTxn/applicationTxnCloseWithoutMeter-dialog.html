@@ -1,0 +1,122 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Create CAN(Without Meter)</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+
+					<fieldset>
+						<legend>Applicant Detail</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Application No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.id}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Full Name</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.firstName
+									| uppercase}}&nbsp;{{applicationTxn.middleName |
+									uppercase}}&nbsp;{{applicationTxn.lastName | uppercase}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Mobile No.</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.mobileNo}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Customer Account Number(CAN)</label>
+								<h5 class="list-group-item-heading">
+									<b>{{applicationTxn.can}}</b>
+								</h5>
+							</div>
+						</div>
+					</fieldset>
+					<hr>
+					<fieldset>
+						<legend>Address Details</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>Division</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.divisionMaster.divisionName
+									| uppercase}}</h5>
+							</div>
+							<div class="col-sm-4">
+								<label>Street</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.streetMaster.streetName
+									| uppercase}}</h5>
+							</div>
+							<div class="col-sm-4">
+								<label>Address</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.dma |
+									uppercase}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<hr>
+					<fieldset>
+						<legend>Connection Detail</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>Category</label>
+								<h5 class="list-group-item-heading">{{applicationTxn.tariffCategoryMaster.tariffCategory
+									| uppercase}}</h5>
+							</div>
+							<div class="col-sm-4">
+								<label>Effective Bill Month</label> <input type="text"
+									class="form-control" ng-model="eDate" disabled />
+								<!-- <h5 class="list-group-item-heading">{{eDate}}</h5> -->
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_connectionDate">Connection
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_connectionDate'>
+										<input id="field_connectionDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="applicationTxn.connectionDate" max-date="dtmax"
+											is-open="datePickerForConnectionDate.status.opened"
+											ng-change="getEffectiveMonth(applicationTxn.connectionDate)"
+											required readonly/> <span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForConnectionDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</fieldset>
+					<hr>
+					<fieldset>
+						<legend>Remarks</legend>
+						<div class="row">
+							<div class="col-sm-12">
+								<!-- <label class="control-label" for="field_remarks">Remarks</label> -->
+								<textarea rows="2" cols="30" class="form-control" name="remarks"
+									id="field_remarks" style="resize: none"
+									ng-model="applicationTxn.remarks" required></textarea>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" onclick="window.history.back()"
+					class="btn btn-info pull-left">
+					<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
+						Back</span>
+				</button>
+				<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					class="btn btn-primary">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</form>

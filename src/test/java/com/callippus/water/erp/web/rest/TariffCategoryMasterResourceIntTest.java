@@ -43,6 +43,8 @@ public class TariffCategoryMasterResourceIntTest {
 
     private static final String DEFAULT_TARIFF_CATEGORY = "AAAAA";
     private static final String UPDATED_TARIFF_CATEGORY = "BBBBB";
+    private static final String DEFAULT_TYPE = "AAAAA";
+    private static final String UPDATED_TYPE = "BBBBB";
 
     @Inject
     private TariffCategoryMasterRepository tariffCategoryMasterRepository;
@@ -71,6 +73,7 @@ public class TariffCategoryMasterResourceIntTest {
     public void initTest() {
         tariffCategoryMaster = new TariffCategoryMaster();
         tariffCategoryMaster.setTariffCategory(DEFAULT_TARIFF_CATEGORY);
+        tariffCategoryMaster.setType(DEFAULT_TYPE);
     }
 
     @Test
@@ -90,6 +93,7 @@ public class TariffCategoryMasterResourceIntTest {
         assertThat(tariffCategoryMasters).hasSize(databaseSizeBeforeCreate + 1);
         TariffCategoryMaster testTariffCategoryMaster = tariffCategoryMasters.get(tariffCategoryMasters.size() - 1);
         assertThat(testTariffCategoryMaster.getTariffCategory()).isEqualTo(DEFAULT_TARIFF_CATEGORY);
+        assertThat(testTariffCategoryMaster.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -98,6 +102,24 @@ public class TariffCategoryMasterResourceIntTest {
         int databaseSizeBeforeTest = tariffCategoryMasterRepository.findAll().size();
         // set the field null
         tariffCategoryMaster.setTariffCategory(null);
+
+        // Create the TariffCategoryMaster, which fails.
+
+        restTariffCategoryMasterMockMvc.perform(post("/api/tariffCategoryMasters")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(tariffCategoryMaster)))
+                .andExpect(status().isBadRequest());
+
+        List<TariffCategoryMaster> tariffCategoryMasters = tariffCategoryMasterRepository.findAll();
+        assertThat(tariffCategoryMasters).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tariffCategoryMasterRepository.findAll().size();
+        // set the field null
+        tariffCategoryMaster.setType(null);
 
         // Create the TariffCategoryMaster, which fails.
 
@@ -121,7 +143,8 @@ public class TariffCategoryMasterResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(tariffCategoryMaster.getId().intValue())))
-                .andExpect(jsonPath("$.[*].tariffCategory").value(hasItem(DEFAULT_TARIFF_CATEGORY.toString())));
+                .andExpect(jsonPath("$.[*].tariffCategory").value(hasItem(DEFAULT_TARIFF_CATEGORY.toString())))
+                .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     @Test
@@ -135,7 +158,8 @@ public class TariffCategoryMasterResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(tariffCategoryMaster.getId().intValue()))
-            .andExpect(jsonPath("$.tariffCategory").value(DEFAULT_TARIFF_CATEGORY.toString()));
+            .andExpect(jsonPath("$.tariffCategory").value(DEFAULT_TARIFF_CATEGORY.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -156,6 +180,7 @@ public class TariffCategoryMasterResourceIntTest {
 
         // Update the tariffCategoryMaster
         tariffCategoryMaster.setTariffCategory(UPDATED_TARIFF_CATEGORY);
+        tariffCategoryMaster.setType(UPDATED_TYPE);
 
         restTariffCategoryMasterMockMvc.perform(put("/api/tariffCategoryMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -167,6 +192,7 @@ public class TariffCategoryMasterResourceIntTest {
         assertThat(tariffCategoryMasters).hasSize(databaseSizeBeforeUpdate);
         TariffCategoryMaster testTariffCategoryMaster = tariffCategoryMasters.get(tariffCategoryMasters.size() - 1);
         assertThat(testTariffCategoryMaster.getTariffCategory()).isEqualTo(UPDATED_TARIFF_CATEGORY);
+        assertThat(testTariffCategoryMaster.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

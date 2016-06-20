@@ -1,5 +1,5 @@
 <div>
-<form name="editForm" role="form" novalidate ng-submit="save()">
+<form name="editForm" rc-submit="save()" novalidate>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Complaint Request</h3>
@@ -29,15 +29,44 @@
 						</div>
 					</div>
 					<div class="row">
+					<div class="form-group"
+										ng-class="{'has-error': editForm.can.$invalid && 
+                                (editForm.can.$dirty || rc.editForm.attempted)}">
 						<div class="col-sm-4 col-sm-offset-2">
 							<label>CAN</label> <input type="text" class="form-control"
-								id="field_can" name="can"
+								id="field_can" name="can" required
 								ng-model="customerComplaints.can" disabled>
+								<div
+									ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
+									<p class="help-block"
+										ng-show="editForm.can.$error.required">This field is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.can.$error.number">Please enter numbers only
+										.</p>
+							</div>
+								</div>
 						</div>
 						<div class="col-sm-4">
-							<label>Customer Name</label> <input type="text"
-								class="form-control" id="field_consName" name="consName"
-								ng-model="customerComplaints.custDetails.consName" disabled>
+						<div class="form-group"
+										ng-class="{'has-error': editForm.consName.$invalid && 
+                                (editForm.consName.$dirty || rc.editForm.attempted)}">
+								
+							<label>Customer Name</label> 
+							<input type="text"	class="form-control" id="field_consName" name="consName"
+								ng-model="customerComplaints.custDetails.consName" required disabled>
+								<div ng-pattern="/^[a-zA-Z]/"
+									ng-show="(editForm.consName.$dirty || rc.editForm.attempted) && editForm.consName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.consName.$error.required">This field is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.consName.$error.pattern">Enter text only
+										.</p>
+								
+							
+									</div>
+									</div>
 						</div>
 					</div>
 					<div class="row">
@@ -63,30 +92,56 @@
 						</div>
 						
 						<div class="col-sm-4">
+						<div class="form-group"
+										ng-class="{'has-error': editForm.complaintTypeMaster.$invalid && 
+                                (editForm.complaintTypeMaster.$dirty || rc.editForm.attempted)}">
+						
 							<label for="field_complaintTypeMaster">Complaint Type</label>
 							<select class="form-control" id="field_complaintTypeMaster"
 								name="complaintTypeMaster"
 								ng-model="customerComplaints.complaintTypeMaster"
-								ng-options="complaintTypeMaster as complaintTypeMaster.complaintType for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.id">
+								ng-options="complaintTypeMaster as complaintTypeMaster.complaintType for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.id" required>
 								<option value=""></option>
 							</select>
+							<div ng-pattern="/^[a-zA-Z]/"
+									ng-show="(editForm.complaintTypeMaster.$dirty || rc.editForm.attempted) && editForm.complaintTypeMaster.$invalid">
+									<p class="help-block"
+										ng-show="editForm.complaintTypeMaster.$error.required">This field is
+										required.</p>
+							
+									</div>
+									</div>
 						</div>
 					</div>
 					<div class="row">
 					<div class="col-sm-4 col-sm-offset-2">
+					<div class="form-group"
+										ng-class="{'has-error': editForm.complaintBy.$invalid && 
+                                (editForm.complaintBy.$dirty || rc.editForm.attempted)}">
+						
 							<label class="control-label" for="field_complaintBy">Complaint
 								By</label> <input type="text" class="form-control" name="complaintBy"
-								id="field_complaintBy" ng-model="customerComplaints.complaintBy" />
+								id="field_complaintBy" ng-model="customerComplaints.complaintBy" required/>
+							<div ng-pattern="/^[a-zA-Z]/"
+									ng-show="(editForm.complaintBy.$dirty || rc.editForm.attempted) && editForm.complaintBy.$invalid">
+									<p class="help-block"
+										ng-show="editForm.complaintBy.$error.required">This field is
+										required.</p>
+							
+									</div>
+									</div>	
 						</div>
 						
 						<div class="col-sm-4">
 							<label class="control-label" for="field_complaintDate">Complaint
 								Date</label>
-							<div class="form-group">
+							<div class="form-group"
+										ng-class="{'has-error': editForm.complaintDate.$invalid && 
+                                (editForm.complaintDate.$dirty || rc.editForm.attempted)}">
 								<div class='input-group date' id='field_complaintDate'>
-									<input id="field_complaintDate" type="text"
-										class="form-control"
-										ng-click="datePickerForComplaintDateOpen($event)"
+									<input id="field_complaintDate" type="text" ng-type="date" name="complaintDate"
+										class="form-control" required
+										ng-click="datePickerForComplaintDateOpen($event)" placeholder="YYYY-MM-DD"										
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="customerComplaints.complaintDate"
 										is-open="datePickerForComplaintDate.status.opened" /> <span
@@ -97,6 +152,15 @@
 										</button>
 									</span>
 								</div>
+								<div 
+									ng-show="(editForm.complaintDate.$dirty || rc.editForm.attempted) && editForm.complaintDate.$invalid">
+									<p class="help-block"
+										ng-show="editForm.complaintDate.$error.date">Please enter date format.</p>
+								<p class="help-block"
+										ng-show="editForm.complaintDate.$error.required">Date is
+										required.</p>
+							
+									</div>
 							</div>
 						</div>
 					</div>
@@ -146,7 +210,7 @@
 			ng-click="clear()">
 			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 		</button>
-		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+		<button type="submit" ng-enabled="editForm.$invalid || isSaving"
 			class="btn btn-primary">
 			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 		</button>

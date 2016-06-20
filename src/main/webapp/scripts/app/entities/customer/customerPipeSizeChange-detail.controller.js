@@ -79,6 +79,9 @@ angular
 
 					$scope.clear = function() {
 						// $uibModalInstance.dismiss('cancel');
+						$('#saveSuccessfullyModal').modal('hide');
+						$('#declineModal').modal('hide');
+						$state.go('customer.pipeSizeList');
 					};
 
 					$scope.datePickerForAssignedDate = {};
@@ -93,15 +96,15 @@ angular
 
 					
 					//approve a request
-					$scope.approve = function(customer){
-			        	//console.log(customer);
+					$scope.approve = function(customer){						
 			        	return $http.post('/api/customers/customersApprove',
 								customer).then(
 								function(response) {
 									console.log("Server response:"
-											+ JSON.stringify(response));
+											+ JSON.stringify(response));									
+									$('#saveSuccessfullyModal').modal('show');
 									//$state.go('request');
-									$state.go('customer.pipeSizeList');
+									//$state.go('customer.pipeSizeList');
 								});
 			        }
 					
@@ -110,18 +113,20 @@ angular
 			        	return $http.post('/api/customers/declineRequest',
 								workflowDTO).then(
 								function(response) {
-									$window.history.back();
+									$('#declineModal').modal('show');
+									//$state.go('customer.pipeSizeList');
+									//$window.history.back();
 								});
 			        }
 					
 					$scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.customer.status) {
-						case 0:
+						case 1:
 							if ($scope.orgRole.id === 10)
 								ret = true;
 							break;
-						case 1:
+						case 2:
 							if ($scope.orgRole.id === 16)
 								ret = true;
 							break;

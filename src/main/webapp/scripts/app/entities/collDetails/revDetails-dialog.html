@@ -25,7 +25,7 @@
 								ng-class="{'has-error': editForm.receiptDt.$invalid && 
          (editForm.receiptDt.$dirty || rc.editForm.attempted)}">
 								<div class='input-group' id='field_receiptDt'>
-									<input id="field_receiptDt" name="receiptDt" type="text"
+									<input id="field_receiptDt" name="receiptDt" type="date"
 										class="form-control" placeholder="YYYY-MM-DD"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-change="validateDate()" ng-model="collDetails.receiptDt"
@@ -44,6 +44,8 @@
 									<p class="help-block"
 										ng-show="editForm.receiptDt.$error.required">Date is
 										required.</p>
+										<p class="help-block"
+										ng-show="editForm.receiptDt.$error.date">Please enter date format.</p>
 									<p class="help-block"
 										ng-show="editForm.receiptDt.$error.veryOld">Date cannot be
 										more than six months old.</p>
@@ -163,7 +165,7 @@
 								Date</label>
 								<div class='input-group' id='field_receiptDt'>
 									<input id="field_instrDt" placeholder="YYYY-MM-DD"
-										name="instrDt" type="text" class="form-control"
+										name="instrDt" type="text" class="form-control" ng-type="date"
 										uib-datepicker-popup="{{dateformat}}"
 										ng-model="collDetails.instrDt" ng-required="instrEnabled"
 										is-open="datePickerForInstrDt.status.opened"
@@ -186,6 +188,8 @@
 										Instrument Date cannot be more than one day in the future.</p>
 									<p class="help-block" ng-show="editForm.instrDt.$error.veryOld">
 										Instrument Date cannot be older than six months.</p>
+								<p class="help-block" ng-show="editForm.instrDt.$error.date">
+										Please enter date format.</p>
 								</div>
 							</div>
 						</div>

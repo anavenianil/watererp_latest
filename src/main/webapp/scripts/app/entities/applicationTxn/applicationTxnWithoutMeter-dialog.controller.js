@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
+    .controller('ApplicationTxnWithoutMeterDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
     		UploadUtil, DateUtils, User, IdProofMaster, DivisionMaster, StreetMaster) {
     	$scope.applicationTxn = {};
     	//$scope.tariffcategorymasters = TariffCategoryMaster.query();
@@ -10,7 +10,7 @@ angular.module('watererpApp')
     	//$scope.streetmasters = StreetMaster.query();
     	$scope.idProofMasters = IdProofMaster.query();
     	$scope.tariffcategorymasters = [];
-    	TariffCategoryMaster.query({page: $scope.page, size: 20, type:'METERED'}, function(result, headers) {
+    	TariffCategoryMaster.query({page: $scope.page, size: 20, type:'UNMETERED'}, function(result, headers) {
             $scope.links = ParseLinks.parse(headers('link'));
             for (var i = 0; i < result.length; i++) {
                 $scope.tariffcategorymasters.push(result[i]);
@@ -48,12 +48,12 @@ angular.module('watererpApp')
         };*/
 
         var onSaveSuccess = function (result) {
+        	$scope.clear();
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
             $scope.applicationTxn.fileNumber = result.fileNumber;
             $scope.applicationTxn.id = result.id;
             $('#saveSuccessfullyModal').modal('show');
-            //$scope.clear();
         };
 
         var onSaveError = function (result) {
@@ -119,8 +119,6 @@ angular.module('watererpApp')
         			photo : null, status: null, meterReading : null, connectionDate : null, remarks : null, meterNo: null, approvedDate : null,
         			meterDetails : null, user : null, requestAt : null
             };
-        	$scope.rc.editForm.attempted=false;
-			$scope.editForm.$setPristine();
         }
         
         
@@ -150,17 +148,6 @@ angular.module('watererpApp')
 				$scope.applicationTxn.designation = "";
 			}
 		}
-/*		$scope.clickBox = function(categoryId){
-			alert("clicked");
-			if(categoryId === 1){
-				
-				$scope.applicationTxn.organizationName =  false;
-				$scope.rc.editForm.attempted=false;
-				$scope.editForm.$setPristine();
-			}
-		}*/
-		
-		
 		
 		$scope.getPropertyVal = function(val1, val2){
 			$scope.applicationTxn.propertyDoc ="";
@@ -177,38 +164,21 @@ angular.module('watererpApp')
 			console.log($scope.applicationTxn.propertyDoc);
 		}
 		
-
-		
 /*$scope.checkForm=function(value1,value2){
-	alert("check");
 if(value1=="checked"|| value2=="checked")
 	{
 	$scope.editForm.applicationTxn.deedDoc.$setValidity(
 			"ltPrevious", true);
 	return true;
-	else 
-		$scope.editForm.applicationTxn.deedDoc.$setValidity(
-				"ltPrevious", false);
-	return false;
-	} 
- if(value1=="checked"|| value2=="checked")
-{
-       $scope.editForm.applicationTxn.agreementDoc.$setValidity(
-		"ltPrevious", true);
-       return true;
+	
+	}
 
 	else
-		 $scope.editForm.applicationTxn.agreementDoc.$setValidity(
-					"ltPrevious", false);
-	return false;
+		alert("operation failed");
 }		
-else
-	{
-	alert("fail");
-	}
-	}*/
 		
-
+		
+*/
 		
 
 	

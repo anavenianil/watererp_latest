@@ -114,8 +114,6 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 				workflowService.setRequestID(getRequestID());
 				workflowService.setRequestType(getRequestType());
 				workflowService.setRequestTypeID(getRequestTypeID());
-				/*requisition contains login user id but there is customer in applicationtxn*/
-				// workflowService.setAppliedBy(applicationTxn.getUser().getId().toString());
 				
 
 				message = super.initWorkflow();
@@ -299,9 +297,14 @@ public class ApplicationTxnWorkflowService extends RequestProcessService {
 		workflowService.getUserDetails();
 	    
 		ApplicationTxn applicationTxn = applicationTxnRepository.findOne(id);
-	    workflowService.setRemarks(remarks);  
+	    workflowService.setRemarks(remarks);
 	    Integer status = applicationTxn.getStatus();
-	    status +=1;
+	    if(applicationTxn.getUser()!=null && applicationTxn.getStatus()==1){
+	    	status = 8;
+	    }else
+	    {
+	    	status +=1;
+	    }
 	    applicationTxn.setStatus(status);
         workflowService.setRequestStatus(status);
         //applicationTxnWorkflowService.

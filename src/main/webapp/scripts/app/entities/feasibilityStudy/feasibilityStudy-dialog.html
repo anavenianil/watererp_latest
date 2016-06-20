@@ -3,7 +3,7 @@
 
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
-				<h3 class="panel-title pull-left">Create or edit a Feasibility
+				<h3 class="panel-title pull-left">Create Feasibility
 					Study</h3>
 			</div>
 			<div class="list-group">
@@ -15,25 +15,25 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<label>First Name</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.firstName}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.firstName | uppercase}}</h5>
 								</div>
 								<div class="col-sm-4">
 									<label>Middle Name</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.middleName}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.middleName | uppercase}}</h5>
 								</div>
 								<div class="col-sm-4">
 									<label>Last Name</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.lastName}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.lastName | uppercase}}</h5>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-4">
 									<label>Organization Name</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.organizationName}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.organizationName | uppercase}}</h5>
 								</div>
 								<div class="col-sm-4">
 									<label>Designation</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.designation}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.designation | uppercase}}</h5>
 								</div>
 							</div>
 						</fieldset>
@@ -61,19 +61,19 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label>Street</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.street}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.street | uppercase}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label> Plot No.</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.plotNo}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.plotNo | uppercase}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label> Block No.</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.blockNo}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.blockNo | uppercase}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label>TANESCO Meter/LUKU No.</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.tanescoMeter}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.tanescoMeter | uppercase}}</h5>
 								</div>
 							</div>
 						</fieldset>
@@ -82,11 +82,11 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label>Water Connection Use</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.waterConnectionUse}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.waterConnectionUse | uppercase}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label>Connection Category</label>
-									<h5 class="list-group-item-heading">{{applicationTxn.tariffCategoryMaster.tariffCategory}}</h5>
+									<h5 class="list-group-item-heading">{{applicationTxn.tariffCategoryMaster.tariffCategory | uppercase}}</h5>
 								</div>
 							</div>
 						</fieldset>
@@ -128,13 +128,6 @@
 										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
 										<option value=""></option>
 									</select>
-									<!-- <input list="preparedBy" type="" class="form-control"
-										id="field_preparedBy" name="preparedBy"
-										ng-model="feasibilityStudy.preparedBy" 
-										ng-change="getpreparedByName(feasibilityStudy.preparedBy)"/>
-									<datalist id="preparedBy">
-										<option ng-repeat="user in users" value="{{user.login}}">
-									</datalist> -->
 								</div>
 								<div class="col-sm-4">
 									<label class="control-label" for="field_status">Name</label> <input
