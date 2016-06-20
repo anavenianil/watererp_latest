@@ -9,8 +9,8 @@
      },
      {
             "relationshipId": 2,
-            "relationshipName": "instrumentIssuerMaster",
-            "otherEntityName": "instrumentIssuerMaster",
+            "relationshipName": "bankMaster",
+            "otherEntityName": "bankMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
      },

@@ -501,7 +501,7 @@ public class BillRunMasterResourceIntTest {
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run2:", 16, content.get("success"));
 			Assert.assertEquals("Failed Records for Run2:", 3, content.get("failed"));
-			Assert.assertEquals("Status for Run2:", "Completed Successfully", content.get("status") );
+			Assert.assertEquals("Status for Run2:", "Completed with Errors", content.get("status") );
 
 			id = content.getLong("id");
 
@@ -595,7 +595,7 @@ public class BillRunMasterResourceIntTest {
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run3:", 15, content.get("success"));
 			Assert.assertEquals("Failed Records for Run3:", 3, content.get("failed"));
-			Assert.assertEquals("Status for Run3:", "Completed Successfully", content.get("status"));
+			Assert.assertEquals("Status for Run3:", "Completed with Errors", content.get("status"));
 
 			id = content.getLong("id");
 
@@ -696,7 +696,7 @@ public class BillRunMasterResourceIntTest {
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run4:", 16, content.get("success"));
 			Assert.assertEquals("Failed Records for Run4:", 3, content.get("failed"));
-			Assert.assertEquals("Status for Run4:", "Completed Successfully", content.get("status") );
+			Assert.assertEquals("Status for Run4:", "Completed with Errors", content.get("status") );
 
 			id = content.getLong("id");
 
@@ -749,7 +749,7 @@ public class BillRunMasterResourceIntTest {
 			content = new JSONObject(result.getResponse().getContentAsString());
 			Assert.assertEquals("Success Records for Run5:", 5, content.get("success"));
 			Assert.assertEquals("Failed Records for Run5:", 3, content.get("failed"));
-			Assert.assertEquals("Status for Run5:", "Completed Successfully", content.get("status") );
+			Assert.assertEquals("Status for Run5:", "Completed with Errors", content.get("status") );
 			
 			id = content.getLong("id");
 
