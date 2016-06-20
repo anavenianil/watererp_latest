@@ -48,12 +48,12 @@ angular.module('watererpApp')
         };*/
 
         var onSaveSuccess = function (result) {
-        	$scope.clear();
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
             $scope.applicationTxn.fileNumber = result.fileNumber;
             $scope.applicationTxn.id = result.id;
             $('#saveSuccessfullyModal').modal('show');
+            //$scope.clear();
         };
 
         var onSaveError = function (result) {
@@ -119,6 +119,8 @@ angular.module('watererpApp')
         			photo : null, status: null, meterReading : null, connectionDate : null, remarks : null, meterNo: null, approvedDate : null,
         			meterDetails : null, user : null, requestAt : null
             };
+        	$scope.rc.editForm.attempted=false;
+			$scope.editForm.$setPristine();
         }
         
         
@@ -148,6 +150,17 @@ angular.module('watererpApp')
 				$scope.applicationTxn.designation = "";
 			}
 		}
+/*		$scope.clickBox = function(categoryId){
+			alert("clicked");
+			if(categoryId === 1){
+				
+				$scope.applicationTxn.organizationName =  false;
+				$scope.rc.editForm.attempted=false;
+				$scope.editForm.$setPristine();
+			}
+		}*/
+		
+		
 		
 		$scope.getPropertyVal = function(val1, val2){
 			$scope.applicationTxn.propertyDoc ="";
@@ -164,21 +177,38 @@ angular.module('watererpApp')
 			console.log($scope.applicationTxn.propertyDoc);
 		}
 		
+
+		
 /*$scope.checkForm=function(value1,value2){
+	alert("check");
 if(value1=="checked"|| value2=="checked")
 	{
 	$scope.editForm.applicationTxn.deedDoc.$setValidity(
 			"ltPrevious", true);
 	return true;
-	
-	}
+	else 
+		$scope.editForm.applicationTxn.deedDoc.$setValidity(
+				"ltPrevious", false);
+	return false;
+	} 
+ if(value1=="checked"|| value2=="checked")
+{
+       $scope.editForm.applicationTxn.agreementDoc.$setValidity(
+		"ltPrevious", true);
+       return true;
 
 	else
-		alert("operation failed");
+		 $scope.editForm.applicationTxn.agreementDoc.$setValidity(
+					"ltPrevious", false);
+	return false;
 }		
+else
+	{
+	alert("fail");
+	}
+	}*/
 		
-		
-*/
+
 		
 
 	

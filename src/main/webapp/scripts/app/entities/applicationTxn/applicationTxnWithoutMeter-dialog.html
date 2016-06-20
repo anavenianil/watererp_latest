@@ -74,14 +74,14 @@
 										<label class="control-label" for="field_firstName">First
 											Name</label> <input type="text" class="form-control text-uppercase"
 											name="firstName" id="field_firstName"
-											ng-model="applicationTxn.firstName" ng-pattern="/[a-zA-Z]+/"
+											ng-model="applicationTxn.firstName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 											required />
 										<div
 											ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.firstName.$error.required">This field
 												is required.</p>
-											<p class="help-block" ng-pattern="/[a-zA-Z]+/"
+											<p class="help-block" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 												ng-show="editForm.firstName.$error.pattern">Enter text
 												only</p>
 										</div>
@@ -99,14 +99,14 @@
 										<label class="control-label" for="field_lastName">Last
 											Name</label> <input type="text" class="form-control text-uppercase"
 											name="lastName" id="field_lastName"
-											ng-model="applicationTxn.lastName" ng-pattern="/[a-zA-Z]+/"
+											ng-model="applicationTxn.lastName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 											required />
 										<div
 											ng-show="(editForm.lastName.$dirty || rc.editForm.attempted) && editForm.lastName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.lastName.$error.required">This field
 												is required.</p>
-											<p class="help-block" ng-pattern="/[a-zA-Z]+/"
+											<p class="help-block" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 												ng-show="editForm.lastName.$error.pattern">Enter text
 												only</p>
 										</div>
@@ -161,13 +161,14 @@
 											ng-enabled="applicationTxn.organization"
 											ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===6" />
 										<div
+
 											ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && editForm.organizationName.$invalid"
 											required>
 											<p class="help-block"
 												ng-show="editForm.organizationName.$error.required">This
 												field is required.</p>
 											<p class="help-block"
-												ng-show="editForm.organizationName.$error.text">Enter
+												ng-show="editForm.organizationName.$error.pattern">Enter
 												text only</p>
 										</div>
 									</div>
@@ -473,9 +474,8 @@
                                 (editForm.approvedDate.$dirty || rc.editForm.attempted)}">
 										<label class="control-label" for="field_approvedDate">Approved
 											Date</label>
-										<div class="form-group">
 											<div class='input-group date' id='field_approvedDate'>
-												<input id="field_approvedDate" type="text"
+												<input id="field_approvedDate" type="text" ng-date="date" name="approvedDate"
 													class="form-control" uib-datepicker-popup="{{dateformat}}"
 													ng-model="applicationTxn.approvedDate" max-date="dtmax"
 													is-open="datePickerForApprovedDate.status.opened" required />
@@ -485,13 +485,15 @@
 														<i class="glyphicon glyphicon-calendar"></i>
 													</button>
 												</span>
-											</div>
 										</div>
 										<div
 											ng-show="(editForm.approvedDate.$dirty || rc.editForm.attempted) && editForm.approvedDate.$invalid">
 											<p class="help-block"
-												ng-show="editForm.approvedDate.$error.required">This
-												field is required.</p>
+												ng-show="editForm.approvedDate.$error.required">Date
+												 is required.</p>
+												<p class="help-block"
+												ng-show="editForm.approvedDate.$error.date">Please enter date format.
+												</p>
 										</div>
 									</div>
 								</div>
