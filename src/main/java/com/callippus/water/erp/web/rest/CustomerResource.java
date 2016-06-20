@@ -207,6 +207,10 @@ public class CustomerResource {
 		/*if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
 			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 		}*/
+		if(workflowDTO.getReceipt()!=null){
+			receiptRepository.save(workflowDTO.getReceipt());
+		}
+		
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()));
 			customer.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
@@ -220,11 +224,7 @@ public class CustomerResource {
 			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
 			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
 		}
-		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
-			if(workflowDTO.getReceipt()!=null){
-				receiptRepository.save(workflowDTO.getReceipt());
-			}
-		}
+			
 		
 		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			 if(customer.getMiddleName()!=null){
@@ -239,7 +239,7 @@ public class CustomerResource {
 			
 		}
 		customerRepository.save(customer);
-		custDetailsRepository.save(custDetails);
+		//custDetailsRepository.save(custDetails); not to save in custDetails
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customer", ""))

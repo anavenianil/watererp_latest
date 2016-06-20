@@ -10,7 +10,7 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
         $scope.orgRole = {};
         $scope.paymenttypess = PaymentTypes.query();
         
-        $scope.maxDate = new Date();
+        $scope.maxDt = new Date();
         $scope.workflowDTO.receipt.receiptDate = new Date();
         
         //$scope.workflowDTO.receipt.amount = 1000;
