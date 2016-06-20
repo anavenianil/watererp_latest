@@ -27,6 +27,6 @@ public interface MeterChangeRepository extends JpaRepository<MeterChange,Long> {
     		+ "where m.can=(select cd.can from CustDetails cd where cd.status='ACTIVE' and cd.can=:can))")*/
    /* @Query("select cd from CustDetails cd where cd.status = 'ACTIVE'and cd.can=(select m.can from MeterChange m "
     		+ "where m.status not in (0,1) and m.id=(select max(mc.id) from MeterChange mc where mc.can=:can))")*/
-    @Query("select m from MeterChange m where m.can=:can and status !=3")
+    @Query("select m from MeterChange m where m.can=:can and status !=0")
     MeterChange findPending(@Param("can") String can);
 }

@@ -85,7 +85,7 @@
 						</div>
 					</fieldset>
 					<br>
-					<fieldset ng-show="meterChange.status===0">
+					<fieldset ng-show="meterChange.status===1">
 						<legend>New Meter Detail</legend>
 						<div class="row">
 							<div class="col-sm-3">
@@ -179,7 +179,7 @@
 
 						</div>
 					</fieldset>
-					<fieldset ng-show="meterChange.status >= 1">
+					<fieldset ng-show="meterChange.status >= 2">
 						<legend>New Meter Detail</legend>
 						<div class="row">
 							<div class="col-sm-3">
@@ -203,10 +203,10 @@
 					<br>
 					<fieldset>
 						<legend></legend>
-						<div class="row">
+						<div class="row" ng-show="canDecline()">
 							<div class="col-sm-12">
 							<div class="form-group" ng-class="{'has-error': editForm.remarks.$invalid && 
-         (editForm.remarks.$dirty || rc.editForm.attempted)}">
+         						(editForm.remarks.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="4" cols="50" class="form-control" name="remarks"
 									id="field_remarks" max="20" ng-model="meterChange.remarks" required></textarea>
@@ -228,7 +228,7 @@
 
 		<button type="button" class="btn btn-success pull-right"
 			ng-click="approve(meterChange)" ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status===1 && orgRole.id === 10">
+			ng-show="meterChange.status===2 && orgRole.id === 10">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button> 
 		
@@ -236,7 +236,7 @@
 		
 		<button type="submit" class="btn btn-success pull-right"
 			ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status===0 && orgRole.id === 15">
+			ng-show="meterChange.status===1 && orgRole.id === 15">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
 
