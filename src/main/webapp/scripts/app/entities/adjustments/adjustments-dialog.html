@@ -74,14 +74,18 @@
 
 
 							<div class="col-sm-4">
-								<div class="form-group"">
+								<div class="form-group" ng-class="{'has-error':editForm.transactionTypeMaster.$invalid && 
+								    (editForm.transactionTypeMaster.$dirty || rc.editForm.attempted)}">
 									<label for="field_transactionTypeMaster">Transaction
 										Type</label> <select class="form-control"
 										id="field_transactionTypeMaster" name="transactionTypeMaster"
-										ng-model="adjustments.transactionTypeMaster"
-										ng-options="transactionTypeMaster as transactionTypeMaster.typeOfTxn for transactionTypeMaster in transactiontypemasters track by transactionTypeMaster.typeoftxn">
+										ng-model="adjustments.transactionTypeMaster" required
+										ng-options="transactionTypeMaster as transactionTypeMaster.typeOfTxn for transactionTypeMaster in transactiontypemasters track by transactionTypeMaster.id">
 										<option value=""></option>
 									</select>
+                                    <div ng-show="editForm.transactionTypeMaster.$invalid && (editForm.transactionTypeMaster.$dirty || rc.editForm.attempted)">
+                                    <p class="help-block" ng-show="editForm.transactionTypeMaster.$error.required">This field is required</p>
+                                    </div>
 								</div>
 							</div>
 							<div class="col-sm-4">
@@ -89,10 +93,11 @@
 									ng-class="{'has-error': editForm.amount.$invalid && 
          (editForm.amount.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_amount">Amount</label>
-									<input type="number" class="form-control" name="amount"
+									<input type="number" class="form-control" name="amount" required
 										id="field_amount" ng-model="adjustments.amount" />
 									<div
 										ng-show="(editForm.amount.$dirty || rc.editForm.attempted) && editForm.amount.$invalid">
+										<p class="help-block" ng-show="editForm.amount.$error.required">This field is required .</p>
 										<p class="help-block" ng-show="editForm.amount.$error.number">Please
 											enter valid numbers .</p>
 									</div>
@@ -102,23 +107,13 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.customerComplaints.$invalid && 
-         (editForm.customerComplaints.$dirty || rc.editForm.attempted)}">
 									<label for="field_customerComplaints">Complaints</label> <select
 										class="form-control" id="field_customerComplaints"
-										name="customerComplaints" required
+										name="customerComplaints" 
 										ng-model="adjustments.customerComplaints"
 										ng-options="customerComplaints as (customerComplaints.id + ': ' +  customerComplaints.complaintTypeMaster.complaintType + ' for amt ' + customerComplaints.adjustmentAmt + ' dtd ' + customerComplaints.complaintDate) for customerComplaints in customerComplaintss">
 										<option value=""></option>
 									</select>
-									<div
-										ng-show="(editForm.customerComplaints.$dirty || rc.editForm.attempted) && editForm.customerComplaints.$invalid">
-										<p class="help-block"
-											ng-show="editForm.customerComplaints.$error.required">This
-											field is required.</p>
-									</div>
-								</div>
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_remarks">Remarks</label>
