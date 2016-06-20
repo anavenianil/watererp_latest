@@ -122,11 +122,11 @@ angular
 					$scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.customer.status) {
-						case 0:
+						case 1:
 							if ($scope.orgRole.id === 10)
 								ret = true;
 							break;
-						case 1:
+						case 2:
 							if ($scope.orgRole.id === 16)
 								ret = true;
 							break;

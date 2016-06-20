@@ -62,7 +62,7 @@ angular.module('watererpApp').controller(
 			$scope.clear = function() {
 				$uibModalInstance.dismiss('cancel');
 			};
-			$scope.datePickerForConnectionDate = {};
+			$scope.datePickerForConnectionDate = {};	
 
 			$scope.datePickerForConnectionDate.status = {
 				opened : false
@@ -74,6 +74,28 @@ angular.module('watererpApp').controller(
 
 			$scope.clear = function() {
 				$scope.applicationTxn = {};
+			}
+			
+			$scope.getEffectiveMonth = function(date){
+				if(date != null){
+					var year = date.getFullYear();
+					var month = date.getMonth()+1;
+					var day = date.getDate();
+					if(month==1){
+						year-=1;
+					}
+					month-=1;
+					if(month==0){
+						month=12;
+					}
+					if(month>0 && month<10){
+						month="0"+month;
+					}
+					$scope.eDate = year+"-"+month+"-"+"01";
+				}
+				else{
+					$scope.eDate = null;
+				}
 			}
 			
 		});

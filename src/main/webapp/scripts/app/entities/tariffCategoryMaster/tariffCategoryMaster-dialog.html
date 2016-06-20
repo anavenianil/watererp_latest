@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myTariffCategoryMasterLabel">Create or edit a Tariff Category Master</h4>
+        <h4 class="modal-title" id="myTariffCategoryMasterLabel">Create or edit a TariffCategoryMaster</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,13 +14,25 @@
                     ng-model="tariffCategoryMaster.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_tariffCategory">Tariff Category</label>
+            <label class="control-label" for="field_tariffCategory">TariffCategory</label>
             <input type="text" class="form-control" name="tariffCategory" id="field_tariffCategory"
                     ng-model="tariffCategoryMaster.tariffCategory"
                     required />
             <div ng-show="editForm.tariffCategory.$invalid">
                 <p class="help-block"
                     ng-show="editForm.tariffCategory.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                    ng-model="tariffCategoryMaster.type"
+                    required />
+            <div ng-show="editForm.type.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.type.$error.required">
                     This field is required.
                 </p>
             </div>

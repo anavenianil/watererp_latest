@@ -53,6 +53,7 @@ angular.module('watererpApp')
                             entity: function () {
                                 return {
                                     tariffCategory: null,
+                                    type: null,
                                     id: null
                                 };
                             }

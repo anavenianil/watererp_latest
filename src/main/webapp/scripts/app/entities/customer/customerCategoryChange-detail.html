@@ -148,7 +148,7 @@
 								<h5 class="list-group-item-heading">{{customer.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-show="customer.status==1">
+							<div class="col-sm-3" ng-show="customer.status==2">
 								<label class="control-label" for="field_changedDate">Changed
 									Date </label>
 								<div class="form-group"
@@ -178,7 +178,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-3" ng-show="customer.status==2">
+							<div class="col-sm-3" ng-show="customer.status==3 || customer.status==9">
 								<label>Changed Date</label>
 								<h5 class="list-group-item-heading">{{customer.changedDate}}</h5>
 							</div>

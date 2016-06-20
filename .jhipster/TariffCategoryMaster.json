@@ -8,6 +8,14 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20160311094431",

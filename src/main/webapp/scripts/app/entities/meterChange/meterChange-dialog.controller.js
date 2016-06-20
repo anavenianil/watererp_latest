@@ -92,13 +92,17 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 		$scope.prevMeterDetailss = [];
         $scope.getCustDetails = function(can) {
 			CustDetailsSearchCAN.get({can : can}, function(result) {
+				$scope.message = null;
                 $scope.custDetails = result;
                 $scope.meterChange.custDetails = $scope.custDetails;
                 $scope.meterChange.prevMeterReading = $scope.custDetails.prevReading;
                 $scope.custDetailsId = $scope.custDetails.id;
                 $scope.meterChange.custDetails.id = $scope.custDetailsId;
                 $scope.prevMeterDetailss.push($scope.custDetails.meterDetails);
-                $scope.meterChange.prevMeterNo = $scope.custDetails.meterDetails;    
+                $scope.meterChange.prevMeterNo = $scope.custDetails.meterDetails;   
+                if($scope.custDetails.meterDetails == null){
+                	$scope.message = "Meter can't be changed for Unmetered connection for the can: "+can;
+                }
             });
         };
         
@@ -113,7 +117,6 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 				}
 				else{
 					$scope.getCustDetails(can);
-					$scope.message = null;
 					$scope.isSaving = false;
 				}
 					
