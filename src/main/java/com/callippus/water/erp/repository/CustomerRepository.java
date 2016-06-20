@@ -19,7 +19,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
 	
 	/*@Query("select c from Customer c where c.id=(SELECT max(cu.id) FROM Customer cu where cu.changeType=:changeType and cu.can="
 			+ "(select cd.can from CustDetails cd where cd.can=:can and cd.status='ACTIVE'))")*/
-	@Query("select c from Customer c where c.can=:can and c.status !=3 and changeType=:changeType")
+	@Query("select c from Customer c where c.can=:can and c.status !=0 and changeType=:changeType")
 	Customer findByChangeTypeAndCan(@Param("changeType")String changeType, @Param("can")String can);
 
 }
