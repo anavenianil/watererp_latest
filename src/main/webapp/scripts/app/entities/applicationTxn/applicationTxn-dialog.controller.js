@@ -4,18 +4,11 @@ angular.module('watererpApp')
     .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
     		UploadUtil, DateUtils, User, IdProofMaster, DivisionMaster, StreetMaster) {
     	$scope.applicationTxn = {};
-    	//$scope.tariffcategorymasters = TariffCategoryMaster.query();
+    	$scope.tariffcategorymasters = TariffCategoryMaster.query();
     	$scope.users = User.query();
     	$scope.divisionmasters = DivisionMaster.query();
     	//$scope.streetmasters = StreetMaster.query();
     	$scope.idProofMasters = IdProofMaster.query();
-    	$scope.tariffcategorymasters = [];
-    	TariffCategoryMaster.query({page: $scope.page, size: 20, type:'METERED'}, function(result, headers) {
-            $scope.links = ParseLinks.parse(headers('link'));
-            for (var i = 0; i < result.length; i++) {
-                $scope.tariffcategorymasters.push(result[i]);
-            }
-        });
     	
     	if($stateParams.id != null){
                 ApplicationTxn.get({id : $stateParams.id}, function(result) {
@@ -147,13 +140,19 @@ angular.module('watererpApp')
 			if(categoryId === 1){
 				$scope.applicationTxn.organization = false;
 				$scope.applicationTxn.organizationName = "";
-				/*$scope.clean*/
 				$scope.applicationTxn.designation = "";
-				
-				
 			}
 		}
-
+/*		$scope.clickBox = function(categoryId){
+			alert("clicked");
+			if(categoryId === 1){
+				
+				$scope.applicationTxn.organizationName =  false;
+				$scope.rc.editForm.attempted=false;
+				$scope.editForm.$setPristine();
+			}
+		}*/
+		
 		
 		
 		$scope.getPropertyVal = function(val1, val2){
@@ -171,59 +170,39 @@ angular.module('watererpApp')
 			console.log($scope.applicationTxn.propertyDoc);
 		}
 		
-		
-		
-	
-		
-		
-/*  $scope.checkForm=function(value)
-  { 
-	  alert("sucess");
-	  if(value != null)
-		  {
-	  $scope.applicationTxn.value=true;
-	  return true;
-	  alert("sucess");
-	  $scope.clear();
-		  }
-  }
-  
-	  $scope.checkdata=function(value)
-		  {
-	  alert("sucess");
-	  if(value != null)
-		  {
-	  $scope.applicationTxn.value=true;
-	  return true;
-	
-	  $scope.clear();
-		  }	 
-	  
-  
-  }
-$scope.cleaned=function()
-{
-$scope.applicationTxn ={deedDoc: null 
-		};	
-}
 
-$scope.clean=function()
-{
-$scope.applicationTxn ={agreementDoc:null
-		};	
-}
-	*/	
-
-
-/*	$scope.clean=function()
+		
+/*$scope.checkForm=function(value1,value2){
+	alert("check");
+if(value1=="checked"|| value2=="checked")
 	{
-		$scope.applicationTxn={organizationName:null
-				};
-		$scope.rc.editForm.attempted=false;
-		$scope.editForm.$setPristine();
-		
+	$scope.editForm.applicationTxn.deedDoc.$setValidity(
+			"ltPrevious", true);
+	return true;
+	else 
+		$scope.editForm.applicationTxn.deedDoc.$setValidity(
+				"ltPrevious", false);
+	return false;
+	} 
+ if(value1=="checked"|| value2=="checked")
+{
+       $scope.editForm.applicationTxn.agreementDoc.$setValidity(
+		"ltPrevious", true);
+       return true;
+
+	else
+		 $scope.editForm.applicationTxn.agreementDoc.$setValidity(
+					"ltPrevious", false);
+	return false;
+}		
+else
+	{
+	alert("fail");
 	}
-		*/
+	}*/
 		
+
+		
+
 	
     });
