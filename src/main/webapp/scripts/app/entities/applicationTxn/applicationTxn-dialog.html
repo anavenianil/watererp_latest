@@ -144,7 +144,7 @@
 								
 									<label class="control-label" for="field_organization">Organization</label>
 									<input type="checkbox" class="form-control" name="organization"
-										ng-disabled="applicationTxn.tariffCategoryMaster.id===1"
+										ng-disabled="applicationTxn.tariffCategoryMaster.id===1" 
 										id="field_organization" ng-model="applicationTxn.organization" />
                                 
 					 
@@ -155,9 +155,9 @@
                                 (editForm.organizationName.$dirty || rc.editForm.attempted)}">
                                 
 									<label class="control-label" for="field_organizationName">Organization
-										Name</label> <input type="text" class="form-control text-uppercase"
+										Name</label> <input type="text" class="form-control text-uppercase" 
 										name="organizationName" id="field_organizationName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-										ng-model="applicationTxn.organizationName" ng-enabled="applicationTxn.organization"
+										ng-model="applicationTxn.organizationName" ng-enabled="applicationTxn.organization" 
 										ng-disabled="!applicationTxn.organization || applicationTxn.tariffCategoryMaster.id===1" required/>
 										<div  ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"										
 										ng-show="(editForm.organizationName.$dirty || rc.editForm.attempted) && editForm.organizationName.$invalid" >
@@ -337,10 +337,11 @@
 										Ownership Document</label> 
 										<br>
 										<div  name="propertyDoc"  id="field_propertyDoc" ng-model="applicationTxn.propertyDoc" 
-										ng-change="checkForm(deedDoc,agreementDoc)" > 
+										> 
+										 
 										 
 										 <input type="checkbox" name="propertyDoc"  
-										ng-model="applicationTxn.deedDoc"   
+										ng-model="applicationTxn.deedDoc"  
 										ng-true-value="'Tittle Deed/Offer letter'"
 										ng-false-value="'Not Submitted'" required>&nbsp;<span>Tittle
 										Deed/Offer letter </span>
@@ -349,14 +350,14 @@
 										<input type="checkbox" name="propertyDoc" 
 										ng-model="applicationTxn.agreementDoc"
 										ng-true-value="'Rented Property-lease-Rent Agreement'"
-										ng-false-value="'Not Submitted'" required="true">&nbsp;<span>Rented
+										ng-false-value="'Not Submitted'" required>&nbsp;<span>Rented
 										Property- lease-Rent Agreement </span>						
 										<div ng-show="(editForm.propertyDoc.$dirty || rc.editForm.attempted) && editForm.propertyDoc.$invalid">
 										<p class="help-block"
 											ng-show="editForm.propertyDoc.$error.required">Any one
 											check-box is required.</p>
 											
-											<!-- </div> -->
+											 </div>
                                      </div>
 									</div>
 								</div>

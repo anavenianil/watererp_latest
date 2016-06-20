@@ -140,19 +140,13 @@ angular.module('watererpApp')
 			if(categoryId === 1){
 				$scope.applicationTxn.organization = false;
 				$scope.applicationTxn.organizationName = "";
+				/*$scope.clean*/
 				$scope.applicationTxn.designation = "";
+				
+				
 			}
 		}
-/*		$scope.clickBox = function(categoryId){
-			alert("clicked");
-			if(categoryId === 1){
-				
-				$scope.applicationTxn.organizationName =  false;
-				$scope.rc.editForm.attempted=false;
-				$scope.editForm.$setPristine();
-			}
-		}*/
-		
+
 		
 		
 		$scope.getPropertyVal = function(val1, val2){
@@ -170,39 +164,59 @@ angular.module('watererpApp')
 			console.log($scope.applicationTxn.propertyDoc);
 		}
 		
-
 		
-/*$scope.checkForm=function(value1,value2){
-	alert("check");
-if(value1=="checked"|| value2=="checked")
-	{
-	$scope.editForm.applicationTxn.deedDoc.$setValidity(
-			"ltPrevious", true);
-	return true;
-	else 
-		$scope.editForm.applicationTxn.deedDoc.$setValidity(
-				"ltPrevious", false);
-	return false;
-	} 
- if(value1=="checked"|| value2=="checked")
+		
+	
+		
+		
+/*  $scope.checkForm=function(value)
+  { 
+	  alert("sucess");
+	  if(value != null)
+		  {
+	  $scope.applicationTxn.value=true;
+	  return true;
+	  alert("sucess");
+	  $scope.clear();
+		  }
+  }
+  
+	  $scope.checkdata=function(value)
+		  {
+	  alert("sucess");
+	  if(value != null)
+		  {
+	  $scope.applicationTxn.value=true;
+	  return true;
+	
+	  $scope.clear();
+		  }	 
+	  
+  
+  }
+$scope.cleaned=function()
 {
-       $scope.editForm.applicationTxn.agreementDoc.$setValidity(
-		"ltPrevious", true);
-       return true;
+$scope.applicationTxn ={deedDoc: null 
+		};	
+}
 
-	else
-		 $scope.editForm.applicationTxn.agreementDoc.$setValidity(
-					"ltPrevious", false);
-	return false;
-}		
-else
+$scope.clean=function()
+{
+$scope.applicationTxn ={agreementDoc:null
+		};	
+}
+	*/	
+
+
+/*	$scope.clean=function()
 	{
-	alert("fail");
+		$scope.applicationTxn={organizationName:null
+				};
+		$scope.rc.editForm.attempted=false;
+		$scope.editForm.$setPristine();
+		
 	}
-	}*/
+		*/
 		
-
-		
-
 	
     });
