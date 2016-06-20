@@ -197,8 +197,10 @@ public class ApplicationTxnResource {
             custDetails.setPrevBillType("U");
             custDetails.setPipeSize(0.5f);
             custDetails.setPipeSizeMaster(pipeSizeMasterRepository.findOne(1l));//hard coded pipesize
-            custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
-            custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
+            custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
+	        custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
+	        custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
+	        custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
             custDetails.setConnDate(applicationTxn.getConnectionDate());
             custDetails.setStatus(CustStatus.ACTIVE);
             //For Bill effective month
