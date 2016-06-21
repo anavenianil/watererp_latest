@@ -15,12 +15,12 @@
        c.address                                           AS cust_address,
        c.city                                              AS cust_city,
        c.pin_code                                          AS cust_pin_code,
-       c.meter_no                                          AS cust_meter_no,
+       (select m.meter_id from meter_details m where m.id=c.meter_details_id)                                          AS cust_meter_no,
        c.pipe_size                                         AS cust_pipe_size,
       c.met_reading_dt                                  AS cust_meter_read_dt,
  (SELECT street_name
         FROM   street_master
-        WHERE  street_no = Substring(b.can, 3, 2))      street_name,
+        WHERE  street_no = Substring(b.can, 3, 2) and division_master_id=Substring(b.can, 1, 2))      street_name,
 b.surcharge as val
 FROM   bill_full_details b
        JOIN cust_details c
@@ -75,9 +75,6 @@ WHERE  b.id=$P{id}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="sewerage" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="meter_no" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="prev_bill_type" class="java.lang.String">
@@ -221,6 +218,12 @@ WHERE  b.id=$P{id}]]>
 	<field name="no_meter_amt" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="lock_charges" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="meter_details_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="category_unused" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -236,10 +239,31 @@ WHERE  b.id=$P{id}]]>
 	<field name="dr_flag" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="id_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="tariff_category_master_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="pipe_size_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="division_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="street_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="tariff_category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="type" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="bill_month" class="java.lang.String"/>
@@ -251,6 +275,7 @@ WHERE  b.id=$P{id}]]>
 	<field name="cust_pin_code" class="java.lang.String"/>
 	<field name="cust_meter_no" class="java.lang.String"/>
 	<field name="cust_pipe_size" class="java.lang.Float"/>
+	<field name="cust_meter_read_dt" class="java.sql.Date"/>
 	<field name="street_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>

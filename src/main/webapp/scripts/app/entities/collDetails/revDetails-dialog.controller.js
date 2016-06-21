@@ -5,14 +5,14 @@ angular
 		.controller(
 				'RevDetailsDialogController',
 				function($scope, $state, CollDetails, RevDetails, ParseLinks,
-						$stateParams, PaymentTypes, InstrumentIssuerMaster,
+						$stateParams, PaymentTypes, BankMaster,
 						CustDetails, CustDetailsService, CollectionTypeMaster,
 						RevenueTypeMaster, $http) {
 
 					$scope.isValidCust = false;
 					$scope.instrEnabled = false;
 					$scope.paymenttypess = PaymentTypes.query();
-					$scope.instrumentissuermasters = InstrumentIssuerMaster
+					$scope.bankmasters = BankMaster
 							.query();
 					// $scope.collectionTypeMasters =
 					// CollectionTypeMaster.query();

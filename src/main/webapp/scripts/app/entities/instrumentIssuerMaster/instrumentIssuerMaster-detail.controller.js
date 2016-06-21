@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('InstrumentIssuerMasterDetailController', function ($scope, $rootScope, $stateParams, entity, InstrumentIssuerMaster) {
+    .controller('BankMasterDetailController', function ($scope, $rootScope, $stateParams, entity, BankMaster) {
         $scope.instrumentIssuerMaster = entity;
         $scope.load = function (id) {
-            InstrumentIssuerMaster.get({id: id}, function(result) {
+            BankMaster.get({id: id}, function(result) {
                 $scope.instrumentIssuerMaster = result;
             });
         };

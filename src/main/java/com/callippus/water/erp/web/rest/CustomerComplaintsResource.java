@@ -135,7 +135,7 @@ public class CustomerComplaintsResource {
 
 			adjustments.setRemarks(customerComplaints.getRemarks());
 			adjustments.setTxnTime(ZonedDateTime.now());
-			adjustments.setStatus(TxnStatus.BILLED);
+			adjustments.setStatus(TxnStatus.INITIATED);
 			adjustments.setCustDetails(custDetails);
 			adjustments.setAmount(amount.abs());
 			

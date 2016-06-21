@@ -1,23 +1,23 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('BankMasterController', function ($scope, $state, BankMaster, ParseLinks) {
+    .controller('ChargeBaseController', function ($scope, $state, ChargeBase, ParseLinks) {
 
-        $scope.instrumentIssuerMasters = [];
+        $scope.chargeBases = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            BankMaster.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            ChargeBase.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
-                    $scope.instrumentIssuerMasters.push(result[i]);
+                    $scope.chargeBases.push(result[i]);
                 }
             });
         };
         $scope.reset = function() {
             $scope.page = 0;
-            $scope.instrumentIssuerMasters = [];
+            $scope.chargeBases = [];
             $scope.loadAll();
         };
         $scope.loadPage = function(page) {
@@ -33,8 +33,9 @@ angular.module('watererpApp')
         };
 
         $scope.clear = function () {
-            $scope.instrumentIssuerMaster = {
-                instrumentIssuer: null,
+            $scope.chargeBase = {
+                code: null,
+                name: null,
                 id: null
             };
         };
