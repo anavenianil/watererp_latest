@@ -122,9 +122,9 @@
 										ng-class="{'has-error': editForm.firstName.$invalid && 
                                 (editForm.firstName.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_firstName">First
-									Name</label> <input type="text" class="form-control" name="firstName" ng-pattern="/^[a-zA-Z]/" 
+									Name</label> <input type="text" class="form-control" name="firstName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 									id="field_firstName" ng-model="customer.firstName" required/>
-								<div ng-pattern="/^[a-zA-Z]/"
+								<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 											ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.firstName.$error.required">This field
@@ -146,9 +146,9 @@
 										ng-class="{'has-error': editForm.lastName.$invalid && 
                                 (editForm.lastName.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_lastName">Last
-									Name</label> <input type="text" class="form-control" name="lastName"
+									Name</label> <input type="text" class="form-control" name="lastName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 									id="field_lastName" ng-model="customer.lastName" required />
-								<div ng-pattern="/^[a-zA-Z]/"
+								<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 											ng-show="(editForm.lastName.$dirty || rc.editForm.attempted) && editForm.lastName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.lastName.$error.required">This field
@@ -258,11 +258,14 @@
 								</div>
 							</div>
 							<div class="col-sm-4">
+							<div class="form-group"
+									ng-class="{'has-error': editForm.requestedDate.$invalid && 
+                                (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_requestedDate">Requested
 									Date</label>
 								<div class="form-group">
 									<div class='input-group date' id='field_requestedDate'>
-										<input id="field_requestedDate" type="text"
+										<input id="field_requestedDate" type="text" name="requestedDate"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
 											ng-model="customer.requestedDate" max-date="dtmax"
 											is-open="datePickerForRequestedDate.status.opened" required />
@@ -273,6 +276,12 @@
 											</button>
 										</span>
 									</div>
+									<div ng-show="(editForm.requestedDate.$dirty || rc.editForm.attempted) && editForm.requestedDate.$invalid">
+										<p class="help-block"
+											ng-show="editForm.requestedDate.$error.required">This
+											field is required.</p>
+									</div>
+								</div>
 								</div>
 							</div>
 						</div>
