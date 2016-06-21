@@ -435,7 +435,12 @@ public class BillRunMasterResourceIntTest {
 			for (BillRunDetails brd : brdList) {
 				BillFullDetails bfd = brd.getBillFullDetails();
 
-				Assert.assertNotNull("Run1: Bill (BFD) Does Not Exist for CAN:" + brd.getCan(), bfd);
+				if(expectedCharges.get(brd.getCan()) == null){
+					Assert.assertNull("Run1: Bill (BFD) Exists for CAN:" + brd.getCan(), bfd);
+					continue;
+				}
+				else
+					Assert.assertNotNull("Run1: Bill (BFD) Does Not Exist for CAN:" + brd.getCan(), bfd);
 
 				Assert.assertEquals("Run1: Units do not match for CAN:" + bfd.getCan(),
 						expectedCharges.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
@@ -525,7 +530,12 @@ public class BillRunMasterResourceIntTest {
 			for (BillRunDetails brd1 : brdList) {
 				BillFullDetails bfd = brd1.getBillFullDetails();
 
-				Assert.assertNotNull("Run2: Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
+				if(expectedCharges2.get(brd1.getCan()) == null){
+					Assert.assertNull("Run2: Bill (BFD) Exists for CAN:" + brd1.getCan(), bfd);
+					continue;
+				}
+				else
+					Assert.assertNotNull("Run2: Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
 
 				Assert.assertEquals("Run2: Units do not match for CAN:" + bfd.getCan(),
 						expectedCharges2.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
@@ -619,8 +629,13 @@ public class BillRunMasterResourceIntTest {
 			for (BillRunDetails brd1 : brdList) {
 				log.debug("Reached here...1:" + brd1.getCan());
 				BillFullDetails bfd = brd1.getBillFullDetails();
-
-				Assert.assertNotNull("Run3: Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
+				
+				if(expectedCharges3.get(brd1.getCan()) == null){
+					Assert.assertNull("Run3: Bill (BFD) Exists for CAN:" + brd1.getCan(), bfd);
+					continue;
+				}
+				else
+					Assert.assertNotNull("Run3: Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
 
 				Assert.assertEquals("Run3: Units do not match for CAN:" + bfd.getCan(),
 						expectedCharges3.get(bfd.getCan())[0].floatValue(), bfd.getUnits().floatValue(), 0.1f);
@@ -719,7 +734,12 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd1 : brdList) {
 				BillFullDetails bfd = brd1.getBillFullDetails();
-
+				
+				if(expectedCharges4.get(brd1.getCan()) == null){
+					Assert.assertNull("Run4: Bill (BFD) Exists for CAN:" + brd1.getCan(), bfd);
+					continue;
+				}
+				else
 				Assert.assertNotNull("Run4: Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
 
 				Assert.assertEquals("Run4: Units do not match for CAN:" + bfd.getCan(),
@@ -768,7 +788,12 @@ public class BillRunMasterResourceIntTest {
 
 			for (BillRunDetails brd1 : brdList) {
 				BillFullDetails bfd = brd1.getBillFullDetails();
-
+				
+				if(expectedCharges5.get(brd1.getCan()) == null){
+					Assert.assertNull("Run5: Bill (BFD) Exists for CAN:" + brd1.getCan(), bfd);
+					continue;
+				}
+				else
 				Assert.assertNotNull("Run5: Bill (BFD) Does Not Exist for CAN:" + brd1.getCan(), bfd);
 
 				Assert.assertEquals("Run5: Units do not match for CAN:" + bfd.getCan(),
