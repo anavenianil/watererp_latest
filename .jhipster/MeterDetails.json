@@ -1,45 +1,53 @@
 {
-    "relationships": [
-    	{
-            "relationshipId": 1,
-            "relationshipName": "meterStatus",
-            "otherEntityName": "meterStatus",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-     ],
-    "fields": [
-        {
-            "fieldId": 1,
-            "fieldName": "meterId",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "meterType",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "meterMake",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "min",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 5,
-            "fieldName": "max",
-            "fieldType": "Float"
-        }
-    ],
-    "changelogDate": "20160405010101",
-    "dto": "no",
-    "service": "no",
-    "pagination": "infinite-scroll"
+	"relationships": [
+		{
+			"relationshipId": 1,
+			"relationshipName": "meterStatus",
+			"otherEntityName": "meterStatus",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		}
+	],
+	"fields": [
+		{
+			"fieldId": 1,
+			"fieldName": "meterId",
+			"fieldType": "String",
+			"fieldValidateRules": [
+				"required"
+			]
+		},
+		{
+			"fieldId": 2,
+			"fieldName": "meterNo",
+			"fieldType": "String",
+			"fieldValidateRules": [
+				"required"
+			]
+		},
+		{
+			"fieldId": 3,
+			"fieldName": "meterType",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 4,
+			"fieldName": "meterMake",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 5,
+			"fieldName": "min",
+			"fieldType": "Float"
+		},
+		{
+			"fieldId": 6,
+			"fieldName": "max",
+			"fieldType": "Float"
+		}
+	],
+	"changelogDate": "20160405010101",
+	"dto": "no",
+	"service": "no",
+	"pagination": "infinite-scroll"
 }
