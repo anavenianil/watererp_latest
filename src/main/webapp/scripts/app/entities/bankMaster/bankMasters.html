@@ -1,0 +1,54 @@
+<div>
+    <h2>BankMasters</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="bankMaster.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new BankMaster</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bankCode"><span>BankCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bankName"><span>BankName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bankBranch"><span>BankBranch</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bankAccount"><span>BankAccount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="bankMaster in bankMasters track by bankMaster.id">
+                    <td><a ui-sref="bankMaster.detail({id:bankMaster.id})">{{bankMaster.id}}</a></td>
+                    <td>{{bankMaster.bankCode}}</td>
+                    <td>{{bankMaster.bankName}}</td>
+                    <td>{{bankMaster.bankBranch}}</td>
+                    <td>{{bankMaster.bankAccount}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="bankMaster.detail({id:bankMaster.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="bankMaster.edit({id:bankMaster.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="bankMaster.delete({id:bankMaster.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

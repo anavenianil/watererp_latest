@@ -22,19 +22,13 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="expense_no" type="varchar(255)"/>
-            
             <column name="expense_amt" type="${floatType}"/>
-            
             <column name="expense_dt" type="timestamp"/>
-            
             <column name="instr_no" type="varchar(255)"/>
-            
             <column name="instr_dt" type="date"/>
-            
             <column name="payment_types_id" type="bigint"/>
-            <column name="instrument_issuer_master_id" type="bigint"/>
+            <column name="bank_master_id" type="bigint"/>
             <column name="collection_type_master_id" type="bigint"/>
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="expense_details" columnName="expense_dt" columnDataType="datetime"/>
 
@@ -45,11 +39,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="payment_types"/>
 
-        <addForeignKeyConstraint baseColumnNames="instrument_issuer_master_id"
+        <addForeignKeyConstraint baseColumnNames="bank_master_id"
                                  baseTableName="expense_details"
-                                 constraintName="fk_expensedetails_instrumentissuermaster_id"
+                                 constraintName="fk_expensedetails_bankmaster_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="instrument_issuer_master"/>
+                                 referencedTableName="bank_master"/>
 
         <addForeignKeyConstraint baseColumnNames="collection_type_master_id"
                                  baseTableName="expense_details"

@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the InstrumentIssuerMaster entity.
+ * Performance test for the BankMaster entity.
  */
-class InstrumentIssuerMasterGatlingTest extends Simulation {
+class BankMasterGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class InstrumentIssuerMasterGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the InstrumentIssuerMaster entity")
+    val scn = scenario("Test the BankMaster entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class InstrumentIssuerMasterGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all instrumentIssuerMasters")
-            .get("/api/instrumentIssuerMasters")
+            exec(http("Get all bankMasters")
+            .get("/api/bankMasters")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new instrumentIssuerMaster")
-            .post("/api/instrumentIssuerMasters")
+            .exec(http("Create new bankMaster")
+            .post("/api/bankMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "instrumentIssuer":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "bankCode":"SAMPLE_TEXT", "bankName":"SAMPLE_TEXT", "bankBranch":"SAMPLE_TEXT", "bankAccount":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_instrumentIssuerMaster_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_bankMaster_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created instrumentIssuerMaster")
-                .get("${new_instrumentIssuerMaster_url}")
+                exec(http("Get created bankMaster")
+                .get("${new_bankMaster_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created instrumentIssuerMaster")
-            .delete("${new_instrumentIssuerMaster_url}")
+            .exec(http("Delete created bankMaster")
+            .delete("${new_bankMaster_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }
