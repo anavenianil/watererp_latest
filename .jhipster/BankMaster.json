@@ -1,0 +1,35 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "bankCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },       
+		{
+            "fieldId": 2,
+            "fieldName": "bankName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },       
+		{
+            "fieldId": 3,
+            "fieldName": "bankBranch",
+            "fieldType": "String"
+        },       
+		{
+            "fieldId": 4,
+            "fieldName": "bankAccount",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160406042024",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

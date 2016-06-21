@@ -22,51 +22,29 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="reversal_ref" type="varchar(255)"/>
-            
             <column name="receipt_no" type="varchar(255)"/>
-            
             <column name="receipt_amt" type="${floatType}"/>
-            
             <column name="receipt_dt" type="timestamp"/>
-            
             <column name="receipt_mode" type="varchar(255)"/>
-            
             <column name="instr_no" type="varchar(255)"/>
-            
             <column name="instr_dt" type="date"/>
-            
             <column name="instr_issuer" type="varchar(255)"/>
-            
             <column name="svr_status" type="varchar(255)"/>
-            
             <column name="can" type="varchar(255)"/>
-            
             <column name="cons_name" type="varchar(255)"/>
-            
             <column name="terminal_id" type="varchar(255)"/>
-            
             <column name="coll_time" type="timestamp"/>
-            
             <column name="txn_status" type="varchar(255)"/>
-            
             <column name="meter_reader_id" type="varchar(255)"/>
-            
             <column name="user_id" type="varchar(255)"/>
-            
             <column name="remarks" type="varchar(255)"/>
-            
             <column name="settlement_id" type="varchar(255)"/>
-            
             <column name="ext_settlement_id" type="varchar(255)"/>
-            
             <column name="lat" type="varchar(255)"/>
-            
             <column name="long_i" type="varchar(255)"/>
-            
             <column name="payment_types_id" type="bigint"/>
-            <column name="instrument_issuer_master_id" type="bigint"/>
+            <column name="bank_master_id" type="bigint"/>
             <column name="collection_type_master_id" type="bigint"/>
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="coll_details" columnName="receipt_dt" columnDataType="datetime"/>
 
@@ -79,11 +57,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="payment_types"/>
 
-        <addForeignKeyConstraint baseColumnNames="instrument_issuer_master_id"
+        <addForeignKeyConstraint baseColumnNames="bank_master_id"
                                  baseTableName="coll_details"
-                                 constraintName="fk_colldetails_instrumentissuermaster_id"
+                                 constraintName="fk_colldetails_bankmaster_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="instrument_issuer_master"/>
+                                 referencedTableName="bank_master"/>
 
         <addForeignKeyConstraint baseColumnNames="collection_type_master_id"
                                  baseTableName="coll_details"
