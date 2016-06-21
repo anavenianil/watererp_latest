@@ -3,7 +3,7 @@
 angular.module('watererpApp').controller(
 		'ExpenseDetailsDialogController',
 		function($scope, $state, ExpenseDetails, PaymentTypes,
-				InstrumentIssuerMaster, CollectionTypeMaster, ParseLinks,
+				BankMaster, CollectionTypeMaster, ParseLinks,
 				$stateParams, $http) {
 			$scope.isValidExpense = false;
 			$scope.instrEnabled = false;
@@ -169,7 +169,7 @@ angular.module('watererpApp').controller(
 			};
 
 			$scope.paymenttypess = PaymentTypes.query();
-			$scope.instrumentissuermasters = InstrumentIssuerMaster.query();
+			$scope.bankMasters = BankMaster.query();
 			// $scope.collectiontypemasters = CollectionTypeMaster.query();
 
 			$scope.datePickerForExpenseDt = {};

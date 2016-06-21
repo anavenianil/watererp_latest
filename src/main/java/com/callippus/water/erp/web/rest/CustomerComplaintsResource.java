@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.domain.Adjustments;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustomerComplaints;
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.TransactionTypeMaster;
 import com.callippus.water.erp.domain.enumeration.TxnStatus;
 import com.callippus.water.erp.repository.AdjustmentsRepository;
@@ -124,7 +125,7 @@ public class CustomerComplaintsResource {
 			return createCustomerComplaints(request, customerComplaints);
 		}
 		
-		if (customerComplaints.getStatus() == 4) {
+		if (CPSConstants.UPDATE.equals(workflowService.getMessage())) {
 			CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customerComplaints.getCan());
 
 			Adjustments adjustments = new Adjustments();
