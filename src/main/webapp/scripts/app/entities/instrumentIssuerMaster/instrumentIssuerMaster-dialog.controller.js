@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('watererpApp').controller('InstrumentIssuerMasterDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'InstrumentIssuerMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, InstrumentIssuerMaster) {
+angular.module('watererpApp').controller('BankMasterDialogController',
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'BankMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, BankMaster) {
 
         $scope.instrumentIssuerMaster = entity;
         $scope.load = function(id) {
-            InstrumentIssuerMaster.get({id : id}, function(result) {
+            BankMaster.get({id : id}, function(result) {
                 $scope.instrumentIssuerMaster = result;
             });
         };
@@ -24,9 +24,9 @@ angular.module('watererpApp').controller('InstrumentIssuerMasterDialogController
         $scope.save = function () {
             $scope.isSaving = true;
             if ($scope.instrumentIssuerMaster.id != null) {
-                InstrumentIssuerMaster.update($scope.instrumentIssuerMaster, onSaveSuccess, onSaveError);
+                BankMaster.update($scope.instrumentIssuerMaster, onSaveSuccess, onSaveError);
             } else {
-                InstrumentIssuerMaster.save($scope.instrumentIssuerMaster, onSaveSuccess, onSaveError);
+                BankMaster.save($scope.instrumentIssuerMaster, onSaveSuccess, onSaveError);
             }
         };
 

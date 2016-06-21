@@ -3,13 +3,13 @@
 angular.module('watererpApp').controller(
 		'CollDetailsDialogController',
 		function($scope, $state, CollDetails, ParseLinks, $stateParams,
-				PaymentTypes, InstrumentIssuerMaster, CustDetails,
+				PaymentTypes, BankMaster, CustDetails,
 				CustDetailsService, CollectionTypeMaster, $http) {
 
 			$scope.isValidCust = false;
 			$scope.instrEnabled = false;
 			$scope.paymenttypess = PaymentTypes.query();
-			$scope.instrumentissuermasters = InstrumentIssuerMaster.query();
+			$scope.bankmasters = BankMaster.query();
 			//$scope.collectionTypeMasters = CollectionTypeMaster.query();
 
 			$scope.custDetails = {};

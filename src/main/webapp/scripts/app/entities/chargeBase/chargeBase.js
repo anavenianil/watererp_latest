@@ -3,108 +3,109 @@
 angular.module('watererpApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('instrumentIssuerMaster', {
+            .state('chargeBase', {
                 parent: 'entity',
-                url: '/instrumentIssuerMasters',
+                url: '/chargeBases',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'BankMasters'
+                    pageTitle: 'ChargeBases'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMasters.html',
-                        controller: 'BankMasterController'
+                        templateUrl: 'scripts/app/entities/chargeBase/chargeBases.html',
+                        controller: 'ChargeBaseController'
                     }
                 },
                 resolve: {
                 }
             })
-            .state('instrumentIssuerMaster.detail', {
+            .state('chargeBase.detail', {
                 parent: 'entity',
-                url: '/instrumentIssuerMaster/{id}',
+                url: '/chargeBase/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'BankMaster'
+                    pageTitle: 'ChargeBase'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-detail.html',
-                        controller: 'BankMasterDetailController'
+                        templateUrl: 'scripts/app/entities/chargeBase/chargeBase-detail.html',
+                        controller: 'ChargeBaseDetailController'
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'BankMaster', function($stateParams, BankMaster) {
-                        return BankMaster.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'ChargeBase', function($stateParams, ChargeBase) {
+                        return ChargeBase.get({id : $stateParams.id});
                     }]
                 }
             })
-            .state('instrumentIssuerMaster.new', {
-                parent: 'instrumentIssuerMaster',
+            .state('chargeBase.new', {
+                parent: 'chargeBase',
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-dialog.html',
-                        controller: 'BankMasterDialogController',
+                        templateUrl: 'scripts/app/entities/chargeBase/chargeBase-dialog.html',
+                        controller: 'ChargeBaseDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
                                 return {
-                                    instrumentIssuer: null,
+                                    code: null,
+                                    name: null,
                                     id: null
                                 };
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('instrumentIssuerMaster', null, { reload: true });
+                        $state.go('chargeBase', null, { reload: true });
                     }, function() {
-                        $state.go('instrumentIssuerMaster');
+                        $state.go('chargeBase');
                     })
                 }]
             })
-            .state('instrumentIssuerMaster.edit', {
-                parent: 'instrumentIssuerMaster',
+            .state('chargeBase.edit', {
+                parent: 'chargeBase',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-dialog.html',
-                        controller: 'BankMasterDialogController',
+                        templateUrl: 'scripts/app/entities/chargeBase/chargeBase-dialog.html',
+                        controller: 'ChargeBaseDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['BankMaster', function(BankMaster) {
-                                return BankMaster.get({id : $stateParams.id});
+                            entity: ['ChargeBase', function(ChargeBase) {
+                                return ChargeBase.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('instrumentIssuerMaster', null, { reload: true });
+                        $state.go('chargeBase', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('instrumentIssuerMaster.delete', {
-                parent: 'instrumentIssuerMaster',
+            .state('chargeBase.delete', {
+                parent: 'chargeBase',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-delete-dialog.html',
-                        controller: 'BankMasterDeleteController',
+                        templateUrl: 'scripts/app/entities/chargeBase/chargeBase-delete-dialog.html',
+                        controller: 'ChargeBaseDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['BankMaster', function(BankMaster) {
-                                return BankMaster.get({id : $stateParams.id});
+                            entity: ['ChargeBase', function(ChargeBase) {
+                                return ChargeBase.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('instrumentIssuerMaster', null, { reload: true });
+                        $state.go('chargeBase', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
