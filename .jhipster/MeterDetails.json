@@ -43,15 +43,6 @@
 			"fieldType": "String"
 		},
 		{
-            "fieldId": 5,
-            "fieldName": "allocationStatus",
-            "fieldType": "AllocationStatus",
-            "fieldValues": "UnAllocated, Allocated",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-		{
 			"fieldId": 6,
 			"fieldName": "max",
 			"fieldType": "Float"

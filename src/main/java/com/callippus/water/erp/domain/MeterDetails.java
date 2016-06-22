@@ -36,15 +36,16 @@ public class MeterDetails implements Serializable {
     @Column(name = "meter_make")
     private String meterMake;
 
-    @Column(name = "min")
-    private Float min;
-
     @Column(name = "max")
     private Float max;
 
     @ManyToOne
     @JoinColumn(name = "meter_status_id")
     private MeterStatus meterStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "pipe_size_master_id")
+    private PipeSizeMaster pipeSizeMaster;
 
     public Long getId() {
         return id;
@@ -86,14 +87,6 @@ public class MeterDetails implements Serializable {
         this.meterMake = meterMake;
     }
 
-    public Float getMin() {
-        return min;
-    }
-
-    public void setMin(Float min) {
-        this.min = min;
-    }
-
     public Float getMax() {
         return max;
     }
@@ -108,6 +101,14 @@ public class MeterDetails implements Serializable {
 
     public void setMeterStatus(MeterStatus meterStatus) {
         this.meterStatus = meterStatus;
+    }
+
+    public PipeSizeMaster getPipeSizeMaster() {
+        return pipeSizeMaster;
+    }
+
+    public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
+        this.pipeSizeMaster = pipeSizeMaster;
     }
 
     @Override
@@ -135,7 +136,6 @@ public class MeterDetails implements Serializable {
             ", meterNo='" + meterNo + "'" +
             ", meterType='" + meterType + "'" +
             ", meterMake='" + meterMake + "'" +
-            ", min='" + min + "'" +
             ", max='" + max + "'" +
             '}';
     }
