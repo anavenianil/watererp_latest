@@ -56,7 +56,6 @@ angular.module('watererpApp')
                                     meterNo: null,
                                     meterType: null,
                                     meterMake: null,
-                                    min: null,
                                     max: null,
                                     id: null
                                 };
