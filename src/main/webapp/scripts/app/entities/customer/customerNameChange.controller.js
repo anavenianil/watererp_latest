@@ -45,7 +45,7 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         };
 
         $scope.clear = function() {
-            //$uibModalInstance.dismiss('cancel');
+            $scope.customer={}
         };
         
         $scope.datePickerForRequestedDate = {};

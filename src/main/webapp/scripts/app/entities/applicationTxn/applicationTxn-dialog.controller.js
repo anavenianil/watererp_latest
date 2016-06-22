@@ -4,18 +4,11 @@ angular.module('watererpApp')
     .controller('ApplicationTxnDialogController', function ($scope, $state, $stateParams ,ApplicationTxn, ParseLinks, TariffCategoryMaster, 
     		UploadUtil, DateUtils, User, IdProofMaster, DivisionMaster, StreetMaster) {
     	$scope.applicationTxn = {};
-    	//$scope.tariffcategorymasters = TariffCategoryMaster.query();
+    	$scope.tariffcategorymasters = TariffCategoryMaster.query();
     	$scope.users = User.query();
     	$scope.divisionmasters = DivisionMaster.query();
     	//$scope.streetmasters = StreetMaster.query();
     	$scope.idProofMasters = IdProofMaster.query();
-    	$scope.tariffcategorymasters = [];
-    	TariffCategoryMaster.query({page: $scope.page, size: 20, type:'METERED'}, function(result, headers) {
-            $scope.links = ParseLinks.parse(headers('link'));
-            for (var i = 0; i < result.length; i++) {
-                $scope.tariffcategorymasters.push(result[i]);
-            }
-        });
     	
     	if($stateParams.id != null){
                 ApplicationTxn.get({id : $stateParams.id}, function(result) {

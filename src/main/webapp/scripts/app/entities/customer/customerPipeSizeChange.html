@@ -61,9 +61,9 @@
                                 (editForm.consName.$dirty || rc.editForm.attempted)}">
 										<label class="control-label" for="field_consName">Consumer
 											Name</label> <input type="text" class="form-control" name="consName"
-											ng-pattern="/^[a-zA-Z]/" id="field_consName"
+											ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/" id="field_consName"
 											ng-model="custDetails.consName" required disabled />
-										<div ng-pattern="/^[a-zA-Z]/"
+										<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 											ng-show="(editForm.consName.$dirty || rc.editForm.attempted) && editForm.consName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.consName.$error.required">This field
