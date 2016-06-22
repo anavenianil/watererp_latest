@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Meter Details</span> {{meterDetails.id}}</h2>
+    <h2><span>MeterDetails</span> {{meterDetails.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Meter Id</span>
+                    <span>MeterId</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{meterDetails.meterId}}</span>
@@ -20,7 +20,15 @@
             </tr>
             <tr>
                 <td>
-                    <span>Meter Type</span>
+                    <span>MeterNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{meterDetails.meterNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>MeterType</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{meterDetails.meterType}}</span>
@@ -28,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Meter Make</span>
+                    <span>MeterMake</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{meterDetails.meterMake}}</span>
@@ -36,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Minimum</span>
+                    <span>Min</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{meterDetails.min}}</span>
@@ -44,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Maximum</span>
+                    <span>Max</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{meterDetails.max}}</span>
@@ -52,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Meter Status</span>
+                    <span>meterStatus</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="meterStatus.detail({id:meterDetails.meterStatus.id})">{{meterDetails.meterStatus.id}}</a>

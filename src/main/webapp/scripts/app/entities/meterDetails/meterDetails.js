@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            /*.state('meterDetails.new', {
+            .state('meterDetails.new', {
                 parent: 'meterDetails',
                 url: '/new',
                 data: {
@@ -53,6 +53,7 @@ angular.module('watererpApp')
                             entity: function () {
                                 return {
                                     meterId: null,
+                                    meterNo: null,
                                     meterType: null,
                                     meterMake: null,
                                     min: null,
@@ -67,8 +68,8 @@ angular.module('watererpApp')
                         $state.go('meterDetails');
                     })
                 }]
-            })*/
-            /*.state('meterDetails.edit', {
+            })
+            .state('meterDetails.edit', {
                 parent: 'meterDetails',
                 url: '/{id}/edit',
                 data: {
@@ -90,7 +91,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })*/
+            })
             .state('meterDetails.delete', {
                 parent: 'meterDetails',
                 url: '/{id}/delete',
@@ -113,37 +114,5 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
-            .state('meterDetails.new', {
-                parent: 'meterDetails',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'MeterDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/meterDetails/meterDetails-dialog.html',
-                        controller: 'MeterDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
-            })
-            .state('meterDetails.edit', {
-                parent: 'meterDetails',
-                url: '/edit/:id',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'MeterDetailss'
-                },
-                views: {
-                    'content@': {
-                    	templateUrl: 'scripts/app/entities/meterDetails/meterDetails-dialog.html',
-                        controller: 'MeterDetailsDialogController'
-                    }
-                },
-                resolve: {
-                }
             });
     });

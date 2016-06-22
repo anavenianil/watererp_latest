@@ -24,17 +24,14 @@
             <column name="meter_id" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+            <column name="meter_no" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="meter_type" type="varchar(255)"/>
-            
             <column name="meter_make" type="varchar(255)"/>
-            
             <column name="min" type="${floatType}"/>
-            
             <column name="max" type="${floatType}"/>
-            
             <column name="meter_status_id" type="bigint"/>
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="meter_status_id"

@@ -25,19 +25,23 @@ public class MeterDetails implements Serializable {
     @NotNull
     @Column(name = "meter_id", nullable = false)
     private String meterId;
-    
+
+    @NotNull
+    @Column(name = "meter_no", nullable = false)
+    private String meterNo;
+
     @Column(name = "meter_type")
     private String meterType;
-    
+
     @Column(name = "meter_make")
     private String meterMake;
-    
+
     @Column(name = "min")
     private Float min;
-    
+
     @Column(name = "max")
     private Float max;
-    
+
     @ManyToOne
     @JoinColumn(name = "meter_status_id")
     private MeterStatus meterStatus;
@@ -53,15 +57,23 @@ public class MeterDetails implements Serializable {
     public String getMeterId() {
         return meterId;
     }
-    
+
     public void setMeterId(String meterId) {
         this.meterId = meterId;
+    }
+
+    public String getMeterNo() {
+        return meterNo;
+    }
+
+    public void setMeterNo(String meterNo) {
+        this.meterNo = meterNo;
     }
 
     public String getMeterType() {
         return meterType;
     }
-    
+
     public void setMeterType(String meterType) {
         this.meterType = meterType;
     }
@@ -69,7 +81,7 @@ public class MeterDetails implements Serializable {
     public String getMeterMake() {
         return meterMake;
     }
-    
+
     public void setMeterMake(String meterMake) {
         this.meterMake = meterMake;
     }
@@ -77,7 +89,7 @@ public class MeterDetails implements Serializable {
     public Float getMin() {
         return min;
     }
-    
+
     public void setMin(Float min) {
         this.min = min;
     }
@@ -85,7 +97,7 @@ public class MeterDetails implements Serializable {
     public Float getMax() {
         return max;
     }
-    
+
     public void setMax(Float max) {
         this.max = max;
     }
@@ -107,9 +119,6 @@ public class MeterDetails implements Serializable {
             return false;
         }
         MeterDetails meterDetails = (MeterDetails) o;
-        if(meterDetails.id == null || id == null) {
-            return false;
-        }
         return Objects.equals(id, meterDetails.id);
     }
 
@@ -123,6 +132,7 @@ public class MeterDetails implements Serializable {
         return "MeterDetails{" +
             "id=" + id +
             ", meterId='" + meterId + "'" +
+            ", meterNo='" + meterNo + "'" +
             ", meterType='" + meterType + "'" +
             ", meterMake='" + meterMake + "'" +
             ", min='" + min + "'" +

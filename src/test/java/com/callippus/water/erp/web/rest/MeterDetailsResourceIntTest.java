@@ -43,6 +43,8 @@ public class MeterDetailsResourceIntTest {
 
     private static final String DEFAULT_METER_ID = "AAAAA";
     private static final String UPDATED_METER_ID = "BBBBB";
+    private static final String DEFAULT_METER_NO = "AAAAA";
+    private static final String UPDATED_METER_NO = "BBBBB";
     private static final String DEFAULT_METER_TYPE = "AAAAA";
     private static final String UPDATED_METER_TYPE = "BBBBB";
     private static final String DEFAULT_METER_MAKE = "AAAAA";
@@ -81,6 +83,7 @@ public class MeterDetailsResourceIntTest {
     public void initTest() {
         meterDetails = new MeterDetails();
         meterDetails.setMeterId(DEFAULT_METER_ID);
+        meterDetails.setMeterNo(DEFAULT_METER_NO);
         meterDetails.setMeterType(DEFAULT_METER_TYPE);
         meterDetails.setMeterMake(DEFAULT_METER_MAKE);
         meterDetails.setMin(DEFAULT_MIN);
@@ -104,6 +107,7 @@ public class MeterDetailsResourceIntTest {
         assertThat(meterDetailss).hasSize(databaseSizeBeforeCreate + 1);
         MeterDetails testMeterDetails = meterDetailss.get(meterDetailss.size() - 1);
         assertThat(testMeterDetails.getMeterId()).isEqualTo(DEFAULT_METER_ID);
+        assertThat(testMeterDetails.getMeterNo()).isEqualTo(DEFAULT_METER_NO);
         assertThat(testMeterDetails.getMeterType()).isEqualTo(DEFAULT_METER_TYPE);
         assertThat(testMeterDetails.getMeterMake()).isEqualTo(DEFAULT_METER_MAKE);
         assertThat(testMeterDetails.getMin()).isEqualTo(DEFAULT_MIN);
@@ -130,6 +134,24 @@ public class MeterDetailsResourceIntTest {
 
     @Test
     @Transactional
+    public void checkMeterNoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterDetailsRepository.findAll().size();
+        // set the field null
+        meterDetails.setMeterNo(null);
+
+        // Create the MeterDetails, which fails.
+
+        restMeterDetailsMockMvc.perform(post("/api/meterDetailss")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(meterDetails)))
+                .andExpect(status().isBadRequest());
+
+        List<MeterDetails> meterDetailss = meterDetailsRepository.findAll();
+        assertThat(meterDetailss).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMeterDetailss() throws Exception {
         // Initialize the database
         meterDetailsRepository.saveAndFlush(meterDetails);
@@ -140,6 +162,7 @@ public class MeterDetailsResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(meterDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].meterId").value(hasItem(DEFAULT_METER_ID.toString())))
+                .andExpect(jsonPath("$.[*].meterNo").value(hasItem(DEFAULT_METER_NO.toString())))
                 .andExpect(jsonPath("$.[*].meterType").value(hasItem(DEFAULT_METER_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].meterMake").value(hasItem(DEFAULT_METER_MAKE.toString())))
                 .andExpect(jsonPath("$.[*].min").value(hasItem(DEFAULT_MIN.doubleValue())))
@@ -158,6 +181,7 @@ public class MeterDetailsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(meterDetails.getId().intValue()))
             .andExpect(jsonPath("$.meterId").value(DEFAULT_METER_ID.toString()))
+            .andExpect(jsonPath("$.meterNo").value(DEFAULT_METER_NO.toString()))
             .andExpect(jsonPath("$.meterType").value(DEFAULT_METER_TYPE.toString()))
             .andExpect(jsonPath("$.meterMake").value(DEFAULT_METER_MAKE.toString()))
             .andExpect(jsonPath("$.min").value(DEFAULT_MIN.doubleValue()))
@@ -182,6 +206,7 @@ public class MeterDetailsResourceIntTest {
 
         // Update the meterDetails
         meterDetails.setMeterId(UPDATED_METER_ID);
+        meterDetails.setMeterNo(UPDATED_METER_NO);
         meterDetails.setMeterType(UPDATED_METER_TYPE);
         meterDetails.setMeterMake(UPDATED_METER_MAKE);
         meterDetails.setMin(UPDATED_MIN);
@@ -197,6 +222,7 @@ public class MeterDetailsResourceIntTest {
         assertThat(meterDetailss).hasSize(databaseSizeBeforeUpdate);
         MeterDetails testMeterDetails = meterDetailss.get(meterDetailss.size() - 1);
         assertThat(testMeterDetails.getMeterId()).isEqualTo(UPDATED_METER_ID);
+        assertThat(testMeterDetails.getMeterNo()).isEqualTo(UPDATED_METER_NO);
         assertThat(testMeterDetails.getMeterType()).isEqualTo(UPDATED_METER_TYPE);
         assertThat(testMeterDetails.getMeterMake()).isEqualTo(UPDATED_METER_MAKE);
         assertThat(testMeterDetails.getMin()).isEqualTo(UPDATED_MIN);

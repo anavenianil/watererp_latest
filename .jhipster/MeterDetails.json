@@ -1,45 +1,64 @@
 {
-    "relationships": [
-    	{
-            "relationshipId": 1,
-            "relationshipName": "meterStatus",
-            "otherEntityName": "meterStatus",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-     ],
-    "fields": [
-        {
-            "fieldId": 1,
-            "fieldName": "meterId",
-            "fieldType": "String",
+	"relationships": [
+		{
+			"relationshipId": 1,
+			"relationshipName": "meterStatus",
+			"otherEntityName": "meterStatus",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		},
+		{
+			"relationshipId": 2,
+			"relationshipName": "pipeSizeMaster",
+			"otherEntityName": "pipeSizeMaster",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		}
+	],
+	"fields": [
+		{
+			"fieldId": 1,
+			"fieldName": "meterId",
+			"fieldType": "String",
+			"fieldValidateRules": [
+				"required"
+			]
+		},
+		{
+			"fieldId": 2,
+			"fieldName": "meterNo",
+			"fieldType": "String",
+			"fieldValidateRules": [
+				"required"
+			]
+		},
+		{
+			"fieldId": 3,
+			"fieldName": "meterType",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 4,
+			"fieldName": "meterMake",
+			"fieldType": "String"
+		},
+		{
+            "fieldId": 5,
+            "fieldName": "allocationStatus",
+            "fieldType": "AllocationStatus",
+            "fieldValues": "UnAllocated, Allocated",
             "fieldValidateRules": [
                 "required"
             ]
         },
-        {
-            "fieldId": 2,
-            "fieldName": "meterType",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "meterMake",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "min",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 5,
-            "fieldName": "max",
-            "fieldType": "Float"
-        }
-    ],
-    "changelogDate": "20160405010101",
-    "dto": "no",
-    "service": "no",
-    "pagination": "infinite-scroll"
+		{
+			"fieldId": 6,
+			"fieldName": "max",
+			"fieldType": "Float"
+		}
+	],
+	"changelogDate": "20160405010101",
+	"dto": "no",
+	"service": "no",
+	"pagination": "infinite-scroll"
 }
