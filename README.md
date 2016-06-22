@@ -104,3 +104,21 @@ REFERENCED_TABLE_NAME = 'application_txn'
 
 
 update `adjustments` set bill_full_details_id=null, status='INITIATED';
+
+# Automated query for dropping meter_details
+drop table adjustments; delete from databasechangelog where filename like '%_adjustments.xml';
+drop table bill_run_details; delete from databasechangelog where filename like '%_billrundetails.xml';
+drop table meter_change; delete from databasechangelog where filename like '%_meterchange.xml';
+drop table bill_full_details; delete from databasechangelog where filename like '%_billfulldetails.xml';
+drop table connection_terminate; delete from databasechangelog where filename like '%_connectionterminate.xml';
+drop table cust_meter_mapping; delete from databasechangelog where filename like '%_custmetermapping.xml';
+drop table cust_details; delete from databasechangelog where filename like '%_custdetails.xml';
+drop table meter_change; delete from databasechangelog where filename like '%_meterchange.xml';
+drop table item_required; delete from databasechangelog where filename like '%_itemrequired.xml';
+drop table feasibility_study; delete from databasechangelog where filename like '%_feasibilitystudy.xml';
+drop table item_required; delete from databasechangelog where filename like '%_itemrequired.xml';
+drop table proceedings; delete from databasechangelog where filename like '%_proceedings.xml';
+drop table receipt; delete from databasechangelog where filename like '%_receipt.xml';
+drop table application_txn; delete from databasechangelog where filename like '%_applicationtxn.xml';
+drop table application_txn; delete from databasechangelog where filename like '%_applicationtxn.xml';
+drop table meter_details; delete from databasechangelog where filename like '%_meterdetails.xml';'

@@ -6,6 +6,13 @@
 			"otherEntityName": "meterStatus",
 			"relationshipType": "many-to-one",
 			"otherEntityField": "id"
+		},
+		{
+			"relationshipId": 2,
+			"relationshipName": "pipeSizeMaster",
+			"otherEntityName": "pipeSizeMaster",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
 		}
 	],
 	"fields": [
@@ -36,10 +43,14 @@
 			"fieldType": "String"
 		},
 		{
-			"fieldId": 5,
-			"fieldName": "min",
-			"fieldType": "Float"
-		},
+            "fieldId": 5,
+            "fieldName": "allocationStatus",
+            "fieldType": "AllocationStatus",
+            "fieldValues": "UnAllocated, Allocated",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
 		{
 			"fieldId": 6,
 			"fieldName": "max",
