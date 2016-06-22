@@ -58,11 +58,14 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 						console.log("Server response:"
 								+ JSON.stringify(response));
 						$window.history.back();
+						 $("#saveSuccessfullyModal").modal("show");
 					});
         }
 
-        $scope.clear = function() {
+        $scope.confirm = function() {
             //$uibModalInstance.dismiss('cancel');
+        	$("#saveSuccessfullyModal").modal("hide");
+        	$state.go("customer.nameChangeDetail");
         };
         $scope.datePickerForCheckOrDdDate = {};
 
@@ -113,4 +116,21 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 			}
 			return ret;
 		}
+		
+		$scope.resetInstr=function(PaymentTypes)
+		{
+		if (PaymentTypes.toUpperCase() === 'CASH') 
+				{
+				$scope.instrEnabled=false;
+				$scope.workflowDTO.receipt.checkOrDdDate = null;
+				$scope.workflowDTO.receipt.checkOrDdNo = null;
+				$scope.receipt.bankName = null;
+				$scope.receipt.branchName = null;
+				
+				}
+			else
+				$scope.instrEnabled=true;
+			
+		}
+		
 });

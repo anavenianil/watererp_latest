@@ -204,8 +204,8 @@
          (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
 
 										<div class='input-group date' id='field_requestedDate'>
-											<input id="field_requestedDate" type="text"
-												name="requestedDate" class="form-control"
+											<input id="field_requestedDate" type="text" ng-type="date"
+												name="requestedDate" class="form-control" placeholder="YYYY-MM-DD"
 												uib-datepicker-popup="{{dateformat}}"
 												ng-model="customer.requestedDate" max-date="dtmax"
 												is-open="datePickerForRequestedDate.status.opened" required />
