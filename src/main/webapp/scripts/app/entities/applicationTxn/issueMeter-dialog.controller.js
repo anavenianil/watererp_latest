@@ -21,6 +21,10 @@ angular.module('watererpApp')
                 for (var i = 0; i < result.length; i++) {
                     $scope.meterdetailss.push(result[i]);
                 }
+                if($scope.meterdetailss.length == 0){
+                	//alert("No Meter Available");
+                	$('#meterAvailabilityModal').modal('show');
+                }
             });
         };
         $scope.loadAllUnallottedMeter();
@@ -79,6 +83,11 @@ angular.module('watererpApp')
         $scope.clear = function(){
         	$scope.applicationTxn = {
             };
+        }
+        
+        $scope.closeDialague = function(){
+        	$('#meterAvailabilityModal').modal('hide');
+        	//$state.go('request');
         }
     });
 
