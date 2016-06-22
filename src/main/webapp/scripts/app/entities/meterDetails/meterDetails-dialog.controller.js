@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('watererpApp').controller('MeterDetailsDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'MeterDetails', 'MeterStatus',
-        function($scope, $stateParams, $uibModalInstance, entity, MeterDetails, MeterStatus) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'MeterDetails', 'MeterStatus', 'PipeSizeMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, MeterDetails, MeterStatus, PipeSizeMaster) {
 
         $scope.meterDetails = entity;
         $scope.meterstatuss = MeterStatus.query();
+        $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.load = function(id) {
             MeterDetails.get({id : id}, function(result) {
                 $scope.meterDetails = result;

@@ -44,14 +44,6 @@
             </tr>
             <tr>
                 <td>
-                    <span>Min</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{meterDetails.min}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span>Max</span>
                 </td>
                 <td>
@@ -64,6 +56,14 @@
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="meterStatus.detail({id:meterDetails.meterStatus.id})">{{meterDetails.meterStatus.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>pipeSizeMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="pipeSizeMaster.detail({id:meterDetails.pipeSizeMaster.id})">{{meterDetails.pipeSizeMaster.id}}</a>
                 </td>
             </tr>
             </tbody>
