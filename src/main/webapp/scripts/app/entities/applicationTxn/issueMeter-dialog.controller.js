@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('IssueMeterDialogController', function ($scope, $state, $stateParams, ApplicationTxn, ParseLinks, DateUtils, MeterDetails,
-    		ApplicationTxnService, $http) {
+    		ApplicationTxnService, $http, $window) {
 
     	$scope.workflowDTO = {};
     	$scope.workflowDTO.applicationTxn = {};
@@ -87,7 +87,7 @@ angular.module('watererpApp')
         
         $scope.closeDialague = function(){
         	$('#meterAvailabilityModal').modal('hide');
-        	//$state.go('request');
+        	$window.history.back();
         }
     });
 
