@@ -19,9 +19,9 @@ angular.module('watererpApp').controller(
 			
 			
 			$scope.getDetails = function(requestId, requestTypeId, domainObjectId){
-				console.log("request Id:" +requestId);
+				/*console.log("request Id:" +requestId);
 				console.log("request Type: "+requestTypeId);
-				console.log("domainObject: "+domainObjectId);
+				console.log("domainObject: "+domainObjectId);*/
 				if(requestTypeId===1 || requestTypeId===6){//NEW CONNECTION
 					$state.go('applicationTxn.detail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
