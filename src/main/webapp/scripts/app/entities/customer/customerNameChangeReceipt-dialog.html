@@ -1,5 +1,5 @@
 <div>
-<form name="editForm"  rc-button="save()" novalidate>
+<form name="editForm"  rc-submit="save()" novalidate>
 
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -139,7 +139,7 @@
          (editForm.bankName.$dirty || rc.editForm.attempted)}">
 							<label class="control-label" for="field_bankName">Bank
 								Name</label> <input type="text" class="form-control" name="bankName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-								id="field_bankName" ng-model="receipt.bankName" ng-required="instrEnabled"
+								id="field_bankName" ng-model="workflowDTO.receipt.bankName" ng-required="instrEnabled"
 								ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
 								<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 									ng-show="(editForm.bankName.$dirty || rc.editForm.attempted) && editForm.bankName.$invalid">
@@ -158,7 +158,7 @@
          (editForm.branchName.$dirty || rc.editForm.attempted)}">
 							<label class="control-label" for="field_branchName">Branch
 								Name</label> <input type="text" class="form-control" name="branchName" ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-								id="field_branchName" ng-model="receipt.branchName" ng-required="instrEnabled"
+								id="field_branchName" ng-model="workflowDTO.receipt.branchName" ng-required="instrEnabled"
 								ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
 								<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 									ng-show="(editForm.branchName.$dirty || rc.editForm.attempted) && editForm.branchName.$invalid">
@@ -236,7 +236,7 @@
 					<div class="modal-header"></div>
 					<div class="modal-body">
 						<p>
-						<h3>Request Approved Successfully!</h3>
+						<h3>Request Submitted Successfully!</h3>
 						</p>
 						<div>
 							<h4>
