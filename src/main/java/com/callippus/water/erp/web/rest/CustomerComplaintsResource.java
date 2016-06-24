@@ -125,6 +125,15 @@ public class CustomerComplaintsResource {
 			return createCustomerComplaints(request, customerComplaints);
 		}
 		
+		
+		
+		CustomerComplaints customerComplaints1 = customerComplaintsRepository.findOne(customerComplaints.getId());
+		customerComplaints1.setStatus(customerComplaints1.getStatus() + 1);
+		customerComplaints1.setAdjustmentAmt(customerComplaints.getAdjustmentAmt());
+		customerComplaints1.setAdjustmentBillId(customerComplaints.getAdjustmentBillId());
+		CustomerComplaints result = customerComplaintsRepository.save(customerComplaints1);
+		approveApplication(customerComplaints.getId(), customerComplaints.getRemarks());
+		
 		if (CPSConstants.UPDATE.equals(workflowService.getMessage())) {
 			CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customerComplaints.getCan());
 
@@ -153,12 +162,6 @@ public class CustomerComplaintsResource {
 			adjustmentsRepository.save(adjustments);
 		}
 		
-		CustomerComplaints customerComplaints1 = customerComplaintsRepository.findOne(customerComplaints.getId());
-		customerComplaints1.setStatus(customerComplaints1.getStatus() + 1);
-		customerComplaints1.setAdjustmentAmt(customerComplaints.getAdjustmentAmt());
-		customerComplaints1.setAdjustmentBillId(customerComplaints.getAdjustmentBillId());
-		CustomerComplaints result = customerComplaintsRepository.save(customerComplaints1);
-		approveApplication(customerComplaints.getId(), customerComplaints.getRemarks());
 		return ResponseEntity.ok()
 				.headers(
 						HeaderUtil.createEntityUpdateAlert("customerComplaints", customerComplaints.getId().toString()))
