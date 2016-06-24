@@ -4,7 +4,7 @@ angular
 		.module('watererpApp')
 		.controller(
 				'CustomerNameChangeDetailController',
-				function($scope, $stateParams, CustDetails,
+				function($scope, $stateParams, CustDetails,$window,
 						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal) {
 
 					$scope.workflowDTO = {};
@@ -55,8 +55,10 @@ angular
 
 					$scope.maxDt = new Date();
 
-					$scope.clear = function() {
+					$scope.confirm = function() {
 						// $uibModalInstance.dismiss('cancel');
+						 $("#saveSuccessfullyModal").modal("hide");
+			             $state.go('customer.nameChangeList');
 					};
 
 					//approve a request
@@ -67,7 +69,8 @@ angular
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
-									$state.go('customer.nameChangeList');
+							           $("#saveSuccessfullyModal").modal("show");
+									//$state.go('customer.nameChangeList');
 								});
 			        }
 					

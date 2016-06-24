@@ -61,7 +61,6 @@ angular.module('watererpApp').controller(
 				//$state.go('adjustments');
 				$scope.rc.editForm.attempted = false;
 				$scope.editForm.$setPristine();
-				//$scope.clear();
 			};
 
 			var onSaveError = function(result) {

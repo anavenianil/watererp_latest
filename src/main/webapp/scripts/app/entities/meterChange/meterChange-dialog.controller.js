@@ -140,7 +140,6 @@ angular.module('watererpApp').controller('MeterChangeDialogController',
 			$scope.getActiveCAN($scope.meterChange.can);
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
-			//$scope.clear();
 			$scope.rc.editForm.attempted=false;
 			$scope.editForm.$setPristine();
 			
