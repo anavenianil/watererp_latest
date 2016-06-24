@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller('MeterChangeDialogController',
         function($scope, $state, $stateParams, MeterChange, CustDetails, MeterDetails, User, $http, CustDetailsSearchCAN, ParseLinks,
-        		GetMeterDetails, Principal, GetActiveCAN) {
+        		/*GetMeterDetails,*/ Principal, GetActiveCAN) {
 
         $scope.meterChange = {};
         $scope.custdetailss = CustDetails.query();

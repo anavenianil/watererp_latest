@@ -77,10 +77,19 @@ public class MeterDetailsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<MeterDetails>> getAllMeterDetailss(Pageable pageable)
+    public ResponseEntity<List<MeterDetails>> getAllMeterDetailss(Pageable pageable,
+    		@RequestParam(value = "meterStatusId", required = false) Long meterStatusId)
         throws URISyntaxException {
         log.debug("REST request to get a page of MeterDetailss");
-        Page<MeterDetails> page = meterDetailsRepository.findAll(pageable); 
+       //Page<MeterDetails> page = meterDetailsRepository.findAll(pageable);
+        Page<MeterDetails> page;
+        if(meterStatusId != null){
+        	page = meterDetailsRepository.findByMeterStatus(pageable, meterStatusId);
+        }
+        else
+        {
+        	page = meterDetailsRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/meterDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
