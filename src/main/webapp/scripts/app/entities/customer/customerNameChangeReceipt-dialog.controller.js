@@ -44,6 +44,7 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:receiptUpdate', result);
             $scope.isSaving = false;
+            $scope.customer.id=result.id;
         };
 
         var onSaveError = function (result) {
@@ -57,12 +58,17 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 					function(response) {
 						console.log("Server response:"
 								+ JSON.stringify(response));
-						$window.history.back();
+						//$window.history.back();
+						  $("#saveSuccessfullyModal").modal("show");
 					});
         }
 
-        $scope.clear = function() {
+        $scope.confirm = function() {
             //$uibModalInstance.dismiss('cancel');
+        	alert("how r u");
+        	$("#saveSuccessfullyModal").modal("hide");
+        	alert("fine");
+        	$state.go('customer.nameChangeList');
         };
         $scope.datePickerForCheckOrDdDate = {};
 
@@ -113,4 +119,21 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 			}
 			return ret;
 		}
+		
+		$scope.resetInstr=function(paymentMode)
+		{
+		if (paymentMode.toUpperCase() === 'CASH') 
+				{
+				$scope.instrEnabled=false;
+				$scope.workflowDTO.receipt.checkOrDdDate = null;
+				$scope.workflowDTO.receipt.checkOrDdNo = null;
+				$scope.workflowDTO.receipt.bankName = null;
+				$scope.workflowDTO.receipt.branchName = null;
+				
+				}
+			else
+				$scope.instrEnabled=true;
+			
+		}
+		
 });

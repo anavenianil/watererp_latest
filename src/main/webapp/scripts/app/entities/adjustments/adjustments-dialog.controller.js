@@ -9,7 +9,7 @@ angular.module('watererpApp').controller(
 			$scope.adjustments = {};
 			$scope.billfulldetailss = BillFullDetails.query();
 			$scope.transactiontypemasters = TransactionTypeMaster.query();
-
+			//$scope.transactiontypemasters=" ";
 			$scope.load = function(id) {
 				Adjustments.get({
 					id : id
@@ -43,7 +43,9 @@ angular.module('watererpApp').controller(
 				$scope.adjustments.custInfo = arr[0] + " | " + arr[1];
 				$scope.adjustInfo = "";
 				$scope.isValidCust = true;
-
+                $scope.rc.editForm.attempted=false;
+                $scope.editForm.$setPristine();
+                
 				CustomerComplaints.getByCan({can:$scope.adjustments.can, status: 5}, function(
 						data) {
 					$scope.customerComplaintss = data;
@@ -59,7 +61,6 @@ angular.module('watererpApp').controller(
 				//$state.go('adjustments');
 				$scope.rc.editForm.attempted = false;
 				$scope.editForm.$setPristine();
-				//$scope.clear();
 			};
 
 			var onSaveError = function(result) {
@@ -89,6 +90,8 @@ angular.module('watererpApp').controller(
 					customerComplaints : null,
 					remarks : null
 				};
+				$scope.rc.editForm.attempted=false;
+                $scope.editForm.$setPristine();
 			};
 			$scope.datePickerForTxnTime = {};
 
