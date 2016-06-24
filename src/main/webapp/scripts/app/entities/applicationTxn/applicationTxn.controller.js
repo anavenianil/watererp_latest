@@ -104,20 +104,39 @@ angular.module('watererpApp')
         };
         
         $scope.onSearch = function() {
-        	var applicationTxnNo = document.getElementById("applicationTxnId").value;
+        	var applicationTxnNo = null;
+        	var applicationTxnDt = null;
+        	var statusSearch = null;
+        	var typeSearch = null;
+        	
+        	applicationTxnNo = document.getElementById("applicationTxnId").value;
+        	if(applicationTxnNo == ""){
+        		applicationTxnNo = null;
+        	}
             console.log("applicationTxnNo: "+applicationTxnNo);
             
-            var applicationTxnDt = DateUtils.convertLocaleDateToServer($scope.applicationTxnDt);
+            applicationTxnDt = DateUtils.convertLocaleDateToServer($scope.applicationTxnDt);
+            if(applicationTxnDt == ""){
+        		applicationTxnDt = null;
+        	}
             console.log("applicationTxnDt: "+$scope.applicationTxnDt);
             
             var statusSearch = document.getElementById("statusSearch").value;
+            if(statusSearch == ""){
+            	statusSearch = null;
+        	}
             console.log("statusSearch: "+statusSearch);
             
             var typeSearch = document.getElementById("typeSearch").value;
+            if(typeSearch == ""){
+            	typeSearch = null;
+        	}
             console.log("typeSearch: "+typeSearch);
             
-            ApplicationTxnService.search(applicationTxnNo, applicationTxnDt, statusSearch, typeSearch).then(function (data) {
-                $scope.applicationTxns = data;
-            });
+            if(applicationTxnNo!=null || applicationTxnDt != null|| statusSearch !=null || typeSearch != null){
+            	ApplicationTxnService.search(applicationTxnNo, applicationTxnDt, statusSearch, typeSearch).then(function (data) {
+                    $scope.applicationTxns = data;
+                });
+            }
         }
     });
