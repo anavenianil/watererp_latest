@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ ConnectionTerminate, MeterDetails, $http, CustDetailsSearchCAN, 
-        		ParseLinks, GetMeterDetails, $state, StreetMaster, DivisionMaster) {
+        		ParseLinks, /*GetMeterDetails,*/ $state, StreetMaster, DivisionMaster) {
 
         $scope.connectionTerminate = {};
         $scope.custDetails = {};

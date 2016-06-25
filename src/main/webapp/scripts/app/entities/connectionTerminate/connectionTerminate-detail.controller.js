@@ -80,6 +80,18 @@ angular.module('watererpApp')
 			return ret;
 		}
 		
+		$scope.canShow = function() {
+			var ret = false;
+			switch ($scope.custDetails.status) {
+			case "TERMINATED":
+					$scope.status = 9;
+					ret = true;
+					break;
+			default:
+				break;
+			}
+			return ret;
+		}
 		
 		$scope.approve = function(workflowDTO){
         	return $http.post('/api/connectionTerminates/approve',

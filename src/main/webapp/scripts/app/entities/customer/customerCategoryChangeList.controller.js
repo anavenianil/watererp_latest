@@ -62,7 +62,7 @@ angular.module('watererpApp')
         
         $scope.findByCANAndCategory = function(can) {
         	$scope.customers = [];
-            Customer.query({page: $scope.page, size: 20, changeType:$scope.customer.changeType, can:can, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            Customer.query({page: $scope.page, changeType:$scope.customer.changeType, can:can, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.customers.push(result[i]);

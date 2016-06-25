@@ -65,9 +65,7 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 
         $scope.confirm = function() {
             //$uibModalInstance.dismiss('cancel');
-        	alert("how r u");
         	$("#saveSuccessfullyModal").modal("hide");
-        	alert("fine");
         	$state.go('customer.nameChangeList');
         };
         $scope.datePickerForCheckOrDdDate = {};
