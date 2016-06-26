@@ -22,10 +22,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="coll_name" type="varchar(255)"/>
-            
-            <column name="txn_type" type="varchar(255)"/>
-            
-            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
+            <column name="txn_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="has_account_no" type="bit"/>
+            <column name="account_code" type="varchar(255)"/>
         </createTable>
         
     </changeSet>

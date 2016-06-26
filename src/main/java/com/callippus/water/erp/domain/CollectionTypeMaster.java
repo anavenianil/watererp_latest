@@ -4,8 +4,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import com.callippus.water.erp.domain.enumeration.TransactionType;
 
 /**
  * A CollectionTypeMaster.
@@ -21,10 +24,18 @@ public class CollectionTypeMaster implements Serializable {
 
     @Column(name = "coll_name")
     private String collName;
-    
-    @Column(name = "txn_type")
-    private String txnType;
-    
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "txn_type", nullable = false)
+    private TransactionType txnType;
+
+    @Column(name = "has_account_no")
+    private Boolean hasAccountNo;
+
+    @Column(name = "account_code")
+    private String accountCode;
+
     public Long getId() {
         return id;
     }
@@ -36,17 +47,33 @@ public class CollectionTypeMaster implements Serializable {
     public String getCollName() {
         return collName;
     }
-    
+
     public void setCollName(String collName) {
         this.collName = collName;
     }
 
-    public String getTxnType() {
+    public TransactionType getTxnType() {
         return txnType;
     }
-    
-    public void setTxnType(String txnType) {
+
+    public void setTxnType(TransactionType txnType) {
         this.txnType = txnType;
+    }
+
+    public Boolean getHasAccountNo() {
+        return hasAccountNo;
+    }
+
+    public void setHasAccountNo(Boolean hasAccountNo) {
+        this.hasAccountNo = hasAccountNo;
+    }
+
+    public String getAccountCode() {
+        return accountCode;
+    }
+
+    public void setAccountCode(String accountCode) {
+        this.accountCode = accountCode;
     }
 
     @Override
@@ -58,9 +85,6 @@ public class CollectionTypeMaster implements Serializable {
             return false;
         }
         CollectionTypeMaster collectionTypeMaster = (CollectionTypeMaster) o;
-        if(collectionTypeMaster.id == null || id == null) {
-            return false;
-        }
         return Objects.equals(id, collectionTypeMaster.id);
     }
 
@@ -75,6 +99,8 @@ public class CollectionTypeMaster implements Serializable {
             "id=" + id +
             ", collName='" + collName + "'" +
             ", txnType='" + txnType + "'" +
+            ", hasAccountNo='" + hasAccountNo + "'" +
+            ", accountCode='" + accountCode + "'" +
             '}';
     }
 }

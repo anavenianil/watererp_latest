@@ -67,7 +67,7 @@ class CollectionTypeMasterGatlingTest extends Simulation {
             .exec(http("Create new collectionTypeMaster")
             .post("/api/collectionTypeMasters")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "collName":"SAMPLE_TEXT", "txnType":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "collName":"SAMPLE_TEXT", "txnType":null, "hasAccountNo":null, "accountCode":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_collectionTypeMaster_url")))
             .pause(10)

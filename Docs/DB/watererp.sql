@@ -78,9 +78,9 @@ CREATE TABLE `adjustments` (
   KEY `fk_adjustments_transactiontypemaster_id` (`transaction_type_master_id`),
   KEY `fk_adjustments_user_id` (`user_id`),
   KEY `fk_adjustments_customercomplaints_id` (`customer_complaints_id`),
-  CONSTRAINT `fk_adjustments_customercomplaints_id` FOREIGN KEY (`customer_complaints_id`) REFERENCES `customer_complaints` (`id`),
   CONSTRAINT `fk_adjustments_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
   CONSTRAINT `fk_adjustments_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
+  CONSTRAINT `fk_adjustments_customercomplaints_id` FOREIGN KEY (`customer_complaints_id`) REFERENCES `customer_complaints` (`id`),
   CONSTRAINT `fk_adjustments_transactiontypemaster_id` FOREIGN KEY (`transaction_type_master_id`) REFERENCES `transaction_type_master` (`id`),
   CONSTRAINT `fk_adjustments_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -147,8 +147,8 @@ CREATE TABLE `application_txn` (
   KEY `fk_applicationtxn_divisionmaster_id` (`division_master_id`),
   KEY `fk_applicationtxn_streetmaster_id` (`street_master_id`),
   KEY `fk_applicationtxn_idproofmaster_id` (`id_proof_master_id`),
-  CONSTRAINT `fk_applicationtxn_idproofmaster_id` FOREIGN KEY (`id_proof_master_id`) REFERENCES `id_proof_master` (`id`),
   CONSTRAINT `fk_applicationtxn_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`),
+  CONSTRAINT `fk_applicationtxn_idproofmaster_id` FOREIGN KEY (`id_proof_master_id`) REFERENCES `id_proof_master` (`id`),
   CONSTRAINT `fk_applicationtxn_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
   CONSTRAINT `fk_applicationtxn_requestat_id` FOREIGN KEY (`request_at_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_applicationtxn_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
@@ -305,7 +305,7 @@ CREATE TABLE `bill_details` (
   PRIMARY KEY (`id`),
   KEY `fk_billdetails_mtrreader_id` (`mtr_reader_id`),
   CONSTRAINT `fk_billdetails_mtrreader_id` FOREIGN KEY (`mtr_reader_id`) REFERENCES `jhi_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=332 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=334 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`bill_details`
@@ -404,6 +404,9 @@ INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`me
  (172,'04060003',NULL,'2016-08-01',NULL,NULL,'S','201608','201608',NULL,42,42,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-08-29','\0','2016-06-01 17:33:00','COMMITTED',15),
  (173,'05050002',NULL,'2016-08-01',NULL,NULL,'B','201608','201608',NULL,71,71,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-08-29','\0','2016-06-01 17:39:55','COMMITTED',14),
  (174,'06020001',NULL,'2016-08-01',NULL,NULL,'L','201608','201608',NULL,13,13,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-08-29','\0','2016-06-01 17:39:55','COMMITTED',14);
+INSERT INTO `bill_details` (`id`,`can`,`bill_number`,`bill_date`,`bill_time`,`meter_make`,`current_bill_type`,`from_month`,`to_month`,`meter_fix_date`,`initial_reading`,`present_reading`,`units`,`water_cess`,`sewerage_cess`,`service_charge`,`meter_service_charge`,`total_amount`,`net_payable_amount`,`telephone_no`,`meter_status`,`met_reader_code`,`bill_flag`,`svr_status`,`terminal_id`,`meter_reader_id`,`user_id`,`mobile_no`,`notice_no`,`lat`,`longi`,`no_meter_amt`,`met_reading_dt`,`is_rounding`,`insert_dt`,`status`,`mtr_reader_id`) VALUES 
+ (332,'A0100111',NULL,'2016-06-01',NULL,NULL,'M','201504','201606',NULL,NULL,100,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-22','\0','2016-06-22 17:06:02','INITIATED',7),
+ (333,'A0101011',NULL,'2016-06-01',NULL,NULL,'M','201603','201606',NULL,138,150,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2016-06-06','\0','2016-06-22 17:06:38','INITIATED',9);
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 
 
@@ -481,7 +484,7 @@ CREATE TABLE `bill_full_details` (
   PRIMARY KEY (`id`),
   KEY `fk_billfulldetails_meterdetails_id` (`meter_details_id`),
   CONSTRAINT `fk_billfulldetails_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`bill_full_details`
@@ -513,7 +516,7 @@ CREATE TABLE `bill_run_details` (
   CONSTRAINT `fk_billrundetails_billdetails_id` FOREIGN KEY (`bill_details_id`) REFERENCES `bill_details` (`id`),
   CONSTRAINT `fk_billrundetails_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
   CONSTRAINT `fk_billrundetails_billrunmaster_id` FOREIGN KEY (`bill_run_master_id`) REFERENCES `bill_run_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`bill_run_details`
@@ -536,7 +539,7 @@ CREATE TABLE `bill_run_master` (
   `failed` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=584 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`bill_run_master`
@@ -544,114 +547,7 @@ CREATE TABLE `bill_run_master` (
 
 /*!40000 ALTER TABLE `bill_run_master` DISABLE KEYS */;
 INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
- (402,'2016-06-14 12:45:40','0',16,0,'COMMITTED'),
- (403,'2016-06-14 12:47:12','0',14,2,'COMMITTED'),
- (406,'2016-06-14 13:21:10','0',16,0,'COMMITTED'),
- (407,'2016-06-14 13:21:16','0',14,2,'COMMITTED'),
- (413,'2016-06-14 14:07:58','0',16,0,'COMMITTED'),
- (414,'2016-06-14 14:25:28','0',16,0,'COMMITTED'),
- (415,'2016-06-14 14:32:53','0',16,0,'COMMITTED'),
- (416,'2016-06-14 14:33:07','0',16,0,'COMMITTED'),
- (417,'2016-06-14 14:56:09','0',16,0,'COMMITTED'),
- (418,'2016-06-14 14:56:15','0',16,0,'COMMITTED'),
- (421,'2016-06-14 15:11:59','0',16,0,'COMMITTED'),
- (422,'2016-06-14 15:12:39','0',16,0,'COMMITTED'),
- (423,'2016-06-14 15:28:09','0',16,0,'COMMITTED'),
- (424,'2016-06-14 15:31:01','0',16,0,'COMMITTED'),
- (426,'2016-06-14 15:45:38','0',16,0,'COMMITTED'),
- (427,'2016-06-14 15:45:43','0',16,0,'COMMITTED'),
- (428,'2016-06-14 16:13:04','0',16,0,'COMMITTED'),
- (429,'2016-06-14 16:13:13','0',16,0,'COMMITTED'),
- (432,'2016-06-14 16:24:24','0',16,0,'COMMITTED');
-INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
- (433,'2016-06-14 16:24:29','0',16,0,'COMMITTED'),
- (434,'2016-06-14 16:24:33','0',16,0,'COMMITTED'),
- (435,'2016-06-14 16:33:10','0',16,0,'COMMITTED'),
- (436,'2016-06-14 16:33:16','0',16,0,'COMMITTED'),
- (437,'2016-06-14 16:33:20','0',16,0,'COMMITTED'),
- (438,'2016-06-14 16:37:01','0',16,0,'COMMITTED'),
- (439,'2016-06-14 16:37:13','0',16,0,'COMMITTED'),
- (440,'2016-06-14 16:37:17','0',16,0,'COMMITTED'),
- (444,'2016-06-14 16:53:06','0',16,0,'COMMITTED'),
- (445,'2016-06-14 16:53:12','0',16,0,'COMMITTED'),
- (446,'2016-06-14 16:53:16','0',15,0,'COMMITTED'),
- (447,'2016-06-14 17:02:36','0',16,0,'COMMITTED'),
- (448,'2016-06-14 17:02:42','0',16,0,'COMMITTED'),
- (449,'2016-06-14 17:02:45','0',15,0,'COMMITTED'),
- (450,'2016-06-14 17:24:38','0',16,0,'COMMITTED'),
- (451,'2016-06-14 17:24:43','0',16,0,'COMMITTED'),
- (452,'2016-06-14 17:24:47','0',15,0,'COMMITTED'),
- (453,'2016-06-14 17:24:49','0',8,0,'COMMITTED'),
- (457,'2016-06-14 18:29:51','0',16,0,'COMMITTED');
-INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
- (458,'2016-06-14 18:29:56','0',16,0,'COMMITTED'),
- (459,'2016-06-14 18:30:00','0',15,0,'COMMITTED'),
- (460,'2016-06-14 18:30:02','0',13,3,'COMMITTED'),
- (461,'2016-06-14 18:41:02','0',16,0,'COMMITTED'),
- (462,'2016-06-14 18:41:07','0',16,0,'COMMITTED'),
- (463,'2016-06-14 18:41:11','0',15,0,'COMMITTED'),
- (464,'2016-06-14 18:41:14','0',14,2,'COMMITTED'),
- (465,'2016-06-14 18:54:31','0',16,0,'COMMITTED'),
- (466,'2016-06-14 18:54:36','0',16,0,'COMMITTED'),
- (467,'2016-06-14 18:54:39','0',15,0,'COMMITTED'),
- (468,'2016-06-14 18:54:42','0',15,1,'COMMITTED'),
- (469,'2016-06-14 19:02:35','0',16,0,'COMMITTED'),
- (470,'2016-06-14 19:02:41','0',16,0,'COMMITTED'),
- (471,'2016-06-14 19:02:46','0',15,0,'COMMITTED'),
- (472,'2016-06-14 19:02:48','0',15,1,'COMMITTED'),
- (477,'2016-06-14 19:17:00','0',16,0,'COMMITTED'),
- (478,'2016-06-14 19:17:05','0',16,0,'COMMITTED'),
- (479,'2016-06-14 19:17:09','0',15,0,'COMMITTED'),
- (480,'2016-06-14 19:17:12','0',15,1,'COMMITTED');
-INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
- (481,'2016-06-14 19:25:58','0',16,0,'COMMITTED'),
- (482,'2016-06-14 19:26:03','0',16,0,'COMMITTED'),
- (483,'2016-06-14 19:26:07','0',15,0,'COMMITTED'),
- (484,'2016-06-14 19:26:10','0',16,0,'COMMITTED'),
- (485,'2016-06-14 19:29:51','0',16,0,'COMMITTED'),
- (486,'2016-06-14 19:29:56','0',16,0,'COMMITTED'),
- (487,'2016-06-14 19:30:00','0',15,0,'COMMITTED'),
- (488,'2016-06-14 19:30:02','0',16,0,'COMMITTED'),
- (489,'2016-06-15 09:46:59','0',12,4,'COMMITTED'),
- (490,'2016-06-15 09:51:41','0',12,4,'COMMITTED'),
- (491,'2016-06-15 10:54:31','0',13,3,'COMMITTED'),
- (492,'2016-06-15 10:58:24','0',13,3,'COMMITTED'),
- (493,'2016-06-15 10:59:05','0',8,8,'COMMITTED'),
- (494,'2016-06-15 11:30:56','0',14,3,'COMMITTED'),
- (495,'2016-06-15 11:31:04','0',2,14,'COMMITTED'),
- (496,'2016-06-15 11:36:06','0',15,1,'COMMITTED'),
- (497,'2016-06-15 11:40:42','0',15,1,'COMMITTED'),
- (498,'2016-06-15 11:46:49','0',15,1,'COMMITTED'),
- (499,'2016-06-15 11:54:50','0',16,0,'COMMITTED');
-INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
- (500,'2016-06-15 11:55:17','0',16,0,'COMMITTED'),
- (501,'2016-06-15 11:55:21','0',15,0,'COMMITTED'),
- (502,'2016-06-15 11:55:23','0',16,0,'COMMITTED'),
- (503,'2016-06-15 12:00:17','0',16,0,'COMMITTED'),
- (504,'2016-06-15 12:00:23','0',16,0,'COMMITTED'),
- (505,'2016-06-15 12:00:27','0',15,0,'COMMITTED'),
- (506,'2016-06-15 12:00:30','0',16,0,'COMMITTED'),
- (507,'2016-06-15 13:08:31','0',16,0,'COMMITTED'),
- (508,'2016-06-15 13:08:37','0',16,0,'COMMITTED'),
- (509,'2016-06-15 13:08:40','0',15,0,'COMMITTED'),
- (510,'2016-06-15 13:08:43','0',16,0,'COMMITTED'),
- (511,'2016-06-15 13:08:45','0',5,0,'COMMITTED'),
- (512,'2016-06-15 13:19:47','0',16,0,'COMMITTED'),
- (513,'2016-06-15 13:19:53','0',16,0,'COMMITTED'),
- (514,'2016-06-15 13:19:57','0',15,0,'COMMITTED'),
- (515,'2016-06-15 13:20:00','0',16,0,'COMMITTED'),
- (516,'2016-06-15 13:20:01','0',5,0,'COMMITTED'),
- (517,'2016-06-15 13:35:51','0',16,0,'COMMITTED'),
- (518,'2016-06-15 13:35:56','0',16,0,'COMMITTED');
-INSERT INTO `bill_run_master` (`id`,`date`,`area`,`success`,`failed`,`status`) VALUES 
- (519,'2016-06-15 13:36:01','0',15,0,'COMMITTED'),
- (520,'2016-06-15 13:36:03','0',16,0,'COMMITTED'),
- (521,'2016-06-15 13:36:05','0',5,0,'COMMITTED'),
- (522,'2016-06-15 13:46:01','0',16,0,'COMMITTED'),
- (523,'2016-06-15 13:46:07','0',16,0,'COMMITTED'),
- (524,'2016-06-15 13:46:11','0',15,0,'COMMITTED'),
- (525,'2016-06-15 13:46:13','0',16,0,'COMMITTED'),
- (526,'2016-06-15 13:46:15','0',5,0,'COMMITTED');
+ (1,'2016-06-25 12:35:47','0',0,0,'In Process');
 /*!40000 ALTER TABLE `bill_run_master` ENABLE KEYS */;
 
 
@@ -753,7 +649,7 @@ CREATE TABLE `coll_details` (
   `reversal_ref` varchar(255) DEFAULT NULL,
   `receipt_no` varchar(255) DEFAULT NULL,
   `receipt_amt` float DEFAULT NULL,
-  `receipt_dt` timestamp NULL DEFAULT NULL,
+  `receipt_dt` timestamp NULL,
   `receipt_mode` varchar(255) DEFAULT NULL,
   `instr_no` varchar(255) DEFAULT NULL,
   `instr_dt` date DEFAULT NULL,
@@ -762,7 +658,7 @@ CREATE TABLE `coll_details` (
   `can` varchar(255) DEFAULT NULL,
   `cons_name` varchar(255) DEFAULT NULL,
   `terminal_id` varchar(255) DEFAULT NULL,
-  `coll_time` timestamp NULL DEFAULT NULL,
+  `coll_time` timestamp NULL,
   `txn_status` varchar(255) DEFAULT NULL,
   `meter_reader_id` varchar(255) DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL,
@@ -781,7 +677,7 @@ CREATE TABLE `coll_details` (
   CONSTRAINT `fk_colldetails_collectiontypemaster_id` FOREIGN KEY (`collection_type_master_id`) REFERENCES `collection_type_master` (`id`),
   CONSTRAINT `fk_colldetails_bankmaster_id` FOREIGN KEY (`bank_master_id`) REFERENCES `bank_master` (`id`),
   CONSTRAINT `fk_colldetails_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`coll_details`
@@ -799,26 +695,17 @@ DROP TABLE IF EXISTS `collection_type_master`;
 CREATE TABLE `collection_type_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `coll_name` varchar(255) DEFAULT NULL,
-  `txn_type` varchar(255) DEFAULT NULL,
+  `txn_type` varchar(255) NOT NULL,
+  `has_account_no` bit(1) DEFAULT NULL,
+  `account_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`collection_type_master`
 --
 
 /*!40000 ALTER TABLE `collection_type_master` DISABLE KEYS */;
-INSERT INTO `collection_type_master` (`id`,`coll_name`,`txn_type`) VALUES 
- (1,'BILL PAYMENT','C'),
- (2,'NEW CONNECTION','C'),
- (3,'PENALTY','C'),
- (4,'RECONNECTION','C'),
- (5,'EXPENSE 1','E'),
- (6,'EXPENSE 2','E'),
- (7,'EXPENSE 3','E'),
- (8,'EXPENSE 4','E'),
- (9,'Rent','R'),
- (10,'Scrap Sale','R');
 /*!40000 ALTER TABLE `collection_type_master` ENABLE KEYS */;
 
 
@@ -856,7 +743,7 @@ CREATE TABLE `configuration_details` (
   `value` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`configuration_details`
@@ -881,6 +768,8 @@ INSERT INTO `configuration_details` (`id`,`name`,`value`,`description`) VALUES
  (15,'SEWERAGE_CONN','F','false'),
  (16,'MIN_AVG_KL','2.5','Min. Avg KL in case customer\'s Avg KL is not available'),
  (17,'NAME_CHANGE_FEE','1000',NULL);
+INSERT INTO `configuration_details` (`id`,`name`,`value`,`description`) VALUES 
+ (18,'MIGRATION_BILL_MONTH','201303','Bill Month to migrate. Only used during one time migration');
 /*!40000 ALTER TABLE `configuration_details` ENABLE KEYS */;
 
 
@@ -1024,12 +913,12 @@ CREATE TABLE `cust_details` (
   KEY `fk_custdetails_divisionmaster_id` (`division_master_id`),
   KEY `fk_custdetails_streetmaster_id` (`street_master_id`),
   KEY `fk_custdetails_meterdetails_id` (`meter_details_id`),
-  CONSTRAINT `fk_custdetails_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
   CONSTRAINT `fk_custdetails_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`),
+  CONSTRAINT `fk_custdetails_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
   CONSTRAINT `fk_custdetails_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_custdetails_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
   CONSTRAINT `fk_custdetails_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18435 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`cust_details`
@@ -1037,34 +926,1036 @@ CREATE TABLE `cust_details` (
 
 /*!40000 ALTER TABLE `cust_details` DISABLE KEYS */;
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (1,'02020005','ABC','DEF','PQR','14','2016-05-23','Punna Reddy Chilukuri','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','S','2016-08-01',3.5,'2016-08-27',29,'2016-08-01',0,6734.36,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',0,'123456','abc@abc.abc','ACTIVE',1,1,1,1,9),
- (2,'08090001','78','654','DMA8 Street9',NULL,'2016-05-23','bhasker reddy','987','hyderabad','KIGOMA','812',NULL,0.5,'T','F','B','2016-08-01',11,'2016-08-28',37,'2016-08-01',0,15167.8,0,0,0,0,'0.0',1,0,0,NULL,0,'9390148141','0','0','0','0','0','0','2016-04-03',0,'987','bhasker@gmail.com','ACTIVE',1,1,8,9,5);
+ (1,'02020005','ABC','DEF','PQR','14','2016-04-23','Punna Reddy Chilukuri','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','S','2016-08-01',3.5,'2016-08-27',29,'2016-08-01',0,6734.36,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',0,'123456','abc@abc.abc','ACTIVE',1,1,1,1,9),
+ (2,'08090001','78','654','DMA8 Street9',NULL,'2016-04-03','bhasker reddy','','hyderabad','KIGOMA','812',NULL,0.5,'T','F','B','2016-08-01',11,'2016-08-28',37,'2016-08-01',0,15167.8,0,0,0,0,'0.0',1,0,0,NULL,0,'9390148141','0','0','0','0','0','0','2016-04-03',0,'987','bhasker@gmail.com','ACTIVE',1,1,8,9,5);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (3,'04060001','4','2','DMA4 Street6',NULL,'2016-02-03','Tejasree Mamidipaka','161','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812',NULL,0.5,'T','F','M','2016-07-01',7,'2016-07-30',36,'2016-07-01',0,4675.2,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0','2016-03-03',0,'12421214','tejasree.m@gmail.com','ACTIVE',1,1,4,6,2),
- (4,'05050001','4','2','DMA5 Street5',NULL,'2016-02-23','neha Mamidipaka','162','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812',NULL,1,'T','F','M','2016-07-01',8,'2016-07-30',33,'2016-07-01',0,5745.18,0,0,0,0,'0.0',1,0,0,NULL,0,'9849469151','0','0','0','0','0','0','2016-03-23',0,'12151612','neha.m@gmail.com','ACTIVE',1,3,5,5,4);
+ (3,'04060001','4','2','DMA4 Street6',NULL,'2016-03-03','Tejasree Mamidipaka','','Plot No:161,\nSubhodaya Nagar, Opp: Kphb,\nKukatpally','KIGOMA','812',NULL,0.5,'T','F','M','2016-07-01',7,'2016-07-30',36,'2016-07-01',0,4675.2,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0','2016-03-03',0,'12421214','tejasree.m@gmail.com','ACTIVE',1,1,4,6,2),
+ (4,'05050001','4','2','DMA5 Street5',NULL,'2016-03-23','neha Mamidipaka','','Plot No: 162,\nsubhodaya nagar, opp: kphb, \nkukatpally','KIGOMA','812',NULL,1,'T','F','M','2016-07-01',8,'2016-07-30',33,'2016-07-01',0,5745.18,0,0,0,0,'0.0',1,0,0,NULL,0,'9849469151','0','0','0','0','0','0','2016-03-23',0,'12151612','neha.m@gmail.com','ACTIVE',1,3,5,5,4);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (5,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-06','Rajesh Kollipara','11','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812',NULL,0.5,'T','F','M','2016-07-01',3.33333,'2016-07-28',51,'2016-07-01',0,3337.43,0,0,0,0,'0.0',1,0,0,NULL,0,'9949911111','0','0','0','0','0','0','2016-03-03',0,'1111a1111','rajesh.k@gmail.com','ACTIVE',1,1,4,6,1),
- (6,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-20','sudhakar g','22','plot no 22,\nroad no 2,\nkphb','KIGOMA','812',NULL,0.5,'T','F','S','2016-08-01',2.5,'2016-08-29',42,'2016-08-01',0,17748.7,0,0,0,0,'0.0',1,0,0,NULL,0,'9849422222','0','0','0','0','0','0','2016-03-23',0,'2222b2222','sudhakar.g@gmail.com','ACTIVE',1,1,4,6,3);
+ (5,'04060002','Road no 1','1','DMA4 Street6',NULL,'2016-03-03','Rajesh Kollipara','','Plot No 11,\nroad no 1, kphb,\nhyderabad','KIGOMA','812',NULL,0.5,'T','F','M','2016-07-01',3.33333,'2016-07-28',51,'2016-07-01',0,3337.43,0,0,0,0,'0.0',1,0,0,NULL,0,'9949911111','0','0','0','0','0','0','2016-03-03',0,'1111a1111','rajesh.k@gmail.com','ACTIVE',1,1,4,6,1),
+ (6,'04060003','road no 2','2','DMA4 Street6',NULL,'2016-03-23','sudhakar g','','plot no 22,\nroad no 2,\nkphb','KIGOMA','812',NULL,0.5,'T','F','S','2016-08-01',2.5,'2016-08-29',42,'2016-08-01',0,17748.7,0,0,0,0,'0.0',1,0,0,NULL,0,'9849422222','0','0','0','0','0','0','2016-03-23',0,'2222b2222','sudhakar.g@gmail.com','ACTIVE',1,1,4,6,3);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (7,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-04-10','Sunitha b','33','plot no 33,\nroad no 3,\nkphb','KIGOMA','812',NULL,0.75,'T','F','M','2016-07-01',7.5,'2016-07-30',68,'2016-07-01',0,11544.7,0,0,0,0,'0.0',1,0,0,NULL,0,'9849433333','0','0','0','0','0','0','2016-02-03',0,'3333c3333','sunitha.b@gmail.com','ACTIVE',1,2,4,6,5),
- (8,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-04-18','Mahesh S','44','plot no 44,\nroad no 4\nkphb','KIGOMA','812',NULL,1,'T','F','B','2016-08-01',3,'2016-08-29',71,'2016-08-01',0,25010.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9849444444','0','0','0','0','0','0','2016-02-23',0,'4444d4444','mahesh.s@gmail.com','ACTIVE',1,3,5,5,7);
+ (7,'04060004','road no 3','3b','DMA4 Street6',NULL,'2016-02-03','Sunitha b','','plot no 33,\nroad no 3,\nkphb','KIGOMA','812',NULL,0.75,'T','F','M','2016-07-01',7.5,'2016-07-30',68,'2016-07-01',0,11544.7,0,0,0,0,'0.0',1,0,0,NULL,0,'9849433333','0','0','0','0','0','0','2016-02-03',0,'3333c3333','sunitha.b@gmail.com','ACTIVE',1,2,4,6,5),
+ (8,'05050002','road no 4','4','DMA5 Street5',NULL,'2016-02-23','Mahesh S','','plot no 44,\nroad no 4\nkphb','KIGOMA','812',NULL,1,'T','F','B','2016-08-01',3,'2016-08-29',71,'2016-08-01',0,25010.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9849444444','0','0','0','0','0','0','2016-02-23',0,'4444d4444','mahesh.s@gmail.com','ACTIVE',1,3,5,5,7);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (9,'06020001','06','02','PQR','14','2016-04-23','Test Customer 06020001','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','L','2016-08-01',4.5,'2016-08-29',13,'2016-08-01',0,23844.5,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',3181.67,'123456','abc@abc.abc','ACTIVE',1,1,6,2,11),
- (10,'06020002','06','02','PQR','14','2016-04-23','Test Customer 06020002','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',3.16667,'2016-07-29',8,'2016-07-01',0,19762.9,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,12);
+ (9,'06020001','06','02','PQR','14','2016-04-23','Test Customer 06020001','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','L','2016-08-01',4.5,'2016-08-29',13,'2016-08-01',0,23844.5,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',3181.67,'123456','abc@abc.abc','ACTIVE',1,1,6,2,11),
+ (10,'06020002','06','02','PQR','14','2016-04-03','Test Customer 06020002','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',3.16667,'2016-07-29',8,'2016-07-01',0,19762.9,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,12);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (11,'06020003','06','02','PQR','14','2016-04-23','Test Customer 06020003','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',4.33333,'2016-07-29',17,'2016-07-01',0,18370.5,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,13),
- (12,'06020004','06','02','PQR','14','2016-04-23','Test Customer 06020004','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',4,'2016-07-29',16,'2016-07-01',0,21192.1,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,14);
+ (11,'06020003','06','02','PQR','14','2016-04-23','Test Customer 06020003','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',4.33333,'2016-07-29',17,'2016-07-01',0,18370.5,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-23',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,13),
+ (12,'06020004','06','02','PQR','14','2016-04-03','Test Customer 06020004','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',4,'2016-07-29',16,'2016-07-01',0,21192.1,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-04-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,14);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (13,'06020005','06','02','PQR','14','2016-04-23','Test Customer 06020005','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','L','2016-07-01',2.5,'2016-07-29',9,'2016-07-01',0,21344.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-23',2075,'123456','abc@abc.abc','ACTIVE',1,1,6,2,15),
- (14,'06020006','06','02','PQR','14','2016-04-23','Test Customer 06020006','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','S','2016-07-01',2.5,'2016-07-29',21,'2016-07-01',0,21786.8,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,16);
+ (13,'06020005','06','02','PQR','14','2016-03-23','Test Customer 06020005','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','L','2016-07-01',2.5,'2016-07-29',9,'2016-07-01',0,21344.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-23',2075,'123456','abc@abc.abc','ACTIVE',1,1,6,2,15),
+ (14,'06020006','06','02','PQR','14','2016-03-03','Test Customer 06020006','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','S','2016-07-01',2.5,'2016-07-29',21,'2016-07-01',0,21786.8,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,16);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (15,'06020007','06','02','PQR','14','2016-04-23','Test Customer 06020007','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',5,'2016-07-29',17,'2016-07-01',0,20294.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-23',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,17),
- (16,'06020008','06','02','PQR','14','2016-04-23','Test Customer 06020008','123','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','B','2016-07-01',2.5,'2016-07-29',20,'2016-07-01',0,21786.8,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,18);
+ (15,'06020007','06','02','PQR','14','2016-03-23','Test Customer 06020007','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','M','2016-07-01',5,'2016-07-29',17,'2016-07-01',0,20294.6,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-23',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,17),
+ (16,'06020008','06','02','PQR','14','2016-03-03','Test Customer 06020008','','HIJ','HYDERABAD','500086',NULL,0.5,'T','F','B','2016-07-01',2.5,'2016-07-29',20,'2016-07-01',0,21786.8,0,0,0,0,'0.0',1,0,0,NULL,0,'9989505111','0','0','0','0','0','0','2016-03-03',0,'123456','abc@abc.abc','ACTIVE',1,1,6,2,18);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (23,'06060007','6',NULL,'DMA6 StNo6',NULL,'2016-06-01','naresh ya','417','plot no 417\nstreet 6\nkphb','KIGOMA','812',NULL,0.5,'T','F','U','2016-05-01',0,'2016-06-01',NULL,'2016-06-01',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0',NULL,NULL,'121316',NULL,'ACTIVE',6,1,6,12,NULL),
- (24,'06060008','6',NULL,'DMA6 StNo6',NULL,'2016-06-18','narasimha rao ya','418','plot no 417\nstreet no 6\nkphb','KIGOMA','812',NULL,0.5,'T','F','U','2016-05-01',0,'2016-06-18',NULL,'2016-06-18',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0',NULL,NULL,'121318',NULL,'ACTIVE',6,1,6,12,NULL);
+ (23,'06060007','6',NULL,'DMA6 StNo6',NULL,NULL,'naresh ya','','plot no 417\nstreet 6\nkphb','KIGOMA','812',NULL,0.5,'T','F','U','2016-05-01',0,'2016-06-01',NULL,'2016-06-01',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0',NULL,NULL,'121316',NULL,'ACTIVE',1,1,6,12,NULL),
+ (24,'06060008','6',NULL,'DMA6 StNo6',NULL,NULL,'narasimha rao ya','','plot no 417\nstreet no 6\nkphb','KIGOMA','812',NULL,0.5,'T','F','U','2016-05-01',0,'2016-06-18',NULL,'2016-06-18',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'9949976058','0','0','0','0','0','0',NULL,NULL,'121318',NULL,'ACTIVE',1,1,6,12,NULL);
 INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
- (25,'04060005','4','6','DMA4 Street6','14','2016-04-12','Srinivas gattu','420','plot no 9\nnizampet road','KIGOMA','812',NULL,0.5,'T','F','U','2016-03-01',0,'2016-04-12',NULL,'2016-04-12',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'99895051111','0','0','0','0','0','0',NULL,NULL,'1234af',NULL,'ACTIVE',6,1,4,6,NULL);
+ (25,'04060005','4','6','DMA4 Street6','14',NULL,'Srinivas gattu','','plot no 9\nnizampet road','KIGOMA','812',NULL,0.5,'T','F','U','2016-03-01',0,'2016-04-12',NULL,'2016-04-12',0,0,0,0,0,0,'0.0',1,0,0,NULL,0,'99895051111','0','0','0','0','0','0',NULL,NULL,'1234af',NULL,'ACTIVE',1,1,4,6,NULL),
+ (17767,'A0100111','A01',NULL,'','','2015-04-27','MUSSA HAMISI','001','GUNGU, GUNGU, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U',NULL,NULL,NULL,NULL,'2014-01-09',NULL,0,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-27',0,'','','ACTIVE',1,3,11,14,4406);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17768,'A0101011','A01',NULL,'','','2015-08-11','SELEMAN MAARUFU','010','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',138,'2014-01-09',NULL,259363,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4407),
+ (17769,'A0102111','A01',NULL,'','','2012-09-19','HAMISI FERUZI KABWE','021','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2013-09-27',NULL,'2013-09-27',106,'2014-01-09',NULL,19877.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,3,11,14,4408);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17770,'A0103911','A01',NULL,'','','2012-09-19','ABDALAH MFAUME','039','Gungu, GUNGU, -','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',0,'2014-01-09',NULL,293922,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,2,11,14,4409),
+ (17771,'A0105511','A01',NULL,'','','2012-09-20','KABWE HEMED','055','Gungu, KIKUNKU, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',310,'2014-01-09',NULL,118210,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-20',0,'','','ACTIVE',1,2,11,14,4410);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17772,'A0105811','A01',NULL,'','','2015-03-09','AMRI YUSUF','058','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','769','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',8,'2014-01-09',NULL,58884.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-03-09',0,'','','ACTIVE',1,3,11,14,4411),
+ (17773,'A0111111','A01',NULL,'','','2015-08-11','JUMA SWEDI','111','Gungu, KIKUNKU B, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',122,'2014-01-09',NULL,271330,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4413);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17774,'A0111511','A01',NULL,'','','2010-12-01','HASAN HAMIS SULULU','115','Gungu, BUTUNGA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1993,'2014-01-09',NULL,119697,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2010-12-01',0,'','','ACTIVE',1,3,11,14,4414),
+ (17775,'A0113011','A01',NULL,'','','2015-08-11','VENERANDA NICALAUS','130','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',38,'2014-01-09',NULL,73260.5,0,0,0,0,'0.00',1,0,0,NULL,52000,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4415);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17776,'A0114511','A01',NULL,'','','2012-09-21','TATU SHABANI','145','Gungu, KIKUNGU, -','KIGOMA UJIJI','-','L',0.5,'T','F','M','2015-12-27',NULL,'2015-12-27',241,'2014-01-09',NULL,293522,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,2,11,14,4416),
+ (17777,'A0114611','A01',NULL,'','','2015-08-11','HAMZA RUBIBI','146','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',175,'2014-01-09',NULL,338371,0,0,0,0,'0.00',1,0,0,NULL,270000,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4417);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17778,'A0114811','A01',NULL,'','','2012-09-19','BAKARI ABDALLAH','148','Gungu, KIKUNGU, -','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',376,'2014-01-09',NULL,240451,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,3,11,14,4418),
+ (17779,'A0115211','A01',NULL,'','','2015-08-11','SONGORO IDD HEMED','152','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','430','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',123,'2014-01-09',NULL,39214.5,0,0,0,0,'0.00',1,0,0,NULL,39250,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4419);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17780,'A0115611','A01',NULL,'','','2012-09-19','RAMADHANI GANGE','156','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',852,'2014-01-09',NULL,128473,0,0,0,0,'0.00',1,0,0,NULL,80000,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,2,11,14,4420),
+ (17781,'A0115811','A01',NULL,'','','2012-09-19','SIMONI BUGABO','158','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',320,'2014-01-09',NULL,109437,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,2,11,14,4421);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17782,'A0118111','A01',NULL,'','','2008-01-01','JUMANNE RASHID','181','Gungu, BUTUNGA, -','KIGOMA UJIJI','-','L',0.25,'T','F','M','2013-11-27',NULL,'2013-11-27',1710,'2014-01-09',NULL,62034.5,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2008-01-01',0,'','','ACTIVE',1,1,11,14,4422),
+ (17783,'A0118211','A01',NULL,'','','2012-09-20','VENANCE KALINDA','182','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',378,'2014-01-09',NULL,127197,0,0,0,0,'0.00',1,0,0,NULL,100000,'','0','0','0','0','0','0','2012-09-20',0,'','','ACTIVE',1,3,11,14,4423);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17784,'A0119011','A01',NULL,'','','2008-01-01','WILLIAM KAGOZI','190','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','105','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1686,'2014-01-09',NULL,3291.14,0,0,0,0,'0.00',1,0,0,NULL,3000,'','0','0','0','0','0','0','2008-01-01',0,'','','ACTIVE',1,3,11,14,4424),
+ (17785,'A0201811','A02',NULL,'','','2012-09-21','YASIN KIFUNGO','018','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2013-03-25',NULL,'2013-03-25',200,'2014-01-09',NULL,244192,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,2,11,14,4426);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17786,'A0202411','A02',NULL,'','','2015-08-11','AMRI MASHAKA','024','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','42','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',44,'2014-01-09',NULL,19746.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4427),
+ (17787,'A0204211','A02',NULL,'','','2015-09-01','HAMZA M. RUBIBI','042','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','319','A',0.75,'T','F','U',NULL,NULL,NULL,NULL,'2014-01-09',NULL,19692.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4428);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17788,'A0205411','A02',NULL,'','','2008-01-01','SHABAN  MGOZI','054','Gungu, BUTUNGA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1979,'2014-01-09',NULL,92336.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2008-01-01',0,'','','ACTIVE',1,3,11,14,4429),
+ (17789,'A0208211','A02',NULL,'','','2015-10-01','RAMADHAN ISSA FUNDI','082','Gungu, SANGO, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',21,'2014-01-09',NULL,260531,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-10-01',0,'','','ACTIVE',1,3,11,14,4430);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17790,'A0208411','A02',NULL,'','','2012-09-20','ISSA YAGAZA','084','Gungu, KIKUNKU, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2013-11-27',NULL,'2013-11-27',77,'2014-01-09',NULL,22229.5,0,0,0,0,'0.00',1,0,0,NULL,22300,'','0','0','0','0','0','0','2012-09-20',0,'','','ACTIVE',1,3,11,14,4431),
+ (17791,'A0208811','A02',NULL,'','','2010-12-01','KASSIM  SELEMAN','088','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',760,'2014-01-09',NULL,4736.63,0,0,0,0,'0.00',1,0,0,NULL,5000,'','0','0','0','0','0','0','2010-12-01',0,'','','ACTIVE',1,3,11,14,4432);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17792,'A0209611','A02',NULL,'','','2015-10-01','JOHN DAUD','096','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',380,'2014-01-09',NULL,19636.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-10-01',0,'','','ACTIVE',1,3,11,14,4433),
+ (17793,'A0210811','A02',NULL,'','','2012-09-21','JAPHET KAREJA (MADEVU GUEST HOUSE - KIBIRIZI)','108','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-12-27',NULL,'2015-12-27',384,'2014-01-09',NULL,74627.1,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,3,11,14,4434);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17794,'A0211411','A02',NULL,'','','2015-08-11','JUMANNE MUSA MUHAYE','114','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',49,'2014-01-09',NULL,196888,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4435),
+ (17795,'A0211511','A02',NULL,'','','2014-09-04','MARY ROMAN KARINDA','115','GUNGU, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',60,'2014-01-09',NULL,31416,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4436);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17796,'A0211911','A02',NULL,'','','2015-09-01','MOSHI TANDITSE','119','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',52,'2014-01-09',NULL,107598,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4437),
+ (17797,'A0212811','A02',NULL,'','','2014-11-11','HUSSEIN S. MPARO','128','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',302,'2014-01-09',NULL,19666.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-11-11',0,'','','ACTIVE',1,3,11,14,4438);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17798,'A0214511','A02',NULL,'','','2012-09-21','MSIKITI WA ANSWAR SUNNA (KIBIRIZI)','145','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1659,'2014-01-09',NULL,239000,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,3,11,14,4439),
+ (17799,'A0214611','A02',NULL,'','','2015-08-11','IBRAHIM HASSAN','146','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',537,'2014-01-09',NULL,20346.5,0,0,0,0,'0.00',1,0,0,NULL,19000,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4440);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17800,'A0216411','A02',NULL,'','','2014-11-11','PETRO RUVAHOFI','164','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',371,'2014-01-09',NULL,58695.5,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-11-11',0,'','','ACTIVE',1,3,11,14,4441),
+ (17801,'A0216911','A02',NULL,'','','2015-08-11','MASJID SALAMA','169','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',268,'2014-01-09',NULL,546278,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4442);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17802,'A0218711','A02',NULL,'','','2015-05-01','S. R. KASENDEKA (GUEST HOUSE)','187','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','33','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',292,'2014-01-09',NULL,119312,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2015-05-01',0,'','','ACTIVE',1,3,11,14,4443),
+ (17803,'A0218811','A02',NULL,'','','2012-09-21','SETH KAGOMA','188','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2014-01-25',NULL,'2014-01-25',NULL,'2014-01-09',NULL,316400,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,3,11,14,4444);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17804,'A0219111','A02',NULL,'','','2014-10-03','AHMAD R. YANGA','191','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',424,'2014-01-09',NULL,39266.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-10-03',0,'','','ACTIVE',1,3,11,14,4445),
+ (17805,'A0219511','A02',NULL,'','','2012-09-20','YOVITA MFAUME NTAYEGA','195','Gungu, KIKUNGU, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2013-01-27',NULL,'2013-01-27',NULL,'2014-01-09',NULL,75860.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-20',0,'','','ACTIVE',1,3,11,14,4446);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17806,'A0219711','A02',NULL,'','','2011-11-29','ANDERSON ROBERT','197','Gungu, KAHABWA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2012-03-25',NULL,'2012-03-25',79,'2014-01-09',NULL,30446.3,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2011-11-29',0,'','','ACTIVE',1,3,11,14,4447),
+ (17807,'A0300811','A03',NULL,'','','2011-11-29','TOWN DIRECTOR (MACHINJIO KIBIRIZI)','008','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','44','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',5055,'2014-01-09',NULL,106979,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-11-29',0,'','','ACTIVE',1,3,11,14,4448);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17808,'A0302111','A03',NULL,'','','2014-09-04','HALID FIKIRINI BAMBE','021','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',535,'2014-01-09',NULL,55598.5,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4449),
+ (17809,'A0304911','A03',NULL,'','','2014-08-09','GABRIEL PETRO','049','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',311,'2014-01-09',NULL,153253,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-09',0,'','','ACTIVE',1,3,11,14,4450);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17810,'A0306611','A03',NULL,'','','2012-09-21','MWENE BULONGO MTANGWA','066','Gungu, KIBIRIZI, -','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',275,'2014-01-09',NULL,65706.3,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,3,11,14,4451),
+ (17811,'A0307211','A03',NULL,'','','2014-08-09','FATUMA RAMADHAN','072','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',144,'2014-01-09',NULL,127339,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2014-08-09',0,'','','ACTIVE',1,3,11,14,4452);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17812,'A0307911','A03',NULL,'','','2014-09-04','DEUS SABU','079','Gungu, GEZAULOLE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',254,'2014-01-09',NULL,87646.9,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4453),
+ (17813,'A0308011','A03',NULL,'','','2015-09-01','VICTORY KAPAMA','080','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',133,'2014-01-09',NULL,91512.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4454);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17814,'A0308211','A03',NULL,'','','2014-09-04','STEPHEN LUGERA','082','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',245,'2014-01-09',NULL,59712.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4455),
+ (17815,'A0309411','A03',NULL,'','','2014-09-04','HAMISI MDIDA','094','Gungu, GEZAULOLE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',228,'2014-01-09',NULL,38562.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4456);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17816,'A0311011','A03',NULL,'','','2014-09-04','ANASTAZIA MILIGO','110','Gungu, -, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',728,'2014-01-09',NULL,19251,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4458),
+ (17817,'A0311711','A03',NULL,'','','2015-09-01','GAUDENCE B. MISABA','117','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',153,'2014-01-09',NULL,56386.5,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4459);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17818,'A0313711','A03',NULL,'','','2014-09-04','HAMISI SAID','137','Gungu, GEZAULOLE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',366,'2014-01-09',NULL,19862.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4460),
+ (17819,'A0313811','A03',NULL,'','','2015-09-01','RAJABU LUKUMAN','138','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',37,'2014-01-09',NULL,-39863.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4461);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17820,'A0314911','A03',NULL,'','','2011-11-29','NYANZA BOTTLING LTD','149','Gungu, KIBIRIZI, -','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3310,'2014-01-09',NULL,76418.4,0,0,0,0,'0.00',1,0,0,NULL,61000,'','0','0','0','0','0','0','2011-11-29',0,'','','ACTIVE',1,3,11,14,4463),
+ (17821,'A0316611','A03',NULL,'','','2014-10-13','HASSAN MASHAKA','166','Gungu, GEZAULOLE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-12-27',NULL,'2015-12-27',14,'2014-01-09',NULL,19601.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-10-13',0,'','','ACTIVE',1,3,11,14,4464);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17822,'A0319411','A03',NULL,'','','2014-10-03','SELEMAN SIKUYAKWENDA','194','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',537,'2014-01-09',NULL,75345.5,0,0,0,0,'0.00',1,0,0,NULL,40500,'','0','0','0','0','0','0','2014-10-03',0,'','','ACTIVE',1,3,11,14,4465),
+ (17823,'A0400411','A04',NULL,'','','2012-09-21','YUSUFU NTAHONDI','004','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',392,'2014-01-09',NULL,86791.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,3,11,14,4466);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17824,'A0400711','A04',NULL,'','','2015-10-01','NASIBU MADABARI','007','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',49,'2014-01-09',NULL,302425,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-10-01',0,'','','ACTIVE',1,3,11,14,4467),
+ (17825,'A0401111','A04',NULL,'','','2012-09-21','MARCEL MANGAPI','011','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','D',0.5,'T','F','M','2012-12-27',NULL,'2012-12-27',33,'2014-01-09',NULL,128817,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,2,11,14,4468);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17826,'A0401211','A04',NULL,'','','2012-09-19','HASSAN FUNDI','012','Gungu, KIKUNGU, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',853,'2014-01-09',NULL,35268.2,0,0,0,0,'0.00',1,0,0,NULL,16000,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,2,11,14,4469),
+ (17827,'A0401511','A04',NULL,'','','2015-08-11','SHAFI A. HAMISI','015','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',111,'2014-01-09',NULL,97486.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4470);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17828,'A0401711','A04',NULL,'','','2012-09-19','COSTANTINO DAUD','017','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2015-12-27',NULL,'2015-12-27',147,'2014-01-09',NULL,16749.2,0,0,0,0,'0.00',1,0,0,NULL,10000,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,2,11,14,4471),
+ (17829,'A0401811','A04',NULL,'','','2012-09-20','SLYVESTER YEYEYE','018','Gungu, KIKUNGU, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',255,'2014-01-09',NULL,23969,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2012-09-20',0,'','','ACTIVE',1,3,11,14,4472);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17830,'A0402311','A04',NULL,'','','2012-09-21','HARUNA MARUNDE','023','Gungu, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',325,'2014-01-09',NULL,190443,0,0,0,0,'0.00',1,0,0,NULL,10000,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,3,11,14,4473),
+ (17831,'A0402611','A04',NULL,'','',NULL,'NYANZA MINES (T) LTD','026','Gungu, KIBIRIZI GODOWN, Kigoma','KIGOMA UJIJI','1065','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',3510,'2014-01-09',NULL,38326.1,0,0,0,0,'0.00',1,0,0,NULL,39000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4474);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17832,'A0403311','A04',NULL,'','','2015-08-11','NESTORY GOMBA','033','Gungu, GUNGU, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',177,'2014-01-09',NULL,23214,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4475),
+ (17833,'A0403511','A04',NULL,'','','2012-09-04','RAMADHAN GANGE','035','Gungu, KIKUNGU, -','KIGOMA UJIJI','-','L',0.5,'T','F','M','2013-07-27',NULL,'2013-07-27',219,'2014-01-09',NULL,21417.8,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-09-04',0,'','','ACTIVE',1,2,11,14,4476);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17834,'A0404811','A04',NULL,'','','2014-09-04','IDD HUSSEIN','048','Gungu, MBOGO, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',310,'2014-01-09',NULL,87312.5,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4477),
+ (17835,'A0405511','A04',NULL,'','',NULL,'MUSSA KIUMBE KUNDA','055','Gungu, BUTUNGA, -','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-01-27',NULL,'2016-01-27',2678,'2014-01-09',NULL,15421.8,0,0,0,0,'0.00',1,0,0,NULL,15500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4478);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17836,'A0405911','A04',NULL,'','',NULL,'N. M. C CAMP','059','Gungu, KIKUNGU, Kigoma','KIGOMA UJIJI','672','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',11565,'2014-01-09',NULL,626577,0,0,0,0,'0.00',1,0,0,NULL,626577,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4479),
+ (17837,'A0406011','A04',NULL,'','',NULL,'MWAMINI JUMA','060','Gungu, GUNGU, -','KIGOMA UJIJI','-','D',0.25,'T','F','M',NULL,NULL,NULL,0,'2014-01-09',NULL,102272,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4480);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17838,'A0406211','A04',NULL,'','','2012-09-21','ISSA KITUMBU','062','Gungu, KIBILIZI, Kigoma','KIGOMA UJIJI','-','D',0.5,'T','F','M','2012-12-27',NULL,'2012-12-27',46,'2014-01-09',NULL,180832,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,2,11,14,4481),
+ (17839,'A0406411','A04',NULL,'','','2014-09-04','ROSE ZACHARIA','064','Gungu, GEZAULOLE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',614,'2014-01-09',NULL,5384.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4482);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17840,'A0406711','A04',NULL,'','',NULL,'RAMADHAN ISSA','067','Gungu, GEZAULOLE, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2015-09-27',NULL,'2015-09-27',2,'2014-01-09',NULL,448178,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4483),
+ (17841,'A0407411','A04',NULL,'','','2014-09-04','JENIROZA LUHAMA','074','Gungu, GEZAULOLE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',127,'2014-01-09',NULL,74366.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4484);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17842,'A0407911','A04',NULL,'','','2014-10-13','KASA SEIF','079','Gungu, GEZAULOLE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',307,'2014-01-09',NULL,133634,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2014-10-13',0,'','','ACTIVE',1,3,11,14,4485),
+ (17843,'A0408011','A04',NULL,'','','2014-10-13','KURWA ADAM','080','Gungu, GEZAULOLE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-10-27',NULL,'2015-10-27',173,'2014-01-09',NULL,48799.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-10-13',0,'','','ACTIVE',1,3,11,14,4486);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17844,'A0408711','A04',NULL,'','','2015-09-01','ANNA P. SINKONU','087','Gungu, GEZAULOLE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',80,'2014-01-09',NULL,58112.5,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4487),
+ (17845,'A0409111','A04',NULL,'','','2015-08-11','RASHID BAKARI RUBIBI','091','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',107,'2014-01-09',NULL,65288.5,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2015-08-11',0,'','','ACTIVE',1,3,11,14,4488);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17846,'A0409211','A04',NULL,'','','2014-09-04','OMARY H. NDORONA','092','Gungu, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',540,'2014-01-09',NULL,86534.5,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4489),
+ (17847,'A0410211','A04',NULL,'','','2012-09-21','OSWALD MAKUNGU','102','KIBIRIZI, KIBIRIZI A, Kigoma','KIGOMA UJIJI','196','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',616,'2014-01-09',NULL,14902.3,0,0,0,0,'0.00',1,0,0,NULL,15000,'','0','0','0','0','0','0','2012-09-21',0,'','','ACTIVE',1,2,11,14,4490);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17848,'A0410611','A04',NULL,'','','2011-05-18','ANDERSON ROBERT','106','GUNGU, KAHABWA, Kigoma','KIGOMA UJIJI',NULL,'D',0.75,'T','F','M',NULL,NULL,NULL,NULL,'2014-01-09',NULL,342972,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-05-18',0,'','','ACTIVE',1,3,11,14,4491),
+ (17849,'A0411011','A04',NULL,'','','2014-09-04','BLANTAYE M. RUGAGARA','110','KIGOMA/GUNGU, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',178,'2014-01-09',NULL,0,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4492);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17850,'A0411111','A04',NULL,'','','2014-09-04','MAHANGAIKO A. YOHANA (GUEST HOUSE)','111','KIGOMA/GUNGU, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',833,'2014-01-09',NULL,0,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4493),
+ (17851,'A0609611','A06',NULL,'','','2014-09-04','HAWA MFAUME HASANI','096','GUNGU, GUNGU, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',452,'2014-01-09',NULL,19680,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-04',0,'','','ACTIVE',1,3,11,14,4501);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17852,'A0609911','A06',NULL,'','','2014-10-03','FABIAN J. MZIGAMA','099','GUNGU, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',82,'2014-01-09',NULL,38080,0,0,0,0,'0.00',1,0,0,NULL,57760,'','0','0','0','0','0','0','2014-10-03',0,'','','ACTIVE',1,3,11,14,4502),
+ (17853,'A0610211','A06',NULL,'','','2014-01-01','MESHI O. SENGA','102','GUNGU, GUNGU, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',491,'2014-01-09',NULL,19680,0,0,0,0,'0.00',1,0,0,NULL,18500,'','0','0','0','0','0','0','2014-01-01',0,'','','ACTIVE',1,3,11,14,4503);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17854,'B0100311','B01',NULL,'','','2014-07-11','SIWAZURI ULIMWENGU','003','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','0','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',292,'2014-01-09',NULL,289013,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4508),
+ (17855,'B0100611','B01',NULL,'','',NULL,'HASSAN HUSSEIN (HOTEL)','006','Lubengera, KIGOMA AREA, Kigoma','KIGOMA UJIJI','611','L',0.25,'T','F','M','2015-09-27',NULL,'2015-09-27',NULL,'2014-01-09',NULL,73087.4,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4509);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17856,'B0100711','B01',NULL,'','','2014-08-13','GERMAN PATRICK KALALA(24 KJ NAVY)','007','Lubengera, LUBENGERA, KIGOMA','KIGOMA UJIJI','80','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',2213,'2014-01-09',NULL,166339,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4510),
+ (17857,'B0101511','B01',NULL,'','','2012-09-05','MRS. LOICE MABULA','015','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',795,'2014-01-09',NULL,13588.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,3,11,14,4511);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17858,'B0102011','B01',NULL,'','','2015-06-01','M/S MEBCO LTD','020','Lubengera, KIGOMA  , KIGOMA','KIGOMA UJIJI','1371','A',0.75,'T','F','U','2015-06-27',NULL,'2015-06-27',77,'2014-01-09',NULL,19229.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-06-01',0,'','','ACTIVE',1,3,11,14,4512),
+ (17859,'B0102111','B01',NULL,'','',NULL,'MARIAM MUSHARIF','021','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-10-27',NULL,'2015-10-27',2598,'2014-01-09',NULL,51846.4,0,0,0,0,'0.00',1,0,0,NULL,51500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4513);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17860,'B0102811','B01',NULL,'','','2014-09-17','EDWARD NYAMBALWA','028','Lubengera, MWANGA ROAD, KIGOMA','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',125,'2014-01-09',NULL,55482.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-17',0,'','','ACTIVE',1,3,11,14,4515),
+ (17861,'B0103311','B01',NULL,'','','2011-03-01','TABU SALUMU','033','Lubengera, KIGOMA, Kigoma','KIGOMA UJIJI','1336','D',0.75,'T','F','M','2011-05-28',NULL,'2011-05-28',883,'2014-01-09',NULL,178412,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-03-01',0,'','','ACTIVE',1,3,11,14,4516);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17862,'B0103911','B01',NULL,'','',NULL,'SEIF KHALFANI SOUD','039','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','186','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',7173,'2014-01-09',NULL,55429,0,0,0,0,'0.00',1,0,0,NULL,55500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4517),
+ (17863,'B0104111','B01',NULL,'','','2014-08-28','SAMWEL S. LILENGA','041','MWANGA ROAD, MWANGA ROAD, Kigoma','KIGOMA UJIJI','15','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',847,'2014-01-09',NULL,17939.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-28',0,'','','ACTIVE',1,2,11,14,4518);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17864,'B0104311','B01',NULL,'','','2012-09-09','DAVID JOSHUA','043','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','188','L',0.75,'T','F','M','2014-05-27',NULL,'2014-05-27',250,'2014-01-09',NULL,56954.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-09',0,'','','ACTIVE',1,3,11,14,4520),
+ (17865,'B0104312','B01',NULL,'','','2012-09-09','DAVID JOSHUA - B (USWEGE EDWARD)','043','KGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI','812','A',0.75,'T','F','U','2014-05-27',NULL,'2014-05-27',250,'2014-01-09',NULL,35024.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-09',0,'','','ACTIVE',1,3,11,14,4520);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17866,'B0104611','B01',NULL,'','','2011-12-31','ELIASA AHAMAD','046','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','978','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2400,'2014-01-09',NULL,62254.7,0,0,0,0,'0.00',1,0,0,NULL,39000,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4521),
+ (17867,'B0104711','B01',NULL,'','','2014-02-14','ANDREW JESSEY','047','KIGOMA, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',173,'2014-01-09',NULL,3372.4,0,0,0,0,'0.00',1,0,0,NULL,3500,'','0','0','0','0','0','0','2014-02-14',0,'','','ACTIVE',1,3,11,14,4522);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17868,'B0105211','B01',NULL,'','','2015-11-01','HAMISI TIBWA','052','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',164,'2014-01-09',NULL,39598,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2015-11-01',0,'','','ACTIVE',1,3,11,14,4523),
+ (17869,'B0105311','B01',NULL,'','',NULL,'NASORO SOUD','053','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1463,'2014-01-09',NULL,21657.4,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4524);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17870,'B0105511','B01',NULL,'','','2014-07-10','PATRICK KIZA','055','Lubengera, LUBENGERA, KIGOMA','KIGOMA UJIJI','645','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',178,'2014-01-09',NULL,39038,0,0,0,0,'0.00',1,0,0,NULL,39000,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4525),
+ (17871,'B0105611','B01',NULL,'','','2012-09-03','JUMANNE KIKWALE','056','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',601,'2014-01-09',NULL,21585.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-03',0,'','','ACTIVE',1,3,11,14,4526);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17872,'B0105911','B01',NULL,'','','2011-12-31','SELEMANI MCHANI (BAR)','059','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1178,'2014-01-09',NULL,40565.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4527),
+ (17873,'B0106311','B01',NULL,'','','2012-09-05','ZINDUNA MTALE','063','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',713,'2014-01-09',NULL,29466.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,3,11,14,4528);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17874,'B0107011','B01',NULL,'','','2015-09-01','HERIETH SARATIEL','070','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',102,'2014-01-09',NULL,19588,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4529),
+ (17875,'B0107211','B01',NULL,'','','2012-09-14','RAPHAEL SYLYVESTER','072','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',864,'2014-01-09',NULL,18042,0,0,0,0,'0.00',1,0,0,NULL,18000,'','0','0','0','0','0','0','2012-09-14',0,'','','ACTIVE',1,3,11,14,4530);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17876,'B0107311','B01',NULL,'','','2011-12-31','CCM TAWI LA KIGOMA','073','Lubengera, KIGOMA AREA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',969,'2014-01-09',NULL,38955.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4531),
+ (17877,'B0107811','B01',NULL,'','','2012-08-04','KITUNDA ERASTO','078','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',967,'2014-01-09',NULL,18393.4,0,0,0,0,'0.00',1,0,0,NULL,18500,'','0','0','0','0','0','0','2012-08-04',0,'','','ACTIVE',1,3,11,14,4532);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17878,'B0108011','B01',NULL,'','','2012-03-31','SAREHE HERY','080','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',940,'2014-01-09',NULL,161110,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-03-31',0,'','','ACTIVE',1,1,11,14,4533),
+ (17879,'B0108511','B01',NULL,'','','2012-09-13','MAHAMUD AHAMED (SUN G. HOUSE)','085','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2015-12-27',NULL,'2015-12-27',1919,'2014-01-09',NULL,8341.61,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-13',0,'','','ACTIVE',1,2,11,14,4534);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17880,'B0108711','B01',NULL,'','','2014-12-01','STEVEN S. KEBERO','087','KIGOMA, MWANGA ROAD, Kigoma','KIGOMA UJIJI','671','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',230,'2014-01-09',NULL,44156,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-12-01',0,'','','ACTIVE',1,3,11,14,4535),
+ (17881,'B0108811','B01',NULL,'','','2012-09-05','RIZIKI ISMAIL','088','Lubengera, MWANGA ROAD, KIGOMA','KIGOMA UJIJI','216','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',840,'2014-01-09',NULL,17720.5,0,0,0,0,'0.00',1,0,0,NULL,18000,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,2,11,14,4536);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17882,'B0108911','B01',NULL,'','','2014-07-11','ULIMWENGU KABWE (HOTEL BACK OF NATIONAL HOUSING)','089','Lubengera, KIGOMA, Kigoma','KIGOMA UJIJI','854','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',301,'2014-01-09',NULL,46121.7,0,0,0,0,'0.00',1,0,0,NULL,46000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4537),
+ (17883,'B0109011','B01',NULL,'','','2015-04-03','ZAKIA KALAYE','090','Lubengera, LUBENGERA, -','KIGOMA UJIJI','951','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',276,'2014-01-09',NULL,100727,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-04-03',0,'','','ACTIVE',1,3,11,14,4538);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17884,'B0109111','B01',NULL,'','','2014-02-02','KIGOMA TOWN COUNCIL (KIGOMA CLINIC)','091','Lubengera, KIGOMA AREA, Kigoma','KIGOMA UJIJI','44','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',220,'2014-01-09',NULL,42090,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-02-02',0,'','','ACTIVE',1,3,11,14,4539),
+ (17885,'B0109311','B01',NULL,'','','2014-07-11','ESMAIL NKO','093','Lubengera, MWANGA ROAD, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-10-27',NULL,'2015-10-27',249,'2014-01-09',NULL,19687.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4540);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17886,'B0109511','B01',NULL,'','','2015-04-01','GRACE NDABOINE','095','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',50,'2014-01-09',NULL,37620,0,0,0,0,'0.00',1,0,0,NULL,38000,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4541),
+ (17887,'B0109611','B01',NULL,'','','2015-09-01','STELLA MATUTIONOR NDABOINE','096','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',119,'2014-01-09',NULL,19612.5,0,0,0,0,'0.00',1,0,0,NULL,19613,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4542);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17888,'B0109711','B01',NULL,'','','2012-09-05','TITO JULIUS','097','Lubengera, SANGANIGWA, KIGOMA','KIGOMA UJIJI','512','L',0.75,'T','F','M','2015-10-27',NULL,'2015-10-27',349,'2014-01-09',NULL,7134.21,0,0,0,0,'0.00',1,0,0,NULL,7500,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,3,11,14,4543),
+ (17889,'B0110011','B01',NULL,'','','2015-03-03','D. KAHEMA (GBP KITUO CHA MAFUTA)','100','Lubengera, LUBENGERA CCM AREA, Kigoma','KIGOMA UJIJI','80','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',1326,'2014-01-09',NULL,70065.7,0,0,0,0,'0.00',1,0,0,NULL,46230,'','0','0','0','0','0','0','2015-03-03',0,'','','ACTIVE',1,3,11,14,4544);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17890,'B0110311','B01',NULL,'','','2012-09-09','MESHACK MAGESA','103','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','D',0.5,'T','F','M','2014-04-27',NULL,'2014-04-27',220,'2014-01-09',NULL,216701,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-09',0,'','','ACTIVE',1,2,11,14,4545),
+ (17891,'B0110411','B01',NULL,'','','2014-07-11','MARIAM SAMIZI','104','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI','104','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',434,'2014-01-09',NULL,71632,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4546);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17892,'B0110611','B01',NULL,'','','2015-10-01','KASHINDI MOHAMED','106','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',86,'2014-01-09',NULL,143282,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-10-01',0,'','','ACTIVE',1,3,11,14,4547),
+ (17893,'B0111011','B01',NULL,'','','2015-04-01','AHADI KATIGIRI','110','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',292,'2014-01-09',NULL,58383.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4548);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17894,'B0111211','B01',NULL,'','','2014-07-11','AMOUR AUGUSTIONO','112','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',410,'2014-01-09',NULL,116769,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4549),
+ (17895,'B0111511','B01',NULL,'','','2013-07-01','EMILY THOMAS','115','Lubengera, SANGANIGWA, KIGOMA','KIGOMA UJIJI','71','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',1360,'2014-01-09',NULL,86204.4,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2013-07-01',0,'','','ACTIVE',1,3,11,14,4550);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17896,'B0111711','B01',NULL,'','','2014-09-22','IBRAHIM KASAMBWE','117','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','820','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',590,'2014-01-09',NULL,233433,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,4551),
+ (17897,'B0111811','B01',NULL,'','','2014-07-11','JABU HUSSEIN','118','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',645,'2014-01-09',NULL,38053.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4552);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17898,'B0112311','B01',NULL,'','','2014-07-11','SEVERINO P. L. MARUNDO','123','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',354,'2014-01-09',NULL,77008.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4553),
+ (17899,'B0112611','B01',NULL,'','','2011-08-26','AYOUB RWASSA','126','Lubengera, LUMUMBA ROAD, -','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',199,'2014-01-09',NULL,20015.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2011-08-26',0,'','','ACTIVE',1,3,11,14,4554);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17900,'B0113311','B01',NULL,'','','2012-09-05','OVA KASIMU','133','Lubengera, MWANGA ROAD, -','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',759,'2014-01-09',NULL,18352.7,0,0,0,0,'0.00',1,0,0,NULL,15000,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,3,11,14,4555),
+ (17901,'B0113411','B01',NULL,'','',NULL,'MWINGIRA J.R.','134','Lubengera, KIGOMA SEC SCHOOL, -','KIGOMA UJIJI','-','L',0.25,'T','F','M','2012-04-27',NULL,'2012-04-27',0,'2014-01-09',NULL,-15134.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4556);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17902,'B0113511','B01',NULL,'','','2012-08-06','M. R. G. RUBABA','135','Lubengera, KIGOMA SEC. SCHOOL, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',631,'2014-01-09',NULL,33831.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-06',0,'','','ACTIVE',1,3,11,14,4557),
+ (17903,'B0113911','B01',NULL,'','','2014-07-11','METHORD PETRO NTIZAHUSHE','139','Lubengera, LUBENGERA, KIGOMA','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',101,'2014-01-09',NULL,39203.5,0,0,0,0,'0.00',1,0,0,NULL,32500,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4558);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17904,'B0114111','B01',NULL,'','','2014-03-03','LIVINGSTONE AVIATION','141','Lubengera, LUMUMBA RD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',5332,'2014-01-09',NULL,414555,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-03-03',0,'','','ACTIVE',1,3,11,14,4559),
+ (17905,'B0114211','B01',NULL,'','','2014-08-27','F. P. C. T EYE CLINIC','142','Lubengera, LUMUMBA RD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-11-27',NULL,'2015-11-27',2238,'2014-01-09',NULL,394999,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-27',0,'','','ACTIVE',1,3,11,14,4560);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17906,'B0114311','B01',NULL,'','','2014-08-29','KIBOA (INFONEI) - BLANSO','143','Lubengera, LUMUMBA RD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',218,'2014-01-09',NULL,290734,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-29',0,'','','ACTIVE',1,3,11,14,4561),
+ (17907,'B0114511','B01',NULL,'','','2014-03-03','AIDAN NDOWA','145','Lubengera, LUMUMBA RD, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',1064,'2014-01-09',NULL,98947.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-03-03',0,'','','ACTIVE',1,3,11,14,4562);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17908,'B0114611','B01',NULL,'','','2014-07-11','ALPHONCE FELICIANO BANDYA','146','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',199,'2014-01-09',NULL,53812.5,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4563),
+ (17909,'B0114711','B01',NULL,'','','2010-12-01','I.O.M','147','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',4559,'2014-01-09',NULL,113826,0,0,0,0,'0.00',1,0,0,NULL,113600,'','0','0','0','0','0','0','2010-12-01',0,'','','ACTIVE',1,1,11,14,4564);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17910,'B0115011','B01',NULL,'','','2011-01-01','FIDELLS P. BARUNGUZA','150','Lubengera, KIGOMA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',132,'2014-01-09',NULL,47169.2,0,0,0,0,'0.00',1,0,0,NULL,48000,'','0','0','0','0','0','0','2011-01-01',0,'','','ACTIVE',1,3,11,14,4565),
+ (17911,'B0115111','B01',NULL,'','','2014-07-11','YUNIS NAIMAN MACHA','151','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',374,'2014-01-09',NULL,19754.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4566);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17912,'B0115411','B01',NULL,'','','2014-07-11','SIWAZURI ULIMWENGU','154','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',155,'2014-01-09',NULL,19762.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4567),
+ (17913,'B0115511','B01',NULL,'','','2014-10-03','WHITE SISTERS','155','Lubengera, KIRUGWE, Kigoma','KIGOMA UJIJI','71','A',0.75,'T','F','U','2014-11-25',NULL,'2014-11-25',196,'2014-01-09',NULL,86830.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-10-03',0,'','','ACTIVE',1,3,11,14,4568);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17914,'B0116011','B01',NULL,'','',NULL,'AMI TANZANIA LTD (AMI CLEARING AND FOWARDING OFFICE)','160','Lubengera, KIRUGWE, Kigoma','KIGOMA UJIJI','04','L',0.25,'T','F','M','2012-12-27',NULL,'2012-12-27',224,'2014-01-09',NULL,46214.3,0,0,0,0,'0.00',1,0,0,NULL,46200,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4569),
+ (17915,'B0116111','B01',NULL,'','','2012-03-31','AMI TANZANIA LTD (ANDY BLAKE)','161','KIGOMA, KIRUGWE, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1466,'2014-01-09',NULL,376602,0,0,0,0,'0.00',1,0,0,NULL,182662,'','0','0','0','0','0','0','2012-03-31',0,'','','ACTIVE',1,3,11,14,4570);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17916,'B0116611','B01',NULL,'','','2011-09-03','NEEMA LUVUGO','166','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','49','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',889,'2014-01-09',NULL,56366.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,4571),
+ (17917,'B0116711','B01',NULL,'','',NULL,'SEIF MLAMBALAZI','167','Lubengera, GUNGU RD, KGM','KIGOMA UJIJI','151','L',0.25,'T','F','M','2015-10-27',NULL,'2015-10-27',305,'2014-01-09',NULL,7799.53,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4572);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17918,'B0116811','B01',NULL,'','','2012-09-17','R. P. SUMKA','168','Lubengera, GUNGU RD, Kigoma','KIGOMA UJIJI','33','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2929,'2014-01-09',NULL,105149,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-17',0,'','','ACTIVE',1,3,11,14,4573),
+ (17919,'B0116911','B01',NULL,'','','2011-09-05','BEATUS T. MGHAMBA','169','Lubengera, GUNGU RD, KGM','KIGOMA UJIJI','49','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1203,'2014-01-09',NULL,25942.7,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2011-09-05',0,'','','ACTIVE',1,3,11,14,4574);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17920,'B0117211','B01',NULL,'','','2011-09-06','A. E. UISO','172','Lubengera, GUNGU RD, Kigoma','KIGOMA UJIJI','125','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1833,'2014-01-09',NULL,23865.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4575),
+ (17921,'B0118211','B01',NULL,'','','2000-01-01','MOHAMED HASSAN','182','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','338','L',0.75,'T','F','M','2016-01-27',NULL,'2016-01-27',873,'2014-01-09',NULL,20304.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2000-01-01',0,'','','ACTIVE',1,3,11,14,4576);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17922,'B0118811','B01',NULL,'','','2013-08-05','MATALIS','188','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','-','A',0.5,'T','F','U','2016-02-01',NULL,'2016-02-01',842,'2014-01-09',NULL,45623.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2013-08-05',0,'','','ACTIVE',1,2,11,14,4577),
+ (17923,'B0119011','B01',NULL,'','',NULL,'TCA UPENDO DISPENSARY','190','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','317','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',3937,'2014-01-09',NULL,36396.7,0,0,0,0,'0.00',1,0,0,NULL,37000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4578);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17924,'B0119911','B01',NULL,'','','2015-01-01','BUHA CO-OPERATIVE(MAMA JILULU BAR)','199','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','362','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',143,'2014-01-09',NULL,351850,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-01',0,'','','ACTIVE',1,3,11,14,4579),
+ (17925,'B0120011','B01',NULL,'','',NULL,'ALLY SEIF   OPPOSITE NMB BANK','200','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','186','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',1933,'2014-01-09',NULL,38631.8,0,0,0,0,'0.00',1,0,0,NULL,39000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4580);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17926,'B0200111','B02',NULL,'','','2015-07-17','ABDALLAH MT','001','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','413','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',67,'2014-01-09',NULL,88436,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-17',0,'','','ACTIVE',1,3,11,14,4581),
+ (17927,'B0200211','B02',NULL,'','','2014-09-17','NATIONAL INSURANCE (BIMA)','002','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','17','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2014,'2014-01-09',NULL,-41831.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-17',0,'','','ACTIVE',1,3,11,14,4582);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17928,'B0200311','B02',NULL,'','','2014-07-11','HUSSEN KAMAL','003','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','195','A',0.75,'T','F','U','2014-07-27',NULL,'2014-07-27',73,'2014-01-09',NULL,57429.4,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4583),
+ (17929,'B0200711','B02',NULL,'','','2011-10-01','I MOSQUE','007','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','195','L',0.75,'T','F','M','2013-08-27',NULL,'2013-08-27',597,'2014-01-09',NULL,29576.5,0,0,0,0,'0.00',1,0,0,NULL,29500,'','0','0','0','0','0','0','2011-10-01',0,'','','ACTIVE',1,3,11,14,4584);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17930,'B0200811','B02',NULL,'','','2015-04-01','SAID SOUD','008','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','1186','D',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',370,'2014-01-09',NULL,288086,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4585),
+ (17931,'B0200911','B02',NULL,'','','2011-01-01','OIL COM (T) LTD','009','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','80','D',0.25,'T','F','M','2014-06-27',NULL,'2014-06-27',646,'2014-01-09',NULL,272872,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-01-01',0,'','','ACTIVE',1,1,11,14,4586);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17932,'B0201011','B02',NULL,'','','2011-01-01','PEFA MISSION','010','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',384,'2014-01-09',NULL,30716.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-01-01',0,'','','ACTIVE',1,3,11,14,4587),
+ (17933,'B0201211','B02',NULL,'','','2015-02-18','TURASHASHE (HUDUMA YA CHOO - KIGOMA)','012','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','710','L',0.75,'T','F','M','2015-02-26',NULL,'2015-02-26',8,'2014-01-09',NULL,13790.3,0,0,0,0,'0.00',1,0,0,NULL,13500,'','0','0','0','0','0','0','2015-02-18',0,'','','ACTIVE',1,3,11,14,4588);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17934,'B0201711','B02',NULL,'','','2000-12-01','SHIA IS JAMAT','017','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','20','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2351,'2014-01-09',NULL,17527.6,0,0,0,0,'0.00',1,0,0,NULL,17600,'','0','0','0','0','0','0','2000-12-01',0,'','','ACTIVE',1,3,11,14,4589),
+ (17935,'B0201911','B02',NULL,'','','2013-05-05','MIZRA KASAM','019','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','74','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',1052,'2014-01-09',NULL,47346.8,0,0,0,0,'0.00',1,0,0,NULL,47350,'','0','0','0','0','0','0','2013-05-05',0,'','','ACTIVE',1,3,11,14,4590);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17936,'B0202011','B02',NULL,'','','2012-09-12','LADHU JAFFER','020','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','35','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1547,'2014-01-09',NULL,54253.2,0,0,0,0,'0.00',1,0,0,NULL,54500,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,3,11,14,4591),
+ (17937,'B0202211','B02',NULL,'','','2011-10-29','HAJI JAFFER','022','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','156','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',967,'2014-01-09',NULL,17406.8,0,0,0,0,'0.00',1,0,0,NULL,17500,'','0','0','0','0','0','0','2011-10-29',0,'','','ACTIVE',1,3,11,14,4593);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17938,'B0202311','B02',NULL,'','','2013-08-06','SHARIF  AL  WORKS (ALLY\'S HOTEL)','023','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','25','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',766,'2014-01-09',NULL,169538,0,0,0,0,'0.00',1,0,0,NULL,170000,'','0','0','0','0','0','0','2013-08-06',0,'','','ACTIVE',1,3,11,14,4594),
+ (17939,'B0202511','B02',NULL,'','','2012-09-12','BIDYANGUZE  GROUP (ISSA NYOKA)','025','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','403','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1475,'2014-01-09',NULL,329178,0,0,0,0,'0.00',1,0,0,NULL,150000,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,3,11,14,4596);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17940,'B0202811','B02',NULL,'','',NULL,'MOHAMMED AHMAD','028','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','41','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',NULL,'2014-01-09',NULL,110251,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4597),
+ (17941,'B0202911','B02',NULL,'','',NULL,'ISSA K. VISRAM','029','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','25','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20180.9,0,0,0,0,'0.00',1,0,0,NULL,20180,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4598);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17942,'B0203111','B02',NULL,'','','2012-09-12','ABDALLAH SHARIF (SHARIF PHOTO HOUSE)','031','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','23','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1703,'2014-01-09',NULL,28411.4,0,0,0,0,'0.00',1,0,0,NULL,28500,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,3,11,14,4599),
+ (17943,'B0203311','B02',NULL,'','','2012-09-12','M.M. ABDALLAH','033','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','16','D',0.75,'T','F','M','2012-10-29',NULL,'2012-10-29',35,'2014-01-09',NULL,371041,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,3,11,14,4600);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17944,'B0203511','B02',NULL,'','','2011-01-01','AZIM S.PREMJI (KIGOMA CATERING)','035','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','9','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3432,'2014-01-09',NULL,195662,0,0,0,0,'0.00',1,0,0,NULL,195035,'','0','0','0','0','0','0','2011-01-01',0,'','','ACTIVE',1,3,11,14,4601),
+ (17945,'B0203611','B02',NULL,'','','2012-09-13','MARNIK CHANDE','036','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','10','L',0.5,'T','F','M','2015-07-30',NULL,'2015-07-30',298,'2014-01-09',NULL,4044.76,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-13',0,'','','ACTIVE',1,2,11,14,4602);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17946,'B0203911','B02',NULL,'','','2013-05-05','DAHEL JAMAL','039','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1443,'2014-01-09',NULL,32798,0,0,0,0,'0.00',1,0,0,NULL,33000,'','0','0','0','0','0','0','2013-05-05',0,'','','ACTIVE',1,3,11,14,4603),
+ (17947,'B0204011','B02',NULL,'','','2012-09-15','OMARI MWAKALIKAMO','040','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','96','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',314,'2014-01-09',NULL,4822.16,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-15',0,'','','ACTIVE',1,3,11,14,4604);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17948,'B0204211','B02',NULL,'','','2014-07-09','ELIZA V. MASIGATI','042','LUMUMBA, LUMUMBA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',361,'2014-01-09',NULL,91875,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-09',0,'','','ACTIVE',1,3,11,14,4605),
+ (17949,'B0204411','B02',NULL,'','','2014-05-01','M. J. MULLAH','044','Lubengera, MARKET AREA, Kigoma','KIGOMA UJIJI','26','A',0.75,'T','F','U',NULL,NULL,NULL,NULL,'2014-01-09',NULL,-24437.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-05-01',0,'','','ACTIVE',1,3,11,14,4606);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17950,'B0204611','B02',NULL,'','','2015-04-28','HILALI ALLY','046','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','37','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1975,'2014-01-09',NULL,81017.1,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2015-04-28',0,'','','ACTIVE',1,3,11,14,4607),
+ (17951,'B0204711','B02',NULL,'','','2012-09-13','PHILLIMON P KYOKA','047','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','1252','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',256,'2014-01-09',NULL,15861.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-13',0,'','','ACTIVE',1,2,11,14,4608);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17952,'B0204811','B02',NULL,'','','2012-09-13','M. G. KARMAL','048','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',1957,'2014-01-09',NULL,179316,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-13',0,'','','ACTIVE',1,2,11,14,4609),
+ (17953,'B0205511','B02',NULL,'','','2015-07-01','VRUSHAN C. K. DESAI (SUN CITY HOTEL)','055','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','27','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',477,'2014-01-09',NULL,70309.8,0,0,0,0,'0.00',1,0,0,NULL,70500,'','0','0','0','0','0','0','2015-07-01',0,'','','ACTIVE',1,3,11,14,4610);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17954,'B0206011','B02',NULL,'','','2015-04-01','NHC - BIASHARA','060','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',1.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2963,'2014-01-09',NULL,239343,0,0,0,0,'0.00',1,0,0,NULL,239500,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,5,11,14,4612),
+ (17955,'B0206711','B02',NULL,'','','2014-07-11','AUT SOKONI LTD','067','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','10','A',0.75,'T','F','U',NULL,NULL,NULL,NULL,'2014-01-09',NULL,46565.1,0,0,0,0,'0.00',1,0,0,NULL,46500,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4613);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17956,'B0206811','B02',NULL,'','','2014-07-09','FATUMA ASAJILE','068','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-12-27',NULL,'2015-12-27',406,'2014-01-09',NULL,58237.5,0,0,0,0,'0.00',1,0,0,NULL,58000,'','0','0','0','0','0','0','2014-07-09',0,'','','ACTIVE',1,3,11,14,4614),
+ (17957,'B0206911','B02',NULL,'','','2014-07-27','KIGOMA HOTEL (GEORGINA KAMUNTU)','069','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','18','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',5635,'2014-01-09',NULL,153032,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,4615);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17958,'B0207211','B02',NULL,'','','2014-07-11','REV. SADOCK JACOB MLONGETCHA','072','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','60','A',0.75,'T','F','U','2015-10-27',NULL,'2015-10-27',175,'2014-01-09',NULL,228,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4616),
+ (17959,'B0207411','B02',NULL,'','','2011-08-30','NATIONAL HOUSING','074','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','271','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2866,'2014-01-09',NULL,46188.9,0,0,0,0,'0.00',1,0,0,NULL,46500,'','0','0','0','0','0','0','2011-08-30',0,'','','ACTIVE',1,3,11,14,4617);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17960,'B0207611','B02',NULL,'','','2011-09-05','MAPINDUZI HOTEL','076','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','18','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3959,'2014-01-09',NULL,155047,0,0,0,0,'0.00',1,0,0,NULL,70000,'','0','0','0','0','0','0','2011-09-05',0,'','','ACTIVE',1,3,11,14,4618),
+ (17961,'B0207811','B02',NULL,'','','2011-09-22','STAR SERVICE STATION','078','Lubengera, CALTEX AREA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3320,'2014-01-09',NULL,8404.7,0,0,0,0,'0.00',1,0,0,NULL,8404.7,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4619);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17962,'B0207911','B02',NULL,'','','2015-02-01','COMMUNIT CENTER','079','Lubengera, KIEZYA ROAD, Kigoma','KIGOMA UJIJI','71','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',358,'2014-01-09',NULL,46189.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-02-01',0,'','','ACTIVE',1,3,11,14,4620),
+ (17963,'B0208011','B02',NULL,'','',NULL,'TRL STATION MASTER','080','Lubengera, KIEZYA ROAD, Kigoma','KIGOMA UJIJI','33','D',0.25,'T','F','M','2013-02-27',NULL,'2013-02-27',NULL,'2014-01-09',NULL,3266260,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4621);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17964,'B0208111','B02',NULL,'','',NULL,'TRL UJENZI','081','Lubengera, STATION AREA , Kigoma','KIGOMA UJIJI','33','L',0.25,'T','F','M','2013-08-27',NULL,'2013-08-27',59277,'2014-01-09',NULL,5058200,0,0,0,0,'0.00',1,0,0,NULL,1845420,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4622),
+ (17965,'B0208211','B02',NULL,'','','2015-05-01','MUAPI LTD','082','BOMA AREA, BALBASE AREA, Kigoma','KIGOMA UJIJI','1033','L',1.25,'T','F','M','2016-02-01',NULL,'2016-02-01',20869,'2014-01-09',NULL,101788,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-05-01',0,'','','ACTIVE',1,5,11,14,4623);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17966,'B0208611','B02',NULL,'','','2013-12-23','DICRTICT COMMISSINAER','086','Lubengera, BOMA AREA , KGM','KIGOMA UJIJI','5','L',0.25,'T','F','M',NULL,NULL,NULL,0,'2014-01-09',NULL,347817,0,0,0,0,'0.00',1,0,0,NULL,200000,'','0','0','0','0','0','0','2013-12-23',0,'','','ACTIVE',1,1,11,14,4624),
+ (17967,'B0209011','B02',NULL,'','',NULL,'USTAWI WA JAMII','090','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','76','D',0.25,'T','F','M','2012-09-28',NULL,'2012-09-28',1299,'2014-01-09',NULL,184296,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4625);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17968,'B0209111','B02',NULL,'','','2015-01-16','LABOUR OFFICE','091','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','110','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',49,'2014-01-09',NULL,163438,0,0,0,0,'0.00',1,0,0,NULL,130000,'','0','0','0','0','0','0','2015-01-16',0,'','','ACTIVE',1,3,11,14,4626),
+ (17969,'B0209211','B02',NULL,'','','2015-02-01','POLICE OFFICE','092','Lubengera, BAGWEROAD, Kigoma','KIGOMA UJIJI','70','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',17935,'2014-01-09',NULL,706885,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-02-01',0,'','','ACTIVE',1,3,11,14,4627);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17970,'B0209311','B02',NULL,'','',NULL,'CONGO CONSULATE (DRC - CONGO)','093','Lubengera, BAGWEROAD, Kigoma','KIGOMA UJIJI','31','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',7937,'2014-01-09',NULL,49999.3,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4628),
+ (17971,'B0209411','B02',NULL,'','',NULL,'SHIRIMA','094','Lubengera, BAGWE ROAD, Kigoma','KIGOMA UJIJI','332','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',4327,'2014-01-09',NULL,25297.3,0,0,0,0,'0.00',1,0,0,NULL,25500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4629);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17972,'B0209711','B02',NULL,'','','2014-05-01','TURASHASHE PHARMACEUTICALS LTD','097','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','710','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',40,'2014-01-09',NULL,91490,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-05-01',0,'','','ACTIVE',1,3,11,14,4630),
+ (17973,'B0209911','B02',NULL,'','','2015-03-12','HINDU MANDIR TEMPLE','099','KIGOMA, KHERI AVENUE, Kigoma','KIGOMA UJIJI','10','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',60,'2014-01-09',NULL,41277.6,0,0,0,0,'0.00',1,0,0,NULL,41000,'','0','0','0','0','0','0','2015-03-12',0,'','','ACTIVE',1,3,11,14,4631);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17974,'B0210111','B02',NULL,'','','2012-09-13','HASHIM RUNGWE','101','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',1070,'2014-01-09',NULL,47844.1,0,0,0,0,'0.00',1,0,0,NULL,22000,'','0','0','0','0','0','0','2012-09-13',0,'','','ACTIVE',1,2,11,14,4632),
+ (17975,'B0210411','B02',NULL,'','','2011-10-28','M. KALUNGUYEYE','104','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','D',0.75,'T','F','M','2012-07-25',NULL,'2012-07-25',382,'2014-01-09',NULL,60450.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-10-28',0,'','','ACTIVE',1,3,11,14,4633);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17976,'B0210511','B02',NULL,'','','2011-09-06','J. B. MAKUMBI','105','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',26581,'2014-01-09',NULL,42065.9,0,0,0,0,'0.00',1,0,0,NULL,42000,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4634),
+ (17977,'B0210611','B02',NULL,'','',NULL,'RUBALWA INVESTMWNT (TPA)KIGOMA CLUB','106','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2011-07-28',NULL,'2011-07-28',10682,'2014-01-09',NULL,764783,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4635);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17978,'B0210811','B02',NULL,'','',NULL,'SUZANA SMITH','108','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2299,'2014-01-09',NULL,21029.5,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4636),
+ (17979,'B0210911','B02',NULL,'','',NULL,'KIMONDO','109','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3196,'2014-01-09',NULL,22402.3,0,0,0,0,'0.00',1,0,0,NULL,22000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4637);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17980,'B0211311','B02',NULL,'','',NULL,'JWTZ 24KJ(OSATI)','113','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M',NULL,NULL,NULL,0,'2014-01-09',NULL,162540,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4638),
+ (17981,'B0211411','B02',NULL,'','','2000-12-01','ADMINISRTATIVE OFFCE B','114','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','179','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20187.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2000-12-01',0,'','','ACTIVE',1,1,11,14,4639);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17982,'B0211511','B02',NULL,'','',NULL,'EDWIN KASYUPA.','115','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','49','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',729,'2014-01-09',NULL,21050.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4640),
+ (17983,'B0211711','B02',NULL,'','','2014-07-27','REGIONAL ADMINISTRATIVE (DSO - KIGOMA)','117','Lubengera, KIMBA RAOD, Kigoma','KIGOMA UJIJI','179','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',157,'2014-01-09',NULL,52562.4,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,4641);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17984,'B0211911','B02',NULL,'','','2014-08-13','JUDGE REST HOUSE','119','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','100','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1073,'2014-01-09',NULL,413779,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4642),
+ (17985,'B0212011','B02',NULL,'','',NULL,'KHALID S, SOUD','120','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20180,0,0,0,0,'0.00',1,0,0,NULL,20180,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4643);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17986,'B0212111','B02',NULL,'','',NULL,'MR. BUSUNGU','121','Lubengera, KAKORWA ROAD, KGM','KIGOMA UJIJI','125','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,51172.9,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4644),
+ (17987,'B0212411','B02',NULL,'','',NULL,'NASORO A. MWINGIRA','124','Lubengera, KAKORWA ROAD, KGM','KIGOMA UJIJI','44','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',616,'2014-01-09',NULL,38014.3,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4645);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17988,'B0212511','B02',NULL,'','',NULL,'MR S. MAMUMI','125','Lubengera, KAKORWA ROAD, KGM','KIGOMA UJIJI','44','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',594,'2014-01-09',NULL,20212.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4646),
+ (17989,'B0212611','B02',NULL,'','','2014-08-13','M/S. MAFURU','126','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',348,'2014-01-09',NULL,81746.2,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4647);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17990,'B0212711','B02',NULL,'','','2011-09-06','S. N. C. C','127','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1685,'2014-01-09',NULL,34490.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4648),
+ (17991,'B0212811','B02',NULL,'','',NULL,'A. N. M. KALANGALI','128','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2467,'2014-01-09',NULL,16635.1,0,0,0,0,'0.00',1,0,0,NULL,15000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4649);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17992,'B0212911','B02',NULL,'','',NULL,'B. MAHIMA','129','Lubengera, KAKORWA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',1129,'2014-01-09',NULL,44351.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4650),
+ (17993,'B0213011','B02',NULL,'','','2013-10-07','FAO FINIDA PROJECT','130','Lubengera, KAKORWA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',1810,'2014-01-09',NULL,20252.8,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2013-10-07',0,'','','ACTIVE',1,1,11,14,4651);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17994,'B0213111','B02',NULL,'','','2015-07-01','TAFIRI KIGOMA','131','Lubengera, KAKORWA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',11194,'2014-01-09',NULL,42090.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-01',0,'','','ACTIVE',1,3,11,14,4652),
+ (17995,'B0213311','B02',NULL,'','','2014-04-03','A.J. MASANGULA','133','Lubengera, KAKORWA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',153,'2014-01-09',NULL,12471.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-04-03',0,'','','ACTIVE',1,3,11,14,4653);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17996,'B0213411','B02',NULL,'','','2012-04-01','MSHAURI WA MGAMBO','134','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',741,'2014-01-09',NULL,10342.8,0,0,0,0,'0.00',1,0,0,NULL,10000,'','0','0','0','0','0','0','2012-04-01',0,'','','ACTIVE',1,3,11,14,4654),
+ (17997,'B0213511','B02',NULL,'','',NULL,'MAGDALENA ZABRON','135','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-01-27',NULL,'2016-01-27',998,'2014-01-09',NULL,19880.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4655);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (17998,'B0213611','B02',NULL,'','','2015-04-03','EFATA D. MOLELI','136','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','D',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',109,'2014-01-09',NULL,170364,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-03',0,'','','ACTIVE',1,3,11,14,4656),
+ (17999,'B0213711','B02',NULL,'','',NULL,'JOHN RAZARO','137','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,140699,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4657);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18000,'B0214011','B02',NULL,'','','2015-12-30','J.V. RWIZA','140','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',261,'2014-01-09',NULL,19987.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-12-30',0,'','','ACTIVE',1,3,11,14,4658),
+ (18001,'B0214211','B02',NULL,'','',NULL,'GWITABA ALLY','142','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','41','L',0.25,'T','F','M','2015-11-27',NULL,'2015-11-27',3322,'2014-01-09',NULL,38528.6,0,0,0,0,'0.00',1,0,0,NULL,37000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4659);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18002,'B0214311','B02',NULL,'','',NULL,'MAJANI BUSAGA','143','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-05-04',NULL,'2015-05-04',521,'2014-01-09',NULL,10885.2,0,0,0,0,'0.00',1,0,0,NULL,11000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4660),
+ (18003,'B0214611','B02',NULL,'','','2014-02-02','FAITH BAR','146','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','64','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2299,'2014-01-09',NULL,52480.8,0,0,0,0,'0.00',1,0,0,NULL,53000,'','0','0','0','0','0','0','2014-02-02',0,'','','ACTIVE',1,3,11,14,4661);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18004,'B0214911','B02',NULL,'','','2011-09-06','IBRAHIM MBAGO','149','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1329,'2014-01-09',NULL,10107.5,0,0,0,0,'0.00',1,0,0,NULL,10500,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4662),
+ (18005,'B0215011','B02',NULL,'','','2011-09-06','M. G. BENJAMIN GABIW','150','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','31','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2248,'2014-01-09',NULL,49756.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4663);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18006,'B0215211','B02',NULL,'','',NULL,'TANESCO OFFICE','152','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','46','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',10430,'2014-01-09',NULL,110356,0,0,0,0,'0.00',1,0,0,NULL,110358,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4664),
+ (18007,'B0215311','B02',NULL,'','','2011-12-31','C. H.  LUGIKO','153','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1241,'2014-01-09',NULL,76309.8,0,0,0,0,'0.00',1,0,0,NULL,28500,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4665);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18008,'B0215411','B02',NULL,'','',NULL,'AUGUSTINO MSASA','154','Lubengera, GUNGU ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',5770,'2014-01-09',NULL,26920,0,0,0,0,'0.00',1,0,0,NULL,53921,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4666),
+ (18009,'B0215511','B02',NULL,'','',NULL,'PONSIANI NGOBYA','155','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20188.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4667);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18010,'B0215611','B02',NULL,'','','2012-09-15','FRANCK F. RWESA','156','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2014-05-27',NULL,'2014-05-27',744,'2014-01-09',NULL,31641.9,0,0,0,0,'0.00',1,0,0,NULL,31500,'','0','0','0','0','0','0','2012-09-15',0,'','','ACTIVE',1,1,11,14,4668),
+ (18011,'B0215811','B02',NULL,'','','2015-09-01','HARUNA NGESHA','158','Lubengera, LUBENGERA-MJI MWEMA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',56,'2014-01-09',NULL,74687.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4669);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18012,'B0215911','B02',NULL,'','','2016-01-01','BONIFASI MAKULILO (FURAHA GUEST)','159','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',6727,'2014-01-09',NULL,91532.1,0,0,0,0,'0.00',1,0,0,NULL,91500,'','0','0','0','0','0','0','2016-01-01',0,'','','ACTIVE',1,3,11,14,4670),
+ (18013,'B0216211','B02',NULL,'','',NULL,'POSTER MASTER','162','Lubengera, GUNGU ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2014-05-27',NULL,'2014-05-27',3385,'2014-01-09',NULL,57461.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4671);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18014,'B0216311','B02',NULL,'','',NULL,'JULIUS ASSAM','163','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-10-27',NULL,'2015-10-27',184,'2014-01-09',NULL,25905.9,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4672),
+ (18015,'B0216411','B02',NULL,'','','2011-09-03','LYOBA E.','164','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',361,'2014-01-09',NULL,4902.46,0,0,0,0,'0.00',1,0,0,NULL,5000,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,4673);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18016,'B0216511','B02',NULL,'','','2011-09-03','ROBERT ONYANGO','165','Lubengera, GUNGU ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1059,'2014-01-09',NULL,13102.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,4674),
+ (18017,'B0216611','B02',NULL,'','',NULL,'A. S. JAKONYANGO','166','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2495,'2014-01-09',NULL,7623.98,0,0,0,0,'0.00',1,0,0,NULL,7623.98,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4675);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18018,'B0216711','B02',NULL,'','','2012-09-15','LYLIAN W. MGUHI','167','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',388,'2014-01-09',NULL,13536.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-15',0,'','','ACTIVE',1,1,11,14,4676),
+ (18019,'B0216811','B02',NULL,'','',NULL,'DR. BILL HALLINGTON','168','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3453,'2014-01-09',NULL,29227.2,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4677);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18020,'B0216911','B02',NULL,'','','2011-11-29','MKURUGENZI D.E.D','169','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-01-27',NULL,'2016-01-27',NULL,'2014-01-09',NULL,634655,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-11-29',0,'','','ACTIVE',1,2,11,14,4678),
+ (18021,'B0217011','B02',NULL,'','',NULL,'F. T.  MATALISI','170','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2012-11-27',NULL,'2012-11-27',82,'2014-01-09',NULL,211841,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4679);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18022,'B0217211','B02',NULL,'','','2014-10-08','NICOLAUS CHALE','172','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',129,'2014-01-09',NULL,70487.9,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2014-10-08',0,'','','ACTIVE',1,3,11,14,4680),
+ (18023,'B0217311','B02',NULL,'','',NULL,'KATIBU CCM','173','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','199','L',0.75,'T','F','M','2015-05-04',NULL,'2015-05-04',1970,'2014-01-09',NULL,19357.3,0,0,0,0,'0.00',1,0,0,NULL,19500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4681);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18024,'B0217411','B02',NULL,'','','2011-09-06','A. MSUMBA','174','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1784,'2014-01-09',NULL,100677,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4682),
+ (18025,'B0217511','B02',NULL,'','',NULL,'LIMOY','175','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',4251,'2014-01-09',NULL,18556.7,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4683);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18026,'B0217611','B02',NULL,'','',NULL,'DR.CONGO CONSULATE','176','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',4991,'2014-01-09',NULL,31605.3,0,0,0,0,'0.00',1,0,0,NULL,31606,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4684),
+ (18027,'B0217711','B02',NULL,'','','2011-09-06','MKALAY KAYOMBO','177','Lubengera, MARNE DRIVE, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3753,'2014-01-09',NULL,45889.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4685);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18028,'B0217911','B02',NULL,'','','2011-09-06','JACOB NDOLOSI','179','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',756,'2014-01-09',NULL,12888.4,0,0,0,0,'0.00',1,0,0,NULL,13000,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4686),
+ (18029,'B0218011','B02',NULL,'','','2016-02-01','TACARE','180','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',34636,'2014-01-09',NULL,553432,0,0,0,0,'0.00',1,0,0,NULL,553433,'','0','0','0','0','0','0','2016-02-01',0,'','','ACTIVE',1,3,11,14,4687);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18030,'B0218211','B02',NULL,'','','2011-09-06','LONGINUS TEGUILILWA','182','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-01-27',NULL,'2016-01-27',648,'2014-01-09',NULL,36440.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4688),
+ (18031,'B0218311','B02',NULL,'','',NULL,'STASLAUS MHOZA','183','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1352,'2014-01-09',NULL,-9308.59,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4689);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18032,'B0218411','B02',NULL,'','','2012-01-01','SHABANI BIMALA (MACHINE)NEAR STANLEY RESTAURANT STAND','184','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1481,'2014-01-09',NULL,33749.2,0,0,0,0,'0.00',1,0,0,NULL,33749,'','0','0','0','0','0','0','2012-01-01',0,'','','ACTIVE',1,3,11,14,4690),
+ (18033,'B0218611','B02',NULL,'','','2011-05-03','TANGANYIKA BEACH HOTEL','186','Lubengera, SHEDE, Kigoma','KIGOMA UJIJI','-','L',1,'T','F','M','2016-02-01',NULL,'2016-02-01',67447,'2014-01-09',NULL,1543430,0,0,0,0,'0.00',1,0,0,NULL,706932,'','0','0','0','0','0','0','2011-05-03',0,'','','ACTIVE',1,4,11,14,4691);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18034,'B0218811','B02',NULL,'','','2011-09-22','N. L. G. NDILE','188','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',1650,'2014-01-09',NULL,30405.8,0,0,0,0,'0.00',1,0,0,NULL,31000,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,2,11,14,4692),
+ (18035,'B0218911','B02',NULL,'','',NULL,'P.C.B NGULEY','189','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2820,'2014-01-09',NULL,-4858.07,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4693);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18036,'B0219011','B02',NULL,'','',NULL,'D.F. MHALU','190','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20290.3,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4694),
+ (18037,'B0219811','B02',NULL,'','',NULL,'MADINA HOTEL','198','Lubengera, MARKET AREA, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2015-11-27',NULL,'2015-11-27',8905,'2014-01-09',NULL,467045,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4695);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18038,'B0219911','B02',NULL,'','',NULL,'SAFARI LODGE','199','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',4231,'2014-01-09',NULL,68780.6,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4696),
+ (18039,'B0220011','B02',NULL,'','','2011-09-22','QUEENS BAR','200','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-09-27',NULL,'2015-09-27',5402,'2014-01-09',NULL,43954.9,0,0,0,0,'0.00',1,0,0,NULL,42000,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4697);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18040,'B0220111','B02',NULL,'','','2012-09-13','YUSUPH HASSAN ADEN','201','KIGOMA, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','1254','D',0.75,'T','F','M','2012-11-27',NULL,'2012-11-27',20,'2014-01-09',NULL,172956,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-13',0,'','','ACTIVE',1,3,11,14,4698),
+ (18041,'B0300111','B03',NULL,'','','2011-02-25','GEORGE NZUNDA','001','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-05-04',NULL,'2015-05-04',481,'2014-01-09',NULL,21384.9,0,0,0,0,'0.00',1,0,0,NULL,21500,'','0','0','0','0','0','0','2011-02-25',0,'','','ACTIVE',1,1,11,14,4699);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18042,'B0300411','B03',NULL,'','','2011-09-22','ADIAN KIULA','004','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-08-27',NULL,'2015-08-27',2486,'2014-01-09',NULL,47453.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4700),
+ (18043,'B0301011','B03',NULL,'','','2010-05-28','KAMANDA MGAMBO [HENRY TRYPHON LWEKENGO]','010','Lubengera, LUBENGELA Q, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-05-04',NULL,'2015-05-04',NULL,'2014-01-09',NULL,32384.8,0,0,0,0,'0.00',1,0,0,NULL,10000,'','0','0','0','0','0','0','2010-05-28',0,'','','ACTIVE',1,3,11,14,4701);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18044,'B0301311','B03',NULL,'','','2015-07-31','G. MATHEW','013','Lubengera, LUBENGELA Q, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',223,'2014-01-09',NULL,44254.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-31',0,'','','ACTIVE',1,3,11,14,4702),
+ (18045,'B0301811','B03',NULL,'','',NULL,'LINUS FURAHA','018','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',793,'2014-01-09',NULL,13005.6,0,0,0,0,'0.00',1,0,0,NULL,13000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4703);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18046,'B0302011','B03',NULL,'','',NULL,'P. BAYONA','020','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-05-04',NULL,'2015-05-04',3396,'2014-01-09',NULL,-2097.4,0,0,0,0,'0.00',1,0,0,NULL,17956.1,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4705),
+ (18047,'B0302111','B03',NULL,'','','2012-08-14','BISWALO MANUMBU','021','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',623,'2014-01-09',NULL,24096.1,0,0,0,0,'0.00',1,0,0,NULL,24000,'','0','0','0','0','0','0','2012-08-14',0,'','','ACTIVE',1,2,11,14,4706);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18048,'B0302211','B03',NULL,'','','2012-05-01','NBC BANK LTD','022','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',5117,'2014-01-09',NULL,154148,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-05-01',0,'','','ACTIVE',1,3,11,14,4707),
+ (18049,'B0302411','B03',NULL,'','','2015-05-01','MR. A. B. MAGGID','024','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',257,'2014-01-09',NULL,55881.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-05-01',0,'','','ACTIVE',1,3,11,14,4708);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18050,'B0302511','B03',NULL,'','',NULL,'MRISHO MADILI','025','Lubengera, LUMUMBA ROAD, KMG','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',NULL,'2014-01-09',NULL,12687.8,0,0,0,0,'0.00',1,0,0,NULL,13000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4709),
+ (18051,'B0302711','B03',NULL,'','','2015-05-01','M. A. MWAMGONGO','027','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',747,'2014-01-09',NULL,26989.7,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-05-01',0,'','','ACTIVE',1,3,11,14,4710);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18052,'B0303211','B03',NULL,'','','2012-09-01','MSAJIRI WA MAJUMBA','032','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',2359,'2014-01-09',NULL,41918.6,0,0,0,0,'0.00',1,0,0,NULL,42000,'','0','0','0','0','0','0','2012-09-01',0,'','','ACTIVE',1,2,11,14,4711),
+ (18053,'B0303311','B03',NULL,'','',NULL,'LAKE VIEW HOTEL','033','KIGOMA, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2016,'2014-01-09',NULL,39594.5,0,0,0,0,'0.00',1,0,0,NULL,39500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4712);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18054,'B0303511','B03',NULL,'','','2012-09-15','S. A. MALETA','035','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',887,'2014-01-09',NULL,9284.78,0,0,0,0,'0.00',1,0,0,NULL,10000,'','0','0','0','0','0','0','2012-09-15',0,'','','ACTIVE',1,2,11,14,4713),
+ (18055,'B0303611','B03',NULL,'','','2012-09-05','MOHAMEDI JAMALI NSHOYE','036','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','196','L',0.75,'T','F','M','2016-01-27',NULL,'2016-01-27',792,'2014-01-09',NULL,94407.6,0,0,0,0,'0.00',1,0,0,NULL,100000,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,3,11,14,4714);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18056,'B0303811','B03',NULL,'','','2014-07-11','J.R KIMAMBI - CONVENT (A)','038','Lubengera, MJIMWEMA, KGM','KIGOMA UJIJI','332','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',113,'2014-01-09',NULL,235458,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4715),
+ (18057,'B0304111','B03',NULL,'','','2014-07-10','J.R. KIMAMBI - CONVENT (D)','041','Lubengera, MJIMWEMA, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',403,'2014-01-09',NULL,235458,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4716);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18058,'B0305011','B03',NULL,'','','2011-12-31','S. M. CHIKOYO','050','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1242,'2014-01-09',NULL,14302.1,0,0,0,0,'0.00',1,0,0,NULL,14302,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4717),
+ (18059,'B0305111','B03',NULL,'','',NULL,'JAFFER','051','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',4680,'2014-01-09',NULL,22212.9,0,0,0,0,'0.00',1,0,0,NULL,22000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4718);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18060,'B0305211','B03',NULL,'','','2014-07-11','TOWN DIRECTOR (MWEKA HAZINA)','052','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','44','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',637,'2014-01-09',NULL,19680.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4719),
+ (18061,'B0305411','B03',NULL,'','',NULL,'TTCL (OFFICE)','054','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','757','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',3481,'2014-01-09',NULL,41911.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4720);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18062,'B0305511','B03',NULL,'','','2014-08-27','JOHN MUHEMO','055','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-11-27',NULL,'2015-11-27',1476,'2014-01-09',NULL,89939.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-27',0,'','','ACTIVE',1,1,11,14,4721),
+ (18063,'B0305711','B03',NULL,'','','2011-10-10','ASSEMBLIES OF GOD','057','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1471,'2014-01-09',NULL,29193,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2011-10-10',0,'','','ACTIVE',1,3,11,14,4723);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18064,'B0305811','B03',NULL,'','','2014-07-11','ANTHONY MISIGARO','058','SANGANIGWA, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',503,'2014-01-09',NULL,86439.5,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4724),
+ (18065,'B0306011','B03',NULL,'','',NULL,'MANENO RUGANDA','060','Lubengera, KHERI EVENUE , Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',8031,'2014-01-09',NULL,155433,0,0,0,0,'0.00',1,0,0,NULL,155000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4725);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18066,'B0306111','B03',NULL,'','',NULL,'EMMANUEL MKUYA','061','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',566,'2014-01-09',NULL,30616.2,0,0,0,0,'0.00',1,0,0,NULL,16500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4726),
+ (18067,'B0306311','B03',NULL,'','','2014-07-10','PHILIMON SAMWEL NDYANA','063','MJIMWEMA, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','1116','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',444,'2014-01-09',NULL,38539.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4727);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18068,'B0306611','B03',NULL,'','','2014-09-15','CO- OPERATIVE CENTER','066','Lubengera, KAYA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-10-27',NULL,'2015-10-27',133,'2014-01-09',NULL,117844,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-15',0,'','','ACTIVE',1,3,11,14,4728),
+ (18069,'B0306711','B03',NULL,'','',NULL,'A. S. BUJUNE','067','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2013-05-27',NULL,'2013-05-27',439,'2014-01-09',NULL,9644.31,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4729);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18070,'B0306911','B03',NULL,'','','2014-07-10','KAMUNONKO HERDHAN','069','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',349,'2014-01-09',NULL,-345.078,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4730),
+ (18071,'B0307111','B03',NULL,'','','2014-04-19','TANZANIA REVENUE AUTHORITY','071','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','104','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1473,'2014-01-09',NULL,147230,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-04-19',0,'','','ACTIVE',1,3,11,14,4731);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18072,'B0307411','B03',NULL,'','','2011-10-18','MELANIA RAPHAEL','074','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','box 1242','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',713,'2014-01-09',NULL,6823.03,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-10-18',0,'','','ACTIVE',1,2,11,14,4732),
+ (18073,'B0307511','B03',NULL,'','','2012-08-11','MTENGA S.LEONE','075','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',268,'2014-01-09',NULL,6236.55,0,0,0,0,'0.00',1,0,0,NULL,10404.5,'','0','0','0','0','0','0','2012-08-11',0,'','','ACTIVE',1,2,11,14,4733);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18074,'B0307611','B03',NULL,'','',NULL,'PERES B. MAGIRI','076','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1423,'2014-01-09',NULL,16026.4,0,0,0,0,'0.00',1,0,0,NULL,16000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4734),
+ (18075,'B0307711','B03',NULL,'','','2014-07-10','H. MFAUME (SEBABILI)','077','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',120,'2014-01-09',NULL,116013,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4735);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18076,'B0307811','B03',NULL,'','','2014-04-19','A.J. MULLA','078','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','D',0.75,'T','F','M','2014-05-27',NULL,'2014-05-27',38,'2014-01-09',NULL,71864.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-04-19',0,'','','ACTIVE',1,3,11,14,4736),
+ (18077,'B0307911','B03',NULL,'','',NULL,'MSALAKA M. C','079','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2013-05-27',NULL,'2013-05-27',2620,'2014-01-09',NULL,134433,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4737);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18078,'B0308111','B03',NULL,'','','2012-08-04','G. BAKUZA','081','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',402,'2014-01-09',NULL,56960.7,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-04',0,'','','ACTIVE',1,3,11,14,4738),
+ (18079,'B0308211','B03',NULL,'','',NULL,'BENJAMINI RUSIMBI','082','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2012-10-29',NULL,'2012-10-29',55,'2014-01-09',NULL,19584.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4739);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18080,'B0308811','B03',NULL,'','','2012-08-15','GODFREY  CHATTA','088','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2012-08-28',NULL,'2012-08-28',7,'2014-01-09',NULL,159247,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-15',0,'','','ACTIVE',1,3,11,14,4740),
+ (18081,'B0308911','B03',NULL,'','','2012-09-14','AHMEDI IBRAHIM','089','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','41','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1678,'2014-01-09',NULL,92188.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-14',0,'','','ACTIVE',1,3,11,14,4741);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18082,'B0309311','B03',NULL,'','','2011-09-06','MAKINGA KAVAHO','093','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','44','L',0.75,'T','F','M','2013-04-27',NULL,'2013-04-27',587,'2014-01-09',NULL,419698,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,4742),
+ (18083,'B0309511','B03',NULL,'','','2011-10-01','KYANYARI DONATUSI (BALIMI BAR & GUEST)','095','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','407','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1706,'2014-01-09',NULL,51122.4,0,0,0,0,'0.00',1,0,0,NULL,51000,'','0','0','0','0','0','0','2011-10-01',0,'','','ACTIVE',1,3,11,14,4743);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18084,'B0309611','B03',NULL,'','','2010-01-01','UNHCR','096','Lubengera, KHERI EVENUE , KGM','KIGOMA UJIJI','1213','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',36324,'2014-01-09',NULL,261608,0,0,0,0,'0.00',1,0,0,NULL,261608,'','0','0','0','0','0','0','2010-01-01',0,'','','ACTIVE',1,1,11,14,4744),
+ (18085,'B0309911','B03',NULL,'','','2014-04-19','OMARI WAZIRI (ROYAL PRINCE LODGE)','099','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1976,'2014-01-09',NULL,111316,0,0,0,0,'0.00',1,0,0,NULL,112000,'','0','0','0','0','0','0','2014-04-19',0,'','','ACTIVE',1,3,11,14,4745);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18086,'B0310011','B03',NULL,'','','2012-08-04','FRED KALIBWAMI','100','Lubengera, LUBENGELA ROAD, KGM','KIGOMA UJIJI','199','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',2892,'2014-01-09',NULL,12396.5,0,0,0,0,'0.00',1,0,0,NULL,12000,'','0','0','0','0','0','0','2012-08-04',0,'','','ACTIVE',1,2,11,14,4746),
+ (18087,'B0310611','B03',NULL,'','','2014-08-11','KAFUNDA ABEID','106','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','31','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',522,'2014-01-09',NULL,344063,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-08-11',0,'','','ACTIVE',1,3,11,14,4747);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18088,'B0310711','B03',NULL,'','','2011-09-03','GERVAS  W. BINDYANGUZE','107','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','408','D',0.75,'T','F','M','2016-01-27',NULL,'2016-01-27',14,'2014-01-09',NULL,46230.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,4748),
+ (18089,'B0310811','B03',NULL,'','','2012-09-18','A. C. LUOGA','108','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','70','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',911,'2014-01-09',NULL,19887.7,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-09-18',0,'','','ACTIVE',1,2,11,14,4749);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18090,'B0310911','B03',NULL,'','','2014-07-11','HASSANI B. RADHA','109','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','164','A',0.75,'T','F','U','2015-09-27',NULL,'2015-09-27',336,'2014-01-09',NULL,39132.5,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4750),
+ (18091,'B0311011','B03',NULL,'','',NULL,'MBARUKU YOGWA','110','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,248223,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4751);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18092,'B0311111','B03',NULL,'','',NULL,'E. H. RIWA','111','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','622','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2806,'2014-01-09',NULL,10726.3,0,0,0,0,'0.00',1,0,0,NULL,11000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4752),
+ (18093,'B0311611','B03',NULL,'','','2014-08-11','ALICE KIBINGA','116','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','105','A',0.75,'T','F','U','2015-12-27',NULL,'2015-12-27',531,'2014-01-09',NULL,219988,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2014-08-11',0,'','','ACTIVE',1,3,11,14,4753);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18094,'B0311711','B03',NULL,'','','2015-04-01','AYUBU KARIGIRI (PCCB)','117','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','710','A',0.75,'T','F','U','2015-07-30',NULL,'2015-07-30',228,'2014-01-09',NULL,41580.1,0,0,0,0,'0.00',1,0,0,NULL,41600,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4754),
+ (18095,'B0311911','B03',NULL,'','','2014-04-19','MLIMANI HOTEL (MWAKA HILL)','119','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','-','L',1.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2283,'2014-01-09',NULL,350133,0,0,0,0,'0.00',1,0,0,NULL,350000,'','0','0','0','0','0','0','2014-04-19',0,'','','ACTIVE',1,5,11,14,4755);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18096,'B0312511','B03',NULL,'','','2011-12-31','ATHUMAN HAMISI','125','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','1131','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1096,'2014-01-09',NULL,3893.48,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4756),
+ (18097,'B0312611','B03',NULL,'','','2012-08-17','DR. ALLY R. KILIMBA','126','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','451','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',660,'2014-01-09',NULL,27505.6,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-08-17',0,'','','ACTIVE',1,2,11,14,4757);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18098,'B0312911','B03',NULL,'','','2012-08-04','DICKSON RUSIMBI','129','Lubengera, LUBENGELA ROAD, KGM','KIGOMA UJIJI','519','D',0.75,'T','F','M','2012-10-29',NULL,'2012-10-29',326,'2014-01-09',NULL,276707,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-04',0,'','','ACTIVE',1,3,11,14,4758),
+ (18099,'B0313711','B03',NULL,'','','2011-09-23','AQUA LODGE','137','BANGWE, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',13533,'2014-01-09',NULL,250494,0,0,0,0,'0.00',1,0,0,NULL,100000,'','0','0','0','0','0','0','2011-09-23',0,'','','ACTIVE',1,1,11,14,4759);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18100,'B0313911','B03',NULL,'','','2012-09-15','MWANAID HAMIS','139','MWANGA ROAD, MWANGA ROAD, KGM','KIGOMA UJIJI','756','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',787,'2014-01-09',NULL,15154.8,0,0,0,0,'0.00',1,0,0,NULL,15000,'','0','0','0','0','0','0','2012-09-15',0,'','','ACTIVE',1,1,11,14,4760),
+ (18101,'B0314411','B03',NULL,'','',NULL,'HAZINA NDOGO','144','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','1204','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',17530,'2014-01-09',NULL,526542,0,0,0,0,'0.00',1,0,0,NULL,526542,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4761);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18102,'B0314511','B03',NULL,'','',NULL,'M. WAMUNZA','145','Lubengera, KAKORWA ROAD, Kigoma','KIGOMA UJIJI','65','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,190476,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4762),
+ (18103,'B0314611','B03',NULL,'','','2012-08-15','MUSSA S. ABDALLAH','146','Lubengera, LUBENGELA ROAD, KGM','KIGOMA UJIJI','117','D',0.75,'T','F','M','2013-01-27',NULL,'2013-01-27',121,'2014-01-09',NULL,191554,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-15',0,'','','ACTIVE',1,3,11,14,4763);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18104,'B0314811','B03',NULL,'','',NULL,'YAMAGINE GUES HOUSE','148','KIGOMA, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',3299,'2014-01-09',NULL,71986.7,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4764),
+ (18105,'B0314911','B03',NULL,'','','2012-08-11','MARY MAYENJE MACHUNDA','149','Lubengera, LUBENGELA ROAD, KGM','KIGOMA UJIJI','337','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',911,'2014-01-09',NULL,7715.46,0,0,0,0,'0.00',1,0,0,NULL,7500,'','0','0','0','0','0','0','2012-08-11',0,'','','ACTIVE',1,2,11,14,4765);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18106,'B0315111','B03',NULL,'','','2012-09-14','JOSEPHAT DONGWE','151','KIGOMA, MWANGA ROAD, Kigoma','KIGOMA UJIJI','103','L',0.5,'T','F','M','2016-01-27',NULL,'2016-01-27',875,'2014-01-09',NULL,22730.6,0,0,0,0,'0.00',1,0,0,NULL,22000,'','0','0','0','0','0','0','2012-09-14',0,'','','ACTIVE',1,2,11,14,4766),
+ (18107,'B0315211','B03',NULL,'','','2014-12-23','RWASA AYUBU','152','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','305','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',199,'2014-01-09',NULL,56274.6,0,0,0,0,'0.00',1,0,0,NULL,32000,'','0','0','0','0','0','0','2014-12-23',0,'','','ACTIVE',1,3,11,14,4767);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18108,'B0315611','B03',NULL,'','',NULL,'ONESMO KARUMBA','156','Lubengera, LUBENGELA ROAD, KGM','KIGOMA UJIJI','305','D',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,395561,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4769),
+ (18109,'B0315711','B03',NULL,'','','2015-01-01','JAMES D. R. NYABAKARI','157','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','92','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',81,'2014-01-09',NULL,49942.3,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-01',0,'','','ACTIVE',1,3,11,14,4770);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18110,'B0315811','B03',NULL,'','','2014-07-10','CHACHA D. NYAKIMORI  (ABDALLAH LUGAGI)','158','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','757','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',258,'2014-01-09',NULL,96787.5,0,0,0,0,'0.00',1,0,0,NULL,79280,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4771),
+ (18111,'B0316011','B03',NULL,'','','2014-07-11','JANUARY G.RULINDA','160','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',417,'2014-01-09',NULL,59362.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4772);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18112,'B0316111','B03',NULL,'','','2014-08-13','JAFARI KHALFAN MLALA','161','Lubengera, LUBENGELA ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',307,'2014-01-09',NULL,331913,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4773),
+ (18113,'B0316611','B03',NULL,'','','2012-08-04','M.A. BARAGWIHA','166','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','105','D',0.5,'T','F','M','2012-12-27',NULL,'2012-12-27',103,'2014-01-09',NULL,328591,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-04',0,'','','ACTIVE',1,2,11,14,4774);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18114,'B0317311','B03',NULL,'','','2015-12-31','B. KARUMBA (PRIDE TANZANIA LTD)','173','KIGOMA, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','305','D',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',4746,'2014-01-09',NULL,521535,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-12-31',0,'','','ACTIVE',1,1,11,14,4775),
+ (18115,'B0317811','B03',NULL,'','',NULL,'IBRAHIM J. LAKHA','178','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','92','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,105.907,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4776);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18116,'B0318211','B03',NULL,'','','2014-07-11','ZABIBU KASATO','182','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','80','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',948,'2014-01-09',NULL,19004.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4777),
+ (18117,'B0318511','B03',NULL,'','','2011-09-22','SAMWEL KIFUNYU','185','Lubengera, KIGOMA AREA, Kigoma','KIGOMA UJIJI','512','D',0.25,'T','F','M','2012-03-25',NULL,'2012-03-25',158,'2014-01-09',NULL,92640.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,1,11,14,4778);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18118,'B0318811','B03',NULL,'','','2014-07-10','A.J MBAGO','188','Lubengera, LUBENGERA ROAD, X171 KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',369,'2014-01-09',NULL,18338,0,0,0,0,'0.00',1,0,0,NULL,38018,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4779),
+ (18119,'B0318911','B03',NULL,'','',NULL,'SADALA MATIKO','189','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','744','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,141078,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4780);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18120,'B0319211','B03',NULL,'','','2000-12-01','DAWSON KAHEMA','192','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','1366','D',0.25,'T','F','M',NULL,NULL,NULL,0,'2014-01-09',NULL,284778,0,0,0,0,'0.00',1,0,0,NULL,125000,'','0','0','0','0','0','0','2000-12-01',0,'','','ACTIVE',1,1,11,14,4781),
+ (18121,'B0319311','B03',NULL,'','','2015-06-17','SHOMARI B. YOGWA','193','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','694','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',49,'2014-01-09',NULL,200174,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-06-17',0,'','','ACTIVE',1,3,11,14,4782);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18122,'B0320011','B03',NULL,'','','2014-07-11','DAUDI KIOBYA','200','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','447','A',0.75,'T','F','U','2014-10-27',NULL,'2014-10-27',23,'2014-01-09',NULL,164228,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4783),
+ (18123,'B0400111','B04',NULL,'','','2014-07-11','MARIAM WAZIRI','001','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','5','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',245,'2014-01-09',NULL,18726.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4784);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18124,'B0400511','B04',NULL,'','','2010-01-01','TTCL (GARDEN)','005','Lubengera, GUNGU ROAD, Kigoma','KIGOMA UJIJI','757','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',10585,'2014-01-09',NULL,20311.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2010-01-01',0,'','','ACTIVE',1,1,11,14,4785),
+ (18125,'B0400811','B04',NULL,'','','2014-08-13','S. PETER','008','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','246','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',517,'2014-01-09',NULL,150629,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4786);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18126,'B0401011','B04',NULL,'','','2014-07-11','ANWARY SHABANI','010','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','49','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',283,'2014-01-09',NULL,72122.5,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4787),
+ (18127,'B0401111','B04',NULL,'','','2011-09-01','KANISA LA PENTEKOSTE (AGAPE)','011','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1951,'2014-01-09',NULL,42139.3,0,0,0,0,'0.00',1,0,0,NULL,42000,'','0','0','0','0','0','0','2011-09-01',0,'','','ACTIVE',1,3,11,14,4788);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18128,'B0401211','B04',NULL,'','','2011-09-22','JOY IN THE HERVEST','012','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1081,'2014-01-09',NULL,78979.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4789),
+ (18129,'B0401611','B04',NULL,'','','2015-12-01','REV. SADOCK MAKAYA','016','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','81','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',30,'2014-01-09',NULL,38952,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-12-01',0,'','','ACTIVE',1,3,11,14,4790);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18130,'B0401711','B04',NULL,'','',NULL,'MOHAMED JAMA ALAMAGANI','017','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','1016','L',0.25,'T','F','M','2015-10-27',NULL,'2015-10-27',881,'2014-01-09',NULL,41368.7,0,0,0,0,'0.00',1,0,0,NULL,22000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4791),
+ (18131,'B0401911','B04',NULL,'','','2014-07-09','EZEKIEL G. MIFORA','019','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','1097','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',348,'2014-01-09',NULL,29187.5,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2014-07-09',0,'','','ACTIVE',1,3,11,14,4792);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18132,'B0402011','B04',NULL,'','','2013-07-05','RAMADHANI ABDALLAH','020','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','91','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',460,'2014-01-09',NULL,168508,0,0,0,0,'0.00',1,0,0,NULL,90000,'','0','0','0','0','0','0','2013-07-05',0,'','','ACTIVE',1,3,11,14,4793),
+ (18133,'B0402111','B04',NULL,'','',NULL,'ZINGA DUGUMBI (AMALULA GUEST HOUSE)','021','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','595','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2283,'2014-01-09',NULL,46497.4,0,0,0,0,'0.00',1,0,0,NULL,47000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4794);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18134,'B0402411','B04',NULL,'','','2015-11-01','HAMIMU BURAHEZE','024','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','1225','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',100,'2014-01-09',NULL,18137.5,0,0,0,0,'0.00',1,0,0,NULL,18000,'','0','0','0','0','0','0','2015-11-01',0,'','','ACTIVE',1,3,11,14,4795),
+ (18135,'B0402711','B04',NULL,'','','2010-01-01','MAUNZENGE SLYVESTER(DARAJANI-JAFFER SHOP)','027','MWANGA ROAD, MWANGA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',3115,'2014-01-09',NULL,28537.5,0,0,0,0,'0.00',1,0,0,NULL,28500,'','0','0','0','0','0','0','2010-01-01',0,'','','ACTIVE',1,1,11,14,4796);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18136,'B0403311','B04',NULL,'','','2011-09-22','HUSSEIN SHABBIR MOHAMED HUSSEIN','033','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',NULL,'2014-01-09',NULL,61804.1,0,0,0,0,'0.00',1,0,0,NULL,62000,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4797),
+ (18137,'B0403611','B04',NULL,'','','2015-02-12','ANTHONY MISIGARO (24KJ NAVY).','036','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','1092','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',795,'2014-01-09',NULL,247201,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-02-12',0,'','','ACTIVE',1,3,11,14,4798);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18138,'B0404111','B04',NULL,'','',NULL,'EVEGREEN BAR','041','KIGOMA, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2013-07-27',NULL,'2013-07-27',3092,'2014-01-09',NULL,282503,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4799),
+ (18139,'B0404211','B04',NULL,'','','2012-10-20','METHEW CHAMPANDA','042','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','337','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',761,'2014-01-09',NULL,9563.63,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-10-20',0,'','','ACTIVE',1,2,11,14,4800);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18140,'B0404311','B04',NULL,'','','2012-09-04','RC - PAROKIA YA KIGOMA','043','KIGOMA, MWANGA ROAD, Kigoma','KIGOMA UJIJI','71','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',395,'2014-01-09',NULL,85659.8,0,0,0,0,'0.00',1,0,0,NULL,55000,'','0','0','0','0','0','0','2012-09-04',0,'','','ACTIVE',1,2,11,14,4801),
+ (18141,'B0404511','B04',NULL,'','','2012-01-01','SHABANI H. BIMALA','045','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','400','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',6231,'2014-01-09',NULL,1356880,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-01-01',0,'','','ACTIVE',1,3,11,14,4802);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18142,'B0404911','B04',NULL,'','','2015-04-01','STEVEN MAKALA','049','Lubengera, KIGOMA SEC SCHOOL, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',166,'2014-01-09',NULL,22054.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4803),
+ (18143,'B0405211','B04',NULL,'','','2013-03-22','W. N. KALAHEZE','052','Lubengera, KIGOMA SEC SCHOOL, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',23404,'2014-01-09',NULL,73708.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2013-03-22',0,'','','ACTIVE',1,3,11,14,4804);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18144,'B0405511','B04',NULL,'','','2008-01-01','MASANJA NGUSA','055','Lubengera, KIGOMA SEC SCHOOL, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M',NULL,NULL,NULL,0,'2014-01-09',NULL,61986.7,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2008-01-01',0,'','','ACTIVE',1,3,11,14,4805),
+ (18145,'B0405611','B04',NULL,'','',NULL,'MR. W. S. KULANDEA','056','BANGWE, KIGOMA SECONDARY SCHOOL, Kigoma','KIGOMA UJIJI','51','D',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,228633,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4806);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18146,'B0405711','B04',NULL,'','','2012-08-06','E.S ZILIKANA','057','Lubengera, KIGOMA SEC SCHOOL, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',693,'2014-01-09',NULL,14072.8,0,0,0,0,'0.00',1,0,0,NULL,14000,'','0','0','0','0','0','0','2012-08-06',0,'','','ACTIVE',1,3,11,14,4807),
+ (18147,'B0405811','B04',NULL,'','','2013-03-30','PROTAS NTIYAMAGWA','058','Lubengera, KIGOMA SEC SCHOOL, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',361,'2014-01-09',NULL,133484,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2013-03-30',0,'','','ACTIVE',1,2,11,14,4808);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18148,'B0405911','B04',NULL,'','','2012-08-03','ANDERSON BIDYA','059','Lubengera, KIGOMA SEC SCHOOL, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',500,'2014-01-09',NULL,7880.7,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-03',0,'','','ACTIVE',1,3,11,14,4809),
+ (18149,'B0406011','B04',NULL,'','','2012-05-01','MR. MTINDO S. J','060','Lubengera, KIGOMA SEC SCHOOL, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2014-12-25',NULL,'2014-12-25',281,'2014-01-09',NULL,29915.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-05-01',0,'','','ACTIVE',1,3,11,14,4810);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18150,'B0406111','B04',NULL,'','','2012-08-03','MR. DOBEYE A','061','Lubengera, KIGOMA SEC SCHOOL, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',390,'2014-01-09',NULL,22610.8,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-08-03',0,'','','ACTIVE',1,3,11,14,4811),
+ (18151,'B0406211','B04',NULL,'','','2014-09-17','NZEYI FITI','062','MWANGA ROAD, MWANGA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',368,'2014-01-09',NULL,137628,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-17',0,'','','ACTIVE',1,3,11,14,4812);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18152,'B0406411','B04',NULL,'','','2012-09-04','FAUSTIN BAIGANA','064','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',875,'2014-01-09',NULL,93047.7,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-04',0,'','','ACTIVE',1,3,11,14,4813),
+ (18153,'B0406811','B04',NULL,'','','2012-09-12','HAWA FARIJALA','068','LUMUMBA, LUMUMBA, KGM','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',664,'2014-01-09',NULL,36087.2,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,2,11,14,4814);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18154,'B0406911','B04',NULL,'','','2012-09-04','PASTORY B. MLELUKE','069','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',879,'2014-01-09',NULL,56878.8,0,0,0,0,'0.00',1,0,0,NULL,57000,'','0','0','0','0','0','0','2012-09-04',0,'','','ACTIVE',1,3,11,14,4815),
+ (18155,'B0407011','B04',NULL,'','','2014-09-17','SARTIEL KEREBUKE','070','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',369,'2014-01-09',NULL,36276.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-17',0,'','','ACTIVE',1,3,11,14,4816);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18156,'B0407411','B04',NULL,'','','2012-09-04','ZERA NASHONI','074','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',695,'2014-01-09',NULL,107134,0,0,0,0,'0.00',1,0,0,NULL,107200,'','0','0','0','0','0','0','2012-09-04',0,'','','ACTIVE',1,3,11,14,4817),
+ (18157,'B0407511','B04',NULL,'','','2011-09-21','MAKTABA (DIRECTOR TLB ,NCL,UWTST)','075','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',745,'2014-01-09',NULL,60615.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-21',0,'','','ACTIVE',1,3,11,14,4818);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18158,'B0407711','B04',NULL,'','','2016-01-01','SHABANI J. SHABANI','077','Kigoma, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U',NULL,NULL,NULL,NULL,'2014-01-09',NULL,239788,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2016-01-01',0,'','','ACTIVE',1,3,11,14,4819),
+ (18159,'B0407811','B04',NULL,'','','2014-11-27','EZEKIELI JOSEPH','078','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-10-27',NULL,'2015-10-27',NULL,'2014-01-09',NULL,104583,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-11-27',0,'','','ACTIVE',1,3,11,14,4820);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18160,'B0408111','B04',NULL,'','','2011-12-31','ALLY SALUMU RUBIBI (NEAR KIBO PEAK - WAANDISHI WA HABARI)','081','Lubengera, KAYA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1236,'2014-01-09',NULL,84395.3,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4821),
+ (18161,'B0408211','B04',NULL,'','','2012-08-01','F. T. MATALISI (JORAMU BIGUZA)','082','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',551,'2014-01-09',NULL,5483.99,0,0,0,0,'0.00',1,0,0,NULL,5500,'','0','0','0','0','0','0','2012-08-01',0,'','','ACTIVE',1,3,11,14,4822);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18162,'B0408511','B04',NULL,'','','2014-08-13','PASIAN SHABANI','085','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','80','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',397,'2014-01-09',NULL,19662.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4823),
+ (18163,'B0408911','B04',NULL,'','','2012-09-14','VENANCE  NTAHIYE','089','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',1248,'2014-01-09',NULL,106737,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-14',0,'','','ACTIVE',1,2,11,14,4824);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18164,'B0409111','B04',NULL,'','',NULL,'SELEMANI  S. ABDALLAH','091','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','635','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20880.3,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4825),
+ (18165,'B0409411','B04',NULL,'','','2014-07-11','SLYVANUS STANISLAUS','094','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','740','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',174,'2014-01-09',NULL,37962.5,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4827);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18166,'B0409611','B04',NULL,'','',NULL,'TRL OVER SEER','096','Lubengera, SHEDE AREA, KGM','KIGOMA UJIJI','33','L',0.25,'T','F','M','2013-10-25',NULL,'2013-10-25',5408,'2014-01-09',NULL,112326,0,0,0,0,'0.00',1,0,0,NULL,144616,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4828),
+ (18167,'B0409711','B04',NULL,'','',NULL,'TRL POLICE','097','KIGOMA, KIEZYA ROAD, Kigoma','KIGOMA UJIJI','33','D',0.25,'T','F','M','2011-03-28',NULL,'2011-03-28',11964,'2014-01-09',NULL,349722,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4829);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18168,'B0409811','B04',NULL,'','','2014-04-19','TANZANIA PORTS AUTHORITY(TPA)','098','Lubengera, SHEDE AREA, KGM','KIGOMA UJIJI','-','L',1.25,'T','F','M','2016-02-01',NULL,'2016-02-01',5306,'2014-01-09',NULL,158951,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-04-19',0,'','','ACTIVE',1,5,11,14,4830),
+ (18169,'B0410211','B04',NULL,'','',NULL,'WILSON BILANTANYE','102','Lubengera, SHEDE AREA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1325,'2014-01-09',NULL,72438.3,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4831);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18170,'B0410311','B04',NULL,'','','2010-12-20','ZANZIBAR HILL HOTEL','103','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1802,'2014-01-09',NULL,125388,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2010-12-20',0,'','','ACTIVE',1,3,11,14,4832),
+ (18171,'B0410411','B04',NULL,'','',NULL,'SHULE YA CHEKECHEYA','104','Lubengera, SHEDE AREA, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',3501,'2014-01-09',NULL,64033.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4833);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18172,'B0412111','B04',NULL,'','','2015-07-31','FANUEL J. LUGONZIBWA','121','Lubengera, SHEDE AREA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-11-27',NULL,'2015-11-27',123,'2014-01-09',NULL,92987.5,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2015-07-31',0,'','','ACTIVE',1,3,11,14,4834),
+ (18173,'B0414211','B04',NULL,'','',NULL,'MOHAMED A. SHARIF','142','Lubengera, LUMUMBA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-10-27',NULL,'2015-10-27',2343,'2014-01-09',NULL,22294.8,0,0,0,0,'0.00',1,0,0,NULL,22200,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4835);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18174,'B0414611','B04',NULL,'','',NULL,'JUMA MKOPI','146','SHEDE AREA, SHEDE, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-11-27',NULL,'2015-11-27',2107,'2014-01-09',NULL,9315.4,0,0,0,0,'0.00',1,0,0,NULL,9300,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4836),
+ (18175,'B0414711','B04',NULL,'','','2012-09-09','GERADY TIJE','147','Lubengera, MWANGA ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',310,'2014-01-09',NULL,86018,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-09',0,'','','ACTIVE',1,3,11,14,4837);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18176,'B0415011','B04',NULL,'','',NULL,'RICHARD NTAHAMBA (MJIMWEMA LODGE)','150','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','568','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',7262,'2014-01-09',NULL,27341.4,0,0,0,0,'0.00',1,0,0,NULL,27500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4838),
+ (18177,'B0415411','B04',NULL,'','','2011-12-31','VEDASTUS MPAMO','154','Lubengera, SHEDE AREA, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2012-08-28',NULL,'2012-08-28',804,'2014-01-09',NULL,40806.3,0,0,0,0,'0.00',1,0,0,NULL,24000,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,1,11,14,4839);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18178,'B0415511','B04',NULL,'','','2011-10-01','PEACE RUHUZA','155','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','1193','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2432,'2014-01-09',NULL,46834.6,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2011-10-01',0,'','','ACTIVE',1,3,11,14,4840),
+ (18179,'B0415811','B04',NULL,'','','2012-09-12','KITAMA IBRAHIM','158','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','609','D',0.75,'T','F','M','2012-12-27',NULL,'2012-12-27',47,'2014-01-09',NULL,97665.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,3,11,14,4841);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18180,'B0416011','B04',NULL,'','','2012-02-01','A. S. DOSSA','160','Lubengera, BANGWE, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-01-27',NULL,'2016-01-27',224,'2014-01-09',NULL,19322.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-02-01',0,'','','ACTIVE',1,3,11,14,4842),
+ (18181,'B0416111','B04',NULL,'','','2014-07-11','ZACHARIA SIMON','161','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',220,'2014-01-09',NULL,30945,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4843);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18182,'B0416211','B04',NULL,'','','2015-01-01','MSABAHA J. MTAKWA','162','Lubengera, KIEKYA ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',263,'2014-01-09',NULL,157033,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-01',0,'','','ACTIVE',1,3,11,14,4844),
+ (18183,'B0416611','B04',NULL,'','','2015-08-01','JONAS MPULUMBA','166','Lubengera, LUBENGERA, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',53,'2014-01-09',NULL,31847.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-08-01',0,'','','ACTIVE',1,3,11,14,4845);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18184,'B0416811','B04',NULL,'','','2012-03-31','KAMARA DISPENSARY','168','Lubengera, BANGWE ROAD, KGM','KIGOMA UJIJI','44','D',1,'T','F','M','2016-02-01',NULL,'2016-02-01',545,'2014-01-09',NULL,42090,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-03-31',0,'','','ACTIVE',1,4,11,14,4846),
+ (18185,'B0417011','B04',NULL,'','','2014-04-19',' COAST VIEW RESORT','170','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3074,'2014-01-09',NULL,80256,0,0,0,0,'0.00',1,0,0,NULL,80000,'','0','0','0','0','0','0','2014-04-19',0,'','','ACTIVE',1,3,11,14,4847);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18186,'B0417111','B04',NULL,'','','2016-01-01','ILUMVA ZABRON','171','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U',NULL,NULL,NULL,86,'2014-01-09',NULL,19008.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2016-01-01',0,'','','ACTIVE',1,3,11,14,4848),
+ (18187,'B0417211','B04',NULL,'','','2014-07-11','NYANDWI AUGUSTINO','172','SANGANIGWA, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',320,'2014-01-09',NULL,-1237.5,0,0,0,0,'0.00',1,0,0,NULL,18443,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4849);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18188,'B0417311','B04',NULL,'','','2013-11-11','SEVENTH DAY ADVENTIST CHURCH','173','KIGOMA, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',116,'2014-01-09',NULL,63373.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2013-11-11',0,'','','ACTIVE',1,3,11,14,4850),
+ (18189,'B0417411','B04',NULL,'','',NULL,'J. R. KIMAMBI','174','Lubengera, LUBENGERA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2013-05-27',NULL,'2013-05-27',876,'2014-01-09',NULL,-60768,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4851);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18190,'B0417511','B04',NULL,'','','2012-08-27','RAPHAEL SYLVESTER (SAN SIRO PUB)','175','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',NULL,'2014-01-09',NULL,26988.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-27',0,'','','ACTIVE',1,2,11,14,4852),
+ (18191,'B0417611','B04',NULL,'','','2015-02-01','REMMY PATRICK','176','Lubengera, SANGANIGWA - KIGOMA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',147,'2014-01-09',NULL,19758,0,0,0,0,'0.00',1,0,0,NULL,19700,'','0','0','0','0','0','0','2015-02-01',0,'','','ACTIVE',1,3,11,14,4853);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18192,'B0417811','B04',NULL,'','','2014-07-11','JOSEPHAT KITYABA','178','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-01-27',NULL,'2016-01-27',538,'2014-01-09',NULL,43083.5,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4854),
+ (18193,'B0418211','B04',NULL,'','',NULL,'CHRISTINA RAZARO','182','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20262.9,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4856);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18194,'B0418711','B04',NULL,'','',NULL,'ANDREW JOHN','187','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','D',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,146331,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4857),
+ (18195,'B0418811','B04',NULL,'','','2014-07-09','ALLY MLAMBALAZI','188','Lubengera, LUBENGERA ROAD, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-03-03',NULL,'2015-03-03',77,'2014-01-09',NULL,82307.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-09',0,'','','ACTIVE',1,3,11,14,4858);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18196,'B0418911','B04',NULL,'','',NULL,'IDDY ALLY CHETO','189','Lubengera, SHEDE AREA, KGM','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,40056.9,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4859),
+ (18197,'B0419611','B04',NULL,'','','2012-09-05','ULIMWENGU ALOYCES','196','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-03-03',NULL,'2015-03-03',770,'2014-01-09',NULL,46404.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,3,11,14,4860);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18198,'B0419811','B04',NULL,'','',NULL,'MOHAMED ABDALLAH','198','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','L',0.25,'T','F','M','2012-10-29',NULL,'2012-10-29',28,'2014-01-09',NULL,90365.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4861),
+ (18199,'B0420011','B04',NULL,'','','2015-04-25','DR. ALOYS MISAGO','200','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',314,'2014-01-09',NULL,205093,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-25',0,'','','ACTIVE',1,3,11,14,4862);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18200,'B0420111','B04',NULL,'','','2014-08-13','ZILIKANA RAJABU','201','KIGOMA, SANGANIGWA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',335,'2014-01-09',NULL,39126,0,0,0,0,'0.00',1,0,0,NULL,19000,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4863),
+ (18201,'B0500211','B05',NULL,'','',NULL,'MRS. MSEMWA','002','Lubengera, SHEDE, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2011-07-28',NULL,'2011-07-28',4196,'2014-01-09',NULL,167711,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4864);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18202,'B0500311','B05',NULL,'','','2015-01-01','RAPHAEL MOLELI (BUTCHER - KIGOMA)','003','Lubengera, KIGOMA AREA, Kigoma','KIGOMA UJIJI','731','A',0.75,'T','F','U',NULL,NULL,NULL,NULL,'2014-01-09',NULL,110764,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-01',0,'','','ACTIVE',1,3,11,14,4865),
+ (18203,'B0500811','B05',NULL,'','','2016-01-01','JOHN PHILIBERT','008','Lubengera, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',314,'2014-01-09',NULL,100133,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2016-01-01',0,'','','ACTIVE',1,3,11,14,4866);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18204,'B0501111','B05',NULL,'','','2011-09-22','JUMA HASSAN KIRUNGI','011','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2013-06-27',NULL,'2013-06-27',301,'2014-01-09',NULL,29328,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4867),
+ (18205,'B0501911','B05',NULL,'','','2011-12-31','UWT - KIBO PEAK (GUEST HOUSE) - MTEI','019','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','622','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',6730,'2014-01-09',NULL,83519.2,0,0,0,0,'0.00',1,0,0,NULL,83519,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,2,11,14,4868);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18206,'B0502211','B05',NULL,'','','2012-01-01','COLMAN J. KIWALE','022','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1280,'2014-01-09',NULL,195023,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-01-01',0,'','','ACTIVE',1,3,11,14,4869),
+ (18207,'B0502311','B05',NULL,'','','2012-08-14','F. KASAVUBU','023','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',1694,'2014-01-09',NULL,38546.1,0,0,0,0,'0.00',1,0,0,NULL,38500,'','0','0','0','0','0','0','2012-08-14',0,'','','ACTIVE',1,2,11,14,4870);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18208,'B0502411','B05',NULL,'','','2014-07-11','YUSUFU HASSAN','024','Lubengera, MWANGA ROAD, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',1730,'2014-01-09',NULL,19712.5,0,0,0,0,'0.00',1,0,0,NULL,19800,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4871),
+ (18209,'B0502711','B05',NULL,'','','2016-01-01','MTUKWAO ELIAS','027','Lubengera, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',272,'2014-01-09',NULL,32666,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2016-01-01',0,'','','ACTIVE',1,3,11,14,4872);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18210,'B0503011','B05',NULL,'','','2016-02-01','EMMANUEL MTITI','030','Lubengera, MARKET AREA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',59,'2014-01-09',NULL,178175,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2016-02-01',0,'','','ACTIVE',1,3,11,14,4873),
+ (18211,'B0503211','B05',NULL,'','','2011-10-01','SELEMANI YUSUFU (HUDUMA YA CHOO)','032','Lubengera, MARKET AREA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3135,'2014-01-09',NULL,6333.01,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-10-01',0,'','','ACTIVE',1,3,11,14,4874);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18212,'B0503511','B05',NULL,'','','2011-08-05','MHAMBWE MAMALISHE (HOTEL STAND STATION)','035','Lubengera, LUMUMBA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2013-11-27',NULL,'2013-11-27',399,'2014-01-09',NULL,79872.2,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2011-08-05',0,'','','ACTIVE',1,3,11,14,4875),
+ (18213,'B0503911','B05',NULL,'','','2014-07-11','MOSHI ISSA','039','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',203,'2014-01-09',NULL,104508,0,0,0,0,'0.00',1,0,0,NULL,53000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4876);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18214,'B0504111','B05',NULL,'','','2015-07-16','DAFU EDWARD','041','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-07-30',NULL,'2015-07-30',36,'2014-01-09',NULL,30054.4,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2015-07-16',0,'','','ACTIVE',1,3,11,14,4877),
+ (18215,'B0504311','B05',NULL,'','','2012-08-10','TUMAINI KATULA','043','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',784,'2014-01-09',NULL,86080.4,0,0,0,0,'0.00',1,0,0,NULL,86000,'','0','0','0','0','0','0','2012-08-10',0,'','','ACTIVE',1,3,11,14,4878);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18216,'B0504411','B05',NULL,'','','2014-07-10','JORAMU BIGUZA (FOR KALOKOLA - PRODAP/NDF)','044','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',557,'2014-01-09',NULL,71734.8,0,0,0,0,'0.00',1,0,0,NULL,75000,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4879),
+ (18217,'B0505111','B05',NULL,'','',NULL,'INT. GOOD SAMARITAN','051','Lubengera, KIGOMA, -','KIGOMA UJIJI','-','D',0.25,'T','F','M','2015-07-30',NULL,'2015-07-30',10,'2014-01-09',NULL,443232,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4880);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18218,'B0505211','B05',NULL,'','','2013-08-07','ALHAJI BARUANI NGUZA ( MUNICIPAL MAYOR)','052','MJIMWEMA, LUBENGERA, Kigoma','KIGOMA UJIJI','44','D',0.25,'T','F','M','2014-10-27',NULL,'2014-10-27',74,'2014-01-09',NULL,210345,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2013-08-07',0,'','','ACTIVE',1,1,11,14,4881),
+ (18219,'B0505311','B05',NULL,'','','2012-09-15','HAMZA SUNGURA','053','MWANGA ROAD, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',873,'2014-01-09',NULL,84138,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2012-09-15',0,'','','ACTIVE',1,2,11,14,4882);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18220,'B0505711','B05',NULL,'','','2014-12-03','NATIONAL MICROFINACE BANK','057','Lubengera, LUMUMBA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2014-01-25',NULL,'2014-01-25',2531,'2014-01-09',NULL,164048,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-12-03',0,'','','ACTIVE',1,3,11,14,4883),
+ (18221,'B0505811','B05',NULL,'','',NULL,'D.M.O - KIGOMA COUNCIL','058','Lubengera, KHERI AVENUE, -','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',1196,'2014-01-09',NULL,67809.5,0,0,0,0,'0.00',1,0,0,NULL,47889.1,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4884);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18222,'B0506911','B05',NULL,'','','2014-11-07','LAZARO TANDA','069','Lubengera, MWANGA ROAD, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-01-27',NULL,'2016-01-27',145,'2014-01-09',NULL,117512,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-11-07',0,'','','ACTIVE',1,3,11,14,4885),
+ (18223,'B0507611','B05',NULL,'','',NULL,'JUMA SELEMANI','076','Lubengera, LUMUMBA, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,87674.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4886);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18224,'B0507911','B05',NULL,'','','2022-09-22','AMINA MALENGWA (CHOO)','079','Lubengera, KIGOMA AREA, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2013-04-27',NULL,'2013-04-27',276,'2014-01-09',NULL,30308,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2022-09-22',0,'','','ACTIVE',1,2,11,14,4887),
+ (18225,'B0508211','B05',NULL,'','','2014-07-11','ALLY R. KILIMBA','082','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',616,'2014-01-09',NULL,19612,0,0,0,0,'0.00',1,0,0,NULL,19700,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4888);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18226,'B0508611','B05',NULL,'','','2011-04-04','JAMES NYABAKARI (CAR WASH)','086','Lubengera, LUMUMBA , Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2014-10-27',NULL,'2014-10-27',1899,'2014-01-09',NULL,517059,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-04-04',0,'','','ACTIVE',1,3,11,14,4889),
+ (18227,'B0509711','B05',NULL,'','','2012-07-03','JOHN K. PHILBERT','097','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',457,'2014-01-09',NULL,8524.37,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-07-03',0,'','','ACTIVE',1,3,11,14,4890);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18228,'B0509911','B05',NULL,'','','2014-07-10','ANNA GERALD','099','Lubengera, KIGOMA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',309,'2014-01-09',NULL,2.5,0,0,0,0,'0.00',1,0,0,NULL,3,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4891),
+ (18229,'B0510011','B05',NULL,'','',NULL,'ASTRIDA MJARA','100','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20790.9,0,0,0,0,'0.00',1,0,0,NULL,15000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4892);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18230,'B0510111','B05',NULL,'','','2012-08-10','DANIEL SUMWIN BONDO','101','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',1342,'2014-01-09',NULL,89431.8,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2012-08-10',0,'','','ACTIVE',1,2,11,14,4893),
+ (18231,'B0510811','B05',NULL,'','','2010-01-01','RASHID KASENDEKA (WEBSITE PUB)','108','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-01-27',NULL,'2016-01-27',3211,'2014-01-09',NULL,22919.4,0,0,0,0,'0.00',1,0,0,NULL,23000,'','0','0','0','0','0','0','2010-01-01',0,'','','ACTIVE',1,1,11,14,4894);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18232,'B0511411','B05',NULL,'','','2012-08-14','RAJABU KISHAKARI','114','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2013-02-27',NULL,'2013-02-27',171,'2014-01-09',NULL,199300,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-14',0,'','','ACTIVE',1,3,11,14,4895),
+ (18233,'B0511611','B05',NULL,'','','2015-01-16','ELIAS M. MBONEYE','116','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',852,'2014-01-09',NULL,76842.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-16',0,'','','ACTIVE',1,3,11,14,4896);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18234,'B0512011','B05',NULL,'','','2011-09-26','EMMANUEL MORA','120','Lubengera, MARKET AREA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',869,'2014-01-09',NULL,22591.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-26',0,'','','ACTIVE',1,3,11,14,4897),
+ (18235,'B0512211','B05',NULL,'','','2012-08-14','BISWALO MANUMBU','122','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',991,'2014-01-09',NULL,30905,0,0,0,0,'0.00',1,0,0,NULL,31000,'','0','0','0','0','0','0','2012-08-14',0,'','','ACTIVE',1,3,11,14,4898);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18236,'B0512911','B05',NULL,'','','2015-04-01','RICHARD MAKULILO,                                 P. O.','129','KIBIRIZI ROAD, KIBIRIZI ROAD, KIGOMA','KIGOMA UJIJI','864','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',229,'2014-01-09',NULL,19487.5,0,0,0,0,'0.00',1,0,0,NULL,19500,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4899),
+ (18237,'B0513211','B05',NULL,'','','2014-12-01','CHOBALIKO SALVATORY','132','Lubengera, KHERI AVENUE, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',764,'2014-01-09',NULL,194773,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-12-01',0,'','','ACTIVE',1,3,11,14,4900);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18238,'B0514311','B05',NULL,'','','2014-08-14','CHRISTOPHER LUGIKO','143','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',148,'2014-01-09',NULL,143712,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-14',0,'','','ACTIVE',1,3,11,14,4902),
+ (18239,'B0514511','B05',NULL,'','','2014-07-11','EZEKIEL I. NYAMBELE','145','Lubengera, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',188,'2014-01-09',NULL,176238,0,0,0,0,'0.00',1,0,0,NULL,100000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4903);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18240,'B0514911','B05',NULL,'','','2012-08-15','DAVIES P. BARIKI','149','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1102,'2014-01-09',NULL,20488.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-15',0,'','','ACTIVE',1,3,11,14,4904),
+ (18241,'B0515111','B05',NULL,'','','2014-08-13','ASHURA B. IBRAHIM','151','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',416,'2014-01-09',NULL,103610,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,4905);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18242,'B0515211','B05',NULL,'','','2012-01-01','HASSAN BUNDALA','152','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2842,'2014-01-09',NULL,50815.8,0,0,0,0,'0.00',1,0,0,NULL,51000,'','0','0','0','0','0','0','2012-01-01',0,'','','ACTIVE',1,3,11,14,4906),
+ (18243,'B0515311','B05',NULL,'','','2010-12-12','ASAJILE MWAKALAMBILE','153','Lubengera, LUBENGERA NEAR CCM, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2012-05-30',NULL,'2012-05-30',361,'2014-01-09',NULL,333557,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2010-12-12',0,'','','ACTIVE',1,3,11,14,4907);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18244,'B0516911','B05',NULL,'','','2014-07-11','TOWN DIRECTOR \"B\"','169','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',173,'2014-01-09',NULL,18158.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4909),
+ (18245,'B0517011','B05',NULL,'','','2015-06-17','TOWN DIRECTOR \"C\" (MUNICIPAL ENGINEER\'S HOUSE)','170','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-07-30',NULL,'2015-07-30',59,'2014-01-09',NULL,18880,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-06-17',0,'','','ACTIVE',1,3,11,14,4910);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18246,'B0517411','B05',NULL,'','','2012-08-06','JUMANNE KIKWALI','174','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','332 DED- KIGOMA','D',0.5,'T','F','M','2013-03-25',NULL,'2013-03-25',1163,'2014-01-09',NULL,193294,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-06',0,'','','ACTIVE',1,2,11,14,4911),
+ (18247,'B0517511','B05',NULL,'','','2015-07-16','HAMISI MGUNDA','175','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-11-27',NULL,'2015-11-27',172,'2014-01-09',NULL,228533,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-16',0,'','','ACTIVE',1,3,11,14,4912);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18248,'B0518111','B05',NULL,'','','2010-01-01','BROTHER\'S OF CHARITY','181','POLICE LINE, KIGOMA, Kigoma','KIGOMA UJIJI','612','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',10871,'2014-01-09',NULL,170806,0,0,0,0,'0.00',1,0,0,NULL,171000,'','0','0','0','0','0','0','2010-01-01',0,'','','ACTIVE',1,1,11,14,4913),
+ (18249,'B0518611','B05',NULL,'','','2015-04-01','GASPARY H. LUPORI','186','BANGWE,  BANGWE AREA, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',372,'2014-01-09',NULL,217083,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4914);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18250,'B0519811','B05',NULL,'','','2014-11-18','MAENDELEO YA JAMII (FELSA)','198','Lubengera, KIGOMA AREA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2006,'2014-01-09',NULL,13322.7,0,0,0,0,'0.00',1,0,0,NULL,14000,'','0','0','0','0','0','0','2014-11-18',0,'','','ACTIVE',1,3,11,14,4916),
+ (18251,'B0600711','B06',NULL,'','','2014-08-11','ANTHONY RUTAHOILE','007','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',214,'2014-01-09',NULL,38958.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-11',0,'','','ACTIVE',1,3,11,14,4917);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18252,'B0601111','B06',NULL,'','','2014-09-22','ADAM N.','011','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',1184,'2014-01-09',NULL,19612.5,0,0,0,0,'0.00',1,0,0,NULL,19600,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,4918),
+ (18253,'B0601311','B06',NULL,'','','2014-07-11','HEMED ABDALLAH','013','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',229,'2014-01-09',NULL,174512,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4919);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18254,'B0601411','B06',NULL,'','','2011-09-22','YONA NTIBONA','014','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',794,'2014-01-09',NULL,13526.4,0,0,0,0,'0.00',1,0,0,NULL,13500,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4920),
+ (18255,'B0601511','B06',NULL,'','','2015-07-18','NYENGO SAID (HOTEL)','015','KIGOMA, KIGOMA MARKET, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',232,'2014-01-09',NULL,50059.8,0,0,0,0,'0.00',1,0,0,NULL,75000,'','0','0','0','0','0','0','2015-07-18',0,'','','ACTIVE',1,3,11,14,4921);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18256,'B0601711','B06',NULL,'','','2014-07-11','MEKSINA L. MALEKEZA','017','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',273,'2014-01-09',NULL,20162.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4922),
+ (18257,'B0601911','B06',NULL,'','','2014-11-25','SHEM MKANGWA','019','Lubengera, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',155,'2014-01-09',NULL,19662.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-11-25',0,'','','ACTIVE',1,3,11,14,4923);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18258,'B0602011','B06',NULL,'','','2015-01-01','SOFIA GERVAS BAKIWA','020','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M',NULL,NULL,NULL,NULL,'2014-01-09',NULL,47382.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-01',0,'','','ACTIVE',1,3,11,14,4924),
+ (18259,'B0603011','B06',NULL,'','','2015-04-01','KHALID IDD SALUMU','030','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-10-27',NULL,'2015-10-27',430,'2014-01-09',NULL,264433,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4925);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18260,'B0603111','B06',NULL,'','','2002-01-01','IDD RISASI','031','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2015-09-27',NULL,'2015-09-27',999,'2014-01-09',NULL,36374.4,0,0,0,0,'0.00',1,0,0,NULL,32000,'','0','0','0','0','0','0','2002-01-01',0,'','','ACTIVE',1,2,11,14,4926),
+ (18261,'B0603811','B06',NULL,'','','2014-08-07','TWAHA GOBEKA','038','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',521,'2014-01-09',NULL,39185,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-07',0,'','','ACTIVE',1,3,11,14,4927);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18262,'B0604611','B06',NULL,'','','2015-03-16','FATUMA ASAJILE (BABY COME)','046','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',240,'2014-01-09',NULL,45698.1,0,0,0,0,'0.00',1,0,0,NULL,46000,'','0','0','0','0','0','0','2015-03-16',0,'','','ACTIVE',1,3,11,14,4928),
+ (18263,'B0604911','B06',NULL,'','','2012-08-10','SELESTINO RUBWILIZA','049','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','707','D',0.75,'T','F','M','2012-11-27',NULL,'2012-11-27',139,'2014-01-09',NULL,169007,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-08-10',0,'','','ACTIVE',1,3,11,14,4929);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18264,'B0605111','B06',NULL,'','','2015-09-01','YASIN MGUBA AHAMAD (CAR WASH - LUBENGERA)','051','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',272,'2014-01-09',NULL,51507.8,0,0,0,0,'0.00',1,0,0,NULL,47500,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4930),
+ (18265,'B0605411','B06',NULL,'','','2015-07-31',' RICHARD Y. RASHID','054','Lubengera, SHEDE, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',90,'2014-01-09',NULL,0.87274,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-31',0,'','','ACTIVE',1,3,11,14,4931);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18266,'B0605811','B06',NULL,'','','2014-11-07','BULL S. SELEMANI','058','Lubengera, MWANGA ROAD, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',43,'2014-01-09',NULL,93133.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-11-07',0,'','','ACTIVE',1,3,11,14,4932),
+ (18267,'B0606111','B06',NULL,'','','2010-12-01','JEREMIAH MTEWA LUSIMIKO','061','Lubengera, SHEDE, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',89,'2014-01-09',NULL,206599,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2010-12-01',0,'','','ACTIVE',1,3,11,14,4933);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18268,'B0606511','B06',NULL,'','','2015-01-01','PASCHAL CHAMPANDA','065','Lubengera, SHEDE, Kigoma','KIGOMA UJIJI','-','D',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',935,'2014-01-09',NULL,146741,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-01',0,'','','ACTIVE',1,2,11,14,4934),
+ (18269,'B0606611','B06',NULL,'','','2015-07-01','EVODIA ANDREW LUKEKA','066','Lubengera, SHEDE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',214,'2014-01-09',NULL,245475,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-01',0,'','','ACTIVE',1,3,11,14,4935);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18270,'B0607211','B06',NULL,'','','2011-10-01','SHERTIEL SHEMAYA (G. HOUSE)','072','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3361,'2014-01-09',NULL,107066,0,0,0,0,'0.00',1,0,0,NULL,110000,'','0','0','0','0','0','0','2011-10-01',0,'','','ACTIVE',1,3,11,14,4936),
+ (18271,'B0607711','B06',NULL,'','','2014-07-27','ZENA YAHAYA BAKARI','077','Lubengera, BANGWE-MJI MPYA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-07-30',NULL,'2015-07-30',211,'2014-01-09',NULL,59040,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,4938);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18272,'B0607811','B06',NULL,'','','2012-09-05','ZAWADI HAMISI KAPWACHA','078','Lubengera, SANGANIGWA, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2013-02-27',NULL,'2013-02-27',133,'2014-01-09',NULL,180954,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-05',0,'','','ACTIVE',1,3,11,14,4939),
+ (18273,'B0608211','B06',NULL,'','','2014-07-11','YOWEL W. LUZINA','082','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-01-27',NULL,'2016-01-27',NULL,'2014-01-09',NULL,333763,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4940);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18274,'B0608611','B06',NULL,'','','2016-01-01','NCHABILONDA CAFÉ','086','Lubengera, KIGOMA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1379,'2014-01-09',NULL,56132.7,0,0,0,0,'0.00',1,0,0,NULL,57000,'','0','0','0','0','0','0','2016-01-01',0,'','','ACTIVE',1,3,11,14,4942),
+ (18275,'B0608811','B06',NULL,'','','2010-12-01','AMISA SALEHE RASHID','088','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2014-10-27',NULL,'2014-10-27',311,'2014-01-09',NULL,120678,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2010-12-01',0,'','','ACTIVE',1,1,11,14,4943);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18276,'B0608911','B06',NULL,'','','2015-09-01','SAMWELI KIBABI','089','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-10-27',NULL,'2015-10-27',37,'2014-01-09',NULL,263539,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4944),
+ (18277,'B0609011','B06',NULL,'','','2014-09-22','JAPHET KABURA','090','Lubengera, BANGWE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',403,'2014-01-09',NULL,53508.5,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,4945);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18278,'B0609111','B06',NULL,'','','2014-08-11','KENGWA ABDALLAH','091','Lubengera, RUTEKO , Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',385,'2014-01-09',NULL,19512.5,0,0,0,0,'0.00',1,0,0,NULL,19500,'','0','0','0','0','0','0','2014-08-11',0,'','','ACTIVE',1,3,11,14,4946),
+ (18279,'B0609311','B06',NULL,'','','2014-07-11','TIRAS JAPHET MGUTA','093','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',359,'2014-01-09',NULL,19587.5,0,0,0,0,'0.00',1,0,0,NULL,35500,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4947);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18280,'B0609611','B06',NULL,'','','2010-01-01','CRDB BANK','096','Lubengera, LUMUMBA, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',1999,'2014-01-09',NULL,56612.8,0,0,0,0,'0.00',1,0,0,NULL,56612,'','0','0','0','0','0','0','2010-01-01',0,'','','ACTIVE',1,1,11,14,4948),
+ (18281,'B0609811','B06',NULL,'','','1998-07-11','NASHON M. NDAHEZE','098','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',63,'2014-01-09',NULL,64.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','1998-07-11',0,'','','ACTIVE',1,3,11,14,4949);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18282,'B0609911','B06',NULL,'','','2010-12-01','GEOFREY J. KARUMBA','099','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1691,'2014-01-09',NULL,41027,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2010-12-01',0,'','','ACTIVE',1,3,11,14,4950),
+ (18283,'B0610011','B06',NULL,'','','2014-07-10','RAJABU R. KISAMA','100','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',731,'2014-01-09',NULL,18329.4,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4951);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18284,'B0610111','B06',NULL,'','','2014-07-11','KEVIN BONIPHACE','101','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',345,'2014-01-09',NULL,19838,0,0,0,0,'0.00',1,0,0,NULL,39518,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4952),
+ (18285,'B0610311','B06',NULL,'','','2015-09-01','ELIZABETH KABAHILIZA','103','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',48,'2014-01-09',NULL,273432,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-09-01',0,'','','ACTIVE',1,3,11,14,4953);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18286,'B0610411','B06',NULL,'','','2010-01-01','NEW MODERN RESTAURANT','104','Lubengera, LUMUMBA, Kigoma','KIGOMA UJIJI','-','D',0.25,'T','F','M','2013-02-27',NULL,'2013-02-27',1413,'2014-01-09',NULL,293701,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2010-01-01',0,'','','ACTIVE',1,1,11,14,4954),
+ (18287,'B0610511','B06',NULL,'','','2011-09-05','NEW SEZERO RESTAURANT','105','Lubengera, KIGOMA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1146,'2014-01-09',NULL,21002.2,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0','2011-09-05',0,'','','ACTIVE',1,3,11,14,4955);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18288,'B0610711','B06',NULL,'','','2014-09-17','VODACOM TANZANIA','107','Lubengera, LUMUMBA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',184,'2014-01-09',NULL,-24389.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-17',0,'','','ACTIVE',1,3,11,14,4956),
+ (18289,'B0610811','B06',NULL,'','','2014-07-21','SABINA GEORGE NSANA','108','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',NULL,'2014-01-09',NULL,67333.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-21',0,'','','ACTIVE',1,3,11,14,4957);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18290,'B0612511','B06',NULL,'','','2011-09-27','EVERINE S. HEGUYE','125','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2109,'2014-01-09',NULL,35896.6,0,0,0,0,'0.00',1,0,0,NULL,36000,'','0','0','0','0','0','0','2011-09-27',0,'','','ACTIVE',1,3,11,14,4958),
+ (18291,'B0612611','B06',NULL,'','','2011-02-01','KILUMBE S. NG\'ENDA (GOMBE G. HOUSE)','126','Lubengera, MWANGA ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',2908,'2014-01-09',NULL,74308.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-02-01',0,'','','ACTIVE',1,2,11,14,4959);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18292,'B0612811','B06',NULL,'','','2015-07-31','XAVERY R. MARKO','128','Lubengera, SHEDE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',120,'2014-01-09',NULL,51902.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-31',0,'','','ACTIVE',1,3,11,14,4960),
+ (18293,'B0612911','B06',NULL,'','','2015-07-16','JOHN EDWARD MASANJA','129','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',438,'2014-01-09',NULL,19083.5,0,0,0,0,'0.00',1,0,0,NULL,19000,'','0','0','0','0','0','0','2015-07-16',0,'','','ACTIVE',1,3,11,14,4961);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18294,'B0613011','B06',NULL,'','','2014-07-11','ABDULRAHMAN KANGE','130','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',88,'2014-01-09',NULL,78720,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4962),
+ (18295,'B0613411','B06',NULL,'','','2015-06-01','SHUKURU ATHUMANI LUNYAMI','134','Lubengera, LUMUMBA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',41,'2014-01-09',NULL,59062.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-06-01',0,'','','ACTIVE',1,3,11,14,4963);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18296,'B0613511','B06',NULL,'','','2015-06-01','PILI KAHURANANGA','135','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',149,'2014-01-09',NULL,23487.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-06-01',0,'','','ACTIVE',1,3,11,14,4964),
+ (18297,'B0613911','B06',NULL,'','','2015-07-01','SUMATRA - KIGOMA','139','Lubengera, BOMA AREA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-01-27',NULL,'2016-01-27',84,'2014-01-09',NULL,41177.6,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2015-07-01',0,'','','ACTIVE',1,3,11,14,4965);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18298,'B0614011','B06',NULL,'','','2015-04-01','BAHARI R. BAHARI','140','Lubengera, MWANGA ROAD, -','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',125,'2014-01-09',NULL,7692.11,0,0,0,0,'0.00',1,0,0,NULL,8000,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4966),
+ (18299,'B0614411','B06',NULL,'','','2014-07-11','ASHA ALI MUSSA','144','Lubengera, LUBENGERA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',537,'2014-01-09',NULL,85712.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4967);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18300,'B0614611','B06',NULL,'','','2011-02-10','ASAJILE MWAKALAMBILE','146','KIGOMA, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','-','L',1,'T','F','M','2016-02-01',NULL,'2016-02-01',441,'2014-01-09',NULL,38225.6,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2011-02-10',0,'','','ACTIVE',1,4,11,14,4968),
+ (18301,'B0614711','B06',NULL,'','','2014-07-27','ALLY HAMISI MZIRA','147','KATONGA, KATONGA, Kigoma','KIGOMA UJIJI','79','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',514,'2014-01-09',NULL,19029.4,0,0,0,0,'0.00',1,0,0,NULL,19000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,4969);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18302,'B0614811','B06',NULL,'','','2011-09-22','AMIN S. PREMJI','148','Lubengera, LUMUMBA ROAD, Kigoma','KIGOMA UJIJI','9','D',0.75,'T','F','M','2012-03-25',NULL,'2012-03-25',193,'2014-01-09',NULL,305820,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,4970),
+ (18303,'B0615011','B06',NULL,'','','2015-07-01','JUMA HASSAN SELEMANI','150','KIGOMA, KATONGA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',139,'2014-01-09',NULL,102088,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-01',0,'','','ACTIVE',1,3,11,14,4971);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18304,'B0615111','B06',NULL,'','','2014-07-09','ROBERT NUMVILE','151','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',323,'2014-01-09',NULL,140196,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-09',0,'','','ACTIVE',1,3,11,14,4972),
+ (18305,'B0660611','B06',NULL,'','','2011-09-28','ZANZIBAR HILL HOTEL(CHIMPANZEE)','606','KGM, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'L',0.75,'T','F','M','2014-09-27',NULL,'2014-09-27',2879,'2014-01-09',NULL,-31805.6,0,0,0,0,'0.00',1,0,0,NULL,12000,'','0','0','0','0','0','0','2011-09-28',0,'','','ACTIVE',1,3,11,14,4983);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18306,'B0660811','B06',NULL,'','','2015-04-01','JOYCE MDAI SENKUKU','608','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2015-04-29',NULL,'2015-04-29',20,'2014-01-09',NULL,163238,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,4984),
+ (18307,'B0660911','B06',NULL,'','','2011-10-09','SAFARI LODGE NO 2 BAR','609','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1745,'2014-01-09',NULL,51008.5,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2011-10-09',0,'','','ACTIVE',1,3,11,14,4985);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18308,'B0661011','B06',NULL,'','','2011-12-31','VENERANDA CHOCHA','610','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1168,'2014-01-09',NULL,5899.13,0,0,0,0,'0.00',1,0,0,NULL,5000,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,4986),
+ (18309,'B0661311','B06',NULL,'','','2014-07-11','SIGFRID J. KIWALE','613','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',208,'2014-01-09',NULL,28012.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,4987);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18310,'B0661411','B06',NULL,'','','2014-07-09','AMINA KANYOGOTO BIHOGA','614','MJIMWEMA, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',525,'2014-01-09',NULL,61562.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-09',0,'','','ACTIVE',1,3,11,14,4988),
+ (18311,'B0661611','B06',NULL,'','','2014-07-10','RABAN PATRICK KEREBUKA','616','LUBENGELA, LUBENGELA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',167,'2014-01-09',NULL,19411.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4989);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18312,'B0661711','B06',NULL,'','','2014-07-10','MWL. JUMA MSABAHA','617','LUBENGERA, LUBENGERA, Kigoma','KIGOMA UJIJI','547','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',85,'2014-01-09',NULL,58840,0,0,0,0,'0.00',1,0,0,NULL,59040,'','0','0','0','0','0','0','2014-07-10',0,'','','ACTIVE',1,3,11,14,4990),
+ (18313,'B0700211','B07',NULL,'','','2011-09-05','DENIS ENOS','002','Kibirizi Road, KIBIRIZI ROAD, KIGOMA','KIGOMA UJIJI','197','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',698,'2014-01-09',NULL,10731.9,0,0,0,0,'0.00',1,0,0,NULL,10700,'','0','0','0','0','0','0','2011-09-05',0,'','','ACTIVE',1,3,11,14,4992);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18314,'B0700311','B07',NULL,'','',NULL,'YOTHAM R. BIRIKA','003','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','383','L',0.25,'T','F','M',NULL,NULL,NULL,NULL,'2014-01-09',NULL,20139.5,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,4993),
+ (18315,'B0700811','B07',NULL,'','',NULL,'G. L. NSHEKELA','008','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2013-01-27',NULL,'2013-01-27',150,'2014-01-09',NULL,171551,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,4994);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18316,'B0700911','B07',NULL,'','','2000-01-01','ENGEN PERTOLIUM','009','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2464,'2014-01-09',NULL,51181.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2000-01-01',0,'','','ACTIVE',1,1,11,14,4995),
+ (18317,'B0701211','B07',NULL,'','','2012-09-20','GUNGU DISPENSARY','012','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','44','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3805,'2014-01-09',NULL,84180,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-20',0,'','','ACTIVE',1,3,11,14,4996);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18318,'B0701411','B07',NULL,'','','2014-12-03','AFISA MFAWIDHI UVUVI (DORIA)','014','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-01-27',NULL,'2016-01-27',1172,'2014-01-09',NULL,42090,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-12-03',0,'','','ACTIVE',1,3,11,14,4997),
+ (18319,'B0701611','B07',NULL,'','','2016-01-05','EQBAL ALBHAL(BERA)','016','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',10,'2014-01-09',NULL,45730.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2016-01-05',0,'','','ACTIVE',1,3,11,14,4998);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18320,'B0701711','B07',NULL,'','','2012-03-31','THOMAS Z. TUTU (MASHINE YA KUSAGA)','017','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2030,'2014-01-09',NULL,31152.3,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-03-31',0,'','','ACTIVE',1,3,11,14,4999),
+ (18321,'B0701811','B07',NULL,'','',NULL,'OIL COM (T) LTD','018','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-10-27',NULL,'2015-10-27',130006,'2014-01-09',NULL,16686.7,0,0,0,0,'0.00',1,0,0,NULL,17000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5000);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18322,'B0701911','B07',NULL,'','','2011-11-29','LADHU JAFFER (CHEMI COTEX INDURSTY)','019','Kibirizi Road, GUNGU RD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2144,'2014-01-09',NULL,85752.4,0,0,0,0,'0.00',1,0,0,NULL,86000,'','0','0','0','0','0','0','2011-11-29',0,'','','ACTIVE',1,3,11,14,5001),
+ (18323,'B0702011','B07',NULL,'','',NULL,'ASHA WAZIRI    JUMA','020','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-02-26',NULL,'2015-02-26',1012,'2014-01-09',NULL,82552.9,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5002);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18324,'B0702211','B07',NULL,'','',NULL,'B. L. NDIKA','022','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',1443,'2014-01-09',NULL,24376.2,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5003),
+ (18325,'B0702311','B07',NULL,'','',NULL,'MR. JOHN KALUPALE','023','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,50697.9,0,0,0,0,'0.00',1,0,0,NULL,70878,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5004);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18326,'B0702411','B07',NULL,'','','2011-09-22','REV. NATHAN P. RASMISSEN','024','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','349','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1149,'2014-01-09',NULL,13386.1,0,0,0,0,'0.00',1,0,0,NULL,13400,'','0','0','0','0','0','0','2011-09-22',0,'','','ACTIVE',1,3,11,14,5005),
+ (18327,'B0702611','B07',NULL,'','','2011-09-06','SHABANI BIMALA (REV. NATHAN P. RASMISSEN)','026','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','349','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',785,'2014-01-09',NULL,10486.8,0,0,0,0,'0.00',1,0,0,NULL,10487,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,5006);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18328,'B0702811','B07',NULL,'','','2011-09-06','TATU J. EGERRUP','028','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-10-27',NULL,'2015-10-27',1684,'2014-01-09',NULL,13492.4,0,0,0,0,'0.00',1,0,0,NULL,28491.7,'','0','0','0','0','0','0','2011-09-06',0,'','','ACTIVE',1,3,11,14,5007),
+ (18329,'B0703111','B07',NULL,'','','2011-08-25','TOTAL DEPOT','031','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','1202','D',1,'T','F','M','2012-12-27',NULL,'2012-12-27',3905,'2014-01-09',NULL,281329,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-08-25',0,'','','ACTIVE',1,4,11,14,5008);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18330,'B0703511','B07',NULL,'','','2011-10-01','SIMON RUKELEWA','035','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','100','L',0.5,'T','F','M','2015-06-27',NULL,'2015-06-27',699,'2014-01-09',NULL,39717.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2011-10-01',0,'','','ACTIVE',1,2,11,14,5009),
+ (18331,'B0703611','B07',NULL,'','',NULL,'AMONI BYEJWE','036','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',563,'2014-01-09',NULL,9216.2,0,0,0,0,'0.00',1,0,0,NULL,9500,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,5010);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18332,'B0703711','B07',NULL,'','','2012-09-17','S,T TERESHA','037','Kibirizi Road, KIBIRIZI ROAD, KGM','KIGOMA UJIJI','71','L',0.5,'T','F','M','2014-01-25',NULL,'2014-01-25',NULL,'2014-01-09',NULL,9273.36,0,0,0,0,'0.00',1,0,0,NULL,9394,'','0','0','0','0','0','0','2012-09-17',0,'','','ACTIVE',1,2,11,14,5011),
+ (18333,'B0703911','B07',NULL,'','','2011-09-03','DIOCESE OF KIGOMA - ST METHEW NZIMANO','039','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',12266,'2014-01-09',NULL,211289,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,5012);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18334,'B0704111','B07',NULL,'','',NULL,'GBP TANZANIA LTD','041','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','80','L',0.25,'T','F','M',NULL,NULL,NULL,0,'2014-01-09',NULL,46230,0,0,0,0,'0.00',1,0,0,NULL,46230,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5013),
+ (18335,'B0704211','B07',NULL,'','','2011-09-03','MARY RAZARO','042','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',3042,'2014-01-09',NULL,143406,0,0,0,0,'0.00',1,0,0,NULL,143500,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,5014);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18336,'B0704511','B07',NULL,'','',NULL,'WORLD OIL (T) LTD','045','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','75175','L',0.25,'T','F','M','2015-12-27',NULL,'2015-12-27',141,'2014-01-09',NULL,97868.6,0,0,0,0,'0.00',1,0,0,NULL,98000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5015),
+ (18337,'B0704911','B07',NULL,'','',NULL,'TRL KIBIRIZI QTRS','049','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2013-11-27',NULL,'2013-11-27',4257,'2014-01-09',NULL,1576670,0,0,0,0,'0.00',1,0,0,NULL,295826,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5016);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18338,'B0705211','B07',NULL,'','','2012-09-19','SAYUNI MBOGOZI','052','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','192','L',0.5,'T','F','M','2014-03-25',NULL,'2014-03-25',237,'2014-01-09',NULL,104744,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2012-09-19',0,'','','ACTIVE',1,2,11,14,5017),
+ (18339,'B0706311','B07',NULL,'','','2011-09-03','BARAKA M. RUBHUNDI','063','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',532,'2014-01-09',NULL,93515.7,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,5018);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18340,'B0706411','B07',NULL,'','','2011-09-03','MARY MAVANZA','064','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1289,'2014-01-09',NULL,45745.8,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-09-03',0,'','','ACTIVE',1,3,11,14,5019),
+ (18341,'B0706611','B07',NULL,'','','2011-09-05','ILAMPA ENOCK (NO. I).','066','KIGOMA, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','681','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1624,'2014-01-09',NULL,50784.7,0,0,0,0,'0.00',1,0,0,NULL,51000,'','0','0','0','0','0','0','2011-09-05',0,'','','ACTIVE',1,3,11,14,5020);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18342,'B0706811','B07',NULL,'','','2012-09-17','JUMANNE NGOFA','068','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',1050,'2014-01-09',NULL,14003.1,0,0,0,0,'0.00',1,0,0,NULL,14000,'','0','0','0','0','0','0','2012-09-17',0,'','','ACTIVE',1,2,11,14,5021),
+ (18343,'B0707011','B07',NULL,'','','2012-09-17','VIMLA PASSIAN SHABANI','070','Kibirizi Road, KIBIRIZI ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',630,'2014-01-09',NULL,413477,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-17',0,'','','ACTIVE',1,3,11,14,5022);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18344,'B1000311','B10',NULL,'','','2014-09-22','FORTUNATUS FINTANI','003','Kibirizi, KIBIRIZI AREA, KIGOMA','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',994,'2014-01-09',NULL,-44014.3,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,5024),
+ (18345,'B1000411','B10',NULL,'','','2012-09-18','AHAMED DOSSA','004','Kibirizi, KIBIRIZI AREA, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',971,'2014-01-09',NULL,5457.46,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-18',0,'','','ACTIVE',1,2,11,14,5025);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18346,'B1000711','B10',NULL,'','','2014-07-24','BENEMARIA SISTERS','007','KIGOMA, KIBIRIZI  ROAD, Kigoma','KIGOMA UJIJI','71','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',240,'2014-01-09',NULL,65511.9,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2014-07-24',0,'','','ACTIVE',1,3,11,14,5026),
+ (18347,'B1001011','B10',NULL,'','','2012-09-18','FREDIE PHILIMON','010','Kibirizi, KIBIRIZI, KIGOMA','KIGOMA UJIJI','16','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',854,'2014-01-09',NULL,55828.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-18',0,'','','ACTIVE',1,2,11,14,5027);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18348,'B1001611','B10',NULL,'','','2015-11-27','SOLOMON STEPHAN MUHAMILA','016','Kibirizi, KIBIRIZI, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',48,'2014-01-09',NULL,189127,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-11-27',0,'','','ACTIVE',1,3,11,14,5028),
+ (18349,'B1002411','B10',NULL,'','','2012-09-03','ANATORIA FULGENCE','024','Kibirizi, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2013-11-27',NULL,'2013-11-27',324,'2014-01-09',NULL,130656,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-03',0,'','','ACTIVE',1,3,11,14,5030);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18350,'B1002911','B10',NULL,'','','2016-01-05','FUEL MASTER KIBILIZI PETROL STATITION(BERA)','029','Kibirizi, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',16,'2014-01-09',NULL,45730.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2016-01-05',0,'','','ACTIVE',1,3,11,14,5031),
+ (18351,'B1003111','B10',NULL,'','','2012-09-17','SALU  STIPHINE BUNDALA','031','Kibirizi, KIBIRIZI, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',374,'2014-01-09',NULL,93589.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-17',0,'','','ACTIVE',1,3,11,14,5032);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18352,'B1003811','B10',NULL,'','','2014-11-18','REVOCATUS LUTERA','038','KIGOMA, KIBIBIRI, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',187,'2014-01-09',NULL,54980,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-11-18',0,'','','ACTIVE',1,3,11,14,5033),
+ (18353,'B1215511','B12',NULL,'','','2011-09-05','ILAMPA ENOCK (NO. II)','155','KIGOMA, KIBIRIZI  ROAD, Kigoma','KIGOMA UJIJI','681','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1986,'2014-01-09',NULL,67972.5,0,0,0,0,'0.00',1,0,0,NULL,65000,'','0','0','0','0','0','0','2011-09-05',0,'','','ACTIVE',1,3,11,14,5035);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18354,'B1215611','B12',NULL,'','','2014-04-19','ANDREW MTEI - (CAR-SHOW ROOM)','156','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI','622','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',851,'2014-01-09',NULL,52128.4,0,0,0,0,'0.00',1,0,0,NULL,52128,'','0','0','0','0','0','0','2014-04-19',0,'','','ACTIVE',1,3,11,14,5036),
+ (18355,'B1215811','B12',NULL,'','','2014-07-27','COSTANSIA MAGANGA MASOLWA','158','KIGOMA, KATONGA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-03-03',NULL,'2015-03-03',128,'2014-01-09',NULL,131612,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5038);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18356,'B1216111','B12',NULL,'','','2012-09-12','JUMA S. MASSOLA','161','Kigoma Centre, KIGOMA, Kigoma','KIGOMA UJIJI','-','L',0.5,'T','F','M','2016-02-01',NULL,'2016-02-01',702,'2014-01-09',NULL,35263,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,2,11,14,5039),
+ (18357,'B1216311','B12',NULL,'','','2011-12-31','SELEMAN MALIK SALUM','163','Kibirizi Road, KIBIRIZI, Kigoma','KIGOMA UJIJI',NULL,'L',0.75,'T','F','M','2015-10-27',NULL,'2015-10-27',934,'2014-01-09',NULL,53573.4,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,5040);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18358,'B1217011','B12',NULL,'','','2014-11-27','CHEMI BUTA MARCEL','170','Kigoma Centre, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',288,'2014-01-09',NULL,19412.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-11-27',0,'','','ACTIVE',1,3,11,14,5041),
+ (18359,'B1217211','B12',NULL,'','','2011-05-01','ISAYA CHARLES VYANGA - CAR WASH MAKABURINI','172','KIGOMA, LUBENGERA, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2011-06-28',NULL,'2011-06-28',243,'2014-01-09',NULL,195358,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-05-01',0,'','','ACTIVE',1,3,11,14,5042);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18360,'B1217311','B12',NULL,'','','2014-07-11','S.D.A.MASALIO','173','Lubengera, LUBENGERA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',148,'2014-01-09',NULL,20410.1,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,5043),
+ (18361,'B1217411','B12',NULL,'','','2012-09-12','LADISLAUS KIBABI','174','Bangwe, KAMARA, Kigoma','KIGOMA UJIJI',NULL,'D',0.5,'T','F','M','2012-10-29',NULL,'2012-10-29',64,'2014-01-09',NULL,149331,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-09-12',0,'','','ACTIVE',1,2,11,14,5044);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18362,'B1217811','B12',NULL,'','','2014-07-11','JOSEPHAT LAURENT GAWA','178','Lubengera, MJIMWEMA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',294,'2014-01-09',NULL,22029.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,5045),
+ (18363,'B1300211','B13',NULL,'','','2012-10-20','NEIGHBOURS WITHOUT  BOARDERS(NWB)','002','Katonga, KIBIRIZI, KGM','KIGOMA UJIJI','-','L',0.5,'T','F','M','2014-11-25',NULL,'2014-11-25',656,'2014-01-09',NULL,18881.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2012-10-20',0,'','','ACTIVE',1,2,11,14,5049);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18364,'B1300511','B13',NULL,'','','2014-07-27','MUSSA HUSSEIN','005','Katonga, BUTEKO, Kigoma','KIGOMA UJIJI','79','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',371,'2014-01-09',NULL,21796.9,0,0,0,0,'0.00',1,0,0,NULL,13000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5050),
+ (18365,'B1300711','B13',NULL,'','','2014-07-27','EMMANUEL DAMIANO','007','Katonga, KATONGA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',220,'2014-01-09',NULL,39922,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5051);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18366,'B1301511','B13',NULL,'','','2014-07-27','QIBLATEIN MOSQUE','015','KIGOMA, KATONGA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',377,'2014-01-09',NULL,146923,0,0,0,0,'0.00',1,0,0,NULL,53200,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5052),
+ (18367,'B1301911','B13',NULL,'','','2013-07-27','SANGO MRISHO','019','Katonga, KATONGA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2014-09-27',NULL,'2014-09-27',23,'2014-01-09',NULL,19631,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2013-07-27',0,'','','ACTIVE',1,3,11,14,5053);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18368,'B1302711','B13',NULL,'','','2015-02-01','KITWE SEC SCHOOL','027','KATONGA, KATONGA, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2015-11-27',NULL,'2015-11-27',29,'2014-01-09',NULL,411770,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-02-01',0,'','','ACTIVE',1,3,11,14,5054),
+ (18369,'B1302811','B13',NULL,'','','2014-07-27','KAPIKI JUMA RAMADHAN','028','KIGOMA - BANGWE, KATONGA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',475,'2014-01-09',NULL,19011.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5055);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18370,'B1600911','B16',NULL,'','','2014-07-27','MSIKITI WA IJUMAA BOTEKO','009','Kamara, KAMARA, Kigoma','KIGOMA UJIJI','79','A',0.75,'T','F','U','2015-12-27',NULL,'2015-12-27',363,'2014-01-09',NULL,111278,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5056),
+ (18371,'B1601111','B16',NULL,'','','2014-07-27','MPAJI MIREMBE','011','Kamara, KAMARA, KGM','KIGOMA UJIJI','-','A',0.75,'T','F','U','2014-12-25',NULL,'2014-12-25',63,'2014-01-09',NULL,39082.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5057);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18372,'B1601311','B16',NULL,'','','2015-04-01','CHARLES RWEYEMAMU','013','Kamara, KAMARA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',51,'2014-01-09',NULL,39602.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,5058),
+ (18373,'B1601811','B16',NULL,'','','2012-05-01','GEOFREY MTAKUBWA (KAMPALA INN G.HOUSE)','018','Kamara, KAMARA - KATONGA, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',571,'2014-01-09',NULL,163202,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2012-05-01',0,'','','ACTIVE',1,3,11,14,5059);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18374,'B1603511','B16',NULL,'','','2014-07-27','JALALA HAMIMU BADYANA','035','Kamara, KAMARA \"A\", Kigoma','KIGOMA UJIJI','759','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',490,'2014-01-09',NULL,19479.4,0,0,0,0,'0.00',1,0,0,NULL,19500,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5060),
+ (18375,'B1603811','B16',NULL,'','','2011-05-26','LADSLAUS KIBABI','038','KAMARA, KAMARA, Kigoma','KIGOMA UJIJI',NULL,'D',0.75,'T','F','M',NULL,NULL,NULL,NULL,'2014-01-09',NULL,221892,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-05-26',0,'','','ACTIVE',1,3,11,14,5061);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18376,'B1604911','B16',NULL,'','','2015-07-13','NGASA HAMISI','049','KAMARA, KAMARA BANGWE, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',58,'2014-01-09',NULL,78026,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-13',0,'','','ACTIVE',1,3,11,14,5062),
+ (18377,'B1605011','B16',NULL,'','','2014-10-23','EDIPHONCE.S. ENOCK','050','KAMARA, KAMARA BANGWE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',278,'2014-01-09',NULL,58080,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-10-23',0,'','','ACTIVE',1,3,11,14,5063);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18378,'B1605111','B16',NULL,'','','2015-11-01','BASHIR YASIN','051','KAMARA, KAMARA BANGWE, Kigoma','KIGOMA UJIJI',NULL,'A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',4,'2014-01-09',NULL,68400,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-11-01',0,'','','ACTIVE',1,3,11,14,5064),
+ (18379,'B1605611','B16',NULL,'','','2015-07-01','HAMISI S. BETESE','056','KAMARA, KAMARA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',121,'2014-01-09',NULL,59040,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2015-07-01',0,'','','ACTIVE',1,3,11,14,5065);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18380,'B1605811','B16',NULL,'','','2014-09-22','MASJID ALLY','058','KIGOMA, KAMARA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',113,'2014-01-09',NULL,0,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,5066),
+ (18381,'B1900111','B19',NULL,'','','2014-08-22','MATILDA MZINDAKAYA','001','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','125','D',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',437,'2014-01-09',NULL,73511.7,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-22',0,'','','ACTIVE',1,3,11,14,5067);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18382,'B1900311','B19',NULL,'','','2015-01-01','AHADI S. KATIGIRI','003','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','710','L',0.75,'T','F','M','2015-12-27',NULL,'2015-12-27',56,'2014-01-09',NULL,113607,0,0,0,0,'0.00',1,0,0,NULL,114000,'','0','0','0','0','0','0','2015-01-01',0,'','','ACTIVE',1,3,11,14,5068),
+ (18383,'B1901411','B19',NULL,'','','2011-01-01','BROTHER\'S OF CHARTITY','014','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','612','D',0.25,'T','F','M','2014-07-27',NULL,'2014-07-27',5135,'2014-01-09',NULL,370457,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-01-01',0,'','','ACTIVE',1,1,11,14,5069);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18384,'B1901611','B19',NULL,'','','2014-09-22','JAMES M. DONGWE','016','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',522,'2014-01-09',NULL,19540,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,5070),
+ (18385,'B1901811','B19',NULL,'','','2015-03-01','PAUL J. MAHAMBA (OMEGA GUEST HOUSE)','018','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1080,'2014-01-09',NULL,23815.8,0,0,0,0,'0.00',1,0,0,NULL,21000,'','0','0','0','0','0','0','2015-03-01',0,'','','ACTIVE',1,3,11,14,5071);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18386,'B1901812','B19',NULL,'','','2015-03-01','PAUL J. MAHAMBA','018','MJIMWEMA, BANGWE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',1080,'2014-01-09',NULL,18160,0,0,0,0,'0.00',1,0,0,NULL,37840,'','0','0','0','0','0','0','2015-03-01',0,'','','ACTIVE',1,3,11,14,5071),
+ (18387,'B1902111','B19',NULL,'','','2014-09-22','JIMBO LA KIGOMA','021','Bangwe, BANGWE AREA, Kigoma','KIGOMA UJIJI','71','A',0.75,'T','F','U','2015-12-27',NULL,'2015-12-27',359,'2014-01-09',NULL,19660,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,5072);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18388,'B1902411','B19',NULL,'','','2015-04-01','BIZE H. AMANI (JONAS CASIANO)','024','Bangwe, BANGWE AREA, KIGOMA','KIGOMA UJIJI','79','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',281,'2014-01-09',NULL,57646,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2015-04-01',0,'','','ACTIVE',1,3,11,14,5073),
+ (18389,'B1902611','B19',NULL,'','','2014-08-12','HILALI KAYANDA','026','KATONGA, KATONGA, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',253,'2014-01-09',NULL,112802,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-08-12',0,'','','ACTIVE',1,3,11,14,5074);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18390,'B1903411','B19',NULL,'','','2011-10-18','YUSUFU J. MAZANA','034','Bangwe, BANGWE , Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2483,'2014-01-09',NULL,8635.98,0,0,0,0,'0.00',1,0,0,NULL,10000,'','0','0','0','0','0','0','2011-10-18',0,'','','ACTIVE',1,3,11,14,5075),
+ (18391,'B1904111','B19',NULL,'','',NULL,'MORDEN HOTEL (SANDRA)','041','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','332','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',4774,'2014-01-09',NULL,47477,0,0,0,0,'0.00',1,0,0,NULL,47000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5076);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18392,'B1904211','B19',NULL,'','',NULL,'DOMINICK KWEKA','042','KIGOMA, BANGWE ROAD, Kigoma','KIGOMA UJIJI','1365','L',0.25,'T','F','M','2015-11-27',NULL,'2015-11-27',3383,'2014-01-09',NULL,-1878.56,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5078),
+ (18393,'B1904311','B19',NULL,'','',NULL,'AHMED MWILIMA','043','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','59','L',0.25,'T','F','M','2015-11-27',NULL,'2015-11-27',1583,'2014-01-09',NULL,31743.2,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5079);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18394,'B1904511','B19',NULL,'','',NULL,'A. KAGURUMJULI','045','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2015-11-27',NULL,'2015-11-27',1976,'2014-01-09',NULL,248242,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5080),
+ (18395,'B1904611','B19',NULL,'','','2014-09-27','KILIMO NA MIFUGO','046','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2015-06-27',NULL,'2015-06-27',612,'2014-01-09',NULL,294630,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2014-09-27',0,'','','ACTIVE',1,3,11,14,5081);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18396,'B1904711','B19',NULL,'','',NULL,'BANGWE PRISON','047','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','50','L',0.25,'T','F','M','2012-09-28',NULL,'2012-09-28',3990,'2014-01-09',NULL,16079000,0,0,0,0,'0.00',1,0,0,NULL,2000000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5082),
+ (18397,'B1904811','B19',NULL,'','',NULL,'KIGOMA S SCHOOL','048','Bangwe, BANGWE ROAD, KGM','KIGOMA UJIJI','51','D',0.25,'T','F','M','2011-12-23',NULL,'2011-12-23',42562,'2014-01-09',NULL,7688980,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5083);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18398,'B1904911','B19',NULL,'','','2015-03-18','BANGWE LINE POLICE','049','Bangwe, BANGWE ROAD, KGM','KIGOMA UJIJI','70','L',2,'T','F','M','2015-10-27',NULL,'2015-10-27',220790,'2014-01-09',NULL,13063900,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-03-18',0,'','','ACTIVE',1,8,11,14,5084),
+ (18399,'B1905511','B19',NULL,'','',NULL,'TANESCO PUMP HOUSE','055','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','78','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',43203,'2014-01-09',NULL,270774,0,0,0,0,'0.00',1,0,0,NULL,88056.7,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5085);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18400,'B1906011','B19',NULL,'','','2015-02-01','B. MGONGOLWA','060','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','359','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',279,'2014-01-09',NULL,7701,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-02-01',0,'','','ACTIVE',1,3,11,14,5086),
+ (18401,'B1906111','B19',NULL,'','',NULL,'SIMON R. NGOLE','061','Bangwe, BANGWE ROAD, KGM','KIGOMA UJIJI','179','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2584,'2014-01-09',NULL,71607.8,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5087);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18402,'B1906211','B19',NULL,'','',NULL,'DR. BANGI','062','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','16','D',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',475,'2014-01-09',NULL,71989.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,5088),
+ (18403,'B1906611','B19',NULL,'','','2013-01-01','REGIONAL COMMISSIONER','066','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','125','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',22380,'2014-01-09',NULL,2133450,0,0,0,0,'0.00',1,0,0,NULL,359916,'','0','0','0','0','0','0','2013-01-01',0,'','','ACTIVE',1,3,11,14,5089);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18404,'B1906711','B19',NULL,'','',NULL,'PAULO MJANTA','067','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2011-02-28',NULL,'2011-02-28',0,'2014-01-09',NULL,20797.9,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5090),
+ (18405,'B1906911','B19',NULL,'','','2014-02-01','MESHACK KAJELELO','069','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',235,'2014-01-09',NULL,23341.8,0,0,0,0,'0.00',1,0,0,NULL,22500,'','0','0','0','0','0','0','2014-02-01',0,'','','ACTIVE',1,3,11,14,5091);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18406,'B1907011','B19',NULL,'','','2015-07-17','MBINDUKA CHATA','070','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',334,'2014-01-09',NULL,27422,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-07-17',0,'','','ACTIVE',1,3,11,14,5092),
+ (18407,'B1907111','B19',NULL,'','',NULL,'TAFIRI KIGOMA','071','KIGOMA, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',5181,'2014-01-09',NULL,46230,0,0,0,0,'0.00',1,0,0,NULL,83784.1,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5093);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18408,'B1907511','B19',NULL,'','',NULL,'BUHA COOOP SOCIETY','075','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2011-07-28',NULL,'2011-07-28',NULL,'2014-01-09',NULL,137952,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,5094),
+ (18409,'B1907611','B19',NULL,'','',NULL,'DR. MATHIAS J. NDALITUKE','076','Bangwe, BANGWE ROAD, KGM','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',4595,'2014-01-09',NULL,32519.9,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,5095);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18410,'B1907711','B19',NULL,'','',NULL,'CHUO CHA USHIRIKA (MARRY BONIPHACE)','077','KIGOMA, BANGWE ROAD, Kigoma','KIGOMA UJIJI','70','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2366,'2014-01-09',NULL,42382.9,0,0,0,0,'0.00',1,0,0,NULL,25000,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,3,11,14,5096),
+ (18411,'B1907911','B19',NULL,'','',NULL,'GARRY TRAP','079','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.25,'T','F','M','2016-02-01',NULL,'2016-02-01',2107,'2014-01-09',NULL,5503.76,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5097);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18412,'B1908311','B19',NULL,'','',NULL,'KYANYARI DONATUSI','083','Bangwe, KIBIRIZI  ROAD, KGM','KIGOMA UJIJI','407','L',0.25,'T','F','M','2015-10-27',NULL,'2015-10-27',6054,'2014-01-09',NULL,240321,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0',NULL,0,'','','ACTIVE',1,1,11,14,5098),
+ (18413,'B1908411','B19',NULL,'','','2015-12-01','MHUSINI ABDALLAH','084','Bangwe, BANGWE ROAD, KGM','KIGOMA UJIJI','413','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',4906,'2014-01-09',NULL,14943.5,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-12-01',0,'','','ACTIVE',1,3,11,14,5099);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18414,'B1908711','B19',NULL,'','','2010-12-01','HILL TOP HOTEL','087','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','1160','D',0.75,'T','F','M','2011-11-20',NULL,'2011-11-20',9,'2014-01-09',NULL,1537340,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2010-12-01',0,'','','ACTIVE',1,3,11,14,5100),
+ (18415,'B1909011','B19',NULL,'','','2011-05-23','AQUA PRODUCT (ST. THOMAS MOORE - BROTHER\'S OF CHARITY QTR)','090','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','34','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',2061,'2014-01-09',NULL,43180.6,0,0,0,0,'0.00',1,0,0,NULL,40000,'','0','0','0','0','0','0','2011-05-23',0,'','','ACTIVE',1,3,11,14,5101);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18416,'B1909111','B19',NULL,'','','2011-09-29','EDWARD P. MASENGA','091','KIGOMA, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-11-27',NULL,'2015-11-27',759,'2014-01-09',NULL,2005100,0,0,0,0,'0.00',1,0,0,NULL,80000,'','0','0','0','0','0','0','2011-09-29',0,'','','ACTIVE',1,3,11,14,5102),
+ (18417,'B1909311','B19',NULL,'','','2014-09-22','MOHAMMED IDD KIMOSA','093','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','1196','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',547,'2014-01-09',NULL,60713,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,5103);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18418,'B1909611','B19',NULL,'','','2011-12-31','MARIAM WAZIRI','096','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1416,'2014-01-09',NULL,13381.6,0,0,0,0,'0.00',1,0,0,NULL,13500,'','0','0','0','0','0','0','2011-12-31',0,'','','ACTIVE',1,3,11,14,5104),
+ (18419,'B1909911','B19',NULL,'','','2011-06-28','CHRISTOPHER MUGANYIZI','099','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2015-01-27',NULL,'2015-01-27',161,'2014-01-09',NULL,348055,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2011-06-28',0,'','','ACTIVE',1,3,11,14,5105);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18420,'B1910011','B19',NULL,'','','2014-08-11','CLEOPHACE BUTAHE','100','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','727','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',391,'2014-01-09',NULL,19642,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-08-11',0,'','','ACTIVE',1,3,11,14,5106),
+ (18421,'B1910211','B19',NULL,'','','2014-09-30','ZAHIR HAJRI','102','Bangwe, BANGWE ROAD, KGM','KIGOMA UJIJI','39','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',867,'2014-01-09',NULL,19570.5,0,0,0,0,'0.00',1,0,0,NULL,19600,'','0','0','0','0','0','0','2014-09-30',0,'','','ACTIVE',1,3,11,14,5107);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18422,'B1910311','B19',NULL,'','','2013-08-05','POST OFFICE - GARDEN','103','KIGOMA, KIBIRIZI  ROAD, Kigoma','KIGOMA UJIJI','-','D',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',1330,'2014-01-09',NULL,6138510,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2013-08-05',0,'','','ACTIVE',1,3,11,14,5108),
+ (18423,'B1910511','B19',NULL,'','','2014-08-13','NEZIAH NIMENYA','105','KIGOMA, MWANGA ROAD, Kigoma','KIGOMA UJIJI','700','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',308,'2014-01-09',NULL,33911.9,0,0,0,0,'0.00',1,0,0,NULL,27500,'','0','0','0','0','0','0','2014-08-13',0,'','','ACTIVE',1,3,11,14,5109);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18424,'B1910611','B19',NULL,'','','2012-05-01','AFISA MAGEREZA','106','Bangwe, BANGWE ROAD, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2015-12-27',NULL,'2015-12-27',6780,'2014-01-09',NULL,19178900,0,0,0,0,'0.00',1,0,0,NULL,2000000,'','0','0','0','0','0','0','2012-05-01',0,'','','ACTIVE',1,3,11,14,5110),
+ (18425,'B1910911','B19',NULL,'','','2015-02-01','DAVID WILLIAM (HIGH TECH)','109','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','-','L',0.75,'T','F','M','2016-02-01',NULL,'2016-02-01',718,'2014-01-09',NULL,51213.3,0,0,0,0,'0.00',1,0,0,NULL,50000,'','0','0','0','0','0','0','2015-02-01',0,'','','ACTIVE',1,3,11,14,5111);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18426,'B1911211','B19',NULL,'','','2014-09-22','SHENY ELLISON','112','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',400,'2014-01-09',NULL,18967.5,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,5112),
+ (18427,'B1911311','B19',NULL,'','','2014-07-11','JAMES KASASE','113','Bangwe, BANGWE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',829,'2014-01-09',NULL,18662,0,0,0,0,'0.00',1,0,0,NULL,19000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,5113);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18428,'B1913811','B19',NULL,'','','2014-07-11','SENGA IBRAHIM KIBORE','138','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',869,'2014-01-09',NULL,48712.5,0,0,0,0,'0.00',1,0,0,NULL,30000,'','0','0','0','0','0','0','2014-07-11',0,'','','ACTIVE',1,3,11,14,5114),
+ (18429,'B1914011','B19',NULL,'','','2015-02-01','LUCRASIA KAFUSO','140','Bangwe, BANGWE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',62,'2014-01-09',NULL,20839.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2015-02-01',0,'','','ACTIVE',1,3,11,14,5115);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18430,'B1917511','B19',NULL,'','','2014-07-27','AHMAD OMARY','175','KAMARA, KATONGA, Kigoma','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-10-27',NULL,'2015-10-27',284,'2014-01-09',NULL,103188,0,0,0,0,'0.00',1,0,0,NULL,60000,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5116),
+ (18431,'B1917711','B19',NULL,'','','2014-07-27','WILLIAM MASALU','177','Bangwe, BANGWE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',274,'2014-01-09',NULL,18633.5,0,0,0,0,'0.00',1,0,0,NULL,38314,'','0','0','0','0','0','0','2014-07-27',0,'','','ACTIVE',1,3,11,14,5117);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18432,'B1917811','B19',NULL,'','','2015-07-16','BARUAN KALENGA','178','Bangwe, BANGWE, Kigoma','KIGOMA UJIJI','875','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',62,'2014-01-09',NULL,132803,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-07-16',0,'','','ACTIVE',1,3,11,14,5118),
+ (18433,'B1918111','B19',NULL,'','','2014-09-22','JONAS LUSHINGWA M.','181','Bangwe, BANGWE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2016-02-01',NULL,'2016-02-01',187,'2014-01-09',NULL,19486.4,0,0,0,0,'0.00',1,0,0,NULL,20000,'','0','0','0','0','0','0','2014-09-22',0,'','','ACTIVE',1,3,11,14,5119);
+INSERT INTO `cust_details` (`id`,`can`,`div_code`,`sec_code`,`sec_name`,`met_reader_code`,`conn_date`,`cons_name`,`house_no`,`address`,`city`,`pin_code`,`category_unused`,`pipe_size`,`board_meter`,`sewerage`,`prev_bill_type`,`prev_bill_month`,`prev_avg_kl`,`met_reading_dt`,`prev_reading`,`met_reading_mo`,`met_avg_kl`,`arrears`,`reversal_amt`,`installment`,`other_charges`,`surcharge`,`hrs_surcharge`,`res_units`,`met_cost_installment`,`int_on_arrears`,`last_pymt_dt`,`last_pymt_amt`,`mobile_no`,`cc_flag`,`cp_flag`,`notice_flag`,`dr_flag`,`lat`,`longi`,`meter_fix_date`,`lock_charges`,`id_number`,`email`,`status`,`tariff_category_master_id`,`pipe_size_master_id`,`division_master_id`,`street_master_id`,`meter_details_id`) VALUES 
+ (18434,'B1918611','B19',NULL,'','','2015-01-05','BANGWE MOSQUE','186','Bangwe, BANGWE, -','KIGOMA UJIJI','-','A',0.75,'T','F','U','2015-12-27',NULL,'2015-12-27',47,'2014-01-09',NULL,41577.6,0,0,0,0,'0.00',1,0,0,NULL,0,'','0','0','0','0','0','0','2015-01-05',0,'','','ACTIVE',1,3,11,14,5120);
 /*!40000 ALTER TABLE `cust_details` ENABLE KEYS */;
 
 
@@ -1082,8 +1973,8 @@ CREATE TABLE `cust_meter_mapping` (
   PRIMARY KEY (`id`),
   KEY `fk_custmetermapping_custdetails_id` (`cust_details_id`),
   KEY `fk_custmetermapping_meterdetails_id` (`meter_details_id`),
-  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
-  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`)
+  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
+  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
@@ -1322,15 +2213,14 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160229111821','jhipster','classpath:config/liquibase/changelog/20160229111821_added_entity_RequestWorkflowHistory.xml','2016-04-13 12:52:57',112,'EXECUTED','7:df037b52eebabe97bca6601174750057','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
  ('20160329064157','jhipster','classpath:config/liquibase/changelog/20160329064157_added_entity_ComplaintTypeMaster.xml','2016-04-13 13:19:32',120,'EXECUTED','7:925d2a76e3b71e5bc7daf39c4f8ee2b5','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160413093028','jhipster','classpath:config/liquibase/changelog/20160413093028_added_entity_MeterStatus.xml','2016-04-18 12:57:45',121,'EXECUTED','7:4d7c1ce6ba1e28d5591ed0f73c0058a8','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-04-18 13:01:24',128,'EXECUTED','7:1128b00324be2ae65e6b38b670f60e36','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160309103544','jhipster','classpath:config/liquibase/changelog/20160309103544_added_entity_Module.xml','2016-04-21 15:40:56',136,'EXECUTED','7:2bd44e3f9e9ef3e2df74cd6440f20f4e','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160309103544','jhipster','classpath:config/liquibase/changelog/20160309103544_added_entity_Module.xml','2016-04-21 15:40:56',136,'EXECUTED','7:2bd44e3f9e9ef3e2df74cd6440f20f4e','createTable, dropDefaultValue','',NULL,'3.4.2',NULL,NULL),
  ('20160309104200','jhipster','classpath:config/liquibase/changelog/20160309104200_added_entity_Module2MenuItem.xml','2016-04-21 15:40:56',137,'EXECUTED','7:9824330082db5729d7b5d6bf940348df','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160324101502','jhipster','classpath:config/liquibase/changelog/20160324101502_added_entity_StreetMaster.xml','2016-04-22 16:32:17',138,'EXECUTED','7:06a439d83aa505f96f7a5912600760b3','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160426103301','jhipster','classpath:config/liquibase/changelog/20160426103301_added_entity_IdProofMaster.xml','2016-04-27 09:12:30',141,'EXECUTED','7:94a5cf42044a1b16758e77fdaf7ee4a5','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160427084244','jhipster','classpath:config/liquibase/changelog/20160427084244_added_entity_MerchantMaster.xml','2016-04-27 09:15:33',146,'EXECUTED','7:6c558187f8cb1283d0f35b86b24e3d8f','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160427084244','jhipster','classpath:config/liquibase/changelog/20160427084244_added_entity_MerchantMaster.xml','2016-04-27 09:15:33',146,'EXECUTED','7:6c558187f8cb1283d0f35b86b24e3d8f','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160229065514','jhipster','classpath:config/liquibase/changelog/20160229065514_added_entity_PipeSizeMaster.xml','2016-05-02 14:07:37',152,'EXECUTED','7:84481a490a68b0f89ed9d2f5fcd3293b','createTable','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160229065514','jhipster','classpath:config/liquibase/changelog/20160229065514_added_entity_PipeSizeMaster.xml','2016-05-02 14:07:37',152,'EXECUTED','7:84481a490a68b0f89ed9d2f5fcd3293b','createTable','',NULL,'3.4.2',NULL,NULL),
  ('20160229065700','jhipster','classpath:config/liquibase/changelog/20160229065700_added_entity_CategoryPipeSizeMapping.xml','2016-05-02 14:07:38',153,'EXECUTED','7:10b74427e2abf13a1e46b02177b879c5','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160427084544','jhipster','classpath:config/liquibase/changelog/20160427084544_added_entity_OnlinePaymentOrder.xml','2016-05-02 14:07:41',157,'EXECUTED','7:c89108e03c232e11ba95545a3077646e','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160427104544','jhipster','classpath:config/liquibase/changelog/20160427104544_added_entity_OnlinePaymentResponse.xml','2016-05-03 17:04:09',158,'EXECUTED','7:446fb20c8df2e6211ae618789b57766b','createTable, dropDefaultValue, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
@@ -1346,25 +2236,27 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160229072353','jhipster','classpath:config/liquibase/changelog/20160229072353_added_entity_ManageCashPoint.xml','2016-05-24 11:54:43',179,'EXECUTED','7:063f36a456a8a13982a11343a8a8dddd','createTable, dropDefaultValue, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160229074219','jhipster','classpath:config/liquibase/changelog/20160229074219_added_entity_ReAllotment.xml','2016-05-24 11:54:45',180,'EXECUTED','7:eb523405877dcf8d7dd83dc9199b8ea3','createTable, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
  ('20160406042024','jhipster','classpath:config/liquibase/changelog/20160406042024_added_entity_BankMaster.xml','2016-06-20 19:26:19',189,'EXECUTED','7:b29135deebd1c64e4ae7b95f7f494f9a','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-06-20 19:26:20',190,'EXECUTED','7:c144c67518add4196438bab2239aae6a','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+ ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-06-22 09:42:14',192,'EXECUTED','7:706cd8f8ee58d5f683273b58ded10ed2','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-06-20 19:26:22',191,'EXECUTED','7:73db2f64a635723c9207731b2cc719de','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_MeterDetails.xml','2016-06-22 09:42:14',192,'EXECUTED','7:706cd8f8ee58d5f683273b58ded10ed2','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160229075018','jhipster','classpath:config/liquibase/changelog/20160229075018_added_entity_ApplicationTxn.xml','2016-06-22 09:42:17',193,'EXECUTED','7:bc3817fceaf1e83b90459c81f129b3ab','createTable, addForeignKeyConstraint (x7)','',NULL,'3.4.2',NULL,NULL),
  ('20160324105452','jhipster','classpath:config/liquibase/changelog/20160324105452_added_entity_FeasibilityStudy.xml','2016-06-22 09:42:19',194,'EXECUTED','7:aa06f800520a2b8bfef4654df0572d3d','createTable, dropDefaultValue (x6), addForeignKeyConstraint (x9)','',NULL,'3.4.2',NULL,NULL),
- ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-06-22 09:42:19',195,'EXECUTED','7:b7446d7e9934ac87de93b1c42cf3107a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160330095504','jhipster','classpath:config/liquibase/changelog/20160330095504_added_entity_Proceedings.xml','2016-06-22 09:42:19',195,'EXECUTED','7:b7446d7e9934ac87de93b1c42cf3107a','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160401064028','jhipster','classpath:config/liquibase/changelog/20160401064028_added_entity_Receipt.xml','2016-06-22 09:42:20',196,'EXECUTED','7:c01dba5cca3c8eae2dddad353e044b26','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
- ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-06-22 09:42:21',197,'EXECUTED','7:8c269e2ffbb5c3db5631d120fa99abd7','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
+ ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-06-22 09:42:21',197,'EXECUTED','7:8c269e2ffbb5c3db5631d120fa99abd7','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-06-22 09:42:22',198,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-06-22 09:42:22',199,'EXECUTED','7:844b0fb0485f7bc7c6d1dec18e3c99b8','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
- ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-06-22 09:42:23',200,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
-INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-06-22 09:42:23',200,'EXECUTED','7:4ea9f0b6d412315e5baff9213f3fbaeb','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-06-22 09:42:24',201,'EXECUTED','7:208b28854110ec930d0f7348946c1469','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160419095001','jhipster','classpath:config/liquibase/changelog/20160419095001_added_entity_MeterChange.xml','2016-06-22 09:42:25',202,'EXECUTED','7:b853d75dbbef5f864231ef25da88d23c','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
+ ('20160419095001','jhipster','classpath:config/liquibase/changelog/20160419095001_added_entity_MeterChange.xml','2016-06-22 09:42:25',202,'EXECUTED','7:b853d75dbbef5f864231ef25da88d23c','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
  ('20160504065608','jhipster','classpath:config/liquibase/changelog/20160504065608_added_entity_ConnectionTerminate.xml','2016-06-22 09:42:25',203,'EXECUTED','7:77b9eddf440cf38d04fe73c2b25a4aaf','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160612095001','jhipster','classpath:config/liquibase/changelog/20160612095001_added_entity_Adjustments.xml','2016-06-22 09:42:27',204,'EXECUTED','7:01a368366d6a5155db7636b6888d0617','createTable, dropDefaultValue, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
- ('20160229070800','jhipster','classpath:config/liquibase/changelog/20160229070800_added_entity_ChargeBase.xml','2016-06-22 09:53:24',205,'EXECUTED','7:e7734a735d216617649f57460fae54b1','createTable','',NULL,'3.4.2',NULL,NULL);
+ ('20160229070800','jhipster','classpath:config/liquibase/changelog/20160229070800_added_entity_ChargeBase.xml','2016-06-22 09:53:24',205,'EXECUTED','7:e7734a735d216617649f57460fae54b1','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-06-26 22:04:57',206,'EXECUTED','7:e91365a33054f9d04d8e2934946ce25c','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-06-26 22:04:58',207,'EXECUTED','7:c144c67518add4196438bab2239aae6a','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
+ ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-06-26 22:05:00',208,'EXECUTED','7:73db2f64a635723c9207731b2cc719de','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -1571,7 +2463,7 @@ CREATE TABLE `division_master` (
   `division_name` varchar(255) DEFAULT NULL,
   `division_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`division_master`
@@ -1588,7 +2480,8 @@ INSERT INTO `division_master` (`id`,`division_name`,`division_code`) VALUES
  (7,'DMA7','07'),
  (8,'DMA8','08'),
  (9,'DMA9','09'),
- (10,'DMA10','10');
+ (10,'DMA10','10'),
+ (11,'General','99');
 /*!40000 ALTER TABLE `division_master` ENABLE KEYS */;
 
 
@@ -1756,7 +2649,7 @@ CREATE TABLE `expense_details` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `expense_no` varchar(255) DEFAULT NULL,
   `expense_amt` float DEFAULT NULL,
-  `expense_dt` timestamp NULL DEFAULT NULL,
+  `expense_dt` timestamp NULL,
   `instr_no` varchar(255) DEFAULT NULL,
   `instr_dt` date DEFAULT NULL,
   `payment_types_id` bigint(20) DEFAULT NULL,
@@ -1833,10 +2726,10 @@ CREATE TABLE `feasibility_study` (
   KEY `fk_feasibilitystudy_inspectionbydepartmenthead_id` (`inspection_by_department_head_id`),
   KEY `fk_feasibilitystudy_approvedbyoperationmanager_id` (`approved_by_operation_manager_id`),
   KEY `fk_feasibilitystudy_categorymaster_id` (`category_master_id`),
-  CONSTRAINT `fk_feasibilitystudy_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
   CONSTRAINT `fk_feasibilitystudy_approvedbyoperationmanager_id` FOREIGN KEY (`approved_by_operation_manager_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_feasibilitystudy_approvedbyzonalhead_id` FOREIGN KEY (`approved_by_zonal_head_id`) REFERENCES `jhi_user` (`id`),
+  CONSTRAINT `fk_feasibilitystudy_categorymaster_id` FOREIGN KEY (`category_master_id`) REFERENCES `category_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`),
   CONSTRAINT `fk_feasibilitystudy_inspectionbydepartmenthead_id` FOREIGN KEY (`inspection_by_department_head_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_feasibilitystudy_preparedby_id` FOREIGN KEY (`prepared_by_id`) REFERENCES `jhi_user` (`id`),
@@ -2099,11 +2992,11 @@ CREATE TABLE `item_required` (
   KEY `fk_itemrequired_feasibilitystudy_id` (`feasibility_study_id`),
   KEY `fk_itemrequired_proceedings_id` (`proceedings_id`),
   KEY `fk_itemrequired_uom_id` (`uom_id`),
-  CONSTRAINT `fk_itemrequired_uom_id` FOREIGN KEY (`uom_id`) REFERENCES `uom` (`id`),
   CONSTRAINT `fk_itemrequired_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
   CONSTRAINT `fk_itemrequired_feasibilitystudy_id` FOREIGN KEY (`feasibility_study_id`) REFERENCES `feasibility_study` (`id`),
   CONSTRAINT `fk_itemrequired_materialmaster_id` FOREIGN KEY (`material_master_id`) REFERENCES `material_master` (`id`),
-  CONSTRAINT `fk_itemrequired_proceedings_id` FOREIGN KEY (`proceedings_id`) REFERENCES `proceedings` (`id`)
+  CONSTRAINT `fk_itemrequired_proceedings_id` FOREIGN KEY (`proceedings_id`) REFERENCES `proceedings` (`id`),
+  CONSTRAINT `fk_itemrequired_uom_id` FOREIGN KEY (`uom_id`) REFERENCES `uom` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
@@ -2246,7 +3139,7 @@ CREATE TABLE `jhi_persistent_audit_event` (
   `event_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `idx_persistent_audit_event` (`principal`,`event_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=1071 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1074 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`jhi_persistent_audit_event`
@@ -3388,7 +4281,10 @@ INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`e
 INSERT INTO `jhi_persistent_audit_event` (`event_id`,`principal`,`event_date`,`event_type`) VALUES 
  (1068,'billrunmgr','2016-06-20 12:51:56','AUTHENTICATION_SUCCESS'),
  (1069,'admin','2016-06-20 14:14:03','AUTHENTICATION_SUCCESS'),
- (1070,'sf0021','2016-06-20 14:30:49','AUTHENTICATION_SUCCESS');
+ (1070,'sf0021','2016-06-20 14:30:49','AUTHENTICATION_SUCCESS'),
+ (1071,'billrunmgr','2016-06-22 17:03:25','AUTHENTICATION_SUCCESS'),
+ (1072,'admin','2016-06-22 17:04:28','AUTHENTICATION_SUCCESS'),
+ (1073,'billrunmgr','2016-06-22 17:06:52','AUTHENTICATION_SUCCESS');
 /*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 
 
@@ -5655,7 +6551,14 @@ INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES
  (1069,'remoteAddress','192.168.1.15'),
  (1069,'sessionId','E89843707E265E1C9AA57CAC957DDDA0'),
  (1070,'remoteAddress','192.168.1.15'),
- (1070,'sessionId','1454A8EE2649D778DDF4CD82E766CDEF');
+ (1070,'sessionId','1454A8EE2649D778DDF4CD82E766CDEF'),
+ (1071,'remoteAddress','0:0:0:0:0:0:0:1');
+INSERT INTO `jhi_persistent_audit_evt_data` (`event_id`,`name`,`value`) VALUES 
+ (1071,'sessionId','9A60944C2B2D5BC495664CCFF28AA26A'),
+ (1072,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (1072,'sessionId','CE39800932C574ECDA9404630580D9DB'),
+ (1073,'remoteAddress','0:0:0:0:0:0:0:1'),
+ (1073,'sessionId','A016FBA29209C96DDB4CF2516CE9619A');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 
 
@@ -5683,92 +6586,93 @@ CREATE TABLE `jhi_persistent_token` (
 /*!40000 ALTER TABLE `jhi_persistent_token` DISABLE KEYS */;
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
  ('+7U0yycBuHmv+/d33EOmkw==',3,'dMDREmAGWqyusdVWQQ7vYA==','2016-04-27','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('/bnNodc1lpYZMXJHTOJtCA==',31,'8eU6Mqq4xNeUwYUdrDL+Rw==','2016-06-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('1mZqfRNb3PGMA66LQG0Fhg==',3,'PpS3UQPmUb24wzCVFjGjNQ==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('2LjYAaKNZjnF1v/HIkjwsg==',30,'OqLtMTUUzaxLP2dP2WF4UA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('2yjVI0YodHXMcX9UYNv9jw==',21,'kafn/6inJsopOarTM46AxA==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('3937fVSl0f6WWAydhNdUZg==',3,'rJfdttno/vtYeY2tsnQe+Q==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('3fGdr/cwYT6ECkvcD/ly7g==',31,'yin7z11ad9WD7fPPRRr9RA==','2016-06-01','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('4oZOM9WeVb8ocnwRxVvJfA==',31,'pzo3LAfZ2YQXoPdbAIfhPg==','2016-05-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('3fGdr/cwYT6ECkvcD/ly7g==',31,'yin7z11ad9WD7fPPRRr9RA==','2016-06-01','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('4oZOM9WeVb8ocnwRxVvJfA==',31,'pzo3LAfZ2YQXoPdbAIfhPg==','2016-05-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('8zfMKiZOPrVt6lXtFt/vJQ==',3,'/N+mw7gTID3HBRr0XCncMg==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('A/8QpszxZA9aBejUNkjXhA==',5,'whjMwUOFMnusG9vMgh6scw==','2016-06-10','192.168.1.6','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('Ac6XW1CPScAvp4jClsPmMA==',20,'vuJUxH0AyhlMMyPTvUprag==','2016-05-12','122.170.249.158','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('aVS1+MnWV34wggZUmJvL9w==',31,'44AoSeN/P86Yz5k5cUd7lg==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('B8febmGNzSucvnszfJn8aQ==',31,'ayhyRwskOfRp1oDNOvZ9qw==','2016-05-12','122.170.249.158','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('BgqvCpZRcut7eRM9BYGikA==',30,'5iU7rwFlZQ4Gt1dHdofdkg==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('BjuoMFmske3TrzieL4XAlg==',3,'Ln/wXnsNTA7acj8Ouqoi+Q==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('BgqvCpZRcut7eRM9BYGikA==',30,'5iU7rwFlZQ4Gt1dHdofdkg==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('BjuoMFmske3TrzieL4XAlg==',3,'Ln/wXnsNTA7acj8Ouqoi+Q==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('bm32YJ9FNGzRU1uMi+22+Q==',3,'HQzoLo8TglobmdU54cPyNA==','2016-05-30','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
  ('BqSGG3u7I3FNEGIS4YTdnA==',30,'TVPCFvOjZvfNKQfOcumCGA==','2016-05-06','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('BZtphJr70B/B7eE/hPwjnw==',21,'FzJEY6HcVEglQYosnSNjWg==','2016-06-20','192.168.1.15','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('ChkJAcPJOneYygJ35FjR9g==',31,'6F9B28Pl70WP5rM5Q5Q0/w==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('CIgQNZ8FKQM/DmDaYobODA==',5,'V3SYimBIqbEK8J0ezKRydw==','2016-05-18','192.168.1.25','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
- ('CX1H2M8p7PrMlBFUiF5ejg==',16,'csVkryGOlP/Wr4j9XyWXDg==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('DaK7uQT48/cKNPmvfHNy7g==',31,'nWj1dWsWeqKsrAzGShVYtA==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('CIgQNZ8FKQM/DmDaYobODA==',5,'V3SYimBIqbEK8J0ezKRydw==','2016-05-18','192.168.1.25','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('CX1H2M8p7PrMlBFUiF5ejg==',16,'csVkryGOlP/Wr4j9XyWXDg==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
+ ('DaK7uQT48/cKNPmvfHNy7g==',31,'nWj1dWsWeqKsrAzGShVYtA==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('DbAm0z5VPEc+EtXrkXdvKw==',3,'Yous7+mwwzsCcw6ZF1OdMg==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('e5qNbeFco2eWENKj/+RW1g==',3,'niUqrvzC03eynQfROEZDqA==','2016-05-06','192.168.1.4','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('EG3kGgtX3liShbfTTaAgiA==',5,'aD22faP9jxmf7wdLDd9hMA==','2016-05-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ePbL4hkUt4E52k/aBtE/MA==',21,'UsBLX/CfktztTx7Od1cTzA==','2016-04-28','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('F8sJ+cN9mT4bgFb0qWuElQ==',30,'1r74O2dQgko/ccI8eUYcGA==','2016-04-26','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('fFTdM+jQgj3eMZD9eWBg6Q==',3,'PYCkcHlcu1gFjJRbHkERHg==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('fOQn3HnYBCzVRX2tSrZ6/w==',3,'qGLnqEhOatlH2gCZd+7GQg==','2016-06-17','192.168.1.20','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0');
+ ('F8sJ+cN9mT4bgFb0qWuElQ==',30,'1r74O2dQgko/ccI8eUYcGA==','2016-04-26','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('fFTdM+jQgj3eMZD9eWBg6Q==',3,'PYCkcHlcu1gFjJRbHkERHg==','2016-05-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('fOQn3HnYBCzVRX2tSrZ6/w==',3,'qGLnqEhOatlH2gCZd+7GQg==','2016-06-17','192.168.1.20','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('h2bUpKDi3+XLdwZvYfctSg==',16,'0kDBdHEYWPkiv5WGMUyl8w==','2016-04-27','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('hfGksqBgjUnqndHWJ3/5wA==',30,'FbXszKhHyDuqmM8FnVRRUw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('HoUZ0JlyDpz02Gjz/PKAIw==',15,'uK6UIkCTlVGzDiCNbYrLpw==','2016-04-22','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('hPIvtj6fWgUruwe1q0Lkzg==',5,'MuBgjHxfmF05WvNRIplg+Q==','2016-06-17','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('hpx7sHez6/mnrjnhZ3DX+A==',3,'VqaJz6VLNIqEid/PNNJdhw==','2016-05-10','196.41.61.82','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('ihEf0pcPskdgqK7cOFzTJw==',21,'TdMRgg17krhlPYtJrkjWXA==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('JkO1Egyw+3JpnCDvarFSJQ==',31,'+rmweMdpNs/d3K82VBmA3Q==','2016-05-12','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('hpx7sHez6/mnrjnhZ3DX+A==',3,'VqaJz6VLNIqEid/PNNJdhw==','2016-05-10','196.41.61.82','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('ihEf0pcPskdgqK7cOFzTJw==',21,'TdMRgg17krhlPYtJrkjWXA==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
+ ('JkO1Egyw+3JpnCDvarFSJQ==',31,'+rmweMdpNs/d3K82VBmA3Q==','2016-05-12','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('JsXTquBBdYJXYvFXWiDO+w==',5,'vtqxVgMZjTxtqH3n3OTosA==','2016-06-20','192.168.1.15','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('Jt1tQaRUywvgCflDNZISJg==',3,'kDuQ5LaUwKjGAmkNe8eMCg==','2016-04-27','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('k2Tiai7BXpQHEwfZgrhj6g==',16,'EoRRRHI4yUgdB7cEkJz0rQ==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('KR8Wl8wmGSqAkXVsqdpaVA==',21,'oRNb0lpNtS16eEGKmXmorg==','2016-06-20','192.168.1.15','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
- ('lqqkRZHMgCV5ZRZsdmOctA==',3,'Sqs4OVQ6a8Sm5+xrE5sxsg==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('mFxt08kJ+MznP+HasUarJQ==',31,'HwEBWdjwSvPHSnqpA1yNUA==','2016-05-13','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
- ('Mi6MLXJPl0/RJj05s09iMQ==',3,'NerOglc8HIpbaSpJJ3m5fA==','2016-05-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
+ ('lqqkRZHMgCV5ZRZsdmOctA==',3,'Sqs4OVQ6a8Sm5+xrE5sxsg==','2016-04-13','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('mFxt08kJ+MznP+HasUarJQ==',31,'HwEBWdjwSvPHSnqpA1yNUA==','2016-05-13','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
+ ('Mi6MLXJPl0/RJj05s09iMQ==',3,'NerOglc8HIpbaSpJJ3m5fA==','2016-05-04','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('mN78rTbpO1zJ3NSIXBQ2wg==',30,'A009nxRkiVkn8Up1bOtQfQ==','2016-05-04','192.168.1.23','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('N5tURezUqhBwraYfORpoOg==',3,'Z7l8+8dlatnIze1ZddxZoQ==','2016-05-09','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('NfvEopDM6MXVAGJnzk6SXg==',31,'WUjrD8SxMsA3T2z9eCPU5Q==','2016-06-01','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ny63voHlh1g5DzOlyLwYTQ==',27,'ZAFbKrGGRPl7EtKIpaxgqA==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('odIcxtIiUMAAdHvLI1fZ0g==',3,'6hyclrvKtc4YTW6j6ulqLw==','2016-05-11','110.224.236.177','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'),
- ('omL/EzrvAvwVEbBKTEH5aw==',30,'CseC8BLe5lXIEbYKOM4Abw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('odIcxtIiUMAAdHvLI1fZ0g==',3,'6hyclrvKtc4YTW6j6ulqLw==','2016-05-11','110.224.236.177','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('omL/EzrvAvwVEbBKTEH5aw==',30,'CseC8BLe5lXIEbYKOM4Abw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Ou/RH69+FvylPxoHvZnbRw==',5,'e1t+qftoRCq1I2Ix/QHuUQ==','2016-05-24','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('ouNW66N4shg9zlgZ5ERIpA==',23,'m0cBSjz8/eLfVupNUbKqKg==','2016-06-10','192.168.1.6','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('Oxk4LYSJP4B0Kgl/4Jp1YQ==',5,'lWWoH0XsW/TqwOREew9mDg==','2016-05-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('PdrO87bBjGbEQ9chdqoBRA==',3,'ijuaw2/inuLXwum1fcPdlg==','2016-05-31','192.168.1.3','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('PKTqBBTgNwNlyaX1s1Ks/Q==',21,'Yjev72B8yjB8ddv4IYAzdQ==','2016-06-10','192.168.1.6','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('pMyOIrgHgrCeHf9U1k1jig==',15,'JN5k9M/NYqnv3OyrQgjchw==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('PR5kn34VNMdWSV9Xx8/GNA==',15,'0ee2KDYIhL/Zc6v7Dk38tg==','2016-06-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0');
+ ('pMyOIrgHgrCeHf9U1k1jig==',15,'JN5k9M/NYqnv3OyrQgjchw==','2016-04-30','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('PR5kn34VNMdWSV9Xx8/GNA==',15,'0ee2KDYIhL/Zc6v7Dk38tg==','2016-06-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('q7XsLPGhgLfQI03IAy+sMg==',15,'f96/QO7HrHkS+8H1N6VIWw==','2016-05-09','110.224.230.23','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
  ('QNKrooOpjWJXpm7AAOEFQQ==',20,'DMvylSUGtrldSFzxyjrKXw==','2016-04-19','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('QnOVEcUN7EljG4/UD6aXXA==',3,'YZtjIP/DY6zaxa37xPsGWQ==','2016-05-13','192.168.1.5','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('shPh5FTXeL6vvAymUqZWhA==',16,'ipG4gIPxvyFPIfAF3t//rA==','2016-05-20','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('T53sqN50j/yG+Xy1nwQZEA==',3,'aNXX3d+8jixBot4xU/iyMA==','2016-05-11','110.224.236.177','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
- ('tfgC0LtXvzQgiwGOttkAEg==',3,'ss13GqZmv4ugTSw1dB0zNw==','2016-06-06','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('tkZhouRzCm0FpoITe9H+Pg==',15,'+9E6soOikCp1IbkGUx4PjQ==','2016-05-23','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0');
+ ('tfgC0LtXvzQgiwGOttkAEg==',3,'ss13GqZmv4ugTSw1dB0zNw==','2016-06-06','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('tkZhouRzCm0FpoITe9H+Pg==',15,'+9E6soOikCp1IbkGUx4PjQ==','2016-05-23','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'),
  ('tSOtngv/3diHOsCJo6rYOg==',31,'Epepxgsy2Z5mG5jhhc9fQw==','2016-05-12','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('UskT7RTuw9oGrEyoA5/p0A==',5,'sYjElW5FAVD213b3/i/07A==','2016-05-23','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
  ('uuRMPqbtEBc6QVsYIXN2pA==',21,'oeCuCAeQjxjpbYtfS8o4/w==','2016-04-26','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('V9rQqqIRC/goYf0v4KMZ3g==',30,'d8YPqVoG4JnyxyH1XvqOyA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('vCltSl9MsKd488jrCU8XQw==',5,'m9uZJi+jxdO842VU7ckQzA==','2016-05-10','122.170.237.113','Mozilla/5.0 (X11; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0'),
- ('vehx07ryxugUHCENmGBUSA==',30,'tSECGXgNhKq8auv6nZmQuw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('vnR7DP8oSYXDmF+mnmU1kg==',21,'/81Dy452hRlZFVFwMvjsag==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('vehx07ryxugUHCENmGBUSA==',30,'tSECGXgNhKq8auv6nZmQuw==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('vnR7DP8oSYXDmF+mnmU1kg==',21,'/81Dy452hRlZFVFwMvjsag==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('w19dFvKWblZHPQ4qBmRwOQ==',3,'niw5it4bdTF1FOsKFYODRQ==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('Wcl3JtiPVeESKHgkm9DWVA==',30,'2E/wOFh/Y8+Y89I+G+sIQA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('wHOaPe95y0bFDhv7rwp+pQ==',3,'G5PATNutbflLHCMZntNdzA==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('wlsxEVx3DOGE5elnLj7U8Q==',3,'OA+2jIAtEEIKEr1jUU54UA==','2016-04-21','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('XQG+pOIkmGVy/h3BRMq+Pw==',30,'rmKrD1xN8nP8aLEDALqvFA==','2016-04-25','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
- ('YCy7O8uNAqrw7SFOZCRH7Q==',15,'96gB2HojQE8BSXPuGXHk7A==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0'),
- ('yeGR7p45ZYo74KGrWntAZA==',3,'ytU215AgvrBXIiLMgsecaw==','2016-04-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0');
+ ('YCy7O8uNAqrw7SFOZCRH7Q==',15,'96gB2HojQE8BSXPuGXHk7A==','2016-04-29','0:0:0:0:0:0:0:1','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0');
 INSERT INTO `jhi_persistent_token` (`series`,`user_id`,`token_value`,`token_date`,`ip_address`,`user_agent`) VALUES 
+ ('yeGR7p45ZYo74KGrWntAZA==',3,'ytU215AgvrBXIiLMgsecaw==','2016-04-15','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ynZOMTxODvqkNvAvZyrabw==',30,'/neHN/ixIp/JbDwgJM2N3A==','2016-04-18','0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('ZeWv40JzO9chd/3DLw5QZw==',3,'7qpybtDxl+Azh/kyfSI5dg==','2016-04-21','127.0.0.1','Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0'),
  ('zFE08dIb3ttfqV37i6eHKA==',3,'4X2BHKVSVF8Lb6nvKk79IQ==','2016-04-12','127.0.0.1','Mozilla/5.0 (Windows NT 6.2; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0'),
@@ -6324,11 +7228,11 @@ CREATE TABLE `meter_change` (
   KEY `fk_meterchange_newmeterno_id` (`new_meter_no_id`),
   KEY `fk_meterchange_billfulldetails_id` (`bill_full_details_id`),
   KEY `fk_meterchange_user_id` (`user_id`),
-  CONSTRAINT `fk_meterchange_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_meterchange_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
   CONSTRAINT `fk_meterchange_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
   CONSTRAINT `fk_meterchange_newmeterno_id` FOREIGN KEY (`new_meter_no_id`) REFERENCES `meter_details` (`id`),
-  CONSTRAINT `fk_meterchange_prevmeterno_id` FOREIGN KEY (`prev_meter_no_id`) REFERENCES `meter_details` (`id`)
+  CONSTRAINT `fk_meterchange_prevmeterno_id` FOREIGN KEY (`prev_meter_no_id`) REFERENCES `meter_details` (`id`),
+  CONSTRAINT `fk_meterchange_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
@@ -6363,9 +7267,9 @@ CREATE TABLE `meter_details` (
   PRIMARY KEY (`id`),
   KEY `fk_meterdetails_meterstatus_id` (`meter_status_id`),
   KEY `fk_meterdetails_pipesizemaster_id` (`pipe_size_master_id`),
-  CONSTRAINT `fk_meterdetails_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
-  CONSTRAINT `fk_meterdetails_meterstatus_id` FOREIGN KEY (`meter_status_id`) REFERENCES `meter_status` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_meterdetails_meterstatus_id` FOREIGN KEY (`meter_status_id`) REFERENCES `meter_status` (`id`),
+  CONSTRAINT `fk_meterdetails_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9068 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`meter_details`
@@ -6403,7 +7307,4944 @@ INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make
  (27,'Meter:27','','Digital','visiontek',99999,2,NULL),
  (28,'Meter:28','','Digital','visiontek',99999,2,NULL),
  (29,'Meter:29','','Digital','visiontek',99999,2,NULL),
- (30,'Meter:30','','Digital','visiontek',99999,2,NULL);
+ (30,'Meter:30','','Digital','visiontek',99999,2,NULL),
+ (4406,'A010011','BM 1079K','Normal',NULL,NULL,NULL,1),
+ (4407,'A010101','13 09544635','Normal',NULL,NULL,NULL,1),
+ (4408,'A010211','147274','Normal',NULL,NULL,NULL,1),
+ (4409,'A010391','127986','Normal',NULL,NULL,NULL,1),
+ (4410,'A010551','6151001','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4411,'A010581','BM 2750K','Normal',NULL,NULL,NULL,1),
+ (4412,'A011011','13 09544201','Normal',NULL,NULL,NULL,1),
+ (4413,'A011111','1309544094','Normal',NULL,NULL,NULL,1),
+ (4414,'A011151','06-428402','Normal',NULL,NULL,NULL,1),
+ (4415,'A011301','1309544669','Normal',NULL,NULL,NULL,1),
+ (4416,'A011451','6151002','Normal',NULL,NULL,NULL,1),
+ (4417,'A011461','1309544101','Normal',NULL,NULL,NULL,1),
+ (4418,'A011481','146997','Normal',NULL,NULL,NULL,1),
+ (4419,'A011521','13 09544156','Normal',NULL,NULL,NULL,1),
+ (4420,'A011561','127987','Normal',NULL,NULL,NULL,1),
+ (4421,'A011581','6150860','Normal',NULL,NULL,NULL,1),
+ (4422,'A011811','TMP-00000164','Normal',NULL,NULL,NULL,1),
+ (4423,'A011821','6151004','Normal',NULL,NULL,NULL,1),
+ (4424,'A011901','TMP-00000168','Normal',NULL,NULL,NULL,1),
+ (4425,'A011911','13 09544405','Normal',NULL,NULL,NULL,1),
+ (4426,'A020181','6151003','Normal',NULL,NULL,NULL,1),
+ (4427,'A020241','13 09544676','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4428,'A020421','13 09544101','Normal',NULL,NULL,NULL,1),
+ (4429,'A020541','TMP-00000171','Normal',NULL,NULL,NULL,1),
+ (4430,'A020821','13 09544407','Normal',NULL,NULL,NULL,1),
+ (4431,'A020841','147280','Normal',NULL,NULL,NULL,1),
+ (4432,'A020881','05-213508','Normal',NULL,NULL,NULL,1),
+ (4433,'A020961','98A185311','Normal',NULL,NULL,NULL,1),
+ (4434,'A021081','127984','Normal',NULL,NULL,NULL,1),
+ (4435,'A021141','1309544491','Normal',NULL,NULL,NULL,1),
+ (4436,'A021151','BM 842K','Normal',NULL,NULL,NULL,1),
+ (4437,'A021191','13 09544091','Normal',NULL,NULL,NULL,1),
+ (4438,'A021281','BM 1480K','Normal',NULL,NULL,NULL,1),
+ (4439,'A021451','127432','Normal',NULL,NULL,NULL,1),
+ (4440,'A021461','1309544096','Normal',NULL,NULL,NULL,1),
+ (4441,'A021641','BM 594K','Normal',NULL,NULL,NULL,1),
+ (4442,'A021691','1309544254','Normal',NULL,NULL,NULL,1),
+ (4443,'A021871','BM 2033K','Normal',NULL,NULL,NULL,1),
+ (4444,'A021881','127433','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4445,'A021911','BM 1365K','Normal',NULL,NULL,NULL,1),
+ (4446,'A021951','147272','Normal',NULL,NULL,NULL,1),
+ (4447,'A021971','TMP-666','Normal',NULL,NULL,NULL,1),
+ (4448,'A030081','06-427619','Normal',NULL,NULL,NULL,1),
+ (4449,'A030211','BM 228K','Normal',NULL,NULL,NULL,1),
+ (4450,'A030491','BM 2515K','Normal',NULL,NULL,NULL,1),
+ (4451,'A030661','127436','Normal',NULL,NULL,NULL,1),
+ (4452,'A030721','BM 011K','Normal',NULL,NULL,NULL,1),
+ (4453,'A030791','BM 241K','Normal',NULL,NULL,NULL,1),
+ (4454,'A030801','13 09544207','Normal',NULL,NULL,NULL,1),
+ (4455,'A030821','BM 2650K','Normal',NULL,NULL,NULL,1),
+ (4456,'A030941','BM 1633K','Normal',NULL,NULL,NULL,1),
+ (4457,'A031091','1309544139','Normal',NULL,NULL,NULL,1),
+ (4458,'A031101','BM 1101K','Normal',NULL,NULL,NULL,1),
+ (4459,'A031171','13 09544644','Normal',NULL,NULL,NULL,1),
+ (4460,'A031371','BM 1493K','Normal',NULL,NULL,NULL,1),
+ (4461,'A031381','13 09544550','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4462,'A031401','13 09544189','Normal',NULL,NULL,NULL,1),
+ (4463,'A031491','TMP-322','Normal',NULL,NULL,NULL,1),
+ (4464,'A031661','BM 1010K','Normal',NULL,NULL,NULL,1),
+ (4465,'A031941','BM 2062K','Normal',NULL,NULL,NULL,1),
+ (4466,'A040041','146996','Normal',NULL,NULL,NULL,1),
+ (4467,'A040071','BM 1612K','Normal',NULL,NULL,NULL,1),
+ (4468,'A040111','6151234','Normal',NULL,NULL,NULL,1),
+ (4469,'A040121','146998','Normal',NULL,NULL,NULL,1),
+ (4470,'A040151','13 09544342','Normal',NULL,NULL,NULL,1),
+ (4471,'A040171','147958','Normal',NULL,NULL,NULL,1),
+ (4472,'A040181','128332','Normal',NULL,NULL,NULL,1),
+ (4473,'A040231','128281','Normal',NULL,NULL,NULL,1),
+ (4474,'A040261','TMP-00000013','Normal',NULL,NULL,NULL,1),
+ (4475,'A040331','1309544548','Normal',NULL,NULL,NULL,1),
+ (4476,'A040351','147277','Normal',NULL,NULL,NULL,1),
+ (4477,'A040481','BM 973K','Normal',NULL,NULL,NULL,1),
+ (4478,'A040551','TMP-00000014','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4479,'A040591','TMP-00000017','Normal',NULL,NULL,NULL,1),
+ (4480,'A040601','TMP-00000018','Normal',NULL,NULL,NULL,1),
+ (4481,'A040621','6151620','Normal',NULL,NULL,NULL,1),
+ (4482,'A040641','BM 312K','Normal',NULL,NULL,NULL,1),
+ (4483,'A040671','','Normal',NULL,NULL,NULL,1),
+ (4484,'A040741','BM 2050K','Normal',NULL,NULL,NULL,1),
+ (4485,'A040791','BM 1587K','Normal',NULL,NULL,NULL,1),
+ (4486,'A040801','BM 1985K','Normal',NULL,NULL,NULL,1),
+ (4487,'A040871','13 09544476','Normal',NULL,NULL,NULL,1),
+ (4488,'A040911','1309544552','Normal',NULL,NULL,NULL,1),
+ (4489,'A040921','BM 2610K','Normal',NULL,NULL,NULL,1),
+ (4490,'A041021','6151626','Normal',NULL,NULL,NULL,1),
+ (4491,'A041061','814782','Normal',NULL,NULL,NULL,1),
+ (4492,'A041101','BM 2539K','Normal',NULL,NULL,NULL,1),
+ (4493,'A041111','BM 2454K','Normal',NULL,NULL,NULL,1),
+ (4494,'A041121','13 09544093','Normal',NULL,NULL,NULL,1),
+ (4495,'A041131','BM 1744K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4496,'A041152','13-08-02345','Normal',NULL,NULL,NULL,1),
+ (4497,'A041161','BM 552K','Normal',NULL,NULL,NULL,1),
+ (4498,'A041181','1309544379','Normal',NULL,NULL,NULL,1),
+ (4499,'A041191','BM 2566K','Normal',NULL,NULL,NULL,1),
+ (4500,'A041201','13 09544056','Normal',NULL,NULL,NULL,1),
+ (4501,'A060961','BM 2045K','Normal',NULL,NULL,NULL,1),
+ (4502,'A060991','BM 69K','Normal',NULL,NULL,NULL,1),
+ (4503,'A061021','13 09544597','Normal',NULL,NULL,NULL,1),
+ (4504,'A061041','BM 3K','Normal',NULL,NULL,NULL,1),
+ (4505,'A061071','BM 311K','Normal',NULL,NULL,NULL,1),
+ (4506,'A061081','13 09544375','Normal',NULL,NULL,NULL,1),
+ (4507,'A061121','13 09544288','Normal',NULL,NULL,NULL,1),
+ (4508,'B010031','BM 2306K','Normal',NULL,NULL,NULL,1),
+ (4509,'B010061','921','Normal',NULL,NULL,NULL,1),
+ (4510,'B010071','BM 405K','Normal',NULL,NULL,NULL,1),
+ (4511,'B010151','147547','Normal',NULL,NULL,NULL,1),
+ (4512,'B010201','BM 1438K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4513,'B010211','06.427436','Normal',NULL,NULL,NULL,1),
+ (4514,'B010231','BM 119K','Normal',NULL,NULL,NULL,1),
+ (4515,'B010281','BM 1773K','Normal',NULL,NULL,NULL,1),
+ (4516,'B010331','06-427986','Normal',NULL,NULL,NULL,1),
+ (4517,'B010391','06.429111','Normal',NULL,NULL,NULL,1),
+ (4518,'B010411','6151624','Normal',NULL,NULL,NULL,1),
+ (4519,'B010412','BM 046K','Normal',NULL,NULL,NULL,1),
+ (4520,'B010431','06428307','Normal',NULL,NULL,NULL,1),
+ (4521,'B010461','071200544','Normal',NULL,NULL,NULL,1),
+ (4522,'B010471','13-08-03000','Normal',NULL,NULL,NULL,1),
+ (4523,'B010521','BM 122K','Normal',NULL,NULL,NULL,1),
+ (4524,'B010531','06-421909','Normal',NULL,NULL,NULL,1),
+ (4525,'B010551','BM 598K','Normal',NULL,NULL,NULL,1),
+ (4526,'B010561','146961','Normal',NULL,NULL,NULL,1),
+ (4527,'B010591','TMP-5220','Normal',NULL,NULL,NULL,1),
+ (4528,'B010631','148781','Normal',NULL,NULL,NULL,1),
+ (4529,'B010701','13 09544418','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4530,'B010721','6151816','Normal',NULL,NULL,NULL,1),
+ (4531,'B010731','TMP-5678','Normal',NULL,NULL,NULL,1),
+ (4532,'B010781','028378196','Normal',NULL,NULL,NULL,1),
+ (4533,'B010801','148630','Normal',NULL,NULL,NULL,1),
+ (4534,'B010851','146584','Normal',NULL,NULL,NULL,1),
+ (4535,'B010871','BM 1707K','Normal',NULL,NULL,NULL,1),
+ (4536,'B010881','ZR-02834687','Normal',NULL,NULL,NULL,1),
+ (4537,'B010891','BM 2458K','Normal',NULL,NULL,NULL,1),
+ (4538,'B010901','BM 308K','Normal',NULL,NULL,NULL,1),
+ (4539,'B010911','205213527','Normal',NULL,NULL,NULL,1),
+ (4540,'B010931','BM 313K','Normal',NULL,NULL,NULL,1),
+ (4541,'B010951','BM 1619K','Normal',NULL,NULL,NULL,1),
+ (4542,'B010961','13 09544063','Normal',NULL,NULL,NULL,1),
+ (4543,'B010971','148907','Normal',NULL,NULL,NULL,1),
+ (4544,'B011001','BM 956K','Normal',NULL,NULL,NULL,1),
+ (4545,'B011031','127981','Normal',NULL,NULL,NULL,1),
+ (4546,'B011041','BM 101K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4547,'B011061','13 09544151','Normal',NULL,NULL,NULL,1),
+ (4548,'B011101','BM 355K','Normal',NULL,NULL,NULL,1),
+ (4549,'B011121','BM 2783K','Normal',NULL,NULL,NULL,1),
+ (4550,'B011151','06-429029','Normal',NULL,NULL,NULL,1),
+ (4551,'B011171','BM 2312K','Normal',NULL,NULL,NULL,1),
+ (4552,'B011181','BM 1288K','Normal',NULL,NULL,NULL,1),
+ (4553,'B011231','BM 1198K','Normal',NULL,NULL,NULL,1),
+ (4554,'B011261','06-424879','Normal',NULL,NULL,NULL,1),
+ (4555,'B011331','147200','Normal',NULL,NULL,NULL,1),
+ (4556,'B011341','TMP-00000012','Normal',NULL,NULL,NULL,1),
+ (4557,'B011351','PM-071201147','Normal',NULL,NULL,NULL,1),
+ (4558,'B011391','BM 1528K','Normal',NULL,NULL,NULL,1),
+ (4559,'B011411','07-12202228','Normal',NULL,NULL,NULL,1),
+ (4560,'B011421','1308618','Normal',NULL,NULL,NULL,1),
+ (4561,'B011431','BM 503K','Normal',NULL,NULL,NULL,1),
+ (4562,'B011451','147954','Normal',NULL,NULL,NULL,1),
+ (4563,'B011461','BM 071K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4564,'B011471','06-427437','Normal',NULL,NULL,NULL,1),
+ (4565,'B011501','BM 341K','Normal',NULL,NULL,NULL,1),
+ (4566,'B011511','BM 2636K','Normal',NULL,NULL,NULL,1),
+ (4567,'B011541','BM 981K','Normal',NULL,NULL,NULL,1),
+ (4568,'B011551','BM 2529K','Normal',NULL,NULL,NULL,1),
+ (4569,'B011601','','Normal',NULL,NULL,NULL,1),
+ (4570,'B011611','071200814','Normal',NULL,NULL,NULL,1),
+ (4571,'B011661','071200127','Normal',NULL,NULL,NULL,1),
+ (4572,'B011671','147956','Normal',NULL,NULL,NULL,1),
+ (4573,'B011681','147000','Normal',NULL,NULL,NULL,1),
+ (4574,'B011691','147960','Normal',NULL,NULL,NULL,1),
+ (4575,'B011721','071201552','Normal',NULL,NULL,NULL,1),
+ (4576,'B011821','BM 1843K','Normal',NULL,NULL,NULL,1),
+ (4577,'B011881','40017469','Normal',NULL,NULL,NULL,1),
+ (4578,'B011901','TMP-00000031','Normal',NULL,NULL,NULL,1),
+ (4579,'B011991','BM 835','Normal',NULL,NULL,NULL,1),
+ (4580,'B012001','071202044','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4581,'B020011','1309544248','Normal',NULL,NULL,NULL,1),
+ (4582,'B020021','BM 2431K','Normal',NULL,NULL,NULL,1),
+ (4583,'B020031','BM 2502K','Normal',NULL,NULL,NULL,1),
+ (4584,'B020071','071201521','Normal',NULL,NULL,NULL,1),
+ (4585,'B020081','BM 413K','Normal',NULL,NULL,NULL,1),
+ (4586,'B020091','TMP-00000100','Normal',NULL,NULL,NULL,1),
+ (4587,'B020101','13 09544200','Normal',NULL,NULL,NULL,1),
+ (4588,'B020121','KIMEI 130900476','Normal',NULL,NULL,NULL,1),
+ (4589,'B020171','TMP 0000766','Normal',NULL,NULL,NULL,1),
+ (4590,'B020191','TMP 000770','Normal',NULL,NULL,NULL,1),
+ (4591,'B020201','146586','Normal',NULL,NULL,NULL,1),
+ (4592,'B020211','13 09544316','Normal',NULL,NULL,NULL,1),
+ (4593,'B020221','071200110','Normal',NULL,NULL,NULL,1),
+ (4594,'B020231','13 09544498','Normal',NULL,NULL,NULL,1),
+ (4595,'B020241','BM 590K','Normal',NULL,NULL,NULL,1),
+ (4596,'B020251','6151617','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4597,'B020281','TMP-00000037','Normal',NULL,NULL,NULL,1),
+ (4598,'B020291','TMP-00000038','Normal',NULL,NULL,NULL,1),
+ (4599,'B020311','148905','Normal',NULL,NULL,NULL,1),
+ (4600,'B020331','6151232','Normal',NULL,NULL,NULL,1),
+ (4601,'B020351','130904556','Normal',NULL,NULL,NULL,1),
+ (4602,'B020361','6151948','Normal',NULL,NULL,NULL,1),
+ (4603,'B020391','071202022','Normal',NULL,NULL,NULL,1),
+ (4604,'B020401','6151623','Normal',NULL,NULL,NULL,1),
+ (4605,'B020421','BM 1702 K','Normal',NULL,NULL,NULL,1),
+ (4606,'B020441','BM 1032K','Normal',NULL,NULL,NULL,1),
+ (4607,'B020461','13000504','Normal',NULL,NULL,NULL,1),
+ (4608,'B020471','147199','Normal',NULL,NULL,NULL,1),
+ (4609,'B020481','148902','Normal',NULL,NULL,NULL,1),
+ (4610,'B020551','1309544554','Normal',NULL,NULL,NULL,1),
+ (4611,'B020591','BM 1324K','Normal',NULL,NULL,NULL,1),
+ (4612,'B020601','13 000509','Normal',NULL,NULL,NULL,1),
+ (4613,'B020671','BM 814K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4614,'B020681','BM 1468K','Normal',NULL,NULL,NULL,1),
+ (4615,'B020691','071201118','Normal',NULL,NULL,NULL,1),
+ (4616,'B020721','BM 1513K','Normal',NULL,NULL,NULL,1),
+ (4617,'B020741','06-49717','Normal',NULL,NULL,NULL,1),
+ (4618,'B020761','071200072','Normal',NULL,NULL,NULL,1),
+ (4619,'B020781','07834850','Normal',NULL,NULL,NULL,1),
+ (4620,'B020791','BM 887K','Normal',NULL,NULL,NULL,1),
+ (4621,'B020801','TMP-00000049','Normal',NULL,NULL,NULL,1),
+ (4622,'B020811','88693531','Normal',NULL,NULL,NULL,1),
+ (4623,'B020821','13 000508','Normal',NULL,NULL,NULL,1),
+ (4624,'B020861','TMP-00000052','Normal',NULL,NULL,NULL,1),
+ (4625,'B020901','TMP-00000054','Normal',NULL,NULL,NULL,1),
+ (4626,'B020911','BM 786K','Normal',NULL,NULL,NULL,1),
+ (4627,'B020921','BM 1460K','Normal',NULL,NULL,NULL,1),
+ (4628,'B020931','06-429279','Normal',NULL,NULL,NULL,1),
+ (4629,'B020941','05-215609','Normal',NULL,NULL,NULL,1),
+ (4630,'B020971','13 0900689','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4631,'B020991','BM 1611K','Normal',NULL,NULL,NULL,1),
+ (4632,'B021011','148881','Normal',NULL,NULL,NULL,1),
+ (4633,'B021041','071201548','Normal',NULL,NULL,NULL,1),
+ (4634,'B021051','071200527','Normal',NULL,NULL,NULL,1),
+ (4635,'B021061','06428305','Normal',NULL,NULL,NULL,1),
+ (4636,'B021081','06.427938','Normal',NULL,NULL,NULL,1),
+ (4637,'B021091','06.427935','Normal',NULL,NULL,NULL,1),
+ (4638,'B021131','TMP-00000066','Normal',NULL,NULL,NULL,1),
+ (4639,'B021141','TMP-00000045','Normal',NULL,NULL,NULL,1),
+ (4640,'B021151','TMP-00000067','Normal',NULL,NULL,NULL,1),
+ (4641,'B021171','BM 1661K','Normal',NULL,NULL,NULL,1),
+ (4642,'B021191','BM 157K','Normal',NULL,NULL,NULL,1),
+ (4643,'B021201','TMP-00000079','Normal',NULL,NULL,NULL,1),
+ (4644,'B021211','TMP-00000080','Normal',NULL,NULL,NULL,1),
+ (4645,'B021241','128287','Normal',NULL,NULL,NULL,1),
+ (4646,'B021251','TMP-00000083','Normal',NULL,NULL,NULL,1),
+ (4647,'B021261','BM 1379K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4648,'B021271','071202029','Normal',NULL,NULL,NULL,1),
+ (4649,'B021281','06.428863','Normal',NULL,NULL,NULL,1),
+ (4650,'B021291','06-427937','Normal',NULL,NULL,NULL,1),
+ (4651,'B021301','06-427553','Normal',NULL,NULL,NULL,1),
+ (4652,'B021311','06-428972','Normal',NULL,NULL,NULL,1),
+ (4653,'B021331','06-429114','Normal',NULL,NULL,NULL,1),
+ (4654,'B021341','071201507','Normal',NULL,NULL,NULL,1),
+ (4655,'B021351','146608','Normal',NULL,NULL,NULL,1),
+ (4656,'B021361','BM 658K','Normal',NULL,NULL,NULL,1),
+ (4657,'B021371','TMP-00000093','Normal',NULL,NULL,NULL,1),
+ (4658,'B021401','BM 1852K','Normal',NULL,NULL,NULL,1),
+ (4659,'B021421','06.428523','Normal',NULL,NULL,NULL,1),
+ (4660,'B021431','TMP-00000095','Normal',NULL,NULL,NULL,1),
+ (4661,'B021461','06-428523','Normal',NULL,NULL,NULL,1),
+ (4662,'B021491','071200162','Normal',NULL,NULL,NULL,1),
+ (4663,'B021501','071202019','Normal',NULL,NULL,NULL,1),
+ (4664,'B021521','06-426736','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4665,'B021531','071200051','Normal',NULL,NULL,NULL,1),
+ (4666,'B021541','TMP-00000100','Normal',NULL,NULL,NULL,1),
+ (4667,'B021551','TMP-00000101','Normal',NULL,NULL,NULL,1),
+ (4668,'B021561','6151013','Normal',NULL,NULL,NULL,1),
+ (4669,'B021581','BM 1395K','Normal',NULL,NULL,NULL,1),
+ (4670,'B021591','06-429092','Normal',NULL,NULL,NULL,1),
+ (4671,'B021621','TMP-00000104','Normal',NULL,NULL,NULL,1),
+ (4672,'B021631','TMP-00000105','Normal',NULL,NULL,NULL,1),
+ (4673,'B021641','071200780','Normal',NULL,NULL,NULL,1),
+ (4674,'B021651','071200375','Normal',NULL,NULL,NULL,1),
+ (4675,'B021661','06.427769','Normal',NULL,NULL,NULL,1),
+ (4676,'B021671','6151813','Normal',NULL,NULL,NULL,1),
+ (4677,'B021681','06.428866','Normal',NULL,NULL,NULL,1),
+ (4678,'B021691','02-377941','Normal',NULL,NULL,NULL,1),
+ (4679,'B021701','TMP-00000111','Normal',NULL,NULL,NULL,1),
+ (4680,'B021721','BM 191K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4681,'B021731','06.428386','Normal',NULL,NULL,NULL,1),
+ (4682,'B021741','071202224','Normal',NULL,NULL,NULL,1),
+ (4683,'B021751','05213646','Normal',NULL,NULL,NULL,1),
+ (4684,'B021761','06-427478','Normal',NULL,NULL,NULL,1),
+ (4685,'B021771','071200062','Normal',NULL,NULL,NULL,1),
+ (4686,'B021791','071200079','Normal',NULL,NULL,NULL,1),
+ (4687,'B021801','06-428459','Normal',NULL,NULL,NULL,1),
+ (4688,'B021821','071200125','Normal',NULL,NULL,NULL,1),
+ (4689,'B021831','05.213645','Normal',NULL,NULL,NULL,1),
+ (4690,'B021841','06-428578','Normal',NULL,NULL,NULL,1),
+ (4691,'B021861','06-49712','Normal',NULL,NULL,NULL,1),
+ (4692,'B021881','02-377947','Normal',NULL,NULL,NULL,1),
+ (4693,'B021891','06.426739','Normal',NULL,NULL,NULL,1),
+ (4694,'B021901','TMP-00000131','Normal',NULL,NULL,NULL,1),
+ (4695,'B021981','06-427934','Normal',NULL,NULL,NULL,1),
+ (4696,'B021991','06-427982','Normal',NULL,NULL,NULL,1),
+ (4697,'B022001','06-427801','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4698,'B022011','6150863','Normal',NULL,NULL,NULL,1),
+ (4699,'B030011','TMP-00000071','Normal',NULL,NULL,NULL,1),
+ (4700,'B030041','06-427676','Normal',NULL,NULL,NULL,1),
+ (4701,'B030101','0213643','Normal',NULL,NULL,NULL,1),
+ (4702,'B030131','13 09544083','Normal',NULL,NULL,NULL,1),
+ (4703,'B030181','147052','Normal',NULL,NULL,NULL,1),
+ (4704,'B030191','BM 2479K','Normal',NULL,NULL,NULL,1),
+ (4705,'B030201','06.429113','Normal',NULL,NULL,NULL,1),
+ (4706,'B030211','40017249','Normal',NULL,NULL,NULL,1),
+ (4707,'B030221','071201177','Normal',NULL,NULL,NULL,1),
+ (4708,'B030241','146585','Normal',NULL,NULL,NULL,1),
+ (4709,'B030251','02377916','Normal',NULL,NULL,NULL,1),
+ (4710,'B030271','148906','Normal',NULL,NULL,NULL,1),
+ (4711,'B030321','40017214','Normal',NULL,NULL,NULL,1),
+ (4712,'B030331','071200722','Normal',NULL,NULL,NULL,1),
+ (4713,'B030351','6151966','Normal',NULL,NULL,NULL,1),
+ (4714,'B030361','148786','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4715,'B030381','BM 784K','Normal',NULL,NULL,NULL,1),
+ (4716,'B030411','BM 2673K','Normal',NULL,NULL,NULL,1),
+ (4717,'B030501','071200028','Normal',NULL,NULL,NULL,1),
+ (4718,'B030511','06.428520','Normal',NULL,NULL,NULL,1),
+ (4719,'B030521','BM 713K','Normal',NULL,NULL,NULL,1),
+ (4720,'B030541','TMP-00000156','Normal',NULL,NULL,NULL,1),
+ (4721,'B030551','TMP-00000157','Normal',NULL,NULL,NULL,1),
+ (4722,'B030552','40017417','Normal',NULL,NULL,NULL,1),
+ (4723,'B030571','071201578','Normal',NULL,NULL,NULL,1),
+ (4724,'B030581','BM 889K','Normal',NULL,NULL,NULL,1),
+ (4725,'B030601','06-49691','Normal',NULL,NULL,NULL,1),
+ (4726,'B030611','06-426750','Normal',NULL,NULL,NULL,1),
+ (4727,'B030631','BM 117K','Normal',NULL,NULL,NULL,1),
+ (4728,'B030661','130904077','Normal',NULL,NULL,NULL,1),
+ (4729,'B030671','02-1503564','Normal',NULL,NULL,NULL,1),
+ (4730,'B030691','BM 2213K','Normal',NULL,NULL,NULL,1),
+ (4731,'B030711','13 09544450','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4732,'B030741','02-377949','Normal',NULL,NULL,NULL,1),
+ (4733,'B030751','02378182','Normal',NULL,NULL,NULL,1),
+ (4734,'B030761','06.427402','Normal',NULL,NULL,NULL,1),
+ (4735,'B030771','BM 1691K','Normal',NULL,NULL,NULL,1),
+ (4736,'B030781','000','Normal',NULL,NULL,NULL,1),
+ (4737,'B030791','05.215604','Normal',NULL,NULL,NULL,1),
+ (4738,'B030811','40017440','Normal',NULL,NULL,NULL,1),
+ (4739,'B030821','TMP-00000170','Normal',NULL,NULL,NULL,1),
+ (4740,'B030881','ZR-02834576','Normal',NULL,NULL,NULL,1),
+ (4741,'B030891','147897','Normal',NULL,NULL,NULL,1),
+ (4742,'B030931','071201762','Normal',NULL,NULL,NULL,1),
+ (4743,'B030951','071200878','Normal',NULL,NULL,NULL,1),
+ (4744,'B030961','TMP-00000756','Normal',NULL,NULL,NULL,1),
+ (4745,'B030991','13 09544429','Normal',NULL,NULL,NULL,1),
+ (4746,'B031001','003132','Normal',NULL,NULL,NULL,1),
+ (4747,'B031061','BM 479K','Normal',NULL,NULL,NULL,1),
+ (4748,'B031071','140301864','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4749,'B031081','146588','Normal',NULL,NULL,NULL,1),
+ (4750,'B031091','BM 2168K','Normal',NULL,NULL,NULL,1),
+ (4751,'B031101','TMP-00000178','Normal',NULL,NULL,NULL,1),
+ (4752,'B031111','06.427756','Normal',NULL,NULL,NULL,1),
+ (4753,'B031161','BM 2048K','Normal',NULL,NULL,NULL,1),
+ (4754,'B031171','BM 518K','Normal',NULL,NULL,NULL,1),
+ (4755,'B031191','13000514','Normal',NULL,NULL,NULL,1),
+ (4756,'B031251','071200658','Normal',NULL,NULL,NULL,1),
+ (4757,'B031261','148799','Normal',NULL,NULL,NULL,1),
+ (4758,'B031291','02378181','Normal',NULL,NULL,NULL,1),
+ (4759,'B031371','06-427674','Normal',NULL,NULL,NULL,1),
+ (4760,'B031391','146589','Normal',NULL,NULL,NULL,1),
+ (4761,'B031441','TMP-00000186','Normal',NULL,NULL,NULL,1),
+ (4762,'B031451','TMP-00000187','Normal',NULL,NULL,NULL,1),
+ (4763,'B031461','147194','Normal',NULL,NULL,NULL,1),
+ (4764,'B031481','TMP-00000188','Normal',NULL,NULL,NULL,1),
+ (4765,'B031491','02-378196','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4766,'B031511','6151321','Normal',NULL,NULL,NULL,1),
+ (4767,'B031521','BM 199K','Normal',NULL,NULL,NULL,1),
+ (4768,'B031531','BM 1770K','Normal',NULL,NULL,NULL,1),
+ (4769,'B031561','TMP-00000190','Normal',NULL,NULL,NULL,1),
+ (4770,'B031571','BM 2784K','Normal',NULL,NULL,NULL,1),
+ (4771,'B031581','BM 289K','Normal',NULL,NULL,NULL,1),
+ (4772,'B031601','BM 1012K','Normal',NULL,NULL,NULL,1),
+ (4773,'B031611','BM 1534K','Normal',NULL,NULL,NULL,1),
+ (4774,'B031661','147187','Normal',NULL,NULL,NULL,1),
+ (4775,'B031731','06-427480','Normal',NULL,NULL,NULL,1),
+ (4776,'B031781','TMP-00000196','Normal',NULL,NULL,NULL,1),
+ (4777,'B031821','BM 739K','Normal',NULL,NULL,NULL,1),
+ (4778,'B031851','TMP-00000189','Normal',NULL,NULL,NULL,1),
+ (4779,'B031881','BM 347K','Normal',NULL,NULL,NULL,1),
+ (4780,'B031891','TMP-00000199','Normal',NULL,NULL,NULL,1),
+ (4781,'B031921','TMP-00000074','Normal',NULL,NULL,NULL,1),
+ (4782,'B031931','1309544190','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4783,'B032001','BM 1172K','Normal',NULL,NULL,NULL,1),
+ (4784,'B040011','BM 760K','Normal',NULL,NULL,NULL,1),
+ (4785,'B040051','TMP-00000757','Normal',NULL,NULL,NULL,1),
+ (4786,'B040081','BM 1144K','Normal',NULL,NULL,NULL,1),
+ (4787,'B040101',' BM 1677K','Normal',NULL,NULL,NULL,1),
+ (4788,'B040111','06-428565','Normal',NULL,NULL,NULL,1),
+ (4789,'B040121','BM 382K','Normal',NULL,NULL,NULL,1),
+ (4790,'B040161','0304521','Normal',NULL,NULL,NULL,1),
+ (4791,'B040171','147265','Normal',NULL,NULL,NULL,1),
+ (4792,'B040191','BM 492K','Normal',NULL,NULL,NULL,1),
+ (4793,'B040201','TMP-0000009','Normal',NULL,NULL,NULL,1),
+ (4794,'B040211','TMP-00000201','Normal',NULL,NULL,NULL,1),
+ (4795,'B040241','BM 2385K','Normal',NULL,NULL,NULL,1),
+ (4796,'B040271','TMP-00000759','Normal',NULL,NULL,NULL,1),
+ (4797,'B040331','071200716','Normal',NULL,NULL,NULL,1),
+ (4798,'B040361','BM 2184K','Normal',NULL,NULL,NULL,1),
+ (4799,'B040411','TMP-00000205','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4800,'B040421','148903','Normal',NULL,NULL,NULL,1),
+ (4801,'B040431','6160997','Normal',NULL,NULL,NULL,1),
+ (4802,'B040451','071202209','Normal',NULL,NULL,NULL,1),
+ (4803,'B040491','13 9544608','Normal',NULL,NULL,NULL,1),
+ (4804,'B040521','06-428303','Normal',NULL,NULL,NULL,1),
+ (4805,'B040551','TMP-00000160','Normal',NULL,NULL,NULL,1),
+ (4806,'B040561','TMP-00000206','Normal',NULL,NULL,NULL,1),
+ (4807,'B040571','PM-071201711','Normal',NULL,NULL,NULL,1),
+ (4808,'B040581','40017288','Normal',NULL,NULL,NULL,1),
+ (4809,'B040591','ZR-02834666','Normal',NULL,NULL,NULL,1),
+ (4810,'B040601','071200705','Normal',NULL,NULL,NULL,1),
+ (4811,'B040611','071200174','Normal',NULL,NULL,NULL,1),
+ (4812,'B040621','BM 401K','Normal',NULL,NULL,NULL,1),
+ (4813,'B040641','147264','Normal',NULL,NULL,NULL,1),
+ (4814,'B040681','146628','Normal',NULL,NULL,NULL,1),
+ (4815,'B040691','6151005','Normal',NULL,NULL,NULL,1),
+ (4816,'B040701','BM 2354K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4817,'B040741','147894','Normal',NULL,NULL,NULL,1),
+ (4818,'B040751','06-429052','Normal',NULL,NULL,NULL,1),
+ (4819,'B040771','BM 1314K','Normal',NULL,NULL,NULL,1),
+ (4820,'B040781','BM 1951K','Normal',NULL,NULL,NULL,1),
+ (4821,'B040811','071200034','Normal',NULL,NULL,NULL,1),
+ (4822,'B040821','02-834681','Normal',NULL,NULL,NULL,1),
+ (4823,'B040851','BM 1477K','Normal',NULL,NULL,NULL,1),
+ (4824,'B040891','147182','Normal',NULL,NULL,NULL,1),
+ (4825,'B040911','TMP-00000214','Normal',NULL,NULL,NULL,1),
+ (4826,'B040921','BM 1084K','Normal',NULL,NULL,NULL,1),
+ (4827,'B040941','BM 924K','Normal',NULL,NULL,NULL,1),
+ (4828,'B040961','TMP-00000215','Normal',NULL,NULL,NULL,1),
+ (4829,'B040971','TMP-00000216','Normal',NULL,NULL,NULL,1),
+ (4830,'B040981','13000511','Normal',NULL,NULL,NULL,1),
+ (4831,'B041021','05.215626','Normal',NULL,NULL,NULL,1),
+ (4832,'B041031','0649679','Normal',NULL,NULL,NULL,1),
+ (4833,'B041041','05213476','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4834,'B041211','13 09544690','Normal',NULL,NULL,NULL,1),
+ (4835,'B041421','TMP-00000221','Normal',NULL,NULL,NULL,1),
+ (4836,'B041461','TMP-00000222','Normal',NULL,NULL,NULL,1),
+ (4837,'B041471','ZR.02834673','Normal',NULL,NULL,NULL,1),
+ (4838,'B041501','05213518','Normal',NULL,NULL,NULL,1),
+ (4839,'B041541','TMP-00000225','Normal',NULL,NULL,NULL,1),
+ (4840,'B041551','071200946','Normal',NULL,NULL,NULL,1),
+ (4841,'B041581','146625','Normal',NULL,NULL,NULL,1),
+ (4842,'B041601','BM 1964K','Normal',NULL,NULL,NULL,1),
+ (4843,'B041611','BM 2649K','Normal',NULL,NULL,NULL,1),
+ (4844,'B041621','BM 1425K','Normal',NULL,NULL,NULL,1),
+ (4845,'B041661','TMP 00000229','Normal',NULL,NULL,NULL,1),
+ (4846,'B041681','ZR 02834556','Normal',NULL,NULL,NULL,1),
+ (4847,'B041701','BM 2197K','Normal',NULL,NULL,NULL,1),
+ (4848,'B041711','0301027','Normal',NULL,NULL,NULL,1),
+ (4849,'B041721','BM 2251K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4850,'B041731','07-1202201','Normal',NULL,NULL,NULL,1),
+ (4851,'B041741','TMP-00000233','Normal',NULL,NULL,NULL,1),
+ (4852,'B041751','6151007','Normal',NULL,NULL,NULL,1),
+ (4853,'B041761','BM 1578K','Normal',NULL,NULL,NULL,1),
+ (4854,'B041781','BM 767K','Normal',NULL,NULL,NULL,1),
+ (4855,'B041811','13 09544335','Normal',NULL,NULL,NULL,1),
+ (4856,'B041821','TMP-00000235','Normal',NULL,NULL,NULL,1),
+ (4857,'B041871','TMP-00000236','Normal',NULL,NULL,NULL,1),
+ (4858,'B041881','BM 1265K','Normal',NULL,NULL,NULL,1),
+ (4859,'B041891','TMP-00000237','Normal',NULL,NULL,NULL,1),
+ (4860,'B041961','147058','Normal',NULL,NULL,NULL,1),
+ (4861,'B041981','TMP-00000267','Normal',NULL,NULL,NULL,1),
+ (4862,'B042001','BM 2528K','Normal',NULL,NULL,NULL,1),
+ (4863,'B042011','BM 1867K','Normal',NULL,NULL,NULL,1),
+ (4864,'B050021','','Normal',NULL,NULL,NULL,1),
+ (4865,'B050031','BM 427K','Normal',NULL,NULL,NULL,1),
+ (4866,'B050081','BM 240K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4867,'B050111','071202222','Normal',NULL,NULL,NULL,1),
+ (4868,'B050191','02-378184','Normal',NULL,NULL,NULL,1),
+ (4869,'B050221','071202090','Normal',NULL,NULL,NULL,1),
+ (4870,'B050231','146924','Normal',NULL,NULL,NULL,1),
+ (4871,'B050241','BM 205K','Normal',NULL,NULL,NULL,1),
+ (4872,'B050271','BM 006K','Normal',NULL,NULL,NULL,1),
+ (4873,'B050301','13 09544632','Normal',NULL,NULL,NULL,1),
+ (4874,'B050321','071200180','Normal',NULL,NULL,NULL,1),
+ (4875,'B050351','071200585','Normal',NULL,NULL,NULL,1),
+ (4876,'B050391','BM 488K','Normal',NULL,NULL,NULL,1),
+ (4877,'B050411','1309544451','Normal',NULL,NULL,NULL,1),
+ (4878,'B050431','02378178','Normal',NULL,NULL,NULL,1),
+ (4879,'B050441','BM 2410K','Normal',NULL,NULL,NULL,1),
+ (4880,'B050511','06-428429','Normal',NULL,NULL,NULL,1),
+ (4881,'B050521','TMP-00000279','Normal',NULL,NULL,NULL,1),
+ (4882,'B050531','6151230','Normal',NULL,NULL,NULL,1),
+ (4883,'B050571','BM 1664K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4884,'B050581','06-426750','Normal',NULL,NULL,NULL,1),
+ (4885,'B050691','BM 1190K','Normal',NULL,NULL,NULL,1),
+ (4886,'B050761','TMP-00000280','Normal',NULL,NULL,NULL,1),
+ (4887,'B050791','02-378185','Normal',NULL,NULL,NULL,1),
+ (4888,'B050821','BM 1739K','Normal',NULL,NULL,NULL,1),
+ (4889,'B050861','TMP 1200','Normal',NULL,NULL,NULL,1),
+ (4890,'B050971','BM 461K','Normal',NULL,NULL,NULL,1),
+ (4891,'B050991','BM 573K','Normal',NULL,NULL,NULL,1),
+ (4892,'B051001','TMP-00000283','Normal',NULL,NULL,NULL,1),
+ (4893,'B051011','02378192','Normal',NULL,NULL,NULL,1),
+ (4894,'B051081','06-428533','Normal',NULL,NULL,NULL,1),
+ (4895,'B051141','146571','Normal',NULL,NULL,NULL,1),
+ (4896,'B051161','BM 2471K','Normal',NULL,NULL,NULL,1),
+ (4897,'B051201','071201165','Normal',NULL,NULL,NULL,1),
+ (4898,'B051221','146626','Normal',NULL,NULL,NULL,1),
+ (4899,'B051291','BM 260K','Normal',NULL,NULL,NULL,1),
+ (4900,'B051321','BM 1296K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4901,'B051341','BM 807K','Normal',NULL,NULL,NULL,1),
+ (4902,'B051431','BM 2026K','Normal',NULL,NULL,NULL,1),
+ (4903,'B051451','BM 979K','Normal',NULL,NULL,NULL,1),
+ (4904,'B051491','146921','Normal',NULL,NULL,NULL,1),
+ (4905,'B051511','BM 1004K','Normal',NULL,NULL,NULL,1),
+ (4906,'B051521','071200061','Normal',NULL,NULL,NULL,1),
+ (4907,'B051531','06428337','Normal',NULL,NULL,NULL,1),
+ (4908,'B051621','BM 1036K','Normal',NULL,NULL,NULL,1),
+ (4909,'B051691','BM 2792K','Normal',NULL,NULL,NULL,1),
+ (4910,'B051701','BM 556K','Normal',NULL,NULL,NULL,1),
+ (4911,'B051741','02-377909','Normal',NULL,NULL,NULL,1),
+ (4912,'B051751','1309544209','Normal',NULL,NULL,NULL,1),
+ (4913,'B051811','06-427554','Normal',NULL,NULL,NULL,1),
+ (4914,'B051861','BM 2271K','Normal',NULL,NULL,NULL,1),
+ (4915,'B051951','BM 1523K','Normal',NULL,NULL,NULL,1),
+ (4916,'B051981','07-1202094','Normal',NULL,NULL,NULL,1),
+ (4917,'B060071','BM 1239K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4918,'B060111','BM 70K','Normal',NULL,NULL,NULL,1),
+ (4919,'B060131','BM 2272K','Normal',NULL,NULL,NULL,1),
+ (4920,'B060141','0712005180','Normal',NULL,NULL,NULL,1),
+ (4921,'B060151','13 09544329','Normal',NULL,NULL,NULL,1),
+ (4922,'B060171','BM 1772K','Normal',NULL,NULL,NULL,1),
+ (4923,'B060191','BM 551K','Normal',NULL,NULL,NULL,1),
+ (4924,'B060201','BM 835K','Normal',NULL,NULL,NULL,1),
+ (4925,'B060301','BM 705K','Normal',NULL,NULL,NULL,1),
+ (4926,'B060311','02-378191','Normal',NULL,NULL,NULL,1),
+ (4927,'B060381','BM 1029K','Normal',NULL,NULL,NULL,1),
+ (4928,'B060461','BM 1851K','Normal',NULL,NULL,NULL,1),
+ (4929,'B060491','02377912','Normal',NULL,NULL,NULL,1),
+ (4930,'B060511','13 09544463','Normal',NULL,NULL,NULL,1),
+ (4931,'B060541','13 09544147','Normal',NULL,NULL,NULL,1),
+ (4932,'B060581','BM 1108K','Normal',NULL,NULL,NULL,1),
+ (4933,'B060611','1309544433','Normal',NULL,NULL,NULL,1),
+ (4934,'B060651','02-378193','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4935,'B060661','1309544558','Normal',NULL,NULL,NULL,1),
+ (4936,'B060721','071201735','Normal',NULL,NULL,NULL,1),
+ (4937,'B060761','BM 1140K','Normal',NULL,NULL,NULL,1),
+ (4938,'B060771','BM 785K','Normal',NULL,NULL,NULL,1),
+ (4939,'B060781','147685','Normal',NULL,NULL,NULL,1),
+ (4940,'B060821','BM 1252K','Normal',NULL,NULL,NULL,1),
+ (4941,'B060841','13 09544599','Normal',NULL,NULL,NULL,1),
+ (4942,'B060861','06-428799','Normal',NULL,NULL,NULL,1),
+ (4943,'B060881','TMP-00000701','Normal',NULL,NULL,NULL,1),
+ (4944,'B060891','13 09544283','Normal',NULL,NULL,NULL,1),
+ (4945,'B060901','BM 408K','Normal',NULL,NULL,NULL,1),
+ (4946,'B060911','BM 286K','Normal',NULL,NULL,NULL,1),
+ (4947,'B060931','BM 1306K','Normal',NULL,NULL,NULL,1),
+ (4948,'B060961','H00050','Normal',NULL,NULL,NULL,1),
+ (4949,'B060981','BM 270K','Normal',NULL,NULL,NULL,1),
+ (4950,'B060991','06.429030','Normal',NULL,NULL,NULL,1),
+ (4951,'B061001','BM 2451K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4952,'B061011','BM 1096K','Normal',NULL,NULL,NULL,1),
+ (4953,'B061031','13 09544536','Normal',NULL,NULL,NULL,1),
+ (4954,'B061041','071200692','Normal',NULL,NULL,NULL,1),
+ (4955,'B061051','071201769','Normal',NULL,NULL,NULL,1),
+ (4956,'B061071','BM 2113K','Normal',NULL,NULL,NULL,1),
+ (4957,'B061081','BM 1844K','Normal',NULL,NULL,NULL,1),
+ (4958,'B061251','071200853','Normal',NULL,NULL,NULL,1),
+ (4959,'B061261','071200126','Normal',NULL,NULL,NULL,1),
+ (4960,'B061281','13 09544090','Normal',NULL,NULL,NULL,1),
+ (4961,'B061291','BM 261000K','Normal',NULL,NULL,NULL,1),
+ (4962,'B061301','BM 1058K','Normal',NULL,NULL,NULL,1),
+ (4963,'B061341','BM 1836K','Normal',NULL,NULL,NULL,1),
+ (4964,'B061351','13 09544626','Normal',NULL,NULL,NULL,1),
+ (4965,'B061391','13 09544291','Normal',NULL,NULL,NULL,1),
+ (4966,'B061401','BM 2324K','Normal',NULL,NULL,NULL,1),
+ (4967,'B061441','BM 1645K','Normal',NULL,NULL,NULL,1),
+ (4968,'B061461','030135','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4969,'B061471','BM 917K','Normal',NULL,NULL,NULL,1),
+ (4970,'B061481','TMP00112','Normal',NULL,NULL,NULL,1),
+ (4971,'B061501','1309544515','Normal',NULL,NULL,NULL,1),
+ (4972,'B061511','BM 791K','Normal',NULL,NULL,NULL,1),
+ (4973,'B061741','BM 2790K','Normal',NULL,NULL,NULL,1),
+ (4974,'B061771','BM 2751K','Normal',NULL,NULL,NULL,1),
+ (4975,'B061781','BM 2595K','Normal',NULL,NULL,NULL,1),
+ (4976,'B061821','H0034','Normal',NULL,NULL,NULL,1),
+ (4977,'B061841','13 09544082','Normal',NULL,NULL,NULL,1),
+ (4978,'B061861','BM-1032K','Normal',NULL,NULL,NULL,1),
+ (4979,'B061871','02-378195','Normal',NULL,NULL,NULL,1),
+ (4980,'B061911','13-08-02916','Normal',NULL,NULL,NULL,1),
+ (4981,'B061931','BM 2499K','Normal',NULL,NULL,NULL,1),
+ (4982,'B061991','BM 478K','Normal',NULL,NULL,NULL,1),
+ (4983,'B066061','06-49674','Normal',NULL,NULL,NULL,1),
+ (4984,'B066081','BM 710K','Normal',NULL,NULL,NULL,1),
+ (4985,'B066091','071200512','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (4986,'B066101','03856','Normal',NULL,NULL,NULL,1),
+ (4987,'B066131','BM 2105K','Normal',NULL,NULL,NULL,1),
+ (4988,'B066141','BM 49K','Normal',NULL,NULL,NULL,1),
+ (4989,'B066161','BM 1600K','Normal',NULL,NULL,NULL,1),
+ (4990,'B066171','BM 995K','Normal',NULL,NULL,NULL,1),
+ (4991,'B066181','BM 2427K','Normal',NULL,NULL,NULL,1),
+ (4992,'B070021','071200179','Normal',NULL,NULL,NULL,1),
+ (4993,'B070031','No-Meter','Normal',NULL,NULL,NULL,1),
+ (4994,'B070081','146995','Normal',NULL,NULL,NULL,1),
+ (4995,'B070091','06-49653','Normal',NULL,NULL,NULL,1),
+ (4996,'B070121','146605','Normal',NULL,NULL,NULL,1),
+ (4997,'B070141','BM 1589K','Normal',NULL,NULL,NULL,1),
+ (4998,'B070161','BM 2652K','Normal',NULL,NULL,NULL,1),
+ (4999,'B070171','06-49651','Normal',NULL,NULL,NULL,1),
+ (5000,'B070181','TMP-00000145','Normal',NULL,NULL,NULL,1),
+ (5001,'B070191','07-1200056','Normal',NULL,NULL,NULL,1),
+ (5002,'B070201','40017299','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5003,'B070221','TMP-00000162','Normal',NULL,NULL,NULL,1),
+ (5004,'B070231','TMP-00000168','Normal',NULL,NULL,NULL,1),
+ (5005,'B070241','071200369','Normal',NULL,NULL,NULL,1),
+ (5006,'B070261','071200637','Normal',NULL,NULL,NULL,1),
+ (5007,'B070281','071200049','Normal',NULL,NULL,NULL,1),
+ (5008,'B070311','0623903','Normal',NULL,NULL,NULL,1),
+ (5009,'B070351','071201767','Normal',NULL,NULL,NULL,1),
+ (5010,'B070361','128340','Normal',NULL,NULL,NULL,1),
+ (5011,'B070371','147273','Normal',NULL,NULL,NULL,1),
+ (5012,'B070391','071201130','Normal',NULL,NULL,NULL,1),
+ (5013,'B070411','TMP-00000212','Normal',NULL,NULL,NULL,1),
+ (5014,'B070421','071201145','Normal',NULL,NULL,NULL,1),
+ (5015,'B070451','02-1501503','Normal',NULL,NULL,NULL,1),
+ (5016,'B070491','02-377948','Normal',NULL,NULL,NULL,1),
+ (5017,'B070521','6151811','Normal',NULL,NULL,NULL,1),
+ (5018,'B070631','071200511','Normal',NULL,NULL,NULL,1),
+ (5019,'B070641','071200718','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5020,'B070661','071200166','Normal',NULL,NULL,NULL,1),
+ (5021,'B070681','6151006','Normal',NULL,NULL,NULL,1),
+ (5022,'B070701','128282','Normal',NULL,NULL,NULL,1),
+ (5023,'B071071','0649715','Normal',NULL,NULL,NULL,1),
+ (5024,'B100031','BM 1984K','Normal',NULL,NULL,NULL,1),
+ (5025,'B100041','6151015','Normal',NULL,NULL,NULL,1),
+ (5026,'B100071','13-08-00886','Normal',NULL,NULL,NULL,1),
+ (5027,'B100101','147959','Normal',NULL,NULL,NULL,1),
+ (5028,'B100161','BM 1988K','Normal',NULL,NULL,NULL,1),
+ (5029,'B100181','BM 1008K','Normal',NULL,NULL,NULL,1),
+ (5030,'B100241','148514','Normal',NULL,NULL,NULL,1),
+ (5031,'B100291','BM 1999K','Normal',NULL,NULL,NULL,1),
+ (5032,'B100311','127983','Normal',NULL,NULL,NULL,1),
+ (5033,'B100381','BM 623K','Normal',NULL,NULL,NULL,1),
+ (5034,'B100411','1309544512','Normal',NULL,NULL,NULL,1),
+ (5035,'B121551','071201713','Normal',NULL,NULL,NULL,1),
+ (5036,'B121561','BM 2403K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5037,'B121562','40017475','Normal',NULL,NULL,NULL,1),
+ (5038,'B121581','BM 971K','Normal',NULL,NULL,NULL,1),
+ (5039,'B121611','6151231','Normal',NULL,NULL,NULL,1),
+ (5040,'B121631','071200749','Normal',NULL,NULL,NULL,1),
+ (5041,'B121701','BM 334K','Normal',NULL,NULL,NULL,1),
+ (5042,'B121721','temp 1201','Normal',NULL,NULL,NULL,1),
+ (5043,'B121731','BM 1482K','Normal',NULL,NULL,NULL,1),
+ (5044,'B121741','148908','Normal',NULL,NULL,NULL,1),
+ (5045,'B121781','BM 2684K','Normal',NULL,NULL,NULL,1),
+ (5046,'B121791','BM 1461K','Normal',NULL,NULL,NULL,1),
+ (5047,'B121801','1309544621','Normal',NULL,NULL,NULL,1),
+ (5048,'B121811','13 09544237','Normal',NULL,NULL,NULL,1),
+ (5049,'B130021','02.378187','Normal',NULL,NULL,NULL,1),
+ (5050,'B130051','BM 1150K','Normal',NULL,NULL,NULL,1),
+ (5051,'B130071','BM 2006K','Normal',NULL,NULL,NULL,1),
+ (5052,'B130151','BM 1219K','Normal',NULL,NULL,NULL,1),
+ (5053,'B130191','BM 838K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5054,'B130271','BM 707K','Normal',NULL,NULL,NULL,1),
+ (5055,'B130281','BM 591K','Normal',NULL,NULL,NULL,1),
+ (5056,'B160091','BM 567K','Normal',NULL,NULL,NULL,1),
+ (5057,'B160111','BM 2763K','Normal',NULL,NULL,NULL,1),
+ (5058,'B160131','1309544290','Normal',NULL,NULL,NULL,1),
+ (5059,'B160181','071200915','Normal',NULL,NULL,NULL,1),
+ (5060,'B160351','BM 151K','Normal',NULL,NULL,NULL,1),
+ (5061,'B160381','427553','Normal',NULL,NULL,NULL,1),
+ (5062,'B160491','13 09544095','Normal',NULL,NULL,NULL,1),
+ (5063,'B160501','BM 2073K','Normal',NULL,NULL,NULL,1),
+ (5064,'B160511','13 09544048','Normal',NULL,NULL,NULL,1),
+ (5065,'B160561','1309544174','Normal',NULL,NULL,NULL,1),
+ (5066,'B160581','BM 830K','Normal',NULL,NULL,NULL,1),
+ (5067,'B190011','BM 883K','Normal',NULL,NULL,NULL,1),
+ (5068,'B190031','BM 686K','Normal',NULL,NULL,NULL,1),
+ (5069,'B190141','TMP-00000002','Normal',NULL,NULL,NULL,1),
+ (5070,'B190161','BM 79K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5071,'B190181','BM 2469K','Normal',NULL,NULL,NULL,1),
+ (5072,'B190211','BM 1849K','Normal',NULL,NULL,NULL,1),
+ (5073,'B190241','BM 1052K','Normal',NULL,NULL,NULL,1),
+ (5074,'B190261','BM 599K','Normal',NULL,NULL,NULL,1),
+ (5075,'B190341','071201533','Normal',NULL,NULL,NULL,1),
+ (5076,'B190411','06-428562','Normal',NULL,NULL,NULL,1),
+ (5077,'B190412','BM 2287K','Normal',NULL,NULL,NULL,1),
+ (5078,'B190421','06-428548','Normal',NULL,NULL,NULL,1),
+ (5079,'B190431','071200604','Normal',NULL,NULL,NULL,1),
+ (5080,'B190451','05.213640','Normal',NULL,NULL,NULL,1),
+ (5081,'B190461','M10','Normal',NULL,NULL,NULL,1),
+ (5082,'B190471','TMP-00000068','Normal',NULL,NULL,NULL,1),
+ (5083,'B190481','TMP-00000069','Normal',NULL,NULL,NULL,1),
+ (5084,'B190491','PZN 057','Normal',NULL,NULL,NULL,1),
+ (5085,'B190551','06-49685','Normal',NULL,NULL,NULL,1),
+ (5086,'B190601','BM 115K','Normal',NULL,NULL,NULL,1),
+ (5087,'B190611','06.428460','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5088,'B190621','06-427770','Normal',NULL,NULL,NULL,1),
+ (5089,'B190661','071200345','Normal',NULL,NULL,NULL,1),
+ (5090,'B190671','TMP-00000125','Normal',NULL,NULL,NULL,1),
+ (5091,'B190691','BM 2010K','Normal',NULL,NULL,NULL,1),
+ (5092,'B190701','BM 1062K','Normal',NULL,NULL,NULL,1),
+ (5093,'B190711','06-428546','Normal',NULL,NULL,NULL,1),
+ (5094,'B190751','06-427771','Normal',NULL,NULL,NULL,1),
+ (5095,'B190761','06.428867','Normal',NULL,NULL,NULL,1),
+ (5096,'B190771','05-213647','Normal',NULL,NULL,NULL,1),
+ (5097,'B190791','06-427936','Normal',NULL,NULL,NULL,1),
+ (5098,'B190831','TMP-00000183','Normal',NULL,NULL,NULL,1),
+ (5099,'B190841','06494663','Normal',NULL,NULL,NULL,1),
+ (5100,'B190871','TMP 0000768','Normal',NULL,NULL,NULL,1),
+ (5101,'B190901','071200989','Normal',NULL,NULL,NULL,1),
+ (5102,'B190911','TMP-013452','Normal',NULL,NULL,NULL,1),
+ (5103,'B190931','BM 789K','Normal',NULL,NULL,NULL,1),
+ (5104,'B190961','071201131','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5105,'B190991','BM 1102K','Normal',NULL,NULL,NULL,1),
+ (5106,'B191001','BM 475K','Normal',NULL,NULL,NULL,1),
+ (5107,'B191021','BM 138K','Normal',NULL,NULL,NULL,1),
+ (5108,'B191031','06-4291125','Normal',NULL,NULL,NULL,1),
+ (5109,'B191051','BM 1692K','Normal',NULL,NULL,NULL,1),
+ (5110,'B191061','06-49681','Normal',NULL,NULL,NULL,1),
+ (5111,'B191091','BM 2039K','Normal',NULL,NULL,NULL,1),
+ (5112,'B191121','BM 1281K','Normal',NULL,NULL,NULL,1),
+ (5113,'B191131','BM 002K','Normal',NULL,NULL,NULL,1),
+ (5114,'B191381','BM 987K','Normal',NULL,NULL,NULL,1),
+ (5115,'B191401','BM 2490K','Normal',NULL,NULL,NULL,1),
+ (5116,'B191751','BM 1969K','Normal',NULL,NULL,NULL,1),
+ (5117,'B191771','BM 2541K','Normal',NULL,NULL,NULL,1),
+ (5118,'B191781','1309544353','Normal',NULL,NULL,NULL,1),
+ (5119,'B191811','BM 2094K','Normal',NULL,NULL,NULL,1),
+ (5120,'B191861','BM 204K','Normal',NULL,NULL,NULL,1),
+ (5121,'B191911','BM 1527K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5122,'B191931','01.1730944','Normal',NULL,NULL,NULL,1),
+ (5123,'B191941','BM 1231K','Normal',NULL,NULL,NULL,1),
+ (5124,'B191951','13 09544334','Normal',NULL,NULL,NULL,1),
+ (5125,'B200071','BM 1189K','Normal',NULL,NULL,NULL,1),
+ (5126,'B200131','BM 1292K','Normal',NULL,NULL,NULL,1),
+ (5127,'B200191','06-427460','Normal',NULL,NULL,NULL,1),
+ (5128,'B200231','13 09544666','Normal',NULL,NULL,NULL,1),
+ (5129,'B200241','BM 1316K','Normal',NULL,NULL,NULL,1),
+ (5130,'B200291','BM 274K','Normal',NULL,NULL,NULL,1),
+ (5131,'B200321','02-371177','Normal',NULL,NULL,NULL,1),
+ (5132,'B200391','BM 628K','Normal',NULL,NULL,NULL,1),
+ (5133,'B200421','13 09544565','Normal',NULL,NULL,NULL,1),
+ (5134,'B200441','88693596','Normal',NULL,NULL,NULL,1),
+ (5135,'B200451','033547','Normal',NULL,NULL,NULL,1),
+ (5136,'B200461','07-1200522','Normal',NULL,NULL,NULL,1),
+ (5137,'B200741','02.378183','Normal',NULL,NULL,NULL,1),
+ (5138,'B200751','BM 2457K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5139,'B200801','BM 1274K','Normal',NULL,NULL,NULL,1),
+ (5140,'B200811','L015-03-04232','Normal',NULL,NULL,NULL,1),
+ (5141,'B200821','BM 561K','Normal',NULL,NULL,NULL,1),
+ (5142,'B200831','13 09544263','Normal',NULL,NULL,NULL,1),
+ (5143,'B200871','BM 778K','Normal',NULL,NULL,NULL,1),
+ (5144,'B200901','BM 726K','Normal',NULL,NULL,NULL,1),
+ (5145,'B200911','13 09544369','Normal',NULL,NULL,NULL,1),
+ (5146,'B201011','BM 1635K','Normal',NULL,NULL,NULL,1),
+ (5147,'B201021','BM 1241K','Normal',NULL,NULL,NULL,1),
+ (5148,'B201041','BM 2564K','Normal',NULL,NULL,NULL,1),
+ (5149,'B201071','BM 1042K','Normal',NULL,NULL,NULL,1),
+ (5150,'B201081','BM 1913K','Normal',NULL,NULL,NULL,1),
+ (5151,'B201121','0','Normal',NULL,NULL,NULL,1),
+ (5152,'B201171','BM 798K','Normal',NULL,NULL,NULL,1),
+ (5153,'B201181','BM 1031K','Normal',NULL,NULL,NULL,1),
+ (5154,'B201211','BM 1098K','Normal',NULL,NULL,NULL,1),
+ (5155,'B201241','BM 2149K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5156,'B201261','141101669','Normal',NULL,NULL,NULL,1),
+ (5157,'B201271','13 09544541','Normal',NULL,NULL,NULL,1),
+ (5158,'B201281','BM 1164K','Normal',NULL,NULL,NULL,1),
+ (5159,'B201971','1309544191','Normal',NULL,NULL,NULL,1),
+ (5160,'B201981','1309544465','Normal',NULL,NULL,NULL,1),
+ (5161,'B210011','BM 2427K','Normal',NULL,NULL,NULL,1),
+ (5162,'B210021','BM 1089K','Normal',NULL,NULL,NULL,1),
+ (5163,'B210031','07-128665','Normal',NULL,NULL,NULL,1),
+ (5164,'B210081','13 09544108','Normal',NULL,NULL,NULL,1),
+ (5165,'B210141','40017466','Normal',NULL,NULL,NULL,1),
+ (5166,'B210261','1309544208','Normal',NULL,NULL,NULL,1),
+ (5167,'B210281','2015-05-04482','Normal',NULL,NULL,NULL,1),
+ (5168,'B210291','10-030141','Normal',NULL,NULL,NULL,1),
+ (5169,'B210301','274315-10','Normal',NULL,NULL,NULL,1),
+ (5170,'B210311','HCMB13120657','Normal',NULL,NULL,NULL,1),
+ (5171,'B220031','BM 1407K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5172,'B220041','BM 1505K','Normal',NULL,NULL,NULL,1),
+ (5173,'B220071','BM 1674K','Normal',NULL,NULL,NULL,1),
+ (5174,'B220091','BM 1924K','Normal',NULL,NULL,NULL,1),
+ (5175,'B220121','1309544424','Normal',NULL,NULL,NULL,1),
+ (5176,'B220191','07-1200501','Normal',NULL,NULL,NULL,1),
+ (5177,'B230021','140301073','Normal',NULL,NULL,NULL,1),
+ (5178,'B240011','BM 1186K','Normal',NULL,NULL,NULL,1),
+ (5179,'B280091','WM 1492','Normal',NULL,NULL,NULL,1),
+ (5180,'B280101','WM 0502','Normal',NULL,NULL,NULL,1),
+ (5181,'B280111','WM 0197','Normal',NULL,NULL,NULL,1),
+ (5182,'B280121','WM0468','Normal',NULL,NULL,NULL,1),
+ (5183,'B280131','WM 0975','Normal',NULL,NULL,NULL,1),
+ (5184,'B280151','5-255944','Normal',NULL,NULL,NULL,1),
+ (5185,'C010021','06-427705','Normal',NULL,NULL,NULL,1),
+ (5186,'C010031','BM 2438K','Normal',NULL,NULL,NULL,1),
+ (5187,'C010071','BM 2190K','Normal',NULL,NULL,NULL,1),
+ (5188,'C010101','BM 2261K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5189,'C010111','13 09544276','Normal',NULL,NULL,NULL,1),
+ (5190,'C010211','BM 1491K','Normal',NULL,NULL,NULL,1),
+ (5191,'C010221','BM 2211K','Normal',NULL,NULL,NULL,1),
+ (5192,'C010331','BM 1667K','Normal',NULL,NULL,NULL,1),
+ (5193,'C010371','BM 1076K','Normal',NULL,NULL,NULL,1),
+ (5194,'C010471','1309544547','Normal',NULL,NULL,NULL,1),
+ (5195,'C010501','40017477','Normal',NULL,NULL,NULL,1),
+ (5196,'C010561','BM 455K','Normal',NULL,NULL,NULL,1),
+ (5197,'C010651','BM 1731K','Normal',NULL,NULL,NULL,1),
+ (5198,'C010661','BM 321K','Normal',NULL,NULL,NULL,1),
+ (5199,'C010801','13 09544462','Normal',NULL,NULL,NULL,1),
+ (5200,'C010831','BM 1520K','Normal',NULL,NULL,NULL,1),
+ (5201,'C010851','BM 589K','Normal',NULL,NULL,NULL,1),
+ (5202,'C010861','BM 483K','Normal',NULL,NULL,NULL,1),
+ (5203,'C010871','BM 529K','Normal',NULL,NULL,NULL,1),
+ (5204,'C010901','06.427702','Normal',NULL,NULL,NULL,1),
+ (5205,'C010961','BM 674K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5206,'C010971','BM 1398K','Normal',NULL,NULL,NULL,1),
+ (5207,'C011001','13 09544697','Normal',NULL,NULL,NULL,1),
+ (5208,'C011011','13 09544084','Normal',NULL,NULL,NULL,1),
+ (5209,'C011031','13 09544179','Normal',NULL,NULL,NULL,1),
+ (5210,'C011041','BM 631K','Normal',NULL,NULL,NULL,1),
+ (5211,'C011071','BM2571K','Normal',NULL,NULL,NULL,1),
+ (5212,'C011101','BM 1483K','Normal',NULL,NULL,NULL,1),
+ (5213,'C011121','06.428482','Normal',NULL,NULL,NULL,1),
+ (5214,'C011191','06-428637','Normal',NULL,NULL,NULL,1),
+ (5215,'C011211','BM 2047K','Normal',NULL,NULL,NULL,1),
+ (5216,'C011231','BM 2121K','Normal',NULL,NULL,NULL,1),
+ (5217,'C011291','BM 2265K','Normal',NULL,NULL,NULL,1),
+ (5218,'C011301','BM 1410K','Normal',NULL,NULL,NULL,1),
+ (5219,'C011311','BM 1071K','Normal',NULL,NULL,NULL,1),
+ (5220,'C011321','BM 811K','Normal',NULL,NULL,NULL,1),
+ (5221,'C011381','13 09544360','Normal',NULL,NULL,NULL,1),
+ (5222,'C011401','1309544138','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5223,'C011451','02-1501863','Normal',NULL,NULL,NULL,1),
+ (5224,'C011461','BM 804K','Normal',NULL,NULL,NULL,1),
+ (5225,'C011481','BM 1926K','Normal',NULL,NULL,NULL,1),
+ (5226,'C011491','BM 2030K','Normal',NULL,NULL,NULL,1),
+ (5227,'C011581','40017389','Normal',NULL,NULL,NULL,1),
+ (5228,'C011611','148629','Normal',NULL,NULL,NULL,1),
+ (5229,'C011651','BM 257K','Normal',NULL,NULL,NULL,1),
+ (5230,'C011731','BM 847K','Normal',NULL,NULL,NULL,1),
+ (5231,'C011921','BM 2200K','Normal',NULL,NULL,NULL,1),
+ (5232,'C011941','BM 2223K','Normal',NULL,NULL,NULL,1),
+ (5233,'C011961','02-835003','Normal',NULL,NULL,NULL,1),
+ (5234,'C011991','BM 356K','Normal',NULL,NULL,NULL,1),
+ (5235,'C012001','BM 348K','Normal',NULL,NULL,NULL,1),
+ (5236,'C012011','BM 1651K','Normal',NULL,NULL,NULL,1),
+ (5237,'C020011','13 09544496','Normal',NULL,NULL,NULL,1),
+ (5238,'C020071','1309544443','Normal',NULL,NULL,NULL,1),
+ (5239,'C020091','BM 1838K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5240,'C020101','BM 1499K','Normal',NULL,NULL,NULL,1),
+ (5241,'C020121','BM 2342K','Normal',NULL,NULL,NULL,1),
+ (5242,'C020141','13 09544064','Normal',NULL,NULL,NULL,1),
+ (5243,'C020151','BM 2358K','Normal',NULL,NULL,NULL,1),
+ (5244,'C020231','BM 324K','Normal',NULL,NULL,NULL,1),
+ (5245,'C020271','BM 2222K','Normal',NULL,NULL,NULL,1),
+ (5246,'C020281','BM 2195K','Normal',NULL,NULL,NULL,1),
+ (5247,'C020301','13 09544359','Normal',NULL,NULL,NULL,1),
+ (5248,'C020341','BM192K','Normal',NULL,NULL,NULL,1),
+ (5249,'C020431','BM 802K','Normal',NULL,NULL,NULL,1),
+ (5250,'C020451','BM 831K','Normal',NULL,NULL,NULL,1),
+ (5251,'C020461','BM 246K','Normal',NULL,NULL,NULL,1),
+ (5252,'C020491','13 09544312','Normal',NULL,NULL,NULL,1),
+ (5253,'C020561','1309544387','Normal',NULL,NULL,NULL,1),
+ (5254,'C020581','06-4292','Normal',NULL,NULL,NULL,1),
+ (5255,'C020601','BM 1882K','Normal',NULL,NULL,NULL,1),
+ (5256,'C020661','BM 1605K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5257,'C020691','BM 2207K','Normal',NULL,NULL,NULL,1),
+ (5258,'C020701','1309544098','Normal',NULL,NULL,NULL,1),
+ (5259,'C020711','BM 1340K','Normal',NULL,NULL,NULL,1),
+ (5260,'C020751','BM 823K','Normal',NULL,NULL,NULL,1),
+ (5261,'C020761','BM 2453K','Normal',NULL,NULL,NULL,1),
+ (5262,'C020771','BM 2687K','Normal',NULL,NULL,NULL,1),
+ (5263,'C020781','BM 1827K','Normal',NULL,NULL,NULL,1),
+ (5264,'C020871','BM 1915K','Normal',NULL,NULL,NULL,1),
+ (5265,'C020931','BM 2145K','Normal',NULL,NULL,NULL,1),
+ (5266,'C020961','BM 1975K','Normal',NULL,NULL,NULL,1),
+ (5267,'C021001','BM 1368K','Normal',NULL,NULL,NULL,1),
+ (5268,'C021071','BM 1175K','Normal',NULL,NULL,NULL,1),
+ (5269,'C021081','06-427522','Normal',NULL,NULL,NULL,1),
+ (5270,'C021091','BM 2593K','Normal',NULL,NULL,NULL,1),
+ (5271,'C021121','1309544446','Normal',NULL,NULL,NULL,1),
+ (5272,'C021151','BM 2611K','Normal',NULL,NULL,NULL,1),
+ (5273,'C021191','BM 2660K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5274,'C021211','1309544415','Normal',NULL,NULL,NULL,1),
+ (5275,'C021251','07-1200859','Normal',NULL,NULL,NULL,1),
+ (5276,'C021291','BM 867K','Normal',NULL,NULL,NULL,1),
+ (5277,'C021301','BM 2534K','Normal',NULL,NULL,NULL,1),
+ (5278,'C021381','BM 2651K','Normal',NULL,NULL,NULL,1),
+ (5279,'C021411','1309544211','Normal',NULL,NULL,NULL,1),
+ (5280,'C021461','BM 1040K','Normal',NULL,NULL,NULL,1),
+ (5281,'C021481','BM 2729K','Normal',NULL,NULL,NULL,1),
+ (5282,'C021501','BM 1559K','Normal',NULL,NULL,NULL,1),
+ (5283,'C021511','BM 1024K','Normal',NULL,NULL,NULL,1),
+ (5284,'C021541','BM 1414K','Normal',NULL,NULL,NULL,1),
+ (5285,'C021571','BM 277K','Normal',NULL,NULL,NULL,1),
+ (5286,'C021581','13 09544500','Normal',NULL,NULL,NULL,1),
+ (5287,'C021621','BM 612K','Normal',NULL,NULL,NULL,1),
+ (5288,'C021691','BM 2311K','Normal',NULL,NULL,NULL,1),
+ (5289,'C021701','13 09544381','Normal',NULL,NULL,NULL,1),
+ (5290,'C021711','BM 1080K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5291,'C021741','BM 1218K','Normal',NULL,NULL,NULL,1),
+ (5292,'C021751','BM 565K','Normal',NULL,NULL,NULL,1),
+ (5293,'C021761','BM 242K','Normal',NULL,NULL,NULL,1),
+ (5294,'C021771','BM 1765K','Normal',NULL,NULL,NULL,1),
+ (5295,'C021801','BM 2252K','Normal',NULL,NULL,NULL,1),
+ (5296,'C021811','BM 1334K','Normal',NULL,NULL,NULL,1),
+ (5297,'C021831','BM 158','Normal',NULL,NULL,NULL,1),
+ (5298,'C021881','BM 2632K','Normal',NULL,NULL,NULL,1),
+ (5299,'C021911','BM 1996K','Normal',NULL,NULL,NULL,1),
+ (5300,'C021921','BM 100K','Normal',NULL,NULL,NULL,1),
+ (5301,'C021951','1309544345','Normal',NULL,NULL,NULL,1),
+ (5302,'C021961','BM 1938K','Normal',NULL,NULL,NULL,1),
+ (5303,'C022011','02-834555','Normal',NULL,NULL,NULL,1),
+ (5304,'C030021','1309544159','Normal',NULL,NULL,NULL,1),
+ (5305,'C030041','BM 1001K','Normal',NULL,NULL,NULL,1),
+ (5306,'C030061','BM 40K','Normal',NULL,NULL,NULL,1),
+ (5307,'C030071','BM 2482K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5308,'C030111','BM 1640K','Normal',NULL,NULL,NULL,1),
+ (5309,'C030151','BM 1859K','Normal',NULL,NULL,NULL,1),
+ (5310,'C030241','BM 2766K','Normal',NULL,NULL,NULL,1),
+ (5311,'C030301','BM 671K','Normal',NULL,NULL,NULL,1),
+ (5312,'C030311','BM 1621K','Normal',NULL,NULL,NULL,1),
+ (5313,'C030341','BM 1561K','Normal',NULL,NULL,NULL,1),
+ (5314,'C030351','13 09544679','Normal',NULL,NULL,NULL,1),
+ (5315,'C030391','BM 2404K','Normal',NULL,NULL,NULL,1),
+ (5316,'C030411','BM 1754K','Normal',NULL,NULL,NULL,1),
+ (5317,'C030451','13 09544296','Normal',NULL,NULL,NULL,1),
+ (5318,'C030471','BM 2542K','Normal',NULL,NULL,NULL,1),
+ (5319,'C030521','BM 149K','Normal',NULL,NULL,NULL,1),
+ (5320,'C030571','BM 2138K','Normal',NULL,NULL,NULL,1),
+ (5321,'C030581','13 09544508','Normal',NULL,NULL,NULL,1),
+ (5322,'C030651','13 09544153','Normal',NULL,NULL,NULL,1),
+ (5323,'C030711','BM 2647K','Normal',NULL,NULL,NULL,1),
+ (5324,'C030731','BM 1709K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5325,'C030801','BM 1758K','Normal',NULL,NULL,NULL,1),
+ (5326,'C030841','BM 2327K','Normal',NULL,NULL,NULL,1),
+ (5327,'C030921','BM 1357K','Normal',NULL,NULL,NULL,1),
+ (5328,'C030971','BM 640K','Normal',NULL,NULL,NULL,1),
+ (5329,'C031031','1309544281','Normal',NULL,NULL,NULL,1),
+ (5330,'C031041','071201176','Normal',NULL,NULL,NULL,1),
+ (5331,'C031171','TMP-888','Normal',NULL,NULL,NULL,1),
+ (5332,'C031201','1309544649','Normal',NULL,NULL,NULL,1),
+ (5333,'C031211','1309544411','Normal',NULL,NULL,NULL,1),
+ (5334,'C031221','02834649','Normal',NULL,NULL,NULL,1),
+ (5335,'C031261','13 09544241','Normal',NULL,NULL,NULL,1),
+ (5336,'C031271','BM 1745K','Normal',NULL,NULL,NULL,1),
+ (5337,'C031281','13 09544305','Normal',NULL,NULL,NULL,1),
+ (5338,'C031311','BM 179K','Normal',NULL,NULL,NULL,1),
+ (5339,'C031331','BM 2215K','Normal',NULL,NULL,NULL,1),
+ (5340,'C031341','BM 1749K','Normal',NULL,NULL,NULL,1),
+ (5341,'C031381','40017495','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5342,'C031401','BM 1232K','Normal',NULL,NULL,NULL,1),
+ (5343,'C031411','BM 2781K','Normal',NULL,NULL,NULL,1),
+ (5344,'C031441','BM 942K','Normal',NULL,NULL,NULL,1),
+ (5345,'C031451','1309544587','Normal',NULL,NULL,NULL,1),
+ (5346,'C031551','1309544136','Normal',NULL,NULL,NULL,1),
+ (5347,'C031641','BM 1971K','Normal',NULL,NULL,NULL,1),
+ (5348,'C031671','13 09544373','Normal',NULL,NULL,NULL,1),
+ (5349,'C031691','06-427625','Normal',NULL,NULL,NULL,1),
+ (5350,'C031711','13 09544224','Normal',NULL,NULL,NULL,1),
+ (5351,'C031741','BM 578K','Normal',NULL,NULL,NULL,1),
+ (5352,'C031771','BM 1371K','Normal',NULL,NULL,NULL,1),
+ (5353,'C031781','BM 2116K','Normal',NULL,NULL,NULL,1),
+ (5354,'C031821','BM 1515K','Normal',NULL,NULL,NULL,1),
+ (5355,'C031861','BM 1056K','Normal',NULL,NULL,NULL,1),
+ (5356,'C031881','BM 2536K','Normal',NULL,NULL,NULL,1),
+ (5357,'C031911','BM 1214K','Normal',NULL,NULL,NULL,1),
+ (5358,'C031941','1309544392','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5359,'C031951','BM 1942K','Normal',NULL,NULL,NULL,1),
+ (5360,'C031971','13 09544402','Normal',NULL,NULL,NULL,1),
+ (5361,'C031981','06-428348','Normal',NULL,NULL,NULL,1),
+ (5362,'C032001','05.216300','Normal',NULL,NULL,NULL,1),
+ (5363,'C032011','13 09544652','Normal',NULL,NULL,NULL,1),
+ (5364,'C040011','BM 1540K','Normal',NULL,NULL,NULL,1),
+ (5365,'C040031','BM 411K','Normal',NULL,NULL,NULL,1),
+ (5366,'C040061','BM 2141K','Normal',NULL,NULL,NULL,1),
+ (5367,'C040101','BM 2171K','Normal',NULL,NULL,NULL,1),
+ (5368,'C040111','TMP-00000044','Normal',NULL,NULL,NULL,1),
+ (5369,'C040141','BM 1295K','Normal',NULL,NULL,NULL,1),
+ (5370,'C040151','BM 63K','Normal',NULL,NULL,NULL,1),
+ (5371,'C040201','BM 2076K','Normal',NULL,NULL,NULL,1),
+ (5372,'C040221','1309544641','Normal',NULL,NULL,NULL,1),
+ (5373,'C040251','BM 662K','Normal',NULL,NULL,NULL,1),
+ (5374,'C040261','141101839','Normal',NULL,NULL,NULL,1),
+ (5375,'C040281','BM 84K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5376,'C040291','BM 1402K','Normal',NULL,NULL,NULL,1),
+ (5377,'C040301','BM 1638K','Normal',NULL,NULL,NULL,1),
+ (5378,'C040331','BM 2374K','Normal',NULL,NULL,NULL,1),
+ (5379,'C040341','40017468','Normal',NULL,NULL,NULL,1),
+ (5380,'C040381','13 09544181','Normal',NULL,NULL,NULL,1),
+ (5381,'C040401','BM 650K','Normal',NULL,NULL,NULL,1),
+ (5382,'C040411','BM 453K','Normal',NULL,NULL,NULL,1),
+ (5383,'C040431','BM 1786K','Normal',NULL,NULL,NULL,1),
+ (5384,'C040451','1309544303','Normal',NULL,NULL,NULL,1),
+ (5385,'C040471','BM 1304K','Normal',NULL,NULL,NULL,1),
+ (5386,'C040481','BM 1136K','Normal',NULL,NULL,NULL,1),
+ (5387,'C040501','BM 1321K','Normal',NULL,NULL,NULL,1),
+ (5388,'C040531','BM 2696K','Normal',NULL,NULL,NULL,1),
+ (5389,'C040541','BM 1808K','Normal',NULL,NULL,NULL,1),
+ (5390,'C040561','13 09544384','Normal',NULL,NULL,NULL,1),
+ (5391,'C040571','BM 796K','Normal',NULL,NULL,NULL,1),
+ (5392,'C040581','TMP-00000001','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5393,'C040631','BM 169K','Normal',NULL,NULL,NULL,1),
+ (5394,'C040651','BM 1212K','Normal',NULL,NULL,NULL,1),
+ (5395,'C040671','BM 2263K','Normal',NULL,NULL,NULL,1),
+ (5396,'C040681','BM 104K','Normal',NULL,NULL,NULL,1),
+ (5397,'C040731','BM 2506K','Normal',NULL,NULL,NULL,1),
+ (5398,'C040741','BM 2335K','Normal',NULL,NULL,NULL,1),
+ (5399,'C040751','06-428481','Normal',NULL,NULL,NULL,1),
+ (5400,'C040761','BM 1791K','Normal',NULL,NULL,NULL,1),
+ (5401,'C040771','BM 343K','Normal',NULL,NULL,NULL,1),
+ (5402,'C040781','BM 2095K','Normal',NULL,NULL,NULL,1),
+ (5403,'C040841','BM 078K','Normal',NULL,NULL,NULL,1),
+ (5404,'C040861','BM 507K','Normal',NULL,NULL,NULL,1),
+ (5405,'C040891','BM 1811K','Normal',NULL,NULL,NULL,1),
+ (5406,'C040971','1309544169','Normal',NULL,NULL,NULL,1),
+ (5407,'C040981','BM 326K','Normal',NULL,NULL,NULL,1),
+ (5408,'C041011','13 09544092','Normal',NULL,NULL,NULL,1),
+ (5409,'C041021','BM 91K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5410,'C041031','BM 412K','Normal',NULL,NULL,NULL,1),
+ (5411,'C041071','BM 643K','Normal',NULL,NULL,NULL,1),
+ (5412,'C041121','TMP-00000030','Normal',NULL,NULL,NULL,1),
+ (5413,'C041141','BM 1623K','Normal',NULL,NULL,NULL,1),
+ (5414,'C041171','BM 141K','Normal',NULL,NULL,NULL,1),
+ (5415,'C041181','BM 1085K','Normal',NULL,NULL,NULL,1),
+ (5416,'C041191','BM 657K','Normal',NULL,NULL,NULL,1),
+ (5417,'C041211','BM 1318K','Normal',NULL,NULL,NULL,1),
+ (5418,'C041251','BM 2140K','Normal',NULL,NULL,NULL,1),
+ (5419,'C041261','05-213471','Normal',NULL,NULL,NULL,1),
+ (5420,'C041281','BM 1790K','Normal',NULL,NULL,NULL,1),
+ (5421,'C041301','BM 2712K','Normal',NULL,NULL,NULL,1),
+ (5422,'C041311','BM 725K','Normal',NULL,NULL,NULL,1),
+ (5423,'C041331','TMP-00000029','Normal',NULL,NULL,NULL,1),
+ (5424,'C041431','BM 692K','Normal',NULL,NULL,NULL,1),
+ (5425,'C041441','BM 127K','Normal',NULL,NULL,NULL,1),
+ (5426,'C041491','BM 575K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5427,'C041531','BM 314K','Normal',NULL,NULL,NULL,1),
+ (5428,'C041551','BM 2246K','Normal',NULL,NULL,NULL,1),
+ (5429,'C041591','BM 2043K','Normal',NULL,NULL,NULL,1),
+ (5430,'C041621','BM 1269K','Normal',NULL,NULL,NULL,1),
+ (5431,'C041641','BM 184K','Normal',NULL,NULL,NULL,1),
+ (5432,'C041661','BM 1327K','Normal',NULL,NULL,NULL,1),
+ (5433,'C041711','BM 2241K','Normal',NULL,NULL,NULL,1),
+ (5434,'C041731','BM 2267K','Normal',NULL,NULL,NULL,1),
+ (5435,'C041801','1309544364','Normal',NULL,NULL,NULL,1),
+ (5436,'C041831','06-467767','Normal',NULL,NULL,NULL,1),
+ (5437,'C041851','BM 1225K','Normal',NULL,NULL,NULL,1),
+ (5438,'C041871','BM 1263K','Normal',NULL,NULL,NULL,1),
+ (5439,'C041881','BM  2063K','Normal',NULL,NULL,NULL,1),
+ (5440,'C041901','1309544524','Normal',NULL,NULL,NULL,1),
+ (5441,'C041991','13 09544434','Normal',NULL,NULL,NULL,1),
+ (5442,'C042011','06-428556','Normal',NULL,NULL,NULL,1),
+ (5443,'C050041','03-04241','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5444,'C050051','BM 2494K','Normal',NULL,NULL,NULL,1),
+ (5445,'C050061','BM 1428K','Normal',NULL,NULL,NULL,1),
+ (5446,'C050081','BM 550K','Normal',NULL,NULL,NULL,1),
+ (5447,'C050111','BM 1199K','Normal',NULL,NULL,NULL,1),
+ (5448,'C050141','15-00366','Normal',NULL,NULL,NULL,1),
+ (5449,'C050151','BM 1092K','Normal',NULL,NULL,NULL,1),
+ (5450,'C050201','1309544643','Normal',NULL,NULL,NULL,1),
+ (5451,'C050221','BM 1868K','Normal',NULL,NULL,NULL,1),
+ (5452,'C050231','BM 77K','Normal',NULL,NULL,NULL,1),
+ (5453,'C050281','06-427445','Normal',NULL,NULL,NULL,1),
+ (5454,'C050321','06.428389','Normal',NULL,NULL,NULL,1),
+ (5455,'C050371','BM 2143K','Normal',NULL,NULL,NULL,1),
+ (5456,'C050421','06.428666','Normal',NULL,NULL,NULL,1),
+ (5457,'C050501','BM 728K','Normal',NULL,NULL,NULL,1),
+ (5458,'C050521','BM 633K','Normal',NULL,NULL,NULL,1),
+ (5459,'C050531','','Normal',NULL,NULL,NULL,1),
+ (5460,'C050621','BM 2085K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5461,'C050671','BM 2717K','Normal',NULL,NULL,NULL,1),
+ (5462,'C050791','1309544058','Normal',NULL,NULL,NULL,1),
+ (5463,'C050821','BM 1176K','Normal',NULL,NULL,NULL,1),
+ (5464,'C050951','BM 1993K','Normal',NULL,NULL,NULL,1),
+ (5465,'C050961','BM2185K','Normal',NULL,NULL,NULL,1),
+ (5466,'C050971','BM 375K','Normal',NULL,NULL,NULL,1),
+ (5467,'C050981','BM 2022K','Normal',NULL,NULL,NULL,1),
+ (5468,'C051001','13 09544692','Normal',NULL,NULL,NULL,1),
+ (5469,'C051081','06-427406','Normal',NULL,NULL,NULL,1),
+ (5470,'C051091','BM 431K','Normal',NULL,NULL,NULL,1),
+ (5471,'C051291','TMP-00000070','Normal',NULL,NULL,NULL,1),
+ (5472,'C051311','1309544409','Normal',NULL,NULL,NULL,1),
+ (5473,'C051361','BM 891K','Normal',NULL,NULL,NULL,1),
+ (5474,'C051381','BM 1229K','Normal',NULL,NULL,NULL,1),
+ (5475,'C051401','1309544639','Normal',NULL,NULL,NULL,1),
+ (5476,'C051411','13 09544560','Normal',NULL,NULL,NULL,1),
+ (5477,'C051421','BM 718K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5478,'C051441','1309544053','Normal',NULL,NULL,NULL,1),
+ (5479,'C051471','bm 1732k','Normal',NULL,NULL,NULL,1),
+ (5480,'C051481','BM 1564K','Normal',NULL,NULL,NULL,1),
+ (5481,'C051491','BM 2725K','Normal',NULL,NULL,NULL,1),
+ (5482,'C051511','TMP-00000036','Normal',NULL,NULL,NULL,1),
+ (5483,'C051551','BM 1077K','Normal',NULL,NULL,NULL,1),
+ (5484,'C051571','BM2602K','Normal',NULL,NULL,NULL,1),
+ (5485,'C051581','13 09544214','Normal',NULL,NULL,NULL,1),
+ (5486,'C051591','1309544331','Normal',NULL,NULL,NULL,1),
+ (5487,'C051641','TMP-00000037','Normal',NULL,NULL,NULL,1),
+ (5488,'C051651','1309544260','Normal',NULL,NULL,NULL,1),
+ (5489,'C051721','BM 2264K','Normal',NULL,NULL,NULL,1),
+ (5490,'C051761','BM 2732K','Normal',NULL,NULL,NULL,1),
+ (5491,'C051781','BM 1742K','Normal',NULL,NULL,NULL,1),
+ (5492,'C051801','BM 1459K','Normal',NULL,NULL,NULL,1),
+ (5493,'C051821','BM 1448K','Normal',NULL,NULL,NULL,1),
+ (5494,'C051851','BM 821K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5495,'C051891','06-428387','Normal',NULL,NULL,NULL,1),
+ (5496,'C051901','BM 394K','Normal',NULL,NULL,NULL,1),
+ (5497,'C051911','BM 672K','Normal',NULL,NULL,NULL,1),
+ (5498,'C051951','BM 1909K','Normal',NULL,NULL,NULL,1),
+ (5499,'C060021','BM 2318K','Normal',NULL,NULL,NULL,1),
+ (5500,'C060071','BM 1757K','Normal',NULL,NULL,NULL,1),
+ (5501,'C060081','BM 513K','Normal',NULL,NULL,NULL,1),
+ (5502,'C060091','BM 585K','Normal',NULL,NULL,NULL,1),
+ (5503,'C060101','BM 1694K','Normal',NULL,NULL,NULL,1),
+ (5504,'C060121','BM 1442K','Normal',NULL,NULL,NULL,1),
+ (5505,'C060161','BM 1075K','Normal',NULL,NULL,NULL,1),
+ (5506,'C060171','BM 2753K','Normal',NULL,NULL,NULL,1),
+ (5507,'C060201','BM 2658K','Normal',NULL,NULL,NULL,1),
+ (5508,'C060211','BM 2521K','Normal',NULL,NULL,NULL,1),
+ (5509,'C060311','BM 1835K','Normal',NULL,NULL,NULL,1),
+ (5510,'C060321','06-425421','Normal',NULL,NULL,NULL,1),
+ (5511,'C060331','06-427683','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5512,'C060351','BM 716K','Normal',NULL,NULL,NULL,1),
+ (5513,'C060361','BM 2090K','Normal',NULL,NULL,NULL,1),
+ (5514,'C060431','BM 526K','Normal',NULL,NULL,NULL,1),
+ (5515,'C060461','BM 2176K','Normal',NULL,NULL,NULL,1),
+ (5516,'C060471','900000078','Normal',NULL,NULL,NULL,1),
+ (5517,'C060481','BM 2531K','Normal',NULL,NULL,NULL,1),
+ (5518,'C060501','TMP-00000748','Normal',NULL,NULL,NULL,1),
+ (5519,'C060511','BM 2012K','Normal',NULL,NULL,NULL,1),
+ (5520,'C060521','BM 772K','Normal',NULL,NULL,NULL,1),
+ (5521,'C060531','TMP-00000750','Normal',NULL,NULL,NULL,1),
+ (5522,'C060541','BM 2209K','Normal',NULL,NULL,NULL,1),
+ (5523,'C060571','TMP-00000032','Normal',NULL,NULL,NULL,1),
+ (5524,'C060581','BM 1283K','Normal',NULL,NULL,NULL,1),
+ (5525,'C060631','13 09544647','Normal',NULL,NULL,NULL,1),
+ (5526,'C060651','128286','Normal',NULL,NULL,NULL,1),
+ (5527,'C060671','13 09544178','Normal',NULL,NULL,NULL,1),
+ (5528,'C060701','BM 135K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5529,'C060711','071200342','Normal',NULL,NULL,NULL,1),
+ (5530,'C060721','13 09544062','Normal',NULL,NULL,NULL,1),
+ (5531,'C060751','06-429206','Normal',NULL,NULL,NULL,1),
+ (5532,'C060761','BM 1569K','Normal',NULL,NULL,NULL,1),
+ (5533,'C060771','BM 1884K','Normal',NULL,NULL,NULL,1),
+ (5534,'C060801','02-324','Normal',NULL,NULL,NULL,1),
+ (5535,'C060821','BM 383K','Normal',NULL,NULL,NULL,1),
+ (5536,'C060831','BM 37K','Normal',NULL,NULL,NULL,1),
+ (5537,'C060841','BM 2019K','Normal',NULL,NULL,NULL,1),
+ (5538,'C060851','BM 290K','Normal',NULL,NULL,NULL,1),
+ (5539,'C060871','BM 900K','Normal',NULL,NULL,NULL,1),
+ (5540,'C060881','13 09544473','Normal',NULL,NULL,NULL,1),
+ (5541,'C060931','12-05213607','Normal',NULL,NULL,NULL,1),
+ (5542,'C060961','BM 2146K','Normal',NULL,NULL,NULL,1),
+ (5543,'C060981','BM 2389K','Normal',NULL,NULL,NULL,1),
+ (5544,'C061011','BM 2774K','Normal',NULL,NULL,NULL,1),
+ (5545,'C061021','06.427703','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5546,'C061041','BM 1920K','Normal',NULL,NULL,NULL,1),
+ (5547,'C061051','BM 2450K','Normal',NULL,NULL,NULL,1),
+ (5548,'C061071','1309544452','Normal',NULL,NULL,NULL,1),
+ (5549,'C061081','BM 0K','Normal',NULL,NULL,NULL,1),
+ (5550,'C061091','BM 225K','Normal',NULL,NULL,NULL,1),
+ (5551,'C061131','BM 2133K','Normal',NULL,NULL,NULL,1),
+ (5552,'C061151','BM 1905K','Normal',NULL,NULL,NULL,1),
+ (5553,'C061201','BM 235K','Normal',NULL,NULL,NULL,1),
+ (5554,'C061221','BM 1688K','Normal',NULL,NULL,NULL,1),
+ (5555,'C061231','BM 1329K','Normal',NULL,NULL,NULL,1),
+ (5556,'C061241','BM777K','Normal',NULL,NULL,NULL,1),
+ (5557,'C061261','1309544040','Normal',NULL,NULL,NULL,1),
+ (5558,'C061271','BM 1217K','Normal',NULL,NULL,NULL,1),
+ (5559,'C061291','BM 950K','Normal',NULL,NULL,NULL,1),
+ (5560,'C061321','BM 1865K','Normal',NULL,NULL,NULL,1),
+ (5561,'C061341','BM 1804K','Normal',NULL,NULL,NULL,1),
+ (5562,'C061351','BM 1249K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5563,'C061361','BM 1685K','Normal',NULL,NULL,NULL,1),
+ (5564,'C061391','13 09544551','Normal',NULL,NULL,NULL,1),
+ (5565,'C061411','071200357','Normal',NULL,NULL,NULL,1),
+ (5566,'C061421','BM 572K','Normal',NULL,NULL,NULL,1),
+ (5567,'C061431','BM 2569K','Normal',NULL,NULL,NULL,1),
+ (5568,'C061451','BM 338K','Normal',NULL,NULL,NULL,1),
+ (5569,'C061461','40077287','Normal',NULL,NULL,NULL,1),
+ (5570,'C061471','BM 1817K','Normal',NULL,NULL,NULL,1),
+ (5571,'C061531','BM 600K','Normal',NULL,NULL,NULL,1),
+ (5572,'C061541','BM 516K','Normal',NULL,NULL,NULL,1),
+ (5573,'C061551','13 09544577','Normal',NULL,NULL,NULL,1),
+ (5574,'C061561','BM 1512K','Normal',NULL,NULL,NULL,1),
+ (5575,'C061581','BM 1273K','Normal',NULL,NULL,NULL,1),
+ (5576,'C061591','BM 1626K','Normal',NULL,NULL,NULL,1),
+ (5577,'C061601','BM 1800K','Normal',NULL,NULL,NULL,1),
+ (5578,'C061651','BM 2596K','Normal',NULL,NULL,NULL,1),
+ (5579,'C061661','BM 721K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5580,'C061671','BM 915K','Normal',NULL,NULL,NULL,1),
+ (5581,'C061681','BM 252K','Normal',NULL,NULL,NULL,1),
+ (5582,'C061691','BM2411K','Normal',NULL,NULL,NULL,1),
+ (5583,'C061751','BM 554K','Normal',NULL,NULL,NULL,1),
+ (5584,'C061771','BM 1490K','Normal',NULL,NULL,NULL,1),
+ (5585,'C061781','BM 1254K','Normal',NULL,NULL,NULL,1),
+ (5586,'C061821','06.428391','Normal',NULL,NULL,NULL,1),
+ (5587,'C061831','06-427685','Normal',NULL,NULL,NULL,1),
+ (5588,'C061861','BM 472K','Normal',NULL,NULL,NULL,1),
+ (5589,'C061911','TMP-00000031','Normal',NULL,NULL,NULL,1),
+ (5590,'C061921','1309544570','Normal',NULL,NULL,NULL,1),
+ (5591,'C061931','BM 1973K','Normal',NULL,NULL,NULL,1),
+ (5592,'C061981','BM 2127K','Normal',NULL,NULL,NULL,1),
+ (5593,'C062011','BM 2185K','Normal',NULL,NULL,NULL,1),
+ (5594,'C062021','05-226300','Normal',NULL,NULL,NULL,1),
+ (5595,'C062061','1309544333','Normal',NULL,NULL,NULL,1),
+ (5596,'C062071','06-42752','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5597,'C070011','13 09544610','Normal',NULL,NULL,NULL,1),
+ (5598,'C070021','130900543','Normal',NULL,NULL,NULL,1),
+ (5599,'C070031','BM 1546K','Normal',NULL,NULL,NULL,1),
+ (5600,'C070041','BM 1163K','Normal',NULL,NULL,NULL,1),
+ (5601,'C070051','BM 2422K','Normal',NULL,NULL,NULL,1),
+ (5602,'C070061','BM 2126K','Normal',NULL,NULL,NULL,1),
+ (5603,'C070071','0096','Normal',NULL,NULL,NULL,1),
+ (5604,'C070091','BM 2615K','Normal',NULL,NULL,NULL,1),
+ (5605,'C070101','BM 2702K','Normal',NULL,NULL,NULL,1),
+ (5606,'C070111','06-429129','Normal',NULL,NULL,NULL,1),
+ (5607,'C070121','BM 1210K','Normal',NULL,NULL,NULL,1),
+ (5608,'C070131','BM 88K','Normal',NULL,NULL,NULL,1),
+ (5609,'C070141','BM 2052K','Normal',NULL,NULL,NULL,1),
+ (5610,'C070171','0046','Normal',NULL,NULL,NULL,1),
+ (5611,'C070181','1309544143','Normal',NULL,NULL,NULL,1),
+ (5612,'C070191','BM 2123K','Normal',NULL,NULL,NULL,1),
+ (5613,'C070201','TPM-00000105','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5614,'C070211','BM 2329K','Normal',NULL,NULL,NULL,1),
+ (5615,'C070231','BM 1750K','Normal',NULL,NULL,NULL,1),
+ (5616,'C070241','BM 090K','Normal',NULL,NULL,NULL,1),
+ (5617,'C070251','BM 848K','Normal',NULL,NULL,NULL,1),
+ (5618,'C070261','1111','Normal',NULL,NULL,NULL,1),
+ (5619,'C070271','06-429146','Normal',NULL,NULL,NULL,1),
+ (5620,'C070281','06.426771','Normal',NULL,NULL,NULL,1),
+ (5621,'C070291','13 09544423','Normal',NULL,NULL,NULL,1),
+ (5622,'C070301','BM 1585K','Normal',NULL,NULL,NULL,1),
+ (5623,'C070311','1309544651','Normal',NULL,NULL,NULL,1),
+ (5624,'C070321','BM 436K','Normal',NULL,NULL,NULL,1),
+ (5625,'C070331','BM 2046K','Normal',NULL,NULL,NULL,1),
+ (5626,'C070341','BM 1347K','Normal',NULL,NULL,NULL,1),
+ (5627,'C070351','147054','Normal',NULL,NULL,NULL,1),
+ (5628,'C070361','13 09544293','Normal',NULL,NULL,NULL,1),
+ (5629,'C070371','TPM-00000116','Normal',NULL,NULL,NULL,1),
+ (5630,'C070381','06.426773','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5631,'C070391','TMP-00000117','Normal',NULL,NULL,NULL,1),
+ (5632,'C070401','1309544678','Normal',NULL,NULL,NULL,1),
+ (5633,'C070411','BM 1343K','Normal',NULL,NULL,NULL,1),
+ (5634,'C070421','003300','Normal',NULL,NULL,NULL,1),
+ (5635,'C070431','BM 708K','Normal',NULL,NULL,NULL,1),
+ (5636,'C070441','BM 2330K','Normal',NULL,NULL,NULL,1),
+ (5637,'C070451','BM 920K','Normal',NULL,NULL,NULL,1),
+ (5638,'C070471','BM 244K','Normal',NULL,NULL,NULL,1),
+ (5639,'C070481','13 09544258','Normal',NULL,NULL,NULL,1),
+ (5640,'C070501','BM 1037K','Normal',NULL,NULL,NULL,1),
+ (5641,'C070511','BM 1521K','Normal',NULL,NULL,NULL,1),
+ (5642,'C070521','06.428361','Normal',NULL,NULL,NULL,1),
+ (5643,'C070541','BM 1068K','Normal',NULL,NULL,NULL,1),
+ (5644,'C070551','BM 2626K','Normal',NULL,NULL,NULL,1),
+ (5645,'C070561','13 09544054','Normal',NULL,NULL,NULL,1),
+ (5646,'C070591','1309544255','Normal',NULL,NULL,NULL,1),
+ (5647,'C070601','06.428493','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5648,'C070611','BM 2782K','Normal',NULL,NULL,NULL,1),
+ (5649,'C070621','BM 18K','Normal',NULL,NULL,NULL,1),
+ (5650,'C070631','06.428362','Normal',NULL,NULL,NULL,1),
+ (5651,'C070641','06-428359','Normal',NULL,NULL,NULL,1),
+ (5652,'C070651','06-428358','Normal',NULL,NULL,NULL,1),
+ (5653,'C070661','BM 2283K','Normal',NULL,NULL,NULL,1),
+ (5654,'C070671','BM 614K','Normal',NULL,NULL,NULL,1),
+ (5655,'C070681','BM 2761K','Normal',NULL,NULL,NULL,1),
+ (5656,'C070701','BM 211K','Normal',NULL,NULL,NULL,1),
+ (5657,'C070711','13 09544386','Normal',NULL,NULL,NULL,1),
+ (5658,'C070721','06-427715','Normal',NULL,NULL,NULL,1),
+ (5659,'C070731','06.426772','Normal',NULL,NULL,NULL,1),
+ (5660,'C070751','BM 85K','Normal',NULL,NULL,NULL,1),
+ (5661,'C070761','732098','Normal',NULL,NULL,NULL,1),
+ (5662,'C070771','06.428387','Normal',NULL,NULL,NULL,1),
+ (5663,'C070781','06-428518','Normal',NULL,NULL,NULL,1),
+ (5664,'C070791','1309544304','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5665,'C070801','BM 2350K','Normal',NULL,NULL,NULL,1),
+ (5666,'C070811','BM 2654K','Normal',NULL,NULL,NULL,1),
+ (5667,'C070821','06-428514','Normal',NULL,NULL,NULL,1),
+ (5668,'C070831','BM 2316K','Normal',NULL,NULL,NULL,1),
+ (5669,'C070841','BM 2319K','Normal',NULL,NULL,NULL,1),
+ (5670,'C070851','BM 1944K','Normal',NULL,NULL,NULL,1),
+ (5671,'C070871','TMP-002','Normal',NULL,NULL,NULL,1),
+ (5672,'C070881','BM 2692K','Normal',NULL,NULL,NULL,1),
+ (5673,'C070891','02.1504093','Normal',NULL,NULL,NULL,1),
+ (5674,'C070901','06-429122','Normal',NULL,NULL,NULL,1),
+ (5675,'C070911','BM 2275K','Normal',NULL,NULL,NULL,1),
+ (5676,'C070921','147541','Normal',NULL,NULL,NULL,1),
+ (5677,'C070931','003','Normal',NULL,NULL,NULL,1),
+ (5678,'C070941','06-429171','Normal',NULL,NULL,NULL,1),
+ (5679,'C070961','BM 861K','Normal',NULL,NULL,NULL,1),
+ (5680,'C070981','1309544605','Normal',NULL,NULL,NULL,1),
+ (5681,'C071001','06.427521','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5682,'C071041','BM 1420K','Normal',NULL,NULL,NULL,1),
+ (5683,'C071051','BM 910K','Normal',NULL,NULL,NULL,1),
+ (5684,'C071101','06.429073','Normal',NULL,NULL,NULL,1),
+ (5685,'C071111','BM 2077K','Normal',NULL,NULL,NULL,1),
+ (5686,'C071161','BM 2455K','Normal',NULL,NULL,NULL,1),
+ (5687,'C071191','1309545459','Normal',NULL,NULL,NULL,1),
+ (5688,'C071221','13 09544268','Normal',NULL,NULL,NULL,1),
+ (5689,'C071251','BM 432K','Normal',NULL,NULL,NULL,1),
+ (5690,'C071301','05-213605','Normal',NULL,NULL,NULL,1),
+ (5691,'C071341','BM 1862K','Normal',NULL,NULL,NULL,1),
+ (5692,'C071371','1309544219','Normal',NULL,NULL,NULL,1),
+ (5693,'C071441','BM 2230K','Normal',NULL,NULL,NULL,1),
+ (5694,'C071461','1309544127','Normal',NULL,NULL,NULL,1),
+ (5695,'C071471','BM 042K','Normal',NULL,NULL,NULL,1),
+ (5696,'C071501','13 09544675','Normal',NULL,NULL,NULL,1),
+ (5697,'C071521','TMP-00000416','Normal',NULL,NULL,NULL,1),
+ (5698,'C071561','BM 574K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5699,'C071591','BM 494K','Normal',NULL,NULL,NULL,1),
+ (5700,'C071661','40017428','Normal',NULL,NULL,NULL,1),
+ (5701,'C071761','1309544614','Normal',NULL,NULL,NULL,1),
+ (5702,'C071781','BM 857K','Normal',NULL,NULL,NULL,1),
+ (5703,'C071791','1309544239','Normal',NULL,NULL,NULL,1),
+ (5704,'C071811','BM 076K','Normal',NULL,NULL,NULL,1),
+ (5705,'C072001','BM 293K','Normal',NULL,NULL,NULL,1),
+ (5706,'C080021','1309544067','Normal',NULL,NULL,NULL,1),
+ (5707,'C080031','40017394','Normal',NULL,NULL,NULL,1),
+ (5708,'C080041','02-373911','Normal',NULL,NULL,NULL,1),
+ (5709,'C080081','13 09544614','Normal',NULL,NULL,NULL,1),
+ (5710,'C080091','1309544520','Normal',NULL,NULL,NULL,1),
+ (5711,'C080101','06-429202','Normal',NULL,NULL,NULL,1),
+ (5712,'C080211','BM 2196K','Normal',NULL,NULL,NULL,1),
+ (5713,'C080251','BM 2313K','Normal',NULL,NULL,NULL,1),
+ (5714,'C080261','1309544394','Normal',NULL,NULL,NULL,1),
+ (5715,'C080351','BM 2474K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5716,'C080421','1502304','Normal',NULL,NULL,NULL,1),
+ (5717,'C080461','BM 593K','Normal',NULL,NULL,NULL,1),
+ (5718,'C080501','BM 1922K','Normal',NULL,NULL,NULL,1),
+ (5719,'C080521','BM 340K','Normal',NULL,NULL,NULL,1),
+ (5720,'C080541','BM 2098K','Normal',NULL,NULL,NULL,1),
+ (5721,'C080551','BM 732K','Normal',NULL,NULL,NULL,1),
+ (5722,'C080581','06-427497','Normal',NULL,NULL,NULL,1),
+ (5723,'C080591','BM 033K','Normal',NULL,NULL,NULL,1),
+ (5724,'C080601','bm 2555k','Normal',NULL,NULL,NULL,1),
+ (5725,'C080641','BM 523K','Normal',NULL,NULL,NULL,1),
+ (5726,'C080671','BM 1917K','Normal',NULL,NULL,NULL,1),
+ (5727,'C080681','02-377915','Normal',NULL,NULL,NULL,1),
+ (5728,'C080751','BM 1177K','Normal',NULL,NULL,NULL,1),
+ (5729,'C080781','BM 2277K','Normal',NULL,NULL,NULL,1),
+ (5730,'C080791','BM 559K','Normal',NULL,NULL,NULL,1),
+ (5731,'C080811','BM 2723K','Normal',NULL,NULL,NULL,1),
+ (5732,'C080841','BM 2511K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5733,'C080851','BM 722K','Normal',NULL,NULL,NULL,1),
+ (5734,'C080881','TMP-00000429','Normal',NULL,NULL,NULL,1),
+ (5735,'C080891','BM 1660K','Normal',NULL,NULL,NULL,1),
+ (5736,'C080901','13 09544324','Normal',NULL,NULL,NULL,1),
+ (5737,'C080911','BM 911K','Normal',NULL,NULL,NULL,1),
+ (5738,'C080921','BM 2005K','Normal',NULL,NULL,NULL,1),
+ (5739,'C080931','BM 144K','Normal',NULL,NULL,NULL,1),
+ (5740,'C080971','BM 1888K','Normal',NULL,NULL,NULL,1),
+ (5741,'C080991','06-429253','Normal',NULL,NULL,NULL,1),
+ (5742,'C081001','BM 2734K','Normal',NULL,NULL,NULL,1),
+ (5743,'C081011','BM 361K','Normal',NULL,NULL,NULL,1),
+ (5744,'C081081','13 09544416','Normal',NULL,NULL,NULL,1),
+ (5745,'C081101','BM 1769K','Normal',NULL,NULL,NULL,1),
+ (5746,'C081121','13 09544150','Normal',NULL,NULL,NULL,1),
+ (5747,'C081141','BM 2677K','Normal',NULL,NULL,NULL,1),
+ (5748,'C081151','BM 945K','Normal',NULL,NULL,NULL,1),
+ (5749,'C081171','BM 406K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5750,'C081181','13 09544576','Normal',NULL,NULL,NULL,1),
+ (5751,'C081191','BM 1351K','Normal',NULL,NULL,NULL,1),
+ (5752,'C081211','BM 1805K','Normal',NULL,NULL,NULL,1),
+ (5753,'C081221','071200695','Normal',NULL,NULL,NULL,1),
+ (5754,'C081231','071200093','Normal',NULL,NULL,NULL,1),
+ (5755,'C081251','BM 1595K','Normal',NULL,NULL,NULL,1),
+ (5756,'C081301','1309544410','Normal',NULL,NULL,NULL,1),
+ (5757,'C081311','TMP-00000081','Normal',NULL,NULL,NULL,1),
+ (5758,'C081331','13-08-01798','Normal',NULL,NULL,NULL,1),
+ (5759,'C081351','13 09544398','Normal',NULL,NULL,NULL,1),
+ (5760,'C081361','BM 303K','Normal',NULL,NULL,NULL,1),
+ (5761,'C081411','1309544667','Normal',NULL,NULL,NULL,1),
+ (5762,'C081481','40017392','Normal',NULL,NULL,NULL,1),
+ (5763,'C081501','BM 2177K','Normal',NULL,NULL,NULL,1),
+ (5764,'C081511','BM 198K','Normal',NULL,NULL,NULL,1),
+ (5765,'C081531','06.427630','Normal',NULL,NULL,NULL,1),
+ (5766,'C081551','13 09544495','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5767,'C081591','BM 2604K','Normal',NULL,NULL,NULL,1),
+ (5768,'C081631','13 09544654','Normal',NULL,NULL,NULL,1),
+ (5769,'C081641','BM 2567K','Normal',NULL,NULL,NULL,1),
+ (5770,'C081651','BM 266K','Normal',NULL,NULL,NULL,1),
+ (5771,'C081671','02-377910','Normal',NULL,NULL,NULL,1),
+ (5772,'C081681','BM 1162K','Normal',NULL,NULL,NULL,1),
+ (5773,'C081701','BM 213K','Normal',NULL,NULL,NULL,1),
+ (5774,'C081711','BM 695K','Normal',NULL,NULL,NULL,1),
+ (5775,'C081731','13 09544410','Normal',NULL,NULL,NULL,1),
+ (5776,'C081741','BM 421K','Normal',NULL,NULL,NULL,1),
+ (5777,'C081751','BM 2205K','Normal',NULL,NULL,NULL,1),
+ (5778,'C081761','BM 2560K','Normal',NULL,NULL,NULL,1),
+ (5779,'C081771','BM 2132K','Normal',NULL,NULL,NULL,1),
+ (5780,'C081781','BM 1853K','Normal',NULL,NULL,NULL,1),
+ (5781,'C081791','BM 2505K','Normal',NULL,NULL,NULL,1),
+ (5782,'C081831','BM 2112K','Normal',NULL,NULL,NULL,1),
+ (5783,'C081841','BM 808K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5784,'C081851','BM 2044K','Normal',NULL,NULL,NULL,1),
+ (5785,'C081881','BM 236K','Normal',NULL,NULL,NULL,1),
+ (5786,'C081901','BM 2307K','Normal',NULL,NULL,NULL,1),
+ (5787,'C081911','BM 1369K','Normal',NULL,NULL,NULL,1),
+ (5788,'C081931','06.426740','Normal',NULL,NULL,NULL,1),
+ (5789,'C081941','BM 223K','Normal',NULL,NULL,NULL,1),
+ (5790,'C081951','BM 295K','Normal',NULL,NULL,NULL,1),
+ (5791,'C081991','BM 2752K','Normal',NULL,NULL,NULL,1),
+ (5792,'C082001','13 09544701','Normal',NULL,NULL,NULL,1),
+ (5793,'C082011','BM 1782K','Normal',NULL,NULL,NULL,1),
+ (5794,'C090021','BM 45K','Normal',NULL,NULL,NULL,1),
+ (5795,'C090031','13 09544166','Normal',NULL,NULL,NULL,1),
+ (5796,'C090051','BM 845K','Normal',NULL,NULL,NULL,1),
+ (5797,'C090071','BM 469K','Normal',NULL,NULL,NULL,1),
+ (5798,'C090081','BM 914K','Normal',NULL,NULL,NULL,1),
+ (5799,'C090091','BM 1518K','Normal',NULL,NULL,NULL,1),
+ (5800,'C090101','BM 1424K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5801,'C090121','13 09544426','Normal',NULL,NULL,NULL,1),
+ (5802,'C090141','BM 536K','Normal',NULL,NULL,NULL,1),
+ (5803,'C090191','06.','Normal',NULL,NULL,NULL,1),
+ (5804,'C090231','BM 846K','Normal',NULL,NULL,NULL,1),
+ (5805,'C090241','BM 2278K','Normal',NULL,NULL,NULL,1),
+ (5806,'C090261','1309544154','Normal',NULL,NULL,NULL,1),
+ (5807,'C090281','BM 2161K','Normal',NULL,NULL,NULL,1),
+ (5808,'C090291','BM 869K','Normal',NULL,NULL,NULL,1),
+ (5809,'C090321','BM 540K','Normal',NULL,NULL,NULL,1),
+ (5810,'C090411','06 428556','Normal',NULL,NULL,NULL,1),
+ (5811,'C090471','1309544435','Normal',NULL,NULL,NULL,1),
+ (5812,'C090621','BM 1622K','Normal',NULL,NULL,NULL,1),
+ (5813,'C090701','000T','Normal',NULL,NULL,NULL,1),
+ (5814,'C090721','BM 1752K','Normal',NULL,NULL,NULL,1),
+ (5815,'C090751','BM 524K','Normal',NULL,NULL,NULL,1),
+ (5816,'C090801','BM 1820K','Normal',NULL,NULL,NULL,1),
+ (5817,'C090881','BM 2067K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5818,'C090921','13 09544535','Normal',NULL,NULL,NULL,1),
+ (5819,'C090941','BM 922K','Normal',NULL,NULL,NULL,1),
+ (5820,'C091011','BM 1337K','Normal',NULL,NULL,NULL,1),
+ (5821,'C091051','13 09544206','Normal',NULL,NULL,NULL,1),
+ (5822,'C091081','13 09544111','Normal',NULL,NULL,NULL,1),
+ (5823,'C091191','1309544514','Normal',NULL,NULL,NULL,1),
+ (5824,'C091221','13 09544497','Normal',NULL,NULL,NULL,1),
+ (5825,'C091371','13 09544562','Normal',NULL,NULL,NULL,1),
+ (5826,'C091381','BM 4K','Normal',NULL,NULL,NULL,1),
+ (5827,'C091411','BM 2603K','Normal',NULL,NULL,NULL,1),
+ (5828,'C091421','BM 1039K','Normal',NULL,NULL,NULL,1),
+ (5829,'C091451','BM 335K','Normal',NULL,NULL,NULL,1),
+ (5830,'C091481','BM 1312K','Normal',NULL,NULL,NULL,1),
+ (5831,'C091491','BM 698K','Normal',NULL,NULL,NULL,1),
+ (5832,'C091511','BM 537K','Normal',NULL,NULL,NULL,1),
+ (5833,'C091521','BM 497K','Normal',NULL,NULL,NULL,1),
+ (5834,'C091531','1309544516','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5835,'C091551','BM2342K','Normal',NULL,NULL,NULL,1),
+ (5836,'C091611','BM 1155K','Normal',NULL,NULL,NULL,1),
+ (5837,'C091631','BM 414K','Normal',NULL,NULL,NULL,1),
+ (5838,'C091661','06-427770','Normal',NULL,NULL,NULL,1),
+ (5839,'C091701','BM 968K','Normal',NULL,NULL,NULL,1),
+ (5840,'C091721','BM 931K','Normal',NULL,NULL,NULL,1),
+ (5841,'C091731','BM 1854K','Normal',NULL,NULL,NULL,1),
+ (5842,'C091741','01-1730947','Normal',NULL,NULL,NULL,1),
+ (5843,'C091751','BM 655K','Normal',NULL,NULL,NULL,1),
+ (5844,'C091761','06-426742','Normal',NULL,NULL,NULL,1),
+ (5845,'C091781','06.428576','Normal',NULL,NULL,NULL,1),
+ (5846,'C091801','07-1201192','Normal',NULL,NULL,NULL,1),
+ (5847,'C091811','BM 969K','Normal',NULL,NULL,NULL,1),
+ (5848,'C091851','06-42862','Normal',NULL,NULL,NULL,1),
+ (5849,'C091871','BM 1717K','Normal',NULL,NULL,NULL,1),
+ (5850,'C091901','BM 2764K','Normal',NULL,NULL,NULL,1),
+ (5851,'C091921','BM 227K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5852,'C091931','BM 1478K','Normal',NULL,NULL,NULL,1),
+ (5853,'C091951','BM 837K','Normal',NULL,NULL,NULL,1),
+ (5854,'C091991','BM 1401K','Normal',NULL,NULL,NULL,1),
+ (5855,'C100011','06.428621','Normal',NULL,NULL,NULL,1),
+ (5856,'C100041','40017504','Normal',NULL,NULL,NULL,1),
+ (5857,'C100051','06-429028','Normal',NULL,NULL,NULL,1),
+ (5858,'C100071','BM 2428K','Normal',NULL,NULL,NULL,1),
+ (5859,'C100101','BM2360K','Normal',NULL,NULL,NULL,1),
+ (5860,'C100111','BM 2000K','Normal',NULL,NULL,NULL,1),
+ (5861,'C100131','BM 2225K','Normal',NULL,NULL,NULL,1),
+ (5862,'C100141','BM 113K','Normal',NULL,NULL,NULL,1),
+ (5863,'C100151','13 09544347','Normal',NULL,NULL,NULL,1),
+ (5864,'C100181','07-1202009','Normal',NULL,NULL,NULL,1),
+ (5865,'C100191','BM 155K','Normal',NULL,NULL,NULL,1),
+ (5866,'C100231','BM 1285K','Normal',NULL,NULL,NULL,1),
+ (5867,'C100251','BM 284K','Normal',NULL,NULL,NULL,1),
+ (5868,'C100321','BM 162K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5869,'C100351','BM 1616K','Normal',NULL,NULL,NULL,1),
+ (5870,'C100401','1309544262','Normal',NULL,NULL,NULL,1),
+ (5871,'C100411','06-426743','Normal',NULL,NULL,NULL,1),
+ (5872,'C100451','ZR-02834670','Normal',NULL,NULL,NULL,1),
+ (5873,'C100461','1309544354','Normal',NULL,NULL,NULL,1),
+ (5874,'C100471','BM 1022K','Normal',NULL,NULL,NULL,1),
+ (5875,'C100511','13 09544042','Normal',NULL,NULL,NULL,1),
+ (5876,'C100521','BM 2653K','Normal',NULL,NULL,NULL,1),
+ (5877,'C100531','1309544072','Normal',NULL,NULL,NULL,1),
+ (5878,'C100541','BM 2057K','Normal',NULL,NULL,NULL,1),
+ (5879,'C100571','13 09544460','Normal',NULL,NULL,NULL,1),
+ (5880,'C100581','13 09544456','Normal',NULL,NULL,NULL,1),
+ (5881,'C100601','BM2738K','Normal',NULL,NULL,NULL,1),
+ (5882,'C100631','BM 2104K','Normal',NULL,NULL,NULL,1),
+ (5883,'C100641','13 09544185','Normal',NULL,NULL,NULL,1),
+ (5884,'C100661','13 0954438','Normal',NULL,NULL,NULL,1),
+ (5885,'C100691','06-427953','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5886,'C100701','TMP-00000165','Normal',NULL,NULL,NULL,1),
+ (5887,'C100711','40017383','Normal',NULL,NULL,NULL,1),
+ (5888,'C100721','BM 1018K','Normal',NULL,NULL,NULL,1),
+ (5889,'C100741','BM 1119K','Normal',NULL,NULL,NULL,1),
+ (5890,'C100761','BM 669K','Normal',NULL,NULL,NULL,1),
+ (5891,'C100791','ZR-02834656','Normal',NULL,NULL,NULL,1),
+ (5892,'C100811','BM 1898K','Normal',NULL,NULL,NULL,1),
+ (5893,'C100821','BM 1620K','Normal',NULL,NULL,NULL,1),
+ (5894,'C100831','BM 1672K','Normal',NULL,NULL,NULL,1),
+ (5895,'C100851','13 09544107','Normal',NULL,NULL,NULL,1),
+ (5896,'C100861','BM 1072K','Normal',NULL,NULL,NULL,1),
+ (5897,'C100881','BM 2617K','Normal',NULL,NULL,NULL,1),
+ (5898,'C100901','BM 1981K','Normal',NULL,NULL,NULL,1),
+ (5899,'C100941','BM 2533K','Normal',NULL,NULL,NULL,1),
+ (5900,'C100951','BM 963K','Normal',NULL,NULL,NULL,1),
+ (5901,'C100961','975825','Normal',NULL,NULL,NULL,1),
+ (5902,'C100971','BM 927K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5903,'C101021','BM 1097K','Normal',NULL,NULL,NULL,1),
+ (5904,'C101031','1309544528','Normal',NULL,NULL,NULL,1),
+ (5905,'C101051','BM 1654K','Normal',NULL,NULL,NULL,1),
+ (5906,'C101061','BM 39K','Normal',NULL,NULL,NULL,1),
+ (5907,'C101081','BM 923K','Normal',NULL,NULL,NULL,1),
+ (5908,'C101131','BM 913K','Normal',NULL,NULL,NULL,1),
+ (5909,'C101171','BM 2559K','Normal',NULL,NULL,NULL,1),
+ (5910,'C101181','BM 1716K','Normal',NULL,NULL,NULL,1),
+ (5911,'C101211','BM 1657K','Normal',NULL,NULL,NULL,1),
+ (5912,'C101221','BM 1668K','Normal',NULL,NULL,NULL,1),
+ (5913,'C101231','BM 025K','Normal',NULL,NULL,NULL,1),
+ (5914,'C101241','1309544122','Normal',NULL,NULL,NULL,1),
+ (5915,'C101251','TMP-00000633','Normal',NULL,NULL,NULL,1),
+ (5916,'C101281','06-492255','Normal',NULL,NULL,NULL,1),
+ (5917,'C101301','BM 2397K','Normal',NULL,NULL,NULL,1),
+ (5918,'C101311','BM 2092K','Normal',NULL,NULL,NULL,1),
+ (5919,'C101321','BM 164K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5920,'C101341','13 09544620','Normal',NULL,NULL,NULL,1),
+ (5921,'C101441','BM 1877K','Normal',NULL,NULL,NULL,1),
+ (5922,'C101471','BM 2266K','Normal',NULL,NULL,NULL,1),
+ (5923,'C101481','BM 2657K','Normal',NULL,NULL,NULL,1),
+ (5924,'C101491','BM 2707K','Normal',NULL,NULL,NULL,1),
+ (5925,'C101531','BM 1044K','Normal',NULL,NULL,NULL,1),
+ (5926,'C101541','BM 1738K','Normal',NULL,NULL,NULL,1),
+ (5927,'C101561','BM 2682K','Normal',NULL,NULL,NULL,1),
+ (5928,'C101611','0-1-1730014','Normal',NULL,NULL,NULL,1),
+ (5929,'C101621','13 0801667','Normal',NULL,NULL,NULL,1),
+ (5930,'C101671','06-428570','Normal',NULL,NULL,NULL,1),
+ (5931,'C101691','BM 543K','Normal',NULL,NULL,NULL,1),
+ (5932,'C101701','BM 021K','Normal',NULL,NULL,NULL,1),
+ (5933,'C101711','BM 1311K','Normal',NULL,NULL,NULL,1),
+ (5934,'C101721','BM 2378K','Normal',NULL,NULL,NULL,1),
+ (5935,'C101731','BM 2607K','Normal',NULL,NULL,NULL,1),
+ (5936,'C101751','BM 410K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5937,'C101781','BM 1206K','Normal',NULL,NULL,NULL,1),
+ (5938,'C101791','BM 2741K','Normal',NULL,NULL,NULL,1),
+ (5939,'C101801','BM 1714K','Normal',NULL,NULL,NULL,1),
+ (5940,'C101811','BM 399K','Normal',NULL,NULL,NULL,1),
+ (5941,'C101831','BM 1201K','Normal',NULL,NULL,NULL,1),
+ (5942,'C101841','13 09544177','Normal',NULL,NULL,NULL,1),
+ (5943,'C101851','BM 2302K','Normal',NULL,NULL,NULL,1),
+ (5944,'C101861','13 09544540','Normal',NULL,NULL,NULL,1),
+ (5945,'C101871','BM 741K','Normal',NULL,NULL,NULL,1),
+ (5946,'C101881','BM 328K','Normal',NULL,NULL,NULL,1),
+ (5947,'C101901','BM 1336K','Normal',NULL,NULL,NULL,1),
+ (5948,'C101941','BM 1422K','Normal',NULL,NULL,NULL,1),
+ (5949,'C101951','BM 1430K','Normal',NULL,NULL,NULL,1),
+ (5950,'C101961','BM 041K','Normal',NULL,NULL,NULL,1),
+ (5951,'C101981','BM 1779K','Normal',NULL,NULL,NULL,1),
+ (5952,'C102001','BM 153K','Normal',NULL,NULL,NULL,1),
+ (5953,'C110011','BM 1682K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5954,'C110031','BM 1350K','Normal',NULL,NULL,NULL,1),
+ (5955,'C110041','BM 259K','Normal',NULL,NULL,NULL,1),
+ (5956,'C110061','BM 2101K','Normal',NULL,NULL,NULL,1),
+ (5957,'C110081','BM 2484K','Normal',NULL,NULL,NULL,1),
+ (5958,'C110091','BM 1590K','Normal',NULL,NULL,NULL,1),
+ (5959,'C110131','BM 1030K','Normal',NULL,NULL,NULL,1),
+ (5960,'C110161','BM 445K','Normal',NULL,NULL,NULL,1),
+ (5961,'C110191','BM 768K','Normal',NULL,NULL,NULL,1),
+ (5962,'C110241','BM 1138K','Normal',NULL,NULL,NULL,1),
+ (5963,'C110251','BM 2298K','Normal',NULL,NULL,NULL,1),
+ (5964,'C110261','BM 1271K','Normal',NULL,NULL,NULL,1),
+ (5965,'C110271','BM 2587K','Normal',NULL,NULL,NULL,1),
+ (5966,'C110281','BM 452K','Normal',NULL,NULL,NULL,1),
+ (5967,'C110291','BM 1896K','Normal',NULL,NULL,NULL,1),
+ (5968,'C110301','BM1457K','Normal',NULL,NULL,NULL,1),
+ (5969,'C110321','40017403','Normal',NULL,NULL,NULL,1),
+ (5970,'C110351','BM 2103K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5971,'C110361','BM 1644K','Normal',NULL,NULL,NULL,1),
+ (5972,'C110371','BM 2695K','Normal',NULL,NULL,NULL,1),
+ (5973,'C110391','1309544670','Normal',NULL,NULL,NULL,1),
+ (5974,'C110421','06-429212','Normal',NULL,NULL,NULL,1),
+ (5975,'C110461','BM 748K','Normal',NULL,NULL,NULL,1),
+ (5976,'C110501','BM 299K','Normal',NULL,NULL,NULL,1),
+ (5977,'C110511','BM 1387K','Normal',NULL,NULL,NULL,1),
+ (5978,'C110521','BM 742K','Normal',NULL,NULL,NULL,1),
+ (5979,'C110531','BM 1234K','Normal',NULL,NULL,NULL,1),
+ (5980,'C110541','BM 2772K','Normal',NULL,NULL,NULL,1),
+ (5981,'C110561','BM 86K','Normal',NULL,NULL,NULL,1),
+ (5982,'C110601','BM 817K','Normal',NULL,NULL,NULL,1),
+ (5983,'C110631','BM 160K','Normal',NULL,NULL,NULL,1),
+ (5984,'C110641','BM 2163K','Normal',NULL,NULL,NULL,1),
+ (5985,'C110651','BM 2706K','Normal',NULL,NULL,NULL,1),
+ (5986,'C110681','BM 2178K','Normal',NULL,NULL,NULL,1),
+ (5987,'C110691','000009','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (5988,'C110781','BM 895K','Normal',NULL,NULL,NULL,1),
+ (5989,'C110831','BM 1446K','Normal',NULL,NULL,NULL,1),
+ (5990,'C110851','141101663','Normal',NULL,NULL,NULL,1),
+ (5991,'C110911','13 09544328','Normal',NULL,NULL,NULL,1),
+ (5992,'C110931','02-377912','Normal',NULL,NULL,NULL,1),
+ (5993,'C110941','BM 2770K','Normal',NULL,NULL,NULL,1),
+ (5994,'C110961','BM 495K','Normal',NULL,NULL,NULL,1),
+ (5995,'C111001','BM 1592K','Normal',NULL,NULL,NULL,1),
+ (5996,'C111011','BM 2535K','Normal',NULL,NULL,NULL,1),
+ (5997,'C111021','BM 744K','Normal',NULL,NULL,NULL,1),
+ (5998,'C111031','BM 1641K','Normal',NULL,NULL,NULL,1),
+ (5999,'C111041','BM 297K','Normal',NULL,NULL,NULL,1),
+ (6000,'C111061','06-428574','Normal',NULL,NULL,NULL,1),
+ (6001,'C111071','BM 1182K','Normal',NULL,NULL,NULL,1),
+ (6002,'C111101','BM 263K','Normal',NULL,NULL,NULL,1),
+ (6003,'C111111','BM 476K','Normal',NULL,NULL,NULL,1),
+ (6004,'C111131','BM 1541K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6005,'C111191','BM 601K','Normal',NULL,NULL,NULL,1),
+ (6006,'C111261','40017210','Normal',NULL,NULL,NULL,1),
+ (6007,'C111301','06.429269','Normal',NULL,NULL,NULL,1),
+ (6008,'C111321','1309544448','Normal',NULL,NULL,NULL,1),
+ (6009,'C111341','BM 666K','Normal',NULL,NULL,NULL,1),
+ (6010,'C111361','13095444051','Normal',NULL,NULL,NULL,1),
+ (6011,'C111371','BM 1497K','Normal',NULL,NULL,NULL,1),
+ (6012,'C111381','ZR-02834554','Normal',NULL,NULL,NULL,1),
+ (6013,'C111391','BM 60K','Normal',NULL,NULL,NULL,1),
+ (6014,'C111421','BM 1724K','Normal',NULL,NULL,NULL,1),
+ (6015,'C111441','BM1259K','Normal',NULL,NULL,NULL,1),
+ (6016,'C111481','13 09544221','Normal',NULL,NULL,NULL,1),
+ (6017,'C111491','BM 1423K','Normal',NULL,NULL,NULL,1),
+ (6018,'C111511','BM 587K','Normal',NULL,NULL,NULL,1),
+ (6019,'C111611','06.428570','Normal',NULL,NULL,NULL,1),
+ (6020,'C111651','BM 1345K','Normal',NULL,NULL,NULL,1),
+ (6021,'C111661','BM 1879K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6022,'C111671','BM 245K','Normal',NULL,NULL,NULL,1),
+ (6023,'C111691','BM 1878K','Normal',NULL,NULL,NULL,1),
+ (6024,'C111701','TMP-999','Normal',NULL,NULL,NULL,1),
+ (6025,'C111731','BM 323K','Normal',NULL,NULL,NULL,1),
+ (6026,'C111761','06-427766','Normal',NULL,NULL,NULL,1),
+ (6027,'C111771','BM 1375K','Normal',NULL,NULL,NULL,1),
+ (6028,'C111821','BM 1348K','Normal',NULL,NULL,NULL,1),
+ (6029,'C111831','BM 307K','Normal',NULL,NULL,NULL,1),
+ (6030,'C111851','13 09544372','Normal',NULL,NULL,NULL,1),
+ (6031,'C111861','1309544203','Normal',NULL,NULL,NULL,1),
+ (6032,'C111871','BM 1730K','Normal',NULL,NULL,NULL,1),
+ (6033,'C111881','001579','Normal',NULL,NULL,NULL,1),
+ (6034,'C111961','BM 072K','Normal',NULL,NULL,NULL,1),
+ (6035,'C120021','BM 1708K','Normal',NULL,NULL,NULL,1),
+ (6036,'C120031','1309544118','Normal',NULL,NULL,NULL,1),
+ (6037,'C120041','BM 281','Normal',NULL,NULL,NULL,1),
+ (6038,'C120121','1309544323','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6039,'C120181','1309544037','Normal',NULL,NULL,NULL,1),
+ (6040,'C120221','BM 178K','Normal',NULL,NULL,NULL,1),
+ (6041,'C120271','BM 2525K','Normal',NULL,NULL,NULL,1),
+ (6042,'C120281','13 09544279','Normal',NULL,NULL,NULL,1),
+ (6043,'C120311','BM 1015K','Normal',NULL,NULL,NULL,1),
+ (6044,'C120321','BM 2107K','Normal',NULL,NULL,NULL,1),
+ (6045,'C120331','BM 2341K','Normal',NULL,NULL,NULL,1),
+ (6046,'C120391','BM 1722K','Normal',NULL,NULL,NULL,1),
+ (6047,'C120421','BM 1766K','Normal',NULL,NULL,NULL,1),
+ (6048,'C120431','BM 1960K','Normal',NULL,NULL,NULL,1),
+ (6049,'C120441','1309544232','Normal',NULL,NULL,NULL,1),
+ (6050,'C120491','BM 325K','Normal',NULL,NULL,NULL,1),
+ (6051,'C120501','BM 20406K','Normal',NULL,NULL,NULL,1),
+ (6052,'C120511','BM 2376K','Normal',NULL,NULL,NULL,1),
+ (6053,'C120531','BM 2351K','Normal',NULL,NULL,NULL,1),
+ (6054,'C120551','1309544141','Normal',NULL,NULL,NULL,1),
+ (6055,'C120591','BM 1041K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6056,'C120611','BM 1670K','Normal',NULL,NULL,NULL,1),
+ (6057,'C120661','BM 904K','Normal',NULL,NULL,NULL,1),
+ (6058,'C120691','BM 457K','Normal',NULL,NULL,NULL,1),
+ (6059,'C120721','BM 1209K','Normal',NULL,NULL,NULL,1),
+ (6060,'C120791','BM 1094K','Normal',NULL,NULL,NULL,1),
+ (6061,'C120811','BM 121K','Normal',NULL,NULL,NULL,1),
+ (6062,'C120841','BM 743K','Normal',NULL,NULL,NULL,1),
+ (6063,'C120851','130903196','Normal',NULL,NULL,NULL,1),
+ (6064,'C120871','BM 1953K','Normal',NULL,NULL,NULL,1),
+ (6065,'C120881','BM 2445K','Normal',NULL,NULL,NULL,1),
+ (6066,'C120911','BM 2740K','Normal',NULL,NULL,NULL,1),
+ (6067,'C120921','BM 520K','Normal',NULL,NULL,NULL,1),
+ (6068,'C120931','13 09544272','Normal',NULL,NULL,NULL,1),
+ (6069,'C120971','BM 2655K','Normal',NULL,NULL,NULL,1),
+ (6070,'C121001','13 09544155','Normal',NULL,NULL,NULL,1),
+ (6071,'C121011','1309544523','Normal',NULL,NULL,NULL,1),
+ (6072,'C121021','TMP-00000665','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6073,'C121031','BM 878K','Normal',NULL,NULL,NULL,1),
+ (6074,'C121041','TMP-00000666','Normal',NULL,NULL,NULL,1),
+ (6075,'C121051','BM 2503K','Normal',NULL,NULL,NULL,1),
+ (6076,'C121071','BM 2778K','Normal',NULL,NULL,NULL,1),
+ (6077,'C121151','BM 1363K','Normal',NULL,NULL,NULL,1),
+ (6078,'C121171','BM 696K','Normal',NULL,NULL,NULL,1),
+ (6079,'C121191','BM 1122K','Normal',NULL,NULL,NULL,1),
+ (6080,'C121211','BM 1247K','Normal',NULL,NULL,NULL,1),
+ (6081,'C121231','147895','Normal',NULL,NULL,NULL,1),
+ (6082,'C121241','BM 418K','Normal',NULL,NULL,NULL,1),
+ (6083,'C121261','BM 2114K','Normal',NULL,NULL,NULL,1),
+ (6084,'C121271','TMP-00000667','Normal',NULL,NULL,NULL,1),
+ (6085,'C121311','BM 2028K','Normal',NULL,NULL,NULL,1),
+ (6086,'C121321','BM 1342K','Normal',NULL,NULL,NULL,1),
+ (6087,'C121331','PM-O71200565','Normal',NULL,NULL,NULL,1),
+ (6088,'C121361','BM 140K','Normal',NULL,NULL,NULL,1),
+ (6089,'C121371','BM 531K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6090,'C121391','BM 376K','Normal',NULL,NULL,NULL,1),
+ (6091,'C121441','BM 2785K','Normal',NULL,NULL,NULL,1),
+ (6092,'C121451','BM 957K','Normal',NULL,NULL,NULL,1),
+ (6093,'C121461','BM 1476K','Normal',NULL,NULL,NULL,1),
+ (6094,'C121471','BM 1723K','Normal',NULL,NULL,NULL,1),
+ (6095,'C121541','06.428567','Normal',NULL,NULL,NULL,1),
+ (6096,'C121591','BM570K','Normal',NULL,NULL,NULL,1),
+ (6097,'C121621','06-428695','Normal',NULL,NULL,NULL,1),
+ (6098,'C121661','BM 1697K','Normal',NULL,NULL,NULL,1),
+ (6099,'C121671','BM 1768K','Normal',NULL,NULL,NULL,1),
+ (6100,'C121701','BM 815K','Normal',NULL,NULL,NULL,1),
+ (6101,'C121711','BM 102K','Normal',NULL,NULL,NULL,1),
+ (6102,'C121721','06-428433','Normal',NULL,NULL,NULL,1),
+ (6103,'C121731','BM 2013K','Normal',NULL,NULL,NULL,1),
+ (6104,'C121761','BM 2517K','Normal',NULL,NULL,NULL,1),
+ (6105,'C121771','BM 982K','Normal',NULL,NULL,NULL,1),
+ (6106,'C121781','13 09544480','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6107,'C121791','BM 302K','Normal',NULL,NULL,NULL,1),
+ (6108,'C121811','BM 530K','Normal',NULL,NULL,NULL,1),
+ (6109,'C121821','BM 2240K','Normal',NULL,NULL,NULL,1),
+ (6110,'C121891','BM 819K','Normal',NULL,NULL,NULL,1),
+ (6111,'C121921','06-426740','Normal',NULL,NULL,NULL,1),
+ (6112,'C121931','BM 2634K','Normal',NULL,NULL,NULL,1),
+ (6113,'C121941','BM 1050K','Normal',NULL,NULL,NULL,1),
+ (6114,'C121951','BM 502K','Normal',NULL,NULL,NULL,1),
+ (6115,'C121971','BM 676K','Normal',NULL,NULL,NULL,1),
+ (6116,'C121991','BM 2423K','Normal',NULL,NULL,NULL,1),
+ (6117,'C130031','BM 2226K','Normal',NULL,NULL,NULL,1),
+ (6118,'C130061','BM 2597K','Normal',NULL,NULL,NULL,1),
+ (6119,'C130091','BM 828K','Normal',NULL,NULL,NULL,1),
+ (6120,'C130121','BM 2456K','Normal',NULL,NULL,NULL,1),
+ (6121,'C130141','BM 1997K','Normal',NULL,NULL,NULL,1),
+ (6122,'C130171','BM 2214K','Normal',NULL,NULL,NULL,1),
+ (6123,'C130181','13 09544427','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6124,'C130191','BM 279K','Normal',NULL,NULL,NULL,1),
+ (6125,'C130211','BM 1719K','Normal',NULL,NULL,NULL,1),
+ (6126,'C130221','1309544117','Normal',NULL,NULL,NULL,1),
+ (6127,'C130241','13 09544102','Normal',NULL,NULL,NULL,1),
+ (6128,'C130251','06427788','Normal',NULL,NULL,NULL,1),
+ (6129,'C130271','05-213504','Normal',NULL,NULL,NULL,1),
+ (6130,'C130281','BM 2546K','Normal',NULL,NULL,NULL,1),
+ (6131,'C130291','BM 124K','Normal',NULL,NULL,NULL,1),
+ (6132,'C130311','BM 463K','Normal',NULL,NULL,NULL,1),
+ (6133,'C130351','1309544679','Normal',NULL,NULL,NULL,1),
+ (6134,'C130361','BM 2616K','Normal',NULL,NULL,NULL,1),
+ (6135,'C130381','BM 2640K','Normal',NULL,NULL,NULL,1),
+ (6136,'C130401','BM 1159K','Normal',NULL,NULL,NULL,1),
+ (6137,'C130411','BM 1663K','Normal',NULL,NULL,NULL,1),
+ (6138,'C130451','BM1837K','Normal',NULL,NULL,NULL,1),
+ (6139,'C130461','BM 1132K','Normal',NULL,NULL,NULL,1),
+ (6140,'C130471','BM 2064K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6141,'C130491','942580','Normal',NULL,NULL,NULL,1),
+ (6142,'C130501','BM 2015K','Normal',NULL,NULL,NULL,1),
+ (6143,'C130511','BM 2429K','Normal',NULL,NULL,NULL,1),
+ (6144,'C130521','40017270','Normal',NULL,NULL,NULL,1),
+ (6145,'C130541','BM 1180K','Normal',NULL,NULL,NULL,1),
+ (6146,'C130551','BM 745K','Normal',NULL,NULL,NULL,1),
+ (6147,'C130561','13 09544588','Normal',NULL,NULL,NULL,1),
+ (6148,'C130591','BM 1743K','Normal',NULL,NULL,NULL,1),
+ (6149,'C130621','BM 2016K','Normal',NULL,NULL,NULL,1),
+ (6150,'C130631','13 09544103','Normal',NULL,NULL,NULL,1),
+ (6151,'C130651','BM 1059K','Normal',NULL,NULL,NULL,1),
+ (6152,'C130661','BM 2174K','Normal',NULL,NULL,NULL,1),
+ (6153,'C130671','ZR-02834819','Normal',NULL,NULL,NULL,1),
+ (6154,'C130681','BM 2480K','Normal',NULL,NULL,NULL,1),
+ (6155,'C130691','BM 61K','Normal',NULL,NULL,NULL,1),
+ (6156,'C130701','BM 1104K','Normal',NULL,NULL,NULL,1),
+ (6157,'C130711','BM 1170K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6158,'C130721','13 - 08 - 02808','Normal',NULL,NULL,NULL,1),
+ (6159,'C130741','BM 1643K','Normal',NULL,NULL,NULL,1),
+ (6160,'C130751','BM 646K','Normal',NULL,NULL,NULL,1),
+ (6161,'C130761','BM 15K','Normal',NULL,NULL,NULL,1),
+ (6162,'C130771','BM 1864K','Normal',NULL,NULL,NULL,1),
+ (6163,'C130781','BM 1604K','Normal',NULL,NULL,NULL,1),
+ (6164,'C130791','BM 487K','Normal',NULL,NULL,NULL,1),
+ (6165,'C130831','BM 1194K','Normal',NULL,NULL,NULL,1),
+ (6166,'C130851','0022','Normal',NULL,NULL,NULL,1),
+ (6167,'C130871','C13-087-1','Normal',NULL,NULL,NULL,1),
+ (6168,'C130881','02-377951','Normal',NULL,NULL,NULL,1),
+ (6169,'C130891','BM 1936K','Normal',NULL,NULL,NULL,1),
+ (6170,'C130901','BM 1183K','Normal',NULL,NULL,NULL,1),
+ (6171,'C130911','BM 1027K','Normal',NULL,NULL,NULL,1),
+ (6172,'C130921','BM 605K','Normal',NULL,NULL,NULL,1),
+ (6173,'C130931','TMP-005','Normal',NULL,NULL,NULL,1),
+ (6174,'C130951','BM 086K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6175,'C130971','BM 273K','Normal',NULL,NULL,NULL,1),
+ (6176,'C131001','BM 1117K','Normal',NULL,NULL,NULL,1),
+ (6177,'C131011','13 09544661','Normal',NULL,NULL,NULL,1),
+ (6178,'C131041','13 09544468','Normal',NULL,NULL,NULL,1),
+ (6179,'C131101','BM 2338K','Normal',NULL,NULL,NULL,1),
+ (6180,'C131111','13 09544645','Normal',NULL,NULL,NULL,1),
+ (6181,'C131121','BM 372K','Normal',NULL,NULL,NULL,1),
+ (6182,'C131141','TMP-00000668','Normal',NULL,NULL,NULL,1),
+ (6183,'C131151','001001','Normal',NULL,NULL,NULL,1),
+ (6184,'C131161','06-427447','Normal',NULL,NULL,NULL,1),
+ (6185,'C131171','TMP-00000671','Normal',NULL,NULL,NULL,1),
+ (6186,'C131181','TMP-00000672','Normal',NULL,NULL,NULL,1),
+ (6187,'C131191','TMP-00000673','Normal',NULL,NULL,NULL,1),
+ (6188,'C131201','TMP-00000674','Normal',NULL,NULL,NULL,1),
+ (6189,'C131211','TMP-006','Normal',NULL,NULL,NULL,1),
+ (6190,'C131241','BM 1624K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6191,'C131251','BM952K','Normal',NULL,NULL,NULL,1),
+ (6192,'C131261','BM 959K','Normal',NULL,NULL,NULL,1),
+ (6193,'C131281','BM 2284K','Normal',NULL,NULL,NULL,1),
+ (6194,'C131291','BM 1655K','Normal',NULL,NULL,NULL,1),
+ (6195,'C131301','BM 1434K','Normal',NULL,NULL,NULL,1),
+ (6196,'C131311','1309544220','Normal',NULL,NULL,NULL,1),
+ (6197,'C131321','BM 2701K','Normal',NULL,NULL,NULL,1),
+ (6198,'C131341','13 09544318','Normal',NULL,NULL,NULL,1),
+ (6199,'C131381','BM 1929K','Normal',NULL,NULL,NULL,1),
+ (6200,'C131391','BM 2648K','Normal',NULL,NULL,NULL,1),
+ (6201,'C131401','BM 1925K','Normal',NULL,NULL,NULL,1),
+ (6202,'C131421','40017254','Normal',NULL,NULL,NULL,1),
+ (6203,'C131451','BM 2314K','Normal',NULL,NULL,NULL,1),
+ (6204,'C131461','BM 268K','Normal',NULL,NULL,NULL,1),
+ (6205,'C131471','1309544688','Normal',NULL,NULL,NULL,1),
+ (6206,'C131501','BM 1074K','Normal',NULL,NULL,NULL,1),
+ (6207,'C131531','BM 2070K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6208,'C131541','BM 932K','Normal',NULL,NULL,NULL,1),
+ (6209,'C131551','BM 1812K','Normal',NULL,NULL,NULL,1),
+ (6210,'C131581','BM 1747K','Normal',NULL,NULL,NULL,1),
+ (6211,'C131591','13 09544592','Normal',NULL,NULL,NULL,1),
+ (6212,'C131611','13 09544330','Normal',NULL,NULL,NULL,1),
+ (6213,'C131631','BM 233K','Normal',NULL,NULL,NULL,1),
+ (6214,'C131671','BM 876K','Normal',NULL,NULL,NULL,1),
+ (6215,'C131681','BM 2645K','Normal',NULL,NULL,NULL,1),
+ (6216,'C131711','1309544184','Normal',NULL,NULL,NULL,1),
+ (6217,'C131721','BM 2180K','Normal',NULL,NULL,NULL,1),
+ (6218,'C131741','BM627K','Normal',NULL,NULL,NULL,1),
+ (6219,'C131751','BM 834K','Normal',NULL,NULL,NULL,1),
+ (6220,'C131761','BM 1934K','Normal',NULL,NULL,NULL,1),
+ (6221,'C131971','40017234','Normal',NULL,NULL,NULL,1),
+ (6222,'C132001','BM 1228K','Normal',NULL,NULL,NULL,1),
+ (6223,'C140011','BM 2420K','Normal',NULL,NULL,NULL,1),
+ (6224,'C140031','BM 1432K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6225,'C140041','BM 206K','Normal',NULL,NULL,NULL,1),
+ (6226,'C140051','BM 2031K','Normal',NULL,NULL,NULL,1),
+ (6227,'C140111','BM 1305K','Normal',NULL,NULL,NULL,1),
+ (6228,'C140141','BM 2510K','Normal',NULL,NULL,NULL,1),
+ (6229,'C140161','15-04064','Normal',NULL,NULL,NULL,1),
+ (6230,'C140191','BM 1548K','Normal',NULL,NULL,NULL,1),
+ (6231,'C140201','BM 1359K','Normal',NULL,NULL,NULL,1),
+ (6232,'C140211','BM 1019K','Normal',NULL,NULL,NULL,1),
+ (6233,'C140221','BM 388K','Normal',NULL,NULL,NULL,1),
+ (6234,'C140231','06-429201','Normal',NULL,NULL,NULL,1),
+ (6235,'C140251','BM 965k','Normal',NULL,NULL,NULL,1),
+ (6236,'C140261','BM992K','Normal',NULL,NULL,NULL,1),
+ (6237,'C140281','BM 2334K','Normal',NULL,NULL,NULL,1),
+ (6238,'C140291','BM 2018K','Normal',NULL,NULL,NULL,1),
+ (6239,'C140331','06-429074','Normal',NULL,NULL,NULL,1),
+ (6240,'C140332','06-427786','Normal',NULL,NULL,NULL,1),
+ (6241,'C140341','BM 1841K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6242,'C140351','BM 181K','Normal',NULL,NULL,NULL,1),
+ (6243,'C140361','BM 1421K','Normal',NULL,NULL,NULL,1),
+ (6244,'C140381','BM 1970K','Normal',NULL,NULL,NULL,1),
+ (6245,'C140391','BM 291K','Normal',NULL,NULL,NULL,1),
+ (6246,'C140411','BM 2672K','Normal',NULL,NULL,NULL,1),
+ (6247,'C140441','02377913','Normal',NULL,NULL,NULL,1),
+ (6248,'C140471','01-1730943','Normal',NULL,NULL,NULL,1),
+ (6249,'C140481','BM 2718K','Normal',NULL,NULL,NULL,1),
+ (6250,'C140491','BM 1319K','Normal',NULL,NULL,NULL,1),
+ (6251,'C140511','BM 1813K','Normal',NULL,NULL,NULL,1),
+ (6252,'C140521','BM 1823K','Normal',NULL,NULL,NULL,1),
+ (6253,'C140531','BM 1582K','Normal',NULL,NULL,NULL,1),
+ (6254,'C140541','BM 2014K','Normal',NULL,NULL,NULL,1),
+ (6255,'C140551','BM 2565K','Normal',NULL,NULL,NULL,1),
+ (6256,'C140561','BM 120K','Normal',NULL,NULL,NULL,1),
+ (6257,'C140581','BM1673K','Normal',NULL,NULL,NULL,1),
+ (6258,'C140591','BM 1142K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6259,'C140601','BM 1785K','Normal',NULL,NULL,NULL,1),
+ (6260,'C141641','BM 2258K','Normal',NULL,NULL,NULL,1),
+ (6261,'C141651','BM 1698K','Normal',NULL,NULL,NULL,1),
+ (6262,'C141661','13 09544482','Normal',NULL,NULL,NULL,1),
+ (6263,'C141671','BM 538K','Normal',NULL,NULL,NULL,1),
+ (6264,'C141691','BM 1572K','Normal',NULL,NULL,NULL,1),
+ (6265,'C141901','BM 1798K','Normal',NULL,NULL,NULL,1),
+ (6266,'C141911','BM 1412K','Normal',NULL,NULL,NULL,1),
+ (6267,'C141921','BM 2674K','Normal',NULL,NULL,NULL,1),
+ (6268,'C141951','BM 1301K','Normal',NULL,NULL,NULL,1),
+ (6269,'C141961','1309544055','Normal',NULL,NULL,NULL,1),
+ (6270,'C141971','BM 2452K','Normal',NULL,NULL,NULL,1),
+ (6271,'C141981','1309544196','Normal',NULL,NULL,NULL,1),
+ (6272,'C141991','BM 2359K','Normal',NULL,NULL,NULL,1),
+ (6273,'C142001','BM 1277K','Normal',NULL,NULL,NULL,1),
+ (6274,'C150021','BM 1990K','Normal',NULL,NULL,NULL,1),
+ (6275,'C150031','BM 577K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6276,'C150051','BM 301K','Normal',NULL,NULL,NULL,1),
+ (6277,'C150061','13 09544623','Normal',NULL,NULL,NULL,1),
+ (6278,'C150091','13 09544534','Normal',NULL,NULL,NULL,1),
+ (6279,'C150101','BM 2736K','Normal',NULL,NULL,NULL,1),
+ (6280,'C150121','1309544308','Normal',NULL,NULL,NULL,1),
+ (6281,'C150131','1309544132','Normal',NULL,NULL,NULL,1),
+ (6282,'C150141','1309544436','Normal',NULL,NULL,NULL,1),
+ (6283,'C150161','1309544414','Normal',NULL,NULL,NULL,1),
+ (6284,'C150171','13 09544467','Normal',NULL,NULL,NULL,1),
+ (6285,'C160021','BM 440K','Normal',NULL,NULL,NULL,1),
+ (6286,'C160041','1308761','Normal',NULL,NULL,NULL,1),
+ (6287,'C160051','BM 1447K','Normal',NULL,NULL,NULL,1),
+ (6288,'C160061','BM 766K','Normal',NULL,NULL,NULL,1),
+ (6289,'C160071','BM 2416K','Normal',NULL,NULL,NULL,1),
+ (6290,'C160081','BM2416K','Normal',NULL,NULL,NULL,1),
+ (6291,'C160111','BM 2504K','Normal',NULL,NULL,NULL,1),
+ (6292,'C160121','BM 400K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6293,'C160131','BM 1895K','Normal',NULL,NULL,NULL,1),
+ (6294,'C160161','BM 1712K','Normal',NULL,NULL,NULL,1),
+ (6295,'C160181','BM 2007K','Normal',NULL,NULL,NULL,1),
+ (6296,'C160221','1309544699','Normal',NULL,NULL,NULL,1),
+ (6297,'C160261','BM 1980K','Normal',NULL,NULL,NULL,1),
+ (6298,'C160291','40017245','Normal',NULL,NULL,NULL,1),
+ (6299,'C160301','05.213565','Normal',NULL,NULL,NULL,1),
+ (6300,'C160331','13 09544104','Normal',NULL,NULL,NULL,1),
+ (6301,'C160351','BM 1848K','Normal',NULL,NULL,NULL,1),
+ (6302,'C160381','13 09544440','Normal',NULL,NULL,NULL,1),
+ (6303,'C160391','13 09544225','Normal',NULL,NULL,NULL,1),
+ (6304,'C160401','071200701','Normal',NULL,NULL,NULL,1),
+ (6305,'C160411','BM 1591K','Normal',NULL,NULL,NULL,1),
+ (6306,'C160431','BM 1874K','Normal',NULL,NULL,NULL,1),
+ (6307,'C160441','BM 1735K','Normal',NULL,NULL,NULL,1),
+ (6308,'C160451','BM 2579K','Normal',NULL,NULL,NULL,1),
+ (6309,'C160461','BM 1536K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6310,'C160471','BM 2136K','Normal',NULL,NULL,NULL,1),
+ (6311,'C160491','BM 1557K','Normal',NULL,NULL,NULL,1),
+ (6312,'C160531','BM 882K','Normal',NULL,NULL,NULL,1),
+ (6313,'C160551','1309544406','Normal',NULL,NULL,NULL,1),
+ (6314,'C160591','BM 468K','Normal',NULL,NULL,NULL,1),
+ (6315,'C160601','BM 1261k','Normal',NULL,NULL,NULL,1),
+ (6316,'C160611','BM 1211K','Normal',NULL,NULL,NULL,1),
+ (6317,'C160641','BM 984K','Normal',NULL,NULL,NULL,1),
+ (6318,'C160681','BM 2011K','Normal',NULL,NULL,NULL,1),
+ (6319,'C160691','1309544233','Normal',NULL,NULL,NULL,1),
+ (6320,'C160721','BM 731K','Normal',NULL,NULL,NULL,1),
+ (6321,'C160751','BM 2325K','Normal',NULL,NULL,NULL,1),
+ (6322,'C160761','BM 2498K','Normal',NULL,NULL,NULL,1),
+ (6323,'C160771','BM 2108K','Normal',NULL,NULL,NULL,1),
+ (6324,'C160781','06-427675','Normal',NULL,NULL,NULL,1),
+ (6325,'C160791','BM1473K','Normal',NULL,NULL,NULL,1),
+ (6326,'C160801','BM 2659K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6327,'C160811','BM 2665K','Normal',NULL,NULL,NULL,1),
+ (6328,'C160821','40017349','Normal',NULL,NULL,NULL,1),
+ (6329,'C160831','BM 1215K','Normal',NULL,NULL,NULL,1),
+ (6330,'C160841','BM1602K','Normal',NULL,NULL,NULL,1),
+ (6331,'C160861','13 09544615','Normal',NULL,NULL,NULL,1),
+ (6332,'C160871','BM 1158K','Normal',NULL,NULL,NULL,1),
+ (6333,'C160891','1309544299','Normal',NULL,NULL,NULL,1),
+ (6334,'C160911','BM 1517K','Normal',NULL,NULL,NULL,1),
+ (6335,'C160921','40017427','Normal',NULL,NULL,NULL,1),
+ (6336,'C160931','BM 890K','Normal',NULL,NULL,NULL,1),
+ (6337,'C160951','BM 81K','Normal',NULL,NULL,NULL,1),
+ (6338,'C160961','BM 1508K','Normal',NULL,NULL,NULL,1),
+ (6339,'C160971','13 09544603','Normal',NULL,NULL,NULL,1),
+ (6340,'C160981','BM 202K','Normal',NULL,NULL,NULL,1),
+ (6341,'C161001','13 09544264','Normal',NULL,NULL,NULL,1),
+ (6342,'C161021','BM 874K','Normal',NULL,NULL,NULL,1),
+ (6343,'C161051','BM 850K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6344,'C161061','BM 2347K','Normal',NULL,NULL,NULL,1),
+ (6345,'C161101','BM 5271K','Normal',NULL,NULL,NULL,1),
+ (6346,'C161111','TMP-00000041','Normal',NULL,NULL,NULL,1),
+ (6347,'C161121','BM 2608K','Normal',NULL,NULL,NULL,1),
+ (6348,'C161141','BM 517K','Normal',NULL,NULL,NULL,1),
+ (6349,'C161171','TMP 000770','Normal',NULL,NULL,NULL,1),
+ (6350,'C161181','BM 2708K','Normal',NULL,NULL,NULL,1),
+ (6351,'C161191','BM 454K','Normal',NULL,NULL,NULL,1),
+ (6352,'C161201','13 09544378','Normal',NULL,NULL,NULL,1),
+ (6353,'C161211','BM 1876K','Normal',NULL,NULL,NULL,1),
+ (6354,'C161241','BM 777K','Normal',NULL,NULL,NULL,1),
+ (6355,'C161261','BM 709K','Normal',NULL,NULL,NULL,1),
+ (6356,'C161271','BM 2739K','Normal',NULL,NULL,NULL,1),
+ (6357,'C161311','BM 2465K','Normal',NULL,NULL,NULL,1),
+ (6358,'C161331','BM 667K','Normal',NULL,NULL,NULL,1),
+ (6359,'C161391','0001','Normal',NULL,NULL,NULL,1),
+ (6360,'C161421','BM 2388K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6361,'C161431','BM 2259K','Normal',NULL,NULL,NULL,1),
+ (6362,'C161461','BM 782K','Normal',NULL,NULL,NULL,1),
+ (6363,'C161481','BM 187K','Normal',NULL,NULL,NULL,1),
+ (6364,'C161521','BM 074K','Normal',NULL,NULL,NULL,1),
+ (6365,'C161531','BM 2281K','Normal',NULL,NULL,NULL,1),
+ (6366,'C161551','BM 1875K','Normal',NULL,NULL,NULL,1),
+ (6367,'C161601','13 09544546','Normal',NULL,NULL,NULL,1),
+ (6368,'C161691','13 09544231','Normal',NULL,NULL,NULL,1),
+ (6369,'C161751','BM 197K','Normal',NULL,NULL,NULL,1),
+ (6370,'C161761','BM 1409K','Normal',NULL,NULL,NULL,1),
+ (6371,'C161771','BM 1954K','Normal',NULL,NULL,NULL,1),
+ (6372,'C161791','1309544626','Normal',NULL,NULL,NULL,1),
+ (6373,'C161821','BM 1346K','Normal',NULL,NULL,NULL,1),
+ (6374,'C161851','BM 2079K','Normal',NULL,NULL,NULL,1),
+ (6375,'C161861','13 09544668','Normal',NULL,NULL,NULL,1),
+ (6376,'C161871','BM 2303K','Normal',NULL,NULL,NULL,1),
+ (6377,'C161901','TMP-00000040','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6378,'C161911','BM 154K','Normal',NULL,NULL,NULL,1),
+ (6379,'C161921','BM 1928K','Normal',NULL,NULL,NULL,1),
+ (6380,'C161931','BM 1181K','Normal',NULL,NULL,NULL,1),
+ (6381,'C161941','13 09544640','Normal',NULL,NULL,NULL,1),
+ (6382,'C161971','BM 1678K','Normal',NULL,NULL,NULL,1),
+ (6383,'C161991','13 09544230','Normal',NULL,NULL,NULL,1),
+ (6384,'C162021','BM 673K','Normal',NULL,NULL,NULL,1),
+ (6385,'C162031','13 09544099','Normal',NULL,NULL,NULL,1),
+ (6386,'C170031','BM 2357K','Normal',NULL,NULL,NULL,1),
+ (6387,'C170041','BM 1290K','Normal',NULL,NULL,NULL,1),
+ (6388,'C170051','BM 1453K','Normal',NULL,NULL,NULL,1),
+ (6389,'C170081','BM 2572K','Normal',NULL,NULL,NULL,1),
+ (6390,'C170101','BM 267K','Normal',NULL,NULL,NULL,1),
+ (6391,'C170141','BM 2021K','Normal',NULL,NULL,NULL,1),
+ (6392,'C170171','1309544490','Normal',NULL,NULL,NULL,1),
+ (6393,'C170181','1309544325','Normal',NULL,NULL,NULL,1),
+ (6394,'C170201','13 09544071','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6395,'C170281','BM 287K','Normal',NULL,NULL,NULL,1),
+ (6396,'C170291','BM 1173K','Normal',NULL,NULL,NULL,1),
+ (6397,'C170321','6151565','Normal',NULL,NULL,NULL,1),
+ (6398,'C170331','BM 174K','Normal',NULL,NULL,NULL,1),
+ (6399,'C170371','BM 972K','Normal',NULL,NULL,NULL,1),
+ (6400,'C170391','1309544069','Normal',NULL,NULL,NULL,1),
+ (6401,'C170481','BM 2548K','Normal',NULL,NULL,NULL,1),
+ (6402,'C170551','1309544087','Normal',NULL,NULL,NULL,1),
+ (6403,'C170571','BM 1264K','Normal',NULL,NULL,NULL,1),
+ (6404,'C170581','06 427507','Normal',NULL,NULL,NULL,1),
+ (6405,'C170591','BM 1043K','Normal',NULL,NULL,NULL,1),
+ (6406,'C170661','TMP-00000051','Normal',NULL,NULL,NULL,1),
+ (6407,'C170671','BM 1325K','Normal',NULL,NULL,NULL,1),
+ (6408,'C170681','BM 1693K','Normal',NULL,NULL,NULL,1),
+ (6409,'C170721','BM 2402K','Normal',NULL,NULL,NULL,1),
+ (6410,'C170731','1309544356','Normal',NULL,NULL,NULL,1),
+ (6411,'C170741','BM 336K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6412,'C170831','BM 315K','Normal',NULL,NULL,NULL,1),
+ (6413,'C170841','1309544148','Normal',NULL,NULL,NULL,1),
+ (6414,'C170871','BM 2117K','Normal',NULL,NULL,NULL,1),
+ (6415,'C170881','BM 477K','Normal',NULL,NULL,NULL,1),
+ (6416,'C170901','BM 1335K','Normal',NULL,NULL,NULL,1),
+ (6417,'C170911','BM 1911K','Normal',NULL,NULL,NULL,1),
+ (6418,'C170941','BM 1948K','Normal',NULL,NULL,NULL,1),
+ (6419,'C170951','HCMB 13120151','Normal',NULL,NULL,NULL,1),
+ (6420,'C170961','40017444','Normal',NULL,NULL,NULL,1),
+ (6421,'C170981','BM 1756K','Normal',NULL,NULL,NULL,1),
+ (6422,'C171001','M 06 428560','Normal',NULL,NULL,NULL,1),
+ (6423,'C171011','BM 953K','Normal',NULL,NULL,NULL,1),
+ (6424,'C171021','BM703K','Normal',NULL,NULL,NULL,1),
+ (6425,'C171041','BM 2040K','Normal',NULL,NULL,NULL,1),
+ (6426,'C171051','BM 525K','Normal',NULL,NULL,NULL,1),
+ (6427,'C171061','06-4649456','Normal',NULL,NULL,NULL,1),
+ (6428,'C171081','BM 1315K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6429,'C171101','BM 608K','Normal',NULL,NULL,NULL,1),
+ (6430,'C171111','M.05-213511','Normal',NULL,NULL,NULL,1),
+ (6431,'C171121','BM 1776K','Normal',NULL,NULL,NULL,1),
+ (6432,'C171131','BM 345K','Normal',NULL,NULL,NULL,1),
+ (6433,'C171151','BM 035K','Normal',NULL,NULL,NULL,1),
+ (6434,'C171191','BM 1555K','Normal',NULL,NULL,NULL,1),
+ (6435,'C171201','BM 2395K','Normal',NULL,NULL,NULL,1),
+ (6436,'C171211','BM 2151K','Normal',NULL,NULL,NULL,1),
+ (6437,'C171231','BM 106K','Normal',NULL,NULL,NULL,1),
+ (6438,'C171251','BM 2668K','Normal',NULL,NULL,NULL,1),
+ (6439,'C171271','02-1504045','Normal',NULL,NULL,NULL,1),
+ (6440,'C171281','1309544628','Normal',NULL,NULL,NULL,1),
+ (6441,'C171291','BM 1065K','Normal',NULL,NULL,NULL,1),
+ (6442,'C171301','BM 2491K','Normal',NULL,NULL,NULL,1),
+ (6443,'C171311','148653','Normal',NULL,NULL,NULL,1),
+ (6444,'C171331','BM 1157K','Normal',NULL,NULL,NULL,1),
+ (6445,'C171341','BM 462K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6446,'C171361','BM 1253K','Normal',NULL,NULL,NULL,1),
+ (6447,'C171371','BM 2516K','Normal',NULL,NULL,NULL,1),
+ (6448,'C171381','BM 2299K','Normal',NULL,NULL,NULL,1),
+ (6449,'C171391','BM 747K','Normal',NULL,NULL,NULL,1),
+ (6450,'C171401','BM 1552K','Normal',NULL,NULL,NULL,1),
+ (6451,'C171411','BM 510K','Normal',NULL,NULL,NULL,1),
+ (6452,'C171421','BM 373K','Normal',NULL,NULL,NULL,1),
+ (6453,'C171431','BM 2733K','Normal',NULL,NULL,NULL,1),
+ (6454,'C171451','BM 2605K','Normal',NULL,NULL,NULL,1),
+ (6455,'C171471','BM 2644K','Normal',NULL,NULL,NULL,1),
+ (6456,'C171481','BM 1415K','Normal',NULL,NULL,NULL,1),
+ (6457,'C171491','BM 464K','Normal',NULL,NULL,NULL,1),
+ (6458,'C171501','02-377942','Normal',NULL,NULL,NULL,1),
+ (6459,'C171511','BM 1391K','Normal',NULL,NULL,NULL,1),
+ (6460,'C171531','BM 627K','Normal',NULL,NULL,NULL,1),
+ (6461,'C171541','141101930','Normal',NULL,NULL,NULL,1),
+ (6462,'C171581','1309544048','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6463,'C171591','BM 2771K','Normal',NULL,NULL,NULL,1),
+ (6464,'C171611','BM 1675K','Normal',NULL,NULL,NULL,1),
+ (6465,'C171631','BM 1781K','Normal',NULL,NULL,NULL,1),
+ (6466,'C171641','BM 2748K','Normal',NULL,NULL,NULL,1),
+ (6467,'C171651','9426129','Normal',NULL,NULL,NULL,1),
+ (6468,'C171661','BM 265K','Normal',NULL,NULL,NULL,1),
+ (6469,'C171671','BM 1537K','Normal',NULL,NULL,NULL,1),
+ (6470,'C171681','BM 23K','Normal',NULL,NULL,NULL,1),
+ (6471,'C171691','BM 2297K','Normal',NULL,NULL,NULL,1),
+ (6472,'C171701','BM 261K','Normal',NULL,NULL,NULL,1),
+ (6473,'C171711','BM 564K','Normal',NULL,NULL,NULL,1),
+ (6474,'C171721','BM 358K','Normal',NULL,NULL,NULL,1),
+ (6475,'C171731','BM 1810K','Normal',NULL,NULL,NULL,1),
+ (6476,'C171741','BM 1538K','Normal',NULL,NULL,NULL,1),
+ (6477,'C171791','148791','Normal',NULL,NULL,NULL,1),
+ (6478,'C171801','13 09544077','Normal',NULL,NULL,NULL,1),
+ (6479,'C171811','BM 2547K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6480,'C171821','06-427482','Normal',NULL,NULL,NULL,1),
+ (6481,'C171831','BM 1839K','Normal',NULL,NULL,NULL,1),
+ (6482,'C171841','06-429030','Normal',NULL,NULL,NULL,1),
+ (6483,'C171851','BM 1897K','Normal',NULL,NULL,NULL,1),
+ (6484,'C171861','BM 1761K','Normal',NULL,NULL,NULL,1),
+ (6485,'C171871','BM 1903K','Normal',NULL,NULL,NULL,1),
+ (6486,'C171881','BM 613K','Normal',NULL,NULL,NULL,1),
+ (6487,'C171891','BM 1257K','Normal',NULL,NULL,NULL,1),
+ (6488,'C171901','BM 1167K','Normal',NULL,NULL,NULL,1),
+ (6489,'C171921','BM 2690K','Normal',NULL,NULL,NULL,1),
+ (6490,'C171931','BM 1914K','Normal',NULL,NULL,NULL,1),
+ (6491,'C171941','BM 036K','Normal',NULL,NULL,NULL,1),
+ (6492,'C171951','BM 532K','Normal',NULL,NULL,NULL,1),
+ (6493,'C171961','BM 1203K','Normal',NULL,NULL,NULL,1),
+ (6494,'C171971','BM 1634K','Normal',NULL,NULL,NULL,1),
+ (6495,'C171991','1309544322','Normal',NULL,NULL,NULL,1),
+ (6496,'C172001','BM 514K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6497,'C220021','13 09544549','Normal',NULL,NULL,NULL,1),
+ (6498,'C220031','1309544109','Normal',NULL,NULL,NULL,1),
+ (6499,'C220041','1309544245','Normal',NULL,NULL,NULL,1),
+ (6500,'C220051','13 09544505','Normal',NULL,NULL,NULL,1),
+ (6501,'C220081','13 09544630','Normal',NULL,NULL,NULL,1),
+ (6502,'C220091','13 09544168','Normal',NULL,NULL,NULL,1),
+ (6503,'C220111','1309544352','Normal',NULL,NULL,NULL,1),
+ (6504,'C220121','1309544370','Normal',NULL,NULL,NULL,1),
+ (6505,'C220131','13 09544197','Normal',NULL,NULL,NULL,1),
+ (6506,'C220141','13 09544477','Normal',NULL,NULL,NULL,1),
+ (6507,'C220151','13 09544114','Normal',NULL,NULL,NULL,1),
+ (6508,'C220161','1309544068','Normal',NULL,NULL,NULL,1),
+ (6509,'C220181','1309544656','Normal',NULL,NULL,NULL,1),
+ (6510,'C220191','1309544266','Normal',NULL,NULL,NULL,1),
+ (6511,'C220231','1309544607','Normal',NULL,NULL,NULL,1),
+ (6512,'C220251','13 09544302','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6513,'C220261','13 09544307','Normal',NULL,NULL,NULL,1),
+ (6514,'C220271','1309544119','Normal',NULL,NULL,NULL,1),
+ (6515,'C220301','1309544088','Normal',NULL,NULL,NULL,1),
+ (6516,'C220311','BM 1958K','Normal',NULL,NULL,NULL,1),
+ (6517,'C220321','1309544636','Normal',NULL,NULL,NULL,1),
+ (6518,'C220341','13 09544475','Normal',NULL,NULL,NULL,1),
+ (6519,'C220351','6151000','Normal',NULL,NULL,NULL,1),
+ (6520,'C221431','13 09544673','Normal',NULL,NULL,NULL,1),
+ (6521,'C221441','1309544574','Normal',NULL,NULL,NULL,1),
+ (6522,'C221491','BM 2760K','Normal',NULL,NULL,NULL,1),
+ (6523,'C221531','06-428429','Normal',NULL,NULL,NULL,1),
+ (6524,'C221541','141102723','Normal',NULL,NULL,NULL,1),
+ (6525,'C240021','1309544584','Normal',NULL,NULL,NULL,1),
+ (6526,'D010011','TMP-00000451','Normal',NULL,NULL,NULL,1),
+ (6527,'D010071','BM 946K','Normal',NULL,NULL,NULL,1),
+ (6528,'D010091','13 09544479','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6529,'D010131','147688','Normal',NULL,NULL,NULL,1),
+ (6530,'D010171','BM 1695K','Normal',NULL,NULL,NULL,1),
+ (6531,'D010191','BM 1484K','Normal',NULL,NULL,NULL,1),
+ (6532,'D010201','06-49646','Normal',NULL,NULL,NULL,1),
+ (6533,'D010221','40017422','Normal',NULL,NULL,NULL,1),
+ (6534,'D010241','BM 912K','Normal',NULL,NULL,NULL,1),
+ (6535,'D010251','BM 168K','Normal',NULL,NULL,NULL,1),
+ (6536,'D010261','1309544389','Normal',NULL,NULL,NULL,1),
+ (6537,'D010291','1309544563','Normal',NULL,NULL,NULL,1),
+ (6538,'D010311','00529','Normal',NULL,NULL,NULL,1),
+ (6539,'D010331','13-001781','Normal',NULL,NULL,NULL,1),
+ (6540,'D010351','BM 391K','Normal',NULL,NULL,NULL,1),
+ (6541,'D010361','BM 960K','Normal',NULL,NULL,NULL,1),
+ (6542,'D010401','06-428534','Normal',NULL,NULL,NULL,1),
+ (6543,'D010441','06-428698','Normal',NULL,NULL,NULL,1),
+ (6544,'D010491','01-23773','Normal',NULL,NULL,NULL,1),
+ (6545,'D010501','13 08544113','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6546,'D010511','BM 1653K','Normal',NULL,NULL,NULL,1),
+ (6547,'D010521','13 09544140','Normal',NULL,NULL,NULL,1),
+ (6548,'D010541','BM 1656K','Normal',NULL,NULL,NULL,1),
+ (6549,'D010551','07-1200013','Normal',NULL,NULL,NULL,1),
+ (6550,'D010561','BM 110K','Normal',NULL,NULL,NULL,1),
+ (6551,'D010611','BM 645K','Normal',NULL,NULL,NULL,1),
+ (6552,'D010621','06-427410','Normal',NULL,NULL,NULL,1),
+ (6553,'D010631','BM 2638K','Normal',NULL,NULL,NULL,1),
+ (6554,'D010691','06-428941','Normal',NULL,NULL,NULL,1),
+ (6555,'D010701','147892','Normal',NULL,NULL,NULL,1),
+ (6556,'D010791','071201389','Normal',NULL,NULL,NULL,1),
+ (6557,'D010821','BM 217K','Normal',NULL,NULL,NULL,1),
+ (6558,'D010831','BM 489K','Normal',NULL,NULL,NULL,1),
+ (6559,'D010851','BM 1338K','Normal',NULL,NULL,NULL,1),
+ (6560,'D010861','BM 1169K','Normal',NULL,NULL,NULL,1),
+ (6561,'D010871','BM 1506K','Normal',NULL,NULL,NULL,1),
+ (6562,'D010921','BM 1901K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6563,'D010961','BM 319K','Normal',NULL,NULL,NULL,1),
+ (6564,'D011011','06-428617','Normal',NULL,NULL,NULL,1),
+ (6565,'D011021','13 09544538','Normal',NULL,NULL,NULL,1),
+ (6566,'D011091','BM 687K','Normal',NULL,NULL,NULL,1),
+ (6567,'D011171','BM 1064K','Normal',NULL,NULL,NULL,1),
+ (6568,'D011181','BM 133K','Normal',NULL,NULL,NULL,1),
+ (6569,'D011191','148652','Normal',NULL,NULL,NULL,1),
+ (6570,'D011211','06.427952','Normal',NULL,NULL,NULL,1),
+ (6571,'D011221','13 09544315','Normal',NULL,NULL,NULL,1),
+ (6572,'D011311','BM 166K','Normal',NULL,NULL,NULL,1),
+ (6573,'D011331','BM 2550K','Normal',NULL,NULL,NULL,1),
+ (6574,'D011381','BM 2618K','Normal',NULL,NULL,NULL,1),
+ (6575,'D011391','1309544089','Normal',NULL,NULL,NULL,1),
+ (6576,'D011401','BM 2789K','Normal',NULL,NULL,NULL,1),
+ (6577,'D011411','BM 2433K','Normal',NULL,NULL,NULL,1),
+ (6578,'D011421','BM 2295K','Normal',NULL,NULL,NULL,1),
+ (6579,'D011451','BM 652K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6580,'D011461','BM 219K','Normal',NULL,NULL,NULL,1),
+ (6581,'D011481','BM 2375K','Normal',NULL,NULL,NULL,1),
+ (6582,'D011531','BM 82K','Normal',NULL,NULL,NULL,1),
+ (6583,'D011541','146624','Normal',NULL,NULL,NULL,1),
+ (6584,'D011601','1309544339','Normal',NULL,NULL,NULL,1),
+ (6585,'D011611','13 09544487','Normal',NULL,NULL,NULL,1),
+ (6586,'D011621','13 09544385','Normal',NULL,NULL,NULL,1),
+ (6587,'D011641','13 09544563','Normal',NULL,NULL,NULL,1),
+ (6588,'D011661','BM 930K','Normal',NULL,NULL,NULL,1),
+ (6589,'D011671','BM 624K','Normal',NULL,NULL,NULL,1),
+ (6590,'D011681','13 09544568','Normal',NULL,NULL,NULL,1),
+ (6591,'D011701','BM 2780K','Normal',NULL,NULL,NULL,1),
+ (6592,'D011721','BM 918K','Normal',NULL,NULL,NULL,1),
+ (6593,'D011731','13 09544317','Normal',NULL,NULL,NULL,1),
+ (6594,'D011751','BM 677K','Normal',NULL,NULL,NULL,1),
+ (6595,'D011781','BM 1046K','Normal',NULL,NULL,NULL,1),
+ (6596,'D011791','BM 1679K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6597,'D011811','BM 2038K','Normal',NULL,NULL,NULL,1),
+ (6598,'D011851','BM 988K','Normal',NULL,NULL,NULL,1),
+ (6599,'D011931','13 09544662','Normal',NULL,NULL,NULL,1),
+ (6600,'D011941','06-428616','Normal',NULL,NULL,NULL,1),
+ (6601,'D011961','BM 1880K','Normal',NULL,NULL,NULL,1),
+ (6602,'D020041','BM 1676K','Normal',NULL,NULL,NULL,1),
+ (6603,'D020081','BM 1991K','Normal',NULL,NULL,NULL,1),
+ (6604,'D020091','BM 2001K','Normal',NULL,NULL,NULL,1),
+ (6605,'D020101','BM 714K','Normal',NULL,NULL,NULL,1),
+ (6606,'D020111','BM 415K','Normal',NULL,NULL,NULL,1),
+ (6607,'D020131','6151715','Normal',NULL,NULL,NULL,1),
+ (6608,'D020141','1309544343','Normal',NULL,NULL,NULL,1),
+ (6609,'D020171','BM 474K','Normal',NULL,NULL,NULL,1),
+ (6610,'D020191','BM 1992K','Normal',NULL,NULL,NULL,1),
+ (6611,'D020281','BM 569K','Normal',NULL,NULL,NULL,1),
+ (6612,'D020341','BM 579K','Normal',NULL,NULL,NULL,1),
+ (6613,'D020371','BM 1989K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6614,'D020391','BM 779K','Normal',NULL,NULL,NULL,1),
+ (6615,'D020401','BM 660K','Normal',NULL,NULL,NULL,1),
+ (6616,'D020441','13 09544073','Normal',NULL,NULL,NULL,1),
+ (6617,'D020471','148794','Normal',NULL,NULL,NULL,1),
+ (6618,'D020501','148626','Normal',NULL,NULL,NULL,1),
+ (6619,'D020511','40017499','Normal',NULL,NULL,NULL,1),
+ (6620,'D020521','BM 247K','Normal',NULL,NULL,NULL,1),
+ (6621,'D020561','BM 2239K','Normal',NULL,NULL,NULL,1),
+ (6622,'D020571','BM 884K','Normal',NULL,NULL,NULL,1),
+ (6623,'D020581','127982','Normal',NULL,NULL,NULL,1),
+ (6624,'D020601','13 09544365','Normal',NULL,NULL,NULL,1),
+ (6625,'D020621','BM 1488K','Normal',NULL,NULL,NULL,1),
+ (6626,'D020631','BM 330K','Normal',NULL,NULL,NULL,1),
+ (6627,'D020661','BM 1153K','Normal',NULL,NULL,NULL,1),
+ (6628,'D020721','BM 1918K','Normal',NULL,NULL,NULL,1),
+ (6629,'D020761','130903835','Normal',NULL,NULL,NULL,1),
+ (6630,'D020791','BM 2664K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6631,'D020801','BM 865K','Normal',NULL,NULL,NULL,1),
+ (6632,'D020811','146623','Normal',NULL,NULL,NULL,1),
+ (6633,'D020831','13 09544481','Normal',NULL,NULL,NULL,1),
+ (6634,'D020841','BM 255K','Normal',NULL,NULL,NULL,1),
+ (6635,'D020851','BM 1360K','Normal',NULL,NULL,NULL,1),
+ (6636,'D020871','BM 1510K','Normal',NULL,NULL,NULL,1),
+ (6637,'D020881','148785','Normal',NULL,NULL,NULL,1),
+ (6638,'D020901','BM 1367K','Normal',NULL,NULL,NULL,1),
+ (6639,'D020911','BM 2212K','Normal',NULL,NULL,NULL,1),
+ (6640,'D020971','BM 1303K','Normal',NULL,NULL,NULL,1),
+ (6641,'D020991','13 09544502','Normal',NULL,NULL,NULL,1),
+ (6642,'D021001','BM 416K','Normal',NULL,NULL,NULL,1),
+ (6643,'D021031','BM 1242K','Normal',NULL,NULL,NULL,1),
+ (6644,'D021041','05-215243','Normal',NULL,NULL,NULL,1),
+ (6645,'D021081','BM 638K','Normal',NULL,NULL,NULL,1),
+ (6646,'D021091','BM 51K','Normal',NULL,NULL,NULL,1),
+ (6647,'D021131','BM 482K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6648,'D021151','146964','Normal',NULL,NULL,NULL,1),
+ (6649,'D021191','13 09544488','Normal',NULL,NULL,NULL,1),
+ (6650,'D021211','BM 898K','Normal',NULL,NULL,NULL,1),
+ (6651,'D021221','ZR-02835058','Normal',NULL,NULL,NULL,1),
+ (6652,'D021231','BM 1383K','Normal',NULL,NULL,NULL,1),
+ (6653,'D021241','BM 111K','Normal',NULL,NULL,NULL,1),
+ (6654,'D021261','BM 1648K','Normal',NULL,NULL,NULL,1),
+ (6655,'D021271','BM 109K','Normal',NULL,NULL,NULL,1),
+ (6656,'D021291','BM 851K','Normal',NULL,NULL,NULL,1),
+ (6657,'D021311','BM 437K','Normal',NULL,NULL,NULL,1),
+ (6658,'D021341','13-08-01192','Normal',NULL,NULL,NULL,1),
+ (6659,'D021371','BM 1814K','Normal',NULL,NULL,NULL,1),
+ (6660,'D021381','BM 1603K','Normal',NULL,NULL,NULL,1),
+ (6661,'D021391','BM 2568K','Normal',NULL,NULL,NULL,1),
+ (6662,'D021401','BM 2526K','Normal',NULL,NULL,NULL,1),
+ (6663,'D021421','BM 402K','Normal',NULL,NULL,NULL,1),
+ (6664,'D021431','BM 288K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6665,'D021501','BM 428K','Normal',NULL,NULL,NULL,1),
+ (6666,'D021531','BM 467K','Normal',NULL,NULL,NULL,1),
+ (6667,'D021551','BM 697K','Normal',NULL,NULL,NULL,1),
+ (6668,'D021591','BM 2061K','Normal',NULL,NULL,NULL,1),
+ (6669,'D021611','128290','Normal',NULL,NULL,NULL,1),
+ (6670,'D021621','','Normal',NULL,NULL,NULL,1),
+ (6671,'D021631','BM 2156K','Normal',NULL,NULL,NULL,1),
+ (6672,'D021641','BM 185K','Normal',NULL,NULL,NULL,1),
+ (6673,'D021651','BM 116K','Normal',NULL,NULL,NULL,1),
+ (6674,'D021671','BM 98K','Normal',NULL,NULL,NULL,1),
+ (6675,'D021681','BM 020K','Normal',NULL,NULL,NULL,1),
+ (6676,'D021701','BM 2248K','Normal',NULL,NULL,NULL,1),
+ (6677,'D021711','127438','Normal',NULL,NULL,NULL,1),
+ (6678,'D021781','ZR-02834917','Normal',NULL,NULL,NULL,1),
+ (6679,'D021821','BM 1328K','Normal',NULL,NULL,NULL,1),
+ (6680,'D021831','BM 2667K','Normal',NULL,NULL,NULL,1),
+ (6681,'D021861','BM 774K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6682,'D021871','BM 126K','Normal',NULL,NULL,NULL,1),
+ (6683,'D021881','BM 553K','Normal',NULL,NULL,NULL,1),
+ (6684,'D021911','BM 816K','Normal',NULL,NULL,NULL,1),
+ (6685,'D021921','BM 1300K','Normal',NULL,NULL,NULL,1),
+ (6686,'D021991','BM 1060K','Normal',NULL,NULL,NULL,1),
+ (6687,'D022001','147192','Normal',NULL,NULL,NULL,1),
+ (6688,'D030011','BM 1258K','Normal',NULL,NULL,NULL,1),
+ (6689,'D030041','147271','Normal',NULL,NULL,NULL,1),
+ (6690,'D030051','BM 1452K','Normal',NULL,NULL,NULL,1),
+ (6691,'D030091','1309544399','Normal',NULL,NULL,NULL,1),
+ (6692,'D030101','BM 1332K','Normal',NULL,NULL,NULL,1),
+ (6693,'D030111','BM 2310K','Normal',NULL,NULL,NULL,1),
+ (6694,'D030121','BM 2131K','Normal',NULL,NULL,NULL,1),
+ (6695,'D030131','BM 1073K','Normal',NULL,NULL,NULL,1),
+ (6696,'D030141','1309544277','Normal',NULL,NULL,NULL,1),
+ (6697,'D030161','05.213474','Normal',NULL,NULL,NULL,1),
+ (6698,'D030171','06-427724','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6699,'D030231','BM 444K','Normal',NULL,NULL,NULL,1),
+ (6700,'D030241','BM1441K','Normal',NULL,NULL,NULL,1),
+ (6701,'D030251','147278','Normal',NULL,NULL,NULL,1),
+ (6702,'D030261','146622','Normal',NULL,NULL,NULL,1),
+ (6703,'D030271','BM 057K','Normal',NULL,NULL,NULL,1),
+ (6704,'D030311','BM 1456K','Normal',NULL,NULL,NULL,1),
+ (6705,'D030321','BM 1137K','Normal',NULL,NULL,NULL,1),
+ (6706,'D030341','BM 2003K','Normal',NULL,NULL,NULL,1),
+ (6707,'D030361','BM 2553K','Normal',NULL,NULL,NULL,1),
+ (6708,'D030381','BM 1652K','Normal',NULL,NULL,NULL,1),
+ (6709,'D030401','BM 1845K','Normal',NULL,NULL,NULL,1),
+ (6710,'D030421','BM 124K','Normal',NULL,NULL,NULL,1),
+ (6711,'D030441','ZR 02834696','Normal',NULL,NULL,NULL,1),
+ (6712,'D030471','BM 009K','Normal',NULL,NULL,NULL,1),
+ (6713,'D030481','1309544265','Normal',NULL,NULL,NULL,1),
+ (6714,'D030491','BM 576K','Normal',NULL,NULL,NULL,1),
+ (6715,'D030501','BM 1466K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6716,'D030511','BM 1380K','Normal',NULL,NULL,NULL,1),
+ (6717,'D030521','BM 2633K','Normal',NULL,NULL,NULL,1),
+ (6718,'D030531','2015-03-04371','Normal',NULL,NULL,NULL,1),
+ (6719,'D030541','BM 371K','Normal',NULL,NULL,NULL,1),
+ (6720,'D030551','BM 48K','Normal',NULL,NULL,NULL,1),
+ (6721,'D030571','BM 2100K','Normal',NULL,NULL,NULL,1),
+ (6722,'D030581','13 09544513','Normal',NULL,NULL,NULL,1),
+ (6723,'D030611','13 09544247','Normal',NULL,NULL,NULL,1),
+ (6724,'D030631','BM 1286K','Normal',NULL,NULL,NULL,1),
+ (6725,'D030661','BM 1822K','Normal',NULL,NULL,NULL,1),
+ (6726,'D030671','146995','Normal',NULL,NULL,NULL,1),
+ (6727,'D032001','BM 118K','Normal',NULL,NULL,NULL,1),
+ (6728,'D040031','05.215675','Normal',NULL,NULL,NULL,1),
+ (6729,'D040041','06-427730','Normal',NULL,NULL,NULL,1),
+ (6730,'D040061','40017251','Normal',NULL,NULL,NULL,1),
+ (6731,'D040071','06-428619','Normal',NULL,NULL,NULL,1),
+ (6732,'D040081','13 09544100','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6733,'D040091','40017323','Normal',NULL,NULL,NULL,1),
+ (6734,'D040111','','Normal',NULL,NULL,NULL,1),
+ (6735,'D040121','071201129','Normal',NULL,NULL,NULL,1),
+ (6736,'D040191','40017298','Normal',NULL,NULL,NULL,1),
+ (6737,'D040201','BM 2346K','Normal',NULL,NULL,NULL,1),
+ (6738,'D040221','BM 2025K','Normal',NULL,NULL,NULL,1),
+ (6739,'D040251','11-1119746','Normal',NULL,NULL,NULL,1),
+ (6740,'D040301','40017347','Normal',NULL,NULL,NULL,1),
+ (6741,'D040321','ZR-02834682','Normal',NULL,NULL,NULL,1),
+ (6742,'D040331','06-427956','Normal',NULL,NULL,NULL,1),
+ (6743,'D040371','40017317','Normal',NULL,NULL,NULL,1),
+ (6744,'D040391','13 09544336','Normal',NULL,NULL,NULL,1),
+ (6745,'D040411','06.427975','Normal',NULL,NULL,NULL,1),
+ (6746,'D040421','40017318','Normal',NULL,NULL,NULL,1),
+ (6747,'D040431','4007346','Normal',NULL,NULL,NULL,1),
+ (6748,'D040451','40017246','Normal',NULL,NULL,NULL,1),
+ (6749,'D040471','BM 2189K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6750,'D040491','ZR-02834739','Normal',NULL,NULL,NULL,1),
+ (6751,'D040501','071201726','Normal',NULL,NULL,NULL,1),
+ (6752,'D040511','40017435','Normal',NULL,NULL,NULL,1),
+ (6753,'D040531','BM 958K','Normal',NULL,NULL,NULL,1),
+ (6754,'D040541','40017205','Normal',NULL,NULL,NULL,1),
+ (6755,'D040551','13 09544246','Normal',NULL,NULL,NULL,1),
+ (6756,'D040581','40017350','Normal',NULL,NULL,NULL,1),
+ (6757,'D040591','40017300','Normal',NULL,NULL,NULL,1),
+ (6758,'D040601','40017378','Normal',NULL,NULL,NULL,1),
+ (6759,'D040621','40017462','Normal',NULL,NULL,NULL,1),
+ (6760,'D040641','ZR-02834828','Normal',NULL,NULL,NULL,1),
+ (6761,'D040651','ZR-02834573','Normal',NULL,NULL,NULL,1),
+ (6762,'D040661','40017459','Normal',NULL,NULL,NULL,1),
+ (6763,'D040681','071200135','Normal',NULL,NULL,NULL,1),
+ (6764,'D040721','0712008557','Normal',NULL,NULL,NULL,1),
+ (6765,'D040731','40017295','Normal',NULL,NULL,NULL,1),
+ (6766,'D040761','40017267','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6767,'D040871','05-402528','Normal',NULL,NULL,NULL,1),
+ (6768,'D040881','06.427669','Normal',NULL,NULL,NULL,1),
+ (6769,'D040991','BM 2122K','Normal',NULL,NULL,NULL,1),
+ (6770,'D041001','BM 1268K','Normal',NULL,NULL,NULL,1),
+ (6771,'D041071','13 09544438','Normal',NULL,NULL,NULL,1),
+ (6772,'D041081','3136','Normal',NULL,NULL,NULL,1),
+ (6773,'D041111','BM 596K','Normal',NULL,NULL,NULL,1),
+ (6774,'D041121','40017434','Normal',NULL,NULL,NULL,1),
+ (6775,'D041161','05.215532','Normal',NULL,NULL,NULL,1),
+ (6776,'D041241','40017439','Normal',NULL,NULL,NULL,1),
+ (6777,'D041321','BM 2577K','Normal',NULL,NULL,NULL,1),
+ (6778,'D041331','06.429178','Normal',NULL,NULL,NULL,1),
+ (6779,'D041351','13 09544585','Normal',NULL,NULL,NULL,1),
+ (6780,'D041371','BM 2663K','Normal',NULL,NULL,NULL,1),
+ (6781,'D041381','40017296','Normal',NULL,NULL,NULL,1),
+ (6782,'D041391','06-428980','Normal',NULL,NULL,NULL,1),
+ (6783,'D041461','40017436','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6784,'D041481','01-1730862','Normal',NULL,NULL,NULL,1),
+ (6785,'D041501','06-427664','Normal',NULL,NULL,NULL,1),
+ (6786,'D041511','40017274','Normal',NULL,NULL,NULL,1),
+ (6787,'D041601','BM 941K','Normal',NULL,NULL,NULL,1),
+ (6788,'D041651','13-08-01958','Normal',NULL,NULL,NULL,1),
+ (6789,'D041681','071201541','Normal',NULL,NULL,NULL,1),
+ (6790,'D041711','BM 2355K','Normal',NULL,NULL,NULL,1),
+ (6791,'D041731','BM 47K','Normal',NULL,NULL,NULL,1),
+ (6792,'D041751','40017294','Normal',NULL,NULL,NULL,1),
+ (6793,'D041761','BM 2481K','Normal',NULL,NULL,NULL,1),
+ (6794,'D041781','BM 534K','Normal',NULL,NULL,NULL,1),
+ (6795,'D041791','BM 689K','Normal',NULL,NULL,NULL,1),
+ (6796,'D041821','BM 771K','Normal',NULL,NULL,NULL,1),
+ (6797,'D041831','13 09544314','Normal',NULL,NULL,NULL,1),
+ (6798,'D041841','BM 871K','Normal',NULL,NULL,NULL,1),
+ (6799,'D041851','40017321','Normal',NULL,NULL,NULL,1),
+ (6800,'D041871','40017271','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6801,'D041891','BM 555K','Normal',NULL,NULL,NULL,1),
+ (6802,'D041931','13 09544543','Normal',NULL,NULL,NULL,1),
+ (6803,'D042001',' BM 1584k','Normal',NULL,NULL,NULL,1),
+ (6804,'D050011','BM 949K','Normal',NULL,NULL,NULL,1),
+ (6805,'D050021','BM 700K','Normal',NULL,NULL,NULL,1),
+ (6806,'D050041','BM 2002K','Normal',NULL,NULL,NULL,1),
+ (6807,'D050081','*40017418*','Normal',NULL,NULL,NULL,1),
+ (6808,'D050131','BM 2686K','Normal',NULL,NULL,NULL,1),
+ (6809,'D050141','BM 1777K','Normal',NULL,NULL,NULL,1),
+ (6810,'D050161','BM 95K','Normal',NULL,NULL,NULL,1),
+ (6811,'D050191','06-427883','Normal',NULL,NULL,NULL,1),
+ (6812,'D050211','BM 2637K','Normal',NULL,NULL,NULL,1),
+ (6813,'D050251','148782','Normal',NULL,NULL,NULL,1),
+ (6814,'D050271','BM 2689K','Normal',NULL,NULL,NULL,1),
+ (6815,'D050311','BM 2024K','Normal',NULL,NULL,NULL,1),
+ (6816,'D050321','BM 2202K','Normal',NULL,NULL,NULL,1),
+ (6817,'D050331','06-428699','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6818,'D050361','99A206619','Normal',NULL,NULL,NULL,1),
+ (6819,'D050381','BM 1703K','Normal',NULL,NULL,NULL,1),
+ (6820,'D050391','40017354','Normal',NULL,NULL,NULL,1),
+ (6821,'D050451','BM 1504k','Normal',NULL,NULL,NULL,1),
+ (6822,'D050471','BM 1126K','Normal',NULL,NULL,NULL,1),
+ (6823,'D050501','40017399','Normal',NULL,NULL,NULL,1),
+ (6824,'D050521','40017248','Normal',NULL,NULL,NULL,1),
+ (6825,'D050541','06-028602','Normal',NULL,NULL,NULL,1),
+ (6826,'D050551','99A206672','Normal',NULL,NULL,NULL,1),
+ (6827,'D050571','BM 2614K','Normal',NULL,NULL,NULL,1),
+ (6828,'D050581','13000507','Normal',NULL,NULL,NULL,1),
+ (6829,'D050631','1309544382','Normal',NULL,NULL,NULL,1),
+ (6830,'D050641','1309544060','Normal',NULL,NULL,NULL,1),
+ (6831,'D050671','BM  2153k','Normal',NULL,NULL,NULL,1),
+ (6832,'D050691','148886','Normal',NULL,NULL,NULL,1),
+ (6833,'D050701','BM 1213K','Normal',NULL,NULL,NULL,1),
+ (6834,'D050731','147681','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6835,'D050781','ZR-2835060','Normal',NULL,NULL,NULL,1),
+ (6836,'D050791','BM 694K','Normal',NULL,NULL,NULL,1),
+ (6837,'D050821','TMP-00000482','Normal',NULL,NULL,NULL,1),
+ (6838,'D050831','BM 1344K','Normal',NULL,NULL,NULL,1),
+ (6839,'D050881','0649713','Normal',NULL,NULL,NULL,1),
+ (6840,'D050901','BM 1759K','Normal',NULL,NULL,NULL,1),
+ (6841,'D050921','147548','Normal',NULL,NULL,NULL,1),
+ (6842,'D050951','06-427421','Normal',NULL,NULL,NULL,1),
+ (6843,'D051021','40017322','Normal',NULL,NULL,NULL,1),
+ (6844,'D051061','06-427442','Normal',NULL,NULL,NULL,1),
+ (6845,'D051062','40017424','Normal',NULL,NULL,NULL,1),
+ (6846,'D051063','TMP001','Normal',NULL,NULL,NULL,1),
+ (6847,'D051081','BM 1801K','Normal',NULL,NULL,NULL,1),
+ (6848,'D051091','06.427772','Normal',NULL,NULL,NULL,1),
+ (6849,'D051111','13 09544470','Normal',NULL,NULL,NULL,1),
+ (6850,'D051121','BM 2409K','Normal',NULL,NULL,NULL,1),
+ (6851,'D051141','BM 188K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6852,'D051171','BM 1352K','Normal',NULL,NULL,NULL,1),
+ (6853,'D051181','BM 976K','Normal',NULL,NULL,NULL,1),
+ (6854,'D051201','BM 1639K','Normal',NULL,NULL,NULL,1),
+ (6855,'D051211','BM 2340K','Normal',NULL,NULL,NULL,1),
+ (6856,'D051231','06.427682','Normal',NULL,NULL,NULL,1),
+ (6857,'D051251','40017285','Normal',NULL,NULL,NULL,1),
+ (6858,'D051271','BM 758K','Normal',NULL,NULL,NULL,1),
+ (6859,'D051281','13 09544522','Normal',NULL,NULL,NULL,1),
+ (6860,'D051291','06-428979','Normal',NULL,NULL,NULL,1),
+ (6861,'D051301','BM 790k','Normal',NULL,NULL,NULL,1),
+ (6862,'D051361','BM 2218K','Normal',NULL,NULL,NULL,1),
+ (6863,'D051441','40017438','Normal',NULL,NULL,NULL,1),
+ (6864,'D051451','BM 2757K','Normal',NULL,NULL,NULL,1),
+ (6865,'D051491','BM 735K','Normal',NULL,NULL,NULL,1),
+ (6866,'D051511','BM 2029K','Normal',NULL,NULL,NULL,1),
+ (6867,'D051581','06.428346','Normal',NULL,NULL,NULL,1),
+ (6868,'D051611','BM 1171K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6869,'D051631','BM 2158K','Normal',NULL,NULL,NULL,1),
+ (6870,'D051651','13 09544687','Normal',NULL,NULL,NULL,1),
+ (6871,'D051661','BM 1503K','Normal',NULL,NULL,NULL,1),
+ (6872,'D051701','40017301','Normal',NULL,NULL,NULL,1),
+ (6873,'D051801','BM 547K','Normal',NULL,NULL,NULL,1),
+ (6874,'D051861','06-428497','Normal',NULL,NULL,NULL,1),
+ (6875,'D051891','ZR-02834965','Normal',NULL,NULL,NULL,1),
+ (6876,'D051901','TMP-00000489','Normal',NULL,NULL,NULL,1),
+ (6877,'D051941','147550','Normal',NULL,NULL,NULL,1),
+ (6878,'D051991','1309544249','Normal',NULL,NULL,NULL,1),
+ (6879,'D052001','03-04-182','Normal',NULL,NULL,NULL,1),
+ (6880,'D052021','40017424','Normal',NULL,NULL,NULL,1),
+ (6881,'D060081','BM 2688K','Normal',NULL,NULL,NULL,1),
+ (6882,'D060091','BM 795K','Normal',NULL,NULL,NULL,1),
+ (6883,'D060131','02-428617','Normal',NULL,NULL,NULL,1),
+ (6884,'D060161','40017291','Normal',NULL,NULL,NULL,1),
+ (6885,'D060201','BM 1516K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6886,'D060211','BM 625K','Normal',NULL,NULL,NULL,1),
+ (6887,'D060251','BM 1130K','Normal',NULL,NULL,NULL,1),
+ (6888,'D060371','BM 801K','Normal',NULL,NULL,NULL,1),
+ (6889,'D060411','BM 367K','Normal',NULL,NULL,NULL,1),
+ (6890,'D060421','BM 2234K','Normal',NULL,NULL,NULL,1),
+ (6891,'D060431','ZR-02835170','Normal',NULL,NULL,NULL,1),
+ (6892,'D060501','TMP-00000505','Normal',NULL,NULL,NULL,1),
+ (6893,'D060521','146992','Normal',NULL,NULL,NULL,1),
+ (6894,'D060571','06-428607','Normal',NULL,NULL,NULL,1),
+ (6895,'D060591','40017431','Normal',NULL,NULL,NULL,1),
+ (6896,'D060601','147059','Normal',NULL,NULL,NULL,1),
+ (6897,'D060641','6150865','Normal',NULL,NULL,NULL,1),
+ (6898,'D060651','01-1730846','Normal',NULL,NULL,NULL,1),
+ (6899,'D060691','BM 493K','Normal',NULL,NULL,NULL,1),
+ (6900,'D060701','BM 200K','Normal',NULL,NULL,NULL,1),
+ (6901,'D060721','BM 1047K','Normal',NULL,NULL,NULL,1),
+ (6902,'D060731','40017502','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6903,'D060741','192','Normal',NULL,NULL,NULL,1),
+ (6904,'D060811','06.429179','Normal',NULL,NULL,NULL,1),
+ (6905,'D060851','98A1855','Normal',NULL,NULL,NULL,1),
+ (6906,'D060871','TMP-00000513','Normal',NULL,NULL,NULL,1),
+ (6907,'D060881','BM 1160K','Normal',NULL,NULL,NULL,1),
+ (6908,'D060911','127434','Normal',NULL,NULL,NULL,1),
+ (6909,'D060951','06-428564','Normal',NULL,NULL,NULL,1),
+ (6910,'D061001','13 09544332','Normal',NULL,NULL,NULL,1),
+ (6911,'D061021','06-428392','Normal',NULL,NULL,NULL,1),
+ (6912,'D061031','BM 1753K','Normal',NULL,NULL,NULL,1),
+ (6913,'D061061','40017272','Normal',NULL,NULL,NULL,1),
+ (6914,'D061111','TMP-00000553','Normal',NULL,NULL,NULL,1),
+ (6915,'D061131','1309544518','Normal',NULL,NULL,NULL,1),
+ (6916,'D061161','148789','Normal',NULL,NULL,NULL,1),
+ (6917,'D061171','BM 2545K','Normal',NULL,NULL,NULL,1),
+ (6918,'D061181','40017461','Normal',NULL,NULL,NULL,1),
+ (6919,'D061271','BM 548K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6920,'D061291','BM 970K','Normal',NULL,NULL,NULL,1),
+ (6921,'D061341','05-213418','Normal',NULL,NULL,NULL,1),
+ (6922,'D061361','BM 616K','Normal',NULL,NULL,NULL,1),
+ (6923,'D061421','06-427559','Normal',NULL,NULL,NULL,1),
+ (6924,'D061441','BM 1567K','Normal',NULL,NULL,NULL,1),
+ (6925,'D061551','06.427460','Normal',NULL,NULL,NULL,1),
+ (6926,'D061581','06.426744','Normal',NULL,NULL,NULL,1),
+ (6927,'D061611','128288','Normal',NULL,NULL,NULL,1),
+ (6928,'D061681','BM 2032K','Normal',NULL,NULL,NULL,1),
+ (6929,'D061691','1309544695','Normal',NULL,NULL,NULL,1),
+ (6930,'D061701','BM 306K','Normal',NULL,NULL,NULL,1),
+ (6931,'D061711','05.215235','Normal',NULL,NULL,NULL,1),
+ (6932,'D061741','BM 1088K','Normal',NULL,NULL,NULL,1),
+ (6933,'D061781','BM 685K','Normal',NULL,NULL,NULL,1),
+ (6934,'D061791','06-427686','Normal',NULL,NULL,NULL,1),
+ (6935,'D061851','147315','Normal',NULL,NULL,NULL,1),
+ (6936,'D061881','06-428979','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6937,'D061901','13 09544474','Normal',NULL,NULL,NULL,1),
+ (6938,'D061941','BM 509K','Normal',NULL,NULL,NULL,1),
+ (6939,'D061951','06-428654','Normal',NULL,NULL,NULL,1),
+ (6940,'D061971','BM 150K','Normal',NULL,NULL,NULL,1),
+ (6941,'D062011','140301612','Normal',NULL,NULL,NULL,1),
+ (6942,'D070011','BM 1272K','Normal',NULL,NULL,NULL,1),
+ (6943,'D070021','003293','Normal',NULL,NULL,NULL,1),
+ (6944,'D070031','BM 2656K','Normal',NULL,NULL,NULL,1),
+ (6945,'D070041','BM 2599K','Normal',NULL,NULL,NULL,1),
+ (6946,'D070061','BM 990K','Normal',NULL,NULL,NULL,1),
+ (6947,'D070111','BM 648K','Normal',NULL,NULL,NULL,1),
+ (6948,'D070191','13 09544176','Normal',NULL,NULL,NULL,1),
+ (6949,'D070201','130802730','Normal',NULL,NULL,NULL,1),
+ (6950,'D070221','13 09544696','Normal',NULL,NULL,NULL,1),
+ (6951,'D070291','13 09544613','Normal',NULL,NULL,NULL,1),
+ (6952,'D070301','13 09544582','Normal',NULL,NULL,NULL,1),
+ (6953,'D070321','BM 129K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6954,'D070351','BM 919K','Normal',NULL,NULL,NULL,1),
+ (6955,'D070361','BM 264K','Normal',NULL,NULL,NULL,1),
+ (6956,'D070381','BM 1941K','Normal',NULL,NULL,NULL,1),
+ (6957,'D070391','BM 1551K','Normal',NULL,NULL,NULL,1),
+ (6958,'D070441','BM 2377K','Normal',NULL,NULL,NULL,1),
+ (6959,'D070451','40017213','Normal',NULL,NULL,NULL,1),
+ (6960,'D070471','BM 2441K','Normal',NULL,NULL,NULL,1),
+ (6961,'D070481','BM 128K','Normal',NULL,NULL,NULL,1),
+ (6962,'D070531','071200003','Normal',NULL,NULL,NULL,1),
+ (6963,'D070641','05-215271','Normal',NULL,NULL,NULL,1),
+ (6964,'D070651','BM 1871K','Normal',NULL,NULL,NULL,1),
+ (6965,'D070671','ZR-02834696','Normal',NULL,NULL,NULL,1),
+ (6966,'D070701','BM 1455K','Normal',NULL,NULL,NULL,1),
+ (6967,'D070711','1309544671','Normal',NULL,NULL,NULL,1),
+ (6968,'D070731','BM 636K','Normal',NULL,NULL,NULL,1),
+ (6969,'D070761','13 09544229','Normal',NULL,NULL,NULL,1),
+ (6970,'D070771','BM 136K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6971,'D070781','BM 1609K','Normal',NULL,NULL,NULL,1),
+ (6972,'D070791','BM 1726K','Normal',NULL,NULL,NULL,1),
+ (6973,'D070801','BM 1007K','Normal',NULL,NULL,NULL,1),
+ (6974,'D070861','40017316','Normal',NULL,NULL,NULL,1),
+ (6975,'D070911','1309544176','Normal',NULL,NULL,NULL,1),
+ (6976,'D070961','M-314-06-428360','Normal',NULL,NULL,NULL,1),
+ (6977,'D070971','BM 2407K','Normal',NULL,NULL,NULL,1),
+ (6978,'D100011','6151714','Normal',NULL,NULL,NULL,1),
+ (6979,'D100021','6151964','Normal',NULL,NULL,NULL,1),
+ (6980,'D100031','BM 2524K','Normal',NULL,NULL,NULL,1),
+ (6981,'D100041','BM 2391K','Normal',NULL,NULL,NULL,1),
+ (6982,'D100061','6151963','Normal',NULL,NULL,NULL,1),
+ (6983,'D100071','02-378194','Normal',NULL,NULL,NULL,1),
+ (6984,'D100101','148613','Normal',NULL,NULL,NULL,1),
+ (6985,'D100141','BM 1855K','Normal',NULL,NULL,NULL,1),
+ (6986,'D100151','06.429203','Normal',NULL,NULL,NULL,1),
+ (6987,'D100171','6151712','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (6988,'D100211','05.213601','Normal',NULL,NULL,NULL,1),
+ (6989,'D100251','147057','Normal',NULL,NULL,NULL,1),
+ (6990,'D100261','','Normal',NULL,NULL,NULL,1),
+ (6991,'D100291','BM 1637K','Normal',NULL,NULL,NULL,1),
+ (6992,'D100321','05.213396','Normal',NULL,NULL,NULL,1),
+ (6993,'D100331','148787','Normal',NULL,NULL,NULL,1),
+ (6994,'D100361','BM 2130K','Normal',NULL,NULL,NULL,1),
+ (6995,'D100391','BM 894K','Normal',NULL,NULL,NULL,1),
+ (6996,'D100401','6151532','Normal',NULL,NULL,NULL,1),
+ (6997,'D100411','127440','Normal',NULL,NULL,NULL,1),
+ (6998,'D100441','6152099','Normal',NULL,NULL,NULL,1),
+ (6999,'D100471','128285','Normal',NULL,NULL,NULL,1),
+ (7000,'D100481','147896','Normal',NULL,NULL,NULL,1),
+ (7001,'D100491','146970','Normal',NULL,NULL,NULL,1),
+ (7002,'D100521','147957','Normal',NULL,NULL,NULL,1),
+ (7003,'D100601','400017345','Normal',NULL,NULL,NULL,1),
+ (7004,'D100611','6151815','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7005,'D100651','1309544180','Normal',NULL,NULL,NULL,1),
+ (7006,'D100661','071201110','Normal',NULL,NULL,NULL,1),
+ (7007,'D100781','40017273','Normal',NULL,NULL,NULL,1),
+ (7008,'D100801','BM 203K','Normal',NULL,NULL,NULL,1),
+ (7009,'D100841','BM 683K','Normal',NULL,NULL,NULL,1),
+ (7010,'D100861','148618','Normal',NULL,NULL,NULL,1),
+ (7011,'D100871','1309544337','Normal',NULL,NULL,NULL,1),
+ (7012,'D100941','BM 1413K','Normal',NULL,NULL,NULL,1),
+ (7013,'D101001','146609','Normal',NULL,NULL,NULL,1),
+ (7014,'D101071','146580','Normal',NULL,NULL,NULL,1),
+ (7015,'D101081','TMP-00000249','Normal',NULL,NULL,NULL,1),
+ (7016,'D101091','6150998','Normal',NULL,NULL,NULL,1),
+ (7017,'D101111','13*08*0152','Normal',NULL,NULL,NULL,1),
+ (7018,'D101131','BM 661K','Normal',NULL,NULL,NULL,1),
+ (7019,'D101141','BM 1154K','Normal',NULL,NULL,NULL,1),
+ (7020,'D101151','BM 2165K','Normal',NULL,NULL,NULL,1),
+ (7021,'D101221','BM 925K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7022,'D101231','147275','Normal',NULL,NULL,NULL,1),
+ (7023,'D101261','13 09544112','Normal',NULL,NULL,NULL,1),
+ (7024,'D101271','13-08-0085','Normal',NULL,NULL,NULL,1),
+ (7025,'D101281','BM 298K','Normal',NULL,NULL,NULL,1),
+ (7026,'D101301','141101622','Normal',NULL,NULL,NULL,1),
+ (7027,'D101321','40017319','Normal',NULL,NULL,NULL,1),
+ (7028,'D101341','141101901','Normal',NULL,NULL,NULL,1),
+ (7029,'D101381','05-215627','Normal',NULL,NULL,NULL,1),
+ (7030,'D101391','BM 2059K','Normal',NULL,NULL,NULL,1),
+ (7031,'D101411','147891','Normal',NULL,NULL,NULL,1),
+ (7032,'D101421','BM 2580K','Normal',NULL,NULL,NULL,1),
+ (7033,'D101451','BM 156K','Normal',NULL,NULL,NULL,1),
+ (7034,'D101471','BM 2173K','Normal',NULL,NULL,NULL,1),
+ (7035,'D101491','99A206615','Normal',NULL,NULL,NULL,1),
+ (7036,'D101541','BM 2247K','Normal',NULL,NULL,NULL,1),
+ (7037,'D101551','1309544531','Normal',NULL,NULL,NULL,1),
+ (7038,'D101571','06.427924','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7039,'D101591','BM 1118K','Normal',NULL,NULL,NULL,1),
+ (7040,'D101611','BM 1165K','Normal',NULL,NULL,NULL,1),
+ (7041,'D101621','06.429224','Normal',NULL,NULL,NULL,1),
+ (7042,'D101631','H00247','Normal',NULL,NULL,NULL,1),
+ (7043,'D101641','13-08-00785','Normal',NULL,NULL,NULL,1),
+ (7044,'D101661','BM 641K','Normal',NULL,NULL,NULL,1),
+ (7045,'D101681','06-429121','Normal',NULL,NULL,NULL,1),
+ (7046,'D101691','40017429','Normal',NULL,NULL,NULL,1),
+ (7047,'D101701','06.427522','Normal',NULL,NULL,NULL,1),
+ (7048,'D101711','071201589','Normal',NULL,NULL,NULL,1),
+ (7049,'D101721','TMP-00000260','Normal',NULL,NULL,NULL,1),
+ (7050,'D101741','BM 26K','Normal',NULL,NULL,NULL,1),
+ (7051,'D101801','BM 2192K','Normal',NULL,NULL,NULL,1),
+ (7052,'D101821','BM 1275K','Normal',NULL,NULL,NULL,1),
+ (7053,'D101841','BM 501K','Normal',NULL,NULL,NULL,1),
+ (7054,'D101851','BM 2747K','Normal',NULL,NULL,NULL,1),
+ (7055,'D101861','BM 1533K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7056,'D101881','06.428498','Normal',NULL,NULL,NULL,1),
+ (7057,'D101891','BM 2759K','Normal',NULL,NULL,NULL,1),
+ (7058,'D101911','BM 499K','Normal',NULL,NULL,NULL,1),
+ (7059,'D101921','1309544146','Normal',NULL,NULL,NULL,1),
+ (7060,'D101941','BM 893K','Normal',NULL,NULL,NULL,1),
+ (7061,'D101981','148788','Normal',NULL,NULL,NULL,1),
+ (7062,'D102001','147055','Normal',NULL,NULL,NULL,1),
+ (7063,'D102031','06-429091','Normal',NULL,NULL,NULL,1),
+ (7064,'D110021','BM 2393K','Normal',NULL,NULL,NULL,1),
+ (7065,'D110071','0120','Normal',NULL,NULL,NULL,1),
+ (7066,'D110081','ZR-02835183','Normal',NULL,NULL,NULL,1),
+ (7067,'D110091','13 09544689','Normal',NULL,NULL,NULL,1),
+ (7068,'D110141','61522097','Normal',NULL,NULL,NULL,1),
+ (7069,'D110151','6150866','Normal',NULL,NULL,NULL,1),
+ (7070,'D110201','BM 2437K','Normal',NULL,NULL,NULL,1),
+ (7071,'D110211','147195','Normal',NULL,NULL,NULL,1),
+ (7072,'D110231','BM 1957K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7073,'D110241','BM 926K','Normal',NULL,NULL,NULL,1),
+ (7074,'D110251','BM 1083K','Normal',NULL,NULL,NULL,1),
+ (7075,'D110261','148651','Normal',NULL,NULL,NULL,1),
+ (7076,'D110271','ZR-02834809','Normal',NULL,NULL,NULL,1),
+ (7077,'D110281','6151323','Normal',NULL,NULL,NULL,1),
+ (7078,'D110291','A0017292','Normal',NULL,NULL,NULL,1),
+ (7079,'D110301','6151959','Normal',NULL,NULL,NULL,1),
+ (7080,'D110311','BM 1377K','Normal',NULL,NULL,NULL,1),
+ (7081,'D110351','40017289','Normal',NULL,NULL,NULL,1),
+ (7082,'D110371','128334','Normal',NULL,NULL,NULL,1),
+ (7083,'D110431','071200797','Normal',NULL,NULL,NULL,1),
+ (7084,'D110441','BM 712K','Normal',NULL,NULL,NULL,1),
+ (7085,'D110451','146574','Normal',NULL,NULL,NULL,1),
+ (7086,'D110481','127435','Normal',NULL,NULL,NULL,1),
+ (7087,'D110491','BM 1809K','Normal',NULL,NULL,NULL,1),
+ (7088,'D110511','6151560','Normal',NULL,NULL,NULL,1),
+ (7089,'D110521','40017463','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7090,'D110571','147053','Normal',NULL,NULL,NULL,1),
+ (7091,'D110581','148909','Normal',NULL,NULL,NULL,1),
+ (7092,'D110601','40017324','Normal',NULL,NULL,NULL,1),
+ (7093,'D110621','146923','Normal',NULL,NULL,NULL,1),
+ (7094,'D110631','147197','Normal',NULL,NULL,NULL,1),
+ (7095,'D110661','147276','Normal',NULL,NULL,NULL,1),
+ (7096,'D110671','071200514','Normal',NULL,NULL,NULL,1),
+ (7097,'D110681','BM 1081K','Normal',NULL,NULL,NULL,1),
+ (7098,'D110691','BM 2086K','Normal',NULL,NULL,NULL,1),
+ (7099,'D110721','148660','Normal',NULL,NULL,NULL,1),
+ (7100,'D110781','40017345','Normal',NULL,NULL,NULL,1),
+ (7101,'D110821','BM 192K','Normal',NULL,NULL,NULL,1),
+ (7102,'D110841','6151320','Normal',NULL,NULL,NULL,1),
+ (7103,'D110851','02-377952','Normal',NULL,NULL,NULL,1),
+ (7104,'D110861','BM 180K','Normal',NULL,NULL,NULL,1),
+ (7105,'D110881','ZR-02835183','Normal',NULL,NULL,NULL,1),
+ (7106,'D110931','6151707','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7107,'D110961','128283','Normal',NULL,NULL,NULL,1),
+ (7108,'D110981','146930','Normal',NULL,NULL,NULL,1),
+ (7109,'D111021','06.427558','Normal',NULL,NULL,NULL,1),
+ (7110,'D111071','6151236','Normal',NULL,NULL,NULL,1),
+ (7111,'D111081','BM 2426K','Normal',NULL,NULL,NULL,1),
+ (7112,'D111141','6152104','Normal',NULL,NULL,NULL,1),
+ (7113,'D111151','BM 1106K','Normal',NULL,NULL,NULL,1),
+ (7114,'D111171','40253','Normal',NULL,NULL,NULL,1),
+ (7115,'D111191','6151960','Normal',NULL,NULL,NULL,1),
+ (7116,'D111201','ZR-02835018','Normal',NULL,NULL,NULL,1),
+ (7117,'D111211','06.427768','Normal',NULL,NULL,NULL,1),
+ (7118,'D111241','06.427972','Normal',NULL,NULL,NULL,1),
+ (7119,'D111261','BM 2777K','Normal',NULL,NULL,NULL,1),
+ (7120,'D111291','6151716','Normal',NULL,NULL,NULL,1),
+ (7121,'D111311','6151808','Normal',NULL,NULL,NULL,1),
+ (7122,'D111361','40017269','Normal',NULL,NULL,NULL,1),
+ (7123,'D111371','147953','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7124,'D111391','40017348','Normal',NULL,NULL,NULL,1),
+ (7125,'D111421','BM 2229K','Normal',NULL,NULL,NULL,1),
+ (7126,'D111441','130903176','Normal',NULL,NULL,NULL,1),
+ (7127,'D111451','ZR-02834811','Normal',NULL,NULL,NULL,1),
+ (7128,'D111481','148617','Normal',NULL,NULL,NULL,1),
+ (7129,'D111491','40017351','Normal',NULL,NULL,NULL,1),
+ (7130,'D111511','1309544175','Normal',NULL,NULL,NULL,1),
+ (7131,'D111521','13 09544285','Normal',NULL,NULL,NULL,1),
+ (7132,'D111541','071200598','Normal',NULL,NULL,NULL,1),
+ (7133,'D111581','BM 2071K','Normal',NULL,NULL,NULL,1),
+ (7134,'D111631','146627','Normal',NULL,NULL,NULL,1),
+ (7135,'D111641','BM 66K','Normal',NULL,NULL,NULL,1),
+ (7136,'D111651','BM 678K','Normal',NULL,NULL,NULL,1),
+ (7137,'D111661','BM 757K','Normal',NULL,NULL,NULL,1),
+ (7138,'D111681','40017380','Normal',NULL,NULL,NULL,1),
+ (7139,'D111691','BM 441K','Normal',NULL,NULL,NULL,1),
+ (7140,'D111721','ZR-02834698','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7141,'D111771','148512','Normal',NULL,NULL,NULL,1),
+ (7142,'D111781','BM 029K','Normal',NULL,NULL,NULL,1),
+ (7143,'D111791','06-429480','Normal',NULL,NULL,NULL,1),
+ (7144,'D111801','6151812*','Normal',NULL,NULL,NULL,1),
+ (7145,'D111831','148885','Normal',NULL,NULL,NULL,1),
+ (7146,'D111841','BM 2220K','Normal',NULL,NULL,NULL,1),
+ (7147,'D111851','40017232','Normal',NULL,NULL,NULL,1),
+ (7148,'D111881','6151324','Normal',NULL,NULL,NULL,1),
+ (7149,'D111921','TMP-00000310','Normal',NULL,NULL,NULL,1),
+ (7150,'D111931','06-428552','Normal',NULL,NULL,NULL,1),
+ (7151,'D111951','TMP-00000313','Normal',NULL,NULL,NULL,1),
+ (7152,'D111991','TMP-00000317','Normal',NULL,NULL,NULL,1),
+ (7153,'D112001','01-1730758','Normal',NULL,NULL,NULL,1),
+ (7154,'D120041','TMP-00000322','Normal',NULL,NULL,NULL,1),
+ (7155,'D120051','6151561','Normal',NULL,NULL,NULL,1),
+ (7156,'D120061','BM 2743K','Normal',NULL,NULL,NULL,1),
+ (7157,'D120161','148889','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7158,'D120171','148059','Normal',NULL,NULL,NULL,1),
+ (7159,'D120231','6152106','Normal',NULL,NULL,NULL,1),
+ (7160,'D120261','146922','Normal',NULL,NULL,NULL,1),
+ (7161,'D120271','6151558','Normal',NULL,NULL,NULL,1),
+ (7162,'D120281','6151562','Normal',NULL,NULL,NULL,1),
+ (7163,'D120311','6150857','Normal',NULL,NULL,NULL,1),
+ (7164,'D120321','00','Normal',NULL,NULL,NULL,1),
+ (7165,'D120341','130801910','Normal',NULL,NULL,NULL,1),
+ (7166,'D120361','6152103','Normal',NULL,NULL,NULL,1),
+ (7167,'D120381','06-429227','Normal',NULL,NULL,NULL,1),
+ (7168,'D120401','6151009','Normal',NULL,NULL,NULL,1),
+ (7169,'D120431','TMP-00000361','Normal',NULL,NULL,NULL,1),
+ (7170,'D120451','BM 1115K','Normal',NULL,NULL,NULL,1),
+ (7171,'D120461','128335','Normal',NULL,NULL,NULL,1),
+ (7172,'D120501','TMP-00000368','Normal',NULL,NULL,NULL,1),
+ (7173,'D120531','6152100','Normal',NULL,NULL,NULL,1),
+ (7174,'D120541','128331','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7175,'D120551','02-378189','Normal',NULL,NULL,NULL,1),
+ (7176,'D120561','05.215625','Normal',NULL,NULL,NULL,1),
+ (7177,'D120581','147193','Normal',NULL,NULL,NULL,1),
+ (7178,'D120611','40017290','Normal',NULL,NULL,NULL,1),
+ (7179,'D120641','6151961','Normal',NULL,NULL,NULL,1),
+ (7180,'D120681','12339','Normal',NULL,NULL,NULL,1),
+ (7181,'D120691','147184','Normal',NULL,NULL,NULL,1),
+ (7182,'D120721','147543','Normal',NULL,NULL,NULL,1),
+ (7183,'D120731','6151566','Normal',NULL,NULL,NULL,1),
+ (7184,'D120741','6151229','Normal',NULL,NULL,NULL,1),
+ (7185,'D120751','146579','Normal',NULL,NULL,NULL,1),
+ (7186,'D120771','148628','Normal',NULL,NULL,NULL,1),
+ (7187,'D120781','148615','Normal',NULL,NULL,NULL,1),
+ (7188,'D120791','6150861','Normal',NULL,NULL,NULL,1),
+ (7189,'D120841','BM 1734K','Normal',NULL,NULL,NULL,1),
+ (7190,'D120851','6151618','Normal',NULL,NULL,NULL,1),
+ (7191,'D120861','6151950','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7192,'D120871','BM 1297K','Normal',NULL,NULL,NULL,1),
+ (7193,'D120891','40017456','Normal',NULL,NULL,NULL,1),
+ (7194,'D120931','071202254','Normal',NULL,NULL,NULL,1),
+ (7195,'D120981','148656','Normal',NULL,NULL,NULL,1),
+ (7196,'D120991','05-215666','Normal',NULL,NULL,NULL,1),
+ (7197,'D121001','BM 896K','Normal',NULL,NULL,NULL,1),
+ (7198,'D121031','40017303','Normal',NULL,NULL,NULL,1),
+ (7199,'D121071','13 09544680','Normal',NULL,NULL,NULL,1),
+ (7200,'D121081','146963','Normal',NULL,NULL,NULL,1),
+ (7201,'D121091','147266','Normal',NULL,NULL,NULL,1),
+ (7202,'D121101','6151233','Normal',NULL,NULL,NULL,1),
+ (7203,'D121111','BM 005K','Normal',NULL,NULL,NULL,1),
+ (7204,'D121131','BM 1831K','Normal',NULL,NULL,NULL,1),
+ (7205,'D121181','6152102','Normal',NULL,NULL,NULL,1),
+ (7206,'D121201','BM 327K','Normal',NULL,NULL,NULL,1),
+ (7207,'D121211','BM 639K','Normal',NULL,NULL,NULL,1),
+ (7208,'D121231','BM 1166K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7209,'D121241','BM 825K','Normal',NULL,NULL,NULL,1),
+ (7210,'D121251','6151557','Normal',NULL,NULL,NULL,1),
+ (7211,'D121261','BM 1419K','Normal',NULL,NULL,NULL,1),
+ (7212,'D121271','BM 1244K','Normal',NULL,NULL,NULL,1),
+ (7213,'D121281','BM 1339K','Normal',NULL,NULL,NULL,1),
+ (7214,'D121291','06.427893','Normal',NULL,NULL,NULL,1),
+ (7215,'D121331','148518','Normal',NULL,NULL,NULL,1),
+ (7216,'D121351','BM 1233K','Normal',NULL,NULL,NULL,1),
+ (7217,'D121371','1309544165','Normal',NULL,NULL,NULL,1),
+ (7218,'D121391','12','Normal',NULL,NULL,NULL,1),
+ (7219,'D121401','04.427724','Normal',NULL,NULL,NULL,1),
+ (7220,'D121411','146603','Normal',NULL,NULL,NULL,1),
+ (7221,'D121421','148783','Normal',NULL,NULL,NULL,1),
+ (7222,'D121431','BM 1243K','Normal',NULL,NULL,NULL,1),
+ (7223,'D121441','6151708','Normal',NULL,NULL,NULL,1),
+ (7224,'D121451','BM 2628K','Normal',NULL,NULL,NULL,1),
+ (7225,'D121471','BM 1599K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7226,'D121501','TEMP 1202','Normal',NULL,NULL,NULL,1),
+ (7227,'D121511','','Normal',NULL,NULL,NULL,1),
+ (7228,'D121531','6151962','Normal',NULL,NULL,NULL,1),
+ (7229,'D121541','148620','Normal',NULL,NULL,NULL,1),
+ (7230,'D121551','148616','Normal',NULL,NULL,NULL,1),
+ (7231,'D121561','6151625','Normal',NULL,NULL,NULL,1),
+ (7232,'D121571','02-377953','Normal',NULL,NULL,NULL,1),
+ (7233,'D121581','BM 541K','Normal',NULL,NULL,NULL,1),
+ (7234,'D121591','128338','Normal',NULL,NULL,NULL,1),
+ (7235,'D121611','BM 2557K','Normal',NULL,NULL,NULL,1),
+ (7236,'D121621','148797','Normal',NULL,NULL,NULL,1),
+ (7237,'D121631','ZR-02834805','Normal',NULL,NULL,NULL,1),
+ (7238,'D121661','6151956','Normal',NULL,NULL,NULL,1),
+ (7239,'D121731','BM 1956K','Normal',NULL,NULL,NULL,1),
+ (7240,'D121741','BM 2081K','Normal',NULL,NULL,NULL,1),
+ (7241,'D121771','146925','Normal',NULL,NULL,NULL,1),
+ (7242,'D121791','BM 2371K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7243,'D121811','11-1120554','Normal',NULL,NULL,NULL,1),
+ (7244,'D121851','148654','Normal',NULL,NULL,NULL,1),
+ (7245,'D121901','147952','Normal',NULL,NULL,NULL,1),
+ (7246,'D121911','BM 1597K','Normal',NULL,NULL,NULL,1),
+ (7247,'D121921','BM 1725K','Normal',NULL,NULL,NULL,1),
+ (7248,'D121931','BM 1320K','Normal',NULL,NULL,NULL,1),
+ (7249,'D121941','148630','Normal',NULL,NULL,NULL,1),
+ (7250,'D122011','1309544350','Normal',NULL,NULL,NULL,1),
+ (7251,'D122021','06-420349','Normal',NULL,NULL,NULL,1),
+ (7252,'D122031','147056','Normal',NULL,NULL,NULL,1),
+ (7253,'D130021','BM 1251K','Normal',NULL,NULL,NULL,1),
+ (7254,'D130041','BM 1780K','Normal',NULL,NULL,NULL,1),
+ (7255,'D130061','BM 2169K','Normal',NULL,NULL,NULL,1),
+ (7256,'D130151','13 08 01420','Normal',NULL,NULL,NULL,1),
+ (7257,'D130161','BM 2009K','Normal',NULL,NULL,NULL,1),
+ (7258,'D130201','BM 392K','Normal',NULL,NULL,NULL,1),
+ (7259,'D130231','BM 964K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7260,'D130241','BM 1625K','Normal',NULL,NULL,NULL,1),
+ (7261,'D130311','BM 2487K','Normal',NULL,NULL,NULL,1),
+ (7262,'D130331','06-427481','Normal',NULL,NULL,NULL,1),
+ (7263,'D130471','06-427686','Normal',NULL,NULL,NULL,1),
+ (7264,'D130521','BM 2417K','Normal',NULL,NULL,NULL,1),
+ (7265,'D130541','40017302','Normal',NULL,NULL,NULL,1),
+ (7266,'D130581','BM 1237K','Normal',NULL,NULL,NULL,1),
+ (7267,'D130611','98-185152','Normal',NULL,NULL,NULL,1),
+ (7268,'D130621','BM 2308K','Normal',NULL,NULL,NULL,1),
+ (7269,'D130741','98A185136','Normal',NULL,NULL,NULL,1),
+ (7270,'D130751','BM 024K','Normal',NULL,NULL,NULL,1),
+ (7271,'D130761','05-215667','Normal',NULL,NULL,NULL,1),
+ (7272,'D130791','05.213405','Normal',NULL,NULL,NULL,1),
+ (7273,'D130801','BKI01112','Normal',NULL,NULL,NULL,1),
+ (7274,'D130831','BM 1100K','Normal',NULL,NULL,NULL,1),
+ (7275,'D130861','BM 1899K','Normal',NULL,NULL,NULL,1),
+ (7276,'D130871','BM 770K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7277,'D130941','BM 1748K','Normal',NULL,NULL,NULL,1),
+ (7278,'D130961','13 09544348','Normal',NULL,NULL,NULL,1),
+ (7279,'D131041','06-428336','Normal',NULL,NULL,NULL,1),
+ (7280,'D131061','BM 519K','Normal',NULL,NULL,NULL,1),
+ (7281,'D131081','BM 1208K','Normal',NULL,NULL,NULL,1),
+ (7282,'D131121','BM 1833K','Normal',NULL,NULL,NULL,1),
+ (7283,'D131151','BM 2578K','Normal',NULL,NULL,NULL,1),
+ (7284,'D131171','BM 53K','Normal',NULL,NULL,NULL,1),
+ (7285,'D131201','06-04579','Normal',NULL,NULL,NULL,1),
+ (7286,'D131211','147188','Normal',NULL,NULL,NULL,1),
+ (7287,'D131231','13 09544404','Normal',NULL,NULL,NULL,1),
+ (7288,'D131241','366361','Normal',NULL,NULL,NULL,1),
+ (7289,'D131252','BM 1614K','Normal',NULL,NULL,NULL,1),
+ (7290,'D131331','TMP-00000495','Normal',NULL,NULL,NULL,1),
+ (7291,'D131341','BM 2598K','Normal',NULL,NULL,NULL,1),
+ (7292,'D131361','BM 803K','Normal',NULL,NULL,NULL,1),
+ (7293,'D131381','BM 1977K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7294,'D131391','BM 2588K','Normal',NULL,NULL,NULL,1),
+ (7295,'D131471','BM 2135K','Normal',NULL,NULL,NULL,1),
+ (7296,'D131521','BM 1238K','Normal',NULL,NULL,NULL,1),
+ (7297,'D131541','13 09544256','Normal',NULL,NULL,NULL,1),
+ (7298,'D131581','BM 2556K','Normal',NULL,NULL,NULL,1),
+ (7299,'D131601','06.428800','Normal',NULL,NULL,NULL,1),
+ (7300,'D131611','BM 2765K','Normal',NULL,NULL,NULL,1),
+ (7301,'D131661','BM 271K','Normal',NULL,NULL,NULL,1),
+ (7302,'D131671','PM-1007005034','Normal',NULL,NULL,NULL,1),
+ (7303,'D131711','BM 2711K','Normal',NULL,NULL,NULL,1),
+ (7304,'D131721','BM 1850K','Normal',NULL,NULL,NULL,1),
+ (7305,'D131741','BM 1250K','Normal',NULL,NULL,NULL,1),
+ (7306,'D131761','BM 1495K','Normal',NULL,NULL,NULL,1),
+ (7307,'D131781','06 49710','Normal',NULL,NULL,NULL,1),
+ (7308,'D131851','05.213410','Normal',NULL,NULL,NULL,1),
+ (7309,'D131881','BM 2635K','Normal',NULL,NULL,NULL,1),
+ (7310,'D131911','13 09544271','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7311,'D131941','06.427946','Normal',NULL,NULL,NULL,1),
+ (7312,'D131991','BM 751K','Normal',NULL,NULL,NULL,1),
+ (7313,'D132001','BM 2549K','Normal',NULL,NULL,NULL,1),
+ (7314,'D140011','BM 2462K','Normal',NULL,NULL,NULL,1),
+ (7315,'D140061','BM 1797K','Normal',NULL,NULL,NULL,1),
+ (7316,'D140081','BM 1751K','Normal',NULL,NULL,NULL,1),
+ (7317,'D140091','06.428930','Normal',NULL,NULL,NULL,1),
+ (7318,'D140111','BM 936K','Normal',NULL,NULL,NULL,1),
+ (7319,'D140141','BM 839K','Normal',NULL,NULL,NULL,1),
+ (7320,'D140151','BM 2512K','Normal',NULL,NULL,NULL,1),
+ (7321,'D140161','BM 2683K','Normal',NULL,NULL,NULL,1),
+ (7322,'D140171','06-427639','Normal',NULL,NULL,NULL,1),
+ (7323,'D140191','BM 1289K','Normal',NULL,NULL,NULL,1),
+ (7324,'D140211','BM 1987K','Normal',NULL,NULL,NULL,1),
+ (7325,'D140221','BM 967K','Normal',NULL,NULL,NULL,1),
+ (7326,'D140231','06-427746','Normal',NULL,NULL,NULL,1),
+ (7327,'D140241','06-429150','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7328,'D140251','06-428615','Normal',NULL,NULL,NULL,1),
+ (7329,'D140261','TMP-00000569','Normal',NULL,NULL,NULL,1),
+ (7330,'D140281','BM 1586K','Normal',NULL,NULL,NULL,1),
+ (7331,'D140321','TMP-00000571','Normal',NULL,NULL,NULL,1),
+ (7332,'D140331','BM 2629K','Normal',NULL,NULL,NULL,1),
+ (7333,'D140351','06-428608','Normal',NULL,NULL,NULL,1),
+ (7334,'D140371','06-429229','Normal',NULL,NULL,NULL,1),
+ (7335,'D140401','BM 2520K','Normal',NULL,NULL,NULL,1),
+ (7336,'D140411','06-429213','Normal',NULL,NULL,NULL,1),
+ (7337,'D140421','06-429050','Normal',NULL,NULL,NULL,1),
+ (7338,'D140461','BM 1260K','Normal',NULL,NULL,NULL,1),
+ (7339,'D140511','BM 1659K','Normal',NULL,NULL,NULL,1),
+ (7340,'D140521','06-427467','Normal',NULL,NULL,NULL,1),
+ (7341,'D140531','BM 231K','Normal',NULL,NULL,NULL,1),
+ (7342,'D140541','06-429051','Normal',NULL,NULL,NULL,1),
+ (7343,'D140591','BM 991K','Normal',NULL,NULL,NULL,1),
+ (7344,'D140611','BM 68K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7345,'D140621','06.428536','Normal',NULL,NULL,NULL,1),
+ (7346,'D140631','BM 2041K','Normal',NULL,NULL,NULL,1),
+ (7347,'D140641','06-429147','Normal',NULL,NULL,NULL,1),
+ (7348,'D140691','BM 1123K','Normal',NULL,NULL,NULL,1),
+ (7349,'D140701','06-427776','Normal',NULL,NULL,NULL,1),
+ (7350,'D140711','BM 374K','Normal',NULL,NULL,NULL,1),
+ (7351,'D140721','','Normal',NULL,NULL,NULL,1),
+ (7352,'D140741','BM 177K','Normal',NULL,NULL,NULL,1),
+ (7353,'D140751','BM 360K','Normal',NULL,NULL,NULL,1),
+ (7354,'D140811','BM 433K','Normal',NULL,NULL,NULL,1),
+ (7355,'D140851','06.427683','Normal',NULL,NULL,NULL,1),
+ (7356,'D140861','BM 2527K','Normal',NULL,NULL,NULL,1),
+ (7357,'D140871','1309544172','Normal',NULL,NULL,NULL,1),
+ (7358,'D140881','BM 2694K','Normal',NULL,NULL,NULL,1),
+ (7359,'D140991','146968','Normal',NULL,NULL,NULL,1),
+ (7360,'D141061','BM 2770K','Normal',NULL,NULL,NULL,1),
+ (7361,'D141081','05.215672','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7362,'D141091','BM 139K','Normal',NULL,NULL,NULL,1),
+ (7363,'D141111','06.427742','Normal',NULL,NULL,NULL,1),
+ (7364,'D141121','05.215594','Normal',NULL,NULL,NULL,1),
+ (7365,'D141141','13 09544261','Normal',NULL,NULL,NULL,1),
+ (7366,'D141171','BM 1129K','Normal',NULL,NULL,NULL,1),
+ (7367,'D141191','BM 2194K','Normal',NULL,NULL,NULL,1),
+ (7368,'D141201','13-08-01885','Normal',NULL,NULL,NULL,1),
+ (7369,'D141221','BM 1317K','Normal',NULL,NULL,NULL,1),
+ (7370,'D141231','BM 1485k','Normal',NULL,NULL,NULL,1),
+ (7371,'D141251','BM 1127K','Normal',NULL,NULL,NULL,1),
+ (7372,'D141271','BM 1940K','Normal',NULL,NULL,NULL,1),
+ (7373,'D141281','BM 498K','Normal',NULL,NULL,NULL,1),
+ (7374,'D141291','BM 2008K','Normal',NULL,NULL,NULL,1),
+ (7375,'D141301','BM 856K','Normal',NULL,NULL,NULL,1),
+ (7376,'D141331','06-428615','Normal',NULL,NULL,NULL,1),
+ (7377,'D141391','BM 1113K','Normal',NULL,NULL,NULL,1),
+ (7378,'D141401','BM 430K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7379,'D141431','13 09544232','Normal',NULL,NULL,NULL,1),
+ (7380,'D141441','13 09544198','Normal',NULL,NULL,NULL,1),
+ (7381,'D141451','BM 1658K','Normal',NULL,NULL,NULL,1),
+ (7382,'D141471','BM 1598K','Normal',NULL,NULL,NULL,1),
+ (7383,'D141531','BM 2418K','Normal',NULL,NULL,NULL,1),
+ (7384,'D141541','BM 1266K','Normal',NULL,NULL,NULL,1),
+ (7385,'D141611','BM 145K','Normal',NULL,NULL,NULL,1),
+ (7386,'D141631','BM 2421K','Normal',NULL,NULL,NULL,1),
+ (7387,'D141641','BM 1293K','Normal',NULL,NULL,NULL,1),
+ (7388,'D141651','BM 2538K','Normal',NULL,NULL,NULL,1),
+ (7389,'D141671','BM 1112K','Normal',NULL,NULL,NULL,1),
+ (7390,'D141681','BM 80K','Normal',NULL,NULL,NULL,1),
+ (7391,'D141711','BM 108K','Normal',NULL,NULL,NULL,1),
+ (7392,'D141771','BM 1965K','Normal',NULL,NULL,NULL,1),
+ (7393,'D141791','13 09544412','Normal',NULL,NULL,NULL,1),
+ (7394,'D141871','BM 97K','Normal',NULL,NULL,NULL,1),
+ (7395,'D141911','BM 1617K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7396,'D141921','BM 810K','Normal',NULL,NULL,NULL,1),
+ (7397,'D141961','BM 1224K','Normal',NULL,NULL,NULL,1),
+ (7398,'D141981','BM 844K','Normal',NULL,NULL,NULL,1),
+ (7399,'D150021','40017207','Normal',NULL,NULL,NULL,1),
+ (7400,'D150051','4001700500','Normal',NULL,NULL,NULL,1),
+ (7401,'D150061','BM 237K','Normal',NULL,NULL,NULL,1),
+ (7402,'D150111','BM 1728K','Normal',NULL,NULL,NULL,1),
+ (7403,'D150121','BM 1028K','Normal',NULL,NULL,NULL,1),
+ (7404,'D150131','H 22894','Normal',NULL,NULL,NULL,1),
+ (7405,'D150151','BM 1774K','Normal',NULL,NULL,NULL,1),
+ (7406,'D150181','BM 737K','Normal',NULL,NULL,NULL,1),
+ (7407,'D150201','BM 2320K','Normal',NULL,NULL,NULL,1),
+ (7408,'D150221','BM 2356K','Normal',NULL,NULL,NULL,1),
+ (7409,'D150231','BM 500K','Normal',NULL,NULL,NULL,1),
+ (7410,'D150241','BM 2373K','Normal',NULL,NULL,NULL,1),
+ (7411,'D150261','BM 1902K','Normal',NULL,NULL,NULL,1),
+ (7412,'D150281','13 09544553','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7413,'D150291','BM 1475K','Normal',NULL,NULL,NULL,1),
+ (7414,'D150311','BM 1207K','Normal',NULL,NULL,NULL,1),
+ (7415,'D150331','BM 1280K','Normal',NULL,NULL,NULL,1),
+ (7416,'D150361','13 09544507','Normal',NULL,NULL,NULL,1),
+ (7417,'D150421','127437','Normal',NULL,NULL,NULL,1),
+ (7418,'D150441','BM 1767K','Normal',NULL,NULL,NULL,1),
+ (7419,'D150471','BM 2697K','Normal',NULL,NULL,NULL,1),
+ (7420,'D150481','BM 886K','Normal',NULL,NULL,NULL,1),
+ (7421,'D150541','40017206','Normal',NULL,NULL,NULL,1),
+ (7422,'D150561','BM 1252K','Normal',NULL,NULL,NULL,1),
+ (7423,'D150581','BM 1291K','Normal',NULL,NULL,NULL,1),
+ (7424,'D150631','BM 1581K','Normal',NULL,NULL,NULL,1),
+ (7425,'D150641','40017433','Normal',NULL,NULL,NULL,1),
+ (7426,'D150661','BM 962K','Normal',NULL,NULL,NULL,1),
+ (7427,'D150681','BM 1650K','Normal',NULL,NULL,NULL,1),
+ (7428,'D150701','BM 2406K','Normal',NULL,NULL,NULL,1),
+ (7429,'D150711','BM 723K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7430,'D150731','BM 1904K','Normal',NULL,NULL,NULL,1),
+ (7431,'D150741','02-835128','Normal',NULL,NULL,NULL,1),
+ (7432,'D150751','147196','Normal',NULL,NULL,NULL,1),
+ (7433,'D150752','147196','Normal',NULL,NULL,NULL,1),
+ (7434,'D150761','BM 196K','Normal',NULL,NULL,NULL,1),
+ (7435,'D150781','BM 1437K','Normal',NULL,NULL,NULL,1),
+ (7436,'D150801','TMP-199','Normal',NULL,NULL,NULL,1),
+ (7437,'D150811','006428979','Normal',NULL,NULL,NULL,1),
+ (7438,'D150851','BM 2681','Normal',NULL,NULL,NULL,1),
+ (7439,'D150861','147185','Normal',NULL,NULL,NULL,1),
+ (7440,'D150871','BM 2353K','Normal',NULL,NULL,NULL,1),
+ (7441,'D150881','BM 378K','Normal',NULL,NULL,NULL,1),
+ (7442,'D150901','BM 1026K','Normal',NULL,NULL,NULL,1),
+ (7443,'D150921','BM 975K','Normal',NULL,NULL,NULL,1),
+ (7444,'D150931','13 09544167','Normal',NULL,NULL,NULL,1),
+ (7445,'D150951','1504064','Normal',NULL,NULL,NULL,1),
+ (7446,'D150961','BM 1416K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7447,'D150981','0712-0123050','Normal',NULL,NULL,NULL,1),
+ (7448,'D151001','05054','Normal',NULL,NULL,NULL,1),
+ (7449,'D151021','13 09544280','Normal',NULL,NULL,NULL,1),
+ (7450,'D151041','0497','Normal',NULL,NULL,NULL,1),
+ (7451,'D151091','BM 610K','Normal',NULL,NULL,NULL,1),
+ (7452,'D151101','BM 2583','Normal',NULL,NULL,NULL,1),
+ (7453,'D151131','BM 841K','Normal',NULL,NULL,NULL,1),
+ (7454,'D151171','BM 1872K','Normal',NULL,NULL,NULL,1),
+ (7455,'D151191','13 09544561','Normal',NULL,NULL,NULL,1),
+ (7456,'D151221','274338-10','Normal',NULL,NULL,NULL,1),
+ (7457,'D151251','BM 1710K','Normal',NULL,NULL,NULL,1),
+ (7458,'D151281','BM 2093K','Normal',NULL,NULL,NULL,1),
+ (7459,'D151291','BM 1282K','Normal',NULL,NULL,NULL,1),
+ (7460,'D151301','BM 208K','Normal',NULL,NULL,NULL,1),
+ (7461,'D151311','05-213469','Normal',NULL,NULL,NULL,1),
+ (7462,'D151321','BM 221K','Normal',NULL,NULL,NULL,1),
+ (7463,'D151331','BM 2518K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7464,'D151371','BM 1560K','Normal',NULL,NULL,NULL,1),
+ (7465,'D151391','BM 2413K','Normal',NULL,NULL,NULL,1),
+ (7466,'D151401','BM 2627K','Normal',NULL,NULL,NULL,1),
+ (7467,'D151411','BM 368K','Normal',NULL,NULL,NULL,1),
+ (7468,'D151431','BM 535K','Normal',NULL,NULL,NULL,1),
+ (7469,'D151451','BM 1900K','Normal',NULL,NULL,NULL,1),
+ (7470,'D151471','BM 296K','Normal',NULL,NULL,NULL,1),
+ (7471,'D151501','BM 1017K','Normal',NULL,NULL,NULL,1),
+ (7472,'D151511','1309544374','Normal',NULL,NULL,NULL,1),
+ (7473,'D151521','BM 1378K','Normal',NULL,NULL,NULL,1),
+ (7474,'D151531','BM 2590K','Normal',NULL,NULL,NULL,1),
+ (7475,'D151541','BM 580K','Normal',NULL,NULL,NULL,1),
+ (7476,'D151551','BM 892K','Normal',NULL,NULL,NULL,1),
+ (7477,'D151561','BM 1596K','Normal',NULL,NULL,NULL,1),
+ (7478,'D151571','BM 642K','Normal',NULL,NULL,NULL,1),
+ (7479,'D151581','BM 2191K','Normal',NULL,NULL,NULL,1),
+ (7480,'D151591','BM 344K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7481,'D151601','BM 398K','Normal',NULL,NULL,NULL,1),
+ (7482,'D151611','BM 2370K','Normal',NULL,NULL,NULL,1),
+ (7483,'D151621','BM 1124K','Normal',NULL,NULL,NULL,1),
+ (7484,'D151631','BM 292K','Normal',NULL,NULL,NULL,1),
+ (7485,'D151641','BM 1955K','Normal',NULL,NULL,NULL,1),
+ (7486,'D151651','BM 794K','Normal',NULL,NULL,NULL,1),
+ (7487,'D151661','BM 473K','Normal',NULL,NULL,NULL,1),
+ (7488,'D151671','BM 349K','Normal',NULL,NULL,NULL,1),
+ (7489,'D151681','BM 1141K','Normal',NULL,NULL,NULL,1),
+ (7490,'D151691','BM 1298K','Normal',NULL,NULL,NULL,1),
+ (7491,'D151701','BM 426K','Normal',NULL,NULL,NULL,1),
+ (7492,'D151711','BM 359K','Normal',NULL,NULL,NULL,1),
+ (7493,'D151721','BM 094K','Normal',NULL,NULL,NULL,1),
+ (7494,'D151731','BM 2714K','Normal',NULL,NULL,NULL,1),
+ (7495,'D151741','BM 1038K','Normal',NULL,NULL,NULL,1),
+ (7496,'D151751','BM 2715K','Normal',NULL,NULL,NULL,1),
+ (7497,'D151761','BM 2235K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7498,'D151771','BM 2235K','Normal',NULL,NULL,NULL,1),
+ (7499,'D151781','BM 2193K','Normal',NULL,NULL,NULL,1),
+ (7500,'D151791','BM 515K','Normal',NULL,NULL,NULL,1),
+ (7501,'D151801','BM 2193K','Normal',NULL,NULL,NULL,1),
+ (7502,'D151811','BM 644K','Normal',NULL,NULL,NULL,1),
+ (7503,'D151821','BM 481K','Normal',NULL,NULL,NULL,1),
+ (7504,'D151831','BM 1832K','Normal',NULL,NULL,NULL,1),
+ (7505,'D151841','BM 220K','Normal',NULL,NULL,NULL,1),
+ (7506,'D151851','BM 566K','Normal',NULL,NULL,NULL,1),
+ (7507,'D151861','BM 566K','Normal',NULL,NULL,NULL,1),
+ (7508,'D151871','BM 146K','Normal',NULL,NULL,NULL,1),
+ (7509,'D151881','BM 859K','Normal',NULL,NULL,NULL,1),
+ (7510,'D151891','BM 2727K','Normal',NULL,NULL,NULL,1),
+ (7511,'D151931','BM 1372K','Normal',NULL,NULL,NULL,1),
+ (7512,'D152001','BM 1433K','Normal',NULL,NULL,NULL,1),
+ (7513,'D160021','BM 350K','Normal',NULL,NULL,NULL,1),
+ (7514,'D160031','BM 2463K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7515,'D160041','BM 2720K','Normal',NULL,NULL,NULL,1),
+ (7516,'D160051','BM 1570K','Normal',NULL,NULL,NULL,1),
+ (7517,'D160061','BM 2344K','Normal',NULL,NULL,NULL,1),
+ (7518,'D160071','BM 2361K','Normal',NULL,NULL,NULL,1),
+ (7519,'D160081','BM 1107K','Normal',NULL,NULL,NULL,1),
+ (7520,'D160091','06-428637','Normal',NULL,NULL,NULL,1),
+ (7521,'D160111','06-427982','Normal',NULL,NULL,NULL,1),
+ (7522,'D160141','05-213399','Normal',NULL,NULL,NULL,1),
+ (7523,'D160151','BM 1184K','Normal',NULL,NULL,NULL,1),
+ (7524,'D160161','40017398','Normal',NULL,NULL,NULL,1),
+ (7525,'D160171','40017430','Normal',NULL,NULL,NULL,1),
+ (7526,'D160181','BM 1435K','Normal',NULL,NULL,NULL,1),
+ (7527,'D160191','BM 1179K','Normal',NULL,NULL,NULL,1),
+ (7528,'D160201','TMP-00000581','Normal',NULL,NULL,NULL,1),
+ (7529,'D160221','40017423','Normal',NULL,NULL,NULL,1),
+ (7530,'D160231','BM 096K','Normal',NULL,NULL,NULL,1),
+ (7531,'D160261','BM 805K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7532,'D160291','BM 690K','Normal',NULL,NULL,NULL,1),
+ (7533,'D160301','TMP-00000529','Normal',NULL,NULL,NULL,1),
+ (7534,'D160311','TMP-00000530','Normal',NULL,NULL,NULL,1),
+ (7535,'D160341','BM 1511K','Normal',NULL,NULL,NULL,1),
+ (7536,'D160351','BM 651K','Normal',NULL,NULL,NULL,1),
+ (7537,'D160361','TMP-00000534','Normal',NULL,NULL,NULL,1),
+ (7538,'D160371','TMP-00000535','Normal',NULL,NULL,NULL,1),
+ (7539,'D160381','TMP-00000536','Normal',NULL,NULL,NULL,1),
+ (7540,'D160391','BM 2639K','Normal',NULL,NULL,NULL,1),
+ (7541,'D160401','40017474','Normal',NULL,NULL,NULL,1),
+ (7542,'D160411','TMP-00000538','Normal',NULL,NULL,NULL,1),
+ (7543,'D160441','13 09544419','Normal',NULL,NULL,NULL,1),
+ (7544,'D160451','TMP-333','Normal',NULL,NULL,NULL,1),
+ (7545,'D160461','1309544589','Normal',NULL,NULL,NULL,1),
+ (7546,'D160471','02-377916','Normal',NULL,NULL,NULL,1),
+ (7547,'D160491','1309544683','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7548,'D160501','1309544444','Normal',NULL,NULL,NULL,1),
+ (7549,'D160521','06.427778','Normal',NULL,NULL,NULL,1),
+ (7550,'D160531','13 09544173','Normal',NULL,NULL,NULL,1),
+ (7551,'D160561','BM 800K','Normal',NULL,NULL,NULL,1),
+ (7552,'D160581','130800116','Normal',NULL,NULL,NULL,1),
+ (7553,'D160611','TMP-00000546','Normal',NULL,NULL,NULL,1),
+ (7554,'D160621','BM 688K','Normal',NULL,NULL,NULL,1),
+ (7555,'D160631','BM 630K','Normal',NULL,NULL,NULL,1),
+ (7556,'D160641','13 09544607','Normal',NULL,NULL,NULL,1),
+ (7557,'D160661','BM 1156K','Normal',NULL,NULL,NULL,1),
+ (7558,'D160671','1309544367','Normal',NULL,NULL,NULL,1),
+ (7559,'D160681','BM 095K','Normal',NULL,NULL,NULL,1),
+ (7560,'D160701','BM 840K','Normal',NULL,NULL,NULL,1),
+ (7561,'D160711','13 09544510','Normal',NULL,NULL,NULL,1),
+ (7562,'D160721','BM 788K','Normal',NULL,NULL,NULL,1),
+ (7563,'D160731','TMP-00000561','Normal',NULL,NULL,NULL,1),
+ (7564,'D160791','06-428670','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7565,'D160871','BM 1995K','Normal',NULL,NULL,NULL,1),
+ (7566,'D160881','BM 1451K','Normal',NULL,NULL,NULL,1),
+ (7567,'D160901','BM 2623K','Normal',NULL,NULL,NULL,1),
+ (7568,'D160911','BM 2449K','Normal',NULL,NULL,NULL,1),
+ (7569,'D160981','006428979','Normal',NULL,NULL,NULL,1),
+ (7570,'D161021','BM 1554K','Normal',NULL,NULL,NULL,1),
+ (7571,'D161051','06-428687','Normal',NULL,NULL,NULL,1),
+ (7572,'D161071','13 09544182','Normal',NULL,NULL,NULL,1),
+ (7573,'D161091','40017496','Normal',NULL,NULL,NULL,1),
+ (7574,'D161131','BM 1399K','Normal',NULL,NULL,NULL,1),
+ (7575,'D161141','BM 2036K','Normal',NULL,NULL,NULL,1),
+ (7576,'D161151','BM 701K','Normal',NULL,NULL,NULL,1),
+ (7577,'D161171','BM 1741','Normal',NULL,NULL,NULL,1),
+ (7578,'D161211','BM 2343K','Normal',NULL,NULL,NULL,1),
+ (7579,'D161281','BM 2554K','Normal',NULL,NULL,NULL,1),
+ (7580,'D161291','TMP-00000607','Normal',NULL,NULL,NULL,1),
+ (7581,'D161301','BM 2552K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7582,'D161321','BM 670K','Normal',NULL,NULL,NULL,1),
+ (7583,'D161351','13 09544619','Normal',NULL,NULL,NULL,1),
+ (7584,'D161371','BM 2563K','Normal',NULL,NULL,NULL,1),
+ (7585,'D161381','BM 422K','Normal',NULL,NULL,NULL,1),
+ (7586,'D161391','BM 442K','Normal',NULL,NULL,NULL,1),
+ (7587,'D161401','BM 1594K','Normal',NULL,NULL,NULL,1),
+ (7588,'D161421','13 09544421','Normal',NULL,NULL,NULL,1),
+ (7589,'D161431','BM 1202K','Normal',NULL,NULL,NULL,1),
+ (7590,'D161441','BM 1202','Normal',NULL,NULL,NULL,1),
+ (7591,'D161541','BM 980K','Normal',NULL,NULL,NULL,1),
+ (7592,'D161551','BM 1439K','Normal',NULL,NULL,NULL,1),
+ (7593,'D161571','BM 2537K','Normal',NULL,NULL,NULL,1),
+ (7594,'D161581','BM 2305K','Normal',NULL,NULL,NULL,1),
+ (7595,'D161591','40017401','Normal',NULL,NULL,NULL,1),
+ (7596,'D161601','BM 1788K','Normal',NULL,NULL,NULL,1),
+ (7597,'D161651','BM 994K','Normal',NULL,NULL,NULL,1),
+ (7598,'D161661','BM 880K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7599,'D161691','BM 449K','Normal',NULL,NULL,NULL,1),
+ (7600,'D161711','BM 1133K','Normal',NULL,NULL,NULL,1),
+ (7601,'D161721','BM 1005K','Normal',NULL,NULL,NULL,1),
+ (7602,'D161731','40017432','Normal',NULL,NULL,NULL,1),
+ (7603,'D161751','40017467','Normal',NULL,NULL,NULL,1),
+ (7604,'D161771','4001739','Normal',NULL,NULL,NULL,1),
+ (7605,'D161781','40017416','Normal',NULL,NULL,NULL,1),
+ (7606,'D161791','06-49683','Normal',NULL,NULL,NULL,1),
+ (7607,'D161831','BM 1549K','Normal',NULL,NULL,NULL,1),
+ (7608,'D161841','BM 1662K','Normal',NULL,NULL,NULL,1),
+ (7609,'D161871','06-428473','Normal',NULL,NULL,NULL,1),
+ (7610,'D161881','BM 2187K','Normal',NULL,NULL,NULL,1),
+ (7611,'D161891','BM 435K','Normal',NULL,NULL,NULL,1),
+ (7612,'D161911','06-427567','Normal',NULL,NULL,NULL,1),
+ (7613,'D161921','06-428688','Normal',NULL,NULL,NULL,1),
+ (7614,'D161931','BM 254K','Normal',NULL,NULL,NULL,1),
+ (7615,'D161951','BM 974K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7616,'D161961','BM-799','Normal',NULL,NULL,NULL,1),
+ (7617,'D161971','BM 2731K','Normal',NULL,NULL,NULL,1),
+ (7618,'D161981','BM 1665K','Normal',NULL,NULL,NULL,1),
+ (7619,'D161991','BM 434K','Normal',NULL,NULL,NULL,1),
+ (7620,'D171481','BM 496K','Normal',NULL,NULL,NULL,1),
+ (7621,'D171511','BM 2749','Normal',NULL,NULL,NULL,1),
+ (7622,'D171561','BM 1987K','Normal',NULL,NULL,NULL,1),
+ (7623,'D171571','BM 099K','Normal',NULL,NULL,NULL,1),
+ (7624,'D171581','BM 2231K','Normal',NULL,NULL,NULL,1),
+ (7625,'D171601','BM 423K','Normal',NULL,NULL,NULL,1),
+ (7626,'D171621','BM 2083K','Normal',NULL,NULL,NULL,1),
+ (7627,'D171661','BM 897K','Normal',NULL,NULL,NULL,1),
+ (7628,'D171681','BM 2367K','Normal',NULL,NULL,NULL,1),
+ (7629,'D171701','274348-10','Normal',NULL,NULL,NULL,1),
+ (7630,'D171721','06-428422','Normal',NULL,NULL,NULL,1),
+ (7631,'D171741','6150999','Normal',NULL,NULL,NULL,1),
+ (7632,'D171751','13 09544537','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7633,'D171761','BM 438K','Normal',NULL,NULL,NULL,1),
+ (7634,'D171771','BM 907K','Normal',NULL,NULL,NULL,1),
+ (7635,'D171781','BM 2157K','Normal',NULL,NULL,NULL,1),
+ (7636,'D171791','BM 1381K','Normal',NULL,NULL,NULL,1),
+ (7637,'D171801','BM 357K','Normal',NULL,NULL,NULL,1),
+ (7638,'D171841','13 09544395','Normal',NULL,NULL,NULL,1),
+ (7639,'D171851','BM 2424K','Normal',NULL,NULL,NULL,1),
+ (7640,'D171861','BM 681K','Normal',NULL,NULL,NULL,1),
+ (7641,'D171881','BM 1666K','Normal',NULL,NULL,NULL,1),
+ (7642,'D171921','BM 1374K','Normal',NULL,NULL,NULL,1),
+ (7643,'D171981','BM 1532K','Normal',NULL,NULL,NULL,1),
+ (7644,'D172001','13 09544655','Normal',NULL,NULL,NULL,1),
+ (7645,'D180021','06-427926','Normal',NULL,NULL,NULL,1),
+ (7646,'D180031','BM 512K','Normal',NULL,NULL,NULL,1),
+ (7647,'D180041','13-08-02811','Normal',NULL,NULL,NULL,1),
+ (7648,'D180061','BM 2321K','Normal',NULL,NULL,NULL,1),
+ (7649,'D180081','BM 459K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7650,'D180111','BM 2160K','Normal',NULL,NULL,NULL,1),
+ (7651,'D180151','BM 165K','Normal',NULL,NULL,NULL,1),
+ (7652,'D180201','BM 1860K','Normal',NULL,NULL,NULL,1),
+ (7653,'D190031','BM 2087K','Normal',NULL,NULL,NULL,1),
+ (7654,'D190051','BM 2262K','Normal',NULL,NULL,NULL,1),
+ (7655,'D190071','BM 2056K','Normal',NULL,NULL,NULL,1),
+ (7656,'D190101','6151622','Normal',NULL,NULL,NULL,1),
+ (7657,'D190111','6151953','Normal',NULL,NULL,NULL,1),
+ (7658,'D190131','147198','Normal',NULL,NULL,NULL,1),
+ (7659,'D190151','ZR-02834695','Normal',NULL,NULL,NULL,1),
+ (7660,'D190161','148888','Normal',NULL,NULL,NULL,1),
+ (7661,'D190171','ZR 02835121','Normal',NULL,NULL,NULL,1),
+ (7662,'D190181','BM 424K','Normal',NULL,NULL,NULL,1),
+ (7663,'D190191','BM 1686K','Normal',NULL,NULL,NULL,1),
+ (7664,'D190201','6151016','Normal',NULL,NULL,NULL,1),
+ (7665,'D190211','BM 1467K','Normal',NULL,NULL,NULL,1),
+ (7666,'D190221','6151807','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7667,'D190231','274313-10','Normal',NULL,NULL,NULL,1),
+ (7668,'D190271','BM 1793K','Normal',NULL,NULL,NULL,1),
+ (7669,'D190301','13 09544116','Normal',NULL,NULL,NULL,1),
+ (7670,'D190341','6151954','Normal',NULL,NULL,NULL,1),
+ (7671,'D190361','BM 1721K','Normal',NULL,NULL,NULL,1),
+ (7672,'D190421','BM 881K','Normal',NULL,NULL,NULL,1),
+ (7673,'D190551','ZR-02834710','Normal',NULL,NULL,NULL,1),
+ (7674,'D190601','13 09544533','Normal',NULL,NULL,NULL,1),
+ (7675,'D190621','BM 2065K','Normal',NULL,NULL,NULL,1),
+ (7676,'D190631','BM 1033K','Normal',NULL,NULL,NULL,1),
+ (7677,'D190651','BM 776K','Normal',NULL,NULL,NULL,1),
+ (7678,'D190681','BM 2496K','Normal',NULL,NULL,NULL,1),
+ (7679,'D190711','6151322','Normal',NULL,NULL,NULL,1),
+ (7680,'D190761','148901','Normal',NULL,NULL,NULL,1),
+ (7681,'D190771','BM 2448K','Normal',NULL,NULL,NULL,1),
+ (7682,'D190791','BM 2232K','Normal',NULL,NULL,NULL,1),
+ (7683,'D190801','BM 396K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7684,'D190811','06-428674','Normal',NULL,NULL,NULL,1),
+ (7685,'D190841','BM 62K','Normal',NULL,NULL,NULL,1),
+ (7686,'D190891','BM 1248K','Normal',NULL,NULL,NULL,1),
+ (7687,'D190901','BM 1358K','Normal',NULL,NULL,NULL,1),
+ (7688,'D190951','BM 1006K','Normal',NULL,NULL,NULL,1),
+ (7689,'D190961','BM 2670K','Normal',NULL,NULL,NULL,1),
+ (7690,'D190971','BM 2034K','Normal',NULL,NULL,NULL,1),
+ (7691,'D191001','BM 6151566K','Normal',NULL,NULL,NULL,1),
+ (7692,'D191011','146993','Normal',NULL,NULL,NULL,1),
+ (7693,'D191021','BM 2300K','Normal',NULL,NULL,NULL,1),
+ (7694,'D191061','146582','Normal',NULL,NULL,NULL,1),
+ (7695,'D191071','BM 632K','Normal',NULL,NULL,NULL,1),
+ (7696,'D191111','147689','Normal',NULL,NULL,NULL,1),
+ (7697,'D191141','BM 1086K','Normal',NULL,NULL,NULL,1),
+ (7698,'D191151','146587','Normal',NULL,NULL,NULL,1),
+ (7699,'D191181','BM 2257K','Normal',NULL,NULL,NULL,1),
+ (7700,'D191211','BM 1220K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7701,'D191231','BM 2671K','Normal',NULL,NULL,NULL,1),
+ (7702,'D191261','BM 2412K','Normal',NULL,NULL,NULL,1),
+ (7703,'D191271','06-429233','Normal',NULL,NULL,NULL,1),
+ (7704,'D191301','146575','Normal',NULL,NULL,NULL,1),
+ (7705,'D191351','BM 2461K','Normal',NULL,NULL,NULL,1),
+ (7706,'D191361','07-1201526','Normal',NULL,NULL,NULL,1),
+ (7707,'D191371','BM 2255K','Normal',NULL,NULL,NULL,1),
+ (7708,'D191381','13 09544573','Normal',NULL,NULL,NULL,1),
+ (7709,'D191391','071202011','Normal',NULL,NULL,NULL,1),
+ (7710,'D191401','BM 92K','Normal',NULL,NULL,NULL,1),
+ (7711,'D191411','BM 933K','Normal',NULL,NULL,NULL,1),
+ (7712,'D191461','BM 443K','Normal',NULL,NULL,NULL,1),
+ (7713,'D191491','BM 316K','Normal',NULL,NULL,NULL,1),
+ (7714,'D191501','BM 1174K','Normal',NULL,NULL,NULL,1),
+ (7715,'D191511','BM 2352K','Normal',NULL,NULL,NULL,1),
+ (7716,'D191521','BM 1262K','Normal',NULL,NULL,NULL,1),
+ (7717,'D191551','BM 2078K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7718,'D191601','BM 1021K','Normal',NULL,NULL,NULL,1),
+ (7719,'D191641','6151621','Normal',NULL,NULL,NULL,1),
+ (7720,'D191651','BM 2509K','Normal',NULL,NULL,NULL,1),
+ (7721,'D191771','BM 1125K','Normal',NULL,NULL,NULL,1),
+ (7722,'D191811','150312461','Normal',NULL,NULL,NULL,1),
+ (7723,'D191831','BM 2166K','Normal',NULL,NULL,NULL,1),
+ (7724,'D191841','BM 2244K','Normal',NULL,NULL,NULL,1),
+ (7725,'D191871','147686','Normal',NULL,NULL,NULL,1),
+ (7726,'D191881','148883','Normal',NULL,NULL,NULL,1),
+ (7727,'D191941','40017304','Normal',NULL,NULL,NULL,1),
+ (7728,'D191961','40017415','Normal',NULL,NULL,NULL,1),
+ (7729,'D191981','127985','Normal',NULL,NULL,NULL,1),
+ (7730,'D192001','146966','Normal',NULL,NULL,NULL,1),
+ (7731,'D192021','BM 647K','Normal',NULL,NULL,NULL,1),
+ (7732,'D200011','6151319','Normal',NULL,NULL,NULL,1),
+ (7733,'D200021','BM 1778K','Normal',NULL,NULL,NULL,1),
+ (7734,'D200041','1309544501','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7735,'D200101','146962','Normal',NULL,NULL,NULL,1),
+ (7736,'D200111','147189','Normal',NULL,NULL,NULL,1),
+ (7737,'D200151','13 09544598','Normal',NULL,NULL,NULL,1),
+ (7738,'D200161','147319','Normal',NULL,NULL,NULL,1),
+ (7739,'D200171','147684','Normal',NULL,NULL,NULL,1),
+ (7740,'D200191','BM 1454K','Normal',NULL,NULL,NULL,1),
+ (7741,'D200221','13 09544130','Normal',NULL,NULL,NULL,1),
+ (7742,'D200241','06.494660','Normal',NULL,NULL,NULL,1),
+ (7743,'D200261','BM 1349K','Normal',NULL,NULL,NULL,1),
+ (7744,'D200281','BM 439K','Normal',NULL,NULL,NULL,1),
+ (7745,'D200291','BM 471K','Normal',NULL,NULL,NULL,1),
+ (7746,'D200301','13 09544637','Normal',NULL,NULL,NULL,1),
+ (7747,'D200351','BM 386K','Normal',NULL,NULL,NULL,1),
+ (7748,'D200361','6151318','Normal',NULL,NULL,NULL,1),
+ (7749,'D200371','6150869','Normal',NULL,NULL,NULL,1),
+ (7750,'D200381','071201186','Normal',NULL,NULL,NULL,1),
+ (7751,'D200391','BM 2075K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7752,'D200441','147683','Normal',NULL,NULL,NULL,1),
+ (7753,'D200451','071200754','Normal',NULL,NULL,NULL,1),
+ (7754,'D200461','071200363','Normal',NULL,NULL,NULL,1),
+ (7755,'D200471','6151947','Normal',NULL,NULL,NULL,1),
+ (7756,'D200481','BM 2243K','Normal',NULL,NULL,NULL,1),
+ (7757,'D200491','BM 582K','Normal',NULL,NULL,NULL,1),
+ (7758,'D200501','6150862','Normal',NULL,NULL,NULL,1),
+ (7759,'D200521','6151949','Normal',NULL,NULL,NULL,1),
+ (7760,'D200531','BM 2630K','Normal',NULL,NULL,NULL,1),
+ (7761,'D200541','BM 877K','Normal',NULL,NULL,NULL,1),
+ (7762,'D200551','071202036','Normal',NULL,NULL,NULL,1),
+ (7763,'D200561','6151952','Normal',NULL,NULL,NULL,1),
+ (7764,'D200581','13 09544033','Normal',NULL,NULL,NULL,1),
+ (7765,'D200591','071200869','Normal',NULL,NULL,NULL,1),
+ (7766,'D200601','6151951','Normal',NULL,NULL,NULL,1),
+ (7767,'D200621','BM 682K','Normal',NULL,NULL,NULL,1),
+ (7768,'D200641','146610','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7769,'D200651','1309544269','Normal',NULL,NULL,NULL,1),
+ (7770,'D200661','ZR-02835155','Normal',NULL,NULL,NULL,1),
+ (7771,'D200691','6151965','Normal',NULL,NULL,NULL,1),
+ (7772,'D200701','13 09544133','Normal',NULL,NULL,NULL,1),
+ (7773,'D200711','071201749','Normal',NULL,NULL,NULL,1),
+ (7774,'D200721','071200614','Normal',NULL,NULL,NULL,1),
+ (7775,'D200731','147544','Normal',NULL,NULL,NULL,1),
+ (7776,'D200751','146994','Normal',NULL,NULL,NULL,1),
+ (7777,'D200761','071201195','Normal',NULL,NULL,NULL,1),
+ (7778,'D200771','BM 1795K','Normal',NULL,NULL,NULL,1),
+ (7779,'D200811','BM 2488K','Normal',NULL,NULL,NULL,1),
+ (7780,'D200841','071200530','Normal',NULL,NULL,NULL,1),
+ (7781,'D200851','BM 2473K','Normal',NULL,NULL,NULL,1),
+ (7782,'D200861','BM 937K','Normal',NULL,NULL,NULL,1),
+ (7783,'D200871','BM 2492K','Normal',NULL,NULL,NULL,1),
+ (7784,'D200881','BM 1370K','Normal',NULL,NULL,NULL,1),
+ (7785,'D200911','BM 2470K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7786,'D200941','147320','Normal',NULL,NULL,NULL,1),
+ (7787,'D200951','13 09544542','Normal',NULL,NULL,NULL,1),
+ (7788,'D200961','6151325','Normal',NULL,NULL,NULL,1),
+ (7789,'D200971','1309544555','Normal',NULL,NULL,NULL,1),
+ (7790,'D200991','14991','Normal',NULL,NULL,NULL,1),
+ (7791,'D201001','BM 563K','Normal',NULL,NULL,NULL,1),
+ (7792,'D201011','BM 1429K','Normal',NULL,NULL,NULL,1),
+ (7793,'D201021','13 09544044','Normal',NULL,NULL,NULL,1),
+ (7794,'D201041','BM 1362K','Normal',NULL,NULL,NULL,1),
+ (7795,'D201061','BM 783K','Normal',NULL,NULL,NULL,1),
+ (7796,'D201071','BM 619K','Normal',NULL,NULL,NULL,1),
+ (7797,'D201091','BM 1246K','Normal',NULL,NULL,NULL,1),
+ (7798,'D201101','BM 1333K','Normal',NULL,NULL,NULL,1),
+ (7799,'D201131','BM 2483K','Normal',NULL,NULL,NULL,1),
+ (7800,'D201171','BM 1818K','Normal',NULL,NULL,NULL,1),
+ (7801,'D201181','BM 864K','Normal',NULL,NULL,NULL,1),
+ (7802,'D201191','BM 2562K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7803,'D201201','146573','Normal',NULL,NULL,NULL,1),
+ (7804,'D201221','BM 684K','Normal',NULL,NULL,NULL,1),
+ (7805,'D201231','BM 1978K','Normal',NULL,NULL,NULL,1),
+ (7806,'D201261','BM 2728K','Normal',NULL,NULL,NULL,1),
+ (7807,'D201281','BM 2760K','Normal',NULL,NULL,NULL,1),
+ (7808,'D201291','13 09544061','Normal',NULL,NULL,NULL,1),
+ (7809,'D201301','BM 1389K','Normal',NULL,NULL,NULL,1),
+ (7810,'D201331','13 09544052','Normal',NULL,NULL,NULL,1),
+ (7811,'D201341','13 09544362','Normal',NULL,NULL,NULL,1),
+ (7812,'D201361','13 09544611','Normal',NULL,NULL,NULL,1),
+ (7813,'D201371','13 09544320','Normal',NULL,NULL,NULL,1),
+ (7814,'D201391','13 09544396','Normal',NULL,NULL,NULL,1),
+ (7815,'D201411','127989','Normal',NULL,NULL,NULL,1),
+ (7816,'D201441','BM 2507K','Normal',NULL,NULL,NULL,1),
+ (7817,'D201511','1309544366','Normal',NULL,NULL,NULL,1),
+ (7818,'D201551','071202257PM','Normal',NULL,NULL,NULL,1),
+ (7819,'D201571','BM 2795K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7820,'D201581','05-215235','Normal',NULL,NULL,NULL,1),
+ (7821,'D201591','13 09544634','Normal',NULL,NULL,NULL,1),
+ (7822,'D201611','1309544581','Normal',NULL,NULL,NULL,1),
+ (7823,'D201631','146606','Normal',NULL,NULL,NULL,1),
+ (7824,'D201651','13 09544422','Normal',NULL,NULL,NULL,1),
+ (7825,'D201661','13 09544222','Normal',NULL,NULL,NULL,1),
+ (7826,'D201691','13 09544590','Normal',NULL,NULL,NULL,1),
+ (7827,'D201731','127990','Normal',NULL,NULL,NULL,1),
+ (7828,'D201781','141101554','Normal',NULL,NULL,NULL,1),
+ (7829,'D211571','1309544504','Normal',NULL,NULL,NULL,1),
+ (7830,'D217351','BM 8K','Normal',NULL,NULL,NULL,1),
+ (7831,'D220011','6152098','Normal',NULL,NULL,NULL,1),
+ (7832,'D220051','148520','Normal',NULL,NULL,NULL,1),
+ (7833,'D220061','13-08-01741','Normal',NULL,NULL,NULL,1),
+ (7834,'D220101','400017209','Normal',NULL,NULL,NULL,1),
+ (7835,'D220111','6151014','Normal',NULL,NULL,NULL,1),
+ (7836,'D220141','40017315','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7837,'D220151','40017455','Normal',NULL,NULL,NULL,1),
+ (7838,'D220181','BM 1574K','Normal',NULL,NULL,NULL,1),
+ (7839,'D220191','148655','Normal',NULL,NULL,NULL,1),
+ (7840,'D220261','BM 087K','Normal',NULL,NULL,NULL,1),
+ (7841,'D220271','BM 196KN','Normal',NULL,NULL,NULL,1),
+ (7842,'D220301','148513','Normal',NULL,NULL,NULL,1),
+ (7843,'D220321','6151713','Normal',NULL,NULL,NULL,1),
+ (7844,'D220371','06-427496','Normal',NULL,NULL,NULL,1),
+ (7845,'D220381','02-3779996','Normal',NULL,NULL,NULL,1),
+ (7846,'D220391','ZR-02834846','Normal',NULL,NULL,NULL,1),
+ (7847,'D220401','BM 736K','Normal',NULL,NULL,NULL,1),
+ (7848,'D220411','ZR-02834737','Normal',NULL,NULL,NULL,1),
+ (7849,'D220421','BM 1069K','Normal',NULL,NULL,NULL,1),
+ (7850,'D220431','23898','Normal',NULL,NULL,NULL,1),
+ (7851,'D220451','05-213402','Normal',NULL,NULL,NULL,1),
+ (7852,'D220461','BM 2625K','Normal',NULL,NULL,NULL,1),
+ (7853,'D220471','BM 2794K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7854,'D220491','BM 32K','Normal',NULL,NULL,NULL,1),
+ (7855,'D220501','BM 818K','Normal',NULL,NULL,NULL,1),
+ (7856,'D220511','BM 649K','Normal',NULL,NULL,NULL,1),
+ (7857,'D220551','bm 1393k','Normal',NULL,NULL,NULL,1),
+ (7858,'D220571','BM 2400K','Normal',NULL,NULL,NULL,1),
+ (7859,'D220621','BM 1397K','Normal',NULL,NULL,NULL,1),
+ (7860,'D220631','BM 1514K','Normal',NULL,NULL,NULL,1),
+ (7861,'D220651','BM 1713K','Normal',NULL,NULL,NULL,1),
+ (7862,'D220661','BM 2621K','Normal',NULL,NULL,NULL,1),
+ (7863,'D220671','BM 680K','Normal',NULL,NULL,NULL,1),
+ (7864,'D220711','BM 1079K','Normal',NULL,NULL,NULL,1),
+ (7865,'D220751','BM 1760K','Normal',NULL,NULL,NULL,1),
+ (7866,'D220781','BM 2745K','Normal',NULL,NULL,NULL,1),
+ (7867,'D220791','13 09544292','Normal',NULL,NULL,NULL,1),
+ (7868,'D220801','13 09544284','Normal',NULL,NULL,NULL,1),
+ (7869,'D220811','13 09544145','Normal',NULL,NULL,NULL,1),
+ (7870,'D220821','1309544244','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7871,'D230011','BM 2575K','Normal',NULL,NULL,NULL,1),
+ (7872,'D230021','BM 1834K','Normal',NULL,NULL,NULL,1),
+ (7873,'D230031','BM 702K','Normal',NULL,NULL,NULL,1),
+ (7874,'D230051','BM 1390K','Normal',NULL,NULL,NULL,1),
+ (7875,'D230061','BM 346K','Normal',NULL,NULL,NULL,1),
+ (7876,'D230071','BM 2110K','Normal',NULL,NULL,NULL,1),
+ (7877,'D230081','BM 276K','Normal',NULL,NULL,NULL,1),
+ (7878,'D230091','BM 597K','Normal',NULL,NULL,NULL,1),
+ (7879,'D230101','BM 1323K','Normal',NULL,NULL,NULL,1),
+ (7880,'D230111','BM 2203K','Normal',NULL,NULL,NULL,1),
+ (7881,'D230121','BM 2364K','Normal',NULL,NULL,NULL,1),
+ (7882,'D230141','BM 2096K','Normal',NULL,NULL,NULL,1),
+ (7883,'D230151','BM 2027K','Normal',NULL,NULL,NULL,1),
+ (7884,'D230161','BM 1385K','Normal',NULL,NULL,NULL,1),
+ (7885,'D230171','BM 1366K','Normal',NULL,NULL,NULL,1),
+ (7886,'D230181','BM 2167K','Normal',NULL,NULL,NULL,1),
+ (7887,'D230191','BM 1815K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7888,'D230211','BM 1216K','Normal',NULL,NULL,NULL,1),
+ (7889,'D250011','BM 149K','Normal',NULL,NULL,NULL,1),
+ (7890,'D250021','BM 2049K','Normal',NULL,NULL,NULL,1),
+ (7891,'D250031','BM 2446K','Normal',NULL,NULL,NULL,1),
+ (7892,'D250041','13 09544115','Normal',NULL,NULL,NULL,1),
+ (7893,'D250061','BM 2666K','Normal',NULL,NULL,NULL,1),
+ (7894,'D250081','13 09544074','Normal',NULL,NULL,NULL,1),
+ (7895,'D250091','13 09544286','Normal',NULL,NULL,NULL,1),
+ (7896,'D250111','1309544579','Normal',NULL,NULL,NULL,1),
+ (7897,'D251521','06-427418','Normal',NULL,NULL,NULL,1),
+ (7898,'D260021','13 09544349','Normal',NULL,NULL,NULL,1),
+ (7899,'D260051','1309544658','Normal',NULL,NULL,NULL,1),
+ (7900,'D260081','13 09544572','Normal',NULL,NULL,NULL,1),
+ (7901,'D260101','13 09544183','Normal',NULL,NULL,NULL,1),
+ (7902,'D260121','13 09544618','Normal',NULL,NULL,NULL,1),
+ (7903,'D261661','1309544066','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7904,'D261741','1309544039','Normal',NULL,NULL,NULL,1),
+ (7905,'D261851','141102776','Normal',NULL,NULL,NULL,1),
+ (7906,'E010011','BM 1705K','Normal',NULL,NULL,NULL,1),
+ (7907,'E010061','13 09544274','Normal',NULL,NULL,NULL,1),
+ (7908,'E010141','13000502','Normal',NULL,NULL,NULL,1),
+ (7909,'E010151','2838','Normal',NULL,NULL,NULL,1),
+ (7910,'E010171','BM 586K','Normal',NULL,NULL,NULL,1),
+ (7911,'E010201','BM 159K','Normal',NULL,NULL,NULL,1),
+ (7912,'E010241','13 09544503','Normal',NULL,NULL,NULL,1),
+ (7913,'E010311','BM 1308K','Normal',NULL,NULL,NULL,1),
+ (7914,'E010331','BM 1966K','Normal',NULL,NULL,NULL,1),
+ (7915,'E010621','BM 1705K','Normal',NULL,NULL,NULL,1),
+ (7916,'E010671','BM 480K','Normal',NULL,NULL,NULL,1),
+ (7917,'E010741','BM 727K','Normal',NULL,NULL,NULL,1),
+ (7918,'E010751','BM 1443K','Normal',NULL,NULL,NULL,1),
+ (7919,'E010811','13 09544444','Normal',NULL,NULL,NULL,1),
+ (7920,'E010831','BM 1458K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7921,'E010861','BM 137K','Normal',NULL,NULL,NULL,1),
+ (7922,'E010951','002062','Normal',NULL,NULL,NULL,1),
+ (7923,'E010971','BM 2147K','Normal',NULL,NULL,NULL,1),
+ (7924,'E010981','BM 626K','Normal',NULL,NULL,NULL,1),
+ (7925,'E011001','BM 64K','Normal',NULL,NULL,NULL,1),
+ (7926,'E011081','BM 1830K','Normal',NULL,NULL,NULL,1),
+ (7927,'E011121','1309544663','Normal',NULL,NULL,NULL,1),
+ (7928,'E011201','BM 854K','Normal',NULL,NULL,NULL,1),
+ (7929,'E011271','06-428555','Normal',NULL,NULL,NULL,1),
+ (7930,'E011291','BM 2345K','Normal',NULL,NULL,NULL,1),
+ (7931,'E011341','BM 234K','Normal',NULL,NULL,NULL,1),
+ (7932,'E011371','BM 283K','Normal',NULL,NULL,NULL,1),
+ (7933,'E011401','1309544472','Normal',NULL,NULL,NULL,1),
+ (7934,'E011451','BM 928K','Normal',NULL,NULL,NULL,1),
+ (7935,'E011491','BM 1794K','Normal',NULL,NULL,NULL,1),
+ (7936,'E011571','BM 54K','Normal',NULL,NULL,NULL,1),
+ (7937,'E011701','05-215598','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7938,'E011741','13 09544586','Normal',NULL,NULL,NULL,1),
+ (7939,'E011781','BM 216K','Normal',NULL,NULL,NULL,1),
+ (7940,'E011801','06-428414','Normal',NULL,NULL,NULL,1),
+ (7941,'E011821','BM 6561K','Normal',NULL,NULL,NULL,1),
+ (7942,'E011901','BM 2250K','Normal',NULL,NULL,NULL,1),
+ (7943,'E011921','BM 142K','Normal',NULL,NULL,NULL,1),
+ (7944,'E011941','1309544432','Normal',NULL,NULL,NULL,1),
+ (7945,'E011981','BM 170K','Normal',NULL,NULL,NULL,1),
+ (7946,'E011991','BM 2594K','Normal',NULL,NULL,NULL,1),
+ (7947,'E012011','BM 2238K','Normal',NULL,NULL,NULL,1),
+ (7948,'E020011','BM 1568K','Normal',NULL,NULL,NULL,1),
+ (7949,'E020021','13 09544217','Normal',NULL,NULL,NULL,1),
+ (7950,'E020091','BM 1979K','Normal',NULL,NULL,NULL,1),
+ (7951,'E020121','13 09544686','Normal',NULL,NULL,NULL,1),
+ (7952,'E020281','13 09544612','Normal',NULL,NULL,NULL,1),
+ (7953,'E020311','BM 780K','Normal',NULL,NULL,NULL,1),
+ (7954,'E020361','BM 734K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7955,'E020421','13 09544298','Normal',NULL,NULL,NULL,1),
+ (7956,'E020491','40017402','Normal',NULL,NULL,NULL,1),
+ (7957,'E020521','BM 588K','Normal',NULL,NULL,NULL,1),
+ (7958,'E020531','BM 256K','Normal',NULL,NULL,NULL,1),
+ (7959,'E020601','BM 2331K','Normal',NULL,NULL,NULL,1),
+ (7960,'E020801','BM 2756K','Normal',NULL,NULL,NULL,1),
+ (7961,'E020921','BM 2584K','Normal',NULL,NULL,NULL,1),
+ (7962,'E020961','BM 1519K','Normal',NULL,NULL,NULL,1),
+ (7963,'E021001','1309544252','Normal',NULL,NULL,NULL,1),
+ (7964,'E021041','BM 232K','Normal',NULL,NULL,NULL,1),
+ (7965,'E021091','BM 1755k','Normal',NULL,NULL,NULL,1),
+ (7966,'E021151','BM 280K','Normal',NULL,NULL,NULL,1),
+ (7967,'E021181','1309544417','Normal',NULL,NULL,NULL,1),
+ (7968,'E021231','13 09544287','Normal',NULL,NULL,NULL,1),
+ (7969,'E021241','BM 2293K','Normal',NULL,NULL,NULL,1),
+ (7970,'E021271','BM 2519K','Normal',NULL,NULL,NULL,1),
+ (7971,'E021281','BM 1279K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7972,'E021311','BM 73K','Normal',NULL,NULL,NULL,1),
+ (7973,'E021341','1309544591','Normal',NULL,NULL,NULL,1),
+ (7974,'E021401','BM 2737K','Normal',NULL,NULL,NULL,1),
+ (7975,'E021431','BM 2558K','Normal',NULL,NULL,NULL,1),
+ (7976,'E021531','1309544217','Normal',NULL,NULL,NULL,1),
+ (7977,'E021571','1309544240','Normal',NULL,NULL,NULL,1),
+ (7978,'E021601','BM 2641K','Normal',NULL,NULL,NULL,1),
+ (7979,'E021621','BM 1627K','Normal',NULL,NULL,NULL,1),
+ (7980,'E021631','BM 2292K','Normal',NULL,NULL,NULL,1),
+ (7981,'E021671','BM 147K','Normal',NULL,NULL,NULL,1),
+ (7982,'E021851','BM 1530K','Normal',NULL,NULL,NULL,1),
+ (7983,'E021861','13 09544461','Normal',NULL,NULL,NULL,1),
+ (7984,'E021881','BM 2337K','Normal',NULL,NULL,NULL,1),
+ (7985,'E021921','BM 250K','Normal',NULL,NULL,NULL,1),
+ (7986,'E021931','BM 820K','Normal',NULL,NULL,NULL,1),
+ (7987,'E021971','BM 724K','Normal',NULL,NULL,NULL,1),
+ (7988,'E021981','BM 1531K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (7989,'E021991','S-130','Normal',NULL,NULL,NULL,1),
+ (7990,'E022001','BM 2532K','Normal',NULL,NULL,NULL,1),
+ (7991,'E030021','148625','Normal',NULL,NULL,NULL,1),
+ (7992,'E030111','BM 1618K','Normal',NULL,NULL,NULL,1),
+ (7993,'E030151','13 09544564','Normal',NULL,NULL,NULL,1),
+ (7994,'E030211','40017626','Normal',NULL,NULL,NULL,1),
+ (7995,'E030251','BM 2198K','Normal',NULL,NULL,NULL,1),
+ (7996,'E030271','BM 2042K','Normal',NULL,NULL,NULL,1),
+ (7997,'E030361','BM 385','Normal',NULL,NULL,NULL,1),
+ (7998,'E030391','BM 2322K','Normal',NULL,NULL,NULL,1),
+ (7999,'E030441','13 09544075','Normal',NULL,NULL,NULL,1),
+ (8000,'E030451','BM 2799K','Normal',NULL,NULL,NULL,1),
+ (8001,'E030461','BM 305K','Normal',NULL,NULL,NULL,1),
+ (8002,'E030471','BM 1553K','Normal',NULL,NULL,NULL,1),
+ (8003,'E030501','BM 2631K','Normal',NULL,NULL,NULL,1),
+ (8004,'E030521','BM 2102K','Normal',NULL,NULL,NULL,1),
+ (8005,'E030531','BM 1226K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8006,'E030591','BM 2294K','Normal',NULL,NULL,NULL,1),
+ (8007,'E030601','BM 1152K','Normal',NULL,NULL,NULL,1),
+ (8008,'E030641','BM 2245K','Normal',NULL,NULL,NULL,1),
+ (8009,'E030691','BM 1740K','Normal',NULL,NULL,NULL,1),
+ (8010,'E030701','BM 1270K','Normal',NULL,NULL,NULL,1),
+ (8011,'E030831','BM 934K','Normal',NULL,NULL,NULL,1),
+ (8012,'E030841','BM 759K','Normal',NULL,NULL,NULL,1),
+ (8013,'E030871','BM 417K','Normal',NULL,NULL,NULL,1),
+ (8014,'E030901','BM 2478K','Normal',NULL,NULL,NULL,1),
+ (8015,'E030921','BM 089K','Normal',NULL,NULL,NULL,1),
+ (8016,'E030931','BM 544K','Normal',NULL,NULL,NULL,1),
+ (8017,'E030971','BM 906K','Normal',NULL,NULL,NULL,1),
+ (8018,'E030991','BM 635K','Normal',NULL,NULL,NULL,1),
+ (8019,'E031031','BM 762K','Normal',NULL,NULL,NULL,1),
+ (8020,'E031041','BM 719K','Normal',NULL,NULL,NULL,1),
+ (8021,'E031051','BM 1057K','Normal',NULL,NULL,NULL,1),
+ (8022,'E031091','BM 2744K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8023,'E031101','BM 2332K','Normal',NULL,NULL,NULL,1),
+ (8024,'E031151','BM 2383K','Normal',NULL,NULL,NULL,1),
+ (8025,'E031181','BM 2430K','Normal',NULL,NULL,NULL,1),
+ (8026,'E031201','BM 1949K','Normal',NULL,NULL,NULL,1),
+ (8027,'E031291','BM 2467K','Normal',NULL,NULL,NULL,1),
+ (8028,'E031401','BM 562K','Normal',NULL,NULL,NULL,1),
+ (8029,'E031411','BM 2443K','Normal',NULL,NULL,NULL,1),
+ (8030,'E031431','BM 1090K','Normal',NULL,NULL,NULL,1),
+ (8031,'E031461','BM 1403K','Normal',NULL,NULL,NULL,1),
+ (8032,'E031481','BM 750K','Normal',NULL,NULL,NULL,1),
+ (8033,'E031501','13 09544076','Normal',NULL,NULL,NULL,1),
+ (8034,'E031541','BM 2508K','Normal',NULL,NULL,NULL,1),
+ (8035,'E031641','13 09544259','Normal',NULL,NULL,NULL,1),
+ (8036,'E031691','05-213415','Normal',NULL,NULL,NULL,1),
+ (8037,'E031831','BM 1135K','Normal',NULL,NULL,NULL,1),
+ (8038,'E031841','BM 1470K','Normal',NULL,NULL,NULL,1),
+ (8039,'E031891','BM 1185K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8040,'E031951','BM 2233K','Normal',NULL,NULL,NULL,1),
+ (8041,'E040091','BM 755K','Normal',NULL,NULL,NULL,1),
+ (8042,'E040111','BM 704K','Normal',NULL,NULL,NULL,1),
+ (8043,'E040181','BM 2514K','Normal',NULL,NULL,NULL,1),
+ (8044,'E040241','BM 1463K','Normal',NULL,NULL,NULL,1),
+ (8045,'E040261','BM 2139K','Normal',NULL,NULL,NULL,1),
+ (8046,'E040311','BM 2693K','Normal',NULL,NULL,NULL,1),
+ (8047,'E040371','BM 2372','Normal',NULL,NULL,NULL,1),
+ (8048,'E040421','BM 1669K','Normal',NULL,NULL,NULL,1),
+ (8049,'E040431','BM 393K','Normal',NULL,NULL,NULL,1),
+ (8050,'E040461','BM 161K','Normal',NULL,NULL,NULL,1),
+ (8051,'E040471','BM 1197K','Normal',NULL,NULL,NULL,1),
+ (8052,'E040481','BM 1408K','Normal',NULL,NULL,NULL,1),
+ (8053,'E040491','BM 1894K','Normal',NULL,NULL,NULL,1),
+ (8054,'E040501','BM 1632K','Normal',NULL,NULL,NULL,1),
+ (8055,'E040511','BM 107K','Normal',NULL,NULL,NULL,1),
+ (8056,'E040591','BM 337K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8057,'E040601','BM 190K','Normal',NULL,NULL,NULL,1),
+ (8058,'E040621','BM 148K','Normal',NULL,NULL,NULL,1),
+ (8059,'E040631','BM 1255K','Normal',NULL,NULL,NULL,1),
+ (8060,'E040661','BM 943K','Normal',NULL,NULL,NULL,1),
+ (8061,'E040671','BM 2742K','Normal',NULL,NULL,NULL,1),
+ (8062,'E040801','000529','Normal',NULL,NULL,NULL,1),
+ (8063,'E040821','05-213459','Normal',NULL,NULL,NULL,1),
+ (8064,'E040861','BM 2661K','Normal',NULL,NULL,NULL,1),
+ (8065,'E040901','BM 679K','Normal',NULL,NULL,NULL,1),
+ (8066,'E040921','BM 2274K','Normal',NULL,NULL,NULL,1),
+ (8067,'E040931','BM 1873K','Normal',NULL,NULL,NULL,1),
+ (8068,'E040961','BM 2115K','Normal',NULL,NULL,NULL,1),
+ (8069,'E040981','BM 1671K','Normal',NULL,NULL,NULL,1),
+ (8070,'E040991','13 09544684','Normal',NULL,NULL,NULL,1),
+ (8071,'E041001','BM 993K','Normal',NULL,NULL,NULL,1),
+ (8072,'E041031','BM 528K','Normal',NULL,NULL,NULL,1),
+ (8073,'E041041','BM 558K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8074,'E041071','BM 420K','Normal',NULL,NULL,NULL,1),
+ (8075,'E041081','BM 2698K','Normal',NULL,NULL,NULL,1),
+ (8076,'E041121','BM 2053K','Normal',NULL,NULL,NULL,1),
+ (8077,'E041131','BM-719K','Normal',NULL,NULL,NULL,1),
+ (8078,'E041161','BM 693K','Normal',NULL,NULL,NULL,1),
+ (8079,'E041191','13 09544215','Normal',NULL,NULL,NULL,1),
+ (8080,'E041221','BM 595K','Normal',NULL,NULL,NULL,1),
+ (8081,'E041231','BM 1501K','Normal',NULL,NULL,NULL,1),
+ (8082,'E041251','BM 2710K','Normal',NULL,NULL,NULL,1),
+ (8083,'E041271','BM 2612K','Normal',NULL,NULL,NULL,1),
+ (8084,'E041341','BM 224K','Normal',NULL,NULL,NULL,1),
+ (8085,'E041361','BM 1526K','Normal',NULL,NULL,NULL,1),
+ (8086,'E041371','13 09544187','Normal',NULL,NULL,NULL,1),
+ (8087,'E041391','BM 2703K','Normal',NULL,NULL,NULL,1),
+ (8088,'E041411','BM 2088K','Normal',NULL,NULL,NULL,1),
+ (8089,'E041481','BM 2573K','Normal',NULL,NULL,NULL,1),
+ (8090,'E041501','BM 738K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8091,'E041511','BM 112K','Normal',NULL,NULL,NULL,1),
+ (8092,'E041561','BM 152K','Normal',NULL,NULL,NULL,1),
+ (8093,'E041601','13 09544242','Normal',NULL,NULL,NULL,1),
+ (8094,'E041621','40017476','Normal',NULL,NULL,NULL,1),
+ (8095,'E041631','BM 2089K','Normal',NULL,NULL,NULL,1),
+ (8096,'E041651','BM 1943K','Normal',NULL,NULL,NULL,1),
+ (8097,'E041661','BM 1489K','Normal',NULL,NULL,NULL,1),
+ (8098,'E041691','BM 1013K','Normal',NULL,NULL,NULL,1),
+ (8099,'E041711','141101530','Normal',NULL,NULL,NULL,1),
+ (8100,'E041811','BM 929K','Normal',NULL,NULL,NULL,1),
+ (8101,'E041821','BM 2432K','Normal',NULL,NULL,NULL,1),
+ (8102,'E041841','BM 1464K','Normal',NULL,NULL,NULL,1),
+ (8103,'E041851','BM 2254K','Normal',NULL,NULL,NULL,1),
+ (8104,'E041861','40017377','Normal',NULL,NULL,NULL,1),
+ (8105,'E041871','13 09544227','Normal',NULL,NULL,NULL,1),
+ (8106,'E041881','99A-258709','Normal',NULL,NULL,NULL,1),
+ (8107,'E041891','BM 2543K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8108,'E041901','13 09544310','Normal',NULL,NULL,NULL,1),
+ (8109,'E041921','13 09544226','Normal',NULL,NULL,NULL,1),
+ (8110,'E041951','40017286','Normal',NULL,NULL,NULL,1),
+ (8111,'E041961','BM 403K','Normal',NULL,NULL,NULL,1),
+ (8112,'E041971','40017460','Normal',NULL,NULL,NULL,1),
+ (8113,'E041981','BM 872K','Normal',NULL,NULL,NULL,1),
+ (8114,'E041991','40017247','Normal',NULL,NULL,NULL,1),
+ (8115,'E042001','BM 533K','Normal',NULL,NULL,NULL,1),
+ (8116,'E050011','40017211','Normal',NULL,NULL,NULL,1),
+ (8117,'E050021','BM 2256K','Normal',NULL,NULL,NULL,1),
+ (8118,'E050081','BM 1487K','Normal',NULL,NULL,NULL,1),
+ (8119,'E050091','ZR-02835185','Normal',NULL,NULL,NULL,1),
+ (8120,'E050141','06-428652','Normal',NULL,NULL,NULL,1),
+ (8121,'E050151','TMP-00000680','Normal',NULL,NULL,NULL,1),
+ (8122,'E050161','06-427737','Normal',NULL,NULL,NULL,1),
+ (8123,'E050241','BM 2767K','Normal',NULL,NULL,NULL,1),
+ (8124,'E050291','EZN 250','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8125,'E050301','6151814','Normal',NULL,NULL,NULL,1),
+ (8126,'E050331','06-427403','Normal',NULL,NULL,NULL,1),
+ (8127,'E050341','BM 2472K','Normal',NULL,NULL,NULL,1),
+ (8128,'E050361','40017443','Normal',NULL,NULL,NULL,1),
+ (8129,'E050391','40017442','Normal',NULL,NULL,NULL,1),
+ (8130,'E050401','13 09544492','Normal',NULL,NULL,NULL,1),
+ (8131,'E050411','071201166','Normal',NULL,NULL,NULL,1),
+ (8132,'E050421','13 09544326','Normal',NULL,NULL,NULL,1),
+ (8133,'E050441','BM 253K','Normal',NULL,NULL,NULL,1),
+ (8134,'E050451','06-427613','Normal',NULL,NULL,NULL,1),
+ (8135,'E050461','BH-20','Normal',NULL,NULL,NULL,1),
+ (8136,'E050471','BM 504K','Normal',NULL,NULL,NULL,1),
+ (8137,'E050481','BM 618K','Normal',NULL,NULL,NULL,1),
+ (8138,'E050491','BM 2068K','Normal',NULL,NULL,NULL,1),
+ (8139,'E050511','06-49672','Normal',NULL,NULL,NULL,1),
+ (8140,'E050541','BM 1147K','Normal',NULL,NULL,NULL,1),
+ (8141,'E050561','071200039','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8142,'E050591','BM 1195K','Normal',NULL,NULL,NULL,1),
+ (8143,'E050601','BM 966K','Normal',NULL,NULL,NULL,1),
+ (8144,'E050621','BM 1706K','Normal',NULL,NULL,NULL,1),
+ (8145,'E050651','071201766','Normal',NULL,NULL,NULL,1),
+ (8146,'E050691','1309544129','Normal',NULL,NULL,NULL,1),
+ (8147,'E050721','BM 1313K','Normal',NULL,NULL,NULL,1),
+ (8148,'E050731','BM 2142K','Normal',NULL,NULL,NULL,1),
+ (8149,'E050751','BM 1796K','Normal',NULL,NULL,NULL,1),
+ (8150,'E050761','06-427610','Normal',NULL,NULL,NULL,1),
+ (8151,'E050801','BM 875K','Normal',NULL,NULL,NULL,1),
+ (8152,'E050811','BM 620K','Normal',NULL,NULL,NULL,1),
+ (8153,'E050831','40017464','Normal',NULL,NULL,NULL,1),
+ (8154,'E050881','40017400','Normal',NULL,NULL,NULL,1),
+ (8155,'E050971','40017379','Normal',NULL,NULL,NULL,1),
+ (8156,'E050981','1309544691','Normal',NULL,NULL,NULL,1),
+ (8157,'E051021','BM 2201K','Normal',NULL,NULL,NULL,1),
+ (8158,'E051041','BM 1236K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8159,'E051051','06-49677','Normal',NULL,NULL,NULL,1),
+ (8160,'E051081','88695145','Normal',NULL,NULL,NULL,1),
+ (8161,'E051101','BM 1615K','Normal',NULL,NULL,NULL,1),
+ (8162,'E051151','BM 465K','Normal',NULL,NULL,NULL,1),
+ (8163,'E051201','TMP-00000702','Normal',NULL,NULL,NULL,1),
+ (8164,'E051231','BM 1191K','Normal',NULL,NULL,NULL,1),
+ (8165,'E051251','BM 1227K','Normal',NULL,NULL,NULL,1),
+ (8166,'E051261','40017353','Normal',NULL,NULL,NULL,1),
+ (8167,'E051281','BM 2399K','Normal',NULL,NULL,NULL,1),
+ (8168,'E051291','BM 1151K','Normal',NULL,NULL,NULL,1),
+ (8169,'E051331','BM 2495K','Normal',NULL,NULL,NULL,1),
+ (8170,'E051361','13 09544351','Normal',NULL,NULL,NULL,1),
+ (8171,'E051371','BM 2060K','Normal',NULL,NULL,NULL,1),
+ (8172,'E051431','BM 1606K','Normal',NULL,NULL,NULL,1),
+ (8173,'E051451','BM 1034K','Normal',NULL,NULL,NULL,1),
+ (8174,'E051481','13 09544624','Normal',NULL,NULL,NULL,1),
+ (8175,'E051491','13 09544300','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8176,'E051501','BM 030K','Normal',NULL,NULL,NULL,1),
+ (8177,'E051511','BM 397K','Normal',NULL,NULL,NULL,1),
+ (8178,'E051561','BM 2719K','Normal',NULL,NULL,NULL,1),
+ (8179,'E051571','BM 1427K','Normal',NULL,NULL,NULL,1),
+ (8180,'E051591','BM 1762K','Normal',NULL,NULL,NULL,1),
+ (8181,'E051601','BM 2522K','Normal',NULL,NULL,NULL,1),
+ (8182,'E051611','40017265','Normal',NULL,NULL,NULL,1),
+ (8183,'E051661','BM 2576K','Normal',NULL,NULL,NULL,1),
+ (8184,'E051671','40017501','Normal',NULL,NULL,NULL,1),
+ (8185,'E051691','BM 134K','Normal',NULL,NULL,NULL,1),
+ (8186,'E051701','1309544236','Normal',NULL,NULL,NULL,1),
+ (8187,'E051711','BM 663K','Normal',NULL,NULL,NULL,1),
+ (8188,'E051761','BM 1923K','Normal',NULL,NULL,NULL,1),
+ (8189,'E051781','40017382','Normal',NULL,NULL,NULL,1),
+ (8190,'E051811','BM 2434K','Normal',NULL,NULL,NULL,1),
+ (8191,'E051861','13 09544659','Normal',NULL,NULL,NULL,1),
+ (8192,'E051881','BM 939K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8193,'E051911','','Normal',NULL,NULL,NULL,1),
+ (8194,'E051921','BM 1566K','Normal',NULL,NULL,NULL,1),
+ (8195,'E051971','BM 2080K','Normal',NULL,NULL,NULL,1),
+ (8196,'E051981','BM 1607K','Normal',NULL,NULL,NULL,1),
+ (8197,'E052001','40017352','Normal',NULL,NULL,NULL,1),
+ (8198,'E060011','13 09544218','Normal',NULL,NULL,NULL,1),
+ (8199,'E060021','BM 2678K','Normal',NULL,NULL,NULL,1),
+ (8200,'E060051','BM 617K','Normal',NULL,NULL,NULL,1),
+ (8201,'E060061','BM 2574K','Normal',NULL,NULL,NULL,1),
+ (8202,'E060091','BM 1562K','Normal',NULL,NULL,NULL,1),
+ (8203,'E060211','BM 1886K','Normal',NULL,NULL,NULL,1),
+ (8204,'E060271','13 09544289','Normal',NULL,NULL,NULL,1),
+ (8205,'E060321','13 09544097','Normal',NULL,NULL,NULL,1),
+ (8206,'E060361','BM 2206K','Normal',NULL,NULL,NULL,1),
+ (8207,'E060401','13 09544453','Normal',NULL,NULL,NULL,1),
+ (8208,'E060411','BM 012K','Normal',NULL,NULL,NULL,1),
+ (8209,'E060461','BM 226K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8210,'E060501','BM 1299K','Normal',NULL,NULL,NULL,1),
+ (8211,'E060521','TMP-00000054','Normal',NULL,NULL,NULL,1),
+ (8212,'E060551','BM 34K','Normal',NULL,NULL,NULL,1),
+ (8213,'E060591','13 09544158','Normal',NULL,NULL,NULL,1),
+ (8214,'E060601','BM 2148K','Normal',NULL,NULL,NULL,1),
+ (8215,'E060611','BM 2501K','Normal',NULL,NULL,NULL,1),
+ (8216,'E060621','BM 1983K','Normal',NULL,NULL,NULL,1),
+ (8217,'E060631','BM 1223K','Normal',NULL,NULL,NULL,1),
+ (8218,'E060701','BM 665K','Normal',NULL,NULL,NULL,1),
+ (8219,'E060741','BM 458K','Normal',NULL,NULL,NULL,1),
+ (8220,'E060761','BM 333K','Normal',NULL,NULL,NULL,1),
+ (8221,'E060841','BM 1727K','Normal',NULL,NULL,NULL,1),
+ (8222,'E060871','BM-2309K','Normal',NULL,NULL,NULL,1),
+ (8223,'E060881','BM 909K','Normal',NULL,NULL,NULL,1),
+ (8224,'E060901','BM 2199K','Normal',NULL,NULL,NULL,1),
+ (8225,'E060951','BM 1689K','Normal',NULL,NULL,NULL,1),
+ (8226,'E060981','BM 511K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8227,'E060991','BM 908K','Normal',NULL,NULL,NULL,1),
+ (8228,'E061011','40017376','Normal',NULL,NULL,NULL,1),
+ (8229,'E061021','BM 1093K','Normal',NULL,NULL,NULL,1),
+ (8230,'E061041','BM 1498K','Normal',NULL,NULL,NULL,1),
+ (8231,'E061061','BM 2368K','Normal',NULL,NULL,NULL,1),
+ (8232,'E061071','BM 447K','Normal',NULL,NULL,NULL,1),
+ (8233,'E061121','40017385','Normal',NULL,NULL,NULL,1),
+ (8234,'E061131','BM 2581K','Normal',NULL,NULL,NULL,1),
+ (8235,'E061151','071200580','Normal',NULL,NULL,NULL,1),
+ (8236,'E061171','40017404','Normal',NULL,NULL,NULL,1),
+ (8237,'E061181','13 09544035','Normal',NULL,NULL,NULL,1),
+ (8238,'E061231','BM 2523K','Normal',NULL,NULL,NULL,1),
+ (8239,'E061241','BM 1930K','Normal',NULL,NULL,NULL,1),
+ (8240,'E061291','40017384','Normal',NULL,NULL,NULL,1),
+ (8241,'E061301','BM 2058K','Normal',NULL,NULL,NULL,1),
+ (8242,'E061311','BM 996K','Normal',NULL,NULL,NULL,1),
+ (8243,'E061321','13 09544567','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8244,'E061351','BM 1440K','Normal',NULL,NULL,NULL,1),
+ (8245,'E061401','13 09544602','Normal',NULL,NULL,NULL,1),
+ (8246,'E061411','BM 2642K','Normal',NULL,NULL,NULL,1),
+ (8247,'E061421','BM 1105K','Normal',NULL,NULL,NULL,1),
+ (8248,'E061441','13 09544045','Normal',NULL,NULL,NULL,1),
+ (8249,'E061451','BM 2705K','Normal',NULL,NULL,NULL,1),
+ (8250,'E061461','BM 1892K','Normal',NULL,NULL,NULL,1),
+ (8251,'E061471','BM 365K','Normal',NULL,NULL,NULL,1),
+ (8252,'E061591','BM 2119K','Normal',NULL,NULL,NULL,1),
+ (8253,'E061791','148795','Normal',NULL,NULL,NULL,1),
+ (8254,'E061801','99A-185562','Normal',NULL,NULL,NULL,1),
+ (8255,'E061811','146621','Normal',NULL,NULL,NULL,1),
+ (8256,'E061821','BM 1205K','Normal',NULL,NULL,NULL,1),
+ (8257,'E061941','BM 1111K','Normal',NULL,NULL,NULL,1),
+ (8258,'E061961','BM 792K','Normal',NULL,NULL,NULL,1),
+ (8259,'E061991','BM 230K','Normal',NULL,NULL,NULL,1),
+ (8260,'E070021','BM 1937K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8261,'E070061','BM 1361K','Normal',NULL,NULL,NULL,1),
+ (8262,'E070071','BM 879K','Normal',NULL,NULL,NULL,1),
+ (8263,'E070091','BM 1054K','Normal',NULL,NULL,NULL,1),
+ (8264,'E070101','PM-100700502H','Normal',NULL,NULL,NULL,1),
+ (8265,'E070131','147316','Normal',NULL,NULL,NULL,1),
+ (8266,'E070141','BM 195K','Normal',NULL,NULL,NULL,1),
+ (8267,'E070161','40017293','Normal',NULL,NULL,NULL,1),
+ (8268,'E070251','13 09544489','Normal',NULL,NULL,NULL,1),
+ (8269,'E070361','BM 764K','Normal',NULL,NULL,NULL,1),
+ (8270,'E070381','13 09544050','Normal',NULL,NULL,NULL,1),
+ (8271,'E070391','BM 753K','Normal',NULL,NULL,NULL,1),
+ (8272,'E070441','BM 2179K','Normal',NULL,NULL,NULL,1),
+ (8273,'E070451','BM 1509K','Normal',NULL,NULL,NULL,1),
+ (8274,'E070461','BM 2387K','Normal',NULL,NULL,NULL,1),
+ (8275,'E070471','BM 484K','Normal',NULL,NULL,NULL,1),
+ (8276,'E070531','BM 369K','Normal',NULL,NULL,NULL,1),
+ (8277,'E070601','06-427662','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8278,'E070611','146601','Normal',NULL,NULL,NULL,1),
+ (8279,'E070671','BM 1025K','Normal',NULL,NULL,NULL,1),
+ (8280,'E070681','BM 560K','Normal',NULL,NULL,NULL,1),
+ (8281,'E070791','BM 1647K','Normal',NULL,NULL,NULL,1),
+ (8282,'E070801','BM 2162K','Normal',NULL,NULL,NULL,1),
+ (8283,'E070811','BM 997K','Normal',NULL,NULL,NULL,1),
+ (8284,'E070861','BM 1736K','Normal',NULL,NULL,NULL,1),
+ (8285,'E070911','BM 2074K','Normal',NULL,NULL,NULL,1),
+ (8286,'E070931','BM 1687K','Normal',NULL,NULL,NULL,1),
+ (8287,'E070941','BM 852K','Normal',NULL,NULL,NULL,1),
+ (8288,'E070961','BM 2369K','Normal',NULL,NULL,NULL,1),
+ (8289,'E070981','BM 836K','Normal',NULL,NULL,NULL,1),
+ (8290,'E071001','BM 2285K','Normal',NULL,NULL,NULL,1),
+ (8291,'E071021','147893','Normal',NULL,NULL,NULL,1),
+ (8292,'E071041','BM 1392K','Normal',NULL,NULL,NULL,1),
+ (8293,'E071061','EMU-452','Normal',NULL,NULL,NULL,1),
+ (8294,'E071091','BM 843K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8295,'E071151','13-000493','Normal',NULL,NULL,NULL,1),
+ (8296,'E071171','146664','Normal',NULL,NULL,NULL,1),
+ (8297,'E071191','BM 1974K','Normal',NULL,NULL,NULL,1),
+ (8298,'E071201','BM 2401K','Normal',NULL,NULL,NULL,1),
+ (8299,'E071211','13 09544306','Normal',NULL,NULL,NULL,1),
+ (8300,'E071221','06-429124','Normal',NULL,NULL,NULL,1),
+ (8301,'E071231','BM 2544K','Normal',NULL,NULL,NULL,1),
+ (8302,'E071241','BM 2099K','Normal',NULL,NULL,NULL,1),
+ (8303,'E071251','BM 634K','Normal',NULL,NULL,NULL,1),
+ (8304,'E071261','BM 1444K','Normal',NULL,NULL,NULL,1),
+ (8305,'E071271','BM 215K','Normal',NULL,NULL,NULL,1),
+ (8306,'E071281','13 09544600','Normal',NULL,NULL,NULL,1),
+ (8307,'E071321','13 09544571','Normal',NULL,NULL,NULL,1),
+ (8308,'E071341','BM 989K','Normal',NULL,NULL,NULL,1),
+ (8309,'E071351','BM 1947K','Normal',NULL,NULL,NULL,1),
+ (8310,'E071421','BM 125K','Normal',NULL,NULL,NULL,1),
+ (8311,'E071441','BM 1035K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8312,'E071461','05-215670','Normal',NULL,NULL,NULL,1),
+ (8313,'E071491','13 09544493','Normal',NULL,NULL,NULL,1),
+ (8314,'E071501','BM 1946K','Normal',NULL,NULL,NULL,1),
+ (8315,'E071571','13 09544205','Normal',NULL,NULL,NULL,1),
+ (8316,'E071631','BM 2447K','Normal',NULL,NULL,NULL,1),
+ (8317,'E071641','BM 2280K','Normal',NULL,NULL,NULL,1),
+ (8318,'E071651','BM 2798K','Normal',NULL,NULL,NULL,1),
+ (8319,'E071671','BM 384K','Normal',NULL,NULL,NULL,1),
+ (8320,'E071681','13 09544124','Normal',NULL,NULL,NULL,1),
+ (8321,'E071721','147268','Normal',NULL,NULL,NULL,1),
+ (8322,'E071771','BM 2124K','Normal',NULL,NULL,NULL,1),
+ (8323,'E071791','BM 1355K','Normal',NULL,NULL,NULL,1),
+ (8324,'E071801','BM 2442K','Normal',NULL,NULL,NULL,1),
+ (8325,'E071851','BM 902K','Normal',NULL,NULL,NULL,1),
+ (8326,'E071871','BM 218K','Normal',NULL,NULL,NULL,1),
+ (8327,'E071881','BM 1287K','Normal',NULL,NULL,NULL,1),
+ (8328,'E071901','BM 983K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8329,'E071911','13 09544346','Normal',NULL,NULL,NULL,1),
+ (8330,'E071921','BM 2679K','Normal',NULL,NULL,NULL,1),
+ (8331,'E071931','BM 1986K','Normal',NULL,NULL,NULL,1),
+ (8332,'E071961','13 09544521','Normal',NULL,NULL,NULL,1),
+ (8333,'E080041','BM 130K','Normal',NULL,NULL,NULL,1),
+ (8334,'E080051','BM 1962K','Normal',NULL,NULL,NULL,1),
+ (8335,'E080071','BM 1120K','Normal',NULL,NULL,NULL,1),
+ (8336,'E080081','BM 2328K','Normal',NULL,NULL,NULL,1),
+ (8337,'E080091','148614','Normal',NULL,NULL,NULL,1),
+ (8338,'E080111','13 09544376','Normal',NULL,NULL,NULL,1),
+ (8339,'E080121','BM 1787K','Normal',NULL,NULL,NULL,1),
+ (8340,'E080141','BM 2787K','Normal',NULL,NULL,NULL,1),
+ (8341,'E080151','BM 2035K','Normal',NULL,NULL,NULL,1),
+ (8342,'E080211','BM 446K','Normal',NULL,NULL,NULL,1),
+ (8343,'E080231','40017381','Normal',NULL,NULL,NULL,1),
+ (8344,'E080261','BM 2066K','Normal',NULL,NULL,NULL,1),
+ (8345,'E080271','BM 2051K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8346,'E080281','BM 2186K','Normal',NULL,NULL,NULL,1),
+ (8347,'E080311','07-1201189PM','Normal',NULL,NULL,NULL,1),
+ (8348,'E080371','05-213461','Normal',NULL,NULL,NULL,1),
+ (8349,'E080401','BM 282K','Normal',NULL,NULL,NULL,1),
+ (8350,'E080421','1309544194','Normal',NULL,NULL,NULL,1),
+ (8351,'E080431','147312','Normal',NULL,NULL,NULL,1),
+ (8352,'E080441','BM 1919K','Normal',NULL,NULL,NULL,1),
+ (8353,'E080471','13 09544275','Normal',NULL,NULL,NULL,1),
+ (8354,'E080481','BM 1916K','Normal',NULL,NULL,NULL,1),
+ (8355,'E080491','BM 2775K','Normal',NULL,NULL,NULL,1),
+ (8356,'E080501','BM 1846K','Normal',NULL,NULL,NULL,1),
+ (8357,'E080531','BM 1806K','Normal',NULL,NULL,NULL,1),
+ (8358,'E080551','13 09544216','Normal',NULL,NULL,NULL,1),
+ (8359,'E080561','BM 2172K','Normal',NULL,NULL,NULL,1),
+ (8360,'E080581','BM 1893K','Normal',NULL,NULL,NULL,1),
+ (8361,'E080591','BM 425K','Normal',NULL,NULL,NULL,1),
+ (8362,'E080641','BM 813K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8363,'E080651','BM 1763K','Normal',NULL,NULL,NULL,1),
+ (8364,'E080661','BM 675K','Normal',NULL,NULL,NULL,1),
+ (8365,'E080671','BM 1680K','Normal',NULL,NULL,NULL,1),
+ (8366,'E080711','BM 2152K','Normal',NULL,NULL,NULL,1),
+ (8367,'E080751','BM 1963K','Normal',NULL,NULL,NULL,1),
+ (8368,'E080771','BM 451K','Normal',NULL,NULL,NULL,1),
+ (8369,'E080871','BM 377K','Normal',NULL,NULL,NULL,1),
+ (8370,'E080891','06-49652','Normal',NULL,NULL,NULL,1),
+ (8371,'E080901','BM 1789K','Normal',NULL,NULL,NULL,1),
+ (8372,'E080941','06-428348','Normal',NULL,NULL,NULL,1),
+ (8373,'E080971','BM 1276K','Normal',NULL,NULL,NULL,1),
+ (8374,'E080981','BM 2500K','Normal',NULL,NULL,NULL,1),
+ (8375,'E081001','BM 2260K','Normal',NULL,NULL,NULL,1),
+ (8376,'E081111','BM 207K','Normal',NULL,NULL,NULL,1),
+ (8377,'E081131','06-427784','Normal',NULL,NULL,NULL,1),
+ (8378,'E081151','BM 2380K','Normal',NULL,NULL,NULL,1),
+ (8379,'E081171','BM 2219K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8380,'E081181','BM 456K','Normal',NULL,NULL,NULL,1),
+ (8381,'E081191','BM 921K','Normal',NULL,NULL,NULL,1),
+ (8382,'E081201','BM 1628K','Normal',NULL,NULL,NULL,1),
+ (8383,'E081241','BM 1161K','Normal',NULL,NULL,NULL,1),
+ (8384,'E081301','BM 2301K','Normal',NULL,NULL,NULL,1),
+ (8385,'E081341','13 09544034','Normal',NULL,NULL,NULL,1),
+ (8386,'E081361','146602','Normal',NULL,NULL,NULL,1),
+ (8387,'E081371','148517','Normal',NULL,NULL,NULL,1),
+ (8388,'E081401','TMP-00000024','Normal',NULL,NULL,NULL,1),
+ (8389,'E081451','BM 2396K','Normal',NULL,NULL,NULL,1),
+ (8390,'E081481','BM 1472K','Normal',NULL,NULL,NULL,1),
+ (8391,'E081511','BM 229K','Normal',NULL,NULL,NULL,1),
+ (8392,'E081531','BM 2436K','Normal',NULL,NULL,NULL,1),
+ (8393,'E081561','BM 903K','Normal',NULL,NULL,NULL,1),
+ (8394,'E081571','BM 1134K','Normal',NULL,NULL,NULL,1),
+ (8395,'E081581','13 09544464','Normal',NULL,NULL,NULL,1),
+ (8396,'E081591','BM 1961K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8397,'E081601','BM 1003K','Normal',NULL,NULL,NULL,1),
+ (8398,'E081631','BM 1610K','Normal',NULL,NULL,NULL,1),
+ (8399,'E081641','BM 977K','Normal',NULL,NULL,NULL,1),
+ (8400,'E081661','BM 1933K','Normal',NULL,NULL,NULL,1),
+ (8401,'E081681','BM 1543K','Normal',NULL,NULL,NULL,1),
+ (8402,'E081721','BM 332K','Normal',NULL,NULL,NULL,1),
+ (8403,'E081731','BM 1950K','Normal',NULL,NULL,NULL,1),
+ (8404,'E081741','BM 568K','Normal',NULL,NULL,NULL,1),
+ (8405,'E081751','BM 1887K','Normal',NULL,NULL,NULL,1),
+ (8406,'E081761','40017497','Normal',NULL,NULL,NULL,1),
+ (8407,'E081771','BM 2530K','Normal',NULL,NULL,NULL,1),
+ (8408,'E081791','BM 1775K','Normal',NULL,NULL,NULL,1),
+ (8409,'E081811','BM 609K','Normal',NULL,NULL,NULL,1),
+ (8410,'E081841','825685','Normal',NULL,NULL,NULL,1),
+ (8411,'E081851','BM 1131K','Normal',NULL,NULL,NULL,1),
+ (8412,'E081881','BM 545K','Normal',NULL,NULL,NULL,1),
+ (8413,'E081891','BM 17K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8414,'E081901','BM 1631K','Normal',NULL,NULL,NULL,1),
+ (8415,'E081931','147955','Normal',NULL,NULL,NULL,1),
+ (8416,'E081951','148793','Normal',NULL,NULL,NULL,1),
+ (8417,'E081991','TMP-00000022','Normal',NULL,NULL,NULL,1),
+ (8418,'E090021','BM 1881K','Normal',NULL,NULL,NULL,1),
+ (8419,'E090061','147186','Normal',NULL,NULL,NULL,1),
+ (8420,'E090071','13 09544486','Normal',NULL,NULL,NULL,1),
+ (8421,'E090081','BM 1883K','Normal',NULL,NULL,NULL,1),
+ (8422,'E090091','13 09544557','Normal',NULL,NULL,NULL,1),
+ (8423,'E090101','13 09544204','Normal',NULL,NULL,NULL,1),
+ (8424,'E090151','1309544441','Normal',NULL,NULL,NULL,1),
+ (8425,'E090171','BM 1556K','Normal',NULL,NULL,NULL,1),
+ (8426,'E090191','TMP-00000027','Normal',NULL,NULL,NULL,1),
+ (8427,'E090201','BM 2020K','Normal',NULL,NULL,NULL,1),
+ (8428,'E090221','BM 1544K','Normal',NULL,NULL,NULL,1),
+ (8429,'E090241','BM 860K','Normal',NULL,NULL,NULL,1),
+ (8430,'E090271','BM 2793K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8431,'E090301','148798','Normal',NULL,NULL,NULL,1),
+ (8432,'E090341','BM 1309K','Normal',NULL,NULL,NULL,1),
+ (8433,'E090351','13 09544319','Normal',NULL,NULL,NULL,1),
+ (8434,'E090381','BM 2561K','Normal',NULL,NULL,NULL,1),
+ (8435,'E090391','13 09544038','Normal',NULL,NULL,NULL,1),
+ (8436,'E090431','148792','Normal',NULL,NULL,NULL,1),
+ (8437,'E090441','147314','Normal',NULL,NULL,NULL,1),
+ (8438,'E090461','1309544363','Normal',NULL,NULL,NULL,1),
+ (8439,'E090491','BM 1764K','Normal',NULL,NULL,NULL,1),
+ (8440,'E090501','1309544593','Normal',NULL,NULL,NULL,1),
+ (8441,'E090511','BM 1681K','Normal',NULL,NULL,NULL,1),
+ (8442,'E090531','06-429216','Normal',NULL,NULL,NULL,1),
+ (8443,'E090541','06-428943','Normal',NULL,NULL,NULL,1),
+ (8444,'E090551','06-429211','Normal',NULL,NULL,NULL,1),
+ (8445,'E090561','06-428703','Normal',NULL,NULL,NULL,1),
+ (8446,'E090571','13 09544355','Normal',NULL,NULL,NULL,1),
+ (8447,'E090581','02-834663','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8448,'E090591','06-427734','Normal',NULL,NULL,NULL,1),
+ (8449,'E090601','06-428946','Normal',NULL,NULL,NULL,1),
+ (8450,'E090611','BM 248K','Normal',NULL,NULL,NULL,1),
+ (8451,'E090631','BM 1821K','Normal',NULL,NULL,NULL,1),
+ (8452,'E090641','147051','Normal',NULL,NULL,NULL,1),
+ (8453,'E090661','','Normal',NULL,NULL,NULL,1),
+ (8454,'E090681','BM 1629K','Normal',NULL,NULL,NULL,1),
+ (8455,'E090701','1309544478','Normal',NULL,NULL,NULL,1),
+ (8456,'E090721','BM 2365K','Normal',NULL,NULL,NULL,1),
+ (8457,'E090741','13 09544694','Normal',NULL,NULL,NULL,1),
+ (8458,'E090791','13 09544297','Normal',NULL,NULL,NULL,1),
+ (8459,'E090801','BM 390K','Normal',NULL,NULL,NULL,1),
+ (8460,'E090821','13 09544606','Normal',NULL,NULL,NULL,1),
+ (8461,'E090841','BM 2362K','Normal',NULL,NULL,NULL,1),
+ (8462,'E090881','148800','Normal',NULL,NULL,NULL,1),
+ (8463,'E090901','147311','Normal',NULL,NULL,NULL,1),
+ (8464,'E090961','1309544097','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8465,'E090971','BM 1642K','Normal',NULL,NULL,NULL,1),
+ (8466,'E090981','147546','Normal',NULL,NULL,NULL,1),
+ (8467,'E091011','BM 1462K','Normal',NULL,NULL,NULL,1),
+ (8468,'E091021','BM 352K','Normal',NULL,NULL,NULL,1),
+ (8469,'E091051','BM 2476K','Normal',NULL,NULL,NULL,1),
+ (8470,'E091061','13 09544580','Normal',NULL,NULL,NULL,1),
+ (8471,'E091071','BM 717K','Normal',NULL,NULL,NULL,1),
+ (8472,'E091081','40017498','Normal',NULL,NULL,NULL,1),
+ (8473,'E091111','1309544646','Normal',NULL,NULL,NULL,1),
+ (8474,'E091121','BM 1890K','Normal',NULL,NULL,NULL,1),
+ (8475,'E091141','13 09544361','Normal',NULL,NULL,NULL,1),
+ (8476,'E091161','6151619','Normal',NULL,NULL,NULL,1),
+ (8477,'E091171','40017457','Normal',NULL,NULL,NULL,1),
+ (8478,'E091181','BM 2120K','Normal',NULL,NULL,NULL,1),
+ (8479,'E091191','1309544085','Normal',NULL,NULL,NULL,1),
+ (8480,'E091221','BM 2137K','Normal',NULL,NULL,NULL,1),
+ (8481,'E091241','BM 2724K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8482,'E091251','BM 752K','Normal',NULL,NULL,NULL,1),
+ (8483,'E091261','BM 1847K','Normal',NULL,NULL,NULL,1),
+ (8484,'E091281','146967','Normal',NULL,NULL,NULL,1),
+ (8485,'E091291','BM 364K','Normal',NULL,NULL,NULL,1),
+ (8486,'E091301','BM 010K','Normal',NULL,NULL,NULL,1),
+ (8487,'E091311','13 09544617','Normal',NULL,NULL,NULL,1),
+ (8488,'E091341','TMP-00000720','Normal',NULL,NULL,NULL,1),
+ (8489,'E091421','148658','Normal',NULL,NULL,NULL,1),
+ (8490,'E091431','BM 2017K','Normal',NULL,NULL,NULL,1),
+ (8491,'E091461','146928','Normal',NULL,NULL,NULL,1),
+ (8492,'E091481','06-427779','Normal',NULL,NULL,NULL,1),
+ (8493,'E091491','BM 1465K','Normal',NULL,NULL,NULL,1),
+ (8494,'E091501','BM 1168K','Normal',NULL,NULL,NULL,1),
+ (8495,'E091511','BM 022K','Normal',NULL,NULL,NULL,1),
+ (8496,'E091531','BM 1968K','Normal',NULL,NULL,NULL,1),
+ (8497,'E091551','BM 2746K','Normal',NULL,NULL,NULL,1),
+ (8498,'E091571','BM 746K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8499,'E091591','1309544357','Normal',NULL,NULL,NULL,1),
+ (8500,'E091601','BM 2055K','Normal',NULL,NULL,NULL,1),
+ (8501,'E091621','BM 2379K','Normal',NULL,NULL,NULL,1),
+ (8502,'E091651','BM 1436K','Normal',NULL,NULL,NULL,1),
+ (8503,'E091661','13 09544311','Normal',NULL,NULL,NULL,1),
+ (8504,'E091671','128284','Normal',NULL,NULL,NULL,1),
+ (8505,'E091681','BM 2236K','Normal',NULL,NULL,NULL,1),
+ (8506,'E091691','BM 715K','Normal',NULL,NULL,NULL,1),
+ (8507,'E091711','BM 210K','Normal',NULL,NULL,NULL,1),
+ (8508,'E091721','40017419','Normal',NULL,NULL,NULL,1),
+ (8509,'E091731','146607','Normal',NULL,NULL,NULL,1),
+ (8510,'E091741','1309544400','Normal',NULL,NULL,NULL,1),
+ (8511,'E091761','BM 1494K','Normal',NULL,NULL,NULL,1),
+ (8512,'E091771','147542','Normal',NULL,NULL,NULL,1),
+ (8513,'E091791','13 09544309','Normal',NULL,NULL,NULL,1),
+ (8514,'E091801','BM 1188K','Normal',NULL,NULL,NULL,1),
+ (8515,'E091821','147318','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8516,'E091831','BM 506K','Normal',NULL,NULL,NULL,1),
+ (8517,'E091841','BM 1284K','Normal',NULL,NULL,NULL,1),
+ (8518,'E091861','06-428544','Normal',NULL,NULL,NULL,1),
+ (8519,'E091871','BM 2181K','Normal',NULL,NULL,NULL,1),
+ (8520,'E091891','BM 2624K','Normal',NULL,NULL,NULL,1),
+ (8521,'E091901','071202256','Normal',NULL,NULL,NULL,1),
+ (8522,'E091911','06-427438','Normal',NULL,NULL,NULL,1),
+ (8523,'E091931','06-427433','Normal',NULL,NULL,NULL,1),
+ (8524,'E091971','BM 621K','Normal',NULL,NULL,NULL,1),
+ (8525,'E091981','13 09544135','Normal',NULL,NULL,NULL,1),
+ (8526,'E091991','BM 2497K','Normal',NULL,NULL,NULL,1),
+ (8527,'E100061','BM 065K','Normal',NULL,NULL,NULL,1),
+ (8528,'E100101','BM 183K','Normal',NULL,NULL,NULL,1),
+ (8529,'E100121','BM 592K','Normal',NULL,NULL,NULL,1),
+ (8530,'E100171','BM 59K','Normal',NULL,NULL,NULL,1),
+ (8531,'E100251','BM 2680K','Normal',NULL,NULL,NULL,1),
+ (8532,'E100391','BM 251K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8533,'E100411','BM 1825K','Normal',NULL,NULL,NULL,1),
+ (8534,'E100441','BM 404K','Normal',NULL,NULL,NULL,1),
+ (8535,'E100531','BM 2128K','Normal',NULL,NULL,NULL,1),
+ (8536,'E100551','BM2128K','Normal',NULL,NULL,NULL,1),
+ (8537,'E100561','BM 522K','Normal',NULL,NULL,NULL,1),
+ (8538,'E100591','BM 1388K','Normal',NULL,NULL,NULL,1),
+ (8539,'E100811','BM 944K','Normal',NULL,NULL,NULL,1),
+ (8540,'E100821','BM 1547K','Normal',NULL,NULL,NULL,1),
+ (8541,'E100851','BM 1128K','Normal',NULL,NULL,NULL,1),
+ (8542,'E100891','BM 1998K','Normal',NULL,NULL,NULL,1),
+ (8543,'E100911','BM 1145K','Normal',NULL,NULL,NULL,1),
+ (8544,'E101011','BM 1095K','Normal',NULL,NULL,NULL,1),
+ (8545,'E101051','BM 2662K','Normal',NULL,NULL,NULL,1),
+ (8546,'E101061','BM 013K','Normal',NULL,NULL,NULL,1),
+ (8547,'E101071','13 09544253','Normal',NULL,NULL,NULL,1),
+ (8548,'E101141','13 09544455','Normal',NULL,NULL,NULL,1),
+ (8549,'E101161','BM 1608K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8550,'E101171','BM 1684K','Normal',NULL,NULL,NULL,1),
+ (8551,'E101321','BM 2800K','Normal',NULL,NULL,NULL,1),
+ (8552,'E101371','BM 1014K','Normal',NULL,NULL,NULL,1),
+ (8553,'E101471','BM 2109K','Normal',NULL,NULL,NULL,1),
+ (8554,'E101571','BM 214K','Normal',NULL,NULL,NULL,1),
+ (8555,'E101591','BM 1405K','Normal',NULL,NULL,NULL,1),
+ (8556,'E101681','BM 409K','Normal',NULL,NULL,NULL,1),
+ (8557,'E101731','BM 212K','Normal',NULL,NULL,NULL,1),
+ (8558,'E101741','BM 2700K','Normal',NULL,NULL,NULL,1),
+ (8559,'E101891','BM 1394K','Normal',NULL,NULL,NULL,1),
+ (8560,'E101921','BM 822K','Normal',NULL,NULL,NULL,1),
+ (8561,'E101981','BM 2419K','Normal',NULL,NULL,NULL,1),
+ (8562,'E102001','BM 935K','Normal',NULL,NULL,NULL,1),
+ (8563,'E110031','BM 2111K','Normal',NULL,NULL,NULL,1),
+ (8564,'E110071','BM 490K','Normal',NULL,NULL,NULL,1),
+ (8565,'E110231','40017437','Normal',NULL,NULL,NULL,1),
+ (8566,'E110291','BM 2304K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8567,'E110341','BM 2159K','Normal',NULL,NULL,NULL,1),
+ (8568,'E110381','1309544511','Normal',NULL,NULL,NULL,1),
+ (8569,'E110391','BM 754K','Normal',NULL,NULL,NULL,1),
+ (8570,'E110451','BM 362K','Normal',NULL,NULL,NULL,1),
+ (8571,'E110491','BM 1302K','Normal',NULL,NULL,NULL,1),
+ (8572,'E110611','BM 2444K','Normal',NULL,NULL,NULL,1),
+ (8573,'E110711','BM 1070K','Normal',NULL,NULL,NULL,1),
+ (8574,'E110731','BM 773K','Normal',NULL,NULL,NULL,1),
+ (8575,'E110751','06-428553','Normal',NULL,NULL,NULL,1),
+ (8576,'E110821','BM 370K','Normal',NULL,NULL,NULL,1),
+ (8577,'E110881','1309544043','Normal',NULL,NULL,NULL,1),
+ (8578,'E110921','BM 1449K','Normal',NULL,NULL,NULL,1),
+ (8579,'E110951','BM 1690K','Normal',NULL,NULL,NULL,1),
+ (8580,'E111081','BM 1193K','Normal',NULL,NULL,NULL,1),
+ (8581,'E111181','BM 2643K','Normal',NULL,NULL,NULL,1),
+ (8582,'E111191','BM 1474K','Normal',NULL,NULL,NULL,1),
+ (8583,'E111221','BM 2466K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8584,'E111261','BM 1525K','Normal',NULL,NULL,NULL,1),
+ (8585,'E111341','BM 1699K','Normal',NULL,NULL,NULL,1),
+ (8586,'E111371','BM 55K','Normal',NULL,NULL,NULL,1),
+ (8587,'E111381','BM 2349K','Normal',NULL,NULL,NULL,1),
+ (8588,'E111391','BM 1384K','Normal',NULL,NULL,NULL,1),
+ (8589,'E111461','BM 1322K','Normal',NULL,NULL,NULL,1),
+ (8590,'E111471','BM 1492K','Normal',NULL,NULL,NULL,1),
+ (8591,'E111521','BM 1927K','Normal',NULL,NULL,NULL,1),
+ (8592,'E111551','13 09544223','Normal',NULL,NULL,NULL,1),
+ (8593,'E111581','BM 38K','Normal',NULL,NULL,NULL,1),
+ (8594,'E111621','BM 2622K','Normal',NULL,NULL,NULL,1),
+ (8595,'E111811','BM 243K','Normal',NULL,NULL,NULL,1),
+ (8596,'E111821','BM 2037K','Normal',NULL,NULL,NULL,1),
+ (8597,'E111831','BM 2685K','Normal',NULL,NULL,NULL,1),
+ (8598,'E111841','13 09544445','Normal',NULL,NULL,NULL,1),
+ (8599,'E111861','BM 1588K','Normal',NULL,NULL,NULL,1),
+ (8600,'E111871','BM 1221K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8601,'E112001','06-427531','Normal',NULL,NULL,NULL,1),
+ (8602,'E120091','BM 2691K','Normal',NULL,NULL,NULL,1),
+ (8603,'E120131','BM 2288K','Normal',NULL,NULL,NULL,1),
+ (8604,'E120161','1309544390','Normal',NULL,NULL,NULL,1),
+ (8605,'E120171','BM 1535K','Normal',NULL,NULL,NULL,1),
+ (8606,'E120211','1309544215','Normal',NULL,NULL,NULL,1),
+ (8607,'E120301','BM 749K','Normal',NULL,NULL,NULL,1),
+ (8608,'E120321','BM 733K','Normal',NULL,NULL,NULL,1),
+ (8609,'E120341','1309544301','Normal',NULL,NULL,NULL,1),
+ (8610,'E120351','E12-035-1','Normal',NULL,NULL,NULL,1),
+ (8611,'E120471','BM 2366K','Normal',NULL,NULL,NULL,1),
+ (8612,'E120561','BM 491K','Normal',NULL,NULL,NULL,1),
+ (8613,'E120601','BM 2601K','Normal',NULL,NULL,NULL,1),
+ (8614,'E120631','BM 1310K','Normal',NULL,NULL,NULL,1),
+ (8615,'E120651','BM 275K','Normal',NULL,NULL,NULL,1),
+ (8616,'E120671','BM 542K','Normal',NULL,NULL,NULL,1),
+ (8617,'E120721','BM 2762K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8618,'E120731','BM 2592K','Normal',NULL,NULL,NULL,1),
+ (8619,'E120771','BM 2669K','Normal',NULL,NULL,NULL,1),
+ (8620,'E120791','BM 1870K','Normal',NULL,NULL,NULL,1),
+ (8621,'E120801','BM 1364K','Normal',NULL,NULL,NULL,1),
+ (8622,'E120851','BM 1935K','Normal',NULL,NULL,NULL,1),
+ (8623,'E120891','BM 1082K','Normal',NULL,NULL,NULL,1),
+ (8624,'E120901','BM 186K','Normal',NULL,NULL,NULL,1),
+ (8625,'E120911','13 09544192','Normal',NULL,NULL,NULL,1),
+ (8626,'E120931','BM 615K','Normal',NULL,NULL,NULL,1),
+ (8627,'E120941','BM 114K','Normal',NULL,NULL,NULL,1),
+ (8628,'E120951','BM 978K','Normal',NULL,NULL,NULL,1),
+ (8629,'E120961','BM 2779K','Normal',NULL,NULL,NULL,1),
+ (8630,'E120971','BM 466K','Normal',NULL,NULL,NULL,1),
+ (8631,'E120981','BM 262K','Normal',NULL,NULL,NULL,1),
+ (8632,'E121021','13 09544036','Normal',NULL,NULL,NULL,1),
+ (8633,'E121051','BM 885K','Normal',NULL,NULL,NULL,1),
+ (8634,'E121061','BM 1700K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8635,'E121091','BM 1976K','Normal',NULL,NULL,NULL,1),
+ (8636,'E121141','BM 2730K','Normal',NULL,NULL,NULL,1),
+ (8637,'E121171','071200773','Normal',NULL,NULL,NULL,1),
+ (8638,'E121211','BM 2217K','Normal',NULL,NULL,NULL,1),
+ (8639,'E121221','BM 1000K','Normal',NULL,NULL,NULL,1),
+ (8640,'E121231','40017465','Normal',NULL,NULL,NULL,1),
+ (8641,'E121281','BM 2713K','Normal',NULL,NULL,NULL,1),
+ (8642,'E121351','02-377950','Normal',NULL,NULL,NULL,1),
+ (8643,'E121361','BM 1840K','Normal',NULL,NULL,NULL,1),
+ (8644,'E121381','BM 2414K','Normal',NULL,NULL,NULL,1),
+ (8645,'E121451','1309544506','Normal',NULL,NULL,NULL,1),
+ (8646,'E121461','BM 870K','Normal',NULL,NULL,NULL,1),
+ (8647,'E121481','BM 1696K','Normal',NULL,NULL,NULL,1),
+ (8648,'E121491','BM 1445K','Normal',NULL,NULL,NULL,1),
+ (8649,'E121561','BM 2390K','Normal',NULL,NULL,NULL,1),
+ (8650,'E121571','BM 1889K','Normal',NULL,NULL,NULL,1),
+ (8651,'E121621','BM 2709K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8652,'E121631','BM 1507K','Normal',NULL,NULL,NULL,1),
+ (8653,'E121661','BM 2540K','Normal',NULL,NULL,NULL,1),
+ (8654,'E121691','BM 2405K','Normal',NULL,NULL,NULL,1),
+ (8655,'E121711','BM 1396K','Normal',NULL,NULL,NULL,1),
+ (8656,'E121721','BM 1148K','Normal',NULL,NULL,NULL,1),
+ (8657,'E121741','13 09544199','Normal',NULL,NULL,NULL,1),
+ (8658,'E121801','BM 2004K','Normal',NULL,NULL,NULL,1),
+ (8659,'E121811','BM 2600K','Normal',NULL,NULL,NULL,1),
+ (8660,'E121831','BM 1245K','Normal',NULL,NULL,NULL,1),
+ (8661,'E121881','BM 1426K','Normal',NULL,NULL,NULL,1),
+ (8662,'E121891','0756815259','Normal',NULL,NULL,NULL,1),
+ (8663,'E121941','BM 1307K','Normal',NULL,NULL,NULL,1),
+ (8664,'E121991','BM 389K','Normal',NULL,NULL,NULL,1),
+ (8665,'E122001','13 09544583','Normal',NULL,NULL,NULL,1),
+ (8666,'E130011','BM 1803K','Normal',NULL,NULL,NULL,1),
+ (8667,'E130021','BM 2228K','Normal',NULL,NULL,NULL,1),
+ (8668,'E130041','BM 2227K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8669,'E130071','BM 1178K','Normal',NULL,NULL,NULL,1),
+ (8670,'E130151','BM 833K','Normal',NULL,NULL,NULL,1),
+ (8671,'E130171','BM 83K','Normal',NULL,NULL,NULL,1),
+ (8672,'E130201','BM 1411K','Normal',NULL,NULL,NULL,1),
+ (8673,'E130211','BM 001K','Normal',NULL,NULL,NULL,1),
+ (8674,'E130221','BM 862K','Normal',NULL,NULL,NULL,1),
+ (8675,'E130231','BM 2155K','Normal',NULL,NULL,NULL,1),
+ (8676,'E130261','BM 521K','Normal',NULL,NULL,NULL,1),
+ (8677,'E130301','BM 1016K','Normal',NULL,NULL,NULL,1),
+ (8678,'E130361','BM 1450K','Normal',NULL,NULL,NULL,1),
+ (8679,'E130371','BM 1683K','Normal',NULL,NULL,NULL,1),
+ (8680,'E130391','BM 781K','Normal',NULL,NULL,NULL,1),
+ (8681,'E130401','BM 2069K','Normal',NULL,NULL,NULL,1),
+ (8682,'E130411','BM 622K','Normal',NULL,NULL,NULL,1),
+ (8683,'E130441','BM 2589K','Normal',NULL,NULL,NULL,1),
+ (8684,'E130461','BM 1571K','Normal',NULL,NULL,NULL,1),
+ (8685,'E130481','BM 1376K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8686,'E130511','BM 1356K','Normal',NULL,NULL,NULL,1),
+ (8687,'E130561','BM 1278K','Normal',NULL,NULL,NULL,1),
+ (8688,'E130581','BM 2486K','Normal',NULL,NULL,NULL,1),
+ (8689,'E130611','BM 654K','Normal',NULL,NULL,NULL,1),
+ (8690,'E130621','BM 2758K','Normal',NULL,NULL,NULL,1),
+ (8691,'E130641','1309544298','Normal',NULL,NULL,NULL,1),
+ (8692,'E130671','13 09544327','Normal',NULL,NULL,NULL,1),
+ (8693,'E130701','BM 007K','Normal',NULL,NULL,NULL,1),
+ (8694,'E130721','BM 448K','Normal',NULL,NULL,NULL,1),
+ (8695,'E130731','BM 1869K','Normal',NULL,NULL,NULL,1),
+ (8696,'E130771','BM 2336K','Normal',NULL,NULL,NULL,1),
+ (8697,'E130811','BM 2485K','Normal',NULL,NULL,NULL,1),
+ (8698,'E130831','BM 827K','Normal',NULL,NULL,NULL,1),
+ (8699,'E130851','BM 1646K','Normal',NULL,NULL,NULL,1),
+ (8700,'E130881','BM 2091K','Normal',NULL,NULL,NULL,1),
+ (8701,'E130901','BM 765K','Normal',NULL,NULL,NULL,1),
+ (8702,'E130921','BM 1502K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8703,'E130951','BM 1331K','Normal',NULL,NULL,NULL,1),
+ (8704,'E130961','BM 2204K','Normal',NULL,NULL,NULL,1),
+ (8705,'E130971','BM 1222K','Normal',NULL,NULL,NULL,1),
+ (8706,'E130981','BM 699K','Normal',NULL,NULL,NULL,1),
+ (8707,'E131001','BM 52K','Normal',NULL,NULL,NULL,1),
+ (8708,'E131011','BM 486K','Normal',NULL,NULL,NULL,1),
+ (8709,'E131031','BM 2282K','Normal',NULL,NULL,NULL,1),
+ (8710,'E131041','BM 1575K','Normal',NULL,NULL,NULL,1),
+ (8711,'E131061','BM 1267K','Normal',NULL,NULL,NULL,1),
+ (8712,'E131071','BM 310K','Normal',NULL,NULL,NULL,1),
+ (8713,'E131181','BM 1861K','Normal',NULL,NULL,NULL,1),
+ (8714,'E131321','13 09544403','Normal',NULL,NULL,NULL,1),
+ (8715,'E131381','13 09544499','Normal',NULL,NULL,NULL,1),
+ (8716,'E131431','13 09544578','Normal',NULL,NULL,NULL,1),
+ (8717,'E131441','BM 2468K','Normal',NULL,NULL,NULL,1),
+ (8718,'E131461','BM 1885K','Normal',NULL,NULL,NULL,1),
+ (8719,'E131491','13 09544442','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8720,'E131511','BM 278K','Normal',NULL,NULL,NULL,1),
+ (8721,'E131551','BM 1011K','Normal',NULL,NULL,NULL,1),
+ (8722,'E131581','BM 381K','Normal',NULL,NULL,NULL,1),
+ (8723,'E131591','BM 2289K','Normal',NULL,NULL,NULL,1),
+ (8724,'E131601','BM 2175K','Normal',NULL,NULL,NULL,1),
+ (8725,'E131611','BM 031K','Normal',NULL,NULL,NULL,1),
+ (8726,'E131671','BM 1545K','Normal',NULL,NULL,NULL,1),
+ (8727,'E131761','BM 711K','Normal',NULL,NULL,NULL,1),
+ (8728,'E131791','BM 947K','Normal',NULL,NULL,NULL,1),
+ (8729,'E131831','BM 1866K','Normal',NULL,NULL,NULL,1),
+ (8730,'E131921','BM 2392K','Normal',NULL,NULL,NULL,1),
+ (8731,'E132041','BM 353K','Normal',NULL,NULL,NULL,1),
+ (8732,'E132051','1309544250','Normal',NULL,NULL,NULL,1),
+ (8733,'E132061','BM 201K','Normal',NULL,NULL,NULL,1),
+ (8734,'E132071','BM 222K','Normal',NULL,NULL,NULL,1),
+ (8735,'E140031','BM 339K','Normal',NULL,NULL,NULL,1),
+ (8736,'E140101','BM 729K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8737,'E140181','13 09544251','Normal',NULL,NULL,NULL,1),
+ (8738,'E140231','BM 2613K','Normal',NULL,NULL,NULL,1),
+ (8739,'E140381','BM 1192K','Normal',NULL,NULL,NULL,1),
+ (8740,'E140401','BM 2118K','Normal',NULL,NULL,NULL,1),
+ (8741,'E140491','BM 873K','Normal',NULL,NULL,NULL,1),
+ (8742,'E140501','13 09544471','Normal',NULL,NULL,NULL,1),
+ (8743,'E140571','BM 999K','Normal',NULL,NULL,NULL,1),
+ (8744,'E140601','BM 249K','Normal',NULL,NULL,NULL,1),
+ (8745,'E140641','13 09544078','Normal',NULL,NULL,NULL,1),
+ (8746,'E140661','BM 1330K','Normal',NULL,NULL,NULL,1),
+ (8747,'E140701','PM-100700513','Normal',NULL,NULL,NULL,1),
+ (8748,'E140731','BM 2249K','Normal',NULL,NULL,NULL,1),
+ (8749,'E140751','06-427970','Normal',NULL,NULL,NULL,1),
+ (8750,'E140891','13 09544228','Normal',NULL,NULL,NULL,1),
+ (8751,'E141091','BM 1009K','Normal',NULL,NULL,NULL,1),
+ (8752,'E141111','06-427925','Normal',NULL,NULL,NULL,1),
+ (8753,'E141131','BM 653K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8754,'E141141','BM 2150K','Normal',NULL,NULL,NULL,1),
+ (8755,'E141171','BM 2619K','Normal',NULL,NULL,NULL,1),
+ (8756,'E141191','BM 2268K','Normal',NULL,NULL,NULL,1),
+ (8757,'E141201','BM 2296K','Normal',NULL,NULL,NULL,1),
+ (8758,'E141231','BM 1353K','Normal',NULL,NULL,NULL,1),
+ (8759,'E141241','BM 1048K','Normal',NULL,NULL,NULL,1),
+ (8760,'E141251','BM 1910K','Normal',NULL,NULL,NULL,1),
+ (8761,'E141261','BM 1382K','Normal',NULL,NULL,NULL,1),
+ (8762,'E141291','BM 387K','Normal',NULL,NULL,NULL,1),
+ (8763,'E141311','02-378178','Normal',NULL,NULL,NULL,1),
+ (8764,'E141341','02-377908','Normal',NULL,NULL,NULL,1),
+ (8765,'E141371','BM 1994K','Normal',NULL,NULL,NULL,1),
+ (8766,'E141381','02-377939','Normal',NULL,NULL,NULL,1),
+ (8767,'E141401','BM 2769K','Normal',NULL,NULL,NULL,1),
+ (8768,'E141411','BM 1341K','Normal',NULL,NULL,NULL,1),
+ (8769,'E141451','BM 1187K','Normal',NULL,NULL,NULL,1),
+ (8770,'E141461','13 09544596','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8771,'E141481','BM 1576K','Normal',NULL,NULL,NULL,1),
+ (8772,'E141491','02-378179','Normal',NULL,NULL,NULL,1),
+ (8773,'E141501','BM 1649K','Normal',NULL,NULL,NULL,1),
+ (8774,'E141511','BM 1121K','Normal',NULL,NULL,NULL,1),
+ (8775,'E141531','BM 2609K','Normal',NULL,NULL,NULL,1),
+ (8776,'E141541','BM 986K','Normal',NULL,NULL,NULL,1),
+ (8777,'E141551','BM 629K','Normal',NULL,NULL,NULL,1),
+ (8778,'E141561','BM 1737K','Normal',NULL,NULL,NULL,1),
+ (8779,'E141571','BM 2570K','Normal',NULL,NULL,NULL,1),
+ (8780,'E141581','BM 1715K','Normal',NULL,NULL,NULL,1),
+ (8781,'E141591','BM 331K','Normal',NULL,NULL,NULL,1),
+ (8782,'E141601','BM 2106K','Normal',NULL,NULL,NULL,1),
+ (8783,'E141611','BM 1139K','Normal',NULL,NULL,NULL,1),
+ (8784,'E141621','BM 300K','Normal',NULL,NULL,NULL,1),
+ (8785,'E141631','BM 1087K','Normal',NULL,NULL,NULL,1),
+ (8786,'E141641','BM954K','Normal',NULL,NULL,NULL,1),
+ (8787,'E141671','BM 2097K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8788,'E141681','BM 1469K','Normal',NULL,NULL,NULL,1),
+ (8789,'E141691','BM 1952K','Normal',NULL,NULL,NULL,1),
+ (8790,'E141721','BM 1091K','Normal',NULL,NULL,NULL,1),
+ (8791,'E141731','BM 637K','Normal',NULL,NULL,NULL,1),
+ (8792,'E141741','BM 1400K','Normal',NULL,NULL,NULL,1),
+ (8793,'E141751','BM 1067K','Normal',NULL,NULL,NULL,1),
+ (8794,'E141761','BM 2582K','Normal',NULL,NULL,NULL,1),
+ (8795,'E141771','BM 163K','Normal',NULL,NULL,NULL,1),
+ (8796,'E141781','BM 363K','Normal',NULL,NULL,NULL,1),
+ (8797,'E141801','BM 2273K','Normal',NULL,NULL,NULL,1),
+ (8798,'E141811','BM 607K','Normal',NULL,NULL,NULL,1),
+ (8799,'E141821','BM 351K','Normal',NULL,NULL,NULL,1),
+ (8800,'E141831','BM 2513K','Normal',NULL,NULL,NULL,1),
+ (8801,'E141841','BM 2754K','Normal',NULL,NULL,NULL,1),
+ (8802,'E141871','BM 508K','Normal',NULL,NULL,NULL,1),
+ (8803,'E141901','BM 1704K','Normal',NULL,NULL,NULL,1),
+ (8804,'E141911','BM 2620K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8805,'E141921','BM 2394K','Normal',NULL,NULL,NULL,1),
+ (8806,'E141941','BM 1630K','Normal',NULL,NULL,NULL,1),
+ (8807,'E141961','13 09544106','Normal',NULL,NULL,NULL,1),
+ (8808,'E141971','BM 056K','Normal',NULL,NULL,NULL,1),
+ (8809,'E141991','13 09544674','Normal',NULL,NULL,NULL,1),
+ (8810,'E142001','1309544080','Normal',NULL,NULL,NULL,1),
+ (8811,'E150031','BM 2606K','Normal',NULL,NULL,NULL,1),
+ (8812,'E150041','BM 720K','Normal',NULL,NULL,NULL,1),
+ (8813,'E150051','BM 2144K','Normal',NULL,NULL,NULL,1),
+ (8814,'E150081','BM 1907K','Normal',NULL,NULL,NULL,1),
+ (8815,'E150091','1309544657','Normal',NULL,NULL,NULL,1),
+ (8816,'E150101','BM 1479K','Normal',NULL,NULL,NULL,1),
+ (8817,'E150111','BM 1908K','Normal',NULL,NULL,NULL,1),
+ (8818,'E150131','temp 1204','Normal',NULL,NULL,NULL,1),
+ (8819,'E150141','BM 849K','Normal',NULL,NULL,NULL,1),
+ (8820,'E150161','BM 407K','Normal',NULL,NULL,NULL,1),
+ (8821,'E150191','40011419','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8822,'E150211','BM 899K','Normal',NULL,NULL,NULL,1),
+ (8823,'E150231','BM 769K','Normal',NULL,NULL,NULL,1),
+ (8824,'E150261','BM 1729K','Normal',NULL,NULL,NULL,1),
+ (8825,'E150281','BM 1240K','Normal',NULL,NULL,NULL,1),
+ (8826,'E150321','TMP-0998','Normal',NULL,NULL,NULL,1),
+ (8827,'E150331','BM 1959K','Normal',NULL,NULL,NULL,1),
+ (8828,'E150361','13 09544483','Normal',NULL,NULL,NULL,1),
+ (8829,'E150371','BM 853K','Normal',NULL,NULL,NULL,1),
+ (8830,'E150381','BM 395K','Normal',NULL,NULL,NULL,1),
+ (8831,'E150391','BM 4596K','Normal',NULL,NULL,NULL,1),
+ (8832,'E150411','58638','Normal',NULL,NULL,NULL,1),
+ (8833,'E150421','55033','Normal',NULL,NULL,NULL,1),
+ (8834,'E150441','BM 1733K','Normal',NULL,NULL,NULL,1),
+ (8835,'E150451','23879','Normal',NULL,NULL,NULL,1),
+ (8836,'E150461','4890','Normal',NULL,NULL,NULL,1),
+ (8837,'E150481','23049','Normal',NULL,NULL,NULL,1),
+ (8838,'E150491','BM 2773K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8839,'E150501','04090','Normal',NULL,NULL,NULL,1),
+ (8840,'E150511','010483','Normal',NULL,NULL,NULL,1),
+ (8841,'E150521','0492','Normal',NULL,NULL,NULL,1),
+ (8842,'E150541','BM 1783K','Normal',NULL,NULL,NULL,1),
+ (8843,'E150551','ZR 02834955','Normal',NULL,NULL,NULL,1),
+ (8844,'E150571','13 09544257','Normal',NULL,NULL,NULL,1),
+ (8845,'E150581','13 09544380','Normal',NULL,NULL,NULL,1),
+ (8846,'E150591','06-427632','Normal',NULL,NULL,NULL,1),
+ (8847,'E150601','BM 1406K','Normal',NULL,NULL,NULL,1),
+ (8848,'E150611','BM 5084K','Normal',NULL,NULL,NULL,1),
+ (8849,'E150621','BM 1078K','Normal',NULL,NULL,NULL,1),
+ (8850,'E150631','BM 105K','Normal',NULL,NULL,NULL,1),
+ (8851,'E150641','BM 1404K','Normal',NULL,NULL,NULL,1),
+ (8852,'E150651','BM 1826K','Normal',NULL,NULL,NULL,1),
+ (8853,'E150681','147545','Normal',NULL,NULL,NULL,1),
+ (8854,'E150691','150312438','Normal',NULL,NULL,NULL,1),
+ (8855,'E150701','150314815','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8856,'E150711',' 6151624','Normal',NULL,NULL,NULL,1),
+ (8857,'E150741','146965','Normal',NULL,NULL,NULL,1),
+ (8858,'E150751','02-377913','Normal',NULL,NULL,NULL,1),
+ (8859,'E150761','BM 2735K','Normal',NULL,NULL,NULL,1),
+ (8860,'E150771','BM 1471K','Normal',NULL,NULL,NULL,1),
+ (8861,'E150781','BM 603K','Normal',NULL,NULL,NULL,1),
+ (8862,'E150791','BM 1524K','Normal',NULL,NULL,NULL,1),
+ (8863,'E150801','BM 855K','Normal',NULL,NULL,NULL,1),
+ (8864,'E150811','BM 1045K','Normal',NULL,NULL,NULL,1),
+ (8865,'E150831','13 09544627','Normal',NULL,NULL,NULL,1),
+ (8866,'E150841','13 09544160','Normal',NULL,NULL,NULL,1),
+ (8867,'E151351','BM 2646K','Normal',NULL,NULL,NULL,1),
+ (8868,'E151361','BM 1023K','Normal',NULL,NULL,NULL,1),
+ (8869,'E151381','BM 1063K','Normal',NULL,NULL,NULL,1),
+ (8870,'E151401','BM 761K','Normal',NULL,NULL,NULL,1),
+ (8871,'E151411','BM 1967K','Normal',NULL,NULL,NULL,1),
+ (8872,'E151421','BM 706K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8873,'E151441','BM 2082K','Normal',NULL,NULL,NULL,1),
+ (8874,'E151461','BM 285K','Normal',NULL,NULL,NULL,1),
+ (8875,'E151471','BM 549K','Normal',NULL,NULL,NULL,1),
+ (8876,'E151491','BM 2386K','Normal',NULL,NULL,NULL,1),
+ (8877,'E151501','BM 14K','Normal',NULL,NULL,NULL,1),
+ (8878,'E151511','BM 016K','Normal',NULL,NULL,NULL,1),
+ (8879,'E151531','BM 1143K','Normal',NULL,NULL,NULL,1),
+ (8880,'E151551','BM 1431K','Normal',NULL,NULL,NULL,1),
+ (8881,'E151561','BM 730K','Normal',NULL,NULL,NULL,1),
+ (8882,'E151571','BM 2224K','Normal',NULL,NULL,NULL,1),
+ (8883,'E151581','BM 2182K','Normal',NULL,NULL,NULL,1),
+ (8884,'E151591','BM 985K','Normal',NULL,NULL,NULL,1),
+ (8885,'E151601','BM 238K','Normal',NULL,NULL,NULL,1),
+ (8886,'E151611','BM 1711K','Normal',NULL,NULL,NULL,1),
+ (8887,'E151621','BM 2317K','Normal',NULL,NULL,NULL,1),
+ (8888,'E151631','BM 1701K','Normal',NULL,NULL,NULL,1),
+ (8889,'E151651','06-49673','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8890,'E151671','BM 1002K','Normal',NULL,NULL,NULL,1),
+ (8891,'E151681','BM 2425K','Normal',NULL,NULL,NULL,1),
+ (8892,'E151691','BM 027K','Normal',NULL,NULL,NULL,1),
+ (8893,'E151701','BM 2440K','Normal',NULL,NULL,NULL,1),
+ (8894,'E151711','BM 2716K','Normal',NULL,NULL,NULL,1),
+ (8895,'E151731','BM 143K','Normal',NULL,NULL,NULL,1),
+ (8896,'E151741','BM 1051K','Normal',NULL,NULL,NULL,1),
+ (8897,'E151761','BM 1326K','Normal',NULL,NULL,NULL,1),
+ (8898,'E151771','BM 2216K','Normal',NULL,NULL,NULL,1),
+ (8899,'E151781','BM 940K','Normal',NULL,NULL,NULL,1),
+ (8900,'E151791','BM 1481K','Normal',NULL,NULL,NULL,1),
+ (8901,'E151801','BM 2164K','Normal',NULL,NULL,NULL,1),
+ (8902,'E151811','BM 354K','Normal',NULL,NULL,NULL,1),
+ (8903,'E151831','BM 2477K','Normal',NULL,NULL,NULL,1),
+ (8904,'E151861','BM 1558K','Normal',NULL,NULL,NULL,1),
+ (8905,'E151871','BM 1784K','Normal',NULL,NULL,NULL,1),
+ (8906,'E151901','BM 1579K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8907,'E151911','BM 2339K','Normal',NULL,NULL,NULL,1),
+ (8908,'E151931','BM 2721K','Normal',NULL,NULL,NULL,1),
+ (8909,'E151941','BM 938K','Normal',NULL,NULL,NULL,1),
+ (8910,'E151951','BM 611K','Normal',NULL,NULL,NULL,1),
+ (8911,'E151961','BM 342K','Normal',NULL,NULL,NULL,1),
+ (8912,'E151981','BM 172K','Normal',NULL,NULL,NULL,1),
+ (8913,'E160011','BM 955K','Normal',NULL,NULL,NULL,1),
+ (8914,'E160021','BM 998K','Normal',NULL,NULL,NULL,1),
+ (8915,'E160031','13 09544234','Normal',NULL,NULL,NULL,1),
+ (8916,'E160041','BM 304K','Normal',NULL,NULL,NULL,1),
+ (8917,'E160051','BM 1060KN','Normal',NULL,NULL,NULL,1),
+ (8918,'E160061','BM 193K','Normal',NULL,NULL,NULL,1),
+ (8919,'E160081','BM 1858K','Normal',NULL,NULL,NULL,1),
+ (8920,'E160101','BM 450K','Normal',NULL,NULL,NULL,1),
+ (8921,'E160121','BM 317K','Normal',NULL,NULL,NULL,1),
+ (8922,'E160141','BM 429K','Normal',NULL,NULL,NULL,1),
+ (8923,'E160151','BM 826K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8924,'E160161','BM 664K','Normal',NULL,NULL,NULL,1),
+ (8925,'E160171','BM 43K','Normal',NULL,NULL,NULL,1),
+ (8926,'E160181','BM 1110K','Normal',NULL,NULL,NULL,1),
+ (8927,'E160201','BM 948K','Normal',NULL,NULL,NULL,1),
+ (8928,'E160211','BM 366K','Normal',NULL,NULL,NULL,1),
+ (8929,'E160281','BM 2253K','Normal',NULL,NULL,NULL,1),
+ (8930,'E160291','BM 2276K','Normal',NULL,NULL,NULL,1),
+ (8931,'E160301','11-1119716','Normal',NULL,NULL,NULL,1),
+ (8932,'E160311','BM 2072K','Normal',NULL,NULL,NULL,1),
+ (8933,'E160321','BM 824K','Normal',NULL,NULL,NULL,1),
+ (8934,'E160331','BM 2586','Normal',NULL,NULL,NULL,1),
+ (8935,'E160341','BM 175K','Normal',NULL,NULL,NULL,1),
+ (8936,'E160351','BM 173K','Normal',NULL,NULL,NULL,1),
+ (8937,'E160361','BM 1204K','Normal',NULL,NULL,NULL,1),
+ (8938,'E160371','BM 2154K','Normal',NULL,NULL,NULL,1),
+ (8939,'E160381','BM 2023K','Normal',NULL,NULL,NULL,1),
+ (8940,'E160391','BM 806K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8941,'E160401','BM 1354K','Normal',NULL,NULL,NULL,1),
+ (8942,'E160411','1309544682','Normal',NULL,NULL,NULL,1),
+ (8943,'E160441','BM 2290K','Normal',NULL,NULL,NULL,1),
+ (8944,'E160451','BM 1816K','Normal',NULL,NULL,NULL,1),
+ (8945,'E160461','BM 1802K','Normal',NULL,NULL,NULL,1),
+ (8946,'E160491','40017397','Normal',NULL,NULL,NULL,1),
+ (8947,'E160501','BM 1580K','Normal',NULL,NULL,NULL,1),
+ (8948,'E160521','BM 2722K','Normal',NULL,NULL,NULL,1),
+ (8949,'E160531','BM 485K','Normal',NULL,NULL,NULL,1),
+ (8950,'E160541','BM 2435K','Normal',NULL,NULL,NULL,1),
+ (8951,'E160551','BM 1542K','Normal',NULL,NULL,NULL,1),
+ (8952,'E160561','BM 1972K','Normal',NULL,NULL,NULL,1),
+ (8953,'E160571','BM 1593K','Normal',NULL,NULL,NULL,1),
+ (8954,'E160581','BM 294K','Normal',NULL,NULL,NULL,1),
+ (8955,'E160591','BM 571K','Normal',NULL,NULL,NULL,1),
+ (8956,'E160611','BM 1500K','Normal',NULL,NULL,NULL,1),
+ (8957,'E160621','BM 583K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8958,'E160631','BM 1932K','Normal',NULL,NULL,NULL,1),
+ (8959,'E160641','BM 1200K','Normal',NULL,NULL,NULL,1),
+ (8960,'E160661','BM 1912K','Normal',NULL,NULL,NULL,1),
+ (8961,'E160671','BM 1053K','Normal',NULL,NULL,NULL,1),
+ (8962,'E160691','BM 380K','Normal',NULL,NULL,NULL,1),
+ (8963,'E160701','BM 581K','Normal',NULL,NULL,NULL,1),
+ (8964,'E160711','BM 2269K','Normal',NULL,NULL,NULL,1),
+ (8965,'E160721','BM 888K','Normal',NULL,NULL,NULL,1),
+ (8966,'E160731','13 09544193','Normal',NULL,NULL,NULL,1),
+ (8967,'E160741','BM 1939K','Normal',NULL,NULL,NULL,1),
+ (8968,'E160751','13 09544235','Normal',NULL,NULL,NULL,1),
+ (8969,'E160761','BM 2591K','Normal',NULL,NULL,NULL,1),
+ (8970,'E160771','BM 019K','Normal',NULL,NULL,NULL,1),
+ (8971,'E160781','13 09544665','Normal',NULL,NULL,NULL,1),
+ (8972,'E160791','BM 1573K','Normal',NULL,NULL,NULL,1),
+ (8973,'E160801','1309544059','Normal',NULL,NULL,NULL,1),
+ (8974,'E160811','BM 2704K','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8975,'E160821','BM 2489K','Normal',NULL,NULL,NULL,1),
+ (8976,'E160831','BM 1055K','Normal',NULL,NULL,NULL,1),
+ (8977,'E160851','13 09544485','Normal',NULL,NULL,NULL,1),
+ (8978,'E160861','13 09544519','Normal',NULL,NULL,NULL,1),
+ (8979,'E160871','1309544218','Normal',NULL,NULL,NULL,1),
+ (8980,'E160881','1309544469','Normal',NULL,NULL,NULL,1),
+ (8981,'E160901','1309544371','Normal',NULL,NULL,NULL,1),
+ (8982,'E160921','1309544454','Normal',NULL,NULL,NULL,1),
+ (8983,'E160931','1309544631','Normal',NULL,NULL,NULL,1),
+ (8984,'E160941','13 09544653','Normal',NULL,NULL,NULL,1),
+ (8985,'E160951','1309544600','Normal',NULL,NULL,NULL,1),
+ (8986,'E160961','13 09544154','Normal',NULL,NULL,NULL,1),
+ (8987,'E160971','1309544425','Normal',NULL,NULL,NULL,1),
+ (8988,'E160991','1309544123','Normal',NULL,NULL,NULL,1),
+ (8989,'E161001','1309544527','Normal',NULL,NULL,NULL,1),
+ (8990,'E161011','1309544595','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (8991,'E161031','1309544105','Normal',NULL,NULL,NULL,1),
+ (8992,'E161041','1309544556','Normal',NULL,NULL,NULL,1),
+ (8993,'E161051','13 09544125','Normal',NULL,NULL,NULL,1),
+ (8994,'E161061','1309544081','Normal',NULL,NULL,NULL,1),
+ (8995,'E161071','1309544439','Normal',NULL,NULL,NULL,1),
+ (8996,'E161081','13 09544164','Normal',NULL,NULL,NULL,1),
+ (8997,'E161101','1309544161','Normal',NULL,NULL,NULL,1),
+ (8998,'E161121','1309544344','Normal',NULL,NULL,NULL,1),
+ (8999,'E161131','1309544431','Normal',NULL,NULL,NULL,1),
+ (9000,'E161141','13 09544282','Normal',NULL,NULL,NULL,1),
+ (9001,'E161151','1309544672','Normal',NULL,NULL,NULL,1),
+ (9002,'E161161','13 09544428','Normal',NULL,NULL,NULL,1),
+ (9003,'E161171','1309544128','Normal',NULL,NULL,NULL,1),
+ (9004,'E161181','BM 954K','Normal',NULL,NULL,NULL,1),
+ (9005,'E161201','1309544648','Normal',NULL,NULL,NULL,1),
+ (9006,'E161211','1309544650','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (9007,'E161221','1309544041','Normal',NULL,NULL,NULL,1),
+ (9008,'E161231','1309544566','Normal',NULL,NULL,NULL,1),
+ (9009,'E161261','BM 1529K','Normal',NULL,NULL,NULL,1),
+ (9010,'E161271','06-49716','Normal',NULL,NULL,NULL,1),
+ (9011,'E161341','BM 44K','Normal',NULL,NULL,NULL,1),
+ (9012,'E161531','D 1003 15 00496','Normal',NULL,NULL,NULL,1),
+ (9013,'E161561','BM 866K','Normal',NULL,NULL,NULL,1),
+ (9014,'E161671','13-0801424','Normal',NULL,NULL,NULL,1),
+ (9015,'E170071','BM 1636K','Normal',NULL,NULL,NULL,1),
+ (9016,'E170081','BM 1496K','Normal',NULL,NULL,NULL,1),
+ (9017,'E170091','1309544604','Normal',NULL,NULL,NULL,1),
+ (9018,'E170101','1309544526','Normal',NULL,NULL,NULL,1),
+ (9019,'E170121','1309544430','Normal',NULL,NULL,NULL,1),
+ (9020,'E171221','1309544459','Normal',NULL,NULL,NULL,1),
+ (9021,'E171231','1309544393','Normal',NULL,NULL,NULL,1),
+ (9022,'E171241','1309544149','Normal',NULL,NULL,NULL,1),
+ (9023,'E171251','1309544489','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (9024,'E171271','13 09544377','Normal',NULL,NULL,NULL,1),
+ (9025,'E171281','13 09544664','Normal',NULL,NULL,NULL,1),
+ (9026,'E171321','13 09544625','Normal',NULL,NULL,NULL,1),
+ (9027,'E171331','13 09544057','Normal',NULL,NULL,NULL,1),
+ (9028,'E171381','HCMB 13120781','Normal',NULL,NULL,NULL,1),
+ (9029,'E171401','1309544530','Normal',NULL,NULL,NULL,1),
+ (9030,'E171461','PM.07120070','Normal',NULL,NULL,NULL,1),
+ (9031,'E171481','BM 602K','Normal',NULL,NULL,NULL,1),
+ (9032,'E180031','BM 067K','Normal',NULL,NULL,NULL,1),
+ (9033,'E180041','BM 606K','Normal',NULL,NULL,NULL,1),
+ (9034,'E180061','BM 901K','Normal',NULL,NULL,NULL,1),
+ (9035,'E180071','BM 047K','Normal',NULL,NULL,NULL,1),
+ (9036,'E180081','13 09544494','Normal',NULL,NULL,NULL,1),
+ (9037,'E180091','1309544086','Normal',NULL,NULL,NULL,1),
+ (9038,'E180101','13 09544408','Normal',NULL,NULL,NULL,1),
+ (9039,'E180111','1309544210','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (9040,'E180121','1309544213','Normal',NULL,NULL,NULL,1),
+ (9041,'E180131','1309544340','Normal',NULL,NULL,NULL,1),
+ (9042,'E180141','1309544401','Normal',NULL,NULL,NULL,1),
+ (9043,'E180151','1309544616','Normal',NULL,NULL,NULL,1),
+ (9044,'E180161','1309544544','Normal',NULL,NULL,NULL,1),
+ (9045,'E180171','1309544484','Normal',NULL,NULL,NULL,1),
+ (9046,'E180181','1309544131','Normal',NULL,NULL,NULL,1),
+ (9047,'E180191','1309544575','Normal',NULL,NULL,NULL,1),
+ (9048,'E180201','1309544642','Normal',NULL,NULL,NULL,1),
+ (9049,'E180211','1309544685','Normal',NULL,NULL,NULL,1),
+ (9050,'E180221','1309544120','Normal',NULL,NULL,NULL,1),
+ (9051,'E180231','13 09544313','Normal',NULL,NULL,NULL,1),
+ (9052,'E180251','13 09544270','Normal',NULL,NULL,NULL,1),
+ (9053,'E180261','13 09544594','Normal',NULL,NULL,NULL,1),
+ (9054,'E180271','1309544653','Normal',NULL,NULL,NULL,1),
+ (9055,'E180281','1309544162','Normal',NULL,NULL,NULL,1);
+INSERT INTO `meter_details` (`id`,`meter_id`,`meter_no`,`meter_type`,`meter_make`,`max`,`meter_status_id`,`pipe_size_master_id`) VALUES 
+ (9056,'E180291','13 09544660','Normal',NULL,NULL,NULL,1),
+ (9057,'E180301','13 09544049','Normal',NULL,NULL,NULL,1),
+ (9058,'E180311','13 09544202','Normal',NULL,NULL,NULL,1),
+ (9059,'E180321','13 09544047','Normal',NULL,NULL,NULL,1),
+ (9060,'E180331','13 09544569','Normal',NULL,NULL,NULL,1),
+ (9061,'E180341','13 09544391','Normal',NULL,NULL,NULL,1),
+ (9062,'E180351','13 09544447','Normal',NULL,NULL,NULL,1),
+ (9063,'E180371','13 09544545','Normal',NULL,NULL,NULL,1),
+ (9064,'E180381','13 09544186','Normal',NULL,NULL,NULL,1),
+ (9065,'E180391','BM 2796K','Normal',NULL,NULL,NULL,1),
+ (9066,'E180401','1309544078','Normal',NULL,NULL,NULL,1),
+ (9067,'E180411','13 09544121','Normal',NULL,NULL,NULL,1);
 /*!40000 ALTER TABLE `meter_details` ENABLE KEYS */;
 
 
@@ -6611,7 +12452,7 @@ CREATE TABLE `online_payment_callback` (
   KEY `fk_onlinepaymentcallback_onlinepaymentorder_id` (`online_payment_order_id`),
   CONSTRAINT `fk_onlinepaymentcallback_merchantmaster_id` FOREIGN KEY (`merchant_master_id`) REFERENCES `merchant_master` (`id`),
   CONSTRAINT `fk_onlinepaymentcallback_onlinepaymentorder_id` FOREIGN KEY (`online_payment_order_id`) REFERENCES `online_payment_order` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=878 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=793 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`online_payment_callback`
@@ -6938,7 +12779,7 @@ CREATE TABLE `pipe_size_master` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `pipe_size` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`pipe_size_master`
@@ -6946,9 +12787,14 @@ CREATE TABLE `pipe_size_master` (
 
 /*!40000 ALTER TABLE `pipe_size_master` DISABLE KEYS */;
 INSERT INTO `pipe_size_master` (`id`,`pipe_size`) VALUES 
- (1,0.5),
- (2,0.75),
- (3,1);
+ (1,0.25),
+ (2,0.5),
+ (3,0.75),
+ (4,1),
+ (5,1.25),
+ (6,1.5),
+ (7,1.75),
+ (8,2);
 /*!40000 ALTER TABLE `pipe_size_master` ENABLE KEYS */;
 
 
@@ -6977,8 +12823,8 @@ CREATE TABLE `proceedings` (
   PRIMARY KEY (`id`),
   KEY `fk_proceedings_applicationtxn_id` (`application_txn_id`),
   KEY `fk_proceedings_pipesizemaster_id` (`pipe_size_master_id`),
-  CONSTRAINT `fk_proceedings_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
-  CONSTRAINT `fk_proceedings_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`)
+  CONSTRAINT `fk_proceedings_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
+  CONSTRAINT `fk_proceedings_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
@@ -7052,8 +12898,8 @@ CREATE TABLE `receipt` (
   PRIMARY KEY (`id`),
   KEY `fk_receipt_applicationtxn_id` (`application_txn_id`),
   KEY `fk_receipt_paymenttypes_id` (`payment_types_id`),
-  CONSTRAINT `fk_receipt_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`),
-  CONSTRAINT `fk_receipt_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`)
+  CONSTRAINT `fk_receipt_applicationtxn_id` FOREIGN KEY (`application_txn_id`) REFERENCES `application_txn` (`id`),
+  CONSTRAINT `fk_receipt_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
@@ -7582,7 +13428,7 @@ CREATE TABLE `street_master` (
   PRIMARY KEY (`id`),
   KEY `fk_streetmaster_divisionmaster_id` (`division_master_id`),
   CONSTRAINT `fk_streetmaster_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `watererp`.`street_master`
@@ -7602,7 +13448,8 @@ INSERT INTO `street_master` (`id`,`street_name`,`street_no`,`division_master_id`
  (10,'Street10','10',9),
  (11,'Street11','11',10),
  (12,'StNo6','06',6),
- (13,'StNo02','02',6);
+ (13,'StNo02','02',6),
+ (14,'General','99',11);
 /*!40000 ALTER TABLE `street_master` ENABLE KEYS */;
 
 
