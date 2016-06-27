@@ -698,6 +698,7 @@ CREATE TABLE `collection_type_master` (
   `txn_type` varchar(255) NOT NULL,
   `has_account_no` bit(1) DEFAULT NULL,
   `account_code` varchar(255) DEFAULT NULL,
+  `receipt_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -2253,10 +2254,10 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160504065608','jhipster','classpath:config/liquibase/changelog/20160504065608_added_entity_ConnectionTerminate.xml','2016-06-22 09:42:25',203,'EXECUTED','7:77b9eddf440cf38d04fe73c2b25a4aaf','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160612095001','jhipster','classpath:config/liquibase/changelog/20160612095001_added_entity_Adjustments.xml','2016-06-22 09:42:27',204,'EXECUTED','7:01a368366d6a5155db7636b6888d0617','createTable, dropDefaultValue, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160229070800','jhipster','classpath:config/liquibase/changelog/20160229070800_added_entity_ChargeBase.xml','2016-06-22 09:53:24',205,'EXECUTED','7:e7734a735d216617649f57460fae54b1','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-06-26 22:04:57',206,'EXECUTED','7:e91365a33054f9d04d8e2934946ce25c','createTable','',NULL,'3.4.2',NULL,NULL),
- ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-06-26 22:04:58',207,'EXECUTED','7:c144c67518add4196438bab2239aae6a','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+ ('20160412112557','jhipster','classpath:config/liquibase/changelog/20160412112557_added_entity_CollectionTypeMaster.xml','2016-06-27 08:55:43',206,'EXECUTED','7:deb94e4ef0460b31ff141f0a859a85e7','createTable','',NULL,'3.4.2',NULL,NULL),
+ ('20160315053144','jhipster','classpath:config/liquibase/changelog/20160315053144_added_entity_CollDetails.xml','2016-06-27 08:55:44',207,'EXECUTED','7:c144c67518add4196438bab2239aae6a','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-06-26 22:05:00',208,'EXECUTED','7:73db2f64a635723c9207731b2cc719de','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
+ ('20160415064155','jhipster','classpath:config/liquibase/changelog/20160415064155_added_entity_ExpenseDetails.xml','2016-06-27 08:55:45',208,'EXECUTED','7:73db2f64a635723c9207731b2cc719de','createTable, dropDefaultValue, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 

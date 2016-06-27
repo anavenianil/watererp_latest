@@ -53,6 +53,8 @@ public class CollectionTypeMasterResourceIntTest {
     private static final Boolean UPDATED_HAS_ACCOUNT_NO = true;
     private static final String DEFAULT_ACCOUNT_CODE = "AAAAA";
     private static final String UPDATED_ACCOUNT_CODE = "BBBBB";
+    private static final String DEFAULT_RECEIPT_CODE = "AAAAA";
+    private static final String UPDATED_RECEIPT_CODE = "BBBBB";
 
     @Inject
     private CollectionTypeMasterRepository collectionTypeMasterRepository;
@@ -84,6 +86,7 @@ public class CollectionTypeMasterResourceIntTest {
         collectionTypeMaster.setTxnType(DEFAULT_TXN_TYPE);
         collectionTypeMaster.setHasAccountNo(DEFAULT_HAS_ACCOUNT_NO);
         collectionTypeMaster.setAccountCode(DEFAULT_ACCOUNT_CODE);
+        collectionTypeMaster.setReceiptCode(DEFAULT_RECEIPT_CODE);
     }
 
     @Test
@@ -106,6 +109,7 @@ public class CollectionTypeMasterResourceIntTest {
         assertThat(testCollectionTypeMaster.getTxnType()).isEqualTo(DEFAULT_TXN_TYPE);
         assertThat(testCollectionTypeMaster.getHasAccountNo()).isEqualTo(DEFAULT_HAS_ACCOUNT_NO);
         assertThat(testCollectionTypeMaster.getAccountCode()).isEqualTo(DEFAULT_ACCOUNT_CODE);
+        assertThat(testCollectionTypeMaster.getReceiptCode()).isEqualTo(DEFAULT_RECEIPT_CODE);
     }
 
     @Test
@@ -140,7 +144,8 @@ public class CollectionTypeMasterResourceIntTest {
                 .andExpect(jsonPath("$.[*].collName").value(hasItem(DEFAULT_COLL_NAME.toString())))
                 .andExpect(jsonPath("$.[*].txnType").value(hasItem(DEFAULT_TXN_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].hasAccountNo").value(hasItem(DEFAULT_HAS_ACCOUNT_NO.booleanValue())))
-                .andExpect(jsonPath("$.[*].accountCode").value(hasItem(DEFAULT_ACCOUNT_CODE.toString())));
+                .andExpect(jsonPath("$.[*].accountCode").value(hasItem(DEFAULT_ACCOUNT_CODE.toString())))
+                .andExpect(jsonPath("$.[*].receiptCode").value(hasItem(DEFAULT_RECEIPT_CODE.toString())));
     }
 
     @Test
@@ -157,7 +162,8 @@ public class CollectionTypeMasterResourceIntTest {
             .andExpect(jsonPath("$.collName").value(DEFAULT_COLL_NAME.toString()))
             .andExpect(jsonPath("$.txnType").value(DEFAULT_TXN_TYPE.toString()))
             .andExpect(jsonPath("$.hasAccountNo").value(DEFAULT_HAS_ACCOUNT_NO.booleanValue()))
-            .andExpect(jsonPath("$.accountCode").value(DEFAULT_ACCOUNT_CODE.toString()));
+            .andExpect(jsonPath("$.accountCode").value(DEFAULT_ACCOUNT_CODE.toString()))
+            .andExpect(jsonPath("$.receiptCode").value(DEFAULT_RECEIPT_CODE.toString()));
     }
 
     @Test
@@ -181,6 +187,7 @@ public class CollectionTypeMasterResourceIntTest {
         collectionTypeMaster.setTxnType(UPDATED_TXN_TYPE);
         collectionTypeMaster.setHasAccountNo(UPDATED_HAS_ACCOUNT_NO);
         collectionTypeMaster.setAccountCode(UPDATED_ACCOUNT_CODE);
+        collectionTypeMaster.setReceiptCode(UPDATED_RECEIPT_CODE);
 
         restCollectionTypeMasterMockMvc.perform(put("/api/collectionTypeMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -195,6 +202,7 @@ public class CollectionTypeMasterResourceIntTest {
         assertThat(testCollectionTypeMaster.getTxnType()).isEqualTo(UPDATED_TXN_TYPE);
         assertThat(testCollectionTypeMaster.getHasAccountNo()).isEqualTo(UPDATED_HAS_ACCOUNT_NO);
         assertThat(testCollectionTypeMaster.getAccountCode()).isEqualTo(UPDATED_ACCOUNT_CODE);
+        assertThat(testCollectionTypeMaster.getReceiptCode()).isEqualTo(UPDATED_RECEIPT_CODE);
     }
 
     @Test

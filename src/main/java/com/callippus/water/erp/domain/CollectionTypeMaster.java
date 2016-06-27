@@ -36,6 +36,9 @@ public class CollectionTypeMaster implements Serializable {
     @Column(name = "account_code")
     private String accountCode;
 
+    @Column(name = "receipt_code")
+    private String receiptCode;
+
     public Long getId() {
         return id;
     }
@@ -76,6 +79,14 @@ public class CollectionTypeMaster implements Serializable {
         this.accountCode = accountCode;
     }
 
+    public String getReceiptCode() {
+        return receiptCode;
+    }
+
+    public void setReceiptCode(String receiptCode) {
+        this.receiptCode = receiptCode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -101,6 +112,7 @@ public class CollectionTypeMaster implements Serializable {
             ", txnType='" + txnType + "'" +
             ", hasAccountNo='" + hasAccountNo + "'" +
             ", accountCode='" + accountCode + "'" +
+            ", receiptCode='" + receiptCode + "'" +
             '}';
     }
 }

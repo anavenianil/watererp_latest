@@ -24,6 +24,11 @@
             "fieldId": 4,
             "fieldName": "accountCode",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "receiptCode",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160412112557",

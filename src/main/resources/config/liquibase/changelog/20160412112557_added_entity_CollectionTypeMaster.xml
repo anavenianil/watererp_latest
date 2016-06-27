@@ -27,6 +27,7 @@
             </column>
             <column name="has_account_no" type="bit"/>
             <column name="account_code" type="varchar(255)"/>
+            <column name="receipt_code" type="varchar(255)"/>
         </createTable>
         
     </changeSet>
