@@ -170,7 +170,7 @@ public class BillingService {
 		dTo = LocalDate.of(2016, 06, 30);
 	}
 
-	public BillRunMaster generateBill() throws Exception {
+	public BillRunMaster generateBill(boolean unmeteredFlag) throws Exception {
 		initBillRun();
 
 		List<BillDetails> bd = billDetailsRepository.findAllInitiated();
@@ -180,7 +180,8 @@ public class BillingService {
 
 		processBillsWithMeter(bd);
 
-		processBillsWithoutMeter();
+		if(unmeteredFlag)
+			processBillsWithoutMeter();
 
 		if (failedRecords > 0)
 			br.setStatus("Completed with Errors");
