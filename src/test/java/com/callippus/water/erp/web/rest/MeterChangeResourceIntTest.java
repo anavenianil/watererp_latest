@@ -31,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.callippus.water.erp.domain.enumeration.MeterChangeStatus;
 
 /**
  * Test class for the MeterChangeResource REST controller.
@@ -59,8 +60,9 @@ public class MeterChangeResourceIntTest {
     private static final LocalDate DEFAULT_APPROVED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_APPROVED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Integer DEFAULT_STATUS = 1;
-    private static final Integer UPDATED_STATUS = 2;
+
+    private static final MeterChangeStatus DEFAULT_STATUS = MeterChangeStatus.INITIATED;
+    private static final MeterChangeStatus UPDATED_STATUS = MeterChangeStatus.PROCESSING;
 
     @Inject
     private MeterChangeRepository meterChangeRepository;
@@ -124,6 +126,24 @@ public class MeterChangeResourceIntTest {
 
     @Test
     @Transactional
+    public void checkStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = meterChangeRepository.findAll().size();
+        // set the field null
+        meterChange.setStatus(null);
+
+        // Create the MeterChange, which fails.
+
+        restMeterChangeMockMvc.perform(post("/api/meterChanges")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(meterChange)))
+                .andExpect(status().isBadRequest());
+
+        List<MeterChange> meterChanges = meterChangeRepository.findAll();
+        assertThat(meterChanges).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMeterChanges() throws Exception {
         // Initialize the database
         meterChangeRepository.saveAndFlush(meterChange);
@@ -139,7 +159,7 @@ public class MeterChangeResourceIntTest {
                 .andExpect(jsonPath("$.[*].newMeterReading").value(hasItem(DEFAULT_NEW_METER_READING.doubleValue())))
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
                 .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -159,7 +179,7 @@ public class MeterChangeResourceIntTest {
             .andExpect(jsonPath("$.newMeterReading").value(DEFAULT_NEW_METER_READING.doubleValue()))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
             .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test

@@ -27,7 +27,9 @@
             <column name="new_meter_reading" type="${floatType}"/>
             <column name="remarks" type="varchar(255)"/>
             <column name="approved_date" type="date"/>
-            <column name="status" type="integer"/>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="cust_details_id" type="bigint"/>
             <column name="prev_meter_no_id" type="bigint"/>
             <column name="new_meter_no_id" type="bigint"/>

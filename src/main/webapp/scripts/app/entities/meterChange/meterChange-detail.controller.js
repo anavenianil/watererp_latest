@@ -98,11 +98,11 @@ angular.module('watererpApp')
         $scope.canDecline = function() {
 			var ret = false;
 			switch ($scope.meterChange.status) {
-			case 1:
+			case'INITIATED':
 				if ($scope.orgRole.id === 15)
 					ret = true;
 				break;
-			case 2:
+			case 'PROCESSING':
 				if ($scope.orgRole.id === 10)
 					ret = true;
 				break;
