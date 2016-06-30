@@ -1023,7 +1023,7 @@ public class BillingService {
 
 	public CustValidation getCustInfo(CustDetails customer, BillDetails bill_details) {
 
-		if (customer.getPipeSize() < 0.5f)
+		if (customer.getPipeSize() < 0.25f)
 			return CustValidation.INVALID_PIPESIZE;
 
 		Calendar cal = Calendar.getInstance();

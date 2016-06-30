@@ -43,10 +43,7 @@
         {
             "fieldId": 6,
             "fieldName": "connDate",
-            "fieldType": "LocalDate",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "LocalDate"
         },
         {
             "fieldId": 7,

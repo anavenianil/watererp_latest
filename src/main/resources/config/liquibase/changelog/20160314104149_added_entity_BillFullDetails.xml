@@ -30,9 +30,7 @@
             <column name="sec_code" type="varchar(255)"/>
             <column name="sec_name" type="varchar(255)"/>
             <column name="met_reader_code" type="varchar(255)"/>
-            <column name="conn_date" type="date">
-                <constraints nullable="false" />
-            </column>
+            <column name="conn_date" type="date"/>
             <column name="cons_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
