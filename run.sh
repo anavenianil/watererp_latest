@@ -20,7 +20,7 @@ if [ -n "$message" ]; then
 	echo "This is the db:" $db
 	if [ -n "$db" ]; then
 		echo "Message contains [DB], Restoring DB"
-		mysql -u root -pmysql watererp < Docs/DB/testingDB.sql
+		mysql -u root -pmysql watererp < Docs/DB/watererp.sql
 	else 
 		patch=$(echo $message|grep "\[PATCH\]")
 		echo "This is the patch:" $patch
@@ -37,8 +37,8 @@ set -e
 
 ##### Integration Testing #######
 #sudo SPRING_PROFILES_ACTIVE=fast mvn test
-export SPRING_PROFILES_ACTIVE=fast
-sudo mvn -Dtest=BillRunMasterResourceIntTest test
+#export SPRING_PROFILES_ACTIVE=fast
+#sudo mvn -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then
