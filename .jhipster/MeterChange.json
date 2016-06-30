@@ -69,8 +69,12 @@
         },
         {
             "fieldId": 7,
-            "fieldName": "status",
-            "fieldType": "Integer"
+            "fieldName": "status",            
+            "fieldType": "MeterChangeStatus",
+            "fieldValues": "INITIATED, PROCESSING, APPROVED, BILLED",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20160419095001",

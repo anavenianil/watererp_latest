@@ -1,14 +1,10 @@
 package com.callippus.water.erp.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -16,7 +12,6 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "coll_details")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CollDetails implements Serializable {
 
     @Id

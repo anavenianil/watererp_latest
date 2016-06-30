@@ -11,6 +11,7 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.enumeration.BillingStatus;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
+import com.callippus.water.erp.domain.enumeration.MeterChangeStatus;
 import com.callippus.water.erp.domain.enumeration.TxnStatus;
 import com.callippus.water.erp.mappings.BillMapper;
 import com.callippus.water.erp.repository.AdjustmentsRepository;
@@ -87,29 +88,6 @@ public class BillingService {
 		ALREADY_BILLED, INVALID_BILL_TYPE, INVALID_METER_READING, INVALID_METER_READING_MONTH, INVALID_PIPESIZE, INVALID_CATEGORY, NOT_IMPLEMENTED, INVALID_PREV_BILL_MONTH, CUSTOMER_DOES_NOT_EXIST, SUCCESS
 	};
 
-	enum MeterChangeStatus {
-		APPROVED(2), BILLED(3);
-
-		private int _value;
-
-		MeterChangeStatus(int Value) {
-			this._value = Value;
-		}
-
-		public int getValue() {
-			return _value;
-		}
-
-		public static MeterChangeStatus fromInt(int i) {
-			for (MeterChangeStatus b : MeterChangeStatus.values()) {
-				if (b.getValue() == i) {
-					return b;
-				}
-			}
-			return null;
-		}
-	}
-
 	enum BrdStatus {
 		INIT(0), FAILED(1), SUCCESS(2), FAILED_COMMIT(3), COMMITTED(4);
 
@@ -170,7 +148,7 @@ public class BillingService {
 		dTo = LocalDate.of(2016, 06, 30);
 	}
 
-	public BillRunMaster generateBill() throws Exception {
+	public BillRunMaster generateBill(boolean unmeteredFlag) throws Exception {
 		initBillRun();
 
 		List<BillDetails> bd = billDetailsRepository.findAllInitiated();
@@ -180,7 +158,8 @@ public class BillingService {
 
 		processBillsWithMeter(bd);
 
-		processBillsWithoutMeter();
+		if(unmeteredFlag)
+			processBillsWithoutMeter();
 
 		if (failedRecords > 0)
 			br.setStatus("Completed with Errors");
@@ -410,11 +389,11 @@ public class BillingService {
 			custDetailsRepository.saveAndFlush(customer);
 
 			MeterChange meterChange = meterChangeRepository.findByCanAndStatus(customer.getCan(),
-					MeterChangeStatus.APPROVED.getValue());
+					MeterChangeStatus.APPROVED);
 
 			if (meterChange != null) {
 				meterChange.setBillFullDetails(bfd);
-				meterChange.setStatus(3);
+				meterChange.setStatus(MeterChangeStatus.BILLED);
 
 				meterChangeRepository.save(meterChange);
 			}
@@ -476,7 +455,7 @@ public class BillingService {
 		total_cess = 0.0f;
 		kl = 0.0f;
 
-		meterChange = meterChangeRepository.findByCanAndStatus(can, MeterChangeStatus.APPROVED.getValue());
+		meterChange = meterChangeRepository.findByCanAndStatus(can, MeterChangeStatus.APPROVED);
 
 		brd = new BillRunDetails();
 		brd.setCan(can);

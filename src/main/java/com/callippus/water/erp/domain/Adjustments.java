@@ -19,7 +19,6 @@ import com.callippus.water.erp.domain.enumeration.TxnStatus;
  */
 @Entity
 @Table(name = "adjustments")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Adjustments implements Serializable {
 
     @Id
@@ -29,7 +28,7 @@ public class Adjustments implements Serializable {
     @Column(name = "can")
     private String can;
 
-    @Column(name = "amount", precision=10, scale=2)
+    @Column(name = "amount", precision=20, scale=3)
     private BigDecimal amount;
 
     @Column(name = "remarks")

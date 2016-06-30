@@ -34,10 +34,10 @@ public class ItemRequired implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
     
-    @Column(name = "rate_per_shs", precision=10, scale=2)
+    @Column(name = "rate_per_shs", precision=20, scale=3)
     private BigDecimal ratePerShs;
     
-    @Column(name = "amount", precision=10, scale=2)
+    @Column(name = "amount", precision=20, scale=3)
     private BigDecimal amount;
     
     @ManyToOne

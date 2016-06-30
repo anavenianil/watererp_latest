@@ -85,7 +85,7 @@
 						</div>
 					</fieldset>
 					<br>
-					<fieldset ng-show="meterChange.status===1">
+					<fieldset ng-show="meterChange.status==='INITIATED'">
 						<legend>New Meter Detail</legend>
 						<div class="row">
 							<div class="col-sm-3">
@@ -182,7 +182,7 @@
 
 						</div>
 					</fieldset>
-					<fieldset ng-show="meterChange.status >= 2">
+					<fieldset ng-show="meterChange.status != 'INITIATED'">
 						<legend>New Meter Detail</legend>
 						<div class="row">
 							<div class="col-sm-3">
@@ -235,7 +235,7 @@
 		<button type="button" class="btn btn-success pull-right"
 			ng-click="approve(meterChange)"
 			ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status===2 && orgRole.id === 10">
+			ng-show="meterChange.status==='PROCESSING' && orgRole.id === 10">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 
@@ -243,7 +243,7 @@
 
 		<button type="submit" class="btn btn-success pull-right"
 			ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status===1 && orgRole.id === 15">
+			ng-show="meterChange.status==='INITIATED' && orgRole.id === 15">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
 

@@ -6,9 +6,28 @@
             "fieldName": "collName",
             "fieldType": "String"
         },
-        {
+		{
             "fieldId": 2,
             "fieldName": "txnType",
+            "fieldType": "TransactionType",
+            "fieldValues": "PAYMENT, ADJUSTMENT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "hasAccountNo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "accountCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "receiptCode",
             "fieldType": "String"
         }
     ],
