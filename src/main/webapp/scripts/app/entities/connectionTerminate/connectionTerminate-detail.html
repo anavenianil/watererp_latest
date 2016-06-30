@@ -64,9 +64,13 @@
 					</div>
 				</fieldset>
 				<br>
-				<fieldset>
+				<fieldset ng-show="status!=9">
 					<legend>Meter Info.</legend>
 					<div class="row">
+						<div class="col-sm-3">
+							<label>Meter Id</label>
+							<h5 class="list-group-item-heading">{{custDetails.meterDetails.meterId}}</h5>
+						</div>
 						<div class="col-sm-3">
 							<label class="control-label" for="field_meterRecovered">Meter
 								Recovered</label>
@@ -92,9 +96,11 @@
 								Meter Reading</label> <input type="number" class="form-control"
 								name="lastMeterReading" id="field_lastMeterReading"
 								ng-disabled="workflowDTO.connectionTerminate.meterRecovered==false"
-								ng-model="workflowDTO.connectionTerminate.lastMeterReading" 
-								ng-blur="checkReading(custDetails.prevReading, workflowDTO.connectionTerminate.lastMeterReading)"/>
+								ng-model="workflowDTO.connectionTerminate.lastMeterReading"
+								ng-blur="checkReading(custDetails.prevReading, workflowDTO.connectionTerminate.lastMeterReading)" />
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-3">
 							<label class="control-label" for="field_meterRecoveredDate">Meter
 								Recovered Date</label>
@@ -119,31 +125,60 @@
 					</div>
 				</fieldset>
 				<hr>
-				<div class="row">
-					<div class="col-sm-3">
-						<label class="control-label" for="field_approvedDate">Approved
-							Date</label>
-						<div class="form-group">
-							<div class='input-group date' id='field_approvedDate'>
-								<input id="field_approvedDate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="workflowDTO.approvedDate" max-date="maxDt"
-									is-open="datePickerForApprovedDate.status.opened" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="datePickerForApprovedDateOpen($event)">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
+				<fieldset ng-show="status!=9">
+					<legend>Approval Details</legend>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_approvedDate">Approved
+								Date</label>
+							<div class="form-group">
+								<div class='input-group date' id='field_approvedDate'>
+									<input id="field_approvedDate" type="text" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
+										ng-model="workflowDTO.approvedDate" max-date="maxDt"
+										is-open="datePickerForApprovedDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForApprovedDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
 							</div>
 						</div>
+						<div class="col-sm-9">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<textarea rows="2" cols="50" class="form-control" name="remarks"
+								style="resize: none" id="field_remarks" max="20"
+								ng-model="workflowDTO.remarks"></textarea>
+						</div>
 					</div>
-					<div class="col-sm-9">
-						<label class="control-label" for="field_remarks">Remarks</label>
-						<textarea rows="3" cols="50" class="form-control" name="remarks"
-							style="resize: none" id="field_remarks" max="20" ng-model="workflowDTO.remarks"></textarea>
+				</fieldset>
+				<fieldset ng-show="canShow()">
+					<legend>Meter Info.</legend>
+					<div class="row">
+						<div class="col-sm-2">
+							<label>Meter No</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterDetails.meterId}}</h5>
+						</div>
+						<div class="col-sm-2">
+							<label>Requested Date</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.requestDate | date:'mediumDate'}}</h5>
+						</div>
+						<div class="col-sm-2">
+							<label>Meter Recovered</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecovered}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Recovered Date</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecoveredDate | date:'mediumDate'}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Last Reading</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.lastMeterReading}}</h5>
+						</div>
 					</div>
-				</div>
+				</fieldset>
 			</div>
 		</div>
 	</div>

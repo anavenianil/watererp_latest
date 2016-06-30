@@ -29,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.callippus.water.erp.domain.enumeration.TransactionType;
 
 /**
  * Test class for the CollectionTypeMasterResource REST controller.
@@ -43,8 +44,17 @@ public class CollectionTypeMasterResourceIntTest {
 
     private static final String DEFAULT_COLL_NAME = "AAAAA";
     private static final String UPDATED_COLL_NAME = "BBBBB";
-    private static final String DEFAULT_TXN_TYPE = "AAAAA";
-    private static final String UPDATED_TXN_TYPE = "BBBBB";
+
+
+    private static final TransactionType DEFAULT_TXN_TYPE = TransactionType.PAYMENT;
+    private static final TransactionType UPDATED_TXN_TYPE = TransactionType.ADJUSTMENT;
+
+    private static final Boolean DEFAULT_HAS_ACCOUNT_NO = false;
+    private static final Boolean UPDATED_HAS_ACCOUNT_NO = true;
+    private static final String DEFAULT_ACCOUNT_CODE = "AAAAA";
+    private static final String UPDATED_ACCOUNT_CODE = "BBBBB";
+    private static final String DEFAULT_RECEIPT_CODE = "AAAAA";
+    private static final String UPDATED_RECEIPT_CODE = "BBBBB";
 
     @Inject
     private CollectionTypeMasterRepository collectionTypeMasterRepository;
@@ -74,6 +84,9 @@ public class CollectionTypeMasterResourceIntTest {
         collectionTypeMaster = new CollectionTypeMaster();
         collectionTypeMaster.setCollName(DEFAULT_COLL_NAME);
         collectionTypeMaster.setTxnType(DEFAULT_TXN_TYPE);
+        collectionTypeMaster.setHasAccountNo(DEFAULT_HAS_ACCOUNT_NO);
+        collectionTypeMaster.setAccountCode(DEFAULT_ACCOUNT_CODE);
+        collectionTypeMaster.setReceiptCode(DEFAULT_RECEIPT_CODE);
     }
 
     @Test
@@ -94,6 +107,27 @@ public class CollectionTypeMasterResourceIntTest {
         CollectionTypeMaster testCollectionTypeMaster = collectionTypeMasters.get(collectionTypeMasters.size() - 1);
         assertThat(testCollectionTypeMaster.getCollName()).isEqualTo(DEFAULT_COLL_NAME);
         assertThat(testCollectionTypeMaster.getTxnType()).isEqualTo(DEFAULT_TXN_TYPE);
+        assertThat(testCollectionTypeMaster.getHasAccountNo()).isEqualTo(DEFAULT_HAS_ACCOUNT_NO);
+        assertThat(testCollectionTypeMaster.getAccountCode()).isEqualTo(DEFAULT_ACCOUNT_CODE);
+        assertThat(testCollectionTypeMaster.getReceiptCode()).isEqualTo(DEFAULT_RECEIPT_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void checkTxnTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = collectionTypeMasterRepository.findAll().size();
+        // set the field null
+        collectionTypeMaster.setTxnType(null);
+
+        // Create the CollectionTypeMaster, which fails.
+
+        restCollectionTypeMasterMockMvc.perform(post("/api/collectionTypeMasters")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(collectionTypeMaster)))
+                .andExpect(status().isBadRequest());
+
+        List<CollectionTypeMaster> collectionTypeMasters = collectionTypeMasterRepository.findAll();
+        assertThat(collectionTypeMasters).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -108,7 +142,10 @@ public class CollectionTypeMasterResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(collectionTypeMaster.getId().intValue())))
                 .andExpect(jsonPath("$.[*].collName").value(hasItem(DEFAULT_COLL_NAME.toString())))
-                .andExpect(jsonPath("$.[*].txnType").value(hasItem(DEFAULT_TXN_TYPE.toString())));
+                .andExpect(jsonPath("$.[*].txnType").value(hasItem(DEFAULT_TXN_TYPE.toString())))
+                .andExpect(jsonPath("$.[*].hasAccountNo").value(hasItem(DEFAULT_HAS_ACCOUNT_NO.booleanValue())))
+                .andExpect(jsonPath("$.[*].accountCode").value(hasItem(DEFAULT_ACCOUNT_CODE.toString())))
+                .andExpect(jsonPath("$.[*].receiptCode").value(hasItem(DEFAULT_RECEIPT_CODE.toString())));
     }
 
     @Test
@@ -123,7 +160,10 @@ public class CollectionTypeMasterResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(collectionTypeMaster.getId().intValue()))
             .andExpect(jsonPath("$.collName").value(DEFAULT_COLL_NAME.toString()))
-            .andExpect(jsonPath("$.txnType").value(DEFAULT_TXN_TYPE.toString()));
+            .andExpect(jsonPath("$.txnType").value(DEFAULT_TXN_TYPE.toString()))
+            .andExpect(jsonPath("$.hasAccountNo").value(DEFAULT_HAS_ACCOUNT_NO.booleanValue()))
+            .andExpect(jsonPath("$.accountCode").value(DEFAULT_ACCOUNT_CODE.toString()))
+            .andExpect(jsonPath("$.receiptCode").value(DEFAULT_RECEIPT_CODE.toString()));
     }
 
     @Test
@@ -145,6 +185,9 @@ public class CollectionTypeMasterResourceIntTest {
         // Update the collectionTypeMaster
         collectionTypeMaster.setCollName(UPDATED_COLL_NAME);
         collectionTypeMaster.setTxnType(UPDATED_TXN_TYPE);
+        collectionTypeMaster.setHasAccountNo(UPDATED_HAS_ACCOUNT_NO);
+        collectionTypeMaster.setAccountCode(UPDATED_ACCOUNT_CODE);
+        collectionTypeMaster.setReceiptCode(UPDATED_RECEIPT_CODE);
 
         restCollectionTypeMasterMockMvc.perform(put("/api/collectionTypeMasters")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -157,6 +200,9 @@ public class CollectionTypeMasterResourceIntTest {
         CollectionTypeMaster testCollectionTypeMaster = collectionTypeMasters.get(collectionTypeMasters.size() - 1);
         assertThat(testCollectionTypeMaster.getCollName()).isEqualTo(UPDATED_COLL_NAME);
         assertThat(testCollectionTypeMaster.getTxnType()).isEqualTo(UPDATED_TXN_TYPE);
+        assertThat(testCollectionTypeMaster.getHasAccountNo()).isEqualTo(UPDATED_HAS_ACCOUNT_NO);
+        assertThat(testCollectionTypeMaster.getAccountCode()).isEqualTo(UPDATED_ACCOUNT_CODE);
+        assertThat(testCollectionTypeMaster.getReceiptCode()).isEqualTo(UPDATED_RECEIPT_CODE);
     }
 
     @Test

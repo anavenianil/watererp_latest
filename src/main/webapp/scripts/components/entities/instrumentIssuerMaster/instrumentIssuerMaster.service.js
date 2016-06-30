@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .factory('InstrumentIssuerMaster', function ($resource, DateUtils) {
+    .factory('BankMaster', function ($resource, DateUtils) {
         return $resource('api/instrumentIssuerMasters/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {

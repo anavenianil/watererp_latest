@@ -267,7 +267,7 @@
             "fieldId": 45,
             "fieldName": "status",
             "fieldType": "CustStatus",
-            "fieldValues": "ACTIVE, TERMINATED, PROCESSING",
+            "fieldValues": "ACTIVE, TERMINATED, PROCESSING, DISCONNECTED, DEACTIVE",
             "fieldValidateRules": [
                 "required"
             ]

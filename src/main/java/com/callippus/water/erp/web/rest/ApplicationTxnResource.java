@@ -534,7 +534,7 @@ public class ApplicationTxnResource {
 	
 	
 	
-	//added to change stage for issueing meter
+	//added to change stage for issuing meter
 	@RequestMapping(value = "/applicationTxns/issueMeter", 
 			method = RequestMethod.POST, 
 			produces = MediaType.APPLICATION_JSON_VALUE)

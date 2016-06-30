@@ -35,9 +35,9 @@ angular.module('watererpApp')
         $scope.clear = function () {
             $scope.meterDetails = {
                 meterId: null,
+                meterNo: null,
                 meterType: null,
                 meterMake: null,
-                min: null,
                 max: null,
                 id: null
             };

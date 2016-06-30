@@ -14,8 +14,7 @@ import com.callippus.water.erp.domain.MeterDetails;
 public interface MeterDetailsRepository extends JpaRepository<MeterDetails,Long> {
 	
 	@Query("Select md from MeterDetails md where md.meterStatus.id =:meterStatusId")
+
 	Page<MeterDetails> findByMeterStatus(Pageable pageable, @Param("meterStatusId")Long meterStatusId);
-	
-	MeterDetails findByMeterId(String meterId);
 
 }

@@ -61,9 +61,10 @@
                                 (editForm.consName.$dirty || rc.editForm.attempted)}">
 										<label class="control-label" for="field_consName">Consumer
 											Name</label> <input type="text" class="form-control" name="consName"
-											ng-pattern="/^[a-zA-Z]/" id="field_consName"
-											ng-model="custDetails.consName" required disabled />
-										<div ng-pattern="/^[a-zA-Z]/"
+											ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
+											id="field_consName" ng-model="custDetails.consName" required
+											disabled />
+										<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 											ng-show="(editForm.consName.$dirty || rc.editForm.attempted) && editForm.consName.$invalid">
 											<p class="help-block"
 												ng-show="editForm.consName.$error.required">This field
@@ -201,11 +202,12 @@
 										Date</label>
 									<div class="form-group"
 										ng-class="{'has-error': editForm.requestedDate.$invalid && 
-         (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
+         								(editForm.requestedDate.$dirty || rc.editForm.attempted)}">
 
 										<div class='input-group date' id='field_requestedDate'>
-											<input id="field_requestedDate" type="text"
+											<input id="field_requestedDate" type="text" ng-type="date"
 												name="requestedDate" class="form-control"
+												placeholder="YYYY-MM-DD"
 												uib-datepicker-popup="{{dateformat}}"
 												ng-model="customer.requestedDate" max-date="dtmax"
 												is-open="datePickerForRequestedDate.status.opened" required />
@@ -265,9 +267,7 @@
 								<label>Application No.:&nbsp;&nbsp; </label>{{customer.id}}
 							</h4>
 						</div>
-
 					</div>
-
 					<div class="modal-footer">
 						<button type="button" class="btn btn-success" data-dismiss="modal"
 							ng-click="clear()">

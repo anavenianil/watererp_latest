@@ -169,7 +169,7 @@ angular.module('watererpApp').controller(
 			};
 
 			$scope.paymenttypess = PaymentTypes.query();
-			$scope.bankMasters = BankMaster.query();
+			$scope.bankmasters = BankMaster.query();
 			// $scope.collectiontypemasters = CollectionTypeMaster.query();
 
 			$scope.datePickerForExpenseDt = {};

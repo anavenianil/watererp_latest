@@ -67,7 +67,7 @@ class MeterDetailsGatlingTest extends Simulation {
             .exec(http("Create new meterDetails")
             .post("/api/meterDetailss")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "meterId":"SAMPLE_TEXT", "meterType":"SAMPLE_TEXT", "meterMake":"SAMPLE_TEXT", "min":null, "max":null}""")).asJSON
+            .body(StringBody("""{"id":null, "meterId":"SAMPLE_TEXT", "meterNo":"SAMPLE_TEXT", "meterType":"SAMPLE_TEXT", "meterMake":"SAMPLE_TEXT", "max":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_meterDetails_url")))
             .pause(10)

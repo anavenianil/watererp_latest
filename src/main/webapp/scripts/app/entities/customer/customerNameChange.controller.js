@@ -28,7 +28,9 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
             $scope.$emit('watererpApp:customerUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('customer.nameChangeList');
+            $scope.customer.id = result.id;
+           $("#saveSuccessfullyModal").modal("show");
+            //$state.go('customer.nameChangeList');
         };
 
         var onSaveError = function (result) {
@@ -36,6 +38,7 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         };
 
         $scope.save = function () {
+        	$scope.customer.changeType = "CHANGENAME";
             $scope.isSaving = true;
             if ($scope.customer.id != null) {
                 Customer.update($scope.customer, onSaveSuccess, onSaveError);
@@ -45,9 +48,16 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         };
 
         $scope.clear = function() {
-            //$uibModalInstance.dismiss('cancel');
+            $scope.customer={firstName:null, middleName:null, lastName:null, mobileNo:null, email:null, photo:null, idNumber:null, requestedDate:null, idProof:null
+            		};
         };
         
+        $scope.confirm=function()
+        {
+        	
+        	 $("#saveSuccessfullyModal").modal("hide");
+             $state.go('customer.nameChangeList');
+        }
         $scope.datePickerForRequestedDate = {};
 
         $scope.datePickerForRequestedDate.status = {
@@ -111,6 +121,7 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
         
         //when selected searched CAN in DropDown
         $scope.onSelect = function($item, $model, $label) {
+        	$scope.clear();
 			//console.log($item);
 			var arr = $item.split("-");
 			$scope.custDetails = {};
@@ -122,6 +133,9 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
 			$scope.customer.can = $scope.custDetails.can;
 			$scope.custInfo = ""; 
 			$scope.isValidCust = true;
+			$scope.rc.editForm.attempted=false;
+			$scope.editForm.$setPristine();
+			
 		};
 		
 		 $scope.$watch('customer.photo1', function (files) {

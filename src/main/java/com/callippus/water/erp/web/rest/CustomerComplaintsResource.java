@@ -125,6 +125,8 @@ public class CustomerComplaintsResource {
 			return createCustomerComplaints(request, customerComplaints);
 		}
 		
+		
+		
 		CustomerComplaints customerComplaints1 = customerComplaintsRepository.findOne(customerComplaints.getId());
 		customerComplaints1.setStatus(customerComplaints1.getStatus() + 1);
 		customerComplaints1.setAdjustmentAmt(customerComplaints.getAdjustmentAmt());
@@ -159,8 +161,6 @@ public class CustomerComplaintsResource {
 			adjustments.setCustomerComplaints(customerComplaints);
 			adjustmentsRepository.save(adjustments);
 		}
-		
-		
 		
 		return ResponseEntity.ok()
 				.headers(

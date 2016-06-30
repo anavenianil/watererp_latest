@@ -40,8 +40,7 @@ public class BillFullDetails implements Serializable {
     @Column(name = "met_reader_code")
     private String metReaderCode;
 
-    @NotNull
-    @Column(name = "conn_date", nullable = false)
+    @Column(name = "conn_date")
     private LocalDate connDate;
 
     @NotNull

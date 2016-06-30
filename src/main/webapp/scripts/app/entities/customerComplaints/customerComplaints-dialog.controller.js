@@ -43,19 +43,16 @@ angular
 					$scope.collDetails.consName = "";
 					$scope.customerComplaints.custDetails = {};
 					$scope.onSelect = function($item, $model, $label) {
+						$scope.clear();
 						console.log($item);
 						var arr = $item.split("-");
-
 						$scope.collDetails.can = arr[0];
 						$scope.collDetails.consName = arr[1];
 						$scope.collDetails.address = arr[2];
 						$scope.custInfo = "";
 						$scope.isValidCust = true;
-						$scope.clear();
 						$scope.rc.editForm.attempted=false;
 						$scope.editForm.$setPristine();
-
-						$scope.clear();
 						CustDetailsService
 								.get(
 										{

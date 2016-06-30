@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('InstrumentIssuerMasterController', function ($scope, $state, InstrumentIssuerMaster, ParseLinks) {
+    .controller('BankMasterController', function ($scope, $state, BankMaster, ParseLinks) {
 
         $scope.instrumentIssuerMasters = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.loadAll = function() {
-            InstrumentIssuerMaster.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            BankMaster.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.instrumentIssuerMasters.push(result[i]);

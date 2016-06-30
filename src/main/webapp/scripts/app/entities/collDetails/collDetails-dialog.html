@@ -39,7 +39,7 @@
 								<div
 											ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
 											<p class="help-block"
-												ng-show="editForm.can.$error.required">Please enter can number.</p>
+												ng-show="editForm.can.$error.required">This field is required.</p>
 								</div>		</div>
 						</div>
 						<div class="col-sm-4">
@@ -193,7 +193,7 @@
 									name="instrumentIssuerMaster"
 									ng-model="collDetails.instrumentIssuerMaster"
 									ng-required="instrEnabled"
-									ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in instrumentissuermasters track by instrumentIssuerMaster.id"
+									ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in bankmasters track by instrumentIssuerMaster.id"
 									ng-disabled="!instrEnabled">
 								</select>
 

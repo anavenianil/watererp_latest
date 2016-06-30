@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.ConnectionTerminate;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
@@ -188,19 +189,6 @@ public class ConnectionTerminateResource {
 		ConnectionTerminate connectionTerminate = workflowDTO.getConnectionTerminate();
 		
 		connectionTerminateRepository.save(connectionTerminate);
-		
-		CustDetails custDetails = custDetailsRepository.findByCanForUpdate(connectionTerminate.getCan());
-		custDetails.setStatus(CustStatus.TERMINATED);
-		custDetailsRepository.save(custDetails);
-		
-		MeterDetails meterDetails = connectionTerminate.getMeterDetails();
-		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
-		meterDetailsRepository.save(meterDetails);
-		
-		CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(custDetails, null);
-        cmpOld.setToDate(connectionTerminate.getMeterRecoveredDate());
-        custMeterMappingRepository.save(cmpOld);
-        
 		try {
 			workflowService.setRemarks(workflowDTO.getRemarks());
 			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
@@ -210,6 +198,22 @@ public class ConnectionTerminateResource {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
+			CustDetails custDetails = custDetailsRepository.findByCanForUpdate(connectionTerminate.getCan());
+			custDetails.setStatus(CustStatus.TERMINATED);
+			custDetailsRepository.save(custDetails);
+			
+			MeterDetails meterDetails = connectionTerminate.getMeterDetails();
+			meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
+			meterDetailsRepository.save(meterDetails);
+			
+			CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(custDetails, null);
+	        cmpOld.setToDate(connectionTerminate.getMeterRecoveredDate());
+	        custMeterMappingRepository.save(cmpOld);
+		}
+		
+        
+		
 		return ResponseEntity.created(new URI("/api/connectionTerminates/"))
 				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
 				.body(null);

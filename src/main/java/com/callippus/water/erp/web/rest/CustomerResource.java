@@ -140,7 +140,7 @@ public class CustomerResource {
 			page = customerRepository.findByChangeType(pageable, changeType);
 		} 
 		else if(changeType != null && can!=null){
-			page = customerRepository.findByChangeTypeAndCan(pageable, changeType, can);
+			page = customerRepository.findByCanAndChangeType(pageable, can, changeType);
 		}
 		else 
 		{

@@ -8,12 +8,12 @@ angular.module('watererpApp')
                 url: '/instrumentIssuerMasters',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'InstrumentIssuerMasters'
+                    pageTitle: 'BankMasters'
                 },
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMasters.html',
-                        controller: 'InstrumentIssuerMasterController'
+                        controller: 'BankMasterController'
                     }
                 },
                 resolve: {
@@ -24,17 +24,17 @@ angular.module('watererpApp')
                 url: '/instrumentIssuerMaster/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'InstrumentIssuerMaster'
+                    pageTitle: 'BankMaster'
                 },
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-detail.html',
-                        controller: 'InstrumentIssuerMasterDetailController'
+                        controller: 'BankMasterDetailController'
                     }
                 },
                 resolve: {
-                    entity: ['$stateParams', 'InstrumentIssuerMaster', function($stateParams, InstrumentIssuerMaster) {
-                        return InstrumentIssuerMaster.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'BankMaster', function($stateParams, BankMaster) {
+                        return BankMaster.get({id : $stateParams.id});
                     }]
                 }
             })
@@ -47,7 +47,7 @@ angular.module('watererpApp')
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-dialog.html',
-                        controller: 'InstrumentIssuerMasterDialogController',
+                        controller: 'BankMasterDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -73,11 +73,11 @@ angular.module('watererpApp')
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-dialog.html',
-                        controller: 'InstrumentIssuerMasterDialogController',
+                        controller: 'BankMasterDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['InstrumentIssuerMaster', function(InstrumentIssuerMaster) {
-                                return InstrumentIssuerMaster.get({id : $stateParams.id});
+                            entity: ['BankMaster', function(BankMaster) {
+                                return BankMaster.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
@@ -96,11 +96,11 @@ angular.module('watererpApp')
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/entities/instrumentIssuerMaster/instrumentIssuerMaster-delete-dialog.html',
-                        controller: 'InstrumentIssuerMasterDeleteController',
+                        controller: 'BankMasterDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['InstrumentIssuerMaster', function(InstrumentIssuerMaster) {
-                                return InstrumentIssuerMaster.get({id : $stateParams.id});
+                            entity: ['BankMaster', function(BankMaster) {
+                                return BankMaster.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {

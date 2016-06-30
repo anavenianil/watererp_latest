@@ -5,10 +5,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import com.callippus.water.erp.domain.enumeration.MeterChangeStatus;
 
 /**
  * A MeterChange.
@@ -40,8 +43,10 @@ public class MeterChange implements Serializable {
     @Column(name = "approved_date")
     private LocalDate approvedDate;
 
-    @Column(name = "status")
-    private Integer status;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private MeterChangeStatus status;
 
     @ManyToOne
     @JoinColumn(name = "cust_details_id")
@@ -119,11 +124,11 @@ public class MeterChange implements Serializable {
         this.approvedDate = approvedDate;
     }
 
-    public Integer getStatus() {
+    public MeterChangeStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(MeterChangeStatus status) {
         this.status = status;
     }
 

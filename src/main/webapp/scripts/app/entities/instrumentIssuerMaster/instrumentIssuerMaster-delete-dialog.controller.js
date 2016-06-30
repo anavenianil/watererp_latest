@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('watererpApp')
-	.controller('InstrumentIssuerMasterDeleteController', function($scope, $uibModalInstance, entity, InstrumentIssuerMaster) {
+	.controller('BankMasterDeleteController', function($scope, $uibModalInstance, entity, BankMaster) {
 
         $scope.instrumentIssuerMaster = entity;
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
         $scope.confirmDelete = function (id) {
-            InstrumentIssuerMaster.delete({id: id},
+            BankMaster.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
                 });

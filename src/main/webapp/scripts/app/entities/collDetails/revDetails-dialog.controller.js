@@ -12,7 +12,7 @@ angular
 					$scope.isValidCust = false;
 					$scope.instrEnabled = false;
 					$scope.paymenttypess = PaymentTypes.query();
-					$scope.bankMasters = BankMaster
+					$scope.bankmasters = BankMaster
 							.query();
 					// $scope.collectionTypeMasters =
 					// CollectionTypeMaster.query();

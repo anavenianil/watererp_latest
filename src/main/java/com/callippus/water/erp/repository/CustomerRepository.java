@@ -15,7 +15,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
 	
 	Page<Customer> findByChangeType(Pageable pageable, String changeType);
 	
-	Page<Customer> findByChangeTypeAndCan(Pageable pageable, String changeType, String can);
+	Page<Customer> findByCanAndChangeType(Pageable pageable, String can, String changeType);
 	
 	/*@Query("select c from Customer c where c.id=(SELECT max(cu.id) FROM Customer cu where cu.changeType=:changeType and cu.can="
 			+ "(select cd.can from CustDetails cd where cd.can=:can and cd.status='ACTIVE'))")*/

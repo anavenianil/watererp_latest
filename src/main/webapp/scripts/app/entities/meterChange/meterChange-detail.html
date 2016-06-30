@@ -85,76 +85,79 @@
 						</div>
 					</fieldset>
 					<br>
-					<fieldset ng-show="meterChange.status===1">
+					<fieldset ng-show="meterChange.status==='INITIATED'">
 						<legend>New Meter Detail</legend>
 						<div class="row">
 							<div class="col-sm-3">
-							<div class="form-group" ng-class="{'has-error': editForm.newMeterNo.$invalid && 
-         (editForm.newMeterNo.$dirty || rc.editForm.attempted)}">
-								<label>New Meter Number</label>
-								<!-- <h5 class="list-group-item-heading">{{meterChange.newMeterNo.meterId}}</h5> -->
-								<select class="form-control" id="field_newMeterNo"
-									name="newMeterNo" ng-model="meterChange.newMeterNo"
-									ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
-									required>
-									<option value=""></option>
-								</select>
-								<div
-									ng-show="(editForm.newMeterNo.$dirty || rc.editForm.attempted) && editForm.newMeterNo.$invalid">
-									<p class="help-block"
-										ng-show="editForm.newMeterNo.$error.required">This field is
-										required.</p>
-									
-								</div>
-							
-								</div>
-							</div>
-							<div class="col-sm-3">
-							<div class="form-group" ng-class="{'has-error': editForm.newMeterReading.$invalid && 
-         (editForm.newMeterReading.$dirty || rc.editForm.attempted)}">
-								<label>New Meter Reading</label>
-								<!-- <h5 class="list-group-item-heading">{{meterChange.newMeterReading}}</h5> -->
-								<input type="number" class="form-control" name="newMeterReading"
-									id="field_newMeterReading"
-									ng-model="meterChange.newMeterReading" required />
+								<div class="form-group"
+									ng-class="{'has-error': editForm.newMeterNo.$invalid && 
+         					(editForm.newMeterNo.$dirty || rc.editForm.attempted)}">
+									<label>New Meter Number</label>
+									<!-- <h5 class="list-group-item-heading">{{meterChange.newMeterNo.meterId}}</h5> -->
+									<select class="form-control" id="field_newMeterNo"
+										name="newMeterNo" ng-model="meterChange.newMeterNo"
+										ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
+										required>
+										<option value=""></option>
+									</select>
 									<div
-									ng-show="(editForm.newMeterReading.$dirty || rc.editForm.attempted) && editForm.newMeterReading.$invalid">
-									<p class="help-block"
-										ng-show="editForm.newMeterReading.$error.required">This field is
-										required.</p>
-									
-								</div>
-							
+										ng-show="(editForm.newMeterNo.$dirty || rc.editForm.attempted) && editForm.newMeterNo.$invalid">
+										<p class="help-block"
+											ng-show="editForm.newMeterNo.$error.required">This field
+											is required.</p>
+									</div>
+
 								</div>
 							</div>
 							<div class="col-sm-3">
-							<div class="form-group" ng-class="{'has-error': editForm.user.$invalid && 
-         (editForm.user.$dirty || rc.editForm.attempted)}">
-								<label>Approved By</label>
-								<!-- <h5 class="list-group-item-heading">{{meterChange.user.firstName}}&nbsp;{{meterChange.user.lastName}}({{meterChange.user.login}})</h5> -->
-								<select class="form-control" id="field_user" name="user"
-									ng-model="meterChange.user"
-									ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users"
-									required>
-									<option value=""></option>
-								</select>
-								<div
-									ng-show="(editForm.user.$dirty || rc.editForm.attempted) && editForm.user.$invalid">
-									<p class="help-block"
-										ng-show="editForm.user.$error.required">This field is
-										required.</p>
-									
+								<div class="form-group"
+									ng-class="{'has-error': editForm.newMeterReading.$invalid && 
+        							 (editForm.newMeterReading.$dirty || rc.editForm.attempted)}">
+									<label>New Meter Reading</label>
+									<!-- <h5 class="list-group-item-heading">{{meterChange.newMeterReading}}</h5> -->
+									<input type="number" class="form-control"
+										name="newMeterReading" id="field_newMeterReading"
+										ng-model="meterChange.newMeterReading" required />
+									<div
+										ng-show="(editForm.newMeterReading.$dirty || rc.editForm.attempted) && editForm.newMeterReading.$invalid">
+										<p class="help-block"
+											ng-show="editForm.newMeterReading.$error.required">This
+											field is required.</p>
+
+									</div>
+
 								</div>
-							
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.user.$invalid && 
+         							(editForm.user.$dirty || rc.editForm.attempted)}">
+									<label>Approved By</label>
+									<!-- <h5 class="list-group-item-heading">{{meterChange.user.firstName}}&nbsp;{{meterChange.user.lastName}}({{meterChange.user.login}})</h5> -->
+									<select class="form-control" id="field_user" name="user"
+										ng-model="meterChange.user"
+										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users"
+										required>
+										<option value=""></option>
+									</select>
+									<div
+										ng-show="(editForm.user.$dirty || rc.editForm.attempted) && editForm.user.$invalid">
+										<p class="help-block" ng-show="editForm.user.$error.required">This
+											field is required.</p>
+
+									</div>
+
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<label>Approved Date</label>
-								<div class="form-group" ng-class="{'has-error': editForm.approvedDate.$invalid && 
-         (editForm.approvedDate.$dirty || rc.editForm.attempted)}">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.approvedDate.$invalid && 
+         							(editForm.approvedDate.$dirty || rc.editForm.attempted)}">
 									<div class='input-group date' id='field_approvedDate'>
-										<input id="field_approvedDate" type="text" ng-type="date" name="approvedDate"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
+										<input id="field_approvedDate" type="text" ng-type="date"
+											name="approvedDate" class="form-control"
+											uib-datepicker-popup="{{dateformat}}"
 											ng-model="meterChange.approvedDate" max-date="maxDt"
 											is-open="datePickerForApprovedDate.status.opened" required />
 										<span class="input-group-btn">
@@ -165,21 +168,21 @@
 										</span>
 									</div>
 									<div
-									ng-show="(editForm.approvedDate.$dirty || rc.editForm.attempted) && editForm.approvedDate.$invalid">
-									<p class="help-block"
-										ng-show="editForm.approvedDate.$error.required">Date is
-										required.</p>
-									<p class="help-block"
-										ng-show="editForm.approvedDate.$error.date">Please enter Date format
-										.</p>
-								</div>
-							
+										ng-show="(editForm.approvedDate.$dirty || rc.editForm.attempted) && editForm.approvedDate.$invalid">
+										<p class="help-block"
+											ng-show="editForm.approvedDate.$error.required">Date is
+											required.</p>
+										<p class="help-block"
+											ng-show="editForm.approvedDate.$error.date">Please enter
+											Date format .</p>
+									</div>
+
 								</div>
 							</div>
 
 						</div>
 					</fieldset>
-					<fieldset ng-show="meterChange.status >= 2">
+					<fieldset ng-show="meterChange.status != 'INITIATED'">
 						<legend>New Meter Detail</legend>
 						<div class="row">
 							<div class="col-sm-3">
@@ -196,7 +199,8 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Approve Date</label>
-								<h5 class="list-group-item-heading">{{meterChange.approvedDate | date:'mediumDate'}}</h5>
+								<h5 class="list-group-item-heading">{{meterChange.approvedDate
+									| date:'mediumDate'}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -205,19 +209,21 @@
 						<legend></legend>
 						<div class="row" ng-show="canDecline()">
 							<div class="col-sm-12">
-							<div class="form-group" ng-class="{'has-error': editForm.remarks.$invalid && 
+								<div class="form-group"
+									ng-class="{'has-error': editForm.remarks.$invalid && 
          						(editForm.remarks.$dirty || rc.editForm.attempted)}">
-								<label class="control-label" for="field_remarks">Remarks</label>
-								<textarea rows="4" cols="50" class="form-control" name="remarks"
-									id="field_remarks" max="20" ng-model="meterChange.remarks" required></textarea>
+									<label class="control-label" for="field_remarks">Remarks</label>
+									<textarea rows="4" cols="50" class="form-control"
+										name="remarks" id="field_remarks" max="20"
+										ng-model="meterChange.remarks" required></textarea>
 									<div
-									ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
-									<p class="help-block"
-										ng-show="editForm.remarks.$error.required">This field is
-										required.</p>
-									
-								</div>
-							
+										ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
+										<p class="help-block"
+											ng-show="editForm.remarks.$error.required">This field is
+											required.</p>
+
+									</div>
+
 								</div>
 							</div>
 						</div>
@@ -227,16 +233,17 @@
 		</div>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-click="approve(meterChange)" ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status===2 && orgRole.id === 10">
+			ng-click="approve(meterChange)"
+			ng-enabled="editForm.$invalid || isSaving"
+			ng-show="meterChange.status==='PROCESSING' && orgRole.id === 10">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-		</button> 
-		
-		
-		
+		</button>
+
+
+
 		<button type="submit" class="btn btn-success pull-right"
 			ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status===1 && orgRole.id === 15">
+			ng-show="meterChange.status==='INITIATED' && orgRole.id === 15">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
 
@@ -258,8 +265,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="confirmForm">
-					<div class="modal-header">
-					</div>
+					<div class="modal-header"></div>
 					<div class="modal-body">
 						<p>
 						<h3>Request Approved Successfully!</h3>

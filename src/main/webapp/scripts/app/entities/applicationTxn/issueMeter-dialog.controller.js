@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('IssueMeterDialogController', function ($scope, $state, $stateParams, ApplicationTxn, ParseLinks, DateUtils, MeterDetails,
-    		ApplicationTxnService, $http) {
+    		ApplicationTxnService, $http, $window) {
 
     	$scope.workflowDTO = {};
     	$scope.workflowDTO.applicationTxn = {};
@@ -20,6 +20,10 @@ angular.module('watererpApp')
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.meterdetailss.push(result[i]);
+                }
+                if($scope.meterdetailss.length == 0){
+                	//alert("No Meter Available");
+                	$('#meterAvailabilityModal').modal('show');
                 }
             });
         };
@@ -79,6 +83,11 @@ angular.module('watererpApp')
         $scope.clear = function(){
         	$scope.applicationTxn = {
             };
+        }
+        
+        $scope.closeDialague = function(){
+        	$('#meterAvailabilityModal').modal('hide');
+        	$window.history.back();
         }
     });
 

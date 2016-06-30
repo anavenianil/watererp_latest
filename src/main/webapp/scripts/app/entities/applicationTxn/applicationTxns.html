@@ -100,7 +100,7 @@
 												'label-warning': applicationTxn.status === 4, 'label-default': applicationTxn.status === 5, 
 												'label-info': applicationTxn.status === 6,  'label-primary': applicationTxn.status === 7, 
 												'label-success': applicationTxn.status === 8}">
-										{{(applicationTxn.status===0?'Pending':(applicationTxn.status===1?'Approved':(applicationTxn.status===2?'Feasibility':
+										{{(applicationTxn.status===0?'Pending':(applicationTxn.status===1?'Forwarded':(applicationTxn.status===2?'Feasibility':
 										(applicationTxn.status===3?'Proceedings':(applicationTxn.status===4?'Receipt':(applicationTxn.status===5?'Store':
 										(applicationTxn.status===6?'Meter':(applicationTxn.status===7?'CAN':'Completed'))))))))}}</span></td>
 								<td><span class="label"

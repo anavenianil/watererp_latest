@@ -1,25 +1,22 @@
 'use strict';
 
 angular.module('watererpApp').controller('MeterDetailsDialogController',
-        function($scope, $stateParams, MeterDetails, $state, MeterStatus) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'MeterDetails', 'MeterStatus', 'PipeSizeMaster',
+        function($scope, $stateParams, $uibModalInstance, entity, MeterDetails, MeterStatus, PipeSizeMaster) {
 
-        $scope.meterDetails = {};
-        $scope.meterStatuss = MeterStatus.query();
+        $scope.meterDetails = entity;
+        $scope.meterstatuss = MeterStatus.query();
+        $scope.pipesizemasters = PipeSizeMaster.query();
         $scope.load = function(id) {
             MeterDetails.get({id : id}, function(result) {
                 $scope.meterDetails = result;
             });
         };
-        
-        if($stateParams.id != null){
-        	$scope.load($stateParams.id);
-        }
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:meterDetailsUpdate', result);
-            //$uibModalInstance.close(result);
+            $uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('meterDetails');
         };
 
         var onSaveError = function (result) {
@@ -38,4 +35,4 @@ angular.module('watererpApp').controller('MeterDetailsDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
-});
+}]);
