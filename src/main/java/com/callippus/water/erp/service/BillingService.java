@@ -182,7 +182,14 @@ public class BillingService {
 
 		initBillRun();
 
-		process_bill(can);
+		CustDetails custDetails = custDetailsRepository.findByCan(can);
+		
+		if(custDetails.getStatus() == CustStatus.TERMINATED)
+			saveAndRunTerminations(custDetails);
+		else if(custDetails.getPrevBillType().equals("U"))
+			saveAndRunUnbilled(custDetails);
+		else		
+			process_bill(can);
 
 		if (failedRecords > 0)
 			br.setStatus("Completed with Errors");
@@ -226,10 +233,7 @@ public class BillingService {
 			if (customer == null) {
 				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
 				return;
-			} else if (customer.getStatus() != CustStatus.ACTIVE) {
-				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
-				return;
-			}
+			} 
 
 			if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("T") || bill_details.getCurrentBillType().equals("S")) {
 				if (meterChange != null) {
@@ -474,15 +478,19 @@ public class BillingService {
 
 	public void processDisconnectedMeters() {
 		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
-		customers.forEach(customer -> saveTerminations(customer));
+		customers.forEach(customer -> saveAndRunTerminations(customer));
+	}
+
+	public void processDisconnectedMeters(CustDetails customer ) {
+		saveAndRunTerminations(customer);
 	}
 
 	public void processBillsWithoutMeter() {
 		List<CustDetails> customers = custDetailsRepository.findByPrevBillType("U");
-		customers.forEach(customer -> saveUnbilled(customer));
+		customers.forEach(customer -> saveAndRunUnbilled(customer));
 	}
 
-	public void saveTerminations(CustDetails customer) {
+	public void saveAndRunTerminations(CustDetails customer) {
 		// Insert bill_details record for each new termination
 		ConnectionTerminate ct =  connectionTerminateRepository.findByCan(customer.getCan());
 		Float currentReading = ct.getLastMeterReading();
@@ -492,7 +500,7 @@ public class BillingService {
 		saveAndRunBill(customer, "T", meterReadingDt, previousReading, currentReading);
 	}
 
-	public void saveUnbilled(CustDetails customer) {
+	public void saveAndRunUnbilled(CustDetails customer) {
 		// Insert bill_details record for each run
 		if (customer.getStatus() != CustStatus.ACTIVE) {
 			process_error("Customer not found in CUST_DETAILS for CAN", customer.getCan());
@@ -502,7 +510,7 @@ public class BillingService {
 		saveAndRunBill(customer, "U", LocalDate.now(), null, null);
 	}
 
-	public void saveAndRunBill(CustDetails customer, String prevBillType, LocalDate metReadingDt, Float prevReading, Float curReading) {
+	public void saveAndRunBill(CustDetails customer, String currentBillType, LocalDate metReadingDt, Float prevReading, Float curReading) {
 		initBill(customer.getCan()); // Is inited again in process_bill, but
 		// right now there is no better
 		// solution
@@ -511,7 +519,7 @@ public class BillingService {
 			bill_details.setCan(customer.getCan());
 			LocalDate now = LocalDate.now();
 			bill_details.setBillDate(now);
-			bill_details.setCurrentBillType("U");
+			bill_details.setCurrentBillType(currentBillType);
 
 			DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyyMM");
 			if (customer.getPrevBillMonth() != null) {
@@ -535,6 +543,8 @@ public class BillingService {
 			bill_details.setMeterReaderId("1");
 
 			billDetailsRepository.saveAndFlush(bill_details);
+			
+			process_bill(bill_details);
 
 		} catch (Exception e) {
 			e.printStackTrace();
