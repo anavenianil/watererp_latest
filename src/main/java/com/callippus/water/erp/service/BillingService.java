@@ -231,7 +231,7 @@ public class BillingService {
 				return;
 			}
 
-			if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S")) {
+			if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("T") || bill_details.getCurrentBillType().equals("S")) {
 				if (meterChange != null) {
 					getUnitsKLMeterChange(bill_details, customer);
 				} else if (bill_details.getIsRounding()) {
@@ -655,7 +655,7 @@ public class BillingService {
 
 			log.debug("Months:" + monthsDiff);
 
-			if (bill_details.getCurrentBillType().equals("M") && (customer.getPrevBillType() == null
+			if ((bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("T")) && (customer.getPrevBillType() == null
 					|| customer.getPrevBillType().equals("M") || customer.getPrevBillType().equals("L"))) {
 
 				if (!customer.getPrevReading().equals("0")) {
@@ -679,7 +679,7 @@ public class BillingService {
 				}
 
 				kl = (float) (unitsKL);
-			} else if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S")) // Moved
+			} else if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("T") || bill_details.getCurrentBillType().equals("S")) // Moved
 																														// from
 																														// Stuck/Burnt
 																														// to
@@ -801,7 +801,7 @@ public class BillingService {
 				log.debug("Usage Charge:" + (Double) charge.get("amount"));
 				bfd.setWaterCess(bfd.getWaterCess() + ((Double) charge.get("amount")).floatValue());
 
-				if ((bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S"))
+				if ((bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("T") || bill_details.getCurrentBillType().equals("S"))
 						&& (customer.getPrevBillType() == null || customer.getPrevBillType().equals("L"))) {
 					if (customer.getLockCharges() == null)
 						bfd.setLockCharges(0.0f);
@@ -934,7 +934,7 @@ public class BillingService {
 		}
 
 		try {
-			if (!bill_details.getCurrentBillType().equals("M"))
+			if (! (bill_details.getCurrentBillType().equals("M")) || bill_details.getCurrentBillType().equals("T") || bill_details.getCurrentBillType().equals("S")) 
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getPrevBillMonth().plusMonths(1);
@@ -943,7 +943,7 @@ public class BillingService {
 
 			// Previously Metered or Locked and currently Metered
 			if ((customer.getPrevBillType().equals("L") || customer.getPrevBillType().equals("M"))
-					&& bill_details.getCurrentBillType().equals("M")) {
+					&& (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("T"))) {
 
 				long billDays = ChronoUnit.DAYS.between(dFrom, dTo);
 
