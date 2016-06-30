@@ -183,12 +183,16 @@ public class BillingService {
 		initBillRun();
 
 		CustDetails custDetails = custDetailsRepository.findByCan(can);
-		
-		if(custDetails.getStatus() == CustStatus.TERMINATED)
+
+		if (custDetails.getStatus() != CustStatus.ACTIVE && custDetails.getStatus() != CustStatus.TERMINATED) {
+			throw new Exception("Invalid CustStatus for CAN:" + can + ", Status:" + custDetails.getStatus().toString());
+		}
+
+		if (custDetails.getStatus() == CustStatus.TERMINATED)
 			saveAndRunTerminations(custDetails);
-		else if(custDetails.getPrevBillType().equals("U"))
+		else if (custDetails.getPrevBillType().equals("U"))
 			saveAndRunUnbilled(custDetails);
-		else		
+		else
 			process_bill(can);
 
 		if (failedRecords > 0)
@@ -233,7 +237,7 @@ public class BillingService {
 			if (customer == null) {
 				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
 				return;
-			} 
+			}
 
 			if (bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S")) {
 				if (meterChange != null) {
@@ -379,10 +383,10 @@ public class BillingService {
 			customer.setPrevReading(bfd.getPresentReading());
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
-			
-			if(customer.getStatus() == CustStatus.TERMINATED)
+
+			if (customer.getStatus() == CustStatus.TERMINATED)
 				customer.setStatus(CustStatus.DISCONNECTED);
-			
+
 			if (bfd.getCurrentBillType().equals("L"))
 				customer.setLockCharges(bfd.getLockCharges());
 			else
@@ -485,7 +489,7 @@ public class BillingService {
 		customers.forEach(customer -> saveAndRunTerminations(customer));
 	}
 
-	public void processDisconnectedMeters(CustDetails customer ) {
+	public void processDisconnectedMeters(CustDetails customer) {
 		saveAndRunTerminations(customer);
 	}
 
@@ -496,17 +500,17 @@ public class BillingService {
 
 	public void saveAndRunTerminations(CustDetails customer) {
 		// Insert bill_details record for each new termination
-		ConnectionTerminate ct =  connectionTerminateRepository.findByCan(customer.getCan());
+		ConnectionTerminate ct = connectionTerminateRepository.findByCan(customer.getCan());
 		Float currentReading = ct.getLastMeterReading();
 		Float previousReading = customer.getPrevReading();
 		LocalDate meterReadingDt = ct.getMeterRecoveredDate();
 		String currentBillType = "";
 
-		if(currentReading != null)
+		if (currentReading != null)
 			currentBillType = "M";
 		else
 			currentBillType = "L";
-		
+
 		saveAndRunBill(customer, currentBillType, meterReadingDt, previousReading, currentReading);
 	}
 
@@ -520,7 +524,8 @@ public class BillingService {
 		saveAndRunBill(customer, "U", LocalDate.now(), null, null);
 	}
 
-	public void saveAndRunBill(CustDetails customer, String currentBillType, LocalDate metReadingDt, Float prevReading, Float curReading) {
+	public void saveAndRunBill(CustDetails customer, String currentBillType, LocalDate metReadingDt, Float prevReading,
+			Float curReading) {
 		initBill(customer.getCan()); // Is inited again in process_bill, but
 		// right now there is no better
 		// solution
@@ -554,7 +559,7 @@ public class BillingService {
 			bill_details.setMeterReaderId("1");
 
 			billDetailsRepository.saveAndFlush(bill_details);
-			
+
 			process_bill(bill_details);
 
 		} catch (Exception e) {
@@ -955,7 +960,7 @@ public class BillingService {
 		}
 
 		try {
-			if (! (bill_details.getCurrentBillType().equals("M")) || bill_details.getCurrentBillType().equals("S")) 
+			if (!(bill_details.getCurrentBillType().equals("M")) || bill_details.getCurrentBillType().equals("S"))
 				bill_details.setPresentReading(customer.getPrevReading());
 
 			dFrom = customer.getPrevBillMonth().plusMonths(1);
