@@ -50,13 +50,12 @@ angular
 						$scope.datePickerForRequestedDate.status.opened = true;
 					};
 
-					$scope.validateCategory = function(prevCategory,
-							presentCategory) {
-						if (prevCategory === presentCategory) {
+					$scope.validateCategory = function(oldCategory,
+							newCategory) {
+						if (oldCategory === newCategory) {
 							alert("Selected Category Same as Previous");
-							$scope.customer.presentCategory = {};
-						} else if (presentCategory === 1) {
-
+							$scope.customer.newTariffCategory = {};
+						} else if (newCategory === 1) {
 							$scope.instrEnabled = false;
 							$scope.customer.organizationName = null;
 						} else
@@ -90,8 +89,9 @@ angular
 										},
 										function(result) {
 											$scope.custDetails = result;
-											$scope.customer.meterReading = $scope.custDetails.prevReading;
-											$scope.customer.tariffCategoryMaster = $scope.custDetails.tariffCategoryMaster;
+											$scope.customer.prevMeterReading = $scope.custDetails.prevReading;
+											$scope.customer.oldTariffCategory = $scope.custDetails.tariffCategoryMaster;
+											$scope.customer.previousEmail = $scope.custDetails.email;
 										});
 					};
 
@@ -113,16 +113,18 @@ angular
 								function(response) {
 									$scope.custDetails = response.data.custDetails;
 									$scope.message = null;
+									$scope.customer.prevMeterReading = $scope.custDetails.prevReading;
 									if(response.data.applicationTxn != null){
-										$scope.customer.tariffCategoryMaster = response.data.applicationTxn.tariffCategoryMaster;
+										$scope.customer.oldTariffCategory = response.data.applicationTxn.tariffCategoryMaster;
 										$scope.customer.prevOrganizationName = response.data.applicationTxn.organizationName;
 										$scope.customer.prevDesignation = response.data.applicationTxn.designation;
 									}
 									if(response.data.customer != null){
 										if(response.data.customer.status == 3){
-											$scope.customer.tariffCategoryMaster = response.data.customer.presentCategory;
+											$scope.customer.oldTariffCategory = response.data.customer.presentCategory;
 											$scope.customer.prevOrganizationName = response.data.customer.organizationName;
 											$scope.customer.prevDesignation = response.data.customer.designation;
+											//$scope.customer.prevMeterReading = response.data.customer.meterReading;
 										}
 										else{
 											$scope.isSaving = true;

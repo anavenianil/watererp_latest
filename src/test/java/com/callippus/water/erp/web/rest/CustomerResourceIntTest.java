@@ -44,11 +44,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CustomerResourceIntTest {
 
 
-    private static final Float DEFAULT_METER_READING = 1F;
-    private static final Float UPDATED_METER_READING = 2F;
+    private static final Float DEFAULT_PREV_METER_READING = 1F;
+    private static final Float UPDATED_PREV_METER_READING = 2F;
 
-    private static final Float DEFAULT_PRESENT_READING = 1F;
-    private static final Float UPDATED_PRESENT_READING = 2F;
+    private static final Float DEFAULT_NEW_METER_READING = 1F;
+    private static final Float UPDATED_NEW_METER_READING = 2F;
 
     private static final Boolean DEFAULT_ORGANIZATION = false;
     private static final Boolean UPDATED_ORGANIZATION = true;
@@ -74,6 +74,8 @@ public class CustomerResourceIntTest {
     private static final Long UPDATED_PREVIOUS_MOBILE = 2L;
     private static final String DEFAULT_PREVIOUS_EMAIL = "AAAAA";
     private static final String UPDATED_PREVIOUS_EMAIL = "BBBBB";
+    private static final String DEFAULT_NEW_EMAIL = "AAAAA";
+    private static final String UPDATED_NEW_EMAIL = "BBBBB";
     private static final String DEFAULT_FIRST_NAME = "AAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBB";
     private static final String DEFAULT_MIDDLE_NAME = "AAAAA";
@@ -83,8 +85,6 @@ public class CustomerResourceIntTest {
 
     private static final Long DEFAULT_MOBILE_NO = 1L;
     private static final Long UPDATED_MOBILE_NO = 2L;
-    private static final String DEFAULT_EMAIL = "AAAAA";
-    private static final String UPDATED_EMAIL = "BBBBB";
     private static final String DEFAULT_ID_NUMBER = "AAAAA";
     private static final String UPDATED_ID_NUMBER = "BBBBB";
     private static final String DEFAULT_PHOTO = "AAAAA";
@@ -124,8 +124,8 @@ public class CustomerResourceIntTest {
     @Before
     public void initTest() {
         customer = new Customer();
-        customer.setMeterReading(DEFAULT_METER_READING);
-        customer.setPresentReading(DEFAULT_PRESENT_READING);
+        customer.setPrevMeterReading(DEFAULT_PREV_METER_READING);
+        customer.setNewMeterReading(DEFAULT_NEW_METER_READING);
         customer.setOrganization(DEFAULT_ORGANIZATION);
         customer.setOrganizationName(DEFAULT_ORGANIZATION_NAME);
         customer.setDesignation(DEFAULT_DESIGNATION);
@@ -137,11 +137,11 @@ public class CustomerResourceIntTest {
         customer.setPreviousName(DEFAULT_PREVIOUS_NAME);
         customer.setPreviousMobile(DEFAULT_PREVIOUS_MOBILE);
         customer.setPreviousEmail(DEFAULT_PREVIOUS_EMAIL);
+        customer.setNewEmail(DEFAULT_NEW_EMAIL);
         customer.setFirstName(DEFAULT_FIRST_NAME);
         customer.setMiddleName(DEFAULT_MIDDLE_NAME);
         customer.setLastName(DEFAULT_LAST_NAME);
         customer.setMobileNo(DEFAULT_MOBILE_NO);
-        customer.setEmail(DEFAULT_EMAIL);
         customer.setIdNumber(DEFAULT_ID_NUMBER);
         customer.setPhoto(DEFAULT_PHOTO);
         customer.setStatus(DEFAULT_STATUS);
@@ -165,8 +165,8 @@ public class CustomerResourceIntTest {
         List<Customer> customers = customerRepository.findAll();
         assertThat(customers).hasSize(databaseSizeBeforeCreate + 1);
         Customer testCustomer = customers.get(customers.size() - 1);
-        assertThat(testCustomer.getMeterReading()).isEqualTo(DEFAULT_METER_READING);
-        assertThat(testCustomer.getPresentReading()).isEqualTo(DEFAULT_PRESENT_READING);
+        assertThat(testCustomer.getPrevMeterReading()).isEqualTo(DEFAULT_PREV_METER_READING);
+        assertThat(testCustomer.getNewMeterReading()).isEqualTo(DEFAULT_NEW_METER_READING);
         assertThat(testCustomer.getOrganization()).isEqualTo(DEFAULT_ORGANIZATION);
         assertThat(testCustomer.getOrganizationName()).isEqualTo(DEFAULT_ORGANIZATION_NAME);
         assertThat(testCustomer.getDesignation()).isEqualTo(DEFAULT_DESIGNATION);
@@ -178,11 +178,11 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getPreviousName()).isEqualTo(DEFAULT_PREVIOUS_NAME);
         assertThat(testCustomer.getPreviousMobile()).isEqualTo(DEFAULT_PREVIOUS_MOBILE);
         assertThat(testCustomer.getPreviousEmail()).isEqualTo(DEFAULT_PREVIOUS_EMAIL);
+        assertThat(testCustomer.getNewEmail()).isEqualTo(DEFAULT_NEW_EMAIL);
         assertThat(testCustomer.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testCustomer.getMiddleName()).isEqualTo(DEFAULT_MIDDLE_NAME);
         assertThat(testCustomer.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testCustomer.getMobileNo()).isEqualTo(DEFAULT_MOBILE_NO);
-        assertThat(testCustomer.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testCustomer.getIdNumber()).isEqualTo(DEFAULT_ID_NUMBER);
         assertThat(testCustomer.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testCustomer.getStatus()).isEqualTo(DEFAULT_STATUS);
@@ -201,8 +201,8 @@ public class CustomerResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(customer.getId().intValue())))
-                .andExpect(jsonPath("$.[*].meterReading").value(hasItem(DEFAULT_METER_READING.doubleValue())))
-                .andExpect(jsonPath("$.[*].presentReading").value(hasItem(DEFAULT_PRESENT_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].prevMeterReading").value(hasItem(DEFAULT_PREV_METER_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].newMeterReading").value(hasItem(DEFAULT_NEW_METER_READING.doubleValue())))
                 .andExpect(jsonPath("$.[*].organization").value(hasItem(DEFAULT_ORGANIZATION.booleanValue())))
                 .andExpect(jsonPath("$.[*].organizationName").value(hasItem(DEFAULT_ORGANIZATION_NAME.toString())))
                 .andExpect(jsonPath("$.[*].designation").value(hasItem(DEFAULT_DESIGNATION.toString())))
@@ -214,11 +214,11 @@ public class CustomerResourceIntTest {
                 .andExpect(jsonPath("$.[*].previousName").value(hasItem(DEFAULT_PREVIOUS_NAME.toString())))
                 .andExpect(jsonPath("$.[*].previousMobile").value(hasItem(DEFAULT_PREVIOUS_MOBILE.intValue())))
                 .andExpect(jsonPath("$.[*].previousEmail").value(hasItem(DEFAULT_PREVIOUS_EMAIL.toString())))
+                .andExpect(jsonPath("$.[*].newEmail").value(hasItem(DEFAULT_NEW_EMAIL.toString())))
                 .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
                 .andExpect(jsonPath("$.[*].middleName").value(hasItem(DEFAULT_MIDDLE_NAME.toString())))
                 .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
                 .andExpect(jsonPath("$.[*].mobileNo").value(hasItem(DEFAULT_MOBILE_NO.intValue())))
-                .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
                 .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
@@ -237,8 +237,8 @@ public class CustomerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(customer.getId().intValue()))
-            .andExpect(jsonPath("$.meterReading").value(DEFAULT_METER_READING.doubleValue()))
-            .andExpect(jsonPath("$.presentReading").value(DEFAULT_PRESENT_READING.doubleValue()))
+            .andExpect(jsonPath("$.prevMeterReading").value(DEFAULT_PREV_METER_READING.doubleValue()))
+            .andExpect(jsonPath("$.newMeterReading").value(DEFAULT_NEW_METER_READING.doubleValue()))
             .andExpect(jsonPath("$.organization").value(DEFAULT_ORGANIZATION.booleanValue()))
             .andExpect(jsonPath("$.organizationName").value(DEFAULT_ORGANIZATION_NAME.toString()))
             .andExpect(jsonPath("$.designation").value(DEFAULT_DESIGNATION.toString()))
@@ -250,11 +250,11 @@ public class CustomerResourceIntTest {
             .andExpect(jsonPath("$.previousName").value(DEFAULT_PREVIOUS_NAME.toString()))
             .andExpect(jsonPath("$.previousMobile").value(DEFAULT_PREVIOUS_MOBILE.intValue()))
             .andExpect(jsonPath("$.previousEmail").value(DEFAULT_PREVIOUS_EMAIL.toString()))
+            .andExpect(jsonPath("$.newEmail").value(DEFAULT_NEW_EMAIL.toString()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.middleName").value(DEFAULT_MIDDLE_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
             .andExpect(jsonPath("$.mobileNo").value(DEFAULT_MOBILE_NO.intValue()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
             .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
@@ -279,8 +279,8 @@ public class CustomerResourceIntTest {
 		int databaseSizeBeforeUpdate = customerRepository.findAll().size();
 
         // Update the customer
-        customer.setMeterReading(UPDATED_METER_READING);
-        customer.setPresentReading(UPDATED_PRESENT_READING);
+        customer.setPrevMeterReading(UPDATED_PREV_METER_READING);
+        customer.setNewMeterReading(UPDATED_NEW_METER_READING);
         customer.setOrganization(UPDATED_ORGANIZATION);
         customer.setOrganizationName(UPDATED_ORGANIZATION_NAME);
         customer.setDesignation(UPDATED_DESIGNATION);
@@ -292,11 +292,11 @@ public class CustomerResourceIntTest {
         customer.setPreviousName(UPDATED_PREVIOUS_NAME);
         customer.setPreviousMobile(UPDATED_PREVIOUS_MOBILE);
         customer.setPreviousEmail(UPDATED_PREVIOUS_EMAIL);
+        customer.setNewEmail(UPDATED_NEW_EMAIL);
         customer.setFirstName(UPDATED_FIRST_NAME);
         customer.setMiddleName(UPDATED_MIDDLE_NAME);
         customer.setLastName(UPDATED_LAST_NAME);
         customer.setMobileNo(UPDATED_MOBILE_NO);
-        customer.setEmail(UPDATED_EMAIL);
         customer.setIdNumber(UPDATED_ID_NUMBER);
         customer.setPhoto(UPDATED_PHOTO);
         customer.setStatus(UPDATED_STATUS);
@@ -312,8 +312,8 @@ public class CustomerResourceIntTest {
         List<Customer> customers = customerRepository.findAll();
         assertThat(customers).hasSize(databaseSizeBeforeUpdate);
         Customer testCustomer = customers.get(customers.size() - 1);
-        assertThat(testCustomer.getMeterReading()).isEqualTo(UPDATED_METER_READING);
-        assertThat(testCustomer.getPresentReading()).isEqualTo(UPDATED_PRESENT_READING);
+        assertThat(testCustomer.getPrevMeterReading()).isEqualTo(UPDATED_PREV_METER_READING);
+        assertThat(testCustomer.getNewMeterReading()).isEqualTo(UPDATED_NEW_METER_READING);
         assertThat(testCustomer.getOrganization()).isEqualTo(UPDATED_ORGANIZATION);
         assertThat(testCustomer.getOrganizationName()).isEqualTo(UPDATED_ORGANIZATION_NAME);
         assertThat(testCustomer.getDesignation()).isEqualTo(UPDATED_DESIGNATION);
@@ -325,11 +325,11 @@ public class CustomerResourceIntTest {
         assertThat(testCustomer.getPreviousName()).isEqualTo(UPDATED_PREVIOUS_NAME);
         assertThat(testCustomer.getPreviousMobile()).isEqualTo(UPDATED_PREVIOUS_MOBILE);
         assertThat(testCustomer.getPreviousEmail()).isEqualTo(UPDATED_PREVIOUS_EMAIL);
+        assertThat(testCustomer.getNewEmail()).isEqualTo(UPDATED_NEW_EMAIL);
         assertThat(testCustomer.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testCustomer.getMiddleName()).isEqualTo(UPDATED_MIDDLE_NAME);
         assertThat(testCustomer.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testCustomer.getMobileNo()).isEqualTo(UPDATED_MOBILE_NO);
-        assertThat(testCustomer.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testCustomer.getIdNumber()).isEqualTo(UPDATED_ID_NUMBER);
         assertThat(testCustomer.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testCustomer.getStatus()).isEqualTo(UPDATED_STATUS);

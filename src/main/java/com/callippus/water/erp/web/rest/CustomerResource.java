@@ -212,12 +212,13 @@ public class CustomerResource {
 		}
 		
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
-			customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()));
+			//customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()));
 			customer.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
 		}
 		
 		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
-			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
+			//custDetails.setTariffCategoryMaster(customer.getPresentCategory());
+			custDetails.setTariffCategoryMaster(customer.getNewTariffCategory());
 		}
 		
 		if("PIPESIZE".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
@@ -234,7 +235,7 @@ public class CustomerResource {
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getLastName());
 	            }
 			custDetails.setMobileNo(customer.getMobileNo().toString());
-			custDetails.setEmail(customer.getEmail());
+			custDetails.setEmail(customer.getNewEmail());//changed
 			custDetails.setIdNumber(customer.getIdNumber());
 			
 		}
