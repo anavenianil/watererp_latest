@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 
 /**
  * Spring Data JPA repository for the CustDetails entity.
@@ -27,6 +28,8 @@ public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 			+ "from CustDetails at where SUBSTRING(can, 1,2)=:division and SUBSTRING(can, 3,2)=:street")
 	Integer findByCan(@Param("division")String division, @Param("street")String street); 
 	
-
+	@Query("select c from CustDetails c where c.status='TERMINATED' and c.prevBillType != 'T'")
+	public List<CustDetails> findNewTerminations();
+	
 	public List<CustDetails> findByPrevBillType(String prevBillType);
 }
