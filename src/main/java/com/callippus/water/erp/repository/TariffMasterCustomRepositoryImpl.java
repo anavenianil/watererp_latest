@@ -61,7 +61,7 @@ public class TariffMasterCustomRepositoryImpl extends
 		"          valid_from, "+
 		"          valid_to, "+
 		"          c.tariff_category_master_id, "+
-		"          case when Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) = 0 then 1 else Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) end months, "+
+		"          case when Timestampdiff(month, date(valid_from), date(valid_to) + INTERVAL 1 day) = 0 then 1 else Timestampdiff(month, date(valid_from), date(valid_to) + INTERVAL 1 day) end months, "+
 		"          t.id tariff_charges_id, "+
 		"          t.tariff_desc, "+
 		"          t.slab_min, "+
@@ -118,16 +118,16 @@ public class TariffMasterCustomRepositoryImpl extends
 		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
 		Timestamp to = Timestamp.valueOf(validTo.atStartOfDay());
 
-		String sql = "select tariff_type_master_id, avg(rate) rate,sum(amount) amount from " + 
+		String sql = "select tariff_type_master_id, sum(rate * months)/sum(months) rate,sum(amount) amount from " + 
 				"( " +
-				"SELECT tariff_type_master_id, rate, "+
+				"SELECT tariff_type_master_id, rate, months, "+
 				"       CASE "+
 				"           WHEN tariff_type_master_id=1 THEN CASE "+
 				"                                                 WHEN 1=? THEN rate * months * min_unmetered_kl "+
 				"                                                 ELSE rate * months * avg_kl "+
 				"                                             END "+
 				"           ELSE CASE "+
-				"                    WHEN Timestampdiff(day, valid_from, valid_to + INTERVAL 1 day) < 15 THEN 0 "+
+				"                    WHEN Timestampdiff(day, date(valid_from), date(valid_to) + INTERVAL 1 day) < 15 THEN 0 "+
 				"                    ELSE rate * months "+
 				"                END "+
 				"       END amount "+
@@ -137,7 +137,7 @@ public class TariffMasterCustomRepositoryImpl extends
 				"          valid_from, "+
 				"          valid_to, "+
 				"          c.tariff_category_master_id, "+
-				"          case when Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) = 0 then 1 else Timestampdiff(month, valid_from, valid_to + INTERVAL 1 day) end months, "+
+				"          case when Timestampdiff(month, date(valid_from), date(valid_to) + INTERVAL 1 day) = 0 then 1 else Timestampdiff(month, date(valid_from), date(valid_to) + INTERVAL 1 day) end months, "+
 				"          t.id tariff_charges_id, "+
 				"          t.tariff_desc, "+
 				"          t.slab_min, "+
