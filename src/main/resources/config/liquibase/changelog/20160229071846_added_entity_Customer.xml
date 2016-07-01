@@ -61,7 +61,9 @@
             
             <column name="photo" type="varchar(255)"/>
             
-            <column name="status" type="integer"/>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             
             <column name="changed_date" type="date"/>
             

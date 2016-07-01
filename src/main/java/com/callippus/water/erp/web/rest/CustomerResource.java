@@ -30,6 +30,7 @@ import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
@@ -85,12 +86,13 @@ public class CustomerResource {
 			return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("customer","idexists","A new customer cannot already have an ID")).body(null);
 		}
 		customer.setPhoto("");
+		customer.setStatus(ChangeCaseStatus.INITIATED);
 		customerRepository.save(customer);
 		HashMap<String, String> hm = new HashMap<String, String>();
 		hm.put("photo", "setPhoto");
 		UploadDownloadResource.setValues(customer, hm, request,
 				customer.getId());
-		customer.setStatus(1);
+		
 		Customer result = customerRepository.save(customer);
 		try {
 			workflowService.setAssignedDate(ZonedDateTime.now().toString());
@@ -190,7 +192,10 @@ public class CustomerResource {
 		log.debug("REST request to save Customer : {}", workflowDTO);
 		Customer customer = workflowDTO.getCustomer();
 		Customer customerDb = customerRepository.findOne(customer.getId());
-		customer.setStatus(customerDb.getStatus() + 1);
+		if(ChangeCaseStatus.INITIATED.equals(customerDb.getStatus())){
+			customer.setStatus(ChangeCaseStatus.PROCESSING);
+		}
+		//customer.setStatus(customerDb.getStatus() + 1);
 		try {
 			workflowService.setRemarks(workflowDTO.getRemarks());
 			workflowService.getUserDetails();
@@ -213,7 +218,8 @@ public class CustomerResource {
 		
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			//customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()));
-			customer.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
+			//customer.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
+			customer.setStatus(ChangeCaseStatus.APPROVED);
 		}
 		
 		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
@@ -227,7 +233,7 @@ public class CustomerResource {
 		}
 			
 		
-		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
+		/*if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			 if(customer.getMiddleName()!=null){
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getMiddleName()+" "+customer.getLastName());
 	            }
@@ -238,7 +244,7 @@ public class CustomerResource {
 			custDetails.setEmail(customer.getNewEmail());//changed
 			custDetails.setIdNumber(customer.getIdNumber());
 			
-		}
+		}*/
 		customerRepository.save(customer);
 		//custDetailsRepository.save(custDetails); not to save in custDetails
 
@@ -266,8 +272,9 @@ public class CustomerResource {
 		
 		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
 		
-		workflowDTO.getCustomer().setStatus(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()).getId().intValue());
+		//workflowDTO.getCustomer().setStatus(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()).getId().intValue());
 		//Customer customer = 
+		workflowDTO.getCustomer().setStatus(ChangeCaseStatus.DECLINED);
 		customerRepository.save(workflowDTO.getCustomer());
 		
 		//customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()));

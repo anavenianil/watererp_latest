@@ -140,7 +140,11 @@
         {
             "fieldId": 21,
             "fieldName": "status",
-            "fieldType": "Integer"
+            "fieldType": "ChangeCaseStatus",
+            "fieldValues": "INITIATED, PROCESSING, PAYMENTNC, APPROVED, DECLINED, BILLED",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldId": 22,

@@ -192,12 +192,11 @@ angular
 					$scope.checkReading = function(prvReading, newReading) {
 						if (prvReading >= newReading) {
 
-							$scope.editForm.presentReading.$setValidity(
+							$scope.editForm.newMeterReading.$setValidity(
 									"ltPrevious", true);
 							return true;
 						} else {
-
-							$scope.editForm.presentReading.$setValidity(
+							$scope.editForm.newMeterReading.$setValidity(
 									"ltPrevious", false);
 							return false;
 						}

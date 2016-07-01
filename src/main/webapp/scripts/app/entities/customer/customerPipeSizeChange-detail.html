@@ -72,7 +72,7 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label>Previous Pipe Size</label>
-									<h5 class="list-group-item-heading">{{customer.pipeSizeMaster.pipeSize}}</h5>
+									<h5 class="list-group-item-heading">{{customer.oldPipeSizeMaster.pipeSize}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label>Requested Pipe Size</label>
@@ -80,11 +80,11 @@
 								</div>
 								<div class="col-sm-3">
 									<label>Previous Reading(Last Billed)</label>
-									<h5 class="list-group-item-heading">{{customer.meterReading}}</h5>
+									<h5 class="list-group-item-heading">{{customer.prevMeterReading}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label>Present Reading</label>
-									<h5 class="list-group-item-heading">{{customer.presentReading}}</h5>
+									<h5 class="list-group-item-heading">{{customer.newMeterReading}}</h5>
 								</div>
 							</div>
 							<br>
@@ -95,7 +95,7 @@
 										| date:'mediumDate'}}</h5>
 								</div>
 								<div class="col-sm-3"
-									ng-show="customer.status==2 && orgRole.id==16">
+									ng-show="customer.status=='PROCESSING' && orgRole.id==16">
 									<label class="control-label" for="field_changedDate">Changed
 										Date</label>
 									<div class="form-group"
@@ -125,7 +125,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-3" ng-show="customer.status==9">
+								<div class="col-sm-3" ng-show="customer.status=='APPROVED' || customer.status=='APPROVED'">
 									<label>Changed Date</label>
 									<h5 class="list-group-item-heading">{{customer.changedDate
 										| date:'mediumDate'}}</h5>

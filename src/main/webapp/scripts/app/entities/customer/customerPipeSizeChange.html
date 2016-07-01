@@ -51,7 +51,6 @@
 												field is required.</p>
 											<p class="help-block" ng-show="editForm.can.$error.number">Please
 												enter numbers only .</p>
-
 										</div>
 									</div>
 								</div>
@@ -72,8 +71,6 @@
 											<p class="help-block"
 												ng-show="editForm.consName.$error.pattern">Enter text
 												only .</p>
-
-
 										</div>
 									</div>
 								</div>
@@ -132,9 +129,9 @@
 							<legend>Change Pipe Size</legend>
 							<div class="row">
 								<div class="col-sm-3">
-									<label for="field_pipeSizeMaster">Present Pipe Size</label> <select
-										class="form-control" id="field_pipeSizeMaster"
-										name="pipeSizeMaster" ng-model="customer.pipeSizeMaster"
+									<label for="field_oldPipeSizeMaster">Present Pipe Size</label> <select
+										class="form-control" id="field_oldPipeSizeMaster"
+										name="oldPipeSizeMaster" ng-model="customer.oldPipeSizeMaster"
 										ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id"
 										disabled required>
 										<option value=""></option>
@@ -149,7 +146,7 @@
 											id="field_requestedPipeSizeMaster"
 											name="requestedPipeSizeMaster"
 											ng-model="customer.requestedPipeSizeMaster"
-											ng-change="pipeCheck(customer.pipeSizeMaster.id, customer.requestedPipeSizeMaster.id)"
+											ng-change="pipeCheck(customer.oldPipeSizeMaster.id, customer.requestedPipeSizeMaster.id)"
 											ng-options="pipeSizeMaster as pipeSizeMaster.pipeSize for pipeSizeMaster in pipesizemasters track by pipeSizeMaster.id"
 											required>
 											<option value=""></option>
@@ -167,29 +164,28 @@
 									</div>
 								</div>
 								<div class="col-sm-3">
-									<label class="control-label" for="field_meterReading">Meter
+									<label class="control-label" for="field_prevMeterReading">Meter
 										Reading(Last Billed)</label> <input type="number" class="form-control"
-										name="meterReading" id="field_meterReading"
-										ng-model="customer.meterReading" disabled required />
+										name="prevMeterReading" id="field_prevMeterReading"
+										ng-model="customer.prevMeterReading" disabled required />
 								</div>
 								<div class="col-sm-3">
 									<div class="form-group"
-										ng-class="{'has-error': editForm.presentReading.$invalid && 
-         								(editForm.presentReading.$dirty || rc.editForm.attempted)}">
-										<label class="control-label" for="field_presentReading">Present
+										ng-class="{'has-error': editForm.newMeterReading.$invalid && 
+         								(editForm.newMeterReading.$dirty || rc.editForm.attempted)}">
+										<label class="control-label" for="field_newMeterReading">Present
 											Reading</label> <input type="number" class="form-control"
-											name="presentReading" id="field_presentReading"
-											ng-model="customer.presentReading" min="0"
-											ng-blur="checkReading(customer.presentReading,customer.meterReading)"
+											name="newMeterReading" id="field_newMeterReading"
+											ng-model="customer.newMeterReading" min="0"
+											ng-blur="checkReading(customer.newMeterReading,customer.prevMeterReading)"
 											required />
 										<div
-											ng-show="(editForm.presentReading.$dirty || rc.editForm.attempted) && editForm.presentReading.$invalid">
+											ng-show="(editForm.newMeterReading.$dirty || rc.editForm.attempted) && editForm.newMeterReading.$invalid">
 											<p class="help-block"
-												ng-show="editForm.presentReading.$error.required">This
+												ng-show="editForm.newMeterReading.$error.required">This
 												field is required.</p>
-
 											<p class="help-block"
-												ng-show="editForm.presentReading.$error.ltPrevious">Value
+												ng-show="editForm.newMeterReading.$error.ltPrevious">Value
 												is greater than or equal to Previous Reading.</p>
 										</div>
 									</div>
