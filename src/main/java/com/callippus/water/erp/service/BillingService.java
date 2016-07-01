@@ -1,5 +1,6 @@
 package com.callippus.water.erp.service;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.Adjustments;
 import com.callippus.water.erp.domain.BillDetails;
@@ -9,8 +10,10 @@ import com.callippus.water.erp.domain.BillRunMaster;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.ConnectionTerminate;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.enumeration.BillingStatus;
+import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.domain.enumeration.MeterChangeStatus;
 import com.callippus.water.erp.domain.enumeration.TxnStatus;
@@ -23,6 +26,7 @@ import com.callippus.water.erp.repository.BillRunMasterRepository;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.ConnectionTerminateRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.repository.MeterChangeRepository;
 import com.callippus.water.erp.repository.TariffMasterCustomRepository;
 
@@ -84,6 +88,9 @@ public class BillingService {
 
 	@Inject
 	private ConnectionTerminateRepository connectionTerminateRepository;
+
+	@Inject
+	private CustomerRepository customerRepository;
 
 	enum Status {
 		SUCCESS, FAILURE
@@ -401,8 +408,6 @@ public class BillingService {
 
 			adjustmentsRepository.save(adjustments);
 
-			custDetailsRepository.saveAndFlush(customer);
-
 			MeterChange meterChange = meterChangeRepository.findByCanAndStatus(customer.getCan(),
 					MeterChangeStatus.APPROVED);
 
@@ -412,6 +417,26 @@ public class BillingService {
 
 				meterChangeRepository.save(meterChange);
 			}
+
+			List<Customer> customerChanges = customerRepository.findByCanAndStatus(customer.getCan(),
+					ChangeCaseStatus.APPROVED);
+
+			for (Customer customerChange : customerChanges) {
+				if (customerChange.getChangeType().equals("CONNECTIONCATEGORY")) {
+					customer.setTariffCategoryMaster(customerChange.getNewTariffCategory());
+					customerChange.setStatus(ChangeCaseStatus.BILLED);
+
+					customerRepository.saveAndFlush(customerChange);
+				} else if (customerChange.getChangeType().equals("PIPESIZE")) {
+					customer.setPipeSize(customerChange.getRequestedPipeSizeMaster().getPipeSize());
+					customer.setPipeSizeMaster(customerChange.getRequestedPipeSizeMaster());
+					customerChange.setStatus(ChangeCaseStatus.BILLED);
+
+					customerRepository.saveAndFlush(customerChange);
+				}
+			}
+
+			custDetailsRepository.saveAndFlush(customer);
 
 			log.debug("Finished committing CAN:" + bd.getCan());
 

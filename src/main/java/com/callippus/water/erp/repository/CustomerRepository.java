@@ -1,5 +1,7 @@
 package com.callippus.water.erp.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.callippus.water.erp.domain.Customer;
+import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 
 /**
  * Spring Data JPA repository for the Customer entity.
@@ -21,5 +24,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
 			+ "(select cd.can from CustDetails cd where cd.can=:can and cd.status='ACTIVE'))")*/
 	@Query("select c from Customer c where c.can=:can and c.status !='BILLED' and changeType=:changeType")
 	Customer findByChangeTypeAndCan(@Param("changeType")String changeType, @Param("can")String can);
+	
+	List<Customer> findByCanAndStatus(String can, ChangeCaseStatus status);
 
 }
