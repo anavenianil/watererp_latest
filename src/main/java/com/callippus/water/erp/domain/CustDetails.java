@@ -164,6 +164,21 @@ public class CustDetails implements Serializable {
     @Column(name = "status", nullable = false)
     private CustStatus status;
 
+    @Column(name = "organisation_name")
+    private String organisationName;
+
+    @Column(name = "designation")
+    private String designation;
+
+    @Column(name = "photo")
+    private String photo;
+
+    @Column(name = "deed_doc")
+    private String deedDoc;
+
+    @Column(name = "agreement_doc")
+    private String agreementDoc;
+
     @ManyToOne
     @JoinColumn(name = "tariff_category_master_id")
     private TariffCategoryMaster tariffCategoryMaster;
@@ -552,6 +567,46 @@ public class CustDetails implements Serializable {
         this.status = status;
     }
 
+    public String getOrganisationName() {
+        return organisationName;
+    }
+
+    public void setOrganisationName(String organisationName) {
+        this.organisationName = organisationName;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getDeedDoc() {
+        return deedDoc;
+    }
+
+    public void setDeedDoc(String deedDoc) {
+        this.deedDoc = deedDoc;
+    }
+
+    public String getAgreementDoc() {
+        return agreementDoc;
+    }
+
+    public void setAgreementDoc(String agreementDoc) {
+        this.agreementDoc = agreementDoc;
+    }
+
     public TariffCategoryMaster getTariffCategoryMaster() {
         return tariffCategoryMaster;
     }
@@ -658,6 +713,11 @@ public class CustDetails implements Serializable {
             ", idNumber='" + idNumber + "'" +
             ", email='" + email + "'" +
             ", status='" + status + "'" +
+            ", organisationName='" + organisationName + "'" +
+            ", designation='" + designation + "'" +
+            ", photo='" + photo + "'" +
+            ", deedDoc='" + deedDoc + "'" +
+            ", agreementDoc='" + agreementDoc + "'" +
             '}';
     }
 }

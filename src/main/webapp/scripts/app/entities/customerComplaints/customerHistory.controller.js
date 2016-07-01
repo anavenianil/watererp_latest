@@ -6,6 +6,7 @@ angular.module('watererpApp')
         $scope.customerComplaintss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
+        $scope.txnList = [];
 
         $scope.page = 0;
         
@@ -33,6 +34,7 @@ angular.module('watererpApp')
 						for (var i = 0; i < response.data.length; i++) {
 							$scope.txnList.push(response.data[i]);
 						}
+						console.log($scope.txnList.length);
 					});
 		}
         
@@ -46,37 +48,25 @@ angular.module('watererpApp')
 			$scope.findBillDetails($scope.custDetails.can);
 		};
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        $scope.loadAll = function() {
+        /*$scope.loadAll = function() {
             CustomerComplaints.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.customerComplaintss.push(result[i]);
                 }
             });
-        };
+        };*/
         $scope.reset = function() {
             $scope.page = 0;
             $scope.customerComplaintss = [];
             $scope.loadAll();
         };
-        $scope.loadPage = function(page) {
+        /*$scope.loadPage = function(page) {
             $scope.page = page;
             $scope.loadAll();
         };
         $scope.loadAll();
+        */
 
 
         $scope.refresh = function () {
@@ -108,14 +98,14 @@ angular.module('watererpApp')
 			});
 		};
 		
-		 $scope.getRequestTypeId = function(domainId,requestType) {
+		 /*$scope.getRequestTypeId = function(domainId,requestType) {
      		if(requestType == 1){//INCORRECT BILL
      			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:3});
      		}
      		if(requestType == 2){//INCORRECT BILL
      			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:4});
      		}
-	        }
+	        }*/
 
         $scope.clear = function () {
             $scope.customerComplaints = {

@@ -271,6 +271,31 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+	    {
+            "fieldId": 46,
+            "fieldName": "organisationName",
+            "fieldType": "String"
+        },
+	    {
+            "fieldId": 47,
+            "fieldName": "designation",
+            "fieldType": "String"
+        },
+	    {
+            "fieldId": 48,
+            "fieldName": "photo",
+            "fieldType": "String"
+        },
+	    {
+            "fieldId": 49,
+            "fieldName": "deedDoc",
+            "fieldType": "String"
+        },
+	    {
+            "fieldId": 50,
+            "fieldName": "agreementDoc",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160314132343",

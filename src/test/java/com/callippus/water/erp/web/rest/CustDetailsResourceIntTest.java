@@ -156,6 +156,16 @@ public class CustDetailsResourceIntTest {
 
     private static final CustStatus DEFAULT_STATUS = CustStatus.ACTIVE;
     private static final CustStatus UPDATED_STATUS = CustStatus.TERMINATED;
+    private static final String DEFAULT_ORGANISATION_NAME = "AAAAA";
+    private static final String UPDATED_ORGANISATION_NAME = "BBBBB";
+    private static final String DEFAULT_DESIGNATION = "AAAAA";
+    private static final String UPDATED_DESIGNATION = "BBBBB";
+    private static final String DEFAULT_PHOTO = "AAAAA";
+    private static final String UPDATED_PHOTO = "BBBBB";
+    private static final String DEFAULT_DEED_DOC = "AAAAA";
+    private static final String UPDATED_DEED_DOC = "BBBBB";
+    private static final String DEFAULT_AGREEMENT_DOC = "AAAAA";
+    private static final String UPDATED_AGREEMENT_DOC = "BBBBB";
 
     @Inject
     private CustDetailsRepository custDetailsRepository;
@@ -228,6 +238,11 @@ public class CustDetailsResourceIntTest {
         custDetails.setIdNumber(DEFAULT_ID_NUMBER);
         custDetails.setEmail(DEFAULT_EMAIL);
         custDetails.setStatus(DEFAULT_STATUS);
+        custDetails.setOrganisationName(DEFAULT_ORGANISATION_NAME);
+        custDetails.setDesignation(DEFAULT_DESIGNATION);
+        custDetails.setPhoto(DEFAULT_PHOTO);
+        custDetails.setDeedDoc(DEFAULT_DEED_DOC);
+        custDetails.setAgreementDoc(DEFAULT_AGREEMENT_DOC);
     }
 
     @Test
@@ -291,6 +306,11 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getIdNumber()).isEqualTo(DEFAULT_ID_NUMBER);
         assertThat(testCustDetails.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testCustDetails.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testCustDetails.getOrganisationName()).isEqualTo(DEFAULT_ORGANISATION_NAME);
+        assertThat(testCustDetails.getDesignation()).isEqualTo(DEFAULT_DESIGNATION);
+        assertThat(testCustDetails.getPhoto()).isEqualTo(DEFAULT_PHOTO);
+        assertThat(testCustDetails.getDeedDoc()).isEqualTo(DEFAULT_DEED_DOC);
+        assertThat(testCustDetails.getAgreementDoc()).isEqualTo(DEFAULT_AGREEMENT_DOC);
     }
 
     @Test
@@ -402,7 +422,12 @@ public class CustDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].lockCharges").value(hasItem(DEFAULT_LOCK_CHARGES.doubleValue())))
                 .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+                .andExpect(jsonPath("$.[*].organisationName").value(hasItem(DEFAULT_ORGANISATION_NAME.toString())))
+                .andExpect(jsonPath("$.[*].designation").value(hasItem(DEFAULT_DESIGNATION.toString())))
+                .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
+                .andExpect(jsonPath("$.[*].deedDoc").value(hasItem(DEFAULT_DEED_DOC.toString())))
+                .andExpect(jsonPath("$.[*].agreementDoc").value(hasItem(DEFAULT_AGREEMENT_DOC.toString())));
     }
 
     @Test
@@ -460,7 +485,12 @@ public class CustDetailsResourceIntTest {
             .andExpect(jsonPath("$.lockCharges").value(DEFAULT_LOCK_CHARGES.doubleValue()))
             .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.organisationName").value(DEFAULT_ORGANISATION_NAME.toString()))
+            .andExpect(jsonPath("$.designation").value(DEFAULT_DESIGNATION.toString()))
+            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
+            .andExpect(jsonPath("$.deedDoc").value(DEFAULT_DEED_DOC.toString()))
+            .andExpect(jsonPath("$.agreementDoc").value(DEFAULT_AGREEMENT_DOC.toString()));
     }
 
     @Test
@@ -525,6 +555,11 @@ public class CustDetailsResourceIntTest {
         custDetails.setIdNumber(UPDATED_ID_NUMBER);
         custDetails.setEmail(UPDATED_EMAIL);
         custDetails.setStatus(UPDATED_STATUS);
+        custDetails.setOrganisationName(UPDATED_ORGANISATION_NAME);
+        custDetails.setDesignation(UPDATED_DESIGNATION);
+        custDetails.setPhoto(UPDATED_PHOTO);
+        custDetails.setDeedDoc(UPDATED_DEED_DOC);
+        custDetails.setAgreementDoc(UPDATED_AGREEMENT_DOC);
 
         restCustDetailsMockMvc.perform(put("/api/custDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -580,6 +615,11 @@ public class CustDetailsResourceIntTest {
         assertThat(testCustDetails.getIdNumber()).isEqualTo(UPDATED_ID_NUMBER);
         assertThat(testCustDetails.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testCustDetails.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testCustDetails.getOrganisationName()).isEqualTo(UPDATED_ORGANISATION_NAME);
+        assertThat(testCustDetails.getDesignation()).isEqualTo(UPDATED_DESIGNATION);
+        assertThat(testCustDetails.getPhoto()).isEqualTo(UPDATED_PHOTO);
+        assertThat(testCustDetails.getDeedDoc()).isEqualTo(UPDATED_DEED_DOC);
+        assertThat(testCustDetails.getAgreementDoc()).isEqualTo(UPDATED_AGREEMENT_DOC);
     }
 
     @Test
