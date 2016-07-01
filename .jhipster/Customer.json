@@ -2,14 +2,14 @@
     "relationships": [
     	{
             "relationshipId": 1,
-            "relationshipName": "tariffCategoryMaster",
+            "relationshipName": "oldTariffCategory",
             "otherEntityName": "tariffCategoryMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
     	{
             "relationshipId": 2,
-            "relationshipName": "presentCategory",
+            "relationshipName": "newTariffCategory",
             "otherEntityName": "tariffCategoryMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
@@ -23,20 +23,13 @@
         },
         {
             "relationshipId": 4,
-            "relationshipName": "statusMaster",
-            "otherEntityName": "statusMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipId": 5,
-            "relationshipName": "pipeSizeMaster",
+            "relationshipName": "OldPipeSizeMaster",
             "otherEntityName": "pipeSizeMaster",
             "relationshipType": "many-to-one",
             "otherEntityRelationshipName": "proceedings"
         },
          {
-            "relationshipId": 6,
+            "relationshipId": 5,
             "relationshipName": "requestedPipeSizeMaster",
             "otherEntityName": "pipeSizeMaster",
             "relationshipType": "many-to-one",
@@ -46,12 +39,12 @@
     "fields": [
      	{
             "fieldId": 1,
-            "fieldName": "meterReading",
+            "fieldName": "prevMeterReading",
             "fieldType": "Float"
         },
         {
             "fieldId": 2,
-            "fieldName": "presentReading",
+            "fieldName": "newMeterReading",
             "fieldType": "Float"
         },
         {
@@ -111,28 +104,28 @@
         },
         {
             "fieldId": 14,
-            "fieldName": "firstName",
+            "fieldName": "newEmail",
             "fieldType": "String"
         },
         {
             "fieldId": 15,
-            "fieldName": "middleName",
+            "fieldName": "firstName",
             "fieldType": "String"
         },
         {
             "fieldId": 16,
-            "fieldName": "lastName",
+            "fieldName": "middleName",
             "fieldType": "String"
         },
         {
             "fieldId": 17,
-            "fieldName": "mobileNo",
-            "fieldType": "Long"
+            "fieldName": "lastName",
+            "fieldType": "String"
         },
         {
             "fieldId": 18,
-            "fieldName": "email",
-            "fieldType": "String"
+            "fieldName": "mobileNo",
+            "fieldType": "Long"
         },
         {
             "fieldId": 19,

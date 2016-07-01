@@ -59,9 +59,9 @@
 							<tr ng-repeat="customer in customers track by customer.id">
 								<td>{{$index+1}}</td>
 								<td>{{customer.can}}</td>
-								<td>{{customer.presentReading}}</td>
-								<td>{{customer.tariffCategoryMaster.tariffCategory}}</td>
-								<td>{{customer.presentCategory.tariffCategory}}</td>
+								<td>{{customer.prevMeterReading}}</td>
+								<td>{{customer.oldTariffCategory.tariffCategory}}</td>
+								<td>{{customer.newTariffCategory.tariffCategory}}</td>
 								<td>{{customer.organizationName}}</td>
 								<td>{{customer.designation}}</td>
 								<td>{{customer.requestedDate | date:'mediumDate'}}</td>

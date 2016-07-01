@@ -22,11 +22,11 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "meter_reading")
-    private Float meterReading;
+    @Column(name = "prev_meter_reading")
+    private Float prevMeterReading;
     
-    @Column(name = "present_reading")
-    private Float presentReading;
+    @Column(name = "new_meter_reading")
+    private Float newMeterReading;
     
     @Column(name = "organization")
     private Boolean organization;
@@ -61,6 +61,9 @@ public class Customer implements Serializable {
     @Column(name = "previous_email")
     private String previousEmail;
     
+    @Column(name = "new_email")
+    private String newEmail;
+    
     @Column(name = "first_name")
     private String firstName;
     
@@ -72,9 +75,6 @@ public class Customer implements Serializable {
     
     @Column(name = "mobile_no")
     private Long mobileNo;
-    
-    @Column(name = "email")
-    private String email;
     
     @Column(name = "id_number")
     private String idNumber;
@@ -92,24 +92,20 @@ public class Customer implements Serializable {
     private String changeType;
     
     @ManyToOne
-    @JoinColumn(name = "tariff_category_master_id")
-    private TariffCategoryMaster tariffCategoryMaster;
+    @JoinColumn(name = "old_tariff_category_id")
+    private TariffCategoryMaster oldTariffCategory;
 
     @ManyToOne
-    @JoinColumn(name = "present_category_id")
-    private TariffCategoryMaster presentCategory;
+    @JoinColumn(name = "new_tariff_category_id")
+    private TariffCategoryMaster newTariffCategory;
 
     @ManyToOne
     @JoinColumn(name = "new_proof_master_id")
     private IdProofMaster newProofMaster;
 
     @ManyToOne
-    @JoinColumn(name = "status_master_id")
-    private StatusMaster statusMaster;
-
-    @ManyToOne
-    @JoinColumn(name = "pipe_size_master_id")
-    private PipeSizeMaster pipeSizeMaster;
+    @JoinColumn(name = "old_pipe_size_master_id")
+    private PipeSizeMaster oldPipeSizeMaster;
 
     @ManyToOne
     @JoinColumn(name = "requested_pipe_size_master_id")
@@ -123,20 +119,20 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public Float getMeterReading() {
-        return meterReading;
+    public Float getPrevMeterReading() {
+        return prevMeterReading;
     }
     
-    public void setMeterReading(Float meterReading) {
-        this.meterReading = meterReading;
+    public void setPrevMeterReading(Float prevMeterReading) {
+        this.prevMeterReading = prevMeterReading;
     }
 
-    public Float getPresentReading() {
-        return presentReading;
+    public Float getNewMeterReading() {
+        return newMeterReading;
     }
     
-    public void setPresentReading(Float presentReading) {
-        this.presentReading = presentReading;
+    public void setNewMeterReading(Float newMeterReading) {
+        this.newMeterReading = newMeterReading;
     }
 
     public Boolean getOrganization() {
@@ -227,6 +223,14 @@ public class Customer implements Serializable {
         this.previousEmail = previousEmail;
     }
 
+    public String getNewEmail() {
+        return newEmail;
+    }
+    
+    public void setNewEmail(String newEmail) {
+        this.newEmail = newEmail;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -257,14 +261,6 @@ public class Customer implements Serializable {
     
     public void setMobileNo(Long mobileNo) {
         this.mobileNo = mobileNo;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getIdNumber() {
@@ -307,20 +303,20 @@ public class Customer implements Serializable {
         this.changeType = changeType;
     }
 
-    public TariffCategoryMaster getTariffCategoryMaster() {
-        return tariffCategoryMaster;
+    public TariffCategoryMaster getOldTariffCategory() {
+        return oldTariffCategory;
     }
 
-    public void setTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster) {
-        this.tariffCategoryMaster = tariffCategoryMaster;
+    public void setOldTariffCategory(TariffCategoryMaster tariffCategoryMaster) {
+        this.oldTariffCategory = tariffCategoryMaster;
     }
 
-    public TariffCategoryMaster getPresentCategory() {
-        return presentCategory;
+    public TariffCategoryMaster getNewTariffCategory() {
+        return newTariffCategory;
     }
 
-    public void setPresentCategory(TariffCategoryMaster tariffCategoryMaster) {
-        this.presentCategory = tariffCategoryMaster;
+    public void setNewTariffCategory(TariffCategoryMaster tariffCategoryMaster) {
+        this.newTariffCategory = tariffCategoryMaster;
     }
 
     public IdProofMaster getNewProofMaster() {
@@ -331,20 +327,12 @@ public class Customer implements Serializable {
         this.newProofMaster = idProofMaster;
     }
 
-    public StatusMaster getStatusMaster() {
-        return statusMaster;
+    public PipeSizeMaster getOldPipeSizeMaster() {
+        return oldPipeSizeMaster;
     }
 
-    public void setStatusMaster(StatusMaster statusMaster) {
-        this.statusMaster = statusMaster;
-    }
-
-    public PipeSizeMaster getPipeSizeMaster() {
-        return pipeSizeMaster;
-    }
-
-    public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
-        this.pipeSizeMaster = pipeSizeMaster;
+    public void setOldPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
+        this.oldPipeSizeMaster = pipeSizeMaster;
     }
 
     public PipeSizeMaster getRequestedPipeSizeMaster() {
@@ -379,8 +367,8 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer{" +
             "id=" + id +
-            ", meterReading='" + meterReading + "'" +
-            ", presentReading='" + presentReading + "'" +
+            ", prevMeterReading='" + prevMeterReading + "'" +
+            ", newMeterReading='" + newMeterReading + "'" +
             ", organization='" + organization + "'" +
             ", organizationName='" + organizationName + "'" +
             ", designation='" + designation + "'" +
@@ -392,11 +380,11 @@ public class Customer implements Serializable {
             ", previousName='" + previousName + "'" +
             ", previousMobile='" + previousMobile + "'" +
             ", previousEmail='" + previousEmail + "'" +
+            ", newEmail='" + newEmail + "'" +
             ", firstName='" + firstName + "'" +
             ", middleName='" + middleName + "'" +
             ", lastName='" + lastName + "'" +
             ", mobileNo='" + mobileNo + "'" +
-            ", email='" + email + "'" +
             ", idNumber='" + idNumber + "'" +
             ", photo='" + photo + "'" +
             ", status='" + status + "'" +
