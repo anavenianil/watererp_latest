@@ -201,6 +201,7 @@ public class ApplicationTxnResource {
 	        custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
 	        custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
 	        custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
+	        custDetails.setOrganisationName(applicationTxn.getOrganizationName());
             custDetails.setConnDate(applicationTxn.getConnectionDate());
             custDetails.setStatus(CustStatus.ACTIVE);
             //For Bill effective month
@@ -564,7 +565,7 @@ public class ApplicationTxnResource {
 	
 	
 	
-	//added to change stage for newCustomerSave
+		//added to change stage for newCustomerSave
 		@RequestMapping(value = "/applicationTxns/createNewCustomer", 
 				method = RequestMethod.POST, 
 				produces = MediaType.APPLICATION_JSON_VALUE)
@@ -598,6 +599,7 @@ public class ApplicationTxnResource {
 	           
 	        custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
 	        custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
+	        custDetails.setOrganisationName(applicationTxn.getOrganizationName());
 	        custDetails.setStatus(CustStatus.ACTIVE);
 	            
 	        CustDetails cd = custDetailsRepository.save(custDetails);
