@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
@@ -78,9 +79,12 @@ public class CollDetailsResource {
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
 		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
-		System.out.println(customer);
-		customer.setArrears(customer.getArrears() - collDetails.getReceiptAmt());
-		
+		Float balance = customer.getArrears() - collDetails.getReceiptAmt();
+		customer.setArrears(balance);
+		if(customer.getStatus()==CustStatus.DISCONNECTED && balance.floatValue() <= 0.0f){
+			customer.setStatus(CustStatus.DEACTIVE);
+		}
+				
 		custDetailsRepository.saveAndFlush(customer);
 
 		return ResponseEntity
