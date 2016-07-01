@@ -3,7 +3,7 @@
 angular.module('watererpApp')
     .controller('FeasibilityStudyFormController', function ($scope, $state, FeasibilityStudy, SchemeMaster, TariffCategoryMaster, 
     		MakeOfPipe, MainWaterSize, MainSewerageSize, DocketCode, ApplicationTxn, CategoryMaster, SewerSize, PipeSizeMaster, 
-    		FeasibilityStatus, ParseLinks) {
+    		ParseLinks) {
 
         $scope.feasibilityStudys = [];
         $scope.predicate = 'id';
@@ -20,7 +20,6 @@ angular.module('watererpApp')
         $scope.categorymasters = CategoryMaster.query();
         $scope.sewersizes = SewerSize.query();
         $scope.pipesizemasters = PipeSizeMaster.query();
-        $scope.feasibilitystatuss = FeasibilityStatus.query();
         $scope.applicationtxn = {};
         
         $scope.getCustomer = function(fileNo){
