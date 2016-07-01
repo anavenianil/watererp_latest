@@ -209,9 +209,6 @@ public class CustomerResource {
 		
 		CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customer.getCan());
 		
-		/*if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && customer.getStatus()==2){
-			custDetails.setTariffCategoryMaster(customer.getPresentCategory());
-		}*/
 		if(workflowDTO.getReceipt()!=null){
 			receiptRepository.save(workflowDTO.getReceipt());
 		}
@@ -222,18 +219,18 @@ public class CustomerResource {
 			customer.setStatus(ChangeCaseStatus.APPROVED);
 		}
 		
-		if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
+		/*if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			//custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 			custDetails.setTariffCategoryMaster(customer.getNewTariffCategory());
-		}
+		}*/
 		
-		if("PIPESIZE".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
+		/*if("PIPESIZE".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
 			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
-		}
+		}*/
 			
 		
-		/*if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
+		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			 if(customer.getMiddleName()!=null){
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getMiddleName()+" "+customer.getLastName());
 	            }
@@ -243,10 +240,10 @@ public class CustomerResource {
 			custDetails.setMobileNo(customer.getMobileNo().toString());
 			custDetails.setEmail(customer.getNewEmail());//changed
 			custDetails.setIdNumber(customer.getIdNumber());
-			
-		}*/
+			custDetailsRepository.save(custDetails);
+		}
 		customerRepository.save(customer);
-		//custDetailsRepository.save(custDetails); not to save in custDetails
+		
 
 		return ResponseEntity.created(new URI("/api/customersApprove/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customer", ""))
@@ -312,4 +309,44 @@ public class CustomerResource {
 				.map(result -> new ResponseEntity<>(workflowDTO, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
+    
+    
+    @RequestMapping(value = "/customers/nameChangeReceipt", 
+			method = RequestMethod.POST, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<Customer> nameChangeReceipt(
+			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
+		log.debug("REST request to save Customer : {}", workflowDTO);
+		Customer customer = workflowDTO.getCustomer();
+		Customer customerDb = customerRepository.findOne(customer.getId());
+		try {
+			workflowService.setRemarks(workflowDTO.getRemarks());
+			workflowService.getUserDetails();
+			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+			custDetailsChangeWorkflowService
+					.approvedCahangeCaseRequest(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(ChangeCaseStatus.PROCESSING.equals(customerDb.getStatus())){
+			customer.setStatus(ChangeCaseStatus.PAYMENTNC);
+		}
+		
+		if(workflowDTO.getReceipt()!=null){
+			receiptRepository.save(workflowDTO.getReceipt());
+		}
+		
+		
+		customerRepository.save(customer);
+		//custDetailsRepository.save(custDetails); not to save in custDetails
+
+		return ResponseEntity.created(new URI("/api/nameChangeReceipt/"))
+				.headers(HeaderUtil.createEntityCreationAlert("customer", ""))
+				.body(null);
+	}
 }
+
+

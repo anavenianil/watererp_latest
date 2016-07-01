@@ -87,15 +87,15 @@ angular
 					$scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.workflowDTO.customer.status) {
-						case 1:
+						case 'INITIATED':
 							if ($scope.orgRole.id === 10)
 								ret = true;
 							break;
-						case 2:
+						case 'PROCESSING':
 							if ($scope.orgRole.id === 22)
 								ret = true;
 							break;
-						case 3:
+						case 'PAYMENTNC':
 							if ($scope.orgRole.id === 16)
 								ret = true;
 							break;
