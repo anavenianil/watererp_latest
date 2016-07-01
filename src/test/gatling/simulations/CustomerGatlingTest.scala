@@ -67,7 +67,7 @@ class CustomerGatlingTest extends Simulation {
             .exec(http("Create new customer")
             .post("/api/customers")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "prevMeterReading":null, "newMeterReading":null, "organization":null, "organizationName":"SAMPLE_TEXT", "designation":"SAMPLE_TEXT", "deedDoc":"SAMPLE_TEXT", "agreementDoc":"SAMPLE_TEXT", "remarks":"SAMPLE_TEXT", "requestedDate":"2020-01-01T00:00:00.000Z", "can":"SAMPLE_TEXT", "previousName":"SAMPLE_TEXT", "previousMobile":null, "previousEmail":"SAMPLE_TEXT", "newEmail":"SAMPLE_TEXT", "firstName":"SAMPLE_TEXT", "middleName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "mobileNo":null, "idNumber":"SAMPLE_TEXT", "photo":"SAMPLE_TEXT", "status":"0", "changedDate":"2020-01-01T00:00:00.000Z", "changeType":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "prevMeterReading":null, "newMeterReading":null, "organization":null, "organizationName":"SAMPLE_TEXT", "designation":"SAMPLE_TEXT", "deedDoc":"SAMPLE_TEXT", "agreementDoc":"SAMPLE_TEXT", "remarks":"SAMPLE_TEXT", "requestedDate":"2020-01-01T00:00:00.000Z", "can":"SAMPLE_TEXT", "previousName":"SAMPLE_TEXT", "previousMobile":null, "previousEmail":"SAMPLE_TEXT", "newEmail":"SAMPLE_TEXT", "firstName":"SAMPLE_TEXT", "middleName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "mobileNo":null, "idNumber":"SAMPLE_TEXT", "photo":"SAMPLE_TEXT", "status":null, "changedDate":"2020-01-01T00:00:00.000Z", "changeType":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_customer_url")))
             .pause(10)

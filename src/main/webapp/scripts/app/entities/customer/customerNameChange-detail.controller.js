@@ -10,6 +10,7 @@ angular
 					$scope.workflowDTO = {};
 					$scope.workflowDTO.customer = {};
 					$scope.workflowDTO.customer.changeType = "CHANGENAME";
+					$scope.orgRole = "";
 					
 					$scope.custDetails = {};
 					//$scope.orgRole = Principal.getOrgRole();

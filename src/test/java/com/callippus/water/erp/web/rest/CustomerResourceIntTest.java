@@ -31,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 
 /**
  * Test class for the CustomerResource REST controller.
@@ -89,9 +90,9 @@ public class CustomerResourceIntTest {
     private static final String UPDATED_ID_NUMBER = "BBBBB";
     private static final String DEFAULT_PHOTO = "AAAAA";
     private static final String UPDATED_PHOTO = "BBBBB";
-
-    private static final Integer DEFAULT_STATUS = 1;
-    private static final Integer UPDATED_STATUS = 2;
+    
+    private static final ChangeCaseStatus DEFAULT_STATUS = ChangeCaseStatus.INITIATED;
+    private static final ChangeCaseStatus UPDATED_STATUS = ChangeCaseStatus.PROCESSING;
 
     private static final LocalDate DEFAULT_CHANGED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CHANGED_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -192,6 +193,24 @@ public class CustomerResourceIntTest {
 
     @Test
     @Transactional
+    public void checkStatusIsRequired() throws Exception {
+        int databaseSizeBeforeTest = customerRepository.findAll().size();
+        // set the field null
+        customer.setStatus(null);
+
+        // Create the Customer, which fails.
+
+        restCustomerMockMvc.perform(post("/api/customers")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(customer)))
+                .andExpect(status().isBadRequest());
+
+        List<Customer> customers = customerRepository.findAll();
+        assertThat(customers).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllCustomers() throws Exception {
         // Initialize the database
         customerRepository.saveAndFlush(customer);
@@ -221,7 +240,7 @@ public class CustomerResourceIntTest {
                 .andExpect(jsonPath("$.[*].mobileNo").value(hasItem(DEFAULT_MOBILE_NO.intValue())))
                 .andExpect(jsonPath("$.[*].idNumber").value(hasItem(DEFAULT_ID_NUMBER.toString())))
                 .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
                 .andExpect(jsonPath("$.[*].changedDate").value(hasItem(DEFAULT_CHANGED_DATE.toString())))
                 .andExpect(jsonPath("$.[*].changeType").value(hasItem(DEFAULT_CHANGE_TYPE.toString())));
     }
@@ -257,7 +276,7 @@ public class CustomerResourceIntTest {
             .andExpect(jsonPath("$.mobileNo").value(DEFAULT_MOBILE_NO.intValue()))
             .andExpect(jsonPath("$.idNumber").value(DEFAULT_ID_NUMBER.toString()))
             .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.changedDate").value(DEFAULT_CHANGED_DATE.toString()))
             .andExpect(jsonPath("$.changeType").value(DEFAULT_CHANGE_TYPE.toString()));
     }

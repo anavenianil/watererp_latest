@@ -5,10 +5,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 
 /**
  * A Customer.
@@ -82,8 +85,10 @@ public class Customer implements Serializable {
     @Column(name = "photo")
     private String photo;
     
-    @Column(name = "status")
-    private Integer status;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private ChangeCaseStatus status;
     
     @Column(name = "changed_date")
     private LocalDate changedDate;
@@ -279,11 +284,11 @@ public class Customer implements Serializable {
         this.photo = photo;
     }
 
-    public Integer getStatus() {
+    public ChangeCaseStatus getStatus() {
         return status;
     }
     
-    public void setStatus(Integer status) {
+    public void setStatus(ChangeCaseStatus status) {
         this.status = status;
     }
 

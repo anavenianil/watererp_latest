@@ -110,8 +110,8 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
 						$scope.customer.previousMobile = $scope.custDetails.mobileNo;
 						$scope.customer.previousEmail = $scope.custDetails.email;
 						if(response.data.customer != null){
-								$scope.isSaving = true;
 								$scope.message = "Name change request already submitted for the the CAN: "+can;
+								$scope.isSaving = true;
 						}
 						else{
 							$scope.isSaving = false;
@@ -156,17 +156,5 @@ angular.module('watererpApp').controller('CustomerNameChangeController',
 						+ $scope.serverErrorMsg : '';
 			};
 		
-			
-			
 		
-		/*$scope.saveChanges = function(){
-			console.log("This is the data being posted to server:" + JSON.stringify($scope.workflowTxnDetails));
-			
-			//$scope.workflowTxnDetails[3].previousValue = $scope.workflowTxnDetails[3].previousValue.id;
-			
-			return $http.post('/api/workflowTxnDetailsArr',$scope.workflowTxnDetails).then(function(response) {
-				console.log("Server response:" + JSON.stringify(response));
-			});
-		}*/
-		
-}/*]*/);
+});
