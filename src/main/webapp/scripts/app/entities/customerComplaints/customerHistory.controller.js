@@ -38,6 +38,24 @@ angular.module('watererpApp')
 					});
 		}
         
+        $scope.loadAll = function(can) {
+            CustomerComplaints.query({page: $scope.page, size: 20, can : can, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.customerComplaintss.push(result[i]);
+                }
+            });
+        };
+        
+        $scope.getRequestTypeId = function(domainId,requestType) {
+     		if(requestType == 1){//INCORRECT BILL
+     			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:3});
+     		}
+     		if(requestType == 2){//WATER LEAKAGE
+     			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:4});
+     		}
+	        }
+        
         $scope.onSelect = function($item, $model, $label) {
 			console.log($item);
 			var arr = $item.split("-");
@@ -46,16 +64,10 @@ angular.module('watererpApp')
 			$scope.custDetails.name = arr[1];
 			$scope.custDetails.address = arr[2];
 			$scope.findBillDetails($scope.custDetails.can);
+			$scope.loadAll($scope.custDetails.can);
 		};
         
-        /*$scope.loadAll = function() {
-            CustomerComplaints.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                for (var i = 0; i < result.length; i++) {
-                    $scope.customerComplaintss.push(result[i]);
-                }
-            });
-        };*/
+        
         $scope.reset = function() {
             $scope.page = 0;
             $scope.customerComplaintss = [];

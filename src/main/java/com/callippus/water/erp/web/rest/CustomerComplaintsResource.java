@@ -173,10 +173,19 @@ public class CustomerComplaintsResource {
 	 */
 	@RequestMapping(value = "/customerComplaintss", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<List<CustomerComplaints>> getAllCustomerComplaintss(Pageable pageable)
+	public ResponseEntity<List<CustomerComplaints>> getAllCustomerComplaintss(Pageable pageable,
+			@RequestParam(value = "can", required = false) String can)
 			throws URISyntaxException {
 		log.debug("REST request to get a page of CustomerComplaintss");
-		Page<CustomerComplaints> page = customerComplaintsRepository.findAll(pageable);
+		Page<CustomerComplaints> page;
+		//Page<CustomerComplaints> page = customerComplaintsRepository.findAll(pageable);//Comment this line
+		if(can != null) {
+			page = customerComplaintsRepository.findByCan(pageable, can);
+		}
+		else{
+			page = customerComplaintsRepository.findAll(pageable);
+		}
+		
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customerComplaintss");
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
 	}

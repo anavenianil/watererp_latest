@@ -63,6 +63,16 @@
 								<td><a ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})"
 									>{{customerComplaints.complaintTypeMaster.complaintType}}</a>
 								</td>
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit"
+											ng-click="getRequestTypeId(customerComplaints.id,customerComplaints.complaintTypeMaster.id)"
+											class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-eye-open"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -70,9 +80,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div ng-hide="txnList.length == 0">
-	<h3>Hello World {{txnList.length}}</h3>
-	</div> -->
 	
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
