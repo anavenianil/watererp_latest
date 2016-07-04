@@ -31,6 +31,7 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
+import com.callippus.water.erp.domain.enumeration.ChangeCaseType;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustomerRepository;
@@ -132,7 +133,7 @@ public class CustomerResource {
 	@Timed
 	public ResponseEntity<List<Customer>> getAllCustomers(
 			Pageable pageable,
-			@RequestParam(value = "changeType", required = false) String changeType,
+			@RequestParam(value = "changeType", required = false) ChangeCaseType changeType,
 			@RequestParam(value = "can", required = false) String can)
 			throws URISyntaxException {
 		log.debug("REST request to get a page of Customers");
@@ -214,23 +215,21 @@ public class CustomerResource {
 		}
 		
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
-			//customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()));
-			//customer.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
 			customer.setStatus(ChangeCaseStatus.APPROVED);
 		}
 		
-		/*if("CONNECTIONCATEGORY".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
+		/*if(ChangeCaseType.CONNECTIONCATEGORY.equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			//custDetails.setTariffCategoryMaster(customer.getPresentCategory());
 			custDetails.setTariffCategoryMaster(customer.getNewTariffCategory());
 		}*/
 		
-		/*if("PIPESIZE".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
+		/*if(ChangeCaseType.PIPESIZE.equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			custDetails.setPipeSizeMaster(customer.getRequestedPipeSizeMaster());
 			custDetails.setPipeSize(customer.getRequestedPipeSizeMaster().getPipeSize());
 		}*/
 			
 		
-		if("CHANGENAME".equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
+		if(ChangeCaseType.CHANGENAME.equals(customer.getChangeType()) && CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			 if(customer.getMiddleName()!=null){
 	            	custDetails.setConsName(customer.getFirstName()+" "+customer.getMiddleName()+" "+customer.getLastName());
 	            }
@@ -268,13 +267,9 @@ public class CustomerResource {
 		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
 		
 		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
-		
-		//workflowDTO.getCustomer().setStatus(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()).getId().intValue());
-		//Customer customer = 
+
 		workflowDTO.getCustomer().setStatus(ChangeCaseStatus.DECLINED);
 		customerRepository.save(workflowDTO.getCustomer());
-		
-		//customer.setStatusMaster(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()));
 		
 		return ResponseEntity.created(new URI("/api/customers/declineRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))
@@ -297,12 +292,9 @@ public class CustomerResource {
     	log.debug("REST request to getActiveCan() for Customer  : {}", customer);
 		WorkflowDTO workflowDTO = new WorkflowDTO();
     	Customer newCustomer = customerRepository.findByChangeTypeAndCan(customer.getChangeType(), customer.getCan());
-    	if(newCustomer==null){
-    		workflowDTO.setApplicationTxn(applicationTxnRepository.findByCan(customer.getCan()));
-    	}
-    	else{
-    		workflowDTO.setCustomer(newCustomer);
-    	}
+
+    	workflowDTO.setCustomer(newCustomer);
+
     	workflowDTO.setCustDetails(custDetailsRepository.findByCanForUpdate(customer.getCan()));
 
     	return Optional.ofNullable(workflowDTO)

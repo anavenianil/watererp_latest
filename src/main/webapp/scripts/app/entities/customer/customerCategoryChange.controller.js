@@ -11,7 +11,7 @@ angular
 						RequestWorkflowHistory, Customer) {
 
 					$scope.customer = {};
-					$scope.customer.changeType = "CONNECTIONCATEGORY";
+					$scope.customer.ChangeCaseType = "CONNECTIONCATEGORY";
 
 					$scope.custDetails = {};
 
@@ -81,7 +81,7 @@ angular
 					}
 
 					// get cust details by CAN
-					$scope.getCustDetails = function(can) {
+					/*$scope.getCustDetails = function(can) {
 						CustDetailsSearchCAN
 								.get(
 										{
@@ -93,16 +93,16 @@ angular
 											$scope.customer.oldTariffCategory = $scope.custDetails.tariffCategoryMaster;
 											$scope.customer.previousEmail = $scope.custDetails.email;
 										});
-					};
+					};*/
 
 					// getApplicationTxn by CAN
-					$scope.getApplicationTxn = function(can) {
+					/*$scope.getApplicationTxn = function(can) {
 						ApplicationTxnSearchCAN.get({
 							can : can
 						}, function(result) {
 							$scope.applicationTxn = result;
 						});
-					};
+					};*/
 
 					//to get active can
 					$scope.getActiveCAN = function(can) {
@@ -114,11 +114,11 @@ angular
 									$scope.custDetails = response.data.custDetails;
 									$scope.message = null;
 									$scope.customer.prevMeterReading = $scope.custDetails.prevReading;
-									if(response.data.applicationTxn != null){
-										$scope.customer.oldTariffCategory = response.data.applicationTxn.tariffCategoryMaster;
-										$scope.customer.prevOrganizationName = response.data.applicationTxn.organizationName;
-										$scope.customer.prevDesignation = response.data.applicationTxn.designation;
-									}
+									//if(response.data.applicationTxn != null){
+										$scope.customer.oldTariffCategory = response.data.custDetails.tariffCategoryMaster;
+										$scope.customer.prevOrganizationName = response.data.custDetails.organisationName;
+										$scope.customer.prevDesignation = response.data.custDetails.designation;
+									//}
 									if(response.data.customer != null){
 										if(response.data.customer.status == 3){
 											$scope.customer.oldTariffCategory = response.data.customer.presentCategory;
@@ -131,7 +131,7 @@ angular
 											$scope.message = "Category change request already submitted for the the CAN: "+can;
 										}
 									}
-									console.log("Server response:"+ JSON.stringify(response.data));
+									//console.log("Server response:"+ JSON.stringify(response.data));
 								});
 					}
 
@@ -165,7 +165,7 @@ angular
 						$scope.isSaving = false;
 					};
 					$scope.save = function() {
-						$scope.customer.changeType = "CONNECTIONCATEGORY";
+						$scope.customer.ChangeCaseType = "CONNECTIONCATEGORY";
 						$scope.isSaving = true;
 						if ($scope.customer.id != null) {
 							Customer.update($scope.customer, onSaveSuccess,
@@ -176,22 +176,20 @@ angular
 						}
 					};
 
-					$scope.saveChanges = function() {
+					/*$scope.saveChanges = function() {
 						console.log("WorkflowDTO data being posted to server:"
 								+ JSON.stringify($scope.workflowDTO));
-
 						return $http.post('/api/workflowTxnDetailsArr',
 								$scope.workflowDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
 								});
-					}
+					}*/
 
 
 					$scope.checkReading = function(prvReading, newReading) {
 						if (prvReading >= newReading) {
-
 							$scope.editForm.newMeterReading.$setValidity(
 									"ltPrevious", true);
 							return true;

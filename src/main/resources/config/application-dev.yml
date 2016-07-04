@@ -21,9 +21,9 @@ spring:
     datasource:
         driver-class-name: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
         url: jdbc:mysql://localhost:3306/WaterERP?useUnicode=true&characterEncoding=utf8
-        name: watererp
+        name: WaterERP
         username: root
-        password: p@pyrus
+        password: mysql
     jpa:
         database-platform: org.hibernate.dialect.MySQLInnoDBDialect
         database: MYSQL

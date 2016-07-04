@@ -67,7 +67,9 @@
             
             <column name="changed_date" type="date"/>
             
-            <column name="change_type" type="varchar(255)"/>
+            <column name="change_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             
             <column name="old_tariff_category_id" type="bigint"/>
             <column name="new_tariff_category_id" type="bigint"/>

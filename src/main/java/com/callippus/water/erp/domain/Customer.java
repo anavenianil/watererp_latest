@@ -13,6 +13,8 @@ import java.util.Objects;
 
 import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 
+import com.callippus.water.erp.domain.enumeration.ChangeCaseType;
+
 /**
  * A Customer.
  */
@@ -93,8 +95,10 @@ public class Customer implements Serializable {
     @Column(name = "changed_date")
     private LocalDate changedDate;
     
-    @Column(name = "change_type")
-    private String changeType;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "change_type", nullable = false)
+    private ChangeCaseType changeType;
     
     @ManyToOne
     @JoinColumn(name = "old_tariff_category_id")
@@ -300,11 +304,11 @@ public class Customer implements Serializable {
         this.changedDate = changedDate;
     }
 
-    public String getChangeType() {
+    public ChangeCaseType getChangeType() {
         return changeType;
     }
     
-    public void setChangeType(String changeType) {
+    public void setChangeType(ChangeCaseType changeType) {
         this.changeType = changeType;
     }
 

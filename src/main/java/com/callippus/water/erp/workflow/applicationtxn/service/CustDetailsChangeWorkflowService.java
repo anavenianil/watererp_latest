@@ -20,6 +20,7 @@ import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.Customer;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
+import com.callippus.water.erp.domain.enumeration.ChangeCaseType;
 import com.callippus.water.erp.repository.CustomerRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.repository.WorkflowStageMasterRepository;
@@ -100,15 +101,15 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 		log.debug("WorkflowTxnDetailsWorkflowService --> initWorkflow");
 		String message = "";
 		try {
-			if("CONNECTIONCATEGORY".equals(customer.getChangeType())){
+			if(ChangeCaseType.CONNECTIONCATEGORY.equals(customer.getChangeType())){
 				setRequestType(CPSConstants.CONNECTIONCATEGORY);
-			}
-			if("PIPESIZE".equals(customer.getChangeType())){
+			}else 
+			if(ChangeCaseType.PIPESIZE.equals(customer.getChangeType())){
 				setRequestType(CPSConstants.PIPESIZE);
-			}
-			if("CHANGENAME".equals(customer.getChangeType())){
+			}else
+			if(ChangeCaseType.CHANGENAME.equals(customer.getChangeType())){
 				setRequestType(CPSConstants.CHANGENAME);
-			}
+			}else
 			if("CONNECTIONTERMINATION".equals(customer.getChangeType())){
 				setRequestType(CPSConstants.CONNECTIONTERMINATION);
 			}
@@ -187,13 +188,13 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 					.toString());
 			
 			//User user = workflowTxnDetails.getUser();
-			if("CONNECTIONCATEGORY".equals(customer.getChangeType())){
+			if(ChangeCaseType.CONNECTIONCATEGORY.equals(customer.getChangeType())){
 				workflowService.setRequestType(CPSConstants.CONNECTIONCATEGORY);
 			}
-			if("PIPESIZE".equals(customer.getChangeType())){
+			if(ChangeCaseType.PIPESIZE.equals(customer.getChangeType())){
 				workflowService.setRequestType(CPSConstants.PIPESIZE);
 			}
-			if("CHANGENAME".equals(customer.getChangeType())){
+			if(ChangeCaseType.CHANGENAME.equals(customer.getChangeType())){
 				workflowService.setRequestType(CPSConstants.CHANGENAME);
 			}
 			if("CONNECTIONTERMINATION".equals(customer.getChangeType())){

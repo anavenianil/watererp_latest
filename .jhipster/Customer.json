@@ -154,7 +154,11 @@
         {
             "fieldId": 23,
             "fieldName": "changeType",
-            "fieldType": "String"
+            "fieldType": "ChangeCaseType",
+            "fieldValues": "CONNECTIONCATEGORY, PIPESIZE, CHANGENAME",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
         
     ],

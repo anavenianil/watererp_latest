@@ -32,6 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
+import com.callippus.water.erp.domain.enumeration.ChangeCaseType;
 
 /**
  * Test class for the CustomerResource REST controller.
@@ -96,8 +97,9 @@ public class CustomerResourceIntTest {
 
     private static final LocalDate DEFAULT_CHANGED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CHANGED_DATE = LocalDate.now(ZoneId.systemDefault());
-    private static final String DEFAULT_CHANGE_TYPE = "AAAAA";
-    private static final String UPDATED_CHANGE_TYPE = "BBBBB";
+    
+    private static final ChangeCaseType DEFAULT_CHANGE_TYPE = ChangeCaseType.CONNECTIONCATEGORY;
+    private static final ChangeCaseType UPDATED_CHANGE_TYPE = ChangeCaseType.PIPESIZE;
 
     @Inject
     private CustomerRepository customerRepository;
@@ -197,6 +199,24 @@ public class CustomerResourceIntTest {
         int databaseSizeBeforeTest = customerRepository.findAll().size();
         // set the field null
         customer.setStatus(null);
+
+        // Create the Customer, which fails.
+
+        restCustomerMockMvc.perform(post("/api/customers")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(customer)))
+                .andExpect(status().isBadRequest());
+
+        List<Customer> customers = customerRepository.findAll();
+        assertThat(customers).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkChangeTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = customerRepository.findAll().size();
+        // set the field null
+        customer.setChangeType(null);
 
         // Create the Customer, which fails.
 
