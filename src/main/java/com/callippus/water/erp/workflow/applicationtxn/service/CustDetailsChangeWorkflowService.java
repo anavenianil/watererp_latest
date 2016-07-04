@@ -261,62 +261,18 @@ public class CustDetailsChangeWorkflowService extends RequestProcessService {
 		jdbcTemplate.update(sql);
 	}
 
-	/**
-	 * for request declined & cancel
-	 **/
-	public String declainedRequest(String requestID, String status)
-			throws Exception {
-
-		String message = null;
-		/*
-		 * try{ reqDTO =
-		 * (MTRequestDetailsDTO)session.createCriteria(MTRequestDetailsDTO
-		 * .class).add(Expression.eq("requestID", requestID)).uniqueResult();
-		 * if(!CPSUtils.isNullOrEmpty(reqDTO)){
-		 * if(CPSUtils.compareStrings(CPSConstants.STATUSCANCELLED, status)) {
-		 * String sql =
-		 * "update MTRequestDetailsDTO set status=? where requestID=?";
-		 * session.createQuery(sql).setString(0,
-		 * CPSConstants.STATUSCANCELLED).setString(1,
-		 * requestID).executeUpdate(); message = CPSConstants.SUCCESS; }
-		 * if(CPSUtils.compareStrings(CPSConstants.STATUSDECLINED, status)) {
-		 * String sql =
-		 * "update MTRequestDetailsDTO set status=? where requestID=?";
-		 * session.createQuery(sql).setString(0,
-		 * CPSConstants.STATUSDECLINED).setString(1, requestID).executeUpdate();
-		 * message = CPSConstants.SUCCESS; } }
-		 * 
-		 * }catch (Exception e) { e.printStackTrace();
-		 * hibernateUtils.rollbackTransaction(); message = CPSConstants.FAILED;
-		 * throw e; }
-		 */
-
-		return message;
-	}
-	
-	
 	/*
 	 * Method to approve a request
 	 */
 	public void approveRequest(Long id, String remarks) throws Exception{
-		log.debug("ApplicationTxnCustomRepository -------- approveRequest(): {}");
+		log.debug("CustDetailsChangeWorkflowService -------- approveRequest(): {}");
 		
 		workflowService.getUserDetails();
 	    
-		///WorkflowTxnDetails workflowTxnDetails = workflowTxnDetailsRepository.findOne(id);
 		Customer customer = customerRepository.findOne(id);
 	    workflowService.setRemarks(remarks);  
-	    /*Integer status = applicationTxn.getStatus();
-	    status +=1;
-	    workflowTxnDetails.setStatus(status);
-        workflowService.setRequestStatus(status);*/
-        //applicationTxnWorkflowService.
 	    approvedCahangeCaseRequest(customer);
 
-        /*if(workflowService.getRequestAt()!=null){
-        	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
-        	workflowTxnDetails.setRequestAt(userRepository.findById(uid));
-        }*/
 	    customerRepository.save(customer);
 	}
 

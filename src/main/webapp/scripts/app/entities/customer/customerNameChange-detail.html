@@ -91,7 +91,7 @@
 							</div>
 							<div class="col-sm-4">
 								<label>Email</label>
-								<h5 class="list-group-item-heading">{{customer.email}}</h5>
+								<h5 class="list-group-item-heading">{{customer.newEmail}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Photo</label>
@@ -117,12 +117,12 @@
 								<h5 class="list-group-item-heading">{{customer.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status===9">
+							<div class="col-sm-3" ng-if="customer.status==='APPROVED'">
 								<label>Changed Date</label>
 								<h5 class="list-group-item-heading">{{customer.changedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status===3 && orgRole.id==16">
+							<div class="col-sm-3" ng-if="customer.status==='PAYMENTNC' && orgRole.id==16">
 							<div class="form-group"
 									ng-class="{'has-error': editForm.changedDate.$invalid && 
                                 (editForm.changedDate.$dirty || rc.editForm.attempted)}">
@@ -203,19 +203,19 @@
 		</div>
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="workflowDTO.customer.status === 1 && orgRole.id === 10"
+			ng-if="workflowDTO.customer.status === 'INITIATED' && orgRole.id === 10"
 			ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
 
 		<button type="button" class="btn btn-success pull-right" ng-disabled="editForm.$invalid || isSaving"
 			ui-sref="receiptForNameChange({customerId:workflowDTO.customer.id})"
-			ng-if="workflowDTO.customer.status === 2 && orgRole.id === 22">
+			ng-if="workflowDTO.customer.status === 'PROCESSING' && orgRole.id === 22">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="workflowDTO.customer.status === 3 && orgRole.id === 16"
+			ng-if="workflowDTO.customer.status === 'PAYMENTNC' && orgRole.id === 16"
 			ng-click="approve(workflowDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>

@@ -185,15 +185,15 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="form-group"
-									ng-class="{'has-error': editForm.email.$invalid && 
-						         (editForm.email.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_email">Email
-										Address</label> <input type="email" class="form-control" name="email"
-										id="field_email" ng-model="customer.email" />
+									ng-class="{'has-error': editForm.newEmail.$invalid && 
+						         (editForm.newEmail.$dirty || rc.editForm.attempted)}">
+									<label class="control-label" for="field_newEmail">Email
+										Address</label> <input type="email" class="form-control" name="newEmail"
+										id="field_newEmail" ng-model="customer.newEmail" />
 									<div
-										ng-show="(editForm.email.$dirty || rc.editForm.attempted) && editForm.email.$invalid">
+										ng-show="(editForm.newEmail.$dirty || rc.editForm.attempted) && editForm.newEmail.$invalid">
 
-										<p class="help-block" ng-show="editForm.email.$error.email">Enter
+										<p class="help-block" ng-show="editForm.newEmail.$error.email">Enter
 											alphanemeric number</p>
 									</div>
 								</div>

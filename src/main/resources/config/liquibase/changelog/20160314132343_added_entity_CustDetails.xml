@@ -72,6 +72,11 @@
             <column name="status" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="organisation_name" type="varchar(255)"/>
+            <column name="designation" type="varchar(255)"/>
+            <column name="photo" type="varchar(255)"/>
+            <column name="deed_doc" type="varchar(255)"/>
+            <column name="agreement_doc" type="varchar(255)"/>
             <column name="tariff_category_master_id" type="bigint"/>
             <column name="pipe_size_master_id" type="bigint"/>
             <column name="division_master_id" type="bigint"/>

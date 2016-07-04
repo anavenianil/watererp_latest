@@ -21,8 +21,6 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="item in requestWorkflowHistorys">
-							<!-- <td>{{item.domainObject}}</td>
-							<td>{{item.fileNumber}}</td> -->
 							<td>{{item.assignedFrom.firstName}}
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
 							<td>{{item.assignedTo.firstName}}
@@ -110,15 +108,15 @@
 
 							<div class="col-sm-4">
 								<label>Present Reading</label>
-								<h5 class="list-group-item-heading">{{customer.presentReading}}</h5>
+								<h5 class="list-group-item-heading">{{customer.newMeterReading}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Previous Category</label>
-								<h5 class="list-group-item-heading">{{customer.tariffCategoryMaster.tariffCategory}}</h5>
+								<h5 class="list-group-item-heading">{{customer.oldTariffCategory.tariffCategory}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>New Category</label>
-								<h5 class="list-group-item-heading">{{customer.presentCategory.tariffCategory}}</h5>
+								<h5 class="list-group-item-heading">{{customer.newTariffCategory.tariffCategory}}</h5>
 							</div>
 						</div>
 						<br>
@@ -148,7 +146,7 @@
 								<h5 class="list-group-item-heading">{{customer.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-show="customer.status==2">
+							<div class="col-sm-3" ng-show="customer.status=='PROCESSING'">
 								<label class="control-label" for="field_changedDate">Changed
 									Date </label>
 								<div class="form-group"
@@ -178,9 +176,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-3" ng-show="customer.status==3 || customer.status==9">
+							<div class="col-sm-3" ng-show="customer.status=='APPROVED' || customer.status=='BILLED'">
 								<label>Changed Date</label>
-								<h5 class="list-group-item-heading">{{customer.changedDate}}</h5>
+								<h5 class="list-group-item-heading">{{customer.changedDate | date:'mediumDate'}}</h5>
 							</div>
 						</div>
 					</fieldset>

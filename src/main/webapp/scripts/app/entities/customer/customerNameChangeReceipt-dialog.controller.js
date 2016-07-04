@@ -53,7 +53,7 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 
       //approve a request
 		$scope.approve = function(workflowDTO){
-        	return $http.post('/api/customers/customersApprove',
+        	return $http.post('/api/customers/nameChangeReceipt',
 					workflowDTO).then(
 					function(response) {
 						console.log("Server response:"
