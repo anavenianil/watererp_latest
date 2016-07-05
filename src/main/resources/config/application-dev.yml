@@ -23,7 +23,7 @@ spring:
         url: jdbc:mysql://localhost:3306/WaterERP?useUnicode=true&characterEncoding=utf8
         name: watererp
         username: root
-        password: p@pyrus
+        password: mysql
     jpa:
         database-platform: org.hibernate.dialect.MySQLInnoDBDialect
         database: MYSQL

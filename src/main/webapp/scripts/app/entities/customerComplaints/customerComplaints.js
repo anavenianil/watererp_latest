@@ -93,6 +93,22 @@ angular.module('watererpApp')
                     })
                 }]
             })
+            .state('customerInfo', {
+                parent: 'customerComplaints',
+                url: '/customerInfo',
+                data: {
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER', 'ROLE_ADMIN'],
+                    pageTitle: 'CustomerComplaintss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/customerComplaints/customerInfo.html',
+                        controller: 'CustomerInfoController'
+                    }
+                },
+                resolve: {
+                }
+            })
             .state('customerHistory', {
                 parent: 'customerComplaints',
                 url: '/customerHistory',
