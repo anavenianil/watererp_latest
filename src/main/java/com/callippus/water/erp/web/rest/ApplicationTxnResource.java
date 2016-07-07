@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
@@ -195,7 +196,7 @@ public class ApplicationTxnResource {
             }
             custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             custDetails.setPrevBillType("U");
-            custDetails.setPipeSize(0.5f);
+            custDetails.setPipeSize(new BigDecimal("0.5"));
             custDetails.setPipeSizeMaster(pipeSizeMasterRepository.findOne(1l));//hard coded pipesize
             custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
 	        custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
@@ -597,7 +598,7 @@ public class ApplicationTxnResource {
 	        custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
 	        custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
 	           
-	        custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+	        custDetails.setPipeSize(new BigDecimal(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize()));
 	        custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
 	        custDetails.setOrganisationName(applicationTxn.getOrganizationName());
 	        custDetails.setStatus(CustStatus.ACTIVE);

@@ -1,5 +1,6 @@
 package com.callippus.water.erp.service;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.Adjustments;
 import com.callippus.water.erp.domain.BillDetails;
@@ -122,18 +123,18 @@ public class BillingService {
 		}
 	}
 
-	BigDecimal avgKL = new BigDecimal("0.0");
-	BigDecimal factor = new BigDecimal("0.0");
-	BigDecimal prevAvgKL = new BigDecimal("0.0");
-	BigDecimal units = new BigDecimal("0.0");
-	BigDecimal unitsKL = new BigDecimal("0.0");
-	BigDecimal billedUnitsKL = new BigDecimal("0.0");
-	BigDecimal partialUnitsKL = new BigDecimal("0.0");
-	BigDecimal remUnitsKL = new BigDecimal("0.0");
-	BigDecimal minAvgKL = new BigDecimal("0.0");
+	BigDecimal avgKL = CPSConstants.ZERO;
+	BigDecimal factor = CPSConstants.ZERO;
+	BigDecimal prevAvgKL = CPSConstants.ZERO;
+	BigDecimal units = CPSConstants.ZERO;
+	BigDecimal unitsKL = CPSConstants.ZERO;
+	BigDecimal billedUnitsKL = CPSConstants.ZERO;
+	BigDecimal partialUnitsKL = CPSConstants.ZERO;
+	BigDecimal remUnitsKL = CPSConstants.ZERO;
+	BigDecimal minAvgKL = CPSConstants.ZERO;
 	String monthUpto;
 	boolean hasSewer;
-	BigDecimal ewura = new BigDecimal("0.0");
+	BigDecimal ewura = CPSConstants.ZERO;
 	int monthsDiff = 0;
 	LocalDate dFrom = null;
 	LocalDate dTo = null;
@@ -149,7 +150,7 @@ public class BillingService {
 
 	ConfigurationDetails cd = null;
 
-	BigDecimal total_amount = new BigDecimal("0.0"), net_payable_amount = new BigDecimal("0.0"), surcharge = new BigDecimal("0.0"), total_cess = new BigDecimal("0.0"), kl = new BigDecimal("0.0");
+	BigDecimal total_amount = CPSConstants.ZERO, net_payable_amount = CPSConstants.ZERO, surcharge = CPSConstants.ZERO, total_cess = CPSConstants.ZERO, kl = CPSConstants.ZERO;
 
 	public static void main(String[] args) throws Exception {
 		LocalDate dFrom = null;
@@ -379,7 +380,7 @@ public class BillingService {
 			List<BillRunDetails> brdList = billRunDetailsRepository.findTop3ByCanAndStatusOrderByIdDesc(brd.getCan(),
 					BrdStatus.COMMITTED.getValue());
 
-			BigDecimal kl = new BigDecimal("0.0");
+			BigDecimal kl = CPSConstants.ZERO;
 
 			int i = 0;
 			LocalDate fromDt = null, toDt = null;
@@ -413,7 +414,7 @@ public class BillingService {
 			customer.setPrevAvgKl(prevAvgKL);
 			customer.setPrevBillMonth(LocalDate.parse(bfd.getToMonth() + "01", date_format));
 			customer.setArrears(bfd.getNetPayableAmount());
-			customer.setOtherCharges(new BigDecimal("0.0"));
+			customer.setOtherCharges(CPSConstants.ZERO);
 			customer.setPrevReading(bfd.getPresentReading());
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
@@ -424,7 +425,7 @@ public class BillingService {
 			if (bfd.getCurrentBillType().equals("L"))
 				customer.setLockCharges(bfd.getLockCharges());
 			else
-				customer.setLockCharges(new BigDecimal("0.0"));
+				customer.setLockCharges(CPSConstants.ZERO);
 
 			List<Adjustments> adjustments = adjustmentsRepository
 					.findByCanAndStatusAndBillFullDetails(customer.getCan(), TxnStatus.PROCESSING, bfd);
@@ -455,7 +456,7 @@ public class BillingService {
 
 					customerRepository.saveAndFlush(customerChange);
 				} else if (customerChange.getChangeType().equals("PIPESIZE")) {
-					customer.setPipeSize(customerChange.getRequestedPipeSizeMaster().getPipeSize());
+					customer.setPipeSize(new BigDecimal(customerChange.getRequestedPipeSizeMaster().getPipeSize()));
 					customer.setPipeSizeMaster(customerChange.getRequestedPipeSizeMaster());
 					customerChange.setStatus(ChangeCaseStatus.BILLED);
 
@@ -498,14 +499,14 @@ public class BillingService {
 	}
 
 	public void initBill(String can) {
-		avgKL = new BigDecimal("0.0");
-		factor = new BigDecimal("0.0");
-		prevAvgKL = new BigDecimal("0.0");
-		units = new BigDecimal("0.0");
-		unitsKL = new BigDecimal("0.0");
-		billedUnitsKL = new BigDecimal("0.0");
+		avgKL = CPSConstants.ZERO;
+		factor = CPSConstants.ZERO;
+		prevAvgKL = CPSConstants.ZERO;
+		units = CPSConstants.ZERO;
+		unitsKL = CPSConstants.ZERO;
+		billedUnitsKL = CPSConstants.ZERO;
 		hasSewer = false;
-		ewura = new BigDecimal("0.0");
+		ewura = CPSConstants.ZERO;
 		monthsDiff = 0;
 		dFrom = null;
 		dTo = null;
@@ -513,14 +514,14 @@ public class BillingService {
 		unMeteredFlag = 0;
 		multipleTariffs = false;
 
-		partialUnitsKL = new BigDecimal("0.0");
-		remUnitsKL = new BigDecimal("0.0");
+		partialUnitsKL = CPSConstants.ZERO;
+		remUnitsKL = CPSConstants.ZERO;
 
-		total_amount = new BigDecimal("0.0");
-		net_payable_amount = new BigDecimal("0.0");
-		surcharge = new BigDecimal("0.0");
-		total_cess = new BigDecimal("0.0");
-		kl = new BigDecimal("0.0");
+		total_amount = CPSConstants.ZERO;
+		net_payable_amount = CPSConstants.ZERO;
+		surcharge = CPSConstants.ZERO;
+		total_cess = CPSConstants.ZERO;
+		kl = CPSConstants.ZERO;
 
 		meterChange = meterChangeRepository.findByCanAndStatus(can, MeterChangeStatus.APPROVED);
 
@@ -553,7 +554,7 @@ public class BillingService {
 	public void saveAndRunTerminations(CustDetails customer) {
 		// Insert bill_details record for each new termination
 		ConnectionTerminate ct = connectionTerminateRepository.findByCan(customer.getCan());
-		BigDecimal currentReading = ct.getLastMeterReading();
+		BigDecimal currentReading = new BigDecimal(ct.getLastMeterReading());
 		BigDecimal previousReading = customer.getPrevReading();
 		LocalDate meterReadingDt = ct.getMeterRecoveredDate();
 		String currentBillType = "";
@@ -726,7 +727,7 @@ public class BillingService {
 
 			long days = ChronoUnit.DAYS.between(dFrom, dFrom.withDayOfMonth(dFrom.lengthOfMonth()));
 
-			BigDecimal avgUnitsKL = new BigDecimal("0.0");
+			BigDecimal avgUnitsKL = CPSConstants.ZERO;
 
 			if (monthsDiff == 0)
 				monthsDiff = 1;
@@ -741,7 +742,7 @@ public class BillingService {
 
 					avgKL = unitsKL.divide(new BigDecimal(monthsDiff));
 
-					if (prevAvgKL.compareTo(new BigDecimal("0.0")) != 0) {
+					if (prevAvgKL.compareTo(CPSConstants.ZERO) != 0) {
 						factor = avgKL.divide(prevAvgKL);
 
 						log.debug("units:" + units + ", unitsKL=" + unitsKL + ", avgKL=" + avgKL + ", prevAvgKL="
@@ -882,7 +883,7 @@ public class BillingService {
 				if ((bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S"))
 						&& (customer.getPrevBillType() == null || customer.getPrevBillType().equals("L"))) {
 					if (customer.getLockCharges() == null)
-						bfd.setLockCharges(new BigDecimal("0.0"));
+						bfd.setLockCharges(CPSConstants.ZERO);
 					else {
 						bfd.setLockCharges(new BigDecimal("-1").multiply(customer.getLockCharges()));
 						bfd.setWaterCess(bfd.getWaterCess().add(bfd.getLockCharges()));
@@ -1055,12 +1056,12 @@ public class BillingService {
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, customer);
 			bfd.setId(null);
 
-			bfd.setWaterCess(0.00f);
-			bfd.setSewerageCess(0.00f);
-			bfd.setServiceCharge(0.00f);
-			bfd.setMeterServiceCharge(0.00f);
-			bfd.setLockCharges(0.00f);
-			bfd.setNoMeterAmt(0.00f);
+			bfd.setWaterCess(CPSConstants.ZERO);
+			bfd.setSewerageCess(CPSConstants.ZERO);
+			bfd.setServiceCharge(CPSConstants.ZERO);
+			bfd.setMeterServiceCharge(CPSConstants.ZERO);
+			bfd.setLockCharges(CPSConstants.ZERO);
+			bfd.setNoMeterAmt(CPSConstants.ZERO);
 
 			calc_charges_normal(charges, bill_details, customer, bfd, unitsKL);
 
@@ -1073,19 +1074,19 @@ public class BillingService {
 	}
 
 	public void getUnitsKLMeterChange(BillDetails bill_details, CustDetails customer) {
-		BigDecimal oldUnits = new BigDecimal("0.0");
-		BigDecimal newUnits = new BigDecimal("0.0");
+		BigDecimal oldUnits = CPSConstants.ZERO;
+		BigDecimal newUnits = CPSConstants.ZERO;
 
-		oldUnits = meterChange.getPrevMeterReading() - customer.getPrevReading();
-		newUnits = bill_details.getPresentReading() - meterChange.getNewMeterReading();
+		oldUnits = (new BigDecimal(meterChange.getPrevMeterReading()).subtract(customer.getPrevReading()));
+		newUnits = bill_details.getPresentReading().subtract(new BigDecimal(meterChange.getNewMeterReading()));
 
-		if (oldUnits < new BigDecimal("0.0"))
-			oldUnits = new BigDecimal("0.0");
+		if (oldUnits.compareTo(CPSConstants.ZERO) < 0)
+			oldUnits = CPSConstants.ZERO;
 
-		if (newUnits < new BigDecimal("0.0"))
-			newUnits = new BigDecimal("0.0");
+		if (newUnits.compareTo(CPSConstants.ZERO) < 0)
+			newUnits = CPSConstants.ZERO;
 
-		unitsKL = oldUnits + newUnits;
+		unitsKL = oldUnits.add(newUnits);
 
 		log.debug("Meter Change: Old Units:" + oldUnits + ", newUnits:" + newUnits + ", total:" + unitsKL);
 	}
@@ -1118,7 +1119,7 @@ public class BillingService {
 
 	public CustValidation getCustInfo(CustDetails customer, BillDetails bill_details) {
 
-		if (customer.getPipeSize() < 0.25f)
+		if (customer.getPipeSize().compareTo(new BigDecimal("0.25")) < 0)
 			return CustValidation.INVALID_PIPESIZE;
 
 		Calendar cal = Calendar.getInstance();
