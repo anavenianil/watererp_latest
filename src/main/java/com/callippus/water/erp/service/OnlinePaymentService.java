@@ -19,6 +19,7 @@ import com.callippus.water.erp.service.util.XMLUtil;
 
 
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -60,6 +61,9 @@ public class OnlinePaymentService {
 
 	@Inject
 	private MerchantMasterRepository merchantMasterRepository;
+	
+	@Inject
+	private PaymentService paymentService;
 
 	public static void main(String[] args) throws Exception {
 		String xml = "<OrderRequest> <Currency>TSh</Currency> <MerchantKey>5b56ca5b-a882-4224-b3e7-b558e93e6cb0</MerchantKey> <MerchantCode>Test001</MerchantCode> <MerchantName>testmerchant</MerchantName> <ServiceCode>TESTS001</ServiceCode> <PayBy>TIGOPESADIR</PayBy> <Amount>1</Amount> <UserDefinedField>abcd</UserDefinedField> <Parameters> <Parameter name=\"Email\">test@gmail.com</Parameter> <Parameter name=\"Phone\">1234567895</Parameter> </Parameters> </OrderRequest> ";
@@ -120,20 +124,8 @@ public class OnlinePaymentService {
 
 		opc = onlinePaymentCallbackRepository.save(opc);
 		
-		CustDetails customer = custDetailsRepository.findByCanForUpdate(opr.getOnlinePaymentOrder().getUserDefinedField());
-		
-		log.debug("***** Customer Arrears before payment:" + customer.getArrears());
-		
-		log.debug("***** Customer Payment Amount:" + opc.getTotalAmountPaid());
-		
-		customer.setArrears(customer.getArrears().subtract(pgResponse.getTotalAmountPaid()));
-						
-		custDetailsRepository.save(customer);
-		
-		customer = custDetailsRepository.findOne(customer.getId());
-		
-		log.debug("***** Customer Arrears after payment:" + customer.getArrears());
-		
+		paymentService.postPayment(opr.getOnlinePaymentOrder().getUserDefinedField(), pgResponse.getTotalAmountPaid());
+				
 		log.debug("This is the opc after save:" + opc);
 
 		return "Successfully saved with id:" + opc.getId().toString();

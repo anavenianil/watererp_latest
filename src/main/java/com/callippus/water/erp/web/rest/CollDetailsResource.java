@@ -8,6 +8,7 @@ import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.service.PaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 
@@ -57,6 +58,9 @@ public class CollDetailsResource {
 
 	@Inject
 	private ReportsCustomRepository reportsRepository;
+	
+	@Inject
+	private PaymentService paymentService;
 
 	/**
 	 * POST /collDetailss -> Create a new collDetails.
@@ -77,16 +81,11 @@ public class CollDetailsResource {
 											"A new collDetails cannot already have an ID"))
 					.body(null);
 		}
+		
+		
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
-		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
-		BigDecimal balance = customer.getArrears().subtract(collDetails.getReceiptAmt());
-		customer.setArrears(balance);
-		if(customer.getStatus()==CustStatus.DISCONNECTED && balance.floatValue() <= 0.0f){
-			customer.setStatus(CustStatus.DEACTIVE);
-		}
-				
-		custDetailsRepository.saveAndFlush(customer);
+		paymentService.postPayment(collDetails.getCan(), collDetails.getReceiptAmt());
 
 		return ResponseEntity
 				.created(new URI("/api/collDetailss/" + result.getId()))
