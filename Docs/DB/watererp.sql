@@ -78,9 +78,9 @@ CREATE TABLE `adjustments` (
   KEY `fk_adjustments_transactiontypemaster_id` (`transaction_type_master_id`),
   KEY `fk_adjustments_user_id` (`user_id`),
   KEY `fk_adjustments_customercomplaints_id` (`customer_complaints_id`),
-  CONSTRAINT `fk_adjustments_customercomplaints_id` FOREIGN KEY (`customer_complaints_id`) REFERENCES `customer_complaints` (`id`),
   CONSTRAINT `fk_adjustments_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
   CONSTRAINT `fk_adjustments_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
+  CONSTRAINT `fk_adjustments_customercomplaints_id` FOREIGN KEY (`customer_complaints_id`) REFERENCES `customer_complaints` (`id`),
   CONSTRAINT `fk_adjustments_transactiontypemaster_id` FOREIGN KEY (`transaction_type_master_id`) REFERENCES `transaction_type_master` (`id`),
   CONSTRAINT `fk_adjustments_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -12147,15 +12147,13 @@ CREATE TABLE `coll_details` (
   CONSTRAINT `fk_colldetails_bankmaster_id` FOREIGN KEY (`bank_master_id`) REFERENCES `bank_master` (`id`),
   CONSTRAINT `fk_colldetails_collectiontypemaster_id` FOREIGN KEY (`collection_type_master_id`) REFERENCES `collection_type_master` (`id`),
   CONSTRAINT `fk_colldetails_paymenttypes_id` FOREIGN KEY (`payment_types_id`) REFERENCES `payment_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `watererp`.`coll_details`
 --
 
 /*!40000 ALTER TABLE `coll_details` DISABLE KEYS */;
-INSERT INTO `coll_details` (`id`,`reversal_ref`,`receipt_no`,`receipt_amt`,`receipt_dt`,`receipt_mode`,`instr_no`,`instr_dt`,`instr_issuer`,`svr_status`,`can`,`cons_name`,`terminal_id`,`coll_time`,`txn_status`,`meter_reader_id`,`user_id`,`remarks`,`settlement_id`,`ext_settlement_id`,`lat`,`long_i`,`payment_types_id`,`bank_master_id`,`collection_type_master_id`) VALUES 
- (1,NULL,NULL,54245,'2016-06-30 12:44:37',NULL,NULL,NULL,NULL,NULL,'B0200811 ',' SAID SOUD ',NULL,NULL,'C',NULL,NULL,'paid',NULL,NULL,NULL,NULL,1,NULL,77);
 /*!40000 ALTER TABLE `coll_details` ENABLE KEYS */;
 
 
@@ -12450,8 +12448,8 @@ CREATE TABLE `cust_details` (
   KEY `fk_custdetails_divisionmaster_id` (`division_master_id`),
   KEY `fk_custdetails_streetmaster_id` (`street_master_id`),
   KEY `fk_custdetails_meterdetails_id` (`meter_details_id`),
-  CONSTRAINT `fk_custdetails_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
   CONSTRAINT `fk_custdetails_divisionmaster_id` FOREIGN KEY (`division_master_id`) REFERENCES `division_master` (`id`),
+  CONSTRAINT `fk_custdetails_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
   CONSTRAINT `fk_custdetails_pipesizemaster_id` FOREIGN KEY (`pipe_size_master_id`) REFERENCES `pipe_size_master` (`id`),
   CONSTRAINT `fk_custdetails_streetmaster_id` FOREIGN KEY (`street_master_id`) REFERENCES `street_master` (`id`),
   CONSTRAINT `fk_custdetails_tariffcategorymaster_id` FOREIGN KEY (`tariff_category_master_id`) REFERENCES `tariff_category_master` (`id`)
@@ -12479,8 +12477,8 @@ CREATE TABLE `cust_meter_mapping` (
   PRIMARY KEY (`id`),
   KEY `fk_custmetermapping_custdetails_id` (`cust_details_id`),
   KEY `fk_custmetermapping_meterdetails_id` (`meter_details_id`),
-  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`),
-  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`)
+  CONSTRAINT `fk_custmetermapping_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
+  CONSTRAINT `fk_custmetermapping_meterdetails_id` FOREIGN KEY (`meter_details_id`) REFERENCES `meter_details` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -12520,7 +12518,7 @@ CREATE TABLE `customer` (
   `photo` varchar(255) DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   `changed_date` date DEFAULT NULL,
-  `change_type` varchar(255) DEFAULT NULL,
+  `change_type` varchar(255) NOT NULL,
   `old_tariff_category_id` bigint(20) DEFAULT NULL,
   `new_tariff_category_id` bigint(20) DEFAULT NULL,
   `new_proof_master_id` bigint(20) DEFAULT NULL,
@@ -12731,12 +12729,13 @@ INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDERE
  ('20160330092113','jhipster','classpath:config/liquibase/changelog/20160330092113_added_entity_ItemRequired.xml','2016-06-28 14:57:21',210,'EXECUTED','7:2531c949cd4696268a41071714d2f043','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160314104149','jhipster','classpath:config/liquibase/changelog/20160314104149_added_entity_BillFullDetails.xml','2016-06-30 10:19:29',211,'EXECUTED','7:a00b38c85a18170f232ed48a80f158b7','createTable, addForeignKeyConstraint','',NULL,'3.4.2',NULL,NULL),
  ('20160412143549','jhipster','classpath:config/liquibase/changelog/20160412143549_added_entity_BillRunDetails.xml','2016-06-30 10:19:30',212,'EXECUTED','7:208b28854110ec930d0f7348946c1469','createTable, dropDefaultValue (x2), addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL),
- ('20160229071846','jhipster','classpath:config/liquibase/changelog/20160229071846_added_entity_Customer.xml','2016-07-01 12:59:24',215,'EXECUTED','7:aeb80de53bcaf699ac7d4e7112e4bbcf','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
+ ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-07-01 13:12:18',216,'EXECUTED','7:e3f2e823dfbd784060032c0ccc70c041','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
 INSERT INTO `databasechangelog` (`ID`,`AUTHOR`,`FILENAME`,`DATEEXECUTED`,`ORDEREXECUTED`,`EXECTYPE`,`MD5SUM`,`DESCRIPTION`,`COMMENTS`,`TAG`,`LIQUIBASE`,`CONTEXTS`,`LABELS`) VALUES 
- ('20160314132343','jhipster','classpath:config/liquibase/changelog/20160314132343_added_entity_CustDetails.xml','2016-07-01 13:12:18',216,'EXECUTED','7:e3f2e823dfbd784060032c0ccc70c041','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
  ('20160405010101','jhipster','classpath:config/liquibase/changelog/20160405010101_added_entity_CustMeterMapping.xml','2016-07-01 13:12:19',217,'EXECUTED','7:daff9712c10bda0f757f367deb57dcc9','createTable, addForeignKeyConstraint (x2)','',NULL,'3.4.2',NULL,NULL),
  ('20160419095001','jhipster','classpath:config/liquibase/changelog/20160419095001_added_entity_MeterChange.xml','2016-07-01 13:12:20',218,'EXECUTED','7:c16e6d2dfad2b29930a6478fba6662f6','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
- ('20160612095001','jhipster','classpath:config/liquibase/changelog/20160612095001_added_entity_Adjustments.xml','2016-07-01 13:12:22',219,'EXECUTED','7:43ff1f09b677c9c7835b072567813f41','createTable, dropDefaultValue, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL);
+ ('20160612095001','jhipster','classpath:config/liquibase/changelog/20160612095001_added_entity_Adjustments.xml','2016-07-01 13:12:22',219,'EXECUTED','7:43ff1f09b677c9c7835b072567813f41','createTable, dropDefaultValue, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
+ ('20160229071846','jhipster','classpath:config/liquibase/changelog/20160229071846_added_entity_Customer.xml','2016-07-07 08:39:04',220,'EXECUTED','7:3e9221878079a279ccfa287ea93aa9f0','createTable, addForeignKeyConstraint (x5)','',NULL,'3.4.2',NULL,NULL),
+ ('20160707104149','jhipster','classpath:config/liquibase/changelog/20160707104149_added_entity_InvoicePayments.xml','2016-07-07 10:06:24',221,'EXECUTED','7:36d240a0acd926b3af0881296d2d4a18','createTable, addForeignKeyConstraint (x3)','',NULL,'3.4.2',NULL,NULL);
 /*!40000 ALTER TABLE `databasechangelog` ENABLE KEYS */;
 
 
@@ -13272,6 +13271,34 @@ INSERT INTO `id_proof_master` (`id`,`id_proof`) VALUES
  (3,'VOTER\'S ID'),
  (4,'PASSPORT');
 /*!40000 ALTER TABLE `id_proof_master` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `watererp`.`invoice_payments`
+--
+
+DROP TABLE IF EXISTS `invoice_payments`;
+CREATE TABLE `invoice_payments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `amount` decimal(20,3) NOT NULL,
+  `cust_details_id` bigint(20) NOT NULL,
+  `bill_full_details_id` bigint(20) NOT NULL,
+  `coll_details_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_invoicepayments_custdetails_id` (`cust_details_id`),
+  KEY `fk_invoicepayments_billfulldetails_id` (`bill_full_details_id`),
+  KEY `fk_invoicepayments_colldetails_id` (`coll_details_id`),
+  CONSTRAINT `fk_invoicepayments_colldetails_id` FOREIGN KEY (`coll_details_id`) REFERENCES `coll_details` (`id`),
+  CONSTRAINT `fk_invoicepayments_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
+  CONSTRAINT `fk_invoicepayments_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `watererp`.`invoice_payments`
+--
+
+/*!40000 ALTER TABLE `invoice_payments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `invoice_payments` ENABLE KEYS */;
 
 
 --
@@ -17662,11 +17689,11 @@ CREATE TABLE `meter_change` (
   KEY `fk_meterchange_newmeterno_id` (`new_meter_no_id`),
   KEY `fk_meterchange_billfulldetails_id` (`bill_full_details_id`),
   KEY `fk_meterchange_user_id` (`user_id`),
-  CONSTRAINT `fk_meterchange_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`),
   CONSTRAINT `fk_meterchange_billfulldetails_id` FOREIGN KEY (`bill_full_details_id`) REFERENCES `bill_full_details` (`id`),
   CONSTRAINT `fk_meterchange_custdetails_id` FOREIGN KEY (`cust_details_id`) REFERENCES `cust_details` (`id`),
   CONSTRAINT `fk_meterchange_newmeterno_id` FOREIGN KEY (`new_meter_no_id`) REFERENCES `meter_details` (`id`),
-  CONSTRAINT `fk_meterchange_prevmeterno_id` FOREIGN KEY (`prev_meter_no_id`) REFERENCES `meter_details` (`id`)
+  CONSTRAINT `fk_meterchange_prevmeterno_id` FOREIGN KEY (`prev_meter_no_id`) REFERENCES `meter_details` (`id`),
+  CONSTRAINT `fk_meterchange_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

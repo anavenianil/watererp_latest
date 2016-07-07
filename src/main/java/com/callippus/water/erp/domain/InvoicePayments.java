@@ -24,17 +24,20 @@ public class InvoicePayments implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "amount", precision=20, scale=2, nullable = false)
+    @Column(name = "amount", precision=20, scale=3, nullable = false)
     private BigDecimal amount;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "cust_details_id")
     private CustDetails custDetails;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "bill_full_details_id")
     private BillFullDetails billFullDetails;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "coll_details_id")
     private CollDetails collDetails;

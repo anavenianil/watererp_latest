@@ -19,7 +19,8 @@
             "relationshipName": "collDetails",
             "otherEntityName": "collDetails",
             "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "relationshipValidate" : "required"
         }
     ],
     "fields": [
