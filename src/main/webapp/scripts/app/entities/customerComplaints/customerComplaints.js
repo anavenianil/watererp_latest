@@ -109,6 +109,25 @@ angular.module('watererpApp')
                 resolve: {
                 }
             })
+            .state('customerInfo.detail', {
+                parent: 'entity',
+                url: '/customerInfo/{id}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetails'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/customerComplaints/customerInfo-detail.html',
+                        controller: 'CustDetailsDetailController'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'CustDetails', function($stateParams, CustDetails) {
+                        return CustDetails.get({id : $stateParams.id});
+                    }]
+                }
+            })
             .state('customerHistory', {
                 parent: 'customerComplaints',
                 url: '/customerHistory',
