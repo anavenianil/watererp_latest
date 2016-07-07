@@ -126,7 +126,7 @@ public class OnlinePaymentService {
 		
 		log.debug("***** Customer Payment Amount:" + opc.getTotalAmountPaid());
 		
-		customer.setArrears(customer.getArrears() - pgResponse.getTotalAmountPaid());
+		customer.setArrears(customer.getArrears().subtract(pgResponse.getTotalAmountPaid()));
 						
 		custDetailsRepository.save(customer);
 		

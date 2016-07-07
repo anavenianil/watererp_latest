@@ -31,6 +31,7 @@ import javax.transaction.Transactional;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -79,7 +80,7 @@ public class CollDetailsResource {
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
 		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
-		Float balance = customer.getArrears() - collDetails.getReceiptAmt();
+		BigDecimal balance = customer.getArrears().subtract(collDetails.getReceiptAmt());
 		customer.setArrears(balance);
 		if(customer.getStatus()==CustStatus.DISCONNECTED && balance.floatValue() <= 0.0f){
 			customer.setStatus(CustStatus.DEACTIVE);

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -63,8 +64,8 @@ public class CustDetails implements Serializable {
     @Column(name = "category_unused")
     private String categoryUnused;
 
-    @Column(name = "pipe_size")
-    private Float pipeSize;
+    @Column(name = "pipe_size", precision=20, scale=3)
+    private BigDecimal pipeSize;
 
     @Column(name = "board_meter")
     private String boardMeter;
@@ -78,35 +79,35 @@ public class CustDetails implements Serializable {
     @Column(name = "prev_bill_month")
     private LocalDate prevBillMonth;
 
-    @Column(name = "prev_avg_kl")
-    private Float prevAvgKl;
+    @Column(name = "prev_avg_kl", precision=20, scale=3)
+    private BigDecimal prevAvgKl;
 
     @Column(name = "met_reading_dt")
     private LocalDate metReadingDt;
 
-    @Column(name = "prev_reading")
-    private Float prevReading;
+    @Column(name = "prev_reading", precision=20, scale=3)
+    private BigDecimal prevReading;
 
     @Column(name = "met_reading_mo")
     private LocalDate metReadingMo;
 
-    @Column(name = "met_avg_kl")
-    private Float metAvgKl;
+    @Column(name = "met_avg_kl", precision=20, scale=3)
+    private BigDecimal metAvgKl;
 
-    @Column(name = "arrears")
-    private Float arrears;
+    @Column(name = "arrears", precision=20, scale=3)
+    private BigDecimal arrears;
 
-    @Column(name = "reversal_amt")
-    private Float reversalAmt;
+    @Column(name = "reversal_amt", precision=20, scale=3)
+    private BigDecimal reversalAmt;
 
-    @Column(name = "installment")
-    private Float installment;
+    @Column(name = "installment", precision=20, scale=3)
+    private BigDecimal installment;
 
-    @Column(name = "other_charges")
-    private Float otherCharges;
+    @Column(name = "other_charges", precision=20, scale=3)
+    private BigDecimal otherCharges;
 
-    @Column(name = "surcharge")
-    private Float surcharge;
+    @Column(name = "surcharge", precision=20, scale=3)
+    private BigDecimal surcharge;
 
     @Column(name = "hrs_surcharge")
     private String hrsSurcharge;
@@ -114,17 +115,17 @@ public class CustDetails implements Serializable {
     @Column(name = "res_units")
     private Long resUnits;
 
-    @Column(name = "met_cost_installment")
-    private Float metCostInstallment;
+    @Column(name = "met_cost_installment", precision=20, scale=3)
+    private BigDecimal metCostInstallment;
 
-    @Column(name = "int_on_arrears")
-    private Float intOnArrears;
+    @Column(name = "int_on_arrears", precision=20, scale=3)
+    private BigDecimal intOnArrears;
 
     @Column(name = "last_pymt_dt")
     private LocalDate lastPymtDt;
 
-    @Column(name = "last_pymt_amt")
-    private Float lastPymtAmt;
+    @Column(name = "last_pymt_amt", precision=20, scale=3)
+    private BigDecimal lastPymtAmt;
 
     @Column(name = "mobile_no")
     private String mobileNo;
@@ -150,8 +151,8 @@ public class CustDetails implements Serializable {
     @Column(name = "meter_fix_date")
     private LocalDate meterFixDate;
 
-    @Column(name = "lock_charges")
-    private Float lockCharges;
+    @Column(name = "lock_charges", precision=20, scale=3)
+    private BigDecimal lockCharges;
 
     @Column(name = "id_number")
     private String idNumber;
@@ -303,11 +304,11 @@ public class CustDetails implements Serializable {
         this.categoryUnused = categoryUnused;
     }
 
-    public Float getPipeSize() {
+    public BigDecimal getPipeSize() {
         return pipeSize;
     }
 
-    public void setPipeSize(Float pipeSize) {
+    public void setPipeSize(BigDecimal pipeSize) {
         this.pipeSize = pipeSize;
     }
 
@@ -343,11 +344,11 @@ public class CustDetails implements Serializable {
         this.prevBillMonth = prevBillMonth;
     }
 
-    public Float getPrevAvgKl() {
+    public BigDecimal getPrevAvgKl() {
         return prevAvgKl;
     }
 
-    public void setPrevAvgKl(Float prevAvgKl) {
+    public void setPrevAvgKl(BigDecimal prevAvgKl) {
         this.prevAvgKl = prevAvgKl;
     }
 
@@ -359,11 +360,11 @@ public class CustDetails implements Serializable {
         this.metReadingDt = metReadingDt;
     }
 
-    public Float getPrevReading() {
+    public BigDecimal getPrevReading() {
         return prevReading;
     }
 
-    public void setPrevReading(Float prevReading) {
+    public void setPrevReading(BigDecimal prevReading) {
         this.prevReading = prevReading;
     }
 
@@ -375,51 +376,51 @@ public class CustDetails implements Serializable {
         this.metReadingMo = metReadingMo;
     }
 
-    public Float getMetAvgKl() {
+    public BigDecimal getMetAvgKl() {
         return metAvgKl;
     }
 
-    public void setMetAvgKl(Float metAvgKl) {
+    public void setMetAvgKl(BigDecimal metAvgKl) {
         this.metAvgKl = metAvgKl;
     }
 
-    public Float getArrears() {
+    public BigDecimal getArrears() {
         return arrears;
     }
 
-    public void setArrears(Float arrears) {
+    public void setArrears(BigDecimal arrears) {
         this.arrears = arrears;
     }
 
-    public Float getReversalAmt() {
+    public BigDecimal getReversalAmt() {
         return reversalAmt;
     }
 
-    public void setReversalAmt(Float reversalAmt) {
+    public void setReversalAmt(BigDecimal reversalAmt) {
         this.reversalAmt = reversalAmt;
     }
 
-    public Float getInstallment() {
+    public BigDecimal getInstallment() {
         return installment;
     }
 
-    public void setInstallment(Float installment) {
+    public void setInstallment(BigDecimal installment) {
         this.installment = installment;
     }
 
-    public Float getOtherCharges() {
+    public BigDecimal getOtherCharges() {
         return otherCharges;
     }
 
-    public void setOtherCharges(Float otherCharges) {
+    public void setOtherCharges(BigDecimal otherCharges) {
         this.otherCharges = otherCharges;
     }
 
-    public Float getSurcharge() {
+    public BigDecimal getSurcharge() {
         return surcharge;
     }
 
-    public void setSurcharge(Float surcharge) {
+    public void setSurcharge(BigDecimal surcharge) {
         this.surcharge = surcharge;
     }
 
@@ -439,19 +440,19 @@ public class CustDetails implements Serializable {
         this.resUnits = resUnits;
     }
 
-    public Float getMetCostInstallment() {
+    public BigDecimal getMetCostInstallment() {
         return metCostInstallment;
     }
 
-    public void setMetCostInstallment(Float metCostInstallment) {
+    public void setMetCostInstallment(BigDecimal metCostInstallment) {
         this.metCostInstallment = metCostInstallment;
     }
 
-    public Float getIntOnArrears() {
+    public BigDecimal getIntOnArrears() {
         return intOnArrears;
     }
 
-    public void setIntOnArrears(Float intOnArrears) {
+    public void setIntOnArrears(BigDecimal intOnArrears) {
         this.intOnArrears = intOnArrears;
     }
 
@@ -463,11 +464,11 @@ public class CustDetails implements Serializable {
         this.lastPymtDt = lastPymtDt;
     }
 
-    public Float getLastPymtAmt() {
+    public BigDecimal getLastPymtAmt() {
         return lastPymtAmt;
     }
 
-    public void setLastPymtAmt(Float lastPymtAmt) {
+    public void setLastPymtAmt(BigDecimal lastPymtAmt) {
         this.lastPymtAmt = lastPymtAmt;
     }
 
@@ -535,11 +536,11 @@ public class CustDetails implements Serializable {
         this.meterFixDate = meterFixDate;
     }
 
-    public Float getLockCharges() {
+    public BigDecimal getLockCharges() {
         return lockCharges;
     }
 
-    public void setLockCharges(Float lockCharges) {
+    public void setLockCharges(BigDecimal lockCharges) {
         this.lockCharges = lockCharges;
     }
 

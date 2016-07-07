@@ -106,7 +106,7 @@
         {
             "fieldId": 13,
             "fieldName": "pipeSize",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 14,
@@ -131,7 +131,7 @@
         {
             "fieldId": 18,
             "fieldName": "prevAvgKl",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 19,
@@ -141,7 +141,7 @@
         {
             "fieldId": 20,
             "fieldName": "prevReading",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 21,
@@ -151,32 +151,32 @@
         {
             "fieldId": 22,
             "fieldName": "metAvgKl",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 23,
             "fieldName": "arrears",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 24,
             "fieldName": "reversalAmt",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 25,
             "fieldName": "installment",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 26,
             "fieldName": "otherCharges",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 27,
             "fieldName": "surcharge",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 28,
@@ -191,12 +191,12 @@
         {
             "fieldId": 30,
             "fieldName": "metCostInstallment",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 31,
             "fieldName": "intOnArrears",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 32,
@@ -206,7 +206,7 @@
         {
             "fieldId": 33,
             "fieldName": "lastPymtAmt",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 34,
@@ -251,7 +251,7 @@
         {
             "fieldId": 42,
             "fieldName": "lockCharges",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 43,

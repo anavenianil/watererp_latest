@@ -1,10 +1,15 @@
 package com.callippus.water.erp.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -12,6 +17,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "coll_details")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CollDetails implements Serializable {
 
     @Id
@@ -24,8 +30,8 @@ public class CollDetails implements Serializable {
     @Column(name = "receipt_no")
     private String receiptNo;
 
-    @Column(name = "receipt_amt")
-    private Float receiptAmt;
+    @Column(name = "receipt_amt", precision=20, scale=3)
+    private BigDecimal receiptAmt;
 
     @Column(name = "receipt_dt")
     private ZonedDateTime receiptDt;
@@ -117,11 +123,11 @@ public class CollDetails implements Serializable {
         this.receiptNo = receiptNo;
     }
 
-    public Float getReceiptAmt() {
+    public BigDecimal getReceiptAmt() {
         return receiptAmt;
     }
 
-    public void setReceiptAmt(Float receiptAmt) {
+    public void setReceiptAmt(BigDecimal receiptAmt) {
         this.receiptAmt = receiptAmt;
     }
 

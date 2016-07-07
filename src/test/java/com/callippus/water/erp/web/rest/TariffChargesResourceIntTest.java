@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,14 +51,14 @@ public class TariffChargesResourceIntTest {
     private static final Integer DEFAULT_SLAB_MAX = 1;
     private static final Integer UPDATED_SLAB_MAX = 2;
 
-    private static final Float DEFAULT_RATE = 1F;
-    private static final Float UPDATED_RATE = 2F;
+    private static final BigDecimal DEFAULT_RATE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_RATE = new BigDecimal(2);
 
-    private static final Float DEFAULT_MIN_KL = 1F;
-    private static final Float UPDATED_MIN_KL = 2F;
+    private static final BigDecimal DEFAULT_MIN_KL = new BigDecimal(1);
+    private static final BigDecimal UPDATED_MIN_KL = new BigDecimal(2);
 
-    private static final Float DEFAULT_MIN_UNMETERED_KL = 1F;
-    private static final Float UPDATED_MIN_UNMETERED_KL = 2F;
+    private static final BigDecimal DEFAULT_MIN_UNMETERED_KL = new BigDecimal(1);
+    private static final BigDecimal UPDATED_MIN_UNMETERED_KL = new BigDecimal(2);
 
     @Inject
     private TariffChargesRepository tariffChargesRepository;
@@ -239,9 +240,9 @@ public class TariffChargesResourceIntTest {
                 .andExpect(jsonPath("$.[*].tariffDesc").value(hasItem(DEFAULT_TARIFF_DESC.toString())))
                 .andExpect(jsonPath("$.[*].slabMin").value(hasItem(DEFAULT_SLAB_MIN)))
                 .andExpect(jsonPath("$.[*].slabMax").value(hasItem(DEFAULT_SLAB_MAX)))
-                .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.doubleValue())))
-                .andExpect(jsonPath("$.[*].minKL").value(hasItem(DEFAULT_MIN_KL.doubleValue())))
-                .andExpect(jsonPath("$.[*].minUnmeteredKL").value(hasItem(DEFAULT_MIN_UNMETERED_KL.doubleValue())));
+                .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.intValue())))
+                .andExpect(jsonPath("$.[*].minKL").value(hasItem(DEFAULT_MIN_KL.intValue())))
+                .andExpect(jsonPath("$.[*].minUnmeteredKL").value(hasItem(DEFAULT_MIN_UNMETERED_KL.intValue())));
     }
 
     @Test
@@ -258,9 +259,9 @@ public class TariffChargesResourceIntTest {
             .andExpect(jsonPath("$.tariffDesc").value(DEFAULT_TARIFF_DESC.toString()))
             .andExpect(jsonPath("$.slabMin").value(DEFAULT_SLAB_MIN))
             .andExpect(jsonPath("$.slabMax").value(DEFAULT_SLAB_MAX))
-            .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.doubleValue()))
-            .andExpect(jsonPath("$.minKL").value(DEFAULT_MIN_KL.doubleValue()))
-            .andExpect(jsonPath("$.minUnmeteredKL").value(DEFAULT_MIN_UNMETERED_KL.doubleValue()));
+            .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.intValue()))
+            .andExpect(jsonPath("$.minKL").value(DEFAULT_MIN_KL.intValue()))
+            .andExpect(jsonPath("$.minUnmeteredKL").value(DEFAULT_MIN_UNMETERED_KL.intValue()));
     }
 
     @Test

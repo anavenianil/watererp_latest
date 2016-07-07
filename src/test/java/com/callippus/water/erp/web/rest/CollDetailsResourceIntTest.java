@@ -2,12 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.callippus.water.erp.Application;
 import com.callippus.water.erp.domain.CollDetails;
-import com.callippus.water.erp.domain.CollectionTypeMaster;
-import com.callippus.water.erp.domain.PaymentTypes;
 import com.callippus.water.erp.repository.CollDetailsRepository;
-import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
-import com.callippus.water.erp.repository.CustDetailsRepository;
-import com.callippus.water.erp.repository.PaymentTypesRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +28,7 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,8 +54,8 @@ public class CollDetailsResourceIntTest {
     private static final String DEFAULT_RECEIPT_NO = "AAAAA";
     private static final String UPDATED_RECEIPT_NO = "BBBBB";
 
-    private static final Float DEFAULT_RECEIPT_AMT = 1F;
-    private static final Float UPDATED_RECEIPT_AMT = 2F;
+    private static final BigDecimal DEFAULT_RECEIPT_AMT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_RECEIPT_AMT = new BigDecimal(2);
 
     private static final ZonedDateTime DEFAULT_RECEIPT_DT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_RECEIPT_DT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -106,15 +102,6 @@ public class CollDetailsResourceIntTest {
     private CollDetailsRepository collDetailsRepository;
 
     @Inject
-    private CollectionTypeMasterRepository collectionTypeMasterRepository;
-    
-    @Inject
-    private CustDetailsRepository custDetailsRepository;
-    
-    @Inject
-    private PaymentTypesRepository paymentTypesRepository;
-
-    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -129,7 +116,6 @@ public class CollDetailsResourceIntTest {
         MockitoAnnotations.initMocks(this);
         CollDetailsResource collDetailsResource = new CollDetailsResource();
         ReflectionTestUtils.setField(collDetailsResource, "collDetailsRepository", collDetailsRepository);
-        ReflectionTestUtils.setField(collDetailsResource, "custDetailsRepository", custDetailsRepository);
         this.restCollDetailsMockMvc = MockMvcBuilders.standaloneSetup(collDetailsResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -161,29 +147,11 @@ public class CollDetailsResourceIntTest {
         collDetails.setLongI(DEFAULT_LONG_I);
     }
 
-    
-    public void createPayment(MockMvc restCollDetailsMockMvc, String can, Float amount, ZonedDateTime date) throws Exception {
-    	collDetails = new CollDetails();
-    	collDetails.setCan(can);
-    	collDetails.setReceiptAmt(amount);
-    	collDetails.setReceiptDt(date);
-    	collDetails.setCollTime(ZonedDateTime.now());
-    	CollectionTypeMaster ct = collectionTypeMasterRepository.findOne(1L);
-    	PaymentTypes pt = paymentTypesRepository.findOne(1L);
-    	collDetails.setCollectionTypeMaster(ct);
-    	collDetails.setPaymentTypes(pt);
-
-        restCollDetailsMockMvc.perform(post("/api/collDetailss")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(collDetails)))
-                .andExpect(status().isCreated());
-    }
-    
-    
     @Test
     @Transactional
     public void createCollDetails() throws Exception {
         int databaseSizeBeforeCreate = collDetailsRepository.findAll().size();
+
         // Create the CollDetails
 
         restCollDetailsMockMvc.perform(post("/api/collDetailss")
@@ -231,7 +199,7 @@ public class CollDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(collDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].reversalRef").value(hasItem(DEFAULT_REVERSAL_REF.toString())))
                 .andExpect(jsonPath("$.[*].receiptNo").value(hasItem(DEFAULT_RECEIPT_NO.toString())))
-                .andExpect(jsonPath("$.[*].receiptAmt").value(hasItem(DEFAULT_RECEIPT_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].receiptAmt").value(hasItem(DEFAULT_RECEIPT_AMT.intValue())))
                 .andExpect(jsonPath("$.[*].receiptDt").value(hasItem(DEFAULT_RECEIPT_DT_STR)))
                 .andExpect(jsonPath("$.[*].receiptMode").value(hasItem(DEFAULT_RECEIPT_MODE.toString())))
                 .andExpect(jsonPath("$.[*].instrNo").value(hasItem(DEFAULT_INSTR_NO.toString())))
@@ -265,7 +233,7 @@ public class CollDetailsResourceIntTest {
             .andExpect(jsonPath("$.id").value(collDetails.getId().intValue()))
             .andExpect(jsonPath("$.reversalRef").value(DEFAULT_REVERSAL_REF.toString()))
             .andExpect(jsonPath("$.receiptNo").value(DEFAULT_RECEIPT_NO.toString()))
-            .andExpect(jsonPath("$.receiptAmt").value(DEFAULT_RECEIPT_AMT.doubleValue()))
+            .andExpect(jsonPath("$.receiptAmt").value(DEFAULT_RECEIPT_AMT.intValue()))
             .andExpect(jsonPath("$.receiptDt").value(DEFAULT_RECEIPT_DT_STR))
             .andExpect(jsonPath("$.receiptMode").value(DEFAULT_RECEIPT_MODE.toString()))
             .andExpect(jsonPath("$.instrNo").value(DEFAULT_INSTR_NO.toString()))
