@@ -877,7 +877,7 @@ public class BillingService {
 
 				bfd.setNoMeterAmt(((BigDecimal) charge.get("rate")));
 
-				log.debug("Usage Charge:" + (Double) charge.get("amount"));
+				log.debug("Usage Charge:" + (BigDecimal) charge.get("amount"));
 				bfd.setWaterCess(bfd.getWaterCess().add((BigDecimal) charge.get("amount")));
 
 				if ((bill_details.getCurrentBillType().equals("M") || bill_details.getCurrentBillType().equals("S"))
@@ -896,10 +896,10 @@ public class BillingService {
 				}
 
 			} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
-				log.debug("Meter Rent:" + (Double) charge.get("amount"));
+				log.debug("Meter Rent:" + (BigDecimal) charge.get("amount"));
 				bfd.setMeterServiceCharge(bfd.getMeterServiceCharge().add((BigDecimal) charge.get("amount")));
 			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
-				log.debug("Service Charge:" + (Double) charge.get("amount"));
+				log.debug("Service Charge:" + (BigDecimal) charge.get("amount"));
 				bfd.setServiceCharge(bfd.getServiceCharge().add((BigDecimal) charge.get("amount")));
 			}
 		}
