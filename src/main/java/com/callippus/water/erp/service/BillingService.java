@@ -1,6 +1,5 @@
 package com.callippus.water.erp.service;
 
-import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.Adjustments;
 import com.callippus.water.erp.domain.BillDetails;
@@ -158,9 +157,11 @@ public class BillingService {
 
 		dFrom = LocalDate.of(2016, 05, 24);
 		dTo = LocalDate.of(2016, 06, 30);
+		
+		System.out.println("THis is the dFrom:" + dFrom + ", to:" + dTo);
 	}
 
-	public BillRunMaster generateBill(boolean unmeteredFlag) throws Exception {
+	public BillRunMaster generateBill(boolean runAll) throws Exception {
 		initBillRun();
 
 		List<BillDetails> bd = billDetailsRepository.findAllInitiated();
@@ -170,7 +171,8 @@ public class BillingService {
 
 		processBillsWithMeter(bd);
 
-		if (unmeteredFlag) {
+		if (runAll) {
+			processTerminatedMeters();
 			processDisconnectedMeters();
 			processBillsWithoutMeter();
 		}
@@ -185,6 +187,31 @@ public class BillingService {
 		return br;
 	}
 
+	public void processDisconnectedMeters(){
+		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
+		customers.forEach(customer -> saveAndRunTerminations(customer));
+	}
+	
+	public BillRunMaster processDisconnection(CustDetails custDetails) throws Exception
+	{
+		initBillRun();
+
+		if (custDetails.getStatus() != CustStatus.ACTIVE && custDetails.getStatus() != CustStatus.TERMINATED) {
+			throw new Exception("Invalid CustStatus for CAN:" + custDetails.getCan() + ", Status:" + custDetails.getStatus().toString());
+		}
+
+//			process_bill(can);
+
+		if (failedRecords > 0)
+			br.setStatus("Completed with Errors");
+		else
+			br.setStatus("Completed Successfully");
+
+		billRunMasterRepository.save(br);
+
+		return br;
+	}
+	
 	public BillRunMaster generateSingleBill(String can) throws Exception {
 
 		initBillRun();
@@ -509,7 +536,7 @@ public class BillingService {
 		bd.forEach(bill_details -> process_bill(bill_details));
 	}
 
-	public void processDisconnectedMeters() {
+	public void processTerminatedMeters() {
 		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
 		customers.forEach(customer -> saveAndRunTerminations(customer));
 	}
