@@ -1,0 +1,54 @@
+
+<div>
+    <h2><span>InvoicePayments</span> {{invoicePayments.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Amount</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{invoicePayments.amount}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>custDetails</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="custDetails.detail({id:invoicePayments.custDetails.id})">{{invoicePayments.custDetails.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>billFullDetails</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="billFullDetails.detail({id:invoicePayments.billFullDetails.id})">{{invoicePayments.billFullDetails.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>collDetails</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="collDetails.detail({id:invoicePayments.collDetails.id})">{{invoicePayments.collDetails.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
