@@ -1,15 +1,16 @@
 'use strict';
 
 angular.module('watererpApp').controller('WorkflowDialogController',
-    /*['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Workflow', 'WorkflowMaster', 'WorkflowRelations', 'OrgRoleInstance', 'WorkflowRelationships', 'WorkflowStageMaster',*/
-        function($scope, $state, $stateParams, /*$uibModalInstance, entity,*/ Workflow, WorkflowMaster, WorkflowRelations, OrgRoleInstance, WorkflowRelationships, WorkflowStageMaster, ParseLinks) {
+        function($scope, $state, $stateParams, Workflow, WorkflowMaster, WorkflowRelations, OrgRoleInstance, WorkflowRelationships, 
+        		WorkflowStageMaster, ParseLinks, $http) {
 
         $scope.workflow = {};
         $scope.workflowmasters = WorkflowMaster.query();
         $scope.workflowrelationss = WorkflowRelations.query();
-        $scope.orgroleinstances = OrgRoleInstance.query();
+        //$scope.orgroleinstances = OrgRoleInstance.query();
         $scope.workflowrelationshipss = WorkflowRelationships.query();
         $scope.workflowstagemasters = WorkflowStageMaster.query();
+        
         $scope.load = function(id) {
             Workflow.get({id : id}, function(result) {
                 $scope.workflow = result;
@@ -51,4 +52,16 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+        
+        
+        $scope.getOrgRoleInstance = function() {
+        	$scope.orgroleinstances = [];
+			return $http.get('/api/orgRoleInstances/getAll'
+					).then(
+					function(response) {
+						$scope.orgroleinstances = response.data;
+					});
+		}
+        
+        $scope.getOrgRoleInstance();
 }/*]*/);
