@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.Customer;
+import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.Workflow;
+import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.WorkflowMaster;
 import com.callippus.water.erp.repository.WorkflowMasterRepository;
 import com.callippus.water.erp.repository.WorkflowRepository;
@@ -88,10 +92,20 @@ public class WorkflowResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Workflow>> getAllWorkflows(Pageable pageable)
+    public ResponseEntity<List<Workflow>> getAllWorkflows(Pageable pageable,
+    		@RequestParam(value = "workflowMasterId", required = false) Long workflowMasterId)
         throws URISyntaxException {
         log.debug("REST request to get a page of Workflows");
-        Page<Workflow> page = workflowRepository.findAll(pageable); 
+        //Page<Workflow> page = workflowRepository.findAll(pageable);
+        Page<Workflow> page;
+        //WorkflowMaster workflowMaster = workflowMasterRepository.findOne(workflowMasterId);
+        if(workflowMasterId != null){
+        	page = workflowRepository.findByWorkflowMaster(pageable, workflowMasterId);
+        }
+        else
+        {
+        	page = workflowRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/workflows");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -125,4 +139,22 @@ public class WorkflowResource {
         workflowRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("workflow", id.toString())).build();
     }
+    
+    /**
+     * Get workflow of workflowMaster
+     */
+    
+    /*@RequestMapping(value = "/workflows/workflowMasterId",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<Workflow>> getWorkflows(
+			@RequestBody WorkflowMaster workflowMaster)
+			throws Exception {
+    	log.debug("REST request to getWorkflows : {}");
+    	List<Workflow> workflows = workflowRepository.findByWorkflowMaster(workflowMaster);
+    	return Optional.ofNullable(workflows)
+				.map(result -> new ResponseEntity<>(workflows, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}*/
 }

@@ -18,24 +18,37 @@
 							<label for="field_workflowMaster">Workflow Type</label> <select
 								class="form-control input-sm" id="field_workflowMaster"
 								name="workflowMaster" ng-model="workflow.workflowMaster"
+								ng-change="getWorkflow(workflow.workflowMaster.id)"
 								ng-options="workflowMaster as workflowMaster.workflowName for workflowMaster in workflowmasters track by workflowMaster.id">
 								<option value=""></option>
 							</select>
 						</div>
+						<div class="col-sm-3" ng-show="workflow.workflowMaster.id ===2">
+							<label class="control-label" for="field_workflowName">Work
+								Flow Name</label> <input type="text" class="form-control"
+								name="workflowName" id="field_workflowName"
+								ng-model="workflow.workflowMaster.workflowName" required />
+							<div ng-show="editForm.workflowName.$invalid">
+								<p class="help-block"
+									ng-show="editForm.workflowName.$error.required">This field
+									is required.</p>
+							</div>
+						</div>
 					</div>
+					<hr>
 					<br>
-					<div class="row">
+					<div class="row" ng-repeat="workflow in workflows track by $index">
 						<div class="col-sm-1">
 							<label class="control-label" for="field_stageId">Stage Id</label>
 							<input type="number" class="form-control" name="stageId" min="1"
-								id="field_stageId" ng-model="workflow.stageId" />
+								id="field_stageId" ng-model="workflow.stageId" disabled/>
 						</div>
 						<div class="col-sm-2">
 							<label for="field_relativeFromRole">Relative From Role</label> <select
 								class="form-control" id="field_relativeFromRole"
 								name="relativeFromRole" ng-model="workflow.relativeFromRole"
-								ng-disabled="workflow.stageId===1"
-								ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
+								ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id"
+								disabled>
 								<option value=""></option>
 							</select>
 						</div>
@@ -43,8 +56,8 @@
 							<label for="field_absoluteFromRole">Absolute From Role</label> <select
 								class="form-control" id="field_absoluteFromRole"
 								name="absoluteFromRole" ng-model="workflow.absoluteFromRole"
-								ng-disabled="workflow.stageId===1"
-								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
+								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id"
+								disabled>
 								<option value=""></option>
 							</select>
 						</div>
@@ -56,24 +69,34 @@
 								<option value=""></option>
 							</select>
 						</div>
-						<div class="col-sm-2" ng-hide="workflow.relationshipType.id===2">
+						<div class="col-sm-2">
 							<label for="field_relativeToRole">Relative To Role</label> <select
 								class="form-control" id="field_relativeToRole"
 								name="relativeToRole" ng-model="workflow.relativeToRole"
-								
+								ng-disabled="workflow.relationshipType.id===2"
 								ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
 								<option value=""></option>
 							</select>
 						</div>
-						<div class="col-sm-2" ng-hide="workflow.relationshipType.id===1">
+						<div class="col-sm-2">
 							<label for="field_absoluteToRole">Absolute To Role</label> <select
 								class="form-control" id="field_absoluteToRole"
 								name="absoluteToRole" ng-model="workflow.absoluteToRole"
+								 ng-disabled="workflow.relationshipType.id===1"
 								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 								<option value=""></option>
 							</select>
 						</div>
-						<div class="col-sm-2">
+					</div>
+					<br>
+					<button type="button" class="btn btn-primary"
+						ng-click="createItemArr()">
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+							Items</span>
+					</button>
+					<br>
+					<!-- <div class="row">
+					 <div class="col-sm-2">
 							<label for="field_workflowStageMaster">Work Flow Stage
 								</label> <select class="form-control"
 								id="field_workflowStageMaster" name="workflowStageMaster"
@@ -82,9 +105,6 @@
 								<option value=""></option>
 							</select>
 						</div>
-					</div>
-					<br>
-					<!-- <div class="row">
 						<div class="col-sm-3">
 							<label for="field_escalationRelationshipType">Escalation
 								Relationship Type</label> <select class="form-control"
