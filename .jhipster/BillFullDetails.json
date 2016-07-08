@@ -344,6 +344,11 @@
             "fieldId": 63,
             "fieldName": "lockCharges",
             "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 64,
+            "fieldName": "dueAmount",
+            "fieldType": "BigDecimal"
         }
     ],
     "changelogDate": "20160314104149",

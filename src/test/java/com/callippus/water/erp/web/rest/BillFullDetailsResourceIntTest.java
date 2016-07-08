@@ -202,6 +202,9 @@ public class BillFullDetailsResourceIntTest {
     private static final BigDecimal DEFAULT_LOCK_CHARGES = new BigDecimal(1);
     private static final BigDecimal UPDATED_LOCK_CHARGES = new BigDecimal(2);
 
+    private static final BigDecimal DEFAULT_DUE_AMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DUE_AMOUNT = new BigDecimal(2);
+
     @Inject
     private BillFullDetailsRepository billFullDetailsRepository;
 
@@ -291,6 +294,7 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setLongi(DEFAULT_LONGI);
         billFullDetails.setNoMeterAmt(DEFAULT_NO_METER_AMT);
         billFullDetails.setLockCharges(DEFAULT_LOCK_CHARGES);
+        billFullDetails.setDueAmount(DEFAULT_DUE_AMOUNT);
     }
 
     @Test
@@ -372,6 +376,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getLongi()).isEqualTo(DEFAULT_LONGI);
         assertThat(testBillFullDetails.getNoMeterAmt()).isEqualTo(DEFAULT_NO_METER_AMT);
         assertThat(testBillFullDetails.getLockCharges()).isEqualTo(DEFAULT_LOCK_CHARGES);
+        assertThat(testBillFullDetails.getDueAmount()).isEqualTo(DEFAULT_DUE_AMOUNT);
     }
 
     @Test
@@ -573,7 +578,8 @@ public class BillFullDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
                 .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
                 .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.intValue())))
-                .andExpect(jsonPath("$.[*].lockCharges").value(hasItem(DEFAULT_LOCK_CHARGES.intValue())));
+                .andExpect(jsonPath("$.[*].lockCharges").value(hasItem(DEFAULT_LOCK_CHARGES.intValue())))
+                .andExpect(jsonPath("$.[*].dueAmount").value(hasItem(DEFAULT_DUE_AMOUNT.intValue())));
     }
 
     @Test
@@ -649,7 +655,8 @@ public class BillFullDetailsResourceIntTest {
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
             .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
             .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.intValue()))
-            .andExpect(jsonPath("$.lockCharges").value(DEFAULT_LOCK_CHARGES.intValue()));
+            .andExpect(jsonPath("$.lockCharges").value(DEFAULT_LOCK_CHARGES.intValue()))
+            .andExpect(jsonPath("$.dueAmount").value(DEFAULT_DUE_AMOUNT.intValue()));
     }
 
     @Test
@@ -732,6 +739,7 @@ public class BillFullDetailsResourceIntTest {
         billFullDetails.setLongi(UPDATED_LONGI);
         billFullDetails.setNoMeterAmt(UPDATED_NO_METER_AMT);
         billFullDetails.setLockCharges(UPDATED_LOCK_CHARGES);
+        billFullDetails.setDueAmount(UPDATED_DUE_AMOUNT);
 
         restBillFullDetailsMockMvc.perform(put("/api/billFullDetailss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -805,6 +813,7 @@ public class BillFullDetailsResourceIntTest {
         assertThat(testBillFullDetails.getLongi()).isEqualTo(UPDATED_LONGI);
         assertThat(testBillFullDetails.getNoMeterAmt()).isEqualTo(UPDATED_NO_METER_AMT);
         assertThat(testBillFullDetails.getLockCharges()).isEqualTo(UPDATED_LOCK_CHARGES);
+        assertThat(testBillFullDetails.getDueAmount()).isEqualTo(UPDATED_DUE_AMOUNT);
     }
 
     @Test

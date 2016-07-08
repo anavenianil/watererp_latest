@@ -98,6 +98,7 @@
             <column name="longi" type="varchar(255)"/>
             <column name="no_meter_amt" type="decimal(20,3)"/>
             <column name="lock_charges" type="decimal(20,3)"/>
+            <column name="due_amount" type="decimal(20,3)"/>
             <column name="meter_details_id" type="bigint"/>
         </createTable>
         

@@ -220,6 +220,9 @@ public class BillFullDetails implements Serializable {
     @Column(name = "lock_charges", precision=20, scale=3)
     private BigDecimal lockCharges;
 
+    @Column(name = "due_amount", precision=20, scale=3)
+    private BigDecimal dueAmount;
+
     @ManyToOne
     @JoinColumn(name = "meter_details_id")
     private MeterDetails meterDetails;
@@ -736,6 +739,14 @@ public class BillFullDetails implements Serializable {
         this.lockCharges = lockCharges;
     }
 
+    public BigDecimal getDueAmount() {
+        return dueAmount;
+    }
+
+    public void setDueAmount(BigDecimal dueAmount) {
+        this.dueAmount = dueAmount;
+    }
+
     public MeterDetails getMeterDetails() {
         return meterDetails;
     }
@@ -828,6 +839,7 @@ public class BillFullDetails implements Serializable {
             ", longi='" + longi + "'" +
             ", noMeterAmt='" + noMeterAmt + "'" +
             ", lockCharges='" + lockCharges + "'" +
+            ", dueAmount='" + dueAmount + "'" +
             '}';
     }
 }
