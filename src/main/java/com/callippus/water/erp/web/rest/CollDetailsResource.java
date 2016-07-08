@@ -85,7 +85,7 @@ public class CollDetailsResource {
 		
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
-		paymentService.postPayment(collDetails.getCan(), collDetails.getReceiptAmt());
+		paymentService.postPayment(result, collDetails.getReceiptAmt());
 
 		return ResponseEntity
 				.created(new URI("/api/collDetailss/" + result.getId()))

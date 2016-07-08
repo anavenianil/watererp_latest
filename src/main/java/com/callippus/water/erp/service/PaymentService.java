@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.InvoicePaymentsRepository;
 
 @Service
 @Transactional
@@ -23,9 +25,12 @@ public class PaymentService {
 	@Inject
 	private CustDetailsRepository custDetailsRepository;
 	
-	public boolean postPayment(String can, BigDecimal amount)
+	@Inject
+	private InvoicePaymentsRepository invoicePaymentsRepository;
+	
+	public boolean postPayment(CollDetails collDetails, BigDecimal amount)
 	{
-		CustDetails customer = custDetailsRepository.findByCanForUpdate(can);
+		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
 		
 		log.debug("***** Customer Arrears before payment:" + customer.getArrears());
 		
