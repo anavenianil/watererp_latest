@@ -13,7 +13,7 @@
 							<div class="col-sm-4" ng-hide="true">
 								<label class="control-label" for="field_can">CAN No.</label> <input
 									type="text" class="form-control" name="can" id="field_can"
-									ng-model="workflowDTO.receipt.can" readonly required />
+									ng-model="changeCaseDTO.receipt.can" readonly required />
 							</div>
 							<div class="col-sm-4">
 								<label class="control-label" for="field_receiptDate">Receipt
@@ -22,7 +22,7 @@
 									<div class='input-group date' id='field_receiptDate'>
 										<input id="field_receiptDate" type="text" class="form-control"
 											uib-datepicker-popup="{{dateformat}}"
-											ng-model="workflowDTO.receipt.receiptDate" max_date="maxDate"
+											ng-model="changeCaseDTO.receipt.receiptDate" max_date="maxDate"
 											is-open="datePickerForReceiptDate.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -39,7 +39,7 @@
 										(editForm.can.$dirty || rc.editForm.attempted)}">
 									<label for="field_can">CAN</label> <input type="text"
 										class="form-control" name="can" id="field_can"
-										ng-model="workflowDTO.receipt.can" readonly required />
+										ng-model="changeCaseDTO.receipt.can" readonly required />
 									<div
 										ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
 										<p class="help-block" ng-show="editForm.can.$error.required">This
@@ -57,8 +57,8 @@
 									<label for="field_paymentTypes">Payment Type</label> <select
 										class="form-control" id="field_paymentTypes"
 										name="paymentTypes"
-										ng-model="workflowDTO.receipt.paymentTypes"
-										ng-change="resetInstr(workflowDTO.receipt.paymentTypes.paymentMode)"
+										ng-model="changeCaseDTO.receipt.paymentTypes"
+										ng-change="resetInstr(changeCaseDTO.receipt.paymentTypes.paymentMode)"
 										ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
 										required>
 										<option value=""></option>
@@ -77,7 +77,7 @@
          							(editForm.receiptAmt.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_amount">Amount</label>
 									<input type="text" class="form-control" name="amount"
-										id="field_amount" ng-model="workflowDTO.receipt.amount"
+										id="field_amount" ng-model="changeCaseDTO.receipt.amount"
 										readonly />
 									<div
 										ng-show="(editForm.receiptAmt.$dirty || rc.editForm.attempted) && editForm.receiptAmt.$invalid">
@@ -97,14 +97,14 @@
 										<input id="field_checkOrDdDate" type="text"
 											name="checkOrDdDate" placeholder="YYYY-MM-DD"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
-											ng-type="date" ng-model="workflowDTO.receipt.checkOrDdDate"
+											ng-type="date" ng-model="changeCaseDTO.receipt.checkOrDdDate"
 											is-open="datePickerForCheckOrDdDate.status.opened"
 											ng-required="instrEnabled"
-											ng-disabled="workflowDTO.receipt.paymentTypes.id===1" /> <span
+											ng-disabled="changeCaseDTO.receipt.paymentTypes.id===1" /> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForCheckOrDdDateOpen($event)"
-												ng-disabled="workflowDTO.receipt.paymentTypes.id===1">
+												ng-disabled="changeCaseDTO.receipt.paymentTypes.id===1">
 												<i class="glyphicon glyphicon-calendar"></i>
 											</button>
 										</span>
@@ -129,9 +129,9 @@
 									<label class="control-label" for="field_checkOrDdNo">Check/DD
 										No.</label> <input type="text" class="form-control" name="checkOrDdNo"
 										id="field_checkOrDdNo"
-										ng-model="workflowDTO.receipt.checkOrDdNo"
+										ng-model="changeCaseDTO.receipt.checkOrDdNo"
 										ng-required="instrEnabled"
-										ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
+										ng-disabled="changeCaseDTO.receipt.paymentTypes.id===1" />
 									<div
 										ng-show="(editForm.checkOrDdNo.$dirty || rc.editForm.attempted) && editForm.checkOrDdNo.$invalid">
 										<p class="help-block"
@@ -147,9 +147,9 @@
 									<label class="control-label" for="field_bankName">Bank
 										Name</label> <input type="text" class="form-control" name="bankName"
 										ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-										id="field_bankName" ng-model="workflowDTO.receipt.bankName"
+										id="field_bankName" ng-model="changeCaseDTO.receipt.bankName"
 										ng-required="instrEnabled"
-										ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
+										ng-disabled="changeCaseDTO.receipt.paymentTypes.id===1" />
 									<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 										ng-show="(editForm.bankName.$dirty || rc.editForm.attempted) && editForm.bankName.$invalid">
 										<p class="help-block"
@@ -169,9 +169,9 @@
 										Name</label> <input type="text" class="form-control" name="branchName"
 										ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 										id="field_branchName"
-										ng-model="workflowDTO.receipt.branchName"
+										ng-model="changeCaseDTO.receipt.branchName"
 										ng-required="instrEnabled"
-										ng-disabled="workflowDTO.receipt.paymentTypes.id===1" />
+										ng-disabled="changeCaseDTO.receipt.paymentTypes.id===1" />
 									<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
 										ng-show="(editForm.branchName.$dirty || rc.editForm.attempted) && editForm.branchName.$invalid">
 										<p class="help-block"
@@ -198,7 +198,7 @@
 											<input id="field_approvedDate" type="text"
 												name="approvedDate" placeholder="YYYY-MM-DD"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
-												ng-model="workflowDTO.approvedDate" max-date="maxDt"
+												ng-model="changeCaseDTO.approvedDate" max-date="maxDt"
 												is-open="datePickerForApprovedDate.status.opened" required />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-default"
@@ -222,7 +222,7 @@
 									<label class="control-label" for="field_remarks">Remarks</label>
 									<textarea rows="2" cols="30" class="form-control"
 										name="remarks" id="field_remarks"
-										ng-model="workflowDTO.remarks" required></textarea>
+										ng-model="changeCaseDTO.remarks" required></textarea>
 								</div>
 							</div>
 						</fieldset>
@@ -235,7 +235,7 @@
 						</button>
 						<button type="button" class="btn btn-success pull-right"
 							ng-disabled="editForm.$invalid || isSaving"
-							ng-click="approve(workflowDTO)">
+							ng-click="approve(changeCaseDTO)">
 							<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 						</button>
 						<!-- <button type="submit" ng-disabled="editForm.$invalid || isSaving"
@@ -258,7 +258,7 @@
 						</p>
 						<div>
 							<h4>
-								<label>Application No.:&nbsp;&nbsp; </label>{{workflowDTO.customer.id}}
+								<label>Application No.:&nbsp;&nbsp; </label>{{changeCaseDTO.customer.id}}
 							</h4>
 						</div>
 

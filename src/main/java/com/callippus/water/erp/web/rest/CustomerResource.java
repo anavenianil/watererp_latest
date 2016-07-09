@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
-import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 import com.callippus.water.erp.domain.enumeration.ChangeCaseType;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
@@ -189,18 +189,18 @@ public class CustomerResource {
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> approveCategoryChange(
-			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
-		log.debug("REST request to save Customer : {}", workflowDTO);
-		Customer customer = workflowDTO.getCustomer();
+			@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException {
+		log.debug("REST request to save Customer : {}", changeCaseDTO);
+		Customer customer = changeCaseDTO.getCustomer();
 		Customer customerDb = customerRepository.findOne(customer.getId());
 		if(ChangeCaseStatus.INITIATED.equals(customerDb.getStatus())){
 			customer.setStatus(ChangeCaseStatus.PROCESSING);
 		}
 		//customer.setStatus(customerDb.getStatus() + 1);
 		try {
-			workflowService.setRemarks(workflowDTO.getRemarks());
+			workflowService.setRemarks(changeCaseDTO.getRemarks());
 			workflowService.getUserDetails();
-			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+			workflowService.setApprovedDate(changeCaseDTO.getApprovedDate());
 			custDetailsChangeWorkflowService
 					.approvedCahangeCaseRequest(customer);
 		} catch (Exception e) {
@@ -210,8 +210,8 @@ public class CustomerResource {
 		
 		CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customer.getCan());
 		
-		if(workflowDTO.getReceipt()!=null){
-			receiptRepository.save(workflowDTO.getReceipt());
+		if(changeCaseDTO.getReceipt()!=null){
+			receiptRepository.save(changeCaseDTO.getReceipt());
 		}
 		
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
@@ -259,17 +259,17 @@ public class CustomerResource {
     @Timed
     @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> declineRequests(
-			@RequestBody WorkflowDTO workflowDTO)
+			@RequestBody ChangeCaseDTO changeCaseDTO)
 			throws Exception {
-		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
+		log.debug("REST request to declineRequest() for Connection Terminate  : {}", changeCaseDTO);
 		
-		workflowService.setRemarks(workflowDTO.getCustomer().getRemarks());
-		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+		workflowService.setRemarks(changeCaseDTO.getCustomer().getRemarks());
+		workflowService.setApprovedDate(changeCaseDTO.getApprovedDate());
 		
-		custDetailsChangeWorkflowService.declineRequest(workflowDTO.getCustomer().getId());
+		custDetailsChangeWorkflowService.declineRequest(changeCaseDTO.getCustomer().getId());
 
-		workflowDTO.getCustomer().setStatus(ChangeCaseStatus.DECLINED);
-		customerRepository.save(workflowDTO.getCustomer());
+		changeCaseDTO.getCustomer().setStatus(ChangeCaseStatus.DECLINED);
+		customerRepository.save(changeCaseDTO.getCustomer());
 		
 		return ResponseEntity.created(new URI("/api/customers/declineRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customers", ""))
@@ -286,19 +286,19 @@ public class CustomerResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<WorkflowDTO> getAtiveCan(
+	public ResponseEntity<ChangeCaseDTO> getAtiveCan(
 			@RequestBody Customer customer)
 			throws Exception {
     	log.debug("REST request to getActiveCan() for Customer  : {}", customer);
-		WorkflowDTO workflowDTO = new WorkflowDTO();
+		ChangeCaseDTO changeCaseDTO = new ChangeCaseDTO();
     	Customer newCustomer = customerRepository.findByChangeTypeAndCan(customer.getChangeType(), customer.getCan());
 
-    	workflowDTO.setCustomer(newCustomer);
+    	changeCaseDTO.setCustomer(newCustomer);
 
-    	workflowDTO.setCustDetails(custDetailsRepository.findByCanForUpdate(customer.getCan()));
+    	changeCaseDTO.setCustDetails(custDetailsRepository.findByCanForUpdate(customer.getCan()));
 
-    	return Optional.ofNullable(workflowDTO)
-				.map(result -> new ResponseEntity<>(workflowDTO, HttpStatus.OK))
+    	return Optional.ofNullable(changeCaseDTO)
+				.map(result -> new ResponseEntity<>(changeCaseDTO, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
     
@@ -309,14 +309,14 @@ public class CustomerResource {
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<Customer> nameChangeReceipt(
-			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
-		log.debug("REST request to save Customer : {}", workflowDTO);
-		Customer customer = workflowDTO.getCustomer();
+			@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException {
+		log.debug("REST request to save Customer : {}", changeCaseDTO);
+		Customer customer = changeCaseDTO.getCustomer();
 		Customer customerDb = customerRepository.findOne(customer.getId());
 		try {
-			workflowService.setRemarks(workflowDTO.getRemarks());
+			workflowService.setRemarks(changeCaseDTO.getRemarks());
 			workflowService.getUserDetails();
-			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+			workflowService.setApprovedDate(changeCaseDTO.getApprovedDate());
 			custDetailsChangeWorkflowService
 					.approvedCahangeCaseRequest(customer);
 		} catch (Exception e) {
@@ -327,8 +327,8 @@ public class CustomerResource {
 			customer.setStatus(ChangeCaseStatus.PAYMENTNC);
 		}
 		
-		if(workflowDTO.getReceipt()!=null){
-			receiptRepository.save(workflowDTO.getReceipt());
+		if(changeCaseDTO.getReceipt()!=null){
+			receiptRepository.save(changeCaseDTO.getReceipt());
 		}
 		
 		

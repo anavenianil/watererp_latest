@@ -155,7 +155,7 @@
 									<div class='input-group date' id='field_changedDate'>
 										<input id="field_changedDate" type="text" class="form-control"
 											name="changedDate" uib-datepicker-popup="{{dateformat}}"
-											ng-model="workflowDTO.customer.changedDate" max-date="maxDt"
+											ng-model="changeCaseDTO.customer.changedDate" max-date="maxDt"
 											is-open="datePickerForChangedDate.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -196,7 +196,7 @@
 										<input id="field_approvedDate" type="text" name="approvedDate"
 											ng-type="date" class="form-control"
 											uib-datepicker-popup="{{dateformat}}"
-											ng-model="workflowDTO.approvedDate" max-date="maxDt"
+											ng-model="changeCaseDTO.approvedDate" max-date="maxDt"
 											is-open="datePickerForApprovedDate.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -224,7 +224,7 @@
 									<label class="control-label" for="field_remarks">Remarks</label>
 									<textarea rows="2" cols="30" class="form-control"
 										name="remarks" id="field_remarks"
-										ng-model="workflowDTO.remarks" required></textarea>
+										ng-model="changeCaseDTO.remarks" required></textarea>
 									<div
 										ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
 										<p class="help-block"
@@ -242,11 +242,11 @@
 
 
 		<!-- <button type="submit" class="btn btn-success pull-right" 
-			ng-show="canDecline()" ng-click="approve(workflowDTO)">
+			ng-show="canDecline()" ng-click="approve(changeCaseDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button> -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-click="approve(workflowDTO)"
+			ng-click="approve(changeCaseDTO)"
 			ng-enabled="editForm.$invalid || isSaving" ng-show="canDecline()">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
@@ -256,7 +256,7 @@
 
 		<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
-			ng-click="declineRequest(workflowDTO)">
+			ng-click="declineRequest(changeCaseDTO)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
 

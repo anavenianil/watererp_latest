@@ -43,7 +43,7 @@ import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
-import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
@@ -541,11 +541,11 @@ public class ApplicationTxnResource {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<WorkflowDTO> issueMeter(
-			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
-		log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+	public ResponseEntity<ChangeCaseDTO> issueMeter(
+			@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException { 
+		log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 		
-		ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+		ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
 			applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
         	MeterDetails meterDetails = applicationTxn.getMeterDetails();
         		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
@@ -571,11 +571,11 @@ public class ApplicationTxnResource {
 				produces = MediaType.APPLICATION_JSON_VALUE)
 		@Timed
 		@Transactional(rollbackFor=Exception.class)
-		public ResponseEntity<WorkflowDTO> createNewCustomer(
-				@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
-			log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+		public ResponseEntity<ChangeCaseDTO> createNewCustomer(
+				@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException { 
+			log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 			
-			ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+			ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
 
 	        MeterDetails meterDetails = applicationTxn.getMeterDetails();
 	    	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));

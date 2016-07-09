@@ -2,6 +2,8 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.callippus.water.erp.domain.Customer;
-import com.callippus.water.erp.domain.MeterDetails;
+import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.Workflow;
 import com.callippus.water.erp.domain.WorkflowDTO;
 import com.callippus.water.erp.domain.WorkflowMaster;
+import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.repository.WorkflowMasterRepository;
 import com.callippus.water.erp.repository.WorkflowRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -48,6 +51,9 @@ public class WorkflowResource {
     
     @Inject
     private WorkflowMasterRepository workflowMasterRepository;
+    
+    @Inject
+    private StatusMasterRepository statusMasterRepository;
     
     /**
      * POST  /workflows -> Create a new workflow.
@@ -140,21 +146,46 @@ public class WorkflowResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("workflow", id.toString())).build();
     }
     
-    /**
-     * Get workflow of workflowMaster
-     */
     
-    /*@RequestMapping(value = "/workflows/workflowMasterId",
-            method = RequestMethod.GET,
+    /**
+     *  Create Workflow
+     */
+    @RequestMapping(value = "/workflows/create",
+            method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-	public ResponseEntity<List<Workflow>> getWorkflows(
-			@RequestBody WorkflowMaster workflowMaster)
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<WorkflowDTO> createWorkflow(
+			@RequestBody WorkflowDTO workflowDTO)
 			throws Exception {
-    	log.debug("REST request to getWorkflows : {}");
-    	List<Workflow> workflows = workflowRepository.findByWorkflowMaster(workflowMaster);
-    	return Optional.ofNullable(workflows)
-				.map(result -> new ResponseEntity<>(workflows, HttpStatus.OK))
+    	log.debug("REST request to createWorkflow() for Workflow  : {}", workflowDTO);
+
+    	if(workflowDTO.getWorkflowName() != null){
+    		workflowDTO.getWorkflowMaster().setCreationDate(ZonedDateTime.now());
+        	workflowDTO.getWorkflowMaster().setLastModifiedDate(ZonedDateTime.now());
+        	workflowDTO.getWorkflowMaster().setToWorkflow(0);
+        	workflowDTO.getWorkflowMaster().setStatusMaster(statusMasterRepository.findOne(2l));
+        	workflowDTO.getWorkflowMaster().setWorkflowName(workflowDTO.getWorkflowName());
+        	
+            WorkflowMaster workflowMaster = workflowMasterRepository.save(workflowDTO.getWorkflowMaster());
+            Iterator<Workflow> iterator = workflowDTO.getWorkflows().iterator();
+            while(iterator.hasNext()){
+            	iterator.next().setWorkflowMaster(workflowMaster);
+            }
+            List<Workflow> items = workflowDTO.getWorkflows();
+            workflowRepository.save(items);
+    	}else{
+    		Iterator<Workflow> iterator = workflowDTO.getWorkflows().iterator();
+            while(iterator.hasNext()){
+            	iterator.next().setWorkflowMaster(workflowDTO.getWorkflowMaster());
+            }
+            List<Workflow> items = workflowDTO.getWorkflows();
+            
+            workflowRepository.save(items);
+    	}
+
+    	return Optional.ofNullable(workflowDTO)
+				.map(result -> new ResponseEntity<>(workflowDTO, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-	}*/
+	}
 }

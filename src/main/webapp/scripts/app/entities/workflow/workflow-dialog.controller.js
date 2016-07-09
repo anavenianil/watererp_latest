@@ -10,6 +10,9 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         //$scope.orgroleinstances = OrgRoleInstance.query();
         $scope.workflowrelationshipss = WorkflowRelationships.query();
         $scope.workflowstagemasters = WorkflowStageMaster.query();
+        $scope.workflowMaster = {};
+        $scope.workflowDTO = {};
+        $scope.workflowDTO.workflowMaster = {};
         $scope.count = 0;
         
         $scope.load = function(id) {
@@ -32,6 +35,7 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         };
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:workflowUpdate', result);
+            $scope.workflowMaster = result;
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
             $state.go('workflow');
@@ -41,13 +45,17 @@ angular.module('watererpApp').controller('WorkflowDialogController',
             $scope.isSaving = false;
         };
 
-        $scope.save = function () {
+        $scope.save1 = function () {
             $scope.isSaving = true;
+            
             for(var i=0; i<$scope.workflows.length; i++){
-            	if ($scope.workflow.id != null) {
-                    Workflow.update($scope.workflow, onSaveSuccess, onSaveError);
+            	$scope.workflows[i].workflowMaster = $scope.workflowMaster;
+            	if ($scope.workflows[i].id != null) {
+            		//Workflow.update($scope.workflows[i], onSaveSuccess, onSaveError);
+                    //Workflow.update($scope.workflow, onSaveSuccess, onSaveError);
                 } else {
-                    Workflow.save($scope.workflow, onSaveSuccess, onSaveError);
+                	//Workflow.save($scope.workflows[i],onSaveSuccess, onSaveError);
+                    //Workflow.save($scope.workflow, onSaveSuccess, onSaveError);
                 }
             }
         };
@@ -56,6 +64,21 @@ angular.module('watererpApp').controller('WorkflowDialogController',
             $uibModalInstance.dismiss('cancel');
         };
         
+        //save
+        $scope.save = function(){
+			$scope.isSaving = true;
+			$scope.workflowDTO.workflows = $scope.workflows;
+			if($scope.workflowDTO.workflowName == null){
+				$scope.workflowDTO.workflowMaster = $scope.workflow.workflowMaster;
+			}
+        	return $http.post('/api/workflows/create',
+        			$scope.workflowDTO).then(
+					function(response) {
+						$scope.isSaving = false;
+						/*console.log("Server response:"
+								+ JSON.stringify(response));*/
+					});
+        }
         
         $scope.getOrgRoleInstance = function() {
         	$scope.orgroleinstances = [];
@@ -72,7 +95,7 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         $scope.getWorkflow = function(workflowMasterId){
         	$scope.workflows = [];
         	if(workflowMasterId == 2){
-        		$scope.workflow.workflowMaster.workflowName = "";
+        	//	$scope.workflowDTO.workflows.workflowMaster.workflowName = "";
         		$scope.count = 0;
         	}
         	else {
@@ -93,6 +116,18 @@ angular.module('watererpApp').controller('WorkflowDialogController',
        		$scope.workflows[$scope.count-1].relativeFromRole = $scope.workflows[$scope.count-2].relativeToRole;
         }
         
+        $scope.changeExistingAbsolute = function(indexId , toRoleId ){
+        	if($scope.workflows.length-1 !=indexId){
+        		$scope.workflows[indexId + 1].absoluteFromRole.id = toRoleId;
+        	}
+        }
+        
+        $scope.changeExistingRelative = function(indexId , toRoleId ){
+        	if($scope.workflows.length-1 !=indexId){
+        		$scope.workflows[indexId + 1].relativeFromRole.id = toRoleId;
+        	}
+        }
+        
       //create array for items
         $scope.createItemArr = function(){
        		$scope.workflows[$scope.count]= {};
@@ -103,11 +138,8 @@ angular.module('watererpApp').controller('WorkflowDialogController',
        		else{
        			$scope.assign();
        		}
-       		//$scope.temp = $scope.workflows[$scope.count-2];
-       		/*$scope.workflows[$scope.count-1].stageId = $scope.workflows[$scope.count-2].stageId +1;
-       		$scope.workflows[$scope.count-1].absoluteFromRole = $scope.workflows[$scope.count-2].absoluteToRole; 
-       		$scope.workflows[$scope.count-1].relativeFromRole = $scope.workflows[$scope.count-2].relativeToRole;*/
         }
+        
         
         
         

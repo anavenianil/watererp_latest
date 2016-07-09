@@ -27,7 +27,7 @@
 							<label class="control-label" for="field_workflowName">Work
 								Flow Name</label> <input type="text" class="form-control"
 								name="workflowName" id="field_workflowName"
-								ng-model="workflow.workflowMaster.workflowName" required />
+								ng-model="workflowDTO.workflowName" />
 							<div ng-show="editForm.workflowName.$invalid">
 								<p class="help-block"
 									ng-show="editForm.workflowName.$error.required">This field
@@ -73,6 +73,7 @@
 							<label for="field_relativeToRole">Relative To Role</label> <select
 								class="form-control" id="field_relativeToRole"
 								name="relativeToRole" ng-model="workflow.relativeToRole"
+								ng-change="changeExistingRelative($index, workflow.relativeToRole.id)"
 								ng-disabled="workflow.relationshipType.id===2"
 								ng-options="workflowRelations as workflowRelations.name for workflowRelations in workflowrelationss track by workflowRelations.id">
 								<option value=""></option>
@@ -82,7 +83,8 @@
 							<label for="field_absoluteToRole">Absolute To Role</label> <select
 								class="form-control" id="field_absoluteToRole"
 								name="absoluteToRole" ng-model="workflow.absoluteToRole"
-								 ng-disabled="workflow.relationshipType.id===1"
+								ng-change="changeExistingAbsolute($index, workflow.absoluteToRole.id)"
+								ng-disabled="workflow.relationshipType.id===1"
 								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 								<option value=""></option>
 							</select>
