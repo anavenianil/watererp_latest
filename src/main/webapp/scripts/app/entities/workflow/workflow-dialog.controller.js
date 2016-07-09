@@ -140,12 +140,10 @@ angular.module('watererpApp').controller('WorkflowDialogController',
        		}
         }
         
-        
-        
-        
       //for removing items
         $scope.removeItemArr = function(indexId) {
+        	$scope.workflows[$scope.count].splice = {};
             $scope.count = $scope.count -1;
-            $scope.workflow.splice(indexId, 1);
+            $scope.workflows[$scope.count].splice(indexId, 1);
           };
 });
