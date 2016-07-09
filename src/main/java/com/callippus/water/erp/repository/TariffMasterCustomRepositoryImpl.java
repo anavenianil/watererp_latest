@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
@@ -49,7 +50,7 @@ public class TariffMasterCustomRepositoryImpl extends
 		this.entityManager = entityManager;
 	}
 
-	public List<java.util.Map<String, Object>> getTariffs(String can, LocalDate validFrom, LocalDate validTo, float avgKL,
+	public List<java.util.Map<String, Object>> getTariffs(String can, LocalDate validFrom, LocalDate validTo, BigDecimal avgKL,
 			int unMeteredFlag, int newMeterFlag) {
 	
 		Timestamp from = Timestamp.valueOf(validFrom.atStartOfDay());
@@ -111,7 +112,7 @@ public class TariffMasterCustomRepositoryImpl extends
 	
 	
 	public List<java.util.Map<String, Object>> findTariffs(String can,
-			LocalDate validFrom, LocalDate validTo, float avgKL,
+			LocalDate validFrom, LocalDate validTo, BigDecimal avgKL,
 			int unMeteredFlag, int newMeterFlag) {
 		
 

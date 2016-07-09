@@ -44,7 +44,7 @@
         {
             "fieldId": 4,
             "fieldName": "rate",
-            "fieldType": "Float",
+            "fieldType": "BigDecimal",
             "fieldValidateRules": [
                 "required"
             ]
@@ -52,7 +52,7 @@
         {
             "fieldId": 5,
             "fieldName": "minKL",
-            "fieldType": "Float",
+            "fieldType": "BigDecimal",
             "fieldValidateRules": [
                 "required"
             ]
@@ -60,7 +60,7 @@
         {
             "fieldId": 6,
             "fieldName": "minUnmeteredKL",
-            "fieldType": "Float",
+            "fieldType": "BigDecimal",
             "fieldValidateRules": [
                 "required"
             ]

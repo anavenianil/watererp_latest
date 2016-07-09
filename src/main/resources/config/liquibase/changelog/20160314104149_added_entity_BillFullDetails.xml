@@ -43,29 +43,29 @@
             </column>
             <column name="pin_code" type="varchar(255)"/>
             <column name="category" type="varchar(255)"/>
-            <column name="pipe_size" type="${floatType}"/>
+            <column name="pipe_size" type="decimal(20,3)"/>
             <column name="board_meter" type="varchar(255)"/>
             <column name="sewerage" type="varchar(255)"/>
             <column name="prev_bill_type" type="varchar(255)"/>
             <column name="prev_bill_month" type="date"/>
-            <column name="prev_avg_kl" type="${floatType}"/>
+            <column name="prev_avg_kl" type="decimal(20,3)"/>
             <column name="met_reading_dt" type="date">
                 <constraints nullable="false" />
             </column>
-            <column name="prev_reading" type="${floatType}"/>
+            <column name="prev_reading" type="decimal(20,3)"/>
             <column name="met_reading_mo" type="date"/>
-            <column name="met_avg_kl" type="${floatType}"/>
-            <column name="arrears" type="${floatType}"/>
-            <column name="reversal_amt" type="${floatType}"/>
-            <column name="installment" type="${floatType}"/>
-            <column name="other_charges" type="${floatType}"/>
-            <column name="surcharge" type="${floatType}"/>
+            <column name="met_avg_kl" type="decimal(20,3)"/>
+            <column name="arrears" type="decimal(20,3)"/>
+            <column name="reversal_amt" type="decimal(20,3)"/>
+            <column name="installment" type="decimal(20,3)"/>
+            <column name="other_charges" type="decimal(20,3)"/>
+            <column name="surcharge" type="decimal(20,3)"/>
             <column name="hrs_surcharge" type="varchar(255)"/>
             <column name="res_units" type="bigint"/>
-            <column name="met_cost_installment" type="${floatType}"/>
-            <column name="int_on_arrears" type="${floatType}"/>
+            <column name="met_cost_installment" type="decimal(20,3)"/>
+            <column name="int_on_arrears" type="decimal(20,3)"/>
             <column name="last_pymt_dt" type="date"/>
-            <column name="last_pymt_amt" type="${floatType}"/>
+            <column name="last_pymt_amt" type="decimal(20,3)"/>
             <column name="bill_number" type="varchar(255)"/>
             <column name="bill_date" type="date">
                 <constraints nullable="false" />
@@ -76,15 +76,15 @@
             <column name="from_month" type="varchar(255)"/>
             <column name="to_month" type="varchar(255)"/>
             <column name="meter_fix_date" type="date"/>
-            <column name="initial_reading" type="${floatType}"/>
-            <column name="present_reading" type="${floatType}"/>
-            <column name="units" type="${floatType}"/>
-            <column name="water_cess" type="${floatType}"/>
-            <column name="sewerage_cess" type="${floatType}"/>
-            <column name="service_charge" type="${floatType}"/>
-            <column name="meter_service_charge" type="${floatType}"/>
-            <column name="total_amount" type="${floatType}"/>
-            <column name="net_payable_amount" type="${floatType}"/>
+            <column name="initial_reading" type="decimal(20,3)"/>
+            <column name="present_reading" type="decimal(20,3)"/>
+            <column name="units" type="decimal(20,3)"/>
+            <column name="water_cess" type="decimal(20,3)"/>
+            <column name="sewerage_cess" type="decimal(20,3)"/>
+            <column name="service_charge" type="decimal(20,3)"/>
+            <column name="meter_service_charge" type="decimal(20,3)"/>
+            <column name="total_amount" type="decimal(20,3)"/>
+            <column name="net_payable_amount" type="decimal(20,3)"/>
             <column name="telephone_no" type="varchar(255)"/>
             <column name="meter_status" type="varchar(255)"/>
             <column name="bill_flag" type="varchar(255)"/>
@@ -96,8 +96,9 @@
             <column name="notice_no" type="varchar(255)"/>
             <column name="lat" type="varchar(255)"/>
             <column name="longi" type="varchar(255)"/>
-            <column name="no_meter_amt" type="${floatType}"/>
-            <column name="lock_charges" type="${floatType}"/>
+            <column name="no_meter_amt" type="decimal(20,3)"/>
+            <column name="lock_charges" type="decimal(20,3)"/>
+            <column name="due_amount" type="decimal(20,3)"/>
             <column name="meter_details_id" type="bigint"/>
         </createTable>
         

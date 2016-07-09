@@ -1,5 +1,7 @@
 package com.callippus.water.erp.domain;
 
+import java.math.BigDecimal;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -33,7 +35,7 @@ public class PGResponse {
 	private String currency;
 
 	@XmlElement(name = "TotalAmountPaid")
-	private Float totalAmountPaid;
+	private BigDecimal totalAmountPaid;
 	
 	@XmlElement(name = "ValidationNumber")
 	private String validationNumber;	
@@ -102,11 +104,11 @@ public class PGResponse {
 		this.currency = currency;
 	}
 
-	public Float getTotalAmountPaid() {
+	public BigDecimal getTotalAmountPaid() {
 		return totalAmountPaid;
 	}
 
-	public void setTotalAmountPaid(Float totalAmountPaid) {
+	public void setTotalAmountPaid(BigDecimal totalAmountPaid) {
 		this.totalAmountPaid = totalAmountPaid;
 	}
 
