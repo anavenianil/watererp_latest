@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('reqOrgWorkflowMapping.new', {
+            /*.state('reqOrgWorkflowMapping.new', {
                 parent: 'reqOrgWorkflowMapping',
                 url: '/new',
                 data: {
@@ -64,8 +64,8 @@ angular.module('watererpApp')
                         $state.go('reqOrgWorkflowMapping');
                     })
                 }]
-            })
-            .state('reqOrgWorkflowMapping.edit', {
+            })*/
+            /*.state('reqOrgWorkflowMapping.edit', {
                 parent: 'reqOrgWorkflowMapping',
                 url: '/{id}/edit',
                 data: {
@@ -87,7 +87,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('reqOrgWorkflowMapping.delete', {
                 parent: 'reqOrgWorkflowMapping',
                 url: '/{id}/delete',
@@ -110,5 +110,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('reqOrgWorkflowMapping.new', {
+                parent: 'reqOrgWorkflowMapping',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'ReqOrgWorkflowMappings'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping-dialog.html',
+                        controller: 'ReqOrgWorkflowMappingDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('reqOrgWorkflowMapping.edit', {
+                parent: 'reqOrgWorkflowMapping',
+                url: '/edit/{id}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'ReqOrgWorkflowMappings'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/reqOrgWorkflowMapping/reqOrgWorkflowMapping-dialog.html',
+                        controller: 'ReqOrgWorkflowMappingDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });
