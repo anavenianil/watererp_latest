@@ -65,6 +65,7 @@
 							<label for="field_relationshipType">Relationship Type</label> <select
 								class="form-control" id="field_relationshipType"
 								name="relationshipType" ng-model="workflow.relationshipType"
+								ng-change="makeToRoleNull(workflow.relationshipType.id, $index)"
 								ng-options="workflowRelationships as workflowRelationships.name for workflowRelationships in workflowrelationshipss track by workflowRelationships.id">
 								<option value=""></option>
 							</select>
@@ -89,19 +90,18 @@
 								<option value=""></option>
 							</select>
 						</div>
-						<!-- <div class="col-sm-1">
-							<label">Remove</label>
+						<div class="col-sm-1">
+							<label>Remove</label>
 							<button type="button" class="btn btn-danger"
 								ng-click="removeItemArr($index)">
 								<span class="glyphicon glyphicon-remove-circle"></span>
 							</button>
-						</div> -->
+						</div>
 					</div>
 					<br>
 					<button type="button" class="btn btn-primary"
 						ng-click="createItemArr()">
-						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
-							Items</span>
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add</span>
 					</button>
 					<br>
 					<!-- <div class="row">

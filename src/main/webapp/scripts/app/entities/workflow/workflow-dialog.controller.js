@@ -95,7 +95,6 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         $scope.getWorkflow = function(workflowMasterId){
         	$scope.workflows = [];
         	if(workflowMasterId == 2){
-        	//	$scope.workflowDTO.workflows.workflowMaster.workflowName = "";
         		$scope.count = 0;
         	}
         	else {
@@ -118,17 +117,19 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         
         $scope.changeExistingAbsolute = function(indexId , toRoleId ){
         	if($scope.workflows.length-1 !=indexId){
+        		$scope.workflows[indexId + 1].absoluteFromRole = {};
         		$scope.workflows[indexId + 1].absoluteFromRole.id = toRoleId;
         	}
         }
         
         $scope.changeExistingRelative = function(indexId , toRoleId ){
         	if($scope.workflows.length-1 !=indexId){
+        		$scope.workflows[indexId + 1].relativeFromRole = {};
         		$scope.workflows[indexId + 1].relativeFromRole.id = toRoleId;
         	}
         }
         
-      //create array for items
+        //create array for items
         $scope.createItemArr = function(){
        		$scope.workflows[$scope.count]= {};
        		$scope.count = $scope.count +1;
@@ -140,10 +141,26 @@ angular.module('watererpApp').controller('WorkflowDialogController',
        		}
         }
         
-      //for removing items
+        //for removing items
         $scope.removeItemArr = function(indexId) {
-        	$scope.workflows[$scope.count].splice = {};
-            $scope.count = $scope.count -1;
+        	//$scope.workflows[$scope.count]= {}
+        	$scope.count = $scope.count -1;
+        	//$scope.workflows[$scope.count].splice = {};
             $scope.workflows[$scope.count].splice(indexId, 1);
           };
+          
+          $scope.makeToRoleNull = function(relationId, indexId){
+        	  if(relationId == 1){//when relative absolute is null
+        		  $scope.workflows[indexId].absoluteToRole = null;
+        		  if($scope.workflows.length-1 != indexId){
+        			  $scope.workflows[indexId+1].absoluteFromRole = null;  
+        		  }
+        	  }
+        	  else if(relationId == 2){//when absolute relative is null
+        		  $scope.workflows[indexId].relativeToRole = null;
+        		  if($scope.workflows.length-1 != indexId){
+        			  $scope.workflows[indexId+1].relativeFromRole = null;  
+        		  }
+        	  }
+          }
 });
