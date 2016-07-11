@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Can</span>
+                    <span>CAN</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{custDetails.can}}</span>
@@ -20,10 +20,50 @@
             </tr>
             <tr>
                 <td>
+                    <span>Division Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{custDetails.divisionMaster.divisionName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <span>Division Code</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{custDetails.divCode}}</span>
+                    <span class="form-control-static">{{custDetails.divisionMaster.divisionCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Street Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{custDetails.streetMaster.streetName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Street Number</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{custDetails.streetMaster.streetNo}}</span>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>
+                    <span>Meter Details</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="meterDetails.detail({id:custMeterMapping.meterDetails.id})">{{custDetails.meterDetails.id}}</a>
+                </td>
+            </tr> -->
+            <tr>
+                <td>
+                    <span>Meter ID</span>
+                </td>
+                <td>
+                    {{custDetails.meterDetails.id}}
                 </td>
             </tr>
             <tr>
@@ -354,6 +394,7 @@
                     <a class="form-control-static" ui-sref="tariffCategoryMaster.detail({id:custDetails.tariffCategoryMaster.id})">{{custDetails.tariffCategoryMaster.id}}</a>
                 </td>
             </tr>
+            
             </tbody>
         </table>
     </div>
