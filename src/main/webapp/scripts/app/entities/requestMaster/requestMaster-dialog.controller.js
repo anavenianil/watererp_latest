@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('watererpApp').controller('RequestMasterDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'RequestMaster', 'StatusMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, RequestMaster, StatusMaster) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'RequestMaster', 'StatusMaster', 'Module',
+        function($scope, $stateParams, $uibModalInstance, entity, RequestMaster, StatusMaster, Module) {
 
         $scope.requestMaster = entity;
         $scope.statusmasters = StatusMaster.query();
+        $scope.modules = Module.query();
         $scope.load = function(id) {
             RequestMaster.get({id : id}, function(result) {
                 $scope.requestMaster = result;

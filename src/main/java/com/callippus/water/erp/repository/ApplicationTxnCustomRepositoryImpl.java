@@ -76,21 +76,23 @@ public class ApplicationTxnCustomRepositoryImpl extends
 	/**
 	 * List count of pending request
 	 */
-	public List<RequestCountDTO> countPendingRequests() throws Exception {
+	public List<RequestCountDTO> countPendingRequests(Long id) throws Exception {
 		log.debug("listAllPendingRequests: {}");
 		workflowService.getUserDetails();
 		
 		if(workflowService.getSfID() == null || workflowService.getOrganisationID() == null) //Workflow not mapped for user in EmpMaster or Office Id not set
 			return null; 
 			
-		String sql = "select id,request_type,count from ( "
-				+ "	SELECT request_master_id id,(select request_type from request_master where id=a.request_master_id) request_type,count(*) count "
-				+ "	FROM request_workflow_history a where status_master_id=3 and assigned_to_id="
-				+ workflowService.getSfID() + " group by request_master_id "
-				+ "	) a";
+		
+		String sql = "select id,request_type,count from ( SELECT request_master_id id, "
+				+ "rm.request_type,count(DISTINCT domain_object) count "
+				+ "	FROM request_workflow_history a, request_master rm where rm.id=a.request_master_id "
+				+ " and rm.module_id= ? and a.status_master_id=3 and a.assigned_to_id=? "
+				+ " group by id, request_type) a";
 
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList(sql);
+				.queryForList(sql,
+						new Object[] { id, workflowService.getSfID() });
 		List<RequestCountDTO> items = new ArrayList<RequestCountDTO>();
 
 		for (Map row : rows) {
@@ -107,7 +109,7 @@ public class ApplicationTxnCustomRepositoryImpl extends
 	/**
 	 * List count of Approved request
 	 */
-	public List<RequestCountDTO> countApprovedRequests() throws Exception {
+	public List<RequestCountDTO> countApprovedRequests(Long id) throws Exception {
 		log.debug("listApprovedRequests: {}");
 		workflowService.getUserDetails();
 				
@@ -115,14 +117,21 @@ public class ApplicationTxnCustomRepositoryImpl extends
 			return null; 
 			
 		
-		String sql = "select id,request_type,count from ( "
-				+ "			SELECT  request_master_id id,(select request_type from request_master where id=a.request_master_id) request_type,count(distinct domain_object) count "
-				+ "			FROM request_workflow_history a where status_master_id in (5,7,9)  and assigned_to_id="
-				+ workflowService.getSfID() + " group by request_master_id "
-				+ "			) a";
-
+		/*String sql = "SELECT id, request_type, count FROM (SELECT request_master_id id, "
+				+ " rm.request_type, COUNT(DISTINCT domain_object) count "
+				+ " FROM request_workflow_history a, request_master rm WHERE rm.id = a.request_master_id "
+				+ " AND rm.module_id = ? AND a.status_master_id IN (5, 7, 9) AND a.assigned_to_id = ? "
+				+ " GROUP BY id, request_type) a";*/
+		
+		String sql = "SELECT id, request_type, count FROM (SELECT request_master_id id, "
+				+ " rm.request_type, COUNT(DISTINCT domain_object) count "
+				+ " FROM request_workflow_history a, request_master rm WHERE rm.id = a.request_master_id "
+				+ " AND rm.module_id = ? AND a.status_master_id IN (5, 7, 9) AND a.assigned_to_id = ? "
+				+ " GROUP BY id, request_type) a";
+		
 		List<java.util.Map<String, Object>> rows = jdbcTemplate
-				.queryForList(sql);
+				.queryForList(sql,
+						new Object[] { id , workflowService.getSfID()});
 		List<RequestCountDTO> items = new ArrayList<RequestCountDTO>();
 
 		for (Map row : rows) {

@@ -341,9 +341,10 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<RequestCountDTO>> getPendingRequests(HttpServletResponse response)throws Exception {
+    public ResponseEntity<List<RequestCountDTO>> getPendingRequests(HttpServletResponse response,
+    		@RequestParam(value = "id", required = false) Long id)throws Exception {
         log.debug("REST request to get Requisition : {}");
-        List<RequestCountDTO> pendingRequests = applicationTxnCustomRepository.countPendingRequests();
+        List<RequestCountDTO> pendingRequests = applicationTxnCustomRepository.countPendingRequests(id);
 
         return new ResponseEntity<>(pendingRequests, HttpStatus.OK);
     }
@@ -357,9 +358,10 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<RequestCountDTO>> getApprovedRequests(HttpServletResponse response)throws Exception {
+    public ResponseEntity<List<RequestCountDTO>> getApprovedRequests(HttpServletResponse response,
+    		@RequestParam(value = "id", required = false) Long id)throws Exception {
         log.debug("REST request to get Requisition : {}");
-        List<RequestCountDTO> approvedRequests = applicationTxnCustomRepository.countApprovedRequests();
+        List<RequestCountDTO> approvedRequests = applicationTxnCustomRepository.countApprovedRequests(id);
 
         return new ResponseEntity<>(approvedRequests, HttpStatus.OK);
     }

@@ -41,6 +41,10 @@ public class RequestMaster implements Serializable {
     @JoinColumn(name = "status_master_id")
     private StatusMaster statusMaster;
 
+    @ManyToOne
+    @JoinColumn(name = "module_id")
+    private Module module;
+
     public Long getId() {
         return id;
     }
@@ -95,6 +99,14 @@ public class RequestMaster implements Serializable {
 
     public void setStatusMaster(StatusMaster statusMaster) {
         this.statusMaster = statusMaster;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     @Override

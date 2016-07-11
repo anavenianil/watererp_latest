@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('RequestMasterDetailController', function ($scope, $rootScope, $stateParams, entity, RequestMaster, StatusMaster) {
+    .controller('RequestMasterDetailController', function ($scope, $rootScope, $stateParams, entity, RequestMaster, StatusMaster, Module) {
         $scope.requestMaster = entity;
         $scope.load = function (id) {
             RequestMaster.get({id: id}, function(result) {

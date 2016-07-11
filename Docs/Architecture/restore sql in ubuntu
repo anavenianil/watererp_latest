@@ -1,0 +1,4 @@
+cd path-to-sql-folder
+Ex: /home/callippus/Projects/watererp/Docs/DB
+
+mysql -u root -pmysql watererp < watererp.sql

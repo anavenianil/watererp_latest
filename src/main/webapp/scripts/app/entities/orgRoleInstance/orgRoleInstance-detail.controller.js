@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('OrgRoleInstanceDetailController', function ($scope, $rootScope, $stateParams, entity, OrgRoleInstance, StatusMaster, OrgRoleHierarchy, DepartmentsMaster) {
+    .controller('OrgRoleInstanceDetailController', function ($scope, $rootScope, $stateParams, entity, OrgRoleInstance, StatusMaster, OrgRoleHierarchy/*, DepartmentsMaster*/) {
         $scope.orgRoleInstance = entity;
         $scope.load = function (id) {
             OrgRoleInstance.get({id: id}, function(result) {

@@ -28,7 +28,7 @@ angular.module('watererpApp')
                 }
             }).state('moduleDashboard', {
                 parent: 'site',
-                url: '/module/:moduleName',
+                url: '/module/:moduleName/:id',
                 data: {
                     authorities: []
                 },
