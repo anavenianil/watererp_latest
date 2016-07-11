@@ -1,26 +1,48 @@
 'use strict';
 
 angular.module('watererpApp').controller('EmpMasterDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpMaster', 'User', 'OrgRoleInstance', 'DesignationMaster', 'StatusMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, EmpMaster, User, OrgRoleInstance, DesignationMaster, StatusMaster) {
+    /*['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpMaster', 'User', 'OrgRoleInstance', 'DesignationMaster', 'StatusMaster',*/
+        function($scope, $stateParams, /*$uibModalInstance, entity,*/ EmpMaster, User, OrgRoleInstance, DesignationMaster, StatusMaster, $http) {
 
-        $scope.empMaster = entity;
-        $scope.users = User.query();
-        $scope.orgroleinstances = OrgRoleInstance.query();
+        $scope.empMaster = {};
+        //$scope.users = User.query();
+        //$scope.orgroleinstances = OrgRoleInstance.query();
         $scope.designationmasters = DesignationMaster.query();
         $scope.statusmasters = StatusMaster.query();
         $scope.employeestatuss= [{"id":"1", "value":"MARRIED"},{"id":"2", "value":"UNMARRIED"}];
+        $scope.getOrgRoleInstance = function() {
+        	$scope.orgroleinstances = [];
+			return $http.get('/api/orgRoleInstances/getAll').then(function(response) {
+						$scope.orgroleinstances = response.data;
+					});
+		}
+        $scope.getOrgRoleInstance();
+        
+        
+        $scope.getUser = function() {
+        	$scope.users = [];
+			return $http.get('/api/users/getAll'
+					).then(
+					function(response) {
+						$scope.users = response.data;
+					});
+		}
+        $scope.getUser();
+        
         $scope.load = function(id) {
             EmpMaster.get({id : id}, function(result) {
                 $scope.empMaster = result;
             });
         };
         
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id);
+        }
         $scope.dtMax = new Date();
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:empMasterUpdate', result);
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
             $scope.isSaving = false;
         };
 
@@ -38,7 +60,7 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         };
         $scope.datePickerForDateOfBirth = {};
 
@@ -58,4 +80,4 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
         $scope.datePickerForJoiningDateOpen = function($event) {
             $scope.datePickerForJoiningDate.status.opened = true;
         };
-}]);
+}/*]*/);

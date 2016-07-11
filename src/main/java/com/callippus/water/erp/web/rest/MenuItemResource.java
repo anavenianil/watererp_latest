@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.MenuItem;
+import com.callippus.water.erp.domain.OrgRoleInstance;
 import com.callippus.water.erp.repository.MenuItemRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -117,4 +118,22 @@ public class MenuItemResource {
         menuItemRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("menuItem", id.toString())).build();
     }
+    
+    /**
+     * Get All MenuItems
+     */
+    @RequestMapping(value = "/menuItems/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<MenuItem>> getAllMenuItems()
+			throws Exception {
+    	log.debug("REST request to getAllMenuItems : {}");
+    	
+    	List<MenuItem> menuItems = menuItemRepository.findAll();
+    
+    	return Optional.ofNullable(menuItems)
+				.map(result -> new ResponseEntity<>(menuItems, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

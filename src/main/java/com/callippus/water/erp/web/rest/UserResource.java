@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.Authority;
+import com.callippus.water.erp.domain.OrgRoleInstance;
 import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.repository.AuthorityRepository;
 import com.callippus.water.erp.repository.UserRepository;
@@ -12,6 +13,7 @@ import com.callippus.water.erp.web.rest.dto.ManagedUserDTO;
 import com.callippus.water.erp.web.rest.dto.UserDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,9 +27,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -199,4 +204,23 @@ public class UserResource {
         userService.deleteUserInformation(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "A user is deleted with identifier " + login, login)).build();
     }
+    
+    
+    /**
+     * Get All OrgRoleInstance
+     */
+    @RequestMapping(value = "/users/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<ManagedUserDTO>> getManagedUserDTO()
+			throws Exception {
+    	log.debug("REST request to getManagedUserDTO : {}");
+    	
+    	List<ManagedUserDTO> users = userRepository.findAllUsers();
+    
+    	return Optional.ofNullable(users)
+				.map(result -> new ResponseEntity<>(users, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

@@ -1,6 +1,7 @@
 package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.callippus.water.erp.domain.MenuItem;
 import com.callippus.water.erp.domain.Url;
 import com.callippus.water.erp.repository.UrlRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -117,4 +118,22 @@ public class UrlResource {
         urlRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("url", id.toString())).build();
     }
+    
+    /**
+     * Get All Urls
+     */
+    @RequestMapping(value = "/urls/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<Url>> getAllUrls()
+			throws Exception {
+    	log.debug("REST request to getAllUrls: {}");
+    	
+    	List<Url> urls = urlRepository.findAll();
+    
+    	return Optional.ofNullable(urls)
+				.map(result -> new ResponseEntity<>(urls, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }
