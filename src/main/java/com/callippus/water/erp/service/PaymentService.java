@@ -63,11 +63,13 @@ public class PaymentService {
 			InvoicePayments ip = new InvoicePayments();
 			ip.setBillFullDetails(invoice);
 			ip.setCollDetails(collDetails);
+			ip.setCustDetails(customer);
 			
 			if(dueAmount.subtract(remPayment).compareTo(CPSConstants.ZERO) >= 0)
 			{
 				invoice.setDueAmount(dueAmount.subtract(remPayment));
 				ip.setAmount(remPayment);
+				remPayment = CPSConstants.ZERO;
 				invoicePaymentsRepository.save(ip);
 				billFullDetailsRepository.save(invoice);
 				log.debug("Saving Invoice Payments:" + ip.toString());

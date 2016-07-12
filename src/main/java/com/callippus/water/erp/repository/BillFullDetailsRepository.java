@@ -19,7 +19,7 @@ public interface BillFullDetailsRepository extends JpaRepository<BillFullDetails
 	
 	public Page<BillFullDetails> findByCan(Pageable pageable, String can);
 	
-	@Query("select b from BillFullDetails b where b.can=:can and b.dueAmount > 0 order by id")
+	@Query("select brd.billFullDetails from BillRunDetails brd where brd.status=4 and brd.can=:can and brd.billFullDetails.dueAmount > 0 order by brd.id")
 	public List<BillFullDetails> findBillsDue(@Param("can") String can);
 	
 }
