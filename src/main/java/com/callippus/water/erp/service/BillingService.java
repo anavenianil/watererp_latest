@@ -957,6 +957,7 @@ public class BillingService {
 
 			BigDecimal netPayable = bfd.getTotalAmount().add(bfd.getIntOnArrears()).add(bfd.getArrears());
 			bfd.setNetPayableAmount(netPayable);
+			bfd.setDueAmount(total);
 
 			log.debug(
 					"Net Payable = Total (" + bfd.getTotalAmount() + ") " + "+ Int on Arrears (" + bfd.getIntOnArrears()
