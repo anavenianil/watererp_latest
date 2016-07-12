@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ItemRequired;
-import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.WorkflowTxnDetailsRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -148,10 +148,10 @@ public class WorkflowTxnDetailsResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<WorkflowTxnDetails> createWorkflowTxnDetailsArr(@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
-        log.debug("REST request to save WorkflowTxnDetails : {}", workflowDTO);
-        WorkflowTxnDetails wtd = workflowDTO.getWorkflowTxnDetailss().get(0);
-        List<WorkflowTxnDetails> workflowTxnDetailss = workflowTxnDetailsRepository.save(workflowDTO.getWorkflowTxnDetailss());
+    public ResponseEntity<WorkflowTxnDetails> createWorkflowTxnDetailsArr(@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException {
+        log.debug("REST request to save WorkflowTxnDetails : {}", changeCaseDTO);
+        WorkflowTxnDetails wtd = changeCaseDTO.getWorkflowTxnDetailss().get(0);
+        List<WorkflowTxnDetails> workflowTxnDetailss = workflowTxnDetailsRepository.save(changeCaseDTO.getWorkflowTxnDetailss());
         
        /* try{
         	workflowService.getUserDetails();
@@ -165,7 +165,7 @@ public class WorkflowTxnDetailsResource {
         catch(Exception e){
         	System.out.println(e);
         }*/
-        workflowTxnDetailsRepository.save(workflowDTO.getWorkflowTxnDetailss());
+        workflowTxnDetailsRepository.save(changeCaseDTO.getWorkflowTxnDetailss());
         
         return ResponseEntity.created(new URI("/api/workflowTxnDetailss/"))
             .headers(HeaderUtil.createEntityCreationAlert("workflowTxnDetails",""))
@@ -179,10 +179,10 @@ public class WorkflowTxnDetailsResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
         @Timed
-        public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
-            log.debug("REST request to save WorkflowTxnDetails : {}", workflowDTO);
-            WorkflowTxnDetails wtd = workflowDTO.getWorkflowTxnDetailss().get(0);
-            List<WorkflowTxnDetails> workflowTxnDetailss = workflowTxnDetailsRepository.save(workflowDTO.getWorkflowTxnDetailss());
+        public ResponseEntity<WorkflowTxnDetails> approveCategoryChange(@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException {
+            log.debug("REST request to save WorkflowTxnDetails : {}", changeCaseDTO);
+            WorkflowTxnDetails wtd = changeCaseDTO.getWorkflowTxnDetailss().get(0);
+            List<WorkflowTxnDetails> workflowTxnDetailss = workflowTxnDetailsRepository.save(changeCaseDTO.getWorkflowTxnDetailss());
             
             try{
             	workflowService.getUserDetails();
@@ -191,7 +191,7 @@ public class WorkflowTxnDetailsResource {
             catch(Exception e){
             	System.out.println(e);
             }
-            workflowTxnDetailsRepository.save(workflowDTO.getWorkflowTxnDetailss());
+            workflowTxnDetailsRepository.save(changeCaseDTO.getWorkflowTxnDetailss());
             
             return ResponseEntity.created(new URI("/api/workflowTxnDetailss/"))
                 .headers(HeaderUtil.createEntityCreationAlert("workflowTxnDetails",""))

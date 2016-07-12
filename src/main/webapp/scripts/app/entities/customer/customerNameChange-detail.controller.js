@@ -7,9 +7,9 @@ angular
 				function($scope, $stateParams, CustDetails,$window,
 						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal) {
 
-					$scope.workflowDTO = {};
-					$scope.workflowDTO.customer = {};
-					$scope.workflowDTO.customer.changeType = "CHANGENAME";
+					$scope.changeCaseDTO = {};
+					$scope.changeCaseDTO.customer = {};
+					$scope.changeCaseDTO.customer.changeType = "CHANGENAME";
 					$scope.orgRole = "";
 					
 					$scope.custDetails = {};
@@ -27,7 +27,7 @@ angular
 					
 					$scope.load = function (id) {
 			            Customer.get({id: id}, function(result) {
-			                $scope.workflowDTO.customer = result;
+			                $scope.changeCaseDTO.customer = result;
 			                $scope.customer = result;
 			                $scope.getCustDetails(result.can);
 			            });
@@ -63,10 +63,10 @@ angular
 					};
 
 					//approve a request
-					$scope.approve = function(workflowDTO){
+					$scope.approve = function(changeCaseDTO){
 			        	//console.log(customer);
 			        	return $http.post('/api/customers/customersApprove',
-								workflowDTO).then(
+			        			changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
@@ -76,9 +76,9 @@ angular
 			        }
 					
 					//declineRequest
-					$scope.declineRequest = function(workflowDTO){
+					$scope.declineRequest = function(changeCaseDTO){
 			        	return $http.post('/api/customers/declineRequest',
-								workflowDTO).then(
+			        			changeCaseDTO).then(
 								function(response) {
 									$window.history.back();
 								});
@@ -86,7 +86,7 @@ angular
 					
 					$scope.canDecline = function() {
 						var ret = false;
-						switch ($scope.workflowDTO.customer.status) {
+						switch ($scope.changeCaseDTO.customer.status) {
 						case 'INITIATED':
 							if ($scope.orgRole.id === 10)
 								ret = true;

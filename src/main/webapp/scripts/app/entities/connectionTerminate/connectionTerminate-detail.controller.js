@@ -4,7 +4,7 @@ angular.module('watererpApp')
     .controller('ConnectionTerminateDetailController', function ($scope, $rootScope, $stateParams, ConnectionTerminate, 
     		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window, $state) {
         $scope.connectionTerminate = {};
-        $scope.workflowDTO = {};
+        $scope.changeCaseDTO = {};
         $scope.custDetails = {};
         $scope.maxDt = new Date();
         Principal.getOrgRole().then(function(response) {
@@ -21,7 +21,7 @@ angular.module('watererpApp')
         $scope.load = function (id) {
             ConnectionTerminate.get({id: id}, function(result) {
                 $scope.connectionTerminate = result;
-                $scope.workflowDTO.connectionTerminate = result;
+                $scope.changeCaseDTO.connectionTerminate = result;
                 $scope.getCustDetails($scope.connectionTerminate.can);
             });
         };
@@ -93,18 +93,18 @@ angular.module('watererpApp')
 			return ret;
 		}
 		
-		$scope.approve = function(workflowDTO){
+		$scope.approve = function(changeCaseDTO){
         	return $http.post('/api/connectionTerminates/approve',
-					workflowDTO).then(
+        			changeCaseDTO).then(
 					function(response) {
 						$state.go('connectionTerminate');
 					});
         }
 		
 		
-		$scope.declineRequest = function(workflowDTO){
+		$scope.declineRequest = function(changeCaseDTO){
         	return $http.post('/api/connectionTerminates/declineRequest',
-					workflowDTO ).then(
+        			changeCaseDTO ).then(
 					function(response) {
 						$window.history.back();
 					});
@@ -113,7 +113,7 @@ angular.module('watererpApp')
 		$scope.checkReading = function(prevReding, newReading){
 			if(prevReding > newReading){
 				alert("New reading should be greater than previous reading");
-				$scope.workflowDTO.connectionTerminate.lastMeterReading="";
+				$scope.changeCaseDTO.connectionTerminate.lastMeterReading="";
 			}
 		}
     });

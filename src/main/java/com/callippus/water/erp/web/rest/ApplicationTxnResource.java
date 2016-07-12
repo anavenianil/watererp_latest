@@ -44,7 +44,7 @@ import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
-import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
@@ -341,9 +341,10 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<RequestCountDTO>> getPendingRequests(HttpServletResponse response)throws Exception {
+    public ResponseEntity<List<RequestCountDTO>> getPendingRequests(HttpServletResponse response,
+    		@RequestParam(value = "id", required = false) Long id)throws Exception {
         log.debug("REST request to get Requisition : {}");
-        List<RequestCountDTO> pendingRequests = applicationTxnCustomRepository.countPendingRequests();
+        List<RequestCountDTO> pendingRequests = applicationTxnCustomRepository.countPendingRequests(id);
 
         return new ResponseEntity<>(pendingRequests, HttpStatus.OK);
     }
@@ -357,9 +358,10 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<RequestCountDTO>> getApprovedRequests(HttpServletResponse response)throws Exception {
+    public ResponseEntity<List<RequestCountDTO>> getApprovedRequests(HttpServletResponse response,
+    		@RequestParam(value = "id", required = false) Long id)throws Exception {
         log.debug("REST request to get Requisition : {}");
-        List<RequestCountDTO> approvedRequests = applicationTxnCustomRepository.countApprovedRequests();
+        List<RequestCountDTO> approvedRequests = applicationTxnCustomRepository.countApprovedRequests(id);
 
         return new ResponseEntity<>(approvedRequests, HttpStatus.OK);
     }
@@ -542,11 +544,11 @@ public class ApplicationTxnResource {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<WorkflowDTO> issueMeter(
-			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
-		log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+	public ResponseEntity<ChangeCaseDTO> issueMeter(
+			@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException { 
+		log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 		
-		ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+		ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
 			applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
         	MeterDetails meterDetails = applicationTxn.getMeterDetails();
         		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
@@ -572,11 +574,11 @@ public class ApplicationTxnResource {
 				produces = MediaType.APPLICATION_JSON_VALUE)
 		@Timed
 		@Transactional(rollbackFor=Exception.class)
-		public ResponseEntity<WorkflowDTO> createNewCustomer(
-				@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
-			log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+		public ResponseEntity<ChangeCaseDTO> createNewCustomer(
+				@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException { 
+			log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 			
-			ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+			ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
 
 	        MeterDetails meterDetails = applicationTxn.getMeterDetails();
 	    	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));

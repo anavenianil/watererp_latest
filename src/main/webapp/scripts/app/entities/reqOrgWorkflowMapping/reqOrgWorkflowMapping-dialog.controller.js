@@ -1,23 +1,37 @@
 'use strict';
 
 angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ReqOrgWorkflowMapping', 'WorkflowMaster', 'RequestMaster', 'OrgRoleInstance', 'StatusMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, ReqOrgWorkflowMapping, WorkflowMaster, RequestMaster, OrgRoleInstance, StatusMaster) {
+        function($scope, $stateParams, ReqOrgWorkflowMapping, WorkflowMaster, RequestMaster, OrgRoleInstance, StatusMaster, $http) {
 
-        $scope.reqOrgWorkflowMapping = entity;
+        $scope.reqOrgWorkflowMapping = {};
         $scope.workflowmasters = WorkflowMaster.query();
         $scope.requestmasters = RequestMaster.query();
-        $scope.orgroleinstances = OrgRoleInstance.query();
         $scope.statusmasters = StatusMaster.query();
+        //$scope.orgroleinstances = OrgRoleInstance.query();
+        $scope.getOrgRoleInstance = function() {
+        	$scope.orgroleinstances = [];
+			return $http.get('/api/orgRoleInstances/getAll'
+					).then(
+					function(response) {
+						$scope.orgroleinstances = response.data;
+					});
+		}
+        $scope.getOrgRoleInstance();
+        
+        
         $scope.load = function(id) {
             ReqOrgWorkflowMapping.get({id : id}, function(result) {
                 $scope.reqOrgWorkflowMapping = result;
             });
         };
+        
+        if($stateParams.id != null){
+        	$scope.load($stateParams.id);
+        }
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:reqOrgWorkflowMappingUpdate', result);
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
             $scope.isSaving = false;
         };
 
@@ -35,7 +49,7 @@ angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController'
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         };
         $scope.datePickerForCreationDate = {};
 
@@ -55,4 +69,4 @@ angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController'
         $scope.datePickerForLastModifiedDateOpen = function($event) {
             $scope.datePickerForLastModifiedDate.status.opened = true;
         };
-}]);
+});

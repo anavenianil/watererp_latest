@@ -80,7 +80,7 @@
 									ng-model="connectionTerminate.meterRecovered" ng-value="true">Yes
 								</label> &nbsp;&nbsp;&nbsp;&nbsp;<label class="radio-inline"> <input
 									type="radio" name="meterRecovered"
-									ng-model="workflowDTO.connectionTerminate.meterRecovered"
+									ng-model="changeCaseDTO.connectionTerminate.meterRecovered"
 									ng-value="false">No
 								</label>
 							</div>
@@ -95,9 +95,9 @@
 							<label class="control-label" for="field_lastMeterReading">Final
 								Meter Reading</label> <input type="number" class="form-control"
 								name="lastMeterReading" id="field_lastMeterReading"
-								ng-disabled="workflowDTO.connectionTerminate.meterRecovered==false"
-								ng-model="workflowDTO.connectionTerminate.lastMeterReading"
-								ng-blur="checkReading(custDetails.prevReading, workflowDTO.connectionTerminate.lastMeterReading)" />
+								ng-disabled="changeCaseDTO.connectionTerminate.meterRecovered==false"
+								ng-model="changeCaseDTO.connectionTerminate.lastMeterReading"
+								ng-blur="checkReading(custDetails.prevReading, changeCaseDTO.connectionTerminate.lastMeterReading)" />
 						</div>
 					</div>
 					<div class="row">
@@ -108,14 +108,14 @@
 								<div class='input-group date' id='field_meterRecoveredDate'>
 									<input id="field_meterRecoveredDate" type="text"
 										class="form-control" uib-datepicker-popup="{{dateformat}}"
-										ng-model="workflowDTO.connectionTerminate.meterRecoveredDate"
+										ng-model="changeCaseDTO.connectionTerminate.meterRecoveredDate"
 										max-date="maxDt"
-										ng-disabled="workflowDTO.connectionTerminate.meterRecovered==false"
+										ng-disabled="changeCaseDTO.connectionTerminate.meterRecovered==false"
 										is-open="datePickerForMeterRecoveredDate.status.opened" /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											ng-click="datePickerForMeterRecoveredDateOpen($event)"
-											ng-disabled="workflowDTO.connectionTerminate.meterRecovered==false">
+											ng-disabled="changeCaseDTO.connectionTerminate.meterRecovered==false">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
@@ -135,7 +135,7 @@
 								<div class='input-group date' id='field_approvedDate'>
 									<input id="field_approvedDate" type="text" class="form-control"
 										uib-datepicker-popup="{{dateformat}}"
-										ng-model="workflowDTO.approvedDate" max-date="maxDt"
+										ng-model="changeCaseDTO.approvedDate" max-date="maxDt"
 										is-open="datePickerForApprovedDate.status.opened" /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
@@ -150,7 +150,7 @@
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<textarea rows="2" cols="50" class="form-control" name="remarks"
 								style="resize: none" id="field_remarks" max="20"
-								ng-model="workflowDTO.remarks"></textarea>
+								ng-model="changeCaseDTO.remarks"></textarea>
 						</div>
 					</div>
 				</fieldset>
@@ -183,7 +183,7 @@
 		</div>
 	</div>
 	<button type="button" class="btn btn-success pull-right"
-		ng-show="canDecline()" ng-click="approve(workflowDTO)">
+		ng-show="canDecline()" ng-click="approve(changeCaseDTO)">
 		<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 	</button>
 
@@ -191,7 +191,7 @@
 
 	<button type="button" class="btn btn-danger pull-right"
 		ng-show="canDecline()" ng-disabled="isSaving"
-		ng-click="declineRequest(workflowDTO)">
+		ng-click="declineRequest(changeCaseDTO)">
 		<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 	</button>
 	<button type="submit" onclick="window.history.back()"

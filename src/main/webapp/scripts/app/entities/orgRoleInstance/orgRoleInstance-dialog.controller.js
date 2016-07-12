@@ -1,13 +1,24 @@
 'use strict';
 
 angular.module('watererpApp').controller('OrgRoleInstanceDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'OrgRoleInstance', 'StatusMaster', 'OrgRoleHierarchy',
-        function($scope, $stateParams, $uibModalInstance, entity, OrgRoleInstance, StatusMaster, OrgRoleHierarchy) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'OrgRoleInstance', 'StatusMaster', 'OrgRoleHierarchy', '$http',
+        function($scope, $stateParams, $uibModalInstance, entity, OrgRoleInstance, StatusMaster, OrgRoleHierarchy, $http) {
 
         $scope.orgRoleInstance = entity;
         $scope.statusmasters = StatusMaster.query();
         $scope.orgrolehierarchys = OrgRoleHierarchy.query();
         //$scope.departmentsmasters = DepartmentsMaster.query();
+        $scope.getOrgRoleInstance = function() {
+        	$scope.orgroleinstances = [];
+			return $http.get('/api/orgRoleInstances/getAll'
+					).then(
+					function(response) {
+						$scope.orgroleinstances = response.data;
+					});
+		}
+        
+        $scope.getOrgRoleInstance();
+        
         $scope.load = function(id) {
             OrgRoleInstance.get({id : id}, function(result) {
                 $scope.orgRoleInstance = result;

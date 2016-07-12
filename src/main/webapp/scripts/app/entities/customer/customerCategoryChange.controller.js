@@ -17,11 +17,11 @@ angular
 
 					$scope.tariffcategorymasters = TariffCategoryMaster.query();
 					$scope.pipeSizeMasters = PipeSizeMaster.query();
-					$scope.workflowDTO = {};
-					$scope.workflowDTO.requestWorkflowHistory = {};
-					$scope.workflowDTO.workflowTxnDetailss = {};
+					$scope.changeCaseDTO = {};
+					$scope.changeCaseDTO.requestWorkflowHistory = {};
+					$scope.changeCaseDTO.workflowTxnDetailss = {};
 					$scope.applicationTxn = {};
-					$scope.workflowDTO.workflowTxnDetailss = [];
+					$scope.changeCaseDTO.workflowTxnDetailss = [];
 					$scope.referenceNo = "";
 
 					console.log("These are the state:"
@@ -177,10 +177,10 @@ angular
 					};
 
 					/*$scope.saveChanges = function() {
-						console.log("WorkflowDTO data being posted to server:"
-								+ JSON.stringify($scope.workflowDTO));
+						console.log("changeCaseDTO data being posted to server:"
+								+ JSON.stringify($scope.changeCaseDTO));
 						return $http.post('/api/workflowTxnDetailsArr',
-								$scope.workflowDTO).then(
+								$scope.changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
@@ -200,10 +200,10 @@ angular
 						}
 					}
 					//approve a request
-					$scope.approve = function(workflowDTO) {
-						console.log(workflowDTO);
+					$scope.approve = function(changeCaseDTO) {
+						console.log(changeCaseDTO);
 						return $http.post('/api/workflowTxnDetailsApprove',
-								$scope.workflowDTO).then(
+								$scope.changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));

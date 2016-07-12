@@ -14,8 +14,8 @@ import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 public interface ApplicationTxnCustomRepository extends
 JpaRepository<ApplicationTxn, Long> {
 	
-	List<RequestCountDTO> countPendingRequests()throws Exception ;
-	List<RequestCountDTO> countApprovedRequests()throws Exception ;
+	List<RequestCountDTO> countPendingRequests(Long id)throws Exception ;
+	List<RequestCountDTO> countApprovedRequests(Long id)throws Exception ;
 	//List<RequestCountDTO> countMyRequests()throws Exception ;
 	
 	List<RequestWorkflowHistory> listAllPendingRequests(String type) throws Exception;

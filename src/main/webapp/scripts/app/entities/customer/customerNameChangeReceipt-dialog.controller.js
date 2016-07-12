@@ -4,16 +4,16 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
         function($scope, $stateParams, $state, Receipt, PaymentTypes, Customer, CustDetailsSearchCAN, $window, $http, Principal, ConfigurationDetails) {
 
         //$scope.receipt = {};
-        $scope.workflowDTO = {};
-        $scope.workflowDTO.receipt = {};
-        $scope.workflowDTO.customer = {};
+        $scope.changeCaseDTO = {};
+        $scope.changeCaseDTO.receipt = {};
+        $scope.changeCaseDTO.customer = {};
         $scope.orgRole = {};
         $scope.paymenttypess = PaymentTypes.query();
         
         $scope.maxDt = new Date();
-        $scope.workflowDTO.receipt.receiptDate = new Date();
+        $scope.changeCaseDTO.receipt.receiptDate = new Date();
         
-        //$scope.workflowDTO.receipt.amount = 1000;
+        //$scope.changeCaseDTO.receipt.amount = 1000;
         
 
         Principal.getOrgRole().then(function(response) {
@@ -24,15 +24,15 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
         $scope.getNameChangeFee = function() {
             ConfigurationDetails.get({id : 17}, function(result) {
                 $scope.configurationDetails = result;
-                $scope.workflowDTO.receipt.amount = $scope.configurationDetails.value;
+                $scope.changeCaseDTO.receipt.amount = $scope.configurationDetails.value;
             });
         };
         $scope.getNameChangeFee();
 		
         $scope.loadCustomer = function(id) {
             Customer.get({id : id}, function(result) {
-                $scope.workflowDTO.customer = result;
-                $scope.workflowDTO.receipt.can = result.can;
+                $scope.changeCaseDTO.customer = result;
+                $scope.changeCaseDTO.receipt.can = result.can;
                 //$scope.getCustDetails(result.can);
             });
         };
@@ -52,9 +52,9 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
         };
 
       //approve a request
-		$scope.approve = function(workflowDTO){
+		$scope.approve = function(changeCaseDTO){
         	return $http.post('/api/customers/nameChangeReceipt',
-					workflowDTO).then(
+        			changeCaseDTO).then(
 					function(response) {
 						console.log("Server response:"
 								+ JSON.stringify(response));
@@ -99,7 +99,7 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 		
 		$scope.canDecline = function() {
 			var ret = false;
-			switch ($scope.workflowDTO.customer.status) {
+			switch ($scope.changeCaseDTO.customer.status) {
 			case 0:
 				if ($scope.orgRole.id === 10)
 					ret = true;
@@ -123,10 +123,10 @@ angular.module('watererpApp').controller('NameChangeReceiptDialogController',
 		if (paymentMode.toUpperCase() === 'CASH') 
 				{
 				$scope.instrEnabled=false;
-				$scope.workflowDTO.receipt.checkOrDdDate = null;
-				$scope.workflowDTO.receipt.checkOrDdNo = null;
-				$scope.workflowDTO.receipt.bankName = null;
-				$scope.workflowDTO.receipt.branchName = null;
+				$scope.changeCaseDTO.receipt.checkOrDdDate = null;
+				$scope.changeCaseDTO.receipt.checkOrDdNo = null;
+				$scope.changeCaseDTO.receipt.bankName = null;
+				$scope.changeCaseDTO.receipt.branchName = null;
 				
 				}
 			else
