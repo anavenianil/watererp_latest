@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This facilitates run in Jenkins
+# This facilitates run in Jenkins #
 echo "Running script from PWD:" `pwd`
 ##### Unit Testing ##############
 #grunt test
