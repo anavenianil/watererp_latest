@@ -862,7 +862,7 @@ public class BillingService {
 				bfd.setMeterServiceCharge(bfd.getMeterServiceCharge().add((BigDecimal) charge.get("rate"))
 						.multiply(new BigDecimal(months)));
 			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
-				log.debug("Service Charge:" + ((Float) charge.get("rate")).floatValue() * months);
+				log.debug("Service Charge:" + ((BigDecimal) charge.get("rate")).multiply(new BigDecimal(months)));
 				bfd.setServiceCharge(
 						bfd.getServiceCharge().add((BigDecimal) charge.get("rate")).multiply(new BigDecimal(months)));
 			}
