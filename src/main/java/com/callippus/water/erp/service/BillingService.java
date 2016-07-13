@@ -150,7 +150,8 @@ public class BillingService {
 
 	ConfigurationDetails cd = null;
 
-	BigDecimal total_amount = CPSConstants.ZERO, net_payable_amount = CPSConstants.ZERO, surcharge = CPSConstants.ZERO, total_cess = CPSConstants.ZERO, kl = CPSConstants.ZERO;
+	BigDecimal total_amount = CPSConstants.ZERO, net_payable_amount = CPSConstants.ZERO, surcharge = CPSConstants.ZERO,
+			total_cess = CPSConstants.ZERO, kl = CPSConstants.ZERO;
 
 	public static void main(String[] args) throws Exception {
 		LocalDate dFrom = null;
@@ -158,7 +159,7 @@ public class BillingService {
 
 		dFrom = LocalDate.of(2016, 05, 24);
 		dTo = LocalDate.of(2016, 06, 30);
-		
+
 		System.out.println("THis is the dFrom:" + dFrom + ", to:" + dTo);
 	}
 
@@ -188,20 +189,20 @@ public class BillingService {
 		return br;
 	}
 
-	public void processDisconnectedMeters(){
+	public void processDisconnectedMeters() {
 		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
 		customers.forEach(customer -> saveAndRunTerminations(customer));
 	}
-	
-	public BillRunMaster processDisconnection(CustDetails custDetails) throws Exception
-	{
+
+	public BillRunMaster processDisconnection(CustDetails custDetails) throws Exception {
 		initBillRun();
 
 		if (custDetails.getStatus() != CustStatus.ACTIVE && custDetails.getStatus() != CustStatus.TERMINATED) {
-			throw new Exception("Invalid CustStatus for CAN:" + custDetails.getCan() + ", Status:" + custDetails.getStatus().toString());
+			throw new Exception("Invalid CustStatus for CAN:" + custDetails.getCan() + ", Status:"
+					+ custDetails.getStatus().toString());
 		}
 
-//			process_bill(can);
+		// process_bill(can);
 
 		if (failedRecords > 0)
 			br.setStatus("Completed with Errors");
@@ -212,7 +213,7 @@ public class BillingService {
 
 		return br;
 	}
-	
+
 	public BillRunMaster generateSingleBill(String can) throws Exception {
 
 		initBillRun();
@@ -278,7 +279,8 @@ public class BillingService {
 				if (meterChange != null) {
 					getUnitsKLMeterChange(bill_details, customer);
 				} else if (bill_details.getIsRounding()) {
-					unitsKL = bill_details.getPresentReading().add(new BigDecimal("9999")).subtract(bill_details.getInitialReading());
+					unitsKL = bill_details.getPresentReading().add(new BigDecimal("9999"))
+							.subtract(bill_details.getInitialReading());
 				} else {
 					unitsKL = bill_details.getPresentReading().subtract(bill_details.getInitialReading());
 
@@ -577,8 +579,8 @@ public class BillingService {
 		saveAndRunBill(customer, "U", LocalDate.now(), null, null);
 	}
 
-	public void saveAndRunBill(CustDetails customer, String currentBillType, LocalDate metReadingDt, BigDecimal prevReading,
-			BigDecimal curReading) {
+	public void saveAndRunBill(CustDetails customer, String currentBillType, LocalDate metReadingDt,
+			BigDecimal prevReading, BigDecimal curReading) {
 		initBill(customer.getCan()); // Is inited again in process_bill, but
 		// right now there is no better
 		// solution
@@ -748,7 +750,8 @@ public class BillingService {
 						log.debug("units:" + units + ", unitsKL=" + unitsKL + ", avgKL=" + avgKL + ", prevAvgKL="
 								+ prevAvgKL + ", factor=" + factor);
 
-						if (factor.compareTo(new BigDecimal("4.0")) > 0 || factor.compareTo(new BigDecimal("2.5")) < 0) {
+						if (factor.compareTo(new BigDecimal("4.0")) > 0
+								|| factor.compareTo(new BigDecimal("2.5")) < 0) {
 							// Unable to process customer
 							log.debug("Meter reading for:" + customer.getId() + ": is ::"
 									+ bill_details.getPresentReading() + ". This is too high or too low.");
@@ -777,8 +780,8 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl().compareTo(new BigDecimal("0.1")) < 0 ? minAvgKL
-						: customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl().compareTo(new BigDecimal("0.1")) < 0
+						? minAvgKL : customer.getPrevAvgKl());
 
 				if (partialMonth) {
 					long monthsDiff1 = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
@@ -806,8 +809,8 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl().compareTo(new BigDecimal("0.1")) < 0 ? minAvgKL
-						: customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl().compareTo(new BigDecimal("0.1")) < 0
+						? minAvgKL : customer.getPrevAvgKl());
 
 				if (partialMonth) {
 					long monthsDiff1 = ChronoUnit.MONTHS.between(dFrom, dTo.plusDays(1));
@@ -832,8 +835,8 @@ public class BillingService {
 				log.debug("Customer Info:" + customer.toString());
 				log.debug("From:" + dFrom + ", To:" + dTo);
 
-				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl().compareTo(new BigDecimal("0.1")) < 0 ? minAvgKL
-						: customer.getPrevAvgKl());
+				avgKL = (customer.getPrevAvgKl() == null || customer.getPrevAvgKl().compareTo(new BigDecimal("0.1")) < 0
+						? minAvgKL : customer.getPrevAvgKl());
 
 				this.unitsKL = avgKL.multiply(new BigDecimal(monthsDiff));
 				units = this.unitsKL.multiply(new BigDecimal("100.0"));
@@ -854,16 +857,17 @@ public class BillingService {
 
 		for (Map<String, Object> charge : charges) {
 			if (((Long) charge.get("tariff_type_master_id")) == 1) {
-				bfd.setNoMeterAmt(bfd.getNoMeterAmt().add((BigDecimal)charge.get("rate")));
-				bfd.setWaterCess(bfd.getWaterCess().add((BigDecimal)charge.get("rate")).multiply(units));
+				bfd.setNoMeterAmt(bfd.getNoMeterAmt().add((BigDecimal) charge.get("rate")));
+				bfd.setWaterCess(bfd.getWaterCess().add((BigDecimal) charge.get("rate")).multiply(units));
 				log.debug("Usage Charge:" + ((BigDecimal) charge.get("rate")).multiply(units));
 			} else if (((Long) charge.get("tariff_type_master_id")) == 2) {
 				log.debug("Meter Rent:" + ((BigDecimal) charge.get("rate")).multiply(new BigDecimal(months)));
-				bfd.setMeterServiceCharge(
-						bfd.getMeterServiceCharge().add((BigDecimal) charge.get("rate")).multiply(new BigDecimal(months)));
+				bfd.setMeterServiceCharge(bfd.getMeterServiceCharge().add((BigDecimal) charge.get("rate"))
+						.multiply(new BigDecimal(months)));
 			} else if (((Long) charge.get("tariff_type_master_id")) == 3) {
 				log.debug("Service Charge:" + ((Float) charge.get("rate")).floatValue() * months);
-				bfd.setServiceCharge(bfd.getServiceCharge().add((BigDecimal) charge.get("rate")).multiply(new BigDecimal(months)));
+				bfd.setServiceCharge(
+						bfd.getServiceCharge().add((BigDecimal) charge.get("rate")).multiply(new BigDecimal(months)));
 			}
 		}
 	}
@@ -917,23 +921,23 @@ public class BillingService {
 			log.debug("This is the SEWERAGE Charge Configuration:" + cd.toString());
 
 			if (hasSewer)
-				bfd.setSewerageCess(new BigDecimal(cd.getValue()).multiply(bfd.getWaterCess().divide(new BigDecimal("100.0"))));
+				bfd.setSewerageCess(
+						new BigDecimal(cd.getValue()).multiply(bfd.getWaterCess().divide(new BigDecimal("100.0"))));
 
 			cd = configurationDetailsRepository.findOneByName("EWURA");
 
 			log.debug("This is the EWURA Configuration:" + cd.toString());
-			BigDecimal ewura = ((bfd.getWaterCess().add(bfd.getSewerageCess())).multiply(new BigDecimal(cd.getValue()))).divide(new BigDecimal("100.0"));
+			BigDecimal ewura = ((bfd.getWaterCess().add(bfd.getSewerageCess())).multiply(new BigDecimal(cd.getValue())))
+					.divide(new BigDecimal("100.0"));
 
 			bfd.setSurcharge(ewura);
 
 			List<Adjustments> adjustments = adjustmentsRepository
 					.findByCanAndStatusAndBillFullDetails(bill_details.getCan(), TxnStatus.INITIATED, null);
 
-			BigDecimal adjAmount = new BigDecimal("0.00");
-			adjAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+			BigDecimal adjAmount = CPSConstants.ZERO;
 			for (Adjustments adj : adjustments) {
 				BigDecimal adj1 = adj.getAmount();
-				adj1.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 				adj.setBillFullDetails(bfd);
 				adj.setCustDetails(customer);
 				if (adj.getTransactionTypeMaster().getTypeOfTxn().equalsIgnoreCase("Credit"))
@@ -944,8 +948,8 @@ public class BillingService {
 				adj.setStatus(TxnStatus.PROCESSING);
 			}
 
-			BigDecimal total = bfd.getWaterCess().add(bfd.getMeterServiceCharge()).add( bfd.getServiceCharge()).add(
-					bfd.getSewerageCess()).add(bfd.getSurcharge()).add(bfd.getOtherCharges()).add(adjAmount);
+			BigDecimal total = bfd.getWaterCess().add(bfd.getMeterServiceCharge()).add(bfd.getServiceCharge())
+					.add(bfd.getSewerageCess()).add(bfd.getSurcharge()).add(bfd.getOtherCharges()).add(adjAmount);
 
 			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") " + "+ Meter Svc Charge("
 					+ bfd.getMeterServiceCharge() + ") " + "+ Service Charge (" + bfd.getServiceCharge() + ") "
