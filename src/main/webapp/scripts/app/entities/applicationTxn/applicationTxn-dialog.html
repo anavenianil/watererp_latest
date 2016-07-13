@@ -216,7 +216,6 @@
 											ng-model="applicationTxn.officeNo" />
 										<div
 											ng-show="(editForm.officeNo.$dirty || rc.editForm.attempted) && editForm.officeNo.$invalid">
-
 											<p class="help-block"
 												ng-show="editForm.officeNo.$error.number">Enter valid
 												number</p>
@@ -233,12 +232,10 @@
 											ng-pattern="/[a-zA-Z0-9@]+/" />
 										<div
 											ng-show="(editForm.email.$dirty || rc.editForm.attempted) && editForm.email.$invalid">
-
 											<p class="help-block" ng-show="editForm.email.$error.email">Enter
 												alphanemeric number</p>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						</fieldset>
@@ -317,7 +314,6 @@
 											required>
 											<option value=""></option>
 										</select>
-
 										<div
 											ng-show="(editForm.idProofMaster.$dirty || rc.editForm.attempted) && editForm.idProofMaster.$invalid">
 											<p class="help-block"
@@ -352,16 +348,13 @@
                                 		(editForm.propertyDoc.$dirty || rc.editForm.attempted)}">
 										<label class="control-label" for="field_propertyDoc">Property
 											Ownership Document</label> <br>
-										<!-- <div  name="propertyDoc"  id="field_propertyDoc" ng-model="applicationTxn.propertyDoc" 
-										ng-change="checkForm(deedDoc,agreementDoc)" >  -->
-
 										<input type="checkbox" ng-model="applicationTxn.deedDoc"
 											ng-true-value="'Tittle Deed/Offer letter'"
-											ng-false-value="'Not Submitted'" required>&nbsp;<span>Tittle
+											ng-false-value="'Not Submitted'" >&nbsp;<span>Tittle
 											Deed/Offer letter </span> <br> <input type="checkbox"
 											ng-model="applicationTxn.agreementDoc"
 											ng-true-value="'Rented Property-lease-Rent Agreement'"
-											ng-false-value="'Not Submitted'" required>&nbsp;<span>Rented
+											ng-false-value="'Not Submitted'" >&nbsp;<span>Rented
 											Property- lease-Rent Agreement </span>
 										<div
 											ng-show="(editForm.propertyDoc.$dirty || rc.editForm.attempted) && editForm.propertyDoc.$invalid">

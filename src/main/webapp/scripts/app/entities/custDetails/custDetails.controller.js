@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks) {
+    .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks, $http, CustDetailsSearchCAN) {
 
         $scope.custDetailss = [];
         $scope.predicate = 'id';
@@ -79,4 +79,51 @@ angular.module('watererpApp')
                 id: null
             };
         };
+        
+     // to search CAN
+		$scope.getLocation = function(val) {
+			$scope.isValidCust = false;
+			return $http.get('api/custDetailss/searchCAN/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+				return res;
+			});
+		}
+		
+		// get cust details by CAN
+		/*$scope.getCustDetails = function(can) {
+			CustDetailsSearchCAN.get({can : can},
+							function(result) {
+								$scope.custDetails = result;
+								$scope.custDetailss.push(result[i]);
+							});
+		};*/
+		
+		$scope.load = function(id) {
+        	$scope.custDetailss=[];
+        	CustDetails.get({
+				id : id
+			}, function(result) {
+				$scope.custDetailss.push(result);
+			});
+		};
+		
+		// when selected searched CAN in DropDown
+		$scope.onSelect = function($item, $model, $label) {
+			console.log($item);
+			var arr = $item.split("-");			
+			$scope.custDetails = {};
+			$scope.custDetails.can = arr[0].trim();
+			$scope.custDetails.name = arr[1];
+			$scope.custDetails.address = arr[2];
+			$scope.custDetails.id = arr[3];
+			$state.go('custDetails.detail',{id:$scope.custDetails.id});
+			//$scope.load($scope.custDetails.id);
+		};
     });
