@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This facilitates run in Jenkins
+# This facilitates run in Jenkins #
 echo "Running script from PWD:" `pwd`
 ##### Unit Testing ##############
 #grunt test
@@ -37,8 +37,8 @@ set -e
 
 ##### Integration Testing #######
 #sudo SPRING_PROFILES_ACTIVE=fast mvn test
-export SPRING_PROFILES_ACTIVE=fast
-mvn -Dtest=BillRunMasterResourceIntTest test
+#export SPRING_PROFILES_ACTIVE=fast
+#mvn -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
 
 

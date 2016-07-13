@@ -7,7 +7,6 @@ angular.module('watererpApp')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.txnList = [];
-
         $scope.page = 0;
         
         $scope.getLocation = function(val) {
@@ -54,6 +53,18 @@ angular.module('watererpApp')
      		if(requestType == 2){//WATER LEAKAGE
      			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:4});
      		}
+	        }
+        
+        $scope.getCustomerDetails = function(can) {
+        	var val = can;
+			$http.get('api/custDetailss/search/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {				
+				$state.go("customerInfo.detail",{id:response.data.id});
+			});
 	        }
         
         $scope.onSelect = function($item, $model, $label) {
@@ -105,20 +116,10 @@ angular.module('watererpApp')
 			CustomerComplaints.get({
 				id : id
 			}, function(result) {
-				//$scope.customerComplaints = result;
 				$scope.customerComplaintss.push(result);
 			});
 		};
 		
-		 /*$scope.getRequestTypeId = function(domainId,requestType) {
-     		if(requestType == 1){//INCORRECT BILL
-     			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:3});
-     		}
-     		if(requestType == 2){//INCORRECT BILL
-     			$state.go("customerComplaints.detail",{id:domainId, requestTypeId:4});
-     		}
-	        }*/
-
         $scope.clear = function () {
             $scope.customerComplaints = {
                 remarks: null,

@@ -59,7 +59,7 @@
 								</td>
 								<td>{{customerComplaints.complaintBy}}</td>
 								<td>{{customerComplaints.complaintDate | date:'mediumDate'}}</td>
-								<td>{{customerComplaints.can}}</td>
+								<td><a style="cursor:pointer; cursor: hand;" ng-click="getCustomerDetails(customerComplaints.can)">{{customerComplaints.can}}</a></td>
 								<td><a ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})"
 									>{{customerComplaints.complaintTypeMaster.complaintType}}</a>
 								</td>
