@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController',
-        function($scope, $stateParams, ReqOrgWorkflowMapping, WorkflowMaster, RequestMaster, OrgRoleInstance, StatusMaster, $http) {
+        function($scope, $stateParams, ReqOrgWorkflowMapping, WorkflowMaster, RequestMaster, OrgRoleInstance, StatusMaster, $http, ParseLinks) {
 
         $scope.reqOrgWorkflowMapping = {};
         $scope.workflowmasters = WorkflowMaster.query();
         $scope.requestmasters = RequestMaster.query();
-        $scope.statusmasters = StatusMaster.query();
+        //$scope.statusmasters = StatusMaster.query();
         //$scope.orgroleinstances = OrgRoleInstance.query();
         $scope.getOrgRoleInstance = function() {
         	$scope.orgroleinstances = [];
@@ -18,6 +18,17 @@ angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController'
 		}
         $scope.getOrgRoleInstance();
         
+        
+        $scope.getStatusMaster = function() {
+        	$scope.statusmasters = [];
+            StatusMaster.query({page: $scope.page, size: 20, description1:'GENERAL'}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.statusmasters.push(result[i]);
+                }
+            });
+        };
+        $scope.getStatusMaster();
         
         $scope.load = function(id) {
             ReqOrgWorkflowMapping.get({id : id}, function(result) {
