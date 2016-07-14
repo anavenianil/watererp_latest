@@ -91,13 +91,15 @@ public class StatusMasterResource {
         log.debug("REST request to get a page of StatusMasters");
         //Page<StatusMaster> page = statusMasterRepository.findAll(pageable);
         Page<StatusMaster> page;
-        List<String> description = new ArrayList();
-        description.add(description1);
-        if(description2 != null){
-        	description.add(description2);
-        }
-        if(description != null){
-        	page = statusMasterRepository.findByDescriptionIn(pageable, description);
+        List<String> descriptions = new ArrayList();
+        if(description1 !=null ||description2 != null){
+        	if(description1 !=null){
+        		descriptions.add(description1);
+        		if(description2 !=null){
+        			descriptions.add(description2);
+        		}
+        	}
+        	page = statusMasterRepository.findByDescriptionIn(pageable, descriptions);
         }else{
         	page = statusMasterRepository.findAll(pageable);
         }

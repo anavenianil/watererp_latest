@@ -56,6 +56,7 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
             $scope.$emit('watererpApp:empMasterUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('empMaster');
         };
 
         var onSaveError = function (result) {
