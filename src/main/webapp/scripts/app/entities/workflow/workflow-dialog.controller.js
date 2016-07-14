@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller('WorkflowDialogController',
         function($scope, $state, $stateParams, Workflow, WorkflowMaster, WorkflowRelations, OrgRoleInstance, WorkflowRelationships, 
-        		WorkflowStageMaster, ParseLinks, $http) {
+        		WorkflowStageMaster, ParseLinks, $http, $window) {
 
         $scope.workflow = {};
         $scope.workflowmasters = WorkflowMaster.query();
@@ -69,6 +69,7 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         			$scope.workflowDTO).then(
 					function(response) {
 						$scope.isSaving = false;
+						$window.location.reload();
 						/*console.log("Server response:"
 								+ JSON.stringify(response));*/
 					});
@@ -138,10 +139,13 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         }
         
         //for removing items
-        $scope.removeItemArr = function(indexId) { 
+        $scope.removeItemArr = function(indexId, id) { 
         	  $scope.workflows.splice(indexId, 1);   
         	  $scope.count = $scope.count -1;
-        	  //$scope.assign();
+        	  if(id != null){
+        		//$state.go('workflow.delete',{id:id});  
+                    Workflow.delete({id: id});
+        	  }
         	}
           
           $scope.makeToRoleNull = function(relationId, indexId){
