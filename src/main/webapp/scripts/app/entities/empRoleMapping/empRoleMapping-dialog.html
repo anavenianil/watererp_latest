@@ -14,6 +14,32 @@
 				id="id" name="id" ng-model="empRoleMapping.id" readonly />
 		</div>
 		<div class="form-group">
+			<label for="field_user">User</label> <select class="form-control"
+				id="field_user" name="user" ng-model="empRoleMapping.user"
+				ng-options="user as user.firstName +' '+user.lastName+'('+user.login+')' for user in users track by user.id"
+				required>
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_orgRoleInstance">Organization Role Instance</label>
+			<select class="form-control" id="field_orgRoleInstance"
+				name="orgRoleInstance" ng-model="empRoleMapping.orgRoleInstance"
+				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id"
+				required>
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_statusMaster">Status Master</label> <select
+				class="form-control" id="field_statusMaster" name="statusMaster"
+				ng-model="empRoleMapping.statusMaster"
+				ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id"
+				required>
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
 			<label class="control-label" for="field_internalDivision">Internal
 				Division</label> <input type="text" class="form-control"
 				name="internalDivision" id="field_internalDivision"
@@ -57,14 +83,7 @@
 				ng-model="empRoleMapping.parentRoleId" />
 		</div>
 
-		<div class="form-group">
-			<label for="field_user">User</label> <select class="form-control"
-				id="field_user" name="user" ng-model="empRoleMapping.user"
-				ng-options="user as user.firstName +' '+user.lastName+'('+user.login+')' for user in users track by user.id"
-				required>
-				<option value=""></option>
-			</select>
-		</div>
+		
 		<div class="form-group">
 			<label for="field_parentUser">Parent User</label> <select
 				class="form-control" id="field_parentUser" name="parentUser"
@@ -73,24 +92,8 @@
 				<option value=""></option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="field_orgRoleInstance">Organization Role Instance</label>
-			<select class="form-control" id="field_orgRoleInstance"
-				name="orgRoleInstance" ng-model="empRoleMapping.orgRoleInstance"
-				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id"
-				required>
-				<option value=""></option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="field_statusMaster">Status Master</label> <select
-				class="form-control" id="field_statusMaster" name="statusMaster"
-				ng-model="empRoleMapping.statusMaster"
-				ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id"
-				required>
-				<option value=""></option>
-			</select>
-		</div>
+		
+		
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal"
