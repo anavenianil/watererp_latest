@@ -47,17 +47,11 @@ angular.module('watererpApp').controller('WorkflowDialogController',
 
         $scope.save1 = function () {
             $scope.isSaving = true;
-            
-            for(var i=0; i<$scope.workflows.length; i++){
-            	$scope.workflows[i].workflowMaster = $scope.workflowMaster;
             	if ($scope.workflows[i].id != null) {
-            		//Workflow.update($scope.workflows[i], onSaveSuccess, onSaveError);
-                    //Workflow.update($scope.workflow, onSaveSuccess, onSaveError);
+                    Workflow.update($scope.workflow, onSaveSuccess, onSaveError);
                 } else {
-                	//Workflow.save($scope.workflows[i],onSaveSuccess, onSaveError);
-                    //Workflow.save($scope.workflow, onSaveSuccess, onSaveError);
+                    Workflow.save($scope.workflow, onSaveSuccess, onSaveError);
                 }
-            }
         };
 
         $scope.clear = function() {
@@ -131,23 +125,24 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         
         //create array for items
         $scope.createItemArr = function(){
-       		$scope.workflows[$scope.count]= {};
-       		$scope.count = $scope.count +1;
-       		if($scope.count == 1){
-       			$scope.workflows[$scope.count-1].stageId = 1;
-       		}
-       		else{
-       			$scope.assign();
-       		}
+        	if($scope.workflows != null){
+        		$scope.workflows[$scope.count]= {};
+           		$scope.count = $scope.count +1;
+           		if($scope.count == 1){
+           			$scope.workflows[$scope.count-1].stageId = 1;
+           		}
+           		else{
+           			$scope.assign();
+           		}
+        	}
         }
         
         //for removing items
-        $scope.removeItemArr = function(indexId) {
-        	//$scope.workflows[$scope.count]= {}
-        	$scope.count = $scope.count -1;
-        	//$scope.workflows[$scope.count].splice = {};
-            $scope.workflows[$scope.count].splice(indexId, 1);
-          };
+        $scope.removeItemArr = function(indexId) { 
+        	  $scope.workflows.splice(indexId, 1);   
+        	  $scope.count = $scope.count -1;
+        	  //$scope.assign();
+        	}
           
           $scope.makeToRoleNull = function(relationId, indexId){
         	  if(relationId == 1){//when relative absolute is null

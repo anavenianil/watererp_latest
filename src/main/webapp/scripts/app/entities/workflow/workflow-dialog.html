@@ -41,7 +41,8 @@
 						<div class="col-sm-1">
 							<label class="control-label" for="field_stageId">Stage Id</label>
 							<input type="number" class="form-control" name="stageId" min="1"
-								id="field_stageId" ng-model="workflow.stageId" disabled />
+								id="field_stageId" ng-model="workflow.stageId" 
+								disabled />
 						</div>
 						<div class="col-sm-2">
 							<label for="field_relativeFromRole">Relative From Role</label> <select
@@ -90,7 +91,7 @@
 								<option value=""></option>
 							</select>
 						</div>
-						<div class="col-sm-1">
+						<div class="col-sm-1" ng-hide="$index == 0">
 							<label>Remove</label>
 							<button type="button" class="btn btn-danger"
 								ng-click="removeItemArr($index)">
