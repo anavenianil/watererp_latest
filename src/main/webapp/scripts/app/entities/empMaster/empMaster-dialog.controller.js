@@ -3,7 +3,7 @@
 angular.module('watererpApp').controller('EmpMasterDialogController',
     /*['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpMaster', 'User', 'OrgRoleInstance', 'DesignationMaster', 'StatusMaster',*/
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ EmpMaster, User, OrgRoleInstance, DesignationMaster, StatusMaster, 
-        		$http, ParseLinks) {
+        		$http, ParseLinks, $state	) {
 
         $scope.empMaster = {};
         //$scope.users = User.query();

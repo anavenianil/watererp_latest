@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController',
-        function($scope, $stateParams, ReqOrgWorkflowMapping, WorkflowMaster, RequestMaster, OrgRoleInstance, StatusMaster, $http, ParseLinks) {
+        function($scope, $stateParams, ReqOrgWorkflowMapping, WorkflowMaster, RequestMaster, OrgRoleInstance, StatusMaster, $http, ParseLinks, $state) {
 
         $scope.reqOrgWorkflowMapping = {};
         $scope.workflowmasters = WorkflowMaster.query();
@@ -44,6 +44,7 @@ angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController'
             $scope.$emit('watererpApp:reqOrgWorkflowMappingUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('reqOrgWorkflowMapping');
         };
 
         var onSaveError = function (result) {
@@ -61,6 +62,7 @@ angular.module('watererpApp').controller('ReqOrgWorkflowMappingDialogController'
 
         $scope.clear = function() {
             //$uibModalInstance.dismiss('cancel');
+        	$state.go('reqOrgWorkflowMapping');
         };
         $scope.datePickerForCreationDate = {};
 

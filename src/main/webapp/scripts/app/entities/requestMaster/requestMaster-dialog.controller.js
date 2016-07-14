@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('watererpApp').controller('RequestMasterDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'RequestMaster', 'StatusMaster', 'Module',
-        function($scope, $stateParams, $uibModalInstance, entity, RequestMaster, StatusMaster, Module) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'RequestMaster', 'StatusMaster', 'Module', 'ParseLinks',
+        function($scope, $stateParams, $uibModalInstance, entity, RequestMaster, StatusMaster, Module, ParseLinks) {
 
         $scope.requestMaster = entity;
-        $scope.statusmasters = StatusMaster.query();
+        //$scope.statusmasters = StatusMaster.query();
         $scope.modules = Module.query();
         $scope.load = function(id) {
             RequestMaster.get({id : id}, function(result) {
@@ -13,6 +13,17 @@ angular.module('watererpApp').controller('RequestMasterDialogController',
             });
         };
 
+        $scope.getStatusMaster = function() {
+        	$scope.statusmasters = [];
+            StatusMaster.query({page: $scope.page, size: 20, description1:"GENERAL"} , function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.statusmasters.push(result[i]);
+                }
+            });
+        };
+        $scope.getStatusMaster();
+        
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:requestMasterUpdate', result);
             $uibModalInstance.close(result);
