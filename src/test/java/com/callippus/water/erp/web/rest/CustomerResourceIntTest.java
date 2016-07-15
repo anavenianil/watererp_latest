@@ -25,6 +25,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,11 +47,11 @@ import com.callippus.water.erp.domain.enumeration.ChangeCaseType;
 public class CustomerResourceIntTest {
 
 
-    private static final Float DEFAULT_PREV_METER_READING = 1F;
-    private static final Float UPDATED_PREV_METER_READING = 2F;
+    private static final BigDecimal DEFAULT_PREV_METER_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_PREV_METER_READING = new BigDecimal(2);
 
-    private static final Float DEFAULT_NEW_METER_READING = 1F;
-    private static final Float UPDATED_NEW_METER_READING = 2F;
+    private static final BigDecimal DEFAULT_NEW_METER_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_NEW_METER_READING = new BigDecimal(2);
 
     private static final Boolean DEFAULT_ORGANIZATION = false;
     private static final Boolean UPDATED_ORGANIZATION = true;
@@ -240,8 +241,8 @@ public class CustomerResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(customer.getId().intValue())))
-                .andExpect(jsonPath("$.[*].prevMeterReading").value(hasItem(DEFAULT_PREV_METER_READING.doubleValue())))
-                .andExpect(jsonPath("$.[*].newMeterReading").value(hasItem(DEFAULT_NEW_METER_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].prevMeterReading").value(hasItem(DEFAULT_PREV_METER_READING.intValue())))
+                .andExpect(jsonPath("$.[*].newMeterReading").value(hasItem(DEFAULT_NEW_METER_READING.intValue())))
                 .andExpect(jsonPath("$.[*].organization").value(hasItem(DEFAULT_ORGANIZATION.booleanValue())))
                 .andExpect(jsonPath("$.[*].organizationName").value(hasItem(DEFAULT_ORGANIZATION_NAME.toString())))
                 .andExpect(jsonPath("$.[*].designation").value(hasItem(DEFAULT_DESIGNATION.toString())))
@@ -276,8 +277,8 @@ public class CustomerResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(customer.getId().intValue()))
-            .andExpect(jsonPath("$.prevMeterReading").value(DEFAULT_PREV_METER_READING.doubleValue()))
-            .andExpect(jsonPath("$.newMeterReading").value(DEFAULT_NEW_METER_READING.doubleValue()))
+            .andExpect(jsonPath("$.prevMeterReading").value(DEFAULT_PREV_METER_READING.intValue()))
+            .andExpect(jsonPath("$.newMeterReading").value(DEFAULT_NEW_METER_READING.intValue()))
             .andExpect(jsonPath("$.organization").value(DEFAULT_ORGANIZATION.booleanValue()))
             .andExpect(jsonPath("$.organizationName").value(DEFAULT_ORGANIZATION_NAME.toString()))
             .andExpect(jsonPath("$.designation").value(DEFAULT_DESIGNATION.toString()))

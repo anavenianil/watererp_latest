@@ -26,67 +26,67 @@
         {
             "fieldId": 1,
             "fieldName": "subTotalA",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 2,
             "fieldName": "supervisionCharge",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 3,
             "fieldName": "labourCharge",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 4,
             "fieldName": "siteSurvey",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 5,
             "fieldName": "subTotalB",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 6,
             "fieldName": "connectionFee",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 7,
             "fieldName": "waterMeterShs",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 8,
             "fieldName": "applicationFormFee",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 9,
             "fieldName": "grandTotal",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 10,
             "fieldName": "supervisionPercent",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 11,
             "fieldName": "labourChargePercent",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 12,
             "fieldName": "siteSurveyPercent",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 13,
             "fieldName": "ConnectionFeePercent",
-            "fieldType": "Double"
+            "fieldType": "BigDecimal"
         }
     ],
     "changelogDate": "20160330095504",

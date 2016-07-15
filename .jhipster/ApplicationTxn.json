@@ -174,7 +174,7 @@
         {
             "fieldId": 25,
             "fieldName": "meterReading",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 26,

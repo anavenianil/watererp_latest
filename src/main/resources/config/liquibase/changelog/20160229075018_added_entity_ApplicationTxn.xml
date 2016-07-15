@@ -69,7 +69,7 @@
             
             <column name="status" type="integer"/>
             
-            <column name="meter_reading" type="${floatType}"/>
+            <column name="meter_reading" type="decimal(20,3)"/>
             
             <column name="requested_date" type="date"/>
             

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -31,8 +32,8 @@ public class ConnectionTerminate implements Serializable {
     @Column(name = "meter_recovered")
     private Boolean meterRecovered;
     
-    @Column(name = "last_meter_reading")
-    private Float lastMeterReading;
+    @Column(name = "last_meter_reading", precision=10, scale=2)
+    private BigDecimal lastMeterReading;
     
     @Column(name = "meter_recovered_date")
     private LocalDate meterRecoveredDate;
@@ -73,11 +74,11 @@ public class ConnectionTerminate implements Serializable {
         this.meterRecovered = meterRecovered;
     }
 
-    public Float getLastMeterReading() {
+    public BigDecimal getLastMeterReading() {
         return lastMeterReading;
     }
     
-    public void setLastMeterReading(Float lastMeterReading) {
+    public void setLastMeterReading(BigDecimal lastMeterReading) {
         this.lastMeterReading = lastMeterReading;
     }
 

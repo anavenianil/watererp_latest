@@ -150,14 +150,11 @@
 									<input type="checkbox" class="form-control" name="organization"
 										ng-disabled="applicationTxn.tariffCategoryMaster.id===1"
 										id="field_organization" ng-model="applicationTxn.organization" />
-
-
 								</div>
 								<div class="col-sm-4">
 									<div class="form-group"
 										ng-class="{'has-error': editForm.organizationName.$invalid && 
                                 (editForm.organizationName.$dirty || rc.editForm.attempted)}">
-
 										<label class="control-label" for="field_organizationName">Organization
 											Name</label> <input type="text" class="form-control text-uppercase"
 											name="organizationName" id="field_organizationName"
@@ -361,7 +358,6 @@
 											<p class="help-block"
 												ng-show="editForm.propertyDoc.$error.required">Any one
 												check-box is required.</p>
-
 										</div>
 									</div>
 								</div>

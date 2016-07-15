@@ -40,12 +40,12 @@
      	{
             "fieldId": 1,
             "fieldName": "prevMeterReading",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 2,
             "fieldName": "newMeterReading",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 3,

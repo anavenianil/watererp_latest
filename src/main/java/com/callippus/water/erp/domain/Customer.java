@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -27,11 +28,11 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "prev_meter_reading")
-    private Float prevMeterReading;
+    @Column(name = "prev_meter_reading", precision=20, scale=3)
+    private BigDecimal prevMeterReading;
     
-    @Column(name = "new_meter_reading")
-    private Float newMeterReading;
+    @Column(name = "new_meter_reading", precision=20, scale=3)
+    private BigDecimal newMeterReading;
     
     @Column(name = "organization")
     private Boolean organization;
@@ -128,19 +129,19 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    public Float getPrevMeterReading() {
+    public BigDecimal getPrevMeterReading() {
         return prevMeterReading;
     }
     
-    public void setPrevMeterReading(Float prevMeterReading) {
+    public void setPrevMeterReading(BigDecimal prevMeterReading) {
         this.prevMeterReading = prevMeterReading;
     }
 
-    public Float getNewMeterReading() {
+    public BigDecimal getNewMeterReading() {
         return newMeterReading;
     }
     
-    public void setNewMeterReading(Float newMeterReading) {
+    public void setNewMeterReading(BigDecimal newMeterReading) {
         this.newMeterReading = newMeterReading;
     }
 
