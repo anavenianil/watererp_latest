@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -37,8 +38,8 @@ public class CustomerComplaints implements Serializable {
     @Column(name = "can")
     private String can;
     
-    @Column(name = "adjustment_amt")
-    private Float adjustmentAmt;
+    @Column(name = "adjustment_amt", precision=20, scale=3)
+    private BigDecimal adjustmentAmt;
     
     @Column(name = "adjustment_bill_id")
     private String adjustmentBillId;
@@ -98,11 +99,11 @@ public class CustomerComplaints implements Serializable {
         this.can = can;
     }
 
-    public Float getAdjustmentAmt() {
+    public BigDecimal getAdjustmentAmt() {
         return adjustmentAmt;
     }
     
-    public void setAdjustmentAmt(Float adjustmentAmt) {
+    public void setAdjustmentAmt(BigDecimal adjustmentAmt) {
         this.adjustmentAmt = adjustmentAmt;
     }
 

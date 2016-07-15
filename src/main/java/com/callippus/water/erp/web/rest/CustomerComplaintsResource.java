@@ -149,11 +149,19 @@ public class CustomerComplaintsResource {
 			adjustments.setCustDetails(custDetails);
 			adjustments.setAmount(amount.abs());
 			
-			Float amt = customerComplaints.getAdjustmentAmt();
+			/*Float amt = customerComplaints.getAdjustmentAmt(); //commented by mohib after changing float to bigdecimal
 
 			if (amt < 0) { //Debit
 				ttm = transactionTypeMasterRepository.findOne(2L);
 			} else if (amt > 0) { //Credit
+				ttm = transactionTypeMasterRepository.findOne(1L);
+			}*/
+			BigDecimal amt = customerComplaints.getAdjustmentAmt();
+
+			int res = amt.compareTo(new BigDecimal("0"));
+			if (res == -1) { //Debit
+				ttm = transactionTypeMasterRepository.findOne(2L);
+			} else if (res == 1) { //Credit
 				ttm = transactionTypeMasterRepository.findOne(1L);
 			}
 

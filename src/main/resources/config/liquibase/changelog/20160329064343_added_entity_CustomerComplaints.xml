@@ -31,7 +31,7 @@
             
             <column name="can" type="varchar(255)"/>
             
-            <column name="adjustment_amt" type="${floatType}"/>
+            <column name="adjustment_amt" type="decimal(20,3)"/>
             
             <column name="adjustment_bill_id" type="varchar(255)"/>
             

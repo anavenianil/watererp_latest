@@ -37,7 +37,7 @@
         {
             "fieldId": 6,
             "fieldName": "adjustmentAmt",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 7,

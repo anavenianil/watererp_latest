@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks, $http, CustDetailsSearchCAN) {
+    .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks, $http, CustDetailsSearchCAN, TariffCategoryMaster) {
 
         $scope.custDetailss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.tariffcategorymasters = TariffCategoryMaster.query();
         $scope.loadAll = function() {
             CustDetails.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -126,4 +127,15 @@ angular.module('watererpApp')
 			$state.go('custDetails.detail',{id:$scope.custDetails.id});
 			//$scope.load($scope.custDetails.id);
 		};
+		
+		$scope.getCustDetailsByCategory = function(categoryId){
+			$scope.custDetailss=[];
+            CustDetails.query({page: $scope.page, size: 20, categoryId: categoryId}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.custDetailss.push(result[i]);
+                }
+            });
+        
+		}
     });
