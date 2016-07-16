@@ -1,14 +1,58 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CustDetailsController', function ($scope, $state, CustDetails, ParseLinks, $http, CustDetailsSearchCAN, TariffCategoryMaster) {
+    .controller('CustDetailsReportController', function ($scope, $state, CustDetails, ParseLinks, $http, CustDetailsSearchCAN, 
+    		TariffCategoryMaster, DivisionMaster) {
 
         $scope.custDetailss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.tariffcategorymasters = TariffCategoryMaster.query();
+        $scope.divisionmasters = DivisionMaster.query();
         $scope.categoryId =null;
+        
+        
+        $scope.getCustDetailsByCategory = function(categoryId){
+        	$scope.custCategoryCount = [];
+			return $http.get('/api/custDetails/getAll',
+					categoryId).then(function(response) {
+						$scope.custCategoryCount = response.data;
+					});
+        }
+        
+        $scope.custDetailsReportDTO = {};
+        $scope.getCustDetailsByDma = function(dmaId){
+        	$scope.custDetailsReportDTO.dmaId = dmaId;
+        	
+        	return $http.post('/api/custDetails/getAll',
+        			$scope.custDetailsReportDTO).then(
+					function(response) {
+						$scope.custDetailsReportDTO = response.data;
+					});
+        }
+        
+        
+        
+        /*$scope.getCustDetailsByDma = function(dmaId) {
+        	$scope.custDetailsReportDTO.dmaId = dmaId;
+			return $http.get('/api/custDetails/getAll',
+					$scope.custDetailsReportDTO).then(
+					function(response) {
+						$scope.custDetails = response.data.custDetails;
+					});
+		}*/
+        
+        /*$scope.getCustDetailsByDma = function(dmaId){
+        	return $http.get('/api/custDetails/getAll',
+        			dmaId).then(function(response) {
+				$scope.custCategoryCount = response.data;
+			});
+        }*/
+        
+        
+        
+        
         /*$scope.loadAll = function() {
             CustDetails.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -25,66 +69,19 @@ angular.module('watererpApp')
         $scope.loadPage = function(page) {
             $scope.page = page;
             //$scope.loadAll();
-            $scope.getCustDetailsByCategory($scope.categoryId);
+            //$scope.getCustDetailsByCategory($scope.categoryId);
         };
         //$scope.loadAll();
 
 
         $scope.refresh = function () {
             $scope.reset();
-            $scope.clear();
         };
 
-        $scope.clear = function () {
-            $scope.custDetails = {
-                can: null,
-                divCode: null,
-                secCode: null,
-                secName: null,
-                metReaderCode: null,
-                connDate: null,
-                consName: null,
-                houseNo: null,
-                address: null,
-                city: null,
-                pinCode: null,
-                categoryUnused: null,
-                pipeSize: null,
-                boardMeter: null,
-                sewerage: null,
-                meterNo: null,
-                prevBillType: null,
-                prevBillMonth: null,
-                prevAvgKl: null,
-                metReadingDt: null,
-                prevReading: null,
-                metReadingMo: null,
-                metAvgKl: null,
-                arrears: null,
-                reversalAmt: null,
-                installment: null,
-                otherCharges: null,
-                surcharge: null,
-                hrsSurcharge: null,
-                resUnits: null,
-                metCostInstallment: null,
-                intOnArrears: null,
-                lastPymtDt: null,
-                lastPymtAmt: null,
-                mobileNo: null,
-                ccFlag: null,
-                cpFlag: null,
-                noticeFlag: null,
-                drFlag: null,
-                lat: null,
-                longi: null,
-                meterFixDate: null,
-                id: null
-            };
-        };
+        
         
      // to search CAN
-		$scope.getLocation = function(val) {
+		/*$scope.getLocation = function(val) {
 			$scope.isValidCust = false;
 			return $http.get('api/custDetailss/searchCAN/' + val, {
 				params : {
@@ -97,7 +94,7 @@ angular.module('watererpApp')
 				});
 				return res;
 			});
-		}
+		}*/
 		
 		// get cust details by CAN
 		/*$scope.getCustDetails = function(can) {
@@ -108,17 +105,17 @@ angular.module('watererpApp')
 							});
 		};*/
 		
-		$scope.load = function(id) {
+		/*$scope.load = function(id) {
         	$scope.custDetailss=[];
         	CustDetails.get({
 				id : id
 			}, function(result) {
 				$scope.custDetailss.push(result);
 			});
-		};
+		};*/
 		
 		// when selected searched CAN in DropDown
-		$scope.onSelect = function($item, $model, $label) {
+		/*$scope.onSelect = function($item, $model, $label) {
 			console.log($item);
 			var arr = $item.split("-");			
 			$scope.custDetails = {};
@@ -128,9 +125,9 @@ angular.module('watererpApp')
 			$scope.custDetails.id = arr[3];
 			$state.go('custDetails.detail',{id:$scope.custDetails.id});
 			//$scope.load($scope.custDetails.id);
-		};
+		};*/
 		
-		$scope.custDetailss=[];
+		/*$scope.custDetailss=[];
 		$scope.getCustDetailsByCategory = function(categoryId){
 			if($scope.categoryId != categoryId){
 				$scope.page = 0;
@@ -144,5 +141,5 @@ angular.module('watererpApp')
                 }
             });
 		}
-		$scope.getCustDetailsByCategory($scope.categoryId);
+		$scope.getCustDetailsByCategory($scope.categoryId);*/
     });

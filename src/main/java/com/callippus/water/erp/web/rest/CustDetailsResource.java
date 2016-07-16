@@ -1,11 +1,18 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.CustDetails;
-import com.callippus.water.erp.repository.CustDetailsCustomRepository;
-import com.callippus.water.erp.repository.CustDetailsRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,15 +22,25 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.CustDetailsReportDTO;
+import com.callippus.water.erp.domain.DivisionMaster;
+import com.callippus.water.erp.domain.TariffCategoryMaster;
+import com.callippus.water.erp.repository.CustDetailsCustomRepository;
+import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.DivisionMasterRepository;
+import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
+import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing CustDetails.
@@ -39,6 +56,12 @@ public class CustDetailsResource {
     
 	@Inject
 	private CustDetailsCustomRepository custDetailsCustomRepository;
+	
+	@Inject
+	private TariffCategoryMasterRepository tariffCategoryMasterRepository;
+	
+	@Inject
+	private DivisionMasterRepository divisionMasterRepository;
     /**
      * POST  /custDetailss -> Create a new custDetails.
      */
@@ -82,10 +105,19 @@ public class CustDetailsResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<CustDetails>> getAllCustDetailss(Pageable pageable)
+    public ResponseEntity<List<CustDetails>> getAllCustDetailss(Pageable pageable,
+    		@RequestParam(value = "categoryId", required = false) Long categoryId)
         throws URISyntaxException {
         log.debug("REST request to get a page of CustDetailss");
-        Page<CustDetails> page = custDetailsRepository.findAll(pageable); 
+        //Page<CustDetails> page = custDetailsRepository.findAll(pageable);
+        Page<CustDetails> page;
+        if(categoryId !=null){
+        	TariffCategoryMaster tariffCategoryMaster = tariffCategoryMasterRepository.findOne(categoryId);
+        	page = custDetailsRepository.findByTariffCategoryMaster(pageable, tariffCategoryMaster);
+        	
+        }else{
+        	page = custDetailsRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custDetailss");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -152,6 +184,74 @@ public class CustDetailsResource {
         custDetailsRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("custDetails", id.toString())).build();
     }
+    
+    
+    
+    /**
+     * Get By Category Count
+     */
+    /*@RequestMapping(value = "/custDetails/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<CustDetails>> getCategoryCount(@RequestBody Long dmaId)
+			throws Exception {
+    	log.debug("REST request to getCaterogoryCount : {}");
+    	
+    	//List<TariffCategoryMaster> lists = custDetailsRepository.countByTariffCategorMaster(dmaId);
+    	
+    	List<CustDetails> categoryCount = custDetailsRepository.findAll();
+    
+    	return Optional.ofNullable(categoryCount)
+				.map(result -> new ResponseEntity<>(categoryCount, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}*/
+    
+    
+    @RequestMapping(value = "/custDetails/getAll", 
+			method = RequestMethod.POST, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<CustDetailsReportDTO> getCustDetailsReport(
+			@RequestBody CustDetailsReportDTO custDetailsReportDTO) throws URISyntaxException {
+		log.debug("REST request to save Customer : {}", custDetailsReportDTO);
+		
+			Long totalConnection = custDetailsRepository.count();
+			custDetailsReportDTO.setTotalConnection(totalConnection);
+			if(custDetailsReportDTO.getDmaId()!=null){
+				DivisionMaster divisionMaster = divisionMasterRepository.findOne(custDetailsReportDTO.getDmaId());
+				Long totalInOneDma = custDetailsRepository.countByDivisionMaster(divisionMaster);
+				custDetailsReportDTO.setDmaName(divisionMaster.getDivisionName());
+				custDetailsReportDTO.setTotalInOneDma(totalInOneDma);
+
+				List<CustDetails> custDetailss = custDetailsRepository.findByDivisionMaster(divisionMaster);
+				Set<TariffCategoryMaster> items = new HashSet<TariffCategoryMaster>();
+		        Iterator<CustDetails> iterator = custDetailss.iterator();
+		        TariffCategoryMaster tariffCategoryMaster = null;
+		        while(iterator.hasNext()){
+		        	tariffCategoryMaster = iterator.next().getTariffCategoryMaster();
+		        	items.add(tariffCategoryMaster);
+		         }
+		        HashMap<String,Integer> hm=new HashMap<String,Integer>();
+	
+				for (TariffCategoryMaster row : items) {
+					String key = row.getTariffCategory();
+					TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(row.getId());
+					Integer value = custDetailsRepository.countByTariffCategoryMasterAndDivisionMaster(tcm, divisionMaster);
+					hm.put(key, value);
+				}
+	        
+	        custDetailsReportDTO.setTariffCategoryMasters(items);
+	        custDetailsReportDTO.setTariffsCounts(hm);
+		}
+		return Optional.ofNullable(custDetailsReportDTO)
+				.map(result -> new ResponseEntity<>(custDetailsReportDTO, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+    
+    
+    
+    
     
 /*    *//**
      * GET  /custDetailss/:can -> get the "can" custDetails.

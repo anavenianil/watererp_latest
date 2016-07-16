@@ -27,6 +27,17 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-4">
+						<label for="field_divisionMaster">DMA</label> <select
+							class="form-control" id="field_divisionMaster"
+							name="divisionMaster" ng-model="custDetails.divisionMaster"
+							ng-change="getCustDetailsByDma(custDetails.divisionMaster.id)"
+							ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
+							required>
+							<option value="">All</option>
+						</select>
+					</div>
+
+					<div class="col-sm-4">
 						<label for="field_tariffCategoryMaster">Connection
 							Category</label> <select class="form-control"
 							id="field_tariffCategoryMaster" name="tariffCategoryMaster"
@@ -34,12 +45,25 @@
 							ng-change="getCustDetailsByCategory(custDetails.tariffCategoryMaster.id)"
 							ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
 							required>
-							<option value=""></option>
+							<option value="">All</option>
 						</select>
 					</div>
+
 				</div>
 				<hr>
-				<div class="table-responsive">
+				<div>
+					<label> Total Connection :
+						{{custDetailsReportDTO.totalConnection}}</label><br /> <label>
+						Total In DMA {{custDetailsReportDTO.dmaName}} :
+						{{custDetailsReportDTO.totalInOneDma}}</label><br /> <label>
+						Category :</label>
+					<div
+						ng-repeat="tariffsCount in custDetailsReportDTO.tariffsCounts">
+						<span>{{tariffsCount}}</span>
+					</div>
+
+				</div>
+				<!-- <div class="table-responsive">
 					<table class="table table-striped">
 						<thead>
 							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
@@ -89,7 +113,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
