@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.DivisionMaster;
+import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 
 /**
@@ -43,4 +44,8 @@ public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 	
 	//public List<CustDetails> findByTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster);
 	public Integer countByTariffCategoryMasterAndDivisionMaster(TariffCategoryMaster tariffCategoryMaster, DivisionMaster divisionMaster);
+	public List<CustDetails> findByTariffCategoryMasterAndDivisionMasterAndMeterDetails(TariffCategoryMaster tariffCategoryMaster, 
+			DivisionMaster DivisionMaster, MeterDetails meterDetails);
+	public List<CustDetails> findByTariffCategoryMasterAndDivisionMaster(TariffCategoryMaster tariffCategoryMaster, 
+			DivisionMaster DivisionMaster);
 }

@@ -190,24 +190,6 @@ public class CustDetailsResource {
     /**
      * Get By Category Count
      */
-    /*@RequestMapping(value = "/custDetails/getAll",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-	public ResponseEntity<List<CustDetails>> getCategoryCount(@RequestBody Long dmaId)
-			throws Exception {
-    	log.debug("REST request to getCaterogoryCount : {}");
-    	
-    	//List<TariffCategoryMaster> lists = custDetailsRepository.countByTariffCategorMaster(dmaId);
-    	
-    	List<CustDetails> categoryCount = custDetailsRepository.findAll();
-    
-    	return Optional.ofNullable(categoryCount)
-				.map(result -> new ResponseEntity<>(categoryCount, HttpStatus.OK))
-				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-	}*/
-    
-    
     @RequestMapping(value = "/custDetails/getAll", 
 			method = RequestMethod.POST, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -243,6 +225,19 @@ public class CustDetailsResource {
 	        
 	        custDetailsReportDTO.setTariffCategoryMasters(items);
 	        custDetailsReportDTO.setTariffsCounts(hm);
+		}else{
+			List<DivisionMaster> divisionMasters = divisionMasterRepository.findAll();
+			List<CustDetails> custDetailss = new ArrayList<CustDetails>();
+			for (DivisionMaster row : divisionMasters) {
+				List<TariffCategoryMaster> tariffCategoryMasters = tariffCategoryMasterRepository.findAll();
+				for (TariffCategoryMaster tariffCategoryMaster : tariffCategoryMasters) {
+					List<CustDetails> custDetailss1 = new ArrayList<CustDetails>();
+					custDetailss1 = custDetailsRepository.findByTariffCategoryMasterAndDivisionMaster(
+							tariffCategoryMaster, row);
+					custDetailss.addAll(custDetailss1);
+					}
+			}
+			custDetailsReportDTO.setCustDetails(custDetailss);
 		}
 		return Optional.ofNullable(custDetailsReportDTO)
 				.map(result -> new ResponseEntity<>(custDetailsReportDTO, HttpStatus.OK))
