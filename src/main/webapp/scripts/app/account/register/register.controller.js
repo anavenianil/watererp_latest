@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('RegisterController', function ($scope, $timeout, Auth) {
+    .controller('RegisterController', function ($scope, $timeout, Auth, $state) {
     	
     	console.log("page: register.controller.js");
         
@@ -24,6 +24,7 @@ angular.module('watererpApp')
 
                 Auth.createAccount($scope.registerAccount).then(function () {
                     $scope.success = 'OK';
+                    $state.go('user-management');
                 }).catch(function (response) {
                     $scope.success = null;
                     if (response.status === 400 && response.data === 'login already in use') {
