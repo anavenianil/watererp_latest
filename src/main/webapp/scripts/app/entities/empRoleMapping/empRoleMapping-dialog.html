@@ -22,7 +22,7 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="field_orgRoleInstance">Organization Role Instance</label>
+			<label for="field_orgRoleInstance">Organization Role</label>
 			<select class="form-control" id="field_orgRoleInstance"
 				name="orgRoleInstance" ng-model="empRoleMapping.orgRoleInstance"
 				ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id"
@@ -39,18 +39,18 @@
 				<option value=""></option>
 			</select>
 		</div>
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<label class="control-label" for="field_internalDivision">Internal
 				Division</label> <input type="text" class="form-control"
 				name="internalDivision" id="field_internalDivision"
 				ng-model="empRoleMapping.internalDivision" />
-		</div>
-		<div class="form-group">
+		</div> -->
+		<!-- <div class="form-group">
 			<label class="control-label" for="field_internalRole">Internal
 				Role</label> <input type="text" class="form-control" name="internalRole"
 				id="field_internalRole" ng-model="empRoleMapping.internalRole" />
-		</div>
-		<div class="form-group">
+		</div> -->
+		<!-- <div class="form-group">
 			<label class="control-label" for="field_creationDate">Creation
 				Date</label> <input id="field_creationDate" type="text" class="form-control"
 				uib-datepicker-popup="{{dateformat}}"
@@ -62,8 +62,8 @@
 					<i class="glyphicon glyphicon-calendar"></i>
 				</button>
 			</span>
-		</div>
-		<div class="form-group">
+		</div> -->
+		<!-- <div class="form-group">
 			<label class="control-label" for="field_lastModifiedDate">Last
 				Modified Date</label> <input id="field_lastModifiedDate" type="text"
 				class="form-control" uib-datepicker-popup="{{dateformat}}"
@@ -75,25 +75,25 @@
 					<i class="glyphicon glyphicon-calendar"></i>
 				</button>
 			</span>
-		</div>
-		<div class="form-group">
+		</div> -->
+		<!-- <div class="form-group">
 			<label class="control-label" for="field_parentRoleId">Parent
 				Role Id</label> <input type="number" class="form-control"
 				name="parentRoleId" id="field_parentRoleId"
 				ng-model="empRoleMapping.parentRoleId" />
-		</div>
+		</div> -->
 
-		
-		<div class="form-group">
+
+		<!-- <div class="form-group">
 			<label for="field_parentUser">Parent User</label> <select
 				class="form-control" id="field_parentUser" name="parentUser"
 				ng-model="empRoleMapping.parentUser"
 				ng-options="user as user.login for user in users track by user.id">
 				<option value=""></option>
 			</select>
-		</div>
-		
-		
+		</div> -->
+
+
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal"
