@@ -22,17 +22,27 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="can" type="varchar(255)"/>
+            
             <column name="reason_for_change" type="varchar(255)"/>
-            <column name="prev_meter_reading" type="${floatType}"/>
-            <column name="new_meter_reading" type="${floatType}"/>
+            
+            <column name="prev_meter_reading" type="decimal(20,3)"/>
+            
+            <column name="new_meter_reading" type="decimal(20,3)"/>
+            
             <column name="remarks" type="varchar(255)"/>
+            
             <column name="approved_date" type="date"/>
-            <column name="status" type="integer"/>
+            
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            
             <column name="cust_details_id" type="bigint"/>
             <column name="prev_meter_no_id" type="bigint"/>
             <column name="new_meter_no_id" type="bigint"/>
             <column name="bill_full_details_id" type="bigint"/>
             <column name="user_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="cust_details_id"

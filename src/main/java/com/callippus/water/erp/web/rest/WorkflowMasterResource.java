@@ -1,10 +1,14 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.WorkflowMaster;
-import com.callippus.water.erp.repository.WorkflowMasterRepository;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,14 +17,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import com.callippus.water.erp.domain.WorkflowMaster;
+import com.callippus.water.erp.repository.StatusMasterRepository;
+import com.callippus.water.erp.repository.WorkflowMasterRepository;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing WorkflowMaster.
@@ -34,6 +42,9 @@ public class WorkflowMasterResource {
     @Inject
     private WorkflowMasterRepository workflowMasterRepository;
     
+    @Inject
+    private StatusMasterRepository statusMasterRepository;
+    
     /**
      * POST  /workflowMasters -> Create a new workflowMaster.
      */
@@ -46,6 +57,10 @@ public class WorkflowMasterResource {
         if (workflowMaster.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("workflowMaster", "idexists", "A new workflowMaster cannot already have an ID")).body(null);
         }
+        workflowMaster.setCreationDate(ZonedDateTime.now());
+        workflowMaster.setLastModifiedDate(ZonedDateTime.now());
+        workflowMaster.setToWorkflow(0);
+        workflowMaster.setStatusMaster(statusMasterRepository.findOne(2l));
         WorkflowMaster result = workflowMasterRepository.save(workflowMaster);
         return ResponseEntity.created(new URI("/api/workflowMasters/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("workflowMaster", result.getId().toString()))

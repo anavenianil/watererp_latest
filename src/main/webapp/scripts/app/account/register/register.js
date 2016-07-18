@@ -4,14 +4,18 @@ angular.module('watererpApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('register', {
-                parent: 'account',
+                parent: 'site',
                 url: '/register',
                 data: {
-                    authorities: [],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'Registration'
                 },
                 views: {
                     'content@': {
+                        templateUrl: 'scripts/app/account/register/register.html',
+                        controller: 'RegisterController'
+                    },
+                    'dashboard@': {
                         templateUrl: 'scripts/app/account/register/register.html',
                         controller: 'RegisterController'
                     }

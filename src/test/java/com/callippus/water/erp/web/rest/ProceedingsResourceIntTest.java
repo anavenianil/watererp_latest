@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,44 +43,44 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ProceedingsResourceIntTest {
 
 
-    private static final Double DEFAULT_SUB_TOTAL_A = 1D;
-    private static final Double UPDATED_SUB_TOTAL_A = 2D;
+    private static final BigDecimal DEFAULT_SUB_TOTAL_A = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SUB_TOTAL_A = new BigDecimal(2);
 
-    private static final Double DEFAULT_SUPERVISION_CHARGE = 1D;
-    private static final Double UPDATED_SUPERVISION_CHARGE = 2D;
+    private static final BigDecimal DEFAULT_SUPERVISION_CHARGE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SUPERVISION_CHARGE = new BigDecimal(2);
 
-    private static final Double DEFAULT_LABOUR_CHARGE = 1D;
-    private static final Double UPDATED_LABOUR_CHARGE = 2D;
+    private static final BigDecimal DEFAULT_LABOUR_CHARGE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_LABOUR_CHARGE = new BigDecimal(2);
 
-    private static final Double DEFAULT_SITE_SURVEY = 1D;
-    private static final Double UPDATED_SITE_SURVEY = 2D;
+    private static final BigDecimal DEFAULT_SITE_SURVEY = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SITE_SURVEY = new BigDecimal(2);
 
-    private static final Double DEFAULT_SUB_TOTAL_B = 1D;
-    private static final Double UPDATED_SUB_TOTAL_B = 2D;
+    private static final BigDecimal DEFAULT_SUB_TOTAL_B = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SUB_TOTAL_B = new BigDecimal(2);
 
-    private static final Double DEFAULT_CONNECTION_FEE = 1D;
-    private static final Double UPDATED_CONNECTION_FEE = 2D;
+    private static final BigDecimal DEFAULT_CONNECTION_FEE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CONNECTION_FEE = new BigDecimal(2);
 
-    private static final Double DEFAULT_WATER_METER_SHS = 1D;
-    private static final Double UPDATED_WATER_METER_SHS = 2D;
+    private static final BigDecimal DEFAULT_WATER_METER_SHS = new BigDecimal(1);
+    private static final BigDecimal UPDATED_WATER_METER_SHS = new BigDecimal(2);
 
-    private static final Double DEFAULT_APPLICATION_FORM_FEE = 1D;
-    private static final Double UPDATED_APPLICATION_FORM_FEE = 2D;
+    private static final BigDecimal DEFAULT_APPLICATION_FORM_FEE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_APPLICATION_FORM_FEE = new BigDecimal(2);
 
-    private static final Double DEFAULT_GRAND_TOTAL = 1D;
-    private static final Double UPDATED_GRAND_TOTAL = 2D;
+    private static final BigDecimal DEFAULT_GRAND_TOTAL = new BigDecimal(1);
+    private static final BigDecimal UPDATED_GRAND_TOTAL = new BigDecimal(2);
 
-    private static final Double DEFAULT_SUPERVISION_PERCENT = 1D;
-    private static final Double UPDATED_SUPERVISION_PERCENT = 2D;
+    private static final BigDecimal DEFAULT_SUPERVISION_PERCENT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SUPERVISION_PERCENT = new BigDecimal(2);
 
-    private static final Double DEFAULT_LABOUR_CHARGE_PERCENT = 1D;
-    private static final Double UPDATED_LABOUR_CHARGE_PERCENT = 2D;
+    private static final BigDecimal DEFAULT_LABOUR_CHARGE_PERCENT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_LABOUR_CHARGE_PERCENT = new BigDecimal(2);
 
-    private static final Double DEFAULT_SITE_SURVEY_PERCENT = 1D;
-    private static final Double UPDATED_SITE_SURVEY_PERCENT = 2D;
+    private static final BigDecimal DEFAULT_SITE_SURVEY_PERCENT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SITE_SURVEY_PERCENT = new BigDecimal(2);
 
-    private static final Double DEFAULT_CONNECTION_FEE_PERCENT = 1D;
-    private static final Double UPDATED_CONNECTION_FEE_PERCENT = 2D;
+    private static final BigDecimal DEFAULT_CONNECTION_FEE_PERCENT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_CONNECTION_FEE_PERCENT = new BigDecimal(2);
 
     @Inject
     private ProceedingsRepository proceedingsRepository;
@@ -164,19 +165,19 @@ public class ProceedingsResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(proceedings.getId().intValue())))
-                .andExpect(jsonPath("$.[*].subTotalA").value(hasItem(DEFAULT_SUB_TOTAL_A.doubleValue())))
-                .andExpect(jsonPath("$.[*].supervisionCharge").value(hasItem(DEFAULT_SUPERVISION_CHARGE.doubleValue())))
-                .andExpect(jsonPath("$.[*].labourCharge").value(hasItem(DEFAULT_LABOUR_CHARGE.doubleValue())))
-                .andExpect(jsonPath("$.[*].siteSurvey").value(hasItem(DEFAULT_SITE_SURVEY.doubleValue())))
-                .andExpect(jsonPath("$.[*].subTotalB").value(hasItem(DEFAULT_SUB_TOTAL_B.doubleValue())))
-                .andExpect(jsonPath("$.[*].connectionFee").value(hasItem(DEFAULT_CONNECTION_FEE.doubleValue())))
-                .andExpect(jsonPath("$.[*].waterMeterShs").value(hasItem(DEFAULT_WATER_METER_SHS.doubleValue())))
-                .andExpect(jsonPath("$.[*].applicationFormFee").value(hasItem(DEFAULT_APPLICATION_FORM_FEE.doubleValue())))
-                .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.doubleValue())))
-                .andExpect(jsonPath("$.[*].supervisionPercent").value(hasItem(DEFAULT_SUPERVISION_PERCENT.doubleValue())))
-                .andExpect(jsonPath("$.[*].labourChargePercent").value(hasItem(DEFAULT_LABOUR_CHARGE_PERCENT.doubleValue())))
-                .andExpect(jsonPath("$.[*].siteSurveyPercent").value(hasItem(DEFAULT_SITE_SURVEY_PERCENT.doubleValue())))
-                .andExpect(jsonPath("$.[*].ConnectionFeePercent").value(hasItem(DEFAULT_CONNECTION_FEE_PERCENT.doubleValue())));
+                .andExpect(jsonPath("$.[*].subTotalA").value(hasItem(DEFAULT_SUB_TOTAL_A.intValue())))
+                .andExpect(jsonPath("$.[*].supervisionCharge").value(hasItem(DEFAULT_SUPERVISION_CHARGE.intValue())))
+                .andExpect(jsonPath("$.[*].labourCharge").value(hasItem(DEFAULT_LABOUR_CHARGE.intValue())))
+                .andExpect(jsonPath("$.[*].siteSurvey").value(hasItem(DEFAULT_SITE_SURVEY.intValue())))
+                .andExpect(jsonPath("$.[*].subTotalB").value(hasItem(DEFAULT_SUB_TOTAL_B.intValue())))
+                .andExpect(jsonPath("$.[*].connectionFee").value(hasItem(DEFAULT_CONNECTION_FEE.intValue())))
+                .andExpect(jsonPath("$.[*].waterMeterShs").value(hasItem(DEFAULT_WATER_METER_SHS.intValue())))
+                .andExpect(jsonPath("$.[*].applicationFormFee").value(hasItem(DEFAULT_APPLICATION_FORM_FEE.intValue())))
+                .andExpect(jsonPath("$.[*].grandTotal").value(hasItem(DEFAULT_GRAND_TOTAL.intValue())))
+                .andExpect(jsonPath("$.[*].supervisionPercent").value(hasItem(DEFAULT_SUPERVISION_PERCENT.intValue())))
+                .andExpect(jsonPath("$.[*].labourChargePercent").value(hasItem(DEFAULT_LABOUR_CHARGE_PERCENT.intValue())))
+                .andExpect(jsonPath("$.[*].siteSurveyPercent").value(hasItem(DEFAULT_SITE_SURVEY_PERCENT.intValue())))
+                .andExpect(jsonPath("$.[*].ConnectionFeePercent").value(hasItem(DEFAULT_CONNECTION_FEE_PERCENT.intValue())));
     }
 
     @Test
@@ -190,19 +191,19 @@ public class ProceedingsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(proceedings.getId().intValue()))
-            .andExpect(jsonPath("$.subTotalA").value(DEFAULT_SUB_TOTAL_A.doubleValue()))
-            .andExpect(jsonPath("$.supervisionCharge").value(DEFAULT_SUPERVISION_CHARGE.doubleValue()))
-            .andExpect(jsonPath("$.labourCharge").value(DEFAULT_LABOUR_CHARGE.doubleValue()))
-            .andExpect(jsonPath("$.siteSurvey").value(DEFAULT_SITE_SURVEY.doubleValue()))
-            .andExpect(jsonPath("$.subTotalB").value(DEFAULT_SUB_TOTAL_B.doubleValue()))
-            .andExpect(jsonPath("$.connectionFee").value(DEFAULT_CONNECTION_FEE.doubleValue()))
-            .andExpect(jsonPath("$.waterMeterShs").value(DEFAULT_WATER_METER_SHS.doubleValue()))
-            .andExpect(jsonPath("$.applicationFormFee").value(DEFAULT_APPLICATION_FORM_FEE.doubleValue()))
-            .andExpect(jsonPath("$.grandTotal").value(DEFAULT_GRAND_TOTAL.doubleValue()))
-            .andExpect(jsonPath("$.supervisionPercent").value(DEFAULT_SUPERVISION_PERCENT.doubleValue()))
-            .andExpect(jsonPath("$.labourChargePercent").value(DEFAULT_LABOUR_CHARGE_PERCENT.doubleValue()))
-            .andExpect(jsonPath("$.siteSurveyPercent").value(DEFAULT_SITE_SURVEY_PERCENT.doubleValue()))
-            .andExpect(jsonPath("$.ConnectionFeePercent").value(DEFAULT_CONNECTION_FEE_PERCENT.doubleValue()));
+            .andExpect(jsonPath("$.subTotalA").value(DEFAULT_SUB_TOTAL_A.intValue()))
+            .andExpect(jsonPath("$.supervisionCharge").value(DEFAULT_SUPERVISION_CHARGE.intValue()))
+            .andExpect(jsonPath("$.labourCharge").value(DEFAULT_LABOUR_CHARGE.intValue()))
+            .andExpect(jsonPath("$.siteSurvey").value(DEFAULT_SITE_SURVEY.intValue()))
+            .andExpect(jsonPath("$.subTotalB").value(DEFAULT_SUB_TOTAL_B.intValue()))
+            .andExpect(jsonPath("$.connectionFee").value(DEFAULT_CONNECTION_FEE.intValue()))
+            .andExpect(jsonPath("$.waterMeterShs").value(DEFAULT_WATER_METER_SHS.intValue()))
+            .andExpect(jsonPath("$.applicationFormFee").value(DEFAULT_APPLICATION_FORM_FEE.intValue()))
+            .andExpect(jsonPath("$.grandTotal").value(DEFAULT_GRAND_TOTAL.intValue()))
+            .andExpect(jsonPath("$.supervisionPercent").value(DEFAULT_SUPERVISION_PERCENT.intValue()))
+            .andExpect(jsonPath("$.labourChargePercent").value(DEFAULT_LABOUR_CHARGE_PERCENT.intValue()))
+            .andExpect(jsonPath("$.siteSurveyPercent").value(DEFAULT_SITE_SURVEY_PERCENT.intValue()))
+            .andExpect(jsonPath("$.ConnectionFeePercent").value(DEFAULT_CONNECTION_FEE_PERCENT.intValue()));
     }
 
     @Test

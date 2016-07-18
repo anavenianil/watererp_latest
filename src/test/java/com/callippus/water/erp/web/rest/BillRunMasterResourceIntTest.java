@@ -41,6 +41,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
@@ -465,7 +466,7 @@ public class BillRunMasterResourceIntTest {
 
 				for (int i = 0; i < manual_payments.get(bfd.getCan()).length
 						&& manual_payments.get(bfd.getCan())[i] > 0.0f; i++) {
-					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), manual_payments.get(bfd.getCan())[i],
+					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), new BigDecimal(manual_payments.get(bfd.getCan())[i]),
 							ZonedDateTime.now());
 				}
 
@@ -560,7 +561,7 @@ public class BillRunMasterResourceIntTest {
 
 				for (int i = 0; i < manual_payments2.get(bfd.getCan()).length
 						&& manual_payments2.get(bfd.getCan())[i] > 0.0f; i++) {
-					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), manual_payments2.get(bfd.getCan())[i],
+					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), new BigDecimal(manual_payments2.get(bfd.getCan())[i]),
 							ZonedDateTime.now());
 				}
 
@@ -663,7 +664,7 @@ public class BillRunMasterResourceIntTest {
 
 				for (int i = 0; i < manual_payments3.get(bfd.getCan()).length
 						&& manual_payments3.get(bfd.getCan())[i] > 0.0f; i++) {
-					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), manual_payments3.get(bfd.getCan())[i],
+					ct.createPayment(restCollDetailsMockMvc, bfd.getCan(), new BigDecimal(manual_payments3.get(bfd.getCan())[i]),
 							ZonedDateTime.now());
 				}
 

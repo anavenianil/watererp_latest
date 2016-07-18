@@ -38,7 +38,7 @@ angular.module('watererpApp')
                 lastModifiedBy: null, lastModifiedDate: null, resetDate: null,
                 resetKey: null, authorities: null
             };
-            $scope.editForm.$setPristine();
-            $scope.editForm.$setUntouched();
+            //$scope.editForm.$setPristine();
+            //$scope.editForm.$setUntouched();
         };
     });

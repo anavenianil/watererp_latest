@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -58,8 +59,8 @@ public class CollDetailsResourceIntTest {
     private static final String DEFAULT_RECEIPT_NO = "AAAAA";
     private static final String UPDATED_RECEIPT_NO = "BBBBB";
 
-    private static final Float DEFAULT_RECEIPT_AMT = 1F;
-    private static final Float UPDATED_RECEIPT_AMT = 2F;
+    private static final BigDecimal DEFAULT_RECEIPT_AMT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_RECEIPT_AMT = new BigDecimal(2);
 
     private static final ZonedDateTime DEFAULT_RECEIPT_DT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_RECEIPT_DT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -162,7 +163,7 @@ public class CollDetailsResourceIntTest {
     }
 
     
-    public void createPayment(MockMvc restCollDetailsMockMvc, String can, Float amount, ZonedDateTime date) throws Exception {
+    public void createPayment(MockMvc restCollDetailsMockMvc, String can, BigDecimal amount, ZonedDateTime date) throws Exception {
     	collDetails = new CollDetails();
     	collDetails.setCan(can);
     	collDetails.setReceiptAmt(amount);

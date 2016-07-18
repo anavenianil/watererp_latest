@@ -91,7 +91,7 @@
 							</div>
 							<div class="col-sm-4">
 								<label>Email</label>
-								<h5 class="list-group-item-heading">{{customer.email}}</h5>
+								<h5 class="list-group-item-heading">{{customer.newEmail}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Photo</label>
@@ -117,12 +117,12 @@
 								<h5 class="list-group-item-heading">{{customer.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status===9">
+							<div class="col-sm-3" ng-if="customer.status==='APPROVED'">
 								<label>Changed Date</label>
 								<h5 class="list-group-item-heading">{{customer.changedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status===3 && orgRole.id==16">
+							<div class="col-sm-3" ng-if="customer.status==='PAYMENTNC' && orgRole.id==16">
 							<div class="form-group"
 									ng-class="{'has-error': editForm.changedDate.$invalid && 
                                 (editForm.changedDate.$dirty || rc.editForm.attempted)}">
@@ -132,7 +132,7 @@
 									<div class='input-group date' id='field_changedDate'>
 										<input id="field_changedDate" type="text" class="form-control"
 											uib-datepicker-popup="{{dateformat}}" name="changedDate" placeholder="YYYY-MM-DD"	
-											ng-model="workflowDTO.customer.changedDate" max-date="maxDt"
+											ng-model="changeCaseDTO.customer.changedDate" max-date="maxDt"
 											is-open="datePickerForChangedDate.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -165,7 +165,7 @@
 									<div class='input-group date' id='field_approvedDate'>
 										<input id="field_approvedDate" type="text" name="approvedDate"
 											class="form-control" uib-datepicker-popup="{{dateformat}}"
-											ng-model="workflowDTO.approvedDate" max-date="maxDt" placeholder="YYYY-MM-DD"	
+											ng-model="changeCaseDTO.approvedDate" max-date="maxDt" placeholder="YYYY-MM-DD"	
 											is-open="datePickerForApprovedDate.status.opened" required />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
@@ -188,7 +188,7 @@
                                 (editForm.remarks.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_remarks">Remarks</label>
 								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="workflowDTO.remarks" required></textarea>
+									id="field_remarks" ng-model="changeCaseDTO.remarks" required></textarea>
 									<div ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
 										<p class="help-block"
 											ng-show="editForm.remarks.$error.required">This field is required.</p>
@@ -203,27 +203,27 @@
 		</div>
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="workflowDTO.customer.status === 1 && orgRole.id === 10"
-			ng-click="approve(workflowDTO)">
+			ng-if="changeCaseDTO.customer.status === 'INITIATED' && orgRole.id === 10"
+			ng-click="approve(changeCaseDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
 
 		<button type="button" class="btn btn-success pull-right" ng-disabled="editForm.$invalid || isSaving"
-			ui-sref="receiptForNameChange({customerId:workflowDTO.customer.id})"
-			ng-if="workflowDTO.customer.status === 2 && orgRole.id === 22">
+			ui-sref="receiptForNameChange({customerId:changeCaseDTO.customer.id})"
+			ng-if="changeCaseDTO.customer.status === 'PROCESSING' && orgRole.id === 22">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="workflowDTO.customer.status === 3 && orgRole.id === 16"
-			ng-click="approve(workflowDTO)">
+			ng-if="changeCaseDTO.customer.status === 'PAYMENTNC' && orgRole.id === 16"
+			ng-click="approve(changeCaseDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="editForm.$invalid || isSaving"
-			ng-click="declineRequest(workflowDTO)">
+			ng-click="declineRequest(changeCaseDTO)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
 

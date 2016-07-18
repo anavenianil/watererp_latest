@@ -45,7 +45,7 @@ public class MaterialMaster implements Serializable {
     @Column(name = "rate_contract_flag")
     private String rateContractFlag;
     
-    @Column(name = "unit_rate", precision=10, scale=2)
+    @Column(name = "unit_rate", precision=20, scale=3)
     private BigDecimal unitRate;
     
     @Column(name = "description")
@@ -60,7 +60,7 @@ public class MaterialMaster implements Serializable {
     @Column(name = "last_modified_date")
     private ZonedDateTime lastModifiedDate;
     
-    @Column(name = "company_code_id", precision=10, scale=2)
+    @Column(name = "company_code_id", precision=20, scale=3)
     private BigDecimal companyCodeId;
     
     public Long getId() {

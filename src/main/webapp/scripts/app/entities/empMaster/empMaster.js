@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('empMaster.new', {
+            /*.state('empMaster.new', {
                 parent: 'empMaster',
                 url: '/new',
                 data: {
@@ -66,8 +66,8 @@ angular.module('watererpApp')
                         $state.go('empMaster');
                     })
                 }]
-            })
-            .state('empMaster.edit', {
+            })*/
+            /*.state('empMaster.edit', {
                 parent: 'empMaster',
                 url: '/{id}/edit',
                 data: {
@@ -89,7 +89,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('empMaster.delete', {
                 parent: 'empMaster',
                 url: '/{id}/delete',
@@ -112,5 +112,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('empMaster.new', {
+                parent: 'empMaster',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'EmpMasters'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/empMaster/empMaster-dialog.html',
+                        controller: 'EmpMasterDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('empMaster.edit', {
+                parent: 'empMaster',
+                url: '/edit/{id}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'EmpMasters'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/empMaster/empMaster-dialog.html',
+                        controller: 'EmpMasterDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

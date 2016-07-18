@@ -25,6 +25,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,8 +53,8 @@ public class ConnectionTerminateResourceIntTest {
     private static final Boolean DEFAULT_METER_RECOVERED = false;
     private static final Boolean UPDATED_METER_RECOVERED = true;
 
-    private static final Float DEFAULT_LAST_METER_READING = 1F;
-    private static final Float UPDATED_LAST_METER_READING = 2F;
+    private static final BigDecimal DEFAULT_LAST_METER_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_LAST_METER_READING = new BigDecimal(2);
 
     private static final LocalDate DEFAULT_METER_RECOVERED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_METER_RECOVERED_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -128,7 +129,7 @@ public class ConnectionTerminateResourceIntTest {
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
                 .andExpect(jsonPath("$.[*].requestDate").value(hasItem(DEFAULT_REQUEST_DATE.toString())))
                 .andExpect(jsonPath("$.[*].meterRecovered").value(hasItem(DEFAULT_METER_RECOVERED.booleanValue())))
-                .andExpect(jsonPath("$.[*].lastMeterReading").value(hasItem(DEFAULT_LAST_METER_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].lastMeterReading").value(hasItem(DEFAULT_LAST_METER_READING.intValue())))
                 .andExpect(jsonPath("$.[*].meterRecoveredDate").value(hasItem(DEFAULT_METER_RECOVERED_DATE.toString())));
     }
 
@@ -146,7 +147,7 @@ public class ConnectionTerminateResourceIntTest {
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
             .andExpect(jsonPath("$.requestDate").value(DEFAULT_REQUEST_DATE.toString()))
             .andExpect(jsonPath("$.meterRecovered").value(DEFAULT_METER_RECOVERED.booleanValue()))
-            .andExpect(jsonPath("$.lastMeterReading").value(DEFAULT_LAST_METER_READING.doubleValue()))
+            .andExpect(jsonPath("$.lastMeterReading").value(DEFAULT_LAST_METER_READING.intValue()))
             .andExpect(jsonPath("$.meterRecoveredDate").value(DEFAULT_METER_RECOVERED_DATE.toString()));
     }
 

@@ -8,9 +8,9 @@ angular
 						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal, $window) {
 
 					$scope.customer = {};
-					$scope.workflowDTO = {};
-					$scope.workflowDTO.customer = {};
-					$scope.workflowDTO.customer.changeType = "PIPESIZE";
+					$scope.changeCaseDTO = {};
+					$scope.changeCaseDTO.customer = {};
+					$scope.changeCaseDTO.customer.changeType = "PIPESIZE";
 					$scope.custDetails = {};
 					$scope.orgRole = {};
 					Principal.getOrgRole().then(function(response) {
@@ -50,7 +50,7 @@ angular
 			                $scope.customer = result;
 			                $scope.getCustDetails($scope.customer.can);
 			                $scope.customer.remarks = "";
-			                $scope.workflowDTO.customer = result;
+			                $scope.changeCaseDTO.customer = result;
 			            });
 			        };
 					
@@ -109,9 +109,9 @@ angular
 			        }
 					
 					//declineRequest
-					$scope.declineRequest = function(workflowDTO){
+					$scope.declineRequest = function(changeCaseDTO){
 			        	return $http.post('/api/customers/declineRequest',
-								workflowDTO).then(
+			        			changeCaseDTO).then(
 								function(response) {
 									$('#declineModal').modal('show');
 									//$state.go('customer.pipeSizeList');
@@ -122,11 +122,11 @@ angular
 					$scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.customer.status) {
-						case 1:
+						case 'INITIATED':
 							if ($scope.orgRole.id === 10)
 								ret = true;
 							break;
-						case 2:
+						case 'PROCESSING':
 							if ($scope.orgRole.id === 16)
 								ret = true;
 							break;

@@ -1,136 +1,136 @@
 {
-    "relationships": [
-    {
-            "relationshipId": 1,
-            "relationshipName": "paymentTypes",
-            "otherEntityName": "paymentTypes",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-     },
-     {
-            "relationshipId": 2,
-            "relationshipName": "bankMaster",
-            "otherEntityName": "bankMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-     },
-     {
-            "relationshipId": 3,
-            "relationshipName": "collectionTypeMaster",
-            "otherEntityName": "collectionTypeMaster",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-     }
-        ],
-    "fields": [
-        {
-            "fieldId": 1,
-            "fieldName": "reversalRef",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 2,
-            "fieldName": "receiptNo",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "receiptAmt",
-            "fieldType": "Float"
-        },
-        {
-            "fieldId": 4,
-            "fieldName": "receiptDt",
-            "fieldType": "ZonedDateTime"
-        },
-        {
-            "fieldId": 5,
-            "fieldName": "receiptMode",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 6,
-            "fieldName": "instrNo",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 7,
-            "fieldName": "instrDt",
-            "fieldType": "LocalDate"
-        },
-        {
-            "fieldId": 8,
-            "fieldName": "instrIssuer",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 9,
-            "fieldName": "svrStatus",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 10,
-            "fieldName": "can",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 11,
-            "fieldName": "consName",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 12,
-            "fieldName": "terminalId",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 13,
-            "fieldName": "collTime",
-            "fieldType": "ZonedDateTime"
-        },
-        {
-            "fieldId": 14,
-            "fieldName": "txnStatus",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 15,
-            "fieldName": "meterReaderId",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 16,
-            "fieldName": "userId",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 17,
-            "fieldName": "remarks",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 18,
-            "fieldName": "settlementId",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 19,
-            "fieldName": "extSettlementId",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 20,
-            "fieldName": "lat",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 21,
-            "fieldName": "longI",
-            "fieldType": "String"
-        }
-    ],
-    "changelogDate": "20160315053144",
-    "dto": "no",
-    "service": "no",
-    "pagination": "infinite-scroll"
+	"relationships": [
+		{
+			"relationshipId": 1,
+			"relationshipName": "paymentTypes",
+			"otherEntityName": "paymentTypes",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		},
+		{
+			"relationshipId": 2,
+			"relationshipName": "bankMaster",
+			"otherEntityName": "bankMaster",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		},
+		{
+			"relationshipId": 3,
+			"relationshipName": "collectionTypeMaster",
+			"otherEntityName": "collectionTypeMaster",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		}
+	],
+	"fields": [
+		{
+			"fieldId": 1,
+			"fieldName": "reversalRef",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 2,
+			"fieldName": "receiptNo",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 3,
+			"fieldName": "receiptAmt",
+			"fieldType": "BigDecimal"
+		},
+		{
+			"fieldId": 4,
+			"fieldName": "receiptDt",
+			"fieldType": "ZonedDateTime"
+		},
+		{
+			"fieldId": 5,
+			"fieldName": "receiptMode",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 6,
+			"fieldName": "instrNo",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 7,
+			"fieldName": "instrDt",
+			"fieldType": "LocalDate"
+		},
+		{
+			"fieldId": 8,
+			"fieldName": "instrIssuer",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 9,
+			"fieldName": "svrStatus",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 10,
+			"fieldName": "can",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 11,
+			"fieldName": "consName",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 12,
+			"fieldName": "terminalId",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 13,
+			"fieldName": "collTime",
+			"fieldType": "ZonedDateTime"
+		},
+		{
+			"fieldId": 14,
+			"fieldName": "txnStatus",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 15,
+			"fieldName": "meterReaderId",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 16,
+			"fieldName": "userId",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 17,
+			"fieldName": "remarks",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 18,
+			"fieldName": "settlementId",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 19,
+			"fieldName": "extSettlementId",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 20,
+			"fieldName": "lat",
+			"fieldType": "String"
+		},
+		{
+			"fieldId": 21,
+			"fieldName": "longI",
+			"fieldType": "String"
+		}
+	],
+	"changelogDate": "20160315053144",
+	"dto": "no",
+	"service": "no",
+	"pagination": "infinite-scroll"
 }

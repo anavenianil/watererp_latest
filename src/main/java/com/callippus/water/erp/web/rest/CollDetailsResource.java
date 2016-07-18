@@ -4,9 +4,11 @@ import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.service.PaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 
@@ -30,6 +32,7 @@ import javax.transaction.Transactional;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -55,6 +58,9 @@ public class CollDetailsResource {
 
 	@Inject
 	private ReportsCustomRepository reportsRepository;
+	
+	@Inject
+	private PaymentService paymentService;
 
 	/**
 	 * POST /collDetailss -> Create a new collDetails.
@@ -75,13 +81,11 @@ public class CollDetailsResource {
 											"A new collDetails cannot already have an ID"))
 					.body(null);
 		}
+		
+		
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
-		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
-		System.out.println(customer);
-		customer.setArrears(customer.getArrears() - collDetails.getReceiptAmt());
-		
-		custDetailsRepository.saveAndFlush(customer);
+		paymentService.postPayment(result, collDetails.getReceiptAmt());
 
 		return ResponseEntity
 				.created(new URI("/api/collDetailss/" + result.getId()))

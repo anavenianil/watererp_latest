@@ -2,7 +2,10 @@
 
 angular.module('watererpApp')
     .controller('RegisterController', function ($scope, $timeout, Auth) {
-        $scope.success = null;
+    	
+    	console.log("page: register.controller.js");
+        
+    	$scope.success = null;
         $scope.error = null;
         $scope.doNotMatch = null;
         $scope.errorUserExists = null;

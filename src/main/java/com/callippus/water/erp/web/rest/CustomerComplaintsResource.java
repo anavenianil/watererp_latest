@@ -149,11 +149,19 @@ public class CustomerComplaintsResource {
 			adjustments.setCustDetails(custDetails);
 			adjustments.setAmount(amount.abs());
 			
-			Float amt = customerComplaints.getAdjustmentAmt();
+			/*Float amt = customerComplaints.getAdjustmentAmt(); //commented by mohib after changing float to bigdecimal
 
 			if (amt < 0) { //Debit
 				ttm = transactionTypeMasterRepository.findOne(2L);
 			} else if (amt > 0) { //Credit
+				ttm = transactionTypeMasterRepository.findOne(1L);
+			}*/
+			BigDecimal amt = customerComplaints.getAdjustmentAmt();
+
+			int res = amt.compareTo(new BigDecimal("0"));
+			if (res == -1) { //Debit
+				ttm = transactionTypeMasterRepository.findOne(2L);
+			} else if (res == 1) { //Credit
 				ttm = transactionTypeMasterRepository.findOne(1L);
 			}
 
@@ -173,10 +181,19 @@ public class CustomerComplaintsResource {
 	 */
 	@RequestMapping(value = "/customerComplaintss", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<List<CustomerComplaints>> getAllCustomerComplaintss(Pageable pageable)
+	public ResponseEntity<List<CustomerComplaints>> getAllCustomerComplaintss(Pageable pageable,
+			@RequestParam(value = "can", required = false) String can)
 			throws URISyntaxException {
 		log.debug("REST request to get a page of CustomerComplaintss");
-		Page<CustomerComplaints> page = customerComplaintsRepository.findAll(pageable);
+		Page<CustomerComplaints> page;
+		//Page<CustomerComplaints> page = customerComplaintsRepository.findAll(pageable);//Comment this line
+		if(can != null) {
+			page = customerComplaintsRepository.findByCan(pageable, can);
+		}
+		else{
+			page = customerComplaintsRepository.findAll(pageable);
+		}
+		
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customerComplaintss");
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
 	}

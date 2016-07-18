@@ -7,6 +7,7 @@ import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -25,19 +26,19 @@ public class ExpenseDetails implements Serializable {
 
     @Column(name = "expense_no")
     private String expenseNo;
-
-    @Column(name = "expense_amt")
-    private Float expenseAmt;
-
+    
+    @Column(name = "expense_amt", precision=20, scale=3)
+    private BigDecimal expenseAmt;
+    
     @Column(name = "expense_dt")
     private ZonedDateTime expenseDt;
-
+    
     @Column(name = "instr_no")
     private String instrNo;
-
+    
     @Column(name = "instr_dt")
     private LocalDate instrDt;
-
+    
     @ManyToOne
     @JoinColumn(name = "payment_types_id")
     private PaymentTypes paymentTypes;
@@ -61,23 +62,23 @@ public class ExpenseDetails implements Serializable {
     public String getExpenseNo() {
         return expenseNo;
     }
-
+    
     public void setExpenseNo(String expenseNo) {
         this.expenseNo = expenseNo;
     }
 
-    public Float getExpenseAmt() {
+    public BigDecimal getExpenseAmt() {
         return expenseAmt;
     }
-
-    public void setExpenseAmt(Float expenseAmt) {
+    
+    public void setExpenseAmt(BigDecimal expenseAmt) {
         this.expenseAmt = expenseAmt;
     }
 
     public ZonedDateTime getExpenseDt() {
         return expenseDt;
     }
-
+    
     public void setExpenseDt(ZonedDateTime expenseDt) {
         this.expenseDt = expenseDt;
     }
@@ -85,7 +86,7 @@ public class ExpenseDetails implements Serializable {
     public String getInstrNo() {
         return instrNo;
     }
-
+    
     public void setInstrNo(String instrNo) {
         this.instrNo = instrNo;
     }
@@ -93,7 +94,7 @@ public class ExpenseDetails implements Serializable {
     public LocalDate getInstrDt() {
         return instrDt;
     }
-
+    
     public void setInstrDt(LocalDate instrDt) {
         this.instrDt = instrDt;
     }
@@ -131,6 +132,9 @@ public class ExpenseDetails implements Serializable {
             return false;
         }
         ExpenseDetails expenseDetails = (ExpenseDetails) o;
+        if(expenseDetails.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, expenseDetails.id);
     }
 

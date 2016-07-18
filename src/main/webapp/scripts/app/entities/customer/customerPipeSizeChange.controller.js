@@ -102,8 +102,8 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 						}
 						else{
 							$scope.customer.can = response.data.custDetails.can;
-							$scope.customer.pipeSizeMaster = response.data.custDetails.pipeSizeMaster;
-				            $scope.customer.meterReading = response.data.custDetails.prevReading;
+							$scope.customer.oldPipeSizeMaster = response.data.custDetails.pipeSizeMaster;
+				            $scope.customer.prevMeterReading = response.data.custDetails.prevReading;
 						}
 					});
 		}
@@ -140,16 +140,13 @@ angular.module('watererpApp').controller('CustomerPipeSizeChangeController',
 		$scope.checkReading = function(prvReading, newReading){
 			if(prvReading >= newReading)
 				{
-				
-				$scope.editForm.presentReading.$setValidity(
+				$scope.editForm.newMeterReading.$setValidity(
 						"ltPrevious", true);
 				return true;
 				}
 			else
 				{
-				
-				
-				$scope.editForm.presentReading.$setValidity(
+				$scope.editForm.newMeterReading.$setValidity(
 						"ltPrevious", false);
 				return false;
 		}

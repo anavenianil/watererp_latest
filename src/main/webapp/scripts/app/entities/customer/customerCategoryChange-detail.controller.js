@@ -10,8 +10,8 @@ angular
 					$scope.customer = {};
 					$scope.customer.changeType = "CONNECTIONCATEGORY";
 					
-					$scope.workflowDTO = {};
-					//$scope.workflowDTO.customer = {};
+					$scope.changeCaseDTO = {};
+					//$scope.changeCaseDTO.customer = {};
 					
 					$scope.custDetails = {};
 					$scope.maxDt = new Date();
@@ -62,11 +62,11 @@ angular
 					$scope.load = function (id) {
 			            Customer.get({id: id}, function(result) {
 			            	$scope.customer = result;
-			            	$scope.workflowDTO.customer = result;
+			            	$scope.changeCaseDTO.customer = result;
 			                $scope.getCustDetails(result.can);
 			                $scope.getApplicationTxn(result.can);
 			                $scope.customer.remarks = "";
-			                //$scope.workflowDTO.customer = $scope.customer; 
+			                //$scope.changeCaseDTO.customer = $scope.customer; 
 			            });
 			        };
 					
@@ -122,10 +122,10 @@ angular
 
 			        
 					//approve a request
-					$scope.approve = function(workflowDTO){
+					$scope.approve = function(changeCaseDTO){
 						$scope.isSaving = true;
 			        	return $http.post('/api/customers/customersApprove',
-								workflowDTO).then(
+			        			changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
@@ -136,9 +136,9 @@ angular
 			        }
 					
 					//declineRequest
-					$scope.declineRequest = function(workflowDTO){
+					$scope.declineRequest = function(changeCaseDTO){
 			        	return $http.post('/api/customers/declineRequest',
-								workflowDTO).then(
+			        			changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
@@ -149,11 +149,11 @@ angular
 					$scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.customer.status) {
-						case 1:
+						case 'INITIATED':
 							if ($scope.orgRole.id === 10)
 								ret = true;
 							break;
-						case 2:
+						case 'PROCESSING':
 							if ($scope.orgRole.id === 16)
 								ret = true;
 							break;

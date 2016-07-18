@@ -72,7 +72,7 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label>Previous Pipe Size</label>
-									<h5 class="list-group-item-heading">{{customer.pipeSizeMaster.pipeSize}}</h5>
+									<h5 class="list-group-item-heading">{{customer.oldPipeSizeMaster.pipeSize}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label>Requested Pipe Size</label>
@@ -80,11 +80,11 @@
 								</div>
 								<div class="col-sm-3">
 									<label>Previous Reading(Last Billed)</label>
-									<h5 class="list-group-item-heading">{{customer.meterReading}}</h5>
+									<h5 class="list-group-item-heading">{{customer.prevMeterReading}}</h5>
 								</div>
 								<div class="col-sm-3">
 									<label>Present Reading</label>
-									<h5 class="list-group-item-heading">{{customer.presentReading}}</h5>
+									<h5 class="list-group-item-heading">{{customer.newMeterReading}}</h5>
 								</div>
 							</div>
 							<br>
@@ -95,7 +95,7 @@
 										| date:'mediumDate'}}</h5>
 								</div>
 								<div class="col-sm-3"
-									ng-show="customer.status==2 && orgRole.id==16">
+									ng-show="customer.status=='PROCESSING' && orgRole.id==16">
 									<label class="control-label" for="field_changedDate">Changed
 										Date</label>
 									<div class="form-group"
@@ -105,7 +105,7 @@
 											<input id="field_changedDate" type="text"
 												class="form-control" uib-datepicker-popup="{{dateformat}}"
 												name="changedDate"
-												ng-model="workflowDTO.customer.changedDate" max-date="maxDt"
+												ng-model="changeCaseDTO.customer.changedDate" max-date="maxDt"
 												is-open="datePickerForChangedDate.status.opened" required />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-default"
@@ -125,7 +125,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-3" ng-show="customer.status==9">
+								<div class="col-sm-3" ng-show="customer.status=='APPROVED' || customer.status=='BILLED'">
 									<label>Changed Date</label>
 									<h5 class="list-group-item-heading">{{customer.changedDate
 										| date:'mediumDate'}}</h5>
@@ -146,7 +146,7 @@
 											<input id="field_approvedDate" type="text" ng-type="date"
 												name="approvedDate" class="form-control"
 												uib-datepicker-popup="{{dateformat}}"
-												ng-model="workflowDTO.approvedDate" max-date="maxDt"
+												ng-model="changeCaseDTO.approvedDate" max-date="maxDt"
 												is-open="datePickerForApprovedDate.status.opened" required />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-default"
@@ -173,7 +173,7 @@
 										<label class="control-label" for="field_remarks">Remarks</label>
 										<textarea rows="2" cols="30" class="form-control"
 											name="remarks" id="field_remarks"
-											ng-model="workflowDTO.remarks" required></textarea>
+											ng-model="changeCaseDTO.remarks" required></textarea>
 										<div
 											ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
 											<p class="help-block"
@@ -189,7 +189,7 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-success pull-right"
-				ng-show="canDecline()" ng-click="approve(workflowDTO)">
+				ng-show="canDecline()" ng-click="approve(changeCaseDTO)">
 				<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 			</button>
 
@@ -197,7 +197,7 @@
 
 			<button type="button" class="btn btn-danger pull-right"
 				ng-show="canDecline()" ng-disabled="isSaving"
-				ng-click="declineRequest(workflowDTO)">
+				ng-click="declineRequest(changeCaseDTO)">
 				<span class="glyphicon glyphicon-remove-circle"></span>
 				&nbsp;Decline
 			</button>

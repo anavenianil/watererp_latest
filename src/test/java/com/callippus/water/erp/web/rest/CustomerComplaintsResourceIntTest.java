@@ -25,6 +25,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,8 +56,8 @@ public class CustomerComplaintsResourceIntTest {
     private static final String DEFAULT_CAN = "AAAAA";
     private static final String UPDATED_CAN = "BBBBB";
 
-    private static final Float DEFAULT_ADJUSTMENT_AMT = 1F;
-    private static final Float UPDATED_ADJUSTMENT_AMT = 2F;
+    private static final BigDecimal DEFAULT_ADJUSTMENT_AMT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_ADJUSTMENT_AMT = new BigDecimal(2);
     private static final String DEFAULT_ADJUSTMENT_BILL_ID = "AAAAA";
     private static final String UPDATED_ADJUSTMENT_BILL_ID = "BBBBB";
 
@@ -141,7 +142,7 @@ public class CustomerComplaintsResourceIntTest {
                 .andExpect(jsonPath("$.[*].complaintBy").value(hasItem(DEFAULT_COMPLAINT_BY.toString())))
                 .andExpect(jsonPath("$.[*].complaintDate").value(hasItem(DEFAULT_COMPLAINT_DATE.toString())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
-                .andExpect(jsonPath("$.[*].adjustmentAmt").value(hasItem(DEFAULT_ADJUSTMENT_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].adjustmentAmt").value(hasItem(DEFAULT_ADJUSTMENT_AMT.intValue())))
                 .andExpect(jsonPath("$.[*].adjustmentBillId").value(hasItem(DEFAULT_ADJUSTMENT_BILL_ID.toString())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
@@ -162,7 +163,7 @@ public class CustomerComplaintsResourceIntTest {
             .andExpect(jsonPath("$.complaintBy").value(DEFAULT_COMPLAINT_BY.toString()))
             .andExpect(jsonPath("$.complaintDate").value(DEFAULT_COMPLAINT_DATE.toString()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
-            .andExpect(jsonPath("$.adjustmentAmt").value(DEFAULT_ADJUSTMENT_AMT.doubleValue()))
+            .andExpect(jsonPath("$.adjustmentAmt").value(DEFAULT_ADJUSTMENT_AMT.intValue()))
             .andExpect(jsonPath("$.adjustmentBillId").value(DEFAULT_ADJUSTMENT_BILL_ID.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }

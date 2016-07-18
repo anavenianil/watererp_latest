@@ -21,31 +21,31 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="sub_total_a" type="double"/>
+            <column name="sub_total_a" type="decimal(20,3)"/>
             
-            <column name="supervision_charge" type="double"/>
+            <column name="supervision_charge" type="decimal(20,3)"/>
             
-            <column name="labour_charge" type="double"/>
+            <column name="labour_charge" type="decimal(20,3)"/>
             
-            <column name="site_survey" type="double"/>
+            <column name="site_survey" type="decimal(20,3)"/>
             
-            <column name="sub_total_b" type="double"/>
+            <column name="sub_total_b" type="decimal(20,3)"/>
             
-            <column name="connection_fee" type="double"/>
+            <column name="connection_fee" type="decimal(20,3)"/>
             
-            <column name="water_meter_shs" type="double"/>
+            <column name="water_meter_shs" type="decimal(20,3)"/>
             
-            <column name="application_form_fee" type="double"/>
+            <column name="application_form_fee" type="decimal(20,3)"/>
             
-            <column name="grand_total" type="double"/>
+            <column name="grand_total" type="decimal(20,3)"/>
             
-            <column name="supervision_percent" type="double"/>
+            <column name="supervision_percent" type="decimal(20,3)"/>
             
-            <column name="labour_charge_percent" type="double"/>
+            <column name="labour_charge_percent" type="decimal(20,3)"/>
             
-            <column name="site_survey_percent" type="double"/>
+            <column name="site_survey_percent" type="decimal(20,3)"/>
             
-            <column name="connection_fee_percent" type="double"/>
+            <column name="connection_fee_percent" type="decimal(20,3)"/>
             
             <column name="application_txn_id" type="bigint"/>
             <column name="pipe_size_master_id" type="bigint"/>

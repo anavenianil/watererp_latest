@@ -12,11 +12,11 @@ angular
 					$scope.custDetails = {};
 					$scope.tariffcategorymasters = TariffCategoryMaster.query();
 					$scope.pipeSizeMasters = PipeSizeMaster.query();
-					$scope.workflowDTO = {};
-					$scope.workflowDTO.requestWorkflowHistory = {};
-					$scope.workflowDTO.workflowTxnDetailss = {};
+					$scope.changeCaseDTO = {};
+					$scope.changeCaseDTO.requestWorkflowHistory = {};
+					$scope.changeCaseDTO.workflowTxnDetailss = {};
 					$scope.applicationTxn = {};
-					$scope.workflowDTO.workflowTxnDetailss = [];
+					$scope.changeCaseDTO.workflowTxnDetailss = [];
 					$scope.referenceNo = "";
 					
 					console.log("These are the state:"
@@ -29,55 +29,55 @@ angular
 			                for (var i = 0; i < result.length; i++) {
 			                    $scope.requestWorkflowHistorys.push(result[i]);
 			                }
-			                $scope.workflowDTO.requestWorkflowHistory.assignedDate = $scope.requestWorkflowHistorys[0].assignedDate;
+			                $scope.changeCaseDTO.requestWorkflowHistory.assignedDate = $scope.requestWorkflowHistorys[0].assignedDate;
 			            });
 			        };
 					
 
 					if ($state.current.name === "custDetails.categoryChange") {
-						$scope.workflowDTO.workflowTxnDetailss[0] = {};
-						$scope.workflowDTO.workflowTxnDetailss[1] = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[0] = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[1] = {};
 
-						$scope.workflowDTO.workflowTxnDetailss[2] = {};
-						$scope.workflowDTO.workflowTxnDetailss[3] = {};
-						$scope.workflowDTO.workflowTxnDetailss[4] = {};
-						$scope.workflowDTO.workflowTxnDetailss[5] = {};
-						$scope.workflowDTO.workflowTxnDetailss[6] = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[2] = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[3] = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[4] = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[5] = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[6] = {};
 
-						$scope.workflowDTO.workflowTxnDetailss[0].columnName = "prevReading";
-						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[0].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[0].referenceNumber = $scope.referenceNo;
+						$scope.changeCaseDTO.workflowTxnDetailss[0].columnName = "prevReading";
+						$scope.changeCaseDTO.workflowTxnDetailss[0].requestMaster = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[0].requestMaster.id = 8;
+						$scope.changeCaseDTO.workflowTxnDetailss[0].referenceNumber = $scope.referenceNo;
 
-						$scope.workflowDTO.workflowTxnDetailss[1].columnName = "TarrifCategoryMaster";
-						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[1].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[1].referenceNumber = $scope.referenceNo;
+						$scope.changeCaseDTO.workflowTxnDetailss[1].columnName = "TarrifCategoryMaster";
+						$scope.changeCaseDTO.workflowTxnDetailss[1].requestMaster = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[1].requestMaster.id = 8;
+						$scope.changeCaseDTO.workflowTxnDetailss[1].referenceNumber = $scope.referenceNo;
 
-						$scope.workflowDTO.workflowTxnDetailss[2].columnName = "organisation";
-						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[2].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[2].referenceNumber = $scope.referenceNo;
+						$scope.changeCaseDTO.workflowTxnDetailss[2].columnName = "organisation";
+						$scope.changeCaseDTO.workflowTxnDetailss[2].requestMaster = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[2].requestMaster.id = 8;
+						$scope.changeCaseDTO.workflowTxnDetailss[2].referenceNumber = $scope.referenceNo;
 
-						$scope.workflowDTO.workflowTxnDetailss[3].columnName = "organisationName";
-						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[3].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[3].referenceNumber = $scope.referenceNo;
+						$scope.changeCaseDTO.workflowTxnDetailss[3].columnName = "organisationName";
+						$scope.changeCaseDTO.workflowTxnDetailss[3].requestMaster = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[3].requestMaster.id = 8;
+						$scope.changeCaseDTO.workflowTxnDetailss[3].referenceNumber = $scope.referenceNo;
 
-						$scope.workflowDTO.workflowTxnDetailss[4].columnName = "designation";
-						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[4].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[4].referenceNumber = $scope.referenceNo;
+						$scope.changeCaseDTO.workflowTxnDetailss[4].columnName = "designation";
+						$scope.changeCaseDTO.workflowTxnDetailss[4].requestMaster = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[4].requestMaster.id = 8;
+						$scope.changeCaseDTO.workflowTxnDetailss[4].referenceNumber = $scope.referenceNo;
 
-						$scope.workflowDTO.workflowTxnDetailss[5].columnName = "deedDoc";
-						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[5].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[5].referenceNumber = $scope.referenceNo;
+						$scope.changeCaseDTO.workflowTxnDetailss[5].columnName = "deedDoc";
+						$scope.changeCaseDTO.workflowTxnDetailss[5].requestMaster = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[5].requestMaster.id = 8;
+						$scope.changeCaseDTO.workflowTxnDetailss[5].referenceNumber = $scope.referenceNo;
 
-						$scope.workflowDTO.workflowTxnDetailss[6].columnName = "agreementDoc";
-						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster = {};
-						$scope.workflowDTO.workflowTxnDetailss[6].requestMaster.id = 8;
-						$scope.workflowDTO.workflowTxnDetailss[6].referenceNumber = $scope.referenceNo;
+						$scope.changeCaseDTO.workflowTxnDetailss[6].columnName = "agreementDoc";
+						$scope.changeCaseDTO.workflowTxnDetailss[6].requestMaster = {};
+						$scope.changeCaseDTO.workflowTxnDetailss[6].requestMaster.id = 8;
+						$scope.changeCaseDTO.workflowTxnDetailss[6].referenceNumber = $scope.referenceNo;
 					}
 
 					$scope.dtmax = new Date();
@@ -103,11 +103,11 @@ angular
 					$scope.disableOrg = function(categoryId) {
 						console.log("Category id: " + categoryId);
 						if (categoryId === 1) {
-							$scope.workflowDTO.workflowTxnDetailss[2] = false;
-							$scope.workflowDTO.workflowTxnDetailss[3] = "";
-							$scope.workflowDTO.workflowTxnDetailss[4] = "";
-							$scope.workflowDTO.workflowTxnDetailss[5] = "";
-							$scope.workflowDTO.workflowTxnDetailss[6] = "";
+							$scope.changeCaseDTO.workflowTxnDetailss[2] = false;
+							$scope.changeCaseDTO.workflowTxnDetailss[3] = "";
+							$scope.changeCaseDTO.workflowTxnDetailss[4] = "";
+							$scope.changeCaseDTO.workflowTxnDetailss[5] = "";
+							$scope.changeCaseDTO.workflowTxnDetailss[6] = "";
 						}
 					}
 
@@ -137,8 +137,8 @@ angular
 										},
 										function(result) {
 											$scope.custDetails = result;
-											$scope.workflowDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
-											$scope.workflowDTO.workflowTxnDetailss[1].previousValue = parseInt(
+											$scope.changeCaseDTO.workflowTxnDetailss[0].previousValue = $scope.custDetails.prevReading;
+											$scope.changeCaseDTO.workflowTxnDetailss[1].previousValue = parseInt(
 													$scope.custDetails.tariffCategoryMaster.id,
 													10)
 										});
@@ -149,11 +149,11 @@ angular
 						ApplicationTxnSearchCAN.get({can : can},
 										function(result) {
 											$scope.applicationTxn = result;
-											$scope.workflowDTO.workflowTxnDetailss[2].previousValue = $scope.applicationTxn.organization;
-											$scope.workflowDTO.workflowTxnDetailss[3].previousValue = $scope.applicationTxn.organizationName;
-											$scope.workflowDTO.workflowTxnDetailss[4].previousValue = $scope.applicationTxn.designation
-											$scope.workflowDTO.workflowTxnDetailss[5].previousValue = $scope.applicationTxn.deedDoc;
-											$scope.workflowDTO.workflowTxnDetailss[6].previousValue = $scope.applicationTxn.agreementDoc;
+											$scope.changeCaseDTO.workflowTxnDetailss[2].previousValue = $scope.applicationTxn.organization;
+											$scope.changeCaseDTO.workflowTxnDetailss[3].previousValue = $scope.applicationTxn.organizationName;
+											$scope.changeCaseDTO.workflowTxnDetailss[4].previousValue = $scope.applicationTxn.designation
+											$scope.changeCaseDTO.workflowTxnDetailss[5].previousValue = $scope.applicationTxn.deedDoc;
+											$scope.changeCaseDTO.workflowTxnDetailss[6].previousValue = $scope.applicationTxn.agreementDoc;
 										});
 					};
 
@@ -173,15 +173,15 @@ angular
 					};
 
 					$scope.saveChanges = function() {
-						//$scope.workflowDTO.workflowTxnDetailss[1].previousValue = $scope.workflowDTO.workflowTxnDetailss[1].previousValue.id;
-						for(var i=0; i<$scope.workflowDTO.workflowTxnDetailss.length;i++){
-							$scope.workflowDTO.workflowTxnDetailss[i].referenceNumber = $scope.referenceNo;
+						//$scope.changeCaseDTO.workflowTxnDetailss[1].previousValue = $scope.changeCaseDTO.workflowTxnDetailss[1].previousValue.id;
+						for(var i=0; i<$scope.changeCaseDTO.workflowTxnDetailss.length;i++){
+							$scope.changeCaseDTO.workflowTxnDetailss[i].referenceNumber = $scope.referenceNo;
 						}
-						console.log("WorkflowDTO data being posted to server:"
-								+ JSON.stringify($scope.workflowDTO));
+						console.log("changeCaseDTO data being posted to server:"
+								+ JSON.stringify($scope.changeCaseDTO));
 
 						return $http.post('/api/workflowTxnDetailsArr',
-								$scope.workflowDTO).then(
+								$scope.changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
@@ -194,7 +194,7 @@ angular
 					}
 
 					$scope.getWorkflowTxnDetails = function(requestId) {
-						$scope.workflowDTO.workflowTxnDetailss[0] ={};
+						$scope.changeCaseDTO.workflowTxnDetailss[0] ={};
 						WorkflowTxnDetails.query({
 							page : $scope.page,
 							size : 20,
@@ -208,11 +208,11 @@ angular
 									result[i].newValue = parseInt(
 											result[i].newValue, 10);
 								}
-								$scope.workflowDTO.workflowTxnDetailss
+								$scope.changeCaseDTO.workflowTxnDetailss
 										.push(result[i]);
 							}
-							$scope.getCustDetails($scope.workflowDTO.workflowTxnDetailss[0].referenceNumber);
-							$scope.getWorkflowHistoryByDomainId($scope.workflowDTO.workflowTxnDetailss[0].id);
+							$scope.getCustDetails($scope.changeCaseDTO.workflowTxnDetailss[0].referenceNumber);
+							$scope.getWorkflowHistoryByDomainId($scope.changeCaseDTO.workflowTxnDetailss[0].id);
 						});
 					};
 
@@ -221,10 +221,10 @@ angular
 					}
 					
 					//approve a request
-					$scope.approve = function(workflowDTO){
-			        	console.log(workflowDTO);
+					$scope.approve = function(changeCaseDTO){
+			        	console.log(changeCaseDTO);
 			        	return $http.post('/api/workflowTxnDetailsApprove',
-								$scope.workflowDTO).then(
+								$scope.changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));

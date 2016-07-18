@@ -1,9 +1,11 @@
 package com.callippus.water.erp.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +21,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * A Proceedings.
  */
@@ -33,59 +33,62 @@ public class Proceedings implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "sub_total_a")
-    private Double subTotalA;
+    @Column(name = "sub_total_a", precision=20, scale=3)
+    private BigDecimal subTotalA;
     
-    @Column(name = "supervision_charge")
-    private Double supervisionCharge;
+    @Column(name = "supervision_charge", precision=20, scale=3)
+    private BigDecimal supervisionCharge;
     
-    @Column(name = "labour_charge")
-    private Double labourCharge;
+    @Column(name = "labour_charge", precision=20, scale=3)
+    private BigDecimal labourCharge;
     
-    @Column(name = "site_survey")
-    private Double siteSurvey;
+    @Column(name = "site_survey", precision=20, scale=3)
+    private BigDecimal siteSurvey;
     
-    @Column(name = "sub_total_b")
-    private Double subTotalB;
+    @Column(name = "sub_total_b", precision=20, scale=3)
+    private BigDecimal subTotalB;
     
-    @Column(name = "connection_fee")
-    private Double connectionFee;
+    @Column(name = "connection_fee", precision=20, scale=3)
+    private BigDecimal connectionFee;
     
-    @Column(name = "water_meter_shs")
-    private Double waterMeterShs;
+    @Column(name = "water_meter_shs", precision=20, scale=3)
+    private BigDecimal waterMeterShs;
     
-    @Column(name = "application_form_fee")
-    private Double applicationFormFee;
+    @Column(name = "application_form_fee", precision=20, scale=3)
+    private BigDecimal applicationFormFee;
     
-    @Column(name = "grand_total")
-    private Double grandTotal;
+    @Column(name = "grand_total", precision=20, scale=3)
+    private BigDecimal grandTotal;
     
-    @Column(name = "supervision_percent")
-    private Double supervisionPercent;
-
-    @Column(name = "labour_charge_percent")
-    private Double labourChargePercent;
-
-    @Column(name = "site_survey_percent")
-    private Double siteSurveyPercent;
-
-    @Column(name = "connection_fee_percent")
-    private Double connectionFeePercent;
-
+    @Column(name = "supervision_percent", precision=20, scale=3)
+    private BigDecimal supervisionPercent;
+    
+    @Column(name = "labour_charge_percent", precision=20, scale=3)
+    private BigDecimal labourChargePercent;
+    
+    @Column(name = "site_survey_percent", precision=20, scale=3)
+    private BigDecimal siteSurveyPercent;
+    
+    @Column(name = "connection_fee_percent", precision=20, scale=3)
+    private BigDecimal ConnectionFeePercent;
+    
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
     private ApplicationTxn applicationTxn;
-    
-    @ManyToOne
-    @JoinColumn(name = "pipe_size_master_id")
-    private PipeSizeMaster pipeSizeMaster;
 
-    //@OneToMany(mappedBy = "proceedings", cascade = CascadeType.ALL)
-    //@JsonIgnore
+    /*@OneToMany(mappedBy = "proceedings")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ItemRequired> itemRequireds = new HashSet<>();*/
+    
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="proceedings_id", referencedColumnName="id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<ItemRequired> itemRequireds = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "pipe_size_master_id")
+    private PipeSizeMaster pipeSizeMaster;
 
     public Long getId() {
         return id;
@@ -95,108 +98,108 @@ public class Proceedings implements Serializable {
         this.id = id;
     }
 
-    public Double getSubTotalA() {
+    public BigDecimal getSubTotalA() {
         return subTotalA;
     }
     
-    public void setSubTotalA(Double subTotalA) {
+    public void setSubTotalA(BigDecimal subTotalA) {
         this.subTotalA = subTotalA;
     }
 
-    public Double getSupervisionCharge() {
+    public BigDecimal getSupervisionCharge() {
         return supervisionCharge;
     }
     
-    public void setSupervisionCharge(Double supervisionCharge) {
+    public void setSupervisionCharge(BigDecimal supervisionCharge) {
         this.supervisionCharge = supervisionCharge;
     }
 
-    public Double getLabourCharge() {
+    public BigDecimal getLabourCharge() {
         return labourCharge;
     }
     
-    public void setLabourCharge(Double labourCharge) {
+    public void setLabourCharge(BigDecimal labourCharge) {
         this.labourCharge = labourCharge;
     }
 
-    public Double getSiteSurvey() {
+    public BigDecimal getSiteSurvey() {
         return siteSurvey;
     }
     
-    public void setSiteSurvey(Double siteSurvey) {
+    public void setSiteSurvey(BigDecimal siteSurvey) {
         this.siteSurvey = siteSurvey;
     }
 
-    public Double getSubTotalB() {
+    public BigDecimal getSubTotalB() {
         return subTotalB;
     }
     
-    public void setSubTotalB(Double subTotalB) {
+    public void setSubTotalB(BigDecimal subTotalB) {
         this.subTotalB = subTotalB;
     }
 
-    public Double getConnectionFee() {
+    public BigDecimal getConnectionFee() {
         return connectionFee;
     }
     
-    public void setConnectionFee(Double connectionFee) {
+    public void setConnectionFee(BigDecimal connectionFee) {
         this.connectionFee = connectionFee;
     }
 
-    public Double getWaterMeterShs() {
+    public BigDecimal getWaterMeterShs() {
         return waterMeterShs;
     }
     
-    public void setWaterMeterShs(Double waterMeterShs) {
+    public void setWaterMeterShs(BigDecimal waterMeterShs) {
         this.waterMeterShs = waterMeterShs;
     }
 
-    public Double getApplicationFormFee() {
+    public BigDecimal getApplicationFormFee() {
         return applicationFormFee;
     }
     
-    public void setApplicationFormFee(Double applicationFormFee) {
+    public void setApplicationFormFee(BigDecimal applicationFormFee) {
         this.applicationFormFee = applicationFormFee;
     }
 
-    public Double getGrandTotal() {
+    public BigDecimal getGrandTotal() {
         return grandTotal;
     }
     
-    public void setGrandTotal(Double grandTotal) {
+    public void setGrandTotal(BigDecimal grandTotal) {
         this.grandTotal = grandTotal;
     }
 
-    public Double getSupervisionPercent() {
+    public BigDecimal getSupervisionPercent() {
         return supervisionPercent;
     }
-
-    public void setSupervisionPercent(Double percentageMaster) {
-        this.supervisionPercent = percentageMaster;
+    
+    public void setSupervisionPercent(BigDecimal supervisionPercent) {
+        this.supervisionPercent = supervisionPercent;
     }
 
-    public Double getLabourChargePercent() {
+    public BigDecimal getLabourChargePercent() {
         return labourChargePercent;
     }
-
-    public void setLabourChargePercent(Double percentageMaster) {
-        this.labourChargePercent = percentageMaster;
+    
+    public void setLabourChargePercent(BigDecimal labourChargePercent) {
+        this.labourChargePercent = labourChargePercent;
     }
 
-    public Double getSiteSurveyPercent() {
+    public BigDecimal getSiteSurveyPercent() {
         return siteSurveyPercent;
     }
-
-    public void setSiteSurveyPercent(Double percentageMaster) {
-        this.siteSurveyPercent = percentageMaster;
+    
+    public void setSiteSurveyPercent(BigDecimal siteSurveyPercent) {
+        this.siteSurveyPercent = siteSurveyPercent;
     }
 
-    public Double getConnectionFeePercent() {
-        return connectionFeePercent;
+    public BigDecimal getConnectionFeePercent() {
+        return ConnectionFeePercent;
     }
-
-    public void setConnectionFeePercent(Double percentageMaster) {
-        this.connectionFeePercent = percentageMaster;
+    
+    public void setConnectionFeePercent(BigDecimal ConnectionFeePercent) {
+        this.ConnectionFeePercent = ConnectionFeePercent;
     }
 
     public ApplicationTxn getApplicationTxn() {
@@ -208,22 +211,22 @@ public class Proceedings implements Serializable {
     }
 
     public List<ItemRequired> getItemRequireds() {
-        return itemRequireds;
-    }
-
-    public void setItemRequireds(List<ItemRequired> itemRequireds) {
-        this.itemRequireds = itemRequireds;
-    }
-
-    public PipeSizeMaster getPipeSizeMaster() {
-		return pipeSizeMaster;
+		return itemRequireds;
 	}
 
-	public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
-		this.pipeSizeMaster = pipeSizeMaster;
+	public void setItemRequireds(List<ItemRequired> itemRequireds) {
+		this.itemRequireds = itemRequireds;
 	}
 
-	@Override
+	public PipeSizeMaster getPipeSizeMaster() {
+        return pipeSizeMaster;
+    }
+
+    public void setPipeSizeMaster(PipeSizeMaster pipeSizeMaster) {
+        this.pipeSizeMaster = pipeSizeMaster;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -259,8 +262,7 @@ public class Proceedings implements Serializable {
             ", supervisionPercent='" + supervisionPercent + "'" +
             ", labourChargePercent='" + labourChargePercent + "'" +
             ", siteSurveyPercent='" + siteSurveyPercent + "'" +
-            ", connectionFeePercent='" + connectionFeePercent + "'" +
-            
+            ", ConnectionFeePercent='" + ConnectionFeePercent + "'" +
             '}';
     }
 }

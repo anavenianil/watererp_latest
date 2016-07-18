@@ -20,13 +20,13 @@
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="orgRoleName"><span>Organization Role Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="parentOrgRoleId"><span>Parent Organization Role Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="parentOrgRoleId"><span>Parent Organization Role</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="creationDate"><span>Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="isHead"><span>Is Head</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="statusMaster.id"><span>Status Master</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="orgRoleHierarchy.id"><span>Organization Role Hierarchy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="departmentsMaster.id"><span>Departments Master</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!-- <th jh-sort-by="orgRoleHierarchy.id"><span>Organization Role Hierarchy</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+                    <!-- <th jh-sort-by="departmentsMaster.id"><span>Departments Master</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th></th>
                 </tr>
             </thead>
@@ -35,18 +35,18 @@
                     <td><a ui-sref="orgRoleInstance.detail({id:orgRoleInstance.id})">{{orgRoleInstance.id}}</a></td>
                     <td>{{orgRoleInstance.orgRoleName}}</td>
                     <td>{{orgRoleInstance.parentOrgRoleId}}</td>
-                    <td>{{orgRoleInstance.creationDate | date:'medium'}}</td>
-                    <td>{{orgRoleInstance.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{orgRoleInstance.creationDate | date:'mediumDate'}}</td>
+                    <td>{{orgRoleInstance.lastModifiedDate | date:'mediumDate'}}</td>
                     <td>{{orgRoleInstance.isHead}}</td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:orgRoleInstance.statusMaster.id})">{{orgRoleInstance.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:orgRoleInstance.statusMaster.id})">{{orgRoleInstance.statusMaster.status}}</a>
                     </td>
-                    <td>
+                    <!-- <td>
                         <a ui-sref="orgRoleHierarchy.detail({id:orgRoleInstance.orgRoleHierarchy.id})">{{orgRoleInstance.orgRoleHierarchy.id}}</a>
-                    </td>
-                    <td>
+                    </td> -->
+                    <!-- <td>
                         <a ui-sref="departmentsMaster.detail({id:orgRoleInstance.departmentsMaster.id})">{{orgRoleInstance.departmentsMaster.id}}</a>
-                    </td>
+                    </td> -->
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

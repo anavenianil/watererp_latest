@@ -10,5 +10,5 @@ import java.util.List;
  * Spring Data JPA repository for the ConnectionTerminate entity.
  */
 public interface ConnectionTerminateRepository extends JpaRepository<ConnectionTerminate,Long> {
-
+	ConnectionTerminate findByCan(String can);
 }

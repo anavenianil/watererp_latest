@@ -25,6 +25,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,8 +45,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ReceiptResourceIntTest {
 
 
-    private static final Double DEFAULT_AMOUNT = 1D;
-    private static final Double UPDATED_AMOUNT = 2D;
+    private static final BigDecimal DEFAULT_AMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_AMOUNT = new BigDecimal(2);
     private static final String DEFAULT_BANK_NAME = "AAAAA";
     private static final String UPDATED_BANK_NAME = "BBBBB";
     private static final String DEFAULT_BRANCH_NAME = "AAAAA";
@@ -132,7 +133,7 @@ public class ReceiptResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(receipt.getId().intValue())))
-                .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.doubleValue())))
+                .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
                 .andExpect(jsonPath("$.[*].bankName").value(hasItem(DEFAULT_BANK_NAME.toString())))
                 .andExpect(jsonPath("$.[*].branchName").value(hasItem(DEFAULT_BRANCH_NAME.toString())))
                 .andExpect(jsonPath("$.[*].checkOrDdDate").value(hasItem(DEFAULT_CHECK_OR_DD_DATE.toString())))
@@ -152,7 +153,7 @@ public class ReceiptResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(receipt.getId().intValue()))
-            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
             .andExpect(jsonPath("$.bankName").value(DEFAULT_BANK_NAME.toString()))
             .andExpect(jsonPath("$.branchName").value(DEFAULT_BRANCH_NAME.toString()))
             .andExpect(jsonPath("$.checkOrDdDate").value(DEFAULT_CHECK_OR_DD_DATE.toString()))

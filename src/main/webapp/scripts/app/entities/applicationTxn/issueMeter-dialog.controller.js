@@ -4,12 +4,12 @@ angular.module('watererpApp')
     .controller('IssueMeterDialogController', function ($scope, $state, $stateParams, ApplicationTxn, ParseLinks, DateUtils, MeterDetails,
     		ApplicationTxnService, $http, $window) {
 
-    	$scope.workflowDTO = {};
-    	$scope.workflowDTO.applicationTxn = {};
-    	$scope.workflowDTO.actionType = "issueMeter";
+    	$scope.changeCaseDTO = {};
+    	$scope.changeCaseDTO.applicationTxn = {};
+    	$scope.changeCaseDTO.actionType = "issueMeter";
     	//$scope.applicationTxn = {};
     	//$scope.meterdetailss = MeterDetails.query();
-    	$scope.workflowDTO.applicationTxn.connectionDate = new Date();
+    	$scope.changeCaseDTO.applicationTxn.connectionDate = new Date();
     	$scope.dtmax = new Date();
     	
     	
@@ -31,8 +31,8 @@ angular.module('watererpApp')
     	
     	$scope.load = function(id){
     		ApplicationTxn.get({id : id}, function(result) {
-                $scope.workflowDTO.applicationTxn = result;
-                $scope.workflowDTO.applicationTxn.remarks = "";
+                $scope.changeCaseDTO.applicationTxn = result;
+                $scope.changeCaseDTO.applicationTxn.remarks = "";
             });
     	}
     	if($stateParams.id != null){
@@ -57,10 +57,10 @@ angular.module('watererpApp')
 
         
       //approve a request
-		$scope.save = function(workflowDTO){
+		$scope.save = function(changeCaseDTO){
 			$scope.isSaving = true;
         	return $http.post('/api/applicationTxns/issueMeter',
-        			workflowDTO).then(
+        			changeCaseDTO).then(
 					function(response) {
 						$state.go('applicationTxn');
 					});

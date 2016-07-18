@@ -1,0 +1,155 @@
+<div>
+    <h2>Customer Info</h2>
+    <jh-alert></jh-alert>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="custDetails.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Customer Details</span>
+                </button>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+		<div class="col-sm-4 col-md-offset-4">
+			<label for="field_SearchCan">Search By CAN</label>
+			<div class="form-group"
+				ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+				<input type="text" ng-model="custInfo" typeahead-min-length="3"
+					placeholder="Search CAN or Name or Address (Min 3 chars)"
+					uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+					typeahead-loading="loadingCANs"
+					typeahead-on-select='onSelect($item, $model, $label)'
+					typeahead-no-results="noResults" class="form-control">
+				<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+				<div ng-show="noResults">
+					<i class="glyphicon glyphicon-remove"></i>
+					No CANs Found
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="can"><span>CAN</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="divCode"><span>Division Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secCode"><span>Section Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="secName"><span>Section Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReaderCode"><span>Meter Reader Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="connDate"><span>Connection Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="consName"><span>Consumer Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="houseNo"><span>House No</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="address"><span>Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="city"><span>City</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pinCode"><span>Pin Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="categoryUnused"><span>Category Unused</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pipeSize"><span>Pipe Size</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="boardMeter"><span>Board Meter</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sewerage"><span>Sewerage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterNo"><span>Meter Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevBillType"><span>Previous Bill Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevBillMonth"><span>Previous Bill Month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevAvgKl"><span>Previous Average kiloliter </span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReadingDt"><span>Meter Reading Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prevReading"><span>Previous Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metReadingMo"><span>Meter Reading Month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metAvgKl"><span>Meter Average kiloliter </span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="arrears"><span>Arrears</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reversalAmt"><span>Reversal Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="installment"><span>Installment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="otherCharges"><span>Other Charges</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="surcharge"><span>Surcharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hrsSurcharge"><span>Hours Surcharge</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="resUnits"><span>Residential Units</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="metCostInstallment"><span>Meter Cost Installment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="intOnArrears"><span>Int On Arrears</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastPymtDt"><span>Last Payment Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastPymtAmt"><span>Last Payment Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobileNo"><span>Mobile Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                   <!--  <th jh-sort-by="ccFlag"><span>CcFlag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cpFlag"><span>CpFlag</span> <span class="glyphicon glyphicon-sort"></span></th>  -->
+                    <th jh-sort-by="noticeFlag"><span>Notice Flag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="drFlag"><span>Dr Flag</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lat"><span>Latitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="longi"><span>Longitude</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterFixDate"><span>Meter Fix Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffCategoryMaster.id"><span>Tariff Category Master</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="custDetails in custDetailss track by custDetails.id">
+                    <td><a ui-sref="custDetails.detail({id:custDetails.id})">{{custDetails.id}}</a></td>
+                    <td>{{custDetails.can}}</td>
+                    <td>{{custDetails.divCode}}</td>
+                    <td>{{custDetails.secCode}}</td>
+                    <td>{{custDetails.secName}}</td>
+                    <td>{{custDetails.metReaderCode}}</td>
+                        <td>{{custDetails.connDate | date:'mediumDate'}}</td>
+                    <td>{{custDetails.consName}}</td>
+                    <td>{{custDetails.houseNo}}</td>
+                    <td>{{custDetails.address}}</td>
+                    <td>{{custDetails.city}}</td>
+                    <td>{{custDetails.pinCode}}</td>
+                    <td>{{custDetails.categoryUnused}}</td>
+                    <td>{{custDetails.pipeSize}}</td>
+                    <td>{{custDetails.boardMeter}}</td>
+                    <td>{{custDetails.sewerage}}</td>
+                    <td>{{custDetails.meterNo}}</td>
+                    <td>{{custDetails.prevBillType}}</td>
+                        <td>{{custDetails.prevBillMonth | date:'mediumDate'}}</td>
+                    <td>{{custDetails.prevAvgKl}}</td>
+                        <td>{{custDetails.metReadingDt | date:'mediumDate'}}</td>
+                    <td>{{custDetails.prevReading}}</td>
+                        <td>{{custDetails.metReadingMo | date:'mediumDate'}}</td>
+                    <td>{{custDetails.metAvgKl}}</td>
+                    <td>{{custDetails.arrears}}</td>
+                    <td>{{custDetails.reversalAmt}}</td>
+                    <td>{{custDetails.installment}}</td>
+                    <td>{{custDetails.otherCharges}}</td>
+                    <td>{{custDetails.surcharge}}</td>
+                    <td>{{custDetails.hrsSurcharge}}</td>
+                    <td>{{custDetails.resUnits}}</td>
+                    <td>{{custDetails.metCostInstallment}}</td>
+                    <td>{{custDetails.intOnArrears}}</td>
+                        <td>{{custDetails.lastPymtDt | date:'mediumDate'}}</td>
+                    <td>{{custDetails.lastPymtAmt}}</td>
+                    <td>{{custDetails.mobileNo}}</td>
+                    <td>{{custDetails.ccFlag}}</td>
+                    <td>{{custDetails.cpFlag}}</td>
+                    <td>{{custDetails.noticeFlag}}</td>
+                    <td>{{custDetails.drFlag}}</td>
+                    <td>{{custDetails.lat}}</td>
+                    <td>{{custDetails.longi}}</td>
+                        <td>{{custDetails.meterFixDate | date:'mediumDate'}}</td>
+                    <td>
+                        <a ui-sref="tariffCategoryMaster.detail({id:custDetails.tariffCategoryMaster.id})">{{custDetails.tariffCategoryMaster.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="customerInfo.detail({id:custDetails.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="custDetails.edit({id:custDetails.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="custDetails.delete({id:custDetails.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

@@ -21,29 +21,29 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="creationDate"><span>Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="workflowMaster.id"><span>Work Flow Master</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="workflowMaster.id"><span>Workflow Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="requestMaster.id"><span>Request Master</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="orgRoleInstance.id"><span>Organization Role Instance</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="statusMaster.id"><span>Status Master</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="reqOrgWorkflowMapping in reqOrgWorkflowMappings track by reqOrgWorkflowMapping.id">
                     <td><a ui-sref="reqOrgWorkflowMapping.detail({id:reqOrgWorkflowMapping.id})">{{reqOrgWorkflowMapping.id}}</a></td>
-                    <td>{{reqOrgWorkflowMapping.creationDate | date:'medium'}}</td>
-                    <td>{{reqOrgWorkflowMapping.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{reqOrgWorkflowMapping.creationDate | date:'mediumDate'}}</td>
+                    <td>{{reqOrgWorkflowMapping.lastModifiedDate | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="workflowMaster.detail({id:reqOrgWorkflowMapping.workflowMaster.id})">{{reqOrgWorkflowMapping.workflowMaster.id}}</a>
+                        <a ui-sref="workflowMaster.detail({id:reqOrgWorkflowMapping.workflowMaster.id})">{{reqOrgWorkflowMapping.workflowMaster.workflowName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="requestMaster.detail({id:reqOrgWorkflowMapping.requestMaster.id})">{{reqOrgWorkflowMapping.requestMaster.id}}</a>
+                        <a ui-sref="requestMaster.detail({id:reqOrgWorkflowMapping.requestMaster.id})">{{reqOrgWorkflowMapping.requestMaster.requestType}}</a>
                     </td>
                     <td>
-                        <a ui-sref="orgRoleInstance.detail({id:reqOrgWorkflowMapping.orgRoleInstance.id})">{{reqOrgWorkflowMapping.orgRoleInstance.id}}</a>
+                        <a ui-sref="orgRoleInstance.detail({id:reqOrgWorkflowMapping.orgRoleInstance.id})">{{reqOrgWorkflowMapping.orgRoleInstance.orgRoleName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:reqOrgWorkflowMapping.statusMaster.id})">{{reqOrgWorkflowMapping.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:reqOrgWorkflowMapping.statusMaster.id})">{{reqOrgWorkflowMapping.statusMaster.status}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

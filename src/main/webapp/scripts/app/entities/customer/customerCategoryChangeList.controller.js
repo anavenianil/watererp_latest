@@ -8,9 +8,9 @@ angular.module('watererpApp')
         $scope.reverse = true;
         $scope.page = 0;
         $scope.customer = {};
-        $scope.customer.changeType="CONNECTIONCATEGORY";
+        $scope.customer.ChangeCaseType="CONNECTIONCATEGORY";
         $scope.loadAll = function() {
-            Customer.query({page: $scope.page, size: 20, changeType:$scope.customer.changeType, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            Customer.query({page: $scope.page, size: 20, changeType:$scope.customer.ChangeCaseType, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.customers.push(result[i]);

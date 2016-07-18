@@ -1,12 +1,34 @@
 'use strict';
 
 angular.module('watererpApp').controller('MenuItem2UrlDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'MenuItem2Url', 'MenuItem', 'Url',
-        function($scope, $stateParams, $uibModalInstance, entity, MenuItem2Url, MenuItem, Url) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'MenuItem2Url', 'MenuItem', 'Url', '$http',
+        function($scope, $stateParams, $uibModalInstance, entity, MenuItem2Url, MenuItem, Url, $http) {
 
         $scope.menuItem2Url = entity;
-        $scope.menuitems = MenuItem.query();
-        $scope.urls = Url.query();
+        //$scope.menuitems = MenuItem.query();
+        //$scope.urls = Url.query();
+        
+        $scope.getMenuItems = function() {
+        	$scope.menuitems = [];
+			return $http.get('/api/menuItems/getAll'
+					).then(
+					function(response) {
+						$scope.menuitems = response.data;
+					});
+		}
+        $scope.getMenuItems();
+        
+        $scope.getUrls = function() {
+        	$scope.urls = [];
+			return $http.get('/api/urls/getAll'
+					).then(
+					function(response) {
+						$scope.urls = response.data;
+					});
+		}
+        $scope.getUrls();
+        
+        
         $scope.load = function(id) {
             MenuItem2Url.get({id : id}, function(result) {
                 $scope.menuItem2Url = result;
