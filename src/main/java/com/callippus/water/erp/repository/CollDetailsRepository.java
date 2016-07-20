@@ -16,4 +16,6 @@ public interface CollDetailsRepository extends JpaRepository<CollDetails,Long> {
 	Page<CollDetails> findByTxnStatus(Pageable pageable, String txnStatus);
 
 	Page<CollDetails> findByCan(Pageable pageable, String can);
+	
+	List<CollDetails> findTop10ByCanAndReversalRefOrderByIdDesc(String can, String reversalRef);
 }

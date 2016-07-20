@@ -29,4 +29,9 @@ angular.module('watererpApp')
                 }
             }
         });
+    })
+    .factory('CollDetailsCANSearch', function ($resource) {
+    	return $resource('api/collDetailss/forCancel/:can', {}, {
+    		'query': { method: 'GET', isArray: true}
+        });
     });

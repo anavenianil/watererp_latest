@@ -108,5 +108,21 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('collDetails.cancel', {
+                parent: 'collDetails',
+                url: '/cancel',
+                data: {
+                    authorities: ['ROLE_CASHIER','ROLE_USER'],
+                    pageTitle: 'CollDetailss'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/collDetails/collDetailsCancel-dialog.html',
+                        controller: 'CollDetailsCancelDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

@@ -1,6 +1,8 @@
 package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.BillAndCollectionDTO;
 import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.CustDetails;
@@ -215,5 +217,27 @@ public class CollDetailsResource {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+	
+	
 
+	/**
+	 * GET /collDetailss/forCancel/:can
+	 */
+	@RequestMapping(value = "/collDetailss/forCancel/{can}", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<CollDetails>> getCollDetails(@PathVariable String can) {
+		log.debug("REST request to get CollDetails : {}", can);
+
+		List<CollDetails> collDetailss = collDetailsRepository.findTop10ByCanAndReversalRefOrderByIdDesc(can, "");
+
+		return Optional.ofNullable(collDetailss)
+				.map(result -> new ResponseEntity<>(collDetailss, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+	
+	
+	
+	
 }

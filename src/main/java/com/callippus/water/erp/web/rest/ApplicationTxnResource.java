@@ -497,7 +497,7 @@ public class ApplicationTxnResource {
 			IOException {
 		
 		Map<String, Object> params = new HashMap<String,Object>();
-		params.put("id",id);
+		params.put("Id",id);
 
 		JasperPrint jasperPrint = reportsRepository
 				.generateReport("/reports/Application_txn.jasper", params);
