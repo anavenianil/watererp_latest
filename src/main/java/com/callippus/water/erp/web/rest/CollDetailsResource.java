@@ -3,9 +3,11 @@ package com.callippus.water.erp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.BillAndCollectionDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
@@ -37,6 +39,7 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -230,13 +233,29 @@ public class CollDetailsResource {
 	public ResponseEntity<List<CollDetails>> getCollDetails(@PathVariable String can) {
 		log.debug("REST request to get CollDetails : {}", can);
 
-		List<CollDetails> collDetailss = collDetailsRepository.findTop10ByCanAndReversalRefOrderByIdDesc(can, "");
+		List<CollDetails> collDetailss = collDetailsRepository.findTop10ByCanOrderByIdDesc(can);
 
 		return Optional.ofNullable(collDetailss)
 				.map(result -> new ResponseEntity<>(collDetailss, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 	
+	
+		//added to Cancel collection Details
+		@RequestMapping(value = "/collDetailss/collDetailsCancel", 
+				method = RequestMethod.POST, 
+				produces = MediaType.APPLICATION_JSON_VALUE)
+		@Timed
+		public ResponseEntity<CollDetails> collDetailsCancel(
+				@RequestBody CollDetails collDetails) throws URISyntaxException { 
+			log.debug("REST request to cancel Collection : {}", collDetails);
+			
+			//collDetailsRepository.save(collDetails);
+			
+			return ResponseEntity.created(new URI("/api/collDetailss/collDetailsCancel"))
+					.headers(HeaderUtil.createEntityCreationAlert("collDetails", ""))
+					.body(null);
+		}
 	
 	
 	

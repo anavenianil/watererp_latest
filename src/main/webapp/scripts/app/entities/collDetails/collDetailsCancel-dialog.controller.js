@@ -72,14 +72,6 @@ angular.module('watererpApp').controller(
 			
 			$scope.clear=function(){};
 			
-			
-
-			$scope.save = function() {
-				$scope.isSaving = true;
-				CollDetails
-						.save($scope.collDetails, onSaveSuccess, onSaveError);
-			};
-
 			$scope.datePickerForReceiptDt = {};
 
 			$scope.datePickerForReceiptDt.status = {
@@ -91,8 +83,19 @@ angular.module('watererpApp').controller(
 			};
 
 			
-			$scope.cancelCollection = function(collDetails, id){
+			/*$scope.cancelCollection = function(collDetails, id){
 				collDetails.id = id;
 				console.log(collDetails);
-			}
+			}*/
+			
+			
+			$scope.cancelCollection = function(){
+				console.log($scope.collDetails);
+				$scope.isSaving = true;
+	        	return $http.post('/api/collDetailss/collDetailsCancel',
+	        			$scope.collDetails).then(
+						function(response) {
+							console.log("collDetails cancelled");
+						});
+	        }
 		});

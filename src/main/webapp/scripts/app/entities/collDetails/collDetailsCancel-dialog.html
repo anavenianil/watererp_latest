@@ -1,4 +1,4 @@
-<form name="editForm" rc-submit="save()" novalidate>
+<form name="editForm" rc-submit="cancelCollection()" novalidate>
 
 
 	<div class="panel panel-primary">
@@ -49,7 +49,7 @@
 								infinite-scroll-disabled="links['last'] == page">
 								<tr
 									ng-repeat="collDetails in collDetailss track by collDetails.id">
-									<td><input type="radio" name="id" ng-value="collDetails.id"></td>
+									<td><input type="radio" name="id" ng-model="collDetails.id" ng-value="collDetails.id"></td>
 									<td>{{collDetails.id}}</td>
 									<td>{{collDetails.reversalRef}}</td>
 									<td>{{collDetails.receiptAmt| number :2}}</td>
@@ -73,8 +73,8 @@
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span> &nbsp; <span>Cancel</span>
 					</button>
-					<button type="button" ng-enabled="validate() "
-						class="btn btn-primary" id="submitSave" ng-click="cancelCollection(collDetails, collDetails.id)">
+					<button type="submit"
+						class="btn btn-primary" id="submitSave">
 						<span class="glyphicon glyphicon-save"></span> &nbsp; <span>Save</span>
 					</button>
 				</div>
