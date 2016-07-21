@@ -41,19 +41,26 @@
 									<th></th>
 									<th jh-sort-by="id"><span>ID</span></th>
 									<th jh-sort-by="reversalRef"><span>Reversal Ref.</span></th>
+									<th jh-sort-by="receiptNo"><span>Receipt No</span></th>
 									<th jh-sort-by="receiptAmt"><span>Receipt Amount</span></th>
 									<th jh-sort-by="receiptMode"><span>Receipt Mode</span></th>
+									<th jh-sort-by="remarks"><span>Remarks</span></th>
+									<th jh-sort-by="txnStatus"><span>Txn Status</span></th>
 								</tr>
 							</thead>
 							<tbody infinite-scroll="loadPage(page + 1)"
 								infinite-scroll-disabled="links['last'] == page">
 								<tr
 									ng-repeat="collDetails in collDetailss track by collDetails.id">
-									<td><input type="radio" name="id" ng-model="collDetails.id" ng-value="collDetails.id"></td>
+									<td><input type="radio" name="id"
+										ng-click="assignCollDetailsId(collDetails.id)"></td>
 									<td>{{collDetails.id}}</td>
 									<td>{{collDetails.reversalRef}}</td>
+									<td>{{collDetails.receiptNo}}</td>
 									<td>{{collDetails.receiptAmt| number :2}}</td>
 									<td>{{collDetails.receiptMode}}</td>
+									<td>{{collDetails.remarks}}</td>
+									<td>{{collDetails.txnStatus}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -73,8 +80,7 @@
 						ng-click="clear()">
 						<span class="glyphicon glyphicon-ban-circle"></span> &nbsp; <span>Cancel</span>
 					</button>
-					<button type="submit"
-						class="btn btn-primary" id="submitSave">
+					<button type="submit" class="btn btn-primary" id="submitSave">
 						<span class="glyphicon glyphicon-save"></span> &nbsp; <span>Save</span>
 					</button>
 				</div>
@@ -82,3 +88,33 @@
 		</div>
 	</div>
 </form>
+<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form name="confirmForm">
+				<div class="modal-body">
+					<!-- <p>
+					<h3>Collection Cancelled Successfully!</h3>
+					</p> -->
+					<div class="alert alert-info">
+						<strong>Transaction Cancelled Successfully!</strong>
+					</div>
+					<div>
+						<h4>
+							<label>CAN:&nbsp;&nbsp; </label>{{collDetails.can}}
+						</h4>
+						<h4>
+							<label>Receipt No.:&nbsp;&nbsp; </label>{{collDetails.receiptNo}}
+						</h4>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

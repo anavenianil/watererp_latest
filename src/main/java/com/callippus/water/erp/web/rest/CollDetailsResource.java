@@ -249,12 +249,17 @@ public class CollDetailsResource {
 		public ResponseEntity<CollDetails> collDetailsCancel(
 				@RequestBody CollDetails collDetails) throws URISyntaxException { 
 			log.debug("REST request to cancel Collection : {}", collDetails);
+			String newRemarks = collDetails.getRemarks();
+			//String oldRemarks = collDetailsRepository.findOne(collDetails.getId()).getRemarks();
+			collDetails.setRemarks(collDetailsRepository.findOne(collDetails.getId()).getRemarks()+"("+collDetails.getRemarks()+")");
+			collDetails.setTxnStatus("CANCELLED");
+			CollDetails result = collDetails;//collDetailsRepository.save(collDetails);
 			
-			//collDetailsRepository.save(collDetails);
-			
-			return ResponseEntity.created(new URI("/api/collDetailss/collDetailsCancel"))
+			return ResponseEntity.ok().headers(	HeaderUtil.createEntityUpdateAlert("collDetails",
+					collDetails.getId().toString())).body(result);
+			/*return ResponseEntity.created(new URI("/api/collDetailss/collDetailsCancel"))
 					.headers(HeaderUtil.createEntityCreationAlert("collDetails", ""))
-					.body(null);
+					.body(null);*/
 		}
 	
 	

@@ -95,7 +95,15 @@ angular.module('watererpApp').controller(
 	        	return $http.post('/api/collDetailss/collDetailsCancel',
 	        			$scope.collDetails).then(
 						function(response) {
-							console.log("collDetails cancelled");
+							console.log("collDetails cancelled: "+response.data);
+							$scope.collDetails = response.data;
+							$('#saveSuccessfullyModal').modal('show');
 						});
 	        }
+			
+			
+			$scope.assignCollDetailsId = function(id){
+				//alert(id);
+				$scope.collDetails.id = id;
+			}
 		});
