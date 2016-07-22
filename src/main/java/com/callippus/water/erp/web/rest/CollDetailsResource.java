@@ -86,7 +86,7 @@ public class CollDetailsResource {
 											"A new collDetails cannot already have an ID"))
 					.body(null);
 		}
-		
+		collDetails.setReceiptMode(collDetails.getPaymentTypes().getPaymentMode());
 		
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
@@ -249,10 +249,11 @@ public class CollDetailsResource {
 		public ResponseEntity<CollDetails> collDetailsCancel(
 				@RequestBody CollDetails collDetails) throws URISyntaxException { 
 			log.debug("REST request to cancel Collection : {}", collDetails);
-			String newRemarks = collDetails.getRemarks();
+			//String newRemarks = collDetails.getRemarks();
 			//String oldRemarks = collDetailsRepository.findOne(collDetails.getId()).getRemarks();
 			collDetails.setRemarks(collDetailsRepository.findOne(collDetails.getId()).getRemarks()+"("+collDetails.getRemarks()+")");
 			collDetails.setTxnStatus("CANCELLED");
+			
 			CollDetails result = collDetails;//collDetailsRepository.save(collDetails);
 			
 			return ResponseEntity.ok().headers(	HeaderUtil.createEntityUpdateAlert("collDetails",

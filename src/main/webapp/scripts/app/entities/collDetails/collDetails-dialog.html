@@ -185,22 +185,22 @@
 						</div>
 						<div class="col-sm-4">
 							<div class="form-group"
-								ng-class="{ 'has-error' : instrEnabled && editForm.instrumentIssuerMaster.$invalid && 
-         (editForm.instrumentIssuerMaster.$dirty || rc.editForm.attempted)}">
-								<label class="control-label" for="field_instrIssuer">Instrument
+								ng-class="{ 'has-error' : instrEnabled && editForm.bankMaster.$invalid && 
+         (editForm.bankMaster.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_bankMaster">Instrument
 									Issuer</label>
-								<select class="form-control" id="field_instrumentIssuerMaster"
-									name="instrumentIssuerMaster"
-									ng-model="collDetails.instrumentIssuerMaster"
+								<select class="form-control" id="field_bankMaster"
+									name="bankMaster"
+									ng-model="collDetails.bankMaster"
 									ng-required="instrEnabled"
-									ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in bankmasters track by instrumentIssuerMaster.id"
+									ng-options="bankmaster as bankmaster.bankName for bankmaster in bankmasters track by bankmaster.id"
 									ng-disabled="!instrEnabled">
 								</select>
 
 								<div
-									ng-show="(editForm.instrumentIssuerMaster.$dirty || rc.editForm.attempted) && instrEnabled && editForm.instrumentIssuerMaster.$invalid">
+									ng-show="(editForm.bankMaster.$dirty || rc.editForm.attempted) && instrEnabled && editForm.bankMaster.$invalid">
 									<p class="help-block"
-										ng-show="editForm.instrumentIssuerMaster.$error.required">Instrument Issuer
+										ng-show="editForm.bankMaster.$error.required">Instrument Issuer
 										is required.</p>
 								</div>
 							</div>
