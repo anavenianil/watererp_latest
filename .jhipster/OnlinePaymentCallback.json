@@ -44,7 +44,7 @@
         {
             "fieldId": 6,
             "fieldName": "totalAmountPaid",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 7,

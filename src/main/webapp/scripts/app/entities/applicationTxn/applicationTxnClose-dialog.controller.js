@@ -6,14 +6,14 @@ angular.module('watererpApp').controller(
 				ParseLinks, DateUtils, ApplicationTxnService,
 				GetFeasibilityStudy, GetProceedings) {
 
-			$scope.workflowDTO = {};
-			$scope.workflowDTO.applicationTxn = {};
-			$scope.workflowDTO.proceedings = {};
-			$scope.workflowDTO.proceedings.divisionMaster = {};
-			$scope.workflowDTO.proceedings.streetMaster = {};
-			$scope.workflowDTO.divisionCode = '';
-			$scope.workflowDTO.streetNo = '';
-			$scope.workflowDTO.applicationTxn.can = "";
+			$scope.changeCaseDTO = {};
+			$scope.changeCaseDTO.applicationTxn = {};
+			$scope.changeCaseDTO.proceedings = {};
+			$scope.changeCaseDTO.proceedings.divisionMaster = {};
+			$scope.changeCaseDTO.proceedings.streetMaster = {};
+			$scope.changeCaseDTO.divisionCode = '';
+			$scope.changeCaseDTO.streetNo = '';
+			$scope.changeCaseDTO.applicationTxn.can = "";
 			
 			$scope.actionType = "createCAN";
 
@@ -23,21 +23,21 @@ angular.module('watererpApp').controller(
 				ApplicationTxn.get({
 					id : id
 				}, function(result) {
-					$scope.workflowDTO.applicationTxn = result;
-					$scope.workflowDTO.applicationTxn.remarks = '';
+					$scope.changeCaseDTO.applicationTxn = result;
+					$scope.changeCaseDTO.applicationTxn.remarks = '';
 				});
 			}
 
 			GetFeasibilityStudy.get({
 				applicationTxnId : $stateParams.applicationTxnId
 			}, function(result) {
-				$scope.workflowDTO.feasibilityStudy = result;
+				$scope.changeCaseDTO.feasibilityStudy = result;
 			});
 
 			GetProceedings.get({
 				applicationTxnId : $stateParams.applicationTxnId
 			}, function(result) {
-				$scope.workflowDTO.proceedings = result;
+				$scope.changeCaseDTO.proceedings = result;
 			});
 			
 			$scope.getFeasibilityByAppTxn = function(applicationTxnId){
@@ -47,7 +47,7 @@ angular.module('watererpApp').controller(
 	    			$scope.feasibilityStudy = result;
 	    			if($scope.feasibilityStudy.id !=null){
 	    			ApplicationTxnService.generateCan(result.id).then(function(response) {
-	    				$scope.workflowDTO.applicationTxn.can = response;
+	    				$scope.changeCaseDTO.applicationTxn.can = response;
 	    			});
 	    			}
 	    			else{
@@ -77,10 +77,10 @@ angular.module('watererpApp').controller(
 			};
 
 			 //approve a request to create new customer
-			$scope.save = function(workflowDTO){
+			$scope.save = function(changeCaseDTO){
 				$scope.isSaving = true;
 	        	return $http.post('/api/applicationTxns/createNewCustomer',
-	        			workflowDTO).then(
+	        			changeCaseDTO).then(
 						function(response) {
 							$state.go('applicationTxn');
 						});

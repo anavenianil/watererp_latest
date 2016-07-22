@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Request Master</span> {{requestMaster.id}}</h2>
+    <h2><span>RequestMaster</span> {{requestMaster.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Request Type</span>
+                    <span>RequestType</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.requestType}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Creation Date</span>
+                    <span>CreationDate</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.creationDate | date:'medium'}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Last Modified Date</span>
+                    <span>LastModifiedDate</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.lastModifiedDate | date:'medium'}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Internal Flag</span>
+                    <span>InternalFlag</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{requestMaster.internalFlag}}</span>
@@ -52,10 +52,18 @@
             </tr>
             <tr>
                 <td>
-                    <span>Status Master</span>
+                    <span>statusMaster</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="statusMaster.detail({id:requestMaster.statusMaster.id})">{{requestMaster.statusMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>module</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="module.detail({id:requestMaster.module.id})">{{requestMaster.module.id}}</a>
                 </td>
             </tr>
             </tbody>

@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
@@ -43,7 +44,7 @@ import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
-import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
@@ -195,12 +196,13 @@ public class ApplicationTxnResource {
             }
             custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             custDetails.setPrevBillType("U");
-            custDetails.setPipeSize(0.5f);
+            custDetails.setPipeSize(new BigDecimal("0.5"));
             custDetails.setPipeSizeMaster(pipeSizeMasterRepository.findOne(1l));//hard coded pipesize
             custDetails.setBoardMeter(configurationDetailsRepository.findOneByName("BOARD_METER").getValue());
 	        custDetails.setCity(configurationDetailsRepository.findOneByName("CITY").getValue());
 	        custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
 	        custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
+	        custDetails.setOrganisationName(applicationTxn.getOrganizationName());
             custDetails.setConnDate(applicationTxn.getConnectionDate());
             custDetails.setStatus(CustStatus.ACTIVE);
             //For Bill effective month
@@ -339,9 +341,10 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<RequestCountDTO>> getPendingRequests(HttpServletResponse response)throws Exception {
+    public ResponseEntity<List<RequestCountDTO>> getPendingRequests(HttpServletResponse response,
+    		@RequestParam(value = "id", required = false) Long id)throws Exception {
         log.debug("REST request to get Requisition : {}");
-        List<RequestCountDTO> pendingRequests = applicationTxnCustomRepository.countPendingRequests();
+        List<RequestCountDTO> pendingRequests = applicationTxnCustomRepository.countPendingRequests(id);
 
         return new ResponseEntity<>(pendingRequests, HttpStatus.OK);
     }
@@ -355,9 +358,10 @@ public class ApplicationTxnResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<RequestCountDTO>> getApprovedRequests(HttpServletResponse response)throws Exception {
+    public ResponseEntity<List<RequestCountDTO>> getApprovedRequests(HttpServletResponse response,
+    		@RequestParam(value = "id", required = false) Long id)throws Exception {
         log.debug("REST request to get Requisition : {}");
-        List<RequestCountDTO> approvedRequests = applicationTxnCustomRepository.countApprovedRequests();
+        List<RequestCountDTO> approvedRequests = applicationTxnCustomRepository.countApprovedRequests(id);
 
         return new ResponseEntity<>(approvedRequests, HttpStatus.OK);
     }
@@ -493,7 +497,7 @@ public class ApplicationTxnResource {
 			IOException {
 		
 		Map<String, Object> params = new HashMap<String,Object>();
-		params.put("id",id);
+		params.put("Id",id);
 
 		JasperPrint jasperPrint = reportsRepository
 				.generateReport("/reports/Application_txn.jasper", params);
@@ -540,11 +544,11 @@ public class ApplicationTxnResource {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
-	public ResponseEntity<WorkflowDTO> issueMeter(
-			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
-		log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+	public ResponseEntity<ChangeCaseDTO> issueMeter(
+			@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException { 
+		log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 		
-		ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+		ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
 			applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
         	MeterDetails meterDetails = applicationTxn.getMeterDetails();
         		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
@@ -564,17 +568,17 @@ public class ApplicationTxnResource {
 	
 	
 	
-	//added to change stage for newCustomerSave
+		//added to change stage for newCustomerSave
 		@RequestMapping(value = "/applicationTxns/createNewCustomer", 
 				method = RequestMethod.POST, 
 				produces = MediaType.APPLICATION_JSON_VALUE)
 		@Timed
 		@Transactional(rollbackFor=Exception.class)
-		public ResponseEntity<WorkflowDTO> createNewCustomer(
-				@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException { 
-			log.debug("REST request to approve ApplicationTxn : {}", workflowDTO);
+		public ResponseEntity<ChangeCaseDTO> createNewCustomer(
+				@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException { 
+			log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 			
-			ApplicationTxn applicationTxn = workflowDTO.getApplicationTxn();
+			ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
 
 	        MeterDetails meterDetails = applicationTxn.getMeterDetails();
 	    	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
@@ -596,8 +600,9 @@ public class ApplicationTxnResource {
 	        custDetails.setPinCode(configurationDetailsRepository.findOneByName("PIN").getValue());
 	        custDetails.setSewerage(configurationDetailsRepository.findOneByName("SEWERAGE_CONN").getValue());
 	           
-	        custDetails.setPipeSize(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize());
+	        custDetails.setPipeSize(new BigDecimal(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster().getPipeSize()));
 	        custDetails.setPipeSizeMaster(proceedingsRepository.findByApplicationTxn(applicationTxn).getPipeSizeMaster());
+	        custDetails.setOrganisationName(applicationTxn.getOrganizationName());
 	        custDetails.setStatus(CustStatus.ACTIVE);
 	            
 	        CustDetails cd = custDetailsRepository.save(custDetails);

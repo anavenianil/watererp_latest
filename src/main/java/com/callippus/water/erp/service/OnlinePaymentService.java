@@ -1,5 +1,6 @@
 package com.callippus.water.erp.service;
 
+import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.ConfigurationDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.MerchantMaster;
@@ -8,6 +9,7 @@ import com.callippus.water.erp.domain.OnlinePaymentOrder;
 import com.callippus.water.erp.domain.OnlinePaymentResponse;
 import com.callippus.water.erp.domain.PGResponse;
 import com.callippus.water.erp.domain.UnifiedPayment;
+import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
 import com.callippus.water.erp.repository.ConfigurationDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.MerchantMasterRepository;
@@ -19,6 +21,7 @@ import com.callippus.water.erp.service.util.XMLUtil;
 
 
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -60,6 +63,12 @@ public class OnlinePaymentService {
 
 	@Inject
 	private MerchantMasterRepository merchantMasterRepository;
+	
+	@Inject
+	private PaymentService paymentService;
+		
+	@Inject
+	private CollectionTypeMasterRepository collectionTypeMasterRepository;
 
 	public static void main(String[] args) throws Exception {
 		String xml = "<OrderRequest> <Currency>TSh</Currency> <MerchantKey>5b56ca5b-a882-4224-b3e7-b558e93e6cb0</MerchantKey> <MerchantCode>Test001</MerchantCode> <MerchantName>testmerchant</MerchantName> <ServiceCode>TESTS001</ServiceCode> <PayBy>TIGOPESADIR</PayBy> <Amount>1</Amount> <UserDefinedField>abcd</UserDefinedField> <Parameters> <Parameter name=\"Email\">test@gmail.com</Parameter> <Parameter name=\"Phone\">1234567895</Parameter> </Parameters> </OrderRequest> ";
@@ -120,20 +129,19 @@ public class OnlinePaymentService {
 
 		opc = onlinePaymentCallbackRepository.save(opc);
 		
-		CustDetails customer = custDetailsRepository.findByCanForUpdate(opr.getOnlinePaymentOrder().getUserDefinedField());
+		String can = opr.getOnlinePaymentOrder().getUserDefinedField();
+		CollDetails collDetails = new CollDetails();
+		collDetails.setCan(can);
+		collDetails.setReceiptAmt(pgResponse.getTotalAmountPaid());
+		collDetails.setReceiptDt(opr.getResponseTime());
+		collDetails.setExtSettlementId(opc.getMerchantTxnRef());
+		collDetails.setCollTime(opr.getResponseTime());
+		collDetails.setCollectionTypeMaster(collectionTypeMasterRepository.findOne(77L));
+		collDetails.setRemarks("Online Payment id:" + opc.getId().toString());
+		collDetails.setReceiptMode(opc.getPaymentMode());
 		
-		log.debug("***** Customer Arrears before payment:" + customer.getArrears());
-		
-		log.debug("***** Customer Payment Amount:" + opc.getTotalAmountPaid());
-		
-		customer.setArrears(customer.getArrears() - pgResponse.getTotalAmountPaid());
-						
-		custDetailsRepository.save(customer);
-		
-		customer = custDetailsRepository.findOne(customer.getId());
-		
-		log.debug("***** Customer Arrears after payment:" + customer.getArrears());
-		
+		paymentService.postPayment(collDetails, pgResponse.getTotalAmountPaid());
+				
 		log.debug("This is the opc after save:" + opc);
 
 		return "Successfully saved with id:" + opc.getId().toString();

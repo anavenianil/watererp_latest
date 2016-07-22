@@ -1,5 +1,5 @@
 <div>
-    <h2>Request Work Flow Mappings</h2>
+    <h2>Request Workflow Mapping</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
@@ -7,7 +7,7 @@
                 <button class="btn btn-primary" ui-sref="requestWorkflowMapping.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span 
-                       >Create new Request Work Flow Mapping
+                       >Create new Request Workflow Mapping
                     </span>
                 </button>
             </div>
@@ -21,7 +21,7 @@
                     <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="creationDate"><span>Creation Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span>Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="statusMaster.id"><span>Status Master</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="statusMaster.id"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="workflowMaster.id"><span>Work Flow Master</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="requestMaster.id"><span>Request Master</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -30,16 +30,16 @@
             <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
                 <tr ng-repeat="requestWorkflowMapping in requestWorkflowMappings track by requestWorkflowMapping.id">
                     <td><a ui-sref="requestWorkflowMapping.detail({id:requestWorkflowMapping.id})">{{requestWorkflowMapping.id}}</a></td>
-                    <td>{{requestWorkflowMapping.creationDate | date:'medium'}}</td>
-                    <td>{{requestWorkflowMapping.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{requestWorkflowMapping.creationDate | date:'mediumDate'}}</td>
+                    <td>{{requestWorkflowMapping.lastModifiedDate | date:'mediumDate'}}</td>
                     <td>
-                        <a ui-sref="statusMaster.detail({id:requestWorkflowMapping.statusMaster.id})">{{requestWorkflowMapping.statusMaster.id}}</a>
+                        <a ui-sref="statusMaster.detail({id:requestWorkflowMapping.statusMaster.id})">{{requestWorkflowMapping.statusMaster.status}}</a>
                     </td>
                     <td>
-                        <a ui-sref="workflowMaster.detail({id:requestWorkflowMapping.workflowMaster.id})">{{requestWorkflowMapping.workflowMaster.id}}</a>
+                        <a ui-sref="workflowMaster.detail({id:requestWorkflowMapping.workflowMaster.id})">{{requestWorkflowMapping.workflowMaster.workflowName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="requestMaster.detail({id:requestWorkflowMapping.requestMaster.id})">{{requestWorkflowMapping.requestMaster.id}}</a>
+                        <a ui-sref="requestMaster.detail({id:requestWorkflowMapping.requestMaster.id})">{{requestWorkflowMapping.requestMaster.requestType}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

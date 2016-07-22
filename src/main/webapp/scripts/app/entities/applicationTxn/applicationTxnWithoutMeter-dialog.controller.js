@@ -51,7 +51,6 @@ angular.module('watererpApp')
         	$scope.clear();
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
-            $scope.applicationTxn.fileNumber = result.fileNumber;
             $scope.applicationTxn.id = result.id;
             $('#saveSuccessfullyModal').modal('show');
         };

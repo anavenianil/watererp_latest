@@ -29,7 +29,7 @@ import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.MeterDetails;
-import com.callippus.water.erp.domain.WorkflowDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.ConnectionTerminateRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
@@ -183,15 +183,15 @@ public class ConnectionTerminateResource {
 	@Timed
 	@Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<ConnectionTerminate> approveCategoryChange(
-			@RequestBody WorkflowDTO workflowDTO) throws URISyntaxException {
-		log.debug("REST request to terminate Connection : {}", workflowDTO);
+			@RequestBody ChangeCaseDTO changeCaseDTO) throws URISyntaxException {
+		log.debug("REST request to terminate Connection : {}", changeCaseDTO);
 
-		ConnectionTerminate connectionTerminate = workflowDTO.getConnectionTerminate();
+		ConnectionTerminate connectionTerminate = changeCaseDTO.getConnectionTerminate();
 		
 		connectionTerminateRepository.save(connectionTerminate);
 		try {
-			workflowService.setRemarks(workflowDTO.getRemarks());
-			workflowService.setApprovedDate(workflowDTO.getApprovedDate());
+			workflowService.setRemarks(changeCaseDTO.getRemarks());
+			workflowService.setApprovedDate(changeCaseDTO.getApprovedDate());
 			workflowService.getUserDetails();
 			connectionTerminateWorkflowService
 					.approvedCahangeCaseRequest(connectionTerminate);
@@ -228,16 +228,16 @@ public class ConnectionTerminateResource {
     @Timed
     @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<ConnectionTerminate> declineRequests(
-			@RequestBody WorkflowDTO workflowDTO)
+			@RequestBody ChangeCaseDTO changeCaseDTO)
 			throws Exception {
-		log.debug("REST request to declineRequest() for Connection Terminate  : {}", workflowDTO);
+		log.debug("REST request to declineRequest() for Connection Terminate  : {}", changeCaseDTO);
 		
-		workflowService.setRemarks(workflowDTO.getRemarks());
-		workflowService.setApprovedDate(workflowDTO.getApprovedDate());
-		CustDetails custDetails = custDetailsRepository.findByCan(workflowDTO.getConnectionTerminate().getCan());
+		workflowService.setRemarks(changeCaseDTO.getRemarks());
+		workflowService.setApprovedDate(changeCaseDTO.getApprovedDate());
+		CustDetails custDetails = custDetailsRepository.findByCan(changeCaseDTO.getConnectionTerminate().getCan());
 		custDetails.setStatus(CustStatus.ACTIVE);
 		custDetailsRepository.save(custDetails);
-		connectionTerminateWorkflowService.declineRequest(workflowDTO.getConnectionTerminate().getId());
+		connectionTerminateWorkflowService.declineRequest(changeCaseDTO.getConnectionTerminate().getId());
 		return ResponseEntity.created(new URI("/api/connectionTerminates/declineRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("connectionTerminate", ""))
 				.body(null);

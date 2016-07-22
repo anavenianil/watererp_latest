@@ -1,11 +1,15 @@
 package com.callippus.water.erp.common;
 
+import java.math.BigDecimal;
+
 public class CPSConstants {
 	
 	public static final String ISSUEMETER = "issueMeter";
 	public static final String CREATECAN = "createCAN";
 	
 	public static final Integer METERCHANGED = 2;
+	
+	public static final BigDecimal ZERO = new BigDecimal("0.00");
 	
 	//customer info Change case
 	public static final String CONNECTIONCATEGORY = "Connection Category";
@@ -1462,7 +1466,6 @@ public class CPSConstants {
 
 		// LTC
 		public static final String DOPARTNUMBER = "DoPartNumber";
-		public static final String ZERO = "0";
 		public static final String LTCREFUNDHOME = "LTCRefundHome";
 		public static final String LTCREFUND = "ltcRefund";
 		public static final String LTCREFUNDVALUE = "LTC REFUND";

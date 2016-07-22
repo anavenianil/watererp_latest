@@ -11,17 +11,17 @@ angular
 						RequestWorkflowHistory, Customer) {
 
 					$scope.customer = {};
-					$scope.customer.changeType = "CONNECTIONCATEGORY";
+					$scope.customer.ChangeCaseType = "CONNECTIONCATEGORY";
 
 					$scope.custDetails = {};
 
 					$scope.tariffcategorymasters = TariffCategoryMaster.query();
 					$scope.pipeSizeMasters = PipeSizeMaster.query();
-					$scope.workflowDTO = {};
-					$scope.workflowDTO.requestWorkflowHistory = {};
-					$scope.workflowDTO.workflowTxnDetailss = {};
+					$scope.changeCaseDTO = {};
+					$scope.changeCaseDTO.requestWorkflowHistory = {};
+					$scope.changeCaseDTO.workflowTxnDetailss = {};
 					$scope.applicationTxn = {};
-					$scope.workflowDTO.workflowTxnDetailss = [];
+					$scope.changeCaseDTO.workflowTxnDetailss = [];
 					$scope.referenceNo = "";
 
 					console.log("These are the state:"
@@ -50,13 +50,12 @@ angular
 						$scope.datePickerForRequestedDate.status.opened = true;
 					};
 
-					$scope.validateCategory = function(prevCategory,
-							presentCategory) {
-						if (prevCategory === presentCategory) {
+					$scope.validateCategory = function(oldCategory,
+							newCategory) {
+						if (oldCategory === newCategory) {
 							alert("Selected Category Same as Previous");
-							$scope.customer.presentCategory = {};
-						} else if (presentCategory === 1) {
-
+							$scope.customer.newTariffCategory = {};
+						} else if (newCategory === 1) {
 							$scope.instrEnabled = false;
 							$scope.customer.organizationName = null;
 						} else
@@ -82,7 +81,7 @@ angular
 					}
 
 					// get cust details by CAN
-					$scope.getCustDetails = function(can) {
+					/*$scope.getCustDetails = function(can) {
 						CustDetailsSearchCAN
 								.get(
 										{
@@ -90,19 +89,20 @@ angular
 										},
 										function(result) {
 											$scope.custDetails = result;
-											$scope.customer.meterReading = $scope.custDetails.prevReading;
-											$scope.customer.tariffCategoryMaster = $scope.custDetails.tariffCategoryMaster;
+											$scope.customer.prevMeterReading = $scope.custDetails.prevReading;
+											$scope.customer.oldTariffCategory = $scope.custDetails.tariffCategoryMaster;
+											$scope.customer.previousEmail = $scope.custDetails.email;
 										});
-					};
+					};*/
 
 					// getApplicationTxn by CAN
-					$scope.getApplicationTxn = function(can) {
+					/*$scope.getApplicationTxn = function(can) {
 						ApplicationTxnSearchCAN.get({
 							can : can
 						}, function(result) {
 							$scope.applicationTxn = result;
 						});
-					};
+					};*/
 
 					//to get active can
 					$scope.getActiveCAN = function(can) {
@@ -113,23 +113,25 @@ angular
 								function(response) {
 									$scope.custDetails = response.data.custDetails;
 									$scope.message = null;
-									if(response.data.applicationTxn != null){
-										$scope.customer.tariffCategoryMaster = response.data.applicationTxn.tariffCategoryMaster;
-										$scope.customer.prevOrganizationName = response.data.applicationTxn.organizationName;
-										$scope.customer.prevDesignation = response.data.applicationTxn.designation;
-									}
+									$scope.customer.prevMeterReading = $scope.custDetails.prevReading;
+									//if(response.data.applicationTxn != null){
+										$scope.customer.oldTariffCategory = response.data.custDetails.tariffCategoryMaster;
+										$scope.customer.prevOrganizationName = response.data.custDetails.organisationName;
+										$scope.customer.prevDesignation = response.data.custDetails.designation;
+									//}
 									if(response.data.customer != null){
 										if(response.data.customer.status == 3){
-											$scope.customer.tariffCategoryMaster = response.data.customer.presentCategory;
+											$scope.customer.oldTariffCategory = response.data.customer.presentCategory;
 											$scope.customer.prevOrganizationName = response.data.customer.organizationName;
 											$scope.customer.prevDesignation = response.data.customer.designation;
+											//$scope.customer.prevMeterReading = response.data.customer.meterReading;
 										}
 										else{
 											$scope.isSaving = true;
 											$scope.message = "Category change request already submitted for the the CAN: "+can;
 										}
 									}
-									console.log("Server response:"+ JSON.stringify(response.data));
+									//console.log("Server response:"+ JSON.stringify(response.data));
 								});
 					}
 
@@ -163,7 +165,7 @@ angular
 						$scope.isSaving = false;
 					};
 					$scope.save = function() {
-						$scope.customer.changeType = "CONNECTIONCATEGORY";
+						$scope.customer.ChangeCaseType = "CONNECTIONCATEGORY";
 						$scope.isSaving = true;
 						if ($scope.customer.id != null) {
 							Customer.update($scope.customer, onSaveSuccess,
@@ -174,37 +176,34 @@ angular
 						}
 					};
 
-					$scope.saveChanges = function() {
-						console.log("WorkflowDTO data being posted to server:"
-								+ JSON.stringify($scope.workflowDTO));
-
+					/*$scope.saveChanges = function() {
+						console.log("changeCaseDTO data being posted to server:"
+								+ JSON.stringify($scope.changeCaseDTO));
 						return $http.post('/api/workflowTxnDetailsArr',
-								$scope.workflowDTO).then(
+								$scope.changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));
 								});
-					}
+					}*/
 
 
 					$scope.checkReading = function(prvReading, newReading) {
 						if (prvReading >= newReading) {
-
-							$scope.editForm.presentReading.$setValidity(
+							$scope.editForm.newMeterReading.$setValidity(
 									"ltPrevious", true);
 							return true;
 						} else {
-
-							$scope.editForm.presentReading.$setValidity(
+							$scope.editForm.newMeterReading.$setValidity(
 									"ltPrevious", false);
 							return false;
 						}
 					}
 					//approve a request
-					$scope.approve = function(workflowDTO) {
-						console.log(workflowDTO);
+					$scope.approve = function(changeCaseDTO) {
+						console.log(changeCaseDTO);
 						return $http.post('/api/workflowTxnDetailsApprove',
-								$scope.workflowDTO).then(
+								$scope.changeCaseDTO).then(
 								function(response) {
 									console.log("Server response:"
 											+ JSON.stringify(response));

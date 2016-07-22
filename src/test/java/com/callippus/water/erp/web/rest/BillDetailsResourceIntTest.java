@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -70,32 +71,32 @@ public class BillDetailsResourceIntTest {
     private static final LocalDate DEFAULT_METER_FIX_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_METER_FIX_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Float DEFAULT_INITIAL_READING = 1F;
-    private static final Float UPDATED_INITIAL_READING = 2F;
+    private static final BigDecimal DEFAULT_INITIAL_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_INITIAL_READING = new BigDecimal(2);
 
-    private static final Float DEFAULT_PRESENT_READING = 1F;
-    private static final Float UPDATED_PRESENT_READING = 2F;
+    private static final BigDecimal DEFAULT_PRESENT_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_PRESENT_READING = new BigDecimal(2);
 
-    private static final Float DEFAULT_UNITS = 1F;
-    private static final Float UPDATED_UNITS = 2F;
+    private static final BigDecimal DEFAULT_UNITS = new BigDecimal(1);
+    private static final BigDecimal UPDATED_UNITS = new BigDecimal(2);
 
-    private static final Float DEFAULT_WATER_CESS = 1F;
-    private static final Float UPDATED_WATER_CESS = 2F;
+    private static final BigDecimal DEFAULT_WATER_CESS = new BigDecimal(1);
+    private static final BigDecimal UPDATED_WATER_CESS = new BigDecimal(2);
 
-    private static final Float DEFAULT_SEWERAGE_CESS = 1F;
-    private static final Float UPDATED_SEWERAGE_CESS = 2F;
+    private static final BigDecimal DEFAULT_SEWERAGE_CESS = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SEWERAGE_CESS = new BigDecimal(2);
 
-    private static final Float DEFAULT_SERVICE_CHARGE = 1F;
-    private static final Float UPDATED_SERVICE_CHARGE = 2F;
+    private static final BigDecimal DEFAULT_SERVICE_CHARGE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SERVICE_CHARGE = new BigDecimal(2);
 
-    private static final Float DEFAULT_METER_SERVICE_CHARGE = 1F;
-    private static final Float UPDATED_METER_SERVICE_CHARGE = 2F;
+    private static final BigDecimal DEFAULT_METER_SERVICE_CHARGE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_METER_SERVICE_CHARGE = new BigDecimal(2);
 
-    private static final Float DEFAULT_TOTAL_AMOUNT = 1F;
-    private static final Float UPDATED_TOTAL_AMOUNT = 2F;
+    private static final BigDecimal DEFAULT_TOTAL_AMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_TOTAL_AMOUNT = new BigDecimal(2);
 
-    private static final Float DEFAULT_NET_PAYABLE_AMOUNT = 1F;
-    private static final Float UPDATED_NET_PAYABLE_AMOUNT = 2F;
+    private static final BigDecimal DEFAULT_NET_PAYABLE_AMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_NET_PAYABLE_AMOUNT = new BigDecimal(2);
     private static final String DEFAULT_TELEPHONE_NO = "AAAAA";
     private static final String UPDATED_TELEPHONE_NO = "BBBBB";
     private static final String DEFAULT_METER_STATUS = "AAAAA";
@@ -121,8 +122,8 @@ public class BillDetailsResourceIntTest {
     private static final String DEFAULT_LONGI = "AAAAA";
     private static final String UPDATED_LONGI = "BBBBB";
 
-    private static final Float DEFAULT_NO_METER_AMT = 1F;
-    private static final Float UPDATED_NO_METER_AMT = 2F;
+    private static final BigDecimal DEFAULT_NO_METER_AMT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_NO_METER_AMT = new BigDecimal(2);
 
     private static final LocalDate DEFAULT_MET_READING_DT = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_MET_READING_DT = LocalDate.now(ZoneId.systemDefault());
@@ -310,15 +311,15 @@ public class BillDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].fromMonth").value(hasItem(DEFAULT_FROM_MONTH.toString())))
                 .andExpect(jsonPath("$.[*].toMonth").value(hasItem(DEFAULT_TO_MONTH.toString())))
                 .andExpect(jsonPath("$.[*].meterFixDate").value(hasItem(DEFAULT_METER_FIX_DATE.toString())))
-                .andExpect(jsonPath("$.[*].initialReading").value(hasItem(DEFAULT_INITIAL_READING.doubleValue())))
-                .andExpect(jsonPath("$.[*].presentReading").value(hasItem(DEFAULT_PRESENT_READING.doubleValue())))
-                .andExpect(jsonPath("$.[*].units").value(hasItem(DEFAULT_UNITS.doubleValue())))
-                .andExpect(jsonPath("$.[*].waterCess").value(hasItem(DEFAULT_WATER_CESS.doubleValue())))
-                .andExpect(jsonPath("$.[*].sewerageCess").value(hasItem(DEFAULT_SEWERAGE_CESS.doubleValue())))
-                .andExpect(jsonPath("$.[*].serviceCharge").value(hasItem(DEFAULT_SERVICE_CHARGE.doubleValue())))
-                .andExpect(jsonPath("$.[*].meterServiceCharge").value(hasItem(DEFAULT_METER_SERVICE_CHARGE.doubleValue())))
-                .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.doubleValue())))
-                .andExpect(jsonPath("$.[*].netPayableAmount").value(hasItem(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue())))
+                .andExpect(jsonPath("$.[*].initialReading").value(hasItem(DEFAULT_INITIAL_READING.intValue())))
+                .andExpect(jsonPath("$.[*].presentReading").value(hasItem(DEFAULT_PRESENT_READING.intValue())))
+                .andExpect(jsonPath("$.[*].units").value(hasItem(DEFAULT_UNITS.intValue())))
+                .andExpect(jsonPath("$.[*].waterCess").value(hasItem(DEFAULT_WATER_CESS.intValue())))
+                .andExpect(jsonPath("$.[*].sewerageCess").value(hasItem(DEFAULT_SEWERAGE_CESS.intValue())))
+                .andExpect(jsonPath("$.[*].serviceCharge").value(hasItem(DEFAULT_SERVICE_CHARGE.intValue())))
+                .andExpect(jsonPath("$.[*].meterServiceCharge").value(hasItem(DEFAULT_METER_SERVICE_CHARGE.intValue())))
+                .andExpect(jsonPath("$.[*].totalAmount").value(hasItem(DEFAULT_TOTAL_AMOUNT.intValue())))
+                .andExpect(jsonPath("$.[*].netPayableAmount").value(hasItem(DEFAULT_NET_PAYABLE_AMOUNT.intValue())))
                 .andExpect(jsonPath("$.[*].telephoneNo").value(hasItem(DEFAULT_TELEPHONE_NO.toString())))
                 .andExpect(jsonPath("$.[*].meterStatus").value(hasItem(DEFAULT_METER_STATUS.toString())))
                 .andExpect(jsonPath("$.[*].metReaderCode").value(hasItem(DEFAULT_MET_READER_CODE.toString())))
@@ -331,7 +332,7 @@ public class BillDetailsResourceIntTest {
                 .andExpect(jsonPath("$.[*].noticeNo").value(hasItem(DEFAULT_NOTICE_NO.toString())))
                 .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT.toString())))
                 .andExpect(jsonPath("$.[*].longi").value(hasItem(DEFAULT_LONGI.toString())))
-                .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].noMeterAmt").value(hasItem(DEFAULT_NO_METER_AMT.intValue())))
                 .andExpect(jsonPath("$.[*].metReadingDt").value(hasItem(DEFAULT_MET_READING_DT.toString())))
                 .andExpect(jsonPath("$.[*].isRounding").value(hasItem(DEFAULT_IS_ROUNDING.booleanValue())))
                 .andExpect(jsonPath("$.[*].insertDt").value(hasItem(DEFAULT_INSERT_DT_STR)))
@@ -358,15 +359,15 @@ public class BillDetailsResourceIntTest {
             .andExpect(jsonPath("$.fromMonth").value(DEFAULT_FROM_MONTH.toString()))
             .andExpect(jsonPath("$.toMonth").value(DEFAULT_TO_MONTH.toString()))
             .andExpect(jsonPath("$.meterFixDate").value(DEFAULT_METER_FIX_DATE.toString()))
-            .andExpect(jsonPath("$.initialReading").value(DEFAULT_INITIAL_READING.doubleValue()))
-            .andExpect(jsonPath("$.presentReading").value(DEFAULT_PRESENT_READING.doubleValue()))
-            .andExpect(jsonPath("$.units").value(DEFAULT_UNITS.doubleValue()))
-            .andExpect(jsonPath("$.waterCess").value(DEFAULT_WATER_CESS.doubleValue()))
-            .andExpect(jsonPath("$.sewerageCess").value(DEFAULT_SEWERAGE_CESS.doubleValue()))
-            .andExpect(jsonPath("$.serviceCharge").value(DEFAULT_SERVICE_CHARGE.doubleValue()))
-            .andExpect(jsonPath("$.meterServiceCharge").value(DEFAULT_METER_SERVICE_CHARGE.doubleValue()))
-            .andExpect(jsonPath("$.totalAmount").value(DEFAULT_TOTAL_AMOUNT.doubleValue()))
-            .andExpect(jsonPath("$.netPayableAmount").value(DEFAULT_NET_PAYABLE_AMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.initialReading").value(DEFAULT_INITIAL_READING.intValue()))
+            .andExpect(jsonPath("$.presentReading").value(DEFAULT_PRESENT_READING.intValue()))
+            .andExpect(jsonPath("$.units").value(DEFAULT_UNITS.intValue()))
+            .andExpect(jsonPath("$.waterCess").value(DEFAULT_WATER_CESS.intValue()))
+            .andExpect(jsonPath("$.sewerageCess").value(DEFAULT_SEWERAGE_CESS.intValue()))
+            .andExpect(jsonPath("$.serviceCharge").value(DEFAULT_SERVICE_CHARGE.intValue()))
+            .andExpect(jsonPath("$.meterServiceCharge").value(DEFAULT_METER_SERVICE_CHARGE.intValue()))
+            .andExpect(jsonPath("$.totalAmount").value(DEFAULT_TOTAL_AMOUNT.intValue()))
+            .andExpect(jsonPath("$.netPayableAmount").value(DEFAULT_NET_PAYABLE_AMOUNT.intValue()))
             .andExpect(jsonPath("$.telephoneNo").value(DEFAULT_TELEPHONE_NO.toString()))
             .andExpect(jsonPath("$.meterStatus").value(DEFAULT_METER_STATUS.toString()))
             .andExpect(jsonPath("$.metReaderCode").value(DEFAULT_MET_READER_CODE.toString()))
@@ -379,7 +380,7 @@ public class BillDetailsResourceIntTest {
             .andExpect(jsonPath("$.noticeNo").value(DEFAULT_NOTICE_NO.toString()))
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT.toString()))
             .andExpect(jsonPath("$.longi").value(DEFAULT_LONGI.toString()))
-            .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.doubleValue()))
+            .andExpect(jsonPath("$.noMeterAmt").value(DEFAULT_NO_METER_AMT.intValue()))
             .andExpect(jsonPath("$.metReadingDt").value(DEFAULT_MET_READING_DT.toString()))
             .andExpect(jsonPath("$.isRounding").value(DEFAULT_IS_ROUNDING.booleanValue()))
             .andExpect(jsonPath("$.insertDt").value(DEFAULT_INSERT_DT_STR))

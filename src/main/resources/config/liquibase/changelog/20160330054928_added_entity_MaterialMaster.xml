@@ -37,7 +37,7 @@
             
             <column name="rate_contract_flag" type="varchar(255)"/>
             
-            <column name="unit_rate" type="decimal(10,2)"/>
+            <column name="unit_rate" type="decimal(20,3)"/>
             
             <column name="description" type="varchar(255)"/>
             
@@ -47,7 +47,7 @@
             
             <column name="last_modified_date" type="timestamp"/>
             
-            <column name="company_code_id" type="decimal(10,2)"/>
+            <column name="company_code_id" type="decimal(20,3)"/>
             
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>

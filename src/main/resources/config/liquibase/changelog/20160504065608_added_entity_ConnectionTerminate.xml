@@ -27,7 +27,7 @@
             
             <column name="meter_recovered" type="bit"/>
             
-            <column name="last_meter_reading" type="${floatType}"/>
+            <column name="last_meter_reading" type="decimal(20,3)"/>
             
             <column name="meter_recovered_date" type="date"/>
             

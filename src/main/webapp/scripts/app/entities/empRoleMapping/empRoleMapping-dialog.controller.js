@@ -1,13 +1,43 @@
 'use strict';
 
 angular.module('watererpApp').controller('EmpRoleMappingDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpRoleMapping', 'User', 'OrgRoleInstance', 'StatusMaster',
-        function($scope, $stateParams, $uibModalInstance, entity, EmpRoleMapping, User, OrgRoleInstance, StatusMaster) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpRoleMapping', 'User', 'OrgRoleInstance', 'StatusMaster', '$http', 'ParseLinks',
+        function($scope, $stateParams, $uibModalInstance, entity, EmpRoleMapping, User, OrgRoleInstance, StatusMaster, $http, ParseLinks) {
 
         $scope.empRoleMapping = entity;
-        $scope.users = User.query();
-        $scope.orgroleinstances = OrgRoleInstance.query();
-        $scope.statusmasters = StatusMaster.query();
+        //$scope.users = User.query();
+        //$scope.orgroleinstances = OrgRoleInstance.query();
+        //$scope.statusmasters = StatusMaster.query();
+        
+        $scope.getOrgRoleInstance = function() {
+        	$scope.orgroleinstances = [];
+			return $http.get('/api/orgRoleInstances/getAll').then(function(response) {
+						$scope.orgroleinstances = response.data;
+					});
+		}
+        $scope.getOrgRoleInstance();
+        
+        $scope.getUser = function() {
+        	$scope.users = [];
+			return $http.get('/api/users/getAll'
+					).then(
+					function(response) {
+						$scope.users = response.data;
+					});
+		}
+        $scope.getUser();
+        
+        $scope.getStatusMaster = function() {
+        	$scope.statusmasters = [];
+            StatusMaster.query({page: $scope.page, size: 20, description1:'GENERAL'}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.statusmasters.push(result[i]);
+                }
+            });
+        };
+        $scope.getStatusMaster();
+        
         $scope.load = function(id) {
             EmpRoleMapping.get({id : id}, function(result) {
                 $scope.empRoleMapping = result;

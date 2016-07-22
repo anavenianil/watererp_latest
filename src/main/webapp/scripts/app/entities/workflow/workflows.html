@@ -1,61 +1,68 @@
 <div>
-    <h2>Work Flows</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="workflow.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new Work Flow
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="stageId"><span>Stage Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="workflowMaster.id"><span>Work Flow Master</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="relativeFromRole.id"><span>relative From Role</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="absoluteFromRole.id"><span>Absolute From Role</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="relationshipType.id"><span>Relationship Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="relativeToRole.id"><span>Relative To Role</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="absoluteToRole.id"><span>Absolute To Role</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="escalationRelationshipType.id"><span>Escalation Relationship Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+	<h2>Workflow</h2>
+	<jh-alert></jh-alert>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="workflow.new">
+					<span class="glyphicon glyphicon-plus"></span> <span>Create
+						new Workflow </span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="table-responsive">
+		<table class="jh-table table table-striped">
+			<thead>
+				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+					<th jh-sort-by="id"><span>ID</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="stageId"><span>Stage Id</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="workflowMaster.id"><span>Workflow Name</span>
+						<span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="relativeFromRole.id"><span>Relative
+							From Role</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="absoluteFromRole.id"><span>Absolute
+							From Role</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="relationshipType.id"><span>Relationship
+							Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="relativeToRole.id"><span>Relative To
+							Role</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="absoluteToRole.id"><span>Absolute To
+							Role</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<!-- <th jh-sort-by="escalationRelationshipType.id"><span>Escalation Relationship Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="relativeEscalationTo.id"><span>Relative Escalation To</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="absoluteEscalationTo.id"><span>Absolute Escalation To</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="workflowStageMaster.id"><span>Work Flow Stage Master</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="workflow in workflows track by workflow.id">
-                    <td><a ui-sref="workflow.detail({id:workflow.id})">{{workflow.id}}</a></td>
-                    <td>{{workflow.stageId}}</td>
-                    <td>
-                        <a ui-sref="workflowMaster.detail({id:workflow.workflowMaster.id})">{{workflow.workflowMaster.workflowName}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="workflowRelations.detail({id:workflow.relativeFromRole.id})">{{workflow.relativeFromRole.name}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteFromRole.id})">{{workflow.absoluteFromRole.orgRoleName}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="workflowRelationships.detail({id:workflow.relationshipType.id})">{{workflow.relationshipType.name}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="workflowRelations.detail({id:workflow.relativeToRole.id})">{{workflow.relativeToRole.name}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="orgRoleInstance.detail({id:workflow.absoluteToRole.id})">{{workflow.absoluteToRole.orgRoleName}}</a>
-                    </td>
-                    <td>
+                    <th jh-sort-by="workflowStageMaster.id"><span>Work Flow Stage Master</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+					<th></th>
+				</tr>
+			</thead>
+			<tbody infinite-scroll="loadPage(page + 1)"
+				infinite-scroll-disabled="links['last'] == page">
+				<tr ng-repeat="workflow in workflows track by workflow.id">
+					<td><a ui-sref="workflow.detail({id:workflow.id})">{{workflow.id}}</a></td>
+					<td>{{workflow.stageId}}</td>
+					<td><a
+						ui-sref="workflowMaster.detail({id:workflow.workflowMaster.id})">{{workflow.workflowMaster.workflowName}}</a>
+					</td>
+					<td><a
+						ui-sref="workflowRelations.detail({id:workflow.relativeFromRole.id})">{{workflow.relativeFromRole.name}}</a>
+					</td>
+					<td><a
+						ui-sref="orgRoleInstance.detail({id:workflow.absoluteFromRole.id})">{{workflow.absoluteFromRole.orgRoleName}}</a>
+					</td>
+					<td><a
+						ui-sref="workflowRelationships.detail({id:workflow.relationshipType.id})">{{workflow.relationshipType.name}}</a>
+					</td>
+					<td><a
+						ui-sref="workflowRelations.detail({id:workflow.relativeToRole.id})">{{workflow.relativeToRole.name}}</a>
+					</td>
+					<td><a
+						ui-sref="orgRoleInstance.detail({id:workflow.absoluteToRole.id})">{{workflow.absoluteToRole.orgRoleName}}</a>
+					</td>
+					<!-- <td>
                         <a ui-sref="workflowRelationships.detail({id:workflow.escalationRelationshipType.id})">{{workflow.escalationRelationshipType.name}}</a>
                     </td>
                     <td>
@@ -66,31 +73,28 @@
                     </td>
                     <td>
                         <a ui-sref="workflowStageMaster.detail({id:workflow.workflowStageMaster.id})">{{workflow.workflowStageMaster.name}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="workflow.detail({id:workflow.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="workflow.edit({id:workflow.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="workflow.delete({id:workflow.id})"
-                                    class="btn btn-danger btn-sm">                                    
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    </td> -->
+					<td class="text-right">
+						<div class="btn-group flex-btn-group-container">
+							<button type="submit" ui-sref="workflow.detail({id:workflow.id})"
+								class="btn btn-info btn-sm">
+								<span class="glyphicon glyphicon-eye-open"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+							<button type="submit" ui-sref="workflow.edit({id:workflow.id})"
+								class="btn btn-primary btn-sm">
+								<span class="glyphicon glyphicon-pencil"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+							<button type="submit" ui-sref="workflow.delete({id:workflow.id})"
+								class="btn btn-danger btn-sm">
+								<span class="glyphicon glyphicon-remove-circle"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

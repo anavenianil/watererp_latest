@@ -35,7 +35,7 @@
 									class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="can"><span>CAN</span> <span
 									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="presentReading"><span>Present
+								<th jh-sort-by="presentReading"><span>New
 										Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="tariffCategoryMaster.id"><span>Previous
 										Category</span><span class="glyphicon glyphicon-sort"></span></th>
@@ -59,9 +59,9 @@
 							<tr ng-repeat="customer in customers track by customer.id">
 								<td>{{$index+1}}</td>
 								<td>{{customer.can}}</td>
-								<td>{{customer.presentReading}}</td>
-								<td>{{customer.tariffCategoryMaster.tariffCategory}}</td>
-								<td>{{customer.presentCategory.tariffCategory}}</td>
+								<td>{{customer.newMeterReading}}</td>
+								<td>{{customer.oldTariffCategory.tariffCategory}}</td>
+								<td>{{customer.newTariffCategory.tariffCategory}}</td>
 								<td>{{customer.organizationName}}</td>
 								<td>{{customer.designation}}</td>
 								<td>{{customer.requestedDate | date:'mediumDate'}}</td>

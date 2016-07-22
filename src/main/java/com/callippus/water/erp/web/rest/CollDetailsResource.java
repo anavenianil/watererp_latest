@@ -1,12 +1,18 @@
 package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.BillAndCollectionDTO;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.MeterDetails;
+import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.service.PaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 
@@ -30,8 +36,10 @@ import javax.transaction.Transactional;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +63,9 @@ public class CollDetailsResource {
 
 	@Inject
 	private ReportsCustomRepository reportsRepository;
+	
+	@Inject
+	private PaymentService paymentService;
 
 	/**
 	 * POST /collDetailss -> Create a new collDetails.
@@ -75,13 +86,11 @@ public class CollDetailsResource {
 											"A new collDetails cannot already have an ID"))
 					.body(null);
 		}
+		collDetails.setReceiptMode(collDetails.getPaymentTypes().getPaymentMode());
+		
 		CollDetails result = collDetailsRepository.save(collDetails);
 		
-		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
-		System.out.println(customer);
-		customer.setArrears(customer.getArrears() - collDetails.getReceiptAmt());
-		
-		custDetailsRepository.saveAndFlush(customer);
+		paymentService.postPayment(result, collDetails.getReceiptAmt());
 
 		return ResponseEntity
 				.created(new URI("/api/collDetailss/" + result.getId()))
@@ -211,5 +220,49 @@ public class CollDetailsResource {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+	
+	
 
+	/**
+	 * GET /collDetailss/forCancel/:can
+	 */
+	@RequestMapping(value = "/collDetailss/forCancel/{can}", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<CollDetails>> getCollDetails(@PathVariable String can) {
+		log.debug("REST request to get CollDetails : {}", can);
+
+		List<CollDetails> collDetailss = collDetailsRepository.findTop10ByCanOrderByIdDesc(can);
+
+		return Optional.ofNullable(collDetailss)
+				.map(result -> new ResponseEntity<>(collDetailss, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+	
+	
+		//added to Cancel collection Details
+		@RequestMapping(value = "/collDetailss/collDetailsCancel", 
+				method = RequestMethod.POST, 
+				produces = MediaType.APPLICATION_JSON_VALUE)
+		@Timed
+		public ResponseEntity<CollDetails> collDetailsCancel(
+				@RequestBody CollDetails collDetails) throws URISyntaxException { 
+			log.debug("REST request to cancel Collection : {}", collDetails);
+			//String newRemarks = collDetails.getRemarks();
+			//String oldRemarks = collDetailsRepository.findOne(collDetails.getId()).getRemarks();
+			collDetails.setRemarks(collDetailsRepository.findOne(collDetails.getId()).getRemarks()+"("+collDetails.getRemarks()+")");
+			collDetails.setTxnStatus("CANCELLED");
+			
+			CollDetails result = collDetails;//collDetailsRepository.save(collDetails);
+			
+			return ResponseEntity.ok().headers(	HeaderUtil.createEntityUpdateAlert("collDetails",
+					collDetails.getId().toString())).body(result);
+			/*return ResponseEntity.created(new URI("/api/collDetailss/collDetailsCancel"))
+					.headers(HeaderUtil.createEntityCreationAlert("collDetails", ""))
+					.body(null);*/
+		}
+	
+	
+	
 }

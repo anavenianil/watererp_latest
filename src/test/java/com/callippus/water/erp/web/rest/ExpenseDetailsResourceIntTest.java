@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,8 +52,8 @@ public class ExpenseDetailsResourceIntTest {
     private static final String DEFAULT_EXPENSE_NO = "AAAAA";
     private static final String UPDATED_EXPENSE_NO = "BBBBB";
 
-    private static final Float DEFAULT_EXPENSE_AMT = 1F;
-    private static final Float UPDATED_EXPENSE_AMT = 2F;
+    private static final BigDecimal DEFAULT_EXPENSE_AMT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_EXPENSE_AMT = new BigDecimal(2);
 
     private static final ZonedDateTime DEFAULT_EXPENSE_DT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_EXPENSE_DT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
@@ -131,7 +132,7 @@ public class ExpenseDetailsResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(expenseDetails.getId().intValue())))
                 .andExpect(jsonPath("$.[*].expenseNo").value(hasItem(DEFAULT_EXPENSE_NO.toString())))
-                .andExpect(jsonPath("$.[*].expenseAmt").value(hasItem(DEFAULT_EXPENSE_AMT.doubleValue())))
+                .andExpect(jsonPath("$.[*].expenseAmt").value(hasItem(DEFAULT_EXPENSE_AMT.intValue())))
                 .andExpect(jsonPath("$.[*].expenseDt").value(hasItem(DEFAULT_EXPENSE_DT_STR)))
                 .andExpect(jsonPath("$.[*].instrNo").value(hasItem(DEFAULT_INSTR_NO.toString())))
                 .andExpect(jsonPath("$.[*].instrDt").value(hasItem(DEFAULT_INSTR_DT.toString())));
@@ -149,7 +150,7 @@ public class ExpenseDetailsResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(expenseDetails.getId().intValue()))
             .andExpect(jsonPath("$.expenseNo").value(DEFAULT_EXPENSE_NO.toString()))
-            .andExpect(jsonPath("$.expenseAmt").value(DEFAULT_EXPENSE_AMT.doubleValue()))
+            .andExpect(jsonPath("$.expenseAmt").value(DEFAULT_EXPENSE_AMT.intValue()))
             .andExpect(jsonPath("$.expenseDt").value(DEFAULT_EXPENSE_DT_STR))
             .andExpect(jsonPath("$.instrNo").value(DEFAULT_INSTR_NO.toString()))
             .andExpect(jsonPath("$.instrDt").value(DEFAULT_INSTR_DT.toString()));

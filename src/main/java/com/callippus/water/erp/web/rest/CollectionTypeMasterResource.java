@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CollectionTypeMaster;
+import com.callippus.water.erp.domain.enumeration.TransactionType;
 import com.callippus.water.erp.repository.CollectionTypeMasterCustomRepository;
 import com.callippus.water.erp.repository.CollectionTypeMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -88,7 +89,7 @@ public class CollectionTypeMasterResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<CollectionTypeMaster>> getAllCollectionTypeMasters(Pageable pageable,
-    		@RequestParam(value = "txnType", required = false) String txnType)
+    		@RequestParam(value = "txnType", required = false) TransactionType txnType)
         throws URISyntaxException {
         log.debug("REST request to get a page of CollectionTypeMasters");
         //Page<CollectionTypeMaster> page = collectionTypeMasterRepository.findAll(pageable); 

@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -36,8 +37,8 @@ public class OnlinePaymentCallback implements Serializable {
     @Column(name = "response_code")
     private String responseCode;
 
-    @Column(name = "total_amount_paid")
-    private Float totalAmountPaid;
+    @Column(name = "total_amount_paid", precision=20, scale=3)
+    private BigDecimal totalAmountPaid;
 
     @Column(name = "user_defined_field")
     private String userDefinedField;
@@ -101,11 +102,11 @@ public class OnlinePaymentCallback implements Serializable {
         this.responseCode = responseCode;
     }
 
-    public Float getTotalAmountPaid() {
+    public BigDecimal getTotalAmountPaid() {
         return totalAmountPaid;
     }
 
-    public void setTotalAmountPaid(Float totalAmountPaid) {
+    public void setTotalAmountPaid(BigDecimal totalAmountPaid) {
         this.totalAmountPaid = totalAmountPaid;
     }
 

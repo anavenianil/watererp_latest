@@ -25,7 +25,6 @@ angular.module('watererpApp').controller(
 					var res = response.data.map(function(item) {
 						return item;
 					});
-
 					return res;
 				});
 			}

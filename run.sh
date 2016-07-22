@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This facilitates run in Jenkins
+# This facilitates run in Jenkins #
 echo "Running script from PWD:" `pwd`
 ##### Unit Testing ##############
 #grunt test
@@ -37,9 +37,32 @@ set -e
 
 ##### Integration Testing #######
 #sudo SPRING_PROFILES_ACTIVE=fast mvn test
-export SPRING_PROFILES_ACTIVE=fast
-sudo mvn -Dtest=BillRunMasterResourceIntTest test
+#export SPRING_PROFILES_ACTIVE=fast
+#mvn -Dtest=BillRunMasterResourceIntTest test
 ##### E2E Testing ###############
+
+
+##### Production DB Loading ###############
+
+if [ -n "$message" ]; then
+	echo "Message for this version:" $message
+	db=$(echo $message|grep "\[DB\]")
+	echo "This is the db:" $db
+	if [ -n "$db" ]; then
+		echo "Message contains [DB], Restoring DB"
+		mysql -u root -pmysql watererp < Docs/DB/watererp.sql
+	else 
+		patch=$(echo $message|grep "\[PATCH\]")
+		echo "This is the patch:" $patch
+		if [ -n "$patch" ]; then
+			echo "Message contains [PATCH], Applying Patch"
+			mysql -u root -pmysql watererp < Docs/DB/patch.sql			
+		else
+			echo "Skipping DB script run"
+		fi
+	fi
+fi
+
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then
 	echo "Killing:" $a

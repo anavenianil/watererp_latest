@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -94,8 +95,8 @@ public class ApplicationTxn implements Serializable {
     @Column(name = "status")
     private Integer status;
     
-    @Column(name = "meter_reading")
-    private Float meterReading;
+    @Column(name = "meter_reading", precision=20, scale=3)
+    private BigDecimal meterReading;
     
     @Column(name = "requested_date")
     private LocalDate requestedDate;
@@ -346,11 +347,11 @@ public class ApplicationTxn implements Serializable {
         this.status = status;
     }
 
-    public Float getMeterReading() {
+    public BigDecimal getMeterReading() {
         return meterReading;
     }
     
-    public void setMeterReading(Float meterReading) {
+    public void setMeterReading(BigDecimal meterReading) {
         this.meterReading = meterReading;
     }
 

@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.callippus.water.erp.domain.User;
+import com.callippus.water.erp.web.rest.dto.ManagedUserDTO;
 
 /**
  * Spring Data JPA repository for the User entity.
@@ -27,6 +29,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Override
     void delete(User t);
+    
+    @Query("Select u From User u")
+    List<ManagedUserDTO> findAllUsers();
     
     User findById(long parseLong);
     //User findOneByLogin(String login);

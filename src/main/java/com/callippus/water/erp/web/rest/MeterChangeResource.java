@@ -27,6 +27,7 @@ import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.MeterDetails;
+import com.callippus.water.erp.domain.enumeration.MeterChangeStatus;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.CustMeterMappingRepository;
 import com.callippus.water.erp.repository.MeterChangeRepository;
@@ -53,9 +54,6 @@ public class MeterChangeResource {
     
     @Inject
     private CustMeterMappingRepository custMeterMappingRepository;
-    
-    @Inject
-    private CustDetailsRepository custDetailsRepository;
     
     @Inject
     private MeterChangeWorkflowService meterChangeWorkflowService;
@@ -87,7 +85,7 @@ public class MeterChangeResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("meterChange", "idexists", "A new meterChange cannot already have an ID")).body(null);
         }
         if(meterChange.getStatus()==null){
-        	meterChange.setStatus(1);
+        	meterChange.setStatus(MeterChangeStatus.INITIATED);
         }
         MeterDetails prevMeter = meterChange.getPrevMeterNo();
         MeterChange result = null;
@@ -232,9 +230,11 @@ public class MeterChangeResource {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(meterChange.getStatus() >= 1){
-        	meterChange.setStatus(meterChange.getStatus()+1);
-        }
+		//TEMPORAY COMMENT
+		/*if("INITIATED".equals(meterChange.getStatus())){
+        	meterChange.setStatus(MeterChangeStatus.PROCESSING);
+        }*/
+		meterChange.setStatus(MeterChangeStatus.PROCESSING);
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			MeterDetails prevMeter = meterChange.getPrevMeterNo();
         	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));//Status would be according to meter(burnt or stuck)
@@ -262,7 +262,9 @@ public class MeterChangeResource {
 	        custDetails.setPrevReading(meterChange.getNewMeterReading());
 	        custDetailsRepository.save(custDetails);*/
 	        //meterChange.setStatus(CPSConstants.METERCHANGED);
-	        meterChange.setStatus(statusMasterRepository.findByStatus(CPSConstants.COMPLETED.toUpperCase()).getId().intValue());
+	        
+	        //TEMPORAY COMMENT
+	        meterChange.setStatus(MeterChangeStatus.APPROVED);
 	        
 		}
 
@@ -297,7 +299,9 @@ public class MeterChangeResource {
         	meterDetailsRepository.save(meterDetails);
     	}
     	//meterChange.setStatus(2);
-    	meterChange.setStatus(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()).getId().intValue());
+    	//TEMPORAY COMMENT
+    	meterChange.setStatus(MeterChangeStatus.APPROVED);
+    	//meterChange.setStatus(statusMasterRepository.findByStatus(CPSConstants.DECLINED.toUpperCase()).getId().intValue());
     	meterChange.setNewMeterNo(null);
     	meterChange.setNewMeterReading(null);
     	meterChangeRepository.save(meterChange);

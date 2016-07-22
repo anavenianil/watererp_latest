@@ -25,6 +25,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -97,8 +98,8 @@ public class ApplicationTxnResourceIntTest {
     private static final Integer DEFAULT_STATUS = 1;
     private static final Integer UPDATED_STATUS = 2;
 
-    private static final Float DEFAULT_METER_READING = 1F;
-    private static final Float UPDATED_METER_READING = 2F;
+    private static final BigDecimal DEFAULT_METER_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_METER_READING = new BigDecimal(2);
 
     private static final LocalDate DEFAULT_REQUESTED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_REQUESTED_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -262,7 +263,7 @@ public class ApplicationTxnResourceIntTest {
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
                 .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO.toString())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
-                .andExpect(jsonPath("$.[*].meterReading").value(hasItem(DEFAULT_METER_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].meterReading").value(hasItem(DEFAULT_METER_READING.intValue())))
                 .andExpect(jsonPath("$.[*].requestedDate").value(hasItem(DEFAULT_REQUESTED_DATE.toString())))
                 .andExpect(jsonPath("$.[*].connectionDate").value(hasItem(DEFAULT_CONNECTION_DATE.toString())))
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
@@ -307,7 +308,7 @@ public class ApplicationTxnResourceIntTest {
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
             .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
-            .andExpect(jsonPath("$.meterReading").value(DEFAULT_METER_READING.doubleValue()))
+            .andExpect(jsonPath("$.meterReading").value(DEFAULT_METER_READING.intValue()))
             .andExpect(jsonPath("$.requestedDate").value(DEFAULT_REQUESTED_DATE.toString()))
             .andExpect(jsonPath("$.connectionDate").value(DEFAULT_CONNECTION_DATE.toString()))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))

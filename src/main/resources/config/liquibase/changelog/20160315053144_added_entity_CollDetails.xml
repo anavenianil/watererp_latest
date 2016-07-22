@@ -23,7 +23,7 @@
             </column>
             <column name="reversal_ref" type="varchar(255)"/>
             <column name="receipt_no" type="varchar(255)"/>
-            <column name="receipt_amt" type="${floatType}"/>
+            <column name="receipt_amt" type="decimal(20,3)"/>
             <column name="receipt_dt" type="timestamp"/>
             <column name="receipt_mode" type="varchar(255)"/>
             <column name="instr_no" type="varchar(255)"/>

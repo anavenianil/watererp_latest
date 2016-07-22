@@ -31,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -61,8 +62,8 @@ public class OnlinePaymentCallbackResourceIntTest {
 	private static final String DEFAULT_RESPONSE_CODE = "AAAAA";
 	private static final String UPDATED_RESPONSE_CODE = "BBBBB";
 
-	private static final Float DEFAULT_TOTAL_AMOUNT_PAID = 1F;
-	private static final Float UPDATED_TOTAL_AMOUNT_PAID = 2F;
+	private static final BigDecimal DEFAULT_TOTAL_AMOUNT_PAID = new BigDecimal(1);
+	private static final BigDecimal UPDATED_TOTAL_AMOUNT_PAID = new BigDecimal(2);
 	private static final String DEFAULT_USER_DEFINED_FIELD = "AAAAA";
 	private static final String UPDATED_USER_DEFINED_FIELD = "BBBBB";
 	private static final String DEFAULT_MERCHANT_TXN_REF = "AAAAA";

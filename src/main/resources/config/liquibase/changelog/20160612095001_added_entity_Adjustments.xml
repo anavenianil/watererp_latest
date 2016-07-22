@@ -22,7 +22,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="can" type="varchar(255)"/>
-            <column name="amount" type="decimal(10,2)"/>
+            <column name="amount" type="decimal(20,3)"/>
             <column name="remarks" type="varchar(255)"/>
             <column name="txn_time" type="timestamp"/>
             <column name="status" type="varchar(255)">

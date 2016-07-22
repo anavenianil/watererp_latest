@@ -5,10 +5,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
+
+import com.callippus.water.erp.domain.enumeration.MeterChangeStatus;
 
 /**
  * A MeterChange.
@@ -24,25 +28,27 @@ public class MeterChange implements Serializable {
 
     @Column(name = "can")
     private String can;
-
+    
     @Column(name = "reason_for_change")
     private String reasonForChange;
-
-    @Column(name = "prev_meter_reading")
-    private Float prevMeterReading;
-
-    @Column(name = "new_meter_reading")
-    private Float newMeterReading;
-
+    
+    @Column(name = "prev_meter_reading", precision=20, scale=3)
+    private BigDecimal prevMeterReading;
+    
+    @Column(name = "new_meter_reading", precision=20, scale=3)
+    private BigDecimal newMeterReading;
+    
     @Column(name = "remarks")
     private String remarks;
-
+    
     @Column(name = "approved_date")
     private LocalDate approvedDate;
-
-    @Column(name = "status")
-    private Integer status;
-
+    
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private MeterChangeStatus status;
+    
     @ManyToOne
     @JoinColumn(name = "cust_details_id")
     private CustDetails custDetails;
@@ -74,7 +80,7 @@ public class MeterChange implements Serializable {
     public String getCan() {
         return can;
     }
-
+    
     public void setCan(String can) {
         this.can = can;
     }
@@ -82,31 +88,31 @@ public class MeterChange implements Serializable {
     public String getReasonForChange() {
         return reasonForChange;
     }
-
+    
     public void setReasonForChange(String reasonForChange) {
         this.reasonForChange = reasonForChange;
     }
 
-    public Float getPrevMeterReading() {
+    public BigDecimal getPrevMeterReading() {
         return prevMeterReading;
     }
-
-    public void setPrevMeterReading(Float prevMeterReading) {
+    
+    public void setPrevMeterReading(BigDecimal prevMeterReading) {
         this.prevMeterReading = prevMeterReading;
     }
 
-    public Float getNewMeterReading() {
+    public BigDecimal getNewMeterReading() {
         return newMeterReading;
     }
-
-    public void setNewMeterReading(Float newMeterReading) {
+    
+    public void setNewMeterReading(BigDecimal newMeterReading) {
         this.newMeterReading = newMeterReading;
     }
 
     public String getRemarks() {
         return remarks;
     }
-
+    
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
@@ -114,16 +120,16 @@ public class MeterChange implements Serializable {
     public LocalDate getApprovedDate() {
         return approvedDate;
     }
-
+    
     public void setApprovedDate(LocalDate approvedDate) {
         this.approvedDate = approvedDate;
     }
 
-    public Integer getStatus() {
+    public MeterChangeStatus getStatus() {
         return status;
     }
-
-    public void setStatus(Integer status) {
+    
+    public void setStatus(MeterChangeStatus status) {
         this.status = status;
     }
 
@@ -176,6 +182,9 @@ public class MeterChange implements Serializable {
             return false;
         }
         MeterChange meterChange = (MeterChange) o;
+        if(meterChange.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, meterChange.id);
     }
 

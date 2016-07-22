@@ -1,0 +1,40 @@
+{
+    "relationships": [
+	{
+            "relationshipId": 1,
+            "relationshipName": "custDetails",
+            "otherEntityName": "custDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+	{
+            "relationshipId": 2,
+            "relationshipName": "billFullDetails",
+            "otherEntityName": "billFullDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+	{
+            "relationshipId": 3,
+            "relationshipName": "collDetails",
+            "otherEntityName": "collDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id",
+            "relationshipValidate" : "required"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "amount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160707104149",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

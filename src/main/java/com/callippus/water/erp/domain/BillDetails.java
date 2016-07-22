@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -54,32 +55,32 @@ public class BillDetails implements Serializable {
     @Column(name = "meter_fix_date")
     private LocalDate meterFixDate;
 
-    @Column(name = "initial_reading")
-    private Float initialReading;
+    @Column(name = "initial_reading", precision=20, scale=3)
+    private BigDecimal initialReading;
 
-    @Column(name = "present_reading")
-    private Float presentReading;
+    @Column(name = "present_reading", precision=20, scale=3)
+    private BigDecimal presentReading;
 
-    @Column(name = "units")
-    private Float units;
+    @Column(name = "units", precision=20, scale=3)
+    private BigDecimal units;
 
-    @Column(name = "water_cess")
-    private Float waterCess;
+    @Column(name = "water_cess", precision=20, scale=3)
+    private BigDecimal waterCess;
 
-    @Column(name = "sewerage_cess")
-    private Float sewerageCess;
+    @Column(name = "sewerage_cess", precision=20, scale=3)
+    private BigDecimal sewerageCess;
 
-    @Column(name = "service_charge")
-    private Float serviceCharge;
+    @Column(name = "service_charge", precision=20, scale=3)
+    private BigDecimal serviceCharge;
 
-    @Column(name = "meter_service_charge")
-    private Float meterServiceCharge;
+    @Column(name = "meter_service_charge", precision=20, scale=3)
+    private BigDecimal meterServiceCharge;
 
-    @Column(name = "total_amount")
-    private Float totalAmount;
+    @Column(name = "total_amount", precision=20, scale=3)
+    private BigDecimal totalAmount;
 
-    @Column(name = "net_payable_amount")
-    private Float netPayableAmount;
+    @Column(name = "net_payable_amount", precision=20, scale=3)
+    private BigDecimal netPayableAmount;
 
     @Column(name = "telephone_no")
     private String telephoneNo;
@@ -117,8 +118,8 @@ public class BillDetails implements Serializable {
     @Column(name = "longi")
     private String longi;
 
-    @Column(name = "no_meter_amt")
-    private Float noMeterAmt;
+    @Column(name = "no_meter_amt", precision=20, scale=3)
+    private BigDecimal noMeterAmt;
 
     @Column(name = "met_reading_dt")
     private LocalDate metReadingDt;
@@ -218,75 +219,75 @@ public class BillDetails implements Serializable {
         this.meterFixDate = meterFixDate;
     }
 
-    public Float getInitialReading() {
+    public BigDecimal getInitialReading() {
         return initialReading;
     }
 
-    public void setInitialReading(Float initialReading) {
+    public void setInitialReading(BigDecimal initialReading) {
         this.initialReading = initialReading;
     }
 
-    public Float getPresentReading() {
+    public BigDecimal getPresentReading() {
         return presentReading;
     }
 
-    public void setPresentReading(Float presentReading) {
+    public void setPresentReading(BigDecimal presentReading) {
         this.presentReading = presentReading;
     }
 
-    public Float getUnits() {
+    public BigDecimal getUnits() {
         return units;
     }
 
-    public void setUnits(Float units) {
+    public void setUnits(BigDecimal units) {
         this.units = units;
     }
 
-    public Float getWaterCess() {
+    public BigDecimal getWaterCess() {
         return waterCess;
     }
 
-    public void setWaterCess(Float waterCess) {
+    public void setWaterCess(BigDecimal waterCess) {
         this.waterCess = waterCess;
     }
 
-    public Float getSewerageCess() {
+    public BigDecimal getSewerageCess() {
         return sewerageCess;
     }
 
-    public void setSewerageCess(Float sewerageCess) {
+    public void setSewerageCess(BigDecimal sewerageCess) {
         this.sewerageCess = sewerageCess;
     }
 
-    public Float getServiceCharge() {
+    public BigDecimal getServiceCharge() {
         return serviceCharge;
     }
 
-    public void setServiceCharge(Float serviceCharge) {
+    public void setServiceCharge(BigDecimal serviceCharge) {
         this.serviceCharge = serviceCharge;
     }
 
-    public Float getMeterServiceCharge() {
+    public BigDecimal getMeterServiceCharge() {
         return meterServiceCharge;
     }
 
-    public void setMeterServiceCharge(Float meterServiceCharge) {
+    public void setMeterServiceCharge(BigDecimal meterServiceCharge) {
         this.meterServiceCharge = meterServiceCharge;
     }
 
-    public Float getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Float totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Float getNetPayableAmount() {
+    public BigDecimal getNetPayableAmount() {
         return netPayableAmount;
     }
 
-    public void setNetPayableAmount(Float netPayableAmount) {
+    public void setNetPayableAmount(BigDecimal netPayableAmount) {
         this.netPayableAmount = netPayableAmount;
     }
 
@@ -386,11 +387,11 @@ public class BillDetails implements Serializable {
         this.longi = longi;
     }
 
-    public Float getNoMeterAmt() {
+    public BigDecimal getNoMeterAmt() {
         return noMeterAmt;
     }
 
-    public void setNoMeterAmt(Float noMeterAmt) {
+    public void setNoMeterAmt(BigDecimal noMeterAmt) {
         this.noMeterAmt = noMeterAmt;
     }
 

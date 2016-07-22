@@ -2,15 +2,16 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Application_txn" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="dda6da65-b38f-480d-bc59-fcdbc727f9cf">
 	<property name="ireport.zoom" value="0.9090909090909126"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="785"/>
 	<property name="ireport.callouts" value="##Tue May 03 14:47:11 IST 2016"/>
 	<parameter name="Id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR ID]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT *,concat(IFNULL(first_name,""),' ',IFNULL(middle_name,""),' ',IFNULL(last_name,"") )full_name FROM `watererp`.`application_txn` a
-left join `tariff_category_master` t on t.id=a.tariff_category_master_id left join `id_proof_master` i on a.id_proof_master_id=i.id
- where a.id=$P{Id}]]>
+		<![CDATA[SELECT *, concat(IFNULL(first_name,""),',',IFNULL(middle_name,""),',',IFNULL(last_name,"") ) full_name
+FROM `watererp`.`application_txn` a, `tariff_category_master` t, `id_proof_master` i where
+t.id=a.tariff_category_master_id and
+a.id_proof_master_id=i.id and a.id=$P{Id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -87,7 +88,7 @@ left join `tariff_category_master` t on t.id=a.tariff_category_master_id left jo
 	<field name="status" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="meter_reading" class="java.lang.Float">
+	<field name="meter_reading" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="requested_date" class="java.sql.Date">
@@ -133,6 +134,9 @@ left join `tariff_category_master` t on t.id=a.tariff_category_master_id left jo
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="tariff_category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="type" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="id_proof" class="java.lang.String">
@@ -200,10 +204,6 @@ left join `tariff_category_master` t on t.id=a.tariff_category_master_id left jo
 				</textElement>
 				<text><![CDATA[              APPLICATION FORM FOR NEW CONNECTION]]></text>
 			</staticText>
-			<image>
-				<reportElement x="-19" y="6" width="149" height="124" uuid="60de98d2-ed14-4e79-ae33-5fb009bd09f8"/>
-				<imageExpression><![CDATA["C:\\Users\\gattu\\Desktop\\watererp.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<columnHeader>
@@ -687,7 +687,7 @@ left join `tariff_category_master` t on t.id=a.tariff_category_master_id left jo
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{id_proof}=='VOTER  ID'?'YES':'-')]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{id_proof}=='VOTERS ID'?'YES':'-')]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="390" y="176" width="100" height="20" uuid="8a3ba9d3-68b2-4870-8cf4-59a037c9f0c1"/>

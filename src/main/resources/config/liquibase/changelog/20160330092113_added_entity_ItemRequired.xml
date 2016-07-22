@@ -25,9 +25,9 @@
             
             <column name="quantity" type="integer"/>
             
-            <column name="rate_per_shs" type="decimal(10,2)"/>
+            <column name="rate_per_shs" type="decimal(20,3)"/>
             
-            <column name="amount" type="decimal(10,2)"/>
+            <column name="amount" type="decimal(20,3)"/>
             
             <column name="material_master_id" type="bigint"/>
             <column name="application_txn_id" type="bigint"/>

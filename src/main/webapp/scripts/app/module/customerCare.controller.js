@@ -11,7 +11,7 @@ angular.module('watererpApp').controller('CustomerCareController',
 angular.module('watererpApp').controller(
 		'CustomerCareController',
 		function($scope, $state, $rootScope, Account, User,
-				ApplicationTxnService, Principal) {
+				ApplicationTxnService, Principal, $stateParams) {
 			$scope.pendingRequests = [];
 			$scope.approvedRequests = [];
 			$scope.myRequests = [];
@@ -25,11 +25,11 @@ angular.module('watererpApp').controller(
 
 			$scope.loadAll = function() {
 
-				ApplicationTxnService.getPendingRequests().then(function(data) {
+				ApplicationTxnService.getPendingRequests($stateParams.id).then(function(data) {
 					$scope.pendingRequests = data;
 				});
 
-				ApplicationTxnService.getApprovedRequests().then(
+				ApplicationTxnService.getApprovedRequests($stateParams.id).then(
 						function(data) {
 							$scope.approvedRequests = data;
 						});

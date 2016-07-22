@@ -15,14 +15,22 @@ angular.module('watererpApp').factory(
 						return response.data;
 					});
 				},
-				getPendingRequests : function() {
-					return $http.get('api/applicationTxns/getPendingRequests')
-							.then(function(response) {
+				getPendingRequests : function(id) {
+					return $http.get('api/applicationTxns/getPendingRequests'
+							, {
+								params : {
+									id : id
+								}
+							}).then(function(response) {
 								return response.data;
 							});
 				},
-				getApprovedRequests : function() {
-					return $http.get('api/applicationTxns/getApprovedRequests')
+				getApprovedRequests : function(id) {
+					return $http.get('api/applicationTxns/getApprovedRequests', {
+						params : {
+							id : id
+						}
+					})
 							.then(function(response) {
 								return response.data;
 							});

@@ -3,11 +3,11 @@
 angular.module('watererpApp').controller(
 		'ConnectionController',
 		function($scope, $state, $rootScope, Account, User,
-				ApplicationTxnService, Principal) {
+				ApplicationTxnService, Principal, $stateParams) {
 			$scope.pendingRequests = [];
 			$scope.approvedRequests = [];
 			$scope.myRequests = [];
-
+			console.log("These are the stateParams in connection controller:" + JSON.stringify($stateParams));
 			Principal.hasAuthority("ROLE_CUSTOMER").then(function(result) {
 				if (result) {
 					$state.go('applicationTxn.new');
@@ -16,11 +16,11 @@ angular.module('watererpApp').controller(
 
 			$scope.loadAll = function() {
 
-				ApplicationTxnService.getPendingRequests().then(function(data) {
+				ApplicationTxnService.getPendingRequests($stateParams.id).then(function(data) {
 					$scope.pendingRequests = data;
 				});
 
-				ApplicationTxnService.getApprovedRequests().then(
+				ApplicationTxnService.getApprovedRequests($stateParams.id).then(
 						function(data) {
 							$scope.approvedRequests = data;
 						});

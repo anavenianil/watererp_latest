@@ -68,7 +68,6 @@ angular.module('watererpApp')
                                     poBox: null,
                                     requestedDate: null,
                                     photo: null,
-                                    fileNumber: null,
                                     createdDate: null,
                                     updatedDate: null,
                                     status: null,

@@ -1,0 +1,60 @@
+<div>
+    <h2>InvoicePaymentss</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="invoicePayments.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new InvoicePayments</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="custDetails.id"><span>custDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="billFullDetails.id"><span>billFullDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="collDetails.id"><span>collDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="invoicePayments in invoicePaymentss track by invoicePayments.id">
+                    <td><a ui-sref="invoicePayments.detail({id:invoicePayments.id})">{{invoicePayments.id}}</a></td>
+                    <td>{{invoicePayments.amount}}</td>
+                    <td>
+                        <a ui-sref="custDetails.detail({id:invoicePayments.custDetails.id})">{{invoicePayments.custDetails.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="billFullDetails.detail({id:invoicePayments.billFullDetails.id})">{{invoicePayments.billFullDetails.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="collDetails.detail({id:invoicePayments.collDetails.id})">{{invoicePayments.collDetails.id}}</a>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="invoicePayments.detail({id:invoicePayments.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="invoicePayments.edit({id:invoicePayments.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="invoicePayments.delete({id:invoicePayments.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

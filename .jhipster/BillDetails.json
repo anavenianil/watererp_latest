@@ -59,47 +59,47 @@
         {
             "fieldId": 10,
             "fieldName": "initialReading",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 11,
             "fieldName": "presentReading",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 12,
             "fieldName": "units",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 13,
             "fieldName": "waterCess",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 14,
             "fieldName": "sewerageCess",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 15,
             "fieldName": "serviceCharge",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 16,
             "fieldName": "meterServiceCharge",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 17,
             "fieldName": "totalAmount",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 18,
             "fieldName": "netPayableAmount",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 19,
@@ -164,7 +164,7 @@
         {
             "fieldId": 31,
             "fieldName": "noMeterAmt",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 32,

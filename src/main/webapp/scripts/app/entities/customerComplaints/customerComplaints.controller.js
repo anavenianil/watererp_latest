@@ -70,7 +70,6 @@ angular.module('watererpApp')
 			var arr = $item.split("-");
 			$scope.complaintInfo = "";
 			$scope.load(arr[2]);
-			
 		};
 
         $scope.clear = function () {

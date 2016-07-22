@@ -45,7 +45,7 @@ public class BillRunMasterResource {
 	@RequestMapping(value = "/billRunMasters", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<BillRunMaster> createBillRunMaster(
-			@RequestBody BillRunMaster billRunMaster) throws URISyntaxException, Exception {
+			@RequestBody BillRunMaster billRunMaster, @RequestParam(value = "all", required = false) String runAllFlag) throws URISyntaxException, Exception {
 		log.debug("REST request to save BillRunMaster : {}", billRunMaster);
 		
 		BillRunMaster result =  null;
@@ -60,15 +60,16 @@ public class BillRunMasterResource {
 					.body(null);
 		}
 
+		boolean runAll = (runAllFlag != null && runAllFlag.equalsIgnoreCase("true") ? true: false);
 		if (billRunMaster.getArea() == null) {
-			result = billingService.generateBill();
+			result = billingService.generateBill(runAll);
 
 		} else {
 			String param = billRunMaster.getArea().toString();
 
 			if (param.length() < 3) // It's an area
 			{
-				result = billingService.generateBill();
+				result = billingService.generateBill(runAll);
 			} else if (param.length() == 9 || param.length() == 8) {
 				result = billingService.generateSingleBill(param);
 			}
@@ -100,7 +101,7 @@ public class BillRunMasterResource {
         String status = null;
         
         if (billRunMaster.getId() == null) {
-            return createBillRunMaster(billRunMaster);
+            return createBillRunMaster(billRunMaster,null);
         }
         
         if(billRunMaster.getStatus().equalsIgnoreCase("cancel")){
