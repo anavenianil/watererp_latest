@@ -30,7 +30,6 @@
 						<label for="field_divisionMaster">DMA</label> <select
 							class="form-control" id="field_divisionMaster"
 							name="divisionMaster" ng-model="custDetails.divisionMaster"
-							ng-change="getCustDetailsByDma(custDetails.divisionMaster.id)"
 							ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
 							required>
 							<option value="">All</option>
@@ -42,16 +41,19 @@
 							Category</label> <select class="form-control"
 							id="field_tariffCategoryMaster" name="tariffCategoryMaster"
 							ng-model="custDetails.tariffCategoryMaster"
-							ng-change="getCustDetailsByCategory(custDetails.tariffCategoryMaster.id)"
 							ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
 							required>
-							<option value="">All</option>
-						</select>
+													</select>
+					</div>
+					<div class="col-sm-2">
+						<label>Click</label> <a type="button"
+							href="/api/custDetailss/report/{{custDetails.divisionMaster.id}}/{{custDetails.tariffCategoryMaster.id}}"
+							class="pull-right btn btn-warning">Download as PDF</a>
 					</div>
 
 				</div>
 				<hr>
-				<div>
+				<!-- <div>
 					<label> Total Connection :
 						{{custDetailsReportDTO.totalConnection}}</label><br /> <label>
 						Total In DMA {{custDetailsReportDTO.dmaName}} :
@@ -66,7 +68,7 @@
 				<label>hello</label>
 				<div ng-repeat="custDetail in custDetailsReportDTO.custDetails">
 					<span>{{custDetail.consName}}</span>
-				</div>
+				</div> -->
 				<!-- <div class="table-responsive">
 					<table class="table table-striped">
 						<thead>

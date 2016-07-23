@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DivisionCategoryDomestic" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8258616a-f5b9-41ff-bc1a-3a35a2717b91">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="categoryId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please enter Category id]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select case when div_code1 = "" then "" else (select division_name from division_master where division_code = div_code1) end division_name,ifnull(tcm.tariff_category,'') tariff_category,meter_details_id metering_status,count from (
+select  concat(div_code,'-',tariff_category_master_id1,'-',meter_details_id1,'-', level) sort_code,  case when level = 1 then div_code else '' end div_code1, case when level = 2 then tariff_category_master_id1 else '' end t, case when meter_details_id1 ='0' then '' else meter_details_id1 end meter_details_id, count from
+(
+select 3 level, div_code,tariff_category_master_id tariff_category_master_id1, case when meter_details_id is null then 'U' else 'M' end meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, div_code,tariff_category_master_id1, meter_details_id1
+union
+select 2 level, div_code,tariff_category_master_id tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, div_code,tariff_category_master_id1, meter_details_id1
+union
+select 1 level, div_code, '0' tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, div_code,tariff_category_master_id1, meter_details_id1
+) a
+) b left join tariff_category_master tcm
+on b.t = tcm.id
+order by  sort_code]]>
+	</queryString>
+	<field name="division_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tariff_category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metering_status" class="java.lang.String"/>
+	<field name="count" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="234" y="30" width="412" height="34" uuid="e30f22cd-8f8e-4f09-9f14-bdeb566223e7"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMBER OF  CATEGORY MASTERS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="183" y="10" width="152" height="28" uuid="ecdab5f2-5de0-46af-bc7a-8295c9b38408"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Category Masters]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="10" width="144" height="28" uuid="f4bd0e9a-9df0-4711-9296-18fdf5214596"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Division Masters]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="718" y="10" width="67" height="28" uuid="f437bb25-f40f-478d-b0b1-f7a7443e586d"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Total ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="10" width="88" height="28" uuid="ec6dd7c9-6d00-4629-96a9-5a2c20f50195"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Category]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="59" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="168" y="38" width="206" height="20" uuid="adc2139c-4e5e-4391-b1c2-0a2c101b4566"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tariff_category}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="685" y="18" width="100" height="20" uuid="0c9eb6e3-4ec5-41af-8841-050b266ba270"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="10" width="118" height="20" uuid="06911a62-2aea-499b-b55f-e0e42c8f9855"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{division_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="387" y="34" width="230" height="20" uuid="4eb5b2e9-087e-4d90-acec-c2566690d744"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{metering_status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

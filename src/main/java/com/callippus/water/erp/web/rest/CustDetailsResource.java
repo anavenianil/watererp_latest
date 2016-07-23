@@ -1,18 +1,21 @@
 package com.callippus.water.erp.web.rest;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,17 +30,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustDetailsReportDTO;
-import com.callippus.water.erp.domain.DivisionMaster;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.DivisionMasterRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
-import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -62,6 +65,9 @@ public class CustDetailsResource {
 	
 	@Inject
 	private DivisionMasterRepository divisionMasterRepository;
+	
+	@Inject
+    private ReportsCustomRepository reportsRepository;
     /**
      * POST  /custDetailss -> Create a new custDetails.
      */
@@ -188,60 +194,38 @@ public class CustDetailsResource {
     
     
     /**
-     * Get By Category Count
+     * Get By Category PDF 
      */
-    @RequestMapping(value = "/custDetails/getAll", 
-			method = RequestMethod.POST, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	public ResponseEntity<CustDetailsReportDTO> getCustDetailsReport(
-			@RequestBody CustDetailsReportDTO custDetailsReportDTO) throws URISyntaxException {
-		log.debug("REST request to save Customer : {}", custDetailsReportDTO);
+    @RequestMapping(value = "/custDetailss/report/{dmaId}/{categoryId}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getCustDetailsReport(HttpServletResponse response,
+			@PathVariable Long dmaId, @PathVariable Long categoryId) throws JRException,
+			IOException {
+		log.debug("REST request to save Customer : {}", categoryId);
 		
-			Long totalConnection = custDetailsRepository.count();
-			custDetailsReportDTO.setTotalConnection(totalConnection);
-			if(custDetailsReportDTO.getDmaId()!=null){
-				DivisionMaster divisionMaster = divisionMasterRepository.findOne(custDetailsReportDTO.getDmaId());
-				Long totalInOneDma = custDetailsRepository.countByDivisionMaster(divisionMaster);
-				custDetailsReportDTO.setDmaName(divisionMaster.getDivisionName());
-				custDetailsReportDTO.setTotalInOneDma(totalInOneDma);
-
-				List<CustDetails> custDetailss = custDetailsRepository.findByDivisionMaster(divisionMaster);
-				Set<TariffCategoryMaster> items = new HashSet<TariffCategoryMaster>();
-		        Iterator<CustDetails> iterator = custDetailss.iterator();
-		        TariffCategoryMaster tariffCategoryMaster = null;
-		        while(iterator.hasNext()){
-		        	tariffCategoryMaster = iterator.next().getTariffCategoryMaster();
-		        	items.add(tariffCategoryMaster);
-		         }
-		        HashMap<String,Integer> hm=new HashMap<String,Integer>();
-	
-				for (TariffCategoryMaster row : items) {
-					String key = row.getTariffCategory();
-					TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(row.getId());
-					Integer value = custDetailsRepository.countByTariffCategoryMasterAndDivisionMaster(tcm, divisionMaster);
-					hm.put(key, value);
-				}
-	        
-	        custDetailsReportDTO.setTariffCategoryMasters(items);
-	        custDetailsReportDTO.setTariffsCounts(hm);
-		}else{
-			List<DivisionMaster> divisionMasters = divisionMasterRepository.findAll();
-			List<CustDetails> custDetailss = new ArrayList<CustDetails>();
-			for (DivisionMaster row : divisionMasters) {
-				List<TariffCategoryMaster> tariffCategoryMasters = tariffCategoryMasterRepository.findAll();
-				for (TariffCategoryMaster tariffCategoryMaster : tariffCategoryMasters) {
-					List<CustDetails> custDetailss1 = new ArrayList<CustDetails>();
-					custDetailss1 = custDetailsRepository.findByTariffCategoryMasterAndDivisionMaster(
-							tariffCategoryMaster, row);
-					custDetailss.addAll(custDetailss1);
-					}
-			}
-			custDetailsReportDTO.setCustDetails(custDetailss);
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("dmaId", dmaId);
+		params.put("categoryId", categoryId);
+		JasperPrint jasperPrint = null;
+		if(dmaId == null && categoryId == null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/DivisionCategory.jasper", params);
 		}
-		return Optional.ofNullable(custDetailsReportDTO)
-				.map(result -> new ResponseEntity<>(custDetailsReportDTO, HttpStatus.OK))
-				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		else if(dmaId != null && categoryId == null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/DivisionCategoryDA01.jasper", params);
+		}else if(dmaId != null && categoryId != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/DivisionCategoryDomestic.jasper", params);
+		}
+		
+		
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=DivisionCategory_Report_" + categoryId + ".pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
     
     
