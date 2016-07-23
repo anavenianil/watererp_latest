@@ -1,20 +1,17 @@
 package com.callippus.water.erp.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.callippus.water.erp.domain.ApplicationTxn;
-import com.callippus.water.erp.domain.BillAndCollectionDTO;
-import com.callippus.water.erp.domain.ChangeCaseDTO;
-import com.callippus.water.erp.domain.CollDetails;
-import com.callippus.water.erp.domain.CollectionTypeMaster;
-import com.callippus.water.erp.domain.CustDetails;
-import com.callippus.water.erp.domain.MeterDetails;
-import com.callippus.water.erp.domain.enumeration.CustStatus;
-import com.callippus.water.erp.repository.CollDetailsRepository;
-import com.callippus.water.erp.repository.CustDetailsRepository;
-import com.callippus.water.erp.repository.ReportsCustomRepository;
-import com.callippus.water.erp.service.PaymentService;
-import com.callippus.water.erp.web.rest.util.HeaderUtil;
-import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -28,22 +25,25 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.math.BigDecimal;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.time.ZonedDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.User;
+import com.callippus.water.erp.repository.CollDetailsRepository;
+import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.repository.UserRepository;
+import com.callippus.water.erp.security.SecurityUtils;
+import com.callippus.water.erp.service.PaymentService;
+import com.callippus.water.erp.web.rest.util.HeaderUtil;
+import com.callippus.water.erp.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing CollDetails.
@@ -66,6 +66,9 @@ public class CollDetailsResource {
 	
 	@Inject
 	private PaymentService paymentService;
+	
+	@Inject
+	private UserRepository userRepository;
 
 	/**
 	 * POST /collDetailss -> Create a new collDetails.
@@ -86,6 +89,8 @@ public class CollDetailsResource {
 											"A new collDetails cannot already have an ID"))
 					.body(null);
 		}
+		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUser().getUsername()).get();
+		collDetails.setUserId(user.getFirstName()+" "+user.getLastName());
 		collDetails.setReceiptMode(collDetails.getPaymentTypes().getPaymentMode());
 		
 		CollDetails result = collDetailsRepository.save(collDetails);
@@ -241,7 +246,7 @@ public class CollDetailsResource {
 	}
 	
 	
-		//added to Cancel collection Details
+		//added to Cancel collection Details(no more used because created reversal Detail entity)
 		@RequestMapping(value = "/collDetailss/collDetailsCancel", 
 				method = RequestMethod.POST, 
 				produces = MediaType.APPLICATION_JSON_VALUE)
@@ -258,9 +263,7 @@ public class CollDetailsResource {
 			
 			return ResponseEntity.ok().headers(	HeaderUtil.createEntityUpdateAlert("collDetails",
 					collDetails.getId().toString())).body(result);
-			/*return ResponseEntity.created(new URI("/api/collDetailss/collDetailsCancel"))
-					.headers(HeaderUtil.createEntityCreationAlert("collDetails", ""))
-					.body(null);*/
+
 		}
 	
 	
