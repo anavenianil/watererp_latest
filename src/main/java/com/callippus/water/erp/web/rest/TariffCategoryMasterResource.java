@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.Customer;
+import com.callippus.water.erp.domain.DivisionMaster;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,4 +128,28 @@ public class TariffCategoryMasterResource {
         tariffCategoryMasterRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("tariffCategoryMaster", id.toString())).build();
     }
+    
+    /**
+     * Get All TariffCategoryMaster
+     */
+    @RequestMapping(value = "/tariffCategoryMasters/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<TariffCategoryMaster>> getAllTariffCategoryMasters()
+			throws Exception {
+    	log.debug("REST request to getAllTariffCategoryMasters : {}");
+    	
+    	TariffCategoryMaster tcm = new TariffCategoryMaster();
+    	tcm.setId(0l);
+    	tcm.setTariffCategory("All");;
+    	List<TariffCategoryMaster> tariffCategoryMasters = new ArrayList<TariffCategoryMaster>();
+    	tariffCategoryMasters.add(tcm);
+    	List<TariffCategoryMaster> tariffCategoryMaster1= tariffCategoryMasterRepository.findAll();
+    	tariffCategoryMasters.addAll(tariffCategoryMaster1);
+    	
+    	return Optional.ofNullable(tariffCategoryMasters)
+				.map(result -> new ResponseEntity<>(tariffCategoryMasters, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

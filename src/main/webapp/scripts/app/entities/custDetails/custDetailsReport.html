@@ -32,7 +32,7 @@
 							name="divisionMaster" ng-model="custDetails.divisionMaster"
 							ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
 							required>
-							<option value="">All</option>
+							<option value=""></option>
 						</select>
 					</div>
 
@@ -43,83 +43,16 @@
 							ng-model="custDetails.tariffCategoryMaster"
 							ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
 							required>
-													</select>
+							<option value=""></option>
+						</select>
 					</div>
 					<div class="col-sm-2">
 						<label>Click</label> <a type="button"
 							href="/api/custDetailss/report/{{custDetails.divisionMaster.id}}/{{custDetails.tariffCategoryMaster.id}}"
 							class="pull-right btn btn-warning">Download as PDF</a>
 					</div>
-
 				</div>
 				<hr>
-				<!-- <div>
-					<label> Total Connection :
-						{{custDetailsReportDTO.totalConnection}}</label><br /> <label>
-						Total In DMA {{custDetailsReportDTO.dmaName}} :
-						{{custDetailsReportDTO.totalInOneDma}}</label><br /> <label>
-						Category :</label>
-					<div
-						ng-repeat="tariffsCount in custDetailsReportDTO.tariffsCounts">
-						<span>{{tariffsCount}}</span>
-					</div>
-
-				</div>
-				<label>hello</label>
-				<div ng-repeat="custDetail in custDetailsReportDTO.custDetails">
-					<span>{{custDetail.consName}}</span>
-				</div> -->
-				<!-- <div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
-								<th jh-sort-by="id"><span>ID</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="can"><span>CAN</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="metReaderCode"><span>Meter Reader
-										Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="connDate"><span>Connection Date</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="consName"><span>Consumer Name</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="mobileNo"><span>Mobile Number</span> <span
-									class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="tariffCategoryMaster.id"><span>Tariff
-										Category Master</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="divisionMaster.id"><span>Division
-										Master</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody infinite-scroll="loadPage(page + 1)"
-							infinite-scroll-disabled="links['last'] == page">
-							<tr
-								ng-repeat="custDetails in custDetailss track by $index">
-								<td><a ui-sref="custDetails.detail({id:custDetails.id})">{{custDetails.id}}</a></td>
-								<td>{{custDetails.can}}</td>
-								<td>{{custDetails.metReaderCode}}</td>
-								<td>{{custDetails.connDate | date:'mediumDate'}}</td>
-								<td>{{custDetails.consName}}</td>
-								<td>{{custDetails.mobileNo}}</td>
-								<td><a
-									ui-sref="tariffCategoryMaster.detail({id:custDetails.tariffCategoryMaster.id})">{{custDetails.tariffCategoryMaster.tariffCategory}}</a>
-								</td>
-								<td><a
-									ui-sref="divisionMaster.detail({id:custDetails.divisionMaster.id})">{{custDetails.divisionMaster.divisionName}}</a>
-								</td>
-								<td>
-									<button type="submit"
-										ui-sref="custDetails.detail({id:custDetails.id})"
-										class="btn btn-info btn-sm">
-										<span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span>
-											View</span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div> -->
 			</div>
 		</div>
 	</div>
