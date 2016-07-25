@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,7 @@ public class ReversalDetailsResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<ReversalDetails> createReversalDetails(@Valid @RequestBody ReversalDetails reversalDetails) throws URISyntaxException {
         log.debug("REST request to save ReversalDetails : {}", reversalDetails);
         if (reversalDetails.getId() != null) {

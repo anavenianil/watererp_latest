@@ -17,10 +17,12 @@ angular.module('watererpApp').controller('ReversalDetailsDialogController',
         }
 
         var onSaveSuccess = function (result) {
+        	$('#cancelFormModal').modal('hide');
             $scope.$emit('watererpApp:reversalDetailsUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
-            $state.go('reversalDetails');
+            $scope.collDetailss.length = 0;
+            $scope.message = "Collection Cancelled Successfully";
         };
 
         var onSaveError = function (result) {
@@ -37,7 +39,8 @@ angular.module('watererpApp').controller('ReversalDetailsDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
+        	$('#cancelFormModal').modal('hide');
         };
         $scope.datePickerForCancelledDate = {};
 
@@ -86,10 +89,16 @@ angular.module('watererpApp').controller('ReversalDetailsDialogController',
 			$scope.custInfo = "";
 			$scope.isValidCust = true;
 			$scope.getCollDetails($scope.reversalDetails.collDetails.can);
+			$scope.message = null;
 		};
 		
-		$scope.assignCollDetailsId = function(collDetails){
+		/*$scope.assignCollDetailsId = function(collDetails){
 			//alert(id);
 			$scope.reversalDetails.collDetails = collDetails;
+		}*/
+		
+		$scope.confirmCancel = function(collDetails){
+			$scope.reversalDetails.collDetails = collDetails;
+			$('#cancelFormModal').modal('show');
 		}
 });
