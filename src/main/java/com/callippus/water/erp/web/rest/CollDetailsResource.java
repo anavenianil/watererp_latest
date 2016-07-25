@@ -237,8 +237,8 @@ public class CollDetailsResource {
 	@Timed
 	public ResponseEntity<List<CollDetails>> getCollDetails(@PathVariable String can) {
 		log.debug("REST request to get CollDetails : {}", can);
-
-		List<CollDetails> collDetailss = collDetailsRepository.findTop10ByCanOrderByIdDesc(can);
+		//String reversalRef = "";
+		List<CollDetails> collDetailss = collDetailsRepository.findTop10ByCanAndReversalRefOrderByIdDesc(can, "");
 
 		return Optional.ofNullable(collDetailss)
 				.map(result -> new ResponseEntity<>(collDetailss, HttpStatus.OK))
@@ -250,7 +250,7 @@ public class CollDetailsResource {
 		@RequestMapping(value = "/collDetailss/collDetailsCancel", 
 				method = RequestMethod.POST, 
 				produces = MediaType.APPLICATION_JSON_VALUE)
-		@Timed
+		@Timed	
 		public ResponseEntity<CollDetails> collDetailsCancel(
 				@RequestBody CollDetails collDetails) throws URISyntaxException { 
 			log.debug("REST request to cancel Collection : {}", collDetails);
