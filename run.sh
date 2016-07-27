@@ -43,7 +43,7 @@ set -e
 
 
 ##### Production DB Loading ###############
-
+set +e
 if [ -n "$message" ]; then
 	echo "Message for this version:" $message
 	db=$(echo $message|grep "\[DB\]")
@@ -62,7 +62,7 @@ if [ -n "$message" ]; then
 		fi
 	fi
 fi
-
+set -e
 a=`ps -ef|grep java|grep spring-boot|awk '{print $2}'`
 if [ -n "$a" ]; then
 	echo "Killing:" $a
