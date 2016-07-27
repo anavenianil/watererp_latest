@@ -1,43 +1,48 @@
 <div>
-    <h2>ReversalDetailss</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="reversalDetails.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new ReversalDetails
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="cancelledDate"><span>CancelledDate</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="remarks"><span>Remarks</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="collDetails.id"><span>collDetails</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.login"><span>user</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="reversalDetails in reversalDetailss track by reversalDetails.id">
-                    <td><a ui-sref="reversalDetails.detail({id:reversalDetails.id})">{{reversalDetails.id}}</a></td>
-                        <td>{{reversalDetails.cancelledDate | date:'mediumDate'}}</td>
-                    <td>{{reversalDetails.remarks}}</td>
-                    <td>
-                        <a ui-sref="collDetails.detail({id:reversalDetails.collDetails.id})">{{reversalDetails.collDetails.id}}</a>
-                    </td>
-                    <td>
-                        {{reversalDetails.user.login}}
-                    </td>
-                    <td class="text-right">
+	<h2>Reversal Details</h2>
+	<jh-alert></jh-alert>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="reversalDetails.new">
+					<span class="glyphicon glyphicon-plus"></span> <span>Cancel Collection</span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="table-responsive">
+		<table class="jh-table table table-striped">
+			<thead>
+				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+					<th jh-sort-by="id"><span>ID</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="collDetails.id"><span>Collection
+							Details(Receipt No.)</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="user.login"><span>Cancelled By</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="cancelledDate"><span>Cancelled Date</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="remarks"><span>Remarks</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody infinite-scroll="loadPage(page + 1)"
+				infinite-scroll-disabled="links['last'] == page">
+				<tr
+					ng-repeat="reversalDetails in reversalDetailss track by reversalDetails.id">
+					<td><a
+						ui-sref="reversalDetails.detail({id:reversalDetails.id})">{{reversalDetails.id}}</a></td>
+					<td><a
+						ui-sref="collDetails.detail({id:reversalDetails.collDetails.id})">{{reversalDetails.collDetails.id}}</a>
+					</td>
+					<td>{{reversalDetails.user.firstName+' '+reversalDetails.user.lastName+'('+reversalDetails.user.login+')'}}</td>
+					<td>{{reversalDetails.cancelledDate | date:'mediumDate'}}</td>
+					<td>{{reversalDetails.remarks}}</td>
+
+
+					<!-- <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="reversalDetails.detail({id:reversalDetails.id})"
@@ -58,9 +63,9 @@
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                    </td> -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

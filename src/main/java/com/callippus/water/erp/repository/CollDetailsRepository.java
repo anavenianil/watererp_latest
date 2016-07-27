@@ -20,6 +20,7 @@ public interface CollDetailsRepository extends JpaRepository<CollDetails,Long> {
 	
 	//List<CollDetails> findTop10ByCanAndReversalRefOrderByIdDesc(String can, String reversalRef);
 	
-	@Query("select cd from CollDetails cd where cd.can=:can and cd.reversalRef !=''")
-	List<CollDetails> findTop10ByCanOrderByIdDesc(@Param("can") String can);
+	//@Query("select cd from CollDetails cd where cd.can=:can and cd.reversalRef =''")
+	//@Query("select cd from CollDetails cd where cd.can=:can and cd.reversalRef ='' order by cd.id desc limit 10")
+	List<CollDetails> findTop10ByCanAndReversalRefOrderByIdDesc(String can, String reversalRef);
 }
