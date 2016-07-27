@@ -8,6 +8,7 @@ angular.module('watererpApp')
         $scope.page = 0;
         $scope.custDetails = {};
         $scope.custDetails.betweenDates = false;
+        $scope.message = null;
 
         $scope.getDivisionMasters = function() {
         	$scope.divisionmasters = [];
@@ -36,6 +37,7 @@ angular.module('watererpApp')
 		};
 
         $scope.getReport = function () {
+        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.custDetails.fromdate != null && $scope.custDetails.todate != null ){
         	var divisionId = $scope.custDetails.divisionMaster.id;
         	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
             var dateFormat = 'yyyy-MM-dd';
@@ -51,9 +53,15 @@ angular.module('watererpApp')
 
             $scope.collDetails = {};
             
+            	$window.open('/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
+                location.reload();
+            }
+            else
+            	{
+            	$scope.message = "Please Select Details!";
+            	}
             //$window.location = '/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate);
-            $window.open('/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
-            location.reload();
+            
             
         };
 

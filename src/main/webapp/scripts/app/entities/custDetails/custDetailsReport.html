@@ -30,9 +30,8 @@
 						<label>Click</label> <a type="button"
 							href="/api/custDetailss/report/{{custDetails.divisionMaster.id}}/{{custDetails.tariffCategoryMaster.id}}"
 							class="pull-right btn btn-warning"
-							ng-if="custDetails.betweenDates===false">Download as PDF</a> <a href
-							type="button"
-							ng-click="getReport()"
+							ng-if="custDetails.betweenDates===false">Download as PDF</a> <a
+							href type="button" ng-click="getReport()"
 							class="pull-right btn btn-warning"
 							ng-if="custDetails.betweenDates===true">Download as PDF</a>
 					</div>
@@ -43,7 +42,9 @@
 					<div class="col-sm-8">
 
 						<label class="control-label" for="field_organization"> <input
-							type="checkbox" ng-model="custDetails.betweenDates" ng-value="true">&nbsp;&nbsp;<span>Get Collection Report between dates:</span>
+							type="checkbox" ng-model="custDetails.betweenDates"
+							ng-value="true">&nbsp;&nbsp;<span>Get Collection
+								Report between dates:</span>
 					</div>
 				</div>
 				<br>
@@ -69,7 +70,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 
 					<div class="col-sm-4">
 						<label class="control-label" for="todate">To Date</label>
@@ -92,6 +93,9 @@
 					</div>
 				</div>
 				<hr>
+				<div class="alert alert-danger" ng-show="message!=null">
+					<strong>{{message}}</strong>
+				</div>
 			</div>
 		</div>
 	</div>
