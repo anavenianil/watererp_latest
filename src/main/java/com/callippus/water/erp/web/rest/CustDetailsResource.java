@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,14 +16,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
-import com.callippus.water.erp.domain.CustDetailsReportDTO;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
@@ -44,6 +43,10 @@ import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * REST controller for managing CustDetails.
@@ -207,18 +210,25 @@ public class CustDetailsResource {
 		params.put("dmaId", dmaId);
 		params.put("categoryId", categoryId);
 		JasperPrint jasperPrint = null;
-		if(dmaId == null && categoryId == null){
+		if(dmaId == 0 && categoryId == 0){
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/DivisionCategory.jasper", params);
 		}
-		else if(dmaId != null && categoryId == null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/DivisionCategoryDA01.jasper", params);
-		}else if(dmaId != null && categoryId != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/DivisionCategoryDomestic.jasper", params);
-		}
 		
+		else if(dmaId != 0 && categoryId == 0){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/DivisionCategoryDW.jasper", params);
+		}
+		else if(dmaId == 0 && categoryId != 0){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/DivisionCategoryTCW.jasper", params);
+		
+		}
+		else if(dmaId != 0 && categoryId != 0){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/DivisionCategoryDivCat.jasper", params);
+			 
+		}
 		
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
@@ -227,6 +237,50 @@ public class CustDetailsResource {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+    
+    
+    
+    /**
+     * Get By Category PDF2 
+     * @throws ParseException 
+     */
+    @RequestMapping(value = "/custDetailss/report/{dmaId}/{categoryId}/{fromDate}/{toDate}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getCustDetailsReport1(HttpServletResponse response,
+			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate fromDate , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate toDate) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", categoryId);
+   	
+    	
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("dmaId", dmaId);
+		params.put("categoryId", categoryId);
+		params.put("fromDate", fromDate);
+		params.put("toDate", toDate);
+		JasperPrint jasperPrint = null;
+		
+		 if(dmaId != 0 && categoryId != 0 && fromDate != null &&  toDate != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionReport.jasper", params);
+			 
+		}	
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=BillCollectionReport.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

@@ -7,14 +7,15 @@
 		<parameterDescription><![CDATA[Please enter Category id]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[select case when div_code1 = "" then "" else (select division_name from division_master where division_code = div_code1) end division_name,ifnull(tcm.tariff_category,'') tariff_category,meter_details_id metering_status,count from (
-select  concat(div_code,'-',tariff_category_master_id1,'-',meter_details_id1,'-', level) sort_code,  case when level = 1 then div_code else '' end div_code1, case when level = 2 then tariff_category_master_id1 else '' end t, case when meter_details_id1 ='0' then '' else meter_details_id1 end meter_details_id, count from
+		<![CDATA[select case when division_master_id1 = "" then "" else (select division_name from division_master where id = division_master_id1) end division_name,ifnull(tcm.tariff_category,'') tariff_category,meter_details_id metering_status,count from (
+select  concat(division_master_id,'-',tariff_category_master_id1,'-',meter_details_id1,'-', level) sort_code,  case when level = 1 then division_master_id else '' end division_master_id1, case when level = 2 then tariff_category_master_id1 else '' end t, case when meter_details_id1 ='0' then '' else meter_details_id1 end meter_details_id, count from
 (
-select 3 level, div_code,tariff_category_master_id tariff_category_master_id1, case when meter_details_id is null then 'U' else 'M' end meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, div_code,tariff_category_master_id1, meter_details_id1
+select 3 level, division_master_id,tariff_category_master_id tariff_category_master_id1, case when meter_details_id is null then 'U' else 'M' end meter_details_id1, count(*) count from cust_details c  where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId}
+ group by level, division_master_id,tariff_category_master_id, meter_details_id1
 union
-select 2 level, div_code,tariff_category_master_id tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, div_code,tariff_category_master_id1, meter_details_id1
+select 2 level, division_master_id,tariff_category_master_id tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, division_master_id,tariff_category_master_id, meter_details_id1
 union
-select 1 level, div_code, '0' tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, div_code,tariff_category_master_id1, meter_details_id1
+select 1 level, division_master_id, 0 tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and tariff_category_master_id=$P{categoryId} group by level, division_master_id,tariff_category_master_id1, meter_details_id1
 ) a
 ) b left join tariff_category_master tcm
 on b.t = tcm.id
@@ -68,37 +69,37 @@ order by  sort_code]]>
 			<staticText>
 				<reportElement x="412" y="10" width="88" height="28" uuid="ec6dd7c9-6d00-4629-96a9-5a2c20f50195"/>
 				<textElement>
-					<font size="18" isBold="true"/>
+					<font size="18" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Category]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="59" splitType="Stretch">
+		<band height="29" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="168" y="38" width="206" height="20" uuid="adc2139c-4e5e-4391-b1c2-0a2c101b4566"/>
+				<reportElement x="194" y="3" width="206" height="20" uuid="adc2139c-4e5e-4391-b1c2-0a2c101b4566"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tariff_category}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="685" y="18" width="100" height="20" uuid="0c9eb6e3-4ec5-41af-8841-050b266ba270"/>
+				<reportElement x="723" y="4" width="100" height="20" uuid="0c9eb6e3-4ec5-41af-8841-050b266ba270"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="10" width="118" height="20" uuid="06911a62-2aea-499b-b55f-e0e42c8f9855"/>
+				<reportElement x="10" y="0" width="118" height="20" uuid="06911a62-2aea-499b-b55f-e0e42c8f9855"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{division_name}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="387" y="34" width="230" height="20" uuid="4eb5b2e9-087e-4d90-acec-c2566690d744"/>
+				<reportElement x="426" y="3" width="230" height="20" uuid="4eb5b2e9-087e-4d90-acec-c2566690d744"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
