@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReport" language="groovy" pageWidth="700" pageHeight="840" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0889e884-1783-49c2-8de4-a8274a138a82">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="63"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFE6E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFF8F8"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFE6E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFF8F8"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#D5D5BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#FFFFE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFFFF8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="CollectionReport" uuid="f37c5dcd-b8e2-4c03-8b99-6179b5d79ae4">
+		<parameter name="dmaId" class="java.lang.Long">
+			<parameterDescription><![CDATA[Please eneter Division Id]]></parameterDescription>
+		</parameter>
+		<parameter name="categoryId" class="java.lang.Long">
+			<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>
+		</parameter>
+		<parameter name="fromDate" class="java.lang.String">
+			<parameterDescription><![CDATA[Please eneter From Date]]></parameterDescription>
+		</parameter>
+		<parameter name="toDate" class="java.lang.String">
+			<parameterDescription><![CDATA[Please enter To Date]]></parameterDescription>
+		</parameter>
+		<queryString>
+			<![CDATA[select Distinct D.DIVISION_NAME AS DNAME,T.TARIFF_CATEGORY  AS CATEGORY, CASE WHEN C.METER_DETAILS_ID IS NULL THEN 'U' ELSE 'M' END METERED_STATUS,
+COL.CAN AS CAN ,col.receipt_mode as Payment, RECEIPT_DT,SUM(COL.RECEIPT_AMT)AS RECEIPT_AMT
+from CUST_DETAILS C JOIN DIVISION_MASTER D ON C.DIVISION_MASTER_ID=D.ID JOIN TARIFF_CATEGORY_MASTER T  ON C.TARIFF_CATEGORY_MASTER_ID=T.ID
+JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE C.DIVISION_MASTER_ID=$P{dmaId} AND TARIFF_CATEGORY_MASTER_ID=$P{categoryId} and c.status="ACTIVE" AND COL.receipt_dt
+
+ BETWEEN $P{fromDate} and $P{toDate}]]>
+		</queryString>
+		<field name="DNAME" class="java.lang.String"/>
+		<field name="CATEGORY" class="java.lang.String"/>
+		<field name="METERED_STATUS" class="java.lang.String"/>
+		<field name="CAN" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Payment" class="java.lang.String"/>
+		<field name="RECEIPT_DT" class="java.sql.Timestamp">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="RECEIPT_AMT" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="dmaId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please eneter Division Id]]></parameterDescription>
+	</parameter>
+	<parameter name="categoryId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>
+	</parameter>
+	<parameter name="fromDate" class="java.lang.String">
+		<parameterDescription><![CDATA[Please eneter From Date]]></parameterDescription>
+	</parameter>
+	<parameter name="toDate" class="java.lang.String">
+		<parameterDescription><![CDATA[Please enter To Date]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select 1 from dual]]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<variable name="serialNumber" class="java.lang.Integer" resetType="Column" calculation="Count"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="110" y="84" width="455" height="24" backcolor="#666666" uuid="e926a03b-b8cf-49cb-bc2f-8b69d9e94b03"/>
+				<textElement>
+					<font size="15" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+			</staticText>
+			<image>
+				<reportElement x="260" y="3" width="177" height="81" uuid="daabbb63-415d-46e1-a123-7b80422358a1"/>
+				<imageExpression><![CDATA["C:\\Users\\callippus\\Desktop\\watererp.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="249" y="0" width="151" height="24" backcolor="#666666" uuid="cf191411-4afc-416d-ad5f-902be9cd3092"/>
+				<textElement>
+					<font size="15" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[      Collection Report]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="28" width="660" height="1" uuid="7632bc8b-fe2d-4ae8-bc81-f8cbd4052e46"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="574" y="15" width="100" height="20" uuid="b507aeea-c28e-429e-bf0d-d0ae950854d4"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="542" y="15" width="39" height="20" uuid="563a6a41-1157-4cdb-8760-2f7427241378"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[As On]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="70" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="13" y="13" width="535" height="51" uuid="08587fcc-53de-4c38-a260-a4b344a435b7"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="CollectionReport" uuid="c22a7321-42d9-4f62-ac4a-611c49ac85fa">
+						<datasetParameter name="dmaId">
+							<datasetParameterExpression><![CDATA[$P{dmaId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="categoryId">
+							<datasetParameterExpression><![CDATA[$P{categoryId}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fromDate">
+							<datasetParameterExpression><![CDATA[$P{fromDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="toDate">
+							<datasetParameterExpression><![CDATA[$P{toDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="f248e9d9-a3ef-4d21-9ea3-8326c3ed4fa2">
+						<jr:columnHeader style="table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="b2569349-9526-4af7-a286-b796862ddc6c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[ Division Name]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="30"/>
+						<jr:detailCell style="table 2_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="ab34ad83-270b-4338-be96-8231ca90258c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DNAME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="e495d981-fa24-4c8c-8233-f3860cc300a0">
+						<jr:columnHeader style="table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="494710cd-dc83-49bc-bc1c-c9e8e5a6768a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Category]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="30"/>
+						<jr:detailCell style="table 2_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="653e9b34-a227-4030-bb06-6c990fb70b81"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{CATEGORY}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="168a75e1-374b-4cf3-8ad2-5523b2b6f6ce">
+						<jr:columnHeader style="table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="dd24b03f-5344-4448-ba1a-84aabe9a1c3a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Status]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="30"/>
+						<jr:detailCell style="table 2_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="3d6f7112-7634-408e-9e12-0e4e6fd79929"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{METERED_STATUS}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="d36f4aae-1d44-43bc-840c-02f17b80a0c1">
+						<jr:columnHeader style="table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="9f3b95e8-e8d4-4579-9623-366b94558734"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Can]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="30"/>
+						<jr:detailCell style="table 2_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="a67a7aac-1316-49af-a52e-95e9c809ba24"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{CAN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="7b08a90f-15cc-4d45-902a-c8093e3b0762">
+						<jr:columnHeader style="table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="898e0ef1-b706-4c7e-98a1-24820617ede7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Payment]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="30"/>
+						<jr:detailCell style="table 2_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="8941ee02-1b32-4e1f-8452-996139fe4007"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Payment}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="97ae2686-e1c1-4e10-af62-63dbbe4e6501">
+						<jr:columnHeader style="table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="0bf8220e-1452-4924-bf0e-b961d30de906"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Receipt Date]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="30"/>
+						<jr:detailCell style="table 2_TD" height="20">
+							<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="50640626-6c4c-4b7c-b472-52c5991775a4"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{RECEIPT_DT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="650bb162-be81-44d0-b511-91254712fb19">
+						<jr:columnHeader style="table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="8c66e459-cf2f-44ac-8cdc-e12b6b9e8031"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Receipt amount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 2_CH" height="30"/>
+						<jr:detailCell style="table 2_TD" height="20">
+							<textField pattern="###0.00" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20" uuid="cf0ad092-45fb-424b-a960-6df3236c6591"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{RECEIPT_AMT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="277" y="34" width="80" height="20" uuid="2cc80de1-b843-441f-a9b5-df980a96988a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="357" y="34" width="40" height="20" uuid="a7a1eb47-6967-4074-ab1d-4ebab370be12"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

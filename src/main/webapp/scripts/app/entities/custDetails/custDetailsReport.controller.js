@@ -1,15 +1,15 @@
 'use strict';
-
 angular.module('watererpApp')
-    .controller('CustDetailsReportController', function ($scope, $http,	TariffCategoryMaster, DivisionMaster) {
+    .controller('CustDetailsReportController', function ($scope, $window, $state, $filter,  $http, 
+    		TariffCategoryMaster, DivisionMaster) {
 
-        $scope.custDetailss = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
-        //$scope.tariffcategorymasters = TariffCategoryMaster.query();
-        //$scope.divisionmasters = DivisionMaster.query();
-        
+        $scope.custDetails = {};
+        $scope.custDetails.betweenDates = false;
+        $scope.message = null;
+
         $scope.getDivisionMasters = function() {
         	$scope.divisionmasters = [];
 			return $http.get('/api/divisionMasters/getAll').then(function(response) {
@@ -25,6 +25,54 @@ angular.module('watererpApp')
 					});
 		}
         $scope.getTariffCategoryMasters();
-              
+        
+        $scope.datePickerForfromdate = {};
 
+		$scope.datePickerForfromdate.status = {
+			opened : false
+		};
+
+		$scope.datePickerForfromdateOpen = function($event) {
+			$scope.datePickerForfromdate.status.opened = true;
+		};
+
+        $scope.getReport = function () {
+        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.custDetails.fromdate != null && $scope.custDetails.todate != null ){
+        	var divisionId = $scope.custDetails.divisionMaster.id;
+        	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
+            var dateFormat = 'yyyy-MM-dd';
+            var fromDate = $filter('date')($scope.custDetails.fromdate, dateFormat);
+            var toDate = $filter('date')($scope.custDetails.todate, dateFormat);
+
+            var formatDate =  function (dateToFormat) {
+                if (dateToFormat !== undefined && !angular.isString(dateToFormat)) {
+                    return dateToFormat.getYear() + '-' + dateToFormat.getMonth() + '-' + dateToFormat.getDay();
+                }
+                return dateToFormat;
+            };
+
+            $scope.collDetails = {};
+            
+            	$window.open('/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
+                location.reload();
+            }
+            else
+            	{
+            	$scope.message = "Please Select Details!";
+            	}
+            //$window.location = '/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate);
+            
+            
+        };
+
+		
+		 $scope.datePickerFortodate = {};
+
+			$scope.datePickerFortodate.status = {
+				opened : false
+			};
+
+			$scope.datePickerFortodateOpen = function($event) {
+				$scope.datePickerFortodate.status.opened = true;
+			};
     });
