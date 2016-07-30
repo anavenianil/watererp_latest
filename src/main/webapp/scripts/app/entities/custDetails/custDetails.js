@@ -169,5 +169,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
-            });
+            })
+            .state('collectionDetailsReport', {
+                parent: 'custDetails',
+                url: '/collectionDetailsReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/custDetails/collectionDetailsReport.html',
+                        controller: 'CollectionDetailsReportController'
+                    }
+                },
+                resolve: {
+                }
+            });;
     });

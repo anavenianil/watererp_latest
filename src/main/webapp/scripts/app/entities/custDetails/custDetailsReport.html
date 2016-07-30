@@ -27,70 +27,13 @@
 						</select>
 					</div>
 					<div class="col-sm-2">
-						<label>Click</label> <a type="button"
+					 <a type="button"
 							href="/api/custDetailss/report/{{custDetails.divisionMaster.id}}/{{custDetails.tariffCategoryMaster.id}}"
 							class="pull-right btn btn-warning"
-							ng-if="custDetails.betweenDates===false">Download as PDF</a> <a
-							href type="button" ng-click="getReport()"
-							class="pull-right btn btn-warning"
-							ng-if="custDetails.betweenDates===true">Download as PDF</a>
+							>Download as PDF</a>
+						
 					</div>
 
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-sm-8">
-
-						<label class="control-label" for="field_organization"> <input
-							type="checkbox" ng-model="custDetails.betweenDates"
-							ng-value="true">&nbsp;&nbsp;<span>Get Collection
-								Report between dates:</span>
-					</div>
-				</div>
-				<br>
-				<div class="row">
-
-					<div class="col-sm-4">
-						<label class="control-label" for="fromdate">From Date</label>
-						<div class="form-group">
-							<div class='input-group date' id='fromdate'>
-								<input id="fromdate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="custDetails.fromdate"
-									is-open="datePickerForfromdate.status.opened"
-									ng-disabled="custDetails.betweenDates===false" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										id='fromdateDtBtn'
-										ng-click="datePickerForfromdateOpen($event)"
-										ng-disabled="custDetails.betweenDates===false">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="col-sm-4">
-						<label class="control-label" for="todate">To Date</label>
-						<div class="form-group">
-							<div class='input-group date' id='todate'>
-								<input id="todate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="custDetails.todate"
-									is-open="datePickerFortodate.status.opened"
-									ng-disabled="custDetails.betweenDates===false" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default" id='todateDtBtn'
-										ng-click="datePickerFortodateOpen($event)"
-										ng-disabled="custDetails.betweenDates===false">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
-							</div>
-						</div>
-					</div>
 				</div>
 				<hr>
 				<div class="alert alert-danger" ng-show="message!=null">

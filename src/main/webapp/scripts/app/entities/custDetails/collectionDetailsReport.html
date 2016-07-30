@@ -1,0 +1,114 @@
+<form name="editForm" rc.submit="getReport()" novalidate>
+<div>
+	<jh-alert></jh-alert>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Customer Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<hr>
+				<div class="row">
+					<div class="col-sm-4">
+						<label for="field_divisionMaster">DMA</label> <select
+							class="form-control" id="field_divisionMaster"
+							name="divisionMaster" ng-model="custDetails.divisionMaster"
+							ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
+							required>
+						</select>
+					</div>
+
+					<div class="col-sm-4">
+						<label for="field_tariffCategoryMaster">Connection
+							Category</label> <select class="form-control"
+							id="field_tariffCategoryMaster" name="tariffCategoryMaster"
+							ng-model="custDetails.tariffCategoryMaster"
+							ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
+							required>
+						</select>
+					</div>
+					<div class="col-sm-2">
+					 <a type="submit"
+							href type="submit" ng-click="getReport()"
+							class="pull-right btn btn-warning"  ng-enabled="editForm.$invalid || isSaving"
+							ng-if="custDetails.betweenDetailedDates===false">Download as PDF
+						</a>
+							<a
+							href type="submit" ng-click="getReportDetails()"
+							class="pull-right btn btn-warning"  ng-enabled="editForm.$invalid || isSaving"
+							ng-if="custDetails.betweenDetailedDates===true">Download as PDFs
+						</a>
+					</div>
+
+				</div>
+				<br>
+			
+				<br>
+				<div class="row">
+
+					<div class="col-sm-4">
+					<div class="form-group" ng-class="{'has-error':editForm.fromdate.$invalid &&(editForm.fromdate.$dirty || rc.editForm.attempted)}">
+						<label class="control-label" for="fromdate">From Date</label>
+						<div class="form-group">
+							<div class='input-group date' id='fromdate'>
+								<input id="fromdate" type="text" class="form-control"
+									uib-datepicker-popup="{{dateformat}}" name="fromdate"
+									ng-model="custDetails.fromdate" 
+									is-open="datePickerForfromdate.status.opened" required
+									 /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										id='fromdateDtBtn'
+										ng-click="datePickerForfromdateOpen($event)"
+										>
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>	
+								</span>
+							</div>
+							<div ng-show="editForm.fromdate.$invalid &&(editForm.fromdate.$dirty || rc.editForm.attempted)">
+							<p class="help-block" ng-show="editForm.fromdate.$error.required">This field is required</p>
+							</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-sm-4">
+						<label class="control-label" for="todate">To Date</label>
+						<div class="form-group">
+							<div class='input-group date' id='todate'>
+								<input id="todate" type="text" class="form-control"
+									uib-datepicker-popup="{{dateformat}}"
+									ng-model="custDetails.todate"
+									is-open="datePickerFortodate.status.opened"
+									 /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default" id='todateDtBtn'
+										ng-click="datePickerFortodateOpen($event)"
+										>
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				
+				<div class="col-sm-8">
+				
+				<label class="control-label" for="field_organization"> <input
+							type="checkbox" ng-model="custDetails.betweenDetailedDates"
+							ng-value="true">&nbsp;&nbsp;<span>Get Collection
+								Report Complete Detailed between dates:</span>
+				</div>
+				</div>
+				<hr>
+				<!-- <div class="alert alert-danger" ng-show="message!=null">
+					<strong>{{message}}</strong>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+</form>

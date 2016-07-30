@@ -48,11 +48,13 @@ angular.module('watererpApp')
         };*/
 
         var onSaveSuccess = function (result) {
-        	$scope.clear();
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
             $scope.applicationTxn.id = result.id;
             $('#saveSuccessfullyModal').modal('show');
+            $scope.clear();
+			$scope.rc.editForm.attempted=false;
+			$scope.editForm.$setPristine();
         };
 
         var onSaveError = function (result) {
