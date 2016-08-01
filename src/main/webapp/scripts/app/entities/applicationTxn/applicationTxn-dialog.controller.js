@@ -49,7 +49,8 @@ angular.module('watererpApp')
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
-            $scope.applicationTxn.id = result.id;
+            //$scope.applicationTxn.id
+            $scope.applicationTxn= result;
             $('#saveSuccessfullyModal').modal('show');
             //$scope.clear();
         };
