@@ -380,14 +380,14 @@ public class WorkflowService {
 			} else {
 				getBossID = "select case when "
 						+ "(select count(*) from emp_role_mapping erm, emp_master emp where erm.status_master_id=2 and emp.status_master_id=2 and "
-						+ "emp.user_id=erm.user_id and erm.org_role_instance_id=emp.office_id and erm.user_id="
+						+ "emp.user_id=erm.user_id and erm.org_role_instance_id=emp.office_id_id and erm.user_id="
 						+ userID
 						+ ") "
 						+ ">0 then "
 						+ "(select concat(user_id, '#' ,ifnull(org_role_instance_id,'')) from emp_role_mapping where status_master_id=2 and org_role_instance_id="
 						+ "(select ori.parent_org_role_id from emp_role_mapping erm, emp_master emp, org_role_instance ori where "
 						+ "erm.status_master_id=2 and emp.status_master_id=2 and emp.user_id=erm.user_id and "
-						+ "erm.org_role_instance_id=emp.office_id and ori.status_master_id=2 and ori.id=erm.org_role_instance_id and "
+						+ "erm.org_role_instance_id=emp.office_id_id and ori.status_master_id=2 and ori.id=erm.org_role_instance_id and "
 						+ "erm.user_id="
 						+ userID
 						+ ")) "

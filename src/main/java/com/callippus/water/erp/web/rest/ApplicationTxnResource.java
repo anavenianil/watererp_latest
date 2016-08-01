@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
@@ -154,9 +155,15 @@ public class ApplicationTxnResource {
         catch(Exception e){
         	e.printStackTrace();
         }
-        Long uid = Long.valueOf(workflowService.getRequestAt()) ;
-        applicationTxn.setRequestAt(userRepository.findById(uid));
-        ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
+        ApplicationTxn result = new ApplicationTxn();
+        if(CPSConstants.SUCCESS.equals(workflowService.getMessage())){
+        	if(workflowService.getRequestAt() != null){
+            	Long uid = Long.valueOf(workflowService.getRequestAt()) ;
+                applicationTxn.setRequestAt(userRepository.findById(uid));
+            }
+        	result = applicationTxnRepository.save(applicationTxn);
+        }
+        
         
         return ResponseEntity.created(new URI("/api/applicationTxns/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", result.getId().toString()))

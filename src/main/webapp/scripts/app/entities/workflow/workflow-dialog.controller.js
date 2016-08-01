@@ -55,7 +55,8 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+        	$('#deleteModal').modal('hide');
+            //$uibModalInstance.dismiss('cancel');
         };
         
         //save
@@ -147,6 +148,15 @@ angular.module('watererpApp').controller('WorkflowDialogController',
                     Workflow.delete({id: id});
         	  }
         	}
+        
+        $scope.deleteDialogue = function(indexId, workflowId){
+        	 $('#deleteModal').modal('show');
+        	 $scope.indexId = indexId;
+        	 $scope.workflowId = workflowId;
+        } 
+       
+        
+        
           
           $scope.makeToRoleNull = function(relationId, indexId){
         	  if(relationId == 1){//when relative absolute is null
