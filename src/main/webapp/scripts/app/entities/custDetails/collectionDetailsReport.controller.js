@@ -74,7 +74,7 @@ angular.module('watererpApp')
             $scope.isSaving = false;
         };
 */
-        $scope.getReport = function () {
+        $scope.getReport1 = function () {
         	//alert("1");
             if($scope.custDetails.divisionMaster == null &&  $scope.custDetails.tariffCategoryMaster == null && $scope.custDetails.fromdate == null && $scope.custDetails.todate == null ) 
             {
