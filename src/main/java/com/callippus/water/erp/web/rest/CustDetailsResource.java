@@ -338,6 +338,107 @@ public class CustDetailsResource {
     
     
     
+    
+    /**
+     * Get By Category PDF4
+     * @throws ParseException 
+     */
+    @RequestMapping(value = "/collDetailss/reports/{dmaId}/{categoryId}/{year}/{month}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getCollectionDetailsYearlyReport(HttpServletResponse response,
+			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable String year , @PathVariable String month) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", categoryId);
+   	
+    	
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("dmaId", dmaId);
+		params.put("categoryId", categoryId);
+		params.put("year", year);
+		params.put("month", month);
+		JasperPrint jasperPrint = null;
+		
+		 if(dmaId == 0 && categoryId == 0 && year != null &&   month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionYearlyReportAll.jasper", params);
+			 
+		}
+		 else if(dmaId != 0 && categoryId != 0 && year != null &&  month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionYearlyReport.jasper", params);
+			 
+		}	
+		 else if(dmaId == 0 && categoryId != 0 && year != null &&  month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionReportYearlyCategory.jasper", params);
+			 
+		}
+		 else if(dmaId != 0 && categoryId == 0 && year != null &&   month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionYearlyReportDMA.jasper", params);
+			 
+		}
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=BillCollectionYearlyReport.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+     
+    /**
+     * Get By Category PDF4
+     * @throws ParseException 
+     */
+    @RequestMapping(value = "/collDetailss/reportDetails/{dmaId}/{categoryId}/{year}/{month}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getCollectionDetailsYearlyReportDetails(HttpServletResponse response,
+			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable String year , @PathVariable String month) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", categoryId);
+   	
+    	
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("dmaId", dmaId);
+		params.put("categoryId", categoryId);
+		params.put("year", year);
+		params.put("month", month);
+		JasperPrint jasperPrint = null;
+		
+		 if(dmaId == 0 && categoryId == 0 && year != null &&   month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionYearlyReportDetailAll.jasper", params);
+			 
+		}
+		 else if(dmaId != 0 && categoryId != 0 && year != null &&  month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionYearlyReportDetail.jasper", params);
+			 
+		}	
+		 else if(dmaId == 0 && categoryId != 0 && year != null &&  month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionYearlyReportDetailCategory.jasper", params);
+			 
+		}
+		 else if(dmaId != 0 && categoryId == 0 && year != null &&   month != null){
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionYearlyReportDetailDMA.jasper", params);
+			 
+		}
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=BillCollectionYearlyReportDetails.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	} 
+    
+    
+    
+    
+    
+    
+    
 /*    *//**
      * GET  /custDetailss/:can -> get the "can" custDetails.
      *//*

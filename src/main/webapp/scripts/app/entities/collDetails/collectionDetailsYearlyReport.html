@@ -30,13 +30,13 @@
 					<div class="col-sm-2">
 					 <a type="button"
 							href type="button" ng-click="getReport()"
-							class="pull-right btn btn-warning"  ng-enabled="editForm.$invalid || isSaving"
-							ng-if="custDetails.betweenDetailedDates===false">Download as PDF
+							class="pull-right btn btn-warning"  
+							ng-if="collDetails.betweenDetailedDates===false">Download as PDF
 						</a>
 							<a
 							href type="button" ng-click="getReportDetails()"
-							class="pull-right btn btn-warning"  ng-enabled="editForm.$invalid || isSaving"
-							ng-if="custDetails.betweenDetailedDates===true">Download as PDF
+							class="pull-right btn btn-warning"  
+							ng-if="collDetails.betweenDetailedDates===true">Download as PDF
 						</a>
 					</div>
 
@@ -47,26 +47,26 @@
 				<div class="row">
 
 					<div class="col-sm-4">
-					<div class="form-group" ng-class="{'has-error':editForm.fromdate.$invalid &&(editForm.fromdate.$dirty || rc.editForm.attempted)}">
-						<label class="control-label" for="fromdate">From Date</label>
+					<div class="form-group" ng-class="{'has-error':editForm.dateOfYear.$invalid &&(editForm.dateOfYear.$dirty || rc.editForm.attempted)}">
+						<label class="control-label" for="dateOfYear">Year</label>
 						<div class="form-group">
-							<div class='input-group date' id='fromdate'>
-								<input id="fromdate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}" name="fromdate"
-									ng-model="custDetails.fromdate" 
-									is-open="datePickerForfromdate.status.opened" required
+							<div class='input-group date' id='dateOfYear'>
+							<input id="dateOfYear" type="text" class="form-control" datepicker-mode="'year'"   datepicker-month=hide
+									uib-datepicker-popup='yyyy ' name="dateOfYear"  datepicker-options="{{datepickerOptions}}" data-format="yyyy"
+									ng-model="collDetails.dateOfYear"   date-disabled="disabled(date, mode)" 
+									is-open="datePickerFordateOfYear.status.opened" required
 									 /> <span
 									class="input-group-btn">
 									<button type="button" class="btn btn-default"
-										id='fromdateDtBtn'
-										ng-click="datePickerForfromdateOpen($event)"
+										id='dateOfYearDtBtn'
+										ng-click="datePickerFordateOfYearOpen($event)"
 										>
 										<i class="glyphicon glyphicon-calendar"></i>
 									</button>	
-								</span>
-							</div>
-							<div ng-show="editForm.fromdate.$invalid &&(editForm.fromdate.$dirty || rc.editForm.attempted)">
-							<p class="help-block" ng-show="editForm.fromdate.$error.required">This field is required</p>
+								</span> 
+	                           </div>
+							<div ng-show="editForm.dateOfYear.$invalid &&(editForm.dateOfYear.$dirty || rc.editForm.attempted)">
+							<p class="help-block" ng-show="editForm.dateOfYear.$error.required">This field is required</p>
 							</div>
 							</div>
 						</div>
@@ -74,17 +74,17 @@
 
 
 					<div class="col-sm-4">
-						<label class="control-label" for="todate">To Date</label>
+						<label class="control-label" for="dateOfMonth">Month</label>
 						<div class="form-group">
-							<div class='input-group date' id='todate'>
-								<input id="todate" type="text" class="form-control"
-									uib-datepicker-popup="{{dateformat}}"
-									ng-model="custDetails.todate"
-									is-open="datePickerFortodate.status.opened"
+							<div class='input-group date' id='dateOfMonth'>
+								 <input id="dateOfMonth" type="text" class="form-control" datepicker-mode="'month'" 
+									uib-datepicker-popup='MMMM ' name="dateOfMonth"  datepicker-options="{{datepickerOptions}}"
+									ng-model="collDetails.dateOfMonth"   date-disabled="disabled(date, mode)" 
+									is-open="datePickerFordateOfMonth.status.opened" required
 									 /> <span
 									class="input-group-btn">
-									<button type="button" class="btn btn-default" id='todateDtBtn'
-										ng-click="datePickerFortodateOpen($event)"
+									<button type="button" class="btn btn-default" id='dateOfMonthDtBtn'
+										ng-click="datePickerFordateOfMonthOpen($event)"
 										>
 										<i class="glyphicon glyphicon-calendar"></i>
 									</button>
@@ -98,7 +98,7 @@
 				<div class="col-sm-8">
 				
 				<label class="control-label" for="field_organization"> <input
-							type="checkbox" ng-model="custDetails.betweenDetailedDates"
+							type="checkbox" ng-model="collDetails.betweenDetailedDates"
 							ng-value="true">&nbsp;&nbsp;<span>Get Collection
 								Report Complete Detailed between dates:</span>
 				</div>
