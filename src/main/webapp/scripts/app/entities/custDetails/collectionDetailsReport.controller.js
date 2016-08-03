@@ -75,12 +75,12 @@ angular.module('watererpApp')
         };
 */
         $scope.getReport = function () {
-        	alert("1");
+        	//alert("1");
             if($scope.custDetails.divisionMaster == null &&  $scope.custDetails.tariffCategoryMaster == null && $scope.custDetails.fromdate == null && $scope.custDetails.todate == null ) 
             {
-            	alert("sucess");
+            	//alert("sucess");
             	$scope.editForm.$setDirty();
-            alert("3");
+            //alert("3");
             }
         };
     
