@@ -6,7 +6,7 @@ angular.module('watererpApp')
         return {
             restrict: 'A',
             require: 'form',
-            link: function (scope, element, attrs, formCtrl) {
+            link: function (scope, element/*, attrs, formCtrl*/) {
                 element.find('.form-group').each(function() {
                     var $formGroup = $(this);
                     var $inputs = $formGroup.find('input[ng-model],textarea[ng-model],select[ng-model]');
@@ -14,9 +14,10 @@ angular.module('watererpApp')
                     if ($inputs.length > 0) {
                         $inputs.each(function() {
                             var $input = $(this);
-                            var inputName = $input.attr('name');
+                            /*var inputName = $input.attr('name');//newly added*/
                             scope.$watch(function() {
-                                return formCtrl[inputName].$invalid && formCtrl[inputName].$dirty;
+                            	return $input.hasClass('ng-invalid') && $input.hasClass('ng-dirty');//was removed 
+                                //return formCtrl[inputName].$invalid && formCtrl[inputName].$dirty;//newly added
                             }, function(isInvalid) {
                                 $formGroup.toggleClass('has-error', isInvalid);
                             });

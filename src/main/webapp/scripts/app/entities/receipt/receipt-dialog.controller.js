@@ -92,4 +92,13 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         $scope.datePickerForReceiptDateOpen = function($event) {
             $scope.datePickerForReceiptDate.status.opened = true;
         };
+        
+        $scope.doEmpty = function(paymentType){
+        	if(paymentType ==1){
+        		$scope.receipt.checkOrDdDate = "";
+        		$scope.receipt.checkOrDdNo = "";
+        		$scope.receipt.bankName = "";
+        		$scope.receipt.branchName = "";
+        	}
+        }
 });
