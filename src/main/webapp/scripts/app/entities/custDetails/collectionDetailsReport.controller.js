@@ -1,6 +1,7 @@
 'use strict';
 angular.module('watererpApp')
-    .controller('CustDetailsReportController', function ($scope, $window, $state, $filter,  $http, 
+    .controller('CollectionDetailsReportController', function ($scope, $window, $state, $filter,  $http, 
+    		     
     		TariffCategoryMaster, DivisionMaster) {
 
         $scope.predicate = 'id';
@@ -9,7 +10,7 @@ angular.module('watererpApp')
         $scope.custDetails = {};
         $scope.custDetails.betweenDates = false;
         $scope.message = null;
-
+        $scope.custDetails.betweenDetailedDates=false;
         $scope.getDivisionMasters = function() {
         	$scope.divisionmasters = [];
 			return $http.get('/api/divisionMasters/getAll').then(function(response) {
@@ -56,15 +57,33 @@ angular.module('watererpApp')
             	$window.open('/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
                 location.reload();
             }
-            else
-            	{
-            	$scope.message = "Please Select Details!";
-            	}
-            //$window.location = '/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate);
-            
             
         };
-        
+  /*      
+        var onSaveSuccess = function (result) {
+          
+            $scope.isSaving = false;
+            $scope.custDetails.fromdate = result.id;
+           
+            $scope.clear();
+			$scope.rc.editForm.attempted=false;
+			$scope.editForm.$setPristine();
+        };
+
+        var onSaveError = function (result) {
+            $scope.isSaving = false;
+        };
+*/
+        $scope.getReport = function () {
+        	alert("1");
+            if($scope.custDetails.divisionMaster == null &&  $scope.custDetails.tariffCategoryMaster == null && $scope.custDetails.fromdate == null && $scope.custDetails.todate == null ) 
+            {
+            	alert("sucess");
+            	$scope.editForm.$setDirty();
+            alert("3");
+            }
+        };
+    
         
         
         
@@ -85,20 +104,15 @@ angular.module('watererpApp')
 
             $scope.collDetails = {};
             
-            	$window.open('/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
+            	$window.open('/api/custDetailss/report/detailByCan/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
                 location.reload();
             }
-            else
-            	{
-            	$scope.message = "Please Select Details!";
-            	}
-            //$window.location = '/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate);
+          
             
             
         };
         
-        
-        
+   
 
 		
 		 $scope.datePickerFortodate = {};
@@ -111,3 +125,6 @@ angular.module('watererpApp')
 				$scope.datePickerFortodate.status.opened = true;
 			};
     });
+
+
+

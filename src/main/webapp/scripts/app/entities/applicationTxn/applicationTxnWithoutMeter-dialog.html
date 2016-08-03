@@ -11,12 +11,14 @@
 						<jh-alert-error></jh-alert-error>
 						<div class="row">
 							<div class="col-sm-4">
+							<div class="form-group"
+										ng-class="{'has-error': editForm.requestedDate.$invalid && 
+                                (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_requestedDate">Requested
 									Date</label>
-								<div class="form-group">
 									<div class='input-group date' id='field_requestedDate'>
-										<input id="field_requestedDate" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
+										<input id="field_requestedDate" type="text" name="requestedDate"
+											class="form-control" uib-datepicker-popup="{{dateformat}}" ng-date="date"
 											ng-model="applicationTxn.requestedDate" max-date="dtmax"
 											is-open="datePickerForRequestedDate.status.opened" required />
 										<span class="input-group-btn">
@@ -25,10 +27,20 @@
 												<i class="glyphicon glyphicon-calendar"></i>
 											</button>
 										</span>
-									</div>
+								</div>
+									<div
+											ng-show="(editForm.requestedDate.$dirty || rc.editForm.attempted) && editForm.requestedDate.$invalid">
+											<p class="help-block"
+												ng-show="editForm.requestedDate.$error.required">This field is required.</p>
+											<p class="help-block"
+												ng-show="editForm.requestedDate.$error.date">Please enter date format.
+												</p>
+										</div> 
+										
 								</div>
 							</div>
-						</div>
+							</div>
+						
 						<br>
 						<fieldset>
 							<legend>Water Connection Details</legend>

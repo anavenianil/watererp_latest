@@ -93,12 +93,17 @@ angular.module('watererpApp').controller('ReceiptDialogController',
             $scope.datePickerForReceiptDate.status.opened = true;
         };
         
-        $scope.doEmpty = function(paymentType){
-        	if(paymentType ==1){
-        		$scope.receipt.checkOrDdDate = "";
-        		$scope.receipt.checkOrDdNo = "";
-        		$scope.receipt.bankName = "";
-        		$scope.receipt.branchName = "";
-        	}
-        }
+        
+    	$scope.resetInstr = function(paymentMode) {
+			if (paymentMode.toUpperCase()  === 'CASH') {
+				$scope.instrEnabled = false;
+				$scope.receipt.checkOrDdDate = null;
+				$scope.receipt.checkOrDdNo = null;
+				$scope.receipt.bankName = null;
+				$scope.receipt.branchName = null;
+			} else
+				$scope.instrEnabled = true;
+		}
+        
+        
 });
