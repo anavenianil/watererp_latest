@@ -92,4 +92,18 @@ angular.module('watererpApp').controller('ReceiptDialogController',
         $scope.datePickerForReceiptDateOpen = function($event) {
             $scope.datePickerForReceiptDate.status.opened = true;
         };
+        
+        
+    	$scope.resetInstr = function(paymentMode) {
+			if (paymentMode.toUpperCase()  === 'CASH') {
+				$scope.instrEnabled = false;
+				$scope.receipt.checkOrDdDate = null;
+				$scope.receipt.checkOrDdNo = null;
+				$scope.receipt.bankName = null;
+				$scope.receipt.branchName = null;
+			} else
+				$scope.instrEnabled = true;
+		}
+        
+        
 });
