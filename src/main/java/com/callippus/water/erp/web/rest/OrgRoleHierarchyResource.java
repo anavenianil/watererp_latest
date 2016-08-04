@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.OrgRoleHierarchy;
+import com.callippus.water.erp.domain.OrgRoleInstance;
 import com.callippus.water.erp.repository.OrgRoleHierarchyRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -113,4 +114,22 @@ public class OrgRoleHierarchyResource {
         orgRoleHierarchyRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("orgRoleHierarchy", id.toString())).build();
     }
+    
+    /**
+     * Get All orgRoleHierarchys
+     */
+    @RequestMapping(value = "/orgRoleHierarchys/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<OrgRoleHierarchy>> getAllOrgRoleHierarchys()
+			throws Exception {
+    	log.debug("REST request to getAllOrgRoleHierarchys : {}");
+    	
+    	List<OrgRoleHierarchy>  orgRoleHierarchy = orgRoleHierarchyRepository.findAll();
+    
+    	return Optional.ofNullable(orgRoleHierarchy)
+				.map(result -> new ResponseEntity<>(orgRoleHierarchy, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

@@ -19,11 +19,17 @@
 		<![CDATA[select Distinct year(col.receipt_dt)as year,monthName(col.receipt_dt) as month, D.DIVISION_NAME AS DNAME,T.TARIFF_CATEGORY  AS CATEGORY,
 COL.CAN AS CAN ,col.receipt_mode as Payment, RECEIPT_DT,'From Date','To Date',SUM(COL.RECEIPT_AMT)AS Amount,C.cons_name
 from CUST_DETAILS C JOIN DIVISION_MASTER D ON C.DIVISION_MASTER_ID=D.ID JOIN TARIFF_CATEGORY_MASTER T  ON C.TARIFF_CATEGORY_MASTER_ID=T.ID
-JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE C.DIVISION_MASTER_ID=$P{dmaId} AND  TARIFF_CATEGORY_MASTER_ID=$P{categoryId} AND year(col.receipt_dt)=$P{year} AND
-monthName(col.receipt_dt)=$P{month}
+JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE (C.DIVISION_MASTER_ID=$P{dmaId} or $P{dmaId} is null or $P{dmaId}='')  AND
+
+(C.TARIFF_CATEGORY_MASTER_ID=$P{categoryId} or $P{categoryId} is null or  $P{categoryId}='') AND
+
+
+(year(col.receipt_dt)=$P{year} or $P{year} is null or $P{year}='') AND
+
+(monthName(col.receipt_dt)=$P{month} or $P{month} is null or $P{month}='')
 group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 	</queryString>
-	<field name="year" class="java.lang.Long"/>
+	<field name="year" class="java.lang.Integer"/>
 	<field name="month" class="java.lang.String"/>
 	<field name="DNAME" class="java.lang.String"/>
 	<field name="CATEGORY" class="java.lang.String"/>
@@ -52,7 +58,7 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 		<band height="65">
 			<image>
 				<reportElement x="0" y="0" width="117" height="63" uuid="bae31c9c-507b-4af2-a1ac-a9354867562f"/>
-				<imageExpression><![CDATA["C:\\Users\\callippus\\Desktop\\watererp.png"]]></imageExpression>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement mode="Opaque" x="99" y="19" width="531" height="32" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
@@ -118,7 +124,7 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{DNAME}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{dmaId} != 0) ? $F{DNAME} : "ALL"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="77" y="17" width="51" height="19" uuid="5a379110-a911-4a68-8122-8fa01da9a196"/>
@@ -139,7 +145,7 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<textElement>
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{CATEGORY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{categoryId} != 0) ? $F{CATEGORY} : "ALL"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="5" y="18" width="27" height="18" uuid="0bb6ef95-1730-4fd2-a1d9-98880a97c2dc"/>

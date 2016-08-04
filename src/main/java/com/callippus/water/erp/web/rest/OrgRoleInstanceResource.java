@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.OrgRoleInstance;
+import com.callippus.water.erp.domain.StatusMaster;
 import com.callippus.water.erp.repository.OrgRoleInstanceRepository;
+import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -38,6 +40,9 @@ public class OrgRoleInstanceResource {
         
     @Inject
     private OrgRoleInstanceRepository orgRoleInstanceRepository;
+    
+    @Inject
+    private StatusMasterRepository statusMasterRepository;
     
     /**
      * POST  /orgRoleInstances -> Create a new orgRoleInstance.
@@ -116,7 +121,11 @@ public class OrgRoleInstanceResource {
     @Timed
     public ResponseEntity<Void> deleteOrgRoleInstance(@PathVariable Long id) {
         log.debug("REST request to delete OrgRoleInstance : {}", id);
-        orgRoleInstanceRepository.delete(id);
+        //orgRoleInstanceRepository.delete(id);
+        OrgRoleInstance orgRoleInstance = orgRoleInstanceRepository.findOne(id);
+        StatusMaster statusMaster = statusMasterRepository.findOne(1l);
+        orgRoleInstance.setStatusMaster(statusMaster);
+        orgRoleInstanceRepository.save(orgRoleInstance);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("orgRoleInstance", id.toString())).build();
     }
     

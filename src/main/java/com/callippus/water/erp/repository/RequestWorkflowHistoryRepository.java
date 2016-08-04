@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.callippus.water.erp.domain.RequestMaster;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
@@ -28,5 +29,15 @@ public interface RequestWorkflowHistoryRepository extends JpaRepository<RequestW
     Page<RequestWorkflowHistory> findByDomainObjectAndRequestMaster(Pageable pageable, Long domainObject, RequestMaster requestMaster);
     
     Page<RequestWorkflowHistory> findByDomainObjectAndWorkflowMaster(Pageable pageable, Long domainObject, WorkflowMaster workflowMaster);
+    
+    
+    @Query("Select rwh from RequestWorkflowHistory rwh where rwh.statusMaster.id=:statusMasterId and rwh.assignedTo.id=:assignedToId and rwh.requestMaster.id=:requestMasterId")
+	List<RequestWorkflowHistory> findPendingList(@Param("statusMasterId") Long statusMasterId,
+			@Param("assignedToId") Long assignedToId, @Param("requestMasterId") Long requestMasterId);
+    
+    
+    
+    /*List<RequestWorkflowHistory> findApprovedList(@Param("statuses") List<Long> statuses,
+			@Param("assignedToId") Long assignedToId, @Param("requestMasterId") Long requestMasterId);*/
 
 }

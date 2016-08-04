@@ -20,20 +20,20 @@
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="user.id"><span>User</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="orgRoleInstance.id"><span>Organization
-							Role</span> <span class="glyphicon glyphicon-sort"></span></th>
-					<!-- <th jh-sort-by="internalDivision"><span>Internal
-							Division</span> <span class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="internalRole"><span>Internal Role</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="orgRoleInstance.id"><span>Organization
+							Role</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="parentUser.id"><span>Parent User</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="parentRoleId"><span>Parent Role Id</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<!-- <th jh-sort-by="internalDivision"><span>Internal
+							Division</span> <span class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="creationDate"><span>Creation Date</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="lastModifiedDate"><span>Last Modified
-							Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="parentRoleId"><span>Parent Role Id</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="parentUser.id"><span>Parent User</span> <span
-						class="glyphicon glyphicon-sort"></span></th> -->
+							Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
 					<th jh-sort-by="statusMaster.id"><span>Status</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th></th>
@@ -44,16 +44,18 @@
 				<tr
 					ng-repeat="empRoleMapping in empRoleMappings track by empRoleMapping.id">
 					<td><a ui-sref="empRoleMapping.detail({id:empRoleMapping.id})">{{empRoleMapping.id}}</a></td>
-					<td>{{empRoleMapping.user.firstName+' '+empRoleMapping.user.lastName+'('+ empRoleMapping.user.login+')'}}</td>
+					<td>{{empRoleMapping.user.firstName+'
+						'+empRoleMapping.user.lastName+'('+
+						empRoleMapping.user.login+')'}}</td>
+					<td>{{empRoleMapping.internalRole}}</td>
 					<td><a
 						ui-sref="orgRoleInstance.detail({id:empRoleMapping.orgRoleInstance.id})">{{empRoleMapping.orgRoleInstance.orgRoleName}}</a>
 					</td>
-					<!-- <td>{{empRoleMapping.internalDivision}}</td>
-					<td>{{empRoleMapping.internalRole}}</td>
-					<td>{{empRoleMapping.creationDate | date:'mediumDate'}}</td>
-					<td>{{empRoleMapping.lastModifiedDate | date:'mediumDate'}}</td>
+					<td>{{empRoleMapping.parentUser.login}}</td>
 					<td>{{empRoleMapping.parentRoleId}}</td>
-					<td>{{empRoleMapping.parentUser.login}}</td> -->
+					<!-- <td>{{empRoleMapping.internalDivision}}</td>
+					<td>{{empRoleMapping.creationDate | date:'mediumDate'}}</td>
+					<td>{{empRoleMapping.lastModifiedDate | date:'mediumDate'}}</td>-->
 					<td><a
 						ui-sref="statusMaster.detail({id:empRoleMapping.statusMaster.id})">{{empRoleMapping.statusMaster.status}}</a>
 					</td>

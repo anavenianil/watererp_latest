@@ -23,11 +23,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.EmpMaster;
+import com.callippus.water.erp.domain.EmpRoleMapping;
 import com.callippus.water.erp.domain.OrgRoleInstance;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.StatusMaster;
 import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.domain.WorkflowTxnDetails;
 import com.callippus.water.erp.repository.EmpMasterRepository;
+import com.callippus.water.erp.repository.EmpRoleMappingRepository;
 import com.callippus.water.erp.repository.OrgRoleInstanceRepository;
 import com.callippus.water.erp.repository.RequestMasterRepository;
 import com.callippus.water.erp.repository.StatusMasterRepository;
@@ -65,6 +68,9 @@ public class WorkflowService {
 
 	@Inject
 	private EmpMasterRepository empMasterRepository;
+	
+	@Inject
+	private EmpRoleMappingRepository empRoleMappingRepository;
 	
 	@Autowired(required = true)
 	private JdbcTemplate jdbcTemplate;
@@ -380,14 +386,14 @@ public class WorkflowService {
 			} else {
 				getBossID = "select case when "
 						+ "(select count(*) from emp_role_mapping erm, emp_master emp where erm.status_master_id=2 and emp.status_master_id=2 and "
-						+ "emp.user_id=erm.user_id and erm.org_role_instance_id=emp.office_id and erm.user_id="
+						+ "emp.user_id=erm.user_id and erm.org_role_instance_id=emp.office_id_id and erm.user_id="
 						+ userID
 						+ ") "
 						+ ">0 then "
 						+ "(select concat(user_id, '#' ,ifnull(org_role_instance_id,'')) from emp_role_mapping where status_master_id=2 and org_role_instance_id="
 						+ "(select ori.parent_org_role_id from emp_role_mapping erm, emp_master emp, org_role_instance ori where "
 						+ "erm.status_master_id=2 and emp.status_master_id=2 and emp.user_id=erm.user_id and "
-						+ "erm.org_role_instance_id=emp.office_id and ori.status_master_id=2 and ori.id=erm.org_role_instance_id and "
+						+ "erm.org_role_instance_id=emp.office_id_id and ori.status_master_id=2 and ori.id=erm.org_role_instance_id and "
 						+ "erm.user_id="
 						+ userID
 						+ ")) "
@@ -472,9 +478,21 @@ public class WorkflowService {
 	public String getInstanceLogin(String instanceID) throws Exception{
 		log.debug(" getInstanceLogin: {}", instanceID);
 		String instanceLogin = null;
-		String sql = "select concat(user_id,'#',org_role_instance_id) from emp_role_mapping where status_master_id=2 and org_role_instance_id="
-				+ instanceID;
-		instanceLogin = jdbcTemplate.queryForObject(sql, String.class);
+		/*String sql = "select concat(user_id,'#',org_role_instance_id) from emp_role_mapping where status_master_id=2 and org_role_instance_id="
+				+ instanceID;*/
+		//instanceLogin = jdbcTemplate.queryForObject(sql, String.class);
+		try{
+			//StatusMaster statusMaster = statusMasterRepository.findOne(2l);
+			//OrgRoleInstance orgRoleInstance = orgRoleInstanceRepository.findOne(Long.parseLong(instanceID));
+			EmpRoleMapping empRoleMapping = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, Long.parseLong(instanceID));
+			if(empRoleMapping != null){
+				instanceLogin = empRoleMapping.getUser().getId().toString() +'#'+empRoleMapping.getOrgRoleInstance().getId().toString();
+			}
+		}catch(Exception e){
+			instanceLogin = null;
+			//e.printStackTrace();
+		}
+		
 						
 		return instanceLogin;
 	}

@@ -339,28 +339,33 @@
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<div class="form-group" name="propertyDoc"
 										ng-class="{'has-error': editForm.propertyDoc.$invalid && 
                                 		(editForm.propertyDoc.$dirty || rc.editForm.attempted)}">
 										<label class="control-label" for="field_propertyDoc">Property
-											Ownership Document</label> <br>
-										<input type="checkbox" ng-model="applicationTxn.deedDoc"
+											Ownership Document</label><font color="red" ng-show="makeArr.length===0">&nbsp;(Select atleast one.)</font><br> <input
+											type="checkbox" ng-model="applicationTxn.deedDoc"
 											ng-true-value="'Tittle Deed/Offer letter'"
-											ng-false-value="'Not Submitted'" >&nbsp;<span>Tittle
+											ng-false-value="'Not Submitted'"
+											ng-click="check(applicationTxn.deedDoc)">&nbsp;<span>Tittle
 											Deed/Offer letter </span> <br> <input type="checkbox"
 											ng-model="applicationTxn.agreementDoc"
 											ng-true-value="'Rented Property-lease-Rent Agreement'"
-											ng-false-value="'Not Submitted'" >&nbsp;<span>Rented
+											ng-false-value="'Not Submitted'"
+											ng-click="check(applicationTxn.agreementDoc)">&nbsp;<span>Rented
 											Property- lease-Rent Agreement </span>
-										<div
+										<!-- <div
 											ng-show="(editForm.propertyDoc.$dirty || rc.editForm.attempted) && editForm.propertyDoc.$invalid">
 											<p class="help-block"
 												ng-show="editForm.propertyDoc.$error.required">Any one
 												check-box is required.</p>
-										</div>
+										</div> -->
 									</div>
 								</div>
+
+
+
 							</div>
 						</fieldset>
 					</div>
