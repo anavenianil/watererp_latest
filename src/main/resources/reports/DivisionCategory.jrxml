@@ -37,33 +37,75 @@ order by  sort_code]]>
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="89" y="19" width="491" height="32" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="89" y="19" width="471" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
-					<reportElement x="1" y="0" width="489" height="31" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
+					<reportElement x="1" y="0" width="470" height="21" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
 						<font size="15" isBold="true" isUnderline="false"/>
 					</textElement>
-					<text><![CDATA[    MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+					<text><![CDATA[   MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="4" y="2" width="117" height="63" uuid="9b3fe6e7-4f37-43e3-b45d-d79b15432922"/>
+				<reportElement x="0" y="0" width="119" height="63" uuid="7df1e47b-4996-4f00-b3de-fede6a3a53c9"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="51">
+		<band height="53">
 			<frame>
 				<reportElement mode="Opaque" x="1" y="0" width="559" height="51" backcolor="#FFFFFF" uuid="3f2069bb-238b-4126-95e3-08bab7070ed7"/>
 			</frame>
 			<staticText>
-				<reportElement mode="Transparent" x="167" y="-2" width="237" height="22" backcolor="#ACA899" uuid="1d0f2f47-f120-4014-8c0c-7d5d4fcd5536"/>
+				<reportElement mode="Transparent" x="169" y="-2" width="237" height="22" backcolor="#ACA899" uuid="1d0f2f47-f120-4014-8c0c-7d5d4fcd5536"/>
 				<textElement>
 					<font size="15" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Number Of  Connections Report]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="10" y="31" width="27" height="14" uuid="8ec0e53c-8bbc-4bb2-8fe8-a3a16c79037e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[DMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="30" width="51" height="14" uuid="1fb4b16c-c2ad-4138-881c-0de1c968650e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="30" width="10" height="20" uuid="4f3ca20a-f2e4-4f62-b513-9e565c3b7a98"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="29" width="10" height="15" uuid="2d1d1bad-86c1-4fa3-87b4-3c8e9a24760d"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="21" y="30" width="80" height="14" uuid="d7f87d15-670d-4047-82ae-e50b108db7d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{dmaId} != 0) ? $F{division_name} : "ALL"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="30" width="86" height="14" uuid="42b3edc7-bca3-43d8-8723-a58aa663c214"/>
+				<textElement>
+					<font size="11" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{categoryId} != 0) ? $F{tariff_category} : "ALL"]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>

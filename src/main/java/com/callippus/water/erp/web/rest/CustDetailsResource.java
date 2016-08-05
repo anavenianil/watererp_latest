@@ -259,11 +259,11 @@ public class CustDetailsResource {
 		params.put("toDate", toDate);
 		JasperPrint jasperPrint = null;
 		
-		 if(dmaId == 0 && categoryId == 0 && fromDate != null &&  toDate != null){
+		 /*if(dmaId == 0 && categoryId == 0 && fromDate != null &&  toDate != null){*/
 			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportAll.jasper", params);
+					.generateReport("/reports/BillCollectionReport.jasper", params);
 			 
-		}
+		/*}
 		 else if(dmaId != 0 && categoryId != 0 && fromDate != null &&  toDate != null){
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionReport.jasper", params);
@@ -278,7 +278,7 @@ public class CustDetailsResource {
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionReportDMA.jasper", params);
 			 
-		}
+		}*/
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
 				"inline; filename=BillCollectionReport.pdf");
@@ -308,11 +308,11 @@ public class CustDetailsResource {
 		params.put("toDate", toDate);
 		JasperPrint jasperPrint = null;
 		
-		 if(dmaId == 0 && categoryId == 0 && fromDate != null &&  toDate != null){
+		 /*if(dmaId == 0 && categoryId == 0 && fromDate != null &&  toDate != null){*/
 			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportDetailAll.jasper", params);
+					.generateReport("/reports/BillCollectionReportDetail.jasper", params);
 			 
-		}
+		/*}
 		 else if(dmaId != 0 && categoryId != 0 && fromDate != null &&  toDate != null){
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionReportDetail.jasper", params);
@@ -327,7 +327,7 @@ public class CustDetailsResource {
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionReportDetailDMA.jasper", params);
 			 
-		}
+		}*/
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
 				"inline; filename=BillCollectionReportDetail.pdf");
