@@ -51,8 +51,9 @@ angular.module('watererpApp').controller(
 						login : $scope.account.login
 					}, function(result) {
 						$scope.user = result;
+						$scope.loadAll();
 					});
-					$scope.loadAll();
+					
 				}
 			});
 
