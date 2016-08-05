@@ -252,7 +252,7 @@ public class ApplicationTxnCustomRepositoryImpl extends
 			rwh.setRequestStage(Integer.parseInt(row.get("request_stage")
 					.toString()));
 
-			ZonedDateTime obj = ZonedDateTime.now();
+			//ZonedDateTime obj = ZonedDateTime.now();
 
 			//rwh.setActionedDate(obj);
 			rwh.setIpAddress((String) row.get("ip_address"));

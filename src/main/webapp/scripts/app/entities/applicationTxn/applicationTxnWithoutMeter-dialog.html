@@ -69,7 +69,7 @@
 								</div>
 								<div class="col-sm-6">
 									<label class="control-label" for="field_waterConnectionUse">Water
-										Connection Use</label> <input type="text" class="form-control"
+										Connection Use</label> <input type="text" class="form-control text-uppercase"
 										name="waterConnectionUse" id="field_waterConnectionUse"
 										ng-model="applicationTxn.waterConnectionUse" />
 								</div>
@@ -101,7 +101,7 @@
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_middleName">Middle
-										Name</label> <input type="text" class="form-control" name="middleName"
+										Name</label> <input type="text" class="form-control text-uppercase" name="middleName"
 										id="field_middleName" ng-model="applicationTxn.middleName" />
 								</div>
 								<div class="col-sm-3">
@@ -259,7 +259,7 @@
                                 (editForm.street.$dirty || rc.editForm.attempted)}">
 
 										<label class="control-label" for="field_street">Street</label>
-										<input type="text" class="form-control" name="street"
+										<input type="text" class="form-control text-uppercase" name="street"
 											id="field_street" ng-model="applicationTxn.street" required />
 										<div
 											ng-show="(editForm.street.$dirty || rc.editForm.attempted) && editForm.street.$invalid">
@@ -271,17 +271,17 @@
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_plotNo">Plot
-										No.</label> <input type="text" class="form-control" name="plotNo"
+										No.</label> <input type="text" class="form-control text-uppercase" name="plotNo"
 										id="field_plotNo" ng-model="applicationTxn.plotNo" />
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_blockNo">Block
-										No.</label> <input type="text" class="form-control" name="blockNo"
+										No.</label> <input type="text" class="form-control text-uppercase" name="blockNo"
 										id="field_blockNo" ng-model="applicationTxn.blockNo" />
 								</div>
 								<div class="col-sm-3">
 									<label class="control-label" for="field_tanescoMeter">TANESCO
-										Meter/LUKU No.</label> <input type="text" class="form-control"
+										Meter/LUKU No.</label> <input type="text" class="form-control text-uppercase"
 										name="tanescoMeter" id="field_tanescoMeter"
 										ng-model="applicationTxn.tanescoMeter" />
 								</div>
@@ -385,27 +385,26 @@
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 
 									<div class="form-group" name="propertyDoc"
 										ng-class="{'has-error': editForm.propertyDoc.$invalid && 
                                 (editForm.propertyDoc.$dirty || rc.editForm.attempted)}">
 
 										<label class="control-label" for="field_propertyDoc">Property
-											Ownership Document</label> <br>
-
+											Ownership Document</label><font color="red" ng-show="makeArr.length===0">&nbsp;(Select atleast one.)</font><br>
 										<p name="propertyDoc" id="field_propertyDoc"
 											ng-model="applicationTxn.propertyDoc"></p>
-
-
 										<input type="checkbox" name="propertyDoc"
 											ng-model="applicationTxn.deedDoc"
 											ng-true-value="'Tittle Deed/Offer letter'"
-											ng-false-value="'Not Submitted'" required>&nbsp;<span>Tittle
+											ng-false-value="'Not Submitted'"
+											ng-click="check(applicationTxn.deedDoc)">&nbsp;<span>Tittle
 											Deed/Offer letter </span><br> <input type="checkbox"
 											name="propertyDoc" ng-model="applicationTxn.agreementDoc"
 											ng-true-value="'Rented Property-lease-Rent Agreement'"
-											ng-false-value="'Not Submitted'" required>&nbsp;<span>Rented
+											ng-false-value="'Not Submitted'" 
+											ng-click="check(applicationTxn.agreementDoc)">&nbsp;<span>Rented
 											Property- lease-Rent Agreement </span>
 
 										<div
@@ -539,7 +538,7 @@
 						</p>
 						<div>
 							<h4>
-								<label>Application No.:&nbsp;&nbsp; </label>{{applicationTxn.id}}
+								<label>Application No.:&nbsp;&nbsp; </label>{{applicationTxnNo}}
 							</h4>
 						</div>
 					</div>
