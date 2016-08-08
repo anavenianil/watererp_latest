@@ -15,6 +15,7 @@ import com.callippus.water.erp.domain.BillFullDetails;
 import com.callippus.water.erp.domain.CollDetails;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.InvoicePayments;
+import com.callippus.water.erp.domain.ReversalDetails;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
@@ -88,6 +89,24 @@ public class PaymentService {
 		
 		log.debug("Remaining Payment amount left:" + remPayment);
 		log.debug("***** Customer Arrears after payment:" + customer.getArrears());
+		
+		return true;
+	}
+	
+	
+	
+	/**
+	 * Method to knock out the payments(method called from createReversalDetails() method of ReversalDetailsResource )
+	 * tables to be check(billFullDetails, custDetails, collDetails, InvoicePayment)
+	 */
+	public boolean knockOff(ReversalDetails reversalDetails){
+		log.debug(" Reversal Details when knockOff:" + reversalDetails);
+
+		BigDecimal receiptAmount = reversalDetails.getCollDetails().getReceiptAmt();//cancelled amount
+		
+		//InvoicePayments invoicePayments = invoicePaymentsRepository.findByCollDetails(reversalDetails.getCollDetails());
+		
+		//BillFullDetails bfd = 
 		
 		return true;
 	}

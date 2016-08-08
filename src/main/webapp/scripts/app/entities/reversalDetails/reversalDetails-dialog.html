@@ -117,15 +117,15 @@
 							<label class="control-label">Mode. :
 								{{reversalDetails.collDetails.paymentTypes.paymentMode}}</label>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-3" ng-hide ="reversalDetails.collDetails.paymentTypes.id ===1">
 							<label class="control-label">Cheque No:
 								{{reversalDetails.collDetails.instrNo}}</label>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-3" ng-hide ="reversalDetails.collDetails.paymentTypes.id ===1">
 							<label class="control-label">Cheque Date :
 								{{reversalDetails.collDetails.instrDt}}</label>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-4" ng-hide ="reversalDetails.collDetails.paymentTypes.id ===1">
 							<label class="control-label">Bank :
 								{{reversalDetails.collDetails.bankMaster.bankName}}</label>
 						</div>

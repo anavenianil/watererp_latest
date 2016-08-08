@@ -1,3 +1,4 @@
+
 'use strict';
 
 angular.module('watererpApp').controller(
@@ -253,7 +254,7 @@ angular.module('watererpApp').controller(
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;
-					$scope.collDetails.bankrMaster = null;
+					$scope.collDetails.bankMaster = null;
 				} else
 					$scope.instrEnabled = true;
 			}

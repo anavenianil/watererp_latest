@@ -29,6 +29,7 @@ import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.ReversalDetailsRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.security.SecurityUtils;
+import com.callippus.water.erp.service.PaymentService;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -50,6 +51,10 @@ public class ReversalDetailsResource {
     
     @Inject
     private CollDetailsRepository collDetailsRepository;
+    
+    @Inject
+	private PaymentService paymentService;
+    
     /**
      * POST  /reversalDetailss -> Create a new reversalDetails.
      */
@@ -69,7 +74,10 @@ public class ReversalDetailsResource {
         reversalDetails.getCollDetails().setReversalRef("By "+user.getFirstName()+" "+user.getLastName()+" on "+reversalDetails.getCancelledDate());
         reversalDetails.setUser(user);
         collDetailsRepository.save(reversalDetails.getCollDetails());
-        ReversalDetails result = reversalDetailsRepository.save(reversalDetails);
+        ReversalDetails result = reversalDetails;//reversalDetailsRepository.save(reversalDetails);
+        
+        paymentService.knockOff(result);
+        
         return ResponseEntity.created(new URI("/api/reversalDetailss/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("reversalDetails", result.getId().toString()))
             .body(result);
