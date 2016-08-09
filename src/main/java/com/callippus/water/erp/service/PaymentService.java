@@ -96,17 +96,28 @@ public class PaymentService {
 	
 	
 	/**
-	 * Method to knock out the payments(method called from createReversalDetails() method of ReversalDetailsResource )
-	 * tables to be check(billFullDetails, custDetails, collDetails, InvoicePayment)
+	 * Method to knock off the payments(method called from createReversalDetails() method of ReversalDetailsResource )
+	 * tables to check(billFullDetails, custDetails, collDetails, InvoicePayment)
 	 */
 	public boolean knockOff(ReversalDetails reversalDetails){
 		log.debug(" Reversal Details when knockOff:" + reversalDetails);
 
+		
 		BigDecimal receiptAmount = reversalDetails.getCollDetails().getReceiptAmt();//cancelled amount
 		
-		//InvoicePayments invoicePayments = invoicePaymentsRepository.findByCollDetails(reversalDetails.getCollDetails());
+		InvoicePayments invoicePayments = invoicePaymentsRepository.findByCollDetails(reversalDetails.getCollDetails());
+		BillFullDetails billFullDetails = invoicePayments.getBillFullDetails();
+		CustDetails custDetails = invoicePayments.getCustDetails();
 		
-		//BillFullDetails bfd = 
+		BigDecimal duesAmount = invoicePayments.getBillFullDetails().getArrears();
+		BigDecimal newArrears = duesAmount.add(receiptAmount);
+		billFullDetails.setArrears(newArrears);//arrears after cancellation
+		custDetails.setArrears(newArrears);
+
+		billFullDetailsRepository.save(billFullDetails);
+		custDetailsRepository.save(custDetails);
+		
+		
 		
 		return true;
 	}
