@@ -1,221 +1,225 @@
 <div>
-<form name="editForm" rc-submit="save()" novalidate>
-	<div class="panel panel-primary">
-		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Complaint Request</h3>
-		</div>
-		<div class="list-group">
-			<div class="list-group-item">
-				<div class="modal-body">
-					<jh-alert-error></jh-alert-error>
-					<div class="row">
-						<div class="col-sm-4 col-sm-offset-4">
-							<label for="field_applicationTxn">Search By CAN</label>
+	<form name="editForm" rc-submit="save()" novalidate>
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">Complaint Request</h3>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="modal-body">
+						<jh-alert-error></jh-alert-error>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-4">
+								<label for="field_applicationTxn">Search By CAN</label>
 
-							<div class="form-group"
-								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+								<div class="form-group"
+									ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
 
-								<input type="text" ng-model="custInfo" typeahead-min-length="3"
-									placeholder="Search CAN or Name or Address (Min 3 chars)"
-									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
-	 								typeahead-loading="loadingCANs"
-									typeahead-on-select='onSelect($item, $model, $label)'
-									typeahead-no-results="noResults" class="form-control">
-								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
-								<div ng-show="noResults">
-									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+									<input type="text" ng-model="custInfo" typeahead-min-length="3"
+										placeholder="Search CAN or Name or Address (Min 3 chars)"
+										uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+										typeahead-loading="loadingCANs"
+										typeahead-on-select='onSelect($item, $model, $label)'
+										typeahead-no-results="noResults" class="form-control">
+									<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+									<div ng-show="noResults">
+										<i class="glyphicon glyphicon-remove"></i> No CANs Found
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-					<div class="form-group"
-										ng-class="{'has-error': editForm.can.$invalid && 
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.can.$invalid && 
                                 (editForm.can.$dirty || rc.editForm.attempted)}">
-						<div class="col-sm-4 col-sm-offset-2">
-							<label>CAN</label> <input type="text" class="form-control"
-								id="field_can" name="can" required
-								ng-model="customerComplaints.can" disabled>
-								<div
-									ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
-									<p class="help-block"
-										ng-show="editForm.can.$error.required">This field is
-										required.</p>
-									<p class="help-block"
-										ng-show="editForm.can.$error.number">Please enter numbers only.</p>
-							</div>
+
+									<label>CAN</label> <input type="text" class="form-control"
+										id="field_can" name="can" required
+										ng-model="customerComplaints.can" disabled>
+									<div
+										ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid">
+										<p class="help-block" ng-show="editForm.can.$error.required">This
+											field is required.</p>
+										<p class="help-block" ng-show="editForm.can.$error.number">Please
+											enter numbers only.</p>
+									</div>
 								</div>
-						</div>
-						<div class="col-sm-4">
-						<div class="form-group"
-										ng-class="{'has-error': editForm.consName.$invalid && 
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.consName.$invalid && 
                                 (editForm.consName.$dirty || rc.editForm.attempted)}">
-								
-							<label>Customer Name</label>
-							<input type="text"	class="form-control" id="field_consName" name="consName"
-								ng-model="customerComplaints.custDetails.consName" required disabled>
-								<div ng-pattern="/^[a-zA-Z]/"
-									ng-show="(editForm.consName.$dirty || rc.editForm.attempted) && editForm.consName.$invalid">
-									<p class="help-block"
-										ng-show="editForm.consName.$error.required">This field is
-										required.</p>
-									<p class="help-block"
-										ng-show="editForm.consName.$error.pattern">Enter text only
-										.</p>
-								
-							
+
+									<label>Customer Name</label> <input type="text"
+										class="form-control" id="field_consName" name="consName"
+										ng-model="customerComplaints.custDetails.consName" required
+										disabled>
+									<div ng-pattern="/^[a-zA-Z]/"
+										ng-show="(editForm.consName.$dirty || rc.editForm.attempted) && editForm.consName.$invalid">
+										<p class="help-block"
+											ng-show="editForm.consName.$error.required">This field is
+											required.</p>
+										<p class="help-block"
+											ng-show="editForm.consName.$error.pattern">Enter text
+											only .</p>
+
+
 									</div>
-									</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4 col-sm-offset-2">
-							<label>DMA</label> <input type="text" class="form-control"
-								id="field_constituency" name="constituency"
-								ng-model="custDetails.divisionMaster.divisionName" disabled>
-								<!-- $scope.customerComplaints.custDetails.secName -->
-						</div>
-						<div class="col-sm-4">
-							<label>Street</label> <input type="text" class="form-control"
-								id="field_street" name="street"
-								ng-model="custDetails.streetMaster.streetName" disabled>
-						</div>
-						
-					</div>
-					<div class="row">
-					<div class="col-sm-4  col-sm-offset-2">
-							<label>Category</label> <input type="text" class="form-control"
-								id="field_categoryName" name="categoryName"
-								ng-model="customerComplaints.tariffCategory"
-								disabled>
-						</div>
-						
-						<div class="col-sm-4">
-						<div class="form-group"
-										ng-class="{'has-error': editForm.complaintTypeMaster.$invalid && 
-                                (editForm.complaintTypeMaster.$dirty || rc.editForm.attempted)}">
-						
-							<label for="field_complaintTypeMaster">Complaint Type</label>
-							<select class="form-control" id="field_complaintTypeMaster"
-								name="complaintTypeMaster"
-								ng-model="customerComplaints.complaintTypeMaster"
-								ng-options="complaintTypeMaster as complaintTypeMaster.complaintType for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.id" required>
-								<option value=""></option>
-							</select>
-							<div ng-pattern="/^[a-zA-Z]/"
-									ng-show="(editForm.complaintTypeMaster.$dirty || rc.editForm.attempted) && editForm.complaintTypeMaster.$invalid">
-									<p class="help-block"
-										ng-show="editForm.complaintTypeMaster.$error.required">This field is
-										required.</p>
-							
-									</div>
-									</div>
-						</div>
-					</div>
-					<div class="row">
-					<div class="col-sm-4 col-sm-offset-2">
-					<div class="form-group"
-										ng-class="{'has-error': editForm.complaintBy.$invalid && 
-                                (editForm.complaintBy.$dirty || rc.editForm.attempted)}">
-						
-							<label class="control-label" for="field_complaintBy">Complaint
-								By</label> <input type="text" class="form-control" name="complaintBy"
-								id="field_complaintBy" ng-model="customerComplaints.complaintBy" required/>
-							<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-									ng-show="(editForm.complaintBy.$dirty || rc.editForm.attempted) && editForm.complaintBy.$invalid">
-									<p class="help-block"
-										ng-show="editForm.complaintBy.$error.required">This field is
-										required.</p>
-							
-									</div>
-									</div>	
-						</div>
-						
-						<div class="col-sm-4">
-							<label class="control-label" for="field_complaintDate">Complaint
-								Date</label>
-							<div class="form-group"
-										ng-class="{'has-error': editForm.complaintDate.$invalid && 
-                                (editForm.complaintDate.$dirty || rc.editForm.attempted)}">
-								<div class='input-group date' id='field_complaintDate'>
-									<input id="field_complaintDate" type="text" ng-type="date" name="complaintDate"
-										class="form-control" required
-										ng-click="datePickerForComplaintDateOpen($event)" placeholder="YYYY-MM-DD"										
-										uib-datepicker-popup="{{dateformat}}"
-										ng-model="customerComplaints.complaintDate"
-										is-open="datePickerForComplaintDate.status.opened" /> <span
-										class="input-group-btn">
-										<button type="button" class="btn btn-default"
-											ng-click="datePickerForComplaintDateOpen($event)">
-											<i class="glyphicon glyphicon-calendar"></i>
-										</button>
-									</span>
 								</div>
-								<div 
-									ng-show="(editForm.complaintDate.$dirty || rc.editForm.attempted) && editForm.complaintDate.$invalid">
-									<p class="help-block"
-										ng-show="editForm.complaintDate.$error.date">Please enter date format.</p>
-								<p class="help-block"
-										ng-show="editForm.complaintDate.$error.required">Date is
-										required.</p>
-							
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<label>DMA</label> <input type="text" class="form-control"
+									id="field_constituency" name="constituency"
+									ng-model="custDetails.divisionMaster.divisionName" disabled>
+								<!-- $scope.customerComplaints.custDetails.secName -->
+							</div>
+							<div class="col-sm-4">
+								<label>Street</label> <input type="text" class="form-control"
+									id="field_street" name="street"
+									ng-model="custDetails.streetMaster.streetName" disabled>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="col-sm-4  col-sm-offset-2">
+								<label>Category</label> <input type="text" class="form-control"
+									id="field_categoryName" name="categoryName"
+									ng-model="customerComplaints.tariffCategory" disabled>
+							</div>
+
+							<div class="col-sm-4">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.complaintTypeMaster.$invalid && 
+                                (editForm.complaintTypeMaster.$dirty || rc.editForm.attempted)}">
+
+									<label for="field_complaintTypeMaster">Complaint Type</label> <select
+										class="form-control" id="field_complaintTypeMaster"
+										name="complaintTypeMaster"
+										ng-model="customerComplaints.complaintTypeMaster"
+										ng-options="complaintTypeMaster as complaintTypeMaster.complaintType for complaintTypeMaster in complainttypemasters track by complaintTypeMaster.id"
+										required>
+										<option value=""></option>
+									</select>
+									<div ng-pattern="/^[a-zA-Z]/"
+										ng-show="(editForm.complaintTypeMaster.$dirty || rc.editForm.attempted) && editForm.complaintTypeMaster.$invalid">
+										<p class="help-block"
+											ng-show="editForm.complaintTypeMaster.$error.required">This
+											field is required.</p>
+
 									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.complaintBy.$invalid && 
+                                (editForm.complaintBy.$dirty || rc.editForm.attempted)}">
+
+									<label class="control-label" for="field_complaintBy">Complaint
+										By</label> <input type="text" class="form-control" name="complaintBy"
+										id="field_complaintBy"
+										ng-model="customerComplaints.complaintBy" required />
+									<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
+										ng-show="(editForm.complaintBy.$dirty || rc.editForm.attempted) && editForm.complaintBy.$invalid">
+										<p class="help-block"
+											ng-show="editForm.complaintBy.$error.required">This field
+											is required.</p>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="col-sm-4">
+								<label class="control-label" for="field_complaintDate">Complaint
+									Date</label>
+								<div class="form-group"
+									ng-class="{'has-error': editForm.complaintDate.$invalid && 
+                                (editForm.complaintDate.$dirty || rc.editForm.attempted)}">
+									<div class='input-group date' id='field_complaintDate'>
+										<input id="field_complaintDate" type="text" ng-type="date"
+											name="complaintDate" class="form-control" required
+											ng-click="datePickerForComplaintDateOpen($event)"
+											placeholder="YYYY-MM-DD"
+											uib-datepicker-popup="{{dateformat}}"
+											ng-model="customerComplaints.complaintDate"
+											is-open="datePickerForComplaintDate.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForComplaintDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+									<div
+										ng-show="(editForm.complaintDate.$dirty || rc.editForm.attempted) && editForm.complaintDate.$invalid">
+										<p class="help-block"
+											ng-show="editForm.complaintDate.$error.date">Please enter
+											date format.</p>
+										<p class="help-block"
+											ng-show="editForm.complaintDate.$error.required">Date is
+											required.</p>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<label class="control-label" for="field_remarks">Remarks</label>
+								<input type="text" class="form-control" name="remarks"
+									id="field_remarks" ng-model="customerComplaints.remarks" />
+							</div>
+							<div class="col-sm-2">
+								<label>Relevant Document</label>
+								<button type="submit" class="btn btn-primary" ngf-drop=""
+									ngf-select="" ng-model="customerComplaints.relevantDoc1"
+									ng-model-rejected="rejFiles"
+									ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+									class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+									ngf-accept="'image/*,application/pdf'"
+									ngf-drop-available="dropAvailable">
+									<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
+										Relevant Document</span>
+								</button>
+							</div>
+							<div class="col-sm-3">
+								<ul style="clear: both" ng-show="rejFiles.length > 0"
+									class="response">
+									<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+										file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+								</ul>
+								<ul style="clear: both"
+									ng-show="customerComplaints.relevantDoc1.length > 0"
+									class="response">
+									<li class="sel-file"
+										ng-repeat="f in customerComplaints.relevantDoc1">-
+										{{f.name}} <a ng-show="f.result" href="javascript:void(0)"
+										ng-click="f.showDetail = !f.showDetail">details</a>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-					<div class="col-sm-4 col-sm-offset-2">
-							<label class="control-label" for="field_remarks">Remarks</label>
-							<input type="text" class="form-control" name="remarks"
-								id="field_remarks" ng-model="customerComplaints.remarks" />
-						</div>
-						<div class="col-sm-2">
-							<label>Relevant Document</label>
-							<button type="submit" class="btn btn-primary" ngf-drop=""
-								ngf-select="" ng-model="customerComplaints.relevantDoc1"
-								ng-model-rejected="rejFiles"
-								ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
-								class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
-								ngf-accept="'image/*,application/pdf'"
-								ngf-drop-available="dropAvailable">
-								<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
-									Relevant Document</span>
-							</button>
-						</div>
-						<div class="col-sm-3">
-							<ul style="clear: both" ng-show="rejFiles.length > 0"
-								class="response">
-								<li class="sel-file" ng-repeat="f in rejFiles">Rejected
-									file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
-							</ul>
-							<ul style="clear: both"
-								ng-show="customerComplaints.relevantDoc1.length > 0"
-								class="response">
-								<li class="sel-file"
-									ng-repeat="f in customerComplaints.relevantDoc1">
-									 - {{f.name}} <a ng-show="f.result"
-									href="javascript:void(0)"
-									ng-click="f.showDetail = !f.showDetail">details</a> 
-								</li>
-							</ul>
-						</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+						</button>
+						<button type="submit" ng-enabled="editForm.$invalid || isSaving"
+							class="btn btn-primary">
+							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal"
-			ng-click="clear()">
-			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-		</button>
-		<button type="submit" ng-enabled="editForm.$invalid || isSaving"
-			class="btn btn-primary">
-			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-		</button>
-	</div>
-</form>
-<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
+	</form>
+	<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="confirmForm">
