@@ -210,25 +210,9 @@ public class CustDetailsResource {
 		params.put("dmaId", dmaId);
 		params.put("categoryId", categoryId);
 		JasperPrint jasperPrint = null;
-		/*if(dmaId == 0 && categoryId == 0){*/
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/DivisionCategory.jasper", params);
-		/*}
 		
-		else if(dmaId != 0 && categoryId == 0){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/DivisionCategoryDW.jasper", params);
-		}
-		else if(dmaId == 0 && categoryId != 0){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/DivisionCategoryTCW.jasper", params);
-		
-		}
-		else if(dmaId != 0 && categoryId != 0){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/DivisionCategoryDivCat.jasper", params);
-			 
-		}*/
 		
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
@@ -258,27 +242,9 @@ public class CustDetailsResource {
 		params.put("fromDate", fromDate);
 		params.put("toDate", toDate);
 		JasperPrint jasperPrint = null;
+					 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionReport.jasper", params);
 		
-		 /*if(dmaId == 0 && categoryId == 0 && fromDate != null &&  toDate != null){*/
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReport.jasper", params);
-			 
-		/*}
-		 else if(dmaId != 0 && categoryId != 0 && fromDate != null &&  toDate != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReport.jasper", params);
-			 
-		}	
-		 else if(dmaId == 0 && categoryId != 0 && fromDate != null &&  toDate != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportCategory.jasper", params);
-			 
-		}
-		 else if(dmaId != 0 && categoryId == 0 && fromDate != null &&  toDate != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportDMA.jasper", params);
-			 
-		}*/
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
 				"inline; filename=BillCollectionReport.pdf");
@@ -307,27 +273,9 @@ public class CustDetailsResource {
 		params.put("fromDate", fromDate);
 		params.put("toDate", toDate);
 		JasperPrint jasperPrint = null;
+					 jasperPrint = reportsRepository
+					.generateReport("/reports/BillCollectionReportDetail.jasper", params);
 		
-		 /*if(dmaId == 0 && categoryId == 0 && fromDate != null &&  toDate != null){*/
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportDetail.jasper", params);
-			 
-		/*}
-		 else if(dmaId != 0 && categoryId != 0 && fromDate != null &&  toDate != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportDetail.jasper", params);
-			 
-		}	
-		 else if(dmaId == 0 && categoryId != 0 && fromDate != null &&  toDate != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportDetailCategory.jasper", params);
-			 
-		}
-		 else if(dmaId != 0 && categoryId == 0 && fromDate != null &&  toDate != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportDetailDMA.jasper", params);
-			 
-		}*/
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
 				"inline; filename=BillCollectionReportDetail.pdf");
@@ -357,27 +305,10 @@ public class CustDetailsResource {
 		params.put("year", year);
 		params.put("month", month);
 		JasperPrint jasperPrint = null;
-		
-		/* if(dmaId == 0 && categoryId == 0 && year != null &&   month != null){*/
-			 jasperPrint = reportsRepository
+					 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionYearlyReport.jasper", params);
 			 
-/*		}
-		 else if(dmaId != 0 && categoryId != 0 && year != null &&  month != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionYearlyReport.jasper", params);
-			 
-		}	
-		 else if(dmaId == 0 && categoryId != 0 && year != null &&  month != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionReportYearlyCategory.jasper", params);
-			 
-		}
-		 else if(dmaId != 0 && categoryId == 0 && year != null &&   month != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionYearlyReportDMA.jasper", params);
-			 
-		}*/
+
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
 				"inline; filename=BillCollectionYearlyReport.pdf");

@@ -27,7 +27,7 @@ JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE (C.DIVISION_MASTER_ID=$P{dmaId} or 
 (year(col.receipt_dt)=$P{year} or $P{year} is null or $P{year}='') AND
 
 (monthName(col.receipt_dt)=$P{month} or $P{month} is null or $P{month}='')
-group by can]]>
+group by can,payment]]>
 	</queryString>
 	<field name="year" class="java.lang.Integer"/>
 	<field name="month" class="java.lang.String"/>
@@ -53,10 +53,6 @@ group by can]]>
 	</background>
 	<title>
 		<band height="65">
-			<image>
-				<reportElement x="0" y="0" width="117" height="63" uuid="bae31c9c-507b-4af2-a1ac-a9354867562f"/>
-				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
-			</image>
 			<frame>
 				<reportElement mode="Opaque" x="99" y="19" width="531" height="32" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
@@ -67,6 +63,10 @@ group by can]]>
 					<text><![CDATA[    MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
 				</staticText>
 			</frame>
+			<image>
+				<reportElement x="3" y="2" width="117" height="63" uuid="258f5005-6939-4b26-8b66-49ab493f15b3"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -159,7 +159,7 @@ group by can]]>
 				<reportElement x="0" y="20" width="634" height="1" forecolor="#666666" uuid="0874844b-4237-4816-a9a2-fff075747f0d"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="159" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="83cd4217-66b6-47ae-9b62-1be03c4b8cf1"/>
+				<reportElement mode="Opaque" x="0" y="0" width="147" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="83cd4217-66b6-47ae-9b62-1be03c4b8cf1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -187,7 +187,7 @@ group by can]]>
 				<text><![CDATA[Amount]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="452" y="0" width="108" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b8df0848-3094-4254-b27b-1cff7da3a996"/>
+				<reportElement mode="Opaque" x="438" y="0" width="122" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b8df0848-3094-4254-b27b-1cff7da3a996"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -222,8 +222,8 @@ group by can]]>
 				<textFieldExpression><![CDATA[$F{Amount}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="452" y="0" width="89" height="20" uuid="747c626e-815b-4b06-8740-c83c3b65f67e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="482" y="0" width="78" height="20" uuid="747c626e-815b-4b06-8740-c83c3b65f67e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Payment}]]></textFieldExpression>

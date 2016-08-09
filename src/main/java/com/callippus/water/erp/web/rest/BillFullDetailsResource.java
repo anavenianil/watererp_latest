@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -205,5 +206,36 @@ public class BillFullDetailsResource {
 				.map(result -> new ResponseEntity<>(billAndCollectionDTO, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
+	
+	 /**
+     * Get By Category PDF4
+     * @throws ParseException 
+     */
+    @RequestMapping(value = "/BillFullDetailss/reports/{dmaId}/{categoryId}/{year}/{month}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getBillReportDetails(HttpServletResponse response,
+			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable String year , @PathVariable String month) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", categoryId);
+   	
+    	
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("dmaId", dmaId);
+		params.put("categoryId", categoryId);
+		params.put("year", year);
+		params.put("month", month);
+		JasperPrint jasperPrint = null;
+		
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillReport.jasper", params);
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=BillReportDetails.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	} 
+    
+    
     
 }
