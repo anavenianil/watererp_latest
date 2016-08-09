@@ -32,7 +32,12 @@
 					<td>{{billRunMaster.failed}}</td>
 					<!-- <td>{{billRunMaster.status}}</td> -->
 					<td><span class="label"
-						ng-class=" { 'label-success'   : billRunMaster.status === 'COMMITTED', 'label-warning'   : billRunMaster.status === 'COMPLETED', 'label-danger'   :  billRunMaster.status === 'CANCELLED'}">
+						ng-class=" { 'label-success'	:	billRunMaster.status === 'COMMITTED', 
+									'label-warning'		: 	billRunMaster.status === 'COMPLETED', 
+									'label-default'		:	billRunMaster.status === 'CANCELLED',
+									'label-info'		:	billRunMaster.status === 'Completed Successfully', 
+									'label-primary'		:	billRunMaster.status === 'In Process',
+									'label-danger'		:	billRunMaster.status === 'Completed with Errors'}">
 							{{billRunMaster.status}}</span>
 					<td>
 					<td>

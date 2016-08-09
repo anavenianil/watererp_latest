@@ -146,7 +146,7 @@
 								name="collectionTypeMaster" required="required"
 								ng-model="collDetails.collectionTypeMaster"
 								ng-options="collectionTypeMaster as collectionTypeMaster.collName for collectionTypeMaster in collectionTypeMasters track by collectionTypeMaster.id"
-								required>
+								>
 							</select>
 						</div>
 					</div>
@@ -155,7 +155,7 @@
 						<div class="col-sm-4">
 							<div class="form-group"
 								ng-class="{ 'has-error' : instrEnabled && editForm.instrNo.$invalid && 
-         (editForm.instrNo.$dirty || rc.editForm.attempted)}">
+         						(editForm.instrNo.$dirty || rc.editForm.attempted)}">
 								<label class="control-label" for="field_instrNo">Instrument
 									No</label> <input type="number" class="form-control" name="instrNo"
 									id="field_instrNo" ng-model="collDetails.instrNo"
