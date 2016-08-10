@@ -63,8 +63,6 @@
 										<p class="help-block"
 											ng-show="editForm.consName.$error.pattern">Enter text
 											only .</p>
-
-
 									</div>
 								</div>
 							</div>
@@ -108,7 +106,6 @@
 										<p class="help-block"
 											ng-show="editForm.complaintTypeMaster.$error.required">This
 											field is required.</p>
-
 									</div>
 								</div>
 							</div>
@@ -128,7 +125,6 @@
 										<p class="help-block"
 											ng-show="editForm.complaintBy.$error.required">This field
 											is required.</p>
-
 									</div>
 								</div>
 							</div>
@@ -162,7 +158,6 @@
 										<p class="help-block"
 											ng-show="editForm.complaintDate.$error.required">Date is
 											required.</p>
-
 									</div>
 								</div>
 							</div>
@@ -203,6 +198,44 @@
 								</ul>
 							</div>
 						</div>
+						<hr>
+						<fieldset class="col-sm-offset-2"
+							ng-if="customerComplaints.complaintTypeMaster.id==2">
+							<legend>Leakage Details</legend>
+							<div class="row">
+								<div class="col-sm-5 col-sm-offset-0">
+									<label class="control-label" for="field_leakageType">Leakage
+										Type</label> <select class="form-control" id="field_leakageType"
+										name="leakageType" ng-model="customerComplaints.leakageType">
+										<option value="BURST">BURST</option>
+										<option value="VALVE">VALVE</option>
+										<option value="HYDRANT">HYDRANT</option>
+									</select>
+								</div>
+								<div class="col-sm-5">
+									<label class="control-label" for="field_longi">Cordinate
+										X</label> <input type="text" class="form-control" name="longi"
+										id="field_longi" ng-model="customerComplaints.longi" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5 col-sm-offset-0">
+									<label class="control-label" for="field_leakMagnitude">Leakage
+										Magnitude</label> <select class="form-control"
+										id="field_leakMagnitude" name="leakMagnitude"
+										ng-model="customerComplaints.leakMagnitude">
+										<option value="LOW">LOW</option>
+										<option value="MEDIUM">MEDIUM</option>
+										<option value="SEVERE">SEVERE</option>
+									</select>
+								</div>
+								<div class="col-sm-5">
+									<label class="control-label" for="field_lati">Cordinate
+										Y</label> <input type="text" class="form-control" name="lati"
+										id="field_lati" ng-model="customerComplaints.lati" />
+								</div>
+							</div>
+						</fieldset>
 					</div>
 
 					<div class="modal-footer">

@@ -49,9 +49,6 @@
 					<table class="table table-striped">
 						<tbody>
 							<tr>
-
-							</tr>
-							<tr>
 								<td><span>CAN</span></td>
 								<td><span class="form-control-static">{{customerComplaints.can}}</span>
 								</td>
@@ -68,9 +65,8 @@
 							</tr>
 							<tr>
 								<td><span>Complaint Type</span></td>
-								<td><!-- <a class="form-control-static"
-									ui-sref="complaintTypeMaster.detail({id:customerComplaints.complaintTypeMaster.id})"> -->{{customerComplaints.complaintTypeMaster.complaintType}}<!-- </a> -->
-								</td>
+								<td>
+									{{customerComplaints.complaintTypeMaster.complaintType}}</td>
 							</tr>
 							<tr>
 								<td><span>Remarks</span></td>
@@ -80,11 +76,11 @@
 							<tr>
 								<td><span>Relevant Document</span></td>
 								<td>
-								<div ng-hide="customerComplaints.relevantDoc === ''">
-								<span class="form-control-static">
-								<a href="{{customerComplaints.relevantDoc}}">Download&nbsp;<span
-										class="glyphicon glyphicon-download"></span></a></span>
-								</div>
+									<div ng-hide="customerComplaints.relevantDoc === ''">
+										<span class="form-control-static"> <a
+											href="{{customerComplaints.relevantDoc}}">Download&nbsp;<span
+												class="glyphicon glyphicon-download"></span></a></span>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -99,50 +95,324 @@
 							</tr>
 						</tbody>
 					</table>
-			<div ng-if="customerComplaints.complaintTypeMaster.complaintType === 'INCORRECT BILL'">
-			<div class="panel panel-primary">
-			<div class="panel-heading clearfix">
-    		<h3 class="panel-title pull-left">Previous Bill Details</h3>
-			</div>
-			</div>
-			<table class="table table-striped">
-			<thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span></th>
-                    <th jh-sort-by="can"><span>CAN</span></th>
-                    <th jh-sort-by="fromDt"><span>From Month</span></th>
-                    <th jh-sort-by="toDt"><span>To Month</span></th>
-                    <!-- <th jh-sort-by="status"><span>Status</span></th>
-                    <th jh-sort-by="remarks"><span>Remarks</span></th> -->
-                    <!-- <th jh-sort-by="billFullDetails.id"><span>Bill</span></th> -->
-                    <th jh-sort-by="billFullDetails.id"><span>PDF</span></th>
-                </tr>
-            </thead>
-					<tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="billRunDetails in billRunDetailss track by billRunDetails.id">
-                    <td><a ui-sref="billRunDetails.detail({id:billRunDetails.id})">{{billRunDetails.id}}</a></td>
-                    <td>{{billRunDetails.can}}</td>
-                    <td>{{billRunDetails.billFullDetails.fromMonth}}</td>
-                    <td>{{billRunDetails.billFullDetails.toMonth}}</td>
-                    <!-- <td>{{billRunDetails.status}}</td>
-                    <td>{{billRunDetails.remarks}}</td> -->
-                    <!-- <td>
-                         <a ui-sref="billFullDetails.detail({id:billRunDetails.billFullDetails.id})">{{billRunDetails.billFullDetails.id}}</a>
-                    </td> -->
-                    <td>
-                        <a ng-class="{'glyphicon glyphicon-save-file': billRunDetails.billFullDetails.id!=null}" href="/api/billFullDetailss/report/{{billRunDetails.billFullDetails.id}}"></a>
-                    </td>
-                </tr>
-            </tbody>
-			</table>
-			</div>
+					<div
+						ng-if="customerComplaints.complaintTypeMaster.complaintType === 'INCORRECT BILL'">
+						<div class="panel panel-primary">
+							<div class="panel-heading clearfix">
+								<h3 class="panel-title pull-left">Previous Bill Details</h3>
+							</div>
+						</div>
+						<table class="table table-striped">
+							<thead>
+								<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+									<th jh-sort-by="id"><span>ID</span></th>
+									<th jh-sort-by="can"><span>CAN</span></th>
+									<th jh-sort-by="fromDt"><span>From Month</span></th>
+									<th jh-sort-by="toDt"><span>To Month</span></th>
+									<th jh-sort-by="billFullDetails.id"><span>PDF</span></th>
+								</tr>
+							</thead>
+							<tbody infinite-scroll="loadPage(page + 1)"
+								infinite-scroll-disabled="links['last'] == page">
+								<tr
+									ng-repeat="billRunDetails in billRunDetailss track by billRunDetails.id">
+									<td><a
+										ui-sref="billRunDetails.detail({id:billRunDetails.id})">{{billRunDetails.id}}</a></td>
+									<td>{{billRunDetails.can}}</td>
+									<td>{{billRunDetails.billFullDetails.fromMonth}}</td>
+									<td>{{billRunDetails.billFullDetails.toMonth}}</td>
+									<td><a
+										ng-class="{'glyphicon glyphicon-save-file': billRunDetails.billFullDetails.id!=null}"
+										href="/api/billFullDetailss/report/{{billRunDetails.billFullDetails.id}}"></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- Leakage Details -->
+				<div
+					ng-if="customerComplaints.complaintTypeMaster.complaintType === 'WATER LEAKAGE'">
+
+					<fieldset>
+						<legend>Leakage Details</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Leakage Type</label>
+								<h5 class="list-group-item-heading">{{leakageType}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Leakage Magnitude</label>
+								<h5 class="list-group-item-heading">{{leakMagnitude}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Cordinate-X</label>
+								<h5 class="list-group-item-heading">{{longi}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Cordinate-Y</label>
+								<h5 class="list-group-item-heading">{{lati}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<hr>
+					<div ng-if="leakageType==='BURST'">
+						<fieldset>
+							<legend>Leakage Type : BURST</legend>
+							<div class="row">
+								<div class="col-sm-3">
+									<label class="control-label" for="field_meterLocation">Meter
+										Location </label> <select class="form-control"
+										id="field_meterLocation" name="meterLocation"
+										ng-model="customerComplaints.meterLocation">
+										<option value="INSIDE STAND">INSIDE STAND</option>
+										<option value="BELOW GROUND">BELOW GROUND</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_burstPipe">Burst
+										Pipe </label> <select class="form-control" id="field_burstPipe"
+										name="burstPipe" ng-model="customerComplaints.burstPipe">
+										<option value="ON SIDE WALK">ON SIDE WALK</option>
+										<option value="ABOVE GROUND">ABOVE GROUND</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_fromLeft">From
+										Left</label> <input type="text" class="form-control" name="fromLeft"
+										id="field_fromLeft" ng-model="customerComplaints.fromLeft" />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_fromSb">From SB</label>
+									<input type="text" class="form-control" name="fromSb"
+										id="field_fromSb" ng-model="customerComplaints.fromSb" />
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-3">
+									<label class="control-label" for="field_leakMagnitude">Leakage
+										Magnitude</label> <select class="form-control"
+										id="field_leakMagnitude" name="leakMagnitude"
+										ng-model="customerComplaints.leakMagnitude">
+										<option value="LOW">LOW</option>
+										<option value="MEDIUM">MEDIUM</option>
+										<option value="SEVERE">SEVERE</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_burstArea">Burst
+										Area </label> <select class="form-control" id="field_burstArea"
+										name="burstArea" ng-model="customerComplaints.burstArea">
+										<option value="ROAD CROSSING">ROAD CROSSING</option>
+										<option value="IN ROAD">IN ROAD</option>
+										<option value="IN SIDE WALK">IN SIDE WALK</option>
+										<option value="MID BLOCK">MID BLOCK</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_pipeType1">Pipe
+										Type1 </label> <select class="form-control" id="field_pipeType1"
+										name="pipeType1" ng-model="customerComplaints.pipeType1">
+										<option value="AC">AC</option>
+										<option value="STEEL">STEEL</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_pipeType1">Pipe
+										Size1 </label> <select class="form-control" id="field_pipeSize1"
+										name="pipeSize1" ng-model="customerComplaints.pipeSize1">
+										<option value=""></option>
+										<option value="50">50</option>
+										<option value="75">75</option>
+										<option value="100">100</option>
+										<option value="150">150</option>
+										<option value="200">200</option>
+										<option value="225">225</option>
+										<option value="250">250</option>
+										<option value="300">300</option>
+										<option value="375">375</option>
+										<option value="450">450</option>
+										<option value="525">525</option>
+										<option value="575">575</option>
+										<option value="">Others</option>
+									</select>
+								</div>
+								<div class="col-sm-1">
+									<label class="control-label" for="field_pipeSize1">Size</label>
+									<input type="text" class="form-control" name="pipeSize1"
+										id="field_pipeSize1" ng-model="customerComplaints.pipeSize1" />
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-3">
+									<label class="control-label" for="field_pipeType2">Pipe
+										Type2 </label> <select class="form-control" id="field_pipeType2"
+										name="pipeType2" ng-model="customerComplaints.pipeType2">
+										<option value="HDPE">HDPE</option>
+										<option value="uPVC">uPVC</option>
+									</select>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_pipeType1">Pipe
+										Size2 </label> <select class="form-control" id="field_pipeSize2"
+										name="pipeSize2" ng-model="customerComplaints.pipeSize2">
+										<option value=""></option>
+										<option value="63">63</option>
+										<option value="75">75</option>
+										<option value="90">90</option>
+										<option value="110">110</option>
+										<option value="140">140</option>
+										<option value="160">160</option>
+										<option value="200">200</option>
+										<option value="250">250</option>
+										<option value="315">315</option>
+										<option value="350">350</option>
+										<option value="400">400</option>
+										<option value="">Others</option>
+									</select>
+								</div>
+								<div class="col-sm-1">
+									<label class="control-label" for="field_pipeSize2">Size</label>
+									<input type="text" class="form-control" name="pipeSize2"
+										id="field_pipeSize2" ng-model="customerComplaints.pipeSize2" />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_daysRequired">Days
+										Required</label> <input type="text" class="form-control"
+										name="daysRequired" id="field_daysRequired"
+										ng-model="customerComplaints.daysRequired" />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_staffRequired">Staff
+										Required</label> <input type="text" class="form-control"
+										name="staffRequired" id="field_staffRequired"
+										ng-model="customerComplaints.staffRequired" />
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>Repair Type</legend>
+							<div class="row">
+								<div class="col-sm-3">
+									<label class="control-label" for="field_noOfSections">No.
+										of Sections </label> <select class="form-control"
+										id="field_noOfSections" name="noOfSections"
+										ng-model="customerComplaints.noOfSections">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_noOfClamps">No.
+										of Clamps </label> <select class="form-control" id="field_noOfClamps"
+										name="noOfClamps" ng-model="customerComplaints.noOfClamps">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_holeSize">Approximate
+										Size Of Hole </label> <select class="form-control" id="field_holeSize"
+										name="holeSize" ng-model="customerComplaints.holeSize">
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="20">20</option>
+									</select>
+								</div>
+							</div>
+						</fieldset>
+						<br>
+						<fieldset>
+							<legend>Material Required For Repair</legend>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="field_materialMaster">Material Name</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_unit">Unit</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_quantity">Quantity</label>
+								</div>
+							</div>
+							<hr>
+							<fieldset
+								ng-repeat="item in customerComplaints.itemRequireds track by $index">
+								<div class="row">
+									<div class="col-sm-3">
+										<select class="form-control" id="field_materialMaster"
+											name="materialMaster" ng-model="item.materialMaster"
+											ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
+											<option value=""></option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<select class="form-control" id="field_uom" name="uom"
+											ng-model="item.uom"
+											ng-options="uom as uom.value for uom in uoms track by uom.id">
+											<option value=""></option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<input type="number" class="form-control" name="quantity"
+											id="field_quantity" min="0" ng-model="item.quantity" />
+									</div>
+									<div class="col-sm-1">
+										<button type="button" class="btn btn-danger"
+											ng-click="removeItemArr($index)">
+											<span class="glyphicon glyphicon-remove-circle"></span>
+										</button>
+									</div>
+								</div>
+								<br>
+							</fieldset>
+							<button type="button" class="btn btn-primary"
+								ng-click="createItemArr()">
+								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+									Items</span>
+							</button>
+						</fieldset>
+					</div>
+
+					<!-- if request is hydrant -->
+					<div ng-if="leakageType==='HYDRANT'">
+						<fieldset>
+							<legend>Leakage Type: Hydrant</legend>
+							<div class="row">
+								<div class="col-sm-3">
+									<label class="control-label" for="field_fromLeft">From
+										Left </label> <input type="text" class="form-control" name="fromLeft"
+										id="field_fromLeft" ng-model="customerComplaints.fromLeft" />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_fromsb">From SB
+									</label> <input type="text" class="form-control" name="fromsb"
+										id="field_fromsb" ng-model="customerComplaints.fromsb" />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_problemAt">Problem
+										At </label> <select class="form-control" id="field_problemAt"
+										name="problemAt" ng-model="customerComplaints.problemAt">
+										<option value="ABOVE GROUND">ABOVE GROUND</option>
+										<option value="BELOW GROUND">BELOW GROUND</option>
+									</select>
+								</div>
+							</div>
+						</fieldset>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 11 is Commercial Manager -->
-	<div ng-if="orgRole.id === 11 || orgRole.id === 12 || orgRole.id === 4 || orgRole.id === 16"
+	<div
+		ng-if="orgRole.id === 11 || orgRole.id === 12 || orgRole.id === 4 || orgRole.id === 16"
 		class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Adjustment Details</h3>
@@ -152,8 +422,7 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-sm-4 col-md-offset-4">
-							<label for="field_paymentTypes">Bill Month</label> 
-							<select
+							<label for="field_paymentTypes">Bill Month</label> <select
 								class="form-control" id="field_collectionTypeMaster"
 								name="collectionTypeMaster" required="required"
 								ng-model="customerComplaints.billFullDetails"
@@ -164,20 +433,6 @@
 						</div>
 					</div>
 					<div class="row">
-						<!-- <div class="col-sm-4">
-							<label for="field_paymentTypes">Adjustment Bill Id</label> <input
-								type="text" class="form-control" name="totalAmount"
-								id="field_totalAmount"
-								ng-model="customerComplaints.adjustmentBillId"
-								readonly />
-						</div> -->
-						<!-- <div class="col-sm-4">
-							<label for="field_paymentTypes">Total Amount</label> <input
-								type="text" class="form-control" name="totalAmount"
-								id="field_totalAmount"
-								ng-model="customerComplaints.billFullDetails.totalAmount"
-								readonly />
-						</div> -->
 						<div class="col-sm-4 col-md-offset-2">
 							<label for="field_paymentTypes">Net Payable Amount</label> <input
 								type="text" class="form-control" name="netPayableAmount"
@@ -189,7 +444,8 @@
 							<label for="field_paymentTypes">Adjustment Amount</label> <input
 								type="text" class="form-control" name="totalAmount"
 								id="field_totalAmount"
-								ng-model="customerComplaints.adjustmentAmt" ng-disabled="orgRole.id === 16"/>
+								ng-model="customerComplaints.adjustmentAmt"
+								ng-disabled="orgRole.id === 16" />
 						</div>
 					</div>
 				</div>
@@ -208,7 +464,7 @@
 						<div class="col-sm-4">
 							<label for="field_remarks">Remarks</label> <input type="text"
 								class="form-control" name="remarks" id="field_remarks"
-								ng-model="customerComplaints.remarks"/>
+								ng-model="customerComplaints.remarks" />
 						</div>
 					</div>
 				</div>
@@ -226,18 +482,15 @@
 		ng-click="approve(customerComplaints.id)" ng-if="orgRole.orgRoleName === 'Commercial Manager'" ng-disable="customerComplaints.status === 0 && orgRole.orgRoleName === 'ICT & Customer Care Officer'">
 		<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 	</button> -->
-	
+
 	<button type="button" class="btn btn-danger pull-right"
-			ng-show="canDecline()" ng-disabled="isSaving"
-			ng-click="declineRequest(customerComplaints.id)">
-			<span class="glyphicon glyphicon-remove-circle"></span>
-			&nbsp;Decline
+		ng-show="canDecline()" ng-disabled="isSaving"
+		ng-click="declineRequest(customerComplaints.id)">
+		<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 	</button>
-		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+	<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 	<button type="button" class="btn btn-success pull-right"
-			ng-show="canDecline()"
-			ng-click="approve(customerComplaints.id)">
-			<span class="glyphicon glyphicon-check"></span>
-			&nbsp;Approve
+		ng-show="canDecline()" ng-click="approve(customerComplaints.id)">
+		<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 	</button>
 </div>

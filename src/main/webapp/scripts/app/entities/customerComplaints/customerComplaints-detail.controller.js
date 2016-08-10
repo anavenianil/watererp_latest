@@ -12,6 +12,11 @@ angular
 					// This code is used to get the role name / designation.
 					//$scope.orgRole = Principal.getOrgRole();
 					$scope.orgRole = {};
+					
+					//$scope.leakageType = "BURST";
+					//$scope.leakageType = "VALVE";
+					$scope.leakageType = "HYDRANT";
+					
 					Principal.getOrgRole().then(function(response) {
 						$scope.orgRole = response;
 					});
@@ -191,4 +196,19 @@ angular
 						}
 						return ret;
 					}
+			        
+			      //create array for items
+			        $scope.count = 0;
+			        //$scope.customerComplaints.itemRequireds = [];
+			        $scope.createItemArr = function(){
+			        	$scope.customerComplaints.itemRequireds = [];
+			       		$scope.customerComplaints.itemRequireds[$scope.count]= {};
+			       		$scope.count = $scope.count +1;
+			        }
+			        
+			      //for removing items
+			        $scope.removeItemArr = function(indexId) {
+			            $scope.count = $scope.count -1;
+			            $scope.customerComplaints.itemRequireds.splice(indexId, 1);
+			          };
 				});
