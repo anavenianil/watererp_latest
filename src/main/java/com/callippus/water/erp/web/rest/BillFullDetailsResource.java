@@ -15,10 +15,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -38,13 +34,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.BillAndCollectionDTO;
 import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.domain.DivisionMaster;
+import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.BillDetailsCustomRepository;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.BillRunDetailsRepository;
+import com.callippus.water.erp.repository.DivisionMasterRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * REST controller for managing BillFullDetails.
@@ -66,6 +70,12 @@ public class BillFullDetailsResource {
 
 	@Inject
 	BillDetailsCustomRepository billDetailsCustomRepository;
+
+	@Inject
+	DivisionMasterRepository divisionMasterRepository;
+	
+	@Inject TariffCategoryMasterRepository tariffCategoryMasterRepository;
+	
     /**
      * POST  /billFullDetailss -> Create a new billFullDetails.
      */
@@ -224,6 +234,19 @@ public class BillFullDetailsResource {
 		params.put("categoryId", categoryId);
 		params.put("year", year);
 		params.put("month", month);
+		if(dmaId!=0 && categoryId!=0)
+		{
+			DivisionMaster division = divisionMasterRepository.findOne(dmaId);
+			params.put("divisionName", division.getDivisionName());
+			
+			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
+			params.put("categoryName", tcm.getTariffCategory());
+		}
+		else
+		{
+			params.put("divisionName", 0);
+			params.put("categoryName", 0);
+		}
 		JasperPrint jasperPrint = null;
 		
 			 jasperPrint = reportsRepository
