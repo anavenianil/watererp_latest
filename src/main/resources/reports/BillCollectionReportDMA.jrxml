@@ -42,7 +42,7 @@ JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE C.DIVISION_MASTER_ID=$P{dmaId}
 		<band height="65">
 			<image>
 				<reportElement x="0" y="0" width="117" height="63" uuid="bae31c9c-507b-4af2-a1ac-a9354867562f"/>
-				<imageExpression><![CDATA["images\\watererp.png"]]></imageExpression>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement mode="Opaque" x="99" y="19" width="531" height="32" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>

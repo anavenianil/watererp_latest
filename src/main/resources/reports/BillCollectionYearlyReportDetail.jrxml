@@ -19,11 +19,13 @@
 		<![CDATA[select Distinct year(col.receipt_dt)as year,monthName(col.receipt_dt) as month, D.DIVISION_NAME AS DNAME,T.TARIFF_CATEGORY  AS CATEGORY,
 COL.CAN AS CAN ,col.receipt_mode as Payment, RECEIPT_DT,'From Date','To Date',SUM(COL.RECEIPT_AMT)AS Amount,C.cons_name
 from CUST_DETAILS C JOIN DIVISION_MASTER D ON C.DIVISION_MASTER_ID=D.ID JOIN TARIFF_CATEGORY_MASTER T  ON C.TARIFF_CATEGORY_MASTER_ID=T.ID
-JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE C.DIVISION_MASTER_ID=$P{dmaId} AND  TARIFF_CATEGORY_MASTER_ID=$P{categoryId} AND year(col.receipt_dt)=$P{year} AND
-monthName(col.receipt_dt)=$P{month}
-group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
+JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE (C.DIVISION_MASTER_ID=$P{dmaId} or $P{dmaId} is null or $P{dmaId}='')  AND
+(C.TARIFF_CATEGORY_MASTER_ID=$P{categoryId} or $P{categoryId} is null or  $P{categoryId}='') AND
+(year(col.receipt_dt)=$P{year} or $P{year} is null or $P{year}='') AND
+(monthName(col.receipt_dt)=$P{month} or $P{month} is null or $P{month}='')
+group by can,payment,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 	</queryString>
-	<field name="year" class="java.lang.Long"/>
+	<field name="year" class="java.lang.Integer"/>
 	<field name="month" class="java.lang.String"/>
 	<field name="DNAME" class="java.lang.String"/>
 	<field name="CATEGORY" class="java.lang.String"/>
@@ -50,10 +52,6 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 	</background>
 	<title>
 		<band height="65">
-			<image>
-				<reportElement x="0" y="0" width="117" height="63" uuid="bae31c9c-507b-4af2-a1ac-a9354867562f"/>
-				<imageExpression><![CDATA["C:\\Users\\callippus\\Desktop\\watererp.png"]]></imageExpression>
-			</image>
 			<frame>
 				<reportElement mode="Opaque" x="99" y="19" width="531" height="32" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
@@ -61,9 +59,13 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 					<textElement>
 						<font size="16" isBold="true" isUnderline="false"/>
 					</textElement>
-					<text><![CDATA[       MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+					<text><![CDATA[        MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
 				</staticText>
 			</frame>
+			<image>
+				<reportElement x="0" y="2" width="117" height="63" uuid="8f1a8277-116f-41e3-9cd2-efef2e9cf2c8"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -114,11 +116,11 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="22" y="20" width="62" height="14" uuid="6e971766-2ec4-4020-bcf9-7aa4eb77b210"/>
+				<reportElement x="21" y="20" width="62" height="14" uuid="6e971766-2ec4-4020-bcf9-7aa4eb77b210"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{DNAME}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{dmaId} != 0) ? $F{DNAME} : "ALL"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="77" y="17" width="51" height="19" uuid="5a379110-a911-4a68-8122-8fa01da9a196"/>
@@ -135,11 +137,11 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="130" y="20" width="100" height="16" uuid="9d344a84-b039-4fdc-928f-bc74d4c9726d"/>
+				<reportElement x="131" y="20" width="100" height="16" uuid="9d344a84-b039-4fdc-928f-bc74d4c9726d"/>
 				<textElement>
 					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{CATEGORY}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{categoryId} != 0) ? $F{CATEGORY} : "ALL"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="5" y="18" width="27" height="18" uuid="0bb6ef95-1730-4fd2-a1d9-98880a97c2dc"/>
@@ -160,21 +162,21 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CAN]]></text>
+				<text><![CDATA[  CAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="143" y="0" width="169" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3ddfd7aa-e89a-4f7b-987a-1f6fd66aecd2"/>
+				<reportElement mode="Opaque" x="99" y="0" width="213" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3ddfd7aa-e89a-4f7b-987a-1f6fd66aecd2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Name]]></text>
+				<text><![CDATA[Customer Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="312" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c1241e3e-324c-443c-ba2a-ebffd50d12d5"/>
+				<reportElement mode="Opaque" x="272" y="0" width="132" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c1241e3e-324c-443c-ba2a-ebffd50d12d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[     Date]]></text>
+				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="506" y="0" width="87" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f2a2371a-7b59-49ff-82b8-f211b0f806df"/>
@@ -184,7 +186,7 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<text><![CDATA[    Amount]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="404" y="0" width="103" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b8df0848-3094-4254-b27b-1cff7da3a996"/>
+				<reportElement mode="Opaque" x="395" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b8df0848-3094-4254-b27b-1cff7da3a996"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -198,15 +200,15 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="603" height="1" forecolor="#CCCCCC" uuid="e349bb3f-603f-4fa8-a8cb-c1820fba910e"/>
 			</line>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="1" y="0" width="142" height="20" uuid="27370736-5662-46e5-bcbf-f55e2c40486c"/>
+				<reportElement x="1" y="0" width="152" height="20" uuid="27370736-5662-46e5-bcbf-f55e2c40486c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{CAN}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="143" y="0" width="169" height="20" uuid="4701d6a3-f10a-44cc-b162-4c0f127d8adb"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="153" y="0" width="149" height="20" uuid="4701d6a3-f10a-44cc-b162-4c0f127d8adb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cons_name}]]></textFieldExpression>
@@ -219,14 +221,14 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				<textFieldExpression><![CDATA[$F{Amount}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="404" y="0" width="103" height="20" uuid="747c626e-815b-4b06-8740-c83c3b65f67e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="431" y="0" width="84" height="20" uuid="747c626e-815b-4b06-8740-c83c3b65f67e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Payment}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
-				<reportElement x="316" y="1" width="100" height="20" uuid="3a753963-ed84-4317-a55a-2a40b4de8919"/>
+				<reportElement x="276" y="1" width="128" height="20" uuid="3a753963-ed84-4317-a55a-2a40b4de8919"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
@@ -237,14 +239,14 @@ group by can,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 	<columnFooter>
 		<band height="31">
 			<textField pattern="###0.00" isBlankWhenNull="true">
-				<reportElement mode="Opaque" x="502" y="10" width="148" height="20" backcolor="#999999" uuid="a1d757ff-74c4-4026-985e-62a87be9fe85"/>
+				<reportElement mode="Opaque" x="431" y="10" width="268" height="20" backcolor="#999999" uuid="a1d757ff-74c4-4026-985e-62a87be9fe85"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="-22" y="10" width="568" height="20" forecolor="#000000" backcolor="#999999" uuid="d8db0e4c-ebe7-4f29-b23b-c70117ff30ea"/>
+				<reportElement mode="Opaque" x="-22" y="10" width="544" height="20" forecolor="#000000" backcolor="#999999" uuid="d8db0e4c-ebe7-4f29-b23b-c70117ff30ea"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>

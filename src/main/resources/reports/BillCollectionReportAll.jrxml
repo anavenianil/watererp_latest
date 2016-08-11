@@ -46,8 +46,8 @@ group by can]]>
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="2" y="2" width="117" height="63" uuid="051b2cad-d60a-485d-ae53-bce18517b026"/>
-				<imageExpression><![CDATA["images\\watererp.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="119" height="63" uuid="86e11666-41ba-428f-968c-0ebe4eaefbf3"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

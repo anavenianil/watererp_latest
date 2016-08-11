@@ -52,7 +52,7 @@ JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE  TARIFF_CATEGORY_MASTER_ID=$P{categ
 			</frame>
 			<image>
 				<reportElement x="2" y="0" width="117" height="63" uuid="cc224f52-641c-44c8-b247-62d1b547ed7f"/>
-				<imageExpression><![CDATA["images\\watererp.png"]]></imageExpression>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
