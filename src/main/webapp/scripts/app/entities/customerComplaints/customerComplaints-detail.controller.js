@@ -14,8 +14,8 @@ angular
 					$scope.orgRole = {};
 					
 					//$scope.leakageType = "BURST";
-					//$scope.leakageType = "VALVE";
-					$scope.leakageType = "HYDRANT";
+					$scope.leakageType = "VALVE";
+					//$scope.leakageType = "HYDRANT";
 					
 					Principal.getOrgRole().then(function(response) {
 						$scope.orgRole = response;
