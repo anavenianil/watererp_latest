@@ -8,14 +8,17 @@ angular
 						$http, $window, CustomerComplaints, ComplaintTypeMaster,
 						Principal, RequestWorkflowHistory, ParseLinks,
 						ApplicationTxnService, BillFullDetailsSvc, DateUtils,
-						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN) {
+						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN, MaterialMaster, Uom) {
 					// This code is used to get the role name / designation.
 					//$scope.orgRole = Principal.getOrgRole();
 					$scope.orgRole = {};
 					
-					//$scope.leakageType = "BURST";
-					$scope.leakageType = "VALVE";
+					$scope.leakageType = "BURST";
+					//$scope.leakageType = "VALVE";
 					//$scope.leakageType = "HYDRANT";
+					
+					$scope.materialmasters = MaterialMaster.query();
+			        $scope.uoms = Uom.query();
 					
 					Principal.getOrgRole().then(function(response) {
 						$scope.orgRole = response;
@@ -211,4 +214,20 @@ angular
 			            $scope.count = $scope.count -1;
 			            $scope.customerComplaints.itemRequireds.splice(indexId, 1);
 			          };
+			          
+			          $scope.countValve = 0;
+			          //for valve
+			          //$scope.customerComplaints.valveRequests = [];
+			          $scope.createValveArr = function(){
+			        	  	$scope.customerComplaints.valveRequests = [];
+				       		$scope.customerComplaints.valveRequests[$scope.countValve]= {};
+				       		$scope.countValve = $scope.countValve +1;
+				        }
+			          
+			          $scope.removeValveArr = function(indexId) {
+				            $scope.countValve = $scope.countValve -1;
+				            $scope.customerComplaints.valveRequests.splice(indexId, 1);
+				          };
+
+				
 				});

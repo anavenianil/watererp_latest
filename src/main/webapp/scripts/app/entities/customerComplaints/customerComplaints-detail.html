@@ -459,112 +459,136 @@
 					<div ng-if="leakageType==='VALVE'">
 						<fieldset>
 							<legend>Request Type : VALVE</legend>
-							<div class="row">
-								<div class="col-sm-3">
-									<label class="control-label" for="field_closedTime">Closed
-										Time </label> <input type="text" class="form-control"
-										name="closedTime" id="field_closedTime"
-										ng-model="customerComplaints.closedTime" />
+							<fieldset
+								ng-repeat="valve in customerComplaints.valveRequests track by $index">
+								<legend>Valve Details : {{index+1}}</legend>
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="control-label" for="field_closedTime">Closed
+											Time </label> <input type="text" class="form-control input-sm"
+											name="closedTime" id="field_closedTime"
+											ng-model="customerComplaints.closedTime" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_openTime">Open
+											Time </label> <input type="text" class="form-control input-sm"
+											name="openTime" id="field_openTime"
+											ng-model="customerComplaints.openTime" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_colourCode">Colour
+											Code </label> <select class="form-control input-sm"
+											id="field_colourCode" name="colourCode"
+											ng-model="customerComplaints.colourCode">
+											<option value="Red Closed Valve">Red Closed Valve</option>
+											<option value="Yellow Scour Valve">Yellow Scour
+												Valve</option>
+											<option value="Blue Air Valve">Blue Air Valve</option>
+										</select>
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_side">Side </label> <select
+											class="form-control input-sm" id="field_side" name="side"
+											ng-model="customerComplaints.side">
+											<option value="Right Hand">Right Hand</option>
+											<option value="Left Hand">Left Hand</option>
+										</select>
+									</div>
 								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_openTime">Open
-										Time </label> <input type="text" class="form-control" name="openTime"
-										id="field_openTime" ng-model="customerComplaints.openTime" />
+								<br>
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="control-label" for="field_noOfTurns">No.
+											Of Turns </label> <input type="text" class="form-control input-sm"
+											name="noOfTurns" id="field_noOfTurns"
+											ng-model="customerComplaints.noOfTurns" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_valveSize">Valve
+											Size </label> <input type="text" class="form-control input-sm"
+											name="valveSize" id="field_valveSize"
+											ng-model="customerComplaints.valveSize" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_valveNo">Valve
+											No. </label> <input type="text" class="form-control input-sm"
+											name="valveNo" id="field_valveNo"
+											ng-model="customerComplaints.valveNo" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_streetNo">Street
+											No. </label> <input type="text" class="form-control input-sm"
+											name="streetNo" id="field_streetNo"
+											ng-model="customerComplaints.streetNo" />
+									</div>
 								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_colourCode">Colour
-										Code </label> <select class="form-control" id="field_colourCode"
-										name="colourCode" ng-model="customerComplaints.colourCode">
-										<option value="Red Closed Valve">Red Closed Valve</option>
-										<option value="Yellow Scour Valve">Yellow Scour Valve</option>
-										<option value="Blue Air Valve">Blue Air Valve</option>
-									</select>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="control-label" for="field_streetName">Street
+											Name </label> <input type="text" class="form-control input-sm"
+											name="streetName" id="field_streetName"
+											ng-model="customerComplaints.streetName" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_repairCode">Repair
+											Code </label> <select class="form-control input-sm"
+											id="field_repairCode" name="repairCode"
+											ng-model="customerComplaints.repairCode">
+											<option value=""></option>
+											<option value="Repack Gland">Repack Gland</option>
+											<option value="Tighten Gland">Tighten Gland</option>
+											<option value="Replace Spindle">Replace Spindle</option>
+											<option value="Replace Gate">Replace Gate</option>
+											<option value="Replace Valve(RSV)">Replace
+												Valve(RSV)</option>
+											<option value="Close/Open Valve">Close/Open Valve</option>
+											<option value="Inspect Valve">Inspect Valve</option>
+											<option value="Replace Lid">Replace Lid</option>
+											<option value="Replace Gate Valve">Replace Gate
+												Valve</option>
+											<option value="Service P.R.V.">Service P.R.V.</option>
+											<option value="Replace Scour Valve">Replace Scour
+												Valve</option>
+											<option value="Replace Interzone Valve">Replace
+												Interzone Valve</option>
+											<option value="">Other</option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<label class="control-label" for="field_distanceLeft">Distance
+											Left Size </label> <input type="text" class="form-control input-sm"
+											name="distanceLeft" id="field_distanceLeft"
+											ng-model="customerComplaints.distanceLeft" />
+									</div>
+									<div class="col-sm-2">
+										<label class="control-label" for="field_distanceSb">Distance
+											SB </label> <input type="text" class="form-control input-sm"
+											name="distanceSb" id="field_distanceSb"
+											ng-model="customerComplaints.distanceSb" />
+									</div>
+									<div class="col-sm-2">
+										<label class="control-label" for="field_distanceZ">Distance
+											"Z" </label> <input type="text" class="form-control input-sm"
+											name="distanceZ" id="field_distanceZ"
+											ng-model="customerComplaints.distanceZ" />
+									</div>
 								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_side">Side </label> <select
-										class="form-control" id="field_side" name="side"
-										ng-model="customerComplaints.side">
-										<option value="Right Hand">Right Hand</option>
-										<option value="Left Hand">Left Hand</option>
-									</select>
+								<br>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-danger"
+										ng-click="removeValveArr($index)">
+										<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>Remove</span>
+									</button>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-3">
-									<label class="control-label" for="field_valveNo">Valve
-										No. </label> <input type="text" class="form-control" name="valveNo"
-										id="field_valveNo" ng-model="customerComplaints.valveNo" />
-								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_streetNo">Street
-										No. </label> <input type="text" class="form-control" name="streetNo"
-										id="field_streetNo" ng-model="customerComplaints.streetNo" />
-								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_streetName">Street
-										Name </label> <input type="text" class="form-control"
-										name="streetName" id="field_streetName"
-										ng-model="customerComplaints.streetName" />
-								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_repairCode">Repair
-										Code </label> <select class="form-control" id="field_repairCode"
-										name="repairCode" ng-model="customerComplaints.repairCode">
-										<option value=""></option>
-										<option value="Repack Gland">Repack Gland</option>
-										<option value="Tighten Gland">Tighten Gland</option>
-										<option value="Replace Spindle">Replace Spindle</option>
-										<option value="Replace Gate">Replace Gate</option>
-										<option value="Replace Valve(RSV)">Replace Valve(RSV)</option>
-										<option value="Close/Open Valve">Close/Open Valve</option>
-										<option value="Inspect Valve">Inspect Valve</option>
-										<option value="Replace Lid">Replace Lid</option>
-										<option value="Replace Gate Valve">Replace Gate Valve</option>
-										<option value="Service P.R.V.">Service P.R.V.</option>
-										<option value="Replace Scour Valve">Replace Scour
-											Valve</option>
-										<option value="Replace Interzone Valve">Replace
-											Interzone Valve</option>
-										<option value="">Other</option>
-									</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-3">
-									<label class="control-label" for="field_noOfTurns">No.
-										Of Turns </label> <input type="text" class="form-control"
-										name="noOfTurns" id="field_noOfTurns"
-										ng-model="customerComplaints.noOfTurns" />
-								</div>
-								<div class="col-sm-3">
-									<label class="control-label" for="field_valveSize">Valve
-										Size </label> <input type="text" class="form-control" name="valveSize"
-										id="field_valveSize" ng-model="customerComplaints.valveSize" />
-								</div>
-								<!--<div class="col-sm-6">
-									 <fieldset>
-										<legend>Distance From Boundary</legend> -->
-										<div class="col-sm-2">
-											<label class="control-label" for="field_distanceLeft">Distance
-												Left Size </label> <input type="text" class="form-control"
-												name="distanceLeft" id="field_distanceLeft"
-												ng-model="customerComplaints.distanceLeft" />
-										</div>
-										<div class="col-sm-2">
-											<label class="control-label" for="field_distanceSb">Distance
-												SB </label> <input type="text" class="form-control"
-												name="distanceSb" id="field_distanceSb"
-												ng-model="customerComplaints.distanceSb" />
-										</div>
-										<div class="col-sm-2">
-											<label class="control-label" for="field_distanceZ">Distance
-												"Z" </label> <input type="text" class="form-control"
-												name="distanceZ" id="field_distanceZ"
-												ng-model="customerComplaints.distanceZ" />
-										</div>
-									<!-- </fieldset>
-								</div> -->
-							</div>
+								<br>
+								<hr>
+							</fieldset>
+							<button type="button" class="btn btn-primary"
+								ng-click="createValveArr()">
+								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+									Valve Details</span>
+							</button>
 						</fieldset>
 					</div>
 				</div>
