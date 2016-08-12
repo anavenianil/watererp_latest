@@ -8,7 +8,7 @@ angular
 						$http, $window, CustomerComplaints, ComplaintTypeMaster,
 						Principal, RequestWorkflowHistory, ParseLinks,
 						ApplicationTxnService, BillFullDetailsSvc, DateUtils,
-						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN, MaterialMaster, Uom) {
+						BillFullDetailsBillMonths, BillFullDetails, BillRunDetails, TariffCategoryMaster, CustDetailsSearchCAN, MaterialMaster, Uom, DivisionMaster, StreetMaster) {
 					// This code is used to get the role name / designation.
 					//$scope.orgRole = Principal.getOrgRole();
 					$scope.orgRole = {};
