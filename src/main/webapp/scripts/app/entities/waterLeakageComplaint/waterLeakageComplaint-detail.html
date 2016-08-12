@@ -1,0 +1,110 @@
+
+<div>
+    <h2><span>WaterLeakageComplaint</span> {{waterLeakageComplaint.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>LeakageType</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.leakageType}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CoordinateX</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.coordinateX}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CoordinateY</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.coordinateY}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>LeakMagnitude</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.leakMagnitude}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ComplaintDateTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.complaintDateTime | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DaysRequired</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.daysRequired}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>StaffRequired</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.staffRequired}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ComplaintBy</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.complaintBy}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{waterLeakageComplaint.status}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>divisionMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="divisionMaster.detail({id:waterLeakageComplaint.divisionMaster.id})">{{waterLeakageComplaint.divisionMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>streetMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="streetMaster.detail({id:waterLeakageComplaint.streetMaster.id})">{{waterLeakageComplaint.streetMaster.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

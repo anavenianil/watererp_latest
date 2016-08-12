@@ -1,0 +1,82 @@
+<div>
+    <h2>JobCardSiteStatuss</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="jobCardSiteStatus.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new JobCardSiteStatus
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tarPatching"><span>TarPatching</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tarPatchingLength"><span>TarPatchingLength</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tarPatchingBreadth"><span>TarPatchingBreadth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cleanSite"><span>CleanSite</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="backFill"><span>BackFill</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="backFillLength"><span>BackFillLength</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="backFillBreadth"><span>BackFillBreadth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="brickLayer"><span>BrickLayer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="paving"><span>Paving</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pavingLength"><span>PavingLength</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pavingBreadth"><span>PavingBreadth</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="unableToLocate"><span>UnableToLocate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="waterLeakageComplaint.id"><span>waterLeakageComplaint</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="jobCardSiteStatus in jobCardSiteStatuss track by jobCardSiteStatus.id">
+                    <td><a ui-sref="jobCardSiteStatus.detail({id:jobCardSiteStatus.id})">{{jobCardSiteStatus.id}}</a></td>
+                    <td>{{jobCardSiteStatus.tarPatching}}</td>
+                    <td>{{jobCardSiteStatus.tarPatchingLength}}</td>
+                    <td>{{jobCardSiteStatus.tarPatchingBreadth}}</td>
+                    <td>{{jobCardSiteStatus.cleanSite}}</td>
+                    <td>{{jobCardSiteStatus.backFill}}</td>
+                    <td>{{jobCardSiteStatus.backFillLength}}</td>
+                    <td>{{jobCardSiteStatus.backFillBreadth}}</td>
+                    <td>{{jobCardSiteStatus.brickLayer}}</td>
+                    <td>{{jobCardSiteStatus.paving}}</td>
+                    <td>{{jobCardSiteStatus.pavingLength}}</td>
+                    <td>{{jobCardSiteStatus.pavingBreadth}}</td>
+                    <td>{{jobCardSiteStatus.unableToLocate}}</td>
+                    <td>
+                        <a ui-sref="waterLeakageComplaint.detail({id:jobCardSiteStatus.waterLeakageComplaint.id})">{{jobCardSiteStatus.waterLeakageComplaint.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="jobCardSiteStatus.detail({id:jobCardSiteStatus.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="jobCardSiteStatus.edit({id:jobCardSiteStatus.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="jobCardSiteStatus.delete({id:jobCardSiteStatus.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

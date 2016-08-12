@@ -1,0 +1,86 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myJobCardItemRequirementLabel">Create or edit a JobCardItemRequirement</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="jobCardItemRequirement.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                    ng-model="jobCardItemRequirement.quantity"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_replaceLength">ReplaceLength</label>
+            <input type="text" class="form-control" name="replaceLength" id="field_replaceLength"
+                    ng-model="jobCardItemRequirement.replaceLength"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cascadeClamp">CascadeClamp</label>
+            <input type="text" class="form-control" name="cascadeClamp" id="field_cascadeClamp"
+                    ng-model="jobCardItemRequirement.cascadeClamp"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_noOfSection">NoOfSection</label>
+            <input type="number" class="form-control" name="noOfSection" id="field_noOfSection"
+                    ng-model="jobCardItemRequirement.noOfSection"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_noOfClamps">NoOfClamps</label>
+            <input type="number" class="form-control" name="noOfClamps" id="field_noOfClamps"
+                    ng-model="jobCardItemRequirement.noOfClamps"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_type">Type</label>
+            <input type="text" class="form-control" name="type" id="field_type"
+                    ng-model="jobCardItemRequirement.type"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_domainObject">DomainObject</label>
+            <input type="number" class="form-control" name="domainObject" id="field_domainObject"
+                    ng-model="jobCardItemRequirement.domainObject"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_materialMaster">materialMaster</label>
+            <select class="form-control" id="field_materialMaster" name="materialMaster" ng-model="jobCardItemRequirement.materialMaster" ng-options="materialMaster as materialMaster.id for materialMaster in materialmasters track by materialMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_uom">uom</label>
+            <select class="form-control" id="field_uom" name="uom" ng-model="jobCardItemRequirement.uom" ng-options="uom as uom.id for uom in uoms track by uom.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_waterLeakageComplaint">waterLeakageComplaint</label>
+            <select class="form-control" id="field_waterLeakageComplaint" name="waterLeakageComplaint" ng-model="jobCardItemRequirement.waterLeakageComplaint" ng-options="waterLeakageComplaint as waterLeakageComplaint.id for waterLeakageComplaint in waterleakagecomplaints track by waterLeakageComplaint.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

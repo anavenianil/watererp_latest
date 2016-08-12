@@ -1,0 +1,72 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "waterLeakageComplaint",
+            "otherEntityName": "waterLeakageComplaint",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "closedTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "openTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "colourCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "side",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "noOfTurns",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "valveSize",
+            "fieldType": "Float"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "valveNo",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "repairCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "distanceLeft",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "disranceSb",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "distanceZ",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160812104051",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

@@ -1,0 +1,118 @@
+
+<div>
+    <h2><span>ValveComplaint</span> {{valveComplaint.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>ClosedTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.closedTime | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>OpenTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.openTime | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ColourCode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.colourCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Side</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.side}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>NoOfTurns</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.noOfTurns}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ValveSize</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.valveSize}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ValveNo</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.valveNo}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>RepairCode</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.repairCode}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DistanceLeft</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.distanceLeft}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DisranceSb</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.disranceSb}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>DistanceZ</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{valveComplaint.distanceZ}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>waterLeakageComplaint</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="waterLeakageComplaint.detail({id:valveComplaint.waterLeakageComplaint.id})">{{valveComplaint.waterLeakageComplaint.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
