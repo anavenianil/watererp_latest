@@ -26,7 +26,6 @@ public class CPSConstants {
 	public static final String SERVICEUNAVAILABILITY = "Service Unavailibility";
 	
 	public static final String JOBCARD = "JOB CARD";
-	
 	//public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
 	//public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
 	//public static final String CUSTOMERCOMPLAINTSID = "";
