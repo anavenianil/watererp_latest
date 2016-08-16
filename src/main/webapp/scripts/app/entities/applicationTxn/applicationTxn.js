@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/applicationTxns',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_GIS'],
                     pageTitle: 'ApplicationTxns'
                 },
                 views: {
@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/applicationTxn/{id}/{requestTypeId}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_GIS'],
                     pageTitle: 'ApplicationTxn'
                 },
                 views: {
