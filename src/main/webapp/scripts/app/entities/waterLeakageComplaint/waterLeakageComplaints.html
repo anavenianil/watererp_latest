@@ -46,10 +46,10 @@
                     <td>{{waterLeakageComplaint.complaintBy}}</td>
                     <td>{{waterLeakageComplaint.status}}</td>
                     <td>
-                        <a ui-sref="divisionMaster.detail({id:waterLeakageComplaint.divisionMaster.id})">{{waterLeakageComplaint.divisionMaster.id}}</a>
+                        <a ui-sref="divisionMaster.detail({id:waterLeakageComplaint.divisionMaster.id})">{{waterLeakageComplaint.divisionMaster.divisionName}}</a>
                     </td>
                     <td>
-                        <a ui-sref="streetMaster.detail({id:waterLeakageComplaint.streetMaster.id})">{{waterLeakageComplaint.streetMaster.id}}</a>
+                        <a ui-sref="streetMaster.detail({id:waterLeakageComplaint.streetMaster.id})">{{waterLeakageComplaint.streetMaster.streetName}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
@@ -59,7 +59,7 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
-                            <button type="submit"
+                            <!-- <button type="submit"
                                     ui-sref="waterLeakageComplaint.edit({id:waterLeakageComplaint.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -70,7 +70,7 @@
                                     class="btn btn-danger btn-sm">                                    
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
-                            </button>
+                            </button> -->
                         </div>
                     </td>
                 </tr>
