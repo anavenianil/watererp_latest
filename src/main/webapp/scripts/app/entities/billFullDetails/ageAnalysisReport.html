@@ -1,0 +1,59 @@
+<div>
+	<jh-alert></jh-alert>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Age Analysis Report Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<hr>
+				<div class="row">
+					<div class="col-sm-4">
+						<label for="field_divisionMaster">DMA</label> <select
+							class="form-control" id="field_divisionMaster"
+							name="divisionMaster" ng-model="custDetails.divisionMaster"
+							ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
+							required>
+						</select>
+					</div>
+
+					<div class="col-sm-4">
+						<label for="field_tariffCategoryMaster">Connection
+							Category</label> <select class="form-control"
+							id="field_tariffCategoryMaster" name="tariffCategoryMaster"
+							ng-model="custDetails.tariffCategoryMaster"
+							ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
+							required>
+						</select>
+					</div>
+					<div class="col-sm-2">
+					 <a type="button" 
+							href="/api/ageAnalysis/report/{{custDetails.divisionMaster.id}}/{{custDetails.tariffCategoryMaster.id}}"
+							class="pull-right btn btn-warning" ng-if="ageAnalysis.mobile==false"
+							>Download as PDF</a>
+						
+					
+					<!-- <div class="col-sm-2"> -->
+					 <a type="button" 
+							href="/api/ageAnalysisMobile/report/{{custDetails.divisionMaster.id}}/{{custDetails.tariffCategoryMaster.id}}"
+							class="pull-right btn btn-warning" ng-if="ageAnalysis.mobile==true"
+							>Download as PDFs</a>
+
+				<!-- </div> --></div> </div>
+				<div class="row">
+				
+				<div class="col-sm-8">
+				
+				<label class="control-label" for="field_organization"> <input
+							type="checkbox" ng-model="ageAnalysis.mobile"
+							ng-value="true">&nbsp;&nbsp;<span>Get Collection
+								Report Complete Detailed between dates:</span>
+				</div></div>
+				<hr>
+				<!-- <div class="alert alert-danger" ng-show="message!=null">
+					<strong>{{message}}</strong>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>

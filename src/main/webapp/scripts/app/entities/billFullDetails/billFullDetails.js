@@ -203,5 +203,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('ageAnalysisReport', {
+                parent: 'billFullDetails',
+                url: '/ageAnalysisReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'WaterBillDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/billFullDetails/ageAnalysisReport.html',
+                        controller: 'AgeAnalysisReportController'
+                    }
+                },
+                resolve: {
+                }
             });
     });
