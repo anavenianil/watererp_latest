@@ -16,12 +16,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.JobCardDTO;
+import com.callippus.water.erp.domain.MeterChange;
 import com.callippus.water.erp.domain.WaterLeakageComplaint;
 import com.callippus.water.erp.repository.WaterLeakageComplaintRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
@@ -131,4 +134,31 @@ public class WaterLeakageComplaintResource {
         waterLeakageComplaintRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("waterLeakageComplaint", id.toString())).build();
     }
+    
+    
+    
+    @RequestMapping(value = "/waterLeakageComplaints/forwardRequest", 
+    		method = RequestMethod.POST, 
+    		produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<JobCardDTO> approveJobCard(
+			@RequestBody JobCardDTO jobCardDTO) throws URISyntaxException {
+		log.debug("REST request to approve JobCardDTO : {}", jobCardDTO);
+		
+		try {
+			workflowService.setRemarks(jobCardDTO.getRemarks());
+			workflowService.setApprovedDate(jobCardDTO.getApprovedDate());
+			WaterLeakageComplaint waterLeakageComplaint = waterLeakageComplaintRepository.findOne(jobCardDTO.getDomainId());
+			
+
+			workflowService.getUserDetails();
+			waterLeakageComplaintWorkflowService.approvedWaterLeakageComplaints(waterLeakageComplaint);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.created(new URI("/api/waterLeakageComplaints/forwardRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("jobCardDTO", ""))
+				.body(null);
+	}
 }
