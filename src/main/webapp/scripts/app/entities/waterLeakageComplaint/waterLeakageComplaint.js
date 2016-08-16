@@ -21,7 +21,7 @@ angular.module('watererpApp')
             })
             .state('waterLeakageComplaint.detail', {
                 parent: 'entity',
-                url: '/waterLeakageComplaint/{id}',
+                url: '/waterLeakageComplaint/{id}/{requestTypeId}',
                 data: {
                     authorities: ['ROLE_USER', 'ROLE_GIS'],
                     pageTitle: 'WaterLeakageComplaint'
