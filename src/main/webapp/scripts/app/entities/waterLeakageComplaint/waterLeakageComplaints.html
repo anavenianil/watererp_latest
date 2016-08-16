@@ -1,7 +1,7 @@
 <div>
-    <h2>WaterLeakageComplaints</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
+	<h2>Water Leakage Complaints</h2>
+	<jh-alert></jh-alert>
+	<!-- <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="waterLeakageComplaint.new" >
@@ -12,54 +12,76 @@
                 </button>
             </div>
         </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="leakageType"><span>LeakageType</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="coordinateX"><span>CoordinateX</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="coordinateY"><span>CoordinateY</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="leakMagnitude"><span>LeakMagnitude</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="complaintDateTime"><span>ComplaintDateTime</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="daysRequired"><span>DaysRequired</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="staffRequired"><span>StaffRequired</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="complaintBy"><span>ComplaintBy</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="status"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="divisionMaster.id"><span>divisionMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="streetMaster.id"><span>streetMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="waterLeakageComplaint in waterLeakageComplaints track by waterLeakageComplaint.id">
-                    <td><a ui-sref="waterLeakageComplaint.detail({id:waterLeakageComplaint.id})">{{waterLeakageComplaint.id}}</a></td>
-                    <td>{{waterLeakageComplaint.leakageType}}</td>
-                    <td>{{waterLeakageComplaint.coordinateX}}</td>
-                    <td>{{waterLeakageComplaint.coordinateY}}</td>
-                    <td>{{waterLeakageComplaint.leakMagnitude}}</td>
-                    <td>{{waterLeakageComplaint.complaintDateTime | date:'medium'}}</td>
-                    <td>{{waterLeakageComplaint.daysRequired}}</td>
-                    <td>{{waterLeakageComplaint.staffRequired}}</td>
-                    <td>{{waterLeakageComplaint.complaintBy}}</td>
-                    <td>{{waterLeakageComplaint.status}}</td>
-                    <td>
-                        <a ui-sref="divisionMaster.detail({id:waterLeakageComplaint.divisionMaster.id})">{{waterLeakageComplaint.divisionMaster.divisionName}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="streetMaster.detail({id:waterLeakageComplaint.streetMaster.id})">{{waterLeakageComplaint.streetMaster.streetName}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="waterLeakageComplaint.detail({id:waterLeakageComplaint.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <!-- <button type="submit"
+    </div> -->
+	<br />
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Water Leakage Complaints</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="table-responsive">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+								<th jh-sort-by="id"><span>ID</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="leakageType"><span>Leakage Type</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="coordinateX"><span>Coordinate-X</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="coordinateY"><span>Coordinate-Y</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="leakMagnitude"><span>Leak Magnitude</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="complaintDateTime"><span>Complaint Date Time</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="daysRequired"><span>Days Required</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="staffRequired"><span>Staff Required</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="complaintBy"><span>Complaint By</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="status"><span>Status</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="divisionMaster.id"><span>Division</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="streetMaster.id"><span>Street</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody infinite-scroll="loadPage(page + 1)"
+							infinite-scroll-disabled="links['last'] == page">
+							<tr
+								ng-repeat="waterLeakageComplaint in waterLeakageComplaints track by waterLeakageComplaint.id">
+								<td><a
+									ui-sref="waterLeakageComplaint.detail({id:waterLeakageComplaint.id})">{{waterLeakageComplaint.id}}</a></td>
+								<td>{{waterLeakageComplaint.leakageType}}</td>
+								<td>{{waterLeakageComplaint.coordinateX}}</td>
+								<td>{{waterLeakageComplaint.coordinateY}}</td>
+								<td>{{waterLeakageComplaint.leakMagnitude}}</td>
+								<td>{{waterLeakageComplaint.complaintDateTime |
+									date:'medium'}}</td>
+								<td>{{waterLeakageComplaint.daysRequired}}</td>
+								<td>{{waterLeakageComplaint.staffRequired}}</td>
+								<td>{{waterLeakageComplaint.complaintBy}}</td>
+								<td>{{waterLeakageComplaint.status}}</td>
+								<td><a
+									ui-sref="divisionMaster.detail({id:waterLeakageComplaint.divisionMaster.id})">{{waterLeakageComplaint.divisionMaster.divisionName}}</a>
+								</td>
+								<td><a
+									ui-sref="streetMaster.detail({id:waterLeakageComplaint.streetMaster.id})">{{waterLeakageComplaint.streetMaster.streetName}}</a>
+								</td>
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit"
+											ui-sref="waterLeakageComplaint.detail({id:waterLeakageComplaint.id, requestTypeId:12})"
+											class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-eye-open"></span> <span
+												class="hidden-xs hidden-sm"></span>
+										</button>
+										<!-- <button type="submit"
                                     ui-sref="waterLeakageComplaint.edit({id:waterLeakageComplaint.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -71,10 +93,13 @@
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button> -->
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
