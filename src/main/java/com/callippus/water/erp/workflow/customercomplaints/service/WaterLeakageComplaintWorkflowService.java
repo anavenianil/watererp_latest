@@ -97,7 +97,7 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 			}*/
 			//setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
 			//setRequestTypeID(CPSConstants.CUSTOMERCOMPLAINTSID);
-			setRequestType(CPSConstants.WATERLEAKAGE);
+			setRequestType(CPSConstants.JOBCARD);
 
 			setMessage("success");
 

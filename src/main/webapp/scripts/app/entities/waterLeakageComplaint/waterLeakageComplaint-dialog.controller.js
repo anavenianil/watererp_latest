@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller('WaterLeakageComplaintDialogController',
     
-        function($scope, $stateParams, /*entity,*/ WaterLeakageComplaint, DivisionMaster, StreetMaster, JobCardItemRequirement) {
+        function($scope, $stateParams, /*entity,*/ WaterLeakageComplaint, DivisionMaster, StreetMaster, JobCardItemRequirement, ParseLinks) {
 
 		if($stateParams.id!=null){
 			$scope.waterLeakageComplaint = entity;
@@ -13,7 +13,7 @@ angular.module('watererpApp').controller('WaterLeakageComplaintDialogController'
         
         
         $scope.divisionmasters = DivisionMaster.query();
-        $scope.streetmasters = StreetMaster.query();
+        //$scope.streetmasters = StreetMaster.query();
         $scope.jobcarditemrequirements = JobCardItemRequirement.query();
         $scope.load = function(id) {
             WaterLeakageComplaint.get({id : id}, function(result) {
@@ -66,4 +66,16 @@ angular.module('watererpApp').controller('WaterLeakageComplaintDialogController'
         $scope.datePickerForAssignedDateOpen = function($event) {
             $scope.datePickerForAssignedDate.status.opened = true;
         };
+        
+        
+        $scope.getStreet = function(divisionId){
+        	$scope.streetmasters = [];
+            StreetMaster.query({page: $scope.page, size: 20, divisionId: divisionId}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.streetmasters.push(result[i]);
+                }
+            });
+        }
+        
 });

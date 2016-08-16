@@ -37,13 +37,13 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-4 col-sm-offset-2">
-								<label class="control-label" for="field_coordinateX">CoordinateX</label>
+								<label class="control-label" for="field_coordinateX">Coordinate-X</label>
 								<input type="text" class="form-control" name="coordinateX"
 									id="field_coordinateX"
 									ng-model="waterLeakageComplaint.coordinateX" />
 							</div>
 							<div class="col-sm-4">
-								<label class="control-label" for="field_coordinateY">CoordinateY</label>
+								<label class="control-label" for="field_coordinateY">Coordinate-Y</label>
 								<input type="text" class="form-control" name="coordinateY"
 									id="field_coordinateY"
 									ng-model="waterLeakageComplaint.coordinateY" />
@@ -57,7 +57,7 @@
 									name="divisionMaster"
 									ng-change="getStreet(waterLeakageComplaint.divisionMaster.id)"
 									ng-model="waterLeakageComplaint.divisionMaster"
-									ng-options="divisionMaster as divisionMaster.id for divisionMaster in divisionmasters track by divisionMaster.id">
+									ng-options="divisionMaster as divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
 									<option value=""></option>
 								</select>
 							</div>
@@ -66,7 +66,7 @@
 									class="form-control" id="field_streetMaster"
 									name="streetMaster"
 									ng-model="waterLeakageComplaint.streetMaster"
-									ng-options="streetMaster as streetMaster.id for streetMaster in streetmasters track by streetMaster.id">
+									ng-options="streetMaster as streetMaster.streetName for streetMaster in streetmasters track by streetMaster.id">
 									<option value=""></option>
 								</select>
 							</div>

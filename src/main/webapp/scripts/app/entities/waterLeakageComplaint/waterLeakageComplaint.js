@@ -122,7 +122,7 @@ angular.module('watererpApp')
                 parent: 'waterLeakageComplaint',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'WaterLeakageComplaints'
                 },
                 views: {
