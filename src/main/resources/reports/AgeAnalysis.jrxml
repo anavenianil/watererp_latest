@@ -112,7 +112,7 @@ FROM (
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="112" y="20" width="503" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="62" y="22" width="503" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
 					<reportElement x="6" y="0" width="496" height="22" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
@@ -121,10 +121,6 @@ FROM (
 					<text><![CDATA[    MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
 				</staticText>
 			</frame>
-			<image>
-				<reportElement x="1" y="1" width="116" height="64" uuid="b60495bc-2dc6-4e43-92cd-c7a3bd00d7bb"/>
-				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
