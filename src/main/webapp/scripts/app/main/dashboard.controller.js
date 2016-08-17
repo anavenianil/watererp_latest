@@ -25,7 +25,7 @@ angular.module('watererpApp').controller(
 
 			$scope.myLogout = function() {
 				Auth.logout();
-				window.location = '/erpLogin.html';
+				window.location = '/';
 			};
 
 			$scope.getLogin = function() {
