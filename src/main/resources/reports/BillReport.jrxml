@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillReport" language="groovy" pageWidth="560" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="520" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillReport" language="groovy" pageWidth="590" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="550" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -70,7 +70,7 @@ c.tariff_category_master_id=t.id and bfd.can = c.can and
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="72" y="19" width="460" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="94" y="19" width="460" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
 					<reportElement x="2" y="0" width="458" height="21" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
@@ -80,7 +80,7 @@ c.tariff_category_master_id=t.id and bfd.can = c.can and
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="3" y="0" width="97" height="63" uuid="85df1acd-a0a1-4106-905d-c9ebebebb5a3"/>
+				<reportElement x="1" y="1" width="98" height="64" uuid="2e94a604-399c-40a9-804e-86ebf0043d99"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -92,29 +92,29 @@ c.tariff_category_master_id=t.id and bfd.can = c.can and
 				<textField isBlankWhenNull="true">
 					<reportElement x="41" y="31" width="70" height="14" uuid="175a486b-f157-4343-b193-cbe666320add"/>
 					<textElement>
-						<font isBold="true" isUnderline="true"/>
+						<font isBold="false" isUnderline="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($P{divisionName} != '0') ? $P{divisionName} : "ALL"]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
-				<reportElement mode="Transparent" x="116" y="-2" width="237" height="22" backcolor="#ACA899" uuid="1d0f2f47-f120-4014-8c0c-7d5d4fcd5536"/>
+				<reportElement mode="Transparent" x="151" y="-2" width="237" height="22" backcolor="#ACA899" uuid="1d0f2f47-f120-4014-8c0c-7d5d4fcd5536"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="15" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Bill Report]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-11" y="31" width="27" height="14" uuid="8ec0e53c-8bbc-4bb2-8fe8-a3a16c79037e"/>
+				<reportElement x="-11" y="31" width="33" height="14" uuid="8ec0e53c-8bbc-4bb2-8fe8-a3a16c79037e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DMA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="63" y="30" width="51" height="14" uuid="1fb4b16c-c2ad-4138-881c-0de1c968650e"/>
+				<reportElement x="67" y="30" width="51" height="14" uuid="1fb4b16c-c2ad-4138-881c-0de1c968650e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Category]]></text>
 			</staticText>
@@ -126,37 +126,37 @@ c.tariff_category_master_id=t.id and bfd.can = c.can and
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="114" y="29" width="10" height="15" uuid="2d1d1bad-86c1-4fa3-87b4-3c8e9a24760d"/>
+				<reportElement x="116" y="29" width="10" height="15" uuid="2d1d1bad-86c1-4fa3-87b4-3c8e9a24760d"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="120" y="30" width="117" height="14" uuid="42b3edc7-bca3-43d8-8723-a58aa663c214"/>
+				<reportElement x="124" y="30" width="117" height="14" uuid="42b3edc7-bca3-43d8-8723-a58aa663c214"/>
 				<textElement>
-					<font size="11" isBold="true" isUnderline="true"/>
+					<font size="11" isBold="false" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($P{categoryName} !='0') ? $P{categoryName} : "ALL"]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement x="444" y="31" width="49" height="19" uuid="a908d408-9a4a-4627-a97d-39c2b39cd2f5"/>
 				<textElement>
-					<font size="11" isUnderline="true"/>
+					<font size="11" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{year}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="347" y="30" width="100" height="19" uuid="a847b7fd-2378-4bd1-9bc3-2cda60e3baee"/>
 				<textElement>
-					<font size="12" isBold="true" isUnderline="true"/>
+					<font size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[For The Period :]]></text>
 			</staticText>
 			<textField pattern="MMMM" isBlankWhenNull="true">
 				<reportElement x="478" y="31" width="55" height="19" uuid="e0def259-d719-4a45-a99b-0148ed438e5d"/>
 				<textElement>
-					<font size="11" isUnderline="true"/>
+					<font size="11" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{month}]]></textFieldExpression>
 			</textField>
@@ -177,7 +177,7 @@ c.tariff_category_master_id=t.id and bfd.can = c.can and
 			<textField pattern="###0.00" isBlankWhenNull="true">
 				<reportElement x="419" y="61" width="138" height="16" uuid="8bd4ad1f-39d4-4bb8-bc8f-1891da20bc1a"/>
 				<textElement>
-					<font size="12" isBold="true"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{monthlyAmount}!=0) ? $F{monthlyAmount} : " "]]></textFieldExpression>
 			</textField>
@@ -273,7 +273,7 @@ c.tariff_category_master_id=t.id and bfd.can = c.can and
 	<noData>
 		<band height="50">
 			<staticText>
-				<reportElement x="276" y="18" width="134" height="21" uuid="adc53c58-fd8c-4cf2-8ae1-bd89079d6a15"/>
+				<reportElement x="226" y="18" width="134" height="21" uuid="adc53c58-fd8c-4cf2-8ae1-bd89079d6a15"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
