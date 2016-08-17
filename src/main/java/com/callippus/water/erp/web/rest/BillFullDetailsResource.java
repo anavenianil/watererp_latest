@@ -243,6 +243,18 @@ public class BillFullDetailsResource {
 			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
 			params.put("categoryName", tcm.getTariffCategory());
 		}
+		else if(dmaId==0 && categoryId!=0)
+		{
+			params.put("divisionName", 0);
+			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
+			params.put("categoryName", tcm.getTariffCategory());
+		}
+		else if(dmaId!=0 && categoryId==0)
+		{
+			DivisionMaster division = divisionMasterRepository.findOne(dmaId);
+			params.put("divisionName", division.getDivisionName());
+			params.put("categoryName", 0);
+		}
 		else
 		{
 			params.put("divisionName", 0);
@@ -297,7 +309,7 @@ public class BillFullDetailsResource {
     	JasperPrint jasperPrint=null;
     	jasperPrint=reportsRepository.generateReport("/reports/AgeAnalysis-2.jasper", params);
     	response.setContentType("application/x-pdf");
-    	response.setHeader("Content-disposition", "inline; filename=AgeAnalysis.pdf");
+    	response.setHeader("Content-disposition", "inline; filename=AgeAnalysisReport.pdf");
     	final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
     	

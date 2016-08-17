@@ -120,7 +120,7 @@ FROM (
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="112" y="18" width="503" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="112" y="21" width="503" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
 					<reportElement x="6" y="0" width="496" height="22" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
@@ -130,7 +130,7 @@ FROM (
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="0" y="1" width="116" height="64" uuid="4af75f77-7c77-4e18-9798-308e56ca6ef5"/>
+				<reportElement x="1" y="1" width="116" height="64" uuid="8c76a580-4e41-4c06-91a8-dca9880e06ac"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -138,7 +138,7 @@ FROM (
 	<pageHeader>
 		<band height="40">
 			<frame>
-				<reportElement mode="Opaque" x="2" y="0" width="633" height="39" backcolor="#FFFFFF" uuid="3f2069bb-238b-4126-95e3-08bab7070ed7"/>
+				<reportElement mode="Opaque" x="2" y="0" width="708" height="39" backcolor="#FFFFFF" uuid="3f2069bb-238b-4126-95e3-08bab7070ed7"/>
 				<staticText>
 					<reportElement x="235" y="2" width="162" height="19" forecolor="#000000" uuid="79c8bc93-6205-4677-a430-ec7b128843b6"/>
 					<textElement textAlignment="Justified">
@@ -147,14 +147,14 @@ FROM (
 					<text><![CDATA[Age Analysis Report]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="397" y="19" width="82" height="19" uuid="4c00da04-dc52-4ef5-9e89-3d22773834ad"/>
+					<reportElement x="528" y="17" width="82" height="19" uuid="4c00da04-dc52-4ef5-9e89-3d22773834ad"/>
 					<textElement>
 						<font size="12" isBold="true" isUnderline="false"/>
 					</textElement>
 					<text><![CDATA[Report Date :]]></text>
 				</staticText>
 				<textField pattern="dd/MM/yyyy">
-					<reportElement x="474" y="19" width="100" height="16" uuid="1a928112-3d7b-4c8a-b1df-9c158d0c9996"/>
+					<reportElement x="605" y="17" width="100" height="19" uuid="1a928112-3d7b-4c8a-b1df-9c158d0c9996"/>
 					<textElement>
 						<font size="12"/>
 					</textElement>

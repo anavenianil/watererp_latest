@@ -48,11 +48,11 @@
 
 					<div class="col-sm-4">
 					<!-- <div class="form-group" ng-class="{'has-error':editForm.dateOfYear.$invalid &&(editForm.dateOfYear.$dirty || rc.editForm.attempted)}"> -->
-						<label class="control-label" for="dateOfYear">Year</label>
+						<label class="control-label" for="dateOfYear">Date</label>
 						<div class="form-group">
 							<div class='input-group date' id='dateOfYear'>
-							<input id="dateOfYear" type="text" class="form-control" datepicker-mode="'year'"   datepicker-month=hide
-									uib-datepicker-popup='yyyy ' name="dateOfYear"  datepicker-options="{{datepickerOptions}}" data-format="yyyy"
+							<input id="dateOfYear" type="text" class="form-control" datepicker-mode="'year & month'"  
+									uib-datepicker-popup='yyyy-MMMM' name="dateOfYear"  datepicker-options="{{datepickerOptions}}" data-format="yyyy/MMMM"
 									ng-model="collDetails.dateOfYear"   date-disabled="disabled(date, mode)" 
 									is-open="datePickerFordateOfYear.status.opened" required
 									 /> <span
@@ -73,7 +73,7 @@
 					<!-- </div> -->
 
 
-					<div class="col-sm-4">
+					<!-- <div class="col-sm-4">
 						<label class="control-label" for="dateOfMonth">Month</label>
 						<div class="form-group">
 							<div class='input-group date' id='dateOfMonth'>
@@ -91,7 +91,7 @@
 								</span>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
 				

@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CustDetails;
+import com.callippus.water.erp.domain.DivisionMaster;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
@@ -209,6 +210,32 @@ public class CustDetailsResource {
 		Map<String, Object> params = new HashMap<String,Object>();
 		params.put("dmaId", dmaId);
 		params.put("categoryId", categoryId);
+		if(dmaId!=0 && categoryId!=0)
+		{
+			DivisionMaster division = divisionMasterRepository.findOne(dmaId);
+			params.put("divisionName", division.getDivisionName());
+			
+			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
+			params.put("categoryName", tcm.getTariffCategory());
+		}
+		
+		else if(dmaId==0 && categoryId!=0)
+		{
+			params.put("divisionName", 0);
+			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
+			params.put("categoryName", tcm.getTariffCategory());
+		}
+		else if(dmaId!=0 && categoryId==0)
+		{
+			DivisionMaster division = divisionMasterRepository.findOne(dmaId);
+			params.put("divisionName", division.getDivisionName());
+			params.put("categoryName", 0);
+		}
+		else
+		{
+			params.put("divisionName", 0);
+			params.put("categoryName", 0);
+		}
 		JasperPrint jasperPrint = null;
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/DivisionCategory.jasper", params);
