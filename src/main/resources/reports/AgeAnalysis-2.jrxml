@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AgeAnalysis-2" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dmaId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please enter Division Id]]></parameterDescription>
+	</parameter>
+	<parameter name="categoryId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select  can
+	,division_name
+	,tariff_category
+	,cons_name
+          ,mobile_no
+   ,BUCKET_30
+   ,BUCKET_60
+   ,BUCKET_GT_60
+  ,sum(BUCKET_30+BUCKET_60+BUCKET_GT_60)total
+  ,sysdate()from
+(SELECT can
+	,division_name
+	,tariff_category
+	,cons_name
+          ,mobile_no
+	,SUM(ifnull(BUCKET_30, 0)) BUCKET_30
+	,SUM(ifnull(BUCKET_60, 0)) BUCKET_60
+	,SUM(ifnull(BUCKET_GT_60, 0)) BUCKET_GT_60
+	,sysdate()
+FROM (
+	SELECT can
+		,division_name
+		,tariff_category
+		,cons_name
+                     ,mobile_no
+		,due_amount
+		,bill_date
+		,CASE
+			WHEN AGE <= 30
+				THEN DUE_AMOUNT
+			END BUCKET_30
+		,CASE
+			WHEN AGE <= 60
+				AND AGE > 30
+				THEN DUE_AMOUNT
+			END BUCKET_60
+		,CASE
+			WHEN AGE > 60
+				THEN DUE_AMOUNT
+			END BUCKET_GT_60
+	FROM (
+		SELECT c.can
+			,due_amount
+			,bill_date
+			,datediff(now(), date_add(bill_date, interval 15 day)) AGE
+			,d.division_name
+			,t.tariff_category
+			,c.cons_name
+                               ,bfd.mobile_no
+		FROM bill_full_details bfd
+			,bill_run_details brd
+			,cust_details c
+			,division_master d
+			,tariff_category_master t
+		WHERE due_amount > 0
+			AND datediff(now(), date_add(bill_date, interval 15 day)) > 0
+			AND brd.STATUS = 4
+			AND bfd.can = brd.can
+			AND bfd.can = c.can
+			AND bfd.id = brd.bill_full_details_id
+			AND c.division_master_id = d.id
+			AND c.tariff_category_master_id = t.id
+ 	 AND (C.DIVISION_MASTER_ID=$P{dmaId} or $P{dmaId} is null or $P{dmaId}='')
+     AND(C.TARIFF_CATEGORY_MASTER_ID=$P{categoryId} or $P{categoryId} is null or $P{categoryId}='')
+       GROUP BY can
+	,division_name
+	,tariff_category
+	,cons_name
+          ,mobile_no
+    ) A
+	) B
+  GROUP BY can
+	,division_name
+	,tariff_category
+	,cons_name)C
+  GROUP BY can
+	,division_name
+	,tariff_category
+	,cons_name
+  order by total DESC]]>
+	</queryString>
+	<field name="can" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="division_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tariff_category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cons_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mobile_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="BUCKET_30" class="java.math.BigDecimal"/>
+	<field name="BUCKET_60" class="java.math.BigDecimal"/>
+	<field name="BUCKET_GT_60" class="java.math.BigDecimal"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="sysdate()" class="java.sql.Timestamp"/>
+	<variable name="sysdate()_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{sysdate()}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="65">
+			<frame>
+				<reportElement mode="Opaque" x="112" y="21" width="503" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<staticText>
+					<reportElement x="6" y="0" width="496" height="22" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
+					<textElement>
+						<font size="16" isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[    MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+				</staticText>
+			</frame>
+			<image>
+				<reportElement x="1" y="1" width="116" height="64" uuid="8c76a580-4e41-4c06-91a8-dca9880e06ac"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="708" height="39" backcolor="#FFFFFF" uuid="3f2069bb-238b-4126-95e3-08bab7070ed7"/>
+				<staticText>
+					<reportElement x="235" y="2" width="162" height="19" forecolor="#000000" uuid="79c8bc93-6205-4677-a430-ec7b128843b6"/>
+					<textElement textAlignment="Justified">
+						<font size="14" isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Age Analysis Report]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="528" y="17" width="82" height="19" uuid="4c00da04-dc52-4ef5-9e89-3d22773834ad"/>
+					<textElement>
+						<font size="12" isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Report Date :]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="605" y="17" width="100" height="19" uuid="1a928112-3d7b-4c8a-b1df-9c158d0c9996"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sysdate()}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="135" y="20" width="86" height="14" uuid="357c022f-cfc5-44fd-b345-90164115f75e"/>
+				<textElement>
+					<font size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{categoryId} != 0) ? $F{tariff_category} : "ALL"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="20" width="80" height="14" uuid="153a2adb-a616-4998-b45d-860ba706d990"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{dmaId} != 0) ? $F{division_name} : "ALL"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="78" y="20" width="51" height="14" uuid="3125b0ce-d0e4-4ef1-aee9-0c54c98bd714"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="21" width="27" height="14" uuid="db77d241-ef6f-479d-b284-8ff75e60068c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="20" width="10" height="20" uuid="5c262c45-e437-41ee-9b18-bbc959c15718"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="19" width="10" height="15" uuid="a3b82b00-a023-4e2c-82a1-b770aee73000"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22">
+			<line>
+				<reportElement x="0" y="20" width="710" height="1" forecolor="#666666" uuid="0874844b-4237-4816-a9a2-fff075747f0d"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="78" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="83cd4217-66b6-47ae-9b62-1be03c4b8cf1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="57" y="0" width="169" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3ddfd7aa-e89a-4f7b-987a-1f6fd66aecd2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Consumer Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="317" y="0" width="100" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f1fb14c2-a53f-4d6e-a60b-9f1e6c391700"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[           30 Days]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="512" y="0" width="114" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f2a2371a-7b59-49ff-82b8-f211b0f806df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    Gt 60 days]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="417" y="0" width="96" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b8df0848-3094-4254-b27b-1cff7da3a996"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[        60 Days]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="624" y="0" width="86" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e2d7f206-4cf7-487c-9940-3d47bd764fdc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="222" y="0" width="140" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="dcb5afd3-c57a-47b1-a0d2-f246b4ef2b44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mobile Number]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="23" width="710" height="1" forecolor="#CCCCCC" uuid="e349bb3f-603f-4fa8-a8cb-c1820fba910e"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="1" y="0" width="77" height="20" uuid="27370736-5662-46e5-bcbf-f55e2c40486c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{can}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="492" y="0" width="111" height="20" uuid="1d122e97-939d-4e9f-858c-c771c8860a7f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUCKET_GT_60}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="317" y="3" width="100" height="17" uuid="512b8c56-f80d-43f3-ab18-eaac36afdfba"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUCKET_30}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="399" y="0" width="113" height="20" uuid="4a65782d-3686-4ca8-945b-5787a5a20ad5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BUCKET_60}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="91" y="3" width="177" height="17" uuid="3f7c4e5e-e212-4e3f-a089-3e1548f9f5cc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cons_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="624" y="3" width="71" height="17" uuid="741046e3-7a5b-44ae-a25a-9b4d1872b292"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="257" y="3" width="77" height="17" uuid="7d99bb2f-1b60-4d3b-852d-e544110e222f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mobile_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18">
+			<textField>
+				<reportElement mode="Opaque" x="-25" y="4" width="569" height="13" backcolor="#E6E6E6" uuid="081da64b-5126-4af6-8f5b-16a1f05cd4a5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="544" y="4" width="146" height="13" backcolor="#E6E6E6" uuid="d5a81e25-0298-4b78-bf59-04347ee530b9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="1" y="4" width="99" height="13" uuid="63774cdc-08d5-48c8-853f-79fe9529be2b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="276" y="18" width="134" height="21" uuid="adc53c58-fd8c-4cf2-8ae1-bd89079d6a15"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sorry No Data Found]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

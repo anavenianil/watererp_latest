@@ -84,19 +84,7 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 		String message = "";
 		try {
 
-			/*String complainType = waterLeakageComplaint.getComplaintTypeMaster().getComplaintType();
-			if(CPSConstants.INCORRECTBILL.equalsIgnoreCase(complainType)){
-				setRequestType(CPSConstants.INCORRECTBILL);
-			}
-			else
-			if(CPSConstants.WATERLEAKAGE.equalsIgnoreCase(complainType)){
-					setRequestType(CPSConstants.WATERLEAKAGE);
-			}
-			else if(CPSConstants.SERVICEUNAVAILABILITY.equalsIgnoreCase(complainType)){
-					setRequestType(CPSConstants.SERVICEUNAVAILABILITY);
-			}*/
-			//setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
-			//setRequestTypeID(CPSConstants.CUSTOMERCOMPLAINTSID);
+			
 			setRequestType(CPSConstants.JOBCARD);
 
 			setMessage("success");
@@ -161,14 +149,14 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 	 **/
 
 	@SuppressWarnings("unchecked")
-	public String approvedCustomerComplaintsRequest(CustomerComplaints customerComplaints)
+	public String approvedWaterLeakageComplaints(WaterLeakageComplaint waterLeakageComplaint)
 			throws Exception {
 		String message = null;
 		List<RequestWorkflowHistory> l = null;
 		try {
 			Query query = entityManager.createQuery(
 					"from RequestWorkflowHistory r where domainObject="
-							+ customerComplaints.getId(),
+							+ waterLeakageComplaint.getId(),
 					RequestWorkflowHistory.class);
 
 			l = query.getResultList();
@@ -177,17 +165,8 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 			workflowService.setDomain_object_id(l.get(i).getDomainObject()
 					.toString());
 			
-			String complainType = customerComplaints.getComplaintTypeMaster().getComplaintType();
-			if(CPSConstants.INCORRECTBILL.equalsIgnoreCase(complainType)){
-				workflowService.setRequestType(CPSConstants.INCORRECTBILL);
-			}else
-			if(CPSConstants.WATERLEAKAGE.equalsIgnoreCase(complainType)){
-				workflowService.setRequestType(CPSConstants.WATERLEAKAGE);
-			}else
-			if(CPSConstants.SERVICEUNAVAILABILITY.equalsIgnoreCase(complainType)){
-				workflowService.setRequestType(CPSConstants.SERVICEUNAVAILABILITY);
-			}
-			//workflowService.setRequestType(CPSConstants.CUSTOMERCOMPLAINTS);
+			workflowService.setRequestType(CPSConstants.JOBCARD);
+			
 			workflowService.getHistoryID();
 			workflowService.setStageID(l.get(i).getRequestStage().toString());
 			workflowService.setStatus(Integer.parseInt(l.get(i)

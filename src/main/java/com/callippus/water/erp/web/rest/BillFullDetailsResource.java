@@ -220,6 +220,7 @@ public class BillFullDetailsResource {
 	 /**
      * Get By Category PDF4
      * @throws ParseException 
+     * Collection Bill Report
      */
     @RequestMapping(value = "/BillFullDetailss/reports/{dmaId}/{categoryId}/{year}/{month}", method = RequestMethod.GET)
 	@ResponseBody
@@ -242,6 +243,18 @@ public class BillFullDetailsResource {
 			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
 			params.put("categoryName", tcm.getTariffCategory());
 		}
+		else if(dmaId==0 && categoryId!=0)
+		{
+			params.put("divisionName", 0);
+			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
+			params.put("categoryName", tcm.getTariffCategory());
+		}
+		else if(dmaId!=0 && categoryId==0)
+		{
+			DivisionMaster division = divisionMasterRepository.findOne(dmaId);
+			params.put("divisionName", division.getDivisionName());
+			params.put("categoryName", 0);
+		}
 		else
 		{
 			params.put("divisionName", 0);
@@ -259,6 +272,49 @@ public class BillFullDetailsResource {
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	} 
     
+    /**
+     * Age Analysis Report
+     */
+    @RequestMapping(value="ageAnalysis/report/{dmaId}/{categoryId}",  method = RequestMethod.GET)
+    @ResponseBody
+    public void getAgeAnalysisReport(HttpServletResponse response , @PathVariable Long dmaId, @PathVariable Long categoryId)throws JRException,
+    IOException,ParseException
+    {
+    	Map<String,Object> params=new HashMap <String,Object>();
+    	params.put("dmaId", dmaId);
+    	params.put("categoryId", categoryId);
+    	JasperPrint jasperPrint=null;
+    	jasperPrint=reportsRepository.generateReport("/reports/AgeAnalysis.jasper", params);
+    	response.setContentType("application/x-pdf");
+    	response.setHeader("Content-disposition", "inline; filename=AgeAnalysis.pdf");
+    	final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+    	
+    }
     
+    
+    
+    
+    /**
+     * Age Analysis Report2
+     */
+    @RequestMapping(value="ageAnalysisMobile/report/{dmaId}/{categoryId}",  method = RequestMethod.GET)
+    @ResponseBody
+    public void getAgeAnalysisReport2(HttpServletResponse response , @PathVariable Long dmaId, @PathVariable Long categoryId)throws JRException,
+    IOException,ParseException
+    {
+    	Map<String,Object> params=new HashMap <String,Object>();
+    	params.put("dmaId", dmaId);
+    	params.put("categoryId", categoryId);
+    	JasperPrint jasperPrint=null;
+    	jasperPrint=reportsRepository.generateReport("/reports/AgeAnalysis-2.jasper", params);
+    	response.setContentType("application/x-pdf");
+    	response.setHeader("Content-disposition", "inline; filename=AgeAnalysisReport.pdf");
+    	final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+    	
+    }
     
 }
+    
+

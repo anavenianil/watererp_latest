@@ -55,13 +55,18 @@ angular.module('watererpApp')
 	
 		
         $scope.getReport = function () {
-     	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.collDetails.dateOfYear != null && $scope.collDetails.dateOfMonth!= null ){
+        /*	var dateFormat = 'yyyy';
+            var dateFormat1 = 'MMMM';
+            var dateOfYear = $filter('date')($scope.collDetails.dateOfYear, dateFormat);
+            var dateOfMonth = $filter('date')($scope.collDetails.dateOfYear, dateFormat1);*/
+            
+     	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.collDetails.dateOfYear != null ){
      	var divisionId = $scope.custDetails.divisionMaster.id;
      	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
          var dateFormat = 'yyyy';
          var dateFormat1 = 'MMMM';
          var dateOfYear = $filter('date')($scope.collDetails.dateOfYear, dateFormat);
-         var dateOfMonth = $filter('date')($scope.collDetails.dateOfMonth, dateFormat1);
+         var dateOfMonth = $filter('date')($scope.collDetails.dateOfYear, dateFormat1);
 
          var formatDate =  function (dateToFormat) {
              if (dateToFormat !== undefined && !angular.isString(dateToFormat)) {
@@ -108,13 +113,13 @@ angular.module('watererpApp')
         
         
            $scope.getReportDetails = function () {
-        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.collDetails.dateOfYear != null && $scope.collDetails.dateOfMonth!= null ){
+        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.collDetails.dateOfYear != null  ){
         	var divisionId = $scope.custDetails.divisionMaster.id;
         	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
             var dateFormat = 'yyyy';
             var dateFormat1 = 'MMMM';
             var dateOfYear = $filter('date')($scope.collDetails.dateOfYear, dateFormat);
-            var dateOfMonth = $filter('date')($scope.collDetails.dateOfMonth, dateFormat1);
+            var dateOfMonth = $filter('date')($scope.collDetails.dateOfYear, dateFormat1);
             var formatDate =  function (dateToFormat) {
                 if (dateToFormat !== undefined && !angular.isString(dateToFormat)) {
                     return dateToFormat.getYear() + '-' + dateToFormat.getMonth() + '-' + dateToFormat.getDay();
