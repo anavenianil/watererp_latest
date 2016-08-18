@@ -5,7 +5,7 @@ echo "Running script from PWD:" `pwd`
 ##### Unit Testing ##############
 #grunt test
 
-sudo mvn clean initialize
+sudo /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn clean initialize
 
 message=$(grep git.commit.message.full target/classes/config/git.properties | sed -n -e "s/.*=//p")
 
