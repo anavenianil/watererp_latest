@@ -10,7 +10,7 @@ public class CPSConstants {
 	public static final Integer METERCHANGED = 2;
 	
 	public static final BigDecimal ZERO = new BigDecimal("0.00");
-	
+	 
 	//customer info Change case
 	public static final String CONNECTIONCATEGORY = "Connection Category";
 	public static final String PIPESIZE = "Pipe Size";
