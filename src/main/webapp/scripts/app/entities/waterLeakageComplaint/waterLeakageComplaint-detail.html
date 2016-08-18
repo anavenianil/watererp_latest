@@ -30,7 +30,6 @@
 							<td>{{item.remarks}}</td>
 							<td>{{item.ipAddress}}</td>
 							<td>{{item.statusMaster.status}}</td>
-
 						</tr>
 					</tbody>
 				</table>
@@ -104,7 +103,7 @@
 						<br>
 					</fieldset>
 					<hr>
-					<div>
+					<div ng-if="waterLeakageComplaint.status === 'FORWARDED'">
 						<div ng-if="waterLeakageComplaint.leakageType ==='BURST'">
 							<fieldset>
 								<legend>Leakage Type : BURST</legend>
@@ -506,11 +505,12 @@
 								</button>
 							</fieldset>
 						</div>
+						<hr>
 					</div>
 
 
 
-					<hr>
+					
 					<fieldset>
 						<legend>Approval Details</legend>
 						<div class="row">

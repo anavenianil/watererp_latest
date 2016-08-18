@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.callippus.water.erp.domain.DesignationMaster;
+import com.callippus.water.erp.domain.OrgRoleInstance;
 import com.callippus.water.erp.repository.DesignationMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -113,4 +114,22 @@ public class DesignationMasterResource {
         designationMasterRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("designationMaster", id.toString())).build();
     }
+    
+    /**
+     * Get All DesignationMaster
+     */
+    @RequestMapping(value = "/designationMasters/getAll",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<DesignationMaster>> getAllDesignationMaster()
+			throws Exception {
+    	log.debug("REST request to getAllOrgRoleInstances : {}");
+    	
+    	List<DesignationMaster> designationMasters = designationMasterRepository.findAllByOrderByNameAsc();
+    
+    	return Optional.ofNullable(designationMasters)
+				.map(result -> new ResponseEntity<>(designationMasters, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }
