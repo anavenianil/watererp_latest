@@ -56,11 +56,13 @@ public class WaterLeakageComplaintResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<WaterLeakageComplaint> createWaterLeakageComplaint(@RequestBody WaterLeakageComplaint waterLeakageComplaint) throws URISyntaxException, Exception {
         log.debug("REST request to save WaterLeakageComplaint : {}", waterLeakageComplaint);
         if (waterLeakageComplaint.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("waterLeakageComplaint", "idexists", "A new waterLeakageComplaint cannot already have an ID")).body(null);
         }
+        waterLeakageComplaint.setStatus("PENDING");
         WaterLeakageComplaint result = waterLeakageComplaintRepository.save(waterLeakageComplaint);
         
         workflowService.getUserDetails();
@@ -150,6 +152,10 @@ public class WaterLeakageComplaintResource {
 			workflowService.setRemarks(jobCardDTO.getRemarks());
 			workflowService.setApprovedDate(jobCardDTO.getApprovedDate());
 			WaterLeakageComplaint waterLeakageComplaint = waterLeakageComplaintRepository.findOne(jobCardDTO.getDomainId());
+			if("PENDING".equals(waterLeakageComplaint.getStatus())){
+				waterLeakageComplaint.setStatus("FORWARDED");
+				waterLeakageComplaintRepository.save(waterLeakageComplaint);
+			}
 			
 
 			workflowService.getUserDetails();

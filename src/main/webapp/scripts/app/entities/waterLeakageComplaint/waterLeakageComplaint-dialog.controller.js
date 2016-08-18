@@ -26,6 +26,8 @@ angular.module('watererpApp').controller('WaterLeakageComplaintDialogController'
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:waterLeakageComplaintUpdate', result);
             //$uibModalInstance.close(result);
+            $scope.waterLeakageComplaintId = result.id;
+            $('#saveSuccessfullyModal').modal('show');
             $scope.isSaving = false;
         };
 
@@ -43,8 +45,11 @@ angular.module('watererpApp').controller('WaterLeakageComplaintDialogController'
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
+        	$scope.waterLeakageComplaint ={};
         };
+        
+        
         $scope.datePickerForComplaintDateTime = {};
 
         $scope.datePickerForComplaintDateTime.status = {

@@ -133,4 +133,28 @@
 			</div>
 		</div>
 	</form>
+	<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="confirmForm">
+					<div class="modal-body">
+						<p>
+						<h3>Request Submitted Successfully!</h3>
+						</p>
+						<div>
+							<h4>
+								<label>Complaint No.:&nbsp;&nbsp; </label>{{waterLeakageComplaintId}}
+							</h4>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
