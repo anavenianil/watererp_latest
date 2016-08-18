@@ -18,8 +18,17 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
 					});
 		}
         $scope.getOrgRoleInstance();
-       
-        	$scope.getStatusMaster = function() {
+        
+        
+        $scope.getDesignationMaster = function() {
+        	$scope.designationmasters = [];
+			return $http.get('/api/designationMasters/getAll').then(function(response) {
+						$scope.designationmasters = response.data;
+					});
+		}
+        $scope.getDesignationMaster();
+        
+        $scope.getStatusMaster = function() {
         	$scope.statusmasters = [];
             StatusMaster.query({page: $scope.page, size: 20, description1:'GENERAL' , description2:'EMPLOYEE STATUS'}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
