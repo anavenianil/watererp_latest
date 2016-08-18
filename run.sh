@@ -70,7 +70,7 @@ if [ -n "$a" ]; then
 fi
 
 export BUILD_ID=dontKillMe
-sudo nohup mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
+sudo nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
 #sleep 60
 #npm install
 #sudo grunt protractor-xvfb
