@@ -77,21 +77,6 @@
 									date:'medium'}}</h5>
 							</div>
 							<div class="col-sm-3">
-								<label>Days Required</label>
-								<h5 class="list-group-item-heading">{{waterLeakageComplaint.daysRequired}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Staff Required</label>
-								<h5 class="list-group-item-heading">{{waterLeakageComplaint.staffRequired}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Complaint By</label>
-								<h5 class="list-group-item-heading">{{waterLeakageComplaint.complaintBy}}</h5>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">
 								<label>Division Name</label>
 								<h5 class="list-group-item-heading">{{waterLeakageComplaint.divisionMaster.divisionName}}</h5>
 							</div>
@@ -99,11 +84,26 @@
 								<label>Street Name</label>
 								<h5 class="list-group-item-heading">{{waterLeakageComplaint.streetMaster.streetName}}</h5>
 							</div>
+
+							<div class="col-sm-3">
+								<label>Complaint By</label>
+								<h5 class="list-group-item-heading">{{waterLeakageComplaint.complaintBy}}</h5>
+							</div>
 						</div>
+						<!-- <div class="row">
+							<div class="col-sm-3">
+								<label>Days Required</label>
+								<h5 class="list-group-item-heading">{{waterLeakageComplaint.daysRequired}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Staff Required</label>
+								<h5 class="list-group-item-heading">{{waterLeakageComplaint.staffRequired}}</h5>
+							</div>
+						</div> -->
 						<br>
 					</fieldset>
 					<hr>
-					<div ng-if="waterLeakageComplaint.status === 'FORWARDED'">
+					<div ng-if="orgRole.id===15">
 						<div ng-if="waterLeakageComplaint.leakageType ==='BURST'">
 							<fieldset>
 								<legend>Leakage Type : BURST</legend>
@@ -163,17 +163,19 @@
 									</div>
 									<div class="col-sm-3">
 										<label class="control-label" for="field_pipeType">Pipe
-											Type1 </label> <select class="form-control" id="field_pipeType"
-											name="pipeType" ng-change="getPipe(jobCardDTO.burstComplaint.pipeType.id)"
+											Type </label> <select class="form-control" id="field_pipeType"
+											name="pipeType"
+											ng-change="getPipe()"
 											ng-model="jobCardDTO.burstComplaint.pipeType"
-											ng-options="pipe as pipe.pipeName for pipe in pipeTypes track by pipe.id">
+											ng-options="pipe.pipeName as pipe.pipeName for pipe in pipeTypes track by pipe.pipeName">
 											<option value=""></option>
 										</select>
 									</div>
 									<div class="col-sm-2">
 										<label class="control-label" for="field_pipeType">Pipe
-											Size1 </label> <select class="form-control" id="field_pipeSize"
-											name="pipeSize" ng-change="assignPipe(jobCardDTO.burstComplaint.pipeSize1.size)"
+											Size </label> <select class="form-control" id="field_pipeSize"
+											name="pipeSize"
+											ng-change="assignPipe(jobCardDTO.burstComplaint.pipeSize1.size)"
 											ng-model="jobCardDTO.burstComplaint.pipeSize1"
 											ng-options="pipeSize as pipeSize.size for pipeSize in pipeSizes track by pipeSize.size">
 											<option value=""></option>
@@ -192,13 +194,13 @@
 										<label class="control-label" for="field_daysRequired">Days
 											Required</label> <input type="text" class="form-control"
 											name="daysRequired" id="field_daysRequired"
-											ng-model="jobCardDTO.burstComplaint.daysRequired" />
+											ng-model="jobCardDTO.waterLeakageComplaint.daysRequired" />
 									</div>
 									<div class="col-sm-3">
 										<label class="control-label" for="field_staffRequired">Staff
 											Required</label> <input type="text" class="form-control"
 											name="staffRequired" id="field_staffRequired"
-											ng-model="jobCardDTO.burstComplaint.staffRequired" />
+											ng-model="jobCardDTO.waterLeakageComplaint.staffRequired" />
 									</div>
 								</div>
 							</fieldset>
@@ -266,7 +268,7 @@
 								</div>
 								<hr>
 								<fieldset
-									ng-repeat="item in jobCardDTO.burstComplaint.itemRequireds track by $index">
+									ng-repeat="item in jobCardDTO.jobCardItemRequirements">
 									<div class="row">
 										<div class="col-sm-3">
 											<select class="form-control" id="field_materialMaster"
@@ -304,213 +306,8 @@
 						</div>
 
 						<!-- if request is hydrant -->
-						<div ng-if="waterLeakageComplaint.leakageType ==='HYDRANT'">
-							<fieldset>
-								<legend>Leakage Type: Hydrant</legend>
-								<div class="row">
-									<div class="col-sm-3">
-										<label class="control-label" for="field_fromLeft">From
-											Left </label> <input type="text" class="form-control" name="fromLeft"
-											id="field_fromLeft" ng-model="customerComplaints.fromLeft" />
-									</div>
-									<div class="col-sm-3">
-										<label class="control-label" for="field_fromsb">From
-											SB </label> <input type="text" class="form-control" name="fromsb"
-											id="field_fromsb" ng-model="customerComplaints.fromsb" />
-									</div>
-									<div class="col-sm-3">
-										<label class="control-label" for="field_problemAt">Problem
-											At </label> <select class="form-control" id="field_problemAt"
-											name="problemAt" ng-model="customerComplaints.problemAt">
-											<option value="ABOVE GROUND">ABOVE GROUND</option>
-											<option value="BELOW GROUND">BELOW GROUND</option>
-										</select>
-									</div>
-									<div class="col-sm-3">
-										<label class="control-label" for="field_activityType">Activity
-											Type </label> <select class="form-control" id="field_activityType"
-											name="activityType"
-											ng-model="customerComplaints.activityType">
-											<option value=""></option>
-											<option value="Repack Gland">Repack Gland</option>
-											<option value="Tighten Gland">Tighten Gland</option>
-											<option value="Reolace Hydrant">Reolace Hydrant</option>
-											<option value="Rewasher Flat Washer">Rewasher Flat
-												Washer</option>
-											<option value="Replace Head">Replace Head</option>
-											<option value="Replace Lid">Replace Lid</option>
-											<option value="Closing Of Hydrant">Closing Of
-												Hydrant</option>
-											<option value="">Other</option>
-										</select>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-3">
-										<label class="control-label" for="field_pressure">Pressure
-										</label> <input type="text" class="form-control" name="pressure"
-											id="field_pressure" ng-model="customerComplaints.pressure" />
-									</div>
-									<div class="col-sm-3">
-										<label class="control-label" for="field_pressureTime">Pressure
-											Time </label> <input type="text" class="form-control"
-											name="pressureTime" id="field_pressureTime"
-											ng-model="customerComplaints.pressureTime" />
-									</div>
-									<div class="col-sm-3">
-										<label class="control-label" for="field_flow">Flow </label> <input
-											type="text" class="form-control" name="flow" id="field_flow"
-											ng-model="customerComplaints.flow" />
-									</div>
-									<div class="col-sm-3">
-										<label class="control-label" for="field_flowTime">Pressure
-											Time </label> <input type="text" class="form-control" name="flowTime"
-											id="field_flowTime" ng-model="customerComplaints.flowTime" />
-									</div>
-								</div>
-							</fieldset>
-						</div>
-						<div ng-if="waterLeakageComplaint.leakageType ==='VALVE'">
-							<fieldset>
-								<legend>Request Type : VALVE</legend>
-								<fieldset
-									ng-repeat="valve in customerComplaints.valveRequests track by $index">
-									<legend>Valve Details : {{index+1}}</legend>
-									<div class="row">
-										<div class="col-sm-3">
-											<label class="control-label" for="field_closedTime">Closed
-												Time </label> <input type="text" class="form-control input-sm"
-												name="closedTime" id="field_closedTime"
-												ng-model="customerComplaints.closedTime" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_openTime">Open
-												Time </label> <input type="text" class="form-control input-sm"
-												name="openTime" id="field_openTime"
-												ng-model="customerComplaints.openTime" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_colourCode">Colour
-												Code </label> <select class="form-control input-sm"
-												id="field_colourCode" name="colourCode"
-												ng-model="customerComplaints.colourCode">
-												<option value="Red Closed Valve">Red Closed Valve</option>
-												<option value="Yellow Scour Valve">Yellow Scour
-													Valve</option>
-												<option value="Blue Air Valve">Blue Air Valve</option>
-											</select>
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_side">Side </label> <select
-												class="form-control input-sm" id="field_side" name="side"
-												ng-model="customerComplaints.side">
-												<option value="Right Hand">Right Hand</option>
-												<option value="Left Hand">Left Hand</option>
-											</select>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-sm-3">
-											<label class="control-label" for="field_noOfTurns">No.
-												Of Turns </label> <input type="text" class="form-control input-sm"
-												name="noOfTurns" id="field_noOfTurns"
-												ng-model="customerComplaints.noOfTurns" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_valveSize">Valve
-												Size </label> <input type="text" class="form-control input-sm"
-												name="valveSize" id="field_valveSize"
-												ng-model="customerComplaints.valveSize" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_valveNo">Valve
-												No. </label> <input type="text" class="form-control input-sm"
-												name="valveNo" id="field_valveNo"
-												ng-model="customerComplaints.valveNo" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_streetNo">Street
-												No. </label> <input type="text" class="form-control input-sm"
-												name="streetNo" id="field_streetNo"
-												ng-model="customerComplaints.streetNo" />
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-sm-3">
-											<label class="control-label" for="field_streetName">Street
-												Name </label> <input type="text" class="form-control input-sm"
-												name="streetName" id="field_streetName"
-												ng-model="customerComplaints.streetName" />
-										</div>
-										<div class="col-sm-3">
-											<label class="control-label" for="field_repairCode">Repair
-												Code </label> <select class="form-control input-sm"
-												id="field_repairCode" name="repairCode"
-												ng-model="customerComplaints.repairCode">
-												<option value=""></option>
-												<option value="Repack Gland">Repack Gland</option>
-												<option value="Tighten Gland">Tighten Gland</option>
-												<option value="Replace Spindle">Replace Spindle</option>
-												<option value="Replace Gate">Replace Gate</option>
-												<option value="Replace Valve(RSV)">Replace
-													Valve(RSV)</option>
-												<option value="Close/Open Valve">Close/Open Valve</option>
-												<option value="Inspect Valve">Inspect Valve</option>
-												<option value="Replace Lid">Replace Lid</option>
-												<option value="Replace Gate Valve">Replace Gate
-													Valve</option>
-												<option value="Service P.R.V.">Service P.R.V.</option>
-												<option value="Replace Scour Valve">Replace Scour
-													Valve</option>
-												<option value="Replace Interzone Valve">Replace
-													Interzone Valve</option>
-												<option value="">Other</option>
-											</select>
-										</div>
-										<div class="col-sm-2">
-											<label class="control-label" for="field_distanceLeft">Distance
-												Left Size </label> <input type="text" class="form-control input-sm"
-												name="distanceLeft" id="field_distanceLeft"
-												ng-model="customerComplaints.distanceLeft" />
-										</div>
-										<div class="col-sm-2">
-											<label class="control-label" for="field_distanceSb">Distance
-												SB </label> <input type="text" class="form-control input-sm"
-												name="distanceSb" id="field_distanceSb"
-												ng-model="customerComplaints.distanceSb" />
-										</div>
-										<div class="col-sm-2">
-											<label class="control-label" for="field_distanceZ">Distance
-												"Z" </label> <input type="text" class="form-control input-sm"
-												name="distanceZ" id="field_distanceZ"
-												ng-model="customerComplaints.distanceZ" />
-										</div>
-									</div>
-									<br>
-									<div class="col-sm-1">
-										<button type="button" class="btn btn-danger"
-											ng-click="removeValveArr($index)">
-											<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>Remove</span>
-										</button>
-									</div>
-									<br>
-									<hr>
-								</fieldset>
-								<button type="button" class="btn btn-primary"
-									ng-click="createValveArr()">
-									<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
-										Valve Details</span>
-								</button>
-							</fieldset>
-						</div>
-						<hr>
+						
 					</div>
-
-
-
-					
 					<fieldset>
 						<legend>Approval Details</legend>
 						<div class="row">
@@ -544,12 +341,18 @@
 			</div>
 		</div>
 		<button type="button" class="btn btn-success pull-right"
-			ng-click="approveRequest(jobCardDTO)">
+			ng-show="waterLeakageComplaint.status ==='PENDING'"
+			ng-click="forwardRequest(jobCardDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
+		</button>
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="waterLeakageComplaint.status ==='FORWARDED'"
+			ng-click="approveRequest()">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 		<button type="button" class="btn btn-danger pull-right"
-			ng-disabled="isSaving" ng-click="declineRequest(jobCardDTO)">
+			ng-click="declineRequest(jobCardDTO)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
 
@@ -559,6 +362,4 @@
 				Back</span>
 		</button>
 	</form>
-
-
 </div>

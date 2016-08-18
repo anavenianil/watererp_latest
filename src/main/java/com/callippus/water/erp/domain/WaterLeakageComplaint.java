@@ -7,7 +7,9 @@ import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Objects;
 
@@ -58,8 +60,14 @@ public class WaterLeakageComplaint implements Serializable {
     @JoinColumn(name = "street_master_id")
     private StreetMaster streetMaster;
 
-    @OneToMany(mappedBy = "waterLeakageComplaint")
+    /*@OneToMany(mappedBy = "waterLeakageComplaint")
     @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<JobCardItemRequirement> jobCardItemRequirements = new HashSet<>();*/
+    
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="water_leakage_complaint_id", referencedColumnName="id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<JobCardItemRequirement> jobCardItemRequirements = new HashSet<>();
 

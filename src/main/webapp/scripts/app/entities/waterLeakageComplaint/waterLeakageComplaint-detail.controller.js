@@ -2,8 +2,16 @@
 
 angular.module('watererpApp')
     .controller('WaterLeakageComplaintDetailController', function ($scope, $rootScope, $stateParams, entity, WaterLeakageComplaint, DivisionMaster, 
-    		StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http) {
+    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom) {
         $scope.waterLeakageComplaint = entity;
+        
+        $scope.materialmasters = MaterialMaster.query();
+        $scope.uoms = Uom.query();
+        
+        $scope.jobCardDTO = {};
+        //$scope.jobCardDTO.jobCardItemRequirements = [];
+        $scope.count = 0;
+        
         $scope.load = function (id) {
             WaterLeakageComplaint.get({id: id}, function(result) {
                 $scope.waterLeakageComplaint = result;
@@ -20,11 +28,13 @@ angular.module('watererpApp')
                             {"id":"3", "pipeName" : "HDPE"},
                             {"id":"4", "pipeName" : "uPVC"}];
         
-        $scope.getPipe = function(pipeTypeId){
-        	if(pipeTypeId ==1 || pipeTypeId == 2){
+        $scope.getPipe = function(){
+        	console.log($scope.jobCardDTO.burstComplaint.pipeType);
+        	var pipeName = $scope.jobCardDTO.burstComplaint.pipeType;
+        	if(pipeName =='AC' || pipeName == 'STEEL'){
         		$scope.pipeSizes = [{"size": "50"},{"size": "75"},{"size": "100"},{"size": "150"},{"size": "200"},{"size": "225"},{"size": "250"},{"size": "300"},{"size": "375"},{"size": "450"},{"size": "525"},{"size": "575"},{"size": "Other"}];
             }
-        	else{
+        	else if(pipeName =='HDPE' || pipeName == 'uPVC'){
         		$scope.pipeSizes = [{"size": "63"},{"size": "75"},{"size": "90"},{"size": "110"},{"size": "140"},{"size": "160"},{"size": "200"},{"size": "250"},{"size": "315"},{"size": "350"},{"size": "400"},{"size": "Other"}];
         	}
         }
@@ -37,6 +47,11 @@ angular.module('watererpApp')
         		$scope.jobCardDTO.burstComplaint.pipeSize = size;
         	}
         }
+        
+        $scope.orgRole = {};
+		Principal.getOrgRole().then(function(response) {
+			$scope.orgRole = response;
+		});
         
         $scope.getWorkflowHistoryByDomainId = function(requestTypeId) {
         	$scope.requestWorkflowHistorys = [];
@@ -65,9 +80,9 @@ angular.module('watererpApp')
 		
 		//approve a request
 		$scope.jobCardDTO = {};
-		$scope.approveRequest = function(jobCardDTO){
+		$scope.forwardRequest = function(jobCardDTO){
 			$scope.jobCardDTO = jobCardDTO;
-			$scope.jobCardDTO.domainId = $stateParams.id
+			$scope.jobCardDTO.domainId = $stateParams.id;
 			console.log("approve");
         	return $http.post('/api/waterLeakageComplaints/forwardRequest',
         			$scope.jobCardDTO).then(
@@ -76,4 +91,30 @@ angular.module('watererpApp')
 								+ JSON.stringify(response));
 					});
         }
+		
+		
+		$scope.approveRequest = function(){
+			$scope.jobCardDTO.domainId = $stateParams.id;
+			return $http.post('/api/waterLeakageComplaints/forwardRequest',
+        			$scope.jobCardDTO).then(
+					function(response) {
+						console.log("Server response:"
+								+ JSON.stringify(response));
+					});
+		}
+		
+		//create array for items
+		$scope.jobCardDTO.waterLeakageComplaint = {};
+		$scope.jobCardDTO.jobCardItemRequirements = [];
+        $scope.createItemArr = function(){
+       		$scope.jobCardDTO.jobCardItemRequirements[$scope.count]= {};
+       		$scope.count = $scope.count +1;
+        }
+        
+        //remove
+        $scope.removeItemArr = function(indexId) {
+            $scope.count = $scope.count -1;
+            $scope.jobCardDTO.jobCardItemRequirements.splice(indexId, 1);
+          };
+		
     });

@@ -3,8 +3,10 @@ package com.callippus.water.erp.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -23,9 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.JobCardDTO;
-import com.callippus.water.erp.domain.MeterChange;
+import com.callippus.water.erp.domain.JobCardItemRequirement;
 import com.callippus.water.erp.domain.WaterLeakageComplaint;
+import com.callippus.water.erp.repository.BurstComplaintRepository;
 import com.callippus.water.erp.repository.WaterLeakageComplaintRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -47,6 +51,9 @@ public class WaterLeakageComplaintResource {
     
     @Inject
     private WorkflowService workflowService;
+    
+    @Inject
+    private BurstComplaintRepository burstComplaintRepository;
     
     @Inject WaterLeakageComplaintWorkflowService waterLeakageComplaintWorkflowService;
     /**
@@ -149,15 +156,36 @@ public class WaterLeakageComplaintResource {
 		log.debug("REST request to approve JobCardDTO : {}", jobCardDTO);
 		
 		try {
+			Long jobCardTypeDomainId = null;
 			workflowService.setRemarks(jobCardDTO.getRemarks());
 			workflowService.setApprovedDate(jobCardDTO.getApprovedDate());
 			WaterLeakageComplaint waterLeakageComplaint = waterLeakageComplaintRepository.findOne(jobCardDTO.getDomainId());
-			if("PENDING".equals(waterLeakageComplaint.getStatus())){
-				waterLeakageComplaint.setStatus("FORWARDED");
-				waterLeakageComplaintRepository.save(waterLeakageComplaint);
+			if("BURST".equals(waterLeakageComplaint.getLeakageType()) && jobCardDTO.getBurstComplaint()!=null){
+				BurstComplaint burstComplaint = burstComplaintRepository.save(jobCardDTO.getBurstComplaint());
+				jobCardTypeDomainId = burstComplaint.getId();
 			}
 			
-
+			if("PENDING".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+				waterLeakageComplaint.setStatus("FORWARDED");
+			}
+			if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+				waterLeakageComplaint.setStatus("APPROVED");
+				if(jobCardDTO.getJobCardItemRequirements().size()>0){
+					Set<JobCardItemRequirement> itemRequireds = jobCardDTO.getJobCardItemRequirements();
+			        Iterator<JobCardItemRequirement> iterator = itemRequireds.iterator();
+			        while(iterator.hasNext()){
+			          iterator.next().setType("BURST");
+			          iterator.next().setDomainObject(jobCardTypeDomainId);
+			        }
+					
+					waterLeakageComplaint.setJobCardItemRequirements(jobCardDTO.getJobCardItemRequirements());
+				}
+				waterLeakageComplaint.setDaysRequired(jobCardDTO.getWaterLeakageComplaint().getDaysRequired());
+				waterLeakageComplaint.setStaffRequired(jobCardDTO.getWaterLeakageComplaint().getStaffRequired());
+			}
+			
+			waterLeakageComplaintRepository.save(waterLeakageComplaint);
+			
 			workflowService.getUserDetails();
 			waterLeakageComplaintWorkflowService.approvedWaterLeakageComplaints(waterLeakageComplaint);
 		} catch (Exception e) {

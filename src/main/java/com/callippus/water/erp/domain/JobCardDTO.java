@@ -1,6 +1,8 @@
 package com.callippus.water.erp.domain;
 
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Set;
 
 
 public class JobCardDTO {
@@ -9,7 +11,9 @@ public class JobCardDTO {
 	private ZonedDateTime approvedDate;
 	private String remarks;
 	
+	private Set<JobCardItemRequirement> jobCardItemRequirements;
 	private BurstComplaint burstComplaint;
+	private WaterLeakageComplaint waterLeakageComplaint;
 	
 	
 	public Long getDomainId() {
@@ -35,6 +39,18 @@ public class JobCardDTO {
 	}
 	public void setBurstComplaint(BurstComplaint burstComplaint) {
 		this.burstComplaint = burstComplaint;
+	}
+	public Set<JobCardItemRequirement> getJobCardItemRequirements() {
+		return jobCardItemRequirements;
+	}
+	public void setJobCardItemRequirements(Set<JobCardItemRequirement> jobCardItemRequirements) {
+		this.jobCardItemRequirements = jobCardItemRequirements;
+	}
+	public WaterLeakageComplaint getWaterLeakageComplaint() {
+		return waterLeakageComplaint;
+	}
+	public void setWaterLeakageComplaint(WaterLeakageComplaint waterLeakageComplaint) {
+		this.waterLeakageComplaint = waterLeakageComplaint;
 	}
 	
 }
