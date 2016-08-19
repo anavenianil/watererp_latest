@@ -3,10 +3,8 @@ package com.callippus.water.erp.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -25,11 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.JobCardDTO;
 import com.callippus.water.erp.domain.JobCardItemRequirement;
 import com.callippus.water.erp.domain.WaterLeakageComplaint;
 import com.callippus.water.erp.repository.BurstComplaintRepository;
+import com.callippus.water.erp.repository.JobCardItemRequirementRepository;
+import com.callippus.water.erp.repository.JobCardSiteStatusRepository;
 import com.callippus.water.erp.repository.WaterLeakageComplaintRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -55,7 +56,16 @@ public class WaterLeakageComplaintResource {
     @Inject
     private BurstComplaintRepository burstComplaintRepository;
     
-    @Inject WaterLeakageComplaintWorkflowService waterLeakageComplaintWorkflowService;
+    @Inject 
+    private WaterLeakageComplaintWorkflowService waterLeakageComplaintWorkflowService;
+    
+    @Inject
+    private JobCardItemRequirementRepository jobCardItemRequirementRepository;
+    
+    @Inject
+    private JobCardSiteStatusRepository jobCardSiteStatusRepository;
+    
+    
     /**
      * POST  /waterLeakageComplaints -> Create a new waterLeakageComplaint.
      */
@@ -124,6 +134,10 @@ public class WaterLeakageComplaintResource {
     public ResponseEntity<WaterLeakageComplaint> getWaterLeakageComplaint(@PathVariable Long id) {
         log.debug("REST request to get WaterLeakageComplaint : {}", id);
         WaterLeakageComplaint waterLeakageComplaint = waterLeakageComplaintRepository.findOne(id);
+        
+        List<JobCardItemRequirement> jobCardItemRequirements = jobCardItemRequirementRepository.findByWaterLeakageComplaint(waterLeakageComplaint);
+        waterLeakageComplaint.setJobCardItemRequirements(jobCardItemRequirements);
+        
         return Optional.ofNullable(waterLeakageComplaint)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -161,22 +175,20 @@ public class WaterLeakageComplaintResource {
 			workflowService.setApprovedDate(jobCardDTO.getApprovedDate());
 			WaterLeakageComplaint waterLeakageComplaint = waterLeakageComplaintRepository.findOne(jobCardDTO.getDomainId());
 			if("BURST".equals(waterLeakageComplaint.getLeakageType()) && jobCardDTO.getBurstComplaint()!=null){
-				BurstComplaint burstComplaint = burstComplaintRepository.save(jobCardDTO.getBurstComplaint());
+				BurstComplaint burstComplaint = new BurstComplaint();
+				jobCardDTO.getBurstComplaint().setWaterLeakageComplaint(waterLeakageComplaint);
+				burstComplaint = burstComplaintRepository.save(jobCardDTO.getBurstComplaint());
 				jobCardTypeDomainId = burstComplaint.getId();
 			}
 			
-			if("PENDING".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
-				waterLeakageComplaint.setStatus("FORWARDED");
-			}
 			if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
-				waterLeakageComplaint.setStatus("APPROVED");
 				if(jobCardDTO.getJobCardItemRequirements().size()>0){
-					Set<JobCardItemRequirement> itemRequireds = jobCardDTO.getJobCardItemRequirements();
-			        Iterator<JobCardItemRequirement> iterator = itemRequireds.iterator();
+					/*List<JobCardItemRequirement> jobCardItemRequirement = jobCardDTO.getJobCardItemRequirements();
+			        Iterator<JobCardItemRequirement> iterator = jobCardItemRequirement.iterator();
 			        while(iterator.hasNext()){
 			          iterator.next().setType("BURST");
 			          iterator.next().setDomainObject(jobCardTypeDomainId);
-			        }
+			        }*/
 					
 					waterLeakageComplaint.setJobCardItemRequirements(jobCardDTO.getJobCardItemRequirements());
 				}
@@ -184,10 +196,24 @@ public class WaterLeakageComplaintResource {
 				waterLeakageComplaint.setStaffRequired(jobCardDTO.getWaterLeakageComplaint().getStaffRequired());
 			}
 			
+			//set status
+			if("PENDING".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+				waterLeakageComplaint.setStatus("FORWARDED");
+			}else if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+				waterLeakageComplaint.setStatus("INITIATED");
+			}else if("INITIATED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+				waterLeakageComplaint.setStatus("APPROVED");
+			}
+			
 			waterLeakageComplaintRepository.save(waterLeakageComplaint);
 			
 			workflowService.getUserDetails();
 			waterLeakageComplaintWorkflowService.approvedWaterLeakageComplaints(waterLeakageComplaint);
+			
+			if(CPSConstants.UPDATE.equals(workflowService.getMessage()) && jobCardDTO.getJobCardSiteStatus()!=null){
+				jobCardSiteStatusRepository.save(jobCardDTO.getJobCardSiteStatus());
+				waterLeakageComplaint.setStatus("COMPLETED");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -195,4 +221,8 @@ public class WaterLeakageComplaintResource {
 				.headers(HeaderUtil.createEntityCreationAlert("jobCardDTO", ""))
 				.body(null);
 	}
+    
+    
+    
+    
 }

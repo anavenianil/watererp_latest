@@ -103,7 +103,8 @@
 						<br>
 					</fieldset>
 					<hr>
-					<div ng-if="orgRole.id===15">
+					<div
+						ng-if="orgRole.id===15 && waterLeakageComplaint.status === 'FORWARDED'">
 						<div ng-if="waterLeakageComplaint.leakageType ==='BURST'">
 							<fieldset>
 								<legend>Leakage Type : BURST</legend>
@@ -164,8 +165,7 @@
 									<div class="col-sm-3">
 										<label class="control-label" for="field_pipeType">Pipe
 											Type </label> <select class="form-control" id="field_pipeType"
-											name="pipeType"
-											ng-change="getPipe()"
+											name="pipeType" ng-change="getPipe()"
 											ng-model="jobCardDTO.burstComplaint.pipeType"
 											ng-options="pipe.pipeName as pipe.pipeName for pipe in pipeTypes track by pipe.pipeName">
 											<option value=""></option>
@@ -267,8 +267,7 @@
 									</div>
 								</div>
 								<hr>
-								<fieldset
-									ng-repeat="item in jobCardDTO.jobCardItemRequirements">
+								<fieldset ng-repeat="item in jobCardDTO.jobCardItemRequirements">
 									<div class="row">
 										<div class="col-sm-3">
 											<select class="form-control" id="field_materialMaster"
@@ -306,8 +305,223 @@
 						</div>
 
 						<!-- if request is hydrant -->
-						
+
 					</div>
+					<!-- Display Burst Value -->
+					<fieldset ng-if="burstComplaint.id != null">
+						<legend>Burst Details</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Meter Location</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.meterLocation}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Burst Pipe</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.burstPipe}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>From Left</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.fromLeft}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>From Sb</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.fromSb}}</h5>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Burst Area</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.burstArea}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Pipe Type</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.pipeType}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Pipe Size</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.pipeSize}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Hole Size</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.holeSize}}</h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Repair Code</label>
+								<h5 class="list-group-item-heading">{{burstComplaint.repairCode}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset
+						ng-if="waterLeakageComplaint.jobCardItemRequirements.length >0">
+						<legend>Items Required</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Material</label>
+							</div>
+							<div class="col-sm-3">
+								<label>Unit</label>
+							</div>
+							<div class="col-sm-3">
+								<label>Quantity</label>
+							</div>
+						</div>
+						<div class="row"
+							ng-repeat="jobCardItemRequirement in waterLeakageComplaint.jobCardItemRequirements track by $index">
+							<div class="col-sm-3">
+								<h5 class="list-group-item-heading">{{jobCardItemRequirement.materialMaster.materialName}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<h5 class="list-group-item-heading">{{jobCardItemRequirement.uom.value}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<h5 class="list-group-item-heading">{{jobCardItemRequirement.quantity}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<br>
+					<fieldset
+						ng-if="waterLeakageComplaint.status==='APPROVED' && orgRole.id===15">
+						<legend>Site Status</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_tarPatching">Tar
+									Patching</label> <input type="text" class="form-control"
+									name="tarPatching" id="field_tarPatching"
+									ng-model="jobCardDTO.jobCardSiteStatus.tarPatching" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_tarPatchingLength">Tar
+									Patching Length</label> <input type="text" class="form-control"
+									name="tarPatchingLength" id="field_tarPatchingLength"
+									ng-model="jobCardDTO.jobCardSiteStatus.tarPatchingLength" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_tarPatchingBreadth">Tar
+									Patching Breadth</label> <input type="text" class="form-control"
+									name="tarPatchingBreadth" id="field_tarPatchingBreadth"
+									ng-model="jobCardDTO.jobCardSiteStatus.tarPatchingBreadth" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_cleanSite">Clean
+									Site</label> <input type="text" class="form-control" name="cleanSite"
+									id="field_cleanSite"
+									ng-model="jobCardDTO.jobCardSiteStatus.cleanSite" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_backFill">Back
+									Fill</label> <input type="text" class="form-control" name="backFill"
+									id="field_backFill"
+									ng-model="jobCardDTO.jobCardSiteStatus.backFill" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_backFillLength">Back
+									Fill Length</label> <input type="text" class="form-control"
+									name="backFillLength" id="field_backFillLength"
+									ng-model="jobCardDTO.jobCardSiteStatus.backFillLength" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_backFillBreadth">Back
+									Fill Breadth</label> <input type="text" class="form-control"
+									name="backFillBreadth" id="field_backFillBreadth"
+									ng-model="jobCardDTO.jobCardSiteStatus.backFillBreadth" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_brickLayer">Brick
+									Layer</label> <input type="text" class="form-control" name="brickLayer"
+									id="field_brickLayer"
+									ng-model="jobCardDTO.jobCardSiteStatus.brickLayer" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label class="control-label" for="field_paving">Paving</label> <input
+									type="text" class="form-control" name="paving"
+									id="field_paving"
+									ng-model="jobCardDTO.jobCardSiteStatus.paving" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_pavingLength">Paving
+									Length</label> <input type="text" class="form-control"
+									name="pavingLength" id="field_pavingLength"
+									ng-model="jobCardDTO.jobCardSiteStatus.pavingLength" />
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_pavingBreadth">Paving
+									Breadth</label> <input type="text" class="form-control"
+									name="pavingBreadth" id="field_pavingBreadth"
+									ng-model="jobCardDTO.jobCardSiteStatus.pavingBreadth" />
+
+							</div>
+							<div class="col-sm-3">
+								<label class="control-label" for="field_unableToLocate">Unable
+									To Locate</label> <input type="text" class="form-control"
+									name="unableToLocate" id="field_unableToLocate"
+									ng-model="jobCardDTO.jobCardSiteStatus.unableToLocate" />
+							</div>
+						</div>
+					</fieldset>
+					<fieldset ng-if="waterLeakageComplaint.status==='COMPLETED'">
+						<legend>Site Status</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Tar Patching</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.tarPatching}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Tar Patching Length</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.tarPatchingLength}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Tar Patching Breadth</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.tarPatchingBreadth}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Clean Site</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.cleanSite}}</h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Back Fill</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.backFill}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Back Fill Length</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.backFillLength}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Back Fill Breadth</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.backFillBreadth}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Brick Layer</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.brickLayer}}</h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Paving</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.paving}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Paving Length</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.pavingLength}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Paving Breadth</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.pavingBreadth}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Unable To Locate</label>
+								<h5 class="list-group-item-heading">{{jobCardSiteStatus.unableToLocate}}</h5>
+							</div>
+						</div>
+					</fieldset>
 					<fieldset>
 						<legend>Approval Details</legend>
 						<div class="row">
@@ -341,15 +555,14 @@
 			</div>
 		</div>
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="waterLeakageComplaint.status ==='PENDING'"
-			ng-click="forwardRequest(jobCardDTO)">
+			ng-click="forwardRequest()">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
-		<button type="button" class="btn btn-success pull-right"
+		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-show="waterLeakageComplaint.status ==='FORWARDED'"
 			ng-click="approveRequest()">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
-		</button>
+		</button> -->
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 		<button type="button" class="btn btn-danger pull-right"
 			ng-click="declineRequest(jobCardDTO)">

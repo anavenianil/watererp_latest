@@ -2,16 +2,20 @@
 
 angular.module('watererpApp')
     .controller('WaterLeakageComplaintDetailController', function ($scope, $rootScope, $stateParams, entity, WaterLeakageComplaint, DivisionMaster, 
-    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom) {
+    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint) {
         $scope.waterLeakageComplaint = entity;
+        
         
         $scope.materialmasters = MaterialMaster.query();
         $scope.uoms = Uom.query();
         
         $scope.jobCardDTO = {};
+        
         //$scope.jobCardDTO.jobCardItemRequirements = [];
         $scope.count = 0;
-        
+        var complaintId = 0;
+        $scope.burstComplaint = BurstComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
+  
         $scope.load = function (id) {
             WaterLeakageComplaint.get({id: id}, function(result) {
                 $scope.waterLeakageComplaint = result;
@@ -79,10 +83,10 @@ angular.module('watererpApp')
 		
 		
 		//approve a request
-		$scope.jobCardDTO = {};
-		$scope.forwardRequest = function(jobCardDTO){
-			$scope.jobCardDTO = jobCardDTO;
+		$scope.jobCardDTO.waterLeakageComplaint = entity;
+		$scope.forwardRequest = function(){
 			$scope.jobCardDTO.domainId = $stateParams.id;
+			
 			console.log("approve");
         	return $http.post('/api/waterLeakageComplaints/forwardRequest',
         			$scope.jobCardDTO).then(
@@ -104,7 +108,6 @@ angular.module('watererpApp')
 		}
 		
 		//create array for items
-		$scope.jobCardDTO.waterLeakageComplaint = {};
 		$scope.jobCardDTO.jobCardItemRequirements = [];
         $scope.createItemArr = function(){
        		$scope.jobCardDTO.jobCardItemRequirements[$scope.count]= {};
@@ -117,4 +120,5 @@ angular.module('watererpApp')
             $scope.jobCardDTO.jobCardItemRequirements.splice(indexId, 1);
           };
 		
+         
     });

@@ -69,7 +69,7 @@ public class WaterLeakageComplaint implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="water_leakage_complaint_id", referencedColumnName="id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<JobCardItemRequirement> jobCardItemRequirements = new HashSet<>();
+    private List<JobCardItemRequirement> jobCardItemRequirements = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -167,11 +167,11 @@ public class WaterLeakageComplaint implements Serializable {
         this.streetMaster = streetMaster;
     }
 
-    public Set<JobCardItemRequirement> getJobCardItemRequirements() {
+    public List<JobCardItemRequirement> getJobCardItemRequirements() {
         return jobCardItemRequirements;
     }
 
-    public void setJobCardItemRequirements(Set<JobCardItemRequirement> jobCardItemRequirements) {
+    public void setJobCardItemRequirements(List<JobCardItemRequirement> jobCardItemRequirements) {
         this.jobCardItemRequirements = jobCardItemRequirements;
     }
 

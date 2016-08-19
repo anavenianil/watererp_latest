@@ -1,110 +1,109 @@
 
-<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myJobCardSiteStatusLabel">Create or edit a JobCardSiteStatus</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="jobCardSiteStatus.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_tarPatching">TarPatching</label>
-            <input type="text" class="form-control" name="tarPatching" id="field_tarPatching"
-                    ng-model="jobCardSiteStatus.tarPatching"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_tarPatchingLength">TarPatchingLength</label>
-            <input type="text" class="form-control" name="tarPatchingLength" id="field_tarPatchingLength"
-                    ng-model="jobCardSiteStatus.tarPatchingLength"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_tarPatchingBreadth">TarPatchingBreadth</label>
-            <input type="text" class="form-control" name="tarPatchingBreadth" id="field_tarPatchingBreadth"
-                    ng-model="jobCardSiteStatus.tarPatchingBreadth"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_cleanSite">CleanSite</label>
-            <input type="text" class="form-control" name="cleanSite" id="field_cleanSite"
-                    ng-model="jobCardSiteStatus.cleanSite"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_backFill">BackFill</label>
-            <input type="text" class="form-control" name="backFill" id="field_backFill"
-                    ng-model="jobCardSiteStatus.backFill"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_backFillLength">BackFillLength</label>
-            <input type="text" class="form-control" name="backFillLength" id="field_backFillLength"
-                    ng-model="jobCardSiteStatus.backFillLength"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_backFillBreadth">BackFillBreadth</label>
-            <input type="text" class="form-control" name="backFillBreadth" id="field_backFillBreadth"
-                    ng-model="jobCardSiteStatus.backFillBreadth"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_brickLayer">BrickLayer</label>
-            <input type="text" class="form-control" name="brickLayer" id="field_brickLayer"
-                    ng-model="jobCardSiteStatus.brickLayer"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_paving">Paving</label>
-            <input type="text" class="form-control" name="paving" id="field_paving"
-                    ng-model="jobCardSiteStatus.paving"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_pavingLength">PavingLength</label>
-            <input type="text" class="form-control" name="pavingLength" id="field_pavingLength"
-                    ng-model="jobCardSiteStatus.pavingLength"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_pavingBreadth">PavingBreadth</label>
-            <input type="text" class="form-control" name="pavingBreadth" id="field_pavingBreadth"
-                    ng-model="jobCardSiteStatus.pavingBreadth"
-                    required />
-            <div ng-show="editForm.pavingBreadth.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.pavingBreadth.$error.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_unableToLocate">UnableToLocate</label>
-            <input type="text" class="form-control" name="unableToLocate" id="field_unableToLocate"
-                    ng-model="jobCardSiteStatus.unableToLocate"
-                     />
-        </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myJobCardSiteStatusLabel">Create or
+			edit a JobCardSiteStatus</h4>
+	</div>
+	<div class="modal-body">
+		<jh-alert-error></jh-alert-error>
+		<div class="form-group">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="jobCardSiteStatus.id" readonly />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_tarPatching">TarPatching</label>
+			<input type="text" class="form-control" name="tarPatching"
+				id="field_tarPatching" ng-model="jobCardSiteStatus.tarPatching" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_tarPatchingLength">TarPatchingLength</label>
+			<input type="text" class="form-control" name="tarPatchingLength"
+				id="field_tarPatchingLength"
+				ng-model="jobCardSiteStatus.tarPatchingLength" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_tarPatchingBreadth">TarPatchingBreadth</label>
+			<input type="text" class="form-control" name="tarPatchingBreadth"
+				id="field_tarPatchingBreadth"
+				ng-model="jobCardSiteStatus.tarPatchingBreadth" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_cleanSite">CleanSite</label>
+			<input type="text" class="form-control" name="cleanSite"
+				id="field_cleanSite" ng-model="jobCardSiteStatus.cleanSite" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_backFill">BackFill</label> <input
+				type="text" class="form-control" name="backFill" id="field_backFill"
+				ng-model="jobCardSiteStatus.backFill" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_backFillLength">BackFillLength</label>
+			<input type="text" class="form-control" name="backFillLength"
+				id="field_backFillLength"
+				ng-model="jobCardSiteStatus.backFillLength" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_backFillBreadth">BackFillBreadth</label>
+			<input type="text" class="form-control" name="backFillBreadth"
+				id="field_backFillBreadth"
+				ng-model="jobCardSiteStatus.backFillBreadth" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_brickLayer">BrickLayer</label>
+			<input type="text" class="form-control" name="brickLayer"
+				id="field_brickLayer" ng-model="jobCardSiteStatus.brickLayer" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_paving">Paving</label> <input
+				type="text" class="form-control" name="paving" id="field_paving"
+				ng-model="jobCardSiteStatus.paving" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_pavingLength">PavingLength</label>
+			<input type="text" class="form-control" name="pavingLength"
+				id="field_pavingLength" ng-model="jobCardSiteStatus.pavingLength" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_pavingBreadth">PavingBreadth</label>
+			<input type="text" class="form-control" name="pavingBreadth"
+				id="field_pavingBreadth" ng-model="jobCardSiteStatus.pavingBreadth"
+				required />
+			<div ng-show="editForm.pavingBreadth.$invalid">
+				<p class="help-block"
+					ng-show="editForm.pavingBreadth.$error.required">This field is
+					required.</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_unableToLocate">UnableToLocate</label>
+			<input type="text" class="form-control" name="unableToLocate"
+				id="field_unableToLocate"
+				ng-model="jobCardSiteStatus.unableToLocate" />
+		</div>
 
-        <div class="form-group">
-            <label for="field_waterLeakageComplaint">waterLeakageComplaint</label>
-            <select class="form-control" id="field_waterLeakageComplaint" name="waterLeakageComplaint" ng-model="jobCardSiteStatus.waterLeakageComplaint" ng-options="waterLeakageComplaint as waterLeakageComplaint.id for waterLeakageComplaint in waterleakagecomplaints track by waterLeakageComplaint.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+		<div class="form-group">
+			<label for="field_waterLeakageComplaint">waterLeakageComplaint</label>
+			<select class="form-control" id="field_waterLeakageComplaint"
+				name="waterLeakageComplaint"
+				ng-model="jobCardSiteStatus.waterLeakageComplaint"
+				ng-options="waterLeakageComplaint as waterLeakageComplaint.id for waterLeakageComplaint in waterleakagecomplaints track by waterLeakageComplaint.id">
+				<option value=""></option>
+			</select>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
 </form>

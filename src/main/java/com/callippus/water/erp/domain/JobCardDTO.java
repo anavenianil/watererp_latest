@@ -11,9 +11,10 @@ public class JobCardDTO {
 	private ZonedDateTime approvedDate;
 	private String remarks;
 	
-	private Set<JobCardItemRequirement> jobCardItemRequirements;
+	private List<JobCardItemRequirement> jobCardItemRequirements;
 	private BurstComplaint burstComplaint;
 	private WaterLeakageComplaint waterLeakageComplaint;
+	private JobCardSiteStatus jobCardSiteStatus;
 	
 	
 	public Long getDomainId() {
@@ -40,10 +41,10 @@ public class JobCardDTO {
 	public void setBurstComplaint(BurstComplaint burstComplaint) {
 		this.burstComplaint = burstComplaint;
 	}
-	public Set<JobCardItemRequirement> getJobCardItemRequirements() {
+	public List<JobCardItemRequirement> getJobCardItemRequirements() {
 		return jobCardItemRequirements;
 	}
-	public void setJobCardItemRequirements(Set<JobCardItemRequirement> jobCardItemRequirements) {
+	public void setJobCardItemRequirements(List<JobCardItemRequirement> jobCardItemRequirements) {
 		this.jobCardItemRequirements = jobCardItemRequirements;
 	}
 	public WaterLeakageComplaint getWaterLeakageComplaint() {
@@ -51,6 +52,12 @@ public class JobCardDTO {
 	}
 	public void setWaterLeakageComplaint(WaterLeakageComplaint waterLeakageComplaint) {
 		this.waterLeakageComplaint = waterLeakageComplaint;
+	}
+	public JobCardSiteStatus getJobCardSiteStatus() {
+		return jobCardSiteStatus;
+	}
+	public void setJobCardSiteStatus(JobCardSiteStatus jobCardSiteStatus) {
+		this.jobCardSiteStatus = jobCardSiteStatus;
 	}
 	
 }
