@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('WaterLeakageComplaintDetailController', function ($scope, $rootScope, $stateParams, entity, WaterLeakageComplaint, DivisionMaster, 
-    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint, JobCardSiteStatus) {
+    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint, JobCardSiteStatus, ValveComplaint) {
         $scope.waterLeakageComplaint = entity;
         
         
@@ -11,10 +11,11 @@ angular.module('watererpApp')
         
         $scope.jobCardDTO = {};
         
-        //$scope.jobCardDTO.jobCardItemRequirements = [];
         $scope.count = 0;
-        //var complaintId = 0;
+        $scope.valveCount = 0;
+
         $scope.burstComplaint = BurstComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
+        $scope.valveComplaints = ValveComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
         
         $scope.jobCardSiteStatus = JobCardSiteStatus.getByComplaintId({waterLeakageComplaint : $stateParams.id});
   
@@ -99,7 +100,7 @@ angular.module('watererpApp')
         }
 		
 		
-		$scope.approveRequest = function(){
+		/*$scope.approveRequest = function(){
 			$scope.jobCardDTO.domainId = $stateParams.id;
 			return $http.post('/api/waterLeakageComplaints/forwardRequest',
         			$scope.jobCardDTO).then(
@@ -107,7 +108,7 @@ angular.module('watererpApp')
 						console.log("Server response:"
 								+ JSON.stringify(response));
 					});
-		}
+		}*/
 		
 		//create array for items
 		$scope.jobCardDTO.jobCardItemRequirements = [];
@@ -121,6 +122,36 @@ angular.module('watererpApp')
             $scope.count = $scope.count -1;
             $scope.jobCardDTO.jobCardItemRequirements.splice(indexId, 1);
           };
-		
-         
+          
+          //create array for valveComplaint
+          $scope.jobCardDTO.valveComplaints = [];
+          $scope.createValveArr = function(){
+         		$scope.jobCardDTO.valveComplaints[$scope.valveCount]= {};
+         		$scope.valveCount = $scope.valveCount +1;
+          }
+          
+          //remove array for valveComplaint
+          $scope.removeValveArr = function(indexId) {
+              $scope.valveCount = $scope.valveCount -1;
+              $scope.jobCardDTO.valveComplaints.splice(indexId, 1);
+            };
+            
+            $scope.datePickerForClosedTime = {};
+
+            $scope.datePickerForClosedTime.status = {
+                opened: false
+            };
+
+            $scope.datePickerForClosedTimeOpen = function($event) {
+                $scope.datePickerForClosedTime.status.opened = true;
+            };
+            $scope.datePickerForOpenTime = {};
+
+            $scope.datePickerForOpenTime.status = {
+                opened: false
+            };
+
+            $scope.datePickerForOpenTimeOpen = function($event) {
+                $scope.datePickerForOpenTime.status.opened = true;
+            };
     });

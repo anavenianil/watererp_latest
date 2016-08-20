@@ -67,7 +67,7 @@ class ValveComplaintGatlingTest extends Simulation {
             .exec(http("Create new valveComplaint")
             .post("/api/valveComplaints")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "closedTime":"2020-01-01T00:00:00.000Z", "openTime":"2020-01-01T00:00:00.000Z", "colourCode":"SAMPLE_TEXT", "side":"SAMPLE_TEXT", "noOfTurns":"0", "valveSize":null, "valveNo":"0", "repairCode":"SAMPLE_TEXT", "distanceLeft":"SAMPLE_TEXT", "disranceSb":"SAMPLE_TEXT", "distanceZ":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "closedTime":"2020-01-01T00:00:00.000Z", "openTime":"2020-01-01T00:00:00.000Z", "colourCode":"SAMPLE_TEXT", "side":"SAMPLE_TEXT", "noOfTurns":"0", "valveSize":null, "valveNo":"0", "repairCode":"SAMPLE_TEXT", "distanceLeft":"SAMPLE_TEXT", "distanceSb":"SAMPLE_TEXT", "distanceZ":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_valveComplaint_url")))
             .pause(10)

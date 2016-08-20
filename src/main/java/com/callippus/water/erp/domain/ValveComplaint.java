@@ -49,8 +49,8 @@ public class ValveComplaint implements Serializable {
     @Column(name = "distance_left")
     private String distanceLeft;
     
-    @Column(name = "disrance_sb")
-    private String disranceSb;
+    @Column(name = "distance_sb")
+    private String distanceSb;
     
     @Column(name = "distance_z")
     private String distanceZ;
@@ -139,12 +139,12 @@ public class ValveComplaint implements Serializable {
         this.distanceLeft = distanceLeft;
     }
 
-    public String getDisranceSb() {
-        return disranceSb;
+    public String getDistanceSb() {
+        return distanceSb;
     }
     
-    public void setDisranceSb(String disranceSb) {
-        this.disranceSb = disranceSb;
+    public void setDistanceSb(String distanceSb) {
+        this.distanceSb = distanceSb;
     }
 
     public String getDistanceZ() {
@@ -196,7 +196,7 @@ public class ValveComplaint implements Serializable {
             ", valveNo='" + valveNo + "'" +
             ", repairCode='" + repairCode + "'" +
             ", distanceLeft='" + distanceLeft + "'" +
-            ", disranceSb='" + disranceSb + "'" +
+            ", distanceSb='" + distanceSb + "'" +
             ", distanceZ='" + distanceZ + "'" +
             '}';
     }

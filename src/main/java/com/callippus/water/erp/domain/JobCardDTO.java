@@ -15,6 +15,7 @@ public class JobCardDTO {
 	private BurstComplaint burstComplaint;
 	private WaterLeakageComplaint waterLeakageComplaint;
 	private JobCardSiteStatus jobCardSiteStatus;
+	private List<ValveComplaint> valveComplaints;
 	
 	
 	public Long getDomainId() {
@@ -59,5 +60,10 @@ public class JobCardDTO {
 	public void setJobCardSiteStatus(JobCardSiteStatus jobCardSiteStatus) {
 		this.jobCardSiteStatus = jobCardSiteStatus;
 	}
-	
+	public List<ValveComplaint> getValveComplaints() {
+		return valveComplaints;
+	}
+	public void setValveComplaints(List<ValveComplaint> valveComplaints) {
+		this.valveComplaints = valveComplaints;
+	}
 }

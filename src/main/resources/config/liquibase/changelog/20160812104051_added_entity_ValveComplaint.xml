@@ -39,7 +39,7 @@
             
             <column name="distance_left" type="varchar(255)"/>
             
-            <column name="disrance_sb" type="varchar(255)"/>
+            <column name="distance_sb" type="varchar(255)"/>
             
             <column name="distance_z" type="varchar(255)"/>
             

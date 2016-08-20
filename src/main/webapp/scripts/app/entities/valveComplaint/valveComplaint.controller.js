@@ -43,7 +43,7 @@ angular.module('watererpApp')
                 valveNo: null,
                 repairCode: null,
                 distanceLeft: null,
-                disranceSb: null,
+                distanceSb: null,
                 distanceZ: null,
                 id: null
             };

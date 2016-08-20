@@ -72,8 +72,8 @@ public class ValveComplaintResourceIntTest {
     private static final String UPDATED_REPAIR_CODE = "BBBBB";
     private static final String DEFAULT_DISTANCE_LEFT = "AAAAA";
     private static final String UPDATED_DISTANCE_LEFT = "BBBBB";
-    private static final String DEFAULT_DISRANCE_SB = "AAAAA";
-    private static final String UPDATED_DISRANCE_SB = "BBBBB";
+    private static final String DEFAULT_DISTANCE_SB = "AAAAA";
+    private static final String UPDATED_DISTANCE_SB = "BBBBB";
     private static final String DEFAULT_DISTANCE_Z = "AAAAA";
     private static final String UPDATED_DISTANCE_Z = "BBBBB";
 
@@ -112,7 +112,7 @@ public class ValveComplaintResourceIntTest {
         valveComplaint.setValveNo(DEFAULT_VALVE_NO);
         valveComplaint.setRepairCode(DEFAULT_REPAIR_CODE);
         valveComplaint.setDistanceLeft(DEFAULT_DISTANCE_LEFT);
-        valveComplaint.setDisranceSb(DEFAULT_DISRANCE_SB);
+        valveComplaint.setDistanceSb(DEFAULT_DISTANCE_SB);
         valveComplaint.setDistanceZ(DEFAULT_DISTANCE_Z);
     }
 
@@ -141,7 +141,7 @@ public class ValveComplaintResourceIntTest {
         assertThat(testValveComplaint.getValveNo()).isEqualTo(DEFAULT_VALVE_NO);
         assertThat(testValveComplaint.getRepairCode()).isEqualTo(DEFAULT_REPAIR_CODE);
         assertThat(testValveComplaint.getDistanceLeft()).isEqualTo(DEFAULT_DISTANCE_LEFT);
-        assertThat(testValveComplaint.getDisranceSb()).isEqualTo(DEFAULT_DISRANCE_SB);
+        assertThat(testValveComplaint.getDistanceSb()).isEqualTo(DEFAULT_DISTANCE_SB);
         assertThat(testValveComplaint.getDistanceZ()).isEqualTo(DEFAULT_DISTANCE_Z);
     }
 
@@ -165,7 +165,7 @@ public class ValveComplaintResourceIntTest {
                 .andExpect(jsonPath("$.[*].valveNo").value(hasItem(DEFAULT_VALVE_NO)))
                 .andExpect(jsonPath("$.[*].repairCode").value(hasItem(DEFAULT_REPAIR_CODE.toString())))
                 .andExpect(jsonPath("$.[*].distanceLeft").value(hasItem(DEFAULT_DISTANCE_LEFT.toString())))
-                .andExpect(jsonPath("$.[*].disranceSb").value(hasItem(DEFAULT_DISRANCE_SB.toString())))
+                .andExpect(jsonPath("$.[*].distanceSb").value(hasItem(DEFAULT_DISTANCE_SB.toString())))
                 .andExpect(jsonPath("$.[*].distanceZ").value(hasItem(DEFAULT_DISTANCE_Z.toString())));
     }
 
@@ -189,7 +189,7 @@ public class ValveComplaintResourceIntTest {
             .andExpect(jsonPath("$.valveNo").value(DEFAULT_VALVE_NO))
             .andExpect(jsonPath("$.repairCode").value(DEFAULT_REPAIR_CODE.toString()))
             .andExpect(jsonPath("$.distanceLeft").value(DEFAULT_DISTANCE_LEFT.toString()))
-            .andExpect(jsonPath("$.disranceSb").value(DEFAULT_DISRANCE_SB.toString()))
+            .andExpect(jsonPath("$.distanceSb").value(DEFAULT_DISTANCE_SB.toString()))
             .andExpect(jsonPath("$.distanceZ").value(DEFAULT_DISTANCE_Z.toString()));
     }
 
@@ -219,7 +219,7 @@ public class ValveComplaintResourceIntTest {
         valveComplaint.setValveNo(UPDATED_VALVE_NO);
         valveComplaint.setRepairCode(UPDATED_REPAIR_CODE);
         valveComplaint.setDistanceLeft(UPDATED_DISTANCE_LEFT);
-        valveComplaint.setDisranceSb(UPDATED_DISRANCE_SB);
+        valveComplaint.setDistanceSb(UPDATED_DISTANCE_SB);
         valveComplaint.setDistanceZ(UPDATED_DISTANCE_Z);
 
         restValveComplaintMockMvc.perform(put("/api/valveComplaints")
@@ -240,7 +240,7 @@ public class ValveComplaintResourceIntTest {
         assertThat(testValveComplaint.getValveNo()).isEqualTo(UPDATED_VALVE_NO);
         assertThat(testValveComplaint.getRepairCode()).isEqualTo(UPDATED_REPAIR_CODE);
         assertThat(testValveComplaint.getDistanceLeft()).isEqualTo(UPDATED_DISTANCE_LEFT);
-        assertThat(testValveComplaint.getDisranceSb()).isEqualTo(UPDATED_DISRANCE_SB);
+        assertThat(testValveComplaint.getDistanceSb()).isEqualTo(UPDATED_DISTANCE_SB);
         assertThat(testValveComplaint.getDistanceZ()).isEqualTo(UPDATED_DISTANCE_Z);
     }
 

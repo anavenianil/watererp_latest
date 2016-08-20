@@ -3,6 +3,8 @@ package com.callippus.water.erp.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,12 +27,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.BurstComplaint;
+import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.JobCardDTO;
 import com.callippus.water.erp.domain.JobCardItemRequirement;
+import com.callippus.water.erp.domain.ValveComplaint;
 import com.callippus.water.erp.domain.WaterLeakageComplaint;
 import com.callippus.water.erp.repository.BurstComplaintRepository;
 import com.callippus.water.erp.repository.JobCardItemRequirementRepository;
 import com.callippus.water.erp.repository.JobCardSiteStatusRepository;
+import com.callippus.water.erp.repository.ValveComplaintRepository;
 import com.callippus.water.erp.repository.WaterLeakageComplaintRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -55,6 +60,9 @@ public class WaterLeakageComplaintResource {
     
     @Inject
     private BurstComplaintRepository burstComplaintRepository;
+    
+    @Inject
+    private ValveComplaintRepository valveComplaintRepository;
     
     @Inject 
     private WaterLeakageComplaintWorkflowService waterLeakageComplaintWorkflowService;
@@ -179,6 +187,15 @@ public class WaterLeakageComplaintResource {
 				jobCardDTO.getBurstComplaint().setWaterLeakageComplaint(waterLeakageComplaint);
 				burstComplaint = burstComplaintRepository.save(jobCardDTO.getBurstComplaint());
 				jobCardTypeDomainId = burstComplaint.getId();
+			}
+			
+			if("VALVE".equals(waterLeakageComplaint.getLeakageType()) && jobCardDTO.getValveComplaints().size()!=0){
+				List<ValveComplaint> valveComplaints = jobCardDTO.getValveComplaints();
+				Iterator<ValveComplaint> iterator = valveComplaints.iterator();
+				while(iterator.hasNext()){
+			          iterator.next().setWaterLeakageComplaint(waterLeakageComplaint);
+			        }
+				valveComplaintRepository.save(jobCardDTO.getValveComplaints());
 			}
 			
 			if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){

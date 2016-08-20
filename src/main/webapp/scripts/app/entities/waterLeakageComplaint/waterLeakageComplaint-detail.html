@@ -252,57 +252,210 @@
 									</div>
 								</div>
 							</fieldset>
-							<br>
+						</div>
+						<div ng-if="waterLeakageComplaint.leakageType ==='VALVE'">
 							<fieldset>
-								<legend>Material Required For Repair</legend>
-								<div class="row">
-									<div class="col-sm-3">
-										<label for="field_materialMaster">Material Name</label>
-									</div>
-									<div class="col-sm-2">
-										<label class="control-label" for="field_unit">Unit</label>
-									</div>
-									<div class="col-sm-2">
-										<label class="control-label" for="field_quantity">Quantity</label>
-									</div>
-								</div>
-								<hr>
-								<fieldset ng-repeat="item in jobCardDTO.jobCardItemRequirements">
+								<legend>Request Type : VALVE</legend>
+								<fieldset ng-repeat="item in jobCardDTO.valveComplaints">
+									<legend>Valve Details : {{$index+1}}</legend>
 									<div class="row">
-										<div class="col-sm-3">
-											<select class="form-control" id="field_materialMaster"
-												name="materialMaster" ng-model="item.materialMaster"
-												ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
-												<option value=""></option>
+										<!-- <div class="col-sm-2">
+											<label class="control-label" for="field_closedTime">Closed
+												Time </label> <input type="text" class="form-control input-sm"
+												name="closedTime" id="field_closedTime"
+												ng-model="item.closedTime" />
+										</div> -->
+										<div class="col-sm-2">
+											<label class="control-label" for="field_closedTime">Closed
+												Time </label>
+											<div class="input-group">
+												<input id="field_closedTime" type="text"
+													class="form-control" name="closedTime"
+													uib-datepicker-popup="{{dateformat}}"
+													ng-model="item.closedTime"
+													is-open="datePickerForClosedTime.status.opened" /> <span
+													class="input-group-btn">
+													<button type="button" class="btn btn-default"
+														ng-click="datePickerForClosedTimeOpen($event)">
+														<i class="glyphicon glyphicon-calendar"></i>
+													</button>
+												</span>
+											</div>
+										</div>
+										<!-- <div class="col-sm-2">
+											<label class="control-label" for="field_openTime">Open
+												Time </label> <input type="text" class="form-control input-sm"
+												name="openTime" id="field_openTime" ng-model="item.openTime" />
+										</div> -->
+										<div class="col-sm-2">
+											<label class="control-label" for="field_openTime">Closed
+												Time </label>
+											<div class="input-group">
+												<input id="field_openTime" type="text" class="form-control"
+													name="openTime" uib-datepicker-popup="{{dateformat}}"
+													ng-model="item.openTime"
+													is-open="datePickerForOpenTime.status.opened" /> <span
+													class="input-group-btn">
+													<button type="button" class="btn btn-default"
+														ng-click="datePickerForOpenTimeOpen($event)">
+														<i class="glyphicon glyphicon-calendar"></i>
+													</button>
+												</span>
+											</div>
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label" for="field_colourCode">Colour
+												Code </label> <select class="form-control input-sm"
+												id="field_colourCode" name="colourCode"
+												ng-model="item.colourCode">
+												<option value="Red Closed Valve">Red Closed Valve</option>
+												<option value="Yellow Scour Valve">Yellow Scour
+													Valve</option>
+												<option value="Blue Air Valve">Blue Air Valve</option>
 											</select>
 										</div>
 										<div class="col-sm-2">
-											<select class="form-control" id="field_uom" name="uom"
-												ng-model="item.uom"
-												ng-options="uom as uom.value for uom in uoms track by uom.id">
-												<option value=""></option>
+											<label class="control-label" for="field_side">Side </label> <select
+												class="form-control input-sm" id="field_side" name="side"
+												ng-model="item.side">
+												<option value="Right Hand">Right Hand</option>
+												<option value="Left Hand">Left Hand</option>
 											</select>
 										</div>
 										<div class="col-sm-2">
-											<input type="number" class="form-control" name="quantity"
-												id="field_quantity" min="0" ng-model="item.quantity" />
+											<label class="control-label" for="field_noOfTurns">No.
+												Of Turns </label> <input type="text" class="form-control input-sm"
+												name="noOfTurns" id="field_noOfTurns"
+												ng-model="item.noOfTurns" />
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label" for="field_valveSize">Valve
+												Size </label> <input type="text" class="form-control input-sm"
+												name="valveSize" id="field_valveSize"
+												ng-model="item.valveSize" />
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-sm-2">
+											<label class="control-label" for="field_valveNo">Valve
+												No. </label> <input type="text" class="form-control input-sm"
+												name="valveNo" id="field_valveNo" ng-model="item.valveNo" />
+										</div>
+
+
+										<div class="col-sm-2">
+											<label class="control-label" for="field_distanceLeft">Distance
+												Left Size </label> <input type="text" class="form-control input-sm"
+												name="distanceLeft" id="field_distanceLeft"
+												ng-model="item.distanceLeft" />
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label" for="field_distanceSb">Distance
+												SB </label> <input type="text" class="form-control input-sm"
+												name="distanceSb" id="field_distanceSb"
+												ng-model="item.distanceSb" />
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label" for="field_distanceZ">Distance
+												"Z" </label> <input type="text" class="form-control input-sm"
+												name="distanceZ" id="field_distanceZ"
+												ng-model="item.distanceZ" />
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label" for="field_repairCode">Repair
+												Code </label> <select class="form-control input-sm"
+												id="field_repairCode" name="repairCode"
+												ng-model="item.repairCode">
+												<option value=""></option>
+												<option value="Repack Gland">Repack Gland</option>
+												<option value="Tighten Gland">Tighten Gland</option>
+												<option value="Replace Spindle">Replace Spindle</option>
+												<option value="Replace Gate">Replace Gate</option>
+												<option value="Replace Valve(RSV)">Replace
+													Valve(RSV)</option>
+												<option value="Close/Open Valve">Close/Open Valve</option>
+												<option value="Inspect Valve">Inspect Valve</option>
+												<option value="Replace Lid">Replace Lid</option>
+												<option value="Replace Gate Valve">Replace Gate
+													Valve</option>
+												<option value="Service P.R.V.">Service P.R.V.</option>
+												<option value="Replace Scour Valve">Replace Scour
+													Valve</option>
+												<option value="Replace Interzone Valve">Replace
+													Interzone Valve</option>
+												<option value="">Other</option>
+											</select>
 										</div>
 										<div class="col-sm-1">
+											<label>Remove </label>
 											<button type="button" class="btn btn-danger"
-												ng-click="removeItemArr($index)">
-												<span class="glyphicon glyphicon-remove-circle"></span>
+												ng-click="removeValveArr($index)">
+												<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>Remove</span>
 											</button>
 										</div>
 									</div>
 									<br>
+									<hr>
 								</fieldset>
 								<button type="button" class="btn btn-primary"
-									ng-click="createItemArr()">
+									ng-click="createValveArr()">
 									<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
-										Items</span>
+										Valve Details</span>
 								</button>
 							</fieldset>
 						</div>
+						<br>
+						<fieldset>
+							<legend>Material Required For Repair</legend>
+							<div class="row">
+								<div class="col-sm-3">
+									<label for="field_materialMaster">Material Name</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_unit">Unit</label>
+								</div>
+								<div class="col-sm-2">
+									<label class="control-label" for="field_quantity">Quantity</label>
+								</div>
+							</div>
+							<hr>
+							<fieldset ng-repeat="item in jobCardDTO.jobCardItemRequirements">
+								<div class="row">
+									<div class="col-sm-3">
+										<select class="form-control" id="field_materialMaster"
+											name="materialMaster" ng-model="item.materialMaster"
+											ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
+											<option value=""></option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<select class="form-control" id="field_uom" name="uom"
+											ng-model="item.uom"
+											ng-options="uom as uom.value for uom in uoms track by uom.id">
+											<option value=""></option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<input type="number" class="form-control" name="quantity"
+											id="field_quantity" min="0" ng-model="item.quantity" />
+									</div>
+									<div class="col-sm-1">
+										<button type="button" class="btn btn-danger"
+											ng-click="removeItemArr($index)">
+											<span class="glyphicon glyphicon-remove-circle"></span>
+										</button>
+									</div>
+								</div>
+								<br>
+							</fieldset>
+							<button type="button" class="btn btn-primary"
+								ng-click="createItemArr()">
+								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+									Items</span>
+							</button>
+						</fieldset>
+
 
 						<!-- if request is hydrant -->
 
@@ -354,6 +507,88 @@
 							</div>
 						</div>
 					</fieldset>
+					<!-- Display Valve Details -->
+					<fieldset ng-if="valveComplaints.length >0">
+						<legend>Valve Details</legend>
+						<div class="row">
+							<div class="col-sm-1">
+								<label>closed Time</label>
+							</div>
+							<div class="col-sm-1">
+								<label>open Time</label>
+							</div>
+							<div class="col-sm-1">
+								<label>colour Code</label>
+							</div>
+							<div class="col-sm-1">
+								<label>side</label>
+							</div>
+							<div class="col-sm-1">
+								<label>no Of Turns</label>
+							</div>
+							<div class="col-sm-1">
+								<label>valve Size</label>
+							</div>
+							<div class="col-sm-1">
+								<label>valve No</label>
+							</div>
+							<div class="col-sm-1">
+								<label>repair Code</label>
+							</div>
+							<div class="col-sm-1">
+								<label>distance Left</label>
+							</div>
+							<div class="col-sm-1">
+								<label>distance Sb</label>
+							</div>
+							<div class="col-sm-1">
+								<label>distance Z</label>
+							</div>
+						</div>
+						<div class="row"
+							ng-repeat="valveComplaint in valveComplaints track by $index">
+							<div class="row">
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.closedTime | date:'medium'}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.openTime | date:'medium'}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.colourCode}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.side}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.noOfTurns}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.valveSize}}</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.valveNo}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.repairCode}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.distanceLeft}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.distanceSb}}</h5>
+								</div>
+								<div class="col-sm-1">
+									<h5 class="list-group-item-heading">{{valveComplaint.distanceZ}}</h5>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+
+
 					<fieldset
 						ng-if="waterLeakageComplaint.jobCardItemRequirements.length >0">
 						<legend>Items Required</legend>
