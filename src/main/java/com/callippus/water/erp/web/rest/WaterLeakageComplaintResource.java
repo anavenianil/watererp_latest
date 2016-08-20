@@ -211,6 +211,7 @@ public class WaterLeakageComplaintResource {
 			waterLeakageComplaintWorkflowService.approvedWaterLeakageComplaints(waterLeakageComplaint);
 			
 			if(CPSConstants.UPDATE.equals(workflowService.getMessage()) && jobCardDTO.getJobCardSiteStatus()!=null){
+				jobCardDTO.getJobCardSiteStatus().setWaterLeakageComplaint(waterLeakageComplaint);
 				jobCardSiteStatusRepository.save(jobCardDTO.getJobCardSiteStatus());
 				waterLeakageComplaint.setStatus("COMPLETED");
 			}

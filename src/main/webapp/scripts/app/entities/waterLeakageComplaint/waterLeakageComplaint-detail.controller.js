@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('WaterLeakageComplaintDetailController', function ($scope, $rootScope, $stateParams, entity, WaterLeakageComplaint, DivisionMaster, 
-    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint) {
+    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint, JobCardSiteStatus) {
         $scope.waterLeakageComplaint = entity;
         
         
@@ -13,8 +13,10 @@ angular.module('watererpApp')
         
         //$scope.jobCardDTO.jobCardItemRequirements = [];
         $scope.count = 0;
-        var complaintId = 0;
+        //var complaintId = 0;
         $scope.burstComplaint = BurstComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
+        
+        $scope.jobCardSiteStatus = JobCardSiteStatus.getByComplaintId({waterLeakageComplaint : $stateParams.id});
   
         $scope.load = function (id) {
             WaterLeakageComplaint.get({id: id}, function(result) {
