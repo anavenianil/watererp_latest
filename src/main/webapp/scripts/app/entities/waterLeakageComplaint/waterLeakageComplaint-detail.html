@@ -1,7 +1,7 @@
 
 <div>
 	<h2>
-		<span>WaterLeakageComplaint</span> {{waterLeakageComplaint.id}}
+		<span>Water Leakage Complaint</span> {{waterLeakageComplaint.id}}
 	</h2>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -49,6 +49,7 @@
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
+					<!-- Water Leakage Complaint -->
 					<fieldset>
 						<legend>Complaint Details</legend>
 						<div class="row">
@@ -103,8 +104,10 @@
 						<br>
 					</fieldset>
 					<hr>
+					<!--All Complaint Form -->
 					<div
 						ng-if="orgRole.id===15 && waterLeakageComplaint.status === 'FORWARDED'">
+						<!-- Burst Complaint Form Starts Here -->
 						<div ng-if="waterLeakageComplaint.leakageType ==='BURST'">
 							<fieldset>
 								<legend>Leakage Type : BURST</legend>
@@ -253,6 +256,8 @@
 								</div>
 							</fieldset>
 						</div>
+						<!-- Burst Complaint Form Ended Above -->
+						<!-- Valve Complaint Form Starts Below -->
 						<div ng-if="waterLeakageComplaint.leakageType ==='VALVE'">
 							<fieldset>
 								<legend>Request Type : VALVE</legend>
@@ -405,7 +410,83 @@
 								</button>
 							</fieldset>
 						</div>
+						<!-- Valve Complaint Form Ended Above -->
+						<!-- Hydrant Complaint Form Starts Below -->
+						<div ng-if="waterLeakageComplaint.leakageType ==='HYDRANT'">
+							<fieldset>
+								<legend>Leakage Type: Hydrant</legend>
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="control-label" for="field_fromLeft">From
+											Left </label> <input type="text" class="form-control" name="fromLeft"
+											id="field_fromLeft"
+											ng-model="jobCardDTO.hydrantComplaint.fromLeft" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_fromSb">From
+											SB </label> <input type="text" class="form-control" name="fromSb"
+											id="field_fromSb"
+											ng-model="jobCardDTO.hydrantComplaint.fromSb" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_problemAt">Problem
+											At </label> <select class="form-control" id="field_problemAt"
+											name="problemAt"
+											ng-model="jobCardDTO.hydrantComplaint.problemAt">
+											<option value="ABOVE GROUND">ABOVE GROUND</option>
+											<option value="BELOW GROUND">BELOW GROUND</option>
+										</select>
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_activityType">Activity
+											Type </label> <select class="form-control" id="field_activityType"
+											name="activityType"
+											ng-model="jobCardDTO.hydrantComplaint.activityType">
+											<option value=""></option>
+											<option value="Repack Gland">Repack Gland</option>
+											<option value="Tighten Gland">Tighten Gland</option>
+											<option value="Reolace Hydrant">Reolace Hydrant</option>
+											<option value="Rewasher Flat Washer">Rewasher Flat
+												Washer</option>
+											<option value="Replace Head">Replace Head</option>
+											<option value="Replace Lid">Replace Lid</option>
+											<option value="Closing Of Hydrant">Closing Of
+												Hydrant</option>
+											<option value="">Other</option>
+										</select>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="control-label" for="field_pressure">Pressure
+										</label> <input type="text" class="form-control" name="pressure"
+											id="field_pressure"
+											ng-model="jobCardDTO.hydrantComplaint.pressure" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_pressureTime">Pressure
+											Time </label> <input type="text" class="form-control"
+											name="pressureTime" id="field_pressureTime"
+											ng-model="jobCardDTO.hydrantComplaint.pressureTime" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_flow">Flow </label> <input
+											type="text" class="form-control" name="flow" id="field_flow"
+											ng-model="jobCardDTO.hydrantComplaint.flow" />
+									</div>
+									<div class="col-sm-3">
+										<label class="control-label" for="field_flowTime">Flow
+											Time </label> <input type="text" class="form-control" name="flowTime"
+											id="field_flowTime"
+											ng-model="jobCardDTO.hydrantComplaint.flowTime" />
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<!-- Hyderant Complaint Form Ended Above -->
 						<br>
+						<!-- JobCardItemRequirement Form Starts Below -->
 						<fieldset>
 							<legend>Material Required For Repair</legend>
 							<div class="row">
@@ -455,12 +536,9 @@
 									Items</span>
 							</button>
 						</fieldset>
-
-
-						<!-- if request is hydrant -->
-
+						<!-- jobCardItemRequirement Ended Above -->
 					</div>
-					<!-- Display Burst Value -->
+					<!-- Display Burst Complaint Value -->
 					<fieldset ng-if="burstComplaint.id != null">
 						<legend>Burst Details</legend>
 						<div class="row">
@@ -507,88 +585,108 @@
 							</div>
 						</div>
 					</fieldset>
-					<!-- Display Valve Details -->
+					<!-- Display Valve Complaints Values -->
 					<fieldset ng-if="valveComplaints.length >0">
 						<legend>Valve Details</legend>
+						<div ng-repeat="valveComplaint in valveComplaints track by $index">
+							<fieldset>
+								<legend>Valve No.:{{$index+1}}</legend>
+								<div class="row">
+									<div class="col-sm-2">
+										<label>closed Time</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.closedTime
+											| date:'medium'}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>open Time</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.openTime
+											| date:'medium'}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>colour Code</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.colourCode}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>side</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.side}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>no Of Turns</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.noOfTurns}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>valve Size</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.valveSize}}</h5>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<label>valve No</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.valveNo}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>repair Code</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.repairCode}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>distance Left</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.distanceLeft}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>distance Sb</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.distanceSb}}</h5>
+									</div>
+									<div class="col-sm-2">
+										<label>distance Z</label>
+										<h5 class="list-group-item-heading">{{valveComplaint.distanceZ}}</h5>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</fieldset>
+					<!-- Display Hydrant Complaint Values -->
+					<fieldset ng-if="hydrantComplaint.id != null">
+						<legend>Hydrant Details</legend>
 						<div class="row">
-							<div class="col-sm-1">
-								<label>closed Time</label>
+							<div class="col-sm-3">
+								<label>From Left</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.fromLeft}}</h5>
 							</div>
-							<div class="col-sm-1">
-								<label>open Time</label>
+							<div class="col-sm-3">
+								<label>From Sb</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.fromSb}}</h5>
 							</div>
-							<div class="col-sm-1">
-								<label>colour Code</label>
+							<div class="col-sm-3">
+								<label>Problem At</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.problemAt}}</h5>
 							</div>
-							<div class="col-sm-1">
-								<label>side</label>
-							</div>
-							<div class="col-sm-1">
-								<label>no Of Turns</label>
-							</div>
-							<div class="col-sm-1">
-								<label>valve Size</label>
-							</div>
-							<div class="col-sm-1">
-								<label>valve No</label>
-							</div>
-							<div class="col-sm-1">
-								<label>repair Code</label>
-							</div>
-							<div class="col-sm-1">
-								<label>distance Left</label>
-							</div>
-							<div class="col-sm-1">
-								<label>distance Sb</label>
-							</div>
-							<div class="col-sm-1">
-								<label>distance Z</label>
+							<div class="col-sm-3">
+								<label>Activity Type</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.activityType}}</h5>
 							</div>
 						</div>
-						<div class="row"
-							ng-repeat="valveComplaint in valveComplaints track by $index">
-							<div class="row">
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.closedTime | date:'medium'}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.openTime | date:'medium'}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.colourCode}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.side}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.noOfTurns}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.valveSize}}</h5>
-								</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>Pressure</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.pressure}}</h5>
 							</div>
-							<div class="row">
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.valveNo}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.repairCode}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.distanceLeft}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.distanceSb}}</h5>
-								</div>
-								<div class="col-sm-1">
-									<h5 class="list-group-item-heading">{{valveComplaint.distanceZ}}</h5>
-								</div>
+							<div class="col-sm-3">
+								<label>Pressure Time</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.pressureTime}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Flow</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.flow}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Flow Time</label>
+								<h5 class="list-group-item-heading">{{hydrantComplaint.flowTime}}</h5>
 							</div>
 						</div>
 					</fieldset>
 
-
-
+					<!-- Display JobCardItemRequirement Values -->
 					<fieldset
 						ng-if="waterLeakageComplaint.jobCardItemRequirements.length >0">
 						<legend>Items Required</legend>
@@ -617,6 +715,7 @@
 						</div>
 					</fieldset>
 					<br>
+					<!-- JobCardSiteStatus Form starts below -->
 					<fieldset
 						ng-if="waterLeakageComplaint.status==='APPROVED' && orgRole.id===15">
 						<legend>Site Status</legend>
@@ -700,6 +799,8 @@
 							</div>
 						</div>
 					</fieldset>
+					<!-- JobCardSiteStatus Ended Above -->
+					<!-- Display JobCardSiteStatus Values -->
 					<fieldset ng-if="waterLeakageComplaint.status==='COMPLETED'">
 						<legend>Site Status</legend>
 						<div class="row">

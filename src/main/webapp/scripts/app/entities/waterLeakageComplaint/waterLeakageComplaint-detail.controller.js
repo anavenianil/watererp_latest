@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('WaterLeakageComplaintDetailController', function ($scope, $rootScope, $stateParams, entity, WaterLeakageComplaint, DivisionMaster, 
-    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint, JobCardSiteStatus, ValveComplaint) {
+    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint, JobCardSiteStatus, ValveComplaint, HydrantComplaint) {
         $scope.waterLeakageComplaint = entity;
         
         
@@ -16,6 +16,7 @@ angular.module('watererpApp')
 
         $scope.burstComplaint = BurstComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
         $scope.valveComplaints = ValveComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
+        $scope.hydrantComplaint = HydrantComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
         
         $scope.jobCardSiteStatus = JobCardSiteStatus.getByComplaintId({waterLeakageComplaint : $stateParams.id});
   
@@ -94,8 +95,8 @@ angular.module('watererpApp')
         	return $http.post('/api/waterLeakageComplaints/forwardRequest',
         			$scope.jobCardDTO).then(
 					function(response) {
-						console.log("Server response:"
-								+ JSON.stringify(response));
+						/*console.log("Server response:"
+								+ JSON.stringify(response));*/
 					});
         }
 		

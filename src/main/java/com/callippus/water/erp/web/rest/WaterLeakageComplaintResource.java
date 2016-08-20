@@ -3,7 +3,6 @@ package com.callippus.water.erp.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -27,12 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.BurstComplaint;
-import com.callippus.water.erp.domain.ItemRequired;
+import com.callippus.water.erp.domain.HydrantComplaint;
 import com.callippus.water.erp.domain.JobCardDTO;
 import com.callippus.water.erp.domain.JobCardItemRequirement;
 import com.callippus.water.erp.domain.ValveComplaint;
 import com.callippus.water.erp.domain.WaterLeakageComplaint;
 import com.callippus.water.erp.repository.BurstComplaintRepository;
+import com.callippus.water.erp.repository.HydrantComplaintRepository;
 import com.callippus.water.erp.repository.JobCardItemRequirementRepository;
 import com.callippus.water.erp.repository.JobCardSiteStatusRepository;
 import com.callippus.water.erp.repository.ValveComplaintRepository;
@@ -73,7 +73,8 @@ public class WaterLeakageComplaintResource {
     @Inject
     private JobCardSiteStatusRepository jobCardSiteStatusRepository;
     
-    
+    @Inject
+    private HydrantComplaintRepository hydrantComplaintRepository;
     /**
      * POST  /waterLeakageComplaints -> Create a new waterLeakageComplaint.
      */
@@ -198,6 +199,13 @@ public class WaterLeakageComplaintResource {
 				valveComplaintRepository.save(jobCardDTO.getValveComplaints());
 			}
 			
+			if("HYDRANT".equals(waterLeakageComplaint.getLeakageType()) && jobCardDTO.getHydrantComplaint()!=null){
+				HydrantComplaint hydrantComplaint = new HydrantComplaint();
+				jobCardDTO.getHydrantComplaint().setWaterLeakageComplaint(waterLeakageComplaint);
+				hydrantComplaint = hydrantComplaintRepository.save(jobCardDTO.getHydrantComplaint());
+				jobCardTypeDomainId = hydrantComplaint.getId();
+			}
+			
 			if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
 				if(jobCardDTO.getJobCardItemRequirements().size()>0){
 					/*List<JobCardItemRequirement> jobCardItemRequirement = jobCardDTO.getJobCardItemRequirements();
@@ -231,6 +239,7 @@ public class WaterLeakageComplaintResource {
 				jobCardDTO.getJobCardSiteStatus().setWaterLeakageComplaint(waterLeakageComplaint);
 				jobCardSiteStatusRepository.save(jobCardDTO.getJobCardSiteStatus());
 				waterLeakageComplaint.setStatus("COMPLETED");
+				waterLeakageComplaintRepository.save(waterLeakageComplaint);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
