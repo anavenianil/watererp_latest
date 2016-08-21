@@ -75,3 +75,8 @@ sudo nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin
 #sleep 60
 #npm install
 #sudo grunt protractor-xvfb
+
+
+mvn -Pprod -Dyo.test.skip=true -Dmaven.test.skip=true package
+
+./watererp-0.0.1-SNAPSHOT.war --spring.profiles.active=prod

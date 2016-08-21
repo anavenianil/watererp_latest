@@ -4,6 +4,8 @@ import com.callippus.water.erp.domain.PersistentAuditEvent;
 
 import java.time.LocalDateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,7 +16,11 @@ public interface PersistenceAuditEventRepository extends JpaRepository<Persisten
 
     List<PersistentAuditEvent> findByPrincipal(String principal);
 
+    List<PersistentAuditEvent> findByAuditEventDateAfter(LocalDateTime after);
+
     List<PersistentAuditEvent> findByPrincipalAndAuditEventDateAfter(String principal, LocalDateTime after);
 
-    List<PersistentAuditEvent> findAllByAuditEventDateBetween(LocalDateTime fromDate, LocalDateTime toDate);
+    List<PersistentAuditEvent> findByPrincipalAndAuditEventDateAfterAndAuditEventType(String principle, LocalDateTime after, String type);
+
+    Page<PersistentAuditEvent> findAllByAuditEventDateBetween(LocalDateTime fromDate, LocalDateTime toDate, Pageable pageable);
 }
