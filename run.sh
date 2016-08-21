@@ -77,6 +77,6 @@ sudo nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin
 #sudo grunt protractor-xvfb
 
 
-mvn -Pprod -Dyo.test.skip=true -Dmaven.test.skip=true package
+#mvn -Pprod -Dyo.test.skip=true -Dmaven.test.skip=true package
 
-./watererp-0.0.1-SNAPSHOT.war --spring.profiles.active=prod
+#./watererp-0.0.1-SNAPSHOT.war --spring.profiles.active=prod
