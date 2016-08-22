@@ -526,54 +526,57 @@
 									ng-model="jobCardDTO.itemRequired"> Material Required
 								For Repair
 							</legend>
-							<div class="row" ng-if="jobCardDTO.itemRequired">
-								<div class="col-sm-3">
-									<label for="field_materialMaster">Material Name</label>
-								</div>
-								<div class="col-sm-2">
-									<label class="control-label" for="field_unit">Unit</label>
-								</div>
-								<div class="col-sm-2">
-									<label class="control-label" for="field_quantity">Quantity</label>
-								</div>
-							</div>
-							<hr>
-							<div ng-if="jobCardDTO.itemRequired===true">
-								<fieldset ng-repeat="item in jobCardDTO.jobCardItemRequirements">
-									<div class="row">
-										<div class="col-sm-3">
-											<select class="form-control" id="field_materialMaster"
-												name="materialMaster" ng-model="item.materialMaster"
-												ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
-												<option value=""></option>
-											</select>
-										</div>
-										<div class="col-sm-2">
-											<select class="form-control" id="field_uom" name="uom"
-												ng-model="item.uom"
-												ng-options="uom as uom.value for uom in uoms track by uom.id">
-												<option value=""></option>
-											</select>
-										</div>
-										<div class="col-sm-2">
-											<input type="number" class="form-control" name="quantity"
-												id="field_quantity" min="0" ng-model="item.quantity" />
-										</div>
-										<div class="col-sm-1">
-											<button type="button" class="btn btn-danger"
-												ng-click="removeItemArr($index)">
-												<span class="glyphicon glyphicon-remove-circle"></span>
-											</button>
-										</div>
+							<div ng-if="jobCardDTO.itemRequired">
+								<div class="row">
+									<div class="col-sm-3">
+										<label for="field_materialMaster">Material Name</label>
 									</div>
-									<br>
-								</fieldset>
+									<div class="col-sm-2">
+										<label class="control-label" for="field_unit">Unit</label>
+									</div>
+									<div class="col-sm-2">
+										<label class="control-label" for="field_quantity">Quantity</label>
+									</div>
+								</div>
+								<hr>
+								<div>
+									<fieldset
+										ng-repeat="item in jobCardDTO.jobCardItemRequirements">
+										<div class="row">
+											<div class="col-sm-3">
+												<select class="form-control" id="field_materialMaster"
+													name="materialMaster" ng-model="item.materialMaster"
+													ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
+													<option value=""></option>
+												</select>
+											</div>
+											<div class="col-sm-2">
+												<select class="form-control" id="field_uom" name="uom"
+													ng-model="item.uom"
+													ng-options="uom as uom.value for uom in uoms track by uom.id">
+													<option value=""></option>
+												</select>
+											</div>
+											<div class="col-sm-2">
+												<input type="number" class="form-control" name="quantity"
+													id="field_quantity" min="0" ng-model="item.quantity" />
+											</div>
+											<div class="col-sm-1">
+												<button type="button" class="btn btn-danger"
+													ng-click="removeItemArr($index)">
+													<span class="glyphicon glyphicon-remove-circle"></span>
+												</button>
+											</div>
+										</div>
+										<br>
+									</fieldset>
+								</div>
+								<button type="button" class="btn btn-primary"
+									ng-click="createItemArr()">
+									<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
+										Items</span>
+								</button>
 							</div>
-							<button type="button" class="btn btn-primary"
-								ng-if="jobCardDTO.itemRequired" ng-click="createItemArr()">
-								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;<span>Add
-									Items</span>
-							</button>
 						</fieldset>
 						<!-- jobCardItemRequirement Ended Above -->
 					</div>

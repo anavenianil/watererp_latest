@@ -234,10 +234,7 @@ public class WaterLeakageComplaintResource {
 			}
 			
 			waterLeakageComplaintRepository.save(waterLeakageComplaint);
-			
-			if(jobCardDTO.getItemRequired()){
-				workflowService.setStageID("6");
-			}
+
 			workflowService.getUserDetails();
 			waterLeakageComplaintWorkflowService.approvedWaterLeakageComplaints(waterLeakageComplaint);
 			
