@@ -10,7 +10,7 @@ public class CPSConstants {
 	public static final Integer METERCHANGED = 2;
 	
 	public static final BigDecimal ZERO = new BigDecimal("0.00");
-	
+	 
 	//customer info Change case
 	public static final String CONNECTIONCATEGORY = "Connection Category";
 	public static final String PIPESIZE = "Pipe Size";
@@ -24,6 +24,8 @@ public class CPSConstants {
 	public static final String INCORRECTBILL = "Incorrect Bill";
 	public static final String WATERLEAKAGE = "Water Leakage";
 	public static final String SERVICEUNAVAILABILITY = "Service Unavailibility";
+	
+	public static final String JOBCARD = "JOB CARD";
 	//public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
 	//public static final String CUSTOMERCOMPLAINTS = "customerComplaints";
 	//public static final String CUSTOMERCOMPLAINTSID = "";

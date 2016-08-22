@@ -1,0 +1,62 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "waterLeakageComplaint",
+            "otherEntityName": "waterLeakageComplaint",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "meterLocation",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "burstPipe",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "fromLeft",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "fromSb",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "burstArea",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "pipeType",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "pipeSize",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "holeSize",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "repairCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160812103334",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

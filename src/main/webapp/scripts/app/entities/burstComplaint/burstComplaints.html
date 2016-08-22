@@ -1,0 +1,76 @@
+<div>
+    <h2>BurstComplaints</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="burstComplaint.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new BurstComplaint
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="meterLocation"><span>MeterLocation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="burstPipe"><span>BurstPipe</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fromLeft"><span>FromLeft</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fromSb"><span>FromSb</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="burstArea"><span>BurstArea</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pipeType"><span>PipeType</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pipeSize"><span>PipeSize</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="holeSize"><span>HoleSize</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="repairCode"><span>RepairCode</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="waterLeakageComplaint.id"><span>waterLeakageComplaint</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="burstComplaint in burstComplaints track by burstComplaint.id">
+                    <td><a ui-sref="burstComplaint.detail({id:burstComplaint.id})">{{burstComplaint.id}}</a></td>
+                    <td>{{burstComplaint.meterLocation}}</td>
+                    <td>{{burstComplaint.burstPipe}}</td>
+                    <td>{{burstComplaint.fromLeft}}</td>
+                    <td>{{burstComplaint.fromSb}}</td>
+                    <td>{{burstComplaint.burstArea}}</td>
+                    <td>{{burstComplaint.pipeType}}</td>
+                    <td>{{burstComplaint.pipeSize}}</td>
+                    <td>{{burstComplaint.holeSize}}</td>
+                    <td>{{burstComplaint.repairCode}}</td>
+                    <td>
+                        <a ui-sref="waterLeakageComplaint.detail({id:burstComplaint.waterLeakageComplaint.id})">{{burstComplaint.waterLeakageComplaint.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="burstComplaint.detail({id:burstComplaint.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="burstComplaint.edit({id:burstComplaint.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="burstComplaint.delete({id:burstComplaint.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

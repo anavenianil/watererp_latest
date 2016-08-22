@@ -182,17 +182,22 @@ angular.module('watererpApp')
 		$scope.makeArr = [];
 		$scope.check = function(value){
 			
-			if(value == "Tittle Deed/Offer letter"){
+			if(value == "Submitted: Tittle Deed/Offer letter"){
 				$scope.makeArr.push(value);
 				//alert("Submitted:"+ value);
 				//alert("Array length:"+ $scope.makeArr.length);
 			}
-			else if(value == "Rented Property-lease-Rent Agreement"){
+			else if(value == "Submitted :Rented Property-lease-Rent Agreement"){
 				$scope.makeArr.push(value);
 				//alert("Submitted:"+ value);
 				//alert("Array length:"+ $scope.makeArr.length);
 			}
-			else if(value == "Not Submitted"){
+			else if(value == "Not Submitted : Rented Property-lease-Rent Agreement"){
+				$scope.makeArr.pop(value);
+				//alert("Not Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
+			else if(value == "Not Submitted: Tittle Deed/Offer letter"){
 				$scope.makeArr.pop(value);
 				//alert("Not Submitted:"+ value);
 				//alert("Array length:"+ $scope.makeArr.length);

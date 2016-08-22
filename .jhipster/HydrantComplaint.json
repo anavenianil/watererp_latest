@@ -1,0 +1,57 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "waterLeakageComplaint",
+            "otherEntityName": "waterLeakageComplaint",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "fromLeft",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "fromSb",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "problemAt",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "activityType",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "pressure",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "pressureTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "flow",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "flowTime",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160812104529",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

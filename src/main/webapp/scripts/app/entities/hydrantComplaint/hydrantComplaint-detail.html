@@ -1,0 +1,94 @@
+
+<div>
+    <h2><span>HydrantComplaint</span> {{hydrantComplaint.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>FromLeft</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.fromLeft}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>FromSb</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.fromSb}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ProblemAt</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.problemAt}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>ActivityType</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.activityType}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Pressure</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.pressure}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PressureTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.pressureTime}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Flow</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.flow}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>FlowTime</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{hydrantComplaint.flowTime}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>waterLeakageComplaint</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="waterLeakageComplaint.detail({id:hydrantComplaint.waterLeakageComplaint.id})">{{hydrantComplaint.waterLeakageComplaint.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

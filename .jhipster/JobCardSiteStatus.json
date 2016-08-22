@@ -1,0 +1,80 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "waterLeakageComplaint",
+            "otherEntityName": "waterLeakageComplaint",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "tarPatching",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "tarPatchingLength",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "tarPatchingBreadth",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "cleanSite",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "backFill",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "backFillLength",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "backFillBreadth",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "brickLayer",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "paving",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "pavingLength",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
+            "fieldName": "pavingBreadth",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "unableToLocate",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160812105519",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

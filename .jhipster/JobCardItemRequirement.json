@@ -1,0 +1,66 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "materialMaster",
+            "otherEntityName": "materialMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "uom",
+            "otherEntityName": "uom",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "waterLeakageComplaint",
+            "otherEntityName": "waterLeakageComplaint",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "quantity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "replaceLength",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "cascadeClamp",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "noOfSection",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "noOfClamps",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "domainObject",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20160812110310",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

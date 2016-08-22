@@ -66,35 +66,35 @@ angular.module('watererpApp').controller(
 				var ret = false;
 				switch ($scope.applicationTxn.status) {
 				case 0:
-					if ($scope.orgRole.orgRoleName === 'Technical Manager')
+					if ($scope.orgRole.id === 10)
 						ret = true;
 					break;
 				case 1:
-					if ($scope.orgRole.orgRoleName === 'Technical Zonal Supervisor')
+					if ($scope.orgRole.id === 24)
 						ret = true;
 					break;
 				case 2:
-					if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
+					if ($scope.orgRole.id === 15)
 						ret = true;
 					break;
 				case 3:
-					if ($scope.orgRole.orgRoleName === 'Technical Manager')
+					if ($scope.orgRole.id === 10)
 						ret = true;
 					break;
 				case 4:
-					if ($scope.orgRole.orgRoleName === 'Assistant Accountant(Revenue)')
+					if ($scope.orgRole.id === 22)
 						ret = true;
 					break;
 				case 5:
-					if ($scope.orgRole.orgRoleName === 'Stores & Supplies Officer')
+					if ($scope.orgRole.id === 9)
 						ret = true;
 					break;
 				case 6:
-					if ($scope.orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation')
+					if ($scope.orgRole.id === 15)
 						ret = true;
 					break;
 				case 7:
-					if ($scope.orgRole.orgRoleName === 'Billing Officer')
+					if ($scope.orgRole.id === 16)
 						ret = true;
 					break;
 				case 8:

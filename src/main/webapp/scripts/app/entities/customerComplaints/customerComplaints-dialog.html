@@ -212,14 +212,7 @@
 										<option value="HYDRANT">HYDRANT</option>
 									</select>
 								</div>
-								<div class="col-sm-5">
-									<label class="control-label" for="field_longi">Cordinate
-										X</label> <input type="text" class="form-control" name="longi"
-										id="field_longi" ng-model="customerComplaints.longi" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-5 col-sm-offset-0">
+								<div class="col-sm-5 ">
 									<label class="control-label" for="field_leakMagnitude">Leakage
 										Magnitude</label> <select class="form-control"
 										id="field_leakMagnitude" name="leakMagnitude"
@@ -228,6 +221,33 @@
 										<option value="MEDIUM">MEDIUM</option>
 										<option value="SEVERE">SEVERE</option>
 									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5 col-sm-offset-0">
+									<label for="field_divisionMaster">DMA</label> <select
+										class="form-control" id="field_divisionMaster"
+										name="divisionMaster"
+										ng-model="customerComplaints.divisionMaster"
+										ng-change="getStreet(customerComplaints.divisionMaster.id)"
+										ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-sm-5">
+									<label for="field_streetMaster">Street</label> <select
+										class="form-control" id="field_streetMaster"
+										name="streetMaster" ng-model="customerComplaints.streetMaster"
+										ng-options="streetMaster as streetMaster.streetNo +'-'+ streetMaster.streetName for streetMaster in streetMasters track by streetMaster.id">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5 col-sm-offset-0">
+									<label class="control-label" for="field_longi">Cordinate
+										X</label> <input type="text" class="form-control" name="longi"
+										id="field_longi" ng-model="customerComplaints.longi" />
 								</div>
 								<div class="col-sm-5">
 									<label class="control-label" for="field_lati">Cordinate

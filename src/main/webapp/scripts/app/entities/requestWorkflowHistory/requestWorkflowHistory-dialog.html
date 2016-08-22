@@ -1,114 +1,139 @@
 
 <form name="editForm" role="form" novalidate ng-submit="save()">
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myRequestWorkflowHistoryLabel">Create or edit a Request Work Flow History</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="requestWorkflowHistory.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_requestStage">Request Stage</label>
-            <input type="number" class="form-control" name="requestStage" id="field_requestStage"
-                    ng-model="requestWorkflowHistory.requestStage"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_assignedDate">Assigned Date</label>
-            <input id="field_assignedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="requestWorkflowHistory.assignedDate" is-open="datePickerForAssignedDate.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForAssignedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_actionedDate">Actioned Date</label>
-            <input id="field_actionedDate" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="requestWorkflowHistory.actionedDate" is-open="datePickerForActionedDate.status.opened"
-            />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForActionedDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_remarks">Remarks</label>
-            <input type="text" class="form-control" name="remarks" id="field_remarks"
-                    ng-model="requestWorkflowHistory.remarks"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_ipAddress">Ip Address</label>
-            <input type="text" class="form-control" name="ipAddress" id="field_ipAddress"
-                    ng-model="requestWorkflowHistory.ipAddress"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_assignedRole">Assigned  Role</label>
-            <input type="number" class="form-control" name="assignedRole" id="field_assignedRole"
-                    ng-model="requestWorkflowHistory.assignedRole"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_domainObject">Domain Object</label>
-            <input type="number" class="form-control" name="domainObject" id="field_domainObject"
-                    ng-model="requestWorkflowHistory.domainObject"
-                     />
-        </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="myRequestWorkflowHistoryLabel">Create
+			or edit a Request Work Flow History</h4>
+	</div>
+	<div class="modal-body">
+		<jh-alert-error></jh-alert-error>
+		<div class="form-group">
+			<label for="id">ID</label> <input type="text" class="form-control"
+				id="id" name="id" ng-model="requestWorkflowHistory.id" readonly />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_requestStage">Request
+				Stage</label> <input type="number" class="form-control" name="requestStage"
+				id="field_requestStage"
+				ng-model="requestWorkflowHistory.requestStage" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_assignedDate">Assigned
+				Date</label> <input id="field_assignedDate" type="text" class="form-control"
+				uib-datepicker-popup="{{dateformat}}"
+				ng-model="requestWorkflowHistory.assignedDate"
+				is-open="datePickerForAssignedDate.status.opened" /> <span
+				class="input-group-btn">
+				<button type="button" class="btn btn-default"
+					ng-click="datePickerForAssignedDateOpen($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_actionedDate">Actioned
+				Date</label> <input id="field_actionedDate" type="text" class="form-control"
+				uib-datepicker-popup="{{dateformat}}"
+				ng-model="requestWorkflowHistory.actionedDate"
+				is-open="datePickerForActionedDate.status.opened" /> <span
+				class="input-group-btn">
+				<button type="button" class="btn btn-default"
+					ng-click="datePickerForActionedDateOpen($event)">
+					<i class="glyphicon glyphicon-calendar"></i>
+				</button>
+			</span>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_remarks">Remarks</label> <input
+				type="text" class="form-control" name="remarks" id="field_remarks"
+				ng-model="requestWorkflowHistory.remarks" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_ipAddress">Ip Address</label>
+			<input type="text" class="form-control" name="ipAddress"
+				id="field_ipAddress" ng-model="requestWorkflowHistory.ipAddress" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_assignedRole">Assigned
+				Role</label> <input type="number" class="form-control" name="assignedRole"
+				id="field_assignedRole"
+				ng-model="requestWorkflowHistory.assignedRole" />
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="field_domainObject">Domain
+				Object</label> <input type="number" class="form-control" name="domainObject"
+				id="field_domainObject"
+				ng-model="requestWorkflowHistory.domainObject" />
+		</div>
 
-        <div class="form-group">
-            <label for="field_assignedFrom">Assigned From</label>
-            <select class="form-control" id="field_assignedFrom" name="assignedFrom" ng-model="requestWorkflowHistory.assignedFrom" ng-options="user as user.id for user in users track by user.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_assignedTo">Assigned To</label>
-            <select class="form-control" id="field_assignedTo" name="assignedTo" ng-model="requestWorkflowHistory.assignedTo" ng-options="user as user.id for user in users track by user.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_statusMaster">Status Master</label>
-            <select class="form-control" id="field_statusMaster" name="statusMaster" ng-model="requestWorkflowHistory.statusMaster" ng-options="statusMaster as statusMaster.id+'-'+statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_requestMaster">Request Master</label>
-            <select class="form-control" id="field_requestMaster" name="requestMaster" ng-model="requestWorkflowHistory.requestMaster" ng-options="requestMaster as requestMaster.id+'-'+statusMaster.status for requestMaster in requestmasters track by requestMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_workflowMaster">Work Flow Master</label>
-            <select class="form-control" id="field_workflowMaster" name="workflowMaster" ng-model="requestWorkflowHistory.workflowMaster" ng-options="workflowMaster as workflowMaster.id for workflowMaster in workflowmasters track by workflowMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_workflowStageMaster">Work Flow Stage Master</label>
-            <select class="form-control" id="field_workflowStageMaster" name="workflowStageMaster" ng-model="requestWorkflowHistory.workflowStageMaster" ng-options="workflowStageMaster as workflowStageMaster.id for workflowStageMaster in workflowstagemasters track by workflowStageMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_appliedBy">Applied By</label>
-            <select class="form-control" id="field_appliedBy" name="appliedBy" ng-model="requestWorkflowHistory.appliedBy" ng-options="user as user.id for user in users track by user.id">
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-        </button>
-    </div>
+		<div class="form-group">
+			<label for="field_assignedFrom">Assigned From</label> <select
+				class="form-control" id="field_assignedFrom" name="assignedFrom"
+				ng-model="requestWorkflowHistory.assignedFrom"
+				ng-options="user as user.id for user in users track by user.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_assignedTo">Assigned To</label> <select
+				class="form-control" id="field_assignedTo" name="assignedTo"
+				ng-model="requestWorkflowHistory.assignedTo"
+				ng-options="user as user.id for user in users track by user.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_statusMaster">Status Master</label> <select
+				class="form-control" id="field_statusMaster" name="statusMaster"
+				ng-model="requestWorkflowHistory.statusMaster"
+				ng-options="statusMaster as statusMaster.id+'-'+statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_requestMaster">Request Master</label> <select
+				class="form-control" id="field_requestMaster" name="requestMaster"
+				ng-model="requestWorkflowHistory.requestMaster"
+				ng-options="requestMaster as requestMaster.id+'-'+statusMaster.status for requestMaster in requestmasters track by requestMaster.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_workflowMaster">Work Flow Master</label> <select
+				class="form-control" id="field_workflowMaster" name="workflowMaster"
+				ng-model="requestWorkflowHistory.workflowMaster"
+				ng-options="workflowMaster as workflowMaster.id for workflowMaster in workflowmasters track by workflowMaster.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_workflowStageMaster">Work Flow Stage Master</label>
+			<select class="form-control" id="field_workflowStageMaster"
+				name="workflowStageMaster"
+				ng-model="requestWorkflowHistory.workflowStageMaster"
+				ng-options="workflowStageMaster as workflowStageMaster.id for workflowStageMaster in workflowstagemasters track by workflowStageMaster.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="field_appliedBy">Applied By</label> <select
+				class="form-control" id="field_appliedBy" name="appliedBy"
+				ng-model="requestWorkflowHistory.appliedBy"
+				ng-options="user as user.id for user in users track by user.id">
+				<option value=""></option>
+			</select>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ng-click="clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+		</button>
+	</div>
 </form>

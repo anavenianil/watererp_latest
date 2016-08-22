@@ -1,0 +1,76 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "divisionMaster",
+            "otherEntityName": "divisionMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "streetMaster",
+            "otherEntityName": "streetMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "jobCardItemRequirement",
+            "otherEntityName": "jobCardItemRequirement",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "waterLeakageComplaint"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "leakageType",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "coordinateX",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "coordinateY",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "leakMagnitude",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "complaintDateTime",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "daysRequired",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "staffRequired",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "complaintBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "status",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160812111107",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

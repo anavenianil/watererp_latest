@@ -10,5 +10,7 @@ import java.util.List;
  * Spring Data JPA repository for the DesignationMaster entity.
  */
 public interface DesignationMasterRepository extends JpaRepository<DesignationMaster,Long> {
+	
+	List<DesignationMaster> findAllByOrderByNameAsc();
 
 }
