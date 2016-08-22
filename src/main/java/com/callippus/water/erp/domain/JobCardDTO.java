@@ -16,6 +16,7 @@ public class JobCardDTO {
 	private JobCardSiteStatus jobCardSiteStatus;
 	private List<ValveComplaint> valveComplaints;
 	private HydrantComplaint hydrantComplaint;
+	private Boolean itemRequired;
 	
 	
 	public Long getDomainId() {
@@ -71,6 +72,12 @@ public class JobCardDTO {
 	}
 	public void setHydrantComplaint(HydrantComplaint hydrantComplaint) {
 		this.hydrantComplaint = hydrantComplaint;
+	}
+	public Boolean getItemRequired() {
+		return itemRequired;
+	}
+	public void setItemRequired(Boolean itemRequired) {
+		this.itemRequired = itemRequired;
 	}
 	
 }

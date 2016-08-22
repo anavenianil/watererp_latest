@@ -99,7 +99,7 @@
 								<div class="form-group">
 									<div class='input-group date' id='field_requestedDate'>
 										<input id="field_complaintDateTime" type="text"
-											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											class="form-control" uib-datepicker-popup="dd-MMM-yyyy hh:mm"
 											ng-model="waterLeakageComplaint.complaintDateTime"
 											is-open="datePickerForComplaintDateTime.status.opened" /> <span
 											class="input-group-btn">
@@ -118,6 +118,26 @@
 									ng-model="waterLeakageComplaint.complaintBy" />
 							</div>
 						</div>
+						<!-- <div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<div class="dropdown">
+									<a class="dropdown-toggle" id="dropdown2" role="button"
+										data-toggle="dropdown">
+										<div class="input-group">
+											<input type="text" class="form-control"
+												data-ng-model="waterLeakageComplaint.complaintDateTime"><span
+												class="input-group-addon"><i
+												class="glyphicon glyphicon-calendar"></i></span>
+										</div>
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<datetimepicker
+											data-ng-model="waterLeakageComplaint.complaintDateTime"
+											data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" />
+									</ul>
+								</div>
+							</div>
+						</div> -->
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"

@@ -2,18 +2,24 @@
 
 angular.module('watererpApp')
     .controller('WaterLeakageComplaintDetailController', function ($scope, $rootScope, $stateParams, entity, WaterLeakageComplaint, DivisionMaster, 
-    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint, JobCardSiteStatus, ValveComplaint, HydrantComplaint) {
+    		Principal, StreetMaster, JobCardItemRequirement, RequestWorkflowHistory, $http, MaterialMaster, Uom, BurstComplaint, JobCardSiteStatus, ValveComplaint, 
+    		HydrantComplaint, $state) {
         $scope.waterLeakageComplaint = entity;
         
         
         $scope.materialmasters = MaterialMaster.query();
         $scope.uoms = Uom.query();
         
+        $scope.user = Principal.getLogonUser();
+        console.log("login user:"+$scope.user.login);
+        //$scope. loginUser = $scope.user.login;
+        
         $scope.jobCardDTO = {};
         
         $scope.count = 0;
         $scope.valveCount = 0;
-
+        $scope.jobCardDTO.itemRequired = false;
+        
         $scope.burstComplaint = BurstComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
         $scope.valveComplaints = ValveComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
         $scope.hydrantComplaint = HydrantComplaint.getByComplaintId({waterLeakageComplaint : $stateParams.id});
@@ -68,8 +74,18 @@ angular.module('watererpApp')
                 for (var i = 0; i < result.length; i++) {
                     $scope.requestWorkflowHistorys.push(result[i]);
                 }
+                //console.log("Request WorkFlow History Length :"+$scope.requestWorkflowHistorys.length);
+                //console.log("Last request is at :"+$scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].assignedTo.login);
+                $scope.requestAt = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].assignedTo.login;
+                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+                console.log("Request at :"+$scope.requestAt);
+                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+                console.log("status :"+$scope.requestStatus);
             });
         };
+        
+        
+        
         if($stateParams.requestTypeId != null){
         	$scope.getWorkflowHistoryByDomainId($stateParams.requestTypeId);
         }
@@ -95,21 +111,21 @@ angular.module('watererpApp')
         	return $http.post('/api/waterLeakageComplaints/forwardRequest',
         			$scope.jobCardDTO).then(
 					function(response) {
+						$state.go('waterLeakageComplaint');
 						/*console.log("Server response:"
 								+ JSON.stringify(response));*/
 					});
         }
 		
-		
-		/*$scope.approveRequest = function(){
-			$scope.jobCardDTO.domainId = $stateParams.id;
-			return $http.post('/api/waterLeakageComplaints/forwardRequest',
-        			$scope.jobCardDTO).then(
+		// to decline a request
+		$scope.declineRequest = function(){
+        	return $http.post('/api/waterLeakageComplaints/declineRequest',
+					$scope.jobCardDTO ).then(
 					function(response) {
-						console.log("Server response:"
-								+ JSON.stringify(response));
+						$state.go('waterLeakageComplaint');
 					});
-		}*/
+        }
+		
 		
 		//create array for items
 		$scope.jobCardDTO.jobCardItemRequirements = [];
@@ -136,6 +152,16 @@ angular.module('watererpApp')
               $scope.valveCount = $scope.valveCount -1;
               $scope.jobCardDTO.valveComplaints.splice(indexId, 1);
             };
+            
+            
+            
+            $scope.itemLength = function(){
+            	if($scope.jobCardDTO.itemRequired === false){
+            		$scope.jobCardDTO.jobCardItemRequirements.length = 0;
+            		$scope.count = 0;
+            	}
+            	
+            }
             
             $scope.datePickerForClosedTime = {};
 

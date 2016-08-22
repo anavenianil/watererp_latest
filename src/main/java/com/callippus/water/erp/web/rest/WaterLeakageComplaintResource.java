@@ -29,8 +29,11 @@ import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.HydrantComplaint;
 import com.callippus.water.erp.domain.JobCardDTO;
 import com.callippus.water.erp.domain.JobCardItemRequirement;
+import com.callippus.water.erp.domain.MeterChange;
+import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.ValveComplaint;
 import com.callippus.water.erp.domain.WaterLeakageComplaint;
+import com.callippus.water.erp.domain.enumeration.MeterChangeStatus;
 import com.callippus.water.erp.repository.BurstComplaintRepository;
 import com.callippus.water.erp.repository.HydrantComplaintRepository;
 import com.callippus.water.erp.repository.JobCardItemRequirementRepository;
@@ -232,6 +235,9 @@ public class WaterLeakageComplaintResource {
 			
 			waterLeakageComplaintRepository.save(waterLeakageComplaint);
 			
+			if(jobCardDTO.getItemRequired()){
+				workflowService.setStageID("6");
+			}
 			workflowService.getUserDetails();
 			waterLeakageComplaintWorkflowService.approvedWaterLeakageComplaints(waterLeakageComplaint);
 			
@@ -250,6 +256,29 @@ public class WaterLeakageComplaintResource {
 	}
     
     
+    /**
+     * Decline the request
+     */
+    @RequestMapping(value = "/waterLeakageComplaints/declineRequest",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<JobCardDTO> declineRequests(
+			@RequestBody JobCardDTO jobCardDTO)
+			throws Exception {
+		log.debug("REST request to declineRequest() for JobCardDTO  : {}", jobCardDTO);
+		
+		workflowService.setRemarks(jobCardDTO.getRemarks());
+		workflowService.setApprovedDate(ZonedDateTime.now());
+		jobCardDTO.getWaterLeakageComplaint().setStatus("CANCELLED");
+		waterLeakageComplaintRepository.save(jobCardDTO.getWaterLeakageComplaint());
+		waterLeakageComplaintWorkflowService.declineRequest(jobCardDTO.getWaterLeakageComplaint().getId());
+		
+		return ResponseEntity.created(new URI("/api/waterLeakageComplaints/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("jobCardDTO", ""))
+				.body(null);
+	}
     
     
 }

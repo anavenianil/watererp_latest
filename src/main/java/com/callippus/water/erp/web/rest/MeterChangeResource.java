@@ -283,7 +283,7 @@ public class MeterChangeResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    //@Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor=Exception.class)
 	public ResponseEntity<MeterChange> declineRequests(
 			@RequestBody MeterChange meterChange)
 			throws Exception {

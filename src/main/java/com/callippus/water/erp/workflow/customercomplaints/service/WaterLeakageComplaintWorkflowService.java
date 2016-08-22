@@ -55,40 +55,20 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 	@Inject
 	private WorkflowService workflowService;
 
-	@Inject
-	private CustomerComplaintsRepository customerComplaintsRepository;
-
-	@Autowired(required = true)
-	private JdbcTemplate jdbcTemplate;
 
 	public String createTxn(WaterLeakageComplaint waterLeakageComplaint) throws Exception {
-		log.debug("ApplicationTxnWorkflowService --> createTxn");
+		log.debug("WaterLeakageComplaintWorkflowService --> createTxn");
 		String message = "";
-
 		message = initWorkflow(waterLeakageComplaint);
-
 		return message;
 	}
 
-	public void validate(CustomerComplaints applicationTxn) {
-
-		// Validation logic before saving domain object
-
-	}
-
-	public void saveApplicationTxn(CustomerComplaints customerComplaints) {
-		customerComplaintsRepository.save(customerComplaints);
-	}
 
 	public String initWorkflow(WaterLeakageComplaint waterLeakageComplaint) throws Exception {
 		String message = "";
 		try {
-
-			
 			setRequestType(CPSConstants.JOBCARD);
-
 			setMessage("success");
-
 			if (getMessage().equals(CPSConstants.SUCCESS)) {
 
 				/*
@@ -98,9 +78,6 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 				workflowService.setRequestID(getRequestID());
 				workflowService.setRequestType(getRequestType());
 				workflowService.setRequestTypeID(getRequestTypeID());
-				/*requisition contains login user id but there is customer in applicationtxn*/
-				// workflowService.setAppliedBy(applicationTxn.getUser().getId().toString());
-				
 
 				message = super.initWorkflow();
 
@@ -118,31 +95,6 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 		return message;
 	}
 
-	public void applicationTxnRequest(WaterLeakageComplaint waterLeakageComplaint)
-			throws Exception {
-		log.debug("ApplicationTxnWorkflowDetails --> onSubmit --> param=saveRequestDetails");
-		if (CPSUtils.compareStrings(message, CPSConstants.YES)) {
-			setDesignationID(workflowService.getDesignationID());
-			message = initWorkflow(waterLeakageComplaint);
-		}
-	}
-
-	/**
-	 * check employee exist or not
-	 */
-	public String getEmpExist() throws Exception {
-		try {
-			message = workflowService.getEmpExist();
-			if (CPSUtils.compareStrings(message, CPSConstants.NO)) {
-				message = CPSConstants.INVALID;
-			}
-		} catch (Exception e) {
-			message = CPSConstants.FAILED;
-			e.printStackTrace();
-			throw e;
-		}
-		return message;
-	}
 
 	/**
 	 * for request approvel
@@ -183,20 +135,21 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 	}
 
 	/*
-	 * Decline a applicationTxn
+	 * Decline a WaterLeakageComplaint
 	 */
 	public void declineRequest(Long id) throws Exception {
-		log.debug("ApplicationTxnWorkflowService --> declineRequest--" + id);
+		log.debug("waterLeakageComplaintWorkflowService --> declineRequest--" + id);
 
-		DeclineApplicationTxnRequest(id);
+		declineWaterLeakageComplaint(id);
 		workflowService.getUserDetails();
 
 		message = super.declinedRequest(workflowService.getHistoryID(),
 				workflowService.getIpAddress(), workflowService.getRemarks(),workflowService.getApprovedDate());
 	}
 
+	
 	@SuppressWarnings("unchecked")
-	public String DeclineApplicationTxnRequest(Long id) throws Exception {
+	public String declineWaterLeakageComplaint(Long id) throws Exception {
 		String message = null;
 		List<RequestWorkflowHistory> l = null;
 		try {
@@ -214,49 +167,6 @@ public class WaterLeakageComplaintWorkflowService extends RequestProcessService{
 			message = CPSConstants.FAILED;
 			throw e;
 		}
-
-		return message;
-	}
-
-	/**
-	 * This wil update the ApplicationTxn to final stage
-	 */
-	public void updateApplicationTxn(Long id) {
-		log.debug("updateApplicationTxn(): for final stage ");
-		String sql = "update applicationTxn set status=2 where id=" + id;
-		log.debug("Query: " + sql);
-		jdbcTemplate.update(sql);
-	}
-
-	/**
-	 * for request declined & cancel
-	 **/
-	public String declainedRequest(String requestID, String status)
-			throws Exception {
-
-		String message = null;
-		/*
-		 * try{ reqDTO =
-		 * (MTRequestDetailsDTO)session.createCriteria(MTRequestDetailsDTO
-		 * .class).add(Expression.eq("requestID", requestID)).uniqueResult();
-		 * if(!CPSUtils.isNullOrEmpty(reqDTO)){
-		 * if(CPSUtils.compareStrings(CPSConstants.STATUSCANCELLED, status)) {
-		 * String sql =
-		 * "update MTRequestDetailsDTO set status=? where requestID=?";
-		 * session.createQuery(sql).setString(0,
-		 * CPSConstants.STATUSCANCELLED).setString(1,
-		 * requestID).executeUpdate(); message = CPSConstants.SUCCESS; }
-		 * if(CPSUtils.compareStrings(CPSConstants.STATUSDECLINED, status)) {
-		 * String sql =
-		 * "update MTRequestDetailsDTO set status=? where requestID=?";
-		 * session.createQuery(sql).setString(0,
-		 * CPSConstants.STATUSDECLINED).setString(1, requestID).executeUpdate();
-		 * message = CPSConstants.SUCCESS; } }
-		 * 
-		 * }catch (Exception e) { e.printStackTrace();
-		 * hibernateUtils.rollbackTransaction(); message = CPSConstants.FAILED;
-		 * throw e; }
-		 */
 
 		return message;
 	}
