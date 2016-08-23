@@ -82,6 +82,9 @@ public class WorkflowService {
 	private String requestFrom;
 	private String requesterRoleID;
 
+	private boolean stageSkip;
+	private String hardCodedStage;
+	
 	private String requestID; // request ID
 	private String workflowID; // Workflow ID
 	private String requestTypeID; // Request Type ID
@@ -129,6 +132,22 @@ public class WorkflowService {
 	private ZonedDateTime approvedDate;
 	
 	// =================Workflow Process=================
+	
+	public String getHardCodedStage() {
+		return hardCodedStage;
+	}
+
+	public void setHardCodedStage(String hardCodedStage) {
+		this.hardCodedStage = hardCodedStage;
+	}
+	
+	public boolean isStageSkip() {
+		return stageSkip;
+	}
+
+	public void setStageSkip(boolean stageSkip) {
+		this.stageSkip = stageSkip;
+	}
 
 	public ZonedDateTime getApprovedDate() {
 		return approvedDate;

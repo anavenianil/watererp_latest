@@ -219,9 +219,14 @@ public class WaterLeakageComplaintResource {
 			        }*/
 					
 					waterLeakageComplaint.setJobCardItemRequirements(jobCardDTO.getJobCardItemRequirements());
+				}else{
+					workflowService.setStageSkip(true);
+					workflowService.setHardCodedStage("6");
 				}
 				waterLeakageComplaint.setDaysRequired(jobCardDTO.getWaterLeakageComplaint().getDaysRequired());
 				waterLeakageComplaint.setStaffRequired(jobCardDTO.getWaterLeakageComplaint().getStaffRequired());
+				
+				
 			}
 			
 			//set status
@@ -229,6 +234,9 @@ public class WaterLeakageComplaintResource {
 				waterLeakageComplaint.setStatus("FORWARDED");
 			}else if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
 				waterLeakageComplaint.setStatus("INITIATED");
+				if(workflowService.isStageSkip()){
+					waterLeakageComplaint.setStatus("APPROVED");
+				}
 			}else if("INITIATED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
 				waterLeakageComplaint.setStatus("APPROVED");
 			}
@@ -246,6 +254,11 @@ public class WaterLeakageComplaintResource {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		if(CPSConstants.SUCCESS.equals(workflowService.getMessage()) ){
+			workflowService.setHardCodedStage(null);
+			workflowService.setStageSkip(false);
 		}
 		return ResponseEntity.created(new URI("/api/waterLeakageComplaints/forwardRequest/"))
 				.headers(HeaderUtil.createEntityCreationAlert("jobCardDTO", ""))

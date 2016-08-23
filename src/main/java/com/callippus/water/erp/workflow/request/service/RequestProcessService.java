@@ -1089,8 +1089,13 @@ public class RequestProcessService {
 				}
 			}
 		}
-		workflowService.setStageID(String.valueOf((Integer
-				.parseInt(workflowService.getStageID()) + 1)));
+		if(workflowService.isStageSkip()){
+			workflowService.setStageID(workflowService.getHardCodedStage());
+		}else{
+			workflowService.setStageID(String.valueOf((Integer
+					.parseInt(workflowService.getStageID()) + 1)));
+		}
+		
 
 		getDetailsAndProcessRequest();
 		return workflowService;
