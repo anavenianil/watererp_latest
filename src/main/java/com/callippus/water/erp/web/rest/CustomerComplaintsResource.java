@@ -134,7 +134,7 @@ public class CustomerComplaintsResource {
 		CustomerComplaints result = customerComplaintsRepository.save(customerComplaints1);
 		approveApplication(customerComplaints.getId(), customerComplaints.getRemarks());
 		
-		if (CPSConstants.UPDATE.equals(workflowService.getMessage())) {
+		if (CPSConstants.UPDATE.equals(workflowService.getMessage()) && customerComplaints.getComplaintTypeMaster().getId() ==1) {
 			CustDetails custDetails = custDetailsRepository.findByCanForUpdate(customerComplaints.getCan());
 
 			Adjustments adjustments = new Adjustments();

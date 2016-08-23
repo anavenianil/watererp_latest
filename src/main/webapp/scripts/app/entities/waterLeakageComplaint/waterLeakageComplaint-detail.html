@@ -208,9 +208,19 @@
 											name="staffRequired" id="field_staffRequired"
 											ng-model="jobCardDTO.waterLeakageComplaint.staffRequired" />
 									</div>
+									<div class="col-sm-3" >
+										<label class="control-label" for="field_holeSize">
+											Size Of Hole(Approx.) </label> <select class="form-control"
+											id="field_holeSize" name="holeSize"
+											ng-model="jobCardDTO.burstComplaint.holeSize">
+											<option value="5">5</option>
+											<option value="10">10</option>
+											<option value="20">20</option>
+										</select>
+									</div>
 								</div>
 							</fieldset>
-							<br>
+							<!-- <br>
 							<fieldset>
 								<legend>Repair Type</legend>
 								<div class="row">
@@ -227,10 +237,10 @@
 											ng-model="jobCardDTO.burstComplaint.cascadeClamp" />
 									</div>
 									<div class="col-sm-2">
-										<label class="control-label" for="field_noOfSections">No.
+										<label class="control-label" for="field_noOfSection">No.
 											of Sections </label> <select class="form-control"
-											id="field_noOfSections" name="noOfSections"
-											ng-model="jobCardDTO.burstComplaint.noOfSections">
+											id="field_noOfSection" name="noOfSection"
+											ng-model="jobCardDTO.burstComplaint.noOfSection">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -257,7 +267,7 @@
 										</select>
 									</div>
 								</div>
-							</fieldset>
+							</fieldset> -->
 						</div>
 						<!-- Burst Complaint Form Ended Above -->
 						<!-- Valve Complaint Form Starts Below -->
@@ -528,7 +538,7 @@
 							</legend>
 							<div ng-if="jobCardDTO.itemRequired">
 								<div class="row">
-									<div class="col-sm-3">
+									<div class="col-sm-2">
 										<label for="field_materialMaster">Material Name</label>
 									</div>
 									<div class="col-sm-2">
@@ -537,13 +547,29 @@
 									<div class="col-sm-2">
 										<label class="control-label" for="field_quantity">Quantity</label>
 									</div>
+									<div class="col-sm-2">
+										<label class="control-label" for="field_replaceLength">Replace
+											Length</label>
+									</div>
+									<div class="col-sm-1">
+										<label class="control-label" for="field_cascadeClamp">No.
+											of Cascade Clamp </label>
+									</div>
+									<div class="col-sm-1">
+										<label class="control-label" for="field_noOfSection">No.
+											of Sections </label>
+									</div>
+									<div class="col-sm-1">
+										<label class="control-label" for="field_noOfClamps">No.
+											of Clamps </label>
+									</div>
 								</div>
 								<hr>
 								<div>
 									<fieldset
 										ng-repeat="item in jobCardDTO.jobCardItemRequirements">
 										<div class="row">
-											<div class="col-sm-3">
+											<div class="col-sm-2">
 												<select class="form-control" id="field_materialMaster"
 													name="materialMaster" ng-model="item.materialMaster"
 													ng-options="materialMaster as materialMaster.materialName for materialMaster in materialmasters track by materialMaster.id">
@@ -560,6 +586,34 @@
 											<div class="col-sm-2">
 												<input type="number" class="form-control" name="quantity"
 													id="field_quantity" min="0" ng-model="item.quantity" />
+											</div>
+											<div class="col-sm-2">
+												<input type="text" class="form-control" name="replaceLength"
+													id="field_replaceLength"
+													ng-model="item.replaceLength" />
+											</div>
+											<div class="col-sm-1">
+												<input type="text" class="form-control" name="cascadeClamp"
+													id="field_cascadeClamp"
+													ng-model="item.cascadeClamp" />
+											</div>
+											<div class="col-sm-1">
+												<select class="form-control" id="field_noOfSection"
+													name="noOfSection"
+													ng-model="item.noOfSection">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+												</select>
+											</div>
+											<div class="col-sm-1">
+												<select class="form-control" id="field_noOfClamps"
+													name="noOfClamps"
+													ng-model="item.noOfClamps">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+												</select>
 											</div>
 											<div class="col-sm-1">
 												<button type="button" class="btn btn-danger"
@@ -733,26 +787,50 @@
 						ng-if="waterLeakageComplaint.jobCardItemRequirements.length >0">
 						<legend>Items Required</legend>
 						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<label>Material</label>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<label>Unit</label>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<label>Quantity</label>
+							</div>
+							<div class="col-sm-2">
+								<label>Replace Length</label>
+							</div>
+							<div class="col-sm-2">
+								<label>Cascade Clamp</label>
+							</div>
+							<div class="col-sm-1">
+								<label>No. Of Section</label>
+							</div>
+							<div class="col-sm-1">
+								<label>No Of Clamps</label>
 							</div>
 						</div>
 						<div class="row"
 							ng-repeat="jobCardItemRequirement in waterLeakageComplaint.jobCardItemRequirements track by $index">
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<h5 class="list-group-item-heading">{{jobCardItemRequirement.materialMaster.materialName}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<h5 class="list-group-item-heading">{{jobCardItemRequirement.uom.value}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-2">
 								<h5 class="list-group-item-heading">{{jobCardItemRequirement.quantity}}</h5>
+							</div>
+							<div class="col-sm-2">
+								<h5 class="list-group-item-heading">{{jobCardItemRequirement.replaceLength}}</h5>
+							</div>
+							<div class="col-sm-2">
+								<h5 class="list-group-item-heading">{{jobCardItemRequirement.cascadeClamp}}</h5>
+							</div>
+							<div class="col-sm-1">
+								<h5 class="list-group-item-heading">{{jobCardItemRequirement.noOfSection}}</h5>
+							</div>
+							<div class="col-sm-1">
+								<h5 class="list-group-item-heading">{{jobCardItemRequirement.noOfClamps}}</h5>
 							</div>
 						</div>
 					</fieldset>

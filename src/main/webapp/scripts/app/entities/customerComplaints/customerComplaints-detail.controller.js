@@ -13,7 +13,7 @@ angular
 					//$scope.orgRole = Principal.getOrgRole();
 					$scope.orgRole = {};
 					
-					$scope.leakageType = "BURST";
+					//$scope.leakageType = "BURST";
 					//$scope.leakageType = "VALVE";
 					//$scope.leakageType = "HYDRANT";
 					
