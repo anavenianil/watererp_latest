@@ -226,7 +226,6 @@ public class WaterLeakageComplaintResource {
 				waterLeakageComplaint.setDaysRequired(jobCardDTO.getWaterLeakageComplaint().getDaysRequired());
 				waterLeakageComplaint.setStaffRequired(jobCardDTO.getWaterLeakageComplaint().getStaffRequired());
 				
-				
 			}
 			
 			//set status
