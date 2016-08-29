@@ -213,11 +213,11 @@ public class UserResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-	public ResponseEntity<List<ManagedUserDTO>> getManagedUserDTO()
+	public ResponseEntity<List<User>> getManagedUserDTO()
 			throws Exception {
     	log.debug("REST request to getManagedUserDTO : {}");
     	
-    	List<ManagedUserDTO> users = userRepository.findAllUsers();
+    	List<User> users = userRepository.findAllUsers();
     
     	return Optional.ofNullable(users)
 				.map(result -> new ResponseEntity<>(users, HttpStatus.OK))
