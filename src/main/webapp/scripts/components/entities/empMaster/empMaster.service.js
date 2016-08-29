@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('EmpMaster', function ($resource, DateUtils) {
         return $resource('api/empMasters/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getByUserId': { method: 'GET', params: {userId: "userId" }, url:'/api/empMasters/getByUserId', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

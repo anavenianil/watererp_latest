@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.domain.EmpMaster;
 import com.callippus.water.erp.domain.OrgRoleInstance;
 import com.callippus.water.erp.repository.EmpMasterRepository;
+import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -39,6 +41,9 @@ public class EmpMasterResource {
         
     @Inject
     private EmpMasterRepository empMasterRepository;
+    
+    @Inject
+    private UserRepository userRepository;
     
     /**
      * POST  /empMasters -> Create a new empMaster.
@@ -138,4 +143,22 @@ public class EmpMasterResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+    /**
+     * Get EmpMaster by UserId
+     */
+    @RequestMapping(value = "/empMasters/getByUserId",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<EmpMaster> getEmpMasterByUserId(@Param("userId") Long userId)
+			throws Exception {
+    	log.debug("REST request to EmpMaster by userId : {}");
+    	
+    	EmpMaster empMaster = empMasterRepository.findByUser(userRepository.findOne(userId));
+    
+    	return Optional.ofNullable(empMaster)
+				.map(result -> new ResponseEntity<>(empMaster, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
 }
