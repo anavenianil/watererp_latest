@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
@@ -171,4 +173,22 @@ public class FeasibilityStudyResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+    /**
+     * Get FeasibilityStudy by applicationTxnId
+     */
+    @RequestMapping(value = "/feasibilityStudys/getByApplicationTxnId",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<FeasibilityStudy> getFeasibilityStudyByapplicationTxnId(@Param("applicationTxnId") Long applicationTxnId)
+			throws Exception {
+    	log.debug("REST request to FeasibilityStudy by applicationTxnId : {}");
+    	
+    	FeasibilityStudy feasibilityStudy = feasibilityStudyRepository.findByApplicationTxn(applicationTxnRepository.findOne(applicationTxnId));
+    
+    	return Optional.ofNullable(feasibilityStudy)
+				.map(result -> new ResponseEntity<>(feasibilityStudy, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

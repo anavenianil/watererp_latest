@@ -41,11 +41,19 @@
 				<h3 class="panel-title pull-left">
 					Application For New Connection
 				</h3>
+				
 				<div class="pull-right">
 					<a type="button"
 						href="/api/applicationTxns/report/{{applicationTxn.id}}"
 						class="pull-right btn btn-warning">Download as PDF</a>
 				</div>
+				
+				<div class="pull-right">
+					<a type="button" ng-show="applicationTxn.status >=3"
+						ui-sref="feasibilityStudyDetailForAppTxn({applicationTxnId:applicationTxn.id})"
+						class="pull-right btn btn-info">View Feasibility</a>
+				</div>
+				
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
