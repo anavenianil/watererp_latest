@@ -163,7 +163,7 @@
 
 
 			<button type="button" class="btn btn-success pull-right"
-				ng-show="proceedings.applicationTxn.status===4"
+				ng-show="proceedings.applicationTxn.status===4 && orgRole.id===22"
 				ui-sref="receiptForAppTxn({applicationTxnId:proceedings.applicationTxn.id})">
 				<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 			</button>
