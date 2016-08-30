@@ -185,5 +185,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('newWaterConnectionReport', {
+                parent: 'custDetails',
+                url: '/newWaterConnectionReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/custDetails/newWaterConnectionReport.html',
+                        controller: 'NewWaterConnectionReportController'
+                    }
+                },
+                resolve: {
+                }
             });;
     });
