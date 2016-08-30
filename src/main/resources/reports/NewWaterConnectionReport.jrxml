@@ -61,6 +61,10 @@ date(c.conn_date) between date($P{fromDate}) and date($P{toDate})]]>
 				</textElement>
 				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
+			<image>
+				<reportElement x="2" y="0" width="189" height="63" uuid="4ca0b456-1d7a-40df-a485-afcaf917c2d3"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
