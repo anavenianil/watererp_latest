@@ -1,6 +1,6 @@
 'use strict';
 angular.module('watererpApp')
-    .controller('WaterBillReportController', function ($scope, $window, $state, $filter,  $http, 
+    .controller('RevenueSummaryReportController', function ($scope, $window, $state, $filter,  $http, 
     		     
     		TariffCategoryMaster, DivisionMaster) {
 
@@ -54,32 +54,31 @@ angular.module('watererpApp')
 			 };
 	
 		
-        $scope.getReport = function () {
-     	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.collDetails.dateOfYear != null){
-     	var divisionId = $scope.custDetails.divisionMaster.id;
-     	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
-         var dateFormat = 'yyyy-MMMM';
-         /*var dateFormat1 = 'MMMM';*/
-         var dateOfYear = $filter('date')($scope.collDetails.dateOfYear, dateFormat);
-        /* var dateOfMonth = $filter('date')($scope.collDetails.dateOfYear, dateFormat1);*/
+		 $scope.getReport = function () {
+		     	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.collDetails.dateOfYear != null){
+		     	var divisionId = $scope.custDetails.divisionMaster.id;
+		     	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
+		         var dateFormat = 'yyyy-MMMM';
+		         /*var dateFormat1 = 'MMMM';*/
+		         var dateOfYear = $filter('date')($scope.collDetails.dateOfYear, dateFormat);
+		        /* var dateOfMonth = $filter('date')($scope.collDetails.dateOfYear, dateFormat1);*/
 
-         var formatDate =  function (dateToFormat) {
-             if (dateToFormat !== undefined && !angular.isString(dateToFormat)) {
-                 return dateToFormat.getYear() + '-' + dateToFormat.getMonth() + '-' + dateToFormat.getDay();
-             }
-             return dateToFormat;
-         };
+		         var formatDate =  function (dateToFormat) {
+		             if (dateToFormat !== undefined && !angular.isString(dateToFormat)) {
+		                 return dateToFormat.getYear() + '-' + dateToFormat.getMonth() + '-' + dateToFormat.getDay();
+		             }
+		             return dateToFormat;
+		         };
 
-         $scope.collDetails = {};
-         
-         	$window.open('/api/waterBilling/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(dateOfYear) , "_blank")
-             location.reload();
-         }
-       
-     	
-         
-         
-     };
+		         $scope.collDetails = {};
+		         
+		         	$window.open('/api/Revenue/reports/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(dateOfYear) , "_blank")
+		             location.reload();
+		         }
+		       
+		         
+		         
+		     };
   /*      
         var onSaveSuccess = function (result) {
           
@@ -107,8 +106,8 @@ angular.module('watererpApp')
     */
         
         
-    /*    
-           $scope.getReportDetails = function () {
+        
+/*           $scope.getReportDetails = function () {
         	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.collDetails.dateOfYear != null ){
         	var divisionId = $scope.custDetails.divisionMaster.id;
         	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
