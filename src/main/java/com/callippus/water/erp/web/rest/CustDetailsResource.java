@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.DivisionMaster;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
@@ -399,5 +401,30 @@ public class CustDetailsResource {
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	}
+    
+    
+    
+    /**
+     * Get Balance by can
+     */
+    @RequestMapping(value = "/custDetailss/getBalanceByCAN",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_PLAIN_VALUE)
+    @Timed
+	public ResponseEntity<String> getBalanceByCan(@Param("can") String can)
+			throws Exception {
+    	log.debug("REST request to get Balance by can : {}");
+    	
+    	CustDetails custDetails = custDetailsRepository.findByCan(can);
+    	
+    	String balance = custDetails.getCan() +", "+custDetails.getConsName()+", "+ custDetails.getArrears();
+    
+    	return Optional.ofNullable(balance)
+				.map(result -> new ResponseEntity<>(balance, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+    
+    
+    
     
 }

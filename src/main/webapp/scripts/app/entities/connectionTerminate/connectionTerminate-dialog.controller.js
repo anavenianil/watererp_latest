@@ -2,13 +2,16 @@
 
 angular.module('watererpApp').controller('ConnectionTerminateDialogController',
         function($scope, $stateParams, /*$uibModalInstance, entity,*/ ConnectionTerminate, MeterDetails, $http, CustDetailsSearchCAN, 
-        		ParseLinks, /*GetMeterDetails,*/ $state, StreetMaster, DivisionMaster) {
+        		ParseLinks, /*GetMeterDetails,*/ $state, StreetMaster, DivisionMaster, CustDetails) {
 
         $scope.connectionTerminate = {};
         $scope.custDetails = {};
         $scope.maxDt = new Date();
         $scope.divisionmasters = DivisionMaster.query();
         $scope.streetMasters = StreetMaster.query();
+        
+        //$scope.balance = CustDetails.getByCan({can:'A0100111'});
+        
         $scope.load = function(id) {
             ConnectionTerminate.get({id : id}, function(result) {
                 $scope.connectionTerminate = result;
