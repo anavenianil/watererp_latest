@@ -31,7 +31,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void delete(User t);
     
     @Query("Select u From User u")
-    List<ManagedUserDTO> findAllUsers();
+    List<User> findAllUsers();
     
     User findById(long parseLong);
     //User findOneByLogin(String login);

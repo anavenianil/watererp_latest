@@ -1,13 +1,13 @@
 <div>
 	<div>
-		<h2>
+		<!-- <h2>
 			<span>Proceedings</span> {{proceedings.id}}
-		</h2>
+		</h2> -->
 		<div>
 			<div class="panel panel-primary">
 				<div class="panel-heading clearfix">
-					<h3 class="panel-title pull-left">Proceedings for New
-						Connection</h3>
+					<h3 class="panel-title pull-left">Proceedings for Application
+						No.: {{proceedings.applicationTxn.id}}</h3>
 				</div>
 				<div class="list-group">
 					<div class="list-group-item">
@@ -44,10 +44,16 @@
 										<span>{{itemRequired.quantity}}</span>
 									</div>
 									<div class="col-sm-2">
-										<div class="col-md-6"><span class="pull-right">{{itemRequired.ratePerShs | number :2}}</span></div>
+										<div class="col-md-6">
+											<span class="pull-right">{{itemRequired.ratePerShs |
+												number :2}}</span>
+										</div>
 									</div>
 									<div class="col-sm-2">
-									<div class="col-md-6"><span class="pull-right">{{itemRequired.amount | number :2}}</span></div>
+										<div class="col-md-6">
+											<span class="pull-right">{{itemRequired.amount |
+												number :2}}</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -58,24 +64,35 @@
 									<label> A. Sub Total </label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.subTotalA | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.subTotalA
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-sm-10">
-									<label> Supervision ({{proceedings.supervisionPercent}}%)</label>
+									<label> Supervision
+										({{proceedings.supervisionPercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.supervisionCharge | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.supervisionCharge
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-10">
-									<label>Labour Charges ({{proceedings.labourChargePercent}}%)</label>
+									<label>Labour Charges
+										({{proceedings.labourChargePercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.labourCharge | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.labourCharge
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -83,7 +100,10 @@
 									<label>Site Survey ({{proceedings.siteSurveyPercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.siteSurvey | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.siteSurvey
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 							<hr>
@@ -92,16 +112,23 @@
 									<label>SubTotal B</label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.subTotalB | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.subTotalB
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-sm-10">
-									<label>Connection Fee of A & B ({{proceedings.connectionFeePercent}}%)</label>
+									<label>Connection Fee of A & B
+										({{proceedings.connectionFeePercent}}%)</label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.connectionFee | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.connectionFee
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 							<hr>
@@ -110,7 +137,10 @@
 									<label>Application Form Fee</label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.applicationFormFee | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.applicationFormFee
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 							<hr>
@@ -119,7 +149,10 @@
 									<label>Grand Total</label>
 								</div>
 								<div class="col-sm-2">
-									<div class="col-md-6"><h5 class="list-group-item-heading pull-right">{{proceedings.grandTotal | number :2}}</h5></div>
+									<div class="col-md-6">
+										<h5 class="list-group-item-heading pull-right">{{proceedings.grandTotal
+											| number :2}}</h5>
+									</div>
 								</div>
 							</div>
 						</fieldset>
@@ -128,29 +161,12 @@
 				</div>
 			</div>
 
-			<!-- <button type="button" class="btn btn-success pull-right"
-				ng-click="getApplicationTxn(proceedings.applicationTxn.id)">
-				<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-			</button>
 
-			<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-
-			<button type="button" class="btn btn-danger pull-right"
-				ng-click="decline()">
-				<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Decline
-			</button> -->
-			<!-- ng-show="applicationTxn.status===4" -->
 			<button type="button" class="btn btn-success pull-right"
+				ng-show="proceedings.applicationTxn.status===4 && orgRole.id===22"
 				ui-sref="receiptForAppTxn({applicationTxnId:proceedings.applicationTxn.id})">
 				<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 			</button>
-
-			<!-- <span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
-
-			<button type="button" class="btn btn-success pull-right"
-				ng-click="getApplicationTxn(proceedings.applicationTxn.id)">
-				<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
-			</button> -->
 		</div>
 
 		<button type="submit" onclick="window.history.back()"
@@ -176,9 +192,10 @@
 									<jh-alert-error></jh-alert-error>
 									<div class="row">
 										<div class="col-sm-3">
-											<label for="field_applicationTxn">Application Number </label> <input
-												type="text" class="form-control" name="applicationTxn"
-												id="field_applicationTxn" ng-model="applicationTxn" disabled />
+											<label for="field_applicationTxn">Application Number
+											</label> <input type="text" class="form-control"
+												name="applicationTxn" id="field_applicationTxn"
+												ng-model="applicationTxn" disabled />
 										</div>
 										<div class="col-sm-3">
 											<label class="control-label" for="field_approvedDate">Approved

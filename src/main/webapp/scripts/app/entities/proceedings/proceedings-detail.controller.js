@@ -2,7 +2,7 @@
 
 angular.module('watererpApp')
     .controller('ProceedingsDetailController', function ($scope, $rootScope, $stateParams, Proceedings,  
-    		ApplicationTxn, ItemRequired, ParseLinks, ApplicationTxnService, $state, ProceedingsService, ConfigurationDetails) {
+    		ApplicationTxn, ItemRequired, ParseLinks, ApplicationTxnService, $state, ProceedingsService, ConfigurationDetails, Principal) {
         $scope.proceedings = {};
         $scope.approvalDetails = {};
         $scope.applicationTxnId = $stateParams.applicationTxnId;
@@ -20,7 +20,10 @@ angular.module('watererpApp')
             });
         }
         
-        
+        $scope.orgRole = {};
+		Principal.getOrgRole().then(function(response) {
+			$scope.orgRole = response;
+		});
         
         
         

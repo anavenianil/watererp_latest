@@ -1,11 +1,11 @@
 
 <div>
-	<h2>
+	<!-- <h2>
 		<span>Feasibility Study</span> {{feasibilityStudy.id}}
-	</h2>
+	</h2> -->
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
-			<h3 class="panel-title pull-left">Feasibility Study</h3>
+			<h3 class="panel-title pull-left">Feasibility Study For Application No.{{feasibilityStudy.applicationTxn.id}}</h3>
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
@@ -18,7 +18,53 @@
 						</div>
 						<div class="col-sm-3">
 							<label>Full Name</label>
-							<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.fullName}}</h5>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.applicationTxn.firstName}}&nbsp;{{feasibilityStudy.applicationTxn.lastName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>DMA</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.divisionMaster.divisionName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Street</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.streetMaster.streetName}}</h5>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+							<label>Prepared By</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.preparedBy.firstName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Prepared Date</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.preparedDate | date:'mediumDate'}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Zonal Head</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.approvedByZonalHead.firstName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Approval Date</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.zonalHeadApprovalDate | date:'mediumDate'}}</h5>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+							<label>Department Head</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.inspectionByDepartmentHead.firstName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Inspected Date</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.deptHeadInspectedDate | date:'mediumDate'}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Operation Manager</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.approvedByOperationManager.firstName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Approved Date</label>
+							<h5 class="list-group-item-heading">{{feasibilityStudy.operationMangrapproveDate | date:'mediumDate'}}</h5>
 						</div>
 					</div>
 				</fieldset>
@@ -26,13 +72,7 @@
 		</div>
 	</div>
 
-
-
-
-
-
-
-	<div class="table-responsive">
+	<!-- <div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -104,7 +144,7 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div> -->
 
 	<button type="submit" onclick="window.history.back()"
 		class="btn btn-info">

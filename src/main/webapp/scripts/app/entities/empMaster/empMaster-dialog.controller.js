@@ -10,7 +10,7 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
         //$scope.orgroleinstances = OrgRoleInstance.query();
         $scope.designationmasters = DesignationMaster.query();
         //$scope.statusmasters = StatusMaster.query();
-        $scope.employeestatuss= [{"id":"1", "value":"MARRIED"},{"id":"2", "value":"UNMARRIED"}];
+        $scope.employeestatuss= [{"value":"MARRIED"},{"value":"UNMARRIED"}];
         $scope.getOrgRoleInstance = function() {
         	$scope.orgroleinstances = [];
 			return $http.get('/api/orgRoleInstances/getAll').then(function(response) {
@@ -102,4 +102,13 @@ angular.module('watererpApp').controller('EmpMasterDialogController',
         $scope.datePickerForJoiningDateOpen = function($event) {
             $scope.datePickerForJoiningDate.status.opened = true;
         };
+        
+        $scope.getByUser = function(userId){
+        	$scope.empMaster = EmpMaster.getByUserId({userId : userId});
+        	if($scope.empMaster.id == null){
+        		$scope.empMaster.user = {};
+        		$scope.empMaster.user.id = userId;
+        	}
+        	//console.log($scope.empMaster);
+        }
 }/*]*/);

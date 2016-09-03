@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.callippus.water.erp.domain.EmpMaster;
 import com.callippus.water.erp.domain.OrgRoleInstance;
+import com.callippus.water.erp.domain.User;
 
 /**
  * Spring Data JPA repository for the EmpMaster entity.
@@ -24,5 +25,7 @@ public interface EmpMasterRepository extends JpaRepository<EmpMaster,Long> {
 
 	@Query("select empMaster.officeId from EmpMaster empMaster where empMaster.statusMaster.id=2 and empMaster.user.id = :userId")
 	OrgRoleInstance findActiveOfficeId(@Param("userId") Long userId);
+	
+	EmpMaster findByUser(User user);
 
 }

@@ -7,10 +7,10 @@ angular.module('watererpApp').controller(
 				ParseLinks, Principal) {
 			$scope.applicationTxn = entity;
 			
-			$scope.orgRole = {};
+			
 
 			//$scope.orgRole = Principal.getOrgRole();
-			
+			$scope.orgRole = {};
 			Principal.getOrgRole().then(function(response) {
 				$scope.orgRole = response;
 			});

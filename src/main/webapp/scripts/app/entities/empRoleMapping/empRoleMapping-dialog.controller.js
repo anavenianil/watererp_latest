@@ -84,4 +84,13 @@ angular.module('watererpApp').controller('EmpRoleMappingDialogController',
         $scope.datePickerForLastModifiedDateOpen = function($event) {
             $scope.datePickerForLastModifiedDate.status.opened = true;
         };
+        
+        $scope.getByUser = function(userId){
+        	$scope.empRoleMapping = EmpRoleMapping.getByUserId({userId : userId});
+        	if($scope.empRoleMapping.id == null){
+        		$scope.empRoleMapping.user = {};
+        		$scope.empRoleMapping.user.id = userId;
+        	}
+        	//console.log($scope.empMaster);
+        }
 }]);

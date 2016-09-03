@@ -14,31 +14,25 @@
 				<label for="id">ID</label> <input type="text" class="form-control"
 					id="id" name="id" ng-model="empRoleMapping.id" readonly />
 			</div> -->
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<label for="field_user">User</label> <select class="form-control"
 					id="field_user" name="user" ng-model="empRoleMapping.user"
+					ng-change="getByUser(empRoleMapping.user.id)"
 					ng-options="user as user.firstName +' '+user.lastName+'('+user.login+')' for user in users track by user.id"
 					required>
 					<option value=""></option>
 				</select>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<label class="control-label" for="field_internalRole">Internal
-					Role(Employee/Head)</label> <input type="text" class="form-control" name="internalRole"
-					id="field_internalRole" ng-model="empRoleMapping.internalRole" />
-			</div>
-			
-		</div>
-		<div class="row">
-			<div class="col-sm-4">
-				<label for="field_orgRoleInstance">Organization Role</label> <select
-					class="form-control" id="field_orgRoleInstance"
-					name="orgRoleInstance" ng-model="empRoleMapping.orgRoleInstance"
-					ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
-					<option value=""></option>
+					Role</label> <select class="form-control"
+					id="field_internalRole" name="internalRole"
+					ng-model="empRoleMapping.internalRole">
+					<option value="EMPLOYEE">EMPLOYEE</option>
+					<option value="HEAD">HEAD</option>
 				</select>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3" ng-hide="empRoleMapping.internalRole ==='HEAD'">
 				<label for="field_parentUser">Parent User</label> <select
 					class="form-control" id="field_parentUser" name="parentUser"
 					ng-model="empRoleMapping.parentUser"
@@ -46,15 +40,41 @@
 					<option value=""></option>
 				</select>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3" ng-hide="empRoleMapping.internalRole ==='EMPLOYEE'">
+				<label for="field_orgRoleInstance">Organization Role</label> <select
+					class="form-control" id="field_orgRoleInstance"
+					name="orgRoleInstance" ng-model="empRoleMapping.orgRoleInstance"
+					ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
+					<option value=""></option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<label for="field_statusMaster">Status Master</label> <select
+					class="form-control" id="field_statusMaster" name="statusMaster"
+					ng-model="empRoleMapping.statusMaster"
+					ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id"
+					required>
+					<option value=""></option>
+				</select>
+			</div>
+			<!-- <div class="col-sm-4">
+				<label class="control-label" for="field_internalRole">Internal
+					Role(Employee/Head)</label> <input type="text" class="form-control" name="internalRole"
+					id="field_internalRole" ng-model="empRoleMapping.internalRole" />
+			</div> -->
+
+		</div>
+		<br>
+		<div class="row">
+			<!-- <div class="col-sm-4">
 				<label class="control-label" for="field_parentRoleId">Parent
 					Role Id</label> <input type="number" class="form-control"
 					name="parentRoleId" id="field_parentRoleId"
 					ng-model="empRoleMapping.parentRoleId" />
-			</div>
+			</div> -->
 		</div>
 		<div class="row">
-			<div class="col-sm-4">
+			<!-- <div class="col-sm-4">
 				<label class="control-label" for="field_creationDate">Creation
 					Date</label>
 				<div class="form-group">
@@ -71,8 +91,8 @@
 						</span>
 					</div>
 				</div>
-			</div>
-			<div class="col-sm-4">
+			</div> -->
+			<!-- <div class="col-sm-4">
 				<label class="control-label" for="field_lastModifiedDate">Last
 					Modified Date</label>
 				<div class="form-group">
@@ -89,16 +109,8 @@
 						</span>
 					</div>
 				</div>
-			</div>
-			<div class="col-sm-4">
-				<label for="field_statusMaster">Status Master</label> <select
-					class="form-control" id="field_statusMaster" name="statusMaster"
-					ng-model="empRoleMapping.statusMaster"
-					ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id"
-					required>
-					<option value=""></option>
-				</select>
-			</div>
+			</div> -->
+
 			<!-- <div class="col-sm-4">
 				<label class="control-label" for="field_internalDivision">Internal
 					Division</label> <input type="text" class="form-control"
