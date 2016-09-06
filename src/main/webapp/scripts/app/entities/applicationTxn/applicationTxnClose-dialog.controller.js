@@ -82,9 +82,18 @@ angular.module('watererpApp').controller(
 	        	return $http.post('/api/applicationTxns/createNewCustomer',
 	        			changeCaseDTO).then(
 						function(response) {
-							$state.go('applicationTxn');
+							$('#saveSuccessfullyModal').modal('show');
+							$scope.changeCaseDTO = response.data;
+							$scope.applicationTxnId = $scope.changeCaseDTO.applicationTxn.id;
+							$scope.can = $scope.changeCaseDTO.applicationTxn.can;
+							//$state.go('applicationTxn');
 						});
 	        }
+			
+			$scope.done = function(){
+				$('#saveSuccessfullyModal').modal('hide');
+				$state.go('applicationTxn');
+			}
 			
 			$scope.datePickerForConnectionDate = {};
 

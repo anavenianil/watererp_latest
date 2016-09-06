@@ -644,8 +644,8 @@ public class ApplicationTxnResource {
 	        custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
 	        custMeterMappingRepository.save(custMeterMapping);
 				
-			applicationTxnRepository.save(applicationTxn);
-			
+			ApplicationTxn apptxnResult = applicationTxnRepository.save(applicationTxn);
+			changeCaseDTO.setApplicationTxn(apptxnResult);
 	       	try{
 	       		workflowService.setApprovedDate(ZonedDateTime.now());
 	       		applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
@@ -653,10 +653,9 @@ public class ApplicationTxnResource {
 	            catch(Exception e){
 	           	 e.printStackTrace();
 	            }
-
-			return ResponseEntity.created(new URI("/api/applicationTxns/createNewCustomer"))
-					.headers(HeaderUtil.createEntityCreationAlert("applicationTxn", ""))
-					.body(null);
+	       	return ResponseEntity.created(new URI("/api/applicationTxns/" + changeCaseDTO.getApplicationTxn().getId()))
+	                .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", changeCaseDTO.getApplicationTxn().getId().toString()))
+	                .body(changeCaseDTO);
 		}
 	
 
