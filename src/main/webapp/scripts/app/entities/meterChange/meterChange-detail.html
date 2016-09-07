@@ -121,9 +121,7 @@
 										<p class="help-block"
 											ng-show="editForm.newMeterReading.$error.required">This
 											field is required.</p>
-
 									</div>
-
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -142,9 +140,7 @@
 										ng-show="(editForm.user.$dirty || rc.editForm.attempted) && editForm.user.$invalid">
 										<p class="help-block" ng-show="editForm.user.$error.required">This
 											field is required.</p>
-
 									</div>
-
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -211,7 +207,8 @@
 									ng-class="{'has-error': editForm.remarks.$invalid && 
          						(editForm.remarks.$dirty || rc.editForm.attempted)}">
 									<label class="control-label" for="field_remarks">Remarks</label>
-									<textarea rows="4" cols="50" class="form-control"
+									<textarea rows="2" cols="50" style="resize: none" 
+										class="form-control"
 										name="remarks" id="field_remarks" max="20"
 										ng-model="meterChange.remarks" required></textarea>
 									<div
