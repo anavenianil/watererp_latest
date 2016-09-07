@@ -184,6 +184,24 @@ public class CustDetailsResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+     
+    /**
+     * GET  /custDetailss/searchCAN ,Customer/:searchTerms
+     */
+    @RequestMapping(value = "/custDetailss/searchCANDetails/{searchTerms}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<String>> searchCANDetailsLike(@PathVariable String searchTerms) {
+        log.debug("REST request to get CustDetails : {}", searchTerms);
+        List<String> canList = custDetailsCustomRepository.searchCANDetails(searchTerms);
+        return Optional.ofNullable(canList)
+            .map(result -> new ResponseEntity<>(
+            		canList,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
     /**
      * DELETE  /custDetailss/:id -> delete the "id" custDetails.
      */

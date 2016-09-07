@@ -75,5 +75,25 @@ public class CustDetailsCustomRepositoryImpl extends SimpleJpaRepository<CustDet
 
 		return items;
 	}
+	
+	/**
+	 * List can,customer in search box
+	 */
+	public List<String> searchCANDetails(@Param("searchTerms") String searchTerms) {
 
+		String sql = "SELECT concat(can ,' - ',cons_name) can from cust_details where can like ? or cons_name like ?  limit 10";
+		List<java.util.Map<String, Object>> rows = jdbcTemplate.queryForList(sql,
+				new Object[] { "%" + searchTerms + "%", "%" + searchTerms + "%" });
+
+		List<String> items = new ArrayList<String>();
+
+		for (Map row : rows) {
+			items.add((String) row.get("can"));
+		}
+
+		return items;
+	}
+	
+	
+	
 }

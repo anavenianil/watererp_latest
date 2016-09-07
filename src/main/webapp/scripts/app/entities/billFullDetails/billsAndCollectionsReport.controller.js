@@ -2,9 +2,9 @@
 angular.module('watererpApp')
     .controller('BillsAndCollectionsReportController', function ($scope, $window, $state, $filter,  $http, 
     		     
-    		TariffCategoryMaster, DivisionMaster) {
+    		TariffCategoryMaster,CustDetails,CustDetailsSearchCAN, DivisionMaster) {
 
-        $scope.predicate = 'id';
+       $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
         $scope.custDetails = {};
@@ -12,38 +12,46 @@ angular.module('watererpApp')
         $scope.collDetails.betweenDates = false;
         $scope.message = null;
         $scope.collDetails.betweenDetailedDates =false;
+
+		 //to search CAN
+		
+		$scope.getLocation = function(val) {
+			return $http.get('api/custDetailss/searchCANDetails/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+				return res;
+			});
+		}
+
+
+
+	    $scope.getCustDetails = function(can) {
+			CustDetailsSearchCAN.get({can : can}, function(result) {
+                $scope.custDetails = result;
+            });
+        };
         
-        
-        $scope.onSelect = function($item, $model, $label) {
+		$scope.onSelect = function($item, $model, $label) {
 			console.log($item);
 			var arr = $item.split("-");
 			$scope.custDetails = {};
 			$scope.custDetails.can = arr[0].trim();
 			$scope.custDetails.name = arr[1];
-			$scope.custDetails.address = arr[2];
+			/*$scope.custDetails.address = arr[2];*/
 			$scope.getCustDetails($scope.custDetails.can);
-			$scope.custInfo = ""; 
-			$scope.isValidCust = true;
 		};
-        
-        
-        
-        
-	
-	/*	 $scope.getReport = function () {
-		     	if($scope.custInfo != null ){
-		     	var cust = $scope.custDetails.divisionMaster.id;
-		             	
 
-		         $scope.collDetails = {};
-		         
-		         	$window.open('/api/Revenue/reports/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(dateOfYear) , "_blank")
-		             location.reload();
-		         }
-		       
-		         
-		         
-		     };*/
+		$scope.refresh = function() {
+			$scope.reset();
+			$scope.clear();
+		};
+
     });
 
 
