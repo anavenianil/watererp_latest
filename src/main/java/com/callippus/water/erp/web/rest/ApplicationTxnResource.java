@@ -188,10 +188,31 @@ public class ApplicationTxnResource {
             return createApplicationTxn(request, applicationTxn);
         }
         
+        //check CAN already inserted or not
+		String existCan;
+		try{
+			existCan = custDetailsRepository.findByCan(applicationTxn.getCan()).getCan();
+		}catch(Exception e){
+			existCan = null;
+		}
+		try{
+			if(CPSUtils.isNull(existCan)){
+				log.debug("No CAN found and it is a new CAN :");
+			}
+			else{
+				
+				ResponseEntity<String> newCan = generateCanWM(applicationTxn.getId());
+				applicationTxn.setCan(newCan.getBody());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+        
+        
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         /*
-         *for without metered
+         *for without metered after Submitting CAN
          */
         if(applicationTxn.getUser() !=null){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            

@@ -48,13 +48,13 @@
 				</div>
 				<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 				<div class="pull-right">
-					<a type="button" ng-show="applicationTxn.status>=4"
+					<a type="button" ng-show="applicationTxn.status>=4 && applicationTxn.user===null"
 						ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})"
 						class="btn btn-info pull-right">View BOM </a>
 				</div>
 				<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 				<div class="pull-right">
-					<a type="button" ng-show="applicationTxn.status >=3"
+					<a type="button" ng-show="applicationTxn.status >=3 && applicationTxn.user===null"
 						ui-sref="feasibilityStudyDetailForAppTxn({applicationTxnId:applicationTxn.id})"
 						class="pull-right btn btn-info">View Feasibility</a>
 				</div>
