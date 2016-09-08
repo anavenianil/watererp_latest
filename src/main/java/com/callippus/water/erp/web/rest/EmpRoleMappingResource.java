@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.EmpRoleMapping;
 import com.callippus.water.erp.repository.EmpRoleMappingRepository;
+import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -45,6 +46,9 @@ public class EmpRoleMappingResource {
     @Inject
     private UserRepository userRepository;
     
+    @Inject
+    private StatusMasterRepository statusMasterRepository;
+    
     /**
      * POST  /empRoleMappings -> Create a new empRoleMapping.
      */
@@ -58,6 +62,13 @@ public class EmpRoleMappingResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("empRoleMapping", "idexists", "A new empRoleMapping cannot already have an ID")).body(null);
         }
         empRoleMapping.setCreationDate(ZonedDateTime.now());
+        empRoleMapping.setLastModifiedDate(ZonedDateTime.now());
+        
+        EmpRoleMapping empRoleMappingOld = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, 
+        		empRoleMapping.getOrgRoleInstance().getId());
+        empRoleMappingOld.setStatusMaster(statusMasterRepository.findOne(1l));
+        empRoleMappingRepository.save(empRoleMappingOld);
+        empRoleMapping.setStatusMaster(statusMasterRepository.findOne(2l));
         EmpRoleMapping result = empRoleMappingRepository.save(empRoleMapping);
         return ResponseEntity.created(new URI("/api/empRoleMappings/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("empRoleMapping", result.getId().toString()))
@@ -124,7 +135,10 @@ public class EmpRoleMappingResource {
     @Timed
     public ResponseEntity<Void> deleteEmpRoleMapping(@PathVariable Long id) {
         log.debug("REST request to delete EmpRoleMapping : {}", id);
-        empRoleMappingRepository.delete(id);
+        EmpRoleMapping erm = empRoleMappingRepository.findOne(id);
+        erm.setStatusMaster(statusMasterRepository.findOne(1l));
+        empRoleMappingRepository.save(erm);
+        //empRoleMappingRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("empRoleMapping", id.toString())).build();
     }
     
