@@ -95,7 +95,7 @@ ORDER BY txn_date]]>
 				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
 			<image>
-				<reportElement x="-1" y="0" width="255" height="69" uuid="76727b4b-f66a-458c-8c72-f335761ccb88"/>
+				<reportElement x="-1" y="0" width="265" height="69" uuid="7e38ffac-8e71-4b24-84ab-1ab5ebd142e7"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -114,14 +114,14 @@ ORDER BY txn_date]]>
 	<columnHeader>
 		<band height="51" splitType="Stretch">
 			<staticText>
-				<reportElement x="435" y="1" width="56" height="19" uuid="5b048059-9373-4ac4-8433-cb63d5fa85ab"/>
+				<reportElement x="425" y="1" width="56" height="19" uuid="5b048059-9373-4ac4-8433-cb63d5fa85ab"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Previous]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="86" y="2" width="174" height="16" uuid="8488dd5b-d88b-433d-9eab-f71a9d0d80d8"/>
+				<reportElement x="94" y="2" width="174" height="16" uuid="8488dd5b-d88b-433d-9eab-f71a9d0d80d8"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -144,14 +144,14 @@ ORDER BY txn_date]]>
 				<reportElement x="0" y="-1" width="1060" height="1" uuid="8a542af7-cd6a-414b-bae1-47840265b376"/>
 			</line>
 			<staticText>
-				<reportElement x="284" y="1" width="51" height="19" uuid="749752f0-0066-4548-957a-7bc0f4b1fb7e"/>
+				<reportElement x="271" y="1" width="51" height="19" uuid="749752f0-0066-4548-957a-7bc0f4b1fb7e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Present]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="493" y="3" width="55" height="16" uuid="148ec07c-3c1e-4314-a67d-198084a372c3"/>
+				<reportElement x="490" y="3" width="44" height="16" uuid="148ec07c-3c1e-4314-a67d-198084a372c3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -165,7 +165,7 @@ ORDER BY txn_date]]>
 				<text><![CDATA[Basis  For Charge]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="284" y="16" width="51" height="19" uuid="93323708-f448-49d5-9fab-fef9dc64354a"/>
+				<reportElement x="271" y="16" width="51" height="19" uuid="93323708-f448-49d5-9fab-fef9dc64354a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -179,7 +179,7 @@ ORDER BY txn_date]]>
 				<text><![CDATA[Reading ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="435" y="17" width="56" height="18" uuid="6bbf99cc-b94b-44c8-908b-ffd550aeee5b"/>
+				<reportElement x="425" y="17" width="56" height="18" uuid="6bbf99cc-b94b-44c8-908b-ffd550aeee5b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -245,14 +245,14 @@ ORDER BY txn_date]]>
 				<reportElement x="858" y="0" width="1" height="51" uuid="99b8c972-ee8d-4a6e-a2fc-df602c2f3680"/>
 			</line>
 			<staticText>
-				<reportElement x="809" y="0" width="40" height="14" uuid="494410cf-8d64-4cf3-a4e5-11329c28ecee"/>
+				<reportElement x="795" y="0" width="40" height="14" uuid="494410cf-8d64-4cf3-a4e5-11329c28ecee"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Txn ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="811" y="18" width="45" height="14" uuid="4bfb93ca-f2b5-4d5e-be19-71076fdc000a"/>
+				<reportElement x="805" y="15" width="45" height="14" uuid="4bfb93ca-f2b5-4d5e-be19-71076fdc000a"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -282,7 +282,7 @@ ORDER BY txn_date]]>
 				<reportElement x="1060" y="0" width="1" height="51" uuid="72600689-a421-4e4d-918e-0164ad57eae3"/>
 			</line>
 			<staticText>
-				<reportElement x="984" y="2" width="69" height="15" uuid="c503eaca-5ae4-4575-984a-d8146f3a77a4"/>
+				<reportElement x="987" y="2" width="69" height="15" uuid="c503eaca-5ae4-4575-984a-d8146f3a77a4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -349,35 +349,35 @@ ORDER BY txn_date]]>
 				<reportElement x="1060" y="0" width="1" height="53" uuid="93ecb537-695b-45ca-a676-52507ee51398"/>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement x="85" y="4" width="175" height="20" uuid="1b14df2e-22ca-48d4-a4dc-584c881812be"/>
+				<reportElement x="93" y="4" width="175" height="20" uuid="1b14df2e-22ca-48d4-a4dc-584c881812be"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{customer}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="264" y="4" width="64" height="20" uuid="08835cc0-02f1-4026-8caa-de0bf9a4a210"/>
+				<reportElement x="241" y="4" width="76" height="20" uuid="08835cc0-02f1-4026-8caa-de0bf9a4a210"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{present_reading}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="340" y="4" width="77" height="20" uuid="ff4869d3-4854-402c-8bdb-0699394fe30f"/>
+				<reportElement x="317" y="4" width="83" height="20" uuid="ff4869d3-4854-402c-8bdb-0699394fe30f"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{present_reading_dt}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
-				<reportElement x="417" y="4" width="73" height="20" uuid="d7f724df-77b9-4abb-a6a2-604c9be71822"/>
+				<reportElement x="400" y="4" width="74" height="20" uuid="d7f724df-77b9-4abb-a6a2-604c9be71822"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{prev_reading}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
-				<reportElement x="491" y="4" width="55" height="20" uuid="c7970131-5916-404e-832e-b96a6096107f"/>
+				<reportElement x="483" y="4" width="51" height="20" uuid="c7970131-5916-404e-832e-b96a6096107f"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
@@ -411,36 +411,29 @@ ORDER BY txn_date]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{txn_date}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
-				<reportElement x="799" y="4" width="58" height="20" uuid="a86937a1-03fc-4a1e-b500-5a99d64e63f6"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{txn_number}]]></textFieldExpression>
-			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
-				<reportElement x="851" y="4" width="64" height="20" uuid="88417722-478a-4b0e-a30f-8ed76cab92cb"/>
+				<reportElement x="847" y="4" width="64" height="20" uuid="88417722-478a-4b0e-a30f-8ed76cab92cb"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
-				<reportElement x="914" y="4" width="62" height="20" uuid="80f98ed5-4bd1-4faf-abb1-4109dc302f60"/>
+				<reportElement x="910" y="4" width="62" height="20" uuid="80f98ed5-4bd1-4faf-abb1-4109dc302f60"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00" isBlankWhenNull="true">
-				<reportElement x="979" y="4" width="77" height="20" uuid="c11710a4-9b41-4c48-bc8e-be5c355d8b11"/>
+				<reportElement x="969" y="4" width="77" height="20" uuid="c11710a4-9b41-4c48-bc8e-be5c355d8b11"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{amountdue}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="86" y="21" width="175" height="14" uuid="dc79f5e0-b18a-4d04-81da-3873a92935a0"/>
+				<reportElement x="94" y="21" width="175" height="14" uuid="dc79f5e0-b18a-4d04-81da-3873a92935a0"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
@@ -464,6 +457,13 @@ ORDER BY txn_date]]>
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{can}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement x="799" y="4" width="52" height="20" uuid="a86937a1-03fc-4a1e-b500-5a99d64e63f6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{txn_number}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
