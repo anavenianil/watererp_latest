@@ -66,11 +66,6 @@
 									| uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
-								<label>Effective Bill Month</label> <input type="text"
-									class="form-control" ng-model="eDate" disabled />
-								<!-- <h5 class="list-group-item-heading">{{eDate}}</h5> -->
-							</div>
-							<div class="col-sm-4">
 								<label class="control-label" for="field_connectionDate">Connection
 									Date</label>
 								<div class="form-group">
@@ -80,7 +75,7 @@
 											ng-model="applicationTxn.connectionDate" max-date="dtmax"
 											is-open="datePickerForConnectionDate.status.opened"
 											ng-change="getEffectiveMonth(applicationTxn.connectionDate)"
-											required readonly/> <span class="input-group-btn">
+											required readonly /> <span class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForConnectionDateOpen($event)">
 												<i class="glyphicon glyphicon-calendar"></i>
@@ -89,7 +84,10 @@
 									</div>
 								</div>
 							</div>
-
+							<div class="col-sm-4">
+								<label>Effective Bill Month</label> <input type="text"
+									class="form-control" ng-model="eDate" disabled />
+							</div>
 						</div>
 					</fieldset>
 					<hr>
@@ -120,3 +118,31 @@
 		</div>
 	</div>
 </form>
+<div id="saveSuccessfullyModal" class="modal" name="saveForm">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form name="confirmForm">
+
+				<div class="modal-body">
+					<p>
+					<h3>CAN Generated Successfully!</h3>
+					</p>
+					<div>
+						<h4>
+							<label>Application No.:&nbsp;&nbsp; </label>{{applicationTxnId}}
+						</h4>
+						<h4>
+							<label>CAN.:&nbsp;&nbsp; </label>{{can}}
+						</h4>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal"
+						ng-click="done()">
+						<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

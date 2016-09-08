@@ -43,7 +43,10 @@ angular.module('watererpApp').controller(
 			var onSaveSuccess = function(result) {
 				$scope.$emit('watererpApp:applicationTxnUpdate', result);
 				$scope.isSaving = false;
-				$state.go('applicationTxn');
+				//$state.go('applicationTxn');
+				$('#saveSuccessfullyModal').modal('show');
+				$scope.applicationTxnId = result.id;
+				$scope.can = result.can;
 			};
 
 			var onSaveError = function(result) {
@@ -58,6 +61,12 @@ angular.module('watererpApp').controller(
 					alert("Not Saved");
 				}
 			};
+			
+			$scope.done = function(){
+				$('#saveSuccessfullyModal').modal('hide');
+				$state.go('applicationTxn');
+			}
+			
 
 			$scope.clear = function() {
 				$uibModalInstance.dismiss('cancel');
@@ -100,7 +109,6 @@ angular.module('watererpApp').controller(
 			
 			 $(document).ready(function() {
 			        function disableBack() { window.history.forward() }
-
 			        window.onload = disableBack();
 			        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
 			    });

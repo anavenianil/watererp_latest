@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.common.CPSConstants;
+import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
@@ -187,10 +188,31 @@ public class ApplicationTxnResource {
             return createApplicationTxn(request, applicationTxn);
         }
         
+        //check CAN already inserted or not
+		String existCan;
+		try{
+			existCan = custDetailsRepository.findByCan(applicationTxn.getCan()).getCan();
+		}catch(Exception e){
+			existCan = null;
+		}
+		try{
+			if(CPSUtils.isNull(existCan)){
+				log.debug("No CAN found and it is a new CAN :");
+			}
+			else{
+				
+				ResponseEntity<String> newCan = generateCanWM(applicationTxn.getId());
+				applicationTxn.setCan(newCan.getBody());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+        
+        
         ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         
         /*
-         *for without metered
+         *for without metered after Submitting CAN
          */
         if(applicationTxn.getUser() !=null){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
@@ -586,6 +608,27 @@ public class ApplicationTxnResource {
 			log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 			
 			ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
+			
+			//check CAN already inserted or not
+			String existCan;
+			try{
+				existCan = custDetailsRepository.findByCan(applicationTxn.getCan()).getCan();
+			}catch(Exception e){
+				existCan = null;
+			}
+			try{
+				if(CPSUtils.isNull(existCan)){
+					log.debug("No CAN found and it is a new CAN :");
+				}
+				else{
+					FeasibilityStudy fs = feasibilityStudyRepository.findByApplicationTxn(applicationTxn);
+					ResponseEntity<String> newCan = generateCan(fs.getId());
+					applicationTxn.setCan(newCan.getBody());
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
 
 	        MeterDetails meterDetails = applicationTxn.getMeterDetails();
 	    	meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Allotted"));
@@ -622,8 +665,8 @@ public class ApplicationTxnResource {
 	        custMeterMapping.setFromDate(applicationTxn.getConnectionDate());
 	        custMeterMappingRepository.save(custMeterMapping);
 				
-			applicationTxnRepository.save(applicationTxn);
-			
+			ApplicationTxn apptxnResult = applicationTxnRepository.save(applicationTxn);
+			changeCaseDTO.setApplicationTxn(apptxnResult);
 	       	try{
 	       		workflowService.setApprovedDate(ZonedDateTime.now());
 	       		applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
@@ -631,10 +674,9 @@ public class ApplicationTxnResource {
 	            catch(Exception e){
 	           	 e.printStackTrace();
 	            }
-
-			return ResponseEntity.created(new URI("/api/applicationTxns/createNewCustomer"))
-					.headers(HeaderUtil.createEntityCreationAlert("applicationTxn", ""))
-					.body(null);
+	       	return ResponseEntity.created(new URI("/api/applicationTxns/" + changeCaseDTO.getApplicationTxn().getId()))
+	                .headers(HeaderUtil.createEntityCreationAlert("applicationTxn", changeCaseDTO.getApplicationTxn().getId().toString()))
+	                .body(changeCaseDTO);
 		}
 	
 

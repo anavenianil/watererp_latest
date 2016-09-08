@@ -184,7 +184,11 @@ angular.module('watererpApp')
         	$scope.feasibilityStudy.approvedByOperationManager.name = obj.firstName +" "+obj.lastName;
            }
         
-    
+        $(document).ready(function() {
+	        function disableBack() { window.history.forward() }
+	        window.onload = disableBack();
+	        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+	    });
     
 });
 

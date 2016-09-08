@@ -19,7 +19,10 @@
 							</div>
 							<div class="col-sm-3">
 								<label>Full Name</label>
-								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.firstName | uppercase}}&nbsp;{{changeCaseDTO.applicationTxn.middleName | uppercase}}&nbsp;{{changeCaseDTO.applicationTxn.lastName | uppercase}}</h5>
+								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.firstName
+									| uppercase}}&nbsp;{{changeCaseDTO.applicationTxn.middleName |
+									uppercase}}&nbsp;{{changeCaseDTO.applicationTxn.lastName |
+									uppercase}}</h5>
 							</div>
 							<div class="col-sm-3">
 								<label>Mobile No.</label>
@@ -39,15 +42,18 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<label>Division</label>
-								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.divisionMaster.divisionName | uppercase}}</h5>
+								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.divisionMaster.divisionName
+									| uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Street</label>
-								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.streetMaster.streetName | uppercase}}</h5>
+								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.streetMaster.streetName
+									| uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Address</label>
-								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.dma  | uppercase}}</h5>
+								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.dma
+									| uppercase}}</h5>
 							</div>
 						</div>
 					</fieldset>
@@ -57,11 +63,13 @@
 						<div class="row">
 							<div class="col-sm-4">
 								<label>Category</label>
-								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.tariffCategoryMaster.tariffCategory | uppercase}}</h5>
+								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.tariffCategoryMaster.tariffCategory
+									| uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label> Meter Id</label>
-								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.meterDetails.meterId | uppercase}}</h5>
+								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.meterDetails.meterId
+									| uppercase}}</h5>
 							</div>
 							<div class="col-sm-4">
 								<label>Meter Reading</label>
@@ -110,3 +118,31 @@
 		</div>
 	</div>
 </form>
+<div id="saveSuccessfullyModal" class="modal" name="saveForm">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form name="confirmForm">
+
+				<div class="modal-body">
+					<p>
+					<h3>CAN Generated Successfully!</h3>
+					</p>
+					<div>
+						<h4>
+							<label>Application No.:&nbsp;&nbsp; </label>{{applicationTxnId}}
+						</h4>
+						<h4>
+							<label>CAN.:&nbsp;&nbsp; </label>{{can}}
+						</h4>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal"
+						ng-click="done()">
+						<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
