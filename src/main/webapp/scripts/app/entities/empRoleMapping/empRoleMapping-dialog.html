@@ -23,7 +23,7 @@
 					id="id" name="id" ng-model="empRoleMapping.id" readonly />
 			</div> -->
 							<div class="col-sm-3">
-								<label for="field_user">User</label> <select
+								<label for="field_user">Employee</label> <select
 									class="form-control" id="field_user" name="user"
 									ng-model="empRoleMapping.user"
 									ng-change="getByUser(empRoleMapping.user.id)"
@@ -60,7 +60,7 @@
 								</select>
 							</div>
 							<div class="col-sm-3">
-								<label for="field_statusMaster">Status Master</label> <select
+								<label for="field_statusMaster">Status</label> <select
 									class="form-control" id="field_statusMaster"
 									name="statusMaster" ng-model="empRoleMapping.statusMaster"
 									ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id"

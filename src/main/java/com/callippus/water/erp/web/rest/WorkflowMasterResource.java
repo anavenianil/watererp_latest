@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.StatusMaster;
 import com.callippus.water.erp.domain.WorkflowMaster;
 import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.repository.WorkflowMasterRepository;
@@ -95,7 +96,8 @@ public class WorkflowMasterResource {
     public ResponseEntity<List<WorkflowMaster>> getAllWorkflowMasters(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of WorkflowMasters");
-        Page<WorkflowMaster> page = workflowMasterRepository.findAll(pageable); 
+        StatusMaster statusMaster = statusMasterRepository.findOne(2l); 
+        Page<WorkflowMaster> page = workflowMasterRepository.findByStatusMaster(pageable, statusMaster); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/workflowMasters");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
