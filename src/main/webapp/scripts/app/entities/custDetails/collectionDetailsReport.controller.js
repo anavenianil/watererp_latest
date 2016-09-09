@@ -19,6 +19,14 @@ angular.module('watererpApp')
 		}
         $scope.getDivisionMasters();
         
+        $scope.getPaymentTypess = function() {
+        	$scope.paymentTypess = [];
+			return $http.get('/api/paymentTypes/getAll').then(function(response) {
+						$scope.paymentTypess = response.data;
+					});
+		}
+        $scope.getPaymentTypess();
+        
         $scope.getTariffCategoryMasters = function() {
         	$scope.tariffcategorymasters = [];
 			return $http.get('/api/tariffCategoryMasters/getAll').then(function(response) {
@@ -26,6 +34,7 @@ angular.module('watererpApp')
 					});
 		}
         $scope.getTariffCategoryMasters();
+        
         
         $scope.datePickerForfromdate = {};
 
@@ -38,9 +47,10 @@ angular.module('watererpApp')
 		};
 
         $scope.getReport = function () {
-        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.custDetails.fromdate != null && $scope.custDetails.todate != null ){
+        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null &&  $scope.paymentTypes.paymentMode != null && $scope.custDetails.fromdate != null && $scope.custDetails.todate != null ){
         	var divisionId = $scope.custDetails.divisionMaster.id;
-        	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
+        	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;
+        	var paymentId =$scope.paymentTypes.paymentMode.id;
             var dateFormat = 'yyyy-MM-dd';
             var fromDate = $filter('date')($scope.custDetails.fromdate, dateFormat);
             var toDate = $filter('date')($scope.custDetails.todate, dateFormat);
@@ -54,7 +64,7 @@ angular.module('watererpApp')
 
             $scope.collDetails = {};
             
-            	$window.open('/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
+            	$window.open('/api/custDetailss/report/' + divisionId + '/' + tariffCategoryId + '/' + paymentId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
                 location.reload();
             }
             
@@ -88,10 +98,11 @@ angular.module('watererpApp')
         
         
            $scope.getReportDetails = function () {
-        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.custDetails.fromdate != null && $scope.custDetails.todate != null ){
+        	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null &&  $scope.paymentTypes.paymentMode != null && $scope.custDetails.fromdate != null && $scope.custDetails.todate != null ){
         	var divisionId = $scope.custDetails.divisionMaster.id;
         	var tariffCategoryId = $scope.custDetails.tariffCategoryMaster.id;        	
-            var dateFormat = 'yyyy-MM-dd';
+        	var paymentId =$scope.paymentTypes.paymentMode.id;
+        	var dateFormat = 'yyyy-MM-dd';
             var fromDate = $filter('date')($scope.custDetails.fromdate, dateFormat);
             var toDate = $filter('date')($scope.custDetails.todate, dateFormat);
 
@@ -104,7 +115,7 @@ angular.module('watererpApp')
 
             $scope.collDetails = {};
             
-            	$window.open('/api/custDetailss/report/detailByCan/' + divisionId + '/' + tariffCategoryId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
+            	$window.open('/api/custDetailss/report/detailByCan/' + divisionId + '/' + tariffCategoryId + '/' + paymentId + '/' + formatDate(fromDate) + '/' + formatDate(toDate), "_blank")
                 location.reload();
             }
           

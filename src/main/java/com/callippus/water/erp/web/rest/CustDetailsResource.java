@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -275,19 +277,21 @@ public class CustDetailsResource {
      * Get By Category PDF2 
      * @throws ParseException 
      */
-    @RequestMapping(value = "/custDetailss/report/{dmaId}/{categoryId}/{fromDate}/{toDate}", method = RequestMethod.GET)
+    @RequestMapping(value = "/custDetailss/report/{dmaId}/{categoryId}/{paymentId}/{fromDate}/{toDate}", method = RequestMethod.GET)
 	@ResponseBody
 	public void getCustDetailsReport1(HttpServletResponse response,
-			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate fromDate , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate toDate) throws JRException,
+			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable Long paymentId, @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate fromDate , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate toDate) throws JRException,
 			IOException, ParseException {
     	log.debug("REST request to save Customer : {}", categoryId);
    	
     	
+    	
 		Map<String, Object> params = new HashMap<String,Object>();
 		params.put("dmaId", dmaId);
 		params.put("categoryId", categoryId);
-		params.put("fromDate", fromDate);
-		params.put("toDate", toDate);
+		params.put("fromDate", Date.from(fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		params.put("toDate", Date.from(toDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		params.put("paymentId", paymentId);
 		JasperPrint jasperPrint = null;
 					 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionReport.jasper", params);
@@ -306,10 +310,10 @@ public class CustDetailsResource {
      * Get By Category PDF3 
      * @throws ParseException 
      */
-    @RequestMapping(value = "/custDetailss/report/detailByCan/{dmaId}/{categoryId}/{fromDate}/{toDate}", method = RequestMethod.GET)
+    @RequestMapping(value = "/custDetailss/report/detailByCan/{dmaId}/{categoryId}/{paymentId}/{fromDate}/{toDate}", method = RequestMethod.GET)
 	@ResponseBody
 	public void getCustDetailsReportDetails(HttpServletResponse response,
-			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate fromDate , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate toDate) throws JRException,
+			@PathVariable Long dmaId, @PathVariable Long categoryId ,@PathVariable Long paymentId, @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate fromDate , @PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate toDate) throws JRException,
 			IOException, ParseException {
     	log.debug("REST request to save Customer : {}", categoryId);
    	
@@ -317,8 +321,9 @@ public class CustDetailsResource {
 		Map<String, Object> params = new HashMap<String,Object>();
 		params.put("dmaId", dmaId);
 		params.put("categoryId", categoryId);
-		params.put("fromDate", fromDate);
-		params.put("toDate", toDate);
+		params.put("fromDate", Date.from(fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		params.put("toDate", Date.from(toDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		params.put("paymentId", paymentId);
 		JasperPrint jasperPrint = null;
 					 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionReportDetail.jasper", params);
