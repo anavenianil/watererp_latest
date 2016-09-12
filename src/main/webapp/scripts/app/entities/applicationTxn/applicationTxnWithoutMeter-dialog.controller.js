@@ -48,11 +48,13 @@ angular.module('watererpApp')
         };*/
 
         var onSaveSuccess = function (result) {
-        	$scope.clear();
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
-            $scope.applicationTxn.id = result.id;
+            $scope.applicationTxnNo= result.id;
             $('#saveSuccessfullyModal').modal('show');
+            $scope.clear();
+			$scope.rc.editForm.attempted=false;
+			$scope.editForm.$setPristine();
         };
 
         var onSaveError = function (result) {
@@ -60,12 +62,15 @@ angular.module('watererpApp')
         };
 
         $scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.applicationTxn.id != null) {
-                ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
-            } else {
-                ApplicationTxn.save($scope.applicationTxn, onSaveSuccess, onSaveError);
-            }
+        	if($scope.makeArr.length>0){
+        		$scope.isSaving = true;
+                if ($scope.applicationTxn.id != null) {
+                    ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
+                } else {
+                    ApplicationTxn.save($scope.applicationTxn, onSaveSuccess, onSaveError);
+                }
+        	}
+            
         };
 
         /*$scope.clear = function() {
@@ -161,6 +166,27 @@ angular.module('watererpApp')
 				$scope.applicationTxn.propertyDoc = val1 +" & " + val2;
 			}
 			console.log($scope.applicationTxn.propertyDoc);
+		}
+		
+		
+		$scope.makeArr = [];
+		$scope.check = function(value){
+			
+			if(value == "Tittle Deed/Offer letter"){
+				$scope.makeArr.push(value);
+				//alert("Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
+			else if(value == "Rented Property-lease-Rent Agreement"){
+				$scope.makeArr.push(value);
+				//alert("Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
+			else if(value == "Not Submitted"){
+				$scope.makeArr.pop(value);
+				//alert("Not Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
 		}
 		
 /*$scope.checkForm=function(value1,value2){

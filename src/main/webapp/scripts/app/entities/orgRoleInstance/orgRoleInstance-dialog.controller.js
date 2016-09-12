@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('watererpApp').controller('OrgRoleInstanceDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'OrgRoleInstance', 'StatusMaster', 'OrgRoleHierarchy', '$http',
-        function($scope, $stateParams, $uibModalInstance, entity, OrgRoleInstance, StatusMaster, OrgRoleHierarchy, $http) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'OrgRoleInstance', 'StatusMaster', 'OrgRoleHierarchy', '$http', 'ParseLinks',
+        function($scope, $stateParams, $uibModalInstance, entity, OrgRoleInstance, StatusMaster, OrgRoleHierarchy, $http, ParseLinks) {
 
         $scope.orgRoleInstance = entity;
-        $scope.statusmasters = StatusMaster.query();
-        $scope.orgrolehierarchys = OrgRoleHierarchy.query();
+        //$scope.statusmasters = StatusMaster.query();
+        //$scope.orgrolehierarchys = OrgRoleHierarchy.query();
         //$scope.departmentsmasters = DepartmentsMaster.query();
         $scope.getOrgRoleInstance = function() {
         	$scope.orgroleinstances = [];
@@ -16,8 +16,27 @@ angular.module('watererpApp').controller('OrgRoleInstanceDialogController',
 						$scope.orgroleinstances = response.data;
 					});
 		}
-        
         $scope.getOrgRoleInstance();
+        
+        
+        $scope.getOrgrolehierarchys = function() {
+        	$scope.orgrolehierarchys = [];
+			return $http.get('/api/orgRoleHierarchys/getAll').then(function(response) {
+						$scope.orgrolehierarchys = response.data;
+					});
+		}
+        $scope.getOrgrolehierarchys();
+        
+        $scope.getStatusMaster = function() {
+        	$scope.statusmasters = [];
+            StatusMaster.query({page: $scope.page, size: 20, description1:'GENERAL'}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                for (var i = 0; i < result.length; i++) {
+                    $scope.statusmasters.push(result[i]);
+                }
+            });
+        };
+        $scope.getStatusMaster();
         
         $scope.load = function(id) {
             OrgRoleInstance.get({id : id}, function(result) {

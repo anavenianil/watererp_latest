@@ -6,11 +6,15 @@ angular
 				'CustomerComplaintsDialogController',
 				function($scope, $state, CustomerComplaints, ParseLinks,
 						$stateParams, ComplaintTypeMaster, UploadUtil,
-						CustDetailsService, $http) {
+						CustDetailsService, $http, DivisionMaster, StreetMaster) {
 					$scope.customerComplaints = {};
 					// This code is to per populate system date in Complaint Date Field
 					$scope.customerComplaints.complaintDate = new Date();
 					$scope.complainttypemasters = ComplaintTypeMaster.query();
+					
+					$scope.divisionmasters = DivisionMaster.query();
+			        //$scope.streetMasters = StreetMaster.query();
+			        
 					$scope.load = function(id) {
 						CustomerComplaints.get({
 							id : id
@@ -154,4 +158,13 @@ angular
 								+ $scope.serverErrorMsg : '';
 					};
 
+					$scope.getStreet = function(divisionId){
+			        	$scope.streetMasters = [];
+			            StreetMaster.query({page: $scope.page, size: 20, divisionId: divisionId}, function(result, headers) {
+			                $scope.links = ParseLinks.parse(headers('link'));
+			                for (var i = 0; i < result.length; i++) {
+			                    $scope.streetMasters.push(result[i]);
+			                }
+			            });
+			        }
 				});

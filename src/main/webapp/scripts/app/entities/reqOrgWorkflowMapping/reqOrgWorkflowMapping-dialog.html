@@ -90,7 +90,7 @@
 							<label for="field_statusMaster">Status Master</label> <select
 								class="form-control" id="field_statusMaster" name="statusMaster"
 								ng-model="reqOrgWorkflowMapping.statusMaster"
-								ng-options="statusMaster as statusMaster.id+'-'+statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
+								ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
 								<option value=""></option>
 							</select>
 						</div>

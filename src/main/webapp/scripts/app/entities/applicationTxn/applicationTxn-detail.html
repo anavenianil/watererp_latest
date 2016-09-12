@@ -7,7 +7,7 @@
 			<h3 class="panel-title pull-left">Requests</h3>
 		</div>
 		<div class="list-group">
-			<div class="table-responsive" ng-hide="applicationTxn.status===0">
+			<div class="table-responsive">
 				<table class="clickableTable table table-striped">
 					<thead>
 						<tr>
@@ -29,7 +29,6 @@
 							<td>{{item.actionedDate | date:'mediumDate'}}</td>
 							<td>{{item.ipAddress}}</td>
 							<td>{{item.statusMaster.status}}</td>
-
 						</tr>
 					</tbody>
 				</table>
@@ -209,7 +208,7 @@
 						<div class="row">
 							<div class="col-sm-3">
 								<label>Approved By</label>
-								<h5 class="list-group-item-heading">{{applicationTxn.user.firstName}}&nbsp;{{applicationTxn.user.firstName}}({{applicationTxn.user.login}})</h5>
+								<h5 class="list-group-item-heading">{{applicationTxn.user.firstName}}&nbsp;{{applicationTxn.user.lastName}}({{applicationTxn.user.login}})</h5>
 							</div>
 							<div class="col-sm-3">
 								<label>Approved Date</label>
@@ -224,53 +223,52 @@
 
 		<!-- ng-show="{{applicationTxn.status==0}}" -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-if="applicationTxn.status === 0 && orgRole.orgRoleName === 'Technical Manager'"
+			ng-if="applicationTxn.status === 0 && orgRole.id === 10"
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
-
 		<button type="button" class="btn btn-success pull-right"
-			ng-if="applicationTxn.status === 1 && orgRole.orgRoleName === 'Technical Zonal Supervisor'"
+			ng-if="applicationTxn.status === 1 && orgRole.id === 24"
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===2 && orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation'"
+			ng-show="applicationTxn.status===2 && orgRole.id === 15"
 			ui-sref="feasibilityStudyForAppTxn({applicationId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Create
 			Feasibility
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===3 && orgRole.orgRoleName === 'Technical Manager'"
+			ng-show="applicationTxn.status===3 && orgRole.id === 10"
 			ui-sref="proceedingsForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Create
 			Proceedings
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===4 && orgRole.orgRoleName === 'Assistant Accountant(Revenue)'"
+			ng-show="applicationTxn.status===4 && orgRole.id === 22"
 			ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Review
 			Proceedings
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===5 && orgRole.orgRoleName === 'Stores & Supplies Officer'"
+			ng-show="applicationTxn.status===5 && orgRole.id === 9"
 			ui-sref="itemRequiredForApplicationTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Items
 		</button>
 
 		<!-- ui-sref="custMeterMappingForMeterAllot({applicationTxnId:applicationTxn.id})" -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===6 && orgRole.orgRoleName === 'Officer, Operation & Maintance - NRW, Water Supply and Sanitation'"
+			ng-show="applicationTxn.status===6 && orgRole.id === 15"
 			ui-sref="applicationTxnIssueMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===7 && orgRole.orgRoleName === 'Billing Officer'"
+			ng-show="applicationTxn.status===7 && orgRole.id === 16"
 			ui-sref="applicationTxnClose({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete
 		</button>

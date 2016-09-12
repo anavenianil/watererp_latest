@@ -89,7 +89,7 @@
 							<label for="field_statusMaster">Status Master</label> <select
 								class="form-control" id="field_statusMaster" name="statusMaster"
 								ng-model="orgRoleInstance.statusMaster"
-								ng-options="statusMaster as statusMaster.id+'-'+statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
+								ng-options="statusMaster as statusMaster.status for statusMaster in statusmasters track by statusMaster.id">
 								<option value=""></option>
 							</select>
 						</div>
@@ -98,7 +98,7 @@
 								Hierarchy</label> <select class="form-control"
 								id="field_orgRoleHierarchy" name="orgRoleHierarchy"
 								ng-model="orgRoleInstance.orgRoleHierarchy"
-								ng-options="orgRoleHierarchy as orgRoleHierarchy.id for orgRoleHierarchy in orgrolehierarchys track by orgRoleHierarchy.id">
+								ng-options="orgRoleHierarchy as orgRoleHierarchy.roleHierarchyName for orgRoleHierarchy in orgrolehierarchys track by orgRoleHierarchy.id">
 								<option value=""></option>
 							</select>
 						</div>

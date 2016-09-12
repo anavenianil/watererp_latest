@@ -1,3 +1,4 @@
+
 'use strict';
 
 angular.module('watererpApp').controller(
@@ -91,7 +92,7 @@ angular.module('watererpApp').controller(
 					if (!$scope.editForm.field_instrDt.$dirty)
 						return true;
 
-					if (!$scope.editForm.instrumentIssuerMaster.$dirty)
+					if (!$scope.editForm.bankMaster.$dirty)
 						return true;
 
 					if ($scope.editForm.field_instrNo.$invalid)
@@ -100,7 +101,7 @@ angular.module('watererpApp').controller(
 					if ($scope.editForm.field_instrDt.$invalid)
 						return true;
 
-					if ($scope.editForm.instrumentIssuerMaster.$invalid)
+					if ($scope.editForm.bankMaster.$invalid)
 						return true;
 
 				}
@@ -122,7 +123,7 @@ angular.module('watererpApp').controller(
 				$scope.collDetails.consName = arr[1];
 				$scope.collDetails.address = arr[2];
 				$scope.collDetails.receiptDt = new Date();
-				$scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
+				//$scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
 				$scope.collDetails.txnStatus = "C";
 				$scope.getCustDetails(arr[0].trim());
 				$scope.custInfo = "";
@@ -199,7 +200,7 @@ angular.module('watererpApp').controller(
 			
 			$scope.clear=function()
 			{
-				$scope.collDetails={receiptAmt:null , paymentTypes:null , instrNo:null , instrumentIssuerMaster:null , field_instrDt:null
+				$scope.collDetails={receiptAmt:null , paymentTypes:null , instrNo:null , bankMaster:null , field_instrDt:null
 						};
 			};
 			
@@ -253,7 +254,7 @@ angular.module('watererpApp').controller(
 					$scope.instrEnabled = false;
 					$scope.collDetails.instrNo = null;
 					$scope.collDetails.instrDt = null;
-					$scope.collDetails.instrumentIssuerMaster = null;
+					$scope.collDetails.bankMaster = null;
 				} else
 					$scope.instrEnabled = true;
 			}

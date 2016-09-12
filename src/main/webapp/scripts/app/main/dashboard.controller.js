@@ -4,9 +4,9 @@ angular.module('watererpApp').controller(
 		'DashboardController',
 		function($scope, $state, $rootScope, Module, Account, User, $location,
 				$http, Auth, Principal) {
-			$scope.pendingRequests = [];
-			$scope.approvedRequests = [];
-			$scope.myRequests = [];
+			//$scope.pendingRequests = [];
+			//$scope.approvedRequests = [];
+			//$scope.myRequests = [];
 			$scope.$state = $state;
 			$scope.isAuthenticated = Principal.isAuthenticated;
 			$scope.module2menu_items = {};
@@ -25,7 +25,7 @@ angular.module('watererpApp').controller(
 
 			$scope.myLogout = function() {
 				Auth.logout();
-				window.location = '/erpLogin.html';
+				window.location = '/';
 			};
 
 			$scope.getLogin = function() {
@@ -62,20 +62,15 @@ angular.module('watererpApp').controller(
 			Principal.identity().then(function(account) {
 				$scope.account = account;
 				$scope.isAuthenticated = Principal.isAuthenticated;
-
 				if (!$scope.isAuthenticated())
 					$state.go('login');
-
 				else {
 					User.get({
 						login : $scope.account.login
 					}, function(result) {
 						$scope.user = result;
-
 					});
-
 					$scope.loadAll();
-
 				}
 
 			});

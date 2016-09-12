@@ -1,0 +1,294 @@
+<!doctype html>
+<!--  src/main/resources/templates/billingAndCollection.html -->
+<html class="no-js">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>WaterERP</title>
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width" />
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<!-- build:css assets/styles/vendor.css -->
+<!-- bower:css -->
+<link rel="stylesheet"
+	href="bower_components/angular-loading-bar/build/loading-bar.css" />
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:css assets/styles/main.css -->
+<link rel="stylesheet" href="assets/styles/main.css" />
+<!-- endbuild -->
+</head>
+<body ng-app="watererpApp">
+	<!--[if lt IE 9]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+	<!-- <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div> -->
+	<div ui-view="navbar" ng-cloak=""></div>
+	<div class="container">
+		<div class="well" ui-view="content"></div>
+		<div class="footer">
+			<p translate="footer"></p>
+		</div>
+	</div>
+	<!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
+         <script>
+             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+             e.src='//www.google-analytics.com/analytics.js';
+             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+             ga('create','UA-XXXXX-X');ga('send','pageview');
+         </script>-->
+	<!-- build:js scripts/vendor.js -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-aria/angular-aria.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script
+		src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script
+		src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+	<script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+	<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script
+		src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/json3/lib/json3.js"></script>
+	<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+	<script
+		src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+	<script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+	<script
+		src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+	<!-- for no html5 browsers support -->
+	<script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+	<script type="text/javascript" src="bower_components/moment/moment.js"></script>
+	<script type="text/javascript"
+		src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->
+	<script src="scripts/app/app.js"></script>
+	<script src="scripts/app/app.constants.js"></script>
+	<script src="scripts/components/authority/authority.service.js"></script>
+	<script src="scripts/components/entities/module/module.service.js"></script>	
+	<script src="scripts/components/auth/auth.service.js"></script>
+	<script src="scripts/components/auth/principal.service.js"></script>
+	<script src="scripts/components/navbar/navbar.service.js"></script>
+	<script src="scripts/components/auth/authority.directive.js"></script>
+	<script src="scripts/components/compile/compile.directive.js"></script>
+	<script src="scripts/components/auth/services/account.service.js"></script>
+	<script src="scripts/components/auth/services/activate.service.js"></script>
+	<script src="scripts/components/auth/services/password.service.js"></script>
+	<script src="scripts/components/auth/services/register.service.js"></script>
+	<script src="scripts/components/form/form.directive.js"></script>
+	<script src="scripts/components/form/maxbytes.directive.js"></script>
+	<script src="scripts/components/form/minbytes.directive.js"></script>
+	<script src="scripts/components/form/uib-pager.config.js"></script>
+	<script src="scripts/components/form/uib-pagination.config.js"></script>
+	<script src="scripts/components/admin/audits.service.js"></script>
+	<script src="scripts/components/admin/logs.service.js"></script>
+	<script src="scripts/components/admin/configuration.service.js"></script>
+	<script src="scripts/components/admin/monitoring.service.js"></script>
+	<script src="scripts/components/interceptor/auth.interceptor.js"></script>
+	<script	src="scripts/components/interceptor/errorhandler.interceptor.js"></script>
+	<script	src="scripts/components/interceptor/notification.interceptor.js"></script>
+	<script src="scripts/components/navbar/navbar.directive.js"></script>
+	<script src="scripts/components/navbar/navbar.controller.js"></script>
+	<script src="scripts/components/user/user.service.js"></script>
+	<script src="scripts/components/util/truncate.filter.js"></script>
+	<script src="scripts/components/util/base64.service.js"></script>
+	<script src="scripts/components/util/capitalize.filter.js"></script>
+	<script src="scripts/components/alert/alert.service.js"></script>
+	<script src="scripts/components/alert/alert.directive.js"></script>
+	<script src="scripts/components/util/parse-links.service.js"></script>
+	<script src="scripts/components/util/date-util.service.js"></script>
+	<script src="scripts/components/util/data-util.service.js"></script>
+	<script src="scripts/components/util/sort.directive.js"></script>
+	<script src="scripts/components/upload/upload.service.js"></script>
+	<script src="scripts/app/account/account.js"></script>
+	<script src="scripts/app/account/activate/activate.js"></script>
+	<script src="scripts/app/account/activate/activate.controller.js"></script>
+	<script src="scripts/app/account/login/login.js"></script>
+	<script src="scripts/app/account/login/login.controller.js"></script>
+	<script src="scripts/app/account/password/password.js"></script>
+	<script src="scripts/app/account/password/password.controller.js"></script>
+	<script src="scripts/app/account/password/password.directive.js"></script>
+	<script src="scripts/app/account/register/register.js"></script>
+	<script src="scripts/app/account/register/register.controller.js"></script>
+	<script src="scripts/app/account/settings/settings.js"></script>
+	<script src="scripts/app/account/settings/settings.controller.js"></script>
+	<script	src="scripts/app/account/reset/finish/reset.finish.controller.js"></script>
+	<script src="scripts/app/account/reset/finish/reset.finish.js"></script>
+	<script	src="scripts/app/account/reset/request/reset.request.controller.js"></script>
+	<script src="scripts/app/account/reset/request/reset.request.js"></script>
+	<script src="scripts/app/entities/entity.js"></script>
+	<script src="scripts/app/error/error.js"></script>
+	<script src="scripts/app/main/main.js"></script>
+	<script src="scripts/app/main/main.controller.js"></script>
+	<script src="scripts/app/main/dashboard.controller.js"></script>
+	<script src="scripts/app/main/request.controller.js"></script>
+	<script src="scripts/components/auth/services/sessions.service.js"></script>
+	<script src="scripts/components/auth/provider/auth.session.service.js"></script>
+	<script src="scripts/app/account/sessions/sessions.js"></script>
+	<script src="scripts/app/account/sessions/sessions.controller.js"></script>
+	<!-- <script src="scripts/app/module/billingAndCollection.controller.js"></script> -->
+	<script src="scripts/app/module/reports.controller.js"></script>
+	
+	
+	<script src="scripts/app/entities/receipt/receipt.js"></script>
+	<script src="scripts/app/entities/receipt/receipt.controller.js"></script>
+	<script src="scripts/app/entities/receipt/receipt-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/receipt/receipt-delete-dialog.controller.js"></script>
+	<script src="scripts/app/entities/receipt/receipt-detail.controller.js"></script>
+	<script src="scripts/components/entities/receipt/receipt.service.js"></script>
+	<script src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster.js"></script>
+	<script	src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster.controller.js"></script>
+	<script	src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffTypeMaster/tariffTypeMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/tariffTypeMaster/tariffTypeMaster.service.js"></script>
+	<script src="scripts/app/entities/tariffMaster/tariffMaster.js"></script>
+	<script	src="scripts/app/entities/tariffMaster/tariffMaster.controller.js"></script>
+	<script	src="scripts/app/entities/tariffMaster/tariffMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffMaster/tariffMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffMaster/tariffMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/tariffMaster/tariffMaster.service.js"></script>
+	<script src="scripts/app/entities/tariffCharges/tariffCharges.js"></script>
+	<script	src="scripts/app/entities/tariffCharges/tariffCharges.controller.js"></script>
+	<script	src="scripts/app/entities/tariffCharges/tariffCharges-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffCharges/tariffCharges-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffCharges/tariffCharges-detail.controller.js"></script>
+	<script	src="scripts/components/entities/tariffCharges/tariffCharges.service.js"></script>
+	<script src="scripts/app/entities/billDetails/billDetails.js"></script>
+	<script	src="scripts/app/entities/billDetails/billDetails.controller.js"></script>
+	<script	src="scripts/app/entities/billDetails/billDetails-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billDetails/billDetails-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billDetails/billDetails-detail.controller.js"></script>
+	<script	src="scripts/components/entities/billDetails/billDetails.service.js"></script>
+	<script src="scripts/app/entities/billFullDetails/billFullDetails.js"></script>
+	<script	src="scripts/app/entities/billFullDetails/billFullDetails.controller.js"></script>
+	<script	src="scripts/app/entities/billFullDetails/billFullDetails-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billFullDetails/billFullDetails-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billFullDetails/billFullDetails-detail.controller.js"></script>
+	<script	src="scripts/components/entities/billFullDetails/billFullDetails.service.js"></script>
+	<script src="scripts/app/entities/custDetails/custDetails.js"></script>
+	<script	src="scripts/app/entities/custDetails/custDetails.controller.js"></script>
+	<script	src="scripts/app/entities/custDetails/custDetails-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/custDetails/custDetails-delete-dialog.controller.js"></script>
+	<script src="scripts/app/entities/custDetails/custDetails-detail.controller.js"></script>
+	<script	src="scripts/components/entities/custDetails/custDetails.service.js"></script>
+	<script	src="scripts/components/entities/custDetails/CustDetailsService.service.js"></script>
+	<script	src="scripts/app/entities/custDetails/custDetailsReport.controller.js"></script>
+	<script src="scripts/app/entities/collDetails/collDetails.js"></script>
+	<script	src="scripts/app/entities/collDetails/collDetails.controller.js"></script>
+	<script	src="scripts/app/entities/collDetails/collDetails-dialog.controller.js"></script>	
+	<script	src="scripts/app/entities/collDetails/collDetails-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/collDetails/collDetails-detail.controller.js"></script>
+	<script	src="scripts/components/entities/collDetails/collDetails.service.js"></script>
+	<script src="scripts/app/entities/collDetails/revDetails.js"></script>
+	<script	src="scripts/app/entities/collDetails/revDetails-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/collDetails/revDetails.controller.js"></script>
+	<script	src="scripts/components/entities/collDetails/revDetails.service.js"></script>
+	<script	src="scripts/app/entities/collDetails/collDetailsCancel-dialog.controller.js"></script>	
+	<script	src="scripts/app/entities/revenueTypeMaster/revenueTypeMaster.js"></script>
+	<script	src="scripts/app/entities/revenueTypeMaster/revenueTypeMaster.controller.js"></script>
+	<script	src="scripts/app/entities/revenueTypeMaster/revenueTypeMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/revenueTypeMaster/revenueTypeMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/revenueTypeMaster/revenueTypeMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/revenueTypeMaster/revenueTypeMaster.service.js"></script>	
+	<script src="scripts/app/entities/uom/uom.js"></script>
+	<script src="scripts/app/entities/uom/uom.controller.js"></script>
+	<script src="scripts/app/entities/uom/uom-dialog.controller.js"></script>
+	<script src="scripts/app/entities/uom/uom-delete-dialog.controller.js"></script>
+	<script src="scripts/app/entities/uom/uom-detail.controller.js"></script>
+	<script src="scripts/components/entities/uom/uom.service.js"></script>
+	<script src="scripts/app/entities/billRunMaster/billRunMaster.js"></script>
+	<script	src="scripts/app/entities/billRunMaster/billRunMaster.controller.js"></script>
+	<script	src="scripts/app/entities/billRunMaster/billRunMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billRunMaster/billRunMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billRunMaster/billRunMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/billRunMaster/billRunMaster.service.js"></script>
+	<script src="scripts/app/entities/billRunDetails/billRunDetails.js"></script>
+	<script	src="scripts/app/entities/billRunDetails/billRunDetails.controller.js"></script>
+	<script	src="scripts/app/entities/billRunDetails/billRunDetails-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billRunDetails/billRunDetails-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/billRunDetails/billRunDetails-detail.controller.js"></script>
+	<script	src="scripts/components/entities/billRunDetails/billRunDetails.service.js"></script>
+	<script	src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster.js"></script>
+	<script	src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster.controller.js"></script>
+	<script	src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/collectionTypeMaster/collectionTypeMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/collectionTypeMaster/collectionTypeMaster.service.js"></script>
+	<script	src="scripts/components/entities/divisionMaster/divisionMaster.service.js"></script>
+	<script src="scripts/app/entities/expenseDetails/expenseDetails.js"></script>
+	<script	src="scripts/app/entities/expenseDetails/expenseDetails.controller.js"></script>
+	<script	src="scripts/app/entities/expenseDetails/expenseDetails-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/expenseDetails/expenseDetails-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/expenseDetails/expenseDetails-detail.controller.js"></script>
+	<script	src="scripts/components/entities/expenseDetails/expenseDetails.service.js"></script>
+	<script src="scripts/app/entities/meterChange/meterChange.js"></script>
+	<script	src="scripts/app/entities/meterChange/meterChange.controller.js"></script>
+	<script	src="scripts/app/entities/meterChange/meterChange-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/meterChange/meterChange-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/meterChange/meterChange-detail.controller.js"></script>
+	<script	src="scripts/components/entities/meterChange/meterChange.service.js"></script>
+	<script	src="scripts/components/entities/meterDetails/meterDetails.service.js"></script>
+	<script src="scripts/app/entities/paymentTypes/paymentTypes.js"></script>
+	<script	src="scripts/app/entities/paymentTypes/paymentTypes.controller.js"></script>
+	<script	src="scripts/app/entities/paymentTypes/paymentTypes-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/paymentTypes/paymentTypes-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/paymentTypes/paymentTypes-detail.controller.js"></script>
+	<script	src="scripts/components/entities/paymentTypes/paymentTypes.service.js"></script>
+	<script	src="scripts/components/entities/pipeSizeMaster/pipeSizeMaster.service.js"></script>
+	<script	src="scripts/app/entities/bankMaster/bankMaster.js"></script>
+	<script	src="scripts/app/entities/bankMaster/bankMaster.controller.js"></script>
+	<script	src="scripts/app/entities/bankMaster/bankMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/bankMaster/bankMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/bankMaster/bankMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/bankMaster/bankMaster.service.js"></script>
+	<script	src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster.js"></script>
+	<script	src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster.controller.js"></script>
+	<script	src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/tariffCategoryMaster/tariffCategoryMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/tariffCategoryMaster/tariffCategoryMaster.service.js"></script>
+	<script	src="scripts/app/entities/billFullDetails/getWaterBillDetails.controller.js"></script>
+	<script	src="scripts/app/entities/adjustments/adjustments.js"></script>
+	<script	src="scripts/app/entities/adjustments/adjustments.controller.js"></script>
+	<script	src="scripts/app/entities/adjustments/adjustments-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/adjustments/adjustments-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/adjustments/adjustments-detail.controller.js"></script>
+	<script	src="scripts/components/entities/adjustments/adjustments.service.js"></script>
+	<script	src="scripts/components/entities/streetMaster/streetMaster.service.js"></script>	
+	<script	src="scripts/app/entities/transactionTypeMaster/transactionTypeMaster.js"></script>
+	<script	src="scripts/app/entities/transactionTypeMaster/transactionTypeMaster.controller.js"></script>
+	<script	src="scripts/app/entities/transactionTypeMaster/transactionTypeMaster-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/transactionTypeMaster/transactionTypeMaster-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/transactionTypeMaster/transactionTypeMaster-detail.controller.js"></script>
+	<script	src="scripts/components/entities/transactionTypeMaster/transactionTypeMaster.service.js"></script>
+	<script	src="scripts/app/entities/customerComplaints/customerComplaints.js"></script>
+	<script	src="scripts/app/entities/customerComplaints/customerComplaints.controller.js"></script>
+	<script	src="scripts/app/entities/customerComplaints/customerComplaints-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/customerComplaints/customerComplaints-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/customerComplaints/customerComplaints-detail.controller.js"></script>
+	<script	src="scripts/components/entities/customerComplaints/customerComplaints.service.js"></script>		
+	
+	<script	src="scripts/app/entities/reversalDetails/reversalDetails.js"></script>
+	<script	src="scripts/app/entities/reversalDetails/reversalDetails.controller.js"></script>	
+	<script	src="scripts/app/entities/reversalDetails/reversalDetails-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/reversalDetails/reversalDetails-delete-dialog.controller.js"></script>
+	<script	src="scripts/app/entities/reversalDetails/reversalDetails-detail.controller.js"></script>	
+	<script	src="scripts/components/entities/reversalDetails/reversalDetails.service.js"></script>
+	
+	<!-- endbuild -->
+</body>
+</html>
+

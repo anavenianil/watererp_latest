@@ -1,0 +1,161 @@
+<div>
+	<form name="editForm" role="form" novalidate ng-submit="save()">
+
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">Water Leakage Complaint</h3>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="modal-body">
+						<jh-alert-error></jh-alert-error>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<label class="control-label" for="field_leakageType">Leakage
+									Type</label>
+								<!-- <input type="text" class="form-control" name="leakageType"
+									id="field_leakageType"
+									ng-model="waterLeakageComplaint.leakageType" /> -->
+								<select class="form-control" id="field_leakageType"
+									name="leakageType" ng-model="waterLeakageComplaint.leakageType">
+									<option value="BURST">BURST</option>
+									<option value="VALVE">VALVE</option>
+									<option value="HYDRANT">HYDRANT</option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_leakMagnitude">Leak
+									Magnitude</label> <select class="form-control" id="field_leakMagnitude"
+									name="leakMagnitude"
+									ng-model="waterLeakageComplaint.leakMagnitude">
+									<option value="LOW">LOW</option>
+									<option value="MEDIUM">MEDIUM</option>
+									<option value="SEVERE">SEVERE</option>
+								</select>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<label class="control-label" for="field_coordinateX">Coordinate-X</label>
+								<input type="text" class="form-control" name="coordinateX"
+									id="field_coordinateX"
+									ng-model="waterLeakageComplaint.coordinateX" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_coordinateY">Coordinate-Y</label>
+								<input type="text" class="form-control" name="coordinateY"
+									id="field_coordinateY"
+									ng-model="waterLeakageComplaint.coordinateY" />
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<label for="field_divisionMaster">Division(DMA)</label> <select
+									class="form-control" id="field_divisionMaster"
+									name="divisionMaster"
+									ng-change="getStreet(waterLeakageComplaint.divisionMaster.id)"
+									ng-model="waterLeakageComplaint.divisionMaster"
+									ng-options="divisionMaster as divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id">
+									<option value=""></option>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<label for="field_streetMaster">Street</label> <select
+									class="form-control" id="field_streetMaster"
+									name="streetMaster"
+									ng-model="waterLeakageComplaint.streetMaster"
+									ng-options="streetMaster as streetMaster.streetName for streetMaster in streetmasters track by streetMaster.id">
+									<option value=""></option>
+								</select>
+							</div>
+							<!-- <div class="col-sm-3">
+								<label class="control-label" for="field_status">Status</label> <input
+									type="text" class="form-control" name="status"
+									id="field_status" ng-model="waterLeakageComplaint.status" />
+							</div> -->
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4 col-sm-offset-2">
+								<label class="control-label" for="field_complaintDateTime">Complaint
+									Date & Time Date</label>
+									<div class="dropdown">
+										<a class="dropdown-toggle" id="dropdown2" role="button"
+											data-toggle="dropdown" data-target="#">
+											<div class="input-group">
+												<input type="text" class="form-control"
+													data-ng-model="waterLeakageComplaint.complaintDateTime"><span
+													class="input-group-addon"><i
+													class="glyphicon glyphicon-calendar"></i></span>
+											</div>
+										</a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+											<datetimepicker data-ng-model="waterLeakageComplaint.complaintDateTime"
+												data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" />
+										</ul>
+									</div>
+								<!-- <div class="form-group">
+									<div class='input-group date' id='field_requestedDate'>
+										<input id="field_complaintDateTime" type="text"
+											class="form-control" uib-datepicker-popup="dd-MMM-yyyy hh:mm"
+											ng-model="waterLeakageComplaint.complaintDateTime"
+											is-open="datePickerForComplaintDateTime.status.opened" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForComplaintDateTimeOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div> -->
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_complaintBy">Complaint
+									By</label> <input type="text" class="form-control" name="complaintBy"
+									id="field_complaintBy"
+									ng-model="waterLeakageComplaint.complaintBy" />
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+						</button>
+						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+							class="btn btn-primary">
+							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div id="saveSuccessfullyModal" class="modal fade" name="saveForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="confirmForm">
+					<div class="modal-body">
+						<p>
+						<h3>Request Submitted Successfully!</h3>
+						</p>
+						<div>
+							<h4>
+								<label>Complaint No.:&nbsp;&nbsp; </label>{{waterLeakageComplaintId}}
+							</h4>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Ok</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

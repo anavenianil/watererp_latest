@@ -153,5 +153,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            });
+            })
+            .state('custDetailsReport', {
+                parent: 'custDetails',
+                url: '/custDetailsReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/custDetails/custDetailsReport.html',
+                        controller: 'CustDetailsReportController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('collectionDetailsReport', {
+                parent: 'custDetails',
+                url: '/collectionDetailsReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/custDetails/collectionDetailsReport.html',
+                        controller: 'CollectionDetailsReportController'
+                    }
+                },
+                resolve: {
+                }
+            });;
     });

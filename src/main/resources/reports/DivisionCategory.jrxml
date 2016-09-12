@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DivisionCategory" language="groovy" pageWidth="600" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dmaId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please enter Division Id]]></parameterDescription>
+	</parameter>
+	<parameter name="categoryId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>
+	</parameter>
+	<parameter name="categoryName" class="java.lang.String">
+		<parameterDescription><![CDATA[Please enter Category Name]]></parameterDescription>
+	</parameter>
+	<parameter name="divisionName" class="java.lang.String">
+		<parameterDescription><![CDATA[Please enter Division Name]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select case when division_master_id1 = "" then "" else (select division_name from division_master where id = division_master_id1) end division_name,ifnull(tcm.tariff_category,'') tariff_category,meter_details_id metering_status,count from (
+select  concat(division_master_id,'-',tariff_category_master_id1,'-',meter_details_id1,'-', level) sort_code,  case when level = 1 then division_master_id else '' end division_master_id1, case when level = 2 then tariff_category_master_id1 else '' end t, case when meter_details_id1 ='0' then '' else meter_details_id1 end meter_details_id, count from
+(
+select 3 level, division_master_id,tariff_category_master_id tariff_category_master_id1, case when meter_details_id is null then 'U' else 'M' end meter_details_id1, count(*) count from cust_details c  where c.status="ACTIVE" and (division_master_id=$P{dmaId} or $P{dmaId} is null or $P{dmaId}='')  and (tariff_category_master_id=$P{categoryId}  or $P{categoryId} is null or  $P{categoryId}='') group by level, division_master_id,tariff_category_master_id, meter_details_id1
+union
+select 2 level, division_master_id,tariff_category_master_id tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and (division_master_id=$P{dmaId} or $P{dmaId} is null or $P{dmaId}='')  and (tariff_category_master_id=$P{categoryId}  or $P{categoryId} is null or  $P{categoryId}='') group by level, division_master_id,tariff_category_master_id, meter_details_id1
+union
+select 1 level, division_master_id, 0 tariff_category_master_id1, '0' meter_details_id1, count(*) count from cust_details c where c.status="ACTIVE" and (division_master_id=$P{dmaId} or $P{dmaId} is null or $P{dmaId}='')  and (tariff_category_master_id=$P{categoryId}  or $P{categoryId} is null or  $P{categoryId}='') group by level, division_master_id,tariff_category_master_id1, meter_details_id1
+) a
+) b left join tariff_category_master tcm
+on b.t = tcm.id
+order by  sort_code]]>
+	</queryString>
+	<field name="division_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tariff_category" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="metering_status" class="java.lang.String"/>
+	<field name="count" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="65">
+			<frame>
+				<reportElement mode="Opaque" x="93" y="19" width="471" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<staticText>
+					<reportElement x="1" y="0" width="470" height="21" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
+					<textElement>
+						<font size="15" isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[   MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+				</staticText>
+			</frame>
+			<image>
+				<reportElement x="1" y="-1" width="100" height="66" uuid="afe0e3e9-d143-4e51-9c3a-c34ad85f5f61"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53">
+			<frame>
+				<reportElement mode="Opaque" x="1" y="0" width="559" height="51" backcolor="#FFFFFF" uuid="3f2069bb-238b-4126-95e3-08bab7070ed7"/>
+			</frame>
+			<staticText>
+				<reportElement mode="Transparent" x="169" y="-2" width="237" height="22" backcolor="#ACA899" uuid="1d0f2f47-f120-4014-8c0c-7d5d4fcd5536"/>
+				<textElement>
+					<font size="15" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Number Of  Connections Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="30" width="27" height="14" uuid="8ec0e53c-8bbc-4bb2-8fe8-a3a16c79037e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="30" width="51" height="14" uuid="1fb4b16c-c2ad-4138-881c-0de1c968650e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="43" y="30" width="10" height="20" uuid="4f3ca20a-f2e4-4f62-b513-9e565c3b7a98"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="29" width="10" height="15" uuid="2d1d1bad-86c1-4fa3-87b4-3c8e9a24760d"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="23" y="30" width="80" height="14" uuid="d7f87d15-670d-4047-82ae-e50b108db7d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{dmaId} != 0) ? $P{divisionName} : "ALL"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="30" width="86" height="14" uuid="42b3edc7-bca3-43d8-8723-a58aa663c214"/>
+				<textElement>
+					<font size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{categoryId} != 0) ? $P{categoryName} : "ALL"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22">
+			<line>
+				<reportElement x="0" y="20" width="560" height="1" forecolor="#666666" uuid="0874844b-4237-4816-a9a2-fff075747f0d"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="159" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="83cd4217-66b6-47ae-9b62-1be03c4b8cf1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="147" y="0" width="146" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="3ddfd7aa-e89a-4f7b-987a-1f6fd66aecd2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tariff Category]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="293" y="0" width="159" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f1fb14c2-a53f-4d6e-a60b-9f1e6c391700"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="452" y="0" width="108" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b8df0848-3094-4254-b27b-1cff7da3a996"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Count]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="24" width="560" height="1" forecolor="#CCCCCC" uuid="e349bb3f-603f-4fa8-a8cb-c1820fba910e"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="1" y="0" width="158" height="20" uuid="27370736-5662-46e5-bcbf-f55e2c40486c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{division_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="187" y="0" width="140" height="20" uuid="4701d6a3-f10a-44cc-b162-4c0f127d8adb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tariff_category}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="452" y="0" width="67" height="20" uuid="747c626e-815b-4b06-8740-c83c3b65f67e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement x="317" y="0" width="105" height="20" uuid="512b8c56-f80d-43f3-ab18-eaac36afdfba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{metering_status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="-25" y="4" width="488" height="13" backcolor="#E6E6E6" uuid="081da64b-5126-4af6-8f5b-16a1f05cd4a5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="463" y="4" width="125" height="13" backcolor="#E6E6E6" uuid="d5a81e25-0298-4b78-bf59-04347ee530b9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="1" y="4" width="99" height="13" uuid="63774cdc-08d5-48c8-853f-79fe9529be2b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="205" y="18" width="134" height="21" uuid="adc53c58-fd8c-4cf2-8ae1-bd89079d6a15"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sorry No Data Found]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

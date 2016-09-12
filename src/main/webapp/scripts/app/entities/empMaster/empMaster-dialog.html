@@ -25,7 +25,7 @@
 						<div class="col-sm-4">
 							<label for="field_user">Employee</label> <select
 								class="form-control" id="field_user" name="user"
-								ng-model="empMaster.user"
+								ng-model="empMaster.user" ng-change="getByUser(empMaster.user.id)"
 								ng-options="user as user.firstName+' '+user.lastName+'('+user.login+')' for user in users track by user.id">
 								<option value=""></option>
 							</select>
@@ -87,10 +87,10 @@
 							<!-- <input type="text" class="form-control" name="employeeType"
 								id="field_employeeType" ng-model="empMaster.employeeType" /> -->
 							<select class="input-sm form-control" id="field_employeeType"
-								ng-model="employeeType">
-								<option value="" label="">Select Status</option>
-								<option value="GOVERNMENT" label="SINGLE">GOVERNMENT</option>
-								<option value="CONTRACT" label="MARRIED">CONTRACT</option>
+								ng-model="empMaster.employeeType">
+								<option value="" label="">Select Type</option>
+								<option value="GOVERNMENT" label="GOVERNMENT">GOVERNMENT</option>
+								<option value="CONTRACT" label="CONTRACT">CONTRACT</option>
 							</select>
 						</div>
 						<div class="col-sm-4">
@@ -107,28 +107,26 @@
 							<label for="field_designationMaster">Designation</label> <select
 								class="form-control" id="field_designationMaster"
 								name="designationMaster" ng-model="empMaster.designationMaster"
-								ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
+								ng-options="designationMaster as designationMaster.name for designationMaster in designationmasters track by designationMaster.id">
 								<option value=""></option>
 							</select>
 						</div>
-						<div class="col-sm-4">
+						<!-- <div class="col-sm-4">
 							<label for="field_directorateId">Directorate Id</label> <select
 								class="form-control" id="field_directorateId"
 								name="directorateId" ng-model="empMaster.directorateId"
 								ng-options="orgRoleInstance as orgRoleInstance.orgRoleName for orgRoleInstance in orgroleinstances track by orgRoleInstance.id">
 								<option value=""></option>
 							</select>
-						</div>
+						</div> -->
 						<div class="col-sm-4">
 							<label for="field_reportingTo">Reporting To</label> <select
 								class="form-control" id="field_reportingTo" name="reportingTo"
 								ng-model="empMaster.reportingTo"
-								ng-options="designationMaster as designationMaster.id for designationMaster in designationmasters track by designationMaster.id">
+								ng-options="designationMaster as designationMaster.name for designationMaster in designationmasters track by designationMaster.id">
 								<option value=""></option>
 							</select>
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-4">
 							<label for="field_statusMaster">Status</label> <select
 								class="form-control" id="field_statusMaster" name="statusMaster"
@@ -137,6 +135,9 @@
 								<option value=""></option>
 							</select>
 						</div>
+					</div>
+					<div class="row">
+						
 					</div>
 
 				</div>

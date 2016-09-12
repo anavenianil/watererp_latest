@@ -21,9 +21,9 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="prev_meter_reading" type="${floatType}"/>
+            <column name="prev_meter_reading" type="decimal(20,3)"/>
             
-            <column name="new_meter_reading" type="${floatType}"/>
+            <column name="new_meter_reading" type="decimal(20,3)"/>
             
             <column name="organization" type="bit"/>
             

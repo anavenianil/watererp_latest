@@ -1,0 +1,98 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myValveComplaintLabel">Create or edit a ValveComplaint</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="valveComplaint.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_closedTime">ClosedTime</label>
+            <input type="datetime-local" class="form-control" name="closedTime" id="field_closedTime"
+                    ng-model="valveComplaint.closedTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_openTime">OpenTime</label>
+            <input type="datetime-local" class="form-control" name="openTime" id="field_openTime"
+                    ng-model="valveComplaint.openTime"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_colourCode">ColourCode</label>
+            <input type="text" class="form-control" name="colourCode" id="field_colourCode"
+                    ng-model="valveComplaint.colourCode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_side">Side</label>
+            <input type="text" class="form-control" name="side" id="field_side"
+                    ng-model="valveComplaint.side"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_noOfTurns">NoOfTurns</label>
+            <input type="number" class="form-control" name="noOfTurns" id="field_noOfTurns"
+                    ng-model="valveComplaint.noOfTurns"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_valveSize">ValveSize</label>
+            <input type="number" class="form-control" name="valveSize" id="field_valveSize"
+                    ng-model="valveComplaint.valveSize"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_valveNo">ValveNo</label>
+            <input type="number" class="form-control" name="valveNo" id="field_valveNo"
+                    ng-model="valveComplaint.valveNo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_repairCode">RepairCode</label>
+            <input type="text" class="form-control" name="repairCode" id="field_repairCode"
+                    ng-model="valveComplaint.repairCode"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_distanceLeft">DistanceLeft</label>
+            <input type="text" class="form-control" name="distanceLeft" id="field_distanceLeft"
+                    ng-model="valveComplaint.distanceLeft"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_distanceSb">DistanceSb</label>
+            <input type="text" class="form-control" name="distanceSb" id="field_distanceSb"
+                    ng-model="valveComplaint.distanceSb"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_distanceZ">DistanceZ</label>
+            <input type="text" class="form-control" name="distanceZ" id="field_distanceZ"
+                    ng-model="valveComplaint.distanceZ"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_waterLeakageComplaint">waterLeakageComplaint</label>
+            <select class="form-control" id="field_waterLeakageComplaint" name="waterLeakageComplaint" ng-model="valveComplaint.waterLeakageComplaint" ng-options="waterLeakageComplaint as waterLeakageComplaint.id for waterLeakageComplaint in waterleakagecomplaints track by waterLeakageComplaint.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

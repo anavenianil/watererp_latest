@@ -1,0 +1,80 @@
+<div>
+    <h2>JobCardItemRequirements</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="jobCardItemRequirement.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new JobCardItemRequirement
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantity"><span>Quantity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="replaceLength"><span>ReplaceLength</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cascadeClamp"><span>CascadeClamp</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noOfSection"><span>NoOfSection</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="noOfClamps"><span>NoOfClamps</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="type"><span>Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="domainObject"><span>DomainObject</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="materialMaster.id"><span>materialMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="uom.id"><span>uom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="waterLeakageComplaint.id"><span>waterLeakageComplaint</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="jobCardItemRequirement in jobCardItemRequirements track by jobCardItemRequirement.id">
+                    <td><a ui-sref="jobCardItemRequirement.detail({id:jobCardItemRequirement.id})">{{jobCardItemRequirement.id}}</a></td>
+                    <td>{{jobCardItemRequirement.quantity}}</td>
+                    <td>{{jobCardItemRequirement.replaceLength}}</td>
+                    <td>{{jobCardItemRequirement.cascadeClamp}}</td>
+                    <td>{{jobCardItemRequirement.noOfSection}}</td>
+                    <td>{{jobCardItemRequirement.noOfClamps}}</td>
+                    <td>{{jobCardItemRequirement.type}}</td>
+                    <td>{{jobCardItemRequirement.domainObject}}</td>
+                    <td>
+                        <a ui-sref="materialMaster.detail({id:jobCardItemRequirement.materialMaster.id})">{{jobCardItemRequirement.materialMaster.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="uom.detail({id:jobCardItemRequirement.uom.id})">{{jobCardItemRequirement.uom.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="waterLeakageComplaint.detail({id:jobCardItemRequirement.waterLeakageComplaint.id})">{{jobCardItemRequirement.waterLeakageComplaint.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="jobCardItemRequirement.detail({id:jobCardItemRequirement.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="jobCardItemRequirement.edit({id:jobCardItemRequirement.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="jobCardItemRequirement.delete({id:jobCardItemRequirement.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

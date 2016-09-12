@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'account',
                 url: '/settings',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_GIS'],
                     pageTitle: 'Settings'
                 },
                 views: {

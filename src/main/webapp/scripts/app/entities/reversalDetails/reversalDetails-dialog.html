@@ -1,0 +1,183 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()"
+	show-validation>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Reversal Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+					<jh-alert-error></jh-alert-error>
+					<div class="row">
+						<div class="col-sm-4 col-md-offset-4">
+							<label for="field_applicationTxn">Search By CAN</label>
+							<div class="form-group"
+								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+								<input type="text" ng-model="custInfo" typeahead-min-length="3"
+									placeholder="Search CAN or Name or Address (Min 3 chars)"
+									uib-typeahead="custInfo for custInfo in getCustomer($viewValue)"
+									typeahead-loading="loadingCANs"
+									typeahead-on-select='onSelect($item, $model, $label)'
+									typeahead-no-results="noResults" class="form-control">
+								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="noResults">
+									<i class="glyphicon glyphicon-remove"></i> No CANs Found
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="alert alert-success" ng-show="message!=null">
+						<strong>{{message}}</strong>
+					</div>
+					<div class="row" ng-if="collDetailss.length!=null">
+						<div class="panel panel-primary">
+							<div class="panel-heading clearfix">
+								<h3 class="panel-title pull-left">Last 10 Collection
+									Details</h3>
+							</div>
+						</div>
+						<table class="table table-striped">
+							<thead>
+								<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+									<!-- <th></th> -->
+									<th jh-sort-by="id"><span>ID</span></th>
+									<th jh-sort-by="receiptNo"><span>Receipt No.</span></th>
+									<th jh-sort-by="receiptDt"><span>Receipt Date</span></th>
+									<th jh-sort-by="receiptAmt" class="text-right"><span>Receipt
+											Amount</span></th>
+									<th jh-sort-by="receiptMode"><span>Receipt Mode</span></th>
+									<th jh-sort-by="remarks"><span>Remarks</span></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody infinite-scroll="loadPage(page + 1)"
+								infinite-scroll-disabled="links['last'] == page">
+								<tr
+									ng-repeat="collDetails in collDetailss track by collDetails.id">
+									<!-- <td><input type="radio" name="id"
+										ng-click="assignCollDetailsId(collDetails)"></td> -->
+									<td><a ui-sref="collDetails.detail({id:collDetails.id})">{{collDetails.id}}</a></td>
+									<!-- <td>{{collDetails.reversalRef}}</td> -->
+									<td>{{collDetails.receiptNo}}</td>
+									<td>{{collDetails.receiptDt | date:'mediumDate'}}</td>
+									<td class="text-right">{{collDetails.receiptAmt| number
+										:2}}</td>
+									<td>{{collDetails.receiptMode}}</td>
+									<td>{{collDetails.remarks}}</td>
+									<td><button type="button"
+											ng-disabled="editForm.$invalid || isSaving"
+											ng-click="confirmCancel(collDetails)" class="btn btn-warning">
+											<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Cancel</span>
+										</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<form id="cancelFormModal" class="modal" name="cancelForm"
+	ng-submit="save()">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" ng-click="clear()">&times;</button>
+				<h4 class="modal-title">Confirm Cancel Operation!</h4>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to Cancel this Collection Details?</p>
+				<hr>
+				<div class="alert alert-info">
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="control-label">CAN :
+								{{reversalDetails.collDetails.can}}</label>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label">Receipt No. :
+								{{reversalDetails.collDetails.id}}</label>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label">Receipt Date :
+								{{reversalDetails.collDetails.receiptDt| date:'mediumDate'}}</label>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label">Receipt Amount :
+								{{reversalDetails.collDetails.receiptAmt| number:2}}</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="control-label">Mode. :
+								{{reversalDetails.collDetails.paymentTypes.paymentMode}}</label>
+						</div>
+						<div class="col-sm-3" ng-hide ="reversalDetails.collDetails.paymentTypes.id ===1">
+							<label class="control-label">Cheque No:
+								{{reversalDetails.collDetails.instrNo}}</label>
+						</div>
+						<div class="col-sm-3" ng-hide ="reversalDetails.collDetails.paymentTypes.id ===1">
+							<label class="control-label">Cheque Date :
+								{{reversalDetails.collDetails.instrDt}}</label>
+						</div>
+						<div class="col-sm-4" ng-hide ="reversalDetails.collDetails.paymentTypes.id ===1">
+							<label class="control-label">Bank :
+								{{reversalDetails.collDetails.bankMaster.bankName}}</label>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="row col-md-offset-2">
+					<div class="col-sm-4">
+						<label class="control-label" for="field_cancelledDate">Cancelled
+							Date</label>
+						<div class="form-group">
+							<div class='input-group date' id='field_cancelledDate'>
+								<input id="field_cancelledDate" type="text" class="form-control"
+									uib-datepicker-popup="{{dateformat}}"
+									ng-model="reversalDetails.cancelledDate"
+									is-open="datePickerForCancelledDate.status.opened" required />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="datePickerForCancelledDateOpen($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+						<div ng-show="editForm.cancelledDate.$invalid">
+							<p class="help-block"
+								ng-show="editForm.cancelledDate.$error.required">This field
+								is required.</p>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<label class="control-label" for="field_remarks">Remarks</label> <input
+							type="text" class="form-control" name="remarks"
+							id="field_remarks" ng-model="reversalDetails.remarks" required />
+						<div ng-show="editForm.remarks.$invalid">
+							<p class="help-block" ng-show="editForm.remarks.$error.required">
+								This field is required.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger"
+					ng-disabled="editForm.$invalid || isSaving" ng-click="clear()">
+					<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>No</span>
+				</button>
+				<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+					class="btn btn-success">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Yes</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</form>

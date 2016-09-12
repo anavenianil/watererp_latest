@@ -25,6 +25,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,18 +50,17 @@ public class MeterChangeResourceIntTest {
     private static final String DEFAULT_REASON_FOR_CHANGE = "AAAAA";
     private static final String UPDATED_REASON_FOR_CHANGE = "BBBBB";
 
-    private static final Float DEFAULT_PREV_METER_READING = 1F;
-    private static final Float UPDATED_PREV_METER_READING = 2F;
+    private static final BigDecimal DEFAULT_PREV_METER_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_PREV_METER_READING = new BigDecimal(2);
 
-    private static final Float DEFAULT_NEW_METER_READING = 1F;
-    private static final Float UPDATED_NEW_METER_READING = 2F;
+    private static final BigDecimal DEFAULT_NEW_METER_READING = new BigDecimal(1);
+    private static final BigDecimal UPDATED_NEW_METER_READING = new BigDecimal(2);
     private static final String DEFAULT_REMARKS = "AAAAA";
     private static final String UPDATED_REMARKS = "BBBBB";
 
     private static final LocalDate DEFAULT_APPROVED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_APPROVED_DATE = LocalDate.now(ZoneId.systemDefault());
-
-
+    
     private static final MeterChangeStatus DEFAULT_STATUS = MeterChangeStatus.INITIATED;
     private static final MeterChangeStatus UPDATED_STATUS = MeterChangeStatus.PROCESSING;
 
@@ -155,8 +155,8 @@ public class MeterChangeResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(meterChange.getId().intValue())))
                 .andExpect(jsonPath("$.[*].can").value(hasItem(DEFAULT_CAN.toString())))
                 .andExpect(jsonPath("$.[*].reasonForChange").value(hasItem(DEFAULT_REASON_FOR_CHANGE.toString())))
-                .andExpect(jsonPath("$.[*].prevMeterReading").value(hasItem(DEFAULT_PREV_METER_READING.doubleValue())))
-                .andExpect(jsonPath("$.[*].newMeterReading").value(hasItem(DEFAULT_NEW_METER_READING.doubleValue())))
+                .andExpect(jsonPath("$.[*].prevMeterReading").value(hasItem(DEFAULT_PREV_METER_READING.intValue())))
+                .andExpect(jsonPath("$.[*].newMeterReading").value(hasItem(DEFAULT_NEW_METER_READING.intValue())))
                 .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS.toString())))
                 .andExpect(jsonPath("$.[*].approvedDate").value(hasItem(DEFAULT_APPROVED_DATE.toString())))
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
@@ -175,8 +175,8 @@ public class MeterChangeResourceIntTest {
             .andExpect(jsonPath("$.id").value(meterChange.getId().intValue()))
             .andExpect(jsonPath("$.can").value(DEFAULT_CAN.toString()))
             .andExpect(jsonPath("$.reasonForChange").value(DEFAULT_REASON_FOR_CHANGE.toString()))
-            .andExpect(jsonPath("$.prevMeterReading").value(DEFAULT_PREV_METER_READING.doubleValue()))
-            .andExpect(jsonPath("$.newMeterReading").value(DEFAULT_NEW_METER_READING.doubleValue()))
+            .andExpect(jsonPath("$.prevMeterReading").value(DEFAULT_PREV_METER_READING.intValue()))
+            .andExpect(jsonPath("$.newMeterReading").value(DEFAULT_NEW_METER_READING.intValue()))
             .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS.toString()))
             .andExpect(jsonPath("$.approvedDate").value(DEFAULT_APPROVED_DATE.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));

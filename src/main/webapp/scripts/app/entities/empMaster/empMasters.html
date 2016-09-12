@@ -1,12 +1,12 @@
 <div>
-	<h2>EmpMasters</h2>
+	<h2>Employee Master</h2>
 	<jh-alert></jh-alert>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-4 no-padding-left">
 				<button class="btn btn-primary" ui-sref="empMaster.new">
 					<span class="glyphicon glyphicon-plus"></span> <span>Create
-						new EmpMaster </span>
+						new Employee </span>
 				</button>
 			</div>
 		</div>
@@ -20,6 +20,10 @@
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="user.id"><span>Employee</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="designationMaster.id"><span>Designation
+							Master</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="reportingTo.id"><span>Reporting To</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="dateOfBirth"><span>Date Of Birth</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="joiningDate"><span>Joining Date</span> <span
@@ -30,13 +34,9 @@
 						class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="officeId.id"><span>office Id</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="designationMaster.id"><span>Designation
-							Master</span> <span class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="directorateId.id"><span>Directorate Id</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
+					<!-- <th jh-sort-by="directorateId.id"><span>Directorate Id</span>
+						<span class="glyphicon glyphicon-sort"></span></th> -->
 					<th jh-sort-by="statusMaster.id"><span>Status</span> <span
-						class="glyphicon glyphicon-sort"></span></th>
-					<th jh-sort-by="reportingTo.id"><span>Reporting To</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
 					<th></th>
 				</tr>
@@ -46,6 +46,12 @@
 				<tr ng-repeat="empMaster in empMasters track by empMaster.id">
 					<td><a ui-sref="empMaster.detail({id:empMaster.id})">{{empMaster.id}}</a></td>
 					<td>{{empMaster.user.firstName}}&nbsp;{{empMaster.user.lastName}}({{empMaster.user.login}})</td>
+					<td><a
+						ui-sref="designationMaster.detail({id:empMaster.designationMaster.id})">{{empMaster.designationMaster.name}}</a>
+					</td>
+					<td><a
+						ui-sref="designationMaster.detail({id:empMaster.reportingTo.id})">{{empMaster.reportingTo.name}}</a>
+					</td>
 					<td>{{empMaster.dateOfBirth | date:'mediumDate'}}</td>
 					<td>{{empMaster.joiningDate | date:'mediumDate'}}</td>
 					<td>{{empMaster.maritalStatus}}</td>
@@ -53,17 +59,11 @@
 					<td><a
 						ui-sref="orgRoleInstance.detail({id:empMaster.officeId.id})">{{empMaster.officeId.orgRoleName}}</a>
 					</td>
-					<td><a
-						ui-sref="designationMaster.detail({id:empMaster.designationMaster.id})">{{empMaster.designationMaster.name}}</a>
-					</td>
-					<td><a
+					<!-- <td><a
 						ui-sref="orgRoleInstance.detail({id:empMaster.directorateId.id})">{{empMaster.directorateId.orgRoleName}}</a>
-					</td>
+					</td> -->
 					<td><a
 						ui-sref="statusMaster.detail({id:empMaster.statusMaster.id})">{{empMaster.statusMaster.status}}</a>
-					</td>
-					<td><a
-						ui-sref="designationMaster.detail({id:empMaster.reportingTo.id})">{{empMaster.reportingTo.name}}</a>
 					</td>
 					<td class="text-right">
 						<div class="btn-group flex-btn-group-container">

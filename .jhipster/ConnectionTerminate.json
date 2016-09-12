@@ -27,7 +27,7 @@
         {
             "fieldId": 4,
             "fieldName": "lastMeterReading",
-            "fieldType": "Float"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldId": 5,

@@ -145,7 +145,7 @@
 									name="instrumentIssuerMaster"
 									ng-model="collDetails.instrumentIssuerMaster"
 									ng-required="instrEnabled"
-									ng-options="instrumentIssuerMaster as instrumentIssuerMaster.instrumentIssuer for instrumentIssuerMaster in bankmasters track by instrumentIssuerMaster.id"
+									ng-options="bankMaster as bankMaster.bankName for bankMaster in bankmasters track by bankMaster.id"
 									ng-disabled="!instrEnabled">
 								</select>
 

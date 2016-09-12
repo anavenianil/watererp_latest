@@ -49,7 +49,8 @@ angular.module('watererpApp')
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:applicationTxnUpdate', result);
             $scope.isSaving = false;
-            $scope.applicationTxn.id = result.id;
+            //$scope.applicationTxn.id
+            $scope.applicationTxn= result;
             $('#saveSuccessfullyModal').modal('show');
             //$scope.clear();
         };
@@ -59,12 +60,14 @@ angular.module('watererpApp')
         };
 
         $scope.save = function () {
-            $scope.isSaving = true;
-            if ($scope.applicationTxn.id != null) {
-                ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
-            } else {
-                ApplicationTxn.save($scope.applicationTxn, onSaveSuccess, onSaveError);
-            }
+        	if($scope.makeArr.length>0){
+        		$scope.isSaving = true;
+                if ($scope.applicationTxn.id != null) {
+                    ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
+                } else {
+                    ApplicationTxn.save($scope.applicationTxn, onSaveSuccess, onSaveError);
+                }
+        	}
         };
 
         /*$scope.clear = function() {
@@ -175,7 +178,32 @@ angular.module('watererpApp')
 			console.log($scope.applicationTxn.propertyDoc);
 		}
 		
-
+		
+		$scope.makeArr = [];
+		$scope.check = function(value){
+			
+			if(value == "Submitted: Tittle Deed/Offer letter"){
+				$scope.makeArr.push(value);
+				//alert("Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
+			else if(value == "Submitted :Rented Property-lease-Rent Agreement"){
+				$scope.makeArr.push(value);
+				//alert("Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
+			else if(value == "Not Submitted : Rented Property-lease-Rent Agreement"){
+				$scope.makeArr.pop(value);
+				//alert("Not Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
+			else if(value == "Not Submitted: Tittle Deed/Offer letter"){
+				$scope.makeArr.pop(value);
+				//alert("Not Submitted:"+ value);
+				//alert("Array length:"+ $scope.makeArr.length);
+			}
+		}
+		
 		
 /*$scope.checkForm=function(value1,value2){
 	alert("check");

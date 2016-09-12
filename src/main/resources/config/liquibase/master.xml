@@ -101,5 +101,12 @@
     <include file="classpath:config/liquibase/changelog/20160612095001_added_entity_Adjustments.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160229070800_added_entity_ChargeBase.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160707104149_added_entity_InvoicePayments.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160722131141_added_entity_ReversalDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160812111107_added_entity_WaterLeakageComplaint.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160812103334_added_entity_BurstComplaint.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160812104051_added_entity_ValveComplaint.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160812104529_added_entity_HydrantComplaint.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160812110310_added_entity_JobCardItemRequirement.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160812105519_added_entity_JobCardSiteStatus.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

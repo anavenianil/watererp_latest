@@ -1,0 +1,126 @@
+
+<div>
+    <h2><span>JobCardSiteStatus</span> {{jobCardSiteStatus.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>TarPatching</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.tarPatching}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TarPatchingLength</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.tarPatchingLength}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>TarPatchingBreadth</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.tarPatchingBreadth}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>CleanSite</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.cleanSite}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>BackFill</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.backFill}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>BackFillLength</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.backFillLength}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>BackFillBreadth</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.backFillBreadth}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>BrickLayer</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.brickLayer}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>Paving</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.paving}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PavingLength</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.pavingLength}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>PavingBreadth</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.pavingBreadth}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>UnableToLocate</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{jobCardSiteStatus.unableToLocate}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>waterLeakageComplaint</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="waterLeakageComplaint.detail({id:jobCardSiteStatus.waterLeakageComplaint.id})">{{jobCardSiteStatus.waterLeakageComplaint.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

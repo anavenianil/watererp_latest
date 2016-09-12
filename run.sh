@@ -5,7 +5,7 @@ echo "Running script from PWD:" `pwd`
 ##### Unit Testing ##############
 #grunt test
 
-sudo mvn clean initialize
+sudo /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn clean initialize
 
 message=$(grep git.commit.message.full target/classes/config/git.properties | sed -n -e "s/.*=//p")
 
@@ -70,7 +70,13 @@ if [ -n "$a" ]; then
 fi
 
 export BUILD_ID=dontKillMe
-sudo nohup mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
+sudo nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Pfast spring-boot:run  > /var/log/jenkins/app.log&
+#sudo nohup /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven/bin/mvn -Pprod spring-boot:run  > /var/log/jenkins/app.log&
 #sleep 60
 #npm install
 #sudo grunt protractor-xvfb
+
+
+#mvn -Pprod -Dyo.test.skip=true -Dmaven.test.skip=true package
+
+#./watererp-0.0.1-SNAPSHOT.war --spring.profiles.active=prod

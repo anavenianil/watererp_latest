@@ -42,7 +42,7 @@ angular
 
 					$scope.logout = function() {
 						Auth.logout();
-						window.location = '/erpLogin.html';
+						window.location = '/';
 						$scope.userRole = "";
 					};
 

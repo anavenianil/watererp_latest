@@ -44,7 +44,6 @@ angular.module('watererpApp')
 				var res = response.data.map(function(item) {
 					return item;
 				});
-
 				return res;
 			});
 		}

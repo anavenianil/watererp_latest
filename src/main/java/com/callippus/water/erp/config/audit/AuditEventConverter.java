@@ -1,3 +1,6 @@
+/**
+ * Spring Framework configuration files.
+ */
 package com.callippus.water.erp.config.audit;
 
 import com.callippus.water.erp.domain.PersistentAuditEvent;

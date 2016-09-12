@@ -187,5 +187,53 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('billReport', {
+                parent: 'billFullDetails',
+                url: '/billReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'WaterBillDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/billFullDetails/billReport.html',
+                        controller: 'BillReportController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('ageAnalysisReport', {
+                parent: 'billFullDetails',
+                url: '/ageAnalysisReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'WaterBillDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/billFullDetails/ageAnalysisReport.html',
+                        controller: 'AgeAnalysisReportController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('waterBillReport', {
+                parent: 'billFullDetails',
+                url: '/waterBillReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'WaterBillDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/billFullDetails/waterBillReport.html',
+                        controller: 'WaterBillReportController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

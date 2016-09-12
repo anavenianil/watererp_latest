@@ -556,7 +556,8 @@ public class BillingService {
 	public void saveAndRunTerminations(CustDetails customer) {
 		// Insert bill_details record for each new termination
 		ConnectionTerminate ct = connectionTerminateRepository.findByCan(customer.getCan());
-		BigDecimal currentReading = new BigDecimal(ct.getLastMeterReading());
+		//BigDecimal currentReading = new BigDecimal(ct.getLastMeterReading()); //commented by mohib
+		BigDecimal currentReading = ct.getLastMeterReading(); // added by mohib
 		BigDecimal previousReading = customer.getPrevReading();
 		LocalDate meterReadingDt = ct.getMeterRecoveredDate();
 		String currentBillType = "";
@@ -1075,8 +1076,10 @@ public class BillingService {
 		BigDecimal oldUnits = CPSConstants.ZERO;
 		BigDecimal newUnits = CPSConstants.ZERO;
 
-		oldUnits = (new BigDecimal(meterChange.getPrevMeterReading()).subtract(customer.getPrevReading()));
-		newUnits = bill_details.getPresentReading().subtract(new BigDecimal(meterChange.getNewMeterReading()));
+		//oldUnits = (new BigDecimal(meterChange.getPrevMeterReading()).subtract(customer.getPrevReading())); // commented by mohib
+		//newUnits = bill_details.getPresentReading().subtract(new BigDecimal(meterChange.getNewMeterReading())); commented by mohib
+		oldUnits = (meterChange.getPrevMeterReading().subtract(customer.getPrevReading())); // added by mohib
+		newUnits = bill_details.getPresentReading().subtract(meterChange.getNewMeterReading()); // added by mohib
 
 		if (oldUnits.compareTo(CPSConstants.ZERO) < 0)
 			oldUnits = CPSConstants.ZERO;

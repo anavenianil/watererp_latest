@@ -27,7 +27,7 @@ public class CustDetails implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "can", nullable = false)
+    @Column(name = "can", nullable = false, unique= true)
     private String can;
 
     @Column(name = "div_code")

@@ -53,6 +53,9 @@ public class ApplicationTxnCustomRepositoryImpl extends
 	
 	@Inject
 	private ApplicationTxnWorkflowService applicationTxnWorkflowService;
+	
+	@Inject
+	private RequestWorkflowHistoryRepository requestWorkflowHistoryRepository;
 
 	/*
 	 * @Inject WorkflowServiceRepository workflowServiceRepository;
@@ -158,8 +161,10 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		if(workflowService.getSfID() == null || workflowService.getOrganisationID() == null) //Workflow not mapped for user in EmpMaster or Office Id not set
 			return null; 
 			
+		List<RequestWorkflowHistory> requestWorkflowHistorys = requestWorkflowHistoryRepository
+				.findPendingList(3l, Long.parseLong(workflowService.getSfID()), Long.parseLong(type));
 		
-		String sql = "SELECT  r.id, r.request_stage, r.assigned_date, from_unixtime(unix_timestamp(r.actioned_date)) as A, r.remarks, r.ip_address, "
+		/*String sql = "SELECT  r.id, r.request_stage, r.assigned_date, from_unixtime(unix_timestamp(r.actioned_date)) as A, r.remarks, r.ip_address, "
 				+ "r.assigned_role, r.domain_object, r.assigned_from_id, r.assigned_to_id, r.status_master_id, r.request_master_id, r.workflow_master_id,"
 				+ " r.workflow_stage_master_id, r.applied_by_id FROM  request_workflow_history r where  "
 				+ " r.status_master_id=3 and r.assigned_to_id="
@@ -180,8 +185,8 @@ public class ApplicationTxnCustomRepositoryImpl extends
 			rwh.setRequestStage(Integer.parseInt(row.get("request_stage")
 					.toString()));
 
-			ZonedDateTime now = ZonedDateTime.now();
-			rwh.setActionedDate(now);
+			//ZonedDateTime now = ZonedDateTime.now();
+			//rwh.setActionedDate(now);
 			rwh.setIpAddress((String) row.get("ip_address"));
 
 			// rwh.setAssigned_role_id(Integer.parseInt((String)row.get("assigned_role_id")));
@@ -202,9 +207,9 @@ public class ApplicationTxnCustomRepositoryImpl extends
 					.get("request_master_id")));
 			// rwh.setApplied_by(userRepository.findById((Long)row.get("applied_by_id")));
 			items.add(rwh);
-		}
+		}*/
 
-		return items;
+		return requestWorkflowHistorys;
 	}
 	
 	/**
@@ -220,6 +225,11 @@ public class ApplicationTxnCustomRepositoryImpl extends
 		if(workflowService.getSfID() == null || workflowService.getOrganisationID() == null) //Workflow not mapped for user in EmpMaster or Office Id not set
 			return null; 
 					
+		/*List<Long> statuses = new ArrayList();
+		statuses.add(5l);statuses.add(7l);statuses.add(9l);
+		List<RequestWorkflowHistory> requestWorkflowHistorys = requestWorkflowHistoryRepository
+				.findApprovedList(statuses, Long.parseLong(workflowService.getSfID()), Long.parseLong(type));*/
+		
 		String sql = "SELECT  r.id, r.request_stage, r.assigned_date, from_unixtime(unix_timestamp(r.actioned_date)) as A, r.remarks, "
 				+ " r.ip_address, r.assigned_role, r.domain_object, r.assigned_from_id, r.assigned_to_id, r.status_master_id, "
 				+ " r.request_master_id, r.workflow_master_id, r.workflow_stage_master_id, r.applied_by_id "
@@ -242,9 +252,9 @@ public class ApplicationTxnCustomRepositoryImpl extends
 			rwh.setRequestStage(Integer.parseInt(row.get("request_stage")
 					.toString()));
 
-			ZonedDateTime obj = ZonedDateTime.now();
+			//ZonedDateTime obj = ZonedDateTime.now();
 
-			rwh.setActionedDate(obj);
+			//rwh.setActionedDate(obj);
 			rwh.setIpAddress((String) row.get("ip_address"));
 
 			rwh.setDomainObject((Long) row.get("domain_object"));

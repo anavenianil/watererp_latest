@@ -44,6 +44,9 @@ angular.module('watererpApp').controller(
 				if(requestTypeId===11){//CONNECTION TERMINATION
 					$state.go('connectionTerminate.detail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
+				if(requestTypeId===12){//WATER LEAKAGE COMPLAINT (job card)
+					$state.go('waterLeakageComplaint.detail',{id:domainObjectId, requestTypeId:requestTypeId});
+				}
 			}
 
 		});

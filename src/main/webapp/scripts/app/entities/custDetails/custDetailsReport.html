@@ -1,0 +1,45 @@
+<div>
+	<jh-alert></jh-alert>
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Customer Details</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<hr>
+				<div class="row">
+					<div class="col-sm-4">
+						<label for="field_divisionMaster">DMA</label> <select
+							class="form-control" id="field_divisionMaster"
+							name="divisionMaster" ng-model="custDetails.divisionMaster"
+							ng-options="divisionMaster as divisionMaster.divisionCode +'-'+ divisionMaster.divisionName for divisionMaster in divisionmasters track by divisionMaster.id"
+							required>
+						</select>
+					</div>
+
+					<div class="col-sm-4">
+						<label for="field_tariffCategoryMaster">Connection
+							Category</label> <select class="form-control"
+							id="field_tariffCategoryMaster" name="tariffCategoryMaster"
+							ng-model="custDetails.tariffCategoryMaster"
+							ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
+							required>
+						</select>
+					</div>
+					<div class="col-sm-2">
+					 <a type="button"
+							href="/api/custDetailss/report/{{custDetails.divisionMaster.id}}/{{custDetails.tariffCategoryMaster.id}}"
+							class="pull-right btn btn-warning"
+							>Download as PDF</a>
+						
+					</div>
+
+				</div>
+				<hr>
+				<div class="alert alert-danger" ng-show="message!=null">
+					<strong>{{message}}</strong>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

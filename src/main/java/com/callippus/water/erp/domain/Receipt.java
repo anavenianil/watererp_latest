@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -22,8 +23,8 @@ public class Receipt implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "amount")
-    private Double amount;
+    @Column(name = "amount", precision=20, scale=3)
+    private BigDecimal amount;
     
     @Column(name = "bank_name")
     private String bankName;
@@ -59,11 +60,11 @@ public class Receipt implements Serializable {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
     
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

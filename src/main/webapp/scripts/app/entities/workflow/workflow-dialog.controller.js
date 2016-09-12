@@ -2,7 +2,7 @@
 
 angular.module('watererpApp').controller('WorkflowDialogController',
         function($scope, $state, $stateParams, Workflow, WorkflowMaster, WorkflowRelations, OrgRoleInstance, WorkflowRelationships, 
-        		WorkflowStageMaster, ParseLinks, $http) {
+        		WorkflowStageMaster, ParseLinks, $http, $window) {
 
         $scope.workflow = {};
         $scope.workflowmasters = WorkflowMaster.query();
@@ -47,21 +47,16 @@ angular.module('watererpApp').controller('WorkflowDialogController',
 
         $scope.save1 = function () {
             $scope.isSaving = true;
-            
-            for(var i=0; i<$scope.workflows.length; i++){
-            	$scope.workflows[i].workflowMaster = $scope.workflowMaster;
             	if ($scope.workflows[i].id != null) {
-            		//Workflow.update($scope.workflows[i], onSaveSuccess, onSaveError);
-                    //Workflow.update($scope.workflow, onSaveSuccess, onSaveError);
+                    Workflow.update($scope.workflow, onSaveSuccess, onSaveError);
                 } else {
-                	//Workflow.save($scope.workflows[i],onSaveSuccess, onSaveError);
-                    //Workflow.save($scope.workflow, onSaveSuccess, onSaveError);
+                    Workflow.save($scope.workflow, onSaveSuccess, onSaveError);
                 }
-            }
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+        	$('#deleteModal').modal('hide');
+            //$uibModalInstance.dismiss('cancel');
         };
         
         //save
@@ -75,6 +70,7 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         			$scope.workflowDTO).then(
 					function(response) {
 						$scope.isSaving = false;
+						$window.location.reload();
 						/*console.log("Server response:"
 								+ JSON.stringify(response));*/
 					});
@@ -131,23 +127,36 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         
         //create array for items
         $scope.createItemArr = function(){
-       		$scope.workflows[$scope.count]= {};
-       		$scope.count = $scope.count +1;
-       		if($scope.count == 1){
-       			$scope.workflows[$scope.count-1].stageId = 1;
-       		}
-       		else{
-       			$scope.assign();
-       		}
+        	if($scope.workflows != null){
+        		$scope.workflows[$scope.count]= {};
+           		$scope.count = $scope.count +1;
+           		if($scope.count == 1){
+           			$scope.workflows[$scope.count-1].stageId = 1;
+           		}
+           		else{
+           			$scope.assign();
+           		}
+        	}
         }
         
         //for removing items
-        $scope.removeItemArr = function(indexId) {
-        	//$scope.workflows[$scope.count]= {}
-        	$scope.count = $scope.count -1;
-        	//$scope.workflows[$scope.count].splice = {};
-            $scope.workflows[$scope.count].splice(indexId, 1);
-          };
+        $scope.removeItemArr = function(indexId, id) { 
+        	  $scope.workflows.splice(indexId, 1);   
+        	  $scope.count = $scope.count -1;
+        	  if(id != null){
+        		//$state.go('workflow.delete',{id:id});  
+                    Workflow.delete({id: id});
+        	  }
+        	}
+        
+        $scope.deleteDialogue = function(indexId, workflowId){
+        	 $('#deleteModal').modal('show');
+        	 $scope.indexId = indexId;
+        	 $scope.workflowId = workflowId;
+        } 
+       
+        
+        
           
           $scope.makeToRoleNull = function(relationId, indexId){
         	  if(relationId == 1){//when relative absolute is null

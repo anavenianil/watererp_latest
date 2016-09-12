@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +14,6 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,13 +34,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.BillAndCollectionDTO;
 import com.callippus.water.erp.domain.BillFullDetails;
+import com.callippus.water.erp.domain.DivisionMaster;
+import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.BillDetailsCustomRepository;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
 import com.callippus.water.erp.repository.BillRunDetailsRepository;
+import com.callippus.water.erp.repository.DivisionMasterRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.repository.TariffCategoryMasterRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * REST controller for managing BillFullDetails.
@@ -65,6 +70,12 @@ public class BillFullDetailsResource {
 
 	@Inject
 	BillDetailsCustomRepository billDetailsCustomRepository;
+
+	@Inject
+	DivisionMasterRepository divisionMasterRepository;
+	
+	@Inject TariffCategoryMasterRepository tariffCategoryMasterRepository;
+	
     /**
      * POST  /billFullDetailss -> Create a new billFullDetails.
      */
@@ -205,5 +216,126 @@ public class BillFullDetailsResource {
 				.map(result -> new ResponseEntity<>(billAndCollectionDTO, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
+	
+	 /**
+     * Get By Category PDF4
+     * @throws ParseException 
+     * Collection Bill Report
+     */
+    @RequestMapping(value = "/BillFullDetailss/reports/{dmaId}/{categoryId}/{year}/{month}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getBillReportDetails(HttpServletResponse response,
+			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable String year , @PathVariable String month) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", categoryId);
+   	
+    	
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("dmaId", dmaId);
+		params.put("categoryId", categoryId);
+		params.put("year", year);
+		params.put("month", month);
+		if(dmaId!=0 && categoryId!=0)
+		{
+			DivisionMaster division = divisionMasterRepository.findOne(dmaId);
+			params.put("divisionName", division.getDivisionName());
+			
+			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
+			params.put("categoryName", tcm.getTariffCategory());
+		}
+		else if(dmaId==0 && categoryId!=0)
+		{
+			params.put("divisionName", 0);
+			TariffCategoryMaster tcm = tariffCategoryMasterRepository.findOne(categoryId);
+			params.put("categoryName", tcm.getTariffCategory());
+		}
+		else if(dmaId!=0 && categoryId==0)
+		{
+			DivisionMaster division = divisionMasterRepository.findOne(dmaId);
+			params.put("divisionName", division.getDivisionName());
+			params.put("categoryName", 0);
+		}
+		else
+		{
+			params.put("divisionName", 0);
+			params.put("categoryName", 0);
+		}
+		JasperPrint jasperPrint = null;
+		
+			 jasperPrint = reportsRepository
+					.generateReport("/reports/BillReport.jasper", params);
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=BillReportDetails.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	} 
+    
+    /**
+     * Age Analysis Report
+     */
+    @RequestMapping(value="ageAnalysis/report/{dmaId}/{categoryId}",  method = RequestMethod.GET)
+    @ResponseBody
+    public void getAgeAnalysisReport(HttpServletResponse response , @PathVariable Long dmaId, @PathVariable Long categoryId)throws JRException,
+    IOException,ParseException
+    {
+    	Map<String,Object> params=new HashMap <String,Object>();
+    	params.put("dmaId", dmaId);
+    	params.put("categoryId", categoryId);
+    	JasperPrint jasperPrint=null;
+    	jasperPrint=reportsRepository.generateReport("/reports/AgeAnalysis.jasper", params);
+    	response.setContentType("application/x-pdf");
+    	response.setHeader("Content-disposition", "inline; filename=AgeAnalysis.pdf");
+    	final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+    	
+    }
+    
+    
+    
+    
+    /**
+     * Age Analysis Report2
+     */
+    @RequestMapping(value="ageAnalysisMobile/report/{dmaId}/{categoryId}",  method = RequestMethod.GET)
+    @ResponseBody
+    public void getAgeAnalysisReport2(HttpServletResponse response , @PathVariable Long dmaId, @PathVariable Long categoryId)throws JRException,
+    IOException,ParseException
+    {
+    	Map<String,Object> params=new HashMap <String,Object>();
+    	params.put("dmaId", dmaId);
+    	params.put("categoryId", categoryId);
+    	JasperPrint jasperPrint=null;
+    	jasperPrint=reportsRepository.generateReport("/reports/AgeAnalysis-2.jasper", params);
+    	response.setContentType("application/x-pdf");
+    	response.setHeader("Content-disposition", "inline; filename=AgeAnalysisReport.pdf");
+    	final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+    	
+    }
+    /**
+     * Water Bill Report
+     */
+    @RequestMapping(value="waterBilling/report/{dmaId}/{categoryId}/{toMonth}",  method = RequestMethod.GET)
+    @ResponseBody
+    public void getAgeAnalysisReport(HttpServletResponse response , @PathVariable Long dmaId, @PathVariable Long categoryId,
+    		                          @PathVariable String toMonth)throws JRException,
+    IOException,ParseException
+    {
+    	Map<String,Object> params=new HashMap <String,Object>();
+    	params.put("dmaId", dmaId);
+    	params.put("categoryId", categoryId);
+    	params.put("toMonth", toMonth);
+    	JasperPrint jasperPrint=null;
+    	jasperPrint=reportsRepository.generateReport("/reports/Water Billing Summary.jasper", params);
+    	response.setContentType("application/x-pdf");
+    	response.setHeader("Content-disposition", "inline; filename=WaterBilling.pdf");
+    	final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+    	
+    }
     
 }
+    
+
