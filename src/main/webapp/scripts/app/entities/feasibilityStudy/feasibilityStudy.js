@@ -159,5 +159,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('feasibilityStudyDetailForAppTxn', {
+                parent: 'entity',
+                url: '/feasibilityStudys/{applicationTxnId}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'FeasibilityStudys'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/feasibilityStudy/feasibilityStudy-detail.html',
+                        controller: 'FeasibilityStudyDetailController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

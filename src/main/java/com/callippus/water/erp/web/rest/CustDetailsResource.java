@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.DivisionMaster;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
@@ -362,27 +364,8 @@ public class CustDetailsResource {
 		params.put("year", year);
 		params.put("month", month);
 		JasperPrint jasperPrint = null;
-		
-		/* if(dmaId == 0 && categoryId == 0 && year != null &&   month != null){*/
 			 jasperPrint = reportsRepository
 					.generateReport("/reports/BillCollectionYearlyReportDetail.jasper", params);
-			 
-/*		}
-		 else if(dmaId != 0 && categoryId != 0 && year != null &&  month != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionYearlyReportDetail.jasper", params);
-			 
-		}	
-		 else if(dmaId == 0 && categoryId != 0 && year != null &&  month != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionYearlyReportDetailCategory.jasper", params);
-			 
-		}
-		 else if(dmaId != 0 && categoryId == 0 && year != null &&   month != null){
-			 jasperPrint = reportsRepository
-					.generateReport("/reports/BillCollectionYearlyReportDetailDMA.jasper", params);
-			 
-		}*/
 		response.setContentType("application/x-pdf");
 		response.setHeader("Content-disposition",
 				"inline; filename=BillCollectionYearlyReportDetails.pdf");
@@ -391,26 +374,57 @@ public class CustDetailsResource {
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
 	} 
     
+    /**
+     * New Water Connection
+    
+     */
+    @RequestMapping(value = "/newWaterConnection/report/{dmaId}/{categoryId}/{fromDate}/{toDate}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getNewWaterConnectionReport(HttpServletResponse response,
+			@PathVariable Long dmaId, @PathVariable Long categoryId , @PathVariable  String fromDate , @PathVariable  String  toDate) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", categoryId);
+
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("dmaId", dmaId);
+		params.put("categoryId", categoryId);
+		params.put("fromDate", fromDate);
+		params.put("toDate", toDate);
+		JasperPrint jasperPrint = null;
+					 jasperPrint = reportsRepository
+					.generateReport("/reports/NewWaterConnectionReport.jasper", params);
+		
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=NewWaterConnectionReport.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
     
     
     
-    
-    
-    
-/*    *//**
-     * GET  /custDetailss/:can -> get the "can" custDetails.
-     *//*
-    @RequestMapping(value = "/custDetailss/search",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+    /**
+     * Get Balance by can
+     */
+    @RequestMapping(value = "/custDetailss/getBalanceByCAN",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_PLAIN_VALUE)
     @Timed
-    public ResponseEntity<CustDetails> getCustDetailsCan(@RequestParam(value = "can", required = false) String can) {
-        log.debug("REST request to get CustDetails : {}", can);
-        CustDetails custDetails = custDetailsRepository.findByCan(can);
-        return Optional.ofNullable(custDetails)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }*/
+	public ResponseEntity<String> getBalanceByCan(@Param("can") String can)
+			throws Exception {
+    	log.debug("REST request to get Balance by can : {}");
+    	
+    	CustDetails custDetails = custDetailsRepository.findByCan(can);
+    	
+    	String balance = custDetails.getCan() +", "+custDetails.getConsName()+", "+ custDetails.getArrears();
+    
+    	return Optional.ofNullable(balance)
+				.map(result -> new ResponseEntity<>(balance, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
+    
+    
+    
+    
 }

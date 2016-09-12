@@ -89,6 +89,14 @@ angular.module('watererpApp')
         	$('#meterAvailabilityModal').modal('hide');
         	$window.history.back();
         }
+        
+        $(document).ready(function() {
+  	        function disableBack() { window.history.forward() }
+  	        window.onload = disableBack();
+  	        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+  	    });
+        
+        
     });
 
 

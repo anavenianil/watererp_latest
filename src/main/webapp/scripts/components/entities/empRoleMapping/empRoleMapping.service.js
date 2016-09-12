@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('EmpRoleMapping', function ($resource, DateUtils) {
         return $resource('api/empRoleMappings/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getByUserId': { method: 'GET', params: {userId: "userId" }, url:'/api/empRoleMappings/getByUserId', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

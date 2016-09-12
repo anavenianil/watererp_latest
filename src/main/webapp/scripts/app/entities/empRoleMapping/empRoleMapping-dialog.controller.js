@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('watererpApp').controller('EmpRoleMappingDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpRoleMapping', 'User', 'OrgRoleInstance', 'StatusMaster', '$http', 'ParseLinks',
-        function($scope, $stateParams, $uibModalInstance, entity, EmpRoleMapping, User, OrgRoleInstance, StatusMaster, $http, ParseLinks) {
+    /*['$scope', '$stateParams', '$uibModalInstance', 'entity', 'EmpRoleMapping', 'User', 'OrgRoleInstance', 'StatusMaster', '$http', 'ParseLinks',*/
+        function($scope, $stateParams, /*$uibModalInstance, entity,*/ EmpRoleMapping, User, OrgRoleInstance, StatusMaster, $http, ParseLinks, $state) {
 
-        $scope.empRoleMapping = entity;
+        $scope.empRoleMapping = {};
         //$scope.users = User.query();
         //$scope.orgroleinstances = OrgRoleInstance.query();
         //$scope.statusmasters = StatusMaster.query();
@@ -43,11 +43,16 @@ angular.module('watererpApp').controller('EmpRoleMappingDialogController',
                 $scope.empRoleMapping = result;
             });
         };
+        
+        if($stateParams.id !=null){
+        	$scope.load($stateParams.id);
+        }
 
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:empRoleMappingUpdate', result);
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $state.go('empRoleMapping');
         };
 
         var onSaveError = function (result) {
@@ -64,7 +69,8 @@ angular.module('watererpApp').controller('EmpRoleMappingDialogController',
         };
 
         $scope.clear = function() {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
+        	$scope.empRoleMapping = {};
         };
         $scope.datePickerForCreationDate = {};
 
@@ -84,4 +90,16 @@ angular.module('watererpApp').controller('EmpRoleMappingDialogController',
         $scope.datePickerForLastModifiedDateOpen = function($event) {
             $scope.datePickerForLastModifiedDate.status.opened = true;
         };
-}]);
+        
+        $scope.getByUser = function(userId){
+        	if(userId !=null){
+        		$scope.empRoleMapping = EmpRoleMapping.getByUserId({userId : userId});
+        	}
+        	
+        	if($scope.empRoleMapping.id == null){
+        		$scope.empRoleMapping.user = {};
+        		$scope.empRoleMapping.user.id = userId;
+        	}
+        	//console.log($scope.empMaster);
+        }
+}/*]*/);

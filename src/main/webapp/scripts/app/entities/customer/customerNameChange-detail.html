@@ -208,7 +208,7 @@
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
 
-		<button type="button" class="btn btn-success pull-right" ng-disabled="editForm.$invalid || isSaving"
+		<button type="button" class="btn btn-success pull-right" ng-disabled="isSaving"
 			ui-sref="receiptForNameChange({customerId:changeCaseDTO.customer.id})"
 			ng-if="changeCaseDTO.customer.status === 'PROCESSING' && orgRole.id === 22">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt

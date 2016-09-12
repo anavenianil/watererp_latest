@@ -38,7 +38,7 @@ angular.module('watererpApp')
                     }]
                 }
             })
-            .state('empRoleMapping.new', {
+            /*.state('empRoleMapping.new', {
                 parent: 'empRoleMapping',
                 url: '/new',
                 data: {
@@ -67,8 +67,8 @@ angular.module('watererpApp')
                         $state.go('empRoleMapping');
                     })
                 }]
-            })
-            .state('empRoleMapping.edit', {
+            })*/
+            /*.state('empRoleMapping.edit', {
                 parent: 'empRoleMapping',
                 url: '/{id}/edit',
                 data: {
@@ -90,7 +90,7 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
-            })
+            })*/
             .state('empRoleMapping.delete', {
                 parent: 'empRoleMapping',
                 url: '/{id}/delete',
@@ -113,5 +113,37 @@ angular.module('watererpApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('empRoleMapping.new', {
+                parent: 'empRoleMapping',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'EmpRoleMappings'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/empRoleMapping/empRoleMapping-dialog.html',
+                        controller: 'EmpRoleMappingDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('empRoleMapping.edit', {
+                parent: 'empRoleMapping',
+                url: '/edit/{id}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'EmpRoleMappings'
+                },
+                views: {
+                    'content@': {
+                    	templateUrl: 'scripts/app/entities/empRoleMapping/empRoleMapping-dialog.html',
+                        controller: 'EmpRoleMappingDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

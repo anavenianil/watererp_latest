@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('FeasibilityStudy', function ($resource, DateUtils) {
         return $resource('api/feasibilityStudys/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getByapplicationTxnId': { method: 'GET', params: {applicationTxnId: "applicationTxnId" }, url:'/api/feasibilityStudys/getByApplicationTxnId', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

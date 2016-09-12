@@ -505,7 +505,7 @@ public class RequestProcessService {
 		workflowService.setRequestAt(rwh.getAssignedTo().getId().toString());//additional Added by mohib for applicationTxn
 		workflowService.getStatus();
 		rwh.setStatusMaster(statusMasterRepository.findOne(new Long(3)));// 3-PENDING
-		rwh.setIpAddress(workflowService.getIpAddress());
+		//rwh.setIpAddress(workflowService.getIpAddress());
 		//rwh.setRemarks(workflowService.getRemarks());
 		rwh.setDomainObject(new Long(
 				workflowService.getDomain_object_id()));

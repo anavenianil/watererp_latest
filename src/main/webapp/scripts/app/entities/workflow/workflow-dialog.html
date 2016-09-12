@@ -23,7 +23,11 @@
 								<option value=""></option>
 							</select>
 						</div>
-						<div class="col-sm-3" ng-show="workflow.workflowMaster.id ===2">
+						<div class="col-sm-3">
+							<input type="checkbox" ng-click="clearWorkflow(createWorkflow)"
+								ng-model="createWorkflow"> <label>Create New Workflow</label>
+						</div>
+						<div class="col-sm-3" ng-show="createWorkflow">
 							<label class="control-label" for="field_workflowName">Workflow
 								Name</label> <input type="text" class="form-control" name="workflowName"
 								id="field_workflowName" ng-model="workflowDTO.workflowName" />
@@ -174,10 +178,10 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal"
+			<!-- <button type="button" class="btn btn-default" data-dismiss="modal"
 				ng-click="clear()">
 				<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
-			</button>
+			</button> -->
 			<button type="submit" ng-disabled="editForm.$invalid || isSaving"
 				class="btn btn-primary">
 				<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>

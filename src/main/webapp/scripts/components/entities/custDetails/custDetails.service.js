@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('CustDetails', function ($resource, DateUtils) {
         return $resource('api/custDetailss/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getByCan': { method: 'GET', params: {can: "can" }, url:'/api/custDetailss/getBalanceByCAN', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

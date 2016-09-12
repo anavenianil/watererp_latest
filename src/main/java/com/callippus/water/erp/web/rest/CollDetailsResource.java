@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -265,7 +266,29 @@ public class CollDetailsResource {
 					collDetails.getId().toString())).body(result);
 
 		}
+	    /**
+	     * Revenue Summary Report
+	     */
+	    @RequestMapping(value="Revenue/reports/{dmaId}/{categoryId}/{toMonth}",  method = RequestMethod.GET)
+	    @ResponseBody
+	    public void getAgeAnalysisReport(HttpServletResponse response , @PathVariable Long dmaId, @PathVariable Long categoryId,
+	    		                          @PathVariable String toMonth)throws JRException,
+	    IOException,ParseException
+	    {
+	    	Map<String,Object> params=new HashMap <String,Object>();
+	    	params.put("dmaId", dmaId);
+	    	params.put("categoryId", categoryId);
+	    	params.put("toMonth", toMonth);
+	    	JasperPrint jasperPrint=null;
+	    	jasperPrint=reportsRepository.generateReport("/reports/RevenueSummaryReport.jasper", params);
+	    	response.setContentType("application/x-pdf");
+	    	response.setHeader("Content-disposition", "inline; filename=RevenueSummaryReport.pdf");
+	    	final OutputStream outStream = response.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	    	
+	    }
+	    
+	}
 	
 	
-	
-}
+
