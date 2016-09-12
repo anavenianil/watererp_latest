@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bill" language="groovy" pageWidth="1000" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ede3c4b4-7e79-4194-9047-9d7e39b76875">
 	<property name="ireport.zoom" value="1.100000000000015"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="163"/>
+	<property name="ireport.x" value="33"/>
+	<property name="ireport.y" value="151"/>
 	<parameter name="id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR CAN ID]]></parameterDescription>
 	</parameter>
@@ -68,7 +68,7 @@ WHERE  b.id=$P{id}]]>
 	<field name="category" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="pipe_size" class="java.lang.Float">
+	<field name="pipe_size" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="board_meter" class="java.lang.String">
@@ -83,34 +83,34 @@ WHERE  b.id=$P{id}]]>
 	<field name="prev_bill_month" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="prev_avg_kl" class="java.lang.Float">
+	<field name="prev_avg_kl" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="met_reading_dt" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="prev_reading" class="java.lang.Float">
+	<field name="prev_reading" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="met_reading_mo" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="met_avg_kl" class="java.lang.Float">
+	<field name="met_avg_kl" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="arrears" class="java.lang.Float">
+	<field name="arrears" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="reversal_amt" class="java.lang.Float">
+	<field name="reversal_amt" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="installment" class="java.lang.Float">
+	<field name="installment" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="other_charges" class="java.lang.Float">
+	<field name="other_charges" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="surcharge" class="java.lang.Float">
+	<field name="surcharge" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="hrs_surcharge" class="java.lang.String">
@@ -119,16 +119,16 @@ WHERE  b.id=$P{id}]]>
 	<field name="res_units" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="met_cost_installment" class="java.lang.Float">
+	<field name="met_cost_installment" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="int_on_arrears" class="java.lang.Float">
+	<field name="int_on_arrears" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="last_pymt_dt" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="last_pymt_amt" class="java.lang.Float">
+	<field name="last_pymt_amt" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="bill_number" class="java.lang.String">
@@ -155,31 +155,31 @@ WHERE  b.id=$P{id}]]>
 	<field name="meter_fix_date" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="initial_reading" class="java.lang.Float">
+	<field name="initial_reading" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="present_reading" class="java.lang.Float">
+	<field name="present_reading" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="units" class="java.lang.Float">
+	<field name="units" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="water_cess" class="java.lang.Float">
+	<field name="water_cess" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="sewerage_cess" class="java.lang.Float">
+	<field name="sewerage_cess" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="service_charge" class="java.lang.Float">
+	<field name="service_charge" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="meter_service_charge" class="java.lang.Float">
+	<field name="meter_service_charge" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="total_amount" class="java.lang.Float">
+	<field name="total_amount" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="net_payable_amount" class="java.lang.Float">
+	<field name="net_payable_amount" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="telephone_no" class="java.lang.String">
@@ -215,10 +215,13 @@ WHERE  b.id=$P{id}]]>
 	<field name="longi" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="no_meter_amt" class="java.lang.Float">
+	<field name="no_meter_amt" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="lock_charges" class="java.lang.Float">
+	<field name="lock_charges" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="due_amount" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="meter_details_id" class="java.lang.Long">
@@ -248,6 +251,21 @@ WHERE  b.id=$P{id}]]>
 	<field name="status" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="organisation_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="designation" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="photo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="deed_doc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="agreement_doc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="tariff_category_master_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -267,19 +285,19 @@ WHERE  b.id=$P{id}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="bill_month" class="java.lang.String"/>
-	<field name="meter" class="java.lang.Double"/>
+	<field name="meter" class="java.math.BigDecimal"/>
 	<field name="cust_cons_name" class="java.lang.String"/>
 	<field name="cust_house_no" class="java.lang.String"/>
 	<field name="cust_address" class="java.lang.String"/>
 	<field name="cust_city" class="java.lang.String"/>
 	<field name="cust_pin_code" class="java.lang.String"/>
 	<field name="cust_meter_no" class="java.lang.String"/>
-	<field name="cust_pipe_size" class="java.lang.Float"/>
+	<field name="cust_pipe_size" class="java.math.BigDecimal"/>
 	<field name="cust_meter_read_dt" class="java.sql.Date"/>
 	<field name="street_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="val" class="java.lang.Float"/>
+	<field name="val" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

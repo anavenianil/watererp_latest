@@ -941,8 +941,6 @@ public class BillingService {
 					adjAmount = adjAmount.add(adj1);
 				else
 					adjAmount = adjAmount.subtract(adj1);
-
-				adj.setStatus(TxnStatus.PROCESSING);
 			}
 
 			BigDecimal total = bfd.getWaterCess().add(bfd.getMeterServiceCharge()).add(bfd.getServiceCharge())
@@ -984,8 +982,6 @@ public class BillingService {
 			log.debug("This is the BillFullDetails:" + bfd);
 
 			bfdRepository.save(bfd);
-
-			adjustmentsRepository.save(adjustments);
 
 			brd.setToDt(ZonedDateTime.now());
 			brd.setStatus(BrdStatus.SUCCESS.getValue());
