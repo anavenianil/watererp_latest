@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('Module2MenuItemController', function ($scope, $state, Module2MenuItem, ParseLinks) {
+    .controller('Module2MenuItemController', function ($scope, $state, Module2MenuItem, ParseLinks, Module) {
 
         $scope.module2MenuItems = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.modules = Module.query();
         $scope.loadAll = function() {
             Module2MenuItem.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -18,13 +19,13 @@ angular.module('watererpApp')
         $scope.reset = function() {
             $scope.page = 0;
             $scope.module2MenuItems = [];
-            $scope.loadAll();
+            //$scope.loadAll();
         };
         $scope.loadPage = function(page) {
             $scope.page = page;
-            $scope.loadAll();
+            //$scope.loadAll();
         };
-        $scope.loadAll();
+        //$scope.loadAll();
 
 
         $scope.refresh = function () {
@@ -38,4 +39,8 @@ angular.module('watererpApp')
                 id: null
             };
         };
+        
+        $scope.getModuleMenu = function(moduleId){
+        	$scope.module2MenuItems = Module2MenuItem.getByModuleId({moduleId:moduleId});
+        }
     });

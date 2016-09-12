@@ -1,5 +1,7 @@
 package com.callippus.water.erp.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +15,7 @@ import com.callippus.water.erp.domain.enumeration.TransactionType;
 public interface CollectionTypeMasterRepository extends JpaRepository<CollectionTypeMaster,Long> {
 	
 	Page<CollectionTypeMaster> findByTxnType(Pageable pageable, TransactionType txnType);
+	
+	List<CollectionTypeMaster> findByTxnType(TransactionType txnType);
 
 }

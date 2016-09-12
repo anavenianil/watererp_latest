@@ -55,6 +55,7 @@ angular.module('watererpApp').controller('ReversalDetailsDialogController',
         
         $scope.getCollDetails = function(can) {
 			$scope.isValidCust = false;
+			$scope.can = can;
 			return $http.get(
 					'api/collDetailss/forCancel/' + can)
 					.then(function(response) {
