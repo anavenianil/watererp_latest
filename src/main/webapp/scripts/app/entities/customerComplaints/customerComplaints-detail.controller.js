@@ -183,7 +183,7 @@ angular
 								ret = true;
 							break;
 						case 2:
-							if ($scope.orgRole.id === 11 || $scope.orgRole.id === 24)	//Finance Manager || Technical Zonal Supervisor
+							if ($scope.orgRole.id === 11 || $scope.orgRole.id === 14)	//Finance Manager || Technical Zonal Supervisor
 								ret = true;
 							break;
 						case 3:
