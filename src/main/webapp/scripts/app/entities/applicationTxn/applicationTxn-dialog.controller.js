@@ -51,6 +51,7 @@ angular.module('watererpApp')
             $scope.isSaving = false;
             //$scope.applicationTxn.id
             $scope.applicationTxn= result;
+            $scope.applicationTxnId = result.id;
             $('#saveSuccessfullyModal').modal('show');
             //$scope.clear();
         };

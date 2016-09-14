@@ -1,64 +1,76 @@
 <div>
-    <h2>Module2 Menu Items</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="module2MenuItem.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new Module2 Menu Item
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="priority"><span>Priority</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="module.id"><span>Module</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="menuItem.id"><span>Menu Item</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
-                <tr ng-repeat="module2MenuItem in module2MenuItems track by module2MenuItem.id">
-                    <td><a ui-sref="module2MenuItem.detail({id:module2MenuItem.id})">{{module2MenuItem.id}}</a></td>
-                    <td>{{module2MenuItem.priority}}</td>
-                    <td>
-                        <a ui-sref="module.detail({id:module2MenuItem.module.id})">{{module2MenuItem.module.name}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="menuItem.detail({id:module2MenuItem.menuItem.id})">{{module2MenuItem.menuItem.name}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="module2MenuItem.detail({id:module2MenuItem.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="module2MenuItem.edit({id:module2MenuItem.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="module2MenuItem.delete({id:module2MenuItem.id})"
-                                    class="btn btn-danger btn-sm">                                    
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+	<h2>Module2 Menu Items</h2>
+	<jh-alert></jh-alert>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="module2MenuItem.new">
+					<span class="glyphicon glyphicon-plus"></span> <span>Create
+						new Module2 Menu Item </span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="table-responsive">
+		<div class="col-sm-4">
+			<label for="field_module">Module</label> <select class="form-control"
+				id="field_module" name="module" ng-model="module2MenuItem.module"
+				ng-change="getModuleMenu(module2MenuItem.module.id)"
+				ng-options="module as module.name for module in modules track by module.id">
+				<option value=""></option>
+			</select>
+		</div>
+		<table class="jh-table table table-striped">
+			<thead>
+				<tr jh-sort="predicate" ascending="reverse" callback="reset()">
+					<th jh-sort-by="id"><span>ID</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="priority"><span>Priority</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="module.id"><span>Module</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="menuItem.id"><span>Menu Item</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody infinite-scroll="loadPage(page + 1)"
+				infinite-scroll-disabled="links['last'] == page">
+				<tr
+					ng-repeat="module2MenuItem in module2MenuItems track by module2MenuItem.id">
+					<td><a
+						ui-sref="module2MenuItem.detail({id:module2MenuItem.id})">{{module2MenuItem.id}}</a></td>
+					<td>{{module2MenuItem.priority}}</td>
+					<td><a ui-sref="module.detail({id:module2MenuItem.module.id})">{{module2MenuItem.module.name}}</a>
+					</td>
+					<td><a
+						ui-sref="menuItem.detail({id:module2MenuItem.menuItem.id})">{{module2MenuItem.menuItem.name}}</a>
+					</td>
+					<td class="text-right">
+						<div class="btn-group flex-btn-group-container">
+							<button type="submit"
+								ui-sref="module2MenuItem.detail({id:module2MenuItem.id})"
+								class="btn btn-info btn-sm">
+								<span class="glyphicon glyphicon-eye-open"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+							<button type="submit"
+								ui-sref="module2MenuItem.edit({id:module2MenuItem.id})"
+								class="btn btn-primary btn-sm">
+								<span class="glyphicon glyphicon-pencil"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+							<button type="submit"
+								ui-sref="module2MenuItem.delete({id:module2MenuItem.id})"
+								class="btn btn-danger btn-sm">
+								<span class="glyphicon glyphicon-remove-circle"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

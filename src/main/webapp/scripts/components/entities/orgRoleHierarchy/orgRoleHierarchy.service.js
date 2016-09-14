@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('OrgRoleHierarchy', function ($resource, DateUtils) {
         return $resource('api/orgRoleHierarchys/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getAll': { method: 'GET', url:'/api/orgRoleHierarchys/getAll', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

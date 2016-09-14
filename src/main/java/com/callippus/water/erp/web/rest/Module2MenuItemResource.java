@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +26,7 @@ import com.callippus.water.erp.domain.Module2MenuItem;
 import com.callippus.water.erp.domain.ModuleMenuDTO;
 import com.callippus.water.erp.repository.Module2MenuItemCustomRepository;
 import com.callippus.water.erp.repository.Module2MenuItemRepository;
+import com.callippus.water.erp.repository.ModuleRepository;
 import com.callippus.water.erp.security.SecurityUtils;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -44,6 +46,9 @@ public class Module2MenuItemResource {
     
     @Inject
     private Module2MenuItemCustomRepository module2MenuItemCustomRepository;
+    
+    @Inject
+    private ModuleRepository moduleRepository;
     
     /**
      * POST  /module2MenuItems -> Create a new module2MenuItem.
@@ -141,4 +146,23 @@ public class Module2MenuItemResource {
         return module2MenuItemCustomRepository.findAllByLoginUsingMapping (user) ;
 
     }
+    
+    
+    /**
+     * Get Module2Menu by moduleId
+     */
+    @RequestMapping(value = "/module2MenuItems/getByModuleId",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<Module2MenuItem>> getBurstComplaintByComplaintId(@Param("moduleId") Long moduleId)
+			throws Exception {
+    	log.debug("REST request to Module2MenuItem by moduleId : {}");
+    	
+    	List<Module2MenuItem> module2MenuItem = module2MenuItemRepository.findByModule(moduleRepository.findOne(moduleId));
+    
+    	return Optional.ofNullable(module2MenuItem)
+				.map(result -> new ResponseEntity<>(module2MenuItem, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

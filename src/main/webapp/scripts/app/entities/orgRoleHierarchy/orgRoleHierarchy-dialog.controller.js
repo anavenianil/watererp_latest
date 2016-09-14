@@ -6,6 +6,7 @@ angular.module('watererpApp').controller('OrgRoleHierarchyDialogController',
 
         $scope.orgRoleHierarchy = entity;
         //$scope.statusmasters = StatusMaster.query();
+        $scope.parentRoleHierarchys = OrgRoleHierarchy.getAll();
         $scope.getStatusMaster = function() {
         	$scope.statusmasters = [];
             StatusMaster.query({page: $scope.page, size: 20, description1:'GENERAL'}, function(result, headers) {

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.CollectionTypeMaster;
 import com.callippus.water.erp.domain.enumeration.TransactionType;
 import com.callippus.water.erp.repository.CollectionTypeMasterCustomRepository;
@@ -148,4 +150,23 @@ public class CollectionTypeMasterResource {
         collectionTypeMasterRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("collectionTypeMaster", id.toString())).build();
     }
+    
+    
+    /**
+     * Get CollectionTypeMaster by txnType
+     */
+    @RequestMapping(value = "/collectionTypeMasters/txnType",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<CollectionTypeMaster>> getCollectionTypeMasterByTxnType(@Param("txnType") TransactionType txnType)
+			throws Exception {
+    	log.debug("REST request to CollectionTypeMaster by txnType : {}");
+
+    	List<CollectionTypeMaster> collectionTypeMaster = collectionTypeMasterRepository.findByTxnType(txnType);
+    
+    	return Optional.ofNullable(collectionTypeMaster)
+				.map(result -> new ResponseEntity<>(collectionTypeMaster, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 }

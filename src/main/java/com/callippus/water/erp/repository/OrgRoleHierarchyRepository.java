@@ -10,5 +10,7 @@ import java.util.List;
  * Spring Data JPA repository for the OrgRoleHierarchy entity.
  */
 public interface OrgRoleHierarchyRepository extends JpaRepository<OrgRoleHierarchy,Long> {
+	
+	List<OrgRoleHierarchy> findAllByOrderByRoleHierarchyNameAsc();
 
 }

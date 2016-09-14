@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,7 @@ public class EmpRoleMappingResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional(rollbackFor=Exception.class)
     public ResponseEntity<EmpRoleMapping> createEmpRoleMapping(@RequestBody EmpRoleMapping empRoleMapping) throws URISyntaxException {
         log.debug("REST request to save EmpRoleMapping : {}", empRoleMapping);
         if (empRoleMapping.getId() != null) {
@@ -66,8 +68,11 @@ public class EmpRoleMappingResource {
         
         EmpRoleMapping empRoleMappingOld = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, 
         		empRoleMapping.getOrgRoleInstance().getId());
-        empRoleMappingOld.setStatusMaster(statusMasterRepository.findOne(1l));
-        empRoleMappingRepository.save(empRoleMappingOld);
+        if(empRoleMappingOld != null){
+        	empRoleMappingOld.setStatusMaster(statusMasterRepository.findOne(1l));
+            empRoleMappingRepository.save(empRoleMappingOld);
+        }
+        
         empRoleMapping.setStatusMaster(statusMasterRepository.findOne(2l));
         EmpRoleMapping result = empRoleMappingRepository.save(empRoleMapping);
         return ResponseEntity.created(new URI("/api/empRoleMappings/" + result.getId()))
