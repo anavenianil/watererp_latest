@@ -248,60 +248,69 @@
 		</div>
 
 		<!-- ng-show="{{applicationTxn.status==0}}" -->
+		<!-- Technical Manager -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-if="applicationTxn.status === 0 && orgRole.id === 10"
+			ng-if="applicationTxn.status === 0 && orgRole.id === 9" 
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
+		
+		<!-- Water Network Engineer -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-if="applicationTxn.status === 1 && orgRole.id === 24"
+			ng-if="applicationTxn.status === 1 && orgRole.id === 14"
 			ng-click="getApplicationTxn(applicationTxn.id)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>
 
+		<!-- Planning & Construction Engineer  -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===2 && orgRole.id === 15"
+			ng-show="applicationTxn.status===2 && orgRole.id === 16"
 			ui-sref="feasibilityStudyForAppTxn({applicationId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Create
 			Feasibility
 		</button>
 
+		<!-- Technical Manager -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===3 && orgRole.id === 10"
+			ng-show="applicationTxn.status===3 && orgRole.id === 9"
 			ui-sref="proceedingsForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Create
 			Proceedings
 		</button>
-
+		
+		<!-- Rev. Ass. Acc. -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===4 && orgRole.id === 22"
+			ng-show="applicationTxn.status===4 && orgRole.id === 23"
 			ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Review
 			Proceedings
 		</button>
 
+		<!-- Stores & Supplies Officer -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===5 && orgRole.id === 9"
+			ng-show="applicationTxn.status===5 && orgRole.id === 25"
 			ui-sref="itemRequiredForApplicationTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Items
 		</button>
 
 		<!-- ui-sref="custMeterMappingForMeterAllot({applicationTxnId:applicationTxn.id})" -->
+		<!-- Planning & Construction Engineer -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===6 && orgRole.id === 15"
+			ng-show="applicationTxn.status===6 && orgRole.id === 16"
 			ui-sref="applicationTxnIssueMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
 
+		<!-- Billing Officer -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===7 && orgRole.id === 16"
+			ng-show="applicationTxn.status===7 && orgRole.id === 18"
 			ui-sref="applicationTxnClose({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete
 		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.user.id !=null && applicationTxn.status==1 && orgRole.id==16"
+			ng-show="applicationTxn.user.id !=null && applicationTxn.status==1 && orgRole.id==18"
 			ui-sref="applicationTxnCloseWithoutMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete
 		</button>

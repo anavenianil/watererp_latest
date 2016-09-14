@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Tariff Charges</span> {{tariffCharges.id}}</h2>
+    <h2><span>TariffCharges</span> {{tariffCharges.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <td>
-                    <span>Tariff Description</span>
+                    <span>TariffDesc</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffCharges.tariffDesc}}</span>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Slab Minimum</span>
+                    <span>SlabMin</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffCharges.slabMin}}</span>
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Slab Maximum</span>
+                    <span>SlabMax</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffCharges.slabMax}}</span>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Minimum Kiloliter</span>
+                    <span>MinKL</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffCharges.minKL}}</span>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>
-                    <span>Minimum Unmetered Kiloliter</span>
+                    <span>MinUnmeteredKL</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{tariffCharges.minUnmeteredKL}}</span>
@@ -60,15 +60,23 @@
             </tr>
             <tr>
                 <td>
-                    <span>Tariff Master</span>
+                    <span>SlabBaseCharge</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="tariffMaster.detail({id:tariffCharges.tariffMaster.id})">{{tariffCharges.tariffMaster.tariffName}}</a>
+                    <span class="form-control-static">{{tariffCharges.slabBaseCharge}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span>Tariff Type Master</span>
+                    <span>tariffMaster</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="tariffMaster.detail({id:tariffCharges.tariffMaster.id})">{{tariffCharges.tariffMaster.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>tariffTypeMaster</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="tariffTypeMaster.detail({id:tariffCharges.tariffTypeMaster.id})">{{tariffCharges.tariffTypeMaster.id}}</a>

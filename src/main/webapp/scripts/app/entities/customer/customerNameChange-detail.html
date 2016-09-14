@@ -122,7 +122,7 @@
 								<h5 class="list-group-item-heading">{{customer.changedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status==='PAYMENTNC' && orgRole.id==16">
+							<div class="col-sm-3" ng-if="customer.status==='PAYMENTNC' && orgRole.id==18">
 							<div class="form-group"
 									ng-class="{'has-error': editForm.changedDate.$invalid && 
                                 (editForm.changedDate.$dirty || rc.editForm.attempted)}">
@@ -201,21 +201,25 @@
 				</div>
 			</div>
 		</div>
+		<!-- Technical Manager -->
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="changeCaseDTO.customer.status === 'INITIATED' && orgRole.id === 10"
+			ng-if="changeCaseDTO.customer.status === 'INITIATED' && orgRole.id === 9"
 			ng-click="approve(changeCaseDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
 
+		<!--  -->
 		<button type="button" class="btn btn-success pull-right" ng-disabled="isSaving"
 			ui-sref="receiptForNameChange({customerId:changeCaseDTO.customer.id})"
-			ng-if="changeCaseDTO.customer.status === 'PROCESSING' && orgRole.id === 22">
+			ng-if="changeCaseDTO.customer.status === 'PROCESSING' && orgRole.id === 23">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
+		
+		<!--  -->
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="changeCaseDTO.customer.status === 'PAYMENTNC' && orgRole.id === 16"
+			ng-if="changeCaseDTO.customer.status === 'PAYMENTNC' && orgRole.id === 18"
 			ng-click="approve(changeCaseDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 		</button>

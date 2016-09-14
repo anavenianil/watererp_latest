@@ -26,27 +26,31 @@ public class TariffCharges implements Serializable {
     @NotNull
     @Column(name = "tariff_desc", nullable = false)
     private String tariffDesc;
-
+    
     @NotNull
     @Column(name = "slab_min", nullable = false)
     private Integer slabMin;
-
+    
     @NotNull
     @Column(name = "slab_max", nullable = false)
     private Integer slabMax;
-
+    
     @NotNull
     @Column(name = "rate", precision=20, scale=3, nullable = false)
     private BigDecimal rate;
-
+    
     @NotNull
     @Column(name = "min_kl", precision=20, scale=3, nullable = false)
     private BigDecimal minKL;
-
+    
     @NotNull
     @Column(name = "min_unmetered_kl", precision=20, scale=3, nullable = false)
     private BigDecimal minUnmeteredKL;
-
+    
+    @NotNull
+    @Column(name = "slab_base_charge", precision=20, scale=3, nullable = false)
+    private BigDecimal slabBaseCharge;
+    
     @ManyToOne
     @JoinColumn(name = "tariff_master_id")
     private TariffMaster tariffMaster;
@@ -66,7 +70,7 @@ public class TariffCharges implements Serializable {
     public String getTariffDesc() {
         return tariffDesc;
     }
-
+    
     public void setTariffDesc(String tariffDesc) {
         this.tariffDesc = tariffDesc;
     }
@@ -74,7 +78,7 @@ public class TariffCharges implements Serializable {
     public Integer getSlabMin() {
         return slabMin;
     }
-
+    
     public void setSlabMin(Integer slabMin) {
         this.slabMin = slabMin;
     }
@@ -82,7 +86,7 @@ public class TariffCharges implements Serializable {
     public Integer getSlabMax() {
         return slabMax;
     }
-
+    
     public void setSlabMax(Integer slabMax) {
         this.slabMax = slabMax;
     }
@@ -90,7 +94,7 @@ public class TariffCharges implements Serializable {
     public BigDecimal getRate() {
         return rate;
     }
-
+    
     public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
@@ -98,7 +102,7 @@ public class TariffCharges implements Serializable {
     public BigDecimal getMinKL() {
         return minKL;
     }
-
+    
     public void setMinKL(BigDecimal minKL) {
         this.minKL = minKL;
     }
@@ -106,9 +110,17 @@ public class TariffCharges implements Serializable {
     public BigDecimal getMinUnmeteredKL() {
         return minUnmeteredKL;
     }
-
+    
     public void setMinUnmeteredKL(BigDecimal minUnmeteredKL) {
         this.minUnmeteredKL = minUnmeteredKL;
+    }
+
+    public BigDecimal getSlabBaseCharge() {
+        return slabBaseCharge;
+    }
+    
+    public void setSlabBaseCharge(BigDecimal slabBaseCharge) {
+        this.slabBaseCharge = slabBaseCharge;
     }
 
     public TariffMaster getTariffMaster() {
@@ -136,6 +148,9 @@ public class TariffCharges implements Serializable {
             return false;
         }
         TariffCharges tariffCharges = (TariffCharges) o;
+        if(tariffCharges.id == null || id == null) {
+            return false;
+        }
         return Objects.equals(id, tariffCharges.id);
     }
 
@@ -154,6 +169,7 @@ public class TariffCharges implements Serializable {
             ", rate='" + rate + "'" +
             ", minKL='" + minKL + "'" +
             ", minUnmeteredKL='" + minUnmeteredKL + "'" +
+            ", slabBaseCharge='" + slabBaseCharge + "'" +
             '}';
     }
 }

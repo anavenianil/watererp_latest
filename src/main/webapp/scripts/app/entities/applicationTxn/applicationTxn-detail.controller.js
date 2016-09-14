@@ -66,35 +66,35 @@ angular.module('watererpApp').controller(
 				var ret = false;
 				switch ($scope.applicationTxn.status) {
 				case 0:
-					if ($scope.orgRole.id === 10)
+					if ($scope.orgRole.id === 9) //Technical Manager
 						ret = true;
 					break;
 				case 1:
-					if ($scope.orgRole.id === 24)
+					if ($scope.orgRole.id === 14) //Water Network Engineer
 						ret = true;
 					break;
 				case 2:
-					if ($scope.orgRole.id === 15)
+					if ($scope.orgRole.id === 16) //Planning & Construction Engineer 
 						ret = true;
 					break;
 				case 3:
-					if ($scope.orgRole.id === 10)
+					if ($scope.orgRole.id === 9) //Technical Manager
 						ret = true;
 					break;
 				case 4:
-					if ($scope.orgRole.id === 22)
+					if ($scope.orgRole.id === 23) //Rev. Ass. Acc.
 						ret = true;
 					break;
 				case 5:
-					if ($scope.orgRole.id === 9)
+					if ($scope.orgRole.id === 25) //Stores & Supplies Officer
 						ret = true;
 					break;
 				case 6:
-					if ($scope.orgRole.id === 15)
+					if ($scope.orgRole.id === 16) //Planning & Construction Engineer
 						ret = true;
 					break;
 				case 7:
-					if ($scope.orgRole.id === 16)
+					if ($scope.orgRole.id === 18) //Billing Officer
 						ret = true;
 					break;
 				case 8:

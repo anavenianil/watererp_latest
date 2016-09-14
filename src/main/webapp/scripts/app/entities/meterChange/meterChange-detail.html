@@ -230,7 +230,7 @@
 		<button type="button" class="btn btn-success pull-right"
 			ng-click="approve(meterChange)"
 			ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status==='PROCESSING' && orgRole.id === 10">
+			ng-show="meterChange.status==='PROCESSING' && orgRole.id === 9">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 
@@ -238,7 +238,7 @@
 
 		<button type="submit" class="btn btn-success pull-right"
 			ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status==='INITIATED' && orgRole.id === 15">
+			ng-show="meterChange.status==='INITIATED' && orgRole.id === 16">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
 
