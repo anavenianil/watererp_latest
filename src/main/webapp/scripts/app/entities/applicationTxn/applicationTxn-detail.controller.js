@@ -94,7 +94,7 @@ angular.module('watererpApp').controller(
 						ret = true;
 					break;
 				case 7:
-					if ($scope.orgRole.id === 16)
+					if ($scope.orgRole.id === 18) //Billing Officer
 						ret = true;
 					break;
 				case 8:
