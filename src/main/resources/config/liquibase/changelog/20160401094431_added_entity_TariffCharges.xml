@@ -24,23 +24,34 @@
             <column name="tariff_desc" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            
             <column name="slab_min" type="integer">
                 <constraints nullable="false" />
             </column>
+            
             <column name="slab_max" type="integer">
                 <constraints nullable="false" />
             </column>
+            
             <column name="rate" type="decimal(20,3)">
                 <constraints nullable="false" />
             </column>
+            
             <column name="min_kl" type="decimal(20,3)">
                 <constraints nullable="false" />
             </column>
+            
             <column name="min_unmetered_kl" type="decimal(20,3)">
                 <constraints nullable="false" />
             </column>
+            
+            <column name="slab_base_charge" type="decimal(20,3)">
+                <constraints nullable="false" />
+            </column>
+            
             <column name="tariff_master_id" type="bigint"/>
             <column name="tariff_type_master_id" type="bigint"/>
+            <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
         <addForeignKeyConstraint baseColumnNames="tariff_master_id"
