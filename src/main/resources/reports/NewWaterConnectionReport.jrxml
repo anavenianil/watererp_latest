@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewWaterConnectionReport" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6ffddcd9-5017-4e57-a4ec-310ce169fc24">
 	<property name="ireport.zoom" value="1.1000000000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="49"/>
 	<parameter name="dmaId" class="java.lang.Long"/>
 	<parameter name="categoryId" class="java.lang.Long">
 		<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>

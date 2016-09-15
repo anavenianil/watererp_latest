@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReportDetail" language="groovy" pageWidth="670" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReportDetail" pageWidth="670" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -9,20 +9,26 @@
 	<parameter name="categoryId" class="java.lang.Long">
 		<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>
 	</parameter>
-	<parameter name="fromDate" class="java.lang.String">
+	<parameter name="fromDate" class="java.util.Date">
 		<parameterDescription><![CDATA[Please enterFrom Date]]></parameterDescription>
 	</parameter>
-	<parameter name="toDate" class="java.lang.String">
+	<parameter name="toDate" class="java.util.Date">
 		<parameterDescription><![CDATA[Please enter To Date]]></parameterDescription>
+	</parameter>
+	<parameter name="paymentId" class="java.lang.Long">
+		<parameterDescription><![CDATA[Please enter payment type]]></parameterDescription>
 	</parameter>
 	<queryString>
 		<![CDATA[select Distinct D.DIVISION_NAME AS DNAME,T.TARIFF_CATEGORY  AS CATEGORY,
 COL.CAN AS CAN ,col.receipt_mode as Payment, RECEIPT_DT,'From Date','To Date',SUM(COL.RECEIPT_AMT)AS Amount ,c.cons_name
 from CUST_DETAILS C JOIN DIVISION_MASTER D ON C.DIVISION_MASTER_ID=D.ID JOIN TARIFF_CATEGORY_MASTER T  ON C.TARIFF_CATEGORY_MASTER_ID=T.ID
-JOIN COLL_DETAILS COL ON C.CAN=COL.CAN WHERE
+JOIN COLL_DETAILS COL ON C.CAN=COL.CAN JOIN PAYMENT_TYPES P ON COL.PAYMENT_TYPES_ID= P.ID
+ WHERE
 (C.DIVISION_MASTER_ID=$P{dmaId} or $P{dmaId} is null or $P{dmaId}='') AND
 (TARIFF_CATEGORY_MASTER_ID=$P{categoryId} or $P{categoryId} is null or $P{categoryId} ='')  AND
-date(COL.receipt_dt) BETWEEN date($P{fromDate}) and date($P{toDate})
+date(COL.receipt_dt) BETWEEN $P{fromDate} and $P{toDate}
+ and
+(P.ID=$P{paymentId} or $P{paymentId} is null or $P{paymentId}='')
 group by can,payment,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 	</queryString>
 	<field name="DNAME" class="java.lang.String"/>
@@ -51,7 +57,7 @@ group by can,payment,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="109" y="20" width="504" height="23" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="109" y="22" width="504" height="23" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
 					<reportElement x="0" y="0" width="504" height="21" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
@@ -61,7 +67,7 @@ group by can,payment,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="0" y="0" width="117" height="65" uuid="df778e21-dda1-46a6-a138-ca99dcb6c465"/>
+				<reportElement x="1" y="0" width="117" height="65" uuid="a610a276-d96a-4f39-9f4b-3bc3f65851cc"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -92,14 +98,14 @@ group by can,payment,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				</textElement>
 				<text><![CDATA[To]]></text>
 			</staticText>
-			<textField pattern="yyyy/MM/dd">
+			<textField pattern="yyyy-MM-dd">
 				<reportElement x="563" y="32" width="57" height="19" uuid="6183ce44-2758-4c5b-88fc-26e5e921c612"/>
 				<textElement>
 					<font size="11" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{toDate}]]></textFieldExpression>
 			</textField>
-			<textField pattern="yyyy/MM/dd">
+			<textField pattern="yyyy-MM-dd">
 				<reportElement x="489" y="32" width="69" height="19" uuid="832272ea-c281-4926-85f7-fecc82ee8a5f"/>
 				<textElement>
 					<font size="11" isUnderline="false"/>

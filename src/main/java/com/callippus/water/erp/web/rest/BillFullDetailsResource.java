@@ -336,6 +336,28 @@ public class BillFullDetailsResource {
     	
     }
     
+    /**
+     * Bills And Collections
+     */
+    @RequestMapping(value="billsAndCollections/report/{can}",  method = RequestMethod.GET)
+    @ResponseBody
+    public void getBillsAndCollections(HttpServletResponse response , @PathVariable String can)throws JRException,
+    IOException,ParseException
+    {
+    	Map<String,Object> params=new HashMap <String,Object>();
+    	params.put("can", can);
+    	
+    	JasperPrint jasperPrint=null;
+    	jasperPrint=reportsRepository.generateReport("/reports/BillandCollections.jasper", params);
+    	response.setContentType("application/x-pdf");
+    	response.setHeader("Content-disposition", "inline; filename=BillandCollections.pdf");
+    	final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+    	
+    }
+    
+    
+    
 }
     
 
