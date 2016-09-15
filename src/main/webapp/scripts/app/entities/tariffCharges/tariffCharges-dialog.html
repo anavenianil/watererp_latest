@@ -4,7 +4,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myTariffChargesLabel">Create or edit a TariffCharges</h4>
+        <h4 class="modal-title" id="myTariffChargesLabel">Create or edit a Tariff Charges</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
@@ -14,7 +14,19 @@
                     ng-model="tariffCharges.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_tariffDesc">TariffDesc</label>
+            <label for="field_tariffMaster">tariff Master</label>
+            <select class="form-control" id="field_tariffMaster" name="tariffMaster" ng-model="tariffCharges.tariffMaster" ng-options="tariffMaster as tariffMaster.tariffName for tariffMaster in tariffmasters track by tariffMaster.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_tariffTypeMaster">tariff Type Master</label>
+            <select class="form-control" id="field_tariffTypeMaster" name="tariffTypeMaster" ng-model="tariffCharges.tariffTypeMaster" ng-options="tariffTypeMaster as tariffTypeMaster.tariffType for tariffTypeMaster in tarifftypemasters track by tariffTypeMaster.id">
+                <option value=""></option>
+            </select>
+        </div>        
+        <div class="form-group">
+            <label class="control-label" for="field_tariffDesc">Tariff Description</label>
             <input type="text" class="form-control" name="tariffDesc" id="field_tariffDesc"
                     ng-model="tariffCharges.tariffDesc"
                     required />
@@ -26,7 +38,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_slabMin">SlabMin</label>
+            <label class="control-label" for="field_slabMin">Slab Minimum</label>
             <input type="number" class="form-control" name="slabMin" id="field_slabMin"
                     ng-model="tariffCharges.slabMin"
                     required />
@@ -42,7 +54,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_slabMax">SlabMax</label>
+            <label class="control-label" for="field_slabMax">Slab Maximum</label>
             <input type="number" class="form-control" name="slabMax" id="field_slabMax"
                     ng-model="tariffCharges.slabMax"
                     required />
@@ -74,7 +86,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_minKL">MinKL</label>
+            <label class="control-label" for="field_minKL">Minimum Kiloliter </label>
             <input type="number" class="form-control" name="minKL" id="field_minKL"
                     ng-model="tariffCharges.minKL"
                     required />
@@ -90,7 +102,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_minUnmeteredKL">MinUnmeteredKL</label>
+            <label class="control-label" for="field_minUnmeteredKL">Minimum Unmetered Kiloliter</label>
             <input type="number" class="form-control" name="minUnmeteredKL" id="field_minUnmeteredKL"
                     ng-model="tariffCharges.minUnmeteredKL"
                     required />
@@ -120,19 +132,6 @@
                     This field should be a number.
                 </p>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="field_tariffMaster">tariffMaster</label>
-            <select class="form-control" id="field_tariffMaster" name="tariffMaster" ng-model="tariffCharges.tariffMaster" ng-options="tariffMaster as tariffMaster.id for tariffMaster in tariffmasters track by tariffMaster.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="field_tariffTypeMaster">tariffTypeMaster</label>
-            <select class="form-control" id="field_tariffTypeMaster" name="tariffTypeMaster" ng-model="tariffCharges.tariffTypeMaster" ng-options="tariffTypeMaster as tariffTypeMaster.id for tariffTypeMaster in tarifftypemasters track by tariffTypeMaster.id">
-                <option value=""></option>
-            </select>
         </div>
     </div>
     <div class="modal-footer">
