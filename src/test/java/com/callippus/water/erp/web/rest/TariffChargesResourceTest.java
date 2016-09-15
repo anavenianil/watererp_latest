@@ -13,7 +13,6 @@ import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -40,10 +39,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class TariffChargesResourceIntTest {
+public class TariffChargesResourceTest {
 
-    private static final String DEFAULT_TARIFF_DESC = "AAAAA";
-    private static final String UPDATED_TARIFF_DESC = "BBBBB";
+    private static final String DEFAULT_TARIFF_DESC = "SAMPLE_TEXT";
+    private static final String UPDATED_TARIFF_DESC = "UPDATED_TEXT";
 
     private static final Integer DEFAULT_SLAB_MIN = 1;
     private static final Integer UPDATED_SLAB_MIN = 2;
@@ -69,9 +68,6 @@ public class TariffChargesResourceIntTest {
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
-    @Inject
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
     private MockMvc restTariffChargesMockMvc;
 
     private TariffCharges tariffCharges;
@@ -81,9 +77,7 @@ public class TariffChargesResourceIntTest {
         MockitoAnnotations.initMocks(this);
         TariffChargesResource tariffChargesResource = new TariffChargesResource();
         ReflectionTestUtils.setField(tariffChargesResource, "tariffChargesRepository", tariffChargesRepository);
-        this.restTariffChargesMockMvc = MockMvcBuilders.standaloneSetup(tariffChargesResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setMessageConverters(jacksonMessageConverter).build();
+        this.restTariffChargesMockMvc = MockMvcBuilders.standaloneSetup(tariffChargesResource).setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before
@@ -256,7 +250,7 @@ public class TariffChargesResourceIntTest {
         tariffChargesRepository.saveAndFlush(tariffCharges);
 
         // Get all the tariffChargess
-        restTariffChargesMockMvc.perform(get("/api/tariffChargess?sort=id,desc"))
+        restTariffChargesMockMvc.perform(get("/api/tariffChargess"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(tariffCharges.getId().intValue())))
@@ -313,6 +307,7 @@ public class TariffChargesResourceIntTest {
         tariffCharges.setMinKL(UPDATED_MIN_KL);
         tariffCharges.setMinUnmeteredKL(UPDATED_MIN_UNMETERED_KL);
         tariffCharges.setSlabBaseCharge(UPDATED_SLAB_BASE_CHARGE);
+        
 
         restTariffChargesMockMvc.perform(put("/api/tariffChargess")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
