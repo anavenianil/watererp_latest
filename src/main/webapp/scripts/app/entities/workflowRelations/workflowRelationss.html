@@ -1,60 +1,60 @@
 <div>
-    <h2>Work Flow Relationss</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="workflowRelations.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                       >Create new Work Flow Relations
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr>
-                    <th><span>ID</span></th>
-                    <th><span>Name</span></th>
-                    <th><span>Status Master</span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="workflowRelations in workflowRelationss track by workflowRelations.id">
-                    <td><a ui-sref="workflowRelations.detail({id:workflowRelations.id})">{{workflowRelations.id}}</a></td>
-                    <td>{{workflowRelations.name}}</td>
-                    <td>
-                        <a ui-sref="statusMaster.detail({id:workflowRelations.statusMaster.id})">{{workflowRelations.statusMaster.id}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="workflowRelations.detail({id:workflowRelations.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="workflowRelations.edit({id:workflowRelations.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="workflowRelations.delete({id:workflowRelations.id})"
-                                    class="btn btn-danger btn-sm">                                    
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+	<h2>Work Flow Relations</h2>
+	<jh-alert></jh-alert>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="workflowRelations.new">
+					<span class="glyphicon glyphicon-plus"></span> <span>Create
+						new Workflow Relations </span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="table-responsive">
+		<table class="jh-table table table-striped">
+			<thead>
+				<tr>
+					<th><span>ID</span></th>
+					<th><span>Name</span></th>
+					<th><span>Status Master</span></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					ng-repeat="workflowRelations in workflowRelationss track by workflowRelations.id">
+					<td><a
+						ui-sref="workflowRelations.detail({id:workflowRelations.id})">{{workflowRelations.id}}</a></td>
+					<td>{{workflowRelations.name}}</td>
+					<td><a
+						ui-sref="statusMaster.detail({id:workflowRelations.statusMaster.id})">{{workflowRelations.statusMaster.status}}</a>
+					</td>
+					<td class="text-right">
+						<div class="btn-group flex-btn-group-container">
+							<button type="submit"
+								ui-sref="workflowRelations.detail({id:workflowRelations.id})"
+								class="btn btn-info btn-sm">
+								<span class="glyphicon glyphicon-eye-open"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+							<button type="submit"
+								ui-sref="workflowRelations.edit({id:workflowRelations.id})"
+								class="btn btn-primary btn-sm">
+								<span class="glyphicon glyphicon-pencil"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+							<button type="submit"
+								ui-sref="workflowRelations.delete({id:workflowRelations.id})"
+								class="btn btn-danger btn-sm">
+								<span class="glyphicon glyphicon-remove-circle"></span> <span
+									class="hidden-xs hidden-sm"></span>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

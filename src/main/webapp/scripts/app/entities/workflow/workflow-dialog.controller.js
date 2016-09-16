@@ -25,14 +25,14 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         	$scope.load($stateParams.id);
         }
 
-        $scope.getWorkflow = function(workflowMasterId) {
+        /*$scope.getWorkflow = function(workflowMasterId) {
             Workflow.query({page: $scope.page, size: 20, workflowMasterId:workflowMasterId, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.workflows.push(result[i]);
                 }
             });
-        };
+        };*/
         var onSaveSuccess = function (result) {
             $scope.$emit('watererpApp:workflowUpdate', result);
             $scope.workflowMaster = result;
@@ -89,6 +89,7 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         
         
         $scope.getWorkflow = function(workflowMasterId){
+        	$scope.createWorkflow = false;
         	$scope.workflows = [];
         	if(workflowMasterId == 2){
         		$scope.count = 0;
@@ -170,6 +171,17 @@ angular.module('watererpApp').controller('WorkflowDialogController',
         		  if($scope.workflows.length-1 != indexId){
         			  $scope.workflows[indexId+1].relativeFromRole = null;  
         		  }
+        	  }
+          }
+          
+          $scope.clearWorkflow = function(createWorkflow){
+        	  if(createWorkflow){
+        		  $scope.workflow = {};
+        		  $scope.workflows = []; 
+        		  $scope.count = 0;
+        	  }
+        	  else{
+        		  console.log("Hello");
         	  }
           }
 });

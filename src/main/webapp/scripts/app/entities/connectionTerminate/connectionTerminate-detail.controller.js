@@ -71,7 +71,7 @@ angular.module('watererpApp')
 			var ret = false;
 			switch ($scope.custDetails.status) {
 			case "PROCESSING":
-				if ($scope.orgRole.id === 10)
+				if ($scope.orgRole.id === 9)
 					ret = true;
 				break;
 			default:

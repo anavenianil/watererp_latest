@@ -74,9 +74,9 @@ public class ReversalDetailsResource {
         reversalDetails.getCollDetails().setReversalRef("By "+user.getFirstName()+" "+user.getLastName()+" on "+reversalDetails.getCancelledDate());
         reversalDetails.setUser(user);
         collDetailsRepository.save(reversalDetails.getCollDetails());
-        ReversalDetails result = reversalDetails;//reversalDetailsRepository.save(reversalDetails);
+        ReversalDetails result = reversalDetailsRepository.save(reversalDetails);
         
-        paymentService.knockOff(result);
+        //paymentService.knockOff(result);
         
         return ResponseEntity.created(new URI("/api/reversalDetailss/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("reversalDetails", result.getId().toString()))

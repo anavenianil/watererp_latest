@@ -88,15 +88,15 @@ angular
 						var ret = false;
 						switch ($scope.changeCaseDTO.customer.status) {
 						case 'INITIATED':
-							if ($scope.orgRole.id === 10)
+							if ($scope.orgRole.id === 9)
 								ret = true;
 							break;
 						case 'PROCESSING':
-							if ($scope.orgRole.id === 22)
+							if ($scope.orgRole.id === 23)
 								ret = true;
 							break;
 						case 'PAYMENTNC':
-							if ($scope.orgRole.id === 16)
+							if ($scope.orgRole.id === 18)
 								ret = true;
 							break;
 						default:

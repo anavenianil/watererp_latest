@@ -123,11 +123,11 @@ angular
 						var ret = false;
 						switch ($scope.customer.status) {
 						case 'INITIATED':
-							if ($scope.orgRole.id === 10)
+							if ($scope.orgRole.id === 9) //Technical Manager
 								ret = true;
 							break;
 						case 'PROCESSING':
-							if ($scope.orgRole.id === 16)
+							if ($scope.orgRole.id === 18) //Billing Officer
 								ret = true;
 							break;
 						default:

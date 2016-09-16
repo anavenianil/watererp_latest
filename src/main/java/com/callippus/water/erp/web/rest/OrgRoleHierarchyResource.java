@@ -126,7 +126,7 @@ public class OrgRoleHierarchyResource {
 			throws Exception {
     	log.debug("REST request to getAllOrgRoleHierarchys : {}");
     	
-    	List<OrgRoleHierarchy>  orgRoleHierarchy = orgRoleHierarchyRepository.findAll();
+    	List<OrgRoleHierarchy>  orgRoleHierarchy = orgRoleHierarchyRepository.findAllByOrderByRoleHierarchyNameAsc();
     
     	return Optional.ofNullable(orgRoleHierarchy)
 				.map(result -> new ResponseEntity<>(orgRoleHierarchy, HttpStatus.OK))

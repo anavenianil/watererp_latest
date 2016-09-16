@@ -99,11 +99,11 @@ angular.module('watererpApp')
 			var ret = false;
 			switch ($scope.meterChange.status) {
 			case'INITIATED':
-				if ($scope.orgRole.id === 15)
+				if ($scope.orgRole.id === 16)
 					ret = true;
 				break;
 			case 'PROCESSING':
-				if ($scope.orgRole.id === 10)
+				if ($scope.orgRole.id === 9)
 					ret = true;
 				break;
 			default:

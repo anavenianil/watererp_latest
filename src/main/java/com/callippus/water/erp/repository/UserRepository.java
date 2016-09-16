@@ -30,7 +30,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Override
     void delete(User t);
     
-    @Query("Select u From User u")
+    @Query("Select u From User u where u.activated=1")
     List<User> findAllUsers();
     
     User findById(long parseLong);

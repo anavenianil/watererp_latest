@@ -64,6 +64,14 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "slabBaseCharge",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20160401094431",
