@@ -209,7 +209,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="63" splitType="Stretch">
+		<band height="65" splitType="Stretch">
 			<staticText>
 				<reportElement x="168" y="0" width="564" height="27" uuid="a344c408-2c60-4dd6-a63c-b037e20c85b1"/>
 				<textElement>
@@ -217,7 +217,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				</textElement>
 				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="470" y="40" width="117" height="19" uuid="dc370149-2104-44c2-8eeb-431c29df372a"/>
 				<textElement textAlignment="Left">
 					<font size="15" isBold="true"/>
@@ -232,7 +232,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				<text><![CDATA[Water Billing Report For]]></text>
 			</staticText>
 			<image>
-				<reportElement x="2" y="-22" width="189" height="85" uuid="0f559faf-7e6c-4ad7-be71-ff8ed86e5a08"/>
+				<reportElement x="2" y="-15" width="291" height="80" uuid="0f559faf-7e6c-4ad7-be71-ff8ed86e5a08"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
