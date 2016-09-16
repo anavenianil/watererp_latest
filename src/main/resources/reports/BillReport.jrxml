@@ -94,7 +94,7 @@ c.tariff_category_master_id=t.id and bfd.can = c.can and
 					<textElement>
 						<font isBold="false" isUnderline="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[($P{divisionName} != '0') ? $P{divisionName} : "ALL"]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($P{divisionName} !='0') ? $P{divisionName} : "ALL"]]></textFieldExpression>
 				</textField>
 			</frame>
 			<staticText>
