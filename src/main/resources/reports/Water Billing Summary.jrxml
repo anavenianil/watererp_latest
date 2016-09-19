@@ -209,7 +209,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="63" splitType="Stretch">
+		<band height="65" splitType="Stretch">
 			<staticText>
 				<reportElement x="168" y="0" width="564" height="27" uuid="a344c408-2c60-4dd6-a63c-b037e20c85b1"/>
 				<textElement>
@@ -217,7 +217,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				</textElement>
 				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="470" y="40" width="117" height="19" uuid="dc370149-2104-44c2-8eeb-431c29df372a"/>
 				<textElement textAlignment="Left">
 					<font size="15" isBold="true"/>
@@ -232,7 +232,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				<text><![CDATA[Water Billing Report For]]></text>
 			</staticText>
 			<image>
-				<reportElement x="2" y="-22" width="189" height="85" uuid="0f559faf-7e6c-4ad7-be71-ff8ed86e5a08"/>
+				<reportElement x="2" y="-15" width="291" height="80" uuid="0f559faf-7e6c-4ad7-be71-ff8ed86e5a08"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -320,14 +320,14 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				<reportElement x="101" y="-1" width="1" height="37" uuid="1d06b653-ee3c-4941-b2a4-bf8d5b3750f9"/>
 			</line>
 			<staticText>
-				<reportElement x="10" y="2" width="59" height="17" uuid="4479cbad-43eb-4994-995e-0a13c7028a04"/>
+				<reportElement x="10" y="2" width="59" height="19" uuid="4479cbad-43eb-4994-995e-0a13c7028a04"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Class]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="117" y="2" width="59" height="17" uuid="9d7b2a08-5efd-419a-b7ef-e8f8fcd4e594"/>
+				<reportElement x="117" y="2" width="59" height="19" uuid="9d7b2a08-5efd-419a-b7ef-e8f8fcd4e594"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -395,7 +395,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				<reportElement x="598" y="-1" width="1" height="37" uuid="eba02bc9-3d50-49f0-860a-61ec21678238"/>
 			</line>
 			<staticText>
-				<reportElement x="598" y="2" width="94" height="19" uuid="fd02cd2b-2c59-4925-85fc-f21746041b92"/>
+				<reportElement x="599" y="2" width="84" height="19" uuid="fd02cd2b-2c59-4925-85fc-f21746041b92"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -452,7 +452,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				<reportElement x="-1" y="-1" width="1" height="37" uuid="bda235b1-64f7-4d61-a917-76b0cae2f581"/>
 			</line>
 			<staticText>
-				<reportElement x="200" y="2" width="96" height="17" uuid="01f9b4c4-2365-4f54-a67b-2c01c6db317f"/>
+				<reportElement x="199" y="2" width="96" height="19" uuid="80a902a1-b89f-4b79-a3b3-42386210d74d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -655,7 +655,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 	<noData>
 		<band height="50">
 			<staticText>
-				<reportElement x="362" y="29" width="134" height="21" uuid="8293ce15-0440-4332-87b5-46e1d2f4d58f"/>
+				<reportElement x="315" y="29" width="134" height="21" uuid="8293ce15-0440-4332-87b5-46e1d2f4d58f"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
