@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="feasibilities_subreport5" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="49482f50-882e-4acf-b661-857e47956fe6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<parameter name="NAME" class="java.lang.String">
+		<parameterDescription><![CDATA[PLEASE ENTER YOUR NAME]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM `watererp`.`application_txn` a join feasibility_study f  on a.id=f.application_txn_id join proceedings p on p.application_txn_id=a.id
+where full_name=$P{NAME}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="full_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="home_or_office_number" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="regional_number" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fax_number" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="plot_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="area" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="street" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="village_executive_office" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="village_executive_office_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="po_box" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="requested_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="photo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="file_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="created_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="updated_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="detail_address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="meter_reading" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="connection_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="can" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="category_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="customer_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="meter_details_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="modified_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prepared_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="zonal_head_approval_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dept_head_inspected_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="operation_mangrapprove_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="division_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="zone_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="street_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="application_txn_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prepared_by_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="approved_by_zonal_head_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="inspection_by_department_head_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="approved_by_operation_manager_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sub_total_a" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="supervision_charge" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="labour_charge" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="site_survey" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sub_total_b" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="connection_fee" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="water_meter_shs" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="application_form_fee" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="grand_total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="supervision_percent" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="labour_charge_percent" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="site_survey_percent" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="connection_fee_percent" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="379" splitType="Stretch">
+			<staticText>
+				<reportElement x="563" y="11" width="76" height="20" uuid="33c5d3ed-8ec6-4fc6-b4cd-b68c9c34c082"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Created Date ...................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="641" y="13" width="119" height="20" uuid="8437237f-c5a6-4601-8c7d-28c7d8b277fd"/>
+				<text><![CDATA[.........................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="654" y="7" width="100" height="20" uuid="ab891152-61f8-48a5-a402-c5f0087175c2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{created_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="39" width="65" height="20" uuid="aab43c9b-d3c1-4af7-8c35-6f939dc02a2e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ref . and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="81" width="129" height="20" uuid="dc4945c2-81e5-4107-95cd-36e9d8208c07"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Mr / Ms / Dr / Eng /NGO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="85" width="353" height="20" uuid="05321bfe-8fbf-4120-8277-5a6d5f7ac781"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[......................................................................................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="81" width="113" height="20" uuid="91fa019e-5055-47aa-9f4c-ef0f33903ba6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="118" width="65" height="20" uuid="99acc06a-3a07-4840-9628-f92f4f20fbca"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[ADDRESS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="120" width="419" height="20" uuid="99b88300-863f-4fef-95c2-c69ceaf71b5e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[.............................................................................................................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="251" y="109" width="117" height="20" uuid="84addc19-8321-49fa-ae02-2335dffad73c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detail_address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="152" width="482" height="20" uuid="b6492f44-923e-4006-bd66-0a102276b9aa"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[.............................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="191" width="65" height="20" uuid="c4fd222c-67a6-41da-9be0-a60c98bf3b7a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[P.O.BOX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="191" width="419" height="20" uuid="c2fae36a-5307-4076-a0b7-6e1346fd5107"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[.............................................................................................................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="252" y="184" width="100" height="20" uuid="fe943741-7b35-4ca3-85c7-036707d4608f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{po_box}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="249" width="168" height="20" uuid="7d267a14-d769-41e9-bfc8-ca0de92f1fe6"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RE: water connections]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="289" width="388" height="20" uuid="e0c8b623-3e75-42db-b741-55f0c74b38a3"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Return your application to connect the water in your area nursery and
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="289" width="212" height="20" uuid="cd7bbdda-a609-49ca-a85e-1ba1fb1ae766"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[.............................................................................................................................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="443" y="286" width="100" height="20" uuid="fc5ded6f-768c-4b00-a4b9-1af5ac68da0d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="329" width="168" height="20" uuid="03481c4f-7066-4858-be40-06a6c09cbb03"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[.............................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="614" y="289" width="109" height="20" uuid="8e9a48e2-fb4d-4a49-85dd-ccff4a69773d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[plot_number]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="325" width="100" height="20" uuid="bce5a2b8-033f-460b-8e8e-6e8a915bbeae"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plot_number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="329" width="58" height="20" uuid="3517bad6-38d5-414b-a487-7e5937ba3403"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[street]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="277" y="326" width="100" height="20" uuid="a240a561-b6c7-4ed8-b65d-90ef40aa96a6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{street}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="333" width="168" height="20" uuid="6948e866-1d2f-4b13-9f9d-6c37fb558c61"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[.............................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="333" width="166" height="20" uuid="e07445dd-56a9-4558-8dab-a6e895a036dd"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[And the cost of the amount of]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="571" y="335" width="168" height="20" uuid="39a49f04-a036-4585-9c79-b863cdc20445"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[.............................................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="355" width="776" height="24" uuid="65d07605-3733-451d-bf2f-bb3c3d857a4f"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[outlined in this letter and water connections .You pay by check or cash before the work began. Submit a letter / certificate this time to pay .
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="621" y="331" width="100" height="20" uuid="f08ce7d1-b406-472e-9951-3c5a514e97e0"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grand_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
