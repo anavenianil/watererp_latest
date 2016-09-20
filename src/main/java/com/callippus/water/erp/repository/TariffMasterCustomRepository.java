@@ -12,7 +12,7 @@ import java.util.List;
  * Spring Data JPA repository for the TariffMaster entity.
  */
 public interface TariffMasterCustomRepository extends JpaRepository<TariffMaster,Long> {	
-	List<java.util.Map<String, Object>> findTariffs(String can, LocalDate validFrom, LocalDate validTo, BigDecimal avgKL, int unMeteredFlag, int newMeterFlag);
+	List<java.util.Map<String, Object>> findTariffs(String can, LocalDate validFrom, LocalDate validTo, BigDecimal avgKL, int unMeteredFlag, int newMeterFlag, boolean isTelescopic);
 	List<java.util.Map<String, Object>> getTariffs(String can, LocalDate validFrom, LocalDate validTo, BigDecimal avgKL,
 			int unMeteredFlag, int newMeterFlag);
 }

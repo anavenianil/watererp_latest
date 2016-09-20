@@ -698,8 +698,12 @@ public class BillingService {
 
 				log.debug("Charges for remaining units:" + remUnitsKL + ", avgKL:" + avgKL + "=>" + charges);
 
+				cd = configurationDetailsRepository.findOneByName("IS_TELESCOPIC");
+
+				boolean isTelescopic = (cd != null && cd.getValue().equalsIgnoreCase("true"))?true:false;
+				
 				charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
-						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag);
+						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag, isTelescopic);
 
 				if (charges.isEmpty())
 					throw new Exception("No tariffs configured. ");
@@ -1046,8 +1050,12 @@ public class BillingService {
 
 			unMeteredFlag = (bill_details.getCurrentBillType().equals("U") ? 1 : 0);
 
+			cd = configurationDetailsRepository.findOneByName("IS_TELESCOPIC");
+
+			boolean isTelescopic = (cd != null && cd.getValue().equalsIgnoreCase("true"))?true:false;
+			
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
-					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag);
+					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag, isTelescopic);
 
 			if (charges.isEmpty())
 				throw new Exception("No tariffs configured.");
