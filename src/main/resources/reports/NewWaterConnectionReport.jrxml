@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewWaterConnectionReport" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6ffddcd9-5017-4e57-a4ec-310ce169fc24">
 	<property name="ireport.zoom" value="1.1000000000000014"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="18"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="dmaId" class="java.lang.Long"/>
 	<parameter name="categoryId" class="java.lang.Long">
 		<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>
@@ -126,7 +126,7 @@ date(c.conn_date) between date($P{fromDate}) and date($P{toDate})]]>
 				<text><![CDATA[For The Period]]></text>
 			</staticText>
 			<textField pattern="yyyy/MM/dd">
-				<reportElement x="633" y="38" width="57" height="18" uuid="e077aa77-18b8-4e21-aed8-21a8d7fd7e17"/>
+				<reportElement x="639" y="38" width="57" height="19" uuid="e077aa77-18b8-4e21-aed8-21a8d7fd7e17"/>
 				<textElement>
 					<font size="11" isUnderline="false"/>
 				</textElement>
@@ -140,7 +140,7 @@ date(c.conn_date) between date($P{fromDate}) and date($P{toDate})]]>
 				<textFieldExpression><![CDATA[$P{fromDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="616" y="37" width="21" height="20" uuid="4fe9f5fa-e799-4f59-b355-596d369d3619"/>
+				<reportElement x="622" y="37" width="21" height="20" uuid="4fe9f5fa-e799-4f59-b355-596d369d3619"/>
 				<textElement>
 					<font size="12" isUnderline="false"/>
 				</textElement>
