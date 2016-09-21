@@ -929,7 +929,7 @@ public class BillingService {
 			cd = configurationDetailsRepository.findOneByName("EWURA");
 
 			log.debug("This is the EWURA Configuration:" + cd.toString());
-			BigDecimal ewura = ((bfd.getWaterCess().add(bfd.getSewerageCess())).multiply(new BigDecimal(cd.getValue())))
+			BigDecimal ewura = ((bfd.getWaterCess().add(bfd.getSewerageCess()).add(bfd.getMeterServiceCharge()).add(bfd.getServiceCharge())).multiply(new BigDecimal(cd.getValue())))
 					.divide(new BigDecimal("100.0"));
 
 			bfd.setSurcharge(ewura);
