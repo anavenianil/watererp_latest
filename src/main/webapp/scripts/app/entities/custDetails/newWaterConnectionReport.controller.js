@@ -60,34 +60,7 @@
                 }
                 
             };
-      /*      
-            var onSaveSuccess = function (result) {
-              
-                $scope.isSaving = false;
-                $scope.custDetails.fromdate = result.id;
-               
-                $scope.clear();
-    			$scope.rc.editForm.attempted=false;
-    			$scope.editForm.$setPristine();
-            };
-
-            var onSaveError = function (result) {
-                $scope.isSaving = false;
-            };
-    */
-     /*       $scope.getReport1 = function () {
-            	//alert("1");
-                if($scope.custDetails.divisionMaster == null &&  $scope.custDetails.tariffCategoryMaster == null && $scope.custDetails.fromdate == null && $scope.custDetails.todate == null ) 
-                {
-                	//alert("sucess");
-                	$scope.editForm.$setDirty();
-                //alert("3");
-                }
-            };
-        */
-            
-            
-            
+      
                $scope.getReportDetails = function () {
             	if($scope.custDetails.divisionMaster != null &&  $scope.custDetails.tariffCategoryMaster != null && $scope.custDetails.fromdate != null && $scope.custDetails.todate != null ){
             	var divisionId = $scope.custDetails.divisionMaster.id;

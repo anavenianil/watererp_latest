@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewWaterConnectionReport" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6ffddcd9-5017-4e57-a4ec-310ce169fc24">
-	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.zoom" value="1.1000000000000014"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="49"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="dmaId" class="java.lang.Long"/>
 	<parameter name="categoryId" class="java.lang.Long">
 		<parameterDescription><![CDATA[Please enter Category Id]]></parameterDescription>
@@ -53,7 +53,7 @@ date(c.conn_date) between date($P{fromDate}) and date($P{toDate})]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="64" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
 				<reportElement x="110" y="17" width="564" height="27" uuid="08825054-a973-40ee-8daf-89bf5540f4e6"/>
 				<textElement>
@@ -62,7 +62,7 @@ date(c.conn_date) between date($P{fromDate}) and date($P{toDate})]]>
 				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
 			<image>
-				<reportElement x="2" y="0" width="189" height="63" uuid="4ca0b456-1d7a-40df-a485-afcaf917c2d3"/>
+				<reportElement x="2" y="0" width="167" height="61" uuid="9ef76e8f-a996-483c-b14b-07862ec8390d"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -119,28 +119,28 @@ date(c.conn_date) between date($P{fromDate}) and date($P{toDate})]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="473" y="39" width="100" height="18" uuid="c5a4fb5a-ee9c-416e-bebd-14d9a58c14e7"/>
+				<reportElement x="472" y="38" width="100" height="18" uuid="c5a4fb5a-ee9c-416e-bebd-14d9a58c14e7"/>
 				<textElement>
 					<font size="12" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[For The Period]]></text>
 			</staticText>
 			<textField pattern="yyyy/MM/dd">
-				<reportElement x="635" y="39" width="57" height="18" uuid="e077aa77-18b8-4e21-aed8-21a8d7fd7e17"/>
+				<reportElement x="639" y="38" width="57" height="19" uuid="e077aa77-18b8-4e21-aed8-21a8d7fd7e17"/>
 				<textElement>
 					<font size="11" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{toDate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy/MM/dd">
-				<reportElement x="561" y="39" width="69" height="18" uuid="08452ea3-a18b-4e94-9922-0851b18505c6"/>
+				<reportElement x="563" y="38" width="69" height="18" uuid="08452ea3-a18b-4e94-9922-0851b18505c6"/>
 				<textElement>
 					<font size="11" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fromDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="619" y="38" width="21" height="20" uuid="4fe9f5fa-e799-4f59-b355-596d369d3619"/>
+				<reportElement x="622" y="37" width="21" height="20" uuid="4fe9f5fa-e799-4f59-b355-596d369d3619"/>
 				<textElement>
 					<font size="12" isUnderline="false"/>
 				</textElement>

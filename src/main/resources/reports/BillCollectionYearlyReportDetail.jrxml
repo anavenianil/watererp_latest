@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReportDetail" language="groovy" pageWidth="670" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReportDetail" pageWidth="670" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -63,7 +63,7 @@ group by can,payment,DNAME,CATEGORY,Payment,RECEIPT_DT]]>
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="0" y="2" width="117" height="63" uuid="8ed8fd9a-2df9-46ea-af98-ba34d2fe7ec7"/>
+				<reportElement x="0" y="2" width="117" height="63" uuid="6552b2b2-a40d-4208-9b35-b8cc57313054"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>

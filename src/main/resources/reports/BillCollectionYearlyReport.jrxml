@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReport" language="groovy" pageWidth="670" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReport" pageWidth="670" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
 	<property name="ireport.zoom" value="1.0000000000000002"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -64,7 +64,7 @@ group by can,payment]]>
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="1" y="1" width="117" height="63" uuid="297ac4bd-54e7-40cb-802f-b09a65693732"/>
+				<reportElement x="0" y="2" width="117" height="63" uuid="53184f56-4f9c-4fd7-af6e-ec00f66038a7"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -87,21 +87,21 @@ group by can,payment]]>
 					</textElement>
 					<text><![CDATA[For The Period]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="132" y="21" width="107" height="15" uuid="e57723ed-5460-4915-8f4b-9f756764ce8c"/>
 					<textElement>
 						<font size="11" isBold="false" isUnderline="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($P{categoryId} != 0) ? $F{CATEGORY} : "ALL"]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="529" y="23" width="65" height="15" uuid="4ab2436c-2c96-4c3f-9e21-ab0676698f5f"/>
 					<textElement>
 						<font size="11" isBold="false" isUnderline="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[($P{month} != null) ? $P{month} : "ALL"]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="494" y="23" width="65" height="15" uuid="cd0c2cf5-0af3-4cab-9881-155f50a9e785"/>
 					<textElement>
 						<font size="11" isBold="false" isUnderline="false"/>
@@ -109,7 +109,7 @@ group by can,payment]]>
 					<textFieldExpression><![CDATA[($P{year} != null) ? $P{year} : "ALL"]]></textFieldExpression>
 				</textField>
 			</frame>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="13" y="21" width="80" height="14" uuid="8332b904-95dc-4459-80fc-ee0c8950b2c7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="false" isUnderline="false"/>
