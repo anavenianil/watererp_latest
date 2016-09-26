@@ -600,9 +600,9 @@
 		</div>
 	</div>
 
-	<!-- 11 is Commercial Manager -->
+	<!-- 10 is Commercial Manager -->
 	<div
-		ng-if="orgRole.id === 11 || orgRole.id === 12 || orgRole.id === 4 || orgRole.id === 16"
+		ng-if="orgRole.id === 10 || orgRole.id === 11 || orgRole.id === 4 || orgRole.id === 18"
 		class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Adjustment Details</h3>
@@ -618,7 +618,7 @@
 								ng-model="customerComplaints.billFullDetails"
 								ng-options="billFullDetails as billFullDetails.toMonth for billFullDetails in billFullDetailss track by billFullDetails.id"
 								ng-change="getBillById(customerComplaints.billFullDetails.id)"
-								ng-disabled="orgRole.id === 16">
+								ng-disabled="orgRole.id === 18">
 							</select>
 						</div>
 					</div>
@@ -635,7 +635,7 @@
 								type="text" class="form-control" name="totalAmount"
 								id="field_totalAmount"
 								ng-model="customerComplaints.adjustmentAmt"
-								ng-disabled="orgRole.id === 16" />
+								ng-disabled="orgRole.id === 18" />
 						</div>
 					</div>
 				</div>
