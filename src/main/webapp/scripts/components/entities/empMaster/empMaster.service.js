@@ -5,6 +5,7 @@ angular.module('watererpApp')
         return $resource('api/empMasters/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'getByUserId': { method: 'GET', params: {userId: "userId" }, url:'/api/empMasters/getByUserId', isArray: false},
+            'getEmpByDesig': { method: 'GET', params: {designation: "designation" }, url:'/api/empMasters/getUsersByDesignation', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
