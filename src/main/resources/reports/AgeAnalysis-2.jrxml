@@ -120,13 +120,13 @@ FROM (
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="112" y="21" width="503" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="112" y="21" width="578" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
-					<reportElement x="6" y="0" width="496" height="22" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
+					<reportElement x="6" y="0" width="572" height="22" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
 						<font size="16" isBold="true" isUnderline="false"/>
 					</textElement>
-					<text><![CDATA[    MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+					<text><![CDATA[  SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY ]]></text>
 				</staticText>
 			</frame>
 			<image>

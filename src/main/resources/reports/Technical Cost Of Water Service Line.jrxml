@@ -127,18 +127,32 @@ left join proceedings p on i.proceedings_id=p.id left join material_master m on 
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="128" splitType="Stretch">
 			<staticText>
-				<reportElement x="152" y="23" width="448" height="27" uuid="448913b9-8935-4d84-a34d-e5e86eb2d46a"/>
+				<reportElement x="245" y="81" width="348" height="25" uuid="448913b9-8935-4d84-a34d-e5e86eb2d46a"/>
 				<textElement>
-					<font size="20" isBold="true"/>
+					<font size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TECHNICAL COST OF WATER SERVICE LINE]]></text>
 			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="165" y="27" width="575" height="22" isPrintInFirstWholeBand="true" backcolor="#006699" uuid="45adec15-7b2e-4c2a-9d41-3a5045c5f5b1"/>
+			</frame>
+			<staticText>
+				<reportElement x="165" y="27" width="575" height="22" forecolor="#FFFFFF" uuid="c3aa6d6a-0793-4f0b-b70b-4f1fc4856704"/>
+				<textElement>
+					<font size="16" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
+			</staticText>
+			<image>
+				<reportElement x="-1" y="0" width="189" height="75" uuid="ffc23a38-6fc4-4262-97d4-d4c587383f5c"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="5" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="58" splitType="Stretch">

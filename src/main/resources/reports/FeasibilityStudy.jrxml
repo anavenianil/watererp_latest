@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FeasibilityStudy" pageWidth="660" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="620" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="79d6a703-e5fa-4b25-b125-b7218cf74a8c">
+	<property name="ireport.zoom" value="1.1000000000000028"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<parameter name="applicationNo" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select f.id,concat(a.first_name,' ',a.last_name)fullName,d.division_name,s.street_name,j.first_name,f.prepared_date,f.zonal_head_approval_date,
+f.dept_head_inspected_date,operation_mangrapprove_date,(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_zonal_head_id=j.id  and f.id=$P{applicationNo})ZonalHead,
+(select j.first_name from feasibility_study f,jhi_user j where f.inspection_by_department_head_id=j.id and f.id=$P{applicationNo})DeptHead,
+(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_operation_manager_id=j.id and f.id=$P{applicationNo})OperationMgr
+from feasibility_study f, application_txn a, street_master s, jhi_user j, division_master d
+where f.id=a.id  and f.division_master_id=d.id and f.street_master_id= s.id and f.prepared_by_id=j.id and f.id=$P{applicationNo}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fullName" class="java.lang.String"/>
+	<field name="division_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="street_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prepared_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="zonal_head_approval_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dept_head_inspected_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="operation_mangrapprove_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ZonalHead" class="java.lang.String"/>
+	<field name="DeptHead" class="java.lang.String"/>
+	<field name="OperationMgr" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="125" y="16" width="498" height="22" isPrintInFirstWholeBand="true" backcolor="#006699" uuid="7173d787-0d4b-4b8f-82bf-7813797de329"/>
+			</frame>
+			<staticText>
+				<reportElement x="125" y="16" width="498" height="22" forecolor="#FFFFFF" uuid="0a263314-545d-4ba1-b073-18e7ecaf31cd"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[   SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="192" height="61" uuid="97e7b230-9cf3-4696-be29-ea12d3a14d8a"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="247" y="0" width="191" height="19" uuid="658915ba-4eed-471d-aa42-a818d2325ae3"/>
+				<textElement>
+					<font fontName="SansSerif" size="15" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Feasibility Study Details]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="77" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="38" width="617" height="1" uuid="b9aff2aa-acab-49d2-accc-8ddc07437c48"/>
+			</line>
+			<line>
+				<reportElement x="134" y="39" width="1" height="37" uuid="53d0d2ee-84af-40e7-84c7-3ad23d774441"/>
+			</line>
+			<line>
+				<reportElement x="618" y="38" width="1" height="38" uuid="404c09d0-3022-4b25-a63e-52269d7217bc"/>
+			</line>
+			<line>
+				<reportElement x="344" y="38" width="1" height="38" uuid="10f23762-9145-4453-a254-83dd6c027efa"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="505" y="43" width="118" height="20" uuid="ff4869d3-4854-402c-8bdb-0699394fe30f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{street_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="147" y="43" width="193" height="20" uuid="dc79f5e0-b18a-4d04-81da-3873a92935a0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fullName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="489" y="38" width="1" height="38" uuid="2857deeb-e65e-4eef-bbaf-e63e5f2435e5"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-2" y="43" width="47" height="20" uuid="e1f930bc-81dd-45bc-80e5-f17c1bedf52a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="43" width="98" height="20" isRemoveLineWhenBlank="true" uuid="dec04c89-69b5-492c-aa94-e3a7ca8f0b47"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{division_name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="39" width="1" height="37" uuid="7630aa8c-788c-4358-a4dd-857b8f29c064"/>
+			</line>
+			<staticText>
+				<reportElement x="145" y="11" width="174" height="19" uuid="8488dd5b-d88b-433d-9eab-f71a9d0d80d8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FullName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-5" y="11" width="50" height="17" uuid="b6d1cc95-609b-48c4-8a85-dd9403f9a637"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<line>
+				<reportElement x="344" y="1" width="1" height="37" uuid="6264d2f1-3cfe-4e12-8b8d-a4dc5bc2bc48"/>
+			</line>
+			<line>
+				<reportElement x="134" y="0" width="1" height="38" uuid="fdc59e77-b319-4c7f-9833-5b88eb77e39d"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="617" height="1" uuid="8a542af7-cd6a-414b-bae1-47840265b376"/>
+			</line>
+			<line>
+				<reportElement x="489" y="2" width="1" height="36" uuid="de7353ed-40ca-4386-990d-4bd34bd009d7"/>
+			</line>
+			<line>
+				<reportElement x="618" y="0" width="1" height="38" uuid="b2574ea3-6d05-4f0e-aad0-f41f6129c525"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="38" uuid="45671c10-3424-4c07-9eb2-9b03e6dfcd07"/>
+			</line>
+			<staticText>
+				<reportElement x="361" y="11" width="96" height="19" uuid="30647688-1045-4078-92f4-6eb91e058463"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="13" width="96" height="20" uuid="052f4472-5662-4214-aff7-1c447287644b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Street Name]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="76" width="618" height="1" uuid="9355f2f6-31a4-4aa8-9ccc-2625e2fd5d46"/>
+			</line>
+		</band>
+		<band height="79">
+			<line>
+				<reportElement x="344" y="0" width="1" height="38" uuid="d8b5c1ab-24b5-4355-b188-af1c742ec347"/>
+			</line>
+			<line>
+				<reportElement x="489" y="38" width="1" height="41" uuid="7e86e7e2-dbf5-454f-81b4-09fc87164d3b"/>
+			</line>
+			<line>
+				<reportElement x="618" y="38" width="1" height="40" uuid="e9db864f-a6e0-4814-bb86-3b202210e435"/>
+			</line>
+			<line>
+				<reportElement x="134" y="-1" width="1" height="40" uuid="b1a3c4cf-9d32-46f2-9de3-4c107ed5075b"/>
+			</line>
+			<line>
+				<reportElement x="344" y="38" width="1" height="40" uuid="5585ccec-0701-4bd1-a607-4cf1d87281e2"/>
+			</line>
+			<line>
+				<reportElement x="489" y="-1" width="1" height="40" uuid="cb97437e-776c-44df-92c0-0bd8547d575d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="38" width="1" height="40" uuid="f99429a9-8b9f-4084-abd3-1325dc482210"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="37" uuid="d1002793-ac70-4c61-b9e3-c09015eee34a"/>
+			</line>
+			<line>
+				<reportElement x="1" y="38" width="617" height="1" uuid="14f83ff0-7c3d-45f9-8cf0-0aab085efb57"/>
+			</line>
+			<line>
+				<reportElement x="134" y="39" width="1" height="39" uuid="b081bef2-4937-4426-8151-7e7c961be55a"/>
+			</line>
+			<line>
+				<reportElement x="618" y="-1" width="1" height="40" uuid="c7aa0062-8300-4cd4-a3ea-824d7336062b"/>
+			</line>
+			<textField>
+				<reportElement x="12" y="43" width="100" height="16" isRemoveLineWhenBlank="true" uuid="54318ddb-7f30-415e-94a3-7378299e97c9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="8" width="89" height="17" uuid="f218de44-b448-4297-a84d-c03eb03636d9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prepared By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="8" width="141" height="20" uuid="ad6a9e45-1c5b-4b46-b190-7eb8638bd404"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prepared Date]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="138" y="43" width="116" height="16" isRemoveLineWhenBlank="true" uuid="ea799694-dc7c-40f8-9b3b-92c28c483180"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prepared_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="361" y="8" width="105" height="17" uuid="36d2ddd7-f04b-4837-b297-00bbeea4093c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zonal Head]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="361" y="43" width="138" height="16" isRemoveLineWhenBlank="true" uuid="20b00267-381d-4500-9fbd-518a5203eba7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ZonalHead}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="505" y="8" width="117" height="20" uuid="4cadae7d-3d13-452b-9a10-16a39582f6fd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Approval Date]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="494" y="43" width="117" height="16" isRemoveLineWhenBlank="true" uuid="2c49bb31-6c3e-4b3d-a767-e89a13072ee0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zonal_head_approval_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="78" width="618" height="1" uuid="d9cd9a88-e9c2-4947-b71e-68067d119556"/>
+			</line>
+		</band>
+		<band height="79">
+			<line>
+				<reportElement x="489" y="38" width="1" height="41" uuid="194d8ffc-7032-4630-bd85-b6e4fb0d50c6"/>
+			</line>
+			<line>
+				<reportElement x="1" y="38" width="617" height="1" uuid="7be0a32c-dbb8-40c9-bf71-43a043dc56c9"/>
+			</line>
+			<line>
+				<reportElement x="344" y="0" width="1" height="39" uuid="5e31d216-72cc-4e92-b2fb-37f82fdc378c"/>
+			</line>
+			<line>
+				<reportElement x="618" y="37" width="1" height="42" uuid="e70090b1-9ae1-48fd-a0a8-d0aff7ba03f4"/>
+			</line>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="494" y="43" width="117" height="16" isRemoveLineWhenBlank="true" uuid="3514cab0-b810-4e65-98ac-120a99f3ff1b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{operation_mangrapprove_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="344" y="38" width="1" height="40" uuid="068a9b85-c733-41c2-a049-b632048cb072"/>
+			</line>
+			<line>
+				<reportElement x="134" y="39" width="1" height="39" uuid="c13688a2-833a-41c3-87f3-31432db9b05f"/>
+			</line>
+			<line>
+				<reportElement x="489" y="-1" width="1" height="39" uuid="1726afa5-efa6-440f-ad8f-ad99af388ae2"/>
+			</line>
+			<line>
+				<reportElement x="0" y="38" width="1" height="40" uuid="3006fa29-da14-4e8c-9367-182c892c0d32"/>
+			</line>
+			<line>
+				<reportElement x="134" y="-1" width="1" height="40" uuid="09bf616a-3a46-4342-a8b9-8ecde3104a3d"/>
+			</line>
+			<staticText>
+				<reportElement x="505" y="8" width="117" height="20" uuid="64201561-9057-441d-8028-e172efd4e037"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Approved Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="78" width="618" height="1" uuid="62ef0dca-151d-43ae-a220-cef3564780bd"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="1" height="37" uuid="41496919-210f-4dcf-a773-962493287a76"/>
+			</line>
+			<line>
+				<reportElement x="618" y="-1" width="1" height="38" uuid="97edb5cb-ad40-4c83-8671-1ab6c7745bd4"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="8" width="108" height="17" uuid="1d0acdfd-5f5b-405e-8afc-d87914a3d5f6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Department Head]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="43" width="127" height="20" isRemoveLineWhenBlank="true" uuid="bc5ed950-ea1d-4b72-a39b-1ab345f11e10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DeptHead}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="145" y="8" width="141" height="17" uuid="4b075230-c067-4d24-9401-6aaf01a8b9d2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inspected Date]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="143" y="43" width="192" height="20" isRemoveLineWhenBlank="true" uuid="990c4074-885b-4d94-8967-0fe0cfad5042"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dept_head_inspected_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="361" y="8" width="110" height="20" uuid="793aaf2c-a189-4f83-9df5-543c43bd2d33"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operation Manager]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="361" y="43" width="125" height="20" isRemoveLineWhenBlank="true" uuid="2844d17e-5cc0-446d-b219-c95d8996fc29"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OperationMgr}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="44" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="499" y="15" width="121" height="13" backcolor="#E6E6E6" uuid="694e9cf6-930f-4af4-a572-e5920a7b9065"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="15" width="499" height="13" backcolor="#E6E6E6" uuid="ea36f9d6-409a-4c63-9422-ac2521e56c45"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="15" width="151" height="13" uuid="f38eea77-c64a-46e2-98c8-aeee2679487e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="213" y="11" width="199" height="21" uuid="108997e8-c848-478a-b4e4-346d607d6775"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sorry No Data Found]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

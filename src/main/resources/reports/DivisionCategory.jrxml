@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DivisionCategory" pageWidth="600" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DivisionCategory" pageWidth="625" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="585" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -43,13 +43,13 @@ order by  sort_code]]>
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="93" y="19" width="471" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="93" y="19" width="492" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
-					<reportElement x="1" y="0" width="470" height="21" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
+					<reportElement x="1" y="0" width="491" height="21" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
-						<font size="15" isBold="true" isUnderline="false"/>
+						<font size="14" isBold="true" isUnderline="false"/>
 					</textElement>
-					<text><![CDATA[   MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+					<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 				</staticText>
 			</frame>
 			<image>
@@ -66,7 +66,7 @@ order by  sort_code]]>
 			<staticText>
 				<reportElement mode="Transparent" x="169" y="-2" width="237" height="22" backcolor="#ACA899" uuid="1d0f2f47-f120-4014-8c0c-7d5d4fcd5536"/>
 				<textElement>
-					<font size="15" isBold="true" isUnderline="true"/>
+					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Number Of  Connections Report]]></text>
 			</staticText>

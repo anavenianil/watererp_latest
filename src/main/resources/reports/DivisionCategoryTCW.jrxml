@@ -90,17 +90,17 @@ order by  sort_code]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="106" splitType="Stretch">
+		<band height="105" splitType="Stretch">
 			<image>
 				<reportElement x="192" y="1" width="177" height="81" uuid="08c64cea-e95a-4950-9c63-755611544704"/>
 				<imageExpression><![CDATA["C:\\Users\\callippus\\Desktop\\watererp.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Transparent" x="45" y="81" width="455" height="24" backcolor="#666666" uuid="a5df9708-f3bb-4ee3-ac06-9aaedf51d235"/>
+				<reportElement mode="Transparent" x="17" y="81" width="528" height="24" backcolor="#666666" uuid="a5df9708-f3bb-4ee3-ac06-9aaedf51d235"/>
 				<textElement>
 					<font size="15" isBold="true" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[ MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -117,14 +117,14 @@ order by  sort_code]]>
 				<reportElement x="10" y="56" width="551" height="1" uuid="79ffa73d-ab13-46ad-aeeb-2432f806f46c"/>
 			</line>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="515" y="42" width="100" height="20" uuid="8d30966b-71f0-4342-b75e-354ed07cb4f2"/>
+				<reportElement x="474" y="42" width="100" height="20" uuid="8d30966b-71f0-4342-b75e-354ed07cb4f2"/>
 				<textElement>
 					<font isBold="true" isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="483" y="42" width="39" height="20" uuid="5b81de67-d68e-4659-9d5e-7ccb701572be"/>
+				<reportElement x="442" y="42" width="39" height="20" uuid="5b81de67-d68e-4659-9d5e-7ccb701572be"/>
 				<textElement>
 					<font isBold="true" isUnderline="false"/>
 				</textElement>

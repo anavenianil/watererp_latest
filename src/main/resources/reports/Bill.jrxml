@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bill" language="groovy" pageWidth="1000" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ede3c4b4-7e79-4194-9047-9d7e39b76875">
 	<property name="ireport.zoom" value="1.3310000000000202"/>
 	<property name="ireport.x" value="36"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR CAN ID]]></parameterDescription>
 	</parameter>
@@ -364,11 +364,11 @@ WHERE  b.id=$P{id}]]>
 				<text><![CDATA[Fax:              028-2803621]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="306" y="0" width="238" height="27" uuid="50227bcc-b0d6-47b6-9c6f-775268b815e5"/>
+				<reportElement x="274" y="0" width="261" height="27" uuid="50227bcc-b0d6-47b6-9c6f-775268b815e5"/>
 				<textElement>
-					<font fontName="Times New Roman" size="16" isBold="true"/>
+					<font fontName="Times New Roman" size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Water Board ERP]]></text>
+				<text><![CDATA[  SUMBAWANGA Water Board ERP]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="246" y="43" width="100" height="14" uuid="dc8bc35a-90f4-41b8-b286-f5b6834ca6e3"/>
@@ -575,7 +575,7 @@ WHERE  b.id=$P{id}]]>
 				<textFieldExpression><![CDATA[$F{cust_address}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="306" y="21" width="113" height="14" uuid="27ac6e6f-2474-46fe-a245-cc06d8c6b0a3"/>
+				<reportElement x="307" y="21" width="136" height="14" uuid="27ac6e6f-2474-46fe-a245-cc06d8c6b0a3"/>
 				<textElement>
 					<font fontName="Times New Roman" size="10"/>
 				</textElement>
@@ -586,7 +586,7 @@ WHERE  b.id=$P{id}]]>
 				<textFieldExpression><![CDATA[$F{street_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="395" y="20" width="100" height="20" uuid="0e186c32-1c66-4c21-83b6-a118f41e0586"/>
+				<reportElement x="396" y="20" width="123" height="20" uuid="0e186c32-1c66-4c21-83b6-a118f41e0586"/>
 				<textFieldExpression><![CDATA[$F{bill_month}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">

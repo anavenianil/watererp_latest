@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reciept" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ee084720-7170-4f54-ba91-bbff0d5f1af4">
 	<property name="ireport.zoom" value="1.2100000000000086"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="31"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT * FROM `coll_details` c]]>
 	</queryString>
@@ -101,11 +101,11 @@
 				<text><![CDATA[MJINI(KUWASA -KIGOMA)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="315" y="6" width="455" height="21" uuid="c6256cf3-2e37-43b2-9295-d41fafe15b32"/>
+				<reportElement x="315" y="6" width="443" height="21" uuid="c6256cf3-2e37-43b2-9295-d41fafe15b32"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[KIGOMA / UJIJIURBAN WATER SUPPLYAND SANITATION AUTHORITY(KUWASA -  KIGOMA)]]></text>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="371" y="55" width="53" height="21" uuid="5e02387e-41ca-4c74-b0e3-4ff0401ab185"/>
