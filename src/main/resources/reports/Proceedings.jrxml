@@ -8,7 +8,7 @@
 		<![CDATA[select Distinct m.material_name,u.value,i.quantity,i.rate_per_shs,i.amount,p.sub_total_a,p.supervision_charge,p.labour_charge,p.site_survey,p.sub_total_b,
 p.connection_fee,p.application_form_fee,p.grand_total from proceedings p , item_required i , material_master m , uom u
 
-where p.application_txn_id=i.proceedings_id and i.uom_id= u.id and i.material_master_id= m.id  and p.application_txn_id=$P{pId}]]>
+where p.id=i.proceedings_id and i.uom_id= u.id and i.material_master_id= m.id  and p.application_txn_id=$P{pId}]]>
 	</queryString>
 	<field name="material_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

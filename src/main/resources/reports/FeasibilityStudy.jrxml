@@ -6,11 +6,11 @@
 	<parameter name="applicationNo" class="java.lang.Long"/>
 	<queryString>
 		<![CDATA[select f.id,concat(a.first_name,' ',a.last_name)fullName,d.division_name,s.street_name,j.first_name,f.prepared_date,f.zonal_head_approval_date,
-f.dept_head_inspected_date,operation_mangrapprove_date,(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_zonal_head_id=j.id  and f.id=$P{applicationNo})ZonalHead,
-(select j.first_name from feasibility_study f,jhi_user j where f.inspection_by_department_head_id=j.id and f.id=$P{applicationNo})DeptHead,
-(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_operation_manager_id=j.id and f.id=$P{applicationNo})OperationMgr
+f.dept_head_inspected_date,operation_mangrapprove_date,(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_zonal_head_id=j.id  and f.application_txn_id=$P{applicationNo})ZonalHead,
+(select j.first_name from feasibility_study f,jhi_user j where f.inspection_by_department_head_id=j.id and f.application_txn_id=$P{applicationNo})DeptHead,
+(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_operation_manager_id=j.id and f.application_txn_id=$P{applicationNo})OperationMgr
 from feasibility_study f, application_txn a, street_master s, jhi_user j, division_master d
-where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_master_id= s.id and f.prepared_by_id=j.id and f.id=$P{applicationNo}]]>
+where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_master_id= s.id and f.prepared_by_id=j.id and f.application_txn_id=$P{applicationNo}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
