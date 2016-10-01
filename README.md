@@ -139,7 +139,7 @@ drop table item_required;
  delete from watererp.coll_details;
  delete FROM `watererp`.`customer`;
  delete FROM `watererp`.`tariff_charges`;
-  delete FROM `watererp`.`tariff_master`;
-  delete FROM `watererp`.`tariff_category_master`;
+ delete FROM `watererp`.`tariff_master`;
+ delete FROM `watererp`.`tariff_category_master`;
  delete FROM `watererp`.`meter_details`;
 
