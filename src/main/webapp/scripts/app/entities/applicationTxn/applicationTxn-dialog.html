@@ -336,6 +336,32 @@
 										</div>
 									</div>
 								</div>
+								<!-- <div class="col-sm-3">
+									<label>Click to upload Id Proof</label>
+									<button type="submit" class="btn btn-primary" ngf-drop=""
+										ngf-select="" ng-model="applicationTxn.idProof1"
+										ng-model-rejected="rejFiles"
+										ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+										class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+										ngf-accept="'image/*,application/pdf'"
+										ngf-drop-available="dropAvailable">
+										<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload Id Proof</span>
+									</button>
+								</div> -->
+								<!-- <div class="col-sm-3">
+									<ul style="clear: both" ng-show="rejFiles.length > 0"
+										class="response">
+										<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+											file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+									</ul>
+									<ul style="clear: both"
+										ng-show="applicationTxn.idProof1.length > 0" class="response">
+										<li class="sel-file" ng-repeat="f in applicationTxn.idProof1">
+											- {{f.name}} <a ng-show="f.result" href="javascript:void(0)"
+											ng-click="f.showDetail = !f.showDetail">details</a>
+										</li>
+									</ul>
+								</div> -->
 							</div>
 							<br>
 							<div class="row">
@@ -344,8 +370,10 @@
 										ng-class="{'has-error': editForm.propertyDoc.$invalid && 
                                 		(editForm.propertyDoc.$dirty || rc.editForm.attempted)}">
 										<label class="control-label" for="field_propertyDoc">Property
-											Ownership Document</label><font color="red" ng-show="makeArr.length===0">&nbsp;(Select atleast one.)</font><br> <input
-											type="checkbox" ng-model="applicationTxn.deedDoc"
+											Ownership Document</label><font color="red"
+											ng-show="makeArr.length===0">&nbsp;(Select atleast
+											one.)</font><br> <input type="checkbox"
+											ng-model="applicationTxn.deedDoc"
 											ng-true-value="'Submitted: Tittle Deed/Offer letter'"
 											ng-false-value="'Not Submitted: Tittle Deed/Offer letter'"
 											ng-click="check(applicationTxn.deedDoc)">&nbsp;<span>Tittle

@@ -123,10 +123,24 @@ angular.module('watererpApp')
             };
         	$scope.rc.editForm.attempted=false;
 			$scope.editForm.$setPristine();
+			$scope.applicationTxn.requestedDate = new Date();
         }
         
         
         $scope.$watch('applicationTxn.photo1', function (files) {
+            $scope.formUpload = false;
+            if (files != null) {
+                for (var i = 0; i < files.length; i++) {
+                    $scope.errorMsg = null;
+                    (function (file) {
+                    	UploadUtil.uploadUsingUpload(file, $scope, 'waterErp');
+                    })(files[i]);
+                }
+            }
+        });
+        
+        
+        $scope.$watch('applicationTxn.idProof1', function (files) {
             $scope.formUpload = false;
             if (files != null) {
                 for (var i = 0; i < files.length; i++) {
