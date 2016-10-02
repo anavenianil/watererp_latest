@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.callippus.water.erp.domain.DesignationMaster;
 import com.callippus.water.erp.domain.EmpMaster;
 import com.callippus.water.erp.domain.OrgRoleInstance;
+import com.callippus.water.erp.domain.StatusMaster;
 import com.callippus.water.erp.domain.User;
 
 /**
@@ -27,5 +29,7 @@ public interface EmpMasterRepository extends JpaRepository<EmpMaster,Long> {
 	OrgRoleInstance findActiveOfficeId(@Param("userId") Long userId);
 	
 	EmpMaster findByUser(User user);
+	
+	List<EmpMaster> findByDesignationMasterAndStatusMaster(DesignationMaster designationMaster, StatusMaster statusMaster);
 
 }

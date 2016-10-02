@@ -261,7 +261,7 @@ and (Date_Format(Str_to_date(bfd.to_month, '%Y%m'), '%Y-%M')=$P{toMonth} or $P{t
 				<text><![CDATA[Printed :]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy  h:mm a" isBlankWhenNull="true">
-				<reportElement x="69" y="65" width="100" height="19" uuid="35d3cc96-c77b-4172-9a06-b9a8312519ae"/>
+				<reportElement x="69" y="65" width="319" height="19" uuid="35d3cc96-c77b-4172-9a06-b9a8312519ae"/>
 				<textElement>
 					<font size="13"/>
 				</textElement>

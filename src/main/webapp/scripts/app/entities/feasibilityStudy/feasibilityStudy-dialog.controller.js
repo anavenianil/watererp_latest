@@ -6,7 +6,7 @@ angular.module('watererpApp')
     	
     	$scope.feasibilityStudy = {};
         $scope.divisionmasters = DivisionMaster.query();
-        $scope.users = User.query();
+        $scope.users = User.getAll();
         $scope.applicationTxn = {};
         
         if($stateParams.id != null){
