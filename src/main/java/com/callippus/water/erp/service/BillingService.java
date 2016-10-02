@@ -284,7 +284,7 @@ public class BillingService {
 				} else {
 					unitsKL = bill_details.getPresentReading().subtract(bill_details.getInitialReading());
 
-					if (unitsKL.compareTo(new BigDecimal("0")) < 0)
+					if (unitsKL.compareTo(CPSConstants.ZERO) < 0)
 						throw new Exception("Invalid Meter Reading");
 				}
 
