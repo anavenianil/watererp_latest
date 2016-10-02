@@ -235,5 +235,21 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('billsAndCollectionsReport', {
+                parent: 'billFullDetails',
+                url: '/billsAndCollectionsReport',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'WaterBillDetailss'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/billFullDetails/billsAndCollectionsReport.html',
+                        controller: 'BillsAndCollectionsReportController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

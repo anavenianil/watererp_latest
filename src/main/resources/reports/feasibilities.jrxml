@@ -40,24 +40,28 @@ where full_name=$P{NAME}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="47" splitType="Stretch"/>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="162" y="13" width="565" height="19" uuid="9eb51857-0213-49d4-a108-b55083b9595a"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="177" height="81" uuid="35f288e4-07a3-4b10-bc13-7de49a768dd9"/>
+				<imageExpression><![CDATA["C:\\Users\\callippus\\Desktop\\watererp.png"]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="2" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
-			<staticText>
-				<reportElement x="70" y="0" width="497" height="19" uuid="9eb51857-0213-49d4-a108-b55083b9595a"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[		MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
-			</staticText>
-		</band>
+		<band height="21" splitType="Stretch"/>
 		<band height="51" splitType="Stretch">
 			<subreport runToBottom="false">
 				<reportElement x="0" y="0" width="802" height="51" uuid="6c20aeaa-96fe-48b5-a73e-95f01d522ede"/>

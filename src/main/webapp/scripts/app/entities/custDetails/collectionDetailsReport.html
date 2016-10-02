@@ -27,6 +27,7 @@
 							required>
 						</select>
 					</div>
+						
 					<div class="col-sm-2">
 					 <a type="button"
 							href type="button" ng-click="getReport()"
@@ -45,6 +46,15 @@
 			
 				<br>
 				<div class="row">
+							<div class="col-sm-4">
+						<label for="field_payment_types">Payment Mode
+							</label> <select class="form-control"
+							id="field_paymentTypes" name="paymentTypes"
+							ng-model="paymentTypes.paymentMode"
+							ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymentTypess track by paymentTypes.id"
+							required>
+						</select>
+					</div>
 
 					<div class="col-sm-4">
 					<div class="form-group" ng-class="{'has-error':editForm.fromdate.$invalid &&(editForm.fromdate.$dirty || rc.editForm.attempted)}">

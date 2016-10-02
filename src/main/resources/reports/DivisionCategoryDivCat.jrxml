@@ -125,11 +125,11 @@ order by  sort_code]]>
 				<imageExpression><![CDATA["C:\\Users\\callippus\\Desktop\\watererp.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Transparent" x="55" y="82" width="455" height="24" backcolor="#666666" uuid="52251ec3-68ca-4b8b-bb03-a7665c2f01f7"/>
+				<reportElement mode="Transparent" x="16" y="82" width="535" height="24" backcolor="#666666" uuid="52251ec3-68ca-4b8b-bb03-a7665c2f01f7"/>
 				<textElement>
 					<font size="15" isBold="true" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[ MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
 		</band>
 	</title>

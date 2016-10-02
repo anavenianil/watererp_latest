@@ -1,13 +1,19 @@
 package com.callippus.water.erp.web.rest;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
@@ -30,11 +37,16 @@ import com.callippus.water.erp.domain.Proceedings;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ItemRequiredRepository;
 import com.callippus.water.erp.repository.ProceedingsRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
 import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * REST controller for managing Proceedings.
@@ -59,6 +71,9 @@ public class ProceedingsResource {
     
     @Inject
     private WorkflowService workflowService;
+    
+	@Inject
+	private ReportsCustomRepository reportsRepository;
     
     
     /**
@@ -211,4 +226,33 @@ public class ProceedingsResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+    
+    /**
+     * Get By Proceedings Report
+     * @throws ParseException 
+     */
+    @RequestMapping(value = "/reports/proceedings/{pId}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getCustDetailsReport1(HttpServletResponse response,
+			@PathVariable Long pId) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", pId);
+   	
+    	
+    	
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("pId", pId);
+	
+		JasperPrint jasperPrint = null;
+					 jasperPrint = reportsRepository
+					.generateReport("/reports/Proceedings.jasper", params);
+		
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=Proceedings.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
 }

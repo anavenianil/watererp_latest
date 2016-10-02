@@ -11,7 +11,7 @@
 		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT * FROM `doi2`.`t_request_master` t  ]]>
+		<![CDATA[SELECT * FROM `doi2`.`t_request_master` t]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -44,20 +44,20 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="95" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="124" y="13" width="270" height="46" backcolor="#00FFFF" uuid="a4db0b85-d7a6-49b8-9aec-ddbfdcdfcc12"/>
+				<reportElement mode="Opaque" x="233" y="58" width="270" height="27" backcolor="#00FFFF" uuid="a4db0b85-d7a6-49b8-9aec-ddbfdcdfcc12"/>
 				<textElement>
-					<font size="24"/>
+					<font size="16"/>
 				</textElement>
-				<text><![CDATA[             Sample]]></text>
+				<text><![CDATA[                           Sample]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="86" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="441" y="21" width="100" height="20" backcolor="#999999" uuid="e12690a4-27e9-4282-8c3e-d50e120f3def"/>
+				<reportElement mode="Opaque" x="548" y="21" width="100" height="20" backcolor="#999999" uuid="e12690a4-27e9-4282-8c3e-d50e120f3def"/>
 				<text><![CDATA[TESTING]]></text>
 			</staticText>
 		</band>

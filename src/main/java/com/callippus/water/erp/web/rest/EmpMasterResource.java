@@ -2,7 +2,9 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -24,8 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.EmpMaster;
 import com.callippus.water.erp.domain.OrgRoleInstance;
+import com.callippus.water.erp.domain.User;
+import com.callippus.water.erp.repository.DesignationMasterRepository;
 import com.callippus.water.erp.repository.EmpMasterRepository;
+import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.repository.UserRepository;
+import com.callippus.water.erp.web.rest.dto.RequestCountDTO;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -44,6 +50,12 @@ public class EmpMasterResource {
     
     @Inject
     private UserRepository userRepository;
+    
+    @Inject
+    private DesignationMasterRepository designationMasterRepository;
+    
+    @Inject
+    private StatusMasterRepository statusMasterRepository;
     
     /**
      * POST  /empMasters -> Create a new empMaster.
@@ -160,5 +172,34 @@ public class EmpMasterResource {
     	return Optional.ofNullable(empMaster)
 				.map(result -> new ResponseEntity<>(empMaster, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
+    
+    
+    /**
+     * Get User by designation
+     */
+    @RequestMapping(value = "/empMasters/getUsersByDesignation",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<User>> getUsersByDesignation(@Param("designation") Long designation)
+			throws Exception {
+    	log.debug("REST request to Users by designation : {}");
+    	
+		List<EmpMaster> empMasters = empMasterRepository
+				.findByDesignationMasterAndStatusMaster(designationMasterRepository.findOne(designation), statusMasterRepository.findOne(2l));
+		
+
+    	List<User> users = new ArrayList<User>();
+
+		for (EmpMaster em : empMasters) {
+			User u = new User();
+			u = em.getUser();
+			users.add(u);
+		}
+    
+    	return Optional.ofNullable(users)
+				.map(result -> new ResponseEntity<>(users, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 }

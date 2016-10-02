@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciept1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="f87bd37b-c742-4b32-aad6-1831c85ce2a3">
 	<property name="ireport.zoom" value="0.9090909090909094"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="165"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="Reciept Id" class="java.lang.String">
 		<parameterDescription><![CDATA[PLEASE ENTER RECIEPT ID]]></parameterDescription>
 	</parameter>
@@ -137,11 +137,11 @@
 				<reportElement x="801" y="2" width="1" height="319" uuid="82ac2174-83e8-4221-a16b-0b205c3cca13"/>
 			</line>
 			<staticText>
-				<reportElement x="315" y="7" width="455" height="21" uuid="e5fed96a-8276-43ab-8196-c7a137cee29e"/>
+				<reportElement x="293" y="7" width="509" height="21" uuid="e5fed96a-8276-43ab-8196-c7a137cee29e"/>
 				<textElement>
-					<font size="12" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[KIGOMA / UJIJIURBAN WATER SUPPLYAND SANITATION AUTHORITY(KUWASA -  KIGOMA)]]></text>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="13" y="7" width="238" height="21" uuid="0883fa8d-fe77-4f17-9510-e444b869324f"/>

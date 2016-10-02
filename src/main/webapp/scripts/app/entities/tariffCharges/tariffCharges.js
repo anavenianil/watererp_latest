@@ -58,6 +58,7 @@ angular.module('watererpApp')
                                     rate: null,
                                     minKL: null,
                                     minUnmeteredKL: null,
+                                    slabBaseCharge: null,
                                     id: null
                                 };
                             }

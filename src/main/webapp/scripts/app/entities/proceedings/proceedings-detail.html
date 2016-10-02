@@ -6,8 +6,14 @@
 		<div>
 			<div class="panel panel-primary">
 				<div class="panel-heading clearfix">
-					<h3 class="panel-title pull-left">Proceedings for Application
-						No.: {{proceedings.applicationTxn.id}}</h3>
+					<h3 class="panel-title pull-left">Proceedings for Application 
+						No.: {{proceedings.applicationTxn.id}} </h3>
+				<div class="pull-right">
+				<a class="pull-right btn btn-warning
+				type="button" href="api/reports/proceedings/{{proceedings.applicationTxn.id}}">Download as PDF</a>
+				</div>		
+						
+						
 				</div>
 				<div class="list-group">
 					<div class="list-group-item">
@@ -163,7 +169,7 @@
 
 
 			<button type="button" class="btn btn-success pull-right"
-				ng-show="proceedings.applicationTxn.status===4 && orgRole.id===22"
+				ng-show="proceedings.applicationTxn.status===4 && orgRole.id===23"
 				ui-sref="receiptForAppTxn({applicationTxnId:proceedings.applicationTxn.id})">
 				<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 			</button>

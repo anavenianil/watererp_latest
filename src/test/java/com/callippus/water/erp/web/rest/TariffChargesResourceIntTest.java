@@ -60,6 +60,9 @@ public class TariffChargesResourceIntTest {
     private static final BigDecimal DEFAULT_MIN_UNMETERED_KL = new BigDecimal(1);
     private static final BigDecimal UPDATED_MIN_UNMETERED_KL = new BigDecimal(2);
 
+    private static final BigDecimal DEFAULT_SLAB_BASE_CHARGE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_SLAB_BASE_CHARGE = new BigDecimal(2);
+
     @Inject
     private TariffChargesRepository tariffChargesRepository;
 
@@ -92,6 +95,7 @@ public class TariffChargesResourceIntTest {
         tariffCharges.setRate(DEFAULT_RATE);
         tariffCharges.setMinKL(DEFAULT_MIN_KL);
         tariffCharges.setMinUnmeteredKL(DEFAULT_MIN_UNMETERED_KL);
+        tariffCharges.setSlabBaseCharge(DEFAULT_SLAB_BASE_CHARGE);
     }
 
     @Test
@@ -116,6 +120,7 @@ public class TariffChargesResourceIntTest {
         assertThat(testTariffCharges.getRate()).isEqualTo(DEFAULT_RATE);
         assertThat(testTariffCharges.getMinKL()).isEqualTo(DEFAULT_MIN_KL);
         assertThat(testTariffCharges.getMinUnmeteredKL()).isEqualTo(DEFAULT_MIN_UNMETERED_KL);
+        assertThat(testTariffCharges.getSlabBaseCharge()).isEqualTo(DEFAULT_SLAB_BASE_CHARGE);
     }
 
     @Test
@@ -228,6 +233,24 @@ public class TariffChargesResourceIntTest {
 
     @Test
     @Transactional
+    public void checkSlabBaseChargeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tariffChargesRepository.findAll().size();
+        // set the field null
+        tariffCharges.setSlabBaseCharge(null);
+
+        // Create the TariffCharges, which fails.
+
+        restTariffChargesMockMvc.perform(post("/api/tariffChargess")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(tariffCharges)))
+                .andExpect(status().isBadRequest());
+
+        List<TariffCharges> tariffChargess = tariffChargesRepository.findAll();
+        assertThat(tariffChargess).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllTariffChargess() throws Exception {
         // Initialize the database
         tariffChargesRepository.saveAndFlush(tariffCharges);
@@ -242,7 +265,8 @@ public class TariffChargesResourceIntTest {
                 .andExpect(jsonPath("$.[*].slabMax").value(hasItem(DEFAULT_SLAB_MAX)))
                 .andExpect(jsonPath("$.[*].rate").value(hasItem(DEFAULT_RATE.intValue())))
                 .andExpect(jsonPath("$.[*].minKL").value(hasItem(DEFAULT_MIN_KL.intValue())))
-                .andExpect(jsonPath("$.[*].minUnmeteredKL").value(hasItem(DEFAULT_MIN_UNMETERED_KL.intValue())));
+                .andExpect(jsonPath("$.[*].minUnmeteredKL").value(hasItem(DEFAULT_MIN_UNMETERED_KL.intValue())))
+                .andExpect(jsonPath("$.[*].slabBaseCharge").value(hasItem(DEFAULT_SLAB_BASE_CHARGE.intValue())));
     }
 
     @Test
@@ -261,7 +285,8 @@ public class TariffChargesResourceIntTest {
             .andExpect(jsonPath("$.slabMax").value(DEFAULT_SLAB_MAX))
             .andExpect(jsonPath("$.rate").value(DEFAULT_RATE.intValue()))
             .andExpect(jsonPath("$.minKL").value(DEFAULT_MIN_KL.intValue()))
-            .andExpect(jsonPath("$.minUnmeteredKL").value(DEFAULT_MIN_UNMETERED_KL.intValue()));
+            .andExpect(jsonPath("$.minUnmeteredKL").value(DEFAULT_MIN_UNMETERED_KL.intValue()))
+            .andExpect(jsonPath("$.slabBaseCharge").value(DEFAULT_SLAB_BASE_CHARGE.intValue()));
     }
 
     @Test
@@ -287,6 +312,7 @@ public class TariffChargesResourceIntTest {
         tariffCharges.setRate(UPDATED_RATE);
         tariffCharges.setMinKL(UPDATED_MIN_KL);
         tariffCharges.setMinUnmeteredKL(UPDATED_MIN_UNMETERED_KL);
+        tariffCharges.setSlabBaseCharge(UPDATED_SLAB_BASE_CHARGE);
 
         restTariffChargesMockMvc.perform(put("/api/tariffChargess")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -303,6 +329,7 @@ public class TariffChargesResourceIntTest {
         assertThat(testTariffCharges.getRate()).isEqualTo(UPDATED_RATE);
         assertThat(testTariffCharges.getMinKL()).isEqualTo(UPDATED_MIN_KL);
         assertThat(testTariffCharges.getMinUnmeteredKL()).isEqualTo(UPDATED_MIN_UNMETERED_KL);
+        assertThat(testTariffCharges.getSlabBaseCharge()).isEqualTo(UPDATED_SLAB_BASE_CHARGE);
     }
 
     @Test

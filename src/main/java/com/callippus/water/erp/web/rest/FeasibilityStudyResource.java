@@ -1,16 +1,26 @@
 package com.callippus.water.erp.web.rest;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
@@ -26,10 +37,15 @@ import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.FeasibilityStudyRepository;
+import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
 import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * REST controller for managing FeasibilityStudy.
@@ -46,6 +62,9 @@ public class FeasibilityStudyResource {
     @Inject
     private WorkflowService workflowService;
     
+	@Inject
+	private ReportsCustomRepository reportsRepository;
+	
     @Inject
     private ApplicationTxnRepository applicationTxnRepository;
     
@@ -191,4 +210,33 @@ public class FeasibilityStudyResource {
 				.map(result -> new ResponseEntity<>(feasibilityStudy, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
+    
+    /**
+     * Get By Feasibility Study Report
+     * @throws ParseException 
+     */
+    @RequestMapping(value = "/feasibilityStudy/report/{applicationNo}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getCustDetailsReport1(HttpServletResponse response,
+			@PathVariable Long applicationNo) throws JRException,
+			IOException, ParseException {
+    	log.debug("REST request to save Customer : {}", applicationNo);
+   	
+    	
+    	
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("applicationNo", applicationNo);
+	
+		JasperPrint jasperPrint = null;
+					 jasperPrint = reportsRepository
+					.generateReport("/reports/FeasibilityStudy.jasper", params);
+		
+		response.setContentType("application/x-pdf");
+		response.setHeader("Content-disposition",
+				"inline; filename=FeasibilityStudy.pdf");
+
+		final OutputStream outStream = response.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+     
 }

@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +36,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.PaymentTypes;
+import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.domain.User;
 import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
+import com.callippus.water.erp.repository.PaymentTypesRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
 import com.callippus.water.erp.repository.UserRepository;
 import com.callippus.water.erp.security.SecurityUtils;
@@ -70,6 +74,9 @@ public class CollDetailsResource {
 	
 	@Inject
 	private UserRepository userRepository;
+	
+	@Inject
+	private PaymentTypesRepository paymentTypesRepository;
 
 	/**
 	 * POST /collDetailss -> Create a new collDetails.
@@ -266,6 +273,35 @@ public class CollDetailsResource {
 					collDetails.getId().toString())).body(result);
 
 		}
+		
+		
+		 /**
+	     * Get All payment_types
+	     */
+	    @RequestMapping(value = "/paymentTypes/getAll",
+	            method = RequestMethod.GET,
+	            produces = MediaType.APPLICATION_JSON_VALUE)
+	    @Timed
+		public ResponseEntity<List<PaymentTypes>> getAllPaymentTypes()
+				throws Exception {
+	    	log.debug("REST request to getAllpayment_typess : {}");
+	    	
+	    	PaymentTypes cd = new PaymentTypes();
+	    	cd.setId(0l);
+	    	cd.setPaymentMode("All");;
+	    	List<PaymentTypes> coll = new ArrayList<PaymentTypes>();
+	    	coll.add(cd);
+	    	List<PaymentTypes> coll1= paymentTypesRepository.findAll();
+	    	coll.addAll(coll1);
+	    	
+	    	return Optional.ofNullable(coll)
+					.map(result -> new ResponseEntity<>(coll, HttpStatus.OK))
+					.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		}
+		
+		
+		
+
 	    /**
 	     * Revenue Summary Report
 	     */
