@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Receipt1" pageWidth="750" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="5e45bfab-77fb-4ce9-93eb-47d420129997">
+	<property name="ireport.zoom" value="1.1000000000000028"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="receiptId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select amount, bank_name, branch_name,check_or_dd_date,check_or_dd_no,receipt_date,a.id,p.payment_mode
+from receipt r,application_txn a,payment_types  p where r.application_txn_id=a.id and r.payment_types_id=p.id
+and r.id=$P{receiptId}]]>
+	</queryString>
+	<field name="amount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bank_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="branch_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="check_or_dd_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="check_or_dd_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="receipt_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="payment_mode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="153" y="30" width="555" height="23" backcolor="#006699" uuid="02f7e1c4-4126-49ee-891d-8310c566e55c"/>
+				<staticText>
+					<reportElement x="0" y="2" width="555" height="21" forecolor="#FFFFFF" uuid="a2c5c586-1f5b-4f4e-996e-efb40bb1f00b"/>
+					<textElement>
+						<font size="15" isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[       SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY ]]></text>
+				</staticText>
+			</frame>
+			<image>
+				<reportElement x="1" y="5" width="192" height="76" uuid="d4782a5a-025b-4e3e-afdf-9a34aa55b44e"/>
+				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="241" y="0" width="312" height="20" uuid="98116f30-5c47-4b55-89fa-9ab74542b13c"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Receipt Details]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="243" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="71" width="142" height="19" uuid="bdea765f-a1e4-4030-b774-40d5ea2e2482"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[iii) Branch Name                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="99" width="142" height="19" uuid="7dc29a70-8dd1-49e8-9545-d95a5fddf92f"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[iv) Check Or Dd Date    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="128" width="449" height="19" uuid="1f9daf01-11a6-4d95-bff7-f867533fda7e"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[v)  Check Or Dd Number
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="159" width="143" height="19" uuid="cfb75d5a-8894-4077-b622-bd2f595d0e1b"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[vi) Receipt Date		]]></text>
+			</staticText>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="170" y="9" width="484" height="21" isRemoveLineWhenBlank="true" uuid="6930abe4-dcb7-4f6b-9c93-3487d0e40d0f"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="173" y="39" width="484" height="24" isRemoveLineWhenBlank="true" uuid="679e7fc9-6c58-47a7-b13e-d9f17500849b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bank_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMMM-yyyy" isBlankWhenNull="true">
+				<reportElement x="173" y="99" width="484" height="19" isRemoveLineWhenBlank="true" uuid="3a1219da-9914-48d5-88bb-a309093884bb"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{check_or_dd_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement x="173" y="128" width="478" height="19" isRemoveLineWhenBlank="true" uuid="31c82cb1-3eaf-46ce-b27c-a348f3bc3b71"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{check_or_dd_no}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMMM-yyyy" isBlankWhenNull="true">
+				<reportElement x="173" y="159" width="484" height="19" isRemoveLineWhenBlank="true" uuid="1a1f0159-d904-40d4-96aa-1674c00b8e90"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receipt_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="40" width="142" height="19" uuid="6938040a-759e-4ae7-9a48-decc7712aa1e"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ii)  Bank Name             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="9" width="142" height="21" uuid="3aaf0684-e614-4f17-be4e-97f901649376"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[i) Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="9" width="16" height="21" uuid="ad786e7f-a925-4ea1-bf4e-425339998142"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="40" width="16" height="19" uuid="a52ae52b-8170-4741-b6fc-a4a754529f91"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="71" width="16" height="19" uuid="7c7877e6-1dc5-4b25-892b-a6fe5c342f07"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="99" width="16" height="19" uuid="3fc4ce1f-fba0-43cf-82de-0c8981b06515"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="128" width="16" height="19" uuid="6c595b51-8c6d-462c-bcb9-129e3d3a6631"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="159" width="16" height="19" uuid="f203ba6f-ca30-4121-8154-ff2da55cde51"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="173" y="71" width="488" height="19" isRemoveLineWhenBlank="true" uuid="0c1872ce-940e-4bf6-949d-ef787da316d7"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{branch_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="189" width="155" height="19" uuid="5b7c51d8-0068-4b00-b142-e1cd10e37b83"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  vii) Application Transaction]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="189" width="16" height="19" uuid="a17c7cb6-cc2f-4715-95f5-49c7d0c7936d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="173" y="189" width="488" height="19" isRemoveLineWhenBlank="true" uuid="79cf2aae-dd68-4a0f-b683-3f8a19bc1eea"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-4" y="220" width="144" height="19" uuid="c9094b30-6df5-439d-ac07-b1b8c52e7b88"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  viii) Payment Types]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="220" width="16" height="19" uuid="878e1e6d-ee21-4703-ad38-9357e60366a7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="173" y="220" width="498" height="19" isRemoveLineWhenBlank="true" uuid="feffe28e-1350-4375-9a6c-f1d1c6e43e4b"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment_mode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="155" y="10" width="200" height="13" uuid="91eb1f5a-8f2d-4c37-92c5-4d947234af4e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="568" y="10" width="142" height="13" backcolor="#E6E6E6" uuid="e1f0f795-39b1-432b-860c-66a5b74d1743"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="1" y="10" width="567" height="13" backcolor="#E6E6E6" uuid="16f73795-6c26-4dce-8569-1d47675877e7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="1" y="10" width="200" height="13" uuid="9ea16683-0d99-4a3d-8f1f-c10336038f54"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="230" y="12" width="298" height="21" uuid="bf37af24-a31b-422d-b048-6950ed876af8"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sorry No Data Found]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>
