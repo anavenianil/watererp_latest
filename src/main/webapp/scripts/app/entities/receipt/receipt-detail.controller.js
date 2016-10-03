@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('ReceiptDetailController', function ($scope, $rootScope, $stateParams, entity, Receipt, ApplicationTxn, PaymentTypes) {
+    .controller('ReceiptDetailController', function ($scope, $rootScope, $stateParams, entity, Receipt,  PaymentTypes) {
         $scope.receipt = entity;
         $scope.load = function (id) {
             Receipt.get({id: id}, function(result) {
