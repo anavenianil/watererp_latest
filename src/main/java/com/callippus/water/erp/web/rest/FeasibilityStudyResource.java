@@ -217,7 +217,7 @@ public class FeasibilityStudyResource {
      */
     @RequestMapping(value = "/feasibilityStudy/report/{applicationNo}", method = RequestMethod.GET)
 	@ResponseBody
-	public void getCustDetailsReport1(HttpServletResponse response,
+	public void getFeasibilityDetails(HttpServletResponse response,
 			@PathVariable Long applicationNo) throws JRException,
 			IOException, ParseException {
     	log.debug("REST request to save Customer : {}", applicationNo);

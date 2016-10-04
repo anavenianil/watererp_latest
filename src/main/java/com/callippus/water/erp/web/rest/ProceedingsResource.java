@@ -234,7 +234,7 @@ public class ProceedingsResource {
      */
     @RequestMapping(value = "/reports/proceedings/{pId}", method = RequestMethod.GET)
 	@ResponseBody
-	public void getCustDetailsReport1(HttpServletResponse response,
+	public void getProceedingDetails(HttpServletResponse response,
 			@PathVariable Long pId) throws JRException,
 			IOException, ParseException {
     	log.debug("REST request to save Customer : {}", pId);

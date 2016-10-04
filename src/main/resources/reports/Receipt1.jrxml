@@ -1,45 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FeasibilityStudy" pageWidth="750" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="5e45bfab-77fb-4ce9-93eb-47d420129997">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Receipt1" pageWidth="750" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="5e45bfab-77fb-4ce9-93eb-47d420129997">
 	<property name="ireport.zoom" value="1.1000000000000028"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="applicationNo" class="java.lang.Long"/>
+	<parameter name="receiptId" class="java.lang.Long"/>
 	<queryString>
-		<![CDATA[select f.application_txn_id,concat(a.first_name,' ',a.last_name)fullName,d.division_name,s.street_name,j.first_name,f.prepared_date,f.zonal_head_approval_date,
-f.dept_head_inspected_date,operation_mangrapprove_date,(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_zonal_head_id=j.id  and f.application_txn_id=$P{applicationNo})ZonalHead,
-(select j.first_name from feasibility_study f,jhi_user j where f.inspection_by_department_head_id=j.id and f.application_txn_id=$P{applicationNo})DeptHead,
-(select j.first_name from feasibility_study f,jhi_user j where f.approved_by_operation_manager_id=j.id and f.application_txn_id=$P{applicationNo})OperationMgr
-from feasibility_study f, application_txn a, street_master s, jhi_user j, division_master d
-where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_master_id= s.id and f.prepared_by_id=j.id and f.application_txn_id=$P{applicationNo}]]>
+		<![CDATA[select amount, bank_name, branch_name,check_or_dd_date,check_or_dd_no,receipt_date,a.id,p.payment_mode
+from receipt r,application_txn a,payment_types  p where r.application_txn_id=a.id and r.payment_types_id=p.id
+and r.id=$P{receiptId}]]>
 	</queryString>
-	<field name="application_txn_id" class="java.lang.Long">
+	<field name="amount" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="fullName" class="java.lang.String"/>
-	<field name="division_name" class="java.lang.String">
+	<field name="bank_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="street_name" class="java.lang.String">
+	<field name="branch_name" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="first_name" class="java.lang.String">
+	<field name="check_or_dd_date" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="prepared_date" class="java.sql.Timestamp">
+	<field name="check_or_dd_no" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="zonal_head_approval_date" class="java.sql.Timestamp">
+	<field name="receipt_date" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="dept_head_inspected_date" class="java.sql.Timestamp">
+	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="operation_mangrapprove_date" class="java.sql.Timestamp">
+	<field name="payment_mode" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="ZonalHead" class="java.lang.String"/>
-	<field name="DeptHead" class="java.lang.String"/>
-	<field name="OperationMgr" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -56,7 +49,7 @@ where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_mast
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="7" y="2" width="192" height="76" uuid="d4782a5a-025b-4e3e-afdf-9a34aa55b44e"/>
+				<reportElement x="1" y="5" width="192" height="76" uuid="d4782a5a-025b-4e3e-afdf-9a34aa55b44e"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -68,7 +61,7 @@ where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_mast
 				<textElement>
 					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
-				<text><![CDATA[Feasibility Study Details]]></text>
+				<text><![CDATA[Receipt Details]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -76,27 +69,27 @@ where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_mast
 		<band height="2" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="449" splitType="Stretch">
+		<band height="243" splitType="Stretch">
 			<staticText>
 				<reportElement x="7" y="71" width="142" height="19" uuid="bdea765f-a1e4-4030-b774-40d5ea2e2482"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[iii) DMA                     ]]></text>
+				<text><![CDATA[iii) Branch Name                ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="7" y="99" width="142" height="19" uuid="7dc29a70-8dd1-49e8-9545-d95a5fddf92f"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[iv) Street Name           ]]></text>
+				<text><![CDATA[iv) Check Or Dd Date    ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="7" y="128" width="449" height="19" uuid="1f9daf01-11a6-4d95-bff7-f867533fda7e"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[v)  Prepared By
+				<text><![CDATA[v)  Check Or Dd Number
 ]]></text>
 			</staticText>
 			<staticText>
@@ -104,56 +97,56 @@ where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_mast
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[vi) Prepared Date			]]></text>
+				<text><![CDATA[vi) Receipt Date		]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
+			<textField pattern="###0.00" isBlankWhenNull="true">
 				<reportElement x="170" y="9" width="484" height="21" isRemoveLineWhenBlank="true" uuid="6930abe4-dcb7-4f6b-9c93-3487d0e40d0f"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{application_txn_id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="173" y="39" width="484" height="24" isRemoveLineWhenBlank="true" uuid="679e7fc9-6c58-47a7-b13e-d9f17500849b"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fullName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bank_name}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
+			<textField pattern="dd-MMMM-yyyy" isBlankWhenNull="true">
 				<reportElement x="173" y="99" width="484" height="19" isRemoveLineWhenBlank="true" uuid="3a1219da-9914-48d5-88bb-a309093884bb"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{street_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{check_or_dd_date}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
+			<textField pattern="###0" isBlankWhenNull="true">
 				<reportElement x="173" y="128" width="478" height="19" isRemoveLineWhenBlank="true" uuid="31c82cb1-3eaf-46ce-b27c-a348f3bc3b71"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{check_or_dd_no}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MMMM-yyyy" isBlankWhenNull="true">
 				<reportElement x="173" y="159" width="484" height="19" isRemoveLineWhenBlank="true" uuid="1a1f0159-d904-40d4-96aa-1674c00b8e90"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{prepared_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{receipt_date}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="7" y="40" width="142" height="19" uuid="6938040a-759e-4ae7-9a48-decc7712aa1e"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ii)  Full Name                      ]]></text>
+				<text><![CDATA[ii)  Bank Name             ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="9" width="142" height="21" uuid="3aaf0684-e614-4f17-be4e-97f901649376"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[i)  Application No]]></text>
+				<text><![CDATA[i) Amount]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="153" y="9" width="16" height="21" uuid="ad786e7f-a925-4ea1-bf4e-425339998142"/>
@@ -202,14 +195,14 @@ where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_mast
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{division_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{branch_name}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="189" width="126" height="19" uuid="5b7c51d8-0068-4b00-b142-e1cd10e37b83"/>
+				<reportElement x="0" y="189" width="155" height="19" uuid="5b7c51d8-0068-4b00-b142-e1cd10e37b83"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[  vii) Zonal Head]]></text>
+				<text><![CDATA[  vii) Application Transaction]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="153" y="189" width="16" height="19" uuid="a17c7cb6-cc2f-4715-95f5-49c7d0c7936d"/>
@@ -223,14 +216,14 @@ where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_mast
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ZonalHead}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="-4" y="220" width="144" height="19" uuid="c9094b30-6df5-439d-ac07-b1b8c52e7b88"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[  viii) Approval Date]]></text>
+				<text><![CDATA[  viii) Payment Types]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="153" y="220" width="16" height="19" uuid="878e1e6d-ee21-4703-ad38-9357e60366a7"/>
@@ -239,101 +232,17 @@ where f.application_txn_id=a.id  and f.division_master_id=d.id and f.street_mast
 				</textElement>
 				<text><![CDATA[:]]></text>
 			</staticText>
-			<textField pattern="dd-MMMM-yyyy" isBlankWhenNull="true">
+			<textField pattern="###0.00" isBlankWhenNull="true">
 				<reportElement x="173" y="220" width="498" height="19" isRemoveLineWhenBlank="true" uuid="feffe28e-1350-4375-9a6c-f1d1c6e43e4b"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{zonal_head_approval_date}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-7" y="251" width="136" height="19" uuid="ec0f9e00-6d81-434e-979e-28a3bbb6153b"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[    ix)  Department Head]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="153" y="251" width="16" height="19" uuid="c277adf3-8dc2-4d41-ad0b-8c9bc5afe187"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="173" y="251" width="502" height="19" isRemoveLineWhenBlank="true" uuid="60f8a8eb-a982-4d95-a87d-2e0380cbbd12"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{DeptHead}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-4" y="282" width="136" height="19" uuid="521d4fdc-6001-4e9f-b585-4c7505ad67c9"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[    x)  Inspected Date]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="153" y="282" width="16" height="19" uuid="81d65bab-2f5e-4010-8540-a6c504067228"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField pattern="dd-MMMM-yyyy" isBlankWhenNull="true">
-				<reportElement x="173" y="282" width="516" height="19" isRemoveLineWhenBlank="true" uuid="78808c13-3a7e-4278-a690-009ca71db962"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dept_head_inspected_date}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-4" y="311" width="157" height="19" uuid="adc69a76-b426-4705-957d-d75015cae3b2"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[  xi)  Operation Manager]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="153" y="311" width="16" height="19" uuid="5cbc2345-ab83-41a7-9998-421b3b5b9db0"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="173" y="311" width="516" height="19" isRemoveLineWhenBlank="true" uuid="00ca5195-a6d9-42f5-a712-adb4ac51b33f"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{OperationMgr}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-5" y="341" width="157" height="19" uuid="c0ce8166-fa32-4dfb-ab83-bdc2b403d34c"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ xii)  Approved Date]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="153" y="341" width="16" height="19" uuid="f66943cd-6f05-46ab-8856-d829e4e6ceb1"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField pattern="dd-MMMM-yyyy" isBlankWhenNull="true">
-				<reportElement x="173" y="341" width="516" height="19" isRemoveLineWhenBlank="true" uuid="6be4cb11-b98c-4b9a-aa80-cdad88204fb9"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{operation_mangrapprove_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{payment_mode}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="3" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="24" splitType="Stretch">
