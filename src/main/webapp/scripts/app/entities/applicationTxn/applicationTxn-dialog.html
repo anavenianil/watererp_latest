@@ -319,7 +319,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-3">
+								<!-- <div class="col-sm-3">
 									<div class="form-group"
 										ng-class="{'has-error': editForm.idNumber.$invalid && 
                                 (editForm.idNumber.$dirty || rc.editForm.attempted)}">
@@ -335,11 +335,11 @@
 												is required.</p>
 										</div>
 									</div>
-								</div>
-								<!-- <div class="col-sm-3">
+								</div> -->
+								<div class="col-sm-3">
 									<label>Click to upload Id Proof</label>
 									<button type="submit" class="btn btn-primary" ngf-drop=""
-										ngf-select="" ng-model="applicationTxn.idProof1"
+										ngf-select="" ng-model="applicationTxn.idNumber1"
 										ng-model-rejected="rejFiles"
 										ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
 										class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
@@ -347,49 +347,78 @@
 										ngf-drop-available="dropAvailable">
 										<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload Id Proof</span>
 									</button>
-								</div> -->
-								<!-- <div class="col-sm-3">
+								</div>
+								<div class="col-sm-3">
 									<ul style="clear: both" ng-show="rejFiles.length > 0"
 										class="response">
 										<li class="sel-file" ng-repeat="f in rejFiles">Rejected
 											file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
 									</ul>
 									<ul style="clear: both"
-										ng-show="applicationTxn.idProof1.length > 0" class="response">
-										<li class="sel-file" ng-repeat="f in applicationTxn.idProof1">
+										ng-show="applicationTxn.idNumber1.length > 0" class="response">
+										<li class="sel-file" ng-repeat="f in applicationTxn.idNumber1">
 											- {{f.name}} <a ng-show="f.result" href="javascript:void(0)"
 											ng-click="f.showDetail = !f.showDetail">details</a>
 										</li>
 									</ul>
-								</div> -->
+								</div>
 							</div>
 							<br>
 							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group" name="propertyDoc"
-										ng-class="{'has-error': editForm.propertyDoc.$invalid && 
-                                		(editForm.propertyDoc.$dirty || rc.editForm.attempted)}">
-										<label class="control-label" for="field_propertyDoc">Property
-											Ownership Document</label><font color="red"
-											ng-show="makeArr.length===0">&nbsp;(Select atleast
-											one.)</font><br> <input type="checkbox"
-											ng-model="applicationTxn.deedDoc"
-											ng-true-value="'Submitted: Tittle Deed/Offer letter'"
-											ng-false-value="'Not Submitted: Tittle Deed/Offer letter'"
-											ng-click="check(applicationTxn.deedDoc)">&nbsp;<span>Tittle
-											Deed/Offer letter </span> <br> <input type="checkbox"
-											ng-model="applicationTxn.agreementDoc"
-											ng-true-value="'Submitted :Rented Property-lease-Rent Agreement'"
-											ng-false-value="'Not Submitted : Rented Property-lease-Rent Agreement'"
-											ng-click="check(applicationTxn.agreementDoc)">&nbsp;<span>Rented
-											Property- lease-Rent Agreement </span>
-										<!-- <div
-											ng-show="(editForm.propertyDoc.$dirty || rc.editForm.attempted) && editForm.propertyDoc.$invalid">
-											<p class="help-block"
-												ng-show="editForm.propertyDoc.$error.required">Any one
-												check-box is required.</p>
-										</div> -->
-									</div>
+								<div class="col-sm-3">
+									<label>Deed Document</label>
+									<button type="submit" class="btn btn-primary" ngf-drop=""
+										ngf-select="" ng-model="applicationTxn.deedDoc1"
+										ng-model-rejected="rejFiles"
+										ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+										class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+										ngf-accept="'image/*,application/pdf'"
+										ngf-drop-available="dropAvailable">
+										<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
+											Deed Document</span>
+									</button>
+								</div>
+								<div class="col-sm-2">
+									<ul style="clear: both" ng-show="rejFiles.length > 0"
+										class="response">
+										<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+											file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+									</ul>
+									<ul style="clear: both"
+										ng-show="applicationTxn.deedDoc1.length > 0" class="response">
+										<li class="sel-file" ng-repeat="f in applicationTxn.deedDoc1">
+											- {{f.name}} <a ng-show="f.result" href="javascript:void(0)"
+											ng-click="f.showDetail = !f.showDetail">details</a>
+										</li>
+									</ul>
+								</div>
+								
+								<div class="col-sm-3">
+									<label>Agreement Document</label>
+									<button type="submit" class="btn btn-primary" ngf-drop=""
+										ngf-select="" ng-model="applicationTxn.agreementDoc1"
+										ng-model-rejected="rejFiles"
+										ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+										class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+										ngf-accept="'image/*,application/pdf'"
+										ngf-drop-available="dropAvailable">
+										<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
+											Agreement Document</span>
+									</button>
+								</div>
+								<div class="col-sm-2">
+									<ul style="clear: both" ng-show="rejFiles.length > 0"
+										class="response">
+										<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+											file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+									</ul>
+									<ul style="clear: both"
+										ng-show="applicationTxn.agreementDoc1.length > 0" class="response">
+										<li class="sel-file" ng-repeat="f in applicationTxn.agreementDoc1">
+											- {{f.name}} <a ng-show="f.result" href="javascript:void(0)"
+											ng-click="f.showDetail = !f.showDetail">details</a>
+										</li>
+									</ul>
 								</div>
 
 

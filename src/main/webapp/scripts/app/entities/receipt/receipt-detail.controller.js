@@ -3,6 +3,7 @@
 angular.module('watererpApp')
     .controller('ReceiptDetailController', function ($scope, $rootScope, $stateParams, entity, Receipt,  PaymentTypes) {
         $scope.receipt = entity;
+        //console.log(JSON.stringify(entity));
         $scope.load = function (id) {
             Receipt.get({id: id}, function(result) {
                 $scope.receipt = result;

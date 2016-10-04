@@ -7,7 +7,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +15,6 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,12 +36,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.common.CPSUtils;
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.CustMeterMapping;
 import com.callippus.water.erp.domain.FeasibilityStudy;
 import com.callippus.water.erp.domain.MeterDetails;
 import com.callippus.water.erp.domain.RequestWorkflowHistory;
-import com.callippus.water.erp.domain.ChangeCaseDTO;
+import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.mappings.CustDetailsMapper;
 import com.callippus.water.erp.repository.ApplicationTxnCustomRepository;
@@ -68,6 +64,10 @@ import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
 import com.callippus.water.erp.workflow.service.WorkflowService;
 import com.codahale.metrics.annotation.Timed;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * REST controller for managing ApplicationTxn.
@@ -123,6 +123,9 @@ public class ApplicationTxnResource {
     @Inject
     private PipeSizeMasterRepository pipeSizeMasterRepository;
     
+    @Inject
+    private TariffCategoryMasterRepository tariffCategoryMasterRepository;
+    
     /**
      * POST  /applicationTxns -> Create a new applicationTxn.
      */
@@ -141,10 +144,26 @@ public class ApplicationTxnResource {
         	applicationTxn.setStatus(0);
         }
         applicationTxn.setPhoto("");
+        applicationTxn.setIdNumber("");
+        applicationTxn.setDeedDoc("");
+        applicationTxn.setAgreementDoc("");
         applicationTxnRepository.save(applicationTxn);
-        HashMap<String,String> hm = new HashMap<String,String>();
-        hm.put("photo", "setPhoto");
-        UploadDownloadResource.setValues(applicationTxn, hm, request, applicationTxn.getId());
+        
+        HashMap<String,String> hm1 = new HashMap<String,String>();
+        hm1.put("photo", "setPhoto");
+        UploadDownloadResource.setValues(applicationTxn, hm1, request, applicationTxn.getId());
+        
+        HashMap<String,String> hm2 = new HashMap<String,String>();
+        hm2.put("idNumber", "setIdNumber");
+        UploadDownloadResource.setValues(applicationTxn, hm2, request, applicationTxn.getId());
+        
+        HashMap<String,String> hm3 = new HashMap<String,String>();
+        hm3.put("deedDoc", "setDeedDoc");
+        UploadDownloadResource.setValues(applicationTxn, hm3, request, applicationTxn.getId());
+        
+        HashMap<String,String> hm4 = new HashMap<String,String>();
+        hm4.put("agreementDoc", "setAgreementDoc");
+        UploadDownloadResource.setValues(applicationTxn, hm4, request, applicationTxn.getId());
         
         //ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         //this is for workflow for new request
@@ -214,14 +233,14 @@ public class ApplicationTxnResource {
         /*
          *for without metered after Submitting CAN
          */
-        if(applicationTxn.getUser() !=null){
+        if(applicationTxn.getUser() !=null || applicationTxn.getStatus()==7){
         	CustDetails custDetails = CustDetailsMapper.INSTANCE.appTxnToCustDetails(applicationTxn);            
             custDetails.setId(null);
             if(applicationTxn.getMiddleName()!=null){
-            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getMiddleName()+" "+applicationTxn.getLastName());
+            	custDetails.setConsName(applicationTxn.getFirstName().toUpperCase()+" "+applicationTxn.getMiddleName().toUpperCase()+" "+applicationTxn.getLastName().toUpperCase());
             }
             else{
-            	custDetails.setConsName(applicationTxn.getFirstName()+" "+applicationTxn.getLastName());
+            	custDetails.setConsName(applicationTxn.getFirstName().toUpperCase()+" "+applicationTxn.getLastName().toUpperCase());
             }
             custDetails.setSecName(applicationTxn.getDivisionMaster().getDivisionName()+" "+applicationTxn.getStreetMaster().getStreetName());
             custDetails.setPrevBillType("U");
@@ -241,7 +260,7 @@ public class ApplicationTxnResource {
             custDetailsRepository.save(custDetails);
             
         }
-        if(applicationTxn.getUser()!=null){
+        if(applicationTxn.getUser()!=null || applicationTxn.getStatus()==7){
         	 try{
         		 workflowService.setApprovedDate(ZonedDateTime.now());
         		 applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
@@ -578,10 +597,18 @@ public class ApplicationTxnResource {
 		log.debug("REST request to approve ApplicationTxn : {}", changeCaseDTO);
 		
 		ApplicationTxn applicationTxn = changeCaseDTO.getApplicationTxn();
+		//if meter is not available
+		if(applicationTxn.getMeterDetails() != null){
 			applicationTxn.setMeterNo(applicationTxn.getMeterDetails().getMeterId());
         	MeterDetails meterDetails = applicationTxn.getMeterDetails();
         		meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Processing"));
         		meterDetailsRepository.save(meterDetails);
+		}else{
+			//if meter is not available then category is changed to unmetered
+			Long  categoryID = applicationTxn.getTariffCategoryMaster().getId() + 6l;
+			applicationTxn.setTariffCategoryMaster(tariffCategoryMasterRepository.findOne(categoryID));
+		}
+			
 		applicationTxnRepository.save(applicationTxn);
        	 try{
        		 workflowService.setApprovedDate(ZonedDateTime.now());

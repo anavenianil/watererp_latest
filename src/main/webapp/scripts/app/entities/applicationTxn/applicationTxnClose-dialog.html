@@ -78,15 +78,34 @@
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-sm-4">
+							<!-- <div class="col-sm-4">
 								<label>Connection Date</label>
 								<h5 class="list-group-item-heading">{{changeCaseDTO.applicationTxn.connectionDate
 									| date:'mediumDate'}}</h5>
-							</div>
+							</div> -->
 							<div class="col-sm-4">
 								<label>Total Amount</label>
 								<h5 class="list-group-item-heading">{{changeCaseDTO.proceedings.grandTotal|
 									number:2}}</h5>
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_connectionDate">Connection
+									Date</label>
+								<div class="form-group">
+									<div class='input-group date' id='field_connectionDate'>
+										<input id="field_connectionDate" type="text"
+											class="form-control" uib-datepicker-popup="{{dateformat}}"
+											ng-model="changeCaseDTO.applicationTxn.connectionDate" max-date="dtmax"
+											is-open="datePickerForConnectionDate.status.opened"
+											ng-change="getEffectiveMonth(applicationTxn.connectionDate)"
+											required /> <span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForConnectionDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</fieldset>

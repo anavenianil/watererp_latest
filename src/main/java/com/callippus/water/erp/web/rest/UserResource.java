@@ -207,7 +207,7 @@ public class UserResource {
     
     
     /**
-     * Get All OrgRoleInstance
+     * Get All User
      */
     @RequestMapping(value = "/users/getAll",
             method = RequestMethod.GET,

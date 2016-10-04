@@ -61,14 +61,14 @@ angular.module('watererpApp')
         };
 
         $scope.save = function () {
-        	if($scope.makeArr.length>0){
+        	//if($scope.makeArr.length>0){
         		$scope.isSaving = true;
                 if ($scope.applicationTxn.id != null) {
                     ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
                 } else {
                     ApplicationTxn.save($scope.applicationTxn, onSaveSuccess, onSaveError);
                 }
-        	}
+        	//}
         };
 
         /*$scope.clear = function() {
@@ -140,7 +140,31 @@ angular.module('watererpApp')
         });
         
         
-        $scope.$watch('applicationTxn.idProof1', function (files) {
+        $scope.$watch('applicationTxn.idNumber1', function (files) {
+            $scope.formUpload = false;
+            if (files != null) {
+                for (var i = 0; i < files.length; i++) {
+                    $scope.errorMsg = null;
+                    (function (file) {
+                    	UploadUtil.uploadUsingUpload(file, $scope, 'waterErp');
+                    })(files[i]);
+                }
+            }
+        });
+        
+        $scope.$watch('applicationTxn.deedDoc1', function (files) {
+            $scope.formUpload = false;
+            if (files != null) {
+                for (var i = 0; i < files.length; i++) {
+                    $scope.errorMsg = null;
+                    (function (file) {
+                    	UploadUtil.uploadUsingUpload(file, $scope, 'waterErp');
+                    })(files[i]);
+                }
+            }
+        });
+        
+        $scope.$watch('applicationTxn.agreementDoc1', function (files) {
             $scope.formUpload = false;
             if (files != null) {
                 for (var i = 0; i < files.length; i++) {

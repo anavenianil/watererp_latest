@@ -69,7 +69,12 @@ angular.module('watererpApp').controller(
 			var onSaveSuccess = function(result) {
 				$scope.$emit('watererpApp:applicationTxnUpdate', result);
 				$scope.isSaving = false;
-				$state.go('applicationTxn');
+				//$state.go('applicationTxn');
+				$('#saveSuccessfullyModal').modal('show');
+				$scope.applicationTxn
+				$scope.applicationTxnId = $scope.applicationTxn.id;
+				$scope.can = $scope.applicationTxn.can;
+				
 			};
 
 			var onSaveError = function(result) {
@@ -79,15 +84,22 @@ angular.module('watererpApp').controller(
 			 //approve a request to create new customer
 			$scope.save = function(changeCaseDTO){
 				$scope.isSaving = true;
-	        	return $http.post('/api/applicationTxns/createNewCustomer',
-	        			changeCaseDTO).then(
-						function(response) {
-							$('#saveSuccessfullyModal').modal('show');
-							$scope.changeCaseDTO = response.data;
-							$scope.applicationTxnId = $scope.changeCaseDTO.applicationTxn.id;
-							$scope.can = $scope.changeCaseDTO.applicationTxn.can;
-							//$state.go('applicationTxn');
-						});
+				if(changeCaseDTO.applicationTxn.meterDetails == null){
+					$scope.applicationTxn = changeCaseDTO.applicationTxn;
+					ApplicationTxn.update($scope.applicationTxn, onSaveSuccess, onSaveError);
+					
+				}else{
+					return $http.post('/api/applicationTxns/createNewCustomer',
+		        			changeCaseDTO).then(
+							function(response) {
+								$('#saveSuccessfullyModal').modal('show');
+								$scope.changeCaseDTO = response.data;
+								$scope.applicationTxnId = $scope.changeCaseDTO.applicationTxn.id;
+								$scope.can = $scope.changeCaseDTO.applicationTxn.can;
+								//$state.go('applicationTxn');
+							});
+				}
+	        	
 	        }
 			
 			$scope.done = function(){

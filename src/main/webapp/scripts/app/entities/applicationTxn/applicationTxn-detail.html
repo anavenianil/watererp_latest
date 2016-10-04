@@ -58,6 +58,13 @@
 						ui-sref="feasibilityStudyDetailForAppTxn({applicationTxnId:applicationTxn.id})"
 						class="pull-right btn btn-info">View Feasibility</a>
 				</div>
+				
+				<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+				<div class="pull-right">
+					<a type="button" ng-show="applicationTxn.status >=5 && applicationTxn.user===null"
+						ui-sref="receiptDetailByApplicationTxn({applicationTxnId:applicationTxn.id})"
+						class="pull-right btn btn-info">View Receipt</a>
+				</div>
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
