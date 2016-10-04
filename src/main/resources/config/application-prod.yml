@@ -20,8 +20,8 @@ spring:
             enabled: false
     datasource:
         driver-class-name: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-        url: jdbc:mysql://localhost:3306/WaterERP?useUnicode=true&characterEncoding=utf8
-        name: WaterERP
+        url: jdbc:mysql://localhost:3306/kigoma?useUnicode=true&characterEncoding=utf8
+        name: kigoma
         username: root
         password: mysql
     jpa:
