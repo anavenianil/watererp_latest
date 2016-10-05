@@ -31,6 +31,7 @@ import com.callippus.water.erp.repository.MeterChangeRepository;
 import com.callippus.water.erp.repository.TariffMasterCustomRepository;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -931,6 +932,7 @@ public class BillingService {
 			log.debug("This is the EWURA Configuration:" + cd.toString());
 			BigDecimal ewura = ((bfd.getWaterCess().add(bfd.getSewerageCess()).add(bfd.getMeterServiceCharge()).add(bfd.getServiceCharge())).multiply(new BigDecimal(cd.getValue())))
 					.divide(new BigDecimal("100.0"));
+			ewura = ewura.setScale(3, RoundingMode.CEILING);
 
 			bfd.setSurcharge(ewura);
 
@@ -938,8 +940,11 @@ public class BillingService {
 					.findByCanAndStatusAndBillFullDetails(bill_details.getCan(), TxnStatus.INITIATED, null);
 
 			BigDecimal adjAmount = CPSConstants.ZERO;
+			adjAmount = adjAmount.setScale(3, RoundingMode.CEILING);
+			
 			for (Adjustments adj : adjustments) {
 				BigDecimal adj1 = adj.getAmount();
+				adj1.setScale(3, RoundingMode.CEILING);
 				adj.setBillFullDetails(bfd);
 				adj.setCustDetails(customer);
 				if (adj.getTransactionTypeMaster().getTypeOfTxn().equalsIgnoreCase("Credit"))
@@ -950,6 +955,7 @@ public class BillingService {
 
 			BigDecimal total = bfd.getWaterCess().add(bfd.getMeterServiceCharge()).add(bfd.getServiceCharge())
 					.add(bfd.getSewerageCess()).add(bfd.getSurcharge()).add(bfd.getOtherCharges()).add(adjAmount);
+			total = total.setScale(3, RoundingMode.CEILING);
 
 			log.debug("Total=Water Cess (" + bfd.getWaterCess() + ") " + "+ Meter Svc Charge("
 					+ bfd.getMeterServiceCharge() + ") " + "+ Service Charge (" + bfd.getServiceCharge() + ") "
@@ -960,6 +966,7 @@ public class BillingService {
 			bfd.setTotalAmount(total);
 
 			BigDecimal netPayable = bfd.getTotalAmount().add(bfd.getIntOnArrears()).add(bfd.getArrears());
+			netPayable = netPayable.setScale(3, RoundingMode.CEILING);
 			bfd.setNetPayableAmount(netPayable);
 			bfd.setDueAmount(total);
 
