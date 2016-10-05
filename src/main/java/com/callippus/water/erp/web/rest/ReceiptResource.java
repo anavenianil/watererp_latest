@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
 import com.callippus.water.erp.domain.Receipt;
+import com.callippus.water.erp.domain.ValveComplaint;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
@@ -156,6 +158,24 @@ public class ReceiptResource {
         receiptRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("receipt", id.toString())).build();
     }
+    
+    /**
+     * Get Receipt by applicationTxnId
+     */
+    @RequestMapping(value = "/receipts/getByApplicationTxnId",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<Receipt> getReceiptByApplicationTxnId(@Param("applicationTxnId") Long applicationTxnId)
+			throws Exception {
+    	log.debug("REST request to Receipt by applicationTxnId : {}");
+    	
+    	Receipt receipt = receiptRepository.findByApplicationTxn(applicationTxnRepository.findOne(applicationTxnId));
+    
+    	return Optional.ofNullable(receipt)
+				.map(result -> new ResponseEntity<>(receipt, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
     
     /**
      * Get By receipt Report

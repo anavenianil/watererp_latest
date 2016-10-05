@@ -162,5 +162,24 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('receiptDetailByApplicationTxn', {
+                parent: 'entity',
+                url: '/receiptForApplicationTxn/{applicationTxnId}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Receipt'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/receipt/receipt-detail.html',
+                        controller: 'ReceiptDetailController'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'Receipt', function($stateParams, Receipt) {
+                        return Receipt.getByApplicationTxn({applicationTxnId : $stateParams.applicationTxnId});
+                    }]
+                }
             });
     });

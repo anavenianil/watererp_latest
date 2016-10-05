@@ -123,6 +123,7 @@ angular.module('watererpApp')
         			photo : null, status: null, meterReading : null, connectionDate : null, remarks : null, meterNo: null, approvedDate : null,
         			meterDetails : null, user : null, requestAt : null
             };
+        	$scope.applicationTxn.requestedDate = new Date();
         }
         
         

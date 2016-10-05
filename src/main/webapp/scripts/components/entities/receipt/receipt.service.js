@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('Receipt', function ($resource, DateUtils) {
         return $resource('api/receipts/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getByApplicationTxn': { method: 'GET', params: {applicationTxnId: "applicationTxnId" }, url:'/api/receipts/getByApplicationTxnId', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

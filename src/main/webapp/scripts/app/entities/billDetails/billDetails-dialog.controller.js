@@ -6,7 +6,7 @@ angular
 				'BillDetailsDialogController',
 				function($scope, $state, $filter, BillDetails, BillDetailsSvc,
 						CustDetails, CustDetailsService, ParseLinks,
-						$stateParams, $http, User) {
+						$stateParams, $http, User, EmpMaster) {
 
 					$scope.recordExists = false;
 					$scope.alreadyRun = false;
@@ -31,8 +31,11 @@ angular
 						id : 'B',
 						name : 'BURNT'
 					} ];
-					$scope.users = User.query();
+					
+					//$scope.users = User.query();
 
+					$scope.users = EmpMaster.getEmpByDesig({designation:10});//Meter Reader
+					
 					$scope.billDetailsId = $stateParams.id;
 					if ($stateParams.id != null) {
 						BillDetails.get({
@@ -284,6 +287,7 @@ angular
 												$scope.billDetails.initialReading = $scope.custDetails.prevReading;
 												$scope.billDetails.prevMetReadingDt = $scope.custDetails.metReadingDt;
 											}
+											$scope.billDetails.tariffCategory = $scope.custDetails.tariffCategoryMaster.tariffCategory;
 
 										});
 					}

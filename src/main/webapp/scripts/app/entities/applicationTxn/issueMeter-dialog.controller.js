@@ -87,7 +87,7 @@ angular.module('watererpApp')
         
         $scope.closeDialague = function(){
         	$('#meterAvailabilityModal').modal('hide');
-        	$window.history.back();
+        	//$window.history.back();
         }
         
         $(document).ready(function() {
