@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.callippus.water.erp.domain.EmpRoleMapping;
+import com.callippus.water.erp.domain.StatusMaster;
 import com.callippus.water.erp.domain.User;
 
 /**
@@ -24,4 +25,9 @@ public interface EmpRoleMappingRepository extends JpaRepository<EmpRoleMapping,L
     EmpRoleMapping findByStatusMasterAndOrgRoleInstance( @Param("statusMasterId")Long statusMasterId, @Param("orgRoleInstanceId")Long orgRoleInstanceId);
 
     EmpRoleMapping findByUser(User user);
+    
+    List<EmpRoleMapping> findByUserAndStatusMaster(User user, StatusMaster statusMaster);
+    
+    @Query("select empRoleMapping from EmpRoleMapping empRoleMapping where statusMaster.id=2 and empRoleMapping.user.login = ?#{principal.username}")
+    List<EmpRoleMapping> findUser();
 }

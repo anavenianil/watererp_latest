@@ -25,9 +25,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.EmpRoleMapping;
+import com.callippus.water.erp.domain.RequestWorkflowHistory;
+import com.callippus.water.erp.domain.RequestWorkflowMapping;
+import com.callippus.water.erp.domain.Workflow;
 import com.callippus.water.erp.repository.EmpRoleMappingRepository;
+import com.callippus.water.erp.repository.OrgRoleInstanceRepository;
+import com.callippus.water.erp.repository.RequestMasterRepository;
+import com.callippus.water.erp.repository.RequestWorkflowHistoryRepository;
+import com.callippus.water.erp.repository.RequestWorkflowMappingRepository;
 import com.callippus.water.erp.repository.StatusMasterRepository;
 import com.callippus.water.erp.repository.UserRepository;
+import com.callippus.water.erp.repository.WorkflowRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
@@ -49,6 +57,21 @@ public class EmpRoleMappingResource {
     
     @Inject
     private StatusMasterRepository statusMasterRepository;
+    
+    @Inject
+    private RequestWorkflowHistoryRepository requestWorkflowHistoryRepository;
+    
+    @Inject
+    private RequestMasterRepository requestMasterRepository;
+    
+    @Inject
+    private RequestWorkflowMappingRepository requestWorkflowMappingRepository;
+    
+    @Inject
+    private WorkflowRepository workflowRepository;
+    
+    @Inject
+    private OrgRoleInstanceRepository orgRoleInstanceRepository;
     
     /**
      * POST  /empRoleMappings -> Create a new empRoleMapping.
@@ -160,6 +183,68 @@ public class EmpRoleMappingResource {
     	
     	EmpRoleMapping empRoleMapping = empRoleMappingRepository.findByUser(userRepository.findOne(userId));
     
+    	return Optional.ofNullable(empRoleMapping)
+				.map(result -> new ResponseEntity<>(empRoleMapping, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
+    
+    /**
+     * Get EmpRoleMapping by UserId
+     */
+    @RequestMapping(value = "/empRoleMappings/getMappingsByUserId",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<EmpRoleMapping>> getEmpRoleMappingsByUserId(@Param("userId") Long userId)
+			throws Exception {
+    	log.debug("REST request to EmpRoleMappings by userId : {}");
+    	
+    	List<EmpRoleMapping> empRoleMappings = empRoleMappingRepository.findByUserAndStatusMaster(userRepository.findOne(userId), statusMasterRepository.findOne(2l));
+    
+    	return Optional.ofNullable(empRoleMappings)
+				.map(result -> new ResponseEntity<>(empRoleMappings, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
+    
+   /* *//**
+     * Get EmpRoleMapping by Login
+     */
+    @RequestMapping(value = "/empRoleMappings/getMappingsByLogin",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<EmpRoleMapping> getEmpRoleMappingsByLogin(@Param("domainObjectId") Long domainObjectId, @Param("requestTypeId") Long requestTypeId)
+			throws Exception {
+    	log.debug("REST request to EmpRoleMappings by login : {}");
+    	
+    	
+    	RequestWorkflowMapping requestWorkflowMapping = requestWorkflowMappingRepository.findByRequestMaster(requestMasterRepository.findOne(requestTypeId));
+    	RequestWorkflowHistory rwh = requestWorkflowHistoryRepository.findTop1ByDomainObjectAndRequestMasterOrderByIdDesc(domainObjectId, requestMasterRepository.findOne(requestTypeId));
+    	Workflow workflow = workflowRepository.findByWorkflowMasterAndStageId(requestWorkflowMapping.getWorkflowMaster(), rwh.getRequestStage());
+    	
+    	EmpRoleMapping empRoleMapping = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, workflow.getAbsoluteToRole().getId());
+    	
+    	//List<EmpRoleMapping> empRoleMappings = empRoleMappingRepository.findUser();
+    
+    	return Optional.ofNullable(empRoleMapping)
+				.map(result -> new ResponseEntity<>(empRoleMapping, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
+    
+    
+    /**
+     * Get EmpRoleMapping by OrgRoleInstance
+     */
+    @RequestMapping(value = "/empRoleMappings/getMappingsByOrgRoleInstance",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<EmpRoleMapping> getMappingsByOrgRoleInstance(@Param("orgRoleInstanceId") Long orgRoleInstanceId)
+			throws Exception {
+    	log.debug("REST request to EmpRoleMappings by orgRoleInstanceId : {}");
+    	
+    	EmpRoleMapping empRoleMapping = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, orgRoleInstanceId);
+    	
     	return Optional.ofNullable(empRoleMapping)
 				.map(result -> new ResponseEntity<>(empRoleMapping, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.OK));

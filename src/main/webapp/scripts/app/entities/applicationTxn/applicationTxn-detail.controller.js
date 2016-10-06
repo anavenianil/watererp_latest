@@ -4,13 +4,21 @@ angular.module('watererpApp').controller(
 		'ApplicationTxnDetailController',
 		function($state, $scope, $rootScope, $stateParams, entity,
 				ApplicationTxn, ApplicationTxnService, RequestWorkflowHistory,
-				ParseLinks, Principal) {
+				ParseLinks, Principal, EmpRoleMapping) {
 			$scope.applicationTxn = entity;
 			
+			$scope.orgRole = {};
+			/*var onSaveSuccess = function (result) {
+				$scope.orgRole = result.orgRoleInstance;
+				console.log("Roles"+JSON.stringify($scope.orgRole));
+	        };
+			
+			console.log("$stateParams.id:"+$stateParams.id +", $stateParams.requestTypeId:"+$stateParams.requestTypeId);
+			EmpRoleMapping.getMappingsByLogin({domainObjectId:$stateParams.id, requestTypeId: $stateParams.requestTypeId}, onSaveSuccess);*/
 			
 
 			//$scope.orgRole = Principal.getOrgRole();
-			$scope.orgRole = {};
+			
 			Principal.getOrgRole().then(function(response) {
 				$scope.orgRole = response;
 			});

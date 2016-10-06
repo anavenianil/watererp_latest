@@ -110,4 +110,16 @@ angular.module('watererpApp').controller('ReceiptDialogController',
   	        window.onload = disableBack();
   	        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
   	    });
+    	
+    	
+    	$scope.getReceiptAmount = function(applicationTxnId){
+        	GetProceedings.get({
+    			applicationTxnId : applicationTxnId
+    		}, function(result) {
+    			$scope.proceedings = result;
+    			$scope.receipt.applicationTxn = $scope.proceedings.applicationTxn; 
+                $scope.receipt.amount = $scope.proceedings.grandTotal;
+                $scope.receipt.applicationTxn.remarks = "";
+    		});
+        }
 });
