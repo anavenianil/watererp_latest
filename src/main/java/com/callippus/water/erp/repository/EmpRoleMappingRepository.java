@@ -28,6 +28,10 @@ public interface EmpRoleMappingRepository extends JpaRepository<EmpRoleMapping,L
     
     List<EmpRoleMapping> findByUserAndStatusMaster(User user, StatusMaster statusMaster);
     
+    
+    @Query("select empRoleMapping from EmpRoleMapping empRoleMapping where empRoleMapping.statusMaster.id=2 and empRoleMapping.user.login = ?#{principal.username}")
+    EmpRoleMapping findByStatusMasterAndUser();
+    
     @Query("select empRoleMapping from EmpRoleMapping empRoleMapping where statusMaster.id=2 and empRoleMapping.user.login = ?#{principal.username}")
     List<EmpRoleMapping> findUser();
 }

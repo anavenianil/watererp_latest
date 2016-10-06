@@ -8,14 +8,12 @@ angular.module('watererpApp').controller(
 			$scope.applicationTxn = entity;
 			
 			$scope.orgRole = {};
-			/*var onSaveSuccess = function (result) {
-				$scope.orgRole = result.orgRoleInstance;
-				console.log("Roles"+JSON.stringify($scope.orgRole));
+			/*var onSaveSuccess = function (response) {
+				console.log("Show Button"+JSON.stringify(response));
 	        };
 			
-			console.log("$stateParams.id:"+$stateParams.id +", $stateParams.requestTypeId:"+$stateParams.requestTypeId);
-			EmpRoleMapping.getMappingsByLogin({domainObjectId:$stateParams.id, requestTypeId: $stateParams.requestTypeId}, onSaveSuccess);*/
-			
+			$scope.empRoleWorkflow = EmpRoleMapping.getMappingsByWorkflow({domainObjectId:$stateParams.id, requestTypeId: $stateParams.requestTypeId});
+			$scope.empLogin = EmpRoleMapping.getMappingsByLogin();*/
 
 			//$scope.orgRole = Principal.getOrgRole();
 			
@@ -72,6 +70,8 @@ angular.module('watererpApp').controller(
 
 			$scope.canDecline = function() {
 				var ret = false;
+				/*console.log("$scope.orgRole.id:"+$scope.orgRole.id);
+				console.log("$scope.applicationTxn.status:"+$scope.applicationTxn.status);*/
 				switch ($scope.applicationTxn.status) {
 				case 0:
 					if ($scope.orgRole.id === 9) //Technical Manager

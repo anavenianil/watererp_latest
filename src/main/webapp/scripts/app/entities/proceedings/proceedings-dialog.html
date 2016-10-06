@@ -124,7 +124,7 @@
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
 									name="ratePerShs" id="field_ratePerShs"
-									ng-model="item.ratePerShs" readonly />
+									ng-model="item.ratePerShs" ng-change="calculateRate()"/>
 							</div>
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
@@ -159,7 +159,7 @@
 					</div>
 				</div>
 				<br>
-				<hr>
+				<!-- <hr>
 				<div class="row">
 					<div class="col-sm-2">
 						<label for="field_supervisionPercent">Supervision (%)</label>
@@ -199,7 +199,7 @@
 							Survey (%)</label>
 					</div>
 					<div class="col-sm-1">
-						<!-- <label for="field_siteSurveyPercent">siteSurveyPercent</label> -->
+						<label for="field_siteSurveyPercent">siteSurveyPercent</label>
 						<input type="number" class="form-control" name="siteSurveyPercent"
 							id="field_siteSurveyPercent"
 							ng-model="proceedings.siteSurveyPercent" readonly />
@@ -210,7 +210,7 @@
 							ng-model="proceedings.siteSurvey" readonly />
 					</div>
 				</div>
-				<br>
+				<br> 
 				<hr>
 				<div class="row">
 					<div class="col-sm-9">
@@ -223,7 +223,7 @@
 							ng-model="proceedings.subTotalB" readonly />
 					</div>
 				</div>
-				<br>
+				<br> -->
 				<hr>
 				<div class="row">
 					<div class="col-sm-2">
@@ -243,7 +243,7 @@
 					</div>
 				</div>
 				<br>
-				<hr>
+				<!-- <hr>
 				<div class="row">
 					<div class="col-sm-9">
 						<label class="control-label" for="field_applicationFormFee">Application
@@ -255,7 +255,7 @@
 							ng-model="proceedings.applicationFormFee" readonly />
 					</div>
 				</div>
-				<br>
+				<br> -->
 				<hr>
 				<div class="row">
 					<div class="col-sm-9">

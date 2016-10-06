@@ -209,28 +209,42 @@ public class EmpRoleMappingResource {
    /* *//**
      * Get EmpRoleMapping by Login
      */
-    @RequestMapping(value = "/empRoleMappings/getMappingsByLogin",
+    @RequestMapping(value = "/empRoleMappings/getMappingsByWorkflow",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-	public ResponseEntity<EmpRoleMapping> getEmpRoleMappingsByLogin(@Param("domainObjectId") Long domainObjectId, @Param("requestTypeId") Long requestTypeId)
+	public ResponseEntity<EmpRoleMapping> getEmpRoleMappingsByWorkflow(@Param("domainObjectId") Long domainObjectId, @Param("requestTypeId") Long requestTypeId)
 			throws Exception {
-    	log.debug("REST request to EmpRoleMappings by login : {}");
-    	
+    	log.debug("REST request to EmpRoleMappings by Workflow : {}");
     	
     	RequestWorkflowMapping requestWorkflowMapping = requestWorkflowMappingRepository.findByRequestMaster(requestMasterRepository.findOne(requestTypeId));
     	RequestWorkflowHistory rwh = requestWorkflowHistoryRepository.findTop1ByDomainObjectAndRequestMasterOrderByIdDesc(domainObjectId, requestMasterRepository.findOne(requestTypeId));
     	Workflow workflow = workflowRepository.findByWorkflowMasterAndStageId(requestWorkflowMapping.getWorkflowMaster(), rwh.getRequestStage());
-    	
     	EmpRoleMapping empRoleMapping = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, workflow.getAbsoluteToRole().getId());
     	
-    	//List<EmpRoleMapping> empRoleMappings = empRoleMappingRepository.findUser();
-    
     	return Optional.ofNullable(empRoleMapping)
 				.map(result -> new ResponseEntity<>(empRoleMapping, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.OK));
 	}
     
+    
+    /**
+     * Get EmpRoleMapping by Login
+     */
+    @RequestMapping(value = "/empRoleMappings/getMappingsByLogin",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<EmpRoleMapping> getEmpRoleMappingsByLogin()
+			throws Exception {
+    	log.debug("REST request to EmpRoleMappings by login : {}");
+    	
+    	EmpRoleMapping byLoggidIn = empRoleMappingRepository.findByStatusMasterAndUser();
+    
+    	return Optional.ofNullable(byLoggidIn)
+				.map(result -> new ResponseEntity<>(byLoggidIn, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
     
     /**
      * Get EmpRoleMapping by OrgRoleInstance
@@ -249,4 +263,6 @@ public class EmpRoleMappingResource {
 				.map(result -> new ResponseEntity<>(empRoleMapping, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.OK));
 	}
+    
+    
 }
