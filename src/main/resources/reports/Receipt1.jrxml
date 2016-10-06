@@ -5,7 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="receiptId" class="java.lang.Long"/>
 	<queryString>
-		<![CDATA[select concat(a.first_name,' ',a.last_name)fullname,replace(a.dma,'\n',' ') dma,replace(c.address,'\n',' ') address,amount, bank_name, branch_name,check_or_dd_date,check_or_dd_no,receipt_date,a.id,p.payment_mode
+		<![CDATA[select concat(IFNULL(a.first_name,""),' ',IFNULL(a.middle_name,""),' ' ,IFNULL(a.last_name,"") ) fullname,replace(a.dma,'\n',' ') dma,replace(c.address,'\n',' ') address,amount, bank_name, branch_name,check_or_dd_date,check_or_dd_no,receipt_date,a.id,p.payment_mode
 from receipt r,application_txn a,payment_types  p ,cust_details c where r.application_txn_id=a.id and r.payment_types_id=p.id and c.can=a.can and r.id=$P{receiptId}]]>
 	</queryString>
 	<field name="fullname" class="java.lang.String"/>
@@ -55,7 +55,7 @@ from receipt r,application_txn a,payment_types  p ,cust_details c where r.applic
 				</staticText>
 			</frame>
 			<image>
-				<reportElement x="1" y="4" width="192" height="76" uuid="307db1c3-434d-46ac-8943-5ff70c3c084b"/>
+				<reportElement x="5" y="4" width="192" height="76" uuid="216cff49-60fc-42b8-bfc7-54bd072d5412"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -281,7 +281,7 @@ from receipt r,application_txn a,payment_types  p ,cust_details c where r.applic
 				<textFieldExpression><![CDATA[$F{fullname}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="173" y="29" width="478" height="20" uuid="cc0d8020-5b8d-4f85-a611-c9af6fb21d4d"/>
+				<reportElement x="171" y="29" width="478" height="20" uuid="cc0d8020-5b8d-4f85-a611-c9af6fb21d4d"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
