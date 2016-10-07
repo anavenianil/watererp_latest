@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.CollDetails;
+import com.callippus.water.erp.domain.EmpRoleMapping;
 import com.callippus.water.erp.domain.PaymentTypes;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.domain.User;
@@ -172,7 +174,7 @@ public class CollDetailsResource {
 		log.debug("REST request to get a page of CollDetailss");
 		Page<CollDetails> page;
 		if (txnStatus != null) {
-			page = collDetailsRepository.findByTxnStatus(pageable, txnStatus);
+			page = collDetailsRepository.findByTxnStatusOrderByIdDesc(pageable, txnStatus);
 		} else 
 			if(can != null) {
 				page = collDetailsRepository.findByCan(pageable, can);
@@ -321,8 +323,27 @@ public class CollDetailsResource {
 	    	response.setHeader("Content-disposition", "inline; filename=RevenueSummaryReport.pdf");
 	    	final OutputStream outStream = response.getOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
-	    	
 	    }
+	
+	    
+	    /**
+	     * Get CollDetails by CAN
+	     */
+	    @RequestMapping(value = "/collDetailss/getCollDetailsByCAN",
+	            method = RequestMethod.GET,
+	            produces = MediaType.APPLICATION_JSON_VALUE)
+	    @Timed
+		public ResponseEntity<List<CollDetails>> getCollDetailsByCan(@Param("can") String can)
+				throws Exception {
+	    	log.debug("REST request to collDetails by CAN : {}");
+	    	
+	    	List<CollDetails> collDetails = collDetailsRepository.findTop10ByCanOrderByIdDesc(can);
+	    	
+	    	return Optional.ofNullable(collDetails)
+					.map(result -> new ResponseEntity<>(collDetails, HttpStatus.OK))
+					.orElse(new ResponseEntity<>(HttpStatus.OK));
+		}
+	    
 	    
 	}
 	
