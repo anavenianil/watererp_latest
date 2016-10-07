@@ -201,5 +201,24 @@ angular.module('watererpApp')
                 },
                 resolve: {
                 }
+            })
+            .state('custDetailsByCAN', {
+                parent: 'entity',
+                url: '/custDetailsByCAN/{can}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'CustDetails'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/custDetails/custDetails-detail.html',
+                        controller: 'CustDetailsDetailController'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'CustDetails', function($stateParams, CustDetails) {
+                        return CustDetails.getCustDetailsByCan({can : $stateParams.can});
+                    }]
+                }
             });;
     });

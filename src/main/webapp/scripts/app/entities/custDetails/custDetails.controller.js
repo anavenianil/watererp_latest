@@ -126,7 +126,7 @@ angular.module('watererpApp')
 			$scope.custDetails.name = arr[1];
 			$scope.custDetails.address = arr[2];
 			$scope.custDetails.id = arr[3];
-			$state.go('custDetails.detail',{id:$scope.custDetails.id});
+			$state.go('custDetailsByCAN',{can:$scope.custDetails.can});
 			//$scope.load($scope.custDetails.id);
 		};
 		
