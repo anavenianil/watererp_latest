@@ -43,7 +43,10 @@
 				<fieldset>
 					<legend>Items Required</legend>
 					<div class="row">
-						<div class="col-sm-3">
+						<div class="col-sm-1">
+							<label class="control-label" for="field_organization">Provided</label>
+						</div>
+						<div class="col-sm-2">
 							<label for="field_materialMaster">Material Name</label>
 						</div>
 						<div class="col-sm-2">
@@ -66,7 +69,12 @@
 					<fieldset
 						ng-repeat="item in proceedings.itemRequireds track by $index">
 						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-1">
+								<input type="checkbox" class="form-control" name="providedItem"
+									id="field_providedItem" ng-model="item.providedItem" 
+									ng-change="calculateRate()"/>
+							</div>
+							<div class="col-sm-2">
 								<div class="form-group"
 									ng-class="{'has-error': editForm.materialMaster.$invalid && 
          							(editForm.materialMaster.$dirty || rc.editForm.attempted)}">
@@ -124,7 +132,7 @@
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"
 									name="ratePerShs" id="field_ratePerShs"
-									ng-model="item.ratePerShs" ng-change="calculateRate()"/>
+									ng-model="item.ratePerShs" ng-change="calculateRate()" />
 							</div>
 							<div class="col-sm-2">
 								<input type="number" class="form-control text-right"

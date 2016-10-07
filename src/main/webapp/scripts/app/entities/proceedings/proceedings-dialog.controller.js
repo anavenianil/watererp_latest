@@ -105,16 +105,24 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         //create array for items
         $scope.createItemArr = function(){
        		$scope.proceedings.itemRequireds[$scope.count]= {};
+       		$scope.proceedings.itemRequireds[$scope.count].providedItem = true;
        		$scope.count = $scope.count +1;
         }
         
         //calculations for proceedings
+        
         $scope.calculateRate = function(){
+        	$scope.notProvided = 0;
         	for(var i=0; i<$scope.proceedings.itemRequireds.length; i++){
         		var quantity = $scope.proceedings.itemRequireds[i].quantity;
         		var rate = $scope.proceedings.itemRequireds[i].ratePerShs;
         		$scope.proceedings.itemRequireds[i].amount = quantity * rate;
+        		
+        		if($scope.proceedings.itemRequireds[i].providedItem == false){
+        			$scope.notProvided = $scope.notProvided + $scope.proceedings.itemRequireds[i].amount;
+        		}
         	}
+        	console.log("Sum of not Provided material : "+$scope.notProvided);
         	$scope.proceedings.subTotalA = 0;
         	for(var i=0; i<$scope.proceedings.itemRequireds.length; i++){
         		$scope.proceedings.subTotalA = $scope.proceedings.subTotalA + $scope.proceedings.itemRequireds[i].amount;
@@ -126,7 +134,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         										+ $scope.proceedings.labourCharge +$scope.proceedings.siteSurvey;
         	$scope.proceedings.connectionFee = ($scope.proceedings.subTotalB * $scope.proceedings.connectionFeePercent)/100;
         	$scope.proceedings.grandTotal = $scope.proceedings.subTotalB + $scope.proceedings.connectionFee 
-        									+ $scope.proceedings.applicationFormFee;
+        									+ $scope.proceedings.applicationFormFee - $scope.notProvided;
         }
         
         //for removing items
