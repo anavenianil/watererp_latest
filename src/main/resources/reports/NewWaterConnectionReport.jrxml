@@ -55,7 +55,7 @@ date(c.conn_date) between date($P{fromDate}) and date($P{toDate})]]>
 	<title>
 		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="110" y="17" width="564" height="27" uuid="08825054-a973-40ee-8daf-89bf5540f4e6"/>
+				<reportElement x="110" y="17" width="586" height="27" uuid="08825054-a973-40ee-8daf-89bf5540f4e6"/>
 				<textElement>
 					<font fontName="SansSerif" size="16" isBold="true"/>
 				</textElement>

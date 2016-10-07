@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Application_txn" language="groovy" pageWidth="750" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="dda6da65-b38f-480d-bc59-fcdbc727f9cf">
 	<property name="ireport.zoom" value="0.9090909090909126"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<property name="ireport.callouts" value="##Tue May 03 14:47:11 IST 2016"/>
 	<parameter name="Id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR ID]]></parameterDescription>
@@ -181,14 +181,14 @@ a.id_proof_master_id=i.id and a.id=$P{Id}]]>
 				<textElement>
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[    AUTHORITY]]></text>
+				<text><![CDATA[    AUTHORITY ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="132" y="48" width="410" height="23" uuid="03f7b4c1-9d2d-4d03-9f63-992dc7eae754"/>
 				<textElement>
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[KIGOMA/UJIJI URBAN WATER SUPPLY AND SANIATATION]]></text>
+				<text><![CDATA[  SUMBAWANGA URBAN WATER SUPPLY AND SANITATION ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="239" y="119" width="326" height="23" uuid="a54a9779-bf17-4412-95d9-49da2e7a12db"/>

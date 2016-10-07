@@ -13,6 +13,11 @@ angular.module('watererpApp').controller(
 					$state.go('applicationTxn.new');
 				}
 			});*/
+			Principal.hasAuthority("ROLE_CUSTOMER").then(function(result) {
+				if (result) {
+					$state.go('customer.categoryChange');
+				}
+			});
 
 			$scope.loadAll = function() {
 

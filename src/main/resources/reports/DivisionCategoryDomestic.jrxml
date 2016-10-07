@@ -33,43 +33,54 @@ order by  sort_code]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="110" splitType="Stretch">
 			<staticText>
-				<reportElement x="234" y="30" width="412" height="34" uuid="e30f22cd-8f8e-4f09-9f14-bdeb566223e7"/>
+				<reportElement x="234" y="69" width="412" height="19" uuid="e30f22cd-8f8e-4f09-9f14-bdeb566223e7"/>
 				<textElement>
-					<font size="22" isBold="true"/>
+					<font size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[NUMBER OF  CATEGORY MASTERS]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="164" y="11" width="535" height="24" backcolor="#666666" uuid="87dd4cda-8f5c-4827-831e-42c24abde3b6"/>
+				<textElement>
+					<font size="15" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="177" height="81" uuid="f43be3f5-5b71-4d06-b5ff-e7b509bc746c"/>
+				<imageExpression><![CDATA["C:\\Users\\callippus\\Desktop\\watererp.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement x="183" y="10" width="152" height="28" uuid="ecdab5f2-5de0-46af-bc7a-8295c9b38408"/>
+				<reportElement x="183" y="10" width="152" height="17" uuid="ecdab5f2-5de0-46af-bc7a-8295c9b38408"/>
 				<textElement>
-					<font size="18"/>
+					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Category Masters]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="10" width="144" height="28" uuid="f4bd0e9a-9df0-4711-9296-18fdf5214596"/>
+				<reportElement x="10" y="10" width="144" height="17" uuid="f4bd0e9a-9df0-4711-9296-18fdf5214596"/>
 				<textElement>
-					<font size="18"/>
+					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Division Masters]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="718" y="10" width="67" height="28" uuid="f437bb25-f40f-478d-b0b1-f7a7443e586d"/>
+				<reportElement x="718" y="10" width="67" height="17" uuid="f437bb25-f40f-478d-b0b1-f7a7443e586d"/>
 				<textElement>
-					<font size="18"/>
+					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Total ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="412" y="10" width="88" height="28" uuid="ec6dd7c9-6d00-4629-96a9-5a2c20f50195"/>
+				<reportElement x="412" y="10" width="88" height="17" uuid="ec6dd7c9-6d00-4629-96a9-5a2c20f50195"/>
 				<textElement>
-					<font size="18" isBold="false"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Category]]></text>
 			</staticText>

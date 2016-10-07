@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReport" pageWidth="670" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="630" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillCollectionReport" pageWidth="680" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="640" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eb8d596-56d9-4d4b-a599-73500d1fc470">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -51,19 +51,15 @@ JOIN COLL_DETAILS COL ON C.CAN=COL.CAN JOIN PAYMENT_TYPES P ON COL.PAYMENT_TYPES
 	<title>
 		<band height="65">
 			<frame>
-				<reportElement mode="Opaque" x="112" y="18" width="503" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
+				<reportElement mode="Opaque" x="112" y="18" width="538" height="22" backcolor="#006699" uuid="72ee1a75-f9d7-4059-986d-8ef9fd31fa40"/>
 				<staticText>
-					<reportElement x="6" y="0" width="496" height="22" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
+					<reportElement x="6" y="0" width="532" height="22" forecolor="#FFFFFF" uuid="e075faf1-a12a-473b-9e2c-e4c054ed5fc2"/>
 					<textElement>
-						<font size="16" isBold="true" isUnderline="false"/>
+						<font size="15" isBold="true" isUnderline="false"/>
 					</textElement>
-					<text><![CDATA[    MAMALAKAYA MAJISAFI NA MAJITAKA MJINI KIGOMA/UJIJI]]></text>
+					<text><![CDATA[ SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY ]]></text>
 				</staticText>
 			</frame>
-			<image>
-				<reportElement x="2" y="1" width="117" height="63" uuid="2f4ac4f7-4fbe-42ba-b180-9e4747b04c49"/>
-				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>

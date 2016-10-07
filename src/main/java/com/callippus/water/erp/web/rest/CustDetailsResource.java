@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -284,13 +285,13 @@ public class CustDetailsResource {
 			IOException, ParseException {
     	log.debug("REST request to save Customer : {}", categoryId);
    	
-    	
+    	DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	
 		Map<String, Object> params = new HashMap<String,Object>();
 		params.put("dmaId", dmaId);
 		params.put("categoryId", categoryId);
-		params.put("fromDate", Date.from(fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-		params.put("toDate", Date.from(toDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		params.put("fromDate", fromDate.format(date_format));
+		params.put("toDate", toDate.format(date_format));
 		params.put("paymentId", paymentId);
 		JasperPrint jasperPrint = null;
 					 jasperPrint = reportsRepository
