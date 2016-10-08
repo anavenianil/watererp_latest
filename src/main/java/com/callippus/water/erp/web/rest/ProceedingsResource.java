@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,9 +33,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.FeasibilityReportDTO;
 import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.Proceedings;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
+import com.callippus.water.erp.repository.FeasibilityStudyRepository;
 import com.callippus.water.erp.repository.ItemRequiredRepository;
 import com.callippus.water.erp.repository.ProceedingsRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
@@ -74,6 +77,9 @@ public class ProceedingsResource {
     
 	@Inject
 	private ReportsCustomRepository reportsRepository;
+    
+    @Inject
+    private FeasibilityStudyRepository feasibilityStudyRepository;
     
     
     /**
@@ -200,7 +206,7 @@ public class ProceedingsResource {
         log.debug("REST request to get Proceedings : {}", applicationTxnId);
         ApplicationTxn applicationTxn = applicationTxnRepository.findOne(applicationTxnId);
         Proceedings proceedings = proceedingsRepository.findByApplicationTxn(applicationTxn);
-        List<ItemRequired> itemRequireds = itemRequiredRepository.findByProceedings(proceedings);
+        List<ItemRequired> itemRequireds = itemRequiredRepository.findByProceedingsAndPrividedFromStores(proceedings, true);
         proceedings.setItemRequireds(itemRequireds);
         return Optional.ofNullable(proceedings)
             .map(result -> new ResponseEntity<>(
@@ -254,5 +260,45 @@ public class ProceedingsResource {
 
 		final OutputStream outStream = response.getOutputStream();
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+	}
+    
+    
+    /**
+     * Get save Proceedings and feasibility
+     */
+    @RequestMapping(value = "/proceedingss/saveFeasibilityReport",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<Proceedings> saveFeasibilityReport(@RequestBody FeasibilityReportDTO feasibilityReportDTO)
+			throws Exception {
+    	log.debug("REST request to save Proceedings and feasibility : {}");
+    	
+    	ApplicationTxn applicationTxn = applicationTxnRepository.findOne(feasibilityReportDTO.getProceedings().getApplicationTxn().getId());
+    	applicationTxn.setDivisionMaster(feasibilityReportDTO.getFeasibilityStudy().getDivisionMaster());
+        applicationTxn.setStreetMaster(feasibilityReportDTO.getFeasibilityStudy().getStreetMaster());
+        applicationTxnRepository.save(applicationTxn);
+    	feasibilityReportDTO.getFeasibilityStudy().setApplicationTxn(applicationTxn);
+    	feasibilityStudyRepository.save(feasibilityReportDTO.getFeasibilityStudy());
+    	
+        List<ItemRequired> itemRequireds = feasibilityReportDTO.getProceedings().getItemRequireds();
+        Iterator<ItemRequired> iterator = itemRequireds.iterator();
+        while(iterator.hasNext()){
+          iterator.next().setApplicationTxn(applicationTxn);
+        }
+        
+        Proceedings proceedings = proceedingsRepository.save(feasibilityReportDTO.getProceedings());
+        try{
+        	workflowService.setApprovedDate(ZonedDateTime.now());
+        	applicationTxnWorkflowService.approveRequest(applicationTxn.getId(), applicationTxn.getRemarks());
+        }
+        catch(Exception e){
+        	e.printStackTrace();
+        }
+    	
+    	return Optional.ofNullable(proceedings)
+				.map(result -> new ResponseEntity<>(proceedings, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
 	}
 }

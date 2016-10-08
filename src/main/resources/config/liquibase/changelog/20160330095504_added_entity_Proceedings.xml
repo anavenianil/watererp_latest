@@ -47,6 +47,8 @@
             
             <column name="connection_fee_percent" type="decimal(20,3)"/>
             
+            <column name="deducted_amount" type="decimal(20,3)"/>
+            
             <column name="application_txn_id" type="bigint"/>
             <column name="pipe_size_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
