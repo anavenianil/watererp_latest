@@ -22,11 +22,13 @@
 				<label for="id">ID</label> <input type="text" class="form-control"
 					id="id" name="id" ng-model="empRoleMapping.id" readonly />
 			</div> -->
+			
+							<!-- ng-change="getByUser(empRoleMapping.user.id)" -->
 							<div class="col-sm-3">
 								<label for="field_user">Employee</label> <select
 									class="form-control" id="field_user" name="user"
 									ng-model="empRoleMapping.user"
-									ng-change="getByUser(empRoleMapping.user.id)"
+									
 									ng-options="user as user.firstName +' '+user.lastName+'('+user.login+')' for user in users track by user.id"
 									required>
 									<option value=""></option>
@@ -135,8 +137,8 @@
 							ng-click="clear()">
 							<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
 						</button>
-						<button type="submit" ng-disabled="editForm.$invalid || isSaving"
-							class="btn btn-primary">
+						<button type="button" ng-disabled="editForm.$invalid || isSaving"
+							class="btn btn-primary" ng-click="getByOrgId(empRoleMapping.orgRoleInstance.id)">
 							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
 						</button>
 					</div>
@@ -145,3 +147,29 @@
 		</div>
 	</div>
 </form>
+
+<div id="saveSuccessfullyModal" class="modal" name="saveForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="confirmForm">
+					<div class="modal-body">
+						<div class="alert alert-danger" ng-show="message!=null">
+							<strong>{{message}}</strong>
+						</div>
+						Do you want to delete the previous role and create new? 
+						
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal"
+							ng-click="clear()">
+							<span class="glyphicon glyphicon-danger"></span>&nbsp;<span>No</span>
+						</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal"
+							ng-click="save()">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp;<span>Yes</span>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>

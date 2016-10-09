@@ -36,7 +36,7 @@ public interface RequestWorkflowHistoryRepository extends JpaRepository<RequestW
 			@Param("assignedToId") Long assignedToId, @Param("requestMasterId") Long requestMasterId);
     
     
-    
+    RequestWorkflowHistory findTop1ByDomainObjectAndRequestMasterOrderByIdDesc(Long domainObject, RequestMaster requestMaster);
     /*List<RequestWorkflowHistory> findApprovedList(@Param("statuses") List<Long> statuses,
 			@Param("assignedToId") Long assignedToId, @Param("requestMasterId") Long requestMasterId);*/
 

@@ -52,6 +52,7 @@ angular.module('watererpApp').controller('EmpRoleMappingDialogController',
             $scope.$emit('watererpApp:empRoleMappingUpdate', result);
             //$uibModalInstance.close(result);
             $scope.isSaving = false;
+            $('#saveSuccessfullyModal').modal('hide');
             $state.go('empRoleMapping');
         };
 
@@ -102,4 +103,17 @@ angular.module('watererpApp').controller('EmpRoleMappingDialogController',
         	}
         	//console.log($scope.empMaster);
         }
+        $scope.empRoles = {};
+        $scope.empRoles.orRoleInstance = {};
+        $scope.empRoles.user = {};
+        $scope.getByOrgId = function(orgRoleInstanceId){
+        	$('#saveSuccessfullyModal').modal('show');
+        	EmpRoleMapping.getMappingsByOrgRoleInstance({orgRoleInstanceId:orgRoleInstanceId}, onRetrievalEmpRole);
+        }
+        
+        var onRetrievalEmpRole = function(result){
+        	$scope.message = "Role "+ result.orgRoleInstance.orgRoleName+ " is already assigned to "+result.user.firstName +" "+result.user.lastName+".";
+        }
+        
+        
 }/*]*/);

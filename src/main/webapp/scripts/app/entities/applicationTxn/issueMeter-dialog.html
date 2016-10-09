@@ -24,7 +24,7 @@
 										class="form-control" uib-datepicker-popup="{{dateformat}}"
 										ng-model="changeCaseDTO.applicationTxn.connectionDate"
 										is-open="datePickerForConnectionDate.status.opened"
-										max-date="dtmax" required /> <span class="input-group-btn">
+										max-date="dtmax" /> <span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											ng-click="datePickerForConnectionDateOpen($event)">
 											<i class="glyphicon glyphicon-calendar"></i>
@@ -40,8 +40,7 @@
 							<label for="field_meterDetails">Meter Details</label> <select
 								class="form-control" id="field_meterDetails" name="meterDetails"
 								ng-model="changeCaseDTO.applicationTxn.meterDetails"
-								ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id"
-								required>
+								ng-options="meterDetails as meterDetails.meterId for meterDetails in meterdetailss track by meterDetails.id">
 								<option value=""></option>
 							</select>
 						</div>
@@ -49,7 +48,7 @@
 							<label class="control-label" for="field_meterReading">Meter
 								Reading</label> <input type="text" class="form-control"
 								name="meterReading" id="field_meterReading"
-								ng-model="changeCaseDTO.applicationTxn.meterReading" required />
+								ng-model="changeCaseDTO.applicationTxn.meterReading" />
 						</div>
 					</div>
 					<br>

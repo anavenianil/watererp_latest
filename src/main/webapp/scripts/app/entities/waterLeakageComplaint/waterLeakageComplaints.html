@@ -56,7 +56,7 @@
 							<tr
 								ng-repeat="waterLeakageComplaint in waterLeakageComplaints track by waterLeakageComplaint.id">
 								<td><a
-									ui-sref="waterLeakageComplaint.detail({id:waterLeakageComplaint.id})">{{waterLeakageComplaint.id}}</a></td>
+									ui-sref="waterLeakageComplaintForGIS({id:waterLeakageComplaint.id})">{{waterLeakageComplaint.id}}</a></td>
 								<td>{{waterLeakageComplaint.leakageType}}</td>
 								<td>{{waterLeakageComplaint.coordinateX}}</td>
 								<td>{{waterLeakageComplaint.coordinateY}}</td>

@@ -82,6 +82,9 @@ public class ProceedingsResourceIntTest {
     private static final BigDecimal DEFAULT_CONNECTION_FEE_PERCENT = new BigDecimal(1);
     private static final BigDecimal UPDATED_CONNECTION_FEE_PERCENT = new BigDecimal(2);
 
+    private static final BigDecimal DEFAULT_DEDUCTED_AMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DEDUCTED_AMOUNT = new BigDecimal(2);
+
     @Inject
     private ProceedingsRepository proceedingsRepository;
 
@@ -121,6 +124,7 @@ public class ProceedingsResourceIntTest {
         proceedings.setLabourChargePercent(DEFAULT_LABOUR_CHARGE_PERCENT);
         proceedings.setSiteSurveyPercent(DEFAULT_SITE_SURVEY_PERCENT);
         proceedings.setConnectionFeePercent(DEFAULT_CONNECTION_FEE_PERCENT);
+        proceedings.setDeductedAmount(DEFAULT_DEDUCTED_AMOUNT);
     }
 
     @Test
@@ -152,6 +156,7 @@ public class ProceedingsResourceIntTest {
         assertThat(testProceedings.getLabourChargePercent()).isEqualTo(DEFAULT_LABOUR_CHARGE_PERCENT);
         assertThat(testProceedings.getSiteSurveyPercent()).isEqualTo(DEFAULT_SITE_SURVEY_PERCENT);
         assertThat(testProceedings.getConnectionFeePercent()).isEqualTo(DEFAULT_CONNECTION_FEE_PERCENT);
+        assertThat(testProceedings.getDeductedAmount()).isEqualTo(DEFAULT_DEDUCTED_AMOUNT);
     }
 
     @Test
@@ -177,7 +182,8 @@ public class ProceedingsResourceIntTest {
                 .andExpect(jsonPath("$.[*].supervisionPercent").value(hasItem(DEFAULT_SUPERVISION_PERCENT.intValue())))
                 .andExpect(jsonPath("$.[*].labourChargePercent").value(hasItem(DEFAULT_LABOUR_CHARGE_PERCENT.intValue())))
                 .andExpect(jsonPath("$.[*].siteSurveyPercent").value(hasItem(DEFAULT_SITE_SURVEY_PERCENT.intValue())))
-                .andExpect(jsonPath("$.[*].ConnectionFeePercent").value(hasItem(DEFAULT_CONNECTION_FEE_PERCENT.intValue())));
+                .andExpect(jsonPath("$.[*].connectionFeePercent").value(hasItem(DEFAULT_CONNECTION_FEE_PERCENT.intValue())))
+                .andExpect(jsonPath("$.[*].deductedAmount").value(hasItem(DEFAULT_DEDUCTED_AMOUNT.intValue())));
     }
 
     @Test
@@ -203,7 +209,8 @@ public class ProceedingsResourceIntTest {
             .andExpect(jsonPath("$.supervisionPercent").value(DEFAULT_SUPERVISION_PERCENT.intValue()))
             .andExpect(jsonPath("$.labourChargePercent").value(DEFAULT_LABOUR_CHARGE_PERCENT.intValue()))
             .andExpect(jsonPath("$.siteSurveyPercent").value(DEFAULT_SITE_SURVEY_PERCENT.intValue()))
-            .andExpect(jsonPath("$.ConnectionFeePercent").value(DEFAULT_CONNECTION_FEE_PERCENT.intValue()));
+            .andExpect(jsonPath("$.connectionFeePercent").value(DEFAULT_CONNECTION_FEE_PERCENT.intValue()))
+            .andExpect(jsonPath("$.deductedAmount").value(DEFAULT_DEDUCTED_AMOUNT.intValue()));
     }
 
     @Test
@@ -236,6 +243,7 @@ public class ProceedingsResourceIntTest {
         proceedings.setLabourChargePercent(UPDATED_LABOUR_CHARGE_PERCENT);
         proceedings.setSiteSurveyPercent(UPDATED_SITE_SURVEY_PERCENT);
         proceedings.setConnectionFeePercent(UPDATED_CONNECTION_FEE_PERCENT);
+        proceedings.setDeductedAmount(UPDATED_DEDUCTED_AMOUNT);
 
         restProceedingsMockMvc.perform(put("/api/proceedingss")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -259,6 +267,7 @@ public class ProceedingsResourceIntTest {
         assertThat(testProceedings.getLabourChargePercent()).isEqualTo(UPDATED_LABOUR_CHARGE_PERCENT);
         assertThat(testProceedings.getSiteSurveyPercent()).isEqualTo(UPDATED_SITE_SURVEY_PERCENT);
         assertThat(testProceedings.getConnectionFeePercent()).isEqualTo(UPDATED_CONNECTION_FEE_PERCENT);
+        assertThat(testProceedings.getDeductedAmount()).isEqualTo(UPDATED_DEDUCTED_AMOUNT);
     }
 
     @Test

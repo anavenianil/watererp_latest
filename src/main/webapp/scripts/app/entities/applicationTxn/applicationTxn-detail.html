@@ -48,15 +48,25 @@
 				</div>
 				<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 				<div class="pull-right">
-					<a type="button" ng-show="applicationTxn.status>=4 && applicationTxn.user===null"
+					<a type="button"
+						ng-show="applicationTxn.status>=1 && applicationTxn.user===null"
 						ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})"
 						class="btn btn-info pull-right">View BOM </a>
 				</div>
 				<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 				<div class="pull-right">
-					<a type="button" ng-show="applicationTxn.status >=3 && applicationTxn.user===null"
+					<a type="button"
+						ng-show="applicationTxn.status >=1 && applicationTxn.user===null"
 						ui-sref="feasibilityStudyDetailForAppTxn({applicationTxnId:applicationTxn.id})"
 						class="pull-right btn btn-info">View Feasibility</a>
+				</div>
+
+				<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+				<div class="pull-right">
+					<a type="button"
+						ng-show="applicationTxn.status >=4 && applicationTxn.user===null"
+						ui-sref="receiptDetailByApplicationTxn({applicationTxnId:applicationTxn.id})"
+						class="pull-right btn btn-info">View Receipt</a>
 				</div>
 			</div>
 			<div class="list-group">
@@ -77,7 +87,8 @@
 								<label>Customer Account Number(CAN)</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.can}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="applicationTxn.meterDetails.id!=null">
+							<div class="col-sm-3"
+								ng-if="applicationTxn.meterDetails.id!=null">
 								<label>Meter No.</label>
 								<h5 class="list-group-item-heading">{{applicationTxn.meterDetails.meterId}}</h5>
 							</div>
@@ -246,41 +257,31 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- ng-show="{{applicationTxn.status==0}}" -->
-		<!-- Technical Manager -->
+		<!-- Water Network Engineer  -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-if="applicationTxn.status === 0 && orgRole.id === 9" 
-			ng-click="getApplicationTxn(applicationTxn.id)">
-			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
-		</button>
-		
-		<!-- Water Network Engineer -->
-		<button type="button" class="btn btn-success pull-right"
-			ng-if="applicationTxn.status === 1 && orgRole.id === 14"
-			ng-click="getApplicationTxn(applicationTxn.id)">
-			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
-		</button>
-
-		<!-- Planning & Construction Engineer  -->
-		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===2 && orgRole.id === 16"
-			ui-sref="feasibilityStudyForAppTxn({applicationId:applicationTxn.id})">
-			<span class="glyphicon glyphicon-check"></span> &nbsp;Create
-			Feasibility
-		</button>
-
-		<!-- Technical Manager -->
-		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===3 && orgRole.id === 9"
+			ng-show="applicationTxn.status===0 && orgRole.id === 14"
 			ui-sref="proceedingsForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Create
 			Proceedings
 		</button>
-		
-		<!-- Rev. Ass. Acc. -->
+
+		<!-- Technical Manager -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===4 && orgRole.id === 23"
+			ng-if="applicationTxn.status === 1 && orgRole.id === 9"
+			ng-click="getApplicationTxn(applicationTxn.id)">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
+		</button>
+
+		<!-- Managing Director -->
+		<button type="button" class="btn btn-success pull-right"
+			ng-if="applicationTxn.status === 2 && orgRole.id === 4"
+			ng-click="getApplicationTxn(applicationTxn.id)">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
+		</button>
+
+		<!-- Cashier -->
+		<button type="button" class="btn btn-success pull-right"
+			ng-show="applicationTxn.status===3 && orgRole.id === 26"
 			ui-sref="proceedingsDetailForAppTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Review
 			Proceedings
@@ -288,32 +289,39 @@
 
 		<!-- Stores & Supplies Officer -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===5 && orgRole.id === 25"
+			ng-show="applicationTxn.status===4 && orgRole.id === 25"
 			ui-sref="itemRequiredForApplicationTxn({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Items
 		</button>
 
-		<!-- ui-sref="custMeterMappingForMeterAllot({applicationTxnId:applicationTxn.id})" -->
-		<!-- Planning & Construction Engineer -->
+		<!-- Credit Control Officer -->
 		<button type="button" class="btn btn-success pull-right"
-			ng-show="applicationTxn.status===6 && orgRole.id === 16"
+			ng-show="applicationTxn.status===5 && orgRole.id === 19"
 			ui-sref="applicationTxnIssueMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Issue Meter
 		</button>
+
+		<!-- Water Network Engineer -->
+		<button type="button" class="btn btn-success pull-right"
+			ng-if="applicationTxn.status === 6 && orgRole.id === 14"
+			ng-click="getApplicationTxn(applicationTxn.id)">
+			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
+		</button>
+
 
 		<!-- Billing Officer -->
 		<button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.status===7 && orgRole.id === 18"
 			ui-sref="applicationTxnClose({applicationTxnId:applicationTxn.id})">
-			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete
+			<span class="glyphicon glyphicon-check"></span> &nbsp;CAN Generate
 		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
-		<button type="button" class="btn btn-success pull-right"
+		<!-- <button type="button" class="btn btn-success pull-right"
 			ng-show="applicationTxn.user.id !=null && applicationTxn.status==1 && orgRole.id==18"
 			ui-sref="applicationTxnCloseWithoutMeter({applicationTxnId:applicationTxn.id})">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Complete
-		</button>
+		</button> -->
 		<button type="button" class="btn btn-danger pull-right"
 			ng-show="canDecline()" ng-disabled="isSaving"
 			ng-click="declineRequest(applicationTxn.id)">

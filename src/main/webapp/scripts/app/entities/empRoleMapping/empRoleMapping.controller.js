@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('EmpRoleMappingController', function ($scope, $state, EmpRoleMapping, ParseLinks) {
+    .controller('EmpRoleMappingController', function ($scope, $state, EmpRoleMapping, ParseLinks, User) {
 
         $scope.empRoleMappings = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 0;
+        $scope.users = User.getAll();
         $scope.loadAll = function() {
             EmpRoleMapping.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -42,4 +43,9 @@ angular.module('watererpApp')
                 id: null
             };
         };
+        
+        $scope.getByUser = function(userId){
+        	$scope.empRoleMappings = EmpRoleMapping.getMappingsByUserId({userId:userId});
+        }
+        
     });

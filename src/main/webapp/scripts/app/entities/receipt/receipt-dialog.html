@@ -1,4 +1,5 @@
-<form name="editForm"  rc-submit="save()" novalidate>
+
+<form name="editForm" rc-submit="save()" novalidate>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title pull-left">Create Receipt: {{receipt.id}}</h3>
@@ -13,11 +14,22 @@
 								class="form-control" id="id" name="id" ng-model="receipt.id"
 								readonly />
 						</div> -->
-						<div class="col-sm-4" ng-hide="true">
+						<!-- <div class="col-sm-4" ng-hide="true">
 							<label class="control-label" for="field_can">CAN No.</label> <input
 								type="text" class="form-control" name="can" id="field_can"
 								ng-model="receipt.applicationTxn.can" readonly />
+						</div> -->
+
+						<div class="col-sm-4 col-md-offset-4">
+							<input type="text" class="input-sm form-control"
+								id="applicationTxnId" placeholder="Search By Application No"
+								name="applicationTxnId" ng-model="applicationTxnId"
+								ng-change="getReceiptAmount(applicationTxnId)" />
 						</div>
+					</div>
+					<hr>
+					<br>
+					<div class="row">
 						<div class="col-sm-4">
 							<label class="control-label" for="field_receiptDate">Receipt
 								Date</label>
@@ -49,48 +61,53 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
-						<div class="form-group"
+							<div class="form-group"
 								ng-class="{'has-error': editForm.paymentTypes.$invalid && 
          (editForm.paymentTypes.$dirty || rc.editForm.attempted)}">
-							<label for="field_paymentTypes">Payment Type</label> <select
-								class="form-control" id="field_paymentTypes" name="paymentTypes"
-								ng-model="receipt.paymentTypes" ng-change="resetInstr(receipt.paymentTypes.paymentMode)"
-								ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id" required>
-								<option value=""></option>
-							</select>
+								<label for="field_paymentTypes">Payment Type</label> <select
+									class="form-control" id="field_paymentTypes"
+									name="paymentTypes" ng-model="receipt.paymentTypes"
+									ng-change="resetInstr(receipt.paymentTypes.paymentMode)"
+									ng-options="paymentTypes as paymentTypes.paymentMode for paymentTypes in paymenttypess track by paymentTypes.id"
+									required>
+									<option value=""></option>
+								</select>
 								<div
 									ng-show="(editForm.paymentTypes.$dirty || rc.editForm.attempted) && editForm.paymentTypes.$invalid">
 									<p class="help-block"
 										ng-show="editForm.paymentTypes.$error.required">This field
-										 is required.</p>
+										is required.</p>
 								</div>
-								</div>
+							</div>
 						</div>
 						<div class="col-sm-4">
-						<div class="form-group"
+							<div class="form-group"
 								ng-class="{'has-error': editForm.amount.$invalid && 
          (editForm.amount.$dirty || rc.editForm.attempted)}">
-							<label class="control-label" for="field_amount">Amount</label> <input
-								type="number" class="form-control" name="amount"
-								id="field_amount" ng-model="receipt.amount" readonly required />
-						
-						<div
+								<label class="control-label" for="field_amount">Amount</label> <input
+									type="number" class="form-control" name="amount"
+									id="field_amount" ng-model="receipt.amount" readonly required />
+
+								<div
 									ng-show="(editForm.amount.$dirty || rc.editForm.attempted) && editForm.amount.$invalid">
-									<p class="help-block"
-										ng-show="editForm.amount.$error.required">This field
-										 is required.</p>
-								</div></div></div>
+									<p class="help-block" ng-show="editForm.amount.$error.required">This
+										field is required.</p>
+								</div>
+							</div>
+						</div>
 						<div class="col-sm-4">
 							<label class="control-label" for="field_checkOrDdDate">Check/DD
 								Date</label>
-							<div class="form-group" 
-									ng-class="{'has-error':instrEnabled && editForm.checkOrDdDate.$invalid && 
+							<div class="form-group"
+								ng-class="{'has-error':instrEnabled && editForm.checkOrDdDate.$invalid && 
                                 (editForm.checkOrDdDate.$dirty || rc.editForm.attempted)}">
 								<div class='input-group date' id='field_checkOrDdDate'>
-									<input id="field_checkOrDdDate" type="text" name="checkOrDdDate"
-										class="form-control" uib-datepicker-popup="{{dateformat}}"
+									<input id="field_checkOrDdDate" type="text"
+										name="checkOrDdDate" class="form-control"
+										uib-datepicker-popup="{{dateformat}}"
 										ng-model="receipt.checkOrDdDate"
-										is-open="datePickerForCheckOrDdDate.status.opened" 	ng-required="instrEnabled" ng-disabled="!instrEnabled" 
+										is-open="datePickerForCheckOrDdDate.status.opened"
+										ng-required="instrEnabled" ng-disabled="!instrEnabled"
 										ng-disabled="receipt.paymentTypes.id===1" required /> <span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
@@ -100,85 +117,94 @@
 										</button>
 									</span>
 								</div>
-										<div
-										ng-show="(editForm.checkOrDdDate.$dirty || rc.editForm.attempted) && instrEnabled && editForm.checkOrDdDate.$invalid">
-										<p class="help-block"
-											ng-show="editForm.checkOrDdDate.$error.required" >This field is required.</p>
-                                     </div>
+								<div
+									ng-show="(editForm.checkOrDdDate.$dirty || rc.editForm.attempted) && instrEnabled && editForm.checkOrDdDate.$invalid">
+									<p class="help-block"
+										ng-show="editForm.checkOrDdDate.$error.required">This
+										field is required.</p>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
-						<div class="form-group" 
-									ng-class="{'has-error': instrEnabled && editForm.checkOrDdNo.$invalid && 
+							<div class="form-group"
+								ng-class="{'has-error': instrEnabled && editForm.checkOrDdNo.$invalid && 
                                 (editForm.checkOrDdNo.$dirty || rc.editForm.attempted)}">
-							<label class="control-label" for="field_checkOrDdNo">Check/DD
-								No.</label> <input type="text" class="form-control" name="checkOrDdNo"
-								id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo" ng-required="instrEnabled" ng-disabled="!instrEnabled"
-								ng-disabled="receipt.paymentTypes.id===1" required/>
-									<div
-										ng-show="(editForm.checkOrDdNo.$dirty || rc.editForm.attempted) && instrEnabled && editForm.checkOrDdNo.$invalid">
-										<p class="help-block"
-											ng-show="editForm.checkOrDdNo.$error.required" >This field is required.</p>
-                                     </div>
-									</div>
-						</div>
-						<div class="col-sm-4">
-						<div class="form-group" 
-									ng-class="{'has-error':instrEnabled && editForm.bankName.$invalid && 
-                                (editForm.bankName.$dirty || rc.editForm.attempted)}">
-							<label class="control-label" for="field_bankName">Bank
-								Name</label> <input type="text" class="form-control" name="bankName"
-								id="field_bankName" ng-model="receipt.bankName" ng-required="instrEnabled" ng-disabled="!instrEnabled"
-								ng-disabled="receipt.paymentTypes.id===1" required/>
+								<label class="control-label" for="field_checkOrDdNo">Check/DD
+									No.</label> <input type="text" class="form-control" name="checkOrDdNo"
+									id="field_checkOrDdNo" ng-model="receipt.checkOrDdNo"
+									ng-required="instrEnabled" ng-disabled="!instrEnabled"
+									ng-disabled="receipt.paymentTypes.id===1" required />
 								<div
-										ng-show="(editForm.bankName.$dirty || rc.editForm.attempted) && editForm.bankName.$invalid">
-										<p class="help-block"
-											ng-show="editForm.bankName.$error.required" >This field is required.</p>
-                                     </div>
-						</div></div>
-						<div class="col-sm-4">
-						<div class="form-group" 
-									ng-class="{'has-error': instrEnabled && editForm.branchName.$invalid && 
-                                (editForm.branchName.$dirty || rc.editForm.attempted)}">
-							<label class="control-label" for="field_branchName">Branch
-								Name</label> <input type="text" class="form-control" name="branchName"
-								id="field_branchName" ng-model="receipt.branchName" ng-required="instrEnabled" ng-disabled="!instrEnabled"
-								ng-disabled="receipt.paymentTypes.id===1" required />
-								<div
-										ng-show="(editForm.branchName.$dirty || rc.editForm.attempted) && instrEnabled && editForm.branchName.$invalid">
-										<p class="help-block"
-											ng-show="editForm.branchName.$error.required" >This field is required.</p>
-                                     </div>
+									ng-show="(editForm.checkOrDdNo.$dirty || rc.editForm.attempted) && instrEnabled && editForm.checkOrDdNo.$invalid">
+									<p class="help-block"
+										ng-show="editForm.checkOrDdNo.$error.required">This field
+										is required.</p>
 								</div>
-						</div>
-					</div>
-					</div>
-					<br>
-					<fieldset>
-						<legend></legend>
-						<div class="row">
-							<div class="col-sm-12">
-								<label class="control-label" for="field_remarks">Remarks</label>
-								<textarea rows="2" cols="30" class="form-control" name="remarks"
-									id="field_remarks" ng-model="receipt.applicationTxn.remarks" required></textarea>
 							</div>
 						</div>
-					</fieldset>
+						<div class="col-sm-4">
+							<div class="form-group"
+								ng-class="{'has-error':instrEnabled && editForm.bankName.$invalid && 
+                                (editForm.bankName.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_bankName">Bank
+									Name</label> <input type="text" class="form-control" name="bankName"
+									id="field_bankName" ng-model="receipt.bankName"
+									ng-required="instrEnabled" ng-disabled="!instrEnabled"
+									ng-disabled="receipt.paymentTypes.id===1" required />
+								<div
+									ng-show="(editForm.bankName.$dirty || rc.editForm.attempted) && editForm.bankName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.bankName.$error.required">This field is
+										required.</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group"
+								ng-class="{'has-error': instrEnabled && editForm.branchName.$invalid && 
+                                (editForm.branchName.$dirty || rc.editForm.attempted)}">
+								<label class="control-label" for="field_branchName">Branch
+									Name</label> <input type="text" class="form-control" name="branchName"
+									id="field_branchName" ng-model="receipt.branchName"
+									ng-required="instrEnabled" ng-disabled="!instrEnabled"
+									ng-disabled="receipt.paymentTypes.id===1" required />
+								<div
+									ng-show="(editForm.branchName.$dirty || rc.editForm.attempted) && instrEnabled && editForm.branchName.$invalid">
+									<p class="help-block"
+										ng-show="editForm.branchName.$error.required">This field
+										is required.</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" onclick="window.history.back()"
-						class="btn btn-info pull-left">
-						<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
-							Back</span>
-					</button>
-					<button type="submit" ng-enabled="editForm.$invalid || isSaving"
-						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-					</button>
-				</div>
+				<br>
+				<fieldset>
+					<legend></legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="control-label" for="field_remarks">Remarks</label>
+							<textarea rows="2" cols="30" class="form-control" name="remarks"
+								id="field_remarks" ng-model="receipt.applicationTxn.remarks"
+								required></textarea>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="modal-footer">
+				<button type="button" onclick="window.history.back()"
+					class="btn btn-info pull-left">
+					<span class="glyphicon glyphicon-arrow-left"></span> &nbsp; <span>
+						Back</span>
+				</button>
+				<button type="submit" ng-enabled="editForm.$invalid || isSaving"
+					class="btn btn-primary">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+				</button>
 			</div>
 		</div>
+	</div>
 	</div>
 </form>

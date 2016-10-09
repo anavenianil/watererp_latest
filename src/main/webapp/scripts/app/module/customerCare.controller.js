@@ -22,9 +22,15 @@ angular.module('watererpApp').controller(
 					$state.go('customerComplaints.new');
 				}
 			});
+			
+			Principal.hasAuthority("ROLE_GIS").then(function(result) {
+				console.log("This is the result:" + JSON.stringify(result));
+				if (result) {
+					$state.go('waterLeakageComplaint');
+				}
+			});
 
 			$scope.loadAll = function() {
-
 				ApplicationTxnService.getPendingRequests($stateParams.id).then(function(data) {
 					$scope.pendingRequests = data;
 				});

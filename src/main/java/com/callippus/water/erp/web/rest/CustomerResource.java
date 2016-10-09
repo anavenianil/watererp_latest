@@ -2,6 +2,7 @@ package com.callippus.water.erp.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.common.CPSConstants;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.Customer;
+import com.callippus.water.erp.domain.EmpRoleMapping;
 import com.callippus.water.erp.domain.ChangeCaseDTO;
 import com.callippus.water.erp.domain.enumeration.ChangeCaseStatus;
 import com.callippus.water.erp.domain.enumeration.ChangeCaseType;
@@ -338,6 +341,44 @@ public class CustomerResource {
 		return ResponseEntity.created(new URI("/api/nameChangeReceipt/"))
 				.headers(HeaderUtil.createEntityCreationAlert("customer", ""))
 				.body(null);
+	}
+    
+    
+    /**
+     * Get Customer Change Cases by requestedDate
+     */
+    @RequestMapping(value = "/customers/getByRequestedDate",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<Customer>> getByRequestedDate(@Param("requestedDate") ZonedDateTime requestedDate, @Param("changeCaseType") ChangeCaseType changeCaseType)
+			throws Exception {
+    	log.debug("REST request to Customer Change Cases by requestedDate : {}");
+    	
+    	List<Customer> customers = customerRepository.findByRequestedDateAndChangeTypeOrderByIdDesc(requestedDate.toLocalDate(), changeCaseType);
+    	
+    	return Optional.ofNullable(customers)
+				.map(result -> new ResponseEntity<>(customers, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
+    
+    
+    /**
+     * Get Customer Change Cases by Can and change type
+     */
+    @RequestMapping(value = "/customers/getByCanAndChangeType",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<List<Customer>> getByCanAndChangeTyoe(@Param("can") String can, @Param("changeCaseType") ChangeCaseType changeCaseType)
+			throws Exception {
+    	log.debug("REST request to Customer Change Cases by requestedDate : {}");
+    	
+    	List<Customer> customers = customerRepository.findByCanAndChangeTypeOrderByIdDesc(can, changeCaseType);
+    	
+    	return Optional.ofNullable(customers)
+				.map(result -> new ResponseEntity<>(customers, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
 	}
 }
 

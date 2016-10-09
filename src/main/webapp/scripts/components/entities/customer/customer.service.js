@@ -4,6 +4,8 @@ angular.module('watererpApp')
     .factory('Customer', function ($resource, DateUtils) {
         return $resource('api/customers/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getByRequestedDate': { method: 'GET', params: {requestedDate: "requestedDate", changeCaseType:"changeCaseType" }, url:'/api/customers/getByRequestedDate', isArray: true},
+            'getByCanAndChangeType': { method: 'GET', params: {can: "can", changeCaseType:"changeCaseType" }, url:'/api/customers/getByCanAndChangeType', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

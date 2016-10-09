@@ -189,14 +189,14 @@ where p.id=i.proceedings_id and i.uom_id= u.id and i.material_master_id= m.id  a
 	<title>
 		<band height="60" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="107" y="16" width="424" height="22" isPrintInFirstWholeBand="true" backcolor="#006699" uuid="7173d787-0d4b-4b8f-82bf-7813797de329"/>
+				<reportElement mode="Opaque" x="107" y="16" width="493" height="22" isPrintInFirstWholeBand="true" backcolor="#006699" uuid="7173d787-0d4b-4b8f-82bf-7813797de329"/>
 			</frame>
 			<staticText>
-				<reportElement x="107" y="16" width="424" height="22" forecolor="#FFFFFF" uuid="0a263314-545d-4ba1-b073-18e7ecaf31cd"/>
+				<reportElement x="107" y="16" width="493" height="22" forecolor="#FFFFFF" uuid="0a263314-545d-4ba1-b073-18e7ecaf31cd"/>
 				<textElement>
 					<font size="14" isBold="true" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[  MAMALAKA YA MAJISAFI NA USAFI MJINI KIGOMA/UJIJI]]></text>
+				<text><![CDATA[SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY]]></text>
 			</staticText>
 			<image>
 				<reportElement x="0" y="-2" width="192" height="61" uuid="5ca5b345-e5f2-4471-8d29-c1d097fc6a18"/>

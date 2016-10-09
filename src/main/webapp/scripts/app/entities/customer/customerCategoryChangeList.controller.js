@@ -9,24 +9,28 @@ angular.module('watererpApp')
         $scope.page = 0;
         $scope.customer = {};
         $scope.customer.ChangeCaseType="CONNECTIONCATEGORY";
-        $scope.loadAll = function() {
+        /*$scope.loadAll = function() {
             Customer.query({page: $scope.page, size: 20, changeType:$scope.customer.ChangeCaseType, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.customers.push(result[i]);
                 }
             });
-        };
+        };*/
+        console.log(new Date());
+        
+        $scope.customers = Customer.getByRequestedDate({requestedDate:new Date(), changeCaseType:"CONNECTIONCATEGORY"});
+        
         $scope.reset = function() {
             $scope.page = 0;
             $scope.customers = [];
-            $scope.loadAll();
+            //$scope.loadAll();
         };
         $scope.loadPage = function(page) {
             $scope.page = page;
-            $scope.loadAll();
+            //$scope.loadAll();
         };
-        $scope.loadAll();
+        //$scope.loadAll();
 
 
         $scope.refresh = function () {
@@ -62,7 +66,7 @@ angular.module('watererpApp')
         
         $scope.findByCANAndCategory = function(can) {
         	$scope.customers = [];
-            Customer.query({page: $scope.page, changeType:$scope.customer.changeType, can:can, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            Customer.query({page: $scope.page, changeType:$scope.customer.ChangeCaseType, can:can}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 for (var i = 0; i < result.length; i++) {
                     $scope.customers.push(result[i]);
@@ -95,8 +99,13 @@ angular.module('watererpApp')
 			$scope.custDetails.address = arr[2];
 			$scope.custInfo = "";
 			$scope.isValidCust = true;
-			$scope.findByCANAndCategory($scope.custDetails.can);
+			//$scope.findByCANAndCategory($scope.custDetails.can);
+			$scope.findByCan($scope.custDetails.can);
 		};
+		
+		$scope.findByCan = function(can){
+			$scope.customers = Customer.getByCanAndChangeType({can:can, changeCaseType:"CONNECTIONCATEGORY"});
+		}
 		
 		
     });

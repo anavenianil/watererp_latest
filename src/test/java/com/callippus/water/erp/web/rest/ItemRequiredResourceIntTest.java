@@ -55,6 +55,9 @@ public class ItemRequiredResourceIntTest {
     private static final BigDecimal DEFAULT_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_AMOUNT = new BigDecimal(2);
 
+    private static final Boolean DEFAULT_PRIVIDED_FROM_STORES = false;
+    private static final Boolean UPDATED_PRIVIDED_FROM_STORES = true;
+
     @Inject
     private ItemRequiredRepository itemRequiredRepository;
 
@@ -85,6 +88,7 @@ public class ItemRequiredResourceIntTest {
         itemRequired.setQuantity(DEFAULT_QUANTITY);
         itemRequired.setRatePerShs(DEFAULT_RATE_PER_SHS);
         itemRequired.setAmount(DEFAULT_AMOUNT);
+        itemRequired.setPrividedFromStores(DEFAULT_PRIVIDED_FROM_STORES);
     }
 
     @Test
@@ -107,6 +111,7 @@ public class ItemRequiredResourceIntTest {
         assertThat(testItemRequired.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testItemRequired.getRatePerShs()).isEqualTo(DEFAULT_RATE_PER_SHS);
         assertThat(testItemRequired.getAmount()).isEqualTo(DEFAULT_AMOUNT);
+        assertThat(testItemRequired.getPrividedFromStores()).isEqualTo(DEFAULT_PRIVIDED_FROM_STORES);
     }
 
     @Test
@@ -123,7 +128,8 @@ public class ItemRequiredResourceIntTest {
                 .andExpect(jsonPath("$.[*].provided").value(hasItem(DEFAULT_PROVIDED)))
                 .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
                 .andExpect(jsonPath("$.[*].ratePerShs").value(hasItem(DEFAULT_RATE_PER_SHS.intValue())))
-                .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())));
+                .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
+                .andExpect(jsonPath("$.[*].prividedFromStores").value(hasItem(DEFAULT_PRIVIDED_FROM_STORES.booleanValue())));
     }
 
     @Test
@@ -140,7 +146,8 @@ public class ItemRequiredResourceIntTest {
             .andExpect(jsonPath("$.provided").value(DEFAULT_PROVIDED))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
             .andExpect(jsonPath("$.ratePerShs").value(DEFAULT_RATE_PER_SHS.intValue()))
-            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()));
+            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
+            .andExpect(jsonPath("$.prividedFromStores").value(DEFAULT_PRIVIDED_FROM_STORES.booleanValue()));
     }
 
     @Test
@@ -164,6 +171,7 @@ public class ItemRequiredResourceIntTest {
         itemRequired.setQuantity(UPDATED_QUANTITY);
         itemRequired.setRatePerShs(UPDATED_RATE_PER_SHS);
         itemRequired.setAmount(UPDATED_AMOUNT);
+        itemRequired.setPrividedFromStores(UPDATED_PRIVIDED_FROM_STORES);
 
         restItemRequiredMockMvc.perform(put("/api/itemRequireds")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -178,6 +186,7 @@ public class ItemRequiredResourceIntTest {
         assertThat(testItemRequired.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testItemRequired.getRatePerShs()).isEqualTo(UPDATED_RATE_PER_SHS);
         assertThat(testItemRequired.getAmount()).isEqualTo(UPDATED_AMOUNT);
+        assertThat(testItemRequired.getPrividedFromStores()).isEqualTo(UPDATED_PRIVIDED_FROM_STORES);
     }
 
     @Test
