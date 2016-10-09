@@ -88,9 +88,14 @@ public class EmpRoleMappingResource {
         }
         empRoleMapping.setCreationDate(ZonedDateTime.now());
         empRoleMapping.setLastModifiedDate(ZonedDateTime.now());
-        
-        EmpRoleMapping empRoleMappingOld = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, 
-        		empRoleMapping.getOrgRoleInstance().getId());
+        EmpRoleMapping empRoleMappingOld;
+        try{
+        	empRoleMappingOld = empRoleMappingRepository.findByStatusMasterAndOrgRoleInstance(2l, 
+            		empRoleMapping.getOrgRoleInstance().getId());
+            
+        }catch(Exception e){
+        	empRoleMappingOld = null;
+        }
         if(empRoleMappingOld != null){
         	empRoleMappingOld.setStatusMaster(statusMasterRepository.findOne(1l));
             empRoleMappingRepository.save(empRoleMappingOld);
