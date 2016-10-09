@@ -50,18 +50,9 @@
 									</div>
 								</div>
 								<div class="col-sm-4">
-									<div class="form-group"
-										ng-class="{'has-error': editForm.name.$invalid && 
-                                		(editForm.name.$dirty || rc.editForm.attempted)}">
-										<label for="name">Name</label> <input type="text"
-											class="form-control" id="field_name" name="name"
-											ng-model="meterChange.name" required readonly />
-										<div
-											ng-show="(editForm.name.$dirty || rc.editForm.attempted) && editForm.name.$invalid">
-											<p class="help-block" ng-show="editForm.name.$error.required">This
-												field is required.</p>
-										</div>
-									</div>
+									<label for="name">Name</label> <input type="text"
+										class="form-control" id="field_name" name="name"
+										ng-model="meterChange.name" required readonly />
 								</div>
 								<div class="col-sm-4">
 									<label for="mobileNo">mobileNo</label> <input type="text"

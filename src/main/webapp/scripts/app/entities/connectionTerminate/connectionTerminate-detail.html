@@ -64,13 +64,50 @@
 					</div>
 				</fieldset>
 				<br>
-				<fieldset ng-show="status!=9">
+				<fieldset>
 					<legend>Meter Info.</legend>
 					<div class="row">
 						<div class="col-sm-3">
 							<label>Meter Id</label>
 							<h5 class="list-group-item-heading">{{custDetails.meterDetails.meterId}}</h5>
 						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_prevReading">Last
+								Meter Reading(billed)</label> <input type="number" class="form-control"
+								name="prevReading" id="field_prevReading"
+								ng-model="custDetails.prevReading" disabled />
+						</div>
+					</div>
+					<br>
+					<div class="row" ng-show="connectionTerminate.meterRecovered != null">
+						<!-- <div class="col-sm-2">
+							<label>Meter No</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterDetails.meterId}}</h5>
+						</div> -->
+						<div class="col-sm-3">
+							<label>Requested Date</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.requestDate
+								| date:'mediumDate'}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Meter Recovered</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecovered===0?'NOT RECOVERED':'YES RECOVERED'}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Recovered Date</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecoveredDate
+								| date:'mediumDate'}}</h5>
+						</div>
+						<!-- <div class="col-sm-3">
+							<label>Last Reading</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.lastMeterReading}}</h5>
+						</div> -->
+					</div>
+				</fieldset>
+				<br>
+				<fieldset ng-show="orgRole.id === 14">
+				<legend>Meter Info.</legend>
+					<div class="row" >
 						<div class="col-sm-3">
 							<label class="control-label" for="field_meterRecovered">Meter
 								Recovered</label>
@@ -85,12 +122,7 @@
 								</label>
 							</div>
 						</div>
-						<div class="col-sm-3">
-							<label class="control-label" for="field_prevReading">Last
-								Meter Reading(billed)</label> <input type="number" class="form-control"
-								name="prevReading" id="field_prevReading"
-								ng-model="custDetails.prevReading" disabled />
-						</div>
+
 						<div class="col-sm-3">
 							<label class="control-label" for="field_lastMeterReading">Final
 								Meter Reading</label> <input type="number" class="form-control"
@@ -99,8 +131,6 @@
 								ng-model="changeCaseDTO.connectionTerminate.lastMeterReading"
 								ng-blur="checkReading(custDetails.prevReading, changeCaseDTO.connectionTerminate.lastMeterReading)" />
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-3">
 							<label class="control-label" for="field_meterRecoveredDate">Meter
 								Recovered Date</label>
@@ -125,7 +155,7 @@
 					</div>
 				</fieldset>
 				<hr>
-				<fieldset ng-show="status!=9">
+				<fieldset ng-show="user.login === requestAt && requestStatus === 3">
 					<legend>Approval Details</legend>
 					<div class="row">
 						<div class="col-sm-3">
@@ -154,44 +184,21 @@
 						</div>
 					</div>
 				</fieldset>
-				<fieldset ng-show="canShow()">
-					<legend>Meter Info.</legend>
-					<div class="row">
-						<div class="col-sm-2">
-							<label>Meter No</label>
-							<h5 class="list-group-item-heading">{{connectionTerminate.meterDetails.meterId}}</h5>
-						</div>
-						<div class="col-sm-2">
-							<label>Requested Date</label>
-							<h5 class="list-group-item-heading">{{connectionTerminate.requestDate | date:'mediumDate'}}</h5>
-						</div>
-						<div class="col-sm-2">
-							<label>Meter Recovered</label>
-							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecovered}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Recovered Date</label>
-							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecoveredDate | date:'mediumDate'}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Last Reading</label>
-							<h5 class="list-group-item-heading">{{connectionTerminate.lastMeterReading}}</h5>
-						</div>
-					</div>
-				</fieldset>
+
 			</div>
 		</div>
 	</div>
 	<button type="button" class="btn btn-success pull-right"
-		ng-show="canDecline()" ng-click="approve(changeCaseDTO)">
+		ng-show="user.login === requestAt && requestStatus === 3"
+		ng-click="approve(changeCaseDTO)">
 		<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 	</button>
 
 	<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 	<button type="button" class="btn btn-danger pull-right"
-		ng-show="canDecline()" ng-disabled="isSaving"
-		ng-click="declineRequest(changeCaseDTO)">
+		ng-show="user.login === requestAt && requestStatus === 3"
+		ng-disabled="isSaving" ng-click="declineRequest(changeCaseDTO)">
 		<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 	</button>
 	<button type="submit" onclick="window.history.back()"
