@@ -122,7 +122,7 @@
 								<h5 class="list-group-item-heading">{{customer.changedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-if="customer.status==='PAYMENTNC' && orgRole.id==18">
+							<div class="col-sm-3" ng-show="user.login === requestAt && requestStatus === 3 && orgRole.id==18">
 							<div class="form-group"
 									ng-class="{'has-error': editForm.changedDate.$invalid && 
                                 (editForm.changedDate.$dirty || rc.editForm.attempted)}">
@@ -133,7 +133,7 @@
 										<input id="field_changedDate" type="text" class="form-control"
 											uib-datepicker-popup="{{dateformat}}" name="changedDate" placeholder="YYYY-MM-DD"	
 											ng-model="changeCaseDTO.customer.changedDate" max-date="maxDt"
-											is-open="datePickerForChangedDate.status.opened" required />
+											is-open="datePickerForChangedDate.status.opened" />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-default"
 												ng-click="datePickerForChangedDateOpen($event)">
@@ -155,7 +155,7 @@
 					<br>
 					<fieldset>
 						<legend></legend>
-						<div class="row" ng-if="canDecline()">
+						<div class="row" ng-show="user.login === requestAt && requestStatus === 3">
 							<div class="col-sm-3">
 							<div class="form-group"
 									ng-class="{'has-error': editForm.approvedDate.$invalid && 
@@ -204,7 +204,8 @@
 		<!-- Technical Manager -->
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="changeCaseDTO.customer.status === 'INITIATED' && orgRole.id === 9"
+			ng-show="user.login === requestAt && requestStatus === 3"
+			ng-hide = "orgRole.id === 26"
 			ng-click="approve(changeCaseDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
@@ -212,21 +213,15 @@
 		<!--  -->
 		<button type="button" class="btn btn-success pull-right" ng-disabled="isSaving"
 			ui-sref="receiptForNameChange({customerId:changeCaseDTO.customer.id})"
-			ng-if="changeCaseDTO.customer.status === 'PROCESSING' && orgRole.id === 23">
+			ng-show="user.login === requestAt && requestStatus === 3 && orgRole.id === 26">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
 		
 		<!--  -->
-		<button type="button" class="btn btn-success pull-right"
-			ng-disabled="editForm.$invalid || isSaving"
-			ng-if="changeCaseDTO.customer.status === 'PAYMENTNC' && orgRole.id === 18"
-			ng-click="approve(changeCaseDTO)">
-			<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
-		</button>
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-danger pull-right"
-			ng-show="canDecline()" ng-disabled="editForm.$invalid || isSaving"
+			ng-show="user.login === requestAt && requestStatus === 3" ng-disabled="editForm.$invalid || isSaving"
 			ng-click="declineRequest(changeCaseDTO)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>
