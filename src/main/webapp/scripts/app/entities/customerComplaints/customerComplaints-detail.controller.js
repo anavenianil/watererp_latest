@@ -175,7 +175,7 @@ angular
 						var ret = false;
 						switch ($scope.customerComplaints.status) {
 						case 0:
-							if ($scope.orgRole.id === 20)	//ICT & Customer Care Officer
+							if ($scope.orgRole.id === 33)	//Customer Relation Officer Head
 								ret = true;
 							break;
 						case 1:
@@ -183,7 +183,7 @@ angular
 								ret = true;
 							break;
 						case 2:
-							if ($scope.orgRole.id === 11 || $scope.orgRole.id === 14)	//Finance Manager || Technical Zonal Supervisor
+							if ($scope.orgRole.id === 11)	//Finance Manager || Technical Zonal Supervisor
 								ret = true;
 							break;
 						case 3:
