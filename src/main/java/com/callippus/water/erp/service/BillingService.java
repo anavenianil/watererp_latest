@@ -225,13 +225,41 @@ public class BillingService {
 
 		return br;
 	}
-
 	
 	public void processDisconnection(CustDetails custDetails) 
 	{
 		try
 		{
-			process_bill(custDetails.getCan());			
+			
+			List<java.util.Map<String, Object>> charges = new ArrayList<java.util.Map<String, Object>>();
+			for(int i=0;i<3;i++)
+			{
+				Map<String, Object> charge = new HashMap<String,Object>();
+				charge.put("tariff_type_master_id", new Long(i));
+				
+				if(i != 2)
+					charge.put("rate", CPSConstants.ZERO);
+				else
+					charge.put("rate", new BigDecimal("520.00"));
+				
+				charges.add(charge);			
+			}
+
+			BillDetails bill_details = billDetailsRepository.findValidBillForCan(custDetails.getCan());
+			
+			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, custDetails);
+			bfd.setId(null);
+
+			bfd.setWaterCess(CPSConstants.ZERO);
+			bfd.setSewerageCess(CPSConstants.ZERO);
+			bfd.setServiceCharge(CPSConstants.ZERO);
+			bfd.setMeterServiceCharge(CPSConstants.ZERO);
+			bfd.setLockCharges(CPSConstants.ZERO);
+			bfd.setNoMeterAmt(CPSConstants.ZERO);
+
+			calc_charges_normal(charges, bill_details, custDetails, bfd, unitsKL);
+
+			process_bill_common(custDetails, bill_details, bfd, dFrom, dTo);			
 		}
 		catch(Exception e)
 		{
