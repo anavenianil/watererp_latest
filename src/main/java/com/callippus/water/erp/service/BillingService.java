@@ -230,6 +230,9 @@ public class BillingService {
 	{
 		try
 		{
+			initBill(custDetails.getCan()); // Is inited again in process_bill, but
+			// right now there is no better
+			// solution
 			
 			List<java.util.Map<String, Object>> charges = new ArrayList<java.util.Map<String, Object>>();
 			for(int i=0;i<3;i++)
@@ -237,10 +240,15 @@ public class BillingService {
 				Map<String, Object> charge = new HashMap<String,Object>();
 				charge.put("tariff_type_master_id", new Long(i));
 				
-				if(i != 2)
+				if(i != 2){
 					charge.put("rate", CPSConstants.ZERO);
+					charge.put("amount", CPSConstants.ZERO);
+				}
 				else
+				{
 					charge.put("rate", new BigDecimal("520.00"));
+					charge.put("amount", new BigDecimal("520.00"));
+				}
 				
 				charges.add(charge);			
 			}
@@ -257,6 +265,10 @@ public class BillingService {
 			bfd.setLockCharges(CPSConstants.ZERO);
 			bfd.setNoMeterAmt(CPSConstants.ZERO);
 
+			dFrom = custDetails.getPrevBillMonth().plusMonths(1);
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
+
+			
 			calc_charges_normal(charges, bill_details, custDetails, bfd, unitsKL);
 
 			process_bill_common(custDetails, bill_details, bfd, dFrom, dTo);			
