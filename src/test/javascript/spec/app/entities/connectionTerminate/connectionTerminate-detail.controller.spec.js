@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('ConnectionTerminate Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockConnectionTerminate, MockMeterDetails;
+        var MockEntity, MockConnectionTerminate, MockMeterDetails, MockTariffCategoryMaster;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,6 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockConnectionTerminate = jasmine.createSpy('MockConnectionTerminate');
             MockMeterDetails = jasmine.createSpy('MockMeterDetails');
+            MockTariffCategoryMaster = jasmine.createSpy('MockTariffCategoryMaster');
             
 
             var locals = {
@@ -20,7 +21,8 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
                 'ConnectionTerminate': MockConnectionTerminate,
-                'MeterDetails': MockMeterDetails
+                'MeterDetails': MockMeterDetails,
+                'TariffCategoryMaster': MockTariffCategoryMaster
             };
             createController = function() {
                 $injector.get('$controller')("ConnectionTerminateDetailController", locals);

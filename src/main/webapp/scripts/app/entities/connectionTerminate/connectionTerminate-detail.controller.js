@@ -8,6 +8,7 @@ angular.module('watererpApp')
         $scope.custDetails = {};
         $scope.maxDt = new Date();
         $scope.user = Principal.getLogonUser();
+        $scope.changeCaseDTO.approvedDate = new Date();
         
         Principal.getOrgRole().then(function(response) {
 			$scope.orgRole = response;

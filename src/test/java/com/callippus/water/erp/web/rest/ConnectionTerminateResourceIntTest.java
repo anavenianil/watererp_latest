@@ -32,6 +32,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.callippus.water.erp.domain.enumeration.TerminationType;
+import com.callippus.water.erp.domain.enumeration.MeterCondition;
+import com.callippus.water.erp.domain.enumeration.TerminationStatus;
 
 /**
  * Test class for the ConnectionTerminateResource REST controller.
@@ -58,6 +61,20 @@ public class ConnectionTerminateResourceIntTest {
 
     private static final LocalDate DEFAULT_METER_RECOVERED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_METER_RECOVERED_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Boolean DEFAULT_METERED_CONNECTION = false;
+    private static final Boolean UPDATED_METERED_CONNECTION = true;
+    private static final String DEFAULT_REASON = "AAAAA";
+    private static final String UPDATED_REASON = "BBBBB";
+    
+    private static final TerminationType DEFAULT_TERMINATION_TYPE = TerminationType.TEMPORARY;
+    private static final TerminationType UPDATED_TERMINATION_TYPE = TerminationType.PERMANENT;
+    
+    private static final MeterCondition DEFAULT_METER_CONDITION = MeterCondition.WORKING;
+    private static final MeterCondition UPDATED_METER_CONDITION = MeterCondition.FAULT;
+    
+    private static final TerminationStatus DEFAULT_STATUS = TerminationStatus.PENDING;
+    private static final TerminationStatus UPDATED_STATUS = TerminationStatus.INITIATED;
 
     @Inject
     private ConnectionTerminateRepository connectionTerminateRepository;
@@ -90,6 +107,11 @@ public class ConnectionTerminateResourceIntTest {
         connectionTerminate.setMeterRecovered(DEFAULT_METER_RECOVERED);
         connectionTerminate.setLastMeterReading(DEFAULT_LAST_METER_READING);
         connectionTerminate.setMeterRecoveredDate(DEFAULT_METER_RECOVERED_DATE);
+        connectionTerminate.setMeteredConnection(DEFAULT_METERED_CONNECTION);
+        connectionTerminate.setReason(DEFAULT_REASON);
+        connectionTerminate.setTerminationType(DEFAULT_TERMINATION_TYPE);
+        connectionTerminate.setMeterCondition(DEFAULT_METER_CONDITION);
+        connectionTerminate.setStatus(DEFAULT_STATUS);
     }
 
     @Test
@@ -113,6 +135,11 @@ public class ConnectionTerminateResourceIntTest {
         assertThat(testConnectionTerminate.getMeterRecovered()).isEqualTo(DEFAULT_METER_RECOVERED);
         assertThat(testConnectionTerminate.getLastMeterReading()).isEqualTo(DEFAULT_LAST_METER_READING);
         assertThat(testConnectionTerminate.getMeterRecoveredDate()).isEqualTo(DEFAULT_METER_RECOVERED_DATE);
+        assertThat(testConnectionTerminate.getMeteredConnection()).isEqualTo(DEFAULT_METERED_CONNECTION);
+        assertThat(testConnectionTerminate.getReason()).isEqualTo(DEFAULT_REASON);
+        assertThat(testConnectionTerminate.getTerminationType()).isEqualTo(DEFAULT_TERMINATION_TYPE);
+        assertThat(testConnectionTerminate.getMeterCondition()).isEqualTo(DEFAULT_METER_CONDITION);
+        assertThat(testConnectionTerminate.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -130,7 +157,12 @@ public class ConnectionTerminateResourceIntTest {
                 .andExpect(jsonPath("$.[*].requestDate").value(hasItem(DEFAULT_REQUEST_DATE.toString())))
                 .andExpect(jsonPath("$.[*].meterRecovered").value(hasItem(DEFAULT_METER_RECOVERED.booleanValue())))
                 .andExpect(jsonPath("$.[*].lastMeterReading").value(hasItem(DEFAULT_LAST_METER_READING.intValue())))
-                .andExpect(jsonPath("$.[*].meterRecoveredDate").value(hasItem(DEFAULT_METER_RECOVERED_DATE.toString())));
+                .andExpect(jsonPath("$.[*].meterRecoveredDate").value(hasItem(DEFAULT_METER_RECOVERED_DATE.toString())))
+                .andExpect(jsonPath("$.[*].meteredConnection").value(hasItem(DEFAULT_METERED_CONNECTION.booleanValue())))
+                .andExpect(jsonPath("$.[*].reason").value(hasItem(DEFAULT_REASON.toString())))
+                .andExpect(jsonPath("$.[*].terminationType").value(hasItem(DEFAULT_TERMINATION_TYPE.toString())))
+                .andExpect(jsonPath("$.[*].meterCondition").value(hasItem(DEFAULT_METER_CONDITION.toString())))
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -148,7 +180,12 @@ public class ConnectionTerminateResourceIntTest {
             .andExpect(jsonPath("$.requestDate").value(DEFAULT_REQUEST_DATE.toString()))
             .andExpect(jsonPath("$.meterRecovered").value(DEFAULT_METER_RECOVERED.booleanValue()))
             .andExpect(jsonPath("$.lastMeterReading").value(DEFAULT_LAST_METER_READING.intValue()))
-            .andExpect(jsonPath("$.meterRecoveredDate").value(DEFAULT_METER_RECOVERED_DATE.toString()));
+            .andExpect(jsonPath("$.meterRecoveredDate").value(DEFAULT_METER_RECOVERED_DATE.toString()))
+            .andExpect(jsonPath("$.meteredConnection").value(DEFAULT_METERED_CONNECTION.booleanValue()))
+            .andExpect(jsonPath("$.reason").value(DEFAULT_REASON.toString()))
+            .andExpect(jsonPath("$.terminationType").value(DEFAULT_TERMINATION_TYPE.toString()))
+            .andExpect(jsonPath("$.meterCondition").value(DEFAULT_METER_CONDITION.toString()))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -173,6 +210,11 @@ public class ConnectionTerminateResourceIntTest {
         connectionTerminate.setMeterRecovered(UPDATED_METER_RECOVERED);
         connectionTerminate.setLastMeterReading(UPDATED_LAST_METER_READING);
         connectionTerminate.setMeterRecoveredDate(UPDATED_METER_RECOVERED_DATE);
+        connectionTerminate.setMeteredConnection(UPDATED_METERED_CONNECTION);
+        connectionTerminate.setReason(UPDATED_REASON);
+        connectionTerminate.setTerminationType(UPDATED_TERMINATION_TYPE);
+        connectionTerminate.setMeterCondition(UPDATED_METER_CONDITION);
+        connectionTerminate.setStatus(UPDATED_STATUS);
 
         restConnectionTerminateMockMvc.perform(put("/api/connectionTerminates")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -188,6 +230,11 @@ public class ConnectionTerminateResourceIntTest {
         assertThat(testConnectionTerminate.getMeterRecovered()).isEqualTo(UPDATED_METER_RECOVERED);
         assertThat(testConnectionTerminate.getLastMeterReading()).isEqualTo(UPDATED_LAST_METER_READING);
         assertThat(testConnectionTerminate.getMeterRecoveredDate()).isEqualTo(UPDATED_METER_RECOVERED_DATE);
+        assertThat(testConnectionTerminate.getMeteredConnection()).isEqualTo(UPDATED_METERED_CONNECTION);
+        assertThat(testConnectionTerminate.getReason()).isEqualTo(UPDATED_REASON);
+        assertThat(testConnectionTerminate.getTerminationType()).isEqualTo(UPDATED_TERMINATION_TYPE);
+        assertThat(testConnectionTerminate.getMeterCondition()).isEqualTo(UPDATED_METER_CONDITION);
+        assertThat(testConnectionTerminate.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

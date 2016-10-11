@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/custDetailss',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustDetailss'
                 },
                 views: {
@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/custDetails/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustDetails'
                 },
                 views: {
@@ -206,7 +206,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/custDetailsByCAN/{can}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustDetails'
                 },
                 views: {

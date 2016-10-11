@@ -11,6 +11,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import com.callippus.water.erp.domain.enumeration.TerminationType;
+
+import com.callippus.water.erp.domain.enumeration.MeterCondition;
+
+import com.callippus.water.erp.domain.enumeration.TerminationStatus;
+
 /**
  * A ConnectionTerminate.
  */
@@ -38,9 +44,31 @@ public class ConnectionTerminate implements Serializable {
     @Column(name = "meter_recovered_date")
     private LocalDate meterRecoveredDate;
     
+    @Column(name = "metered_connection")
+    private Boolean meteredConnection;
+    
+    @Column(name = "reason")
+    private String reason;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "termination_type")
+    private TerminationType terminationType;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "meter_condition")
+    private MeterCondition meterCondition;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private TerminationStatus status;
+    
     @ManyToOne
     @JoinColumn(name = "meter_details_id")
     private MeterDetails meterDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "tariff_category_master_id")
+    private TariffCategoryMaster tariffCategoryMaster;
 
     public Long getId() {
         return id;
@@ -90,12 +118,60 @@ public class ConnectionTerminate implements Serializable {
         this.meterRecoveredDate = meterRecoveredDate;
     }
 
+    public Boolean getMeteredConnection() {
+        return meteredConnection;
+    }
+    
+    public void setMeteredConnection(Boolean meteredConnection) {
+        this.meteredConnection = meteredConnection;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+    
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public TerminationType getTerminationType() {
+        return terminationType;
+    }
+    
+    public void setTerminationType(TerminationType terminationType) {
+        this.terminationType = terminationType;
+    }
+
+    public MeterCondition getMeterCondition() {
+        return meterCondition;
+    }
+    
+    public void setMeterCondition(MeterCondition meterCondition) {
+        this.meterCondition = meterCondition;
+    }
+
+    public TerminationStatus getStatus() {
+        return status;
+    }
+    
+    public void setStatus(TerminationStatus status) {
+        this.status = status;
+    }
+
     public MeterDetails getMeterDetails() {
         return meterDetails;
     }
 
     public void setMeterDetails(MeterDetails meterDetails) {
         this.meterDetails = meterDetails;
+    }
+
+    public TariffCategoryMaster getTariffCategoryMaster() {
+        return tariffCategoryMaster;
+    }
+
+    public void setTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster) {
+        this.tariffCategoryMaster = tariffCategoryMaster;
     }
 
     @Override
@@ -127,6 +203,11 @@ public class ConnectionTerminate implements Serializable {
             ", meterRecovered='" + meterRecovered + "'" +
             ", lastMeterReading='" + lastMeterReading + "'" +
             ", meterRecoveredDate='" + meterRecoveredDate + "'" +
+            ", meteredConnection='" + meteredConnection + "'" +
+            ", reason='" + reason + "'" +
+            ", terminationType='" + terminationType + "'" +
+            ", meterCondition='" + meterCondition + "'" +
+            ", status='" + status + "'" +
             '}';
     }
 }

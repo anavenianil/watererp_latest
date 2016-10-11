@@ -27,11 +27,22 @@
             
             <column name="meter_recovered" type="bit"/>
             
-            <column name="last_meter_reading" type="decimal(20,3)"/>
+            <column name="last_meter_reading" type="decimal(10,2)"/>
             
             <column name="meter_recovered_date" type="date"/>
             
+            <column name="metered_connection" type="bit"/>
+            
+            <column name="reason" type="varchar(255)"/>
+            
+            <column name="termination_type" type="varchar(255)"/>
+            
+            <column name="meter_condition" type="varchar(255)"/>
+            
+            <column name="status" type="varchar(255)"/>
+            
             <column name="meter_details_id" type="bigint"/>
+            <column name="tariff_category_master_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -40,6 +51,12 @@
                                  constraintName="fk_connectionterminate_meterdetails_id"
                                  referencedColumnNames="id"
                                  referencedTableName="meter_details"/>
+
+        <addForeignKeyConstraint baseColumnNames="tariff_category_master_id"
+                                 baseTableName="connection_terminate"
+                                 constraintName="fk_connectionterminate_tariffcategorymaster_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tariff_category_master"/>
 
     </changeSet>
 </databaseChangeLog>

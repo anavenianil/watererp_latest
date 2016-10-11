@@ -42,72 +42,115 @@
 		</div>
 		<div class="list-group">
 			<div class="list-group-item">
-				<fieldset>
-					<legend>Customer Details</legend>
+				<fieldset ng-if="custDetails.can">
+					<legend>Customer Information for CAN : {{custDetails.can}}</legend>
 					<div class="row">
 						<div class="col-sm-3">
-							<label>CAN</label>
-							<h5 class="list-group-item-heading">{{custDetails.can}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label>Name</label>
+							<label class="control-label" for="field_consName">Consumer
+								Name</label>
 							<h5 class="list-group-item-heading">{{custDetails.consName}}</h5>
 						</div>
 						<div class="col-sm-3">
-							<label>Mobile Number</label>
+							<label class="control-label" for="field_can">Dues</label>
+							<h5 class="list-group-item-heading">{{custDetails.arrears |
+								number :2}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_category">Category</label>
+							<h5 class="list-group-item-heading">{{custDetails.tariffCategoryMaster.tariffCategory}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_meterDetails">Meter
+								No. </label>
+							<h5 class="list-group-item-heading">{{custDetails.meterDetails.meterNo}}</h5>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_mobileNo">Mobile
+								No.</label>
 							<h5 class="list-group-item-heading">{{custDetails.mobileNo}}</h5>
 						</div>
 						<div class="col-sm-3">
-							<label>E-mail</label>
+							<label class="control-label" for="field_email">E-mail
+								Address</label>
 							<h5 class="list-group-item-heading">{{custDetails.email}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label for="field_divisionMaster">DMA</label>
+							<h5 class="list-group-item-heading">{{custDetails.divisionMaster.divisionName}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label for="field_streetMaster">Street</label>
+							<h5 class="list-group-item-heading">{{custDetails.streetMaster.streetName}}</h5>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_houseNo">House
+								No./Plot No.</label>
+							<h5 class="list-group-item-heading">{{custDetails.houseNo}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label class="control-label" for="field_city">City</label>
+							<h5 class="list-group-item-heading">{{custDetails.city}}</h5>
+						</div>
+						<div class="col-sm-6">
+							<label class="control-label" for="field_address">Address
+								Detail</label>
+							<h5 class="list-group-item-heading">{{custDetails.address}}</h5>
 						</div>
 					</div>
 				</fieldset>
 				<br>
 				<fieldset>
-					<legend>Meter Info.</legend>
+					<legend>Request Details</legend>
 					<div class="row">
-						<div class="col-sm-3">
-							<label>Meter Id</label>
-							<h5 class="list-group-item-heading">{{custDetails.meterDetails.meterId}}</h5>
-						</div>
-						<div class="col-sm-3">
-							<label class="control-label" for="field_prevReading">Last
-								Meter Reading(billed)</label> <input type="number" class="form-control"
-								name="prevReading" id="field_prevReading"
-								ng-model="custDetails.prevReading" disabled />
-						</div>
-					</div>
-					<br>
-					<div class="row" ng-show="connectionTerminate.meterRecovered != null">
-						<!-- <div class="col-sm-2">
-							<label>Meter No</label>
-							<h5 class="list-group-item-heading">{{connectionTerminate.meterDetails.meterId}}</h5>
-						</div> -->
 						<div class="col-sm-3">
 							<label>Requested Date</label>
 							<h5 class="list-group-item-heading">{{connectionTerminate.requestDate
 								| date:'mediumDate'}}</h5>
 						</div>
 						<div class="col-sm-3">
+							<label>Termination Type</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.terminationType}}</h5>
+						</div>
+						<div class="col-sm-6">
+							<label>Reason</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.reason}}</h5>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset ng-show="connectionTerminate.meterRecovered === true">
+					<legend>Meter Info.</legend>
+					<div class="row">
+						<div class="col-sm-3">
 							<label>Meter Recovered</label>
-							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecovered===0?'NOT RECOVERED':'YES RECOVERED'}}</h5>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecovered===0?'NOT
+								RECOVERED':'YES RECOVERED'}}</h5>
 						</div>
 						<div class="col-sm-3">
 							<label>Recovered Date</label>
 							<h5 class="list-group-item-heading">{{connectionTerminate.meterRecoveredDate
 								| date:'mediumDate'}}</h5>
 						</div>
-						<!-- <div class="col-sm-3">
-							<label>Last Reading</label>
+						<div class="col-sm-3">
+							<label>Last Meter Reading</label>
 							<h5 class="list-group-item-heading">{{connectionTerminate.lastMeterReading}}</h5>
-						</div> -->
+						</div>
+						<div class="col-sm-3">
+							<label>Meter Condition</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.meterCondition}}</h5>
+						</div>
 					</div>
 				</fieldset>
 				<br>
-				<fieldset ng-show="orgRole.id === 14">
-				<legend>Meter Info.</legend>
-					<div class="row" >
+				<fieldset
+					ng-show="orgRole.id === 14 && connectionTerminate.meteredConnection === true && connectionTerminate.status != 'TERMINATED'">
+					<legend>Meter Info.</legend>
+					<div class="row">
 						<div class="col-sm-3">
 							<label class="control-label" for="field_meterRecovered">Meter
 								Recovered</label>
@@ -122,14 +165,19 @@
 								</label>
 							</div>
 						</div>
-
+						<div class="col-sm-3">
+							<label class="control-label" for="field_lastMeterReading">Last
+								Billed Reading</label> <input type="number" class="form-control"
+								name="lastBilledReading" id="field_lastBilledReading"
+								ng-model="custDetails.prevReading" disabled />
+						</div>
 						<div class="col-sm-3">
 							<label class="control-label" for="field_lastMeterReading">Final
 								Meter Reading</label> <input type="number" class="form-control"
 								name="lastMeterReading" id="field_lastMeterReading"
 								ng-disabled="changeCaseDTO.connectionTerminate.meterRecovered==false"
 								ng-model="changeCaseDTO.connectionTerminate.lastMeterReading"
-								ng-blur="checkReading(custDetails.prevReading, changeCaseDTO.connectionTerminate.lastMeterReading)" />
+								ng-blur="checkReading(custDetails.prevReading, custDetails.prevReading)" />
 						</div>
 						<div class="col-sm-3">
 							<label class="control-label" for="field_meterRecoveredDate">Meter
@@ -151,6 +199,19 @@
 									</span>
 								</div>
 							</div>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label class="control-label" for="field_meterCondition">Meter Condition</label> 
+							<select class="form-control" name="meterCondition"
+								ng-model="connectionTerminate.meterCondition"
+								ng-disabled="changeCaseDTO.connectionTerminate.meterRecovered==false"
+								id="field_meterCondition">
+								<option value="WORKING">WORKING</option>
+								<option value="FAULT">FAULT</option>
+							</select>
 						</div>
 					</div>
 				</fieldset>
@@ -176,7 +237,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-9">
+						<div class="col-sm-6">
 							<label class="control-label" for="field_remarks">Remarks</label>
 							<textarea rows="2" cols="50" class="form-control" name="remarks"
 								style="resize: none" id="field_remarks" max="20"

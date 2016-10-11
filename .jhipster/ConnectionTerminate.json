@@ -6,6 +6,13 @@
             "otherEntityName": "meterDetails",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -33,6 +40,34 @@
             "fieldId": 5,
             "fieldName": "meterRecoveredDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "meteredConnection",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "reason",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "terminationType",
+            "fieldType": "TerminationType",
+            "fieldValues": "TEMPORARY, PERMANENT"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "meterCondition",
+            "fieldType": "MeterCondition",
+            "fieldValues": "WORKING, FAULT"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "status",
+            "fieldType": "TerminationStatus",
+            "fieldValues": "PENDING, INITIATED, APPROVED, TERMINATED"
         }
     ],
     "changelogDate": "20160504065608",
