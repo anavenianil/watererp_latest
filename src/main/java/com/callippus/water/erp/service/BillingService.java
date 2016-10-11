@@ -191,28 +191,8 @@ public class BillingService {
 	}
 
 	public void processDisconnectedMeters() {
-		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
-		customers.forEach(customer -> saveAndRunTerminations(customer));
-	}
-
-	public BillRunMaster processDisconnection(CustDetails custDetails) throws Exception {
-		initBillRun();
-
-		if (custDetails.getStatus() != CustStatus.ACTIVE && custDetails.getStatus() != CustStatus.TERMINATED) {
-			throw new Exception("Invalid CustStatus for CAN:" + custDetails.getCan() + ", Status:"
-					+ custDetails.getStatus().toString());
-		}
-
-		// process_bill(can);
-
-		if (failedRecords > 0)
-			br.setStatus("Completed with Errors");
-		else
-			br.setStatus("Completed Successfully");
-
-		billRunMasterRepository.save(br);
-
-		return br;
+		List<CustDetails> customers = custDetailsRepository.findByStatus(CustStatus.DISCONNECTED.toString());
+		customers.forEach(customer -> processDisconnection(customer));
 	}
 
 	public BillRunMaster generateSingleBill(String can) throws Exception {
@@ -221,12 +201,16 @@ public class BillingService {
 
 		CustDetails custDetails = custDetailsRepository.findByCan(can);
 
-		if (custDetails.getStatus() != CustStatus.ACTIVE && custDetails.getStatus() != CustStatus.TERMINATED) {
-			throw new Exception("Invalid CustStatus for CAN:" + can + ", Status:" + custDetails.getStatus().toString());
+		if (custDetails.getStatus() == CustStatus.DEACTIVE) {
+			throw new Exception("Invalid CustStatus for CAN:" + custDetails.getCan() + ", Status:"
+					+ custDetails.getStatus().toString());
 		}
 
+		
 		if (custDetails.getStatus() == CustStatus.TERMINATED)
 			saveAndRunTerminations(custDetails);
+		else if(custDetails.getStatus() == CustStatus.DISCONNECTED)
+			processDisconnection(custDetails);
 		else if (custDetails.getPrevBillType() != null && custDetails.getPrevBillType().equals("U"))
 			saveAndRunUnmetered(custDetails);
 		else
@@ -242,6 +226,19 @@ public class BillingService {
 		return br;
 	}
 
+	
+	public void processDisconnection(CustDetails custDetails) 
+	{
+		try
+		{
+			process_bill(custDetails.getCan());			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public void process_error(String message, String can) {
 		log.debug(message + ":" + can);
 
@@ -263,7 +260,7 @@ public class BillingService {
 				process_error("Bill Date Older than 1 year for CAN", bill_details.getCan());
 				return;
 			}
-
+			
 			initBill(bill_details.getCan());
 
 			brd.setBillDetails(bill_details);
@@ -273,6 +270,12 @@ public class BillingService {
 
 			if (customer == null) {
 				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
+				return;
+			}
+			
+			if (customer.getStatus() == CustStatus.DEACTIVE) {
+				process_error("Invalid Status:"
+						+ customer.getStatus().toString(), customer.getCan());
 				return;
 			}
 
@@ -541,12 +544,8 @@ public class BillingService {
 	}
 
 	public void processTerminatedMeters() {
-		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
+		List<CustDetails> customers = custDetailsRepository.findByStatus(CustStatus.TERMINATED.toString());
 		customers.forEach(customer -> saveAndRunTerminations(customer));
-	}
-
-	public void processDisconnectedMeters(CustDetails customer) {
-		saveAndRunTerminations(customer);
 	}
 
 	public void processBillsWithoutMeter() {

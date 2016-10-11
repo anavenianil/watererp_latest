@@ -32,8 +32,7 @@ public interface CustDetailsRepository extends JpaRepository<CustDetails,Long> {
 			+ "from CustDetails at where SUBSTRING(can, 1,2)=:division and SUBSTRING(can, 3,2)=:street")
 	Integer findByCan(@Param("division")String division, @Param("street")String street); 
 	
-	@Query("select c from CustDetails c where c.status='DEACTIVE'")
-	public List<CustDetails> findNewTerminations();
+	public List<CustDetails> findByStatus(String status);
 	
 	public List<CustDetails> findByPrevBillType(String prevBillType);
 	
