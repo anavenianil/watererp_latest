@@ -234,24 +234,6 @@ public class BillingService {
 			// right now there is no better
 			// solution
 			
-			List<java.util.Map<String, Object>> charges = new ArrayList<java.util.Map<String, Object>>();
-			for(int i=0;i<3;i++)
-			{
-				Map<String, Object> charge = new HashMap<String,Object>();
-				charge.put("tariff_type_master_id", new Long(i));
-				
-				if(i != 2){
-					charge.put("rate", CPSConstants.ZERO);
-					charge.put("amount", CPSConstants.ZERO);
-				}
-				else
-				{
-					charge.put("rate", new BigDecimal("520.00"));
-					charge.put("amount", new BigDecimal("520.00"));
-				}
-				
-				charges.add(charge);			
-			}
 
 			BillDetails bill_details = billDetailsRepository.findValidBillForCan(custDetails.getCan());
 			
@@ -268,7 +250,37 @@ public class BillingService {
 			dFrom = custDetails.getPrevBillMonth().plusMonths(1);
 			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
 
-			
+			List<java.util.Map<String, Object>> charges = new ArrayList<java.util.Map<String, Object>>();
+			for(int i=0;i<3;i++)
+			{
+				Map<String, Object> charge = new HashMap<String,Object>();
+				charge.put("tariff_type_master_id", new Long(i));
+				
+				if(i != 2){
+					charge.put("rate", CPSConstants.ZERO);
+					charge.put("amount", CPSConstants.ZERO);
+					charges.add(charge);
+				}
+				else
+				{
+					List<java.util.Map<String, Object>> svcCharges = tariffMasterCustomRepository.findTariffsForDisconnections(bill_details.getCan(),
+							dFrom, dTo, minAvgKL, 0, 0, false); //Calculating slab for minAvgKL
+					
+					boolean tariffExists = false;
+					for(Map<String, Object>  charge1: svcCharges)
+					{
+						if (((Long) charge1.get("tariff_type_master_id")) == 3) {
+							tariffExists = true;
+							log.debug("Disconnection Service Charge:" + (BigDecimal) charge1.get("amount"));
+							charges.add(charge1);
+						}
+					}
+					
+					if(!tariffExists)
+						throw new Exception("No tariffs configured.");
+				}	
+			}
+
 			calc_charges_normal(charges, bill_details, custDetails, bfd, unitsKL);
 
 			process_bill_common(custDetails, bill_details, bfd, dFrom, dTo);			
