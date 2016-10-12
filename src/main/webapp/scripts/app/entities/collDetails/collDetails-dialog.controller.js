@@ -29,6 +29,7 @@ angular.module('watererpApp').controller(
                     $scope.collectionTypeMasters.push(result[i]);
                 }
                 $scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
+                $scope.collTypeId = $scope.collectionTypeMasters[0].id;
             });
 
 			var onSaveSuccess = function(result) {
@@ -129,6 +130,7 @@ angular.module('watererpApp').controller(
 				$scope.custInfo = "";
 				$scope.isValidCust = true;
 				//$scope.clear();
+				$scope.collDetails.collectionTypeMaster.id = $scope.collTypeId;
 				$scope.rc.editForm.attempted=false;
 				$scope.editForm.$setPristine();
 			};

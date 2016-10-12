@@ -43,6 +43,7 @@
             
             <column name="meter_details_id" type="bigint"/>
             <column name="tariff_category_master_id" type="bigint"/>
+            <column name="recovered_by_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -57,6 +58,12 @@
                                  constraintName="fk_connectionterminate_tariffcategorymaster_id"
                                  referencedColumnNames="id"
                                  referencedTableName="tariff_category_master"/>
+
+        <addForeignKeyConstraint baseColumnNames="recovered_by_id"
+                                 baseTableName="connection_terminate"
+                                 constraintName="fk_connectionterminate_recoveredby_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -102,6 +102,9 @@ public class ConnectionTerminateResource {
         if("METERED".equals(custDetails.getTariffCategoryMaster().getType())){
         	connectionTerminate.setMeteredConnection(true);
         }
+        if(connectionTerminate.getMeterRecovered() == true){
+        	connectionTerminate.setStatus(TerminationStatus.APPROVED);
+        }
         ConnectionTerminate result = connectionTerminateRepository.save(connectionTerminate);
         try {
 			workflowService.getUserDetails();
@@ -208,14 +211,17 @@ public class ConnectionTerminateResource {
 			CustDetails custDetails = custDetailsRepository.findByCanForUpdate(connectionTerminate.getCan());
 			custDetails.setStatus(CustStatus.TERMINATED);
 			custDetailsRepository.save(custDetails);
+			if(connectionTerminate.getMeterDetails() != null){
+				MeterDetails meterDetails = connectionTerminate.getMeterDetails();
+				meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
+				meterDetailsRepository.save(meterDetails);
+				
+				CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(custDetails, null);
+		        cmpOld.setToDate(connectionTerminate.getMeterRecoveredDate());
+		        custMeterMappingRepository.save(cmpOld);
+			}
 			
-			MeterDetails meterDetails = connectionTerminate.getMeterDetails();
-			meterDetails.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));
-			meterDetailsRepository.save(meterDetails);
-			
-			CustMeterMapping cmpOld = custMeterMappingRepository.findByCustDetailsAndToDate(custDetails, null);
-	        cmpOld.setToDate(connectionTerminate.getMeterRecoveredDate());
-	        custMeterMappingRepository.save(cmpOld);
+	        
 	        connectionTerminate.setStatus(TerminationStatus.TERMINATED);
 	        connectionTerminateRepository.save(connectionTerminate);
 		}

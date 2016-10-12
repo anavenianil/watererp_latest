@@ -2,13 +2,14 @@
 
 angular.module('watererpApp')
     .controller('ConnectionTerminateDetailController', function ($scope, $rootScope, $stateParams, ConnectionTerminate, 
-    		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window, $state) {
+    		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window, $state, EmpMaster) {
         $scope.connectionTerminate = {};
         $scope.changeCaseDTO = {};
         $scope.custDetails = {};
         $scope.maxDt = new Date();
         $scope.user = Principal.getLogonUser();
         $scope.changeCaseDTO.approvedDate = new Date();
+        $scope.usersByDesig = EmpMaster.getEmpByDesig({designation:30});
         
         Principal.getOrgRole().then(function(response) {
 			$scope.orgRole = response;

@@ -123,7 +123,7 @@
 						</div>
 					</div>
 				</fieldset>
-				<fieldset ng-show="connectionTerminate.meterRecovered === true">
+				<fieldset ng-show="connectionTerminate.meterRecovered === true && (connectionTerminate.status === 'TERMINATED' || connectionTerminate.status === 'APPROVED')">
 					<legend>Meter Info.</legend>
 					<div class="row">
 						<div class="col-sm-3">
@@ -143,6 +143,10 @@
 						<div class="col-sm-3">
 							<label>Meter Condition</label>
 							<h5 class="list-group-item-heading">{{connectionTerminate.meterCondition}}</h5>
+						</div>
+						<div class="col-sm-3">
+							<label>Meter Recovered By</label>
+							<h5 class="list-group-item-heading">{{connectionTerminate.recoveredBy.firstName}}&nbsp;{{connectionTerminate.recoveredBy.lastName}}</h5>
 						</div>
 					</div>
 				</fieldset>
@@ -213,6 +217,15 @@
 								<option value="FAULT">FAULT</option>
 							</select>
 						</div>
+						<div class="col-sm-3">
+								<label for="field_recoveredBy">Recovered By</label> <select
+									class="form-control" id="field_recoveredBy" name="recoveredBy"
+									ng-model="changeCaseDTO.connectionTerminate.recoveredBy"
+									ng-disabled="changeCaseDTO.connectionTerminate.meterRecovered==false"
+									ng-options="user as user.firstName+' '+user.lastName for user in usersByDesig">
+									<option value=""></option>
+								</select>
+							</div>
 					</div>
 				</fieldset>
 				<hr>

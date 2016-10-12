@@ -13,6 +13,13 @@
             "otherEntityName": "tariffCategoryMaster",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "recoveredBy",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

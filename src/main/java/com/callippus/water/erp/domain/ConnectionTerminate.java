@@ -70,6 +70,10 @@ public class ConnectionTerminate implements Serializable {
     @JoinColumn(name = "tariff_category_master_id")
     private TariffCategoryMaster tariffCategoryMaster;
 
+    @ManyToOne
+    @JoinColumn(name = "recovered_by_id")
+    private User recoveredBy;
+
     public Long getId() {
         return id;
     }
@@ -172,6 +176,14 @@ public class ConnectionTerminate implements Serializable {
 
     public void setTariffCategoryMaster(TariffCategoryMaster tariffCategoryMaster) {
         this.tariffCategoryMaster = tariffCategoryMaster;
+    }
+
+    public User getRecoveredBy() {
+        return recoveredBy;
+    }
+
+    public void setRecoveredBy(User user) {
+        this.recoveredBy = user;
     }
 
     @Override
