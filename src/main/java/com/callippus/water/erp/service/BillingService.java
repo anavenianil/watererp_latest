@@ -176,7 +176,6 @@ public class BillingService {
 
 		if (runAll) {
 			processTerminatedMeters();
-			processDisconnectedMeters();
 			processBillsWithoutMeter();
 		}
 
@@ -209,8 +208,6 @@ public class BillingService {
 		
 		if (custDetails.getStatus() == CustStatus.TERMINATED)
 			saveAndRunTerminations(custDetails);
-		else if(custDetails.getStatus() == CustStatus.DISCONNECTED)
-			processDisconnection(custDetails);
 		else if (custDetails.getPrevBillType() != null && custDetails.getPrevBillType().equals("U"))
 			saveAndRunUnmetered(custDetails);
 		else
@@ -312,6 +309,7 @@ public class BillingService {
 				process_error("Bill Date Older than 1 year for CAN", bill_details.getCan());
 				return;
 			}
+		
 			
 			initBill(bill_details.getCan());
 
@@ -322,6 +320,11 @@ public class BillingService {
 
 			if (customer == null) {
 				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
+				return;
+			}
+			
+			if(customer.getStatus() == CustStatus.DISCONNECTED){
+				processDisconnection(customer);
 				return;
 			}
 			
@@ -477,7 +480,9 @@ public class BillingService {
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
 
-			if (customer.getStatus() == CustStatus.TERMINATED)
+			if (customer.getStatus() == CustStatus.TERMINATED && customer.getArrears().compareTo(new BigDecimal("0.00")) <= 0)
+				customer.setStatus(CustStatus.DEACTIVE);
+			else
 				customer.setStatus(CustStatus.DISCONNECTED);
 
 			if (bfd.getCurrentBillType().equals("L"))
