@@ -4,15 +4,17 @@ angular
 		.module('watererpApp')
 		.controller(
 				'CustomerCategoryChangeDetailController',
-				function($scope, $stateParams, CustDetails,
-						$state, $http, ParseLinks, RequestWorkflowHistory, Customer, CustDetailsSearchCAN, Principal, $window, ApplicationTxnSearchCAN) {
+				function($scope, $stateParams, CustDetails, $state, $http,
+						ParseLinks, RequestWorkflowHistory, Customer,
+						CustDetailsSearchCAN, Principal, $window,
+						ApplicationTxnSearchCAN) {
 
 					$scope.customer = {};
 					$scope.customer.changeType = "CONNECTIONCATEGORY";
 					
 					$scope.changeCaseDTO = {};
 					//$scope.changeCaseDTO.customer = {};
-					
+					$scope.user = Principal.getLogonUser();
 					$scope.custDetails = {};
 					$scope.maxDt = new Date();
 					//$scope.orgRole = Principal.getOrgRole();
@@ -43,12 +45,12 @@ angular
 			        };
 					
 			        // getApplicationTxn by CAN
-					$scope.getApplicationTxn = function(can) {
+					/*$scope.getApplicationTxn = function(can) {
 						ApplicationTxnSearchCAN.get({can : can},
 										function(result) {
 											$scope.applicationTxn = result;
 										});
-					};
+					};*/
 					
 					// get cust details by CAN
 					$scope.getCustDetails = function(can) {
@@ -64,7 +66,7 @@ angular
 			            	$scope.customer = result;
 			            	$scope.changeCaseDTO.customer = result;
 			                $scope.getCustDetails(result.can);
-			                $scope.getApplicationTxn(result.can);
+			                //$scope.getApplicationTxn(result.can);
 			                $scope.customer.remarks = "";
 			                //$scope.changeCaseDTO.customer = $scope.customer; 
 			            });
@@ -85,6 +87,11 @@ angular
 			                for (var i = 0; i < result.length; i++) {
 			                    $scope.requestWorkflowHistorys.push(result[i]);
 			                }
+			                $scope.requestAt = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].assignedTo.login;
+			                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+			                console.log("Request at :"+$scope.requestAt);
+			                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+			                console.log("status :"+$scope.requestStatus);
 			            });
 			        };
 			        $scope.getWorkflowHistoryByDomainId();
@@ -146,20 +153,20 @@ angular
 								});
 			        }
 					
-					$scope.canDecline = function() {
+					/*$scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.customer.status) {
 						case 'INITIATED':
-							if ($scope.orgRole.id === 9) //Technical Manager
+							if ($scope.orgRole.id === 33) //Customer relation Officer Head
 								ret = true;
 							break;
 						case 'PROCESSING':
-							if ($scope.orgRole.id === 18) //Billing Officer
+							if ($scope.orgRole.id === 9) // Technical Manager
 								ret = true;
 							break;
 						default:
 							break;
 						}
 						return ret;
-					}
+					}*/
 				});

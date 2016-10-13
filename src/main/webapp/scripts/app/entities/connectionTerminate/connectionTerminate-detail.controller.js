@@ -2,11 +2,15 @@
 
 angular.module('watererpApp')
     .controller('ConnectionTerminateDetailController', function ($scope, $rootScope, $stateParams, ConnectionTerminate, 
-    		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window, $state) {
+    		MeterDetails, RequestWorkflowHistory, ParseLinks, CustDetailsSearchCAN, Principal, $http, $window, $state, EmpMaster) {
         $scope.connectionTerminate = {};
         $scope.changeCaseDTO = {};
         $scope.custDetails = {};
         $scope.maxDt = new Date();
+        $scope.user = Principal.getLogonUser();
+        $scope.changeCaseDTO.approvedDate = new Date();
+        $scope.usersByDesig = EmpMaster.getEmpByDesig({designation:30});
+        
         Principal.getOrgRole().then(function(response) {
 			$scope.orgRole = response;
 		});
@@ -42,6 +46,11 @@ angular.module('watererpApp')
                 for (var i = 0; i < result.length; i++) {
                     $scope.requestWorkflowHistorys.push(result[i]);
                 }
+                $scope.requestAt = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].assignedTo.login;
+                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+                console.log("Request at :"+$scope.requestAt);
+                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+                console.log("status :"+$scope.requestStatus);
             });
         };
         $scope.getWorkflowHistoryByDomainId();
@@ -67,7 +76,7 @@ angular.module('watererpApp')
             $scope.datePickerForApprovedDate.status.opened = true;
         };
         
-		$scope.canDecline = function() {
+		/*$scope.canDecline = function() {
 			var ret = false;
 			switch ($scope.custDetails.status) {
 			case "PROCESSING":
@@ -78,9 +87,9 @@ angular.module('watererpApp')
 				break;
 			}
 			return ret;
-		}
+		}*/
 		
-		$scope.canShow = function() {
+		/*$scope.canShow = function() {
 			var ret = false;
 			switch ($scope.custDetails.status) {
 			case "TERMINATED":
@@ -91,7 +100,7 @@ angular.module('watererpApp')
 				break;
 			}
 			return ret;
-		}
+		}*/
 		
 		$scope.approve = function(changeCaseDTO){
         	return $http.post('/api/connectionTerminates/approve',

@@ -5,6 +5,10 @@ angular.module('watererpApp')
         return $resource('api/empRoleMappings/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'getByUserId': { method: 'GET', params: {userId: "userId" }, url:'/api/empRoleMappings/getByUserId', isArray: false},
+            'getMappingsByUserId': { method: 'GET', params: {userId: "userId" }, url:'/api/empRoleMappings/getMappingsByUserId', isArray: true},
+            'getMappingsByWorkflow': { method: 'GET', params:{domainObjectId: "domainObjectId", requestTypeId: "requestTypeId"}, url:'/api/empRoleMappings/getMappingsByWorkflow', isArray: false},
+            'getMappingsByOrgRoleInstance': { method: 'GET', params:{orgRoleInstanceId: "orgRoleInstanceId"}, url:'/api/empRoleMappings/getMappingsByOrgRoleInstance', isArray: false},
+            'getMappingsByLogin': { method: 'GET', url:'/api/empRoleMappings/getMappingsByLogin', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

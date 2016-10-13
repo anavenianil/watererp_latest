@@ -67,7 +67,7 @@ class ConnectionTerminateGatlingTest extends Simulation {
             .exec(http("Create new connectionTerminate")
             .post("/api/connectionTerminates")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "can":"SAMPLE_TEXT", "requestDate":"2020-01-01T00:00:00.000Z", "meterRecovered":null, "lastMeterReading":null, "meterRecoveredDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "can":"SAMPLE_TEXT", "requestDate":"2020-01-01T00:00:00.000Z", "meterRecovered":null, "lastMeterReading":null, "meterRecoveredDate":"2020-01-01T00:00:00.000Z", "meteredConnection":null, "reason":"SAMPLE_TEXT", "terminationType":null, "meterCondition":null, "status":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_connectionTerminate_url")))
             .pause(10)

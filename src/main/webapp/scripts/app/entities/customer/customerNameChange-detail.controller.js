@@ -11,7 +11,7 @@ angular
 					$scope.changeCaseDTO.customer = {};
 					$scope.changeCaseDTO.customer.changeType = "CHANGENAME";
 					$scope.orgRole = "";
-					
+					$scope.user = Principal.getLogonUser();
 					$scope.custDetails = {};
 					//$scope.orgRole = Principal.getOrgRole();
 					Principal.getOrgRole().then(function(response) {
@@ -48,6 +48,11 @@ angular
 			                for (var i = 0; i < result.length; i++) {
 			                    $scope.requestWorkflowHistorys.push(result[i]);
 			                }
+			                $scope.requestAt = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].assignedTo.login;
+			                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+			                console.log("Request at :"+$scope.requestAt);
+			                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+			                console.log("status :"+$scope.requestStatus);
 			            });
 			        };
 			        $scope.getWorkflowHistoryByDomainId();
@@ -88,15 +93,15 @@ angular
 						var ret = false;
 						switch ($scope.changeCaseDTO.customer.status) {
 						case 'INITIATED':
-							if ($scope.orgRole.id === 9)
+							if ($scope.orgRole.id === 33)
 								ret = true;
 							break;
 						case 'PROCESSING':
-							if ($scope.orgRole.id === 23)
+							if ($scope.orgRole.id === 26)
 								ret = true;
 							break;
 						case 'PAYMENTNC':
-							if ($scope.orgRole.id === 18)
+							if ($scope.orgRole.id === 9)
 								ret = true;
 							break;
 						default:

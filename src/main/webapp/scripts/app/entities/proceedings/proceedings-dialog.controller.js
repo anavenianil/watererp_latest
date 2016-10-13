@@ -3,7 +3,7 @@
 
 angular.module('watererpApp').controller('ProceedingsDialogController',
         function($scope, $state, $stateParams, Proceedings, ApplicationTxn, ItemRequired, MaterialMaster, ParseLinks, 
-        		ApplicationTxnService, Uom, ConfigurationDetails, PipeSizeMaster) {
+        		ApplicationTxnService, Uom, ConfigurationDetails, PipeSizeMaster, EmpMaster, DivisionMaster, StreetMaster) {
 
         $scope.proceedings = {};
         //$scope.itemrequireds = ItemRequired.query();
@@ -14,6 +14,8 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.applicationTxnId = $stateParams.applicationTxnId;
         $scope.proceedings.itemRequireds = [];
         $scope.count = 0;
+        $scope.usersByDesig = EmpMaster.getEmpByDesig({designation:30});
+        $scope.divisionmasters = DivisionMaster.query();
 
         $scope.getApplicationTxns = function(){
         	$scope.applicationTxns = [];
@@ -91,11 +93,17 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
 
         $scope.save = function () {
             $scope.isSaving = true;
-            if ($scope.proceedings.id != null) {
+            
+           /* if ($scope.proceedings.id != null) {
                 Proceedings.update($scope.proceedings, onSaveSuccess, onSaveError);
             } else {
                 Proceedings.save($scope.proceedings, onSaveSuccess, onSaveError);
-            }
+            }*/
+            $scope.feasibilityReportDTO = {};
+            $scope.feasibilityReportDTO.proceedings = $scope.proceedings;
+            $scope.feasibilityReportDTO.feasibilityStudy = $scope.feasibilityStudy;
+            console.log($scope.feasibilityReportDTO);
+            Proceedings.saveFeasibilityReport($scope.feasibilityReportDTO, onSaveSuccess, onSaveError);
         };
 
         $scope.clear = function() {
@@ -105,16 +113,24 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         //create array for items
         $scope.createItemArr = function(){
        		$scope.proceedings.itemRequireds[$scope.count]= {};
+       		$scope.proceedings.itemRequireds[$scope.count].prividedFromStores = true;
        		$scope.count = $scope.count +1;
         }
         
         //calculations for proceedings
+        
         $scope.calculateRate = function(){
+        	$scope.proceedings.deductedAmount = 0;
         	for(var i=0; i<$scope.proceedings.itemRequireds.length; i++){
         		var quantity = $scope.proceedings.itemRequireds[i].quantity;
         		var rate = $scope.proceedings.itemRequireds[i].ratePerShs;
         		$scope.proceedings.itemRequireds[i].amount = quantity * rate;
+        		
+        		if($scope.proceedings.itemRequireds[i].prividedFromStores == false){
+        			$scope.proceedings.deductedAmount = $scope.proceedings.deductedAmount + $scope.proceedings.itemRequireds[i].amount;
+        		}
         	}
+        	console.log("Sum of not Provided material : "+$scope.proceedings.deductedAmount);
         	$scope.proceedings.subTotalA = 0;
         	for(var i=0; i<$scope.proceedings.itemRequireds.length; i++){
         		$scope.proceedings.subTotalA = $scope.proceedings.subTotalA + $scope.proceedings.itemRequireds[i].amount;
@@ -126,7 +142,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         										+ $scope.proceedings.labourCharge +$scope.proceedings.siteSurvey;
         	$scope.proceedings.connectionFee = ($scope.proceedings.subTotalB * $scope.proceedings.connectionFeePercent)/100;
         	$scope.proceedings.grandTotal = $scope.proceedings.subTotalB + $scope.proceedings.connectionFee 
-        									+ $scope.proceedings.applicationFormFee;
+        									+ $scope.proceedings.applicationFormFee - $scope.proceedings.deductedAmount;
         }
         
         //for removing items
@@ -150,4 +166,24 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
   	        window.onload = disableBack();
   	        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
   	    });
+          
+          $scope.datePickerForPreparedDate = {};
+
+          $scope.datePickerForPreparedDate.status = {
+              opened: false
+          };
+
+          $scope.datePickerForPreparedDateOpen = function($event) {
+              $scope.datePickerForPreparedDate.status.opened = true;
+          };
+          
+          $scope.getStreet = function(divisionId){
+          	$scope.streetMasters = [];
+              StreetMaster.query({page: $scope.page, size: 20, divisionId: divisionId}, function(result, headers) {
+                  $scope.links = ParseLinks.parse(headers('link'));
+                  for (var i = 0; i < result.length; i++) {
+                      $scope.streetMasters.push(result[i]);
+                  }
+              });
+          }
 });

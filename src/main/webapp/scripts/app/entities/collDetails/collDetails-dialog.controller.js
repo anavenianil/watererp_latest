@@ -29,6 +29,7 @@ angular.module('watererpApp').controller(
                     $scope.collectionTypeMasters.push(result[i]);
                 }
                 $scope.collDetails.collectionTypeMaster.id = $scope.collectionTypeMasters[0].id;
+                $scope.collTypeId = $scope.collectionTypeMasters[0].id;
             });
 
 			var onSaveSuccess = function(result) {
@@ -129,6 +130,7 @@ angular.module('watererpApp').controller(
 				$scope.custInfo = "";
 				$scope.isValidCust = true;
 				//$scope.clear();
+				$scope.collDetails.collectionTypeMaster.id = $scope.collTypeId;
 				$scope.rc.editForm.attempted=false;
 				$scope.editForm.$setPristine();
 			};
@@ -241,11 +243,14 @@ angular.module('watererpApp').controller(
 				$scope.datePickerForCollTime.status.opened = true;
 			};
 
+			$scope.collDetails.tariffCategoryMaster = {};
 			$scope.getCustDetails = function(can) {
 				CustDetailsService.get({
 					can : can
 				}, function(result) {
 					$scope.custDetails = result;
+					$scope.collDetails.tariffCategoryMaster = {};
+					$scope.collDetails.tariffCategoryMaster.tariffCategory = result.tariffCategoryMaster.tariffCategory;
 				});
 			}
 

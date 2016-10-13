@@ -135,7 +135,7 @@
 						<br>
 						<fieldset>
 							<legend></legend>
-							<div class="row" ng-if="canDecline()">
+							<div class="row" ng-show="user.login === requestAt && requestStatus === 3">
 								<div class="col-sm-3">
 									<label class="control-label" for="field_approvedDate">Approved
 										Date</label>
@@ -189,14 +189,14 @@
 				</div>
 			</div>
 			<button type="button" class="btn btn-success pull-right"
-				ng-show="canDecline()" ng-click="approve(changeCaseDTO)">
+				ng-show="user.login === requestAt && requestStatus === 3" ng-click="approve(changeCaseDTO)">
 				<span class="glyphicon glyphicon-check"></span> &nbsp;Approve
 			</button>
 
 			<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 			<button type="button" class="btn btn-danger pull-right"
-				ng-show="canDecline()" ng-disabled="isSaving"
+				ng-show="user.login === requestAt && requestStatus === 3" ng-disabled="isSaving"
 				ng-click="declineRequest(changeCaseDTO)">
 				<span class="glyphicon glyphicon-remove-circle"></span>
 				&nbsp;Decline

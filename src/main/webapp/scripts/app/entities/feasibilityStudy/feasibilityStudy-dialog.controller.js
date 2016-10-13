@@ -1,14 +1,17 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('FeasibilityStudyDialogController', function ($scope, $stateParams, ParseLinks, $state, FeasibilityStudy, DivisionMaster,
-    		StreetMaster, ApplicationTxn, User, ApplicationTxnService) {
+		    .controller(
+				'FeasibilityStudyDialogController',
+				function($scope, $stateParams, ParseLinks, $state,
+						FeasibilityStudy, DivisionMaster, StreetMaster,
+						ApplicationTxn, User, ApplicationTxnService, EmpMaster) {
     	
     	$scope.feasibilityStudy = {};
         $scope.divisionmasters = DivisionMaster.query();
         $scope.users = User.getAll();
         $scope.applicationTxn = {};
-        
+        $scope.usersByDesig = EmpMaster.getEmpByDesig({designation:30});
         if($stateParams.id != null){
         	$scope.feasibilityStudyId = $stateParams.id;
         	FeasibilityStudy.get({id : $scope.feasibilityStudyId}, function(result) {

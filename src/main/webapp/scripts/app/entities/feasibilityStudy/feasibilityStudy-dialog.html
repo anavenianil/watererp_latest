@@ -125,7 +125,7 @@
 										class="form-control" id="field_preparedBy" name="preparedBy"
 										ng-model="feasibilityStudy.preparedBy"
 										ng-change="getpreparedByName(feasibilityStudy.preparedBy)"
-										ng-options="user as user.login +'-'+ user.firstName+' '+user.lastName for user in users">
+										ng-options="user as user.firstName+' '+user.lastName for user in usersByDesig">
 										<option value=""></option>
 									</select>
 								</div>

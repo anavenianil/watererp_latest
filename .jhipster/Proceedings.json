@@ -85,7 +85,12 @@
         },
         {
             "fieldId": 13,
-            "fieldName": "ConnectionFeePercent",
+            "fieldName": "connectionFeePercent",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 14,
+            "fieldName": "deductedAmount",
             "fieldType": "BigDecimal"
         }
     ],

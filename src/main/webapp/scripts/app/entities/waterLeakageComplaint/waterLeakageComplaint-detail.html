@@ -41,7 +41,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading clearfix">
 				<h3 class="panel-title pull-left">Water Leakage Complaint
-					Details</h3>
+					Details : {{waterLeakageComplaint.id}}</h3>
 				<div class="pull-right" ng-hide="true">
 					<a type="button" href="/api/meterChanges/report/{{meterChange.id}}"
 						class="pull-right btn btn-warning">Download as PDF</a>
@@ -689,51 +689,51 @@
 								<legend>Valve No.:{{$index+1}}</legend>
 								<div class="row">
 									<div class="col-sm-2">
-										<label>closed Time</label>
+										<label>Closed Time</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.closedTime
 											| date:'medium'}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>open Time</label>
+										<label>Open Time</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.openTime
 											| date:'medium'}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>colour Code</label>
+										<label>Colour Code</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.colourCode}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>side</label>
+										<label>Side</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.side}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>no Of Turns</label>
+										<label>No Of Turns</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.noOfTurns}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>valve Size</label>
+										<label>Valve Size</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.valveSize}}</h5>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-2">
-										<label>valve No</label>
+										<label>Valve No</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.valveNo}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>repair Code</label>
+										<label>Repair Code</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.repairCode}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>distance Left</label>
+										<label>Distance Left</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.distanceLeft}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>distance Sb</label>
+										<label>Distance Sb</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.distanceSb}}</h5>
 									</div>
 									<div class="col-sm-2">
-										<label>distance Z</label>
+										<label>Distance Z</label>
 										<h5 class="list-group-item-heading">{{valveComplaint.distanceZ}}</h5>
 									</div>
 								</div>

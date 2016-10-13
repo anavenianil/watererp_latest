@@ -144,16 +144,16 @@ public class ApplicationTxnResource {
         	applicationTxn.setStatus(0);
         }
         applicationTxn.setPhoto("");
-        applicationTxn.setIdNumber("");
+        /*applicationTxn.setIdNumber("");
         applicationTxn.setDeedDoc("");
-        applicationTxn.setAgreementDoc("");
+        applicationTxn.setAgreementDoc("");*/
         applicationTxnRepository.save(applicationTxn);
         
         HashMap<String,String> hm1 = new HashMap<String,String>();
         hm1.put("photo", "setPhoto");
         UploadDownloadResource.setValues(applicationTxn, hm1, request, applicationTxn.getId());
         
-        HashMap<String,String> hm2 = new HashMap<String,String>();
+        /*HashMap<String,String> hm2 = new HashMap<String,String>();
         hm2.put("idNumber", "setIdNumber");
         UploadDownloadResource.setValues(applicationTxn, hm2, request, applicationTxn.getId());
         
@@ -163,7 +163,7 @@ public class ApplicationTxnResource {
         
         HashMap<String,String> hm4 = new HashMap<String,String>();
         hm4.put("agreementDoc", "setAgreementDoc");
-        UploadDownloadResource.setValues(applicationTxn, hm4, request, applicationTxn.getId());
+        UploadDownloadResource.setValues(applicationTxn, hm4, request, applicationTxn.getId());*/
         
         //ApplicationTxn result = applicationTxnRepository.save(applicationTxn);
         //this is for workflow for new request

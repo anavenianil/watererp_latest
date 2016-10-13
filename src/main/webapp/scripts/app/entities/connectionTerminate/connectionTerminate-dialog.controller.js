@@ -18,6 +18,8 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
             });
         };
         
+        $scope.connectionTerminate.requestDate = new Date();  
+        	
         if($stateParams.id != null){
         	$scope.load($stateParams.id);
         }
@@ -99,7 +101,7 @@ angular.module('watererpApp').controller('ConnectionTerminateDialogController',
                 $scope.meterdetailss.push($scope.custDetails.meterDetails);
                 $scope.connectionTerminate.meterDetails = $scope.custDetails.meterDetails;
                 if($scope.custDetails.arrears > 0){
-                	$scope.isSaving = true;
+                	//$scope.isSaving = true;
                 	$scope.arrearsMessage = "Clear Due Amount: "+$scope.custDetails.arrears+" Shilling(TZS)";
                 }
                 else{

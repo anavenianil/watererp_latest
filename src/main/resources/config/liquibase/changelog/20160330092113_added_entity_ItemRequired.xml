@@ -29,6 +29,8 @@
             
             <column name="amount" type="decimal(20,3)"/>
             
+            <column name="privided_from_stores" type="bit"/>
+            
             <column name="material_master_id" type="bigint"/>
             <column name="application_txn_id" type="bigint"/>
             <column name="feasibility_study_id" type="bigint"/>

@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/custDetailss',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustDetailss'
                 },
                 views: {
@@ -23,7 +23,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/custDetails/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CustDetails'
                 },
                 views: {
@@ -200,6 +200,25 @@ angular.module('watererpApp')
                     }
                 },
                 resolve: {
+                }
+            })
+            .state('custDetailsByCAN', {
+                parent: 'entity',
+                url: '/custDetailsByCAN/{can}',
+                data: {
+                    authorities: ['ROLE_USER', 'ROLE_CUSTOMER'],
+                    pageTitle: 'CustDetails'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/custDetails/custDetails-detail.html',
+                        controller: 'CustDetailsDetailController'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'CustDetails', function($stateParams, CustDetails) {
+                        return CustDetails.getCustDetailsByCan({can : $stateParams.can});
+                    }]
                 }
             });;
     });

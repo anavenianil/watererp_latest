@@ -4,13 +4,19 @@ angular.module('watererpApp').controller(
 		'ApplicationTxnDetailController',
 		function($state, $scope, $rootScope, $stateParams, entity,
 				ApplicationTxn, ApplicationTxnService, RequestWorkflowHistory,
-				ParseLinks, Principal) {
+				ParseLinks, Principal, EmpRoleMapping) {
 			$scope.applicationTxn = entity;
 			
+			$scope.orgRole = {};
+			/*var onSaveSuccess = function (response) {
+				console.log("Show Button"+JSON.stringify(response));
+	        };
 			
+			$scope.empRoleWorkflow = EmpRoleMapping.getMappingsByWorkflow({domainObjectId:$stateParams.id, requestTypeId: $stateParams.requestTypeId});
+			$scope.empLogin = EmpRoleMapping.getMappingsByLogin();*/
 
 			//$scope.orgRole = Principal.getOrgRole();
-			$scope.orgRole = {};
+			
 			Principal.getOrgRole().then(function(response) {
 				$scope.orgRole = response;
 			});
@@ -64,40 +70,40 @@ angular.module('watererpApp').controller(
 
 			$scope.canDecline = function() {
 				var ret = false;
+				/*console.log("$scope.orgRole.id:"+$scope.orgRole.id);
+				console.log("$scope.applicationTxn.status:"+$scope.applicationTxn.status);*/
 				switch ($scope.applicationTxn.status) {
 				case 0:
-					if ($scope.orgRole.id === 9) //Technical Manager
-						ret = true;
-					break;
-				case 1:
 					if ($scope.orgRole.id === 14) //Water Network Engineer
 						ret = true;
 					break;
-				case 2:
-					if ($scope.orgRole.id === 16) //Planning & Construction Engineer 
-						ret = true;
-					break;
-				case 3:
+				case 1:
 					if ($scope.orgRole.id === 9) //Technical Manager
 						ret = true;
 					break;
-				case 4:
-					if ($scope.orgRole.id === 23) //Rev. Ass. Acc.
+				case 2:
+					if ($scope.orgRole.id === 4) //Managing Director 
 						ret = true;
 					break;
-				case 5:
+				case 3:
+					if ($scope.orgRole.id === 26) //Cashier
+						ret = true;
+					break;
+				case 4:
 					if ($scope.orgRole.id === 25) //Stores & Supplies Officer
 						ret = true;
 					break;
+				case 5:
+					if ($scope.orgRole.id === 19) //Credit Control Officer(For Meter)
+						ret = true;
+					break;
 				case 6:
-					if ($scope.orgRole.id === 16) //Planning & Construction Engineer
+					if ($scope.orgRole.id === 14) //Water Network Engineer
 						ret = true;
 					break;
 				case 7:
 					if ($scope.orgRole.id === 18) //Billing Officer
 						ret = true;
-					break;
-				case 8:
 					break;
 				default:
 					break;

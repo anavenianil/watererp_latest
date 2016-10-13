@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('IssueMeterDialogController', function ($scope, $state, $stateParams, ApplicationTxn, ParseLinks, DateUtils, MeterDetails,
-    		ApplicationTxnService, $http, $window) {
+		    .controller(
+				'IssueMeterDialogController',
+				function($scope, $state, $stateParams, ApplicationTxn,
+						ParseLinks, DateUtils, MeterDetails,
+						ApplicationTxnService, $http, $window) {
 
     	$scope.changeCaseDTO = {};
     	$scope.changeCaseDTO.applicationTxn = {};

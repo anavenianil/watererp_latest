@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('CollDetails', function ($resource, DateUtils) {
         return $resource('api/collDetailss/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'getCollDetailsByCan': { method: 'GET', params: {can: "can" }, url:'/api/collDetailss/getCollDetailsByCAN', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

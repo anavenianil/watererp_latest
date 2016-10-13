@@ -152,5 +152,24 @@ angular.module('watererpApp')
                         return WaterLeakageComplaint.get({id : $stateParams.id});
                     }]
                 }
+            })
+            .state('waterLeakageComplaintForGIS', {
+                parent: 'entity',
+                url: '/waterLeakageComplaint/{id}',
+                data: {
+                    authorities: ['ROLE_USER', 'ROLE_GIS'],
+                    pageTitle: 'WaterLeakageComplaint'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/waterLeakageComplaint/waterLeakageComplaint-detail.html',
+                        controller: 'WaterLeakageComplaintDetailController'
+                    }
+                },
+                resolve: {
+                    entity: ['$stateParams', 'WaterLeakageComplaint', function($stateParams, WaterLeakageComplaint) {
+                        return WaterLeakageComplaint.get({id : $stateParams.id});
+                    }]
+                }
             });
     });

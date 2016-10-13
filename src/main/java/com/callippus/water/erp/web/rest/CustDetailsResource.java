@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.callippus.water.erp.domain.BurstComplaint;
 import com.callippus.water.erp.domain.CustDetails;
 import com.callippus.water.erp.domain.DivisionMaster;
+import com.callippus.water.erp.domain.EmpRoleMapping;
 import com.callippus.water.erp.domain.TariffCategoryMaster;
 import com.callippus.water.erp.repository.CustDetailsCustomRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
@@ -449,6 +450,23 @@ public class CustDetailsResource {
 	}
     
     
+    /**
+     * Get CustDetails by CAN
+     */
+    @RequestMapping(value = "/custDetailss/getCustDetailsByCAN",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<CustDetails> getCustDetailsByCan(@Param("can") String can)
+			throws Exception {
+    	log.debug("REST request to CustDetails by CAN : {}");
+    	
+    	CustDetails custDetails = custDetailsRepository.findByCan(can);
+    	
+    	return Optional.ofNullable(custDetails)
+				.map(result -> new ResponseEntity<>(custDetails, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
     
     
 }

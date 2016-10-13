@@ -56,6 +56,11 @@
             "fieldId": 4,
             "fieldName": "amount",
             "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "prividedFromStores",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20160330092113",

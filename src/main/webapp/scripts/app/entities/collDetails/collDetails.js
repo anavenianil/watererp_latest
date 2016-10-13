@@ -7,7 +7,7 @@ angular.module('watererpApp')
                 parent: 'entity',
                 url: '/collDetailss',
                 data: {
-                    authorities: ['ROLE_CASHIER','ROLE_USER'],
+                    authorities: ['ROLE_CASHIER','ROLE_USER', 'ROLE_CUSTOMER'],
                     pageTitle: 'CollDetailss'
                 },
                 views: {

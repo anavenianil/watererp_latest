@@ -1,20 +1,14 @@
 package com.callippus.water.erp.domain;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
 
 /**
  * A ItemRequired.
@@ -40,6 +34,9 @@ public class ItemRequired implements Serializable {
     @Column(name = "amount", precision=20, scale=3)
     private BigDecimal amount;
     
+    @Column(name = "privided_from_stores")
+    private Boolean prividedFromStores;
+    
     @ManyToOne
     @JoinColumn(name = "material_master_id")
     private MaterialMaster materialMaster;
@@ -55,7 +52,7 @@ public class ItemRequired implements Serializable {
     @ManyToOne
     @JoinColumn(name = "proceedings_id")
     private Proceedings proceedings;
-    
+
     @ManyToOne
     @JoinColumn(name = "uom_id")
     private Uom uom;
@@ -100,6 +97,14 @@ public class ItemRequired implements Serializable {
         this.amount = amount;
     }
 
+    public Boolean getPrividedFromStores() {
+        return prividedFromStores;
+    }
+    
+    public void setPrividedFromStores(Boolean prividedFromStores) {
+        this.prividedFromStores = prividedFromStores;
+    }
+
     public MaterialMaster getMaterialMaster() {
         return materialMaster;
     }
@@ -133,14 +138,14 @@ public class ItemRequired implements Serializable {
     }
 
     public Uom getUom() {
-		return uom;
-	}
+        return uom;
+    }
 
-	public void setUom(Uom uom) {
-		this.uom = uom;
-	}
+    public void setUom(Uom uom) {
+        this.uom = uom;
+    }
 
-	@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -168,6 +173,7 @@ public class ItemRequired implements Serializable {
             ", quantity='" + quantity + "'" +
             ", ratePerShs='" + ratePerShs + "'" +
             ", amount='" + amount + "'" +
+            ", prividedFromStores='" + prividedFromStores + "'" +
             '}';
     }
 }

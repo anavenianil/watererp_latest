@@ -25,7 +25,7 @@
 								{{item.assignedFrom.lastName}} ({{item.assignedFrom.login}})</td>
 							<td>{{item.assignedTo.firstName}}
 								{{item.assignedTo.lastName}} ({{item.assignedTo.login}})</td>
-							<td>{{item.actionedDate | date:'medium'}}</td>
+							<td>{{item.actionedDate | date:'mediumDate'}}</td>
 							<td>{{item.remarks}}</td>
 							<td>{{item.ipAddress}}</td>
 							<td>{{item.statusMaster.status}}</td>
@@ -83,7 +83,30 @@
 						</div>
 					</fieldset>
 					<br>
-					<fieldset ng-show="meterChange.status==='INITIATED'">
+					
+					<fieldset ng-show="meterChange.newMeterNo.meterId != null">
+						<legend>New Meter Detail</legend>
+						<div class="row">
+							<div class="col-sm-3">
+								<label>New Meter Number</label>
+								<h5 class="list-group-item-heading">{{meterChange.newMeterNo.meterId}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>New Meter Reading</label>
+								<h5 class="list-group-item-heading">{{meterChange.newMeterReading}}</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Approve By</label>
+								<h5 class="list-group-item-heading">{{meterChange.user.firstName}}&nbsp;{{meterChange.user.lastName}}({{meterChange.user.login}})</h5>
+							</div>
+							<div class="col-sm-3">
+								<label>Approve Date</label>
+								<h5 class="list-group-item-heading">{{meterChange.approvedDate
+									| date:'mediumDate'}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset ng-show="orgRole.id === 25">
 						<legend>New Meter Detail</legend>
 						<div class="row">
 							<div class="col-sm-3">
@@ -176,32 +199,10 @@
 
 						</div>
 					</fieldset>
-					<fieldset ng-show="meterChange.status != 'INITIATED'">
-						<legend>New Meter Detail</legend>
-						<div class="row">
-							<div class="col-sm-3">
-								<label>New Meter Number</label>
-								<h5 class="list-group-item-heading">{{meterChange.newMeterNo.meterId}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>New Meter Reading</label>
-								<h5 class="list-group-item-heading">{{meterChange.newMeterReading}}</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Approve By</label>
-								<h5 class="list-group-item-heading">{{meterChange.user.firstName}}&nbsp;{{meterChange.user.lastName}}({{meterChange.user.login}})</h5>
-							</div>
-							<div class="col-sm-3">
-								<label>Approve Date</label>
-								<h5 class="list-group-item-heading">{{meterChange.approvedDate
-									| date:'mediumDate'}}</h5>
-							</div>
-						</div>
-					</fieldset>
 					<br>
 					<fieldset>
 						<legend></legend>
-						<div class="row" ng-show="canDecline()">
+						<div class="row" ng-show="user.login === requestAt && requestStatus === 3">
 							<div class="col-sm-12">
 								<div class="form-group"
 									ng-class="{'has-error': editForm.remarks.$invalid && 
@@ -230,7 +231,7 @@
 		<button type="button" class="btn btn-success pull-right"
 			ng-click="approve(meterChange)"
 			ng-enabled="editForm.$invalid || isSaving"
-			ng-show="meterChange.status==='PROCESSING' && orgRole.id === 9">
+			ng-show="user.login === requestAt && requestStatus === 3">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
 		</button>
 
@@ -245,7 +246,7 @@
 		<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
 
 		<button type="button" class="btn btn-danger pull-right"
-			ng-show="canDecline()" ng-enabled="isSaving"
+			ng-show="user.login === requestAt && requestStatus === 3" ng-enabled="isSaving"
 			ng-click="declineRequest(meterChange)">
 			<span class="glyphicon glyphicon-remove-circle"></span> &nbsp;Decline
 		</button>

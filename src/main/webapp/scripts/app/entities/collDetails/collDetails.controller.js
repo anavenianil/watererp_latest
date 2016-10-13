@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('watererpApp')
-    .controller('CollDetailsController', function ($scope, $state, CollDetails, ParseLinks) {
+    .controller('CollDetailsController', function ($scope, $state, CollDetails, ParseLinks, $http) {
 
         $scope.collDetailss = [];
         $scope.predicate = 'id';
@@ -58,4 +58,28 @@ angular.module('watererpApp')
                 id: null
             };
         };
+        
+     // to search CAN
+		$scope.getLocation = function(val) {
+			$scope.isValidCust = false;
+			return $http.get('api/custDetailss/searchCAN/' + val, {
+				params : {
+					address : val,
+					sensor : false
+				}
+			}).then(function(response) {
+				var res = response.data.map(function(item) {
+					return item;
+				});
+				return res;
+			});
+		}
+		
+		
+		$scope.onSelect = function($item, $model, $label) {
+			console.log($item);
+			var arr = $item.split("-");			
+			$scope.can = arr[0].trim();
+			$scope.collDetailss = CollDetails.getCollDetailsByCan({can : $scope.can});
+		};
     });

@@ -1,320 +1,314 @@
 <div>
-<form name="editForm" rc-submit="save()" novalidate>
-	<div class="panel panel-primary">
-		<div class="panel-heading clearfix">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true" ng-click="clear()">&times;</button>
-			<h3 class="panel-title pull-left">Customer Name Change</h3>
-		</div>
-		<div class="list-group">
-			<div class="list-group-item">
-				<div class="modal-body">
-					<jh-alert-error></jh-alert-error>
-					<div class="row">
-						<div class="col-sm-4 col-md-offset-4">
-							<label for="field_SearchCan">Search By CAN</label>
-
-							<div class="form-group"
-								ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
-								<input type="text" ng-model="custInfo" typeahead-min-length="3"
-									placeholder="Search CAN or Name or Address (Min 3 chars)"
-									uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
-									typeahead-loading="loadingCANs"
-									typeahead-on-select='onSelect($item, $model, $label)'
-									typeahead-no-results="noResults" class="form-control">
-								<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
-								<div ng-show="noResults">
-									<i class="glyphicon glyphicon-remove"></i> No CANs Found
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="alert alert-danger" ng-show="message!=null">
-						<strong>{{message}}</strong>
-					</div>
-					<hr>
-					<br>
-					<fieldset>
-						<legend>Customer Information</legend>
+	<form name="editForm" rc-submit="save()" novalidate>
+		<div class="panel panel-primary">
+			<div class="panel-heading clearfix">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" ng-click="clear()">&times;</button>
+				<h3 class="panel-title pull-left">Customer Name Change</h3>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="modal-body">
+						<jh-alert-error></jh-alert-error>
 						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-4 col-md-offset-4">
+								<label for="field_SearchCan">Search By CAN</label>
+
 								<div class="form-group"
-									ng-class="{'has-error':editForm.can.$invalid && (editForm.can.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_can">CAN</label> <input
-										type="text" class="form-control" name="can" id="field_can"
-										required ng-model="custDetails.can" disabled />
-									<div
-										ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid ">
-										<p class="help-block" ng-show="editForm.can.$error.required">
-											This field is required.</p>
+									ng-class="{ 'has-error' : editForm.field_custDetails.$invalid  && editForm.field_custDetails.$dirty}">
+									<input type="text" ng-model="custInfo" typeahead-min-length="3"
+										placeholder="Search CAN or Name or Address (Min 3 chars)"
+										uib-typeahead="custInfo for custInfo in getLocation($viewValue)"
+										typeahead-loading="loadingCANs"
+										typeahead-on-select='onSelect($item, $model, $label)'
+										typeahead-no-results="noResults" class="form-control">
+									<i ng-show="loadingCANs" class="glyphicon glyphicon-refresh"></i>
+									<div ng-show="noResults">
+										<i class="glyphicon glyphicon-remove"></i> No CANs Found
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-3">
-								<div class="form-group"
-									ng-class="{'has-error':editForm.previousName.$invalid &&(editForm.previousName.$dirty || rc.editForm.attempted)}">
+						</div>
+						<div class="alert alert-danger" ng-show="message!=null">
+							<strong>{{message}}</strong>
+						</div>
+						<hr>
+						<br>
+						<fieldset>
+							<legend>Customer Information</legend>
+							<div class="row">
+								<div class="col-sm-3">
+									<div class="form-group"
+										ng-class="{'has-error':editForm.can.$invalid && (editForm.can.$dirty || rc.editForm.attempted)}">
+										<label class="control-label" for="field_can">CAN</label> <input
+											type="text" class="form-control" name="can" id="field_can"
+											required ng-model="custDetails.can" disabled />
+										<div
+											ng-show="(editForm.can.$dirty || rc.editForm.attempted) && editForm.can.$invalid ">
+											<p class="help-block" ng-show="editForm.can.$error.required">
+												This field is required.</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
 									<label class="control-label" for="field_previousName">Consumer
 										Name</label> <input type="text" class="form-control"
 										name="previousName" id="field_consName"
 										ng-model="customer.previousName" required disabled />
-									<div
-										ng-show="editForm.previousName.$invalid &&(editForm.previousName.$dirty || rc.editForm.attempted)">
-										<p class="help-block"
-											ng-show="editForm.previousName.$error.required">This
-											field is required.</p>
-									</div>
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_previousMobile">Mobile
+										No.</label> <input type="text" class="form-control"
+										name="previousMobile" id="field_previousMobile"
+										ng-model="customer.previousMobile" disabled />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_previousEmail">E-mail
+									</label> <input type="text" class="form-control" name="previousEmail"
+										id="field_previousEmail" ng-model="customer.previousEmail"
+										disabled />
 								</div>
 							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_previousMobile">Mobile
-									No.</label> <input type="text" class="form-control"
-									name="previousMobile" id="field_previousMobile"
-									ng-model="customer.previousMobile" disabled />
+							<br>
+							<div class="row">
+								<div class="col-sm-3">
+									<label class="control-label" for="field_houseNo">House
+										No./Plot No.</label> <input type="text" class="form-control"
+										name="houseNo" id="field_houseNo"
+										ng-model="custDetails.houseNo" disabled />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_divisionMaster">DMA</label>
+									<input type="text" class="form-control" name="divisionMaster"
+										id="field_divisionMaster"
+										ng-model="custDetails.divisionMaster.divisionName" disabled />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_streetMaster">Street</label>
+									<input type="text" class="form-control" name="streetMaster"
+										id="field_streetMaster"
+										ng-model="custDetails.streetMaster.streetName" disabled />
+								</div>
+								<div class="col-sm-3">
+									<label class="control-label" for="field_city">City</label> <input
+										type="text" class="form-control" name="city" id="field_city"
+										ng-model="custDetails.city" disabled />
+								</div>
 							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_previousEmail">E-mail
-								</label> <input type="text" class="form-control" name="previousEmail"
-									id="field_previousEmail" ng-model="customer.previousEmail"
-									disabled />
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-3">
-								<label class="control-label" for="field_houseNo">House
-									No./Plot No.</label> <input type="text" class="form-control"
-									name="houseNo" id="field_houseNo"
-									ng-model="custDetails.houseNo" disabled />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_divisionMaster">DMA</label>
-								<input type="text" class="form-control" name="divisionMaster"
-									id="field_divisionMaster"
-									ng-model="custDetails.divisionMaster.divisionName" disabled />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_streetMaster">Street</label>
-								<input type="text" class="form-control" name="streetMaster"
-									id="field_streetMaster"
-									ng-model="custDetails.streetMaster.streetName" disabled />
-							</div>
-							<div class="col-sm-3">
-								<label class="control-label" for="field_city">City</label> <input
-									type="text" class="form-control" name="city" id="field_city"
-									ng-model="custDetails.city" disabled />
-							</div>
-						</div>
 
-						<br>
-						<div class="row">
-							<div class="col-sm-12">
-								<label class="control-label" for="field_address">Address
-									Detail</label>
-								<textarea rows="2" cols="30" class="form-control" name="address"
-									id="field_address" style="resize: none"
-									ng-model="custDetails.address" disabled></textarea>
+							<br>
+							<div class="row">
+								<div class="col-sm-12">
+									<label class="control-label" for="field_address">Address
+										Detail</label>
+									<textarea rows="2" cols="30" class="form-control"
+										name="address" id="field_address" style="resize: none"
+										ng-model="custDetails.address" disabled></textarea>
+								</div>
 							</div>
-						</div>
-					</fieldset>
-					<hr>
-					<br>
-					<fieldset>
-						<legend>Change of Name</legend>
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.firstName.$invalid && 
+						</fieldset>
+						<hr>
+						<br>
+						<fieldset>
+							<legend>Change of Name</legend>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="form-group"
+										ng-class="{'has-error': editForm.firstName.$invalid && 
                                 (editForm.firstName.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_firstName">First
-										Name</label> <input type="text" class="form-control" name="firstName"
-										ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-										id="field_firstName" ng-model="customer.firstName" required />
-									<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-										ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
-										<p class="help-block"
-											ng-show="editForm.firstName.$error.required">This field
-											is required.</p>
-										<p class="help-block"
-											ng-show="editForm.firstName.$error.pattern">Enter text
-											only .</p>
+										<label class="control-label" for="field_firstName">First
+											Name</label> <input type="text" class="form-control" name="firstName"
+											ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
+											id="field_firstName" ng-model="customer.firstName" required />
+										<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
+											ng-show="(editForm.firstName.$dirty || rc.editForm.attempted) && editForm.firstName.$invalid">
+											<p class="help-block"
+												ng-show="editForm.firstName.$error.required">This field
+												is required.</p>
+											<p class="help-block"
+												ng-show="editForm.firstName.$error.pattern">Enter text
+												only .</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-sm-4">
-								<label class="control-label" for="field_middleName">Middle
-									Name</label> <input type="text" class="form-control" name="middleName"
-									id="field_middleName" ng-model="customer.middleName" />
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.lastName.$invalid && 
+								<div class="col-sm-4">
+									<label class="control-label" for="field_middleName">Middle
+										Name</label> <input type="text" class="form-control" name="middleName"
+										id="field_middleName" ng-model="customer.middleName" />
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group"
+										ng-class="{'has-error': editForm.lastName.$invalid && 
                                 (editForm.lastName.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_lastName">Last
-										Name</label> <input type="text" class="form-control" name="lastName"
-										ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-										id="field_lastName" ng-model="customer.lastName" required />
-									<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
-										ng-show="(editForm.lastName.$dirty || rc.editForm.attempted) && editForm.lastName.$invalid">
-										<p class="help-block"
-											ng-show="editForm.lastName.$error.required">This field is
-											required.</p>
-										<p class="help-block"
-											ng-show="editForm.lastName.$error.pattern">Enter text
-											only .</p>
+										<label class="control-label" for="field_lastName">Last
+											Name</label> <input type="text" class="form-control" name="lastName"
+											ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
+											id="field_lastName" ng-model="customer.lastName" required />
+										<div ng-pattern="/^[a-zA-Z]+[\-'\s]?[a-zA-Z ]+$/"
+											ng-show="(editForm.lastName.$dirty || rc.editForm.attempted) && editForm.lastName.$invalid">
+											<p class="help-block"
+												ng-show="editForm.lastName.$error.required">This field
+												is required.</p>
+											<p class="help-block"
+												ng-show="editForm.lastName.$error.pattern">Enter text
+												only .</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.mobileNo.$invalid && 
+							<br>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="form-group"
+										ng-class="{'has-error': editForm.mobileNo.$invalid && 
                                 (editForm.mobileNo.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_mobileNo">Mobile
-										No.</label> <input type="number" class="form-control" name="mobileNo"
-										id="field_mobileNo" ng-model="customer.mobileNo" />
-									<div
-										ng-show="(editForm.mobileNo.$dirty || rc.editForm.attempted) && editForm.mobileNo.$invalid">
-
-										<p class="help-block"
-											ng-show="editForm.mobileNo.$error.number">Enter valid
-											mobile number</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.newEmail.$invalid && 
-						         (editForm.newEmail.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_newEmail">Email
-										Address</label> <input type="email" class="form-control" name="newEmail"
-										id="field_newEmail" ng-model="customer.newEmail" />
-									<div
-										ng-show="(editForm.newEmail.$dirty || rc.editForm.attempted) && editForm.newEmail.$invalid">
-
-										<p class="help-block" ng-show="editForm.newEmail.$error.email">Enter
-											alphanemeric number</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-1">
-								<label>Photo</label>
-								<button type="submit" class="btn btn-primary" ngf-drop=""
-									ngf-select="" ng-model="customer.photo1"
-									ng-model-rejected="rejFiles"
-									ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
-									class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
-									ngf-accept="'image/*,application/pdf'"
-									ngf-drop-available="dropAvailable">
-									<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
-										Photo</span>
-								</button>
-							</div>
-							<div class="col-sm-2">
-								<ul style="clear: both" ng-show="rejFiles.length > 0"
-									class="response">
-									<li class="sel-file" ng-repeat="f in rejFiles">Rejected
-										file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
-								</ul>
-								<ul style="clear: both" ng-show="customer.photo1.length > 0"
-									class="response">
-									<li class="sel-file" ng-repeat="f in customer.photo1">-
-										{{f.name}} <a ng-show="f.result" href="javascript:void(0)"
-										ng-click="f.showDetail = !f.showDetail">details</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.newProofMaster.$invalid && 
-						         (editForm.newProofMaster.$dirty || rc.editForm.attempted)}">
-									<label for="field_newProofMaster">Id Proof(Any among
-										these)</label> <select class="form-control" id="field_newProofMaster"
-										name="newProofMaster" ng-model="customer.newProofMaster"
-										ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idproofmasters track by idProofMaster.id"
-										required>
-										<option value=""></option>
-									</select>
-									<div
-										ng-show="(editForm.newProofMaster.$dirty || rc.editForm.attempted) && editForm.newProofMaster.$invalid">
-
-										<p class="help-block"
-											ng-show="editForm.newProofMaster.$error.required">This
-											field is required</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.idNumber.$invalid && 
-                                (editForm.idNumber.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_idNumber">Id
-										Number</label> <input type="text" class="form-control" name="idNumber"
-										id="field_idNumber" ng-model="customer.idNumber" required />
-									<div
-										ng-show="(editForm.idNumber.$dirty || rc.editForm.attempted) && editForm.idNumber.$invalid">
-										<p class="help-block"
-											ng-show="editForm.idNumber.$error.required">This field is
-											required.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="form-group"
-									ng-class="{'has-error': editForm.requestedDate.$invalid && 
-                                (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
-									<label class="control-label" for="field_requestedDate">Requested
-										Date</label>
-									<div class="form-group">
-										<div class='input-group date' id='field_requestedDate'>
-											<input id="field_requestedDate" type="text"
-												name="requestedDate" ng-type="date" class="form-control"
-												uib-datepicker-popup="{{dateformat}}"
-												placeholder="YYYY-MM-DD" ng-model="customer.requestedDate"
-												max-date="dtmax"
-												is-open="datePickerForRequestedDate.status.opened" required />
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-default"
-													ng-click="datePickerForRequestedDateOpen($event)">
-													<i class="glyphicon glyphicon-calendar"></i>
-												</button>
-											</span>
-										</div>
+										<label class="control-label" for="field_mobileNo">Mobile
+											No.</label> <input type="number" class="form-control" name="mobileNo"
+											id="field_mobileNo" ng-model="customer.mobileNo" />
 										<div
-											ng-show="(editForm.requestedDate.$dirty || rc.editForm.attempted) && editForm.requestedDate.$invalid">
+											ng-show="(editForm.mobileNo.$dirty || rc.editForm.attempted) && editForm.mobileNo.$invalid">
+
 											<p class="help-block"
-												ng-show="editForm.requestedDate.$error.required">Date is
-												required.</p>
+												ng-show="editForm.mobileNo.$error.number">Enter valid
+												mobile number</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group"
+										ng-class="{'has-error': editForm.newEmail.$invalid && 
+						         (editForm.newEmail.$dirty || rc.editForm.attempted)}">
+										<label class="control-label" for="field_newEmail">Email
+											Address</label> <input type="email" class="form-control"
+											name="newEmail" id="field_newEmail"
+											ng-model="customer.newEmail" />
+										<div
+											ng-show="(editForm.newEmail.$dirty || rc.editForm.attempted) && editForm.newEmail.$invalid">
+
 											<p class="help-block"
-												ng-show="editForm.requestedDate.$error.date">Please
-												enter date format.</p>
+												ng-show="editForm.newEmail.$error.email">Enter
+												alphanemeric number</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-1">
+									<label>Photo</label>
+									<button type="submit" class="btn btn-primary" ngf-drop=""
+										ngf-select="" ng-model="customer.photo1"
+										ng-model-rejected="rejFiles"
+										ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+										class="drop-box" ngf-multiple="true" ngf-allow-dir="true"
+										ngf-accept="'image/*,application/pdf'"
+										ngf-drop-available="dropAvailable">
+										<span class="glyphicon glyphicon-open"></span>&nbsp;<span>Upload
+											Photo</span>
+									</button>
+								</div>
+								<div class="col-sm-2">
+									<ul style="clear: both" ng-show="rejFiles.length > 0"
+										class="response">
+										<li class="sel-file" ng-repeat="f in rejFiles">Rejected
+											file: {{f.name}} - size: {{f.size}}B - type: {{f.type}}</li>
+									</ul>
+									<ul style="clear: both" ng-show="customer.photo1.length > 0"
+										class="response">
+										<li class="sel-file" ng-repeat="f in customer.photo1">-
+											{{f.name}} <a ng-show="f.result" href="javascript:void(0)"
+											ng-click="f.showDetail = !f.showDetail">details</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="form-group"
+										ng-class="{'has-error': editForm.newProofMaster.$invalid && 
+						         (editForm.newProofMaster.$dirty || rc.editForm.attempted)}">
+										<label for="field_newProofMaster">Id Proof(Any among
+											these)</label> <select class="form-control" id="field_newProofMaster"
+											name="newProofMaster" ng-model="customer.newProofMaster"
+											ng-options="idProofMaster as idProofMaster.idProof for idProofMaster in idproofmasters track by idProofMaster.id"
+											required>
+											<option value=""></option>
+										</select>
+										<div
+											ng-show="(editForm.newProofMaster.$dirty || rc.editForm.attempted) && editForm.newProofMaster.$invalid">
+
+											<p class="help-block"
+												ng-show="editForm.newProofMaster.$error.required">This
+												field is required</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group"
+										ng-class="{'has-error': editForm.idNumber.$invalid && 
+                                (editForm.idNumber.$dirty || rc.editForm.attempted)}">
+										<label class="control-label" for="field_idNumber">Id
+											Number</label> <input type="text" class="form-control"
+											name="idNumber" id="field_idNumber"
+											ng-model="customer.idNumber" required />
+										<div
+											ng-show="(editForm.idNumber.$dirty || rc.editForm.attempted) && editForm.idNumber.$invalid">
+											<p class="help-block"
+												ng-show="editForm.idNumber.$error.required">This field
+												is required.</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group"
+										ng-class="{'has-error': editForm.requestedDate.$invalid && 
+                                (editForm.requestedDate.$dirty || rc.editForm.attempted)}">
+										<label class="control-label" for="field_requestedDate">Requested
+											Date</label>
+										<div class="form-group">
+											<div class='input-group date' id='field_requestedDate'>
+												<input id="field_requestedDate" type="text"
+													name="requestedDate" ng-type="date" class="form-control"
+													uib-datepicker-popup="{{dateformat}}"
+													placeholder="YYYY-MM-DD" ng-model="customer.requestedDate"
+													max-date="dtmax"
+													is-open="datePickerForRequestedDate.status.opened" required />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default"
+														ng-click="datePickerForRequestedDateOpen($event)">
+														<i class="glyphicon glyphicon-calendar"></i>
+													</button>
+												</span>
+											</div>
+											<div
+												ng-show="(editForm.requestedDate.$dirty || rc.editForm.attempted) && editForm.requestedDate.$invalid">
+												<p class="help-block"
+													ng-show="editForm.requestedDate.$error.required">Date
+													is required.</p>
+												<p class="help-block"
+													ng-show="editForm.requestedDate.$error.date">Please
+													enter date format.</p>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</fieldset>
-				</div>
-				<div class="modal-footer">
-					<button type="button" onclick="window.history.back()"
-						class="btn btn-info pull-left">
-						<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
-							Back</span>
-					</button>
-					<button type="submit" ng-enabled="editForm.$invalid || isSaving"
-						class="btn btn-primary">
-						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
-					</button>
+						</fieldset>
+					</div>
+					<div class="modal-footer">
+						<button type="button" onclick="window.history.back()"
+							class="btn btn-info pull-left">
+							<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
+								Back</span>
+						</button>
+						<button type="submit" ng-enabled="editForm.$invalid || isSaving"
+							class="btn btn-primary">
+							<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</form>
-<div id="saveSuccessfullyModal" class="modal" name="saveForm">
+	</form>
+	<div id="saveSuccessfullyModal" class="modal" name="saveForm">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="confirmForm">
@@ -341,4 +335,4 @@
 			</div>
 		</div>
 	</div>
-	</div>
+</div>

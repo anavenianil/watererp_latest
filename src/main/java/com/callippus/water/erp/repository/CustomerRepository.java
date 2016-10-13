@@ -1,5 +1,6 @@
 package com.callippus.water.erp.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -28,4 +29,7 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
 	
 	List<Customer> findByCanAndStatus(String can, ChangeCaseStatus status);
 
+	List<Customer> findByRequestedDateAndChangeTypeOrderByIdDesc(LocalDate requestedDate, ChangeCaseType changeType);
+	
+	List<Customer> findByCanAndChangeTypeOrderByIdDesc(String can, ChangeCaseType changeType);
 }

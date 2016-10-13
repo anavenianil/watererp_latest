@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('Proceedings', function ($resource, DateUtils) {
         return $resource('api/proceedingss/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'saveFeasibilityReport': { method: 'POST', url:'/api/proceedingss/saveFeasibilityReport', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

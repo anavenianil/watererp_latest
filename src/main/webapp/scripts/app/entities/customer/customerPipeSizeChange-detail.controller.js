@@ -13,6 +13,7 @@ angular
 					$scope.changeCaseDTO.customer.changeType = "PIPESIZE";
 					$scope.custDetails = {};
 					$scope.orgRole = {};
+					$scope.user = Principal.getLogonUser();
 					Principal.getOrgRole().then(function(response) {
 						$scope.orgRole = response;
 					});					
@@ -69,6 +70,11 @@ angular
 			                for (var i = 0; i < result.length; i++) {
 			                    $scope.requestWorkflowHistorys.push(result[i]);
 			                }
+			                $scope.requestAt = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].assignedTo.login;
+			                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+			                console.log("Request at :"+$scope.requestAt);
+			                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+			                console.log("status :"+$scope.requestStatus);
 			            });
 			        };
 			        $scope.getWorkflowHistoryByDomainId();
@@ -119,7 +125,7 @@ angular
 								});
 			        }
 					
-					$scope.canDecline = function() {
+					/*$scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.customer.status) {
 						case 'INITIATED':
@@ -134,5 +140,5 @@ angular
 							break;
 						}
 						return ret;
-					}
+					}*/
 				});

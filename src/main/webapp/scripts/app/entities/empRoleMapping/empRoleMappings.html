@@ -12,6 +12,18 @@
 		</div>
 	</div>
 	<br />
+	<div class="row">
+		<div class="col-sm-3 col-md-offset-4">
+			<label for="field_user">Employee</label> <select class="form-control"
+				id="field_user" name="user" ng-model="empRoleMapping.user"
+				ng-change="getByUser(empRoleMapping.user.id)"
+				ng-options="user as user.firstName +' '+user.lastName+'('+user.login+')' for user in users track by user.id"
+				required>
+				<option value=""></option>
+			</select>
+		</div>
+	</div >
+	<br>
 	<div class="table-responsive">
 		<table class="jh-table table table-striped">
 			<thead>

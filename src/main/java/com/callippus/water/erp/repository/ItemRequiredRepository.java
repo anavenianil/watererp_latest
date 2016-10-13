@@ -21,6 +21,6 @@ public interface ItemRequiredRepository extends JpaRepository<ItemRequired,Long>
 	//@Query("Select ir from ItemRequired ir where ir.applicationTxn.id=:applicationTxnId")
 	Page<ItemRequired> findByApplicationTxn(Pageable pageable, ApplicationTxn applicationTxn);
 	
-	List<ItemRequired> findByProceedings(Proceedings proceedings);
+	List<ItemRequired> findByProceedingsAndPrividedFromStores(Proceedings proceedings, Boolean prividedFromStores);
 
 }

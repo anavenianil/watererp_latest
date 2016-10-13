@@ -237,7 +237,7 @@ public class MeterChangeResource {
 		meterChange.setStatus(MeterChangeStatus.PROCESSING);
 		if(CPSConstants.UPDATE.equals(workflowService.getMessage())){
 			MeterDetails prevMeter = meterChange.getPrevMeterNo();
-        	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Unallotted"));//Status would be according to meter(burnt or stuck)
+        	prevMeter.setMeterStatus(meterStatusRepository.findByStatus("Fault"));//Status would be according to meter(burnt or stuck)
         	meterDetailsRepository.save(prevMeter);
 
         	MeterDetails meterDetails = meterChange.getNewMeterNo();

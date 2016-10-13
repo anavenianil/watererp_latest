@@ -70,7 +70,10 @@ public class Proceedings implements Serializable {
     private BigDecimal siteSurveyPercent;
     
     @Column(name = "connection_fee_percent", precision=20, scale=3)
-    private BigDecimal ConnectionFeePercent;
+    private BigDecimal connectionFeePercent;
+    
+    @Column(name = "deducted_amount", precision=20, scale=3)
+    private BigDecimal deductedAmount;
     
     @ManyToOne
     @JoinColumn(name = "application_txn_id")
@@ -195,11 +198,19 @@ public class Proceedings implements Serializable {
     }
 
     public BigDecimal getConnectionFeePercent() {
-        return ConnectionFeePercent;
+        return connectionFeePercent;
     }
     
-    public void setConnectionFeePercent(BigDecimal ConnectionFeePercent) {
-        this.ConnectionFeePercent = ConnectionFeePercent;
+    public void setConnectionFeePercent(BigDecimal connectionFeePercent) {
+        this.connectionFeePercent = connectionFeePercent;
+    }
+
+    public BigDecimal getDeductedAmount() {
+        return deductedAmount;
+    }
+    
+    public void setDeductedAmount(BigDecimal deductedAmount) {
+        this.deductedAmount = deductedAmount;
     }
 
     public ApplicationTxn getApplicationTxn() {
@@ -262,7 +273,8 @@ public class Proceedings implements Serializable {
             ", supervisionPercent='" + supervisionPercent + "'" +
             ", labourChargePercent='" + labourChargePercent + "'" +
             ", siteSurveyPercent='" + siteSurveyPercent + "'" +
-            ", ConnectionFeePercent='" + ConnectionFeePercent + "'" +
+            ", connectionFeePercent='" + connectionFeePercent + "'" +
+            ", deductedAmount='" + deductedAmount + "'" +
             '}';
     }
 }
