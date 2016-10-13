@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reciept" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ee084720-7170-4f54-ba91-bbff0d5f1af4">
-	<property name="ireport.zoom" value="1.2100000000000086"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.5937424601000214"/>
+	<property name="ireport.x" value="1140"/>
+	<property name="ireport.y" value="815"/>
+	<parameter name="id" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT * FROM `coll_details` c]]>
+		<![CDATA[SELECT
+     *
+FROM
+     `coll_details` cd
+WHERE
+     cd.id = $P{id}]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -15,7 +23,7 @@
 	<field name="receipt_no" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="receipt_amt" class="java.lang.Float">
+	<field name="receipt_amt" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="receipt_dt" class="java.sql.Timestamp">
@@ -75,7 +83,7 @@
 	<field name="payment_types_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="instrument_issuer_master_id" class="java.lang.Long">
+	<field name="bank_master_id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="collection_type_master_id" class="java.lang.Long">
@@ -98,7 +106,7 @@
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[MJINI(KUWASA -KIGOMA)]]></text>
+				<text><![CDATA[MJINI(SUWASA - SUMBAWANGA)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="315" y="6" width="443" height="21" uuid="c6256cf3-2e37-43b2-9295-d41fafe15b32"/>
@@ -157,11 +165,11 @@
 				<text><![CDATA[Namabari ya huduma kwa wateja]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="204" y="239" width="224" height="21" uuid="ac5c635e-aa3e-4ec2-97dd-4f1efbf93466"/>
+				<reportElement x="204" y="239" width="279" height="21" uuid="ac5c635e-aa3e-4ec2-97dd-4f1efbf93466"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[MANEJA WA MKOA , NSSF - KIGOMA.]]></text>
+				<text><![CDATA[MANEJA WA MKOA , NSSF - SUMBAWANGA.]]></text>
 			</staticText>
 			<line>
 				<reportElement x="-1" y="0" width="1" height="364" uuid="75a78950-54a7-4353-bfb7-c55347fb4fe6"/>
@@ -251,7 +259,44 @@
 				</textElement>
 				<text><![CDATA[Cts]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="164" y="160" width="100" height="20" uuid="4e043649-ed74-4182-b9d3-14385d7b3784"/>
+				<textFieldExpression><![CDATA[$F{user_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="324" y="159" width="100" height="20" uuid="033caae8-3168-4fb3-95f6-d407ed347d66"/>
+				<text><![CDATA[Customer Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="424" y="159" width="100" height="20" uuid="96eceeb3-0f95-4287-8dce-7b0e3af66816"/>
+				<textFieldExpression><![CDATA[$F{cons_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="324" y="195" width="100" height="20" uuid="14e607d4-c317-4b51-a035-a624e6bdb2c2"/>
+				<text><![CDATA[Collection Type]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="424" y="195" width="100" height="20" uuid="a0528785-3885-40a2-bba3-d3f9440b970f"/>
+				<textFieldExpression><![CDATA[$F{collection_type_master_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="556" y="159" width="100" height="20" uuid="184ffbd0-4d51-428c-95d5-3701413d9664"/>
+				<text><![CDATA[CAN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="658" y="159" width="100" height="20" uuid="42bfae75-6fa7-4331-a453-00e672dae4e5"/>
+				<textFieldExpression><![CDATA[$F{can}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="634" y="110" width="100" height="20" uuid="255c9f17-d605-4fdd-bea8-1031c2c499f3"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="634" y="260" width="100" height="20" uuid="2a21319a-26bc-43fd-8e90-171fa4bf57ba"/>
+				<textFieldExpression><![CDATA[$F{receipt_amt}]]></textFieldExpression>
+			</textField>
 		</band>
+		<band/>
 	</detail>
 	<columnFooter>
 		<band height="44" splitType="Stretch">
