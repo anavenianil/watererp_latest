@@ -243,11 +243,14 @@ angular.module('watererpApp').controller(
 				$scope.datePickerForCollTime.status.opened = true;
 			};
 
+			$scope.collDetails.tariffCategoryMaster = {};
 			$scope.getCustDetails = function(can) {
 				CustDetailsService.get({
 					can : can
 				}, function(result) {
 					$scope.custDetails = result;
+					$scope.collDetails.tariffCategoryMaster = {};
+					$scope.collDetails.tariffCategoryMaster.tariffCategory = result.tariffCategoryMaster.tariffCategory;
 				});
 			}
 

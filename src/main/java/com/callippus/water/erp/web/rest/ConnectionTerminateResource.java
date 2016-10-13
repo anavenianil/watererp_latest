@@ -102,9 +102,9 @@ public class ConnectionTerminateResource {
         if("METERED".equals(custDetails.getTariffCategoryMaster().getType())){
         	connectionTerminate.setMeteredConnection(true);
         }
-        if(connectionTerminate.getMeterRecovered() == true){
+        /*if(connectionTerminate.getMeterRecovered() == true){
         	connectionTerminate.setStatus(TerminationStatus.APPROVED);
-        }
+        }*/
         ConnectionTerminate result = connectionTerminateRepository.save(connectionTerminate);
         try {
 			workflowService.getUserDetails();
