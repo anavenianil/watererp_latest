@@ -2,6 +2,8 @@ package com.callippus.water.erp.web.rest;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
@@ -34,6 +36,7 @@ import com.callippus.water.erp.domain.ValveComplaint;
 import com.callippus.water.erp.repository.ApplicationTxnRepository;
 import com.callippus.water.erp.repository.ReceiptRepository;
 import com.callippus.water.erp.repository.ReportsCustomRepository;
+import com.callippus.water.erp.service.util.NumberToWords;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.workflow.applicationtxn.service.ApplicationTxnWorkflowService;
 import com.callippus.water.erp.workflow.service.WorkflowService;
@@ -187,9 +190,27 @@ public class ReceiptResource {
 			@PathVariable Long receiptId) throws JRException,
 			IOException, ParseException {
     	
+    	if(receiptId == null)
+    	{
+    		return;
+    	}
+    	
+    	Receipt receipt = receiptRepository.findOne(receiptId);
+    	BigDecimal d = receipt.getAmount();
+    	    	
+    	String amtInwordsRs = NumberToWords.numToWords(d.doubleValue());
+    	double cents = d.subtract(d.setScale(0, RoundingMode.FLOOR)).movePointRight(d.scale()).doubleValue();
+    	
+    	String amtInwordsPs = "Zero";
+    	
+    	if(cents > 0.0f)
+    		amtInwordsPs = NumberToWords.numToWords(cents);
+    	    	
 		Map<String, Object> params = new HashMap<String,Object>();
 		params.put("receiptId", receiptId);
-	
+		params.put("amtInwordsRs", amtInwordsRs);
+		params.put("amtInwordsPs", amtInwordsPs);
+		
 		JasperPrint jasperPrint = null;
 					 jasperPrint = reportsRepository
 					.generateReport("/reports/Receipt1.jasper", params);

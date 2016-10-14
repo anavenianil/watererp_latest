@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bill" language="groovy" pageWidth="1000" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ede3c4b4-7e79-4194-9047-9d7e39b76875">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bill" pageWidth="1000" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="ede3c4b4-7e79-4194-9047-9d7e39b76875">
+	<property name="ireport.zoom" value="1.0514816984441773"/>
+	<property name="ireport.x" value="18"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id" class="java.lang.Long">
 		<parameterDescription><![CDATA[PLEASE ENTER YOUR CAN ID]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT *,(present_reading - b.initial_reading) cons,
-       Date_format(Str_to_date(to_month, '%Y%m'), '%M %Y') bill_month,
-       service_charge + meter_service_charge          meter,
-       c.cons_name                                         AS cust_cons_name,
-       c.house_no                                          AS cust_house_no,
-      replace(c.address, '\n', ' ') AS cust_address,
-       c.city                                              AS cust_city,
-       c.pin_code                                          AS cust_pin_code,
-       (select m.meter_id from meter_details m where m.id=c.meter_details_id)                                          AS cust_meter_no,
-       c.pipe_size                                         AS cust_pipe_size,
-      c.met_reading_dt                                  AS cust_meter_read_dt,
- (SELECT street_name
-        FROM   street_master
-        WHERE  street_no = Substring(b.can, 3, 2) and division_master_id=Substring(b.can, 1, 2))      street_name,
-b.surcharge as val
-FROM   bill_full_details b
-       JOIN cust_details c
-              ON c.can = b.can
-       JOIN tariff_category_master t
-              ON t.id = c.tariff_category_master_id
-
-WHERE  b.id=$P{id}]]>
+		<![CDATA[SELECT  * ,
+	(present_reading - b.initial_reading) cons
+	,Date_format(Str_to_date(to_month, '%Y%m'), '%M %Y') bill_month
+	,service_charge + meter_service_charge meter
+	,c.cons_name AS cust_cons_name
+	,c.house_no AS cust_house_no
+	,replace(c.address, '\n', ' ') AS cust_address
+	,c.city AS cust_city
+	,c.pin_code AS cust_pin_code
+,tc.min_kl
+,(no_meter_amt * tc.min_kl)metcons
+,no_meter_amt
+,(
+		SELECT m.meter_id
+		FROM meter_details m
+		WHERE m.id = c.meter_details_id
+		) AS cust_meter_no
+	,c.pipe_size AS cust_pipe_size
+	,c.met_reading_dt AS cust_meter_read_dt
+	,(
+		SELECT street_name
+		FROM street_master
+		WHERE street_no = Substring(b.can, 3, 2)
+			AND division_master_id = Substring(b.can, 1, 2)
+		) street_name
+	,b.surcharge AS val
+FROM bill_full_details b
+INNER JOIN cust_details c ON c.can = b.can
+INNER JOIN tariff_category_master t ON t.id = c.tariff_category_master_id
+INNER JOIN tariff_master tm ON tm.tariff_category_master_id=c.tariff_category_master_id
+INNER JOIN tariff_charges tc ON tc.tariff_master_id=tm.id
+WHERE b.id = $P{id} and tc.tariff_type_master_id=1]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -285,6 +295,45 @@ WHERE  b.id=$P{id}]]>
 	<field name="type" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="tariff_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valid_from" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valid_to" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="active" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tariff_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="slab_min" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="slab_max" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="min_kl" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="min_unmetered_kl" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="slab_base_charge" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tariff_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tariff_type_master_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="cons" class="java.math.BigDecimal"/>
 	<field name="bill_month" class="java.lang.String"/>
 	<field name="meter" class="java.math.BigDecimal"/>
@@ -293,6 +342,7 @@ WHERE  b.id=$P{id}]]>
 	<field name="cust_address" class="java.lang.String"/>
 	<field name="cust_city" class="java.lang.String"/>
 	<field name="cust_pin_code" class="java.lang.String"/>
+	<field name="metcons" class="java.math.BigDecimal"/>
 	<field name="cust_meter_no" class="java.lang.String"/>
 	<field name="cust_pipe_size" class="java.math.BigDecimal"/>
 	<field name="cust_meter_read_dt" class="java.sql.Date"/>
@@ -443,14 +493,14 @@ WHERE  b.id=$P{id}]]>
 				<textElement>
 					<font fontName="Times New Roman" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Matumizi kati ya 0-35.8333 kwa mwezi]]></text>
+				<text><![CDATA[Matumizi kati ya 0 -        ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="563" y="210" width="93" height="17" uuid="6d0b98b7-c444-4850-9f6b-8ddd3e186297"/>
 				<textElement>
 					<font fontName="Times New Roman" isBold="true"/>
 				</textElement>
-				<text><![CDATA[utalipa 43000]]></text>
+				<text><![CDATA[utalipa ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="246" y="130" width="76" height="18" isRemoveLineWhenBlank="true" uuid="3942fd6e-c049-40ff-9f04-878245c02ad7"/>
@@ -481,7 +531,7 @@ WHERE  b.id=$P{id}]]>
 			<staticText>
 				<reportElement x="306" y="21" width="113" height="14" uuid="27ac6e6f-2474-46fe-a245-cc06d8c6b0a3"/>
 				<textElement>
-					<font fontName="Times New Roman" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<text><![CDATA[BILLING MONTH]]></text>
 			</staticText>
@@ -490,7 +540,7 @@ WHERE  b.id=$P{id}]]>
 				<textFieldExpression><![CDATA[$F{street_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="395" y="20" width="100" height="20" isRemoveLineWhenBlank="true" uuid="0e186c32-1c66-4c21-83b6-a118f41e0586"/>
+				<reportElement x="390" y="21" width="100" height="14" isRemoveLineWhenBlank="true" uuid="0e186c32-1c66-4c21-83b6-a118f41e0586"/>
 				<textFieldExpression><![CDATA[$F{bill_month}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -521,8 +571,16 @@ WHERE  b.id=$P{id}]]>
 				<reportElement x="460" y="175" width="100" height="15" isRemoveLineWhenBlank="true" uuid="97186f0b-3cf7-48f4-b47d-3518f3ae0119"/>
 				<textFieldExpression><![CDATA[$F{met_reading_dt}]]></textFieldExpression>
 			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="654" y="196" width="184" height="14" uuid="4a203614-c838-44c6-aa2d-d28ab1bbe251"/>
+				<textFieldExpression><![CDATA[$F{min_kl} +" "+"kwa mwezi"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="598" y="210" width="100" height="17" uuid="9441484f-d17c-4f5f-8f08-6399e7ee7898"/>
+				<textFieldExpression><![CDATA[$F{metcons}]]></textFieldExpression>
+			</textField>
 			<image>
-				<reportElement x="2" y="-14" width="167" height="75" uuid="128a2f68-3eb3-438b-a54a-9bc29ee72263"/>
+				<reportElement x="7" y="-17" width="167" height="75" uuid="618b2792-8bc6-4f10-b8b9-a99e9a9f7b8b"/>
 				<imageExpression><![CDATA["src/main/webapp/assets/images/watererp.png"]]></imageExpression>
 			</image>
 		</band>
@@ -797,6 +855,11 @@ WHERE  b.id=$P{id}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cons}]]></textFieldExpression>
 			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="136" y="98" width="100" height="16" isRemoveLineWhenBlank="true" uuid="76cda195-8d3d-4932-8ccb-2f37ef82c5e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{min_kl}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
@@ -858,21 +921,14 @@ WHERE  b.id=$P{id}]]>
 				<text><![CDATA[please produce this bill intact when making payment.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="27" y="137" width="468" height="20" uuid="72160c4d-8580-4b00-aa03-c63f3775c575"/>
+				<reportElement x="27" y="141" width="675" height="20" uuid="72160c4d-8580-4b00-aa03-c63f3775c575"/>
 				<textElement>
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ (c) Cheques should be made a payable to the Managing Director, Kigoma Urban]]></text>
+				<text><![CDATA[ (c) Cheques should be made a payable to the Managing Director, SUMBAWANGA URBAN WATER SUPPLY AND SANITATION AUTHORITY .]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="37" y="151" width="458" height="15" uuid="4ee3b457-70a7-453d-8fae-4851ea9b36ee"/>
-				<textElement>
-					<font fontName="SansSerif" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Water And Sewerage Authority.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="26" y="167" width="471" height="20" uuid="33807a9a-a913-44a6-a00e-f7be0c29b639"/>
+				<reportElement x="26" y="160" width="471" height="20" uuid="33807a9a-a913-44a6-a00e-f7be0c29b639"/>
 				<textElement>
 					<font fontName="SansSerif" size="10"/>
 				</textElement>
@@ -886,4 +942,15 @@ WHERE  b.id=$P{id}]]>
 			</line>
 		</band>
 	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="385" y="14" width="183" height="21" uuid="3a918459-664c-4a82-910b-cb218157d2f6"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sorry No Data Found]]></text>
+			</staticText>
+		</band>
+	</noData>
 </jasperReport>
