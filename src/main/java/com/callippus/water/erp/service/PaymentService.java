@@ -1,12 +1,12 @@
 package com.callippus.water.erp.service;
 
+
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +18,10 @@ import com.callippus.water.erp.domain.InvoicePayments;
 import com.callippus.water.erp.domain.ReversalDetails;
 import com.callippus.water.erp.domain.enumeration.CustStatus;
 import com.callippus.water.erp.repository.BillFullDetailsRepository;
+import com.callippus.water.erp.repository.CollDetailsRepository;
 import com.callippus.water.erp.repository.CustDetailsRepository;
 import com.callippus.water.erp.repository.InvoicePaymentsRepository;
+
 
 @Service
 @Transactional
@@ -28,17 +30,22 @@ public class PaymentService {
 	private static final Logger log = LoggerFactory
 			.getLogger(PaymentService.class);
 
-	@Inject
+	@Autowired
 	private CustDetailsRepository custDetailsRepository;
-	
-	@Inject
-	private InvoicePaymentsRepository invoicePaymentsRepository;
-		
-	@Inject
+	@Autowired
 	private BillFullDetailsRepository billFullDetailsRepository;
+	@Autowired
+	private InvoicePaymentsRepository invoicePaymentsRepository;
 	
-	public boolean postPayment(CollDetails collDetails, BigDecimal amount)
+	public boolean postPayment(CollDetails collDetails, BigDecimal amount) throws Exception
 	{
+		List<InvoicePayments> ipList = invoicePaymentsRepository.findByCollDetails(collDetails);
+		
+		if(ipList.size() != 0){
+			log.debug("Payment already posted:" + collDetails.toString());
+			throw new Exception("Payment already posted");
+		}
+					
 		CustDetails customer = custDetailsRepository.findByCanForUpdate(collDetails.getCan());
 		
 		log.debug("***** Customer Arrears before payment:" + customer.getArrears());
@@ -104,21 +111,22 @@ public class PaymentService {
 
 		
 		BigDecimal receiptAmount = reversalDetails.getCollDetails().getReceiptAmt();//cancelled amount
-		
-		InvoicePayments invoicePayments = invoicePaymentsRepository.findByCollDetails(reversalDetails.getCollDetails());
-		BillFullDetails billFullDetails = invoicePayments.getBillFullDetails();
-		CustDetails custDetails = invoicePayments.getCustDetails();
-		
-		BigDecimal duesAmount = invoicePayments.getBillFullDetails().getArrears();
-		BigDecimal newArrears = duesAmount.add(receiptAmount);
-		billFullDetails.setArrears(newArrears);//arrears after cancellation
-		custDetails.setArrears(newArrears);
+		List<InvoicePayments> ipList = invoicePaymentsRepository.findByCollDetails(reversalDetails.getCollDetails());
 
-		billFullDetailsRepository.save(billFullDetails);
-		custDetailsRepository.save(custDetails);
-		
-		
-		
+		for(InvoicePayments invoicePayments:ipList)
+		{
+			BillFullDetails billFullDetails = invoicePayments.getBillFullDetails();
+			CustDetails custDetails = invoicePayments.getCustDetails();
+			
+			BigDecimal duesAmount = invoicePayments.getBillFullDetails().getArrears();
+			BigDecimal newArrears = duesAmount.add(receiptAmount);
+			billFullDetails.setArrears(newArrears);//arrears after cancellation
+			custDetails.setArrears(newArrears);
+			
+			billFullDetailsRepository.save(billFullDetails);
+			custDetailsRepository.save(custDetails);
+		}
+			
 		return true;
 	}
 }
