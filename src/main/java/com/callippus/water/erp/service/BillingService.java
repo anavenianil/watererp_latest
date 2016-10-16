@@ -189,11 +189,6 @@ public class BillingService {
 		return br;
 	}
 
-	public void processDisconnectedMeters() {
-		List<CustDetails> customers = custDetailsRepository.findByStatus(CustStatus.DISCONNECTED.toString());
-		customers.forEach(customer -> processDisconnection(customer));
-	}
-
 	public BillRunMaster generateSingleBill(String can) throws Exception {
 
 		initBillRun();
@@ -222,14 +217,8 @@ public class BillingService {
 		return br;
 	}
 
-	public void processDisconnection(CustDetails custDetails) {
+	public void processDisconnection(CustDetails custDetails, BillDetails bill_details) {
 		try {
-			initBill(custDetails.getCan()); // Is inited again in process_bill,
-											// but
-			// right now there is no better
-			// solution
-
-			BillDetails bill_details = billDetailsRepository.findValidBillForCan(custDetails.getCan());
 
 			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, custDetails);
 			bfd.setId(null);
@@ -326,7 +315,7 @@ public class BillingService {
 			}
 
 			if (customer.getStatus() == CustStatus.DISCONNECTED) {
-				processDisconnection(customer);
+				processDisconnection(customer, bill_details);
 				return;
 			}
 
