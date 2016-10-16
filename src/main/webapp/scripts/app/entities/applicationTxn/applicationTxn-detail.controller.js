@@ -66,43 +66,40 @@ angular.module('watererpApp').controller(
 			if ($stateParams.id != null) {
 				$scope.getWorkflowHistoryByDomainId();
 			}
-			//$scope.getWorkflowHistoryByDomainId();
 
 			$scope.canDecline = function() {
 				var ret = false;
-				/*console.log("$scope.orgRole.id:"+$scope.orgRole.id);
-				console.log("$scope.applicationTxn.status:"+$scope.applicationTxn.status);*/
 				switch ($scope.applicationTxn.status) {
 				case 0:
-					if ($scope.orgRole.id === 14) //Water Network Engineer
+					if ($scope.orgRole.id === 14) //Water Network Engineer(suwasa-14, kigoma-14 or 15, lindi-)
 						ret = true;
 					break;
 				case 1:
-					if ($scope.orgRole.id === 9) //Technical Manager
+					if ($scope.orgRole.id === 10) //Technical Manager(suwasa-9, kigoma-10, lindi-)
 						ret = true;
 					break;
 				case 2:
-					if ($scope.orgRole.id === 4) //Managing Director 
+					if ($scope.orgRole.id === 4) //Managing Director(suwasa-4, kigoma-4, lindi-)
 						ret = true;
 					break;
 				case 3:
-					if ($scope.orgRole.id === 26) //Cashier
+					if ($scope.orgRole.id === 22) //Cashier(suwasa-26, kigoma- Ass. acc. rev- 22, lindi-)
 						ret = true;
 					break;
 				case 4:
-					if ($scope.orgRole.id === 25) //Stores & Supplies Officer
+					if ($scope.orgRole.id === 9) //Stores & Supplies Officer(suwasa-25, kigoma-9, lindi-)
 						ret = true;
 					break;
 				case 5:
-					if ($scope.orgRole.id === 19) //Credit Control Officer(For Meter)
+					if ($scope.orgRole.id === 17) //Credit Control Officer(For Meter)(suwasa-19, kigoma-17, lindi-)
 						ret = true;
 					break;
 				case 6:
-					if ($scope.orgRole.id === 14) //Water Network Engineer
+					if ($scope.orgRole.id === 14) //Water Network Engineer(suwasa-14, kigoma-14 or 15, lindi-)
 						ret = true;
 					break;
 				case 7:
-					if ($scope.orgRole.id === 18) //Billing Officer
+					if ($scope.orgRole.id === 16) //Billing Officer(suwasa-18, kigoma-16, lindi-)
 						ret = true;
 					break;
 				default:
