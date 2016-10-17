@@ -122,7 +122,7 @@
 								<h5 class="list-group-item-heading">{{customer.changedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3" ng-show="user.login === requestAt && requestStatus === 3 && orgRole.id==18">
+							<div class="col-sm-3" ng-show="user.login === requestAt && requestStatus === 3 && orgRole.id==16">
 							<div class="form-group"
 									ng-class="{'has-error': editForm.changedDate.$invalid && 
                                 (editForm.changedDate.$dirty || rc.editForm.attempted)}">
@@ -205,7 +205,7 @@
 		<button type="button" class="btn btn-success pull-right"
 			ng-disabled="editForm.$invalid || isSaving"
 			ng-show="user.login === requestAt && requestStatus === 3"
-			ng-hide = "orgRole.id === 26"
+			ng-hide = "orgRole.id === 22"
 			ng-click="approve(changeCaseDTO)">
 			<span class="glyphicon glyphicon-check"></span> &nbsp;Forward
 		</button>
@@ -213,7 +213,7 @@
 		<!--  -->
 		<button type="button" class="btn btn-success pull-right" ng-disabled="isSaving"
 			ui-sref="receiptForNameChange({customerId:changeCaseDTO.customer.id})"
-			ng-show="user.login === requestAt && requestStatus === 3 && orgRole.id === 26">
+			ng-show="user.login === requestAt && requestStatus === 3 && orgRole.id === 22">
 			<span class="glyphicon glyphicon-check"></span>&nbsp;Create Receipt
 		</button>
 		

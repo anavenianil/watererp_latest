@@ -14,7 +14,7 @@ angular.module('watererpApp').controller('ProceedingsDialogController',
         $scope.applicationTxnId = $stateParams.applicationTxnId;
         $scope.proceedings.itemRequireds = [];
         $scope.count = 0;
-        $scope.usersByDesig = EmpMaster.getEmpByDesig({designation:30});
+        $scope.usersByDesig = EmpMaster.getEmpByDesig({designation:8});
         $scope.divisionmasters = DivisionMaster.query();
 
         $scope.getApplicationTxns = function(){

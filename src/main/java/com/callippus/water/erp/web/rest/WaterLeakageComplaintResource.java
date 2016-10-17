@@ -209,7 +209,7 @@ public class WaterLeakageComplaintResource {
 				jobCardTypeDomainId = hydrantComplaint.getId();
 			}
 			
-			if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+			if("PENDING".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
 				if(jobCardDTO.getJobCardItemRequirements().size()>0){
 					/*List<JobCardItemRequirement> jobCardItemRequirement = jobCardDTO.getJobCardItemRequirements();
 			        Iterator<JobCardItemRequirement> iterator = jobCardItemRequirement.iterator();
@@ -229,9 +229,9 @@ public class WaterLeakageComplaintResource {
 			}
 			
 			//set status
-			if("PENDING".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+			/*if("PENDING".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
 				waterLeakageComplaint.setStatus("FORWARDED");
-			}else if("FORWARDED".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
+			}else */if("PENDING".equals(jobCardDTO.getWaterLeakageComplaint().getStatus())){
 				waterLeakageComplaint.setStatus("INITIATED");
 				if(workflowService.isStageSkip()){
 					waterLeakageComplaint.setStatus("APPROVED");

@@ -109,7 +109,7 @@
 					<hr>
 					<!--All Complaint Form -->
 					<div
-						ng-if="orgRole.id===14 && waterLeakageComplaint.status === 'FORWARDED'">
+						ng-if="orgRole.id===15 && waterLeakageComplaint.status === 'PENDING'">
 						<!-- Burst Complaint Form Starts Here -->
 						<div ng-if="waterLeakageComplaint.leakageType ==='BURST'">
 							<fieldset>
@@ -837,7 +837,7 @@
 					<br>
 					<!-- JobCardSiteStatus Form starts below -->
 					<fieldset
-						ng-if="waterLeakageComplaint.status==='APPROVED' && orgRole.id===14">
+						ng-if="waterLeakageComplaint.status==='APPROVED' && orgRole.id===15">
 						<legend>Site Status</legend>
 						<div class="row">
 							<div class="col-sm-3">

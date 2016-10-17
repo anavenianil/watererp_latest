@@ -174,24 +174,24 @@ angular
 			        $scope.canDecline = function() {
 						var ret = false;
 						switch ($scope.customerComplaints.status) {
-						case 0:
+						/*case 0:
 							if ($scope.orgRole.id === 33)	//Customer Relation Officer Head
+								ret = true;
+							break;*/
+						case 0:
+							if ($scope.orgRole.id === 11 || $scope.orgRole.id === 10)	//Commercial Manager || Technical Manager
 								ret = true;
 							break;
 						case 1:
-							if ($scope.orgRole.id === 10 || $scope.orgRole.id === 9)	//Commercial Manager || Technical Manager
+							if ($scope.orgRole.id === 12)	//Finance Manager || Technical Zonal Supervisor
 								ret = true;
 							break;
 						case 2:
-							if ($scope.orgRole.id === 11)	//Finance Manager || Technical Zonal Supervisor
-								ret = true;
-							break;
-						case 3:
 							if ($scope.orgRole.id === 4 || $scope.orgRole.id === 9)	//Managing Director || Technical Manager
 								ret = true;
 							break;
-						case 4:
-							if ($scope.orgRole.id === 18)	//Billing Officer
+						case 3:
+							if ($scope.orgRole.id === 16)	//Billing Officer
 								ret = true;
 							break;
 						default:
