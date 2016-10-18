@@ -176,34 +176,8 @@ public class BillingService {
 
 		if (runAll) {
 			processTerminatedMeters();
-			processDisconnectedMeters();
 			processBillsWithoutMeter();
 		}
-
-		if (failedRecords > 0)
-			br.setStatus("Completed with Errors");
-		else
-			br.setStatus("Completed Successfully");
-
-		billRunMasterRepository.save(br);
-
-		return br;
-	}
-
-	public void processDisconnectedMeters() {
-		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
-		customers.forEach(customer -> saveAndRunTerminations(customer));
-	}
-
-	public BillRunMaster processDisconnection(CustDetails custDetails) throws Exception {
-		initBillRun();
-
-		if (custDetails.getStatus() != CustStatus.ACTIVE && custDetails.getStatus() != CustStatus.TERMINATED) {
-			throw new Exception("Invalid CustStatus for CAN:" + custDetails.getCan() + ", Status:"
-					+ custDetails.getStatus().toString());
-		}
-
-		// process_bill(can);
 
 		if (failedRecords > 0)
 			br.setStatus("Completed with Errors");
@@ -221,8 +195,9 @@ public class BillingService {
 
 		CustDetails custDetails = custDetailsRepository.findByCan(can);
 
-		if (custDetails.getStatus() != CustStatus.ACTIVE && custDetails.getStatus() != CustStatus.TERMINATED) {
-			throw new Exception("Invalid CustStatus for CAN:" + can + ", Status:" + custDetails.getStatus().toString());
+		if (custDetails.getStatus() == CustStatus.DEACTIVE) {
+			throw new Exception("Invalid CustStatus for CAN:" + custDetails.getCan() + ", Status:"
+					+ custDetails.getStatus().toString());
 		}
 
 		if (custDetails.getStatus() == CustStatus.TERMINATED)
@@ -242,16 +217,79 @@ public class BillingService {
 		return br;
 	}
 
+	public void processDisconnection(CustDetails custDetails, BillDetails bill_details) {
+		try {
+
+			BillFullDetails bfd = BillMapper.INSTANCE.bdToBfd(bill_details, custDetails);
+			bfd.setId(null);
+
+			bfd.setWaterCess(CPSConstants.ZERO);
+			bfd.setSewerageCess(CPSConstants.ZERO);
+			bfd.setServiceCharge(CPSConstants.ZERO);
+			bfd.setMeterServiceCharge(CPSConstants.ZERO);
+			bfd.setLockCharges(CPSConstants.ZERO);
+			bfd.setNoMeterAmt(CPSConstants.ZERO);
+
+			dFrom = custDetails.getPrevBillMonth().plusMonths(1);
+			dTo = bill_details.getBillDate().withDayOfMonth(bill_details.getBillDate().lengthOfMonth());
+
+			List<java.util.Map<String, Object>> charges = new ArrayList<java.util.Map<String, Object>>();
+			for (int i = 0; i < 3; i++) {
+				Map<String, Object> charge = new HashMap<String, Object>();
+				charge.put("tariff_type_master_id", new Long(i));
+
+				if (i != 2) {
+					charge.put("rate", CPSConstants.ZERO);
+					charge.put("amount", CPSConstants.ZERO);
+					charges.add(charge);
+				} else {
+					List<java.util.Map<String, Object>> svcCharges = tariffMasterCustomRepository
+							.findTariffsForDisconnections(bill_details.getCan(), dFrom, dTo, minAvgKL, 0, 0, false); // Calculating
+																														// slab
+																														// for
+																														// minAvgKL
+
+					boolean tariffExists = false;
+					for (Map<String, Object> charge1 : svcCharges) {
+						if (((Long) charge1.get("tariff_type_master_id")) == 3) {
+							tariffExists = true;
+							log.debug("Disconnection Service Charge:" + (BigDecimal) charge1.get("amount"));
+							charges.add(charge1);
+						}
+					}
+
+					if (!tariffExists)
+						throw new Exception("No tariffs configured.");
+				}
+			}
+
+			calc_charges_normal(charges, bill_details, custDetails, bfd, unitsKL);
+
+			process_bill_common(custDetails, bill_details, bfd, dFrom, dTo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
+			process_error(CPSUtils.getStackLimited("", e, 150), brd.getCan());
+			return;
+		}
+	}
+
 	public void process_error(String message, String can) {
-		log.debug(message + ":" + can);
+		try {
+			log.debug(message + ":" + can);
 
-		brd.setToDt(ZonedDateTime.now());
-		brd.setStatus(0);
-		brd.setRemarks("Failed with error:" + message + ":" + can);
-		billRunDetailsRepository.save(brd);
+			brd.setToDt(ZonedDateTime.now());
+			brd.setStatus(0);
+			brd.setRemarks("Failed with error:" + message + ":" + can);
+			billRunDetailsRepository.save(brd);
 
-		br.setFailed(++failedRecords);
-		billRunMasterRepository.save(br);
+			br.setFailed(++failedRecords);
+			billRunMasterRepository.save(br);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			log.debug("Exception in Process Error:" + CPSUtils.stackTraceToString(ex));
+			return;
+		}
 	}
 
 	public void process_bill(BillDetails bill_details) {
@@ -273,6 +311,16 @@ public class BillingService {
 
 			if (customer == null) {
 				process_error("Customer not found in CUST_DETAILS for CAN", bill_details.getCan());
+				return;
+			}
+
+			if (customer.getStatus() == CustStatus.DISCONNECTED) {
+				processDisconnection(customer, bill_details);
+				return;
+			}
+
+			if (customer.getStatus() == CustStatus.DEACTIVE) {
+				process_error("Invalid Status:" + customer.getStatus().toString(), customer.getCan());
 				return;
 			}
 
@@ -302,6 +350,7 @@ public class BillingService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			process_error(CPSUtils.getStackLimited("", e, 150), brd.getCan());
 			return;
 		}
@@ -325,6 +374,7 @@ public class BillingService {
 			return "CANCEL Success!";
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			return "CANCEL Failed:" + e.getMessage();
 		}
 	}
@@ -356,6 +406,7 @@ public class BillingService {
 			return "COMMIT Success!";
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			return "COMMIT Failed:" + e.getMessage();
 		}
 	}
@@ -422,7 +473,10 @@ public class BillingService {
 			customer.setMetReadingDt(bfd.getMetReadingDt());
 			customer.setMetReadingMo(bfd.getMetReadingDt().withDayOfMonth(1));
 
-			if (customer.getStatus() == CustStatus.TERMINATED)
+			if (customer.getStatus() == CustStatus.TERMINATED
+					&& customer.getArrears().compareTo(new BigDecimal("0.00")) <= 0)
+				customer.setStatus(CustStatus.DEACTIVE);
+			else
 				customer.setStatus(CustStatus.DISCONNECTED);
 
 			if (bfd.getCurrentBillType().equals("L"))
@@ -473,6 +527,7 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			brd.setRemarks(CPSUtils.getStackLimited("Failed with error:", e, 250));
 			brd.setStatus(BrdStatus.FAILED_COMMIT.getValue());
 			billRunDetailsRepository.save(brd);
@@ -541,12 +596,8 @@ public class BillingService {
 	}
 
 	public void processTerminatedMeters() {
-		List<CustDetails> customers = custDetailsRepository.findNewTerminations();
+		List<CustDetails> customers = custDetailsRepository.findByStatus(CustStatus.TERMINATED.toString());
 		customers.forEach(customer -> saveAndRunTerminations(customer));
-	}
-
-	public void processDisconnectedMeters(CustDetails customer) {
-		saveAndRunTerminations(customer);
 	}
 
 	public void processBillsWithoutMeter() {
@@ -557,7 +608,8 @@ public class BillingService {
 	public void saveAndRunTerminations(CustDetails customer) {
 		// Insert bill_details record for each new termination
 		ConnectionTerminate ct = connectionTerminateRepository.findByCan(customer.getCan());
-		//BigDecimal currentReading = new BigDecimal(ct.getLastMeterReading()); //commented by mohib
+		// BigDecimal currentReading = new BigDecimal(ct.getLastMeterReading());
+		// //commented by mohib
 		BigDecimal currentReading = ct.getLastMeterReading(); // added by mohib
 		BigDecimal previousReading = customer.getPrevReading();
 		LocalDate meterReadingDt = ct.getMeterRecoveredDate();
@@ -618,6 +670,7 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			process_error(CPSUtils.getStackLimited("", e, 150), brd.getCan());
 			return;
 		}
@@ -701,8 +754,8 @@ public class BillingService {
 
 				cd = configurationDetailsRepository.findOneByName("IS_TELESCOPIC");
 
-				boolean isTelescopic = (cd != null && cd.getValue().equalsIgnoreCase("true"))?true:false;
-				
+				boolean isTelescopic = (cd != null && cd.getValue().equalsIgnoreCase("true")) ? true : false;
+
 				charges = tariffMasterCustomRepository.findTariffs(bill_details.getCan(),
 						dFrom.plusMonths(1).withDayOfMonth(1), dTo, avgKL, unMeteredFlag, newMeterFlag, isTelescopic);
 
@@ -718,6 +771,7 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			process_error(CPSUtils.getStackLimited("", e, 150), brd.getCan());
 			return;
 		}
@@ -847,6 +901,7 @@ public class BillingService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			process_error(CPSUtils.getStackLimited("", e, 150), brd.getCan());
 			return;
 		}
@@ -930,8 +985,9 @@ public class BillingService {
 			cd = configurationDetailsRepository.findOneByName("EWURA");
 
 			log.debug("This is the EWURA Configuration:" + cd.toString());
-			BigDecimal ewura = ((bfd.getWaterCess().add(bfd.getSewerageCess()).add(bfd.getMeterServiceCharge()).add(bfd.getServiceCharge())).multiply(new BigDecimal(cd.getValue())))
-					.divide(new BigDecimal("100.0"));
+			BigDecimal ewura = ((bfd.getWaterCess().add(bfd.getSewerageCess()).add(bfd.getMeterServiceCharge())
+					.add(bfd.getServiceCharge())).multiply(new BigDecimal(cd.getValue())))
+							.divide(new BigDecimal("100.0"));
 			ewura = ewura.setScale(3, RoundingMode.CEILING);
 
 			bfd.setSurcharge(ewura);
@@ -941,12 +997,16 @@ public class BillingService {
 
 			BigDecimal adjAmount = CPSConstants.ZERO;
 			adjAmount = adjAmount.setScale(3, RoundingMode.CEILING);
-			
+
 			for (Adjustments adj : adjustments) {
 				BigDecimal adj1 = adj.getAmount();
 				adj1.setScale(3, RoundingMode.CEILING);
 				adj.setBillFullDetails(bfd);
 				adj.setCustDetails(customer);
+
+				if (adj.getTransactionTypeMaster() == null)
+					throw new Exception("Invalid Adjustment type - Should be Debit or Credit");
+
 				if (adj.getTransactionTypeMaster().getTypeOfTxn().equalsIgnoreCase("Credit"))
 					adjAmount = adjAmount.add(adj1);
 				else
@@ -1007,6 +1067,8 @@ public class BillingService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			brd.setBillFullDetails(null);
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			process_error(CPSUtils.getStackLimited("", e, 150), brd.getCan());
 			return;
 		}
@@ -1059,8 +1121,8 @@ public class BillingService {
 
 			cd = configurationDetailsRepository.findOneByName("IS_TELESCOPIC");
 
-			boolean isTelescopic = (cd != null && cd.getValue().equalsIgnoreCase("true"))?true:false;
-			
+			boolean isTelescopic = (cd != null && cd.getValue().equalsIgnoreCase("true")) ? true : false;
+
 			List<java.util.Map<String, Object>> charges = tariffMasterCustomRepository
 					.findTariffs(bill_details.getCan(), dFrom, dTo, avgKL, unMeteredFlag, newMeterFlag, isTelescopic);
 
@@ -1082,6 +1144,7 @@ public class BillingService {
 			process_bill_common(customer, bill_details, bfd, dFrom, dTo);
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.debug("Exception:" + CPSUtils.stackTraceToString(e));
 			process_error(CPSUtils.getStackLimited("", e, 150), brd.getCan());
 			return;
 		}
@@ -1091,10 +1154,17 @@ public class BillingService {
 		BigDecimal oldUnits = CPSConstants.ZERO;
 		BigDecimal newUnits = CPSConstants.ZERO;
 
-		//oldUnits = (new BigDecimal(meterChange.getPrevMeterReading()).subtract(customer.getPrevReading())); // commented by mohib
-		//newUnits = bill_details.getPresentReading().subtract(new BigDecimal(meterChange.getNewMeterReading())); commented by mohib
-		oldUnits = (meterChange.getPrevMeterReading().subtract(customer.getPrevReading())); // added by mohib
-		newUnits = bill_details.getPresentReading().subtract(meterChange.getNewMeterReading()); // added by mohib
+		// oldUnits = (new
+		// BigDecimal(meterChange.getPrevMeterReading()).subtract(customer.getPrevReading()));
+		// // commented by mohib
+		// newUnits = bill_details.getPresentReading().subtract(new
+		// BigDecimal(meterChange.getNewMeterReading())); commented by mohib
+		oldUnits = (meterChange.getPrevMeterReading().subtract(customer.getPrevReading())); // added
+																							// by
+																							// mohib
+		newUnits = bill_details.getPresentReading().subtract(meterChange.getNewMeterReading()); // added
+																								// by
+																								// mohib
 
 		if (oldUnits.compareTo(CPSConstants.ZERO) < 0)
 			oldUnits = CPSConstants.ZERO;

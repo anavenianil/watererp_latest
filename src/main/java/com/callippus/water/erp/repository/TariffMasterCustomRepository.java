@@ -15,4 +15,6 @@ public interface TariffMasterCustomRepository extends JpaRepository<TariffMaster
 	List<java.util.Map<String, Object>> findTariffs(String can, LocalDate validFrom, LocalDate validTo, BigDecimal avgKL, int unMeteredFlag, int newMeterFlag, boolean isTelescopic);
 	List<java.util.Map<String, Object>> getTariffs(String can, LocalDate validFrom, LocalDate validTo, BigDecimal avgKL,
 			int unMeteredFlag, int newMeterFlag);
+	List<java.util.Map<String, Object>> findTariffsForDisconnections(String can, LocalDate validFrom, LocalDate validTo,
+			BigDecimal avgKL, int unMeteredFlag, int newMeterFlag, boolean isTelescopic);
 }

@@ -87,7 +87,7 @@ public class CollDetailsResource {
 	@Timed
 	@Transactional
 	public ResponseEntity<CollDetails> createCollDetails(
-			@RequestBody CollDetails collDetails) throws URISyntaxException {
+			@RequestBody CollDetails collDetails) throws URISyntaxException, Exception {
 		log.debug("REST request to save CollDetails : {}", collDetails);
 		if (collDetails.getId() != null) {
 			return ResponseEntity
@@ -148,7 +148,7 @@ public class CollDetailsResource {
 	@RequestMapping(value = "/collDetailss", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public ResponseEntity<CollDetails> updateCollDetails(
-			@RequestBody CollDetails collDetails) throws URISyntaxException {
+			@RequestBody CollDetails collDetails) throws URISyntaxException, Exception {
 		log.debug("REST request to update CollDetails : {}", collDetails);
 		if (collDetails.getId() == null) {
 			return createCollDetails(collDetails);

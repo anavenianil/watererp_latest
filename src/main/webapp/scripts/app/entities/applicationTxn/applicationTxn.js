@@ -228,24 +228,5 @@ angular.module('watererpApp')
                 resolve: {
                 	
                 }
-            })
-            .state('applicationTxnForGis', {
-                parent: 'entity',
-                url: '/applicationTxn/{id}',
-                data: {
-                    authorities: ['ROLE_USER', 'ROLE_GIS'],
-                    pageTitle: 'ApplicationTxn'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/entities/applicationTxn/applicationTxn-detail.html',
-                        controller: 'ApplicationTxnDetailController'
-                    }
-                },
-                resolve: {
-                    entity: ['$stateParams', 'ApplicationTxn', function($stateParams, ApplicationTxn) {
-                        return ApplicationTxn.get({id : $stateParams.id});
-                    }]
-                }
             });
     });
