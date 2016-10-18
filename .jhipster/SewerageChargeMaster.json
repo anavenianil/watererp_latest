@@ -1,0 +1,22 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "tariffCategory"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20161018073255",
+    "dto": "no",
+    "service": "no",
+    "pagination": "pager"
+}

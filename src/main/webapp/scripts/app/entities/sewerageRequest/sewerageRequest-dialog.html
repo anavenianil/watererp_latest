@@ -1,0 +1,119 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()">
+
+	<!-- <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true" ng-click="clear()">&times;</button>
+		<h4 class="modal-title" id="mySewerageRequestLabel">Create or
+			edit a SewerageRequest</h4>
+	</div> -->
+	<div class="panel panel-primary">
+		<div class="panel-heading clearfix">
+			<h3 class="panel-title pull-left">Sewerage Request</h3>
+		</div>
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="modal-body">
+
+					<div class="row">
+						<!-- <div class="col-sm-3">
+							<label for="id">ID</label> <input type="text"
+								class="form-control" id="id" name="id"
+								ng-model="sewerageRequest.id" readonly />
+						</div> -->
+						<div class="col-sm-4">
+							<label class="control-label" for="field_requestedDate">Request
+								Date</label>
+							<div class="input-group">
+								<input id="field_requestedDate" type="text" class="form-control"
+									uib-datepicker-popup="{{dateformat}}"
+									ng-model="sewerageRequest.requestedDate"
+									is-open="datePickerForRequestedDate.status.opened" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="datePickerForRequestedDateOpen($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_customerName">Customer
+								Name</label> <input type="text" class="form-control" name="customerName"
+								id="field_customerName" ng-model="sewerageRequest.customerName" />
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_mobileNo">Mobile
+								No.</label> <input type="text" class="form-control" name="mobileNo"
+								id="field_mobileNo" ng-model="sewerageRequest.mobileNo" />
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-4">
+							<label class="control-label" for="field_address">Address</label>
+							<input type="text" class="form-control" name="address"
+								id="field_address" ng-model="sewerageRequest.address" />
+						</div>
+
+						<!-- <div class="col-sm-3">
+							<label class="control-label" for="field_receiptNo">ReceiptNo</label>
+							<input type="number" class="form-control" name="receiptNo"
+								id="field_receiptNo" ng-model="sewerageRequest.receiptNo" />
+						</div> -->
+						<div class="col-sm-4">
+							<label for="field_tariffCategoryMaster">Tariff Category</label> <select
+								class="form-control" id="field_tariffCategoryMaster"
+								name="tariffCategoryMaster"
+								ng-model="sewerageRequest.tariffCategoryMaster"
+								ng-options="tariffCategoryMaster as tariffCategoryMaster.tariffCategory for tariffCategoryMaster in tariffcategorymasters track by tariffCategoryMaster.id"
+								ng-change="getSewerageAmount(sewerageRequest.tariffCategoryMaster.id)">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label class="control-label" for="field_amount">Amount</label> <input
+								type="number" class="form-control" name="amount"
+								id="field_amount" ng-model="sewerageRequest.amount" disabled/>
+						</div>
+						<!-- <div class="col-sm-3">
+							<label class="control-label" for="field_paymentDate">PaymentDate</label>
+							<div class="input-group">
+								<input id="field_paymentDate" type="text" class="form-control"
+									uib-datepicker-popup="{{dateformat}}"
+									ng-model="sewerageRequest.paymentDate"
+									is-open="datePickerForPaymentDate.status.opened" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="datePickerForPaymentDateOpen($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div> -->
+
+
+						<!-- <div class="col-sm-3">
+							<label for="field_receipt">receipt</label> <select
+								class="form-control" id="field_receipt" name="receipt"
+								ng-model="sewerageRequest.receipt"
+								ng-options="receipt as receipt.id for receipt in receipts track by receipt.id">
+								<option value=""></option>
+							</select>
+						</div> -->
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						ng-click="clear()">
+						<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+					</button>
+					<button type="submit" ng-disabled="editForm.$invalid || isSaving"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

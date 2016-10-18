@@ -1,0 +1,59 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "tariffCategoryMaster",
+            "otherEntityName": "tariffCategoryMaster",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "tariffCategory"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "receipt",
+            "otherEntityName": "receipt",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "customerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "mobileNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "requestedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "receiptNo",
+            "fieldType": "Long"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "paymentDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20161018074206",
+    "dto": "no",
+    "service": "no",
+    "pagination": "infinite-scroll"
+}

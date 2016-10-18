@@ -1,0 +1,76 @@
+<div>
+    <h2>Sewerage Requests</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="sewerageRequest.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                       >Create new SewerageRequest
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerName"><span>CustomerName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobileNo"><span>MobileNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="requestedDate"><span>RequestedDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="receiptNo"><span>ReceiptNo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="address"><span>Address</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="amount"><span>Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="paymentDate"><span>PaymentDate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tariffCategoryMaster.tariffCategory"><span>tariffCategoryMaster</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="receipt.id"><span>receipt</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <tr ng-repeat="sewerageRequest in sewerageRequests track by sewerageRequest.id">
+                    <td><a ui-sref="sewerageRequest.detail({id:sewerageRequest.id})">{{sewerageRequest.id}}</a></td>
+                    <td>{{sewerageRequest.customerName}}</td>
+                    <td>{{sewerageRequest.mobileNo}}</td>
+                        <td>{{sewerageRequest.requestedDate | date:'mediumDate'}}</td>
+                    <td>{{sewerageRequest.receiptNo}}</td>
+                    <td>{{sewerageRequest.address}}</td>
+                    <td>{{sewerageRequest.amount}}</td>
+                        <td>{{sewerageRequest.paymentDate | date:'mediumDate'}}</td>
+                    <td>
+                        <a ui-sref="tariffCategoryMaster.detail({id:sewerageRequest.tariffCategoryMaster.id})">{{sewerageRequest.tariffCategoryMaster.tariffCategory}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="receipt.detail({id:sewerageRequest.receipt.id})">{{sewerageRequest.receipt.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="sewerageRequest.detail({id:sewerageRequest.id, requestTypeId:13})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sewerageRequest.edit({id:sewerageRequest.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="sewerageRequest.delete({id:sewerageRequest.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

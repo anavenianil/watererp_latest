@@ -108,5 +108,7 @@
     <include file="classpath:config/liquibase/changelog/20160812104529_added_entity_HydrantComplaint.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160812110310_added_entity_JobCardItemRequirement.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160812105519_added_entity_JobCardSiteStatus.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161018073255_added_entity_SewerageChargeMaster.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161018074206_added_entity_SewerageRequest.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>
