@@ -34,7 +34,8 @@ angular
 					
 					//$scope.users = User.query();
 
-					$scope.users = EmpMaster.getEmpByDesig({designation:10});//Meter Reader
+					//$scope.users = EmpMaster.getEmpByDesig({designation:10});//Meter Reader
+					$scope.users = User.query();
 					
 					$scope.billDetailsId = $stateParams.id;
 					if ($stateParams.id != null) {
