@@ -5,6 +5,7 @@ angular.module('watererpApp')
         return $resource('api/proceedingss/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'saveFeasibilityReport': { method: 'POST', url:'/api/proceedingss/saveFeasibilityReport', isArray: false},
+            'getByApplicationTxn': { method: 'GET', params: {applicationTxnId: "applicationTxnId" }, url:'/api/proceedingss/getByApplicationTxn', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

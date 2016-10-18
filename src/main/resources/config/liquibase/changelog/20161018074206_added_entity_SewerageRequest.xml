@@ -35,6 +35,12 @@
             
             <column name="payment_date" type="date"/>
             
+            <column name="vehicle_no" type="varchar(255)"/>
+            
+            <column name="driver" type="varchar(255)"/>
+            
+            <column name="completion_date" type="date"/>
+            
             <column name="tariff_category_master_id" type="bigint"/>
             <column name="receipt_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->

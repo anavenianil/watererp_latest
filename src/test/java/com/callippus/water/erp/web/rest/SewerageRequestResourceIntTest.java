@@ -62,6 +62,13 @@ public class SewerageRequestResourceIntTest {
 
     private static final LocalDate DEFAULT_PAYMENT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_PAYMENT_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_VEHICLE_NO = "AAAAA";
+    private static final String UPDATED_VEHICLE_NO = "BBBBB";
+    private static final String DEFAULT_DRIVER = "AAAAA";
+    private static final String UPDATED_DRIVER = "BBBBB";
+
+    private static final LocalDate DEFAULT_COMPLETION_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_COMPLETION_DATE = LocalDate.now(ZoneId.systemDefault());
 
     @Inject
     private SewerageRequestRepository sewerageRequestRepository;
@@ -96,6 +103,9 @@ public class SewerageRequestResourceIntTest {
         sewerageRequest.setAddress(DEFAULT_ADDRESS);
         sewerageRequest.setAmount(DEFAULT_AMOUNT);
         sewerageRequest.setPaymentDate(DEFAULT_PAYMENT_DATE);
+        sewerageRequest.setVehicleNo(DEFAULT_VEHICLE_NO);
+        sewerageRequest.setDriver(DEFAULT_DRIVER);
+        sewerageRequest.setCompletionDate(DEFAULT_COMPLETION_DATE);
     }
 
     @Test
@@ -121,6 +131,9 @@ public class SewerageRequestResourceIntTest {
         assertThat(testSewerageRequest.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testSewerageRequest.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testSewerageRequest.getPaymentDate()).isEqualTo(DEFAULT_PAYMENT_DATE);
+        assertThat(testSewerageRequest.getVehicleNo()).isEqualTo(DEFAULT_VEHICLE_NO);
+        assertThat(testSewerageRequest.getDriver()).isEqualTo(DEFAULT_DRIVER);
+        assertThat(testSewerageRequest.getCompletionDate()).isEqualTo(DEFAULT_COMPLETION_DATE);
     }
 
     @Test
@@ -140,7 +153,10 @@ public class SewerageRequestResourceIntTest {
                 .andExpect(jsonPath("$.[*].receiptNo").value(hasItem(DEFAULT_RECEIPT_NO.intValue())))
                 .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS.toString())))
                 .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
-                .andExpect(jsonPath("$.[*].paymentDate").value(hasItem(DEFAULT_PAYMENT_DATE.toString())));
+                .andExpect(jsonPath("$.[*].paymentDate").value(hasItem(DEFAULT_PAYMENT_DATE.toString())))
+                .andExpect(jsonPath("$.[*].vehicleNo").value(hasItem(DEFAULT_VEHICLE_NO.toString())))
+                .andExpect(jsonPath("$.[*].driver").value(hasItem(DEFAULT_DRIVER.toString())))
+                .andExpect(jsonPath("$.[*].completionDate").value(hasItem(DEFAULT_COMPLETION_DATE.toString())));
     }
 
     @Test
@@ -160,7 +176,10 @@ public class SewerageRequestResourceIntTest {
             .andExpect(jsonPath("$.receiptNo").value(DEFAULT_RECEIPT_NO.intValue()))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS.toString()))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
-            .andExpect(jsonPath("$.paymentDate").value(DEFAULT_PAYMENT_DATE.toString()));
+            .andExpect(jsonPath("$.paymentDate").value(DEFAULT_PAYMENT_DATE.toString()))
+            .andExpect(jsonPath("$.vehicleNo").value(DEFAULT_VEHICLE_NO.toString()))
+            .andExpect(jsonPath("$.driver").value(DEFAULT_DRIVER.toString()))
+            .andExpect(jsonPath("$.completionDate").value(DEFAULT_COMPLETION_DATE.toString()));
     }
 
     @Test
@@ -187,6 +206,9 @@ public class SewerageRequestResourceIntTest {
         sewerageRequest.setAddress(UPDATED_ADDRESS);
         sewerageRequest.setAmount(UPDATED_AMOUNT);
         sewerageRequest.setPaymentDate(UPDATED_PAYMENT_DATE);
+        sewerageRequest.setVehicleNo(UPDATED_VEHICLE_NO);
+        sewerageRequest.setDriver(UPDATED_DRIVER);
+        sewerageRequest.setCompletionDate(UPDATED_COMPLETION_DATE);
 
         restSewerageRequestMockMvc.perform(put("/api/sewerageRequests")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -204,6 +226,9 @@ public class SewerageRequestResourceIntTest {
         assertThat(testSewerageRequest.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testSewerageRequest.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testSewerageRequest.getPaymentDate()).isEqualTo(UPDATED_PAYMENT_DATE);
+        assertThat(testSewerageRequest.getVehicleNo()).isEqualTo(UPDATED_VEHICLE_NO);
+        assertThat(testSewerageRequest.getDriver()).isEqualTo(UPDATED_DRIVER);
+        assertThat(testSewerageRequest.getCompletionDate()).isEqualTo(UPDATED_COMPLETION_DATE);
     }
 
     @Test

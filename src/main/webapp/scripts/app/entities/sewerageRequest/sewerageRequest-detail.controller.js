@@ -5,7 +5,7 @@ angular
 		.controller(
 				'SewerageRequestDetailController',
 				function($scope, $rootScope, $stateParams, entity,
-						SewerageRequest, TariffCategoryMaster, Receipt, RequestWorkflowHistory) {
+						SewerageRequest, TariffCategoryMaster, Receipt, RequestWorkflowHistory, Principal) {
         $scope.sewerageRequest = entity;
         $scope.load = function (id) {
             SewerageRequest.get({id: id}, function(result) {
@@ -17,6 +17,12 @@ angular
         });
         $scope.$on('$destroy', unsubscribe);
         
+        $scope.user = Principal.getLogonUser();
+        $scope.orgRole = {};
+        Principal.getOrgRole().then(function(response) {
+			$scope.orgRole = response;
+		});
+        
         $scope.getWorkflowHistoryByDomainId = function(requestTypeId) {
         	$scope.requestWorkflowHistorys = [];
             RequestWorkflowHistory.query({page: $scope.page, size: 20, dimainObjectId: $stateParams.id, requestTypeId: $stateParams.requestTypeId}, function(result, headers) {
@@ -24,13 +30,48 @@ angular
                     $scope.requestWorkflowHistorys.push(result[i]);
                 }
                 $scope.requestAt = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].assignedTo.login;
-                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+                //$scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
                 console.log("Request at :"+$scope.requestAt);
-                $scope.requestStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
+                $scope.requestWorkflowStatus = $scope.requestWorkflowHistorys[$scope.requestWorkflowHistorys.length-1].statusMaster.id;
                 console.log("status :"+$scope.requestStatus);
             });
         };
         
         $scope.getWorkflowHistoryByDomainId();
 
+        $scope.datePickerForApprovedDate = {};
+
+        $scope.datePickerForApprovedDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForApprovedDateOpen = function($event) {
+            $scope.datePickerForApprovedDate.status.opened = true;
+        };
+        
+        $scope.datePickerForCompletionDate = {};
+
+        $scope.datePickerForCompletionDate.status = {
+            opened: false
+        };
+
+        $scope.datePickerForCompletionDateOpen = function($event) {
+            $scope.datePickerForCompletionDate.status.opened = true;
+        };
+        
+        var onSaveSuccess = function (result) {
+            $scope.isSaving = false;
+        };
+
+        var onSaveError = function (result) {
+            $scope.isSaving = false;
+        };
+        
+        $scope.sewerageApprovalDTO = {};
+        $scope.approveSewerageRequest = function () {
+            $scope.isSaving = true;
+            $scope.sewerageApprovalDTO.sewerageRequest = $scope.sewerageRequest;
+            SewerageRequest.sewerageRequestApproval($scope.sewerageApprovalDTO, onSaveSuccess, onSaveError);
+        };
+        
     });

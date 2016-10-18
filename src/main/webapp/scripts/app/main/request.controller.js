@@ -47,6 +47,9 @@ angular.module('watererpApp').controller(
 				if(requestTypeId===12){//WATER LEAKAGE COMPLAINT (job card)
 					$state.go('waterLeakageComplaint.detail',{id:domainObjectId, requestTypeId:requestTypeId});
 				}
+				if(requestTypeId===13){//SEWERAGE REQUEST
+					$state.go('sewerageRequest.detail',{id:domainObjectId, requestTypeId:requestTypeId});
+				}
 			}
 
 		});

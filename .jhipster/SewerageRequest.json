@@ -50,6 +50,21 @@
             "fieldId": 7,
             "fieldName": "paymentDate",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "vehicleNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "driver",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "completionDate",
+            "fieldType": "LocalDate"
         }
     ],
     "changelogDate": "20161018074206",

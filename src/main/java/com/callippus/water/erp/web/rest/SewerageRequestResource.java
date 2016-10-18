@@ -16,13 +16,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.callippus.water.erp.domain.Receipt;
+import com.callippus.water.erp.domain.SewerageApprovalDTO;
 import com.callippus.water.erp.domain.SewerageRequest;
+import com.callippus.water.erp.repository.ReceiptRepository;
 import com.callippus.water.erp.repository.SewerageRequestRepository;
 import com.callippus.water.erp.web.rest.util.HeaderUtil;
 import com.callippus.water.erp.web.rest.util.PaginationUtil;
@@ -48,6 +52,8 @@ public class SewerageRequestResource {
     @Inject
     private SewerageRequestWorkflowService sewerageRequestWorkflowService;
     
+    @Inject
+    private ReceiptRepository receiptRepository;
     /**
      * POST  /sewerageRequests -> Create a new sewerageRequest.
      */
@@ -136,4 +142,89 @@ public class SewerageRequestResource {
         sewerageRequestRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("sewerageRequest", id.toString())).build();
     }
+    
+    
+    
+    /**
+     * Approve  /sewerageRequests/sewerageRequestApprove 
+     */
+    
+    @RequestMapping(value = "/sewerageRequests/sewerageRequestApproval",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<SewerageApprovalDTO> sewerageRequestApproval(@RequestBody SewerageApprovalDTO sewerageApprovalDTO)
+			throws Exception {
+
+    	log.debug("REST request to approve SewerageRequest : {}", sewerageApprovalDTO);
+    	SewerageRequest sewerageRequest = sewerageApprovalDTO.getSewerageRequest(); 
+    	if(sewerageApprovalDTO.getReceipt() != null){
+    		Receipt receipt = receiptRepository.save(sewerageApprovalDTO.getReceipt());
+    		sewerageRequest.setReceipt(receipt);
+    		sewerageRequest.setPaymentDate(receipt.getReceiptDate());
+    		sewerageRequestRepository.save(sewerageRequest);
+    	}
+    	
+    	sewerageRequestRepository.save(sewerageRequest);
+		
+    	try {
+			workflowService.setRemarks(sewerageApprovalDTO.getRemarks());
+			workflowService.setApprovedDate(ZonedDateTime.now());
+			workflowService.getUserDetails();
+			sewerageRequestWorkflowService
+					.approvedSewerageRequest(sewerageApprovalDTO.getSewerageRequest());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	return Optional.ofNullable(sewerageApprovalDTO)
+				.map(result -> new ResponseEntity<>(sewerageApprovalDTO, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
+   /* @RequestMapping(value = "/sewerageRequests/sewerageRequestApprove", 
+    		method = RequestMethod.POST, 
+    		produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	@Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<SewerageApprovalDTO> approveSewerageRequest(
+			@RequestBody SewerageApprovalDTO sewerageApprovalDTO) throws Exception {
+    	
+		log.debug("REST request to approve SewerageRequest : {}", sewerageApprovalDTO);
+		
+		try {
+			workflowService.setRemarks(sewerageApprovalDTO.getRemarks());
+			workflowService.setApprovedDate(ZonedDateTime.now());
+			workflowService.getUserDetails();
+			sewerageRequestWorkflowService
+					.approvedSewerageRequest(sewerageApprovalDTO.getSewerageRequest());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Optional.ofNullable(sewerageApprovalDTO)
+				.map(result -> new ResponseEntity<>(sewerageApprovalDTO, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}*/
+    
+    
+    /**
+     * Decline the request
+     */
+    @RequestMapping(value = "/sewerageRequests/declineRequest",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional(rollbackFor=Exception.class)
+	public ResponseEntity<SewerageApprovalDTO> declineRequests(
+			@RequestBody SewerageApprovalDTO sewerageApprovalDTO)
+			throws Exception {
+		log.debug("REST request to declineRequest() for Sewerage Request  : {}", sewerageApprovalDTO);
+    	
+		workflowService.setRemarks(sewerageApprovalDTO.getRemarks());
+		workflowService.setApprovedDate(ZonedDateTime.now());
+		sewerageRequestWorkflowService.declineRequest(sewerageApprovalDTO.getSewerageRequest().getId());
+		return ResponseEntity.created(new URI("/api/sewerageRequests/declineRequest/"))
+				.headers(HeaderUtil.createEntityCreationAlert("sewerageApprovalDTO", ""))
+				.body(null);
+	}
 }

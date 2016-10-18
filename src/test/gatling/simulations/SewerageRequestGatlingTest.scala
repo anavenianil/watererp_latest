@@ -67,7 +67,7 @@ class SewerageRequestGatlingTest extends Simulation {
             .exec(http("Create new sewerageRequest")
             .post("/api/sewerageRequests")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "customerName":"SAMPLE_TEXT", "mobileNo":"SAMPLE_TEXT", "requestedDate":"2020-01-01T00:00:00.000Z", "receiptNo":null, "address":"SAMPLE_TEXT", "amount":null, "paymentDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "customerName":"SAMPLE_TEXT", "mobileNo":"SAMPLE_TEXT", "requestedDate":"2020-01-01T00:00:00.000Z", "receiptNo":null, "address":"SAMPLE_TEXT", "amount":null, "paymentDate":"2020-01-01T00:00:00.000Z", "vehicleNo":"SAMPLE_TEXT", "driver":"SAMPLE_TEXT", "completionDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_sewerageRequest_url")))
             .pause(10)

@@ -1,7 +1,7 @@
 
 <div>
 	<h2>
-		<span>SewerageRequest</span> {{sewerageRequest.id}}
+		<span>Sewerage Request : </span> {{sewerageRequest.id}}
 	</h2>
 	<div class="panel panel-primary">
 		<div class="panel-heading clearfix">
@@ -51,48 +51,177 @@
 					<fieldset>
 						<legend>Request Details</legend>
 						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>Request No.</label>
 								<h5 class="list-group-item-heading">{{sewerageRequest.id}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>Requested Date.</label>
 								<h5 class="list-group-item-heading">{{sewerageRequest.requestedDate
 									| date:'mediumDate'}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>Customer Name</label>
 								<h5 class="list-group-item-heading">{{sewerageRequest.customerName}}</h5>
 							</div>
-							<div class="col-sm-3">
+
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-4">
 								<label>Address</label>
 								<h5 class="list-group-item-heading">{{sewerageRequest.address}}</h5>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>Tariff Category</label>
 								<h5 class="list-group-item-heading">{{sewerageRequest.tariffCategoryMaster.tariffCategory}}</h5>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<label>Amount</label>
-								<h5 class="list-group-item-heading">{{sewerageRequest.address}}</h5>
+								<h5 class="list-group-item-heading">{{sewerageRequest.amount
+									|number :2}}</h5>
 							</div>
 						</div>
 					</fieldset>
+					<fieldset
+						ng-show="user.login === requestAt && requestWorkflowStatus === 9">
+						<legend>Completion Details</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>Driver</label>
+								<h5 class="list-group-item-heading">{{sewerageRequest.driver}}</h5>
+							</div>
+							<div class="col-sm-4">
+								<label>Vehicle No.</label>
+								<h5 class="list-group-item-heading">{{sewerageRequest.vehicleNo}}</h5>
+							</div>
+							<div class="col-sm-4">
+								<label>Completion Date</label>
+								<h5 class="list-group-item-heading">{{sewerageRequest.completionDate | date:'mediumDate'}}</h5>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset
+						ng-show="user.login === requestAt && requestWorkflowStatus === 3 && sewerageRequest.receipt != null">
+						<legend>Completion Details</legend>
+						<div class="row">
+							<div class="col-sm-4">
+								<label class="control-label" for="field_vehicleNo">Vehicle
+									No.</label> <input type="text" class="form-control" name="vehicleNo"
+									id="field_vehicleNo" ng-model="sewerageRequest.vehicleNo" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_driver">Driver
+									Name</label> <input type="text" class="form-control" name="driver"
+									id="field_driver" ng-model="sewerageRequest.driver" />
+							</div>
+							<div class="col-sm-4">
+								<label class="control-label" for="field_completionDate">Completion
+									Date</label>
+								<div class="input-group">
+									<input id="field_completionDate" type="text"
+										class="form-control" uib-datepicker-popup="{{dateformat}}"
+										ng-model="sewerageRequest.completionDate"
+										is-open="datePickerForCompletionDate.status.opened" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="datePickerForCompletionDateOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Approval Details</legend>
+						<div class="row"
+							ng-show="user.login === requestAt && requestWorkflowStatus === 3">
+							<div class="col-sm-4">
+								<label>Approved Date</label>
+								<div class="form-group"
+									ng-class="{'has-error': editForm.approvedDate.$invalid && 
+         							(editForm.approvedDate.$dirty || rc.editForm.attempted)}">
+									<div class='input-group date' id='field_approvedDate'>
+										<input id="field_approvedDate" type="text" ng-type="date"
+											name="approvedDate" class="form-control"
+											uib-datepicker-popup="{{dateformat}}"
+											ng-model="sewerageApprovalDTO.approvedDate" max-date="maxDt"
+											is-open="datePickerForApprovedDate.status.opened" required />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default"
+												ng-click="datePickerForApprovedDateOpen($event)">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</button>
+										</span>
+									</div>
+									<div
+										ng-show="(editForm.approvedDate.$dirty || rc.editForm.attempted) && editForm.approvedDate.$invalid">
+										<p class="help-block"
+											ng-show="editForm.approvedDate.$error.required">Date is
+											required.</p>
+										<p class="help-block"
+											ng-show="editForm.approvedDate.$error.date">Please enter
+											Date format .</p>
+									</div>
 
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group"
+									ng-class="{'has-error': editForm.remarks.$invalid && 
+         						(editForm.remarks.$dirty || rc.editForm.attempted)}">
+									<label class="control-label" for="field_remarks">Remarks</label>
+									<textarea rows="2" cols="50" style="resize: none"
+										class="form-control" name="remarks" id="field_remarks"
+										max="20" ng-model="sewerageApprovalDTO.remarks" required></textarea>
+									<div
+										ng-show="(editForm.remarks.$dirty || rc.editForm.attempted) && editForm.remarks.$invalid">
+										<p class="help-block"
+											ng-show="editForm.remarks.$error.required">This field is
+											required.</p>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<hr>
 					<button type="submit" onclick="window.history.back()"
 						class="btn btn-info">
 						<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>
 							Back</span>
 					</button>
 
+					<!-- requestWorkflowStatus 3 is for Pending -->
+					<button type="button" class="btn btn-success pull-right"
+						ng-click="approveSewerageRequest(sewerageApprovalDTO)"
+						ng-enabled="editForm.$invalid || isSaving"
+						ng-show="user.login === requestAt && requestWorkflowStatus === 3">
+						<span class="glyphicon glyphicon-check"></span>&nbsp;Approve
+					</button>
+
+					<button type="button" class="btn btn-success pull-right"
+						ng-disabled="isSaving"
+						ui-sref="receiptForSewerage({sewerageRequestId:sewerageRequest.id})"
+						ng-show="user.login === requestAt && requestWorkflowStatus === 3 && orgRole.id === 22">
+						<span class="glyphicon glyphicon-check"></span>&nbsp;Create
+						Receipt
+					</button>
+
+					<span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
+
+					<!-- requestWorkflowStatus 3 is for Pending -->
+					<button type="button" class="btn btn-danger pull-right"
+						ng-show="user.login === requestAt && requestWorkflowStatus === 3"
+						ng-enabled="isSaving"
+						ng-click="declineRequest(sewerageApprovalDTO)">
+						<span class="glyphicon glyphicon-remove-circle"></span>
+						&nbsp;Decline
+					</button>
 				</div>
 			</div>
 		</div>
 	</form>
-
-
-
-
 </div>

@@ -44,6 +44,15 @@ public class SewerageRequest implements Serializable {
     @Column(name = "payment_date")
     private LocalDate paymentDate;
     
+    @Column(name = "vehicle_no")
+    private String vehicleNo;
+    
+    @Column(name = "driver")
+    private String driver;
+    
+    @Column(name = "completion_date")
+    private LocalDate completionDate;
+    
     @ManyToOne
     @JoinColumn(name = "tariff_category_master_id")
     private TariffCategoryMaster tariffCategoryMaster;
@@ -116,6 +125,30 @@ public class SewerageRequest implements Serializable {
         this.paymentDate = paymentDate;
     }
 
+    public String getVehicleNo() {
+        return vehicleNo;
+    }
+    
+    public void setVehicleNo(String vehicleNo) {
+        this.vehicleNo = vehicleNo;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+    
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public LocalDate getCompletionDate() {
+        return completionDate;
+    }
+    
+    public void setCompletionDate(LocalDate completionDate) {
+        this.completionDate = completionDate;
+    }
+
     public TariffCategoryMaster getTariffCategoryMaster() {
         return tariffCategoryMaster;
     }
@@ -163,6 +196,9 @@ public class SewerageRequest implements Serializable {
             ", address='" + address + "'" +
             ", amount='" + amount + "'" +
             ", paymentDate='" + paymentDate + "'" +
+            ", vehicleNo='" + vehicleNo + "'" +
+            ", driver='" + driver + "'" +
+            ", completionDate='" + completionDate + "'" +
             '}';
     }
 }

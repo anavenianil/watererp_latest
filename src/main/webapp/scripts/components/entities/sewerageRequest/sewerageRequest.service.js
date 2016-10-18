@@ -4,6 +4,7 @@ angular.module('watererpApp')
     .factory('SewerageRequest', function ($resource, DateUtils) {
         return $resource('api/sewerageRequests/:id', {}, {
             'query': { method: 'GET', isArray: true},
+            'sewerageRequestApproval': { method: 'POST', url:'/api/sewerageRequests/sewerageRequestApproval', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

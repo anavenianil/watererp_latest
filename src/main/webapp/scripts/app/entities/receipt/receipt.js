@@ -181,5 +181,37 @@ angular.module('watererpApp')
                         return Receipt.getByApplicationTxn({applicationTxnId : $stateParams.applicationTxnId});
                     }]
                 }
+            })
+            .state('receiptForAll', {
+                parent: 'receipt',
+                url: '/sewerageReceipt',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Receipts'
+                },
+                views: {
+                    'content@': {
+                    	 templateUrl: 'scripts/app/entities/receipt/receiptAll-dialog.html',
+                         controller: 'ReceiptAllDialogController'
+                    }
+                },
+                resolve: {
+                }
+            })
+            .state('receiptForSewerage', {
+                parent: 'receipt',
+                url: '/sewerageReceipt/{sewerageRequestId}',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'Receipts'
+                },
+                views: {
+                    'content@': {
+                    	 templateUrl: 'scripts/app/entities/receipt/receiptForSewerage-dialog.html',
+                         controller: 'ReceiptForSewerageDialogController'
+                    }
+                },
+                resolve: {
+                }
             });
     });

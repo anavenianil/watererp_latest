@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.callippus.water.erp.domain.ApplicationTxn;
+import com.callippus.water.erp.domain.EmpMaster;
 import com.callippus.water.erp.domain.FeasibilityReportDTO;
 import com.callippus.water.erp.domain.ItemRequired;
 import com.callippus.water.erp.domain.Proceedings;
@@ -297,6 +298,24 @@ public class ProceedingsResource {
         	e.printStackTrace();
         }
     	
+    	return Optional.ofNullable(proceedings)
+				.map(result -> new ResponseEntity<>(proceedings, HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.OK));
+	}
+    
+    /**
+     * Get Proceedings by ApplicationTxn
+     */
+    @RequestMapping(value = "/proceedingss/getByApplicationTxn",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+	public ResponseEntity<Proceedings> getByApplicationTxn(@Param("applicationTxnId") Long applicationTxnId)
+			throws Exception {
+    	log.debug("REST request to Proceedings by applicationTxnId : {}");
+    	
+    	Proceedings proceedings= proceedingsRepository.findByApplicationTxn(applicationTxnRepository.findOne(applicationTxnId));
+    
     	return Optional.ofNullable(proceedings)
 				.map(result -> new ResponseEntity<>(proceedings, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.OK));
