@@ -2,5 +2,5 @@
 
 angular.module('watererpApp').controller('BillingAndCollectionController',
 		function($scope, $state, $rootScope, Account, User, Principal) {
-			$state.go('billRunMaster');
+			$state.go('collDetails');
 		});
